@@ -12,4 +12,3 @@ class form_dummy extends moodleform {
 	}
 }
 
-?>

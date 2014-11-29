@@ -1,6 +1,6 @@
 <?php
 
-	// This file is part of Moodle - http://moodle.org/
+// This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,22 +15,27 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
 /**
-* German strings for newmodule
+ * This file replaces the legacy STATEMENTS section in db/install.xml,
+* lib.php/modulename_install() post installation hook and partially defaults.php
 *
 * @package mod_groupformation
 * @copyright 2014 Nora Wester
 * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 */
+	/**
+ 	* Post installation procedure
+	*
+	* @see upgrade_plugins_modules()
+	*/
+	function xmldb_groupformation_install() {
 
-	defined('MOODLE_INTERNAL') || die();
+	}
+	
+	/**
+ 	* Post installation recovery procedure
+ 	*
+ 	* @see upgrade_plugins_modules()
+ 	*/
+	function xmldb_groupformation_install_recovery() {
 
-	$string['modulename'] = 'Lerngruppenbildung';
-	$string['modulenameplural'] = 'Lerngruppenbildungen';
-	$string['modulename_help'] = 'Mit dem Lerngruppenbildungs Module kann man sich in eine Lerngruppe eintragen lassen, anhand von Kriterien';
-	$string['groupformationfieldset'] = 'Custom example fieldset';
-	$string['groupformationname'] = 'Lerngruppenbildung';
-	$string['groupformationname_help'] = 'ToolTip Lergruppenbildung';
-	$string['groupformation'] = 'Lerngruppenbildung';
-	$string['pluginadministration'] = 'Lerngruppenbildungs Administration';
-	$string['pluginname'] = 'groupformation';
-	$string['nonewmodules'] = '';
+	}
