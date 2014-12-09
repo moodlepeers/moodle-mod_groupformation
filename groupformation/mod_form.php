@@ -36,7 +36,7 @@
 		function definition() {
 	//		global $CFG, $DB, $OUTPUT;  
 
-			$mform = $this->_form;
+			$mform =& $this->_form;
 		
 			// Adding the "general" fieldset, where all the common settings are showed.
 			$mform->addElement('header', 'general', get_string('general', 'form'));
@@ -48,6 +48,7 @@
 			} else {
 				$mform->setType('name', PARAM_CLEAN);
 			}
+			
 			$mform->addRule('name', null, 'required', null, 'client');
 			$mform->addRule('name', get_string('maximumchars', '', 255), 'maxlength', 255, 'client');
 			$mform->addHelpButton('name', 'groupformationname', 'groupformation');

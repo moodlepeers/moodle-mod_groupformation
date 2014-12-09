@@ -30,7 +30,7 @@
 	if (!$course = $DB->get_record('course', array('id'=> $id), '*', MUST_EXIST)) {
 		print_error('Course ID is incorrect');
 	}
-
+	
 	require_course_login($course);
 	
 	add_to_log($course->id, 'groupformation', 'view all', 'index.php?id='.$course->id, '');
@@ -82,3 +82,4 @@
 	echo $OUTPUT->heading(get_string('modulnameplurals', 'groupformation'), 2);
 	echo html_writer::table($table);
 	echo $OUTPUT->footer();
+	

@@ -34,3 +34,7 @@
 	$string['pluginadministration'] = 'Lerngruppenbildungs Administration';
 	$string['pluginname'] = 'groupformation';
 	$string['nonewmodules'] = '';
+	$string['groupnameexists'] = 'Dieser Lerngruppenname existiert schon';
+	$string['generategroups'] = 'Lerngruppengenerierung';
+	$string['namingschema'] = "Namensschema";
+	$string['userpergroup'] = 'Wieviele Nutzer per Gruppe?';
