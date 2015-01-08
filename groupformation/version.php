@@ -26,8 +26,9 @@ $plugin->version   = 2014051200; //value out of "feedback"
 $plugin->requires  = 2014050800; //value out of "feedback"
 $plugin->cron      = 0;
 $plugin->component = 'mod_groupformation';
-// $plugin->maturity  = MATURITY_STABLE;
-// $plugin->release   = 'TODO';
+$plugin->maturity  = MATURITY_ALPHA;
+$plugin->release   = 'v1.1';
+$plugin->dependencies = array();
  
 // $plugin->dependencies = array(
 //     'mod_forum' => ANY_VERSION,

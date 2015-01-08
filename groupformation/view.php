@@ -57,15 +57,15 @@
 	}
 
 	require_login($course, true, $cm);
-	$context = context_module::instance($cm->id);
-	
-	$event = \mod_groupformation\event\course_module_viewed::create(
-			array(
-					'objectid' => $PAGE->cm->instance,
-					'context' => $PAGE->context,
-			));
+//	$context = context_module::instance($cm->id);
+
+	$event = \mod_groupformation\event\course_module_viewed::create(array(
+			'objectid' => $PAGE->cm->instance,
+			'context' => $PAGE->context,
+	));
+
 	$event->add_record_snapshot('course', $PAGE->course);
-	$event->add_record_snapshot($PAGE->cm->modname, $activityrecord);
+	$event->add_record_snapshot($PAGE->cm->modname, $groupformation);
 	$event->trigger();
 	
 	$PAGE->set_url('/mod/groupformation/view.php', array('id' => $cm->id));
@@ -73,7 +73,7 @@
 // 	$PAGE->set_heading(get_string('header', 'groupformation'));
 	$PAGE->set_title(format_string($groupformation->name));
 	$PAGE->set_heading(format_string($course->fullname));
-	$PAGE->set_context($context);
+//	$PAGE->set_context($context);
 
 	
 	echo $OUTPUT->header();

@@ -29,10 +29,12 @@
 */
 
 	defined('MOODLE_INTERNAL') || die();
-/*
- * Example constant:
- * define('NEWMODULE_ULTIMATE_ANSWER', 42);
-*/
+
+	/**
+	 * Example constant, you probably want to remove this 
+	 */
+	define('GROUPFORMATION_ULTIMATE_ANSWER', 42);
+	
 	/**
  	* Moodle core API
 	*/
@@ -49,12 +51,16 @@
 				return true;
 			case FEATURE_SHOW_DESCRIPTION:
 				return true;
+			case FEATURE_GRADE_HAS_GRADE:
+				return true;
+			case FEATURE_BACKUP_MOODLE2:
+				return true;
 			default:
 				return null;
 		}
 	}
 	/**
- 	* Saves a new instance of the newmodule into the database
+ 	* Saves a new instance of the groupformation into the database
  	*
  	* Given an object containing all the necessary data,
  	* (defined by the form in mod_form.php) this function
@@ -70,7 +76,10 @@
 		$groupformation->timecreated = time();
 		
 		// You may have to add extra stuff in here.
-		return $DB->insert_record('groupformation', $groupformation);
+		$groupformation->id = $DB->insert_record('groupformation', $groupformation);
+		groupformation_grade_item_update($groupformation);
+		
+		return $groupformation->id;
 	}
 	
 	/**
@@ -90,7 +99,11 @@
 		$groupformation->id = $groupformation->instance;
 	
 		// You may have to add extra stuff in here.
-		return $DB->update_record('groupformation', $groupformation);
+		$result = $DB->update_record('groupformation', $groupformation);
+		
+		groupformation_grade_item_update($groupformation);
+		
+		return $result;
 	}
 	
 	/**
@@ -111,6 +124,9 @@
 	
 		// Delete any dependent records here.
 		$DB->delete_records('groupformation', array('id' => $groupformation->id));
+		
+		groupformation_grade_item_delete($groupformation);
+		
 		return true;
 	}
 	
@@ -257,16 +273,43 @@
  	* @param mixed optional array/object of grade(s); 'reset' means reset grades in gradebook
  	* @return void
  	*/
-	function groupformation_grade_item_update(stdClass $groupformation, $grades=null) {
+	function groupformation_grade_item_update(stdClass $groupformation, $reset=false) {
 		global $CFG;
 		require_once($CFG->libdir.'/gradelib.php');
-		/* @example */
+		
 		$item = array();
 		$item['itemname'] = clean_param($groupformation->name, PARAM_NOTAGS);
 		$item['gradetype'] = GRADE_TYPE_VALUE;
-		$item['grademax'] = $groupformation->grade;
-		$item['grademin'] = 0;
+		
+		if($groupformation->grade > 0) {
+			$item['gradetype'] = GRADE_TYPE_VALUE;
+			$item['grademax'] = $groupformation->grade;
+			$item['grademin'] = 0;
+		} else if($groupformation->grade < 0) {
+			$item['gradetype'] = GRADE_TYPE_SCALE;
+			$item['scaleid'] = -$groupformation->grade;
+		} else {
+			$item['gradetype'] = GRADE_TYPE_NONE;
+		}
+		
+		if($reset) {
+			$item['reset'] = true;
+		}
+		
 		grade_update('mod/groupformation', $groupformation->course, 'mod', 'groupformation', $groupformation->id, 0, null, $item);
+	}
+
+	/**
+	 * Delete grade item for given groupformation instance
+	 *
+	 * @param stdClass $groupformation instance object
+	 * @return grade_item
+	 */
+	function groupformation_grade_item_delete($groupformation) {
+		global $CFG;
+		require_once($CFG->libdir.'/gradelib.php');
+		return grade_update('mod/groupformation', $groupformation->course, 'mod', 'groupformation',
+				$groupformation->id, 0, null, array('deleted' => 1));
 	}
 	
 	/**

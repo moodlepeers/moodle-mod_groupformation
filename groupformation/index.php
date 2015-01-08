@@ -33,53 +33,102 @@
 	
 	require_course_login($course);
 	
-	add_to_log($course->id, 'groupformation', 'view all', 'index.php?id='.$course->id, '');
+//	add_to_log($course->id, 'groupformation', 'view all', 'index.php?id='.$course->id, '');
 	
-	$coursecontext = context_course::instance($course->id);
+	$params = array(
+			'context' => context_course::instance($course->id)
+	);
+	
+	$event = \mod_groupformation\event\course_module_instance_list_viewed::create(§params);
+	$event->add_record_snapshot('course', $course);
+	$event->trigger();
+	
+	$strname = get_string('groupformationplural', 'mod_groupformation');
+//	$coursecontext = context_course::instance($course->id);
 	
 	$PAGE->set_url('/mod/groupformation/index.php', array('id' => $id));
-	$PAGE->set_title(format_string($course->fullname));
-	$PAGE->set_heading(format_string($course->fullname));
-	$PAGE->set_context($coursecontext);
+	$PAGE->navbar->add($strname);
+	$PAGE->set_title("$course->shortname: $strname");
+	$PAGE->set_heading($course->fullname);
+	$PAGE->set_pagelayout('incourse');
+//	$PAGE->set_context($coursecontext);
 	
 	echo $OUTPUT->header();
+	echo $OUTPUT->heading($strname);
 	
 	if (! $groupformations = get_all_instances_in_course('groupformation', $course)) {
 		notice(get_string('nonewmodules', 'groupformation'), new moodle_url('/course/view.php', array('id' => $course->id)));
 	}
 	
+	$usesections = course_format_uses_sections($course->format);
+	
 	$table = new html_table();
-	if ($course->format == 'weeks') {
-		$table->head = array(get_string('week'), get_string('name'));
-		$table->align = array('center', 'left');
-	} else if ($course->format == 'topics') {
-		$table->head = array(get_string('topic'), get_string('name'));
-		$table->align = array('center', 'left', 'left', 'left');
+	$table->attributes['class'] = 'generaltable mod_index';
+	
+// 	if ($course->format == 'weeks') {
+// 		$table->head = array(get_string('week'), get_string('name'));
+// 		$table->align = array('center', 'left');
+// 	} else if ($course->format == 'topics') {
+// 		$table->head = array(get_string('topic'), get_string('name'));
+// 		$table->align = array('center', 'left', 'left', 'left');
+// 	} else {
+// 		$table->head = array(get_string('name'));
+// 		$table->align = array('left', 'left', 'left');
+// 	}
+	
+	if ($usesections) {
+		$strsectionname = get_string('sectionname', 'format_'.$course->format);
+		$table->head = array ($strsectionname, $strname);
+		$table->align = array ('center', 'left');
 	} else {
-		$table->head = array(get_string('name'));
-		$table->align = array('left', 'left', 'left');
+		$table->head = array ($strname);
+		$table->align = array ('left');
 	}
 	
-	foreach ($groupformations as $groupformation) {
-		if (!$groupformation->visible) {
-			$link = html_writer::link(
-					new moodle_url('/mod/groupformation.php', array('id' => $groupformation->coursemodule)),
-					format_string($groupformation->name, true),
-					array('class' => 'dimmed'));
-		} else {
-			$link = html_writer::link(
-					new moodle_url('/mod/groupformation.php', array('id' => $groupformation->coursemodule)),
-					format_string($groupformation->name, true));
+	$modinfo = get_fast_modinfo($course);
+	$currentsection = '';
+	foreach ($modinfo->instances['groupformation'] as $cm) {
+		$row = array();
+		if ($usesections) {
+			if ($cm->sectionnum !== $currentsection) {
+				if ($cm->sectionnum) {
+					$row[] = get_section_name($course, $cm->sectionnum);
+				}
+				if ($currentsection !== '') {
+					$table->data[] = 'hr';
+				}
+				$currentsection = $cm->sectionnum;
+			}
 		}
 		
-		if ($course->format == 'weeks' or $course->format == 'topics') {
-			$table->data[] = array($groupformation->section, $link);
-		} else {
-			$table->data[] = array($link);
-		}
+		$class = $cm->visible ? null : array('class' => 'dimmed');
+		
+		$row[] = html_writer::link(new moodle_url('view.php', array('id' => $cm->id)),
+				$cm->get_formatted_name(), $class);
+		$table->data[] = $row;
+		
 	}
+// 	foreach ($groupformations as $groupformation) {
+// 		if (!$groupformation->visible) {
+// 			$link = html_writer::link(
+// 					new moodle_url('/mod/groupformation.php', array('id' => $groupformation->coursemodule)),
+// 					format_string($groupformation->name, true),
+// 					array('class' => 'dimmed'));
+// 		} else {
+// 			$link = html_writer::link(
+// 					new moodle_url('/mod/groupformation.php', array('id' => $groupformation->coursemodule)),
+// 					format_string($groupformation->name, true));
+// 		}
+		
+// 		if ($course->format == 'weeks' or $course->format == 'topics') {
+// 			$table->data[] = array($groupformation->section, $link);
+// 		} else {
+// 			$table->data[] = array($link);
+// 		}
+// 	}
 	
-	echo $OUTPUT->heading(get_string('modulnameplurals', 'groupformation'), 2);
+// 	echo $OUTPUT->heading(get_string('modulnameplurals', 'groupformation'), 2);
+	
 	echo html_writer::table($table);
 	echo $OUTPUT->footer();
 	

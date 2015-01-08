@@ -56,11 +56,14 @@
 			// Adding the standard "intro" and "introformat" fields.
 			$this->add_intro_editor();
 			
-			// Adding the rest of groupformation settings, spreeading all them into this fieldset
-			// ... or adding more fieldsets ('header' elements) if needed for better logic.
-			$mform->addElement('static', 'label1', 'groupformationsetting1', 'Your newmodule fields go here. Replace me!');
-			$mform->addElement('header', 'groupformationfieldset', get_string('groupformationfieldset', 'groupformation'));
-			$mform->addElement('static', 'label2', 'groupformationsetting2', 'Your newmodule fields go here. Replace me!');
+// 			// Adding the rest of groupformation settings, spreeading all them into this fieldset
+// 			// ... or adding more fieldsets ('header' elements) if needed for better logic.
+// 			$mform->addElement('static', 'label1', 'groupformationsetting1', 'Your newmodule fields go here. Replace me!');
+// 			$mform->addElement('header', 'groupformationfieldset', get_string('groupformationfieldset', 'groupformation'));
+// 			$mform->addElement('static', 'label2', 'groupformationsetting2', 'Your newmodule fields go here. Replace me!');
+			
+			// Add standard grading elements.
+			$this->standard_grading_coursemodule_elements();
 			
 			// Add standard elements, common to all modules.
 			$this->standard_coursemodule_elements();
