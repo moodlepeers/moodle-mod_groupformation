@@ -25,11 +25,13 @@
 
 	require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 	require_once(dirname(__FILE__).'/lib.php');
+	require_once ($CFG->dirroot.'/mod/feedback/lib.php');
 
 	//$id = required_param('id', PARAM_INT);    // Course Module ID
 	$id = optional_param('id', 0, PARAM_INT);   // Course Module ID
 	$g = optional_param('g', 0, PARAM_INT);		// groupformation instance ID
 	
+	$current_tab = 'view';
 	// if(!$cm = get_coursemodule_from_id('groupformation', $id, 0, false, MUST_EXIST)) {
 	// //if (!$cm = get_coursemodule_from_id('groupformation', $id)) {
 	// 	print_error('Course Module ID was incorrect'); // NOTE this is invalid use of print_error, must be a lang string id
@@ -68,7 +70,7 @@
 	$event->add_record_snapshot($PAGE->cm->modname, $groupformation);
 	$event->trigger();
 	
-	$PAGE->set_url('/mod/groupformation/view.php', array('id' => $cm->id));
+	$PAGE->set_url('/mod/groupformation/view.php', array('id' => $cm->id, 'do_show' => 'view'));
 // 	$PAGE->set_title(get_string('title', 'groupformation'));
 // 	$PAGE->set_heading(get_string('header', 'groupformation'));
 	$PAGE->set_title(format_string($groupformation->name));
@@ -78,7 +80,9 @@
 	
 	echo $OUTPUT->header();
 
-
+	// Print the tabs.
+	require('tabs.php');
+	
 	// $mform = new form_dummy();
 	// //Form processing and displaying is done here
 	// if ($mform->is_cancelled()) {
@@ -102,5 +106,56 @@
 	
 	// Replace the following lines with you own code.
 	echo $OUTPUT->heading('Yay! It works!');
+	
+	$feedbackid = groupformation_get_feedback_id($groupformation->id);
+	//####### completed-start
+	if ($feedbackid != '') {
+		echo $OUTPUT->box_start('generalbox boxaligncenter boxwidthwide');
+		//check, whether the feedback is open (timeopen, timeclose)
+		$checktime = time();
+		$feedbacktimes = groupformation_get_times($feedbackid);
+		if (($feedbacktimes->timeopen > $checktime) OR
+				($feedbacktimes->timeclose < $checktime AND $feedbacktimes->timeclose > 0)) {
+	
+					echo $OUTPUT->notification(get_string('feedbackIsNotOpen', 'groupformation'));
+					echo $OUTPUT->continue_button($CFG->wwwroot.'/course/view.php?id='.$course->id);
+					echo $OUTPUT->box_end();
+					echo $OUTPUT->footer();
+					exit;
+				}
+	
+				if (feedback_is_already_submitted($feedbackid, $course->id)) {
+					
+					$completefile = 'complete.php';
+					$guestid = false;
+					
+					
+					/**
+					 * hier bin ich mir unsicher
+					 */
+					$url_params = array('id'=>$id, 'courseid'=>$course->id, 'gopage'=>0);
+					$completeurl = new moodle_url('/mod/feedback/'.$completefile, $url_params);
+	
+					$feedbackcompletedtmp = feedback_get_current_completed($feedbackid, true, $course->id, $guestid);
+					if ($feedbackcompletedtmp) {
+						if ($startpage = feedback_get_page_to_continue($feedbackid, $course->id, $guestid)) {
+							$completeurl->param('gopage', $startpage);
+						}
+						echo '<a href="'.$completeurl->out().'">'.get_string('continueTheForm', 'groupformation').'</a>';
+					} else {
+						echo '<a href="'.$completeurl->out().'">'.get_string('completeTheForm', 'groupformation').'</a>';
+					}
+				} else {
+					echo $OUTPUT->notification(get_string('feedbackIsAlreadySubmitted', 'groupformation'));
+					if ($courseid) {
+						echo $OUTPUT->continue_button($CFG->wwwroot.'/course/view.php?id='.$course->id);
+					} else {
+						echo $OUTPUT->continue_button($CFG->wwwroot.'/course/view.php?id='.$course->id);
+					}
+				}
+				echo $OUTPUT->box_end();
+	}
+	//####### completed-end
+	
 	
 	echo $OUTPUT->footer();

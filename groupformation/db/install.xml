@@ -25,5 +25,19 @@
 				<INDEX NAME="course" UNIQUE="false" FIELDS="course"/>
 			</INDEXES>
 		</TABLE>
+		<TABLE NAME="groupformation_feedback" COMMENT="things to save about feedback">
+			<FIELDS>
+				<FIELD NAME="feedback" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+				<FIELD NAME="groupformation" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+				<FIELD NAME="motivationselected" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+				<FIELD NAME="motivationsimilar" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+				<FIELD NAME="lernstilselected" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+				<FIELD NAME="lernstilsimilar" TYPE="inr" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+			</FIELDS>
+			
+			<KEYS>
+				<KEY NAME="primary" TYPE="primary" FIELDS="groupformation"/>
+			</KEYS>
+		</TABLE>
 	</TABLES>
 	</XMLDB>

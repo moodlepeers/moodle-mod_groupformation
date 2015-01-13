@@ -36,5 +36,34 @@
 	$string['nonewmodules'] = '';
 	$string['groupnameexists'] = 'Dieser Lerngruppenname existiert schon';
 	$string['generategroups'] = 'Lerngruppengenerierung';
-	$string['namingschema'] = "Namensschema";
+	$string['namingschema'] = 'Namensschema';
 	$string['userpergroup'] = 'Wieviele Nutzer per Gruppe?';
+	$string['feedbackIsNotOpen'] = 'Abgabephase ist abgeschlossen';
+	$string['continueTheForm'] = 'Weiter ausfüllen';
+	$string['completeTheForm'] = 'Ausfüllen';
+	$string['feedbackIsAlreadySubmitted'] = 'Es wurde schon ausgefüllt';
+	$string['overview'] = 'Overview';
+	$string['edit_param'] = 'Editieren';
+	$string['editparam'] = 'Paramter editieren';
+	$string['exam'] = 'Klausurvorbereitung';
+	$string['seminar'] = 'Themenvorbereitung';
+	$string['learningGroup'] = 'Lerngruppe';
+	$string['szenario'] = 'Szenario';
+	$string['szenario_help'] = 'Lerngruppe wählen Sie bitte, wenn .... 
+			Klausurvorbereitung wählen Sie, wenn ... .
+			Themenvorbereitung wählen Sie bitte, wenn ...';
+	$string['parameter'] = 'Parameter';
+	$string['parameter_help'] = 'So wählen Sie die Parameter...';
+	$string['lernstil'] = 'Lernstil';
+	$string['similar'] = 'ähnlich';
+	$string['different'] = 'unterschiedlich';
+	$string['motivation'] = 'Motivation';
+	$string['topics'] = 'Themen';
+	$string['topicchoice'] = 'Themenauswahl';
+	$string['useOneLineForEachTopic'] = 'Für jedes Thema eine Zeile benutzen';
+	$string['similarKnowledge'] = 'gleicher Wissensstand';
+	$string['differentKnowledge'] = 'unterschiedlicher Wissensstand';
+	$string['similarKnowledgeChoice'] = '';
+	$string['differentKnowledgeChoice'] = '';
+	$string['useOneLineForEachKnowledge'] = 'Für jedes Thema eine eigene Zeile benutzen';
+	$string['assesstimestart_help'] = 'Um früher zu starten, einfach die Startzeit umstellen';
