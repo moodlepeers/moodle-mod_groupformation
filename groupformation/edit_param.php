@@ -27,16 +27,17 @@
 	require_once('../config.php');
 	require_once ($CFG->dirroot.'/mod/feedback/lib.php');
 	require_once('lib.php');
+	require_once('edit_param_form.php');
 	
 //	$courseid = required_param('courseid', PARAM_INT);
 
 	$id = optional_param('id', 0, PARAM_INT);   // Course Module ID
 	$g = optional_param('g', 0, PARAM_INT);		// groupformation instance ID
 	
-	$do_show = optional_param('do_show', 'edit_param', PARAM_ALPHA);
-	$current_tab = $do_show;
 	
-	$PAGE->set_url('/groupformation/edit_param.php', array('id' => $id, 'do_show' => $do_show));
+	$current_tab = 'edit_param';
+	
+	$PAGE->set_url('/groupformation/edit_param.php', array('id' => $id));
 	
 	if($id) {
 		$cm = get_coursemodule_from_id('groupformation', $id, 0, false, MUST_EXIST);
@@ -68,7 +69,7 @@
 	$PAGE->set_title('edit_param');
 	$PAGE->set_heading($course->fullname. ': '.'edit_param');
 	$PAGE->set_pagelayout('admin');
-	navigation_node::override_active_url(new moodle_url('/groupformation/index.php', array('id' => $id, 'do_show' => $do_show)));
+	navigation_node::override_active_url(new moodle_url('/groupformation/index.php', array('id' => $id)));
 	
 	// 	// Print the page and form
 	// 	$preview = '';
@@ -118,9 +119,33 @@
 // 		if (! $feedback = $DB->get_record("feedback", array("id"=>$cm->instance))) {
 // 			print_error('invalidcoursemodule');
 // 		}
+
+// 		/**
+// 		 * for importing
+// 		 * erste Variante mit xml Datei aber neuer Abhängigkeit
+// 		 */
+// 		require($CFG->dirroot.'/mod/feedback/import.php');
+		
+// 		if (!$xmldata = feedback_load_xml_data($xmlcontent)) {
+// 			print_error('cannotloadxml', 'groupformation', returnurl);
+// 		}
+		
+// 		$importerror = feedback_import_loaded_data($xmldata, $feedback->id);
+		
+// 		/**
+// 		 * oder diese Variante, bei dem man ein Template vorher erstellen muss
+// 		 */
+// 		feedback_items_from_template($feedback, $templateid, $deleteold = false);
 		/**
 		 * typs: captcha info label multichoice multichoicerated numeric textarea textfield
 		 */
+		$coursename = $course->name;
+		$intro = "<p>In der Lehrveranstaltung $coursename wird Gruppenarbeit 
+					eingesetzt. Um eine möglichst optimale Zusammensetzung aller Gruppen zu erzielen, 
+					sollen mit diesem Fragebogen Ihr Vorwissen, Ihre Interessen und Ihre Motivation 
+					erfasst werden. Die Software bildet dann die Gruppen so, dass die zu erwartende 
+					Zufriedenheit aller Teilnehmer und Leistungen aller Gruppen möglichst hoch sind.
+					Ihre Eingaben sind von niemandem (auch nicht dem Dozenten) einsehbar <br></p>";
 		
 		/**
 		 * intro
@@ -130,20 +155,20 @@
 				'id' => '',
 				'feedback' => $feedbackid,
 				'template' => 0,
-				'name' => 'intro',
+				'name' => get_string('modulename', 'groupformation'),
 				'label' => '',
-				'presentation' => 'Dies ist der Introtext', // TODO
+				'presentation' => $intro, // TODO oder presentation_editor
 				'type' => 'label',
 				'position' => 0,
 				'hasvalue' => 0,
 				'required' => 0,
 				'dependitem' => 0,
 				'dependvalue' => "",
-				'options' => 'options',
+				'options' => '',
 				
 				'feedbackid' => $feedbackid,
 				'templatedid' => 0,
-				'itemname' => 'intro',
+				'itemname' => get_string('modulename', 'groupformation'),
 				'itemlabel' => '',
 		);
 		
@@ -152,16 +177,134 @@
 		feedback_create_pagebreak($feedbackid);
 		
 		/**
-		 * motivation
+		 * Allgemeines
 		 */
-		if($data->motivation == 'checked'){
-			
+		$languagechoice = 'Sprache für die Gruppenarbeit / Language for Team Work';
+		$language = "deutsch \n english"; // oder 'd>>>>>deutsch|english'
+		
+		$dataarray = array(
+				'id' => '',
+				'feedback' => $feedbackid,
+				'template' => 0,
+				'name' => $languagechoice,
+				'label' => '',
+				'values' => $language, // TODO
+				'type' => 'multichoice',
+				'position' => 1,
+				'hasvalue' => 0,
+				'required' => 0,
+				'dependitem' => 0,
+				'dependvalue' => '',
+				'options' => 'ih',
+		
+				'feedbackid' => $feedbackid,
+				'templatedid' => 0,
+				'itemname' => $languagechoice,
+				'itemlabel' => '',
+				'subtype' => 'd',
+				'horizontal' => 1,
+				'ignoreempty' => 1,
+				'hidenoselect' => 1
+				
+		);
+		
+		feedback_create_item($dataarray);
+		
+		$radiopresentation = "gut \n schlecht"; // oder 'r>>>>>stimmt||||stimmt nicht<<<<<1'
+		$position = 2;
+		
+		$knowledges = $data->knowledgeValues;
+		$knowledgearray = explode("\n", $knowledges);
+		
+		foreach($knowledgearray as $knowledge){
+		
+			$knowledgename = "Wie schätzen Sie ihr persönliches Vorwissen in $knowledge ein?";
+				
+			$dataarray = array(
+					'id' => '',
+					'feedback' => $feedbackid,
+					'template' => 0,
+					'name' => $knowledgename,
+					'label' => '',
+					'values' => $radiopresentation, // TODO
+					'type' => 'multichoice',
+					'position' => $position,
+					'hasvalue' => 0,
+					'required' => 0,
+					'dependitem' => 0,
+					'dependvalue' => '',
+					'options' => 'ih',
+		
+					'feedbackid' => $feedbackid,
+					'templatedid' => 0,
+					'itemname' => $languagechoice,
+					'itemlabel' => '',
+					'subtype' => 'r',
+					'horizontal' => 1,
+					'ignoreempty' => 1,
+					'hidenoselect' => 1
+			);
+		
+			feedback_create_item($dataarray);
+		
+			$position++;
 		}
 		
-		if($data->lernstil == 'checked'){
+		$topics = $data->topicValues;
+		$topicsarray = explode("\n", $topics);
+		
+		foreach($topicsarray as $topic){
+		
+			$topicname = "Wie groß ist Ihr Interesse an $topic";
+			
+			$dataarray = array(
+					'id' => '',
+					'feedback' => $feedbackid,
+					'template' => 0,
+					'name' => $topicname,
+					'label' => '',
+					'values' => $radiopresentation, // TODO
+					'type' => 'multichoice',
+					'position' => $position,
+					'hasvalue' => 0,
+					'required' => 0,
+					'dependitem' => 0,
+					'dependvalue' => '',
+					'options' => 'ih',
+		
+					'feedbackid' => $feedbackid,
+					'templatedid' => 0,
+					'itemname' => $languagechoice,
+					'itemlabel' => '',
+					'subtype' => 'r',
+					'horizontal' => 1,
+					'ignoreempty' => 1,
+					'hidenoselect' => 1
+			);
+		
+			feedback_create_item($dataarray);
+		
+			$position++;
+		}
+		feedback_create_pagebreak($feedbackid);
+		
+		// ab hier importieren?!
+		
+		$szenariotyp = $data->szenario;
+		
+		//je nach szenario andere Werte und Fragen
+		if($szenariotypo == 'project'){
+			
+		} elseif ($szenariotyp == 'homework'){
+			
+		} else {
 			
 		}
-		
+	
 		//und soweiter
 		groupformation_create_feedback($data, $feedbackid, $groupformation->id);
 	}
+	
+	echo $OUTPUT->header();
+	$paramform->display();
+	echo $OUTPUT->footer();

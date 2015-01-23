@@ -45,25 +45,22 @@
 	$string['overview'] = 'Overview';
 	$string['edit_param'] = 'Editieren';
 	$string['editparam'] = 'Paramter editieren';
-	$string['exam'] = 'Klausurvorbereitung';
-	$string['seminar'] = 'Themenvorbereitung';
-	$string['learningGroup'] = 'Lerngruppe';
 	$string['szenario'] = 'Szenario';
-	$string['szenario_help'] = 'Lerngruppe wählen Sie bitte, wenn ....
-			Klausurvorbereitung wählen Sie, wenn ... .
-			Themenvorbereitung wählen Sie bitte, wenn ...';
-	$string['parameter'] = 'Parameter';
-	$string['parameter_help'] = 'So wählen Sie die Parameter...';
-	$string['lernstil'] = 'Lernstil';
-	$string['similar'] = 'ähnlich';
-	$string['different'] = 'unterschiedlich';
-	$string['motivation'] = 'Motivation';
+	$string['szenarioLabel'] = '';
+	$string['szenarioInfo'] = 'Das Gruppenformationsplugin stellt drei Szenarie zur Auswahl. 
+			Beim Projekt .... 
+			Beim Referat ....
+			Bei Hausaufgaben ....';
+	$string['project'] = 'Projekt';
+	$string['homework'] = 'Hausaufgaben';
+	$string['presentation'] = 'Referat';
+	$string['time'] = 'Time';
+	$string['individual'] = 'Einzelbewertung';
+	$string['asgroup'] = 'Gruppenbewertung';
 	$string['topics'] = 'Themen';
 	$string['topicchoice'] = 'Themenauswahl';
 	$string['useOneLineForEachTopic'] = 'Für jedes Thema eine Zeile benutzen';
-	$string['similarKnowledge'] = 'gleicher Wissensstand';
-	$string['differentKnowledge'] = 'unterschiedlicher Wissensstand';
-	$string['similarKnowledgeChoice'] = '';
-	$string['differentKnowledgeChoice'] = '';
+	$string['knowledge'] = 'Vorwissen';
+	$string['knowledgeChoice'] = '';
 	$string['useOneLineForEachKnowledge'] = 'Für jedes Thema eine eigene Zeile benutzen';
-	$string['assesstimestart_help'] = 'Um früher zu starten, einfach die Startzeit umstellen';
+	$string['cannotloadxml'] = 'XML Datei konnte nicht geladen werden';

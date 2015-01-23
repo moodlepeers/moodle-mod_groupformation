@@ -40,53 +40,20 @@
  
 			$mform->addElement('header', 'editparam', get_string('editparam', 'groupformation'));
 				
-			$attribut = array('learningGroup' => get_string('learningGroup', 'groupformation'),
-					'exam' => get_string('exam', 'groupformation'),
-					'seminar' => get_string('seminar', 'groupformation')
+			$mform->addElement('static', 'szenarioInfo', get_string('szenarioLabel', 'groupformation'), get_string('szenarioInfo', 'groupformation'));
+			
+			$attribut = array('project' => get_string('project', 'groupformation'),
+					'homework' => get_string('homework', 'groupformation'),
+					'presentation' => get_string('presentation', 'groupformation')
 			);
 			
-			$mform->addElement('select', 'szenario', 'Szenario', $attribut);
-			$mform->addHelpButton("szenario", 'szenario', 'groupformation');
+			$mform->addElement('select', 'szenario', get_string('szenario', 'groupformation'), $attribut);
 			
-			$mform->addElement('static', 'parameter', 'Parameter');
-			$mform->addHelpButton('parameter', 'parameter', 'groupformation');
-			
-			$mform->addElement('advcheckbox', 'lernstil', get_string('lernstil', 'groupformation'));
-			
-			$learningarray=array();
-			$learningarray[] =& $mform->createElement('radio', 'yesnol', '', get_string('similar', 'groupformation'), 1);
-			$learningarray[] =& $mform->createElement('radio', 'yesnol', '', get_string('different', 'groupformation'), 0);
-			$learningarray[] =& $mform->createElement('text', 'textl', '', '');
-			$learningarray[] =& $mform->createElement('static', 'percentl', '', 'percent');
-			$mform->addGroup($learningarray, 'learning', '', array(' '), false);
-			
-			$mform->addElement('advcheckbox', 'motivation', get_string('motivation', 'groupformation'));
-			
-			$motivarray=array();
-			$motivarray[] =& $mform->createElement('radio', 'yesnom', '', get_string('similar', 'groupformation'), 1);
-			$motivarray[] =& $mform->createElement('radio', 'yesnom', '', get_string('different', 'groupformation'), 0);
-			$motivarray[] =& $mform->createElement('text', 'textm', '', '');
-			$motivarray[] =& $mform->createElement('static', 'percentm', '', 'percent');
-			$mform->addGroup($motivarray, 'motivation', '', array(' '), false);
-			
-			$mform->addElement('advcheckbox', 'topics', get_string('topics', 'groupformation'));
-				
 			$mform->addElement('static', 'hintTopic', get_string('topicchoice', 'groupformation'), get_string('useOneLineForEachTopic', 'groupformation'));
 			$mform->addElement('textarea', 'topicValues', '', 'wrap="virtual" rows="10" cols="65"');
 				
-			$mform->addElement('advcheckbox', 'similarKnowledge', get_string('similarKnowledge', 'groupformation'));
-			
-			$mform->addElement('static', 'hintSimilarKnowledge', get_string('similarKnowledgeChoice', 'groupformation'), get_string('useOneLineForEachKnowledge', 'groupformation'));
-			$mform->addElement('textarea', 'similarKnowledgeValues', '', 'wrap="virtual" rows="10" cols="65"');
-			
-			$mform->addElement('advcheckbox', 'differentKnowledge', get_string('differentKnowledge', 'groupformation'));
-			
-			$mform->addElement('static', 'hintdifferentKnowledge', get_string('differentKnowledgeChoice', 'groupformation'), get_string('useOneLineForEachKnowledge', 'groupformation'));
-			$mform->addElement('textarea', 'differentKnowledgeValues', '', 'wrap="virtual" rows="10" cols="65"');
-			
-			$mform->addElement('date_time_selector', 'assesstimestart', get_string('from'));
-			$mform->addHelpButton('assesstimestart', 'assesstimestart', 'groupformation');
-			$mform->addElement('date_time_selector', 'assesstimeend', get_string('to'));
+			$mform->addElement('static', 'hintKnowledge', get_string('knowledgeChoice', 'groupformation'), get_string('useOneLineForEachKnowledge', 'groupformation'));
+			$mform->addElement('textarea', 'knowledgeValues', '', 'wrap="virtual" rows="10" cols="65"');
 			
 			$this->add_action_buttons();
 			}

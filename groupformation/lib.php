@@ -435,27 +435,14 @@
 		
 		$item->groupformation = $groupformationid;
 	
-		if($data->motivation == 'checked'){
-			$item->motivationselected = 1;
-			if($data->yesnom == 1)
-				$item->motivationsimilar = 1;
-			else $item->motivationsimilar = 0;
-		} else {
-			$item->motivationselected = 0;
-			$item->motivationsimilar = 0;
-		}
+		$item->szenario = $data->szenario;
 			
+		$topics = $data->topicValues;
+		$knowledge = $data->knowlegdeValues;
 		
-		if($data->lernstil == 'checked'){
-			$item->lernstilselected = 1;
-			if($data->yesnol == 1)
-				$item->lernstilsimilar = 1;
-			else $item->lernstilsimilar = 0;
-		} else {
-			$item->lernstilselected = 0;
-			$item->lernstilsimilar = 0;
-		}
-	
+		$item->topics = $topics;
+		$item->knowledge = $knowledge;
+		
 		$item->id = $DB->insert_record('groupformation_feedback', $item);
 	
 		return $item->id;
@@ -475,16 +462,3 @@
 		
 	}
 	
-	function groupformation_get_times($feedbackid){
-		global $DB;
-		
-		/**
-		 * muss auskommentiert bleiben, bis Datenbank steht
-		 */
-// 		return array(
-// 				'timeopen' => $DB->get_field('groupformation_feedback', 'timeopen', array('feedback' => $feedbackid)),
-// 				'timeclose' => $DB->get_field('groupformation_feedback', 'timeclose', array('feedback' => $feedbackid))
-// 		);
-		
-		return array();
-	}

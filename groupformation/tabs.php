@@ -47,10 +47,10 @@
 	$viewurl = new moodle_url('/mod/groupformation/view.php', array('id'=>$usedid, 'do_show'=>'view'));
 	$row[] = new tabobject('view', $viewurl->out(), get_string('overview', 'groupformation'));
 
-	if (has_capability('mod/groupformation:editparams', $context)) {
+//	if (has_capability('mod/groupformation:editparams', $context)) {
 		$editurl = new moodle_url('/mod/groupformation/edit_param.php', array('id'=>$usedid, 'do_show'=>'edit_param'));
 		$row[] = new tabobject('edit_param', $editurl->out(), get_string('edit_param', 'groupformation'));
-	}
+//	}
 
 
 
