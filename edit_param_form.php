@@ -30,7 +30,7 @@
 
 	require_once("$CFG->libdir/formslib.php");
 
-	class edit_param_form extends moodleform {
+	class mod_groupformation_edit_param_form extends moodleform {
 
 		//Add elements to form
 		public function definition() {
@@ -40,7 +40,7 @@
  
 			$mform->addElement('header', 'editparam', get_string('editparam', 'groupformation'));
 				
-			$mform->addElement('static', 'szenarioInfo', get_string('szenarioLabel', 'groupformation'), get_string('szenarioInfo', 'groupformation'));
+			$mform->addElement('static', 'szenarioInfo', get_string('szenarioLabel', 'groupformation'), get_string('szenarioInfo', 'groupform'));
 			
 			$attribut = array('project' => get_string('project', 'groupformation'),
 					'homework' => get_string('homework', 'groupformation'),
