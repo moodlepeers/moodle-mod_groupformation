@@ -26,7 +26,7 @@
 
 	require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 	require_once(dirname(__FILE__).'/edit_param_form.php');
-	require_once(dirname(__FILE__).'/setting_manager.php');
+	require_once(dirname(__FILE__).'/classes/lecturer_settings/setting_manager.php');
 
 	
 //	$courseid = required_param('courseid', PARAM_INT);

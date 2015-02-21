@@ -39,11 +39,11 @@
 			'context' => context_course::instance($course->id)
 	);
 	
-	$event = \mod_groupformation\event\course_module_instance_list_viewed::create(§params);
+	$event = \mod_groupformation\event\course_module_instance_list_viewed::create($params);
 	$event->add_record_snapshot('course', $course);
 	$event->trigger();
 	
-	$strname = get_string('groupformationplural', 'mod_groupformation');
+	$strname = get_string('groupformationplural', 'groupformation');
 //	$coursecontext = context_course::instance($course->id);
 	
 	$PAGE->set_url('/mod/groupformation/index.php', array('id' => $id));
@@ -57,7 +57,7 @@
 	echo $OUTPUT->heading($strname);
 	
 	if (! $groupformations = get_all_instances_in_course('groupformation', $course)) {
-		notice(get_string('nonewmodules', 'groupformation'), new moodle_url('/course/view.php', array('id' => $course->id)));
+		notice(get_string('nogroupformation', 'groupformation'), new moodle_url('/course/view.php', array('id' => $course->id)));
 	}
 	
 	$usesections = course_format_uses_sections($course->format);

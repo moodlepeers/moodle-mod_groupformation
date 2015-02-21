@@ -22,10 +22,10 @@
  
 defined('MOODLE_INTERNAL') || die();
  
-$plugin->version   = 2014051200; //value out of "feedback"
+$plugin->version   = 2015021800; 
 $plugin->requires  = 2014050800; //value out of "feedback"
 $plugin->cron      = 0;
-$plugin->component = 'mod_groupformation';
+$plugin->component = 'mod_groupform';
 $plugin->maturity  = MATURITY_ALPHA;
 $plugin->release   = 'v1.1';
 $plugin->dependencies = array();

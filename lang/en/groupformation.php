@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
 /**
-* English strings for newmodule
+* German strings for newmodule
 *
 * @package mod_groupformation
 * @copyright 2014 Nora Wester
@@ -24,43 +24,42 @@
 
 	defined('MOODLE_INTERNAL') || die();
 
-	$string['modulename'] = 'groupformation';
-	$string['modulenameplural'] = 'groupformations';
-	$string['modulename_help'] = 'With the groupformation plugin you can generate learning groups';
+	$string['modulename'] = 'Gruppenformation';
+	$string['modulenameplural'] = 'Gruppenformationen';
+	$string['modulename_help'] = 'Mit dem Gruppenformations Plugin kann man sich in eine Lerngruppe eintragen lassen, anhand von Kriterien';
 	$string['groupformationfieldset'] = 'Custom example fieldset';
-	$string['groupformationname'] = 'Groupformation';
-	$string['groupformationname_help'] = 'ToolTip Groupformation';
-	$string['groupformation'] = 'Groupformation';
-	$string['pluginadministration'] = 'Administration for Groupformation';
+	$string['groupformationname'] = 'Gruppenformation';
+	$string['groupformationname_help'] = 'ToolTip Gruppenformation';
+	$string['groupformation'] = 'Gruppenformation';
+	$string['pluginadministration'] = 'Gruppenformation Administration';
 	$string['pluginname'] = 'groupformation';
-	$string['nonewmodules'] = '';
-	$string['groupnameexists'] = 'This group name already exist';
-	$string['generategroups'] = 'generate groups';
-	$string['namingschema'] = "namingchema";
-	$string['userpergroup'] = 'How many users per group?';
-	$string['feedbackIsNotOpen'] = 'Abgabephase ist abgeschlossen';
+	$string['nogroupformation'] = 'keine Gruppenformation';
+	$string['groupnameexists'] = 'Dieser Lerngruppenname existiert schon';
+	$string['generategroups'] = 'Lerngruppengenerierung';
+	$string['namingschema'] = 'Namensschema';
+	$string['userpergroup'] = 'Wieviele Nutzer per Gruppe?';
+	$string['notOpen'] = 'Abgabephase ist abgeschlossen';
 	$string['continueTheForm'] = 'Weiter ausfüllen';
 	$string['completeTheForm'] = 'Ausfüllen';
-	$string['feedbackIsAlreadySubmitted'] = 'Es wurde schon ausgefüllt';
+	$string['alreadySubmitted'] = 'Es wurde schon ausgefüllt';
 	$string['overview'] = 'Overview';
+	$string['generategroups'] = "Gruppen generieren";
 	$string['edit_param'] = 'Editieren';
 	$string['editparam'] = 'Paramter editieren';
 	$string['szenario'] = 'Szenario';
 	$string['szenarioLabel'] = '';
-	$string['szenarioInfo'] = 'Das Gruppenformationsplugin stellt drei Szenarie zur Auswahl. 
-			Beim Projekt .... 
-			Beim Referat ....
-			Bei Hausaufgaben ....';
+	$string['szenarioInfo'] = 'Das Gruppenformationsplugin stellt drei Szenarie zur Verfügung. 
+			Beim Projekt wird darauf geachtet, dass sich die Persönlichkeiten der Gruppenmitglieder ergänzen. 
+			Beim Referat steht das gemeinsane Themeninteresse im Vordergrund.
+			Bei den Hausaufgaben wird darauf geachtet, dass es die besten Vorausetzungen für kollaboratives Lernen gibt';
 	$string['project'] = 'Projekt';
 	$string['homework'] = 'Hausaufgaben';
 	$string['presentation'] = 'Referat';
-	$string['time'] = 'Time';
-	$string['individual'] = 'Einzelbewertung';
-	$string['asgroup'] = 'Gruppenbewertung';
+	$string['time'] = 'Zeit';
 	$string['topics'] = 'Themen';
 	$string['topicchoice'] = 'Themenauswahl';
 	$string['useOneLineForEachTopic'] = 'Für jedes Thema eine Zeile benutzen';
 	$string['knowledge'] = 'Vorwissen';
-	$string['knowledgeChoice'] = '';
+	$string['knowledgeChoice'] = 'Vorwissen';
 	$string['useOneLineForEachKnowledge'] = 'Für jedes Thema eine eigene Zeile benutzen';
 	$string['cannotloadxml'] = 'XML Datei konnte nicht geladen werden';

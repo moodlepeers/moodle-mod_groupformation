@@ -47,7 +47,7 @@
 	// }
 	
 	if($id) {
-		$cm = get_coursemodule_from_id('groupformationation', $id, 0, false, MUST_EXIST);
+		$cm = get_coursemodule_from_id('groupformation', $id, 0, false, MUST_EXIST);
 		$course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
 		$groupformation = $DB->get_record('groupformation', array('id' => $cm->instance), '*', MUST_EXIST);
 	} else if($g) {
