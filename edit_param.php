@@ -118,7 +118,7 @@
 		
 		$settings = new mod_groupformation_setting_manager($id, $data->szenario, $topicsarray, $knowledgesarray);
 		
-		$settings->create_Questions(true);
+		$settings->create_Questions(TRUE);
 		$settings->save_settings();
 	}
 	

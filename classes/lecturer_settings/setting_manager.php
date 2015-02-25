@@ -59,9 +59,9 @@ if (!defined('MOODLE_INTERNAL')) {
 		
 		/**
 		 * 
-		 * @param bool $german indicates whether the question should be in german
+		 * @param $german indicates whether the question should be in german
 		 */
-		public function create_Questions(bool $german){
+		public function create_Questions($german){
 			//'Sprache für die Gruppenarbeit / Language for Team Work'
 			
 			if($german){

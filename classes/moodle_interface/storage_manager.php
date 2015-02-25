@@ -65,7 +65,7 @@
 			$data->id = $DB->insert_record("groupformation_question_settings", $data);
 		}
 		
-		private function convertOptions(array $options){
+		private function convertOptions($options){
 			$op = implode("</OPTION> /n <OPTION>", $options);
 			return "<OPTION>" . $op . "</OPTION>";
 		}
