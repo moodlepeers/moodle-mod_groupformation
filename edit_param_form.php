@@ -55,6 +55,13 @@
 			$mform->addElement('static', 'hintKnowledge', get_string('knowledgeChoice', 'groupformation'), get_string('useOneLineForEachKnowledge', 'groupformation'));
 			$mform->addElement('textarea', 'knowledgeValues', '', 'wrap="virtual" rows="10" cols="65"');
 			
+			$activity_id = optional_param('id', false, PARAM_INT);
+			if ($activity_id) {
+				$mform->addElement('hidden', 'id');
+				$mform->setType('id', PARAM_INT);
+				$mform->setDefault('id', $activity_id);
+			}
+			
 			$this->add_action_buttons();
 			}
 	}
