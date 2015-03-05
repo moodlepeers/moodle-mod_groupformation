@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//DE"
+       "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>Student Survey</title>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+
+	<div id="content">
+        
+        <div class="grid grid-pad">
+            
+            <div class="col_100">
+<!--                        <h4>1. Please choose the size or the number of groups.</h4>-->
+                        <p>In the course {name of the course} you will work in groups. In order to get an optimal matching of group members, we kindly ask you to fill in this questionnaire about your prior knowledge, your interests, your learning style and your motivation. The software will then form groups so that satisfaction and performance of all participants are expected to be high. </p>
+            </div>
+        
+            <form action="survey_2.html">
+
+                <div class="grid survey">
+                    
+                    <div class="col_100"><h4>1. Sprache f&uuml;r die Gruppenarbeit / Language for Team Work</h4></div>
+                    
+                    <div class="grid">
+                        <div class="col_50">
+                            <p>Bitte w&auml;hlen Sie, in welchen Sprachen es Ihnen m&ouml;glich ist, mit Ihrer Gruppe zu kommunizieren. / Please select in which languages you can possibly communicate with your team.</p>
+                        </div>
+                        <div class="col_50">
+                            <div class="grid">
+                                <div class="col_25">Deutsch</div>
+                                <div class="col_25">Englisch</div>
+                                <div class="col_25">Beides (Deutsch bevorzugt) </div>
+                                <div class="col_25">Both (English prefered) </div>
+                            </div>
+                            <div class="grid">
+                                <div class="col_25"><input type="radio" name="group_opt" id="radio_group_numb" value="group_opt_numb"/></div>
+                                <div class="col_25"><input type="radio" name="group_opt" id="radio_group_numb" value="group_opt_numb"/></div>
+                                <div class="col_25"><input type="radio" name="group_opt" id="radio_group_numb" value="group_opt_numb"/></div>
+                                <div class="col_25"><input type="radio" name="group_opt" id="radio_group_numb" value="group_opt_numb"/></div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                    
+                    
+                    <div class="grid">
+                        <div class="col_50">
+                            <p>Bitte w&auml;hlen Sie, in welchen Sprachen es Ihnen m&ouml;glich ist, mit Ihrer Gruppe zu kommunizieren. / Please select in which languages you can possibly communicate with your team.</p>
+                        </div>
+                        <div class="col_50">
+                            <div class="grid">
+                                <div class="col_25">Deutsch</div>
+                                <div class="col_25">Englisch</div>
+                                <div class="col_25">Beides (Deutsch bevorzugt) </div>
+                                <div class="col_25">Both (English prefered) </div>
+                            </div>
+                            <div class="grid">
+                                <div class="col_25"><input type="radio" name="group_opt" id="radio_group_numb" value="group_opt_numb"/></div>
+                                <div class="col_25"><input type="radio" name="group_opt" id="radio_group_numb" value="group_opt_numb"/></div>
+                                <div class="col_25"><input type="radio" name="group_opt" id="radio_group_numb" value="group_opt_numb"/></div>
+                                <div class="col_25"><input type="radio" name="group_opt" id="radio_group_numb" value="group_opt_numb"/></div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                    
+                    <table>
+                        <th>1. Sprache f&uuml;r die Gruppenarbeit / Language for Team Work</th>
+                        <th>Deutsch</th>
+                        <th>English</th>
+                        <th>Beides (Deutsch bevorzugt)</th>
+                        <th>Both (English prefered)</th>
+                        <tr>
+                            <td>
+                            Bitte w&auml;hlen Sie, in welchen Sprachen es Ihnen m&ouml;glich ist, mit Ihrer Gruppe zu kommunizieren. / Please select in which languages you can possibly communicate with your team.
+                            </td>
+                            <td>
+                                <input type="radio" name="group_opt" id="radio_group_numb" value="group_opt_numb"/>
+                            </td>
+                            <td>
+                                <input type="radio" name="group_opt" id="radio_group_numb" value="group_opt_numb"/>
+                            </td>
+                            <td>
+                                <input type="radio" name="group_opt" id="radio_group_numb" value="group_opt_numb"/>
+                            </td>
+                            <td>
+                                <input type="radio" name="group_opt" id="radio_group_numb" value="group_opt_numb"/>
+                            </td>
+                            
+                        </tr>
+                    
+                    </table>
+
+                    <div class="col_33">
+                        <input type="radio" name="group_opt" id="radio_group_size" value="group_opt_size" checked="checked"/>
+                        <label for="group_size">Group size</label>
+                        <input id="group_size" type="number" name="group_size" min="0" max="100" step="" value="0">    
+                    </div>
+                    <div class="col_66">
+                        <input type="radio" name="group_opt" id="radio_group_numb" value="group_opt_numb"/>
+                        <label for="numb_of_groups">Number of Groups</label>
+                        <input type="number" id="numb_of_groups" name="numb_of_groups" min="0" max="100" step="" value="0">
+                    </div>
+
+                </div> <!-- /grid -->
+                <div class="grid">
+
+                    <div class="col_100">
+                        <h4>2. Please fill out what prior knowledge is relevant for the project.</h4>
+                    </div>
+
+                    <div class="grid">
+                        <div class="col_33">A. <input class="" name="prior_knowledge_1" type="text" size="16" maxlength="50" placeholder=""></div>
+                    
+                        <div class="col_33">B. <input class="" name="prior_knowledge_2" type="text" size="16" maxlength="50" placeholder=""></div>
+                    
+                        <div class="col_33">C. <input class="" name="prior_knowledge_3" type="text" size="16" maxlength="50" placeholder=""></div>
+                        
+                    </div>
+                    
+                    <div class="grid">
+
+                        <div class="col_100"><button class="f_btn_round">add more</button></div>
+                    </div>
+
+                    <div class="col_100">
+                        <button type="reset" class="f_btn">Cancel</button>
+                        <button type="button" class="f_btn" onclick="window.location.href='dozent_settings.html'">Back</button>
+                        <button type="submit" class="f_btn">Continue</button>
+                    </div>
+                    
+<!--
+                    <div class="col_100">
+                        <input class="fbutton" type="reset" value="Cancel">
+                        <button type="button" class="fbutton" onclick="window.location.href='dozent_settings.html'">Back</button>
+                        <input class="fbutton" type="submit" value="Continue">
+                    </div>
+-->
+
+                </div><!-- /grid -->
+
+
+            </form>
+        </div> <!-- /grid grid-pad-->
+
+	</div> <!-- /content -->     
+
+</body>
+</html>
