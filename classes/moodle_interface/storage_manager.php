@@ -62,7 +62,7 @@
 			$data->topicvalues = $this->convertOptions($topics);
 			$data->knowledgevalues = $this->convertOptions($knowledge);
 			
-			$data->id = $DB->insert_record("groupformation_question_settings", $data);
+			$data->id = $DB->insert_record("groupformation_q_settings", $data);
 		}
 		
 		private function convertOptions($options){

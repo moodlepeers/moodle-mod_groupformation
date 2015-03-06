@@ -40,7 +40,7 @@
  
 			$mform->addElement('header', 'editparam', get_string('editparam', 'groupformation'));
 				
-			$mform->addElement('static', 'szenarioInfo', get_string('szenarioLabel', 'groupformation'), get_string('szenarioInfo', 'groupform'));
+			$mform->addElement('static', 'szenarioInfo', get_string('szenarioInfo', 'groupformation'), get_string('szenarioInfo', 'groupform'));
 			
 			$attribut = array('project' => get_string('project', 'groupformation'),
 					'homework' => get_string('homework', 'groupformation'),

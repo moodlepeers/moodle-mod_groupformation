@@ -29,7 +29,7 @@
 		</TABLE>
 		<TABLE NAME="groupformation_question" COMMENT="save things according to a question">
 			<FIELDS>
-				<FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="true"/>
+				<FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
 				<FIELD NAME="groupformation" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
 				<FIELD NAME="type" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
 				<FIELD NAME="page" TYPE="int" LENGTH="3" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
@@ -45,7 +45,7 @@
 		</TABLE>
 		<TABLE NAME="groupformation_answer" COMMENT="save the answer to the question">
 			<FIELDS>
-				<FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="true"/>
+				<FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
 				<FIELD NAME="questionid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
 				<FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
 				<FIELD NAME="answer" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
@@ -60,9 +60,9 @@
         		<INDEX NAME="userid" UNIQUE="false" FIELDS="userid"/>
       		</INDEXES>
       	</TABLE>
-      	<TABLE NAME="groupformation_question_settings" COMMENT="input requirements of lecturer">
+      	<TABLE NAME="groupformation_q_settings" COMMENT="input requirements of lecturer">
       		<FIELDS>
-      			<FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="true"/>
+      			<FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
       			<FIELD NAME="groupformation" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
       			<FIELD NAME="szenario" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
       			<FIELD NAME="questionnumber" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
@@ -75,9 +75,9 @@
 				<KEY NAME="groupformation" TYPE="foreign" FIELDS="groupformation" REFTABLE="groupformation" REFFIELDS="id"/>
       		</KEYS>
       	</TABLE>
-      	<TABLE NAME="groupformation_grouping_settings" COMMENT="settings for generating core_group(s)">
+      	<TABLE NAME="groupformation_g_settings" COMMENT="settings for generating core_group(s)">
       		<FIELDS>
-      			<FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="true"/>
+      			<FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
       			<FIELD NAME="groupformation" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
       			<FIELD NAME="namingschema" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
       			<FIELD NAME="userpergroup" TYPE="int" LENGTH="3" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>

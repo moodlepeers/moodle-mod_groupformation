@@ -66,9 +66,9 @@
 	$PAGE->set_title(format_string($groupformation->name));
 	$PAGE->set_heading(format_string($course->fullname));
 	
-	$returnurl = $CFG->wwwroot.'/groupformation/index.php?id='.$course->id;
-	
-	
+	//$returnurl = $CFG->wwwroot.'/groupformation/index.php?id='.$course->id;
+	//$returnurl = new moodle_url('');
+	$returnurl = new moodle_url('/mod/groupformation/view.php', array('id' => $cm->id, 'do_show' => 'view'));
 //	$PAGE->set_title('edit_param');
 // 	$PAGE->set_heading($course->fullname. ': '.'edit_param');
 // 	$PAGE->set_pagelayout('admin');
@@ -120,6 +120,8 @@
 		
 		$settings->create_Questions(TRUE);
 		$settings->save_settings();
+		
+		redirect($returnurl);
 	}
 	
 	echo $OUTPUT->footer();
