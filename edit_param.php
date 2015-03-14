@@ -26,7 +26,10 @@
 
 	require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 	require_once(dirname(__FILE__).'/edit_param_form.php');
-	require_once(dirname(__FILE__).'/classes/lecturer_settings/setting_manager.php');
+	
+// 	global $CFG;
+// 	require_once $CFG->dirroot.'/mod/groupformation/classes/lecturer_settings/setting_manager.php';
+	require_once(dirname(__FILE__).'/setting_manager.php');
 
 	
 //	$courseid = required_param('courseid', PARAM_INT);
@@ -67,8 +70,8 @@
 	$PAGE->set_heading(format_string($course->fullname));
 	
 	//$returnurl = $CFG->wwwroot.'/groupformation/index.php?id='.$course->id;
-	//$returnurl = new moodle_url('');
 	$returnurl = new moodle_url('/mod/groupformation/view.php', array('id' => $cm->id, 'do_show' => 'view'));
+	
 //	$PAGE->set_title('edit_param');
 // 	$PAGE->set_heading($course->fullname. ': '.'edit_param');
 // 	$PAGE->set_pagelayout('admin');
@@ -81,6 +84,40 @@
 	// 	/// Get applicable roles - used in menus etc later on
 	// 	$rolenames = role_fix_names(get_profile_roles($context), $context, ROLENAME_ALIAS, true);
 	
+	$mform = new mod_groupformation_edit_param_form();
+	
+	if ($mform->is_cancelled()) {
+		redirect($returnurl);
+	
+	} elseif ($data = $mform->get_data()) {
+	
+	
+		// 		$coursename = $course->name;
+		// 		$intro = "<p>In der Lehrveranstaltung $coursename wird Gruppenarbeit
+		// 					eingesetzt. Um eine möglichst optimale Zusammensetzung aller Gruppen zu erzielen,
+		// 					sollen mit diesem Fragebogen Ihr Vorwissen, Ihre Interessen und Ihre Motivation
+		// 					erfasst werden. Die Software bildet dann die Gruppen so, dass die zu erwartende
+		// 					Zufriedenheit aller Teilnehmer und Leistungen aller Gruppen möglichst hoch sind.
+		// 					Ihre Eingaben sind von niemandem (auch nicht dem Dozenten) einsehbar <br></p>";
+	
+	
+		$knowledges = $data->knowledgeValues;
+		$knowledgearray = explode("\n", $knowledges);
+	
+	
+		$topics = $data->topicValues;
+		$topicsarray = explode("\n", $topics);
+		
+		var_dump($topicsarray);
+	
+		$settings = new mod_groupformation_setting_manager($groupformation->id, $data->szenario, $topicsarray, $knowledgearray);
+	
+		$settings->create_Questions(TRUE);
+		$settings->save_settings();
+	
+		redirect($returnurl);
+	}
+	
 	echo $OUTPUT->header();
 	
 	require('tabs.php');
@@ -88,40 +125,10 @@
 	/// Create the form
 	echo $OUTPUT->box_start('generalbox errorboxcontent boxaligncenter boxwidthnormal');
 
-	$mform = new mod_groupformation_edit_param_form();
+	//$mform = new mod_groupformation_edit_param_form();
 	$mform->display();
 	
 	echo $OUTPUT->box_end();
 	
-	/// Handle form submission
-	if ($mform->is_cancelled()) {
-		redirect($returnurl);
-	
-	} elseif ($data = $mform->get_data()) {
-		
-		
-// 		$coursename = $course->name;
-// 		$intro = "<p>In der Lehrveranstaltung $coursename wird Gruppenarbeit 
-// 					eingesetzt. Um eine möglichst optimale Zusammensetzung aller Gruppen zu erzielen, 
-// 					sollen mit diesem Fragebogen Ihr Vorwissen, Ihre Interessen und Ihre Motivation 
-// 					erfasst werden. Die Software bildet dann die Gruppen so, dass die zu erwartende 
-// 					Zufriedenheit aller Teilnehmer und Leistungen aller Gruppen möglichst hoch sind.
-// 					Ihre Eingaben sind von niemandem (auch nicht dem Dozenten) einsehbar <br></p>";
-		
-		
-		$knowledges = $data->knowledgeValues;
-		$knowledgearray = explode("\n", $knowledges);
-		
-		
-		$topics = $data->topicValues;
-		$topicsarray = explode("\n", $topics);
-		
-		$settings = new mod_groupformation_setting_manager($id, $data->szenario, $topicsarray, $knowledgesarray);
-		
-		$settings->create_Questions(TRUE);
-		$settings->save_settings();
-		
-		redirect($returnurl);
-	}
 	
 	echo $OUTPUT->footer();

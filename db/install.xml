@@ -32,9 +32,7 @@
 				<FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
 				<FIELD NAME="groupformation" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
 				<FIELD NAME="type" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
-				<FIELD NAME="page" TYPE="int" LENGTH="3" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
 				<FIELD NAME="question" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
-				<FIELD NAME="category" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
 				<FIELD NAME="options" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
 			</FIELDS>
 			
@@ -46,6 +44,8 @@
 		<TABLE NAME="groupformation_answer" COMMENT="save the answer to the question">
 			<FIELDS>
 				<FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+				<FIELD NAME="groupformation" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+				<FIELD NAME="category" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
 				<FIELD NAME="questionid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
 				<FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
 				<FIELD NAME="answer" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
@@ -53,7 +53,7 @@
 			
 			<KEYS>
 				<KEY NAME="primary" TYPE="primary" FIELDS="id"/>
-				<KEY NAME="id" TYPE="foreign" FIELDS="questionid" REFTABLE="groupformation_question" REFFIELDS="id"/>
+				<KEY NAME="groupformation" TYPE="foreign" FIELDS="groupformation" REFTABLE="groupformation" REFFIELDS="id"/>
 			</KEYS>
 			
 			<INDEXES>
@@ -67,7 +67,7 @@
       			<FIELD NAME="szenario" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
       			<FIELD NAME="questionnumber" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
       			<FIELD NAME="topicvalues" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
-      			<FIELD NAME="knowledgevales" TYPE="text" NOTNULL="true" SEQUENCE="false"/> 
+                <FIELD NAME="knowledgevales" TYPE="text" NOTNULL="true" SEQUENCE="false"/>	
       		</FIELDS>
       		
       		<KEYS>
@@ -88,5 +88,135 @@
 				<KEY NAME="groupformation" TYPE="foreign" FIELDS="groupformation" REFTABLE="groupformation" REFFIELDS="id"/>
       		</KEYS>
       	</TABLE>
+      	
+      	<TABLE NAME="groupformation_de_team" COMMENT="save things according to a question">
+			<FIELDS>
+				<FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+				<FIELD NAME="type" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+				<FIELD NAME="question" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+				<FIELD NAME="options" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+			</FIELDS>
+			
+			<KEYS>
+				<KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+			</KEYS>
+		</TABLE>
+		
+		<TABLE NAME="groupformation_en_team" COMMENT="save things according to a question">
+			<FIELDS>
+				<FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+				<FIELD NAME="type" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+				<FIELD NAME="question" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+				<FIELD NAME="options" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+			</FIELDS>
+			
+			<KEYS>
+				<KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+			</KEYS>
+		</TABLE>
+		
+		<TABLE NAME="groupformation_en_motiv" COMMENT="save things according to a question">
+			<FIELDS>
+				<FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+				<FIELD NAME="type" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+				<FIELD NAME="question" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+				<FIELD NAME="options" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+			</FIELDS>
+			
+			<KEYS>
+				<KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+			</KEYS>
+		</TABLE>
+		
+		<TABLE NAME="groupformation_de_motiv" COMMENT="save things according to a question">
+			<FIELDS>
+				<FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+				<FIELD NAME="type" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+				<FIELD NAME="question" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+				<FIELD NAME="options" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+			</FIELDS>
+			
+			<KEYS>
+				<KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+			</KEYS>
+		</TABLE>
+		
+		<TABLE NAME="groupformation_en_grade" COMMENT="save things according to a question">
+			<FIELDS>
+				<FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+				<FIELD NAME="type" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+				<FIELD NAME="question" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+				<FIELD NAME="options" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+			</FIELDS>
+			
+			<KEYS>
+				<KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+			</KEYS>
+		</TABLE>
+		
+		<TABLE NAME="groupformation_de_grade" COMMENT="save things according to a question">
+			<FIELDS>
+				<FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+				<FIELD NAME="type" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+				<FIELD NAME="question" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+				<FIELD NAME="options" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+			</FIELDS>
+			
+			<KEYS>
+				<KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+			</KEYS>
+		</TABLE>
+		
+		<TABLE NAME="groupformation_en_learning" COMMENT="save things according to a question">
+			<FIELDS>
+				<FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+				<FIELD NAME="type" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+				<FIELD NAME="question" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+				<FIELD NAME="options" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+			</FIELDS>
+			
+			<KEYS>
+				<KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+			</KEYS>
+		</TABLE>
+		
+		<TABLE NAME="groupformation_de_learning" COMMENT="save things according to a question">
+			<FIELDS>
+				<FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+				<FIELD NAME="type" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+				<FIELD NAME="question" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+				<FIELD NAME="options" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+			</FIELDS>
+			
+			<KEYS>
+				<KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+			</KEYS>
+		</TABLE>
+		
+		<TABLE NAME="groupformation_en_char" COMMENT="save things according to a question">
+			<FIELDS>
+				<FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+				<FIELD NAME="type" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+				<FIELD NAME="question" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+				<FIELD NAME="options" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+			</FIELDS>
+			
+			<KEYS>
+				<KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+			</KEYS>
+		</TABLE>
+		
+		<TABLE NAME="groupformation_de_char" COMMENT="save things according to a question">
+			<FIELDS>
+				<FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+				<FIELD NAME="type" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+				<FIELD NAME="question" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+				<FIELD NAME="options" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
+			</FIELDS>
+			
+			<KEYS>
+				<KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+			</KEYS>
+		</TABLE>
 	</TABLES>
 	</XMLDB>
