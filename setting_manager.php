@@ -23,13 +23,15 @@
  */
 
 //defined('MOODLE_INTERNAL') || die();  -> template
+//namespace mod_groupformation\classes\lecturer_settings;
 
 if (!defined('MOODLE_INTERNAL')) {
 	die('Direct access to this script is forbidden.');    ///  It must be included from a Moodle page
 }
 	
 	//require_once 'storage_manager.php';
-	require_once(dirname(__FILE__).'/classes/moodle_interface/storage_manager.php');
+	require_once(dirname(__FILE__).'/storage_manager.php');
+	require_once(dirname(__FILE__).'/xml_loader.php');
 
 	
 	class mod_groupformation_setting_manager {
@@ -40,13 +42,15 @@ if (!defined('MOODLE_INTERNAL')) {
 		private $knowledgeValues;
 		private $store;
 		
+		private $xmlLoader;
+		
 		private $number = 0;
 
 		/**
 		 * 
 		 * @param unknown $groupformationid
 		 * @param unknown $szenario
-		 * @param array $topicValues
+		 * @param  $topicValues
 		 * @param array $knowledgeValues
 		 */
 		public function __construct($groupformationid, $szenario, array $topicValues, array $knowledgeValues){
@@ -55,6 +59,8 @@ if (!defined('MOODLE_INTERNAL')) {
 			$this->knowledgeValues = $knowledgeValues;
 			$this->topicValues = $topicValues;
 			$this->store = new mod_groupformation_storage_manager($groupformationid);
+			$this->xmlLoader = new mod_groupformation_xml_loader();
+			$this->xmlLoader->setStore($this->store);
 		}
 		
 		/**
@@ -65,7 +71,7 @@ if (!defined('MOODLE_INTERNAL')) {
 			//'Sprache für die Gruppenarbeit / Language for Team Work'
 			
 			if($german){
-				$languageQ = "Bitte wählen Sie, in welcher Sprache es Ihnen möglich ist mit ihrer Gruppe zu kommunizieren";
+				$languageQ = "Bitte waehlen Sie, in welcher Sprache es Ihnen moeglich ist mit ihrer Gruppe zu kommunizieren";
 				$options = array ("deutsch", "deutsch/englisch", "englisch");
 			}
 			else {
@@ -74,71 +80,82 @@ if (!defined('MOODLE_INTERNAL')) {
 			}
 			
 			$question = array('type' => 'dropdown',
-					'page' => 1,
 					'question' => $languageQ,
-					'category' => 'general',
 					'options' => $options
 			);
+			
 			
 			$this->store->add_Question($question);
 			$this->number++;
 			
-			if(german){
+			
+			if($german){
 				$options = array ("sehr gut","","","","nicht vorhanden");
 			} else {
 				$options = array ("excellent", "", "", "","none");
 			}
 			
+			
 			if($this->szenario != 'seminar'){
 				foreach($this->knowledgeValues as $knowledge){
-			
-					if($german)
-						$knowledgename = "Wie schätzen Sie ihr persönliches Vorwissen in $knowledge ein?";
-					else $knowledgename = "";
+					if(strlen($knowledge) != 0){
+						if($german)
+							$knowledgename = "Wie schaetzen Sie ihr persoenliches Vorwissen in $knowledge ein?";
+						else $knowledgename = "";
 				
-					$question = array('type' => 'dropdown',
-							'page' => 1,
-							'question' => $knowledgename,
-							'category' => 'general',
+						$question = array('type' => 'dropdown',
+								'question' => $knowledgename,
+								'options' => $options
+						);
+					
+						$this->store->add_question($question);
+						$this->number++;
+					}
+			
+				}
+			}
+			//Bitte sortieren Sie die zur Wahl stehenden Themen entsprechend Ihrer Präferenz, beginnend mit Ihrem bevorzugten Thema.
+			//Please sort topics available according to your preference, starting with your prefered topic.
+			foreach($this->topicValues as $topic){
+				
+				if(strlen($topic) != 0){
+					if($german)
+						$topicname = "Wie gross ist Ihr Interesse an $topic";
+					else $topicname = "";
+				
+					$question = array('type' => 'dragdrop',
+							'question' => $topicname,
 							'options' => $options
 					);
-					
+				
 					$this->store->add_question($question);
 					$this->number++;
 				}
 			}
 			
-			//Bitte sortieren Sie die zur Wahl stehenden Themen entsprechend Ihrer Präferenz, beginnend mit Ihrem bevorzugten Thema.
-			//Please sort topics available according to your preference, starting with your prefered topic.
-			foreach($this->topicValues as $topic){
-				
-				if($german)
-					$topicname = "Wie groß ist Ihr Interesse an $topic";
-				else $topicname = "";
-				
-				$question = array('type' => 'dropdown',
-						'page' => 1,
-						'question' => $topicname,
-						'category' => 'general',
-						'options' => $options
-				);
-				
-				$this->store->add_question($question);
-				$this->number++;
+			$empty = $this->store->catalogTableNotSet();
+			var_dump($empty);
+			if($empty){
+				$this->xmlLoader->saveData('team');
 			}
 			
-			//je nach szenario andere Werte und Fragen
-			if($this->szenario == 'project'){
-					//importieren Persönlichkeit motivation (Teamoreintierung)
-			} 
+// 			$temp = $this->xmlLoader->saveData('character', $german, $this->number);
+// 			$this->number = $this->number + $temp;
 			
-			if($this->szenario == 'homework'){
-					//importieren Persönlichkeit{ohne 4,5,9,10} Lernstil (Teamorientierung)
-			} 
+// 			//je nach szenario andere Werte und Fragen
+// 			if($this->szenario == 'project'){
+// 				$temp = $this->xmlLoader->saveData('motivation', $german, $this->number);
+// 				$this->number = $this->number + $temp;
+// 			} 
+			
+// 			if($this->szenario == 'homework'){
+// 				$temp = $this->xmlLoader->saveData('learning', $german, $this->number);
+// 				$this->number = $this->number + $temp;
+// 			} 
 		}
 		
 		public function save_settings(){
 			
-			$this->store->add_settings($this->knowledgeValues, $this->szenario, $this->topicValues, $this->number);
+			 $this->store->add_settings($this->knowledgeValues, $this->szenario, $this->topicValues, $this->number);
 		}
 	}

@@ -80,7 +80,7 @@
 				)
 		),
 			
-		'mod/groupformation:editparam' => array(
+		'mod/groupformation:editsettings' => array(
 			
 				'riskbitmask' => RISK_SPAM | RISK_XSS,
 			
@@ -91,6 +91,53 @@
 						'manager' => CAP_ALLOW
 				)
 		),
+			
+		'mod/groupformation:readsettings' => array(
+						
+				'captype' => 'read',
+				'contextlevel' => CONTEXT_MODULE,
+				'archetypes' => array(
+						'editingteacher' => CAP_ALLOW,
+						'manager' => CAP_ALLOW
+				)
+		),
+			
+		'mod/groupformation:onlystudent' => array(
+			
+				'riskbitmask' => RISK_SPAM,
+			
+				'captype' => 'write',
+				'contextlevel' => CONTEXT_MODULE,
+				'archetypes' => array(
+						'student' => CAP_ALLOW
+				)
+		),
+			
+		'mod/groupformation:onlymanager' => array(
+						
+				'riskbitmask' => RISK_SPAM,
+						
+				'captype' => 'write',
+				'contextlevel' => CONTEXT_MODULE,
+				'archetypes' => array(
+						'manager' => CAP_ALLOW
+				)
+		),
+			
+		'mod/groupformation:onlyread' => array(
+			
+				'riskbitmask' => RISK_PERSONAL,
+			
+				'captype' => 'read',
+				'contextlevel' => CONTEXT_MODULE,
+				'archetypes' => array(
+						'student' => CAP_ALLOW,
+						'editingteacher' => CAP_ALLOW,
+						'teacher' => CAP_ALLOW,
+						'manager' => CAP_ALLOW
+				)
+		),
+			
 	);
 
 	

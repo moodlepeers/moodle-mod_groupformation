@@ -3,7 +3,7 @@
      <QUESTIONS>
           <QUESTION TYPE="dropdown">
                <QUESTIONTEXT>
-                    <![CDATA[Welche Note möchten Sie erreichen?]]>
+                    <![CDATA[Welche Note moechten Sie erreichen?]]>
                </QUESTIONTEXT>
                <OPTIONS>
                    	<OPTION> 
@@ -44,7 +44,7 @@
           
           <QUESTION TYPE="dropdown">
                <QUESTIONTEXT>
-                    <![CDATA[Welche Note halten Sie für realistisch?]]>
+                    <![CDATA[Welche Note halten Sie fuer realistisch?]]>
                </QUESTIONTEXT>
                <OPTIONS>
                    	<OPTION> 
@@ -85,7 +85,7 @@
           
           <QUESTION TYPE="dropdown">
                <QUESTIONTEXT>
-                    <![CDATA[Ab welcher Note wären Sie unzufrieden?]]>
+                    <![CDATA[Ab welcher Note waeren Sie unzufrieden?]]>
                </QUESTIONTEXT>
                <OPTIONS>
                    	<OPTION> 

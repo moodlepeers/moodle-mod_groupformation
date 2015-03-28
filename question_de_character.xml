@@ -3,7 +3,7 @@
      <QUESTIONS>			
           <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich bin eher zurückhaltend, reserviert]]>
+                    <![CDATA[Ich bin eher zurueckhaltend, reserviert]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -119,7 +119,7 @@
           
           <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich habe nur wenig künstlerisches Interesse.]]>
+                    <![CDATA[Ich habe nur wenig kuenstlerisches Interesse.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -206,7 +206,7 @@
           
 		 <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich erledige Aufgaben gründlich.]]>
+                    <![CDATA[Ich erledige Aufgaben gruendlich.]]>
                </QUESTIONTEXT>
              <OPTIONS>
                     <OPTION>
@@ -235,7 +235,7 @@
           
           <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich werde leicht nervös und unsicher.]]>
+                    <![CDATA[Ich werde leicht nervoes und unsicher.]]>
                </QUESTIONTEXT>
               <OPTIONS>
                     <OPTION>
@@ -293,7 +293,7 @@
           
           <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich bin rücksichtsvoll zu anderen, einfühlsam.]]>
+                    <![CDATA[Ich bin ruecksichtsvoll zu anderen, einfuehlsam.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>

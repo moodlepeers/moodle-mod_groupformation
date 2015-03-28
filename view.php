@@ -107,6 +107,12 @@
 	// Replace the following lines with you own code.
 	echo $OUTPUT->heading('Yay! It works!');
 	
+// 	require_once(dirname(__FILE__).'/xml_loader.php');
+	require_once(dirname(__FILE__).'/question_manager.php');
+// 	$xmlLoader = new mod_groupformation_xml_loader();
+	$questionManager = new mod_groupformation_question_manager($groupformation->id);
+	$questionManager->getFirstQuestion();
+// 	$xmlLoader->saveData('team', FALSE, 0);
 	//$feedbackid = groupformation_get_feedback_id($groupformation->id);
 		
 	echo $OUTPUT->footer();

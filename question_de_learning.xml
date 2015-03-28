@@ -3,7 +3,7 @@
      <QUESTIONS>
           <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich lerne durch fühlen]]>
+                    <![CDATA[Ich lerne durch fuehlen]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -119,7 +119,7 @@
           
           <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Wenn ich lerne, bin ich offen für neue Erfahrungen.]]>
+                    <![CDATA[Wenn ich lerne, bin ich offen fuer neue Erfahrungen.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -206,7 +206,7 @@
           
 		 <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich ziehe es vor, die Dinge selbst zu erproben und mich davon zu überzeugen, was möglich ist.]]>
+                    <![CDATA[Ich ziehe es vor, die Dinge selbst zu erproben und mich davon zu ueberzeugen, was moeglich ist.]]>
                </QUESTIONTEXT>
                
                <OPTIONS>
@@ -236,7 +236,7 @@
           
           <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich lerne am besten, wenn ich zunächst sorgfältig beobachte und zuhöre.]]>
+                    <![CDATA[Ich lerne am besten, wenn ich zunaechst sorgfaeltig beobachte und zuhoere.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -353,7 +353,7 @@
           
           <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich erspare mir gern durch gründliches Erkunden und kritisches Abwägen überflüssige Irrwege.]]>
+                    <![CDATA[Ich erspare mir gern durch gruendliches Erkunden und kritisches Abwaegen ueberfluessige Irrwege.]]>
                </QUESTIONTEXT>
               <OPTIONS>
                     <OPTION>
@@ -382,7 +382,7 @@
 
 		  <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich lerne am besten durch persönliche Kontakte.]]>
+                    <![CDATA[Ich lerne am besten durch persoenliche Kontakte.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -411,7 +411,7 @@
           
 		 <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich lerne am besten, wenn ich mich auf logische Überlegungen stützen kann.]]>
+                    <![CDATA[Ich lerne am besten, wenn ich mich auf logische Ueberlegungen stuetzen kann.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -440,7 +440,7 @@
           
           <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Für mich ist es eine Zumutung, wenn ich nur zuhören und lesen darf, was andere mir zu sagen haben.]]>
+                    <![CDATA[Fuer mich ist es eine Zumutung, wenn ich nur zuhoeren und lesen darf, was andere mir zu sagen haben.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -527,7 +527,7 @@
           
           <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich lerne am besten, wenn ich mich zurückhalte, bis ich das Thema überblicke.]]>
+                    <![CDATA[Ich lerne am besten, wenn ich mich zurueckhalte, bis ich das Thema ueberblicke.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -556,7 +556,7 @@
           
           <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich lerne am besten, wenn es mich persönlich betrifft.]]>
+                    <![CDATA[Ich lerne am besten, wenn es mich persoenlich betrifft.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -585,7 +585,7 @@
           
 		 <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich lerne am besten, wenn ich mich auf meine Beobachtungen stütze.]]>
+                    <![CDATA[Ich lerne am besten, wenn ich mich auf meine Beobachtungen stuetze.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -614,7 +614,7 @@
           
           <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich lerne am besten, wenn ich mich auf mein Gefühl verlasse.]]>
+                    <![CDATA[Ich lerne am besten, wenn ich mich auf mein Gefuehl verlasse.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -672,7 +672,7 @@
           
           <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Wenn ich lerne, löse ich Probleme durch Nachdenken.]]>
+                    <![CDATA[Wenn ich lerne, loese ich Probleme durch Nachdenken.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
