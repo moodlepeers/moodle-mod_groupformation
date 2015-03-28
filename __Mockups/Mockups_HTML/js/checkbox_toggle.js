@@ -1,0 +1,10 @@
+$(document).ready(function(){
+        $('input[type="checkbox"]').click(function(){
+            if($(this).attr("value")=="wantKnowledge"){
+                $(".knowledge").toggle();
+            }
+            if($(this).attr("value")=="wantTopics"){
+                $(".topics").toggle();
+            }
+        });
+});
