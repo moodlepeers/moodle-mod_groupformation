@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION VERSION="200701" COMMENT="">
-     <QUESTIONS>
+     <QUESTIONS VERSION="1">
           <QUESTION TYPE="dropdown">
                <QUESTIONTEXT>
-                    <![CDATA[Welche Note moechten Sie erreichen?]]>
+                    <![CDATA[Which grade would you like to achive?]]>
                </QUESTIONTEXT>
-               <OPTIONS>
+                <OPTIONS>
                    	<OPTION> 
                    		<![CDATA[1.0]]>
                    	</OPTION>
@@ -37,16 +37,13 @@
                     	<![CDATA[4.0]]>
                     </OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[grade]]>
-               </CATEGORY>
           </QUESTION>
           
           <QUESTION TYPE="dropdown">
                <QUESTIONTEXT>
-                    <![CDATA[Welche Note halten Sie fuer realistisch?]]>
+                    <![CDATA[Which grade seems realistic to you?]]>
                </QUESTIONTEXT>
-               <OPTIONS>
+                <OPTIONS>
                    	<OPTION> 
                    		<![CDATA[1.0]]>
                    	</OPTION>
@@ -78,16 +75,13 @@
                     	<![CDATA[4.0]]>
                     </OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[grade]]>
-               </CATEGORY>
           </QUESTION>
           
-          <QUESTION TYPE="dropdown">
+          <QUESTION TYPE="dorpdown">
                <QUESTIONTEXT>
-                    <![CDATA[Ab welcher Note waeren Sie unzufrieden?]]>
+                    <![CDATA[From which grade on would you be unsatisfied?]]>
                </QUESTIONTEXT>
-               <OPTIONS>
+                <OPTIONS>
                    	<OPTION> 
                    		<![CDATA[1.0]]>
                    	</OPTION>
@@ -119,9 +113,6 @@
                     	<![CDATA[4.0]]>
                     </OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[grade]]>
-               </CATEGORY>
           </QUESTION>
-     </QUESTIONS>
+	</QUESTIONS>
 </GROUPFORMATION>

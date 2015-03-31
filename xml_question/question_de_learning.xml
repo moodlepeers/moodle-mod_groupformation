@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION VERSION="200701" COMMENT="">
-     <QUESTIONS>
-		 <QUESTION TYPE="radio">
+     <QUESTIONS VERSION="1">
+          <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich mag diese Art von Lehrveranstaltungen.]]>
+                    <![CDATA[Ich lerne durch fühlen]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -25,14 +25,11 @@
 						<![CDATA[trifft zu]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
           </QUESTION>
           
           <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich glaube, der Schwierigkeit dieser Lehrveranstaltung gewachsen zu sein.]]>
+                    <![CDATA[Ich lerne durch Tun.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -54,14 +51,11 @@
 						<![CDATA[trifft zu]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
           </QUESTION>
           
           <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Wahrscheinlich werde ich die Lernveranstaltung nicht schaffen]]>
+                    <![CDATA[Ich lerne durch Beobachten.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -83,16 +77,13 @@
 						<![CDATA[trifft zu]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
-         </QUESTION>
+          </QUESTION>
           
 		 <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Bei der Lehrveranstaltung mag ich das wissenschaftliche Arbeiten.]]>
+                    <![CDATA[Ich lerne durch Nachdenken.]]>
                </QUESTIONTEXT>
-               <OPTIONS>
+              <OPTIONS>
                     <OPTION>
                     	<![CDATA[trifft nicht zu]]>
                     </OPTION>
@@ -112,14 +103,11 @@
 						<![CDATA[trifft zu]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
           </QUESTION>
           
           <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich fuehle mich unter Druck, bei der Lehrveranstaltung gut abschneiden zu muessen.]]>
+                    <![CDATA[Wenn ich lerne, bin ich offen für neue Erfahrungen.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -141,130 +129,11 @@
 						<![CDATA[trifft zu]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
-         </QUESTION>
-          
-		 <QUESTION TYPE="radio">
-               <QUESTIONTEXT>
-                    <![CDATA[Die Lehrveranstaltung ist eine richtige Herausforderung für mich.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[trifft zu]]>
-					</OPTION>
-               </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
-          </QUESTION>
-          
-          <QUESTION TYPE="radio">
-               <QUESTIONTEXT>
-                    <![CDATA[Nach dem Lesen der Kursinformation erscheint mir die Lehrveranstaltung sehr interessant.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[trifft zu]]>
-					</OPTION>
-               </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
-         </QUESTION>
-          
-		 <QUESTION TYPE="radio">
-               <QUESTIONTEXT>
-                    <![CDATA[Ich bin sehr gespannt darauf, wie gut ich hier abschneiden werde.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[trifft zu]]>
-					</OPTION>
-               </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
-          </QUESTION>
-          
-          <QUESTION TYPE="radio">
-               <QUESTIONTEXT>
-                    <![CDATA[Ich fuerchte mich ein wenig davor, dass ich mich blamieren koennte.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[trifft zu]]>
-					</OPTION>
-               </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
           </QUESTION>
           
 		  <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich bin fest entschlossen, mich bei dieser Lehrveranstaltung voll anzustrengen.]]>
+                    <![CDATA[Wenn ich lerne, betrachte ich vorher alle Seiten einer Aufgabe.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -286,14 +155,11 @@
 						<![CDATA[trifft zu]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
           </QUESTION>
           
           <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Bei Lehrveranstaltungen wie dieser brauche ich keine Belohnung; sie machen mir auch so viel Spass.]]>
+                    <![CDATA[Ich bin erst zufrieden, wenn ich etwas "auf den Begriff" bringen kann.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -315,14 +181,11 @@
 						<![CDATA[trifft zu]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
-          </QUESTION>
+         </QUESTION>
           
-		  <QUESTION TYPE="radio">
+		 <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Es ist mir etwas peinlich, hier zu versagen.]]>
+                    <![CDATA[Ich ziehe es vor, die Dinge selbst zu erproben und mich davon zu überzeugen, was möglich ist.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -344,14 +207,11 @@
 						<![CDATA[trifft zu]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
           </QUESTION>
           
           <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich glaube, dass kann jeder schaffen.]]>
+                    <![CDATA[Ich lerne am besten, wenn ich zunächst sorgfältig beobachte und zuhöre.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -373,14 +233,116 @@
 						<![CDATA[trifft zu]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich lerne am besten, wenn ich praktisch damit umgehen kann.]]>
+               </QUESTIONTEXT>
+              
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich lerne am besten, wenn meine Intuition angesprochen ist.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Wenn ich lerne, bin ich jemand, der rational vorgeht.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich erspare mir gern durch gründliches Erkunden und kritisches Abwägen überflüssige Irrwege.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
           </QUESTION>
 
 		  <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich glaube, ich schaffe diese Lehrveranstaltung nicht.]]>
+                    <![CDATA[Ich lerne am besten durch persönliche Kontakte.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -402,14 +364,11 @@
 						<![CDATA[trifft zu]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
          </QUESTION>
           
 		 <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Wenn ich die Lehrveranstaltung schaffe, werde ich schon ein wenig stolz auf meine Tuechtigkeit sein.]]>
+                    <![CDATA[Ich lerne am besten, wenn ich mich auf logische Überlegungen stützen kann.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -431,14 +390,11 @@
 						<![CDATA[trifft zu]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
           </QUESTION>
           
           <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Wenn ich an die Lernveranstaltung denke, bin ich etwas beunruhigt.]]>
+                    <![CDATA[Für mich ist es eine Zumutung, wenn ich nur zuhören und lesen darf, was andere mir zu sagen haben.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -460,16 +416,13 @@
 						<![CDATA[trifft zu]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
          </QUESTION>
           
 		 <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Aufgaben, wie die in dieser Lehrveranstaltung, wuerde ich auch in meiner Freizeit bearbeiten.]]>
+                    <![CDATA[Ich lerne am besten, wenn ich Ergebnisse aus meiner Arbeit sehen kann.]]>
                </QUESTIONTEXT>
-               <OPTIONS>
+              <OPTIONS>
                     <OPTION>
                     	<![CDATA[trifft nicht zu]]>
                     </OPTION>
@@ -489,14 +442,11 @@
 						<![CDATA[trifft zu]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
           </QUESTION>
           
           <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Die konkreten Leistungsanforderungen hier laehmen mich.]]>
+                    <![CDATA[Ich habe es gern, wenn systematische Analysen von Tatsachen und Theorien vorherrschen.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -518,9 +468,162 @@
 						<![CDATA[trifft zu]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich lerne am besten, wenn ich mich zurückhalte, bis ich das Thema überblicke.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich lerne am besten, wenn es mich persönlich betrifft.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich lerne am besten, wenn ich mich auf meine Beobachtungen stütze.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich lerne am besten, wenn ich mich auf mein Gefühl verlasse.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich gewinne nicht viel aus Lernsituationen, in denen ich eine passive Rolle habe.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Wenn ich lerne, löse ich Probleme durch Nachdenken.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
           </QUESTION>
      </QUESTIONS>
 </GROUPFORMATION>

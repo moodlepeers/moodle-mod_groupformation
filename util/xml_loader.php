@@ -28,7 +28,8 @@
 		die('Direct access to this script is forbidden.');    ///  It must be included from a Moodle page
 	}
 	
-	require_once(dirname(__FILE__).'/storage_manager.php');
+	//require_once(dirname(__FILE__).'/storage_manager.php');
+	require_once($CFG->dirroot.'/mod/groupformation/moodle_interface/storage_manager.php');
 	
 	class mod_groupformation_xml_loader{
 		
@@ -44,41 +45,73 @@
 		
 		
 		public function saveData($category){
-			//$this->save($category, TRUE);
-			$this->save($category, FALSE);
+			$array = array();
+			
+			$array[] = $this->save($category, 'en');
+			$array[] = $this->save($category, 'de');
+			
+			return $array;
 		}
+		
+		public function latestVersion($category){
+			
+			$xmlFile = 'xml_question/question_de_'.$category.'.xml';
+				
+			if (file_exists($xmlFile)) {
+				$xml = simplexml_load_file($xmlFile);
+					
+				$version = trim($xml->QUESTIONS['VERSION']);
+				if($this->storeM->latestVersion($category, $version)){
+					
+				}else{
+					$array = $this->saveData($category);
+					$this->storeM->add_catalog_version($category, $array[0][1], $version, FALSE);
+				}
+			}else{
+				exit("Datei $xmlFile kann nicht geöffnet werden.");
+			}
+		}
+		
 		/**
-		 * 
+		 * gibt ein array zurück, wo auf Position 0 die version und auf Position 1 die Anzahl der Fragen zu finden ist
 		 * @param unknown $category welche Kategory
 		 * @param unknown $german bool ob deutsch oder nicht 
 		 */
-		private function save($category, $german){
+		private function save($category, $lang){
 			
-			if($german){
-				$xmlFile = 'question_de_'.$category.'.xml';
-			}else{
-				$xmlFile = 'question_en_'.$category.'.xml';
-			}
+			$xmlFile = 'xml_question/question_'.$lang.'_'.$category.'.xml';
+			
+			$return = array();
 			
 			if (file_exists($xmlFile)) {
 				$xml = simplexml_load_file($xmlFile);
 			
+				$return[] = trim($xml->QUESTIONS['VERSION']);
+				$numbers = 0;
+				$init = $this->storeM->catalogTableNotSet();
+				
 				foreach ( $xml->QUESTIONS->QUESTION as $question )
 				{	
 					$options = $question->OPTIONS;
 					$optionArray = array();
+					//options zerlegen
 					foreach ($options->OPTION as $option){
 						$optionArray[] = trim($option);
 					}
-					//options noch zerteilen
+					
+					$numbers++;
+					
 					$array = array('type' => trim($question['TYPE']),
-							'category' => trim($question->CATEGORY),
 							'question' => trim($question->QUESTIONTEXT),
-							'options' => $optionArray
+							'options' => $optionArray,
+							'position' => $numbers
 					);
 
-					$this->storeM->add_catalog_question($array, $german, $category);
+					$this->storeM->add_catalog_question($array, $lang, $category, $init);
 				}
+				
+				$return[] = $numbers;
+				return $return;
 			
 			} else {
 				exit("Datei $xmlFile kann nicht geöffnet werden.");

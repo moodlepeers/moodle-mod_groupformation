@@ -107,11 +107,30 @@
 	// Replace the following lines with you own code.
 	echo $OUTPUT->heading('Yay! It works!');
 	
-// 	require_once(dirname(__FILE__).'/xml_loader.php');
-	require_once(dirname(__FILE__).'/question_manager.php');
-// 	$xmlLoader = new mod_groupformation_xml_loader();
-	$questionManager = new mod_groupformation_question_manager($groupformation->id);
-	$questionManager->getFirstQuestion();
+ 	require_once(dirname(__FILE__).'/moodle_interface/storage_manager.php');
+  	require_once(dirname(__FILE__).'/question_manager/question_manager.php');
+//  	$a = array();
+// 	var_dump(count($a));
+	
+// //  	$xmlLoader = new mod_groupformation_xml_loader();
+	$store = new mod_groupformation_storage_manager($groupformation->id);
+	if($store->existSetting()){
+		$questionManager = new mod_groupformation_question_manager($groupformation->id, 'en');
+		$hasNext = $questionManager->hasNext();
+
+		if($hasNext){
+			$category = $questionManager->getCurrentCategory();
+			$question = $questionManager->getNextQuestion();
+			var_dump($category);
+			var_dump($question);
+		}
+	}else{
+		echo $OUTPUT->heading('haloo');
+		
+	}
+// 	$questions = $questionManager->getFirstQuestion($USER->id);
+// 	var_dump($questions);
+	//var_dump($USER->id);
 // 	$xmlLoader->saveData('team', FALSE, 0);
 	//$feedbackid = groupformation_get_feedback_id($groupformation->id);
 		

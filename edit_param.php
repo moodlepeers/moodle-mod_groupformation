@@ -29,7 +29,7 @@
 	
 // 	global $CFG;
 // 	require_once $CFG->dirroot.'/mod/groupformation/classes/lecturer_settings/setting_manager.php';
-	require_once(dirname(__FILE__).'/setting_manager.php');
+	require_once(dirname(__FILE__).'/question_settings/setting_manager.php');
 
 	
 //	$courseid = required_param('courseid', PARAM_INT);
@@ -110,9 +110,9 @@
 		
 		var_dump($topicsarray);
 	
-		$settings = new mod_groupformation_setting_manager($groupformation->id, $data->szenario, $topicsarray, $knowledgearray);
+		$settings = new mod_groupformation_setting_manager($groupformation->id, $data->szenario, array(), array());
 	
-		$settings->create_Questions(TRUE);
+// 		$settings->create_Questions(TRUE);
 		$settings->save_settings();
 	
 		redirect($returnurl);

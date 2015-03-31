@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION VERSION="201502" COMMENT="">
-     <QUESTIONS>
+     <QUESTIONS VERSION="1">
 		 <QUESTION TYPE="radio">
                <QUESTIONTEXT>
                     <![CDATA[I like such kinds of courses.]]>
@@ -25,9 +25,6 @@
 						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
           </QUESTION>
           
           <QUESTION TYPE="radio">
@@ -54,9 +51,6 @@
 						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
          </QUESTION>
           
 		 <QUESTION TYPE="radio">
@@ -83,9 +77,6 @@
 						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
           </QUESTION>
           
           <QUESTION TYPE="radio">
@@ -112,9 +103,6 @@
 						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
          </QUESTION>
           
 		 <QUESTION TYPE="radio">
@@ -141,9 +129,6 @@
 						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
           </QUESTION>
           
           <QUESTION TYPE="radio">
@@ -170,9 +155,6 @@
 						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
          </QUESTION>
           
 		 <QUESTION TYPE="radio">
@@ -199,9 +181,6 @@
 						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
           </QUESTION>
           
           <QUESTION TYPE="radio">
@@ -228,9 +207,6 @@
 						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
          </QUESTION>
           
 		 <QUESTION TYPE="radio">
@@ -257,9 +233,6 @@
 						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
           </QUESTION>
           
           <QUESTION TYPE="radio">
@@ -286,9 +259,6 @@
 						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
          </QUESTION>
           
 		 <QUESTION TYPE="radio">
@@ -315,9 +285,6 @@
 						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
           </QUESTION>
           
           <QUESTION TYPE="radio">
@@ -344,9 +311,6 @@
 						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
           </QUESTION>
 
 		  <QUESTION TYPE="radio">
@@ -373,9 +337,6 @@
 						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
          </QUESTION>
           
 		 <QUESTION TYPE="radio">
@@ -402,9 +363,6 @@
 						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
           </QUESTION>
           
           <QUESTION TYPE="radio">
@@ -431,9 +389,6 @@
 						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
          </QUESTION>
           
 		 <QUESTION TYPE="radio">
@@ -460,9 +415,6 @@
 						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
           </QUESTION>
           
           <QUESTION TYPE="radio">
@@ -489,9 +441,6 @@
 						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
           </QUESTION>	
           
           <QUESTION TYPE="radio">
@@ -518,9 +467,6 @@
 						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[motivation]]>
-               </CATEGORY>
           </QUESTION>
      </QUESTIONS>
 </GROUPFORMATION>

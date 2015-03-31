@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION VERSION="201502" COMMENT="">
-     <QUESTIONS>
-		 <QUESTION TYPE="radio">
+     <QUESTIONS VERSION="1">
+     	<QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Meine Arbeit stellt mich vor allem dann zufrieden, wenn ich nicht auf die Unterstuetzung anderer angewiesen bin.]]>
+                    <![CDATA[I learn by feeling]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
+                    	<![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
                     	<![CDATA[]]>
@@ -22,21 +22,44 @@
 						<![CDATA[]]>
 					</OPTION>
 					<OPTION>
-						<![CDATA[trifft zu]]>
+						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[team]]>
-               </CATEGORY>
+         </QUESTION>
+          
+         <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[I learn by doing.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
           </QUESTION>
           
           <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich erziele die besten Arbeitsergebnisse, wenn ich alleine arbeite.]]>
+                    <![CDATA[I learn by observing.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
+                    	<![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
                     	<![CDATA[]]>
@@ -51,21 +74,18 @@
 						<![CDATA[]]>
 					</OPTION>
 					<OPTION>
-						<![CDATA[trifft zu]]>
+						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[team]]>
-               </CATEGORY>
          </QUESTION>
           
 		 <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Mir ist es wichtig, dass ich mich bei meiner Taetigkeit nicht staendig mit anderen abstimmen muss.]]>
+                    <![CDATA[I learn by thinking.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
+                    	<![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
                     	<![CDATA[]]>
@@ -80,21 +100,18 @@
 						<![CDATA[]]>
 					</OPTION>
 					<OPTION>
-						<![CDATA[trifft zu]]>
+						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[team]]>
-               </CATEGORY>
-          </QUESTION>
+         </QUESTION>
           
-          <QUESTION TYPE="radio">
+         <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich ziehe es vor, allein zu arbeiten.]]>
+                    <![CDATA[When I learn I am open to new experiences.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
+                    	<![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
                     	<![CDATA[]]>
@@ -109,21 +126,18 @@
 						<![CDATA[]]>
 					</OPTION>
 					<OPTION>
-						<![CDATA[trifft zu]]>
+						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[team]]>
-               </CATEGORY>
          </QUESTION>
           
 		 <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich bin davon ueberzeugt, dass nahezu alle aktuellen Probleme nur im Team zu bewaeltigen sind.]]>
+                    <![CDATA[When I learn I first consider all possible perspectives of the subject.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
+                    	<![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
                     	<![CDATA[]]>
@@ -138,21 +152,18 @@
 						<![CDATA[]]>
 					</OPTION>
 					<OPTION>
-						<![CDATA[trifft zu]]>
+						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[team]]>
-               </CATEGORY>
-          </QUESTION>
+         </QUESTION>
           
-          <QUESTION TYPE="radio">
+         <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Wenn man eine Aufgabe optimal erledigen will, sollte man sie allein angehen.]]>
+                    <![CDATA[I am only satisfied when I manage to understand something conceptually.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
+                    	<![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
                     	<![CDATA[]]>
@@ -167,21 +178,174 @@
 						<![CDATA[]]>
 					</OPTION>
 					<OPTION>
-						<![CDATA[trifft zu]]>
+						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[team]]>
-               </CATEGORY>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[I prefer to try out things myself and be ensured of the possibilities.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+         <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[I learn best when I carefully observe and listen.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[I learn best when I can proceed practically.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+         <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[I learn best when intuition is needed.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[When I learn I proceed rationally.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+         <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[I like to prevent mistakes by exploring thoroughly and with critical attitude.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
           </QUESTION>
 
 		  <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Bei nahezu allen Aufgaben nimmt die Bearbeitung in Gruppen mehr Zeit als noetig in Anspruch.]]>
+                    <![CDATA[I learn best from personal contacts.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
+                    	<![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
                     	<![CDATA[]]>
@@ -196,21 +360,18 @@
 						<![CDATA[]]>
 					</OPTION>
 					<OPTION>
-						<![CDATA[trifft zu]]>
+						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[team]]>
-               </CATEGORY>
          </QUESTION>
           
 		 <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Meine Kollegen meinen, ich sei ein Einzelkaempfer.]]>
+                    <![CDATA[I learn best when I can rely on logical ideas.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
+                    	<![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
                     	<![CDATA[]]>
@@ -225,21 +386,18 @@
 						<![CDATA[]]>
 					</OPTION>
 					<OPTION>
-						<![CDATA[trifft zu]]>
+						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[team]]>
-               </CATEGORY>
-          </QUESTION>
+         </QUESTION>
           
-          <QUESTION TYPE="radio">
+         <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich kann meine Faehigkeiten vor allem in der Zusammenarbeit mit anderen voll entfalten.]]>
+                    <![CDATA[It bothers me when I can only listen or read what others have to tell.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
+                    	<![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
                     	<![CDATA[]]>
@@ -254,21 +412,18 @@
 						<![CDATA[]]>
 					</OPTION>
 					<OPTION>
-						<![CDATA[trifft zu]]>
+						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[team]]>
-               </CATEGORY>
          </QUESTION>
           
 		 <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Bei der Bearbeitung einer Aufgabe moechte ich so lange wie moeglich ohne die Hilfe anderer auskommen.]]>
+                    <![CDATA[I learn best when I can see the results from my work.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
+                    	<![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
                     	<![CDATA[]]>
@@ -283,21 +438,70 @@
 						<![CDATA[]]>
 					</OPTION>
 					<OPTION>
-						<![CDATA[trifft zu]]>
+						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[team]]>
-               </CATEGORY>
+         </QUESTION>
+          
+         <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[I like it when systematical analysis from facts and theories are available.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+         <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[I learn best when I first gain on overview of the topic before acting.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
           </QUESTION>
           
           <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Wenn ich etwas plane, ueberlege ich zunaechst, wer noch bei dem Projekt mitarbeiten koennte.]]>
+                    <![CDATA[I learn best when I am personally involved.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
+                    	<![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
                     	<![CDATA[]]>
@@ -312,79 +516,18 @@
 						<![CDATA[]]>
 					</OPTION>
 					<OPTION>
-						<![CDATA[trifft zu]]>
+						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[team]]>
-               </CATEGORY>
-          </QUESTION>
-          
-          <QUESTION TYPE="radio">
-               <QUESTIONTEXT>
-                    <![CDATA[Es widerstrebt meinem Arbeitsstil, staendig alles mit anderen diskutieren zu muessen.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[trifft zu]]>
-					</OPTION>
-               </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[team]]>
-               </CATEGORY>
-          </QUESTION>
-          
-          <QUESTION TYPE="radio">
-               <QUESTIONTEXT>
-                    <![CDATA[Wenn ich die Wahl habe, bearbeite ich Aufgaben lieber gemeinsam mit anderen.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[trifft zu]]>
-					</OPTION>
-               </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[team]]>
-               </CATEGORY>
          </QUESTION>
           
 		 <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Wenn ich die Wahl habe, arbeite ich lieber im Team als allein.]]>
+                    <![CDATA[I learn best when I rely on my observations.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
+                    	<![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
                     	<![CDATA[]]>
@@ -399,21 +542,18 @@
 						<![CDATA[]]>
 					</OPTION>
 					<OPTION>
-						<![CDATA[trifft zu]]>
+						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[team]]>
-               </CATEGORY>
-          </QUESTION>
+         </QUESTION>
           
-          <QUESTION TYPE="radio">
+         <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich finde, Teamarbeit hilft mir dabei, effektiver zu arbeiten.]]>
+                    <![CDATA[I learn best when I rely on my feelings.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
+                    	<![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
                     	<![CDATA[]]>
@@ -428,21 +568,18 @@
 						<![CDATA[]]>
 					</OPTION>
 					<OPTION>
-						<![CDATA[trifft zu]]>
+						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[team]]>
-               </CATEGORY>
          </QUESTION>
           
 		 <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Im Allgemeinen bevorzuge ich es, als Teil eines Teams zu arbeiten.]]>
+                    <![CDATA[I don't take special advantage from learning situations in which I have a passive role.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
+                    	<![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
                     	<![CDATA[]]>
@@ -457,50 +594,18 @@
 						<![CDATA[]]>
 					</OPTION>
 					<OPTION>
-						<![CDATA[trifft zu]]>
+						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[team]]>
-               </CATEGORY>
-          </QUESTION>
-          
-          <QUESTION TYPE="radio">
-               <QUESTIONTEXT>
-                    <![CDATA[Ich arbeite lieber mit anderen in einem Team zusammen als allein.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[trifft zu]]>
-					</OPTION>
-               </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[team]]>
-               </CATEGORY>
          </QUESTION>
           
-		 <QUESTION TYPE="radio">
+         <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Wenn ich die Wahl habe, wuerde ich lieber einen Job nehmen, bei dem ich allein arbeiten kann, als einen, bei dem ich mit anderen zusammen arbeiten muss.]]>
+                    <![CDATA[When I learn I solve problems by reflecting.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
+                    	<![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
                     	<![CDATA[]]>
@@ -515,273 +620,9 @@
 						<![CDATA[]]>
 					</OPTION>
 					<OPTION>
-						<![CDATA[trifft zu]]>
+						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[team]]>
-               </CATEGORY>
-          </QUESTION>
-          
-          <QUESTION TYPE="radio">
-               <QUESTIONTEXT>
-                    <![CDATA[Ich mag es, wenn Teammitglieder selbstaendig, anstatt gemeinsam mit den anderen die ganze Zeit.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[trifft zu]]>
-					</OPTION>
-               </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[team]]>
-               </CATEGORY>
          </QUESTION>
-          
-		 <QUESTION TYPE="radio">
-               <QUESTIONTEXT>
-                    <![CDATA[Jeder Mensch traegt Verantwortung für alle anderen in seiner Arbeitsgruppe.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[trifft zu]]>
-					</OPTION>
-               </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[team]]>
-               </CATEGORY>
-          </QUESTION>
-          
-          <QUESTION TYPE="radio">
-               <QUESTIONTEXT>
-                    <![CDATA[Die Gesellschaft funktioniert am besten, wenn die Menschen sich fuer das Wohl von allen einsetzen.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[trifft zu]]>
-					</OPTION>
-               </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[team]]>
-               </CATEGORY>
-         </QUESTION>
-          
-		 <QUESTION TYPE="radio">
-               <QUESTIONTEXT>
-                    <![CDATA[Die Leistung der gesamten Arbeitsgruppe ist wichtiger als die eigene individuelle Leistung.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[trifft zu]]>
-					</OPTION>
-               </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[team]]>
-               </CATEGORY>
-          </QUESTION>
-          
-          <QUESTION TYPE="radio">
-               <QUESTIONTEXT>
-                    <![CDATA[Gute Teammitglieder ordnen ihre eigenen Ziele und Gedanken denen des Teams unter.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[trifft zu]]>
-					</OPTION>
-               </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[team]]>
-               </CATEGORY>
-          </QUESTION>
-
-		  <QUESTION TYPE="radio">
-               <QUESTIONTEXT>
-                    <![CDATA[Die Belohnung eines Mitarbeiters sollte vor allem auf der Leistung seiner Arbeitsgruppeen basieren.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[trifft zu]]>
-					</OPTION>
-               </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[team]]>
-               </CATEGORY>
-         </QUESTION>
-          
-		 <QUESTION TYPE="radio">
-               <QUESTIONTEXT>
-                    <![CDATA[Es ist wichtig, nicht zu sehr aus einem Team herauszustechen.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[trifft zu]]>
-					</OPTION>
-               </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[team]]>
-               </CATEGORY>
-          </QUESTION>
-          
-          <QUESTION TYPE="radio">
-               <QUESTIONTEXT>
-                    <![CDATA[Jedes Teammitglied sollte für die Leistung der anderen im Team verantwortlich sein.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[trifft zu]]>
-					</OPTION>
-               </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[team]]>
-               </CATEGORY>
-         </QUESTION>
-          
-		 <QUESTION TYPE="radio">
-               <QUESTIONTEXT>
-                    <![CDATA[Die eigene Verantwortung für Familienmitglieder sollte ueber die eigenen Eltern und Kinder hinausgehen.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[trifft zu]]>
-					</OPTION>
-               </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[team]]>
-               </CATEGORY>
-          </QUESTION>
      </QUESTIONS>
 </GROUPFORMATION>

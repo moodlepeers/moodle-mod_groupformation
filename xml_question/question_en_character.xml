@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<GROUPFORMATION VERSION="200701" COMMENT="">
-     <QUESTIONS>			
-          <QUESTION TYPE="radio">
+<GROUPFORMATION VERSION="201502" COMMENT="">
+     <QUESTIONS VERSION="1">
+     	<QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich bin eher zurueckhaltend, reserviert]]>
+                    <![CDATA[I see myself as someone who is reserved.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
+                    	<![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
                     	<![CDATA[]]>
@@ -22,21 +22,18 @@
 						<![CDATA[]]>
 					</OPTION>
 					<OPTION>
-						<![CDATA[trifft zu]]>
+						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[character]]>
-               </CATEGORY>
          </QUESTION>
           
 		 <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich schenke anderen leicht vertrauen, glaube an das Gute im Menschen.]]>
+                    <![CDATA[I see myself as someone who is generally trusting.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
+                    	<![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
                     	<![CDATA[]]>
@@ -51,79 +48,18 @@
 						<![CDATA[]]>
 					</OPTION>
 					<OPTION>
-						<![CDATA[trifft zu]]>
+						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[character]]>
-               </CATEGORY>
-          </QUESTION>
-          
-          <QUESTION TYPE="radio">
-               <QUESTIONTEXT>
-                    <![CDATA[Ich bin bequem, neige zur Faulheit.]]>
-               </QUESTIONTEXT>
-              <OPTIONS>
-                    <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[trifft zu]]>
-					</OPTION>
-               </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[character]]>
-               </CATEGORY>
          </QUESTION>
           
-		 <QEUSTION TYPE="radio">
+         <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich bin entspannt, lasse mich durch Stress nicht aus der Ruhe bringen.]]>
-               </QUESTIONTEXT>
-              <OPTIONS>
-                    <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[trifft zu]]>
-					</OPTION>
-               </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[character]]>
-               </CATEGORY>
-          </QUESTION>
-          
-          <QUESTION TYPE="radio">
-               <QUESTIONTEXT>
-                    <![CDATA[Ich habe nur wenig kuenstlerisches Interesse.]]>
+                    <![CDATA[I see myself as someone who tends to be lazy.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
+                    	<![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
                     	<![CDATA[]]>
@@ -138,21 +74,18 @@
 						<![CDATA[]]>
 					</OPTION>
 					<OPTION>
-						<![CDATA[trifft zu]]>
+						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[character]]>
-               </CATEGORY>
          </QUESTION>
           
 		 <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich gehe aus mir heraus, bin gesellig]]>
+                    <![CDATA[I see myself as someone who is relaxed, handles stress well.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
+                    	<![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
                     	<![CDATA[]]>
@@ -167,21 +100,18 @@
 						<![CDATA[]]>
 					</OPTION>
 					<OPTION>
-						<![CDATA[trifft zu]]>
+						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[character]]>
-               </CATEGORY>
-          </QUESTION>
+         </QUESTION>
           
-          <QUESTION TYPE="radio">
+         <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich neige dazu, andere zu kritisieren.]]>
+                    <![CDATA[I see myself as someone who has few artistic interests.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
+                    	<![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
                     	<![CDATA[]]>
@@ -196,21 +126,18 @@
 						<![CDATA[]]>
 					</OPTION>
 					<OPTION>
-						<![CDATA[trifft zu]]>
+						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[character]]>
-               </CATEGORY>
          </QUESTION>
           
 		 <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich erledige Aufgaben gruendlich.]]>
+                    <![CDATA[I see myself as someone who is outgoing, sociable.]]>
                </QUESTIONTEXT>
-             <OPTIONS>
+               <OPTIONS>
                     <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
+                    	<![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
                     	<![CDATA[]]>
@@ -225,21 +152,18 @@
 						<![CDATA[]]>
 					</OPTION>
 					<OPTION>
-						<![CDATA[trifft zu]]>
+						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[character]]>
-               </CATEGORY>
-          </QUESTION>
+         </QUESTION>
           
-          <QUESTION TYPE="radio">
+         <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich werde leicht nervoes und unsicher.]]>
+                    <![CDATA[I see myself as someone who tends to find fault with others.]]>
                </QUESTIONTEXT>
-              <OPTIONS>
+               <OPTIONS>
                     <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
+                    	<![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
                     	<![CDATA[]]>
@@ -254,50 +178,18 @@
 						<![CDATA[]]>
 					</OPTION>
 					<OPTION>
-						<![CDATA[trifft zu]]>
+						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[character]]>
-               </CATEGORY>
          </QUESTION>
           
 		 <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich habe eine aktive Vorstellungskraft, bin phantasievoll.]]>
-               </QUESTIONTEXT>
-              <OPTIONS>
-                    <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[trifft zu]]>
-					</OPTION>
-               </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[character]]>
-               </CATEGORY>
-          </QUESTION>
-          
-          <QUESTION TYPE="radio">
-               <QUESTIONTEXT>
-                    <![CDATA[Ich bin ruecksichtsvoll zu anderen, einfuehlsam.]]>
+                    <![CDATA[I see myself as someone who does a thorough job.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[trifft nicht zu]]>
+                    	<![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
                     	<![CDATA[]]>
@@ -312,12 +204,87 @@
 						<![CDATA[]]>
 					</OPTION>
 					<OPTION>
-						<![CDATA[trifft zu]]>
+						<![CDATA[agree]]>
 					</OPTION>
                </OPTIONS>
-               <CATEGORY>
-                    <![CDATA[character]]>
-               </CATEGORY>
          </QUESTION>
-	</QUESTIONS>
+          
+         <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[I see myself as someone who gets nervous easily.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[I see myself as someone who has an active imagination.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+         <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[I see myself as someone who is considerate and kind to almost everyone.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+     </QUESTIONS>
 </GROUPFORMATION>
