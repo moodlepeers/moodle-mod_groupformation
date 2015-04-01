@@ -11,6 +11,7 @@
     <script type="text/javascript" src="js/ui-1.10.4/jquery-ui.js"></script>
 
     <script type="text/javascript" src="js/functions.js"></script>
+<!--    <script type="text/javascript" src="js/sticky.js"></script>-->
     
 </head>
 <body>
@@ -50,150 +51,167 @@
 
 
                 <div class="grid">
-                    <div class="col_100">
-                        <h4 class="optional">3. Improve group performance with defined prior knowledge.</h4>
-                    </div>
                     
-                    <div class="col_50">
-                        <label for="wantKnowledge">
+                    <div class="col_100">
+                        <h4 class="optional"><label for="wantKnowledge">
                           <input type="checkbox" name="chbKnowledge" value="wantKnowledge" id="wantKnowledge">
-                          I want to request the knowledge
+                          Das Vorwissen soll in die Gruppenbildung einflie&szlig;en</h4>
                         </label> 
                     </div>
                     
-                    <div class="col_50">
-                        view demo
-                    </div>
-                    
-                    <div class="col_50">
-                        <div class="multi_field_wrapper knowledge">
-                            <input type="button" class="add_field" value="Add Knowledge" />
-                            <div class="multi_fields">
-                                <div class="multi_field">
-                                    <input class="respwidth" type="text" name="knowledge[]">
-                                    <button type="button" class="remove_field">Remove</button>
-                                </div>
-                                <div class="multi_field">
-                                    <input class="respwidth" type="text" name="knowledge[]">
-                                    <button type="button" class="remove_field">Remove</button>
-                                </div>
-                                <div class="multi_field">
-                                    <input class="respwidth" type="text" name="knowledge[]">
-                                    <button type="button" class="remove_field">Remove</button>
-                                </div>
-                            </div>
-                        </div>
+<!--                    <div class="col_100">-->
+                       
+                        <div class="knowledge">
                         
-                    </div>
+                        <p>Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einsch&auml;tzen sollen. Eine Vorschau des Studenten-Fragebogens finden Sie unter Vorschau. F&uuml;r Ihre Auswahl "Hausaufgabengruppen" wird das Vorwissen m&ouml;glichst varriiert in jeder Gruppe.</p>
+                                                    
+                            <div class="multi_field_wrapper persist-area">
+                                <div id="" class="btn_wrap">
+                                    <label>
+                                        <button type="button" class="add_field" title="Zeile hinzuf&uuml;gen"></button>Zeile hinzuf&uuml;gen</label>
+                                    <label>
+                                        <button type="button" class="preview" id="preview_knowledge" title="Vorschau"></button>Vorschau</label>
+                                        
+                                </div>
+                                   
+                                
+                                <div class="grid">
+                                    <div class="col_50">
+                                        <div class="multi_fields">
+                                            <div class="multi_field">
+                                                <input class="respwidth" type="text" name="knowledge[]">
+                                                <button type="button" class="remove_field" title="Zeile entfernen"></button>
+                                            </div>
+                                            <div class="multi_field">
+                                                <input class="respwidth" type="text" name="knowledge[]">
+                                                <button type="button" class="remove_field" title="Zeile entfernen"></button>
+                                            </div>
+                                            <div class="multi_field">
+                                                <input class="respwidth" type="text" name="knowledge[]">
+                                                <button type="button" class="remove_field" title="Zeile entfernen"></button>
+                                            </div>
+                                        </div>
+                                    </div> <!-- /col_50 -->    
+                                </div>  
+                            </div> <!-- /multi_field_wrapper-->
+                        </div> <!-- /.knowledge -->
+<!--                    </div>   /col_100 -->
                     
                     
                 </div> <!-- /grid --> 
                 
 
                 <div class="grid">
-                    <div class="col_100">
-                        <h4 class="optional">4. You can predefine topics here!<span class="toolt" tooltip="Notice: You can have just one topic per group!"></span></h4>
-                    </div>
                     
-                    <div class="col_50">
-                        <label for="wantTopics">
+                    <div class="col_100">
+                        <h4 class="optional"><label for="wantTopics">
                           <input type="checkbox" name="chbTopics" value="wantTopics" id="wantTopics">
-                          I want to define topics
+                          Ich m&ouml;chte Themen definieren</h4>
                         </label> 
                     </div>
                     
-                    <div class="col_50">
-                        view demo
-                    </div>
                     
-                    
-                    <div class="col_50">
-                        <div class="multi_field_wrapper topics">
-                            <input type="button" class="add_field" value="Add Topic" />
-                            <div class="multi_fields">
-                                <div class="multi_field">
-                                    <input class="respwidth" type="text" name="topic[]">
-                                    <button type="button" class="remove_field">Remove</button>
-                                </div>
-                                <div class="multi_field">
-                                    <input class="respwidth" type="text" name="topic[]">
-                                    <button type="button" class="remove_field">Remove</button>
-                                </div>
-                                <div class="multi_field">
-                                    <input class="respwidth" type="text" name="topic[]">
-                                    <button type="button" class="remove_field">Remove</button>
-                                </div>
-                            </div>
-                        </div>            
-                    </div>
+<!--                    <div class="col_100">-->
+                        <div class="topics">
+                            <p>Themen.. </p>
+                            
+                            <div class="multi_field_wrapper persist-area">
+                                
+                                <div id="sticky_anchor"></div> 
+                                    <div id="" class="btn_wrap">
+                                        <label>
+                                            <button type="button" class="add_field" title="Zeile hinzuf&uuml;gen"></button>Zeile hinzuf&uuml;gen</label>
+                                        <label>
+                                            <button type="button" class="preview" id="preview_topics" title="Vorschau"></button>Vorschau</label>
+                                    </div>
+                                <div class="grid">
+                                    <div class="col_50">
+                                        
+                                        <div class="multi_fields">
+                                            <div class="multi_field">
+                                                <input class="respwidth" type="text" name="topic[]">
+                                                <button type="button" class="remove_field"></button>
+                                            </div>
+                                            <div class="multi_field">
+                                                <input class="respwidth" type="text" name="topic[]">
+                                                <button type="button" class="remove_field"></button>
+                                            </div>
+                                            <div class="multi_field">
+                                                <input class="respwidth" type="text" name="topic[]">
+                                                <button type="button" class="remove_field"></button>
+                                            </div>
+                                        </div>
+                                    </div> <!-- /col_50 -->
+                                </div> <!-- /grid -->
+                                
+                            </div>   
+                        </div>
+<!--                    </div>-->
                     
                     
                     
                 </div>  <!-- /grid --> 
                 
                 
-                <div class="grid">
+                <div class="grid option_row">
 
-                    <div class="col_100">
-                        <h4 class="optional">5. Please choose the size or the number of groups.<span class="toolt" tooltip="You can tweak this option later, after your participants completed the survey!"></span></h4>
+                    <div class="col_33 ">
+                        <h4 class="optional">Gruppen Optionen<span class="toolt" tooltip="Diese Option kann bei Gruppenbildung optimiert werden, nachdem die Frageb&ouml;gen ausgef&uuml;hlt wurden"></span></h4>
                     </div>
 
+                    <div class="col_33" ><label><input type="radio" name="group_opt" id="group_opt_size" value="group_size" checked="checked" />
+                                Max. Gruppengr&ouml;&szlig;e</label><input type="number" class="group_opt" id="group_size" min="0" max="100" value="0" /></div>
+                    <div class="col_33"><label><input type="radio" name="group_opt" id="group_opt_numb" value="numb_of_groups"/>
+                                Max. Gruppenanzahl</label><input type="number" class="group_opt" id="numb_of_groups"  min="0" max="100" value="0" disabled="disabled" /></div>
+                    
+                    
+<!--
                     <div class="col_100">
                         <table class="tabled_inputs">
                             <tr>
                                 <td><label><input type="radio" name="group_opt" id="group_opt_size" value="group_size" checked="checked" />
-                                Max. Group size</label></td>
-                                <td><input type="number" class="group_opt" id="group_size" min="0" max="100" step="" value="0" /></td>
+                                Max. Gruppengr&ouml;&szlig;e</label></td>
+                                <td><input type="number" class="group_opt" id="group_size" min="0" max="100" value="0" /></td>
                                 <td><span class="toolt" tooltip="Define the maximum of participants in the group!"></span></td>
                             </tr>
                             <tr>
                                 <td><label><input type="radio" name="group_opt" id="group_opt_numb" value="numb_of_groups"/>
-                                Number of Groups</label></td>
-                                <td><input type="number" class="group_opt" id="numb_of_groups"  min="0" max="100" step="" value="0" disabled="disabled" /></td>
+                                Max. Gruppenanzahl</label></td>
+                                <td><input type="number" class="group_opt" id="numb_of_groups"  min="0" max="100" value="0" disabled="disabled" /></td>
                                 <td><span class="toolt" tooltip="The group size will depend on the number of participants!"></span></td>
                             </tr>
                         </table>
                     </div>    
+-->
 
                 </div> <!-- /grid -->
                 
                 
-                <div class="grid">
+                <div class="grid option_row">
 
-                    <div class="col_100">
-                        <h4 class="required">6. How do you validate the work?</h4>
+                    <div class="col_33">
+                        <h4 class="required">Wie bewerten Sie die Arbeit?</h4>
+                    </div>
+                    <div class="col_66">
+                        <select name="valuation" id="valuation">
+                            <option value="grades">Noten</option>
+                            <option value="points">Punkte</option>
+                            <option value="justpass">Nur bestehen</option>
+                            <option value="novaluation">keine Bewertung</option>
+                        </select>
                     </div>
 
-                    <div class="col_100">
-                        <table class="tabled_inputs">
-                            <tr>
-                                <td colspan="3"><label><input type="radio" name="valid_opt" id="valid_opt_grades" value="valid_grades" checked="checked" />
-                                Grades</label></td>
-<!--
-                                <td><input type="number" class="second" id="group_size" min="0" max="100" step="" value="0" /></td>
-                                <td><span class="toolt" tooltip="Define the maximum of participants in the group!"></span></td>
--->
-                            </tr>
-                            <tr>
-                                <td><label><input type="radio" name="valid_opt" id="valid_opt_points" value="valid_points"/>
-                                Max. Points</label></td>
-                                <td><input type="number" class="valid_opt" id="valid_points"  min="0" max="9999" step="1" value="0" disabled="disabled" /></td>
-                                <td><span class="toolt" tooltip="Notice: 1 point maximum =  just pass or fail available!"></span></td>
-                            </tr>
-                        </table>
-                    </div>    
-
                 </div> <!-- /grid -->
                 
                 
                 
                 <div class="grid">
                     <div class="col_100">
-                        <h4 class="required">7. Please define the period of the survey.</h4>
+                        <h4 class="required">Zeitraum f&uuml;r die G&uuml;ltigkeit des Fragebogens</h4>
                     </div>
                     
                     <div class="col_50">
-                        <p style="margin-top:0;">Survey available from: </p>
+                        <p style="margin-top:0;">Von: </p>
                         <input type="text" id="startDate" >
                         <select>
                             <option value="0">00 Uhr</option>
@@ -224,7 +242,7 @@
                     </div>
 
                     <div class="col_50">
-                    <p style="margin-top:0;">To: </p>
+                    <p style="margin-top:0;">Bis: </p>
                         <input type="text" id="endDate" >
                         <select>
                             <option value="0">00 Uhr</option>
@@ -261,9 +279,9 @@
                     
                 <div class="grid">
                     <div class="col_100">
-                        <button type="reset" class="f_btn">Cancel</button>
-                        <button type="button" class="f_btn" onclick="window.location.href='dozent_settings.html'">Back</button>
-                        <button type="submit" class="f_btn">Continue</button>
+                        <button type="reset" class="f_btn">Abbrechen</button>
+                        <button type="button" class="f_btn" onclick="window.location.href='dozent_settings.html'">Zur&uuml;ck</button>
+                        <button type="submit" class="f_btn">Senden</button>
                     </div>                    
                 </div> <!-- /grid --> 
             </form>
@@ -272,13 +290,6 @@
         </div> <!-- /grid grid-pad-->
 
 	</div> <!-- /content -->  
-    
-    <footer>
-    
-    <a href="v1_0/dozent_settings.html">Dozenten Einstellungen v 1.0</a>
-    <a href="v1_0/survey.html">Fragebogen v 1.0</a>
-    
-    </footer>
     
     
 
