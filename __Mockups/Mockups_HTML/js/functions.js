@@ -13,6 +13,8 @@ $(document).ready(function() {
             if($(this).attr("value")=="wantKnowledge"){
                 $(".knowledge").toggle();
             }
+        
+            // If you add topics, number of groups option will adapt
             if($(this).attr("value")=="wantTopics"){
                 $(".topics").toggle();
                 if( $("#group_opt_numb").attr('disabled') == 'disabled' ){
@@ -72,7 +74,57 @@ $(document).ready(function() {
         // enable the current input .second
         $('#'+$(this).val()).removeAttr('disabled');
     });
+
     
+    
+    
+    
+  /////////////////////// Sticky buttons ///////////////////////////////////////////////////////////
+    
+    function UpdateBtnWrapp() {
+        $(".persist-area").each(function() {
+
+        var el             = $(this),
+           offset         = el.offset(),
+           scrollTop      = $(window).scrollTop(),
+           floatingWrapper = $(".floatingWrapper", this)
+
+        if ((scrollTop > offset.top) && (scrollTop < offset.top + el.height())) {
+            floatingWrapper.css({
+            "visibility": "visible"
+            });
+        } else {
+            floatingWrapper.css({
+            "visibility": "hidden"
+            });      
+        };
+    });
+}
+
+// DOM Ready      
+    $(function() {
+
+        var clonedWrapper,
+            theWidth = $('.col_100 h4').width();
+
+
+       $(".persist-area").each(function() {
+           clonedWrapper = $(".btn_wrap", this);       
+           clonedWrapper
+             .before(clonedWrapper.clone(true))
+    //            .css('width', widthYeah)
+    //             .css("width", clonedWrapper.width())
+           .css('width', theWidth)
+             .addClass("floatingWrapper");
+
+       });
+
+       $(window).scroll(UpdateBtnWrapp).trigger("scroll");
+        //    alert(theWidth);
+
+    });
+
+///////////////////////////////////////////////////////////////////////////////////////
     
     
     //

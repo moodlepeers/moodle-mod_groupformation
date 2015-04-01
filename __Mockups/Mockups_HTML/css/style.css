@@ -158,32 +158,6 @@ footer {
   [class*='col_']:last-of-type {
     padding-right: 20px; }
 
-.errors {
-  width: 100%; }
-  .errors p {
-    width: 100%;
-    background-color: #fff0f0;
-    border-color: #ffdce1;
-    color: #c83025;
-    border: 1px solid #ffedca;
-    border-radius: 4px;
-    padding: 8px 35px 8px 14px;
-    margin-bottom: 20px;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5); }
-  .errors p:before {
-    font-weight: bold;
-    content: "* "; }
-
-.knowledge, .topics {
-  display: none; }
-
-.multi_field_wrapper input.respwidth {
-  width: 80%;
-  margin: 10px 10px 10px 0; }
-  @media (min-width: 48em) {
-    .multi_field_wrapper input.respwidth {
-      width: 50%; } }
-
 .alright {
   text-align: right; }
 
@@ -215,6 +189,66 @@ h1.caption {
 
 .whitespace_m {
   margin: 3em 0; }
+
+.errors {
+  width: 100%; }
+  .errors p {
+    width: 100%;
+    background-color: #fff0f0;
+    border-color: #ffdce1;
+    color: #c83025;
+    border: 1px solid #ffedca;
+    border-radius: 4px;
+    padding: 8px 35px 8px 14px;
+    margin-bottom: 20px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5); }
+  .errors p:before {
+    font-weight: bold;
+    content: "* "; }
+
+.knowledge, .topics {
+  display: none; }
+
+.multi_field_wrapper input.respwidth {
+  width: 80%;
+  margin: 10px 10px 10px 0; }
+
+.btn_wrap {
+  line-height: 50px;
+  height: 50px; }
+  .btn_wrap button {
+    margin-right: 8px; }
+  .btn_wrap label {
+    margin: 0 12px; }
+  .btn_wrap label:hover {
+    cursor: pointer; }
+
+.floatingWrapper {
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  visibility: hidden;
+  -webkit-box-shadow: 0 4px 6px -6px black;
+  -moz-box-shadow: 0 4px 6px -6px black;
+  box-shadow: 0 4px 6px -6px black; }
+
+button.add_field {
+  background: url("../img/add.png");
+  width: 20px;
+  height: 20px;
+  background-size: 20px 20px;
+  border: none; }
+
+button.remove_field {
+  background: url("../img/delete.png");
+  width: 20px;
+  height: 20px;
+  background-size: 20px 20px;
+  border: none; }
+
+.option_row label, .option_row select {
+  line-height: 60px;
+  margin: 1.33em 0; }
 
 /* =============================
     styles
@@ -266,6 +300,8 @@ h4.optional:after {
   margin-left: 0.5em;
   color: #aaa;
   font-style: italic; }
+h4 label:hover {
+  cursor: pointer; }
 
 .toolt {
   margin-left: 0.5em;
