@@ -46,9 +46,9 @@
 		
 		public function saveData($category){
 			$array = array();
-			
-			$array[] = $this->save($category, 'en');
-			$array[] = $this->save($category, 'de');
+			$init = $this->storeM->catalogTableNotSet($category);
+			$array[] = $this->save($category, 'en', $init);
+			$array[] = $this->save($category, 'de', $init);
 			
 			return $array;
 		}
@@ -77,7 +77,7 @@
 		 * @param unknown $category welche Kategory
 		 * @param unknown $german bool ob deutsch oder nicht 
 		 */
-		private function save($category, $lang){
+		private function save($category, $lang, $init){
 			
 			$xmlFile = 'xml_question/question_'.$lang.'_'.$category.'.xml';
 			
@@ -88,7 +88,6 @@
 			
 				$return[] = trim($xml->QUESTIONS['VERSION']);
 				$numbers = 0;
-				$init = $this->storeM->catalogTableNotSet();
 				
 				foreach ( $xml->QUESTIONS->QUESTION as $question )
 				{	
@@ -120,7 +119,9 @@
 		}
 		
 		public function xmlToArray($xmlContent){
-			$xml = simplexml_load_file($xmlContent);
+			//var_dump($xmlContent);
+			//$xml = simplexml_load_file($xmlContent);
+			$xml = simplexml_load_string($xmlContent);
 			$optionArray = array();
 			foreach ($xml->OPTION as $option){
 				$optionArray[] = trim($option);

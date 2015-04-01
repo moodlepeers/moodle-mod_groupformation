@@ -56,11 +56,11 @@
 // 		}
 	
 		//es wird davon ausgegangen, dass alle Fragentabellen immer auf dem gleichen Stand sind
-		public function catalogTableNotSet(){
+		public function catalogTableNotSet($category = 'general'){
 			 global $CFG, $DB;
 			// $indexes = $DB->get_indexes('groupformation_en_team');
-			 $count = $DB->count_records('groupformation_general');
-			 var_dump($count);
+			 $count = $DB->count_records('groupformation_'.$category);
+			 //var_dump($count);
 			 return $count == 0;
 		}		
 
@@ -119,8 +119,7 @@
             $data->topicvaluesnumber = count($topics);
             $data->knowledgevaluesnumber = count($knowledge);
             
-            var_dump($data);
-            var_dump($this->existSetting());
+            
             if(!$this->existSetting()){
             	$DB->insert_record('groupformation_q_settings', $data);
             }

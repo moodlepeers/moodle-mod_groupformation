@@ -78,8 +78,12 @@
 				if($this->numbers[$this->currentCategoryPosition] == 0){
 					$this->currentCategoryPosition++;
 				}
+				
+				//var_dump($this->currentCategoryPosition);
+				
+				if($this->numbers[$this->currentCategoryPosition] == 0){
 			
-				if($this->numbers[$this->currentCategoryPosition] == 1){
+					var_dump('h');
 					$this->currentCategoryPosition++;
 				}
 			}
@@ -94,13 +98,14 @@
 				
 				if($this->currentCategoryPosition < 2){
 					
-						$temp = $this->store->getDozentQuestion($this->names[$this->currentCategoryPosition]);
-						$values = $this->xml->xmlToArray('<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS>' . $temp . '</OPTIONS>');
-						foreach ($values as $value){
-							$question = array();
-							$question[] = 'type';
-							$question[] = $value;
-							$question[] = 'options';
+ 						$temp = $this->store->getDozentQuestion($this->names[$this->currentCategoryPosition]);
+ 						//var_dump($temp);
+						$values = $this->xml->xmlToArray('<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>');
+ 						foreach ($values as $value){
+ 							$question = array();
+ 							$question[] = 'type';
+ 							$question[] = $value;
+ 							$question[] = 'options';
 							$questions[] = $question;
 						}
 					
@@ -112,7 +117,8 @@
 						$question[] = $array->type;
 						$question[] = $array->question;
 						$o = $array->options;
-						$question[] = $this->xml->xmlToArray('<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS>' . $o . '</OPTIONS>');
+						
+						$question[] = $this->xml->xmlToArray('<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $o . ' </OPTIONS>');
 						//$questions[] = $array->options;
 						$questions[] = $question;
 					}
@@ -152,7 +158,10 @@
 				}
 			}
 			
-
+			//TODO das ist die eigentliche Abfrage; nur solange bis die anderen Datenbanken voll sind
+// 			if($this->currentCategoryPosition == 6 || $this->szenario == 'presentation'){
+// 				$this->currentCategoryPosition = -1;
+// 			}
 
 			if($this->currentCategoryPosition == 7 || $this->szenario == 'presentation'){
 				$this->currentCategoryPosition = -1;
