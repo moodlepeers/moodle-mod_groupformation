@@ -25,7 +25,7 @@
 
 	require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 	require_once(dirname(__FILE__).'/lib.php');
-	require_once ($CFG->dirroot.'/mod/feedback/lib.php');
+// 	require_once ($CFG->dirroot.'/mod/feedback/lib.php');
 
 	//$id = required_param('id', PARAM_INT);    // Course Module ID
 	$id = optional_param('id', 0, PARAM_INT);   // Course Module ID
@@ -107,55 +107,31 @@
 	// Replace the following lines with you own code.
 	echo $OUTPUT->heading('Yay! It works!');
 	
-	$feedbackid = groupformation_get_feedback_id($groupformation->id);
-	//####### completed-start
-	if ($feedbackid != '') {
-		echo $OUTPUT->box_start('generalbox boxaligncenter boxwidthwide');
-		//check, whether the feedback is open (timeopen, timeclose)
-		$checktime = time();
-		$feedbacktimes = groupformation_get_times($feedbackid);
-		if (($feedbacktimes->timeopen > $checktime) OR
-				($feedbacktimes->timeclose < $checktime AND $feedbacktimes->timeclose > 0)) {
+ 	require_once(dirname(__FILE__).'/moodle_interface/storage_manager.php');
+  	require_once(dirname(__FILE__).'/question_manager/question_manager.php');
+//  	$a = array();
+// 	var_dump(count($a));
 	
-					echo $OUTPUT->notification(get_string('feedbackIsNotOpen', 'groupformation'));
-					echo $OUTPUT->continue_button($CFG->wwwroot.'/course/view.php?id='.$course->id);
-					echo $OUTPUT->box_end();
-					echo $OUTPUT->footer();
-					exit;
-				}
-	
-				if (feedback_is_already_submitted($feedbackid, $course->id)) {
-					
-					$completefile = 'complete.php';
-					$guestid = false;
-					
-					
-					/**
-					 * hier bin ich mir unsicher
-					 */
-					$url_params = array('id'=>$id, 'courseid'=>$course->id, 'gopage'=>0);
-					$completeurl = new moodle_url('/mod/feedback/'.$completefile, $url_params);
-	
-					$feedbackcompletedtmp = feedback_get_current_completed($feedbackid, true, $course->id, $guestid);
-					if ($feedbackcompletedtmp) {
-						if ($startpage = feedback_get_page_to_continue($feedbackid, $course->id, $guestid)) {
-							$completeurl->param('gopage', $startpage);
-						}
-						echo '<a href="'.$completeurl->out().'">'.get_string('continueTheForm', 'groupformation').'</a>';
-					} else {
-						echo '<a href="'.$completeurl->out().'">'.get_string('completeTheForm', 'groupformation').'</a>';
-					}
-				} else {
-					echo $OUTPUT->notification(get_string('feedbackIsAlreadySubmitted', 'groupformation'));
-					if ($courseid) {
-						echo $OUTPUT->continue_button($CFG->wwwroot.'/course/view.php?id='.$course->id);
-					} else {
-						echo $OUTPUT->continue_button($CFG->wwwroot.'/course/view.php?id='.$course->id);
-					}
-				}
-				echo $OUTPUT->box_end();
+// //  	$xmlLoader = new mod_groupformation_xml_loader();
+	$store = new mod_groupformation_storage_manager($groupformation->id);
+	if($store->existSetting()){
+		$questionManager = new mod_groupformation_question_manager($groupformation->id, 'en');
+		$hasNext = $questionManager->hasNext();
+
+		if($hasNext){
+			$category = $questionManager->getCurrentCategory();
+			$question = $questionManager->getNextQuestion();
+			var_dump($category);
+			var_dump($question);
+		}
+	}else{
+		echo $OUTPUT->heading('haloo');
+		
 	}
-	//####### completed-end
-	
-	
+// 	$questions = $questionManager->getFirstQuestion($USER->id);
+// 	var_dump($questions);
+	//var_dump($USER->id);
+// 	$xmlLoader->saveData('team', FALSE, 0);
+	//$feedbackid = groupformation_get_feedback_id($groupformation->id);
+		
 	echo $OUTPUT->footer();

@@ -1,0 +1,349 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//DE"
+       "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title>Student Survey</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="js/ui-1.10.4/css/base/jquery-ui.css">
+    <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="js/ui-1.10.4/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/functions.js"></script>
+    
+</head>
+<body>
+    
+    
+    <p>Responsive Web Design</p>    
+    <p>&larr; Das Fenster gro&szlig; und klein (oder Vollbild) ziehen um das Effekt zu erleben! &rarr;</p>
+    <p>&larr; Grid Konvertierung erfolgt bei viewer width 48em = 768px(im Normalfall) &rarr;</p>
+    
+    
+    <div class="grid">
+        <div class="nav w100">
+                    <ul>
+                        <li><a href="dozent_settings.html">Dozenten Einstellungen</a></li>
+                        <li><a class="active" href="survey.html">Fragebogen</a></li>
+                        <li><a href="index.html">Info</a></li>
+                    </ul>
+        </div>
+    </div>
+    
+    
+
+	<div id="content">
+        
+        <div class="grid grid-pad">
+            
+            <div class="col_100">
+                        <h2>Generated or choosen Title</h2>
+                        <p>In the course {name of the course} you will work in groups. In order to get an optimal matching of group members, we kindly ask you to fill in this questionnaire about your prior knowledge, your interests, your learning style and your motivation. The software will then form groups so that satisfaction and performance of all participants are expected to be high. </p>
+            </div>
+        
+            
+            <form action="survey_2.html">
+                <div class="drid">
+                <div class="col_100">   
+                <h4 class="view_on_mobile">1. Sprache f&uuml;r die Gruppenarbeit / Language for Team Work</h4>
+
+                  <table class="responsive-table">
+                    <colgroup width="" span="">
+                        <col width="64%">
+                        <col width="9%">
+                        <col width="9%">
+                        <col width="9%">
+                        <col width="9%">
+                    </colgroup>
+                      
+                    <thead>
+                      <tr>
+                        <th scope="col">1. Sprache f&uuml;r die Gruppenarbeit / Language for Team Work</th>
+                          <th scope="col"><div class="history">Deutsch</div></th>
+                          <th scope="col"><div class="history">Englisch</div></th>
+                          <th scope="col"><div class="history">Beides - Deutsch bevorzugt</div></th>
+                          <th scope="col"><div class="history">Both - English prefered</div></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">Bitte w&auml;hlen Sie, in welchen Sprachen es Ihnen m&ouml;glich ist, mit Ihrer Gruppe zu kommunizieren. / Please select in which languages you can possibly communicate with your team.</th>
+                        <td data-title="Deutsch" class="radioleft select-area"><input type="radio" name="lang_opt" id="lang_de" value="0"/></td>
+                        <td data-title="Englisch" class="radioleft select-area"><input type="radio" name="lang_opt" id="lang_engl" value="0.3"/></td>
+                        <td data-title="Beides - Deutsch bevorzugt" class="radioleft select-area"><input type="radio" name="lang_opt" id="lang_de_engl" value="0.6"/></td>
+                        <td data-title="Both - English prefered" class="radioleft select-area"><input type="radio" name="lang_opt" id="lang_engl_de" value="1"/></td>
+                      </tr>
+                    </tbody>
+                    </table>
+                </div>
+                
+                <div class="col_100">    
+                    <h4 class="view_on_mobile">2. Themenwahl</h4>
+                    <p id="topicshead">2. Bitte sortieren Sie die zur Wahl stehenden Themen entsprechend Ihrer Pr&auml;ferenz, beginnend mit Ihrem bevorzugten Thema. </p>
+                    <ul id="sortable_topics">
+                      <li id="topic_1" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Thema 1</li>
+                      <li id="topic_2" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Thema 2</li>
+                      <li id="topic_3" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Thema 3</li>
+                      <li id="topic_4" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Thema 4</li>
+                      <li id="topic_5" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Thema 5</li>
+                      <li id="topic_6" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Thema 6</li>
+<!--                      <li id="topic_7" class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>-->
+                    </ul>
+                </div>
+                    
+<!--                Testen des Strings zur späteren Sortierung-->
+                <div class="col_100">query string:<span id="order"></span></div>
+                
+                <div class="col_100">
+                <h4 class="view_on_mobile">3. Wie sch&auml;tzen Sie Ihr pers&ouml;nliches Vorwissen in folgenden Gebieten ein?</h4>
+    
+                <table class="responsive-table">
+                    <colgroup width="" span="">
+                        <col width="64%">
+                        <col width="36%">
+                    </colgroup>
+                    
+                    <thead>
+                      <tr>
+                          <th scope="col" class="">3. Wie sch&auml;tzen Sie Ihr pers&ouml;nliches Vorwissen in folgenden Gebieten ein?</th>
+<!--
+                          <th scope="col">0</th>
+                          <th scope="col">100</th>
+-->
+                        <th scope="col"><div class="history">0 = kein Vorwissen, 100 = sehr viel Vorwissen</div></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">Beispiel 1</th>
+                        <td data-title="0 = kein Vorwissen, 100 = sehr viel Vorwissen " class="range"><span class="">0</span><input type="range" min="0" max="100" value="0" /><span class="">100</span></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Beispiel 2</th>
+                        <td data-title="0 = kein Vorwissen, 100 = sehr viel Vorwissen " class="range"><span class="">0</span><input type="range" min="0" max="100" value="0" /><span class="">100</span></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Beispiel 3</th>
+                        <td data-title="0 = kein Vorwissen, 100 = sehr viel Vorwissen " class="range"><span class="">0</span><input type="range" min="0" max="100" value="0" /><span class="">100</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                
+                
+                <div class="col_100">
+                <h4 class="view_on_mobile">4. Noten</h4>
+
+                <table class="responsive-table">
+                    <colgroup width="" span="">
+                        <col width="64%">
+                        <col width="36%">
+                    </colgroup>
+                    
+                    <thead>
+                      <tr>
+                        <th scope="col" class="">4. Noten</th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">Welche Note m&ouml;chten Sie erreichen?</th>
+                        <td data-title="" class="center">
+                            <select name="gradeA" id="gradeA">
+                                <option value="1.0">1,0</option>
+                                <option value="1.3">1,3</option>
+                                <option value="1.6">1,7</option>
+                                <option value="2.0">2,0</option>
+                                <option value="2.3">2,3</option>
+                                <option value="2.6">2,7</option>
+                                <option value="3.0">3,0</option>
+                                <option value="3.3">3,3</option>
+                                <option value="3.6">3,7</option>
+                                <option value="4.0">4,0</option>
+                            </select>
+                            </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Welche Note halten Sie f&uuml;r realistisch?</th>
+                        <td data-title="" class="center"><select name="gradeB" id="gradeB">
+                                <option value="1.0">1,0</option>
+                                <option value="1.3">1,3</option>
+                                <option value="1.6">1,7</option>
+                                <option value="2.0">2,0</option>
+                                <option value="2.3">2,3</option>
+                                <option value="2.6">2,7</option>
+                                <option value="3.0">3,0</option>
+                                <option value="3.3">3,3</option>
+                                <option value="3.6">3,7</option>
+                                <option value="4.0">4,0</option>
+                            </select>
+                          </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Ab welcher Note w&auml;ren Sie unzufrieden?</th>
+                        <td data-title="" class="center"><select name="gradeC" id="gradeC">
+                                <option value="1.0">1,0</option>
+                                <option value="1.3">1,3</option>
+                                <option value="1.6">1,7</option>
+                                <option value="2.0">2,0</option>
+                                <option value="2.3">2,3</option>
+                                <option value="2.6">2,7</option>
+                                <option value="3.0">3,0</option>
+                                <option value="3.3">3,3</option>
+                                <option value="3.6">3,7</option>
+                                <option value="4.0">4,0</option>
+                            </select>
+                          </td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+                
+                <div class="col_100">
+                <h4 class="view_on_mobile">5. Pers&ouml;nlichkeit</h4>
+                <p class="history"> 1 = "trifft nicht zu", 6 "trifft zu"</p>
+
+                <table class="responsive-table">
+                    <colgroup width="" span="">
+                        <col width="64%">
+                        <col width="6%">
+                        <col width="6%">
+                        <col width="6%">
+                        <col width="6%">
+                        <col width="6%">
+                        <col width="6%">
+                    </colgroup>
+                    
+                    <thead>
+                        <tr>
+                            <th scope="col" class="">5. Pers&ouml;nlichkeit</th>
+                            <th scope="col">1</th>
+                            <th scope="col">2</th>
+                            <th scope="col">3</th>
+                            <th scope="col">4</th>
+                            <th scope="col">5</th>
+                            <th scope="col">6</th>
+            <!--                <th colspan=6 >1 = kein Vorwissen, 6 = sehr viel Vorwissen </th>-->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">...bin eher zur&uuml;ckhaltend, reserviert.</th>
+                            <td data-title="1" class="radiocenter select-area"><input type="radio" name="big5A" value="0"/></td>
+                            <td data-title="2" class="radiocenter select-area"><input type="radio" name="big5A" value="0.2"/></td>
+                            <td data-title="3" class="radiocenter select-area" ><input type="radio" name="big5A" value="0.4"/></td>
+                            <td data-title="4" class="radiocenter select-area" ><input type="radio" name="big5A" value="0.6"/></td>
+                            <td data-title="5" class="radiocenter select-area" ><input type="radio" name="big5A" value="0.8"/></td>
+                            <td data-title="6" class="radiocenter select-area" ><input type="radio" name="big5A" value="1"/></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">...schenke anderen leicht vertrauen, glaube an das Gute im Menschen.</th>
+                            <td data-title="1" class="radiocenter select-area"><input type="radio" name="big5B"  value="0"/></td>
+                            <td data-title="2" class="radiocenter select-area"><input type="radio" name="big5B" value="0.2"/></td>
+                            <td data-title="3" class="radiocenter select-area" ><input type="radio" name="big5B" value="0.4"/></td>
+                            <td data-title="4" class="radiocenter select-area" ><input type="radio" name="big5B" value="0.6"/></td>
+                            <td data-title="5" class="radiocenter select-area" ><input type="radio" name="big5B" value="0.8"/></td>
+                            <td data-title="6" class="radiocenter select-area" ><input type="radio" name="big5B" value="1"/></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">...bin bequem, neige zur Faulheit.</th>
+                            <td data-title="1" class="radiocenter select-area"><input type="radio" name="big5C" value="0"/></td>
+                            <td data-title="2" class="radiocenter select-area"><input type="radio" name="big5C" value="0.2"/></td>
+                            <td data-title="3" class="radiocenter select-area" ><input type="radio" name="big5C" value="0.4"/></td>
+                            <td data-title="4" class="radiocenter select-area" ><input type="radio" name="big5C" value="0.6"/></td>
+                            <td data-title="5" class="radiocenter select-area" ><input type="radio" name="big5C" value="0.8"/></td>
+                            <td data-title="6" class="radiocenter select-area" ><input type="radio" name="big5C" value="1"/></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">...bin entspannt, lasse mich durch Stress nicht aus der Ruhe bringen.</th>
+                            <td data-title="1" class="radiocenter select-area"><input type="radio" name="big5D" value="0"/></td>
+                            <td data-title="2" class="radiocenter select-area"><input type="radio" name="big5D" value="0.2"/></td>
+                            <td data-title="3" class="radiocenter select-area" ><input type="radio" name="big5D" value="0.4"/></td>
+                            <td data-title="4" class="radiocenter select-area" ><input type="radio" name="big5D" value="0.6"/></td>
+                            <td data-title="5" class="radiocenter select-area" ><input type="radio" name="big5D" value="0.8"/></td>
+                            <td data-title="6" class="radiocenter select-area" ><input type="radio" name="big5D" value="1"/></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">...habe nur wenig k&uuml;nstlerisches Interesse.</th>
+                            <td data-title="1" class="radiocenter v"><input type="radio" name="big5E"  value="0"/></td>
+                            <td data-title="2" class="radiocenter select-area"><input type="radio" name="big5E" value="0.2"/></td>
+                            <td data-title="3" class="radiocenter select-area" ><input type="radio" name="big5E" value="0.4"/></td>
+                            <td data-title="4" class="radiocenter select-area" ><input type="radio" name="big5E" value="0.6"/></td>
+                            <td data-title="5" class="radiocenter select-area" ><input type="radio" name="big5E" value="0.8"/></td>
+                            <td data-title="6" class="radiocenter select-area" ><input type="radio" name="big5E" value="1"/></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">...gehe aus mir heraus, bin gesellig.</th>
+                            <td data-title="1" class="radiocenter select-area"><input type="radio" name="big5F" value="0"/></td>
+                            <td data-title="2" class="radiocenter select-area"><input type="radio" name="big5F" value="0.2"/></td>
+                            <td data-title="3" class="radiocenter select-area" ><input type="radio" name="big5F" value="0.4"/></td>
+                            <td data-title="4" class="radiocenter select-area" ><input type="radio" name="big5F" value="0.6"/></td>
+                            <td data-title="5" class="radiocenter select-area" ><input type="radio" name="big5F" value="0.8"/></td>
+                            <td data-title="6" class="radiocenter select-area" ><input type="radio" name="big5F" value="1"/></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">...neige dazu, andere zu kritisieren.</th>
+                            <td data-title="1" class="radiocenter select-area"><input type="radio" name="big5G" value="0"/></td>
+                            <td data-title="2" class="radiocenter select-area"><input type="radio" name="big5G" value="0.2"/></td>
+                            <td data-title="3" class="radiocenter select-area" ><input type="radio" name="big5G" value="0.4"/></td>
+                            <td data-title="4" class="radiocenter select-area" ><input type="radio" name="big5G" value="0.6"/></td>
+                            <td data-title="5" class="radiocenter select-area" ><input type="radio" name="big5G" value="0.8"/></td>
+                            <td data-title="6" class="radiocenter select-area" ><input type="radio" name="big5G" value="1"/></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">...erledige Aufgaben gr&uuml;ndlich.</th>
+                            <td data-title="1" class="radiocenter select-area"><input type="radio" name="big5H" value="0"/></td>
+                            <td data-title="2" class="radiocenter select-area"><input type="radio" name="big5H" value="0.2"/></td>
+                            <td data-title="3" class="radiocenter select-area" ><input type="radio" name="big5H" value="0.4"/></td>
+                            <td data-title="4" class="radiocenter select-area" ><input type="radio" name="big5H" value="0.6"/></td>
+                            <td data-title="5" class="radiocenter select-area" ><input type="radio" name="big5H" value="0.8"/></td>
+                            <td data-title="6" class="radiocenter select-area" ><input type="radio" name="big5H" value="1"/></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">...werde leicht nerv&ouml;s und unsicher.</th>
+                            <td data-title="1" class="radiocenter select-area"><input type="radio" name="big5I" value="0"/></td>
+                            <td data-title="2" class="radiocenter select-area"><input type="radio" name="big5I" value="0.2"/></td>
+                            <td data-title="3" class="radiocenter select-area" ><input type="radio" name="big5I" value="0.4"/></td>
+                            <td data-title="4" class="radiocenter select-area" ><input type="radio" name="big5I" value="0.6"/></td>
+                            <td data-title="5" class="radiocenter select-area" ><input type="radio" name="big5I" value="0.8"/></td>
+                            <td data-title="6" class="radiocenter select-area" ><input type="radio" name="big5J" value="1"/></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">...habe eine aktive Vorstellungskraft, bin phantasievoll.</th>
+                            <td data-title="1" class="radiocenter select-area"><input type="radio" name="big5J" value="0"/></td>
+                            <td data-title="2" class="radiocenter select-area"><input type="radio" name="big5J" value="0.2"/></td>
+                            <td data-title="3" class="radiocenter select-area" ><input type="radio" name="big5J" value="0.4"/></td>
+                            <td data-title="4" class="radiocenter select-area" ><input type="radio" name="big5J" value="0.6"/></td>
+                            <td data-title="5" class="radiocenter select-area" ><input type="radio" name="big5J" value="0.8"/></td>
+                            <td data-title="6" class="radiocenter select-area" ><input type="radio" name="big5J" value="1"/></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">...bin r&uuml;cksichtigsvoll zu anderen, einf&uuml;hlsam</th>
+                            <td data-title="1" class="radiocenter select-area"><input type="radio" name="big5K" value="0"/></td>
+                            <td data-title="2" class="radiocenter select-area"><input type="radio" name="big5K" value="0.2"/></td>
+                            <td data-title="3" class="radiocenter select-area" ><input type="radio" name="big5K" value="0.4"/></td>
+                            <td data-title="4" class="radiocenter select-area"><input type="radio" name="big5K" value="0.6"/></td>
+                            <td data-title="5" class="radiocenter select-area" ><input type="radio" name="big5K" value="0.8"/></td>
+                            <td data-title="6" class="radiocenter select-area" ><input type="radio" name="big5K" value="1"/></td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+             </div>
+            </form>
+            
+            </div>    
+        </div> <!-- /grid grid-pad-->
+
+	</div> <!-- /content -->     
+    
+    <footer>
+    
+    <a href="v1_0/dozent_settings.html">Dozenten Einstellungen v 1.0</a>
+    <a href="v1_0/survey.html">Fragebogen v 1.0</a>
+    
+    </footer>
+    
+
+</body>
+</html>

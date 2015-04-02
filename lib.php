@@ -30,10 +30,7 @@
 
 	defined('MOODLE_INTERNAL') || die();
 
-	/**
-	 * Example constant, you probably want to remove this 
-	 */
-	define('GROUPFORMATION_ULTIMATE_ANSWER', 42);
+	
 	
 	/**
  	* Moodle core API
@@ -420,45 +417,5 @@
 
 	}
 	
-	/**
-	 * creates a new groupformation_feedback-record
-	 *
-	 * @global object
-	 * @param object $data the data from edit_param_form
-	 * @return int the new itemid
-	 */
-	function groupformation_create_feedback($data, $feedbackid, $groupformationid) {
-		global $DB;
 	
-		$item = new stdClass();
-		$item->feedback = $feedbackid;
-		
-		$item->groupformation = $groupformationid;
-	
-		$item->szenario = $data->szenario;
-			
-		$topics = $data->topicValues;
-		$knowledge = $data->knowlegdeValues;
-		
-		$item->topics = $topics;
-		$item->knowledge = $knowledge;
-		
-		$item->id = $DB->insert_record('groupformation_feedback', $item);
-	
-		return $item->id;
-	}
-	
-	function groupformation_get_feedback_id($groupformationid){
-		global $DB;
-		
-		/**
-		 * muss auskommentiert bleiben, bis Datenbank steht
-		 */
-// 		if($DB->record_exists('groupformation_feedback', array('groupformation' => $groupformationid)))
-// 			return $DB->get_field('groupformation_feedback', 'feedback', array('groupformation' => $groupformationid));
-// 		else return '';
-
-		return '';
-		
-	}
 	

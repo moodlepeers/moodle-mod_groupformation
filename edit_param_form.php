@@ -30,7 +30,7 @@
 
 	require_once("$CFG->libdir/formslib.php");
 
-	class edit_param_form extends moodleform {
+	class mod_groupformation_edit_param_form extends moodleform {
 
 		//Add elements to form
 		public function definition() {
@@ -40,7 +40,7 @@
  
 			$mform->addElement('header', 'editparam', get_string('editparam', 'groupformation'));
 				
-			$mform->addElement('static', 'szenarioInfo', get_string('szenarioLabel', 'groupformation'), get_string('szenarioInfo', 'groupformation'));
+			$mform->addElement('static', 'szenarioInfo', get_string('szenarioInfo', 'groupformation'), get_string('szenarioInfo', 'groupform'));
 			
 			$attribut = array('project' => get_string('project', 'groupformation'),
 					'homework' => get_string('homework', 'groupformation'),
@@ -54,6 +54,13 @@
 				
 			$mform->addElement('static', 'hintKnowledge', get_string('knowledgeChoice', 'groupformation'), get_string('useOneLineForEachKnowledge', 'groupformation'));
 			$mform->addElement('textarea', 'knowledgeValues', '', 'wrap="virtual" rows="10" cols="65"');
+			
+			$activity_id = optional_param('id', false, PARAM_INT);
+			if ($activity_id) {
+				$mform->addElement('hidden', 'id');
+				$mform->setType('id', PARAM_INT);
+				$mform->setDefault('id', $activity_id);
+			}
 			
 			$this->add_action_buttons();
 			}

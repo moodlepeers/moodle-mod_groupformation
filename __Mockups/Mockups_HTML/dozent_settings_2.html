@@ -1,0 +1,297 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//DE"
+       "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title>Dozenteneinstellungen</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="js/ui-1.10.4/css/base/jquery-ui.css">
+
+    
+    <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="js/ui-1.10.4/jquery-ui.js"></script>
+
+    <script type="text/javascript" src="js/functions.js"></script>
+<!--    <script type="text/javascript" src="js/sticky.js"></script>-->
+    
+</head>
+<body>
+    
+    
+    <p>Responsive Web Design</p>    
+    <p>&larr; Das Fenster gro&szlig; und klein (oder Vollbild) ziehen um das Effekt zu erleben! &rarr;</p>
+    <p>&larr; Grid Konvertierung erfolgt bei viewer width 48em = 768px(im Normalfall) &rarr;</p>
+    
+    
+    <div class="grid">
+        <div class="nav w100">
+                    <ul>
+                        <li><a class="active" href="dozent_settings.html">Dozenten Einstellungen</a></li>
+                        <li><a href="survey.html">Fragebogen</a></li>
+                        <li><a href="index.html">Info</a></li>
+                    </ul>
+        </div>
+    </div>
+    
+    
+
+	<div id="content">
+        
+        <div class="grid grid-pad">
+            
+            <div class="grid">
+                    <div class="col_100">
+                        <div class="errors">    
+                            <p id="error_date">6 : The end date is earlier than the start date!</p>
+                        </div>
+                    </div>
+                </div>
+            
+        
+            <form id="docent_settings_2" action="dozent_settings_3.html">
+
+
+                <div class="grid">
+                    
+                    <div class="col_100">
+                        <h4 class="optional"><label for="wantKnowledge">
+                          <input type="checkbox" name="chbKnowledge" value="wantKnowledge" id="wantKnowledge">
+                          Das Vorwissen soll in die Gruppenbildung einflie&szlig;en</h4>
+                        </label> 
+                    </div>
+                    
+<!--                    <div class="col_100">-->
+                       
+                        <div class="knowledge">
+                        
+                        <p>Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einsch&auml;tzen sollen. Eine Vorschau des Studenten-Fragebogens finden Sie unter Vorschau. F&uuml;r Ihre Auswahl "Hausaufgabengruppen" wird das Vorwissen m&ouml;glichst varriiert in jeder Gruppe.</p>
+                                                    
+                            <div class="multi_field_wrapper persist-area">
+                                <div id="" class="btn_wrap">
+                                    <label>
+                                        <button type="button" class="add_field" title="Zeile hinzuf&uuml;gen"></button>Zeile hinzuf&uuml;gen</label>
+                                    <label>
+                                        <button type="button" class="preview" id="preview_knowledge" title="Vorschau"></button>Vorschau</label>
+                                        
+                                </div>
+                                   
+                                
+                                <div class="grid">
+                                    <div class="col_50">
+                                        <div class="multi_fields">
+                                            <div class="multi_field">
+                                                <input class="respwidth" type="text" name="knowledge[]">
+                                                <button type="button" class="remove_field" title="Zeile entfernen"></button>
+                                            </div>
+                                            <div class="multi_field">
+                                                <input class="respwidth" type="text" name="knowledge[]">
+                                                <button type="button" class="remove_field" title="Zeile entfernen"></button>
+                                            </div>
+                                            <div class="multi_field">
+                                                <input class="respwidth" type="text" name="knowledge[]">
+                                                <button type="button" class="remove_field" title="Zeile entfernen"></button>
+                                            </div>
+                                        </div>
+                                    </div> <!-- /col_50 -->    
+                                </div>  
+                            </div> <!-- /multi_field_wrapper-->
+                        </div> <!-- /.knowledge -->
+<!--                    </div>   /col_100 -->
+                    
+                    
+                </div> <!-- /grid --> 
+                
+
+                <div class="grid">
+                    
+                    <div class="col_100">
+                        <h4 class="optional"><label for="wantTopics">
+                          <input type="checkbox" name="chbTopics" value="wantTopics" id="wantTopics">
+                          Ich m&ouml;chte Themen definieren</h4>
+                        </label> 
+                    </div>
+                    
+                    
+<!--                    <div class="col_100">-->
+                        <div class="topics">
+                            <p>Themen.. </p>
+                            
+                            <div class="multi_field_wrapper persist-area">
+                                
+                                <div id="sticky_anchor"></div> 
+                                    <div id="" class="btn_wrap">
+                                        <label>
+                                            <button type="button" class="add_field" title="Zeile hinzuf&uuml;gen"></button>Zeile hinzuf&uuml;gen</label>
+                                        <label>
+                                            <button type="button" class="preview" id="preview_topics" title="Vorschau"></button>Vorschau</label>
+                                    </div>
+                                <div class="grid">
+                                    <div class="col_50">
+                                        
+                                        <div class="multi_fields">
+                                            <div class="multi_field">
+                                                <input class="respwidth" type="text" name="topic[]">
+                                                <button type="button" class="remove_field"></button>
+                                            </div>
+                                            <div class="multi_field">
+                                                <input class="respwidth" type="text" name="topic[]">
+                                                <button type="button" class="remove_field"></button>
+                                            </div>
+                                            <div class="multi_field">
+                                                <input class="respwidth" type="text" name="topic[]">
+                                                <button type="button" class="remove_field"></button>
+                                            </div>
+                                        </div>
+                                    </div> <!-- /col_50 -->
+                                </div> <!-- /grid -->
+                                
+                            </div>   
+                        </div>
+<!--                    </div>-->
+                    
+                    
+                    
+                </div>  <!-- /grid --> 
+                
+                
+                <div class="grid option_row">
+
+                    <div class="col_33 ">
+                        <h4 class="optional">Gruppen Optionen<span class="toolt" tooltip="Diese Option kann bei Gruppenbildung optimiert werden, nachdem die Frageb&ouml;gen ausgef&uuml;hlt wurden"></span></h4>
+                    </div>
+
+                    <div class="col_33" ><label><input type="radio" name="group_opt" id="group_opt_size" value="group_size" checked="checked" />
+                                Max. Gruppengr&ouml;&szlig;e</label><input type="number" class="group_opt" id="group_size" min="0" max="100" value="0" /></div>
+                    <div class="col_33"><label><input type="radio" name="group_opt" id="group_opt_numb" value="numb_of_groups"/>
+                                Max. Gruppenanzahl</label><input type="number" class="group_opt" id="numb_of_groups"  min="0" max="100" value="0" disabled="disabled" /></div>
+                    
+                    
+<!--
+                    <div class="col_100">
+                        <table class="tabled_inputs">
+                            <tr>
+                                <td><label><input type="radio" name="group_opt" id="group_opt_size" value="group_size" checked="checked" />
+                                Max. Gruppengr&ouml;&szlig;e</label></td>
+                                <td><input type="number" class="group_opt" id="group_size" min="0" max="100" value="0" /></td>
+                                <td><span class="toolt" tooltip="Define the maximum of participants in the group!"></span></td>
+                            </tr>
+                            <tr>
+                                <td><label><input type="radio" name="group_opt" id="group_opt_numb" value="numb_of_groups"/>
+                                Max. Gruppenanzahl</label></td>
+                                <td><input type="number" class="group_opt" id="numb_of_groups"  min="0" max="100" value="0" disabled="disabled" /></td>
+                                <td><span class="toolt" tooltip="The group size will depend on the number of participants!"></span></td>
+                            </tr>
+                        </table>
+                    </div>    
+-->
+
+                </div> <!-- /grid -->
+                
+                
+                <div class="grid option_row">
+
+                    <div class="col_33">
+                        <h4 class="required">Wie bewerten Sie die Arbeit?</h4>
+                    </div>
+                    <div class="col_66">
+                        <select name="valuation" id="valuation">
+                            <option value="grades">Noten</option>
+                            <option value="points">Punkte</option>
+                            <option value="justpass">Nur bestehen</option>
+                            <option value="novaluation">keine Bewertung</option>
+                        </select>
+                    </div>
+
+                </div> <!-- /grid -->
+                
+                
+                
+                <div class="grid">
+                    <div class="col_100">
+                        <h4 class="required">Zeitraum f&uuml;r die G&uuml;ltigkeit des Fragebogens</h4>
+                    </div>
+                    
+                    <div class="col_50">
+                        <p style="margin-top:0;">Von: </p>
+                        <input type="text" id="startDate" >
+                        <select>
+                            <option value="0">00 Uhr</option>
+                            <option value="1">01 Uhr</option>
+                            <option value="2">02 Uhr</option>
+                            <option value="3">03 Uhr</option>
+                            <option value="4">04 Uhr</option>
+                            <option value="5">05 Uhr</option>
+                            <option value="6">06 Uhr</option>
+                            <option value="7">07 Uhr</option>
+                            <option value="8">08 Uhr</option>
+                            <option value="9">09 Uhr</option>
+                            <option value="10">10 Uhr</option>
+                            <option value="11">11 Uhr</option>
+                            <option value="12" selected>12 Uhr</option>
+                            <option value="13">13 Uhr</option>
+                            <option value="14">14 Uhr</option>
+                            <option value="15">15 Uhr</option>
+                            <option value="16">16 Uhr</option>
+                            <option value="17">17 Uhr</option>
+                            <option value="18">18 Uhr</option>
+                            <option value="19">19 Uhr</option>
+                            <option value="20">20 Uhr</option>
+                            <option value="21">21 Uhr</option>
+                            <option value="22">22 Uhr</option>
+                            <option value="23">23 Uhr</option>
+                        </select>
+                    </div>
+
+                    <div class="col_50">
+                    <p style="margin-top:0;">Bis: </p>
+                        <input type="text" id="endDate" >
+                        <select>
+                            <option value="0">00 Uhr</option>
+                            <option value="1">01 Uhr</option>
+                            <option value="2">02 Uhr</option>
+                            <option value="3">03 Uhr</option>
+                            <option value="4">04 Uhr</option>
+                            <option value="5">05 Uhr</option>
+                            <option value="6">06 Uhr</option>
+                            <option value="7">07 Uhr</option>
+                            <option value="8">08 Uhr</option>
+                            <option value="9">09 Uhr</option>
+                            <option value="10">10 Uhr</option>
+                            <option value="11">11 Uhr</option>
+                            <option value="12" selected>12 Uhr</option>
+                            <option value="13">13 Uhr</option>
+                            <option value="14">14 Uhr</option>
+                            <option value="15">15 Uhr</option>
+                            <option value="16">16 Uhr</option>
+                            <option value="17">17 Uhr</option>
+                            <option value="18">18 Uhr</option>
+                            <option value="19">19 Uhr</option>
+                            <option value="20">20 Uhr</option>
+                            <option value="21">21 Uhr</option>
+                            <option value="22">22 Uhr</option>
+                            <option value="23">23 Uhr</option>
+                        </select>
+                    </div>
+                 
+                </div>
+                
+                
+                
+                    
+                <div class="grid">
+                    <div class="col_100">
+                        <button type="reset" class="f_btn">Abbrechen</button>
+                        <button type="button" class="f_btn" onclick="window.location.href='dozent_settings.html'">Zur&uuml;ck</button>
+                        <button type="submit" class="f_btn">Senden</button>
+                    </div>                    
+                </div> <!-- /grid --> 
+            </form>
+            
+            
+        </div> <!-- /grid grid-pad-->
+
+	</div> <!-- /content -->  
+    
+    
+
+</body>
+</html>
