@@ -113,17 +113,86 @@
 // 	var_dump(count($a));
 	
 // //  	$xmlLoader = new mod_groupformation_xml_loader();
+  	$userId = $USER->id;
 	$store = new mod_groupformation_storage_manager($groupformation->id);
+	
 	if($store->existSetting()){
-		$questionManager = new mod_groupformation_question_manager($groupformation->id, 'en');
+		$questionManager = new mod_groupformation_question_manager($groupformation->id, 'en', $userId);
 		$hasNext = $questionManager->hasNext();
-
 		if($hasNext){
 			$category = $questionManager->getCurrentCategory();
-			$question = $questionManager->getNextQuestion();
 			var_dump($category);
+			$question = $questionManager->getNextQuestion();
+			
 			var_dump($question);
+			$hasAnswer = $questionManager->hasAnswers($userId);
+			var_dump($hasAnswer);
+			if($hasAnswer){
+				var_dump($questionManager->getAnswers($userId));
+			}
+			$hasNext = $questionManager->hasNext();
+// 			$answers = array('0');
+// 			$questionManager->saveAnswers($userId, $answers);
 		}
+		
+		if($hasNext){
+			$category = $questionManager->getCurrentCategory();
+			var_dump($category);
+			$question = $questionManager->getNextQuestion();
+				
+			var_dump($question);
+			$hasAnswer = $questionManager->hasAnswers($userId);
+			var_dump($hasAnswer);
+			if($hasAnswer){
+				var_dump($questionManager->getAnswers($userId));
+			}
+			$hasNext = $questionManager->hasNext();
+		}
+		
+		if($hasNext){
+			$category = $questionManager->getCurrentCategory();
+			var_dump($category);
+			$question = $questionManager->getNextQuestion();
+		
+			var_dump($question);
+			$hasAnswer = $questionManager->hasAnswers($userId);
+			var_dump($hasAnswer);
+			if($hasAnswer){
+				var_dump($questionManager->getAnswers($userId));
+			}
+			$hasNext = $questionManager->hasNext();
+		}
+		
+		if($hasNext){
+			$category = $questionManager->getCurrentCategory();
+			var_dump($category);
+			$question = $questionManager->getNextQuestion();
+		
+			var_dump($question);
+			$hasAnswer = $questionManager->hasAnswers($userId);
+			var_dump($hasAnswer);
+			if($hasAnswer){
+				var_dump($questionManager->getAnswers($userId));
+			}
+			$hasNext = $questionManager->hasNext();
+		}
+		
+		if($hasNext){
+			$category = $questionManager->getCurrentCategory();
+			var_dump($category);
+			$question = $questionManager->getNextQuestion();
+		
+			var_dump($question);
+			$hasAnswer = $questionManager->hasAnswers($userId);
+			var_dump($hasAnswer);
+			var_dump('hasAnswer');
+			if($hasAnswer){
+				var_dump($questionManager->getAnswers($userId));
+			}
+			$hasNext = $questionManager->hasNext();
+		}
+		
+		
 	}else{
 		echo $OUTPUT->heading('haloo');
 		

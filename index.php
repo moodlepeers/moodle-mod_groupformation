@@ -86,6 +86,7 @@
 	}
 	
 	// TODO @NW: What is this foreach doing? (JK)
+	// Template
 	$modinfo = get_fast_modinfo($course);
 	$currentsection = '';
 	foreach ($modinfo->instances['groupformation'] as $cm) {

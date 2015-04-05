@@ -41,6 +41,11 @@
 		private $KNOWLEDGE = 1;
 		private $TOPIC = 0;
 		
+		private $SAVE = 0;
+		private $COMMIT = 1;
+		
+		private $status;
+		
 		private $numbers = array();
 		private $names = array('topic', 'knowledge', 'general','team', 'character', 'learning', 'motivation');
 		
@@ -53,41 +58,66 @@
 		private $currentCategoryPosition = 0;
 	//	private $currentCategory;
 		
-		public function __construct($groupformationid, $lang){
+		public function __construct($groupformationid, $lang, $userId){
 			$this->groupformationid = $groupformationid;
 			$this->lang = $lang;
 			$this->store = new mod_groupformation_storage_manager($groupformationid);
 			$this->xml = new mod_groupformation_xml_loader();
-			$this->init();
+			$this->init($userId);
 		}
 		
-		private function init(){
+		private function init($userId){
 			if($this->store->existSetting()){
 				$this->szenario = $this->store->getSzenario();
 			}
 			//var_dump($this->szenario);
 			if(!$this->store->catalogTableNotSet()){
 				$this->numbers = $this->store->getNumbers($this->names);
+				$this->setNulls();
 			}
 			
+			$this->status = $this->store->answeringStatus($userId);
+			
+		}
+		
+		private function setNulls(){
+			if($this->szenario == 'project'){
+				$this->numbers[$this->LEARNING] = 0;
+			}
+				
+			if($this->szenario == 'homework'){
+				$this->numbers[$this->MOTIVATION] = 0;
+			}	
+			
+			if($this->szenario == 'presentation'){
+				for($i = 0; $i < count($this->numbers); $i++){
+					if($i != $this->TOPIC && $i != $this->KNOWLEDGE){
+						$this->numbers[$i] = 0;
+					}
+				}
+			}
+			
+			var_dump($this->numbers);
 		}
 		
 		public function hasNext(){
 			
-			if($this->currentCategoryPosition > -1){
-				if($this->numbers[$this->currentCategoryPosition] == 0){
+			if($this->currentCategoryPosition > -1 && $this->currentCategoryPosition < 7){
+// 				var_dump($this->numbers[$this->currentCategoryPosition] == 0);
+// 				var_dump('hasNext');
+				while($this->numbers[$this->currentCategoryPosition] == 0){
 					$this->currentCategoryPosition++;
 				}
 				
 				//var_dump($this->currentCategoryPosition);
 				
-				if($this->numbers[$this->currentCategoryPosition] == 0){
+// 				if($this->numbers[$this->currentCategoryPosition] == 0){
 			
-					var_dump('h');
-					$this->currentCategoryPosition++;
-				}
+// 					var_dump('h');
+// 					$this->currentCategoryPosition++;
+// 				}
 			}
-			return $this->currentCategoryPosition != -1;
+			return ($this->currentCategoryPosition != -1 && $this->currentCategoryPosition < 7);
 		}
 		
 		public function getNextQuestion(){
@@ -96,7 +126,7 @@
 			
 				$questions = array();
 				
-				if($this->currentCategoryPosition < 2){
+				if($this->currentCategoryPosition == $this->TOPIC || $this->currentCategoryPosition == $this->KNOWLEDGE){
 					
  						$temp = $this->store->getDozentQuestion($this->names[$this->currentCategoryPosition]);
  						//var_dump($temp);
@@ -126,6 +156,7 @@
 				//hier wird schon die neue Kategory angesetzt
 				//deswegen muss beim holen der Answers zurück gerechnet werden
 				$this->currentCategoryPosition++;
+				
 				return $questions;
 			}
 		}
@@ -138,35 +169,34 @@
 				$temp++;
 			}
 			
-			//schauen, ob an der Categoryposition noch etwas geändert werden muss bezüglich des Szenarios
-			$this->getNextCategory();
-			if($this->currentCategoryPosition-1 == 0){
+			if($this->status == -1){
+				$this->status = $this->SAVE;
 				$this->store->statusChanged($userId);
 			}
 		}
 		
-		private function getNextCategory(){
-			if($this->szenario == 'project'){
-				if($this->currentCategoryPostiton == $this->LEARNING){
-					$this->currentCategoryPosition++;
-				}
-			}
-			
-			if($this->szenario == 'homework'){
-				if($this->currentCategoryPostiton == $this->MOTIVATION){
-					$this->currentCategoryPosition++;
-				}
-			}
-			
-			//TODO das ist die eigentliche Abfrage; nur solange bis die anderen Datenbanken voll sind
-// 			if($this->currentCategoryPosition == 6 || $this->szenario == 'presentation'){
-// 				$this->currentCategoryPosition = -1;
+// 		private function getNextCategory(){
+// 			if($this->szenario == 'project'){
+// 				if($this->currentCategoryPostiton == $this->LEARNING){
+// 					$this->currentCategoryPosition++;
+// 				}
 // 			}
+			
+// 			if($this->szenario == 'homework'){
+// 				if($this->currentCategoryPostiton == $this->MOTIVATION){
+// 					$this->currentCategoryPosition++;
+// 				}
+// 			}
+			
+// 			//TODO das ist die eigentliche Abfrage; nur solange bis die anderen Datenbanken voll sind
+// // 			if($this->currentCategoryPosition == 6 || $this->szenario == 'presentation'){
+// // 				$this->currentCategoryPosition = -1;
+// // 			}
 
-			if($this->currentCategoryPosition == 7 || $this->szenario == 'presentation'){
-				$this->currentCategoryPosition = -1;
- 			}
-		}
+// 			if($this->currentCategoryPosition == 7 || $this->szenario == 'presentation'){
+// 				$this->currentCategoryPosition = -1;
+//  			}
+// 		}
 		
 		public function questionsToAnswer($userId){
 			return $this->store->answeringStatus($userId) != 1;
@@ -174,17 +204,22 @@
 		
 		public function hasAnswers($userId){
 			$firstCondition = $this->store->answeringStatus($userId) == 0;
+			//var_dump($this->names[$this->currentCategoryPosition-1]);
 			$secondCondition = $this->store->answerExist($userId, $this->names[$this->currentCategoryPosition-1], 1);
-			return $firstCondition && $firstCondition;
+// 			var_dump($secondCondition);
+// 			var_dump($firstCondition);
+// 			var_dump($firstCondition && $firstCondition);
+			return ($firstCondition && $secondCondition);
 		}
 		
 		public function getAnswers($userId){
 			$array = array();
 			
 			$answers = $this->store->getAnswer($userId, $this->names[$this->currentCategoryPosition-1]);
+			//var_dump($answers);
 			foreach($answers as $answer){
 				$temp = array(
-						'position' => $answer->position,
+						'position' => $answer->questionid,
 						'answer' => $answer->answer
 				);
 				

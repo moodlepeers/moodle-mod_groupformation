@@ -18,7 +18,7 @@
  * interface betweeen DB and Plugin
  *
  * @package mod_groupformation
- * @copyright 2015 Nora Wester
+ * @author Nora Wester
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -228,6 +228,7 @@
 			
 			$count = $DB->count_records('groupformation_answer', array('groupformation' => $this->groupformationid, 'userid' => $userId,
 					'category' => $category, 'questionid' => $questionId));
+			//var_dump($count);
 			return $count == 1;
 		}
 		
