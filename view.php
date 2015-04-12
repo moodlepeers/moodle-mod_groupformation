@@ -228,7 +228,7 @@
 			echo ' <h4 class="view_on_mobile">' . $category . '</h4>' ;
 				
 			echo '<table class="responsive-table">
-					<colgroup'.		
+					<colgroup>'.		
 														//TODO @Nora || EG : 	je nach Anzahl($optNumb) werden die entsprechenden widths in % angefügt
 														// 						in diesem Fall: 2-7 collumn sind jeweils 36%/6, 1 collumn hätte keine width sondern nur die classe="firstCol"
 						'<col class="firstCol">
