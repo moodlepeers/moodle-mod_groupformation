@@ -25,7 +25,17 @@
 
 	require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 	require_once(dirname(__FILE__).'/lib.php');
-// 	require_once ($CFG->dirroot.'/mod/feedback/lib.php');
+ 	require_once ($CFG->dirroot.'/mod/feedback/lib.php');
+ 	
+ 	//embed javascript 
+//  	$PAGE->requires->js('/mod/groupformation/js/jquery-1.11.0.min.js');
+ 	$PAGE->requires->jquery();
+//  	$PAGE->requires->js('/mod/groupformation/js/surveyFunctions.js');
+ 	$PAGE->requires->jquery_plugin('survey-jquerfunctions', 'mod_groupformation');
+ 	
+ 	
+//  	require_once(dirname(__FILE__).'classes/survey/radiosTable.php');
+
 
 	//$id = required_param('id', PARAM_INT);    // Course Module ID
 	$id = optional_param('id', 0, PARAM_INT);   // Course Module ID
@@ -115,16 +125,80 @@
 // //  	$xmlLoader = new mod_groupformation_xml_loader();
   	$userId = $USER->id;
 	$store = new mod_groupformation_storage_manager($groupformation->id);
+
+	
+	
+	
+
+	
+
+
 	
 	if($store->existSetting()){
 		$questionManager = new mod_groupformation_question_manager($groupformation->id, 'en', $userId);
 		$hasNext = $questionManager->hasNext();
 		if($hasNext){
 			$category = $questionManager->getCurrentCategory();
-			var_dump($category);
+			
+
 			$question = $questionManager->getNextQuestion();
 			
-			var_dump($question);
+// 			var_dump($question);
+			
+			
+			$optionstype = $question[0][0];
+			$optionsarray = $question[0][2];
+			
+			
+			echo '<form action="">';
+			echo '<div class="grid">
+                <div class="col_100"> ';
+				
+			echo ' <h4 class="view_on_mobile">' . $category . '</h4>' ;
+			
+			
+			echo '<table class="responsive-table">' .	
+														//TODO @Nora || EG : 	je nach Anzahl($optNumb) werden die entsprechenden widths in % angefügt
+														//						in diesem Fall: 2-5 collumn sind jeweils 36%/4, 1 collumn hätte keine width sondern nur die classe="firstCol"
+					'<colgroup>
+						<col class="firstCol">
+						<col width="9%">
+						<col width="9%">
+						<col width="9%">
+						<col width="9%">
+					</colgroup>
+					<thead>
+						<tr>
+							<th scope="col">' . $category . '</th>';
+			
+			foreach ($optionsarray as $option){
+				echo '<th scope="col">' . $option . '</th>';
+			}
+			
+			echo '</tr>
+            	</thead>
+            	<tbody>';
+			$questionCounter = 0;
+			foreach ($question as $datarow){
+				$optionCounter = 0;
+				echo '<tr>';
+				echo '<th scope="row">' . $datarow[1] . '</th>';
+				foreach ($optionsarray as $option){
+					echo '<td data-title="' . $option . '" class="radioleft select-area"><input type="radio" ' .
+						'name="' . $category . $questionCounter . '" value="' . $optionCounter.'"/></td>';
+					$optionCounter++;
+				}
+				$questionCounter++;
+				echo '</tr>';
+			}
+			
+			echo '</tbody>
+                    </table>
+					</div>'; // /.col_100
+			
+		
+			
+			
 			$hasAnswer = $questionManager->hasAnswers($userId);
 			var_dump($hasAnswer);
 			if($hasAnswer){
@@ -135,12 +209,69 @@
 // 			$questionManager->saveAnswers($userId, $answers);
 		}
 		
+		
+		
 		if($hasNext){
 			$category = $questionManager->getCurrentCategory();
 			var_dump($category);
 			$question = $questionManager->getNextQuestion();
 				
-			var_dump($question);
+// 			var_dump($question);
+			
+			//TODO @Nora Eine OOP-Lösung siehe "classes/survey/radiosTable.php", 
+			
+			$optionstype = $question[0][0];
+			$optionsarray = $question[0][2];
+				
+			echo '<div class="col_100"> ';
+		
+			echo ' <h4 class="view_on_mobile">' . $category . '</h4>' ;
+				
+			echo '<table class="responsive-table">
+					<colgroup'.		
+														//TODO @Nora || EG : 	je nach Anzahl($optNumb) werden die entsprechenden widths in % angefügt
+														// 						in diesem Fall: 2-7 collumn sind jeweils 36%/6, 1 collumn hätte keine width sondern nur die classe="firstCol"
+						'<col class="firstCol">
+                        <col width="6%">
+                        <col width="6%">
+                        <col width="6%">
+                        <col width="6%">
+                        <col width="6%">
+                        <col width="6%">
+					</colgroup>
+					<thead>
+						<tr>
+							<th scope="col">' . $category . '</th>';
+				
+			foreach ($optionsarray as $option){
+				echo '<th scope="col">' . $option . '</th>';
+			}
+				
+			echo '</tr>
+            	</thead>
+            	<tbody>';
+				
+			foreach ($question as $datarow){
+				echo '<tr>';
+				echo '<th scope="row">' . $datarow[1] . '</th>';
+				foreach ($optionsarray as $option){
+					echo '<td data-title="' . $option . '" class="radioleft select-area"><input type="radio" ' .
+						'name="' . $category . $questionCounter . '" value="' . $optionCounter.'"/></td>';
+					$optionCounter++;
+				}
+				$questionCounter++;
+				echo '</tr>';
+			}
+			
+			echo '</tbody>
+                    </table>
+					</div>'; // /.col_100
+			echo '</div>';  // /.grid
+			echo '</form>';  // /.form
+			
+			
+			
+			
 			$hasAnswer = $questionManager->hasAnswers($userId);
 			var_dump($hasAnswer);
 			if($hasAnswer){
