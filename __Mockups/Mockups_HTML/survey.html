@@ -41,13 +41,13 @@
         
             
             <form action="survey_2.html">
-                <div class="drid">
+<!--                <div class="grid">-->
                 <div class="col_100">   
                 <h4 class="view_on_mobile">1. Sprache f&uuml;r die Gruppenarbeit / Language for Team Work</h4>
 
                   <table class="responsive-table">
-                    <colgroup width="" span="">
-                        <col width="64%">
+                    <colgroup >
+                        <col class="firstCol">
                         <col width="9%">
                         <col width="9%">
                         <col width="9%">
@@ -57,10 +57,10 @@
                     <thead>
                       <tr>
                         <th scope="col">1. Sprache f&uuml;r die Gruppenarbeit / Language for Team Work</th>
-                          <th scope="col"><div class="history">Deutsch</div></th>
-                          <th scope="col"><div class="history">Englisch</div></th>
-                          <th scope="col"><div class="history">Beides - Deutsch bevorzugt</div></th>
-                          <th scope="col"><div class="history">Both - English prefered</div></th>
+                          <th scope="col"><div class="legend">Deutsch</div></th>
+                          <th scope="col"><div class="legend">Englisch</div></th>
+                          <th scope="col"><div class="legend">Beides - Deutsch bevorzugt</div></th>
+                          <th scope="col"><div class="legend">Both - English prefered</div></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -97,7 +97,7 @@
     
                 <table class="responsive-table">
                     <colgroup width="" span="">
-                        <col width="64%">
+                        <col class="firstCol">
                         <col width="36%">
                     </colgroup>
                     
@@ -108,7 +108,7 @@
                           <th scope="col">0</th>
                           <th scope="col">100</th>
 -->
-                        <th scope="col"><div class="history">0 = kein Vorwissen, 100 = sehr viel Vorwissen</div></th>
+                        <th scope="col"><div class="legend">0 = kein Vorwissen, 100 = sehr viel Vorwissen</div></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -134,7 +134,7 @@
 
                 <table class="responsive-table">
                     <colgroup width="" span="">
-                        <col width="64%">
+                        <col class="firstCol">
                         <col width="36%">
                     </colgroup>
                     
@@ -201,11 +201,11 @@
                 
                 <div class="col_100">
                 <h4 class="view_on_mobile">5. Pers&ouml;nlichkeit</h4>
-                <p class="history"> 1 = "trifft nicht zu", 6 "trifft zu"</p>
+                <p class="legend"> 1 = "trifft nicht zu", 6 "trifft zu"</p>
 
                 <table class="responsive-table">
                     <colgroup width="" span="">
-                        <col width="64%">
+                        <col class="firstCol">
                         <col width="6%">
                         <col width="6%">
                         <col width="6%">
@@ -229,12 +229,13 @@
                     <tbody>
                         <tr>
                             <th scope="row">...bin eher zur&uuml;ckhaltend, reserviert.</th>
+                            
                             <td data-title="1" class="radiocenter select-area"><input type="radio" name="big5A" value="0"/></td>
                             <td data-title="2" class="radiocenter select-area"><input type="radio" name="big5A" value="0.2"/></td>
-                            <td data-title="3" class="radiocenter select-area" ><input type="radio" name="big5A" value="0.4"/></td>
-                            <td data-title="4" class="radiocenter select-area" ><input type="radio" name="big5A" value="0.6"/></td>
-                            <td data-title="5" class="radiocenter select-area" ><input type="radio" name="big5A" value="0.8"/></td>
-                            <td data-title="6" class="radiocenter select-area" ><input type="radio" name="big5A" value="1"/></td>
+                            <td data-title="3" class="radiocenter select-area"><input type="radio" name="big5A" value="0.4"/></td>
+                            <td data-title="4" class="radiocenter select-area"><input type="radio" name="big5A" value="0.6"/></td>
+                            <td data-title="5" class="radiocenter select-area"><input type="radio" name="big5A" value="0.8"/></td>
+                            <td data-title="6" class="radiocenter select-area"><input type="radio" name="big5A" value="1"/></td>
                         </tr>
                         <tr>
                             <th scope="row">...schenke anderen leicht vertrauen, glaube an das Gute im Menschen.</th>
@@ -306,7 +307,7 @@
                             <td data-title="3" class="radiocenter select-area" ><input type="radio" name="big5I" value="0.4"/></td>
                             <td data-title="4" class="radiocenter select-area" ><input type="radio" name="big5I" value="0.6"/></td>
                             <td data-title="5" class="radiocenter select-area" ><input type="radio" name="big5I" value="0.8"/></td>
-                            <td data-title="6" class="radiocenter select-area" ><input type="radio" name="big5J" value="1"/></td>
+                            <td data-title="6" class="radiocenter select-area" ><input type="radio" name="big5I" value="1"/></td>
                         </tr>
                         <tr>
                             <th scope="row">...habe eine aktive Vorstellungskraft, bin phantasievoll.</th>
@@ -329,20 +330,13 @@
                     </tbody>
                 </table>
                 </div>
-             </div>
+<!--             </div>-->
             </form>
             
-            </div>    
         </div> <!-- /grid grid-pad-->
 
 	</div> <!-- /content -->     
     
-    <footer>
-    
-    <a href="v1_0/dozent_settings.html">Dozenten Einstellungen v 1.0</a>
-    <a href="v1_0/survey.html">Fragebogen v 1.0</a>
-    
-    </footer>
     
 
 </body>
