@@ -143,57 +143,98 @@
 
 			$question = $questionManager->getNextQuestion();
 			
-// 			var_dump($question);
+			var_dump($question);
 			
 			
 			$optionsarray = $question[0][2];
-			
+			$header = $question[0][1];
 			
 			echo '<form action="">';
 			echo '<div class="grid">
                 <div class="col_100"> ';
-				
-			echo ' <h4 class="view_on_mobile">' . $category . '</h4>' ;
-			
-			
-			echo '<table class="responsive-table">' .	
+
+			echo ' <h4 class="view_on_mobile">' . $header . '</h4>' ;
+	
+	
+			echo '<table class="responsive-table">' .
 														//TODO @Nora || EG : 	je nach Anzahl($optNumb) werden die entsprechenden widths in % angefügt
 														//						in diesem Fall: 2-5 collumn sind jeweils 36%/4, 1 collumn hätte keine width sondern nur die classe="firstCol"
 					'<colgroup>
 						<col class="firstCol">
-						<col width="9%">
-						<col width="9%">
-						<col width="9%">
-						<col width="9%">
-					</colgroup>
-					<thead>
-						<tr>
-							<th scope="col">' . $category . '</th>';
+						<col width="36%">
+					<colgroup>';
+			echo '<thead>
+                      <tr>
+                        <th scope="col" class="">'. $header . '</th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody>';
 			
-			foreach ($optionsarray as $option){
-				echo '<th scope="col">' . $option . '</th>';
-			}
-			
-			echo '</tr>
-            	</thead>
-            	<tbody>';
 			$questionCounter = 0;
 			foreach ($question as $datarow){
-				$optionCounter = 0;
-				echo '<tr>';
-				echo '<th scope="row">' . $datarow[1] . '</th>';
-				foreach ($optionsarray as $option){
-					echo '<td data-title="' . $option . '" class="radioleft select-area"><input type="radio" ' .
-						'name="' . $category . $questionCounter . '" value="' . $optionCounter.'"/></td>';
-					$optionCounter++;
-				}
-				$questionCounter++;
-				echo '</tr>';
+// 				$optionCounter = 0;
+				echo '<tr>
+				<th scope="row">' . $datarow[1] . '</th>
+				<td class="center">
+						<select name="' .$category . $questionCounter . '" id="' .$category . $questionCounter . '">';
+					foreach ($optionsarray as $option){
+						echo '<option value="' . $option . '">' . $option . '</option>';
+					}
+					echo '</select>
+					</td>
+				</tr>';
+				$questionCounter ++;
 			}
+
 			
-			echo '</tbody>
-                    </table>
-					</div>'; // /.col_100
+			
+// 			echo '<form action="">';
+// 			echo '<div class="grid">
+//                 <div class="col_100"> ';
+				
+// 			echo ' <h4 class="view_on_mobile">' . $category . '</h4>' ;
+			
+			
+// 			echo '<table class="responsive-table">' .	
+// 														//TODO @Nora || EG : 	je nach Anzahl($optNumb) werden die entsprechenden widths in % angefügt
+// 														//						in diesem Fall: 2-5 collumn sind jeweils 36%/4, 1 collumn hätte keine width sondern nur die classe="firstCol"
+// 					'<colgroup>
+// 						<col class="firstCol">
+// 						<col width="9%">
+// 						<col width="9%">
+// 						<col width="9%">
+// 						<col width="9%">
+// 					</colgroup>
+// 					<thead>
+// 						<tr>
+// 							<th scope="col">' . $category . '</th>';
+			
+// 			foreach ($optionsarray as $option){
+// 				echo '<th scope="col">' . $option . '</th>';
+// 			}
+			
+// 			echo '</tr>
+//             	</thead>
+//             	<tbody>';
+// 			$questionCounter = 0;
+// 			foreach ($question as $datarow){
+// 				$optionCounter = 0;
+// 				echo '<tr>';
+// 				echo '<th scope="row">' . $datarow[1] . '</th>';
+// 				$optionCounter = 0;
+// 				foreach ($optionsarray as $option){
+// 					echo '<td data-title="' . $option . '" class="radioleft select-area"><input type="radio" ' .
+// 						'name="' . $category . $questionCounter . '" value="' . $optionCounter.'"/></td>';
+// 					$optionCounter++;
+// 				}
+// 				$questionCounter++;
+// 				echo '</tr>';
+// 			}
+			
+// 			echo '</tbody>
+//                     </table>
+// 					</div>'; // /.col_100
 			
 		
 			
@@ -249,9 +290,11 @@
             	</thead>
             	<tbody>';
 				
+			$questionCounter = 0;
 			foreach ($question as $datarow){
 				echo '<tr>';
 				echo '<th scope="row">' . $datarow[1] . '</th>';
+				$optionCounter = 0;
 				foreach ($optionsarray as $option){
 					echo '<td data-title="' . $option . '" class="radioleft select-area"><input type="radio" ' .
 						'name="' . $category . $questionCounter . '" value="' . $optionCounter.'"/></td>';
@@ -315,10 +358,11 @@
 			echo '</tr>
             	</thead>
             	<tbody>';
-			
+			$questionCounter = 0;
 			foreach ($question as $datarow){
 				echo '<tr>';
 				echo '<th scope="row">' . $datarow[1] . '</th>';
+				$optionCounter = 0;
 				foreach ($optionsarray as $option){
 					echo '<td data-title="' . $option . '" class="radioleft select-area"><input type="radio" ' .
 							'name="' . $category . $questionCounter . '" value="' . $optionCounter.'"/></td>';
@@ -379,10 +423,11 @@
 			echo '</tr>
             	</thead>
             	<tbody>';
-			
+			$questionCounter = 0;
 			foreach ($question as $datarow){
 				echo '<tr>';
 				echo '<th scope="row">' . $datarow[1] . '</th>';
+				$optionCounter = 0;
 				foreach ($optionsarray as $option){
 					echo '<td data-title="' . $option . '" class="radioleft select-area"><input type="radio" ' .
 							'name="' . $category . $questionCounter . '" value="' . $optionCounter.'"/></td>';
@@ -448,10 +493,11 @@
 			echo '</tr>
             	</thead>
             	<tbody>';
-			
+			$questionCounter = 0;
 			foreach ($question as $datarow){
 				echo '<tr>';
 				echo '<th scope="row">' . $datarow[1] . '</th>';
+				$optionCounter = 0;
 				foreach ($optionsarray as $option){
 					echo '<td data-title="' . $option . '" class="radioleft select-area"><input type="radio" ' .
 							'name="' . $category . $questionCounter . '" value="' . $optionCounter.'"/></td>';
