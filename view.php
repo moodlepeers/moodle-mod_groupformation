@@ -146,7 +146,6 @@
 // 			var_dump($question);
 			
 			
-			$optionstype = $question[0][0];
 			$optionsarray = $question[0][2];
 			
 			
@@ -220,7 +219,6 @@
 			
 			//TODO @Nora Eine OOP-Lösung siehe "classes/survey/radiosTable.php", 
 			
-			$optionstype = $question[0][0];
 			$optionsarray = $question[0][2];
 				
 			echo '<div class="col_100"> ';
@@ -266,54 +264,214 @@
 			echo '</tbody>
                     </table>
 					</div>'; // /.col_100
+		
+			
+			
+			
+			
+			$hasAnswer = $questionManager->hasAnswers($userId);
+			var_dump($hasAnswer);
+			if($hasAnswer){
+				var_dump($questionManager->getAnswers($userId));
+			}
+			$hasNext = $questionManager->hasNext();
+		}
+		
+		if($hasNext){
+			$category = $questionManager->getCurrentCategory();
+			var_dump($category);
+			$question = $questionManager->getNextQuestion();
+		
+// 			var_dump($question);
+			
+			
+			
+			$optionsarray = $question[0][2];
+			
+			echo '<div class="col_100"> ';
+			
+			echo ' <h4 class="view_on_mobile">' . $category . '</h4>' ;
+			
+			echo '<table class="responsive-table">
+					<colgroup>'.
+								//TODO @Nora || EG : 	je nach Anzahl($optNumb) werden die entsprechenden widths in % angefügt
+			// 						in diesem Fall: 2-7 collumn sind jeweils 36%/6, 1 collumn hätte keine width sondern nur die classe="firstCol"
+			'<col class="firstCol">
+                        <col width="6%">
+                        <col width="6%">
+                        <col width="6%">
+                        <col width="6%">
+                        <col width="6%">
+                        <col width="6%">
+					</colgroup>
+					<thead>
+						<tr>
+							<th scope="col">' . $category . '</th>';
+			
+			foreach ($optionsarray as $option){
+				echo '<th scope="col">' . $option . '</th>';
+			}
+			
+			echo '</tr>
+            	</thead>
+            	<tbody>';
+			
+			foreach ($question as $datarow){
+				echo '<tr>';
+				echo '<th scope="row">' . $datarow[1] . '</th>';
+				foreach ($optionsarray as $option){
+					echo '<td data-title="' . $option . '" class="radioleft select-area"><input type="radio" ' .
+							'name="' . $category . $questionCounter . '" value="' . $optionCounter.'"/></td>';
+					$optionCounter++;
+				}
+				$questionCounter++;
+				echo '</tr>';
+			}
+				
+			echo '</tbody>
+                    </table>
+					</div>'; // /.col_100
+		
+			
+			
+			
+			$hasAnswer = $questionManager->hasAnswers($userId);
+			var_dump($hasAnswer);
+			if($hasAnswer){
+				var_dump($questionManager->getAnswers($userId));
+			}
+			$hasNext = $questionManager->hasNext();
+		}
+		
+		if($hasNext){
+			$category = $questionManager->getCurrentCategory();
+			var_dump($category);
+			$question = $questionManager->getNextQuestion();
+		
+// 			var_dump($question);
+
+			$optionsarray = $question[0][2];
+			
+			echo '<div class="col_100"> ';
+			
+			echo ' <h4 class="view_on_mobile">' . $category . '</h4>' ;
+			
+			echo '<table class="responsive-table">
+					<colgroup>'.
+								//TODO @Nora || EG : 	je nach Anzahl($optNumb) werden die entsprechenden widths in % angefügt
+			// 						in diesem Fall: 2-7 collumn sind jeweils 36%/6, 1 collumn hätte keine width sondern nur die classe="firstCol"
+			'<col class="firstCol">
+                        <col width="6%">
+                        <col width="6%">
+                        <col width="6%">
+                        <col width="6%">
+                        <col width="6%">
+                        <col width="6%">
+					</colgroup>
+					<thead>
+						<tr>
+							<th scope="col">' . $category . '</th>';
+			
+			foreach ($optionsarray as $option){
+				echo '<th scope="col">' . $option . '</th>';
+			}
+			
+			echo '</tr>
+            	</thead>
+            	<tbody>';
+			
+			foreach ($question as $datarow){
+				echo '<tr>';
+				echo '<th scope="row">' . $datarow[1] . '</th>';
+				foreach ($optionsarray as $option){
+					echo '<td data-title="' . $option . '" class="radioleft select-area"><input type="radio" ' .
+							'name="' . $category . $questionCounter . '" value="' . $optionCounter.'"/></td>';
+					$optionCounter++;
+				}
+				$questionCounter++;
+				echo '</tr>';
+			}
+				
+			echo '</tbody>
+                    </table>
+					</div>'; // /.col_100
+			
+			
+			echo '<h1>current Array Example </h1>';
+						var_dump($question);
+					
+
+			
+			
+			$hasAnswer = $questionManager->hasAnswers($userId);
+			var_dump($hasAnswer);
+			if($hasAnswer){
+				var_dump($questionManager->getAnswers($userId));
+			}
+			$hasNext = $questionManager->hasNext();
+		}
+		
+		if($hasNext){
+			$category = $questionManager->getCurrentCategory();
+			var_dump($category);
+			$question = $questionManager->getNextQuestion();
+		
+// 			var_dump($question);											// Ab hier ist alles leer!!! also hasNext = false
+
+			
+			$optionsarray = $question[0][2];
+			
+			echo '<div class="col_100"> ';
+			
+			echo ' <h4 class="view_on_mobile">' . $category . '</h4>' ;
+			
+			echo '<table class="responsive-table">
+					<colgroup>'.
+								//TODO @Nora || EG : 	je nach Anzahl($optNumb) werden die entsprechenden widths in % angefügt
+			// 						in diesem Fall: 2-7 collumn sind jeweils 36%/6, 1 collumn hätte keine width sondern nur die classe="firstCol"
+			'<col class="firstCol">
+                        <col width="6%">
+                        <col width="6%">
+                        <col width="6%">
+                        <col width="6%">
+                        <col width="6%">
+                        <col width="6%">
+					</colgroup>
+					<thead>
+						<tr>
+							<th scope="col">' . $category . '</th>';
+			
+			foreach ($optionsarray as $option){
+				echo '<th scope="col">' . $option . '</th>';
+			}
+			
+			echo '</tr>
+            	</thead>
+            	<tbody>';
+			
+			foreach ($question as $datarow){
+				echo '<tr>';
+				echo '<th scope="row">' . $datarow[1] . '</th>';
+				foreach ($optionsarray as $option){
+					echo '<td data-title="' . $option . '" class="radioleft select-area"><input type="radio" ' .
+							'name="' . $category . $questionCounter . '" value="' . $optionCounter.'"/></td>';
+					$optionCounter++;
+				}
+				$questionCounter++;
+				echo '</tr>';
+			}
+				
+			echo '</tbody>
+                    </table>
+					</div>'; // /.col_100
 			echo '</div>';  // /.grid
 			echo '</form>';  // /.form
 			
+			var_dump($question);
+					
 			
 			
 			
-			$hasAnswer = $questionManager->hasAnswers($userId);
-			var_dump($hasAnswer);
-			if($hasAnswer){
-				var_dump($questionManager->getAnswers($userId));
-			}
-			$hasNext = $questionManager->hasNext();
-		}
-		
-		if($hasNext){
-			$category = $questionManager->getCurrentCategory();
-			var_dump($category);
-			$question = $questionManager->getNextQuestion();
-		
-			var_dump($question);
-			$hasAnswer = $questionManager->hasAnswers($userId);
-			var_dump($hasAnswer);
-			if($hasAnswer){
-				var_dump($questionManager->getAnswers($userId));
-			}
-			$hasNext = $questionManager->hasNext();
-		}
-		
-		if($hasNext){
-			$category = $questionManager->getCurrentCategory();
-			var_dump($category);
-			$question = $questionManager->getNextQuestion();
-		
-			var_dump($question);
-			$hasAnswer = $questionManager->hasAnswers($userId);
-			var_dump($hasAnswer);
-			if($hasAnswer){
-				var_dump($questionManager->getAnswers($userId));
-			}
-			$hasNext = $questionManager->hasNext();
-		}
-		
-		if($hasNext){
-			$category = $questionManager->getCurrentCategory();
-			var_dump($category);
-			$question = $questionManager->getNextQuestion();
-		
-			var_dump($question);
 			$hasAnswer = $questionManager->hasAnswers($userId);
 			var_dump($hasAnswer);
 			var_dump('hasAnswer');
