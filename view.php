@@ -153,7 +153,7 @@
 			echo '<div class="grid">
                 <div class="col_100"> ';
 
-			echo ' <h4 class="view_on_mobile">' . $header . '</h4>' ;
+			echo ' <h4 class="view_on_mobile">' . $category . '</h4>' ;
 	
 	
 			echo '<table class="responsive-table">' .
@@ -165,7 +165,7 @@
 					<colgroup>';
 			echo '<thead>
                       <tr>
-                        <th scope="col" class="">'. $header . '</th>
+                        <th scope="col">'. $category . '</th>
                         <th scope="col"></th>
                       </tr>
                     </thead>
@@ -186,6 +186,9 @@
 				</tr>';
 				$questionCounter ++;
 			}
+			echo ' </tbody>
+                  </table>
+                </div>';
 
 			
 			
