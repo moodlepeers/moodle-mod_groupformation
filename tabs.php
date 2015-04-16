@@ -16,7 +16,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * prints the tabbed bar
+ * directly prints the tabbed bar
 *
 * @author Nora Wester
 * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
@@ -24,6 +24,8 @@
 */
 	defined('MOODLE_INTERNAL') OR die('not allowed');
 
+	// uses: weblib to print tabs
+	
 	$tabs = array();
 	$row  = array();
 	$inactive = array();

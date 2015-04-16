@@ -16,10 +16,11 @@
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
 /**
  * Redirect the user to the appropriate submission related page
- *
+ * (This file is part of the module grid of moodle and not specifically needed by mod_groupformation)
+ *  
  * @package mod_groupformation
  * @category grade
- * @copyright 2014 Nora Wester
+ * @author Nora Wester
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 	require_once(__DIR__ . "../../config.php");

@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
 /**
- * Prints a particular instance of groupformation
- *
+ * Prints a particular instance of groupformation to be viewed by users (of different roles)
+ * 
  * @package mod_groupformation
  * @copyright 2014 Nora Wester
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -26,6 +26,9 @@
 	require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 	require_once(dirname(__FILE__).'/lib.php');
  	require_once ($CFG->dirroot.'/mod/feedback/lib.php');
+ 	
+ 	require_once(dirname(__FILE__).'/moodle_interface/storage_manager.php');
+ 	require_once(dirname(__FILE__).'/question_manager/question_manager.php');
  	
  	//embed javascript 
 //  	$PAGE->requires->js('/mod/groupformation/js/jquery-1.11.0.min.js');
@@ -71,6 +74,7 @@
 	require_login($course, true, $cm);
 //	$context = context_module::instance($cm->id);
 
+	// @all: ?? Wird das Event dann jedesmal geworfen wenn die view.php aufgerufen wird? Gewollt? (JK)
 	$event = \mod_groupformation\event\course_module_viewed::create(array(
 			'objectid' => $PAGE->cm->instance,
 			'context' => $PAGE->context,
@@ -91,7 +95,7 @@
 	echo $OUTPUT->header();
 
 	// Print the tabs.
-	require('tabs.php');
+	require('tabs.php'); // XXX: Would be better to have this as a class (static method) and require_once, then call here the method "printTabs".
 	
 	// $mform = new form_dummy();
 	// //Form processing and displaying is done here
@@ -116,9 +120,7 @@
 	
 	// Replace the following lines with you own code.
 	echo $OUTPUT->heading('Yay! It works!');
-	
- 	require_once(dirname(__FILE__).'/moodle_interface/storage_manager.php');
-  	require_once(dirname(__FILE__).'/question_manager/question_manager.php');
+
 //  	$a = array();
 // 	var_dump(count($a));
 	
@@ -126,29 +128,22 @@
   	$userId = $USER->id;
 	$store = new mod_groupformation_storage_manager($groupformation->id);
 
-	
-	
-	
 
-	
-
-
-	
+	// TODO @EG: Dieser if-Zweig ist 400 Zeilen lang! Bitte kapseln, auslagern, modularisieren! (JK)
 	if($store->existSetting()){
 		$questionManager = new mod_groupformation_question_manager($groupformation->id, 'en', $userId);
 		$hasNext = $questionManager->hasNext();
 		if($hasNext){
 			$category = $questionManager->getCurrentCategory();
 			
-
 			$question = $questionManager->getNextQuestion();
 			
 			var_dump($question);
 			
-			
 			$optionsarray = $question[0][2];
 			$header = $question[0][1];
 			
+			// TODO @EG: Das sollte in einer QuestionTableView-Klasse gekapselt sein, so dass wir hier nur einen Methodenaufruf haben! (JK)
 			echo '<form action="">';
 			echo '<div class="grid">
                 <div class="col_100"> ';
@@ -262,6 +257,8 @@
 // 			var_dump($question);
 			
 			//TODO @Nora Eine OOP-Lösung siehe "classes/survey/radiosTable.php", 
+			//    @EG: Iche sehe da kein verzeichnis /survey...  (JK)
+			//         Ja, auf jeden Fall dies kapsel und auslagern!
 			
 			$optionsarray = $question[0][2];
 				
@@ -310,10 +307,7 @@
 			echo '</tbody>
                     </table>
 					</div>'; // /.col_100
-		
-			
-			
-			
+
 			
 			$hasAnswer = $questionManager->hasAnswers($userId);
 			var_dump($hasAnswer);

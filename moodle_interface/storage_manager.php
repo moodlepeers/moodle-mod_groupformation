@@ -151,6 +151,13 @@
 			return $DB->get_field('groupformation_q_settings', $category . 'values', array('groupformation' => $this->groupformationid));
 		}
 		
+		/** TODO @NW document the method and rename the parameters $i = $id ?
+		 * 
+		 * @param unknown $i
+		 * @param string $category
+		 * @param string $lang
+		 * @return mixed
+		 */
 		public function getCatalogQuestion($i, $category = 'general', $lang = 'en'){
 			global $DB;
 			
