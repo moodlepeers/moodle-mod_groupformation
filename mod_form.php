@@ -62,10 +62,13 @@
 // 			$mform->addElement('header', 'groupformationfieldset', get_string('groupformationfieldset', 'groupformation'));
 // 			$mform->addElement('static', 'label2', 'groupformationsetting2', 'Your newmodule fields go here. Replace me!');
 			
-			$mform->addElement('header', 'time', get_string('time', 'groupformation'));
-			
-			$mform->addElement('date_time_selector', 'timeopen', get_string('from'));
-			$mform->addElement('date_time_selector', 'timeclose', get_string('to'));
+			$mform->addElement('header', 'timinghdr', get_string('availability'));
+
+        	$mform->addElement('date_time_selector', 'timeopen', get_string('feedbackopen', 'feedback'),
+        				array('optional' => true));
+
+	        $mform->addElement('date_time_selector', 'timeclose', get_string('feedbackclose', 'feedback'),
+	            array('optional' => true));
 			
 			// Add standard grading elements.
 			$this->standard_grading_coursemodule_elements();
@@ -75,7 +78,6 @@
 			
 			// Add standard buttons, common to all modules.
 			$this->add_action_buttons();
-		
 	}
 }
 

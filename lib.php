@@ -92,6 +92,9 @@
  	*/
 	function groupformation_update_instance(stdClass $groupformation, mod_groupformation_mod_form $mform = null) {
 		global $DB;
+		
+		//TODO @EG  Hier können wir bestimmen, wie etwas in die Datenbanktabelle gespeichert wird. 
+		//			Diese Stelle wird dann noch relevant.
 		$groupformation->timemodified = time();
 		$groupformation->id = $groupformation->instance;
 	
