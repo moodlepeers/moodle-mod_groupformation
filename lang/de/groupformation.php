@@ -52,6 +52,7 @@
 			Beim Projekt wird darauf geachtet, dass sich die Persönlichkeiten der Gruppenmitglieder ergänzen. 
 			Beim Referat steht das gemeinsane Themeninteresse im Vordergrund.
 			Bei den Hausaufgaben wird darauf geachtet, dass es die besten Vorausetzungen für kollaboratives Lernen gibt';
+	$string['groupformationsettings'] = 'Gruppenformation Einstellungen';
 	$string['project'] = 'Projekt';
 	$string['homework'] = 'Hausaufgaben';
 	$string['presentation'] = 'Referat';
@@ -61,5 +62,21 @@
 	$string['useOneLineForEachTopic'] = 'Für jedes Thema eine Zeile benutzen';
 	$string['knowledge'] = 'Vorwissen';
 	$string['knowledgeChoice'] = 'Vorwissen';
+	$string['groupoptions'] = 'Gruppenoptionen';
+	$string['maxmembers'] = 'Max. Gruppenmitglieder';
+	$string['maxgroups'] = 'Max. Gruppenanzahl';
+	$string['evaluationmethod'] = 'Wie möchten Sie die Arbeit bewerten?';
+	$string['grades'] = 'Noten';
+	$string['points'] = 'Punkte';
+	$string['justpass'] = 'Nur Bestehen';
+	$string['noevaluation'] = 'Keine Bewertung';
 	$string['useOneLineForEachKnowledge'] = 'Für jedes Thema eine eigene Zeile benutzen';
-	$string['cannotloadxml'] = 'XML Datei konnte nicht geladen werden';
+	$string['cannotloadxml'] = 'XML Datei konnte nicht geladen werden.';
+	$string['szenario_error'] = 'Bitte wählen Sie ein Szenario aus.';
+	$string['maxmembers_error'] = 'Bitte wählen Sie die maximale Gruppengröße.';
+	$string['maxgroups_error'] = 'Bitte wählen Sie die maximale Gruppenanzahl.';
+	$string['evaluationmethod_error'] = 'Bitte wählen Sie die Methode zur Bewertung aus.';
+	$string['choose_szenario'] = 'Szenario auswählen';
+	$string['choose_number'] = 'Anzahl auswählen';
+	$string['choose_evaluationmethod'] = 'Methode auswählen';
+	

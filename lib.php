@@ -70,7 +70,11 @@
  	*/
 	function groupformation_add_instance(stdClass $groupformation, mod_groupformation_mod_form $mform = null) {
 		global $DB;
+		
 		$groupformation->timecreated = time();
+		
+		// checks all fields and sets them properly
+		$groupformation = groupformation_set_fields($groupformation);
 		
 		// You may have to add extra stuff in here.
 		$groupformation->id = $DB->insert_record('groupformation', $groupformation);
@@ -93,8 +97,9 @@
 	function groupformation_update_instance(stdClass $groupformation, mod_groupformation_mod_form $mform = null) {
 		global $DB;
 		
-		//TODO @EG  Hier können wir bestimmen, wie etwas in die Datenbanktabelle gespeichert wird. 
-		//			Diese Stelle wird dann noch relevant.
+		// checks all fields and sets them properly
+		$groupformation = groupformation_set_fields($groupformation);
+		
 		$groupformation->timemodified = time();
 		$groupformation->id = $groupformation->instance;
 	
@@ -418,6 +423,37 @@
  	*/
 	function groupformation_extend_settings_navigation(settings_navigation $settingsnav, navigation_node $groupformationnode=null) {
 
+	}
+	
+	/**
+	 * Sets all the importants fields and clears fields which are supposed to be empty or back on default.
+	 * 
+	 * @param $groupformation
+	 * @return $groupformation
+	 */
+	function groupformation_set_fields($groupformation){
+		
+		if (!isset($groupformation->knowledge)){
+			$groupformation->knowledge = 0;
+			$groupformation->knowledgelines = "";
+		}elseif ($groupformation->knowledge==0){
+			$groupformation->knowledgelines = "";
+		}
+		
+		if (!isset($groupformation->topics)){
+			$groupformation->topics = 0;
+			$groupformation->topiclines = "";
+		}elseif ($groupformation->topics==0){
+			$groupformation->topiclines = "";
+		}
+		
+		if (isset($groupformation->groupoption) & $groupformation->groupoption==1){
+			$groupformation->maxmembers = 0;
+		}elseif (isset($groupformation->groupoption) & $groupformation->groupoption==0){
+			$groupformation->maxgroups = 0;
+		}
+		
+		return $groupformation;
 	}
 	
 	
