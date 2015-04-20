@@ -206,7 +206,7 @@ h1.caption {
     font-weight: bold;
     content: "* "; }
 
-.knowledge, .topics {
+.knowledgeWrapper, .topicsWrapper {
   display: none; }
 
 .multi_field_wrapper input.respwidth {

@@ -5,18 +5,20 @@ $(document).ready(function() {
     $(".errors p").hide();
     
     
-    var groupCounter = 3; //counts topics to make group numbers
+    var topicCounter = 3; //counts topics to make group numbers
+    
+    var preknwCounter = 3;
 
     
     //toggle with checkbox
     $('input[type="checkbox"]').click(function(){
             if($(this).attr("value")=="wantKnowledge"){
-                $(".knowledge").toggle();
+                $(".knowledgeWrapper").toggle();
             }
         
             // If you add topics, number of groups option will adapt
             if($(this).attr("value")=="wantTopics"){
-                $(".topics").toggle();
+                $(".topicsWrapper").toggle();
                 if( $("#group_opt_numb").attr('disabled') == 'disabled' ){
                     $("#group_opt_numb").removeAttr('disabled');
                     $('#numb_of_groups').val(0);
@@ -34,33 +36,78 @@ $(document).ready(function() {
     
     
     
+    function addInput($wrapper, $cat){
+//        $multifieldID = 'input' + $cat + $('.multi_field', $wrapper).length;
+        $theID = parseInt($('.multi_field:last-child', $wrapper).attr('id').substr(8)) + 1
+        $multifieldID = 'input' + $cat + $theID;
+
+//        $multifieldID = 'input' + $cat +
+        // adds input field
+        $('.multi_field:first-child', $wrapper).clone(true).attr('id',$multifieldID)
+                                                            .appendTo($wrapper).find('input').val('').focus();  
+        addPreview($wrapper, $cat, $theID);
+    }
+    
+    function addPreview($wrapper, $cat, $theID){
+        $previewRowID = $cat + 'Row' +  $theID;
+        
+        if($cat == 'prk'){
+            $('.knowlRow:first-child', '#preknowledges').clone(true).attr('id',$previewRowID)
+                                                                .appendTo('#preknowledges');
+        }
+        if($cat == 'topicAnchor'){
+            topicCounter++;
+            $('#numb_of_groups').val(topicCounter);
+        }
+    }
+    
+    function removeInput($wrapper, $cat, $field){
+        if ($('.multi_field', $wrapper).length > 1){
+            $theID = parseInt($field.parent('.multi_field').attr('id').substr(8))
+            $previewRowID = $cat + 'Row' +  $theID;
+            //remove Preview
+            document.getElementById($previewRowID).remove();
+            //remove Input
+            $field.parent('.multi_field').remove();
+        }
+    }
+    
+    
     //dynamic inputs function
-    $('.multi_field_wrapper').each(function() {
+    $('.multi_field_wrapper').each(function dynamicInputs() {
         var $wrapper = $('.multi_fields', this);
-        $(".add_field", $(this)).click(function(e) {
-            // adds input field
-            $('.multi_field:first-child', $wrapper).clone(true).appendTo($wrapper).find('input').val('').focus();
-            // count topics and make group number
-            if($(this).parent().attr('class') == 'multi_field_wrapper topics'){
-                groupCounter++;
-                $('#numb_of_groups').val(groupCounter);
-            }
+        var $cat = $(this).parent().attr('id');
+        
+        //add field on button
+        $(".add_field", $(this)).click(function() {
+            addInput($wrapper, $cat);
         });
         
-        
+        //removes field on button
         $('.multi_field .remove_field', $wrapper).click(function() {
-            if ($('.multi_field', $wrapper).length > 1){
-//                alert($(this).parent().parent().attr('class'));
-                if($(this).parent().parent().parent().attr('class') == 'multi_field_wrapper topics'){
-//                if($(this).parentsUntil("div.multi_field_wrapper.topics") ){
-                    groupCounter--;
-                    $('#numb_of_groups').val(groupCounter);
-                }
-                //remove input field
-                $(this).parent('.multi_field').remove();
-            }
+            $field = $(this);
+            removeInput($wrapper, $cat, $field);    
         });
+        
+         $('.multi_field input:text', $wrapper).focus(function() {
+            $previewRowID = ($cat + 'Row' + parseInt($(this).parent().attr('id').substr(8))).children('th').attr('scope');
+            $(this).keyup(function(){
+                alert($previewRowID);
+                document.getElementById($previewRowID).children('th').html($(this).val());
+                alert($(this).parent().attr('id'));
+            });
+        });
+             
+//        $('.multi_field input:text', $wrapper).keyup(function() {
+//            alert($(this).parent().attr('id'));
+//        });
+        
+        
     });
+    
+    
+    
+    
 
 
     //disable with radios
@@ -195,6 +242,10 @@ $(document).ready(function() {
         }, 80);
     }
     
+
+    
+    
+    
     
     
     //
@@ -221,7 +272,7 @@ $(document).ready(function() {
     
     // clickable wraper for input radios // Fragebogen
     $(".select-area").click(function() {
-    $(this).find('input:radio').prop('checked', true);
+        $(this).find('input:radio').prop('checked', true);
     });
 
     
