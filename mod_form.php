@@ -30,7 +30,8 @@
 
 	require_once($CFG->dirroot.'/course/moodleform_mod.php');
 	require_once($CFG->dirroot.'/mod/groupformation/lib.php');  // not in the template
-
+	require_once($CFG->dirroot.'/mod/groupformation/locallib.php');
+	
 	class mod_groupformation_mod_form extends moodleform_mod {
 		
 		/**
@@ -38,12 +39,16 @@
 		 * @see moodleform::definition()
 		 */
 		function definition() {
+			global $PAGE;
+				
 			// global $CFG, $DB, $OUTPUT;  
-
 			$mform =& $this->_form;
 		
 			// Adding the "general" fieldset, where all the common settings are showed.
 			$mform->addElement('header', 'general', get_string('general', 'form'));
+			
+			// TODO @EG hier ist Jquery eingebunden worden ohne Fehler!
+			addjQuery($PAGE);
 			
 			// Adding the standard "name" field.
 			$mform->addElement('text', 'name', get_string('groupformationname', 'groupformation'), array('size' => '64'));
@@ -56,6 +61,8 @@
 			$mform->addRule('name', get_string('maximumchars', '', 255), 'maxlength', 255, 'client');
 			$mform->addHelpButton('name', 'groupformationname', 'groupformation');
 			
+			
+			$mform->addElement('text','anzahl','Anzahl',array('size' => '64','type'=>'number'));
 			// Adding the standard "intro" and "introformat" fields.
 			$this->add_intro_editor();
 			

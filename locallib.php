@@ -34,3 +34,8 @@
  * return new stdClass();
  *}
  */
+	
+	function addjQuery($PAGE){
+		$PAGE->requires->jquery();
+		// TODO @EG hier könnten die einzelnen Scripte rein	
+	}

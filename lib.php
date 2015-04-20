@@ -29,8 +29,6 @@
 */
 
 	defined('MOODLE_INTERNAL') || die();
-
-	
 	
 	/**
  	* Moodle core API
