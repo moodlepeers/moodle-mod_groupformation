@@ -16,7 +16,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * directly prints the tabbed bar
+ * prints the tabbed bar
 *
 * @author Nora Wester
 * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
@@ -24,8 +24,6 @@
 */
 	defined('MOODLE_INTERNAL') OR die('not allowed');
 
-	// uses: weblib to print tabs
-	
 	$tabs = array();
 	$row  = array();
 	$inactive = array();
@@ -50,11 +48,13 @@
 	$row[] = new tabobject('view', $viewurl->out(), get_string('overview', 'groupformation'));
 
 //	if (has_capability('mod/groupformation:editparams', $context)) {
-		$editurl = new moodle_url('/mod/groupformation/edit_param.php', array('id'=>$usedid, 'do_show'=>'edit_param'));
-		$row[] = new tabobject('edit_param', $editurl->out(), get_string('edit_param', 'groupformation'));
+// 		$editurl = new moodle_url('/mod/groupformation/edit_param.php', array('id'=>$usedid, 'do_show'=>'edit_param'));
+// 		$row[] = new tabobject('edit_param', $editurl->out(), get_string('edit_param', 'groupformation'));
 //	}
-
-
+	if (has_capability('mod/groupformation:editsettings', $context)) {
+		$analyseurl = new moodle_url('/mod/groupformation/analyse.php', array('id'=>$usedid, 'do_show'=>'analyse'));
+		$row[] = new tabobject('analyse', $analyseurl->out(), get_string('analyse', 'groupformation'));
+	}
 
 	if (count($row) > 1) {
 		$tabs[] = $row;

@@ -77,14 +77,14 @@
 			$mform->addElement('header', 'groupformationsettings', get_string('groupformationsettings', 'groupformation'));
 
 			// Adding field Szenario choice
-	        $mform->addElement('select', 'szenario', get_string('szenario', 'groupformation'), 
+	        $mform->addElement('select', 'szenario', get_string('scenario', 'groupformation'), 
 	       			array(
-	       					get_string('choose_szenario','groupformation'),
+	       					get_string('choose_scenario','groupformation'),
 	       					get_string('project', 'groupformation'),
 	       					get_string('homework', 'groupformation'),
 	       					get_string('presentation', 'groupformation')
 	       			), null);
-	        $mform->addRule('szenario', get_string('szenario_error', 'groupformation'), 'required', null, 'client');
+	        $mform->addRule('szenario', get_string('scenario_error', 'groupformation'), 'required', null, 'client');
 
 	        // Adding fields for Knowledge questions
 	        $mform->addElement('checkbox', 'knowledge', get_string('knowledge', 'groupformation'));
@@ -125,7 +125,7 @@
 			// TODO @all Brauchen wir die Moodlebewertungsoptionen überhaupt? Ist ja keine Aufgabe mit Abgabe sondern die 
 			// Gruppenformation. Die Abfrage nach der Bewertungsmethode wird oben gemacht und ist ja eigentlich moodle 
 			// unspezifisch, oder? Habs vorerst mal auskommentiert.
-// 			$this->standard_grading_coursemodule_elements();
+ 			$this->standard_grading_coursemodule_elements();
 			
 			// Add standard elements, common to all modules.
 			$this->standard_coursemodule_elements();

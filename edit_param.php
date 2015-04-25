@@ -20,7 +20,7 @@
  * 
  *
  * @package    mod_groupformation
- * @copyright  Nora Wester
+ * @author     Nora Wester
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -29,7 +29,7 @@
 	
 // 	global $CFG;
 // 	require_once $CFG->dirroot.'/mod/groupformation/classes/lecturer_settings/setting_manager.php';
-	require_once(dirname(__FILE__).'/question_settings/setting_manager.php');
+	require_once(dirname(__FILE__).'/classes/lecturer_settings/setting_controller.php');
 
 	
 //	$courseid = required_param('courseid', PARAM_INT);
@@ -108,9 +108,9 @@
 		$topics = $data->topicValues;
 		$topicsarray = explode("\n", $topics);
 		
-		var_dump($topicsarray);
-	
-		$settings = new mod_groupformation_setting_manager($groupformation->id, $data->szenario, array(), array());
+	//	var_dump($topicsarray);
+		var_dump($data->szenario);
+		$settings = new mod_groupformation_setting_controller($groupformation->id, $data->szenario, array('blubb1', 'blubb2'), array());
 	
 // 		$settings->create_Questions(TRUE);
 		$settings->save_settings();

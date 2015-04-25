@@ -18,7 +18,7 @@
 * German strings for newmodule
 *
 * @package mod_groupformation
-* @copyright 2014 Nora Wester
+* @author Nora Wester
 * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 */
 
@@ -46,9 +46,9 @@
 	$string['generategroups'] = "Gruppen generieren";
 	$string['edit_param'] = 'Editieren';
 	$string['editparam'] = 'Paramter editieren';
-	$string['szenario'] = 'Szenario';
-	$string['szenarioLabel'] = '';
-	$string['szenarioInfo'] = 'Das Gruppenformationsplugin stellt drei Szenarie zur Verfügung. 
+	$string['scenario'] = 'Szenario';
+	$string['scenarioLabel'] = '';
+	$string['scenarioInfo'] = 'Das Gruppenformationsplugin stellt drei Szenarie zur Verfügung. 
 			Beim Projekt wird darauf geachtet, dass sich die Persönlichkeiten der Gruppenmitglieder ergänzen. 
 			Beim Referat steht das gemeinsane Themeninteresse im Vordergrund.
 			Bei den Hausaufgaben wird darauf geachtet, dass es die besten Vorausetzungen für kollaboratives Lernen gibt';
@@ -72,11 +72,12 @@
 	$string['noevaluation'] = 'Keine Bewertung';
 	$string['useOneLineForEachKnowledge'] = 'Für jedes Thema eine eigene Zeile benutzen';
 	$string['cannotloadxml'] = 'XML Datei konnte nicht geladen werden.';
-	$string['szenario_error'] = 'Bitte wählen Sie ein Szenario aus.';
+	$string['scenario_error'] = 'Bitte wählen Sie ein Szenario aus.';
 	$string['maxmembers_error'] = 'Bitte wählen Sie die maximale Gruppengröße.';
 	$string['maxgroups_error'] = 'Bitte wählen Sie die maximale Gruppenanzahl.';
 	$string['evaluationmethod_error'] = 'Bitte wählen Sie die Methode zur Bewertung aus.';
-	$string['choose_szenario'] = 'Szenario auswählen';
+	$string['choose_scenario'] = 'Szenario auswählen';
 	$string['choose_number'] = 'Anzahl auswählen';
 	$string['choose_evaluationmethod'] = 'Methode auswählen';
+	$string['analyse'] = 'Analyse';
 	

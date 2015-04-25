@@ -20,7 +20,7 @@
  * form for editing parameter for groupformation
 *
 * @package    mod_groupformation
-* @copyright  Nora Wester
+* @author  Nora Wester
 * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 */
 
@@ -40,7 +40,7 @@
  
 			$mform->addElement('header', 'editparam', get_string('editparam', 'groupformation'));
 				
-			$mform->addElement('static', 'szenarioInfo', get_string('szenarioInfo', 'groupformation'), get_string('szenarioLabel', 'groupformation'));
+			$mform->addElement('static', 'scenarioInfo', get_string('scenarioInfo', 'groupformation'), get_string('scenarioLabel', 'groupformation'));
 			
 			$attribut = array('project' => get_string('project', 'groupformation'),
 					'homework' => get_string('homework', 'groupformation'),

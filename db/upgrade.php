@@ -86,7 +86,7 @@
 			}
 			
 			$table = new xmldb_table('groupformation');
-			$field = new xmldb_field('knowledgelines', XMLDB_TYPE_TEXT, null, XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, 'knowledge');
+			$field = new xmldb_field('knowledgelines', XMLDB_TYPE_TEXT, 'medium', null, null, null, null, 'knowledge');
 			// Add field course.
 			if (!$dbman->field_exists($table, $field)) {
 				$dbman->add_field($table, $field);
@@ -100,7 +100,7 @@
 			}
 			
 			$table = new xmldb_table('groupformation');
-			$field = new xmldb_field('topiclines', XMLDB_TYPE_TEXT, null, XMLDB_UNSIGNED, XMLDB_NOTNULL, null, null, 'topics');
+			$field = new xmldb_field('topiclines', XMLDB_TYPE_TEXT, 'medium', null, null, null, null, 'topics');
 			// Add field course.
 			if (!$dbman->field_exists($table, $field)) {
 				$dbman->add_field($table, $field);
@@ -127,6 +127,8 @@
 				$dbman->add_field($table, $field);
 			}
 			
+// 			$table = new xmldb_table('groupformation_q_settings');
+// 			$dbman->
 			// Once we reach this point, we can store the new version and consider the module
 			// ... upgraded to the version 2007040100 so the next time this block is skipped.
 			upgrade_mod_savepoint(true, 2015041701, 'groupformation');

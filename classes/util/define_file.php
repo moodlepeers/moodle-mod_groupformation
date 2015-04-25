@@ -15,20 +15,24 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
 /**
- * Redirect the user to the appropriate submission related page
+ * define something
  *
  * @package mod_groupformation
- * @category grade
- * @copyright 2014 Nora Wester
+ * @author  Nora Wester
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-	require_once(__DIR__ . "../../config.php");
+
+	define('CATEGORY_NAMES', array('topic', 'knowledge', 'general', 'grade','team', 'character', 'learning', 'motivation'));
+	define('MOTIVATION', 7);
+	define('TEAM', 4);
+	define('LEARNING', 6);
+	define('CHARACTER', 5);
+	define('GENERAL', 2);
+	define('KNOWLEDGE', 1);
+	define('TOPIC', 0);
+	define('GRADE', 3);
 	
-	$id = required_param('id', PARAM_INT);// Course module ID.
 
-	// Item number may be != 0 for activities that allow more than one grade per user.
-	$itemnumber = optional_param('itemnumber', 0, PARAM_INT);
-	$userid = optional_param('userid', 0, PARAM_INT); // Graded user ID (optional).
-
-	// In the simplest case just redirect to the view page.
-	redirect('view.php?id='.$id);
+	if (!defined('MOODLE_INTERNAL')) {
+		die('Direct access to this script is forbidden.');    ///  It must be included from a Moodle page
+	}

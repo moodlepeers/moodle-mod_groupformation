@@ -14,7 +14,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
-/** TODO @NW Bitte kurz beschreiben, was die index.php tut
+/**
  * @package mod_groupformation
  * @copyright 2014 Nora Wester
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -85,8 +85,6 @@
 		$table->align = array ('left');
 	}
 	
-	// TODO @NW: What is this foreach doing? (JK)
-	// Template
 	$modinfo = get_fast_modinfo($course);
 	$currentsection = '';
 	foreach ($modinfo->instances['groupformation'] as $cm) {

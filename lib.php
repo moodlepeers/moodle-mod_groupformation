@@ -24,11 +24,13 @@
 * Moodle is performing actions across all modules.
 *
 * @package mod_groupformation
-* @copyright 2014 Nora Wester
+* @author Nora Wester
 * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 */
 
 	defined('MOODLE_INTERNAL') || die();
+	
+	require_once(dirname(__FILE__).'/classes/moodle_interface/storage_manager.php');
 	
 	/**
  	* Moodle core API
@@ -78,6 +80,8 @@
 		$groupformation->id = $DB->insert_record('groupformation', $groupformation);
 		groupformation_grade_item_update($groupformation);
 		
+		groupformation_save_more_infos($groupformation, TRUE);
+		
 		return $groupformation->id;
 	}
 	
@@ -101,10 +105,15 @@
 		$groupformation->timemodified = time();
 		$groupformation->id = $groupformation->instance;
 	
-		// You may have to add extra stuff in here.
-		$result = $DB->update_record('groupformation', $groupformation);
+		//man kann nur solange etwas verändern bis die erste antwort gespeichert wurde
+		if($DB->count_records('groupformation_answer', array('groupformation' => $this->groupformationid)) == 0){
+			// You may have to add extra stuff in here.
+			$result = $DB->update_record('groupformation', $groupformation);
 		
-		groupformation_grade_item_update($groupformation);
+			groupformation_grade_item_update($groupformation);
+			groupformation_save_more_infos($groupformation, FALSE);
+		}
+		
 		
 		return $result;
 	}
@@ -454,5 +463,21 @@
 		return $groupformation;
 	}
 	
-	
+	function groupformation_save_more_infos($groupformation, $init){
+		
+		//speicher mir zusätzliche Daten ab
+		$store = new mod_groupformation_storage_manager($groupformation->id);
+		
+		$knowledgearray = array();
+		if($groupformation->knowledge != 0){
+			$knowledgearray = explode("\n", $groupformation->knowledgelines);
+		}
+		
+		$topicsarray = array();
+		if($groupformation->topics != 0){
+			$topicsarray = explode("\n", $groupformation->topiclines);
+		}
+		
+		$store->add_setting_question($knowledgearray, $topicsarray, $init);
+	}
 	
