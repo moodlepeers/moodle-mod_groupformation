@@ -23,6 +23,10 @@
  */
 
 	require_once(dirname(__FILE__).'/question_controller.php');
+	require_once(dirname(__FILE__).'/RadioTable.php');
+	require_once(dirname(__FILE__).'/TopicsTable.php');
+	require_once(dirname(__FILE__).'/PreknowledgeTable.php');
+	require_once(dirname(__FILE__).'/ValuationTable.php');
 
 	if (!defined('MOODLE_INTERNAL')) {
 		die('Direct access to this script is forbidden.');    ///  It must be included from a Moodle page
@@ -34,11 +38,19 @@
 		private $groupformationid;
 		private $lang;
 		private $question_manager;
+		private $preknowledge;
+		private $radio;
+		private $topics;
+		private $valuation;
 		
 		public function __construct($groupformationid, $lang, $userId){
 			$this->groupformationid = $groupformationid;
 			$this->lang = $lang;
 			$this->question_manager = new mod_groupformation_question_controller($groupformationid, $lang, $userId);
+			$this->preknowledge = new preKnowledge(array());
+			$this->radio = new RadioTable(array());
+			$this->valuation = new ValuationTable(array());
+			$this->topics = new TopicsTable(array());
 		}
 		
 		public function getQuestions(){
@@ -51,6 +63,25 @@
 					$question = $this->question_manager->getNextQuestion();
 						
 					var_dump($question);
+					
+					//So müsste es mal aussehen
+// 					foreach($question as $q){
+// 						if($q[0] == 'dropdown'){
+// 							$this->valuation->__printHTML($q);
+// 						}
+						
+// 						if($q[0] == 'radio'){
+// 							$this->radio->__printHTML($q);
+// 						}
+						
+// 						if($q[0] == 'typThema'){
+// 							$this->topics->__printHTML($q);
+// 						}
+						
+// 						if($q[0] == 'typVorwissen'){
+// 							$this->preknowledge->__printHTML($q);
+// 						}
+// 					}
 					
 					$optionsarray = $question[0][2];
 					$header = $question[0][1];

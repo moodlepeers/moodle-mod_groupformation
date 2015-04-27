@@ -31,6 +31,7 @@
 	defined('MOODLE_INTERNAL') || die();
 	
 	require_once(dirname(__FILE__).'/classes/moodle_interface/storage_manager.php');
+	require_once(dirname(__FILE__).'/classes/util/xml_loader.php');
 	
 	/**
  	* Moodle core API
@@ -476,6 +477,33 @@
 		$topicsarray = array();
 		if($groupformation->topics != 0){
 			$topicsarray = explode("\n", $groupformation->topiclines);
+		}
+		
+		$names = array('general', 'grade','team', 'character', 'learning', 'motivation');
+		
+		if($init){
+			
+			$xmlLoader = new mod_groupformation_xml_loader();
+			$xmlLoader->setStore($store);
+			
+			if($store->catalogTableNotSet()){
+				
+			 	foreach($names as $category){
+			 		
+		 			$array = $xmlLoader->saveData($category);
+  		 			$version = $array[0][0];
+		 			$numbers = $array[0][1];
+		 			$store->add_catalog_version($category, $numbers, $version, TRUE);
+			 	}		
+
+			}else{
+			//TODO @ALL Wenn man die Fragen ändert, ändern sie sich auch in den alten groupformation Instanzen
+			//da gibt es dann unter umständen konsistenzprobleme
+			//da müssen wir nochmal drüber reden
+				foreach($names as $category){
+					$xmlLoader->latestVersion($category);
+				}
+			}
 		}
 		
 		$store->add_setting_question($knowledgearray, $topicsarray, $init);

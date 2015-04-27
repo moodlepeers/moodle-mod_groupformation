@@ -125,6 +125,7 @@
 			// TODO @all Brauchen wir die Moodlebewertungsoptionen überhaupt? Ist ja keine Aufgabe mit Abgabe sondern die 
 			// Gruppenformation. Die Abfrage nach der Bewertungsmethode wird oben gemacht und ist ja eigentlich moodle 
 			// unspezifisch, oder? Habs vorerst mal auskommentiert.
+//muss drin bleiben, da es sonst (zumindestens bei mir) eine Fehlermeldung gibt
  			$this->standard_grading_coursemodule_elements();
 			
 			// Add standard elements, common to all modules.
