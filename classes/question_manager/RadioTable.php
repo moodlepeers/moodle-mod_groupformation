@@ -2,75 +2,114 @@
 
 class RadioTable {
 	
-	private $categorie;
-	private $token;					//categorie kürzel, für radiobutton name property, um radiobuttons je Frage zu gruppieren
-	private $optArray = array();	// Array mit den möglichen Optionen je Frage. Jede Frage hat gleiche Optionen
-	private $optNumb;
+// 	private $categorie;
+// 	private $token;					//categorie kürzel, für radiobutton name property, um radiobuttons je Frage zu gruppieren
+// 	private $optArray = array();	// Array mit den möglichen Optionen je Frage. Jede Frage hat gleiche Optionen
+// 	private $optNumb;
 	
-	private $questionsArray = array();
+// 	private $questionsArray = array();
+
+	private $category;
+	private $qnumber;
+	private $question;
+	private $optArray = array();
+	
+	
+	public function __construct($q){
+		$this->question = $q[1];
+		$this->optArray = $q[2];
+
+	}
+	
+	
+	
+	public function __printHTML($q, $cat, $qnumb){
+		$this->question = $q[1];
+		$this->optArray = $q[2];
+		$this->category = $cat;
+		$this->qnumber = $qnumb;
+		
+		echo '<tr>';
+		echo '<th scope="row">' . $this->question . '</th>';
+
+		$radioCounter = 0;
+		foreach ($this->optArray as $option){
+			echo '<td data-title="' . $option .
+				'" class="radioleft select-area"><input type="radio" name="' .
+				$this->category . $this->qnumber .
+				'" value="' . $radioCounter . '"/></td>';
+			$radioCounter++;
+		}
+		echo '</tr>';
+	}
+	
+	
+	
+	
 	
 	
 	//$tableArray Bsp. siehe unten
-	public function __construct($tableArray){
-		$this->categorie = $tableArray[0][1];
-		$this->token = $tableArray[0][2];
-		$this->optArray = $tableArray[0][3];
-		$this->optNumb = count($tableArray[0][3]);
+// 	public function __construct($tableArray){
+// 		$this->categorie = $tableArray[0][1];
+// 		$this->token = $tableArray[0][2];
+// 		$this->optArray = $tableArray[0][3];
+// 		$this->optNumb = count($tableArray[0][3]);
 		
-		$this->questionsArray = $tableArray[1];
-	}
+// 		$this->questionsArray = $tableArray[1];
+// 	}
+
 	
 	
-	public function __printHTML(){
-		echo '<div class="col_100"' .
-				' <h4 class="view_on_mobile">' . $this->categorie . '</h4>';
+// 	public function __printHTML(){
+// 		echo '<div class="col_100"' .
+// 				' <h4 class="view_on_mobile">' . $this->categorie . '</h4>';
 		
-		echo '<table class="responsive-table">' . 	//TODO @EG : CSS clase "firstCol" fehlt, width wird auf Desktop/Mobile reagieren
-													//TODO @Nora || EG : 	je nach Anzahl($optNumb) werden die entsprechenden widths in % angefügt
-													// 						in diesem Fall: 2-7 collumn sind jeweils 36%/6, 1 collumn hätte keine width sondern nur die classe="firstCol"
-					'<colgroup>				
-						<col width="64%" class="firstCol">
-                        <col width="6%">
-                        <col width="6%">
-                        <col width="6%">
-                        <col width="6%">
-                        <col width="6%">
-                        <col width="6%">
-					</colgroup>' .
-					'<thead>
-						<tr>
-							<th scope="col">' . $this->categorie . '</th>';
+// 		echo '<table class="responsive-table">' . 	//TODO @EG : CSS clase "firstCol" fehlt, width wird auf Desktop/Mobile reagieren
+// 													//TODO @Nora || EG : 	je nach Anzahl($optNumb) werden die entsprechenden widths in % angefügt
+// 													// 						in diesem Fall: 2-7 collumn sind jeweils 36%/6, 1 collumn hätte keine width sondern nur die classe="firstCol"
+// 					'<colgroup>				
+// 						<col width="64%" class="firstCol">
+//                         <col width="6%">
+//                         <col width="6%">
+//                         <col width="6%">
+//                         <col width="6%">
+//                         <col width="6%">
+//                         <col width="6%">
+// 					</colgroup>' .
+// 					'<thead>
+// 						<tr>
+// 							<th scope="col">' . $this->categorie . '</th>';
 			
-		foreach ($this->optArray as $option){
-			echo '<th scope="col">' . $option . '</th>';
-		}
+// 		foreach ($this->optArray as $option){
+// 			echo '<th scope="col">' . $option . '</th>';
+// 		}
 			
-		echo '</tr>
-            	</thead>
-            	<tbody>';
+// 		echo '</tr>
+//             	</thead>
+//             	<tbody>';
 			
-		$questionCounter = 0;
-		foreach ($this->questionsArray as $question){
-			echo '<tr>';
-			echo '<th scope="row">' . $question . '</th>';
+// 		$questionCounter = 0;
+// 		foreach ($this->questionsArray as $question){
+// 			echo '<tr>';
+// 			echo '<th scope="row">' . $question . '</th>';
 			
-			$radioCounter = 0;
-			foreach ($this->optArray as $option){
-				echo '<td data-title="' . $option . 
-					'" class="radioleft select-area"><input type="radio" name="' . 
-					$this->categorie . $questionCounter . 
-					'" value="' . $radioCounter . '"/></td>';
-				$radioCounter++;
-			}
-			$questionCounter++;
-			echo '</tr>';
-		}
+// 			$radioCounter = 0;
+// 			foreach ($this->optArray as $option){
+// 				echo '<td data-title="' . $option . 
+// 					'" class="radioleft select-area"><input type="radio" name="' . 
+// 					$this->categorie . $questionCounter . 
+// 					'" value="' . $radioCounter . '"/></td>';
+// 				$radioCounter++;
+// 			}
+// 			$questionCounter++;
+// 			echo '</tr>';
+// 		}
 			
-		echo '</tbody>
-                    </table>
-                </div>'; // /.col_100
+// 		echo '</tbody>
+//                     </table>
+//                 </div>'; // /.col_100
 		
-	}
+// 	}
 }
 
 ?>

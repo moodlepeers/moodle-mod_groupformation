@@ -42,6 +42,7 @@
 		private $radio;
 		private $topics;
 		private $valuation;
+		private $qNumber = 0; // TODO @Nora : Gibt es IDs?
 		
 		public function __construct($groupformationid, $lang, $userId){
 			$this->groupformationid = $groupformationid;
@@ -64,70 +65,67 @@
 						
 					var_dump($question);
 					
-					//So müsste es mal aussehen
-// 					foreach($question as $q){
-// 						if($q[0] == 'dropdown'){
-// 							$this->valuation->__printHTML($q);
-// 						}
-						
-// 						if($q[0] == 'radio'){
-// 							$this->radio->__printHTML($q);
-// 						}
-						
-// 						if($q[0] == 'typThema'){
-// 							$this->topics->__printHTML($q);
-// 						}
-						
-// 						if($q[0] == 'typVorwissen'){
-// 							$this->preknowledge->__printHTML($q);
-// 						}
-// 					}
+					$tableType = $question[0][0];
 					
-					$optionsarray = $question[0][2];
-					$header = $question[0][1];
-						
-					// TODO @EG: Das sollte in einer QuestionTableView-Klasse gekapselt sein, so dass wir hier nur einen Methodenaufruf haben! (JK)
 					echo '<form action="">';
 					echo '<div class="grid">
-                <div class="col_100"> ';
-					
+                			<div class="col_100"> ';
+						
 					echo ' <h4 class="view_on_mobile">' . $category . '</h4>' ;
-					
-					
+						
+						
 					echo '<table class="responsive-table">' .
-							//TODO @Nora || EG : 	je nach Anzahl($optNumb) werden die entsprechenden widths in % angefügt
-					//						in diesem Fall: 2-5 collumn sind jeweils 36%/4, 1 collumn hätte keine width sondern nur die classe="firstCol"
-					'<colgroup>
-						<col class="firstCol">
-						<col width="36%">
-					<colgroup>';
+							'<colgroup>
+						<col class="firstCol">';
+					echo '<colgroup>';
+						
+					// Tabellen - Header
 					echo '<thead>
                       <tr>
-                        <th scope="col">'. $category . '</th>
-                        <th scope="col"></th>
-                      </tr>
+                        <th scope="col">'. $category . '</th>';
+					if($tableType == 'radio'){
+						$headerOptArray = $question[0][2];
+						$headerSize = count($headerOptArray);
+					
+						echo '<th scope="col" colspan="'. $headerSize .'"><span style="float:left">'. $headerOptArray[0] .'</span>
+																			<span style="float:right">'. $headerOptArray[$headerSize - 1] .'</span></th>';
+					}
+					else{
+						echo    '<th scope="col"></th>';
+					}
+					 
+					//Tabellen Body
+					echo '</tr>
                     </thead>
                     <tbody>';
-						
-					$questionCounter = 0;
-					foreach ($question as $datarow){
-						// 				$optionCounter = 0;
-						echo '<tr>
-				<th scope="row">' . $datarow[1] . '</th>
-				<td class="center">
-						<select name="' .$category . $questionCounter . '" id="' .$category . $questionCounter . '">';
-						foreach ($optionsarray as $option){
-							echo '<option value="' . $option . '">' . $option . '</option>';
+					
+					
+					
+					//So müsste es mal aussehen
+					foreach($question as $q){
+						if($q[0] == 'dropdown'){
+							$this->valuation->__printHTML($q);
 						}
-						echo '</select>
-					</td>
-				</tr>';
-						$questionCounter ++;
+						
+						if($q[0] == 'radio'){
+							$this->radio->__printHTML($q, $category, $qNumber);
+						}
+						
+						if($q[0] == 'typThema'){
+							$this->topics->__printHTML($q);
+						}
+						
+						if($q[0] == 'typVorwissen'){
+							$this->preknowledge->__printHTML($q);
+						}
+						$qNumber++;
 					}
+						
+					
 					echo ' </tbody>
                   </table>
                 </div>';
-						
+					
 					
 					$hasAnswer = $this->question_manager->hasAnswers();
 					var_dump($hasAnswer);
