@@ -62,7 +62,6 @@
 			$mform->addHelpButton('name', 'groupformationname', 'groupformation');
 			
 			
-			$mform->addElement('text','anzahl','Anzahl',array('size' => '64','type'=>'number'));
 			// Adding the standard "intro" and "introformat" fields.
 			$this->add_intro_editor();
 			
@@ -97,7 +96,7 @@
                             
                             <div class="col_33">
                                 
-                                <input type="radio" name="szenario" id="project" value="project"  />
+                                <input type="radio" name="js_szenario" id="project" value="project"  />
                                 <label class="col_100" for="project" ><h3>Projektteams </h3>
                                     <p><small>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</small></p>
                                 </label>
@@ -105,7 +104,7 @@
                             
                             <div class="col_33">
                                 
-                                <input type="radio" name="szenario" id="homework" value="homework" />
+                                <input type="radio" name="js_szenario" id="homework" value="homework" />
                                 <label class="col_100" for="homework" ><h3>Hausaufgabengruppen </h3>
                                     <p><small>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</small></p>
                                 </label>
@@ -113,7 +112,7 @@
                             
                             <div class="col_33">
                                 
-                                <input type="radio" name="szenario" id="presentation" value="presentation" />
+                                <input type="radio" name="js_szenario" id="presentation" value="presentation" />
                                 <label class="col_100" for="presentation"><h3>Referatsgruppen </h3>
                                     <p><small>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</small></p>
                                 </label>

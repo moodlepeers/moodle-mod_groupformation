@@ -107,12 +107,17 @@
 		$groupformation->id = $groupformation->instance;
 	
 		//man kann nur solange etwas verändern bis die erste antwort gespeichert wurde
-		if($DB->count_records('groupformation_answer', array('groupformation' => $this->groupformationid)) == 0){
+		if($DB->count_records('groupformation_answer', array('groupformation' => $groupformation->id)) == 0){
 			// You may have to add extra stuff in here.
 			$result = $DB->update_record('groupformation', $groupformation);
 		
 			groupformation_grade_item_update($groupformation);
 			groupformation_save_more_infos($groupformation, FALSE);
+		}else{
+			// TODO @Eduard,Nora Wir brauchen die Möglichkeit die Anzahl an Gruppen bzw. die Gruppengröße zu ändern
+			// das wird aber bei anzeigen der Settings geregelt. Workaround für jetzt, ich kümmere mich mit Eduard drum
+			// LG René
+			return true;
 		}
 		
 		
