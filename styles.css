@@ -25,7 +25,7 @@
   padding: 0;
   margin: 0; }
 .nav li {
-  font-family: "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif;
+  font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   font-size: 1.2em;
   line-height: 4em;
   height: 4em;
@@ -168,7 +168,9 @@ footer {
 .alright {
   text-align: right; }
 
-
+.pad20 {
+  padding-left: 20px !important;
+}
 /*
 .container {
   margin: 5% 3%; }

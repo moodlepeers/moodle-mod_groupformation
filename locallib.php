@@ -39,7 +39,6 @@
 		$PAGE->requires->jquery();
 		
 		// TODO @EG hier könnten die einzelnen Scripte rein
-		
 		$PAGE->requires->js($CFG->dirroot.'/mod/groupformation/js/settings_functions.js');
 		
 	}

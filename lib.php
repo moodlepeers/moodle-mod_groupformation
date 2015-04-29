@@ -100,6 +100,8 @@
 	function groupformation_update_instance(stdClass $groupformation, mod_groupformation_mod_form $mform = null) {
 		global $DB;
 		
+		// TODO Kommentar in Wiki - zu XML Fragebögen
+		
 		// checks all fields and sets them properly
 		$groupformation = groupformation_set_fields($groupformation);
 		
