@@ -27,9 +27,13 @@
 	require_once(dirname(__FILE__).'/lib.php');
 // 	require_once ($CFG->dirroot.'/mod/feedback/lib.php');
 
-	$PAGE->requires->jquery();
 	
-	$PAGE->requires->jquery_plugin('survey-jquerfunctions', 'mod_groupformation');
+	// jQuery functions 
+	$PAGE->requires->jquery();
+	$PAGE->requires->js(new moodle_url($CFG->wwwroot . '/mod/groupformation/js/survey_functions.js'));
+// 	$PAGE->requires->js($CFG->dirroot.'/mod/groupformation/test_js.js');
+		
+// 	$PAGE->requires->jquery_plugin('survey-jquerfunctions', 'mod_groupformation');
 	
 
 	//$id = required_param('id', PARAM_INT);    // Course Module ID
@@ -85,8 +89,12 @@
 //	$PAGE->set_context($context);
 
 	
+	
 	echo $OUTPUT->header();
 
+	
+	
+	
 	// Print the tabs.
 	require('tabs.php');
 	
@@ -111,6 +119,8 @@
 		echo $OUTPUT->box(format_module_intro('groupformation', $groupformation, $cm->id), 'generalbox mod_introbox', 'groupformationintro');
 	}
 	
+	
+	
 	// Replace the following lines with you own code.
 	echo $OUTPUT->heading('Yay! It works!');
 	
@@ -120,6 +130,8 @@
 //  	$a = array();
 // 	var_dump(count($a));
 	
+
+  	
 // //  	$xmlLoader = new mod_groupformation_xml_loader();
   	$userId = $USER->id;
 	$store = new mod_groupformation_storage_manager($groupformation->id);
@@ -216,4 +228,8 @@
 // 	$xmlLoader->saveData('team', FALSE, 0);
 	//$feedbackid = groupformation_get_feedback_id($groupformation->id);
 		
+		
+		
 	echo $OUTPUT->footer();
+	
+

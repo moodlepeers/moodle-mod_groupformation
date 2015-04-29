@@ -22,6 +22,11 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+// TODO @EG hier ist Jquery eingebunden worden ohne Fehler!
+// addjQuery($PAGE);
+
+
+    
 	require_once(dirname(__FILE__).'/question_controller.php');
 	require_once(dirname(__FILE__).'/RadioTable.php');
 	require_once(dirname(__FILE__).'/TopicsTable.php');
@@ -35,6 +40,8 @@
 	class mod_groupformation_questionaire {
 
 		
+			
+		
 		private $groupformationid;
 		private $lang;
 		private $question_manager;
@@ -43,8 +50,12 @@
 		private $topics;
 		private $valuation;
 		private $qNumber = 0; // TODO @Nora : Gibt es IDs?
+			
+		
 		
 		public function __construct($groupformationid, $lang, $userId){
+			
+			
 			$this->groupformationid = $groupformationid;
 			$this->lang = $lang;
 			$this->question_manager = new mod_groupformation_question_controller($groupformationid, $lang, $userId);

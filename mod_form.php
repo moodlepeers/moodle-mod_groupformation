@@ -85,11 +85,137 @@
 	       					get_string('presentation', 'groupformation')
 	       			), null);
 	        $mform->addRule('szenario', get_string('scenario_error', 'groupformation'), 'required', null, 'client');
+	        
+	        $mform->addElement('html', '
+	        		<div class="grid">
+                    <div class="col_100">
+                        <h4 class="required">1. Bitte w&auml;hlen Sie das Szenario f&uuml;r die Gruppenformation aus.</h4>
+                    </div>
+                    
+                    <div class="szenarioradios">
+                        <div class="grid">
+                            
+                            <div class="col_33">
+                                
+                                <input type="radio" name="szenario" id="project" value="project"  />
+                                <label class="col_100" for="project" ><h3>Projektteams </h3>
+                                    <p><small>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</small></p>
+                                </label>
+                            </div>
+                            
+                            <div class="col_33">
+                                
+                                <input type="radio" name="szenario" id="homework" value="homework" />
+                                <label class="col_100" for="homework" ><h3>Hausaufgabengruppen </h3>
+                                    <p><small>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</small></p>
+                                </label>
+                            </div>
+                            
+                            <div class="col_33">
+                                
+                                <input type="radio" name="szenario" id="presentation" value="presentation" />
+                                <label class="col_100" for="presentation"><h3>Referatsgruppen </h3>
+                                    <p><small>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</small></p>
+                                </label>
+                            </div>
+                            
+                        </div> <!-- /grid  -->
+                    </div>  
+                    
+                </div> <!-- /grid  -->
+	        		
+	        		
+	        		
+	        		');
+	        
+	        
 
 	        // Adding fields for Knowledge questions
 	        $mform->addElement('checkbox', 'knowledge', get_string('knowledge', 'groupformation'));
 	        $mform->addElement('textarea', 'knowledgelines', get_string('knowledge', 'groupformation'), 'wrap="virtual" rows="10" cols="50"');
 	        $mform->disabledIf('knowledgelines', 'knowledge', 'notchecked');
+	        
+	        
+	        // Adding dynamic inputfields
+	        $mform->addElement('html', '
+	        		<div class="knowledgeWrapper">
+	        
+                        <p>Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einsch&auml;tzen sollen. Eine Vorschau des Studenten-Fragebogens finden Sie unter Vorschau. F&uuml;r Ihre Auswahl "Hausaufgabengruppen" wird das Vorwissen m&ouml;glichst varriiert in jeder Gruppe.</p>
+	        
+                            <div class="grid">
+                            <div id="prk">
+                            <div class="multi_field_wrapper persist-area">
+                                <div class="col_50">
+                                <div id="" class="btn_wrap">
+                                    <label>
+                                        <button type="button" class="add_field" title="Zeile hinzuf&uuml;gen"></button>Zeile hinzuf&uuml;gen</label>
+                                </div>
+                  
+	        
+<!--                      Die Input Felder-->
+	        
+                                        <div class="multi_fields">
+                                            <div class="multi_field" id="inputprk0">
+                                                <input class="respwidth" type="text" name="knowledge[]">
+                                                <button type="button" class="remove_field" title="Zeile entfernen"></button>
+                                            </div>
+                                            <div class="multi_field" id="inputprk1">
+                                                <input class="respwidth" type="text" name="knowledge[]">
+                                                <button type="button" class="remove_field" title="Zeile entfernen"></button>
+                                            </div>
+                                            <div class="multi_field" id="inputprk2">
+                                                <input class="respwidth" type="text" name="knowledge[]">
+                                                <button type="button" class="remove_field" title="Zeile entfernen"></button>
+                                            </div>
+                                        </div>
+                                    </div> <!-- /col_50 -->
+	        
+<!--                      Die Vorschau      -->
+                                    <div class="col_50">
+	        
+                                        <h3>Vorschau</h3>
+	        
+                                            <div class="col_100">
+                                                <h4 class="view_on_mobile">Wie sch&auml;tzen Sie Ihr pers&ouml;nliches Vorwissen in folgenden Gebieten ein?</h4>
+	        
+                                                <table class="responsive-table">
+                                                    <colgroup width="" span="">
+                                                        <col class="firstCol">
+                                                        <col width="36%">
+                                                    </colgroup>
+	        
+                                                    <thead>
+                                                      <tr>
+                                                          <th scope="col" class="">Wie sch&auml;tzen Sie Ihr pers&ouml;nliches Vorwissen in folgenden Gebieten ein?</th>
+                                                        <th scope="col"><div class="legend">0 = kein Vorwissen, 100 = sehr viel Vorwissen</div></th>
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody id="preknowledges">
+                                                      <tr class="knowlRow" id="prkRow0">
+                                                        <th scope="row">Beispiel 1</th>
+                                                        <td data-title="0 = kein Vorwissen, 100 = sehr viel Vorwissen " class="range"><span >0</span><input type="range" min="0" max="100" value="0" /><span>100</span></td>
+                                                      </tr>
+                                                    <tr class="knowlRow" id="prkRow1">
+                                                        <th scope="row">Beispiel 1</th>
+                                                        <td data-title="0 = kein Vorwissen, 100 = sehr viel Vorwissen " class="range"><span >0</span><input type="range" min="0" max="100" value="0" /><span>100</span></td>
+                                                      </tr>
+                                                    <tr class="knowlRow" id="prkRow2">
+                                                        <th scope="row">Beispiel 1</th>
+                                                        <td data-title="0 = kein Vorwissen, 100 = sehr viel Vorwissen " class="range"><span >0</span><input type="range" min="0" max="100" value="0" /><span>100</span></td>
+                                                      </tr>
+	        
+                                                    </tbody>
+                                                  </table>
+                                            </div>
+	        
+                                    </div> <!-- /col_50 -->
+                                </div>  <!-- /multi_field_wrapper-->
+                                </div> <!-- Anchor-->
+	        
+                            </div> <!-- /.grid -->
+                        </div> <!-- /.knowledge -->
+	     
+	        		');
 	        
 	        // Adding fields for topic choices
 	        $mform->addElement('checkbox', 'topics', get_string('topics', 'groupformation'));
