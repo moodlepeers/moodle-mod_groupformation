@@ -63,7 +63,7 @@
                        
                         <div class="knowledgeWrapper">
                         
-                        <p>Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einsch&auml;tzen sollen. Eine Vorschau des Studenten-Fragebogens finden Sie unter Vorschau. F&uuml;r Ihre Auswahl "Hausaufgabengruppen" wird das Vorwissen m&ouml;glichst varriiert in jeder Gruppe.</p>
+                        <p>Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einsch&auml;tzen sollen. Eine Vorschau des Studenten-Fragebogens sehen Sie rechts. F&uuml;r Ihre Auswahl "Hausaufgabengruppen" wird das Vorwissen m&ouml;glichst varriiert in jeder Gruppe.</p>
                                     
                             <div class="grid">
                             <div id="prk">    
@@ -136,7 +136,7 @@
                                 </div> <!-- Anchor-->
                                 
                             </div> <!-- /.grid -->
-                        </div> <!-- /.knowledge -->
+                        </div> <!-- /.knowledgeWrapper -->
                     </div>   <!--/col_100 -->
                     
                     
@@ -155,42 +155,61 @@
                     </div>
                     
                     
-<!--                    <div class="col_100">-->
+                    <div class="col_100">
+                       
                         <div class="topicsWrapper">
-                            <p>Themen.. </p>
-                            
+                        
+                        <p>Geben Sie hier die Themen ein, welche die Studierenden bearbeiten k&ouml;nnen. In den Frageb&ouml;gen werden die Themen nach Priorit&auml;t sortiert. Eine Vorschau sehen Sie rechts.</p>
+                                    
+                            <div class="grid">
+                            <div id="tpk">    
                             <div class="multi_field_wrapper persist-area">
-                                
-                                <div id="sticky_anchor"></div> 
-                                    <div id="" class="btn_wrap">
-                                        <label>
-                                            <button type="button" class="add_field" title="Zeile hinzuf&uuml;gen"></button>Zeile hinzuf&uuml;gen</label>
-                                        <label>
-                                            <button type="button" class="preview" id="preview_topics" title="Vorschau"></button>Vorschau</label>
-                                    </div>
-                                <div class="grid">
-                                    <div class="col_50">
-                                        
+                                <div class="col_50">
+                                <div id="" class="btn_wrap">
+                                    <label>
+                                        <button type="button" class="add_field" title="Zeile hinzuf&uuml;gen"></button>Zeile hinzuf&uuml;gen</label> 
+                                </div>
+                                   
+                                                                    
+<!--                      Die Input Felder-->
+                                    
                                         <div class="multi_fields">
-                                            <div class="multi_field">
+                                            <div class="multi_field" id="inputtopic0">
                                                 <input class="respwidth" type="text" name="topic[]">
-                                                <button type="button" class="remove_field"></button>
+                                                <button type="button" class="remove_field" title="Zeile entfernen"></button>
                                             </div>
-                                            <div class="multi_field">
+                                            <div class="multi_field" id="inputtopic1">
                                                 <input class="respwidth" type="text" name="topic[]">
-                                                <button type="button" class="remove_field"></button>
+                                                <button type="button" class="remove_field" title="Zeile entfernen"></button>
                                             </div>
-                                            <div class="multi_field">
+                                            <div class="multi_field" id="inputtopic1">
                                                 <input class="respwidth" type="text" name="topic[]">
-                                                <button type="button" class="remove_field"></button>
+                                                <button type="button" class="remove_field" title="Zeile entfernen"></button>
                                             </div>
                                         </div>
-                                    </div> <!-- /col_50 -->
-                                </div> <!-- /grid -->
+                                    </div> <!-- /col_50 -->   
+                                    
+<!--                      Die Vorschau      -->
+                                    <div class="col_50">
+                                        
+                                        <h3>Vorschau</h3>
+                    
+                                        <div class="col_100">    
+                                            <h4 class="view_on_mobile">Themenwahl</h4>
+                                            <p id="topicshead">Bitte sortieren Sie die zur Wahl stehenden Themen entsprechend Ihrer Pr&auml;ferenz, beginnend mit Ihrem bevorzugten Thema. </p>
+                                            <ul id="sortable_topics">
+                                              <li class="topicLi" id="topicLi0" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Thema 1</li>
+                                              <li class="topicLi" id="topicLi1" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Thema 2</li>
+                                              <li class="topicLi" id="topicLi2" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Thema 3</li>
+                                            </ul>
+                                        </div>
+                                    </div> <!-- /col_50 --> 
+                                </div>  <!-- /multi_field_wrapper-->
+                                </div> <!-- Anchor-->
                                 
-                            </div>   
-                        </div>
-<!--                    </div>-->
+                            </div> <!-- /.grid -->
+                        </div> <!-- /.topicWrapper -->
+                    </div>   <!--/col_100 -->
                     
                     
                     
