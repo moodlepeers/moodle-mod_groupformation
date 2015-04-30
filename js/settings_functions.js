@@ -20,6 +20,15 @@ $(document).ready(function() {
     // TODO @Eduard hier hab ich das reaktive mal begonnen, doch es muss ja generisch für alle auftauchenden Zeilen sein
     // Ich dachte man könnte vllt eine Zeile und die entsprechende VorschauZeile hidden bereit halten und immer kopieren mit umbenannter ID
     // kann man solche angelegten Dokumente denn dann auch mit Jquery funktionen wie dem keyup verknüpfen? Muss man ja um den Inhalt in die Vorschau zu bekommen
+    // @Rene ich benutze auch keyup. Es gibt jedoch noch eine feature Funktion. Dabei soll eine neue Zeile auftauchen, wenn eine Eingabe erfolgt ist. 
+    // So müsste man den + Button nicht mehr betätigen. Wenn ich einfach nur keyup nutze würde man mit jedem neuen Buchstabe eine Zeile generieren. 
+    // Ich habe es mir folgendermassen überlegt: 
+    // Man prüft und übergibt ein mal bei "focus" die Id der Zeile in der gerade die Eingabe erfolgt. Bei "keyup" wird die Eingabe an die 
+    // Vorschau und den tatsächlichen Textfeld der versteckt ist übergeben. Eine neue Zeile wird nur dann generiert wenn es keine Zeilen mit höherer ID(der jetzigen Zeile) gibt.
+    // Momentan ist die Übergabe der Eingabe nicht implementiert. Die Vorschau der Themen und Vorwissen haben unterschiedliche HTML Struktur,
+    // trotzdem versuche ich diese generisch zu machen. 
+    
+    
     $('#js_id_knowledge').keyup(function () {
     	$('#prkRow0_span').html($('#js_id_knowledge').val());
     
@@ -28,6 +37,7 @@ $(document).ready(function() {
     $('#id_js_knowledge').click(function(){
     	$('#id_knowledge').trigger('click');
     });
+    
     //toggle with checkbox
     $('input[type="checkbox"]').click(function(){
             if($(this).attr("value")=="wantKnowledge"){

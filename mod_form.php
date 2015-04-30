@@ -203,95 +203,300 @@
                     </div>
 			
                 </div> <!-- /grid  -->
-	     
-	     
-	     
+
 	        		');
+			
+			//add Checkbox Preknowledge
 			$mform->addElement('html', '
 					<div class="col_100">
-                        <h4 class="optional"><input name="js_knowledge" type="checkbox" value="1" id="id_js_knowledge">
-                    	'.get_string('knowledge_description','groupformation').'
-						</h4>
-					</div>');
-			// Adding dynamic inputfields
+                        <h4 class="optional"><label for="wantKnowledge">
+                          <input type="checkbox" name="chbKnowledge" value="wantKnowledge">
+                          '.get_string('knowledge_description','groupformation').'</h4>
+                        </label> 
+                    </div>');
+
+			
+			//add dynamic Inputfields Preknowledge and Preview
 			$mform->addElement('html', '
-	        		<div class="knowledgeWrapper">
-	    
+					<div class="grid">
+                    <div class="col_100">
+                       
+                        <div class="knowledgeWrapper">
+                        
                         <p>'.get_string('knowledge_description_extended','groupformation').'</p>
-	    
+                                    
                             <div class="grid">
-                            <div id="prk">
+                            <div id="prk">    
                             <div class="multi_field_wrapper persist-area">
                                 <div class="col_50">
                                 <div id="" class="btn_wrap">
                                     <label>
-                                        <button type="button" class="add_field" title="'.get_string('add_line','groupformation').'"></button>'.get_string('add_line','groupformation').'</label>
+                                        <button type="button" class="add_field"></button>'.get_string('add_line','groupformation').'</label> 
                                 </div>
-			
-	    
+                                   
+                                                                    
 <!--                      Die Input Felder-->
-	    
+                                    
                                         <div class="multi_fields">
                                             <div class="multi_field" id="inputprk0">
-                                                <input class="respwidth" type="text" name="knowledge[]" id="js_id_knowledge">
-                                                <button type="button" class="remove_field" title="'.get_string('remove_line','groupformation').'"></button>
+                                                <input class="respwidth" type="text" name="knowledge[]">
+                                                <button type="button" class="remove_field"></button>
                                             </div>
                                             <div class="multi_field" id="inputprk1">
                                                 <input class="respwidth" type="text" name="knowledge[]">
-                                                <button type="button" class="remove_field" title="'.get_string('remove_line','groupformation').'"></button>
+                                                <button type="button" class="remove_field"></button>
                                             </div>
                                             <div class="multi_field" id="inputprk2">
                                                 <input class="respwidth" type="text" name="knowledge[]">
-                                                <button type="button" class="remove_field" title="'.get_string('remove_line','groupformation').'"></button>
+                                                <button type="button" class="remove_field"></button>
                                             </div>
                                         </div>
-                                    </div> <!-- /col_50 -->
-	    
+                                    </div> <!-- /col_50 -->   
+                                    
 <!--                      Die Vorschau      -->
                                     <div class="col_50">
-	    
+                                        
                                         <h3>'.get_string('preview','groupformation').'</h3>
-	    
+                    
                                             <div class="col_100">'.
 //                                                 '<h4 class="view_on_mobile">'.get_string('knowledge_question','groupformation').'</h4>'.
-												'<table class="responsive-table">
-                                                    <colgroup width="" span="">
+					
+                                                '<table class="responsive-table">
+                                                    <colgroup>
                                                         <col class="firstCol">
                                                         <col width="36%">
                                                     </colgroup>
-	    
+
                                                     <thead>
                                                       <tr>
-                                                          <th scope="col" class="">'.get_string('knowledge_question','groupformation').'</th>
+                                                          <th scope="col">'.get_string('knowledge_question','groupformation').'</th>
                                                         <th scope="col"><div class="legend">'.get_string('knowledge_scale','groupformation').'</div></th>
                                                       </tr>
                                                     </thead>
                                                     <tbody id="preknowledges">
                                                       <tr class="knowlRow" id="prkRow0">
-                                                        <th scope="row"><span id="prkRow0_span">Beispiel</span></th>
+                                                        <th scope="row">Beispiel 1</th>
                                                         <td data-title="'.get_string('knowledge_scale','groupformation').'" class="range"><span >0</span><input type="range" min="0" max="100" value="0" /><span>100</span></td>
                                                       </tr>
                                                     <tr class="knowlRow" id="prkRow1">
-                                                        <th scope="row"><span id="prkRow1_span">Beispiel</span></th>
+                                                        <th scope="row">Beispiel 1</th>
                                                         <td data-title="'.get_string('knowledge_scale','groupformation').'" class="range"><span >0</span><input type="range" min="0" max="100" value="0" /><span>100</span></td>
                                                       </tr>
                                                     <tr class="knowlRow" id="prkRow2">
-                                                        <th scope="row"><span id="prkRow2_span">Beispiel</span></th>
+                                                        <th scope="row">Beispiel 1</th>
                                                         <td data-title="'.get_string('knowledge_scale','groupformation').'" class="range"><span >0</span><input type="range" min="0" max="100" value="0" /><span>100</span></td>
                                                       </tr>
-	    
+                                                      
                                                     </tbody>
                                                   </table>
                                             </div>
-	    
-                                    </div> <!-- /col_50 -->
+
+                                    </div> <!-- /col_50 --> 
                                 </div>  <!-- /multi_field_wrapper-->
                                 </div> <!-- Anchor-->
-	    
+                                
                             </div> <!-- /.grid -->
-                        </div> <!-- /.knowledge -->
+                        </div> <!-- /.knowledgeWrapper -->
+                    </div>   <!--/col_100 -->
+                </div> <!-- /grid --> 
+                ');
 			
-	        		');
+
+			//add checkbox Topics
+			$mform->addElement('html', '
+                <div class="grid">
+                    
+                    <div class="col_100">
+                        <h4 class="optional"><label for="wantTopics">
+                          <input type="checkbox" name="chbTopics" value="wantTopics">
+                          '.get_string('topics_description','groupformation').'</h4>
+                        </label> 
+                    </div>');
+			
+			//add dynamic Inputfields Topics with Preview
+			$mform->addElement('html', '                    
+                    <div class="col_100">
+                        <div class="topicsWrapper">
+                        <p>'.get_string('topics_description_extended','groupformation').'</p>
+                                    
+                            <div class="grid">
+                            <div id="tpk">    
+                            <div class="multi_field_wrapper persist-area">
+                                <div class="col_50">
+                                <div id="" class="btn_wrap">
+                                    <label>
+                                        <button type="button" class="add_field"></button>'.get_string('add_line','groupformation').'</label> 
+                                </div>
+                                   
+                                                                    
+<!--                      Die Input Felder-->
+                                    
+                                        <div class="multi_fields">
+                                            <div class="multi_field" id="inputtopic0">
+                                                <input class="respwidth" type="text" name="topic[]">
+                                                <button type="button" class="remove_field"></button>
+                                            </div>
+                                            <div class="multi_field" id="inputtopic1">
+                                                <input class="respwidth" type="text" name="topic[]">
+                                                <button type="button" class="remove_field"></button>
+                                            </div>
+                                            <div class="multi_field" id="inputtopic1">
+                                                <input class="respwidth" type="text" name="topic[]">
+                                                <button type="button" class="remove_field"></button>
+                                            </div>
+                                        </div>
+                                    </div> <!-- /col_50 -->   
+                                    
+<!--                      Die Vorschau      -->
+                                    <div class="col_50">
+                                        
+                                        <h3>'.get_string('preview','groupformation').'</h3>
+                    
+                                        <div class="col_100">'.    
+//                                         '<h4 class="view_on_mobile">'.get_string('topics_question','groupformation').'</h4>'.
+					
+                                           '<p id="topicshead">'.get_string('knowledge_question','groupformation').'</p>
+                                            <ul id="sortable_topics">
+                                              <li class="topicLi" id="topicLi0"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Thema 1</li>
+                                              <li class="topicLi" id="topicLi1"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Thema 2</li>
+                                              <li class="topicLi" id="topicLi2"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Thema 3</li>
+                                            </ul>
+                                        </div>
+                                    </div> <!-- /col_50 --> 
+                                </div>  <!-- /multi_field_wrapper-->
+                                </div> <!-- Anchor-->
+                                
+                            </div> <!-- /.grid -->
+                        </div> <!-- /.topicWrapper -->
+                    </div>   <!--/col_100 -->
+                </div>  <!-- /grid --> 
+					');
+                
+
+			//add Groupsize Options
+			$mform->addElement('html', '
+                <div class="grid option_row">
+
+                    <div class="col_33 ">
+                        <h4 class="optional">Gruppen Einstellungen<span class="toolt" tooltip="Diese Option kann bei Gruppenbildung optimiert werden, nachdem die Frageb&ouml;gen ausgef&uuml;hlt wurden"></span></h4>
+                    </div>
+
+                    <div class="col_33" ><label><input type="radio" name="group_opt" id="group_opt_size" value="group_size" checked="checked" />
+                                Max. Gruppengr&ouml;&szlig;e</label><input type="number" class="group_opt" id="group_size" min="0" max="100" value="0" /></div>
+                    <div class="col_33"><label><input type="radio" name="group_opt" id="group_opt_numb" value="numb_of_groups"/>
+                                Max. Gruppenanzahl</label><input type="number" class="group_opt" id="numb_of_groups"  min="0" max="100" value="0" disabled="disabled" /></div>
+                </div> <!-- /grid -->
+                ');
+					
+
+			// add Evaluation Options
+			$mform->addElement('html', '
+                
+                <div class="grid option_row">
+
+                    <div class="col_33">
+                        <h4 class="required">Wie bewerten Sie die Arbeit?</h4>
+                    </div>
+                    <div class="col_66">
+                        <select name="valuation" id="valuation">
+                            <option value="grades">Noten</option>
+                            <option value="points">Punkte</option>
+                            <option value="justpass">Nur bestehen</option>
+                            <option value="novaluation">keine Bewertung</option>
+                        </select>
+                    </div>
+
+                </div> <!-- /grid -->
+                ');
+                
+			
+			
+			
+// 			$mform->addElement('html', '
+// 					<div class="col_100">
+//                         <h4 class="optional"><input name="js_knowledge" type="checkbox" value="1" id="id_js_knowledge">
+//                     	'.get_string('knowledge_description','groupformation').'
+// 						</h4>
+// 					</div>');
+// 			// Adding dynamic inputfields
+// 			$mform->addElement('html', '
+// 	        		<div class="knowledgeWrapper">
+	    
+//                         <p>'.get_string('knowledge_description_extended','groupformation').'</p>
+	    
+//                             <div class="grid">
+//                             <div id="prk">
+//                             <div class="multi_field_wrapper persist-area">
+//                                 <div class="col_50">
+//                                 <div id="" class="btn_wrap">
+//                                     <label>
+//                                         <button type="button" class="add_field" title="'.get_string('add_line','groupformation').'"></button>'.get_string('add_line','groupformation').'</label>
+//                                 </div>
+			
+	    
+// <!--                      Die Input Felder-->
+	    
+//                                         <div class="multi_fields">
+//                                             <div class="multi_field" id="inputprk0">
+//                                                 <input class="respwidth" type="text" name="knowledge[]" id="js_id_knowledge">
+//                                                 <button type="button" class="remove_field" title="'.get_string('remove_line','groupformation').'"></button>
+//                                             </div>
+//                                             <div class="multi_field" id="inputprk1">
+//                                                 <input class="respwidth" type="text" name="knowledge[]">
+//                                                 <button type="button" class="remove_field" title="'.get_string('remove_line','groupformation').'"></button>
+//                                             </div>
+//                                             <div class="multi_field" id="inputprk2">
+//                                                 <input class="respwidth" type="text" name="knowledge[]">
+//                                                 <button type="button" class="remove_field" title="'.get_string('remove_line','groupformation').'"></button>
+//                                             </div>
+//                                         </div>
+//                                     </div> <!-- /col_50 -->
+	    
+// <!--                      Die Vorschau      -->
+//                                     <div class="col_50">
+	    
+//                                         <h3>'.get_string('preview','groupformation').'</h3>
+	    
+//                                             <div class="col_100">'.
+// //                                                 '<h4 class="view_on_mobile">'.get_string('knowledge_question','groupformation').'</h4>'.
+// 												'<table class="responsive-table">
+//                                                     <colgroup width="" span="">
+//                                                         <col class="firstCol">
+//                                                         <col width="36%">
+//                                                     </colgroup>
+	    
+//                                                     <thead>
+//                                                       <tr>
+//                                                           <th scope="col" class="">'.get_string('knowledge_question','groupformation').'</th>
+//                                                         <th scope="col"><div class="legend">'.get_string('knowledge_scale','groupformation').'</div></th>
+//                                                       </tr>
+//                                                     </thead>
+//                                                     <tbody id="preknowledges">
+//                                                       <tr class="knowlRow" id="prkRow0">
+//                                                         <th scope="row"><span id="prkRow0_span">Beispiel</span></th>
+//                                                         <td data-title="'.get_string('knowledge_scale','groupformation').'" class="range"><span >0</span><input type="range" min="0" max="100" value="0" /><span>100</span></td>
+//                                                       </tr>
+//                                                     <tr class="knowlRow" id="prkRow1">
+//                                                         <th scope="row"><span id="prkRow1_span">Beispiel</span></th>
+//                                                         <td data-title="'.get_string('knowledge_scale','groupformation').'" class="range"><span >0</span><input type="range" min="0" max="100" value="0" /><span>100</span></td>
+//                                                       </tr>
+//                                                     <tr class="knowlRow" id="prkRow2">
+//                                                         <th scope="row"><span id="prkRow2_span">Beispiel</span></th>
+//                                                         <td data-title="'.get_string('knowledge_scale','groupformation').'" class="range"><span >0</span><input type="range" min="0" max="100" value="0" /><span>100</span></td>
+//                                                       </tr>
+	    
+//                                                     </tbody>
+//                                                   </table>
+//                                             </div>
+	    
+//                                     </div> <!-- /col_50 -->
+//                                 </div>  <!-- /multi_field_wrapper-->
+//                                 </div> <!-- Anchor-->
+	    
+//                             </div> <!-- /.grid -->
+//                         </div> <!-- /.knowledge -->
+			
+// 	        		');
 			 
 			 
 				
