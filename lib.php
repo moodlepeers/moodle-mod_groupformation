@@ -75,13 +75,13 @@
 		$groupformation->timecreated = time();
 		
 		// checks all fields and sets them properly
-		$groupformation = groupformation_set_fields($groupformation);
+		groupformation_set_fields($groupformation);
 		
 		// You may have to add extra stuff in here.
 		$groupformation->id = $DB->insert_record('groupformation', $groupformation);
 		groupformation_grade_item_update($groupformation);
 		
-		groupformation_save_more_infos($groupformation, TRUE);
+// 		groupformation_save_more_infos($groupformation, TRUE);
 		
 		return $groupformation->id;
 	}
@@ -103,11 +103,11 @@
 		// TODO Kommentar in Wiki - zu XML Fragebögen
 		
 		// checks all fields and sets them properly
-		$groupformation = groupformation_set_fields($groupformation);
+		groupformation_set_fields($groupformation);
 		
 		$groupformation->timemodified = time();
 		$groupformation->id = $groupformation->instance;
-	
+		/*
 		//man kann nur solange etwas verändern bis die erste antwort gespeichert wurde
 		if($DB->count_records('groupformation_answer', array('groupformation' => $groupformation->id)) == 0){
 			// You may have to add extra stuff in here.
@@ -121,6 +121,13 @@
 			// LG René
 			return true;
 		}
+		*/
+		// You may have to add extra stuff in here.
+		$result = $DB->update_record('groupformation', $groupformation);
+		
+		groupformation_grade_item_update($groupformation);
+		
+// 		groupformation_save_more_infos($groupformation, FALSE);
 		
 		
 		return $result;
@@ -446,19 +453,20 @@
 	 * @param $groupformation
 	 * @return $groupformation
 	 */
-	function groupformation_set_fields($groupformation){
+	function groupformation_set_fields(&$groupformation){
 		
-		if (!isset($groupformation->knowledge)){
+		if (!isset($mform->knowledge)){
 			$groupformation->knowledge = 0;
 			$groupformation->knowledgelines = "";
-		}elseif ($groupformation->knowledge==0){
+		}elseif ($mform->knowledge==0){
 			$groupformation->knowledgelines = "";
 		}
 		
-		if (!isset($groupformation->topics)){
+		if (!isset($mform->topics)){
 			$groupformation->topics = 0;
 			$groupformation->topiclines = "";
-		}elseif ($groupformation->topics==0){
+		}elseif ($mform->topics==0){
+			$groupformation->topics = 0;
 			$groupformation->topiclines = "";
 		}
 		
@@ -468,7 +476,6 @@
 			$groupformation->maxgroups = 0;
 		}
 		
-		return $groupformation;
 	}
 	
 	function groupformation_save_more_infos($groupformation, $init){

@@ -4,18 +4,21 @@ $(document).ready(function() {
     // if css attribute "display:none" and show on validation error, they will not displayed properly
     $(".errors p").hide();
     
-    $("#fitem_id_szenario").hide();
-    $("#fitem_id_knowledge").hide();
-    $("#fitem_id_knowledgelines").hide();
+    //$("#fitem_id_szenario").hide();
+    //$("#fitem_id_knowledge").hide();
+    //$("#fitem_id_knowledgelines").hide();
     var topicCounter = 3; //counts topics to make group numbers
     
     var preknwCounter = 3;
     
     //$('#fitem_id_knowledge').insertBefore('.knowledgeWrapper');
     
-    $('#id_knowledge').click(function(){
-    	$(".knowledgeWrapper").toggle();
-    });
+//    $('#id_js_knowledge').click(function(){
+//    	$(".knowledgeWrapper").toggle();
+//    });
+//    $('#id_js_topics').click(function(){
+//    	$(".topicsWrapper").toggle();
+//    });
     
     // TODO @Eduard hier hab ich das reaktive mal begonnen, doch es muss ja generisch für alle auftauchenden Zeilen sein
     // Ich dachte man könnte vllt eine Zeile und die entsprechende VorschauZeile hidden bereit halten und immer kopieren mit umbenannter ID
@@ -36,6 +39,9 @@ $(document).ready(function() {
     
     $('#id_js_knowledge').click(function(){
     	$('#id_knowledge').trigger('click');
+    });
+    $('#id_js_topics').click(function(){
+    	$('#id_topics').trigger('click');
     });
     
     //toggle with checkbox

@@ -79,9 +79,9 @@
 	        $mform->addElement('select', 'szenario', get_string('scenario', 'groupformation'), 
 	       			array(
 	       					get_string('choose_scenario','groupformation'),
-	       					get_string('project', 'groupformation'),
-	       					get_string('homework', 'groupformation'),
-	       					get_string('presentation', 'groupformation')
+	       					get_string('scenario_projectteams', 'groupformation'),
+	       					get_string('scenario_homeworkgroups', 'groupformation'),
+	       					get_string('scenario_presentationgroups', 'groupformation')
 	       			), null);
 	        $mform->addRule('szenario', get_string('scenario_error', 'groupformation'), 'required', null, 'client');
 	        
@@ -110,7 +110,7 @@
 	        $mform->addElement('select', 'maxgroups', get_string('maxgroups', 'groupformation'), $options, null);
 
 	        // Adding field for evaluation method
-	        $mform->addElement('select', 'evaluationmethod', get_string('evaluationmethod', 'groupformation'),
+	        $mform->addElement('select', 'evaluationmethod', get_string('evaluationmethod_description', 'groupformation'),
 	        		array(
 	        				get_string('choose_evaluationmethod', 'groupformation'),
 	        				get_string('grades', 'groupformation'),
@@ -126,7 +126,7 @@
 			// TODO @all Brauchen wir die Moodlebewertungsoptionen überhaupt? Ist ja keine Aufgabe mit Abgabe sondern die 
 			// Gruppenformation. Die Abfrage nach der Bewertungsmethode wird oben gemacht und ist ja eigentlich moodle 
 			// unspezifisch, oder? Habs vorerst mal auskommentiert.
-//muss drin bleiben, da es sonst (zumindestens bei mir) eine Fehlermeldung gibt        
+			//muss drin bleiben, da es sonst (zumindestens bei mir) eine Fehlermeldung gibt        
  			$this->standard_grading_coursemodule_elements();
 			
 			// Add standard elements, common to all modules.
@@ -210,7 +210,7 @@
 			$mform->addElement('html', '
 					<div class="col_100">
                         <h4 class="optional"><label for="wantKnowledge">
-                          <input type="checkbox" name="chbKnowledge" value="wantKnowledge">
+                          <input type="checkbox" id="id_js_knowledge" name="chbKnowledge" value="wantKnowledge">
                           '.get_string('knowledge_description','groupformation').'</h4>
                         </label> 
                     </div>');
@@ -308,7 +308,7 @@
                     
                     <div class="col_100">
                         <h4 class="optional"><label for="wantTopics">
-                          <input type="checkbox" name="chbTopics" value="wantTopics">
+                          <input type="checkbox" id="id_js_topics" name="chbTopics" value="wantTopics">
                           '.get_string('topics_description','groupformation').'</h4>
                         </label> 
                     </div>');
@@ -355,7 +355,7 @@
                                         <div class="col_100">'.    
 //                                         '<h4 class="view_on_mobile">'.get_string('topics_question','groupformation').'</h4>'.
 					
-                                           '<p id="topicshead">'.get_string('knowledge_question','groupformation').'</p>
+                                           '<p id="topicshead">'.get_string('topics_question','groupformation').'</p>
                                             <ul id="sortable_topics">
                                               <li class="topicLi" id="topicLi0"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Thema 1</li>
                                               <li class="topicLi" id="topicLi1"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Thema 2</li>
@@ -378,13 +378,13 @@
                 <div class="grid option_row">
 
                     <div class="col_33 ">
-                        <h4 class="optional">Gruppen Einstellungen<span class="toolt" tooltip="Diese Option kann bei Gruppenbildung optimiert werden, nachdem die Frageb&ouml;gen ausgef&uuml;hlt wurden"></span></h4>
+                        <h4 class="optional">'.get_string('groupoption_description','groupformation').'<span class="toolt" tooltip="'.get_string('groupoption_help','groupformation').'"></span></h4>
                     </div>
 
                     <div class="col_33" ><label><input type="radio" name="group_opt" id="group_opt_size" value="group_size" checked="checked" />
-                                Max. Gruppengr&ouml;&szlig;e</label><input type="number" class="group_opt" id="group_size" min="0" max="100" value="0" /></div>
+                                '.get_string('maxmembers','groupformation').'</label><input type="number" class="group_opt" id="group_size" min="0" max="100" value="0" /></div>
                     <div class="col_33"><label><input type="radio" name="group_opt" id="group_opt_numb" value="numb_of_groups"/>
-                                Max. Gruppenanzahl</label><input type="number" class="group_opt" id="numb_of_groups"  min="0" max="100" value="0" disabled="disabled" /></div>
+                                '.get_string('maxgroups','groupformation').'</label><input type="number" class="group_opt" id="numb_of_groups"  min="0" max="100" value="0" disabled="disabled" /></div>
                 </div> <!-- /grid -->
                 ');
 					
@@ -395,14 +395,15 @@
                 <div class="grid option_row">
 
                     <div class="col_33">
-                        <h4 class="required">Wie bewerten Sie die Arbeit?</h4>
+                        <h4 class="required">'.get_string('evaluationmethod_description','groupformation').'</h4>
                     </div>
                     <div class="col_66">
-                        <select name="valuation" id="valuation">
-                            <option value="grades">Noten</option>
-                            <option value="points">Punkte</option>
-                            <option value="justpass">Nur bestehen</option>
-                            <option value="novaluation">keine Bewertung</option>
+                        <select name="evaluation" id="evaluation">
+							<option value="choose_evaluationmethod">'.get_string('choose_evaluationmethod','groupformation').'</option>
+                            <option value="grades">'.get_string('grades','groupformation').'</option>
+                            <option value="points">'.get_string('points','groupformation').'</option>
+                            <option value="justpass">'.get_string('justpass','groupformation').'</option>
+                            <option value="novaluation">'.get_string('noevaluation','groupformation').'</option>
                         </select>
                     </div>
 
