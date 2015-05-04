@@ -46,7 +46,7 @@
 			$commitedNoneComplete = $this->userid_filter->getNumberOfCommitedNoneCompleted();
 			var_dump('Von den fest abgegebenen Antworten sind ' . $commitedNoneComplete . ' nicht vollständig');
 			$generalCompleted = $this->userid_filter->getNumberOfCompleted();
-			var_dump('Generel gibt es ' . $generalCompleted . 'vollständig beantwortete Fragebögen');
+			var_dump('Generel gibt es ' . $generalCompleted . ' vollst&auml;ndig beantwortete Fragebögen');
 		}
 		
 	}

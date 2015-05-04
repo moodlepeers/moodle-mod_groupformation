@@ -146,6 +146,7 @@
 				if($this->currentCategoryPosition == TOPIC || $this->currentCategoryPosition == KNOWLEDGE){
 					
  						$temp = $this->store->getDozentQuestion($this->names[$this->currentCategoryPosition]);
+ 						//var_dump("bin drin");
  						//var_dump($temp);
 						$values = $this->xml->xmlToArray('<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>');
 						

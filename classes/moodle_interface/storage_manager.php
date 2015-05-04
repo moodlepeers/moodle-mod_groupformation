@@ -104,6 +104,8 @@
 			foreach($records as $record){
 				$array[] = $record->userid;
 			}
+			
+			return $array;
 		}
 		
 		public function answerNumberForUser($userId){
@@ -191,7 +193,7 @@
 		public function getDozentQuestion($category){
 			global $DB;
 			
-			return $DB->get_field('groupformation_q_settings', $category . 'values', array('id' => $this->groupformationid));
+			return $DB->get_field('groupformation_q_settings', $category . 'values', array('groupformation' => $this->groupformationid));
 		}
 		
 		public function getCatalogQuestion($i, $category = 'general', $lang = 'en'){

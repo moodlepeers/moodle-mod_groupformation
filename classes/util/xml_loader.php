@@ -57,8 +57,8 @@
 		}
 		
 		public function latestVersion($category){
-			
-			$xmlFile = 'xml_question/question_de_'.$category.'.xml';
+			global $CFG;
+			$xmlFile = $CFG->dirroot.'/mod/groupformation/xml_question/question_de_'.$category.'.xml';
 				
 			if (file_exists($xmlFile)) {
 				$xml = simplexml_load_file($xmlFile);
@@ -81,8 +81,8 @@
 		 * @param unknown $german bool ob deutsch oder nicht 
 		 */
 		private function save($category, $lang){
-			
-			$xmlFile = 'xml_question/question_'.$lang.'_'.$category.'.xml';
+			global $CFG;
+			$xmlFile = $CFG->dirroot.'/mod/groupformation/xml_question/question_'.$lang.'_'.$category.'.xml';
 			
 			$return = array();
 			
