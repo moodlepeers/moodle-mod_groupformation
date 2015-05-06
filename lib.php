@@ -75,7 +75,7 @@
 		$groupformation->timecreated = time();
 		
 		// checks all fields and sets them properly
-		$groupformation = groupformation_set_fields($groupformation, $mform);
+		$groupformation = groupformation_set_fields($groupformation);
 		
 		// You may have to add extra stuff in here.
 		$groupformation->id = $DB->insert_record('groupformation', $groupformation);
@@ -103,7 +103,7 @@
 		// TODO Kommentar in Wiki - zu XML Fragebögen
 		
 		// checks all fields and sets them properly
-		$groupformation = groupformation_set_fields($groupformation,$mform);
+		$groupformation = groupformation_set_fields($groupformation);
 		
 		$groupformation->timemodified = time();
 		$groupformation->id = $groupformation->instance;
@@ -453,7 +453,7 @@
 	 * @param $groupformation
 	 * @return $groupformation
 	 */
-	function groupformation_set_fields(stdClass $groupformation, mod_groupformation_mod_form $mform){
+	function groupformation_set_fields($groupformation){
 		
 		if ($groupformation->knowledge == 0){
 			$groupformation->knowledge = 0;
