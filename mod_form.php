@@ -402,7 +402,7 @@
                         <h4 class="required">'.get_string('evaluationmethod_description','groupformation').'</h4>
                     </div>
                     <div class="col_66">
-                        <select name="evaluationmethod" id="js_evaluationmethod">
+                        <select name="js_evaluationmethod" id="js_evaluationmethod">
 							<option value="0">'.get_string('choose_evaluationmethod','groupformation').'</option>
                             <option value="1">'.get_string('grades','groupformation').'</option>
                             <option value="2">'.get_string('points','groupformation').'</option>
