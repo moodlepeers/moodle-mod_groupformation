@@ -64,10 +64,30 @@ $(document).ready(function() {
     	$(".js_topicsWrapper").toggle();
     }
     
-    $('#js_szenario').change(function() {
-    	alert( this.value ); // or $(this).val()
+    $('#js_evaluationmethod').val($('#id_evaluationmethod').val());
+    $('#group_size').val($('#id_maxmembers').val());
+    $('#numb_of_groups').val($('#id_maxgroups').val());
+    
+    // change of evaluationmethod in js changes non-js field
+    $('#js_evaluationmethod').change(function() {
+    	$('#id_evaluationmethod').val( this.value);
     });
     
+    // change of numb_of_groups in js changes non-js field
+    $('#numb_of_groups').keyup(function() {
+    	$('#id_maxgroups').val(parseInt(this.value));
+    });
+    $('#numb_of_groups').change(function() {
+    	$('#id_maxgroups').val(this.value);
+    });
+    
+    // change of group_size in js changes non-js field
+    $('#group_size').keyup(function() {
+    	$('#id_maxmembers').val(parseInt(this.value));
+    });
+    $('#group_size').change(function() {
+    	$('#id_maxmembers').val(this.value);
+    });
     
     //toggle with checkbox
     $('input[type="checkbox"]').click(function(){
@@ -172,15 +192,16 @@ $(document).ready(function() {
         // disable all inputs in .second and set value to 0
         $('.' + $(this).attr('name')).attr('disabled', 'disabled');
         $('.' + $(this).attr('name')).val(0);
-        
         // enable the current input .second
         $('#'+$(this).val()).removeAttr('disabled');
         
         // click non-js radio buttons
-        if ($(this).val()=='group_size'){
+        if ($(this).prop('id')=='group_opt_size'){
         	$('#id_groupoption_0').click();
+        	$('#id_maxgroups').val(0);
         }else{
         	$('#id_groupoption_1').click();
+            $('#id_maxmembers').val(0);
         }
     });
 

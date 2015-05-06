@@ -103,7 +103,7 @@
 			$mform->addRule('radioar', get_string('maxmembers_error', 'groupformation'), 'required', null, 'client');
 	        $options = array();
 			$options[0] = get_string('choose_number', 'groupformation');
-	        for ($i = 1; $i <= 20; $i ++) {
+	        for ($i = 1; $i <= 100; $i ++) {
 	            $options[$i] = $i;
 	        }
 	        $mform->addElement('select', 'maxmembers', get_string('maxmembers', 'groupformation'), $options, null);
@@ -402,12 +402,12 @@
                         <h4 class="required">'.get_string('evaluationmethod_description','groupformation').'</h4>
                     </div>
                     <div class="col_66">
-                        <select name="evaluation" id="evaluation">
-							<option value="choose_evaluationmethod">'.get_string('choose_evaluationmethod','groupformation').'</option>
-                            <option value="grades">'.get_string('grades','groupformation').'</option>
-                            <option value="points">'.get_string('points','groupformation').'</option>
-                            <option value="justpass">'.get_string('justpass','groupformation').'</option>
-                            <option value="novaluation">'.get_string('noevaluation','groupformation').'</option>
+                        <select name="evaluationmethod" id="js_evaluationmethod">
+							<option value="0">'.get_string('choose_evaluationmethod','groupformation').'</option>
+                            <option value="1">'.get_string('grades','groupformation').'</option>
+                            <option value="2">'.get_string('points','groupformation').'</option>
+                            <option value="3">'.get_string('justpass','groupformation').'</option>
+                            <option value="4">'.get_string('noevaluation','groupformation').'</option>
                         </select>
                     </div>
 
