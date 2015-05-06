@@ -39,6 +39,7 @@ $(document).ready(function() {
     
     $('#id_js_knowledge').click(function(){
     	$('#id_knowledge').trigger('click');
+    	$(".knowledgeWrapper").toggle();
     });
     $('#id_js_topics').click(function(){
     	$('#id_topics').trigger('click');
@@ -46,9 +47,6 @@ $(document).ready(function() {
     
     //toggle with checkbox
     $('input[type="checkbox"]').click(function(){
-            if($(this).attr("value")=="wantKnowledge"){
-                $(".knowledgeWrapper").toggle();
-            }
         
             // If you add topics, number of groups option will adapt
             if($(this).attr("value")=="wantTopics"){
@@ -154,6 +152,13 @@ $(document).ready(function() {
         
         // enable the current input .second
         $('#'+$(this).val()).removeAttr('disabled');
+        
+        // click non-js radio buttons
+        if ($(this).val()=='group_size'){
+        	$('#id_groupoption_0').click();
+        }else{
+        	$('#id_groupoption_1').click();
+        }
     });
 
     

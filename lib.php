@@ -75,13 +75,13 @@
 		$groupformation->timecreated = time();
 		
 		// checks all fields and sets them properly
-		groupformation_set_fields($groupformation);
+		$groupformation = groupformation_set_fields($groupformation, $mform);
 		
 		// You may have to add extra stuff in here.
 		$groupformation->id = $DB->insert_record('groupformation', $groupformation);
 		groupformation_grade_item_update($groupformation);
 		
-// 		groupformation_save_more_infos($groupformation, TRUE);
+		groupformation_save_more_infos($groupformation, TRUE);
 		
 		return $groupformation->id;
 	}
@@ -103,7 +103,7 @@
 		// TODO Kommentar in Wiki - zu XML Fragebögen
 		
 		// checks all fields and sets them properly
-		groupformation_set_fields($groupformation);
+		$groupformation = groupformation_set_fields($groupformation,$mform);
 		
 		$groupformation->timemodified = time();
 		$groupformation->id = $groupformation->instance;
@@ -453,19 +453,14 @@
 	 * @param $groupformation
 	 * @return $groupformation
 	 */
-	function groupformation_set_fields(&$groupformation){
+	function groupformation_set_fields(stdClass $groupformation, mod_groupformation_mod_form $mform){
 		
-		if (!isset($mform->knowledge)){
+		if ($groupformation->knowledge == 0){
 			$groupformation->knowledge = 0;
-			$groupformation->knowledgelines = "";
-		}elseif ($mform->knowledge==0){
 			$groupformation->knowledgelines = "";
 		}
 		
-		if (!isset($mform->topics)){
-			$groupformation->topics = 0;
-			$groupformation->topiclines = "";
-		}elseif ($mform->topics==0){
+		if ($groupformation->topics == 0){
 			$groupformation->topics = 0;
 			$groupformation->topiclines = "";
 		}
@@ -475,6 +470,8 @@
 		}elseif (isset($groupformation->groupoption) & $groupformation->groupoption==0){
 			$groupformation->maxgroups = 0;
 		}
+		
+		return $groupformation;
 		
 	}
 	
