@@ -13,13 +13,6 @@ $(document).ready(function() {
     
     //$('#fitem_id_knowledge').insertBefore('.knowledgeWrapper');
     
-//    $('#id_js_knowledge').click(function(){
-//    	$(".knowledgeWrapper").toggle();
-//    });
-//    $('#id_js_topics').click(function(){
-//    	$(".topicsWrapper").toggle();
-//    });
-    
     // TODO @Eduard hier hab ich das reaktive mal begonnen, doch es muss ja generisch für alle auftauchenden Zeilen sein
     // Ich dachte man könnte vllt eine Zeile und die entsprechende VorschauZeile hidden bereit halten und immer kopieren mit umbenannter ID
     // kann man solche angelegten Dokumente denn dann auch mit Jquery funktionen wie dem keyup verknüpfen? Muss man ja um den Inhalt in die Vorschau zu bekommen
@@ -31,27 +24,57 @@ $(document).ready(function() {
     // Momentan ist die Übergabe der Eingabe nicht implementiert. Die Vorschau der Themen und Vorwissen haben unterschiedliche HTML Struktur,
     // trotzdem versuche ich diese generisch zu machen. 
     
-    
     $('#js_id_knowledge').keyup(function () {
     	$('#prkRow0_span').html($('#js_id_knowledge').val());
     
     });
     
+    //if knowledge gets checked
     $('#id_js_knowledge').click(function(){
-    	$('#id_knowledge').trigger('click');
-    	$(".knowledgeWrapper").toggle();
+    	if ($('#id_knowledge').prop('checked')){
+    		$('#id_knowledge').prop('checked',false);
+    	}else{
+    		$('#id_knowledge').prop('checked', true);
+    	}
+    	$(".js_knowledgeWrapper").toggle();
     });
+    
+    //if topics gets checked
     $('#id_js_topics').click(function(){
-    	$('#id_topics').trigger('click');
+    	if ($('#id_topics').prop('checked')){
+    		$('#id_topics').prop('checked',false);
+    	}else{
+    		alert("false Dialog");
+    		$('#id_topics').prop('checked', true);
+    	}
+    	$(".js_topicsWrapper").toggle();
     });
+    
+    //if knowledge was checked last time
+    if ($('#id_knowledge').prop('checked')){
+    	$('#id_js_knowledge').prop('checked',true);
+    	$('#id_knowledge').prop('checked',true);
+    	$(".js_knowledgeWrapper").toggle();
+    }
+    
+    //if topics was checked last time
+    if ($('#id_topics').prop('checked')){
+    	$('#id_js_topics').prop('checked',true);
+    	$('#id_topics').prop('checked',true);
+    	$(".js_topicsWrapper").toggle();
+    }
+    
+    $('#js_szenario').change(function() {
+    	alert( this.value ); // or $(this).val()
+    });
+    
     
     //toggle with checkbox
     $('input[type="checkbox"]').click(function(){
         
             // If you add topics, number of groups option will adapt
             if($(this).attr("value")=="wantTopics"){
-                $(".topicsWrapper").toggle();
-                if( $("#group_opt_numb").attr('disabled') == 'disabled' ){
+               if( $("#group_opt_numb").attr('disabled') == 'disabled' ){
                     $("#group_opt_numb").removeAttr('disabled');
                     $('#numb_of_groups').val(0);
                 }
@@ -280,6 +303,5 @@ $(document).ready(function() {
             scrollTop: $($param).offset().top
         }, 80);
     }
-    
 
 });

@@ -219,7 +219,7 @@ h1.caption {
     font-weight: bold;
     content: "* "; }
 
-.knowledgeWrapper, .topicsWrapper {
+.js_knowledgeWrapper, .js_topicsWrapper {
   display: none; }
 
 .multi_field_wrapper input.respwidth {

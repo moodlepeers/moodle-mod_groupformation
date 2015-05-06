@@ -453,21 +453,27 @@
 	 * @param $groupformation
 	 * @return $groupformation
 	 */
-	function groupformation_set_fields($groupformation){
+	function groupformation_set_fields(stdClass $groupformation){
 		
-		if ($groupformation->knowledge == 0){
+		if (isset($groupformation->knowledge) && $groupformation->knowledge == 0){
+			$groupformation->knowledge = 0;
+			$groupformation->knowledgelines = "";
+		}elseif (!isset($groupformation->knowledge)){
 			$groupformation->knowledge = 0;
 			$groupformation->knowledgelines = "";
 		}
 		
-		if ($groupformation->topics == 0){
+		if (isset($groupformation->topics) && $groupformation->topics == 0){
+			$groupformation->topics = 0;
+			$groupformation->topiclines = "";
+		}elseif (!isset($groupformation->topics)){
 			$groupformation->topics = 0;
 			$groupformation->topiclines = "";
 		}
 		
-		if (isset($groupformation->groupoption) & $groupformation->groupoption==1){
+		if (isset($groupformation->groupoption) && $groupformation->groupoption==1){
 			$groupformation->maxmembers = 0;
-		}elseif (isset($groupformation->groupoption) & $groupformation->groupoption==0){
+		}elseif (isset($groupformation->groupoption) && $groupformation->groupoption==0){
 			$groupformation->maxgroups = 0;
 		}
 		

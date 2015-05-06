@@ -225,7 +225,7 @@
 // 					<div class="grid">
 //                     <div class="col_100">
                        
-//                         <div class="knowledgeWrapper">
+//                         <div class="js_knowledgeWrapper">
                         
 //                         <p>'.get_string('knowledge_description_extended','groupformation').'</p>
                                     
@@ -320,7 +320,7 @@
 			//add dynamic Inputfields Topics with Preview
 			$mform->addElement('html', '                    
                     <div class="col_100">
-                        <div class="topicsWrapper">
+                        <div class="js_topicsWrapper">
                         <p>'.get_string('topics_description_extended','groupformation').'</p>
                                     
                             <div class="grid">
