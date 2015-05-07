@@ -28,10 +28,11 @@
 
     
 	require_once(dirname(__FILE__).'/question_controller.php');
-	require_once(dirname(__FILE__).'/RadioTable.php');
+	require_once(dirname(__FILE__).'/RadioInput.php');
 	require_once(dirname(__FILE__).'/TopicsTable.php');
-	require_once(dirname(__FILE__).'/PreknowledgeTable.php');
-	require_once(dirname(__FILE__).'/ValuationTable.php');
+	require_once(dirname(__FILE__).'/RangeInput.php');
+	require_once(dirname(__FILE__).'/DropdownInput.php');
+	require_once(dirname(__FILE__).'/HeaderOfInputs.php');
 
 	if (!defined('MOODLE_INTERNAL')) {
 		die('Direct access to this script is forbidden.');    ///  It must be included from a Moodle page
@@ -45,11 +46,15 @@
 		private $groupformationid;
 		private $lang;
 		private $question_manager;
-		private $preknowledge;
+		private $range;
 		private $radio;
 		private $topics;
-		private $valuation;
-		private $qNumber = 0; // TODO @Nora : Gibt es IDs?
+		private $dropdown;
+		
+		private $header;
+		private $qNumber = 0;
+		private $gradesCount;
+		private $category;
 			
 		
 		
@@ -59,84 +64,76 @@
 			$this->groupformationid = $groupformationid;
 			$this->lang = $lang;
 			$this->question_manager = new mod_groupformation_question_controller($groupformationid, $lang, $userId);
-			$this->preknowledge = new preKnowledge(array());
-			$this->radio = new RadioTable(array());
-			$this->valuation = new ValuationTable(array());
-			$this->topics = new TopicsTable(array());
+			$this->header = new HeaderOfInput();
+			$this->range = new RangeInput(array(), $category, $qNumber);
+			$this->radio = new RadioInput(array(), $category, $qNumber);
+			$this->dropdown = new DropdownInput(array(), $category, $qNumber);
+			$this->topics = new TopicsTable(array(), $category, $qNumber);
 		}
 		
+		
+		
 		public function getQuestions(){
+			
+			// TODO @Nora @Rene
+			// Es muss eine Methode eingebaut werden um den Fragebogen in mehrere Tabs zu splitten.
 			
 			$hasNext = $this->question_manager->hasNext();
 			if($this->question_manager->questionsToAnswer()){
 				while($hasNext){
-					$category = $this->question_manager->getCurrentCategory();
-					var_dump($category);
+					$this->category = $this->question_manager->getCurrentCategory();
+					var_dump($this->category);
 					$question = $this->question_manager->getNextQuestion();
-						
-					var_dump($question);
+
+					// print current $question Array
+// 					var_dump($question);
 					
 					$tableType = $question[0][0];
+					$headerOptArray = $question[0][2];
 					
 					echo '<form action="">';
-					echo '<div class="grid">
-                			<div class="col_100"> ';
-						
-					echo ' <h4 class="view_on_mobile">' . $category . '</h4>' ;
-						
-						
-					echo '<table class="responsive-table">' .
-							'<colgroup>
-						<col class="firstCol">';
-					echo '<colgroup>';
-						
-					// Tabellen - Header
-					echo '<thead>
-                      <tr>
-                        <th scope="col">'. $category . '</th>';
-					if($tableType == 'radio'){
-						$headerOptArray = $question[0][2];
-						$headerSize = count($headerOptArray);
-					
-						echo '<th scope="col" colspan="'. $headerSize .'"><span style="float:left">'. $headerOptArray[0] .'</span>
-																			<span style="float:right">'. $headerOptArray[$headerSize - 1] .'</span></th>';
-					}
-					else{
-						echo    '<th scope="col"></th>';
-					}
-					 
-					//Tabellen Body
-					echo '</tr>
-                    </thead>
-                    <tbody>';
 					
 					
 					
-					//So müsste es mal aussehen
+					echo ' <h4 class="view_on_mobile">' . $this->category . '</h4>' ;
+
+					// Print the Header of a table or unordered list
+					$this->header->__printHTML($this->category, $tableType, $headerOptArray);
+
+					
+					// each question with inputs
 					foreach($question as $q){
 						if($q[0] == 'dropdown'){
-							$this->valuation->__printHTML($q);
+							$this->dropdown->__printHTML($q, $this->category, $this->qNumber);
 						}
 						
 						if($q[0] == 'radio'){
-							$this->radio->__printHTML($q, $category, $qNumber);
+							$this->radio->__printHTML($q, $this->category, $this->qNumber);
 						}
 						
 						if($q[0] == 'typThema'){
-							$this->topics->__printHTML($q);
+							$this->topics->__printHTML($q, $this->category, $this->qNumber);
 						}
 						
 						if($q[0] == 'typVorwissen'){
-							$this->preknowledge->__printHTML($q);
+							$this->range->__printHTML($q, $this->category, $this->qNumber);
 						}
-						$qNumber++;
+						$this->qNumber++;
 					}
-						
+
+					// closing the table or unordered list
+					if($tableType == 'typThema'){
+						//close unordered list
+						echo '</ul>';
+					}else{
+						// close tablebody and close table
+						echo ' </tbody>
+		                  </table>';
+					}
+
 					
-					echo ' </tbody>
-                  </table>
-                </div>';
-					
+					// Reset the Question Number, so each HTML table starts with 0
+					$this->qNumber = 0;
 					
 					$hasAnswer = $this->question_manager->hasAnswers();
 					var_dump($hasAnswer);
@@ -148,5 +145,19 @@
 					//$this->question_manager->saveAnswers($answers);
 				}
 			}
+			
+
+			// TODO @Nora @Rene: Die Buttons des Formulars einfach per echo ausgeben oder müssen an dieser Stelle Moodle Elemente benutzt werden?
+			// Die Buttons sowie die Schließung des Formulars muss am Ende jedes Tabs erfolgen.
+			echo '
+			<div class="grid">
+			<div class="col_100">
+			<button type="reset" class="f_btn">Cancel</button>
+			<button type="button" class="f_btn">Save</button>
+			<button type="submit" class="f_btn">Next</button>
+			</div>
+			</div> <!-- /grid -->';
+			// Ende des Formulars
+			echo '</form>';
 		}
 	}

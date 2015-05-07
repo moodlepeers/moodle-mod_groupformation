@@ -1,8 +1,8 @@
 <?php
 
 
-class TopicsTable{
-
+class RangeInput{
+	
 	private $category;
 	private $qnumber;
 	private $question;	
@@ -12,6 +12,7 @@ class TopicsTable{
 		$this->optArray = $q[2];
 		$this->category = $cat;
 		$this->qnumber = $qnumb;
+
 	}
 	
 	
@@ -22,11 +23,17 @@ class TopicsTable{
 		$this->category = $cat;
 		$this->qnumber = $qnumb;
 		
-// 		echo '<li id="'. $this->category . $this->qnumber .'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' . $this->question . '</li>';
-		echo '<li id="'. $this->category . $this->qnumber .'">' . $this->question . '</li>';
+		echo '<tr>';
+		echo '<th scope="row">' . $this->question . '</th>';
+		echo '<td data-title="0 = kein Vorwissen, 100 = sehr viel Vorwissen " class="range">
+					<span class="">0</span>
+					<input type="range" name="'. $this->category . $this->qnumber .'" min="0" max="100" value="0" />
+					<span class="">100</span>
+					</td>';
+		echo '</tr>';
 		
 	}
 }
+
+
 ?>
-
-

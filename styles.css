@@ -1,12 +1,9 @@
-@charset "UTF-8";
+
 /* Welcome to Compass.
  * In this file you should write your main styles. (or centralize your imports)
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
-/* =============================
-    Normalize.css
-===============================*/
-@import url(normalize.css);
+
 /* =============================
    Breakpoints
 ===============================*/
@@ -182,11 +179,12 @@ footer {
       margin: 2em auto;
       max-width: 75em; } }
 
+
+*/
+
 @media (min-width: 48em) {
   .view_on_mobile {
     display: none; } }
-*/
-
 
 h1.caption {
   margin-bottom: 1em;
@@ -372,7 +370,7 @@ a {
 .legend {
   font-size: 0.8em;
   margin: 0;
-  float: right;
+/*  float: right; */
   font-style: italic; }
 
 ul#sortable_topics {

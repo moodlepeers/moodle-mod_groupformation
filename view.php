@@ -28,9 +28,7 @@
 // 	require_once ($CFG->dirroot.'/mod/feedback/lib.php');
 
 	
-	// jQuery functions 
-	$PAGE->requires->jquery();
-	$PAGE->requires->js(new moodle_url($CFG->wwwroot . '/mod/groupformation/js/survey_functions.js'));
+	
 // 	$PAGE->requires->js($CFG->dirroot.'/mod/groupformation/test_js.js');
 		
 // 	$PAGE->requires->jquery_plugin('survey-jquerfunctions', 'mod_groupformation');
@@ -54,6 +52,10 @@
 	// if (!$groupformation = $DB->get_record('groupformation', array('id'=> $cm->instance), '*', MUST_EXIST)) {
 	// 	print_error('course module is incorrect'); // NOTE As above
 	// }
+	
+	// jQuery functions
+	$PAGE->requires->jquery();
+	$PAGE->requires->js(new moodle_url($CFG->wwwroot . '/mod/groupformation/js/survey_functions.js'));
 	
 	if($id) {
 		$cm = get_coursemodule_from_id('groupformation', $id, 0, false, MUST_EXIST);
@@ -229,6 +231,7 @@
 	//$feedbackid = groupformation_get_feedback_id($groupformation->id);
 		
 		
+
 		
 	echo $OUTPUT->footer();
 	
