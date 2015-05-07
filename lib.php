@@ -127,7 +127,7 @@
 		
 		groupformation_grade_item_update($groupformation);
 		
-// 		groupformation_save_more_infos($groupformation, FALSE);
+ 		groupformation_save_more_infos($groupformation, FALSE);
 		
 		
 		return $result;
@@ -523,6 +523,8 @@
 			}
 		}
 		
-		$store->add_setting_question($knowledgearray, $topicsarray, $init);
+		if($DB->count_records('groupformation_answer', array('groupformation' => $groupformation->id)) == 0){
+			$store->add_setting_question($knowledgearray, $topicsarray, $init);
+		}
 	}
 	
