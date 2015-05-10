@@ -19,11 +19,12 @@ class DropdownInput {
 	
 	
 	
-	public function __printHTML($q, $cat, $qnumb){
+	public function __printHTML($q, $cat, $qnumb, $hasAnswer){
 		$this->question = $q[1];
 		$this->optArray = $q[2];
 		$this->category = $cat;
 		$this->qnumber = $qnumb;
+		
 		
 		echo '<tr>';
 		echo '<th scope="row">' . $this->question . '</th>';
@@ -33,9 +34,15 @@ class DropdownInput {
 		foreach ($this->optArray as $option){
 			echo '<option value="'. $option .'">'. $option .'</option>';
 		}
+		
 		echo '</select>
 			</td>
 		</tr>';
+		
+		if($hasAnswer){
+			//$answer ist die position im optionArray von der Antwort
+			$answer = $q[3];
+		}
 	}
 }
 

@@ -17,7 +17,7 @@ class RangeInput{
 	
 	
 	
-	public function __printHTML($q, $cat, $qnumb){
+	public function __printHTML($q, $cat, $qnumb, $hasAnswer){
 		$this->question = $q[1];
 		$this->optArray = $q[2];
 		$this->category = $cat;
@@ -31,6 +31,11 @@ class RangeInput{
 					<span class="">100</span>
 					</td>';
 		echo '</tr>';
+		
+		if($hasAnswer){
+			//$answer ist die position im optionArray bzw. der eingstellte Range von der Antwort
+			$answer = $q[3];
+		}
 		
 	}
 }

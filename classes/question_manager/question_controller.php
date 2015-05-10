@@ -98,15 +98,15 @@
 		}
 		
 		private function setNulls(){
-			if($this->szenario == 'project'){
+			if($this->szenario == 'project' || $this->szenario == 1){
 				$this->numbers[LEARNING] = 0;
 			}
 				
-			if($this->szenario == 'homework'){
+			if($this->szenario == 'homework' || $this->szenario == 2){
 				$this->numbers[MOTIVATION] = 0;
 			}	
 			
-			if($this->szenario == 'presentation'){
+			if($this->szenario == 'presentation' || $this->szenario == 3){
 				for($i = 0; $i < count($this->numbers); $i++){
 					if($i != TOPIC && $i != KNOWLEDGE){
 						$this->numbers[$i] = 0;
@@ -142,6 +142,11 @@
 			if($this->currentCategoryPosition != -1){
 			
 				$questions = array();
+				$hasAnswer = $this->hasAnswers();
+				$answers = array();
+				if($hasAnswer){
+					$answers = $this->getAnswers();
+				}
 				
 				if($this->currentCategoryPosition == TOPIC || $this->currentCategoryPosition == KNOWLEDGE){
 					
@@ -168,7 +173,6 @@
  							$type = 'typVorwissen';
  						}
  						
- 						//TODO @JK/Eduard Können wir es hier mit dem Optionarray so lasen, oder sollen wir ein anders nehmen/gar keins?
  						$options = array();
  						if($this->lang == 'de'){
  							$options = array('sehr gut', '', '', '','gar nicht');
@@ -176,11 +180,22 @@
  							$options = array('excellent', '', '', '','none');
  						}
  						
+ 						$positionArray = 1;
+ 						$positionAnswer = 0;
  						foreach ($values as $value){
  							$question = array();
  							$question[] = $type;
  							$question[] = $text . $value;
  							$question[] = $options;
+ 							if($hasAnswer){
+ 								if($answers[$positionAnswer][0] == $positionArray){
+ 									$question[] = $answers[$positionAnswer][1];
+ 									$positionAnswer++;
+ 								}else{
+ 									$question[] = -1;
+ 								}
+ 								$positionArray++;
+ 							}
 							$questions[] = $question;
 						}
 					
@@ -197,6 +212,15 @@
 						
 						$question[] = $this->xml->xmlToArray('<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $o . ' </OPTIONS>');
 						//$questions[] = $array->options;
+						$positionAnswer = 0;
+						if($hasAnswer){
+							if($answers[$positionAnswer][0] == $i){
+								$question[] = $answers[$positionAnswer][1];
+								$positionAnswer++;
+							}else{
+								$question[] = -1;
+							}
+						}
 						$questions[] = $question;
 					}
 				}		
@@ -252,7 +276,7 @@
 		public function hasAnswers(){
 			$firstCondition = $this->store->answeringStatus($this->userId) == 0;
 			//var_dump($this->names[$this->currentCategoryPosition-1]);
-			$secondCondition = $this->store->answerExist($this->userId, $this->names[$this->currentCategoryPosition-1], 1);
+			$secondCondition = $this->store->answerExist($this->userId, $this->names[$this->currentCategoryPosition], 1);
 // 			var_dump($secondCondition);
 // 			var_dump($firstCondition);
 // 			var_dump($firstCondition && $firstCondition);
@@ -262,13 +286,13 @@
 		public function getAnswers(){
 			$array = array();
 			
-			$answers = $this->store->getAnswer($this->userId, $this->names[$this->currentCategoryPosition-1]);
+			$answers = $this->store->getAnswer($this->userId, $this->names[$this->currentCategoryPosition]);
 			//var_dump($answers);
 			foreach($answers as $answer){
-				$temp = array(
-						'position' => $answer->questionid,
-						'answer' => $answer->answer
-				);
+				$temp = array();
+				$temp[] = $answer->questionid;
+				$temp[] = $answer->answer;
+				
 				
 				$array[] = $temp;
 			}

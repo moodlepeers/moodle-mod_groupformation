@@ -54,7 +54,7 @@
 		private $header;
 		private $qNumber = 0;
 		private $gradesCount;
-		private $category;
+		private $category = "";
 			
 		
 		
@@ -65,10 +65,10 @@
 			$this->lang = $lang;
 			$this->question_manager = new mod_groupformation_question_controller($groupformationid, $lang, $userId);
 			$this->header = new HeaderOfInput();
-			$this->range = new RangeInput(array(), $category, $qNumber);
-			$this->radio = new RadioInput(array(), $category, $qNumber);
-			$this->dropdown = new DropdownInput(array(), $category, $qNumber);
-			$this->topics = new TopicsTable(array(), $category, $qNumber);
+			$this->range = new RangeInput(array(), $this->category, $this->qNumber);
+			$this->radio = new RadioInput(array(), $this->category, $this->qNumber);
+			$this->dropdown = new DropdownInput(array(), $this->category, $this->qNumber);
+			$this->topics = new TopicsTable(array(), $this->category, $this->qNumber);
 		}
 		
 		
@@ -82,7 +82,7 @@
 			if($this->question_manager->questionsToAnswer()){
 				while($hasNext){
 					$this->category = $this->question_manager->getCurrentCategory();
-					var_dump($this->category);
+// 					var_dump($this->category);
 					$question = $this->question_manager->getNextQuestion();
 
 					// print current $question Array
@@ -100,23 +100,24 @@
 					// Print the Header of a table or unordered list
 					$this->header->__printHTML($this->category, $tableType, $headerOptArray);
 
+					$hasAnswer = count($question[0]) == 4;
 					
 					// each question with inputs
 					foreach($question as $q){
 						if($q[0] == 'dropdown'){
-							$this->dropdown->__printHTML($q, $this->category, $this->qNumber);
+							$this->dropdown->__printHTML($q, $this->category, $this->qNumber, $hasAnswer);
 						}
 						
 						if($q[0] == 'radio'){
-							$this->radio->__printHTML($q, $this->category, $this->qNumber);
+							$this->radio->__printHTML($q, $this->category, $this->qNumber, $hasAnswer);
 						}
 						
 						if($q[0] == 'typThema'){
-							$this->topics->__printHTML($q, $this->category, $this->qNumber);
+							$this->topics->__printHTML($q, $this->category, $this->qNumber, $hasAnswer);
 						}
 						
 						if($q[0] == 'typVorwissen'){
-							$this->range->__printHTML($q, $this->category, $this->qNumber);
+							$this->range->__printHTML($q, $this->category, $this->qNumber, $hasAnswer);
 						}
 						$this->qNumber++;
 					}
@@ -135,11 +136,11 @@
 					// Reset the Question Number, so each HTML table starts with 0
 					$this->qNumber = 0;
 					
-					$hasAnswer = $this->question_manager->hasAnswers();
-					var_dump($hasAnswer);
-					if($hasAnswer){
-						var_dump($this->question_manager->getAnswers());
-					}
+// 					$hasAnswer = $this->question_manager->hasAnswers();
+// 					var_dump($hasAnswer);
+// 					if($hasAnswer){
+// 						var_dump($this->question_manager->getAnswers());
+// 					}
 					$hasNext = $this->question_manager->hasNext();
 					//$answers = array('0');
 					//$this->question_manager->saveAnswers($answers);

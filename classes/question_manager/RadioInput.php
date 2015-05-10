@@ -17,7 +17,7 @@ class RadioInput {
 	
 	
 	
-	public function __printHTML($q, $cat, $qnumb){
+	public function __printHTML($q, $cat, $qnumb, $hasAnswer){
 		$this->question = $q[1];
 		$this->optArray = $q[2];
 		$this->category = $cat;
@@ -35,6 +35,11 @@ class RadioInput {
 			$radioCounter++;
 		}
 		echo '</tr>';
+		
+		if($hasAnswer){
+			//$answer ist die position im optionArray von der Antwort
+			$answer = $q[3];
+		}
 	}
 	
 	

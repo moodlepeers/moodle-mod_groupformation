@@ -290,6 +290,11 @@
 			return $count == 1;
 		}
 		
+		public function generalAnswerNotExist(){
+			global $DB;
+			
+			return ($DB->count_records('groupformation_answer', array('groupformation' => $this->groupformationid)) == 0);
+		}
 		
 		public function getAnswer($userId, $category){
 			global $DB;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION VERSION="200701" COMMENT="">
-     <QUESTIONS VERSION="1">
+     <QUESTIONS VERSION="2">
           <QUESTION TYPE="dropdown">
                <QUESTIONTEXT>
                     <![CDATA[Which grade would you like to achive?]]>
@@ -77,7 +77,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION TYPE="dorpdown">
+          <QUESTION TYPE="dropdown">
                <QUESTIONTEXT>
                     <![CDATA[From which grade on would you be unsatisfied?]]>
                </QUESTIONTEXT>

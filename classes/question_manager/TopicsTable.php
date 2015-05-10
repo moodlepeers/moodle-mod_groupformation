@@ -16,7 +16,7 @@ class TopicsTable{
 	
 	
 	
-	public function __printHTML($q, $cat, $qnumb){
+	public function __printHTML($q, $cat, $qnumb, $hasAnswer){
 		$this->question = $q[1];
 		$this->optArray = $q[2];
 		$this->category = $cat;
@@ -24,6 +24,11 @@ class TopicsTable{
 		
 // 		echo '<li id="'. $this->category . $this->qnumber .'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' . $this->question . '</li>';
 		echo '<li id="'. $this->category . $this->qnumber .'">' . $this->question . '</li>';
+		
+		if($hasAnswer){
+			//$answer ist die position im optionArray von der Antwort
+			$answer = $q[3];
+		}
 		
 	}
 }

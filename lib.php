@@ -523,7 +523,7 @@
 			}
 		}
 		
-		if($DB->count_records('groupformation_answer', array('groupformation' => $groupformation->id)) == 0){
+		if($store->generalAnswerNotExist()){
 			$store->add_setting_question($knowledgearray, $topicsarray, $init);
 		}
 	}

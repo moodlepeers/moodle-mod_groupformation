@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION VERSION="200701" COMMENT="">
-     <QUESTIONS VERSION="2">
+     <QUESTIONS>
           <QUESTION TYPE="dropdown">
                <QUESTIONTEXT>
                     <![CDATA[Welche Note möchten Sie erreichen?]]>
@@ -37,6 +37,9 @@
                     	<![CDATA[4.0]]>
                     </OPTION>
                </OPTIONS>
+               <CATEGORY>
+                    <![CDATA[grade]]>
+               </CATEGORY>
           </QUESTION>
           
           <QUESTION TYPE="dropdown">
@@ -75,6 +78,9 @@
                     	<![CDATA[4.0]]>
                     </OPTION>
                </OPTIONS>
+               <CATEGORY>
+                    <![CDATA[grade]]>
+               </CATEGORY>
           </QUESTION>
           
           <QUESTION TYPE="dropdown">
@@ -113,6 +119,9 @@
                     	<![CDATA[4.0]]>
                     </OPTION>
                </OPTIONS>
+               <CATEGORY>
+                    <![CDATA[grade]]>
+               </CATEGORY>
           </QUESTION>
      </QUESTIONS>
 </GROUPFORMATION>
