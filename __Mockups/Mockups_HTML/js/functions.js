@@ -8,7 +8,10 @@ $(document).ready(function() {
     var topicCounter = 3; //counts topics to make group numbers
     
     var preknwCounter = 3;
+    
+    var stringOfPreknowledge = "";
 
+    var stringOfTopics = "";
     
     //toggle with checkbox
     $('input[type="checkbox"]').click(function(){
@@ -96,36 +99,34 @@ $(document).ready(function() {
           $(this).keyup(function(){
               if ($cat == 'prk'){
                   $('#' + $previewRowID).children('th').text($(this).val());
+                  writePreknowledgeToField();
               }
               if ($cat == 'tpc'){
                   $('#' + $previewRowID).html('<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' + $(this).val());
+                  writeTopicsToField();
               }
           });
           
       });
   });
   
+    
   
-  function writeInputsToField(){
-	  $('.js_topicInput').each(function(){
-          $allInputs.append($(this).val());
-          alert ($allInputs);
-		 // $tempPreknwl = $('#id_knowledgelines').text();
-		  $('#id_knowledgelines').val( $tempPreknwl + '~' +  $(this).val());
-		  //$('#id_knowledgelines').text('~' +  $(this).val());
-		 // alert ($(this).val());
-		 // $(this).val(); 
+  function writePreknowledgeToField(){
+      stringOfPreknowledge = '';
+	  $('.js_preknowledgeInput').each(function(){
+          stringOfPreknowledge += $(this).val() + '~';
 	  });
+      $('#id_knowledgelines').val(stringOfPreknowledge);
   }
     
-    $( "#getString" ).click(function() {
-        //alert ('yeah');
-        $('.js_topicInput').each(function(){
-            $sting.append($(this).val());
-            alert ($string);
-            alert($(this).val());
-        }); 
-    });
+    function writeTopicsToField(){
+      stringOfTopics = '';
+	  $('.js_topicInput').each(function(){
+          stringOfPreknowledge += $(this).val() + '~';
+	  });
+      $('#id_topiclines').val(stringOfTopics);
+  }
     
 
 

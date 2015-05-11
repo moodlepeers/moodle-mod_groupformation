@@ -11,6 +11,10 @@ $(document).ready(function() {
     
     var preknwCounter = 3;
     
+    var stringOfPreknowledge = "";
+
+    var stringOfTopics = "";
+    
     //$('#fitem_id_knowledge').insertBefore('.knowledgeWrapper');
     
     // TODO @Eduard hier hab ich das reaktive mal begonnen, doch es muss ja generisch für alle auftauchenden Zeilen sein
@@ -165,47 +169,40 @@ $(document).ready(function() {
       });
       
       //write to the preview
-       $('.multi_field input:text', $wrapper).focus(function() {
-          $previewRowID = ($cat + 'Row' + parseInt($(this).parent().attr('id').substr(8)));
-          $(this).keyup(function(){
-              if ($cat == 'prk'){
-            	  //$tempPreknwl = $('#id_knowledgelines').text();
-                  $('#' + $previewRowID).children('th').text($(this).val());
-//                  $('#id_knowledgelines').text( $tempPreknwl + '~' +  $(this).val());
-                  //writeInputsToField();
-              }
-              if ($cat == 'tpc'){
-                  $('#' + $previewRowID).html('<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' + $(this).val());
-              }
-          });
-          
-      });
-  });
-  
-  
-  function writeInputsToField(){
-	  $('.js_topicInput').each(function(){
-		  $tempPreknwl = $('#id_knowledgelines').text();
-		  $('#id_knowledgelines').text( $tempPreknwl + '~' +  $(this).val());
-		  //$('#id_knowledgelines').text('~' +  $(this).val());
-		 // alert ($(this).val());
-		 // $(this).val(); 
+      $('.multi_field input:text', $wrapper).focus(function() {
+         $previewRowID = ($cat + 'Row' + parseInt($(this).parent().attr('id').substr(8)));
+         $(this).keyup(function(){
+             if ($cat == 'prk'){
+                 $('#' + $previewRowID).children('th').text($(this).val());
+                 writePreknowledgeToField();
+             }
+             if ($cat == 'tpc'){
+                 $('#' + $previewRowID).html('<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' + $(this).val());
+                 writeTopicsToField();
+             }
+         });
+         
+     });
+ });
+ 
+   
+ 
+ function writePreknowledgeToField(){
+     stringOfPreknowledge = '';
+	  $('.js_preknowledgeInput').each(function(){
+         stringOfPreknowledge += $(this).val() + '\n';
 	  });
-	  
-  }
-  
-  
-  
-//  function displayVals() {
-//	  var singleValues = $( "#single" ).val();
-//	  var multipleValues = $( "#multiple" ).val() || [];
-//	  $( "p" ).html( "<b>Single:</b> " + singleValues +
-//	    " <b>Multiple:</b> " + multipleValues.join( ", " ) );
-//	}
-//	 
-//	$( "select" ).change( displayVals );
-//	displayVals();
-//  
+     $('#id_knowledgelines').val(stringOfPreknowledge);
+ }
+   
+   function writeTopicsToField(){
+     stringOfTopics = '';
+	  $('.js_topicInput').each(function(){
+		  stringOfTopics += $(this).val() + '\n';
+	  });
+     $('#id_topiclines').val(stringOfTopics);
+ }
+   
   
 
     //disable with radios

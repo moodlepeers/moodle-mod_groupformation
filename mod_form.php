@@ -243,15 +243,15 @@
                                     
                                         <div class="multi_fields">
                                             <div class="multi_field" id="inputprk0">
-                                                <input class="respwidth" type="text">
+                                                <input class="respwidth js_preknowledgeInput" type="text">
                                                 <button type="button" class="remove_field"></button>
                                             </div>
                                             <div class="multi_field" id="inputprk1">
-                                                <input class="respwidth" type="text">
+                                                <input class="respwidth js_preknowledgeInput" type="text">
                                                 <button type="button" class="remove_field"></button>
                                             </div>
                                             <div class="multi_field" id="inputprk2">
-                                                <input class="respwidth" type="text">
+                                                <input class="respwidth js_preknowledgeInput" type="text">
                                                 <button type="button" class="remove_field"></button>
                                             </div>
                                         </div>
