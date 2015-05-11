@@ -41,7 +41,6 @@ $(document).ready(function() {
         $theID = parseInt($('.multi_field:last-child', $wrapper).attr('id').substr(8)) + 1
         $multifieldID = 'input' + $cat + $theID;
 
-//        $multifieldID = 'input' + $cat +
         // adds input field
         $('.multi_field:first-child', $wrapper).clone(true).attr('id',$multifieldID)
                                                             .appendTo($wrapper).find('input').val('').focus();  
@@ -53,11 +52,12 @@ $(document).ready(function() {
         
         if($cat == 'prk'){
             $('.knowlRow:first-child', '#preknowledges').clone(true).attr('id',$previewRowID)
-                                                                .appendTo('#preknowledges');
+                                                                .appendTo('#preknowledges').find('th').text('');
         }
-        if($cat == 'topicAnchor'){
+        if($cat == 'tpc'){
             topicCounter++;
-            $('#numb_of_groups').val(topicCounter);
+           $('.topicLi:first-child', '#previewTopics').clone(true).attr('id',$previewRowID)
+                                                                .appendTo('#previewTopics').html('<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>');
         }
     }
     
@@ -66,7 +66,7 @@ $(document).ready(function() {
             $theID = parseInt($field.parent('.multi_field').attr('id').substr(8))
             $previewRowID = $cat + 'Row' +  $theID;
             //remove Preview
-            document.getElementById($previewRowID).remove();
+            $('#' + $previewRowID).remove();
             //remove Input
             $field.parent('.multi_field').remove();
         }
@@ -89,24 +89,43 @@ $(document).ready(function() {
             removeInput($wrapper, $cat, $field);    
         });
         
-         $('.multi_field input:text', $wrapper).focus(function() {
-            $previewRowID = ($cat + 'Row' + parseInt($(this).parent().attr('id').substr(8))).children('th').attr('scope');
-            $(this).keyup(function(){
-                alert($previewRowID);
-                document.getElementById($previewRowID).children('th').html($(this).val());
-                alert($(this).parent().attr('id'));
-            });
-        });
-             
-//        $('.multi_field input:text', $wrapper).keyup(function() {
-//            alert($(this).parent().attr('id'));
-//        });
         
-        
+           //write to the preview
+       $('.multi_field input:text', $wrapper).focus(function() {
+          $previewRowID = ($cat + 'Row' + parseInt($(this).parent().attr('id').substr(8)));
+          $(this).keyup(function(){
+              if ($cat == 'prk'){
+                  $('#' + $previewRowID).children('th').text($(this).val());
+              }
+              if ($cat == 'tpc'){
+                  $('#' + $previewRowID).html('<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' + $(this).val());
+              }
+          });
+          
+      });
+  });
+  
+  
+  function writeInputsToField(){
+	  $('.js_topicInput').each(function(){
+          $allInputs.append($(this).val());
+          alert ($allInputs);
+		 // $tempPreknwl = $('#id_knowledgelines').text();
+		  $('#id_knowledgelines').val( $tempPreknwl + '~' +  $(this).val());
+		  //$('#id_knowledgelines').text('~' +  $(this).val());
+		 // alert ($(this).val());
+		 // $(this).val(); 
+	  });
+  }
+    
+    $( "#getString" ).click(function() {
+        //alert ('yeah');
+        $('.js_topicInput').each(function(){
+            $sting.append($(this).val());
+            alert ($string);
+            alert($(this).val());
+        }); 
     });
-    
-    
-    
     
 
 
@@ -254,7 +273,7 @@ $(document).ready(function() {
     
     
     // Drag & Drop the topics/objects to sort them // Fragebogen
-        $('#sortable_topics').sortable({
+        $('.sortable_topics').sortable({
         axis: 'y',
         stop: function (event, ui) {
 	        var data = $(this).sortable('serialize');

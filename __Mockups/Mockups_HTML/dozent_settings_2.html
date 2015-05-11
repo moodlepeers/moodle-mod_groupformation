@@ -48,7 +48,10 @@
             
         
             <form id="docent_settings_2" action="dozent_settings_3.html">
-
+                
+                <textarea id="id_knowledgelines" name="knowledgelines" cols="50" rows="10"></textarea>
+                
+                <button id="getString" type="button"></button>
 
                 <div class="grid">
                     
@@ -79,15 +82,15 @@
                                     
                                         <div class="multi_fields">
                                             <div class="multi_field" id="inputprk0">
-                                                <input class="respwidth" type="text" name="knowledge[]">
+                                                <input class="respwidth js_topicInput" type="text">
                                                 <button type="button" class="remove_field" title="Zeile entfernen"></button>
                                             </div>
                                             <div class="multi_field" id="inputprk1">
-                                                <input class="respwidth" type="text" name="knowledge[]">
+                                                <input class="respwidth js_topicInput" type="text">
                                                 <button type="button" class="remove_field" title="Zeile entfernen"></button>
                                             </div>
                                             <div class="multi_field" id="inputprk2">
-                                                <input class="respwidth" type="text" name="knowledge[]">
+                                                <input class="respwidth js_topicInput" type="text">
                                                 <button type="button" class="remove_field" title="Zeile entfernen"></button>
                                             </div>
                                         </div>
@@ -119,14 +122,13 @@
                                                         <td data-title="0 = kein Vorwissen, 100 = sehr viel Vorwissen " class="range"><span >0</span><input type="range" min="0" max="100" value="0" /><span>100</span></td>
                                                       </tr>
                                                     <tr class="knowlRow" id="prkRow1">
-                                                        <th scope="row">Beispiel 1</th>
+                                                        <th scope="row">Beispiel 2</th>
                                                         <td data-title="0 = kein Vorwissen, 100 = sehr viel Vorwissen " class="range"><span >0</span><input type="range" min="0" max="100" value="0" /><span>100</span></td>
                                                       </tr>
                                                     <tr class="knowlRow" id="prkRow2">
-                                                        <th scope="row">Beispiel 1</th>
+                                                        <th scope="row">Beispiel 3</th>
                                                         <td data-title="0 = kein Vorwissen, 100 = sehr viel Vorwissen " class="range"><span >0</span><input type="range" min="0" max="100" value="0" /><span>100</span></td>
                                                       </tr>
-                                                      
                                                     </tbody>
                                                   </table>
                                             </div>
@@ -162,7 +164,7 @@
                         <p>Geben Sie hier die Themen ein, welche die Studierenden bearbeiten k&ouml;nnen. In den Frageb&ouml;gen werden die Themen nach Priorit&auml;t sortiert. Eine Vorschau sehen Sie rechts.</p>
                                     
                             <div class="grid">
-                            <div id="tpk">    
+                            <div id="tpc">    
                             <div class="multi_field_wrapper persist-area">
                                 <div class="col_50">
                                 <div id="" class="btn_wrap">
@@ -174,16 +176,16 @@
 <!--                      Die Input Felder-->
                                     
                                         <div class="multi_fields">
-                                            <div class="multi_field" id="inputtopic0">
-                                                <input class="respwidth" type="text" name="topic[]">
+                                            <div class="multi_field" id="inputtpc0">
+                                                <input class="respwidth" type="text">
                                                 <button type="button" class="remove_field" title="Zeile entfernen"></button>
                                             </div>
-                                            <div class="multi_field" id="inputtopic1">
-                                                <input class="respwidth" type="text" name="topic[]">
+                                            <div class="multi_field" id="inputtpc1">
+                                                <input class="respwidth" type="text">
                                                 <button type="button" class="remove_field" title="Zeile entfernen"></button>
                                             </div>
-                                            <div class="multi_field" id="inputtopic1">
-                                                <input class="respwidth" type="text" name="topic[]">
+                                            <div class="multi_field" id="inputtpc2">
+                                                <input class="respwidth" type="text">
                                                 <button type="button" class="remove_field" title="Zeile entfernen"></button>
                                             </div>
                                         </div>
@@ -197,10 +199,10 @@
                                         <div class="col_100">    
                                             <h4 class="view_on_mobile">Themenwahl</h4>
                                             <p id="topicshead">Bitte sortieren Sie die zur Wahl stehenden Themen entsprechend Ihrer Pr&auml;ferenz, beginnend mit Ihrem bevorzugten Thema. </p>
-                                            <ul id="sortable_topics">
-                                              <li class="topicLi" id="topicLi0" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Thema 1</li>
-                                              <li class="topicLi" id="topicLi1" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Thema 2</li>
-                                              <li class="topicLi" id="topicLi2" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Thema 3</li>
+                                            <ul class="sortable_topics" id="previewTopics">
+                                              <li class="topicLi" id="tpcRow0" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Thema 1</li>
+                                              <li class="topicLi" id="tpcRow1" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Thema 2</li>
+                                              <li class="topicLi" id="tpcRow2" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Thema 3</li>
                                             </ul>
                                         </div>
                                     </div> <!-- /col_50 --> 

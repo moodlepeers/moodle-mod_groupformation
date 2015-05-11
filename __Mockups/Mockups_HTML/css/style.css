@@ -362,7 +362,7 @@ a {
   float: right;
   font-style: italic; }
 
-ul#sortable_topics {
+ul.sortable_topics {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -371,33 +371,33 @@ ul#sortable_topics {
   font-size: .9em;
   color: rgba(94, 93, 82, 0.75); }
   @media (min-width: 48em) {
-    ul#sortable_topics {
+    ul.sortable_topics {
       font-size: .9em;
       border-width: 1px;
       color: #5e5d52;
       font-weight: bold; } }
   @media (min-width: 62em) {
-    ul#sortable_topics {
+    ul.sortable_topics {
       font-size: 1em; } }
-  ul#sortable_topics li {
+  ul.sortable_topics li {
     padding: 0.4em;
     padding-left: 1.5em;
     border: 2px solid #969696;
     border-top: none;
     cursor: move; }
     @media (min-width: 48em) {
-      ul#sortable_topics li {
+      ul.sortable_topics li {
         border-width: 1px;
         border-top: none; } }
-    ul#sortable_topics li span {
+    ul.sortable_topics li span {
       display: inline-block;
       margin-left: -1.3em;
       margin-right: 1.3em;
       vertical-align: middle; }
-  ul#sortable_topics li:first-child {
+  ul.sortable_topics li:first-child {
     border-top: 2px solid #969696; }
     @media (min-width: 48em) {
-      ul#sortable_topics li:first-child {
+      ul.sortable_topics li:first-child {
         border-width: 1px; } }
 
 p#topicshead {
