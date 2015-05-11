@@ -172,7 +172,7 @@ $(document).ready(function() {
             	  //$tempPreknwl = $('#id_knowledgelines').text();
                   $('#' + $previewRowID).children('th').text($(this).val());
 //                  $('#id_knowledgelines').text( $tempPreknwl + '~' +  $(this).val());
-                  writeInputsToField();
+                  //writeInputsToField();
               }
               if ($cat == 'tpc'){
                   $('#' + $previewRowID).html('<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' + $(this).val());
