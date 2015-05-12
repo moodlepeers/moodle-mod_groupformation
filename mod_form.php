@@ -213,7 +213,7 @@
 			//add Checkbox Preknowledge
 			$mform->addElement('html', '
 					<div class="col_100">
-                        <h4 class="optional"><label for="wantKnowledge">
+                        <h4 class="optional"><label for="id_js_knowledge">
                           <input type="checkbox" id="id_js_knowledge" name="chbKnowledge" value="wantKnowledge">
                           '.get_string('knowledge_description','groupformation').'</h4>
                         </label> 
@@ -310,7 +310,7 @@
                 <div class="grid">
                     
                     <div class="col_100">
-                        <h4 class="optional"><label for="wantTopics">
+                        <h4 class="optional"><label for="id_js_topics">
                           <input type="checkbox" id="id_js_topics" name="chbTopics" value="wantTopics">
                           '.get_string('topics_description','groupformation').'</h4>
                         </label> 
@@ -343,7 +343,7 @@
                                                 <input class="respwidth js_topicInput" type="text">
                                                 <button type="button" class="remove_field"></button>
                                             </div>
-                                            <div class="multi_field" id="inputtpk2">
+                                            <div class="multi_field" id="inputtpc2">
                                                 <input class="respwidth js_topicInput" type="text">
                                                 <button type="button" class="remove_field"></button>
                                             </div>
