@@ -8,9 +8,9 @@ $(document).ready(function() {
 //    $("#fitem_id_knowledge").hide();
 //    $("#fitem_id_knowledgelines").hide();
     
-    var topicCounter = 3; //counts topics to make group numbers
-    
-    var preknwCounter = 3;
+//    var topicCounter = 3; //counts topics to make group numbers
+//    
+//    var preknwCounter = 3;
     
     var stringOfPreknowledge = "";
 
@@ -83,66 +83,80 @@ $(document).ready(function() {
 //    $('#group_size').change(function() {
 //    	$('#id_maxmembers').val(this.value);
 //    });
-//    
-//    //toggle with checkbox
-//    $('input[type="checkbox"]').click(function(){
-//        
-//            // If you add topics, number of groups option will adapt
-//            if($(this).attr("value")=="wantTopics"){
-//               if( $("#group_opt_numb").attr('disabled') == 'disabled' ){
-//                    $("#group_opt_numb").removeAttr('disabled');
-//                    $('#numb_of_groups').val(0);
-//                }
-//                
-//                else{
-//                    $("#group_opt_numb").attr('disabled', 'disabled');
-//                    $("#group_opt_size").prop("checked", true);
-//                    $("#group_size").removeAttr('disabled');
-//                    $("#numb_of_groups").attr('disabled', 'disabled');
-//                    $('#numb_of_groups').val(groupCounter);
-//                }
-//            }
-//        });
-    
-    
-    
-    
-    
-  //if knowledge was checked last time
-  if ($('#id_knowledge').prop('checked')){
-  	$('#id_js_knowledge').prop('checked',true);
-  	$('#id_knowledge').prop('checked',true);
-  	$(".js_knowledgeWrapper").toggle();
-  	//TODO get the value of id_knowledgelines and parse it to dynamic input fields
-  	//
-  	var lines = $('textarea[name=knowledgelines]').val().split('\n');
-    $wrapper = $('#prk').find('.multi_fields');
-    $cat = 'prk';
-    $.each(lines, function(){
-    	addInput($wrapper, $cat, this);
-    });
-    for( var i = 0, l = 3; i < l; i++){
-        removeInput($wrapper, $cat, i);
-    }
-  }
-  
-  //if topics was checked last time
-  if ($('#id_topics').prop('checked')){
-  	$('#id_js_topics').prop('checked',true);
-  	$('#id_topics').prop('checked',true);
-  	$(".js_topicsWrapper").toggle();
-  //TODO get the value of id_topiclines and parse it to dynamic input fields
-  	var lines = $('textarea[name=topiclines]').val().split('\n');
-    $wrapper = $('#tpc').find('.multi_fields');
-    $cat = 'tpc';
-    $.each(lines, function(){
-    	addInput($wrapper, $cat, this);
-    });
-    for( var i = 0, l = 3; i < l; i++){
-        removeInput($wrapper, $cat, i);
-    }
-  }
 
+    
+    
+///////////////////////////////////////////////////////////////////////////////////////////////       
+///////////////////////////////////////////////////////////////////////////////////////////////      
+///////////////////////////////////////////////////////////////////////////////////////////////    
+    
+    
+  // Load Settings  
+    
+  //if knowledge was checked before
+    if ($('#id_knowledge').prop('checked')){
+        $('#id_js_knowledge').prop('checked',true);
+        $('#id_knowledge').prop('checked',true);
+        $(".js_knowledgeWrapper").toggle();
+
+        //get the value of Moodle nativ field #id_knowledgelines, parse it and create dynamic input fields
+        var lines = $('textarea[name=knowledgelines]').val().split('\n');
+        $wrapper = $('#prk').find('.multi_fields');
+        $cat = 'prk';
+        $.each(lines, function(){
+            addInput($wrapper, $cat, this);
+        });
+        for( var i = 0, l = 3; i < l; i++){
+            //remove the first 3 dynamic fields which been created by default
+            removeInput($wrapper, $cat, i);
+        }
+    }
+  
+  //if topics was checked before
+    if ($('#id_topics').prop('checked')){
+        $('#id_js_topics').prop('checked',true);
+        $('#id_topics').prop('checked',true);
+        $(".js_topicsWrapper").toggle();
+
+        //get the value of Moodle nativ field #id_topiclines, parse it and create dynamic input fields 
+        var lines = $('textarea[name=topiclines]').val().split('\n');
+        $wrapper = $('#tpc').find('.multi_fields');
+        $cat = 'tpc';
+        $.each(lines, function(){
+            addInput($wrapper, $cat, this);
+        });
+        for( var i = 0, l = 3; i < l; i++){
+        //remove the first 3 dynamic fields which been created by default
+            removeInput($wrapper, $cat, i);
+        }
+        var activeEllID = 'group_size';
+        var activeElVal = $('#id_maxmembers').val();
+        var nonActiveElVal = getTopicsNumb();
+
+        adjustGropOptions(activeEllID, activeElVal, nonActiveElVal);
+        $("#group_opt_numb").attr('disabled', 'disabled');
+    }else{
+    	if($('input[name=groupoption]:checked').val() == '0'){
+            var activeEllID = 'group_size';
+            var activeElVal = $('#id_maxmembers').val();
+            var nonActiveElVal = $('#id_maxgroups').val();
+
+            adjustGropOptions(activeEllID, activeElVal, nonActiveElVal);
+        }else{
+            var activeEllID = 'numb_of_groups';
+            var activeElVal = $('#id_maxgroups').val();
+            var nonActiveElVal = $('#id_maxmembers').val();
+
+            adjustGropOptions(activeEllID, activeElVal, nonActiveElVal);
+        }
+    }
+    
+    
+    $('#id_general').focus();
+
+    // End of Load Settings    
+    
+    
   
     //if knowledge gets checked
     $('#id_js_knowledge').click(function(){
@@ -163,22 +177,32 @@ $(document).ready(function() {
     		$('#id_topics').prop('checked',false);
     		$('#id_topiclines').attr('disabled', 'disabled');
             
+            var activeElID = 'group_size';
+            var activeElVal = 0;
+            var nonActiveElVal = 0;
+            adjustGropOptions(activeElID, activeElVal, nonActiveElVal);
             
             $("#group_opt_numb").removeAttr('disabled');
-            $('#numb_of_groups').val(0);
+//            $('#numb_of_groups').val(0);
     	}else{
             //topics on
     		$('#id_topics').prop('checked', true);
     		$('#id_topiclines').removeAttr('disabled');
             
+            var activeElID = 'group_size';
+            var activeElVal = 0;
+            var nonActiveElVal = getTopicsNumb();
+            adjustGropOptions(activeElID, activeElVal, nonActiveElVal);
+            
             $("#group_opt_numb").attr('disabled', 'disabled');
-            $("#group_opt_size").prop("checked", true);
-            $("#group_size").removeAttr('disabled');
-            $("#numb_of_groups").attr('disabled', 'disabled');
-            $('#numb_of_groups').val($('#tpc').find('.multi_field', '.multi_fields').length);
+//            $("#group_opt_size").prop("checked", true);
+//            $("#group_size").removeAttr('disabled');
+//            $("#numb_of_groups").attr('disabled', 'disabled');
+//            $('#numb_of_groups').val($('#tpc').find('.multi_field', '.multi_fields').length);
     	}
     	$(".js_topicsWrapper").toggle();
     });
+    
     
     
     
@@ -202,15 +226,11 @@ $(document).ready(function() {
         if($cat == 'tpc'){
             $('.topicLi:first-child', '#previewTopics').clone(true).attr('id',$previewRowID)
                                                                 .appendTo('#previewTopics').html('<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' + $value);
-            
-            // adjust the number of groups to the number of topics
-            $('#numb_of_groups').val($('#tpc').find('.multi_field', '.multi_fields').length);
         }
     }
     
     function removeInput($wrapper, $cat, $theID){
         if ($('.multi_field', $wrapper).length > 1){
-//            $theID = parseInt($field.parent('.multi_field').attr('id').substr(8));
             $previewRowID = $cat + 'Row' +  $theID;
             $multifieldID = 'input' + $cat + $theID;
             //remove Preview
@@ -224,6 +244,8 @@ $(document).ready(function() {
             }
             if($cat == 'tpc'){
                 synchronizeTopics();
+                $('#numb_of_groups').val(getTopicsNumb());
+//                synchronizeTopicsWithGroupnumber();
             }
         }
     }
@@ -249,9 +271,8 @@ $(document).ready(function() {
         
         
     // Create Preview and write to the native Moodle input
-       $('.multi_field input:text', $wrapper).focus(function() {
-            $previewRowID = ($cat + 'Row' + parseInt($(this).parent().attr('id').substr(8)));
-              $(this).keyup(function(){
+        $('.multi_field input:text', $wrapper).keyup(function() {
+        	$previewRowID = ($cat + 'Row' + parseInt($(this).parent().attr('id').substr(8)));
                   if ($cat == 'prk'){
                       $('#' + $previewRowID).children('th').text($(this).val());
                       synchronizePreknowledge();
@@ -259,9 +280,11 @@ $(document).ready(function() {
                   if ($cat == 'tpc'){
                       $('#' + $previewRowID).html('<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' + $(this).val());
                       synchronizeTopics();
+                      $('#numb_of_groups').val(getTopicsNumb());
+                      selectOption('#id_maxgroups', getTopicsNumb());
                   }
               });
-      });
+//      });
   });
     
         
@@ -286,30 +309,73 @@ $(document).ready(function() {
       $('#id_topiclines').val(stringOfTopics.slice(0, -1));
     }
     
-  
+    
 
-    //disable with radios
-
-    $('input[name=group_opt], input[name=valid_opt]').change(function(e){
-        
-        // disable all inputs in .second and set value to 0
-        $('.' + $(this).attr('name')).attr('disabled', 'disabled');
-        $('.' + $(this).attr('name')).val(0);
-        // enable the current input .second
-        $('#'+$(this).val()).removeAttr('disabled');
-        
-        // click non-js radio buttons
-        if ($(this).prop('id')=='group_opt_size'){
-        	$('#id_groupoption_0').click();
-        	$('#id_maxgroups').val(0);
-        }else{
-        	$('#id_groupoption_1').click();
-            $('#id_maxmembers').val(0);
-        }
+    //Groupoptions radiobutton listener
+    $('input[name=group_opt]').change(function(e){
+        var activeElVal = 0;
+        var nonActiveElVal = 0;
+        var activeElID = $(this).val();
+        adjustGropOptions(activeElID, activeElVal, nonActiveElVal);
     });
+    
+    //Groupoptions values listener
+    $('input[class=group_opt]').bind('keyup change', function(){
+            var elID = $(this).attr('id');
+            var elValue = $(this).val();
+            if(elID == 'group_size'){
+            	selectOption('#id_maxmembers', elValue);
+            }else{
+            	selectOption('#id_maxgroups', elValue);
+            }
+        });
+    
+    
+    
+    function adjustGropOptions($activeEllID, $activeElVal, $nonActiveElVal){
+        if($activeEllID == 'group_size'){
+        	$('#group_opt_size').prop('checked', true);
+            $('#group_size').removeAttr('disabled').val($activeElVal);
+            $('#numb_of_groups').attr('disabled', 'disabled').val($nonActiveElVal);
+            
+            //Moodle nativ fields
+            $('#id_groupoption_0').prop('checked', true);
+            $('#id_maxmembers').removeAttr('disabled').val($activeElVal);
+            $('#id_maxgroups').attr('disabled', 'disabled');
+            selectOption('#id_maxgroups', $nonActiveElVal);
+            
+        }else{
+        	$('#group_opt_numb').prop('checked', true);
+            $('#numb_of_groups').removeAttr('disabled').val($activeElVal);
+            $('#group_size').attr('disabled', 'disabled').val($nonActiveElVal);
+            
+            //Moodle nativ fields
+            $('#id_groupoption_1').prop('checked', true);
+            $('#id_maxgroups').removeAttr('disabled').val($activeElVal);
+            $('#id_maxmembers').attr('disabled', 'disabled').val($nonActiveElVal);
+            selectOption('#id_maxmembers', $nonActiveElVal);
+        }
+    }
 
     
+    function getTopicsNumb(){
+        var topicsCounter = 0;
+        $('.js_topicInput').each(function(){
+          if(!$(this).val() == ''){
+            topicsCounter++;
+          }
+      });
+        return topicsCounter;
+    }    
     
+    
+    
+    function selectOption($selectID, $value){
+    	$($selectID + ' option').prop('selected', false).filter('[value="' + $value + '"]').prop('selected', true);
+    }
+    
+    
+
     
     
   /////////////////////// Sticky buttons ///////////////////////////////////////////////////////////

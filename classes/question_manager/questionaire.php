@@ -91,7 +91,7 @@
 					$tableType = $question[0][0];
 					$headerOptArray = $question[0][2];
 					
-					echo '<form action="">';
+					echo '<form action="" method="post">';
 					
 					
 					
