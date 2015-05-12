@@ -273,7 +273,7 @@ $(document).ready(function() {
             stringOfPreknowledge += $(this).val() + '\n';
           }
       });
-      $('#id_knowledgelines').val(stringOfPreknowledge.slice(0, -2));
+      $('#id_knowledgelines').val(stringOfPreknowledge.slice(0, -1));
     }
 
     function synchronizeTopics(){
@@ -283,7 +283,7 @@ $(document).ready(function() {
             stringOfTopics += $(this).val() + '\n';
           }
       });
-      $('#id_topiclines').val(stringOfTopics.slice(0, -2));
+      $('#id_topiclines').val(stringOfTopics.slice(0, -1));
     }
     
   
