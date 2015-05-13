@@ -372,6 +372,7 @@ $(document).ready(function() {
     
     function selectOption($selectID, $value){
     	$($selectID + ' option').prop('selected', false).filter('[value="' + $value + '"]').prop('selected', true);
+    	// TODO @Eduard: Da maxgroups und maxmembers nun Textfelder sind, musst das hier anpassen
     }
     
     
