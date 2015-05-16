@@ -3,6 +3,9 @@ $(document).ready(function() {
     // hide validation error alerts and show them if needed
     // if css attribute "display:none" and show on validation error, they will not displayed properly
     $(".errors p").hide();
+    // TODO wenn JS und nonJS fehlerfrei funktioniert, die folgende Zeile einkommentieren
+//    $("#non-js-content").hide();
+    $("#js-content").show();
     
     //$("#fitem_id_szenario").hide();
 //    $("#fitem_id_knowledge").hide();

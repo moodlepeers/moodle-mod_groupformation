@@ -35,9 +35,12 @@
  *}
  */
 	
-	function addjQuery($PAGE){
+	function addjQuery($PAGE,$filename = null){
 		$PAGE->requires->jquery();
 		
-		$PAGE->requires->js('/mod/groupformation/js/settings_functions.js');
+		if (!is_null($filename)){
+			$PAGE->requires->js('/mod/groupformation/js/'.$filename);
+		}
+		
 		
 	}

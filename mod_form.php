@@ -30,24 +30,25 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 require_once ($CFG->dirroot . '/course/moodleform_mod.php');
 require_once ($CFG->dirroot . '/mod/groupformation/lib.php'); // not in the template
 require_once ($CFG->dirroot . '/mod/groupformation/locallib.php');
+
 class mod_groupformation_mod_form extends moodleform_mod {
 	
 	/**
 	 * (non-PHPdoc)
-	 * 
+	 *
 	 * @see moodleform::definition()
 	 */
 	function definition() {
 		global $PAGE;
+		
+		// Import jQuery and js file
+		addjQuery ( $PAGE, 'settings_functions.js' );
 		
 		// global $CFG, $DB, $OUTPUT;
 		$mform = & $this->_form;
 		
 		// Adding the "general" fieldset, where all the common settings are showed.
 		$mform->addElement ( 'header', 'general', get_string ( 'general', 'form' ) );
-		
-		// TODO @EG hier ist Jquery eingebunden worden ohne Fehler!
-		addjQuery ($PAGE);
 		
 		// Adding the standard "name" field.
 		$mform->addElement ( 'text', 'name', get_string ( 'groupformationname', 'groupformation' ), array (
@@ -77,55 +78,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		// Adding the rest of groupformation settings, spreeading all them into this fieldset
 		$mform->addElement ( 'header', 'groupformationsettings', get_string ( 'groupformationsettings', 'groupformation' ) );
 		
-		// Adding field Szenario choice
-		$mform->addElement ( 'select', 'szenario', get_string ( 'scenario', 'groupformation' ), array (
-				get_string ( 'choose_scenario', 'groupformation' ),
-				get_string ( 'scenario_projectteams', 'groupformation' ),
-				get_string ( 'scenario_homeworkgroups', 'groupformation' ),
-				get_string ( 'scenario_presentationgroups', 'groupformation' ) 
-		), null );
-		$mform->addRule ( 'szenario', get_string ( 'scenario_error', 'groupformation' ), 'required', null, 'client' );
-		
-		// Adding fields for Knowledge questions
-		$mform->addElement ( 'checkbox', 'knowledge', get_string ( 'knowledge', 'groupformation' ) );
-		$mform->addElement ( 'textarea', 'knowledgelines', get_string ( 'knowledge', 'groupformation' ), 'wrap="virtual" rows="10" cols="50"' );
-		$mform->disabledIf ( 'knowledgelines', 'knowledge', 'notchecked' );
-		
-		// Adding fields for topic choices
-		$mform->addElement ( 'checkbox', 'topics', get_string ( 'topics', 'groupformation' ) );
-		$mform->addElement ( 'textarea', 'topiclines', get_string ( 'topics', 'groupformation' ), 'wrap="virtual" rows="10" cols="50"' );
-		$mform->disabledIf ( 'topiclines', 'topics', 'notchecked' );
-		
-		// Adding fields for max members or max groups
-		$radioarray = array ();
-		$radioarray [] = & $mform->createElement ( 'radio', 'groupoption', '', get_string ( 'maxmembers', 'groupformation' ), 0, null );
-		$radioarray [] = & $mform->createElement ( 'radio', 'groupoption', '', get_string ( 'maxgroups', 'groupformation' ), 1, null );
-		$mform->addGroup ( $radioarray, 'radioar', get_string ( 'groupoptions', 'groupformation' ), array (
-				' ' 
-		), false );
-		$mform->addRule ( 'radioar', get_string ( 'maxmembers_error', 'groupformation' ), 'required', null, 'client' );
-
-		$mform->addElement ( 'text', 'maxmembers', get_string ( 'maxmembers', 'groupformation' ), null );
-		$mform->addElement ( 'text', 'maxgroups', get_string ( 'maxgroups', 'groupformation' ), null );
-		$mform->setType ( 'maxmembers', PARAM_NUMBER );
-		$mform->setType ( 'maxgroups', PARAM_NUMBER );
-		
-		$mform->disabledIf ( 'maxmembers', 'groupoption', 'eq', '1' );
-		$mform->disabledIf ( 'maxgroups', 'groupoption', 'eq', '0' );
-		$mform->disabledIf ( 'maxmembers', 'groupoption', 'eq', '1' );
-		
-		// Adding field for evaluation method
-		$mform->addElement ( 'select', 'evaluationmethod', get_string ( 'evaluationmethod_description', 'groupformation' ), array (
-				get_string ( 'choose_evaluationmethod', 'groupformation' ),
-				get_string ( 'grades', 'groupformation' ),
-				get_string ( 'points', 'groupformation' ),
-				get_string ( 'justpass', 'groupformation' ),
-				get_string ( 'noevaluation', 'groupformation' ) 
-		), null );
-		$mform->addRule ( 'evaluationmethod', get_string ( 'evaluationmethod_error', 'groupformation' ), 'required', null, 'client' );
-		$mform->addElement ( 'text', 'maxpoints', get_string ( 'maxpoints','groupformation' ) );
-		$mform->disabledIf ( 'maxpoints', 'evaluationmethod', 'neq', '2' );
-		$mform->setType ( 'maxpoints', PARAM_NUMBER );
+		$this->generateHTMLforNonJS ( $mform );
 		
 		$this->generateHTMLforJS ( $mform );
 		
@@ -141,7 +94,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 	
 	/**
 	 * (non-PHPdoc)
-	 * 
+	 *
 	 * @see moodleform_mod::validation()
 	 */
 	function validation($data, $files) {
@@ -153,13 +106,11 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		
 		// Check if maxmembers or maxgroups is selected and number is chosen
 		if ($data ['groupoption'] == 0) {
-			if (!(is_numeric ( $data ['maxmembers'])) 
-						|| !(intval ( $data ['maxmembers'] ) > 0)) {
+			if (! (is_numeric ( $data ['maxmembers'] )) || ! (intval ( $data ['maxmembers'] ) > 0)) {
 				$errors ['maxmembers'] = get_string ( 'maxmembers_error', 'groupformation' );
 			}
 		} elseif ($data ['groupoption'] == 1) {
-			if (!(is_numeric ( $data ['maxgroups'])) 
-						|| !(intval ( $data ['maxgroups'] ) > 0)) {
+			if (! (is_numeric ( $data ['maxgroups'] )) || ! (intval ( $data ['maxgroups'] ) > 0)) {
 				$errors ['maxgroups'] = get_string ( 'maxgroups_error', 'groupformation' );
 			}
 		}
@@ -169,15 +120,22 @@ class mod_groupformation_mod_form extends moodleform_mod {
 			$errors ['evaluationmethod'] = get_string ( 'evaluationmethod_error', 'groupformation' );
 		}
 		
-		if ($data ['evaluationmethod'] == 2 && 
-				(!(is_numeric ( $data ['maxpoints'])) 
-						|| !(intval ( $data ['maxpoints'] ) <= 100) 
-						|| !(intval ( $data ['maxpoints'] ) > 0))) {
-			$errors ['maxpoints'] = get_string ( 'maxpoints_error', 'groupformation' );							
+		if ($data ['evaluationmethod'] == 2 && (! (is_numeric ( $data ['maxpoints'] )) || ! (intval ( $data ['maxpoints'] ) <= 100) || ! (intval ( $data ['maxpoints'] ) > 0))) {
+			$errors ['maxpoints'] = get_string ( 'maxpoints_error', 'groupformation' );
 		}
 		return $errors;
 	}
+	
+	/**
+	 * generates HTML code for JS version
+	 *
+	 * @param unknown $mform        	
+	 */
 	function generateHTMLforJS(&$mform) {
+		// open div tag for js related content
+		$mform->addElement ( 'html', '<div id="js-content" style="display:none;">' );
+		
+		// add scenario related HTML
 		$mform->addElement ( 'html', '
 	        		<div class="grid">
                     <div class="col_100">
@@ -218,7 +176,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 
 	        		' );
 		
-		// add Checkbox Preknowledge
+		// add checkbox preknowledge
 		$mform->addElement ( 'html', '
 					<div class="col_100">
                         <h4 class="optional"><label for="id_js_knowledge">
@@ -227,7 +185,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
                         </label> 
                     </div>' );
 		
-		// add dynamic Inputfields Preknowledge and Preview
+		// add dynamic input fields preknowledge and Preview
 		$mform->addElement ( 'html', '
 					<div class="grid">
                     <div class="col_100">
@@ -311,7 +269,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
                 </div> <!-- /grid --> 
                 ' );
 		
-		// add checkbox Topics
+		// add checkbox topics
 		$mform->addElement ( 'html', '
                 <div class="grid">
                     
@@ -322,7 +280,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
                         </label> 
                     </div>' );
 		
-		// add dynamic Inputfields Topics with Preview
+		// add dynamic input fields topics with preview
 		$mform->addElement ( 'html', '                    
                     <div class="col_100">
                         <div class="js_topicsWrapper">
@@ -397,7 +355,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
                 </div> <!-- /grid -->
                 ' );
 		
-		// add Evaluation Options
+		// add evaluation options
 		$mform->addElement ( 'html', '
                 
                 <div class="grid option_row">
@@ -418,90 +376,79 @@ class mod_groupformation_mod_form extends moodleform_mod {
                 </div> <!-- /grid -->
                 ' );
 		
-		// $mform->addElement('html', '
-		// <div class="col_100">
-		// <h4 class="optional"><input name="js_knowledge" type="checkbox" value="1" id="id_js_knowledge">
-		// '.get_string('knowledge_description','groupformation').'
-		// </h4>
-		// </div>');
-		// // Adding dynamic inputfields
-		// $mform->addElement('html', '
-		// <div class="knowledgeWrapper">
+		// close div tag for js related content
+		$mform->addElement ( 'html', '</div id="js-content">' );
+	}
+	
+	/**
+	 * generates moodle form elements for non-JS version
+	 *
+	 * @param unknown $mform        	
+	 */
+	function generateHTMLforNonJS(&$mform) {
 		
-		// <p>'.get_string('knowledge_description_extended','groupformation').'</p>
+		// open div tag for non js related content
+		$mform->addElement ( 'html', '<div id="non-js-content">' );
 		
-		// <div class="grid">
-		// <div id="prk">
-		// <div class="multi_field_wrapper persist-area">
-		// <div class="col_50">
-		// <div id="" class="btn_wrap">
-		// <label>
-		// <button type="button" class="add_field" title="'.get_string('add_line','groupformation').'"></button>'.get_string('add_line','groupformation').'</label>
-		// </div>
+		// add field Szenario choice
+		$mform->addElement ( 'select', 'szenario', get_string ( 'scenario', 'groupformation' ), array (
+				get_string ( 'choose_scenario', 'groupformation' ),
+				get_string ( 'scenario_projectteams', 'groupformation' ),
+				get_string ( 'scenario_homeworkgroups', 'groupformation' ),
+				get_string ( 'scenario_presentationgroups', 'groupformation' ) 
+		), null );
 		
-		// <!-- Die Input Felder-->
+		$mform->addRule ( 'szenario', get_string ( 'scenario_error', 'groupformation' ), 'required', null, 'client' );
 		
-		// <div class="multi_fields">
-		// <div class="multi_field" id="inputprk0">
-		// <input class="respwidth" type="text" name="knowledge[]" id="js_id_knowledge">
-		// <button type="button" class="remove_field" title="'.get_string('remove_line','groupformation').'"></button>
-		// </div>
-		// <div class="multi_field" id="inputprk1">
-		// <input class="respwidth" type="text" name="knowledge[]">
-		// <button type="button" class="remove_field" title="'.get_string('remove_line','groupformation').'"></button>
-		// </div>
-		// <div class="multi_field" id="inputprk2">
-		// <input class="respwidth" type="text" name="knowledge[]">
-		// <button type="button" class="remove_field" title="'.get_string('remove_line','groupformation').'"></button>
-		// </div>
-		// </div>
-		// </div> <!-- /col_50 -->
+		// add fields for Knowledge questions
+		$mform->addElement ( 'checkbox', 'knowledge', get_string ( 'knowledge', 'groupformation' ) );
+		$mform->addElement ( 'textarea', 'knowledgelines', get_string ( 'knowledge', 'groupformation' ), 'wrap="virtual" rows="10" cols="50"' );
 		
-		// <!-- Die Vorschau -->
-		// <div class="col_50">
+		$mform->disabledIf ( 'knowledgelines', 'knowledge', 'notchecked' );
 		
-		// <h3>'.get_string('preview','groupformation').'</h3>
+		// add fields for topic choices
+		$mform->addElement ( 'checkbox', 'topics', get_string ( 'topics', 'groupformation' ) );
+		$mform->addElement ( 'textarea', 'topiclines', get_string ( 'topics', 'groupformation' ), 'wrap="virtual" rows="10" cols="50"' );
 		
-		// <div class="col_100">'.
-		// // '<h4 class="view_on_mobile">'.get_string('knowledge_question','groupformation').'</h4>'.
-		// '<table class="responsive-table">
-		// <colgroup width="" span="">
-		// <col class="firstCol">
-		// <col width="36%">
-		// </colgroup>
+		$mform->disabledIf ( 'topiclines', 'topics', 'notchecked' );
 		
-		// <thead>
-		// <tr>
-		// <th scope="col" class="">'.get_string('knowledge_question','groupformation').'</th>
-		// <th scope="col"><div class="legend">'.get_string('knowledge_scale','groupformation').'</div></th>
-		// </tr>
-		// </thead>
-		// <tbody id="preknowledges">
-		// <tr class="knowlRow" id="prkRow0">
-		// <th scope="row"><span id="prkRow0_span">Beispiel</span></th>
-		// <td data-title="'.get_string('knowledge_scale','groupformation').'" class="range"><span >0</span><input type="range" min="0" max="100" value="0" /><span>100</span></td>
-		// </tr>
-		// <tr class="knowlRow" id="prkRow1">
-		// <th scope="row"><span id="prkRow1_span">Beispiel</span></th>
-		// <td data-title="'.get_string('knowledge_scale','groupformation').'" class="range"><span >0</span><input type="range" min="0" max="100" value="0" /><span>100</span></td>
-		// </tr>
-		// <tr class="knowlRow" id="prkRow2">
-		// <th scope="row"><span id="prkRow2_span">Beispiel</span></th>
-		// <td data-title="'.get_string('knowledge_scale','groupformation').'" class="range"><span >0</span><input type="range" min="0" max="100" value="0" /><span>100</span></td>
-		// </tr>
+		// add fields for max members or max groups
+		$radioarray = array ();
+		$radioarray [] = & $mform->createElement ( 'radio', 'groupoption', '', get_string ( 'maxmembers', 'groupformation' ), 0, null );
+		$radioarray [] = & $mform->createElement ( 'radio', 'groupoption', '', get_string ( 'maxgroups', 'groupformation' ), 1, null );
+		$mform->addGroup ( $radioarray, 'radioar', get_string ( 'groupoptions', 'groupformation' ), array (
+				' ' 
+		), false );
+		$mform->addRule ( 'radioar', get_string ( 'maxmembers_error', 'groupformation' ), 'required', null, 'client' );
 		
-		// </tbody>
-		// </table>
-		// </div>
+		$mform->addElement ( 'text', 'maxmembers', get_string ( 'maxmembers', 'groupformation' ), null );
+		$mform->addElement ( 'text', 'maxgroups', get_string ( 'maxgroups', 'groupformation' ), null );
 		
-		// </div> <!-- /col_50 -->
-		// </div> <!-- /multi_field_wrapper-->
-		// </div> <!-- Anchor-->
+		$mform->setType ( 'maxmembers', PARAM_NUMBER );
+		$mform->setType ( 'maxgroups', PARAM_NUMBER );
 		
-		// </div> <!-- /.grid -->
-		// </div> <!-- /.knowledge -->
+		$mform->disabledIf ( 'maxmembers', 'groupoption', 'eq', '1' );
+		$mform->disabledIf ( 'maxgroups', 'groupoption', 'eq', '0' );
+		$mform->disabledIf ( 'maxmembers', 'groupoption', 'eq', '1' );
 		
-		// ');
+		// add field for evaluation method
+		$mform->addElement ( 'select', 'evaluationmethod', get_string ( 'evaluationmethod_description', 'groupformation' ), array (
+				get_string ( 'choose_evaluationmethod', 'groupformation' ),
+				get_string ( 'grades', 'groupformation' ),
+				get_string ( 'points', 'groupformation' ),
+				get_string ( 'justpass', 'groupformation' ),
+				get_string ( 'noevaluation', 'groupformation' ) 
+		), null );
+		
+		$mform->addRule ( 'evaluationmethod', get_string ( 'evaluationmethod_error', 'groupformation' ), 'required', null, 'client' );
+		
+		$mform->addElement ( 'text', 'maxpoints', get_string ( 'maxpoints', 'groupformation' ) );
+		
+		$mform->disabledIf ( 'maxpoints', 'evaluationmethod', 'neq', '2' );
+		$mform->setType ( 'maxpoints', PARAM_NUMBER );
+		
+		// close div tag for non-js related content
+		$mform->addElement ( 'html', '</div id="non-js-content">' );
 	}
 }
 
