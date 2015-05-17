@@ -32,14 +32,26 @@ $(document).ready(function() {
     	if(szenario == 1){
     			$("input[name='js_szenario'][value='project']").attr("checked","checked");
     			//check browser support first, before delete this
-	    		setSzenario('project');
+    			$('#knowledfeInfo').text($('#knowledfeInfoProject').text());
+                $('#headerTopics').removeClass('required').addClass('optional');
+                $('#id_js_topics').prop('disabled', false);
+                
+//	    		setSzenario('project');
     		}else if(szenario == 2){
     			$("input[name='js_szenario'][value='homework']").attr("checked","checked");
     			//check browser support first, before delete this
-	    		setSzenario('homework');
+    			$('#knowledfeInfo').text($('#knowledfeInfoHomework').text());
+                $('#headerTopics').removeClass('required').addClass('optional');
+                $('#id_js_topics').prop('disabled', false);
+                
+//	    		setSzenario('homework');
     		}else if(szenario == 3){
     			$("input[name='js_szenario'][value='presentation']").attr("checked","checked");
     			//check browser support first, before delete this
+    			$('#knowledfeInfo').text($('#knowledfeInfoPresentation').text());
+                $('#headerTopics').removeClass('optional').addClass('required');
+                $('#id_js_topics').prop('disabled', true);
+                
 	    		setSzenario('presentation');
     		}
     }
@@ -273,6 +285,7 @@ $(document).ready(function() {
             if($cat == 'tpc'){
                 synchronizeTopics();
                 $('#numb_of_groups').val(getTopicsNumb());
+                writeTextInput('#id_maxgroups', getTopicsNumb());
             }
         }
     }
@@ -311,8 +324,7 @@ $(document).ready(function() {
                       writeTextInput('#id_maxgroups', getTopicsNumb());
                   }
               });
-//      });
-  });
+    });
     
         
   
@@ -367,7 +379,6 @@ $(document).ready(function() {
             
             //Moodle nativ fields
             $('#id_groupoption_0').prop('checked', true);
-//            $('#id_maxmembers').removeAttr('disabled').val($activeElVal);
             $('#id_maxmembers').removeAttr('disabled');
             writeTextInput('#id_maxmembers', activeElVal);
             $('#id_maxgroups').attr('disabled', 'disabled');

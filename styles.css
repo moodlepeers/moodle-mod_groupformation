@@ -298,7 +298,7 @@ button.remove_field {
   line-height: 1.3;
   background-color: #eee;
   /*      margin: 20px 0;*/
-  padding: 20px 15px;
+  padding: 20px 15px !important;
   border: 1px solid #ccc; }
   .szenarioradios label:hover {
     cursor: pointer;
