@@ -4,103 +4,50 @@ $(document).ready(function() {
     // if css attribute "display:none" and show on validation error, they will not displayed properly
     $(".errors p").hide();
     // TODO wenn JS und nonJS fehlerfrei funktioniert, die folgende Zeile einkommentieren
-//    $("#non-js-content").hide();
+    $("#non-js-content").hide();
     $("#js-content").show();
     
-    //$("#fitem_id_szenario").hide();
-//    $("#fitem_id_knowledge").hide();
-//    $("#fitem_id_knowledgelines").hide();
-    
-//    var topicCounter = 3; //counts topics to make group numbers
-//    
-//    var preknwCounter = 3;
-    
+
     var stringOfPreknowledge = "";
 
     var stringOfTopics = "";
     
-    //$('#fitem_id_knowledge').insertBefore('.knowledgeWrapper');
-    
-    
-//    $('#js_id_knowledge').keyup(function () {
-//    	$('#prkRow0_span').html($('#js_id_knowledge').val());
-//    
-//    });
-    
-    //if knowledge gets checked
-//    $('#id_js_knowledge').click(function(){
-//    	if ($('#id_knowledge').prop('checked')){
-//    		$('#id_knowledge').prop('checked',false);
-//    	}else{
-//    		$('#id_knowledge').prop('checked', true);
-//    	}
-//    	$(".js_knowledgeWrapper").toggle();
-//    });
-//    
-//    //if topics gets checked
-//    $('#id_js_topics').click(function(){
-//    	if ($('#id_topics').prop('checked')){
-//    		$('#id_topics').prop('checked',false);
-//    	}else{
-//    		alert("false Dialog");
-//    		$('#id_topics').prop('checked', true);
-//    	}
-//    	$(".js_topicsWrapper").toggle();
-//    });
-//    
-//    //if knowledge was checked last time
-//    if ($('#id_knowledge').prop('checked')){
-//    	$('#id_js_knowledge').prop('checked',true);
-//    	$('#id_knowledge').prop('checked',true);
-//    	$(".js_knowledgeWrapper").toggle();
-//    }
-//    
-//    //if topics was checked last time
-//    if ($('#id_topics').prop('checked')){
-//    	$('#id_js_topics').prop('checked',true);
-//    	$('#id_topics').prop('checked',true);
-//    	$(".js_topicsWrapper").toggle();
-//    }
-//    
-//    $('#js_evaluationmethod').val($('#id_evaluationmethod').val());
-//    $('#group_size').val($('#id_maxmembers').val());
-//    $('#numb_of_groups').val($('#id_maxgroups').val());
-//    
-//    // change of evaluationmethod in js changes non-js field
-//    $('#js_evaluationmethod').change(function() {
-//    	$('#id_evaluationmethod').val( this.value);
-//    });
-//    
-//    // change of numb_of_groups in js changes non-js field
-//    $('#numb_of_groups').keyup(function() {
-//    	$('#id_maxgroups').val(parseInt(this.value));
-//    });
-//    $('#numb_of_groups').change(function() {
-//    	$('#id_maxgroups').val(this.value);
-//    });
-//    
-//    // change of group_size in js changes non-js field
-//    $('#group_size').keyup(function() {
-//    	$('#id_maxmembers').val(parseInt(this.value));
-//    });
-//    $('#group_size').change(function() {
-//    	$('#id_maxmembers').val(this.value);
-//    });
 
     
     
-///////////////////////////////////////////////////////////////////////////////////////////////       
+      
 ///////////////////////////////////////////////////////////////////////////////////////////////      
 ///////////////////////////////////////////////////////////////////////////////////////////////    
     
     
   // Load Settings  
     
+    //load the szenario which been choosen before
+    if ($('#id_szenario option:selected').val() != 0){
+    	 $('#js_szenarioWrapper').show('2000', 'swing');
+    	var szenario = $('#id_szenario option:selected').val();
+    	if(szenario == 1){
+    			$("input[name='js_szenario'][value='project']").attr("checked","checked");
+    			//check browser support first, before delete this
+//	    		setSzenario('project');
+    		}else if(szenario == 2){
+    			$("input[name='js_szenario'][value='homework']").attr("checked","checked");
+    			//check browser support first, before delete this
+//	    		setSzenario('homework');
+    		}else if(szenario == 3){
+    			$("input[name='js_szenario'][value='presentation']").attr("checked","checked");
+    			//check browser support first, before delete this
+//	    		setSzenario('presentation');
+    		}
+    }
+    
+
+    
   //if knowledge was checked before
     if ($('#id_knowledge').prop('checked')){
         $('#id_js_knowledge').prop('checked',true);
         $('#id_knowledge').prop('checked',true);
-        $(".js_knowledgeWrapper").toggle();
+        $("#js_knowledgeWrapper").toggle();
 
         //get the value of Moodle nativ field #id_knowledgelines, parse it and create dynamic input fields
         var lines = $('textarea[name=knowledgelines]').val().split('\n');
@@ -119,7 +66,7 @@ $(document).ready(function() {
     if ($('#id_topics').prop('checked')){
         $('#id_js_topics').prop('checked',true);
         $('#id_topics').prop('checked',true);
-        $(".js_topicsWrapper").toggle();
+        $("#js_topicsWrapper").toggle();
 
         //get the value of Moodle nativ field #id_topiclines, parse it and create dynamic input fields 
         var lines = $('textarea[name=topiclines]').val().split('\n');
@@ -132,6 +79,7 @@ $(document).ready(function() {
         //remove the first 3 dynamic fields which been created by default
             removeInput($wrapper, $cat, i);
         }
+        // set the groupotions depending on topics
         var activeEllID = 'group_size';
         var activeElVal = $('#id_maxmembers').val();
         var nonActiveElVal = getTopicsNumb();
@@ -139,6 +87,7 @@ $(document).ready(function() {
         adjustGropOptions(activeEllID, activeElVal, nonActiveElVal);
         $("#group_opt_numb").attr('disabled', 'disabled');
     }else{
+    	//set the groupotions from the Moodle native inputs
     	if($('input[name=groupoption]:checked').val() == '0'){
             var activeEllID = 'group_size';
             var activeElVal = $('#id_maxmembers').val();
@@ -155,42 +104,103 @@ $(document).ready(function() {
     }
     
     
-    $('#id_general').focus();
+    if($('#id_evaluationmethod option:selected').val() != 0){
+    	var opt = $('#id_evaluationmethod option:selected').val();
+    	if(opt == '1'){
+    		$('#max_points').prop('disabled', true);
+    		$('#js_evaluationmethod option').prop('selected', false).filter('[value=grades]').prop('selected', true);
+    	}else if(opt == '2'){
+    		$('#js_evaluationmethod option').prop('selected', false).filter('[value=points]').prop('selected', true);
+    		$('#max_points').prop('disabled', false);
+    		$('#max_points').val($('#id_maxpoints').val());
+    	}else if(opt == '3'){
+    		$('#max_points').prop('disabled', true);
+    		$('#js_evaluationmethod option').prop('selected', false).filter('[value=justpass]').prop('selected', true);
+    	}else if(opt == '4'){
+    		$('#max_points').prop('disabled', true);
+    		$('#js_evaluationmethod option').prop('selected', false).filter('[value=novaluation]').prop('selected', true);
+    	}
+    }
+    
+    
+    
 
     // End of Load Settings    
     
-    
+///////////////////////////////////////////////////////////////////////////////////////////////     
   
-    //if knowledge gets checked
+    
+    
+    $('.szenarioLabel').click(function(){
+        if(!(typeof $("input[name='js_szenario']:checked").val() != 'undefined')){
+            $('#js_szenarioWrapper').show('2000', 'swing');
+        }
+    });
+    
+    $("input[name='js_szenario']").change(function(){
+        var szenario = $(this).val();
+        setSzenario(szenario);
+    });
+    
+    function setSzenario($szenario){
+        if($szenario == 'project'){
+        	$('#id_szenario option').prop('selected', false).filter('[value=1]').prop('selected', true);
+        	
+            $('#knowledfeInfo').text($('#knowledfeInfoProject').text());
+            switchTopics('off');
+            $('#headerTopics').removeClass('required').addClass('optional');
+            $('#id_js_topics').prop('disabled', false);
+        }else if($szenario == 'homework'){
+        	$('#id_szenario option').prop('selected', false).filter('[value=2]').prop('selected', true);
+        	
+            $('#knowledfeInfo').text($('#knowledfeInfoHomework').text());
+            switchTopics('off');
+            $('#headerTopics').removeClass('required').addClass('optional');
+            $('#id_js_topics').prop('disabled', false);
+        }else if($szenario == 'presentation'){
+        	$('#id_szenario option').prop('selected', false).filter('[value=3]').prop('selected', true);
+        	
+            $('#knowledfeInfo').text($('#knowledfeInfoPresentation').text());
+            switchTopics('on');
+            $('#headerTopics').removeClass('optional').addClass('required');
+            $('#id_js_topics').prop('disabled', true);
+        }
+    }
+    
+    
+    
+    
+ //if knowledge gets checked
     $('#id_js_knowledge').click(function(){
     	if ($('#id_knowledge').prop('checked')){
     		$('#id_knowledge').prop('checked',false);
     		$('#id_knowledgelines').attr('disabled', 'disabled');
+            
+            $("#js_knowledgeWrapper").hide('2000', 'swing');
     	}else{
     		$('#id_knowledge').prop('checked', true);
     		$('#id_knowledgelines').removeAttr('disabled');
+            
+            $("#js_knowledgeWrapper").show('2000', 'swing');
     	}
-    	$(".js_knowledgeWrapper").toggle();
+    	
     });
     
     //if topics gets checked
     $('#id_js_topics').click(function(){
     	if ($('#id_topics').prop('checked')){
-            //topics off
-    		$('#id_topics').prop('checked',false);
-    		$('#id_topiclines').attr('disabled', 'disabled');
-            
-            var activeElID = 'group_size';
-            var activeElVal = 0;
-            var nonActiveElVal = 0;
-            adjustGropOptions(activeElID, activeElVal, nonActiveElVal);
-            
-            $("#group_opt_numb").removeAttr('disabled');
-//            $('#numb_of_groups').val(0);
+            switchTopics('off');
     	}else{
-            //topics on
-    		$('#id_topics').prop('checked', true);
+            switchTopics('on');
+    	}
+    });
+    
+    function switchTopics($state){
+        if($state == 'on'){
+            $('#id_topics').prop('checked', true);
     		$('#id_topiclines').removeAttr('disabled');
+            
+            $('#id_js_topics').prop('checked',true);
             
             var activeElID = 'group_size';
             var activeElVal = 0;
@@ -198,13 +208,25 @@ $(document).ready(function() {
             adjustGropOptions(activeElID, activeElVal, nonActiveElVal);
             
             $("#group_opt_numb").attr('disabled', 'disabled');
-//            $("#group_opt_size").prop("checked", true);
-//            $("#group_size").removeAttr('disabled');
-//            $("#numb_of_groups").attr('disabled', 'disabled');
-//            $('#numb_of_groups').val($('#tpc').find('.multi_field', '.multi_fields').length);
-    	}
-    	$(".js_topicsWrapper").toggle();
-    });
+            
+            $("#js_topicsWrapper").show('2000', 'swing');
+        }
+        if($state == 'off'){
+            $('#id_topics').prop('checked',false);
+    		$('#id_topiclines').attr('disabled', 'disabled');
+            
+            $('#id_js_topics').prop('checked',false);
+            
+            var activeElID = 'group_size';
+            var activeElVal = 0;
+            var nonActiveElVal = 0;
+            adjustGropOptions(activeElID, activeElVal, nonActiveElVal);
+            
+            $("#group_opt_numb").removeAttr('disabled');
+            
+            $("#js_topicsWrapper").hide('2000', 'swing');
+        }
+    }
     
     
     
@@ -248,7 +270,6 @@ $(document).ready(function() {
             if($cat == 'tpc'){
                 synchronizeTopics();
                 $('#numb_of_groups').val(getTopicsNumb());
-//                synchronizeTopicsWithGroupnumber();
             }
         }
     }
@@ -273,7 +294,7 @@ $(document).ready(function() {
         });
         
         
-    // Create Preview and write to the native Moodle input
+        // Create Preview and write to the native Moodle input
         $('.multi_field input:text', $wrapper).keyup(function() {
         	$previewRowID = ($cat + 'Row' + parseInt($(this).parent().attr('id').substr(8)));
                   if ($cat == 'prk'){
@@ -284,7 +305,7 @@ $(document).ready(function() {
                       $('#' + $previewRowID).html('<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' + $(this).val());
                       synchronizeTopics();
                       $('#numb_of_groups').val(getTopicsNumb());
-                      selectOption('#id_maxgroups', getTopicsNumb());
+                      writeTextInput('#id_maxgroups', getTopicsNumb());
                   }
               });
 //      });
@@ -327,9 +348,9 @@ $(document).ready(function() {
             var elID = $(this).attr('id');
             var elValue = $(this).val();
             if(elID == 'group_size'){
-            	selectOption('#id_maxmembers', elValue);
+                writeTextInput('#id_maxmembers', elValue);
             }else{
-            	selectOption('#id_maxgroups', elValue);
+                writeTextInput('#id_maxgroups', elValue);
             }
         });
     
@@ -345,7 +366,7 @@ $(document).ready(function() {
             $('#id_groupoption_0').prop('checked', true);
             $('#id_maxmembers').removeAttr('disabled').val($activeElVal);
             $('#id_maxgroups').attr('disabled', 'disabled');
-            selectOption('#id_maxgroups', $nonActiveElVal);
+            writeTextInput('#id_maxgroups', $nonActiveElVal);
             
         }else{
         	$('#group_opt_numb').prop('checked', true);
@@ -356,7 +377,7 @@ $(document).ready(function() {
             $('#id_groupoption_1').prop('checked', true);
             $('#id_maxgroups').removeAttr('disabled').val($activeElVal);
             $('#id_maxmembers').attr('disabled', 'disabled').val($nonActiveElVal);
-            selectOption('#id_maxmembers', $nonActiveElVal);
+            writeTextInput('#id_maxmembers', $nonActiveElVal);
         }
     }
 
@@ -371,14 +392,50 @@ $(document).ready(function() {
         return topicsCounter;
     }    
     
-    
-    
-    function selectOption($selectID, $value){
-    	$($selectID + ' option').prop('selected', false).filter('[value="' + $value + '"]').prop('selected', true);
-    	// TODO @Eduard: Da maxgroups und maxmembers nun Textfelder sind, musst das hier anpassen
+    function writeTextInput($selectID, $value){
+        $($selectID).val($value);
     }
     
+    // evaluation method listener
+    $('#js_evaluationmethod').change(function(){
+        if($(this).val()=='grades'){
+            $('#id_evaluationmethod option').prop('selected', false).filter('[value=1]').prop('selected', true);
+            $('#max_points').prop('disabled', true);
+            $('#id_maxpoints').prop('disabled', true);
+            $('#max_points').val(0);
+            $('#id_maxpoints').val(0);
+            
+        }else if($(this).val()=='points'){
+            $('#id_evaluationmethod option').prop('selected', false).filter('[value=2]').prop('selected', true);
+            $('#max_points').prop('disabled', false);
+            $('#id_maxpoints').prop('disabled', false);
+            
+        }else if($(this).val()=='justpass'){
+            $('#id_evaluationmethod option').prop('selected', false).filter('[value=3]').prop('selected', true);
+            $('#max_points').prop('disabled', true);
+            $('#id_maxpoints').prop('disabled', true);
+            $('#max_points').val(0);
+            $('#id_maxpoints').val(0);
+        }else if($(this).val()=='novaluation'){
+            $('#id_evaluationmethod option').prop('selected', false).filter('[value=4]').prop('selected', true);
+            $('#max_points').prop('disabled', true);
+            $('#id_maxpoints').prop('disabled', true);
+            $('#max_points').val(0);
+            $('#id_maxpoints').val(0);
+        }else if($(this).val()=='chooseM'){
+            $('#id_evaluationmethod option').prop('selected', false).filter('[value=0]').prop('selected', true);
+            $('#max_points').prop('disabled', true);
+            $('#id_maxpoints').prop('disabled', true);
+            $('#max_points').val(0);
+            $('#id_maxpoints').val(0);
+        }
+    });
     
+    
+    // write max points to Moodle native Input
+    $('#max_points').bind('keyup change', function(){
+        $('#id_maxpoints').val($(this).val());
+    });
 
     
     

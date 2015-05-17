@@ -165,9 +165,7 @@ footer {
 .alright {
   text-align: right; }
 
-.pad20 {
-  padding-left: 20px !important;
-}
+
 /*
 .container {
   margin: 5% 3%; }
@@ -217,7 +215,9 @@ h1.caption {
     font-weight: bold;
     content: "* "; }
 
-.js_knowledgeWrapper, .js_topicsWrapper {
+#js_topicsWrapper, #js_knowledgeWrapper, #js_szenarioWrapper,
+#knowledfeInfoProject, #knowledfeInfoHomework, #knowledfeInfoPresentation
+{
   display: none; }
 
 .multi_field_wrapper input.respwidth {
@@ -257,9 +257,13 @@ button.remove_field {
   background-size: 20px 20px;
   border: none; }
 
-.option_row label, .option_row select {
+/*.option_row label, .option_row select {
   line-height: 60px;
   margin: 1.33em 0; }
+*/
+
+.option_row label{
+  margin-right: .2em; }
 
 /* =============================
     styles

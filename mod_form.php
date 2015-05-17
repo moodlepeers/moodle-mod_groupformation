@@ -148,7 +148,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
                             <div class="col_33">
 			
                                 <input type="radio" name="js_szenario" id="project" value="project"  />
-                                <label class="col_100 pad20" for="project" ><h3>' . get_string ( 'scenario_projectteams', 'groupformation' ) . '</h3>
+                                <label class="col_100 szenarioLabel" for="project" ><h3>' . get_string ( 'scenario_projectteams', 'groupformation' ) . '</h3>
                                     <p><small>' . get_string ( 'scenario_projectteams_description', 'groupformation' ) . '</small></p>
                                 </label>
                             </div>
@@ -156,7 +156,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
                             <div class="col_33">
 			
                                 <input type="radio" name="js_szenario" id="homework" value="homework" />
-                                <label class="col_100 pad20" for="homework" ><h3>' . get_string ( 'scenario_homeworkgroups', 'groupformation' ) . '</h3>
+                                <label class="col_100 szenarioLabel" for="homework" ><h3>' . get_string ( 'scenario_homeworkgroups', 'groupformation' ) . '</h3>
                                     <p><small>' . get_string ( 'scenario_homeworkgroups_description', 'groupformation' ) . '</small></p>
                                 </label>
                             </div>
@@ -164,7 +164,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
                             <div class="col_33">
 			
                                 <input type="radio" name="js_szenario" id="presentation" value="presentation" />
-                                <label class="col_100 pad20" for="presentation"><h3>' . get_string ( 'scenario_presentationgroups', 'groupformation' ) . '</h3>
+                                <label class="col_100 szenarioLabel" for="presentation"><h3>' . get_string ( 'scenario_presentationgroups', 'groupformation' ) . '</h3>
                                     <p><small>' . get_string ( 'scenario_presentationgroups_description', 'groupformation' ) . '</small></p>
                                 </label>
                             </div>
@@ -175,6 +175,9 @@ class mod_groupformation_mod_form extends moodleform_mod {
                 </div> <!-- /grid  -->
 
 	        		' );
+		
+		//wrapper of the szenario
+		$mform->addElement ( 'html', '<div id="js_szenarioWrapper">');
 		
 		// add checkbox preknowledge
 		$mform->addElement ( 'html', '
@@ -190,10 +193,19 @@ class mod_groupformation_mod_form extends moodleform_mod {
 					<div class="grid">
                     <div class="col_100">
                        
-                        <div class="js_knowledgeWrapper">
+                        <div id="js_knowledgeWrapper">
                         
-                        <p>' . get_string ( 'knowledge_description_extended', 'groupformation' ) . '</p>
-                                    
+                       <!-- <p>' . get_string ( 'knowledge_description_extended', 'groupformation' ) . '</p> -->
+
+						<p id="knowledfeInfo"></p>
+				
+						<p id="knowledfeInfoProject">Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einsch&auml;tzen sollen. Eine Vorschau des Studenten-Fragebogens sehen Sie rechts. F&uuml;r Ihre Auswahl "Projektgruppen" wird das Vorwissen ...</p>
+                        
+                        <p id="knowledfeInfoHomework">Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einsch&auml;tzen sollen. Eine Vorschau des Studenten-Fragebogens sehen Sie rechts. F&uuml;r Ihre Auswahl "Hausaufgabengruppen" wird das Vorwissen m&ouml;glichst varriiert in jeder Gruppe.</p>
+                        
+                        <p id="knowledfeInfoPresentation">Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einsch&auml;tzen sollen. Eine Vorschau des Studenten-Fragebogens sehen Sie rechts. F&uuml;r Ihre Auswahl "Referatsgruppen" wird das Vorwissen ...</p>
+				
+				
                             <div class="grid">
                             <div id="prk">    
                             <div class="multi_field_wrapper persist-area">
@@ -274,7 +286,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
                 <div class="grid">
                     
                     <div class="col_100">
-                        <h4 class="optional"><label for="id_js_topics">
+						<h4 id="headerTopics" class="optional"><label for="id_js_topics">
                           <input type="checkbox" id="id_js_topics" name="chbTopics" value="wantTopics">
                           ' . get_string ( 'topics_description', 'groupformation' ) . '</h4>
                         </label> 
@@ -283,7 +295,8 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		// add dynamic input fields topics with preview
 		$mform->addElement ( 'html', '                    
                     <div class="col_100">
-                        <div class="js_topicsWrapper">
+                        <div id="js_topicsWrapper">
+				
                         <p>' . get_string ( 'topics_description_extended', 'groupformation' ) . '</p>
                                     
                             <div class="grid">
@@ -344,14 +357,16 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		$mform->addElement ( 'html', '
                 <div class="grid option_row">
 
-                    <div class="col_33 ">
+                    <div class="col_100 ">
                         <h4 class="optional">' . get_string ( 'groupoption_description', 'groupformation' ) . '<span class="toolt" tooltip="' . get_string ( 'groupoption_help', 'groupformation' ) . '"></span></h4>
                     </div>
 
-                    <div class="col_33" ><label><input type="radio" name="group_opt" id="group_opt_size" value="group_size" checked="checked" />
-                                ' . get_string ( 'maxmembers', 'groupformation' ) . '</label><input type="number" class="group_opt" id="group_size" min="0" max="100" value="0" /></div>
-                    <div class="col_33"><label><input type="radio" name="group_opt" id="group_opt_numb" value="numb_of_groups"/>
-                                ' . get_string ( 'maxgroups', 'groupformation' ) . '</label><input type="number" class="group_opt" id="numb_of_groups"  min="0" max="100" value="0" disabled="disabled" /></div>
+                    <div class="col_50"><label><input type="radio" name="group_opt" id="group_opt_size" value="group_size" checked="checked" />
+                                ' . get_string ( 'maxmembers', 'groupformation' ) . '</label>
+								<input type="number" class="group_opt" id="group_size" min="0" max="100" value="0" /></div>
+                    <div class="col_50"><label><input type="radio" name="group_opt" id="group_opt_numb" value="numb_of_groups"/>
+                                ' . get_string ( 'maxgroups', 'groupformation' ) . '</label>
+								<input type="number" class="group_opt" id="numb_of_groups"  min="0" max="100" value="0" disabled="disabled" /></div>
                 </div> <!-- /grid -->
                 ' );
 		
@@ -360,21 +375,26 @@ class mod_groupformation_mod_form extends moodleform_mod {
                 
                 <div class="grid option_row">
 
-                    <div class="col_33">
+                    <div class="col_100">
                         <h4 class="required">' . get_string ( 'evaluationmethod_description', 'groupformation' ) . '</h4>
                     </div>
                     <div class="col_66">
-                        <select name="js_evaluationmethod" id="js_evaluationmethod">
-							<option value="0">' . get_string ( 'choose_evaluationmethod', 'groupformation' ) . '</option>
-                            <option value="1">' . get_string ( 'grades', 'groupformation' ) . '</option>
-                            <option value="2">' . get_string ( 'points', 'groupformation' ) . '</option>
-                            <option value="3">' . get_string ( 'justpass', 'groupformation' ) . '</option>
-                            <option value="4">' . get_string ( 'noevaluation', 'groupformation' ) . '</option>
+                        <select id="js_evaluationmethod">
+							<option value="chooseM">' . get_string ( 'choose_evaluationmethod', 'groupformation' ) . '</option>
+                            <option value="grades">' . get_string ( 'grades', 'groupformation' ) . '</option>
+                            <option value="points">' . get_string ( 'points', 'groupformation' ) . '</option>
+                            <option value="justpass">' . get_string ( 'justpass', 'groupformation' ) . '</option>
+                            <option value="novaluation">' . get_string ( 'noevaluation', 'groupformation' ) . '</option>
                         </select>
+						<input type="number" id="max_points"  min="0" max="100" value="0" disabled="disabled" />
                     </div>
 
                 </div> <!-- /grid -->
                 ' );
+		
+		//close wrapper of the szenario
+		$mform->addElement ( 'html', '</div>');
+		
 		
 		// close div tag for js related content
 		$mform->addElement ( 'html', '</div id="js-content">' );
@@ -446,6 +466,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		
 		$mform->disabledIf ( 'maxpoints', 'evaluationmethod', 'neq', '2' );
 		$mform->setType ( 'maxpoints', PARAM_NUMBER );
+		
 		
 		// close div tag for non-js related content
 		$mform->addElement ( 'html', '</div id="non-js-content">' );
