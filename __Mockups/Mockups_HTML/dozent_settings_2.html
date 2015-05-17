@@ -25,7 +25,7 @@
     <div class="grid">
         <div class="nav w100">
                     <ul>
-                        <li><a class="active" href="dozent_settings.html">Dozenten Einstellungen</a></li>
+                        <li><a class="active" href="dozent_settings_2.html">Dozenten Einstellungen</a></li>
                         <li><a href="survey.html">Fragebogen</a></li>
                         <li><a href="index.html">Info</a></li>
                     </ul>
@@ -49,24 +49,77 @@
         
             <form id="docent_settings_2" action="dozent_settings_3.html">
                 
-                <textarea id="id_knowledgelines" name="knowledgelines" cols="50" rows="10"></textarea>
                 
-                <button id="getString" type="button"></button>
-
+<!--                testArea-->
+                
+                <input id="id_knowledge" type="checkbox" value="1" name="knowledge" />
+                <textarea id="id_knowledgelines" name="knowledgelines" cols="50" rows="10"></textarea>
+                <input id="id_topics" type="checkbox" value="1" name="topics" />
+                <textarea id="id_topiclines" name="knowledgelines" cols="50" rows="10"></textarea>
+                
+                
+                
+<!--                /testArea-->
+                
+                <div class="grid">
+                    <div class="col_100">
+                        <h4 class="required">1. Bitte w&auml;hlen Sie das Szenario f&uuml;r die Gruppenformation aus.</h4>
+                    </div>
+                    
+                    <div class="szenarioradios">
+                        <div class="grid">
+                            
+                            <div class="col_33">
+                                
+                                <input type="radio" name="szenario" id="project" value="project"  />
+                                <label class="col_100 szenarioLabel" for="project" ><h3>Projektgruppen </h3>
+                                    <p><small>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</small></p>
+                                </label>
+                            </div>
+                            
+                            <div class="col_33">
+                                
+                                <input type="radio" name="szenario" id="homework" value="homework" />
+                                <label class="col_100 szenarioLabel" for="homework" ><h3>Hausaufgabengruppen </h3>
+                                    <p><small>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</small></p>
+                                </label>
+                            </div>
+                            
+                            <div class="col_33">
+                                
+                                <input type="radio" name="szenario" id="presentation" value="presentation" />
+                                <label class="col_100 szenarioLabel" for="presentation"><h3>Referatsgruppen </h3>
+                                    <p><small>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</small></p>
+                                </label>
+                            </div>
+                            
+                        </div> <!-- /grid  -->
+                    </div>  
+                    
+                </div> <!-- /grid  -->
+                
+                <div id="js_szenarioWrapper">
+                
                 <div class="grid">
                     
                     <div class="col_100">
-                        <h4 class="optional"><label for="wantKnowledge">
-                          <input type="checkbox" name="chbKnowledge" value="wantKnowledge" id="wantKnowledge">
+                        <h4 class="optional"><label for="id_js_knowledge">
+                          <input type="checkbox" name="chbKnowledge" value="wantKnowledge" id="id_js_knowledge">
                           Das Vorwissen soll in die Gruppenbildung einflie&szlig;en</h4>
                         </label> 
                     </div>
                     
                     <div class="col_100">
                        
-                        <div class="knowledgeWrapper">
+                        <div id="js_knowledgeWrapper">
                         
-                        <p>Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einsch&auml;tzen sollen. Eine Vorschau des Studenten-Fragebogens sehen Sie rechts. F&uuml;r Ihre Auswahl "Hausaufgabengruppen" wird das Vorwissen m&ouml;glichst varriiert in jeder Gruppe.</p>
+                        <p id="knowledfeInfo"></p>
+                            
+                        <p id="knowledfeInfoProject">Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einsch&auml;tzen sollen. Eine Vorschau des Studenten-Fragebogens sehen Sie rechts. F&uuml;r Ihre Auswahl "Projektgruppen" wird das Vorwissen ...</p>
+                        
+                        <p id="knowledfeInfoHomework">Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einsch&auml;tzen sollen. Eine Vorschau des Studenten-Fragebogens sehen Sie rechts. F&uuml;r Ihre Auswahl "Hausaufgabengruppen" wird das Vorwissen m&ouml;glichst varriiert in jeder Gruppe.</p>
+                        
+                        <p id="knowledfeInfoPresentation">Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einsch&auml;tzen sollen. Eine Vorschau des Studenten-Fragebogens sehen Sie rechts. F&uuml;r Ihre Auswahl "Referatsgruppen" wird das Vorwissen ...</p>
                                     
                             <div class="grid">
                             <div id="prk">    
@@ -150,8 +203,8 @@
                 <div class="grid">
                     
                     <div class="col_100">
-                        <h4 class="optional"><label for="wantTopics">
-                          <input type="checkbox" name="chbTopics" value="wantTopics" id="wantTopics">
+                        <h4 id="headerTopics" class="optional"><label for="id_js_topics">
+                          <input type="checkbox" name="chbTopics" value="wantTopics" id="id_js_topics">
                           Ich m&ouml;chte Themen definieren</h4>
                         </label> 
                     </div>
@@ -159,7 +212,7 @@
                     
                     <div class="col_100">
                        
-                        <div class="topicsWrapper">
+                        <div id="js_topicsWrapper">
                         
                         <p>Geben Sie hier die Themen ein, welche die Studierenden bearbeiten k&ouml;nnen. In den Frageb&ouml;gen werden die Themen nach Priorit&auml;t sortiert. Eine Vorschau sehen Sie rechts.</p>
                                     
@@ -340,7 +393,7 @@
                 </div>
                 
                 
-                
+                </div> <!-- /js_szenariWrapper -->
                     
                 <div class="grid">
                     <div class="col_100">

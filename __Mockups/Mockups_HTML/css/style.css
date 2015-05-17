@@ -206,7 +206,9 @@ h1.caption {
     font-weight: bold;
     content: "* "; }
 
-.knowledgeWrapper, .topicsWrapper {
+#js_topicsWrapper, #js_knowledgeWrapper, #js_szenarioWrapper,
+#knowledfeInfoProject, #knowledfeInfoHomework, #knowledfeInfoPresentation
+{
   display: none; }
 
 .multi_field_wrapper input.respwidth {
