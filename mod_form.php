@@ -441,6 +441,9 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		), false );
 		$mform->addRule ( 'radioar', get_string ( 'maxmembers_error', 'groupformation' ), 'required', null, 'client' );
 		
+		//TODO @Rene In diese Felder werden mit JS die Werte geschrieben. Beim abspeichern gehen diese aber verloren, bzw wenn man mit firebug
+		//das produzierte HTML untersucht ist das Value dieses inputs richtig abgespeichert, wird jedoch nicht angezeigt und nicht an das JS 
+		//Feld übergeben. 
 		$mform->addElement ( 'text', 'maxmembers', get_string ( 'maxmembers', 'groupformation' ), null );
 		$mform->addElement ( 'text', 'maxgroups', get_string ( 'maxgroups', 'groupformation' ), null );
 		

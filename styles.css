@@ -243,15 +243,18 @@ h1.caption {
   -moz-box-shadow: 0 4px 6px -6px black;
   box-shadow: 0 4px 6px -6px black; }
 
+/*TODO @Rene: wie fügt man das Bild richtig ein?*/
 button.add_field {
-  background: url("../img/add.png");
+  background: url("img/add.png");
   width: 20px;
   height: 20px;
   background-size: 20px 20px;
   border: none; }
 
+
+/*TODO @Rene wie fügt man das Bild richtig ein?*/
 button.remove_field {
-  background: url("../img/delete.png");
+  background: url("img/delete.png");
   width: 20px;
   height: 20px;
   background-size: 20px 20px;

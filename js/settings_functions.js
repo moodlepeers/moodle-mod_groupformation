@@ -3,8 +3,11 @@ $(document).ready(function() {
     // hide validation error alerts and show them if needed
     // if css attribute "display:none" and show on validation error, they will not displayed properly
     $(".errors p").hide();
+    
+    
+    
     // TODO wenn JS und nonJS fehlerfrei funktioniert, die folgende Zeile einkommentieren
-    $("#non-js-content").hide();
+//    $("#non-js-content").hide();
     $("#js-content").show();
     
 
@@ -29,15 +32,15 @@ $(document).ready(function() {
     	if(szenario == 1){
     			$("input[name='js_szenario'][value='project']").attr("checked","checked");
     			//check browser support first, before delete this
-//	    		setSzenario('project');
+	    		setSzenario('project');
     		}else if(szenario == 2){
     			$("input[name='js_szenario'][value='homework']").attr("checked","checked");
     			//check browser support first, before delete this
-//	    		setSzenario('homework');
+	    		setSzenario('homework');
     		}else if(szenario == 3){
     			$("input[name='js_szenario'][value='presentation']").attr("checked","checked");
     			//check browser support first, before delete this
-//	    		setSzenario('presentation');
+	    		setSzenario('presentation');
     		}
     }
     
@@ -47,7 +50,7 @@ $(document).ready(function() {
     if ($('#id_knowledge').prop('checked')){
         $('#id_js_knowledge').prop('checked',true);
         $('#id_knowledge').prop('checked',true);
-        $("#js_knowledgeWrapper").toggle();
+        $("#js_knowledgeWrapper").show('2000', 'swing');
 
         //get the value of Moodle nativ field #id_knowledgelines, parse it and create dynamic input fields
         var lines = $('textarea[name=knowledgelines]').val().split('\n');
@@ -66,7 +69,7 @@ $(document).ready(function() {
     if ($('#id_topics').prop('checked')){
         $('#id_js_topics').prop('checked',true);
         $('#id_topics').prop('checked',true);
-        $("#js_topicsWrapper").toggle();
+        $("#js_topicsWrapper").show('2000', 'swing');
 
         //get the value of Moodle nativ field #id_topiclines, parse it and create dynamic input fields 
         var lines = $('textarea[name=topiclines]').val().split('\n');
@@ -364,7 +367,9 @@ $(document).ready(function() {
             
             //Moodle nativ fields
             $('#id_groupoption_0').prop('checked', true);
-            $('#id_maxmembers').removeAttr('disabled').val($activeElVal);
+//            $('#id_maxmembers').removeAttr('disabled').val($activeElVal);
+            $('#id_maxmembers').removeAttr('disabled');
+            writeTextInput('#id_maxmembers', activeElVal);
             $('#id_maxgroups').attr('disabled', 'disabled');
             writeTextInput('#id_maxgroups', $nonActiveElVal);
             
@@ -375,8 +380,10 @@ $(document).ready(function() {
             
             //Moodle nativ fields
             $('#id_groupoption_1').prop('checked', true);
-            $('#id_maxgroups').removeAttr('disabled').val($activeElVal);
-            $('#id_maxmembers').attr('disabled', 'disabled').val($nonActiveElVal);
+//            $('#id_maxgroups').removeAttr('disabled').val($activeElVal);
+            $('#id_maxgroups').removeAttr('disabled');
+            writeTextInput('#id_maxmembers', activeElVal);
+            $('#id_maxmembers').attr('disabled', 'disabled');
             writeTextInput('#id_maxmembers', $nonActiveElVal);
         }
     }
@@ -393,6 +400,7 @@ $(document).ready(function() {
     }    
     
     function writeTextInput($selectID, $value){
+//    	$textVal = $value.toString();
         $($selectID).val($value);
     }
     
