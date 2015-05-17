@@ -165,6 +165,10 @@ $(document).ready(function() {
             switchTopics('off');
             $('#headerTopics').removeClass('required').addClass('optional');
             $('#id_js_topics').prop('disabled', false);
+            
+            writeTextInput('#id_maxmembers', 0);
+            writeTextInput('#id_maxgroups', 0);
+            
         }else if($szenario == 'homework'){
         	$('#id_szenario option').prop('selected', false).filter('[value=2]').prop('selected', true);
         	
@@ -172,6 +176,9 @@ $(document).ready(function() {
             switchTopics('off');
             $('#headerTopics').removeClass('required').addClass('optional');
             $('#id_js_topics').prop('disabled', false);
+            
+            writeTextInput('#id_maxmembers', 0);
+            writeTextInput('#id_maxgroups', 0);
         }else if($szenario == 'presentation'){
         	$('#id_szenario option').prop('selected', false).filter('[value=3]').prop('selected', true);
         	
@@ -179,6 +186,9 @@ $(document).ready(function() {
             switchTopics('on');
             $('#headerTopics').removeClass('optional').addClass('required');
             $('#id_js_topics').prop('disabled', true);
+            
+            writeTextInput('#id_maxmembers', 0);
+            writeTextInput('#id_maxgroups', getTopicsNumb());
         }
     }
     
