@@ -75,6 +75,7 @@ $string ['scenario_presentationgroups_description'] = 'Lorem ipsum dolor sit ame
 //-------------------------------------------------------------------
 $string ['time'] = 'Time';
 $string ['topics'] = 'Topics';
+$string ['topics_dummy'] = 'How much do you like ';
 $string ['topics_description'] = 'I want to define topics';
 // TODO -------------------------------------------------------------
 $string ['topics_description_extended'] = 'Geben Sie hier die Themen ein, welche die Studierenden bearbeiten k&ouml;nnen. In den Frageb&ouml;gen werden die Themen nach Priorit&auml;t sortiert. Eine Vorschau sehen Sie rechts.';
@@ -87,6 +88,9 @@ $string ['knowledge_description'] = 'I want to include knowledge questions';
 $string ['knowledge_description_extended'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die 
 		Studierenden einsch&auml;tzen sollen. Eine Vorschau des Studenten-Fragebogens finden Sie unter Vorschau. 
 // 		F&uuml;r Ihre Auswahl "Hausaufgabengruppen" wird das Vorwissen m&ouml;glichst varriiert in jeder Gruppe.';
+$string ['knowledge_info_presentation'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einsch&auml;tzen sollen. Eine Vorschau des Studenten-Fragebogens sehen Sie rechts. F&uuml;r Ihre Auswahl "Referatsgruppen" wird das Vorwissen ...';
+$string ['knowledge_info_homework'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einsch&auml;tzen sollen. Eine Vorschau des Studenten-Fragebogens sehen Sie rechts. F&uuml;r Ihre Auswahl "Hausaufgabengruppen" wird das Vorwissen m&ouml;glichst varriiert in jeder Gruppe.';
+$string ['knowledge_info_project'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einsch&auml;tzen sollen. Eine Vorschau des Studenten-Fragebogens sehen Sie rechts. F&uuml;r Ihre Auswahl "Projektgruppen" wird das Vorwissen ...';
 $string ['knowledgeChoice'] = 'Knowledge';
 $string ['add_line'] = 'Add line';
 $string ['remove_line'] = 'Remove line';

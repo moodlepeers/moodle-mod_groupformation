@@ -199,11 +199,11 @@ class mod_groupformation_mod_form extends moodleform_mod {
 
 						<p id="knowledfeInfo"></p>
 				
-						<p id="knowledfeInfoProject">Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einsch&auml;tzen sollen. Eine Vorschau des Studenten-Fragebogens sehen Sie rechts. F&uuml;r Ihre Auswahl "Projektgruppen" wird das Vorwissen ...</p>
+						<p id="knowledfeInfoProject">'.get_string('knowledge_info_project','groupformation').'</p>
                         
-                        <p id="knowledfeInfoHomework">Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einsch&auml;tzen sollen. Eine Vorschau des Studenten-Fragebogens sehen Sie rechts. F&uuml;r Ihre Auswahl "Hausaufgabengruppen" wird das Vorwissen m&ouml;glichst varriiert in jeder Gruppe.</p>
+                        <p id="knowledfeInfoHomework">'.get_string('knowledge_info_homework','groupformation').'</p>
                         
-                        <p id="knowledfeInfoPresentation">Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einsch&auml;tzen sollen. Eine Vorschau des Studenten-Fragebogens sehen Sie rechts. F&uuml;r Ihre Auswahl "Referatsgruppen" wird das Vorwissen ...</p>
+                        <p id="knowledfeInfoPresentation">'.get_string('knowledge_info_presentation','groupformation').'</p>
 				
 				
                             <div class="grid">
@@ -336,11 +336,11 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		// '<h4 class="view_on_mobile">'.get_string('topics_question','groupformation').'</h4>'.
 		
 		'<p id="topicshead">' . get_string ( 'topics_question', 'groupformation' ) . '</p>
-											<span id="topicsDummy" style="display:none;">How much do you like </span>
+											<span id="topicsDummy" style="display:none;">'.get_string('topics_dummy','groupformation').'</span>
                                             <ul class="sortable_topics" id="previewTopics">
-                                              <li class="topicLi" id="tpcRow0" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>How much do you like Thema 1</li>
-                                              <li class="topicLi" id="tpcRow1" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>How much do you like Thema 2</li>
-                                              <li class="topicLi" id="tpcRow2" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>How much do you like Thema 3</li>
+                                              <li class="topicLi" id="tpcRow0" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'.get_string('topics_dummy','groupformation').'Thema 1</li>
+                                              <li class="topicLi" id="tpcRow1" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'.get_string('topics_dummy','groupformation').'Thema 2</li>
+                                              <li class="topicLi" id="tpcRow2" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'.get_string('topics_dummy','groupformation').'Thema 3</li>
                                             </ul>
                                         </div>
                                     </div> <!-- /col_50 --> 

@@ -68,6 +68,7 @@ $string ['scenario_presentationgroups_description'] = 'Lorem ipsum dolor sit ame
 	ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.';
 $string ['time'] = 'Zeit';
 $string ['topics'] = 'Themen';
+$string ['topics_dummy'] = 'Wie gut findest du ';
 $string ['topics_description'] = 'Ich m&ouml;chte Themen definieren';
 $string ['topics_description_extended'] = 'Geben Sie hier die Themen ein, welche die Studierenden bearbeiten k&ouml;nnen. In den Frageb&ouml;gen werden die Themen nach Priorit&auml;t sortiert. Eine Vorschau sehen Sie rechts.';
 $string ['topics_question'] = 'Bitte sortieren Sie die zur Wahl stehenden Themen entsprechend Ihrer Pr&auml;ferenz, beginnend mit Ihrem bevorzugten Thema.';
@@ -79,6 +80,9 @@ $string ['knowledge_description_extended'] = 'Geben Sie hier die Wissensgebiete 
 		Studierenden einsch&auml;tzen sollen. Eine Vorschau des Studenten-Fragebogens finden Sie unter Vorschau. 
 // 		F&uuml;r Ihre Auswahl "Hausaufgabengruppen" wird das Vorwissen m&ouml;glichst varriiert in jeder Gruppe.';
 $string ['knowledgeChoice'] = 'Vorwissen';
+$string ['knowledge_info_presentation'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einsch&auml;tzen sollen. Eine Vorschau des Studenten-Fragebogens sehen Sie rechts. F&uuml;r Ihre Auswahl "Referatsgruppen" wird das Vorwissen ...';
+$string ['knowledge_info_homework'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einsch&auml;tzen sollen. Eine Vorschau des Studenten-Fragebogens sehen Sie rechts. F&uuml;r Ihre Auswahl "Hausaufgabengruppen" wird das Vorwissen m&ouml;glichst varriiert in jeder Gruppe.';
+$string ['knowledge_info_project'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einsch&auml;tzen sollen. Eine Vorschau des Studenten-Fragebogens sehen Sie rechts. F&uuml;r Ihre Auswahl "Projektgruppen" wird das Vorwissen ...';
 $string ['add_line'] = 'Zeile hinzuf&uuml;gen';
 $string ['remove_line'] = 'Zeile entfernen';
 $string ['preview'] = 'Vorschau';
