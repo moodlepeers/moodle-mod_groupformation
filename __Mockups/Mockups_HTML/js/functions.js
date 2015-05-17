@@ -24,26 +24,30 @@ $(document).ready(function() {
     });
     
     function setSzenario($szenario){
-         if($szenario == 'project'){
+        if($szenario == 'project'){
+        	$('#id_szenario option').prop('selected', false).filter('[value=1]').prop('selected', true);
+        	
             $('#knowledfeInfo').text($('#knowledfeInfoProject').text());
             switchTopics('off');
             $('#headerTopics').removeClass('required').addClass('optional');
             $('#id_js_topics').prop('disabled', false);
         }else if($szenario == 'homework'){
+        	$('#id_szenario option').prop('selected', false).filter('[value=2]').prop('selected', true);
+        	
             $('#knowledfeInfo').text($('#knowledfeInfoHomework').text());
             switchTopics('off');
             $('#headerTopics').removeClass('required').addClass('optional');
             $('#id_js_topics').prop('disabled', false);
         }else if($szenario == 'presentation'){
+        	$('#id_szenario option').prop('selected', false).filter('[value=3]').prop('selected', true);
+        	
             $('#knowledfeInfo').text($('#knowledfeInfoPresentation').text());
             switchTopics('on');
             $('#headerTopics').removeClass('optional').addClass('required');
             $('#id_js_topics').prop('disabled', true);
         }
     }
-    
-    
-    
+
     
  //if knowledge gets checked
     $('#id_js_knowledge').click(function(){
@@ -145,7 +149,6 @@ $(document).ready(function() {
             if($cat == 'tpc'){
                 synchronizeTopics();
                 $('#numb_of_groups').val(getTopicsNumb());
-//                synchronizeTopicsWithGroupnumber();
             }
         }
     }
@@ -181,7 +184,8 @@ $(document).ready(function() {
                       $('#' + $previewRowID).html('<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' + $(this).val());
                       synchronizeTopics();
                       $('#numb_of_groups').val(getTopicsNumb());
-                      selectOption('#id_maxgroups', getTopicsNumb());
+//                      selectOption('#id_maxgroups', getTopicsNumb());
+                      writeTextInput('#id_maxgroups', getTopicsNumb());
                   }
               });
 //      });
@@ -224,9 +228,11 @@ $(document).ready(function() {
             var elID = $(this).attr('id');
             var elValue = $(this).val();
             if(elID == 'group_size'){
-            	selectOption('#id_maxmembers', elValue);
+//            	selectOption('#id_maxmembers', elValue);
+                writeTextInput('#id_maxmembers', elValue);
             }else{
-            	selectOption('#id_maxgroups', elValue);
+//            	selectOption('#id_maxgroups', elValue);
+                writeTextInput('#id_maxgroups', elValue);
             }
         });
     
@@ -242,7 +248,8 @@ $(document).ready(function() {
             $('#id_groupoption_0').prop('checked', true);
             $('#id_maxmembers').removeAttr('disabled').val($activeElVal);
             $('#id_maxgroups').attr('disabled', 'disabled');
-            selectOption('#id_maxgroups', $nonActiveElVal);
+//            selectOption('#id_maxgroups', $nonActiveElVal);
+            writeTextInput('#id_maxgroups', $nonActiveElVal);
             
         }else{
         	$('#group_opt_numb').prop('checked', true);
@@ -253,7 +260,8 @@ $(document).ready(function() {
             $('#id_groupoption_1').prop('checked', true);
             $('#id_maxgroups').removeAttr('disabled').val($activeElVal);
             $('#id_maxmembers').attr('disabled', 'disabled').val($nonActiveElVal);
-            selectOption('#id_maxmembers', $nonActiveElVal);
+//            selectOption('#id_maxmembers', $nonActiveElVal);
+            writeTextInput('#id_maxmembers', $nonActiveElVal);
         }
     }
 
@@ -268,12 +276,47 @@ $(document).ready(function() {
         return topicsCounter;
     }    
     
-    
-    
-    function selectOption($selectID, $value){
-    	$($selectID + ' option').prop('selected', false).filter('[value="' + $value + '"]').prop('selected', true);
-    	// TODO @Eduard: Da maxgroups und maxmembers nun Textfelder sind, musst das hier anpassen
+    function writeTextInput($selectID, $value){
+        $($selectID).val($value);
     }
+    
+//    function selectOption($selectID, $value){
+//    	$($selectID + ' option').prop('selected', false).filter('[value="' + $value + '"]').prop('selected', true);
+//    	// TODO @Eduard: Da maxgroups und maxmembers nun Textfelder sind, musst das hier anpassen
+//    }
+    
+    
+    $('#valuation').change(function(){
+        if($(this).val()=='grades'){
+            $('#id_evaluationmethod option').prop('selected', false).filter('[value=1]').prop('selected', true);
+            $('#max_points').prop('disabled', true);
+            $('#id_maxpoints').prop('disabled', true);
+            $('#max_points').val(0);
+            $('#id_maxpoints').val(0)
+            
+        }else if($(this).val()=='points'){
+            $('#id_evaluationmethod option').prop('selected', false).filter('[value=2]').prop('selected', true);
+            $('#max_points').prop('disabled', false);
+            $('#id_maxpoints').prop('disabled', false);
+            
+        }else if($(this).val()=='justpass'){
+            $('#id_evaluationmethod option').prop('selected', false).filter('[value=3]').prop('selected', true);
+            $('#max_points').prop('disabled', true);
+            $('#id_maxpoints').prop('disabled', true);
+            $('#max_points').val(0);
+            $('#id_maxpoints').val(0)
+        }else if($(this).val()=='novaluation'){
+            $('#id_evaluationmethod option').prop('selected', false).filter('[value=4]').prop('selected', true);
+            $('#max_points').prop('disabled', true);
+            $('#id_maxpoints').prop('disabled', true);
+            $('#max_points').val(0);
+            $('#id_maxpoints').val(0)
+        }
+    });
+    
+    $('#max_points').bind('keyup change', function(){
+        $('#id_maxpoints').val($(this).val());
+    });
     
     
     

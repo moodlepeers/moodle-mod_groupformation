@@ -248,9 +248,14 @@ button.remove_field {
   background-size: 20px 20px;
   border: none; }
 
-.option_row label, .option_row select {
+/*
+.option_row label, .option_row select{
   line-height: 60px;
   margin: 1.33em 0; }
+*/
+
+.option_row label{
+  margin-right: .2em; }
 
 /* =============================
     styles

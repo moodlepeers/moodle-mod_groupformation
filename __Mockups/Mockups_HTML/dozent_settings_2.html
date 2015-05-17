@@ -57,7 +57,20 @@
                 <input id="id_topics" type="checkbox" value="1" name="topics" />
                 <textarea id="id_topiclines" name="knowledgelines" cols="50" rows="10"></textarea>
                 
+                <input id="id_groupoption_0" type="radio" value="0" name="groupoption">
+                <input id="id_maxmembers" type="text" value="5" name="maxmembers">
+                <input id="id_groupoption_1" type="radio" value="1" name="groupoption">
+                <input id="id_maxgroups" type="text" value="0" name="maxgroups" >
                 
+                <select id="id_evaluationmethod">
+                    <option value="0">Choose method</option>
+                    <option selected="selected" value="1">Grades</option>
+                    <option value="2">Points</option>
+                    <option value="3">Just pass</option>
+                    <option value="4">No evaluation</option>
+                </select>
+                
+                <input id="id_maxpoints" type="text" value="100" name="maxpoints" disabled="disabled">
                 
 <!--                /testArea-->
                 
@@ -273,41 +286,28 @@
                 
                 <div class="grid option_row">
 
-                    <div class="col_33 ">
+                    <div class="col_100">
                         <h4 class="optional">Gruppen Optionen<span class="toolt" tooltip="Diese Option kann bei Gruppenbildung optimiert werden, nachdem die Frageb&ouml;gen ausgef&uuml;hlt wurden"></span></h4>
                     </div>
 
-                    <div class="col_33" ><label><input type="radio" name="group_opt" id="group_opt_size" value="group_size" checked="checked" />
-                                Max. Gruppengr&ouml;&szlig;e</label><input type="number" class="group_opt" id="group_size" min="0" max="100" value="0" /></div>
-                    <div class="col_33"><label><input type="radio" name="group_opt" id="group_opt_numb" value="numb_of_groups"/>
-                                Max. Gruppenanzahl</label><input type="number" class="group_opt" id="numb_of_groups"  min="0" max="100" value="0" disabled="disabled" /></div>
+                    <div class="col_33" >
+                        <label><input type="radio" name="group_opt" id="group_opt_size" value="group_size" checked="checked" />
+                                Max. Gruppengr&ouml;&szlig;e</label>
+                        <input type="number" class="group_opt" id="group_size" min="0" max="100" value="0" />
+                    </div>
+                    <div class="col_33">
+                        <label><input type="radio" name="group_opt" id="group_opt_numb" value="numb_of_groups"/>
+                                Max. Gruppenanzahl</label>
+                        <input type="number" class="group_opt" id="numb_of_groups"  min="0" max="100" value="0" disabled="disabled" /></div>
                     
                     
-<!--
-                    <div class="col_100">
-                        <table class="tabled_inputs">
-                            <tr>
-                                <td><label><input type="radio" name="group_opt" id="group_opt_size" value="group_size" checked="checked" />
-                                Max. Gruppengr&ouml;&szlig;e</label></td>
-                                <td><input type="number" class="group_opt" id="group_size" min="0" max="100" value="0" /></td>
-                                <td><span class="toolt" tooltip="Define the maximum of participants in the group!"></span></td>
-                            </tr>
-                            <tr>
-                                <td><label><input type="radio" name="group_opt" id="group_opt_numb" value="numb_of_groups"/>
-                                Max. Gruppenanzahl</label></td>
-                                <td><input type="number" class="group_opt" id="numb_of_groups"  min="0" max="100" value="0" disabled="disabled" /></td>
-                                <td><span class="toolt" tooltip="The group size will depend on the number of participants!"></span></td>
-                            </tr>
-                        </table>
-                    </div>    
--->
 
                 </div> <!-- /grid -->
                 
                 
                 <div class="grid option_row">
 
-                    <div class="col_33">
+                    <div class="col_100">
                         <h4 class="required">Wie bewerten Sie die Arbeit?</h4>
                     </div>
                     <div class="col_66">
@@ -317,6 +317,7 @@
                             <option value="justpass">Nur bestehen</option>
                             <option value="novaluation">keine Bewertung</option>
                         </select>
+                        <input type="number" id="max_points"  min="0" max="100" value="0" disabled="disabled" />
                     </div>
 
                 </div> <!-- /grid -->
