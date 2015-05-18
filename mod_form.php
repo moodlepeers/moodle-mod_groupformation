@@ -386,7 +386,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
                             <option value="justpass">' . get_string ( 'justpass', 'groupformation' ) . '</option>
                             <option value="novaluation">' . get_string ( 'noevaluation', 'groupformation' ) . '</option>
                         </select>
-						<input type="number" id="max_points"  min="0" max="100" value="0" disabled="disabled" />
+						<input type="number" id="max_points"  min="0" max="100" value="100" disabled="disabled" />
                     </div>
 
                 </div> <!-- /grid -->

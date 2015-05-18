@@ -527,6 +527,10 @@ function groupformation_set_fields(stdClass $groupformation) {
 		$groupformation->maxgroups = 0;
 	}
 	
+	if (isset ( $groupformation->evaluationmethod) && $groupformation->evaluationmethod != 2){
+		$groupformation->maxpoints = 100;
+	}
+	
 	return $groupformation;
 }
 function groupformation_save_more_infos($groupformation, $init) {
