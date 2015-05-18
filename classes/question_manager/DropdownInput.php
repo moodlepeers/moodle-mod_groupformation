@@ -1,5 +1,26 @@
 <?php
 
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+/**
+ * Prints a particular instance of groupformation
+ *
+ * @package mod_groupformation
+ * @author  
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
 class DropdownInput {
 	
@@ -10,11 +31,8 @@ class DropdownInput {
 	private $optArray = array();
 	
 	
-	public function __construct($q, $cat, $qnumb){
-		$this->question = $q[1];
-		$this->optArray = $q[2];
-		$this->category = $cat;
-		$this->qnumber = $qnumb;
+	public function __construct(){
+		
 	}
 	
 	
@@ -25,24 +43,36 @@ class DropdownInput {
 		$this->category = $cat;
 		$this->qnumber = $qnumb;
 		
+		$answer = -1;
+		$questionCounter = 1;
+		if($hasAnswer){
+			//$answer ist die position im optionArray von der Antwort
+			$answer = $q[3];
+		}
 		
 		echo '<tr>';
-		echo '<th scope="row">' . $this->question . '</th>';
+		//echo '<th scope="row">' . $this->question . '</th>';
+		echo '<td> <label for="' . $this->category . $this->qnumber . '">' .
+				$this->question . '</label> </td>';
+		
+		
 		echo '<td class="center">
-				<select name="grade'. $this->qnumber  .'" id="grade'. $this->qnumber  .'">';
+				<select name="'. $this->category . $this->qnumber  .'" id="' . $this->category . $this->qnumber  .'">';
 		
 		foreach ($this->optArray as $option){
-			echo '<option value="'. $option .'">'. $option .'</option>';
+			if($answer == $questionCounter){
+				echo '<option value="'. $questionCounter .'" selected="selected">'. $option .'</option>';
+			}else{
+				echo '<option value="'. $questionCounter .'">'. $option .'</option>';
+			}
+			$questionCounter++;
 		}
 		
 		echo '</select>
 			</td>
 		</tr>';
 		
-		if($hasAnswer){
-			//$answer ist die position im optionArray von der Antwort
-			$answer = $q[3];
-		}
+		
 	}
 }
 

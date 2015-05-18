@@ -37,7 +37,7 @@
 	if (!defined('MOODLE_INTERNAL')) {
 		die('Direct access to this script is forbidden.');    ///  It must be included from a Moodle page
 	}
-
+	
 	class mod_groupformation_questionaire {
 
 		
@@ -52,26 +52,28 @@
 		private $dropdown;
 		
 		private $header;
-		private $qNumber = 0;
+		private $qNumber = 1;
 		private $gradesCount;
 		private $category = "";
 			
 		
 		
-		public function __construct($groupformationid, $lang, $userId){
+		public function __construct($groupformationid, $lang, $userId, $category){
 			
 			
 			$this->groupformationid = $groupformationid;
 			$this->lang = $lang;
-			$this->question_manager = new mod_groupformation_question_controller($groupformationid, $lang, $userId);
+			$this->question_manager = new mod_groupformation_question_controller($groupformationid, $lang, $userId, $category);
 			$this->header = new HeaderOfInput();
-			$this->range = new RangeInput(array(), $this->category, $this->qNumber);
-			$this->radio = new RadioInput(array(), $this->category, $this->qNumber);
-			$this->dropdown = new DropdownInput(array(), $this->category, $this->qNumber);
-			$this->topics = new TopicsTable(array(), $this->category, $this->qNumber);
+			$this->range = new RangeInput();
+			$this->radio = new RadioInput();
+			$this->dropdown = new DropdownInput();
+			$this->topics = new TopicsTable();
 		}
 		
-		
+		public function goback(){
+			$this->question_manager->goBack();
+		}
 		
 		public function getQuestions(){
 			
@@ -79,8 +81,10 @@
 			// Es muss eine Methode eingebaut werden um den Fragebogen in mehrere Tabs zu splitten.
 			
 			$hasNext = $this->question_manager->hasNext();
-			if($this->question_manager->questionsToAnswer()){
-				while($hasNext){
+			if($this->question_manager->questionsToAnswer() && $hasNext){
+				//while($hasNext){
+					$percent = $this->question_manager->getPercent();
+					var_dump($percent);
 					$this->category = $this->question_manager->getCurrentCategory();
 // 					var_dump($this->category);
 					$question = $this->question_manager->getNextQuestion();
@@ -91,9 +95,22 @@
 					$tableType = $question[0][0];
 					$headerOptArray = $question[0][2];
 					
-					echo '<form action="" method="post">';
+					//echo '<form action="questionaire.php" method="post">';
+					echo '<form action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '" method="post" autocomplete="off">';
 					
+					//hier schicke ich verdeckt die momentane Kategorie und groupformationID mit
+					echo '<input type="hidden" name="category" value="' . $this->category . '"/>';
 					
+					echo '<input type="hidden" name="percent" value="' . $percent . '"/>';
+					
+					$activity_id = optional_param('id', false, PARAM_INT);
+					if ($activity_id) {
+						echo '<input type="hidden" name="id" value="' . $activity_id . '"/>';
+					}else{
+						echo '<input type="hidden" name="id" value="' . $this->groupformationid . '"/>';
+					}
+					
+				//	echo '<input type="hidden" name="userid" value="' . $this->userID . '"/>';
 					
 					echo ' <h4 class="view_on_mobile">' . $this->category . '</h4>' ;
 
@@ -134,31 +151,64 @@
 
 					
 					// Reset the Question Number, so each HTML table starts with 0
-					$this->qNumber = 0;
+					$this->qNumber = 1;
 					
 // 					$hasAnswer = $this->question_manager->hasAnswers();
 // 					var_dump($hasAnswer);
 // 					if($hasAnswer){
 // 						var_dump($this->question_manager->getAnswers());
 // 					}
-					$hasNext = $this->question_manager->hasNext();
+					//$hasNext = $this->question_manager->hasNext();
 					//$answers = array('0');
 					//$this->question_manager->saveAnswers($answers);
+					
+					echo '
+						<div class="grid">
+						<div class="col_100">
+							<button type="submit" name="direction" value="1"> Weiter </button>
+							<button type="submit" name="direction" value="0"> Zurück </button>
+						</div>
+						</div>
+							
+						</form>';
+				//}
+			}else{
+				echo '<h1>There are no more questions to answer</h1>';
+				echo '<form action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '" method="post" autocomplete="off">';
+					
+				//hier schicke ich verdeckt die momentane Kategorie und groupformationID mit
+				echo '<input type="hidden" name="category" value="no"/>';
+					
+				$activity_id = optional_param('id', false, PARAM_INT);
+				if ($activity_id) {
+					echo '<input type="hidden" name="id" value="' . $activity_id . '"/>';
+				}else{
+					echo '<input type="hidden" name="id" value="' . $this->groupformationid . '"/>';
 				}
+				
+				echo '
+						<div class="grid">
+						<div class="col_100">
+							<button type="submit" name="action" value="0">Zur Anfangsseite</button>
+							<button type="submit" name="action" value="1">Abgeben</button>
+						</div>
+						</div>
+							
+						</form>';
 			}
 			
 
 			// TODO @Nora @Rene: Die Buttons des Formulars einfach per echo ausgeben oder müssen an dieser Stelle Moodle Elemente benutzt werden?
 			// Die Buttons sowie die Schließung des Formulars muss am Ende jedes Tabs erfolgen.
-			echo '
-			<div class="grid">
-			<div class="col_100">
-			<button type="reset" class="f_btn">Cancel</button>
-			<button type="button" class="f_btn">Save</button>
-			<button type="submit" class="f_btn">Next</button>
-			</div>
-			</div> <!-- /grid -->';
-			// Ende des Formulars
-			echo '</form>';
+// 			echo '
+// 			<div class="grid">
+// 			<div class="col_100">
+// 			<button type="reset" class="f_btn">Cancel</button>
+// 			<button type="button" class="f_btn">Save</button>
+// 			<button type="submit" class="f_btn">Next</button>
+// 			</div>
+// 			</div> <!-- /grid -->';
+// 			// Ende des Formulars
+// 			echo '</form>';
 		}
 	}

@@ -26,12 +26,13 @@
 	require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 	require_once(dirname(__FILE__).'/lib.php');
 	require_once(dirname(__FILE__).'/locallib.php');
-	
-// 	require_once ($CFG->dirroot.'/mod/feedback/lib.php');
+
+
 
 	//$id = required_param('id', PARAM_INT);    // Course Module ID
 	$id = optional_param('id', 0, PARAM_INT);   // Course Module ID
 	$g = optional_param('g', 0, PARAM_INT);		// groupformation instance ID
+	$back = optional_param('back', 0, PARAM_INT);
 	
 	$current_tab = 'view';
 	// if(!$cm = get_coursemodule_from_id('groupformation', $id, 0, false, MUST_EXIST)) {
@@ -47,6 +48,7 @@
 	// if (!$groupformation = $DB->get_record('groupformation', array('id'=> $cm->instance), '*', MUST_EXIST)) {
 	// 	print_error('course module is incorrect'); // NOTE As above
 	// }
+	
 	
 	// Import jQuery and js file
 	addJQuery($PAGE,'survey_functions.js');
@@ -122,23 +124,58 @@
 	
  	require_once(dirname(__FILE__).'/classes/moodle_interface/storage_manager.php');
   //	require_once(dirname(__FILE__).'/classes/question_manager/question_manager.php');
-  	require_once(dirname(__FILE__).'/classes/question_manager/questionaire.php');
+  	require_once(dirname(__FILE__).'/classes/question_manager/infoText.php');
 //  	$a = array();
 // 	var_dump(count($a));
-	
+  	$userId = $USER->id;
+  	
+  	$store = new mod_groupformation_storage_manager($groupformation->id);
+  	$val;
+  	if($id){
+  		$val = $id;
+  	}else{
+  		$val = $groupformation->id;
+  	}
+  	$info = new mod_groupformation_infoText($val);
+  	
+	$begin = 1;
+  	if (isset($_POST["begin"])){
+  		$begin = $_POST["begin"];
+  	}
+  	
+  	if($begin == 1){
+  		if (isset($_POST["questions"])){
+  			
+  			if($_POST["questions"] == 1 && !$back){
+  			
+  				$returnurl = new moodle_url('/mod/groupformation/answeringView.php', array('id' => $val));
+  			
+  				redirect($returnurl);
+  			}
+  		}
+  	}else{
+  		$store->statusChanged($userId, 1);
+  	}
 
   	
 // //  	$xmlLoader = new mod_groupformation_xml_loader();
-  	$userId = $USER->id;
-	$store = new mod_groupformation_storage_manager($groupformation->id);
-	
-	
- 		if (has_capability('mod/groupformation:onlystudent', $context)){
-			$questionManager = new mod_groupformation_questionaire($groupformation->id, 'en', $userId);
-			$questionManager->getQuestions();
-		}else{
-       		 echo $OUTPUT->heading('no access');
-		}
+	//var_dump(has_capability('mod/groupformation:onlystudent', $context));
+	if (has_capability('mod/groupformation:onlystudent', $context)){
+ 		$status = $store->answeringStatus($userId);
+		if($status ==  -1){
+ 			$info->statusA();
+ 		}
+ 		if($status == 0){
+ 			$info->statusB();
+ 		}
+ 		if($status == 1){
+ 			$info->statusC();
+ 		}
+
+	}else{
+       	//echo $OUTPUT->heading('no access');
+       	$info->Dozent();
+	}
 // 		$hasNext = $questionManager->hasNext();
 // 		if($questionManager->questionsToAnswer($userId)){
 // 			while($hasNext){

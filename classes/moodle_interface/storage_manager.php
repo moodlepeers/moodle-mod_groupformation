@@ -79,6 +79,7 @@
 			$data->options = $this->convertOptions($question['options']);
 			$data->position = $question['position'];
 			$data->language = $language;
+			$data->optionmax = count($question['options']);
 			
 			$DB->insert_record('groupformation_' . $category, $data);
 			
@@ -145,7 +146,6 @@
             
             $data = new stdClass();
             $data->groupformation = $this->groupformationid;
-            $data->szenario = 'v';
             $data->topicvalues = $this->convertOptions($topics);
             $data->knowledgevalues = $this->convertOptions($knowledge);
             $data->topicvaluesnumber = count($topics);
@@ -190,24 +190,34 @@
 			return $array;
 		}
 		
+		public function getNumber($category){
+			global $DB;
+				
+		
+			if($category == 'topic' || $category == 'knowledge'){
+				return $DB->get_field('groupformation_q_settings', $category . 'valuesnumber', array('groupformation' => $this->groupformationid));
+			}else{
+				return $DB->get_field('groupformation_q_version', 'numberofquestion', array('category' => $category));
+			}
+			
+		}
+		
 		public function getDozentQuestion($category){
 			global $DB;
 			
 			return $DB->get_field('groupformation_q_settings', $category . 'values', array('groupformation' => $this->groupformationid));
 		}
 		
-		public function getCatalogQuestion($i, $category = 'general', $lang = 'en'){
+		public function getMaxOfCatalogQuestionOptions($i, $category = 'general'){
 			global $DB;
 			
-// 			if($category == null){
-// 				$return =  $DB->get_record('groupformation_question', array('groupformation' => $this->groupformationid, 'id' => $id));
-// 			}
-			
-// 			if($category == 'team'){
-// 				$table = "groupformation_" . $lang . "_team";
-// 				$return = $DB->get_record($table, array('id' => $id));
-// 				var_dump($return);
-// 			}
+			$table = "groupformation_" . $category;
+			return $DB->get_field($table, 'optionmax', array('language' => 'en', 'position' => $i));
+		}
+		
+		public function getCatalogQuestion($i, $category = 'general', $lang = 'en'){
+			global $DB;
+		
 
 			$table = "groupformation_" . $category;
 			$return = $DB->get_record($table, array('language' => $lang, 'position' => $i));
@@ -231,10 +241,13 @@
 // 			return $count;
 // 		}
 		
-		public function statusChanged($userId){
+		public function statusChanged($userId, $complete=0){
 			global $DB;
 			
-			$status = $this->answeringStatus($userId);
+			$status = 0;
+			if($complete == 0){
+				$status = $this->answeringStatus($userId);
+			}
 			
 			$data = new stdClass();
 			$data->groupformation = $this->groupformationid;
@@ -300,6 +313,12 @@
 			global $DB;
 			
 			return $DB->get_records('groupformation_answer', array('groupformation' => $this->groupformationid, 'userid' => $userId, 'category' => $category));
+		}
+		
+		public function getSingleAnswer($userId, $category, $qID){
+			global $DB;
+				
+			return $DB->get_field('groupformation_answer', 'answer', array('groupformation' => $this->groupformationid, 'userid' => $userId, 'category' => $category, 'questionid' => $qID));
 		}
 		
 		public function saveAnswer($userId, $answer, $category, $questionId){

@@ -72,7 +72,7 @@
 		private $numberOfCategory;
 	//	private $currentCategory;
 		
-		public function __construct($groupformationid, $lang, $userId){
+		public function __construct($groupformationid, $lang, $userId, $oldCategory){
 			$this->groupformationid = $groupformationid;
 			$this->lang = $lang;
 			$this->userId = $userId;
@@ -81,6 +81,36 @@
 			//$this->names = CATEGORY_NAMES;
 			$this->numberOfCategory = count($this->names);
 			$this->init($userId);
+			$this->setIternalNumber($oldCategory);
+		}
+		
+		public function goBack(){
+			$back = 2;
+			while($back > 0 && $this->currentCategoryPosition != 0){
+				if($this->numbers[$this->currentCategoryPosition] != 0){
+					$back = $back-1;
+				}
+				$this->currentCategoryPosition = $this->currentCategoryPosition-1;
+			}
+		}
+		
+		public function getPercent(){
+			$total = 0;
+			$sub = 0;
+			
+			$temp = 0;
+			foreach($this->numbers as $num){
+				if($num != 0){
+					$total++;
+					if($temp < $this->currentCategoryPosition){
+						$sub++;
+					}
+				}
+				
+				$temp++;
+			}
+			
+			return ($sub/$total)*100;
 		}
 		
 		private function init($userId){
@@ -94,6 +124,49 @@
 			}
 			
 			$this->status = $this->store->answeringStatus($userId);
+			
+		}
+		
+		private function setIternalNumber($category){
+			if($category == 'topic'){
+				$this->currentCategoryPosition = TOPIC;
+				$this->currentCategoryPosition++;
+			}
+			
+			if($category == 'knowledge'){
+				$this->currentCategoryPosition = KNOWLEDGE;
+				$this->currentCategoryPosition++;
+			}
+			
+			if($category == 'general'){
+				$this->currentCategoryPosition = GENERAL;
+				$this->currentCategoryPosition++;
+			}
+			
+			if($category == 'grade'){
+				$this->currentCategoryPosition = GRADE;
+				$this->currentCategoryPosition++;
+			}
+			
+			if($category == 'motivation'){
+				$this->currentCategoryPosition = MOTIVATION;
+				$this->currentCategoryPosition++;
+			}
+			
+			if($category == 'learning'){
+				$this->currentCategoryPosition = LEARNING;
+				$this->currentCategoryPosition++;
+			}
+			
+			if($category == 'team'){
+				$this->currentCategoryPosition = TEAM;
+				$this->currentCategoryPosition++;
+			}
+			
+			if($category == 'character'){
+				$this->currentCategoryPosition = CHARACTER;
+				$this->currentCategoryPosition++;
+			}
 			
 		}
 		
@@ -147,6 +220,7 @@
 				if($hasAnswer){
 					$answers = $this->getAnswers();
 				}
+				//var_dump($answers);
 				
 				if($this->currentCategoryPosition == TOPIC || $this->currentCategoryPosition == KNOWLEDGE){
 					
@@ -175,9 +249,9 @@
  						
  						$options = array();
  						if($this->lang == 'de'){
- 							$options = array('sehr gut', '', '', '','gar nicht');
+ 							$options = array('sehr gut', 'gar nicht');
  						}else{
- 							$options = array('excellent', '', '', '','none');
+ 							$options = array('excellent', 'none');
  						}
  						
  						$positionArray = 1;
@@ -202,7 +276,8 @@
 						
 					
 				}else{
-				
+					$positionAnswer = 0;
+					
 					for($i = 1; $i <= $this->numbers[$this->currentCategoryPosition]; $i++){
 						$array = $this->store->getCatalogQuestion($i, $this->names[$this->currentCategoryPosition], $this->lang);
 						$question = array();
@@ -212,7 +287,7 @@
 						
 						$question[] = $this->xml->xmlToArray('<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $o . ' </OPTIONS>');
 						//$questions[] = $array->options;
-						$positionAnswer = 0;
+						
 						if($hasAnswer){
 							if($answers[$positionAnswer][0] == $i){
 								$question[] = $answers[$positionAnswer][1];
