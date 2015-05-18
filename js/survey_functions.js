@@ -32,7 +32,7 @@ $(document).ready(function() {
                             .filter('[value="' + grade1 + '"]')
                             .prop('selected', true);
 
-        $('#grade1 option').each(function(){
+        $('#grade3 option').each(function(){
             if($(this).val() < grade1){
                 $(this).attr('disabled',true);
             }
