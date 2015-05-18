@@ -440,10 +440,11 @@ $(document).ready(function() {
     $('#js_evaluationmethod').change(function(){
         if($(this).val()=='grades'){
             $('#id_evaluationmethod option').prop('selected', false).filter('[value=1]').prop('selected', true);
-            $('#max_points').prop('disabled', true);
-            $('#id_maxpoints').prop('disabled', true);
             $('#max_points').val(0);
             $('#id_maxpoints').val(0);
+            $('#max_points').prop('disabled', true);
+//            $('#id_maxpoints').prop('disabled', true);
+            
             
         }else if($(this).val()=='points'){
             $('#id_evaluationmethod option').prop('selected', false).filter('[value=2]').prop('selected', true);
@@ -452,22 +453,25 @@ $(document).ready(function() {
             
         }else if($(this).val()=='justpass'){
             $('#id_evaluationmethod option').prop('selected', false).filter('[value=3]').prop('selected', true);
-            $('#max_points').prop('disabled', true);
-            $('#id_maxpoints').prop('disabled', true);
             $('#max_points').val(0);
             $('#id_maxpoints').val(0);
+            $('#max_points').prop('disabled', true);
+//            $('#id_maxpoints').prop('disabled', true);
+            
         }else if($(this).val()=='novaluation'){
             $('#id_evaluationmethod option').prop('selected', false).filter('[value=4]').prop('selected', true);
             $('#max_points').prop('disabled', true);
-            $('#id_maxpoints').prop('disabled', true);
             $('#max_points').val(0);
             $('#id_maxpoints').val(0);
+//            $('#id_maxpoints').prop('disabled', true);
+
         }else if($(this).val()=='chooseM'){
             $('#id_evaluationmethod option').prop('selected', false).filter('[value=0]').prop('selected', true);
-            $('#max_points').prop('disabled', true);
-            $('#id_maxpoints').prop('disabled', true);
             $('#max_points').val(0);
             $('#id_maxpoints').val(0);
+            $('#max_points').prop('disabled', true);
+//            $('#id_maxpoints').prop('disabled', true);
+            
         }
     });
     
