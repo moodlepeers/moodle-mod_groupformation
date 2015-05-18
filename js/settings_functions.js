@@ -51,8 +51,19 @@ $(document).ready(function() {
     			$('#knowledfeInfo').text($('#knowledfeInfoPresentation').text());
                 $('#headerTopics').removeClass('optional').addClass('required');
                 $('#id_js_topics').prop('disabled', true);
+                             
+                $('#id_js_topics').prop('checked',true);
                 
-	    		setSzenario('presentation');
+                var activeElID = 'group_size';
+                var activeElVal = $('#id_maxmembers').val();
+                var nonActiveElVal = getTopicsNumb();
+                adjustGropOptions(activeElID, activeElVal, nonActiveElVal);
+                
+                $("#group_opt_numb").attr('disabled', 'disabled');
+                
+                $("#js_topicsWrapper").show('2000', 'swing');
+                
+//	    		setSzenario('presentation');
     		}
     }
     
