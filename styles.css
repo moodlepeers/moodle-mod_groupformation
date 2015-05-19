@@ -243,22 +243,37 @@ h1.caption {
   -moz-box-shadow: 0 4px 6px -6px black;
   box-shadow: 0 4px 6px -6px black; }
 
-/*TODO @Rene: wie fügt man das Bild richtig ein?*/
-button.add_field {
-  background: url("img/add.png");
+button.add_field, button.remove_field {
+/*  background: url("../img/add.png");*/
+
+/*
   width: 20px;
   height: 20px;
   background-size: 20px 20px;
-  border: none; }
+  border: none; 
+*/
+  display: inline-block;
+  background: #eeeeee; /* Old browsers */
 
+  border: 1px solid #a1a1a1;
+  font: bold 1em/2em Arial, Helvetica;
+  text-decoration: none;
+  color: #333;
+  border-radius: .2em;
+    line-height: 1em;
+}
 
-/*TODO @Rene wie fügt man das Bild richtig ein?*/
-button.remove_field {
-  background: url("img/delete.png");
-  width: 20px;
-  height: 20px;
-  background-size: 20px 20px;
-  border: none; }
+button.add_field:before, button.remove_field:before
+{
+  float: left;
+/*  width: 1em;*/
+  text-align: center;
+  font-size: 0.9em;
+  pointer-events: none;
+}
+
+button.add_field:before    { content: "+"; }
+button.remove_field:before    { content: "x"; }
 
 /*.option_row label, .option_row select {
   line-height: 60px;
