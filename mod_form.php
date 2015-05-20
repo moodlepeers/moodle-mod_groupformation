@@ -30,7 +30,6 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 require_once ($CFG->dirroot . '/course/moodleform_mod.php');
 require_once ($CFG->dirroot . '/mod/groupformation/lib.php'); // not in the template
 require_once ($CFG->dirroot . '/mod/groupformation/locallib.php');
-
 class mod_groupformation_mod_form extends moodleform_mod {
 	
 	/**
@@ -90,6 +89,18 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		
 		// Add standard buttons, common to all modules.
 		$this->add_action_buttons ();
+	}
+	
+	/**
+	 *
+	 * @param moodleform_mod $mform        	
+	 */
+	function changesPossible(&$mform) {
+		// Are changes possible?
+		// check if somebody submitted an answer already
+		// - if true, set NON-JS hint
+		// - otherwise do nothing
+		return False;
 	}
 	
 	/**
@@ -176,8 +187,8 @@ class mod_groupformation_mod_form extends moodleform_mod {
 
 	        		' );
 		
-		//wrapper of the szenario
-		$mform->addElement ( 'html', '<div id="js_szenarioWrapper">');
+		// wrapper of the szenario
+		$mform->addElement ( 'html', '<div id="js_szenarioWrapper">' );
 		
 		// add checkbox preknowledge
 		$mform->addElement ( 'html', '
@@ -199,11 +210,11 @@ class mod_groupformation_mod_form extends moodleform_mod {
 
 						<p id="knowledfeInfo"></p>
 				
-						<p id="knowledfeInfoProject">'.get_string('knowledge_info_project','groupformation').'</p>
+						<p id="knowledfeInfoProject">' . get_string ( 'knowledge_info_project', 'groupformation' ) . '</p>
                         
-                        <p id="knowledfeInfoHomework">'.get_string('knowledge_info_homework','groupformation').'</p>
+                        <p id="knowledfeInfoHomework">' . get_string ( 'knowledge_info_homework', 'groupformation' ) . '</p>
                         
-                        <p id="knowledfeInfoPresentation">'.get_string('knowledge_info_presentation','groupformation').'</p>
+                        <p id="knowledfeInfoPresentation">' . get_string ( 'knowledge_info_presentation', 'groupformation' ) . '</p>
 				
 				
                             <div class="grid">
@@ -336,11 +347,11 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		// '<h4 class="view_on_mobile">'.get_string('topics_question','groupformation').'</h4>'.
 		
 		'<p id="topicshead">' . get_string ( 'topics_question', 'groupformation' ) . '</p>
-											<span id="topicsDummy" style="display:none;">'.get_string('topics_dummy','groupformation').'</span>
+											<span id="topicsDummy" style="display:none;">' . get_string ( 'topics_dummy', 'groupformation' ) . '</span>
                                             <ul class="sortable_topics" id="previewTopics">
-                                              <li class="topicLi" id="tpcRow0" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'.get_string('topics_dummy','groupformation').'Thema 1</li>
-                                              <li class="topicLi" id="tpcRow1" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'.get_string('topics_dummy','groupformation').'Thema 2</li>
-                                              <li class="topicLi" id="tpcRow2" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>'.get_string('topics_dummy','groupformation').'Thema 3</li>
+                                              <li class="topicLi" id="tpcRow0" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' . get_string ( 'topics_dummy', 'groupformation' ) . 'Thema 1</li>
+                                              <li class="topicLi" id="tpcRow1" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' . get_string ( 'topics_dummy', 'groupformation' ) . 'Thema 2</li>
+                                              <li class="topicLi" id="tpcRow2" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' . get_string ( 'topics_dummy', 'groupformation' ) . 'Thema 3</li>
                                             </ul>
                                         </div>
                                     </div> <!-- /col_50 --> 
@@ -392,9 +403,8 @@ class mod_groupformation_mod_form extends moodleform_mod {
                 </div> <!-- /grid -->
                 ' );
 		
-		//close wrapper of the szenario
-		$mform->addElement ( 'html', '</div>');
-		
+		// close wrapper of the szenario
+		$mform->addElement ( 'html', '</div>' );
 		
 		// close div tag for js related content
 		$mform->addElement ( 'html', '</div id="js-content">' );
@@ -403,12 +413,23 @@ class mod_groupformation_mod_form extends moodleform_mod {
 	/**
 	 * generates moodle form elements for non-JS version
 	 *
-	 * @param unknown $mform        	
+	 * @param moodleform_mod $mform        	
 	 */
 	function generateHTMLforNonJS(&$mform) {
+		$this->changesPossible ( $mform );
 		
 		// open div tag for non js related content
 		$mform->addElement ( 'html', '<div id="non-js-content">' );
+		
+		// no changes possible hint
+		$changemsg = '<div class="fitem"><span ';
+		if (!$this->changesPossible($mform)){
+			$changemsg .= 'value="1" style="color:red;"';
+		} else {
+			$changemsg .= 'value="0" style="color:red;display:none;"';
+		}
+		$changemsg .= ' id="nochangespossible">'.get_string('nochangespossible','groupformation').'</span></div>';
+		$mform->addElement ( 'html',$changemsg);
 		
 		// add field Szenario choice
 		$mform->addElement ( 'select', 'szenario', get_string ( 'scenario', 'groupformation' ), array (
@@ -441,9 +462,9 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		), false );
 		$mform->addRule ( 'radioar', get_string ( 'maxmembers_error', 'groupformation' ), 'required', null, 'client' );
 		
-		//TODO @Rene In diese Felder werden mit JS die Werte geschrieben. Beim abspeichern gehen diese aber verloren, bzw wenn man mit firebug
-		//das produzierte HTML untersucht ist das Value dieses inputs richtig abgespeichert, wird jedoch nicht angezeigt und nicht an das JS 
-		//Feld übergeben. 
+		// TODO @Rene In diese Felder werden mit JS die Werte geschrieben. Beim abspeichern gehen diese aber verloren, bzw wenn man mit firebug
+		// das produzierte HTML untersucht ist das Value dieses inputs richtig abgespeichert, wird jedoch nicht angezeigt und nicht an das JS
+		// Feld übergeben.
 		$mform->addElement ( 'text', 'maxmembers', get_string ( 'maxmembers', 'groupformation' ), null );
 		$mform->addElement ( 'text', 'maxgroups', get_string ( 'maxgroups', 'groupformation' ), null );
 		
@@ -469,7 +490,6 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		
 		$mform->disabledIf ( 'maxpoints', 'evaluationmethod', 'neq', '2' );
 		$mform->setType ( 'maxpoints', PARAM_NUMBER );
-		
 		
 		// close div tag for non-js related content
 		$mform->addElement ( 'html', '</div id="non-js-content">' );

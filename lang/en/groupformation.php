@@ -47,6 +47,7 @@ $string ['overview'] = 'Overview';
 $string ['generategroups'] = "Gruppen generieren";
 $string ['edit_param'] = 'Editieren';
 $string ['editparam'] = 'Paramter editieren';
+$string ['nochangespossible'] = 'The questionaire has been answered already. You can only change the maximum number of members or maximum number of groups. Further changes will not be saved.';
 //-------------------------------------------------------------------
 $string ['scenario'] = 'Scenario';
 $string ['scenarioLabel'] = '';

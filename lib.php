@@ -148,6 +148,9 @@ function groupformation_update_instance(stdClass $groupformation, mod_groupforma
  */
 function groupformation_delete_instance($id) {
 	global $DB;
+	
+	// TODO kaskadierendes Löschen der Antworten zur passenden groupforamtion id
+	
 	if (! $groupformation = $DB->get_record ( 'groupformation', array (
 			'id' => $id 
 	) )) {
