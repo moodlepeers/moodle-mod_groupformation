@@ -103,30 +103,22 @@ function groupformation_add_instance(stdClass $groupformation, mod_groupformatio
 function groupformation_update_instance(stdClass $groupformation, mod_groupformation_mod_form $mform = null) {
 	global $DB;
 	
-	// TODO Kommentar in Wiki - zu XML Fragebögen
-	
 	// checks all fields and sets them properly
 	$groupformation = groupformation_set_fields ( $groupformation );
 	
 	$groupformation->timemodified = time ();
 	$groupformation->id = $groupformation->instance;
-	/*
-	 * //man kann nur solange etwas verändern bis die erste antwort gespeichert wurde
-	 * if($DB->count_records('groupformation_answer', array('groupformation' => $groupformation->id)) == 0){
-	 * // You may have to add extra stuff in here.
-	 * $result = $DB->update_record('groupformation', $groupformation);
-	 *
-	 * groupformation_grade_item_update($groupformation);
-	 * groupformation_save_more_infos($groupformation, FALSE);
-	 * }else{
-	 * // TODO @Eduard,Nora Wir brauchen die Möglichkeit die Anzahl an Gruppen bzw. die Gruppengröße zu ändern
-	 * // das wird aber bei anzeigen der Settings geregelt. Workaround für jetzt, ich kümmere mich mit Eduard drum
-	 * // LG René
-	 * return true;
-	 * }
-	 */
-	// You may have to add extra stuff in here.
-	$result = $DB->update_record ( 'groupformation', $groupformation );
+	
+	if ($DB->count_records('groupformation_answer', array('groupformation' => $groupformation->id)) == 0){
+		$result = $DB->update_record ( 'groupformation', $groupformation );
+	}else{
+		$orig_record = $DB->get_record('groupformation', array('id' => $groupformation->id));
+		$orig_record->groupoption = $groupformation->groupoption;
+		$orig_record->maxmembers = $groupformation->maxmembers;
+		$orig_record->maxgroups = $groupformation->maxgroups;
+		$result = $DB->update_record ( 'groupformation', $orig_record );
+		
+	}
 	
 	groupformation_grade_item_update ( $groupformation );
 	
@@ -161,6 +153,11 @@ function groupformation_delete_instance($id) {
 	$DB->delete_records ( 'groupformation', array (
 			'id' => $groupformation->id 
 	) );
+	
+	// cascading deletion of all related db entries
+	$DB->delete_records('groupformation_answer', array ('groupformation'=> $groupformation->id));
+	$DB->delete_records('groupformation_q_settings', array ('groupformation'=> $groupformation->id));
+	$DB->delete_records('groupformation_started', array ('groupformation'=> $groupformation->id));
 	
 	groupformation_grade_item_delete ( $groupformation );
 	

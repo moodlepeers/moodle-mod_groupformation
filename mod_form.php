@@ -96,11 +96,18 @@ class mod_groupformation_mod_form extends moodleform_mod {
 	 * @param moodleform_mod $mform        	
 	 */
 	function changesPossible(&$mform) {
+		global $DB;
 		// Are changes possible?
 		// check if somebody submitted an answer already
-		// - if true, set NON-JS hint
-		// - otherwise do nothing
-		return False;
+		$id = $this->_instance;
+		if ($id != '') {
+			$count = $DB->count_records ( 'groupformation_answer', array (
+					'groupformation' => $id 
+			) );
+			if ($count > 0)
+				return False;
+		}
+		return True;
 	}
 	
 	/**
@@ -422,14 +429,14 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		$mform->addElement ( 'html', '<div id="non-js-content">' );
 		
 		// no changes possible hint
-		$changemsg = '<div class="fitem"><span ';
-		if (!$this->changesPossible($mform)){
-			$changemsg .= 'value="1" style="color:red;"';
+		$changemsg = '<div class="fitem"';
+		if (! $this->changesPossible ( $mform )) {
+			$changemsg .= '><span value="1"';
 		} else {
-			$changemsg .= 'value="0" style="color:red;display:none;"';
+			$changemsg .= ' style="display:none;"><span value="0"';
 		}
-		$changemsg .= ' id="nochangespossible">'.get_string('nochangespossible','groupformation').'</span></div>';
-		$mform->addElement ( 'html',$changemsg);
+		$changemsg .= ' style="color:red;" id="nochangespossible">' . get_string ( 'nochangespossible', 'groupformation' ) . '</span></div>';
+		$mform->addElement ( 'html', $changemsg );
 		
 		// add field Szenario choice
 		$mform->addElement ( 'select', 'szenario', get_string ( 'scenario', 'groupformation' ), array (
