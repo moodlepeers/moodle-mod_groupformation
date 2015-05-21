@@ -232,18 +232,19 @@
 						$text; 
 						$type;
  						if($this->currentCategoryPosition == TOPIC){
- 							if($this->lang == 'de'){
- 								$text = 'Wie gefällt Ihnen das Thema ';
- 							}else{
- 								$text = 'How much you like the topic ';
- 							}
+//  							if($this->lang == 'de'){
+//  								$text = 'Wie gefällt Ihnen das Thema ';
+//  							}else{
+//  								$text = 'How much you like the topic ';
+//  							}
  							$type = 'typThema';
  						}else{
- 							if($this->lang == 'de'){
- 								$text = 'Wie schätzen Sie Ihr Vorwissen im folgenden Bereich ein:';
- 							}else{
- 								$text = 'How you rate your knowledge in ';
- 							}
+//  							$text = get_string('knowledge_question','groupformation');
+//  							if($this->lang == 'de'){
+//  								$text = 'Wie schätzen Sie Ihr Vorwissen im folgenden Bereich ein:';
+//  							}else{
+//  								$text = 'How you rate your knowledge in ';
+//  							}
  							$type = 'typVorwissen';
  						}
  						

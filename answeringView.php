@@ -94,7 +94,7 @@
 
 
 	// Replace the following lines with you own code.
-	echo $OUTPUT->heading('Yay! It works!');
+	echo $OUTPUT->heading($groupformation->name);
 
 	require_once(dirname(__FILE__).'/classes/moodle_interface/storage_manager.php');
 //	require_once(dirname(__FILE__).'/classes/question_manager/question_manager.php');
@@ -132,7 +132,7 @@
 	}
 	
 	if($category == '' || $inArray){
-		$questionManager = new mod_groupformation_questionaire($groupformation->id, 'en', $userId, $category);
+		$questionManager = new mod_groupformation_questionaire($groupformation->id, get_language($userid,$course), $userId, $category);
 		
 		if($direction == 0){
 			$questionManager->goback();

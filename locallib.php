@@ -24,23 +24,42 @@
  * @copyright 2014 Nora Wester
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-	defined('MOODLE_INTERNAL') || die();
+defined ( 'MOODLE_INTERNAL' ) || die ();
 /*
  * Does something really useful with the passed things
  *
  * @param array $things
  * @return object
- *function newmodule_do_something_useful(array $things) {
+ * function newmodule_do_something_useful(array $things) {
  * return new stdClass();
- *}
+ * }
  */
+/**
+ * add jquery to view
+ *
+ * @param unknown $PAGE        	
+ * @param string $filename        	
+ */
+function addjQuery($PAGE, $filename = null) {
+	$PAGE->requires->jquery ();
 	
-	function addjQuery($PAGE,$filename = null){
-		$PAGE->requires->jquery();
-		
-		if (!is_null($filename)){
-			$PAGE->requires->js('/mod/groupformation/js/'.$filename);
-		}
-		
-		
+	if (! is_null ( $filename )) {
+		$PAGE->requires->js ( '/mod/groupformation/js/' . $filename );
 	}
+}
+
+function get_language() {
+	global $DB,$COURSE,$CFG,$USER,$PAGE,$_SESSION;
+	return ($CFG->lang != $COURSE->lang)?(($COURSE->lang!='' && $COURSE->lang!=null)?$COURSE->lang:$CFG->lang):$CFG->lang;
+	
+	
+	if ($course->lang != '') {
+		return $course->lang;
+// 	} elseif ($DB->record_exists('user', array('id'=>$userid))) {
+// 		return $DB->get_record('user', array('id'=>$userid))->lang;
+	} elseif ($DB->record_exists('config', array('name'=>'lang'))) {
+		return $DB->get_record('config', array('name'=>'lang'))->value;
+	} else {
+		return 'en';
+	}
+}

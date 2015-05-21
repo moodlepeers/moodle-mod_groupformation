@@ -26,7 +26,7 @@ defined ( 'MOODLE_INTERNAL' ) || die ();
 
 $string ['modulename'] = 'Group formation';
 $string ['modulenameplural'] = 'Group formations';
-$string ['modulename_help'] = 'Mit dem Gruppenformations Plugin kann man sich in eine Lerngruppe eintragen lassen, anhand von Kriterien';
+$string ['modulename_help'] = 'The groupformation plugin generates groups based on a questionaire.';
 $string ['groupformationfieldset'] = 'Custom example fieldset';
 $string ['groupformationname'] = 'Group formation';
 $string ['groupformationname_help'] = 'ToolTip Group formation';
@@ -34,29 +34,27 @@ $string ['groupformation'] = 'Group formation';
 $string ['pluginadministration'] = 'Group formation administration';
 $string ['pluginname'] = 'groupformation';
 $string ['nogroupformation'] = 'No group formation';
-//-------------------------------------------------------------------
-$string ['groupnameexists'] = 'Dieser Lerngruppenname existiert schon';
-$string ['generategroups'] = 'Lerngruppengenerierung';
-$string ['namingschema'] = 'Namensschema';
-$string ['userpergroup'] = 'Wieviele Nutzer per Gruppe?';
-$string ['notOpen'] = 'Abgabephase ist abgeschlossen';
-$string ['continueTheForm'] = 'Weiter ausfüllen';
-$string ['completeTheForm'] = 'Ausfüllen';
-$string ['alreadySubmitted'] = 'Es wurde schon ausgefüllt';
+$string ['groupnameexists'] = 'This group already exists.';
+$string ['generategroups'] = 'Generation of groups';
+$string ['namingschema'] = 'Naming scheme';
+$string ['userpergroup'] = 'How many users in a group?';
+$string ['notOpen'] = 'Submission is closed.';
+$string ['continueTheForm'] = 'Continue';
+$string ['completeTheForm'] = 'Complete questionaire';
+$string ['alreadySubmitted'] = 'Already submitted';
 $string ['overview'] = 'Overview';
-$string ['generategroups'] = "Gruppen generieren";
-$string ['edit_param'] = 'Editieren';
-$string ['editparam'] = 'Paramter editieren';
-$string ['nochangespossible'] = 'The questionaire has been answered already. You can only change the maximum number of members or maximum number of groups. Further changes will not be saved.';
-//-------------------------------------------------------------------
+$string ['generategroups'] = "Generate groups";
+$string ['edit_param'] = 'Edit';
+$string ['editparam'] = 'Edit parameters';
+$string ['nochangespossible'] = 'The questionaire has been answered already. 
+You can only change the maximum number of members or maximum number of groups. Further changes will not be saved.';
 $string ['scenario'] = 'Scenario';
 $string ['scenarioLabel'] = '';
 $string ['scenario_description'] = 'Please choose the scenario for the group formation:';
-// TODO -------------------------------------------------------------
-$string ['scenarioInfo'] = 'Das Gruppenformationsplugin stellt drei Szenarie zur Verfügung. 
-			Beim Projekt wird darauf geachtet, dass sich die Persönlichkeiten der Gruppenmitglieder ergänzen. 
-			Beim Referat steht das gemeinsane Themeninteresse im Vordergrund.
-			Bei den Hausaufgaben wird darauf geachtet, dass es die besten Vorausetzungen für kollaboratives Lernen gibt';
+$string ['scenarioInfo'] = 'The groupformation plugin offers three types of groups. 
+	Project groups are based on personality matching. 
+	Presentation groups are based on topic/interest matching.
+	Homework groups are based on optimizing collaborative learning aspects.';
 $string ['groupformationsettings'] = 'Group formation settings';
 $string ['scenario_projectteams'] = 'Project groups';
 // TODO -------------------------------------------------------------
@@ -73,25 +71,29 @@ $string ['scenario_presentationgroups'] = 'Presentation groups';
 $string ['scenario_presentationgroups_description'] = 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
 	labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et
 	ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.';
-//-------------------------------------------------------------------
 $string ['time'] = 'Time';
 $string ['topics'] = 'Topics';
 $string ['topics_dummy'] = 'How much do you like ';
 $string ['topics_description'] = 'I want to define topics';
-// TODO -------------------------------------------------------------
-$string ['topics_description_extended'] = 'Geben Sie hier die Themen ein, welche die Studierenden bearbeiten k&ouml;nnen. In den Frageb&ouml;gen werden die Themen nach Priorit&auml;t sortiert. Eine Vorschau sehen Sie rechts.';
-$string ['topics_question'] = 'Bitte sortieren Sie die zur Wahl stehenden Themen entsprechend Ihrer Pr&auml;ferenz, beginnend mit Ihrem bevorzugten Thema.';
+$string ['topics_description_extended'] = 'Please list topics for the students to choose from. Students are supposed to sort the topics regarding their interests. Take a look at the preview on the right hand side.';
+$string ['topics_question'] = 'Please sort the following topics regarding your personal interests. Start with your favorite topic.';
 $string ['topicchoice'] = 'Topic selection';
 $string ['useOneLineForEachTopic'] = 'Use one line for each topic';
 $string ['knowledge'] = 'Knowledge';
 $string ['knowledge_description'] = 'I want to include knowledge questions';
 // TODO -------------------------------------------------------------
-$string ['knowledge_description_extended'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die 
-		Studierenden einsch&auml;tzen sollen. Eine Vorschau des Studenten-Fragebogens finden Sie unter Vorschau. 
-// 		F&uuml;r Ihre Auswahl "Hausaufgabengruppen" wird das Vorwissen m&ouml;glichst varriiert in jeder Gruppe.';
-$string ['knowledge_info_presentation'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einsch&auml;tzen sollen. Eine Vorschau des Studenten-Fragebogens sehen Sie rechts. F&uuml;r Ihre Auswahl "Referatsgruppen" wird das Vorwissen ...';
-$string ['knowledge_info_homework'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einsch&auml;tzen sollen. Eine Vorschau des Studenten-Fragebogens sehen Sie rechts. F&uuml;r Ihre Auswahl "Hausaufgabengruppen" wird das Vorwissen m&ouml;glichst varriiert in jeder Gruppe.';
-$string ['knowledge_info_project'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einsch&auml;tzen sollen. Eine Vorschau des Studenten-Fragebogens sehen Sie rechts. F&uuml;r Ihre Auswahl "Projektgruppen" wird das Vorwissen ...';
+$string ['knowledge_description_extended'] = 'Please list knowledge areas in which students should assess themselves. 
+	Take a look at the preview on the right hand side.
+	TODO F&uuml;r Ihre Auswahl "Hausaufgabengruppen" wird das Vorwissen m&ouml;glichst varriiert in jeder Gruppe.';
+$string ['knowledge_info_presentation'] = 'Please list knowledge areas in which students should assess themselves. 
+	Take a look at the preview on the right hand side. 
+	TODO F&uuml;r Ihre Auswahl "Referatsgruppen" wird das Vorwissen ...';
+$string ['knowledge_info_homework'] = 'Please list knowledge areas in which students should assess themselves. 
+	Take a look at the preview on the right hand side. 
+	TODO F&uuml;r Ihre Auswahl "Hausaufgabengruppen" wird das Vorwissen m&ouml;glichst varriiert in jeder Gruppe.';
+$string ['knowledge_info_project'] = 'Please list knowledge areas in which students should assess themselves. 
+	Take a look at the preview on the right hand side. 
+	TODO F&uuml;r Ihre Auswahl "Projektgruppen" wird das Vorwissen ...';
 $string ['knowledgeChoice'] = 'Knowledge';
 $string ['add_line'] = 'Add line';
 $string ['remove_line'] = 'Remove line';
@@ -100,8 +102,7 @@ $string ['knowledge_question'] = 'How much do you know about the following topic
 $string ['knowledge_scale'] = '0 = no knowledge, 100 = big knowledge';
 $string ['groupoptions'] = 'Group settings';
 $string ['groupoption_description'] = 'Group settings description';
-// TODO -------------------------------------------------------------
-$string ['groupoption_help'] = 'Diese Option kann bei Gruppenbildung optimiert werden, nachdem die Frageb&ouml;gen ausgef&uuml;hlt wurden';
+$string ['groupoption_help'] = 'This parameter can be optimized after the submission of the questionaires.';
 $string ['maxmembers'] = 'Max. number of group members';
 $string ['maxgroups'] = 'Max. number of groups';
 $string ['maxpoints'] = 'Max. points';
@@ -121,5 +122,18 @@ $string ['choose_scenario'] = 'Choose scenario';
 $string ['choose_number'] = 'Choose number';
 $string ['choose_evaluationmethod'] = 'Choose method';
 $string ['analyse'] = 'Analysis';
-
-	
+$string ['questionaire_not_started'] = 'The questionaire is ready.';
+$string ['questionaire_press_to_begin'] = 'Press "Next" to begin.';
+$string ['questionaire_not_submitted'] = 'Your answers are not submitted yet.';
+$string ['questionaire_press_continue_submit'] = 'Press "Edit" to continue the questionaire or "Submit" to submit your current answers.';
+$string ['questionaire_answer_stats'] = 'Current state of the questionaire: ';
+$string ['questionaire_submitted'] = 'You have submitted your answers. You cannot change them anymore.';
+$string ['questionaire_press_preview'] = 'Press "Preview" to take a look at the questionaire.';
+$string ['questionaire_no_more_questions'] = 'There are no more questions to answer.';
+$string ['questionaire_press_beginning_submit'] = 'Press "Go to Start" to go back to the start page or "Submit" to submit your current answers.';
+$string ['questionaire_go_to_start'] = 'Go to Start';
+$string ['category_general'] = 'General';
+$string ['category_grade'] = 'Grades';
+$string ['category_team'] = 'Team';
+$string ['category_character'] = 'Character';
+$string ['category_motivation'] = 'Motivation';

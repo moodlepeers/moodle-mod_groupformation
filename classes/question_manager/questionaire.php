@@ -84,7 +84,7 @@
 			if($this->question_manager->questionsToAnswer() && $hasNext){
 				//while($hasNext){
 					$percent = $this->question_manager->getPercent();
-					var_dump($percent);
+					var_dump((float) $percent);
 					$this->category = $this->question_manager->getCurrentCategory();
 // 					var_dump($this->category);
 					$question = $this->question_manager->getNextQuestion();
@@ -164,16 +164,16 @@
 					
 					echo '
 						<div class="grid">
-						<div class="col_100">
-							<button type="submit" name="direction" value="1"> Weiter </button>
-							<button type="submit" name="direction" value="0"> Zurück </button>
+						<div class="col_100 questionaire_button_row">
+							<button type="submit" name="direction" value="0" class="f_btn">'.get_string('previous').'</button>
+							<button type="submit" name="direction" value="1" class="f_btn">'.get_string('next').'</button>
 						</div>
 						</div>
 							
 						</form>';
 				//}
 			}else{
-				echo '<h1>There are no more questions to answer</h1>';
+				echo '<div class="col_100"><h4>'.get_string('questionaire_no_more_questions','groupformation').'</h></div>';
 				echo '<form action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '" method="post" autocomplete="off">';
 					
 				//hier schicke ich verdeckt die momentane Kategorie und groupformationID mit
@@ -188,9 +188,10 @@
 				
 				echo '
 						<div class="grid">
-						<div class="col_100">
-							<button type="submit" name="action" value="0">Zur Anfangsseite</button>
-							<button type="submit" name="action" value="1">Abgeben</button>
+						<div class="questionaire_button_text">'.get_string('questionaire_press_beginning_submit','groupformation').'</div>
+						<div class="col_100 questionaire_button_row">
+							<button type="submit" name="action" value="0">'.get_string('questionaire_go_to_start','groupformation').'</button>
+							<button type="submit" name="action" value="1">'.get_string('submit').'</button>
 						</div>
 						</div>
 							

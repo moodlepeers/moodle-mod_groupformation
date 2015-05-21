@@ -12,7 +12,7 @@ class HeaderOfInput {
 		
 		if($tableType == 'typThema'){
 			// HTML unordered list element - <ul>
-			echo '<p id="topicshead">Bitte sortieren Sie die zur Wahl stehenden Themen entsprechend Ihrer Pr&auml;ferenz, beginnend mit Ihrem bevorzugten Thema. </p>
+			echo '<p id="topicshead">'.get_string('topics_question','groupformation').'</p>
 								<ul id="sortable_topics">';
 		
 		}else{
@@ -25,7 +25,7 @@ class HeaderOfInput {
 			// table - Header
 			echo '<thead>
 			                      <tr>
-			                        <th scope="col">'. $category . '</th>';
+			                        <th scope="col">'. (($tableType=='typVorwissen')?get_string('knowledge_question','groupformation'):get_string('category_'.$category,'groupformation')) . '</th>';
 			if($tableType == 'radio'){
 				$headerSize = count($this->headerOptArray);
 		
@@ -33,7 +33,7 @@ class HeaderOfInput {
 																						<span style="float:right">'. $headerOptArray[$headerSize - 1] .'</span></th>';
 			}
 			else if($tableType == 'typVorwissen'){
-				echo '<th scope="col"><div class="legend">0 = kein Vorwissen, 100 = sehr viel Vorwissen</div></th>';
+				echo '<th scope="col"><div class="legend">'.get_string('knowledge_scale','groupformation').'</div></th>';
 			}else{
 				echo    '<th scope="col"></th>';
 			}

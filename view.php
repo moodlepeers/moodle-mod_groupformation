@@ -25,9 +25,7 @@
 
 	require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 	require_once(dirname(__FILE__).'/lib.php');
-	require_once(dirname(__FILE__).'/locallib.php');
-
-
+	require_once(dirname(__FILE__).'/locallib.php');	
 
 	//$id = required_param('id', PARAM_INT);    // Course Module ID
 	$id = optional_param('id', 0, PARAM_INT);   // Course Module ID
@@ -120,7 +118,7 @@
 	
 	
 	// Replace the following lines with you own code.
-	echo $OUTPUT->heading('Yay! It works!');
+	echo $OUTPUT->heading($groupformation->name);
 	
  	require_once(dirname(__FILE__).'/classes/moodle_interface/storage_manager.php');
   //	require_once(dirname(__FILE__).'/classes/question_manager/question_manager.php');

@@ -105,7 +105,7 @@ require('tabs.php');
 	}
 
 	// Replace the following lines with you own code.
-	echo $OUTPUT->heading('Yay! It works!');
+	echo $OUTPUT->heading($groupformation->name);
 
 	require_once(dirname(__FILE__).'/classes/group_forming/submit_infos.php');
 

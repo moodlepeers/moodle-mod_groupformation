@@ -42,9 +42,14 @@ class RadioInput {
 		$this->category = $cat;
 		$this->qnumber = $qnumb;
 		
-		echo '<tr>';
+		// TODO
+		if (!$hasAnswer){
+			echo '<tr style="text-color:(255,0,255) !important;">';
+		} else {
+			echo '<tr>';
+		}
 		//echo '<th scope="row">' . $this->question . '</th>';
-		echo '<td> <label for="' . $this->category . $this->qnumber . '">' .
+		echo '<th scope="row"> <label for="' . $this->category . $this->qnumber . '">' .
 				$this->question . '</label> </td>';
 		
 		$radioCounter = 1;

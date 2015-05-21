@@ -1,4 +1,4 @@
-<?php
+ï»¿<?php
 
 // This file is part of Moodle - http://moodle.org/
 //
@@ -39,21 +39,21 @@ $string ['generategroups'] = 'Lerngruppengenerierung';
 $string ['namingschema'] = 'Namensschema';
 $string ['userpergroup'] = 'Wieviele Nutzer per Gruppe?';
 $string ['notOpen'] = 'Abgabephase ist abgeschlossen';
-$string ['continueTheForm'] = 'Weiter ausfüllen';
-$string ['completeTheForm'] = 'Ausfüllen';
-$string ['alreadySubmitted'] = 'Es wurde schon ausgefüllt';
+$string ['continueTheForm'] = 'Weiter ausf&uuml;llen';
+$string ['completeTheForm'] = 'Ausf&uuml;llen';
+$string ['alreadySubmitted'] = 'Es wurde schon ausgef&uuml;llt';
 $string ['overview'] = 'Overview';
 $string ['generategroups'] = "Gruppen generieren";
 $string ['edit_param'] = 'Editieren';
 $string ['editparam'] = 'Paramter editieren';
-$string ['nochangespossible'] = 'Der Fragebogen wurde bereits beantwortet. Sie können nur noch Gruppengröße oder Gruppenanzahl ändern. Weitere Änderungen werden nicht gespeichert.';
+$string ['nochangespossible'] = 'Der Fragebogen wurde bereits beantwortet. Sie k&ouml;nnen nur noch Gruppengr&ouml;e oder Gruppenanzahl &auml;ndern. Weitere &Auml;nderungen werden nicht gespeichert.';
 $string ['scenario'] = 'Szenario';
 $string ['scenarioLabel'] = '';
 $string ['scenario_description'] = 'Bitte w&auml;hlen Sie das Szenario f&uuml;r die Gruppenformation aus.';
-$string ['scenarioInfo'] = 'Das Gruppenformationsplugin stellt drei Szenarie zur Verfügung. 
-			Beim Projekt wird darauf geachtet, dass sich die Persönlichkeiten der Gruppenmitglieder ergänzen. 
+$string ['scenarioInfo'] = 'Das Gruppenformationsplugin stellt drei Szenarie zur Verf&uuml;gung. 
+			Beim Projekt wird darauf geachtet, dass sich die Pers&ouml;nlichkeiten der Gruppenmitglieder erg&auml;nzen. 
 			Beim Referat steht das gemeinsane Themeninteresse im Vordergrund.
-			Bei den Hausaufgaben wird darauf geachtet, dass es die besten Vorausetzungen für kollaboratives Lernen gibt';
+			Bei den Hausaufgaben wird darauf geachtet, dass es die besten Vorausetzungen f&uuml;r kollaboratives Lernen gibt';
 $string ['groupformationsettings'] = 'Gruppenformation Einstellungen';
 $string ['scenario_projectteams'] = 'Projektteams';
 $string ['scenario_projectteams_description'] = 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
@@ -74,7 +74,7 @@ $string ['topics_description'] = 'Ich m&ouml;chte Themen definieren';
 $string ['topics_description_extended'] = 'Geben Sie hier die Themen ein, welche die Studierenden bearbeiten k&ouml;nnen. In den Frageb&ouml;gen werden die Themen nach Priorit&auml;t sortiert. Eine Vorschau sehen Sie rechts.';
 $string ['topics_question'] = 'Bitte sortieren Sie die zur Wahl stehenden Themen entsprechend Ihrer Pr&auml;ferenz, beginnend mit Ihrem bevorzugten Thema.';
 $string ['topicchoice'] = 'Themenauswahl';
-$string ['useOneLineForEachTopic'] = 'Für jedes Thema eine Zeile benutzen';
+$string ['useOneLineForEachTopic'] = 'F&uuml;r jedes Thema eine Zeile benutzen';
 $string ['knowledge'] = 'Vorwissen';
 $string ['knowledge_description'] = 'Das Vorwissen soll in die Gruppenbildung einflie&szlig;en.';
 $string ['knowledge_description_extended'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die 
@@ -100,16 +100,35 @@ $string ['grades'] = 'Noten';
 $string ['points'] = 'Punkte';
 $string ['justpass'] = 'Nur Bestehen';
 $string ['noevaluation'] = 'Keine Bewertung';
-$string ['useOneLineForEachKnowledge'] = 'Für jedes Thema eine eigene Zeile benutzen';
+$string ['useOneLineForEachKnowledge'] = 'F&uuml;r jedes Thema eine eigene Zeile benutzen';
 $string ['cannotloadxml'] = 'XML Datei konnte nicht geladen werden.';
-$string ['scenario_error'] = 'Bitte wählen Sie ein Szenario aus.';
-$string ['maxmembers_error'] = 'Bitte wählen Sie die maximale Gruppengröße.';
-$string ['maxgroups_error'] = 'Bitte wählen Sie die maximale Gruppenanzahl.';
-$string ['maxpoints_error'] = 'Sie müssen eine Punktzahl zwischen 1 und 100 angeben.';
-$string ['evaluationmethod_error'] = 'Bitte wählen Sie die Methode zur Bewertung aus.';
-$string ['choose_scenario'] = 'Szenario auswählen';
-$string ['choose_number'] = 'Anzahl auswählen';
-$string ['choose_evaluationmethod'] = 'Methode auswählen';
+$string ['scenario_error'] = 'Bitte w&auml;en Sie ein Szenario aus.';
+$string ['maxmembers_error'] = 'Bitte w&auml;hlen Sie die maximale Gruppengr&ouml;&szlig;.';
+$string ['maxgroups_error'] = 'Bitte w&auml;hlen Sie die maximale Gruppenanzahl.';
+$string ['maxpoints_error'] = 'Sie m&uuml;ssen eine Punktzahl zwischen 1 und 100 angeben.';
+$string ['evaluationmethod_error'] = 'Bitte w&auml;hlen Sie die Methode zur Bewertung aus.';
+$string ['choose_scenario'] = 'Szenario ausw&auml;hlen';
+$string ['choose_number'] = 'Anzahl ausw&auml;hlen';
+$string ['choose_evaluationmethod'] = 'Methode ausw&auml;hlen';
 $string ['analyse'] = 'Analyse';
+$string ['questionaire_not_started'] = 'Der Fragebogen wartet noch auf Ihre Bearbeitung.';
+$string ['questionaire_press_to_begin'] = 'Klicken Sie auf "Weiter", um zu beginnen.';
+$string ['questionaire_not_submitted'] = 'Sie haben den Fragebogen noch nicht abgegeben.';
+$string ['questionaire_press_continue_submit'] = 'Klicken Sie auf "Bearbeiten", um den Fragebogen weiterauszuf&uuml;llen oder auf "Abgeben", um ihn abzugeben.';
+$string ['questionaire_answer_stats'] = 'Aktueller Zustand des Fragebogens: ';
+$string ['questionaire_submitted'] = 'Sie haben den Fragebogen schon abgegeben und k&ouml;nnen nichts an ihren Antworten mehr &auml;ndern.';
+$string ['questionaire_press_preview'] = 'Klicken Sie auf "Vorschau", um den Fragebogen anzusehen.';
+$string ['questionaire_no_more_questions'] = 'Es gibt keine weiteren Fragen zu beantworten.';
+$string ['questionaire_press_beginning_submit'] = 'Klicken Sie auf "Zur Anfangsseite", um zum Anfang zur&uuml;ckzukehren oder auf "Abgeben", um ihre aktuellen Antworten abzugeben.';
+$string ['questionaire_go_to_start'] = 'Zur Anfangsseite';
+$string ['category_general'] = 'Allgemeines';
+$string ['category_grade'] = 'Noten';
+$string ['category_team'] = 'Team';
+$string ['category_character'] = 'Charakter';
+$string ['category_motivation'] = 'Motivation';
+
+// $string [''] = '';
+// $string [''] = '';
+
 
 	

@@ -38,9 +38,9 @@ class mod_groupformation_infoText {
 	}
 	
 	public function statusA(){
-		echo '<div> Der Fragebogen wartet noch auf Ihre Bearbeitung </div>';
-		echo '<div> Klicken Sie hier um ihn zu beginnen </div>';
-		echo '<div>';
+		echo '<div class="questionaire_status">'.get_string('questionaire_not_started','groupformation').'</div>';
+		echo '<div class="questionaire_button_text">'.get_string('questionaire_press_to_begin','groupformation').'</div>';
+		echo '<div class="questionaire_button_row">';
 		echo '<form action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '" method="post" autocomplete="off">';
 			
 		//hier schicke ich verdeckt groupformationID und die Information, ob der Fragebogen angezeigt werden soll
@@ -51,7 +51,7 @@ class mod_groupformation_infoText {
 		echo '
 						<div class="grid">
 						<div class="col_100">
-							<input type="submit" value="Weiter" />
+							<input type="submit" value="'.get_string("next").'" />
 						</div>
 						</div>
 							
@@ -60,9 +60,11 @@ class mod_groupformation_infoText {
 	}
 	
 	public function statusB(){
-		echo '<div> Sie haben den Fragebogen noch nicht abgegeben </div>';
-		echo '<div> Klicken Sie hier um ihn weiterauszufüllen oder ihn abzugeben</div>';
-		echo '<div>';
+		echo '<div><h5>'.get_string('questionaire_answer_stats','groupformation').'</h></div>';
+		echo '<div>'.'TODO show some stats about the categories and the missing answers'.'</div>';
+		echo '<div class="questionaire_status">'.get_string('questionaire_not_submitted','groupformation').'</div>';
+		echo '<div class="questionaire_button_text">'.get_string('questionaire_press_continue_submit','groupformation').'</div>';
+		echo '<div class="questionaire_button_row">';
 		echo '<form action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '" method="post" autocomplete="off">';
 			
 		//hier schicke ich verdeckt groupformationID und die Information, ob der Fragebogen angezeigt werden soll
@@ -73,8 +75,8 @@ class mod_groupformation_infoText {
 		echo '
 						<div class="grid">
 						<div class="col_100">
-							<button type="submit" name="begin" value="1">Bearbeiten</button>
-							<button type="submit" name="begin" value="0">Abgeben</button>
+							<button type="submit" name="begin" value="1">'.get_string('edit').'</button>
+							<button type="submit" name="begin" value="0">'.get_string('submit').'</button>
 						</div>
 						</div>
 							
@@ -83,13 +85,13 @@ class mod_groupformation_infoText {
 	}
 	
 	public function statusC(){
-		echo '<div> Sie haben den Fragebogen schon abgegeben und können nichts an ihren Antworten mehr ändern </div>';
+		echo '<div class="questionaire_status">'.get_string('questionaire_submitted','groupformation').'</div>';
 	}
 	
 	public function Dozent(){
 		
-		echo '<div> Klicken Sie hier um sich den Fragebogen anzuschauen </div>';
-		echo '<div>';
+		echo '<div class="questionaire_button_text">'.get_string('questionaire_press_preview','groupformation').'</div>';
+		echo '<div class="questionaire_button_row">';
 		echo '<form action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '" method="post" autocomplete="off">';
 			
 		//hier schicke ich verdeckt groupformationID und die Information, ob der Fragebogen angezeigt werden soll
@@ -100,7 +102,7 @@ class mod_groupformation_infoText {
 		echo '
 						<div class="grid">
 						<div class="col_100">
-							<input type="submit" value="Weiter" />
+							<input type="submit" value="'.get_string('preview').'" />
 						</div>
 						</div>
 							
