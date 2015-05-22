@@ -18,250 +18,129 @@
  * Prints a particular instance of groupformation
  *
  * @package mod_groupformation
- * @author  Nora Wester
+ * @author Nora Wester
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+require_once (dirname ( dirname ( dirname ( __FILE__ ) ) ) . '/config.php');
+require_once (dirname ( __FILE__ ) . '/lib.php');
+require_once (dirname ( __FILE__ ) . '/locallib.php');
 
+// $id = required_param('id', PARAM_INT); // Course Module ID
+$id = optional_param ( 'id', 0, PARAM_INT ); // Course Module ID
+$g = optional_param ( 'g', 0, PARAM_INT ); // groupformation instance ID
+$back = optional_param ( 'back', 0, PARAM_INT );
 
-	require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
-	require_once(dirname(__FILE__).'/lib.php');
-	require_once(dirname(__FILE__).'/locallib.php');	
+$current_tab = 'view';
 
-	//$id = required_param('id', PARAM_INT);    // Course Module ID
-	$id = optional_param('id', 0, PARAM_INT);   // Course Module ID
-	$g = optional_param('g', 0, PARAM_INT);		// groupformation instance ID
-	$back = optional_param('back', 0, PARAM_INT);
-	
-	$current_tab = 'view';
-	// if(!$cm = get_coursemodule_from_id('groupformation', $id, 0, false, MUST_EXIST)) {
-	// //if (!$cm = get_coursemodule_from_id('groupformation', $id)) {
-	// 	print_error('Course Module ID was incorrect'); // NOTE this is invalid use of print_error, must be a lang string id
-	// }
+// Import jQuery and js file
+addJQuery ( $PAGE, 'survey_functions.js' );
 
-	// if(!$course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST)) {
-	// //if (!$course = $DB->get_record('course', array('id'=> $cm->course))) {
-	// 	print_error('course is misconfigured');  // NOTE As above
-	// }
+if ($id) {
+	$cm = get_coursemodule_from_id ( 'groupformation', $id, 0, false, MUST_EXIST );
+	$course = $DB->get_record ( 'course', array (
+			'id' => $cm->course 
+	), '*', MUST_EXIST );
+	$groupformation = $DB->get_record ( 'groupformation', array (
+			'id' => $cm->instance 
+	), '*', MUST_EXIST );
+} else if ($g) {
+	$groupformation = $DB->get_record ( 'groupformation', array (
+			'id' => $g 
+	), '*', MUST_EXIST );
+	$course = $DB->get_record ( 'course', array (
+			'id' => $groupformation->course 
+	), '*', MUST_EXIST );
+	$cm = get_coursemodule_from_instance ( 'groupformation', $groupformation->id, $course->id, false, MUST_EXIST );
+} else {
+	error ( 'You must specify a course_module ID or an instance ID' );
+}
 
-	// if (!$groupformation = $DB->get_record('groupformation', array('id'=> $cm->instance), '*', MUST_EXIST)) {
-	// 	print_error('course module is incorrect'); // NOTE As above
-	// }
-	
-	
-	// Import jQuery and js file
-	addJQuery($PAGE,'survey_functions.js');
-	
-	if($id) {
-		$cm = get_coursemodule_from_id('groupformation', $id, 0, false, MUST_EXIST);
-		$course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
-		$groupformation = $DB->get_record('groupformation', array('id' => $cm->instance), '*', MUST_EXIST);
-	} else if($g) {
-		$groupformation = $DB->get_record('groupformation', array('id' => $g), '*', MUST_EXIST);
-		$course = $DB->get_record('course', array('id' => $groupformation->course), '*', MUST_EXIST);
-		$cm = get_coursemodule_from_instance('groupformation', $groupformation->id, $course->id, false, MUST_EXIST);
-	} else {
-		error('You must specify a course_module ID or an instance ID');
-	}
+require_login ( $course, true, $cm );
+// $context = context_module::instance($cm->id);
 
-	require_login($course, true, $cm);
-//	$context = context_module::instance($cm->id);
+$event = \mod_groupformation\event\course_module_viewed::create ( array (
+		'objectid' => $PAGE->cm->instance,
+		'context' => $PAGE->context 
+) );
 
-	$event = \mod_groupformation\event\course_module_viewed::create(array(
-			'objectid' => $PAGE->cm->instance,
-			'context' => $PAGE->context,
-	));
+$context = $PAGE->context;
 
-	$context = $PAGE->context;
-	
-	$event->add_record_snapshot('course', $PAGE->course);
-	$event->add_record_snapshot($PAGE->cm->modname, $groupformation);
-	$event->trigger();
-	
-	$PAGE->set_url('/mod/groupformation/view.php', array('id' => $cm->id, 'do_show' => 'view'));
-// 	$PAGE->set_title(get_string('title', 'groupformation'));
-// 	$PAGE->set_heading(get_string('header', 'groupformation'));
-	$PAGE->set_title(format_string($groupformation->name));
-	$PAGE->set_heading(format_string($course->fullname));
-//	$PAGE->set_context($context);
+$event->add_record_snapshot ( 'course', $PAGE->course );
+$event->add_record_snapshot ( $PAGE->cm->modname, $groupformation );
+$event->trigger ();
 
-	
-	
-	echo $OUTPUT->header();
+$PAGE->set_url ( '/mod/groupformation/view.php', array (
+		'id' => $cm->id,
+		'do_show' => 'view' 
+) );
+$PAGE->set_title ( format_string ( $groupformation->name ) );
+$PAGE->set_heading ( format_string ( $course->fullname ) );
+// $PAGE->set_context($context);
 
-	
-	
-	
-	// Print the tabs.
-	require('tabs.php');
-	
-	// $mform = new form_dummy();
-	// //Form processing and displaying is done here
-	// if ($mform->is_cancelled()) {
-	// 	//Handle form cancel operation, if cancel button is present on form
-	// } else if ($fromform = $mform->get_data()) {
-	// 	//In this case you process validated data. $mform->get_data() returns data posted in form.
-	// } else {
-	// 	// this branch is executed if the form is submitted but the data doesn't validate and the form should be redisplayed
-	// 	// or on the first display of the form.
+echo $OUTPUT->header ();
 
-	// 	//Set default data (if any)
-	// 	$mform->set_data($toform);
-	// 	//displays the form
-	// 	$mform->display();
-	// }
+// Print the tabs.
+require ('tabs.php');
 
-	// Conditions to show the intro can change to look for own settings or whatever.
-	if ($groupformation->intro) {
-		echo $OUTPUT->box(format_module_intro('groupformation', $groupformation, $cm->id), 'generalbox mod_introbox', 'groupformationintro');
-	}
-	
-	
-	
-	// Replace the following lines with you own code.
-	echo $OUTPUT->heading($groupformation->name);
-	
- 	require_once(dirname(__FILE__).'/classes/moodle_interface/storage_manager.php');
-  //	require_once(dirname(__FILE__).'/classes/question_manager/question_manager.php');
-  	require_once(dirname(__FILE__).'/classes/question_manager/infoText.php');
-//  	$a = array();
-// 	var_dump(count($a));
-  	$userId = $USER->id;
-  	
-  	$store = new mod_groupformation_storage_manager($groupformation->id);
-  	$val;
-  	if($id){
-  		$val = $id;
-  	}else{
-  		$val = $groupformation->id;
-  	}
-  	$info = new mod_groupformation_infoText($val);
-  	
-	$begin = 1;
-  	if (isset($_POST["begin"])){
-  		$begin = $_POST["begin"];
-  	}
-  	
-  	if($begin == 1){
-  		if (isset($_POST["questions"])){
-  			
-  			if($_POST["questions"] == 1 && !$back){
-  			
-  				$returnurl = new moodle_url('/mod/groupformation/answeringView.php', array('id' => $val));
-  			
-  				redirect($returnurl);
-  			}
-  		}
-  	}else{
-  		$store->statusChanged($userId, 1);
-  	}
+// Conditions to show the intro can change to look for own settings or whatever.
+if ($groupformation->intro) {
+	echo $OUTPUT->box ( format_module_intro ( 'groupformation', $groupformation, $cm->id ), 'generalbox mod_introbox', 'groupformationintro' );
+}
 
-  	
-// //  	$xmlLoader = new mod_groupformation_xml_loader();
-	//var_dump(has_capability('mod/groupformation:onlystudent', $context));
-	if (has_capability('mod/groupformation:onlystudent', $context)){
- 		$status = $store->answeringStatus($userId);
-		if($status ==  -1){
- 			$info->statusA();
- 		}
- 		if($status == 0){
- 			$info->statusB();
- 		}
- 		if($status == 1){
- 			$info->statusC();
- 		}
+// Replace the following lines with you own code.
+echo $OUTPUT->heading ( $groupformation->name );
 
-	}else{
-       	//echo $OUTPUT->heading('no access');
-       	$info->Dozent();
-	}
-// 		$hasNext = $questionManager->hasNext();
-// 		if($questionManager->questionsToAnswer($userId)){
-// 			while($hasNext){
-// 				$category = $questionManager->getCurrentCategory();
-// 				var_dump($category);
-// 				$question = $questionManager->getNextQuestion();
+require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/storage_manager.php');
+// require_once(dirname(__FILE__).'/classes/question_manager/question_manager.php');
+require_once (dirname ( __FILE__ ) . '/classes/question_manager/infoText.php');
+$userId = $USER->id;
+
+$store = new mod_groupformation_storage_manager ( $groupformation->id );
+$val;
+if ($id) {
+	$val = $id;
+} else {
+	$val = $groupformation->id;
+}
+$info = new mod_groupformation_infoText ( $val );
+
+$begin = 1;
+if (isset ( $_POST ["begin"] )) {
+	$begin = $_POST ["begin"];
+}
+
+if ($begin == 1) {
+	if (isset ( $_POST ["questions"] )) {
+		
+		if ($_POST ["questions"] == 1 && ! $back) {
 			
-// 				var_dump($question);
-// 				$hasAnswer = $questionManager->hasAnswers($userId);
-// 				var_dump($hasAnswer);
-// 				if($hasAnswer){
-// 					var_dump($questionManager->getAnswers($userId));
-// 				}
-// 				$hasNext = $questionManager->hasNext();
-// 				$answers = array('0');
-// 				$questionManager->saveAnswers($userId, $answers);
-// 			}
-		
-// 			if($hasNext){
-// 				$category = $questionManager->getCurrentCategory();
-// 				var_dump($category);
-// 				$question = $questionManager->getNextQuestion();
-				
-// 				var_dump($question);
-// 				$hasAnswer = $questionManager->hasAnswers($userId);
-// 				var_dump($hasAnswer);
-// 				if($hasAnswer){
-// 					var_dump($questionManager->getAnswers($userId));
-// 				}
-// 				$hasNext = $questionManager->hasNext();
-// 			}
-		
-// 			if($hasNext){
-// 				$category = $questionManager->getCurrentCategory();
-// 				var_dump($category);
-// 				$question = $questionManager->getNextQuestion();
-		
-// 				var_dump($question);
-// 				$hasAnswer = $questionManager->hasAnswers($userId);
-// 				var_dump($hasAnswer);
-// 				if($hasAnswer){
-// 					var_dump($questionManager->getAnswers($userId));
-// 				}
-// 				$hasNext = $questionManager->hasNext();
-// 			}
-		
-// 			if($hasNext){
-// 				$category = $questionManager->getCurrentCategory();
-// 				var_dump($category);
-// 				$question = $questionManager->getNextQuestion();
-		
-// 				var_dump($question);
-// 				$hasAnswer = $questionManager->hasAnswers($userId);
-// 				var_dump($hasAnswer);
-// 				if($hasAnswer){
-// 					var_dump($questionManager->getAnswers($userId));
-// 				}
-// 				$hasNext = $questionManager->hasNext();
-// 			}
-		
-// 			if($hasNext){
-// 				$category = $questionManager->getCurrentCategory();
-// 				var_dump($category);
-// 				$question = $questionManager->getNextQuestion();
-		
-// 				var_dump($question);
-// 				$hasAnswer = $questionManager->hasAnswers($userId);
-// 				var_dump($hasAnswer);
-// 				var_dump('hasAnswer');
-// 				if($hasAnswer){
-// 					var_dump($questionManager->getAnswers($userId));
-// 				}
-// 				$hasNext = $questionManager->hasNext();
+			$returnurl = new moodle_url ( '/mod/groupformation/answeringView.php', array (
+					'id' => $val 
+			) );
 			
-// 				var_dump($hasNext);
-// 			}
-		
-//		}
-	
-// 	$questions = $questionManager->getFirstQuestion($USER->id);
-// 	var_dump($questions);
-	//var_dump($USER->id);
-// 	$xmlLoader->saveData('team', FALSE, 0);
-	//$feedbackid = groupformation_get_feedback_id($groupformation->id);
-		
-		
+			redirect ( $returnurl );
+		}
+	}
+} else {
+	$store->statusChanged ( $userId, 1 );
+}
 
-		
-	echo $OUTPUT->footer();
+// $xmlLoader = new mod_groupformation_xml_loader();
+if (has_capability ( 'mod/groupformation:onlystudent', $context )) {
+	$status = $store->answeringStatus ( $userId );
+	if ($status == - 1) {
+		$info->statusA ();
+	}
+	if ($status == 0) {
+		$info->statusB ();
+	}
+	if ($status == 1) {
+		$info->statusC ();
+	}
+} else {
+	$info->Dozent ();
+}
+
+echo $OUTPUT->footer ();
 	
 

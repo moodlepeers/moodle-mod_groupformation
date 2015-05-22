@@ -34,6 +34,7 @@ defined ( 'MOODLE_INTERNAL' ) || die ();
  * return new stdClass();
  * }
  */
+
 /**
  * add jquery to view
  *
@@ -48,18 +49,12 @@ function addjQuery($PAGE, $filename = null) {
 	}
 }
 
+/**
+ * sets language depended on moodle config and course config
+ *
+ * @return string - language for showing questions
+ */
 function get_language() {
-	global $DB,$COURSE,$CFG,$USER,$PAGE,$_SESSION;
-	return ($CFG->lang != $COURSE->lang)?(($COURSE->lang!='' && $COURSE->lang!=null)?$COURSE->lang:$CFG->lang):$CFG->lang;
-	
-	
-	if ($course->lang != '') {
-		return $course->lang;
-// 	} elseif ($DB->record_exists('user', array('id'=>$userid))) {
-// 		return $DB->get_record('user', array('id'=>$userid))->lang;
-	} elseif ($DB->record_exists('config', array('name'=>'lang'))) {
-		return $DB->get_record('config', array('name'=>'lang'))->value;
-	} else {
-		return 'en';
-	}
+	global $COURSE, $CFG;
+	return ($CFG->lang != $COURSE->lang) ? (($COURSE->lang != '' && $COURSE->lang != null) ? $COURSE->lang : $CFG->lang) : $CFG->lang;
 }

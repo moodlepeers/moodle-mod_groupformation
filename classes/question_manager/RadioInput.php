@@ -49,7 +49,7 @@ class RadioInput {
 			echo '<tr>';
 		}
 		//echo '<th scope="row">' . $this->question . '</th>';
-		echo '<th scope="row"> <label for="' . $this->category . $this->qnumber . '">' .
+		echo '<td scope="row"> <label for="' . $this->category . $this->qnumber . '">' .
 				$this->question . '</label> </td>';
 		
 		$radioCounter = 1;
