@@ -137,3 +137,7 @@ $string ['category_grade'] = 'Grades';
 $string ['category_team'] = 'Team';
 $string ['category_character'] = 'Character';
 $string ['category_motivation'] = 'Motivation';
+$string ['category_learning'] = 'Learning';
+$string ['stats_partly'] = 'You answered {$a->answered} out of {$a->questions} questions in the category "{$a->category}".';
+$string ['stats_all'] = 'You answered all questions in the category "{$a->category}".';
+$string ['stats_none'] = 'You did not answer any question in the category "{$a->category}".';

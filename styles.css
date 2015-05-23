@@ -168,6 +168,10 @@ footer {
 	padding-top: 10px;
 }
 
+.questionaire_stats_row {
+	font-weight: normal;
+}
+
 [class*='col_'] {
   float: left;
   margin: 5px 0;

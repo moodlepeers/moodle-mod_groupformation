@@ -126,6 +126,10 @@ $string ['category_grade'] = 'Noten';
 $string ['category_team'] = 'Team';
 $string ['category_character'] = 'Charakter';
 $string ['category_motivation'] = 'Motivation';
+$string ['category_learning'] = 'Lernen';
+$string ['stats_partly'] = 'In der Kategorie "{$a->category}" haben Sie {$a->answered} von {$a->questions} Fragen beantwortet.';
+$string ['stats_all'] = 'In der Kategorie "{$a->category}" haben Sie alle Fragen beantwortet.';
+$string ['stats_none'] = 'In der Kategorie "{$a->category}" haben Sie noch keine Frage beantwortet.';
 
 // $string [''] = '';
 // $string [''] = '';

@@ -52,7 +52,7 @@ class DropdownInput {
 		
 		echo '<tr>';
 		//echo '<th scope="row">' . $this->question . '</th>';
-		echo '<td> <label for="' . $this->category . $this->qnumber . '">' .
+		echo '<th scope="row"> <label for="' . $this->category . $this->qnumber . '">' .
 				$this->question . '</label> </td>';
 		
 		
@@ -69,7 +69,7 @@ class DropdownInput {
 		}
 		
 		echo '</select>
-			</td>
+			</th>
 		</tr>';
 		
 		

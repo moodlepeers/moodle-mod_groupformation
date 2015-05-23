@@ -34,7 +34,6 @@ $current_tab = 'view';
 
 // Import jQuery and js file
 addJQuery ( $PAGE, 'survey_functions.js' );
-
 if ($id) {
 	$cm = get_coursemodule_from_id ( 'groupformation', $id, 0, false, MUST_EXIST );
 	$course = $DB->get_record ( 'course', array (
@@ -102,7 +101,8 @@ if ($id) {
 } else {
 	$val = $groupformation->id;
 }
-$info = new mod_groupformation_infoText ( $val );
+$truegroupformationId = $groupformation->id;
+$info = new mod_groupformation_infoText ( $val , $userId , $truegroupformationId );
 
 $begin = 1;
 if (isset ( $_POST ["begin"] )) {
