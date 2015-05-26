@@ -186,6 +186,13 @@ footer {
 	float: right !important;
 }
 
+
+.js_preknowledgeInput, .js_topicInput, #group_size, #numb_of_groups, #max_points{
+    height: 30px !important;
+    line-height: normal;
+}
+#group_size, #numb_of_groups, #max_points{width:100px;}
+
 /*
 .container {
   margin: 5% 3%; }
@@ -236,7 +243,8 @@ h1.caption {
     content: "* "; }
 
 #js_topicsWrapper, #js_knowledgeWrapper, #js_szenarioWrapper,
-#knowledfeInfoProject, #knowledfeInfoHomework, #knowledfeInfoPresentation
+#knowledfeInfoProject, #knowledfeInfoHomework, #knowledfeInfoPresentation,
+#max_points_wrapper
 {
   display: none; }
 
@@ -390,7 +398,8 @@ h4 label:hover {
     border: 1px solid #fff257;
     background-color: #fffbb9;
     margin-top: -50px;
-    margin-left: 20px; }
+    margin-left: 20px; 
+    font-size: 0.9em !important;}
   .toolt[tooltip]:not([tooltip-persistent]):before {
     pointer-events: none; }
 

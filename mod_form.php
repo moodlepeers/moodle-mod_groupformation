@@ -159,6 +159,12 @@ class mod_groupformation_mod_form extends moodleform_mod {
                     <div class="col_100">
                         <h4 class="required">' . get_string ( 'scenario_description', 'groupformation' ) . '</h4>
                     </div>
+				
+					<div class="col_100">
+                        <div class="errors">
+                            <p id="szenario_error"></p>
+                        </div>
+                    </div>
 			
                     <div class="szenarioradios">
                         <div class="grid">
@@ -376,7 +382,18 @@ class mod_groupformation_mod_form extends moodleform_mod {
                 <div class="grid option_row">
 
                     <div class="col_100 ">
-                        <h4 class="optional">' . get_string ( 'groupoption_description', 'groupformation' ) . '<span class="toolt" tooltip="' . get_string ( 'groupoption_help', 'groupformation' ) . '"></span></h4>
+                        <h4 class="required">' . get_string ( 'groupoption_description', 'groupformation' ) . '<span class="toolt" tooltip="' . get_string ( 'groupoption_help', 'groupformation' ) . '"></span></h4>
+                    </div>
+				
+					<div class="col_100">
+                        <div class="errors">
+                            <p id="maxmembers_error"></p>
+                        </div>
+                    </div>
+                    <div class="col_100">
+                        <div class="errors">
+                            <p id="maxgroups_error"></p>
+                        </div>
                     </div>
 
                     <div class="col_50"><label><input type="radio" name="group_opt" id="group_opt_size" value="group_size" checked="checked" />
@@ -396,6 +413,20 @@ class mod_groupformation_mod_form extends moodleform_mod {
                     <div class="col_100">
                         <h4 class="required">' . get_string ( 'evaluationmethod_description', 'groupformation' ) . '</h4>
                     </div>
+				
+					<div class="col_100">
+                        <div class="errors">
+                            <p id="evaluationmethod_error"></p>
+                        </div>
+                    </div>
+
+                    <div class="col_100">
+                        <div class="errors">
+                            <p id="maxpoints_error"></p>
+                        </div>
+                    </div>
+				
+				
                     <div class="col_66">
                         <select id="js_evaluationmethod">
 							<option value="chooseM">' . get_string ( 'choose_evaluationmethod', 'groupformation' ) . '</option>
@@ -404,11 +435,12 @@ class mod_groupformation_mod_form extends moodleform_mod {
                             <option value="justpass">' . get_string ( 'justpass', 'groupformation' ) . '</option>
                             <option value="novaluation">' . get_string ( 'noevaluation', 'groupformation' ) . '</option>
                         </select>
-						<input type="number" id="max_points"  min="0" max="100" value="100" disabled="disabled" />
+						<span id="max_points_wrapper"><input type="number" id="max_points"  min="0" max="100" value="100" /><span class="toolt" tooltip="Bitte maximale Punktzahl eingeben."></span></span>
                     </div>
 
                 </div> <!-- /grid -->
-                ' );
+                ' );                                                                                //TODO @Rene: lang File für tooltip "Maximale Punktzahl" (siehe Zeile oben)
+		
 		
 		// close wrapper of the szenario
 		$mform->addElement ( 'html', '</div>' );

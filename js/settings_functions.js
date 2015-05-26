@@ -7,7 +7,7 @@ $(document).ready(function() {
     
     
     // TODO wenn JS und nonJS fehlerfrei funktioniert, die folgende Zeile einkommentieren
-//    $("#non-js-content").hide();
+    $("#non-js-content").hide();
     $("#js-content").show();
     
 
@@ -21,9 +21,28 @@ $(document).ready(function() {
       
 ///////////////////////////////////////////////////////////////////////////////////////////////      
 ///////////////////////////////////////////////////////////////////////////////////////////////    
-    
-    
-  // Load Settings  
+
+
+    // Load Settings
+
+    if($('.error').length > 0){
+        var messages = $('span.error').map(function(i) {
+            return $(this).text();
+        });
+
+        var ids = $('div.error').map(function(i) {
+            return '#' + $(this).parent().prop('id').substr(9) + '_error';
+        });
+
+        $.each(ids, function(index, value){
+            $(value).text(messages.get(index)).show();
+        });
+
+    //    alert(ids.get().join(', '));
+    //    alert(messages.get().join(', '));
+    }
+
+
     
     //load the szenario which been choosen before
     if ($('#id_szenario option:selected').val() != 0){
@@ -133,17 +152,17 @@ $(document).ready(function() {
     if($('#id_evaluationmethod option:selected').val() != 0){
     	var opt = $('#id_evaluationmethod option:selected').val();
     	if(opt == '1'){
-    		$('#max_points').prop('disabled', true);
+    		$('#max_points_wrapper').hide();
     		$('#js_evaluationmethod option').prop('selected', false).filter('[value=grades]').prop('selected', true);
     	}else if(opt == '2'){
     		$('#js_evaluationmethod option').prop('selected', false).filter('[value=points]').prop('selected', true);
-    		$('#max_points').prop('disabled', false);
+    		$('#max_points_wrapper').show();
     		$('#max_points').val($('#id_maxpoints').val());
     	}else if(opt == '3'){
-    		$('#max_points').prop('disabled', true);
+    		$('#max_points_wrapper').hide();
     		$('#js_evaluationmethod option').prop('selected', false).filter('[value=justpass]').prop('selected', true);
     	}else if(opt == '4'){
-    		$('#max_points').prop('disabled', true);
+    		$('#max_points_wrapper').hide();
     		$('#js_evaluationmethod option').prop('selected', false).filter('[value=novaluation]').prop('selected', true);
     	}
     }
@@ -372,9 +391,9 @@ $(document).ready(function() {
     
 
     //Groupoptions radiobutton listener
-    $('input[name=group_opt]').change(function(e){
-        var activeElVal = 0;
-        var nonActiveElVal = 0;
+    $('input[name=group_opt]').click(function(e){
+        var activeElVal = '0';
+        var nonActiveElVal = '0';
         var activeElID = $(this).val();
         adjustGropOptions(activeElID, activeElVal, nonActiveElVal);
     });
@@ -401,7 +420,7 @@ $(document).ready(function() {
             //Moodle nativ fields
             $('#id_groupoption_0').prop('checked', true);
             $('#id_maxmembers').removeAttr('disabled');
-            writeTextInput('#id_maxmembers', activeElVal);
+            writeTextInput('#id_maxmembers', $activeElVal);
             $('#id_maxgroups').attr('disabled', 'disabled');
             writeTextInput('#id_maxgroups', $nonActiveElVal);
             
@@ -409,12 +428,11 @@ $(document).ready(function() {
         	$('#group_opt_numb').prop('checked', true);
             $('#numb_of_groups').removeAttr('disabled').val($activeElVal);
             $('#group_size').attr('disabled', 'disabled').val($nonActiveElVal);
-            
+
             //Moodle nativ fields
             $('#id_groupoption_1').prop('checked', true);
-//            $('#id_maxgroups').removeAttr('disabled').val($activeElVal);
             $('#id_maxgroups').removeAttr('disabled');
-            writeTextInput('#id_maxmembers', activeElVal);
+            writeTextInput('#id_maxgroups', $activeElVal);
             $('#id_maxmembers').attr('disabled', 'disabled');
             writeTextInput('#id_maxmembers', $nonActiveElVal);
         }
@@ -440,36 +458,36 @@ $(document).ready(function() {
     $('#js_evaluationmethod').change(function(){
         if($(this).val()=='grades'){
             $('#id_evaluationmethod option').prop('selected', false).filter('[value=1]').prop('selected', true);
-            $('#max_points').val(0);
-            $('#id_maxpoints').val(0);
-            $('#max_points').prop('disabled', true);
+//            $('#max_points').val(0);
+//            $('#id_maxpoints').val(0);
+            $('#max_points_wrapper').prop('disabled', true).hide();
 //            $('#id_maxpoints').prop('disabled', true);
             
             
         }else if($(this).val()=='points'){
             $('#id_evaluationmethod option').prop('selected', false).filter('[value=2]').prop('selected', true);
-            $('#max_points').prop('disabled', false);
-            $('#id_maxpoints').prop('disabled', false);
-            
+            $('#max_points_wrapper').show();
+            $('#id_maxpoints').prop('disabled', false).val($('#max_points').val());
+
         }else if($(this).val()=='justpass'){
             $('#id_evaluationmethod option').prop('selected', false).filter('[value=3]').prop('selected', true);
-            $('#max_points').val(0);
-            $('#id_maxpoints').val(0);
-            $('#max_points').prop('disabled', true);
+//            $('#max_points').val(0);
+//            $('#id_maxpoints').val(0);
+            $('#max_points_wrapper').hide();
 //            $('#id_maxpoints').prop('disabled', true);
             
         }else if($(this).val()=='novaluation'){
             $('#id_evaluationmethod option').prop('selected', false).filter('[value=4]').prop('selected', true);
-            $('#max_points').prop('disabled', true);
-            $('#max_points').val(0);
-            $('#id_maxpoints').val(0);
+            $('#max_points_wrapper').hide();
+//            $('#max_points').val(0);
+//            $('#id_maxpoints').val(0);
 //            $('#id_maxpoints').prop('disabled', true);
 
         }else if($(this).val()=='chooseM'){
             $('#id_evaluationmethod option').prop('selected', false).filter('[value=0]').prop('selected', true);
-            $('#max_points').val(0);
-            $('#id_maxpoints').val(0);
-            $('#max_points').prop('disabled', true);
+//            $('#max_points').val(0);
+//            $('#id_maxpoints').val(0);
+            $('#max_points_wrapper').hide();
 //            $('#id_maxpoints').prop('disabled', true);
             
         }
