@@ -47,6 +47,7 @@ function addjQuery($PAGE, $filename = null) {
 	if (! is_null ( $filename )) {
 		$PAGE->requires->js ( '/mod/groupformation/js/' . $filename );
 	}
+	
 }
 
 /**

@@ -180,9 +180,9 @@ class mod_groupformation_infoText {
 			$a->answered = $values['answered'];
 			echo '<tr><th scope="row" class="questionaire_stats_row"><span>';
 			if ($values['missing']==0){
-				echo get_string('stats_all','groupformation',$a);
+				echo get_string('stats_all','groupformation',$a).' <span class="questionaire_all">&#10004;</span>';
 			} elseif ($values['answered']==0){
-				echo get_string('stats_none','groupformation',$a);
+				echo get_string('stats_none','groupformation',$a).' <span class="questionaire_none">&#10008;</span>';
 			} else {
 				echo get_string('stats_partly','groupformation',$a);
 			}

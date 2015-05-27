@@ -172,6 +172,30 @@ footer {
 	font-weight: normal;
 }
 
+.questionaire_progress-bar {
+	float: left;
+	width: 0;
+	height: 100%;
+	font-size: 12px;
+	line-height: 20px;
+	color: #fff;
+	text-align: center;
+	background-color: #18b410;
+	-webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+	box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+	-webkit-transition: width .6s ease;
+	-o-transition: width .6s ease;
+	transition: width .6s ease;
+}
+
+.questionaire_all {
+	color: #18b410;
+}
+
+.questionaire_none {
+	color: #ff0000;
+}
+
 [class*='col_'] {
   float: left;
   margin: 5px 0;

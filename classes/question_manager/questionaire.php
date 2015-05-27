@@ -84,7 +84,12 @@
 			if($this->question_manager->questionsToAnswer() && $hasNext){
 				//while($hasNext){
 					$percent = $this->question_manager->getPercent();
-					var_dump((float) $percent);
+					$percentage = floatval($percent);
+					echo '<div class="progress">
+  							<div class="questionaire_progress-bar" role="progressbar" aria-valuenow="'.$percentage.'" aria-valuemin="0" aria-valuemax="100" style="width:'.$percentage.'%">
+    							'.$percentage.'%
+						  	</div>
+						  </div>';
 					$this->category = $this->question_manager->getCurrentCategory();
 // 					var_dump($this->category);
 					$question = $this->question_manager->getNextQuestion();
