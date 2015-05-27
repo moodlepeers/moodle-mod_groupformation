@@ -55,6 +55,7 @@ function addjQuery($PAGE, $filename = null) {
  * @return string - language for showing questions
  */
 function get_language() {
-	global $COURSE, $CFG;
-	return ($CFG->lang != $COURSE->lang) ? (($COURSE->lang != '' && $COURSE->lang != null) ? $COURSE->lang : $CFG->lang) : $CFG->lang;
+	global $COURSE, $CFG, $USER;
+	// TODO
+	return ($CFG->lang != $COURSE->lang) ? (($COURSE->lang != '' && $COURSE->lang != null) ? $COURSE->lang : $USER->lang) : $CFG->lang;
 }
