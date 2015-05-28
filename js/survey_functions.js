@@ -16,7 +16,6 @@ $(document).ready(function() {
 ////	   }
 //    });
     
-    
     // clickable wraper for input radios // Fragebogen
     $(".select-area").click(function() {
         $(this).find('input:radio').prop('checked', true);

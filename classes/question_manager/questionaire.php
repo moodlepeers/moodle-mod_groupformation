@@ -87,8 +87,7 @@
 					$percentage = floatval($percent);
 					echo '<div class="progress">
   							<div class="questionaire_progress-bar" role="progressbar" aria-valuenow="'.$percentage.'" aria-valuemin="0" aria-valuemax="100" style="width:'.$percentage.'%">
-    							'.$percentage.'%
-						  	</div>
+    							</div>
 						  </div>';
 					$this->category = $this->question_manager->getCurrentCategory();
 // 					var_dump($this->category);

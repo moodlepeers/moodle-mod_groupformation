@@ -60,7 +60,6 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		}
 		$mform->addRule ( 'name', null, 'required', null, 'client' );
 		$mform->addRule ( 'name', get_string ( 'maximumchars', '', 255 ), 'maxlength', 255, 'client' );
-		$mform->addHelpButton ( 'name', 'groupformationname', 'groupformation' );
 		
 		// Adding the standard "intro" and "introformat" fields.
 		$this->add_intro_editor ();
@@ -120,6 +119,11 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		// Check if szenario is selected
 		if ($data ['szenario'] == 0) {
 			$errors ['szenario'] = get_string ( 'scenario_error', 'groupformation' );
+		}
+		
+		// check if groupname is too long
+		if (strlen ( $data ['groupname'] ) > 100) {
+			$errors ['groupname'] = get_string ( 'groupname_error', 'groupformation' );
 		}
 		
 		// Check if maxmembers or maxgroups is selected and number is chosen
@@ -402,8 +406,16 @@ class mod_groupformation_mod_form extends moodleform_mod {
                     <div class="col_50"><label><input type="radio" name="group_opt" id="group_opt_numb" value="numb_of_groups"/>
                                 ' . get_string ( 'maxgroups', 'groupformation' ) . '</label>
 								<input type="number" class="group_opt" id="numb_of_groups"  min="0" max="100" value="0" disabled="disabled" /></div>
-                </div> <!-- /grid -->
-                ' );
+                </div> <!-- /grid -->' );
+		
+		$mform->addElement ( 'html', '
+                <div class="grid option_row">
+
+                    <div class="col_100 ">
+                        <h4 class="optional">' . get_string ( 'groupname', 'groupformation' ) . '<span class="toolt" tooltip="' . get_string ( 'groupname_help', 'groupformation' ) . '"></span></h4>
+                    </div>
+				
+				</div> <!-- /grid -->' );
 		
 		// add evaluation options
 		$mform->addElement ( 'html', '
@@ -439,9 +451,8 @@ class mod_groupformation_mod_form extends moodleform_mod {
                     </div>
 
                 </div> <!-- /grid -->
-                ' );                                                                                //TODO @Rene: lang File für tooltip "Maximale Punktzahl" (siehe Zeile oben)
-		
-		
+                ' ); // TODO @Rene: lang File für tooltip "Maximale Punktzahl" (siehe Zeile oben)
+		     
 		// close wrapper of the szenario
 		$mform->addElement ( 'html', '</div>' );
 		
@@ -510,6 +521,17 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		$mform->disabledIf ( 'maxmembers', 'groupoption', 'eq', '1' );
 		$mform->disabledIf ( 'maxgroups', 'groupoption', 'eq', '0' );
 		$mform->disabledIf ( 'maxmembers', 'groupoption', 'eq', '1' );
+		
+		// add group name field
+		$mform->addElement ( 'text', 'groupname', get_string ( 'groupname', 'groupformation' ), array (
+				'size' => '64' 
+		) );
+		if (! empty ( $CFG->formatstringstriptags )) {
+			$mform->setType ( 'groupname', PARAM_TEXT );
+		} else {
+			$mform->setType ( 'groupname', PARAM_CLEAN );
+		}
+		$mform->addHelpButton ( 'groupname', 'groupname', 'groupformation' );
 		
 		// add field for evaluation method
 		$mform->addElement ( 'select', 'evaluationmethod', get_string ( 'evaluationmethod_description', 'groupformation' ), array (

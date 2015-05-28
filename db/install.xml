@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="mod/groupformation/db" VERSION="20150317" COMMENT="XMLDB file for Moodle mod/groupformation"
+<XMLDB PATH="mod/groupformation/db" VERSION="20150528" COMMENT="XMLDB file for Moodle mod/groupformation"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
@@ -24,7 +24,8 @@
         <FIELD NAME="groupoption" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Option for max members or max number of groups"/>
         <FIELD NAME="maxmembers" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Maximum number of group members."/>
         <FIELD NAME="maxgroups" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Maximum number of groups to generate."/>
-        <FIELD NAME="evaluationmethod" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Evaluation method: grades-0, points-1, just pass-2 and no evaluation-3."/>
+        <FIELD NAME="groupname" TYPE="text" NOTNULL="true" DEFAULT="group" SEQUENCE="false" COMMENT="Group name prefix for generated group names"/>
+		<FIELD NAME="evaluationmethod" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Evaluation method: grades-0, points-1, just pass-2 and no evaluation-3."/>
         <FIELD NAME="maxpoints" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="100" SEQUENCE="false" COMMENT="Maximum number of points if evaluationmethod is 2 (points)."/>
       </FIELDS>
       <KEYS>

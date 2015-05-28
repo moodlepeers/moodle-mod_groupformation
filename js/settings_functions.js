@@ -16,7 +16,18 @@ $(document).ready(function() {
     var stringOfTopics = "";
     
 
-    
+    $('.sortable_topics').sortable({
+  	  axis: 'y',
+  	  stop: function (event, ui) {
+  	      var data = $(this).sortable('serialize');
+  	      $('span#order').text(data);
+  	      /*$.ajax({
+  	              data: oData,
+  	          type: 'POST',
+  	          url: '/your/url/here'
+  	      });*/
+  	 }
+  	});
     
       
 ///////////////////////////////////////////////////////////////////////////////////////////////      
@@ -617,4 +628,8 @@ $(document).ready(function() {
         }, 80);
     }
 
+    // Drag & Drop the topics/objects to sort them 
+	  
+    
+    
 });

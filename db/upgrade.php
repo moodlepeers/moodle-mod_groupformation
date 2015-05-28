@@ -157,6 +157,19 @@
 		
 			upgrade_mod_savepoint(true, 2015051300, 'groupformation');
 		}
+		
+		if ($oldversion < 2015052802) {
+			// For XML:	<FIELD NAME="groupname" TYPE="text" NOTNULL="true" DEFAULT="group" SEQUENCE="false" COMMENT="Group name prefix for generated group names"/>
+			// Define field course to be added to groupformation.
+			$table = new xmldb_table('groupformation');
+			$field = new xmldb_field('groupname', XMLDB_TYPE_TEXT, 'medium', null, null, null, 'group', 'maxgroups');
+			// Add field course.
+			if (!$dbman->field_exists($table, $field)) {
+				$dbman->add_field($table, $field);
+			}
+		
+			upgrade_mod_savepoint(true, 2015052802, 'groupformation');
+		}
 // 		// Second example, some hours later, the same day 2007/04/01
 // 		// ... two more fields and one index were added to install.xml (note the micro increment
 // 		// ... "01" in the last two digits of the version).

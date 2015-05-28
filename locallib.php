@@ -42,7 +42,9 @@ defined ( 'MOODLE_INTERNAL' ) || die ();
  * @param string $filename        	
  */
 function addjQuery($PAGE, $filename = null) {
-	$PAGE->requires->jquery ();
+	$PAGE->requires->jquery();
+	$PAGE->requires->jquery_plugin('ui');
+	$PAGE->requires->jquery_plugin('ui-css');
 	
 	if (! is_null ( $filename )) {
 		$PAGE->requires->js ( '/mod/groupformation/js/' . $filename );
