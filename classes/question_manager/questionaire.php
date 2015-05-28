@@ -203,8 +203,8 @@
 			}
 			
 
-			// TODO @Nora @Rene: Die Buttons des Formulars einfach per echo ausgeben oder müssen an dieser Stelle Moodle Elemente benutzt werden?
-			// Die Buttons sowie die Schließung des Formulars muss am Ende jedes Tabs erfolgen.
+			// TODO @Nora @Rene: Die Buttons des Formulars einfach per echo ausgeben oder mï¿½ssen an dieser Stelle Moodle Elemente benutzt werden?
+			// Die Buttons sowie die Schlieï¿½ung des Formulars muss am Ende jedes Tabs erfolgen.
 // 			echo '
 // 			<div class="grid">
 // 			<div class="col_100">

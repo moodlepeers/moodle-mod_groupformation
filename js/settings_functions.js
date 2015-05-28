@@ -28,13 +28,15 @@ $(document).ready(function() {
   	      });*/
   	 }
   	});
-    
-      
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////      
 ///////////////////////////////////////////////////////////////////////////////////////////////    
 
 
-    // Load Settings
+///////////// Load Settings
+
+// check errors
 
     if($('.error').length > 0){
         var messages = $('span.error').map(function(i) {
@@ -49,137 +51,156 @@ $(document).ready(function() {
             $(value).text(messages.get(index)).show();
         });
 
-    //    alert(ids.get().join(', '));
-    //    alert(messages.get().join(', '));
+        //    alert(ids.get().join(', '));
+        //    alert(messages.get().join(', '));
     }
 
 
-    
-    //load the szenario which been choosen before
-    if ($('#id_szenario option:selected').val() != 0){
-    	 $('#js_szenarioWrapper').show('2000', 'swing');
-    	var szenario = $('#id_szenario option:selected').val();
-    	if(szenario == 1){
-    			$("input[name='js_szenario'][value='project']").attr("checked","checked");
-    			//check browser support first, before delete this
-    			$('#knowledfeInfo').text($('#knowledfeInfoProject').text());
+// check if possible to set settings
+
+    loadGroupformationSettings();
+
+    if(!($('#nochangespossible').css('display') == 'none')){
+
+        $('#js-content').find('input, button, select').prop('disabled', true);
+
+        if($('#id_topics').attr('checked', 'checked')){
+            $('#js-content').find('#group_opt_size, #group_size, #group_size').prop('disabled', false);
+        }else{
+            $('#js-content').find('#group_size, #group_size, #group_opt_numb, #numb_of_groups').prop('disabled', false);
+        }
+    }
+
+    function loadGroupformationSettings(){
+
+        //load the szenario which been choosen before
+        if ($('#id_szenario option:selected').val() != 0){
+            $('#js_szenarioWrapper').show('2000', 'swing');
+            var szenario = $('#id_szenario option:selected').val();
+            if(szenario == 1){
+                $("input[name='js_szenario'][value='project']").attr("checked","checked");
+                //check browser support first, before delete this
+                $('#knowledfeInfo').text($('#knowledfeInfoProject').text());
                 $('#headerTopics').removeClass('required').addClass('optional');
                 $('#id_js_topics').prop('disabled', false);
-                
+
 //	    		setSzenario('project');
-    		}else if(szenario == 2){
-    			$("input[name='js_szenario'][value='homework']").attr("checked","checked");
-    			//check browser support first, before delete this
-    			$('#knowledfeInfo').text($('#knowledfeInfoHomework').text());
+            }else if(szenario == 2){
+                $("input[name='js_szenario'][value='homework']").attr("checked","checked");
+                //check browser support first, before delete this
+                $('#knowledfeInfo').text($('#knowledfeInfoHomework').text());
                 $('#headerTopics').removeClass('required').addClass('optional');
                 $('#id_js_topics').prop('disabled', false);
-                
+
 //	    		setSzenario('homework');
-    		}else if(szenario == 3){
-    			$("input[name='js_szenario'][value='presentation']").attr("checked","checked");
-    			//check browser support first, before delete this
-    			$('#knowledfeInfo').text($('#knowledfeInfoPresentation').text());
+            }else if(szenario == 3){
+                $("input[name='js_szenario'][value='presentation']").attr("checked","checked");
+                //check browser support first, before delete this
+                $('#knowledfeInfo').text($('#knowledfeInfoPresentation').text());
                 $('#headerTopics').removeClass('optional').addClass('required');
                 $('#id_js_topics').prop('disabled', true);
-                             
+
                 $('#id_js_topics').prop('checked',true);
-                
+
                 var activeElID = 'group_size';
                 var activeElVal = $('#id_maxmembers').val();
                 var nonActiveElVal = getTopicsNumb();
                 adjustGropOptions(activeElID, activeElVal, nonActiveElVal);
-                
+
                 $("#group_opt_numb").attr('disabled', 'disabled');
-                
+
                 $("#js_topicsWrapper").show('2000', 'swing');
-                
+
 //	    		setSzenario('presentation');
-    		}
-    }
-    
-
-    
-  //if knowledge was checked before
-    if ($('#id_knowledge').prop('checked')){
-        $('#id_js_knowledge').prop('checked',true);
-        $('#id_knowledge').prop('checked',true);
-        $("#js_knowledgeWrapper").show('2000', 'swing');
-
-        //get the value of Moodle nativ field #id_knowledgelines, parse it and create dynamic input fields
-        var lines = $('textarea[name=knowledgelines]').val().split('\n');
-        $wrapper = $('#prk').find('.multi_fields');
-        $cat = 'prk';
-        $.each(lines, function(){
-            addInput($wrapper, $cat, this);
-        });
-        for( var i = 0, l = 3; i < l; i++){
-            //remove the first 3 dynamic fields which been created by default
-            removeInput($wrapper, $cat, i);
+            }
         }
-    }
-  
-  //if topics was checked before
-    if ($('#id_topics').prop('checked')){
-        $('#id_js_topics').prop('checked',true);
-        $('#id_topics').prop('checked',true);
-        $("#js_topicsWrapper").show('2000', 'swing');
 
-        //get the value of Moodle nativ field #id_topiclines, parse it and create dynamic input fields 
-        var lines = $('textarea[name=topiclines]').val().split('\n');
-        $wrapper = $('#tpc').find('.multi_fields');
-        $cat = 'tpc';
-        $.each(lines, function(){
-            addInput($wrapper, $cat, this);
-        });
-        for( var i = 0, l = 3; i < l; i++){
-        //remove the first 3 dynamic fields which been created by default
-            removeInput($wrapper, $cat, i);
+
+
+        //if knowledge was checked before
+        if ($('#id_knowledge').prop('checked')){
+            $('#id_js_knowledge').prop('checked',true);
+            $('#id_knowledge').prop('checked',true);
+            $("#js_knowledgeWrapper").show('2000', 'swing');
+
+            //get the value of Moodle nativ field #id_knowledgelines, parse it and create dynamic input fields
+            var lines = $('textarea[name=knowledgelines]').val().split('\n');
+            $wrapper = $('#prk').find('.multi_fields');
+            $cat = 'prk';
+            $.each(lines, function(){
+                addInput($wrapper, $cat, this);
+            });
+            for( var i = 0, l = 3; i < l; i++){
+                //remove the first 3 dynamic fields which been created by default
+                removeInput($wrapper, $cat, i);
+            }
         }
-        // set the groupotions depending on topics
-        var activeEllID = 'group_size';
-        var activeElVal = $('#id_maxmembers').val();
-        var nonActiveElVal = getTopicsNumb();
 
-        adjustGropOptions(activeEllID, activeElVal, nonActiveElVal);
-        $("#group_opt_numb").attr('disabled', 'disabled');
-    }else{
-    	//set the groupotions from the Moodle native inputs
-    	if($('input[name=groupoption]:checked').val() == '0'){
+        //if topics was checked before
+        if ($('#id_topics').prop('checked')){
+            $('#id_js_topics').prop('checked',true);
+            $('#id_topics').prop('checked',true);
+            $("#js_topicsWrapper").show('2000', 'swing');
+
+            //get the value of Moodle nativ field #id_topiclines, parse it and create dynamic input fields
+            var lines = $('textarea[name=topiclines]').val().split('\n');
+            $wrapper = $('#tpc').find('.multi_fields');
+            $cat = 'tpc';
+            $.each(lines, function(){
+                addInput($wrapper, $cat, this);
+            });
+            for( var i = 0, l = 3; i < l; i++){
+                //remove the first 3 dynamic fields which been created by default
+                removeInput($wrapper, $cat, i);
+            }
+            // set the groupotions depending on topics
             var activeEllID = 'group_size';
             var activeElVal = $('#id_maxmembers').val();
-            var nonActiveElVal = $('#id_maxgroups').val();
+            var nonActiveElVal = getTopicsNumb();
 
             adjustGropOptions(activeEllID, activeElVal, nonActiveElVal);
+            $("#group_opt_numb").attr('disabled', 'disabled');
         }else{
-            var activeEllID = 'numb_of_groups';
-            var activeElVal = $('#id_maxgroups').val();
-            var nonActiveElVal = $('#id_maxmembers').val();
+            //set the groupotions from the Moodle native inputs
+            if($('input[name=groupoption]:checked').val() == '0'){
+                var activeEllID = 'group_size';
+                var activeElVal = $('#id_maxmembers').val();
+                var nonActiveElVal = $('#id_maxgroups').val();
 
-            adjustGropOptions(activeEllID, activeElVal, nonActiveElVal);
+                adjustGropOptions(activeEllID, activeElVal, nonActiveElVal);
+            }else{
+                var activeEllID = 'numb_of_groups';
+                var activeElVal = $('#id_maxgroups').val();
+                var nonActiveElVal = $('#id_maxmembers').val();
+
+                adjustGropOptions(activeEllID, activeElVal, nonActiveElVal);
+            }
         }
+
+
+        if($('#id_evaluationmethod option:selected').val() != 0){
+            var opt = $('#id_evaluationmethod option:selected').val();
+            if(opt == '1'){
+                $('#max_points_wrapper').hide();
+                $('#js_evaluationmethod option').prop('selected', false).filter('[value=grades]').prop('selected', true);
+            }else if(opt == '2'){
+                $('#js_evaluationmethod option').prop('selected', false).filter('[value=points]').prop('selected', true);
+                $('#max_points_wrapper').show();
+                $('#max_points').val($('#id_maxpoints').val());
+            }else if(opt == '3'){
+                $('#max_points_wrapper').hide();
+                $('#js_evaluationmethod option').prop('selected', false).filter('[value=justpass]').prop('selected', true);
+            }else if(opt == '4'){
+                $('#max_points_wrapper').hide();
+                $('#js_evaluationmethod option').prop('selected', false).filter('[value=novaluation]').prop('selected', true);
+            }
+        }
+
+
     }
-    
-    
-    if($('#id_evaluationmethod option:selected').val() != 0){
-    	var opt = $('#id_evaluationmethod option:selected').val();
-    	if(opt == '1'){
-    		$('#max_points_wrapper').hide();
-    		$('#js_evaluationmethod option').prop('selected', false).filter('[value=grades]').prop('selected', true);
-    	}else if(opt == '2'){
-    		$('#js_evaluationmethod option').prop('selected', false).filter('[value=points]').prop('selected', true);
-    		$('#max_points_wrapper').show();
-    		$('#max_points').val($('#id_maxpoints').val());
-    	}else if(opt == '3'){
-    		$('#max_points_wrapper').hide();
-    		$('#js_evaluationmethod option').prop('selected', false).filter('[value=justpass]').prop('selected', true);
-    	}else if(opt == '4'){
-    		$('#max_points_wrapper').hide();
-    		$('#js_evaluationmethod option').prop('selected', false).filter('[value=novaluation]').prop('selected', true);
-    	}
-    }
-    
-    
-    
+
+
+
 
     // End of Load Settings    
     
