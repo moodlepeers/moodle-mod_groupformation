@@ -358,21 +358,21 @@ button.remove_field:before    { content: "x"; }
 [class*='f_btn']:only-child {
   float: left; }
 
-.szenarioradios h3 {
+#szenarioradios h3 {
   text-align: center; }
-.szenarioradios input[type="radio"] {
+#szenarioradios input[type="radio"] {
   display: none; }
-.szenarioradios label {
+#szenarioradios label {
   line-height: 1.3;
   background-color: #eee;
   /*      margin: 20px 0;*/
   padding: 20px 15px !important;
   border: 1px solid #ccc; }
-  .szenarioradios label:hover {
+  #szenarioradios label:hover {
     cursor: pointer;
     color: #222222;
     box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.65); }
-.szenarioradios input[type="radio"]:checked + label {
+#szenarioradios input[type="radio"]:checked + label {
   color: #ddd;
   background-color: #444; }
 

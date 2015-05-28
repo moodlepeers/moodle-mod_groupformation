@@ -170,7 +170,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
                         </div>
                     </div>
 			
-                    <div class="szenarioradios">
+                    <div id="szenarioradios">
                         <div class="grid">
 			
                             <div class="col_33">
@@ -451,7 +451,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
                     </div>
 
                 </div> <!-- /grid -->
-                ' ); // TODO @Rene: lang File für tooltip "Maximale Punktzahl" (siehe Zeile oben)
+                ' ); // TODO @Rene: lang File fï¿½r tooltip "Maximale Punktzahl" (siehe Zeile oben)
 		     
 		// close wrapper of the szenario
 		$mform->addElement ( 'html', '</div>' );
@@ -472,13 +472,13 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		$mform->addElement ( 'html', '<div id="non-js-content">' );
 		
 		// no changes possible hint
-		$changemsg = '<div class="fitem"';
+		$changemsg = '<div class="fitem" id="nochangespossible"';
 		if (! $this->changesPossible ( $mform )) {
-			$changemsg .= '><span value="1"';
+			$changemsg .= ' ><span value="1"';
 		} else {
 			$changemsg .= ' style="display:none;"><span value="0"';
 		}
-		$changemsg .= ' style="color:red;" id="nochangespossible">' . get_string ( 'nochangespossible', 'groupformation' ) . '</span></div>';
+		$changemsg .= ' style="color:red;">' . get_string ( 'nochangespossible', 'groupformation' ) . '</span></div>';
 		$mform->addElement ( 'html', $changemsg );
 		
 		// add field Szenario choice
