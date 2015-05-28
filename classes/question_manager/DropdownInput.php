@@ -53,7 +53,7 @@ class DropdownInput {
 		echo '<tr>';
 		//echo '<th scope="row">' . $this->question . '</th>';
 		echo '<th scope="row"> <label for="' . $this->category . $this->qnumber . '">' .
-				$this->question . '</label> </td>';
+				$this->question . '</label> </th>';
 		
 		
 		echo '<td class="center">
@@ -63,13 +63,15 @@ class DropdownInput {
 			if($answer == $questionCounter){
 				echo '<option value="'. $questionCounter .'" selected="selected">'. $option .'</option>';
 			}else{
+				
 				echo '<option value="'. $questionCounter .'">'. $option .'</option>';
+				
 			}
 			$questionCounter++;
 		}
 		
 		echo '</select>
-			</th>
+			</td>
 		</tr>';
 		
 		

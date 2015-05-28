@@ -31,6 +31,7 @@ if (!defined('MOODLE_INTERNAL')) {
 
 //require_once 'storage_manager.php';
 require_once($CFG->dirroot.'/mod/groupformation/classes/moodle_interface/storage_manager.php');
+require_once(dirname(__FILE__).'/define_file.php');
 
 
 
@@ -39,8 +40,10 @@ class mod_groupformation_util {
 	private $store;
 	private $groupformationid;
 	
-	private $names = array('topic', 'knowledge', 'general','grade','team', 'character', 'learning', 'motivation');
+	//private $names = array('topic', 'knowledge', 'general','grade','team', 'character', 'learning', 'motivation');
+	private $names = array();
 	private $szenario;
+	private $numbers = array();
 
 	/**
 	 *
@@ -51,13 +54,15 @@ class mod_groupformation_util {
 		$this->groupformationid = $groupformationid;
 		$this->store = new mod_groupformation_storage_manager($groupformationid);
 		$this->szenario = $this->store->getSzenario();
+		$data = new mod_groupformation_data();
+		$this->names = $data->getCriterionNames();
 	}
 	
 	public function getTotalNumber(){
 		$number = 0;
-		$numbers = $this->store->getNumbers($this->names);
-		$this->setNulls($number);
-		foreach($numbers as $n){
+		$this->numbers = $this->store->getNumbers($this->names);
+		$this->setNulls();
+		foreach($this->numbers as $n){
 			$number = $number + $n;
 		}
 		
@@ -73,19 +78,19 @@ class mod_groupformation_util {
 		}	
 	}
 	
-	private function setNulls($numbers){
-		if($this->szenario == 'project'){
-			$numbers[$this->getPosition('learning')] = 0;
+	private function setNulls(){
+		if($this->szenario == 'project' || $this->szenario == 1){
+			$this->numbers[mod_groupformation_data::getPosition('learning')] = 0;
 		}
 	
-		if($this->szenario == 'homework'){
-			$numbers[$this->getPosition('motivation')] = 0;
+		if($this->szenario == 'homework' || $this->szenario == 2){
+			$this->numbers[mod_groupformation_data::getPosition('motivation')] = 0;
 		}
 			
-		if($this->szenario == 'presentation'){
-			for($i = 0; $i < count($numbers); $i++){
-				if($i != $this->getPosition('topic') && $i != $this->getPosition('knowledge')){
-					$numbers[$i] = 0;
+		if($this->szenario == 'presentation' || $this->szenario == 3){
+			for($i = 0; $i < count($this->numbers); $i++){
+				if($i != mod_groupformation_data::getPosition('topic') && $i != mod_groupformation_data::getPosition('general')){
+					$this->numbers[$i] = 0;
 				}
 			}
 		}

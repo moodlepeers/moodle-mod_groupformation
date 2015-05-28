@@ -51,7 +51,7 @@ class mod_groupformation_infoText {
 			),
 			3 => array (
 					'topic',
-					'knowledge' 
+					'general' 
 			) 
 	);
 	public function __construct($groupformationid, $userid, $truegroupformationid) {
@@ -114,13 +114,15 @@ class mod_groupformation_infoText {
 		
 		// hier schicke ich verdeckt groupformationID und die Information, ob der Fragebogen angezeigt werden soll
 		// 1 => ja
-		echo '<input type="hidden" name="questions" value="1"/>';
+	//	echo '<input type="hidden" name="questions" value="1"/>';
 		
 		echo '<input type="hidden" name="id" value="' . $this->groupformationid . '"/>';
 		echo '
 						<div class="grid">
 						<div class="col_100">
-							<input type="submit" value="' . get_string ( 'preview' ) . '" />
+							<button type="submit" name="dozent" value="1">' . get_string ( 'preview' ) . '</button>
+							<button type="submit" name="dozent" value="2">Zur Analyse</button>
+							<button type="submit" name="dozent" value="3">Gruppenformation starten</button>
 						</div>
 						</div>
 							

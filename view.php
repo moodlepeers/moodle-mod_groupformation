@@ -18,129 +18,150 @@
  * Prints a particular instance of groupformation
  *
  * @package mod_groupformation
- * @author Nora Wester
+ * @author  Nora Wester
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require_once (dirname ( dirname ( dirname ( __FILE__ ) ) ) . '/config.php');
-require_once (dirname ( __FILE__ ) . '/lib.php');
-require_once (dirname ( __FILE__ ) . '/locallib.php');
 
-// $id = required_param('id', PARAM_INT); // Course Module ID
-$id = optional_param ( 'id', 0, PARAM_INT ); // Course Module ID
-$g = optional_param ( 'g', 0, PARAM_INT ); // groupformation instance ID
-$back = optional_param ( 'back', 0, PARAM_INT );
 
-$current_tab = 'view';
+	require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
+	require_once(dirname(__FILE__).'/lib.php');
+	require_once(dirname(__FILE__).'/locallib.php');
 
-// Import jQuery and js file
-addJQuery ( $PAGE, 'survey_functions.js' );
-if ($id) {
-	$cm = get_coursemodule_from_id ( 'groupformation', $id, 0, false, MUST_EXIST );
-	$course = $DB->get_record ( 'course', array (
-			'id' => $cm->course 
-	), '*', MUST_EXIST );
-	$groupformation = $DB->get_record ( 'groupformation', array (
-			'id' => $cm->instance 
-	), '*', MUST_EXIST );
-} else if ($g) {
-	$groupformation = $DB->get_record ( 'groupformation', array (
-			'id' => $g 
-	), '*', MUST_EXIST );
-	$course = $DB->get_record ( 'course', array (
-			'id' => $groupformation->course 
-	), '*', MUST_EXIST );
-	$cm = get_coursemodule_from_instance ( 'groupformation', $groupformation->id, $course->id, false, MUST_EXIST );
-} else {
-	error ( 'You must specify a course_module ID or an instance ID' );
-}
 
-require_login ( $course, true, $cm );
-// $context = context_module::instance($cm->id);
 
-$event = \mod_groupformation\event\course_module_viewed::create ( array (
-		'objectid' => $PAGE->cm->instance,
-		'context' => $PAGE->context 
-) );
-
-$context = $PAGE->context;
-
-$event->add_record_snapshot ( 'course', $PAGE->course );
-$event->add_record_snapshot ( $PAGE->cm->modname, $groupformation );
-$event->trigger ();
-
-$PAGE->set_url ( '/mod/groupformation/view.php', array (
-		'id' => $cm->id,
-		'do_show' => 'view' 
-) );
-$PAGE->set_title ( format_string ( $groupformation->name ) );
-$PAGE->set_heading ( format_string ( $course->fullname ) );
-// $PAGE->set_context($context);
-
-echo $OUTPUT->header ();
-
-// Print the tabs.
-require ('tabs.php');
-
-// Conditions to show the intro can change to look for own settings or whatever.
-if ($groupformation->intro) {
-	echo $OUTPUT->box ( format_module_intro ( 'groupformation', $groupformation, $cm->id ), 'generalbox mod_introbox', 'groupformationintro' );
-}
-
-// Replace the following lines with you own code.
-echo $OUTPUT->heading ( $groupformation->name );
-
-require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/storage_manager.php');
-// require_once(dirname(__FILE__).'/classes/question_manager/question_manager.php');
-require_once (dirname ( __FILE__ ) . '/classes/question_manager/infoText.php');
-$userId = $USER->id;
-
-$store = new mod_groupformation_storage_manager ( $groupformation->id );
-$val;
-if ($id) {
-	$val = $id;
-} else {
-	$val = $groupformation->id;
-}
-$truegroupformationId = $groupformation->id;
-$info = new mod_groupformation_infoText ( $val , $userId , $truegroupformationId );
-
-$begin = 1;
-if (isset ( $_POST ["begin"] )) {
-	$begin = $_POST ["begin"];
-}
-
-if ($begin == 1) {
-	if (isset ( $_POST ["questions"] )) {
-		
-		if ($_POST ["questions"] == 1 && ! $back) {
-			
-			$returnurl = new moodle_url ( '/mod/groupformation/answeringView.php', array (
-					'id' => $val 
-			) );
-			
-			redirect ( $returnurl );
-		}
+	//$id = required_param('id', PARAM_INT);    // Course Module ID
+	$id = optional_param('id', 0, PARAM_INT);   // Course Module ID
+	$g = optional_param('g', 0, PARAM_INT);		// groupformation instance ID
+	$back = optional_param('back', 0, PARAM_INT);
+	
+	$current_tab = 'view';
+	// Import jQuery and js file
+	addJQuery ( $PAGE, 'survey_functions.js' );
+	if($id) {
+		$cm = get_coursemodule_from_id('groupformation', $id, 0, false, MUST_EXIST);
+		$course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
+		$groupformation = $DB->get_record('groupformation', array('id' => $cm->instance), '*', MUST_EXIST);
+	} else if($g) {
+		$groupformation = $DB->get_record('groupformation', array('id' => $g), '*', MUST_EXIST);
+		$course = $DB->get_record('course', array('id' => $groupformation->course), '*', MUST_EXIST);
+		$cm = get_coursemodule_from_instance('groupformation', $groupformation->id, $course->id, false, MUST_EXIST);
+	} else {
+		error('You must specify a course_module ID or an instance ID');
 	}
-} else {
-	$store->statusChanged ( $userId, 1 );
-}
 
-// $xmlLoader = new mod_groupformation_xml_loader();
-if (has_capability ( 'mod/groupformation:onlystudent', $context )) {
-	$status = $store->answeringStatus ( $userId );
-	if ($status == - 1) {
-		$info->statusA ();
-	}
-	if ($status == 0) {
-		$info->statusB ();
-	}
-	if ($status == 1) {
-		$info->statusC ();
-	}
-} else {
-	$info->Dozent ();
-}
+	require_login($course, true, $cm);
+//	$context = context_module::instance($cm->id);
 
-echo $OUTPUT->footer ();
+	$event = \mod_groupformation\event\course_module_viewed::create(array(
+			'objectid' => $PAGE->cm->instance,
+			'context' => $PAGE->context,
+	));
+
+	$context = $PAGE->context;
+	
+	$event->add_record_snapshot('course', $PAGE->course);
+	$event->add_record_snapshot($PAGE->cm->modname, $groupformation);
+	$event->trigger();
+	
+	$PAGE->set_url('/mod/groupformation/view.php', array('id' => $cm->id, 'do_show' => 'view'));
+// 	$PAGE->set_title(get_string('title', 'groupformation'));
+// 	$PAGE->set_heading(get_string('header', 'groupformation'));
+	$PAGE->set_title(format_string($groupformation->name));
+	$PAGE->set_heading(format_string($course->fullname));
+//	$PAGE->set_context($context);
+
+	
+
+	
+ 	require_once(dirname(__FILE__).'/classes/moodle_interface/storage_manager.php');
+  //	require_once(dirname(__FILE__).'/classes/question_manager/question_manager.php');
+  	require_once(dirname(__FILE__).'/classes/question_manager/infoText.php');
+  	require_once(dirname(__FILE__).'/classes/group_forming/startGrouping.php');
+//  	$a = array();
+// 	var_dump(count($a));
+  	$userId = $USER->id;
+  	
+  	$store = new mod_groupformation_storage_manager($groupformation->id);
+  	$val;
+  	if($id){
+  		$val = $id;
+  	}else{
+  		$val = $groupformation->id;
+  	}
+  	$truegroupformationId = $groupformation->id;
+	$info = new mod_groupformation_infoText ( $val , $userId , $truegroupformationId );
+  	
+	$begin = 1;
+  	if (isset($_POST["begin"])){
+  		$begin = $_POST["begin"];
+  	}
+  	
+  	$dozent = 0;
+  	if(isset($_POST["dozent"])){
+  		$dozent = $_POST['dozent'];
+  	}
+  	
+  	if($dozent == 1){
+  		$returnurl = new moodle_url('/mod/groupformation/answeringView.php', array('id' => $val));
+  			
+  		redirect($returnurl);
+  	}
+  	
+  	if($dozent == 2){
+  		$returnurl = new moodle_url('/mod/groupformation/analyse.php', array('id' => $val, 'do_show' => 'analyse'));
+  			
+  		redirect($returnurl);
+  	}
+  	
+  	if($dozent == 3){
+  		mod_groupformation_startGrouping::start($groupformation->id);
+  	}
+  	
+  	if($begin == 1){
+  		if (isset($_POST["questions"])){
+  			
+  			if($_POST["questions"] == 1 && !$back){
+  			
+  				$returnurl = new moodle_url('/mod/groupformation/answeringView.php', array('id' => $val));
+  			
+  				redirect($returnurl);
+  			}
+  		}
+  	}else{
+  		$store->statusChanged($userId, 1);
+  	}
+  	
+  	echo $OUTPUT->header();
+  	
+  	// Print the tabs.
+  	require('tabs.php');
+  	
+  	// Conditions to show the intro can change to look for own settings or whatever.
+  	if ($groupformation->intro) {
+  		echo $OUTPUT->box(format_module_intro('groupformation', $groupformation, $cm->id), 'generalbox mod_introbox', 'groupformationintro');
+  	}
+  	
+  	
+  	
+  	// Replace the following lines with you own code.
+  	echo $OUTPUT->heading($groupformation->name);
+  	
+
+	if (has_capability('mod/groupformation:onlystudent', $context)){
+ 		$status = $store->answeringStatus($userId);
+		if($status ==  -1){
+ 			$info->statusA();
+ 		}
+ 		if($status == 0){
+ 			$info->statusB();
+ 		}
+ 		if($status == 1){
+ 			$info->statusC();
+ 		}
+
+	}else{
+       	$info->Dozent();
+	}		
+	echo $OUTPUT->footer();
 	
 

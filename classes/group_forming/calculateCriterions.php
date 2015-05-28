@@ -31,7 +31,7 @@
 
 //require_once 'storage_manager.php';
 	require_once($CFG->dirroot.'/mod/groupformation/classes/moodle_interface/storage_manager.php');
-//require_once($CFG->dirroot.'/mod/groupformation/classes/util/util.php');
+	require_once($CFG->dirroot.'/mod/groupformation/classes/util/xml_loader.php');
 
 
 
@@ -39,7 +39,6 @@
 
 		private $store;
 		private $groupformationid;
-		private $userId;
 		
 		//Extraversion | Gewissenhaftigkeit | Verträglichkeit | Neurotizismus | Offenheit
 		private $BIG5 = array(array(6), array(8), array(2, 11), array(9), array(10));
@@ -54,7 +53,7 @@
 	 	* @param unknown $groupformationid
 
 	 	*/
-		public function __construct($groupformationid, $userId){
+		public function __construct($groupformationid){
 			$this->groupformationid = $groupformationid;
 			$this->store = new mod_groupformation_storage_manager($groupformationid);
 		
@@ -68,19 +67,118 @@
 			
 		}
 		
-		public function getBig5(){
+		public function getLang($userId){
+			$lang = $this->store->getSingleAnswer($userId, 'general', 1);
+			
+			if($lang == 1 || $lang == 3){
+				return 'en';
+			}else{
+				return 'de';
+			}
+		}
+		
+		//gibt ein Array aus arrays zurück | in den einzelarray sind Position 0 -> Vorwissen Position 1 -> Antwort
+		public function knowledgeAll($userId){
+			$knowledge = array();
+			$position = 0;
+			
+			$temp = $this->store->getDozentQuestion('knowledge');
+ 			$values = $this->xml->xmlToArray('<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>');
+					
+			foreach($values as $question){
+				$t = array();
+				$t[] = $question;
+				$t[] = $this->store->getSingleAnswer($userId, 'knowledge', $position);
+				$knowledge[] = $t;
+			}
+			return $knowledge;
+		}
+		
+		public function knowledgeAverage($userId){
+			$total = 0;
+			$numberOfQuestion = 0;
+			$answers = $this->store->getAnswer($userId, 'knowledge');
+			foreach($answers as $answer){
+				$total = $total + $answer->answer;
+				$numberOfQuestion++;
+			}
+			
+			if($numberOfQuestion != 0){
+				return $total / $numberOfQuestion;
+			}else{
+				return 0;
+			}
+		}
+		
+		public function getGrade($position, $userId){
+			return $this->store->getSingleAnswer($userId, 'grade', $position);
+		}
+		
+		public function getGradePosition(){
+			$varianz = 0;
+			$position = 1;
+			$total = 0;
+			$totalOptions = 0;
+			
+			for($i = 1; $i <= 3; $i++){
+				$answers = $this->store->getAnswersToSpecialQuestion('grade', $i);
+				$totalOptions = $this->store->getMaxOfCatalogQuestionOptions($i, 'grade');
+				$dist = $this->getInitalArray($totalOptions);
+				foreach($answers as $answer){
+					$dist[($answer->answer)-1]++;
+					if($i == 1){
+						$total++;
+					}
+				}
+				
+				$tempE = 0;
+				$p = 1;
+				foreach($dist as $d){
+					$tempE = $tempE + ($p * ($d / $total));
+					$p++;
+				}
+				
+				$tempV = 0;
+				$p = 1;
+				foreach($dist as $d){
+					$tempV = $tempV + ((pow(($p - $tempE),2)) * ($d / $total));
+					$p++;
+				}
+				
+				if($varianz < $tempV){
+					$varianz = $tempV;
+					$position = $i;
+				}
+			}
+			
+			return $position;
+		}
+		
+		private function getInitalArray($total){
+			$array = array();
+			for($i = 0; $i<$total; $i++){
+				$array[] = 0;
+			}
+			return $array;
+		}
+		
+		public function getBig5($userId){
 			
 			$array = array();
 			$category = 'character';
 			
 			$count = count($this->BIG5);
+			$szenario = $this->store->getSzenario();
+			if($szenario == 2){
+				$count = $count - 2;
+			}
 			for($i = 0; $i<$count; $i++){
 				$temp = 0;
 				foreach ($this->BIG5[$i] as $num){
-					$temp = $temp + $this->store->getSingleAnswer($this->userId, $category, $num);
+					$temp = $temp + $this->store->getSingleAnswer($userId, $category, $num);
 				}
 				foreach ($this->BIG5Invert[$i] as $num){
-					$temp = $temp + $this->inverse($num, $category, $this->store->getSingleAnswer($this->userId, $category, $num));
+					$temp = $temp + $this->inverse($num, $category, $this->store->getSingleAnswer($userId, $category, $num));
 				}
 				$array[] = $temp;
 			}
@@ -98,7 +196,7 @@
 			
 		}
 		
-		public function getFAM(){
+		public function getFAM($userId){
 				
 			$array = array();
 			$category = 'motivation';
@@ -107,7 +205,7 @@
 			for($i = 0; $i<$count; $i++){
 				$temp = 0;
 				foreach ($this->FAM[$i] as $num){
-					$temp = $temp + $this->store->getSingleAnswer($this->userId, $category, $num);
+					$temp = $temp + $this->store->getSingleAnswer($userId, $category, $num);
 				}
 				$array[] = $temp;
 			}
@@ -115,7 +213,7 @@
 			return $array;
 		}
 		
-		public function getLearn(){
+		public function getLearn($userId){
 		
 			$array = array();
 			$category = 'learning';
@@ -124,7 +222,7 @@
 			for($i = 0; $i<$count; $i++){
 				$temp = 0;
 				foreach ($this->LEARN[$i] as $num){
-					$temp = $temp + $this->store->getSingleAnswer($this->userId, $category, $num);
+					$temp = $temp + $this->store->getSingleAnswer($userId, $category, $num);
 				}
 				$array[] = $temp;
 			}

@@ -41,23 +41,28 @@ class RadioInput {
 		$this->optArray = $q[2];
 		$this->category = $cat;
 		$this->qnumber = $qnumb;
-		
-		// TODO
-		if (!$hasAnswer){
-			echo '<tr style="text-color:(255,0,255) !important;">';
-		} else {
-			echo '<tr>';
-		}
-		//echo '<th scope="row">' . $this->question . '</th>';
-		echo '<td scope="row"> <label for="' . $this->category . $this->qnumber . '">' .
-				$this->question . '</label> </td>';
-		
 		$radioCounter = 1;
 		$answer = -1;
 		if($hasAnswer){
 			//$answer ist die position im optionArray von der Antwort
 			$answer = $q[3];
 		}
+
+		if($answer == -1){
+			echo '<tr class="noAnswer" style="text-color:(255,0,255) !important;">';
+		}else{
+			echo '<tr>';
+		}
+		//echo '<th scope="row">' . $this->question . '</th>';
+		echo '<th scope="row"> <label for="' . $this->category . $this->qnumber . '">' .
+				$this->question . '</label> </th>';
+		
+// 		$radioCounter = 1;
+// 		$answer = -1;
+// 		if($hasAnswer){
+// 			//$answer ist die position im optionArray von der Antwort
+// 			$answer = $q[3];
+// 		}
 		foreach ($this->optArray as $option){
 			if($answer == $radioCounter){
 				echo '<td data-title="' . $option .
@@ -65,7 +70,7 @@ class RadioInput {
 				$this->category . $this->qnumber .
 				'" value="' . $radioCounter . '" checked="checked"/></td>';
 			}else{
-			echo '<td data-title="' . $option .
+				echo '<td data-title="' . $option .
 				'" class="radioleft select-area"><input type="radio" name="' .
 				$this->category . $this->qnumber .
 				'" value="' . $radioCounter . '"/></td>';

@@ -25,20 +25,20 @@
 // 	require_once(dirname(__FILE__).'/xml_loader.php');
 	require_once($CFG->dirroot.'/mod/groupformation/classes/moodle_interface/storage_manager.php');
 	require_once($CFG->dirroot.'/mod/groupformation/classes/util/xml_loader.php');
-//	require_once($CFG->dirroot.'/mod/groupformation/classes/util/define_file.php');
+	require_once($CFG->dirroot.'/mod/groupformation/classes/util/define_file.php');
 
 	if (!defined('MOODLE_INTERNAL')) {
 		die('Direct access to this script is forbidden.');    ///  It must be included from a Moodle page
 	}
 
-	define('MOTIVATION', 7);
-	define('TEAM', 4);
-	define('LEARNING', 6);
-	define('CHARACTER', 5);
-	define('GENERAL', 2);
-	define('KNOWLEDGE', 1);
-	define('TOPIC', 0);
-	define('GRADE', 3);
+// 	define('MOTIVATION', 7);
+// 	define('TEAM', 4);
+// 	define('LEARNING', 6);
+// 	define('CHARACTER', 5);
+// 	define('GENERAL', 2);
+// 	define('KNOWLEDGE', 1);
+// 	define('TOPIC', 0);
+// 	define('GRADE', 3);
 	
 	class mod_groupformation_question_controller {
 		
@@ -57,8 +57,8 @@
 		private $status;
 		
 		private $numbers = array();
-		private $names = array('topic', 'knowledge', 'general', 'grade','team', 'character', 'learning', 'motivation');
-	//	private $names = array();
+// 		private $names = array('topic', 'knowledge', 'general', 'grade','team', 'character', 'learning', 'motivation');
+		private $names = array();
 		
 		private $groupformationid;
 		private $store;
@@ -78,10 +78,13 @@
 			$this->userId = $userId;
 			$this->store = new mod_groupformation_storage_manager($groupformationid);
 			$this->xml = new mod_groupformation_xml_loader();
-			//$this->names = CATEGORY_NAMES;
+			$data = new mod_groupformation_data();
+			$this->names = $data->getNames();
 			$this->numberOfCategory = count($this->names);
 			$this->init($userId);
 			$this->setIternalNumber($oldCategory);
+			
+
 		}
 		
 		public function goBack(){
@@ -128,66 +131,68 @@
 		}
 		
 		private function setIternalNumber($category){
-			if($category == 'topic'){
-				$this->currentCategoryPosition = TOPIC;
+			
+			if($category != ""){
+				$this->currentCategoryPosition = mod_groupformation_data::getPosition($category);
 				$this->currentCategoryPosition++;
 			}
 			
-			if($category == 'knowledge'){
-				$this->currentCategoryPosition = KNOWLEDGE;
-				$this->currentCategoryPosition++;
-			}
 			
-			if($category == 'general'){
-				$this->currentCategoryPosition = GENERAL;
-				$this->currentCategoryPosition++;
-			}
+// 			if($category == 'knowledge'){
+// 				$this->currentCategoryPosition = KNOWLEDGE;
+// 				$this->currentCategoryPosition++;
+// 			}
 			
-			if($category == 'grade'){
-				$this->currentCategoryPosition = GRADE;
-				$this->currentCategoryPosition++;
-			}
+// 			if($category == 'general'){
+// 				$this->currentCategoryPosition = GENERAL;
+// 				$this->currentCategoryPosition++;
+// 			}
 			
-			if($category == 'motivation'){
-				$this->currentCategoryPosition = MOTIVATION;
-				$this->currentCategoryPosition++;
-			}
+// 			if($category == 'grade'){
+// 				$this->currentCategoryPosition = GRADE;
+// 				$this->currentCategoryPosition++;
+// 			}
 			
-			if($category == 'learning'){
-				$this->currentCategoryPosition = LEARNING;
-				$this->currentCategoryPosition++;
-			}
+// 			if($category == 'motivation'){
+// 				$this->currentCategoryPosition = MOTIVATION;
+// 				$this->currentCategoryPosition++;
+// 			}
 			
-			if($category == 'team'){
-				$this->currentCategoryPosition = TEAM;
-				$this->currentCategoryPosition++;
-			}
+// 			if($category == 'learning'){
+// 				$this->currentCategoryPosition = LEARNING;
+// 				$this->currentCategoryPosition++;
+// 			}
 			
-			if($category == 'character'){
-				$this->currentCategoryPosition = CHARACTER;
-				$this->currentCategoryPosition++;
-			}
+// 			if($category == 'team'){
+// 				$this->currentCategoryPosition = TEAM;
+// 				$this->currentCategoryPosition++;
+// 			}
+			
+// 			if($category == 'character'){
+// 				$this->currentCategoryPosition = CHARACTER;
+// 				$this->currentCategoryPosition++;
+// 			}
 			
 		}
 		
 		private function setNulls(){
 			if($this->szenario == 'project' || $this->szenario == 1){
-				$this->numbers[LEARNING] = 0;
+				$this->numbers[mod_groupformation_data::getPosition('learning')] = 0;
 			}
 				
 			if($this->szenario == 'homework' || $this->szenario == 2){
-				$this->numbers[MOTIVATION] = 0;
+				$this->numbers[mod_groupformation_data::getPosition('motivation')] = 0;
 			}	
 			
 			if($this->szenario == 'presentation' || $this->szenario == 3){
 				for($i = 0; $i < count($this->numbers); $i++){
-					if($i != TOPIC && $i != KNOWLEDGE){
+					if($i != mod_groupformation_data::getPosition('topic') && $i != mod_groupformation_data::getPosition('general')){
 						$this->numbers[$i] = 0;
 					}
 				}
 			}
 			
-			var_dump($this->numbers);
+			//var_dump($this->numbers);
 		}
 		
 		public function hasNext(){
@@ -220,9 +225,8 @@
 				if($hasAnswer){
 					$answers = $this->getAnswers();
 				}
-				//var_dump($answers);
 				
-				if($this->currentCategoryPosition == TOPIC || $this->currentCategoryPosition == KNOWLEDGE){
+				if($this->currentCategoryPosition == mod_groupformation_data::getPosition('topic') || $this->currentCategoryPosition == mod_groupformation_data::getPosition('knowledge')){
 					
  						$temp = $this->store->getDozentQuestion($this->names[$this->currentCategoryPosition]);
  						//var_dump("bin drin");
@@ -231,20 +235,20 @@
 						
 						$text; 
 						$type;
- 						if($this->currentCategoryPosition == TOPIC){
-//  							if($this->lang == 'de'){
-//  								$text = 'Wie gefällt Ihnen das Thema ';
-//  							}else{
-//  								$text = 'How much you like the topic ';
-//  							}
+ 						if($this->currentCategoryPosition == mod_groupformation_data::getPosition('topic')){
+ //							if($this->lang == 'de'){
+ //								$text = 'Wie gefällt Ihnen das Thema ';
+ //							}else{
+ //								$text = 'How much you like the topic ';
+ //							}
  							$type = 'typThema';
  						}else{
-//  							$text = get_string('knowledge_question','groupformation');
-//  							if($this->lang == 'de'){
-//  								$text = 'Wie schätzen Sie Ihr Vorwissen im folgenden Bereich ein:';
-//  							}else{
-//  								$text = 'How you rate your knowledge in ';
-//  							}
+ //							$text = get_string('knowledge_question','groupformation');
+ //							if($this->lang == 'de'){
+ //								$text = 'Wie schätzen Sie Ihr Vorwissen im folgenden Bereich ein:';
+ //							}else{
+ //								$text = 'How you rate your knowledge in ';
+ //							}
  							$type = 'typVorwissen';
  						}
  						
@@ -263,7 +267,7 @@
  							$question[] = $text . $value;
  							$question[] = $options;
  							if($hasAnswer){
- 								if($answers[$positionAnswer][0] == $positionArray){
+ 								if($positionAnswer < count($answers) && $answers[$positionAnswer][0] == $positionArray){
  									$question[] = $answers[$positionAnswer][1];
  									$positionAnswer++;
  								}else{
@@ -290,7 +294,7 @@
 						//$questions[] = $array->options;
 						
 						if($hasAnswer){
-							if($answers[$positionAnswer][0] == $i){
+							if($positionAnswer < count($answers) && $answers[$positionAnswer][0] == $i){
 								$question[] = $answers[$positionAnswer][1];
 								$positionAnswer++;
 							}else{

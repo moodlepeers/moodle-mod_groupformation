@@ -56,9 +56,26 @@
 		$this->total = $this->util->getTotalNumber();
 	}
 	
+	public function getSzenario(){
+		return $this->store->getSzenario();
+	}
+	
+	public function getCompletedIds(){
+		$completed = array();
+		foreach($this->totalUserIds as $user){
+			$number = $this->store->answerNumberForUser($user);
+			if($this->total == $number){
+				$completed[] = $user;
+			}
+		}
+		
+		return $completed;
+	}
+	
 	public function getNoneCompletedIds(){
 		
 		$noneCompleted = array();
+		//var_dump($this->totalUserIds);
 		foreach($this->totalUserIds as $user){
 			$number = $this->store->answerNumberForUser($user);
 			if($this->total != $number){

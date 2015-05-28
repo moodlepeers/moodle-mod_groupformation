@@ -117,7 +117,7 @@
 				//	echo '<input type="hidden" name="userid" value="' . $this->userID . '"/>';
 					
 					echo ' <h4 class="view_on_mobile">' . get_string('category_'.$this->category,'groupformation'). '</h4>' ;
-
+				
 					// Print the Header of a table or unordered list
 					$this->header->__printHTML($this->category, $tableType, $headerOptArray);
 
