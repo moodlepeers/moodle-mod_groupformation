@@ -28,44 +28,89 @@ if (!defined('MOODLE_INTERNAL')) {
 
 require_once(dirname(__FILE__).'/userid_filter.php');
 require_once(dirname(__FILE__).'/calculateCriterions.php');
+require_once($CFG->dirroot.'/mod/groupformation/classes/util/define_file.php');
+
 
 class mod_groupformation_startGrouping{
+	
+	private $labels = array();
 	
 	public static function start($groupformationID){
 		echo 'Hier startet die Berechnung';
 		$userFilter = new mod_groupformation_userid_filter($groupformationID);
 		$users = $userFilter->getCompletedIds();
 		$szenario = $userFilter->getSzenario();
+		$data = new mod_groupformation_data();
+		$this->labels = $data->getLabels();
+		$this->setNulls($szenario);
 		$calculator = new mod_groupformation_calculateCriterions($groupformationID);
-		$gradeP = $calculator->getGradePosition();
+		if(count($users)>0){
+			$gradeP = $calculator->getGradePosition($users);
+		}
 		$array = array();
 		foreach($users as $user){
-			//Position 0 UserID
-			$array[] = $user;
-			//Position 1 Sprache
-			$array[] = $calculator->getLang($user);
-			//Position 2 Themen
-			//TODO
-			if($szenario != 3){
-				//Position 3 Vorwissen
-				//TODO abklären wie 
-				
-				//Position 4 Note
-				$array[] = $calculator->getGrade($gradeP, $user);
-				//Position 5 Persönlichkeit
-				$array[] = $calculator->getBig5($user);
-				//Position 6 Team
-				//TODO
-				//Position 7 Motivation bei Projekt /Lernstil bei Hausaufgaben
-				if($szenario == 1){
-					$array[] = $calculator->getFAM($user);
-				}else{
-					$array[] = $calculator->getLearn($user);
-				}
+			$object = new stdClass();
+			foreach($this->labels as $label){
+				if($label != ""){
+					$value = array();
+					if($label == 'userid'){
+						$value[] = $user;
+					}
+					if($label == 'lang'){
+						$value[] = $data->getLangNumber($calculator->getLang($user));
+					}
+					if($label == 'topic'){
+						//TODO
+					}
+					if($label == 'knowledge_heterogen'){
+						$value = $calculator->knowledgeAll($user);
+					}
+					if($label == 'knowledge_homogen'){
+						$value[] = $calculator->knowledgeAverage($user);
+					}
+					if($label == 'grade'){
+						
+					}
+					if($label == 'big5'){
+						$value = $calculator->getBig5($user);
+					}
+					if($label == 'fam'){
+						$value = $calculator->getFAM($user);
+					}
+					if($label == 'learning'){
+						$value = $calculator->getLearn($user);
+					}
+					if($label == 'team'){
+						$value = $calculator->getTeam($user);
+					}
+					$object->$label = $value;
+				} 
 			}
+			$array[] = $object;
 		}
 		
 		var_dump($array);
 	}
-
+	
+	//noch hartgecodet
+	private function setNulls($szenario){
+		if($szenario == 1){
+			$this->labels[9] = "";
+		}
+		
+		if($szenario == 2){
+			$this->labels[4] = "";
+			$this->labels[8] = "";
+		}
+		
+		if($szenario == 3){
+			$this->labels[3] = "";
+			$this->labels[4] = "";
+			$this->labels[5] = "";
+			$this->labels[6] = "";
+			$this->labels[7] = "";
+			$this->labels[8] = "";
+			$this->labels[9] = "";
+		}
+	}
 }

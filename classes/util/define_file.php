@@ -38,9 +38,14 @@
 	}
 	
 	class mod_groupformation_data{
-		
-		private $CATEGORY_NAMES = array('topic', 'knowledge', 'general', 'grade','team', 'character', 'learning', 'motivation');
-		private $CRITERION_CATEGORYS = array('topic', 'knowledge', 'general', 'grade','team', 'character', 'learning', 'motivation');
+		//NORMAL
+//		private $CATEGORY_NAMES = array('topic', 'knowledge', 'general', 'grade','team', 'character', 'learning', 'motivation');
+//		private $CRITERION_CATEGORYS = array('topic', 'knowledge', 'general', 'grade','team', 'character', 'learning', 'motivation');
+//		private $LABELS = array('userid', 'lang', 'topic', 'knowledge_heterogen', 'knowledge_homogen', 'grade', 'big5', 'team', 'fam', 'learning');
+		//MATHEVORKURS
+		private $CATEGORY_NAMES = array('topic', 'knowledge', 'grade','team', 'character', 'learning', 'motivation');
+		private $CRITERION_CATEGORYS = array('topic', 'knowledge', 'grade','team', 'character', 'learning', 'motivation');
+		private $LABELS = array('userid', 'topic', 'knowledge_heterogen', 'knowledge_homogen', 'grade', 'big5', 'team', 'fam', 'learning');
 		const MOTIVATION = 7;
 		const TEAM = 4;
 		const LEARNING = 6;
@@ -56,6 +61,19 @@
 		
 		public function getNames(){
 			return $this->CATEGORY_NAMES;
+		}
+		
+		public function getLangNumber($lang){
+			$p = 0;
+			if($lang == 'en'){
+				$p = 1;
+			}
+			
+			return $p;
+		}
+		
+		public function getLabels(){
+			return $this->LABELS;
 		}
 		
 		public function getCriterionNames(){

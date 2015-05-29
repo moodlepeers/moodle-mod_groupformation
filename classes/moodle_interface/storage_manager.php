@@ -59,7 +59,7 @@
 // 		}
 	
 		//es wird davon ausgegangen, dass alle Fragentabellen immer auf dem gleichen Stand sind
-		public function catalogTableNotSet($category = 'general'){
+		public function catalogTableNotSet($category = 'grade'){
 			 global $CFG, $DB;
 			// $indexes = $DB->get_indexes('groupformation_en_team');
 			 $count = $DB->count_records('groupformation_'.$category);
@@ -221,7 +221,7 @@
 			return $DB->get_field('groupformation_q_settings', $category . 'values', array('groupformation' => $this->groupformationid));
 		}
 		
-		public function getMaxOfCatalogQuestionOptions($i, $category = 'general'){
+		public function getMaxOfCatalogQuestionOptions($i, $category = 'grade'){
 			global $DB;
 			
 			$table = "groupformation_" . $category;
@@ -361,6 +361,7 @@
 				$DB->update_record('groupformation_answer', $data);
 			}
 		}
+		
 		
 // 		public function existSetting(){
 // 			global $DB;

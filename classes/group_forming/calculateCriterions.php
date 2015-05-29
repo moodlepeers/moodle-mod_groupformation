@@ -39,6 +39,7 @@
 
 		private $store;
 		private $groupformationid;
+		private $xml;
 		
 		//Extraversion | Gewissenhaftigkeit | Verträglichkeit | Neurotizismus | Offenheit
 		private $BIG5 = array(array(6), array(8), array(2, 11), array(9), array(10));
@@ -56,7 +57,7 @@
 		public function __construct($groupformationid){
 			$this->groupformationid = $groupformationid;
 			$this->store = new mod_groupformation_storage_manager($groupformationid);
-		
+			$this->xml = new mod_groupformation_xml_loader();
 		}
 		
 		private function inverse($qId, $category, $answer){
@@ -111,10 +112,14 @@
 		}
 		
 		public function getGrade($position, $userId){
-			return $this->store->getSingleAnswer($userId, 'grade', $position);
+			$question = $this->store->getCatalogQuestion($position, 'grade');
+			$o = $question->options;
+			$options = $this->xml->xmlToArray('<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $o . ' </OPTIONS>');
+			$answer = $this->store->getSingleAnswer($userId, 'grade', $position);
+			return $options[$answer-1];
 		}
 		
-		public function getGradePosition(){
+		public function getGradePosition($users){
 			$varianz = 0;
 			$position = 1;
 			$total = 0;
@@ -125,9 +130,11 @@
 				$totalOptions = $this->store->getMaxOfCatalogQuestionOptions($i, 'grade');
 				$dist = $this->getInitalArray($totalOptions);
 				foreach($answers as $answer){
-					$dist[($answer->answer)-1]++;
-					if($i == 1){
-						$total++;
+					if(in_array($answer->userid, $users)){
+						$dist[($answer->answer)-1]++;
+						if($i == 1){
+							$total++;
+						}
 					}
 				}
 				
@@ -230,4 +237,17 @@
 			return $array;
 		}
 		
+		public function getTeam($userId){
+			$total = 0;
+			$numberOf = 0;
+			$array = array();
+			$answers = $this->store->getAnswer($userId, 'team');
+			foreach($answers as $answer){
+				$total = $total + $answer->answer;
+				$numberOf++;
+			}
+			$array[] = $total/numberOf;
+			
+			return $array;
+		}
 	}
