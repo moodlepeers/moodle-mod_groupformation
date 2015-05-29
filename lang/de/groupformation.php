@@ -24,6 +24,7 @@
  */
 defined ( 'MOODLE_INTERNAL' ) || die ();
 
+$string ['language'] = 'de';
 $string ['modulename'] = 'Gruppenformation';
 $string ['modulenameplural'] = 'Gruppenformationen';
 $string ['modulename_help'] = 'Mit dem Gruppenformations Plugin kann man sich in eine Lerngruppe eintragen lassen, anhand von Kriterien';
@@ -124,6 +125,7 @@ $string ['questionaire_press_preview'] = 'Klicken Sie auf "Vorschau", um den Fra
 $string ['questionaire_no_more_questions'] = 'Es gibt keine weiteren Fragen zu beantworten.';
 $string ['questionaire_press_beginning_submit'] = 'Klicken Sie auf "Zur Anfangsseite", um zum Anfang zur&uuml;ckzukehren oder auf "Abgeben", um ihre aktuellen Antworten abzugeben.';
 $string ['questionaire_go_to_start'] = 'Zur Anfangsseite';
+$string ['questionaire_submit'] = 'Abgeben';
 $string ['category_general'] = 'Allgemeines';
 $string ['category_grade'] = 'Noten';
 $string ['category_team'] = 'Team';

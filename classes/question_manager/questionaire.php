@@ -82,7 +82,7 @@
 			
 			$hasNext = $this->question_manager->hasNext();
 			if($this->question_manager->questionsToAnswer() && $hasNext){
-				//while($hasNext){
+					// while($hasNext){
 					$percent = $this->question_manager->getPercent();
 					$percentage = floatval($percent);
 					echo '<div class="progress">
@@ -99,10 +99,10 @@
 					$tableType = $question[0][0];
 					$headerOptArray = $question[0][2];
 					
-					//echo '<form action="questionaire.php" method="post">';
+					// echo '<form action="questionaire.php" method="post">';
 					echo '<form action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '" method="post" autocomplete="off">';
 					
-					//hier schicke ich verdeckt die momentane Kategorie und groupformationID mit
+					// hier schicke ich verdeckt die momentane Kategorie und groupformationID mit
 					echo '<input type="hidden" name="category" value="' . $this->category . '"/>';
 					
 					echo '<input type="hidden" name="percent" value="' . $percent . '"/>';
@@ -114,7 +114,7 @@
 						echo '<input type="hidden" name="id" value="' . $this->groupformationid . '"/>';
 					}
 					
-				//	echo '<input type="hidden" name="userid" value="' . $this->userID . '"/>';
+					// echo '<input type="hidden" name="userid" value="' . $this->userID . '"/>';
 					
 					echo ' <h4 class="view_on_mobile">' . get_string('category_'.$this->category,'groupformation'). '</h4>' ;
 				
@@ -190,12 +190,14 @@
 					echo '<input type="hidden" name="id" value="' . $this->groupformationid . '"/>';
 				}
 				
+				$disabled = answeredAllQuestions($USER->id,$this->groupformationid);
+				
 				echo '
 						<div class="grid">
 						<div class="questionaire_button_text">'.get_string('questionaire_press_beginning_submit','groupformation').'</div>
 						<div class="col_100 questionaire_button_row">
-							<button type="submit" name="action" value="0">'.get_string('questionaire_go_to_start','groupformation').'</button>
-							<button type="submit" name="action" value="1">'.get_string('submit').'</button>
+							<button type="submit" name="action" value="0" >'.get_string('questionaire_go_to_start','groupformation').'</button>
+							<button type="submit" name="action" value="1" '.(($disabled)?'disabled':'').'>'.get_string('questionaire_submit','groupformation').'</button>
 						</div>
 						</div>
 							

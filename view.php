@@ -64,8 +64,6 @@
 	$event->trigger();
 	
 	$PAGE->set_url('/mod/groupformation/view.php', array('id' => $cm->id, 'do_show' => 'view'));
-// 	$PAGE->set_title(get_string('title', 'groupformation'));
-// 	$PAGE->set_heading(get_string('header', 'groupformation'));
 	$PAGE->set_title(format_string($groupformation->name));
 	$PAGE->set_heading(format_string($course->fullname));
 //	$PAGE->set_context($context);
@@ -74,11 +72,9 @@
 
 	
  	require_once(dirname(__FILE__).'/classes/moodle_interface/storage_manager.php');
-  //	require_once(dirname(__FILE__).'/classes/question_manager/question_manager.php');
+// 	require_once(dirname(__FILE__).'/classes/question_manager/question_manager.php');
   	require_once(dirname(__FILE__).'/classes/question_manager/infoText.php');
   	require_once(dirname(__FILE__).'/classes/group_forming/startGrouping.php');
-//  	$a = array();
-// 	var_dump(count($a));
   	$userId = $USER->id;
   	
   	$store = new mod_groupformation_storage_manager($groupformation->id);

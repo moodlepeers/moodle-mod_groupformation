@@ -35,6 +35,8 @@ defined ( 'MOODLE_INTERNAL' ) || die ();
  * }
  */
 
+$categoriesa = true;
+
 /**
  * add jquery to view
  *
@@ -52,13 +54,49 @@ function addjQuery($PAGE, $filename = null) {
 	
 }
 
-/**
- * sets language depended on moodle config and course config
- *
- * @return string - language for showing questions
- */
-function get_language() {
-	global $COURSE, $CFG, $USER;
-	// TODO
-	return ($CFG->lang != $COURSE->lang) ? (($COURSE->lang != '' && $COURSE->lang != null) ? $COURSE->lang : $USER->lang) : $CFG->lang;
+function answeredAllQuestions($userid,$groupformationid){
+	global $DB;
+	$categorysets = array (
+			1 => array (
+					'topic',
+					'knowledge',
+					'general',
+					'grade',
+					'team',
+					'character',
+					'motivation' 
+			),
+			2 => array (
+					'topic',
+					'knowledge',
+					'general',
+					'grade',
+					'team',
+					'character',
+					'learning' 
+			),
+			3 => array (
+					'topic',
+					'general' 
+			) 
+	);
+	$scenario = $DB->get_record('groupformation', array('id'=>$groupformationid))->szenario;
+	$categories = array ();
+	foreach ( $DB->get_records ( 'groupformation_q_version' ) as $record ) {
+		$categories [$record->category] = intval($record->numberofquestion);
+	}
+	$stats = array ();
+	foreach ( $categories as $key => $value ) {
+		if (in_array($key,$categorysets[$scenario])){
+			$count = $DB->count_records ( 'groupformation_answer', array (
+					'groupformation' => $groupformationid,
+					'userid' => $userid,
+					'category' => $key
+			) );
+			if ($value-$count>0){
+				return true;
+			}
+		}
+	}
+	return false;
 }

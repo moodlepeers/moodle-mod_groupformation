@@ -24,6 +24,7 @@
  */
 defined ( 'MOODLE_INTERNAL' ) || die ();
 
+$string ['language'] = 'en';
 $string ['modulename'] = 'Group formation';
 $string ['modulenameplural'] = 'Group formations';
 $string ['modulename_help'] = 'The groupformation plugin generates groups based on a questionaire.';
@@ -135,6 +136,7 @@ $string ['questionaire_press_preview'] = 'Press "Preview" to take a look at the 
 $string ['questionaire_no_more_questions'] = 'There are no more questions to answer.';
 $string ['questionaire_press_beginning_submit'] = 'Press "Go to Start" to go back to the start page or "Submit" to submit your current answers.';
 $string ['questionaire_go_to_start'] = 'Go to Start';
+$string ['questionaire_submit'] = 'Submit';
 $string ['category_general'] = 'General';
 $string ['category_grade'] = 'Grades';
 $string ['category_team'] = 'Team';

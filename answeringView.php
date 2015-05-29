@@ -39,11 +39,11 @@
 		$category = $_POST['category'];
 	}
 
-//$id = required_param('id', PARAM_INT);    // Course Module ID
+// 	$id = required_param('id', PARAM_INT);    // Course Module ID
 	$id = optional_param('id', 0, PARAM_INT);   // Course Module ID
 	$g = optional_param('g', 0, PARAM_INT);		// groupformation instance ID
 
-	// Import jQuery and js file
+// 	Import jQuery and js file
 	addJQuery ( $PAGE, 'survey_functions.js' );
 	
 	if($id) {
@@ -84,15 +84,11 @@
 // 	echo $OUTPUT->heading('Yay! It works!');
 
 	require_once(dirname(__FILE__).'/classes/moodle_interface/storage_manager.php');
-//	require_once(dirname(__FILE__).'/classes/question_manager/question_manager.php');
 	require_once(dirname(__FILE__).'/classes/question_manager/questionaire.php');
 	require_once(dirname(__FILE__).'/classes/question_manager/Save.php');
-//  	$a = array();
-// 	var_dump(count($a));
-
 
  
-// //  	$xmlLoader = new mod_groupformation_xml_loader();
+// 	$xmlLoader = new mod_groupformation_xml_loader();
 	$userId = $USER->id;
 	$store = new mod_groupformation_storage_manager($groupformation->id);
 	$number = $store->getNumber($category);
@@ -136,7 +132,7 @@
 		
 		// Replace the following lines with you own code.
 		//echo $OUTPUT->heading('Yay! It works!');
-		$questionManager = new mod_groupformation_questionaire($groupformation->id, 'en', $userId, $category);
+		$questionManager = new mod_groupformation_questionaire($groupformation->id, get_string('language','groupformation'), $userId, $category);
 		
 		if($direction == 0){
 			$questionManager->goback();

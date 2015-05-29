@@ -120,7 +120,6 @@
 			
 			$this->szenario = $this->store->getSzenario();
 			
-			//var_dump($this->szenario);
 			if(!$this->store->catalogTableNotSet()){
 				$this->numbers = $this->store->getNumbers($this->names);
 				$this->setNulls();
@@ -191,21 +190,14 @@
 					}
 				}
 			}
-			
-			//var_dump($this->numbers);
 		}
 		
 		public function hasNext(){
 			
 			if($this->currentCategoryPosition > -1 && $this->currentCategoryPosition < $this->numberOfCategory){
-// 				var_dump($this->numbers[$this->currentCategoryPosition] == 0);
-// 				var_dump('hasNext');
 				while($this->currentCategoryPosition < $this->numberOfCategory && $this->numbers[$this->currentCategoryPosition] == 0){
 					$this->currentCategoryPosition++;
 				}
-				
-				//var_dump($this->currentCategoryPosition);
-				
 // 				if($this->numbers[$this->currentCategoryPosition] == 0){
 			
 // 					var_dump('h');
@@ -229,9 +221,7 @@
 				if($this->currentCategoryPosition == mod_groupformation_data::getPosition('topic') || $this->currentCategoryPosition == mod_groupformation_data::getPosition('knowledge')){
 					
  						$temp = $this->store->getDozentQuestion($this->names[$this->currentCategoryPosition]);
- 						//var_dump("bin drin");
- 						//var_dump($temp);
-						$values = $this->xml->xmlToArray('<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>');
+ 						$values = $this->xml->xmlToArray('<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>');
 						
 						$text; 
 						$type;
@@ -291,7 +281,6 @@
 						$o = $array->options;
 						
 						$question[] = $this->xml->xmlToArray('<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $o . ' </OPTIONS>');
-						//$questions[] = $array->options;
 						
 						if($hasAnswer){
 							if($positionAnswer < count($answers) && $answers[$positionAnswer][0] == $i){
@@ -357,9 +346,6 @@
 			$firstCondition = $this->store->answeringStatus($this->userId) == 0;
 			//var_dump($this->names[$this->currentCategoryPosition-1]);
 			$secondCondition = $this->store->answerExist($this->userId, $this->names[$this->currentCategoryPosition], 1);
-// 			var_dump($secondCondition);
-// 			var_dump($firstCondition);
-// 			var_dump($firstCondition && $firstCondition);
 			return ($firstCondition && $secondCondition);
 		}
 		

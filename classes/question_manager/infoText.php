@@ -92,11 +92,14 @@ class mod_groupformation_infoText {
 		echo '<input type="hidden" name="questions" value="1"/>';
 		
 		echo '<input type="hidden" name="id" value="' . $this->groupformationid . '"/>';
+		
+		$disabled = answeredAllQuestions($USER->id,$this->truegroupformationid);
+		
 		echo '
 						<div class="grid">
 						<div class="col_100">
 							<button type="submit" name="begin" value="1">' . get_string ( 'edit' ) . '</button>
-							<button type="submit" name="begin" value="0">' . get_string ( 'submit' ) . '</button>
+							<button type="submit" name="begin" value="0" '.(($disabled)?'disabled':'').'>' . get_string ( 'questionaire_submit','groupformation') . '</button>
 						</div>
 						</div>
 							
