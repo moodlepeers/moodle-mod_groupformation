@@ -49,11 +49,11 @@
 		//Konkrete Erfahrung | Aktives Experimentieren | Reflektierte Beobachtung | Abstrakte Begriffsbildung
 		private $LEARN = array(array(1, 5, 11, 14, 20, 22), array(2, 8, 10, 16, 17, 23), array(3, 6, 9, 13, 19, 21), array(4, 7, 12, 15, 18, 24));
 		//TODO @JK TEAM Auswertung fehlt noch
+		
 		/**
-	 	*
-	 	* @param unknown $groupformationid
-
-	 	*/
+		 * 
+		 * @param unknown $groupformationid
+		 */
 		public function __construct($groupformationid){
 			$this->groupformationid = $groupformationid;
 			$this->store = new mod_groupformation_storage_manager($groupformationid);
@@ -68,6 +68,12 @@
 			
 		}
 		
+		/**
+		 * Determines preferred language chosen by user
+		 * 
+		 * @param int $userId
+		 * @return string
+		 */
 		public function getLang($userId){
 			$lang = $this->store->getSingleAnswer($userId, 'general', 1);
 			
@@ -78,7 +84,18 @@
 			}
 		}
 		
+		
 		//gibt ein Array aus arrays zurück | in den einzelarray sind Position 0 -> Vorwissen Position 1 -> Antwort
+		/**
+		 * Determines all answers for knowledge given by the user
+		 * 
+		 * returns an array of arrays with 
+		 * 			position_0 -> knowledge area
+		 * 			position_1 -> answer
+		 * 
+		 * @param int $userId
+		 * @return multitype:multitype:mixed string
+		 */
 		public function knowledgeAll($userId){
 			$knowledge = array();
 			$position = 0;
@@ -95,6 +112,12 @@
 			return $knowledge;
 		}
 		
+		/**
+		 * Determines the average of the answers of the user in the category knowledge
+		 * 
+		 * @param int $userId
+		 * @return int
+		 */
 		public function knowledgeAverage($userId){
 			$total = 0;
 			$numberOfQuestion = 0;
@@ -111,6 +134,13 @@
 			}
 		}
 		
+		/**
+		 * Returns the answer of the n-th grade question
+		 * 
+		 * @param int $position
+		 * @param int $userId
+		 * @return Ambigous <string>
+		 */
 		public function getGrade($position, $userId){
 			$question = $this->store->getCatalogQuestion($position, 'grade');
 			$o = $question->options;
@@ -119,6 +149,14 @@
 			return $options[$answer-1];
 		}
 		
+		/**
+		 * Returns the position of the question, which is needed for the grade criterion
+		 * 
+		 * $users are the ids for the variance calculation
+		 * 
+		 * @param unknown $users
+		 * @return number
+		 */
 		public function getGradePosition($users){
 			$varianz = 0;
 			$position = 1;
@@ -161,6 +199,12 @@
 			return $position;
 		}
 		
+		/** 
+		 * TODO @Nora
+		 * 
+		 * @param unknown $total
+		 * @return multitype:number
+		 */
 		private function getInitalArray($total){
 			$array = array();
 			for($i = 0; $i<$total; $i++){
@@ -169,6 +213,12 @@
 			return $array;
 		}
 		
+		/**
+		 * returns the Big 5 by user
+		 * 
+		 * @param unknown $userId
+		 * @return multitype:number
+		 */
 		public function getBig5($userId){
 			
 			$array = array();
@@ -203,6 +253,12 @@
 			
 		}
 		
+		/**
+		 * TODO @Nora
+		 * 
+		 * @param unknown $userId
+		 * @return multitype:number
+		 */
 		public function getFAM($userId){
 				
 			$array = array();
@@ -220,6 +276,12 @@
 			return $array;
 		}
 		
+		/**
+		 * TODO @Nora
+		 * 
+		 * @param unknown $userId
+		 * @return multitype:number
+		 */
 		public function getLearn($userId){
 		
 			$array = array();
@@ -237,6 +299,12 @@
 			return $array;
 		}
 		
+		/**
+		 * TODO @Nora
+		 * 
+		 * @param unknown $userId
+		 * @return multitype:number
+		 */
 		public function getTeam($userId){
 			$total = 0;
 			$numberOf = 0;
