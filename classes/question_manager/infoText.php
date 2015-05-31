@@ -191,6 +191,7 @@ class mod_groupformation_infoText {
 			$a->category = get_string('category_'.$key,'groupformation');
 			$a->questions = $values['questions'];
 			$a->answered = $values['answered'];
+			if ($values['questions']>0){
 			echo '<tr><th scope="row" class="questionaire_stats_row"><span>';
 			if ($values['missing']==0){
 				echo get_string('stats_all','groupformation',$a).' <span class="questionaire_all">&#10004;</span>';
@@ -200,11 +201,18 @@ class mod_groupformation_infoText {
 				echo get_string('stats_partly','groupformation',$a);
 			}
 			echo '</span></th></tr>';
+			}
 		}
 		echo '</tbody>';
 		echo '</table>';
 				
 		echo '</div>';
 		
+	}
+	
+	public function notAvailable(){
+		$a = $this->store->getTime();
+		echo '<div class="questionaire_status">' . get_string ( 'questionaire_not_available', 'groupformation',$a) . '</div>';
+		echo '<div class="questionaire_status">' . get_string ( 'questionaire_availability_info', 'groupformation', $a) . '</div>';
 	}
 }

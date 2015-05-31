@@ -48,6 +48,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		
 		// Adding the "general" fieldset, where all the common settings are showed.
 		$mform->addElement ( 'header', 'general', get_string ( 'general', 'form' ) );
+		$mform->setExpanded('general');
 		
 		// Adding the standard "name" field.
 		$mform->addElement ( 'text', 'name', get_string ( 'groupformationname', 'groupformation' ), array (
@@ -66,6 +67,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		
 		// Adding the availability settings
 		$mform->addElement ( 'header', 'timinghdr', get_string ( 'availability' ) );
+		$mform->setExpanded('timinghdr');
 		$mform->addElement ( 'date_time_selector', 'timeopen', get_string ( 'feedbackopen', 'feedback' ), array (
 				'optional' => true 
 		) );
@@ -75,6 +77,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		
 		// Adding the rest of groupformation settings, spreeading all them into this fieldset
 		$mform->addElement ( 'header', 'groupformationsettings', get_string ( 'groupformationsettings', 'groupformation' ) );
+		$mform->setExpanded('groupformationsettings');
 		
 		$this->generateHTMLforNonJS ( $mform );
 		

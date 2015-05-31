@@ -186,12 +186,15 @@
 		}
 		
 		// gibt ein array zurück, in dem auf der ersten Position die Startzeit gespeichert ist und auf der zweiten Position die Endzeit
-		public function getTime(){
+		public function getTime($raw = false){
 			global $DB;
 			$times = array();
-			$times[] = $DB->get_field('groupformation', 'timeopen', array('id' => $this->groupformationid));
-			$times[] = $DB->get_field('groupformation', 'timeclose', array('id' => $this->groupformationid));
-			
+			$times['start'] = $DB->get_field('groupformation', 'timeopen', array('id' => $this->groupformationid));
+			$times['end'] = $DB->get_field('groupformation', 'timeclose', array('id' => $this->groupformationid));
+			if (!$raw){
+				$times['start'] = date("Y-m-d H:i", $times['start']);
+				$times['end'] = date("Y-m-d H:i", $times['end']);	
+			}
 			return $times;
 		}
 		
@@ -383,6 +386,16 @@
 					'category' => $category, 'questionid' => $questionId));
 				$DB->update_record('groupformation_answer', $data);
 			}
+		}
+		
+		public function isQuestionaireAvailable(){
+			global $DB;
+			
+			$now = time();
+			
+			$time = $this->getTime(true);
+		
+			return (($now >= intval($time['start'])) && ($now <= intval($time['end']))) || ($time['start']=='0' && $time['end']=='0');
 		}
 		
 		

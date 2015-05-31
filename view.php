@@ -144,19 +144,27 @@
   	
 
 	if (has_capability('mod/groupformation:onlystudent', $context)){
- 		$status = $store->answeringStatus($userId);
-		if($status ==  -1){
- 			$info->statusA();
- 		}
- 		if($status == 0){
- 			$info->statusB();
- 		}
- 		if($status == 1){
- 			$info->statusC();
- 		}
-
+	 	if ($store->isQuestionaireAvailable()){	
+			$status = $store->answeringStatus($userId);
+			if($status ==  -1){
+	 			$info->statusA();
+	 		}
+	 		if($status == 0){
+	 			$info->statusB();
+	 		}
+	 		if($status == 1){
+	 			$info->statusC();
+	 		}
+	 	}else{
+	 		$info->notAvailable();
+	 	}
 	}else{
-       	$info->Dozent();
+		if ($store->isQuestionaireAvailable()){
+       		$info->Dozent();
+		}else{
+			$info->notAvailable();
+			$info->Dozent();
+		}
 	}		
 	echo $OUTPUT->footer();
 	
