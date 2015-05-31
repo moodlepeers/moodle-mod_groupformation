@@ -39,10 +39,10 @@ class mod_groupformation_startGrouping{
 		echo 'Hier startet die Berechnung';
 		$userFilter = new mod_groupformation_userid_filter($groupformationID);
 		$users = $userFilter->getCompletedIds();
-		$szenario = $userFilter->getSzenario();
+		$scenario = $userFilter->getScenario();
 		$data = new mod_groupformation_data();
 		$this->labels = $data->getLabels();
-		$this->setNulls($szenario);
+		$this->setNulls($scenario);
 		$calculator = new mod_groupformation_calculateCriterions($groupformationID);
 		if(count($users)>0){
 			$gradeP = $calculator->getGradePosition($users);
@@ -93,17 +93,17 @@ class mod_groupformation_startGrouping{
 	}
 	
 	//noch hartgecodet
-	private function setNulls($szenario){
-		if($szenario == 1){
+	private function setNulls($scenario){
+		if($scenario == 1){
 			$this->labels[9] = "";
 		}
 		
-		if($szenario == 2){
+		if($scenario == 2){
 			$this->labels[4] = "";
 			$this->labels[8] = "";
 		}
 		
-		if($szenario == 3){
+		if($scenario == 3){
 			$this->labels[3] = "";
 			$this->labels[4] = "";
 			$this->labels[5] = "";

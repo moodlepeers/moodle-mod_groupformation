@@ -63,7 +63,7 @@
 		private $groupformationid;
 		private $store;
 		private $xml;
-		private $szenario;
+		private $scenario;
 		private $lang;
 		
 		private $userId;
@@ -118,7 +118,7 @@
 		
 		private function init($userId){
 			
-			$this->szenario = $this->store->getSzenario();
+			$this->scenarioario = $this->store->getScenario();
 			
 			if(!$this->store->catalogTableNotSet()){
 				$this->numbers = $this->store->getNumbers($this->names);
@@ -175,15 +175,15 @@
 		}
 		
 		private function setNulls(){
-			if($this->szenario == 'project' || $this->szenario == 1){
+			if($this->scenario == 'project' || $this->scenario == 1){
 				$this->numbers[mod_groupformation_data::getPosition('learning')] = 0;
 			}
 				
-			if($this->szenario == 'homework' || $this->szenario == 2){
+			if($this->scenario == 'homework' || $this->scenario == 2){
 				$this->numbers[mod_groupformation_data::getPosition('motivation')] = 0;
 			}	
 			
-			if($this->szenario == 'presentation' || $this->szenario == 3){
+			if($this->scenario == 'presentation' || $this->scenario == 3){
 				for($i = 0; $i < count($this->numbers); $i++){
 					if($i != mod_groupformation_data::getPosition('topic') && $i != mod_groupformation_data::getPosition('general')){
 						$this->numbers[$i] = 0;
@@ -316,24 +316,24 @@
 		}
 		
 // 		private function getNextCategory(){
-// 			if($this->szenario == 'project'){
+// 			if($this->scenario == 'project'){
 // 				if($this->currentCategoryPostiton == $this->LEARNING){
 // 					$this->currentCategoryPosition++;
 // 				}
 // 			}
 			
-// 			if($this->szenario == 'homework'){
+// 			if($this->scenario == 'homework'){
 // 				if($this->currentCategoryPostiton == $this->MOTIVATION){
 // 					$this->currentCategoryPosition++;
 // 				}
 // 			}
 			
 // 			//TODO das ist die eigentliche Abfrage; nur solange bis die anderen Datenbanken voll sind
-// // 			if($this->currentCategoryPosition == 6 || $this->szenario == 'presentation'){
+// // 			if($this->currentCategoryPosition == 6 || $this->scenario == 'presentation'){
 // // 				$this->currentCategoryPosition = -1;
 // // 			}
 
-// 			if($this->currentCategoryPosition == 7 || $this->szenario == 'presentation'){
+// 			if($this->currentCategoryPosition == 7 || $this->scenario == 'presentation'){
 // 				$this->currentCategoryPosition = -1;
 //  			}
 // 		}

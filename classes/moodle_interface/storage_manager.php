@@ -115,15 +115,27 @@
 			return $array;
 		}
 		
-		public function answerNumberForUser($userId){
+		/**
+		 * Determines the number of answered questions of a user (in all categories or a specified category)
+		 * 
+		 * @param int $userId
+		 * @param string $category
+		 * @return number
+		 */
+		public function answerNumberForUser($userId, $category = null){
 			global $DB;
+			
+			if (!is_null($category)){
+				return $DB->count_records('groupformation_answer', array('groupformation' => $this->groupformationid, 'userid' => $userId, 'category' => $category));
+			}
 			
 			$data = new mod_groupformation_data();
 			$names = $data->getCriterionNames();
+			
 			$number = 0;
 			
-			foreach($names as $category){
-				$number = $number + $DB->count_records('groupformation_answer', array('groupformation' => $this->groupformationid, 'userid' => $userId, 'category' => $category));
+			foreach($names as $name){
+				$number = $number + $DB->count_records('groupformation_answer', array('groupformation' => $this->groupformationid, 'userid' => $userId, 'category' => $number));
 			}
 			return $number;
 		}
@@ -188,25 +200,36 @@
 			return "<OPTION>" . $op . "</OPTION>";
 		}
 		
-		public function getNumbers(array $names){
+		/**
+		 * Returns an array with number of questions in each category
+		 * @param array $names
+		 * @return multitype:mixed
+		 */
+		public function getNumbers(array $categories){
 			global $DB;
 			
 			$array = array();
-			foreach($names as $name){
-				if($name == 'topic' || $name == 'knowledge'){
-					$array[] = $DB->get_field('groupformation_q_settings', $name . 'valuesnumber', array('groupformation' => $this->groupformationid));
-				}else{
-					$array[] = $DB->get_field('groupformation_q_version', 'numberofquestion', array('category' => $name));
-				}	
+			foreach($categories as $category){
+				$array[] = $this->getNumber($category);
+// 				if($category == 'topic' || $category == 'knowledge'){
+// 					$array[] = $DB->get_field('groupformation_q_settings', $category . 'valuesnumber', array('groupformation' => $this->groupformationid));
+// 				}else{
+// 					$array[] = $DB->get_field('groupformation_q_version', 'numberofquestion', array('category' => $category));
+// 				}	
 			}
 			
 			return $array;
 		}
 		
+		/**
+		 * Returns the number of questions in a specified category
+		 * 
+		 * @param string $category
+		 * @return mixed
+		 */
 		public function getNumber($category){
 			global $DB;
 				
-		
 			if($category == 'topic' || $category == 'knowledge'){
 				return $DB->get_field('groupformation_q_settings', $category . 'valuesnumber', array('groupformation' => $this->groupformationid));
 			}else{
@@ -238,7 +261,7 @@
 			return $return;
 		}
 		
-		public function getSzenario(){
+		public function getScenario(){
 			global $DB;
 			
 			$settings = $DB->get_record('groupformation', array('id' => $this->groupformationid));

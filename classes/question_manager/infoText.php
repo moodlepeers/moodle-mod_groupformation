@@ -25,6 +25,9 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 	die ( 'Direct access to this script is forbidden.' ); // / It must be included from a Moodle page
 }
 
+require_once($CFG->dirroot.'/mod/groupformation/classes/moodle_interface/storage_manager.php');
+require_once($CFG->dirroot.'/mod/groupformation/classes/util/define_file.php');
+
 // require_once($CFG->dirroot.'/mod/groupformation/classes/moodle_interface/storage_manager.php');
 class mod_groupformation_infoText {
 	private $groupformationid;
@@ -38,7 +41,7 @@ class mod_groupformation_infoText {
 					'grade',
 					'team',
 					'character',
-					'motivation' 
+					'motivation'
 			),
 			2 => array (
 					'topic',
@@ -47,17 +50,20 @@ class mod_groupformation_infoText {
 					'grade',
 					'team',
 					'character',
-					'learning' 
+					'learning'
 			),
 			3 => array (
 					'topic',
-					'general' 
-			) 
+					'general'
+			)
 	);
+	private $store;
+	
 	public function __construct($groupformationid, $userid, $truegroupformationid) {
 		$this->groupformationid = $groupformationid;
 		$this->userid = $userid;
 		$this->truegroupformationid = $truegroupformationid;
+		$this->store = new mod_groupformation_storage_manager($truegroupformationid);
 	}
 	public function statusA() {
 		echo '<div class="questionaire_status">' . get_string ( 'questionaire_not_started', 'groupformation' ) . '</div>';
@@ -139,26 +145,28 @@ class mod_groupformation_infoText {
 	 * @return multitype:multitype:number stats
 	 */
 	private function getStats() {
-		global $DB;
-		$scenario = $DB->get_record('groupformation', array('id'=>$this->truegroupformationid))->szenario;
+		$scenario = $this->store->getScenario();
+		
+		$data = new mod_groupformation_data();
+		
+// 		$scenario = $DB->get_record('groupformation', array('id'=>$this->truegroupformationid))->szenario;
+		
+		$category_set = $data->getCategorySet($scenario);
+		
 		$categories = array ();
-		foreach ( $DB->get_records ( 'groupformation_q_version' ) as $record ) {
-			$categories [$record->category] = ( int ) $record->numberofquestion;
+		
+		foreach ($category_set as $category){
+			$categories [$category] = $this->store->getNumber($category);
 		}
+		
 		$stats = array ();
-		foreach ( $categories as $key => $value ) {
-			if (in_array($key,$this->categorysets[$scenario])){
-				$count = $DB->count_records ( 'groupformation_answer', array (
-						'groupformation' => $this->truegroupformationid,
-						'userid' => $this->userid,
-						'category' => $key
-				) );
-				$stats [$key] = array (
-						'questions' => $value,
-						'answered' => $count,
-						'missing' => $value - $count
-				);
-			}
+		foreach ( $categories as $category => $value ) {
+			$count = $this->store->answerNumberForUser($this->userid, $category);
+			$stats [$category] = array (
+					'questions' => $value,
+					'answered' => $count,
+					'missing' => $value - $count
+			);
 		}
 		return $stats;
 	}

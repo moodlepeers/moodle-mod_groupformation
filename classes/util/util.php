@@ -42,7 +42,7 @@ class mod_groupformation_util {
 	
 	//private $names = array('topic', 'knowledge', 'general','grade','team', 'character', 'learning', 'motivation');
 	private $names = array();
-	private $szenario;
+	private $scenario;
 	private $numbers = array();
 
 	/**
@@ -53,7 +53,7 @@ class mod_groupformation_util {
 	public function __construct($groupformationid){
 		$this->groupformationid = $groupformationid;
 		$this->store = new mod_groupformation_storage_manager($groupformationid);
-		$this->szenario = $this->store->getSzenario();
+		$this->scenario = $this->store->getScenario();
 		$data = new mod_groupformation_data();
 		$this->names = $data->getCriterionNames();
 	}
@@ -79,15 +79,15 @@ class mod_groupformation_util {
 	}
 	
 	private function setNulls(){
-		if($this->szenario == 'project' || $this->szenario == 1){
+		if($this->scenario == 'project' || $this->scenario == 1){
 			$this->numbers[mod_groupformation_data::getPosition('learning')] = 0;
 		}
 	
-		if($this->szenario == 'homework' || $this->szenario == 2){
+		if($this->scenario == 'homework' || $this->scenario == 2){
 			$this->numbers[mod_groupformation_data::getPosition('motivation')] = 0;
 		}
 			
-		if($this->szenario == 'presentation' || $this->szenario == 3){
+		if($this->scenario == 'presentation' || $this->scenario == 3){
 			for($i = 0; $i < count($this->numbers); $i++){
 				if($i != mod_groupformation_data::getPosition('topic') && $i != mod_groupformation_data::getPosition('general')){
 					$this->numbers[$i] = 0;

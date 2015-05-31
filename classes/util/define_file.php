@@ -38,6 +38,8 @@
 	}
 	
 	class mod_groupformation_data{
+		
+		private $SCENARIO_NAMES = array('project','homework','presentation');
 		//NORMAL
 //		private $CATEGORY_NAMES = array('topic', 'knowledge', 'general', 'grade','team', 'character', 'learning', 'motivation');
 //		private $CRITERION_CATEGORYS = array('topic', 'knowledge', 'general', 'grade','team', 'character', 'learning', 'motivation');
@@ -54,6 +56,35 @@
 		const KNOWLEDGE = 1;
 		const TOPIC = 0;
 		const GRADE = 3;
+		
+		private $CATEGORY_SETS = array (
+				'1' => array (
+						'topic',
+						'knowledge',
+						'general',
+						'grade',
+						'team',
+						'character',
+						'motivation'
+				),
+				'2' => array (
+						'topic',
+						'knowledge',
+						'general',
+						'grade',
+						'team',
+						'character',
+						'learning'
+				),
+				'3' => array (
+						'topic',
+						'knowledge',
+						'general',
+						'grade',
+						'character',
+						'motivation',
+				)
+		);
 		
 		public function __construct(){
 		
@@ -112,5 +143,9 @@
 			if($category == 'character'){
 				return self::CHARACTER;
 			}
+		}
+		
+		public function getCategorySet($scenario){
+			return $this->CATEGORY_SETS[$scenario];
 		}
 	}

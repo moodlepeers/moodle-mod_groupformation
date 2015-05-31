@@ -56,8 +56,8 @@
 		$this->total = $this->util->getTotalNumber();
 	}
 	
-	public function getSzenario(){
-		return $this->store->getSzenario();
+	public function getScenario(){
+		return $this->store->getScenario();
 	}
 	
 	public function getCompletedIds(){

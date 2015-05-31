@@ -225,8 +225,8 @@
 			$category = 'character';
 			
 			$count = count($this->BIG5);
-			$szenario = $this->store->getSzenario();
-			if($szenario == 2){
+			$scenario = $this->store->getScenario();
+			if($scenario == 2){
 				$count = $count - 2;
 			}
 			for($i = 0; $i<$count; $i++){
