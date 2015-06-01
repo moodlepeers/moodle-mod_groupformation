@@ -200,10 +200,10 @@
 		}
 		
 		/** 
-		 * TODO @Nora
+		 * returns an array with n = $total fields
 		 * 
 		 * @param unknown $total
-		 * @return multitype:number
+		 * @return multitype:array
 		 */
 		private function getInitalArray($total){
 			$array = array();
@@ -217,7 +217,7 @@
 		 * returns the Big 5 by user
 		 * 
 		 * @param unknown $userId
-		 * @return multitype:number
+		 * @return multitype:array
 		 */
 		public function getBig5($userId){
 			
@@ -254,10 +254,11 @@
 		}
 		
 		/**
-		 * TODO @Nora
+		 * returns the FAM (motivation criterion) of the user specified by §userId
+
 		 * 
 		 * @param unknown $userId
-		 * @return multitype:number
+		 * @return multitype:array
 		 */
 		public function getFAM($userId){
 				
@@ -277,10 +278,10 @@
 		}
 		
 		/**
-		 * TODO @Nora
+		 * returns the learning criterion of the user specified by §userId
 		 * 
 		 * @param unknown $userId
-		 * @return multitype:number
+		 * @return multitype:array
 		 */
 		public function getLearn($userId){
 		
@@ -300,10 +301,11 @@
 		}
 		
 		/**
-		 * TODO @Nora
+		 * returns the team (Teamorientierung) criterion of the user specified by §userId
+
 		 * 
 		 * @param unknown $userId
-		 * @return multitype:number
+		 * @return multitype:number // later on this will be an array
 		 */
 		public function getTeam($userId){
 			$total = 0;
