@@ -147,22 +147,26 @@
 	 	if ($store->isQuestionaireAvailable()){	
 			$status = $store->answeringStatus($userId);
 			if($status ==  -1){
+				$info->availabilityInfo();
 	 			$info->statusA();
 	 		}
 	 		if($status == 0){
+				$info->availabilityInfo();
 	 			$info->statusB();
 	 		}
 	 		if($status == 1){
+				$info->availabilityInfo();
 	 			$info->statusC();
 	 		}
 	 	}else{
-	 		$info->notAvailable();
+	 		$info->notAvailableInfo();
 	 	}
 	}else{
 		if ($store->isQuestionaireAvailable()){
+			$info->availabilityInfo();
        		$info->Dozent();
 		}else{
-			$info->notAvailable();
+			$info->notAvailableInfo();
 			$info->Dozent();
 		}
 	}		
