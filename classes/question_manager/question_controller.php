@@ -194,8 +194,10 @@
 		
 		public function hasNext(){
 			
-			if($this->currentCategoryPosition > -1 && $this->currentCategoryPosition < $this->numberOfCategory){
-				while($this->currentCategoryPosition < $this->numberOfCategory && $this->numbers[$this->currentCategoryPosition] == 0){
+			if($this->currentCategoryPosition >= 0 
+					&& $this->currentCategoryPosition < $this->numberOfCategory){
+				while($this->currentCategoryPosition < $this->numberOfCategory 
+						&& $this->numbers[$this->currentCategoryPosition] == 0){
 					$this->currentCategoryPosition++;
 				}
 // 				if($this->numbers[$this->currentCategoryPosition] == 0){

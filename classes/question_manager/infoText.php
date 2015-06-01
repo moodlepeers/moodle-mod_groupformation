@@ -60,6 +60,7 @@ class mod_groupformation_infoText {
 	private $store;
 	
 	public function __construct($groupformationid, $userid, $truegroupformationid) {
+		// its not the groupformation id -> its also unused so far
 		$this->groupformationid = $groupformationid;
 		$this->userid = $userid;
 		$this->truegroupformationid = $truegroupformationid;
@@ -193,6 +194,8 @@ class mod_groupformation_infoText {
 			$a->answered = $values['answered'];
 			if ($values['questions']>0){
 			echo '<tr><th scope="row" class="questionaire_stats_row"><span>';
+			$url = new moodle_url('answeringView.php',array('id'=>$this->groupformationid,'category'=>$a->category));
+			$a->category = '<a href="'.$url.'">'.$a->category.'</a>';
 			if ($values['missing']==0){
 				echo get_string('stats_all','groupformation',$a).' <span class="questionaire_all">&#10004;</span>';
 			} elseif ($values['answered']==0){

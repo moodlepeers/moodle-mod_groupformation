@@ -29,22 +29,16 @@
 // 	require_once ($CFG->dirroot.'/mod/feedback/lib.php');
 	require_once (dirname ( __FILE__ ) . '/classes/util/define_file.php');
 
+	require_once(dirname(__FILE__).'/classes/moodle_interface/storage_manager.php');
+	require_once(dirname(__FILE__).'/classes/question_manager/questionaire.php');
+	require_once(dirname(__FILE__).'/classes/question_manager/Save.php');
 
-	$data = new mod_groupformation_data();
-	$names = $data->getNames();
-	//$names = array('topic', 'knowledge', 'general', 'grade','team', 'character', 'learning', 'motivation');
-	$category = "";
-
-	if (isset($_POST["category"])){
-		$category = $_POST['category'];
-	}
-
-// 	$id = required_param('id', PARAM_INT);    // Course Module ID
+	// 	Import jQuery and js file
+	addJQuery ( $PAGE, 'survey_functions.js' );
+	
 	$id = optional_param('id', 0, PARAM_INT);   // Course Module ID
 	$g = optional_param('g', 0, PARAM_INT);		// groupformation instance ID
-
-// 	Import jQuery and js file
-	addJQuery ( $PAGE, 'survey_functions.js' );
+	$url_category = optional_param('category','',PARAM_TEXT); 	// category name
 	
 	if($id) {
 		$cm = get_coursemodule_from_id('groupformation', $id, 0, false, MUST_EXIST);
@@ -56,14 +50,28 @@
 		$cm = get_coursemodule_from_instance('groupformation', $groupformation->id, $course->id, false, MUST_EXIST);
 	} else {
 		error('You must specify a course_module ID or an instance ID');
+	}	
+	
+	$context = context_module::instance($cm->id);
+	$userId = $USER->id;
+	
+	require_login($course, true, $cm);
+		
+	$data = new mod_groupformation_data();
+	$store = new mod_groupformation_storage_manager($groupformation->id);
+	
+	$names = $data->getNames();
+	$scenario = $store->getScenario();
+	
+	$category = "";
+
+	if (isset($_POST["category"])){
+		$category = $_POST['category'];
+	}elseif (!(strcmp($url_category, '')==0)){
+		$category = $data->getPreviousCategory($scenario, $url_category);
 	}
 
-	$context = context_module::instance($cm->id);
-	
-//	require_login($course);
-	require_login($course, true, $cm);
-//	require_capability('mod/groupformation:editparam', $context);
-//	$context = context_course::instance($courseid);
+	$number = $store->getNumber($category);
 	
 	
 	$PAGE->set_url('/mod/groupformation/answeringView.php', array('id' => $cm->id));
@@ -77,21 +85,9 @@
 // 	if ($groupformation->intro) {
 // 		echo $OUTPUT->box(format_module_intro('groupformation', $groupformation, $cm->id), 'generalbox mod_introbox', 'groupformationintro');
 // 	}
-
-
-
-// 	// Replace the following lines with you own code.
-// 	echo $OUTPUT->heading('Yay! It works!');
-
-	require_once(dirname(__FILE__).'/classes/moodle_interface/storage_manager.php');
-	require_once(dirname(__FILE__).'/classes/question_manager/questionaire.php');
-	require_once(dirname(__FILE__).'/classes/question_manager/Save.php');
-
  
 // 	$xmlLoader = new mod_groupformation_xml_loader();
-	$userId = $USER->id;
-	$store = new mod_groupformation_storage_manager($groupformation->id);
-	$number = $store->getNumber($category);
+
 	
 	$direction = 1;
 	if(isset($_POST["direction"])){
