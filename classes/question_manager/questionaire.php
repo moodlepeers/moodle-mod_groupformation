@@ -33,7 +33,8 @@
 	require_once(dirname(__FILE__).'/RangeInput.php');
 	require_once(dirname(__FILE__).'/DropdownInput.php');
 	require_once(dirname(__FILE__).'/HeaderOfInputs.php');
-
+	require_once ($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
+	
 	if (!defined('MOODLE_INTERNAL')) {
 		die('Direct access to this script is forbidden.');    ///  It must be included from a Moodle page
 	}
@@ -76,7 +77,7 @@
 		}
 		
 		public function getQuestions(){
-			
+			global $USER;
 			// TODO @Nora @Rene
 			// Es muss eine Methode eingebaut werden um den Fragebogen in mehrere Tabs zu splitten.
 			
@@ -190,7 +191,11 @@
 					echo '<input type="hidden" name="id" value="' . $this->groupformationid . '"/>';
 				}
 				
-				$disabled = answeredAllQuestions($USER->id,$this->groupformationid);
+				$store = new mod_groupformation_storage_manager($this->groupformationid);
+				
+				$hasAnsweredEverything = $store->hasAnsweredEverything($USER->id);
+				
+				$disabled = !$hasAnsweredEverything;
 				
 				echo '
 						<div class="grid">

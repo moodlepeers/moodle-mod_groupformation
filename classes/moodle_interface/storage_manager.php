@@ -29,6 +29,9 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 }
 
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
+require_once ($CFG->dirroot . '/group/lib.php');
+
+
 class mod_groupformation_storage_manager {
 	private $groupformationid;
 	public function __construct($groupformationid) {
@@ -129,19 +132,29 @@ class mod_groupformation_storage_manager {
 		}
 		
 		$data = new mod_groupformation_data ();
-		$names = $data->getCriterionNames ();
 		
+		$scenario = $this->getScenario();
+		$names = $data->getCategorySet($scenario);
 		$number = 0;
-		
 		foreach ( $names as $name ) {
 			$number = $number + $DB->count_records ( 'groupformation_answer', array (
 					'groupformation' => $this->groupformationid,
 					'userid' => $userId,
-					'category' => $number 
+					'category' => $name, 
 			) );
 		}
 		return $number;
 	}
+	
+	public function hasAnsweredEverything($userid) {
+		$scenario = $this->getScenario();
+		$data = new mod_groupformation_data ();
+		$categories = $data->getCategorySet($scenario);
+		$sum = array_sum($this->getNumbers($categories));
+		$user_sum = $this->answerNumberForUser($userid);
+		return $sum == $user_sum;
+	}
+	
 	public function add_catalog_version($category, $numbers, $version, $init) {
 		global $DB;
 		
@@ -322,7 +335,12 @@ class mod_groupformation_storage_manager {
 					'groupformation' => $this->groupformationid,
 					'userid' => $userId 
 			) );
+			$data->timecompleted = time ();
+			
 			$DB->update_record ( 'groupformation_started', $data );
+			
+			// TODO @Rene Here Code for Assigning to GROUP A or GROUP B for MATHE
+			$this->assignToGroup ( $userId );
 		}
 	}
 	
@@ -461,6 +479,60 @@ class mod_groupformation_storage_manager {
 		}
 		
 		return false;
+	}
+	public function assignToGroup($userid) {
+		global $DB,$COURSE;
+		$completed = 1;
+		
+		if (!$DB->record_exists('groups',array('courseid'=>$COURSE->id,'name'=>'Gruppe A'))){
+			$record = new stdClass();
+			$record->courseid = $COURSE->id;
+			$record->name = "Gruppe A";
+			$record->timecreated = time();
+				
+			$a = groups_create_group($record);
+		}
+		if (!$DB->record_exists('groups',array('courseid'=>$COURSE->id,'name'=>'Gruppe B'))){
+			$record = new stdClass();
+			$record->courseid = $COURSE->id;
+			$record->name = "Gruppe B";
+			$record->timecreated = time();
+				
+			$b = groups_create_group($record);
+		}
+		
+		$records = $DB->get_records ( 'groupformation_started', array (
+				'groupformation' => $this->groupformationid,
+				'completed' => $completed 
+		),'timecompleted','id, userid, timecompleted');
+		
+		if (count($records)>0){
+			$i = 0;
+			foreach($records as $id =>$record){
+				if ($record->userid == $userid){		
+					break;
+				}
+				$i++;
+			}
+		
+			$a = $DB->get_field('groups', 'id', array('courseid'=>$COURSE->id,'name'=>'Gruppe A'));
+			$b = $DB->get_field('groups', 'id', array('courseid'=>$COURSE->id,'name'=>'Gruppe B'));
+			
+			if ($i % 2 == 0){
+				// sort to group A
+				groups_add_member($a, $userid);
+				$DB->set_field('groupformation_started', 'groupname', $a, array('groupformation' => $this->groupformationid,
+					'completed' => $completed ,'userid'=>$userid ));
+			}
+			
+			if ($i % 2 == 1){
+				// sort to group B
+				groups_add_member($b, $userid);
+				$DB->set_field('groupformation_started', 'groupname', $b, array('groupformation' => $this->groupformationid,
+					'completed' => $completed ,'userid'=>$userid ));
+				
+			}
+		}
 	}
 	
 	// public function existSetting(){

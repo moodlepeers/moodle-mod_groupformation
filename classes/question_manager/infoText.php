@@ -87,6 +87,7 @@ class mod_groupformation_infoText {
 		echo '</div>';
 	}
 	public function statusB() {
+		global $USER;
 		$this->printStats ();
 		echo '<div class="col_100">' . get_string ( 'questionaire_not_submitted', 'groupformation' ) . '</div>';
 		echo '<div class="col_100">' . get_string ( 'questionaire_press_continue_submit', 'groupformation' ) . '</div>';
@@ -99,7 +100,9 @@ class mod_groupformation_infoText {
 		
 		echo '<input type="hidden" name="id" value="' . $this->groupformationid . '"/>';
 		
-		$disabled = answeredAllQuestions ( $USER->id, $this->truegroupformationid );
+		$hasAnsweredEverything = $this->store->hasAnsweredEverything($USER->id);
+		
+		$disabled = !$hasAnsweredEverything;
 		
 		echo '
 						<div class="grid">
@@ -194,7 +197,7 @@ class mod_groupformation_infoText {
 				echo '<tr><th scope="row" class="questionaire_stats_row"><span>';
 				$url = new moodle_url ( 'answeringView.php', array (
 						'id' => $this->groupformationid,
-						'category' => $a->category 
+						'category' => $key 
 				) );
 				$a->category = '<a href="' . $url . '">' . $a->category . '</a>';
 				if ($values ['missing'] == 0) {
