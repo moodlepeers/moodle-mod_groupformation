@@ -167,10 +167,8 @@ class mod_groupformation_mod_form extends moodleform_mod {
                         <h4 class="required">' . get_string ( 'scenario_description', 'groupformation' ) . '</h4>
                     </div>
 				
-					<div class="col_100">
-                        <div class="errors">
-                            <p id="szenario_error"></p>
-                        </div>
+					<div class="col_100 js_errors" id="szenario_error">
+                            <p></p>
                     </div>
 			
                     <div id="szenarioradios">
@@ -392,15 +390,11 @@ class mod_groupformation_mod_form extends moodleform_mod {
                         <h4 class="required">' . get_string ( 'groupoption_description', 'groupformation' ) . '<span class="toolt" tooltip="' . get_string ( 'groupoption_help', 'groupformation' ) . '"></span></h4>
                     </div>
 				
-					<div class="col_100">
-                        <div class="errors">
-                            <p id="maxmembers_error"></p>
-                        </div>
+					<div class="col_100 js_errors" id="maxmembers_error">
+                             <p></p>
                     </div>
-                    <div class="col_100">
-                        <div class="errors">
-                            <p id="maxgroups_error"></p>
-                        </div>
+                    <div class="col_100 js_errors" id="maxgroups_error">
+                            <p></p>
                     </div>
 
                     <div class="col_50"><label><input type="radio" name="group_opt" id="group_opt_size" value="group_size" checked="checked" />
@@ -415,7 +409,10 @@ class mod_groupformation_mod_form extends moodleform_mod {
                 <div class="grid option_row">
 
                     <div class="col_100 ">
-                        <h4 class="optional">' . get_string ( 'groupname', 'groupformation' ) . '<span class="toolt" tooltip="' . get_string ( 'groupname_help', 'groupformation' ) . '"></span></h4>
+                        <h4 class="required">' . get_string ( 'groupname', 'groupformation' ) . '<span class="toolt" tooltip="' . get_string ( 'groupname_help', 'groupformation' ) . '"></span></h4>
+                    </div>
+					<div class="col_100 ">
+                        <input type="text" class="respwidth" id="js_groupname" />
                     </div>
 				
 				</div> <!-- /grid -->' );
@@ -429,16 +426,12 @@ class mod_groupformation_mod_form extends moodleform_mod {
                         <h4 class="required">' . get_string ( 'evaluationmethod_description', 'groupformation' ) . '</h4>
                     </div>
 				
-					<div class="col_100">
-                        <div class="errors">
-                            <p id="evaluationmethod_error"></p>
-                        </div>
+					<div class="col_100 js_errors" id="evaluationmethod_error">
+                            <p></p>
                     </div>
 
-                    <div class="col_100">
-                        <div class="errors">
-                            <p id="maxpoints_error"></p>
-                        </div>
+                    <div class="col_100 js_errors" id="maxpoints_error">
+                            <p></p>
                     </div>
 				
 				

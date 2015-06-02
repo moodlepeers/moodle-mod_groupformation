@@ -2,7 +2,7 @@ $(document).ready(function() {
     
     // hide validation error alerts and show them if needed
     // if css attribute "display:none" and show on validation error, they will not displayed properly
-    $(".errors p").hide();
+    $(".js_errors").hide();
     
     
     
@@ -48,7 +48,9 @@ $(document).ready(function() {
         });
 
         $.each(ids, function(index, value){
-            $(value).text(messages.get(index)).show();
+        	$(value).show();
+            $(value).find('p').text(messages.get(index));
+            
         });
 
         //    alert(ids.get().join(', '));
@@ -195,6 +197,8 @@ $(document).ready(function() {
                 $('#js_evaluationmethod option').prop('selected', false).filter('[value=novaluation]').prop('selected', true);
             }
         }
+        
+        $('#js_groupname').val($('#id_groupname').val());
 
 
     }
@@ -531,6 +535,11 @@ $(document).ready(function() {
         $('#id_maxpoints').val($(this).val());
     });
 
+    
+    $('#js_groupname').keyup(function(){
+    	$('#id_groupname').val($(this).val());
+    });
+    
     
     
   /////////////////////// Sticky buttons ///////////////////////////////////////////////////////////

@@ -211,7 +211,7 @@ footer {
 }
 
 
-.js_preknowledgeInput, .js_topicInput, #group_size, #numb_of_groups, #max_points{
+.respwidth, #group_size, #numb_of_groups, #max_points{
     height: 30px !important;
     line-height: normal;
 }
@@ -250,9 +250,9 @@ h1.caption {
 .whitespace_m {
   margin: 3em 0; }
 
-.errors {
+.js_errors {
   width: 100%; }
-  .errors p {
+  .js_errors p {
     width: 100%;
     background-color: #fff0f0;
     border-color: #ffdce1;
@@ -262,7 +262,7 @@ h1.caption {
     padding: 8px 35px 8px 14px;
     margin-bottom: 20px;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5); }
-  .errors p:before {
+  .js_errors p:before {
     font-weight: bold;
     content: "* "; }
 
