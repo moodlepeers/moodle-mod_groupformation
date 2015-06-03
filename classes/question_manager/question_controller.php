@@ -97,11 +97,19 @@
 			}
 		}
 		
-		public function getPercent(){
+		public function getPercent($category = null){
+			
+			if (!is_null($category)){
+				$categories = $this->store->getCategories();
+				$pos = array_search($category, $categories);
+				return 100.0*((1.0*$pos)/count($categories));
+			}
+			
 			$total = 0;
 			$sub = 0;
 			
 			$temp = 0;
+			
 			foreach($this->numbers as $num){
 				if($num != 0){
 					$total++;

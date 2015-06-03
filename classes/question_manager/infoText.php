@@ -153,7 +153,7 @@ class mod_groupformation_infoText {
 		
 		// $scenario = $DB->get_record('groupformation', array('id'=>$this->truegroupformationid))->szenario;
 		
-		$category_set = $data->getCategorySet ( $scenario );
+		$category_set = $data->getCategorySet ( $scenario);
 		
 		$categories = array ();
 		

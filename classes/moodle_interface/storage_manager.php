@@ -398,6 +398,19 @@ class mod_groupformation_storage_manager {
 		// var_dump($count);
 		return $count == 1;
 	}
+	
+	public function getCategories(){
+		$data = new mod_groupformation_data();
+		$category_set = $data->getCategorySet($this->getScenario());
+		$categories = array();
+		foreach($category_set as $category){
+			if ($this->getNumber($category)>0){
+				$categories[] = $category;
+			}
+		}
+		return $categories;
+	}
+	
 	public function generalAnswerNotExist() {
 		global $DB;
 		

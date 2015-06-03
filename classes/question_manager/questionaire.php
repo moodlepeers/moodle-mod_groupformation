@@ -34,6 +34,7 @@
 	require_once(dirname(__FILE__).'/DropdownInput.php');
 	require_once(dirname(__FILE__).'/HeaderOfInputs.php');
 	require_once ($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
+	require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 	
 	if (!defined('MOODLE_INTERNAL')) {
 		die('Direct access to this script is forbidden.');    ///  It must be included from a Moodle page
@@ -43,7 +44,7 @@
 
 		
 			
-		
+		private $cmid;
 		private $groupformationid;
 		private $lang;
 		private $question_manager;
@@ -59,9 +60,9 @@
 			
 		
 		
-		public function __construct($groupformationid, $lang, $userId, $category){
+		public function __construct($cmid, $groupformationid, $lang, $userId, $category){
 			
-			
+			$this->cmid = $cmid;
 			$this->groupformationid = $groupformationid;
 			$this->lang = $lang;
 			$this->question_manager = new mod_groupformation_question_controller($groupformationid, $lang, $userId, $category);
@@ -76,6 +77,43 @@
 			$this->question_manager->goBack();
 		}
 		
+		private function getProgressbar(){
+			$percent = $this->question_manager->getPercent($this->category);
+			$percentage = $percent;
+			echo '<div class="progress">
+  							<div class="questionaire_progress-bar" role="progressbar" aria-valuenow="'.$percentage.'" aria-valuemin="0" aria-valuemax="100" style="width:'.$percentage.'%">
+    							</div>
+						  </div>';
+		}
+		
+		private function getOverviewbar($activeCategory){
+			$data = new mod_groupformation_data();
+			$store = new mod_groupformation_storage_manager($this->groupformationid);
+			$scenario = $store->getScenario();
+			$temp_categories = $data->getCategorySet($scenario);
+			$categories = array();
+			foreach($temp_categories as $category){
+				if ($store->getNumber($category)>0){
+					$categories[]=$category;
+				}
+			}
+			echo '<div class="questionaire_navbar">';
+			echo '<ul class="questionaire_navbar">';
+			$width = 100.0/count($categories);
+			foreach($categories as $category){
+				$url = new moodle_url ( 'answeringView.php', array (
+						'id' => $this->cmid,
+						'category' => $category
+				) );
+				echo '<li class="questionaire_navbar" style="width:'.$width.'%;"><a class="questionaire_navbar_link" '.(($activeCategory == $category)?'style="background-color: #2d2d2d; color: #FFFFFF"':'').' href="'.$url.'">'.get_string('category_'.$category,'groupformation').'</a></li>';
+				
+// 				<li><a href="a.html" class="ui-btn-active">One</a></li>
+// 				<li><a href="b.html">Two</a></li>
+			}		
+			echo '</ul>';
+			echo '</div><!-- /navbar -->';
+		}
+		
 		public function getQuestions(){
 			global $USER;
 			// TODO @Nora @Rene
@@ -84,14 +122,12 @@
 			$hasNext = $this->question_manager->hasNext();
 			if($this->question_manager->questionsToAnswer() && $hasNext){
 					// while($hasNext){
-					$percent = $this->question_manager->getPercent();
-					$percentage = floatval($percent);
-					echo '<div class="progress">
-  							<div class="questionaire_progress-bar" role="progressbar" aria-valuenow="'.$percentage.'" aria-valuemin="0" aria-valuemax="100" style="width:'.$percentage.'%">
-    							</div>
-						  </div>';
 					$this->category = $this->question_manager->getCurrentCategory();
-// 					var_dump($this->category);
+					
+					$this->getOverviewbar($this->category);
+					
+					$this->getProgressbar();
+					
 					$question = $this->question_manager->getNextQuestion();
 
 					// print current $question Array

@@ -124,11 +124,7 @@
 			echo $OUTPUT->box(format_module_intro('groupformation', $groupformation, $cm->id), 'generalbox mod_introbox', 'groupformationintro');
 		}
 		
-		
-		
-		// Replace the following lines with you own code.
-		//echo $OUTPUT->heading('Yay! It works!');
-		$questionManager = new mod_groupformation_questionaire($groupformation->id, get_string('language','groupformation'), $userId, $category);
+		$questionManager = new mod_groupformation_questionaire($cm->id,$groupformation->id, get_string('language','groupformation'), $userId, $category);
 		
 		if($direction == 0){
 			$questionManager->goback();
@@ -154,10 +150,6 @@
 			echo $OUTPUT->box(format_module_intro('groupformation', $groupformation, $cm->id), 'generalbox mod_introbox', 'groupformationintro');
 		}
 		
-		
-		
-		// Replace the following lines with you own code.
-		//echo $OUTPUT->heading('Yay! It works!');
 		echo $OUTPUT->heading('category has been manipulated');
 	}
 	

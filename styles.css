@@ -196,6 +196,33 @@ footer {
 	color: #ff0000;
 }
 
+.questionaire_navbar ul {
+    list-style-type: none;
+    margin: 10px 0px;
+    padding: 0;
+    overflow: hidden;
+    width: 100%;
+}
+
+.questionaire_navbar li {
+    float: left;
+}
+
+.questionaire_navbar_link {
+    display: block;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #969696;
+    text-align: center;
+    padding: 4px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.questionaire_navbar_active {
+    background-color: #2d2d2d;
+}
+
 [class*='col_'] {
   float: left;
   margin: 5px 0;
