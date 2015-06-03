@@ -494,7 +494,8 @@ ul.sortable_topics {
     ul.sortable_topics {
       font-size: 1em; } }
   ul.sortable_topics li {
-    padding: 0.4em;
+    padding-top: 0.7em;
+    padding-bottom: 0.7em;
     padding-left: 1.5em;
     border: 2px solid #969696;
     border-top: none;
