@@ -51,10 +51,7 @@ class DropdownInput {
 		}
 		
 		echo '<tr>';
-		//echo '<th scope="row">' . $this->question . '</th>';
-		echo '<th scope="row"> <label for="' . $this->category . $this->qnumber . '">' .
-				$this->question . '</label> </th>';
-		
+		echo '<th scope="row">' . $this->question . '</th>';
 		
 		echo '<td class="center">
 				<select name="'. $this->category . $this->qnumber  .'" id="' . $this->category . $this->qnumber  .'">';

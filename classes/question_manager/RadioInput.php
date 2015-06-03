@@ -53,9 +53,11 @@ class RadioInput {
 		}else{
 			echo '<tr>';
 		}
-		//echo '<th scope="row">' . $this->question . '</th>';
-		echo '<th scope="row"> <label for="' . $this->category . $this->qnumber . '">' .
-				$this->question . '</label> </th>';
+		echo '<th scope="row">' . $this->question . '</th>';
+		
+		//TODO @ALL Wer hat hier label eingebaut und wozu? :) Die Zeile drüber war schon richtig! by EG
+// 		echo '<th scope="row"> <label for="' . $this->category . $this->qnumber . '">' .
+// 				$this->question . '</label> </th>';
 		
 // 		$radioCounter = 1;
 // 		$answer = -1;
