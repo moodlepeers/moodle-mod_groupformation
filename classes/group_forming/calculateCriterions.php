@@ -61,7 +61,7 @@
 		}
 		
 		private function inverse($qId, $category, $answer){
-			$max = $this->store->getMaxOfCatalogQuestionOptions($qId, $category);
+			$max = $this->store->getMaxOptionOfCatalogQuestion($qId, $category);
 			//Da intern bei 0 und nicht bei 1 angefangen wird
 			$max++;
 			return $max - $answer;
@@ -100,7 +100,7 @@
 			$knowledge = array();
 			$position = 0;
 			
-			$temp = $this->store->getDozentQuestion('knowledge');
+			$temp = $this->store->getKnowledgeOrTopicValues('knowledge');
  			$values = $this->xml->xmlToArray('<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>');
 					
 			foreach($values as $question){
@@ -121,7 +121,7 @@
 		public function knowledgeAverage($userId){
 			$total = 0;
 			$numberOfQuestion = 0;
-			$answers = $this->store->getAnswer($userId, 'knowledge');
+			$answers = $this->store->getAnswers($userId, 'knowledge');
 			foreach($answers as $answer){
 				$total = $total + $answer->answer;
 				$numberOfQuestion++;
@@ -165,7 +165,7 @@
 			
 			for($i = 1; $i <= 3; $i++){
 				$answers = $this->store->getAnswersToSpecialQuestion('grade', $i);
-				$totalOptions = $this->store->getMaxOfCatalogQuestionOptions($i, 'grade');
+				$totalOptions = $this->store->getMaxOptionOfCatalogQuestion($i, 'grade');
 				$dist = $this->getInitalArray($totalOptions);
 				foreach($answers as $answer){
 					if(in_array($answer->userid, $users)){
@@ -311,7 +311,7 @@
 			$total = 0;
 			$numberOf = 0;
 			$array = array();
-			$answers = $this->store->getAnswer($userId, 'team');
+			$answers = $this->store->getAnswers($userId, 'team');
 			foreach($answers as $answer){
 				$total = $total + $answer->answer;
 				$numberOf++;

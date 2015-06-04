@@ -230,7 +230,7 @@
 				
 				if($this->currentCategoryPosition == mod_groupformation_data::getPosition('topic') || $this->currentCategoryPosition == mod_groupformation_data::getPosition('knowledge')){
 					
- 						$temp = $this->store->getDozentQuestion($this->names[$this->currentCategoryPosition]);
+ 						$temp = $this->store->getKnowledgeOrTopicValues($this->names[$this->currentCategoryPosition]);
  						$values = $this->xml->xmlToArray('<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>');
 						
 						$text; 
@@ -362,8 +362,7 @@
 		public function getAnswers(){
 			$array = array();
 			
-			$answers = $this->store->getAnswer($this->userId, $this->names[$this->currentCategoryPosition]);
-			//var_dump($answers);
+			$answers = $this->store->getAnswers($this->userId, $this->names[$this->currentCategoryPosition]);
 			foreach($answers as $answer){
 				$temp = array();
 				$temp[] = $answer->questionid;

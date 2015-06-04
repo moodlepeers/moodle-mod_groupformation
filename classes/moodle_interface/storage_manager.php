@@ -34,6 +34,12 @@ require_once ($CFG->dirroot . '/group/lib.php');
 
 class mod_groupformation_storage_manager {
 	private $groupformationid;
+	
+	/**
+	 * Constructs storage manager for a specific groupformation
+	 * 
+	 * @param unknown $groupformationid
+	 */
 	public function __construct($groupformationid) {
 		$this->groupformationid = $groupformationid;
 	}
@@ -57,17 +63,37 @@ class mod_groupformation_storage_manager {
 	// }
 	
 	// es wird davon ausgegangen, dass alle Fragentabellen immer auf dem gleichen Stand sind
+	/**
+	 * Returns if DB does not contain questions for a specific category
+	 * 
+	 * @param string $category
+	 * @return boolean
+	 */
 	public function catalogTableNotSet($category = 'grade') {
-		global $CFG, $DB;
+		global $DB;
 		// $indexes = $DB->get_indexes('groupformation_en_team');
 		$count = $DB->count_records ( 'groupformation_' . $category );
 		// var_dump($count);
 		return $count == 0;
 	}
-	public function delete_old_catalog_question($category) {
+	
+	/**
+	 * Deletes all questions in a specific category
+	 * 
+	 * @param string $category
+	 */
+	public function delete_all_catalog_questions($category) {
 		global $DB;
 		$DB->delete_records ( 'groupformation_' . $category );
 	}
+	
+	/**
+	 * Adds a catalog question in a specific language and category 
+	 * 
+	 * @param array $question
+	 * @param string $language
+	 * @param string $category
+	 */
 	public function add_catalog_question($question, $language, $category) {
 		global $CFG, $DB;
 		
@@ -82,10 +108,22 @@ class mod_groupformation_storage_manager {
 		
 		$DB->insert_record ( 'groupformation_' . $category, $data );
 	}
+	
+	/**
+	 * 
+	 * Returns all users (user IDs) who answered any questions
+	 * 
+	 * @return multitype:NULL
+	 */
 	public function getTotalUserIds() {
-		global $DB;
+		global $DB;		
+		// TODO @Nora
+		// Kann man hier nicht mit groupformation_started arbeiten. 
+		// Da stehen schließlich auch alle Nutzer einmalig drin, 
+		// die bereits geantwortet haben in einer Form
 		
 		$array = array ();
+		$DB->
 		$records = $DB->get_records ( 'groupformation_answer', array (
 				'groupformation' => $this->groupformationid 
 		) );
@@ -98,6 +136,12 @@ class mod_groupformation_storage_manager {
 		
 		return $array;
 	}
+	
+	/**
+	 * Returns all users (user IDs) who completed the questionaire
+	 * 
+	 * @return multitype:NULL
+	 */
 	public function getUserIdsCompleted() {
 		global $DB;
 		
@@ -146,6 +190,12 @@ class mod_groupformation_storage_manager {
 		return $number;
 	}
 	
+	/**
+	 * Determines whether user has answered every question or not
+	 * 
+	 * @param int $userid
+	 * @return boolean
+	 */
 	public function hasAnsweredEverything($userid) {
 		$scenario = $this->getScenario();
 		$data = new mod_groupformation_data ();
@@ -155,6 +205,14 @@ class mod_groupformation_storage_manager {
 		return $sum == $user_sum;
 	}
 	
+	/**
+	 * TODO @Nora
+	 * 
+	 * @param unknown $category
+	 * @param unknown $numbers
+	 * @param unknown $version
+	 * @param unknown $init
+	 */
 	public function add_catalog_version($category, $numbers, $version, $init) {
 		global $DB;
 		
@@ -172,6 +230,14 @@ class mod_groupformation_storage_manager {
 			$DB->update_record ( 'groupformation_q_version', $data );
 		}
 	}
+	
+	/**
+	 * Determines whether the DB contains for a specific category a specific version or not
+	 * 
+	 * @param string $category
+	 * @param string $version
+	 * @return boolean
+	 */
 	public function latestVersion($category, $version) {
 		global $DB;
 		
@@ -184,6 +250,13 @@ class mod_groupformation_storage_manager {
 	}
 	
 	// $init true, wenn es eine initialisierung ist | false wenn es ein Update ist
+	/**
+	 * Adds/Updates knowledge and topic setting of groupformation
+	 * 
+	 * @param unknown $knowledge
+	 * @param unknown $topics
+	 * @param unknown $init
+	 */
 	public function add_setting_question($knowledge, $topics, $init) {
 		global $DB;
 		
@@ -207,6 +280,10 @@ class mod_groupformation_storage_manager {
 	}
 	
 	// gibt ein array zurück, in dem auf der ersten Position die Startzeit gespeichert ist und auf der zweiten Position die Endzeit
+	/**
+	 * Returns map with availability times (xxx_raw is timestamp, xxx is formatted time for display)
+	 * @return multitype:string NULL mixed
+	 */
 	public function getTime() {
 		global $DB;
 		$times = array ();
@@ -222,6 +299,12 @@ class mod_groupformation_storage_manager {
 		
 		return $times;
 	}
+	
+	/**
+	 * Converts knowledge or topic array into XML-based syntax
+	 * @param unknown $options
+	 * @return string
+	 */
 	private function convertOptions($options) {
 		$op = implode ( "</OPTION>  <OPTION>", $options );
 		return "<OPTION>" . $op . "</OPTION>";
@@ -268,14 +351,29 @@ class mod_groupformation_storage_manager {
 			) );
 		}
 	}
-	public function getDozentQuestion($category) {
+	
+	/**
+	 * Returns either knowledge or topic values
+	 * 
+	 * @param unknown $category
+	 * @return mixed
+	 */
+	public function getKnowledgeOrTopicValues($category) {
 		global $DB;
 		
 		return $DB->get_field ( 'groupformation_q_settings', $category . 'values', array (
 				'groupformation' => $this->groupformationid 
 		) );
 	}
-	public function getMaxOfCatalogQuestionOptions($i, $category = 'grade') {
+	
+	/**
+	 * Returns max number of options for a specific question in a specific category
+	 * 
+	 * @param unknown $i
+	 * @param string $category
+	 * @return mixed
+	 */
+	public function getMaxOptionOfCatalogQuestion($i, $category = 'grade') {
 		global $DB;
 		
 		$table = "groupformation_" . $category;
@@ -284,6 +382,15 @@ class mod_groupformation_storage_manager {
 				'position' => $i 
 		) );
 	}
+	
+	/**
+	 * Returns a specific question in a specific category
+	 * 
+	 * @param unknown $i
+	 * @param string $category
+	 * @param string $lang
+	 * @return mixed
+	 */
 	public function getCatalogQuestion($i, $category = 'general', $lang = 'en') {
 		global $DB;
 		
@@ -295,6 +402,12 @@ class mod_groupformation_storage_manager {
 		
 		return $return;
 	}
+	
+	/**
+	 * Returns the scenario
+	 * 
+	 * @return int
+	 */
 	public function getScenario() {
 		global $DB;
 		
@@ -305,13 +418,12 @@ class mod_groupformation_storage_manager {
 		return $settings->szenario;
 	}
 	
-	// public function firstQuestionNumber(){
-	// global $DB;
-	
-	// $count = $DB->count_records('groupformation_question', array('groupformation' => $this->groupformationid));
-	
-	// return $count;
-	// }
+	/**
+	 * Changes status of questionaire for a specific user
+	 * 
+	 * @param unknown $userId
+	 * @param number $complete
+	 */
 	public function statusChanged($userId, $complete = 0) {
 		global $DB;
 		
@@ -344,7 +456,15 @@ class mod_groupformation_storage_manager {
 		}
 	}
 	
-	// -1 kein Eintrag, 0 hat schon mal angefangen zu beantworten, 1 hat seine Antworten abgegeben
+	/**
+	 * Returns answering status for user
+	 * 		0	seen
+	 * 		1	completed
+	 * 	   -1	otherwise
+	 * 
+	 * @param unknown $userId
+	 * @return number
+	 */
 	public function answeringStatus($userId) {
 		global $DB;
 		
@@ -368,7 +488,12 @@ class mod_groupformation_storage_manager {
 		}
 	}
 	
-	// $completed gibt an, ob nur die Anzahl der abgegebenen Fragebögen zurückgegeben werden soll
+	/**
+	 * Returns either number of completed questionaire or number of all started and completed questionaires
+	 * 
+	 * @param boolean $completed
+	 * @return number
+	 */
 	public function getNumberofAnswerStauts($completed) {
 		global $DB;
 		
@@ -386,6 +511,15 @@ class mod_groupformation_storage_manager {
 		
 		return $number;
 	}
+	
+	/**
+	 * Returns whether answer of a specific user for a specific question in a specific category exists or not
+	 * 
+	 * @param int $userId
+	 * @param string $category
+	 * @param int $questionId
+	 * @return boolean
+	 */
 	public function answerExist($userId, $category, $questionId) {
 		global $DB;
 		
@@ -395,10 +529,14 @@ class mod_groupformation_storage_manager {
 				'category' => $category,
 				'questionid' => $questionId 
 		) );
-		// var_dump($count);
 		return $count == 1;
 	}
 	
+	/**
+	 * Returns categories with at least one question, not just the scenario-based category set
+	 * 
+	 * @return multitype:multitype:string
+	 */
 	public function getCategories(){
 		$data = new mod_groupformation_data();
 		$category_set = $data->getCategorySet($this->getScenario());
@@ -411,6 +549,11 @@ class mod_groupformation_storage_manager {
 		return $categories;
 	}
 	
+	/**
+	 * Determines if no answers for groupformation exist
+	 * 
+	 * @return boolean
+	 */
 	public function generalAnswerNotExist() {
 		global $DB;
 		
@@ -418,7 +561,15 @@ class mod_groupformation_storage_manager {
 				'groupformation' => $this->groupformationid 
 		) ) == 0);
 	}
-	public function getAnswer($userId, $category) {
+	
+	/**
+	 * Returns all answers of a specific user in a specific category 
+	 * 
+	 * @param unknown $userId
+	 * @param unknown $category
+	 * @return multitype:
+	 */
+	public function getAnswers($userId, $category) {
 		global $DB;
 		
 		return $DB->get_records ( 'groupformation_answer', array (
@@ -427,6 +578,14 @@ class mod_groupformation_storage_manager {
 				'category' => $category 
 		) );
 	}
+	
+	/**
+	 * Returns all answers to a specific question in a specific category
+	 * 
+	 * @param unknown $category
+	 * @param unknown $questionId
+	 * @return multitype:
+	 */
 	public function getAnswersToSpecialQuestion($category, $questionId) {
 		global $DB;
 		
@@ -436,6 +595,15 @@ class mod_groupformation_storage_manager {
 				'questionid' => $questionId 
 		) );
 	}
+	
+	/**
+	 * Returns answer of a specific user to a specific question in a specific category
+	 * 
+	 * @param unknown $userId
+	 * @param unknown $category
+	 * @param unknown $qID
+	 * @return mixed
+	 */
 	public function getSingleAnswer($userId, $category, $qID) {
 		global $DB;
 		
@@ -446,6 +614,15 @@ class mod_groupformation_storage_manager {
 				'questionid' => $qID 
 		) );
 	}
+	
+	/**
+	 * Saves answer of a specific user to a specific question in a specific category
+	 * 
+	 * @param unknown $userId
+	 * @param unknown $answer
+	 * @param unknown $category
+	 * @param unknown $questionId
+	 */
 	public function saveAnswer($userId, $answer, $category, $questionId) {
 		global $DB;
 		
@@ -471,6 +648,12 @@ class mod_groupformation_storage_manager {
 			$DB->update_record ( 'groupformation_answer', $data );
 		}
 	}
+	
+	/**
+	 * Returns whether questionaire is available or not
+	 * 
+	 * @return boolean
+	 */
 	public function isQuestionaireAvailable() {
 		global $DB;
 		
@@ -493,6 +676,12 @@ class mod_groupformation_storage_manager {
 		
 		return false;
 	}
+	
+	/**
+	 * Assigns user to group A or group B (creates those if they do not exist)
+	 * 
+	 * @param unknown $userid
+	 */
 	public function assignToGroup($userid) {
 		global $DB,$COURSE;
 		$completed = 1;

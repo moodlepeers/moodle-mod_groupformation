@@ -48,7 +48,7 @@
 			$array = array();
 			$init = $this->storeM->catalogTableNotSet($category);
 			if($init == FALSE){
-				$this->storeM->delete_old_catalog_question($category);
+				$this->storeM->delete_all_catalog_questions($category);
 			}
 			$array[] = $this->save($category, 'en');
 			$array[] = $this->save($category, 'de');
