@@ -77,8 +77,7 @@
 			$this->question_manager->goBack();
 		}
 		
-		private function getProgressbar(){
-			$percent = $this->question_manager->getPercent($this->category);
+		private function getProgressbar($percent){
 			$percentage = $percent;
 			echo '<div class="progress">
   							<div class="questionaire_progress-bar" role="progressbar" aria-valuenow="'.$percentage.'" aria-valuemin="0" aria-valuemax="100" style="width:'.$percentage.'%">
@@ -122,11 +121,14 @@
 			$hasNext = $this->question_manager->hasNext();
 			if($this->question_manager->questionsToAnswer() && $hasNext){
 					// while($hasNext){
+					
 					$this->category = $this->question_manager->getCurrentCategory();
+					
+					$percent = $this->question_manager->getPercent($this->category);
 					
 					$this->getOverviewbar($this->category);
 					
-					$this->getProgressbar();
+					$this->getProgressbar($percent);
 					
 					$question = $this->question_manager->getNextQuestion();
 

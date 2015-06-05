@@ -38,7 +38,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 	 * @see moodleform::definition()
 	 */
 	function definition() {
-		global $PAGE;
+		global $PAGE,$USER;
 		
 		// Import jQuery and js file
 		addjQuery ( $PAGE, 'settings_functions.js' );
@@ -91,6 +91,8 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		
 		// Add standard buttons, common to all modules.
 		$this->add_action_buttons ();
+// 		TODO @Johannes hier ist ein Beispiel für ein Logging-Event (serverseitig)
+// 		groupformation_log($USER->id,$this->_instance,'<settings>');
 	}
 	
 	/**

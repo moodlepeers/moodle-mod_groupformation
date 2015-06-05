@@ -25,6 +25,8 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 	die ( 'Direct access to this script is forbidden.' ); // / It must be included from a Moodle page
 }
 
+
+require_once ($CFG->dirroot . '/mod/groupformation/locallib.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 
@@ -85,6 +87,8 @@ class mod_groupformation_infoText {
 							
 						</form>';
 		echo '</div>';
+// 		TODO @Johannes hier ist ein Beispiel für ein Logging-Event (serverseitig)
+// 		groupformation_log($this->userid,$this->truegroupformationid,'<index>');
 	}
 	public function statusB() {
 		global $USER;

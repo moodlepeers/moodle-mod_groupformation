@@ -35,68 +35,85 @@ defined ( 'MOODLE_INTERNAL' ) || die ();
  * }
  */
 
-$categoriesa = true;
+
+require_once($CFG->dirroot.'/mod/groupformation/classes/logging/logging_controller.php');
 
 /**
- * add jquery to view
+ * Adds jQuery
  *
  * @param unknown $PAGE        	
  * @param string $filename        	
  */
 function addjQuery($PAGE, $filename = null) {
-	$PAGE->requires->jquery();
-	$PAGE->requires->jquery_plugin('ui');
-	$PAGE->requires->jquery_plugin('ui-css');
+	$PAGE->requires->jquery ();
+	$PAGE->requires->jquery_plugin ( 'ui' );
+	$PAGE->requires->jquery_plugin ( 'ui-css' );
 	
 	if (! is_null ( $filename )) {
 		$PAGE->requires->js ( '/mod/groupformation/js/' . $filename );
 	}
-	
 }
 
-function answeredAllQuestions($userid,$groupformationid){
-	global $DB;
-	$categorysets = array (
-			1 => array (
-					'topic',
-					'knowledge',
-					'general',
-					'grade',
-					'team',
-					'character',
-					'motivation' 
-			),
-			2 => array (
-					'topic',
-					'knowledge',
-					'general',
-					'grade',
-					'team',
-					'character',
-					'learning' 
-			),
-			3 => array (
-					'topic',
-					'general' 
-			) 
-	);
-	$scenario = $DB->get_record('groupformation', array('id'=>$groupformationid))->szenario;
-	$categories = array ();
-	foreach ( $DB->get_records ( 'groupformation_q_version' ) as $record ) {
-		$categories [$record->category] = intval($record->numberofquestion);
-	}
-	$stats = array ();
-	foreach ( $categories as $key => $value ) {
-		if (in_array($key,$categorysets[$scenario])){
-			$count = $DB->count_records ( 'groupformation_answer', array (
-					'groupformation' => $groupformationid,
-					'userid' => $userid,
-					'category' => $key
-			) );
-			if ($value-$count>0){
-				return true;
-			}
-		}
-	}
-	return false;
+/**
+ * Logs action
+ *
+ * @param unknown $PAGE
+ * @param string $filename
+ */
+function groupformation_log($userid, $groupformationid, $message) {
+	
+	$logging_controller = new mod_groupformation_logging_controller();
+	
+	return $logging_controller->handle($userid,$groupformationid,$message);
 }
+
+
+
+// function answeredAllQuestions($userid, $groupformationid) {
+// 	global $DB;
+// 	$categorysets = array (
+// 			1 => array (
+// 					'topic',
+// 					'knowledge',
+// 					'general',
+// 					'grade',
+// 					'team',
+// 					'character',
+// 					'motivation' 
+// 			),
+// 			2 => array (
+// 					'topic',
+// 					'knowledge',
+// 					'general',
+// 					'grade',
+// 					'team',
+// 					'character',
+// 					'learning' 
+// 			),
+// 			3 => array (
+// 					'topic',
+// 					'general' 
+// 			) 
+// 	);
+// 	$scenario = $DB->get_record ( 'groupformation', array (
+// 			'id' => $groupformationid 
+// 	) )->szenario;
+// 	$categories = array ();
+// 	foreach ( $DB->get_records ( 'groupformation_q_version' ) as $record ) {
+// 		$categories [$record->category] = intval ( $record->numberofquestion );
+// 	}
+// 	$stats = array ();
+// 	foreach ( $categories as $key => $value ) {
+// 		if (in_array ( $key, $categorysets [$scenario] )) {
+// 			$count = $DB->count_records ( 'groupformation_answer', array (
+// 					'groupformation' => $groupformationid,
+// 					'userid' => $userid,
+// 					'category' => $key 
+// 			) );
+// 			if ($value - $count > 0) {
+// 				return true;
+// 			}
+// 		}
+// 	}
+// 	return false;
+// }

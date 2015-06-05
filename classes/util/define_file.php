@@ -123,6 +123,7 @@ class mod_groupformation_data {
 					'topic',
 					'knowledge',
 					'grade',
+					'team',
 					'character',
 					'motivation' 
 			) 
