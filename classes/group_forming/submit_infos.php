@@ -37,6 +37,7 @@
 		public function __construct($groupformationid){
 			$this->groupformationid = $groupformationid;
 			$this->userid_filter = new mod_groupformation_userid_filter($groupformationid);
+			
 		}
 		
 		public function getInfos(){

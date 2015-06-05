@@ -84,7 +84,6 @@ if ($groupformation->intro) {
 echo $OUTPUT->heading ( $groupformation->name );
 
 require_once (dirname ( __FILE__ ) . '/classes/group_forming/submit_infos.php');
-
 $infos = new mod_groupformation_submit_infos ( $groupformation->id );
 $infos->getInfos ();
 

@@ -42,6 +42,7 @@ class mod_groupformation_storage_manager {
 	 */
 	public function __construct($groupformationid) {
 		$this->groupformationid = $groupformationid;
+		
 	}
 	
 	// public function add_question($question){
@@ -121,12 +122,11 @@ class mod_groupformation_storage_manager {
 		// Kann man hier nicht mit groupformation_started arbeiten. 
 		// Da stehen schließlich auch alle Nutzer einmalig drin, 
 		// die bereits geantwortet haben in einer Form
-		
-		$array = array ();
-		$DB->
+		$array = array ();		
 		$records = $DB->get_records ( 'groupformation_answer', array (
 				'groupformation' => $this->groupformationid 
 		) );
+		
 		// TODO Verbessern mit explizitem SQL-Befehl
 		foreach ( $records as $record ) {
 			if (! in_array ( $record->userid, $array )) {
