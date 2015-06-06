@@ -72,6 +72,14 @@
 		private $numberOfCategory;
 	//	private $currentCategory;
 		
+		/**
+		 * Constructs question controller instance
+		 * 
+		 * @param unknown $groupformationid
+		 * @param unknown $lang
+		 * @param unknown $userId
+		 * @param unknown $oldCategory
+		 */
 		public function __construct($groupformationid, $lang, $userId, $oldCategory){
 			$this->groupformationid = $groupformationid;
 			$this->lang = $lang;
@@ -97,6 +105,12 @@
 			}
 		}
 		
+		/**
+		 * Returns percentage of answered questions
+		 * 
+		 * @param string $category
+		 * @return number
+		 */
 		public function getPercent($category = null){
 			
 			if (!is_null($category)){
@@ -143,42 +157,6 @@
 				$this->currentCategoryPosition = mod_groupformation_data::getPosition($category);
 				$this->currentCategoryPosition++;
 			}
-			
-			
-// 			if($category == 'knowledge'){
-// 				$this->currentCategoryPosition = KNOWLEDGE;
-// 				$this->currentCategoryPosition++;
-// 			}
-			
-// 			if($category == 'general'){
-// 				$this->currentCategoryPosition = GENERAL;
-// 				$this->currentCategoryPosition++;
-// 			}
-			
-// 			if($category == 'grade'){
-// 				$this->currentCategoryPosition = GRADE;
-// 				$this->currentCategoryPosition++;
-// 			}
-			
-// 			if($category == 'motivation'){
-// 				$this->currentCategoryPosition = MOTIVATION;
-// 				$this->currentCategoryPosition++;
-// 			}
-			
-// 			if($category == 'learning'){
-// 				$this->currentCategoryPosition = LEARNING;
-// 				$this->currentCategoryPosition++;
-// 			}
-			
-// 			if($category == 'team'){
-// 				$this->currentCategoryPosition = TEAM;
-// 				$this->currentCategoryPosition++;
-// 			}
-			
-// 			if($category == 'character'){
-// 				$this->currentCategoryPosition = CHARACTER;
-// 				$this->currentCategoryPosition++;
-// 			}
 			
 		}
 		

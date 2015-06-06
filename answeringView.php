@@ -127,10 +127,10 @@
 		$questionManager = new mod_groupformation_questionaire($cm->id,$groupformation->id, get_string('language','groupformation'), $userId, $category);
 		
 		if($direction == 0){
-			$questionManager->goback();
+			$questionManager->goBack();
 		}
 		
-		$questionManager->getQuestions();
+		$questionManager->printQuestions();
 		
 	}else if($category == 'no'){
 		if(isset($_POST["action"]) && $_POST["action"] == 1){

@@ -42,8 +42,6 @@
 	
 	class mod_groupformation_questionaire {
 
-		
-			
 		private $cmid;
 		private $groupformationid;
 		private $lang;
@@ -58,8 +56,15 @@
 		private $gradesCount;
 		private $category = "";
 			
-		
-		
+		/**
+		 * Constructs questionaire instance
+		 * 
+		 * @param unknown $cmid
+		 * @param unknown $groupformationid
+		 * @param unknown $lang
+		 * @param unknown $userId
+		 * @param unknown $category
+		 */
 		public function __construct($cmid, $groupformationid, $lang, $userId, $category){
 			
 			$this->cmid = $cmid;
@@ -73,11 +78,19 @@
 			$this->topics = new TopicsTable();
 		}
 		
-		public function goback(){
+		/**
+		 * Goes back one questionaire page
+		 */
+		public function goBack(){
 			$this->question_manager->goBack();
 		}
 		
-		private function getProgressbar($percent){
+		/**
+		 * Prints progressbar
+		 * 
+		 * @param unknown $percent
+		 */
+		private function printProgressbar($percent){
 			$percentage = $percent;
 			echo '<div class="progress">
   							<div class="questionaire_progress-bar" role="progressbar" aria-valuenow="'.$percentage.'" aria-valuemin="0" aria-valuemax="100" style="width:'.$percentage.'%">
@@ -85,7 +98,12 @@
 						  </div>';
 		}
 		
-		private function getOverviewbar($activeCategory){
+		/**
+		 * Prints overview bar with active category
+		 * 
+		 * @param unknown $activeCategory
+		 */
+		private function printOverviewbar($activeCategory = null){
 			$data = new mod_groupformation_data();
 			$store = new mod_groupformation_storage_manager($this->groupformationid);
 			$scenario = $store->getScenario();
@@ -113,11 +131,12 @@
 			echo '</div><!-- /navbar -->';
 		}
 		
-		public function getQuestions(){
+		/**
+		 * Prints Questions
+		 */
+		public function printQuestions(){
 			global $USER;
-			// TODO @Nora @Rene
-			// Es muss eine Methode eingebaut werden um den Fragebogen in mehrere Tabs zu splitten.
-			
+
 			$hasNext = $this->question_manager->hasNext();
 			if($this->question_manager->questionsToAnswer() && $hasNext){
 					// while($hasNext){
@@ -126,9 +145,9 @@
 					
 					$percent = $this->question_manager->getPercent($this->category);
 					
-					$this->getOverviewbar($this->category);
+					$this->printOverviewbar($this->category);
 					
-					$this->getProgressbar($percent);
+					$this->printProgressbar($percent);
 					
 					$question = $this->question_manager->getNextQuestion();
 
@@ -247,18 +266,5 @@
 						</form>';
 			}
 			
-
-			// TODO @Nora @Rene: Die Buttons des Formulars einfach per echo ausgeben oder m�ssen an dieser Stelle Moodle Elemente benutzt werden?
-			// Die Buttons sowie die Schlie�ung des Formulars muss am Ende jedes Tabs erfolgen.
-// 			echo '
-// 			<div class="grid">
-// 			<div class="col_100">
-// 			<button type="reset" class="f_btn">Cancel</button>
-// 			<button type="button" class="f_btn">Save</button>
-// 			<button type="submit" class="f_btn">Next</button>
-// 			</div>
-// 			</div> <!-- /grid -->';
-// 			// Ende des Formulars
-// 			echo '</form>';
 		}
 	}
