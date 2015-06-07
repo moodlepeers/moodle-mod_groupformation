@@ -92,11 +92,12 @@ $surveyStatisticNumers = $infos->getInfos ();
 echo '
 <div class="gf_settings_pad">
                     <div class="gf_pad_header">Groupformation - '. $groupformation->name .'
-</div>
+                    </div>
                     <div class="gf_pad_content">
                         <div class="grid">
                             <div class="col_m_66 bp_align_left-middle">
-                                <span>Die Aktivit&auml;t "Groupformation" l&auml;uft bereits und endet am 00.00.0000 um 0:00 Uhr</span>
+                                <span>Die Aktivit&auml;t "Groupformation" l&auml;uft bereits und endet am 00.00.0000 um 0:00 Uhr.</span></br></br>
+                                <span><i>Nach Abauf der Aktivität ist es den Studierenden nicht mehr möglich Fragebögen auszufühlen bzw abzugeben. Die Gruppenbildung kann nach dem Ablauf oder manuellen stoppen der Aktivität erfolgen!</i></span>
                                 <span style="display:none;">Die Aktivit&auml;t "Groupformation" ist f&uuml;r Studierende ab dem 00.00.0000 um 0:00 Uhr verf&uuml;gbar und endet am 00.00.0000 um 0:00 Uhr</span>
                                 <span><i></i></span>
                             </div>
@@ -108,8 +109,8 @@ echo '
                     </div>
 
                     <div class="gf_pad_header_small">
-Fragebogen Statistik
-</div>
+                        Fragebogen Statistik
+                    </div>
                     <div class="gf_pad_content">
                         <div class="grid row_highlight">
                             <div class="col_m_87-5">Es haben <b>'. $surveyStatisticNumers[0] .'</b> Studenten den Fragebogen bearbeitet</div>
@@ -133,16 +134,16 @@ Fragebogen Statistik
 
                 <div class="gf_settings_pad">
                     <div class="gf_pad_header">
-Gruppenbildung
+                        Gruppenbildung
                     </div>
                     <div class="gf_pad_content bp_align_left-middle">
-                        <button class="gf_button gf_button_pill gf_button_small" disabled>Gruppenbildung starten</button>
+                        <button class="gf_button gf_button_pill gf_button_small" disabled>Gruppen bilden</button>
                         <button class="gf_button gf_button_pill gf_button_small" disabled>Gruppenbildung stoppen</button>
                         <button class="gf_button gf_button_pill gf_button_small" >Gruppen l&ouml;schen</button>
                         <p>Statusanzeige "Gruppenbildung l&auml;uft..." mit %Zahl oder voraussichtlicher Endzeit</p>
                     </div>
                     <div class="gf_pad_header_small">
-Auswertung
+                        Auswertung
                     </div>
                     <div class="gf_pad_content">
                         <p>Gleichm&auml;&szlig;igkeit der Gruppen: <b>0.7</b><span class="toolt" tooltip="ein Wert > 0.5 ist gut"></span></p>
@@ -153,23 +154,23 @@ Auswertung
                     <div class="gf_pad_content">
                         <div class="grid row_highlight">
                             <div class="col_m_87-5">Gruppennamen_16 - Anzahl Mitglieder: <b>3</b> </div>
-                            <div class="col_m_12-5 bp_align_right-middle"><button class="gf_button gf_button_pill gf_button_tiny">view</button></div>
+                            <div class="col_m_12-5 bp_align_right-middle"><button class="gf_button gf_button_pill gf_button_tiny">scroll to</button></div>
                         </div>
                         <div class="grid row_highlight">
                             <div class="col_m_87-5">Gruppennamen_18 - Anzahl Mitglieder: <b>3</b> </div>
-                            <div class="col_m_12-5 bp_align_right-middle"><button class="gf_button gf_button_pill gf_button_tiny">view</button></div>
+                            <div class="col_m_12-5 bp_align_right-middle"><button class="gf_button gf_button_pill gf_button_tiny">scroll to</button></div>
                         </div>
                         <div class="grid row_highlight">
                             <div class="col_m_87-5">Gruppennamen_25 - Anzahl Mitglieder: <b>1</b> </div>
-                            <div class="col_m_12-5 bp_align_right-middle"><button class="gf_button gf_button_pill gf_button_tiny">view</button></div>
+                            <div class="col_m_12-5 bp_align_right-middle"><button class="gf_button gf_button_pill gf_button_tiny">scroll to</button></div>
                         </div>
                         <div class="grid row_highlight">
                             <div class="col_m_87-5">Gruppennamen_36 - Anzahl Mitglieder: <b>2</b> </div>
-                            <div class="col_m_12-5 bp_align_right-middle"><button class="gf_button gf_button_pill gf_button_tiny">view</button></div>
+                            <div class="col_m_12-5 bp_align_right-middle"><button class="gf_button gf_button_pill gf_button_tiny">scroll to</button></div>
                         </div>
                         <div class="grid row_highlight">
                             <div class="col_m_87-5">Gruppennamen_99 - Anzahl Mitglieder: <b>3</b> </div>
-                            <div class="col_m_12-5 bp_align_right-middle"><button class="gf_button gf_button_pill gf_button_tiny">view</button></div>
+                            <div class="col_m_12-5 bp_align_right-middle"><button class="gf_button gf_button_pill gf_button_tiny">scroll to</button></div>
                         </div>
                     </div>
                     <div class="gf_pad_header_small">
