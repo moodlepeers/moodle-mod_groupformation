@@ -81,7 +81,7 @@ if ($groupformation->intro) {
 }
 
 // Replace the following lines with you own code.
-echo $OUTPUT->heading ( $groupformation->name );
+//echo $OUTPUT->heading ( $groupformation->name );
 
 require_once (dirname ( __FILE__ ) . '/classes/group_forming/submit_infos.php');
 $infos = new mod_groupformation_submit_infos ( $groupformation->id );
@@ -91,13 +91,14 @@ $surveyStatisticNumers = $infos->getInfos ();
 
 echo '
 <div class="gf_settings_pad">
-                    <div class="gf_pad_header">Groupformation - Mathe 1(Titel)
+                    <div class="gf_pad_header">Groupformation - '. $groupformation->name .'
 </div>
                     <div class="gf_pad_content">
                         <div class="grid">
                             <div class="col_m_66 bp_align_left-middle">
                                 <span>Die Aktivit&auml;t "Groupformation" l&auml;uft bereits und endet am 00.00.0000 um 0:00 Uhr</span>
                                 <span style="display:none;">Die Aktivit&auml;t "Groupformation" ist f&uuml;r Studierende ab dem 00.00.0000 um 0:00 Uhr verf&uuml;gbar und endet am 00.00.0000 um 0:00 Uhr</span>
+                                <span><i></i></span>
                             </div>
 
                             <div class="col_m_33 bp_align_right-middle">
@@ -147,7 +148,9 @@ Auswertung
                         <p>Gleichm&auml;&szlig;igkeit der Gruppen: <b>0.7</b><span class="toolt" tooltip="ein Wert > 0.5 ist gut"></span></p>
                         <p>Anzahl gebildeter Gruppen: <b>100</b></p>
                         <p>Maximale Gruppengr&ouml;&szlig;e: <b>6</b></p>
-                        <p>Maximale Gruppengr&ouml;&szlig;e wurde bei folgenden Gruppen nicht erreicht: </p>
+                    </div>
+                        <div class="gf_pad_header_small">Maximale Gruppengr&ouml;&szlig;e wurde bei folgenden Gruppen nicht erreicht: </div>
+                    <div class="gf_pad_content">
                         <div class="grid row_highlight">
                             <div class="col_m_87-5">Gruppennamen_16 - Anzahl Mitglieder: <b>3</b> </div>
                             <div class="col_m_12-5 bp_align_right-middle"><button class="gf_button gf_button_pill gf_button_tiny">view</button></div>
@@ -170,8 +173,8 @@ Auswertung
                         </div>
                     </div>
                     <div class="gf_pad_header_small">
-                    &Uuml;bersicht gebildeter Gruppen
-</div>
+                        &Uuml;bersicht gebildeter Gruppen
+                    </div>
                     <div class="gf_pad_content">
                         <div class="grid bottom_stripe">
                             <div class="col_s_50">Name: <b>Gruppennamen_1</b></div>

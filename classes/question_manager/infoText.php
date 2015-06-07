@@ -87,7 +87,7 @@ class mod_groupformation_infoText {
 							
 						</form>';
 		echo '</div>';
-// 		TODO @Johannes hier ist ein Beispiel für ein Logging-Event (serverseitig)
+// 		TODO @Johannes hier ist ein Beispiel fï¿½r ein Logging-Event (serverseitig)
 // 		groupformation_log($this->userid,$this->truegroupformationid,'<index>');
 	}
 	public function statusB() {
@@ -181,7 +181,7 @@ class mod_groupformation_infoText {
 	 * echoes stats about answered and misssing questions
 	 */
 	private function printStats() {
-		echo '<div class="questionaire_stats col_90">';
+		echo '<div class="questionaire_stats col_m_66">';
 		echo '<table class="responsive-table">';
 		echo '<thead><tr><th scope="col">';
 		echo '<div>';

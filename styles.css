@@ -115,7 +115,7 @@ footer {
 /*
   background: white;
 */
-  margin: 0 0 20px 0; }
+/*  margin: 0 0 20px 0;*/ }
   .grid:after {
     content: "";
     display: table;
@@ -421,6 +421,7 @@ h4 label:hover {
     /* needed - do not touch */
     opacity: 1;
     /* customizable */
+    text-align: center;
     border: 1px solid #fff257;
     background-color: #fffbb9;
     margin-top: -50px;
