@@ -240,7 +240,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
                             <div class="grid">
                             <div id="prk">    
                             <div class="multi_field_wrapper persist-area">
-                                <div class="col_50">
+                                <div class="col_m_50">
                                 <div id="" class="btn_wrap">
                                     <label>
                                         <button type="button" class="add_field"></button>' . get_string ( 'add_line', 'groupformation' ) . '</label> 
@@ -266,7 +266,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
                                     </div> <!-- /col_50 -->   
                                     
 <!--                      Die Vorschau      -->
-                                    <div class="col_50">
+                                    <div class="col_m_50">
                                         
                                         <h3>' . get_string ( 'preview', 'groupformation' ) . '</h3>
                     

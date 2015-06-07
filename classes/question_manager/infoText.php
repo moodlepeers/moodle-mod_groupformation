@@ -68,9 +68,9 @@ class mod_groupformation_infoText {
 		$this->store = new mod_groupformation_storage_manager ( $truegroupformationid );
 	}
 	public function statusA() {
-		echo '<div class="questionaire_status">' . get_string ( 'questionaire_not_started', 'groupformation' ) . '</div>';
-		echo '<div class="questionaire_button_text">' . get_string ( 'questionaire_press_to_begin', 'groupformation' ) . '</div>';
-		echo '<div class="questionaire_button_row">';
+		echo '<div class="questionaire_status col_m_100">' . get_string ( 'questionaire_not_started', 'groupformation' ) . '</div>';
+		echo '<div class="questionaire_button_text col_m_100">' . get_string ( 'questionaire_press_to_begin', 'groupformation' ) . '</div>';
+		echo '<div class="questionaire_button_row col_m_100">';
 		echo '<form action="' . htmlspecialchars ( $_SERVER ["PHP_SELF"] ) . '" method="post" autocomplete="off">';
 		
 		// hier schicke ich verdeckt groupformationID und die Information, ob der Fragebogen angezeigt werden soll
@@ -80,7 +80,7 @@ class mod_groupformation_infoText {
 		echo '<input type="hidden" name="id" value="' . $this->groupformationid . '"/>';
 		echo '
 						<div class="grid">
-						<div class="col_100">
+						<div class="col_m_100">
 							<input type="submit" value="' . get_string ( "next" ) . '" />
 						</div>
 						</div>
@@ -93,9 +93,9 @@ class mod_groupformation_infoText {
 	public function statusB() {
 		global $USER;
 		$this->printStats ();
-		echo '<div class="col_100">' . get_string ( 'questionaire_not_submitted', 'groupformation' ) . '</div>';
-		echo '<div class="col_100">' . get_string ( 'questionaire_press_continue_submit', 'groupformation' ) . '</div>';
-		echo '<div class="col_100">';
+		echo '<div class="col_m_100">' . get_string ( 'questionaire_not_submitted', 'groupformation' ) . '</div>';
+		echo '<div class="col_m_100">' . get_string ( 'questionaire_press_continue_submit', 'groupformation' ) . '</div>';
+		echo '<div class="col_m_100">';
 		echo '<form action="' . htmlspecialchars ( $_SERVER ["PHP_SELF"] ) . '" method="post" autocomplete="off">';
 		
 		// hier schicke ich verdeckt groupformationID und die Information, ob der Fragebogen angezeigt werden soll
@@ -110,7 +110,7 @@ class mod_groupformation_infoText {
 		
 		echo '
 						<div class="grid">
-						<div class="col_100">
+						<div class="col_m_100">
 							<button type="submit" name="begin" value="1">' . get_string ( 'edit' ) . '</button>
 							<button type="submit" name="begin" value="0" ' . (($disabled) ? 'disabled' : '') . '>' . get_string ( 'questionaire_submit', 'groupformation' ) . '</button>
 						</div>
@@ -225,9 +225,9 @@ class mod_groupformation_infoText {
 		$end = intval ( $a ['end_raw'] );
 		
 		if (! ($start == 0) && ! ($end == 0)) {
-			echo '<div class="questionaire_status">' . get_string ( 'questionaire_availability_info_now', 'groupformation', $a ) . '</div>';
+			echo '<div class="questionaire_status col_m_100">' . get_string ( 'questionaire_availability_info_now', 'groupformation', $a ) . '</div>';
 		} elseif (($start == 0) && ($end > 0)) {
-			echo '<div class="questionair_status">' . get_string ( 'questionaire_availability_info_until', 'groupformation', $a ) . '</div>';
+			echo '<div class="questionair_status col_m_100">' . get_string ( 'questionaire_availability_info_until', 'groupformation', $a ) . '</div>';
 		}
 	}
 	public function notAvailableInfo() {
