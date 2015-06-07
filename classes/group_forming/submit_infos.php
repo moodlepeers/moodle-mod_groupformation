@@ -39,15 +39,19 @@
 			$this->userid_filter = new mod_groupformation_userid_filter($groupformationid);
 			
 		}
-		
+
 		public function getInfos(){
 			$numbers = $this->userid_filter->getNumbersOfAnswerStatus();
-			var_dump('Es haben ' . $numbers[0] . ' Studenten den Fragebogen bearbeitet');
-			var_dump('Davon haben ' . $numbers[1] . ' ihre Antworten schon fest abgegeben');
-			$commitedNoneComplete = $this->userid_filter->getNumberOfCommitedNoneCompleted();
-			var_dump('Von den fest abgegebenen Antworten sind ' . $commitedNoneComplete . ' nicht vollständig');
-			$generalCompleted = $this->userid_filter->getNumberOfCompleted();
-			var_dump('Generel gibt es ' . $generalCompleted . ' vollst&auml;ndig beantwortete Fragebögen');
+			//var_dump('Es haben ' . $numbers[0] . ' Studenten den Fragebogen bearbeitet');
+			//var_dump('Davon haben ' . $numbers[1] . ' ihre Antworten schon fest abgegeben');
+			//$commitedNoneComplete = $this->userid_filter->getNumberOfCommitedNoneCompleted();
+           // var_dump('Von den fest abgegebenen Antworten sind ' . $commitedNoneComplete . ' nicht vollstï¿½ndig');
+			//$generalCompleted = $this->userid_filter->getNumberOfCompleted();
+			//var_dump('Generel gibt es ' . $generalCompleted . ' vollst&auml;ndig beantwortete Fragebï¿½gen');
+            $numbers [2] = $this->userid_filter->getNumberOfCommitedNoneCompleted();
+            $numbers [3] = $this->userid_filter->getNumberOfCompleted();
+            return $numbers;
 		}
-		
+
+
 	}
