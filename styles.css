@@ -124,7 +124,7 @@ footer {
 .grid-pad {
   padding: 20px 0 20px 20px; }
 
-/*.col_25 {
+.col_25 {
   width: 25%; }
   @media (max-width: 48em) {
     .col_25 {
@@ -155,7 +155,7 @@ footer {
       width: 100%; } }
 
 .col_100 {
-  width: 100%; }*/
+  width: 100%; }
 
  
 .questionaire_status {
