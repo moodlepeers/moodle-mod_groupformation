@@ -44,6 +44,7 @@
 		//Extraversion | Gewissenhaftigkeit | Verträglichkeit | Neurotizismus | Offenheit
 		private $BIG5 = array(array(6), array(8), array(2, 11), array(9), array(10));
 		private $BIG5Invert = array(array(1), array(3), array(7), array(4), array(5));
+		private $BIG5Homogen = array(1, 2);
 		//Herausforderung | Interesse | Ergolgswahrscheinlichkeit | Misserfolgsbefürchtung
 		private $FAM = array(array(6, 8, 10, 15, 17), array(1, 4, 7, 11), array(2, 3, 13, 14), array(5, 9, 12, 16, 18));
 		//Konkrete Erfahrung | Aktives Experimentieren | Reflektierte Beobachtung | Abstrakte Begriffsbildung
@@ -219,9 +220,12 @@
 		 * @param unknown $userId
 		 * @return multitype:array
 		 */
+		//array aus zwei arrays -> Position 0 heterogen | Position 1 homogen
 		public function getBig5($userId){
 			
 			$array = array();
+			$heterogen = array();
+			$homogen = array();
 			$category = 'character';
 			
 			$count = count($this->BIG5);
@@ -237,9 +241,15 @@
 				foreach ($this->BIG5Invert[$i] as $num){
 					$temp = $temp + $this->inverse($num, $category, $this->store->getSingleAnswer($userId, $category, $num));
 				}
-				$array[] = $temp;
+				if(in_array($i, $this->BIG5Homogen)){
+					$homogen[] = $temp;
+				}else{
+					$heterogen[] = $temp;
+				}
 			}
 			
+			$array[] = $heterogen;
+			$array[] = $homogen;
 			return $array;
 // 			//Extraversion
 // 			$temp = 0;
@@ -316,7 +326,7 @@
 				$total = $total + $answer->answer;
 				$numberOf++;
 			}
-			$array[] = $total/numberOf;
+			$array[] = $total/$numberOf;
 			
 			return $array;
 		}

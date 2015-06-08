@@ -42,7 +42,6 @@ class mod_groupformation_storage_manager {
 	 */
 	public function __construct($groupformationid) {
 		$this->groupformationid = $groupformationid;
-		
 	}
 	
 	// public function add_question($question){
@@ -118,20 +117,17 @@ class mod_groupformation_storage_manager {
 	 */
 	public function getTotalUserIds() {
 		global $DB;		
-		// TODO @Nora
-		// Kann man hier nicht mit groupformation_started arbeiten. 
-		// Da stehen schließlich auch alle Nutzer einmalig drin, 
-		// die bereits geantwortet haben in einer Form
-		$array = array ();		
-		$records = $DB->get_records ( 'groupformation_answer', array (
+		
+		$array = array ();
+		
+		$records = $DB->get_records ( 'groupformation_started', array (
 				'groupformation' => $this->groupformationid 
 		) );
 		
-		// TODO Verbessern mit explizitem SQL-Befehl
 		foreach ( $records as $record ) {
-			if (! in_array ( $record->userid, $array )) {
-				$array [] = $record->userid;
-			}
+			
+			$array [] = $record->userid;
+			
 		}
 		
 		return $array;
@@ -178,7 +174,8 @@ class mod_groupformation_storage_manager {
 		$data = new mod_groupformation_data ();
 		
 		$scenario = $this->getScenario();
-		$names = $data->getCategorySet($scenario);
+		//$names = $data->getCategorySet($scenario);
+		$names = $data->getCriterionSet($scenario);
 		$number = 0;
 		foreach ( $names as $name ) {
 			$number = $number + $DB->count_records ( 'groupformation_answer', array (
@@ -199,6 +196,8 @@ class mod_groupformation_storage_manager {
 	public function hasAnsweredEverything($userid) {
 		$scenario = $this->getScenario();
 		$data = new mod_groupformation_data ();
+		//TODO @René
+		//Sollte man hier nicht auf das CriterionSet zugreifen
 		$categories = $data->getCategorySet($scenario);
 		$sum = array_sum($this->getNumbers($categories));
 		$user_sum = $this->answerNumberForUser($userid);
@@ -678,6 +677,7 @@ class mod_groupformation_storage_manager {
 	}
 	
 	/**
+	 * @René willst du dass nicht lieber in eine neue Klasse auslagern?
 	 * Assigns user to group A or group B (creates those if they do not exist)
 	 * 
 	 * @param unknown $userid
@@ -737,6 +737,10 @@ class mod_groupformation_storage_manager {
 		}
 	}
 	
+	public function getGroupSize(){
+		global $DB;
+		return $DB->get_field('groupformation', 'maxmembers', array('id' => $this->groupformationid));
+	}
 	// public function existSetting(){
 	// global $DB;
 	

@@ -42,6 +42,8 @@
 	
 	class mod_groupformation_questionaire {
 
+		
+			
 		private $cmid;
 		private $groupformationid;
 		private $lang;
@@ -55,21 +57,18 @@
 		private $qNumber = 1;
 		private $gradesCount;
 		private $category = "";
-			
-		/**
-		 * Constructs questionaire instance
-		 * 
-		 * @param unknown $cmid
-		 * @param unknown $groupformationid
-		 * @param unknown $lang
-		 * @param unknown $userId
-		 * @param unknown $category
-		 */
+		//--- Mathevorkurs
+		private $notAllAnswers = false;
+		
+		//---	
+		
+		
 		public function __construct($cmid, $groupformationid, $lang, $userId, $category){
 			
 			$this->cmid = $cmid;
 			$this->groupformationid = $groupformationid;
 			$this->lang = $lang;
+			
 			$this->question_manager = new mod_groupformation_question_controller($groupformationid, $lang, $userId, $category);
 			$this->header = new HeaderOfInput();
 			$this->range = new RangeInput();
@@ -78,18 +77,17 @@
 			$this->topics = new TopicsTable();
 		}
 		
-		/**
-		 * Goes back one questionaire page
-		 */
 		public function goBack(){
 			$this->question_manager->goBack();
 		}
 		
-		/**
-		 * Prints progressbar
-		 * 
-		 * @param unknown $percent
-		 */
+		// --- Mathevorkurs
+		public function goNotOn(){
+			$this->question_manager->goNotOn();
+			$this->notAllAnswers = true;
+		}
+		// ---
+		
 		private function printProgressbar($percent){
 			$percentage = $percent;
 			echo '<div class="progress">
@@ -98,12 +96,7 @@
 						  </div>';
 		}
 		
-		/**
-		 * Prints overview bar with active category
-		 * 
-		 * @param unknown $activeCategory
-		 */
-		private function printOverviewbar($activeCategory = null){
+	private function printOverviewbar($activeCategory = null){
 			$data = new mod_groupformation_data();
 			$store = new mod_groupformation_storage_manager($this->groupformationid);
 			$scenario = $store->getScenario();
@@ -131,16 +124,17 @@
 			echo '</div><!-- /navbar -->';
 		}
 		
-		/**
-		 * Prints Questions
-		 */
+		//--- Mathevorkurs
+		private function notAllAnswers(){
+			echo 'Du hast nicht alle Fragen beantwortet';
+		}
+		//---
+		
 		public function printQuestions(){
-			global $USER;
-
+			
 			$hasNext = $this->question_manager->hasNext();
 			if($this->question_manager->questionsToAnswer() && $hasNext){
 					// while($hasNext){
-					
 					$this->category = $this->question_manager->getCurrentCategory();
 					
 					$percent = $this->question_manager->getPercent($this->category);
@@ -148,6 +142,12 @@
 					$this->printOverviewbar($this->category);
 					
 					$this->printProgressbar($percent);
+					
+					//--- MAthevorkurs
+					if($this->notAllAnswers){
+						$this->notAllAnswers();
+					}
+					//---
 					
 					$question = $this->question_manager->getNextQuestion();
 
@@ -248,9 +248,11 @@
 					echo '<input type="hidden" name="id" value="' . $this->groupformationid . '"/>';
 				}
 				
-				$store = new mod_groupformation_storage_manager($this->groupformationid);
+			//	$store = new mod_groupformation_storage_manager($this->groupformationid);
 				
-				$hasAnsweredEverything = $store->hasAnsweredEverything($USER->id);
+			//	$hasAnsweredEverything = $store->hasAnsweredEverything($this->userId);
+				
+				$hasAnsweredEverything = $this->question_manager->hasAllAnswered();
 				
 				$disabled = !$hasAnsweredEverything;
 				

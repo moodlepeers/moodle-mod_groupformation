@@ -25,7 +25,6 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 	die ( 'Direct access to this script is forbidden.' ); // / It must be included from a Moodle page
 }
 
-
 require_once ($CFG->dirroot . '/mod/groupformation/locallib.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
@@ -35,30 +34,30 @@ class mod_groupformation_infoText {
 	private $groupformationid;
 	private $userid;
 	private $truegroupformationid;
-	private $categorysets = array (
-			1 => array (
-					'topic',
-					'knowledge',
-					'general',
-					'grade',
-					'team',
-					'character',
-					'motivation' 
-			),
-			2 => array (
-					'topic',
-					'knowledge',
-					'general',
-					'grade',
-					'team',
-					'character',
-					'learning' 
-			),
-			3 => array (
-					'topic',
-					'general' 
-			) 
-	);
+// 	private $categorysets = array (
+// 			1 => array (
+// 					'topic',
+// 					'knowledge',
+// 					'general',
+// 					'grade',
+// 					'team',
+// 					'character',
+// 					'motivation' 
+// 			),
+// 			2 => array (
+// 					'topic',
+// 					'knowledge',
+// 					'general',
+// 					'grade',
+// 					'team',
+// 					'character',
+// 					'learning' 
+// 			),
+// 			3 => array (
+// 					'topic',
+// 					'general' 
+// 			) 
+// 	);
 	private $store;
 	public function __construct($groupformationid, $userid, $truegroupformationid) {
 		// its not the groupformation id -> its also unused so far
@@ -87,8 +86,8 @@ class mod_groupformation_infoText {
 							
 						</form>';
 		echo '</div>';
-// 		TODO @Johannes hier ist ein Beispiel fï¿½r ein Logging-Event (serverseitig)
-// 		groupformation_log($this->userid,$this->truegroupformationid,'<index>');
+		// 		TODO @Johannes hier ist ein Beispiel für ein Logging-Event (serverseitig)
+		// 		groupformation_log($this->userid,$this->truegroupformationid,'<index>');
 	}
 	public function statusB() {
 		global $USER;

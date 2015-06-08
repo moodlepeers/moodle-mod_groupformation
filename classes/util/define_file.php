@@ -93,16 +93,69 @@ class mod_groupformation_data {
 			'motivation' 
 	);
 	private $LABELS = array (
-			'userid',
+			
 			'topic',
 			'knowledge_heterogen',
 			'knowledge_homogen',
 			'grade',
-			'big5',
+			'big5_heterogen',
+			'big5_homogen',
 			'team',
 			'fam',
 			'learning' 
 	);
+	
+	private $LABEL_SETS = array (
+			'1' => array (
+					'topic',
+					'knowledge_heterogen',
+					'knowledge_homogen',
+					'grade',
+					'big5_heterogen',
+					'big5_homogen',
+					'team',
+					'fam'
+			),
+			'2' => array (
+					'topic',
+					'knowledge_heterogen',
+					'grade',
+					'big5_heterogen',
+					'big5_homogen',
+					'team',
+					'learning' 
+			),
+			'3' => array (
+					'topic'
+			)
+	);
+	
+	//@JK es muss noch geklärt werden, ob Topics homgen oder heterogen sein sollen
+	private $HOMOGEN_SETS = array (
+			'1' => array (
+					false,
+					false,
+					true,
+					true,
+					false,
+					true,
+					true,
+					true
+			),
+			'2' => array (
+					false,
+					false,
+					false,
+					false,
+					true,
+					true,
+					false 
+			),
+			'3' => array (
+					false
+			)
+	);
+	
 	private $CATEGORY_SETS = array (
 			'1' => array (
 					'topic',
@@ -116,26 +169,52 @@ class mod_groupformation_data {
 					'topic',
 					'knowledge',
 					'grade',
+					'team',
 					'character',
-					'motivation' 
+					'learning' 
 			),
 			'3' => array (
+					'topic'
+			) 
+	);
+	
+	private $CRITERION_SETS = array (
+			'1' => array (
 					'topic',
 					'knowledge',
 					'grade',
 					'team',
 					'character',
-					'motivation' 
-			) 
+					'motivation'
+			),
+			'2' => array (
+					'topic',
+					'knowledge',
+					'grade',
+					'team',
+					'character',
+					'learning'
+			),
+			'3' => array (
+					'topic'
+			)
 	);
-	const MOTIVATION = 7;
-	const TEAM = 4;
-	const LEARNING = 6;
-	const CHARACTER = 5;
-	const GENERAL = 2;
-	const KNOWLEDGE = 1;
-	const TOPIC = 0;
-	const GRADE = 3;
+	const MOTIVATION = 6;
+ 	const TEAM = 3;
+ 	const LEARNING = 5;
+ 	const CHARACTER = 4;
+ //	const GENERAL = 2;
+ 	const KNOWLEDGE = 1;
+ 	const TOPIC = 0;
+ 	const GRADE = 2;
+// 	const MOTIVATION = 7;
+// 	const TEAM = 4;
+// 	const LEARNING = 6;
+// 	const CHARACTER = 5;
+// 	const GENERAL = 2;
+// 	const KNOWLEDGE = 1;
+// 	const TOPIC = 0;
+// 	const GRADE = 3;
 	public function __construct() {
 	}
 	public function getNames() {
@@ -154,6 +233,17 @@ class mod_groupformation_data {
 	}
 	public function getCriterionNames() {
 		return $this->CRITERION_CATEGORYS;
+	}
+	
+	public function getPositions($category, $szenario){
+		$array = $this->CATEGORY_SETS[$szenario];
+		$position = 0;
+		foreach($array as $c){
+			if($category == $c){
+				return $position;
+			}
+			$position++;
+		}
 	}
 	public static function getPosition($category) {
 		if ($category == 'topic') {
@@ -191,6 +281,18 @@ class mod_groupformation_data {
 	
 	public function getCategorySet($scenario) {
 		return $this->CATEGORY_SETS [$scenario];
+	}
+	
+	public function getLabelSet($scenario){
+		return $this->LABEL_SETS[$scenario];
+	}
+	
+	public function getCriterionSet($scenario){
+		return $this->CRITERION_SETS[$scenario];
+	}
+	
+	public function getHomogenSet($scenario){
+		return $this->HOMOGEN_SETS[$scenario];
 	}
 	
 	public function getPreviousCategory($scenario, $category) {

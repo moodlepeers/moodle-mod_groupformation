@@ -55,13 +55,14 @@ class mod_groupformation_util {
 		$this->store = new mod_groupformation_storage_manager($groupformationid);
 		$this->scenario = $this->store->getScenario();
 		$data = new mod_groupformation_data();
-		$this->names = $data->getCriterionNames();
+		//$this->names = $data->getCriterionNames();
+		$this->names = $data->getCriterionSet($this->scenario);
 	}
 	
 	public function getTotalNumber(){
 		$number = 0;
 		$this->numbers = $this->store->getNumbers($this->names);
-		$this->setNulls();
+		//$this->setNulls();
 		foreach($this->numbers as $n){
 			$number = $number + $n;
 		}

@@ -70,24 +70,19 @@
 		
 		private $currentCategoryPosition = 0;
 		private $numberOfCategory;
+		private $data;
 	//	private $currentCategory;
 		
-		/**
-		 * Constructs question controller instance
-		 * 
-		 * @param unknown $groupformationid
-		 * @param unknown $lang
-		 * @param unknown $userId
-		 * @param unknown $oldCategory
-		 */
 		public function __construct($groupformationid, $lang, $userId, $oldCategory){
 			$this->groupformationid = $groupformationid;
 			$this->lang = $lang;
 			$this->userId = $userId;
 			$this->store = new mod_groupformation_storage_manager($groupformationid);
 			$this->xml = new mod_groupformation_xml_loader();
-			$data = new mod_groupformation_data();
-			$this->names = $data->getNames();
+			$this->data = new mod_groupformation_data();
+			//$this->names = $data->getNames();
+			$this->scenario = $this->store->getScenario();
+			$this->names = $this->data->getCategorySet($this->scenario);
 			$this->numberOfCategory = count($this->names);
 			$this->init($userId);
 			$this->setIternalNumber($oldCategory);
@@ -95,8 +90,25 @@
 
 		}
 		
+		// --- MAthevorkurs
+		public function goNotOn(){
+			$this->goIternalBack(1);
+		}
+		
+		public function hasAllAnswered(){
+			return $this->store->hasAnsweredEverything($this->userId);
+		}
+		// ---
+		
 		public function goBack(){
-			$back = 2;
+			$this->goIternalBack(2);
+		}
+		
+		private function goIternalBack($back){
+			
+			var_dump($back);
+			var_dump($this->numbers);
+			var_dump($this->currentCategoryPosition);
 			while($back > 0 && $this->currentCategoryPosition != 0){
 				if($this->numbers[$this->currentCategoryPosition] != 0){
 					$back = $back-1;
@@ -105,12 +117,6 @@
 			}
 		}
 		
-		/**
-		 * Returns percentage of answered questions
-		 * 
-		 * @param string $category
-		 * @return number
-		 */
 		public function getPercent($category = null){
 			
 			if (!is_null($category)){
@@ -140,11 +146,9 @@
 		
 		private function init($userId){
 			
-			$this->scenarioario = $this->store->getScenario();
-			
 			if(!$this->store->catalogTableNotSet()){
 				$this->numbers = $this->store->getNumbers($this->names);
-				$this->setNulls();
+				//$this->setNulls();
 			}
 			
 			$this->status = $this->store->answeringStatus($userId);
@@ -154,11 +158,48 @@
 		private function setIternalNumber($category){
 			
 			if($category != ""){
-				$this->currentCategoryPosition = mod_groupformation_data::getPosition($category);
+				$this->currentCategoryPosition = $this->data->getPositions($category, $this->scenario);
 				$this->currentCategoryPosition++;
 			}
 			
+			
+// 			if($category == 'knowledge'){
+// 				$this->currentCategoryPosition = KNOWLEDGE;
+// 				$this->currentCategoryPosition++;
+// 			}
+			
+// 			if($category == 'general'){
+// 				$this->currentCategoryPosition = GENERAL;
+// 				$this->currentCategoryPosition++;
+// 			}
+			
+// 			if($category == 'grade'){
+// 				$this->currentCategoryPosition = GRADE;
+// 				$this->currentCategoryPosition++;
+// 			}
+			
+// 			if($category == 'motivation'){
+// 				$this->currentCategoryPosition = MOTIVATION;
+// 				$this->currentCategoryPosition++;
+// 			}
+			
+// 			if($category == 'learning'){
+// 				$this->currentCategoryPosition = LEARNING;
+// 				$this->currentCategoryPosition++;
+// 			}
+			
+// 			if($category == 'team'){
+// 				$this->currentCategoryPosition = TEAM;
+// 				$this->currentCategoryPosition++;
+// 			}
+			
+// 			if($category == 'character'){
+// 				$this->currentCategoryPosition = CHARACTER;
+// 				$this->currentCategoryPosition++;
+// 			}
+			
 		}
+		
 		
 		private function setNulls(){
 			if($this->scenario == 'project' || $this->scenario == 1){
@@ -211,7 +252,7 @@
  						$temp = $this->store->getKnowledgeOrTopicValues($this->names[$this->currentCategoryPosition]);
  						$values = $this->xml->xmlToArray('<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>');
 						
-						$text; 
+						$text = ''; 
 						$type;
  						if($this->currentCategoryPosition == mod_groupformation_data::getPosition('topic')){
  //							if($this->lang == 'de'){

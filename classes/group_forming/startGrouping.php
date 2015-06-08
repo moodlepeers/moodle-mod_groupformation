@@ -29,33 +29,42 @@ if (!defined('MOODLE_INTERNAL')) {
 require_once(dirname(__FILE__).'/userid_filter.php');
 require_once(dirname(__FILE__).'/calculateCriterions.php');
 require_once($CFG->dirroot.'/mod/groupformation/classes/util/define_file.php');
-
+require_once($CFG->dirroot.'/mod/groupformation/classes/moodle_interface/storage_manager.php');
+require_once($CFG->dirroot.'/lib/groupal/classes/Parser.php');
 
 class mod_groupformation_startGrouping{
 	
-	private $labels = array();
 	
 	public static function start($groupformationID){
 		echo 'Hier startet die Berechnung';
 		$userFilter = new mod_groupformation_userid_filter($groupformationID);
+		$store = new mod_groupformation_storage_manager($groupformationID);
 		$users = $userFilter->getCompletedIds();
 		$scenario = $userFilter->getScenario();
 		$data = new mod_groupformation_data();
-		$this->labels = $data->getLabels();
-		$this->setNulls($scenario);
+		$labels = $data->getLabelSet($scenario);
+		$homogen = $data->getHomogenSet($scenario);
+		//$this->setNulls($scenario);
 		$calculator = new mod_groupformation_calculateCriterions($groupformationID);
+		$gradeP = -1;
 		if(count($users)>0){
 			$gradeP = $calculator->getGradePosition($users);
 		}
 		$array = array();
 		foreach($users as $user){
 			$object = new stdClass();
-			foreach($this->labels as $label){
+			$object->id = $user;
+			$big5 = array();
+			if($scenario != 3){
+				$big5 = $calculator->getBig5($user);
+			}
+			$labelPosition = 0;
+			foreach($labels as $label){
 				if($label != ""){
 					$value = array();
-					if($label == 'userid'){
-						$value[] = $user;
-					}
+// 					if($label == 'userid'){
+// 						$value[] = $user;
+// 					}
 					if($label == 'lang'){
 						$value[] = $data->getLangNumber($calculator->getLang($user));
 					}
@@ -69,10 +78,15 @@ class mod_groupformation_startGrouping{
 						$value[] = $calculator->knowledgeAverage($user);
 					}
 					if($label == 'grade'){
-						
+						if($gradeP != -1){
+							$value[] = $calculator->getGrade($gradeP, $user);
+						}	
 					}
-					if($label == 'big5'){
-						$value = $calculator->getBig5($user);
+					if($label == 'big5_heterogen'){
+						$value = $big5[0];
+					}
+					if($label == 'big5_homogen'){
+						$value = $big5[1];
 					}
 					if($label == 'fam'){
 						$value = $calculator->getFAM($user);
@@ -84,12 +98,17 @@ class mod_groupformation_startGrouping{
 						$value = $calculator->getTeam($user);
 					}
 					$object->$label = $value;
+					$object->homogen = $homogen[$labelPosition];
 				} 
+				
+				$labelPosition++;
 			}
 			$array[] = $object;
 		}
 		
-		var_dump($array);
+		$groupsize = $store->getGroupSize();
+		//var_dump($array);
+		lib_groupal_Parser::parse($array, $labels, $groupsize);
 	}
 	
 	//noch hartgecodet

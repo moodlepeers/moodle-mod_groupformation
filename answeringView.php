@@ -94,16 +94,28 @@
 		$direction = $_POST["direction"];
 	}
 
+	//--- Mathevorkurs
+	$go = true;
+	//---
+	
 	$inArray = in_array($category, $names);
 	if(has_capability('mod/groupformation:onlystudent', $context)){
 		if($inArray){
+			
 			$save = new mod_groupformation_save($groupformation->id, $userId, $category);
 			for($i = 1; $i<=$number; $i++){
 				$temp = $category . $i;
 				if(isset($_POST[$temp])){
 					$save->save($_POST[$temp], $i);
+					
 				}
 			}
+			
+			// --- Mathevorkurs
+			if($store->answerNumberForUser($userId, $category) != $number){
+				$go = false;
+			}
+			// ---
 		}
 	}
 	
@@ -128,6 +140,10 @@
 		
 		if($direction == 0){
 			$questionManager->goBack();
+		}else{
+			if(!$go){
+				$questionManager->goNotOn();
+			}
 		}
 		
 		$questionManager->printQuestions();
