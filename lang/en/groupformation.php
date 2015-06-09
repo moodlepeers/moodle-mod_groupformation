@@ -27,7 +27,7 @@ defined ( 'MOODLE_INTERNAL' ) || die ();
 $string ['language'] = 'en';
 $string ['modulename'] = 'Group formation';
 $string ['modulenameplural'] = 'Group formations';
-$string ['modulename_help'] = 'The groupformation plugin generates groups based on a questionaire.';
+$string ['modulename_help'] = 'The groupformation plugin generates groups of participants based on a questionaire answers.';
 $string ['groupformationfieldset'] = 'Custom example fieldset';
 $string ['groupformationname'] = 'Group formation';
 $string ['groupformationname_help'] = 'ToolTip Group formation';
