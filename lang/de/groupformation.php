@@ -48,6 +48,7 @@ $string ['generategroups'] = "Gruppen erstellen";
 $string ['edit_param'] = 'Bearbeiten';
 $string ['editparam'] = 'Paramter bearbeiten';
 $string ['nochangespossible'] = 'Der Fragebogen wurde bereits von mindestens einer Person beantwortet. Sie k&ouml;nnen nur noch Gruppengr&ouml;e oder Gruppenanzahl &auml;ndern. Weitere &Auml;nderungen werden nicht gespeichert.';
+$string ['availability_nochangespossible'] = 'Der Fragebogen wurde bereits beantwortet. Sie k&ouml;nnen die Verfügbarkeit nicht mehr ändern.';
 $string ['scenario'] = 'Szenario';
 $string ['scenarioLabel'] = '';
 $string ['scenario_description'] = 'Bitte w&auml;hlen Sie das für Sie am Besten geeignete Szenario f&uuml;r die Gruppenformation aus.';
