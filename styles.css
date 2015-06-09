@@ -157,7 +157,9 @@ footer {
 .col_100 {
   width: 100%; }
 
- 
+.questionaire_hint {
+	color: red;
+} 
 .questionaire_status {
 	padding-top: 10px;
 }

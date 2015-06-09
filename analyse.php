@@ -103,7 +103,9 @@ echo '
                             </div>
 
                             <div class="col_m_33 bp_align_right-middle">
-                                <span class="toolt" tooltip="Aktivit&auml;t stoppen um Gruppen zu bilden" style="margin-right:0.7em;"></span><button class="gf_button gf_button_pill gf_button_small">Aktivit&auml;t stoppen</button>
+                                <span class="toolt" tooltip="Aktivit&auml;t stoppen um Gruppen zu bilden" style="margin-right:0.7em;"></span><button class="';
+//                     		gf_button gf_button_pill gf_button_small
+                    		echo '">Aktivit&auml;t stoppen</button>
                             </div>
                         </div>
                     </div>

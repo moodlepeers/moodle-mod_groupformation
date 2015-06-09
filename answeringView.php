@@ -136,7 +136,9 @@
 			echo $OUTPUT->box(format_module_intro('groupformation', $groupformation, $cm->id), 'generalbox mod_introbox', 'groupformationintro');
 		}
 		
-		$questionManager = new mod_groupformation_questionaire($cm->id,$groupformation->id, get_string('language','groupformation'), $userId, $category);
+		$onlystudent = has_capability('mod/groupformation:onlystudent', $context);
+		
+		$questionManager = new mod_groupformation_questionaire($cm->id,$groupformation->id, get_string('language','groupformation'), $userId, $category, $onlystudent);
 		
 		if($direction == 0){
 			$questionManager->goBack();
@@ -145,8 +147,7 @@
 				$questionManager->goNotOn();
 			}
 		}
-		
-		$questionManager->printQuestions();
+		$questionManager->printQuestionairePage();
 		
 	}else if($category == 'no'){
 		if(isset($_POST["action"]) && $_POST["action"] == 1){

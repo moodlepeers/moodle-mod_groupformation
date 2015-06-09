@@ -71,6 +71,11 @@ $(document).ready(function() {
         }else{
             $('#js-content').find('#group_size, #group_size, #group_opt_numb, #numb_of_groups').prop('disabled', false);
         }
+        
+        $("select[id*='id_timeopen']").prop('disabled', true);
+        $("input[id*='id_timeopen']").prop('disabled', true);
+        $("select[id*='id_timeclose']").prop('disabled', true);
+        $("input[id*='id_timeclose']").prop('disabled', true);
     }
 
     function loadGroupformationSettings(){

@@ -68,13 +68,22 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		// Adding the availability settings
 		$mform->addElement ( 'header', 'timinghdr', get_string ( 'availability' ) );
 		$mform->setExpanded('timinghdr');
+		// no changes possible hint
+		$changemsg = '<div class="fitem" id="nochangespossible"';
+		if (!$this->changesPossible ( $mform )) {
+			$changemsg .= ' ><span value="1"';
+		} else {
+			$changemsg .= ' style="display:none;"><span value="0"';
+		}
+		$changemsg .= ' style="color:red;">' . get_string ( 'availability_nochangespossible', 'groupformation' ) . '</span></div>';
+		$mform->addElement ( 'html', $changemsg );
+		
 		$mform->addElement ( 'date_time_selector', 'timeopen', get_string ( 'feedbackopen', 'feedback' ), array (
 				'optional' => true 
 		) );
 		$mform->addElement ( 'date_time_selector', 'timeclose', get_string ( 'feedbackclose', 'feedback' ), array (
 				'optional' => true 
 		) );
-		
 		// Adding the rest of groupformation settings, spreeading all them into this fieldset
 		$mform->addElement ( 'header', 'groupformationsettings', get_string ( 'groupformationsettings', 'groupformation' ) );
 		$mform->setExpanded('groupformationsettings');
@@ -111,7 +120,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 			if ($count > 0)
 				return False;
 		}
-		return True;
+		return true;
 	}
 	
 	/**
@@ -464,12 +473,6 @@ class mod_groupformation_mod_form extends moodleform_mod {
 	 * @param moodleform_mod $mform        	
 	 */
 	function generateHTMLforNonJS(&$mform) {
-		$this->changesPossible ( $mform );
-		
-		// open div tag for non js related content
-		$mform->addElement ( 'html', '<div id="non-js-content">' );
-		
-		// no changes possible hint
 		$changemsg = '<div class="fitem" id="nochangespossible"';
 		if (! $this->changesPossible ( $mform )) {
 			$changemsg .= ' ><span value="1"';
@@ -478,6 +481,9 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		}
 		$changemsg .= ' style="color:red;">' . get_string ( 'nochangespossible', 'groupformation' ) . '</span></div>';
 		$mform->addElement ( 'html', $changemsg );
+		
+		// open div tag for non js related content
+		$mform->addElement ( 'html', '<div id="non-js-content">' );
 		
 		// add field Szenario choice
 		$mform->addElement ( 'select', 'szenario', get_string ( 'scenario', 'groupformation' ), array (
