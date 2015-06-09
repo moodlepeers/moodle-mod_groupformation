@@ -50,7 +50,7 @@
 		$cm = get_coursemodule_from_instance('groupformation', $groupformation->id, $course->id, false, MUST_EXIST);
 	} else {
 		error('You must specify a course_module ID or an instance ID');
-	}	
+	}		
 	
 	$context = context_module::instance($cm->id);
 	$userId = $USER->id;
@@ -127,7 +127,9 @@
 		redirect($returnurl);
 	}
 	
-	if($category == '' || $inArray){
+	$available = $store->isQuestionaireAvailable();
+	
+	if($available && ($category == '' || $inArray)){
 		echo $OUTPUT->header();
 		
 		
@@ -149,7 +151,7 @@
 		}
 		$questionManager->printQuestionairePage();
 		
-	}else if($category == 'no'){
+	}else if(!$available || $category == 'no'){
 		if(isset($_POST["action"]) && $_POST["action"] == 1){
 			$store->statusChanged($userId);
 		}
@@ -167,7 +169,7 @@
 			echo $OUTPUT->box(format_module_intro('groupformation', $groupformation, $cm->id), 'generalbox mod_introbox', 'groupformationintro');
 		}
 		
-		echo $OUTPUT->heading('category has been manipulated');
+		echo $OUTPUT->heading('Category has been manipulated');
 	}
 	
 	
