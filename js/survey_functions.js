@@ -1,5 +1,7 @@
 $(document).ready(function() {
-    
+
+    // TODO Einkommentieren wenn die Topics in erfolgreich in DB geschrieben werden
+    // $('#invisible_topics_inputs').hide();
 
     
     // Drag & Drop the topics/objects to sort them 
@@ -7,7 +9,11 @@ $(document).ready(function() {
     	  axis: 'y',
     	  stop: function (event, ui) {
     	      var data = $(this).sortable('serialize');
-    	      $('span#order').text(data);
+    	      //$('span#order').text(data);
+
+              $('#invisible_topics_inputs').find('input').remove();
+              createTopicInputs();
+
     	      /*$.ajax({
     	              data: oData,
     	          type: 'POST',
@@ -15,6 +21,15 @@ $(document).ready(function() {
     	      });*/
     	 }
     });
+
+
+    function createTopicInputs(){
+        var sortedIDs = $( ".sortable_topics" ).sortable( "toArray" );
+        $.each(sortedIDs, function(index, value){
+            $('<input type="text" name="'+ value +'"/>').val(index +1).appendTo('#invisible_topics_inputs');
+        });
+    }
+    createTopicInputs();
     
     // clickable wraper for input radios // Fragebogen
     $(".select-area").click(function() {

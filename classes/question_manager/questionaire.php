@@ -115,7 +115,11 @@ class mod_groupformation_questionaire {
 	
 	// --- Mathevorkurs
 	private function notAllAnswers() {
-		echo 'Du hast nicht alle Fragen beantwortet';
+        echo '<div class="survey_errors">
+                             <p>Du hast nicht alle Fragen beantwortet</p>
+                    </div>';
+
+		//echo 'Du hast nicht alle Fragen beantwortet';
 	}
 	// ---
 	
@@ -174,6 +178,9 @@ class mod_groupformation_questionaire {
 		if ($tableType == 'typThema') {
 			// close unordered list
 			echo '</ul>';
+
+            echo '<div id="invisible_topics_inputs">
+                            </div>';
 		} else {
 			// close tablebody and close table
 			echo ' </tbody>
