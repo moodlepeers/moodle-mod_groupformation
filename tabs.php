@@ -57,32 +57,32 @@ if (has_capability ( 'mod/groupformation:editsettings', $context )) {
 			'id' => $usedid,
 			'do_show' => 'analysis' 
 	) );
-	$row [] = new tabobject ( 'analysis', $analyseurl->out (), get_string ( 'analysis_view', 'groupformation' ) );
+	$row [] = new tabobject ( 'analysis', $analyseurl->out (), get_string ( 'tab_analysis', 'groupformation' ) );
 	$groupingurl = new moodle_url ( '/mod/groupformation/groupingView.php', array (
 			'id' => $usedid,
 			'do_show' => 'grouping'
 	) );
-	$row [] = new tabobject ( 'grouping', $groupingurl->out (), get_string ( 'grouping_view', 'groupformation' ) );
+	$row [] = new tabobject ( 'grouping', $groupingurl->out (), get_string ( 'tab_grouping', 'groupformation' ) );
 	$answeringViewiewurl = new moodle_url ( '/mod/groupformation/answeringView.php', array (
 			'id' => $usedid
 	) );
-	$row [] = new tabobject ( 'answeringView', $answeringViewiewurl->out (), get_string ( 'preview', 'groupformation' ) );
+	$row [] = new tabobject ( 'answeringView', $answeringViewiewurl->out (), get_string ( 'tab_preview', 'groupformation' ) );
 }elseif (!has_capability ( 'mod/groupformation:editsettings', $context ) && has_capability('mod/groupformation:onlystudent', $context)){
 	$viewurl = new moodle_url ( '/mod/groupformation/view.php', array (
 		'id' => $usedid,
 		'do_show' => 'view' 
 	) );
-	$row [] = new tabobject ( 'view', $viewurl->out (), get_string ( 'questionaire_view', 'groupformation' ) );
+	$row [] = new tabobject ( 'view', $viewurl->out (), get_string ( 'tab_questionaire', 'groupformation' ) );
 	$evaluationurl = new moodle_url ( '/mod/groupformation/evaluationView.php', array (
 			'id' => $usedid,
 			'do_show' => 'evaluation'
 	) );
-	$row [] = new tabobject ( 'evaluation', $evaluationurl->out (), get_string ( 'evaluation_view', 'groupformation' ) );
+	$row [] = new tabobject ( 'evaluation', $evaluationurl->out (), get_string ( 'tab_evaluation', 'groupformation' ) );
 	$groupurl = new moodle_url ( '/mod/groupformation/groupView.php', array (
 			'id' => $usedid,
 			'do_show' => 'group'
 	) );
-	$row [] = new tabobject ( 'group', $groupurl->out (), get_string ( 'group_view', 'groupformation' ) );
+	$row [] = new tabobject ( 'group', $groupurl->out (), get_string ( 'tab_group', 'groupformation' ) );
 }
 
 if (count ( $row ) > 1) {

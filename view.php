@@ -117,7 +117,7 @@
   	}
   	
   	if($dozent == 2){
-  		$returnurl = new moodle_url('/mod/groupformation/analyse.php', array('id' => $id, 'do_show' => 'analyse'));
+  		$returnurl = new moodle_url('/mod/groupformation/analysisView.php', array('id' => $id, 'do_show' => 'analysis'));
   			
   		redirect($returnurl);
   	}

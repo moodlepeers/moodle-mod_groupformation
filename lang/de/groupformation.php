@@ -137,8 +137,13 @@ $string ['category_topic'] = 'Themenauswahl';
 $string ['stats_partly'] = 'In der Kategorie "{$a->category}" haben Sie {$a->answered} von {$a->questions} Fragen beantwortet.';
 $string ['stats_all'] = 'In der Kategorie "{$a->category}" haben Sie alle Fragen beantwortet.';
 $string ['stats_none'] = 'In der Kategorie "{$a->category}" haben Sie noch keine Frage beantwortet.';
+$string ['tab_questionaire'] = 'Fragebogen';
+$string ['tab_analysis'] = 'Analyse';
+$string ['tab_grouping'] = 'Gruppenbildung';
+$string ['tab_preview'] = 'Fragebogen-Vorschau';
+$string ['tab_evaluation'] = 'Auswertung';
+$string ['tab_group'] = 'Gruppenzuordnung';
 
-// $string [''] = '';
 // $string [''] = '';
 
 
