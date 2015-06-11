@@ -134,9 +134,7 @@
 			echo $OUTPUT->box(format_module_intro('groupformation', $groupformation, $cm->id), 'generalbox mod_introbox', 'groupformationintro');
 		}
 		
-		$onlystudent = has_capability('mod/groupformation:onlystudent', $context);
-		
-		$questionManager = new mod_groupformation_questionaire($cm->id,$groupformation->id, get_string('language','groupformation'), $userid, $category, $onlystudent);
+		$questionManager = new mod_groupformation_questionaire($cm->id,$groupformation->id, get_string('language','groupformation'), $userid, $category, $context);
 		
 		if($direction == 0){
 			$questionManager->goBack();

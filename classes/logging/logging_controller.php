@@ -36,11 +36,28 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 // define('GRADE', 3);
 class mod_groupformation_logging_controller {
 	
+	const LOGGING_LEVEL = 3;
+
+	const FATAL = 0;
+	const ERROR = 1;
+	const WARNING = 2;
+	const INFO = 3;
+	const DEBUG = 4;
+	
+	private $LOGGING_LEVELS;
+		
 	const LOGGING_TABLE_NAME = "groupformation_logging";
-	private $MESSAGES = array('<index>', '<settings>', '<begin_questionaire>', '<category_questionaire>', 
-				'<continue_questionaire>', '<submit_questionaire>', '<start_groupal>', 
-				'<cancel_groupal>', '<restart_groupal>', '<view_results_groupal>', '<accept_results_groupal>', 
-				'<delete_results_groupal>', '<delete>', '<unknown>');
+	private $MESSAGES = array('<index>'=>3, '<settings>'=>3, '<begin_questionaire>'=>3, '<category_questionaire>'=>3, 
+				'<continue_questionaire>'=>3, '<submit_questionaire>'=>3, '<start_groupal>'=>3, 
+				'<cancel_groupal>'=>3, '<restart_groupal>'=>3, '<view_results_groupal>'=>3, '<accept_results_groupal>'=>3, 
+				'<delete_results_groupal>'=>3, '<delete>'=>3, '<unknown>'=>3);
+	
+	/**
+	 * Creates logging controller instance
+	 */
+	public function __construct(){
+		$this->LOGGING_LEVELS = array(self::FATAL,self::ERROR,self::WARNING,self::INFO,self::DEBUG);
+	}
 	
 	/**
 	 * Handles data and tries logging it
@@ -84,6 +101,6 @@ class mod_groupformation_logging_controller {
 	 * @return boolean
 	 */
 	private function isValidMessage($message){
-		return in_array($message, $this->MESSAGES);
+		return key_exists($message, $this->MESSAGES) && $this->MESSAGES[$message] <= self::LOGGING_LEVEL;
 	}
 }

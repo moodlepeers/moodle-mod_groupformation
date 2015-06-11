@@ -63,8 +63,8 @@ class mod_groupformation_infoText {
 							
 						</form>';
 		echo '</div>';
-		// 		TODO @Johannes hier ist ein Beispiel für ein Logging-Event (serverseitig)
-		// 		groupformation_log($this->userid,$this->groupformationid,'<index>');
+// 		TODO @Johannes hier ist ein Beispiel für ein Logging-Event (serverseitig)
+		groupformation_log($this->userid,$this->groupformationid,'<index>');
 	}
 	public function statusB() {
 		global $USER;

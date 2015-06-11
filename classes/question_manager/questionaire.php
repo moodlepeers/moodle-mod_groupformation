@@ -49,18 +49,19 @@ class mod_groupformation_questionaire {
 	private $qNumber = 1;
 	private $gradesCount;
 	private $category = "";
-	private $onlystudent;
+	private $context;
+	private $userid;
 	
 	// --- Mathevorkurs
 	private $notAllAnswers = false;
 	
 	// ---
-	public function __construct($cmid, $groupformationid, $lang, $userId, $category,$onlystudent = true) {
+	public function __construct($cmid, $groupformationid, $lang, $userId, $category, $context) {
 		$this->cmid = $cmid;
 		$this->groupformationid = $groupformationid;
 		$this->lang = $lang;
-		$this->onlystudent = $onlystudent;
-		
+		$this->userid = $userId;
+		$this->context = $context;
 		$this->question_manager = new mod_groupformation_question_controller ( $groupformationid, $lang, $userId, $category );
 		$this->header = new HeaderOfInput ();
 		$this->range = new RangeInput ();
@@ -104,7 +105,13 @@ class mod_groupformation_questionaire {
 					'id' => $this->cmid,
 					'category' => $category 
 			) );
-			echo '<li class="questionaire_navbar" style="width:' . $width . '%;"><a class="questionaire_navbar_link" ' . (($activeCategory == $category) ? 'style="background-color: #2d2d2d; color: #FFFFFF"' : '') . ' href="' . $url . '">' . get_string ( 'category_' . $category, 'groupformation' ) . '</a></li>';
+			$positionActiveCategory = $data->getPosition($activeCategory);
+			$positionCategory = $data->getPosition($category);
+			
+			$beforeActive = ($positionCategory<=$positionActiveCategory);
+			$answeredAll = ($store->answerNumberForUser($this->userid,$category)==$store->getNumber($category));
+			$class = ($beforeActive || $answeredAll)?'':'no-active';
+			echo '<li class="questionaire_navbar '.$class.'" style="width:' . $width . '%;"><a class="questionaire_navbar_link" ' . (($activeCategory == $category) ? 'style="background-color: #2d2d2d; color: #FFFFFF"' : '') . ' href="' . $url . '">' . get_string ( 'category_' . $category, 'groupformation' ) . '</a></li>';
 			
 			// <li><a href="a.html" class="ui-btn-active">One</a></li>
 			// <li><a href="b.html">Two</a></li>
@@ -243,7 +250,7 @@ class mod_groupformation_questionaire {
 	}
 	
 	public function printQuestionairePage() {
-		if (!$this->onlystudent)
+		if (has_capability('mod/groupformation:editsettings', $this->context))
 			echo '<div class="col_100 questionaire_hint">'.get_string('questionaire_preview','groupformation').'</div>';
 		
 		if ($this->question_manager->questionsToAnswer () && $this->question_manager->hasNext ()) {
