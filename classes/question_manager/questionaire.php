@@ -110,7 +110,7 @@ class mod_groupformation_questionaire {
 			
 			$beforeActive = ($positionCategory<=$positionActiveCategory);
 			$answeredAll = ($store->answerNumberForUser($this->userid,$category)==$store->getNumber($category));
-			$class = ($beforeActive || $answeredAll)?'':'no-active';
+			$class = (has_capability('mod/groupformation:editsettings', $this->context) || $beforeActive || $answeredAll)?'':'no-active';
 			echo '<li class="questionaire_navbar '.$class.'" style="width:' . $width . '%;"><a class="questionaire_navbar_link" ' . (($activeCategory == $category) ? 'style="background-color: #2d2d2d; color: #FFFFFF"' : '') . ' href="' . $url . '">' . get_string ( 'category_' . $category, 'groupformation' ) . '</a></li>';
 			
 			// <li><a href="a.html" class="ui-btn-active">One</a></li>

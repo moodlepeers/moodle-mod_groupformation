@@ -35,7 +35,6 @@
 	$id = optional_param('id', 0, PARAM_INT);   // Course Module ID
 // 	$g = optional_param('g', 0, PARAM_INT);		// groupformation instance ID
 	$url_category = optional_param('category','',PARAM_TEXT); 	// category name
-	$current_tab = 'view';
 	
 	// 	Import jQuery and js file
 	groupformation_add_jquery ( $PAGE, 'survey_functions.js' );
@@ -58,6 +57,11 @@
 	
 	$category = "";
 
+	if (has_capability('mod/groupformation:onlystudent', $context))
+		$current_tab = 'answering';
+	else
+		$current_tab = 'view';
+	
 	if (isset($_POST["category"])){
 		$category = $_POST['category'];
 	}elseif (!(strcmp($url_category, '')==0)){

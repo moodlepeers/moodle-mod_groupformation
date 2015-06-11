@@ -156,6 +156,7 @@ $string ['category_topic'] = 'Topics';
 $string ['stats_partly'] = 'You answered {$a->answered} out of {$a->questions} questions in the category "{$a->category}".';
 $string ['stats_all'] = 'You answered all questions in the category "{$a->category}".';
 $string ['stats_none'] = 'You did not answer any question in the category "{$a->category}".';
+$string ['tab_overview'] = 'Overview';
 $string ['tab_questionaire'] = 'Questionaire';
 $string ['tab_analysis'] = 'Analysis';
 $string ['tab_grouping'] = 'Groupformation';

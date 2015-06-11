@@ -65,8 +65,11 @@ if (has_capability ( 'mod/groupformation:editsettings', $context )) {
 		'id' => $usedid,
 		'do_show' => 'view' 
 	) );
-	$row [] = new tabobject ( 'view', $viewurl->out (), get_string ( 'tab_questionaire', 'groupformation' ) );
-	$evaluationurl = new moodle_url ( '/mod/groupformation/evaluationView.php', array (
+	$row [] = new tabobject ( 'view', $viewurl->out (), get_string ( 'tab_overview', 'groupformation' ) );
+	$answeringViewiewurl = new moodle_url ( '/mod/groupformation/answeringView.php', array (
+			'id' => $usedid
+	) );
+	$row [] = new tabobject ( 'answering', $answeringViewiewurl->out (), get_string ( 'tab_questionaire', 'groupformation' ) );$evaluationurl = new moodle_url ( '/mod/groupformation/evaluationView.php', array (
 			'id' => $usedid,
 			'do_show' => 'evaluation'
 	) );
