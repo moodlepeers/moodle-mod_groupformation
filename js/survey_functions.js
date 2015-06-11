@@ -32,15 +32,23 @@ $(document).ready(function() {
     createTopicInputs();
 
 
+    if($('.survey_warnings').length < 1){
+        $('.responsive-table>tbody>tr.noAnswer').each(function(){
+            $(this).removeClass('noAnswer');
+        });
+    }
+
     // clickable wraper for input radios // Fragebogen
     $(".select-area").click(function() {
         var name = $(this).find('input:radio').attr('name');
         $('input[name="'+ name +'"]').parent().removeClass('selected_label');
+        $('input[name="'+ name +'"]').parent().parent().removeClass('noAnswer');
         $(this).addClass('selected_label');
         $(this).find('input:radio').prop('checked', true);
     });
 
-    
+
+
     // manipulate grades on change
     $( '#grade1' ).change(function() {
         var grade1 = $(this).val();

@@ -49,7 +49,7 @@ class RadioInput {
 		}
 
 		if($answer == -1){
-			echo '<tr class="noAnswer" style="text-color:(255,0,255) !important;">';
+			echo '<tr class="noAnswer">';
 		}else{
 			echo '<tr>';
 		}
@@ -65,7 +65,7 @@ class RadioInput {
 		foreach ($this->optArray as $option){
 			if($answer == $radioCounter){
 				echo '<td data-title="' . $option .
-				'" class="radioleft select-area"><input type="radio" name="' .
+				'" class="radioleft select-area selected_label"><input type="radio" name="' .
 				$this->category . $this->qnumber .
 				'" value="' . $radioCounter . '" checked="checked"/></td>';
 			}else{

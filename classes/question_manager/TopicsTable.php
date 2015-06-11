@@ -39,7 +39,7 @@ class TopicsTable{
 		$this->category = $cat;
 		$this->qnumber = $qnumb;
 		
-		echo '<li id="'. $this->category .'_'.  $this->qnumber .'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' . $this->question . '</li>';
+		echo '<li id="'. $this->category .  $this->qnumber .'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' . $this->question . '</li>';
 		
 		if($hasAnswer){
 			//$answer ist die position im optionArray von der Antwort

@@ -115,7 +115,7 @@ class mod_groupformation_questionaire {
 	
 	// --- Mathevorkurs
 	private function notAllAnswers() {
-        echo '<div class="survey_errors">
+        echo '<div class="survey_warnings">
                              <p>Du hast nicht alle Fragen beantwortet</p>
                     </div>';
 

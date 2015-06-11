@@ -281,9 +281,9 @@ h1.caption {
 .whitespace_m {
   margin: 3em 0; }
 
-.js_errors, .survey_errors {
+.js_errors{
   width: 100%; }
-  .js_errors p, .survey_errors p {
+  .js_errors p {
     width: 100%;
     background-color: #fff0f0;
     border-color: #ffdce1;
@@ -293,9 +293,25 @@ h1.caption {
     padding: 8px 35px 8px 14px;
     margin-bottom: 20px;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5); }
-  .js_errors p:before, .survey_errors p:before {
+  .js_errors p:before{
     font-weight: bold;
     content: "* "; }
+
+.survey_warnings {
+    width: 100%; }
+.survey_warnings p {
+    width: 100%;
+    background-color: #fcf8e3;
+    color: #8a6d3b;
+    border: 1px solid #faebcc;
+    border-radius: 4px;
+    padding: 8px 35px 8px 14px;
+    margin-bottom: 20px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5); }
+.survey_warnings p:before {
+    font-weight: bold;
+    content: "* "; }
+
 
 #js_topicsWrapper, #js_knowledgeWrapper, #js_szenarioWrapper,
 #knowledfeInfoProject, #knowledfeInfoHomework, #knowledfeInfoPresentation,
@@ -515,10 +531,9 @@ p#topicshead {
 table.tabled_inputs td {
     padding: 10px 5px; }
 table.tabled_inputs label, table.tabled_inputs input[type=radio] {
-    /*margin: 0 5px 0 0;*/ }
+    margin: 0 5px 0 0; }
 
-
-..select-area {
+.select-area {
     -webkit-transition: 0.3s;
     transition: 0.3s;
     opacity: 1; }
@@ -530,7 +545,6 @@ table.tabled_inputs label, table.tabled_inputs input[type=radio] {
 
 .selected_label {
     background-color: #c8ebb0 !important; }
-
 
 .responsive-table {
     line-height: 1.4;
@@ -623,7 +637,11 @@ table.tabled_inputs label, table.tabled_inputs input[type=radio] {
     margin-bottom: 0; }
 @media (min-width: 64em) {
     .responsive-table tbody tr:nth-of-type(even) {
-        background-color: #ebebeb; } }
+        background-color: #f2f2f2; } }
+.responsive-table tbody tr.noAnswer {
+    background-color: #fefdf5; }
+.responsive-table tbody tr.noAnswer:nth-of-type(even) {
+    background-color: #fcf8e3; }
 .responsive-table tbody th[scope="row"] {
     background-color: #969696;
     color: white; }
