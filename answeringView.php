@@ -121,8 +121,7 @@
 	
 	if($direction == 0 && $_POST["percent"] == 0){
 		$returnurl = new moodle_url('/mod/groupformation/view.php', array(
-				'id' => $cm->id, 
-				'do_show' => 'view', 
+				'id' => $cm->id,
 				'back' => '1'));
 		redirect($returnurl);
 	}

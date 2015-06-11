@@ -22,89 +22,102 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-
 	require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 	require_once(dirname(__FILE__).'/lib.php');
 	require_once(dirname(__FILE__).'/locallib.php');
+	require_once(dirname(__FILE__).'/classes/moodle_interface/storage_manager.php');
+	require_once(dirname(__FILE__).'/classes/question_manager/infoText.php');
+	require_once(dirname(__FILE__).'/classes/group_forming/startGrouping.php');
 
-
-
-	//$id = required_param('id', PARAM_INT);    // Course Module ID
+	// Read URL params
 	$id = optional_param('id', 0, PARAM_INT);   // Course Module ID
 	$g = optional_param('g', 0, PARAM_INT);		// groupformation instance ID
+	$do_show = optional_param('do_show', 'view', PARAM_TEXT);
 	$back = optional_param('back', 0, PARAM_INT);
 	
-	$current_tab = 'view';
 	// Import jQuery and js file
 	addJQuery ( $PAGE, 'survey_functions.js' );
+	
+	// Determine cm, course and groupformation
 	if($id) {
 		$cm = get_coursemodule_from_id('groupformation', $id, 0, false, MUST_EXIST);
 		$course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
 		$groupformation = $DB->get_record('groupformation', array('id' => $cm->instance), '*', MUST_EXIST);
-	} else if($g) {
-		$groupformation = $DB->get_record('groupformation', array('id' => $g), '*', MUST_EXIST);
-		$course = $DB->get_record('course', array('id' => $groupformation->course), '*', MUST_EXIST);
-		$cm = get_coursemodule_from_instance('groupformation', $groupformation->id, $course->id, false, MUST_EXIST);
+// 	} else if($g) {
+// 		$groupformation = $DB->get_record('groupformation', array('id' => $g), '*', MUST_EXIST);
+// 		$course = $DB->get_record('course', array('id' => $groupformation->course), '*', MUST_EXIST);
+// 		$cm = get_coursemodule_from_instance('groupformation', $groupformation->id, $course->id, false, MUST_EXIST);
 	} else {
-		error('You must specify a course_module ID or an instance ID');
+		print_error('You must specify a course_module ID or an instance ID');
 	}
 
+// 	if($id){
+// 		$val = $id;
+// 	}
+// 	else{
+// 		$val = $groupformation->id;
+// 	}
+	// Require user login if not already logged in
 	require_login($course, true, $cm);
-//	$context = context_module::instance($cm->id);
 
-	$event = \mod_groupformation\event\course_module_viewed::create(array(
-			'objectid' => $PAGE->cm->instance,
-			'context' => $PAGE->context,
-	));
-
+	// Get useful stuff
 	$context = $PAGE->context;
+	$userid = $USER->id;
 	
-	$event->add_record_snapshot('course', $PAGE->course);
-	$event->add_record_snapshot($PAGE->cm->modname, $groupformation);
-	$event->trigger();
+	if (has_capability('mod/groupformation:editsettings', $context)){
+		$returnurl = new moodle_url('/mod/groupformation/analysisView.php', array('id' => $id, 'do_show' => 'analysis'));
+		redirect($returnurl);
+	}else{
+		$current_tab = $do_show;
+	}
 	
-	$PAGE->set_url('/mod/groupformation/view.php', array('id' => $cm->id, 'do_show' => 'view'));
+// 	if (($do_show == 'view' && !has_capability('mod/groupformation:editsettings', $context)) || isset($_POST['dozent']) || isset($_POST['begin'])){
+// 		// STAY HERE
+// 		$current_tab = $do_show;
+// 	}elseif ($do_show == 'analyse' && has_capability('mod/groupformation:editsettings', $context)){
+// 		$returnurl = new moodle_url('/mod/groupformation/analyse.php', array('id' => $id, 'do_show' => 'analyse'));
+// 		redirect($returnurl);
+// 	}elseif (has_capability('mod/groupformation:editsettings', $context)){
+// 		$returnurl = new moodle_url('/mod/groupformation/analyse.php', array('id' => $id, 'do_show' => 'analyse'));
+// 		redirect($returnurl);
+// 	}else{
+// 		$returnurl = new moodle_url('/mod/groupformation/view.php', array('id' => $id, 'do_show' => 'view'));
+// 		redirect($returnurl);
+// 	}
+
+	
+	$store = new mod_groupformation_storage_manager($groupformation->id);
+	$info = new mod_groupformation_infoText ($cm->id, $groupformation->id, $userid );
+
+	// Trigger event TODO @Nora why?
+	groupformation_trigger_event($cm,$course,$groupformation,$context);
+	
+	$PAGE->set_url('/mod/groupformation/view.php', array('id' => $cm->id, 'do_show' => $do_show));
 	$PAGE->set_title(format_string($groupformation->name));
 	$PAGE->set_heading(format_string($course->fullname));
-//	$PAGE->set_context($context);
-
 	
-
-	
- 	require_once(dirname(__FILE__).'/classes/moodle_interface/storage_manager.php');
-// 	require_once(dirname(__FILE__).'/classes/question_manager/question_manager.php');
-  	require_once(dirname(__FILE__).'/classes/question_manager/infoText.php');
-  	require_once(dirname(__FILE__).'/classes/group_forming/startGrouping.php');
-  	$userId = $USER->id;
-  	
-  	$store = new mod_groupformation_storage_manager($groupformation->id);
-  	$val;
-  	if($id){
-  		$val = $id;
-  	}else{
-  		$val = $groupformation->id;
-  	}
-  	$truegroupformationId = $groupformation->id;
-	$info = new mod_groupformation_infoText ( $val , $userId , $truegroupformationId );
-  	
-	$begin = 1;
-  	if (isset($_POST["begin"])){
+  	$begin = 1;		
+	if (isset($_POST["begin"])){
   		$begin = $_POST["begin"];
+  	}else{
+  		$begin = 1;
   	}
   	
-  	$dozent = 0;
+  	
   	if(isset($_POST["dozent"])){
   		$dozent = $_POST['dozent'];
+  	}else{
+  		$dozent = 0;
   	}
   	
   	if($dozent == 1){
-  		$returnurl = new moodle_url('/mod/groupformation/answeringView.php', array('id' => $val));
+  		$returnurl = new moodle_url('/mod/groupformation/answeringView.php', array('id' => $id));
   			
   		redirect($returnurl);
   	}
   	
   	if($dozent == 2){
-  		$returnurl = new moodle_url('/mod/groupformation/analyse.php', array('id' => $val, 'do_show' => 'analyse'));
+  		$returnurl = new moodle_url('/mod/groupformation/analyse.php', array('id' => $id, 'do_show' => 'analyse'));
   			
   		redirect($returnurl);
   	}
@@ -118,13 +131,13 @@
   			
   			if($_POST["questions"] == 1 && !$back){
   			
-  				$returnurl = new moodle_url('/mod/groupformation/answeringView.php', array('id' => $val));
+  				$returnurl = new moodle_url('/mod/groupformation/answeringView.php', array('id' => $id));
   			
   				redirect($returnurl);
   			}
   		}
   	}else{
-  		$store->statusChanged($userId, 1);
+  		$store->statusChanged($userid, 1);
   	}
   	
   	echo $OUTPUT->header();
@@ -137,15 +150,13 @@
   		echo $OUTPUT->box(format_module_intro('groupformation', $groupformation, $cm->id), 'generalbox mod_introbox', 'groupformationintro');
   	}
   	
-  	
-  	
   	// Replace the following lines with you own code.
   	echo $OUTPUT->heading($groupformation->name);
   	
 
 	if (has_capability('mod/groupformation:onlystudent', $context)){
 	 	if ($store->isQuestionaireAvailable()){	
-			$status = $store->answeringStatus($userId);
+			$status = $store->answeringStatus($userid);
 			if($status ==  -1){
 				$info->availabilityInfo();
 	 			$info->statusA();
@@ -161,7 +172,7 @@
 	 	}else{
 	 		$info->notAvailableInfo();
 	 	}
-	}else{
+	}elseif (has_capability('mod/groupformation:editsettings', $context)){
 		if ($store->isQuestionaireAvailable()){
 			$info->availabilityInfo();
        		$info->Dozent();
@@ -169,7 +180,9 @@
 			$info->notAvailableInfo();
 			$info->Dozent();
 		}
-	}		
+	}else{
+		print_error('This activity is not accessible for you');
+	}
 	echo $OUTPUT->footer();
 	
 

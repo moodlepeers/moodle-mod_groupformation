@@ -67,6 +67,23 @@ function groupformation_log($userid, $groupformationid, $message) {
 	return $logging_controller->handle($userid,$groupformationid,$message);
 }
 
+/**
+ * Triggers event
+ * 
+ * @param stdClass $cm
+ * @param stdClass $course
+ * @param stdClass $groupformation
+ * @param stdClass $context
+ */
+function groupformation_trigger_event($cm,$course,$groupformation,$context){
+	$event = \mod_groupformation\event\course_module_viewed::create(array(
+			'objectid' => $groupformation->id,
+			'context' => $context,
+	));
+	$event->add_record_snapshot('course', $course);
+	$event->add_record_snapshot($cm->modname, $groupformation);
+	$event->trigger();
+}
 
 
 // function answeredAllQuestions($userid, $groupformationid) {

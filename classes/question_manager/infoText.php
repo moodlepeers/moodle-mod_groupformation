@@ -31,40 +31,17 @@ require_once ($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php'
 
 // require_once($CFG->dirroot.'/mod/groupformation/classes/moodle_interface/storage_manager.php');
 class mod_groupformation_infoText {
-	private $groupformationid;
+	private $cmid;
 	private $userid;
-	private $truegroupformationid;
-// 	private $categorysets = array (
-// 			1 => array (
-// 					'topic',
-// 					'knowledge',
-// 					'general',
-// 					'grade',
-// 					'team',
-// 					'character',
-// 					'motivation' 
-// 			),
-// 			2 => array (
-// 					'topic',
-// 					'knowledge',
-// 					'general',
-// 					'grade',
-// 					'team',
-// 					'character',
-// 					'learning' 
-// 			),
-// 			3 => array (
-// 					'topic',
-// 					'general' 
-// 			) 
-// 	);
+	private $groupformationid;
 	private $store;
-	public function __construct($groupformationid, $userid, $truegroupformationid) {
+	
+	public function __construct($cmid, $groupformationid, $userid) {
 		// its not the groupformation id -> its also unused so far
-		$this->groupformationid = $groupformationid;
+		$this->cmid = $cmid;
 		$this->userid = $userid;
-		$this->truegroupformationid = $truegroupformationid;
-		$this->store = new mod_groupformation_storage_manager ( $truegroupformationid );
+		$this->groupformationid = $groupformationid;
+		$this->store = new mod_groupformation_storage_manager ( $groupformationid );
 	}
 	public function statusA() {
 		echo '<div class="questionaire_status col_m_100">' . get_string ( 'questionaire_not_started', 'groupformation' ) . '</div>';
@@ -76,7 +53,7 @@ class mod_groupformation_infoText {
 		// 1 => ja
 		echo '<input type="hidden" name="questions" value="1"/>';
 		
-		echo '<input type="hidden" name="id" value="' . $this->groupformationid . '"/>';
+		echo '<input type="hidden" name="id" value="' . $this->cmid . '"/>';
 		echo '
 						<div class="grid">
 						<div class="col_m_100">
@@ -87,7 +64,7 @@ class mod_groupformation_infoText {
 						</form>';
 		echo '</div>';
 		// 		TODO @Johannes hier ist ein Beispiel für ein Logging-Event (serverseitig)
-		// 		groupformation_log($this->userid,$this->truegroupformationid,'<index>');
+		// 		groupformation_log($this->userid,$this->groupformationid,'<index>');
 	}
 	public function statusB() {
 		global $USER;
@@ -101,7 +78,7 @@ class mod_groupformation_infoText {
 		// 1 => ja
 		echo '<input type="hidden" name="questions" value="1"/>';
 		
-		echo '<input type="hidden" name="id" value="' . $this->groupformationid . '"/>';
+		echo '<input type="hidden" name="id" value="' . $this->cmid . '"/>';
 		
 		$hasAnsweredEverything = $this->store->hasAnsweredEverything($USER->id);
 		
@@ -130,7 +107,7 @@ class mod_groupformation_infoText {
 		// 1 => ja
 		// echo '<input type="hidden" name="questions" value="1"/>';
 		
-		echo '<input type="hidden" name="id" value="' . $this->groupformationid . '"/>';
+		echo '<input type="hidden" name="id" value="' . $this->cmid . '"/>';
 		echo '
 						<div class="grid">
 						<div class="col_100">
@@ -154,7 +131,7 @@ class mod_groupformation_infoText {
 		
 		$data = new mod_groupformation_data ();
 		
-		// $scenario = $DB->get_record('groupformation', array('id'=>$this->truegroupformationid))->szenario;
+		// $scenario = $DB->get_record('groupformation', array('id'=>$this->groupformationid))->szenario;
 		
 		$category_set = $data->getCategorySet ( $scenario);
 		
@@ -199,7 +176,7 @@ class mod_groupformation_infoText {
 			if ($values ['questions'] > 0) {
 				echo '<tr><th scope="row" class="questionaire_stats_row"><span>';
 				$url = new moodle_url ( 'answeringView.php', array (
-						'id' => $this->groupformationid,
+						'id' => $this->cmid,
 						'category' => $key 
 				) );
 				$a->category = '<a href="' . $url . '">' . $a->category . '</a>';
