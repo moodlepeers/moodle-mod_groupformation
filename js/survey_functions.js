@@ -30,9 +30,13 @@ $(document).ready(function() {
         });
     }
     createTopicInputs();
-    
+
+
     // clickable wraper for input radios // Fragebogen
     $(".select-area").click(function() {
+        var name = $(this).find('input:radio').attr('name');
+        $('input[name="'+ name +'"]').parent().removeClass('selected_label');
+        $(this).addClass('selected_label');
         $(this).find('input:radio').prop('checked', true);
     });
 
