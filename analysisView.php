@@ -43,20 +43,10 @@
 		$cm = get_coursemodule_from_id ( 'groupformation', $id, 0, false, MUST_EXIST );
 		$course = $DB->get_record ( 'course', array ('id' => $cm->course ), '*', MUST_EXIST );
 		$groupformation = $DB->get_record ( 'groupformation', array ('id' => $cm->instance ), '*', MUST_EXIST );
-	// } else if ($g) {
-	// 	$groupformation = $DB->get_record ( 'groupformation', array ('id' => $g ), '*', MUST_EXIST );
-	// 	$course = $DB->get_record ( 'course', array ('id' => $groupformation->course ), '*', MUST_EXIST );
-	// 	$cm = get_coursemodule_from_instance ( 'groupformation', $groupformation->id, $course->id, false, MUST_EXIST );
 	} else {
 		error ( 'You must specify a course_module ID or an instance ID' );
 	}
 
-
-	
-	
-	
-	
-	
 	// Require user login if not already logged in
 	require_login ( $course, true, $cm );
 	
@@ -71,22 +61,7 @@
 		$current_tab = $do_show;
 	}
 	
-// 	if ($do_show == 'analyse' && has_capability('mod/groupformation:editsettings', $context)){
-// 		// STAY HERE
-// 		$current_tab = $do_show;
-// 	}elseif ($do_show == 'view'){
-// 		$returnurl = new moodle_url('/mod/groupformation/view.php', array('id' => $id, 'do_show' => 'view'));
-// 		redirect($returnurl);
-// 	}else{
-// 		$returnurl = new moodle_url('/mod/groupformation/view.php', array('id' => $id, 'do_show' => 'view'));
-// 		redirect($returnurl);
-// 	}	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	// Trigger event TODO @Nora why?

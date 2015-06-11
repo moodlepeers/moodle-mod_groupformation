@@ -106,9 +106,9 @@
 		
 		private function goIternalBack($back){
 			
-			var_dump($back);
-			var_dump($this->numbers);
-			var_dump($this->currentCategoryPosition);
+// 			var_dump($back);
+// 			var_dump($this->numbers);
+// 			var_dump($this->currentCategoryPosition);
 			while($back > 0 && $this->currentCategoryPosition != 0){
 				if($this->numbers[$this->currentCategoryPosition] != 0){
 					$back = $back-1;

@@ -26,36 +26,34 @@
 	require_once (dirname ( dirname ( dirname ( __FILE__ ) ) ) . '/config.php');
 	require_once (dirname ( __FILE__ ) . '/lib.php');
 	require_once (dirname ( __FILE__ ) . '/locallib.php');
-// 	require_once ($CFG->dirroot.'/mod/feedback/lib.php');
 	require_once (dirname ( __FILE__ ) . '/classes/util/define_file.php');
-
 	require_once(dirname(__FILE__).'/classes/moodle_interface/storage_manager.php');
 	require_once(dirname(__FILE__).'/classes/question_manager/questionaire.php');
 	require_once(dirname(__FILE__).'/classes/question_manager/Save.php');
 
-	// 	Import jQuery and js file
-	addJQuery ( $PAGE, 'survey_functions.js' );
-	
+	// Read URL params
 	$id = optional_param('id', 0, PARAM_INT);   // Course Module ID
 	$g = optional_param('g', 0, PARAM_INT);		// groupformation instance ID
 	$url_category = optional_param('category','',PARAM_TEXT); 	// category name
+	$current_tab = 'view';
+	
+	// 	Import jQuery and js file
+	addJQuery ( $PAGE, 'survey_functions.js' );
 	
 	if($id) {
 		$cm = get_coursemodule_from_id('groupformation', $id, 0, false, MUST_EXIST);
 		$course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
 		$groupformation = $DB->get_record('groupformation', array('id' => $cm->instance), '*', MUST_EXIST);
-	} else if($g) {
-		$groupformation = $DB->get_record('groupformation', array('id' => $g), '*', MUST_EXIST);
-		$course = $DB->get_record('course', array('id' => $groupformation->course), '*', MUST_EXIST);
-		$cm = get_coursemodule_from_instance('groupformation', $groupformation->id, $course->id, false, MUST_EXIST);
 	} else {
 		error('You must specify a course_module ID or an instance ID');
 	}		
 	
-	$context = context_module::instance($cm->id);
-	$userId = $USER->id;
-	
+	// Require user login if not already logged in
 	require_login($course, true, $cm);
+
+	// Get useful stuff
+	$context = $PAGE->context;
+	$userid = $USER->id;
 		
 	$data = new mod_groupformation_data();
 	$store = new mod_groupformation_storage_manager($groupformation->id);
@@ -102,7 +100,7 @@
 	if(has_capability('mod/groupformation:onlystudent', $context)){
 		if($inArray){
 			
-			$save = new mod_groupformation_save($groupformation->id, $userId, $category);
+			$save = new mod_groupformation_save($groupformation->id, $userid, $category);
 			for($i = 1; $i<=$number; $i++){
 				$temp = $category . $i;
 				if(isset($_POST[$temp])){
@@ -112,7 +110,7 @@
 			}
 			
 			// --- Mathevorkurs
-			if($store->answerNumberForUser($userId, $category) != $number){
+			if($store->answerNumberForUser($userid, $category) != $number){
 				$go = false;
 			}
 			// ---
@@ -126,11 +124,15 @@
 		redirect($returnurl);
 	}
 	
+
+	echo $OUTPUT->header();
+	
+	// Print the tabs.
+	require ('tabs.php');
+	
 	$available = $store->isQuestionaireAvailable();
 	
 	if($available && ($category == '' || $inArray)){
-		echo $OUTPUT->header();
-		
 		
 		// Conditions to show the intro can change to look for own settings or whatever.
 		if ($groupformation->intro) {
@@ -139,7 +141,7 @@
 		
 		$onlystudent = has_capability('mod/groupformation:onlystudent', $context);
 		
-		$questionManager = new mod_groupformation_questionaire($cm->id,$groupformation->id, get_string('language','groupformation'), $userId, $category, $onlystudent);
+		$questionManager = new mod_groupformation_questionaire($cm->id,$groupformation->id, get_string('language','groupformation'), $userid, $category, $onlystudent);
 		
 		if($direction == 0){
 			$questionManager->goBack();
@@ -152,7 +154,7 @@
 		
 	}else if(!$available || $category == 'no'){
 		if(isset($_POST["action"]) && $_POST["action"] == 1){
-			$store->statusChanged($userId);
+			$store->statusChanged($userid);
 		}
 		$returnurl = new moodle_url('/mod/groupformation/view.php', array(
 				'id' => $cm->id, 
@@ -160,7 +162,6 @@
 				'back' => '1'));
 		redirect($returnurl);
 	}else{
-		echo $OUTPUT->header();
 		
 		
 		// Conditions to show the intro can change to look for own settings or whatever.

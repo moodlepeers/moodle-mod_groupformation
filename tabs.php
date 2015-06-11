@@ -45,13 +45,6 @@ if (! isset ( $current_tab )) {
 	$current_tab = '';
 }
 
-
-
-// if (has_capability('mod/groupformation:editparams', $context)) {
-// $editurl = new moodle_url('/mod/groupformation/edit_param.php', array('id'=>$usedid, 'do_show'=>'edit_param'));
-// $row[] = new tabobject('edit_param', $editurl->out(), get_string('edit_param', 'groupformation'));
-// }
-
 if (has_capability ( 'mod/groupformation:editsettings', $context )) {
 	$analyseurl = new moodle_url ( '/mod/groupformation/analysisView.php', array (
 			'id' => $usedid,
@@ -66,7 +59,7 @@ if (has_capability ( 'mod/groupformation:editsettings', $context )) {
 	$answeringViewiewurl = new moodle_url ( '/mod/groupformation/answeringView.php', array (
 			'id' => $usedid
 	) );
-	$row [] = new tabobject ( 'answeringView', $answeringViewiewurl->out (), get_string ( 'tab_preview', 'groupformation' ) );
+	$row [] = new tabobject ( 'view', $answeringViewiewurl->out (), get_string ( 'tab_preview', 'groupformation' ) );
 }elseif (!has_capability ( 'mod/groupformation:editsettings', $context ) && has_capability('mod/groupformation:onlystudent', $context)){
 	$viewurl = new moodle_url ( '/mod/groupformation/view.php', array (
 		'id' => $usedid,

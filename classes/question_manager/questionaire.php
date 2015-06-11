@@ -124,9 +124,6 @@ class mod_groupformation_questionaire {
 	// ---
 	
 	private function printQuestions($questions, $percent) {
-		if (!$this->onlystudent)
-			echo '<div class="col_100 questionaire_hint">'.get_string('questionaire_preview','groupformation').'</div>';
-		
 		$tableType = $questions [0] [0];
 		$headerOptArray = $questions [0] [2];
 		
@@ -246,6 +243,8 @@ class mod_groupformation_questionaire {
 	}
 	
 	public function printQuestionairePage() {
+		if (!$this->onlystudent)
+			echo '<div class="col_100 questionaire_hint">'.get_string('questionaire_preview','groupformation').'</div>';
 		
 		if ($this->question_manager->questionsToAnswer () && $this->question_manager->hasNext ()) {
 			$this->category = $this->question_manager->getCurrentCategory ();
