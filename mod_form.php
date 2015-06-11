@@ -41,7 +41,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		global $PAGE,$USER;
 		
 		// Import jQuery and js file
-		addjQuery ( $PAGE, 'settings_functions.js' );
+		groupformation_add_jquery ( $PAGE, 'settings_functions.js' );
 		
 		// global $CFG, $DB, $OUTPUT;
 		$mform = & $this->_form;

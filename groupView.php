@@ -25,38 +25,19 @@
 	require_once (dirname ( dirname ( dirname ( __FILE__ ) ) ) . '/config.php');
 	require_once (dirname ( __FILE__ ) . '/lib.php');
 	require_once (dirname ( __FILE__ ) . '/locallib.php');
-	
-
-
 
 	// Read URL params
 	$id = optional_param ( 'id', 0, PARAM_INT ); // Course Module ID
-	$g = optional_param ( 'g', 0, PARAM_INT ); // groupformation instance ID
+// 	$g = optional_param ( 'g', 0, PARAM_INT ); // groupformation instance ID
 	$do_show = optional_param('do_show', 'group', PARAM_TEXT);
 	
 	
 	// Import jQuery and js file
-	addJQuery ( $PAGE, 'survey_functions.js' );
+	groupformation_add_jquery ( $PAGE, 'survey_functions.js' );
 	
-	// Determine cm, course and groupformation
-	if ($id) {
-		$cm = get_coursemodule_from_id ( 'groupformation', $id, 0, false, MUST_EXIST );
-		$course = $DB->get_record ( 'course', array ('id' => $cm->course ), '*', MUST_EXIST );
-		$groupformation = $DB->get_record ( 'groupformation', array ('id' => $cm->instance ), '*', MUST_EXIST );
-		// } else if ($g) {
-		// 	$groupformation = $DB->get_record ( 'groupformation', array ('id' => $g ), '*', MUST_EXIST );
-		// 	$course = $DB->get_record ( 'course', array ('id' => $groupformation->course ), '*', MUST_EXIST );
-		// 	$cm = get_coursemodule_from_instance ( 'groupformation', $groupformation->id, $course->id, false, MUST_EXIST );
-	} else {
-		error ( 'You must specify a course_module ID or an instance ID' );
-	}
-	
-	
-	
-	
-	
-	
-	
+	// Determine instances of course module, course, groupformation
+	groupformation_determine_instance($id, $cm, $course, $groupformation);
+		
 	// Require user login if not already logged in
 	require_login ( $course, true, $cm );
 	

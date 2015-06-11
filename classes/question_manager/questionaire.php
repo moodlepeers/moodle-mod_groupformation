@@ -23,7 +23,7 @@
  */
 
 // TODO @EG hier ist Jquery eingebunden worden ohne Fehler!
-// addjQuery($PAGE);
+// groupformation_add_jquery($PAGE);
 require_once (dirname ( __FILE__ ) . '/question_controller.php');
 require_once (dirname ( __FILE__ ) . '/RadioInput.php');
 require_once (dirname ( __FILE__ ) . '/TopicsTable.php');

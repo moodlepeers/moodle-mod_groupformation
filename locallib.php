@@ -35,8 +35,7 @@ defined ( 'MOODLE_INTERNAL' ) || die ();
  * }
  */
 
-
-require_once($CFG->dirroot.'/mod/groupformation/classes/logging/logging_controller.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/logging/logging_controller.php');
 
 /**
  * Adds jQuery
@@ -44,7 +43,7 @@ require_once($CFG->dirroot.'/mod/groupformation/classes/logging/logging_controll
  * @param unknown $PAGE        	
  * @param string $filename        	
  */
-function addjQuery($PAGE, $filename = null) {
+function groupformation_add_jquery($PAGE, $filename = null) {
 	$PAGE->requires->jquery ();
 	$PAGE->requires->jquery_plugin ( 'ui' );
 	$PAGE->requires->jquery_plugin ( 'ui-css' );
@@ -57,80 +56,56 @@ function addjQuery($PAGE, $filename = null) {
 /**
  * Logs action
  *
- * @param unknown $PAGE
- * @param string $filename
+ * @param unknown $PAGE        	
+ * @param string $filename        	
  */
 function groupformation_log($userid, $groupformationid, $message) {
+	$logging_controller = new mod_groupformation_logging_controller ();
 	
-	$logging_controller = new mod_groupformation_logging_controller();
-	
-	return $logging_controller->handle($userid,$groupformationid,$message);
+	return $logging_controller->handle ( $userid, $groupformationid, $message );
 }
 
 /**
  * Triggers event
- * 
- * @param stdClass $cm
- * @param stdClass $course
- * @param stdClass $groupformation
- * @param stdClass $context
+ *
+ * @param stdClass $cm        	
+ * @param stdClass $course        	
+ * @param stdClass $groupformation        	
+ * @param stdClass $context        	
  */
-function groupformation_trigger_event($cm,$course,$groupformation,$context){
-	$event = \mod_groupformation\event\course_module_viewed::create(array(
+function groupformation_trigger_event($cm, $course, $groupformation, $context) {
+	$event = \mod_groupformation\event\course_module_viewed::create ( array (
 			'objectid' => $groupformation->id,
-			'context' => $context,
-	));
-	$event->add_record_snapshot('course', $course);
-	$event->add_record_snapshot($cm->modname, $groupformation);
-	$event->trigger();
+			'context' => $context 
+	) );
+	$event->add_record_snapshot ( 'course', $course );
+	$event->add_record_snapshot ( $cm->modname, $groupformation );
+	$event->trigger ();
 }
 
-
-// function answeredAllQuestions($userid, $groupformationid) {
-// 	global $DB;
-// 	$categorysets = array (
-// 			1 => array (
-// 					'topic',
-// 					'knowledge',
-// 					'general',
-// 					'grade',
-// 					'team',
-// 					'character',
-// 					'motivation' 
-// 			),
-// 			2 => array (
-// 					'topic',
-// 					'knowledge',
-// 					'general',
-// 					'grade',
-// 					'team',
-// 					'character',
-// 					'learning' 
-// 			),
-// 			3 => array (
-// 					'topic',
-// 					'general' 
-// 			) 
-// 	);
-// 	$scenario = $DB->get_record ( 'groupformation', array (
-// 			'id' => $groupformationid 
-// 	) )->szenario;
-// 	$categories = array ();
-// 	foreach ( $DB->get_records ( 'groupformation_q_version' ) as $record ) {
-// 		$categories [$record->category] = intval ( $record->numberofquestion );
-// 	}
-// 	$stats = array ();
-// 	foreach ( $categories as $key => $value ) {
-// 		if (in_array ( $key, $categorysets [$scenario] )) {
-// 			$count = $DB->count_records ( 'groupformation_answer', array (
-// 					'groupformation' => $groupformationid,
-// 					'userid' => $userid,
-// 					'category' => $key 
-// 			) );
-// 			if ($value - $count > 0) {
-// 				return true;
-// 			}
-// 		}
-// 	}
-// 	return false;
-// }
+/**
+ * Determines instances of course module, course and groupformation by id
+ *
+ * @param int $id        	
+ * @param stdClass $cm        	
+ * @param stdClass $course        	
+ * @param stdClass $groupformation         	
+ */
+function groupformation_determine_instance($id, &$cm, &$course, &$groupformation) {
+	global $DB;
+	if ($id) {
+		$cm = get_coursemodule_from_id ( 'groupformation', $id, 0, false, MUST_EXIST );
+		$course = $DB->get_record ( 'course', array (
+				'id' => $cm->course 
+		), '*', MUST_EXIST );
+		$groupformation = $DB->get_record ( 'groupformation', array (
+				'id' => $cm->instance 
+		), '*', MUST_EXIST );
+		// } else if ($g) {
+		// $groupformation = $DB->get_record ( 'groupformation', array ('id' => $g ), '*', MUST_EXIST );
+		// $course = $DB->get_record ( 'course', array ('id' => $groupformation->course ), '*', MUST_EXIST );
+		// $cm = get_coursemodule_from_instance ( 'groupformation', $groupformation->id, $course->id, false, MUST_EXIST );
+	} else {
+		error ( 'You must specify a course_module ID or an instance ID' );
+	}
+}

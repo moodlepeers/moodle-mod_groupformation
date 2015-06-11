@@ -33,20 +33,15 @@
 
 	// Read URL params
 	$id = optional_param('id', 0, PARAM_INT);   // Course Module ID
-	$g = optional_param('g', 0, PARAM_INT);		// groupformation instance ID
+// 	$g = optional_param('g', 0, PARAM_INT);		// groupformation instance ID
 	$url_category = optional_param('category','',PARAM_TEXT); 	// category name
 	$current_tab = 'view';
 	
 	// 	Import jQuery and js file
-	addJQuery ( $PAGE, 'survey_functions.js' );
+	groupformation_add_jquery ( $PAGE, 'survey_functions.js' );
 	
-	if($id) {
-		$cm = get_coursemodule_from_id('groupformation', $id, 0, false, MUST_EXIST);
-		$course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
-		$groupformation = $DB->get_record('groupformation', array('id' => $cm->instance), '*', MUST_EXIST);
-	} else {
-		error('You must specify a course_module ID or an instance ID');
-	}		
+	// Determine instances of course module, course, groupformation
+	groupformation_determine_instance($id, $cm, $course, $groupformation);
 	
 	// Require user login if not already logged in
 	require_login($course, true, $cm);
