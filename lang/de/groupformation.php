@@ -58,11 +58,11 @@ $string ['scenarioInfo'] = 'Die drei Szenarien unterscheiden sich darin, wie die
 		    Beim Referatsgruppen steht das gemeinsame Interesse an den zur Auswahl stehenden Referatsthemen im Vordergrund.';
 $string ['groupformationsettings'] = 'Gruppenformation Einstellungen';
 $string ['scenario_projectteams'] = 'Projektteams';
-$string ['scenario_projectteams_description'] = 'Beim Projekgruppen wird darauf geachtet, dass sich Vorwissen und Merkmale der Gruppenmitglieder erg&auml;nzen während die Motivation und angestrebten Ziele in der Gruppe möglichst ähnlich sind.';
+$string ['scenario_projectteams_description'] = 'Projektteams arbeiten über einen längeren Zeitraum gemeinsam intensiv an einem Projekt (z.B. Durchführung einer Studie, Abgabe eines Berichtes…). Oft können die Aufgaben innerhalb des Teams aufgeteilt werden, sodass es von Vorteil ist, wenn sich die Kompetenzen der Teammitglieder gegenseitig ergänzen. Typischerweise wird die gemeinsame Arbeit mit einer Gruppennote für alle Teammitglieder bewertet. Daher geht es bei der Zusammensetzung von Projektteams primär um ähnliche Motivation und Zielsetzung der Teammitglieder.';
 $string ['scenario_homeworkgroups'] = 'Hausaufgabengruppen';
-$string ['scenario_homeworkgroups_description'] = 'Bei den Hausaufgabengruppen wird so optimiert, dass für jede Gruppe die besten Vorausetzungen f&uuml;r gemeinsames Lernen gegeben sind.';
+$string ['scenario_homeworkgroups_description'] = 'Hausaufgabengruppen arbeiten in regelmäßigen Abständen (meist wöchentlich) an Aufgaben, die zur Vorbereitung auf eine Klausur dienen. Auch wenn die Aufgaben (oft auch "Übungen" oder "Übungszettel" genannt) grundsätzlich auf unterschiedliche Gruppenmitglieder aufgeteilt werden könnten, ist dies meist nicht sinnvoll, weil bei der abschließenden Klausur jedes Gruppenmitglied individuell benotet wird und daher alle Aufgaben selbst lösen können muss. Daher geht es bei der Zusammensetzung von Hausaufgabengruppen primär um unterschiedliches Vorwissen und unterschiedliche Lernstile, die sich ergänzen.';
 $string ['scenario_presentationgroups'] = 'Referatgruppen';
-$string ['scenario_presentationgroups_description'] = 'Bei Referatsgruppen steht das gemeinsame Interesse an den zur Auswahl stehenden Referatsthemen im Vordergrund.';
+$string ['scenario_presentationgroups_description'] = 'Referatsgruppen arbeiten nur über einen relativ kurzen Zeitraum zusammen an einer gemeinsamen Präsentation. Oft wird dabei die Aufgabenstellung schon zu Beginn auf die Gruppenmitglieder aufgeteilt (oder gewählt), dann individuell bearbeitet und erst am Ende wieder zusammengesetzt. Bewertet wird meist die gemeinsame Gruppenleistung. Daher geht es bei der Zusammensetzung von Referatsgruppen primär um gemeinsame Interessen an Themen und Präferenzen für zur Wahl stehende Termine.';
 $string ['time'] = 'Zeit';
 $string ['topics'] = 'Themen';
 $string ['topics_dummy'] = 'Wie sehr möchten Sie das Thema ';
