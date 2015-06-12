@@ -75,6 +75,8 @@
 	$infos = new mod_groupformation_submit_infos ( $groupformation->id );
 	$surveyStatisticNumers = $infos->getInfos ();
 	
+	echo '<div style="color:red;">Diese Seite ist noch in der Entwicklung. Die Inhalte sind ggf. noch rein statisch und haben keinen Effekt oder keine Funktion</div>';
+	
 	echo '
 	<div class="gf_settings_pad">
 		<div class="gf_pad_header">
