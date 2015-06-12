@@ -139,7 +139,6 @@ $string ['stats_all'] = 'In der Kategorie "{$a->category}" haben Sie alle Fragen
 $string ['stats_none'] = 'In der Kategorie "{$a->category}" haben Sie noch keine Frage beantwortet.';
 $string ['tab_questionaire'] = 'Fragebogen';
 $string ['tab_overview'] = 'Überblick';
-$string ['tab_analysis'] = 'Analyse';
 $string ['tab_grouping'] = 'Gruppenbildung';
 $string ['tab_preview'] = 'Fragebogen-Vorschau';
 $string ['tab_evaluation'] = 'Auswertung';

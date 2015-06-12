@@ -50,7 +50,7 @@ if (has_capability ( 'mod/groupformation:editsettings', $context )) {
 			'id' => $usedid,
 			'do_show' => 'analysis' 
 	) );
-	$row [] = new tabobject ( 'analysis', $analyseurl->out (), get_string ( 'tab_analysis', 'groupformation' ) );
+	$row [] = new tabobject ( 'analysis', $analyseurl->out (), get_string ( 'tab_overview', 'groupformation' ) );
 	$groupingurl = new moodle_url ( '/mod/groupformation/groupingView.php', array (
 			'id' => $usedid,
 			'do_show' => 'grouping'

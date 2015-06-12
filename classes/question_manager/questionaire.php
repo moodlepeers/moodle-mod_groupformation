@@ -235,14 +235,14 @@ class mod_groupformation_questionaire {
 		$hasAnsweredEverything = $this->question_manager->hasAllAnswered ();
 		
 		$disabled = ! $hasAnsweredEverything;
-		if (!$this->onlystudent)
+		if (has_capability('mod/groupformation:editsettings', $this->context))
 			echo '<div class="col_100 questionaire_hint">'.get_string('questionaire_submit_disabled_teacher','groupformation').'</div>';
 		
 		echo '		<div class="grid">
 						<div class="questionaire_button_text">' . get_string ( 'questionaire_press_beginning_submit', 'groupformation' ) . '</div>
 						<div class="col_100 questionaire_button_row">';
 		echo '				<button type="submit" name="action" value="0" >' . get_string ( 'questionaire_go_to_start', 'groupformation' ) . '</button>
-							<button type="submit" name="action" value="1" ' . (($disabled || !$this->onlystudent) ? 'disabled' : '') . '>' . get_string ( 'questionaire_submit', 'groupformation' ) . '</button>
+							<button type="submit" name="action" value="1" ' . (($disabled || has_capability('mod/groupformation:editsettings', $this->context)) ? 'disabled' : '') . '>' . get_string ( 'questionaire_submit', 'groupformation' ) . '</button>
 						';
 		echo '			</div>
 					</div>
@@ -250,10 +250,11 @@ class mod_groupformation_questionaire {
 	}
 	
 	public function printQuestionairePage() {
-		if (has_capability('mod/groupformation:editsettings', $this->context))
-			echo '<div class="col_100 questionaire_hint">'.get_string('questionaire_preview','groupformation').'</div>';
 		
 		if ($this->question_manager->questionsToAnswer () && $this->question_manager->hasNext ()) {
+			if (has_capability('mod/groupformation:editsettings', $this->context))
+				echo '<div class="col_100 questionaire_hint">'.get_string('questionaire_preview','groupformation').'</div>';
+			
 			$this->category = $this->question_manager->getCurrentCategory ();
 			
 			$percent = $this->question_manager->getPercent ( $this->category );
