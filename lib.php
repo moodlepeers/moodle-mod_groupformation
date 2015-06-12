@@ -141,7 +141,7 @@ function groupformation_update_instance(stdClass $groupformation, mod_groupforma
 function groupformation_delete_instance($id) {
 	global $DB;
 	
-	// TODO kaskadierendes Löschen der Antworten zur passenden groupforamtion id
+	// TODO kaskadierendes Lï¿½schen der Antworten zur passenden groupforamtion id
 	
 	if (! $groupformation = $DB->get_record ( 'groupformation', array (
 			'id' => $id 
@@ -469,6 +469,12 @@ function groupformation_pluginfile($course, $cm, $context, $filearea, array $arg
  * @param cm_info $cm        	
  */
 function groupformation_extend_navigation(navigation_node $navref, stdclass $course, stdclass $module, cm_info $cm) {
+	foreach ($navref->parent->get_children_key_list() as $key){
+		$node = $navref->parent->get($key);
+		if (count($node->get_children_key_list())==0){
+			$node->nodetype=navigation_node::NODETYPE_LEAF;
+		}
+	}
 }
 
 /**
@@ -483,6 +489,7 @@ function groupformation_extend_navigation(navigation_node $navref, stdclass $cou
  *        	{@link navigation_node}
  */
 function groupformation_extend_settings_navigation(settings_navigation $settingsnav, navigation_node $groupformationnode = null) {
+	
 }
 
 /**
@@ -535,7 +542,7 @@ function groupformation_set_fields(stdClass $groupformation) {
 }
 function groupformation_save_more_infos($groupformation, $init) {
 	
-	// speicher mir zusätzliche Daten ab
+	// speicher mir zusï¿½tzliche Daten ab
 	$store = new mod_groupformation_storage_manager ( $groupformation->id );
 	
 	$knowledgearray = array ();
@@ -572,9 +579,9 @@ function groupformation_save_more_infos($groupformation, $init) {
 				$store->add_catalog_version ( $category, $numbers, $version, TRUE );
 			}
 		} else {
-			// TODO @ALL Wenn man die Fragen ändert, ändern sie sich auch in den alten groupformation Instanzen
-			// da gibt es dann unter umständen konsistenzprobleme
-			// da müssen wir nochmal drüber reden
+			// TODO @ALL Wenn man die Fragen ï¿½ndert, ï¿½ndern sie sich auch in den alten groupformation Instanzen
+			// da gibt es dann unter umstï¿½nden konsistenzprobleme
+			// da mï¿½ssen wir nochmal drï¿½ber reden
 			foreach ( $names as $category ) {
 				$xmlLoader->latestVersion ( $category );
 			}
