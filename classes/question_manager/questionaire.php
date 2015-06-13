@@ -274,9 +274,16 @@ class mod_groupformation_questionaire {
 			
 			$this->printQuestions ( $questions, $percent );
 			
+			// Log access to page
+			groupformation_log($this->userid,$this->groupformationid,'<view_questionaire_category_'.$this->category.'>');
+			
 		} else {
 			
 			$this->printFinalPage ();
+			
+			// Log access to page
+			groupformation_log($this->userid,$this->groupformationid,'<view_questionaire_final_page>');
+				
 		}
 	}
 }

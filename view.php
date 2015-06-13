@@ -55,12 +55,16 @@
 		$current_tab = $do_show;
 	}
 	
+	// Log access to page
+	groupformation_log($USER->id,$groupformation->id,'<view_student_overview>');
+	
 	$store = new mod_groupformation_storage_manager($groupformation->id);
 	$info = new mod_groupformation_infoText ($cm->id, $groupformation->id, $userid );
 
 	// Trigger event TODO @Nora why?
 	groupformation_trigger_event($cm,$course,$groupformation,$context);
-	
+
+	// Set PAGE config
 	$PAGE->set_url('/mod/groupformation/view.php', array('id' => $cm->id, 'do_show' => $do_show));
 	$PAGE->set_title(format_string($groupformation->name));
 	$PAGE->set_heading(format_string($course->fullname));

@@ -52,27 +52,13 @@
 		$current_tab = $do_show;
 	}	
 	
-// 	if ($do_show == 'grouping' && has_capability('mod/groupformation:editsettings', $context)){
-// 		// STAY HERE
-// 		$current_tab = $do_show;
-// 	}elseif ($do_show == 'view'){
-// 		$returnurl = new moodle_url('/mod/groupformation/view.php', array('id' => $id, 'do_show' => 'view'));
-// 		redirect($returnurl);
-// 	}else{
-// 		$returnurl = new moodle_url('/mod/groupformation/view.php', array('id' => $id, 'do_show' => 'view'));
-// 		redirect($returnurl);
-// 	}
-
-
-
-	
-
-
-	
-	
+	// Log access to page
+	groupformation_log($USER->id,$groupformation->id,'<view_student_group_assignment>');
+		
 	// Trigger event TODO @Nora why?
 	groupformation_trigger_event($cm, $course, $groupformation, $context);
-	
+
+	// Set PAGE config
 	$PAGE->set_url ( '/mod/groupformation/evaluationView.php', array ('id' => $cm->id, 'do_show' => $do_show ) );
 	$PAGE->set_title ( format_string ( $groupformation->name ) );
 	$PAGE->set_heading ( format_string ( $course->fullname ) );

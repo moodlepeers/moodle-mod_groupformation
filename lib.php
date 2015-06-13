@@ -81,9 +81,16 @@ function groupformation_add_instance(stdClass $groupformation, mod_groupformatio
 	
 	// You may have to add extra stuff in here.
 	$groupformation->id = $DB->insert_record ( 'groupformation', $groupformation );
+	
+	// Log access to page
+	groupformation_log($USER->id,$groupformation->id,'<create_instance>');
+	
 	groupformation_grade_item_update ( $groupformation );
 	
 	groupformation_save_more_infos ( $groupformation, TRUE );
+	
+	// Log access to page
+	groupformation_log($USER->id,$groupformation->id,'<save_settings>');
 	
 	return $groupformation->id;
 }
@@ -109,6 +116,9 @@ function groupformation_update_instance(stdClass $groupformation, mod_groupforma
 	$groupformation->timemodified = time ();
 	$groupformation->id = $groupformation->instance;
 	
+	// Log access to page
+	groupformation_log($USER->id,$groupformation->id,'<update_instance>');
+	
 	if ($DB->count_records('groupformation_answer', array('groupformation' => $groupformation->id)) == 0){
 		$result = $DB->update_record ( 'groupformation', $groupformation );
 	}else{
@@ -123,6 +133,9 @@ function groupformation_update_instance(stdClass $groupformation, mod_groupforma
 	groupformation_grade_item_update ( $groupformation );
 	
 	groupformation_save_more_infos ( $groupformation, FALSE );
+	
+	// Log access to page
+	groupformation_log($USER->id,$groupformation->id,'<save_settings>');
 	
 	return $result;
 }
@@ -141,8 +154,6 @@ function groupformation_update_instance(stdClass $groupformation, mod_groupforma
 function groupformation_delete_instance($id) {
 	global $DB;
 	
-	// TODO kaskadierendes L�schen der Antworten zur passenden groupforamtion id
-	
 	if (! $groupformation = $DB->get_record ( 'groupformation', array (
 			'id' => $id 
 	) )) {
@@ -160,6 +171,9 @@ function groupformation_delete_instance($id) {
 	$DB->delete_records('groupformation_started', array ('groupformation'=> $groupformation->id));
 	
 	groupformation_grade_item_delete ( $groupformation );
+	
+	// Log access to page
+	groupformation_log($USER->id,$groupformation->id,'<delete_instance>');
 	
 	return true;
 }

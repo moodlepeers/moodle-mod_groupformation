@@ -57,10 +57,16 @@
 	
 	$category = "";
 
-	if (has_capability('mod/groupformation:onlystudent', $context))
+	if (!has_capability('mod/groupformation:editsettings', $context)) {
 		$current_tab = 'answering';
-	else
+		// Log access to page
+		groupformation_log($USER->id,$groupformation->id,'<view_student_questionaire>');
+		
+	} else {
 		$current_tab = 'view';
+		// Log access to page
+		groupformation_log($USER->id,$groupformation->id,'<view_teacher_questionaire_preview>');
+	}
 	
 	if (isset($_POST["category"])){
 		$category = $_POST['category'];
@@ -70,7 +76,7 @@
 
 	$number = $store->getNumber($category);
 	
-	
+	// Set PAGE config
 	$PAGE->set_url('/mod/groupformation/answeringView.php', array('id' => $cm->id));
 	$PAGE->set_title(format_string($groupformation->name));
 	$PAGE->set_heading(format_string($course->fullname));

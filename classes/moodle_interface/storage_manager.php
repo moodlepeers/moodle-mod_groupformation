@@ -78,6 +78,25 @@ class mod_groupformation_storage_manager {
 	}
 	
 	/**
+	 *
+	 * @param moodleform_mod $mform
+	 */
+	function changesPossible(&$mform) {
+		global $DB;
+		// Are changes possible?
+		// check if somebody submitted an answer already
+		$id = $this->groupformationid;
+		if ($id != '') {
+			$count = $DB->count_records ( 'groupformation_answer', array (
+					'groupformation' => $id
+			) );
+			if ($count > 0)
+				return False;
+		}
+		return true;
+	}
+	
+	/**
 	 * Deletes all questions in a specific category
 	 * 
 	 * @param string $category
@@ -196,7 +215,7 @@ class mod_groupformation_storage_manager {
 	public function hasAnsweredEverything($userid) {
 		$scenario = $this->getScenario();
 		$data = new mod_groupformation_data ();
-		//TODO @René
+		//TODO @Renï¿½
 		//Sollte man hier nicht auf das CriterionSet zugreifen
 		$categories = $data->getCategorySet($scenario);
 		$sum = array_sum($this->getNumbers($categories));
@@ -278,7 +297,7 @@ class mod_groupformation_storage_manager {
 		}
 	}
 	
-	// gibt ein array zurück, in dem auf der ersten Position die Startzeit gespeichert ist und auf der zweiten Position die Endzeit
+	// gibt ein array zurï¿½ck, in dem auf der ersten Position die Startzeit gespeichert ist und auf der zweiten Position die Endzeit
 	/**
 	 * Returns map with availability times (xxx_raw is timestamp, xxx is formatted time for display)
 	 * @return multitype:string NULL mixed
@@ -677,7 +696,7 @@ class mod_groupformation_storage_manager {
 	}
 	
 	/**
-	 * @René willst du dass nicht lieber in eine neue Klasse auslagern?
+	 * @Renï¿½ willst du dass nicht lieber in eine neue Klasse auslagern?
 	 * Assigns user to group A or group B (creates those if they do not exist)
 	 * 
 	 * @param unknown $userid

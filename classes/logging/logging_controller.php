@@ -25,82 +25,110 @@
 if (! defined ( 'MOODLE_INTERNAL' )) {
 	die ( 'Direct access to this script is forbidden.' ); // / It must be included from a Moodle page
 }
-
-// define('MOTIVATION', 7);
-// define('TEAM', 4);
-// define('LEARNING', 6);
-// define('CHARACTER', 5);
-// define('GENERAL', 2);
-// define('KNOWLEDGE', 1);
-// define('TOPIC', 0);
-// define('GRADE', 3);
 class mod_groupformation_logging_controller {
-	
-	const LOGGING_LEVEL = 3;
-
+	const LOGGING_LEVEL = 4;
 	const FATAL = 0;
 	const ERROR = 1;
 	const WARNING = 2;
 	const INFO = 3;
 	const DEBUG = 4;
-	
 	private $LOGGING_LEVELS;
-		
 	const LOGGING_TABLE_NAME = "groupformation_logging";
-	private $MESSAGES = array('<index>'=>3, '<settings>'=>3, '<begin_questionaire>'=>3, '<category_questionaire>'=>3, 
-				'<continue_questionaire>'=>3, '<submit_questionaire>'=>3, '<start_groupal>'=>3, 
-				'<cancel_groupal>'=>3, '<restart_groupal>'=>3, '<view_results_groupal>'=>3, '<accept_results_groupal>'=>3, 
-				'<delete_results_groupal>'=>3, '<delete>'=>3, '<unknown>'=>3);
+	private $MESSAGES = array (
+			'<index>' => 3,
+			
+			'<create_instance>' => 3,
+			'<update_instance>' => 3,
+			'<delete_instance>' => 3,
+			
+			'<view_settings>' => 3,
+			'<save_settings>' => 3,
+			
+			'<view_student_overview>' => 3,
+			'<view_student_questionaire>' => 3,
+			'<view_student_evaluation>' => 3,
+			'<view_student_group_assignment>' => 3,
+			
+			'<view_teacher_overview>' => 3,
+			'<view_teacher_grouping>' => 3,
+			'<view_teacher_questionaire_preview>' => 3,
+			
+			'<view_questionaire_category_topic>' => 3,
+			'<view_questionaire_category_knowledge>' => 3,
+			'<view_questionaire_category_team>' => 3,
+			'<view_questionaire_category_character>' => 3,
+			'<view_questionaire_category_motivation>' => 3,
+			'<view_questionaire_category_learning>' => 3,
+			'<view_questionaire_final_page>' => 3,
+			
+// 			'<begin_questionaire>' => 3,
+// 			'<view_category_questionaire>' => 3,
+// 			'<continue_questionaire>' => 3,
+// 			'<submit_questionaire>' => 3,
+// 			'<start_groupal>' => 3,
+// 			'<cancel_groupal>' => 3,
+// 			'<restart_groupal>' => 3,
+// 			'<view_results_groupal>' => 3,
+// 			'<accept_results_groupal>' => 3,
+// 			'<delete_results_groupal>' => 3,
+// 			'<unknown>' => 3 
+	);
 	
 	/**
 	 * Creates logging controller instance
 	 */
-	public function __construct(){
-		$this->LOGGING_LEVELS = array(self::FATAL,self::ERROR,self::WARNING,self::INFO,self::DEBUG);
+	public function __construct() {
+		$this->LOGGING_LEVELS = array (
+				self::FATAL,
+				self::ERROR,
+				self::WARNING,
+				self::INFO,
+				self::DEBUG 
+		);
 	}
 	
 	/**
 	 * Handles data and tries logging it
-	 * 
-	 * @param int $userid
-	 * @param int $groupformationid
-	 * @param string $message
+	 *
+	 * @param int $userid        	
+	 * @param int $groupformationid        	
+	 * @param string $message        	
 	 * @return boolean
 	 */
-	public function handle($userid,$groupformationid,$message){
-		if (!$this->isValidMessage($message))
-			return false;
+	public function handle($userid, $groupformationid, $message) {
+		if ($groupformationid != 0 && $userid != 0 && $this->isValidMessage ( $message ))
+			$this->create_log_entry ( $userid, $groupformationid, $message );
 		else
-			$this->create_log_entry($userid, $groupformationid, $message);
+			return false;
 	}
 	
 	/**
-	 * Creates log entry in database 
-	 * 
-	 * @param int $userid
-	 * @param int $groupformationid
-	 * @param string $message
+	 * Creates log entry in database
+	 *
+	 * @param int $userid        	
+	 * @param int $groupformationid        	
+	 * @param string $message        	
 	 */
-	public function create_log_entry($userid,$groupformationid,$message){
+	public function create_log_entry($userid, $groupformationid, $message) {
 		global $DB;
-		$timestamp = time();
+		$timestamp = time ();
 		
-		$log_entry = new stdClass();
+		$log_entry = new stdClass ();
 		$log_entry->timestamp = $timestamp;
 		$log_entry->userid = $userid;
 		$log_entry->groupformationid = $groupformationid;
 		$log_entry->message = $message;
 		
-		$DB->insert_record(self::LOGGING_TABLE_NAME, $log_entry);
+		$DB->insert_record ( self::LOGGING_TABLE_NAME, $log_entry );
 	}
 	
 	/**
 	 * Checks if message is valid
-	 * 
-	 * @param string $message
+	 *
+	 * @param string $message        	
 	 * @return boolean
 	 */
-	private function isValidMessage($message){
-		return key_exists($message, $this->MESSAGES) && $this->MESSAGES[$message] <= self::LOGGING_LEVEL;
+	private function isValidMessage($message) {
+		return key_exists ( $message, $this->MESSAGES ) && $this->MESSAGES [$message] <= self::LOGGING_LEVEL;
 	}
 }

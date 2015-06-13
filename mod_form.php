@@ -30,7 +30,11 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 require_once ($CFG->dirroot . '/course/moodleform_mod.php');
 require_once ($CFG->dirroot . '/mod/groupformation/lib.php'); // not in the template
 require_once ($CFG->dirroot . '/mod/groupformation/locallib.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
+
 class mod_groupformation_mod_form extends moodleform_mod {
+	
+	private $store;
 	
 	/**
 	 * (non-PHPdoc)
@@ -39,6 +43,11 @@ class mod_groupformation_mod_form extends moodleform_mod {
 	 */
 	function definition() {
 		global $PAGE,$USER;
+		
+		$this->store = new mod_groupformation_storage_manager($this->_instance);
+		
+		// Log access to page
+		groupformation_log($USER->id,$this->_instance,'<view_settings>');
 		
 		// Import jQuery and js file
 		groupformation_add_jquery ( $PAGE, 'settings_functions.js' );
@@ -70,7 +79,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		$mform->setExpanded('timinghdr');
 		// no changes possible hint
 		$changemsg = '<div class="fitem" id="nochangespossible"';
-		if (!$this->changesPossible ( $mform )) {
+		if (!$this->store->changesPossible ( $mform )) {
 			$changemsg .= ' ><span value="1"';
 		} else {
 			$changemsg .= ' style="display:none;"><span value="0"';
@@ -100,27 +109,6 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		
 		// Add standard buttons, common to all modules.
 		$this->add_action_buttons ();
-// 		TODO @Johannes hier ist ein Beispiel für ein Logging-Event (serverseitig)
-// 		groupformation_log($USER->id,$this->_instance,'<settings>');
-	}
-	
-	/**
-	 *
-	 * @param moodleform_mod $mform        	
-	 */
-	function changesPossible(&$mform) {
-		global $DB;
-		// Are changes possible?
-		// check if somebody submitted an answer already
-		$id = $this->_instance;
-		if ($id != '') {
-			$count = $DB->count_records ( 'groupformation_answer', array (
-					'groupformation' => $id 
-			) );
-			if ($count > 0)
-				return False;
-		}
-		return true;
 	}
 	
 	/**
@@ -458,7 +446,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
                     </div>
 
                 </div> <!-- /grid -->
-                ' ); // TODO @Rene: lang File fï¿½r tooltip "Maximale Punktzahl" (siehe Zeile oben)
+                ' ); // TODO @Rene: lang File fÃ¼r tooltip "Maximale Punktzahl" (siehe Zeile oben)
 		     
 		// close wrapper of the szenario
 		$mform->addElement ( 'html', '</div>' );
@@ -474,7 +462,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 	 */
 	function generateHTMLforNonJS(&$mform) {
 		$changemsg = '<div class="fitem" id="nochangespossible"';
-		if (! $this->changesPossible ( $mform )) {
+		if (! $this->store->changesPossible ( $mform )) {
 			$changemsg .= ' ><span value="1"';
 		} else {
 			$changemsg .= ' style="display:none;"><span value="0"';
