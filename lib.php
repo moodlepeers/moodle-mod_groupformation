@@ -108,7 +108,7 @@ function groupformation_add_instance(stdClass $groupformation, mod_groupformatio
  * @return boolean Success/Fail
  */
 function groupformation_update_instance(stdClass $groupformation, mod_groupformation_mod_form $mform = null) {
-	global $DB;
+	global $DB,$USER;
 	
 	// checks all fields and sets them properly
 	$groupformation = groupformation_set_fields ( $groupformation );
@@ -152,7 +152,7 @@ function groupformation_update_instance(stdClass $groupformation, mod_groupforma
  * @return boolean Success/Failure
  */
 function groupformation_delete_instance($id) {
-	global $DB;
+	global $DB,$USER;
 	
 	if (! $groupformation = $DB->get_record ( 'groupformation', array (
 			'id' => $id 

@@ -102,7 +102,7 @@
 	//---
 	
 	$inArray = in_array($category, $names);
-	if(has_capability('mod/groupformation:onlystudent', $context)){
+	if(has_capability('mod/groupformation:onlystudent', $context) && !has_capability('mod/groupformation:editsettings', $context)){
 		if($inArray){
 			
 			$save = new mod_groupformation_save($groupformation->id, $userid, $category);
@@ -137,7 +137,7 @@
 	
 	$available = $store->isQuestionaireAvailable();
 	
-	if($available && ($category == '' || $inArray)){
+	if(($available || has_capability('mod/groupformation:editsettings', $context)) && ($category == '' || $inArray)){
 		
 		// Conditions to show the intro can change to look for own settings or whatever.
 		if ($groupformation->intro) {
