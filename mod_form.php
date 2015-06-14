@@ -266,7 +266,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 <!--                      Die Vorschau      -->
                                     <div class="col_m_50">
                                         
-                                        <h3>' . get_string ( 'preview', 'groupformation' ) . '</h3>
+                                        <h5>' . get_string ( 'preview', 'groupformation' ) . '</h5>
                     
                                             <div class="col_m_100">' .
 		// '<h4 class="view_on_mobile">'.get_string('knowledge_question','groupformation').'</h4>'.
@@ -363,7 +363,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 <!--                      Die Vorschau      -->
                                     <div class="col_m_50">
                                         
-                                        <h3>' . get_string ( 'preview', 'groupformation' ) . '</h3>
+                                        <h5>' . get_string ( 'preview', 'groupformation' ) . '</h5>
                     
                                         <div class="col_m_100">' .
 		// '<h4 class="view_on_mobile">'.get_string('topics_question','groupformation').'</h4>'.

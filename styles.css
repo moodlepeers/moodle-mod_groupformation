@@ -720,6 +720,10 @@ table.tabled_inputs label, table.tabled_inputs input[type=radio] {
 @media (max-width: 48em) {
     .gf_pad_header, .gf_pad_header > p {
         padding: 1em 0.4em 1em; } }
+.gf_pad_header .toolt:after, .gf_pad_header > p .toolt:after {
+    font-size: 70%; }
+.gf_pad_header .toolt[tooltip]:hover:before, .gf_pad_header > p .toolt[tooltip]:hover:before {
+    font-size: 70% !important; }
 
 .gf_pad_header_small {
     font-weight: bold;
