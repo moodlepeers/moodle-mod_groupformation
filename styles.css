@@ -295,7 +295,8 @@ h1.caption {
     border: 1px solid #ffedca;
     border-radius: 4px;
     padding: 8px 35px 8px 14px;
-    margin-bottom: 20px;
+    margin-top: 2px;
+    margin-bottom: 3px;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5); }
   .js_errors p:before{
     font-weight: bold;

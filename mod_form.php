@@ -166,7 +166,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
                                 <span class="required"></span>
                             </div>
 				
-					<div class="col_m_100 js_errors" id="szenario_error">
+					<div class="js_errors" id="szenario_error">
                             <p></p>
                     </div>
 			
@@ -209,7 +209,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		$mform->addElement ( 'html', '<div id="js_szenarioWrapper">' );
 
         //wrapper for preknowledge
-        $mform->addElement ('html', '<div class="gf_settings_pad" id="hereIam">');
+        $mform->addElement ('html', '<div class="gf_settings_pad">');
 
         // add checkbox preknowledge
         $mform->addElement ( 'html', '
@@ -400,16 +400,15 @@ class mod_groupformation_mod_form extends moodleform_mod {
 
                 </div>
 
+                <div class="js_errors" id="maxmembers_error">
+                             <p></p>
+                </div>
+                <div class="js_errors" id="maxgroups_error">
+                        <p></p>
+                </div>
+
                 <div class="gf_pad_content">
                     <div class="grid">
-				
-					<div class="col_100 js_errors" id="maxmembers_error">
-                             <p></p>
-                    </div>
-                    <div class="col_100 js_errors" id="maxgroups_error">
-                            <p></p>
-                    </div>
-
                     <div class="col_m_50"><label><input type="radio" name="group_opt" id="group_opt_size" value="group_size" checked="checked" />
                                 ' . get_string ( 'maxmembers', 'groupformation' ) . '</label>
 								<input type="number" class="group_opt" id="group_size" min="0" max="100" value="0" /></div>
@@ -429,7 +428,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		$mform->addElement ( 'html', '
                 <div class="gf_pad_header">'
 
-            . get_string ( 'groupname', 'groupformation' ) . '<span class="required"></span><span class="toolt" tooltip="' . get_string ( 'groupname_help', 'groupformation' ) . '"></span>
+            . get_string ( 'groupname', 'groupformation' ) . '<span class="optional"></span><span class="toolt" tooltip="' . get_string ( 'groupname_help', 'groupformation' ) . '"></span>
                 </div>
                 <div class="gf_pad_content">
                     <input type="text" class="respwidth" id="js_groupname" />
@@ -452,11 +451,11 @@ class mod_groupformation_mod_form extends moodleform_mod {
             . get_string ( 'evaluationmethod_description', 'groupformation' ) . '<span class="required"></span>
                 </div>
 				
-					<div class="col_100 js_errors" id="evaluationmethod_error">
+					<div class="js_errors" id="evaluationmethod_error">
                             <p></p>
                     </div>
 
-                    <div class="col_100 js_errors" id="maxpoints_error">
+                    <div class="js_errors" id="maxpoints_error">
                             <p></p>
                     </div>
 				
