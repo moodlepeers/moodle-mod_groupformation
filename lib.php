@@ -72,7 +72,7 @@ function groupformation_supports($feature) {
  * @return int The id of the newly inserted groupformation record
  */
 function groupformation_add_instance(stdClass $groupformation, mod_groupformation_mod_form $mform = null) {
-	global $DB;
+	global $DB, $USER;
 	
 	$groupformation->timecreated = time ();
 	
