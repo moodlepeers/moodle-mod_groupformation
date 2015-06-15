@@ -130,10 +130,9 @@ class mod_groupformation_data {
 			)
 	);
 	
-	//@JK es muss noch geklärt werden, ob Topics homgen oder heterogen sein sollen
 	private $HOMOGEN_SETS = array (
 			'1' => array (
-					false,
+					true,
 					false,
 					true,
 					true,
@@ -143,7 +142,7 @@ class mod_groupformation_data {
 					true
 			),
 			'2' => array (
-					false,
+					true,
 					false,
 					false,
 					false,
@@ -152,9 +151,14 @@ class mod_groupformation_data {
 					false 
 			),
 			'3' => array (
-					false
+					true
 			)
 	);
+	
+	private $Big5HomogenExtra_LABEL = array('Gewissenhaftigkeit', 'Vertraeglichkeit');
+	private $Big5HeterogenExtra_LABEL = array('Extraversion', 'Neurotizismus', 'Offenheit');
+	private $FamExtra_LABEL = array('Herausforderung', 'Interesse', 'Erfolg', 'Misserfolg');
+	private $LearnExtra_LABEL = array('KE', 'AE', 'RB', 'AB');
 	
 	private $CATEGORY_SETS = array (
 			'1' => array (
@@ -233,6 +237,24 @@ class mod_groupformation_data {
 	}
 	public function getCriterionNames() {
 		return $this->CRITERION_CATEGORYS;
+	}
+	
+	public function getExtraLabel($label){
+		if($label == 'fam'){
+			return $this->FamExtra_LABEL;
+		}
+		
+		if($label == 'learning'){
+			return $this->LearnExtra_LABEL;
+		}
+		
+		if($label == 'big5_homogen'){
+			return $this->Big5HomogenExtra_LABEL;
+		}
+		
+		if($label == 'big5_heterogen'){
+			return $this->Big5HeterogenExtra_LABEL;
+		}
 	}
 	
 	public function getPositions($category, $szenario){

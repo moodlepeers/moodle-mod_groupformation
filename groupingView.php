@@ -25,6 +25,7 @@
 	require_once (dirname ( dirname ( dirname ( __FILE__ ) ) ) . '/config.php');
 	require_once (dirname ( __FILE__ ) . '/lib.php');
 	require_once (dirname ( __FILE__ ) . '/locallib.php');
+	require_once ($CFG->dirroot . '/mod/groupformation/classes/group_forming/startGrouping.php');
 	
 	// Read URL params
 	$id = optional_param ( 'id', 0, PARAM_INT ); // Course Module ID
@@ -51,6 +52,11 @@
 		$current_tab = $do_show;
 	}	
 	
+	$s = 0;
+	if(isset($_POST["starting"])){
+		$s = $_POST['starting'];
+	}
+	
 	// Log access to page
 	groupformation_log($USER->id,$groupformation->id,'<view_teacher_grouping>');
 	
@@ -72,6 +78,10 @@
 		echo $OUTPUT->box ( format_module_intro ( 'groupformation', $groupformation, $cm->id ), 'generalbox mod_introbox', 'groupformationintro' );
 	}
 	
+	var_dump($s);
+	if($s == 1){
+		mod_groupformation_startGrouping::start($groupformation->id);
+	}
 	// Replace the following lines with you own code.
 	//echo $OUTPUT->heading ( $groupformation->name );
 	
@@ -81,18 +91,25 @@
 	
 	echo '<div style="color:red;">Diese Seite ist noch in der Entwicklung. Die Inhalte sind ggf. noch rein statisch und haben keinen Effekt oder keine Funktion</div>';
 	
+	echo '<form action="' . htmlspecialchars ( $_SERVER ["PHP_SELF"] ) . '" method="post" autocomplete="off">';
+	
+	echo '<input type="hidden" name="id" value="' . $id . '"/>';
+	
 	echo '
 	<div class="gf_settings_pad">
 		<div class="gf_pad_header">
 		Gruppenbildung
 		</div>
 		<div class="gf_pad_content bp_align_left-middle">
-			<button class="gf_button gf_button_pill gf_button_small" disabled>Gruppen bilden</button>
+			<button type="submit" name="starting" value="1" class="gf_button gf_button_pill gf_button_small">Gruppen bilden</button>
 			<button class="gf_button gf_button_pill gf_button_small" disabled>Gruppenbildung stoppen</button>
 			<button class="gf_button gf_button_pill gf_button_small" >Gruppen l&ouml;schen</button>
 			<p>Statusanzeige "Gruppenbildung l&auml;uft..." mit %Zahl oder voraussichtlicher Endzeit</p>
-		</div>
-		<div class="gf_pad_header_small">
+		</div>';
+	
+	echo '</form>';
+	
+	echo  '	<div class="gf_pad_header_small">
 			Auswertung
 		</div>
 		<div class="gf_pad_content">
