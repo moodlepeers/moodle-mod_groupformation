@@ -55,6 +55,7 @@ class DropdownInput {
 		
 		echo '<td class="center">
 				<select name="'. $this->category . $this->qnumber  .'" id="' . $this->category . $this->qnumber  .'">';
+                echo '<option value="0"> - </option>';
 		
 		foreach ($this->optArray as $option){
 			if($answer == $questionCounter){

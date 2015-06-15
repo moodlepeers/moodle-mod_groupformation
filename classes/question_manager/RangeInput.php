@@ -42,10 +42,7 @@ class RangeInput{
 		
 		echo '<tr>';
 		echo '<th scope="row">' . $this->question . '</th>';
-		
-		//TODO @ALL Wer hat hier label eingebaut und wozu? :) Die Zeile drüber war schon richtig! by EG
-// 		echo '<td> <label for="' . $this->category . $this->qnumber . '">' .
-// 				$this->question . '</label> </td>';
+
 		
 		$answer = 0;
 		if($hasAnswer){

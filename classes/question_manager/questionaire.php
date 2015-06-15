@@ -157,7 +157,10 @@ class mod_groupformation_questionaire {
 		$this->header->__printHTML ( $this->category, $tableType, $headerOptArray );
 		
 		$hasAnswer = count ( $questions [0] ) == 4;
-		
+
+        //var_dump($questions);
+        //var_dump($this->category);
+
 		// each question with inputs
 		foreach ( $questions as $q ) {
 			if ($q [0] == 'dropdown') {

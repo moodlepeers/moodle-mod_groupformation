@@ -110,7 +110,6 @@
 				$temp = $category . $i;
 				if(isset($_POST[$temp])){
 					$save->save($_POST[$temp], $i);
-					
 				}
 			}
 			

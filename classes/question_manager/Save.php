@@ -48,12 +48,15 @@
 		
 		
 		public function save($answer, $position){
-			
-			$this->store->saveAnswer($this->userId, $answer, $this->category, $position);
-			if($this->status == -1){
-				$this->status = SAVE;
-				$this->store->statusChanged($this->userId);
-			}
-			
+            // if the answer in category "grade"(dropdowns) is default(0) - return without saving
+			if($this->category == 'grade' && $answer == '0'){
+                return;}
+            else{
+                $this->store->saveAnswer($this->userId, $answer, $this->category, $position);
+                if($this->status == -1){
+                    $this->status = SAVE;
+                    $this->store->statusChanged($this->userId);
+                }
+            }
 		}
 	}
