@@ -22,7 +22,7 @@ $(document).ready(function() {
     	 }
     });
 
-
+    // create hidden Inputs of Topics to write the order of Topics to db with $_POST method
     function createTopicInputs(){
         var sortedIDs = $( ".sortable_topics" ).sortable( "toArray" );
         $.each(sortedIDs, function(index, value){
@@ -32,6 +32,15 @@ $(document).ready(function() {
     createTopicInputs();
 
 
+    // write to hidden inputs to mark range-inputs as valid when they get clicked
+    $('.gf_range_inputs').click(function(){
+        $('input[name="'+ $(this).prop('name')+'_valid"]').val(1);
+    });
+
+
+
+    // if no survey_warnings appear - remove the ccs class "noAnswer" from questions(with radiobuttons) without answer.
+    // This happens when questions are viewed by student first time
     if($('.survey_warnings').length < 1){
         $('.responsive-table>tbody>tr.noAnswer').each(function(){
             $(this).removeClass('noAnswer');

@@ -106,12 +106,29 @@
 		if($inArray){
 			
 			$save = new mod_groupformation_save($groupformation->id, $userid, $category);
-			for($i = 1; $i<=$number; $i++){
-				$temp = $category . $i;
-				if(isset($_POST[$temp])){
-					$save->save($_POST[$temp], $i);
-				}
-			}
+            if($category == 'knowledge'){
+                for($i = 1; $i<=$number; $i++){
+                    $tempValidateRangeValue = $category . $i . '_valid';
+                    $temp = $category . $i;
+                    if(isset($_POST[$temp]) && $_POST[$tempValidateRangeValue] == '1'){
+                        $save->save($_POST[$temp], $i);
+                    }
+                }
+                /*}else if($category == 'grade'){
+                    for($i = 1; $i<=$number; $i++){
+                        $temp = $category . $i;
+                        if(isset($_POST[$temp]) && $_POST[$temp] != 0){
+                            $save->save($_POST[$temp], $i);
+                        }
+                    }*/
+            }else{
+                for($i = 1; $i<=$number; $i++){
+                    $temp = $category . $i;
+                    if(isset($_POST[$temp])){
+                        $save->save($_POST[$temp], $i);
+                    }
+                }
+            }
 			
 			// --- Mathevorkurs
 			if($store->answerNumberForUser($userid, $category) != $number){

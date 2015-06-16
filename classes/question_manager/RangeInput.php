@@ -39,21 +39,24 @@ class RangeInput{
 		$optArray = $q[2];
 		$this->category = $cat;
 		$this->qnumber = $qnumb;
-		
-		echo '<tr>';
-		echo '<th scope="row">' . $this->question . '</th>';
 
 		
 		$answer = 0;
-		if($hasAnswer){
+		if($hasAnswer && $q[3]!= -1){
 			//$answer ist die position im optionArray bzw. der eingstellte Range von der Antwort
 			$answer = $q[3];
-		}
+            echo '<tr>';
+            echo '<th scope="row">' . $this->question . '</th>';
+		}else{
+            echo '<tr class="noAnswer">';
+            echo '<th scope="row">' . $this->question . '</th>';
+        }
 	
 		echo '<td data-title="0 = ' . $optArray[1] . ', 100 = ' . $optArray[0] . '" class="range">
 					<span class="">0</span>
-					<input type="range" name="'. $this->category . $this->qnumber .'" min="0" max="100" value="'. $answer .'" />
+					<input type="range" name="'. $this->category . $this->qnumber .'" class="gf_range_inputs" min="0" max="100" value="'. $answer .'" />
 					<span class="">100</span>
+					<input type="text" name="'. $this->category . $this->qnumber .'_valid" value="0" />
 					</td>';
 		echo '</tr>';
 		

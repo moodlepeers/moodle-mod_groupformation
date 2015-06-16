@@ -45,13 +45,21 @@ class DropdownInput {
 		
 		$answer = -1;
 		$questionCounter = 1;
-		if($hasAnswer){
-			//$answer ist die position im optionArray von der Antwort
-			$answer = $q[3];
-		}
+
+        if($hasAnswer){
+            //$answer ist die position im optionArray von der Antwort
+            $answer = $q[3];
+        }
+
+		if($q[3] != -1){
+            echo '<tr>';
+            echo '<th scope="row">' . $this->question . '</th>';
+		}else{
+            echo '<tr class="noAnswer">';
+            echo '<th scope="row">' . $this->question . '</th>';
+        }
 		
-		echo '<tr>';
-		echo '<th scope="row">' . $this->question . '</th>';
+
 		
 		echo '<td class="center">
 				<select name="'. $this->category . $this->qnumber  .'" id="' . $this->category . $this->qnumber  .'">';
