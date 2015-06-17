@@ -51,7 +51,7 @@ class DropdownInput {
             $answer = $q[3];
         }
 
-		if($q[3] != -1){
+		if($hasAnswer && $q[3] != -1){
             echo '<tr>';
             echo '<th scope="row">' . $this->question . '</th>';
 		}else{

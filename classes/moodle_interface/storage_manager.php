@@ -674,7 +674,6 @@ class mod_groupformation_storage_manager {
 	 */
 	public function isQuestionaireAvailable() {
 		global $DB;
-		
 		$now = time ();
 		
 		$time = $this->getTime ();
@@ -693,6 +692,17 @@ class mod_groupformation_storage_manager {
 		}
 		
 		return false;
+	}
+	
+	
+	public function isQuestionaireCompleted($userid){
+		global $DB;
+		
+		if (!$DB->record_exists('groupformation_started', array('userid'=>$userid,'groupformation'=>$this->groupformationid)))
+			return false;
+		$record = $DB->get_record('groupformation_started', array('userid'=>$userid,'groupformation'=>$this->groupformationid));
+		
+		return ($record->completed == '1');
 	}
 	
 	/**

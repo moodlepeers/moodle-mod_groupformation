@@ -29,7 +29,7 @@ $tabs = array ();
 $row = array ();
 $inactive = array ();
 $activated = array ();
-
+$store = new mod_groupformation_storage_manager($groupformation->id);
 // some pages deliver the cmid instead the id
 if (isset ( $cmid ) and intval ( $cmid ) and $cmid > 0) {
 	$usedid = $cmid;
@@ -66,22 +66,32 @@ if (has_capability ( 'mod/groupformation:editsettings', $context )) {
 		'do_show' => 'view' 
 	) );
 	$row [] = new tabobject ( 'view', $viewurl->out (), get_string ( 'tab_overview', 'groupformation' ) );
-	$answeringViewiewurl = new moodle_url ( '/mod/groupformation/answeringView.php', array (
-			'id' => $usedid
-	) );
-	$row [] = new tabobject ( 'answering', $answeringViewiewurl->out (), get_string ( 'tab_questionaire', 'groupformation' ) );$evaluationurl = new moodle_url ( '/mod/groupformation/evaluationView.php', array (
-			'id' => $usedid,
-			'do_show' => 'evaluation'
-	) );
-	$row [] = new tabobject ( 'evaluation', $evaluationurl->out (), get_string ( 'tab_evaluation', 'groupformation' ) );
-	$groupurl = new moodle_url ( '/mod/groupformation/groupView.php', array (
-			'id' => $usedid,
-			'do_show' => 'group'
-	) );
-	$row [] = new tabobject ( 'group', $groupurl->out (), get_string ( 'tab_group', 'groupformation' ) );
+	if ($store->isQuestionaireAvailable()){
+
+		$answeringViewiewurl = new moodle_url ( '/mod/groupformation/answeringView.php', array (
+				'id' => $usedid
+		) );
+		$row [] = new tabobject ( 'answering', $answeringViewiewurl->out (), get_string ( 'tab_questionaire', 'groupformation' ) );
+		
+		if ($store->isQuestionaireCompleted($userid,$groupformation->id)){
+			$evaluationurl = new moodle_url ( '/mod/groupformation/evaluationView.php', array (
+					'id' => $usedid,
+					'do_show' => 'evaluation'
+			) );
+			$row [] = new tabobject ( 'evaluation', $evaluationurl->out (), get_string ( 'tab_evaluation', 'groupformation' ) );
+
+			$groupurl = new moodle_url ( '/mod/groupformation/groupView.php', array (
+					'id' => $usedid,
+					'do_show' => 'group'
+			) );
+			$row [] = new tabobject ( 'group', $groupurl->out (), get_string ( 'tab_group', 'groupformation' ) );
+		}
+
+	}
+
 }
 
-if (count ( $row ) > 1) {
+if (count ( $row ) >= 1) {
 	$tabs [] = $row;
 	
 	print_tabs ( $tabs, $current_tab, $inactive, $activated );
