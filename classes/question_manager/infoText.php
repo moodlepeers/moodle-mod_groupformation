@@ -35,7 +35,6 @@ class mod_groupformation_infoText {
 	private $userid;
 	private $groupformationid;
 	private $store;
-	
 	public function __construct($cmid, $groupformationid, $userid) {
 		// its not the groupformation id -> its also unused so far
 		$this->cmid = $cmid;
@@ -43,7 +42,11 @@ class mod_groupformation_infoText {
 		$this->groupformationid = $groupformationid;
 		$this->store = new mod_groupformation_storage_manager ( $groupformationid );
 	}
-	public function statusA() {
+	
+	/**
+	 * Prints initial questionaire status page for user
+	 */
+	public function __printStatusA() {
 		echo '<div class="questionaire_status col_m_100">' . get_string ( 'questionaire_not_started', 'groupformation' ) . '</div>';
 		echo '<div class="questionaire_button_text col_m_100">' . get_string ( 'questionaire_press_to_begin', 'groupformation' ) . '</div>';
 		echo '<div class="questionaire_button_row col_m_100">';
@@ -64,9 +67,13 @@ class mod_groupformation_infoText {
 						</form>';
 		echo '</div>';
 	}
-	public function statusB() {
+	
+	/**
+	 * Prints current questionaire status page
+	 */
+	public function __printStatusB() {
 		global $USER;
-		$this->printStats ();
+		$this->__printStats ();
 		echo '<div class="col_m_100">' . get_string ( 'questionaire_not_submitted', 'groupformation' ) . '</div>';
 		echo '<div class="col_m_100">' . get_string ( 'questionaire_press_continue_submit', 'groupformation' ) . '</div>';
 		echo '<div class="col_m_100">';
@@ -78,9 +85,9 @@ class mod_groupformation_infoText {
 		
 		echo '<input type="hidden" name="id" value="' . $this->cmid . '"/>';
 		
-		$hasAnsweredEverything = $this->store->hasAnsweredEverything($USER->id);
+		$hasAnsweredEverything = $this->store->hasAnsweredEverything ( $USER->id );
 		
-		$disabled = !$hasAnsweredEverything;
+		$disabled = ! $hasAnsweredEverything;
 		
 		echo '
 						<div class="grid">
@@ -93,9 +100,17 @@ class mod_groupformation_infoText {
 						</form>';
 		echo '</div>';
 	}
-	public function statusC() {
+	
+	/**
+	 * Prints finished questionaire status page
+	 */
+	public function __printStatusC() {
 		echo '<div class="questionaire_status">' . get_string ( 'questionaire_submitted', 'groupformation' ) . '</div>';
 	}
+	
+	/**
+	 * Print status page for teacher
+	 */
 	public function Dozent() {
 		echo '<div class="questionaire_button_text">' . get_string ( 'questionaire_press_preview', 'groupformation' ) . '</div>';
 		echo '<div class="questionaire_button_row">';
@@ -129,9 +144,7 @@ class mod_groupformation_infoText {
 		
 		$data = new mod_groupformation_data ();
 		
-		// $scenario = $DB->get_record('groupformation', array('id'=>$this->groupformationid))->szenario;
-		
-		$category_set = $data->getCategorySet ( $scenario);
+		$category_set = $data->getCategorySet ( $scenario );
 		
 		$categories = array ();
 		
@@ -152,9 +165,9 @@ class mod_groupformation_infoText {
 	}
 	
 	/**
-	 * echoes stats about answered and misssing questions
+	 * Prints stats about answered and misssing questions
 	 */
-	private function printStats() {
+	private function __printStats() {
 		echo '<div class="questionaire_stats col_m_66">';
 		echo '<table class="responsive-table">';
 		echo '<thead><tr><th scope="col">';
@@ -193,28 +206,33 @@ class mod_groupformation_infoText {
 		
 		echo '</div>';
 	}
-	public function availabilityInfo() {
-		$a = $this->store->getTime ();
-		$start = intval ( $a ['start_raw'] );
-		$end = intval ( $a ['end_raw'] );
-		
-		if (! ($start == 0) && ! ($end == 0)) {
-			echo '<div class="questionaire_status col_m_100">' . get_string ( 'questionaire_availability_info_now', 'groupformation', $a ) . '</div>';
-		} elseif (($start == 0) && ($end > 0)) {
-			echo '<div class="questionair_status col_m_100">' . get_string ( 'questionaire_availability_info_until', 'groupformation', $a ) . '</div>';
-		}
-	}
-	public function notAvailableInfo() {
-		$a = $this->store->getTime ();
-		$start = intval ( $a ['start_raw'] );
-		$end = intval ( $a ['end_raw'] );
-		
-		if (! ($start == 0) && ! ($end == 0)){
-			echo '<div class="questionaire_status">' . get_string ( 'questionaire_not_available', 'groupformation', $a ) . '</div>';
-			echo '<div class="questionaire_status">' . get_string ( 'questionaire_availability_info_future', 'groupformation', $a ) . '</div>';
-		} elseif (($start > 0) && ($end == 0)) {
-			echo '<div class="questionaire_status">' . get_string ( 'questionaire_not_available', 'groupformation', $a ) . '</div>';
-			echo '<div class="questionair_status">' . get_string ( 'questionaire_availability_info_from', 'groupformation', $a ) . '</div>';
+	
+	/**
+	 * Prints availability info
+	 */
+	public function __printAvailabilityInfo($bool = true) {
+		if ($bool) {
+			$a = $this->store->getTime ();
+			$start = intval ( $a ['start_raw'] );
+			$end = intval ( $a ['end_raw'] );
+			
+			if (! ($start == 0) && ! ($end == 0)) {
+				echo '<div class="questionaire_status col_m_100">' . get_string ( 'questionaire_availability_info_now', 'groupformation', $a ) . '</div>';
+			} elseif (($start == 0) && ($end > 0)) {
+				echo '<div class="questionair_status col_m_100">' . get_string ( 'questionaire_availability_info_until', 'groupformation', $a ) . '</div>';
+			}
+		} else {
+			$a = $this->store->getTime ();
+			$start = intval ( $a ['start_raw'] );
+			$end = intval ( $a ['end_raw'] );
+			
+			if (! ($start == 0) && ! ($end == 0)) {
+				echo '<div class="questionaire_status">' . get_string ( 'questionaire_not_available', 'groupformation', $a ) . '</div>';
+				echo '<div class="questionaire_status">' . get_string ( 'questionaire_availability_info_future', 'groupformation', $a ) . '</div>';
+			} elseif (($start > 0) && ($end == 0)) {
+				echo '<div class="questionaire_status">' . get_string ( 'questionaire_not_available', 'groupformation', $a ) . '</div>';
+				echo '<div class="questionair_status">' . get_string ( 'questionaire_availability_info_from', 'groupformation', $a ) . '</div>';
+			}
 		}
 	}
 }

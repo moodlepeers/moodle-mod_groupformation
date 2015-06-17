@@ -109,7 +109,7 @@ class mod_groupformation_logging_controller {
 	 * @param int $groupformationid        	
 	 * @param string $message        	
 	 */
-	public function create_log_entry($userid, $groupformationid, $message) {
+	private function create_log_entry($userid, $groupformationid, $message) {
 		global $DB;
 		$timestamp = time ();
 		

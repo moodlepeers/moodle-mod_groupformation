@@ -131,28 +131,28 @@
 	 	if ($store->isQuestionaireAvailable()){	
 			$status = $store->answeringStatus($userid);
 			if($status ==  -1){
-				$info->availabilityInfo();
-	 			$info->statusA();
+				$info->__printAvailabilityInfo();
+	 			$info->__printStatusA();
 	 		}
 	 		if($status == 0){
-				$info->availabilityInfo();
-	 			$info->statusB();
+				$info->__printAvailabilityInfo();
+	 			$info->__printStatusB();
 	 		}
 	 		if($status == 1){
-				$info->availabilityInfo();
-	 			$info->statusC();
+				$info->__printAvailabilityInfo();
+	 			$info->__printStatusC();
 	 		}
 	 	}else{
-	 		$info->notAvailableInfo();
+	 		$info->__printAvailabilityInfo(false);
 	 	}
-	}elseif (has_capability('mod/groupformation:editsettings', $context)){
-		if ($store->isQuestionaireAvailable()){
-			$info->availabilityInfo();
-       		$info->Dozent();
-		}else{
-			$info->notAvailableInfo();
-			$info->Dozent();
-		}
+// 	}elseif (has_capability('mod/groupformation:editsettings', $context)){
+// 		if ($store->isQuestionaireAvailable()){
+// 			$info->__printAvailabilityInfo();
+//        		$info->Dozent();
+// 		}else{
+// 			$info->__printAvailabilityInfo(false);
+// 			$info->Dozent();
+// 		}
 	}else{
 		print_error('This activity is not accessible for you');
 	}
