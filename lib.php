@@ -32,7 +32,7 @@ defined ( 'MOODLE_INTERNAL' ) || die ();
 
 require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/storage_manager.php');
 require_once (dirname ( __FILE__ ) . '/classes/util/xml_loader.php');
-
+require_once (dirname ( __FILE__ ) . '/locallib.php');
 /**
  * Moodle core API
  */
@@ -83,14 +83,14 @@ function groupformation_add_instance(stdClass $groupformation, mod_groupformatio
 	$groupformation->id = $DB->insert_record ( 'groupformation', $groupformation );
 	
 	// Log access to page
-	groupformation_log($USER->id,$groupformation->id,'<create_instance>');
+	groupformation_log ( $USER->id, $groupformation->id, '<create_instance>' );
 	
 	groupformation_grade_item_update ( $groupformation );
 	
 	groupformation_save_more_infos ( $groupformation, TRUE );
 	
 	// Log access to page
-	groupformation_log($USER->id,$groupformation->id,'<save_settings>');
+	groupformation_log ( $USER->id, $groupformation->id, '<save_settings>' );
 	
 	return $groupformation->id;
 }
@@ -108,7 +108,7 @@ function groupformation_add_instance(stdClass $groupformation, mod_groupformatio
  * @return boolean Success/Fail
  */
 function groupformation_update_instance(stdClass $groupformation, mod_groupformation_mod_form $mform = null) {
-	global $DB,$USER;
+	global $DB, $USER;
 	
 	// checks all fields and sets them properly
 	$groupformation = groupformation_set_fields ( $groupformation );
@@ -117,17 +117,20 @@ function groupformation_update_instance(stdClass $groupformation, mod_groupforma
 	$groupformation->id = $groupformation->instance;
 	
 	// Log access to page
-	groupformation_log($USER->id,$groupformation->id,'<update_instance>');
+	groupformation_log ( $USER->id, $groupformation->id, '<update_instance>' );
 	
-	if ($DB->count_records('groupformation_answer', array('groupformation' => $groupformation->id)) == 0){
+	if ($DB->count_records ( 'groupformation_answer', array (
+			'groupformation' => $groupformation->id 
+	) ) == 0) {
 		$result = $DB->update_record ( 'groupformation', $groupformation );
-	}else{
-		$orig_record = $DB->get_record('groupformation', array('id' => $groupformation->id));
+	} else {
+		$orig_record = $DB->get_record ( 'groupformation', array (
+				'id' => $groupformation->id 
+		) );
 		$orig_record->groupoption = $groupformation->groupoption;
 		$orig_record->maxmembers = $groupformation->maxmembers;
 		$orig_record->maxgroups = $groupformation->maxgroups;
 		$result = $DB->update_record ( 'groupformation', $orig_record );
-		
 	}
 	
 	groupformation_grade_item_update ( $groupformation );
@@ -135,7 +138,7 @@ function groupformation_update_instance(stdClass $groupformation, mod_groupforma
 	groupformation_save_more_infos ( $groupformation, FALSE );
 	
 	// Log access to page
-	groupformation_log($USER->id,$groupformation->id,'<save_settings>');
+	groupformation_log ( $USER->id, $groupformation->id, '<save_settings>' );
 	
 	return $result;
 }
@@ -152,28 +155,34 @@ function groupformation_update_instance(stdClass $groupformation, mod_groupforma
  * @return boolean Success/Failure
  */
 function groupformation_delete_instance($id) {
-	global $DB,$USER;
+	global $DB, $USER;
 	
 	if (! $groupformation = $DB->get_record ( 'groupformation', array (
-			'id' => $id 
+	'id' => $id
 	) )) {
-		return false;
+	return false;
 	}
 	
+	// Log access to page
+	groupformation_log ( $USER->id, $groupformation->id, '<delete_instance>' );
+	
 	// Delete any dependent records here.
-	$DB->delete_records ( 'groupformation', array (
+	$result = $DB->delete_records ( 'groupformation', array (
 			'id' => $groupformation->id 
 	) );
 	
 	// cascading deletion of all related db entries
-	$DB->delete_records('groupformation_answer', array ('groupformation'=> $groupformation->id));
-	$DB->delete_records('groupformation_q_settings', array ('groupformation'=> $groupformation->id));
-	$DB->delete_records('groupformation_started', array ('groupformation'=> $groupformation->id));
+	$DB->delete_records ( 'groupformation_answer', array (
+			'groupformation' => $id 
+	) );
+	$DB->delete_records ( 'groupformation_q_settings', array (
+			'groupformation' => $id 
+	) );
+	$DB->delete_records ( 'groupformation_started', array (
+			'groupformation' => $id 
+	) );
 	
 	groupformation_grade_item_delete ( $groupformation );
-	
-	// Log access to page
-	groupformation_log($USER->id,$groupformation->id,'<delete_instance>');
 	
 	return true;
 }
@@ -260,6 +269,7 @@ function groupformation_print_recent_mod_activity($activity, $courseid, $detail,
  * Function to be run periodically according to the moodle cron
  * This function searches for things that need to be done, such
  * as sending out mail, toggling flags etc .
+ *
  *
  * ..
  *
@@ -483,10 +493,10 @@ function groupformation_pluginfile($course, $cm, $context, $filearea, array $arg
  * @param cm_info $cm        	
  */
 function groupformation_extend_navigation(navigation_node $navref, stdclass $course, stdclass $module, cm_info $cm) {
-	foreach ($navref->parent->get_children_key_list() as $key){
-		$node = $navref->parent->get($key);
-		if (count($node->get_children_key_list())==0){
-			$node->nodetype=navigation_node::NODETYPE_LEAF;
+	foreach ( $navref->parent->get_children_key_list () as $key ) {
+		$node = $navref->parent->get ( $key );
+		if (count ( $node->get_children_key_list () ) == 0) {
+			$node->nodetype = navigation_node::NODETYPE_LEAF;
 		}
 	}
 }
@@ -503,7 +513,6 @@ function groupformation_extend_navigation(navigation_node $navref, stdclass $cou
  *        	{@link navigation_node}
  */
 function groupformation_extend_settings_navigation(settings_navigation $settingsnav, navigation_node $groupformationnode = null) {
-	
 }
 
 /**
@@ -520,10 +529,7 @@ function groupformation_set_fields(stdClass $groupformation) {
 	} elseif (! isset ( $groupformation->knowledge )) {
 		$groupformation->knowledge = 0;
 		$groupformation->knowledgelines = "";
-	} elseif (isset ( $groupformation->knowledge ) 
-			&& $groupformation->knowledge == 1 
-			&& isset ( $groupformation->knowledgelines ) 
-			&& $groupformation->knowledgelines == "") {
+	} elseif (isset ( $groupformation->knowledge ) && $groupformation->knowledge == 1 && isset ( $groupformation->knowledgelines ) && $groupformation->knowledgelines == "") {
 		$groupformation->knowledge = 0;
 		$groupformation->knowledgelines = "";
 	}
@@ -534,10 +540,7 @@ function groupformation_set_fields(stdClass $groupformation) {
 	} elseif (! isset ( $groupformation->topics )) {
 		$groupformation->topics = 0;
 		$groupformation->topiclines = "";
-	} elseif (isset ( $groupformation->topics ) 
-			&& $groupformation->topics == 1 
-			&& isset ( $groupformation->topiclines ) 
-			&& $groupformation->topiclines == "") {
+	} elseif (isset ( $groupformation->topics ) && $groupformation->topics == 1 && isset ( $groupformation->topiclines ) && $groupformation->topiclines == "") {
 		$groupformation->topics = 0;
 		$groupformation->topiclines = "";
 	}
@@ -548,7 +551,7 @@ function groupformation_set_fields(stdClass $groupformation) {
 		$groupformation->maxgroups = 0;
 	}
 	
-	if (isset ( $groupformation->evaluationmethod) && $groupformation->evaluationmethod != 2){
+	if (isset ( $groupformation->evaluationmethod ) && $groupformation->evaluationmethod != 2) {
 		$groupformation->maxpoints = 100;
 	}
 	
