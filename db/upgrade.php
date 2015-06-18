@@ -310,5 +310,126 @@ function xmldb_groupformation_upgrade($oldversion) {
 		upgrade_mod_savepoint ( true, 2015061801, 'groupformation' );
 	}
 	
+	if ($oldversion < 2015061809) {
+	
+		// Define field optionmax to be added to groupformation_motivation.
+		$table = new xmldb_table('groupformation_motivation');
+		$field = new xmldb_field('optionmax', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0', 'position');
+	
+		// Conditionally launch add field optionmax.
+		if (!$dbman->field_exists($table, $field)) {
+			$dbman->add_field($table, $field);
+		}
+		
+		// Define field id to be added to groupformation_team.
+		$table = new xmldb_table('groupformation_team');
+		$field = new xmldb_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null);
+		
+		// Conditionally launch add field id.
+		if (!$dbman->field_exists($table, $field)) {
+			$dbman->add_field($table, $field);
+		}
+		
+		// Define field optionmax to be added to groupformation_grade.
+		$table = new xmldb_table('groupformation_grade');
+		$field = new xmldb_field('optionmax', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0', 'position');
+		
+		// Conditionally launch add field optionmax.
+		if (!$dbman->field_exists($table, $field)) {
+			$dbman->add_field($table, $field);
+		}
+		
+		// Define field id to be added to groupformation_learning.
+		$table = new xmldb_table('groupformation_learning');
+		$field = new xmldb_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null);
+		
+		// Conditionally launch add field id.
+		if (!$dbman->field_exists($table, $field)) {
+			$dbman->add_field($table, $field);
+		}
+		
+		// Define field optionmax to be added to groupformation_character.
+		$table = new xmldb_table('groupformation_character');
+		$field = new xmldb_field('optionmax', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0', 'position');
+		
+		// Conditionally launch add field optionmax.
+		if (!$dbman->field_exists($table, $field)) {
+			$dbman->add_field($table, $field);
+		}
+		
+		// Define field id to be added to groupformation_general.
+		$table = new xmldb_table('groupformation_general');
+		$field = new xmldb_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null);
+		
+		// Conditionally launch add field id.
+		if (!$dbman->field_exists($table, $field)) {
+			$dbman->add_field($table, $field);
+		}
+		
+		// Define table groupformation_srl to be created.
+		$table = new xmldb_table('groupformation_srl');
+		
+		// Adding fields to table groupformation_srl.
+		$table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+		$table->add_field('type', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
+		$table->add_field('question', XMLDB_TYPE_TEXT, null, null, XMLDB_NOTNULL, null, null);
+		$table->add_field('options', XMLDB_TYPE_TEXT, null, null, XMLDB_NOTNULL, null, null);
+		$table->add_field('language', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
+		$table->add_field('position', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+		$table->add_field('optionmax', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+		
+		// Adding keys to table groupformation_srl.
+		$table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+		
+		// Conditionally launch create table for groupformation_srl.
+		if (!$dbman->table_exists($table)) {
+			$dbman->create_table($table);
+		}
+		
+		// Define table groupformation_self to be created.
+		$table = new xmldb_table('groupformation_self');
+		
+		// Adding fields to table groupformation_self.
+		$table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+		$table->add_field('type', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
+		$table->add_field('question', XMLDB_TYPE_TEXT, null, null, XMLDB_NOTNULL, null, null);
+		$table->add_field('options', XMLDB_TYPE_TEXT, null, null, XMLDB_NOTNULL, null, null);
+		$table->add_field('language', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
+		$table->add_field('position', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+		$table->add_field('optionmax', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+		
+		// Adding keys to table groupformation_self.
+		$table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+		
+		// Conditionally launch create table for groupformation_self.
+		if (!$dbman->table_exists($table)) {
+			$dbman->create_table($table);
+		}
+		
+		// Define table groupformation_sellmo to be created.
+		$table = new xmldb_table('groupformation_sellmo');
+		
+		// Adding fields to table groupformation_sellmo.
+		$table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+		$table->add_field('type', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
+		$table->add_field('question', XMLDB_TYPE_TEXT, null, null, XMLDB_NOTNULL, null, null);
+		$table->add_field('options', XMLDB_TYPE_TEXT, null, null, XMLDB_NOTNULL, null, null);
+		$table->add_field('language', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
+		$table->add_field('position', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+		$table->add_field('optionmax', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+		
+		// Adding keys to table groupformation_sellmo.
+		$table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+		
+		// Conditionally launch create table for groupformation_sellmo.
+		if (!$dbman->table_exists($table)) {
+			$dbman->create_table($table);
+		}
+	
+		// Groupformation savepoint reached.
+		upgrade_mod_savepoint(true, 2015061809, 'groupformation');
+	}
+	
+	
 	return true;
 }
