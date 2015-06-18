@@ -252,6 +252,106 @@ function xmldb_groupformation_upgrade($oldversion) {
 		upgrade_mod_savepoint ( true, 2015060501, 'groupformation' );
 	}
 	
+	if ($oldversion < 2015061700) {
+	
+	
+		// Define table groupformation_logging to be created.
+		$table = new xmldb_table('groupformation_jobs');
+	
+		// Adding fields to table groupformation_logging.
+		$table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+	
+		// Adding keys to table groupformation_logging.
+		$table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+	
+		// Conditionally launch create table for groupformation_logging.
+		if (!$dbman->table_exists($table)) {
+			$dbman->create_table($table);
+		}
+	
+		// Groupformation savepoint reached.
+		upgrade_mod_savepoint ( true, 2015061700, 'groupformation' );
+	}
+	
+	if ($oldversion < 2015061801) {
+		
+		// Define field groupformationid to be added to groupformation_jobs.
+        $table = new xmldb_table('groupformation_jobs');
+        $field = new xmldb_field('groupformationid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null, 'id');
+
+        // Conditionally launch add field groupformationid.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field waiting to be added to groupformation_jobs.
+        $table = new xmldb_table('groupformation_jobs');
+        $field = new xmldb_field('waiting', XMLDB_TYPE_INTEGER, '1', null, null, null, '0', 'groupformationid');
+        
+        // Conditionally launch add field waiting.
+        if (!$dbman->field_exists($table, $field)) {
+        	$dbman->add_field($table, $field);
+        }
+        
+        // Define field started to be added to groupformation_jobs.
+        $table = new xmldb_table('groupformation_jobs');
+        $field = new xmldb_field('started', XMLDB_TYPE_INTEGER, '1', null, null, null, '0', 'waiting');
+        
+        // Conditionally launch add field started.
+        if (!$dbman->field_exists($table, $field)) {
+        	$dbman->add_field($table, $field);
+        }
+        
+        // Define field aborted to be added to groupformation_jobs.
+        $table = new xmldb_table('groupformation_jobs');
+        $field = new xmldb_field('aborted', XMLDB_TYPE_INTEGER, '1', null, null, null, '0', 'started');
+        
+        // Conditionally launch add field aborted.
+        if (!$dbman->field_exists($table, $field)) {
+        	$dbman->add_field($table, $field);
+        }
+        
+        // Define field done to be added to groupformation_jobs.
+        $table = new xmldb_table('groupformation_jobs');
+        $field = new xmldb_field('done', XMLDB_TYPE_INTEGER, '1', null, null, null, '0', 'aborted');
+        
+        // Conditionally launch add field done.
+        if (!$dbman->field_exists($table, $field)) {
+        	$dbman->add_field($table, $field);
+        }
+        
+        // Define field timecreated to be added to groupformation_jobs.
+        $table = new xmldb_table('groupformation_jobs');
+        $field = new xmldb_field('timecreated', XMLDB_TYPE_INTEGER, '10', null, null, null, '0', 'done');
+        
+        // Conditionally launch add field timecreated.
+        if (!$dbman->field_exists($table, $field)) {
+        	$dbman->add_field($table, $field);
+        }
+        
+        // Define field timestarted to be added to groupformation_jobs.
+        $table = new xmldb_table('groupformation_jobs');
+        $field = new xmldb_field('timestarted', XMLDB_TYPE_INTEGER, '10', null, null, null, '0', 'timecreated');
+        
+        // Conditionally launch add field timestarted.
+        if (!$dbman->field_exists($table, $field)) {
+        	$dbman->add_field($table, $field);
+        }
+        
+        // Define field timefinished to be added to groupformation_jobs.
+        $table = new xmldb_table('groupformation_jobs');
+        $field = new xmldb_field('timefinished', XMLDB_TYPE_INTEGER, '10', null, null, null, '0', 'timestarted');
+        
+        // Conditionally launch add field timefinished.
+        if (!$dbman->field_exists($table, $field)) {
+        	$dbman->add_field($table, $field);
+        }      
+	
+		// Groupformation savepoint reached.
+		upgrade_mod_savepoint ( true, 2015061801, 'groupformation' );
+	}
+	
+	
 	// // Second example, some hours later, the same day 2007/04/01
 	// // ... two more fields and one index were added to install.xml (note the micro increment
 	// // ... "01" in the last two digits of the version).
