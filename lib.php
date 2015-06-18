@@ -278,6 +278,7 @@ function groupformation_print_recent_mod_activity($activity, $courseid, $detail,
  *      
  */
 function groupformation_cron() {
+	groupformation_log(1, 1, '<view_settings>');
 	return true;
 }
 

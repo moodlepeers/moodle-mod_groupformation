@@ -74,30 +74,29 @@
   		$begin = $_POST["begin"];
   	}else{
   		$begin = 1;
-  	}
+  	}  	
   	
+//   	if(isset($_POST["dozent"])){
+//   		$dozent = $_POST['dozent'];
+//   	}else{
+//   		$dozent = 0;
+//   	}
   	
-  	if(isset($_POST["dozent"])){
-  		$dozent = $_POST['dozent'];
-  	}else{
-  		$dozent = 0;
-  	}
-  	
-  	if($dozent == 1){
-  		$returnurl = new moodle_url('/mod/groupformation/answeringView.php', array('id' => $id));
+//   	if($dozent == 1){
+//   		$returnurl = new moodle_url('/mod/groupformation/answeringView.php', array('id' => $id));
   			
-  		redirect($returnurl);
-  	}
+//   		redirect($returnurl);
+//   	}
   	
-  	if($dozent == 2){
-  		$returnurl = new moodle_url('/mod/groupformation/analysisView.php', array('id' => $id, 'do_show' => 'analysis'));
+//   	if($dozent == 2){
+//   		$returnurl = new moodle_url('/mod/groupformation/analysisView.php', array('id' => $id, 'do_show' => 'analysis'));
   			
-  		redirect($returnurl);
-  	}
+//   		redirect($returnurl);
+//   	}
   	
-  	if($dozent == 3){
-  		mod_groupformation_startGrouping::start($groupformation->id);
-  	}
+//   	if($dozent == 3){
+//   		mod_groupformation_startGrouping::start($groupformation->id);
+//   	}
   	
   	if($begin == 1){
   		if (isset($_POST["questions"])){
@@ -122,10 +121,6 @@
   	if ($groupformation->intro) {
   		echo $OUTPUT->box(format_module_intro('groupformation', $groupformation, $cm->id), 'generalbox mod_introbox', 'groupformationintro');
   	}
-  	
-  	// Replace the following lines with you own code.
-	// echo $OUTPUT->heading($groupformation->name);
-  	
 
 	if (has_capability('mod/groupformation:onlystudent', $context)){
 	 	if ($store->isQuestionaireAvailable()){	
@@ -145,17 +140,10 @@
 	 	}else{
 	 		$info->__printAvailabilityInfo(false);
 	 	}
-// 	}elseif (has_capability('mod/groupformation:editsettings', $context)){
-// 		if ($store->isQuestionaireAvailable()){
-// 			$info->__printAvailabilityInfo();
-//        		$info->Dozent();
-// 		}else{
-// 			$info->__printAvailabilityInfo(false);
-// 			$info->Dozent();
-// 		}
 	}else{
 		print_error('This activity is not accessible for you');
 	}
+	
 	echo $OUTPUT->footer();
 	
 

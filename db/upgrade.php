@@ -38,106 +38,73 @@ defined ( 'MOODLE_INTERNAL' ) || die ();
 function xmldb_groupformation_upgrade($oldversion) {
 	global $DB;
 	$dbman = $DB->get_manager (); // Loads ddl manager and xmldb classes.
-	                             
-	// /*
-	                             // * And upgrade begins here. For each one, you'll need one
-	                             // * block of code similar to the next one. Please, delete
-	                             // * this comment lines once this file start handling proper
-	                             // * upgrade code.
-	                             // *
-	                             // *
-	                             // * if ($oldversion < YYYYMMDD00) { //New version in version.php
-	                             // * }
-	                             // *
-	                             
-	// * Lines below (this included) MUST BE DELETED once you get the first version
-	                             // * of your module ready to be installed. They are here only
-	                             // * for demonstrative purposes and to show how the groupformation
-	                             // * iself has been upgraded.
-	                             // *
-	                             // * For each upgrade block, the file groupformation/version.php
-	                             // * needs to be updated . Such change allows Moodle to know
-	                             // * that this file has to be processed.
-	                             // *
-	                             // * To know more about how to write correct DB upgrade scripts it's
-	                             // * highly recommended to read information available at:
-	                             // * http://docs.moodle.org/en/Development:XMLDB_Documentation
-	                             // * and to play with the XMLDB Editor (in the admin menu) and its
-	                             // * PHP generation posibilities.
-	                             // *
-	                             // * First example, some fields were added to install.xml on 2007/04/01
-	                             // */
 	
 	if ($oldversion < 2015041701) {
-		// Define field course to be added to groupformation.
+		
 		$table = new xmldb_table ( 'groupformation' );
 		$field = new xmldb_field ( 'szenario', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, '0', 'grade' );
-		// Add field course.
+		
 		if (! $dbman->field_exists ( $table, $field )) {
 			$dbman->add_field ( $table, $field );
 		}
 		
 		$table = new xmldb_table ( 'groupformation' );
 		$field = new xmldb_field ( 'knowledge', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, '0', 'szenario' );
-		// Add field course.
+		
 		if (! $dbman->field_exists ( $table, $field )) {
 			$dbman->add_field ( $table, $field );
 		}
 		
 		$table = new xmldb_table ( 'groupformation' );
 		$field = new xmldb_field ( 'knowledgelines', XMLDB_TYPE_TEXT, 'medium', null, null, null, null, 'knowledge' );
-		// Add field course.
+		
 		if (! $dbman->field_exists ( $table, $field )) {
 			$dbman->add_field ( $table, $field );
 		}
 		
 		$table = new xmldb_table ( 'groupformation' );
 		$field = new xmldb_field ( 'topics', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, '0', 'knowledgelines' );
-		// Add field course.
+		
 		if (! $dbman->field_exists ( $table, $field )) {
 			$dbman->add_field ( $table, $field );
 		}
 		
 		$table = new xmldb_table ( 'groupformation' );
 		$field = new xmldb_field ( 'topiclines', XMLDB_TYPE_TEXT, 'medium', null, null, null, null, 'topics' );
-		// Add field course.
+		
 		if (! $dbman->field_exists ( $table, $field )) {
 			$dbman->add_field ( $table, $field );
 		}
 		
 		$table = new xmldb_table ( 'groupformation' );
 		$field = new xmldb_field ( 'maxmembers', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, '0', 'topiclines' );
-		// Add field course.
+		
 		if (! $dbman->field_exists ( $table, $field )) {
 			$dbman->add_field ( $table, $field );
 		}
 		
 		$table = new xmldb_table ( 'groupformation' );
 		$field = new xmldb_field ( 'maxgroups', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, '0', 'maxmembers' );
-		// Add field course.
+		
 		if (! $dbman->field_exists ( $table, $field )) {
 			$dbman->add_field ( $table, $field );
 		}
 		
 		$table = new xmldb_table ( 'groupformation' );
 		$field = new xmldb_field ( 'evaluationmethod', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, '0', 'maxgroups' );
-		// Add field course.
+		
 		if (! $dbman->field_exists ( $table, $field )) {
 			$dbman->add_field ( $table, $field );
 		}
 		
-		// $table = new xmldb_table('groupformation_q_settings');
-		// $dbman->
-		// Once we reach this point, we can store the new version and consider the module
-		// ... upgraded to the version 2007040100 so the next time this block is skipped.
 		upgrade_mod_savepoint ( true, 2015041701, 'groupformation' );
 	}
 	
 	if ($oldversion < 2015041900) {
-		// Define field course to be added to groupformation.
+		
 		$table = new xmldb_table ( 'groupformation' );
 		$field = new xmldb_field ( 'groupoption', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, '0', 'topiclines' );
-		// Add field course.
+		
 		if (! $dbman->field_exists ( $table, $field )) {
 			$dbman->add_field ( $table, $field );
 		}
@@ -146,10 +113,10 @@ function xmldb_groupformation_upgrade($oldversion) {
 	}
 	
 	if ($oldversion < 2015051300) {
-		// Define field course to be added to groupformation.
+		
 		$table = new xmldb_table ( 'groupformation' );
 		$field = new xmldb_field ( 'maxpoints', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, '100', 'evaluationmethod' );
-		// Add field course.
+		
 		if (! $dbman->field_exists ( $table, $field )) {
 			$dbman->add_field ( $table, $field );
 		}
@@ -158,11 +125,10 @@ function xmldb_groupformation_upgrade($oldversion) {
 	}
 	
 	if ($oldversion < 2015052802) {
-		// For XML: <FIELD NAME="groupname" TYPE="text" NOTNULL="true" DEFAULT="group" SEQUENCE="false" COMMENT="Group name prefix for generated group names"/>
-		// Define field course to be added to groupformation.
+		
 		$table = new xmldb_table ( 'groupformation' );
 		$field = new xmldb_field ( 'groupname', XMLDB_TYPE_TEXT, 'medium', null, null, null, 'group', 'maxgroups' );
-		// Add field course.
+		
 		if (! $dbman->field_exists ( $table, $field )) {
 			$dbman->add_field ( $table, $field );
 		}
@@ -171,18 +137,17 @@ function xmldb_groupformation_upgrade($oldversion) {
 	}
 	
 	if ($oldversion < 2015060100) {
-		// Define field course to be added to groupformation.
+		
 		$table = new xmldb_table ( 'groupformation_started' );
 		$field = new xmldb_field ( 'timecompleted', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, null, null, '0', 'completed' );
-		// Add field course.
+		
 		if (! $dbman->field_exists ( $table, $field )) {
 			$dbman->add_field ( $table, $field );
 		}
 		
-		// Define field course to be added to groupformation.
 		$table = new xmldb_table ( 'groupformation_started' );
 		$field = new xmldb_field ( 'groupid', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, null, null, null, 'timecompleted' );
-		// Add field course.
+		
 		if (! $dbman->field_exists ( $table, $field )) {
 			$dbman->add_field ( $table, $field );
 		}
@@ -192,22 +157,16 @@ function xmldb_groupformation_upgrade($oldversion) {
 	
 	if ($oldversion < 2015060500) {
 		
+		$table = new xmldb_table('groupformation_logging');
 
-        // Define table groupformation_logging to be created.
-        $table = new xmldb_table('groupformation_logging');
-
-        // Adding fields to table groupformation_logging.
         $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
 
-        // Adding keys to table groupformation_logging.
-        $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+       	$table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
 
-        // Conditionally launch create table for groupformation_logging.
         if (!$dbman->table_exists($table)) {
             $dbman->create_table($table);
         }
 
-        // Groupformation savepoint reached.
         upgrade_mod_savepoint ( true, 2015060500, 'groupformation' );
 	}
 	
@@ -350,65 +309,6 @@ function xmldb_groupformation_upgrade($oldversion) {
 		// Groupformation savepoint reached.
 		upgrade_mod_savepoint ( true, 2015061801, 'groupformation' );
 	}
-	
-	
-	// // Second example, some hours later, the same day 2007/04/01
-	// // ... two more fields and one index were added to install.xml (note the micro increment
-	// // ... "01" in the last two digits of the version).
-	// if ($oldversion < 2007040101) {
-	
-	// // Define field timecreated to be added to groupformation.
-	// $table = new xmldb_table('groupformation');
-	// $field = new xmldb_field('timecreated', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, '0',
-	// 'introformat');
-	
-	// // Add field timecreated.
-	// if (!$dbman->field_exists($table, $field)) {
-	// $dbman->add_field($table, $field);
-	// }
-	
-	// // Define field timemodified to be added to groupformation.
-	// $table = new xmldb_table('groupformation');
-	// $field = new xmldb_field('timemodified', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, '0',
-	// 'timecreated');
-	
-	// // Add field timemodified.
-	// if (!$dbman->field_exists($table, $field)) {
-	// $dbman->add_field($table, $field);
-	// }
-	
-	// // Define index course (not unique) to be added to groupformation.
-	// $table = new xmldb_table('groupformation');
-	// $index = new xmldb_index('courseindex', XMLDB_INDEX_NOTUNIQUE, array('course'));
-	
-	// // Add index to course field.
-	// if (!$dbman->index_exists($table, $index)) {
-	// $dbman->add_index($table, $index);
-	// }
-	
-	// // Another save point reached.
-	// upgrade_mod_savepoint(true, 2007040101, 'groupformation');
-	// }
-	
-	// // Third example, the next day, 2007/04/02 (with the trailing 00),
-	// // some actions were performed to install.php related with the module.
-	// if ($oldversion < 2007040200) {
-	// // Insert code here to perform some actions (same as in install.php).
-	// upgrade_mod_savepoint(true, 2007040200, 'groupformation');
-	// }
-	
-	// /*
-	// * And that's all. Please, examine and understand the 3 example blocks above. Also
-	// * it's interesting to look how other modules are using this script. Remember that
-	// * the basic idea is to have "blocks" of code (each one being executed only once,
-	// * when the module version (version.php) is updated.
-	// *
-	// * Lines above (this included) MUST BE DELETED once you get the first version of
-	// * yout module working. Each time you need to modify something in the module (DB
-	// * related, you'll raise the version and add one upgrade block here.
-	// *
-	// * Finally, return of upgrade result (true, all went good) to Moodle.
-	// */
 	
 	return true;
 }

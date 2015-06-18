@@ -30,6 +30,7 @@ $row = array ();
 $inactive = array ();
 $activated = array ();
 $store = new mod_groupformation_storage_manager($groupformation->id);
+
 // some pages deliver the cmid instead the id
 if (isset ( $cmid ) and intval ( $cmid ) and $cmid > 0) {
 	$usedid = $cmid;
@@ -40,32 +41,38 @@ if (isset ( $cmid ) and intval ( $cmid ) and $cmid > 0) {
 $context = context_module::instance ( $usedid );
 
 $courseid = optional_param ( 'courseid', false, PARAM_INT );
-// $current_tab = $SESSION->feedback->current_tab;
+
 if (! isset ( $current_tab )) {
 	$current_tab = '';
 }
 
 if (has_capability ( 'mod/groupformation:editsettings', $context )) {
+	
 	$analyseurl = new moodle_url ( '/mod/groupformation/analysisView.php', array (
 			'id' => $usedid,
 			'do_show' => 'analysis' 
 	) );
 	$row [] = new tabobject ( 'analysis', $analyseurl->out (), get_string ( 'tab_overview', 'groupformation' ) );
+	
 	$groupingurl = new moodle_url ( '/mod/groupformation/groupingView.php', array (
 			'id' => $usedid,
 			'do_show' => 'grouping'
 	) );
 	$row [] = new tabobject ( 'grouping', $groupingurl->out (), get_string ( 'tab_grouping', 'groupformation' ) );
+	
 	$answeringViewiewurl = new moodle_url ( '/mod/groupformation/answeringView.php', array (
 			'id' => $usedid
 	) );
 	$row [] = new tabobject ( 'view', $answeringViewiewurl->out (), get_string ( 'tab_preview', 'groupformation' ) );
+	
 }elseif (!has_capability ( 'mod/groupformation:editsettings', $context ) && has_capability('mod/groupformation:onlystudent', $context)){
+	
 	$viewurl = new moodle_url ( '/mod/groupformation/view.php', array (
 		'id' => $usedid,
 		'do_show' => 'view' 
 	) );
 	$row [] = new tabobject ( 'view', $viewurl->out (), get_string ( 'tab_overview', 'groupformation' ) );
+	
 	if ($store->isQuestionaireAvailable()){
 
 		$answeringViewiewurl = new moodle_url ( '/mod/groupformation/answeringView.php', array (
