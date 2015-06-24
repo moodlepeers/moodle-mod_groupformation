@@ -3,6 +3,7 @@ $(document).ready(function() {
     // hide validation error alerts and show them if needed
     // if css attribute "display:none" and show on validation error, they will not displayed properly
     $(".js_errors").hide();
+    $(".settings_info").hide();
     
     
     
@@ -10,6 +11,8 @@ $(document).ready(function() {
     $("#non-js-content").hide();
     $("#js-content").show();
     
+
+    var studentsInCourse = $('#studentsInCourse').text();
 
     var stringOfPreknowledge = "";
 
@@ -87,38 +90,32 @@ $(document).ready(function() {
             if(szenario == 1){
                 $("input[name='js_szenario'][value='project']").attr("checked","checked");
                 //check browser support first, before delete this
-                $('#knowledfeInfo').text($('#knowledfeInfoProject').text());
-                $('#headerTopics').removeClass('required').addClass('optional');
-                $('#id_js_topics').prop('disabled', false);
+                $('#knowledeInfo').text($('#knowledeInfoProject').text());
+                $('#topicsStateLabel').removeClass('required').addClass('optional');
+                //$('#id_js_topics').prop('disabled', false);
 
 //	    		setSzenario('project');
             }else if(szenario == 2){
                 $("input[name='js_szenario'][value='homework']").attr("checked","checked");
                 //check browser support first, before delete this
-                $('#knowledfeInfo').text($('#knowledfeInfoHomework').text());
-                $('#headerTopics').removeClass('required').addClass('optional');
-                $('#id_js_topics').prop('disabled', false);
+                $('#knowledeInfo').text($('#knowledeInfoHomework').text());
+                $('#topicsStateLabel').removeClass('required').addClass('optional');
+                //$('#id_js_topics').prop('disabled', false);
 
 //	    		setSzenario('homework');
             }else if(szenario == 3){
                 $("input[name='js_szenario'][value='presentation']").attr("checked","checked");
                 //check browser support first, before delete this
-                $('#knowledfeInfo').text($('#knowledfeInfoPresentation').text());
-                $('#headerTopics').removeClass('optional').addClass('required');
+                $('#knowledeInfo').text($('#knowledeInfoPresentation').text());
+                $('#topicsStateLabel').removeClass('optional').addClass('required');
                 $('#id_js_topics').prop('disabled', true);
 
                 $('#id_js_topics').prop('checked',true);
 
-                var activeElID = 'group_size';
-                var activeElVal = $('#id_maxmembers').val();
-                var nonActiveElVal = getTopicsNumb();
-                adjustGropOptions(activeElID, activeElVal, nonActiveElVal);
-
-                $("#group_opt_numb").attr('disabled', 'disabled');
+                adjustGropOptions('none', 0, 0);
 
                 $("#js_topicsWrapper").show('2000', 'swing');
 
-//	    		setSzenario('presentation');
             }
         }
 
@@ -161,26 +158,17 @@ $(document).ready(function() {
                 removeInput($wrapper, $cat, i);
             }
             // set the groupotions depending on topics
-            var activeEllID = 'group_size';
-            var activeElVal = $('#id_maxmembers').val();
-            var nonActiveElVal = getTopicsNumb();
+            adjustGropOptions('none', 0, 0);
+            $('#groupSettingsInfo').show('2000', 'swing');
 
-            adjustGropOptions(activeEllID, activeElVal, nonActiveElVal);
-            $("#group_opt_numb").attr('disabled', 'disabled');
         }else{
+
             //set the groupotions from the Moodle native inputs
             if($('input[name=groupoption]:checked').val() == '0'){
-                var activeEllID = 'group_size';
-                var activeElVal = $('#id_maxmembers').val();
-                var nonActiveElVal = $('#id_maxgroups').val();
+                calculateSizeParameter($('#id_maxmembers').val(), 0);
 
-                adjustGropOptions(activeEllID, activeElVal, nonActiveElVal);
             }else{
-                var activeEllID = 'numb_of_groups';
-                var activeElVal = $('#id_maxgroups').val();
-                var nonActiveElVal = $('#id_maxmembers').val();
-
-                adjustGropOptions(activeEllID, activeElVal, nonActiveElVal);
+                calculateSizeParameter(0, $('#id_maxgroups').val());
             }
         }
 
@@ -232,34 +220,32 @@ $(document).ready(function() {
         if($szenario == 'project'){
         	$('#id_szenario option').prop('selected', false).filter('[value=1]').prop('selected', true);
         	
-            $('#knowledfeInfo').text($('#knowledfeInfoProject').text());
+            $('#knowledeInfo').text($('#knowledeInfoProject').text());
             switchTopics('off');
-            $('#headerTopics').removeClass('required').addClass('optional');
+            $('#topicsStateLabel').removeClass('required').addClass('optional');
             $('#id_js_topics').prop('disabled', false);
-            
-            writeTextInput('#id_maxmembers', 0);
-            writeTextInput('#id_maxgroups', 0);
+
+            setGroupSettings();
             
         }else if($szenario == 'homework'){
         	$('#id_szenario option').prop('selected', false).filter('[value=2]').prop('selected', true);
         	
-            $('#knowledfeInfo').text($('#knowledfeInfoHomework').text());
+            $('#knowledeInfo').text($('#knowledeInfoHomework').text());
             switchTopics('off');
-            $('#headerTopics').removeClass('required').addClass('optional');
+            $('#topicsStateLabel').removeClass('required').addClass('optional');
             $('#id_js_topics').prop('disabled', false);
-            
-            writeTextInput('#id_maxmembers', 0);
-            writeTextInput('#id_maxgroups', 0);
+
+            setGroupSettings();
+
         }else if($szenario == 'presentation'){
         	$('#id_szenario option').prop('selected', false).filter('[value=3]').prop('selected', true);
         	
-            $('#knowledfeInfo').text($('#knowledfeInfoPresentation').text());
+            $('#knowledeInfo').text($('#knowledeInfoPresentation').text());
             switchTopics('on');
-            $('#headerTopics').removeClass('optional').addClass('required');
+            $('#topicsStateLabel').removeClass('optional').addClass('required');
             $('#id_js_topics').prop('disabled', true);
-            
-            writeTextInput('#id_maxmembers', 0);
-            writeTextInput('#id_maxgroups', getTopicsNumb());
+
+            setGroupSettings();
         }
     }
     
@@ -297,14 +283,10 @@ $(document).ready(function() {
     		$('#id_topiclines').removeAttr('disabled');
             
             $('#id_js_topics').prop('checked',true);
-            
-            var activeElID = 'group_size';
-            var activeElVal = 0;
-            var nonActiveElVal = getTopicsNumb();
-            adjustGropOptions(activeElID, activeElVal, nonActiveElVal);
-            
-            $("#group_opt_numb").attr('disabled', 'disabled');
-            
+
+            adjustGropOptions('none', 0, 0);
+
+            $('#groupSettingsInfo').show('2000', 'swing');
             $("#js_topicsWrapper").show('2000', 'swing');
         }
         if($state == 'off'){
@@ -319,7 +301,9 @@ $(document).ready(function() {
             adjustGropOptions(activeElID, activeElVal, nonActiveElVal);
             
             $("#group_opt_numb").removeAttr('disabled');
-            
+            $("#group_opt_size").removeAttr('disabled');
+
+            $('#groupSettingsInfo').hide('2000', 'swing');
             $("#js_topicsWrapper").hide('2000', 'swing');
         }
     }
@@ -365,8 +349,8 @@ $(document).ready(function() {
             }
             if($cat == 'tpc'){
                 synchronizeTopics();
-                $('#numb_of_groups').val(getTopicsNumb());
-                writeTextInput('#id_maxgroups', getTopicsNumb());
+                calculateSizeParameter(0, getTopicsNumb());
+                setGroupSettings();
             }
         }
     }
@@ -401,8 +385,8 @@ $(document).ready(function() {
                   if ($cat == 'tpc'){
                       $('#' + $previewRowID).html('<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' + $(this).val());
                       synchronizeTopics();
-                      $('#numb_of_groups').val(getTopicsNumb());
-                      writeTextInput('#id_maxgroups', getTopicsNumb());
+                      calculateSizeParameter(0, getTopicsNumb());
+                      setGroupSettings();
                   }
               });
     });
@@ -444,9 +428,15 @@ $(document).ready(function() {
             var elID = $(this).attr('id');
             var elValue = $(this).val();
             if(elID == 'group_size'){
-                writeTextInput('#id_maxmembers', elValue);
+                calculateSizeParameter(elValue, 0);
+
+                setGroupSettings();
+
             }else{
-                writeTextInput('#id_maxgroups', elValue);
+                calculateSizeParameter(0, elValue);
+
+                setGroupSettings();
+
             }
         });
     
@@ -461,11 +451,11 @@ $(document).ready(function() {
             //Moodle nativ fields
             $('#id_groupoption_0').prop('checked', true);
             $('#id_maxmembers').removeAttr('disabled');
-            writeTextInput('#id_maxmembers', $activeElVal);
             $('#id_maxgroups').attr('disabled', 'disabled');
-            writeTextInput('#id_maxgroups', $nonActiveElVal);
-            
-        }else{
+            setGroupSettings();
+
+
+        }else if($activeEllID == 'numb_of_groups'){
         	$('#group_opt_numb').prop('checked', true);
             $('#numb_of_groups').removeAttr('disabled').val($activeElVal);
             $('#group_size').attr('disabled', 'disabled').val($nonActiveElVal);
@@ -473,10 +463,39 @@ $(document).ready(function() {
             //Moodle nativ fields
             $('#id_groupoption_1').prop('checked', true);
             $('#id_maxgroups').removeAttr('disabled');
-            writeTextInput('#id_maxgroups', $activeElVal);
             $('#id_maxmembers').attr('disabled', 'disabled');
-            writeTextInput('#id_maxmembers', $nonActiveElVal);
+            setGroupSettings();
+
+        }else{
+            $('#group_opt_size').prop('checked', true);
+
+            $("#group_size").attr('disabled', 'disabled');
+            $("#numb_of_groups").attr('disabled', 'disabled');
+            $("#group_opt_numb").attr('disabled', 'disabled');
+            $("#group_opt_size").attr('disabled', 'disabled');
+
+            //Moodle nativ fields
+            $('#id_groupoption_0').prop('checked', true);
+            $('#id_maxmembers').removeAttr('disabled');
+            $('#id_maxgroups').attr('disabled', 'disabled');
+
+            calculateSizeParameter(0, getTopicsNumb());
+            setGroupSettings();
         }
+    }
+
+
+    function calculateSizeParameter($maxMembers, $maxGroups){
+        if($maxMembers == 0){
+            $maxMembers = Math.round(studentsInCourse / $maxGroups);
+        }else if($maxGroups == 0){
+            $maxGroups = Math.round(studentsInCourse / $maxMembers);
+        }else{
+            $('#group_size').val($maxMembers);
+            $('#numb_of_groups').val($maxGroups);
+        }
+        $('#group_size').val($maxMembers);
+        $('#numb_of_groups').val($maxGroups);
     }
 
     
@@ -489,10 +508,11 @@ $(document).ready(function() {
       });
         return topicsCounter;
     }    
-    
-    function writeTextInput($selectID, $value){
-//    	$textVal = $value.toString();
-        $($selectID).val($value);
+
+
+    function setGroupSettings(){
+        $('#id_maxgroups').val($('#numb_of_groups').val());
+        $('#id_maxmembers').val($('#group_size').val());
     }
     
     // evaluation method listener
@@ -544,9 +564,15 @@ $(document).ready(function() {
     $('#js_groupname').keyup(function(){
     	$('#id_groupname').val($(this).val());
     });
-    
-    
-    
+
+
+
+
+    //////////////////////////////////////////////
+    //////////////////////////////////////////////
+    ///////////////NOT IN USE ANYMORE ////////////
+    //////////////////////////////////////////////
+
   /////////////////////// Sticky buttons ///////////////////////////////////////////////////////////
     
     function UpdateBtnWrapp() {
@@ -592,8 +618,7 @@ $(document).ready(function() {
 
     });
 
-///////////////////////////////////////////////////////////////////////////////////////
-    
+
     
     //
     //  Datepicker + validation of dates on submit
@@ -625,9 +650,10 @@ $(document).ready(function() {
             date.setDate(date.getDate() + 7); // Add 7 days
             $('#endDate').datepicker('setDate', date); // Set as default
       });
-    
-    
-    
+
+
+
+
     // validating the docent form page 2
     $( "#docent_settings_2" ).submit(function( event ){
         var proceed = true;

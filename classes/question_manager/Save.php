@@ -50,6 +50,10 @@
 		public function save($answer, $position){
             // if the answer in category "grade"(dropdowns) is default(0) - return without saving
 			if($this->category == 'grade' && $answer == '0'){
+                if($this->status == -1){
+                    $this->status = SAVE;
+                    $this->store->statusChanged($this->userId);
+                }
                 return;}
             else{
                 $this->store->saveAnswer($this->userId, $answer, $this->category, $position);

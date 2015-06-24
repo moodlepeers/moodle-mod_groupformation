@@ -56,7 +56,7 @@ class RangeInput{
 					<span class="">0</span>
 					<input type="range" name="'. $this->category . $this->qnumber .'" class="gf_range_inputs" min="0" max="100" value="'. $answer .'" />
 					<span class="">100</span>
-					<input type="text" name="'. $this->category . $this->qnumber .'_valid" value="0" />
+					<input type="text" name="'. $this->category . $this->qnumber .'_valid" value="0" style="display:none;"/>
 					</td>';
 		echo '</tr>';
 		

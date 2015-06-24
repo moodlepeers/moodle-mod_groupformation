@@ -158,8 +158,8 @@ class mod_groupformation_questionaire {
 		
 		$hasAnswer = count ( $questions [0] ) == 4;
 
-        //var_dump($questions);
-        //var_dump($this->category);
+        // var_dump($questions);
+        // var_dump($this->category);
 
 		// each question with inputs
 		foreach ( $questions as $q ) {

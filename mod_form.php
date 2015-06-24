@@ -225,13 +225,13 @@ class mod_groupformation_mod_form extends moodleform_mod {
 
                        <!-- <p>' . get_string ( 'knowledge_description_extended', 'groupformation' ) . '</p> -->
 
-						<p id="knowledfeInfo"></p>
+						<p id="knowledeInfo"></p>
 				
-						<p id="knowledfeInfoProject">' . get_string ( 'knowledge_info_project', 'groupformation' ) . '</p>
+						<p id="knowledeInfoProject">' . get_string ( 'knowledge_info_project', 'groupformation' ) . '</p>
                         
-                        <p id="knowledfeInfoHomework">' . get_string ( 'knowledge_info_homework', 'groupformation' ) . '</p>
+                        <p id="knowledeInfoHomework">' . get_string ( 'knowledge_info_homework', 'groupformation' ) . '</p>
                         
-                        <p id="knowledfeInfoPresentation">' . get_string ( 'knowledge_info_presentation', 'groupformation' ) . '</p>
+                        <p id="knowledeInfoPresentation">' . get_string ( 'knowledge_info_presentation', 'groupformation' ) . '</p>
 				
 				
                             <div class="grid">
@@ -322,7 +322,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
                     <div class="gf_pad_header">
 						<label class="gf_label" for="id_js_topics">
                           <input type="checkbox" id="id_js_topics" name="chbTopics" value="wantTopics">
-                          ' . get_string ( 'topics_description', 'groupformation' ) . '</label><span class="optional"></span>
+                          ' . get_string ( 'topics_description', 'groupformation' ) . '</label><span id="topicsStateLabel" class="optional"></span>
                     </div>' );
 
 
@@ -388,6 +388,11 @@ class mod_groupformation_mod_form extends moodleform_mod {
         $mform->addElement ('html', '</div>');
 
 
+        $mform->addElement ( 'html', '<div class="settings_info" id="groupSettingsInfo">
+                        <p>' . get_string ( 'groupSettingsInfo', 'groupformation' ) . '</p>
+                </div>');
+
+
         //wrapper for Groupsize Options
         $mform->addElement ('html', '<div class="gf_settings_pad">');
 
@@ -408,6 +413,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
                 </div>
 
                 <div class="gf_pad_content">
+                <p><span id="studentsInCourse"><b>500</b></span> ' . get_string ( 'students_enrolled_info', 'groupformation' ) . '</p>
                     <div class="grid">
                     <div class="col_m_50"><label><input type="radio" name="group_opt" id="group_opt_size" value="group_size" checked="checked" />
                                 ' . get_string ( 'maxmembers', 'groupformation' ) . '</label>
@@ -468,7 +474,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
                             <option value="justpass">' . get_string ( 'justpass', 'groupformation' ) . '</option>
                             <option value="novaluation">' . get_string ( 'noevaluation', 'groupformation' ) . '</option>
                         </select>
-						<span id="max_points_wrapper"><input type="number" id="max_points"  min="0" max="100" value="100" /><span class="toolt" tooltip="Bitte maximale Punktzahl eingeben."></span></span>
+						<span id="max_points_wrapper"><input type="number" id="max_points"  min="0" max="100" value="100" /><span class="toolt" tooltip="' . get_string ( 'evaluation_point_info', 'groupformation' ) . '"></span></span>
                     </div>
                 ' ); // TODO @Rene: lang File für tooltip "Maximale Punktzahl" (siehe Zeile oben)
 
