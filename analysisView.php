@@ -55,7 +55,7 @@
 	groupformation_log($USER->id,$groupformation->id,'<view_teacher_overview>');
 	
 	// Trigger event TODO @Nora why?
-	groupformation_trigger_event($cm, $course, $groupformation, $context);
+	// groupformation_trigger_event($cm, $course, $groupformation, $context);
 	
 	// Set PAGE config
 	$PAGE->set_url ( '/mod/groupformation/analysisView.php', array ('id' => $cm->id, 'do_show' => $do_show ) );
@@ -74,6 +74,20 @@
 	
 	// Replace the following lines with you own code.
 	//echo $OUTPUT->heading ( $groupformation->name );
+	
+	// ---------------------------------------------
+	require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/job_manager.php');
+	
+	$jobmanager = new mod_groupformation_job_manager(null);
+	
+	$job = $jobmanager->get_next_job();
+	
+	var_dump($job);
+	
+	var_dump($jobmanager->is_job_aborted($job));
+	
+	var_dump($jobmanager->do_groupal($job));
+	//-----------------------------------------------
 	
 	require_once (dirname ( __FILE__ ) . '/classes/group_forming/submit_infos.php');
 	$infos = new mod_groupformation_submit_infos ( $groupformation->id );

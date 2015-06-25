@@ -31,6 +31,7 @@
 defined ( 'MOODLE_INTERNAL' ) || die ();
 
 require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/storage_manager.php');
+require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/job_manager.php');
 require_once (dirname ( __FILE__ ) . '/classes/util/xml_loader.php');
 require_once (dirname ( __FILE__ ) . '/locallib.php');
 /**
@@ -278,9 +279,26 @@ function groupformation_print_recent_mod_activity($activity, $courseid, $detail,
  *      
  */
 function groupformation_cron() {
-// 	groupformation_log(1, 1, '<view_settings>');
-// 	sleep(3*60);
-// 	groupformation_log(1, 1, '<view_student_questionaire>');
+
+	$jobmanager = new mod_groupformation_job_manager();
+	
+	$job = $jobmanager->get_next_job();
+	
+	if (is_null($job)){
+		return true;
+	}else{
+		$results = $jobmanager->do_groupal($job);//do_groupal($job);
+		
+		if ($jobmanager->is_job_aborted($job)){
+			$result = null;
+			$jobmanager->reset_job($job); //set_job($job,"0000") //auf 0000
+			return true;
+		}else{
+			$jobmanager->save_result($result);
+			$jobmanager->set_job($job,"0001");
+		}
+	}
+	
 	return true;
 }
 
