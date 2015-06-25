@@ -343,6 +343,10 @@ h1.caption {
   width: 80%;
   margin: 10px 10px 10px 0; }
 
+.multi_field_wrapper input.respwidth.lastInput {
+    opacity: 0.5;
+    cursor: pointer; }
+
 .btn_wrap {
   line-height: 50px;
   height: 50px; }

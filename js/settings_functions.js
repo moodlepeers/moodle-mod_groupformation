@@ -139,6 +139,7 @@ $(document).ready(function() {
                 //remove the first 3 dynamic fields which been created by default
                 removeInput($wrapper, $cat, i);
             }
+            addInput($wrapper, $cat, '');
         }
 
         //if topics was checked before
@@ -158,6 +159,7 @@ $(document).ready(function() {
                 //remove the first 3 dynamic fields which been created by default
                 removeInput($wrapper, $cat, i);
             }
+            addInput($wrapper, $cat, '');
             // set the groupotions depending on topics
             adjustGropOptions('none', 0, 0);
             $('#groupSettingsInfo').show('2000', 'swing');
@@ -313,13 +315,20 @@ $(document).ready(function() {
     
     
     function addInput($wrapper, $cat, $value){
-        $theID = parseInt($('.multi_field:last-child', $wrapper).attr('id').substr(8)) + 1
-        $multifieldID = 'input' + $cat + $theID;
+        $thisID = parseInt($('.multi_field:last-child', $wrapper).attr('id').substr(8));
+        $theNextID = $thisID + 1;
 
-        // adds input field
-        $('.multi_field:first-child', $wrapper).clone(true).attr('id',$multifieldID)
-                                                            .appendTo($wrapper).find('input').val($value).focus();  
-        addPreview($wrapper, $cat, $theID, $value);
+        $thisMultifieldID = 'input' + $cat + $thisID;
+        $nextMultifieldID = 'input' + $cat + $theNextID;
+
+        //last field change style
+        $('.multi_field:last-child', $wrapper).find('input[type="text"]').removeClass('lastInput').removeAttr('placeholder');
+
+        // add input field
+        $('.multi_field:first-child', $wrapper).clone(true).attr('id',$nextMultifieldID)
+                                                            .appendTo($wrapper).find('input').val($value).addClass('lastInput').attr('placeholder','click to add preknowledge');
+
+        addPreview($wrapper, $cat, $theNextID, $value);
     }
     
     function addPreview($wrapper, $cat, $theID, $value){
@@ -363,9 +372,17 @@ $(document).ready(function() {
         var $cat = $(this).parent().attr('id');
         
         //add new empty field on button
-        $(".add_field", $(this)).click(function() {
+ /*       $(".add_field", $(this)).click(function() {
             $value = '';
             addInput($wrapper, $cat, $value);
+        });*/
+
+        //add new empty field with click on last input field
+        $('.multi_field input:text', $wrapper).click(function(){
+            if($('.multi_field:last-child', $wrapper).attr('id') == $(this).parent().attr('id')){
+                $value = '';
+                addInput($wrapper, $cat, $value);
+            }
         });
         
         //removes field on button
@@ -374,8 +391,7 @@ $(document).ready(function() {
             
             removeInput($wrapper, $cat, $theID);    
         });
-        
-        
+
         // Create Preview and write to the native Moodle input
         $('.multi_field input:text', $wrapper).keyup(function() {
         	$previewRowID = ($cat + 'Row' + parseInt($(this).parent().attr('id').substr(8)));
