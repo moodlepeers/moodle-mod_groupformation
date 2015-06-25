@@ -114,8 +114,22 @@ class mod_groupformation_job_manager {
 	 */
 	public function do_groupal($job){
 		// TODO @Nora @Ahmed
+		// get groupformation for this job
+		
+		$store = new mod_groupformation_storage_manager($job->groupformationid);
+		
+		$groupsize = intval($store->getGroupSize());
+		
+		var_dump($groupsize);
+		
+		// get users for this job
+		// for each user get the criterions and create participant
+		// USER+ANSWERS => CRITERIONS => PARTICIPANT WITH CRITERIONS => LIST OF PARTICIPANTS
+		// hand-over participants to groupAL lib 
+		// get back the results
 		
 		
+
 		//----- DUMMY Criterions
 		// ...
 		
@@ -123,8 +137,12 @@ class mod_groupformation_job_manager {
 		
 		//groupal
 		
+		//lib/groupal/run->run(Participants, groupsize, ..)
+		
 		//... var_dump("ergebnis")
 		
+		
+		// DUMMY 
 		$result = new stdClass();
 		$result->groupids = array(1, 2);
 		$result->groups = array(1=>array(2,3),2=>array(1,4,5));
