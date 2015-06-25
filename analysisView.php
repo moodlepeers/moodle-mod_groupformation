@@ -82,11 +82,14 @@
 	
 	$job = $jobmanager->get_next_job();
 	
+	if (!is_null($job)){
 	var_dump($job);
 	
 	var_dump($jobmanager->is_job_aborted($job));
 	
 	var_dump($jobmanager->do_groupal($job));
+	
+	}
 	//-----------------------------------------------
 	
 	require_once (dirname ( __FILE__ ) . '/classes/group_forming/submit_infos.php');

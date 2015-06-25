@@ -28,6 +28,10 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 	die ( 'Direct access to this script is forbidden.' ); // / It must be included from a Moodle page
 }
 
+// DUMMY
+// require_once ...
+
+
 class mod_groupformation_job_manager {	
 	
 	/**
@@ -110,6 +114,16 @@ class mod_groupformation_job_manager {
 	 */
 	public function do_groupal($job){
 		// TODO @Nora @Ahmed
+		
+		
+		//----- DUMMY Criterions
+		// ...
+		
+		//...
+		
+		//groupal
+		
+		//... var_dump("ergebnis")
 		
 		$result = new stdClass();
 		$result->groupids = array(1, 2);
