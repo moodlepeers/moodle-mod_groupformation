@@ -3,6 +3,7 @@ $(document).ready(function() {
     // hide validation error alerts and show them if needed
     // if css attribute "display:none" and show on validation error, they will not displayed properly
     $(".js_errors").hide();
+
     $(".settings_info").hide();
     
     

@@ -227,11 +227,11 @@ class mod_groupformation_mod_form extends moodleform_mod {
 
 						<p id="knowledeInfo"></p>
 				
-						<p id="knowledeInfoProject">' . get_string ( 'knowledge_info_project', 'groupformation' ) . '</p>
+						<p id="knowledeInfoProject" style="display:none;">' . get_string ( 'knowledge_info_project', 'groupformation' ) . '</p>
                         
-                        <p id="knowledeInfoHomework">' . get_string ( 'knowledge_info_homework', 'groupformation' ) . '</p>
+                        <p id="knowledeInfoHomework" style="display:none;">' . get_string ( 'knowledge_info_homework', 'groupformation' ) . '</p>
                         
-                        <p id="knowledeInfoPresentation">' . get_string ( 'knowledge_info_presentation', 'groupformation' ) . '</p>
+                        <p id="knowledeInfoPresentation" style="display:none;">' . get_string ( 'knowledge_info_presentation', 'groupformation' ) . '</p>
 				
 				
                             <div class="grid">
