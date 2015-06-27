@@ -30,6 +30,10 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 
 // DUMMY
 // require_once ...
+        require_once($CFG->dirroot.'/lib/groupal/classes/Criteria/SpecificCriterion.php');
+		require_once($CFG->dirroot.'/lib/groupal/classes/Participant.php');
+		require_once($CFG->dirroot.'/lib/groupal/classes/Cohort.php');
+		require_once($CFG->dirroot.'/lib/groupal/classes/Matcher/GroupALGroupCentricMatcher.php');
 
 
 class mod_groupformation_job_manager {	
@@ -143,10 +147,63 @@ class mod_groupformation_job_manager {
 		
 		
 		// DUMMY 
+		/**
+         * <Testdaten>------------------------------------------
+         */
+        // init CriterionWeight and set group members max size
+        CriterionWeight::init(new HashMap);
+        Group::setGroupMembersMaxSize(3);
+
+        // Dummy Criterions
+        $c_vorwissen = new SpecificCriterion("vorwissen", array(0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4), 0, 1, true, 1);
+        $c_note = new SpecificCriterion("note", array(0.4), 0, 1, true, 1);
+        $c_persoenlichkeit = new SpecificCriterion("persoenlichkeit", array(0.4, 0.4, 0.4, 0.4, 0.4), 0, 1, true, 1);
+        $c_motivation = new SpecificCriterion("motivation", array(0.4, 0.4, 0.4, 0.4), 0, 1, true, 1);
+        $c_lernstil = new SpecificCriterion("lernstil", array(0.4, 0.4, 0.4, 0.4), 0, 1, true, 1);
+        $c_teamorientierung = new SpecificCriterion("teamorientierung", array(0.4, 0.4, 0.4, 0.4, 0.4, 0.4), 0, 1, true, 1);
+        // Dummy Participants
+        $users = array();
+        for ($i = 0; $i < 25; $i++) {
+            $users[] = new Participant(array($c_vorwissen, $c_motivation,
+                $c_note, $c_persoenlichkeit, $c_lernstil, $c_teamorientierung), $i);
+        }
+        /**
+         * </Testdaten>-----------------------------------------
+         */
+
+        // Matcher (einer von beiden)
+		$gcm = new GroupALGroupCentricMatcher();
+        // TODO Cohort dynamisch gestalten
+        $cohort = new Cohort(10, null); // null, weil noch keine Gruppen vorhanden. Bereits vorhandene könnten aber übergeben werden.
+
+        $gcm->matchToGroups($users, $cohort->groups);
+
+
 		$result = new stdClass();
-		$result->groupids = array(1, 2);
-		$result->groups = array(1=>array(2,3),2=>array(1,4,5));
-		$result->users = array(1=>2,2=>1,3=>1,4=>2,5=>2);
+        // groupsIDs und Gruppen sammeln
+		$result->groupids = array();
+        $result->groups = array();
+        $result->users = array();
+
+        foreach($cohort->groups as $g) {
+            // gruppen mit GruppenIDs als array-Index
+            $result->groups[$g->getID()] = $g;
+        }
+
+        foreach($cohort->groups as $g) {
+            // groupIDs
+            $result->groupids[$g->getID()] = $g->getID();
+        }
+
+        // get all matched users
+        foreach($cohort->groups as $g) {
+            $p = $g->get_participants(); // Participants as  LinkedList
+            for ($z = $p->first(); $z != null; $z = $z->next()) {
+                $result->users[] = $z;
+            }
+        }
+
+
 		return $result;	
 	}
 	
