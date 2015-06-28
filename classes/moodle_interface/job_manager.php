@@ -152,7 +152,7 @@ class mod_groupformation_job_manager {
          */
         // init CriterionWeight and set group members max size
         CriterionWeight::init(new HashMap);
-        Group::setGroupMembersMaxSize(3);
+        Group::setGroupMembersMaxSize(2);
 
         // Dummy Criterions
         $c_vorwissen = new SpecificCriterion("vorwissen", array(0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4), 0, 1, true, 1);
@@ -163,7 +163,7 @@ class mod_groupformation_job_manager {
         $c_teamorientierung = new SpecificCriterion("teamorientierung", array(0.4, 0.4, 0.4, 0.4, 0.4, 0.4), 0, 1, true, 1);
         // Dummy Participants
         $users = array();
-        for ($i = 0; $i < 25; $i++) {
+        for ($i = 0; $i < 8; $i++) {
             $users[] = new Participant(array($c_vorwissen, $c_motivation,
                 $c_note, $c_persoenlichkeit, $c_lernstil, $c_teamorientierung), $i);
         }
@@ -174,7 +174,7 @@ class mod_groupformation_job_manager {
         // Matcher (einer von beiden)
 		$gcm = new GroupALGroupCentricMatcher();
         // TODO Cohort dynamisch gestalten
-        $cohort = new Cohort(10, null); // null, weil noch keine Gruppen vorhanden. Bereits vorhandene könnten aber übergeben werden.
+        $cohort = new Cohort(4, null); // null, weil noch keine Gruppen vorhanden. Bereits vorhandene könnten aber übergeben werden.
 
         $gcm->matchToGroups($users, $cohort->groups);
 
@@ -187,23 +187,26 @@ class mod_groupformation_job_manager {
 
         foreach($cohort->groups as $g) {
             // gruppen mit GruppenIDs als array-Index
-            $result->groups[$g->getID()] = $g;
+            $result->groups[$g->getID()] = $g->getID();
         }
 
         foreach($cohort->groups as $g) {
             // groupIDs
-            $result->groupids[$g->getID()] = $g->getID();
+            
+        	// TODO @Ahmed Kannst du in Group eine Methode get_participants_ids() schreiben die die get_participants in ein array mit nur den IDs umwandelt?
+            $result->groupids[$g->getID()] = array('id'=>$g->getID(),'users'=>$g->get_participants()); //->get_participants_ids());
         }
 
         // get all matched users
         foreach($cohort->groups as $g) {
             $p = $g->get_participants(); // Participants as  LinkedList
             for ($z = $p->first(); $z != null; $z = $z->next()) {
-                $result->users[] = $z;
+                $result->users[] = array('id'=>$z->getID(), 'group'=>$z->actualGroup);
             }
         }
-
-
+        
+        //-----------------------------------------------------------
+        
 		return $result;	
 	}
 	

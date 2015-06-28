@@ -146,14 +146,13 @@
 	}
 	
 
-	echo $OUTPUT->header();
-	
-	// Print the tabs.
-	require ('tabs.php');
-	
 	$available = $store->isQuestionaireAvailable();
 	
 	if(($available || has_capability('mod/groupformation:editsettings', $context)) && ($category == '' || $inArray)){
+		echo $OUTPUT->header();
+		
+		// Print the tabs.
+		require ('tabs.php');
 		
 		// Conditions to show the intro can change to look for own settings or whatever.
 		if ($groupformation->intro) {
