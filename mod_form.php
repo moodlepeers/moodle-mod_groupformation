@@ -232,7 +232,8 @@ class mod_groupformation_mod_form extends moodleform_mod {
                         <p id="knowledeInfoHomework" style="display:none;">' . get_string ( 'knowledge_info_homework', 'groupformation' ) . '</p>
                         
                         <p id="knowledeInfoPresentation" style="display:none;">' . get_string ( 'knowledge_info_presentation', 'groupformation' ) . '</p>
-				
+
+				        <p id="stringAddInput" style="display:none;">' . get_string ( 'add_line', 'groupformation' ) . '</p>
 				
                             <div class="grid">
                             <div id="prk">    
@@ -257,8 +258,8 @@ class mod_groupformation_mod_form extends moodleform_mod {
                                                 <button type="button" class="remove_field gf_button gf_button_circle gf_button_small"></button>
                                             </div>
                                             <div class="multi_field" id="inputprk2">
-                                                <input class="respwidth js_preknowledgeInput" type="text">
-                                                <button type="button" class="remove_field gf_button gf_button_circle gf_button_small"></button>
+                                                <input class="respwidth js_preknowledgeInput lastInput" type="text" placeholder="' . get_string ( 'add_line', 'groupformation' ) . '">
+                                                <button type="button" class="remove_field gf_button gf_button_circle gf_button_small" disabled="disabled"></button>
                                             </div>
                                         </div>
                                     </div> <!-- /col_50 -->   
@@ -354,8 +355,8 @@ class mod_groupformation_mod_form extends moodleform_mod {
                                                 <button type="button" class="remove_field gf_button gf_button_circle gf_button_small"></button>
                                             </div>
                                             <div class="multi_field" id="inputtpc2">
-                                                <input class="respwidth js_topicInput" type="text">
-                                                <button type="button" class="remove_field gf_button gf_button_circle gf_button_small"></button>
+                                                <input class="respwidth js_topicInput lastInput" type="text" placeholder="' . get_string ( 'add_line', 'groupformation' ) . '">
+                                                <button type="button" class="remove_field gf_button gf_button_circle gf_button_small" disabled="disabled"></button>
                                             </div>
                                         </div>
                                     </div> <!-- /col_50 -->   

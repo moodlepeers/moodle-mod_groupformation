@@ -18,6 +18,8 @@ $(document).ready(function() {
     var stringOfPreknowledge = "";
 
     var stringOfTopics = "";
+
+    var stringAddInput = $('#stringAddInput').text();
     
 
     $('.sortable_topics').sortable({
@@ -323,10 +325,12 @@ $(document).ready(function() {
 
         //last field change style
         $('.multi_field:last-child', $wrapper).find('input[type="text"]').removeClass('lastInput').removeAttr('placeholder');
+        $('.multi_field:last-child', $wrapper).find('button').removeAttr('disabled');
 
         // add input field
         $('.multi_field:first-child', $wrapper).clone(true).attr('id',$nextMultifieldID)
-                                                            .appendTo($wrapper).find('input').val($value).addClass('lastInput').attr('placeholder','click to add preknowledge');
+                                                            .appendTo($wrapper).find('input').val($value).addClass('lastInput').attr('placeholder', stringAddInput);
+        $('.multi_field:last-child', $wrapper).find('button').attr('disabled', true);
 
         addPreview($wrapper, $cat, $theNextID, $value);
     }
