@@ -150,9 +150,8 @@ class mod_groupformation_job_manager {
 		/**
          * <Testdaten>------------------------------------------
          */
-        // init CriterionWeight and set group members max size
+        // init CriterionWeight
         CriterionWeight::init(new HashMap);
-        Group::setGroupMembersMaxSize(2);
 
         // Dummy Criterions
         $c_vorwissen = new SpecificCriterion("vorwissen", array(0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4), 0, 1, true, 1);
@@ -173,40 +172,9 @@ class mod_groupformation_job_manager {
 
         // Matcher (einer von beiden)
 		$gcm = new GroupALGroupCentricMatcher();
-        // TODO Cohort dynamisch gestalten
-        $cohort = new Cohort(4, null); // null, weil noch keine Gruppen vorhanden. Bereits vorhandene könnten aber übergeben werden.
 
-        $gcm->matchToGroups($users, $cohort->groups);
+        $result = $gcm->perform_groupformation($users, 2, 10);
 
-
-		$result = new stdClass();
-        // groupsIDs und Gruppen sammeln
-		$result->groupids = array();
-        $result->groups = array();
-        $result->users = array();
-
-        foreach($cohort->groups as $g) {
-            // gruppen mit GruppenIDs als array-Index
-            $result->groups[$g->getID()] = $g->getID();
-        }
-
-        foreach($cohort->groups as $g) {
-            // groupIDs
-            
-        	// TODO @Ahmed Kannst du in Group eine Methode get_participants_ids() schreiben die die get_participants in ein array mit nur den IDs umwandelt?
-            $result->groupids[$g->getID()] = array('id'=>$g->getID(),'users'=>$g->get_participants()); //->get_participants_ids());
-        }
-
-        // get all matched users
-        foreach($cohort->groups as $g) {
-            $p = $g->get_participants(); // Participants as  LinkedList
-            for ($z = $p->first(); $z != null; $z = $z->next()) {
-                $result->users[] = array('id'=>$z->getID(), 'group'=>$z->actualGroup);
-            }
-        }
-        
-        //-----------------------------------------------------------
-        
 		return $result;	
 	}
 	
