@@ -804,4 +804,18 @@ class mod_groupformation_storage_manager {
 				'id' => $this->groupformationid 
 		) );
 	}
+	
+	public function getGroupName(){
+		global $DB;
+		return $DB->get_field('groupformation', 'groupname',array (
+				'id' => $this->groupformationid 
+		) );
+	}
+	
+	public function getName(){
+		global $DB;
+		return $DB->get_field('groupformation', 'name',array (
+				'id' => $this->groupformationid
+		) );
+	}
 }

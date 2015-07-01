@@ -430,6 +430,49 @@ function xmldb_groupformation_upgrade($oldversion) {
 		upgrade_mod_savepoint(true, 2015061809, 'groupformation');
 	}
 	
+	if ($oldversion < 2015070100) {
+	
+		// Define table groupformation_groups to be created.
+		$table = new xmldb_table('groupformation_groups');
+		
+		// Adding fields to table groupformation_groups.
+		$table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+		$table->add_field('groupformation', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+		$table->add_field('groupid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+		$table->add_field('groupname', XMLDB_TYPE_CHAR, '255', null, null, null, null);
+		
+		// Adding keys to table groupformation_groups.
+		$table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+		$table->add_key('groupformation', XMLDB_KEY_FOREIGN, array('groupformation'), 'groupformation', array('id'));
+		
+		// Conditionally launch create table for groupformation_groups.
+		if (!$dbman->table_exists($table)) {
+			$dbman->create_table($table);
+		}
+		
+		// Define table groupformation_group_users to be created.
+		$table = new xmldb_table('groupformation_group_users');
+		
+		// Adding fields to table groupformation_group_users.
+		$table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+		$table->add_field('groupformation', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
+		$table->add_field('userid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
+		$table->add_field('groupid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
+		
+		// Adding keys to table groupformation_group_users.
+		$table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+		$table->add_key('groupformation', XMLDB_KEY_FOREIGN, array('groupformation'), 'groupformation', array('id'));
+		
+		// Conditionally launch create table for groupformation_group_users.
+		if (!$dbman->table_exists($table)) {
+			$dbman->create_table($table);
+		}		
+	
+		// Groupformation savepoint reached.
+		upgrade_mod_savepoint(true, 2015070100, 'groupformation');
+	}
+	
+	
 	
 	return true;
 }

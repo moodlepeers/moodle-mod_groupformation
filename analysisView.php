@@ -87,7 +87,11 @@
 	
 	var_dump($jobmanager->is_job_aborted($job));
 	
-	var_dump($jobmanager->do_groupal($job));
+	$result = $jobmanager->do_groupal($job);
+	
+	var_dump($result);
+	
+	var_dump($jobmanager->save_result($job, $result));
 	
 	}
 	//-----------------------------------------------
