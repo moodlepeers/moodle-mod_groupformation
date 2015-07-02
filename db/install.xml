@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="mod/groupformation/db" VERSION="20150701" COMMENT="XMLDB file for Moodle mod/groupformation"
+<XMLDB PATH="mod/groupformation/db" VERSION="20150702" COMMENT="XMLDB file for Moodle mod/groupformation"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
@@ -253,8 +253,12 @@
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="groupformation" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
-        <FIELD NAME="groupid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="moodlegroupid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="groupname" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="groupal" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Gibt an ob die Gruppe durch GroupAL erzeugt wurde"/>
+        <FIELD NAME="random" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Gibt an ob die Gruppe zufällig erzeugt wurde"/>
+        <FIELD NAME="mrandom" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Gibt an ob die Gruppe im Rahmen des Mathevorkurses zufällig erzeugt wurde"/>
+        <FIELD NAME="created" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Gibt an, ob die Gruppen die generiert wurden auch in Moodle erstellt wurden (sprich echte Moodlegruppen)"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>

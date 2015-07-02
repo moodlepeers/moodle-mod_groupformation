@@ -472,6 +472,77 @@ function xmldb_groupformation_upgrade($oldversion) {
 		upgrade_mod_savepoint(true, 2015070100, 'groupformation');
 	}
 	
+	if ($oldversion < 2015070102) {
+	
+		// Changing nullability of field groupid on table groupformation_groups to not null.
+		$table = new xmldb_table('groupformation_groups');
+		$field = new xmldb_field('groupid', XMLDB_TYPE_INTEGER, '10', null, null, null, '0', 'groupformation');
+	
+		// Launch change of nullability for field groupid.
+		$dbman->change_field_notnull($table, $field);
+	
+		// Rename field groupid on table groupformation_groups to NEWNAMEGOESHERE.
+		$table = new xmldb_table('groupformation_groups');
+		$field = new xmldb_field('groupid', XMLDB_TYPE_INTEGER, '10', null, null, null, '0', 'groupformation');
+		
+		// Launch rename field groupid.
+		$dbman->rename_field($table, $field, 'moodlegroupid');
+		
+		// Changing the default of field moodlegroupid on table groupformation_groups to drop it.
+		$table = new xmldb_table('groupformation_groups');
+		$field = new xmldb_field('moodlegroupid', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'groupformation');
+		
+		// Launch change of default for field moodlegroupid.
+		$dbman->change_field_default($table, $field);
+		
+		// Groupformation savepoint reached.
+		upgrade_mod_savepoint(true, 2015070102, 'groupformation');
+	}
+	
+	if ($oldversion < 2015070103) {
+	
+		// Define field groupal to be added to groupformation_groups.
+		$table = new xmldb_table('groupformation_groups');
+		$field = new xmldb_field('groupal', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '0', 'groupname');
+	
+		// Conditionally launch add field groupal.
+		if (!$dbman->field_exists($table, $field)) {
+			$dbman->add_field($table, $field);
+		}
+		
+		// Define field random to be added to groupformation_groups.
+		$table = new xmldb_table('groupformation_groups');
+		$field = new xmldb_field('random', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '0', 'groupal');
+		
+		// Conditionally launch add field random.
+		if (!$dbman->field_exists($table, $field)) {
+			$dbman->add_field($table, $field);
+		}
+		
+		// Define field mrandom to be added to groupformation_groups.
+		$table = new xmldb_table('groupformation_groups');
+		$field = new xmldb_field('mrandom', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '0', 'random');
+		
+		// Conditionally launch add field mrandom.
+		if (!$dbman->field_exists($table, $field)) {
+			$dbman->add_field($table, $field);
+		}
+		
+		// Define field created to be added to groupformation_groups.
+		$table = new xmldb_table('groupformation_groups');
+		$field = new xmldb_field('created', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '0', 'mrandom');
+		
+		// Conditionally launch add field created.
+		if (!$dbman->field_exists($table, $field)) {
+			$dbman->add_field($table, $field);
+		}		
+	
+		// Groupformation savepoint reached.
+		upgrade_mod_savepoint(true, 2015070103, 'groupformation');
+	}
+	
+	
+	
 	
 	
 	return true;

@@ -165,12 +165,13 @@ class mod_groupformation_job_manager {
 	public function save_result($job, $result){
 		global $DB;
 		
-		$idmap = $this->create_groups($job, $result->groups);
+		$flags = array("groupal"=>1,"random"=>0,"mrandom"=>0,"created"=>0);
+		
+		$idmap = $this->create_groups($job, $result->groups,$flags);
 		
 		$this->assign_users_to_groups($job, $result->users, $idmap);
 		
-		// TODO @Rene
-		return false;
+		return true;
 	}
 	
 	/**
@@ -180,7 +181,7 @@ class mod_groupformation_job_manager {
 	 * @param unknown $groupids
 	 * @return boolean
 	 */	
-	public function create_groups($job, $groupids){
+	public function create_groups($job, $groupids, $flags){
 		
 		$groupformationid = $job->groupformationid;
 		
@@ -200,7 +201,7 @@ class mod_groupformation_job_manager {
 		$ids = array();
 		foreach ($groupids as $groupalid){
 			$name = $groupname.strval($groupalid);
-			$id = $this->create_group($groupalid, $name, $groupformationid);
+			$id = $this->create_group($groupalid, $name, $groupformationid,$flags);
 			$ids[$groupalid] = $id;
 		}
 		
@@ -215,13 +216,17 @@ class mod_groupformation_job_manager {
 	 * @param unknown $groupformationid
 	 * @return Ambigous <boolean, number>
 	 */
-	public function create_group($groupalid, $name, $groupformationid){
+	public function create_group($groupalid, $name, $groupformationid,$flags){
 		global $DB;
 		
 		$record = new stdClass();
 		$record->groupformation = $groupformationid;
-		$record->groupid = $groupalid;
+		$record->moodlegroupid = null;
 		$record->groupname = $name;
+		$record->groupal = $flags['groupal'];
+		$record->random = $flags['random'];
+		$record->mrandom = $flags['random'];
+		$record->created = $flags['created'];
 		
 		$id = $DB->insert_record('groupformation_groups', $record);
 		
