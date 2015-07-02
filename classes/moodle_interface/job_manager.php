@@ -271,4 +271,19 @@ class mod_groupformation_job_manager {
 		return $DB->insert_record('groupformation_group_users', $record);
 	}
 	
+	public static function create_job($groupformationid){
+		global $DB;
+		
+		$job = new stdClass();
+		$job->groupformationid = $groupformationid;
+		$job->waiting = 0;
+		$job->started = 0;
+		$job->aborted = 0;
+		$job->done = 0;
+		$job->timecreated = null;
+		$job->timestarted = null;
+		$job->timefinished = null;
+		
+		$DB->insert_record('groupformation_jobs', $job);				
+	}
 }

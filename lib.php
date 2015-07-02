@@ -90,6 +90,8 @@ function groupformation_add_instance(stdClass $groupformation, mod_groupformatio
 	
 	groupformation_save_more_infos ( $groupformation, TRUE );
 	
+	mod_groupformation_job_manager::create_job($groupformation->id);
+	
 	// Log access to page
 	groupformation_log ( $USER->id, $groupformation->id, '<save_settings>' );
 	
