@@ -82,7 +82,7 @@
 			$this->data = new mod_groupformation_data();
 			//$this->names = $data->getNames();
 			$this->scenario = $this->store->getScenario();
-			$this->names = $this->store->getCategories();//data->getCategorySet($this->scenario);
+			$this->names = $this->store->getCategories();
 			$this->numberOfCategory = count($this->names);
 			$this->init($userId);
 			$this->setIternalNumber($oldCategory);
