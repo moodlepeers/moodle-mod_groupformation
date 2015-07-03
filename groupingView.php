@@ -50,12 +50,22 @@
 		redirect($returnurl);
 	}else{
 		$current_tab = $do_show;
-	}	
+	}
+
+    // Get data for HTML output
+    require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/storage_manager.php');
+    require_once (dirname ( __FILE__ ) . '/classes/group_forming/groupingViewController.php');
+    $store = new mod_groupformation_storage_manager($groupformation->id);
+
 	
 	$s = 0;
 	if(isset($_POST["starting"])){
 		$s = $_POST['starting'];
+        // $store->something($_POST['starting']);
 	}
+
+    // set data and viewStatus of groupingView, after possible db update
+    $controller = new mod_groupformation_GroupingViewController($groupformation->id);
 	
 	// Log access to page
 	groupformation_log($USER->id,$groupformation->id,'<view_teacher_grouping>');
@@ -96,7 +106,11 @@
 	echo '<input type="hidden" name="id" value="' . $id . '"/>';
 	
 	echo '
-	<div class="gf_settings_pad">
+	<div class="gf_settings_pad">';
+
+    $controller->displaySettings();
+
+/*    echo'
 		<div class="gf_pad_header">
 		Gruppenbildung
 		</div>
@@ -105,11 +119,19 @@
 			<button class="gf_button gf_button_pill gf_button_small" disabled>Gruppenbildung stoppen</button>
 			<button class="gf_button gf_button_pill gf_button_small" >Gruppen l&ouml;schen</button>
 			<p>Statusanzeige "Gruppenbildung l&auml;uft..." mit %Zahl oder voraussichtlicher Endzeit</p>
-		</div>';
+		</div>';*/
 	
 	echo '</form>';
-	
-	echo  '	<div class="gf_pad_header_small">
+
+
+    $controller->displayAnalysis();
+    $controller->displayUncompleteGroups();
+    $controller->displayGroups();
+
+
+
+
+/*	echo  '	<div class="gf_pad_header_small">
 			Auswertung
 		</div>
 		<div class="gf_pad_content">
@@ -171,7 +193,9 @@
 				<div class="col_s_25 bp_align_right-middle"><button class="gf_button gf_button_pill gf_button_tiny">zur Moodle Gruppenansicht</button></div>
 				<div class="col_s_100 gf_group_links"><a href="#">Max Musterman</a><a href="#">Peter Lustig</a><a href="#">Cho Ngueng</a><a href="#">Mustafa Ghaffar</a><a href="#">Olivia Johnson</a><a href="#">Jurgen Ehrlich</a></div>
 			</div>
-		</div>
-	</div>';
+		</div>';*/
+
+
+	echo '</div>';
 	
 	echo $OUTPUT->footer ();
