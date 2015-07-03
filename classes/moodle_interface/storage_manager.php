@@ -560,10 +560,20 @@ class mod_groupformation_storage_manager {
 		$categories = array ();
 		foreach ( $category_set as $category ) {
 			if ($this->getNumber ( $category ) > 0) {
+				// if ($category != 'general' || ($category == 'general' && $this->getEvaluationMethod() != 1))
+				if ($category != 'grade' || $this->getGeneral())
 				$categories [] = $category;
 			}
 		}
 		return $categories;
+	}
+	
+	public function getGeneral(){
+		global $DB;
+		$evaluationmethod = $DB->get_field('groupformation', 'evaluationmethod', array('id'=>$this->groupformationid));
+		if ($evaluationmethod != 1 && $evaluationmethod != 2)
+			return false; 
+		return true;
 	}
 	
 	/**

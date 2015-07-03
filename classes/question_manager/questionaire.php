@@ -90,7 +90,7 @@ class mod_groupformation_questionaire {
 		$data = new mod_groupformation_data ();
 		$store = new mod_groupformation_storage_manager ( $this->groupformationid );
 		$scenario = $store->getScenario ();
-		$temp_categories = $data->getCategorySet ( $scenario );
+		$temp_categories = $store->getCategories();
 		$categories = array ();
 		foreach ( $temp_categories as $category ) {
 			if ($store->getNumber ( $category ) > 0) {
