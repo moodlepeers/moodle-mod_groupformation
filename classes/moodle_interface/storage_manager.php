@@ -774,7 +774,7 @@ class mod_groupformation_storage_manager {
 			if ($i % 2 == 0) {
 				// sort to group A
 				groups_add_member ( $a, $userid );
-				$DB->set_field ( 'groupformation_started', 'groupname', $a, array (
+				$DB->set_field ( 'groupformation_started', 'groupid', $a, array (
 						'groupformation' => $this->groupformationid,
 						'completed' => $completed,
 						'userid' => $userid 
@@ -784,7 +784,7 @@ class mod_groupformation_storage_manager {
 			if ($i % 2 == 1) {
 				// sort to group B
 				groups_add_member ( $b, $userid );
-				$DB->set_field ( 'groupformation_started', 'groupname', $b, array (
+				$DB->set_field ( 'groupformation_started', 'groupid', $b, array (
 						'groupformation' => $this->groupformationid,
 						'completed' => $completed,
 						'userid' => $userid 
