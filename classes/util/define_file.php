@@ -317,12 +317,4 @@ class mod_groupformation_data {
 		return $this->HOMOGEN_SETS[$scenario];
 	}
 	
-	public function getPreviousCategory($scenario, $category) {
-		$pos = array_search ( strtolower ( $category ), $this->getCategorySet ( $scenario ) );
-		if ($pos >= 1)
-			$previous = $this->getCategorySet ( $scenario )[$pos - 1];
-		else
-			$previous = '';
-		return $previous;
-	}
 }

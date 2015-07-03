@@ -71,7 +71,7 @@
 	if (isset($_POST["category"])){
 		$category = $_POST['category'];
 	}elseif (!(strcmp($url_category, '')==0)){
-		$category = $data->getPreviousCategory($scenario, $url_category);
+		$category = $store->getPreviousCategory($url_category);
 	}
 
 	$number = $store->getNumber($category);

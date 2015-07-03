@@ -190,7 +190,6 @@ class mod_groupformation_storage_manager {
 		$data = new mod_groupformation_data ();
 		
 		$scenario = $this->getScenario ();
-		// $names = $data->getCategorySet($scenario);
 		$names = $data->getCriterionSet ( $scenario );
 		$number = 0;
 		foreach ( $names as $name ) {
@@ -212,9 +211,7 @@ class mod_groupformation_storage_manager {
 	public function hasAnsweredEverything($userid) {
 		$scenario = $this->getScenario ();
 		$data = new mod_groupformation_data ();
-		// TODO @Ren�
-		// Sollte man hier nicht auf das CriterionSet zugreifen
-		$categories = $data->getCategorySet ( $scenario );
+		$categories = $this->getCategories();
 		$sum = array_sum ( $this->getNumbers ( $categories ) );
 		$user_sum = $this->answerNumberForUser ( $userid );
 		return $sum == $user_sum;
@@ -561,14 +558,24 @@ class mod_groupformation_storage_manager {
 		foreach ( $category_set as $category ) {
 			if ($this->getNumber ( $category ) > 0) {
 				// if ($category != 'general' || ($category == 'general' && $this->getEvaluationMethod() != 1))
-				if ($category != 'grade' || $this->getGeneral())
+				if ($category != 'grade' || $this->askForGrade())
 				$categories [] = $category;
 			}
 		}
 		return $categories;
 	}
 	
-	public function getGeneral(){
+	public function getPreviousCategory($category){
+		$categories = $this->getCategories ();
+		$pos = array_search ( strtolower ( $category ),$categories);
+		if ($pos >= 1)
+			$previous = $categories[$pos - 1];
+		else
+			$previous = '';
+		return $previous;
+	}
+	
+	public function askForGrade(){
 		global $DB;
 		$evaluationmethod = $DB->get_field('groupformation', 'evaluationmethod', array('id'=>$this->groupformationid));
 		if ($evaluationmethod != 1 && $evaluationmethod != 2)
