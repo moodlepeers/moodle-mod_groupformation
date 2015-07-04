@@ -43,6 +43,11 @@ class mod_groupformation_infoText {
 		$this->store = new mod_groupformation_storage_manager ( $groupformationid );
 	}
 	
+	//Anzeige, dass die Gruppen gebildet worden sind
+	public function __groupsAvailable(){
+		echo 'Gruppen sind gebildet';
+	}
+	
 	/**
 	 * Prints initial questionaire status page for user
 	 */

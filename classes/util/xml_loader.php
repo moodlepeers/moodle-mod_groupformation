@@ -56,8 +56,12 @@
 			return $array;
 		}
 		
+		//Überprüft, ob die Versionsnummern im xml und der Datenbank übereinstimmen
+		//wenn nicht, wird die Datenbank erneuert
 		public function latestVersion($category){
 			global $CFG;
+			
+			//hier müsste man später noch die Versionsnummern von allen Sprachdateien überprüfen
 			$xmlFile = $CFG->dirroot.'/mod/groupformation/xml_question/question_de_'.$category.'.xml';
 				
 			if (file_exists($xmlFile)) {
@@ -68,7 +72,11 @@
 					
 				}else{
 					$array = $this->saveData($category);
-					$this->storeM->add_catalog_version($category, $array[0][1], $version, FALSE);
+					$number = $array[0][1];
+					if($array[1][1] > $number){
+						$number = $array[1][1];
+					}
+					$this->storeM->add_catalog_version($category, $number, $version, FALSE);
 				}
 			}else{
 				exit("Datei $xmlFile kann nicht geöffnet werden.");

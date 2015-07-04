@@ -26,6 +26,7 @@
 	require_once (dirname ( __FILE__ ) . '/lib.php');
 	require_once (dirname ( __FILE__ ) . '/locallib.php');
 	require_once ($CFG->dirroot . '/mod/groupformation/classes/group_forming/startGrouping.php');
+	//require_once (dirname(__FILE__).'/classes/group_forming/generateGroup.php');
 	
 	// Read URL params
 	$id = optional_param ( 'id', 0, PARAM_INT ); // Course Module ID
@@ -78,7 +79,6 @@
 		echo $OUTPUT->box ( format_module_intro ( 'groupformation', $groupformation, $cm->id ), 'generalbox mod_introbox', 'groupformationintro' );
 	}
 	
-	var_dump($s);
 	if($s == 1){
 		mod_groupformation_startGrouping::start($groupformation->id);
 	}

@@ -123,23 +123,27 @@
   	}
 
 	if (has_capability('mod/groupformation:onlystudent', $context)){
-	 	if ($store->isQuestionaireAvailable()){	
-			$status = $store->answeringStatus($userid);
-			if($status ==  -1){
-				$info->__printAvailabilityInfo();
-	 			$info->__printStatusA();
+		if(!$store->isNotBuild()){
+			$info->__groupsAvailable();
+		}else{
+	 		if ($store->isQuestionaireAvailable()){	
+				$status = $store->answeringStatus($userid);
+				if($status ==  -1){
+					$info->__printAvailabilityInfo();
+	 				$info->__printStatusA();
+	 			}
+	 			if($status == 0){
+					$info->__printAvailabilityInfo();
+	 				$info->__printStatusB();
+	 			}
+	 			if($status == 1){
+					$info->__printAvailabilityInfo();
+	 				$info->__printStatusC();
+	 			}
+	 		}else{
+	 			$info->__printAvailabilityInfo(false);
 	 		}
-	 		if($status == 0){
-				$info->__printAvailabilityInfo();
-	 			$info->__printStatusB();
-	 		}
-	 		if($status == 1){
-				$info->__printAvailabilityInfo();
-	 			$info->__printStatusC();
-	 		}
-	 	}else{
-	 		$info->__printAvailabilityInfo(false);
-	 	}
+		}
 	}else{
 		print_error('This activity is not accessible for you');
 	}

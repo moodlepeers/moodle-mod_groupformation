@@ -31,7 +31,6 @@ require_once(dirname(__FILE__).'/calculateCriterions.php');
 require_once(dirname(__FILE__).'/Parser.php');
 require_once($CFG->dirroot.'/mod/groupformation/classes/util/define_file.php');
 require_once($CFG->dirroot.'/mod/groupformation/classes/moodle_interface/storage_manager.php');
-//require_once($CFG->dirroot.'/lib/groupal/classes/Parser.php');
 
 class mod_groupformation_startGrouping{
 	
@@ -41,6 +40,8 @@ class mod_groupformation_startGrouping{
 		$userFilter = new mod_groupformation_userid_filter($groupformationID);
 		$store = new mod_groupformation_storage_manager($groupformationID);
 		$users = $userFilter->getCompletedIds();
+		//hier werden alle auf abgegeben gesetzt, die komplettt ausgefüllt sind
+		$store->setAllCommited($users);
 		$scenario = $userFilter->getScenario();
 		$data = new mod_groupformation_data();
 		$labels = $data->getLabelSet($scenario);
@@ -63,7 +64,7 @@ class mod_groupformation_startGrouping{
 			if($scenario != 3){
 				$big5 = $calculator->getBig5($user);
 			}
-			
+		
 			$labelPosition = 0;
 			foreach($labels as $label){
 				if($label != ""){
@@ -111,16 +112,16 @@ class mod_groupformation_startGrouping{
 					}
 					if($label == 'big5_heterogen'){
 						$bigTemp = $big5[0];
-						$l = $data->getExtraLabel($label);
+						$l = $data->getExtraLabel($label, $scenario);
 						$p = 0;
 						$h = $homogen[$labelPosition];
-						foreach($l as $ls){
+						foreach($bigTemp as $ls){
 							$value = array();
-							$name = $label . '_' . $ls;
+							$name = $label . '_' . $l[$p];
 							if($userPosition == 0){
 								$totalLabel[] = $name;
 							}
-							$value[] = $bigTemp[$p];
+							$value[] = $ls;
 							$value[] = $h;
 							$object->$name = $value;
 							$p++;
@@ -132,13 +133,13 @@ class mod_groupformation_startGrouping{
 						$l = $data->getExtraLabel($label);
 						$p = 0;
 						$h = $homogen[$labelPosition];
-						foreach($l as $ls){
+						foreach($bigTemp as $ls){
 							$value = array();
-							$name = $label . '_' . $ls;
+							$name = $label . '_' . $l[$p];
 							if($userPosition == 0){
 								$totalLabel[] = $name;
 							}
-							$value[] = $bigTemp[$p];
+							$value[] = $ls;
 							$value[] = $h;
 							$object->$name = $value;
 							$p++;
@@ -199,29 +200,9 @@ class mod_groupformation_startGrouping{
 		}
 		
 		$groupsize = $store->getGroupSize();
-		//var_dump($array);
+		//var_dump($array)
+		
 		lib_groupal_Parser::parse($array, $totalLabel, $groupsize);
 	}
 	
-	//noch hartgecodet
-	private function setNulls($scenario){
-		if($scenario == 1){
-			$this->labels[9] = "";
-		}
-		
-		if($scenario == 2){
-			$this->labels[4] = "";
-			$this->labels[8] = "";
-		}
-		
-		if($scenario == 3){
-			$this->labels[3] = "";
-			$this->labels[4] = "";
-			$this->labels[5] = "";
-			$this->labels[6] = "";
-			$this->labels[7] = "";
-			$this->labels[8] = "";
-			$this->labels[9] = "";
-		}
-	}
 }

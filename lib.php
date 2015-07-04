@@ -33,6 +33,7 @@ defined ( 'MOODLE_INTERNAL' ) || die ();
 require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/storage_manager.php');
 require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/job_manager.php');
 require_once (dirname ( __FILE__ ) . '/classes/util/xml_loader.php');
+require_once (dirname ( __FILE__ ) . '/classes/util/define_file.php');
 require_once (dirname ( __FILE__ ) . '/locallib.php');
 /**
  * Moodle core API
@@ -582,8 +583,9 @@ function groupformation_set_fields(stdClass $groupformation) {
 }
 function groupformation_save_more_infos($groupformation, $init) {
 	
-	// speicher mir zus�tzliche Daten ab
+// speicher mir zus�tzliche Daten ab
 	$store = new mod_groupformation_storage_manager ( $groupformation->id );
+	$data = new mod_groupformation_data();
 	
 	$knowledgearray = array ();
 	if ($groupformation->knowledge != 0) {
@@ -595,14 +597,15 @@ function groupformation_save_more_infos($groupformation, $init) {
 		$topicsarray = explode ( "\n", $groupformation->topiclines );
 	}
 	
-	$names = array (
-			'general',
-			'grade',
-			'team',
-			'character',
-			'learning',
-			'motivation' 
-	);
+// 	$names = array (
+// 			'general',
+// 			'grade',
+// 			'team',
+// 			'character',
+// 			'learning',
+// 			'motivation' 
+// 	);
+	$names = $data->getCategorySet($groupformation->szenario);
 	
 	if ($init) {
 		
@@ -613,17 +616,21 @@ function groupformation_save_more_infos($groupformation, $init) {
 			
 			foreach ( $names as $category ) {
 				
-				$array = $xmlLoader->saveData ( $category );
-				$version = $array [0] [0];
-				$numbers = $array [0] [1];
-				$store->add_catalog_version ( $category, $numbers, $version, TRUE );
+				if($category != 'topic' && $category != 'knowledge'){
+					$array = $xmlLoader->saveData ( $category );
+					$version = $array [0] [0];
+					$numbers = $array [0] [1];
+					$store->add_catalog_version ( $category, $numbers, $version, TRUE );
+				}
 			}
 		} else {
 			// TODO @ALL Wenn man die Fragen �ndert, �ndern sie sich auch in den alten groupformation Instanzen
 			// da gibt es dann unter umst�nden konsistenzprobleme
 			// da m�ssen wir nochmal dr�ber reden
 			foreach ( $names as $category ) {
-				$xmlLoader->latestVersion ( $category );
+				if($category != 'topic' && $category != 'knowledge'){
+					$xmlLoader->latestVersion ( $category );
+				}
 			}
 		}
 	}

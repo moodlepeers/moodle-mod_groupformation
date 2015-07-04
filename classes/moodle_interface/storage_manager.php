@@ -236,13 +236,24 @@ class mod_groupformation_storage_manager {
 		$data->version = $version;
 		$data->numberofquestion = $numbers;
 		
-		if ($init) {
+	//hier was verändert
+		if ($init || $DB->count_records('groupformation_q_version', array('category' => $category)) == 0) {
 			$DB->insert_record ( 'groupformation_q_version', $data );
 		} else {
 			$data->id = $DB->get_field ( 'groupformation_q_version', 'id', array (
 					'category' => $category 
 			) );
 			$DB->update_record ( 'groupformation_q_version', $data );
+		}
+	}
+	
+	//alle werden auf "abgegeben" gesetzt
+	public function setAllCommited($users){
+		
+		foreach($users as $userId){
+			if($this->answeringStatus($userId) != 1){
+				$this->statusChanged($userId);
+			}
 		}
 	}
 	
@@ -817,5 +828,12 @@ class mod_groupformation_storage_manager {
 		return $DB->get_field('groupformation', 'name',array (
 				'id' => $this->groupformationid
 		) );
+	}
+	
+	public function isNotBuild(){
+		global $DB;
+		$table = 'groupformation_groupid_al';
+		$count = $DB->count_records($table, array('groupformation' => $this->groupformationid));
+		return $count == 0;
 	}
 }

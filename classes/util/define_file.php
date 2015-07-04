@@ -34,7 +34,11 @@
 if (! defined ( 'MOODLE_INTERNAL' )) {
 	die ( 'Direct access to this script is forbidden.' ); // / It must be included from a Moodle page
 }
+
+require_once($CFG->dirroot.'/mod/groupformation/classes/moodle_interface/storage_manager.php');
+
 class mod_groupformation_data {
+	
 	private $SCENARIO_NAMES = array (
 			'project',
 			'homework',
@@ -81,7 +85,10 @@ class mod_groupformation_data {
 			'team',
 			'character',
 			'learning',
-			'motivation' 
+			'motivation',
+			'sellmo',
+			'self',
+			'srl' 
 	);
 	private $CRITERION_CATEGORYS = array (
 			'topic',
@@ -167,7 +174,10 @@ class mod_groupformation_data {
 					'grade',
 					'team',
 					'character',
-					'motivation' 
+					'motivation',
+					'sellmo',
+					'self',
+					'srl' 
 			),
 			'2' => array (
 					'topic',
@@ -175,10 +185,13 @@ class mod_groupformation_data {
 					'grade',
 					'team',
 					'character',
-					'learning' 
+					'learning'
 			),
 			'3' => array (
-					'topic'
+					'topic',
+					'sellmo',
+					'self',
+					'srl'
 			) 
 	);
 	
@@ -239,7 +252,7 @@ class mod_groupformation_data {
 		return $this->CRITERION_CATEGORYS;
 	}
 	
-	public function getExtraLabel($label){
+	public function getExtraLabel($label, $scenario = null){
 		if($label == 'fam'){
 			return $this->FamExtra_LABEL;
 		}
@@ -257,8 +270,8 @@ class mod_groupformation_data {
 		}
 	}
 	
-	public function getPositions($category, $szenario){
-		$array = $this->CATEGORY_SETS[$szenario];
+	public function getPositions($category, $scenario, $groupformationid = null){
+		$array = $this->getCategorySet($scenario, $groupformationid);
 		$position = 0;
 		foreach($array as $c){
 			if($category == $c){
@@ -301,8 +314,22 @@ class mod_groupformation_data {
 		}
 	}
 	
-	public function getCategorySet($scenario) {
-		return $this->CATEGORY_SETS [$scenario];
+	public function getCategorySet($scenario, $groupformationid = null) {
+		$array = $this->CATEGORY_SETS [$scenario];
+		if ( $groupformationid != null){
+			$store = new mod_groupformation_storage_manager($groupformationid);
+			if ( $store->hasGrades() != 1){
+				$position = 0;
+				foreach($array as $c){
+					if('grade' == $c){
+						unset($array[$position]);
+						return $array;
+					}
+					$position++;	
+				}
+			}
+		}
+		return $array;
 	}
 	
 	public function getLabelSet($scenario){
@@ -316,6 +343,7 @@ class mod_groupformation_data {
 	public function getHomogenSet($scenario){
 		return $this->HOMOGEN_SETS[$scenario];
 	}
+	
 	
 	public function getPreviousCategory($scenario, $category) {
 		$pos = array_search ( strtolower ( $category ), $this->getCategorySet ( $scenario ) );

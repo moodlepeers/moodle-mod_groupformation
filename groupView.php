@@ -25,6 +25,7 @@
 	require_once (dirname ( dirname ( dirname ( __FILE__ ) ) ) . '/config.php');
 	require_once (dirname ( __FILE__ ) . '/lib.php');
 	require_once (dirname ( __FILE__ ) . '/locallib.php');
+	require_once (dirname (__FILE__).'/classes/group_forming/groupInfos.php');
 
 	// Read URL params
 	$id = optional_param ( 'id', 0, PARAM_INT ); // Course Module ID
@@ -77,5 +78,10 @@
 	//echo $OUTPUT->heading ( $groupformation->name );
 	
 	echo '<div style="color:red;">Diese Seite ist noch in der Entwicklung. Die Inhalte sind ggf. noch rein statisch und haben keinen Effekt oder keine Funktion</div>';
+	
+	$userid = $USER->id;
+	
+	$groupInfo = new mod_groupformation_groupInfos($groupformation->id);
+	$groupInfo->render($userid);
 	
 	echo $OUTPUT->footer ();

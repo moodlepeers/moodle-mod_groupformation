@@ -52,8 +52,9 @@
 	$data = new mod_groupformation_data();
 	$store = new mod_groupformation_storage_manager($groupformation->id);
 	
-	$names = $data->getNames();
+	//$names = $data->getNames();
 	$scenario = $store->getScenario();
+	$names = $data->getCategorySet($scenario);
 	
 	$category = "";
 
