@@ -38,33 +38,43 @@ class mod_groupformation_groupInfos {
 	private $store;
 	private $groupformationid;
 
-	
 	/**
-	 *
-	 * @param unknown $groupformationid
-	*/
+	 * Constructs instance of groupInfos
+	 * 
+	 * @param integer $groupformationid
+	 */
 	public function __construct($groupformationid){
 		$this->groupformationid = $groupformationid;
 		$this->store = new mod_groupformation_storage_manager_groups($groupformationid);
 	}
 	
+	/**
+	 * Outputs group with its members
+	 * 
+	 * @param integer $userid
+	 */
 	public function render($userid){
-		$id = $this->store->haveGroup($userid);
-		if ( $id == -1 ){
-			echo '<h1> Die Gruppenbildung ist noch nicht abgeschlossen </h1>';
-		}else{
+		if ($this->store->hasGroup($userid) ){
+			$id = $this->store->getGroupID($userid);
+			
 			echo 'Deine Gruppennummer ist ' . $id . '<br>';
-			//@René hier müssen die Daten für Moodlegruppen id und Gruppenmitglieder herausgeholte werden
+			
+			// TODO @Nora - done
 			$otherMembers = $this->store->getGroupMembers($userid);
+			
 			echo 'Deine Arbeitskollegen sind: <br>';
+			
 			foreach ( $otherMembers as $memberid ){
 				$member = get_complete_user_data('id', $memberid);
+				
 				if (!$member) {
 					echo 'user does not exist!';
 				}
+				
 				echo $member->firstname . ' ' . $member->lastname;
-				//var_dump($member);
 			}
+		}else{
+			echo '<h1> Die Gruppenbildung ist noch nicht abgeschlossen </h1>';
 		}
 	}
 }
