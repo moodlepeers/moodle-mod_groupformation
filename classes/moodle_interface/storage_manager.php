@@ -583,7 +583,6 @@ class mod_groupformation_storage_manager {
 			$previous = $categories[$pos - 1];
 		else
 			$previous = '';
-		var_dump($previous);
 		return $previous;
 	}
 	

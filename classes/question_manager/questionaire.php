@@ -259,7 +259,6 @@ class mod_groupformation_questionaire {
 				echo '<div class="col_100 questionaire_hint">'.get_string('questionaire_preview','groupformation').'</div>';
 			
 			$this->category = $this->question_manager->getCurrentCategory ();
-			var_dump($this->category);
 			
 			$percent = $this->question_manager->getPercent ( $this->category );
 			

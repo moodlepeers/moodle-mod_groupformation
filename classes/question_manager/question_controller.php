@@ -247,9 +247,6 @@
 					$answers = $this->getAnswers();
 				}
 				
-				var_dump($this->currentCategoryPosition);
-				var_dump($this->store->getCategories());
-				var_dump($this->store->getPosition($this->currentCategoryPosition));
 				if($this->currentCategoryPosition == $this->store->getPosition('topic') || $this->currentCategoryPosition == $this->store->getPosition('knowledge')){
 					
  						$temp = $this->store->getKnowledgeOrTopicValues($this->names[$this->currentCategoryPosition]);
