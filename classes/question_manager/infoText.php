@@ -149,7 +149,7 @@ class mod_groupformation_infoText {
 		
 		$data = new mod_groupformation_data ();
 		
-		$category_set = $data->getCategorySet ( $scenario );
+		$category_set = $this->store->getCategories();
 		
 		$categories = array ();
 		

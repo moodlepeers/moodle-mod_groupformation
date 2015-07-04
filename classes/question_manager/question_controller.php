@@ -82,7 +82,7 @@
 			$this->data = new mod_groupformation_data();
 			//$this->names = $data->getNames();
 			$this->scenario = $this->store->getScenario();
-			$this->names = $this->data->getCategorySet($this->scenario);
+			$this->names = $this->store->getCategories();
 			$this->numberOfCategory = count($this->names);
 			$this->init($userId);
 			$this->setIternalNumber($oldCategory);
@@ -256,7 +256,7 @@
 						$type;
  						if($this->currentCategoryPosition == mod_groupformation_data::getPosition('topic')){
  //							if($this->lang == 'de'){
- //								$text = 'Wie gefällt Ihnen das Thema ';
+ //								$text = 'Wie gefï¿½llt Ihnen das Thema ';
  //							}else{
  //								$text = 'How much you like the topic ';
  //							}
@@ -264,7 +264,7 @@
  						}else{
  //							$text = get_string('knowledge_question','groupformation');
  //							if($this->lang == 'de'){
- //								$text = 'Wie schätzen Sie Ihr Vorwissen im folgenden Bereich ein:';
+ //								$text = 'Wie schï¿½tzen Sie Ihr Vorwissen im folgenden Bereich ein:';
  //							}else{
  //								$text = 'How you rate your knowledge in ';
  //							}
@@ -323,7 +323,7 @@
 					}
 				}		
 				//hier wird schon die neue Kategory angesetzt
-				//deswegen muss beim holen der Answers zurück gerechnet werden
+				//deswegen muss beim holen der Answers zurï¿½ck gerechnet werden
 				$this->currentCategoryPosition++;
 				
 				return $questions;
