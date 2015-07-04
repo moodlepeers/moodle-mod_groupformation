@@ -54,7 +54,7 @@
 	
 	//$names = $data->getNames();
 	$scenario = $store->getScenario();
-	$names = $data->getCategorySet($scenario);
+	$names = $store->getCategories();
 	
 	$category = "";
 
@@ -155,11 +155,6 @@
 		// Print the tabs.
 		require ('tabs.php');
 		
-		// Conditions to show the intro can change to look for own settings or whatever.
-		if ($groupformation->intro) {
-			echo $OUTPUT->box(format_module_intro('groupformation', $groupformation, $cm->id), 'generalbox mod_introbox', 'groupformationintro');
-		}
-		
 		$questionManager = new mod_groupformation_questionaire($cm->id,$groupformation->id, get_string('language','groupformation'), $userid, $category, $context);
 		
 		if($direction == 0){
@@ -181,12 +176,6 @@
 				'back' => '1'));
 		redirect($returnurl);
 	}else{
-		
-		
-		// Conditions to show the intro can change to look for own settings or whatever.
-		if ($groupformation->intro) {
-			echo $OUTPUT->box(format_module_intro('groupformation', $groupformation, $cm->id), 'generalbox mod_introbox', 'groupformationintro');
-		}
 		
 		echo $OUTPUT->heading('Category has been manipulated');
 	}

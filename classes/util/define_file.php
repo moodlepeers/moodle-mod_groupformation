@@ -346,4 +346,4 @@ class mod_groupformation_data {
 	public function getHomogenSet($scenario){
 		return $this->HOMOGEN_SETS[$scenario];
 	}
-	
+}	
