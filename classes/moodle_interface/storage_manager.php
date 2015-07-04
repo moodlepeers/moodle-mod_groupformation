@@ -233,7 +233,7 @@ class mod_groupformation_storage_manager {
 		$data->version = $version;
 		$data->numberofquestion = $numbers;
 		
-	//hier was verändert
+	//hier was verï¿½ndert
 		if ($init || $DB->count_records('groupformation_q_version', array('category' => $category)) == 0) {
 			$DB->insert_record ( 'groupformation_q_version', $data );
 		} else {
@@ -578,11 +578,12 @@ class mod_groupformation_storage_manager {
 	
 	public function getPreviousCategory($category){
 		$categories = $this->getCategories ();
-		$pos = array_search ( strtolower ( $category ),$categories);
+		$pos = $this->getPosition($category);
 		if ($pos >= 1)
 			$previous = $categories[$pos - 1];
 		else
 			$previous = '';
+		var_dump($previous);
 		return $previous;
 	}
 	
@@ -879,6 +880,21 @@ class mod_groupformation_storage_manager {
         return $DB->get_records('groupformation_group_users',
             array('groupformation'=>$this->groupformationid, 'groupid' => $groupid),null,'userid');
 
+    }
+    
+    public function getPosition($category){
+    	$categories = $this->getCategories();
+    	if (in_array($category, $categories)){
+	    	$pos = array_search($category, $categories);
+	    	return $pos;
+    	}else{
+    		return -1;
+    	}
+    }
+    
+    public function getPositions(){
+    	$categories = $this->getCategories();
+    	return array_keys($categories);
     }
 
 }

@@ -81,16 +81,16 @@ class mod_groupformation_util {
 	
 	private function setNulls(){
 		if($this->scenario == 'project' || $this->scenario == 1){
-			$this->numbers[mod_groupformation_data::getPosition('learning')] = 0;
+			$this->numbers[$this->store->getPosition('learning')] = 0;
 		}
 	
 		if($this->scenario == 'homework' || $this->scenario == 2){
-			$this->numbers[mod_groupformation_data::getPosition('motivation')] = 0;
+			$this->numbers[$this->store->getPosition('motivation')] = 0;
 		}
 			
 		if($this->scenario == 'presentation' || $this->scenario == 3){
 			for($i = 0; $i < count($this->numbers); $i++){
-				if($i != mod_groupformation_data::getPosition('topic') && $i != mod_groupformation_data::getPosition('general')){
+				if($i != $this->store->getPosition('topic') && $i != $this->store->getPosition('general')){
 					$this->numbers[$i] = 0;
 				}
 			}

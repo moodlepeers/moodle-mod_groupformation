@@ -72,11 +72,12 @@
 	if (isset($_POST["category"])){
 		$category = $_POST['category'];
 	}elseif (!(strcmp($url_category, '')==0)){
+		var_dump($url_category);
 		$category = $store->getPreviousCategory($url_category);
 	}
 
 	$number = $store->getNumber($category);
-	
+	var_dump($number);
 	// Set PAGE config
 	$PAGE->set_url('/mod/groupformation/answeringView.php', array('id' => $cm->id));
 	$PAGE->set_title(format_string($groupformation->name));
@@ -103,6 +104,7 @@
 	//---
 	
 	$inArray = in_array($category, $names);
+	var_dump($inArray);
 	if(has_capability('mod/groupformation:onlystudent', $context) && !has_capability('mod/groupformation:editsettings', $context)){
 		if($inArray){
 			
@@ -146,7 +148,6 @@
 		redirect($returnurl);
 	}
 	
-
 	$available = $store->isQuestionaireAvailable();
 	
 	if(($available || has_capability('mod/groupformation:editsettings', $context)) && ($category == '' || $inArray)){
@@ -154,7 +155,6 @@
 		
 		// Print the tabs.
 		require ('tabs.php');
-		
 		$questionManager = new mod_groupformation_questionaire($cm->id,$groupformation->id, get_string('language','groupformation'), $userid, $category, $context);
 		
 		if($direction == 0){
@@ -164,6 +164,7 @@
 				$questionManager->goNotOn();
 			}
 		}
+		
 		$questionManager->printQuestionairePage();
 		
 	}else if(!$available || $category == 'no'){

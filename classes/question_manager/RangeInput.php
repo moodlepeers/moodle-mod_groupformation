@@ -27,13 +27,6 @@ class RangeInput{
 	private $qnumber;
 	private $question;	
 	
-	public function __construct(){
-		
-
-	}
-	
-	
-	
 	public function __printHTML($q, $cat, $qnumb, $hasAnswer){
 		$this->question = $q[1];
 		$optArray = $q[2];
@@ -59,8 +52,6 @@ class RangeInput{
 					<input type="text" name="'. $this->category . $this->qnumber .'_valid" value="0" style="display:none;"/>
 					</td>';
 		echo '</tr>';
-		
-		
 	}
 }
 

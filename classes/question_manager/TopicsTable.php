@@ -13,6 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * Prints a particular instance of groupformation
  *
@@ -20,19 +21,21 @@
  * @author  
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 class TopicsTable{
 
 	private $category;
 	private $qnumber;
 	private $question;	
 	
-	public function __construct(){
-		
-	}
-	
-	
-	
+	/**
+	 * 
+	 * print HTML for Topics Table
+	 * 
+	 * @param unknown $q
+	 * @param unknown $cat
+	 * @param unknown $qnumb
+	 * @param unknown $hasAnswer
+	 */
 	public function __printHTML($q, $cat, $qnumb, $hasAnswer){
 		$this->question = $q[1];
 		$this->optArray = $q[2];
@@ -42,7 +45,6 @@ class TopicsTable{
 		echo '<li id="'. $this->category .  $this->qnumber .'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' . $this->question . '</li>';
 		
 		if($hasAnswer){
-			//$answer ist die position im optionArray von der Antwort
 			$answer = $q[3];
 		}
 		

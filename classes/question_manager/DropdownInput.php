@@ -18,91 +18,62 @@
  * Prints a particular instance of groupformation
  *
  * @package mod_groupformation
- * @author  
+ * @author
+ *
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 class DropdownInput {
-	
-	
 	private $category;
 	private $qnumber;
 	private $question;
-	private $optArray = array();
+	private $optArray = array ();
 	
-	
-	public function __construct(){
+	/**
+	 * Print HTML of Dropdown Input
+	 *
+	 * @param unknown $q        	
+	 * @param unknown $cat        	
+	 * @param unknown $qnumb        	
+	 * @param boolean $has_answer        	
+	 */
+	public function __printHTML($q, $category, $question_number, $has_answer) {
+		$question = $q [1];
+		$options = $q [2];
 		
-	}
-	
-	
-	
-	public function __printHTML($q, $cat, $qnumb, $hasAnswer){
-		$this->question = $q[1];
-		$this->optArray = $q[2];
-		$this->category = $cat;
-		$this->qnumber = $qnumb;
-		
-		$answer = -1;
+		$answer = - 1;
 		$questionCounter = 1;
-
-        if($hasAnswer){
-            //$answer ist die position im optionArray von der Antwort
-            $answer = $q[3];
-        }
-
-		if($hasAnswer && $q[3] != -1){
-            echo '<tr>';
-            echo '<th scope="row">' . $this->question . '</th>';
-		}else{
-            echo '<tr class="noAnswer">';
-            echo '<th scope="row">' . $this->question . '</th>';
-        }
 		
-
+		if ($has_answer) {
+			// $answer ist die position im optionArray von der Antwort
+			$answer = $q [3];
+		}
+		
+		if ($has_answer && $q [3] != - 1) {
+			echo '<tr>';
+			echo '<th scope="row">' . $question . '</th>';
+		} else {
+			echo '<tr class="noAnswer">';
+			echo '<th scope="row">' . $question . '</th>';
+		}
 		
 		echo '<td class="center">
-				<select name="'. $this->category . $this->qnumber  .'" id="' . $this->category . $this->qnumber  .'">';
-                echo '<option value="0"> - </option>';
+				<select name="' . $category . $question_number . '" id="' . $category . $question_number . '">';
+		echo '<option value="0"> - </option>';
 		
-		foreach ($this->optArray as $option){
-			if($answer == $questionCounter){
-				echo '<option value="'. $questionCounter .'" selected="selected">'. $option .'</option>';
-			}else{
+		foreach ( $options as $option ) {
+			if ($answer == $questionCounter) {
+				echo '<option value="' . $questionCounter . '" selected="selected">' . $option . '</option>';
+			} else {
 				
-				echo '<option value="'. $questionCounter .'">'. $option .'</option>';
-				
+				echo '<option value="' . $questionCounter . '">' . $option . '</option>';
 			}
-			$questionCounter++;
+			$questionCounter ++;
 		}
 		
 		echo '</select>
 			</td>
 		</tr>';
-		
-		
 	}
 }
 
 ?>
-
-
-
-<!--					 <tr> -->
-<!--                         <th scope="row">Welche Note m&ouml;chten Sie erreichen?</th> -->
-
-<!--                         <td class="center"> -->
-<!--                             <select name="gradeA" id="gradeA"> -->
-<!--                                 <option value="1.0">1,0</option> -->
-<!--                                 <option value="1.3">1,3</option> -->
-<!--                                 <option value="1.6">1,7</option> -->
-<!--                                 <option value="2.0">2,0</option> -->
-<!--                                 <option value="2.3">2,3</option> -->
-<!--                                 <option value="2.6">2,7</option> -->
-<!--                                 <option value="3.0">3,0</option> -->
-<!--                                 <option value="3.3">3,3</option> -->
-<!--                                 <option value="3.6">3,7</option> -->
-<!--                                 <option value="4.0">4,0</option> -->
-<!--                             </select> -->
-<!--                             </td> -->
-<!--                       </tr> -->

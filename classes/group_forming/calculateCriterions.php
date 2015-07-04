@@ -41,11 +41,11 @@
 		private $groupformationid;
 		private $xml;
 		
-		//Extraversion | Gewissenhaftigkeit | Verträglichkeit | Neurotizismus | Offenheit
+		//Extraversion | Gewissenhaftigkeit | Vertrï¿½glichkeit | Neurotizismus | Offenheit
 		private $BIG5 = array(array(6), array(8), array(2, 11), array(9), array(10));
 		private $BIG5Invert = array(array(1), array(3), array(7), array(4), array(5));
 		private $BIG5Homogen = array(1, 2);
-		//Herausforderung | Interesse | Ergolgswahrscheinlichkeit | Misserfolgsbefürchtung
+		//Herausforderung | Interesse | Ergolgswahrscheinlichkeit | Misserfolgsbefï¿½rchtung
 		private $FAM = array(array(6, 8, 10, 15, 17), array(1, 4, 7, 11), array(2, 3, 13, 14), array(5, 9, 12, 16, 18));
 		//Konkrete Erfahrung | Aktives Experimentieren | Reflektierte Beobachtung | Abstrakte Begriffsbildung
 		private $LEARN = array(array(1, 5, 11, 14, 20, 22), array(2, 8, 10, 16, 17, 23), array(3, 6, 9, 13, 19, 21), array(4, 7, 12, 15, 18, 24));
@@ -86,7 +86,7 @@
 		}
 		
 		
-		//gibt ein Array aus arrays zurück | in den einzelarray sind Position 0 -> Vorwissen Position 1 -> Antwort
+		//gibt ein Array aus arrays zurï¿½ck | in den einzelarray sind Position 0 -> Vorwissen Position 1 -> Antwort
 		/**
 		 * Determines all answers for knowledge given by the user
 		 * 
@@ -167,7 +167,7 @@
 			for($i = 1; $i <= 3; $i++){
 				$answers = $this->store->getAnswersToSpecialQuestion('grade', $i);
 				$totalOptions = $this->store->getMaxOptionOfCatalogQuestion($i, 'grade');
-				$dist = $this->getInitalArray($totalOptions);
+				$dist = $this->getInitialArray($totalOptions);
 				foreach($answers as $answer){
 					if(in_array($answer->userid, $users)){
 						$dist[($answer->answer)-1]++;
@@ -206,7 +206,7 @@
 		 * @param unknown $total
 		 * @return multitype:array
 		 */
-		private function getInitalArray($total){
+		private function getInitialArray($total){
 			$array = array();
 			for($i = 0; $i<$total; $i++){
 				$array[] = 0;
@@ -264,7 +264,7 @@
 		}
 		
 		/**
-		 * returns the FAM (motivation criterion) of the user specified by §userId
+		 * returns the FAM (motivation criterion) of the user specified by ï¿½userId
 
 		 * 
 		 * @param unknown $userId
@@ -288,7 +288,7 @@
 		}
 		
 		/**
-		 * returns the learning criterion of the user specified by §userId
+		 * returns the learning criterion of the user specified by ï¿½userId
 		 * 
 		 * @param unknown $userId
 		 * @return multitype:array
@@ -311,7 +311,7 @@
 		}
 		
 		/**
-		 * returns the team (Teamorientierung) criterion of the user specified by §userId
+		 * returns the team (Teamorientierung) criterion of the user specified by ï¿½userId
 
 		 * 
 		 * @param unknown $userId

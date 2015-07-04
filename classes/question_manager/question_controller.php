@@ -158,7 +158,7 @@
 		private function setIternalNumber($category){
 			
 			if($category != ""){
-				$this->currentCategoryPosition = $this->data->getPositions($category, $this->scenario);
+				$this->currentCategoryPosition = $this->store->getPosition($category);
 				$this->currentCategoryPosition++;
 			}
 			
@@ -203,16 +203,16 @@
 		
 		private function setNulls(){
 			if($this->scenario == 'project' || $this->scenario == 1){
-				$this->numbers[mod_groupformation_data::getPosition('learning')] = 0;
+				$this->numbers[$this->store->getPosition('learning')] = 0;
 			}
 				
 			if($this->scenario == 'homework' || $this->scenario == 2){
-				$this->numbers[mod_groupformation_data::getPosition('motivation')] = 0;
+				$this->numbers[$this->store->getPosition('motivation')] = 0;
 			}	
 			
 			if($this->scenario == 'presentation' || $this->scenario == 3){
 				for($i = 0; $i < count($this->numbers); $i++){
-					if($i != mod_groupformation_data::getPosition('topic') && $i != mod_groupformation_data::getPosition('general')){
+					if($i != $this->store->getPosition('topic') && $i != $this->store->getPosition('general')){
 						$this->numbers[$i] = 0;
 					}
 				}
@@ -247,14 +247,17 @@
 					$answers = $this->getAnswers();
 				}
 				
-				if($this->currentCategoryPosition == mod_groupformation_data::getPosition('topic') || $this->currentCategoryPosition == mod_groupformation_data::getPosition('knowledge')){
+				var_dump($this->currentCategoryPosition);
+				var_dump($this->store->getCategories());
+				var_dump($this->store->getPosition($this->currentCategoryPosition));
+				if($this->currentCategoryPosition == $this->store->getPosition('topic') || $this->currentCategoryPosition == $this->store->getPosition('knowledge')){
 					
  						$temp = $this->store->getKnowledgeOrTopicValues($this->names[$this->currentCategoryPosition]);
  						$values = $this->xml->xmlToArray('<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>');
 						
 						$text = ''; 
 						$type;
- 						if($this->currentCategoryPosition == mod_groupformation_data::getPosition('topic')){
+ 						if($this->currentCategoryPosition == $this->store->getPosition('topic')){
  //							if($this->lang == 'de'){
  //								$text = 'Wie gef�llt Ihnen das Thema ';
  //							}else{

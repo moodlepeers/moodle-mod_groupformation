@@ -29,13 +29,6 @@ class RadioInput {
 	private $question;
 	private $optArray = array();
 	
-	
-	public function __construct(){
-		
-	}
-	
-	
-	
 	public function __printHTML($q, $cat, $qnumb, $hasAnswer){
 		$this->question = $q[1];
 		$this->optArray = $q[2];
@@ -55,13 +48,6 @@ class RadioInput {
 		}
 		echo '<th scope="row">' . $this->question . '</th>';
 
-		
-// 		$radioCounter = 1;
-// 		$answer = -1;
-// 		if($hasAnswer){
-// 			//$answer ist die position im optionArray von der Antwort
-// 			$answer = $q[3];
-// 		}
 		foreach ($this->optArray as $option){
 			if($answer == $radioCounter){
 				echo '<td data-title="' . $option .

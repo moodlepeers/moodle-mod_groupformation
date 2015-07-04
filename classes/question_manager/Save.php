@@ -45,8 +45,12 @@
 			$this->status = $this->store->answeringStatus($userId);
 		}
 		
-		
-		
+		/**
+		 * Saves answer
+		 * 
+		 * @param unknown $answer
+		 * @param unknown $position
+		 */
 		public function save($answer, $position){
             // if the answer in category "grade"(dropdowns) is default(0) - return without saving
 			if($this->category == 'grade' && $answer == '0'){

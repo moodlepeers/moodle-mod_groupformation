@@ -68,6 +68,7 @@ class mod_groupformation_questionaire {
 		$this->radio = new RadioInput ();
 		$this->dropdown = new DropdownInput ();
 		$this->topics = new TopicsTable ();
+		$this->category = $category;
 	}
 	public function goBack() {
 		$this->question_manager->goBack ();
@@ -105,8 +106,8 @@ class mod_groupformation_questionaire {
 					'id' => $this->cmid,
 					'category' => $category 
 			) );
-			$positionActiveCategory = $data->getPosition($activeCategory);
-			$positionCategory = $data->getPosition($category);
+			$positionActiveCategory = $store->getPosition($activeCategory);
+			$positionCategory = $store->getPosition($category);
 			
 			$beforeActive = ($positionCategory<=$positionActiveCategory);
 			$answeredAll = ($store->answerNumberForUser($this->userid,$category)==$store->getNumber($category));
@@ -253,12 +254,12 @@ class mod_groupformation_questionaire {
 	}
 	
 	public function printQuestionairePage() {
-		
 		if ($this->question_manager->questionsToAnswer () && $this->question_manager->hasNext ()) {
 			if (has_capability('mod/groupformation:editsettings', $this->context))
 				echo '<div class="col_100 questionaire_hint">'.get_string('questionaire_preview','groupformation').'</div>';
 			
 			$this->category = $this->question_manager->getCurrentCategory ();
+			var_dump($this->category);
 			
 			$percent = $this->question_manager->getPercent ( $this->category );
 			
