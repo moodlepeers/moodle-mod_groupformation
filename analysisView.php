@@ -93,6 +93,7 @@
 	
 	var_dump($jobmanager->save_result($job, $result));
 	
+	var_dump($jobmanager::get_status($job));
 	}
 	//-----------------------------------------------
 	

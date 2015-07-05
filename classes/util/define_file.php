@@ -35,10 +35,8 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 	die ( 'Direct access to this script is forbidden.' ); // / It must be included from a Moodle page
 }
 
-require_once($CFG->dirroot.'/mod/groupformation/classes/moodle_interface/storage_manager.php');
-
+require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 class mod_groupformation_data {
-	
 	private $SCENARIO_NAMES = array (
 			'project',
 			'homework',
@@ -111,7 +109,6 @@ class mod_groupformation_data {
 			'fam',
 			'learning' 
 	);
-	
 	private $LABEL_SETS = array (
 			'1' => array (
 					'topic',
@@ -121,7 +118,7 @@ class mod_groupformation_data {
 					'big5_heterogen',
 					'big5_homogen',
 					'team',
-					'fam'
+					'fam' 
 			),
 			'2' => array (
 					'topic',
@@ -133,10 +130,9 @@ class mod_groupformation_data {
 					'learning' 
 			),
 			'3' => array (
-					'topic'
-			)
+					'topic' 
+			) 
 	);
-	
 	private $HOMOGEN_SETS = array (
 			'1' => array (
 					true,
@@ -146,7 +142,7 @@ class mod_groupformation_data {
 					false,
 					true,
 					true,
-					true
+					true 
 			),
 			'2' => array (
 					true,
@@ -158,15 +154,30 @@ class mod_groupformation_data {
 					false 
 			),
 			'3' => array (
-					true
-			)
+					true 
+			) 
 	);
-	
-	private $Big5HomogenExtra_LABEL = array('Gewissenhaftigkeit', 'Vertraeglichkeit');
-	private $Big5HeterogenExtra_LABEL = array('Extraversion', 'Neurotizismus', 'Offenheit');
-	private $FamExtra_LABEL = array('Herausforderung', 'Interesse', 'Erfolg', 'Misserfolg');
-	private $LearnExtra_LABEL = array('KE', 'AE', 'RB', 'AB');
-	
+	private $Big5HomogenExtra_LABEL = array (
+			'Gewissenhaftigkeit',
+			'Vertraeglichkeit' 
+	);
+	private $Big5HeterogenExtra_LABEL = array (
+			'Extraversion',
+			'Neurotizismus',
+			'Offenheit' 
+	);
+	private $FamExtra_LABEL = array (
+			'Herausforderung',
+			'Interesse',
+			'Erfolg',
+			'Misserfolg' 
+	);
+	private $LearnExtra_LABEL = array (
+			'KE',
+			'AE',
+			'RB',
+			'AB' 
+	);
 	private $CATEGORY_SETS = array (
 			'1' => array (
 					'topic',
@@ -188,16 +199,15 @@ class mod_groupformation_data {
 					'learning',
 					'sellmo',
 					'self',
-					'srl'
+					'srl' 
 			),
 			'3' => array (
 					'topic',
 					'sellmo',
 					'self',
-					'srl'
+					'srl' 
 			) 
 	);
-	
 	private $CRITERION_SETS = array (
 			'1' => array (
 					'topic',
@@ -205,7 +215,7 @@ class mod_groupformation_data {
 					'grade',
 					'team',
 					'character',
-					'motivation'
+					'motivation' 
 			),
 			'2' => array (
 					'topic',
@@ -213,28 +223,35 @@ class mod_groupformation_data {
 					'grade',
 					'team',
 					'character',
-					'learning'
+					'learning' 
 			),
 			'3' => array (
-					'topic'
-			)
+					'topic' 
+			) 
 	);
 	const MOTIVATION = 6;
- 	const TEAM = 3;
- 	const LEARNING = 5;
- 	const CHARACTER = 4;
- //	const GENERAL = 2;
- 	const KNOWLEDGE = 1;
- 	const TOPIC = 0;
- 	const GRADE = 2;
-// 	const MOTIVATION = 7;
-// 	const TEAM = 4;
-// 	const LEARNING = 6;
-// 	const CHARACTER = 5;
-// 	const GENERAL = 2;
-// 	const KNOWLEDGE = 1;
-// 	const TOPIC = 0;
-// 	const GRADE = 3;
+	const TEAM = 3;
+	const LEARNING = 5;
+	const CHARACTER = 4;
+	// const GENERAL = 2;
+	const KNOWLEDGE = 1;
+	const TOPIC = 0;
+	const GRADE = 2;
+	// const MOTIVATION = 7;
+	// const TEAM = 4;
+	// const LEARNING = 6;
+	// const CHARACTER = 5;
+	// const GENERAL = 2;
+	// const KNOWLEDGE = 1;
+	// const TOPIC = 0;
+	// const GRADE = 3;
+	private $job_status_options = array (
+			'ready',
+			'waiting',
+			'started',
+			'aborted',
+			'done' 
+	);
 	public function __construct() {
 	}
 	public function getNames() {
@@ -254,33 +271,31 @@ class mod_groupformation_data {
 	public function getCriterionNames() {
 		return $this->CRITERION_CATEGORYS;
 	}
-	
-	public function getExtraLabel($label, $scenario = null){
-		if($label == 'fam'){
+	public function getExtraLabel($label, $scenario = null) {
+		if ($label == 'fam') {
 			return $this->FamExtra_LABEL;
 		}
 		
-		if($label == 'learning'){
+		if ($label == 'learning') {
 			return $this->LearnExtra_LABEL;
 		}
 		
-		if($label == 'big5_homogen'){
+		if ($label == 'big5_homogen') {
 			return $this->Big5HomogenExtra_LABEL;
 		}
 		
-		if($label == 'big5_heterogen'){
+		if ($label == 'big5_heterogen') {
 			return $this->Big5HeterogenExtra_LABEL;
 		}
 	}
-	
-	public function getPositions($category, $scenario, $groupformationid = null){
-		$array = $this->getCategorySet($scenario, $groupformationid);
+	public function getPositions($category, $scenario, $groupformationid = null) {
+		$array = $this->getCategorySet ( $scenario, $groupformationid );
 		$position = 0;
-		foreach($array as $c){
-			if($category == $c){
+		foreach ( $array as $c ) {
+			if ($category == $c) {
 				return $position;
 			}
-			$position++;
+			$position ++;
 		}
 	}
 	public static function getPosition($category) {
@@ -316,34 +331,35 @@ class mod_groupformation_data {
 			return self::CHARACTER;
 		}
 	}
-	
 	public function getCategorySet($scenario, $groupformationid = null) {
 		$array = $this->CATEGORY_SETS [$scenario];
-		if ( $groupformationid != null){
-			$store = new mod_groupformation_storage_manager($groupformationid);
-			if ( $store->hasGrades() != 1){
+		if ($groupformationid != null) {
+			$store = new mod_groupformation_storage_manager ( $groupformationid );
+			if ($store->hasGrades () != 1) {
 				$position = 0;
-				foreach($array as $c){
-					if('grade' == $c){
-						unset($array[$position]);
+				foreach ( $array as $c ) {
+					if ('grade' == $c) {
+						unset ( $array [$position] );
 						return $array;
 					}
-					$position++;	
+					$position ++;
 				}
 			}
 		}
 		return $array;
 	}
-	
-	public function getLabelSet($scenario){
-		return $this->LABEL_SETS[$scenario];
+	public function getLabelSet($scenario) {
+		return $this->LABEL_SETS [$scenario];
 	}
-	
-	public function getCriterionSet($scenario){
-		return $this->CRITERION_SETS[$scenario];
+	public function getCriterionSet($scenario) {
+		return $this->CRITERION_SETS [$scenario];
 	}
-	
-	public function getHomogenSet($scenario){
-		return $this->HOMOGEN_SETS[$scenario];
+	public function getHomogenSet($scenario) {
+		return $this->HOMOGEN_SETS [$scenario];
+	}
+	public function get_job_status_options() {
+		return $this->job_status_options;
 	}
 }	
+
+
