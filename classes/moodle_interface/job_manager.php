@@ -35,7 +35,7 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 		require_once($CFG->dirroot.'/lib/groupal/classes/Cohort.php');
 		require_once($CFG->dirroot.'/lib/groupal/classes/Matcher/GroupALGroupCentricMatcher.php');
         require_once($CFG->dirroot.'/lib/groupal/classes/GroupFormationAlgorithm.php');
-        require_once($CFG->dirroot.'/lib/groupal/classes/Optimizer/GroupALOptimizer');
+        require_once($CFG->dirroot.'/lib/groupal/classes/Optimizer/GroupALOptimizer.php');
 
 
 class mod_groupformation_job_manager {		
@@ -169,7 +169,6 @@ class mod_groupformation_job_manager {
 		global $DB;
 		
 		$flags = array("groupal"=>1,"random"=>0,"mrandom"=>0,"created"=>0);
-		
 		$idmap = $this->create_groups($job, $result->groups,$flags);
 		
 		$this->assign_users_to_groups($job, $result->users, $idmap);
@@ -184,7 +183,7 @@ class mod_groupformation_job_manager {
 	 * @param unknown $groupids
 	 * @return boolean
 	 */	
-	public function create_groups($job, $groupids, $flags){
+	public function create_groups($job, $groups, $flags){
 		
 		$groupformationid = $job->groupformationid;
 		
@@ -202,7 +201,8 @@ class mod_groupformation_job_manager {
 		}
 		
 		$ids = array();
-		foreach ($groupids as $groupalid){
+		foreach ($groups as $group){+
+			$groupalid = $group->getID();
 			$name = $groupname.strval($groupalid);
 			$id = $this->create_group($groupalid, $name, $groupformationid,$flags);
 			$ids[$groupalid] = $id;
