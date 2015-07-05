@@ -34,6 +34,8 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 		require_once($CFG->dirroot.'/lib/groupal/classes/Participant.php');
 		require_once($CFG->dirroot.'/lib/groupal/classes/Cohort.php');
 		require_once($CFG->dirroot.'/lib/groupal/classes/Matcher/GroupALGroupCentricMatcher.php');
+        require_once($CFG->dirroot.'/lib/groupal/classes/GroupFormationAlgorithm.php');
+        require_once($CFG->dirroot.'/lib/groupal/classes/Optimizer/GroupALOptimizer');
 
 
 class mod_groupformation_job_manager {		
@@ -128,8 +130,6 @@ class mod_groupformation_job_manager {
 		/**
          * <Testdaten>------------------------------------------
          */
-        // init CriterionWeight
-        CriterionWeight::init(new HashMap);
 
         // Dummy Criterions
         $c_vorwissen = new SpecificCriterion("vorwissen", array(0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4), 0, 1, true, 1);
@@ -149,11 +149,13 @@ class mod_groupformation_job_manager {
          */
 
         // Matcher (einer von beiden)
-		$gcm = new GroupALGroupCentricMatcher();
+		//$gcm = new GroupALGroupCentricMatcher();
+        $matcher = new GroupALGroupCentricMatcher();
+        $gal = new GroupFormationAlgorithm($users, $matcher, new GroupALOptimizer($matcher), 3);
 
-        $result = $gcm->perform_groupformation($users, 2, 4);
-		
-       	return $result;	
+        $cohort = $gal->doOneFormation();
+
+        return $cohort->getResult();
 	}
 	
 	/**
