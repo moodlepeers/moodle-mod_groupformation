@@ -140,7 +140,7 @@ class mod_groupformation_job_manager {
         $c_teamorientierung = new SpecificCriterion("teamorientierung", array(0.4, 0.4, 0.4, 0.4, 0.4, 0.4), 0, 1, true, 1);
         // Dummy Participants
         $users = array();
-        for ($i = 0; $i < 8; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $users[] = new Participant(array($c_vorwissen, $c_motivation,
                 $c_note, $c_persoenlichkeit, $c_lernstil, $c_teamorientierung), $i);
         }
@@ -151,7 +151,7 @@ class mod_groupformation_job_manager {
         // Matcher (einer von beiden)
 		//$gcm = new GroupALGroupCentricMatcher();
         $matcher = new GroupALGroupCentricMatcher();
-        $gal = new GroupFormationAlgorithm($users, $matcher, new GroupALOptimizer($matcher), 3);
+        $gal = new GroupFormationAlgorithm($users, $matcher, new GroupALOptimizer($matcher), 4);
 
         $cohort = $gal->doOneFormation();
 
@@ -201,11 +201,10 @@ class mod_groupformation_job_manager {
 		}
 		
 		$ids = array();
-		foreach ($groups as $group){+
-			$groupalid = $group->getID();
+		foreach ($groups as $groupalid => $group){+
 			$name = $groupname.strval($groupalid);
-			$id = $this->create_group($groupalid, $name, $groupformationid,$flags);
-			$ids[$groupalid] = $id;
+			$db_id = $this->create_group($groupalid, $group, $name, $groupformationid, $flags);
+			$ids[$groupalid] = $db_id;
 		}
 		
 		return $ids;
@@ -219,13 +218,14 @@ class mod_groupformation_job_manager {
 	 * @param integer $groupformationid
 	 * @return Ambigous <boolean, number>
 	 */
-	public function create_group($groupalid, $name, $groupformationid,$flags){
+	public function create_group($groupalid, $group, $name, $groupformationid,$flags){
 		global $DB;
 		
 		$record = new stdClass();
 		$record->groupformation = $groupformationid;
 		$record->moodlegroupid = null;
 		$record->groupname = $name;
+		$record->performance_index = $group['gpi'];
 		$record->groupal = $flags['groupal'];
 		$record->random = $flags['random'];
 		$record->mrandom = $flags['random'];
@@ -249,8 +249,8 @@ class mod_groupformation_job_manager {
 		
 		$groupformationid = $job->groupformationid;
 		
-		foreach($users as $key => $user){
-			$this->assign_user_to_group($groupformationid,$user['id'],$user['group'],$idmap);
+		foreach($users as $userid => $groupalid){
+			$this->assign_user_to_group($groupformationid,$userid,$groupalid,$idmap);
 		}
 		
 	}
@@ -263,13 +263,13 @@ class mod_groupformation_job_manager {
 	 * @param unknown $usergroup
 	 * @param unknown $idmap
 	 */
-	public function assign_user_to_group($groupformationid,$userid,$usergroup,$idmap){
+	public function assign_user_to_group($groupformationid,$userid,$groupalid,$idmap){
 		global $DB;
 		
 		$record = new stdClass();
 		$record->groupformation = $groupformationid;
 		$record->userid = $userid;
-		$record->groupid = $idmap[$usergroup];
+		$record->groupid = $idmap[$groupalid];
 		
 		return $DB->insert_record('groupformation_group_users', $record);
 	}

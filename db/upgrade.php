@@ -541,6 +541,21 @@ function xmldb_groupformation_upgrade($oldversion) {
 		upgrade_mod_savepoint(true, 2015070103, 'groupformation');
 	}
 	
+	if ($oldversion < 2015070600) {
+	
+		// Define field performance_index to be added to groupformation_groups.
+		$table = new xmldb_table('groupformation_groups');
+		$field = new xmldb_field('performance_index', XMLDB_TYPE_NUMBER, '20, 8', null, null, null, null, 'groupname');
+	
+		// Conditionally launch add field performance_index.
+		if (!$dbman->field_exists($table, $field)) {
+			$dbman->add_field($table, $field);
+		}
+	
+		// Groupformation savepoint reached.
+		upgrade_mod_savepoint(true, 2015070600, 'groupformation');
+	}
+	
 	
 	
 	
