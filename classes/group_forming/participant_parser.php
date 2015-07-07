@@ -25,7 +25,7 @@
 require_once($CFG->dirroot.'/lib/groupal/classes/Criteria/SpecificCriterion.php');
 require_once($CFG->dirroot.'/lib/groupal/classes/Participant.php');
 
-class lib_groupal_Parser {
+class mod_groupformation_participant_parser {
 	
 	/**
 	 * Parses infos to Participants
@@ -36,7 +36,6 @@ class lib_groupal_Parser {
 	 * @return multitype:Participant
 	 */
 	public static function parse($users, $labels){
-// 		var_dump($infos);
 		$participants = array();
 		
 		foreach($users as $user){
@@ -46,7 +45,7 @@ class lib_groupal_Parser {
 				$value = $user->$label;
 				$count = count($value);
 				$homogen = $value[$count-1];
-				// an letzter Stelle im Array wird �bergeben, ob es homogen ist
+				// an letzter Stelle im Array wird übergeben, ob es homogen ist
 				unset($value[$count-1]);
 				$criterion = new SpecificCriterion($label, $value, 0.0, 1.0, $homogen, 1.0);
 // 				$criterion = new Criterion();
@@ -64,6 +63,5 @@ class lib_groupal_Parser {
 		}
 		
 		return $participants;
-		//An den GroupFormationAlagorithm �bergeben/starten
 	}
 }

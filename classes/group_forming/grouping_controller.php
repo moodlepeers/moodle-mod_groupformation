@@ -28,7 +28,7 @@ if (!defined('MOODLE_INTERNAL')) {
 
 require_once(dirname(__FILE__).'/userid_filter.php');
 require_once(dirname(__FILE__).'/calculateCriterions.php');
-require_once(dirname(__FILE__).'/Parser.php');
+require_once(dirname(__FILE__).'/participant_parser.php');
 require_once($CFG->dirroot.'/mod/groupformation/classes/util/define_file.php');
 require_once($CFG->dirroot.'/mod/groupformation/classes/moodle_interface/storage_manager.php');
 
@@ -222,7 +222,7 @@ class mod_groupformation_grouping_controller{
 			$userPosition++;
 		}
 		
-		return lib_groupal_Parser::parse($array, $totalLabel);
+		return mod_groupformation_participant_parser::parse($array, $totalLabel);
 	}
 	
 }
