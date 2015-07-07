@@ -62,6 +62,8 @@
     $controller = new mod_groupformation_GroupingView_Controller($groupformation->id);
 
 
+    //TODO @Rene: hier die Methoden aufrufen um gruppenbildung zu steuern
+    // TODO Methoden im groupingView_Controller.php angelegt, jedoch nicht implementiert
     if($_POST){
         if(isset($_POST['start'])){
             $controller->start();
@@ -107,7 +109,8 @@
 	$surveyStatisticNumers = $infos->getInfos ();
 	
 	echo '<div style="color:red;">Diese Seite ist noch in der Entwicklung. Die Inhalte sind ggf. noch rein statisch und haben keinen Effekt oder keine Funktion</div>';
-	
+
+    //TODO : form in das template packen?
 	echo '<form action="' . htmlspecialchars ( $_SERVER ["PHP_SELF"] ) . '" method="post" autocomplete="off">';
 	
 	echo '<input type="hidden" name="id" value="' . $id . '"/>';
