@@ -76,24 +76,22 @@
 	//echo $OUTPUT->heading ( $groupformation->name );
 	
 	// ---------------------------------------------
-	require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/job_manager.php');
+// 	require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/job_manager.php');
 	
-	$jobmanager = new mod_groupformation_job_manager(null);
-	
-	$job = $jobmanager->get_next_job();
+	$job = mod_groupformation_job_manager::get_next_job();
 	
 	if (!is_null($job)){
 	var_dump($job);
 	
-	var_dump($jobmanager->is_job_aborted($job));
+	var_dump(mod_groupformation_job_manager::is_job_aborted($job));
 	
-	$result = $jobmanager->do_groupal($job);
+	$result = mod_groupformation_job_manager::do_groupal($job);
 	
 	var_dump($result);
 	
-	var_dump($jobmanager->save_result($job, $result));
+	var_dump(mod_groupformation_job_manager::save_result($job, $result));
 	
-	var_dump($jobmanager::get_status($job));
+	var_dump(mod_groupformation_job_manager::get_status($job));
 	}
 	//-----------------------------------------------
 	

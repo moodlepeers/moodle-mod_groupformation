@@ -45,7 +45,7 @@ class mod_groupformation_job_manager {
 	 * 
 	 * @return Ambigous <>
 	 */
-	public function get_next_job() {
+	public static function get_next_job() {
 		global $DB;
 		$sql = "SELECT * 
 				FROM {groupformation_jobs} 
@@ -64,7 +64,7 @@ class mod_groupformation_job_manager {
 		if (count ( $jobs ) == 1) {
 			$id = array_keys ( $jobs )[0];
 			$job = $jobs [$id];
-			$this->set_job($job,"1000");
+			self::set_job($job,"1000");
 			return $job;
 		}elseif (count ($jobs) == 0){
 			return null;
@@ -77,8 +77,8 @@ class mod_groupformation_job_manager {
 	 * 
 	 * @param stdClass $job
 	 */
-	public function reset_job($job){
-		$this->set_job($job);
+	public static function reset_job($job){
+		self::set_job($job);
 	}
 	
 	/**
@@ -88,7 +88,7 @@ class mod_groupformation_job_manager {
 	 * @param stdClass $job
 	 * @param string $state
 	 */
-	public function set_job($job,$state="0000"){
+	public static function set_job($job,$state="0000"){
 		global $DB;
 		
 		$job->waiting = $state[0];
@@ -106,7 +106,7 @@ class mod_groupformation_job_manager {
 	 * @param stdClass $job
 	 * @return boolean
 	 */
-	public function is_job_aborted($job){
+	public static function is_job_aborted($job){
 		global $DB;
 		
 		return $DB->get_field('groupformation_jobs','aborted',array('id'=>$job->id)) == '1';
@@ -119,7 +119,7 @@ class mod_groupformation_job_manager {
 	 * @param stdClass $job
 	 * @return stdClass
 	 */
-	public function do_groupal($job){
+	public static function do_groupal($job){
 		// TODO @Nora @Ahmed
 		// get groupformation for this job
 		
@@ -165,13 +165,13 @@ class mod_groupformation_job_manager {
 	 * @param stdClass $result
 	 * @return boolean
 	 */
-	public function save_result($job, $result){
+	public static function save_result($job, $result){
 		global $DB;
 		
 		$flags = array("groupal"=>1,"random"=>0,"mrandom"=>0,"created"=>0);
-		$idmap = $this->create_groups($job, $result->groups,$flags);
+		$idmap =self::create_groups($job, $result->groups,$flags);
 		
-		$this->assign_users_to_groups($job, $result->users, $idmap);
+		self::assign_users_to_groups($job, $result->users, $idmap);
 		
 		return true;
 	}
@@ -183,7 +183,7 @@ class mod_groupformation_job_manager {
 	 * @param unknown $groupids
 	 * @return boolean
 	 */	
-	public function create_groups($job, $groups, $flags){
+	private static function create_groups($job, $groups, $flags){
 		
 		$groupformationid = $job->groupformationid;
 		
@@ -203,7 +203,7 @@ class mod_groupformation_job_manager {
 		$ids = array();
 		foreach ($groups as $groupalid => $group){+
 			$name = $groupname.strval($groupalid);
-			$db_id = $this->create_group($groupalid, $group, $name, $groupformationid, $flags);
+			$db_id = self::create_group($groupalid, $group, $name, $groupformationid, $flags);
 			$ids[$groupalid] = $db_id;
 		}
 		
@@ -218,7 +218,7 @@ class mod_groupformation_job_manager {
 	 * @param integer $groupformationid
 	 * @return Ambigous <boolean, number>
 	 */
-	public function create_group($groupalid, $group, $name, $groupformationid,$flags){
+	private static function create_group($groupalid, $group, $name, $groupformationid,$flags){
 		global $DB;
 		
 		$record = new stdClass();
@@ -245,12 +245,12 @@ class mod_groupformation_job_manager {
 	 * @param unknown $users
 	 * @param unknown $idmap
 	 */
-	public function assign_users_to_groups($job, $users, $idmap){
+	private static function assign_users_to_groups($job, $users, $idmap){
 		
 		$groupformationid = $job->groupformationid;
 		
 		foreach($users as $userid => $groupalid){
-			$this->assign_user_to_group($groupformationid,$userid,$groupalid,$idmap);
+			self::assign_user_to_group($groupformationid,$userid,$groupalid,$idmap);
 		}
 		
 	}
@@ -263,7 +263,7 @@ class mod_groupformation_job_manager {
 	 * @param unknown $usergroup
 	 * @param unknown $idmap
 	 */
-	public function assign_user_to_group($groupformationid,$userid,$groupalid,$idmap){
+	private static function assign_user_to_group($groupformationid,$userid,$groupalid,$idmap){
 		global $DB;
 		
 		$record = new stdClass();
