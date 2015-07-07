@@ -26,7 +26,7 @@
 	require_once (dirname ( __FILE__ ) . '/lib.php');
 	require_once (dirname ( __FILE__ ) . '/locallib.php');
 	require_once ($CFG->dirroot . '/mod/groupformation/classes/group_forming/grouping_controller.php');
-	//require_once (dirname(__FILE__).'/classes/group_forming/generateGroup.php');
+	//require_once (dirname(__FILE__).'/classes/group_forming/group_generator.php');
 	
 	// Read URL params
 	$id = optional_param ( 'id', 0, PARAM_INT ); // Course Module ID

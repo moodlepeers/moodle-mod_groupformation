@@ -27,40 +27,44 @@ if (!defined('MOODLE_INTERNAL')) {
 }
 
 require_once(dirname(__FILE__).'/userid_filter.php');
-require_once(dirname(__FILE__).'/calculateCriterions.php');
+require_once(dirname(__FILE__).'/criterion_calculator.php');
 require_once(dirname(__FILE__).'/participant_parser.php');
 require_once($CFG->dirroot.'/mod/groupformation/classes/util/define_file.php');
 require_once($CFG->dirroot.'/mod/groupformation/classes/moodle_interface/storage_manager.php');
 
 class mod_groupformation_grouping_controller{	
 	
+	private $groupformationID;
+	private $store;
+	
+	public function __construct($groupformationID){
+		$this->groupformationID = $groupformationID;
+		$this->store = new mod_groupformation_storage_manager($groupformationID);
+	}
+	
 	/**
 	 * Handles complete questionaires (userids) and sets them to completed/commited
 	 * 
-	 * @param integer $groupformationID
 	 */
-	public static function handle_complete_questionaires($groupformationID){
-		$userFilter = new mod_groupformation_userid_filter($groupformationID);
-		$store = new mod_groupformation_storage_manager($groupformationID);
+	public function handle_complete_questionaires(){
+		$userFilter = new mod_groupformation_userid_filter($this->groupformationID);
 		
 		// hole alle userids von komplett ausgefüllten Fragebögen und markiere diese als abgegeben
 		$users = $userFilter->getCompletedIDs();
-		$store->setAllCommited($users);
+		$this->store->setAllCommited($users);
 	}
 	
 	/**
 	 * Builds Participants array using a parser (at the end)
 	 * 
-	 * @param integer $groupformationID
+	 * @param unknown $users
 	 * @return multitype:Participant
 	 */
-	public static function build_participants($users, $groupformationID){
+	public function build_participants($users){
 		
-		$store = new mod_groupformation_storage_manager($groupformationID);
+		$scenario = $this->store->getScenario();
 		
-		$scenario = $store->getScenario();
-		
-// 		self::handle_complete_questionaires($groupformationID);
+// 		self::handle_complete_questionaires($this->groupformationID);
 		
 		$data = new mod_groupformation_data();
 		
@@ -69,7 +73,7 @@ class mod_groupformation_grouping_controller{
 		$labels = $data->getLabelSet($scenario);
 		$homogen = $data->getHomogenSet($scenario);
 		
-		$calculator = new mod_groupformation_calculateCriterions($groupformationID);
+		$calculator = new mod_groupformation_criterion_calculator($this->groupformationID);
 		$gradeP = -1;
 		if(count($users)>0){
 			$gradeP = $calculator->getGradePosition($users);

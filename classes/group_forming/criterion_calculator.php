@@ -35,7 +35,7 @@
 
 
 
-	class mod_groupformation_calculateCriterions {
+	class mod_groupformation_criterion_calculator {
 
 		private $store;
 		private $groupformationid;
