@@ -26,33 +26,44 @@ require_once($CFG->dirroot.'/lib/groupal/classes/Criteria/SpecificCriterion.php'
 require_once($CFG->dirroot.'/lib/groupal/classes/Participant.php');
 
 class lib_groupal_Parser {
-	public static function parse($infos, $labels, $groupsize){
-		var_dump($infos);
-		$array = array();
-		foreach($infos as $user){
+	
+	/**
+	 * Parses infos to Participants
+	 * 
+	 * @param unknown $users
+	 * @param unknown $labels
+	 * @param unknown $groupsize
+	 * @return multitype:Participant
+	 */
+	public static function parse($users, $labels){
+// 		var_dump($infos);
+		$participants = array();
+		
+		foreach($users as $user){
 			$position = 0;
-			$participant;
+			$participant = null;
 			foreach($labels as $label){
 				$value = $user->$label;
 				$count = count($value);
 				$homogen = $value[$count-1];
-				// an letzter Stelle im Array wird übergeben, ob es homogen ist
+				// an letzter Stelle im Array wird ï¿½bergeben, ob es homogen ist
 				unset($value[$count-1]);
-				$c = new SpecificCriterion($label, $value, 0.0, 1.0, $homogen, 1.0);
-// 				$c = new Criterion();
-// 				$c->setName($label);
-// 				$c->setValues($user->$label);
-// 				$c->setIsHomogeneous($user->homogen);
+				$criterion = new SpecificCriterion($label, $value, 0.0, 1.0, $homogen, 1.0);
+// 				$criterion = new Criterion();
+// 				$criterion->setName($label);
+// 				$criterion->setValues($user->$label);
+// 				$criterion->setIsHomogeneous($user->homogen);
 				if($position == 0){
-					$participant = new Participant($c, $user->id);
+					$participant = new Participant($criterion, $user->id);
 				}else{
-					$participant->addCriteria($c);
+					$participant->addCriteria($criterion);
 				}
 			}
 			
-			$array[] = $participant;
+			$participants[] = $participant;
 		}
 		
-		//An den GroupFormationAlagorithm übergeben/starten
+		return $participants;
+		//An den GroupFormationAlagorithm ï¿½bergeben/starten
 	}
 }

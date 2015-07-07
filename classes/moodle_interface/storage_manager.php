@@ -895,5 +895,5 @@ class mod_groupformation_storage_manager {
     	$categories = $this->getCategories();
     	return array_keys($categories);
     }
-
+    
 }

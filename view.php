@@ -27,7 +27,7 @@
 	require_once(dirname(__FILE__).'/locallib.php');
 	require_once(dirname(__FILE__).'/classes/moodle_interface/storage_manager.php');
 	require_once(dirname(__FILE__).'/classes/question_manager/infoText.php');
-	require_once(dirname(__FILE__).'/classes/group_forming/startGrouping.php');
+	require_once(dirname(__FILE__).'/classes/group_forming/grouping_controller.php');
 
 	// Read URL params
 	$id = optional_param('id', 0, PARAM_INT);   // Course Module ID
@@ -75,29 +75,7 @@
   	}else{
   		$begin = 1;
   	}  	
-  	
-//   	if(isset($_POST["dozent"])){
-//   		$dozent = $_POST['dozent'];
-//   	}else{
-//   		$dozent = 0;
-//   	}
-  	
-//   	if($dozent == 1){
-//   		$returnurl = new moodle_url('/mod/groupformation/answeringView.php', array('id' => $id));
-  			
-//   		redirect($returnurl);
-//   	}
-  	
-//   	if($dozent == 2){
-//   		$returnurl = new moodle_url('/mod/groupformation/analysisView.php', array('id' => $id, 'do_show' => 'analysis'));
-  			
-//   		redirect($returnurl);
-//   	}
-  	
-//   	if($dozent == 3){
-//   		mod_groupformation_startGrouping::start($groupformation->id);
-//   	}
-  	
+  	  	
   	if($begin == 1){
   		if (isset($_POST["questions"])){
   			

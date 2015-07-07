@@ -32,27 +32,50 @@ require_once(dirname(__FILE__).'/Parser.php');
 require_once($CFG->dirroot.'/mod/groupformation/classes/util/define_file.php');
 require_once($CFG->dirroot.'/mod/groupformation/classes/moodle_interface/storage_manager.php');
 
-class mod_groupformation_startGrouping{
+class mod_groupformation_grouping_controller{	
 	
-	
-	public static function start($groupformationID){
-		echo 'Hier startet die Berechnung';
+	/**
+	 * Handles complete questionaires (userids) and sets them to completed/commited
+	 * 
+	 * @param integer $groupformationID
+	 */
+	public static function handle_complete_questionaires($groupformationID){
 		$userFilter = new mod_groupformation_userid_filter($groupformationID);
 		$store = new mod_groupformation_storage_manager($groupformationID);
-		$users = $userFilter->getCompletedIds();
-		//hier werden alle auf abgegeben gesetzt, die komplettt ausgef�llt sind
+		
+		// hole alle userids von komplett ausgefüllten Fragebögen und markiere diese als abgegeben
+		$users = $userFilter->getCompletedIDs();
 		$store->setAllCommited($users);
-		$scenario = $userFilter->getScenario();
+	}
+	
+	/**
+	 * Builds Participants array using a parser (at the end)
+	 * 
+	 * @param integer $groupformationID
+	 * @return multitype:Participant
+	 */
+	public static function build_participants($users, $groupformationID){
+		
+		$store = new mod_groupformation_storage_manager($groupformationID);
+		
+		$scenario = $store->getScenario();
+		
+// 		self::handle_complete_questionaires($groupformationID);
+		
 		$data = new mod_groupformation_data();
+		
+		//$this->setNulls($scenario);
+		
 		$labels = $data->getLabelSet($scenario);
 		$homogen = $data->getHomogenSet($scenario);
-		//$this->setNulls($scenario);
+		
 		$calculator = new mod_groupformation_calculateCriterions($groupformationID);
 		$gradeP = -1;
 		if(count($users)>0){
 			$gradeP = $calculator->getGradePosition($users);
 		}
 		$array = array();
+		
 		//hier werden die einzelnen Extralabels gebildet und dann in diese array gespeichert
 		$totalLabel = array();
 		$userPosition = 0;
@@ -199,10 +222,7 @@ class mod_groupformation_startGrouping{
 			$userPosition++;
 		}
 		
-		$groupsize = $store->getGroupSize();
-		//var_dump($array)
-		
-		lib_groupal_Parser::parse($array, $totalLabel, $groupsize);
+		return lib_groupal_Parser::parse($array, $totalLabel);
 	}
 	
 }

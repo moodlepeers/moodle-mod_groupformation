@@ -60,7 +60,7 @@
 		return $this->store->getScenario();
 	}
 	
-	public function getCompletedIds(){
+	public function getCompletedIDs(){
 		$completed = array();
 		foreach($this->totalUserIds as $user){
 			$number = $this->store->answerNumberForUser($user);

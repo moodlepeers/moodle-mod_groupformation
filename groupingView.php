@@ -25,7 +25,7 @@
 	require_once (dirname ( dirname ( dirname ( __FILE__ ) ) ) . '/config.php');
 	require_once (dirname ( __FILE__ ) . '/lib.php');
 	require_once (dirname ( __FILE__ ) . '/locallib.php');
-	require_once ($CFG->dirroot . '/mod/groupformation/classes/group_forming/startGrouping.php');
+	require_once ($CFG->dirroot . '/mod/groupformation/classes/group_forming/grouping_controller.php');
 	//require_once (dirname(__FILE__).'/classes/group_forming/generateGroup.php');
 	
 	// Read URL params
@@ -84,9 +84,9 @@
 	// Print the tabs.
 	require ('tabs.php');
 	
-	if($s == 1){
-		mod_groupformation_startGrouping::start($groupformation->id);
-	}
+// 	if($s == 1){
+// 		mod_groupformation_startGrouping::start($groupformation->id);
+// 	}
 	// Replace the following lines with you own code.
 	//echo $OUTPUT->heading ( $groupformation->name );
 	
