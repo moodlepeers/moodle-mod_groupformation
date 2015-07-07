@@ -28,6 +28,8 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 	die ( 'Direct access to this script is forbidden.' ); // / It must be included from a Moodle page
 }
 
+	require_once($CFG->dirroot.'/mod/groupformation/classes/group_forming/grouping_controller.php');
+
 // DUMMY
 // require_once ...
         require_once($CFG->dirroot.'/lib/groupal/classes/Criteria/SpecificCriterion.php');
@@ -36,7 +38,7 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 		require_once($CFG->dirroot.'/lib/groupal/classes/Matcher/GroupALGroupCentricMatcher.php');
         require_once($CFG->dirroot.'/lib/groupal/classes/GroupFormationAlgorithm.php');
         require_once($CFG->dirroot.'/lib/groupal/classes/Optimizer/GroupALOptimizer.php');
-
+	
 
 class mod_groupformation_job_manager {		
 	
@@ -128,9 +130,23 @@ class mod_groupformation_job_manager {
 		$groupsize = intval($store->getGroupSize());
 		
 		/**
-         * <Testdaten>------------------------------------------
-         */
+		 * <Richtige Daten - noch buggy>------------------------
+		 */
+		
+// 		$groupformationID = $job->groupformationid;
+		
+// 		$grouping_controller = new mod_groupformation_grouping_controller($groupformationID);
+		
+// 		$users = array(3);
+		
+// 		$participants = $grouping_controller->build_participants($users);
+        
+// 		var_dump($participants);
 
+		/**
+		 * <Testdaten>------------------------------------------
+		 */
+        
         // Dummy Criterions
         $c_vorwissen = new SpecificCriterion("vorwissen", array(0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4), 0, 1, true, 1);
         $c_note = new SpecificCriterion("note", array(0.4), 0, 1, true, 1);

@@ -78,6 +78,8 @@ class mod_groupformation_grouping_controller{
 		if(count($users)>0){
 			$gradeP = $calculator->getGradePosition($users);
 		}
+		
+		var_dump($gradeP);
 		$array = array();
 		
 		//hier werden die einzelnen Extralabels gebildet und dann in diese array gespeichert
@@ -127,6 +129,13 @@ class mod_groupformation_grouping_controller{
 							$totalLabel[] = $label;
 						}
 					}
+					// TODO @Nora - Ich hab bei Bewertungsmethode nach "Just Pass" gearbeitet, 
+					// sprich die Fragebogenseite "Grade" wird nicht angezeigt, 
+					// keine Antwort vom Studenten gespeichert und somit hier keine Antwort gefunden!
+					// Bitte eine Abstraktion von getLabelSet und getHomogenSet in store bauen, 
+					// die die Fälle von grade, points, just pass, no method löst
+					// Wegen der Abstraktion gehören solche Methoden meiner Meinung nach nicht in Data
+					
 					if($label == 'grade'){
 						if($gradeP != -1){
 							$value[] = $calculator->getGrade($gradeP, $user);
