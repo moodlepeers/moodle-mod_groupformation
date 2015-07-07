@@ -55,18 +55,30 @@
 
     // Get data for HTML output
     require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/storage_manager.php');
-    require_once (dirname ( __FILE__ ) . '/classes/group_forming/groupingViewController.php');
+    require_once(dirname(__FILE__) . '/classes/group_forming/groupingView_Controller.php');
     $store = new mod_groupformation_storage_manager($groupformation->id);
 
+    // set data and viewStatus of groupingView, after possible db update
+    $controller = new mod_groupformation_GroupingView_Controller($groupformation->id);
+
+
+    if($_POST){
+        if(isset($_POST['start'])){
+            $controller->start();
+        }elseif(isset($_POST['abort'])){
+            $controller->abort();
+        }elseif(isset($_POST['adopt'])){
+            $controller->adopt();
+        }elseif(isset($_POST['delete'])){
+            $controller->delete();
+        }
+    }
 	
-	$s = 0;
+/*	$s = 0;
 	if(isset($_POST["starting"])){
 		$s = $_POST['starting'];
         // $store->something($_POST['starting']);
-	}
-
-    // set data and viewStatus of groupingView, after possible db update
-    $controller = new mod_groupformation_GroupingViewController($groupformation->id);
+	}*/
 	
 	// Log access to page
 	groupformation_log($USER->id,$groupformation->id,'<view_teacher_grouping>');
@@ -99,98 +111,14 @@
 	echo '<form action="' . htmlspecialchars ( $_SERVER ["PHP_SELF"] ) . '" method="post" autocomplete="off">';
 	
 	echo '<input type="hidden" name="id" value="' . $id . '"/>';
-	
-	echo '
-	<div class="gf_settings_pad">';
-
-    $controller->displaySettings();
-
-/*    echo'
-		<div class="gf_pad_header">
-		Gruppenbildung
-		</div>
-		<div class="gf_pad_content bp_align_left-middle">
-			<button type="submit" name="starting" value="1" class="gf_button gf_button_pill gf_button_small">Gruppen bilden</button>
-			<button class="gf_button gf_button_pill gf_button_small" disabled>Gruppenbildung stoppen</button>
-			<button class="gf_button gf_button_pill gf_button_small" >Gruppen l&ouml;schen</button>
-			<p>Statusanzeige "Gruppenbildung l&auml;uft..." mit %Zahl oder voraussichtlicher Endzeit</p>
-		</div>';*/
-	
-	echo '</form>';
-
-
-    $controller->displayAnalysis();
-    $controller->displayUncompleteGroups();
-    $controller->displayGroups();
 
 
 
+    echo $controller->display();
 
-/*	echo  '	<div class="gf_pad_header_small">
-			Auswertung
-		</div>
-		<div class="gf_pad_content">
-			<p>Gleichm&auml;&szlig;igkeit der Gruppen: <b>0.7</b><span class="toolt" tooltip="ein Wert > 0.5 ist gut"></span></p>
-			<p>Anzahl gebildeter Gruppen: <b>100</b></p>
-			<p>Maximale Gruppengr&ouml;&szlig;e: <b>6</b></p>
-		</div>
-		<div class="gf_pad_header_small">Maximale Gruppengr&ouml;&szlig;e wurde bei folgenden Gruppen nicht erreicht: </div>
-		<div class="gf_pad_content">
-			<div class="grid row_highlight">
-				<div class="col_m_87-5">Gruppennamen_16 - Anzahl Mitglieder: <b>3</b> </div>
-				<div class="col_m_12-5 bp_align_right-middle"><button class="gf_button gf_button_pill gf_button_tiny">scroll to</button></div>
-			</div>
-			<div class="grid row_highlight">
-				<div class="col_m_87-5">Gruppennamen_18 - Anzahl Mitglieder: <b>3</b> </div>
-				<div class="col_m_12-5 bp_align_right-middle"><button class="gf_button gf_button_pill gf_button_tiny">scroll to</button></div>
-			</div>
-			<div class="grid row_highlight">
-				<div class="col_m_87-5">Gruppennamen_25 - Anzahl Mitglieder: <b>1</b> </div>
-				<div class="col_m_12-5 bp_align_right-middle"><button class="gf_button gf_button_pill gf_button_tiny">scroll to</button></div>
-			</div>
-			<div class="grid row_highlight">
-				<div class="col_m_87-5">Gruppennamen_36 - Anzahl Mitglieder: <b>2</b> </div>
-				<div class="col_m_12-5 bp_align_right-middle"><button class="gf_button gf_button_pill gf_button_tiny">scroll to</button></div>
-			</div>
-			<div class="grid row_highlight">
-				<div class="col_m_87-5">Gruppennamen_99 - Anzahl Mitglieder: <b>3</b> </div>
-				<div class="col_m_12-5 bp_align_right-middle"><button class="gf_button gf_button_pill gf_button_tiny">scroll to</button></div>
-			</div>
-		</div>
-		<div class="gf_pad_header_small">
-			&Uuml;bersicht gebildeter Gruppen
-		</div>
-		<div class="gf_pad_content">
-			<div class="grid bottom_stripe">
-				<div class="col_s_50">Name: <b>Gruppennamen_1</b></div>
-				<div class="col_s_25">Gruppenqualit&auml;t: <b>0.63</b></div>
-				<div class="col_s_25 bp_align_right-middle"><button class="gf_button gf_button_pill gf_button_tiny">zur Moodle Gruppenansicht</button></div>
-				<div class="col_s_100 gf_group_links"><a href="#">Max Musterman</a><a href="#">Peter Lustig</a><a href="#">Cho Ngueng</a><a href="#">Mustafa Ghaffar</a><a href="#">Olivia Johnson</a><a href="#">Jurgen Ehrlich</a></div>
-			</div>
-		
-			<div class="grid bottom_stripe">
-				<div class="col_s_50">Name: <b>Gruppennamen_2</b></div>
-				<div class="col_s_25">Gruppenqualit&auml;t: <b>0.63</b></div>
-				<div class="col_s_25 bp_align_right-middle"><button class="gf_button gf_button_pill gf_button_tiny">zur Moodle Gruppenansicht</button></div>
-				<div class="col_s_100 gf_group_links"><a href="#">Max Musterman</a><a href="#">Peter Lustig</a><a href="#">Cho Ngueng</a><a href="#">Mustafa Ghaffar</a><a href="#">Olivia Johnson</a><a href="#">Jurgen Ehrlich</a></div>
-			</div>
-		
-			<div class="grid bottom_stripe">
-				<div class="col_s_50">Name: <b>Gruppennamen_3</b></div>
-				<div class="col_s_25">Gruppenqualit&auml;t: <b>0.63</b></div>
-				<div class="col_s_25 bp_align_right-middle"><button class="gf_button gf_button_pill gf_button_tiny">zur Moodle Gruppenansicht</button></div>
-				<div class="col_s_100 gf_group_links"><a href="#">Max Musterman</a><a href="#">Peter Lustig</a><a href="#">Cho Ngueng</a><a href="#">Mustafa Ghaffar</a><a href="#">Olivia Johnson</a><a href="#">Jurgen Ehrlich</a></div>
-			</div>
-		
-			<div class="grid bottom_stripe">
-				<div class="col_s_50">Name: <b>Gruppennamen_4</b></div>
-				<div class="col_s_25">Gruppenqualit&auml;t: <b>0.63</b></div>
-				<div class="col_s_25 bp_align_right-middle"><button class="gf_button gf_button_pill gf_button_tiny">zur Moodle Gruppenansicht</button></div>
-				<div class="col_s_100 gf_group_links"><a href="#">Max Musterman</a><a href="#">Peter Lustig</a><a href="#">Cho Ngueng</a><a href="#">Mustafa Ghaffar</a><a href="#">Olivia Johnson</a><a href="#">Jurgen Ehrlich</a></div>
-			</div>
-		</div>';*/
+    echo '</form>';
 
+    $controller->showTest();
 
-	echo '</div>';
 	
 	echo $OUTPUT->footer ();
