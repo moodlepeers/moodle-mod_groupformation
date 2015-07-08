@@ -43,18 +43,6 @@ class mod_groupformation_grouping_controller{
 	}
 	
 	/**
-	 * Handles complete questionaires (userids) and sets them to completed/commited
-	 * 
-	 */
-	public function handle_complete_questionaires(){
-		$userFilter = new mod_groupformation_userid_filter($this->groupformationID);
-		
-		// hole alle userids von komplett ausgefüllten Fragebögen und markiere diese als abgegeben
-		$users = $userFilter->getCompletedIDs();
-		$this->store->setAllCommited($users);
-	}
-	
-	/**
 	 * Builds Participants array using a parser (at the end)
 	 * 
 	 * @param unknown $users

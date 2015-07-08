@@ -3,9 +3,7 @@
  *
  */
 
-
-
-class mod_groupformation_group_forming_view{
+class mod_groupformation_template_builder{
     // Pfad zum Template
     private $path;
 
