@@ -5,7 +5,7 @@
 
 
 
-class mod_groupformation_groupForming_View{
+class mod_groupformation_group_forming_view{
     // Pfad zum Template
     private $path;
 

@@ -11,7 +11,7 @@ if (!defined('MOODLE_INTERNAL')) {
 }
 
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
-require_once ($CFG->dirroot . '/mod/groupformation/classes/group_forming/group_forming_View.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/group_forming/group_formingview.php');
 
 
 class mod_groupformation_GroupingView_Controller
@@ -39,7 +39,7 @@ class mod_groupformation_GroupingView_Controller
 
     public function __construct($groupformationID){
         $this->store = new mod_groupformation_storage_manager($groupformationID);
-        $this->view = new mod_groupformation_groupForming_View();
+        $this->view = new mod_groupformation_group_forming_view();
 
         $this->groups = $this->store->getGeneratedGroups();
 
@@ -114,7 +114,7 @@ class mod_groupformation_GroupingView_Controller
      * @return string
      */
     private function loadSettings(){
-        $settingsGroupsView = new mod_groupformation_groupForming_View();
+        $settingsGroupsView = new mod_groupformation_group_forming_view();
         $settingsGroupsView->setTemplate('groupingView_settings');
 
         switch($this->viewState){
@@ -276,7 +276,7 @@ class mod_groupformation_GroupingView_Controller
      * @return string
      */
     private function loadStatistics(){
-        $statisticsView = new mod_groupformation_groupForming_View();
+        $statisticsView = new mod_groupformation_group_forming_view();
 
         if($this->viewState == 3 || $this->viewState == 4) {
             // TODO get statistics
@@ -299,7 +299,7 @@ class mod_groupformation_GroupingView_Controller
      */
     private function loadIncompleteGroups(){
 
-        $incompleteGroupsView = new mod_groupformation_groupForming_View();
+        $incompleteGroupsView = new mod_groupformation_group_forming_view();
 
         if($this->viewState == 3 || $this->viewState == 4) {
             $this->setIncompleteGroups();
@@ -357,7 +357,7 @@ class mod_groupformation_GroupingView_Controller
      * @return string
      */
     private function loadGeneratedGroups(){
-        $generatedGroupsView = new mod_groupformation_groupForming_View();
+        $generatedGroupsView = new mod_groupformation_group_forming_view();
 
         if($this->viewState == 3 || $this->viewState == 4) {
 
