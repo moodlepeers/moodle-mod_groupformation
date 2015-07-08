@@ -11,7 +11,7 @@ if (!defined('MOODLE_INTERNAL')) {
 }
 
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
-require_once ($CFG->dirroot . '/mod/groupformation/classes/group_forming/group_formingview.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/group_forming/group_forming_view.php');
 
 
 class mod_groupformation_GroupingView_Controller
