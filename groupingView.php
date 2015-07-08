@@ -59,7 +59,7 @@
     $store = new mod_groupformation_storage_manager($groupformation->id);
 
     // set data and viewStatus of groupingView, after possible db update
-    $controller = new mod_groupformation_GroupingView_Controller($groupformation->id);
+    $controller = new mod_groupformation_GroupingView_ccontroller($groupformation->id);
 
 
     //TODO @Rene: hier die Methoden aufrufen um gruppenbildung zu steuern

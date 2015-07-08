@@ -1,10 +1,4 @@
 <?php
-/**
- *
- *
- *
- *
- */
 
 if (!defined('MOODLE_INTERNAL')) {
     die('Direct access to this script is forbidden.');    ///  It must be included from a Moodle page
@@ -13,9 +7,8 @@ if (!defined('MOODLE_INTERNAL')) {
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/group_forming/group_forming_view.php');
 
-
-class mod_groupformation_GroupingView_Controller
-{
+class mod_groupformation_GroupingView_ccontroller {
+	
     //state of the controller
     private $viewState = 0;
     private $groups = array();
@@ -35,8 +28,7 @@ class mod_groupformation_GroupingView_Controller
     private $groupsAddopted;
 
     private $test;
-
-
+    
     public function __construct($groupformationID){
         $this->store = new mod_groupformation_storage_manager($groupformationID);
         $this->view = new mod_groupformation_group_forming_view();
@@ -53,9 +45,8 @@ class mod_groupformation_GroupingView_Controller
         $this->surveyState = $this->store->isQuestionaireAvailable();
         //$this->surveyState = 'false';
 
-
-        //TODO groupsAddopted soll aus db abgefragt werden
-        $this->groupsAddopted = 0;
+        // TODO groupsAdopted soll aus db abgefragt werden
+        $this->groupsAdopted = 0;
 
         /* Survey läuft noch */
         if($this->surveyState == 'true'){
@@ -63,7 +54,7 @@ class mod_groupformation_GroupingView_Controller
         }
         /* Survey beendet, aber keine Gruppen generiert*/
         //elseif($this->surveyState == false && !(isset($this->groups) && !empty($this->groups) ))
-        elseif($this->job_status == $this->job_status_options[0] && $this->surveyState == 'false')
+        elseif($this->job_status == $this->job_status_options[0])
         {
             $this->viewState = 1;
         }
@@ -86,29 +77,40 @@ class mod_groupformation_GroupingView_Controller
         }
     }
 
-
+    /**
+     * 
+     */
     public function start(){
         $this->test = 'gestartet';
     }
 
+    /**
+     * 
+     */
     public function abort(){
         $this->test = 'abgebrochen';
     }
 
+    /**
+     * 
+     */
     public function adopt(){
         $this->test = 'adoptiert';
     }
 
+    /**
+     * 
+     */
     public function delete(){
         $this->test = 'gelöscht';
     }
 
+    /**
+     * 
+     */
     public function showTest(){
         return var_dump($this->test);
     }
-
-
-
 
     /** sets the buttons of groupform-settings
      * @return string
@@ -270,8 +272,7 @@ class mod_groupformation_GroupingView_Controller
         }
         return $settingsGroupsView->loadTemplate();
     }
-
-
+    
     /**
      * @return string
      */
@@ -292,9 +293,10 @@ class mod_groupformation_GroupingView_Controller
         }
         return $statisticsView->loadTemplate();
     }
-
-
-    /** assign incompletegroups-data to template
+    
+    /** 
+     * assign incompletegroups-data to template
+     * 
      * @return string
      */
     private function loadIncompleteGroups(){
@@ -322,9 +324,10 @@ class mod_groupformation_GroupingView_Controller
         }
         return $incompleteGroupsView->loadTemplate();
     }
-
-
-    /** returns link for scrollTo function
+    
+    /** 
+     * Returns link for scrollTo function
+     * 
      * @param $groupID
      * @return string
      */
@@ -332,10 +335,9 @@ class mod_groupformation_GroupingView_Controller
         //TODO function to scroll not implemented; return placeholder
         return '#' . $groupID;
     }
-
-
-    /** Set the array with incompleted groups
-     *
+    
+    /** 
+     * Set the array with incompleted groups
      */
     private function setIncompleteGroups(){
 
@@ -351,9 +353,10 @@ class mod_groupformation_GroupingView_Controller
             }
         }
     }
-
-
-    /** assign groups-data to template
+    
+    /** 
+     * Assign groups-data to template
+     * 
      * @return string
      */
     private function loadGeneratedGroups(){
@@ -379,11 +382,10 @@ class mod_groupformation_GroupingView_Controller
         }
         return $generatedGroupsView->loadTemplate();
     }
-
-
-
-
-    /** get the name and moodle-link of groupmembers
+    
+    /** 
+     * Gets the name and moodle-link of groupmembers
+     * 
      * @param $groupID
      * @return array
      */
@@ -403,10 +405,10 @@ class mod_groupformation_GroupingView_Controller
         }
         return $groupMembers;
     }
-
-
-
-    /** get the moodle-link to group and set state of the link(enabled || disabled)
+    
+    /** 
+     * Get the moodle-link to group and set state of the link(enabled || disabled)
+     * 
      * @param $groupID
      * @return array
      */
@@ -426,10 +428,10 @@ class mod_groupformation_GroupingView_Controller
         }
 
     }
-
-
-
-    /** generate and return the HTMl Page with templates and data
+    
+    /** 
+     * Generate and return the HTMl Page with templates and data
+     * 
      * @return string
      */
     public function display(){
