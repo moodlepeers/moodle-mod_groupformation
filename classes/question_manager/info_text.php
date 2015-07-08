@@ -30,7 +30,7 @@ require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/stor
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 
 // require_once($CFG->dirroot.'/mod/groupformation/classes/moodle_interface/storage_manager.php');
-class mod_groupformation_infoText {
+class mod_groupformation_info_text {
 	private $cmid;
 	private $userid;
 	private $groupformationid;
