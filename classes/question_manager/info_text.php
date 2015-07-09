@@ -183,7 +183,7 @@ class mod_groupformation_info_text {
 				</thead>';
 		echo '<tbody>';
 		$stats = $this->getStats ();
-		
+		$prev_incomplete = false;
 		foreach ( $stats as $key => $values ) {
 			$a = new stdClass ();
 			$a->category = get_string ( 'category_' . $key, 'groupformation' );
@@ -195,13 +195,18 @@ class mod_groupformation_info_text {
 						'id' => $this->cmid,
 						'category' => $key 
 				) );
-				$a->category = '<a href="' . $url . '">' . $a->category . '</a>';
+				if (!$prev_incomplete) {
+					$a->category = '<a href="' . $url . '">' . $a->category . '</a>';
+				}
 				if ($values ['missing'] == 0) {
 					echo get_string ( 'stats_all', 'groupformation', $a ) . ' <span class="questionaire_all">&#10004;</span>';
+					$prev_incomplete = false;
 				} elseif ($values ['answered'] == 0) {
 					echo get_string ( 'stats_none', 'groupformation', $a ) . ' <span class="questionaire_none">&#10008;</span>';
+					$prev_incomplete = true;
 				} else {
 					echo get_string ( 'stats_partly', 'groupformation', $a );
+					$prev_incomplete = true;
 				}
 				echo '</span></th></tr>';
 			}
