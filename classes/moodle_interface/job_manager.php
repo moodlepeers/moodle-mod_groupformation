@@ -92,13 +92,19 @@ class mod_groupformation_job_manager {
 	 */
 	public static function set_job($job,$state="0000"){
 		global $DB;
+		$status_options = self::get_status_options();
+		if (array_key_exists($state, $status_options))
+			$status = $status_options[$state];
+		else
+			$status = $state;
+		if (!(preg_match("/[0-1]{4}/", "1301") && strlen("1001")==4))
+			return false;
+		$job->waiting = $status[0];
+		$job->started = $status[1];
+		$job->aborted = $status[2];
+		$job->done = $status[3];
 		
-		$job->waiting = $state[0];
-		$job->started = $state[1];
-		$job->aborted = $state[2];
-		$job->done = $state[3];
-		
-		$DB->update_record('groupformation_jobs', $job);
+		return $DB->update_record('groupformation_jobs', $job);
 	}
 	
 	/**
@@ -113,6 +119,14 @@ class mod_groupformation_job_manager {
 		
 		return $DB->get_field('groupformation_jobs','aborted',array('id'=>$job->id)) == '1';
 		
+	}
+	
+	/**
+	 * Returns status options placed in define file
+	 */
+	public static function get_status_options() {
+		$data = new mod_groupformation_data();
+		return $data->get_job_status_options();
 	}
 	
 	/**
@@ -251,7 +265,6 @@ class mod_groupformation_job_manager {
 		
 		return $id;
 	}
-	
 	
 	/**
 	 * 
