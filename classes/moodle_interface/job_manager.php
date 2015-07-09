@@ -87,14 +87,14 @@ class mod_groupformation_job_manager {
 	 * @param stdClass $job        	
 	 * @param string $state        	
 	 */
-	public static function set_job($job, $state = "0000") {
+	public static function set_job($job, $state = "ready") {
 		global $DB;
 		$status_options = self::get_status_options ();
-		if (array_key_exists ( $state, $status_options ))
+		if (array_key_exists( $state, $status_options ))
 			$status = $status_options [$state];
 		else
 			$status = $state;
-		if (! (preg_match ( "/[0-1]{4}/", "1301" ) && strlen ( "1001" ) == 4))
+		if (! (preg_match ( "/[0-1]{4}/", $status) && strlen ( $status ) == 4))
 			return false;
 		$job->waiting = $status [0];
 		$job->started = $status [1];
@@ -343,7 +343,7 @@ class mod_groupformation_job_manager {
 	 */
 	public static function get_status($job) {
 		$data = new mod_groupformation_data ();
-		$status_options = $data->get_job_status_options ();
+		$status_options = array_keys($data->get_job_status_options ());
 		if ($job->waiting) {
 			return $status_options [1];
 		} elseif ($job->started) {

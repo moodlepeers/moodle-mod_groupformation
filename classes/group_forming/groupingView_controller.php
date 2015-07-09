@@ -37,35 +37,39 @@ class mod_groupformation_groupingView_controller {
 		
 		$this->groups = $this->groups_store->getGeneratedGroups ();
 		
-		// status job
-		$data = new mod_groupformation_data ();
-		$this->job_status_options = $data->get_job_status_options ();
-		$this->job = mod_groupformation_job_manager::get_job ( $groupformationID );
-		$this->job_status = mod_groupformation_job_manager::get_status ( $this->job );
+		$this->determineStatus();
+	}
+	
+	public function determineStatus(){
+		$this->surveyState = $this->store->isQuestionaireAvailable ();		
 		
-		// survey status
-		$this->surveyState = $this->store->isQuestionaireAvailable ();
-		// $this->surveyState = 'false';
+		// status job
+		$this->job_status_options = mod_groupformation_job_manager::get_status_options ();
+		$this->job = mod_groupformation_job_manager::get_job ( $this->groupformationID );
+		$this->job_status = mod_groupformation_job_manager::get_status ( $this->job );
 		
 		// TODO groupsAdopted soll aus db abgefragt werden
 		$this->groupsAdopted = 0;
 		
 		/* Survey läuft noch */
-		if ($this->surveyState == 'true') {
+		if (!$this->surveyState == 'true' ) {
 			$this->viewState = 0;
 		}		/* Survey beendet, aber keine Gruppen generiert */
 		// elseif($this->surveyState == false && !(isset($this->groups) && !empty($this->groups) ))
-		elseif ($this->job_status == $this->job_status_options [0]) {
+		elseif ($this->job_status == 'ready') {
 			$this->viewState = 1;
 		}		/* Gruppenbildung läuft */
 		// elseif($this->surveyState == false && 0)
-		elseif ($this->job_status == $this->job_status_options [1]) {
+		elseif ($this->job_status == 'waiting') {
 			$this->viewState = 2;
 		}		/* Gruppen generiert, aber nicht ins Moodle integriert */
 		// elseif (isset($this->groups) && !empty($this->groups) && $this->groupsAdopted == 0)
-		elseif ($this->job_status == $this->job_status_options [4] && $this->groupsAdopted == 0) {
+		elseif ($this->job_status == 'done') {
 			$this->viewState = 3;
-		} 		/* Gruppen generiert und ins Moodle integriert */
+		} // currently everything block til job is aborted and reset by cron
+		elseif ($this->job_status == 'aborted' || $this->groupsAdopted)  {
+			$this->viewState = 4;
+		} // Moodlegroups are created
 		else {
 			$this->viewState = 4;
 		}
@@ -74,26 +78,32 @@ class mod_groupformation_groupingView_controller {
 	/**
 	 */
 	public function start() {
-		// $this->handle_complete_questionaires();
-		// mod_groupformation_job_manager::set_job($job,"1000");
+		$this->handle_complete_questionaires();
+		mod_groupformation_job_manager::set_job($this->job,"waiting");
+		$this->determineStatus();
 	}
 	
 	/**
 	 */
 	public function abort() {
-		// mod_groupformation_job_manager::set_job($this->job,"0010");
+		mod_groupformation_job_manager::set_job($this->job,"aborted");
+		$this->determineStatus();
 	}
 	
 	/**
 	 */
 	public function adopt() {
 		// mod_groupformation_group_generator::generateMoodleGroups($this->groupformationID);
+		
+		$this->determineStatus();
 	}
 	
 	/**
 	 */
 	public function delete() {
-		// $this->groups_store->deleteGeneratedGroups($this->groupformationID);
+		#$this->groups_store->deleteGeneratedGroups($this->groupformationID);
+		mod_groupformation_job_manager::set_job($this->job,"ready");
+		$this->determineStatus();
 	}
 	
 	/**
@@ -227,7 +237,7 @@ class mod_groupformation_groupingView_controller {
 								'type' => 'submit',
 								'name' => 'delete',
 								'value' => '',
-								'state' => '',
+								'state' => 'disabled',
 								'text' => 'Gruppen l&ouml;schen' 
 						),
 						'button3' => array (
@@ -412,6 +422,7 @@ class mod_groupformation_groupingView_controller {
 	 * @return string
 	 */
 	public function display() {
+		$this->determineStatus();
 		$this->view->setTemplate ( 'wrapper_groupingView' );
 		$this->view->assign ( 'groupingView_settings', $this->loadSettings () );
 		$this->view->assign ( 'groupingView_statistic', $this->loadStatistics () );
