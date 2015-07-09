@@ -101,6 +101,8 @@ class mod_groupformation_questionaire {
 		echo '<div class="questionaire_navbar">';
 		echo '<ul class="questionaire_navbar">';
 		$width = 100.0 / count ( $categories );
+		$stats = $store->getStats($this->userid);
+		$prev_complete = true;
 		foreach ( $categories as $category ) {
 			$url = new moodle_url ( 'answeringView.php', array (
 					'id' => $this->cmid,
@@ -110,10 +112,11 @@ class mod_groupformation_questionaire {
 			$positionCategory = $store->getPosition($category);
 			
 			$beforeActive = ($positionCategory<=$positionActiveCategory);
-			$answeredAll = ($store->answerNumberForUser($this->userid,$category)==$store->getNumber($category));
-			$class = (has_capability('mod/groupformation:editsettings', $this->context) || $beforeActive || $answeredAll)?'':'no-active';
-			echo '<li class="questionaire_navbar '.$class.'" style="width:' . $width . '%;"><a class="questionaire_navbar_link" ' . (($activeCategory == $category) ? 'style="background-color: #2d2d2d; color: #FFFFFF"' : '') . ' href="' . $url . '">' . get_string ( 'category_' . $category, 'groupformation' ) . '</a></li>';
-			
+			$class = (has_capability('mod/groupformation:editsettings', $this->context) || $beforeActive || $prev_complete)?'':'no-active';
+			echo '<li class="questionaire_navbar '.$class.'" style="width:' . $width . '%;">';
+			echo '<a class="questionaire_navbar_link" ' . (($activeCategory == $category) ? 'style="background-color: #2d2d2d; color: #FFFFFF"' : '') . ' href="' . $url . '">' . get_string ( 'category_' . $category, 'groupformation' ) . '</a>';
+			echo '</li>';
+			$prev_complete = $stats[$category]['missing'] == 0;
 			// <li><a href="a.html" class="ui-btn-active">One</a></li>
 			// <li><a href="b.html">Two</a></li>
 		}

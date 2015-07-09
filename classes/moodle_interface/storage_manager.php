@@ -833,6 +833,36 @@ class mod_groupformation_storage_manager {
 		) );
 	}
 	
+	/**
+	 * computes stats about answered and misssing questions
+	 *
+	 * @return multitype:multitype:number stats
+	 */
+	public function getStats($userid) {
+		$scenario = $this->getScenario ();
+	
+		$data = new mod_groupformation_data ();
+	
+		$category_set = $this->getCategories();
+	
+		$categories = array ();
+	
+		foreach ( $category_set as $category ) {
+			$categories [$category] = $this->getNumber ( $category );
+		}
+	
+		$stats = array ();
+		foreach ( $categories as $category => $value ) {
+			$count = $this->answerNumberForUser ( $userid, $category );
+			$stats [$category] = array (
+					'questions' => $value,
+					'answered' => $count,
+					'missing' => $value - $count
+			);
+		}
+		return $stats;
+	}
+	
 	public function getGroupName(){
 		global $DB;
 		return $DB->get_field('groupformation', 'groupname',array (

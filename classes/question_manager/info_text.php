@@ -140,36 +140,6 @@ class mod_groupformation_info_text {
 	}
 	
 	/**
-	 * computes stats about answered and misssing questions
-	 *
-	 * @return multitype:multitype:number stats
-	 */
-	private function getStats() {
-		$scenario = $this->store->getScenario ();
-		
-		$data = new mod_groupformation_data ();
-		
-		$category_set = $this->store->getCategories();
-		
-		$categories = array ();
-		
-		foreach ( $category_set as $category ) {
-			$categories [$category] = $this->store->getNumber ( $category );
-		}
-		
-		$stats = array ();
-		foreach ( $categories as $category => $value ) {
-			$count = $this->store->answerNumberForUser ( $this->userid, $category );
-			$stats [$category] = array (
-					'questions' => $value,
-					'answered' => $count,
-					'missing' => $value - $count 
-			);
-		}
-		return $stats;
-	}
-	
-	/**
 	 * Prints stats about answered and misssing questions
 	 */
 	private function __printStats() {
@@ -182,7 +152,7 @@ class mod_groupformation_info_text {
 		echo '</th></tr>
 				</thead>';
 		echo '<tbody>';
-		$stats = $this->getStats ();
+		$stats = $this->store->getStats ($this->userid);
 		$prev_incomplete = false;
 		foreach ( $stats as $key => $values ) {
 			$a = new stdClass ();
