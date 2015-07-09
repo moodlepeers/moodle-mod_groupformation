@@ -167,7 +167,7 @@ class mod_groupformation_job_manager {
         // Matcher (einer von beiden)
 		//$gcm = new GroupALGroupCentricMatcher();
         $matcher = new GroupALGroupCentricMatcher();
-        $gal = new GroupFormationAlgorithm($users, $matcher, new GroupALOptimizer($matcher), 4);
+        $gal = new GroupFormationAlgorithm($users, $matcher, 4);
 
         $cohort = $gal->doOneFormation();
 
