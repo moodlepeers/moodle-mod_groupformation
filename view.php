@@ -101,7 +101,7 @@
   	}
 
 	if (has_capability('mod/groupformation:onlystudent', $context)){
-		if(!$store->isNotBuild()){
+		if(!mod_groupformation_groups_manager::isNotBuild($groupformation->id)){
 			$info->__groupsAvailable();
 		}else{
 	 		if ($store->isQuestionaireAvailable()){	

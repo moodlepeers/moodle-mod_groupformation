@@ -31,35 +31,18 @@ require_once ('../config.php');
 require_once ('lib.php');
 // ($CFG->dirroot.'/group/lib.php');
 require_once ($CFG->dirroot . '/group/lib.php');
-require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager_groups.php');
-class mod_groupformation_moodle_group_generator {
-	
-	// array aus arrays -> jedes einzelarray steht f�r eine Gruppe || Inahlt sind die jeweiligen Userids
-	private $store;
-	
-	/**
-	 * Constructs instance
-	 *
-	 * @param unknown $groupformationid        	
-	 */
-	public function __construct($groupformationid) {
-		$this->store = new mod_groupformation_storage_manager_groups ( $groupformationid );
-	}
+require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
+class mod_groupformation_group_generator {
 	
 	/**
 	 * Generates moodle groups and sets ids in groupal generated groups
 	 *
 	 * @param unknown $groupal_groups        	
 	 */
-	public function generateMoodleGroups($groupal_groups) {
+	public static function generateMoodleGroups($groupformationID) {
 		global $COURSE;
-		
-		// TODO @Nora
-		// Du musst beim Erstellen von Moodle-Gruppen annehmen,
-		// dass es bereits GroupalGruppen mit Usern gibt (fiktiv; gespeichert
-		// in Tabelle groupformation_groups), diesen haben daher eine ID und schon den Namen
-		// $groupal_groups : array(key=>value) mit key aus groupalgroupids 
-		// (Ids der Tabelle groupformation_groups) und values sind userids
+		$groups_store = new mod_groupformation_groups_manager ( $groupformationid );
+		$groupal_groups = $groups_store->getGeneratedGroups();
 		
 		$position = 0;
 		$created_moodle_groups = array ();
@@ -68,9 +51,12 @@ class mod_groupformation_moodle_group_generator {
 		$failed = false;
 		
 		// allocate the users
-		foreach ( $groupal_groups as $groupid => $users ) {
+		foreach ( $groupal_groups as $groupal_group ) {
 			
-			$groupname = $this->store->getGroupName ( $groupid );
+			$groupid = $groupal_group->id;
+			$groupname = $groupal_group->groupname;
+				
+			$groupal_users = $groups_store->getUsersForGeneratedGroup($groupal_group->id);
 			
 			$parsed_groupname = groups_parse_name ( $groupname, $position );
 			
@@ -89,12 +75,12 @@ class mod_groupformation_moodle_group_generator {
 			
 			$created_moodle_groups [] = $moodlegroupid;
 			// put user into group
-			foreach ( $users as $user ) {
+			foreach ( $groupal_users as $user ) {
 				groups_add_member ( $moodlegroupid, $user );
 			}
 			
 			// TODO @Nora: Erledigt
-			$this->store->saveMoodleGroupID ( $groupid, $moodlegroupid );
+			$groups_store->saveMoodleGroupID ( $groupid, $moodlegroupid );
 			
 			// Invalidate the course groups cache seeing as we've changed it.
 			cache_helper::invalidate_by_definition ( 'core', 'groupdata', array (), array (
@@ -106,7 +92,7 @@ class mod_groupformation_moodle_group_generator {
 					
 					groups_delete_group ( $moodlegroupid );
 					// TODO @Nora Erledigt
-					$this->store->deleteMoodleGroupID ( $moodlegroupid );
+					$groups_store->deleteMoodleGroupID ( $moodlegroupid );
 				}
 			} else {
 			}

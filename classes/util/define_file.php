@@ -357,6 +357,11 @@ class mod_groupformation_data {
 	public function getHomogenSet($scenario) {
 		return $this->HOMOGEN_SETS [$scenario];
 	}
+	/**
+	 * Return job status options
+	 * 
+	 * @return multitype:string
+	 */
 	public function get_job_status_options() {
 		return $this->job_status_options;
 	}

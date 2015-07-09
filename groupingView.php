@@ -121,7 +121,5 @@
 
     echo '</form>';
 
-    $controller->showTest();
-
 	
 	echo $OUTPUT->footer ();

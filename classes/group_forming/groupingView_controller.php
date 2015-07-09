@@ -5,8 +5,10 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/group_forming/template_builder.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
 
 class mod_groupformation_groupingView_controller {
+	
 	private $groupformationID;
 	
 	// state of the controller
@@ -14,7 +16,8 @@ class mod_groupformation_groupingView_controller {
 	private $groups = array ();
 	private $incompleteGroups = array ();
 	private $store = NULL;
-	private $job = NULL;
+	private $groups_store = NULL;
+ 	private $job = NULL;
 	private $view = NULL;
 	private $job_status;
 	private $job_status_options;
@@ -27,9 +30,12 @@ class mod_groupformation_groupingView_controller {
 	public function __construct($groupformationID) {
 		$this->groupformationID = $groupformationID;
 		$this->store = new mod_groupformation_storage_manager ( $groupformationID );
+		
+		$this->groups_store = new mod_groupformation_groups_manager($groupformationID);
+		
 		$this->view = new mod_groupformation_template_builder ();
 		
-		$this->groups = $this->store->getGeneratedGroups ();
+		$this->groups = $this->groups_store->getGeneratedGroups ();
 		
 		// status job
 		$data = new mod_groupformation_data ();
@@ -68,7 +74,6 @@ class mod_groupformation_groupingView_controller {
 	/**
 	 */
 	public function start() {
-		$this->test = 'gestartet';
 		// $this->handle_complete_questionaires();
 		// mod_groupformation_job_manager::set_job($job,"1000");
 	}
@@ -76,25 +81,19 @@ class mod_groupformation_groupingView_controller {
 	/**
 	 */
 	public function abort() {
-		$this->test = 'abgebrochen';
+		// mod_groupformation_job_manager::set_job($this->job,"0010");
 	}
 	
 	/**
 	 */
 	public function adopt() {
-		$this->test = 'adoptiert';
+		// mod_groupformation_group_generator::generateMoodleGroups($this->groupformationID);
 	}
 	
 	/**
 	 */
 	public function delete() {
-		$this->test = 'gelöscht';
-	}
-	
-	/**
-	 */
-	public function showTest() {
-		return var_dump ( $this->test );
+		// $this->groups_store->deleteGeneratedGroups($this->groupformationID);
 	}
 	
 	/**
@@ -319,7 +318,7 @@ class mod_groupformation_groupingView_controller {
 		$maxSize = $this->store->getGroupSize ();
 		
 		foreach ( $this->groups as $key => $value ) {
-			$usersIDs = $this->store->getUsersFromGeneratedGroups ( $key );
+			$usersIDs = $this->store_groups->getUsersForGeneratedGroup ( $key );
 			$size = count ( $usersIDs );
 			if ($size < $maxSize) {
 				$a = ( array ) $this->groups [$key];
@@ -365,7 +364,7 @@ class mod_groupformation_groupingView_controller {
 	 * @return array
 	 */
 	private function getGroupMembers($groupID) {
-		$usersIDs = $this->store->getUsersFromGeneratedGroups ( $groupID );
+		$usersIDs = $this->groups_store->getUsersForGeneratedGroup ( $groupID );
 		$groupMembers = array ();
 		
 		foreach ( $usersIDs as $user ) {

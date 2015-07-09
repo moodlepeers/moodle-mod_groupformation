@@ -28,23 +28,20 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 	die ( 'Direct access to this script is forbidden.' ); // / It must be included from a Moodle page
 }
 
-	require_once($CFG->dirroot.'/mod/groupformation/classes/group_forming/grouping_controller.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/group_forming/grouping_controller.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
 
-// DUMMY
-// require_once ...
-        require_once($CFG->dirroot.'/lib/groupal/classes/Criteria/SpecificCriterion.php');
-		require_once($CFG->dirroot.'/lib/groupal/classes/Participant.php');
-		require_once($CFG->dirroot.'/lib/groupal/classes/Cohort.php');
-		require_once($CFG->dirroot.'/lib/groupal/classes/Matcher/GroupALGroupCentricMatcher.php');
-        require_once($CFG->dirroot.'/lib/groupal/classes/GroupFormationAlgorithm.php');
-        require_once($CFG->dirroot.'/lib/groupal/classes/Optimizer/GroupALOptimizer.php');
-	
-
-class mod_groupformation_job_manager {		
+require_once ($CFG->dirroot . '/lib/groupal/classes/Criteria/SpecificCriterion.php');
+require_once ($CFG->dirroot . '/lib/groupal/classes/Participant.php');
+require_once ($CFG->dirroot . '/lib/groupal/classes/Cohort.php');
+require_once ($CFG->dirroot . '/lib/groupal/classes/Matcher/GroupALGroupCentricMatcher.php');
+require_once ($CFG->dirroot . '/lib/groupal/classes/GroupFormationAlgorithm.php');
+require_once ($CFG->dirroot . '/lib/groupal/classes/Optimizer/GroupALOptimizer.php');
+class mod_groupformation_job_manager {
 	
 	/**
 	 * Selects next job and sets it on "started"
-	 * 
+	 *
 	 * @return Ambigous <>
 	 */
 	public static function get_next_job() {
@@ -66,252 +63,253 @@ class mod_groupformation_job_manager {
 		if (count ( $jobs ) == 1) {
 			$id = array_keys ( $jobs )[0];
 			$job = $jobs [$id];
-			self::set_job($job,"1000");
+			self::set_job ( $job, "1000" );
 			return $job;
-		}elseif (count ($jobs) == 0){
+		} elseif (count ( $jobs ) == 0) {
 			return null;
 		}
 	}
 	
 	/**
-	 * 
+	 *
 	 * Resets job to 0000
-	 * 
-	 * @param stdClass $job
+	 *
+	 * @param stdClass $job        	
 	 */
-	public static function reset_job($job){
-		self::set_job($job);
+	public static function reset_job($job) {
+		self::set_job ( $job );
 	}
 	
 	/**
-	 * 
+	 *
 	 * Sets job to state e.g. 1000
-	 * 
-	 * @param stdClass $job
-	 * @param string $state
+	 *
+	 * @param stdClass $job        	
+	 * @param string $state        	
 	 */
-	public static function set_job($job,$state="0000"){
+	public static function set_job($job, $state = "0000") {
 		global $DB;
-		$status_options = self::get_status_options();
-		if (array_key_exists($state, $status_options))
-			$status = $status_options[$state];
+		$status_options = self::get_status_options ();
+		if (array_key_exists ( $state, $status_options ))
+			$status = $status_options [$state];
 		else
 			$status = $state;
-		if (!(preg_match("/[0-1]{4}/", "1301") && strlen("1001")==4))
+		if (! (preg_match ( "/[0-1]{4}/", "1301" ) && strlen ( "1001" ) == 4))
 			return false;
-		$job->waiting = $status[0];
-		$job->started = $status[1];
-		$job->aborted = $status[2];
-		$job->done = $status[3];
+		$job->waiting = $status [0];
+		$job->started = $status [1];
+		$job->aborted = $status [2];
+		$job->done = $status [3];
 		
-		return $DB->update_record('groupformation_jobs', $job);
+		return $DB->update_record ( 'groupformation_jobs', $job );
 	}
 	
 	/**
-	 * 
+	 *
 	 * Checks whether job is aborted or not
-	 * 
-	 * @param stdClass $job
+	 *
+	 * @param stdClass $job        	
 	 * @return boolean
 	 */
-	public static function is_job_aborted($job){
+	public static function is_job_aborted($job) {
 		global $DB;
 		
-		return $DB->get_field('groupformation_jobs','aborted',array('id'=>$job->id)) == '1';
-		
+		return $DB->get_field ( 'groupformation_jobs', 'aborted', array (
+				'id' => $job->id 
+		) ) == '1';
 	}
 	
 	/**
 	 * Returns status options placed in define file
 	 */
 	public static function get_status_options() {
-		$data = new mod_groupformation_data();
-		return $data->get_job_status_options();
+		$data = new mod_groupformation_data ();
+		return $data->get_job_status_options ();
 	}
 	
 	/**
 	 * Runs groupal with job
-	 * 
-	 * @param stdClass $job
+	 *
+	 * @param stdClass $job        	
 	 * @return stdClass
 	 */
-	public static function do_groupal($job){
+	public static function do_groupal($job) {
 		// TODO @Nora @Ahmed
 		// get groupformation for this job
+		$store = new mod_groupformation_storage_manager ( $job->groupformationid );
 		
-		$store = new mod_groupformation_storage_manager($job->groupformationid);		
-		
-		$groupsize = intval($store->getGroupSize());
+		$groupsize = intval ( $store->getGroupSize () );
 		
 		/**
 		 * <Richtige Daten - noch buggy>------------------------
 		 */
 		
-// 		$groupformationID = $job->groupformationid;
+		// $groupformationID = $job->groupformationid;
 		
-// 		$grouping_controller = new mod_groupformation_grouping_controller($groupformationID);
+		// $grouping_controller = new mod_groupformation_grouping_controller($groupformationID);
 		
-// 		$users = array(3);
+		// $users = array(3);
 		
-// 		$participants = $grouping_controller->build_participants($users);
-        
-// 		var_dump($participants);
-
+		// $participants = $grouping_controller->build_participants($users);
+		
+		// var_dump($participants);
+		
 		/**
 		 * <Testdaten>------------------------------------------
 		 */
-        
-        // Dummy Criterions
-        $c_vorwissen = new SpecificCriterion("vorwissen", array(0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4), 0, 1, true, 1);
-        $c_note = new SpecificCriterion("note", array(0.4), 0, 1, true, 1);
-        $c_persoenlichkeit = new SpecificCriterion("persoenlichkeit", array(0.4, 0.4, 0.4, 0.4, 0.4), 0, 1, true, 1);
-        $c_motivation = new SpecificCriterion("motivation", array(0.4, 0.4, 0.4, 0.4), 0, 1, true, 1);
-        $c_lernstil = new SpecificCriterion("lernstil", array(0.4, 0.4, 0.4, 0.4), 0, 1, true, 1);
-        $c_teamorientierung = new SpecificCriterion("teamorientierung", array(0.4, 0.4, 0.4, 0.4, 0.4, 0.4), 0, 1, true, 1);
-        // Dummy Participants
-        $users = array();
-        for ($i = 0; $i < 10; $i++) {
-            $users[] = new Participant(array($c_vorwissen, $c_motivation,
-                $c_note, $c_persoenlichkeit, $c_lernstil, $c_teamorientierung), $i);
-        }
-        /**
-         * </Testdaten>-----------------------------------------
-         */
-
-        // Matcher (einer von beiden)
-		//$gcm = new GroupALGroupCentricMatcher();
-        $matcher = new GroupALGroupCentricMatcher();
-        $gal = new GroupFormationAlgorithm($users, $matcher, 4);
-
-        $cohort = $gal->doOneFormation();
-
-        return $cohort->getResult();
+		
+		// Dummy Criterions
+		$c_vorwissen = new SpecificCriterion ( "vorwissen", array (
+				0.4,
+				0.4,
+				0.4,
+				0.4,
+				0.4,
+				0.4,
+				0.4,
+				0.4 
+		), 0, 1, true, 1 );
+		$c_note = new SpecificCriterion ( "note", array (
+				0.4 
+		), 0, 1, true, 1 );
+		$c_persoenlichkeit = new SpecificCriterion ( "persoenlichkeit", array (
+				0.4,
+				0.4,
+				0.4,
+				0.4,
+				0.4 
+		), 0, 1, true, 1 );
+		$c_motivation = new SpecificCriterion ( "motivation", array (
+				0.4,
+				0.4,
+				0.4,
+				0.4 
+		), 0, 1, true, 1 );
+		$c_lernstil = new SpecificCriterion ( "lernstil", array (
+				0.4,
+				0.4,
+				0.4,
+				0.4 
+		), 0, 1, true, 1 );
+		$c_teamorientierung = new SpecificCriterion ( "teamorientierung", array (
+				0.4,
+				0.4,
+				0.4,
+				0.4,
+				0.4,
+				0.4 
+		), 0, 1, true, 1 );
+		// Dummy Participants
+		$users = array ();
+		for($i = 0; $i < 10; $i ++) {
+			$users [] = new Participant ( array (
+					$c_vorwissen,
+					$c_motivation,
+					$c_note,
+					$c_persoenlichkeit,
+					$c_lernstil,
+					$c_teamorientierung 
+			), $i );
+		}
+		/**
+		 * </Testdaten>-----------------------------------------
+		 */
+		
+		// Matcher (einer von beiden)
+		// $gcm = new GroupALGroupCentricMatcher();
+		$matcher = new GroupALGroupCentricMatcher ();
+		$gal = new GroupFormationAlgorithm ( $users, $matcher, 4 );
+		
+		$cohort = $gal->doOneFormation ();
+		
+		return $cohort->getResult ();
 	}
 	
 	/**
 	 * Saves results
-	 * 
-	 * @param stdClass $job
-	 * @param stdClass $result
+	 *
+	 * @param stdClass $job        	
+	 * @param stdClass $result        	
 	 * @return boolean
 	 */
-	public static function save_result($job, $result){
+	public static function save_result($job, $result) {
 		global $DB;
 		
-		$flags = array("groupal"=>1,"random"=>0,"mrandom"=>0,"created"=>0);
-		$idmap =self::create_groups($job, $result->groups,$flags);
+		$flags = array (
+				"groupal" => 1,
+				"random" => 0,
+				"mrandom" => 0,
+				"created" => 0 
+		);
+		$idmap = self::create_groups ( $job, $result->groups, $flags );
 		
-		self::assign_users_to_groups($job, $result->users, $idmap);
+		self::assign_users_to_groups ( $job, $result->users, $idmap );
 		
 		return true;
 	}
 	
 	/**
 	 * Creates groups generated by GroupAL
-	 * 
-	 * @param stdClass $job
-	 * @param unknown $groupids
+	 *
+	 * @param stdClass $job        	
+	 * @param unknown $groupids        	
 	 * @return boolean
-	 */	
-	private static function create_groups($job, $groups, $flags){
-		
+	 */
+	private static function create_groups($job, $groups, $flags) {
 		$groupformationid = $job->groupformationid;
 		
-		$store = new mod_groupformation_storage_manager($groupformationid);
+		$groups_store = new mod_groupformation_groups_manager ( $groupformationid );
 		
-		$groupname_prefix = $store->getGroupName();
-		$groupformationname = $store->getName();
+		$store = new mod_groupformation_storage_manager ( $groupformationid );
+		
+		$groupname_prefix = $store->getGroupName ();
+		$groupformationname = $store->getName ();
 		
 		$groupname = "";
-	
-		if (strlen($groupname_prefix)<1){
-			$groupname = "G_".substr($groupformationname, 0, 8)."_";
-		}else{
-			$groupname = "G_".$groupname_prefix."_";
+		
+		if (strlen ( $groupname_prefix ) < 1) {
+			$groupname = "G_" . substr ( $groupformationname, 0, 8 ) . "_";
+		} else {
+			$groupname = "G_" . $groupname_prefix . "_";
 		}
 		
-		$ids = array();
-		foreach ($groups as $groupalid => $group){+
-			$name = $groupname.strval($groupalid);
-			$db_id = self::create_group($groupalid, $group, $name, $groupformationid, $flags);
-			$ids[$groupalid] = $db_id;
+		$ids = array ();
+		foreach ( $groups as $groupalid => $group ) {
+			+ $name = $groupname . strval ( $groupalid );
+			$db_id = $groups_store->create_group ( $groupalid, $group, $name, $groupformationid, $flags );
+			$ids [$groupalid] = $db_id;
 		}
 		
 		return $ids;
 	}
 	
 	/**
-	 * Creates group instance in DB
-	 * 
-	 * @param integer $groupalid
-	 * @param unknown $name
-	 * @param integer $groupformationid
-	 * @return Ambigous <boolean, number>
-	 */
-	private static function create_group($groupalid, $group, $name, $groupformationid,$flags){
-		global $DB;
-		
-		$record = new stdClass();
-		$record->groupformation = $groupformationid;
-		$record->moodlegroupid = null;
-		$record->groupname = $name;
-		$record->performance_index = $group['gpi'];
-		$record->groupal = $flags['groupal'];
-		$record->random = $flags['random'];
-		$record->mrandom = $flags['random'];
-		$record->created = $flags['created'];
-		
-		$id = $DB->insert_record('groupformation_groups', $record);
-		
-		return $id;
-	}
-	
-	/**
-	 * 
+	 *
 	 * Assign users to groups
-	 * 
-	 * @param stdClass $job
-	 * @param unknown $users
-	 * @param unknown $idmap
+	 *
+	 * @param stdClass $job        	
+	 * @param unknown $users        	
+	 * @param unknown $idmap        	
 	 */
-	private static function assign_users_to_groups($job, $users, $idmap){
-		
+	private static function assign_users_to_groups($job, $users, $idmap) {
 		$groupformationid = $job->groupformationid;
 		
-		foreach($users as $userid => $groupalid){
-			self::assign_user_to_group($groupformationid,$userid,$groupalid,$idmap);
+		$groups_store = new mod_groupformation_groups_manager ( $groupformationid );
+		
+		foreach ( $users as $userid => $groupalid ) {
+			$groups_store->assign_user_to_group ( $groupformationid, $userid, $groupalid, $idmap );
 		}
-		
-	}
-	
-	/**
-	 * Creats user-group instance in DB
-	 * 
-	 * @param integer $groupformationid
-	 * @param integer $userid
-	 * @param unknown $usergroup
-	 * @param unknown $idmap
-	 */
-	private static function assign_user_to_group($groupformationid,$userid,$groupalid,$idmap){
-		global $DB;
-		
-		$record = new stdClass();
-		$record->groupformation = $groupformationid;
-		$record->userid = $userid;
-		$record->groupid = $idmap[$groupalid];
-		
-		return $DB->insert_record('groupformation_group_users', $record);
 	}
 	
 	/**
 	 * Creates job for groupformation instance
-	 * 
-	 * @param integer $groupformationid
+	 *
+	 * @param integer $groupformationid        	
 	 */
-	public static function create_job($groupformationid){
+	public static function create_job($groupformationid) {
 		global $DB;
 		
-		$job = new stdClass();
+		$job = new stdClass ();
 		$job->groupformationid = $groupformationid;
 		$job->waiting = 0;
 		$job->started = 0;
@@ -321,39 +319,41 @@ class mod_groupformation_job_manager {
 		$job->timestarted = null;
 		$job->timefinished = null;
 		
-		$DB->insert_record('groupformation_jobs', $job);				
+		$DB->insert_record ( 'groupformation_jobs', $job );
 	}
 	
 	/**
 	 * Returns job for groupformation
-	 * 
-	 * @param integer $groupformationid
+	 *
+	 * @param integer $groupformationid        	
 	 * @return stdClass
 	 */
-	public static function get_job($groupformationid){
+	public static function get_job($groupformationid) {
 		global $DB;
-		return $DB->get_record('groupformation_jobs', array('groupformationid'=>$groupformationid));
+		return $DB->get_record ( 'groupformation_jobs', array (
+				'groupformationid' => $groupformationid 
+		) );
 	}
 	
 	/**
 	 * Returns job status -> to compare use $data->get_job_status_options()
-	 * 
-	 * @param stdClass $job
+	 *
+	 * @param stdClass $job        	
 	 * @return String
 	 */
-	public static function get_status($job){
-		$data = new mod_groupformation_data();
-		$status_options = $data->get_job_status_options();
-		if ($job->waiting){
-			return $status_options[1];
-		}elseif ($job->started) {
-			return $status_options[2];
-		}elseif ($job->aborted) {
-			return $status_options[3];
-		}elseif ($job->done) {
-			return $status_options[4];
-		}else{
-			return $status_options[0];
+	public static function get_status($job) {
+		$data = new mod_groupformation_data ();
+		$status_options = $data->get_job_status_options ();
+		if ($job->waiting) {
+			return $status_options [1];
+		} elseif ($job->started) {
+			return $status_options [2];
+		} elseif ($job->aborted) {
+			return $status_options [3];
+		} elseif ($job->done) {
+			return $status_options [4];
+		} else {
+			return $status_options [0];
 		}
 	}
 }

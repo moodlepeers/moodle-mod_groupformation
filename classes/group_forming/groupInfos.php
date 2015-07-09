@@ -30,7 +30,7 @@ if (!defined('MOODLE_INTERNAL')) {
 }
 
 //require_once 'storage_manager.php';
-require_once($CFG->dirroot.'/mod/groupformation/classes/moodle_interface/storage_manager_groups.php');
+require_once($CFG->dirroot.'/mod/groupformation/classes/moodle_interface/groups_manager.php');
 
 
 class mod_groupformation_groupInfos {
@@ -45,7 +45,7 @@ class mod_groupformation_groupInfos {
 	 */
 	public function __construct($groupformationid){
 		$this->groupformationid = $groupformationid;
-		$this->store = new mod_groupformation_storage_manager_groups($groupformationid);
+		$this->store = new mod_groupformation_groups_manager($groupformationid);
 	}
 	
 	/**
