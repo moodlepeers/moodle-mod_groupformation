@@ -53,10 +53,11 @@ class mod_groupformation_participant_parser {
 // 				$criterion->setValues($user->$label);
 // 				$criterion->setIsHomogeneous($user->homogen);
 				if($position == 0){
-					$participant = new Participant($criterion, $user->id);
+					$participant = new Participant(array($criterion), $user->id);
 				}else{
 					$participant->addCriteria($criterion);
 				}
+				$position++;
 			}
 			
 			$participants[] = $participant;

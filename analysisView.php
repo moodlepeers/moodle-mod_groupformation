@@ -82,24 +82,29 @@ if ($groupformation->intro) {
 
 // ---------------------------------------------
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/job_manager.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/group_forming/grouping_controller.php');
 
-$jm = new mod_groupformation_job_manager ();
+$gc = new mod_groupformation_grouping_controller($groupformation->id);
 
-$job = $jm::get_next_job ();
+var_dump($gc->build_participants(array(3))[0]->getCriteria()->size());
 
-if (! is_null ( $job )) {
-	var_dump ( $job );
+// $jm = new mod_groupformation_job_manager ();
+
+// $job = $jm::get_next_job ();
+
+// if (! is_null ( $job )) {
+// 	var_dump ( $job );
 	
-// 	var_dump ( $jm::is_job_aborted ( $job ) );
+// // 	var_dump ( $jm::is_job_aborted ( $job ) );
 	
-	$result = $jm::do_groupal ( $job );
+// 	$result = $jm::do_groupal ( $job );
 	
-	var_dump ( $result );
+// 	var_dump ( $result );
 	
-	var_dump ( $jm::save_result ( $job, $result ) );
+// 	var_dump ( $jm::save_result ( $job, $result ) );
 	
-// 	var_dump ( $jm::get_status ( $job ) );
-}
+// // 	var_dump ( $jm::get_status ( $job ) );
+// }
 // -----------------------------------------------
 
 require_once (dirname ( __FILE__ ) . '/classes/group_forming/submit_infos.php');

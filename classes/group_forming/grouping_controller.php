@@ -67,7 +67,6 @@ class mod_groupformation_grouping_controller{
 			$gradeP = $calculator->getGradePosition($users);
 		}
 		
-		var_dump($gradeP);
 		$array = array();
 		
 		//hier werden die einzelnen Extralabels gebildet und dann in diese array gespeichert
