@@ -58,7 +58,7 @@ class mod_groupformation_grouping_controller{
 		
 		//$this->setNulls($scenario);
 		
-		$labels = $data->getLabelSet($scenario);
+		$labels = $data->getLabelSet($scenario, $groupformationID);
 		$homogen = $data->getHomogenSet($scenario);
 		
 		$calculator = new mod_groupformation_criterion_calculator($this->groupformationID);
@@ -90,7 +90,7 @@ class mod_groupformation_grouping_controller{
 // 					}
 					if($label == 'lang'){
 						$value[] = $data->getLangNumber($calculator->getLang($user));
-						$value[] = $homogen[$labelPosition];
+						$value[] = $homogen[$label];
 						$object->$label = $value;
 						if($userPosition == 0){
 							$totalLabel[] = $label;
@@ -101,7 +101,7 @@ class mod_groupformation_grouping_controller{
 					}
 					if($label == 'knowledge_heterogen'){
 						$value = $calculator->knowledgeAll($user);
-						$value[] = $homogen[$labelPosition];
+						$value[] = $homogen[$label];
 						$object->$label = $value;
 						if($userPosition == 0){
 							$totalLabel[] = $label;
@@ -110,7 +110,7 @@ class mod_groupformation_grouping_controller{
 					}
 					if($label == 'knowledge_homogen'){
 						$value[] = $calculator->knowledgeAverage($user);
-						$value[] = $homogen[$labelPosition];
+						$value[] = $homogen[$label];
 						$object->$label = $value;
 						if($userPosition == 0){
 							$totalLabel[] = $label;
@@ -126,7 +126,7 @@ class mod_groupformation_grouping_controller{
 					if($label == 'grade'){
 						if($gradeP != -1){
 							$value[] = $calculator->getGrade($gradeP, $user);
-							$value[] = $homogen[$labelPosition];
+							$value[] = $homogen[$label];
 							$object->$label = $value;
 							if($userPosition == 0){
 								$totalLabel[] = $label;
@@ -137,7 +137,7 @@ class mod_groupformation_grouping_controller{
 						$bigTemp = $big5[0];
 						$l = $data->getExtraLabel($label, $scenario);
 						$p = 0;
-						$h = $homogen[$labelPosition];
+						$h = $homogen[$label];
 						foreach($bigTemp as $ls){
 							$value = array();
 							$name = $label . '_' . $l[$p];
@@ -155,7 +155,7 @@ class mod_groupformation_grouping_controller{
 						
 						$l = $data->getExtraLabel($label);
 						$p = 0;
-						$h = $homogen[$labelPosition];
+						$h = $homogen[$label];
 						foreach($bigTemp as $ls){
 							$value = array();
 							$name = $label . '_' . $l[$p];
@@ -172,7 +172,7 @@ class mod_groupformation_grouping_controller{
 						$famTemp = $calculator->getFAM($user);
 						$l = $data->getExtraLabel($label);
 						$p = 0;
-						$h = $homogen[$labelPosition];
+						$h = $homogen[$label];
 						foreach($l as $ls){
 							$value = array();
 							$name = $label . '_' . $ls;
@@ -190,7 +190,7 @@ class mod_groupformation_grouping_controller{
 						$learnTemp = $calculator->getLearn($user);
 						$l = $data->getExtraLabel($label);
 						$p = 0;
-						$h = $homogen[$labelPosition];
+						$h = $homogen[$label];
 						foreach($l as $ls){
 							$value = array();
 							$name = $label . '_' . $ls;
@@ -205,7 +205,7 @@ class mod_groupformation_grouping_controller{
 					}
 					if($label == 'team'){
 						$value = $calculator->getTeam($user);
-						$value[] = $homogen[$labelPosition];
+						$value[] = $homogen[$label];
 						$object->$label = $value;
 						if($userPosition == 0){
 							$totalLabel[] = $label;

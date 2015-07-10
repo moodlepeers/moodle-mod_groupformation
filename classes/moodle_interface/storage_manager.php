@@ -190,7 +190,7 @@ class mod_groupformation_storage_manager {
 		$data = new mod_groupformation_data ();
 		
 		$scenario = $this->getScenario ();
-		$names = $data->getCriterionSet ( $scenario );
+		$names = $data->getCriterionSet ( $scenario , $this->groupformationid);
 		$number = 0;
 		foreach ( $names as $name ) {
 			$number = $number + $DB->count_records ( 'groupformation_answer', array (

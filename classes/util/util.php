@@ -56,7 +56,7 @@ class mod_groupformation_util {
 		$this->scenario = $this->store->getScenario();
 		$data = new mod_groupformation_data();
 		//$this->names = $data->getCriterionNames();
-		$this->names = $data->getCriterionSet($this->scenario);
+		$this->names = $data->getCriterionSet($this->scenario, $groupformationid);
 	}
 	
 	public function getTotalNumber(){

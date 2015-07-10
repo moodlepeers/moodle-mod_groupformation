@@ -135,27 +135,27 @@ class mod_groupformation_data {
 	);
 	private $HOMOGEN_SETS = array (
 			'1' => array (
-					true,
-					false,
-					true,
-					true,
-					false,
-					true,
-					true,
-					true 
+					'topic' => true,
+					'knowledge_heterogen' => false,
+					'knowledge_homogen' => true,
+					'grade' => true,
+					'big5_heterogen' => false,
+					'big5_homogen' => true,
+					'team' => true,
+					'fam' => true
 			),
 			'2' => array (
-					true,
-					false,
-					false,
-					false,
-					true,
-					true,
-					false 
+					'topic' => true,
+					'knowledge_heterogen' => false,
+					'grade' => false,
+					'big5_heterogen' => false,
+					'big5_homogen' => true,
+					'team' => true,
+					'learning' => false 
 			),
 			'3' => array (
-					true 
-			) 
+					'topic' => true
+			)
 	);
 	private $Big5HomogenExtra_LABEL = array (
 			'Gewissenhaftigkeit',
@@ -215,7 +215,10 @@ class mod_groupformation_data {
 					'grade',
 					'team',
 					'character',
-					'motivation' 
+					'motivation',
+					'sellmo',
+					'self',
+					'srl' 
 			),
 			'2' => array (
 					'topic',
@@ -223,10 +226,16 @@ class mod_groupformation_data {
 					'grade',
 					'team',
 					'character',
-					'learning' 
+					'learning',
+					'sellmo',
+					'self',
+					'srl'
 			),
 			'3' => array (
-					'topic' 
+					'topic',
+					'sellmo',
+					'self',
+					'srl'
 			) 
 	);
 	const MOTIVATION = 6;
@@ -348,11 +357,48 @@ class mod_groupformation_data {
 		}
 		return $array;
 	}
-	public function getLabelSet($scenario) {
-		return $this->LABEL_SETS [$scenario];
+	public function getLabelSet($scenario, $groupformationid = null){
+		$array = $this->LABEL_SETS [$scenario];
+		if ( $groupformationid != null){
+			$store = new mod_groupformation_storage_manager($groupformationid);
+			$hasTopic = $store->getNumber("topic");
+			$hasKnowledge = $store->getNumber("knowledge");
+			$grades = $store->askForGrade();
+			
+				$position = 0;
+				foreach($array as $c){
+					if(('grade' == $c && $grades == false) || ($hasTopic == 0 && 'topic' == $c) || ($hasKnowledge == 0 && ('knowledge_heterogen' == $c || 'knowledge_homogen' == $c))){
+						unset($array[$position]);
+					}
+					
+					$position++;	
+				}
+			
+		}
+		return $array;
 	}
-	public function getCriterionSet($scenario) {
-		return $this->CRITERION_SETS [$scenario];
+	
+	public function getCriterionSet($scenario, $groupformationid = null){
+		$array = $this->CRITERION_SETS [$scenario];
+		if ( $groupformationid != null){
+			$store = new mod_groupformation_storage_manager($groupformationid);
+			$hasTopic = $store->getNumber("topic");
+			$hasKnowledge = $store->getNumber("knowledge");
+			$grades = $store->askForGrade();
+			
+				$position = 0;
+				foreach($array as $c){
+					if(('grade' == $c && $grades == false) || ($hasTopic == 0 && 'topic' == $c) || ($hasKnowledge == 0 && ('knowledge_heterogen' == $c || 'knowledge_homogen' == $c))){
+						unset($array[$position]);
+					}
+					
+					$position++;	
+				}
+				
+				
+			return $array;
+		}
+		return $array;
 	}
 	public function getHomogenSet($scenario) {
 		return $this->HOMOGEN_SETS [$scenario];
