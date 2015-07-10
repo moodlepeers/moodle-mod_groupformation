@@ -710,16 +710,37 @@ class mod_groupformation_storage_manager {
 		
 		if (($start == 0) && ($end == 0)) {
 			return true;
-		} elseif (($start == 0) && ($now <= $end)) {
+		} elseif (($start == 0) && ($now < $end)) {
 			return true;
 		} elseif (($now >= $start) && ($end == 0)) {
 			return true;
-		} elseif (($now >= $start) && ($now <= $end)) {
+		} elseif (($now >= $start) && ($now < $end)) {
 			return true;
 		}
 		
 		return false;
 	}
+
+    public function closeQuestionnaire() {
+        global $DB;
+
+        $data = new stdClass ();
+        $data->id = $this->groupformationid;
+        $data->timeclose = time ();
+
+        $DB->update_record ( 'groupformation', $data );
+    }
+
+    public function openQuestionnaire() {
+        global $DB;
+
+        $data = new stdClass ();
+        $data->id = $this->groupformationid;
+        $data->timeclose = 0;
+        $data->timeopen = time ();
+
+        $DB->update_record ( 'groupformation', $data );
+    }
 	
 	/**
 	 * Returns whether questionaire was completed and send by user or not

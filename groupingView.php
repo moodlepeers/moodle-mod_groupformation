@@ -55,7 +55,7 @@
 
     // Get data for HTML output
     require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/storage_manager.php');
-    require_once(dirname(__FILE__) . '/classes/group_forming/groupingView_Controller.php');
+    require_once(dirname(__FILE__) . '/classes/controller/groupingView_controller.php');
     $store = new mod_groupformation_storage_manager($groupformation->id);
 
     // set data and viewStatus of groupingView, after possible db update

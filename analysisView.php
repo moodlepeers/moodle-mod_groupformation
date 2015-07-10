@@ -83,6 +83,17 @@ if ($groupformation->intro) {
 // ---------------------------------------------
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/job_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/group_forming/grouping_controller.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/controller/analysis_controller.php');
+
+$controller = new mod_groupformation_analysis_controller($groupformation->id );
+
+if($_POST){
+    if(isset($_POST['start_questionnaire'])){
+        $controller->startQuestionnaire();
+    }elseif(isset($_POST['stop_questionnaire'])){
+        $controller->stopQuestionnaire();
+    }
+}
 
 $gc = new mod_groupformation_grouping_controller($groupformation->id);
 
@@ -107,54 +118,22 @@ var_dump($gc->build_participants(array(3))[0]->getCriteria()->size());
 // }
 // -----------------------------------------------
 
-require_once (dirname ( __FILE__ ) . '/classes/group_forming/submit_infos.php');
+/*require_once (dirname ( __FILE__ ) . '/classes/group_forming/submit_infos.php');
 $infos = new mod_groupformation_submit_infos ( $groupformation->id );
-$surveyStatisticNumers = $infos->getInfos ();
+$surveyStatisticNumers = $infos->getInfos ();*/
 
 echo '<div style="color:red;">Diese Seite ist noch in der Entwicklung. Die Inhalte sind ggf. noch rein statisch und haben keinen Effekt oder keine Funktion</div>';
 
-echo '
-				<div class="gf_settings_pad">
-                    <div class="gf_pad_header">Groupformation - ' . $groupformation->name . '
-                    </div>
-                    <div class="gf_pad_content">
-                        <div class="grid">
-                            <div class="col_m_66 bp_align_left-middle">
-                                <span>Die Aktivit&auml;t "Groupformation" l&auml;uft bereits und endet am 00.00.0000 um 0:00 Uhr.</span></br></br>
-                                <span><i>Nach Abauf der Aktivität ist es den Studierenden nicht mehr möglich Fragebögen auszufühlen bzw abzugeben. Die Gruppenbildung kann nach dem Ablauf oder manuellen stoppen der Aktivität erfolgen!</i></span>
-                                <span style="display:none;">Die Aktivit&auml;t "Groupformation" ist f&uuml;r Studierende ab dem 00.00.0000 um 0:00 Uhr verf&uuml;gbar und endet am 00.00.0000 um 0:00 Uhr</span>
-                                <span><i></i></span>
-                            </div>
 
-                            <div class="col_m_33 bp_align_right-middle">
-                                <span class="toolt" tooltip="Aktivit&auml;t stoppen um Gruppen zu bilden" style="margin-right:0.7em;"></span><button class="gf_button gf_button_pill gf_button_small"';
-//
-echo '>Aktivit&auml;t stoppen</button>
-                            </div>
-                        </div>
-                    </div>
+//TODO : form in das template packen?
+echo '<form action="' . htmlspecialchars ( $_SERVER ["PHP_SELF"] ) . '" method="post" autocomplete="off">';
 
-                    <div class="gf_pad_header_small">
-                        Fragebogen Statistik
-                    </div>
-                    <div class="gf_pad_content">
-                        <div class="grid row_highlight">
-                            <div class="col_m_87-5">Es haben <b>' . $surveyStatisticNumers [0] . '</b> Studenten den Fragebogen bearbeitet</div>
-                            <div class="col_m_12-5 bp_align_right-middle"><button class="gf_button gf_button_pill gf_button_tiny">view</button></div>
-                        </div>
-                        <div class="grid row_highlight">
-                            <div class="col_m_87-5">Davon haben <b>' . $surveyStatisticNumers [1] . '</b> ihre Antworten schon fest abgegeben</div>
-                            <div class="col_m_12-5 bp_align_right-middle"><button class="gf_button gf_button_pill gf_button_tiny">view</button></div>
-                        </div>
-                        <div class="grid row_highlight">
-                            <div class="col_m_87-5">Von den fest abgegebenen Antworten sind <b>' . $surveyStatisticNumers [2] . '</b> nicht vollst&auml;ndig</div>
-                            <div class="col_m_12-5 bp_align_right-middle"><button class="gf_button gf_button_pill gf_button_tiny">view</button></div>
-                        </div>
-                        <div class="grid row_highlight">
-                            <div class="col_m_87-5">Generel gibt es <b>' . $surveyStatisticNumers [3] . '</b> vollst&auml;ndig beantwortete Frageb&ouml;gen</div>
-                            <div class="col_m_12-5 bp_align_right-middle"><button class="gf_button gf_button_pill gf_button_tiny">view</button></div>
-                        </div>
-                    </div>
-                </div>';
+echo '<input type="hidden" name="id" value="' . $id . '"/>';
+
+echo $controller->display();
+
+echo '</form>';
+
+
 
 echo $OUTPUT->footer ();

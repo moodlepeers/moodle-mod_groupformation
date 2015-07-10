@@ -4,7 +4,7 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 }
 
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
-require_once ($CFG->dirroot . '/mod/groupformation/classes/group_forming/template_builder.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
 
 class mod_groupformation_groupingView_controller {
@@ -52,7 +52,7 @@ class mod_groupformation_groupingView_controller {
 		$this->groupsAdopted = 0;
 		
 		/* Survey läuft noch */
-		if (!$this->surveyState == 'true' ) {
+        if ($this->surveyState == 'true' ) {
 			$this->viewState = 0;
 		}		/* Survey beendet, aber keine Gruppen generiert */
 		// elseif($this->surveyState == false && !(isset($this->groups) && !empty($this->groups) ))
