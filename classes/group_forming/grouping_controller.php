@@ -63,7 +63,7 @@ class mod_groupformation_grouping_controller{
 		
 		$calculator = new mod_groupformation_criterion_calculator($this->groupformationID);
 		$gradeP = -1;
-		if(count($users)>0){
+		if(count($users)>0 && in_array('knowledge_heterogen', $labels)){
 			$gradeP = $calculator->getGradePosition($users);
 		}
 		
