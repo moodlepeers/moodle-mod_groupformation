@@ -255,11 +255,11 @@ class mod_groupformation_data {
 	// const TOPIC = 0;
 	// const GRADE = 3;
 	private $job_status_options = array (
-			'ready',
-			'waiting',
-			'started',
-			'aborted',
-			'done' 
+			'ready' => '0000',
+			'waiting' => '1000',
+			'started' => '0100',
+			'aborted' => '0010',
+			'done' => '0001' 
 	);
 	public function __construct() {
 	}

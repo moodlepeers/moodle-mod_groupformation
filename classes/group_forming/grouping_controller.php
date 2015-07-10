@@ -58,7 +58,7 @@ class mod_groupformation_grouping_controller{
 		
 		//$this->setNulls($scenario);
 		
-		$labels = $data->getLabelSet($scenario, $groupformationID);
+		$labels = $data->getLabelSet($scenario, $this->groupformationID);
 		$homogen = $data->getHomogenSet($scenario);
 		
 		$calculator = new mod_groupformation_criterion_calculator($this->groupformationID);
