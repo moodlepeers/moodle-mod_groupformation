@@ -58,7 +58,7 @@
 	groupformation_trigger_event($cm, $course, $groupformation, $context);
 
 	// Set PAGE config
-	$PAGE->set_url ( '/mod/groupformation/evaluationView.php', array ('id' => $cm->id, 'do_show' => $do_show ) );
+	$PAGE->set_url ( '/mod/groupformation/evaluation_view.php', array ('id' => $cm->id, 'do_show' => $do_show ) );
 	$PAGE->set_title ( format_string ( $groupformation->name ) );
 	$PAGE->set_heading ( format_string ( $course->fullname ) );
 	

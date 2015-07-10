@@ -161,7 +161,7 @@ class mod_groupformation_info_text {
 			$a->answered = $values ['answered'];
 			if ($values ['questions'] > 0) {
 				echo '<tr><th scope="row" class="questionaire_stats_row"><span>';
-				$url = new moodle_url ( 'answeringView.php', array (
+				$url = new moodle_url ( 'questionaire_view.php', array (
 						'id' => $this->cmid,
 						'category' => $key 
 				) );

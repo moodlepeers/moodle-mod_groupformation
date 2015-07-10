@@ -25,7 +25,7 @@
 	require_once (dirname ( dirname ( dirname ( __FILE__ ) ) ) . '/config.php');
 	require_once (dirname ( __FILE__ ) . '/lib.php');
 	require_once (dirname ( __FILE__ ) . '/locallib.php');
-	require_once (dirname (__FILE__).'/classes/group_forming/groupInfos.php');
+	require_once (dirname (__FILE__).'/classes/group_forming/group_infos.php');
 
 	// Read URL params
 	$id = optional_param ( 'id', 0, PARAM_INT ); // Course Module ID
@@ -60,7 +60,7 @@
 	groupformation_trigger_event($cm, $course, $groupformation, $context);
 
 	// Set PAGE config
-	$PAGE->set_url ( '/mod/groupformation/evaluationView.php', array ('id' => $cm->id, 'do_show' => $do_show ) );
+	$PAGE->set_url ( '/mod/groupformation/group_view.php', array ('id' => $cm->id, 'do_show' => $do_show ) );
 	$PAGE->set_title ( format_string ( $groupformation->name ) );
 	$PAGE->set_heading ( format_string ( $course->fullname ) );
 	
@@ -81,7 +81,7 @@
 	
 	$userid = $USER->id;
 	
-	$groupInfo = new mod_groupformation_groupInfos($groupformation->id);
+	$groupInfo = new mod_groupformation_group_infos($groupformation->id);
 	$groupInfo->render($userid);
 	
 	echo $OUTPUT->footer ();

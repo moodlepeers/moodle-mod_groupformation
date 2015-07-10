@@ -710,34 +710,40 @@ class mod_groupformation_storage_manager {
 		
 		if (($start == 0) && ($end == 0)) {
 			return true;
-		} elseif (($start == 0) && ($now < $end)) {
+		} elseif (($start == 0) && ($now <= $end)) {
 			return true;
 		} elseif (($now >= $start) && ($end == 0)) {
 			return true;
-		} elseif (($now >= $start) && ($now < $end)) {
+		} elseif (($now >= $start) && ($now <= $end)) {
 			return true;
 		}
 		
 		return false;
 	}
 
+	/**
+	 * Sets timestamp in groupformation in order to close/terminate questionaire
+	 */
     public function closeQuestionnaire() {
         global $DB;
 
         $data = new stdClass ();
         $data->id = $this->groupformationid;
-        $data->timeclose = time ();
+        $data->timeclose = time ()-0;
 
         $DB->update_record ( 'groupformation', $data );
     }
 
+    /**
+     * Sets timestamp in groupformation in order to open/begin questionaire
+     */
     public function openQuestionnaire() {
         global $DB;
 
         $data = new stdClass ();
         $data->id = $this->groupformationid;
         $data->timeclose = 0;
-        $data->timeopen = time ();
+        $data->timeopen = time ()-1;
 
         $DB->update_record ( 'groupformation', $data );
     }

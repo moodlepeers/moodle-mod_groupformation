@@ -81,7 +81,7 @@
   			
   			if($_POST["questions"] == 1 && !$back){
   			
-  				$returnurl = new moodle_url('/mod/groupformation/answeringView.php', array('id' => $id));
+  				$returnurl = new moodle_url('/mod/groupformation/questionaire_view.php', array('id' => $id));
   			
   				redirect($returnurl);
   			}

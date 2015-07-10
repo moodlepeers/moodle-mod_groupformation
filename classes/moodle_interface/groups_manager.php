@@ -168,16 +168,10 @@ class mod_groupformation_groups_manager {
 	 */
 	public function hasGroup($userid, $moodlegroup = false) {
 		global $DB;
-		if ($moodlegroup)
-			$count = $DB->count_records ( 'groupformation_groups', array (
-				'groupformation' => $this->groupformationid,
-				'userid' => $userid, 'created' => 1
-			) );
-		else
-			$count = $DB->count_records ( 'groupformation_groups', array (
+		$count = $DB->count_records ( 'groupformation_group_users', array (
 					'groupformation' => $this->groupformationid,
 					'userid' => $userid
-			) );
+		) );
 		return ($count == 1);
 	}
 	

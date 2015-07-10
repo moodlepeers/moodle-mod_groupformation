@@ -78,7 +78,7 @@
 	$number = $store->getNumber($category);
 	
 	// Set PAGE config
-	$PAGE->set_url('/mod/groupformation/answeringView.php', array('id' => $cm->id));
+	$PAGE->set_url('/mod/groupformation/questionaire_view.php', array('id' => $cm->id));
 	$PAGE->set_title(format_string($groupformation->name));
 	$PAGE->set_heading(format_string($course->fullname));
 

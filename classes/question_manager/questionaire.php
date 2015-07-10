@@ -104,7 +104,7 @@ class mod_groupformation_questionaire {
 		$stats = $store->getStats($this->userid);
 		$prev_complete = true;
 		foreach ( $categories as $category ) {
-			$url = new moodle_url ( 'answeringView.php', array (
+			$url = new moodle_url ( 'questionaire_view.php', array (
 					'id' => $this->cmid,
 					'category' => $category 
 			) );

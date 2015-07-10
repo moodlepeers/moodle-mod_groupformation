@@ -33,7 +33,7 @@ if (!defined('MOODLE_INTERNAL')) {
 require_once($CFG->dirroot.'/mod/groupformation/classes/moodle_interface/groups_manager.php');
 
 
-class mod_groupformation_groupInfos {
+class mod_groupformation_group_infos {
 
 	private $store;
 	private $groupformationid;
@@ -74,7 +74,7 @@ class mod_groupformation_groupInfos {
 				echo $member->firstname . ' ' . $member->lastname;
 			}
 		}else{
-			echo '<h1> Die Gruppenbildung ist noch nicht abgeschlossen </h1>';
+			echo '<h3> Die Gruppenbildung ist noch nicht abgeschlossen </h>';
 		}
 	}
 }
