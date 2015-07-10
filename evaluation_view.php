@@ -45,7 +45,7 @@
 	$userid = $USER->id;
 	
 	if (has_capability('mod/groupformation:editsettings', $context)){
-		$returnurl = new moodle_url('/mod/groupformation/analysisView.php', array('id' => $id, 'do_show' => 'analysis'));
+		$returnurl = new moodle_url('/mod/groupformation/analysis_view.php', array('id' => $id, 'do_show' => 'analysis'));
 		redirect($returnurl);
 	}else{
 		$current_tab = $do_show;

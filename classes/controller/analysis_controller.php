@@ -8,7 +8,7 @@
 
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
-require_once ($CFG->dirroot . '/mod/groupformation/classes/group_forming/submit_infos.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/submit_infos.php');
 
 
 

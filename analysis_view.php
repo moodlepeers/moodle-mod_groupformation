@@ -60,7 +60,7 @@ groupformation_log ( $USER->id, $groupformation->id, '<view_teacher_overview>' )
 // groupformation_trigger_event($cm, $course, $groupformation, $context);
 
 // Set PAGE config
-$PAGE->set_url ( '/mod/groupformation/analysisView.php', array (
+$PAGE->set_url ( '/mod/groupformation/analysis_view.php', array (
 		'id' => $cm->id,
 		'do_show' => $do_show 
 ) );
@@ -82,8 +82,9 @@ if ($groupformation->intro) {
 
 // ---------------------------------------------
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/job_manager.php');
-require_once ($CFG->dirroot . '/mod/groupformation/classes/group_forming/grouping_controller.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/controller/analysis_controller.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_parser.php');
+
 
 $controller = new mod_groupformation_analysis_controller($groupformation->id );
 
@@ -95,9 +96,9 @@ if($_POST){
     }
 }
 
-$gc = new mod_groupformation_grouping_controller($groupformation->id);
+$pp = new mod_groupformation_participant_parser($groupformation->id);
 
-var_dump($gc->build_participants(array(3))[0]->getCriteria()->size());
+var_dump($pp->build_participants(array(3))[0]->getCriteria()->size());
 
 // $jm = new mod_groupformation_job_manager ();
 
@@ -118,7 +119,7 @@ var_dump($gc->build_participants(array(3))[0]->getCriteria()->size());
 // }
 // -----------------------------------------------
 
-/*require_once (dirname ( __FILE__ ) . '/classes/group_forming/submit_infos.php');
+/*require_once (dirname ( __FILE__ ) . '/classes/grouping/submit_infos.php');
 $infos = new mod_groupformation_submit_infos ( $groupformation->id );
 $surveyStatisticNumers = $infos->getInfos ();*/
 

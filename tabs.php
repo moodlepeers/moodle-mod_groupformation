@@ -48,7 +48,7 @@ if (! isset ( $current_tab )) {
 
 if (has_capability ( 'mod/groupformation:editsettings', $context )) {
 	
-	$analyseurl = new moodle_url ( '/mod/groupformation/analysisView.php', array (
+	$analyseurl = new moodle_url ( '/mod/groupformation/analysis_view.php', array (
 			'id' => $usedid,
 			'do_show' => 'analysis' 
 	) );

@@ -15,79 +15,113 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
 /**
- * Prints a particular instance of groupformation
+ *
  *
  * @package mod_groupformation
- * @author  Nora Wester
+ * @author Nora Wester
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-if (!defined('MOODLE_INTERNAL')) {
-	die('Direct access to this script is forbidden.');    ///  It must be included from a Moodle page
-}
+require_once($CFG->dirroot.'/lib/groupal/classes/Criteria/SpecificCriterion.php');
+require_once($CFG->dirroot.'/lib/groupal/classes/Participant.php');
+require_once($CFG->dirroot.'/mod/groupformation/classes/grouping/criterion_calculator.php');
 
-require_once(dirname(__FILE__).'/userid_filter.php');
-require_once(dirname(__FILE__).'/criterion_calculator.php');
-require_once(dirname(__FILE__).'/participant_parser.php');
-require_once($CFG->dirroot.'/mod/groupformation/classes/util/define_file.php');
-require_once($CFG->dirroot.'/mod/groupformation/classes/moodle_interface/storage_manager.php');
 
-class mod_groupformation_grouping_controller{	
+class mod_groupformation_participant_parser {
 	
 	private $groupformationID;
-	private $store;
 	
 	public function __construct($groupformationID){
 		$this->groupformationID = $groupformationID;
-		$this->store = new mod_groupformation_storage_manager($groupformationID);
 	}
 	
 	/**
-	 * Builds Participants array using a parser (at the end)
+	 * Parses infos to Participants
 	 * 
+	 * @param unknown $users
+	 * @param unknown $labels
+	 * @param unknown $groupsize
+	 * @return multitype:Participant
+	 */
+	private function parse($users, $labels){
+		$participants = array();
+		
+		foreach($users as $user){
+			$position = 0;
+			$participant = null;
+			foreach($labels as $label){
+				$value = $user->$label;
+				$count = count($value);
+				$homogen = $value[$count-1];
+				// an letzter Stelle im Array wird übergeben, ob es homogen ist
+				unset($value[$count-1]);
+				$criterion = new SpecificCriterion($label, $value, 0.0, 1.0, $homogen, 1.0);
+// 				$criterion = new Criterion();
+// 				$criterion->setName($label);
+// 				$criterion->setValues($user->$label);
+// 				$criterion->setIsHomogeneous($user->homogen);
+				if($position == 0){
+					$participant = new Participant(array($criterion), $user->id);
+				}else{
+					$participant->addCriteria($criterion);
+				}
+				$position++;
+			}
+			
+			$participants[] = $participant;
+		}
+		
+		return $participants;
+	}
+
+	/**
+	 * Builds Participants array using a parser (at the end)
+	 *
 	 * @param unknown $users
 	 * @return multitype:Participant
 	 */
+	
 	public function build_participants($users){
+		$groupformationid = $this->groupformationID;
 		
-		$scenario = $this->store->getScenario();
+		$store = new mod_groupformation_storage_manager($groupformationid);
 		
-// 		self::handle_complete_questionaires($this->groupformationID);
-		
+		$scenario = $store->getScenario();
+	
+		// 		self::handle_complete_questionaires($groupformationid);
+	
 		$data = new mod_groupformation_data();
 		
-		//$this->setNulls($scenario);
-		
-		$labels = $data->getLabelSet($scenario, $this->groupformationID);
+		$labels = $data->getLabelSet($scenario, $groupformationid);
 		$homogen = $data->getHomogenSet($scenario);
-		
-		$calculator = new mod_groupformation_criterion_calculator($this->groupformationID);
+	
+		$calculator = new mod_groupformation_criterion_calculator($groupformationid);
 		$gradeP = -1;
 		if(count($users)>0 && in_array('knowledge_heterogen', $labels)){
 			$gradeP = $calculator->getGradePosition($users);
 		}
-		
+	
 		$array = array();
-		
+	
 		//hier werden die einzelnen Extralabels gebildet und dann in diese array gespeichert
 		$totalLabel = array();
 		$userPosition = 0;
 		foreach($users as $user){
 			$object = new stdClass();
 			$object->id = $user;
-			
+	
 			$big5 = array();
 			if($scenario != 3){
 				$big5 = $calculator->getBig5($user);
 			}
-		
+	
 			$labelPosition = 0;
 			foreach($labels as $label){
 				if($label != ""){
 					$value = array();
-// 					if($label == 'userid'){
-// 						$value[] = $user;
-// 					}
+					// 					if($label == 'userid'){
+					// 						$value[] = $user;
+					// 					}
 					if($label == 'lang'){
 						$value[] = $data->getLangNumber($calculator->getLang($user));
 						$value[] = $homogen[$label];
@@ -106,7 +140,7 @@ class mod_groupformation_grouping_controller{
 						if($userPosition == 0){
 							$totalLabel[] = $label;
 						}
-						
+	
 					}
 					if($label == 'knowledge_homogen'){
 						$value[] = $calculator->knowledgeAverage($user);
@@ -116,13 +150,13 @@ class mod_groupformation_grouping_controller{
 							$totalLabel[] = $label;
 						}
 					}
-					// TODO @Nora - Ich hab bei Bewertungsmethode nach "Just Pass" gearbeitet, 
-					// sprich die Fragebogenseite "Grade" wird nicht angezeigt, 
+					// TODO @Nora - Ich hab bei Bewertungsmethode nach "Just Pass" gearbeitet,
+					// sprich die Fragebogenseite "Grade" wird nicht angezeigt,
 					// keine Antwort vom Studenten gespeichert und somit hier keine Antwort gefunden!
-					// Bitte eine Abstraktion von getLabelSet und getHomogenSet in store bauen, 
+					// Bitte eine Abstraktion von getLabelSet und getHomogenSet in store bauen,
 					// die die Fälle von grade, points, just pass, no method löst
 					// Wegen der Abstraktion gehören solche Methoden meiner Meinung nach nicht in Data
-					
+	
 					if($label == 'grade'){
 						if($gradeP != -1){
 							$value[] = $calculator->getGrade($gradeP, $user);
@@ -131,7 +165,7 @@ class mod_groupformation_grouping_controller{
 							if($userPosition == 0){
 								$totalLabel[] = $label;
 							}
-						}	
+						}
 					}
 					if($label == 'big5_heterogen'){
 						$bigTemp = $big5[0];
@@ -152,7 +186,7 @@ class mod_groupformation_grouping_controller{
 					}
 					if($label == 'big5_homogen'){
 						$bigTemp = $big5[1];
-						
+	
 						$l = $data->getExtraLabel($label);
 						$p = 0;
 						$h = $homogen[$label];
@@ -184,7 +218,7 @@ class mod_groupformation_grouping_controller{
 							$object->$name = $value;
 							$p++;
 						}
-						
+	
 					}
 					if($label == 'learning'){
 						$learnTemp = $calculator->getLearn($user);
@@ -211,18 +245,17 @@ class mod_groupformation_grouping_controller{
 							$totalLabel[] = $label;
 						}
 					}
-					
-// 					$object->$label = $value;
-// 					$object->homogen = $homogen[$labelPosition];
-				} 
-				
+	
+					// 					$object->$label = $value;
+					// 					$object->homogen = $homogen[$labelPosition];
+				}
+	
 				$labelPosition++;
 			}
 			$array[] = $object;
 			$userPosition++;
 		}
-		
-		return mod_groupformation_participant_parser::parse($array, $totalLabel);
-	}
 	
+		return $this->parse($array, $totalLabel);
+	}
 }

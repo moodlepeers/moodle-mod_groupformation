@@ -7,7 +7,7 @@ require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/stor
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
 
-class mod_groupformation_groupingView_controller {
+class mod_groupformation_grouping_controller {
 	
 	private $groupformationID;
 	
