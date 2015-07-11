@@ -581,37 +581,37 @@ function groupformation_set_fields(stdClass $groupformation) {
 	
 	return $groupformation;
 }
+
+// $init gibt an, ob der Aufruf von einem erstellen iner Instanz oder von einem editieren der Instanz kommt
 function groupformation_save_more_infos($groupformation, $init) {
 	
 // speicher mir zusï¿½tzliche Daten ab
 	$store = new mod_groupformation_storage_manager ( $groupformation->id );
 	$data = new mod_groupformation_data();
 	
+	//Vorwissen ind Arrayform
 	$knowledgearray = array ();
 	if ($groupformation->knowledge != 0) {
 		$knowledgearray = explode ( "\n", $groupformation->knowledgelines );
 	}
 	
+	//Topics in Arrayform
 	$topicsarray = array ();
 	if ($groupformation->topics != 0) {
 		$topicsarray = explode ( "\n", $groupformation->topiclines );
 	}
 	
-// 	$names = array (
-// 			'general',
-// 			'grade',
-// 			'team',
-// 			'character',
-// 			'learning',
-// 			'motivation' 
-// 	);
+
 	$names = $data->getCategorySet($groupformation->szenario);
 	
+	// Änderungen an den Katalogfragen werden erst beim Erstellen einer Instanz übernommen
 	if ($init) {
 		
 		$xmlLoader = new mod_groupformation_xml_loader ();
 		$xmlLoader->setStore ( $store );
 		
+		//wenn die Datenbank noch komplet leer ist, speicher einfach alle Infos aus den xml's ab
+		// ansonsten überprüfe zu jeder Kategorie die VErsionsnummer und ändere bei bedarf
 		if ($store->catalogTableNotSet ()) {
 			
 			foreach ( $names as $category ) {
@@ -635,6 +635,7 @@ function groupformation_save_more_infos($groupformation, $init) {
 		}
 	}
 	
+	// wenn noch nichts beantwortet ist, speicher die neuen informationen für Vorwissen und Topics
 	if ($store->generalAnswerNotExist ()) {
 		$store->add_setting_question ( $knowledgearray, $topicsarray, $init );
 	}
