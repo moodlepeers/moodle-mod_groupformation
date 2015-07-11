@@ -6,6 +6,7 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/userid_filter.php');
 
 class mod_groupformation_grouping_controller {
 	
@@ -79,7 +80,7 @@ class mod_groupformation_grouping_controller {
 	 */
 	public function start() {
 		$this->handle_complete_questionaires();
-		mod_groupformation_job_manager::set_job($this->job,"waiting");
+		mod_groupformation_job_manager::set_job($this->job,"waiting",true);
 		$this->determineStatus();
 	}
 	

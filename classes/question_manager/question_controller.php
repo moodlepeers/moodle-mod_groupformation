@@ -301,7 +301,6 @@
 					
 				}else{
 					$positionAnswer = 0;
-					
 					for($i = 1; $i <= $this->numbers[$this->currentCategoryPosition]; $i++){
 						$array = $this->store->getCatalogQuestion($i, $this->names[$this->currentCategoryPosition], $this->lang);
 						$question = array();

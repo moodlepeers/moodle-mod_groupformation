@@ -418,7 +418,6 @@ class mod_groupformation_storage_manager {
 	 */
 	public function getCatalogQuestion($i, $category = 'general', $lang = 'en') {
 		global $DB;
-		
 		$table = "groupformation_" . $category;
 		$return = $DB->get_record ( $table, array (
 				'language' => $lang,

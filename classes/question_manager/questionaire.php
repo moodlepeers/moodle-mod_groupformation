@@ -22,8 +22,6 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// TODO @EG hier ist Jquery eingebunden worden ohne Fehler!
-// groupformation_add_jquery($PAGE);
 require_once (dirname ( __FILE__ ) . '/question_controller.php');
 require_once (dirname ( __FILE__ ) . '/RadioInput.php');
 require_once (dirname ( __FILE__ ) . '/TopicsTable.php');

@@ -98,16 +98,16 @@ if($_POST){
 
 $pp = new mod_groupformation_participant_parser($groupformation->id);
 
-var_dump($pp->build_participants(array(3))[0]->getCriteria()->size());
+// var_dump($pp->build_participants(array(3))[0]->getCriteria());
 
-// $jm = new mod_groupformation_job_manager ();
+$jm = new mod_groupformation_job_manager ();
 
-// $job = $jm::get_next_job ();
+$job = $jm::get_next_job ();
 
-// if (! is_null ( $job )) {
-// 	var_dump ( $job );
+if (! is_null ( $job )) {
+	var_dump ( $job->groupformationid);
 	
-// // 	var_dump ( $jm::is_job_aborted ( $job ) );
+// 	var_dump ( $jm::is_job_aborted ( $job ) );
 	
 // 	$result = $jm::do_groupal ( $job );
 	
@@ -115,8 +115,8 @@ var_dump($pp->build_participants(array(3))[0]->getCriteria()->size());
 	
 // 	var_dump ( $jm::save_result ( $job, $result ) );
 	
-// // 	var_dump ( $jm::get_status ( $job ) );
-// }
+// 	var_dump ( $jm::get_status ( $job ) );
+}
 // -----------------------------------------------
 
 /*require_once (dirname ( __FILE__ ) . '/classes/grouping/submit_infos.php');

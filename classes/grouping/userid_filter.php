@@ -65,7 +65,7 @@
 		foreach($this->totalUserIds as $user){
 			$number = $this->store->answerNumberForUser($user);
 			if($this->total == $number){
-				$completed[] = $user;
+				$completed[] = intval($user);
 			}
 		}
 		
@@ -75,11 +75,10 @@
 	public function getNoneCompletedIds(){
 		
 		$noneCompleted = array();
-		//var_dump($this->totalUserIds);
 		foreach($this->totalUserIds as $user){
 			$number = $this->store->answerNumberForUser($user);
 			if($this->total != $number){
-				$noneCompleted[] = $user;
+				$noneCompleted[] = intval($user);
 			}
 		}
 		
