@@ -1,5 +1,715 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION VERSION="200701" COMMENT="">
-     <QUESTIONS VERSION="1">			
-	 </QUESTIONS>
+     <QUESTIONS VERSION="2">			
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Im Studium geht es mir darum, neue Ideen zu bekommen.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[stimmt gar nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[stimmt eher nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[weder/noch]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt eher]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt genau]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Im Studium geht es mir darum, zu zeigen, dass ich bei einer Sache gut bin.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[stimmt gar nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[stimmt eher nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[weder/noch]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt eher]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt genau]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Im Studium geht es mir darum, dass andere Studierende nicht denken, ich sei dumm.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[stimmt gar nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[stimmt eher nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[weder/noch]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt eher]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt genau]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Im Studium geht es mir darum, keine schwierigen Prüfungen oder Klausuren zu haben.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[stimmt gar nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[stimmt eher nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[weder/noch]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt eher]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt genau]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Im Studium geht es mir darum, etwas Interessantes zu lernen.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[stimmt gar nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[stimmt eher nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[weder/noch]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt eher]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt genau]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Im Studium geht es mir darum, mich nicht zu blamieren (z.B. durch falsche Ergebnisse oder dumme Fragen).]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[stimmt gar nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[stimmt eher nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[weder/noch]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt eher]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt genau]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Im Studium geht es mir darum, zu Hause keine Arbeiten erledigen zu müssen.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[stimmt gar nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[stimmt eher nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[weder/noch]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt eher]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt genau]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Im Studium geht es mir darum, später knifflige Probleme lösen zu können.]]>
+               </QUESTIONTEXT>
+             <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[stimmt gar nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[stimmt eher nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[weder/noch]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt eher]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt genau]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Im Studium geht es mir darum, Arbeiten besser zu schaffen als andere.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[stimmt gar nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[stimmt eher nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[weder/noch]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt eher]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt genau]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Im Studium geht es mir darum, dass niemand merkt, wenn ich etwas nicht verstehe.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[stimmt gar nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[stimmt eher nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[weder/noch]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt eher]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt genau]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Im Studium geht es mir darum, keine schwierigen Fragen oder Aufgaben lösen zu müssen.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[stimmt gar nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[stimmt eher nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[weder/noch]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt eher]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt genau]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+         <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Im Studium geht es mir darum, komplizierte Inhalte zu verstehen.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[stimmt gar nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[stimmt eher nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[weder/noch]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt eher]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt genau]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Im Studium geht es mir darum, bessere Noten oder Beurteilungen zu bekommen als andere.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[stimmt gar nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[stimmt eher nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[weder/noch]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt eher]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt genau]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Im Studium geht es mir darum, dass niemand denkt, ich sei weniger schlau als andere.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[stimmt gar nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[stimmt eher nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[weder/noch]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt eher]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt genau]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Im Studium geht es mir darum, nicht so schwer zu arbeiten.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[stimmt gar nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[stimmt eher nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[weder/noch]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt eher]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt genau]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Im Studium geht es mir darum, dass das Gelernte für mich Sinn ergibt.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[stimmt gar nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[stimmt eher nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[weder/noch]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt eher]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt genau]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Im Studium geht es mir darum, dass andere denken, dass ich klug bin.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[stimmt gar nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[stimmt eher nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[weder/noch]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt eher]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt genau]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Im Studium geht es mir darum, zu verbergen, wenn ich weniger weiß als andere.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[stimmt gar nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[stimmt eher nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[weder/noch]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt eher]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt genau]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Im Studium geht es mir darum, dass die Arbeit leicht ist.]]>
+               </QUESTIONTEXT>
+             <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[stimmt gar nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[stimmt eher nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[weder/noch]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt eher]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt genau]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Im Studium geht es mir darum, zum Nachdenken angeregt zu werden.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[stimmt gar nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[stimmt eher nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[weder/noch]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt eher]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt genau]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Im Studium geht es mir darum, zu zeigen, dass ich die Inhalte beherrsche.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[stimmt gar nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[stimmt eher nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[weder/noch]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt eher]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt genau]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Im Studium geht es mir darum, keine falschen Antworten auf Fragen der Dozenten zu geben.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[stimmt gar nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[stimmt eher nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[weder/noch]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt eher]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt genau]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+         <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Im Studium geht es mir darum, aufwendige Aufgaben nicht selber erledigen zu müssen.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[stimmt gar nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[stimmt eher nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[weder/noch]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt eher]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt genau]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Im Studium geht es mir darum, so viel wie möglich zu lernen.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[stimmt gar nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[stimmt eher nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[weder/noch]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt eher]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt genau]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Im Studium geht es mir darum, das was ich kann und weiß auch zu zeigen.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[stimmt gar nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[stimmt eher nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[weder/noch]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt eher]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt genau]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Im Studium geht es mir darum, nicht durch dumme Fragen aufzufallen.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[stimmt gar nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[stimmt eher nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[weder/noch]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt eher]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt genau]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Im Studium geht es mir darum, mit wenig Arbeit durchs Studium zu kommen.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[stimmt gar nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[stimmt eher nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[weder/noch]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt eher]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt genau]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Im Studium geht es mir darum, ein tiefes Verständnis für die Inhalte zu erwerben.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[stimmt gar nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[stimmt eher nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[weder/noch]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt eher]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt genau]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Im Studium geht es mir darum, dass die anderen merken, wenn ich in Tests und Prüfungen gut abschneide.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[stimmt gar nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[stimmt eher nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[weder/noch]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt eher]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt genau]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Im Studium geht es mir darum, nicht zu zeigen, wenn mir eine aufgabe schwerer fällt als den anderen.]]>
+               </QUESTIONTEXT>
+             <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[stimmt gar nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[stimmt eher nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[weder/noch]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt eher]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt genau]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Im Studium geht es mir darum, den Arbeitsaufwand stets gering zu haben.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[stimmt gar nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[stimmt eher nicht]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[weder/noch]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt eher]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[stimmt genau]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+	</QUESTIONS>
 </GROUPFORMATION>
