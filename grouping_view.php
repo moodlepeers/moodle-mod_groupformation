@@ -25,8 +25,7 @@
 	require_once (dirname ( dirname ( dirname ( __FILE__ ) ) ) . '/config.php');
 	require_once (dirname ( __FILE__ ) . '/lib.php');
 	require_once (dirname ( __FILE__ ) . '/locallib.php');
-	require_once ($CFG->dirroot . '/mod/groupformation/classes/group_forming/grouping_controller.php');
-	//require_once (dirname(__FILE__).'/classes/group_forming/group_generator.php');
+	//require_once (dirname(__FILE__).'/classes/grouping/group_generator.php');
 	
 	// Read URL params
 	$id = optional_param ( 'id', 0, PARAM_INT ); // Course Module ID
@@ -55,11 +54,11 @@
 
     // Get data for HTML output
     require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/storage_manager.php');
-    require_once(dirname(__FILE__) . '/classes/controller/groupingView_controller.php');
+    require_once(dirname(__FILE__) . '/classes/controller/grouping_controller.php');
     $store = new mod_groupformation_storage_manager($groupformation->id);
 
     // set data and viewStatus of groupingView, after possible db update
-    $controller = new mod_groupformation_groupingView_controller($groupformation->id);
+    $controller = new mod_groupformation_grouping_controller($groupformation->id);
 
 
     //TODO @Rene: hier die Methoden aufrufen um gruppenbildung zu steuern
@@ -104,7 +103,7 @@
 	// Replace the following lines with you own code.
 	//echo $OUTPUT->heading ( $groupformation->name );
 	
-	require_once (dirname ( __FILE__ ) . '/classes/group_forming/submit_infos.php');
+	require_once (dirname ( __FILE__ ) . '/classes/grouping/submit_infos.php');
 	$infos = new mod_groupformation_submit_infos ( $groupformation->id );
 	$surveyStatisticNumers = $infos->getInfos ();
 	

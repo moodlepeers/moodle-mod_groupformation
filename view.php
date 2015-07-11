@@ -27,7 +27,6 @@
 	require_once(dirname(__FILE__).'/locallib.php');
 	require_once(dirname(__FILE__).'/classes/moodle_interface/storage_manager.php');
 	require_once(dirname(__FILE__).'/classes/question_manager/info_text.php');
-	require_once(dirname(__FILE__).'/classes/group_forming/grouping_controller.php');
 
 	// Read URL params
 	$id = optional_param('id', 0, PARAM_INT);   // Course Module ID
@@ -49,7 +48,7 @@
 	$userid = $USER->id;
 	
 	if (has_capability('mod/groupformation:editsettings', $context)){
-		$returnurl = new moodle_url('/mod/groupformation/analysisView.php', array('id' => $id, 'do_show' => 'analysis'));
+		$returnurl = new moodle_url('/mod/groupformation/analysis_view.php', array('id' => $id, 'do_show' => 'analysis'));
 		redirect($returnurl);
 	}else{
 		$current_tab = $do_show;

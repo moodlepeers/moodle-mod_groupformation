@@ -729,7 +729,7 @@ class mod_groupformation_storage_manager {
 
         $data = new stdClass ();
         $data->id = $this->groupformationid;
-        $data->timeclose = time ()-0;
+        $data->timeclose = time ()-1;
 
         $DB->update_record ( 'groupformation', $data );
     }
