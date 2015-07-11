@@ -59,6 +59,7 @@ class mod_groupformation_util {
 		$this->names = $data->getCriterionSet($this->scenario, $groupformationid);
 	}
 	
+	// gibt an, wieveiel Fragen der ganze (momentane) Fragebogen besitzt
 	public function getTotalNumber(){
 		$number = 0;
 		$this->numbers = $this->store->getNumbers($this->names);
@@ -70,6 +71,7 @@ class mod_groupformation_util {
 		return $number;
 	}
 	
+	// gibt die Position einer Kategorie zurück
 	private function getPosition($category){
 		//$position = -1;
 		for($i = 0; $i<count($this->names); $i++){
@@ -79,23 +81,5 @@ class mod_groupformation_util {
 		}	
 	}
 	
-	private function setNulls(){
-		if($this->scenario == 'project' || $this->scenario == 1){
-			$this->numbers[$this->store->getPosition('learning')] = 0;
-		}
-	
-		if($this->scenario == 'homework' || $this->scenario == 2){
-			$this->numbers[$this->store->getPosition('motivation')] = 0;
-		}
-			
-		if($this->scenario == 'presentation' || $this->scenario == 3){
-			for($i = 0; $i < count($this->numbers); $i++){
-				if($i != $this->store->getPosition('topic') && $i != $this->store->getPosition('general')){
-					$this->numbers[$i] = 0;
-				}
-			}
-		}
-
-	}
 	
 }

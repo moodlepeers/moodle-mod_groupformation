@@ -39,11 +39,14 @@
 				
 		}
 		
+		// damit die Klasse die groupformationId nicht wissen muss, übergebe den kompletten storage_manager wenn du mir den Fragenkatalogen arbeitest
 		public function setStore(mod_groupformation_storage_manager $store){
 			$this->storeM = $store;
 		}
 		
-		
+		// bereitet das speichern der Daten aus einem bestimmten xml-Satz ( defineirt durch Kategorie ) vor
+		// wenn schon etwas in der Datenbank zu dieser Kategorie enthalten ist, lösche alle Einträge
+		// ansonsten speicher die Daten für englisch und deutsch und gebe die jeweiligen Versionsnummern und Fragenanzahl als array in einem array zurück  
 		public function saveData($category){
 			$array = array();
 			$init = $this->storeM->catalogTableNotSet($category);
@@ -73,9 +76,11 @@
 				}else{
 					$array = $this->saveData($category);
 					$number = $array[0][1];
+					// falls in der englischen Datei nichts drin ist, nehme die Fragenanzahl der deutschen Datei
 					if($array[1][1] > $number){
 						$number = $array[1][1];
 					}
+					// speicher die Versionsnummer
 					$this->storeM->add_catalog_version($category, $number, $version, FALSE);
 				}
 			}else{
@@ -117,6 +122,7 @@
 							'position' => $numbers
 					);
 
+					//speichert die Fragen in der Datenbank ab
 					$this->storeM->add_catalog_question($array, $lang, $category);
 				}
 				
@@ -129,6 +135,7 @@
 			
 		}
 		
+		// wandle den xml String aus der Datenbank (Feld options) in ein array
 		public function xmlToArray($xmlContent){
 			//var_dump($xmlContent);
 			//$xml = simplexml_load_file($xmlContent);
