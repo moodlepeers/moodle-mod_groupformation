@@ -87,6 +87,23 @@ class mod_groupformation_groups_manager {
 	}
 	
 	/**
+	 * Returns whether groups are created in moodle or not
+	 * 
+	 * @param unknown $groupformationID
+	 */
+	public function groupsCreated($groupformationID){
+		global $DB;
+		$records = $DB->get_records('groupformation_groups',array('groupformation'=>$this->groupformationid));
+		
+		foreach($records as $key=>$record){
+			if ($record->created == 1)
+				return true;
+		}
+		
+		return false;
+	}
+	
+	/**
 	 * Resets moodle groupids
 	 * 
 	 * @param unknown $moodlegroupid

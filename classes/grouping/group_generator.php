@@ -48,6 +48,9 @@ class mod_groupformation_group_generator {
 		$groups_store = new mod_groupformation_groups_manager ( $groupformationID );
 		$groupal_groups = $groups_store->getGeneratedGroups();
 		
+		if ($groups_store->groupsCreated($groupformationID))
+			return false;
+		
 		$position = 0;
 		$created_moodle_groups = array ();
 		
