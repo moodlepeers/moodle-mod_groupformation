@@ -109,11 +109,11 @@ if (! is_null ( $job )) {
 	
 // 	var_dump ( $jm::is_job_aborted ( $job ) );
 	
-	$result = $jm::do_groupal ( $job );
+// 	$result = $jm::do_groupal ( $job );
 	
 // 	var_dump ( $result );
 	
-	var_dump ( $jm::save_result ( $job, $result ) );
+// 	var_dump ( $jm::save_result ( $job, $result ) );
 	
 // 	var_dump ( $jm::get_status ( $job ) );
 }
