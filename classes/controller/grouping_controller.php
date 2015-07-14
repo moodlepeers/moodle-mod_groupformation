@@ -7,6 +7,7 @@ require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/stor
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/userid_filter.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/group_generator.php');
 
 class mod_groupformation_grouping_controller {
 	
@@ -72,6 +73,12 @@ class mod_groupformation_grouping_controller {
 			$this->viewState = 4;
 		} // Moodlegroups are created
 		else {
+			// TODO @Eduard
+			// Was passiert mit den Buttons wenn Gruppen erzeugt wurden?
+			// Eigentlich müssen die dann alle ausgegraut werden, da Gruppen löschen nicht die Moodlegruppen meint oder?
+			// Außerdem muss in der View kenntlich gemacht werden, dass diese Gruppen in Moodle erzeugt wurden 
+			// (Roter Hinweistext oder so?)
+			// Derzeit habe ich auf den Button: "Gruppen löschen" auch die Funktion gelegt, dass in Moodle angelegte Gruppen gelöscht werden.
 			$this->viewState = 4;
 		}
 	}
@@ -94,16 +101,15 @@ class mod_groupformation_grouping_controller {
 	/**
 	 */
 	public function adopt() {
-		// mod_groupformation_group_generator::generateMoodleGroups($this->groupformationID);
-		
+		mod_groupformation_group_generator::generateMoodleGroups($this->groupformationID);
 		$this->determineStatus();
 	}
 	
 	/**
 	 */
 	public function delete() {
-		#$this->groups_store->deleteGeneratedGroups($this->groupformationID);
-		mod_groupformation_job_manager::set_job($this->job,"ready");
+		mod_groupformation_job_manager::set_job($this->job,"ready",false, true);
+		$this->groups_store->deleteGeneratedGroups();
 		$this->determineStatus();
 	}
 	
@@ -329,7 +335,7 @@ class mod_groupformation_grouping_controller {
 		$maxSize = $this->store->getGroupSize ();
 		
 		foreach ( $this->groups as $key => $value ) {
-			$usersIDs = $this->store_groups->getUsersForGeneratedGroup ( $key );
+			$usersIDs = $this->groups_store->getUsersForGeneratedGroup ( $key );
 			$size = count ( $usersIDs );
 			if ($size < $maxSize) {
 				$a = ( array ) $this->groups [$key];
@@ -356,7 +362,7 @@ class mod_groupformation_grouping_controller {
 				$generatedGroupsView->assign ( $key, array (
 						'groupname' => $value->groupname,
 						'groupquallity' => '0.74',
-						'grouplink' => $this->linkToGoup ( $key ),
+						'grouplink' => $this->linktToGroup ( $key ),
 						'group_members' => $this->getGroupMembers ( $key ) 
 				) );
 			}
@@ -398,7 +404,7 @@ class mod_groupformation_grouping_controller {
 	 *        	$groupID
 	 * @return array
 	 */
-	private function linkToGoup($groupID) {
+	private function linktToGroup($groupID) {
 		$link = array ();
 		if ($this->viewState == 4) {
 			// generate link, button enabled

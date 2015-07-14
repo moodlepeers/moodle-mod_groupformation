@@ -27,8 +27,8 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require_once ('../config.php');
-require_once ('lib.php');
+#require_once ('../config.php');
+#require_once ('lib.php');
 // ($CFG->dirroot.'/group/lib.php');
 require_once ($CFG->dirroot . '/group/lib.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
@@ -41,7 +41,11 @@ class mod_groupformation_group_generator {
 	 */
 	public static function generateMoodleGroups($groupformationID) {
 		global $COURSE;
-		$groups_store = new mod_groupformation_groups_manager ( $groupformationid );
+// 		$groupalt = groups_get_group_by_name(2, "test");
+// 		var_dump($groupalt);
+// 		groups_delete_group($groupalt);
+		
+		$groups_store = new mod_groupformation_groups_manager ( $groupformationID );
 		$groupal_groups = $groups_store->getGeneratedGroups();
 		
 		$position = 0;
@@ -70,13 +74,14 @@ class mod_groupformation_group_generator {
 			$new_moodlegroup = new stdClass ();
 			$new_moodlegroup->courseid = $COURSE->id;
 			$new_moodlegroup->name = $parsed_groupname;
+			$new_moodlegroup->timecreated = time ();
 			
 			$moodlegroupid = groups_create_group ( $new_moodlegroup );
 			
 			$created_moodle_groups [] = $moodlegroupid;
 			// put user into group
 			foreach ( $groupal_users as $user ) {
-				groups_add_member ( $moodlegroupid, $user );
+				groups_add_member ( $moodlegroupid, $user->userid );
 			}
 			
 			// TODO @Nora: Erledigt
@@ -94,7 +99,6 @@ class mod_groupformation_group_generator {
 					// TODO @Nora Erledigt
 					$groups_store->deleteMoodleGroupID ( $moodlegroupid );
 				}
-			} else {
 			}
 			
 			// for ($j=0; $j<$userpergrp; $j++) {

@@ -66,7 +66,7 @@ class mod_groupformation_job_manager {
 			if ($job->timecreated != null && ($next == null || $job->timecreated < $next->timecreated))
 				$next = $job;
 		}
-		self::set_job ( $next, "1000");	
+		self::set_job ( $next, "0100", true);	
 		return $next;
 	}
 	
@@ -87,7 +87,7 @@ class mod_groupformation_job_manager {
 	 * @param stdClass $job        	
 	 * @param string $state        	
 	 */
-	public static function set_job($job, $state = "ready", $time = false) {
+	public static function set_job($job, $state = "ready", $settime = false, $resettime = false) {
 		global $DB;
 		$status_options = self::get_status_options ();
 		if (array_key_exists( $state, $status_options ))
@@ -101,8 +101,20 @@ class mod_groupformation_job_manager {
 		$job->aborted = $status [2];
 		$job->done = $status [3];
 		
-		if ($job->waiting == 1 && $time)
+		if ($job->waiting == 1 && $settime)
 			$job->timecreated = time();
+		if ($job->done == 1 && $settime)
+			$job->timefinished = time();
+		if ($job->started == 1 && $settime)
+			$job->timestarted = time();
+		
+		if ($job->waiting == 0 && $resettime)
+			$job->timecreated = 0;
+		if ($job->done == 0 && $resettime)
+			$job->timefinished = 0;
+		if ($job->started == 0 && $resettime)
+			$job->timestarted = 0;
+		
 		return $DB->update_record ( 'groupformation_jobs', $job );
 	}
 	
@@ -140,7 +152,7 @@ class mod_groupformation_job_manager {
 		// get groupformation for this job
 		$store = new mod_groupformation_storage_manager ( $job->groupformationid );
 		
-		$groupsize = intval (1);// $store->getGroupSize () );
+		$groupsize = intval ($store->getGroupSize () );
 		
 		/**
 		 * <Richtige Daten - noch buggy>------------------------
@@ -161,64 +173,64 @@ class mod_groupformation_job_manager {
 		 * <Testdaten>------------------------------------------
 		 */
 		
-// 		// Dummy Criterions
-// 		$c_vorwissen = new SpecificCriterion ( "vorwissen", array (
-// 				0.4,
-// 				0.4,
-// 				0.4,
-// 				0.4,
-// 				0.4,
-// 				0.4,
-// 				0.4,
-// 				0.4 
-// 		), 0, 1, true, 1 );
-// 		$c_note = new SpecificCriterion ( "note", array (
-// 				0.4 
-// 		), 0, 1, true, 1 );
-// 		$c_persoenlichkeit = new SpecificCriterion ( "persoenlichkeit", array (
-// 				0.4,
-// 				0.4,
-// 				0.4,
-// 				0.4,
-// 				0.4 
-// 		), 0, 1, true, 1 );
-// 		$c_motivation = new SpecificCriterion ( "motivation", array (
-// 				0.4,
-// 				0.4,
-// 				0.4,
-// 				0.4 
-// 		), 0, 1, true, 1 );
-// 		$c_lernstil = new SpecificCriterion ( "lernstil", array (
-// 				0.4,
-// 				0.4,
-// 				0.4,
-// 				0.4 
-// 		), 0, 1, true, 1 );
-// 		$c_teamorientierung = new SpecificCriterion ( "teamorientierung", array (
-// 				0.4,
-// 				0.4,
-// 				0.4,
-// 				0.4,
-// 				0.4,
-// 				0.4 
-// 		), 0, 1, true, 1 );
-// 		// Dummy Participants
-// 		$users = array ();
-// 		for($i = 0; $i < 10; $i ++) {
-// 			$users [] = new Participant ( array (
-// 					$c_vorwissen,
-// 					$c_motivation,
-// 					$c_note,
-// 					$c_persoenlichkeit,
-// 					$c_lernstil,
-// 					$c_teamorientierung 
-// 			), $i );
-// 		}
+		// Dummy Criterions
+		$c_vorwissen = new SpecificCriterion ( "vorwissen", array (
+				0.4,
+				0.4,
+				0.4,
+				0.4,
+				0.4,
+				0.4,
+				0.4,
+				0.4 
+		), 0, 1, true, 1 );
+		$c_note = new SpecificCriterion ( "note", array (
+				0.4 
+		), 0, 1, true, 1 );
+		$c_persoenlichkeit = new SpecificCriterion ( "persoenlichkeit", array (
+				0.4,
+				0.4,
+				0.4,
+				0.4,
+				0.4 
+		), 0, 1, true, 1 );
+		$c_motivation = new SpecificCriterion ( "motivation", array (
+				0.4,
+				0.4,
+				0.4,
+				0.4 
+		), 0, 1, true, 1 );
+		$c_lernstil = new SpecificCriterion ( "lernstil", array (
+				0.4,
+				0.4,
+				0.4,
+				0.4 
+		), 0, 1, true, 1 );
+		$c_teamorientierung = new SpecificCriterion ( "teamorientierung", array (
+				0.4,
+				0.4,
+				0.4,
+				0.4,
+				0.4,
+				0.4 
+		), 0, 1, true, 1 );
+		// Dummy Participants
+		$users = array ();
+		for($i = 3; $i < 4; $i ++) {
+			$users [] = new Participant ( array (
+					$c_vorwissen,
+					$c_motivation,
+					$c_note,
+					$c_persoenlichkeit,
+					$c_lernstil,
+					$c_teamorientierung 
+			), $i );
+		}
 		/**
 		 * </Testdaten>-----------------------------------------
 		 */
 		
-		$users = $participants;
+// 		$users = $participants;
 		
 		// Matcher (einer von beiden)
 		// $gcm = new GroupALGroupCentricMatcher();
@@ -249,6 +261,8 @@ class mod_groupformation_job_manager {
 		$idmap = self::create_groups ( $job, $result->groups, $flags );
 		
 		self::assign_users_to_groups ( $job, $result->users, $idmap );
+		
+		self::set_job($job,'done', true);
 		
 		return true;
 	}

@@ -234,6 +234,12 @@ class mod_groupformation_groups_manager {
 	 */
 	public function deleteGeneratedGroups(){
 		global $DB;
+		$records = $DB->get_records('groupformation_groups',array('groupformation'=>$this->groupformationid));
+		
+		foreach($records as $key=>$record){
+			if ($record->created == 1)
+				groups_delete_group($record->moodlegroupid);
+		}
 		$DB->delete_records('groupformation_groups',array('groupformation'=>$this->groupformationid));
 		$DB->delete_records('groupformation_group_users',array('groupformation'=>$this->groupformationid));
 	}
