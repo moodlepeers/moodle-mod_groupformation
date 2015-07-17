@@ -556,7 +556,18 @@ function xmldb_groupformation_upgrade($oldversion) {
 		upgrade_mod_savepoint(true, 2015070600, 'groupformation');
 	}
 	
+	if ($oldversion < 2015071600) {
 	
+		// Changing nullability of field userid on table groupformation_logging to null.
+		$table = new xmldb_table('groupformation_logging');
+		$field = new xmldb_field('userid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null, 'timestamp');
+	
+		// Launch change of nullability for field userid.
+		$dbman->change_field_notnull($table, $field);
+	
+		// Groupformation savepoint reached.
+		upgrade_mod_savepoint(true, 2015071600, 'groupformation');
+	}
 	
 	
 	

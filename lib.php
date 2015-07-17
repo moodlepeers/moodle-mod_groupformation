@@ -283,24 +283,24 @@ function groupformation_print_recent_mod_activity($activity, $courseid, $detail,
  */
 function groupformation_cron() {
 
-	$jobmanager = new mod_groupformation_job_manager();
+// 	$jobmanager = new mod_groupformation_job_manager();
 	
-	$job = $jobmanager->get_next_job();
+// 	$job = $jobmanager->get_next_job();
 	
-	if (is_null($job)){
-		return true;
-	}else{
-		$results = $jobmanager->do_groupal($job);//do_groupal($job);
+// 	if (is_null($job)){
+// 		return true;
+// 	}else{
+// 		$results = $jobmanager->do_groupal($job);//do_groupal($job);
 		
-		if ($jobmanager->is_job_aborted($job)){
-			$result = null;
-			$jobmanager->reset_job($job); //set_job($job,"0000") //auf 0000
-			return true;
-		}else{
-			$jobmanager->save_result($result);
-			$jobmanager->set_job($job,"0001");
-		}
-	}
+// 		if ($jobmanager->is_job_aborted($job)){
+// 			$result = null;
+// 			$jobmanager->reset_job($job); //set_job($job,"0000") //auf 0000
+// 			return true;
+// 		}else{
+// 			$jobmanager->save_result($result);
+// 			$jobmanager->set_job($job,"0001");
+// 		}
+// 	}
 	
 	return true;
 }
@@ -604,14 +604,14 @@ function groupformation_save_more_infos($groupformation, $init) {
 
 	$names = $data->getCategorySet($groupformation->szenario);
 	
-	// Änderungen an den Katalogfragen werden erst beim Erstellen einer Instanz übernommen
+	// ï¿½nderungen an den Katalogfragen werden erst beim Erstellen einer Instanz ï¿½bernommen
 	if ($init) {
 		
 		$xmlLoader = new mod_groupformation_xml_loader ();
 		$xmlLoader->setStore ( $store );
 		
 		//wenn die Datenbank noch komplet leer ist, speicher einfach alle Infos aus den xml's ab
-		// ansonsten überprüfe zu jeder Kategorie die VErsionsnummer und ändere bei bedarf
+		// ansonsten ï¿½berprï¿½fe zu jeder Kategorie die VErsionsnummer und ï¿½ndere bei bedarf
 		if ($store->catalogTableNotSet ()) {
 			
 			foreach ( $names as $category ) {
@@ -635,7 +635,7 @@ function groupformation_save_more_infos($groupformation, $init) {
 		}
 	}
 	
-	// wenn noch nichts beantwortet ist, speicher die neuen informationen für Vorwissen und Topics
+	// wenn noch nichts beantwortet ist, speicher die neuen informationen fï¿½r Vorwissen und Topics
 	if ($store->generalAnswerNotExist ()) {
 		$store->add_setting_question ( $knowledgearray, $topicsarray, $init );
 	}

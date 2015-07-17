@@ -8,9 +8,7 @@ require_once ($CFG->dirroot . '/mod/groupformation/classes/util/template_builder
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/userid_filter.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/group_generator.php');
-
 class mod_groupformation_grouping_controller {
-	
 	private $groupformationID;
 	
 	// state of the controller
@@ -19,7 +17,7 @@ class mod_groupformation_grouping_controller {
 	private $incompleteGroups = array ();
 	private $store = NULL;
 	private $groups_store = NULL;
- 	private $job = NULL;
+	private $job = NULL;
 	private $view = NULL;
 	private $job_status;
 	private $job_status_options;
@@ -28,94 +26,85 @@ class mod_groupformation_grouping_controller {
 	// generierte Gruppen als Moodlegruppen übernommen
 	private $groupsAdopted;
 	private $test;
-	
 	public function __construct($groupformationID) {
 		$this->groupformationID = $groupformationID;
 		$this->store = new mod_groupformation_storage_manager ( $groupformationID );
 		
-		$this->groups_store = new mod_groupformation_groups_manager($groupformationID);
+		$this->groups_store = new mod_groupformation_groups_manager ( $groupformationID );
 		
 		$this->view = new mod_groupformation_template_builder ();
 		
 		$this->groups = $this->groups_store->getGeneratedGroups ();
 		
-		$this->determineStatus();
+		$this->determineStatus ();
 	}
-	
-	public function determineStatus(){
-		$this->surveyState = $this->store->isQuestionaireAvailable ();		
+	public function determineStatus() {
+		$this->surveyState = $this->store->isQuestionaireAvailable ();
 		
 		// status job
 		$this->job_status_options = mod_groupformation_job_manager::get_status_options ();
 		$this->job = mod_groupformation_job_manager::get_job ( $this->groupformationID );
 		$this->job_status = mod_groupformation_job_manager::get_status ( $this->job );
 		
-		// TODO groupsAdopted soll aus db abgefragt werden
-		$this->groupsAdopted = 0;
+		$this->groupsAdopted = $this->groups_store->groupsCreated ( $this->groupformationID );
 		
 		/* Survey läuft noch */
-        if ($this->surveyState == 'true' ) {
+		if ($this->surveyState == 'true') {
 			$this->viewState = 0;
-		}		/* Survey beendet, aber keine Gruppen generiert */
+		} /* Survey beendet, aber keine Gruppen generiert */
 		// elseif($this->surveyState == false && !(isset($this->groups) && !empty($this->groups) ))
 		elseif ($this->job_status == 'ready') {
 			$this->viewState = 1;
-		}		/* Gruppenbildung läuft */
+		} /* Gruppenbildung läuft */
 		// elseif($this->surveyState == false && 0)
-		elseif ($this->job_status == 'waiting') {
+		elseif ($this->job_status == 'waiting' || $this->job_status == 'started') {
 			$this->viewState = 2;
-		}		/* Gruppen generiert, aber nicht ins Moodle integriert */
+		} /* Gruppen generiert, aber nicht ins Moodle integriert */
 		// elseif (isset($this->groups) && !empty($this->groups) && $this->groupsAdopted == 0)
-		elseif ($this->job_status == 'done') {
+		elseif ($this->job_status == 'aborted') {
 			$this->viewState = 3;
-		} // currently everything block til job is aborted and reset by cron
-		elseif ($this->job_status == 'aborted' || $this->groupsAdopted)  {
-			$this->viewState = 4;
 		} // Moodlegroups are created
-		else {
-			// TODO @Eduard
-			// Was passiert mit den Buttons wenn Gruppen erzeugt wurden?
-			// Eigentlich müssen die dann alle ausgegraut werden, da Gruppen löschen nicht die Moodlegruppen meint oder?
-			// Außerdem muss in der View kenntlich gemacht werden, dass diese Gruppen in Moodle erzeugt wurden 
-			// (Roter Hinweistext oder so?)
-			// Derzeit habe ich auf den Button: "Gruppen löschen" auch die Funktion gelegt, dass in Moodle angelegte Gruppen gelöscht werden.
+elseif ($this->job_status == 'done' && ! $this->groupsAdopted) {
 			$this->viewState = 4;
+		} // currently everything block til job is aborted and reset by cron
+elseif ($this->job_status == 'done' && $this->groupsAdopted) {
+			$this->viewState = 5;
 		}
 	}
 	
 	/**
 	 */
 	public function start() {
-		$this->handle_complete_questionaires();
-		mod_groupformation_job_manager::set_job($this->job,"waiting",true);
-		$this->determineStatus();
+		$this->handle_complete_questionaires ();
+		mod_groupformation_job_manager::set_job ( $this->job, "waiting", true );
+		$this->determineStatus ();
 	}
 	
 	/**
 	 */
 	public function abort() {
-		mod_groupformation_job_manager::set_job($this->job,"aborted");
-		$this->determineStatus();
+		mod_groupformation_job_manager::set_job ( $this->job, "aborted", false, false );
+		$this->determineStatus ();
 	}
 	
 	/**
 	 */
 	public function adopt() {
-		mod_groupformation_group_generator::generateMoodleGroups($this->groupformationID);
-		$this->determineStatus();
+		mod_groupformation_group_generator::generateMoodleGroups ( $this->groupformationID );
+		$this->determineStatus ();
 	}
 	
 	/**
 	 */
 	public function delete() {
-		mod_groupformation_job_manager::set_job($this->job,"ready",false, true);
-		$this->groups_store->deleteGeneratedGroups();
-		$this->determineStatus();
+		mod_groupformation_job_manager::set_job ( $this->job, "ready", false, true );
+		$this->groups_store->deleteGeneratedGroups ();
+		$this->determineStatus ();
 	}
 	
 	/**
 	 * sets the buttons of groupform-settings
-	 * 
+	 *
 	 * @return string
 	 */
 	private function loadSettings() {
@@ -198,7 +187,7 @@ class mod_groupformation_grouping_controller {
 								'name' => 'adopt',
 								'value' => '',
 								'state' => 'disabled',
-								'text' => 'Gruppe übernehmen' 
+								'text' => 'Gruppe &uuml;bernehmen' 
 						) 
 				) );
 				
@@ -217,15 +206,15 @@ class mod_groupformation_grouping_controller {
 								'type' => 'submit',
 								'name' => 'delete',
 								'value' => '',
-								'state' => '',
-								'text' => 'Gruppen l&ouml;schen' 
+								'state' => 'disabled',
+								'text' => 'Gruppenvorschlag l&ouml;schen' 
 						),
 						'button3' => array (
 								'type' => 'submit',
 								'name' => 'adopt',
 								'value' => '',
-								'state' => '',
-								'text' => 'Gruppe übernehmen' 
+								'state' => 'disabled',
+								'text' => 'Gruppenvorschlag &uuml;bernehmen' 
 						) 
 				) );
 				
@@ -244,15 +233,42 @@ class mod_groupformation_grouping_controller {
 								'type' => 'submit',
 								'name' => 'delete',
 								'value' => '',
+								'state' => '',
+								'text' => 'Gruppenvorschlag l&ouml;schen' 
+						),
+						'button3' => array (
+								'type' => 'submit',
+								'name' => 'adopt',
+								'value' => '',
+								'state' => '',
+								'text' => 'Gruppenvorschlag übernehmen' 
+						) 
+				) );
+				
+				break;
+			
+			case 5 :
+				$settingsGroupsView->assign ( 'buttons', array (
+						'button1' => array (
+								'type' => 'submit',
+								'name' => 'start',
+								'value' => '',
 								'state' => 'disabled',
-								'text' => 'Gruppen l&ouml;schen' 
+								'text' => 'Gruppenbildung starten' 
+						),
+						'button2' => array (
+								'type' => 'submit',
+								'name' => 'delete',
+								'value' => '',
+								'state' => '',
+								'text' => 'Moodle-Gruppen l&ouml;schen' 
 						),
 						'button3' => array (
 								'type' => 'submit',
 								'name' => 'adopt',
 								'value' => '',
 								'state' => 'disabled',
-								'text' => 'Gruppe übernehmen' 
+								'text' => 'Gruppenvorschlag übernehmen' 
 						) 
 				) );
 				
@@ -274,7 +290,7 @@ class mod_groupformation_grouping_controller {
 	private function loadStatistics() {
 		$statisticsView = new mod_groupformation_template_builder ();
 		
-		if ($this->viewState == 3 || $this->viewState == 4) {
+		if ($this->viewState == 4 || $this->viewState == 5) {
 			// TODO get statistics
 			$statisticsView->setTemplate ( 'groupingView_statistics' );
 			
@@ -296,7 +312,7 @@ class mod_groupformation_grouping_controller {
 	private function loadIncompleteGroups() {
 		$incompleteGroupsView = new mod_groupformation_template_builder ();
 		
-		if ($this->viewState == 3 || $this->viewState == 4) {
+		if ($this->viewState == 4 || $this->viewState == 5) {
 			$this->setIncompleteGroups ();
 			
 			$incompleteGroupsView->setTemplate ( 'groupingView_incompleteGroups' );
@@ -353,7 +369,7 @@ class mod_groupformation_grouping_controller {
 	private function loadGeneratedGroups() {
 		$generatedGroupsView = new mod_groupformation_template_builder ();
 		
-		if ($this->viewState == 3 || $this->viewState == 4) {
+		if ($this->viewState == 4 || $this->viewState == 5) {
 			
 			$generatedGroupsView->setTemplate ( 'groupingView_generatedGroups' );
 			
@@ -429,7 +445,7 @@ class mod_groupformation_grouping_controller {
 	 * @return string
 	 */
 	public function display() {
-		$this->determineStatus();
+		$this->determineStatus ();
 		$this->view->setTemplate ( 'wrapper_groupingView' );
 		$this->view->assign ( 'groupingView_settings', $this->loadSettings () );
 		$this->view->assign ( 'groupingView_statistic', $this->loadStatistics () );

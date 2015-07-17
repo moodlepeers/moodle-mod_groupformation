@@ -45,7 +45,6 @@ class mod_groupformation_participant_parser {
 	 */
 	private function parse($users, $labels){
 		$participants = array();
-		
 		foreach($users as $user){
 			$position = 0;
 			$participant = null;
@@ -55,7 +54,8 @@ class mod_groupformation_participant_parser {
 				$homogen = $value[$count-1];
 				// an letzter Stelle im Array wird übergeben, ob es homogen ist
 				unset($value[$count-1]);
-				$criterion = new SpecificCriterion($label, $value, 0.0, 1.0, $homogen, 1.0);
+				$criterion = new SpecificCriterion($label, $value, 0.0, 1.0, $homogen, 1);
+// 				var_dump($criterion);
 // 				$criterion = new Criterion();
 // 				$criterion->setName($label);
 // 				$criterion->setValues($user->$label);
@@ -66,8 +66,8 @@ class mod_groupformation_participant_parser {
 					$participant->addCriteria($criterion);
 				}
 				$position++;
+				
 			}
-			
 			$participants[] = $participant;
 		}
 		
@@ -136,6 +136,10 @@ class mod_groupformation_participant_parser {
 					if($label == 'knowledge_heterogen'){
 						$value = $calculator->knowledgeAll($user);
 						$value[] = $homogen[$label];
+						foreach ($value as $k=>$v){
+							if (is_array($v))
+								$value[$k]=$v[1];
+						}
 						$object->$label = $value;
 						if($userPosition == 0){
 							$totalLabel[] = $label;
@@ -257,5 +261,18 @@ class mod_groupformation_participant_parser {
 		}
 	
 		return $this->parse($array, $totalLabel);
+	}
+	
+	/**
+	 * Generates participants without criterions
+	 * 
+	 * @param unknown $users
+	 */
+	public function build_empty_participants ( $users ) {
+		// Participants with null for the criterion
+		
+		$participants = array();
+		
+		return $participants;
 	}
 }

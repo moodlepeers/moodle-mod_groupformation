@@ -27,9 +27,6 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-#require_once ('../config.php');
-#require_once ('lib.php');
-// ($CFG->dirroot.'/group/lib.php');
 require_once ($CFG->dirroot . '/group/lib.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
 class mod_groupformation_group_generator {
@@ -41,14 +38,11 @@ class mod_groupformation_group_generator {
 	 */
 	public static function generateMoodleGroups($groupformationID) {
 		global $COURSE;
-// 		$groupalt = groups_get_group_by_name(2, "test");
-// 		var_dump($groupalt);
-// 		groups_delete_group($groupalt);
 		
 		$groups_store = new mod_groupformation_groups_manager ( $groupformationID );
-		$groupal_groups = $groups_store->getGeneratedGroups();
+		$groupal_groups = $groups_store->getGeneratedGroups ();
 		
-		if ($groups_store->groupsCreated($groupformationID))
+		if ($groups_store->groupsCreated ( $groupformationID ))
 			return false;
 		
 		$position = 0;
@@ -62,8 +56,8 @@ class mod_groupformation_group_generator {
 			
 			$groupid = $groupal_group->id;
 			$groupname = $groupal_group->groupname;
-				
-			$groupal_users = $groups_store->getUsersForGeneratedGroup($groupal_group->id);
+			
+			$groupal_users = $groups_store->getUsersForGeneratedGroup ( $groupal_group->id );
 			
 			$parsed_groupname = groups_parse_name ( $groupname, $position );
 			
@@ -87,7 +81,6 @@ class mod_groupformation_group_generator {
 				groups_add_member ( $moodlegroupid, $user->userid );
 			}
 			
-			// TODO @Nora: Erledigt
 			$groups_store->saveMoodleGroupID ( $groupid, $moodlegroupid );
 			
 			// Invalidate the course groups cache seeing as we've changed it.
@@ -99,63 +92,11 @@ class mod_groupformation_group_generator {
 				foreach ( $created_moodle_groups as $groupid => $moodlegroupid ) {
 					
 					groups_delete_group ( $moodlegroupid );
-					// TODO @Nora Erledigt
+					
 					$groups_store->deleteMoodleGroupID ( $moodlegroupid );
 				}
 			}
-			
-			// for ($j=0; $j<$userpergrp; $j++) {
-			// if (empty($users)) {
-			// break 2;
-			// }
-			// $user = array_shift($users);
-			// $groups[$i]['members'][$user->id] = $user;
-			// }
 		}
 	}
-	
-	// if (isset($data->preview)) {
-	// $table = new html_table();
-	// $table->head = array(get_string('groupscount', 'groupformation', $numgrps));
-	// $table->size = array('100%');
-	// $table->align = array('left');
-	// $table->width = '40%';
-	// $table->data = array();
-	
-	// foreach ($groups as $group) {
-	// $line = array();
-	// if (groups_get_group_by_name($courseid, $group['name'])) {
-	// $line[] = '<span class="notifyproblem">'.get_string('groupnameexists', 'groupformation', $group['name']).'</span>';
-	// $error = get_string('groupnameexists', 'groupformation', $group['name']);
-	// } else {
-	// $line[] = $group['name'];
-	// }
-	// $table->data[] = $line;
-	// }
-	
-	// $preview .= html_writer::table($table);
-	
-	// }
-
-/**
- * NO GROUPING
- */
-	
-	// // Save the groups data
-	// foreach ($groups as $key=>$group) {
-	// if (groups_get_group_by_name($courseid, $group['name'])) {
-	// $error = get_string('groupnameexists', 'groupformation', $group['name']);
-	// $failed = true;
-	// break;
-	// }
-	// $newgroup = new stdClass();
-	// $newgroup->courseid = $data->courseid;
-	// $newgroup->name = $group['name'];
-	// $groupid = groups_create_group($newgroup);
-	// $created_moodle_groups[] = $groupid;
-	// foreach($group['members'] as $user) {
-	// groups_add_member($groupid, $user->id);
-	// }
-	// }
 }
 

@@ -28,7 +28,10 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 	die ( 'Direct access to this script is forbidden.' ); // / It must be included from a Moodle page
 }
 
+require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/userid_filter.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_parser.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
+require_once ($CFG->dirroot . '/mod/groupformation/lib.php');
 
 require_once ($CFG->dirroot . '/lib/groupal/classes/Criteria/SpecificCriterion.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/Participant.php');
@@ -36,7 +39,6 @@ require_once ($CFG->dirroot . '/lib/groupal/classes/Cohort.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/Matcher/GroupALGroupCentricMatcher.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/GroupFormationAlgorithm.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/Optimizer/GroupALOptimizer.php');
-
 class mod_groupformation_job_manager {
 	
 	/**
@@ -59,25 +61,43 @@ class mod_groupformation_job_manager {
 				ORDER BY timecreated ASC";
 		$jobs = $DB->get_records_sql ( $sql );
 		
-		if (count($jobs)==0)
+		if (count ( $jobs ) == 0)
 			return null;
 		$next = null;
-		foreach($jobs as $id=>$job){
+		foreach ( $jobs as $id => $job ) {
 			if ($job->timecreated != null && ($next == null || $job->timecreated < $next->timecreated))
 				$next = $job;
 		}
-		self::set_job ( $next, "0100", true);	
+		self::set_job ( $next, "started", true );
 		return $next;
 	}
 	
 	/**
+	 * Selects aborted but not started jobs and sets it on "started"
 	 *
-	 * Resets job to 0000
+	 * @return Ambigous <>
+	 */
+	public static function get_aborted_jobs() {
+		global $DB;
+		$jobs = $DB->get_records ( 'groupformation_jobs', array (
+				'waiting' => 0,
+				'started' => 0,
+				'aborted' => 1,
+				'done' => 0,
+				'timestarted' => 0 
+		) );
+		
+		return $jobs;
+	}
+	
+	/**
+	 *
+	 * Resets job to "ready"
 	 *
 	 * @param stdClass $job        	
 	 */
 	public static function reset_job($job) {
-		self::set_job ( $job );
+		self::set_job ( $job, "ready", false, true );
 	}
 	
 	/**
@@ -90,11 +110,11 @@ class mod_groupformation_job_manager {
 	public static function set_job($job, $state = "ready", $settime = false, $resettime = false) {
 		global $DB;
 		$status_options = self::get_status_options ();
-		if (array_key_exists( $state, $status_options ))
+		if (array_key_exists ( $state, $status_options ))
 			$status = $status_options [$state];
 		else
 			$status = $state;
-		if (! (preg_match ( "/[0-1]{4}/", $status) && strlen ( $status ) == 4))
+		if (! (preg_match ( "/[0-1]{4}/", $status ) && strlen ( $status ) == 4))
 			return false;
 		$job->waiting = $status [0];
 		$job->started = $status [1];
@@ -102,11 +122,11 @@ class mod_groupformation_job_manager {
 		$job->done = $status [3];
 		
 		if ($job->waiting == 1 && $settime)
-			$job->timecreated = time();
+			$job->timecreated = time ();
 		if ($job->done == 1 && $settime)
-			$job->timefinished = time();
+			$job->timefinished = time ();
 		if ($job->started == 1 && $settime)
-			$job->timestarted = time();
+			$job->timestarted = time ();
 		
 		if ($job->waiting == 0 && $resettime)
 			$job->timecreated = 0;
@@ -142,36 +162,13 @@ class mod_groupformation_job_manager {
 	}
 	
 	/**
-	 * Runs groupal with job
+	 * Generates participants with ids within interval
 	 *
-	 * @param stdClass $job        	
-	 * @return stdClass
+	 * @param unknown $id_begin        	
+	 * @param unknown $id_end        	
+	 * @return multitype:Participant
 	 */
-	public static function do_groupal($job) {
-		// TODO @Nora @Ahmed
-		// get groupformation for this job
-		$store = new mod_groupformation_storage_manager ( $job->groupformationid );
-		
-		$groupsize = intval ($store->getGroupSize () );
-		
-		/**
-		 * <Richtige Daten - noch buggy>------------------------
-		 */
-		
-		$userfilter = new mod_groupformation_userid_filter($job->groupformationid);
-		
-		$completed_users = $userfilter->getCompletedIDs();
-		$not_completed_users = $userfilter->getNoneCompletedIds();
-		
-		$pp = new mod_groupformation_participant_parser($job->groupformationid);
-		
-		$participants = $pp->build_participants($completed_users);
-		
-		var_dump($participants[0]);
-	
-		/**
-		 * <Testdaten>------------------------------------------
-		 */
+	private static function get_testing_data($id_begin, $id_end) {
 		
 		// Dummy Criterions
 		$c_vorwissen = new SpecificCriterion ( "vorwissen", array (
@@ -216,7 +213,7 @@ class mod_groupformation_job_manager {
 		), 0, 1, true, 1 );
 		// Dummy Participants
 		$users = array ();
-		for($i = 3; $i < 4; $i ++) {
+		for($i = $id_begin; $i <= $id_end; $i ++) {
 			$users [] = new Participant ( array (
 					$c_vorwissen,
 					$c_motivation,
@@ -226,18 +223,77 @@ class mod_groupformation_job_manager {
 					$c_teamorientierung 
 			), $i );
 		}
+		
+		return $users;
+	}
+	
+	/**
+	 * Runs groupal with job
+	 *
+	 * @param stdClass $job        	
+	 * @return stdClass
+	 */
+	public static function do_groupal($job) {
+		$groupformationid = $job->groupformationid;
 		/**
-		 * </Testdaten>-----------------------------------------
+		 * <Testdaten>
 		 */
 		
-// 		$users = $participants;
+		// $groupal_participants = self::get_testing_data ( 3, 4 );
 		
+		/**
+		 * </Testdaten>
+		 */
+		
+		/**
+		 * <Echte Daten>
+		 */
+		
+		$userfilter = new mod_groupformation_userid_filter ( $groupformationid );
+		
+		$completed_users = $userfilter->getCompletedIDs ();
+		$not_completed_users = $userfilter->getNoneCompletedIds ();
+		
+		$pp = new mod_groupformation_participant_parser ( $groupformationid );
+		
+		$divided_userlist = array_chunk ( $completed_users, count ( $completed_users ) / 2 );
+		
+		$groupal_users = $divided_userlist [0];
+		$random_users = $divided_userlist [1];
+		
+		// Generate participants for Groupal
+		$participants = $pp->build_participants ( $completed_users );
+		$groupal_participants = $participants;
+		
+		// Generate empty participants
+		$participants == $pp->build_empty_participants ( $random_users );
+		$random_participants = $participants;
+		
+		// Generate empty participants
+		$participants == $pp->build_empty_participants ( $not_completed_users );
+		$incomplete_participants = $participants;
+		/**
+		 * </Echte Daten>
+		 */
+		
+		$store = new mod_groupformation_storage_manager ( $groupformationid );
+		$groupsize = 1; // intval ( $store->getGroupSize () );
+		                
 		// Matcher (einer von beiden)
-		// $gcm = new GroupALGroupCentricMatcher();
 		$matcher = new GroupALGroupCentricMatcher ();
-		$gal = new GroupFormationAlgorithm ( $users, $matcher, 1);
 		
-		$cohort = $gal->doOneFormation ();
+		$gfa = new GroupFormationAlgorithm ( $groupal_participants, $matcher, $groupsize );
+		$cohort = $gfa->doOneFormation ();
+		
+		// TODO @Nora: Leg in der Lib eine Klasse GroupFormationRandomAlgorithm an,
+		// welche die Participants und groupsize im Konstruktor bekommt
+		// $gfra = new GroupFormationRandomAlgorithm($random_participants, $groupsize);
+		
+		// Die Klasse hat eine Methode doOneFormation(), sie gibt ein Cohortobject zurück.
+		// $random_cohort = $gfra->doOneFormation();
+		
+		// $gfra = new GroupFormationRandomAlgorithm($incomplete_participants, $groupsize);
+		// $incomplete_cohort = $gfra->doOneFormation();
 		
 		return $cohort->getResult ();
 	}
@@ -262,7 +318,7 @@ class mod_groupformation_job_manager {
 		
 		self::assign_users_to_groups ( $job, $result->users, $idmap );
 		
-		self::set_job($job,'done', true);
+		self::set_job ( $job, 'done', true );
 		
 		return true;
 	}
@@ -362,7 +418,7 @@ class mod_groupformation_job_manager {
 	 */
 	public static function get_status($job) {
 		$data = new mod_groupformation_data ();
-		$status_options = array_keys($data->get_job_status_options ());
+		$status_options = array_keys ( $data->get_job_status_options () );
 		if ($job->waiting) {
 			return $status_options [1];
 		} elseif ($job->started) {

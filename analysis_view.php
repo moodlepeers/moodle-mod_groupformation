@@ -102,18 +102,20 @@ $pp = new mod_groupformation_participant_parser($groupformation->id);
 
 $jm = new mod_groupformation_job_manager ();
 
-$job = $jm::get_next_job ();
+$job = null;
+
+// $job = $jm::get_next_job ();
 
 if (! is_null ( $job )) {
-	var_dump ( $job->groupformationid);
+// 	var_dump ( $job->groupformationid);
 	
 // 	var_dump ( $jm::is_job_aborted ( $job ) );
 	
 // 	$result = $jm::do_groupal ( $job );
 	
-// 	var_dump ( $result );
+// var_dump ( $result );
 	
-// 	var_dump ( $jm::save_result ( $job, $result ) );
+// var_dump ( $jm::save_result ( $job, $result ) );
 	
 // 	var_dump ( $jm::get_status ( $job ) );
 }

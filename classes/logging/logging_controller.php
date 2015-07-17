@@ -96,7 +96,7 @@ class mod_groupformation_logging_controller {
 	 * @return boolean
 	 */
 	public function handle($userid, $groupformationid, $message) {
-		if ($groupformationid != 0 && $userid != 0 && $this->isValidMessage ( $message ))
+		if ($groupformationid != 0 && $this->isValidMessage ( $message ))
 			$this->create_log_entry ( $userid, $groupformationid, $message );
 		else
 			return false;
