@@ -146,8 +146,12 @@ class mod_groupformation_groups_manager {
 	 */
 	public function getGroupName($userid){
 		global $DB;
-		$groupname = $DB->get_field('groupformation_groups', 'groupname', array('groupformation'=>$this->groupformationid,'userid'=>$userid)); 
-		return $groupname;
+		$groupid = $DB->get_field('groupformation_group_users', 'groupid', array('groupformation'=>$this->groupformationid,'userid'=>$userid)); 
+		
+		return $DB->get_field ( 'groupformation_groups', 'groupname', array (
+				'groupformation' => $this->groupformationid,
+				'id' => $groupid 
+		) );
 	}
 	
 	/**
@@ -201,7 +205,7 @@ class mod_groupformation_groups_manager {
 	public function getGroupID($userid) {
 		global $DB;
 		
-		return $DB->get_field ( 'groupformation_groups', 'id', array (
+		return $DB->get_field ( 'groupformation_group_users', 'groupid', array (
 				'groupformation' => $this->groupformationid,
 				'userid' => $userid 
 		) );

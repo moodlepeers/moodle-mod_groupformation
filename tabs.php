@@ -29,7 +29,7 @@ $tabs = array ();
 $row = array ();
 $inactive = array ();
 $activated = array ();
-$store = new mod_groupformation_storage_manager($groupformation->id);
+$store = new mod_groupformation_storage_manager ( $groupformation->id );
 
 // some pages deliver the cmid instead the id
 if (isset ( $cmid ) and intval ( $cmid ) and $cmid > 0) {
@@ -56,46 +56,42 @@ if (has_capability ( 'mod/groupformation:editsettings', $context )) {
 	
 	$groupingurl = new moodle_url ( '/mod/groupformation/grouping_view.php', array (
 			'id' => $usedid,
-			'do_show' => 'grouping'
+			'do_show' => 'grouping' 
 	) );
 	$row [] = new tabobject ( 'grouping', $groupingurl->out (), get_string ( 'tab_grouping', 'groupformation' ) );
 	
 	$questionaire_viewiewurl = new moodle_url ( '/mod/groupformation/questionaire_view.php', array (
-			'id' => $usedid
+			'id' => $usedid 
 	) );
 	$row [] = new tabobject ( 'view', $questionaire_viewiewurl->out (), get_string ( 'tab_preview', 'groupformation' ) );
-	
-}elseif (!has_capability ( 'mod/groupformation:editsettings', $context ) && has_capability('mod/groupformation:onlystudent', $context)){
+} elseif (! has_capability ( 'mod/groupformation:editsettings', $context ) && has_capability ( 'mod/groupformation:onlystudent', $context )) {
 	
 	$viewurl = new moodle_url ( '/mod/groupformation/view.php', array (
-		'id' => $usedid,
-		'do_show' => 'view' 
+			'id' => $usedid,
+			'do_show' => 'view' 
 	) );
 	$row [] = new tabobject ( 'view', $viewurl->out (), get_string ( 'tab_overview', 'groupformation' ) );
 	
-	if ($store->isQuestionaireAvailable()){
-
+	if ($store->isQuestionaireAvailable ()) {
+		
 		$questionaire_viewiewurl = new moodle_url ( '/mod/groupformation/questionaire_view.php', array (
-				'id' => $usedid
+				'id' => $usedid 
 		) );
 		$row [] = new tabobject ( 'answering', $questionaire_viewiewurl->out (), get_string ( 'tab_questionaire', 'groupformation' ) );
-		
-		if ($store->isQuestionaireCompleted($userid,$groupformation->id)){
-			$evaluationurl = new moodle_url ( '/mod/groupformation/evaluation_view.php', array (
-					'id' => $usedid,
-					'do_show' => 'evaluation'
-			) );
-			$row [] = new tabobject ( 'evaluation', $evaluationurl->out (), get_string ( 'tab_evaluation', 'groupformation' ) );
-
-			$groupurl = new moodle_url ( '/mod/groupformation/group_view.php', array (
-					'id' => $usedid,
-					'do_show' => 'group'
-			) );
-			$row [] = new tabobject ( 'group', $groupurl->out (), get_string ( 'tab_group', 'groupformation' ) );
-		}
-
 	}
-
+	if ($store->isQuestionaireCompleted ( $userid )) {
+		$evaluationurl = new moodle_url ( '/mod/groupformation/evaluation_view.php', array (
+				'id' => $usedid,
+				'do_show' => 'evaluation' 
+		) );
+		$row [] = new tabobject ( 'evaluation', $evaluationurl->out (), get_string ( 'tab_evaluation', 'groupformation' ) );
+		
+		$groupurl = new moodle_url ( '/mod/groupformation/group_view.php', array (
+				'id' => $usedid,
+				'do_show' => 'group' 
+		) );
+		$row [] = new tabobject ( 'group', $groupurl->out (), get_string ( 'tab_group', 'groupformation' ) );
+	}
 }
 
 if (count ( $row ) >= 1) {

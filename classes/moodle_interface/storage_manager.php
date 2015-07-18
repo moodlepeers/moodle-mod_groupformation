@@ -190,7 +190,7 @@ class mod_groupformation_storage_manager {
 		$data = new mod_groupformation_data ();
 		
 		$scenario = $this->getScenario ();
-		$names = $data->getCriterionSet ( $scenario , $this->groupformationid);
+		$names = $data->getCriterionSet ( $scenario, $this->groupformationid );
 		$number = 0;
 		foreach ( $names as $name ) {
 			$number = $number + $DB->count_records ( 'groupformation_answer', array (
@@ -211,7 +211,7 @@ class mod_groupformation_storage_manager {
 	public function hasAnsweredEverything($userid) {
 		$scenario = $this->getScenario ();
 		$data = new mod_groupformation_data ();
-		$categories = $this->getCategories();
+		$categories = $this->getCategories ();
 		$sum = array_sum ( $this->getNumbers ( $categories ) );
 		$user_sum = $this->answerNumberForUser ( $userid );
 		return $sum == $user_sum;
@@ -233,8 +233,10 @@ class mod_groupformation_storage_manager {
 		$data->version = $version;
 		$data->numberofquestion = $numbers;
 		
-	//hier was ver�ndert
-		if ($init || $DB->count_records('groupformation_q_version', array('category' => $category)) == 0) {
+		// hier was ver�ndert
+		if ($init || $DB->count_records ( 'groupformation_q_version', array (
+				'category' => $category 
+		) ) == 0) {
 			$DB->insert_record ( 'groupformation_q_version', $data );
 		} else {
 			$data->id = $DB->get_field ( 'groupformation_q_version', 'id', array (
@@ -244,12 +246,11 @@ class mod_groupformation_storage_manager {
 		}
 	}
 	
-	//alle werden auf "abgegeben" gesetzt
-	public function setAllCommited($users){
-		
-		foreach($users as $userId){
-			if($this->answeringStatus($userId) != 1){
-				$this->statusChanged($userId);
+	// alle werden auf "abgegeben" gesetzt
+	public function setAllCommited($users) {
+		foreach ( $users as $userId ) {
+			if ($this->answeringStatus ( $userId ) != 1) {
+				$this->statusChanged ( $userId );
 			}
 		}
 	}
@@ -305,7 +306,7 @@ class mod_groupformation_storage_manager {
 	// gibt ein array zur�ck, in dem auf der ersten Position die Startzeit gespeichert ist und auf der zweiten Position die Endzeit
 	/**
 	 * Returns map with availability times (xxx_raw is timestamp, xxx is formatted time for display)
-	 * 
+	 *
 	 * @return multitype:string NULL mixed
 	 */
 	public function getTime() {
@@ -318,15 +319,51 @@ class mod_groupformation_storage_manager {
 				'id' => $this->groupformationid 
 		) );
 		
-		$times ['start'] = date ( "Y-m-d H:i", $times ['start_raw'] );
-		$times ['end'] = date ( "Y-m-d H:i", $times ['end_raw'] );
+		if ('en' == get_string ( "language", "groupformation" )) {
+			$format = "l jS \of F j, Y, g:i a";
+			$trans = array();
+			$times ['start'] = strtr ( date ( $format, $times ['start_raw'] ), $trans);
+			$times ['end'] = strtr ( date ( $format, $times ['end_raw'] ), $trans);
+			
+		} elseif ('de' == get_string ( "language", "groupformation" )) {
+			$format = "l, d.m.y, H:m";
+			$trans = array (
+					'Monday' => 'Montag',
+					'Tuesday' => 'Dienstag',
+					'Wednesday' => 'Mittwoch',
+					'Thursday' => 'Donnerstag',
+					'Friday' => 'Freitag',
+					'Saturday' => 'Samstag',
+					'Sunday' => 'Sonntag',
+					'Mon' => 'Mo',
+					'Tue' => 'Di',
+					'Wed' => 'Mi',
+					'Thu' => 'Do',
+					'Fri' => 'Fr',
+					'Sat' => 'Sa',
+					'Sun' => 'So',
+					'January' => 'Januar',
+					'February' => 'Februar',
+					'March' => 'März',
+					'May' => 'Mai',
+					'June' => 'Juni',
+					'July' => 'Juli',
+					'October' => 'Oktober',
+					'December' => 'Dezember'
+			);
+			$times ['start'] = strtr ( date ( $format, $times ['start_raw'] ), $trans).' Uhr';
+			$times ['end'] = strtr ( date ( $format, $times ['end_raw'] ), $trans).' Uhr';
+		}
+
+// 		$times ['start'] = date ( $format, $times ['start_raw'] );
+// 		$times ['end'] = date ( $format, $times ['end_raw'] );
 		
 		return $times;
 	}
 	
 	/**
 	 * Converts knowledge or topic array into XML-based syntax
-	 * 
+	 *
 	 * @param unknown $options        	
 	 * @return string
 	 */
@@ -568,28 +605,28 @@ class mod_groupformation_storage_manager {
 		foreach ( $category_set as $category ) {
 			if ($this->getNumber ( $category ) > 0) {
 				// if ($category != 'general' || ($category == 'general' && $this->getEvaluationMethod() != 1))
-				if ($category != 'grade' || $this->askForGrade())
-				$categories [] = $category;
+				if ($category != 'grade' || $this->askForGrade ())
+					$categories [] = $category;
 			}
 		}
 		return $categories;
 	}
-	
-	public function getPreviousCategory($category){
+	public function getPreviousCategory($category) {
 		$categories = $this->getCategories ();
-		$pos = $this->getPosition($category);
+		$pos = $this->getPosition ( $category );
 		if ($pos >= 1)
-			$previous = $categories[$pos - 1];
+			$previous = $categories [$pos - 1];
 		else
 			$previous = '';
 		return $previous;
 	}
-	
-	public function askForGrade(){
+	public function askForGrade() {
 		global $DB;
-		$evaluationmethod = $DB->get_field('groupformation', 'evaluationmethod', array('id'=>$this->groupformationid));
+		$evaluationmethod = $DB->get_field ( 'groupformation', 'evaluationmethod', array (
+				'id' => $this->groupformationid 
+		) );
 		if ($evaluationmethod != 1 && $evaluationmethod != 2)
-			return false; 
+			return false;
 		return true;
 	}
 	
@@ -719,33 +756,33 @@ class mod_groupformation_storage_manager {
 		
 		return false;
 	}
-
+	
 	/**
 	 * Sets timestamp in groupformation in order to close/terminate questionaire
 	 */
-    public function closeQuestionnaire() {
-        global $DB;
-
-        $data = new stdClass ();
-        $data->id = $this->groupformationid;
-        $data->timeclose = time ()-1;
-
-        $DB->update_record ( 'groupformation', $data );
-    }
-
-    /**
-     * Sets timestamp in groupformation in order to open/begin questionaire
-     */
-    public function openQuestionnaire() {
-        global $DB;
-
-        $data = new stdClass ();
-        $data->id = $this->groupformationid;
-        $data->timeclose = 0;
-        $data->timeopen = time ()-1;
-
-        $DB->update_record ( 'groupformation', $data );
-    }
+	public function closeQuestionnaire() {
+		global $DB;
+		
+		$data = new stdClass ();
+		$data->id = $this->groupformationid;
+		$data->timeclose = time () - 1;
+		
+		$DB->update_record ( 'groupformation', $data );
+	}
+	
+	/**
+	 * Sets timestamp in groupformation in order to open/begin questionaire
+	 */
+	public function openQuestionnaire() {
+		global $DB;
+		
+		$data = new stdClass ();
+		$data->id = $this->groupformationid;
+		$data->timeclose = 0;
+		$data->timeopen = time () - 1;
+		
+		$DB->update_record ( 'groupformation', $data );
+	}
 	
 	/**
 	 * Returns whether questionaire was completed and send by user or not
@@ -866,56 +903,62 @@ class mod_groupformation_storage_manager {
 	 */
 	public function getStats($userid) {
 		$scenario = $this->getScenario ();
-	
+		
 		$data = new mod_groupformation_data ();
-	
-		$category_set = $this->getCategories();
-	
+		
+		$category_set = $this->getCategories ();
+		
 		$categories = array ();
-	
+		
 		foreach ( $category_set as $category ) {
 			$categories [$category] = $this->getNumber ( $category );
 		}
-	
+		
 		$stats = array ();
 		foreach ( $categories as $category => $value ) {
 			$count = $this->answerNumberForUser ( $userid, $category );
 			$stats [$category] = array (
 					'questions' => $value,
 					'answered' => $count,
-					'missing' => $value - $count
+					'missing' => $value - $count 
 			);
 		}
 		return $stats;
 	}
-	
-	public function getGroupName(){
+	public function getGroupName() {
 		global $DB;
-		return $DB->get_field('groupformation', 'groupname',array (
+		return $DB->get_field ( 'groupformation', 'groupname', array (
 				'id' => $this->groupformationid 
 		) );
 	}
-	
-	public function getName(){
+	public function getName() {
 		global $DB;
-		return $DB->get_field('groupformation', 'name',array (
-				'id' => $this->groupformationid
+		return $DB->get_field ( 'groupformation', 'name', array (
+				'id' => $this->groupformationid 
 		) );
 	}
-    
-    public function getPosition($category){
-    	$categories = $this->getCategories();
-    	if (in_array($category, $categories)){
-	    	$pos = array_search($category, $categories);
-	    	return $pos;
-    	}else{
-    		return -1;
-    	}
-    }
-    
-    public function getPositions(){
-    	$categories = $this->getCategories();
-    	return array_keys($categories);
-    }
-    
+	public function getPosition($category) {
+		$categories = $this->getCategories ();
+		if (in_array ( $category, $categories )) {
+			$pos = array_search ( $category, $categories );
+			return $pos;
+		} else {
+			return - 1;
+		}
+	}
+	public function getPositions() {
+		$categories = $this->getCategories ();
+		return array_keys ( $categories );
+	}
+	public function getUser($id) {
+		global $DB;
+		if ($DB->record_exists ( 'user', array (
+				'id' => $id 
+		) )) {
+			return $DB->get_record ( 'user', array (
+					'id' => $id 
+			) );
+		}
+		return null;
+	}
 }

@@ -1,5 +1,6 @@
 <?php
 
+use core\plugininfo\availability;
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -191,6 +192,9 @@ class mod_groupformation_info_text {
 	 * Prints availability info
 	 */
 	public function __printAvailabilityInfo($bool = true) {
+		echo '<div class="questionaire_status col_m_100">' . $this->availabilityState() . '</div>';
+		return;
+		
 		if ($bool) {
 			$a = $this->store->getTime ();
 			$start = intval ( $a ['start_raw'] );
@@ -199,7 +203,7 @@ class mod_groupformation_info_text {
 			if (! ($start == 0) && ! ($end == 0)) {
 				echo '<div class="questionaire_status col_m_100">' . get_string ( 'questionaire_availability_info_now', 'groupformation', $a ) . '</div>';
 			} elseif (($start == 0) && ($end > 0)) {
-				echo '<div class="questionair_status col_m_100">' . get_string ( 'questionaire_availability_info_until', 'groupformation', $a ) . '</div>';
+				echo '<div class="questionaire_status col_m_100">' . get_string ( 'questionaire_availability_info_until', 'groupformation', $a ) . '</div>';
 			}
 		} else {
 			$a = $this->store->getTime ();
@@ -211,8 +215,49 @@ class mod_groupformation_info_text {
 				echo '<div class="questionaire_status">' . get_string ( 'questionaire_availability_info_future', 'groupformation', $a ) . '</div>';
 			} elseif (($start > 0) && ($end == 0)) {
 				echo '<div class="questionaire_status">' . get_string ( 'questionaire_not_available', 'groupformation', $a ) . '</div>';
-				echo '<div class="questionair_status">' . get_string ( 'questionaire_availability_info_from', 'groupformation', $a ) . '</div>';
+				echo '<div class="questionaire_status">' . get_string ( 'questionaire_availability_info_from', 'groupformation', $a ) . '</div>';
 			}
 		}
+	}
+	
+	public function availabilityState(){
+		$a = $this->store->getTime();
+		$begin = intval ( $a ['start_raw'] );
+		$end = intval ( $a ['end_raw'] );
+		$now = time();
+		if ($begin == 0 & $end == 0) {
+			return get_string('questionaire_available','groupformation',$a);
+		} elseif ($begin != 0 & $end == 0) {
+			// erst ab $begin verfügbar
+			if ($now < $begin) {
+				// noch nicht verfügbar
+				return get_string('questionaire_not_available_begin','groupformation',$a);
+			} elseif ($now >= $begin) {
+				// verfügbar
+				return get_string('questionaire_available','groupformation',$a);
+			}
+		} elseif ($begin == 0 & $end != 0) {
+			// nur verfügbar bis $end
+			if ($now <= $end) {
+				// verfügbar
+				return get_string('questionaire_available_end','groupformation',$a);
+			} elseif ($now > $end) {
+				// nicht mehr verfügbar
+				return get_string('questionaire_not_available','groupformation',$a);
+			}
+		} elseif ($begin != 0 & $end != 0) {
+			// verfügbar zwischen $begin und $end
+			if ($now < $begin & $now < $end) {
+				// noch nicht verfügbar
+				return get_string('questionaire_not_available_begin_end','groupformation',$a);
+			} elseif ($now >= $begin & $now <= $end){
+				// verfügbar
+				return get_string('questionaire_available','groupformation',$a);
+			} elseif ($now > $begin & $now > $end) {
+				// nicht mehr verfügbar
+				return get_string('questionaire_not_available_end','groupformation',$a);
+			}
+		}
+		
 	}
 }

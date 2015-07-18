@@ -26,6 +26,12 @@ class mod_groupformation_grouping_controller {
 	// generierte Gruppen als Moodlegruppen übernommen
 	private $groupsAdopted;
 	private $test;
+	
+	/**
+	 * Creates an instance of grouping_controller for groupformation
+	 * 
+	 * @param unknown $groupformationID
+	 */
 	public function __construct($groupformationID) {
 		$this->groupformationID = $groupformationID;
 		$this->store = new mod_groupformation_storage_manager ( $groupformationID );
@@ -38,6 +44,10 @@ class mod_groupformation_grouping_controller {
 		
 		$this->determineStatus ();
 	}
+	
+	/**
+	 * Determines status of grouping_view
+	 */
 	public function determineStatus() {
 		$this->surveyState = $this->store->isQuestionaireAvailable ();
 		
@@ -73,6 +83,7 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 	}
 	
 	/**
+	 * POST action to start job, sets it to 'waiting'
 	 */
 	public function start() {
 		$this->handle_complete_questionaires ();
@@ -81,6 +92,7 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 	}
 	
 	/**
+	 * POST action to abort current waiting or running job
 	 */
 	public function abort() {
 		mod_groupformation_job_manager::set_job ( $this->job, "aborted", false, false );
@@ -88,6 +100,7 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 	}
 	
 	/**
+	 * POST action to adopt groups to moodle
 	 */
 	public function adopt() {
 		mod_groupformation_group_generator::generateMoodleGroups ( $this->groupformationID );
@@ -95,6 +108,7 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 	}
 	
 	/**
+	 * POST action to delete generated and/or adopted groups (moodle groups)
 	 */
 	public function delete() {
 		mod_groupformation_job_manager::set_job ( $this->job, "ready", false, true );
@@ -103,7 +117,7 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 	}
 	
 	/**
-	 * sets the buttons of groupform-settings
+	 * sets the buttons of grouping settings
 	 *
 	 * @return string
 	 */
@@ -305,7 +319,7 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 	}
 	
 	/**
-	 * assign incompletegroups-data to template
+	 * Assigns data about incomplete groups to template
 	 *
 	 * @return string
 	 */
@@ -345,7 +359,7 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 	}
 	
 	/**
-	 * Set the array with incompleted groups
+	 * Sets the array with incompleted groups
 	 */
 	private function setIncompleteGroups() {
 		$maxSize = $this->store->getGroupSize ();
@@ -390,20 +404,26 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 	}
 	
 	/**
-	 * Gets the name and moodle-link of groupmembers
+	 * Gets the name and moodle link of group members
 	 *
 	 * @param
 	 *        	$groupID
 	 * @return array
 	 */
 	private function getGroupMembers($groupID) {
+		global $CFG, $COURSE, $USER;
 		$usersIDs = $this->groups_store->getUsersForGeneratedGroup ( $groupID );
 		$groupMembers = array ();
 		
 		foreach ( $usersIDs as $user ) {
 			// TODO: get link of user and username with the userID
+			$url = $CFG->wwwroot . '/user/view.php?id=' . $user->userid . '&course=' . $COURSE->id;
+			
 			$userName = $user->userid;
-			$userLink = 'userlink';
+			$user_record = $this->store->getUser($user->userid);
+			if (!is_null($user_record))
+				$userName = fullname($user_record);
+			$userLink = $url;
 			
 			$groupMembers [$user->userid] = [ 
 					'name' => $userName,
