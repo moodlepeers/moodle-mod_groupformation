@@ -277,7 +277,7 @@ class mod_groupformation_job_manager {
 		 */
 		
 		$store = new mod_groupformation_storage_manager ( $groupformationid );
-		$groupsize = 1; // intval ( $store->getGroupSize () );
+		$groupsize = 6; // intval ( $store->getGroupSize () );
 		                
 		// Matcher (einer von beiden)
 		$matcher = new GroupALGroupCentricMatcher ();

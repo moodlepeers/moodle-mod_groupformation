@@ -25,6 +25,9 @@ require_once (dirname ( dirname ( dirname ( __FILE__ ) ) ) . '/config.php');
 require_once (dirname ( __FILE__ ) . '/lib.php');
 require_once (dirname ( __FILE__ ) . '/locallib.php');
 
+/* Ahmed */
+require_once (dirname (__FILE__) . '/classes/moodle_interface/create_q_testuser.php');
+
 // Read URL params
 $id = optional_param ( 'id', 0, PARAM_INT ); // Course Module ID
                                              // $g = optional_param ( 'g', 0, PARAM_INT ); // groupformation instance ID
@@ -105,13 +108,28 @@ $jm = new mod_groupformation_job_manager ();
 $job = null;
 
 // $job = $jm::get_next_job ();
+/* ----------  Ahmed Testet User creation  ---------- */
+
+$cqt = new mod_groupformation_create_q_testuser();
+/*
+ * beachte:
+ *  ->	in create_q_testuser.php: Zeile 44, groupformationid hard setzen
+ *  ->	job_manager.php: groupsize setzen, ist derzeit noch hard gesetzt
+ */
+// echo $cqt->createTestusers(300);
+
+
+
+/* ---------- / Ahmed Tested User creation  ---------- */
 
 if (! is_null ( $job )) {
 // 	var_dump ( $job->groupformationid);
 	
 // 	var_dump ( $jm::is_job_aborted ( $job ) );
 	
-// 	$result = $jm::do_groupal ( $job );
+ 	$result = $jm::do_groupal ( $job );
+	//if (get_user_)
+
 	
 // var_dump ( $result );
 	
