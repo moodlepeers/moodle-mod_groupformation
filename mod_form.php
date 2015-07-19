@@ -156,6 +156,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 	 * @param unknown $mform        	
 	 */
 	function generateHTMLforJS(&$mform) {
+		global $PAGE;
 		// open div tag for js related content
 		$mform->addElement ( 'html', '<div id="js-content" style="display:none;">' );
 		
@@ -414,7 +415,13 @@ class mod_groupformation_mod_form extends moodleform_mod {
                 </div>
 
                 <div class="gf_pad_content">
-                <p><span id="studentsInCourse"><b>500</b></span> ' . get_string ( 'students_enrolled_info', 'groupformation' ) . '</p>
+                <p><span id="studentsInCourse"><b>');
+
+		$context = $PAGE->context;
+        $count = count(
+        get_enrolled_users($context,'mod/groupformation:onlystudent'));
+                
+        $mform->addElement ('html', $count.'</b></span> ' . get_string ( 'students_enrolled_info', 'groupformation' ) . '</p>
                     <div class="grid">
                     <div class="col_m_50"><label><input type="radio" name="group_opt" id="group_opt_size" value="group_size" checked="checked" />
                                 ' . get_string ( 'maxmembers', 'groupformation' ) . '</label>
