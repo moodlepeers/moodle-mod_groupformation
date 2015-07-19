@@ -55,12 +55,8 @@ class build_groups extends \core\task\scheduled_task {
 	 * Resets all aborted jobs which are not currently running
 	 */
 	private function reset_aborted_jobs() {
-		groupformation_log ( 1, 1, '<view_teacher_overview>' );
-		
 		$jobs = \mod_groupformation_job_manager::get_aborted_jobs ();
-		groupformation_log ( 2, 1, '<view_teacher_overview>' );
 		foreach ( $jobs as $key => $job ) {
-			groupformation_log ( 3, 1, '<view_teacher_overview>' );
 			\mod_groupformation_job_manager::reset_job ( $job );
 		}
 	}

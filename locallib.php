@@ -50,10 +50,10 @@ function groupformation_add_jquery($PAGE, $filename = null) {
  * @param unknown $PAGE        	
  * @param string $filename        	
  */
-function groupformation_log($userid, $groupformationid, $message) {
+function groupformation_log($userid, $groupformationid, $message, $message_check = true) {
 	$logging_controller = new mod_groupformation_logging_controller ();
 	
-	return $logging_controller->handle ( $userid, $groupformationid, $message );
+	return $logging_controller->handle ( $userid, $groupformationid, $message, $message_check );
 }
 
 /**

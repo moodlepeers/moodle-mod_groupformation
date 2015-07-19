@@ -423,6 +423,10 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 			$user_record = $this->store->getUser($user->userid);
 			if (!is_null($user_record))
 				$userName = fullname($user_record);
+			
+			if (!(strlen($userName)>2)){
+				$userName = $user->userid;
+			}
 			$userLink = $url;
 			
 			$groupMembers [$user->userid] = [ 
