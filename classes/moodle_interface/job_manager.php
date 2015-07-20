@@ -236,17 +236,17 @@ class mod_groupformation_job_manager {
 	public static function do_groupal($job) {
 		$groupformationid = $job->groupformationid;
 		/**
-		 * <Testdaten>
+		 * <Testdaten>----------------------------------------------------
 		 */
 		
 		// $groupal_participants = self::get_testing_data ( 3, 4 );
 		
 		/**
-		 * </Testdaten>
+		 * </Testdaten>----------------------------------------------------
 		 */
 		
 		/**
-		 * <Echte Daten>
+		 * <Echte Daten>----------------------------------------------------
 		 */
 		
 		$userfilter = new mod_groupformation_userid_filter ( $groupformationid );
@@ -256,24 +256,33 @@ class mod_groupformation_job_manager {
 		
 		$pp = new mod_groupformation_participant_parser ( $groupformationid );
 		
-		$divided_userlist = array_chunk ( $completed_users, count ( $completed_users ) / 2 );
+		$divided_userlist = array_chunk ( $completed_users, ceil ( count ( $completed_users ) / 2.0 ) );
 		
-		$groupal_users = $divided_userlist [0];
-		$random_users = $divided_userlist [1];
+		if (!is_null ( $divided_userlist [0] )) {
+			$groupal_users = $divided_userlist [0];
+		} else {
+			$groupal_users = array();
+		}
+		if (!is_null ( $divided_userlist [1] )) {
+			$random_users = $divided_userlist [1];
+		} else {
+			$random_users = array();
+		}
 		
 		// Generate participants for Groupal
 		$participants = $pp->build_participants ( $completed_users );
 		$groupal_participants = $participants;
 		
 		// Generate empty participants
-		$participants == $pp->build_empty_participants ( $random_users );
+		$participants = $pp->build_empty_participants ( $random_users );
 		$random_participants = $participants;
 		
 		// Generate empty participants
-		$participants == $pp->build_empty_participants ( $not_completed_users );
+		$participants = $pp->build_empty_participants ( $not_completed_users );
 		$incomplete_participants = $participants;
+		
 		/**
-		 * </Echte Daten>
+		 * </Echte Daten>----------------------------------------------------
 		 */
 		
 		$store = new mod_groupformation_storage_manager ( $groupformationid );
@@ -409,14 +418,14 @@ class mod_groupformation_job_manager {
 				'groupformationid' => $groupformationid 
 		) )) {
 			return $DB->get_record ( 'groupformation_jobs', array (
-					'groupformationid' => $groupformationid
+					'groupformationid' => $groupformationid 
 			) );
-		}else{
-			$record = new stdClass();
+		} else {
+			$record = new stdClass ();
 			$record->groupformationid = $groupformationid;
-			$DB->insert_record('groupformation_jobs',$record);
+			$DB->insert_record ( 'groupformation_jobs', $record );
 			return $DB->get_record ( 'groupformation_jobs', array (
-					'groupformationid' => $groupformationid
+					'groupformationid' => $groupformationid 
 			) );
 		}
 	}

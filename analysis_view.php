@@ -105,7 +105,7 @@ $pp = new mod_groupformation_participant_parser($groupformation->id);
 
 $jm = new mod_groupformation_job_manager ();
 
-$job = null;
+$job = $jm::get_job($groupformation->id);
 
 // $job = $jm::get_next_job ();
 /* ----------  Ahmed Testet User creation  ---------- */

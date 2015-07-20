@@ -269,9 +269,12 @@ class mod_groupformation_participant_parser {
 	 * @param unknown $users
 	 */
 	public function build_empty_participants ( $users ) {
-		// Participants with null for the criterion
-		
 		$participants = array();
+		
+		foreach ($users as $user){
+			$participant = new Participant(null, $user);
+			$participants[] = $participant;	
+		}
 		
 		return $participants;
 	}
