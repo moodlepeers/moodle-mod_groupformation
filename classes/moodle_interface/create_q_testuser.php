@@ -169,6 +169,10 @@ class mod_groupformation_create_q_testuser {
                 $DB->insert_record("groupformation_started", $sql);
                 $DB->insert_records("groupformation_answer", $allInserts);
 
+                // enroll user
+                global $COURSE;
+                enrol_try_internal_enrol($COURSE->id, $userid);
+
             } catch (Exception $e) {
                 echo "<div class='alert'>$user DB-Eintrag fehlgeschlagen</div>";
             }
