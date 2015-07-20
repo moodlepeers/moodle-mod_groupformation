@@ -16,7 +16,7 @@ class mod_groupformation_create_q_testuser {
      * @param
      * @return array of created users
      */
-    public function createTestusers($number) {
+    public function createTestusers($number, $nTopics, $nKnowledges) {
         /* container for created users */
         global $DB;
         $users = array();
@@ -41,38 +41,27 @@ class mod_groupformation_create_q_testuser {
                 $userid = $userStd->id;
 
                 $groupformation = 7;
-                // groupformation: #, category: topic, questionid: 1, userid: #, answer: 1
-                // groupformation: #, category: topic, questionid: 2, userid: #, answer: 2
-                $sql = new stdClass();
-                $sql->groupformation = $groupformation;
-                $sql->category = "topic";
-                $sql->questionid = 1;
-                $sql->userid = $userid;
-                $sql->answer = 1;
-                $allInserts[] = $sql;
-                $sql = new stdClass();
-                $sql->groupformation = $groupformation;
-                $sql->category = "topic";
-                $sql->questionid = 2;
-                $sql->userid = $userid;
-                $sql->answer = 2;
-                $allInserts[] = $sql;
-                // groupformation: #, category: knowledge, questionid: 1, userid: #, answer: 3
-                // groupformation: #, category: knowledge, questionid: 2, userid: #, answer: 2
-                $sql = new stdClass();
-                $sql->groupformation = $groupformation;
-                $sql->category = "knowledge";
-                $sql->questionid = 1;
-                $sql->userid = $userid;
-                $sql->answer = 3;
-                $allInserts[] = $sql;
-                $sql = new stdClass();
-                $sql->groupformation = $groupformation;
-                $sql->category = "knowledge";
-                $sql->questionid = 2;
-                $sql->userid = $userid;
-                $sql->answer = 2;
-                $allInserts[] = $sql;
+                // groupformation: #, category: topic, questionid: <iteration>, userid: #, answer: <iteration>
+                for ($i = 1; $i<= $nTopics; $i++) {
+                    $sql = new stdClass();
+                    $sql->groupformation = $groupformation;
+                    $sql->category = "topic";
+                    $sql->questionid = $i; // $i, weil anzahl topics = anzahl id's
+                    $sql->userid = $userid;
+                    $sql->answer = $i; // $i, damit topics nur einmal, in "erstellter" Reihenfolge, sortiert sind
+                    $allInserts[] = $sql;
+                }
+
+                // groupformation: #, category: knowledge, questionid: <iteration>, userid: #, answer: 1 - 6
+                for ($i = 1; $i <= $nKnowledges; $i++) {
+                    $sql = new stdClass();
+                    $sql->groupformation = $groupformation;
+                    $sql->category = "knowledge";
+                    $sql->questionid = $i; // gleiche Sache wie bei topics (oben drüber)
+                    $sql->userid = $userid;
+                    $sql->answer = ($j % 2 == 0) ? 1 : 6;
+                    $allInserts[] = $sql;
+                }
                 // groupformation: #, category: grade, questionid: 1, userid: #, answer: 1
                 // groupformation: #, category: grade, questionid: 2, userid: #, answer: 4
                 // groupformation: #, category: grade, questionid: 3, userid: #, answer: 1
@@ -182,5 +171,18 @@ class mod_groupformation_create_q_testuser {
         /* ---------- / Fragebogen fuer jeden user ausfuellen  ---------- */
 
         return "user erstellt!!";
+    }
+
+    public function deleteTestusers() {
+        global $DB;
+        try {
+            $DB->delete_records("groupformation_answer");
+            $DB->delete_records("groupformation_started");
+            $DB->delete_records("user", array("id"=> "id > 5"));
+            return "true";
+        } catch (Exception $e) {
+            return "false";
+        }
+
     }
 }

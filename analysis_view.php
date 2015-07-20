@@ -116,9 +116,11 @@ $cqt = new mod_groupformation_create_q_testuser();
  * beachte:
  *  ->	in create_q_testuser.php: Zeile 44, groupformationid hard setzen
  *  ->	job_manager.php: groupsize setzen, ist derzeit noch hard gesetzt
+ * @param1: Anzahl testuser
+ * @param2: Anzahl verfügbarer Themen
+ * @param3: Anzahl verschiedener "Vorwissen"
  */
-// echo $cqt->createTestusers(30);
-
+//echo $cqt->createTestusers(30, 2, 2);
 
 
 
