@@ -405,9 +405,20 @@ class mod_groupformation_job_manager {
 	 */
 	public static function get_job($groupformationid) {
 		global $DB;
-		return $DB->get_record ( 'groupformation_jobs', array (
+		if ($DB->record_exists ( 'groupformation_jobs', array (
 				'groupformationid' => $groupformationid 
-		) );
+		) )) {
+			return $DB->get_record ( 'groupformation_jobs', array (
+					'groupformationid' => $groupformationid
+			) );
+		}else{
+			$record = new stdClass();
+			$record->groupformationid = $groupformationid;
+			$DB->insert_record('groupformation_jobs',$record);
+			return $DB->get_record ( 'groupformation_jobs', array (
+					'groupformationid' => $groupformationid
+			) );
+		}
 	}
 	
 	/**

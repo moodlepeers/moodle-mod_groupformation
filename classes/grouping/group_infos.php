@@ -50,7 +50,7 @@
 		 */
 		public function render($userid) {
 			global $CFG, $COURSE;
-			if ($this->groups_store->hasGroup ( $userid )) {
+			if ($this->groups_store->hasGroup ( $userid ) && $this->groups_store->groupsCreated($this->groupformationid)) {
 				$id = $this->groups_store->getGroupID ( $userid );
 				
 				$name = $this->groups_store->getGroupName ( $userid );
