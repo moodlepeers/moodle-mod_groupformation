@@ -28,7 +28,7 @@ class build_groups extends \core\task\scheduled_task {
 		$this->reset_aborted_jobs ();
 		
 		// Look for jobs; select a job; get it done
-// 		$this->do_job ();
+		$this->do_job ();
 		
 		return true;
 	}

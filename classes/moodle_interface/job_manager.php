@@ -135,6 +135,19 @@ class mod_groupformation_job_manager {
 		if ($job->started == 0 && $resettime)
 			$job->timestarted = 0;
 		
+		if ($resettime) {
+			$job->matcher_used = null;
+			$job->count_groups = null;
+			$job->performance_index = null;
+			$job->stats_avg_variance = null;
+			$job->stats_variance = null;
+			$job->stats_n = null;
+			$job->stats_avg = null;
+			$job->stats_st_dev = null;
+			$job->stats_norm_st_dev = null;
+			$job->stats_performance_index = null;
+		}
+		
 		return $DB->update_record ( 'groupformation_jobs', $job );
 	}
 	
@@ -258,15 +271,15 @@ class mod_groupformation_job_manager {
 		
 		$divided_userlist = array_chunk ( $completed_users, ceil ( count ( $completed_users ) / 2.0 ) );
 		
-		if (!is_null ( $divided_userlist [0] )) {
+		if (! is_null ( $divided_userlist [0] )) {
 			$groupal_users = $divided_userlist [0];
 		} else {
-			$groupal_users = array();
+			$groupal_users = array ();
 		}
-		if (!is_null ( $divided_userlist [1] )) {
+		if (! is_null ( $divided_userlist [1] )) {
 			$random_users = $divided_userlist [1];
 		} else {
-			$random_users = array();
+			$random_users = array ();
 		}
 		
 		// Generate participants for Groupal
@@ -304,7 +317,9 @@ class mod_groupformation_job_manager {
 		// $gfra = new GroupFormationRandomAlgorithm($incomplete_participants, $groupsize);
 		// $incomplete_cohort = $gfra->doOneFormation();
 		
-		return $cohort->getResult ();
+		var_dump ( $cohort );
+		
+		return $cohort;
 	}
 	
 	/**
@@ -314,8 +329,10 @@ class mod_groupformation_job_manager {
 	 * @param stdClass $result        	
 	 * @return boolean
 	 */
-	public static function save_result($job, $result) {
+	public static function save_result($job, $cohort) {
 		global $DB;
+		
+		$result = $cohort->getResult ();
 		
 		$flags = array (
 				"groupal" => 1,
@@ -329,7 +346,39 @@ class mod_groupformation_job_manager {
 		
 		self::set_job ( $job, 'done', true );
 		
+		self::save_stats ( $job, $cohort );
+		
 		return true;
+	}
+	
+	/**
+	 * Saves stats for computed job
+	 *
+	 * @param unknown $job        	
+	 * @param unknown $cohort        	
+	 */
+	private static function save_stats($job, $cohort) {
+		global $DB;
+		
+		$record = $DB->get_record ( 'groupformation_jobs', array (
+				'id' => $job->id 
+		) );
+		
+		$record->matcher_used = $cohort->whichMatcherUsed;
+		$record->count_groups = $cohort->countOfGroups;
+		$record->performance_index = $cohort->cohortPerformanceIndex;
+		
+		$stats = $cohort->results;
+		
+		$record->stats_avg_variance = $stats->averageVariance;
+		$record->stats_variance = $stats->variance;
+		$record->stats_n = $stats->n;
+		$record->stats_avg = $stats->avg;
+		$record->stats_st_dev = $stats->stDev;
+		$record->stats_norm_st_dev = $stats->normStDev;
+		$record->stats_performance_index = $stats->performanceIndex;
+		
+		$DB->update_record ( 'groupformation_jobs', $record );
 	}
 	
 	/**
