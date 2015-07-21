@@ -132,7 +132,9 @@ if (! is_null ( $job )) {
 // 	var_dump ( $jm::is_job_aborted ( $job ) );
 	
  	$result = $jm::do_groupal ( $job );
-	//if (get_user_)
+	
+ 	var_dump($result);
+	var_dump($result->getResult());
 
 	
 // var_dump ( $result );

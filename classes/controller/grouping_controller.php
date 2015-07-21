@@ -20,7 +20,6 @@ class mod_groupformation_grouping_controller {
 	private $job = NULL;
 	private $view = NULL;
 	private $job_status;
-	private $job_status_options;
 	private $surveyState;
 	
 	// generierte Gruppen als Moodlegruppen übernommen
@@ -52,7 +51,6 @@ class mod_groupformation_grouping_controller {
 		$this->surveyState = $this->store->isQuestionaireAvailable ();
 		
 		// status job
-		$this->job_status_options = mod_groupformation_job_manager::get_status_options ();
 		$this->job = mod_groupformation_job_manager::get_job ( $this->groupformationID );
 		$this->job_status = mod_groupformation_job_manager::get_status ( $this->job );
 		

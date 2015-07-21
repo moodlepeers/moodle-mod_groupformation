@@ -317,7 +317,7 @@ class mod_groupformation_job_manager {
 		// $gfra = new GroupFormationRandomAlgorithm($incomplete_participants, $groupsize);
 		// $incomplete_cohort = $gfra->doOneFormation();
 		
-		var_dump ( $cohort );
+		// var_dump ( $cohort );
 		
 		return $cohort;
 	}
@@ -329,24 +329,58 @@ class mod_groupformation_job_manager {
 	 * @param stdClass $result        	
 	 * @return boolean
 	 */
-	public static function save_result($job, $cohort) {
+	public static function save_result($job, $groupal_cohort = null, $random_cohort = null, $incomplete_cohort = null) {
 		global $DB;
 		
-		$result = $cohort->getResult ();
+		if (! is_null ( $groupal_cohort )) {
+			
+			$result = $groupal_cohort->getResult ();
+			
+			$flags = array (
+					"groupal" => 1,
+					"random" => 0,
+					"mrandom" => 0,
+					"created" => 0 
+			);
+			
+			$idmap = self::create_groups ( $job, $result->groups, $flags );
+			
+			self::assign_users_to_groups ( $job, $result->users, $idmap );
+			
+			self::save_stats ( $job, $groupal_cohort );
+		}
 		
-		$flags = array (
-				"groupal" => 1,
-				"random" => 0,
-				"mrandom" => 0,
-				"created" => 0 
-		);
-		$idmap = self::create_groups ( $job, $result->groups, $flags );
+		if (! is_null ( $random_cohort )) {
+			$result = $groupal_cohort->getResult ();
+			
+			$flags = array (
+					"groupal" => 0,
+					"random" => 0,
+					"mrandom" => 1,
+					"created" => 0 
+			);
+			
+			$idmap = self::create_groups ( $job, $result->groups, $flags );
+			
+			self::assign_users_to_groups ( $job, $result->users, $idmap );
+		}
 		
-		self::assign_users_to_groups ( $job, $result->users, $idmap );
+		if (! is_null ( $incomplete_cohort )) {
+			$result = $incomplete_cohort->getResult ();
+			
+			$flags = array (
+					"groupal" => 0,
+					"random" => 1,
+					"mrandom" => 0,
+					"created" => 0
+			);
+			
+			$idmap = self::create_groups ( $job, $result->groups, $flags );
+			
+			self::assign_users_to_groups ( $job, $result->users, $idmap );
+		}
 		
 		self::set_job ( $job, 'done', true );
-		
-		self::save_stats ( $job, $cohort );
 		
 		return true;
 	}
