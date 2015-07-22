@@ -269,17 +269,22 @@ class mod_groupformation_job_manager {
 		
 		$pp = new mod_groupformation_participant_parser ( $groupformationid );
 		
-		$divided_userlist = array_chunk ( $completed_users, ceil ( count ( $completed_users ) / 2.0 ) );
-		
-		if (! is_null ( $divided_userlist [0] )) {
-			$groupal_users = $divided_userlist [0];
+		if (count ( $completed_users ) > 2) {
+			$divided_userlist = array_chunk ( $completed_users, ceil ( count ( $completed_users ) / 2.0 ) );
+			
+			if (! is_null ( $divided_userlist [0] )) {
+				$groupal_users = $divided_userlist [0];
+			} else {
+				$groupal_users = array ();
+			}
+			if (! is_null ( $divided_userlist [1] )) {
+				$random_users = $divided_userlist [1];
+			} else {
+				$random_users = array ();
+			}
 		} else {
-			$groupal_users = array ();
-		}
-		if (! is_null ( $divided_userlist [1] )) {
-			$random_users = $divided_userlist [1];
-		} else {
-			$random_users = array ();
+			$groupal_users = $completed_users;
+			$random_users = array();
 		}
 		
 		// Generate participants for Groupal
@@ -372,7 +377,7 @@ class mod_groupformation_job_manager {
 					"groupal" => 0,
 					"random" => 1,
 					"mrandom" => 0,
-					"created" => 0
+					"created" => 0 
 			);
 			
 			$idmap = self::create_groups ( $job, $result->groups, $flags );
