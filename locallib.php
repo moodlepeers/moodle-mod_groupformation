@@ -45,15 +45,83 @@ function groupformation_add_jquery($PAGE, $filename = null) {
 }
 
 /**
- * Logs action
- *
- * @param unknown $PAGE        	
- * @param string $filename        	
+ * Logs message
+ * 
+ * @param integer $userid
+ * @param integer $groupformationid
+ * @param string $message
+ * @param string $level
+ * @return boolean
  */
-function groupformation_log($userid, $groupformationid, $message, $message_check = true) {
+function groupformation_log($userid, $groupformationid, $message, $level = 'info') {
 	$logging_controller = new mod_groupformation_logging_controller ();
 	
-	return $logging_controller->handle ( $userid, $groupformationid, $message, $message_check );
+	return $logging_controller->handle ( $userid, $groupformationid, $message, $level );
+}
+
+/**
+ * Logs debug message
+ * 
+ * @param integer $userid
+ * @param integer $groupformationid
+ * @param string $message
+ * @param string $level
+ * @return boolean
+ */
+function groupformation_debug($userid, $groupformationid, $message) {
+	return groupformation_log($userid, $groupformationid, $message, $level = 'debug');
+}
+
+/**
+ * Logs info message
+ *
+ * @param integer $userid
+ * @param integer $groupformationid
+ * @param string $message
+ * @param string $level
+ * @return boolean
+ */
+function groupformation_info($userid, $groupformationid, $message) {
+	return groupformation_log($userid, $groupformationid, $message, $level = 'info');
+}
+
+/**
+ * Logs warn message
+ * 
+ * @param integer $userid
+ * @param integer $groupformationid
+ * @param string $message
+ * @param string $level
+ * @return boolean
+ */
+function groupformation_warn($userid, $groupformationid, $message) {
+	return groupformation_log($userid, $groupformationid, $message, $level = 'warn');
+}
+
+/**
+ * Logs error message
+ * 
+ * @param integer $userid
+ * @param integer $groupformationid
+ * @param string $message
+ * @param string $level
+ * @return boolean
+ */
+function groupformation_error($userid, $groupformationid, $message) {
+	return groupformation_log($userid, $groupformationid, $message, $level = 'error');
+}
+
+/**
+ * Logs fatal message
+ *
+ * @param integer $userid
+ * @param integer $groupformationid
+ * @param string $message
+ * @param string $level
+ * @return boolean
+ */
+function groupformation_fatal($userid, $groupformationid, $message) {
+	return groupformation_log($userid, $groupformationid, $message, $level = 'fatal');
 }
 
 /**

@@ -79,11 +79,11 @@ class mod_groupformation_logging_controller {
 	 */
 	public function __construct() {
 		$this->LOGGING_LEVELS = array (
-				self::FATAL,
-				self::ERROR,
-				self::WARNING,
-				self::INFO,
-				self::DEBUG 
+				self::FATAL => 'fatal',
+				self::ERROR => 'error',
+				self::WARNING => 'warning',
+				self::INFO => 'info',
+				self::DEBUG => 'debug' 
 		);
 	}
 	
@@ -95,8 +95,8 @@ class mod_groupformation_logging_controller {
 	 * @param string $message        	
 	 * @return boolean
 	 */
-	public function handle($userid, $groupformationid, $message, $messageCheck = true) {
-		if ($groupformationid != 0 && ($messageCheck & $this->isValidMessage ( $message )))
+	public function handle($userid, $groupformationid, $message, $level) {
+		if ($groupformationid != 0)
 			$this->create_log_entry ( $userid, $groupformationid, $message );
 		else
 			return false;

@@ -32,6 +32,7 @@ require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/userid_filte
 require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_parser.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/lib.php');
+require_once ($CFG->dirroot . '/mod/groupformation/locallib.php');
 
 require_once ($CFG->dirroot . '/lib/groupal/classes/Criteria/SpecificCriterion.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/Participant.php');
@@ -246,7 +247,8 @@ class mod_groupformation_job_manager {
 	 * @param stdClass $job        	
 	 * @return stdClass
 	 */
-	public static function do_groupal($job) {
+	public static function do_groupal($job, &$groupal_cohort, &$random_cohort, &$incomplete_cohort) {
+		
 		$groupformationid = $job->groupformationid;
 		/**
 		 * <Testdaten>----------------------------------------------------
@@ -284,8 +286,10 @@ class mod_groupformation_job_manager {
 			}
 		} else {
 			$groupal_users = $completed_users;
-			$random_users = array();
+			$random_users = array ();
 		}
+		
+		$starttime = microtime ( true );
 		
 		// Generate participants for Groupal
 		$participants = $pp->build_participants ( $completed_users );
@@ -298,6 +302,11 @@ class mod_groupformation_job_manager {
 		// Generate empty participants
 		$participants = $pp->build_empty_participants ( $not_completed_users );
 		$incomplete_participants = $participants;
+
+		$endtime = microtime ( true );
+		$comptime = $endtime - $starttime;
+		
+		groupformation_log ( null, $job->groupformationid, 'building participants for groupal needed ' . $comptime . 'ms' );
 		
 		/**
 		 * </Echte Daten>----------------------------------------------------
@@ -305,13 +314,25 @@ class mod_groupformation_job_manager {
 		
 		$store = new mod_groupformation_storage_manager ( $groupformationid );
 		$groupsize = 6; // intval ( $store->getGroupSize () );
-		                
+		
+		$cohort = null;
+		
+		if (count($groupal_participants)>0) {
+		
 		// Matcher (einer von beiden)
 		$matcher = new GroupALGroupCentricMatcher ();
+		
+		$starttime = microtime ( true );
 		
 		$gfa = new GroupFormationAlgorithm ( $groupal_participants, $matcher, $groupsize );
 		$cohort = $gfa->doOneFormation ();
 		
+		$endtime = microtime ( true );
+		$comptime = $endtime - $starttime;
+		
+		groupformation_log ( null, $job->groupformationid, 'groupal needed ' . $comptime . 'ms' );
+			
+		}
 		// TODO @Nora: Leg in der Lib eine Klasse GroupFormationRandomAlgorithm an,
 		// welche die Participants und groupsize im Konstruktor bekommt
 		// $gfra = new GroupFormationRandomAlgorithm($random_participants, $groupsize);

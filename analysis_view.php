@@ -105,10 +105,6 @@ $pp = new mod_groupformation_participant_parser($groupformation->id);
 
 $jm = new mod_groupformation_job_manager ();
 
-$job = null; 
-$job = $jm::get_job($groupformation->id);
-
-// $job = $jm::get_next_job ();
 /* ----------  Ahmed Testet User creation  ---------- */
 
 $cqt = new mod_groupformation_create_q_testuser();
@@ -126,14 +122,23 @@ $cqt = new mod_groupformation_create_q_testuser();
 
 /* ---------- / Ahmed Tested User creation  ---------- */
 
+$job = null;
+$groupal_cohort = null;
+$random_cohort = null;
+$incomplete_cohort = null;
+
+$job = $jm::get_job($groupformation->id);
+
+// $job = $jm::get_next_job ();
+
 if (! is_null ( $job )) {
 // 	var_dump ( $job->groupformationid);
 	
 // 	var_dump ( $jm::is_job_aborted ( $job ) );
 	
- 	//$result = $jm::do_groupal ( $job );
+ 	$result = $jm::do_groupal ( $job, $groupal_cohort, $random_cohort, $incomplete_cohort);
 	
- 	//var_dump($result);
+//  	var_dump($result);
 	//var_dump($result->getResult());
 
 	

@@ -42,10 +42,10 @@ class build_groups extends \core\task\scheduled_task {
 		$saved = false;
 		$job = \mod_groupformation_job_manager::get_next_job ();
 		if (! is_null ( $job )) {
-			$result = \mod_groupformation_job_manager::do_groupal ( $job );
+			$result = \mod_groupformation_job_manager::do_groupal ( $job, $groupal_cohort, $random_cohort, $incomplete_cohort);
 			$aborted = \mod_groupformation_job_manager::is_job_aborted ( $job );
 			if (! $aborted) {
-				$saved = \mod_groupformation_job_manager::save_result ( $job, $result );
+				$saved = \mod_groupformation_job_manager::save_result ( $job, $groupal_cohort );
 			}
 		}
 		return $saved;
