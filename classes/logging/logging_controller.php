@@ -26,7 +26,7 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 	die ( 'Direct access to this script is forbidden.' ); // / It must be included from a Moodle page
 }
 class mod_groupformation_logging_controller {
-	const LOGGING_LEVEL = 4;
+	const LOGGING_LEVEL = 4; // <= Sperre
 	const FATAL = 0;
 	const ERROR = 1;
 	const WARNING = 2;
