@@ -92,7 +92,7 @@ if ($_POST) {
  */
 
 // Log access to page
-groupformation_log ( $USER->id, $groupformation->id, '<view_teacher_grouping>' );
+groupformation_info ( $USER->id, $groupformation->id, '<view_teacher_grouping>' );
 
 // Trigger event TODO @Nora why?
 groupformation_trigger_event ( $cm, $course, $groupformation, $context );

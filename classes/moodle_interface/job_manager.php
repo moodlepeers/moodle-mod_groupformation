@@ -70,6 +70,9 @@ class mod_groupformation_job_manager {
 				$next = $job;
 		}
 		self::set_job ( $next, "started", true );
+		
+		groupformation_info ( null, $next->groupformationid, 'groupal job with groupformation id="' . $next->groupformationid . '" selected' );
+		
 		return $next;
 	}
 	
@@ -99,6 +102,7 @@ class mod_groupformation_job_manager {
 	 */
 	public static function reset_job($job) {
 		self::set_job ( $job, "ready", false, true );
+		groupformation_info ( null, $job->groupformationid, 'groupal job with groupformation id="' . $job->groupformationid . '" resetted' );
 	}
 	
 	/**
@@ -111,31 +115,43 @@ class mod_groupformation_job_manager {
 	public static function set_job($job, $state = "ready", $settime = false, $resettime = false) {
 		global $DB;
 		$status_options = self::get_status_options ();
+		
 		if (array_key_exists ( $state, $status_options ))
 			$status = $status_options [$state];
 		else
 			$status = $state;
 		if (! (preg_match ( "/[0-1]{4}/", $status ) && strlen ( $status ) == 4))
 			return false;
+		
 		$job->waiting = $status [0];
 		$job->started = $status [1];
 		$job->aborted = $status [2];
 		$job->done = $status [3];
 		
-		if ($job->waiting == 1 && $settime)
+		if ($job->waiting == 1 && $settime) {
 			$job->timecreated = time ();
-		if ($job->done == 1 && $settime)
+			groupformation_info ( null, $job->groupformationid, 'groupal job with groupformation id="' . $job->groupformationid . '" set to waiting' );
+		}
+		if ($job->done == 1 && $settime) {
 			$job->timefinished = time ();
-		if ($job->started == 1 && $settime)
+			groupformation_info ( null, $job->groupformationid, 'groupal job with groupformation id="' . $job->groupformationid . '" set to done' );
+		}
+		if ($job->started == 1 && $settime) {
 			$job->timestarted = time ();
-		
-		if ($job->waiting == 0 && $resettime)
+			groupformation_info ( null, $job->groupformationid, 'groupal job with groupformation id="' . $job->groupformationid . '" set to started' );
+		}
+		if ($job->aborted == 1) {
+			groupformation_info ( null, $job->groupformationid, 'groupal job with groupformation id="' . $job->groupformationid . '" set to aborted' );
+		}
+		if ($job->waiting == 0 && $resettime) {
 			$job->timecreated = 0;
-		if ($job->done == 0 && $resettime)
+		}
+		if ($job->done == 0 && $resettime) {
 			$job->timefinished = 0;
-		if ($job->started == 0 && $resettime)
+		}
+		if ($job->started == 0 && $resettime) {
 			$job->timestarted = 0;
-		
+		}
 		if ($resettime) {
 			$job->matcher_used = null;
 			$job->count_groups = null;
@@ -248,7 +264,6 @@ class mod_groupformation_job_manager {
 	 * @return stdClass
 	 */
 	public static function do_groupal($job, &$groupal_cohort, &$random_cohort, &$incomplete_cohort) {
-		
 		$groupformationid = $job->groupformationid;
 		/**
 		 * <Testdaten>----------------------------------------------------
@@ -302,11 +317,11 @@ class mod_groupformation_job_manager {
 		// Generate empty participants
 		$participants = $pp->build_empty_participants ( $not_completed_users );
 		$incomplete_participants = $participants;
-
+		
 		$endtime = microtime ( true );
 		$comptime = $endtime - $starttime;
 		
-		groupformation_log ( null, $job->groupformationid, 'building participants for groupal needed ' . $comptime . 'ms' );
+		groupformation_info ( null, $job->groupformationid, 'building participants for groupal needed ' . $comptime . 'ms' );
 		
 		/**
 		 * </Echte Daten>----------------------------------------------------
@@ -317,21 +332,20 @@ class mod_groupformation_job_manager {
 		
 		$cohort = null;
 		
-		if (count($groupal_participants)>0) {
-		
-		// Matcher (einer von beiden)
-		$matcher = new GroupALGroupCentricMatcher ();
-		
-		$starttime = microtime ( true );
-		
-		$gfa = new GroupFormationAlgorithm ( $groupal_participants, $matcher, $groupsize );
-		$cohort = $gfa->doOneFormation ();
-		
-		$endtime = microtime ( true );
-		$comptime = $endtime - $starttime;
-		
-		groupformation_log ( null, $job->groupformationid, 'groupal needed ' . $comptime . 'ms' );
+		if (count ( $groupal_participants ) > 0) {
 			
+			// Matcher (einer von beiden)
+			$matcher = new GroupALGroupCentricMatcher ();
+			
+			$starttime = microtime ( true );
+			
+			$gfa = new GroupFormationAlgorithm ( $groupal_participants, $matcher, $groupsize );
+			$cohort = $gfa->doOneFormation ();
+			
+			$endtime = microtime ( true );
+			$comptime = $endtime - $starttime;
+			
+			groupformation_info ( null, $job->groupformationid, 'groupal needed ' . $comptime . 'ms' );
 		}
 		// TODO @Nora: Leg in der Lib eine Klasse GroupFormationRandomAlgorithm an,
 		// welche die Participants und groupsize im Konstruktor bekommt
@@ -407,6 +421,8 @@ class mod_groupformation_job_manager {
 		}
 		
 		self::set_job ( $job, 'done', true );
+		
+		groupformation_info ( null, $job->groupformationid, 'groupal results saved' );
 		
 		return true;
 	}

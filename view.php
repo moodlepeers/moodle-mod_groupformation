@@ -55,7 +55,7 @@
 	}
 	
 	// Log access to page
-	groupformation_log($USER->id,$groupformation->id,'<view_student_overview>');
+	groupformation_info($USER->id,$groupformation->id,'<view_student_overview>');
 	
 	$store = new mod_groupformation_storage_manager($groupformation->id);
 	$info = new mod_groupformation_info_text ($cm->id, $groupformation->id, $userid );

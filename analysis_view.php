@@ -57,7 +57,7 @@ if (! has_capability ( 'mod/groupformation:editsettings', $context )) {
 }
 
 // Log access to page
-groupformation_log ( $USER->id, $groupformation->id, '<view_teacher_overview>' );
+groupformation_info ( $USER->id, $groupformation->id, '<view_teacher_overview>' );
 
 // Trigger event TODO @Nora why?
 // groupformation_trigger_event($cm, $course, $groupformation, $context);

@@ -61,12 +61,12 @@
 	if (!has_capability('mod/groupformation:editsettings', $context)) {
 		$current_tab = 'answering';
 		// Log access to page
-		groupformation_log($USER->id,$groupformation->id,'<view_student_questionaire>');
+		groupformation_info($USER->id,$groupformation->id,'<view_student_questionaire>');
 		
 	} else {
 		$current_tab = 'view';
 		// Log access to page
-		groupformation_log($USER->id,$groupformation->id,'<view_teacher_questionaire_preview>');
+		groupformation_info($USER->id,$groupformation->id,'<view_teacher_questionaire_preview>');
 	}
 	
 	if (isset($_POST["category"])){

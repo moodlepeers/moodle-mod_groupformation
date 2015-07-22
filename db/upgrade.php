@@ -184,7 +184,7 @@ function xmldb_groupformation_upgrade($oldversion) {
 		
 		// Define field userid to be added to groupformation_logging.
 		$table = new xmldb_table ( 'groupformation_logging' );
-		$field = new xmldb_field ( 'userid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null, 'timestamp' );
+		$field = new xmldb_field ( 'userid', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'timestamp' );
 		
 		// Conditionally launch add field userid.
 		if (! $dbman->field_exists ( $table, $field )) {
@@ -193,7 +193,7 @@ function xmldb_groupformation_upgrade($oldversion) {
 		
 		// Define field groupformationid to be added to groupformation_logging.
 		$table = new xmldb_table ( 'groupformation_logging' );
-		$field = new xmldb_field ( 'groupformationid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null, 'userid' );
+		$field = new xmldb_field ( 'groupformationid', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'userid' );
 		
 		// Conditionally launch add field groupformationid.
 		if (! $dbman->field_exists ( $table, $field )) {
@@ -685,6 +685,33 @@ function xmldb_groupformation_upgrade($oldversion) {
 		// Groupformation savepoint reached.
 		upgrade_mod_savepoint ( true, 2015072000, 'groupformation' );
 	}
+	
+	if ($oldversion < 2015072200) {
+	
+		// Changing nullability of field groupformationid on table groupformation_logging to not null.
+		$table = new xmldb_table('groupformation_logging');
+		$field = new xmldb_field('groupformationid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null, 'userid');
+	
+		// Launch change of nullability for field groupformationid.
+		$dbman->change_field_notnull($table, $field);
+	
+		// Groupformation savepoint reached.
+		upgrade_mod_savepoint(true, 2015072200, 'groupformation');
+	}
+	
+	if ($oldversion < 2015072201) {
+	
+		// Changing type of field timestamp on table groupformation_logging to number.
+		$table = new xmldb_table('groupformation_logging');
+		$field = new xmldb_field('timestamp', XMLDB_TYPE_NUMBER, '20, 8', null, XMLDB_NOTNULL, null, null, 'id');
+	
+		// Launch change of type for field timestamp.
+		$dbman->change_field_type($table, $field);
+	
+		// Groupformation savepoint reached.
+		upgrade_mod_savepoint(true, 2015072201, 'groupformation');
+	}
+	
 	
 	return true;
 }

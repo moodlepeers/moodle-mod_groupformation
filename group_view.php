@@ -54,7 +54,7 @@
 	}	
 	
 	// Log access to page
-	groupformation_log($USER->id,$groupformation->id,'<view_student_group_assignment>');
+	groupformation_info($USER->id,$groupformation->id,'<view_student_group_assignment>');
 		
 	// Trigger event TODO @Nora why?
 	groupformation_trigger_event($cm, $course, $groupformation, $context);

@@ -96,7 +96,7 @@ class mod_groupformation_logging_controller {
 	 * @return boolean
 	 */
 	public function handle($userid, $groupformationid, $message, $level) {
-		if ($groupformationid != 0)
+		if (!is_null($message) && is_string($message))
 			$this->create_log_entry ( $userid, $groupformationid, $message );
 		else
 			return false;
@@ -111,7 +111,7 @@ class mod_groupformation_logging_controller {
 	 */
 	private function create_log_entry($userid, $groupformationid, $message) {
 		global $DB;
-		$timestamp = time ();
+		$timestamp = microtime (true);
 		
 		$log_entry = new stdClass ();
 		$log_entry->timestamp = $timestamp;

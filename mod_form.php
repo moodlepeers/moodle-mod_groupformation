@@ -47,7 +47,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		$this->store = new mod_groupformation_storage_manager($this->_instance);
 		
 		// Log access to page
-		groupformation_log($USER->id,$this->_instance,'<view_settings>');
+		groupformation_info($USER->id,$this->_instance,'<view_settings>');
 		
 		// Import jQuery and js file
 		groupformation_add_jquery ( $PAGE, 'settings_functions.js' );

@@ -23,12 +23,15 @@ class build_groups extends \core\task\scheduled_task {
 	 * @see \core\task\task_base::execute()
 	 */
 	public function execute() {
+		groupformation_info(null, null, 'cron job started');
 		
 		// First reset aborted jobs; user might wanna use it soon
 		$this->reset_aborted_jobs ();
 		
 		// Look for jobs; select a job; get it done
 		$this->do_job ();
+		
+		groupformation_info(null, null, 'cron job terminated');
 		
 		return true;
 	}
@@ -40,12 +43,20 @@ class build_groups extends \core\task\scheduled_task {
 	 */
 	private function do_job() {
 		$saved = false;
+		
+		$job = null;
+		$groupal_cohort = null;
+		$random_cohort = null;
+		$incomplete_cohort = null;
+		
 		$job = \mod_groupformation_job_manager::get_next_job ();
+		
 		if (! is_null ( $job )) {
-			$result = \mod_groupformation_job_manager::do_groupal ( $job, $groupal_cohort, $random_cohort, $incomplete_cohort);
+			$result = \mod_groupformation_job_manager::do_groupal ( $job, $groupal_cohort, $random_cohort, $incomplete_cohort );
 			$aborted = \mod_groupformation_job_manager::is_job_aborted ( $job );
+			
 			if (! $aborted) {
-				$saved = \mod_groupformation_job_manager::save_result ( $job, $groupal_cohort );
+				$saved = \mod_groupformation_job_manager::save_result ( $job, $groupal_cohort, $random_cohort, $incomplete_cohort );
 			}
 		}
 		return $saved;

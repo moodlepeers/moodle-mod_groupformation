@@ -85,7 +85,7 @@ function groupformation_add_instance(stdClass $groupformation, mod_groupformatio
 	$groupformation->id = $DB->insert_record ( 'groupformation', $groupformation );
 	
 	// Log access to page
-	groupformation_log ( $USER->id, $groupformation->id, '<create_instance>' );
+	groupformation_info ( $USER->id, $groupformation->id, '<create_instance>' );
 	
 	groupformation_grade_item_update ( $groupformation );
 	
@@ -94,7 +94,7 @@ function groupformation_add_instance(stdClass $groupformation, mod_groupformatio
 	mod_groupformation_job_manager::create_job($groupformation->id);
 	
 	// Log access to page
-	groupformation_log ( $USER->id, $groupformation->id, '<save_settings>' );
+	groupformation_info ( $USER->id, $groupformation->id, '<save_settings>' );
 	
 	return $groupformation->id;
 }
@@ -121,7 +121,7 @@ function groupformation_update_instance(stdClass $groupformation, mod_groupforma
 	$groupformation->id = $groupformation->instance;
 	
 	// Log access to page
-	groupformation_log ( $USER->id, $groupformation->id, '<update_instance>' );
+	groupformation_info ( $USER->id, $groupformation->id, '<update_instance>' );
 	
 	if ($DB->count_records ( 'groupformation_answer', array (
 			'groupformation' => $groupformation->id 
@@ -142,7 +142,7 @@ function groupformation_update_instance(stdClass $groupformation, mod_groupforma
 	groupformation_save_more_infos ( $groupformation, FALSE );
 	
 	// Log access to page
-	groupformation_log ( $USER->id, $groupformation->id, '<save_settings>' );
+	groupformation_info ( $USER->id, $groupformation->id, '<save_settings>' );
 	
 	return $result;
 }
@@ -168,7 +168,7 @@ function groupformation_delete_instance($id) {
 	}
 	
 	// Log access to page
-	groupformation_log ( $USER->id, $groupformation->id, '<delete_instance>' );
+	groupformation_info ( $USER->id, $groupformation->id, '<delete_instance>' );
 	
 	// Delete any dependent records here.
 	$result = $DB->delete_records ( 'groupformation', array (
