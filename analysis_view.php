@@ -120,8 +120,8 @@ $stm = new mod_groupformation_storage_manager($groupformation->id);
  */
 $topic = $stm->getNumber("topic");
 $know = $stm->getNumber("knowledge");
-echo $cqt->createTestusers(30, $topic, $know, $groupformation->id);
-//echo $cqt->deleteTestusers();
+//echo $cqt->createTestusers(30, $topic, $know, $groupformation->id);
+echo $cqt->deleteTestusers();
 //echo var_dump($stm->getCategories());
 
 /* ---------- / Ahmed Tested User creation  ---------- */

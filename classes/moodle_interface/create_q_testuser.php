@@ -199,12 +199,16 @@ class mod_groupformation_create_q_testuser {
             exit();
         }
         try {
-            //$DB->get_record_sql("DELETE FROM mdl_groupformation_answer;");
-            //$DB->get_record_sql("DELETE FROM mdl_groupformation_started");
-            //$DB->get_record_sql("DELETE FROM mdl_user WHERE id > 5");
-            $d = $mysql->query("DELETE FROM mdl_groupformation_answer;");
-            $d = $mysql->query("DELETE FROM mdl_groupformation_started;");
-            $d = $mysql->query("DELETE FROM mdl_user WHERE username LIKE 'user%';");
+
+            $userids = $DB->get_records_sql("SELECT * FROM {user} WHERE username LIKE 'user%'");
+
+            foreach ($userids as $u) {
+                $DB->delete_records("user", array('id' => $u->id));
+                $DB->delete_records("groupformation_answer", array('userid' => $u->id));
+                $DB->delete_records("groupformation_started", array('userid' => $u->id));
+
+            }
+
             return "user und ihre antworten gelöscht!";
         } catch (Exception $e) {
             return "fehler beim delete-Befehl";
