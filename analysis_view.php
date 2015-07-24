@@ -126,7 +126,7 @@ $stm = new mod_groupformation_storage_manager($groupformation->id);
 $topic = $stm->getNumber("topic");
 $know = $stm->getNumber("knowledge");
 // echo $cqt->createTestusers(30, $topic, $know, $groupformation->id);
-echo $cqt->deleteTestusers();
+//echo $cqt->deleteTestusers();
 //echo var_dump($stm->getCategories());
 
 /* ---------- / Ahmed Tested User creation ---------- */
@@ -147,11 +147,11 @@ if (! is_null ( $job )) {
 	
 	//$result = $jm::do_groupal ( $job, $groupal_cohort, $random_cohort, $incomplete_cohort);
 	
-	// $pp = new mod_groupformation_participant_parser($groupformation->id);
+// 	$pp = new mod_groupformation_participant_parser($groupformation->id);
 	
-	// $participants = $pp->build_participants(array(3));
+// 	$participants = $pp->build_participants(array(67,68,69));
 	
-	// var_dump($participants[0]->getCriteria()->first()->next());
+// 	var_dump($participants[0]->getCriteria()->first()->next());
 	// var_dump($result);
 	// var_dump($result->getResult());
 	
