@@ -117,7 +117,7 @@ $cqt = new mod_groupformation_create_q_testuser ();
  * @param2: groupformation id
  */
 
-echo $cqt->createTestusers ( 30, $groupformation->id );
+// echo $cqt->createTestusers ( 30, $groupformation->id );
 // echo $cqt->deleteTestusers();
 
 /* ---------- / Ahmed Tested User creation ---------- */
