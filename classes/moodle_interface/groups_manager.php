@@ -234,7 +234,7 @@ class mod_groupformation_groups_manager {
 		global $DB;
 		return $DB->get_records ( 'groupformation_groups', array (
 				'groupformation' => $this->groupformationid
-		), 'id', 'id, groupname' );
+		), 'id', 'id, groupname,performance_index' );
 	}
 	
 	/**

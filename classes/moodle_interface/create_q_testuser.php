@@ -17,12 +17,15 @@ class mod_groupformation_create_q_testuser {
      * @param
      * @return array of created users
      */
-    public function createTestusers($number, $nTopics, $nKnowledges, $groupformation) {
+    public function createTestusers($number, $groupformation) {
         /* container for created users */
         global $DB;
         /* storage manager */
         $stm = new mod_groupformation_storage_manager($groupformation);
-
+		
+        $nTopics = $stm->getNumber ( "topic" );
+        $nKnowledges = $stm->getNumber ( "knowledge" );
+        
         $categories = $stm->getCategories();
 
         $users = array();

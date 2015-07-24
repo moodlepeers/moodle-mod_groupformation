@@ -39,6 +39,7 @@ require_once ($CFG->dirroot . '/lib/groupal/classes/Participant.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/Cohort.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/Matcher/GroupALGroupCentricMatcher.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/GroupFormationAlgorithm.php');
+require_once ($CFG->dirroot . '/lib/groupal/classes/GroupFormationRandomAlgorithm.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/Optimizer/GroupALOptimizer.php');
 class mod_groupformation_job_manager {
 	
@@ -265,24 +266,11 @@ class mod_groupformation_job_manager {
 	 */
 	public static function do_groupal($job, &$groupal_cohort, &$random_cohort, &$incomplete_cohort) {
 		$groupformationid = $job->groupformationid;
-		/**
-		 * <Testdaten>----------------------------------------------------
-		 */
-		
-		// $groupal_participants = self::get_testing_data ( 3, 4 );
-		
-		/**
-		 * </Testdaten>----------------------------------------------------
-		 */
-		
-		/**
-		 * <Echte Daten>----------------------------------------------------
-		 */
 		
 		$userfilter = new mod_groupformation_userid_filter ( $groupformationid );
 		
 		$completed_users = $userfilter->getCompletedIDs ();
-		$not_completed_users = $userfilter->getNoneCompletedIds ();
+		$incomplete_users = $userfilter->getNoneCompletedIds ();
 		
 		$pp = new mod_groupformation_participant_parser ( $groupformationid );
 		
@@ -304,10 +292,12 @@ class mod_groupformation_job_manager {
 			$random_users = array ();
 		}
 		
+		// var_dump($groupal_users,$random_users);
+		
 		$starttime = microtime ( true );
 		
 		// Generate participants for Groupal
-		$participants = $pp->build_participants ( $completed_users );
+		$participants = $pp->build_participants ( $groupal_users );
 		$groupal_participants = $participants;
 		
 		// Generate empty participants
@@ -315,7 +305,7 @@ class mod_groupformation_job_manager {
 		$random_participants = $participants;
 		
 		// Generate empty participants
-		$participants = $pp->build_empty_participants ( $not_completed_users );
+		$participants = $pp->build_empty_participants ( $incomplete_users );
 		$incomplete_participants = $participants;
 		
 		$endtime = microtime ( true );
@@ -323,14 +313,10 @@ class mod_groupformation_job_manager {
 		
 		groupformation_info ( null, $job->groupformationid, 'building participants for groupal needed ' . $comptime . 'ms' );
 		
-		/**
-		 * </Echte Daten>----------------------------------------------------
-		 */
+		// var_dump ($random_participants,$incomplete_participants);
 		
 		$store = new mod_groupformation_storage_manager ( $groupformationid );
-		$groupsize = 6; // intval ( $store->getGroupSize () );
-		
-		$cohort = null;
+		$groupsize = intval ( $store->getGroupSize () );
 		
 		if (count ( $groupal_participants ) > 0) {
 			
@@ -340,26 +326,31 @@ class mod_groupformation_job_manager {
 			$starttime = microtime ( true );
 			
 			$gfa = new GroupFormationAlgorithm ( $groupal_participants, $matcher, $groupsize );
-			$cohort = $gfa->doOneFormation ();
+			$groupal_cohort = $gfa->doOneFormation ();
 			
 			$endtime = microtime ( true );
 			$comptime = $endtime - $starttime;
 			
 			groupformation_info ( null, $job->groupformationid, 'groupal needed ' . $comptime . 'ms' );
 		}
-		// TODO @Nora: Leg in der Lib eine Klasse GroupFormationRandomAlgorithm an,
-		// welche die Participants und groupsize im Konstruktor bekommt
-		// $gfra = new GroupFormationRandomAlgorithm($random_participants, $groupsize);
 		
-		// Die Klasse hat eine Methode doOneFormation(), sie gibt ein Cohortobject zurück.
-		// $random_cohort = $gfra->doOneFormation();
+		if (count ( $random_participants ) > 0) {
+			$gfra = new GroupFormationRandomAlgorithm ( $random_participants, $groupsize );
+			$random_cohort = $gfra->doOneFormation ();
+		}
 		
-		// $gfra = new GroupFormationRandomAlgorithm($incomplete_participants, $groupsize);
-		// $incomplete_cohort = $gfra->doOneFormation();
+		if (count ( $incomplete_participants ) > 0) {
+			$gfra = new GroupFormationRandomAlgorithm ( $incomplete_participants, $groupsize );
+			$incomplete_cohort = $gfra->doOneFormation ();
+		}
 		
-		// var_dump ( $cohort );
+		// var_dump ( $groupal_cohort );
+		// var_dump ( $random_cohort );
+		// var_dump ( $incomplete_cohort );
 		
-		return $cohort;
+		$cohorts = array($groupal_cohort,$random_cohort,$incomplete_cohort);
+		
+		return $cohorts;
 	}
 	
 	/**
@@ -391,7 +382,7 @@ class mod_groupformation_job_manager {
 		}
 		
 		if (! is_null ( $random_cohort )) {
-			$result = $groupal_cohort->getResult ();
+			$result = $random_cohort->getResult ();
 			
 			$flags = array (
 					"groupal" => 0,

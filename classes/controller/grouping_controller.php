@@ -393,9 +393,11 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 			
 			foreach ( $this->groups as $key => $value ) {
 				
+				$gpi = (is_null($value->performance_index))?'-':$value->performance_index;
+				
 				$generatedGroupsView->assign ( $key, array (
 						'groupname' => $value->groupname,
-						'groupquallity' => '0.74',
+						'groupquallity' => $gpi,
 						'grouplink' => $this->linktToGroup ( $key ),
 						'group_members' => $this->getGroupMembers ( $key ) 
 				) );

@@ -23,7 +23,7 @@ class build_groups extends \core\task\scheduled_task {
 	 * @see \core\task\task_base::execute()
 	 */
 	public function execute() {
-		groupformation_info(null, null, 'cron job started');
+		groupformation_info ( null, null, 'cron job started' );
 		
 		// First reset aborted jobs; user might wanna use it soon
 		$this->reset_aborted_jobs ();
@@ -31,7 +31,7 @@ class build_groups extends \core\task\scheduled_task {
 		// Look for jobs; select a job; get it done
 		$this->do_job ();
 		
-		groupformation_info(null, null, 'cron job terminated');
+		groupformation_info ( null, null, 'cron job terminated' );
 		
 		return true;
 	}

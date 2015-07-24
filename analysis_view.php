@@ -28,8 +28,7 @@ require_once (dirname ( __FILE__ ) . '/locallib.php');
 /* Ahmed */
 
 require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/create_q_testuser.php');
-require_once (dirname (__FILE__) . '/classes/moodle_interface/storage_manager.php');
-
+require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/storage_manager.php');
 
 // Read URL params
 $id = optional_param ( 'id', 0, PARAM_INT ); // Course Module ID
@@ -111,23 +110,15 @@ $jm = new mod_groupformation_job_manager ();
 
 $cqt = new mod_groupformation_create_q_testuser ();
 
-$cqt = new mod_groupformation_create_q_testuser();
-$stm = new mod_groupformation_storage_manager($groupformation->id);
-/*
- * beachte:
- * -> in create_q_testuser.php: Zeile 44, groupformationid hard setzen
- * -> job_manager.php: groupsize setzen, ist derzeit noch hard gesetzt
- * @param1: Anzahl testuser
- * @param2: Anzahl verfügbarer Themen
- * @param3: Anzahl verschiedener "Vorwissen"
- */
-// echo $cqt->createTestusers(30, 2, 2);
+$cqt = new mod_groupformation_create_q_testuser ();
 
-$topic = $stm->getNumber("topic");
-$know = $stm->getNumber("knowledge");
-// echo $cqt->createTestusers(30, $topic, $know, $groupformation->id);
-//echo $cqt->deleteTestusers();
-//echo var_dump($stm->getCategories());
+/*
+ * @param1: number of testuser
+ * @param2: groupformation id
+ */
+
+echo $cqt->createTestusers ( 30, $groupformation->id );
+// echo $cqt->deleteTestusers();
 
 /* ---------- / Ahmed Tested User creation ---------- */
 
@@ -138,28 +129,10 @@ $incomplete_cohort = null;
 
 $job = $jm::get_job ( $groupformation->id );
 
-// $job = $jm::get_next_job ();
-
 if (! is_null ( $job )) {
-	// var_dump ( $job->groupformationid);
+	// $result = $jm::do_groupal ( $job, $groupal_cohort, $random_cohort, $incomplete_cohort);
 	
-	// var_dump ( $jm::is_job_aborted ( $job ) );
-	
-	//$result = $jm::do_groupal ( $job, $groupal_cohort, $random_cohort, $incomplete_cohort);
-	
-// 	$pp = new mod_groupformation_participant_parser($groupformation->id);
-	
-// 	$participants = $pp->build_participants(array(67,68,69));
-	
-// 	var_dump($participants[0]->getCriteria()->first()->next());
 	// var_dump($result);
-	// var_dump($result->getResult());
-	
-	// var_dump ( $result );
-	
-	// var_dump ( $jm::save_result ( $job, $result ) );
-	
-	// var_dump ( $jm::get_status ( $job ) );
 }
 // -----------------------------------------------
 
