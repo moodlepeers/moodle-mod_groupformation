@@ -192,12 +192,6 @@ class mod_groupformation_create_q_testuser {
     public function deleteTestusers() {
         global $DB;
 
-        $mysql = new mysqli("localhost", "root", "", "moodle");
-        /* check connection */
-        if ($mysql->connect_errno) {
-            printf("Connect failed: %s\n", $mysql->connect_error);
-            exit();
-        }
         try {
 
             $userids = $DB->get_records_sql("SELECT * FROM {user} WHERE username LIKE 'user%'");
