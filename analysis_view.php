@@ -27,6 +27,7 @@ require_once (dirname ( __FILE__ ) . '/locallib.php');
 
 /* Ahmed */
 require_once (dirname (__FILE__) . '/classes/moodle_interface/create_q_testuser.php');
+require_once (dirname (__FILE__) . '/classes/moodle_interface/storage_manager.php');
 
 // Read URL params
 $id = optional_param ( 'id', 0, PARAM_INT ); // Course Module ID
@@ -108,6 +109,7 @@ $jm = new mod_groupformation_job_manager ();
 /* ----------  Ahmed Testet User creation  ---------- */
 
 $cqt = new mod_groupformation_create_q_testuser();
+$stm = new mod_groupformation_storage_manager($groupformation->id);
 /*
  * beachte:
  *  ->	in create_q_testuser.php: Zeile 44, groupformationid hard setzen
@@ -116,9 +118,11 @@ $cqt = new mod_groupformation_create_q_testuser();
  * @param2: Anzahl verfügbarer Themen
  * @param3: Anzahl verschiedener "Vorwissen"
  */
-//echo $cqt->createTestusers(30, 2, 2);
-
-
+$topic = $stm->getNumber("topic");
+$know = $stm->getNumber("knowledge");
+echo $cqt->createTestusers(30, $topic, $know, $groupformation->id);
+//echo $cqt->deleteTestusers();
+//echo var_dump($stm->getCategories());
 
 /* ---------- / Ahmed Tested User creation  ---------- */
 
@@ -136,7 +140,7 @@ if (! is_null ( $job )) {
 	
 // 	var_dump ( $jm::is_job_aborted ( $job ) );
 	
- 	$result = $jm::do_groupal ( $job, $groupal_cohort, $random_cohort, $incomplete_cohort);
+ 	//$result = $jm::do_groupal ( $job, $groupal_cohort, $random_cohort, $incomplete_cohort);
 	
 //  	var_dump($result);
 	//var_dump($result->getResult());

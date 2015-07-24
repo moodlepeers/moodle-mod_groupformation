@@ -5,6 +5,7 @@
  * Date: 18/07/15
  * Time: 08:56
  */
+require_once (dirname (__FILE__) . '/storage_manager.php');
 
 class mod_groupformation_create_q_testuser {
 
@@ -16,9 +17,14 @@ class mod_groupformation_create_q_testuser {
      * @param
      * @return array of created users
      */
-    public function createTestusers($number, $nTopics, $nKnowledges) {
+    public function createTestusers($number, $nTopics, $nKnowledges, $groupformation) {
         /* container for created users */
         global $DB;
+        /* storage manager */
+        $stm = new mod_groupformation_storage_manager($groupformation);
+
+        $categories = $stm->getCategories();
+
         $users = array();
 
         for ($j = 1; $j <= $number; $j++) {
@@ -28,7 +34,7 @@ class mod_groupformation_create_q_testuser {
                 $userStd = create_user_record($user, "Moodle_1234");
                 $users[] = $user;
             } catch (Exception $e) {
-                echo "<div class='alert'>$user not created, already da</div>";
+                //echo "<div class='alert'>$user not created, already da</div>";
                 // schlägt user creation fehl, dann überspringe auch Datenbankoperationen mit "continue"
                 continue;
             }
@@ -40,8 +46,8 @@ class mod_groupformation_create_q_testuser {
                 $allInserts = array();
                 $userid = $userStd->id;
 
-                $groupformation = 7;
                 // groupformation: #, category: topic, questionid: <iteration>, userid: #, answer: <iteration>
+
                 for ($i = 1; $i<= $nTopics; $i++) {
                     $sql = new stdClass();
                     $sql->groupformation = $groupformation;
@@ -88,37 +94,43 @@ class mod_groupformation_create_q_testuser {
                 $allInserts[] = $sql;
 
                 // groupformation: #, category: team, questionid: 1 - 27, userid: #, answer: 1 - 6
-                for ($i = 1; $i <= 27; $i++) {
-                    $sql = new stdClass();
-                    $sql->groupformation = $groupformation;
-                    $sql->category = "team";
-                    $sql->questionid = $i;
-                    $sql->userid = $userid;
-                    $sql->answer = ($j % 2 == 0) ? 1 : 6;
-                    $allInserts[] = $sql;
+                if (in_array("team", $categories)) {
+                    for ($i = 1, $n = $stm->getNumber("team"); $i <= $n; $i++) {
+                        $sql = new stdClass();
+                        $sql->groupformation = $groupformation;
+                        $sql->category = "team";
+                        $sql->questionid = $i;
+                        $sql->userid = $userid;
+                        $sql->answer = ($j % 2 == 0) ? 1 : 6;
+                        $allInserts[] = $sql;
+                    }
                 }
                 // groupformation: #, category: character, questionid: 1 - 11, userid: #, answer: 1 - 6
-                for ($i = 1; $i <= 11; $i++) {
-                    $sql = new stdClass();
-                    $sql->groupformation = $groupformation;
-                    $sql->category = "character";
-                    $sql->questionid = $i;
-                    $sql->userid = $userid;
-                    $sql->answer = ($j % 2 == 0) ? 1 : 6;
-                    $allInserts[] = $sql;
+                if (in_array("character", $categories)) {
+                    for ($i = 1, $n = $stm->getNumber("character"); $i <= $n; $i++) {
+                        $sql = new stdClass();
+                        $sql->groupformation = $groupformation;
+                        $sql->category = "character";
+                        $sql->questionid = $i;
+                        $sql->userid = $userid;
+                        $sql->answer = ($j % 2 == 0) ? 1 : 6;
+                        $allInserts[] = $sql;
+                    }
                 }
                 // groupformation: #, category: motivation, questionid: 1 - 18, userid: #, answer: 1 - 6
-                for ($i = 1; $i <= 18; $i++) {
-                    $sql = new stdClass();
-                    $sql->groupformation = $groupformation;
-                    $sql->category = "motivation";
-                    $sql->questionid = $i;
-                    $sql->userid = $userid;
-                    $sql->answer = ($j % 2 == 0) ? 1 : 6;
-                    $allInserts[] = $sql;
+                if (in_array("motivation", $categories)) {
+                    for ($i = 1, $n = $stm->getNumber("motivation"); $i <= $n; $i++) {
+                        $sql = new stdClass();
+                        $sql->groupformation = $groupformation;
+                        $sql->category = "motivation";
+                        $sql->questionid = $i;
+                        $sql->userid = $userid;
+                        $sql->answer = ($j % 2 == 0) ? 1 : 6;
+                        $allInserts[] = $sql;
+                    }
                 }
                 // groupformation: #, category: sellmo, questionid: 1 - 31, userid: #, answer: 1 - 5
-                for ($i = 1; $i <= 31; $i++) {
+                for ($i = 1, $n = $stm->getNumber("sellmo"); $i <= 31; $i++) {
                     $sql = new stdClass();
                     $sql->groupformation = $groupformation;
                     $sql->category = "sellmo";
@@ -128,24 +140,28 @@ class mod_groupformation_create_q_testuser {
                     $allInserts[] = $sql;
                 }
                 // groupformation: #, category: self, questionid: 1 - 10, userid: #, answer: 1 - 6
-                for ($i = 1; $i <= 10; $i++) {
-                    $sql = new stdClass();
-                    $sql->groupformation = $groupformation;
-                    $sql->category = "self";
-                    $sql->questionid = $i;
-                    $sql->userid = $userid;
-                    $sql->answer = ($j % 2 == 0) ? 1 : 6;
-                    $allInserts[] = $sql;
+                if (in_array("self", $categories)) {
+                    for ($i = 1, $n = $stm->getNumber("self"); $i <= 10; $i++) {
+                        $sql = new stdClass();
+                        $sql->groupformation = $groupformation;
+                        $sql->category = "self";
+                        $sql->questionid = $i;
+                        $sql->userid = $userid;
+                        $sql->answer = ($j % 2 == 0) ? 1 : 6;
+                        $allInserts[] = $sql;
+                    }
                 }
                 // groupformation: #, category: srl, questionid: 1 - 62, userid: #, answer: 1 - 6
-                for ($i = 1; $i <= 62; $i++) {
-                    $sql = new stdClass();
-                    $sql->groupformation = $groupformation;
-                    $sql->category = "srl";
-                    $sql->questionid = $i;
-                    $sql->userid = $userid;
-                    $sql->answer = ($j % 2 == 0) ? 1 : 6;
-                    $allInserts[] = $sql;
+                if (in_array("srl", $categories)) {
+                    for ($i = 1, $n = $stm->getNumber("srl"); $i <= 62; $i++) {
+                        $sql = new stdClass();
+                        $sql->groupformation = $groupformation;
+                        $sql->category = "srl";
+                        $sql->questionid = $i;
+                        $sql->userid = $userid;
+                        $sql->answer = ($j % 2 == 0) ? 1 : 6;
+                        $allInserts[] = $sql;
+                    }
                 }
 
                 // alles eintragen
@@ -175,14 +191,25 @@ class mod_groupformation_create_q_testuser {
 
     public function deleteTestusers() {
         global $DB;
-        try {
-            $DB->delete_records("groupformation_answer");
-            $DB->delete_records("groupformation_started");
-            $DB->delete_records("user", array("id"=> "id > 5"));
-            return "true";
-        } catch (Exception $e) {
-            return "false";
+
+        $mysql = new mysqli("localhost", "root", "", "moodle");
+        /* check connection */
+        if ($mysql->connect_errno) {
+            printf("Connect failed: %s\n", $mysql->connect_error);
+            exit();
         }
+        try {
+            //$DB->get_record_sql("DELETE FROM mdl_groupformation_answer;");
+            //$DB->get_record_sql("DELETE FROM mdl_groupformation_started");
+            //$DB->get_record_sql("DELETE FROM mdl_user WHERE id > 5");
+            $d = $mysql->query("DELETE FROM mdl_groupformation_answer;");
+            $d = $mysql->query("DELETE FROM mdl_groupformation_started;");
+            $d = $mysql->query("DELETE FROM mdl_user WHERE username LIKE 'user%';");
+            return "user und ihre antworten gelöscht!";
+        } catch (Exception $e) {
+            return "fehler beim delete-Befehl";
+        }
+
 
     }
 }
