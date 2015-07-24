@@ -246,15 +246,6 @@ class mod_groupformation_storage_manager {
 		}
 	}
 	
-	// alle werden auf "abgegeben" gesetzt
-	public function setAllCommited($users) {
-		foreach ( $users as $userId ) {
-			if ($this->answeringStatus ( $userId ) != 1) {
-				$this->statusChanged ( $userId );
-			}
-		}
-	}
-	
 	/**
 	 * Determines whether the DB contains for a specific category a specific version or not
 	 *
@@ -321,10 +312,9 @@ class mod_groupformation_storage_manager {
 		
 		if ('en' == get_string ( "language", "groupformation" )) {
 			$format = "l jS \of F j, Y, g:i a";
-			$trans = array();
-			$times ['start'] = strtr ( date ( $format, $times ['start_raw'] ), $trans);
-			$times ['end'] = strtr ( date ( $format, $times ['end_raw'] ), $trans);
-			
+			$trans = array ();
+			$times ['start'] = strtr ( date ( $format, $times ['start_raw'] ), $trans );
+			$times ['end'] = strtr ( date ( $format, $times ['end_raw'] ), $trans );
 		} elseif ('de' == get_string ( "language", "groupformation" )) {
 			$format = "l, d.m.y, H:m";
 			$trans = array (
@@ -349,14 +339,14 @@ class mod_groupformation_storage_manager {
 					'June' => 'Juni',
 					'July' => 'Juli',
 					'October' => 'Oktober',
-					'December' => 'Dezember'
+					'December' => 'Dezember' 
 			);
-			$times ['start'] = strtr ( date ( $format, $times ['start_raw'] ), $trans).' Uhr';
-			$times ['end'] = strtr ( date ( $format, $times ['end_raw'] ), $trans).' Uhr';
+			$times ['start'] = strtr ( date ( $format, $times ['start_raw'] ), $trans ) . ' Uhr';
+			$times ['end'] = strtr ( date ( $format, $times ['end_raw'] ), $trans ) . ' Uhr';
 		}
-
-// 		$times ['start'] = date ( $format, $times ['start_raw'] );
-// 		$times ['end'] = date ( $format, $times ['end_raw'] );
+		
+		// $times ['start'] = date ( $format, $times ['start_raw'] );
+		// $times ['end'] = date ( $format, $times ['end_raw'] );
 		
 		return $times;
 	}
@@ -486,34 +476,45 @@ class mod_groupformation_storage_manager {
 	 * @param number $complete        	
 	 */
 	public function statusChanged($userId, $complete = 0) {
-		global $DB;
-		
 		$status = 0;
 		if ($complete == 0) {
 			$status = $this->answeringStatus ( $userId );
 		}
 		
-		$data = new stdClass ();
-		$data->groupformation = $this->groupformationid;
-		$data->userid = $userId;
-		
 		if ($status == - 1) {
-			$data->completed = 0;
-			$DB->insert_record ( 'groupformation_started', $data );
+			$this->setCompleted($userId, false);
 		}
 		
 		if ($status == 0) {
-			$data->completed = 1;
-			$data->id = $DB->get_field ( 'groupformation_started', 'id', array (
-					'groupformation' => $this->groupformationid,
-					'userid' => $userId 
-			) );
-			$data->timecompleted = time ();
-			
-			$DB->update_record ( 'groupformation_started', $data );
-			
+			$this->setCompleted ( $userId, true );
 			// TODO @Rene Here Code for Assigning to GROUP A or GROUP B for MATHE
 			$this->assignToGroup ( $userId );
+		}
+	}
+	
+	/**
+	 * set status to complete
+	 *
+	 * @param unknown $userid        	
+	 */
+	public function setCompleted($userid, $completed = false) {
+		global $DB;
+		
+		if (!$completed) {
+			$data = new stdClass ();
+			$data->completed = 0;
+			$data->groupformation = $this->groupformationid;
+			$data->userid = $userid;
+			$DB->insert_record('groupformation_started', $data);
+			
+		} else {
+			$data = $DB->get_record ( 'groupformation_started', array (
+					'groupformation' => $this->groupformationid,
+					'userid' => $userid 
+			) );
+			$data->completed = 1;
+			$data->timecompleted = time ();
+			$DB->update_record ( 'groupformation_started', $data );
 		}
 	}
 	

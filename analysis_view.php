@@ -26,7 +26,7 @@ require_once (dirname ( __FILE__ ) . '/lib.php');
 require_once (dirname ( __FILE__ ) . '/locallib.php');
 
 /* Ahmed */
-require_once (dirname (__FILE__) . '/classes/moodle_interface/create_q_testuser.php');
+require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/create_q_testuser.php');
 
 // Read URL params
 $id = optional_param ( 'id', 0, PARAM_INT ); // Course Module ID
@@ -88,84 +88,84 @@ require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/job_
 require_once ($CFG->dirroot . '/mod/groupformation/classes/controller/analysis_controller.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_parser.php');
 
+$controller = new mod_groupformation_analysis_controller ( $groupformation->id );
 
-$controller = new mod_groupformation_analysis_controller($groupformation->id );
-
-if($_POST){
-    if(isset($_POST['start_questionnaire'])){
-        $controller->startQuestionnaire();
-    }elseif(isset($_POST['stop_questionnaire'])){
-        $controller->stopQuestionnaire();
-    }
+if ($_POST) {
+	if (isset ( $_POST ['start_questionnaire'] )) {
+		$controller->startQuestionnaire ();
+	} elseif (isset ( $_POST ['stop_questionnaire'] )) {
+		$controller->stopQuestionnaire ();
+	}
 }
 
-$pp = new mod_groupformation_participant_parser($groupformation->id);
+$pp = new mod_groupformation_participant_parser ( $groupformation->id );
 
 // var_dump($pp->build_participants(array(3))[0]->getCriteria());
 
 $jm = new mod_groupformation_job_manager ();
 
-/* ----------  Ahmed Testet User creation  ---------- */
+/* ---------- Ahmed Testet User creation ---------- */
 
-$cqt = new mod_groupformation_create_q_testuser();
+$cqt = new mod_groupformation_create_q_testuser ();
 /*
  * beachte:
- *  ->	in create_q_testuser.php: Zeile 44, groupformationid hard setzen
- *  ->	job_manager.php: groupsize setzen, ist derzeit noch hard gesetzt
+ * -> in create_q_testuser.php: Zeile 44, groupformationid hard setzen
+ * -> job_manager.php: groupsize setzen, ist derzeit noch hard gesetzt
  * @param1: Anzahl testuser
  * @param2: Anzahl verfügbarer Themen
  * @param3: Anzahl verschiedener "Vorwissen"
  */
-//echo $cqt->createTestusers(30, 2, 2);
+// echo $cqt->createTestusers(30, 2, 2);
 
-
-
-/* ---------- / Ahmed Tested User creation  ---------- */
+/* ---------- / Ahmed Tested User creation ---------- */
 
 $job = null;
 $groupal_cohort = null;
 $random_cohort = null;
 $incomplete_cohort = null;
 
-$job = $jm::get_job($groupformation->id);
+$job = $jm::get_job ( $groupformation->id );
 
 // $job = $jm::get_next_job ();
 
 if (! is_null ( $job )) {
-// 	var_dump ( $job->groupformationid);
+	// var_dump ( $job->groupformationid);
 	
-// 	var_dump ( $jm::is_job_aborted ( $job ) );
+	// var_dump ( $jm::is_job_aborted ( $job ) );
 	
- 	$result = $jm::do_groupal ( $job, $groupal_cohort, $random_cohort, $incomplete_cohort);
+	$result = $jm::do_groupal ( $job, $groupal_cohort, $random_cohort, $incomplete_cohort );
 	
-//  	var_dump($result);
-	//var_dump($result->getResult());
-
+	// $pp = new mod_groupformation_participant_parser($groupformation->id);
 	
-// var_dump ( $result );
+	// $participants = $pp->build_participants(array(3));
 	
-// var_dump ( $jm::save_result ( $job, $result ) );
+	// var_dump($participants[0]->getCriteria()->first()->next());
+	// var_dump($result);
+	// var_dump($result->getResult());
 	
-// 	var_dump ( $jm::get_status ( $job ) );
+	// var_dump ( $result );
+	
+	// var_dump ( $jm::save_result ( $job, $result ) );
+	
+	// var_dump ( $jm::get_status ( $job ) );
 }
 // -----------------------------------------------
 
-/*require_once (dirname ( __FILE__ ) . '/classes/grouping/submit_infos.php');
-$infos = new mod_groupformation_submit_infos ( $groupformation->id );
-$surveyStatisticNumers = $infos->getInfos ();*/
+/*
+ * require_once (dirname ( __FILE__ ) . '/classes/grouping/submit_infos.php');
+ * $infos = new mod_groupformation_submit_infos ( $groupformation->id );
+ * $surveyStatisticNumers = $infos->getInfos ();
+ */
 
 echo '<div style="color:red;">Diese Seite ist noch in der Entwicklung. Die Inhalte sind ggf. noch rein statisch und haben keinen Effekt oder keine Funktion</div>';
 
-
-//TODO : form in das template packen?
+// TODO : form in das template packen?
 echo '<form action="' . htmlspecialchars ( $_SERVER ["PHP_SELF"] ) . '" method="post" autocomplete="off">';
 
 echo '<input type="hidden" name="id" value="' . $id . '"/>';
 
-echo $controller->display();
+echo $controller->display ();
 
 echo '</form>';
-
-
 
 echo $OUTPUT->footer ();

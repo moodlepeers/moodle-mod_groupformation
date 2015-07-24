@@ -64,7 +64,7 @@ $controller = new mod_groupformation_grouping_controller ( $groupformation->id )
 
 if ($_POST) {
 	if (isset ( $_POST ['start'] )) {
-		$controller->start ();
+		$controller->start ($course,$cm);
 		unset ( $_POST ['start'] );
 	} elseif (isset ( $_POST ['abort'] )) {
 		$controller->abort ();

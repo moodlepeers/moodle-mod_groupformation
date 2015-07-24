@@ -52,10 +52,12 @@ function groupformation_supports($feature) {
 			return true;
 		case FEATURE_SHOW_DESCRIPTION :
 			return true;
-		case FEATURE_GRADE_HAS_GRADE :
-			return true;
 		case FEATURE_BACKUP_MOODLE2 :
 			return true;
+		case FEATURE_COMPLETION_TRACKS_VIEWS :
+			return true;
+// 		case FEATURE_COMPLETION_HAS_RULES :
+// 			return true;
 		default :
 			return null;
 	}
@@ -91,7 +93,7 @@ function groupformation_add_instance(stdClass $groupformation, mod_groupformatio
 	
 	groupformation_save_more_infos ( $groupformation, TRUE );
 	
-	mod_groupformation_job_manager::create_job($groupformation->id);
+	mod_groupformation_job_manager::create_job ( $groupformation->id );
 	
 	// Log access to page
 	groupformation_info ( $USER->id, $groupformation->id, '<save_settings>' );
@@ -162,9 +164,9 @@ function groupformation_delete_instance($id) {
 	global $DB, $USER;
 	
 	if (! $groupformation = $DB->get_record ( 'groupformation', array (
-	'id' => $id
+			'id' => $id 
 	) )) {
-	return false;
+		return false;
 	}
 	
 	// Log access to page
@@ -275,6 +277,7 @@ function groupformation_print_recent_mod_activity($activity, $courseid, $detail,
  * as sending out mail, toggling flags etc .
  *
  *
+ *
  * ..
  *
  * @return boolean
@@ -282,26 +285,25 @@ function groupformation_print_recent_mod_activity($activity, $courseid, $detail,
  *      
  */
 function groupformation_cron() {
-
-// 	$jobmanager = new mod_groupformation_job_manager();
 	
-// 	$job = $jobmanager->get_next_job();
+	// $jobmanager = new mod_groupformation_job_manager();
 	
-// 	if (is_null($job)){
-// 		return true;
-// 	}else{
-// 		$results = $jobmanager->do_groupal($job);//do_groupal($job);
-		
-// 		if ($jobmanager->is_job_aborted($job)){
-// 			$result = null;
-// 			$jobmanager->reset_job($job); //set_job($job,"0000") //auf 0000
-// 			return true;
-// 		}else{
-// 			$jobmanager->save_result($result);
-// 			$jobmanager->set_job($job,"0001");
-// 		}
-// 	}
+	// $job = $jobmanager->get_next_job();
 	
+	// if (is_null($job)){
+	// return true;
+	// }else{
+	// $results = $jobmanager->do_groupal($job);//do_groupal($job);
+	
+	// if ($jobmanager->is_job_aborted($job)){
+	// $result = null;
+	// $jobmanager->reset_job($job); //set_job($job,"0000") //auf 0000
+	// return true;
+	// }else{
+	// $jobmanager->save_result($result);
+	// $jobmanager->set_job($job,"0001");
+	// }
+	// }
 	return true;
 }
 
@@ -585,24 +587,23 @@ function groupformation_set_fields(stdClass $groupformation) {
 // $init gibt an, ob der Aufruf von einem erstellen iner Instanz oder von einem editieren der Instanz kommt
 function groupformation_save_more_infos($groupformation, $init) {
 	
-// speicher mir zus�tzliche Daten ab
+	// speicher mir zus�tzliche Daten ab
 	$store = new mod_groupformation_storage_manager ( $groupformation->id );
-	$data = new mod_groupformation_data();
+	$data = new mod_groupformation_data ();
 	
-	//Vorwissen ind Arrayform
+	// Vorwissen ind Arrayform
 	$knowledgearray = array ();
 	if ($groupformation->knowledge != 0) {
 		$knowledgearray = explode ( "\n", $groupformation->knowledgelines );
 	}
 	
-	//Topics in Arrayform
+	// Topics in Arrayform
 	$topicsarray = array ();
 	if ($groupformation->topics != 0) {
 		$topicsarray = explode ( "\n", $groupformation->topiclines );
 	}
 	
-
-	$names = $data->getCategorySet($groupformation->szenario);
+	$names = $data->getCategorySet ( $groupformation->szenario );
 	
 	// �nderungen an den Katalogfragen werden erst beim Erstellen einer Instanz �bernommen
 	if ($init) {
@@ -610,13 +611,13 @@ function groupformation_save_more_infos($groupformation, $init) {
 		$xmlLoader = new mod_groupformation_xml_loader ();
 		$xmlLoader->setStore ( $store );
 		
-		//wenn die Datenbank noch komplet leer ist, speicher einfach alle Infos aus den xml's ab
+		// wenn die Datenbank noch komplet leer ist, speicher einfach alle Infos aus den xml's ab
 		// ansonsten �berpr�fe zu jeder Kategorie die VErsionsnummer und �ndere bei bedarf
 		if ($store->catalogTableNotSet ()) {
 			
 			foreach ( $names as $category ) {
 				
-				if($category != 'topic' && $category != 'knowledge'){
+				if ($category != 'topic' && $category != 'knowledge') {
 					$array = $xmlLoader->saveData ( $category );
 					$version = $array [0] [0];
 					$numbers = $array [0] [1];
@@ -628,7 +629,7 @@ function groupformation_save_more_infos($groupformation, $init) {
 			// da gibt es dann unter umst�nden konsistenzprobleme
 			// da m�ssen wir nochmal dr�ber reden
 			foreach ( $names as $category ) {
-				if($category != 'topic' && $category != 'knowledge'){
+				if ($category != 'topic' && $category != 'knowledge') {
 					$xmlLoader->latestVersion ( $category );
 				}
 			}

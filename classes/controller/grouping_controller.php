@@ -28,8 +28,8 @@ class mod_groupformation_grouping_controller {
 	
 	/**
 	 * Creates an instance of grouping_controller for groupformation
-	 * 
-	 * @param unknown $groupformationID
+	 *
+	 * @param unknown $groupformationID        	
 	 */
 	public function __construct($groupformationID) {
 		$this->groupformationID = $groupformationID;
@@ -83,10 +83,16 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 	/**
 	 * POST action to start job, sets it to 'waiting'
 	 */
-	public function start() {
-		$this->handle_complete_questionaires ();
+	public function start($course, $cm) {
+		$users = $this->handle_complete_questionaires ();
 		mod_groupformation_job_manager::set_job ( $this->job, "waiting", true );
 		$this->determineStatus ();
+		
+		foreach ( $users as $userid ) {
+			$completion = new completion_info ( $course );
+			$completion->set_module_viewed ( $cm, $userid );
+		}
+		return $users;
 	}
 	
 	/**
@@ -418,11 +424,11 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 			$url = $CFG->wwwroot . '/user/view.php?id=' . $user->userid . '&course=' . $COURSE->id;
 			
 			$userName = $user->userid;
-			$user_record = $this->store->getUser($user->userid);
-			if (!is_null($user_record))
-				$userName = fullname($user_record);
+			$user_record = $this->store->getUser ( $user->userid );
+			if (! is_null ( $user_record ))
+				$userName = fullname ( $user_record );
 			
-			if (!(strlen($userName)>2)){
+			if (! (strlen ( $userName ) > 2)) {
 				$userName = $user->userid;
 			}
 			$userLink = $url;
@@ -484,7 +490,10 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 		
 		// hole alle userids von komplett ausgefüllten Fragebögen und markiere diese als abgegeben
 		$users = $userFilter->getCompletedIDs ();
-		$this->store->setAllCommited ( $users );
+		
+		foreach ( $users as $user ) {
+			$this->store->setCompleted ( $user, true );
+		}
 		
 		return $users;
 	}

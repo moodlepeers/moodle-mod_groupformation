@@ -60,6 +60,11 @@
 	$store = new mod_groupformation_storage_manager($groupformation->id);
 	$info = new mod_groupformation_info_text ($cm->id, $groupformation->id, $userid );
 
+	if ($store->isQuestionaireCompleted($userid)){
+		$completion = new completion_info($course);
+		$completion->set_module_viewed($cm,$userid);
+	}	
+	
 	// Trigger event TODO @Nora why?
 	groupformation_trigger_event($cm,$course,$groupformation,$context);
 

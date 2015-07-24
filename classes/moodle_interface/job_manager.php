@@ -88,7 +88,7 @@ class mod_groupformation_job_manager {
 				'started' => 0,
 				'aborted' => 1,
 				'done' => 0,
-				'timestarted' => 0 
+				'timestarted' => null 
 		) );
 		
 		return $jobs;
@@ -524,9 +524,9 @@ class mod_groupformation_job_manager {
 		$job->started = 0;
 		$job->aborted = 0;
 		$job->done = 0;
-		$job->timecreated = null;
-		$job->timestarted = null;
-		$job->timefinished = null;
+		$job->timecreated = 0;
+		$job->timestarted = 0;
+		$job->timefinished = 0;
 		
 		$DB->insert_record ( 'groupformation_jobs', $job );
 	}
