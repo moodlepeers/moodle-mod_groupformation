@@ -58,11 +58,11 @@ $string ['scenarioInfo'] = 'Die drei Szenarien unterscheiden sich darin, wie die
 		    Beim Referatsgruppen steht das gemeinsame Interesse an den zur Auswahl stehenden Referatsthemen im Vordergrund.';
 $string ['groupformationsettings'] = 'Gruppenformation Einstellungen';
 $string ['scenario_projectteams'] = 'Projektteams';
-$string ['scenario_projectteams_description'] = 'Projektteams arbeiten über einen längeren Zeitraum gemeinsam intensiv an einem Projekt (z.B. Durchführung einer Studie, Abgabe eines Berichtes…). Oft können die Aufgaben innerhalb des Teams aufgeteilt werden, sodass es von Vorteil ist, wenn sich die Kompetenzen der Teammitglieder gegenseitig ergänzen. Typischerweise wird die gemeinsame Arbeit mit einer Gruppennote für alle Teammitglieder bewertet. Daher geht es bei der Zusammensetzung von Projektteams primär um ähnliche Motivation und Zielsetzung der Teammitglieder.';
+$string ['scenario_projectteams_description'] = 'Projektteams arbeiten über einen längeren Zeitraum gemeinsam intensiv an einem Projekt (z.B. Durchführung einer Studie, Abgabe eines Berichtes, etc.). Oft können die Aufgaben innerhalb des Teams aufgeteilt werden, sodass es von Vorteil ist, wenn sich die Kompetenzen der Teammitglieder gegenseitig ergänzen. Typischerweise wird die gemeinsame Arbeit mit einer Gruppennote für alle Teammitglieder bewertet. Daher geht es bei der Zusammensetzung von Projektteams primär um ähnliche Motivation und Zielsetzung der Teammitglieder.';
 $string ['scenario_homeworkgroups'] = 'Hausaufgabengruppen';
 $string ['scenario_homeworkgroups_description'] = 'Hausaufgabengruppen arbeiten in regelmäßigen Abständen (meist wöchentlich) an Aufgaben, die zur Vorbereitung auf eine Klausur dienen. Auch wenn die Aufgaben (oft auch "Übungen" oder "Übungszettel" genannt) grundsätzlich auf unterschiedliche Gruppenmitglieder aufgeteilt werden könnten, ist dies meist nicht sinnvoll, weil bei der abschließenden Klausur jedes Gruppenmitglied individuell benotet wird und daher alle Aufgaben selbst lösen können muss. Daher geht es bei der Zusammensetzung von Hausaufgabengruppen primär um unterschiedliches Vorwissen und unterschiedliche Lernstile, die sich ergänzen.';
 $string ['scenario_presentationgroups'] = 'Referatgruppen';
-$string ['scenario_presentationgroups_description'] = 'Referatsgruppen arbeiten nur über einen relativ kurzen Zeitraum zusammen an einer gemeinsamen Präsentation. Oft wird dabei die Aufgabenstellung schon zu Beginn auf die Gruppenmitglieder aufgeteilt (oder gewählt), dann individuell bearbeitet und erst am Ende wieder zusammengesetzt. Bewertet wird meist die gemeinsame Gruppenleistung. Daher geht es bei der Zusammensetzung von Referatsgruppen primär um gemeinsame Interessen an Themen und Präferenzen für zur Wahl stehende Termine.';
+$string ['scenario_presentationgroups_description'] = 'Referatsgruppen arbeiten nur über einen relativ kurzen Zeitraum zusammen an einer gemeinsamen Präsentation. Oft wird dabei die Aufgabenstellung schon zu Beginn auf die Gruppenmitglieder aufgeteilt (oder gewählt), dann individuell bearbeitet und erst am Ende wieder zusammengesetzt. Bewertet wird meist die gemeinsame Gruppenleistung. Daher geht es bei der Zusammensetzung von Referatsgruppen primär um gemeinsame Interessen an Themen.';
 $string ['time'] = 'Zeit';
 $string ['topics'] = 'Themen';
 $string ['topics_dummy'] = 'Wie sehr möchten Sie das Thema ';
@@ -73,11 +73,18 @@ $string ['topicchoice'] = 'Themenauswahl';
 $string ['useOneLineForEachTopic'] = 'Pro Thema jeweils eine Zeile benutzen';
 $string ['knowledge'] = 'Vorwissen';
 $string ['knowledge_description'] = 'Das Vorwissen in bestimmten Gebieten soll in die Gruppenbildung einflie&szlig;en.';
-$string ['knowledge_description_extended'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Teilnehmenden einsch&auml;tzen sollen. Eine Vorschau des Fragebogens-Abschnittes für die Teilnehmenden ist rechts zu sehen.';
+$string ['knowledge_description_extended'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Teilnehmenden einsch&auml;tzen sollen. 
+		Eine Vorschau des Fragebogens-Abschnittes für die Teilnehmenden ist rechts zu sehen.';
 $string ['knowledgeChoice'] = 'Vorwissen';
-$string ['knowledge_info_presentation'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Teilnehmenden einsch&auml;tzen sollen. Eine Vorschau des Fragebogens-Abschnittes für die Teilnehmenden ist rechts zu sehen. Für Ihre Auswahl "Referatsgruppen" wird das Vorwissen nur berücksichtigt, falls nach Optimierung der Themenwahl noch weiter optimiert werden kann.';
-$string ['knowledge_info_homework'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Teilnehmenden einsch&auml;tzen sollen. Eine Vorschau des Fragebogens-Abschnittes für die Teilnehmenden ist rechts zu sehen. F&uuml;r Ihre Auswahl "Hausaufgabengruppen" wird so optimiert, dass das Vorwissen sich in jeder Gruppe m&ouml;glichst ergänzt.';
-$string ['knowledge_info_project'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einsch&auml;tzen sollen. Eine Vorschau des Studenten-Fragebogens sehen Sie rechts. F&uuml;r Ihre Auswahl "Projektgruppen" wird wird so optimiert, dass das Vorwissen sich in jeder Gruppe m&ouml;glichst ergänzt, das Wissensniveau der Teilnehmenden aber vergleichbar ist.';
+$string ['knowledge_info_presentation'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Teilnehmenden einsch&auml;tzen sollen. 
+		Eine Vorschau des Fragebogens-Abschnittes für die Teilnehmenden ist rechts zu sehen. 
+		Für Ihre Auswahl "Referatsgruppen" wird das Vorwissen nur berücksichtigt, falls nach Optimierung der Themenwahl noch weiter optimiert werden kann.';
+$string ['knowledge_info_homework'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Teilnehmenden einsch&auml;tzen sollen. 
+		Eine Vorschau des Fragebogens-Abschnittes für die Teilnehmenden ist rechts zu sehen. 
+		F&uuml;r Ihre Auswahl "Hausaufgabengruppen" wird so optimiert, dass das Vorwissen sich in jeder Gruppe m&ouml;glichst ergänzt.';
+$string ['knowledge_info_project'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einsch&auml;tzen sollen. 
+		Eine Vorschau des Studenten-Fragebogens sehen Sie rechts. 
+		F&uuml;r Ihre Auswahl "Projektgruppen" wird wird so optimiert, dass das Vorwissen sich in jeder Gruppe m&ouml;glichst ergänzt, das Wissensniveau der Teilnehmenden aber vergleichbar ist.';
 $string ['add_line'] = 'Zeile hinzufügen';
 $string ['remove_line'] = 'Zeile entfernen';
 $string ['preview'] = 'Vorschau';

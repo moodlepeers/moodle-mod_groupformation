@@ -52,27 +52,18 @@ You can only change the maximum number of members or maximum number of groups. F
 $string ['availability_nochangespossible'] = 'The questionaire has been answered already. You cannot change the availability anymore.';
 $string ['scenario'] = 'Scenario';
 $string ['scenarioLabel'] = '';
-$string ['scenario_description'] = 'Please choose the scenario for the group formation:';
-$string ['scenarioInfo'] = 'The groupformation plugin offers three types of groups. 
-	Project groups are based on personality matching. 
-	Presentation groups are based on topic/interest matching.
-	Homework groups are based on optimizing collaborative learning aspects.';
+$string ['scenario_description'] = 'Please choose the most suitable scenario for the group formation.';
+$string ['scenarioInfo'] = 'The three scenarios differ in the way how questionaaire items influence the group formation.  
+			For project teams it considers prior knowledge and traits of the group members to amend each other while motivation (level) and personal targets should be as similar as possible.    
+			For homework groups it optimizes each group to have the best possible prerequisites for collaborative learning.
+		    For presentation groups the main aspect is a mutual interest in the same selected (and assigend) topic to work on.';
 $string ['groupformationsettings'] = 'Group formation settings';
-$string ['scenario_projectteams'] = 'Project groups';
-// TODO -------------------------------------------------------------
-$string ['scenario_projectteams_description'] = 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-	labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et
-	ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.';
+$string ['scenario_projectteams'] = 'Project teams';
+$string ['scenario_projectteams_description'] = 'Project teams work intensively together to finish a project (e.g. conduct a study, delivery of a report, etc.). Often, duties and tasks can be split among the team members. Consequently it is beneficial to have a mixture of amending comptencies in the team. Usually, such a collective work result is graded with a equal group mark for all members. Thus, groupformation aims for similar motivation and similar objectives (beside the prerequisites).';
 $string ['scenario_homeworkgroups'] = 'Homework groups';
-// TODO -------------------------------------------------------------
-$string ['scenario_homeworkgroups_description'] = 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-	labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et
-	ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.';
+$string ['scenario_homeworkgroups_description'] = 'Homework groups complete (smaller) assignments in regular intervals (often weekly) as a preperation for examination. Even though the assigment tasks (often called exercises, practice, control questions or homework) are principally subdividable among group members, this is not intended as with the final examination each member will be graded individually and needs to be able to solve all tasks alone. Consequently, groupformation aims for diverse prior knowledge and diverse learning styles that benefit from each other.';
 $string ['scenario_presentationgroups'] = 'Presentation groups';
-// TODO -------------------------------------------------------------
-$string ['scenario_presentationgroups_description'] = 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-	labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et
-	ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.';
+$string ['scenario_presentationgroups_description'] = 'Presentation groups work together for a relatively short time period to finish a presentation (usually to be held in class). Often in the beginning a specific sub-task is assigned to (or selected by) each student, individually worked on, and in the end re-assembled to a complete presentation. Grading is usually done for the perforance of the whole group together. Therefore, groupformation aims primarily for mutual interest in the same topic.';
 $string ['time'] = 'Time';
 $string ['topics'] = 'Topics';
 $string ['topics_dummy'] = 'How much do you like ';
@@ -83,19 +74,17 @@ $string ['topicchoice'] = 'Topic selection';
 $string ['useOneLineForEachTopic'] = 'Use one line for each topic';
 $string ['knowledge'] = 'Knowledge';
 $string ['knowledge_description'] = 'I want to include knowledge questions';
-// TODO -------------------------------------------------------------
 $string ['knowledge_description_extended'] = 'Please list knowledge areas in which students should assess themselves. 
-	Take a look at the preview on the right hand side.
-	TODO F&uuml;r Ihre Auswahl "Hausaufgabengruppen" wird das Vorwissen m&ouml;glichst varriiert in jeder Gruppe.';
+	Take a look at the preview on the right hand side.';
 $string ['knowledge_info_presentation'] = 'Please list knowledge areas in which students should assess themselves. 
 	Take a look at the preview on the right hand side. 
-	TODO F&uuml;r Ihre Auswahl "Referatsgruppen" wird das Vorwissen ...';
+	According to your selection "presentation groups" prior knowledge will be varied within each group (low priority behind topics)';
 $string ['knowledge_info_homework'] = 'Please list knowledge areas in which students should assess themselves. 
 	Take a look at the preview on the right hand side. 
-	TODO F&uuml;r Ihre Auswahl "Hausaufgabengruppen" wird das Vorwissen m&ouml;glichst varriiert in jeder Gruppe.';
+	According to your selection "homework groups" prior knowledge will be varied within each group.';
 $string ['knowledge_info_project'] = 'Please list knowledge areas in which students should assess themselves. 
 	Take a look at the preview on the right hand side. 
-	TODO F&uuml;r Ihre Auswahl "Projektgruppen" wird das Vorwissen ...';
+	According to your selection "project teams" prior knowledge (areas) will be varied within each group, but the level of knowledge is desired to be similar.';
 $string ['knowledgeChoice'] = 'Knowledge';
 $string ['add_line'] = 'Add line';
 $string ['remove_line'] = 'Remove line';
