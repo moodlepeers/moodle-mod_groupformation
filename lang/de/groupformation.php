@@ -47,14 +47,14 @@ $string ['overview'] = 'Übersicht';
 $string ['generategroups'] = "Gruppen erstellen";
 $string ['edit_param'] = 'Bearbeiten';
 $string ['editparam'] = 'Paramter bearbeiten';
-$string ['nochangespossible'] = 'Der Fragebogen wurde bereits von mindestens einer Person beantwortet. Sie k&ouml;nnen nur noch Gruppengr&ouml;e oder Gruppenanzahl &auml;ndern. Weitere &Auml;nderungen werden nicht gespeichert.';
-$string ['availability_nochangespossible'] = 'Der Fragebogen wurde bereits beantwortet. Sie k&ouml;nnen die Verfügbarkeit nicht mehr ändern.';
+$string ['nochangespossible'] = 'Der Fragebogen wurde bereits von mindestens einer Person beantwortet. Sie können nur noch Gruppengröße oder Gruppenanzahl ändern. Weitere Änderungen werden nicht gespeichert.';
+$string ['availability_nochangespossible'] = 'Der Fragebogen wurde bereits beantwortet. Sie können die Verfügbarkeit nicht mehr ändern.';
 $string ['scenario'] = 'Szenario';
 $string ['scenarioLabel'] = '';
-$string ['scenario_description'] = 'Bitte wählen Sie das für Sie am Besten geeignete Szenario f&uuml;r die Gruppenformation aus.';
+$string ['scenario_description'] = 'Bitte wählen Sie das für Sie am Besten geeignete Szenario für die Gruppenformation aus.';
 $string ['scenarioInfo'] = 'Die drei Szenarien unterscheiden sich darin, wie die Fragebogen-Antworten bei der Gruppenbildung berücksichtigt werden.  
-			Beim Projekgruppen wird darauf geachtet, dass sich Vorwissen und Merkmale der Gruppenmitglieder erg&auml;nzen während die Motivation und angestrebten Ziele in der Gruppe möglichst ähnlich sind.    
-			Bei den Hausaufgabengruppen wird so optimiert, dass für jede Gruppe die besten Vorausetzungen f&uuml;r gemeinsames Lernen gegeben sind.
+			Beim Projekgruppen wird darauf geachtet, dass sich Vorwissen und Merkmale der Gruppenmitglieder ergänzen während die Motivation und angestrebten Ziele in der Gruppe möglichst ähnlich sind.    
+			Bei den Hausaufgabengruppen wird so optimiert, dass für jede Gruppe die besten Vorausetzungen für gemeinsames Lernen gegeben sind.
 		    Beim Referatsgruppen steht das gemeinsame Interesse an den zur Auswahl stehenden Referatsthemen im Vordergrund.';
 $string ['groupformationsettings'] = 'Gruppenformation Einstellungen';
 $string ['scenario_projectteams'] = 'Projektteams';
@@ -66,25 +66,25 @@ $string ['scenario_presentationgroups_description'] = 'Referatsgruppen arbeiten 
 $string ['time'] = 'Zeit';
 $string ['topics'] = 'Themen';
 $string ['topics_dummy'] = 'Wie sehr möchten Sie das Thema ';
-$string ['topics_description'] = 'Ich m&ouml;chte (Gruppen-)Themen zur Auswahl anbieten';
-$string ['topics_description_extended'] = 'Geben Sie hier die Themen ein, welche die Teilnehmenden in Gruppen bearbeiten k&ouml;nnen. In den Frageb&ouml;gen werden die Themen durch die Teilnehmenden nach Priorit&auml;t sortiert. Eine Vorschau sehen Sie rechts. Wenn Sie Themen angeben wird die Gruppierung vor allem nach passender Themenauswahl durchgeführt.';
+$string ['topics_description'] = 'Ich möchte (Gruppen-)Themen zur Auswahl anbieten';
+$string ['topics_description_extended'] = 'Geben Sie hier die Themen ein, welche die Teilnehmenden in Gruppen bearbeiten können. In den Fragebögen werden die Themen durch die Teilnehmenden nach Priorität sortiert. Eine Vorschau sehen Sie rechts. Wenn Sie Themen angeben wird die Gruppierung vor allem nach passender Themenauswahl durchgeführt.';
 $string ['topics_question'] = 'Bitte sortieren Sie die zur Wahl stehenden Themen entsprechend Ihrer Präferenz, beginnend mit Ihrem bevorzugten Thema.';
 $string ['topicchoice'] = 'Themenauswahl';
 $string ['useOneLineForEachTopic'] = 'Pro Thema jeweils eine Zeile benutzen';
 $string ['knowledge'] = 'Vorwissen';
-$string ['knowledge_description'] = 'Das Vorwissen in bestimmten Gebieten soll in die Gruppenbildung einflie&szlig;en.';
-$string ['knowledge_description_extended'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Teilnehmenden einsch&auml;tzen sollen. 
+$string ['knowledge_description'] = 'Das Vorwissen in bestimmten Gebieten soll in die Gruppenbildung einfließen.';
+$string ['knowledge_description_extended'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Teilnehmenden einschätzen sollen. 
 		Eine Vorschau des Fragebogens-Abschnittes für die Teilnehmenden ist rechts zu sehen.';
 $string ['knowledgeChoice'] = 'Vorwissen';
-$string ['knowledge_info_presentation'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Teilnehmenden einsch&auml;tzen sollen. 
+$string ['knowledge_info_presentation'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Teilnehmenden einschätzen sollen. 
 		Eine Vorschau des Fragebogens-Abschnittes für die Teilnehmenden ist rechts zu sehen. 
 		Für Ihre Auswahl "Referatsgruppen" wird das Vorwissen nur berücksichtigt, falls nach Optimierung der Themenwahl noch weiter optimiert werden kann.';
-$string ['knowledge_info_homework'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Teilnehmenden einsch&auml;tzen sollen. 
+$string ['knowledge_info_homework'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Teilnehmenden einschätzen sollen. 
 		Eine Vorschau des Fragebogens-Abschnittes für die Teilnehmenden ist rechts zu sehen. 
-		F&uuml;r Ihre Auswahl "Hausaufgabengruppen" wird so optimiert, dass das Vorwissen sich in jeder Gruppe m&ouml;glichst ergänzt.';
-$string ['knowledge_info_project'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einsch&auml;tzen sollen. 
+		Für Ihre Auswahl "Hausaufgabengruppen" wird so optimiert, dass das Vorwissen sich in jeder Gruppe möglichst ergänzt.';
+$string ['knowledge_info_project'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einschätzen sollen. 
 		Eine Vorschau des Studenten-Fragebogens sehen Sie rechts. 
-		F&uuml;r Ihre Auswahl "Projektgruppen" wird wird so optimiert, dass das Vorwissen sich in jeder Gruppe m&ouml;glichst ergänzt, das Wissensniveau der Teilnehmenden aber vergleichbar ist.';
+		Für Ihre Auswahl "Projektgruppen" wird wird so optimiert, dass das Vorwissen sich in jeder Gruppe möglichst ergänzt, das Wissensniveau der Teilnehmenden aber vergleichbar ist.';
 $string ['add_line'] = 'Zeile hinzufügen';
 $string ['remove_line'] = 'Zeile entfernen';
 $string ['preview'] = 'Vorschau';
@@ -93,7 +93,7 @@ $string ['knowledge_scale'] = '0&nbsp;=&nbsp;kein&nbsp;Vorwissen, 100&nbsp;=&nbs
 $string ['groupoptions'] = 'Gruppen-Einstellungen';
 $string ['groupoption_description'] = 'Gruppen-Einstellungen';
 $string ['groupoption_help'] = 'Diese Einstellungen können bis zum Starten der Gruppenbildung geändert werden, selbst wenn schon Fragebögen von Teilnehmenden ausgefüllt wurden.';
-$string ['maxmembers'] = 'Max. Gruppengr&ouml;&szlig;e';
+$string ['maxmembers'] = 'Max. Gruppengröße';
 $string ['maxgroups'] = 'Max. Gruppenanzahl';
 $string ['maxpoints'] = 'Max. Punktzahl';
 $string ['groupname'] = 'Gruppen-Name';
@@ -103,30 +103,30 @@ $string ['grades'] = 'Noten';
 $string ['points'] = 'Punkte';
 $string ['justpass'] = 'Nur Bestehen';
 $string ['noevaluation'] = 'Keine Bewertung';
-$string ['useOneLineForEachKnowledge'] = 'F&uuml;r jedes Thema eine eigene Zeile benutzen';
+$string ['useOneLineForEachKnowledge'] = 'Für jedes Thema eine eigene Zeile benutzen';
 $string ['cannotloadxml'] = 'XML Datei konnte nicht geladen werden.';
-$string ['scenario_error'] = 'Bitte w&auml;en Sie ein Szenario aus.';
+$string ['scenario_error'] = 'Bitte wäen Sie ein Szenario aus.';
 $string ['maxmembers_error'] = 'Bitte wählen Sie die maximale Gruppengröße.';
 $string ['maxgroups_error'] = 'Bitte wählen Sie die maximale Gruppenanzahl.';
-$string ['maxpoints_error'] = 'Sie m&uuml;ssen eine Punktzahl zwischen 1 und 100 angeben.';
+$string ['maxpoints_error'] = 'Sie müssen eine Punktzahl zwischen 1 und 100 angeben.';
 $string ['groupname_error'] = 'Der Gruppen-Name kann maximal 100 Zeichen lang sein.';
 $string ['evaluationmethod_error'] = 'Bitte wählen Sie die Methode zur Bewertung aus.';
 $string ['choose_scenario'] = 'Szenario auswählen';
 $string ['choose_number'] = 'Anzahl auswählen';
-$string ['choose_evaluationmethod'] = 'Bewertungsmethode ausw&auml;hlen';
+$string ['choose_evaluationmethod'] = 'Bewertungsmethode auswählen';
 $string ['evaluation_point_info'] = 'Bitte maximale Punktzahl eingeben';
 $string ['students_enrolled_info'] = 'Studenten sind im Kurs eingeschrieben';
-$string ['groupSettingsInfo'] = 'Sie haben Themen zur Auswahl angegeben. Daraus bestimmt sich die Anzahl der Gruppen und deren Gr&ouml;&szlig;e.';
+$string ['groupSettingsInfo'] = 'Sie haben Themen zur Auswahl angegeben. Daraus bestimmt sich die Anzahl der Gruppen und deren Größe.';
 $string ['analyse'] = 'Analyse';
 $string ['questionaire_not_started'] = 'Der Fragebogen wartet noch auf Ihre Bearbeitung.';
 $string ['questionaire_press_to_begin'] = 'Klicken Sie auf "Weiter", um zu beginnen.';
 $string ['questionaire_not_submitted'] = 'Sie haben den Fragebogen noch nicht abgegeben.';
-$string ['questionaire_press_continue_submit'] = 'Klicken Sie auf "Bearbeiten", um den Fragebogen weiter auszuf&uuml;llen oder auf "Abgeben", um ihn abzugeben.';
+$string ['questionaire_press_continue_submit'] = 'Klicken Sie auf "Bearbeiten", um den Fragebogen weiter auszufüllen oder auf "Abgeben", um ihn abzugeben.';
 $string ['questionaire_answer_stats'] = 'Aktueller Zustand des Fragebogens: ';
-$string ['questionaire_submitted'] = 'Sie haben den Fragebogen bereits abgegeben und k&ouml;nnen Ihre Antworten nicht mehr &auml;ndern.';
+$string ['questionaire_submitted'] = 'Sie haben den Fragebogen bereits abgegeben und können Ihre Antworten nicht mehr ändern.';
 $string ['questionaire_press_preview'] = 'Klicken Sie auf "Vorschau", um den Fragebogen anzusehen.';
 $string ['questionaire_no_more_questions'] = 'Es gibt keine weiteren Fragen zu beantworten.';
-$string ['questionaire_press_beginning_submit'] = 'Klicken Sie auf "Zur Anfangsseite", um zum Anfang zur&uuml;ckzukehren oder auf "Abgeben", um Ihre Antworten endgültig abzugeben.';
+$string ['questionaire_press_beginning_submit'] = 'Klicken Sie auf "Zur Anfangsseite", um zum Anfang zurückzukehren oder auf "Abgeben", um Ihre Antworten endgültig abzugeben.';
 $string ['questionaire_go_to_start'] = 'Zur Anfangsseite';
 $string ['questionaire_submit'] = 'Abgeben';
 $string ['questionaire_submit_disabled_teacher'] = '(Abgeben ist deaktiviert, da Sie die Rolle Kursleiter haben)';
