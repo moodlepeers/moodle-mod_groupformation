@@ -398,7 +398,7 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 				$generatedGroupsView->assign ( $key, array (
 						'groupname' => $value->groupname,
 						'groupquallity' => $gpi,
-						'grouplink' => $this->linktToGroup ( $key ),
+						'grouplink' => $this->linkToGroup ( $value->moodlegroupid ),
 						'group_members' => $this->getGroupMembers ( $key ) 
 				) );
 			}
@@ -450,13 +450,13 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 	 *        	$groupID
 	 * @return array
 	 */
-	private function linktToGroup($groupID) {
+	private function linkToGroup($groupID) {
+		global $COURSE, $CFG;
 		$link = array ();
-		if ($this->viewState == 4) {
-			// generate link, button enabled
-			// TODO: get link to group with the groupID
+		if ($this->groupsAdopted) {
+			$url = new moodle_url('/group/members.php',array('group'=>$groupID));//='.$groupID;					
 			return $link = [ 
-					'#' . $groupID,
+					$url,
 					'' 
 			];
 			// return '<a href="#"><button class="gf_button gf_button_pill gf_button_tiny">zur Moodle Gruppenansicht</button></a>';
