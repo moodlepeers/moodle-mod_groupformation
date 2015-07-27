@@ -84,6 +84,8 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 	 * POST action to start job, sets it to 'waiting'
 	 */
 	public function start($course, $cm) {
+		global $USER;
+		groupformation_info($USER->id, $this->groupformationID, 'groupal job queued by course manager/teacher');
 		$users = $this->handle_complete_questionaires ();
 		mod_groupformation_job_manager::set_job ( $this->job, "waiting", true );
 		$this->determineStatus ();
@@ -92,6 +94,8 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 			$completion = new completion_info ( $course );
 			$completion->set_module_viewed ( $cm, $userid );
 		}
+		
+		
 		return $users;
 	}
 	
@@ -99,6 +103,8 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 	 * POST action to abort current waiting or running job
 	 */
 	public function abort() {
+		global $USER;
+		groupformation_info($USER->id, $this->groupformationID, 'groupal job aborted by course manager/teacher');
 		mod_groupformation_job_manager::set_job ( $this->job, "aborted", false, false );
 		$this->determineStatus ();
 	}
@@ -107,6 +113,8 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 	 * POST action to adopt groups to moodle
 	 */
 	public function adopt() {
+		global $USER;
+		groupformation_info($USER->id, $this->groupformationID, 'groupal job results adopted to moodle groups by course manager/teacher');
 		mod_groupformation_group_generator::generateMoodleGroups ( $this->groupformationID );
 		$this->determineStatus ();
 	}
@@ -115,6 +123,8 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 	 * POST action to delete generated and/or adopted groups (moodle groups)
 	 */
 	public function delete() {
+		global $USER;
+		groupformation_info($USER->id, $this->groupformationID, 'groupal job results deleted by course manager/teacher');
 		mod_groupformation_job_manager::set_job ( $this->job, "ready", false, true );
 		$this->groups_store->deleteGeneratedGroups ();
 		$this->determineStatus ();

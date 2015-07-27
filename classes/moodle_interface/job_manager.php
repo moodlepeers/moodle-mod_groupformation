@@ -131,18 +131,18 @@ class mod_groupformation_job_manager {
 		
 		if ($job->waiting == 1 && $settime) {
 			$job->timecreated = time ();
-			groupformation_info ( null, $job->groupformationid, 'groupal job with groupformation id="' . $job->groupformationid . '" set to waiting' );
+			groupformation_info ( null, $job->groupformationid, 'groupal job set to waiting' );
 		}
 		if ($job->done == 1 && $settime) {
 			$job->timefinished = time ();
-			groupformation_info ( null, $job->groupformationid, 'groupal job with groupformation id="' . $job->groupformationid . '" set to done' );
+			groupformation_info ( null, $job->groupformationid, 'groupal job set to done' );
 		}
 		if ($job->started == 1 && $settime) {
 			$job->timestarted = time ();
-			groupformation_info ( null, $job->groupformationid, 'groupal job with groupformation id="' . $job->groupformationid . '" set to started' );
+			groupformation_info ( null, $job->groupformationid, 'groupal job set to started' );
 		}
 		if ($job->aborted == 1) {
-			groupformation_info ( null, $job->groupformationid, 'groupal job with groupformation id="' . $job->groupformationid . '" set to aborted' );
+			groupformation_info ( null, $job->groupformationid, 'groupal job set to aborted' );
 		}
 		if ($job->waiting == 0 && $resettime) {
 			$job->timecreated = 0;
