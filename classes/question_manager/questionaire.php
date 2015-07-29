@@ -85,7 +85,7 @@ class mod_groupformation_questionaire {
     							</div>
 						  </div>';
 	}
-	private function printOverviewbar($activeCategory = null) {
+	/*private function printOverviewbar($activeCategory = null) {
 		$data = new mod_groupformation_data ();
 		$store = new mod_groupformation_storage_manager ( $this->groupformationid );
 		$scenario = $store->getScenario ();
@@ -120,7 +120,43 @@ class mod_groupformation_questionaire {
 		}
 		echo '</ul>';
 		echo '</div><!-- /navbar -->';
-	}
+	}*/
+
+    private function printOverviewbar($activeCategory = null) {
+        $data = new mod_groupformation_data ();
+        $store = new mod_groupformation_storage_manager ( $this->groupformationid );
+        $scenario = $store->getScenario ();
+        $temp_categories = $store->getCategories();
+        $categories = array ();
+        foreach ( $temp_categories as $category ) {
+            if ($store->getNumber ( $category ) > 0) {
+                $categories [] = $category;
+            }
+        }
+        echo '<div id="questionaire_navbar">';
+        echo '<ul id="accordion">';
+        $stats = $store->getStats($this->userid);
+        $prev_complete = true;
+        foreach ( $categories as $category ) {
+            $url = new moodle_url ( 'questionaire_view.php', array (
+                'id' => $this->cmid,
+                'category' => $category
+            ) );
+            $positionActiveCategory = $store->getPosition($activeCategory);
+            $positionCategory = $store->getPosition($category);
+
+            $beforeActive = ($positionCategory<=$positionActiveCategory);
+            $class = (has_capability('mod/groupformation:editsettings', $this->context) || $beforeActive || $prev_complete)?'':'no-active';
+            echo '<li class="'. (($activeCategory == $category) ? 'current' : 'accord_li') . '">';
+            echo '<span>'. ( $positionCategory + 1) .'</span><a class="' . $class .'"  href="' . $url . '">'  . get_string ( 'category_' . $category, 'groupformation' ) .'</a>';
+            echo '</li>';
+            $prev_complete = $stats[$category]['missing'] == 0;
+            // <li><a href="a.html" class="ui-btn-active">One</a></li>
+            // <li><a href="b.html">Two</a></li>
+        }
+        echo '</ul>';
+        echo '</div><!-- /navbar -->';
+    }
 	
 	// --- Mathevorkurs
 	private function notAllAnswers() {

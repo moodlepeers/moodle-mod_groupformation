@@ -3,6 +3,31 @@ $(document).ready(function() {
     // TODO Einkommentieren wenn die Topics in erfolgreich in DB geschrieben werden
     // $('#invisible_topics_inputs').hide();
 
+    //get the widths of all navigation li's
+    var menuWidths = $('#accordion li').map(function(i) {
+        return $(this).outerWidth();
+    });
+
+    //shrink all widths to 50
+    $("#accordion li.accord_li").each(function(){
+        $(this).width(50);
+    });
+
+    var activeItem = $();
+
+    $("#accordion li.accord_li").hover(
+        //hover event
+        function(){
+            $(activeItem).animate({width: "50px"}, {duration:300, queue:false});
+            var a_width = menuWidths.get($(this).index());
+            $(this).animate({width: a_width}, {duration:300, queue:false});
+            activeItem = this;
+        },
+        //mouse leave event
+        function(){
+            $(activeItem).animate({width: "50px"}, {duration:300, queue:false});
+        });
+
     
     // Drag & Drop the topics/objects to sort them 
     $('.sortable_topics').sortable({

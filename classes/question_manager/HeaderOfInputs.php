@@ -12,7 +12,7 @@ class HeaderOfInput {
 		
 		if($tableType == 'typThema'){
 			// HTML unordered list element - <ul>
-			echo '<p id="topicshead">'.get_string('topics_question','groupformation').'</p>
+			echo '<div id="topicshead">'.get_string('topics_question','groupformation').'</div>
 								<ul class="sortable_topics">';
 		
 		}else{
