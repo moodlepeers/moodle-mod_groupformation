@@ -241,7 +241,7 @@ footer {
     list-style: none;
     margin: 30px auto;
     padding: 0;
-    height: 30px;
+    height: 40px;
     overflow: hidden;
 }
 
@@ -249,23 +249,33 @@ footer {
     float: left;
     border-left: 2px solid #969696;
     display: block;
-    height: 30px;
+    height: 40px;
     overflow: hidden;
     text-decoration: none;
     font-size: 16px;
     line-height: 1.5em;
 }
+#accordion li.current{
+    background-color: #969696;
+    color: #fff;
+}
+
+#accordion li.current a{
+    pointer-events: none;
+    font-style: none;
+    color: #fff;
+}
 
 #accordion li a {
     float: left;
-    padding: 5px 15px 0 0 ;
+    padding: 10px 20px 0 0 ;
 }
 
 #accordion li span {
     width: 40px;
     height: 30px;
     float: left;
-    padding: 5px 0 0 5px;
+    padding: 10px 0 0 5px;
 }
 
 
