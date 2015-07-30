@@ -450,12 +450,10 @@ $(document).ready(function() {
             var elValue = $(this).val();
             if(elID == 'group_size'){
                 calculateSizeParameter(elValue, 0);
-
                 setGroupSettings();
 
             }else{
                 calculateSizeParameter(0, elValue);
-
                 setGroupSettings();
 
             }
@@ -509,6 +507,7 @@ $(document).ready(function() {
     function calculateSizeParameter($maxMembers, $maxGroups){
         if($maxMembers == 0){
             $maxMembers = Math.round(studentsInCourse / $maxGroups);
+            if ($maxMembers == 0) return $maxMembers == 1;
         }else if($maxGroups == 0){
             $maxGroups = Math.round(studentsInCourse / $maxMembers);
         }else{
