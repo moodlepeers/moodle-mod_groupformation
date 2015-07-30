@@ -19,7 +19,7 @@ $(document).ready(function() {
         //hover event
         function(){
             $(activeItem).animate({width: "50px"}, {duration:100, queue:false});
-            var a_width = menuWidths.get($(this).index())+20;
+            var a_width = menuWidths.get($(this).index());
             $(this).animate({width: a_width}, {duration:200, queue:false});
             activeItem = this;
         },
