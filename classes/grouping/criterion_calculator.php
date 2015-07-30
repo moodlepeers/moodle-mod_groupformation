@@ -49,7 +49,7 @@
 		private $FAM = array(array(6, 8, 10, 15, 17), array(1, 4, 7, 11), array(2, 3, 13, 14), array(5, 9, 12, 16, 18));
 		//Konkrete Erfahrung | Aktives Experimentieren | Reflektierte Beobachtung | Abstrakte Begriffsbildung
 		private $LEARN = array(array(1, 5, 11, 14, 20, 22), array(2, 8, 10, 16, 17, 23), array(3, 6, 9, 13, 19, 21), array(4, 7, 12, 15, 18, 24));
-		//TODO @JK TEAM Auswertung fehlt noch
+		
 		
 		/**
 		 * 
@@ -95,7 +95,7 @@
 		 * 			position_1 -> answer
 		 * 
 		 * @param int $userId
-		 * @return multitype:multitype:mixed string
+		 * @return multitype:multitype:mixed float
 		 */
 		public function knowledgeAll($userId){
 			$knowledge = array();
@@ -105,10 +105,11 @@
  			$values = $this->xml->xmlToArray('<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>');
 					
 			foreach($values as $question){
-				$t = array();
-				$t[] = $question;
-				$t[] = $this->store->getSingleAnswer($userId, 'knowledge', $position);
+			//	$t = array();
+			//	$t[] = $question;
+				$t = floatval($this->store->getSingleAnswer($userId, 'knowledge', $position));
 				$knowledge[] = $t;
+				$position++;
 			}
 			return $knowledge;
 		}
@@ -117,7 +118,7 @@
 		 * Determines the average of the answers of the user in the category knowledge
 		 * 
 		 * @param int $userId
-		 * @return int
+		 * @return float
 		 */
 		public function knowledgeAverage($userId){
 			$total = 0;
@@ -129,9 +130,9 @@
 			}
 			
 			if($numberOfQuestion != 0){
-				return $total / $numberOfQuestion;
+				return floatval($total / $numberOfQuestion);
 			}else{
-				return 0;
+				return 0.0;
 			}
 		}
 		
@@ -140,14 +141,14 @@
 		 * 
 		 * @param int $position
 		 * @param int $userId
-		 * @return Ambigous <string>
+		 * @return float
 		 */
 		public function getGrade($position, $userId){
 			$question = $this->store->getCatalogQuestion($position, 'grade');
 			$o = $question->options;
 			$options = $this->xml->xmlToArray('<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $o . ' </OPTIONS>');
 			$answer = $this->store->getSingleAnswer($userId, 'grade', $position);
-			return $options[$answer-1];
+			return floatval($options[$answer-1]);
 		}
 		
 		/**
@@ -234,7 +235,7 @@
 				$count = $count - 2;
 			}
 			for($i = 0; $i<$count; $i++){
-				$temp = 0;
+				$temp = 0.0;
 				foreach ($this->BIG5[$i] as $num){
 					$temp = $temp + $this->store->getSingleAnswer($userId, $category, $num);
 				}
@@ -242,9 +243,9 @@
 					$temp = $temp + $this->inverse($num, $category, $this->store->getSingleAnswer($userId, $category, $num));
 				}
 				if(in_array($i, $this->BIG5Homogen)){
-					$homogen[] = $temp;
+					$homogen[] = floatval($temp);
 				}else{
-					$heterogen[] = $temp;
+					$heterogen[] = floatval($temp);
 				}
 			}
 			
@@ -277,11 +278,11 @@
 				
 			$count = count($this->FAM);
 			for($i = 0; $i<$count; $i++){
-				$temp = 0;
+				$temp = 0.0;
 				foreach ($this->FAM[$i] as $num){
 					$temp = $temp + $this->store->getSingleAnswer($userId, $category, $num);
 				}
-				$array[] = $temp;
+				$array[] = floatval($temp);
 			}
 				
 			return $array;
@@ -300,11 +301,11 @@
 		
 			$count = count($this->LEARN);
 			for($i = 0; $i<$count; $i++){
-				$temp = 0;
+				$temp = 0.0;
 				foreach ($this->LEARN[$i] as $num){
 					$temp = $temp + $this->store->getSingleAnswer($userId, $category, $num);
 				}
-				$array[] = $temp;
+				$array[] = floatval($temp);
 			}
 		
 			return $array;
@@ -318,7 +319,7 @@
 		 * @return multitype:number // later on this will be an array
 		 */
 		public function getTeam($userId){
-			$total = 0;
+			$total = 0.0;
 			$numberOf = 0;
 			$array = array();
 			$answers = $this->store->getAnswers($userId, 'team');
@@ -326,7 +327,12 @@
 				$total = $total + $answer->answer;
 				$numberOf++;
 			}
-			$array[] = $total/$numberOf;
+			
+			if($numberOf != 0){
+				$array[] = floatval($total/$numberOf);
+			}else{
+				$array[] = 0.0;
+			}
 			
 			return $array;
 		}
