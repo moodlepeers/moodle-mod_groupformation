@@ -18,9 +18,9 @@ $(document).ready(function() {
     $("#accordion li.accord_li").hover(
         //hover event
         function(){
-            $(activeItem).animate({width: "50px"}, {duration:300, queue:false});
-            var a_width = menuWidths.get($(this).index());
-            $(this).animate({width: a_width}, {duration:300, queue:false});
+            $(activeItem).animate({width: "50px"}, {duration:100, queue:false});
+            var a_width = menuWidths.get($(this).index())+20;
+            $(this).animate({width: a_width}, {duration:200, queue:false});
             activeItem = this;
         },
         //mouse leave event
