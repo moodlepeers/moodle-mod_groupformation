@@ -84,11 +84,12 @@ function groupformation_add_instance(stdClass $groupformation, mod_groupformatio
 	$groupformation = groupformation_set_fields ( $groupformation );
 	
 	// You may have to add extra stuff in here.
-	$groupformation->id = $DB->insert_record ( 'groupformation', $groupformation );
+	$id = $DB->insert_record ( 'groupformation', $groupformation );
+	
+	$groupformation = $DB->get_record('groupformation', array('id'=>$id));
 	
 	// Log access to page
 	groupformation_info ( $USER->id, $groupformation->id, '<create_instance>' );
-	
 	groupformation_grade_item_update ( $groupformation );
 	
 	groupformation_save_more_infos ( $groupformation, TRUE );
