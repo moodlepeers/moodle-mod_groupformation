@@ -11,7 +11,7 @@ $(document).ready(function() {
     });
 
 
-    
+
     //shrink all widths to 50
     $("#accordion li.accord_li").each(function(){
         $(this).width(50);

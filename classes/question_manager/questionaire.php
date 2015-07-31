@@ -155,7 +155,6 @@ class mod_groupformation_questionaire {
             // <li><a href="b.html">Two</a></li>
         }
         echo '</ul>';
-        echo '</div><!-- /navbar -->';
     }
 	
 	// --- Mathevorkurs
