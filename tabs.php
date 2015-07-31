@@ -46,46 +46,55 @@ if (! isset ( $current_tab )) {
 	$current_tab = '';
 }
 
+// has editing rights -> course manager or higher
 if (has_capability ( 'mod/groupformation:editsettings', $context )) {
-	
+	// analysis_view
 	$analyseurl = new moodle_url ( '/mod/groupformation/analysis_view.php', array (
 			'id' => $usedid,
 			'do_show' => 'analysis' 
 	) );
 	$row [] = new tabobject ( 'analysis', $analyseurl->out (), get_string ( 'tab_overview', 'groupformation' ) );
 	
+	// grouping_view
 	$groupingurl = new moodle_url ( '/mod/groupformation/grouping_view.php', array (
 			'id' => $usedid,
 			'do_show' => 'grouping' 
 	) );
 	$row [] = new tabobject ( 'grouping', $groupingurl->out (), get_string ( 'tab_grouping', 'groupformation' ) );
 	
+	// questionaire_view -> preview mode
 	$questionaire_viewiewurl = new moodle_url ( '/mod/groupformation/questionaire_view.php', array (
 			'id' => $usedid 
 	) );
 	$row [] = new tabobject ( 'view', $questionaire_viewiewurl->out (), get_string ( 'tab_preview', 'groupformation' ) );
 } elseif (! has_capability ( 'mod/groupformation:editsettings', $context ) && has_capability ( 'mod/groupformation:onlystudent', $context )) {
 	
+	// view -> student mode
 	$viewurl = new moodle_url ( '/mod/groupformation/view.php', array (
 			'id' => $usedid,
 			'do_show' => 'view' 
 	) );
 	$row [] = new tabobject ( 'view', $viewurl->out (), get_string ( 'tab_overview', 'groupformation' ) );
 	
+	// If questionaire is available for students
 	if ($store->isQuestionaireAvailable ()) {
-		
+		// questionaire view
 		$questionaire_viewiewurl = new moodle_url ( '/mod/groupformation/questionaire_view.php', array (
 				'id' => $usedid 
 		) );
 		$row [] = new tabobject ( 'answering', $questionaire_viewiewurl->out (), get_string ( 'tab_questionaire', 'groupformation' ) );
 	}
+	
+	// If student completed the questionaire
 	if ($store->isQuestionaireCompleted ( $userid )) {
-		$evaluationurl = new moodle_url ( '/mod/groupformation/evaluation_view.php', array (
-				'id' => $usedid,
-				'do_show' => 'evaluation' 
-		) );
-		$row [] = new tabobject ( 'evaluation', $evaluationurl->out (), get_string ( 'tab_evaluation', 'groupformation' ) );
+		// evaluation view -> later TODO
+		// $evaluationurl = new moodle_url ( '/mod/groupformation/evaluation_view.php', array (
+		// 'id' => $usedid,
+		// 'do_show' => 'evaluation'
+		// ) );
+		// $row [] = new tabobject ( 'evaluation', $evaluationurl->out (), get_string ( 'tab_evaluation', 'groupformation' ) );
 		
+		// group view
 		$groupurl = new moodle_url ( '/mod/groupformation/group_view.php', array (
 				'id' => $usedid,
 				'do_show' => 'group' 

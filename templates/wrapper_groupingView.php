@@ -1,7 +1,7 @@
 
 
 <div class="gf_settings_pad">
-    <div class="gf_pad_header">
+    <div class="gf_pad_header_small">
         Gruppenbildung
     </div>
     <div class="gf_pad_content bp_align_left-middle">

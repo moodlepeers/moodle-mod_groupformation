@@ -111,19 +111,23 @@
 	 		if ($store->isQuestionaireAvailable()){	
 				$status = $store->answeringStatus($userid);
 				if($status ==  -1){
+					mod_groupformation_util::get_info_text_for_student(true,$groupformation->id);
 					$info->__printAvailabilityInfo();
 	 				$info->__printStatusA();
 	 			}
 	 			if($status == 0){
+					mod_groupformation_util::get_info_text_for_student(false,$groupformation->id);
 					$info->__printAvailabilityInfo();
 	 				$info->__printStatusB();
 	 			}
 	 			if($status == 1){
-					$info->__printAvailabilityInfo();
+					mod_groupformation_util::get_info_text_for_student(false,$groupformation->id);
+	 				$info->__printAvailabilityInfo();
 	 				$info->__printStatusC();
 	 			}
 	 		}else{
-	 			$info->__printAvailabilityInfo(false);
+	 			$info->__printIntroText('student',true);
+				$info->__printAvailabilityInfo(false);
 	 		}
 		}
 	}else{

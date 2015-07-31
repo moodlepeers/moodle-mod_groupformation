@@ -38,9 +38,9 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 class mod_groupformation_data {
 	private $SCENARIO_NAMES = array (
-			'project',
-			'homework',
-			'presentation' 
+			1 =>'projectteams',
+			2 =>'homeworkgroups',
+			3 =>'presentationgroups' 
 	);
 	// NORMAL
 	// private $CATEGORY_NAMES = array('topic', 'knowledge', 'general', 'grade','team', 'character', 'learning', 'motivation');
@@ -263,6 +263,14 @@ class mod_groupformation_data {
 	);
 	public function __construct() {
 	}
+	
+	public function getScenarioName($scenario){
+		if ($scenario>=1 && $scenario<=3)
+			return $this->SCENARIO_NAMES[$scenario];
+		else
+			return $this->SCENARIO_NAMES[1];
+	}
+	
 	public function getNames() {
 		return $this->CATEGORY_NAMES;
 	}

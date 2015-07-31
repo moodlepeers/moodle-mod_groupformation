@@ -78,9 +78,9 @@ echo $OUTPUT->header ();
 require ('tabs.php');
 
 // Conditions to show the intro can change to look for own settings or whatever.
-if ($groupformation->intro) {
-	echo $OUTPUT->box ( format_module_intro ( 'groupformation', $groupformation, $cm->id ), 'generalbox mod_introbox', 'groupformationintro' );
-}
+// if ($groupformation->intro) {
+// 	echo $OUTPUT->box ( format_module_intro ( 'groupformation', $groupformation, $cm->id ), 'generalbox mod_introbox', 'groupformationintro' );
+// }
 
 // Replace the following lines with you own code.
 // echo $OUTPUT->heading ( $groupformation->name );

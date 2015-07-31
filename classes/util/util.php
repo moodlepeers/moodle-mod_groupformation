@@ -16,70 +16,80 @@
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
 /**
  *
- *
  * @package mod_groupformation
  * @author Nora Wester
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-//defined('MOODLE_INTERNAL') || die();  -> template
-//namespace mod_groupformation\classes\lecturer_settings;
-
-if (!defined('MOODLE_INTERNAL')) {
-	die('Direct access to this script is forbidden.');    ///  It must be included from a Moodle page
+// defined('MOODLE_INTERNAL') || die(); -> template
+// namespace mod_groupformation\classes\lecturer_settings;
+if (! defined ( 'MOODLE_INTERNAL' )) {
+	die ( 'Direct access to this script is forbidden.' ); // / It must be included from a Moodle page
 }
 
-//require_once 'storage_manager.php';
-require_once($CFG->dirroot.'/mod/groupformation/classes/moodle_interface/storage_manager.php');
-require_once(dirname(__FILE__).'/define_file.php');
-
-
-
+// require_once 'storage_manager.php';
+require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
+require_once (dirname ( __FILE__ ) . '/define_file.php');
 class mod_groupformation_util {
-
-	private $store;
-	private $groupformationid;
 	
-	//private $names = array('topic', 'knowledge', 'general','grade','team', 'character', 'learning', 'motivation');
-	private $names = array();
-	private $scenario;
-	private $numbers = array();
-
 	/**
-	 *
-	 * @param unknown $groupformationid
-
+	 * Returns html code for info text for teachers
+	 * 
+	 * @param string $unfolded
+	 * @param string $page
+	 * @return string
 	 */
-	public function __construct($groupformationid){
-		$this->groupformationid = $groupformationid;
-		$this->store = new mod_groupformation_storage_manager($groupformationid);
-		$this->scenario = $this->store->getScenario();
-		$data = new mod_groupformation_data();
-		//$this->names = $data->getCriterionNames();
-		$this->names = $data->getCriterionSet($this->scenario, $groupformationid);
-	}
-	
-	// gibt an, wieveiel Fragen der ganze (momentane) Fragebogen besitzt
-	public function getTotalNumber(){
-		$number = 0;
-		$this->numbers = $this->store->getNumbers($this->names);
-		//$this->setNulls();
-		foreach($this->numbers as $n){
-			$number = $number + $n;
-		}
+	public static function get_info_text_for_teacher($unfolded = false, $page = "settings") {
+		$s = '<p><a class="show">' . get_string ( 'info_header_teacher_' . $page, 'groupformation' ) . '</a></p>';
+		$s .= '<div id="info_text" style="display: ' . (($unfolded) ? 'block' : 'none') . ';">';
+		$s .= '<p style="padding-left: 10px;">' . get_string ( 'info_text_teacher_' . $page, 'groupformation' ) . '</p>';
+		$s .= '</div>';
+		$s .= self::get_js_for_info_text ();
 		
-		return $number;
+		return $s;
 	}
 	
-	// gibt die Position einer Kategorie zurück
-	private function getPosition($category){
-		//$position = -1;
-		for($i = 0; $i<count($this->names); $i++){
-			if($this->names[$i] == $category){
-				return $i;
-			}
-		}	
+	/**
+	 * Returns inline JS
+	 * 
+	 * @return string
+	 */
+	private static function get_js_for_info_text() {
+		$s = "";
+		$s .= '<script type="text/javascript">';
+		$s .= '		$(function() {';
+		$s .= '			$(\'.show\').click(function() {';
+		$s .= '				$(\'#info_text\').slideToggle();';
+		$s .= '	    	});';
+		$s .= '		});';
+		$s .= '</script>';
+		return $s;
 	}
 	
-	
+	/**
+	 * Returns html code for info text for students
+	 * 
+	 * @param string $unfolded
+	 * @param int $groupformationid
+	 * @param string $role
+	 * @return string
+	 */
+	public static function get_info_text_for_student($unfolded = false, $groupformationid = null, $role = "student") {
+		if (is_null ( $groupformationid )) {
+			return "";
+		}
+		$store = new mod_groupformation_storage_manager ( $groupformationid );
+		
+		$scenario_name = get_string ( 'scenario_' . $store->getScenario ( true ), 'groupformation' );
+		$a = new stdClass ();
+		$a->scenario_name = $scenario_name;
+		
+		$s = '<p><a class="show">' . get_string ( 'info_header_' . $role, 'groupformation' ) . '</a></p>';
+		$s .= '<div id="info_text" style="display: ' . (($unfolded) ? 'block' : 'none') . ';">';
+		$s .= '<p style="padding-left: 10px;">' . get_string ( 'info_text_' . $role, 'groupformation', $a ) . '</p>';
+		$s .= '</div>';
+		$s .= self::get_js_for_info_text ();
+		
+		return $s;
+	}
 }

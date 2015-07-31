@@ -459,14 +459,31 @@ class mod_groupformation_storage_manager {
 	 *
 	 * @return int
 	 */
-	public function getScenario() {
+	public function getScenario($name = false) {
 		global $DB;
 		
 		$settings = $DB->get_record ( 'groupformation', array (
 				'id' => $this->groupformationid 
 		) );
 		
+		if ($name){
+			$data = new mod_groupformation_data();
+			return $data->getScenarioName($settings->szenario);
+		}
+		
 		return $settings->szenario;
+	}
+	
+	public function getTotalNumber(){
+		$data = new mod_groupformation_data();
+		$names = $data->getCriterionSet($this->getScenario(), $this->groupformationid);
+		$number = 0;
+		$numbers = $this->getNumbers($names);
+		foreach($numbers as $n){
+			$number = $number + $n;
+		}
+	
+		return $number;
 	}
 	
 	/**

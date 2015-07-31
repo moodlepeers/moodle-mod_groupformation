@@ -123,7 +123,7 @@ class mod_groupformation_analysis_controller
                     'name' => 'stop_questionnaire',
                     'value' => '',
                     'state' => '',
-                    'text' => 'Aktivit&auml;t beenden'
+                    'text' => 'Aktivität beenden'
                 )
             );
 
@@ -134,12 +134,14 @@ class mod_groupformation_analysis_controller
                     'name' => 'start_questionnaire',
                     'value' => '',
                     'state' => '',
-                    'text' => 'Aktivit&auml;t starten'
+                    'text' => 'Aktivität starten'
                 )
             );
         }
 
-
+        $info_teacher = mod_groupformation_util::get_info_text_for_teacher(false,"analysis");
+        
+		$statusAnalysisView->assign('info_teacher', $info_teacher);
         $statusAnalysisView->assign('analysis_time_start', $this->start_time );
         $statusAnalysisView->assign('analysis_time_end', $this->end_time );
         $statusAnalysisView->assign('analysis_status_info', 'here comes the important info text');

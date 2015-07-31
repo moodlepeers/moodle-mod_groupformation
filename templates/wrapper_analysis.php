@@ -1,5 +1,5 @@
 <div class="gf_settings_pad">
-    <div class="gf_pad_header">Groupformation - "Platzhalter"
+    <div class="gf_pad_header_small">Aktivität
     </div>
     <div class="gf_pad_content">
 
@@ -7,7 +7,7 @@
     </div>
 
     <div class="gf_pad_header_small">
-        Fragebogen Statistik
+        Fragebogenstatistik
     </div>
     <div class="gf_pad_content">
         <?php echo $this->_['analysis_statistics_template']; ?>
