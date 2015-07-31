@@ -75,6 +75,6 @@
 	// Replace the following lines with you own code.
 	//echo $OUTPUT->heading ( $groupformation->name );
 	
-	echo '<div style="color:red;">Diese Seite ist noch in der Entwicklung. Die Inhalte sind ggf. noch rein statisch und haben keinen Effekt oder keine Funktion</div>';
+	echo '<div style="color:red;">Diese Seite ist noch in der Entwicklung. Die Inhalte sind ggf. noch rein statisch und haben keinen Effekt oder keine Funktion.</div>';
 	
 	echo $OUTPUT->footer ();
