@@ -4,20 +4,6 @@ $(document).ready(function() {
     // $('#invisible_topics_inputs').hide();
 
 
-    Element.prototype.getElementWidth = function() {
-        if (typeof this.clip !== "undefined") {
-            return this.clip.width;
-            } else {
-            if (this.style.pixelWidth) {
-                return this.style.pixelWidth;
-            } else {
-                return this.offsetWidth;
-                }
-            }
-        };
-
-
-
     //get the widths of all navigation li's
     var menuWidths = $('#accordion li').map(function(i) {
         //document.getElementById('foo').offsetWidth
@@ -25,24 +11,11 @@ $(document).ready(function() {
     });
 
 
-       $('#testShow')
-           .append( $('#accordion li').map(function(i) {
-               return $(this).outerWidth(true);
-           })
-               .get()
-               .join( ", " ) )
-           .append( $('#accordion li').map(function(i) {
-               return document.defaultView.getComputedStyle(this, null).width;
-               //return this.getElementWidth();
-           })
-               .get()
-               .join( ", " ) );
-
-
+    
     //shrink all widths to 50
-    /*$("#accordion li.accord_li").each(function(){
+    $("#accordion li.accord_li").each(function(){
         $(this).width(50);
-    });*/
+    });
 
     var activeItem = $();
 
