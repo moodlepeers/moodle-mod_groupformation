@@ -331,8 +331,15 @@ button.remove_field:before    { content: "x"; }
 [class*='f_btn']:only-child {
   float: left; }
 
-#szenarioradios h3 {
-  text-align: center; }
+#szenarioradios .sz_header {
+  text-align: center;
+    font-size: 1.6em;
+    padding: .5em 0;
+    font-weight: bold;}
+@media (min-width:64em) and (max-width: 78em) {
+    #szenarioradios .sz_header {
+        font-size: 1.2em;
+        font-weight: bold; } }
 #szenarioradios input[type="radio"] {
   display: none; }
 #szenarioradios label {

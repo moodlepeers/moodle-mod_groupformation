@@ -178,7 +178,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
                             <div class="col_m_33">
 			
                                 <input type="radio" name="js_szenario" id="project" value="project"  />
-                                <label class="col_m_100 szenarioLabel" for="project" ><h3>' . get_string ( 'scenario_projectteams', 'groupformation' ) . '</h3>
+                                <label class="col_m_100 szenarioLabel" for="project" ><div class="sz_header">' . get_string ( 'scenario_projectteams', 'groupformation' ) . '</div>
                                     <p><small>' . get_string ( 'scenario_projectteams_description', 'groupformation' ) . '</small></p>
                                 </label>
                             </div>
@@ -186,7 +186,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
                             <div class="col_m_33">
 			
                                 <input type="radio" name="js_szenario" id="homework" value="homework" />
-                                <label class="col_m_100 szenarioLabel" for="homework" ><h3>' . get_string ( 'scenario_homeworkgroups', 'groupformation' ) . '</h3>
+                                <label class="col_m_100 szenarioLabel" for="homework" ><div class="sz_header">' . get_string ( 'scenario_homeworkgroups', 'groupformation' ) . '</div>
                                     <p><small>' . get_string ( 'scenario_homeworkgroups_description', 'groupformation' ) . '</small></p>
                                 </label>
                             </div>
@@ -194,7 +194,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
                             <div class="col_m_33">
 			
                                 <input type="radio" name="js_szenario" id="presentation" value="presentation" />
-                                <label class="col_m_100 szenarioLabel" for="presentation"><h3>' . get_string ( 'scenario_presentationgroups', 'groupformation' ) . '</h3>
+                                <label class="col_m_100 szenarioLabel" for="presentation"><div class="sz_header">' . get_string ( 'scenario_presentationgroups', 'groupformation' ) . '</div>
                                     <p><small>' . get_string ( 'scenario_presentationgroups_description', 'groupformation' ) . '</small></p>
                                 </label>
                             </div>
