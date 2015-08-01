@@ -85,7 +85,7 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 	 */
 	public function start($course, $cm) {
 		global $USER;
-		groupformation_info($USER->id, $this->groupformationID, 'groupal job queued by course manager/teacher');
+		groupformation_info ( $USER->id, $this->groupformationID, 'groupal job queued by course manager/teacher' );
 		$users = $this->handle_complete_questionaires ();
 		mod_groupformation_job_manager::set_job ( $this->job, "waiting", true );
 		$this->determineStatus ();
@@ -95,7 +95,6 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 			$completion->set_module_viewed ( $cm, $userid );
 		}
 		
-		
 		return $users;
 	}
 	
@@ -104,7 +103,7 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 	 */
 	public function abort() {
 		global $USER;
-		groupformation_info($USER->id, $this->groupformationID, 'groupal job aborted by course manager/teacher');
+		groupformation_info ( $USER->id, $this->groupformationID, 'groupal job aborted by course manager/teacher' );
 		mod_groupformation_job_manager::set_job ( $this->job, "aborted", false, false );
 		$this->determineStatus ();
 	}
@@ -114,7 +113,7 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 	 */
 	public function adopt() {
 		global $USER;
-		groupformation_info($USER->id, $this->groupformationID, 'groupal job results adopted to moodle groups by course manager/teacher');
+		groupformation_info ( $USER->id, $this->groupformationID, 'groupal job results adopted to moodle groups by course manager/teacher' );
 		mod_groupformation_group_generator::generateMoodleGroups ( $this->groupformationID );
 		$this->determineStatus ();
 	}
@@ -124,7 +123,7 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 	 */
 	public function delete() {
 		global $USER;
-		groupformation_info($USER->id, $this->groupformationID, 'groupal job results deleted by course manager/teacher');
+		groupformation_info ( $USER->id, $this->groupformationID, 'groupal job results deleted by course manager/teacher' );
 		mod_groupformation_job_manager::set_job ( $this->job, "ready", false, true );
 		$this->groups_store->deleteGeneratedGroups ();
 		$this->determineStatus ();
@@ -136,6 +135,7 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 	 * @return string
 	 */
 	private function loadSettings() {
+		global $PAGE;
 		$settingsGroupsView = new mod_groupformation_template_builder ();
 		$settingsGroupsView->setTemplate ( 'groupingView_settings' );
 		
@@ -307,6 +307,17 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 				
 				break;
 		}
+		
+		$userfilter = new mod_groupformation_userid_filter ( $this->groupformationID );
+		
+		$count = count($userfilter->getCompletedIDs ());
+		$count += count($userfilter->getNoneCompletedIDs ());
+		
+		$context = $PAGE->context;
+		$count = count ( get_enrolled_users ( $context, 'mod/groupformation:onlystudent' ) );
+		
+		$settingsGroupsView->assign ( 'student_count', $count);
+		
 		return $settingsGroupsView->loadTemplate ();
 	}
 	
@@ -322,9 +333,9 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 			// TODO get statistics
 			$statisticsView->setTemplate ( 'groupingView_statistics' );
 			
-			$statisticsView->assign ( 'performance', '' );
-			$statisticsView->assign ( 'numbOfGroups', '' );
-			$statisticsView->assign ( 'maxSize', '' );
+			$statisticsView->assign ( 'performance', $this->job->performance_index );
+			$statisticsView->assign ( 'numbOfGroups', count ( $this->groups_store->getGeneratedGroups () ) );
+			$statisticsView->assign ( 'maxSize', $this->store->getGroupSize () );
 		} else {
 			$statisticsView->setTemplate ( 'groupingView_noData' );
 			$statisticsView->assign ( 'groupingView_noData', 'keine Daten vorhanden' );
@@ -403,7 +414,7 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 			
 			foreach ( $this->groups as $key => $value ) {
 				
-				$gpi = (is_null($value->performance_index))?'-':$value->performance_index;
+				$gpi = (is_null ( $value->performance_index )) ? '-' : $value->performance_index;
 				
 				$generatedGroupsView->assign ( $key, array (
 						'groupname' => $value->groupname,
@@ -464,7 +475,9 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 		global $COURSE, $CFG;
 		$link = array ();
 		if ($this->groupsAdopted) {
-			$url = new moodle_url('/group/members.php',array('group'=>$groupID));//='.$groupID;					
+			$url = new moodle_url ( '/group/members.php', array (
+					'group' => $groupID 
+			) ); // ='.$groupID;
 			return $link = [ 
 					$url,
 					'' 

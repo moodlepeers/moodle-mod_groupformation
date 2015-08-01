@@ -109,7 +109,7 @@ $cqt = new mod_groupformation_create_q_testuser ();
  * @param2: groupformation id
  */
 
-// $cqt->createTestusers ( 30, $groupformation->id,true);
+// $cqt->createTestusers ( 60, $groupformation->id,true);
 // $cqt->deleteTestusers();
 
 /* ---------- / Ahmed Tested User creation ---------- */
@@ -125,8 +125,8 @@ $incomplete_cohort = null;
 $job = $jm::get_job ( $groupformation->id );
 
 if (! is_null ( $job )) {
-	// $result = $jm::do_groupal ( $job, $groupal_cohort, $random_cohort, $incomplete_cohort);
-	// var_dump($result);
+// 	$result = $jm::do_groupal ( $job, $groupal_cohort, $random_cohort, $incomplete_cohort);
+// 	var_dump($result);
 }
 // -----------------------------------------------
 
