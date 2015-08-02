@@ -140,6 +140,9 @@ function groupformation_update_instance(stdClass $groupformation, mod_groupforma
 		$result = $DB->update_record ( 'groupformation', $orig_record );
 	}
 	
+	// get current DB record (with all DB defaults)
+	$groupformation = $DB->get_record('groupformation', array('id'=>$groupformation->id));
+	
 	groupformation_grade_item_update ( $groupformation );
 	
 	groupformation_save_more_infos ( $groupformation, FALSE );
