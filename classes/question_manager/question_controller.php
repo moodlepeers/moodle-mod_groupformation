@@ -236,7 +236,7 @@
 			return ($this->currentCategoryPosition != -1 && $this->currentCategoryPosition < $this->numberOfCategory);
 		}
 		
-		public function getNextQuestion(){
+		public function getNextQuestions(){
 			
 			if($this->currentCategoryPosition != -1){
 			

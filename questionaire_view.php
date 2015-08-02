@@ -82,27 +82,22 @@
 	$PAGE->set_title(format_string($groupformation->name));
 	$PAGE->set_heading(format_string($course->fullname));
 
-// 	echo $OUTPUT->header();
-
-
 // 	// Conditions to show the intro can change to look for own settings or whatever.
 // 	if ($groupformation->intro) {
 // 		echo $OUTPUT->box(format_module_intro('groupformation', $groupformation, $cm->id), 'generalbox mod_introbox', 'groupformationintro');
 // 	}
  
-// 	$xmlLoader = new mod_groupformation_xml_loader();
-
-	
 	$direction = 1;
 	if(isset($_POST["direction"])){
 		$direction = $_POST["direction"];
 	}
 
-	//--- Mathevorkurs
+	// --- Mathevorkurs
 	$go = true;
 	//---
 	
 	$inArray = in_array($category, $names);
+	
 	if(has_capability('mod/groupformation:onlystudent', $context) && !has_capability('mod/groupformation:editsettings', $context)){
 		if($inArray){
 			
@@ -147,12 +142,14 @@
 	}
 	
 	$available = $store->isQuestionaireAvailable();
-	
-	if(($available || has_capability('mod/groupformation:editsettings', $context)) && ($category == '' || $inArray)){
+	$isTeacher = has_capability('mod/groupformation:editsettings', $context);
+	if (($available || $isTeacher) && ($category == '' || $inArray)) {
+		
 		echo $OUTPUT->header();
 		
 		// Print the tabs.
 		require ('tabs.php');
+		
 		$questionManager = new mod_groupformation_questionaire($cm->id,$groupformation->id, get_string('language','groupformation'), $userid, $category, $context);
 		
 		if($direction == 0){
@@ -165,23 +162,21 @@
 		
 		$questionManager->printQuestionairePage();
 		
-	}else if(!$available || $category == 'no'){
+	} else if(!$available || $category == 'no') {
+		
 		if(isset($_POST["action"]) && $_POST["action"] == 1){
 			$store->statusChanged($userid);
 		}
+		
 		$returnurl = new moodle_url('/mod/groupformation/view.php', array(
 				'id' => $cm->id, 
 				'do_show' => 'view', 
 				'back' => '1'));
 		redirect($returnurl);
-	}else{
+	} else {
 		
 		echo $OUTPUT->heading('Category has been manipulated');
 	}
-	
-	
-
-
 
 	echo $OUTPUT->footer();
 
