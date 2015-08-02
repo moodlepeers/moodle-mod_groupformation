@@ -155,11 +155,12 @@ class mod_groupformation_questionaire {
             // <li><a href="b.html">Two</a></li>
         }
         echo '</ul>';
+        echo '</div>';
     }
 	
 	// --- Mathevorkurs
 	private function notAllAnswers() {
-        echo '<div class="survey_warnings">
+        echo '<div class="col_100 survey_warnings">
                              <p>Du hast nicht alle Fragen beantwortet</p>
                     </div>';
 
@@ -171,6 +172,7 @@ class mod_groupformation_questionaire {
 		$tableType = $questions [0] [0];
 		$headerOptArray = $questions [0] [2];
 		
+		echo '<div class="col_100">';
 		// echo '<form action="questionaire.php" method="post">';
 		echo '<form action="' . htmlspecialchars ( $_SERVER ["PHP_SELF"] ) . '" method="post" autocomplete="off">';
 		
@@ -251,7 +253,8 @@ class mod_groupformation_questionaire {
 						</div>
 						</div>
 				
-						</form>';
+						</form>
+						</div>';
 	}
 	
 	private function printFinalPage() {
