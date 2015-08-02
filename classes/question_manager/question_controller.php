@@ -242,10 +242,10 @@
 			
 				$questions = array();
 				$hasAnswer = $this->hasAnswers();
-				$answers = array();
-				if($hasAnswer){
-					$answers = $this->getAnswers();
-				}
+				//$answers = array();
+				//if($hasAnswer){
+				//	$answers = $this->getAnswers();
+				//}
 				
 				if($this->currentCategoryPosition == $this->store->getPosition('topic') || $this->currentCategoryPosition == $this->store->getPosition('knowledge')){
 					
@@ -278,21 +278,28 @@
  							$options = array('excellent', 'none');
  						}
  						
- 						$positionArray = 1;
- 						$positionAnswer = 0;
+ 						$position = 1;
+ 					//	$positionAnswer = 0;
  						foreach ($values as $value){
  							$question = array();
  							$question[] = $type;
  							$question[] = $text . $value;
  							$question[] = $options;
  							if($hasAnswer){
- 								if($positionAnswer < count($answers) && $answers[$positionAnswer][0] == $positionArray){
- 									$question[] = $answers[$positionAnswer][1];
- 									$positionAnswer++;
+ 						//		if($positionAnswer < count($answers) && $answers[$positionAnswer][0] == $positionArray){
+ 						//			$question[] = $answers[$positionAnswer][1];
+ 						//			$positionAnswer++;
+ 						//		}else{
+ 						//			$question[] = -1;
+ 						//		}
+ 						//		$positionArray++;
+ 								$answer = $this->store->getSingleAnswer($this->userId, $this->names[$this->currentCategoryPosition], $position);
+ 								if($answer != false){
+ 									$question[] = $answer;
  								}else{
  									$question[] = -1;
  								}
- 								$positionArray++;
+ 								$position++;
  							}
 							$questions[] = $question;
 						}
@@ -311,9 +318,15 @@
 						$question[] = $this->xml->xmlToArray('<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $o . ' </OPTIONS>');
 						
 						if($hasAnswer){
-							if($positionAnswer < count($answers) && $answers[$positionAnswer][0] == $i){
-								$question[] = $answers[$positionAnswer][1];
-								$positionAnswer++;
+						//	if($positionAnswer < count($answers) && $answers[$positionAnswer][0] == $i){
+						//		$question[] = $answers[$positionAnswer][1];
+						//		$positionAnswer++;
+						//	}else{
+						//		$question[] = -1;
+						//	}
+							$answer = $this->store->getSingleAnswer($this->userId, $this->names[$this->currentCategoryPosition], $i);
+							if($answer != false){
+								$question[] = $answer;
 							}else{
 								$question[] = -1;
 							}
