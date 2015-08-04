@@ -59,7 +59,7 @@
 				
 				// echo 'Deine Gruppennummer ist ' . $id . '<br>';
 				
-				$otherMembers = $this->groups_store->getGroupMembers ( $userid );
+				$otherMembers = $this->groups_store->get_group_members ( $userid );
 				
 				if (count ( $otherMembers ) > 0) {
 					echo 'Deine Arbeitskollegen sind: <br>';

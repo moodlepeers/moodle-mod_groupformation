@@ -33,7 +33,11 @@ class mod_groupformation_analysis_controller
 
     private $test;
 
-
+	/**
+	 * Creates instance of analysis controller
+	 * 
+	 * @param int $groupformationID
+	 */
     public function __construct($groupformationID)
     {
         $this->groupformationID = $groupformationID;
@@ -80,16 +84,26 @@ class mod_groupformation_analysis_controller
         }*/
     }
 
-    public function startQuestionnaire() {
-        $this->store->openQuestionnaire();
+    /**
+     * Sets start time of questionnaire to now
+     */
+    public function start_questionnaire() {
+        $this->store->open_questionnaire();
     }
 
-    public function stopQuestionnaire() {
-        $this->store->closeQuestionnaire();
+    /**
+     * Sets end time of questionnaire to now
+     */
+    public function stop_questionnaire() {
+        $this->store->close_questionnaire();
     }
 
-
-    private function loadStatus(){
+	/**
+	 * Loads status
+	 * 
+	 * @return string
+	 */
+    private function load_status(){
 
         $statusAnalysisView = new mod_groupformation_template_builder ();
         $statusAnalysisView->setTemplate ( 'analysis_status' );
@@ -151,7 +165,7 @@ class mod_groupformation_analysis_controller
     }
 
 
-    private function loadStatistics()
+    private function load_statistics()
     {
     	global $PAGE;
     	
@@ -174,8 +188,8 @@ class mod_groupformation_analysis_controller
 
     public function display() {
         $this->view->setTemplate ( 'wrapper_analysis' );
-        $this->view->assign ( 'analysis_status_template', $this->loadStatus() );
-        $this->view->assign ( 'analysis_statistics_template', $this->loadStatistics() );
+        $this->view->assign ( 'analysis_status_template', $this->load_status() );
+        $this->view->assign ( 'analysis_statistics_template', $this->load_statistics() );
         return $this->view->loadTemplate ();
     }
 

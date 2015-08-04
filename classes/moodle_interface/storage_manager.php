@@ -805,7 +805,7 @@ class mod_groupformation_storage_manager {
 	/**
 	 * Sets timestamp in groupformation in order to close/terminate questionaire
 	 */
-	public function closeQuestionnaire() {
+	public function close_questionnaire() {
 		global $DB;
 		
 		$data = new stdClass ();
@@ -818,7 +818,7 @@ class mod_groupformation_storage_manager {
 	/**
 	 * Sets timestamp in groupformation in order to open/begin questionaire
 	 */
-	public function openQuestionnaire() {
+	public function open_questionnaire() {
 		global $DB;
 		
 		$data = new stdClass ();

@@ -96,9 +96,9 @@ $controller = new mod_groupformation_analysis_controller ( $groupformation->id )
 
 if ($_POST) {
 	if (isset ( $_POST ['start_questionnaire'] )) {
-		$controller->startQuestionnaire ();
+		$controller->start_questionnaire ();
 	} elseif (isset ( $_POST ['stop_questionnaire'] )) {
-		$controller->stopQuestionnaire ();
+		$controller->stop_questionnaire ();
 	}
 }
 

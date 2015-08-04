@@ -42,13 +42,13 @@ class mod_groupformation_grouping_controller {
 		
 		$this->groups = $this->groups_store->getGeneratedGroups ();
 		
-		$this->determineStatus ();
+		$this->determine_status ();
 	}
 	
 	/**
 	 * Determines status of grouping_view
 	 */
-	public function determineStatus() {
+	public function determine_status() {
 		$this->surveyState = $this->store->isQuestionaireAvailable ();
 		
 		// status job
@@ -89,7 +89,7 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 		groupformation_info ( $USER->id, $this->groupformationID, 'groupal job queued by course manager/teacher' );
 		$users = $this->handle_complete_questionaires ();
 		mod_groupformation_job_manager::set_job ( $this->job, "waiting", true );
-		$this->determineStatus ();
+		$this->determine_status ();
 		
 		foreach ( $users as $userid ) {
 			$completion = new completion_info ( $course );
@@ -106,7 +106,7 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 		global $USER;
 		groupformation_info ( $USER->id, $this->groupformationID, 'groupal job aborted by course manager/teacher' );
 		mod_groupformation_job_manager::set_job ( $this->job, "aborted", false, false );
-		$this->determineStatus ();
+		$this->determine_status ();
 	}
 	
 	/**
@@ -116,7 +116,7 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 		global $USER;
 		groupformation_info ( $USER->id, $this->groupformationID, 'groupal job results adopted to moodle groups by course manager/teacher' );
 		mod_groupformation_group_generator::generateMoodleGroups ( $this->groupformationID );
-		$this->determineStatus ();
+		$this->determine_status ();
 	}
 	
 	/**
@@ -127,7 +127,7 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 		groupformation_info ( $USER->id, $this->groupformationID, 'groupal job results deleted by course manager/teacher' );
 		mod_groupformation_job_manager::set_job ( $this->job, "ready", false, true );
 		$this->groups_store->deleteGeneratedGroups ();
-		$this->determineStatus ();
+		$this->determine_status ();
 	}
 	
 	/**
@@ -135,7 +135,7 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 	 *
 	 * @return string
 	 */
-	private function loadSettings() {
+	private function load_settings() {
 		global $PAGE;
 		$settingsGroupsView = new mod_groupformation_template_builder ();
 		$settingsGroupsView->setTemplate ( 'groupingView_settings' );
@@ -327,7 +327,7 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 	 *
 	 * @return string
 	 */
-	private function loadStatistics() {
+	private function load_statistics() {
 		$statisticsView = new mod_groupformation_template_builder ();
 		
 		if ($this->viewState == 4 || $this->viewState == 5) {
@@ -349,7 +349,7 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 	 *
 	 * @return string
 	 */
-	private function loadIncompleteGroups() {
+	private function load_incomplete_groups() {
 		$incompleteGroupsView = new mod_groupformation_template_builder ();
 		
 		if ($this->viewState == 4 || $this->viewState == 5) {
@@ -361,7 +361,7 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 				
 				$incompleteGroupsView->assign ( $key, array (
 						'groupname' => $value->groupname,
-						'scrollTo_group' => $this->scrollToGoupLink ( $key ),
+						'scrollTo_group' => $this->get_scroll_to_link ( $key ),
 						'groupsize' => $value->groupsize 
 				) );
 			}
@@ -379,7 +379,7 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 	 *        	$groupID
 	 * @return string
 	 */
-	private function scrollToGoupLink($groupID) {
+	private function get_scroll_to_link($groupID) {
 		// TODO function to scroll not implemented; return placeholder
 		return '#' . $groupID;
 	}
@@ -387,7 +387,7 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 	/**
 	 * Sets the array with incompleted groups
 	 */
-	private function setIncompleteGroups() {
+	private function set_incomplete_groups() {
 		$maxSize = $this->store->getGroupSize ();
 		
 		foreach ( $this->groups as $key => $value ) {
@@ -406,7 +406,7 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 	 *
 	 * @return string
 	 */
-	private function loadGeneratedGroups() {
+	private function load_generated_groups() {
 		$generatedGroupsView = new mod_groupformation_template_builder ();
 		
 		if ($this->viewState == 4 || $this->viewState == 5) {
@@ -420,8 +420,8 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 				$generatedGroupsView->assign ( $key, array (
 						'groupname' => $value->groupname,
 						'groupquallity' => $gpi,
-						'grouplink' => $this->linkToGroup ( $value->moodlegroupid ),
-						'group_members' => $this->getGroupMembers ( $key ) 
+						'grouplink' => $this->get_group_link ( $value->moodlegroupid ),
+						'group_members' => $this->get_group_members ( $key ) 
 				) );
 			}
 		} else {
@@ -438,7 +438,7 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 	 *        	$groupID
 	 * @return array
 	 */
-	private function getGroupMembers($groupID) {
+	private function get_group_members($groupID) {
 		global $CFG, $COURSE, $USER;
 		$usersIDs = $this->groups_store->getUsersForGeneratedGroup ( $groupID );
 		$groupMembers = array ();
@@ -472,7 +472,7 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 	 *        	$groupID
 	 * @return array
 	 */
-	private function linkToGroup($groupID) {
+	private function get_group_link($groupID) {
 		global $COURSE, $CFG;
 		$link = array ();
 		if ($this->groupsAdopted) {
@@ -499,12 +499,12 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 	 * @return string
 	 */
 	public function display() {
-		$this->determineStatus ();
+		$this->determine_status ();
 		$this->view->setTemplate ( 'wrapper_groupingView' );
-		$this->view->assign ( 'groupingView_settings', $this->loadSettings () );
-		$this->view->assign ( 'groupingView_statistic', $this->loadStatistics () );
-		$this->view->assign ( 'groupingView_incompleteGroups', $this->loadIncompleteGroups () );
-		$this->view->assign ( 'groupingView_generatedGroups', $this->loadGeneratedGroups () );
+		$this->view->assign ( 'groupingView_settings', $this->load_settings () );
+		$this->view->assign ( 'groupingView_statistic', $this->load_statistics () );
+		$this->view->assign ( 'groupingView_incompleteGroups', $this->load_incomplete_groups () );
+		$this->view->assign ( 'groupingView_generatedGroups', $this->load_generated_groups () );
 		return $this->view->loadTemplate ();
 	}
 	
@@ -514,7 +514,6 @@ elseif ($this->job_status == 'done' && $this->groupsAdopted) {
 	private function handle_complete_questionaires() {
 		$userFilter = new mod_groupformation_userid_filter ( $this->groupformationID );
 		
-		// hole alle userids von komplett ausgefüllten Fragebögen und markiere diese als abgegeben
 		$users = $userFilter->getCompletedIDs ();
 		
 		foreach ( $users as $user ) {

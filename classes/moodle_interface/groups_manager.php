@@ -160,7 +160,7 @@ class mod_groupformation_groups_manager {
 	 * @param integer $userid        	
 	 * @return multitype:unknown
 	 */
-	public function getGroupMembers($userid) {
+	public function get_group_members($userid) {
 		global $DB;
 		
 		$array = array ();
