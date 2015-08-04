@@ -1,6 +1,7 @@
 <?php
 
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/controller/grouping_controller.php');
 
 class mod_groupformation_test_user_generator {
 	
@@ -143,6 +144,8 @@ class mod_groupformation_test_user_generator {
 			foreach ( $user_records as $userid => $record ) {
 				
 				try {
+					$grouping_controller = new mod_groupformation_grouping_controller($groupformationid);
+					$grouping_controller->delete();	
 					
 					$DB->delete_records ( "user", array (
 							'id' => $userid 
