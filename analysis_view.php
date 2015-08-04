@@ -25,9 +25,7 @@ require_once (dirname ( dirname ( dirname ( __FILE__ ) ) ) . '/config.php');
 require_once (dirname ( __FILE__ ) . '/lib.php');
 require_once (dirname ( __FILE__ ) . '/locallib.php');
 
-/* Ahmed */
-
-require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/test_user_generator.php');
+require_once (dirname ( __FILE__ ) . '/classes/util/test_user_generator.php');
 require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/storage_manager.php');
 
 // Read URL params
