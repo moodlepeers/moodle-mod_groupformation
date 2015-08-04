@@ -51,6 +51,9 @@ class mod_groupformation_test_user_generator {
 			
 			try {
 				$user = create_user_record ( $username, $password );
+				$user->firstname = "Dummy";
+				$user->lastname = "User ".$j;
+				$DB->update_record('user', $user);
 				$userid = $user->id;
 			} catch ( Exception $e ) {
 				$this->echowarn ( "Error while creating user. The user might already exist." );

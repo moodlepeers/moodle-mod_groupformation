@@ -8,6 +8,7 @@ require_once ($CFG->dirroot . '/mod/groupformation/classes/util/template_builder
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/userid_filter.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/group_generator.php');
+
 class mod_groupformation_grouping_controller {
 	private $groupformationID;
 	

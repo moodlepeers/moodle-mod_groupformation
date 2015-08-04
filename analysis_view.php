@@ -139,8 +139,8 @@ $incomplete_cohort = null;
 $job = $jm::get_job ( $groupformation->id );
 
 if (! is_null ( $job )) {
-	// $result = $jm::do_groupal ( $job, $groupal_cohort, $random_cohort, $incomplete_cohort);
-	// var_dump($result);
+	$result = $jm::do_groupal ( $job, $groupal_cohort, $random_cohort, $incomplete_cohort);
+// 	var_dump($result);
 }
 // -----------------------------------------------
 

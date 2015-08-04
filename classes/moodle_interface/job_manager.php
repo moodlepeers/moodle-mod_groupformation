@@ -262,7 +262,7 @@ class mod_groupformation_job_manager {
 	 * Runs groupal with job
 	 *
 	 * @param stdClass $job        	
-	 * @return stdClass
+	 * @return array
 	 */
 	public static function do_groupal($job, &$groupal_cohort, &$random_cohort, &$incomplete_cohort) {
 		$groupformationid = $job->groupformationid;
@@ -270,7 +270,20 @@ class mod_groupformation_job_manager {
 		$userfilter = new mod_groupformation_userid_filter ( $groupformationid );
 		
 		$completed_users = $userfilter->getCompletedIDs ();
-		$incomplete_users = $userfilter->getNoneCompletedIds ();
+		$nonecomplete_users = $userfilter->getNoneCompletedIds ();
+		
+		$store = new mod_groupformation_storage_manager($groupformationid);
+		
+		$courseid = $store->getCourseID();
+
+		$context = context_course::instance($courseid);
+		
+		$enrolled_students = array_keys(get_enrolled_users ( $context, 'mod/groupformation:onlystudent' ));
+		
+		$diff = array_diff($enrolled_students, $completed_users);
+		$merge = array_unique(array_merge($diff,$nonecomplete_users));
+		
+		$incomplete_users = $merge;
 		
 		$pp = new mod_groupformation_participant_parser ( $groupformationid );
 		
@@ -464,11 +477,12 @@ class mod_groupformation_job_manager {
 		$groupformationname = $store->getName ();
 		
 		$groupname = "";
+		$i = $store->getInstanceNumber();
 		
 		if (strlen ( $groupname_prefix ) < 1) {
-			$groupname = "G_" . substr ( $groupformationname, 0, 8 ) . "_";
+			$groupname = "G".$i."_" . substr ( $groupformationname, 0, 8 ) . "_";
 		} else {
-			$groupname = "G_" . $groupname_prefix . "_";
+			$groupname = "G".$i."_" . $groupname_prefix . "_";
 		}
 		
 		$ids = array ();

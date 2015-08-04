@@ -76,6 +76,33 @@ class mod_groupformation_storage_manager {
 	}
 	
 	/**
+	 * Returns course id
+	 * 
+	 * @return mixed
+	 */
+	public function getCourseID(){
+		global $DB;
+		return $DB->get_field('groupformation', 'course', array('id'=>$this->groupformationid));
+	}
+	
+	/**
+	 * Returns instance number of all groupformations in course
+	 */
+	public function getInstanceNumber(){
+		global $DB;
+		$courseid = $this->getCourseID();
+		$records = $DB->get_records('groupformation',array('course'=>$courseid),'id','id');
+		$i = 1;
+		foreach ($records as $id=>$record){
+			if ($id == $this->groupformationid)
+				return $i;
+			else
+				$i++;
+		}
+		return $i;
+	}
+	
+	/**
 	 *
 	 * @param moodleform_mod $mform        	
 	 */
