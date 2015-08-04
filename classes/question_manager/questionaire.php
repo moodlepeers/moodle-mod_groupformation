@@ -152,7 +152,7 @@ class mod_groupformation_questionaire {
 	
 	// --- Mathevorkurs
 	private function notAllAnswers() {
-		echo '<div class="col_100 survey_warnings">
+		echo '<div class="survey_warnings">
                              <p>Du hast nicht alle Fragen beantwortet</p>
                     </div>';
 		
@@ -170,8 +170,7 @@ class mod_groupformation_questionaire {
 		$tableType = $questions [0] [0];
 		$headerOptArray = $questions [0] [2];
 		
-		echo '<div class="col_100">';
-		
+
 		echo '<form action="' . htmlspecialchars ( $_SERVER ["PHP_SELF"] ) . '" method="post" autocomplete="off">';
 		
 		// hier schicke ich verdeckt die momentane Kategorie und groupformationID mit
@@ -247,7 +246,6 @@ class mod_groupformation_questionaire {
 		$this->printActionButtons();
 		
 		echo '</form>';
-		echo '</div>';
 	}
 	
 	/**
