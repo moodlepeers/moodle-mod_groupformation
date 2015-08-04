@@ -58,6 +58,8 @@
 	groupformation_info($USER->id,$groupformation->id,'<view_student_overview>');
 	
 	$store = new mod_groupformation_storage_manager($groupformation->id);
+	$groups_store = new mod_groupformation_groups_manager($groupformation->id);
+	
 	$info = new mod_groupformation_info_text ($cm->id, $groupformation->id, $userid );
 
 	if ($store->isQuestionaireCompleted($userid)){
@@ -105,7 +107,8 @@
   	}
 
 	if (has_capability('mod/groupformation:onlystudent', $context)){
-		if(!mod_groupformation_groups_manager::isNotBuild($groupformation->id)){
+		$isBuild = $groups_store->is_build();
+		if(!isBuild){
 			$info->__groupsAvailable();
 		}else{
 	 		if ($store->isQuestionaireAvailable()){	

@@ -473,7 +473,7 @@ class mod_groupformation_job_manager {
 		
 		$store = new mod_groupformation_storage_manager ( $groupformationid );
 		
-		$groupname_prefix = $store->getGroupName ();
+		$groupname_prefix = $store->get_group_name_setting ();
 		$groupformationname = $store->getName ();
 		
 		$groupname = "";

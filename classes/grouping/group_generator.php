@@ -40,9 +40,9 @@ class mod_groupformation_group_generator {
 		global $COURSE;
 		
 		$groups_store = new mod_groupformation_groups_manager ( $groupformationID );
-		$groupal_groups = $groups_store->getGeneratedGroups ();
+		$groupal_groups = $groups_store->get_generated_groups ();
 		
-		if ($groups_store->groupsCreated ( $groupformationID ))
+		if ($groups_store->groups_created ())
 			return false;
 		
 		$position = 0;
@@ -57,7 +57,7 @@ class mod_groupformation_group_generator {
 			$groupid = $groupal_group->id;
 			$groupname = $groupal_group->groupname;
 			
-			$groupal_users = $groups_store->getUsersForGeneratedGroup ( $groupal_group->id );
+			$groupal_users = $groups_store->get_users_for_generated_group ( $groupal_group->id );
 			
 			$parsed_groupname = groups_parse_name ( $groupname, $position );
 			
@@ -81,7 +81,7 @@ class mod_groupformation_group_generator {
 				groups_add_member ( $moodlegroupid, $user->userid );
 			}
 			
-			$groups_store->saveMoodleGroupID ( $groupid, $moodlegroupid );
+			$groups_store->save_moodlegroup_id ( $groupid, $moodlegroupid );
 			
 			// Invalidate the course groups cache seeing as we've changed it.
 			cache_helper::invalidate_by_definition ( 'core', 'groupdata', array (), array (
@@ -93,7 +93,7 @@ class mod_groupformation_group_generator {
 					
 					groups_delete_group ( $moodlegroupid );
 					
-					$groups_store->deleteMoodleGroupID ( $moodlegroupid );
+					$groups_store->delete_moodlegroup_id ( $moodlegroupid );
 				}
 			}
 		}

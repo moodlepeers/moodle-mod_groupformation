@@ -50,10 +50,10 @@
 		 */
 		public function render($userid) {
 			global $CFG, $COURSE;
-			if ($this->groups_store->hasGroup ( $userid ) && $this->groups_store->groupsCreated($this->groupformationid)) {
-				$id = $this->groups_store->getGroupID ( $userid );
+			if ($this->groups_store->has_group ( $userid ) && $this->groups_store->groups_created()) {
+				$id = $this->groups_store->get_group_id ( $userid );
 				
-				$name = $this->groups_store->getGroupName ( $userid );
+				$name = $this->groups_store->get_group_name ( $userid );
 				
 				echo 'Dein Gruppenname ist ' . $name . ' (ID #' . $id . ')<br>';
 				

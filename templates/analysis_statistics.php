@@ -1,9 +1,9 @@
 <div class="grid row_highlight">
-    <div class="col_m_87-5">Es gibt <b><?php echo $this->_['statistics_enrolled']; ?></b> eingeschriebene Studenten, die den Fragebogen ausfüllen können.</div>
+    <div class="col_m_87-5">Es gibt <b><?php echo $this->_['statistics_enrolled']; ?></b> <?php echo ($this->_['statistics_enrolled']==1)?"eingeschriebenen Studierenden, der":"eingeschriebene Studierende, die";?> den Fragebogen ausfüllen können.</div>
 <!--     <div class="col_m_12-5 bp_align_right-middle"><button class="gf_button gf_button_pill gf_button_tiny">view</button></div> -->
 </div>
 <div class="grid row_highlight">
-    <div class="col_m_87-5">Es haben <b><?php echo $this->_['statistics_processed']; ?></b> Studenten den Fragebogen bearbeitet.</div>
+    <div class="col_m_87-5">Es <?php echo ($this->_['statistics_processed']==1)?"hat":"haben"?> <b><?php echo $this->_['statistics_processed']; ?></b> <?php echo ($this->_['statistics_processed']==1)?"Studierender":"Studierende"?> den Fragebogen bearbeitet.</div>
 <!--     <div class="col_m_12-5 bp_align_right-middle"><button class="gf_button gf_button_pill gf_button_tiny">view</button></div> -->
 </div>
 <div class="grid row_highlight">
