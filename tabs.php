@@ -30,6 +30,7 @@ $row = array ();
 $inactive = array ();
 $activated = array ();
 $store = new mod_groupformation_storage_manager ( $groupformation->id );
+$groups_store = new mod_groupformation_groups_manager($groupformation->id);
 
 // some pages deliver the cmid instead the id
 if (isset ( $cmid ) and intval ( $cmid ) and $cmid > 0) {
@@ -86,7 +87,7 @@ if (has_capability ( 'mod/groupformation:editsettings', $context )) {
 	}
 	
 	// If student completed the questionaire
-	if ($store->isQuestionaireCompleted ( $userid )) {
+	if ($store->isQuestionaireCompleted ( $userid ) || $groups_store->groups_created()) {
 		// evaluation view -> later TODO
 		// $evaluationurl = new moodle_url ( '/mod/groupformation/evaluation_view.php', array (
 		// 'id' => $usedid,

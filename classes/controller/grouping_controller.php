@@ -132,7 +132,7 @@ class mod_groupformation_grouping_controller {
 		// logging
 		groupformation_info ( $USER->id, $this->groupformationID, 'groupal job results adopted to moodle groups by course manager/teacher' );
 		
-		mod_groupformation_group_generator::generateMoodleGroups ( $this->groupformationID );
+		mod_groupformation_group_generator::generate_moodle_groups ( $this->groupformationID );
 		$this->determine_status ();
 	}
 	

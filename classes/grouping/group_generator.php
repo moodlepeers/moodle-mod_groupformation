@@ -33,10 +33,11 @@ class mod_groupformation_group_generator {
 	
 	/**
 	 * Generates moodle groups and sets ids in groupal generated groups
-	 *
-	 * @param unknown $groupal_groups        	
+	 * 
+	 * @param int $groupformationID
+	 * @return boolean
 	 */
-	public static function generateMoodleGroups($groupformationID) {
+	public static function generate_moodle_groups($groupformationID) {
 		global $COURSE;
 		
 		$groups_store = new mod_groupformation_groups_manager ( $groupformationID );

@@ -55,7 +55,7 @@
 				
 				$name = $this->groups_store->get_group_name ( $userid );
 				
-				echo 'Dein Gruppenname ist ' . $name . ' (ID #' . $id . ')<br>';
+				echo 'Der Name deiner Gruppe ist ' . $name . ' (ID #' . $id . ')<br>';
 				
 				// echo 'Deine Gruppennummer ist ' . $id . '<br>';
 				
@@ -76,6 +76,8 @@
 						
 						echo '<a href="' . $url . '">' . fullname ( $member ) . '</a>';
 					}
+				}else{
+					echo 'Du bist allein in dieser Gruppe.';
 				}
 			} else {
 				echo '<h5> Die Gruppenbildung ist noch nicht abgeschlossen </h>';
