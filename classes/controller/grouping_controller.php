@@ -158,6 +158,7 @@ class mod_groupformation_grouping_controller {
 	public function display() {
 		$this->determine_status ();
 		$this->view->setTemplate ( 'wrapper_groupingView' );
+        $this->view->assign ( 'groupingView_Title', $this->store->getName() );
 		$this->view->assign ( 'groupingView_settings', $this->load_settings () );
 		$this->view->assign ( 'groupingView_statistic', $this->load_statistics () );
 		$this->view->assign ( 'groupingView_incompleteGroups', $this->load_incomplete_groups () );

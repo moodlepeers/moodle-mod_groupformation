@@ -1,5 +1,5 @@
 <div class="gf_settings_pad">
-    <div class="gf_pad_header_small">Aktivität
+    <div class="gf_pad_header">Aktivität - <?php echo $this->_['analysis_name']; ?>
     </div>
     <div class="gf_pad_content">
 

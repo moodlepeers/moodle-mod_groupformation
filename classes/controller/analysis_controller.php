@@ -188,6 +188,7 @@ class mod_groupformation_analysis_controller
 
     public function display() {
         $this->view->setTemplate ( 'wrapper_analysis' );
+        $this->view->assign( 'analysis_name', $this->store->getName());
         $this->view->assign ( 'analysis_status_template', $this->load_status() );
         $this->view->assign ( 'analysis_statistics_template', $this->load_statistics() );
         return $this->view->loadTemplate ();
