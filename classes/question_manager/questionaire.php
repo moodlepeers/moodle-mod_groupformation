@@ -171,7 +171,7 @@ class mod_groupformation_questionaire {
 		$headerOptArray = $questions [0] [2];
 		
 
-		echo '<form action="' . htmlspecialchars ( $_SERVER ["PHP_SELF"] ) . '" method="post" autocomplete="off">';
+		echo '<form style="width:100%; float:left;" action="' . htmlspecialchars ( $_SERVER ["PHP_SELF"] ) . '" method="post" autocomplete="off">';
 		
 		// hier schicke ich verdeckt die momentane Kategorie und groupformationID mit
 		echo '<input type="hidden" name="category" value="' . $this->category . '"/>';
