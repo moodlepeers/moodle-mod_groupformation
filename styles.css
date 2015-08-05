@@ -806,7 +806,7 @@ table.tabled_inputs label, table.tabled_inputs input[type=radio] {
     background-color: #ebebeb; }
 @media (max-width: 48em) {
     .gf_pad_header, .gf_pad_header > p {
-        padding: 1em 0.4em 1em; } }
+        padding: 1em 1em 1em; } }
 .gf_pad_header .toolt:after, .gf_pad_header > p .toolt:after {
     font-size: 70%; }
 .gf_pad_header .toolt[tooltip]:hover:before, .gf_pad_header > p .toolt[tooltip]:hover:before {
@@ -819,16 +819,17 @@ table.tabled_inputs label, table.tabled_inputs input[type=radio] {
     background-color: #ebebeb; }
 @media (max-width: 48em) {
     .gf_pad_header_small {
-        padding: 1em 0.4em 1em; } }
+        padding: 1em 1em 1em; } }
 
 .gf_pad_content {
     background-color: whitesmoke;
     padding: 2em 1.6em 2em; }
 @media (max-width: 48em) {
     .gf_pad_content {
-        padding: 1em 0.6em 1em; } }
+        padding: 1em 1em 1em; } }
 
 .row_highlight {
+    padding: 2px 0;
     border-bottom: 1px solid white;
     -webkit-transition: 0.3s;
     transition: 0.3s;
