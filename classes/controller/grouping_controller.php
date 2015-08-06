@@ -398,6 +398,7 @@ class mod_groupformation_grouping_controller {
 				$incompleteGroupsView->assign ( $key, array (
 						'groupname' => $value->groupname,
 						'scrollTo_group' => $this->get_scroll_to_link ( $key ),
+						'grouplink' => $this->get_group_link ( $value->moodlegroupid ),
 						'groupsize' => $value->groupsize 
 				) );
 			}
