@@ -83,9 +83,9 @@ function groupformation_add_instance(stdClass $groupformation, mod_groupformatio
 	// checks all fields and sets them properly
 	$groupformation = groupformation_set_fields ( $groupformation );
 	
-	// You may have to add extra stuff in here.
 	$id = $DB->insert_record ( 'groupformation', $groupformation );
 	
+	// get current DB record (with all DB defaults)
 	$groupformation = $DB->get_record('groupformation', array('id'=>$id));
 	
 	// Log access to page
@@ -139,6 +139,9 @@ function groupformation_update_instance(stdClass $groupformation, mod_groupforma
 		$orig_record->maxgroups = $groupformation->maxgroups;
 		$result = $DB->update_record ( 'groupformation', $orig_record );
 	}
+	
+	// get current DB record (with all DB defaults)
+	$groupformation = $DB->get_record('groupformation', array('id'=>$groupformation->id));
 	
 	groupformation_grade_item_update ( $groupformation );
 	

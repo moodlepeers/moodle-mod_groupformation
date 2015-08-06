@@ -120,7 +120,7 @@ require_once (dirname ( __FILE__ ) . '/classes/grouping/submit_infos.php');
 $infos = new mod_groupformation_submit_infos ( $groupformation->id );
 $surveyStatisticNumers = $infos->getInfos ();
 
-echo '<div style="color:red;">Diese Seite ist noch in der Entwicklung. Die Inhalte sind ggf. noch rein statisch und haben keinen Effekt oder keine Funktion</div>';
+echo '<div style="color:red;">Diese Seite ist soweit fertig; Rückmeldung, wenn es etwas fehlt oder unverständlich ist, wäre super.</div>';
 
 // TODO : form in das template packen?
 echo '<form action="' . htmlspecialchars ( $_SERVER ["PHP_SELF"] ) . '" method="post" autocomplete="off">';

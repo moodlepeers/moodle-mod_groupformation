@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
 /**
- * interface betweeen DB and Plugin
+ * Interface betweeen DB and Plugin
  *
  * @package mod_groupformation
  * @author Nora Wester, Rene Roepke
@@ -23,10 +23,9 @@
  */
 
 if (! defined ( 'MOODLE_INTERNAL' )) {
-	die ( 'Direct access to this script is forbidden.' ); // / It must be included from a Moodle page
+	die ( 'Direct access to this script is forbidden.' ); // It must be included from a Moodle page
 }
 
-require_once ($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 require_once ($CFG->dirroot . '/group/lib.php');
 
 class mod_groupformation_groups_manager {
@@ -91,7 +90,7 @@ class mod_groupformation_groups_manager {
 	 * 
 	 * @param unknown $groupformationID
 	 */
-	public function groupsCreated($groupformationID){
+	public function groups_created(){
 		global $DB;
 		$records = $DB->get_records('groupformation_groups',array('groupformation'=>$this->groupformationid));
 		
@@ -109,7 +108,7 @@ class mod_groupformation_groups_manager {
 	 * @param unknown $moodlegroupid
 	 * @return boolean
 	 */
-	public function deleteMoodleGroupID($moodlegroupid) {
+	public function delete_moodlegroup_id($moodlegroupid) {
 		global $DB;
 		
 		$record = $DB->get_record ( 'groupformation_groups', array (
@@ -125,10 +124,10 @@ class mod_groupformation_groups_manager {
 	/**
 	 * Saves moodlegroupid in database
 	 * 
-	 * @param unknown $groupid
-	 * @param unknown $moodlegroupid
+	 * @param int $groupid
+	 * @param int $moodlegroupid
 	 */
-	public function saveMoodleGroupID($groupid, $moodlegroupid){
+	public function save_moodlegroup_id($groupid, $moodlegroupid){
 		global $DB;
 		
 		$record = $DB->get_record('groupformation_groups', array('groupformation'=>$this->groupformationid,'id'=>$groupid));
@@ -144,7 +143,7 @@ class mod_groupformation_groups_manager {
 	 * @param unknown $userid
 	 * @return mixed
 	 */
-	public function getGroupName($userid){
+	public function get_group_name($userid){
 		global $DB;
 		$groupid = $DB->get_field('groupformation_group_users', 'groupid', array('groupformation'=>$this->groupformationid,'userid'=>$userid)); 
 		
@@ -160,11 +159,11 @@ class mod_groupformation_groups_manager {
 	 * @param integer $userid        	
 	 * @return multitype:unknown
 	 */
-	public function getGroupMembers($userid) {
+	public function get_group_members($userid) {
 		global $DB;
 		
 		$array = array ();
-		$groupid = $this->getGroupID ( $userid );
+		$groupid = $this->get_group_id ( $userid );
 		$records = $DB->get_records ( 'groupformation_group_users', array (
 				'groupformation' => $this->groupformationid,
 				'groupid' => $groupid 
@@ -184,10 +183,10 @@ class mod_groupformation_groups_manager {
 	 * TODO @Nora - return only true/false and optional query param 
 	 * to ask if in moodle created or just in groupal generated
 	 *
-	 * @param unknown $userid        	
-	 * @return Ambigous <number, mixed>
+	 * @param int $userid        	
+	 * @return boolean
 	 */
-	public function hasGroup($userid, $moodlegroup = false) {
+	public function has_group($userid, $moodlegroup = false) {
 		global $DB;
 		$count = $DB->count_records ( 'groupformation_group_users', array (
 					'groupformation' => $this->groupformationid,
@@ -197,12 +196,12 @@ class mod_groupformation_groups_manager {
 	}
 	
 	/**
-	 * Returns groupid for user
+	 * Returns group id for user
 	 *
 	 * @param integer $userid        	
 	 * @return mixed
 	 */
-	public function getGroupID($userid) {
+	public function get_group_id($userid) {
 		global $DB;
 		
 		return $DB->get_field ( 'groupformation_group_users', 'groupid', array (
@@ -216,11 +215,11 @@ class mod_groupformation_groups_manager {
 	 * 
 	 * @return boolean
 	 */
-	public static function isNotBuild($groupformationid){
+	public function is_build(){
 		global $DB;
 		$table = 'groupformation_groups';
-		$count = $DB->count_records($table, array('groupformation' => $groupformationid, 'created' => 1));
-		return $count == 0;
+		$count = $DB->count_records($table, array('groupformation' => $this->groupformationid, 'created' => 1));
+		return $count>0;
 	}
 	
 	
@@ -230,7 +229,7 @@ class mod_groupformation_groups_manager {
 	 * @return mixed
 	 */
 	
-	public function getGeneratedGroups(){
+	public function get_generated_groups(){
 		global $DB;
 		return $DB->get_records ( 'groupformation_groups', array (
 				'groupformation' => $this->groupformationid
@@ -243,7 +242,7 @@ class mod_groupformation_groups_manager {
 	 * @return mixed
 	 */
 	
-	public function getUsersForGeneratedGroup($groupid){
+	public function get_users_for_generated_group($groupid){
 		global $DB;
 		return $DB->get_records('groupformation_group_users',
 				array('groupformation'=>$this->groupformationid, 'groupid' => $groupid),null,'userid');
@@ -253,8 +252,9 @@ class mod_groupformation_groups_manager {
 	/**
 	 * Deletes all generated group
 	 */
-	public function deleteGeneratedGroups(){
+	public function delete_generated_groups(){
 		global $DB;
+		
 		$records = $DB->get_records('groupformation_groups',array('groupformation'=>$this->groupformationid));
 		
 		foreach($records as $key=>$record){

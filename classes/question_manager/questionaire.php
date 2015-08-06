@@ -21,7 +21,6 @@
  * @author Nora Wester
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 require_once (dirname ( __FILE__ ) . '/question_controller.php');
 require_once (dirname ( __FILE__ ) . '/RadioInput.php');
 require_once (dirname ( __FILE__ ) . '/TopicsTable.php');
@@ -54,13 +53,26 @@ class mod_groupformation_questionaire {
 	private $notAllAnswers = false;
 	
 	// ---
+	
+	/**
+	 * Creates instance of questionaire
+	 * 
+	 * @param unknown $cmid
+	 * @param unknown $groupformationid
+	 * @param unknown $lang
+	 * @param unknown $userId
+	 * @param unknown $category
+	 * @param unknown $context
+	 */
 	public function __construct($cmid, $groupformationid, $lang, $userId, $category, $context) {
 		$this->cmid = $cmid;
 		$this->groupformationid = $groupformationid;
 		$this->lang = $lang;
 		$this->userid = $userId;
 		$this->context = $context;
+		
 		$this->question_manager = new mod_groupformation_question_controller ( $groupformationid, $lang, $userId, $category );
+		
 		$this->header = new HeaderOfInput ();
 		$this->range = new RangeInput ();
 		$this->radio = new RadioInput ();
@@ -68,6 +80,10 @@ class mod_groupformation_questionaire {
 		$this->topics = new TopicsTable ();
 		$this->category = $category;
 	}
+	
+	/**
+	 * Go Back
+	 */
 	public function goBack() {
 		$this->question_manager->goBack ();
 	}
@@ -78,102 +94,84 @@ class mod_groupformation_questionaire {
 		$this->notAllAnswers = true;
 	}
 	// ---
+	
+	/**
+	 * Prints progress bar
+	 * 
+	 * @param unknown $percent
+	 */
 	private function printProgressbar($percent) {
-		$percentage = $percent;
-		echo '<div class="progress">
-  							<div class="questionaire_progress-bar" role="progressbar" aria-valuenow="' . $percentage . '" aria-valuemin="0" aria-valuemax="100" style="width:' . $percentage . '%">
-    							</div>
-						  </div>';
+		
+		echo '<div class="progress">';
+		
+		echo '	<div class="questionaire_progress-bar" role="progressbar" aria-valuenow="' . $percent . '" aria-valuemin="0" aria-valuemax="100" style="width:' . $percent . '%"></div>';
+		
+		echo '</div>';
 	}
-	/*private function printOverviewbar($activeCategory = null) {
+
+	/**
+	 * Prints navigation bar
+	 * 
+	 * @param string $activeCategory
+	 */
+	private function printNavbar($activeCategory = null) {
 		$data = new mod_groupformation_data ();
 		$store = new mod_groupformation_storage_manager ( $this->groupformationid );
 		$scenario = $store->getScenario ();
-		$temp_categories = $store->getCategories();
+		$temp_categories = $store->getCategories ();
 		$categories = array ();
 		foreach ( $temp_categories as $category ) {
 			if ($store->getNumber ( $category ) > 0) {
 				$categories [] = $category;
 			}
 		}
-		echo '<div class="questionaire_navbar">';
-		echo '<ul class="questionaire_navbar">';
-		$width = 100.0 / count ( $categories );
-		$stats = $store->getStats($this->userid);
+		echo '<div id="questionaire_navbar">';
+		echo '<ul id="accordion">';
+		$stats = $store->getStats ( $this->userid );
 		$prev_complete = true;
 		foreach ( $categories as $category ) {
 			$url = new moodle_url ( 'questionaire_view.php', array (
 					'id' => $this->cmid,
 					'category' => $category 
 			) );
-			$positionActiveCategory = $store->getPosition($activeCategory);
-			$positionCategory = $store->getPosition($category);
+			$positionActiveCategory = $store->getPosition ( $activeCategory );
+			$positionCategory = $store->getPosition ( $category );
 			
-			$beforeActive = ($positionCategory<=$positionActiveCategory);
-			$class = (has_capability('mod/groupformation:editsettings', $this->context) || $beforeActive || $prev_complete)?'':'no-active';
-			echo '<li class="questionaire_navbar '.$class.'" style="width:' . $width . '%;">';
-			echo '<a class="questionaire_navbar_link" ' . (($activeCategory == $category) ? 'style="background-color: #2d2d2d; color: #FFFFFF"' : '') . ' href="' . $url . '">' . get_string ( 'category_' . $category, 'groupformation' ) . '</a>';
+			$beforeActive = ($positionCategory <= $positionActiveCategory);
+			$class = (has_capability ( 'mod/groupformation:editsettings', $this->context ) || $beforeActive || $prev_complete) ? '' : 'no-active';
+			echo '<li class="' . (($activeCategory == $category) ? 'current' : 'accord_li') . '">';
+			echo '<span>' . ($positionCategory + 1) . '</span><a class="' . $class . '"  href="' . $url . '">' . get_string ( 'category_' . $category, 'groupformation' ) . '</a>';
 			echo '</li>';
-			$prev_complete = $stats[$category]['missing'] == 0;
+			$prev_complete = $stats [$category] ['missing'] == 0;
 			// <li><a href="a.html" class="ui-btn-active">One</a></li>
 			// <li><a href="b.html">Two</a></li>
 		}
 		echo '</ul>';
-		echo '</div><!-- /navbar -->';
-	}*/
-
-    private function printOverviewbar($activeCategory = null) {
-        $data = new mod_groupformation_data ();
-        $store = new mod_groupformation_storage_manager ( $this->groupformationid );
-        $scenario = $store->getScenario ();
-        $temp_categories = $store->getCategories();
-        $categories = array ();
-        foreach ( $temp_categories as $category ) {
-            if ($store->getNumber ( $category ) > 0) {
-                $categories [] = $category;
-            }
-        }
-        echo '<div id="questionaire_navbar">';
-        echo '<ul id="accordion">';
-        $stats = $store->getStats($this->userid);
-        $prev_complete = true;
-        foreach ( $categories as $category ) {
-            $url = new moodle_url ( 'questionaire_view.php', array (
-                'id' => $this->cmid,
-                'category' => $category
-            ) );
-            $positionActiveCategory = $store->getPosition($activeCategory);
-            $positionCategory = $store->getPosition($category);
-
-            $beforeActive = ($positionCategory<=$positionActiveCategory);
-            $class = (has_capability('mod/groupformation:editsettings', $this->context) || $beforeActive || $prev_complete)?'':'no-active';
-            echo '<li class="'. (($activeCategory == $category) ? 'current' : 'accord_li') . '">';
-            echo '<span>'. ( $positionCategory + 1) .'</span><a class="' . $class .'"  href="' . $url . '">'  . get_string ( 'category_' . $category, 'groupformation' ) .'</a>';
-            echo '</li>';
-            $prev_complete = $stats[$category]['missing'] == 0;
-            // <li><a href="a.html" class="ui-btn-active">One</a></li>
-            // <li><a href="b.html">Two</a></li>
-        }
-        echo '</ul>';
-        echo '</div><!-- /navbar -->';
-    }
+		echo '</div>';
+	}
 	
 	// --- Mathevorkurs
 	private function notAllAnswers() {
-        echo '<div class="survey_warnings">
+		echo '<div class="survey_warnings">
                              <p>Du hast nicht alle Fragen beantwortet</p>
                     </div>';
-
-		//echo 'Du hast nicht alle Fragen beantwortet';
+		
+		// echo 'Du hast nicht alle Fragen beantwortet';
 	}
 	// ---
 	
+	/**
+	 * Prints table with questions
+	 * 
+	 * @param unknown $questions
+	 * @param unknown $percent
+	 */
 	private function printQuestions($questions, $percent) {
 		$tableType = $questions [0] [0];
 		$headerOptArray = $questions [0] [2];
 		
-		// echo '<form action="questionaire.php" method="post">';
-		echo '<form action="' . htmlspecialchars ( $_SERVER ["PHP_SELF"] ) . '" method="post" autocomplete="off">';
+
+		echo '<form style="width:100%; float:left;" action="' . htmlspecialchars ( $_SERVER ["PHP_SELF"] ) . '" method="post" autocomplete="off">';
 		
 		// hier schicke ich verdeckt die momentane Kategorie und groupformationID mit
 		echo '<input type="hidden" name="category" value="' . $this->category . '"/>';
@@ -181,6 +179,7 @@ class mod_groupformation_questionaire {
 		echo '<input type="hidden" name="percent" value="' . $percent . '"/>';
 		
 		$activity_id = optional_param ( 'id', false, PARAM_INT );
+		
 		if ($activity_id) {
 			echo '<input type="hidden" name="id" value="' . $activity_id . '"/>';
 		} else {
@@ -195,10 +194,10 @@ class mod_groupformation_questionaire {
 		$this->header->__printHTML ( $this->category, $tableType, $headerOptArray );
 		
 		$hasAnswer = count ( $questions [0] ) == 4;
-
-        // var_dump($questions);
-        // var_dump($this->category);
-
+		
+		// var_dump($questions);
+		// var_dump($this->category);
+		
 		// each question with inputs
 		foreach ( $questions as $q ) {
 			if ($q [0] == 'dropdown') {
@@ -223,8 +222,8 @@ class mod_groupformation_questionaire {
 		if ($tableType == 'typThema') {
 			// close unordered list
 			echo '</ul>';
-
-            echo '<div id="invisible_topics_inputs">
+			
+			echo '<div id="invisible_topics_inputs">
                             </div>';
 		} else {
 			// close tablebody and close table
@@ -244,17 +243,26 @@ class mod_groupformation_questionaire {
 		// $answers = array('0');
 		// $this->question_manager->saveAnswers($answers);
 		
-		echo '
-						<div class="grid">
+		$this->printActionButtons();
+		
+		echo '</form>';
+	}
+	
+	/**
+	 * Prints action buttons for questionaire page
+	 */
+	private function printActionButtons(){
+		echo '<div class="grid">
 						<div class="col_100 questionaire_button_row">
 							<button type="submit" name="direction" value="0" class="f_btn">' . get_string ( 'previous' ) . '</button>
 							<button type="submit" name="direction" value="1" class="f_btn">' . get_string ( 'next' ) . '</button>
 						</div>
-						</div>
-				
-						</form>';
+						</div>';
 	}
 	
+	/**
+	 * Prints final page of questionaire
+	 */
 	private function printFinalPage() {
 		echo '<div class="col_100"><h4>' . get_string ( 'questionaire_no_more_questions', 'groupformation' ) . '</h></div>';
 		echo '	<form action="' . htmlspecialchars ( $_SERVER ["PHP_SELF"] ) . '" method="post" autocomplete="off">';
@@ -276,54 +284,57 @@ class mod_groupformation_questionaire {
 		$hasAnsweredEverything = $this->question_manager->hasAllAnswered ();
 		
 		$disabled = ! $hasAnsweredEverything;
-		if (has_capability('mod/groupformation:editsettings', $this->context))
-			echo '<div class="col_100 questionaire_hint">'.get_string('questionaire_submit_disabled_teacher','groupformation').'</div>';
+		if (has_capability ( 'mod/groupformation:editsettings', $this->context ))
+			echo '<div class="col_100 questionaire_hint">' . get_string ( 'questionaire_submit_disabled_teacher', 'groupformation' ) . '</div>';
 		
-		echo '		<div class="grid">
-						<div class="questionaire_button_text">' . get_string ( 'questionaire_press_beginning_submit', 'groupformation' ) . '</div>
-						<div class="col_100 questionaire_button_row">';
-		echo '				<button type="submit" name="action" value="0" >' . get_string ( 'questionaire_go_to_start', 'groupformation' ) . '</button>
-							<button type="submit" name="action" value="1" ' . (($disabled || has_capability('mod/groupformation:editsettings', $this->context)) ? 'disabled' : '') . '>' . get_string ( 'questionaire_submit', 'groupformation' ) . '</button>
-						';
-		echo '			</div>
-					</div>
-				</form>';
+		echo '<div class="grid">';
+		echo '	<div class="questionaire_button_text">' . get_string ( 'questionaire_press_beginning_submit', 'groupformation' ) . '</div>';
+		echo '	<div class="col_100 questionaire_button_row">';
+		echo '		<button type="submit" name="action" value="0" >' . get_string ( 'questionaire_go_to_start', 'groupformation' ) . '</button>';
+		echo '		<button type="submit" name="action" value="1" ' . (($disabled || has_capability ( 'mod/groupformation:editsettings', $this->context )) ? 'disabled' : '') . '>' . get_string ( 'questionaire_submit', 'groupformation' ) . '</button>';
+		echo '	</div>';
+		echo '</div>';
+		
+		echo '</form>';
 	}
 	
+	/**
+	 * Prints questionaire page
+	 */
 	public function printQuestionairePage() {
 		if ($this->question_manager->questionsToAnswer () && $this->question_manager->hasNext ()) {
-			if (has_capability('mod/groupformation:editsettings', $this->context))
-				echo '<div class="col_100 questionaire_hint">'.get_string('questionaire_preview','groupformation').'</div>';
+			
+			$isTeacher = has_capability ( 'mod/groupformation:editsettings', $this->context );
+			
+			if ($isTeacher)
+				echo '<div class="col_100 questionaire_hint">' . get_string ( 'questionaire_preview', 'groupformation' ) . '</div>';
 			
 			$this->category = $this->question_manager->getCurrentCategory ();
 			
 			$percent = $this->question_manager->getPercent ( $this->category );
 			
-			$this->printOverviewbar ( $this->category );
+			$this->printNavbar ( $this->category );
 			
 			$this->printProgressbar ( $percent );
 			
-			// TODO @Nora Das kann man auch auslagern mit einer Konstantem im Define-File
-			// --- MAthevorkurs
+			// --- Mathevorkurs
 			if ($this->notAllAnswers) {
 				$this->notAllAnswers ();
 			}
 			// ---
 			
-			$questions = $this->question_manager->getNextQuestion ();
+			$questions = $this->question_manager->getNextQuestions ();
 			
 			$this->printQuestions ( $questions, $percent );
 			
 			// Log access to page
-			groupformation_info($this->userid,$this->groupformationid,'<view_questionaire_category_'.$this->category.'>');
-			
+			groupformation_info ( $this->userid, $this->groupformationid, '<view_questionaire_category_' . $this->category . '>' );
 		} else {
 			
 			$this->printFinalPage ();
 			
 			// Log access to page
-			groupformation_info($this->userid,$this->groupformationid,'<view_questionaire_final_page>');
-				
+			groupformation_info ( $this->userid, $this->groupformationid, '<view_questionaire_final_page>' );
 		}
 	}
 }

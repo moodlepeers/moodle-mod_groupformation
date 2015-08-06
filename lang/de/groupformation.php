@@ -161,7 +161,51 @@ $string ['questionaire_available_end'] = 'Der Fragebogen ist verfügbar bis {$a-
 $string ['questionaire_not_available'] = 'Der Fragebogen ist derzeit nicht verfügbar.';
 $string ['questionaire_not_available_begin_end'] = 'Der Fragebogen ist verfügbar von {$a->start} bis {$a->end}.';
 $string ['questionaire_not_available_end'] = 'Der Fragebogen ist nicht mehr verfügbar.';
-
+$string ['info_header_student'] = 'Was bedeutet Gruppenformation?';
+$string ['info_text_student'] = 'In diesem Moodle-Kurs wird die Gruppenformation dazu genutzt {$a->scenario_name} für eine erfolgreiche Zusammenarbeit zu bilden.
+		Wenn Sie den Fragebogen ausgefüllt und abgeschickt haben, werden für Sie geeignete Lernpartner/innen ermittelt. 
+		Alle Angaben werden vertraulich behandelt. 
+		<br>Ist die Befragungszeit um, werden Gruppen unter Berücksichtigung Ihrer Angaben und Präferenzen gebildet. Sie können anschließend hier Ihre Gruppenmitglieder einsehen (und auch über Moodle kontaktieren).
+		<br><br>
+		Fragen? Probleme? Lob? Anregungen?<br>
+		Die Plugin-Entwickler/innen und Wissenschaftler/innen dazu, finden Sie unter<br>
+		http://sourceforge.net/projects/moodlepeers/ <br>
+		(erstellt und weiterentwickelt mit Mitteln zur Qualitätsverbesserung der Lehre\' der TU Darmstadt)
+';
+$string ['info_header_teacher_analysis'] = 'Wie funktioniert die Gruppenformation?';
+$string ['info_header_teacher_settings'] = 'Wie funktioniert die Gruppenformation?';
+$string ['info_text_teacher_settings'] = 'Mit diesem Plugin haben Sie die Möglichkeit die Bildung von Gruppen Ihrer Teilnehmenden zu optimieren. Die drei erforderlichen Schritte sind:<br>
+		1.)	Sie fügen die Aktivität „Gruppenformation“ Ihrem Kurs hinzu.
+		Auf dieser Seite können Sie auswählen, welches Szenario am besten zu Ihren Vorstellungen der späteren Gruppenarbeit passt 
+		(Bei Unsicherheit wählen Sie Projektteams). Die weiteren Einstellungen erlauben Ihnen die gewünschte Gruppengröße und evtl. eine Themenauswahl für 
+		Studierende anzugeben. Wenn Sie möchten, dass die Studierenden sich im Vorwissen gut ergänzen in den später gebildeten Gruppen, können Sie die Vorwissensthemen 
+		zur Abfrage angeben.<br>
+		2.)	Studierende sehen den Fragebogen, welcher basierend auf Ihren Einstellungen erstellt wurde. Die Dauer der Verfügbarkeit der Fragen können Sie einstellen (siehe 1.). 
+		Eine Vorschau des Studierenden-Fragebogens erhalten Sie beim späteren Öffnen der Aktivität als Dozent/in.<br>
+		3.)	Sie können unter dem Menüpunkt ‚Gruppenformation‘, wenn Sie die Aktivität später selbst aufrufen, sehen, wie viele Antworten bereits 
+		vorliegen. Sind Sie mit dem Rücklauf zufrieden, starten Sie manuell die Bildung der Gruppen (dies geschieht niemals automatisch).<br>
+		Es dauert eine Weile, bis alle Gruppen fertig erstellt sind. Das Ergebnis können Sie sich noch einmal ansehen, bevor Sie die Gruppen so in Moodle übernehmen.<br>
+		<br>
+		Fertig. Jetzt können auch die Studierenden Ihre Gruppenmitglieder sehen. Es ist Ihnen als Dozent/in jederzeit möglich, die Gruppen manuell in Moodle nachzubearbeiten (bspw. bei Nachzüglern).<br>
+';
+$string ['info_text_teacher_analysis'] = 'Mit diesem Plugin haben Sie die Möglichkeit die Bildung von Gruppen Ihrer Teilnehmenden zu optimieren. Die drei erforderlichen Schritte sind:<br>
+		<br>
+		1.)	Sie fügen die Aktivität „Gruppenformation“ Ihrem Kurs hinzu.
+		(Das ist bereits geschehen, wenn Sie diese Seite hier sehen).
+		In den Einstellungen können Sie auswählen, welches Szenario am besten zu Ihren Vorstellungen der späteren Gruppenarbeit passt
+		(Bei Unsicherheit wählen Sie Projektteams). Die weiteren Einstellungen erlauben Ihnen die gewünschte Gruppengröße und evtl. eine Themenauswahl für
+		Studierende anzugeben. Wenn Sie möchten, dass die Studierenden sich im Vorwissen gut ergänzen in den später gebildeten Gruppen, können Sie die Vorwissensthemen
+		zur Abfrage angeben.<br>
+		<br>
+		2.)	Studierende sehen den Fragebogen, welcher basierend auf Ihren Einstellungen erstellt wurde. Die Dauer der Verfügbarkeit der Fragen können Sie einstellen (siehe 1.).
+		Eine Vorschau des Studierenden-Fragebogens erhalten Sie im Menü oben.<br>
+		<br>
+		3.)	Sie können unter dem Menüpunkt ‚Gruppenformation‘ hier auf dieser Seite sehen, wie viele Antworten bereits
+		vorliegen. Sind Sie mit dem Rücklauf zufrieden, starten Sie manuell die Bildung der Gruppen (dies geschieht niemals automatisch).<br>
+		Es dauert eine Weile, bis alle Gruppen fertig erstellt sind. Das Ergebnis können Sie sich noch einmal ansehen, bevor Sie die Gruppen so in Moodle übernehmen.<br>
+		<br>
+		Fertig. Jetzt können auch die Studierenden Ihre Gruppenmitglieder sehen. Es ist Ihnen als Dozent/in jederzeit möglich, die Gruppen manuell in Moodle nachzubearbeiten (bspw. bei Nachzüglern).<br>
+';
 // $string [''] = '';
 
 

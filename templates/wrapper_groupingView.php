@@ -2,7 +2,7 @@
 
 <div class="gf_settings_pad">
     <div class="gf_pad_header">
-        Gruppenbildung
+        Gruppenbildung - <?php echo $this->_['groupingView_Title']; ?>
     </div>
     <div class="gf_pad_content bp_align_left-middle">
         <?php echo $this->_['groupingView_settings']; ?>

@@ -33,7 +33,11 @@ class mod_groupformation_analysis_controller
 
     private $test;
 
-
+	/**
+	 * Creates instance of analysis controller
+	 * 
+	 * @param int $groupformationID
+	 */
     public function __construct($groupformationID)
     {
         $this->groupformationID = $groupformationID;
@@ -80,16 +84,26 @@ class mod_groupformation_analysis_controller
         }*/
     }
 
-    public function startQuestionnaire() {
-        $this->store->openQuestionnaire();
+    /**
+     * Sets start time of questionnaire to now
+     */
+    public function start_questionnaire() {
+        $this->store->open_questionnaire();
     }
 
-    public function stopQuestionnaire() {
-        $this->store->closeQuestionnaire();
+    /**
+     * Sets end time of questionnaire to now
+     */
+    public function stop_questionnaire() {
+        $this->store->close_questionnaire();
     }
 
-
-    private function loadStatus(){
+	/**
+	 * Loads status
+	 * 
+	 * @return string
+	 */
+    private function load_status(){
 
         $statusAnalysisView = new mod_groupformation_template_builder ();
         $statusAnalysisView->setTemplate ( 'analysis_status' );
@@ -123,7 +137,7 @@ class mod_groupformation_analysis_controller
                     'name' => 'stop_questionnaire',
                     'value' => '',
                     'state' => '',
-                    'text' => 'Aktivit&auml;t beenden'
+                    'text' => 'Aktivität beenden'
                 )
             );
 
@@ -134,12 +148,14 @@ class mod_groupformation_analysis_controller
                     'name' => 'start_questionnaire',
                     'value' => '',
                     'state' => '',
-                    'text' => 'Aktivit&auml;t starten'
+                    'text' => 'Aktivität starten'
                 )
             );
         }
 
-
+        $info_teacher = mod_groupformation_util::get_info_text_for_teacher(false,"analysis");
+        
+		$statusAnalysisView->assign('info_teacher', $info_teacher);
         $statusAnalysisView->assign('analysis_time_start', $this->start_time );
         $statusAnalysisView->assign('analysis_time_end', $this->end_time );
         $statusAnalysisView->assign('analysis_status_info', 'here comes the important info text');
@@ -149,13 +165,18 @@ class mod_groupformation_analysis_controller
     }
 
 
-    private function loadStatistics()
+    private function load_statistics()
     {
+    	global $PAGE;
+    	
         $questionnaire_StatisticNumbers = $this->analyse_infos->getInfos ();
 
         $statisticsAnalysisView = new mod_groupformation_template_builder ();
         $statisticsAnalysisView->setTemplate ( 'analysis_statistics' );
-
+        $context = $PAGE->context;
+		$count = count ( get_enrolled_users ( $context, 'mod/groupformation:onlystudent' ) );
+		
+        $statisticsAnalysisView->assign('statistics_enrolled', $count );
         $statisticsAnalysisView->assign('statistics_processed', $questionnaire_StatisticNumbers[0] );
         $statisticsAnalysisView->assign('statistics_submited', $questionnaire_StatisticNumbers[1] );
         $statisticsAnalysisView->assign('statistics_submited_incomplete', $questionnaire_StatisticNumbers[2] );
@@ -167,8 +188,9 @@ class mod_groupformation_analysis_controller
 
     public function display() {
         $this->view->setTemplate ( 'wrapper_analysis' );
-        $this->view->assign ( 'analysis_status_template', $this->loadStatus() );
-        $this->view->assign ( 'analysis_statistics_template', $this->loadStatistics() );
+        $this->view->assign( 'analysis_name', $this->store->getName());
+        $this->view->assign ( 'analysis_status_template', $this->load_status() );
+        $this->view->assign ( 'analysis_statistics_template', $this->load_statistics() );
         return $this->view->loadTemplate ();
     }
 

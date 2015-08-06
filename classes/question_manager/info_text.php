@@ -1,5 +1,4 @@
 <?php
-
 use core\plugininfo\availability;
 // This file is part of Moodle - http://moodle.org/
 //
@@ -44,8 +43,8 @@ class mod_groupformation_info_text {
 		$this->store = new mod_groupformation_storage_manager ( $groupformationid );
 	}
 	
-	//Anzeige, dass die Gruppen gebildet worden sind
-	public function __groupsAvailable(){
+	// Anzeige, dass die Gruppen gebildet worden sind
+	public function __groupsAvailable() {
 		echo 'Gruppen sind gebildet';
 	}
 	
@@ -53,7 +52,7 @@ class mod_groupformation_info_text {
 	 * Prints initial questionaire status page for user
 	 */
 	public function __printStatusA() {
-		echo '<div class="questionaire_status col_m_100">' . get_string ( 'questionaire_not_started', 'groupformation' ) . '</div>';
+// 		echo '<div class="questionaire_status col_m_100">' . get_string ( 'questionaire_not_started', 'groupformation' ) . '</div>';
 		echo '<div class="questionaire_button_text col_m_100">' . get_string ( 'questionaire_press_to_begin', 'groupformation' ) . '</div>';
 		echo '<div class="questionaire_button_row col_m_100">';
 		echo '<form action="' . htmlspecialchars ( $_SERVER ["PHP_SELF"] ) . '" method="post" autocomplete="off">';
@@ -153,7 +152,7 @@ class mod_groupformation_info_text {
 		echo '</th></tr>
 				</thead>';
 		echo '<tbody>';
-		$stats = $this->store->getStats ($this->userid);
+		$stats = $this->store->getStats ( $this->userid );
 		$prev_incomplete = false;
 		foreach ( $stats as $key => $values ) {
 			$a = new stdClass ();
@@ -166,7 +165,7 @@ class mod_groupformation_info_text {
 						'id' => $this->cmid,
 						'category' => $key 
 				) );
-				if (!$prev_incomplete) {
+				if (! $prev_incomplete) {
 					$a->category = '<a href="' . $url . '">' . $a->category . '</a>';
 				}
 				if ($values ['missing'] == 0) {
@@ -192,7 +191,7 @@ class mod_groupformation_info_text {
 	 * Prints availability info
 	 */
 	public function __printAvailabilityInfo($bool = true) {
-		echo '<div class="questionaire_status col_m_100">' . $this->availabilityState() . '</div>';
+		echo '<div class="questionaire_status col_m_100">' . $this->availabilityState () . '</div>';
 		return;
 		
 		if ($bool) {
@@ -219,45 +218,43 @@ class mod_groupformation_info_text {
 			}
 		}
 	}
-	
-	public function availabilityState(){
-		$a = $this->store->getTime();
+	public function availabilityState() {
+		$a = $this->store->getTime ();
 		$begin = intval ( $a ['start_raw'] );
 		$end = intval ( $a ['end_raw'] );
-		$now = time();
+		$now = time ();
 		if ($begin == 0 & $end == 0) {
-			return get_string('questionaire_available','groupformation',$a);
+			return get_string ( 'questionaire_available', 'groupformation', $a );
 		} elseif ($begin != 0 & $end == 0) {
 			// erst ab $begin verfügbar
 			if ($now < $begin) {
 				// noch nicht verfügbar
-				return get_string('questionaire_not_available_begin','groupformation',$a);
+				return get_string ( 'questionaire_not_available_begin', 'groupformation', $a );
 			} elseif ($now >= $begin) {
 				// verfügbar
-				return get_string('questionaire_available','groupformation',$a);
+				return get_string ( 'questionaire_available', 'groupformation', $a );
 			}
 		} elseif ($begin == 0 & $end != 0) {
 			// nur verfügbar bis $end
 			if ($now <= $end) {
 				// verfügbar
-				return get_string('questionaire_available_end','groupformation',$a);
+				return get_string ( 'questionaire_available_end', 'groupformation', $a );
 			} elseif ($now > $end) {
 				// nicht mehr verfügbar
-				return get_string('questionaire_not_available','groupformation',$a);
+				return get_string ( 'questionaire_not_available', 'groupformation', $a );
 			}
 		} elseif ($begin != 0 & $end != 0) {
 			// verfügbar zwischen $begin und $end
 			if ($now < $begin & $now < $end) {
 				// noch nicht verfügbar
-				return get_string('questionaire_not_available_begin_end','groupformation',$a);
-			} elseif ($now >= $begin & $now <= $end){
+				return get_string ( 'questionaire_not_available_begin_end', 'groupformation', $a );
+			} elseif ($now >= $begin & $now <= $end) {
 				// verfügbar
-				return get_string('questionaire_available','groupformation',$a);
+				return get_string ( 'questionaire_available', 'groupformation', $a );
 			} elseif ($now > $begin & $now > $end) {
 				// nicht mehr verfügbar
-				return get_string('questionaire_not_available_end','groupformation',$a);
+				return get_string ( 'questionaire_not_available_end', 'groupformation', $a );
 			}
 		}
-		
 	}
 }

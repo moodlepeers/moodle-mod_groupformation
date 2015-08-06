@@ -50,16 +50,16 @@
 		 */
 		public function render($userid) {
 			global $CFG, $COURSE;
-			if ($this->groups_store->hasGroup ( $userid ) && $this->groups_store->groupsCreated($this->groupformationid)) {
-				$id = $this->groups_store->getGroupID ( $userid );
+			if ($this->groups_store->has_group ( $userid ) && $this->groups_store->groups_created()) {
+				$id = $this->groups_store->get_group_id ( $userid );
 				
-				$name = $this->groups_store->getGroupName ( $userid );
+				$name = $this->groups_store->get_group_name ( $userid );
 				
-				echo 'Dein Gruppenname ist ' . $name . ' (ID #' . $id . ')<br>';
+				echo 'Der Name deiner Gruppe ist ' . $name . ' (ID #' . $id . ')<br>';
 				
 				// echo 'Deine Gruppennummer ist ' . $id . '<br>';
 				
-				$otherMembers = $this->groups_store->getGroupMembers ( $userid );
+				$otherMembers = $this->groups_store->get_group_members ( $userid );
 				
 				if (count ( $otherMembers ) > 0) {
 					echo 'Deine Arbeitskollegen sind: <br>';
@@ -76,6 +76,8 @@
 						
 						echo '<a href="' . $url . '">' . fullname ( $member ) . '</a>';
 					}
+				}else{
+					echo 'Du bist allein in dieser Gruppe.';
 				}
 			} else {
 				echo '<h5> Die Gruppenbildung ist noch nicht abgeschlossen </h>';

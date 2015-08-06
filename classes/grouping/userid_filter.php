@@ -51,9 +51,8 @@
 	public function __construct($groupformationid){
 		$this->groupformationid = $groupformationid;
 		$this->store = new mod_groupformation_storage_manager($groupformationid);
-		$this->util = new mod_groupformation_util($groupformationid);
 		$this->totalUserIds = $this->store->getTotalUserIds();
-		$this->total = $this->util->getTotalNumber();
+		$this->total = $this->store->getTotalNumber();
 	}
 	
 	public function getScenario(){

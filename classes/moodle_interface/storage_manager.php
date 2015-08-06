@@ -14,16 +14,15 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+
 /**
- * interface betweeen DB and Plugin
+ * Interface betweeen DB and Plugin
  *
  * @package mod_groupformation
  * @author Nora Wester
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-// TODO einige Methoden noch nicht getestet
-// defined('MOODLE_INTERNAL') || die(); -> template
-// namespace mod_groupformation\moodle_interface;
+
 if (! defined ( 'MOODLE_INTERNAL' )) {
 	die ( 'Direct access to this script is forbidden.' ); // / It must be included from a Moodle page
 }
@@ -36,31 +35,12 @@ class mod_groupformation_storage_manager {
 	/**
 	 * Constructs storage manager for a specific groupformation
 	 *
-	 * @param unknown $groupformationid        	
+	 * @param int $groupformationid        	
 	 */
 	public function __construct($groupformationid) {
 		$this->groupformationid = $groupformationid;
 	}
 	
-	// public function add_question($question){
-	// global $CFG, $DB;
-	
-	// $data = new stdClass();
-	// $data->groupformation = $this->groupformationid;
-	
-	// $data->type = $question['type'];
-	// $data->question = $question['question'];
-	// $data->options = $this->convertOptions($question['options']);
-	
-	// var_dump($data);
-	
-	// //var_dump($data);
-	// if($DB->count_records('groupformation_question', array('groupformation' => $this->groupformationid)) == 0){
-	// $DB->insert_record('groupformation_question', $data);
-	// }
-	// }
-	
-	// es wird davon ausgegangen, dass alle Fragentabellen immer auf dem gleichen Stand sind
 	/**
 	 * Returns if DB does not contain questions for a specific category
 	 *
@@ -73,6 +53,33 @@ class mod_groupformation_storage_manager {
 		$count = $DB->count_records ( 'groupformation_' . $category );
 		// var_dump($count);
 		return $count == 0;
+	}
+	
+	/**
+	 * Returns course id
+	 * 
+	 * @return mixed
+	 */
+	public function getCourseID(){
+		global $DB;
+		return $DB->get_field('groupformation', 'course', array('id'=>$this->groupformationid));
+	}
+	
+	/**
+	 * Returns instance number of all groupformations in course
+	 */
+	public function getInstanceNumber(){
+		global $DB;
+		$courseid = $this->getCourseID();
+		$records = $DB->get_records('groupformation',array('course'=>$courseid),'id','id');
+		$i = 1;
+		foreach ($records as $id=>$record){
+			if ($id == $this->groupformationid)
+				return $i;
+			else
+				$i++;
+		}
+		return $i;
 	}
 	
 	/**
@@ -220,10 +227,10 @@ class mod_groupformation_storage_manager {
 	/**
 	 * TODO @Nora
 	 *
-	 * @param unknown $category        	
-	 * @param unknown $numbers        	
+	 * @param string $category        	
+	 * @param int $numbers        	
 	 * @param unknown $version        	
-	 * @param unknown $init        	
+	 * @param boolean $init        	
 	 */
 	public function add_catalog_version($category, $numbers, $version, $init) {
 		global $DB;
@@ -233,7 +240,6 @@ class mod_groupformation_storage_manager {
 		$data->version = $version;
 		$data->numberofquestion = $numbers;
 		
-		// hier was ver�ndert
 		if ($init || $DB->count_records ( 'groupformation_q_version', array (
 				'category' => $category 
 		) ) == 0) {
@@ -459,14 +465,31 @@ class mod_groupformation_storage_manager {
 	 *
 	 * @return int
 	 */
-	public function getScenario() {
+	public function getScenario($name = false) {
 		global $DB;
 		
 		$settings = $DB->get_record ( 'groupformation', array (
 				'id' => $this->groupformationid 
 		) );
 		
+		if ($name){
+			$data = new mod_groupformation_data();
+			return $data->getScenarioName($settings->szenario);
+		}
+		
 		return $settings->szenario;
+	}
+	
+	public function getTotalNumber(){
+		$data = new mod_groupformation_data();
+		$names = $data->getCriterionSet($this->getScenario(), $this->groupformationid);
+		$number = 0;
+		$numbers = $this->getNumbers($names);
+		foreach($numbers as $n){
+			$number = $number + $n;
+		}
+	
+		return $number;
 	}
 	
 	/**
@@ -761,7 +784,7 @@ class mod_groupformation_storage_manager {
 	/**
 	 * Sets timestamp in groupformation in order to close/terminate questionaire
 	 */
-	public function closeQuestionnaire() {
+	public function close_questionnaire() {
 		global $DB;
 		
 		$data = new stdClass ();
@@ -774,7 +797,7 @@ class mod_groupformation_storage_manager {
 	/**
 	 * Sets timestamp in groupformation in order to open/begin questionaire
 	 */
-	public function openQuestionnaire() {
+	public function open_questionnaire() {
 		global $DB;
 		
 		$data = new stdClass ();
@@ -926,7 +949,7 @@ class mod_groupformation_storage_manager {
 		}
 		return $stats;
 	}
-	public function getGroupName() {
+	public function get_group_name_setting() {
 		global $DB;
 		return $DB->get_field ( 'groupformation', 'groupname', array (
 				'id' => $this->groupformationid 

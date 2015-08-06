@@ -58,6 +58,8 @@
 	groupformation_info($USER->id,$groupformation->id,'<view_student_overview>');
 	
 	$store = new mod_groupformation_storage_manager($groupformation->id);
+	$groups_store = new mod_groupformation_groups_manager($groupformation->id);
+	
 	$info = new mod_groupformation_info_text ($cm->id, $groupformation->id, $userid );
 
 	if ($store->isQuestionaireCompleted($userid)){
@@ -105,24 +107,29 @@
   	}
 
 	if (has_capability('mod/groupformation:onlystudent', $context)){
-		if(!mod_groupformation_groups_manager::isNotBuild($groupformation->id)){
+		$isBuild = $groups_store->is_build();
+		if(!isBuild){
 			$info->__groupsAvailable();
 		}else{
 	 		if ($store->isQuestionaireAvailable()){	
 				$status = $store->answeringStatus($userid);
 				if($status ==  -1){
+					echo mod_groupformation_util::get_info_text_for_student(true,$groupformation->id);
 					$info->__printAvailabilityInfo();
 	 				$info->__printStatusA();
 	 			}
 	 			if($status == 0){
+					echo mod_groupformation_util::get_info_text_for_student(false,$groupformation->id);
 					$info->__printAvailabilityInfo();
 	 				$info->__printStatusB();
 	 			}
 	 			if($status == 1){
-					$info->__printAvailabilityInfo();
+					echo mod_groupformation_util::get_info_text_for_student(false,$groupformation->id);
+	 				$info->__printAvailabilityInfo();
 	 				$info->__printStatusC();
 	 			}
 	 		}else{
+	 			echo mod_groupformation_util::get_info_text_for_student(true,$groupformation->id);
 	 			$info->__printAvailabilityInfo(false);
 	 		}
 		}

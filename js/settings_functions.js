@@ -486,7 +486,7 @@ $(document).ready(function() {
             setGroupSettings();
 
         }else{
-            $('#group_opt_size').prop('checked', true);
+            $('#group_opt_numb').prop('checked', true);
 
             $("#group_size").attr('disabled', 'disabled');
             $("#numb_of_groups").attr('disabled', 'disabled');

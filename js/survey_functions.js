@@ -3,10 +3,14 @@ $(document).ready(function() {
     // TODO Einkommentieren wenn die Topics in erfolgreich in DB geschrieben werden
     // $('#invisible_topics_inputs').hide();
 
+
     //get the widths of all navigation li's
     var menuWidths = $('#accordion li').map(function(i) {
+        //document.getElementById('foo').offsetWidth
         return $(this).outerWidth();
     });
+
+
 
     //shrink all widths to 50
     $("#accordion li.accord_li").each(function(){
@@ -19,7 +23,7 @@ $(document).ready(function() {
         //hover event
         function(){
             $(activeItem).animate({width: "50px"}, {duration:300, queue:false});
-            var a_width = menuWidths.get($(this).index());
+            var a_width = menuWidths.get($(this).index()) + 1;
             $(this).animate({width: a_width}, {duration:300, queue:false});
             activeItem = this;
         },
@@ -27,6 +31,7 @@ $(document).ready(function() {
         function(){
             $(activeItem).animate({width: "50px"}, {duration:300, queue:false});
         });
+
 
     
     // Drag & Drop the topics/objects to sort them 

@@ -150,10 +150,10 @@ class mod_groupformation_participant_parser {
 						$value["homogen"] = $homogen[$label];
 						$value["minVal"] = $minVals[$label];
 						$value["maxVal"] = $maxVals[$label];						
-						foreach ($value as $k=>$v){
-							if (is_array($v))
-								$value[$k]=$v[1];
-						}
+						//foreach ($value as $k=>$v){
+						//	if (is_array($v))
+						//		$value[$k]=$v[1];
+						//}
 						$object->$label = $value;
 						if($userPosition == 0){
 							$totalLabel[] = $label;

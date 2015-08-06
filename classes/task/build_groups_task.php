@@ -1,11 +1,33 @@
 <?php
 
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+/**
+ * Task - Cron
+ *
+ * @package mod_groupformation
+ * @author Rene & Ahmed
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 namespace mod_groupformation\task;
 
 require_once ($CFG->dirroot . '/mod/groupformation/locallib.php');
 require_once ($CFG->dirroot . '/mod/groupformation/lib.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/job_manager.php');
-class build_groups extends \core\task\scheduled_task {
+class build_groups_task extends \core\task\scheduled_task {
 	
 	/**
 	 * (non-PHPdoc)
@@ -54,9 +76,9 @@ class build_groups extends \core\task\scheduled_task {
 		if (! is_null ( $job )) {
 			$result = \mod_groupformation_job_manager::do_groupal ( $job, $groupal_cohort, $random_cohort, $incomplete_cohort );
 			$aborted = \mod_groupformation_job_manager::is_job_aborted ( $job );
-			
 			if (! $aborted) {
-				$saved = \mod_groupformation_job_manager::save_result ( $job, $groupal_cohort, $random_cohort, $incomplete_cohort );
+				
+				$saved = \mod_groupformation_job_manager::save_result ( $job, $groupal_cohort, $result [1], $result [2] );
 			}
 		}
 		return $saved;
