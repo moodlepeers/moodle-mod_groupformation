@@ -42,7 +42,9 @@
 		private $xml;
 		
 		//Extraversion | Gewissenhaftigkeit | Vertr�glichkeit | Neurotizismus | Offenheit
+		//                          12        14       8   17         15        16
 		private $BIG5 = array(array(6), array(8), array(2, 11), array(9), array(10));
+		//                                -7        -9       -13        -10      -11
 		private $BIG5Invert = array(array(1), array(3), array(7), array(4), array(5));
 		private $BIG5Homogen = array(1, 2);
 		//Herausforderung | Interesse | Ergolgswahrscheinlichkeit | Misserfolgsbef�rchtung

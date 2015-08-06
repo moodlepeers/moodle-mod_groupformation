@@ -110,15 +110,13 @@ $jm = new mod_groupformation_job_manager ();
 
 $cqt = new mod_groupformation_create_q_testuser ();
 
-$cqt = new mod_groupformation_create_q_testuser ();
-
 /*
  * @param1: number of testuser
  * @param2: groupformation id
  */
 
-// echo $cqt->createTestusers ( 30, $groupformation->id );
-// echo $cqt->deleteTestusers();
+//echo $cqt->createTestusers(4, $groupformation->id );
+//echo $cqt->deleteTestusers();
 
 /* ---------- / Ahmed Tested User creation ---------- */
 
@@ -130,9 +128,11 @@ $incomplete_cohort = null;
 $job = $jm::get_job ( $groupformation->id );
 
 if (! is_null ( $job )) {
-	// $result = $jm::do_groupal ( $job, $groupal_cohort, $random_cohort, $incomplete_cohort);
+	//$result = $jm::do_groupal ( $job, $groupal_cohort, $random_cohort, $incomplete_cohort);
 	
 	// var_dump($result);
+	// var_dump($result[0]->groups);
+	// var_dump($result[0]->results);	
 }
 // -----------------------------------------------
 

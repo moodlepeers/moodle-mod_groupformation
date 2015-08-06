@@ -51,10 +51,17 @@ class mod_groupformation_participant_parser {
 			foreach($labels as $label){
 				$value = $user->$label;
 				$count = count($value);
-				$homogen = $value[$count-1];
-				// an letzter Stelle im Array wird übergeben, ob es homogen ist
-				unset($value[$count-1]);
-				$criterion = new SpecificCriterion($label, $value, 0.0, 1.0, $homogen, 1);
+				$homogen = $value["homogen"]; 
+				unset($value["homogen"]);
+				// on key "minVal" is the minValue
+				// on key "maxVal is the maxValue
+				$minVal = $value["minVal"];
+				$maxVal = $value["maxVal"];
+				unset($value["minVal"]);
+				unset($value["maxVal"]);
+				// all remaining $value values are indexed array values
+				
+				$criterion = new SpecificCriterion($label, $value, $minVal, $maxVal, $homogen, 1);
 // 				var_dump($criterion);
 // 				$criterion = new Criterion();
 // 				$criterion->setName($label);
@@ -63,7 +70,7 @@ class mod_groupformation_participant_parser {
 				if($position == 0){
 					$participant = new Participant(array($criterion), $user->id);
 				}else{
-					$participant->addCriteria($criterion);
+					$participant->addCriterion($criterion);
 				}
 				$position++;
 				
@@ -94,7 +101,9 @@ class mod_groupformation_participant_parser {
 		
 		$labels = $data->getLabelSet($scenario, $groupformationid);
 		$homogen = $data->getHomogenSet($scenario);
-	
+		$minVals = $data->getMinValSet($scenario); 
+		$maxVals = $data->getMaxValSet($scenario);
+		
 		$calculator = new mod_groupformation_criterion_calculator($groupformationid);
 		$gradeP = -1;
 		if(count($users)>0 && in_array('knowledge_heterogen', $labels)){
@@ -104,6 +113,7 @@ class mod_groupformation_participant_parser {
 		$array = array();
 	
 		//hier werden die einzelnen Extralabels gebildet und dann in diese array gespeichert
+		// TODO Nora: Comments please in this code! (not easily understandable) (JK)
 		$totalLabel = array();
 		$userPosition = 0;
 		foreach($users as $user){
@@ -124,18 +134,22 @@ class mod_groupformation_participant_parser {
 					// 					}
 					if($label == 'lang'){
 						$value[] = $data->getLangNumber($calculator->getLang($user));
-						$value[] = $homogen[$label];
+						$value["homogen"] = $homogen[$label]; // all these 3 could be set outside of if-clauses easily: same for all.
+						$value["minVal"] = $minVals[$label];
+						$value["maxVal"] = $maxVals[$label];						
 						$object->$label = $value;
 						if($userPosition == 0){
 							$totalLabel[] = $label;
 						}
 					}
 					if($label == 'topic'){
-						//TODO
+						//TODO						
 					}
 					if($label == 'knowledge_heterogen'){
 						$value = $calculator->knowledgeAll($user);
-						$value[] = $homogen[$label];
+						$value["homogen"] = $homogen[$label];
+						$value["minVal"] = $minVals[$label];
+						$value["maxVal"] = $maxVals[$label];						
 						foreach ($value as $k=>$v){
 							if (is_array($v))
 								$value[$k]=$v[1];
@@ -148,7 +162,9 @@ class mod_groupformation_participant_parser {
 					}
 					if($label == 'knowledge_homogen'){
 						$value[] = $calculator->knowledgeAverage($user);
-						$value[] = $homogen[$label];
+						$value["homogen"] = $homogen[$label];
+						$value["minVal"] = $minVals[$label];
+						$value["maxVal"] = $maxVals[$label];
 						$object->$label = $value;
 						if($userPosition == 0){
 							$totalLabel[] = $label;
@@ -164,7 +180,9 @@ class mod_groupformation_participant_parser {
 					if($label == 'grade'){
 						if($gradeP != -1){
 							$value[] = $calculator->getGrade($gradeP, $user);
-							$value[] = $homogen[$label];
+							$value["homogen"] = $homogen[$label];
+							$value["minVal"] = $minVals[$label];
+							$value["maxVal"] = $maxVals[$label];
 							$object->$label = $value;
 							if($userPosition == 0){
 								$totalLabel[] = $label;
@@ -183,13 +201,15 @@ class mod_groupformation_participant_parser {
 								$totalLabel[] = $name;
 							}
 							$value[] = $ls;
-							$value[] = $h;
+							$value["homogen"] = $h;
+							$value["minVal"] = $minVals[$label];
+							$value["maxVal"] = $maxVals[$label];								
 							$object->$name = $value;
 							$p++;
 						}
 					}
 					if($label == 'big5_homogen'){
-						$bigTemp = $big5[1];
+						$bigTemp = $big5[1];  // TODO: please explain this code or rename variable
 	
 						$l = $data->getExtraLabel($label);
 						$p = 0;
@@ -201,7 +221,9 @@ class mod_groupformation_participant_parser {
 								$totalLabel[] = $name;
 							}
 							$value[] = $ls;
-							$value[] = $h;
+							$value["homogen"] = $h;
+							$value["minVal"] = $minVals[$label];
+							$value["maxVal"] = $maxVals[$label];								
 							$object->$name = $value;
 							$p++;
 						}
@@ -218,7 +240,9 @@ class mod_groupformation_participant_parser {
 								$totalLabel[] = $name;
 							}
 							$value[] = $famTemp[$p];
-							$value[] = $h;
+							$value["homogen"] = $h;
+							$value["minVal"] = $minVals[$label];
+							$value["maxVal"] = $maxVals[$label];								
 							$object->$name = $value;
 							$p++;
 						}
@@ -236,14 +260,18 @@ class mod_groupformation_participant_parser {
 								$totalLabel[] = $name;
 							}
 							$value[] = $learnTemp[$p];
-							$value[] = $h;
+							$value["homogen"] = $h;
+							$value["minVal"] = $minVals[$label];
+							$value["maxVal"] = $maxVals[$label];								
 							$object->$name = $value;
 							$p++;
 						}
 					}
 					if($label == 'team'){
 						$value = $calculator->getTeam($user);
-						$value[] = $homogen[$label];
+						$value["homogen"] = $homogen[$label];
+						$value["minVal"] = $minVals[$label];
+						$value["maxVal"] = $maxVals[$label];						
 						$object->$label = $value;
 						if($userPosition == 0){
 							$totalLabel[] = $label;

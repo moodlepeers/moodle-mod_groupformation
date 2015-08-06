@@ -297,7 +297,7 @@ class mod_groupformation_job_manager {
 		$starttime = microtime ( true );
 		
 		// Generate participants for Groupal
-		$participants = $pp->build_participants ( $groupal_users );
+		$participants = $pp->build_participants ($groupal_users);
 		$groupal_participants = $participants;
 		
 		// Generate empty participants
@@ -326,7 +326,7 @@ class mod_groupformation_job_manager {
 			$starttime = microtime ( true );
 			
 			$gfa = new GroupFormationAlgorithm ( $groupal_participants, $matcher, $groupsize );
-			$groupal_cohort = $gfa->doOneFormation ();
+			$groupal_cohort = $gfa->doOneFormation (); // this call takes time...
 			
 			$endtime = microtime ( true );
 			$comptime = $endtime - $starttime;

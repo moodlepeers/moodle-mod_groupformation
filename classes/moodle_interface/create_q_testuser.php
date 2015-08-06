@@ -23,8 +23,8 @@ class mod_groupformation_create_q_testuser {
         /* storage manager */
         $stm = new mod_groupformation_storage_manager($groupformation);
 		
-        $nTopics = $stm->getNumber ( "topic" );
-        $nKnowledges = $stm->getNumber ( "knowledge" );
+        $nTopics = $stm->getNumber( "topic" );
+        $nKnowledges = $stm->getNumber( "knowledge" );
         
         $categories = $stm->getCategories();
 

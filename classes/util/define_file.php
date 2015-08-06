@@ -157,6 +157,57 @@ class mod_groupformation_data {
 					'topic' => true
 			)
 	);
+	// provides the minimum values each "value" can have in such a vector
+	private $MINVAL_SETS = array (
+			'1' => array (
+					'topic' => 0.0,
+					'knowledge_heterogen' => 0.0,
+					'knowledge_homogen' => 0.0,
+					'grade' => 1.0,
+					'big5_heterogen' => 2.0,
+					'big5_homogen' => 2.0,
+					'team' => 1.0,
+					'fam' => 4.0
+			),
+			'2' => array (
+					'topic' => 0.0,
+					'knowledge_heterogen' => 0.0,
+					'grade' => 0.0, // TOO @Eduard: Egal ob Noten, Punkte etc. die Skala sollte immer zw. 0 und 1 abspeichern!
+					'big5_heterogen' => 2.0,
+					'big5_homogen' => 2.0,
+					'team' => 1.0,
+					'learning' => 6.0
+			),
+			'3' => array (
+					'topic' => 0.0
+			)
+	);
+	// provides the max values each of the "values" in a vector can have
+	private $MAXVAL_SETS = array (
+			'1' => array (
+					'topic' => 100, // XXX this is hard to say...
+					'knowledge_heterogen' => 100.0,  // TODO: @Eduard: check that the slider encodes to 0...100. If 0.. 1.0 then set here 1.0
+					'knowledge_homogen' => 100.0,  // and here as well.
+					'grade' => 1.0, // TODO @Eduard: Egal ob Noten, Punkte etc. die Skala sollte immer zw. 0 und 1 abspeichern!
+					'big5_heterogen' => 18.0, // FIXME This is crap, as big5 has value areas from 2 to 12 and "verträglichkeit" has 3 to 18. needs normation!
+					'big5_homogen' => 18.0,
+					'team' => 6.0,
+					'fam' => 30.0 // FIXME: @Nora: FAM sollte jede der vier Variablen die berechnet werden auf das Interval 0..1 normiert werde (dann hier und bei minVal aktualisieren), denn: einige berechnen sich aus 4 variablen (min max ist dann 4 bis 24) und einige aus 5 (min max 5 bis 30). Das ist nicht gut. Sollte einheitliche min max haben (bspw. normiert auf 0...1 Interval)
+			),
+			'2' => array (
+					'topic' => 100.0,
+					'knowledge_heterogen' => 100.0,
+					'grade' => 1.0,
+					'big5_heterogen' => 18.0,
+					'big5_homogen' => 18.0,
+					'team' => 6.0,
+					'learning' => 36.0
+			),
+			'3' => array (
+					'topic' => 100.0
+			)
+	);
+	
 	private $Big5HomogenExtra_LABEL = array (
 			'Gewissenhaftigkeit',
 			'Vertraeglichkeit' 
@@ -400,9 +451,23 @@ class mod_groupformation_data {
 		}
 		return $array;
 	}
+	
+	
 	public function getHomogenSet($scenario) {
-		return $this->HOMOGEN_SETS [$scenario];
+		return $this->HOMOGEN_SETS[$scenario];
 	}
+	
+	public function getMinValSet($scenario) {
+		return $this->MINVAL_SETS[$scenario];
+	}
+	
+	public function getMaxValSet($scenario) {
+		return $this->MAXVAL_SETS[$scenario];
+	}
+	
+	
+	
+	
 	/**
 	 * Return job status options
 	 * 
