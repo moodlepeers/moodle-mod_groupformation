@@ -23,7 +23,7 @@
  */
 require_once (dirname ( __FILE__ ) . '/question_controller.php');
 require_once (dirname ( __FILE__ ) . '/RadioInput.php');
-require_once (dirname ( __FILE__ ) . '/TopicsTable.php');
+require_once (dirname ( __FILE__ ) . '/topics_table.php');
 require_once (dirname ( __FILE__ ) . '/RangeInput.php');
 require_once (dirname ( __FILE__ ) . '/DropdownInput.php');
 require_once (dirname ( __FILE__ ) . '/HeaderOfInputs.php');
@@ -77,7 +77,7 @@ class mod_groupformation_questionaire {
 		$this->range = new RangeInput ();
 		$this->radio = new RadioInput ();
 		$this->dropdown = new DropdownInput ();
-		$this->topics = new TopicsTable ();
+		$this->topics = new topics_table ();
 		$this->category = $category;
 	}
 	
