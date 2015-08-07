@@ -22,7 +22,7 @@
  *
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class DropdownInput {
+class dropdown_question {
 	private $category;
 	private $qnumber;
 	private $question;

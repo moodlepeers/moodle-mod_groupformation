@@ -25,7 +25,7 @@ require_once (dirname ( __FILE__ ) . '/question_controller.php');
 require_once (dirname ( __FILE__ ) . '/RadioInput.php');
 require_once (dirname ( __FILE__ ) . '/topics_table.php');
 require_once (dirname ( __FILE__ ) . '/RangeInput.php');
-require_once (dirname ( __FILE__ ) . '/DropdownInput.php');
+require_once (dirname ( __FILE__ ) . '/dropdown_question.php');
 require_once (dirname ( __FILE__ ) . '/HeaderOfInputs.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');

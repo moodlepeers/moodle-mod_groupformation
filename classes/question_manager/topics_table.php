@@ -29,7 +29,7 @@ class topics_table{
 	
 	/**
 	 * 
-	 * print HTML for Topics Table
+	 * print HTML for topics table
 	 * 
 	 * @param unknown $q
 	 * @param unknown $cat
