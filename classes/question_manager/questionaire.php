@@ -76,7 +76,7 @@ class mod_groupformation_questionaire {
 		$this->header = new HeaderOfInput ();
 		$this->range = new RangeInput ();
 		$this->radio = new RadioInput ();
-		$this->dropdown = new DropdownInput ();
+		$this->dropdown = new dropdown_question ();
 		$this->topics = new topics_table ();
 		$this->category = $category;
 	}
