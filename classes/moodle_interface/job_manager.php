@@ -195,6 +195,7 @@ class mod_groupformation_job_manager {
 	/**
 	 * Generates participants with ids within interval
 	 *
+	 * @deprecated not in use?
 	 * @param unknown $id_begin        	
 	 * @param unknown $id_end        	
 	 * @return multitype:Participant
@@ -262,7 +263,7 @@ class mod_groupformation_job_manager {
 	 * Runs groupal with job
 	 *
 	 * @param stdClass $job        	
-	 * @return array
+	 * @return array with 3 elements: groupal cohorts, random cohort and incomplete random cohort
 	 */
 	public static function do_groupal($job, &$groupal_cohort, &$random_cohort, &$incomplete_cohort) {
 		$groupformationid = $job->groupformationid;
@@ -357,9 +358,9 @@ class mod_groupformation_job_manager {
 			$incomplete_cohort = $gfra->doOneFormation ();
 		}
 			
-		// var_dump ( $groupal_cohort );
-		// var_dump ( $random_cohort );
-		// var_dump ( $incomplete_cohort );
+// 		 var_dump ( $groupal_cohort );
+// 		 var_dump ( $random_cohort );
+// 		 var_dump ( $incomplete_cohort );
 		
 		$cohorts = array($groupal_cohort,$random_cohort,$incomplete_cohort);
 		
