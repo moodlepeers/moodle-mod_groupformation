@@ -1,6 +1,6 @@
 <?php
 
-class HeaderOfInput {
+class question_table_header {
 	
 	private $tableType;
 	private $headerOptArray;
