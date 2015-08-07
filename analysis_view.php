@@ -105,24 +105,23 @@ if ($_POST) {
 
 $cqt = new mod_groupformation_test_user_generator ();
 
-if ($delete_users){
+if ($delete_users) {
 	$cqt->delete_test_users ( $groupformation->id );
 	$returnurl = new moodle_url ( '/mod/groupformation/analysis_view.php', array (
 			'id' => $id,
-			'do_show' => 'analysis'
+			'do_show' => 'analysis' 
 	) );
 	redirect ( $returnurl );
-	
 }
-if ($create_users > 0){
-	$cqt->create_test_users ( $create_users, $groupformation->id,$create_answers);
+if ($create_users > 0) {
+	$cqt->create_test_users ( $create_users, $groupformation->id, $create_answers );
 	$returnurl = new moodle_url ( '/mod/groupformation/analysis_view.php', array (
 			'id' => $id,
-			'do_show' => 'analysis'
+			'do_show' => 'analysis' 
 	) );
 	redirect ( $returnurl );
 }
-	
+
 /* ---------- / Automated test user generation ---------- */
 
 $jm = new mod_groupformation_job_manager ();
@@ -136,10 +135,10 @@ $incomplete_cohort = null;
 $job = $jm::get_job ( $groupformation->id );
 
 if (! is_null ( $job )) {
-// 	$result = $jm::do_groupal ( $job, $groupal_cohort, $random_cohort, $incomplete_cohort);
-// 	var_dump($result);
+	// $result = $jm::do_groupal ( $job, $groupal_cohort, $random_cohort, $incomplete_cohort);
+	// var_dump($result);
 	// var_dump($result[0]->groups);
-	// var_dump($result[0]->results);	
+	// var_dump($result[0]->results);
 }
 // -----------------------------------------------
 

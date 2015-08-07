@@ -290,26 +290,8 @@ function groupformation_print_recent_mod_activity($activity, $courseid, $detail,
  */
 function groupformation_cron() {
 	
-	// What is this code for and why is it commented out?  --> please add a comment..
-
-	// $jobmanager = new mod_groupformation_job_manager();
+	// not used so far
 	
-	// $job = $jobmanager->get_next_job();
-	
-	// if (is_null($job)){
-	// return true;
-	// }else{
-	// $results = $jobmanager->do_groupal($job);//do_groupal($job);
-	
-	// if ($jobmanager->is_job_aborted($job)){
-	// $result = null;
-	// $jobmanager->reset_job($job); //set_job($job,"0000") //auf 0000
-	// return true;
-	// }else{
-	// $jobmanager->save_result($result);
-	// $jobmanager->set_job($job,"0001");
-	// }
-	// }
 	return true;
 }
 
