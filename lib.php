@@ -625,7 +625,7 @@ function groupformation_save_more_infos($groupformation, $init) {
 	}
 	
 	// wenn noch nichts beantwortet ist, speicher die neuen informationen f�r Vorwissen und Topics
-	if ($store->answered_already ()) {
+	if ($store->already_answered ()) {
 		$store->add_setting_question ( $knowledgearray, $topicsarray, $init );
 	}
 }
