@@ -22,7 +22,6 @@
  * @author Nora Wester
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 if (! defined ( 'MOODLE_INTERNAL' )) {
 	die ( 'Direct access to this script is forbidden.' ); // / It must be included from a Moodle page
 }
@@ -57,48 +56,33 @@ class mod_groupformation_storage_manager {
 	
 	/**
 	 * Returns course id
-	 * 
+	 *
 	 * @return mixed
 	 */
-	public function getCourseID(){
+	public function getCourseID() {
 		global $DB;
-		return $DB->get_field('groupformation', 'course', array('id'=>$this->groupformationid));
+		return $DB->get_field ( 'groupformation', 'course', array (
+				'id' => $this->groupformationid 
+		) );
 	}
 	
 	/**
 	 * Returns instance number of all groupformations in course
 	 */
-	public function getInstanceNumber(){
+	public function getInstanceNumber() {
 		global $DB;
-		$courseid = $this->getCourseID();
-		$records = $DB->get_records('groupformation',array('course'=>$courseid),'id','id');
+		$courseid = $this->getCourseID ();
+		$records = $DB->get_records ( 'groupformation', array (
+				'course' => $courseid 
+		), 'id', 'id' );
 		$i = 1;
-		foreach ($records as $id=>$record){
+		foreach ( $records as $id => $record ) {
 			if ($id == $this->groupformationid)
 				return $i;
 			else
-				$i++;
+				$i ++;
 		}
 		return $i;
-	}
-	
-	/**
-	 *
-	 * @param moodleform_mod $mform        	
-	 */
-	function changesPossible(&$mform) {
-		global $DB;
-		// Are changes possible?
-		// check if somebody submitted an answer already
-		$id = $this->groupformationid;
-		if ($id != '') {
-			$count = $DB->count_records ( 'groupformation_answer', array (
-					'groupformation' => $id 
-			) );
-			if ($count > 0)
-				return False;
-		}
-		return true;
 	}
 	
 	/**
@@ -472,23 +456,22 @@ class mod_groupformation_storage_manager {
 				'id' => $this->groupformationid 
 		) );
 		
-		if ($name){
-			$data = new mod_groupformation_data();
-			return $data->getScenarioName($settings->szenario);
+		if ($name) {
+			$data = new mod_groupformation_data ();
+			return $data->getScenarioName ( $settings->szenario );
 		}
 		
 		return $settings->szenario;
 	}
-	
-	public function getTotalNumber(){
-		$data = new mod_groupformation_data();
-		$names = $data->getCriterionSet($this->getScenario(), $this->groupformationid);
+	public function getTotalNumber() {
+		$data = new mod_groupformation_data ();
+		$names = $data->getCriterionSet ( $this->getScenario (), $this->groupformationid );
 		$number = 0;
-		$numbers = $this->getNumbers($names);
-		foreach($numbers as $n){
+		$numbers = $this->getNumbers ( $names );
+		foreach ( $numbers as $n ) {
 			$number = $number + $n;
 		}
-	
+		
 		return $number;
 	}
 	
@@ -505,12 +488,12 @@ class mod_groupformation_storage_manager {
 		}
 		
 		if ($status == - 1) {
-			$this->setCompleted($userId, false);
+			$this->setCompleted ( $userId, false );
 		}
 		
 		if ($status == 0) {
 			$this->setCompleted ( $userId, true );
-			// TODO @Rene Here Code for Assigning to GROUP A or GROUP B for MATHE
+			// TODO Mathevorkurs
 			$this->assignToGroup ( $userId );
 		}
 	}
@@ -518,27 +501,32 @@ class mod_groupformation_storage_manager {
 	/**
 	 * set status to complete
 	 *
-	 * @param unknown $userid        	
+	 * @param int $userid        	
 	 */
 	public function setCompleted($userid, $completed = false) {
 		global $DB;
 		
-		if (!$completed) {
-			$data = new stdClass ();
-			$data->completed = 0;
-			$data->groupformation = $this->groupformationid;
-			$data->userid = $userid;
-			$DB->insert_record('groupformation_started', $data);
-			
-		} else {
+		$exists = $DB->record_exists ( 'groupformation_started', array (
+				'groupformation' => $this->groupformationid,
+				'userid' => $userid 
+		) );
+		
+		if ($exists) {
 			$data = $DB->get_record ( 'groupformation_started', array (
 					'groupformation' => $this->groupformationid,
 					'userid' => $userid 
 			) );
-			$data->completed = 1;
+			$data->completed = $completed;
 			$data->timecompleted = time ();
 			$DB->update_record ( 'groupformation_started', $data );
+		} else {
+			$data = new stdClass ();
+			$data->completed = $completed;
+			$data->groupformation = $this->groupformationid;
+			$data->userid = $userid;
+			$DB->insert_record ( 'groupformation_started', $data );
 		}
+		// }
 	}
 	
 	/**
@@ -607,14 +595,13 @@ class mod_groupformation_storage_manager {
 	 */
 	public function answerExist($userId, $category, $questionId) {
 		global $DB;
-		
-		$count = $DB->count_records ( 'groupformation_answer', array (
+
+		return $DB->record_exists( 'groupformation_answer', array (
 				'groupformation' => $this->groupformationid,
 				'userid' => $userId,
 				'category' => $category,
 				'questionid' => $questionId 
-		) );
-		return $count == 1;
+		) );;
 	}
 	
 	/**
@@ -655,11 +642,11 @@ class mod_groupformation_storage_manager {
 	}
 	
 	/**
-	 * Determines if no answers for groupformation exist
+	 * Determines if someone already answered at least one question
 	 *
 	 * @return boolean
 	 */
-	public function generalAnswerNotExist() {
+	public function already_answered() {
 		global $DB;
 		
 		return ($DB->count_records ( 'groupformation_answer', array (
@@ -670,16 +657,16 @@ class mod_groupformation_storage_manager {
 	/**
 	 * Returns all answers of a specific user in a specific category
 	 *
-	 * @param unknown $userId        	
-	 * @param unknown $category        	
-	 * @return multitype:
+	 * @param int $userid        	
+	 * @param string $category        	
+	 * @return array
 	 */
-	public function getAnswers($userId, $category) {
+	public function getAnswers($userid, $category) {
 		global $DB;
 		
 		return $DB->get_records ( 'groupformation_answer', array (
 				'groupformation' => $this->groupformationid,
-				'userid' => $userId,
+				'userid' => $userid,
 				'category' => $category 
 		) );
 	}
@@ -687,70 +674,70 @@ class mod_groupformation_storage_manager {
 	/**
 	 * Returns all answers to a specific question in a specific category
 	 *
-	 * @param unknown $category        	
-	 * @param unknown $questionId        	
-	 * @return multitype:
+	 * @param string $category        	
+	 * @param int $questionid        	
+	 * @return array
 	 */
-	public function getAnswersToSpecialQuestion($category, $questionId) {
+	public function getAnswersToSpecialQuestion($category, $questionid) {
 		global $DB;
 		
 		return $DB->get_records ( 'groupformation_answer', array (
 				'groupformation' => $this->groupformationid,
 				'category' => $category,
-				'questionid' => $questionId 
+				'questionid' => $questionid 
 		) );
 	}
 	
 	/**
 	 * Returns answer of a specific user to a specific question in a specific category
 	 *
-	 * @param unknown $userId        	
-	 * @param unknown $category        	
-	 * @param unknown $qID        	
-	 * @return mixed
+	 * @param int $userid        	
+	 * @param string $category        	
+	 * @param int $questionid        	
+	 * @return int
 	 */
-	public function getSingleAnswer($userId, $category, $qID) {
+	public function getSingleAnswer($userid, $category, $questionid) {
 		global $DB;
 		
 		return $DB->get_field ( 'groupformation_answer', 'answer', array (
 				'groupformation' => $this->groupformationid,
-				'userid' => $userId,
+				'userid' => $userid,
 				'category' => $category,
-				'questionid' => $qID 
+				'questionid' => $questionid 
 		) );
 	}
 	
 	/**
 	 * Saves answer of a specific user to a specific question in a specific category
 	 *
-	 * @param unknown $userId        	
-	 * @param unknown $answer        	
-	 * @param unknown $category        	
-	 * @param unknown $questionId        	
+	 * @param int $userid        	
+	 * @param int $answer        	
+	 * @param string $category        	
+	 * @param int $questionid        	
 	 */
-	public function saveAnswer($userId, $answer, $category, $questionId) {
+	public function saveAnswer($userid, $answer, $category, $questionid) {
 		global $DB;
 		
-		$answerAlreadyExist = $this->answerExist ( $userId, $category, $questionId );
+		$answerAlreadyExist = $this->answerExist ( $userid, $category, $questionid );
 		
-		$data = new stdClass ();
-		$data->groupformation = $this->groupformationid;
-		
-		$data->userid = $userId;
-		$data->category = $category;
-		$data->questionid = $questionId;
-		$data->answer = $answer;
-		
-		if (! $answerAlreadyExist) {
-			$DB->insert_record ( 'groupformation_answer', $data );
-		} else {
-			$data->id = $DB->get_field ( 'groupformation_answer', 'id', array (
-					'groupformation' => $this->groupformationid,
-					'userid' => $userId,
-					'category' => $category,
-					'questionid' => $questionId 
-			) );
-			$DB->update_record ( 'groupformation_answer', $data );
+		if ($answerAlreadyExist){
+			$record = $DB->get_record( 'groupformation_answer', array (
+				'groupformation' => $this->groupformationid,
+				'userid' => $userid,
+				'category' => $category,
+				'questionid' => $questionid 
+		) );		
+			$record->answer = $answer;
+			$DB->update_record ( 'groupformation_answer', $record );
+		}else{
+			$record = new stdClass ();
+			$record->groupformation = $this->groupformationid;
+			
+			$record->userid = $userid;
+			$record->category = $category;
+			$record->questionid = $questionid;
+			$record->answer = $answer;
+			$DB->insert_record ( 'groupformation_answer', $record );
 		}
 	}
 	

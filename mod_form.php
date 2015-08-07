@@ -78,7 +78,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		$mform->setExpanded ( 'timinghdr' );
 		// no changes possible hint
 		$changemsg = '<div class="fitem" id="nochangespossible"';
-		if (! $this->store->changesPossible ( $mform )) {
+		if ($this->store->already_answered()) {
 			$changemsg .= ' ><span value="1"';
 		} else {
 			$changemsg .= ' style="display:none;"><span value="0"';
@@ -489,7 +489,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 	 */
 	function generate_html_for_non_js(&$mform) {
 		$changemsg = '<div class="fitem" id="nochangespossible"';
-		if (! $this->store->changesPossible ( $mform )) {
+		if ($this->store->already_answered ()) {
 			$changemsg .= ' ><span value="1"';
 		} else {
 			$changemsg .= ' style="display:none;"><span value="0"';
