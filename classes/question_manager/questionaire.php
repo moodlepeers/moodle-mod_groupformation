@@ -307,7 +307,7 @@ class mod_groupformation_questionaire {
 			$isTeacher = has_capability ( 'mod/groupformation:editsettings', $this->context );
 			
 			if ($isTeacher)
-				echo '<div class="col_100 questionaire_hint">' . get_string ( 'questionaire_preview', 'groupformation' ) . '</div>';
+				echo '<div class="alert">' . get_string ( 'questionaire_preview', 'groupformation' ) . '</div>';
 			
 			$this->category = $this->question_manager->getCurrentCategory ();
 			

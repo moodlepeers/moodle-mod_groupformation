@@ -80,7 +80,7 @@
 					echo 'Du bist allein in dieser Gruppe.';
 				}
 			} else {
-				echo '<h5> Die Gruppenbildung ist noch nicht abgeschlossen </h>';
+				echo '<h5> Die Gruppenbildung ist noch nicht abgeschlossen. </h>';
 			}
 		}
 	}

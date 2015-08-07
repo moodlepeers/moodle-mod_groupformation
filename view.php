@@ -108,7 +108,7 @@
 
 	if (has_capability('mod/groupformation:onlystudent', $context)){
 		$isBuild = $groups_store->is_build();
-		if(!isBuild){
+		if($isBuild){
 			$info->__groupsAvailable();
 		}else{
 	 		if ($store->isQuestionaireAvailable()){	
