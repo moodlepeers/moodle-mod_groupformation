@@ -21,12 +21,12 @@
  * logic, should go here. Never include this file from your lib.php!
  *
  * @package mod_groupformation
- * @copyright 2014 Nora Wester
+ * @copyright 2015 MoodlePeers
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined ( 'MOODLE_INTERNAL' ) || die ();
 
-require_once ($CFG->dirroot . '/mod/groupformation/classes/logging/logging_controller.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/controller/logging_controller.php');
 
 /**
  * Adds jQuery
