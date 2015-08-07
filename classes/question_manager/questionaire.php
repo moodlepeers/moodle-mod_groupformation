@@ -24,7 +24,7 @@
 require_once (dirname ( __FILE__ ) . '/question_controller.php');
 require_once (dirname ( __FILE__ ) . '/radio_question.php');
 require_once (dirname ( __FILE__ ) . '/topics_table.php');
-require_once (dirname ( __FILE__ ) . '/RangeInput.php');
+require_once (dirname ( __FILE__ ) . '/range_question.php');
 require_once (dirname ( __FILE__ ) . '/dropdown_question.php');
 require_once (dirname ( __FILE__ ) . '/HeaderOfInputs.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
@@ -74,7 +74,7 @@ class mod_groupformation_questionaire {
 		$this->question_manager = new mod_groupformation_question_controller ( $groupformationid, $lang, $userId, $category );
 		
 		$this->header = new HeaderOfInput ();
-		$this->range = new RangeInput ();
+		$this->range = new range_question ();
 		$this->radio = new radio_question ();
 		$this->dropdown = new dropdown_question ();
 		$this->topics = new topics_table ();
