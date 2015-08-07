@@ -22,7 +22,7 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once (dirname ( __FILE__ ) . '/question_controller.php');
-require_once (dirname ( __FILE__ ) . '/RadioInput.php');
+require_once (dirname ( __FILE__ ) . '/radio_question.php');
 require_once (dirname ( __FILE__ ) . '/topics_table.php');
 require_once (dirname ( __FILE__ ) . '/RangeInput.php');
 require_once (dirname ( __FILE__ ) . '/dropdown_question.php');
@@ -75,7 +75,7 @@ class mod_groupformation_questionaire {
 		
 		$this->header = new HeaderOfInput ();
 		$this->range = new RangeInput ();
-		$this->radio = new RadioInput ();
+		$this->radio = new radio_question ();
 		$this->dropdown = new dropdown_question ();
 		$this->topics = new topics_table ();
 		$this->category = $category;
