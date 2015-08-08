@@ -92,4 +92,23 @@ class mod_groupformation_util {
 		
 		return $s;
 	}
+	
+	/**
+	 * Returns user record
+	 * 
+	 * @param int $userid
+	 * @return stdClass|null
+	 */
+	public static function get_user_record($userid){
+		global $DB;
+		if ($DB->record_exists ( 'user', array (
+				'id' => $userid
+		) )) {
+			return $DB->get_record ( 'user', array (
+					'id' => $userid
+			) );
+		}
+		return null;
+	}
+	
 }

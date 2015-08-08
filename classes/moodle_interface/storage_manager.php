@@ -30,7 +30,7 @@ require_once ($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php'
 require_once ($CFG->dirroot . '/group/lib.php');
 class mod_groupformation_storage_manager {
 	private $groupformationid;
-	
+	private $data;
 	/**
 	 * Constructs storage manager for a specific groupformation
 	 *
@@ -38,6 +38,7 @@ class mod_groupformation_storage_manager {
 	 */
 	public function __construct($groupformationid) {
 		$this->groupformationid = $groupformationid;
+		$this->data = new mod_groupformation_data();
 	}
 	
 	/**
@@ -177,11 +178,9 @@ class mod_groupformation_storage_manager {
 					'category' => $category 
 			) );
 		}
-		
-		$data = new mod_groupformation_data ();
-		
+
 		$scenario = $this->getScenario ();
-		$names = $data->getCriterionSet ( $scenario, $this->groupformationid );
+		$names = $this->data->getCriterionSet ( $scenario, $this->groupformationid );
 		$number = 0;
 		foreach ( $names as $name ) {
 			$number = $number + $DB->count_records ( 'groupformation_answer', array (
@@ -201,7 +200,6 @@ class mod_groupformation_storage_manager {
 	 */
 	public function hasAnsweredEverything($userid) {
 		$scenario = $this->getScenario ();
-		$data = new mod_groupformation_data ();
 		$categories = $this->getCategories ();
 		$sum = array_sum ( $this->getNumbers ( $categories ) );
 		$user_sum = $this->get_number_of_answers ( $userid );
@@ -457,15 +455,14 @@ class mod_groupformation_storage_manager {
 		) );
 		
 		if ($name) {
-			$data = new mod_groupformation_data ();
-			return $data->getScenarioName ( $settings->szenario );
+			return $this->data->getScenarioName ( $settings->szenario );
 		}
 		
 		return $settings->szenario;
 	}
+	
 	public function getTotalNumber() {
-		$data = new mod_groupformation_data ();
-		$names = $data->getCriterionSet ( $this->getScenario (), $this->groupformationid );
+		$names = $this->data->getCriterionSet ( $this->getScenario (), $this->groupformationid );
 		$number = 0;
 		$numbers = $this->getNumbers ( $names );
 		foreach ( $numbers as $n ) {
@@ -494,7 +491,7 @@ class mod_groupformation_storage_manager {
 		if ($status == 0) {
 			$this->setCompleted ( $userId, true );
 			// TODO Mathevorkurs
-			$this->assignToGroup ( $userId );
+			$this->assign_to_group_AB ( $userId );
 		}
 	}
 	
@@ -610,8 +607,7 @@ class mod_groupformation_storage_manager {
 	 * @return multitype:multitype:string
 	 */
 	public function getCategories() {
-		$data = new mod_groupformation_data ();
-		$category_set = $data->getCategorySet ( $this->getScenario () );
+		$category_set = $this->data->getCategorySet ( $this->getScenario () );
 		$categories = array ();
 		foreach ( $category_set as $category ) {
 			if ($this->getNumber ( $category ) > 0) {
@@ -818,12 +814,11 @@ class mod_groupformation_storage_manager {
 	}
 	
 	/**
-	 * @Rene willst du dass nicht lieber in eine neue Klasse auslagern?
 	 * Assigns user to group A or group B (creates those if they do not exist)
 	 *
-	 * @param unknown $userid        	
+	 * @param int $userid        	
 	 */
-	public function assignToGroup($userid) {
+	public function assign_to_group_AB($userid) {
 		global $DB, $COURSE;
 		$completed = 1;
 		
@@ -915,8 +910,6 @@ class mod_groupformation_storage_manager {
 	public function getStats($userid) {
 		$scenario = $this->getScenario ();
 		
-		$data = new mod_groupformation_data ();
-		
 		$category_set = $this->getCategories ();
 		
 		$categories = array ();
@@ -961,15 +954,5 @@ class mod_groupformation_storage_manager {
 		$categories = $this->getCategories ();
 		return array_keys ( $categories );
 	}
-	public function getUser($id) {
-		global $DB;
-		if ($DB->record_exists ( 'user', array (
-				'id' => $id 
-		) )) {
-			return $DB->get_record ( 'user', array (
-					'id' => $id 
-			) );
-		}
-		return null;
-	}
+	
 }

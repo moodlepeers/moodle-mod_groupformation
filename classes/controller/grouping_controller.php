@@ -22,7 +22,7 @@ require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/stor
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
 
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
-
+require_once ($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/userid_filter.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/group_generator.php');
 
@@ -485,7 +485,7 @@ class mod_groupformation_grouping_controller {
 			$url = $CFG->wwwroot . '/user/view.php?id=' . $user->userid . '&course=' . $COURSE->id;
 			
 			$userName = $user->userid;
-			$user_record = $this->store->getUser ( $user->userid );
+			$user_record = mod_groupformation_util::get_user_record($user->userid );
 			if (! is_null ( $user_record ))
 				$userName = fullname ( $user_record );
 			
