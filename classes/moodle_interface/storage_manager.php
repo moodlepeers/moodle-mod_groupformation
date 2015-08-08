@@ -593,7 +593,7 @@ class mod_groupformation_storage_manager {
 	 * @param int $questionId        	
 	 * @return boolean
 	 */
-	public function answerExist($userId, $category, $questionId) {
+	public function has_answer($userId, $category, $questionId) {
 		global $DB;
 
 		return $DB->record_exists( 'groupformation_answer', array (
@@ -718,7 +718,7 @@ class mod_groupformation_storage_manager {
 	public function saveAnswer($userid, $answer, $category, $questionid) {
 		global $DB;
 		
-		$answerAlreadyExist = $this->answerExist ( $userid, $category, $questionid );
+		$answerAlreadyExist = $this->has_answer ( $userid, $category, $questionid );
 		
 		if ($answerAlreadyExist){
 			$record = $DB->get_record( 'groupformation_answer', array (
