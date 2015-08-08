@@ -109,7 +109,7 @@ class mod_groupformation_storage_manager {
 		
 		$data->type = $question ['type'];
 		$data->question = $question ['question'];
-		$data->options = $this->convertOptions ( $question ['options'] );
+		$data->options = $this->convert_options ( $question ['options'] );
 		$data->position = $question ['position'];
 		$data->language = $language;
 		$data->optionmax = count ( $question ['options'] );
@@ -267,8 +267,8 @@ class mod_groupformation_storage_manager {
 		
 		$data = new stdClass ();
 		$data->groupformation = $this->groupformationid;
-		$data->topicvalues = $this->convertOptions ( $topics );
-		$data->knowledgevalues = $this->convertOptions ( $knowledge );
+		$data->topicvalues = $this->convert_options ( $topics );
+		$data->knowledgevalues = $this->convert_options ( $knowledge );
 		$data->topicvaluesnumber = count ( $topics );
 		$data->knowledgevaluesnumber = count ( $knowledge );
 		
@@ -347,7 +347,7 @@ class mod_groupformation_storage_manager {
 	 * @param unknown $options        	
 	 * @return string
 	 */
-	private function convertOptions($options) {
+	private function convert_options($options) {
 		$op = implode ( "</OPTION>  <OPTION>", $options );
 		return "<OPTION>" . $op . "</OPTION>";
 	}
