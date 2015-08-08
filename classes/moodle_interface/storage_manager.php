@@ -167,7 +167,7 @@ class mod_groupformation_storage_manager {
 	 * @param string $category        	
 	 * @return number
 	 */
-	public function answerNumberForUser($userId, $category = null) {
+	public function get_number_of_answers($userId, $category = null) {
 		global $DB;
 		
 		if (! is_null ( $category )) {
@@ -204,7 +204,7 @@ class mod_groupformation_storage_manager {
 		$data = new mod_groupformation_data ();
 		$categories = $this->getCategories ();
 		$sum = array_sum ( $this->getNumbers ( $categories ) );
-		$user_sum = $this->answerNumberForUser ( $userid );
+		$user_sum = $this->get_number_of_answers ( $userid );
 		return $sum == $user_sum;
 	}
 	
@@ -927,7 +927,7 @@ class mod_groupformation_storage_manager {
 		
 		$stats = array ();
 		foreach ( $categories as $category => $value ) {
-			$count = $this->answerNumberForUser ( $userid, $category );
+			$count = $this->get_number_of_answers ( $userid, $category );
 			$stats [$category] = array (
 					'questions' => $value,
 					'answered' => $count,

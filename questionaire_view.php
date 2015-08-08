@@ -127,7 +127,7 @@
             }
 			
 			// --- Mathevorkurs
-			if($store->answerNumberForUser($userid, $category) != $number){
+			if($store->get_number_of_answers($userid, $category) != $number){
 				$go = false;
 			}
 			// ---

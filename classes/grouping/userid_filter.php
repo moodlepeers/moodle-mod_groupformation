@@ -62,7 +62,7 @@
 	public function getCompletedIDs(){
 		$completed = array();
 		foreach($this->totalUserIds as $user){
-			$number = $this->store->answerNumberForUser($user);
+			$number = $this->store->get_number_of_answers($user);
 			if($this->total == $number){
 				$completed[] = intval($user);
 			}
@@ -75,7 +75,7 @@
 		
 		$noneCompleted = array();
 		foreach($this->totalUserIds as $user){
-			$number = $this->store->answerNumberForUser($user);
+			$number = $this->store->get_number_of_answers($user);
 			if($this->total != $number){
 				$noneCompleted[] = intval($user);
 			}
@@ -92,7 +92,7 @@
 		$totalNumber = 0;
 		$ids = $this->store->getUserIdsCompleted();
 		foreach($ids as $user){
-			$number = $this->store->answerNumberForUser($user);
+			$number = $this->store->get_number_of_answers($user);
 			if($this->total != $number){
 				$totalNumber++;
 			}
