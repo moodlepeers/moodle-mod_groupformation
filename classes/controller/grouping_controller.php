@@ -452,7 +452,7 @@ class mod_groupformation_grouping_controller {
 			
 			foreach ( $this->groups as $key => $value ) {
 				
-				$gpi = (is_null ( $value->performance_index )) ? '-' : $value->performance_index;
+				$gpi = (is_null ( $value->performance_index ) || $value->performance_index == 0.0 ) ? '-' : $value->performance_index;
 				
 				$generatedGroupsView->assign ( $key, array (
 						'groupname' => $value->groupname,
