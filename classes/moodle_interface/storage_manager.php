@@ -298,13 +298,20 @@ class mod_groupformation_storage_manager {
 				'id' => $this->groupformationid 
 		) );
 		
+		
+		$format = "l jS \of F j, Y, g:i a";
+		
+		$times ['start'] = date ( $format, $times ['start_raw'] );
+		$times ['end'] = date ( $format, $times ['end_raw'] );
+		
+		
 		if ('en' == get_string ( "language", "groupformation" )) {
 			$format = "l jS \of F j, Y, g:i a";
 			$trans = array ();
 			$times ['start'] = strtr ( date ( $format, $times ['start_raw'] ), $trans );
 			$times ['end'] = strtr ( date ( $format, $times ['end_raw'] ), $trans );
-		} elseif ('de' == get_string ( "language", "groupformation" )) {
-			$format = "l, d.m.y, H:m";
+		}elseif ('de' == get_string ( "language", "groupformation" )) {
+			$format = "l, d.m.y, H:i";
 			$trans = array (
 					'Monday' => 'Montag',
 					'Tuesday' => 'Dienstag',
@@ -333,8 +340,6 @@ class mod_groupformation_storage_manager {
 			$times ['end'] = strtr ( date ( $format, $times ['end_raw'] ), $trans ) . ' Uhr';
 		}
 		
-		// $times ['start'] = date ( $format, $times ['start_raw'] );
-		// $times ['end'] = date ( $format, $times ['end_raw'] );
 		
 		return $times;
 	}
@@ -786,7 +791,8 @@ class mod_groupformation_storage_manager {
 		$data = new stdClass ();
 		$data->id = $this->groupformationid;
 		$data->timeclose = 0;
-		$data->timeopen = time () - 1;
+		$time = time();
+		$data->timeopen = $time - 1;
 		
 		$DB->update_record ( 'groupformation', $data );
 	}
