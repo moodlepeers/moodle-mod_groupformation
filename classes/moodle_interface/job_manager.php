@@ -41,6 +41,7 @@ require_once ($CFG->dirroot . '/lib/groupal/classes/Matcher/GroupALGroupCentricM
 require_once ($CFG->dirroot . '/lib/groupal/classes/GroupFormationAlgorithm.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/GroupFormationRandomAlgorithm.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/Optimizer/GroupALOptimizer.php');
+require_once ($CFG->dirroot . '/lib/groupal/classes/ParticipantWriter.php');
 class mod_groupformation_job_manager {
 	
 	/**
@@ -61,7 +62,12 @@ class mod_groupformation_job_manager {
 					AND 
 					done = 0
 				ORDER BY timecreated ASC";
-		$jobs = $DB->get_records('groupformation_jobs',array('waiting'=>1,'started'=>0,'aborted'=>0,'done'=>0));
+		$jobs = $DB->get_records ( 'groupformation_jobs', array (
+				'waiting' => 1,
+				'started' => 0,
+				'aborted' => 0,
+				'done' => 0 
+		) );
 		
 		if (count ( $jobs ) == 0)
 			return null;
@@ -205,9 +211,8 @@ class mod_groupformation_job_manager {
 		// Dummy Criterions
 		$c_vorwissen = new SpecificCriterion ( "vorwissen", array (
 				0.4,
-				0.4,
-				0.4,
-				0.4,
+				0.8,
+				0.8,
 				0.4,
 				0.4,
 				0.4,
@@ -243,10 +248,18 @@ class mod_groupformation_job_manager {
 				0.4,
 				0.4 
 		), 0, 1, true, 1 );
-		// Dummy Participants
-		$users = array ();
+		
+		$criterion_types = array (
+				$c_vorwissen,
+				$c_motivation,
+				$c_note,
+				$c_persoenlichkeit,
+				$c_lernstil,
+				$c_teamorientierung 
+		);
+		$participants = array ();
 		for($i = $id_begin; $i <= $id_end; $i ++) {
-			$users [] = new Participant ( array (
+			$participants [] = new Participant ( array (
 					$c_vorwissen,
 					$c_motivation,
 					$c_note,
@@ -256,7 +269,7 @@ class mod_groupformation_job_manager {
 			), $i );
 		}
 		
-		return $users;
+		return $participants;
 	}
 	
 	/**
@@ -268,21 +281,24 @@ class mod_groupformation_job_manager {
 	public static function do_groupal($job, &$groupal_cohort, &$random_cohort, &$incomplete_cohort) {
 		$groupformationid = $job->groupformationid;
 		
+		$store = new mod_groupformation_storage_manager ( $groupformationid );
+		$groupsize = intval ( $store->getGroupSize () );
+		
 		$userfilter = new mod_groupformation_userid_filter ( $groupformationid );
 		
 		$completed_users = $userfilter->getCompletedIDs ();
 		$nonecomplete_users = $userfilter->getNoneCompletedIds ();
 		
-		$store = new mod_groupformation_storage_manager($groupformationid);
+		$store = new mod_groupformation_storage_manager ( $groupformationid );
 		
-		$courseid = $store->getCourseID();
-
-		$context = context_course::instance($courseid);
+		$courseid = $store->getCourseID ();
 		
-		$enrolled_students = array_keys(get_enrolled_users ( $context, 'mod/groupformation:onlystudent' ));
+		$context = context_course::instance ( $courseid );
 		
-		$diff = array_diff($enrolled_students, $completed_users);
-		$merge = array_unique(array_merge($diff,$nonecomplete_users));
+		$enrolled_students = array_keys ( get_enrolled_users ( $context, 'mod/groupformation:onlystudent' ) );
+		
+		$diff = array_diff ( $enrolled_students, $completed_users );
+		$merge = array_unique ( array_merge ( $diff, $nonecomplete_users ) );
 		
 		$incomplete_users = $merge;
 		
@@ -306,13 +322,16 @@ class mod_groupformation_job_manager {
 			$random_users = array ();
 		}
 		
-		// var_dump($groupal_users,$random_users);
-		
 		$starttime = microtime ( true );
 		
 		// Generate participants for Groupal
-		$participants = $pp->build_participants ($groupal_users);
+		// $participants = $pp->build_participants ($groupal_users);
+		$participants = self::get_testing_data ( 1, 20 );
 		$groupal_participants = $participants;
+		
+		// TODO XML WRITER : einkommentieren falls benötigt
+		// $participant_writer = new participant_writer ();
+		// $participant_writer->write ( $groupal_participants );
 		
 		// Generate empty participants
 		$participants = $pp->build_empty_participants ( $random_users );
@@ -341,28 +360,32 @@ class mod_groupformation_job_manager {
 			
 			$gfa = new GroupFormationAlgorithm ( $groupal_participants, $matcher, $groupsize );
 			$groupal_cohort = $gfa->doOneFormation (); // this call takes time...
-				
+			
 			$endtime = microtime ( true );
 			$comptime = $endtime - $starttime;
 			
 			groupformation_info ( null, $job->groupformationid, 'groupal needed ' . $comptime . 'ms' );
 		}
-			
+		
 		if (count ( $random_participants ) > 0) {
 			$gfra = new GroupFormationRandomAlgorithm ( $random_participants, $groupsize );
 			$random_cohort = $gfra->doOneFormation ();
 		}
-			
+		
 		if (count ( $incomplete_participants ) > 0) {
 			$gfra = new GroupFormationRandomAlgorithm ( $incomplete_participants, $groupsize );
 			$incomplete_cohort = $gfra->doOneFormation ();
 		}
-			
-// 		 var_dump ( $groupal_cohort );
-// 		 var_dump ( $random_cohort );
-// 		 var_dump ( $incomplete_cohort );
 		
-		$cohorts = array($groupal_cohort,$random_cohort,$incomplete_cohort);
+		// var_dump ( $groupal_cohort );
+		// var_dump ( $random_cohort );
+		// var_dump ( $incomplete_cohort );
+		
+		$cohorts = array (
+				$groupal_cohort,
+				$random_cohort,
+				$incomplete_cohort 
+		);
 		
 		return $cohorts;
 	}
@@ -441,11 +464,11 @@ class mod_groupformation_job_manager {
 	private static function save_stats($job, &$groupal_cohort = null) {
 		global $DB;
 		
-		$job->matcher_used = strval($groupal_cohort->whichMatcherUsed);
-		$job->count_groups = floatval($groupal_cohort->countOfGroups);
-		$job->performance_index = floatval($groupal_cohort->cohortPerformanceIndex);
+		$job->matcher_used = strval ( $groupal_cohort->whichMatcherUsed );
+		$job->count_groups = floatval ( $groupal_cohort->countOfGroups );
+		$job->performance_index = floatval ( $groupal_cohort->cohortPerformanceIndex );
 		
-		groupformation_info(null, null, $job->matcher_used."yay");
+		groupformation_info ( null, null, $job->matcher_used . "yay" );
 		
 		$stats = $groupal_cohort->results;
 		
@@ -457,7 +480,7 @@ class mod_groupformation_job_manager {
 		$job->stats_norm_st_dev = $stats->normStDev;
 		$job->stats_performance_index = $stats->performanceIndex;
 		
-		$DB->update_record('groupformation_jobs', $job);
+		$DB->update_record ( 'groupformation_jobs', $job );
 	}
 	
 	/**
@@ -478,12 +501,12 @@ class mod_groupformation_job_manager {
 		$groupformationname = $store->getName ();
 		
 		$groupname = "";
-		$i = $store->getInstanceNumber();
+		$i = $store->getInstanceNumber ();
 		
 		if (strlen ( $groupname_prefix ) < 1) {
-			$groupname = "G".$i."_" . substr ( $groupformationname, 0, 8 ) . "_";
+			$groupname = "G" . $i . "_" . substr ( $groupformationname, 0, 8 ) . "_";
 		} else {
-			$groupname = "G".$i."_" . $groupname_prefix . "_";
+			$groupname = "G" . $i . "_" . $groupname_prefix . "_";
 		}
 		
 		$ids = array ();
