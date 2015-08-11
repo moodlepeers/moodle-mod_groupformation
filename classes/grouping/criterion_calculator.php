@@ -185,6 +185,9 @@
 					}
 				}
 				
+				// TODO @Nora: Da answers ein leeres Array ist wird $total nie erhöht
+				// In Zeile 194 und 201 hat man dann Division by Zero Probleme
+				
 				$tempE = 0;
 				$p = 1;
 				foreach($dist as $d){
