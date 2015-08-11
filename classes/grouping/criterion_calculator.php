@@ -77,14 +77,18 @@
 		 * @param int $userId
 		 * @return string
 		 */
+		
+		//TODO Sprachcodierung 
 		public function getLang($userId){
 			$lang = $this->store->getSingleAnswer($userId, 'general', 1);
+			$valueMax = $this->store->getMaxOptionOfCatalogQuestion($num, $category);
 			
-			if($lang == 1 || $lang == 3){
-				return 'en';
-			}else{
-				return 'de';
-			}
+	//	if($lang == 1 || $lang == 3){
+	//			return 'en';
+	//		}else{
+	//			return 'de';
+	//		}
+			return $lang/$valueMax;
 		}
 		
 		
@@ -110,7 +114,7 @@
 			//	$t = array();
 			//	$t[] = $question;
 				$t = floatval($this->store->getSingleAnswer($userId, 'knowledge', $position));
-				$knowledge[] = $t;
+				$knowledge[] = $t/100.0;
 				$position++;
 			}
 			return $knowledge;
@@ -124,15 +128,15 @@
 		 */
 		public function knowledgeAverage($userId){
 			$total = 0;
-			$numberOfQuestion = 0;
 			$answers = $this->store->getAnswers($userId, 'knowledge');
+			$numberOfQuestion = count($answers);
 			foreach($answers as $answer){
 				$total = $total + $answer->answer;
-				$numberOfQuestion++;
 			}
 			
 			if($numberOfQuestion != 0){
-				return floatval($total / $numberOfQuestion);
+				$temp = floatval($total) / ($numberOfQuestion);
+				return floatval($temp)/100;
 			}else{
 				return 0.0;
 			}
@@ -150,7 +154,8 @@
 			$o = $question->options;
 			$options = $this->xml->xmlToArray('<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $o . ' </OPTIONS>');
 			$answer = $this->store->getSingleAnswer($userId, 'grade', $position);
-			return floatval($options[$answer-1]);
+			//return floatval($options[$answer-1]);
+			return floatval($answer/$this->store->getMaxOptionOfCatalogQuestion($position));
 		}
 		
 		/**
@@ -237,17 +242,20 @@
 				$count = $count - 2;
 			}
 			for($i = 0; $i<$count; $i++){
-				$temp = 0.0;
+				$temp = 0;
+				$maxValue = 0;
 				foreach ($this->BIG5[$i] as $num){
 					$temp = $temp + $this->store->getSingleAnswer($userId, $category, $num);
+					$maxValue = $maxValue + $this->store->getMaxOptionOfCatalogQuestion($num, $category);
 				}
 				foreach ($this->BIG5Invert[$i] as $num){
 					$temp = $temp + $this->inverse($num, $category, $this->store->getSingleAnswer($userId, $category, $num));
+					$maxValue = $maxValue + $this->store->getMaxOptionOfCatalogQuestion($num, $category);
 				}
 				if(in_array($i, $this->BIG5Homogen)){
-					$homogen[] = floatval($temp);
+					$homogen[] = floatval($temp)/($maxValue);
 				}else{
-					$heterogen[] = floatval($temp);
+					$heterogen[] = floatval($temp)/($maxValue);
 				}
 			}
 			
@@ -280,11 +288,13 @@
 				
 			$count = count($this->FAM);
 			for($i = 0; $i<$count; $i++){
-				$temp = 0.0;
+				$temp = 0;
+				$maxValue = 0;
 				foreach ($this->FAM[$i] as $num){
 					$temp = $temp + $this->store->getSingleAnswer($userId, $category, $num);
+					$maxValue = $maxValue + $this->store->getMaxOptionOfCatalogQuestion($num, $category);
 				}
-				$array[] = floatval($temp);
+				$array[] = floatval($temp)/($maxValue);
 			}
 				
 			return $array;
@@ -303,11 +313,13 @@
 		
 			$count = count($this->LEARN);
 			for($i = 0; $i<$count; $i++){
-				$temp = 0.0;
+				$temp = 0;
+				$maxValue = 0;
 				foreach ($this->LEARN[$i] as $num){
 					$temp = $temp + $this->store->getSingleAnswer($userId, $category, $num);
+					$maxValue = $maxValue + $this->store->getMaxOptionOfCatalogQuestion($num, $category);
 				}
-				$array[] = floatval($temp);
+				$array[] = floatval($temp)/($maxValue);
 			}
 		
 			return $array;
@@ -322,16 +334,20 @@
 		 */
 		public function getTeam($userId){
 			$total = 0.0;
-			$numberOf = 0;
+			$maxValue = 0.0;
 			$array = array();
 			$answers = $this->store->getAnswers($userId, 'team');
+			$numberOf = count($answers);
 			foreach($answers as $answer){
 				$total = $total + $answer->answer;
-				$numberOf++;
+				$maxValue = $maxValue + $this->store->getMaxOptionOfCatalogQuestion($numberOf, 'team');
 			}
 			
 			if($numberOf != 0){
-				$array[] = floatval($total/$numberOf);
+				$temp = $total/$numberOf;
+				$temptotalValue = $maxValue/$numberOf;
+				$array[] = floatval($temp/$temptotalValue);
+				//$array[] = floatval($total/$numberOf);
 			}else{
 				$array[] = 0.0;
 			}

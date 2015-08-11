@@ -325,8 +325,8 @@ class mod_groupformation_job_manager {
 		$starttime = microtime ( true );
 		
 		// Generate participants for Groupal
-		// $participants = $pp->build_participants ($groupal_users);
-		$participants = self::get_testing_data ( 1, 20 );
+		$participants = $pp->build_participants ( $groupal_users );
+		// $participants = self::get_testing_data ( 1, 20 );
 		$groupal_participants = $participants;
 		
 		// TODO XML WRITER : einkommentieren falls benötigt
