@@ -645,7 +645,7 @@ class mod_groupformation_storage_manager {
 	public function already_answered() {
 		global $DB;
 		
-		return ($DB->count_records ( 'groupformation_answer', array (
+		return !($DB->count_records ( 'groupformation_answer', array (
 				'groupformation' => $this->groupformationid 
 		) ) == 0);
 	}
