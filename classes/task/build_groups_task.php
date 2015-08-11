@@ -36,7 +36,7 @@ class build_groups_task extends \core\task\scheduled_task {
 	 */
 	public function get_name() {
 		// Shown in admin screens
-		return "groupformation_job_build_groups";
+		return "Gruppenbildung und Aufräumen";
 	}
 	
 	/**
@@ -45,15 +45,15 @@ class build_groups_task extends \core\task\scheduled_task {
 	 * @see \core\task\task_base::execute()
 	 */
 	public function execute() {
-// 		groupformation_info ( null, null, 'cron job started' );
+		groupformation_info ( null, null, 'cron job started' );
 		
-		// First reset aborted jobs; user might wanna use it soon
-// 		$this->reset_aborted_jobs ();
+// 		First reset aborted jobs; user might wanna use it soon
+		$this->reset_aborted_jobs ();
 		
-		// Look for jobs; select a job; get it done
-// 		$this->do_job ();
+// 		Look for jobs; select a job; get it done
+		$this->do_job ();
 		
-// 		groupformation_info ( null, null, 'cron job terminated' );
+		groupformation_info ( null, null, 'cron job terminated' );
 		
 		return true;
 	}
