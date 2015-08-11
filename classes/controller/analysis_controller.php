@@ -131,26 +131,56 @@ class mod_groupformation_analysis_controller
         }
 
         if($this->questionnaire_status  == true){
-
-            $statusAnalysisView->assign ( 'button', array (
-                    'type' => 'submit',
-                    'name' => 'stop_questionnaire',
-                    'value' => '',
-                    'state' => '',
-                    'text' => 'Aktivität beenden'
-                )
-            );
+            if(mod_groupformation_job_manager::get_status(
+                    mod_groupformation_job_manager::get_job(
+                        $this->groupformationID)) !== "ready")
+            {
+                $statusAnalysisView->assign ( 'button', array (
+                        'type' => 'submit',
+                        'name' => 'stop_questionnaire',
+                        'value' => '',
+                        'state' => 'disabled',
+                        'text' => 'Aktivität beenden'
+                    )
+                );
+            } else {
+                $statusAnalysisView->assign('button', array(
+                        'type' => 'submit',
+                        'name' => 'stop_questionnaire',
+                        'value' => '',
+                        'state' => '',
+                        'text' => 'Aktivität beenden'
+                    )
+                );
+            }
 
         }elseif($this->questionnaire_status  == false){
 
-            $statusAnalysisView->assign ( 'button', array (
-                    'type' => 'submit',
-                    'name' => 'start_questionnaire',
-                    'value' => '',
-                    'state' => '',
-                    'text' => 'Aktivität starten'
-                )
-            );
+            if (mod_groupformation_job_manager::get_status(
+                    mod_groupformation_job_manager::get_job(
+                        $this->groupformationID)) !== "ready") {
+                $statusAnalysisView->assign ( 'button', array (
+                        'type' => 'submit',
+                        'name' => 'stop_questionnaire',
+                        'value' => '',
+                        'state' => 'disabled',
+                        'text' => 'Aktivität starten'
+                    )
+                );
+            } else {
+                $statusAnalysisView->assign('button', array(
+                        'type' => 'submit',
+                        'name' => 'start_questionnaire',
+                        'value' => '',
+                        'state' => '',
+                        'text' => 'Aktivität starten'
+                    )
+                );
+            }
+        }
+        // zusätzlich schauen, ob Gruppenbildung bereits gestartet, dann button disablen
+         else {
+
         }
 
         $info_teacher = mod_groupformation_util::get_info_text_for_teacher(false,"analysis");
