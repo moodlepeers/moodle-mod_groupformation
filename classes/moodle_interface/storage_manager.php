@@ -420,7 +420,7 @@ class mod_groupformation_storage_manager {
 	 *
 	 * @param unknown $i        	
 	 * @param string $category        	
-	 * @return mixed
+	 * @return int
 	 */
 	public function getMaxOptionOfCatalogQuestion($i, $category = 'grade') {
 		global $DB;
