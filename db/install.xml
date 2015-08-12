@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="mod/groupformation/db" VERSION="20150722" COMMENT="XMLDB file for Moodle mod/groupformation"
+<XMLDB PATH="mod/groupformation/db" VERSION="20150813" COMMENT="XMLDB file for Moodle mod/groupformation"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
@@ -212,6 +212,7 @@
         <FIELD NAME="completed" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="1 is completed questionnaire"/>
         <FIELD NAME="timecompleted" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="groupid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="answer_count" TYPE="int" LENGTH="20" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
@@ -245,7 +246,7 @@
         <FIELD NAME="timestarted" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="timefinished" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="matcher_used" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
-        <FIELD NAME="count_groups" TYPE="number" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="count_groups" TYPE="number" LENGTH="10" NOTNULL="false" SEQUENCE="false" DECIMALS="0"/>
         <FIELD NAME="performance_index" TYPE="number" LENGTH="20" NOTNULL="false" SEQUENCE="false" DECIMALS="8"/>
         <FIELD NAME="stats_avg_variance" TYPE="number" LENGTH="20" NOTNULL="false" SEQUENCE="false" DECIMALS="8"/>
         <FIELD NAME="stats_variance" TYPE="number" LENGTH="20" NOTNULL="false" SEQUENCE="false" DECIMALS="8"/>

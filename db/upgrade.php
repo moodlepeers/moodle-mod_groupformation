@@ -712,6 +712,20 @@ function xmldb_groupformation_upgrade($oldversion) {
 		upgrade_mod_savepoint(true, 2015072201, 'groupformation');
 	}
 	
+	if ($oldversion < 2015081300) {
+	
+		// Define field answer_count to be added to groupformation_started.
+		$table = new xmldb_table('groupformation_started');
+		$field = new xmldb_field('answer_count', XMLDB_TYPE_INTEGER, '20', null, null, null, '0', 'groupid');
+	
+		// Conditionally launch add field answer_count.
+		if (!$dbman->field_exists($table, $field)) {
+			$dbman->add_field($table, $field);
+		}
+	
+		// Groupformation savepoint reached.
+		upgrade_mod_savepoint(true, 2015081300, 'groupformation');
+	}
 	
 	return true;
 }
