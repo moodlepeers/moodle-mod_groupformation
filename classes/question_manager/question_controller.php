@@ -386,7 +386,8 @@
 		public function hasAnswers(){
 			$firstCondition = $this->store->answeringStatus($this->userId) == 0;
 			//var_dump($this->names[$this->currentCategoryPosition-1]);
-			$secondCondition = $this->store->has_answer($this->userId, $this->names[$this->currentCategoryPosition], 1);
+			$second = $this->store->getAnswers($this->userId, $this->names[$this->currentCategoryPosition]);
+			$secondCondition = $second > 0;
 			return ($firstCondition && $secondCondition);
 		}
 		
