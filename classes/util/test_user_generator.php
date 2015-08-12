@@ -23,7 +23,7 @@ class mod_groupformation_test_user_generator {
 	 * @param string $setAnswers
 	 * @return boolean
 	 */
-	public function create_test_users($n, $groupformationid, $setAnswers = false) {
+	public function create_test_users($n, $groupformationid, $setAnswers = false, $randomized = false) {
 		global $COURSE, $DB;
 		
 		$store = new mod_groupformation_storage_manager ( $groupformationid );
@@ -94,10 +94,12 @@ class mod_groupformation_test_user_generator {
 							$record->userid = $userid;
 							if ($category == "topic" || $category == "knowledge") {
 								$record->answer = ($j % 2 == 0) ? ($i) : ($m + 1 - $i); // $i, damit topics nur einmal, in "erstellter" Reihenfolge, sortiert sind
-							} elseif ($category == "grade") {
-								$record->answer = 2 * $i;
 							} else {
-								$record->answer = ($j % 5)+1;
+								if ($randomized) {
+									$record->answer = rand(1, $store->getMaxOptionOfCatalogQuestion($i, $category));
+								} else {
+									$record->answer = ($j % $store->getMaxOptionOfCatalogQuestion($i, $category))+1;
+								}
 							}
 							$all_records [] = $record;
 						}
