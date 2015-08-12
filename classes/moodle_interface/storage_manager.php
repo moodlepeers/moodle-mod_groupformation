@@ -964,4 +964,14 @@ class mod_groupformation_storage_manager {
 		return array_keys ( $categories );
 	}
 	
+	/**
+	 * Returns if questionaire is closed
+	 * 
+	 * @return boolean
+	 */
+	public function isQuestionaireAccessible(){
+		$times = $this->getTime();
+		$condition = $times['end_raw']<time();
+		return (!$this->isQuestionaireAvailable() && $condition);
+	}
 }

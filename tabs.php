@@ -78,7 +78,7 @@ if (has_capability ( 'mod/groupformation:editsettings', $context )) {
 	$row [] = new tabobject ( 'view', $viewurl->out (), get_string ( 'tab_overview', 'groupformation' ) );
 	
 	// If questionaire is available for students
-	if ($store->isQuestionaireAvailable ()) {
+	if ($store->isQuestionaireAvailable () || ($store->isQuestionaireAccessible())) {
 		// questionaire view
 		$questionaire_viewiewurl = new moodle_url ( '/mod/groupformation/questionaire_view.php', array (
 				'id' => $usedid 

@@ -141,7 +141,7 @@
 		redirect($returnurl);
 	}
 	
-	$available = $store->isQuestionaireAvailable();
+	$available = $store->isQuestionaireAvailable() || $store->isQuestionaireAccessible();
 	$isTeacher = has_capability('mod/groupformation:editsettings', $context);
 	if (($available || $isTeacher) && ($category == '' || $inArray)) {
 		
