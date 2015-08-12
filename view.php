@@ -27,6 +27,7 @@
 	require_once(dirname(__FILE__).'/locallib.php');
 	require_once(dirname(__FILE__).'/classes/moodle_interface/storage_manager.php');
 	require_once(dirname(__FILE__).'/classes/question_manager/info_text.php');
+    require_once(dirname(__FILE__).'/classes/controller/student_overview_controller.php');
 
 	// Read URL params
 	$id = optional_param('id', 0, PARAM_INT);   // Course Module ID
@@ -105,7 +106,11 @@
   		echo $OUTPUT->box(format_module_intro('groupformation', $groupformation, $cm->id), 'generalbox mod_introbox', 'groupformationintro');
   	}
 
-	if (has_capability('mod/groupformation:onlystudent', $context)){
+    $controller = new mod_groupformation_student_overview_controller($cm->id, $groupformation->id, $userid);
+    echo $controller->display();
+
+    //TODO @Rene || EG delete the following if studen overview works right
+	/*if (has_capability('mod/groupformation:onlystudent', $context)){
 		$isBuild = $groups_store->is_build();
 		if($isBuild){
 			$info->__groupsAvailable();
@@ -134,7 +139,7 @@
 		}
 	}else{
 		print_error('This activity is not accessible for you');
-	}
+	}*/
 	
 	echo $OUTPUT->footer();
 	
