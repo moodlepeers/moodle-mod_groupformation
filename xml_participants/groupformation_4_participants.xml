@@ -1,0 +1,634 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Participants version="1">
+    <UsedCriteria>
+        <Criterion name="knowledge_heterogen" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="3"/>
+        <Criterion name="big5_heterogen_Extraversion" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1"/>
+        <Criterion name="big5_homogen_Gewissenhaftigkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1"/>
+        <Criterion name="big5_homogen_Vertraeglichkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1"/>
+        <Criterion name="team" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1"/>
+        <Criterion name="learning_KE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1"/>
+        <Criterion name="learning_AE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1"/>
+        <Criterion name="learning_RB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1"/>
+        <Criterion name="learning_AB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1"/>
+    </UsedCriteria>
+    <participant id="231">
+        <Criterion name="knowledge_heterogen" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="3">
+            <Value name="value0" value="0"/>
+            <Value name="value1" value="0.03"/>
+            <Value name="value2" value="0.02"/>
+        </Criterion>
+        <Criterion name="big5_heterogen_Extraversion" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Gewissenhaftigkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Vertraeglichkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.72222222222222"/>
+        </Criterion>
+        <Criterion name="team" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_KE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_AE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_RB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_AB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+    </participant>
+    <participant id="232">
+        <Criterion name="knowledge_heterogen" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="3">
+            <Value name="value0" value="0"/>
+            <Value name="value1" value="0.01"/>
+            <Value name="value2" value="0.02"/>
+        </Criterion>
+        <Criterion name="big5_heterogen_Extraversion" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Gewissenhaftigkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Vertraeglichkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.44444444444444"/>
+        </Criterion>
+        <Criterion name="team" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_KE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_AE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_RB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_AB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+    </participant>
+    <participant id="233">
+        <Criterion name="knowledge_heterogen" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="3">
+            <Value name="value0" value="0"/>
+            <Value name="value1" value="0.03"/>
+            <Value name="value2" value="0.02"/>
+        </Criterion>
+        <Criterion name="big5_heterogen_Extraversion" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Gewissenhaftigkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Vertraeglichkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.72222222222222"/>
+        </Criterion>
+        <Criterion name="team" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_KE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_AE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_RB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_AB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+    </participant>
+    <participant id="234">
+        <Criterion name="knowledge_heterogen" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="3">
+            <Value name="value0" value="0"/>
+            <Value name="value1" value="0.01"/>
+            <Value name="value2" value="0.02"/>
+        </Criterion>
+        <Criterion name="big5_heterogen_Extraversion" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Gewissenhaftigkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Vertraeglichkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.44444444444444"/>
+        </Criterion>
+        <Criterion name="team" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_KE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_AE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_RB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_AB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+    </participant>
+    <participant id="235">
+        <Criterion name="knowledge_heterogen" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="3">
+            <Value name="value0" value="0"/>
+            <Value name="value1" value="0.03"/>
+            <Value name="value2" value="0.02"/>
+        </Criterion>
+        <Criterion name="big5_heterogen_Extraversion" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Gewissenhaftigkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Vertraeglichkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.72222222222222"/>
+        </Criterion>
+        <Criterion name="team" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_KE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_AE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_RB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_AB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+    </participant>
+    <participant id="236">
+        <Criterion name="knowledge_heterogen" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="3">
+            <Value name="value0" value="0"/>
+            <Value name="value1" value="0.01"/>
+            <Value name="value2" value="0.02"/>
+        </Criterion>
+        <Criterion name="big5_heterogen_Extraversion" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Gewissenhaftigkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Vertraeglichkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.44444444444444"/>
+        </Criterion>
+        <Criterion name="team" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_KE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_AE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_RB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_AB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+    </participant>
+    <participant id="237">
+        <Criterion name="knowledge_heterogen" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="3">
+            <Value name="value0" value="0"/>
+            <Value name="value1" value="0.03"/>
+            <Value name="value2" value="0.02"/>
+        </Criterion>
+        <Criterion name="big5_heterogen_Extraversion" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Gewissenhaftigkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Vertraeglichkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.72222222222222"/>
+        </Criterion>
+        <Criterion name="team" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_KE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_AE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_RB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_AB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+    </participant>
+    <participant id="238">
+        <Criterion name="knowledge_heterogen" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="3">
+            <Value name="value0" value="0"/>
+            <Value name="value1" value="0.01"/>
+            <Value name="value2" value="0.02"/>
+        </Criterion>
+        <Criterion name="big5_heterogen_Extraversion" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Gewissenhaftigkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Vertraeglichkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.44444444444444"/>
+        </Criterion>
+        <Criterion name="team" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_KE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_AE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_RB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_AB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+    </participant>
+    <participant id="239">
+        <Criterion name="knowledge_heterogen" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="3">
+            <Value name="value0" value="0"/>
+            <Value name="value1" value="0.03"/>
+            <Value name="value2" value="0.02"/>
+        </Criterion>
+        <Criterion name="big5_heterogen_Extraversion" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Gewissenhaftigkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Vertraeglichkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.72222222222222"/>
+        </Criterion>
+        <Criterion name="team" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_KE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_AE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_RB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_AB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+    </participant>
+    <participant id="240">
+        <Criterion name="knowledge_heterogen" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="3">
+            <Value name="value0" value="0"/>
+            <Value name="value1" value="0.01"/>
+            <Value name="value2" value="0.02"/>
+        </Criterion>
+        <Criterion name="big5_heterogen_Extraversion" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Gewissenhaftigkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Vertraeglichkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.44444444444444"/>
+        </Criterion>
+        <Criterion name="team" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_KE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_AE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_RB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_AB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+    </participant>
+    <participant id="241">
+        <Criterion name="knowledge_heterogen" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="3">
+            <Value name="value0" value="0"/>
+            <Value name="value1" value="0.03"/>
+            <Value name="value2" value="0.02"/>
+        </Criterion>
+        <Criterion name="big5_heterogen_Extraversion" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Gewissenhaftigkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Vertraeglichkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.72222222222222"/>
+        </Criterion>
+        <Criterion name="team" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_KE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_AE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_RB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_AB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+    </participant>
+    <participant id="242">
+        <Criterion name="knowledge_heterogen" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="3">
+            <Value name="value0" value="0"/>
+            <Value name="value1" value="0.01"/>
+            <Value name="value2" value="0.02"/>
+        </Criterion>
+        <Criterion name="big5_heterogen_Extraversion" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Gewissenhaftigkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Vertraeglichkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.44444444444444"/>
+        </Criterion>
+        <Criterion name="team" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_KE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_AE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_RB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_AB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+    </participant>
+    <participant id="243">
+        <Criterion name="knowledge_heterogen" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="3">
+            <Value name="value0" value="0"/>
+            <Value name="value1" value="0.03"/>
+            <Value name="value2" value="0.02"/>
+        </Criterion>
+        <Criterion name="big5_heterogen_Extraversion" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Gewissenhaftigkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Vertraeglichkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.72222222222222"/>
+        </Criterion>
+        <Criterion name="team" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_KE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_AE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_RB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_AB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+    </participant>
+    <participant id="244">
+        <Criterion name="knowledge_heterogen" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="3">
+            <Value name="value0" value="0"/>
+            <Value name="value1" value="0.01"/>
+            <Value name="value2" value="0.02"/>
+        </Criterion>
+        <Criterion name="big5_heterogen_Extraversion" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Gewissenhaftigkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Vertraeglichkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.44444444444444"/>
+        </Criterion>
+        <Criterion name="team" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_KE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_AE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_RB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_AB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+    </participant>
+    <participant id="245">
+        <Criterion name="knowledge_heterogen" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="3">
+            <Value name="value0" value="0"/>
+            <Value name="value1" value="0.03"/>
+            <Value name="value2" value="0.02"/>
+        </Criterion>
+        <Criterion name="big5_heterogen_Extraversion" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Gewissenhaftigkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Vertraeglichkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.72222222222222"/>
+        </Criterion>
+        <Criterion name="team" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_KE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_AE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_RB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_AB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+    </participant>
+    <participant id="246">
+        <Criterion name="knowledge_heterogen" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="3">
+            <Value name="value0" value="0"/>
+            <Value name="value1" value="0.01"/>
+            <Value name="value2" value="0.02"/>
+        </Criterion>
+        <Criterion name="big5_heterogen_Extraversion" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Gewissenhaftigkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Vertraeglichkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.44444444444444"/>
+        </Criterion>
+        <Criterion name="team" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_KE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_AE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_RB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_AB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+    </participant>
+    <participant id="247">
+        <Criterion name="knowledge_heterogen" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="3">
+            <Value name="value0" value="0"/>
+            <Value name="value1" value="0.03"/>
+            <Value name="value2" value="0.02"/>
+        </Criterion>
+        <Criterion name="big5_heterogen_Extraversion" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Gewissenhaftigkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Vertraeglichkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.72222222222222"/>
+        </Criterion>
+        <Criterion name="team" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_KE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_AE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_RB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_AB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+    </participant>
+    <participant id="248">
+        <Criterion name="knowledge_heterogen" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="3">
+            <Value name="value0" value="0"/>
+            <Value name="value1" value="0.01"/>
+            <Value name="value2" value="0.02"/>
+        </Criterion>
+        <Criterion name="big5_heterogen_Extraversion" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Gewissenhaftigkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Vertraeglichkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.44444444444444"/>
+        </Criterion>
+        <Criterion name="team" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_KE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_AE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_RB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_AB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+    </participant>
+    <participant id="249">
+        <Criterion name="knowledge_heterogen" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="3">
+            <Value name="value0" value="0"/>
+            <Value name="value1" value="0.03"/>
+            <Value name="value2" value="0.02"/>
+        </Criterion>
+        <Criterion name="big5_heterogen_Extraversion" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Gewissenhaftigkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Vertraeglichkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.72222222222222"/>
+        </Criterion>
+        <Criterion name="team" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_KE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_AE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_RB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+        <Criterion name="learning_AB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="1"/>
+        </Criterion>
+    </participant>
+    <participant id="250">
+        <Criterion name="knowledge_heterogen" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="3">
+            <Value name="value0" value="0"/>
+            <Value name="value1" value="0.01"/>
+            <Value name="value2" value="0.02"/>
+        </Criterion>
+        <Criterion name="big5_heterogen_Extraversion" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Gewissenhaftigkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.58333333333333"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Vertraeglichkeit" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.44444444444444"/>
+        </Criterion>
+        <Criterion name="team" minValue="0" maxValue="1" isHomogeneous="1" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_KE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_AE" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_RB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+        <Criterion name="learning_AB" minValue="0" maxValue="1" isHomogeneous="" weight="1" valueCount="1">
+            <Value name="value0" value="0.16666666666667"/>
+        </Criterion>
+    </participant>
+</Participants>
