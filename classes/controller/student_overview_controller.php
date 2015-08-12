@@ -75,12 +75,18 @@ class mod_groupformation_student_overview_controller {
             if($isBuild){
                 $this->view_state = 2;
             }else{
+                if ($this->store->isQuestionaireAvailable()) {
                     $this->view_state = $this->store->answeringStatus($this->userid);
+                }else{$this->view_state = 4;}
             }
         }else{
             $this->view_state = 3;
         }
 
+    }
+
+    public function test(){
+        return $this->view_state;
     }
 
 
@@ -137,13 +143,29 @@ class mod_groupformation_student_overview_controller {
                 break;
 
             case 2:
+                $this->groupformation_info = mod_groupformation_util::get_info_text_for_student(false, $this->groupformationid);
                 $this->groupformation_state_info = 'Gruppen sind gebildet';
                 $this->buttons_info_array = array();
                 $this->buttons_array = array();
                 break;
 
             case 3:
+                $this->groupformation_info = mod_groupformation_util::get_info_text_for_student(false, $this->groupformationid);
                 $this->groupformation_state_info = 'This activity is not accessible for you';
+                $this->buttons_info_array = array();
+                $this->buttons_array = array();
+                break;
+
+            case 4;
+                $this->groupformation_info = mod_groupformation_util::get_info_text_for_student(false, $this->groupformationid);
+                $this->groupformation_state_info = $this->availabilityState();
+                $this->buttons_info_array = array();
+                $this->buttons_array = array();
+
+                break;
+
+            default:
+                $this->groupformation_state_info = 'invalid status';
                 $this->buttons_info_array = array();
                 $this->buttons_array = array();
                 break;
