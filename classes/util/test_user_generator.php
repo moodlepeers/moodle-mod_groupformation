@@ -94,13 +94,11 @@ class mod_groupformation_test_user_generator {
 							$record->userid = $userid;
 							if ($category == "topic" || $category == "knowledge") {
 								$record->answer = ($j % 2 == 0) ? ($i) : ($m + 1 - $i); // $i, damit topics nur einmal, in "erstellter" Reihenfolge, sortiert sind
-							} elseif ($category == "grade") {
-								$record->answer = 2 * $i;
 							} else {
 								if ($randomized) {
-									$record->answer = rand(1, 5);
+									$record->answer = rand(1, $store->getMaxOptionOfCatalogQuestion($i, $category));
 								} else {
-									$record->answer = ($j % 5)+1;
+									$record->answer = ($j % $store->getMaxOptionOfCatalogQuestion($i, $category))+1;
 								}
 							}
 							$all_records [] = $record;
