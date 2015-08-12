@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -13,6 +14,14 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Controller for grouping view
+ *
+ * @package mod_groupformation
+ * @author MoodlePeers
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 if (! defined ( 'MOODLE_INTERNAL' )) {
 	die ( 'Direct access to this script is forbidden.' ); // / It must be included from a Moodle page
 }
@@ -25,9 +34,8 @@ require_once ($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/userid_filter.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/group_generator.php');
 require_once ($CFG->dirroot . '/mod/groupformation/locallib.php');
-
 class mod_groupformation_grouping_controller {
-	private $groupformationID;
+	private $groupformationid;
 	private $view_state = 0;
 	private $groups = array ();
 	private $incomplete_groups = array ();
@@ -40,20 +48,20 @@ class mod_groupformation_grouping_controller {
 	/**
 	 * Creates an instance of grouping_controller for groupformation
 	 *
-	 * @param unknown $groupformationID        	
+	 * @param int $groupformationid        	
 	 */
-	public function __construct($groupformationID) {
-		$this->groupformationID = $groupformationID;
+	public function __construct($groupformationid) {
+		$this->groupformationid = $groupformationid;
 		
-		$this->store = new mod_groupformation_storage_manager ( $groupformationID );
+		$this->store = new mod_groupformation_storage_manager ( $groupformationid );
 		
-		$this->groups_store = new mod_groupformation_groups_manager ( $groupformationID );
+		$this->groups_store = new mod_groupformation_groups_manager ( $groupformationid );
 		
 		$this->view = new mod_groupformation_template_builder ();
 		
 		$this->groups = $this->groups_store->get_generated_groups ();
 		
-		$this->job = mod_groupformation_job_manager::get_job ( $this->groupformationID );
+		$this->job = mod_groupformation_job_manager::get_job ( $this->groupformationid );
 		
 		$this->determine_status ();
 	}
@@ -96,20 +104,18 @@ class mod_groupformation_grouping_controller {
 		global $USER;
 		
 		// logging
-		groupformation_info ( $USER->id, $this->groupformationID, 'groupal job queued by course manager/teacher' );
+		groupformation_info ( $USER->id, $this->groupformationid, 'groupal job queued by course manager/teacher' );
 		
 		$users = $this->handle_complete_questionaires ();
 		mod_groupformation_job_manager::set_job ( $this->job, "waiting", true );
 		$this->determine_status ();
 		
-		$context = groupformation_get_context ( $this->groupformationID );
+		$context = groupformation_get_context ( $this->groupformationid );
 		$enrolled_users = get_enrolled_users ( $context, 'mod/groupformation:onlystudent' );
 		
-		
 		foreach ( $enrolled_users as $key => $user ) {
-			groupformation_set_activity_completion($course,$cm,$user->id);
+			groupformation_set_activity_completion ( $course, $cm, $user->id );
 		}
-		
 		
 		return $users;
 	}
@@ -121,7 +127,7 @@ class mod_groupformation_grouping_controller {
 		global $USER;
 		
 		// logging
-		groupformation_info ( $USER->id, $this->groupformationID, 'groupal job aborted by course manager/teacher' );
+		groupformation_info ( $USER->id, $this->groupformationid, 'groupal job aborted by course manager/teacher' );
 		
 		mod_groupformation_job_manager::set_job ( $this->job, "aborted", false, false );
 		$this->determine_status ();
@@ -134,9 +140,9 @@ class mod_groupformation_grouping_controller {
 		global $USER;
 		
 		// logging
-		groupformation_info ( $USER->id, $this->groupformationID, 'groupal job results adopted to moodle groups by course manager/teacher' );
+		groupformation_info ( $USER->id, $this->groupformationid, 'groupal job results adopted to moodle groups by course manager/teacher' );
 		
-		mod_groupformation_group_generator::generate_moodle_groups ( $this->groupformationID );
+		mod_groupformation_group_generator::generate_moodle_groups ( $this->groupformationid );
 		$this->determine_status ();
 	}
 	
@@ -147,7 +153,7 @@ class mod_groupformation_grouping_controller {
 		global $USER;
 		
 		// logging
-		groupformation_info ( $USER->id, $this->groupformationID, 'groupal job results deleted by course manager/teacher' );
+		groupformation_info ( $USER->id, $this->groupformationid, 'groupal job results deleted by course manager/teacher' );
 		
 		mod_groupformation_job_manager::set_job ( $this->job, "ready", false, true );
 		$this->groups_store->delete_generated_groups ();
@@ -374,7 +380,7 @@ class mod_groupformation_grouping_controller {
 				break;
 		}
 		
-		$userfilter = new mod_groupformation_userid_filter ( $this->groupformationID );
+		$userfilter = new mod_groupformation_userid_filter ( $this->groupformationid );
 		
 		$count = count ( $userfilter->getCompletedIDs () );
 		$count += count ( $userfilter->getNoneCompletedIDs () );
@@ -510,7 +516,6 @@ class mod_groupformation_grouping_controller {
 		$groupMembers = array ();
 		
 		foreach ( $usersIDs as $user ) {
-			// TODO: get link of user and username with the userID
 			$url = $CFG->wwwroot . '/user/view.php?id=' . $user->userid . '&course=' . $COURSE->id;
 			
 			$userName = $user->userid;
@@ -534,36 +539,30 @@ class mod_groupformation_grouping_controller {
 	/**
 	 * Get the moodle-link to group and set state of the link(enabled || disabled)
 	 *
-	 * @param
-	 *        	$groupID
+	 * @param int $groupid   	
 	 * @return array
 	 */
-	private function get_group_link($groupID) {
-		global $COURSE, $CFG;
+	private function get_group_link($groupid) {
 		$link = array ();
 		if ($this->groups_created) {
 			$url = new moodle_url ( '/group/members.php', array (
-					'group' => $groupID 
-			) ); // ='.$groupID;
-			return $link = [ 
-					$url,
-					'' 
-			];
-			// return '<a href="#"><button class="gf_button gf_button_pill gf_button_tiny">zur Moodle Gruppenansicht</button></a>';
-		} else { // no link, button disabled
-			return $link = [ 
-					'',
-					'disabled' 
-			];
-			// return '<a href="#"><button class="gf_button gf_button_pill gf_button_tiny" disabled>zur Moodle Gruppenansicht</button></a>';
+					'group' => $groupid 
+			) );
+			$link[] = $url;
+			$link[] = '';
+		} else {
+			
+			$link[] = '';
+			$link[] = 'disabled';
 		}
+		return $link;
 	}
 	
 	/**
 	 * Handles complete questionaires (userids) and sets them to completed/commited
 	 */
 	private function handle_complete_questionaires() {
-		$userFilter = new mod_groupformation_userid_filter ( $this->groupformationID );
+		$userFilter = new mod_groupformation_userid_filter ( $this->groupformationid );
 		
 		$users = $userFilter->getCompletedIDs ();
 		
