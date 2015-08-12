@@ -97,7 +97,7 @@ class mod_groupformation_test_user_generator {
 							} elseif ($category == "grade") {
 								$record->answer = 2 * $i;
 							} else {
-								$record->answer = ($j % 2 == 0) ? 1 : 6;
+								$record->answer = ($j % 5)+1;
 							}
 							$all_records [] = $record;
 						}

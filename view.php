@@ -63,8 +63,7 @@
 	$info = new mod_groupformation_info_text ($cm->id, $groupformation->id, $userid );
 
 	if ($store->isQuestionaireCompleted($userid)){
-		$completion = new completion_info($course);
-		$completion->set_module_viewed($cm,$userid);
+		groupformation_set_activity_completion($course, $cm, $userid);
 	}	
 	
 	// Trigger event TODO @Nora why?

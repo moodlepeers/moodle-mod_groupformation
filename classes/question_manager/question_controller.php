@@ -90,6 +90,11 @@
 
 		}
 		
+		public function hasCommited(){
+			$status = $this->store->answeringStatus($this->userId);
+			return $status == 1;
+		}
+		
 		// --- MAthevorkurs
 		public function goNotOn(){
 			$this->goIternalBack(1);
@@ -242,6 +247,7 @@
 			
 				$questions = array();
 				$hasAnswer = $this->hasAnswers();
+				
 				//$answers = array();
 				//if($hasAnswer){
 				//	$answers = $this->getAnswers();
@@ -310,25 +316,40 @@
 					$positionAnswer = 0;
 					for($i = 1; $i <= $this->numbers[$this->currentCategoryPosition]; $i++){
 						$array = $this->store->getCatalogQuestion($i, $this->names[$this->currentCategoryPosition], $this->lang);
-						$question = array();
-						$question[] = $array->type;
-						$question[] = $array->question;
-						$o = $array->options;
 						
-						$question[] = $this->xml->xmlToArray('<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $o . ' </OPTIONS>');
-						
-						if($hasAnswer){
-						//	if($positionAnswer < count($answers) && $answers[$positionAnswer][0] == $i){
-						//		$question[] = $answers[$positionAnswer][1];
-						//		$positionAnswer++;
-						//	}else{
-						//		$question[] = -1;
-						//	}
-							$answer = $this->store->getSingleAnswer($this->userId, $this->names[$this->currentCategoryPosition], $i);
-							if($answer != false){
-								$question[] = $answer;
+						if(empty($array)){
+							if ($this->lang != 'en'){
+								$array = $this->store->getCatalogQuestion($i, $this->names[$this->currentCategoryPosition], 'en');
 							}else{
-								$question[] = -1;
+								$lang = $this->store->getPossibleLang($this->names[$this->currentCategoryPosition]);
+								$array = $this->store->getCatalogQuestion($i, $this->names[$this->currentCategoryPosition], $lang);
+							}
+						}
+						
+						if(count($array) == 0){
+							echo 'This questionaire site is neither available in your favorite language nor in english!';
+						}else{
+						
+							$question = array();
+							$question[] = $array->type;
+							$question[] = $array->question;
+							$o = $array->options;
+						
+							$question[] = $this->xml->xmlToArray('<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $o . ' </OPTIONS>');
+						
+							if($hasAnswer){
+							//	if($positionAnswer < count($answers) && $answers[$positionAnswer][0] == $i){
+							//		$question[] = $answers[$positionAnswer][1];
+							//		$positionAnswer++;
+							//	}else{
+							//		$question[] = -1;
+							//	}
+								$answer = $this->store->getSingleAnswer($this->userId, $this->names[$this->currentCategoryPosition], $i);
+								if($answer != false){
+									$question[] = $answer;
+								}else{
+									$question[] = -1;
+								}
 							}
 						}
 						$questions[] = $question;
@@ -384,9 +405,10 @@
 		}
 		
 		public function hasAnswers(){
-			$firstCondition = $this->store->answeringStatus($this->userId) == 0;
+			$firstCondition = $this->store->answeringStatus($this->userId) > -1;
 			//var_dump($this->names[$this->currentCategoryPosition-1]);
-			$secondCondition = $this->store->has_answer($this->userId, $this->names[$this->currentCategoryPosition], 1);
+			$second = $this->store->getAnswers($this->userId, $this->names[$this->currentCategoryPosition]);
+			$secondCondition = $second > 0;
 			return ($firstCondition && $secondCondition);
 		}
 		

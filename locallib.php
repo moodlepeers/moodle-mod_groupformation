@@ -168,3 +168,30 @@ function groupformation_determine_instance($id, &$cm, &$course, &$groupformation
 		error ( 'You must specify a course_module ID or an instance ID' );
 	}
 }
+
+/**
+ * Returns context for groupformation id
+ * 
+ * @param int $groupformationid
+ * @return context_course
+ */
+function groupformation_get_context($groupformationid){
+	$store = new mod_groupformation_storage_manager($groupformationid);
+	
+	$courseid = $store->getCourseID ();
+	
+	$context = context_course::instance ( $courseid );
+	
+	return $context;
+}
+
+/**
+ * 
+ * @param stdClass $course
+ * @param stdClass $cm
+ * @param int $userid
+ */
+function groupformation_set_activity_completion($course,$cm,$userid){
+	$completion = new completion_info ( $course );
+	$completion->set_module_viewed ( $cm, $userid );
+}

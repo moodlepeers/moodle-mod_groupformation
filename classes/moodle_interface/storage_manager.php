@@ -298,20 +298,13 @@ class mod_groupformation_storage_manager {
 				'id' => $this->groupformationid 
 		) );
 		
-		
-		$format = "l jS \of F j, Y, g:i a";
-		
-		$times ['start'] = date ( $format, $times ['start_raw'] );
-		$times ['end'] = date ( $format, $times ['end_raw'] );
-		
-		
 		if ('en' == get_string ( "language", "groupformation" )) {
 			$format = "l jS \of F j, Y, g:i a";
 			$trans = array ();
 			$times ['start'] = strtr ( date ( $format, $times ['start_raw'] ), $trans );
 			$times ['end'] = strtr ( date ( $format, $times ['end_raw'] ), $trans );
-		}elseif ('de' == get_string ( "language", "groupformation" )) {
-			$format = "l, d.m.y, H:i";
+		} elseif ('de' == get_string ( "language", "groupformation" )) {
+			$format = "l, d.m.y, H:m";
 			$trans = array (
 					'Monday' => 'Montag',
 					'Tuesday' => 'Dienstag',
@@ -340,6 +333,8 @@ class mod_groupformation_storage_manager {
 			$times ['end'] = strtr ( date ( $format, $times ['end_raw'] ), $trans ) . ' Uhr';
 		}
 		
+		// $times ['start'] = date ( $format, $times ['start_raw'] );
+		// $times ['end'] = date ( $format, $times ['end_raw'] );
 		
 		return $times;
 	}
@@ -375,6 +370,15 @@ class mod_groupformation_storage_manager {
 		}
 		
 		return $array;
+	}
+	
+	
+	public function getPossibleLang($category){
+		global $DB;
+		
+		$table = 'groupformation_' . $category;
+		$lang = $DB->get_field($table, 'language', array(), IGNORE_MULTIPLE);
+		return $lang;
 	}
 	
 	/**
@@ -791,8 +795,7 @@ class mod_groupformation_storage_manager {
 		$data = new stdClass ();
 		$data->id = $this->groupformationid;
 		$data->timeclose = 0;
-		$time = time();
-		$data->timeopen = $time - 1;
+		$data->timeopen = time () - 1;
 		
 		$DB->update_record ( 'groupformation', $data );
 	}

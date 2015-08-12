@@ -302,12 +302,17 @@ class mod_groupformation_questionaire {
 	 * Prints questionaire page
 	 */
 	public function printQuestionairePage() {
-		if ($this->question_manager->questionsToAnswer () && $this->question_manager->hasNext ()) {
+	//	if ($this->question_manager->questionsToAnswer () && $this->question_manager->hasNext ()) {
 			
+		if ($this->question_manager->hasNext ()) {
 			$isTeacher = has_capability ( 'mod/groupformation:editsettings', $this->context );
 			
 			if ($isTeacher)
 				echo '<div class="alert">' . get_string ( 'questionaire_preview', 'groupformation' ) . '</div>';
+			
+			if ($this->question_manager->hasCommited()){
+				echo '<div class="alert" id="commited_view">' . get_string( 'questionaire_commited', 'groupformation') . '</div>';
+			}
 			
 			$this->category = $this->question_manager->getCurrentCategory ();
 			
