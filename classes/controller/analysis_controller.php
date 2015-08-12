@@ -1,21 +1,35 @@
 <?php
+
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+
 /**
- * Created by PhpStorm.
- * User: eduardgallwas
- * Date: 09.07.15
- * Time: 09:59
+ * Controller for analysis view
+ *
+ * @package mod_groupformation
+ * @author MoodlePeers
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/submit_infos.php');
 class mod_groupformation_analysis_controller {
-	private $groupformationID;
-	
-	// state of the controller
-	// private $viewState = 0;
+	private $groupformationid;
 	private $store = NULL;
 	private $view = NULL;
-	private $questionnaire_status;
+	private $questionnaire_available;
 	private $activity_time;
 	private $start_time;
 	private $end_time;
@@ -25,57 +39,21 @@ class mod_groupformation_analysis_controller {
 	private $analyse_infos = NULL;
 	private $test;
 	private $state;
+	
 	/**
 	 * Creates instance of analysis controller
 	 *
-	 * @param int $groupformationID        	
+	 * @param int $groupformationid        	
 	 */
-	public function __construct($groupformationID) {
-		$this->groupformationID = $groupformationID;
-		$this->store = new mod_groupformation_storage_manager ( $groupformationID );
+	public function __construct($groupformationid) {
+		$this->groupformationid = $groupformationid;
+		
+		$this->store = new mod_groupformation_storage_manager ( $groupformationid );
 		$this->view = new mod_groupformation_template_builder ();
+		
 		$this->determineStatus ();
 		
-		$this->analyse_infos = new mod_groupformation_submit_infos ( $groupformationID );
-		
-		/*
-		 * if(($start == 0) && ($end == 0) && ($this->survey_status == true )){
-		 * // die Aktivität ist die ganze zeit verfügbar und muss manuel beendet werden
-		 * $this->viewState = 0;
-		 *
-		 *
-		 * $this->test = get_string ( 'questionaire_availability_info_future', 'groupformation', $this->activity_time );
-		 * } elseif (($start > $this->time_now ) && ($end == 0)) {
-		 * // die Aktivität startet am ... und läuft bis sie manuel beendet wird
-		 * $this->viewState = 1;
-		 *
-		 * $this->activity_status_info = 'test1';
-		 *
-		 * } elseif (($start > $this->time_now) && !($end == 0)) {
-		 * // die Aktivität startet am ... und endet am ...
-		 * $this->viewState = 2;
-		 *
-		 * $this->activity_status_info = 'test2';
-		 *
-		 * } elseif (($start < $this->time_now) && ($end == 0)) {
-		 * // die Aktivität läuft bereits seit... und muss manuel gestoppt werden
-		 * $this->viewState = 3;
-		 *
-		 * $this->activity_status_info = 'test3';
-		 *
-		 * } elseif(($start < $this->time_now) && ($end > $this->time_now)) {
-		 * // die Aktivität läuft bereits seit .. und endet am ..
-		 * $this->viewState = 4;
-		 *
-		 * $this->activity_status_info = 'test4';
-		 *
-		 * } elseif(($end < $this->time_now)) {
-		 * // die Aktivität wurde am ... beendet
-		 * $this->viewState = 5;
-		 *
-		 * $this->activity_status_info = 'test5';
-		 * }
-		 */
+		$this->analyse_infos = new mod_groupformation_submit_infos ( $groupformationid );
 	}
 	
 	/**
@@ -93,15 +71,13 @@ class mod_groupformation_analysis_controller {
 	}
 	
 	/**
-	 * Loads status
+	 * Loads status for template
 	 *
 	 * @return string
 	 */
 	private function load_status() {
 		$statusAnalysisView = new mod_groupformation_template_builder ();
 		$statusAnalysisView->setTemplate ( 'analysis_status' );
-		
-		$this->questionnaire_status = $this->store->isQuestionaireAvailable ();
 		
 		$this->activity_time = $this->store->getTime ();
 		
@@ -117,46 +93,17 @@ class mod_groupformation_analysis_controller {
 			$this->end_time = $this->activity_time ['end'];
 		}
 		
-		if ($this->questionnaire_status == true) {
-			if ($this->job_state !== "ready") {
-				$statusAnalysisView->assign ( 'button', array (
-						'type' => 'submit',
-						'name' => 'stop_questionnaire',
-						'value' => '',
-						'state' => 'disabled',
-						'text' => 'Aktivität beenden' 
-				) );
-			} else {
-				$statusAnalysisView->assign ( 'button', array (
-						'type' => 'submit',
-						'name' => 'stop_questionnaire',
-						'value' => '',
-						'state' => '',
-						'text' => 'Aktivität beenden' 
-				) );
-			}
-		} elseif ($this->questionnaire_status == false) {
-			
-			if ($this->job_state !== "ready") {
-				$statusAnalysisView->assign ( 'button', array (
-						'type' => 'submit',
-						'name' => 'stop_questionnaire',
-						'value' => '',
-						'state' => 'disabled',
-						'text' => 'Aktivität starten' 
-				) );
-			} else {
-				$statusAnalysisView->assign ( 'button', array (
-						'type' => 'submit',
-						'name' => 'start_questionnaire',
-						'value' => '',
-						'state' => '',
-						'text' => 'Aktivität starten' 
-				) );
-			}
-		}  // zusätzlich schauen, ob Gruppenbildung bereits gestartet, dann button disablen
-else {
-		}
+		$button_name = ($this->questionnaire_available) ? "stop_questionnaire" : "start_questionnaire";
+		$button_caption = ($this->questionnaire_available) ? "Aktivität beenden" : "Aktivität starten";
+		$button_disabled = ($this->job_state !== "ready") ? "disabled" : "";
+		
+		$statusAnalysisView->assign ( 'button', array (
+				'type' => 'submit',
+				'name' => $button_name,
+				'value' => '',
+				'state' => $button_disabled,
+				'text' => $button_caption 
+		) );
 		
 		$info_teacher = mod_groupformation_util::get_info_text_for_teacher ( false, "analysis" );
 		
@@ -175,11 +122,17 @@ else {
 				$statusAnalysisView->assign ( 'analysis_status_info', 'Die Gruppenbildung wurde bereits angestoßen bzw. durchgeführt. Die Aktivität kann nicht mehr gestartet werden' );
 				break;
 			default :
-				$statusAnalysisView->assign ( 'analysis_status_info', 'Useful magic text' );
+				$statusAnalysisView->assign ( 'analysis_status_info', 'Sie können die Aktivität starten oder beenden.' );
 		}
 		
 		return $statusAnalysisView->loadTemplate ();
 	}
+	
+	/**
+	 * Loads statistics for template
+	 *
+	 * @return string
+	 */
 	private function load_statistics() {
 		global $PAGE;
 		
@@ -198,6 +151,12 @@ else {
 		
 		return $statisticsAnalysisView->loadTemplate ();
 	}
+	
+	/**
+	 * Display all templates
+	 *
+	 * @return string
+	 */
 	public function display() {
 		$this->view->setTemplate ( 'wrapper_analysis' );
 		$this->view->assign ( 'analysis_name', $this->store->getName () );
@@ -205,21 +164,21 @@ else {
 		$this->view->assign ( 'analysis_statistics_template', $this->load_statistics () );
 		return $this->view->loadTemplate ();
 	}
+	
+	/**
+	 * Determine status variables
+	 */
 	public function determineStatus() {
-		$this->questionnaire_status = $this->store->isQuestionaireAvailable ();
+		$this->questionnaire_available = $this->store->isQuestionaireAvailable ();
 		$this->state = 1;
-		$this->job_state = mod_groupformation_job_manager::get_status ( mod_groupformation_job_manager::get_job ( $this->groupformationID ) );
+		$this->job_state = mod_groupformation_job_manager::get_status ( mod_groupformation_job_manager::get_job ( $this->groupformationid ) );
+		
 		if ($this->job_state !== 'ready') {
 			$this->state = 3;
-		} elseif ($this->questionnaire_status) {
+		} elseif ($this->questionnaire_available) {
 			$this->state = 1;
 		} else {
 			$this->state = 2;
 		}
 	}
-	
-	// echo '<div class="questionaire_status">' . get_string ( 'questionaire_not_available', 'groupformation', $a ) . '</div>';
-	// echo '<div class="questionaire_status">' . get_string ( 'questionaire_availability_info_future', 'groupformation', $a ) . '</div>';
-	// echo '<div class="questionaire_status">' . get_string ( 'questionaire_not_available', 'groupformation', $a ) . '</div>';
-	// echo '<div class="questionair_status">' . get_string ( 'questionaire_availability_info_from', 'groupformation', $a ) . '</div>';
 }
