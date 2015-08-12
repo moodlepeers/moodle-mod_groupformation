@@ -74,6 +74,26 @@ $PAGE->set_url ( '/mod/groupformation/analysis_view.php', array (
 $PAGE->set_title ( format_string ( $groupformation->name ) );
 $PAGE->set_heading ( format_string ( $course->fullname ) );
 
+require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/job_manager.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/controller/analysis_controller.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_parser.php');
+
+$controller = new mod_groupformation_analysis_controller ( $groupformation->id );
+
+if ($_POST) {
+	if (isset ( $_POST ['start_questionnaire'] )) {
+		$controller->start_questionnaire ();
+
+	} elseif (isset ( $_POST ['stop_questionnaire'] )) {
+		$controller->stop_questionnaire ();
+	}
+	$returnurl = new moodle_url ( '/mod/groupformation/analysis_view.php', array (
+			'id' => $id,
+			'do_show' => 'analysis'
+	) );
+	redirect($returnurl);
+}
+
 echo $OUTPUT->header ();
 
 // Print the tabs.
@@ -88,19 +108,7 @@ require ('tabs.php');
 // echo $OUTPUT->heading ( $groupformation->name );
 
 // ---------------------------------------------
-require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/job_manager.php');
-require_once ($CFG->dirroot . '/mod/groupformation/classes/controller/analysis_controller.php');
-require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_parser.php');
 
-$controller = new mod_groupformation_analysis_controller ( $groupformation->id );
-
-if ($_POST) {
-	if (isset ( $_POST ['start_questionnaire'] )) {
-		$controller->start_questionnaire ();
-	} elseif (isset ( $_POST ['stop_questionnaire'] )) {
-		$controller->stop_questionnaire ();
-	}
-}
 
 /* ---------- Automated test user generation ---------- */
 
