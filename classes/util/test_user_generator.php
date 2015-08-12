@@ -23,7 +23,7 @@ class mod_groupformation_test_user_generator {
 	 * @param string $setAnswers
 	 * @return boolean
 	 */
-	public function create_test_users($n, $groupformationid, $setAnswers = false) {
+	public function create_test_users($n, $groupformationid, $setAnswers = false, $randomized = false) {
 		global $COURSE, $DB;
 		
 		$store = new mod_groupformation_storage_manager ( $groupformationid );
@@ -97,7 +97,11 @@ class mod_groupformation_test_user_generator {
 							} elseif ($category == "grade") {
 								$record->answer = 2 * $i;
 							} else {
-								$record->answer = ($j % 5)+1;
+								if ($randomized) {
+									$record->answer = rand(1, 5);
+								} else {
+									$record->answer = ($j % 5)+1;
+								}
 							}
 							$all_records [] = $record;
 						}

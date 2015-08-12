@@ -34,6 +34,7 @@ $do_show = optional_param ( 'do_show', 'analysis', PARAM_TEXT );
 
 $create_users = optional_param ( 'create_users', 0, PARAM_INT );
 $create_answers = optional_param ( 'create_answers', false, PARAM_BOOL );
+$random_answers = optional_param ( 'random_answers', false, PARAM_BOOL );
 $delete_users = optional_param ( 'delete_users', false, PARAM_BOOL );
 
 // Import jQuery and js file
@@ -114,7 +115,7 @@ if ($delete_users) {
 	redirect ( $returnurl );
 }
 if ($create_users > 0) {
-	$cqt->create_test_users ( $create_users, $groupformation->id, $create_answers );
+	$cqt->create_test_users ( $create_users, $groupformation->id, $create_answers, $random_answers );
 	$returnurl = new moodle_url ( '/mod/groupformation/analysis_view.php', array (
 			'id' => $id,
 			'do_show' => 'analysis' 
