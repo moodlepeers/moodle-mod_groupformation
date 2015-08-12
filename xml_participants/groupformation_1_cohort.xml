@@ -1,0 +1,1345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Instance id="2015">
+    <Groups usedMatcher="GroupALGroupCentricMatcher" CohortPerformanceIndex="0.72727272727273" CohortAveragePerformanceIndex="-" CohortNormStDev="-">
+        <Group id="1" groupPerformanceIndex="0.72727272727273" groupAverage="-" normalizedStDev="-">
+            <participant id="36">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="38">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="40">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="42">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="44">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+        </Group>
+        <Group id="2" groupPerformanceIndex="0.72727272727273" groupAverage="-" normalizedStDev="-">
+            <participant id="37">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="39">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="41">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="43">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="45">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+        </Group>
+        <Group id="3" groupPerformanceIndex="0.72727272727273" groupAverage="-" normalizedStDev="-">
+            <participant id="46">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="48">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="50">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="52">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="54">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+        </Group>
+        <Group id="4" groupPerformanceIndex="0.72727272727273" groupAverage="-" normalizedStDev="-">
+            <participant id="47">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="49">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="51">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="53">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="55">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+        </Group>
+        <Group id="5" groupPerformanceIndex="0.72727272727273" groupAverage="-" normalizedStDev="-">
+            <participant id="56">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="58">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="60">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="62">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="64">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+        </Group>
+        <Group id="6" groupPerformanceIndex="0.72727272727273" groupAverage="-" normalizedStDev="-">
+            <participant id="57">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="59">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="61">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="63">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="65">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+        </Group>
+        <Group id="7" groupPerformanceIndex="0.72727272727273" groupAverage="-" normalizedStDev="-">
+            <participant id="66">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="68">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="70">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="72">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="74">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+        </Group>
+        <Group id="8" groupPerformanceIndex="0.72727272727273" groupAverage="-" normalizedStDev="-">
+            <participant id="67">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="69">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="71">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="73">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="75">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+        </Group>
+        <Group id="9" groupPerformanceIndex="0.72727272727273" groupAverage="-" normalizedStDev="-">
+            <participant id="76">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="78">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="80">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="82">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="84">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+        </Group>
+        <Group id="10" groupPerformanceIndex="0.72727272727273" groupAverage="-" normalizedStDev="-">
+            <participant id="77">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="79">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="81">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="83">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="85">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+        </Group>
+        <Group id="11" groupPerformanceIndex="0.72727272727273" groupAverage="-" normalizedStDev="-">
+            <participant id="86">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="88">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="90">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="92">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="94">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+        </Group>
+        <Group id="12" groupPerformanceIndex="0.72727272727273" groupAverage="-" normalizedStDev="-">
+            <participant id="87">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="89">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="91">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="93">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="95">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+        </Group>
+        <Group id="13" groupPerformanceIndex="0.72727272727273" groupAverage="-" normalizedStDev="-">
+            <participant id="96">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="98">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="100">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="102">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="104">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+        </Group>
+        <Group id="14" groupPerformanceIndex="0.72727272727273" groupAverage="-" normalizedStDev="-">
+            <participant id="97">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="99">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="101">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="103">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="105">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+        </Group>
+        <Group id="15" groupPerformanceIndex="0.72727272727273" groupAverage="-" normalizedStDev="-">
+            <participant id="106">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="108">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="110">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="112">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="114">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+        </Group>
+        <Group id="16" groupPerformanceIndex="0.72727272727273" groupAverage="-" normalizedStDev="-">
+            <participant id="107">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="109">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="111">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="113">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="115">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+        </Group>
+        <Group id="17" groupPerformanceIndex="0.72727272727273" groupAverage="-" normalizedStDev="-">
+            <participant id="116">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="118">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="120">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="122">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="124">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+        </Group>
+        <Group id="18" groupPerformanceIndex="0.72727272727273" groupAverage="-" normalizedStDev="-">
+            <participant id="117">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="119">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="121">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="123">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="125">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+        </Group>
+        <Group id="19" groupPerformanceIndex="0.72727272727273" groupAverage="-" normalizedStDev="-">
+            <participant id="126">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="128">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="130">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="132">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+            <participant id="134">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.72222222222222"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="1"/>
+            </participant>
+        </Group>
+        <Group id="20" groupPerformanceIndex="0.72727272727273" groupAverage="-" normalizedStDev="-">
+            <participant id="127">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="129">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="131">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="133">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+            <participant id="135">
+                <Criterion name="grade" isHomogeneous="1" minValue="0" maxValue="1" value0="0.2"/>
+                <Criterion name="big5_heterogen_Extraversion" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Neurotizismus" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_heterogen_Offenheit" isHomogeneous="" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Gewissenhaftigkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.58333333333333"/>
+                <Criterion name="big5_homogen_Vertraeglichkeit" isHomogeneous="1" minValue="0" maxValue="1" value0="0.44444444444444"/>
+                <Criterion name="team" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Herausforderung" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Interesse" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Erfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+                <Criterion name="fam_Misserfolg" isHomogeneous="1" minValue="0" maxValue="1" value0="0.16666666666667"/>
+            </participant>
+        </Group>
+    </Groups>
+</Instance>
