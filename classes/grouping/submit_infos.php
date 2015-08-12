@@ -33,23 +33,53 @@
 		
 		private $groupformationid;
 		private $userid_filter;
+		private $store;
 		
 		public function __construct($groupformationid){
 			$this->groupformationid = $groupformationid;
 			$this->userid_filter = new mod_groupformation_userid_filter($groupformationid);
+			$this->store = new mod_groupformation_storage_manager($groupformationid);
 		}
 
 		public function getInfos(){
-			$numbers = $this->userid_filter->getNumbersOfAnswerStatus();
-			//var_dump('Es haben ' . $numbers[0] . ' Studenten den Fragebogen bearbeitet');
-			//var_dump('Davon haben ' . $numbers[1] . ' ihre Antworten schon fest abgegeben');
-			//$commitedNoneComplete = $this->userid_filter->getNumberOfCommitedNoneCompleted();
-           // var_dump('Von den fest abgegebenen Antworten sind ' . $commitedNoneComplete . ' nicht vollst�ndig');
-			//$generalCompleted = $this->userid_filter->getNumberOfCompleted();
-			//var_dump('Generel gibt es ' . $generalCompleted . ' vollst&auml;ndig beantwortete Frageb�gen');
-            $numbers [2] = $this->userid_filter->getNumberOfCommitedNoneCompleted();
-            $numbers [3] = $this->userid_filter->getNumberOfCompleted();
-            return $numbers;
+			$total_answer_count = $this->store->get_total_number_of_answers();
+			
+			$stats = array();
+			
+			$context = groupformation_get_context($this->groupformationid);
+			$students = get_enrolled_users($context,'mod/groupformation:onlystudent');
+			$student_count = count($students);
+			
+			$stats[] = $student_count;
+			
+			$started = $this->userid_filter->get_started();
+			$started_count = count($started);
+			
+			$stats[] = $started_count;
+			
+			$completed = $this->userid_filter->get_completed();
+			$completed_count = count($completed);
+			
+			$stats[] = $completed_count;
+			
+			$no_missing_answers = array();
+			foreach($started as $userid => $record){
+				if ($record->answer_count == $total_answer_count)
+					$no_missing_answers[]=$userid;
+			}
+			$no_missing_answers_count = count($no_missing_answers);
+			
+			$stats[] = $no_missing_answers_count;
+			
+			$missing_answers = array();
+			foreach($completed as $userid => $record){
+				if ($record->answer_count != $total_answer_count)
+					$missing_answers[]=$userid;
+			}
+			$missing_answers_count = count($missing_answers);
+			$stats[] = $missing_answers_count;
+
+            return $stats;
 		}
 
 

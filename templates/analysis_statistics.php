@@ -11,7 +11,7 @@
 <!--     <div class="col_m_12-5 bp_align_right-middle"><button class="gf_button gf_button_pill gf_button_tiny">view</button></div> -->
 </div>
 <div class="grid row_highlight">
-    <div class="col_m_100">Von den fest abgegebenen Fragebögen sind <b><?php echo $this->_['statistics_submited_incomplete']; ?></b> nicht vollst&auml;ndig.</div>
+	<div class="col_m_100">Von den fest abgegebenen Fragebögen sind <b><?php echo $this->_['statistics_submited_incomplete']; ?></b> nicht vollst&auml;ndig.</div>
 <!--     <div class="col_m_12-5 bp_align_right-middle"><button class="gf_button gf_button_pill gf_button_tiny">view</button></div> -->
 </div>
 <div class="grid row_highlight">

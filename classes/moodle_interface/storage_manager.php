@@ -42,6 +42,20 @@ class mod_groupformation_storage_manager {
 	}
 	
 	/**
+	 * Sets answer counter for user
+	 * 
+	 * @param int $userid
+	 */
+	public function set_answer_count($userid){
+		global $DB;
+		$record = $DB->get_record ( 'groupformation_started', array (
+				'groupformation' => $this->groupformationid, 'userid'=>$userid
+		) );
+		$record->answer_count = $DB->count_records('groupformation_answer',array('groupformation'=>$this->groupformationid,'userid'=>$userid));
+		$DB->update_record('groupformation_started', $record);
+	}
+	
+	/**
 	 * Returns if DB does not contain questions for a specific category
 	 *
 	 * @param string $category        	
@@ -387,7 +401,7 @@ class mod_groupformation_storage_manager {
 	 * @param string $category        	
 	 * @return mixed
 	 */
-	public function getNumber($category) {
+	public function getNumber($category = null) {
 		global $DB;
 		
 		if ($category == 'topic' || $category == 'knowledge') {
@@ -973,5 +987,16 @@ class mod_groupformation_storage_manager {
 		$times = $this->getTime();
 		$condition = $times['end_raw']<time();
 		return (!$this->isQuestionaireAvailable() && $condition);
+	}
+	
+	/**
+	 * Returns the total number of answers
+	 * 
+	 * @return int
+	 */
+	public function get_total_number_of_answers(){
+		$categories = $this->getCategories();
+		$numbers = $this->getNumbers($categories);
+		return array_sum($numbers);
 	}
 }

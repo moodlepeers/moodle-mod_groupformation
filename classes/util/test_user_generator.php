@@ -74,6 +74,7 @@ class mod_groupformation_test_user_generator {
 					$record->groupformation = $groupformationid;
 					$record->userid = $userid;
 					$record->completed = ($setAnswers)?1:0;
+					$record->answer_count = $store->get_total_number_of_answers();
 					$record->timecompleted = ($setAnswers)?time():null;
 					$record->groupid = NULL;
 					$DB->insert_record ( "groupformation_started", $record );

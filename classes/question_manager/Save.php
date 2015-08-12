@@ -65,6 +65,7 @@
                     $this->status = SAVE;
                     $this->store->statusChanged($this->userId);
                 }
+                $this->store->set_answer_count($this->userId);
             }
 		}
 	}

@@ -147,10 +147,10 @@ class mod_groupformation_analysis_controller {
 		$context = $PAGE->context;
 		$count = count ( get_enrolled_users ( $context, 'mod/groupformation:onlystudent' ) );
 		
-		$statisticsAnalysisView->assign ( 'statistics_enrolled', $count );
-		$statisticsAnalysisView->assign ( 'statistics_processed', $questionnaire_StatisticNumbers [0] );
-		$statisticsAnalysisView->assign ( 'statistics_submited', $questionnaire_StatisticNumbers [1] );
-		$statisticsAnalysisView->assign ( 'statistics_submited_incomplete', $questionnaire_StatisticNumbers [2] );
+		$statisticsAnalysisView->assign ( 'statistics_enrolled', $questionnaire_StatisticNumbers [0] );
+		$statisticsAnalysisView->assign ( 'statistics_processed', $questionnaire_StatisticNumbers [1] );
+		$statisticsAnalysisView->assign ( 'statistics_submited', $questionnaire_StatisticNumbers [2] );
+		$statisticsAnalysisView->assign ( 'statistics_submited_incomplete', $questionnaire_StatisticNumbers [4] );
 		$statisticsAnalysisView->assign ( 'statistics_submited_complete', $questionnaire_StatisticNumbers [3] );
 		
 		return $statisticsAnalysisView->loadTemplate ();

@@ -55,6 +55,30 @@
 		$this->total = $this->store->getTotalNumber();
 	}
 	
+	/**
+	 * Returns array of records of table groupformation_started where completed
+	 *
+	 * @return array
+	 */
+	public function get_completed(){
+		global $DB;
+		return $DB->get_records ( 'groupformation_started', array (
+				'groupformation' => $this->groupformationid, 'completed'=>1
+		),'userid');
+	}
+	
+	/**
+	 * Returns array of records of table groupformation_started
+	 * 
+	 * @return array
+	 */
+	public function get_started(){
+		global $DB;
+		return $DB->get_records ( 'groupformation_started', array (
+				'groupformation' => $this->groupformationid
+		),'userid');
+	}
+	
 	public function getScenario(){
 		return $this->store->getScenario();
 	}
