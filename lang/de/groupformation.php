@@ -217,6 +217,7 @@ $string['grouping_delete'] = 'Gruppen l&ouml;schen';
 $string['grouping_adopt'] = 'Gruppe übernehmen';
 $string['grouping_abort'] = 'Gruppenbildung abbrechen';
 $string['moodlegrouping_delete'] = 'Moodle-Gruppen l&ouml;schen';
+$string['questionaire_commited'] = 'Ihre Antworten sind abgegeben. Somit können Sie sie nicht mehr verändern.';
 // $string [''] = '';
 
 
