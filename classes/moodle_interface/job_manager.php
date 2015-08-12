@@ -281,8 +281,11 @@ class mod_groupformation_job_manager {
 	 */
 	public static function do_groupal($job, &$groupal_cohort, &$random_cohort, &$incomplete_cohort) {
 		global $CFG;
+
 		$groupformationid = $job->groupformationid;
-		
+
+		$path = $CFG->dirroot . '/mod/groupformation/xml_participants/'."php_".$groupformationid;
+
 		$store = new mod_groupformation_storage_manager ( $groupformationid );
 		$groupsize = intval ( $store->getGroupSize () );
 		
@@ -332,7 +335,7 @@ class mod_groupformation_job_manager {
 		$groupal_participants = $participants;
 		
 		// TODO XML WRITER : einkommentieren falls benötigt
-		$participant_writer = new participant_writer ($CFG->dirroot . '/mod/groupformation/xml_participants/'."groupformation_".$groupformationid."_participants.xml");
+		$participant_writer = new participant_writer ($path."_participants.xml");
 		$participant_writer->write ( $groupal_participants );
 		
 		// Generate empty participants
@@ -383,8 +386,8 @@ class mod_groupformation_job_manager {
 		// var_dump ( $random_cohort );
 		// var_dump ( $incomplete_cohort );
 
-//		$cohort_writer = new cohort_writer($CFG->dirroot . '/mod/groupformation/xml_participants/'."groupformation_".$groupformationid."_cohort.xml");
-//		$cohort_writer->write($groupal_cohort);
+		$cohort_writer = new cohort_writer($path . $groupformationid."_cohort.xml");
+		$cohort_writer->write($groupal_cohort);
 
 		$cohorts = array (
 				$groupal_cohort,
