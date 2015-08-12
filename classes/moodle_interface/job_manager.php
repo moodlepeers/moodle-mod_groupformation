@@ -42,6 +42,7 @@ require_once ($CFG->dirroot . '/lib/groupal/classes/GroupFormationAlgorithm.php'
 require_once ($CFG->dirroot . '/lib/groupal/classes/GroupFormationRandomAlgorithm.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/Optimizer/GroupALOptimizer.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/ParticipantWriter.php');
+require_once ($CFG->dirroot . '/lib/groupal/classes/CohortWriter.php');
 class mod_groupformation_job_manager {
 	
 	/**
@@ -381,7 +382,10 @@ class mod_groupformation_job_manager {
 		// var_dump ( $groupal_cohort );
 		// var_dump ( $random_cohort );
 		// var_dump ( $incomplete_cohort );
-		
+
+//		$cohort_writer = new cohort_writer($CFG->dirroot . '/mod/groupformation/xml_participants/'."groupformation_".$groupformationid."_cohort.xml");
+//		$cohort_writer->write($groupal_cohort);
+
 		$cohorts = array (
 				$groupal_cohort,
 				$random_cohort,
