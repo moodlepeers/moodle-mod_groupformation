@@ -108,7 +108,6 @@
 
     $controller = new mod_groupformation_student_overview_controller($cm->id, $groupformation->id, $userid);
     echo $controller->display();
-    var_dump($controller->test());
 
     //TODO @Rene || EG delete the following if studen overview works right
 	/*if (has_capability('mod/groupformation:onlystudent', $context)){

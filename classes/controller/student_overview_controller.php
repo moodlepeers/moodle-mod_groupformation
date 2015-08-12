@@ -85,10 +85,6 @@ class mod_groupformation_student_overview_controller {
 
     }
 
-    public function test(){
-        return $this->view_state;
-    }
-
 
     /**
      * set all variable to the current state
