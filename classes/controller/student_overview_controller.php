@@ -36,9 +36,9 @@ class mod_groupformation_student_overview_controller {
 
     private $view_state;
 
-    private $groupformation_state_info;
+    private $groupformation_state_info = array();
     private $buttons_array = array();
-    private $buttons_info_array = array();
+    private $buttons_info;
     private $survey_states_array = array();
     private $groupformation_info;
     private $survey_states_title = '';
@@ -93,8 +93,8 @@ class mod_groupformation_student_overview_controller {
         switch ($this->view_state) {
             case -1 :
                 $this->groupformation_info = mod_groupformation_util::get_info_text_for_student(true, $this->groupformationid);
-                $this->groupformation_state_info = $this->availabilityState();
-                $this->buttons_info_array = array(get_string ( 'questionaire_press_to_begin', 'groupformation' ));
+                $this->groupformation_state_info = array($this->availabilityState());
+                $this->buttons_info = array(get_string ( 'questionaire_press_to_begin', 'groupformation' ));
                 $this->buttons_array = array(
                     array('type' => 'submit',
                         'name' => '',
@@ -107,8 +107,8 @@ class mod_groupformation_student_overview_controller {
 
             case 0:
                 $this->groupformation_info = mod_groupformation_util::get_info_text_for_student(false, $this->groupformationid);
-                $this->groupformation_state_info = $this->availabilityState();
-                $this->buttons_info_array = array( get_string ( 'questionaire_not_submitted', 'groupformation' ), get_string ( 'questionaire_press_continue_submit', 'groupformation' ) );
+                $this->groupformation_state_info = array( $this->availabilityState(), get_string ( 'questionaire_not_submitted', 'groupformation' ));
+                $this->buttons_info = get_string ( 'questionaire_press_continue_submit', 'groupformation' );
 
                 $this->determine_survey_stats();
 
@@ -132,37 +132,37 @@ class mod_groupformation_student_overview_controller {
                 break;
 
             case 1:
-                $this->groupformation_info = mod_groupformation_util::get_info_text_for_student(false, $this->groupformationid);
-                $this->groupformation_state_info = $this->availabilityState();
-                $this->buttons_info_array = array(get_string ( 'questionaire_submitted', 'groupformation' ));
+                $this->groupformation_info = mod_groupformation_util::get_info_text_for_student(true, $this->groupformationid);
+                $this->groupformation_state_info = array( $this->availabilityState(), get_string ( 'questionaire_submitted', 'groupformation' ));
+                $this->buttons_info = '';
                 $this->buttons_array = array();
                 break;
 
             case 2:
                 $this->groupformation_info = mod_groupformation_util::get_info_text_for_student(false, $this->groupformationid);
-                $this->groupformation_state_info = 'Gruppen sind gebildet';
-                $this->buttons_info_array = array();
+                $this->groupformation_state_info = array('Gruppen sind gebildet');
+                $this->buttons_info = '';
                 $this->buttons_array = array();
                 break;
 
             case 3:
                 $this->groupformation_info = mod_groupformation_util::get_info_text_for_student(false, $this->groupformationid);
-                $this->groupformation_state_info = 'This activity is not accessible for you';
-                $this->buttons_info_array = array();
+                $this->groupformation_state_info = array('This activity is not accessible for you');
+                $this->buttons_info = '';
                 $this->buttons_array = array();
                 break;
 
             case 4;
-                $this->groupformation_info = mod_groupformation_util::get_info_text_for_student(false, $this->groupformationid);
-                $this->groupformation_state_info = $this->availabilityState();
-                $this->buttons_info_array = array();
+                $this->groupformation_info = mod_groupformation_util::get_info_text_for_student(true, $this->groupformationid);
+                $this->groupformation_state_info = array($this->availabilityState());
+                $this->buttons_info = '';
                 $this->buttons_array = array();
 
                 break;
 
             default:
-                $this->groupformation_state_info = 'invalid status';
-                $this->buttons_info_array = array();
+                $this->groupformation_state_info = array('invalid status');
+                $this->buttons_info = '';
                 $this->buttons_array = array();
                 break;
         }
@@ -283,7 +283,7 @@ class mod_groupformation_student_overview_controller {
 
         $this->view->assign('cmid', $this->cmid);
         $this->view->assign('buttons', $this->buttons_array);
-        $this->view->assign('buttons_infos', $this->buttons_info_array);
+        $this->view->assign('buttons_infos', $this->buttons_info);
 
 
         return $this->view->loadTemplate ();
