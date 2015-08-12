@@ -169,6 +169,12 @@ function groupformation_determine_instance($id, &$cm, &$course, &$groupformation
 	}
 }
 
+/**
+ * Returns context for groupformation id
+ * 
+ * @param int $groupformationid
+ * @return context_course
+ */
 function groupformation_get_context($groupformationid){
 	$store = new mod_groupformation_storage_manager($groupformationid);
 	
@@ -177,4 +183,15 @@ function groupformation_get_context($groupformationid){
 	$context = context_course::instance ( $courseid );
 	
 	return $context;
+}
+
+/**
+ * 
+ * @param stdClass $course
+ * @param stdClass $cm
+ * @param int $userid
+ */
+function groupformation_set_activity_completion($course,$cm,$userid){
+	$completion = new completion_info ( $course );
+	$completion->set_module_viewed ( $cm, $userid );
 }
