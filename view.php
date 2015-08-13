@@ -67,9 +67,6 @@
 		groupformation_set_activity_completion($course, $cm, $userid);
 	}	
 	
-	// Trigger event TODO @Nora why?
-	groupformation_trigger_event($cm,$course,$groupformation,$context);
-
 	// Set PAGE config
 	$PAGE->set_url('/mod/groupformation/view.php', array('id' => $cm->id, 'do_show' => $do_show));
 	$PAGE->set_title(format_string($groupformation->name));
@@ -108,38 +105,6 @@
 
     $controller = new mod_groupformation_student_overview_controller($cm->id, $groupformation->id, $userid);
     echo $controller->display();
-
-    //TODO @Rene || EG delete the following if studen overview works right
-	/*if (has_capability('mod/groupformation:onlystudent', $context)){
-		$isBuild = $groups_store->is_build();
-		if($isBuild){
-			$info->__groupsAvailable();
-		}else{
-	 		if ($store->isQuestionaireAvailable()){	
-				$status = $store->answeringStatus($userid);
-				if($status ==  -1){
-					echo mod_groupformation_util::get_info_text_for_student(true,$groupformation->id);
-					$info->__printAvailabilityInfo();
-	 				$info->__printStatusA();
-	 			}
-	 			if($status == 0){
-					echo mod_groupformation_util::get_info_text_for_student(false,$groupformation->id);
-					$info->__printAvailabilityInfo();
-	 				$info->__printStatusB();
-	 			}
-	 			if($status == 1){
-					echo mod_groupformation_util::get_info_text_for_student(false,$groupformation->id);
-	 				$info->__printAvailabilityInfo();
-	 				$info->__printStatusC();
-	 			}
-	 		}else{
-	 			echo mod_groupformation_util::get_info_text_for_student(true,$groupformation->id);
-	 			$info->__printAvailabilityInfo(false);
-	 		}
-		}
-	}else{
-		print_error('This activity is not accessible for you');
-	}*/
 	
 	echo $OUTPUT->footer();
 	

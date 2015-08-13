@@ -470,7 +470,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
                         </select>
 						<span id="max_points_wrapper"><input type="number" id="max_points"  min="0" max="100" value="100" /><span class="toolt" tooltip="' . get_string ( 'evaluation_point_info', 'groupformation' ) . '"></span></span>
                     </div>
-                ' ); // TODO @Rene: lang File für tooltip "Maximale Punktzahl" (siehe Zeile oben)
+                ' );
 		     
 		// close wrapper for evaluation options
 		$mform->addElement ( 'html', '</div>' );

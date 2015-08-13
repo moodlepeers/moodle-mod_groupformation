@@ -282,18 +282,10 @@ function groupformation_print_recent_mod_activity($activity, $courseid, $detail,
  * This function searches for things that need to be done, such
  * as sending out mail, toggling flags etc .
  *
- *
- *
- * ..
- *
  * @return boolean
- * @todo Finish documenting this function
- *      
  */
 function groupformation_cron() {
-	
-	// not used so far
-	
+
 	return true;
 }
 
@@ -615,9 +607,9 @@ function groupformation_save_more_infos($groupformation, $init) {
 				}
 			}
 		} else {
-			// TODO @ALL Wenn man die Fragen �ndert, �ndern sie sich auch in den alten groupformation Instanzen
-			// da gibt es dann unter umst�nden konsistenzprobleme
-			// da m�ssen wir nochmal dr�ber reden
+			// TODO Wenn man die Fragen ändert, ändern sich auch in den alten groupformation-Instanzen
+			// Da gibt es dann unter Umständen Konsistenzprobleme
+			// Da müssen wir nochmal drüber sprechen
 			foreach ( $names as $category ) {
 				if ($category != 'topic' && $category != 'knowledge') {
 					$xmlLoader->latestVersion ( $category );

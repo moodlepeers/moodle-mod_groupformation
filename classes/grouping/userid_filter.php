@@ -21,7 +21,7 @@
  * @author Nora Wester
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-	//TODO noch nicht getestet
+
 //defined('MOODLE_INTERNAL') || die();  -> template
 //namespace mod_groupformation\classes\lecturer_settings;
 

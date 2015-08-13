@@ -22,7 +22,6 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-	//TODO Noch nicht getestet
 	require_once(dirname(__FILE__).'/userid_filter.php');
 
 	if (!defined('MOODLE_INTERNAL')) {
