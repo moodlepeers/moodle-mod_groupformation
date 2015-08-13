@@ -386,7 +386,7 @@ class mod_groupformation_job_manager {
 		// var_dump ( $random_cohort );
 		// var_dump ( $incomplete_cohort );
 
-		$cohort_writer = new cohort_writer($path . $groupformationid."_cohort.xml");
+		$cohort_writer = new cohort_writer($path."_cohort.xml");
 		$cohort_writer->write($groupal_cohort);
 
 		$cohorts = array (

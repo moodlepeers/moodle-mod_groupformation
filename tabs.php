@@ -86,8 +86,11 @@ if (has_capability ( 'mod/groupformation:editsettings', $context )) {
 		$row [] = new tabobject ( 'answering', $questionaire_viewiewurl->out (), get_string ( 'tab_questionaire', 'groupformation' ) );
 	}
 	
-	// If student completed the questionaire
-	if ($store->isQuestionaireCompleted ( $userid ) || $groups_store->groups_created()) {
+	// always if student meets conditions
+	// || $store->isQuestionaireCompleted ( $userid ) || $groups_store->groups_created()) {
+	
+	if (true){ 
+		
 		// evaluation view -> later TODO
 		// $evaluationurl = new moodle_url ( '/mod/groupformation/evaluation_view.php', array (
 		// 'id' => $usedid,

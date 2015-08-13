@@ -133,7 +133,7 @@ class mod_groupformation_student_overview_controller {
 
             case 1:         // Questionaire is submitted
                 $this->groupformation_info = mod_groupformation_util::get_info_text_for_student(true, $this->groupformationid);
-                $this->groupformation_state_info = array( $this->availabilityState(), get_string ( 'questionaire_submitted', 'groupformation' ));
+                $this->groupformation_state_info = array(get_string ( 'questionaire_submitted', 'groupformation' ));
                 $this->buttons_info = '';
                 $this->buttons_array = array();
                 break;
@@ -147,7 +147,7 @@ class mod_groupformation_student_overview_controller {
 
             case 3:         // The activity is not accessible for the student/teacher
                 $this->groupformation_info = mod_groupformation_util::get_info_text_for_student(false, $this->groupformationid);
-                $this->groupformation_state_info = array('This activity is not accessible for you');
+                $this->groupformation_state_info = array('Die Aktivität ist für dich nicht einsehbar.');
                 $this->buttons_info = '';
                 $this->buttons_array = array();
                 break;
