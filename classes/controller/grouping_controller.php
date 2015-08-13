@@ -167,12 +167,12 @@ class mod_groupformation_grouping_controller {
 	 */
 	public function display() {
 		$this->determine_status ();
-		$this->view->setTemplate ( 'wrapper_groupingView' );
-		$this->view->assign ( 'groupingView_Title', $this->store->getName () );
-		$this->view->assign ( 'groupingView_settings', $this->load_settings () );
-		$this->view->assign ( 'groupingView_statistic', $this->load_statistics () );
-		$this->view->assign ( 'groupingView_incompleteGroups', $this->load_incomplete_groups () );
-		$this->view->assign ( 'groupingView_generatedGroups', $this->load_generated_groups () );
+		$this->view->setTemplate ( 'wrapper_grouping' );
+		$this->view->assign ( 'grouping_title', $this->store->getName () );
+		$this->view->assign ( 'grouping_settings', $this->load_settings () );
+		$this->view->assign ( 'grouping_statistics', $this->load_statistics () );
+		$this->view->assign ( 'grouping_incomplete_groups', $this->load_incomplete_groups () );
+		$this->view->assign ( 'grouping_generated_groups', $this->load_generated_groups () );
 		return $this->view->loadTemplate ();
 	}
 	
@@ -184,7 +184,7 @@ class mod_groupformation_grouping_controller {
 	private function load_settings() {
 		global $PAGE;
 		$settingsGroupsView = new mod_groupformation_template_builder ();
-		$settingsGroupsView->setTemplate ( 'groupingView_settings' );
+		$settingsGroupsView->setTemplate ( 'grouping_settings' );
 		
 		switch ($this->view_state) {
 			case 0 :
@@ -403,14 +403,14 @@ class mod_groupformation_grouping_controller {
 		
 		if ($this->view_state == 4 || $this->view_state == 5) {
 			
-			$statisticsView->setTemplate ( 'groupingView_statistics' );
+			$statisticsView->setTemplate ( 'grouping_statistics' );
 			
 			$statisticsView->assign ( 'performance', $this->job->performance_index );
 			$statisticsView->assign ( 'numbOfGroups', count ( $this->groups_store->get_generated_groups () ) );
 			$statisticsView->assign ( 'maxSize', $this->store->getGroupSize () );
 		} else {
-			$statisticsView->setTemplate ( 'groupingView_noData' );
-			$statisticsView->assign ( 'groupingView_noData', get_string('no_data_to_display','groupformation') );
+			$statisticsView->setTemplate ( 'grouping_no_data' );
+			$statisticsView->assign ( 'grouping_no_data', get_string('no_data_to_display','groupformation') );
 		}
 		return $statisticsView->loadTemplate ();
 	}
@@ -426,7 +426,7 @@ class mod_groupformation_grouping_controller {
 		if ($this->view_state == 4 || $this->view_state == 5) {
 			$this->set_incomplete_groups ();
 			
-			$incompleteGroupsView->setTemplate ( 'groupingView_incompleteGroups' );
+			$incompleteGroupsView->setTemplate ( 'grouping_incomplete_groups' );
 			
 			foreach ( $this->incomplete_groups as $key => $value ) {
 				
@@ -438,8 +438,8 @@ class mod_groupformation_grouping_controller {
 				) );
 			}
 		} else {
-			$incompleteGroupsView->setTemplate ( 'groupingView_noData' );
-			$incompleteGroupsView->assign ( 'groupingView_noData', get_string('no_data_to_display','groupformation') );
+			$incompleteGroupsView->setTemplate ( 'grouping_no_data' );
+			$incompleteGroupsView->assign ( 'grouping_no_data', get_string('no_data_to_display','groupformation') );
 		}
 		return $incompleteGroupsView->loadTemplate ();
 	}
@@ -482,7 +482,7 @@ class mod_groupformation_grouping_controller {
 		
 		if ($this->view_state == 4 || $this->view_state == 5) {
 			
-			$generatedGroupsView->setTemplate ( 'groupingView_generatedGroups' );
+			$generatedGroupsView->setTemplate ( 'grouping_generated_groups' );
 			
 			foreach ( $this->groups as $key => $value ) {
 				
@@ -496,8 +496,8 @@ class mod_groupformation_grouping_controller {
 				) );
 			}
 		} else {
-			$generatedGroupsView->setTemplate ( 'groupingView_noData' );
-			$generatedGroupsView->assign ( 'groupingView_noData', get_string('no_data_to_display','groupformation') );
+			$generatedGroupsView->setTemplate ( 'grouping_no_data' );
+			$generatedGroupsView->assign ( 'grouping_no_data', get_string('no_data_to_display','groupformation') );
 		}
 		return $generatedGroupsView->loadTemplate ();
 	}
