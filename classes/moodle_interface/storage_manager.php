@@ -518,7 +518,7 @@ class mod_groupformation_storage_manager {
 		if ($status == 0) {
 			$this->setCompleted ( $userId, true );
 			// TODO Mathevorkurs
-			$this->gm->assign_to_group_AB( $userid);
+			$this->gm->assign_to_group_AB( $userId);
 		}
 	}
 	

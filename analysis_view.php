@@ -151,7 +151,7 @@ if (! is_null ( $job )) {
 }
 // -----------------------------------------------
 
-echo '<div style="color:red;">Diese Seite ist soweit fertig; Rückmeldung, wenn es etwas fehlt oder unverständlich ist, wäre super.</div>';
+// echo '<div style="color:red;">Diese Seite ist soweit fertig; Rückmeldung, wenn es etwas fehlt oder unverständlich ist, wäre super.</div>';
 
 // TODO : form in das template packen?
 echo '<form action="' . htmlspecialchars ( $_SERVER ["PHP_SELF"] ) . '" method="post" autocomplete="off">';

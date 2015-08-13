@@ -410,7 +410,7 @@ class mod_groupformation_grouping_controller {
 			$statisticsView->assign ( 'maxSize', $this->store->getGroupSize () );
 		} else {
 			$statisticsView->setTemplate ( 'groupingView_noData' );
-			$statisticsView->assign ( 'groupingView_noData', 'keine Daten vorhanden' );
+			$statisticsView->assign ( 'groupingView_noData', get_string('no_data_to_display','groupformation') );
 		}
 		return $statisticsView->loadTemplate ();
 	}
@@ -439,7 +439,7 @@ class mod_groupformation_grouping_controller {
 			}
 		} else {
 			$incompleteGroupsView->setTemplate ( 'groupingView_noData' );
-			$incompleteGroupsView->assign ( 'groupingView_noData', 'keine Daten vorhanden' );
+			$incompleteGroupsView->assign ( 'groupingView_noData', get_string('no_data_to_display','groupformation') );
 		}
 		return $incompleteGroupsView->loadTemplate ();
 	}
@@ -498,7 +498,7 @@ class mod_groupformation_grouping_controller {
 			}
 		} else {
 			$generatedGroupsView->setTemplate ( 'groupingView_noData' );
-			$generatedGroupsView->assign ( 'groupingView_noData', 'keine Daten vorhanden' );
+			$generatedGroupsView->assign ( 'groupingView_noData', get_string('no_data_to_display','groupformation') );
 		}
 		return $generatedGroupsView->loadTemplate ();
 	}
