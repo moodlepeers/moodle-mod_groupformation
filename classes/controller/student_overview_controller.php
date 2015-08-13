@@ -94,7 +94,7 @@ class mod_groupformation_student_overview_controller {
             case -1 :
                 $this->groupformation_info = mod_groupformation_util::get_info_text_for_student(true, $this->groupformationid);
                 $this->groupformation_state_info = array($this->availabilityState());
-                $this->buttons_info = array(get_string ( 'questionaire_press_to_begin', 'groupformation' ));
+                $this->buttons_info = get_string ( 'questionaire_press_to_begin', 'groupformation' );
                 $this->buttons_array = array(
                     array('type' => 'submit',
                         'name' => '',
