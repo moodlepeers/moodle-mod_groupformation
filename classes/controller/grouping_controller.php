@@ -402,7 +402,7 @@ class mod_groupformation_grouping_controller {
 		$statisticsView = new mod_groupformation_template_builder ();
 		
 		if ($this->view_state == 4 || $this->view_state == 5) {
-			// TODO get statistics
+			
 			$statisticsView->setTemplate ( 'groupingView_statistics' );
 			
 			$statisticsView->assign ( 'performance', $this->job->performance_index );
@@ -452,7 +452,6 @@ class mod_groupformation_grouping_controller {
 	 * @return string
 	 */
 	private function get_scroll_to_link($groupID) {
-		// TODO function to scroll not implemented; return placeholder
 		return '#' . $groupID;
 	}
 	

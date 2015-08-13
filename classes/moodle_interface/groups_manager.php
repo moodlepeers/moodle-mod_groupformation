@@ -180,8 +180,6 @@ class mod_groupformation_groups_manager {
 	
 	/**
 	 * Returns whether user has a group or not
-	 * TODO @Nora - return only true/false and optional query param 
-	 * to ask if in moodle created or just in groupal generated
 	 *
 	 * @param int $userid        	
 	 * @return boolean

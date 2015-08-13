@@ -53,9 +53,6 @@
 	
 	// Log access to page
 	groupformation_info($USER->id,$groupformation->id,'<view_student_evaluation>');
-	
-	// Trigger event TODO @Nora why?
-	groupformation_trigger_event($cm, $course, $groupformation, $context);
 
 	// Set PAGE config
 	$PAGE->set_url ( '/mod/groupformation/evaluation_view.php', array ('id' => $cm->id, 'do_show' => $do_show ) );

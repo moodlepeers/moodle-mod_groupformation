@@ -377,29 +377,6 @@
 			}
 		}
 		
-// 		private function getNextCategory(){
-// 			if($this->scenario == 'project'){
-// 				if($this->currentCategoryPostiton == $this->LEARNING){
-// 					$this->currentCategoryPosition++;
-// 				}
-// 			}
-			
-// 			if($this->scenario == 'homework'){
-// 				if($this->currentCategoryPostiton == $this->MOTIVATION){
-// 					$this->currentCategoryPosition++;
-// 				}
-// 			}
-			
-// 			//TODO das ist die eigentliche Abfrage; nur solange bis die anderen Datenbanken voll sind
-// // 			if($this->currentCategoryPosition == 6 || $this->scenario == 'presentation'){
-// // 				$this->currentCategoryPosition = -1;
-// // 			}
-
-// 			if($this->currentCategoryPosition == 7 || $this->scenario == 'presentation'){
-// 				$this->currentCategoryPosition = -1;
-//  			}
-// 		}
-		
 		public function questionsToAnswer(){
 			return $this->store->answeringStatus($this->userId) != 1;
 		}

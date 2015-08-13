@@ -67,9 +67,6 @@
 		groupformation_set_activity_completion($course, $cm, $userid);
 	}	
 	
-	// Trigger event TODO @Nora why?
-	groupformation_trigger_event($cm,$course,$groupformation,$context);
-
 	// Set PAGE config
 	$PAGE->set_url('/mod/groupformation/view.php', array('id' => $cm->id, 'do_show' => $do_show));
 	$PAGE->set_title(format_string($groupformation->name));
