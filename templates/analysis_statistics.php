@@ -1,5 +1,5 @@
 <div class="grid row_highlight">
-    <div class="col_m_100">Es gibt <b><?php echo $this->_['statistics_enrolled']; ?></b> <?php echo ($this->_['statistics_enrolled']==1)?"eingeschriebenen Studierenden, der":"eingeschriebene Studierende, die";?> den Fragebogen ausfüllen können.</div>
+    <div class="col_m_100">Es gibt <b><?php echo $this->_['statistics_enrolled']; ?></b> <?php echo ($this->_['statistics_enrolled']==1)?"eingeschriebenen Studierenden, der":"eingeschriebene Studierende, die";?> den Fragebogen ausfüllen <?php echo ($this->_['statistics_enrolled']==1)?"kann":"können";?>.</div>
 <!--     <div class="col_m_12-5 bp_align_right-middle"><button class="gf_button gf_button_pill gf_button_tiny">view</button></div> -->
 </div>
 <div class="grid row_highlight">

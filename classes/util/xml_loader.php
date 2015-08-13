@@ -39,14 +39,14 @@
 				
 		}
 		
-		// damit die Klasse die groupformationId nicht wissen muss, übergebe den kompletten storage_manager wenn du mir den Fragenkatalogen arbeitest
+		// damit die Klasse die groupformationId nicht wissen muss, ï¿½bergebe den kompletten storage_manager wenn du mir den Fragenkatalogen arbeitest
 		public function setStore(mod_groupformation_storage_manager $store){
 			$this->storeM = $store;
 		}
 		
 		// bereitet das speichern der Daten aus einem bestimmten xml-Satz ( defineirt durch Kategorie ) vor
-		// wenn schon etwas in der Datenbank zu dieser Kategorie enthalten ist, lösche alle Einträge
-		// ansonsten speicher die Daten für englisch und deutsch und gebe die jeweiligen Versionsnummern und Fragenanzahl als array in einem array zurück  
+		// wenn schon etwas in der Datenbank zu dieser Kategorie enthalten ist, lï¿½sche alle Eintrï¿½ge
+		// ansonsten speicher die Daten fï¿½r englisch und deutsch und gebe die jeweiligen Versionsnummern und Fragenanzahl als array in einem array zurï¿½ck  
 		public function saveData($category){
 			$array = array();
 			$init = $this->storeM->catalogTableNotSet($category);
@@ -59,12 +59,12 @@
 			return $array;
 		}
 		
-		//Überprüft, ob die Versionsnummern im xml und der Datenbank übereinstimmen
+		//ï¿½berprï¿½ft, ob die Versionsnummern im xml und der Datenbank ï¿½bereinstimmen
 		//wenn nicht, wird die Datenbank erneuert
 		public function latestVersion($category){
 			global $CFG;
 			
-			//hier müsste man später noch die Versionsnummern von allen Sprachdateien überprüfen
+			//hier mï¿½sste man spï¿½ter noch die Versionsnummern von allen Sprachdateien ï¿½berprï¿½fen
 			$xmlFile = $CFG->dirroot.'/mod/groupformation/xml_question/question_de_'.$category.'.xml';
 				
 			if (file_exists($xmlFile)) {
@@ -84,12 +84,12 @@
 					$this->storeM->add_catalog_version($category, $number, $version, FALSE);
 				}
 			}else{
-				exit("Datei $xmlFile kann nicht geöffnet werden.");
+				exit("Datei $xmlFile kann nicht geï¿½ffnet werden.");
 			}
 		}
 		
 		/**
-		 * gibt ein array zurück, wo auf Position 0 die version und auf Position 1 die Anzahl der Fragen zu finden ist
+		 * gibt ein array zurï¿½ck, wo auf Position 0 die version und auf Position 1 die Anzahl der Fragen zu finden ist
 		 * @param unknown $category welche Kategory
 		 * @param unknown $german bool ob deutsch oder nicht 
 		 */
@@ -130,14 +130,14 @@
 				return $return;
 			
 			} else {
-				exit("Datei $xmlFile kann nicht geöffnet werden.");
+				exit("Datei $xmlFile kann nicht geï¿½ffnet werden.");
 			}
 			
 		}
 		
 		// wandle den xml String aus der Datenbank (Feld options) in ein array
 		public function xmlToArray($xmlContent){
-			//var_dump($xmlContent);
+			var_dump($xmlContent);
 			//$xml = simplexml_load_file($xmlContent);
 			$xml = simplexml_load_string($xmlContent);
 			$optionArray = array();
