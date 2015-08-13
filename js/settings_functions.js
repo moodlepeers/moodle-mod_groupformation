@@ -73,9 +73,9 @@ $(document).ready(function() {
         $('#js-content').find('input, button, select').prop('disabled', true);
 
         if($('#id_topics').attr('checked', 'checked')){
-            $('#js-content').find('#group_opt_size, #group_size, #group_size').prop('disabled', false);
+            $('#js-content').find('#group_opt_size, #group_size, #group_opt_numb').removeAttr('disabled');
         }else{
-            $('#js-content').find('#group_size, #group_size, #group_opt_numb, #numb_of_groups').prop('disabled', false);
+            $('#js-content').find('#group_size, #group_size, #group_opt_numb, #numb_of_groups').removeAttr('disabled');
         }
         
         $("select[id*='id_timeopen']").prop('disabled', true);
