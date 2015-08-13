@@ -26,11 +26,14 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 	die ( 'Direct access to this script is forbidden.' ); // / It must be included from a Moodle page
 }
 
+require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 require_once ($CFG->dirroot . '/group/lib.php');
+
 class mod_groupformation_storage_manager {
 	private $groupformationid;
 	private $data;
+	private $gm;
 	/**
 	 * Constructs storage manager for a specific groupformation
 	 *
@@ -39,6 +42,7 @@ class mod_groupformation_storage_manager {
 	public function __construct($groupformationid) {
 		$this->groupformationid = $groupformationid;
 		$this->data = new mod_groupformation_data();
+		$this->gm = new mod_groupformation_groups_manager($groupformationid);
 	}
 	
 	/**
@@ -514,7 +518,7 @@ class mod_groupformation_storage_manager {
 		if ($status == 0) {
 			$this->setCompleted ( $userId, true );
 			// TODO Mathevorkurs
-			$this->assign_to_group_AB ( $userId );
+			$this->gm->assign_to_group_AB( $userid);
 		}
 	}
 	

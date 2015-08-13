@@ -264,4 +264,81 @@ class mod_groupformation_groups_manager {
 		$DB->delete_records('groupformation_groups',array('groupformation'=>$this->groupformationid));
 		$DB->delete_records('groupformation_group_users',array('groupformation'=>$this->groupformationid));
 	}
+	
+	/**
+	 * Assigns user to group A or group B (creates those if they do not exist)
+	 *
+	 * @param int $userid
+	 */
+	public function assign_to_group_AB($userid) {
+		global $DB, $COURSE;
+		$completed = 1;
+	
+		if (! $DB->record_exists ( 'groups', array (
+				'courseid' => $COURSE->id,
+				'name' => 'Gruppe A'
+		) )) {
+			$record = new stdClass ();
+			$record->courseid = $COURSE->id;
+			$record->name = "Gruppe A";
+			$record->timecreated = time ();
+				
+			$a = groups_create_group ( $record );
+		}
+		if (! $DB->record_exists ( 'groups', array (
+				'courseid' => $COURSE->id,
+				'name' => 'Gruppe B'
+		) )) {
+			$record = new stdClass ();
+			$record->courseid = $COURSE->id;
+			$record->name = "Gruppe B";
+			$record->timecreated = time ();
+				
+			$b = groups_create_group ( $record );
+		}
+	
+		$records = $DB->get_records ( 'groupformation_started', array (
+				'groupformation' => $this->groupformationid,
+				'completed' => $completed
+		), 'timecompleted', 'id, userid, timecompleted' );
+	
+		if (count ( $records ) > 0) {
+			$i = 0;
+			foreach ( $records as $id => $record ) {
+				if ($record->userid == $userid) {
+					break;
+				}
+				$i ++;
+			}
+				
+			$a = $DB->get_field ( 'groups', 'id', array (
+					'courseid' => $COURSE->id,
+					'name' => 'Gruppe A'
+			) );
+			$b = $DB->get_field ( 'groups', 'id', array (
+					'courseid' => $COURSE->id,
+					'name' => 'Gruppe B'
+			) );
+				
+			if ($i % 2 == 0) {
+				// sort to group A
+				groups_add_member ( $a, $userid );
+				$DB->set_field ( 'groupformation_started', 'groupid', $a, array (
+						'groupformation' => $this->groupformationid,
+						'completed' => $completed,
+						'userid' => $userid
+				) );
+			}
+				
+			if ($i % 2 == 1) {
+				// sort to group B
+				groups_add_member ( $b, $userid );
+				$DB->set_field ( 'groupformation_started', 'groupid', $b, array (
+						'groupformation' => $this->groupformationid,
+						'completed' => $completed,
+						'userid' => $userid
+				) );
+			}
+		}
+	}
 }
