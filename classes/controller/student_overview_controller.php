@@ -91,7 +91,7 @@ class mod_groupformation_student_overview_controller {
      */
     private function determine_view(){
         switch ($this->view_state) {
-            case -1 :
+            case -1 :       // Questionaire is available but not started yet
                 $this->groupformation_info = mod_groupformation_util::get_info_text_for_student(true, $this->groupformationid);
                 $this->groupformation_state_info = array($this->availabilityState());
                 $this->buttons_info = get_string ( 'questionaire_press_to_begin', 'groupformation' );
@@ -105,7 +105,7 @@ class mod_groupformation_student_overview_controller {
                 );
                 break;
 
-            case 0:
+            case 0:         // Questionaire is available, started, not finished and not submited
                 $this->groupformation_info = mod_groupformation_util::get_info_text_for_student(false, $this->groupformationid);
                 $this->groupformation_state_info = array( $this->availabilityState(), get_string ( 'questionaire_not_submitted', 'groupformation' ));
                 $this->buttons_info = get_string ( 'questionaire_press_continue_submit', 'groupformation' );
@@ -131,28 +131,28 @@ class mod_groupformation_student_overview_controller {
                 );
                 break;
 
-            case 1:
+            case 1:         // Questionaire is submitted
                 $this->groupformation_info = mod_groupformation_util::get_info_text_for_student(true, $this->groupformationid);
                 $this->groupformation_state_info = array( $this->availabilityState(), get_string ( 'questionaire_submitted', 'groupformation' ));
                 $this->buttons_info = '';
                 $this->buttons_array = array();
                 break;
 
-            case 2:
+            case 2:         // Groups are built
                 $this->groupformation_info = mod_groupformation_util::get_info_text_for_student(false, $this->groupformationid);
                 $this->groupformation_state_info = array('Gruppen sind gebildet');
                 $this->buttons_info = '';
                 $this->buttons_array = array();
                 break;
 
-            case 3:
+            case 3:         // The activity is not accessible for the student/teacher
                 $this->groupformation_info = mod_groupformation_util::get_info_text_for_student(false, $this->groupformationid);
                 $this->groupformation_state_info = array('This activity is not accessible for you');
                 $this->buttons_info = '';
                 $this->buttons_array = array();
                 break;
 
-            case 4;
+            case 4;         // The Questionaire is not available, but groups are not build yet
                 $this->groupformation_info = mod_groupformation_util::get_info_text_for_student(true, $this->groupformationid);
                 $this->groupformation_state_info = array($this->availabilityState());
                 $this->buttons_info = '';
