@@ -137,7 +137,7 @@
 		
 		// wandle den xml String aus der Datenbank (Feld options) in ein array
 		public function xmlToArray($xmlContent){
-			var_dump($xmlContent);
+// 			var_dump($xmlContent);
 			//$xml = simplexml_load_file($xmlContent);
 			$xml = simplexml_load_string($xmlContent);
 			$optionArray = array();
