@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION VERSION="201502" COMMENT="">
-     <QUESTIONS VERSION="1">
+     <QUESTIONS VERSION="2">
 		 <QUESTION TYPE="radio">
                <QUESTIONTEXT>
                     <![CDATA[Meine Arbeit stellt mich vor allem dann zufrieden, wenn ich nicht auf die Unterstützung anderer angewiesen bin.]]>
@@ -471,7 +471,7 @@
           
           <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich mag es, wenn Teammitglieder selbständig, anstatt gemeinsam mit den anderen die ganze Zeit.]]>
+                    <![CDATA[Ich mag es, wenn Teammitglieder selbständig arbeiten, anstatt die ganze Zeit im Team zu arbeiten.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -601,7 +601,7 @@
 
 		  <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Die Belohnung eines Mitarbeiters sollte vor allem auf der Leistung seiner Arbeitsgruppeen basieren.]]>
+                    <![CDATA[Die Belohnung eines Mitarbeiters sollte vor allem auf der Leistung seiner Arbeitsgruppen basieren.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>

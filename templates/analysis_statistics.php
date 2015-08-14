@@ -7,7 +7,7 @@
 <!--     <div class="col_m_12-5 bp_align_right-middle"><button class="gf_button gf_button_pill gf_button_tiny">view</button></div> -->
 </div>
 <div class="grid row_highlight">
-    <div class="col_m_100">Davon haben <b><?php echo $this->_['statistics_submited']; ?></b> ihre Antworten schon entgültig abgegeben.</div>
+    <div class="col_m_100">Davon haben <b><?php echo $this->_['statistics_submited']; ?></b> ihre Antworten schon endgültig abgegeben.</div>
 <!--     <div class="col_m_12-5 bp_align_right-middle"><button class="gf_button gf_button_pill gf_button_tiny">view</button></div> -->
 </div>
 <div class="grid row_highlight">

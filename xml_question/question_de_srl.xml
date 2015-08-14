@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION VERSION="200701" COMMENT="">
-     <QUESTIONS VERSION="2">			
+     <QUESTIONS VERSION="3">			
           <QUESTION TYPE="radio">
                <QUESTIONTEXT>
                     <![CDATA[Ich vergegenwärtige mir öfters am Tag, was ich noch alles tun will.]]>
@@ -107,7 +107,7 @@
           
           <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich setze mir feste Zeitpunkte, zu denen ich miene Ziele erreichen will.]]>
+                    <![CDATA[Ich setze mir feste Zeitpunkte, zu denen ich meine Ziele erreichen will.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -444,7 +444,7 @@
           
           <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Vor dem Lernen schalte ich Telefon, Handy und Kommunikationssoftware wie Emails oder Chatprogramme aus.]]>
+                    <![CDATA[Vor dem Lernen schalte ich Telefon, Handy und Kommunikationssoftware wie E-Mails oder Chatprogramme aus.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -1195,7 +1195,7 @@
           
           <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Am Ende des tages frage ich mich, ob ich zufrieden bin mit meiner Leistung.]]>
+                    <![CDATA[Am Ende des Tages frage ich mich, ob ich zufrieden bin mit meiner Leistung.]]>
                </QUESTIONTEXT>
               <OPTIONS>
                     <OPTION>
@@ -1480,7 +1480,7 @@
           
           <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Ich denke an frühere Erfolge zurück, um mein Selbstbewußtsein zu stärken.]]>
+                    <![CDATA[Ich denke an frühere Erfolge zurück, um mein Selbstbewusstsein zu stärken.]]>
                </QUESTIONTEXT>
               <OPTIONS>
                     <OPTION>

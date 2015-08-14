@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION VERSION="200701" COMMENT="">
-     <QUESTIONS VERSION="2">			
+     <QUESTIONS VERSION="3">			
           <QUESTION TYPE="radio">
                <QUESTIONTEXT>
                     <![CDATA[Im Studium geht es mir darum, neue Ideen zu bekommen.]]>
@@ -668,7 +668,7 @@
           
 		 <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Im Studium geht es mir darum, nicht zu zeigen, wenn mir eine aufgabe schwerer fällt als den anderen.]]>
+                    <![CDATA[Im Studium geht es mir darum, nicht zu zeigen, wenn mir eine Aufgabe schwerer fällt als den anderen.]]>
                </QUESTIONTEXT>
              <OPTIONS>
                     <OPTION>
@@ -691,7 +691,7 @@
           
           <QUESTION TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[Im Studium geht es mir darum, den Arbeitsaufwand stets gering zu haben.]]>
+                    <![CDATA[Im Studium geht es mir darum, den Arbeitsaufwand stets gering zu halten.]]>
                </QUESTIONTEXT>
               <OPTIONS>
                     <OPTION>
