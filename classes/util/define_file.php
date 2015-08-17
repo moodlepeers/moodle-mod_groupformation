@@ -312,33 +312,59 @@ class mod_groupformation_data {
 			'aborted' => '0010',
 			'done' => '0001' 
 	);
-	public function __construct() {
-	}
 	
-	public function getScenarioName($scenario){
+	private $question_types = array (
+		'motivation' => 'radio',
+		'character' => 'radio',
+		'learning' => 'radio',
+		'sellmo' => 'radio',
+		'srl' => 'radio',
+		'topic' => 'sortable',
+		'knowledge' => 'range',
+		'grade' => 'dropdown',
+		'general' => 'dropdown',
+		'self' => 'radio',
+	);
+	
+	/**
+	 * Returns scenario name
+	 * 
+	 * @param int $scenario
+	 * @return string
+	 */
+	public function get_scenario_name($scenario){
 		if ($scenario>=1 && $scenario<=3)
 			return $this->SCENARIO_NAMES[$scenario];
 		else
 			return $this->SCENARIO_NAMES[1];
 	}
 	
+	/**
+	 * Returns question types
+	 * 
+	 * @deprecated not uses til now
+	 * @return multitype:string
+	 */
+	public function get_question_types(){
+		return $this->question_types;
+	}
+	
+	/**
+	 * Returns names of categories
+	 * 
+	 * @return multitype:string
+	 */
 	public function getNames() {
 		return $this->CATEGORY_NAMES;
 	}
-	public function getLangNumber($lang) {
-		$p = 0;
-		if ($lang == 'en') {
-			$p = 1;
-		}
-		
-		return $p;
-	}
-	public function getLabels() {
-		return $this->LABELS;
-	}
-	public function getCriterionNames() {
-		return $this->CRITERION_CATEGORYS;
-	}
+
+	/**
+	 * Returns extra labels for criteria like fam, learning, big5_xxx
+	 * 
+	 * @param unknown $label
+	 * @param string $scenario
+	 * @return multitype:string
+	 */
 	public function getExtraLabel($label, $scenario = null) {
 		if ($label == 'fam') {
 			return $this->FamExtra_LABEL;
@@ -356,49 +382,14 @@ class mod_groupformation_data {
 			return $this->Big5HeterogenExtra_LABEL;
 		}
 	}
-	public function getPositions($category, $scenario, $groupformationid = null) {
-		$array = $this->getCategorySet ( $scenario, $groupformationid );
-		$position = 0;
-		foreach ( $array as $c ) {
-			if ($category == $c) {
-				return $position;
-			}
-			$position ++;
-		}
-	}
-	public static function getPosition($category) {
-		if ($category == 'topic') {
-			return self::TOPIC;
-		}
-		
-		if ($category == 'team') {
-			return self::TEAM;
-		}
-		
-		if ($category == 'motivation') {
-			return self::MOTIVATION;
-		}
-		
-		if ($category == 'learning') {
-			return self::LEARNING;
-		}
-		
-		if ($category == 'knowledge') {
-			return self::KNOWLEDGE;
-		}
-		
-		if ($category == 'grade') {
-			return self::GRADE;
-		}
-		
-		if ($category == 'general') {
-			return self::GENERAL;
-		}
-		
-		if ($category == 'character') {
-			return self::CHARACTER;
-		}
-	}
+	
+	/**
+	 * Returns category set
+	 * 
+	 * @param int $scenario
+	 * @param string $groupformationid
+	 * @return multitype:multitype:string
+	 */
 	public function getCategorySet($scenario, $groupformationid = null) {
 		$array = $this->CATEGORY_SETS [$scenario];
 		if ($groupformationid != null) {
@@ -416,6 +407,14 @@ class mod_groupformation_data {
 		}
 		return $array;
 	}
+	
+	/**
+	 * Returns label set
+	 * 
+	 * @param int $scenario
+	 * @param string $groupformationid
+	 * @return multitype:multitype:string
+	 */
 	public function getLabelSet($scenario, $groupformationid = null){
 		$array = $this->LABEL_SETS [$scenario];
 		if ( $groupformationid != null){
@@ -437,6 +436,13 @@ class mod_groupformation_data {
 		return $array;
 	}
 	
+	/**
+	 * Returns criterion set
+	 * 
+	 * @param unknown $scenario
+	 * @param string $groupformationid
+	 * @return multitype:multitype:string
+	 */
 	public function getCriterionSet($scenario, $groupformationid = null){
 		$array = $this->CRITERION_SETS [$scenario];
 		if ( $groupformationid != null){
@@ -460,21 +466,35 @@ class mod_groupformation_data {
 		return $array;
 	}
 	
-	
+	/**
+	 * Returns homogen criteria set
+	 * 
+	 * @param unknown $scenario
+	 * @return multitype:multitype:boolean
+	 */
 	public function getHomogenSet($scenario) {
 		return $this->HOMOGEN_SETS[$scenario];
 	}
 	
+	/**
+	 * Returns min val set
+	 * 
+	 * @param unknown $scenario
+	 * @return multitype:multitype:number
+	 */
 	public function getMinValSet($scenario) {
 		return $this->MINVAL_SETS[$scenario];
 	}
 	
+	/**
+	 * Returns max val set
+	 * 
+	 * @param unknown $scenario
+	 * @return multitype:multitype:number
+	 */
 	public function getMaxValSet($scenario) {
 		return $this->MAXVAL_SETS[$scenario];
 	}
-	
-	
-	
 	
 	/**
 	 * Return job status options

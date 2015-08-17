@@ -130,6 +130,7 @@ class mod_groupformation_storage_manager {
 		$data->question = $question ['question'];
 		$data->options = $this->convert_options ( $question ['options'] );
 		$data->position = $question ['position'];
+// 		$data->questionid = $question ['questionid'];
 		$data->language = $language;
 		$data->optionmax = count ( $question ['options'] );
 		
@@ -482,7 +483,7 @@ class mod_groupformation_storage_manager {
 		) );
 		
 		if ($name) {
-			return $this->data->getScenarioName ( $settings->szenario );
+			return $this->data->get_scenario_name( $settings->szenario );
 		}
 		
 		return $settings->szenario;
