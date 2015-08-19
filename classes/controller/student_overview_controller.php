@@ -265,7 +265,8 @@ class mod_groupformation_student_overview_controller {
         $this->determine_view();
 
         $this->view->setTemplate ( 'wrapper_students_overview' );
-
+        $this->view->assign('cmid', $this->cmid);
+        
         $this->view->assign ( 'student_overview_title', $this->store->getName() );
         $this->view->assign('student_overview_groupformation_info', $this->groupformation_info);
         $this->view->assign('student_overview_groupformation_status', $this->groupformation_state_info);
@@ -281,9 +282,10 @@ class mod_groupformation_student_overview_controller {
         }
 
 
-        $this->view->assign('cmid', $this->cmid);
+        
         if($this->view_state == -1 || $this->view_state == 0){
             $survey_options_view = new mod_groupformation_template_builder ();
+            $survey_options_view->assign('cmid', $this->cmid);
             $survey_options_view->setTemplate ( 'students_overview_options' );
             $survey_options_view->assign('buttons', $this->buttons_array);
             $survey_options_view->assign('buttons_infos', $this->buttons_info);
