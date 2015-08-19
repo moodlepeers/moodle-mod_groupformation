@@ -247,6 +247,7 @@ h1.caption {
     content: "* "; }
 
 .settings_info {
+    float: left;
     width: 100%; }
 .settings_info p {
     width: 100%;
@@ -255,11 +256,8 @@ h1.caption {
     border: 1px solid #bce8f1;
     border-radius: 4px;
     padding: 8px 35px 8px 14px;
-    margin-bottom: 20px;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5); }
-.settings_info p:before {
-    font-weight: bold;
-    content: "! "; }
+
 
 
 #js_topicsWrapper, #js_knowledgeWrapper, #js_szenarioWrapper,
