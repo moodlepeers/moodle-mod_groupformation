@@ -18,165 +18,170 @@
  * Prints a particular instance of groupformation
  *
  * @package mod_groupformation
- * @author  Nora Wester
+ * @author Nora Wester
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+require_once (dirname ( dirname ( dirname ( __FILE__ ) ) ) . '/config.php');
+require_once (dirname ( __FILE__ ) . '/lib.php');
+require_once (dirname ( __FILE__ ) . '/locallib.php');
+require_once (dirname ( __FILE__ ) . '/classes/util/define_file.php');
+require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/storage_manager.php');
+require_once (dirname ( __FILE__ ) . '/classes/question_manager/questionaire.php');
+require_once (dirname ( __FILE__ ) . '/classes/question_manager/Save.php');
 
+// Read URL params
+$id = optional_param ( 'id', 0, PARAM_INT ); // Course Module ID
+                                          // $g = optional_param('g', 0, PARAM_INT); // groupformation instance ID
+$url_category = optional_param ( 'category', '', PARAM_TEXT ); // category name
+                                                          
+// Import jQuery and js file
+groupformation_add_jquery ( $PAGE, 'survey_functions.js' );
 
-	require_once (dirname ( dirname ( dirname ( __FILE__ ) ) ) . '/config.php');
-	require_once (dirname ( __FILE__ ) . '/lib.php');
-	require_once (dirname ( __FILE__ ) . '/locallib.php');
-	require_once (dirname ( __FILE__ ) . '/classes/util/define_file.php');
-	require_once(dirname(__FILE__).'/classes/moodle_interface/storage_manager.php');
-	require_once(dirname(__FILE__).'/classes/question_manager/questionaire.php');
-	require_once(dirname(__FILE__).'/classes/question_manager/Save.php');
+// Determine instances of course module, course, groupformation
+groupformation_determine_instance ( $id, $cm, $course, $groupformation );
 
-	// Read URL params
-	$id = optional_param('id', 0, PARAM_INT);   // Course Module ID
-// 	$g = optional_param('g', 0, PARAM_INT);		// groupformation instance ID
-	$url_category = optional_param('category','',PARAM_TEXT); 	// category name
-	
-	// 	Import jQuery and js file
-	groupformation_add_jquery ( $PAGE, 'survey_functions.js' );
-	
-	// Determine instances of course module, course, groupformation
-	groupformation_determine_instance($id, $cm, $course, $groupformation);
-	
-	// Require user login if not already logged in
-	require_login($course, true, $cm);
+// Require user login if not already logged in
+require_login ( $course, true, $cm );
 
-	// Get useful stuff
-	$context = $PAGE->context;
-	$userid = $USER->id;
-		
-	$data = new mod_groupformation_data();
-	$store = new mod_groupformation_storage_manager($groupformation->id);
-	
-	//$names = $data->getNames();
-	$scenario = $store->getScenario();
-	$names = $store->getCategories();
-	
-	$category = "";
+// Get useful stuff
+$context = $PAGE->context;
+$userid = $USER->id;
 
-	if (!has_capability('mod/groupformation:editsettings', $context)) {
-		$current_tab = 'answering';
-		// Log access to page
-		groupformation_info($USER->id,$groupformation->id,'<view_student_questionaire>');
-		
-	} else {
-		$current_tab = 'view';
-		// Log access to page
-		groupformation_info($USER->id,$groupformation->id,'<view_teacher_questionaire_preview>');
-	}
-	
-	if (isset($_POST["category"])){
-		$category = $_POST['category'];
-	}elseif (!(strcmp($url_category, '')==0)){
-		$category = $store->getPreviousCategory($url_category);
-	}
+$data = new mod_groupformation_data ();
+$store = new mod_groupformation_storage_manager ( $groupformation->id );
 
-	$number = $store->getNumber($category);
-	
-	// Set PAGE config
-	$PAGE->set_url('/mod/groupformation/questionaire_view.php', array('id' => $cm->id));
-	$PAGE->set_title(format_string($groupformation->name));
-	$PAGE->set_heading(format_string($course->fullname));
+// $names = $data->getNames();
+$scenario = $store->getScenario ();
+$names = $store->getCategories ();
 
-// 	// Conditions to show the intro can change to look for own settings or whatever.
-// 	if ($groupformation->intro) {
-// 		echo $OUTPUT->box(format_module_intro('groupformation', $groupformation, $cm->id), 'generalbox mod_introbox', 'groupformationintro');
-// 	}
- 
-	$direction = 1;
-	if(isset($_POST["direction"])){
-		$direction = $_POST["direction"];
-	}
+$category = "";
 
-	// --- Mathevorkurs
-	$go = true;
-	//---
-	
-	$inArray = in_array($category, $names);
-	
-	if(has_capability('mod/groupformation:onlystudent', $context) && !has_capability('mod/groupformation:editsettings', $context)){
-		if($inArray){
+if (! has_capability ( 'mod/groupformation:editsettings', $context )) {
+	$current_tab = 'answering';
+	// Log access to page
+	groupformation_info ( $USER->id, $groupformation->id, '<view_student_questionaire>' );
+} else {
+	$current_tab = 'view';
+	// Log access to page
+	groupformation_info ( $USER->id, $groupformation->id, '<view_teacher_questionaire_preview>' );
+}
+
+if (isset ( $_POST ["category"] )) {
+	$category = $_POST ['category'];
+} elseif (! (strcmp ( $url_category, '' ) == 0)) {
+	$category = $store->getPreviousCategory ( $url_category );
+}
+
+$number = $store->getNumber ( $category );
+
+// Set PAGE config
+$PAGE->set_url ( '/mod/groupformation/questionaire_view.php', array (
+		'id' => $cm->id 
+) );
+$PAGE->set_title ( format_string ( $groupformation->name ) );
+$PAGE->set_heading ( format_string ( $course->fullname ) );
+
+// // Conditions to show the intro can change to look for own settings or whatever.
+// if ($groupformation->intro) {
+// echo $OUTPUT->box(format_module_intro('groupformation', $groupformation, $cm->id), 'generalbox mod_introbox', 'groupformationintro');
+// }
+
+$direction = 1;
+if (isset ( $_POST ["direction"] )) {
+	$direction = $_POST ["direction"];
+}
+
+// --- Mathevorkurs
+$go = true;
+// ---
+
+$inArray = in_array ( $category, $names );
+
+if (has_capability ( 'mod/groupformation:onlystudent', $context ) && ! has_capability ( 'mod/groupformation:editsettings', $context )) {
+	$status = $store->answeringStatus ( $userid );
+	if ($status == 0 || $status == - 1) {
+		if ($inArray) {
 			
-			$save = new mod_groupformation_save($groupformation->id, $userid, $category);
-            if($category == 'knowledge'){
-                for($i = 1; $i<=$number; $i++){
-                    $tempValidateRangeValue = $category . $i . '_valid';
-                    $temp = $category . $i;
-                    if(isset($_POST[$temp]) && $_POST[$tempValidateRangeValue] == '1'){
-                        $save->save($_POST[$temp], $i);
-                    }
-                }
-                /*}else if($category == 'grade'){
-                    for($i = 1; $i<=$number; $i++){
-                        $temp = $category . $i;
-                        if(isset($_POST[$temp]) && $_POST[$temp] != 0){
-                            $save->save($_POST[$temp], $i);
-                        }
-                    }*/
-            }else{
-                for($i = 1; $i<=$number; $i++){
-                    $temp = $category . $i;
-                    if(isset($_POST[$temp])){
-                        $save->save($_POST[$temp], $i);
-                    }
-                }
-            }
+			$save = new mod_groupformation_save ( $groupformation->id, $userid, $category );
+			if ($category == 'knowledge') {
+				for($i = 1; $i <= $number; $i ++) {
+					$tempValidateRangeValue = $category . $i . '_valid';
+					$temp = $category . $i;
+					if (isset ( $_POST [$temp] ) && $_POST [$tempValidateRangeValue] == '1') {
+						$save->save ( $_POST [$temp], $i );
+					}
+				}
+				/*
+				 * }else if($category == 'grade'){
+				 * for($i = 1; $i<=$number; $i++){
+				 * $temp = $category . $i;
+				 * if(isset($_POST[$temp]) && $_POST[$temp] != 0){
+				 * $save->save($_POST[$temp], $i);
+				 * }
+				 * }
+				 */
+			} else {
+				for($i = 1; $i <= $number; $i ++) {
+					$temp = $category . $i;
+					if (isset ( $_POST [$temp] )) {
+						$save->save ( $_POST [$temp], $i );
+					}
+				}
+			}
 			
 			// --- Mathevorkurs
-			if($store->get_number_of_answers($userid, $category) != $number){
+			if ($store->get_number_of_answers ( $userid, $category ) != $number) {
 				$go = false;
 			}
 			// ---
 		}
 	}
-	
-	if($direction == 0 && $_POST["percent"] == 0){
-		$returnurl = new moodle_url('/mod/groupformation/view.php', array(
-				'id' => $cm->id,
-				'back' => '1'));
-		redirect($returnurl);
-	}
-	
-	$available = $store->isQuestionaireAvailable() || $store->isQuestionaireAccessible();
-	$isTeacher = has_capability('mod/groupformation:editsettings', $context);
-	if (($available || $isTeacher) && ($category == '' || $inArray)) {
-		
-		echo $OUTPUT->header();
-		
-		// Print the tabs.
-		require ('tabs.php');
-		
-		$questionManager = new mod_groupformation_questionaire($cm->id,$groupformation->id, get_string('language','groupformation'), $userid, $category, $context);
-		
-		if($direction == 0){
-			$questionManager->goBack();
-		}else{
-			if(!$go){
-				$questionManager->goNotOn();
-			}
-		}
-		
-		$questionManager->printQuestionairePage();
-		
-	} else if(!$available || $category == 'no') {
-		
-		if(isset($_POST["action"]) && $_POST["action"] == 1){
-			$store->statusChanged($userid);
-		}
-		
-		$returnurl = new moodle_url('/mod/groupformation/view.php', array(
-				'id' => $cm->id, 
-				'do_show' => 'view', 
-				'back' => '1'));
-		redirect($returnurl);
-	} else {
-		
-		echo $OUTPUT->heading('Category has been manipulated');
-	}
+}
 
-	echo $OUTPUT->footer();
+if ($direction == 0 && $_POST ["percent"] == 0) {
+	$returnurl = new moodle_url ( '/mod/groupformation/view.php', array (
+			'id' => $cm->id,
+			'back' => '1' 
+	) );
+	redirect ( $returnurl );
+}
+
+$available = $store->isQuestionaireAvailable () || $store->isQuestionaireAccessible ();
+$isTeacher = has_capability ( 'mod/groupformation:editsettings', $context );
+if (($available || $isTeacher) && ($category == '' || $inArray)) {
+	
+	echo $OUTPUT->header ();
+	
+	// Print the tabs.
+	require ('tabs.php');
+	
+	$questionManager = new mod_groupformation_questionaire ( $cm->id, $groupformation->id, get_string ( 'language', 'groupformation' ), $userid, $category, $context );
+	
+	if ($direction == 0) {
+		$questionManager->goBack ();
+	} else {
+		if (! $go) {
+			$questionManager->goNotOn ();
+		}
+	}
+	
+	$questionManager->printQuestionairePage ();
+} else if (! $available || $category == 'no') {
+	
+	if (isset ( $_POST ["action"] ) && $_POST ["action"] == 1) {
+		$store->statusChanged ( $userid );
+	}
+	
+	$returnurl = new moodle_url ( '/mod/groupformation/view.php', array (
+			'id' => $cm->id,
+			'do_show' => 'view',
+			'back' => '1' 
+	) );
+	redirect ( $returnurl );
+} else {
+	
+	echo $OUTPUT->heading ( 'Category has been manipulated' );
+}
+
+echo $OUTPUT->footer ();
 
