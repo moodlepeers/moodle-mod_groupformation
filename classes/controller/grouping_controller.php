@@ -410,7 +410,7 @@ class mod_groupformation_grouping_controller {
 			$statisticsView->assign ( 'maxSize', $this->store->getGroupSize () );
 		} else {
 			$statisticsView->setTemplate ( 'grouping_no_data' );
-			$statisticsView->assign ( 'grouping_no_data', get_string('no_data_to_display','groupformation') );
+			$statisticsView->assign ( 'grouping_no_data', get_string ( 'no_data_to_display', 'groupformation' ) );
 		}
 		return $statisticsView->loadTemplate ();
 	}
@@ -439,7 +439,7 @@ class mod_groupformation_grouping_controller {
 			}
 		} else {
 			$incompleteGroupsView->setTemplate ( 'grouping_no_data' );
-			$incompleteGroupsView->assign ( 'grouping_no_data', get_string('no_data_to_display','groupformation') );
+			$incompleteGroupsView->assign ( 'grouping_no_data', get_string ( 'no_data_to_display', 'groupformation' ) );
 		}
 		return $incompleteGroupsView->loadTemplate ();
 	}
@@ -497,7 +497,7 @@ class mod_groupformation_grouping_controller {
 			}
 		} else {
 			$generatedGroupsView->setTemplate ( 'grouping_no_data' );
-			$generatedGroupsView->assign ( 'grouping_no_data', get_string('no_data_to_display','groupformation') );
+			$generatedGroupsView->assign ( 'grouping_no_data', get_string ( 'no_data_to_display', 'groupformation' ) );
 		}
 		return $generatedGroupsView->loadTemplate ();
 	}
@@ -538,7 +538,7 @@ class mod_groupformation_grouping_controller {
 	/**
 	 * Get the moodle-link to group and set state of the link(enabled || disabled)
 	 *
-	 * @param int $groupid   	
+	 * @param int $groupid        	
 	 * @return array
 	 */
 	private function get_group_link($groupid) {
@@ -547,12 +547,12 @@ class mod_groupformation_grouping_controller {
 			$url = new moodle_url ( '/group/members.php', array (
 					'group' => $groupid 
 			) );
-			$link[] = $url;
-			$link[] = '';
+			$link [] = $url;
+			$link [] = '';
 		} else {
 			
-			$link[] = '';
-			$link[] = 'disabled';
+			$link [] = '';
+			$link [] = 'disabled';
 		}
 		return $link;
 	}
