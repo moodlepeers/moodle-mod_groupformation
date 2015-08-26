@@ -310,7 +310,9 @@ class mod_groupformation_questionaire {
 			if ($isTeacher)
 				echo '<div class="alert">' . get_string ( 'questionaire_preview', 'groupformation' ) . '</div>';
 			
-			if ($this->question_manager->hasCommited()){
+			$store = new mod_groupformation_storage_manager($this->groupformationid);
+			
+			if ($this->question_manager->hasCommited() ||  !$store->isQuestionaireAvailable()){
 				echo '<div class="alert" id="commited_view">' . get_string( 'questionaire_commited', 'groupformation') . '</div>';
 			}
 			
