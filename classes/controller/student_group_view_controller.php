@@ -38,6 +38,12 @@ class mod_groupformation_student_group_view_controller {
 
     private $view = NULL;
 
+    private $group_name = '';
+    private $group_info = '';
+    private $group_info_contact = '';
+
+    private $array = array();
+
     /**
      * Constructs instance of groupInfos
      *
@@ -64,9 +70,8 @@ class mod_groupformation_student_group_view_controller {
             $name = $this->groups_store->get_group_name ( $userid );
 
             //echo 'Der Name deiner Gruppe ist ' . $name . ' (ID #' . $id . ')<br>';
-            $string = $name . ' (ID #' . $id . ')';
+            $this->group_name = $name . ' (ID #' . $id . ')';
 
-            $this->view->assign('group_name', $string);
 
             // echo 'Deine Gruppennummer ist ' . $id . '<br>';
 
@@ -75,10 +80,10 @@ class mod_groupformation_student_group_view_controller {
             if (count ( $otherMembers ) > 0) {
                 //echo 'Deine Arbeitskollegen sind: <br>';
 
-                $this->view->assign('group_info', 'Deine Arbeitskollegen sind:');
-                $this->view->assign('group_info_contact', 'Um deine Gruppenmitglieder zu kontaktieren, klicke auf deren Profilnamen.');
+                $this->group_info = 'Deine Arbeitskollegen sind:';
+                $this->group_info_contact = 'Um deine Gruppenmitglieder zu kontaktieren, klicke auf deren Profilnamen.';
 
-                $array = array();
+                //$array = array();
                 foreach ( $otherMembers as $memberid ) {
 
                     $member = get_complete_user_data ( 'id', $memberid );
@@ -86,21 +91,26 @@ class mod_groupformation_student_group_view_controller {
                     $url = $CFG->wwwroot . '/user/view.php?id=' . $memberid . '&course=' . $COURSE->id;
 
                     if (! $member) {
-                        echo 'user does not exist!';
+                        $this->array[] =  'user does not exist!';
                     }
 
-                    $array[] = '<a href="' . $url . '">' . fullname ( $member ) . '</a>';
+                    $this->array[] = '<a href="' . $url . '">' . fullname ( $member ) . '</a>';
                     //echo '<a href="' . $url . '">' . fullname ( $member ) . '</a>';
                 }
-                $this->view->assign('members', $array);
+
             }else{
-                $this->view->assign('group_info', 'Du bist allein in dieser Gruppe.');
+                $this->group_info = 'Du bist allein in dieser Gruppe.';
                 //echo 'Du bist allein in dieser Gruppe.';
             }
         } else {
-            $this->view->assign('group_info', 'Die Gruppenbildung ist noch nicht abgeschlossen.');
+            $this->group_info = 'Die Gruppenbildung ist noch nicht abgeschlossen.';
             //echo '<h5> Die Gruppenbildung ist noch nicht abgeschlossen. </h>';
         }
+
+        $this->view->assign('group_name', $this->group_name);
+        $this->view->assign('members', $this->array);
+        $this->view->assign('group_info', $this->group_info);
+        $this->view->assign('group_info_contact', $this->group_info_contact);
         return $this->view->loadTemplate();
     }
 }

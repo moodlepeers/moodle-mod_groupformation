@@ -130,24 +130,24 @@ require ('tabs.php');
 
 /* ---------- Automated test user generation ---------- */
 
-// $cqt = new mod_groupformation_test_user_generator ();
+ $cqt = new mod_groupformation_test_user_generator ();
 
-// if ($delete_users) {
-// 	$cqt->delete_test_users ( $groupformation->id );
-// 	$returnurl = new moodle_url ( '/mod/groupformation/analysis_view.php', array (
-// 			'id' => $id,
-// 			'do_show' => 'analysis' 
-// 	) );
-// 	redirect ( $returnurl );
-// }
-// if ($create_users > 0) {
-// 	$cqt->create_test_users ( $create_users, $groupformation->id, $create_answers, $random_answers );
-// 	$returnurl = new moodle_url ( '/mod/groupformation/analysis_view.php', array (
-// 			'id' => $id,
-// 			'do_show' => 'analysis' 
-// 	) );
-// 	redirect ( $returnurl );
-// }
+ if ($delete_users) {
+ 	$cqt->delete_test_users ( $groupformation->id );
+ 	$returnurl = new moodle_url ( '/mod/groupformation/analysis_view.php', array (
+ 			'id' => $id,
+ 			'do_show' => 'analysis'
+ 	) );
+ 	redirect ( $returnurl );
+ }
+ if ($create_users > 0) {
+ 	$cqt->create_test_users ( $create_users, $groupformation->id, $create_answers, $random_answers );
+ 	$returnurl = new moodle_url ( '/mod/groupformation/analysis_view.php', array (
+ 			'id' => $id,
+ 			'do_show' => 'analysis'
+ 	) );
+ 	redirect ( $returnurl );
+ }
 
 /* ---------- / Automated test user generation ---------- */
 
