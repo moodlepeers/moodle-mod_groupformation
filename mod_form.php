@@ -247,6 +247,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
                                    
                                                                     
 <!--                      Die Input Felder-->
+                                <h5>' . get_string ( 'input', 'groupformation' ) . '</h5>
                                     
                                         <div class="multi_fields">
                                             <div class="multi_field" id="inputprk0">
@@ -286,15 +287,15 @@ class mod_groupformation_mod_form extends moodleform_mod {
                                                     </thead>
                                                     <tbody id="preknowledges">
                                                       <tr class="knowlRow" id="prkRow0">
-                                                        <th scope="row">Beispiel 1</th>
+                                                        <th scope="row">' . get_string ( 'knowledge_dummy', 'groupformation' ) . ' 1</th>
                                                         <td data-title="' . get_string ( 'knowledge_scale', 'groupformation' ) . '" class="range"><span >0</span><input type="range" min="0" max="100" value="0" /><span>100</span></td>
                                                       </tr>
                                                     <tr class="knowlRow" id="prkRow1">
-                                                        <th scope="row">Beispiel 1</th>
+                                                        <th scope="row">' . get_string ( 'knowledge_dummy', 'groupformation' ) . ' 2</th>
                                                         <td data-title="' . get_string ( 'knowledge_scale', 'groupformation' ) . '" class="range"><span >0</span><input type="range" min="0" max="100" value="0" /><span>100</span></td>
                                                       </tr>
                                                     <tr class="knowlRow" id="prkRow2">
-                                                        <th scope="row">Beispiel 1</th>
+                                                        <th scope="row">' . get_string ( 'knowledge_dummy', 'groupformation' ) . ' 3</th>
                                                         <td data-title="' . get_string ( 'knowledge_scale', 'groupformation' ) . '" class="range"><span >0</span><input type="range" min="0" max="100" value="0" /><span>100</span></td>
                                                       </tr>
                                                     </tbody>
@@ -333,14 +334,10 @@ class mod_groupformation_mod_form extends moodleform_mod {
                             <div id="tpc">
                             <div class="multi_field_wrapper persist-area">
                                 <div class="col_m_50">
-                                <!-- <div id="" class="btn_wrap">
-                                    <label>
-                                        <button type="button" class="add_field gf_button gf_button_circle gf_button_small"></button>' . get_string ( 'add_line', 'groupformation' ) . '</label>
-                                </div> -->
-                                   
+
                                                                     
 <!--                      Die Input Felder-->
-                                    
+                                    <h5>' . get_string ( 'input', 'groupformation' ) . '</h5>
                                         <div class="multi_fields">
                                             <div class="multi_field" id="inputtpc0">
                                                 <input class="respwidth js_topicInput" type="text">
@@ -368,9 +365,9 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		'<p id="topicshead">' . get_string ( 'topics_question', 'groupformation' ) . '</p>
 											<span id="topicsDummy" style="display:none;">' . get_string ( 'topics_dummy', 'groupformation' ) . '</span>
                                             <ul class="sortable_topics" id="previewTopics">
-                                              <li class="topicLi" id="tpcRow0" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' . get_string ( 'topics_dummy', 'groupformation' ) . 'Thema 1</li>
-                                              <li class="topicLi" id="tpcRow1" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' . get_string ( 'topics_dummy', 'groupformation' ) . 'Thema 2</li>
-                                              <li class="topicLi" id="tpcRow2" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' . get_string ( 'topics_dummy', 'groupformation' ) . 'Thema 3</li>
+                                              <li class="topicLi" id="tpcRow0" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' . get_string ( 'topics_dummy', 'groupformation' ) . '1</li>
+                                              <li class="topicLi" id="tpcRow1" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' . get_string ( 'topics_dummy', 'groupformation' ) . '2</li>
+                                              <li class="topicLi" id="tpcRow2" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' . get_string ( 'topics_dummy', 'groupformation' ) . '3</li>
                                             </ul>
                                        </div>
                                     </div> <!-- /col_50 -->
@@ -383,10 +380,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		
 		// close wrapper for topics
 		$mform->addElement ( 'html', '</div>' );
-		
-		$mform->addElement ( 'html', '<div class="settings_info" id="groupSettingsInfo">
-                        <p>' . get_string ( 'groupSettingsInfo', 'groupformation' ) . '</p>
-                </div>' );
+
 		
 		// wrapper for Groupsize Options
 		$mform->addElement ( 'html', '<div class="gf_settings_pad">' );
@@ -396,6 +390,10 @@ class mod_groupformation_mod_form extends moodleform_mod {
 
                 <div class="gf_pad_header">' . get_string ( 'groupoption_description', 'groupformation' ) . '<span class="required"></span><span class="toolt" tooltip="' . get_string ( 'groupoption_help', 'groupformation' ) . '"></span>
 
+                </div>
+
+                <div class="settings_info" id="groupSettingsInfo">
+                        <p>' . get_string ( 'groupSettingsInfo', 'groupformation' ) . '</p>
                 </div>
 
                 <div class="js_errors" id="maxmembers_error">

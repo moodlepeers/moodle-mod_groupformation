@@ -106,51 +106,73 @@ require ('tabs.php');
 
 // ---------------------------------------------
 
+// require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/answer_manager.php');
+// require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/question_manager.php');
+// require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/version_manager.php');
+// require_once ($CFG->dirroot . '/mod/groupformation/classes/model/range_question.php');
+
+// $vm = new mod_groupformation_version_manager($groupformation->id);
+
+// $filename = 'definition_2015100100.xml';
+
+// $vm->read_file($filename);
+
+// $b = $qm->add_setting_question(array('V1','V2'), array('T1','T2','T3'));
+// var_dump($b);
+
+// var_dump($question->is_valid());
+// $question->save();
+
+// var_dump($question->get_knowledge_values());
+// $radio_question = new mod_groupformation_radio_question('motivation',19);
+
+
 
 /* ---------- Automated test user generation ---------- */
 
-$cqt = new mod_groupformation_test_user_generator ();
+ $cqt = new mod_groupformation_test_user_generator ();
 
-if ($delete_users) {
-	$cqt->delete_test_users ( $groupformation->id );
-	$returnurl = new moodle_url ( '/mod/groupformation/analysis_view.php', array (
-			'id' => $id,
-			'do_show' => 'analysis' 
-	) );
-	redirect ( $returnurl );
-}
-if ($create_users > 0) {
-	$cqt->create_test_users ( $create_users, $groupformation->id, $create_answers, $random_answers );
-	$returnurl = new moodle_url ( '/mod/groupformation/analysis_view.php', array (
-			'id' => $id,
-			'do_show' => 'analysis' 
-	) );
-	redirect ( $returnurl );
-}
+ if ($delete_users) {
+ 	$cqt->delete_test_users ( $groupformation->id );
+ 	$returnurl = new moodle_url ( '/mod/groupformation/analysis_view.php', array (
+ 			'id' => $id,
+ 			'do_show' => 'analysis'
+ 	) );
+ 	redirect ( $returnurl );
+ }
+ if ($create_users > 0) {
+ 	$cqt->create_test_users ( $create_users, $groupformation->id, $create_answers, $random_answers );
+ 	$returnurl = new moodle_url ( '/mod/groupformation/analysis_view.php', array (
+ 			'id' => $id,
+ 			'do_show' => 'analysis'
+ 	) );
+ 	redirect ( $returnurl );
+ }
 
 /* ---------- / Automated test user generation ---------- */
 
-$jm = new mod_groupformation_job_manager ();
 
-$job = null;
 
-$groupal_cohort = null;
-$random_cohort = null;
-$incomplete_cohort = null;
+// $jm = new mod_groupformation_job_manager ();
 
-$job = $jm::get_job ( $groupformation->id );
+// $job = null;
 
-if (! is_null ( $job )) {
-	// $result = $jm::do_groupal ( $job, $groupal_cohort, $random_cohort, $incomplete_cohort);
-	// var_dump($result);
-	// var_dump($result[0]->groups);
-	// var_dump($result[0]->results);
-}
+// $groupal_cohort = null;
+// $random_cohort = null;
+// $incomplete_cohort = null;
+
+// $job = $jm::get_job ( $groupformation->id );
+
+// if (! is_null ( $job )) {
+// 	$result = $jm::do_groupal ( $job, $groupal_cohort, $random_cohort, $incomplete_cohort);
+// 	// var_dump($result);
+// 	// var_dump($result[0]->groups);
+// 	// var_dump($result[0]->results);
+// }
 // -----------------------------------------------
 
 // echo '<div style="color:red;">Diese Seite ist soweit fertig; Rückmeldung, wenn es etwas fehlt oder unverständlich ist, wäre super.</div>';
 
-// TODO @EG : form in das template packen?
 echo '<form action="' . htmlspecialchars ( $_SERVER ["PHP_SELF"] ) . '" method="post" autocomplete="off">';
 
 echo '<input type="hidden" name="id" value="' . $id . '"/>';
