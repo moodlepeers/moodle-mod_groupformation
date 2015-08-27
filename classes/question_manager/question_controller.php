@@ -96,9 +96,9 @@
 		}
 		
 		// --- MAthevorkurs
-		public function goNotOn(){
-			$this->goIternalBack(1);
-		}
+		//public function goNotOn(){
+		//	$this->goIternalBack(1);
+		//}
 		
 		public function hasAllAnswered(){
 			return $this->store->hasAnsweredEverything($this->userId);
@@ -167,41 +167,6 @@
 				$this->currentCategoryPosition++;
 			}
 			
-			
-// 			if($category == 'knowledge'){
-// 				$this->currentCategoryPosition = KNOWLEDGE;
-// 				$this->currentCategoryPosition++;
-// 			}
-			
-// 			if($category == 'general'){
-// 				$this->currentCategoryPosition = GENERAL;
-// 				$this->currentCategoryPosition++;
-// 			}
-			
-// 			if($category == 'grade'){
-// 				$this->currentCategoryPosition = GRADE;
-// 				$this->currentCategoryPosition++;
-// 			}
-			
-// 			if($category == 'motivation'){
-// 				$this->currentCategoryPosition = MOTIVATION;
-// 				$this->currentCategoryPosition++;
-// 			}
-			
-// 			if($category == 'learning'){
-// 				$this->currentCategoryPosition = LEARNING;
-// 				$this->currentCategoryPosition++;
-// 			}
-			
-// 			if($category == 'team'){
-// 				$this->currentCategoryPosition = TEAM;
-// 				$this->currentCategoryPosition++;
-// 			}
-			
-// 			if($category == 'character'){
-// 				$this->currentCategoryPosition = CHARACTER;
-// 				$this->currentCategoryPosition++;
-// 			}
 			
 		}
 		
@@ -286,6 +251,8 @@
  						
  						$position = 1;
  					//	$positionAnswer = 0;
+ 						$questionsfirst = array();
+ 						$answerPosition = array();
  						foreach ($values as $value){
  							$question = array();
  							$question[] = $type;
@@ -305,12 +272,26 @@
  								}else{
  									$question[] = -1;
  								}
+ 								$answerPosition[$answer] = $position-1;
  								$position++;
+ 								
  							}
-							$questions[] = $question;
+ 							
+							$questionsfirst[] = $question;
+							
 						}
 					
+						$l = count($answerPosition);
 						
+						if($l>0 && $this->currentCategoryPosition == $this->store->getPosition('topic')){
+							for($k = 1; $k<= $l; $k++){
+								$h = $questionsfirst[$answerPosition[$k]];
+								$h[] = $answerPosition[$k];
+								$questions[] = $h;
+							}
+						}else{
+							$questions = $questionsfirst;
+						}
 					
 				}else{
 					$positionAnswer = 0;

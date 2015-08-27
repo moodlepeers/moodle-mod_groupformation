@@ -114,6 +114,7 @@ class mod_groupformation_data {
 					'topic',
 					'knowledge_heterogen',
 					'knowledge_homogen',
+					'general',
 					'grade',
 					'big5_heterogen',
 					'big5_homogen',
@@ -123,6 +124,7 @@ class mod_groupformation_data {
 			'2' => array (
 					'topic',
 					'knowledge_heterogen',
+					'general',
 					'grade',
 					'big5_heterogen',
 					'big5_homogen',
@@ -130,7 +132,8 @@ class mod_groupformation_data {
 					'learning' 
 			),
 			'3' => array (
-					'topic' 
+					'topic',
+					'general' 
 			) 
 	);
 	private $HOMOGEN_SETS = array (
@@ -138,6 +141,7 @@ class mod_groupformation_data {
 					'topic' => true,
 					'knowledge_heterogen' => false,
 					'knowledge_homogen' => true,
+					'general' => true,
 					'grade' => true,
 					'big5_heterogen' => false,
 					'big5_homogen' => true,
@@ -147,6 +151,7 @@ class mod_groupformation_data {
 			'2' => array (
 					'topic' => true,
 					'knowledge_heterogen' => false,
+					'general' => true,
 					'grade' => false,
 					'big5_heterogen' => false,
 					'big5_homogen' => true,
@@ -154,7 +159,8 @@ class mod_groupformation_data {
 					'learning' => false 
 			),
 			'3' => array (
-					'topic' => true
+					'topic' => true,
+					'general' => true
 			)
 	);
 	// provides the minimum values each "value" can have in such a vector
@@ -233,60 +239,48 @@ class mod_groupformation_data {
 			'1' => array (
 					'topic',
 					'knowledge',
+					'general',
 					'grade',
 					'team',
 					'character',
-					'motivation',
-					'sellmo',
-					'self',
-					'srl' 
+					'motivation'
 			),
 			'2' => array (
 					'topic',
 					'knowledge',
+					'general',
 					'grade',
 					'team',
 					'character',
-					'learning',
-					'sellmo',
-					'self',
-					'srl' 
+					'learning'
 			),
 			'3' => array (
 					'topic',
-					'sellmo',
-					'self',
-					'srl' 
+					'general' 
 			) 
 	);
 	private $CRITERION_SETS = array (
 			'1' => array (
 					'topic',
 					'knowledge',
+					'general',
 					'grade',
 					'team',
 					'character',
-					'motivation',
-					'sellmo',
-					'self',
-					'srl' 
+					'motivation'
 			),
 			'2' => array (
 					'topic',
 					'knowledge',
+					'general',
 					'grade',
 					'team',
 					'character',
-					'learning',
-					'sellmo',
-					'self',
-					'srl'
+					'learning'
 			),
 			'3' => array (
 					'topic',
-					'sellmo',
-					'self',
-					'srl'
+					'general'
 			) 
 	);
 	const MOTIVATION = 6;
