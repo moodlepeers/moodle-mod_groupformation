@@ -1,5 +1,5 @@
 <div class="gf_settings_pad">
-    <div class="gf_pad_header">Gruppenbildung - <?php echo $this->_['student_overview_title']; ?>
+    <div class="gf_pad_header"><?php echo get_string('group_building', 'groupformation');?> - <?php echo $this->_['student_overview_title']; ?>
     </div>
     <div class="gf_pad_content">
         <p><?php echo $this->_['student_overview_groupformation_info']; ?></p>

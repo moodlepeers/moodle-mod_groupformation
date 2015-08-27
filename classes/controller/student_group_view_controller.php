@@ -80,8 +80,8 @@ class mod_groupformation_student_group_view_controller {
             if (count ( $otherMembers ) > 0) {
                 //echo 'Deine Arbeitskollegen sind: <br>';
 
-                $this->group_info = 'Deine Arbeitskollegen sind:';
-                $this->group_info_contact = 'Um deine Gruppenmitglieder zu kontaktieren, klicke auf deren Profilnamen.';
+                $this->group_info = get_string('membersAre', 'groupformation');
+                $this->group_info_contact = get_string('contact_members', 'groupformation');
 
                 //$array = array();
                 foreach ( $otherMembers as $memberid ) {
@@ -91,7 +91,7 @@ class mod_groupformation_student_group_view_controller {
                     $url = $CFG->wwwroot . '/user/view.php?id=' . $memberid . '&course=' . $COURSE->id;
 
                     if (! $member) {
-                        $this->array[] =  'user does not exist!';
+                        $this->array[] =  get_string('noUser', 'groupformation');
                     }
 
                     $this->array[] = '<a href="' . $url . '">' . fullname ( $member ) . '</a>';
@@ -99,11 +99,11 @@ class mod_groupformation_student_group_view_controller {
                 }
 
             }else{
-                $this->group_info = 'Du bist allein in dieser Gruppe.';
+                $this->group_info = get_string('oneManGroup', 'groupformation');
                 //echo 'Du bist allein in dieser Gruppe.';
             }
         } else {
-            $this->group_info = 'Die Gruppenbildung ist noch nicht abgeschlossen.';
+            $this->group_info = get_string('groupingNotReady', 'groupformation');
             //echo '<h5> Die Gruppenbildung ist noch nicht abgeschlossen. </h>';
         }
 

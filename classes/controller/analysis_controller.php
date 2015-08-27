@@ -86,19 +86,19 @@ class mod_groupformation_analysis_controller {
 		$this->activity_time = $this->store->getTime ();
 		
 		if (intval ( $this->activity_time ['start_raw'] ) == 0) {
-			$this->start_time = 'Kein Zeitpunkt festgelegt';
+			$this->start_time = get_string('no_time', 'groupformation');
 		} else {
 			$this->start_time = $this->activity_time ['start'];
 		}
 		
 		if (intval ( $this->activity_time ['end_raw'] ) == 0) {
-			$this->end_time = 'Kein Zeitpunkt festgelegt';
+			$this->end_time = get_string('no_time', 'groupformation');
 		} else {
 			$this->end_time = $this->activity_time ['end'];
 		}
 		
 		$button_name = ($this->questionnaire_available) ? "stop_questionnaire" : "start_questionnaire";
-		$button_caption = ($this->questionnaire_available) ? "Aktivität beenden" : "Aktivität starten";
+		$button_caption = ($this->questionnaire_available) ? get_string('activity_end', 'groupformation') : get_string('activity_start', 'groupformation');
 		$button_disabled = ($this->job_state !== "ready") ? "disabled" : "";
 		
 		$statusAnalysisView->assign ( 'button', array (
@@ -117,16 +117,16 @@ class mod_groupformation_analysis_controller {
 		
 		switch ($this->state) {
 			case 1 :
-				$statusAnalysisView->assign ( 'analysis_status_info', 'Sie müssen die Aktivität beenden, bevor sie Gruppen bilden können.' );
+				$statusAnalysisView->assign ( 'analysis_status_info', get_string('analysis_status_info0', 'groupformation') );
 				break;
 			case 2 :
-				$statusAnalysisView->assign ( 'analysis_status_info', 'Sie müssen die Aktivität starten, damit Studierende den Fragebogen beantworten können.' );
+				$statusAnalysisView->assign ( 'analysis_status_info', get_string('analysis_status_info1', 'groupformation') );
 				break;
 			case 3 :
-				$statusAnalysisView->assign ( 'analysis_status_info', 'Die Gruppenbildung wurde bereits angestoßen bzw. durchgeführt. Die Aktivität kann nicht mehr gestartet werden' );
+				$statusAnalysisView->assign ( 'analysis_status_info', get_string('analysis_status_info2', 'groupformation') );
 				break;
 			default :
-				$statusAnalysisView->assign ( 'analysis_status_info', 'Sie können die Aktivität starten oder beenden.' );
+				$statusAnalysisView->assign ( 'analysis_status_info', get_string('analysis_status_info3', 'groupformation') );
 		}
 		
 		return $statusAnalysisView->loadTemplate ();

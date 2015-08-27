@@ -1,6 +1,6 @@
 
 <div class="grid">
-    <div class="col_m_87-5">Es gibt <b><?php echo $this->_['student_count']; ?></b> <?php echo ($this->_['student_count']==1)?"Studierenden":"Studierende";?> zur Gruppenbildung.</div>
+    <div class="col_m_87-5"><?php echo get_string('are', 'groupformation');?> <b><?php echo $this->_['student_count']; ?></b> <?php echo ($this->_['student_count']==1)? get_string('students_grouping_single', 'groupformation'):get_string('students_grouping_single', 'groupformation');?></div>
 </div>
 
 <?php foreach($this->_['buttons'] as $button) { ?>
