@@ -45,6 +45,48 @@ class mod_groupformation_storage_manager {
 		$this->gm = new mod_groupformation_groups_manager($groupformationid);
 	}
 	
+	
+	// MATHEVORKURS
+	public function show_students(){
+		global $DB,$COURSE,$CFG;
+		$records = $DB->get_records('groupformation_started',array('completed'=>1,'groupformation'=>$this->groupformationid));
+		if (count($records)>0){
+			echo '<div class="alert">';
+			echo 'Studenten, die bereits geantwortet und abgegeben haben:<br>';
+		}else{
+			echo '<div class="alert">Es gibt keine Studenten, die bereits abgegeben haben</div>';
+		}
+		foreach ( $records as $record ) {
+		
+			$member = get_complete_user_data ( 'id', $record->userid );
+		
+			$url = $CFG->wwwroot . '/user/view.php?id=' . $record->userid . '&course=' . $COURSE->id;
+		
+			if (! $member) {
+				echo 'user does not exist!';
+			}
+		
+			echo '<a href="' . $url . '">' . fullname ( $member ) . '</a><br>';
+		}
+		if (count($records)>0){
+			echo '</div class="alert">';
+		}
+	}
+	
+	public function repair_activity(){
+		global $DB;
+		$record = $DB->get_record('groupformation', array('id'=>$this->groupformationid));
+		$record->szenario = 1;
+		$DB->update_record('groupformation', $record);
+		
+		$records = $DB->get_records('groupformation_started',array('groupformation'=>$this->groupformationid));
+		foreach ($records as $record){
+			$record->completed = 0;
+			$DB->update_record('groupformation_started', $record);
+		}
+	}
+	
+	
 	/**
 	 * Sets answer counter for user
 	 * 

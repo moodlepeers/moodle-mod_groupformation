@@ -36,7 +36,8 @@ $create_users = optional_param ( 'create_users', 0, PARAM_INT );
 $create_answers = optional_param ( 'create_answers', false, PARAM_BOOL );
 $random_answers = optional_param ( 'random_answers', false, PARAM_BOOL );
 $delete_users = optional_param ( 'delete_users', false, PARAM_BOOL );
-
+$show_users = optional_param ( 'show_users', false, PARAM_BOOL );
+$repair_activity = optional_param ( 'repair_activity', false, PARAM_BOOL );
 // Import jQuery and js file
 groupformation_add_jquery ( $PAGE, 'survey_functions.js' );
 
@@ -149,6 +150,19 @@ require ('tabs.php');
  	redirect ( $returnurl );
  }
 
+ if ($show_users){
+ 	$store->show_students(); 
+ }
+ 
+ if ($repair_activity){
+ 	$store->repair_activity();
+ 	$returnurl = new moodle_url ( '/mod/groupformation/analysis_view.php', array (
+ 			'id' => $id,
+ 			'do_show' => 'analysis'
+ 	) );
+ 	redirect ( $returnurl );
+ }
+ 
 /* ---------- / Automated test user generation ---------- */
 
 
