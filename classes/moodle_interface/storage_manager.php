@@ -49,7 +49,7 @@ class mod_groupformation_storage_manager {
 	// MATHEVORKURS
 	public function show_students(){
 		global $DB,$COURSE,$CFG;
-		$records = $DB->get_records('groupformation_started',array('completed'=>1,'groupformation'=>$this->groupformationid));
+		$records = $DB->get_records('groupformation_started',array('completed'=>0,'groupformation'=>$this->groupformationid));
 		if (count($records)>0){
 			echo '<div class="alert">';
 			echo 'Studenten, die bereits geantwortet und abgegeben haben:<br>';
@@ -65,12 +65,22 @@ class mod_groupformation_storage_manager {
 			if (! $member) {
 				echo 'user does not exist!';
 			}
-		
+			if ($this->get_number_of_answers($record->userid,'learning')>0){
+				echo 'With answers for irrelevant category: ';
+// 				$this->delete_answers($record->userid,'learning');
+			}
+			echo $this->get_number_of_answers($record->userid);
 			echo '<a href="' . $url . '">' . fullname ( $member ) . '</a><br>';
 		}
 		if (count($records)>0){
 			echo '</div class="alert">';
 		}
+		echo '<div class="alert">'.$this->get_total_number_of_answers().'</div>';
+	}
+	
+	public function delete_answers($userid,$category){
+		global $DB;
+		$DB->delete_records('groupformation_answer',array('userid'=>$userid,'category'=>$category,'groupformation'=>$this->groupformationid));
 	}
 	
 	public function repair_activity(){
