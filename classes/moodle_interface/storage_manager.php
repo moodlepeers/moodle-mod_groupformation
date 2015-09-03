@@ -50,11 +50,14 @@ class mod_groupformation_storage_manager {
 		$records = $DB->get_records ( 'groupformation_started', array (
 				'groupformation' => $this->groupformationid 
 		) );
+
+		echo '<div class="alert">Gesamtanzahl an Fragen, die zu beantworten sind: ' . $this->get_total_number_of_answers () . '</div>';
+		
 		if (count ( $records ) > 0) {
 			echo '<div class="alert">';
-			echo 'Studenten, die bereits geantwortet und abgegeben haben:<br>';
+			echo 'Studenten, die mind. eine Frage beantwortet haben:<br>';
 		} else {
-			echo '<div class="alert">Es gibt keine Studenten, die bereits abgegeben haben</div>';
+			echo '<div class="alert">Es gibt keine Studenten, die mind. eine Frage beantwortet haben.</div>';
 		}
 		foreach ( $records as $record ) {
 			
@@ -63,12 +66,13 @@ class mod_groupformation_storage_manager {
 			$url = $CFG->wwwroot . '/user/view.php?id=' . $record->userid . '&course=' . $COURSE->id;
 			
 			if (! $member) {
-				echo 'user does not exist!';
+				echo 'Teilnehmer mit ID '.$record->userid.' existiert nicht.';
 			} else {
-				echo '<a href="' . $url . '">' . fullname ( $member ) . '</a> with ';
-				echo $this->get_number_of_answers ( $record->userid ) . ' answers';
+				echo '<a href="' . $url . '">' . fullname ( $member ) . '</a> ';
+				echo '{'.$this->get_number_of_answers ( $record->userid ) . ' answers} ';
+				echo (($record->completed == 1)?'[Abgegeben]':'[In Bearbeitung]').'';
 				if ($this->get_number_of_answers ( $record->userid, 'learning' ) > 0) {
-					echo ' (user has answers for irrelevant category) ';
+					echo ' (Teilnehmer hat Antworten vor Umstellung eingereicht) ';
 					// $this->delete_answers($record->userid,'learning');
 				}
 				echo '<br>';
@@ -77,7 +81,6 @@ class mod_groupformation_storage_manager {
 		if (count ( $records ) > 0) {
 			echo '</div class="alert">';
 		}
-		echo '<div class="alert">Total number of answers for questionnaire: ' . $this->get_total_number_of_answers () . '</div>';
 	}
 	public function delete_answers($userid, $category) {
 		global $DB;
