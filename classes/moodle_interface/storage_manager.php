@@ -65,11 +65,10 @@ class mod_groupformation_storage_manager {
 			if (! $member) {
 				echo 'user does not exist!';
 			} else {
-				echo $this->get_number_of_answers ( $record->userid );
 				echo '<a href="' . $url . '">' . fullname ( $member ) . '</a> with ';
 				echo $this->get_number_of_answers ( $record->userid ) . ' answers';
 				if ($this->get_number_of_answers ( $record->userid, 'learning' ) > 0) {
-					echo '(has answers for irrelevant category) ';
+					echo ' (user has answers for irrelevant category) ';
 					// $this->delete_answers($record->userid,'learning');
 				}
 				echo '<br>';
