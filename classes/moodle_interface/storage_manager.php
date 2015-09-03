@@ -48,7 +48,6 @@ class mod_groupformation_storage_manager {
 	public function show_students() {
 		global $DB, $COURSE, $CFG;
 		$records = $DB->get_records ( 'groupformation_started', array (
-				'completed' => 0,
 				'groupformation' => $this->groupformationid 
 		) );
 		if (count ( $records ) > 0) {
