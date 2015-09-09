@@ -33,14 +33,13 @@ class mod_groupformation_test_user_generator {
 		
 		$username = $this->get_username ( null, $groupformationid );
 			
-		$user_records = $DB->get_records_sql ( 'SELECT * FROM {user} WHERE username LIKE \'' . $username . '%\'' );
-		
-		if (count($user_records)>0){
-			$record = end($user_records);
-			$prev_username = $record->username;
-			$prev_username_nr = intval(substr($prev_username, strpos($prev_username,"nr")+2));
-			$first = $prev_username_nr+1;
-			$last = $prev_username_nr+$n;
+		// How many user have been created so far?
+        $user_records = $DB->get_field_sql('SELECT COUNT(id) AS count FROM {user} WHERE username LIKE \'' . $username . '%\'');
+        
+        if ($user_records > 0) {
+            $prev_username_nr = $user_records;
+            $first = $prev_username_nr + 1;
+            $last = $prev_username_nr + $n;
 		}else{
 			$first = 1;
 			$last = $n;
