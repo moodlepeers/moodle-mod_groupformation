@@ -44,6 +44,12 @@ class mod_groupformation_storage_manager {
 		$this->gm = new mod_groupformation_groups_manager ( $groupformationid );
 	}
 	
+	public function show_logging(){
+		global $DB;
+		$count = $DB->count_records('groupformation_logging');
+		echo '<div class="alert">'.$count.' Logeinträge</div>';
+	}
+	
 	// MATHEVORKURS
 	public function show_students() {
 		global $DB, $COURSE, $CFG;

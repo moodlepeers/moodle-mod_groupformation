@@ -38,6 +38,7 @@ $random_answers = optional_param ( 'random_answers', false, PARAM_BOOL );
 $delete_users = optional_param ( 'delete_users', false, PARAM_BOOL );
 $show_users = optional_param ( 'show_users', false, PARAM_BOOL );
 $repair_activity = optional_param ( 'repair_activity', false, PARAM_BOOL );
+$show_logging = optional_param ( 'show_logging', false, PARAM_BOOL );
 // Import jQuery and js file
 groupformation_add_jquery ( $PAGE, 'survey_functions.js' );
 
@@ -156,6 +157,15 @@ require ('tabs.php');
  
  if ($repair_activity){
  	$store->repair_activity();
+ 	$returnurl = new moodle_url ( '/mod/groupformation/analysis_view.php', array (
+ 			'id' => $id,
+ 			'do_show' => 'analysis'
+ 	) );
+ 	redirect ( $returnurl );
+ }
+ 
+ if ($show_logging){
+ 	$store->show_logging();
  	$returnurl = new moodle_url ( '/mod/groupformation/analysis_view.php', array (
  			'id' => $id,
  			'do_show' => 'analysis'
