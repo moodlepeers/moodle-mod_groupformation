@@ -53,7 +53,25 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		
 		// global $CFG, $DB, $OUTPUT;
 		$mform = & $this->_form;
-		
+
+
+
+
+        $mform->addElement ( 'html', '<div class="beta_version_warning" id="maxmembers_error">
+                             <p>ACHTUNG: BETA-Version. Nur für Dozenten in Zusammenarbeit mit Projekt MoodlePeers  gedacht.</p>
+                </div>');
+
+        // add passwort field
+        $mform->addElement ( 'password', 'password', 'Passwort', array (
+            'size' => '64'
+        ) );
+//        $mform->disabledIf('name', 'password', 'neq', 'MoodlePeersBeta');
+//        $mform->disabledIf('name', 'timinghdr', 'neq', 'MoodlePeersBeta');
+
+//        $mform->disabledIf('name', 'password', 'neq', 'MoodlePeersBeta');
+
+
+
 		// Adding the "general" fieldset, where all the common settings are showed.
 		$mform->addElement ( 'header', 'general', get_string ( 'general', 'form' ) );
 		$mform->setExpanded ( 'general' );
@@ -117,6 +135,10 @@ class mod_groupformation_mod_form extends moodleform_mod {
 	 */
 	function validation($data, $files) {
 		$errors = array ();
+        if ($data['password'] != 'MoodlePeersBeta'){
+            $errors ['szenario'] = get_string ( 'password_wrong', 'groupformation' );
+        }
+
 		// Check if szenario is selected
 		if ($data ['szenario'] == 0) {
 			$errors ['szenario'] = get_string ( 'scenario_error', 'groupformation' );

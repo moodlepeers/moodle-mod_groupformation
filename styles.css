@@ -213,6 +213,25 @@ h1.caption {
 .whitespace_m {
   margin: 3em 0; }
 
+/* TODO delete this after beta is finished */
+.beta_version_warning{
+    width: 100%; }
+.beta_version_warning p {
+    width: 100%;
+    background-color: #fff0f0;
+    border-color: #ffdce1;
+    color: #c83025;
+    border: 1px solid #ffedca;
+    border-radius: 4px;
+    padding: 8px 35px 8px 14px;
+    margin-top: 2px;
+    margin-bottom: 3px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5); }
+.beta_version_warning p:before{
+    font-weight: bold;
+    content: "* "; }
+/***********************/
+
 .js_errors{
   width: 100%; }
   .js_errors p {
