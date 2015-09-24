@@ -236,7 +236,6 @@ $string['contact_members'] = 'To contact your team members you have to click on 
 $string['invalid'] = 'invalid status';
 $string['groups_build'] = 'Groups are built.';
 $string['activity_visible'] = 'Activity is not visible for you.';
-
 $string['are'] = 'You have ';
 $string['are_now'] = 'At the moment you have ';
 $string['students_available_single'] = ' enrolled student who can fill in the questionnaire.';
@@ -263,7 +262,6 @@ $string['your_group'] = 'Your group ';
 $string['students_grouping_single'] = ' student for group building.';
 $string['students_grouping_multiple'] = ' students for group building.';
 $string['students_commited_single'] = ' student therefrom has already commited his/her answers.';
-$string['students_commited_multiple'] = ' students therefrom have already commited their answers.'
+$string['students_commited_multiple'] = ' students therefrom have already commited their answers.';
 $string['commited_not_completed'] = ' from the commited questionnaires are not complete.';
 $string['completed_questionaire'] = ' completely answered questionnaires.';
-// $string [''] = '';
