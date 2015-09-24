@@ -29,7 +29,6 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 require_once ($CFG->dirroot . '/group/lib.php');
-
 class mod_groupformation_storage_manager {
 	private $groupformationid;
 	private $data;
@@ -41,22 +40,26 @@ class mod_groupformation_storage_manager {
 	 */
 	public function __construct($groupformationid) {
 		$this->groupformationid = $groupformationid;
-		$this->data = new mod_groupformation_data();
-		$this->gm = new mod_groupformation_groups_manager($groupformationid);
+		$this->data = new mod_groupformation_data ();
+		$this->gm = new mod_groupformation_groups_manager ( $groupformationid );
 	}
 	
 	/**
 	 * Sets answer counter for user
-	 * 
-	 * @param int $userid
+	 *
+	 * @param int $userid        	
 	 */
-	public function set_answer_count($userid){
+	public function set_answer_count($userid) {
 		global $DB;
 		$record = $DB->get_record ( 'groupformation_started', array (
-				'groupformation' => $this->groupformationid, 'userid'=>$userid
+				'groupformation' => $this->groupformationid,
+				'userid' => $userid 
 		) );
-		$record->answer_count = $DB->count_records('groupformation_answer',array('groupformation'=>$this->groupformationid,'userid'=>$userid));
-		$DB->update_record('groupformation_started', $record);
+		$record->answer_count = $DB->count_records ( 'groupformation_answer', array (
+				'groupformation' => $this->groupformationid,
+				'userid' => $userid 
+		) );
+		$DB->update_record ( 'groupformation_started', $record );
 	}
 	
 	/**
@@ -130,7 +133,7 @@ class mod_groupformation_storage_manager {
 		$data->question = $question ['question'];
 		$data->options = $this->convert_options ( $question ['options'] );
 		$data->position = $question ['position'];
-// 		$data->questionid = $question ['questionid'];
+		// $data->questionid = $question ['questionid'];
 		$data->language = $language;
 		$data->optionmax = count ( $question ['options'] );
 		
@@ -197,7 +200,7 @@ class mod_groupformation_storage_manager {
 					'category' => $category 
 			) );
 		}
-
+		
 		$scenario = $this->getScenario ();
 		$names = $this->data->getCriterionSet ( $scenario, $this->groupformationid );
 		$number = 0;
@@ -390,13 +393,11 @@ class mod_groupformation_storage_manager {
 		
 		return $array;
 	}
-	
-	
-	public function getPossibleLang($category){
+	public function getPossibleLang($category) {
 		global $DB;
 		
 		$table = 'groupformation_' . $category;
-		$lang = $DB->get_field($table, 'language', array(), IGNORE_MULTIPLE);
+		$lang = $DB->get_field ( $table, 'language', array (), IGNORE_MULTIPLE );
 		return $lang;
 	}
 	
@@ -483,12 +484,11 @@ class mod_groupformation_storage_manager {
 		) );
 		
 		if ($name) {
-			return $this->data->get_scenario_name( $settings->szenario );
+			return $this->data->get_scenario_name ( $settings->szenario );
 		}
 		
 		return $settings->szenario;
 	}
-	
 	public function getTotalNumber() {
 		$names = $this->data->getCriterionSet ( $this->getScenario (), $this->groupformationid );
 		$number = 0;
@@ -519,7 +519,7 @@ class mod_groupformation_storage_manager {
 		if ($status == 0) {
 			$this->setCompleted ( $userId, true );
 			// TODO Mathevorkurs
-			$this->gm->assign_to_group_AB( $userId);
+			// $this->gm->assign_to_group_AB( $userId);
 		}
 	}
 	
@@ -620,13 +620,14 @@ class mod_groupformation_storage_manager {
 	 */
 	public function has_answer($userId, $category, $questionId) {
 		global $DB;
-
-		return $DB->record_exists( 'groupformation_answer', array (
+		
+		return $DB->record_exists ( 'groupformation_answer', array (
 				'groupformation' => $this->groupformationid,
 				'userid' => $userId,
 				'category' => $category,
 				'questionid' => $questionId 
-		) );;
+		) );
+		;
 	}
 	
 	/**
@@ -673,7 +674,7 @@ class mod_groupformation_storage_manager {
 	public function already_answered() {
 		global $DB;
 		
-		return !($DB->count_records ( 'groupformation_answer', array (
+		return ! ($DB->count_records ( 'groupformation_answer', array (
 				'groupformation' => $this->groupformationid 
 		) ) == 0);
 	}
@@ -744,16 +745,16 @@ class mod_groupformation_storage_manager {
 		
 		$answerAlreadyExist = $this->has_answer ( $userid, $category, $questionid );
 		
-		if ($answerAlreadyExist){
-			$record = $DB->get_record( 'groupformation_answer', array (
-				'groupformation' => $this->groupformationid,
-				'userid' => $userid,
-				'category' => $category,
-				'questionid' => $questionid 
-		) );		
+		if ($answerAlreadyExist) {
+			$record = $DB->get_record ( 'groupformation_answer', array (
+					'groupformation' => $this->groupformationid,
+					'userid' => $userid,
+					'category' => $category,
+					'questionid' => $questionid 
+			) );
 			$record->answer = $answer;
 			$DB->update_record ( 'groupformation_answer', $record );
-		}else{
+		} else {
 			$record = new stdClass ();
 			$record->groupformation = $this->groupformationid;
 			
@@ -985,23 +986,23 @@ class mod_groupformation_storage_manager {
 	
 	/**
 	 * Returns if questionaire is closed
-	 * 
+	 *
 	 * @return boolean
 	 */
-	public function isQuestionaireAccessible(){
-		$times = $this->getTime();
-		$condition = $times['end_raw']<time();
-		return (!$this->isQuestionaireAvailable() && $condition);
+	public function isQuestionaireAccessible() {
+		$times = $this->getTime ();
+		$condition = $times ['end_raw'] < time ();
+		return (! $this->isQuestionaireAvailable () && $condition);
 	}
 	
 	/**
 	 * Returns the total number of answers
-	 * 
+	 *
 	 * @return int
 	 */
-	public function get_total_number_of_answers(){
-		$categories = $this->getCategories();
-		$numbers = $this->getNumbers($categories);
-		return array_sum($numbers);
+	public function get_total_number_of_answers() {
+		$categories = $this->getCategories ();
+		$numbers = $this->getNumbers ( $categories );
+		return array_sum ( $numbers );
 	}
 }

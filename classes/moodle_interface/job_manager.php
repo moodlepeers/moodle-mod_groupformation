@@ -309,23 +309,29 @@ class mod_groupformation_job_manager {
 		
 		$pp = new mod_groupformation_participant_parser ( $groupformationid );
 		
-		if (count ( $completed_users ) > 2) {
-			$divided_userlist = array_chunk ( $completed_users, ceil ( count ( $completed_users ) / 2.0 ) );
-			
-			if (! is_null ( $divided_userlist [0] )) {
-				$groupal_users = $divided_userlist [0];
-			} else {
-				$groupal_users = array ();
-			}
-			if (! is_null ( $divided_userlist [1] )) {
-				$random_users = $divided_userlist [1];
-			} else {
-				$random_users = array ();
-			}
-		} else {
-			$groupal_users = $completed_users;
-			$random_users = array ();
-		}
+		// --- Mathevorkurs
+		// if (count ( $completed_users ) > 2) {
+		// $divided_userlist = array_chunk ( $completed_users, ceil ( count ( $completed_users ) / 2.0 ) );
+		
+		// if (! is_null ( $divided_userlist [0] )) {
+		// $groupal_users = $divided_userlist [0];
+		// } else {
+		// $groupal_users = array ();
+		// }
+		// if (! is_null ( $divided_userlist [1] )) {
+		// $random_users = $divided_userlist [1];
+		// } else {
+		// $random_users = array ();
+		// }
+		// } else {
+		// $groupal_users = $completed_users;
+		// $random_users = array ();
+		// }
+		// --- END: Mathevorkurs
+		
+		// --- Klassisch
+		$groupal_users = $completed_users;
+		// --- END: Klassisch
 		
 		$starttime = microtime ( true );
 		
@@ -338,9 +344,11 @@ class mod_groupformation_job_manager {
 		// $participant_writer = new participant_writer ( $path . "_participants.xml" );
 		// $participant_writer->write ( $groupal_participants );
 		
+		// --- Mathevorkurs
 		// Generate empty participants
-		$participants = $pp->build_empty_participants ( $random_users );
-		$random_participants = $participants;
+		// $participants = $pp->build_empty_participants ( $random_users );
+		// $random_participants = $participants;
+		// --- END: Mathevorkurs
 		
 		// Generate empty participants
 		$participants = $pp->build_empty_participants ( $incomplete_users );
@@ -371,11 +379,12 @@ class mod_groupformation_job_manager {
 			
 			groupformation_info ( null, $job->groupformationid, 'groupal needed ' . $comptime . 'ms' );
 		}
-		
-		if (count ( $random_participants ) > 0) {
-			$gfra = new GroupFormationRandomAlgorithm ( $random_participants, $groupsize );
-			$random_cohort = $gfra->doOneFormation ();
-		}
+		// --- Mathevorkurs
+		// if (count ( $random_participants ) > 0) {
+		// $gfra = new GroupFormationRandomAlgorithm ( $random_participants, $groupsize );
+		// $random_cohort = $gfra->doOneFormation ();
+		// }
+		// --- END: Mathevorkurs
 		
 		if (count ( $incomplete_participants ) > 0) {
 			$gfra = new GroupFormationRandomAlgorithm ( $incomplete_participants, $groupsize );
@@ -390,11 +399,20 @@ class mod_groupformation_job_manager {
 		// $cohort_writer = new cohort_writer($path."_cohort.xml");
 		// $cohort_writer->write($groupal_cohort);
 		
+		// --- Mathevorkurs
+		// $cohorts = array (
+		// $groupal_cohort,
+		// $random_cohort,
+		// $incomplete_cohort
+		// );
+		// --- END: Mathevorkurs
+		
+		// --- Klassisch
 		$cohorts = array (
 				$groupal_cohort,
-				$random_cohort,
 				$incomplete_cohort 
 		);
+		// --- END: Klassisch
 		
 		return $cohorts;
 	}

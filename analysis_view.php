@@ -80,15 +80,14 @@ $controller = new mod_groupformation_analysis_controller ( $groupformation->id )
 if ($_POST) {
 	if (isset ( $_POST ['start_questionnaire'] )) {
 		$controller->start_questionnaire ();
-
 	} elseif (isset ( $_POST ['stop_questionnaire'] )) {
 		$controller->stop_questionnaire ();
 	}
 	$returnurl = new moodle_url ( '/mod/groupformation/analysis_view.php', array (
 			'id' => $id,
-			'do_show' => 'analysis'
+			'do_show' => 'analysis' 
 	) );
-	redirect($returnurl);
+	redirect ( $returnurl );
 }
 
 echo $OUTPUT->header ();
@@ -126,32 +125,28 @@ require ('tabs.php');
 // var_dump($question->get_knowledge_values());
 // $radio_question = new mod_groupformation_radio_question('motivation',19);
 
-
-
 /* ---------- Automated test user generation ---------- */
 
- $cqt = new mod_groupformation_test_user_generator ();
+$cqt = new mod_groupformation_test_user_generator ();
 
- if ($delete_users) {
- 	$cqt->delete_test_users ( $groupformation->id );
- 	$returnurl = new moodle_url ( '/mod/groupformation/analysis_view.php', array (
- 			'id' => $id,
- 			'do_show' => 'analysis'
- 	) );
- 	redirect ( $returnurl );
- }
- if ($create_users > 0) {
- 	$cqt->create_test_users ( $create_users, $groupformation->id, $create_answers, $random_answers );
- 	$returnurl = new moodle_url ( '/mod/groupformation/analysis_view.php', array (
- 			'id' => $id,
- 			'do_show' => 'analysis'
- 	) );
- 	redirect ( $returnurl );
- }
+if ($delete_users) {
+	$cqt->delete_test_users ( $groupformation->id );
+	$returnurl = new moodle_url ( '/mod/groupformation/analysis_view.php', array (
+			'id' => $id,
+			'do_show' => 'analysis' 
+	) );
+	redirect ( $returnurl );
+}
+if ($create_users > 0) {
+	$cqt->create_test_users ( $create_users, $groupformation->id, $create_answers, $random_answers );
+	$returnurl = new moodle_url ( '/mod/groupformation/analysis_view.php', array (
+			'id' => $id,
+			'do_show' => 'analysis' 
+	) );
+	redirect ( $returnurl );
+}
 
 /* ---------- / Automated test user generation ---------- */
-
-
 
 // $jm = new mod_groupformation_job_manager ();
 
@@ -164,11 +159,13 @@ require ('tabs.php');
 // $job = $jm::get_job ( $groupformation->id );
 
 // if (! is_null ( $job )) {
-// 	$result = $jm::do_groupal ( $job, $groupal_cohort, $random_cohort, $incomplete_cohort);
-// 	// var_dump($result);
+// 	$result = $jm::do_groupal ( $job, $groupal_cohort, $random_cohort, $incomplete_cohort );
+// 	var_dump ( $result );
+// 	// $saved = $jm::save_result($job,$result[0],$random_cohort,$result[1]);
 // 	// var_dump($result[0]->groups);
 // 	// var_dump($result[0]->results);
 // }
+
 // -----------------------------------------------
 
 // echo '<div style="color:red;">Diese Seite ist soweit fertig; Rückmeldung, wenn es etwas fehlt oder unverständlich ist, wäre super.</div>';

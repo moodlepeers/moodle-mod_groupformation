@@ -95,7 +95,7 @@
 			return $status == 1;
 		}
 		
-		// --- MAthevorkurs
+		// --- Mathevorkurs
 		//public function goNotOn(){
 		//	$this->goIternalBack(1);
 		//}
