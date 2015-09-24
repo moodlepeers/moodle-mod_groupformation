@@ -57,6 +57,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 
 
 
+        // beta version info and password
         $mform->addElement ( 'html', '<div class="beta_version_warning" id="maxmembers_error">
                              <p>ACHTUNG: BETA-Version. Nur für Dozenten in Zusammenarbeit mit Projekt MoodlePeers  gedacht.</p>
                 </div>');
@@ -65,10 +66,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
         $mform->addElement ( 'password', 'password', 'Passwort', array (
             'size' => '64'
         ) );
-//        $mform->disabledIf('name', 'password', 'neq', 'MoodlePeersBeta');
-//        $mform->disabledIf('name', 'timinghdr', 'neq', 'MoodlePeersBeta');
 
-//        $mform->disabledIf('name', 'password', 'neq', 'MoodlePeersBeta');
 
 
 
@@ -135,6 +133,8 @@ class mod_groupformation_mod_form extends moodleform_mod {
 	 */
 	function validation($data, $files) {
 		$errors = array ();
+
+        // check the password for beta version
         if ($data['password'] != 'MoodlePeersBeta'){
             $errors ['szenario'] = get_string ( 'password_wrong', 'groupformation' );
         }
