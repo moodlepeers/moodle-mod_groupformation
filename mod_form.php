@@ -31,7 +31,6 @@ require_once ($CFG->dirroot . '/course/moodleform_mod.php');
 require_once ($CFG->dirroot . '/mod/groupformation/lib.php'); // not in the template
 require_once ($CFG->dirroot . '/mod/groupformation/locallib.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
-
 class mod_groupformation_mod_form extends moodleform_mod {
 	private $store;
 	
@@ -53,23 +52,22 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		
 		// global $CFG, $DB, $OUTPUT;
 		$mform = & $this->_form;
-
-
-
-
-        // beta version info and password
-        $mform->addElement ( 'html', '<div class="beta_version_warning" id="maxmembers_error">
-                             <p>ACHTUNG: BETA-Version. Nur für Dozenten in Zusammenarbeit mit Projekt MoodlePeers  gedacht.</p>
-                </div>');
-
-        // add passwort field
-        $mform->addElement ( 'password', 'password', 'Passwort', array (
-            'size' => '64'
-        ) );
-
-
-
-
+		
+		if (! isset ( $this->_cm )) {
+			
+			$mform->addElement ( 'header', 'password_header', get_string ( 'password' ) );
+			$mform->setExpanded ( 'password_header' );
+			// beta version info and password
+			$mform->addElement ( 'html', '<div class="beta_version_warning" id="maxmembers_error">
+                             <p>ACHTUNG: BETA-Version. Nur für Dozenten in Zusammenarbeit mit Projekt MoodlePeers gedacht.</p>
+                </div>' );
+			
+			// add passwort field
+			$mform->addElement ( 'password', 'password',get_string('password'), array (
+					'size' => '64' 
+			) );
+			$mform->addRule ( 'password', null, 'required', null, 'client' );
+		}
 		// Adding the "general" fieldset, where all the common settings are showed.
 		$mform->addElement ( 'header', 'general', get_string ( 'general', 'form' ) );
 		$mform->setExpanded ( 'general' );
@@ -94,7 +92,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		$mform->setExpanded ( 'timinghdr' );
 		// no changes possible hint
 		$changemsg = '<div class="fitem" id="nochangespossible"';
-		if ($this->store->already_answered()) {
+		if ($this->store->already_answered ()) {
 			$changemsg .= ' ><span value="1"';
 		} else {
 			$changemsg .= ' style="display:none;"><span value="0"';
@@ -133,12 +131,12 @@ class mod_groupformation_mod_form extends moodleform_mod {
 	 */
 	function validation($data, $files) {
 		$errors = array ();
-
-        // check the password for beta version
-        if ($data['password'] != 'MoodlePeersBeta'){
-            $errors ['szenario'] = get_string ( 'password_wrong', 'groupformation' );
-        }
-
+		
+		// check the password for beta version
+		if ($data ['password'] != 'MoodlePeersBeta') {
+			$errors ['szenario'] = get_string ( 'password_wrong', 'groupformation' );
+		}
+		
 		// Check if szenario is selected
 		if ($data ['szenario'] == 0) {
 			$errors ['szenario'] = get_string ( 'scenario_error', 'groupformation' );
@@ -181,7 +179,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		// open div tag for js related content
 		$mform->addElement ( 'html', '<div id="js-content" style="display:none;">' );
 		
-		$mform->addElement ( 'html',mod_groupformation_util::get_info_text_for_teacher(false));
+		$mform->addElement ( 'html', mod_groupformation_util::get_info_text_for_teacher ( false ) );
 		// add scenario related HTML
 		$mform->addElement ( 'html', '
                     <div class="gf_settings_pad">
@@ -402,7 +400,6 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		
 		// close wrapper for topics
 		$mform->addElement ( 'html', '</div>' );
-
 		
 		// wrapper for Groupsize Options
 		$mform->addElement ( 'html', '<div class="gf_settings_pad">' );
@@ -491,7 +488,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 						<span id="max_points_wrapper"><input type="number" id="max_points"  min="0" max="100" value="100" /><span class="toolt" tooltip="' . get_string ( 'evaluation_point_info', 'groupformation' ) . '"></span></span>
                     </div>
                 ' );
-		     
+		
 		// close wrapper for evaluation options
 		$mform->addElement ( 'html', '</div>' );
 		
