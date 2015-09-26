@@ -727,5 +727,30 @@ function xmldb_groupformation_upgrade($oldversion) {
 		upgrade_mod_savepoint(true, 2015081300, 'groupformation');
 	}
 	
+	if ($oldversion < 2015092600) {
+	
+		// Define field onlyactivestudents to be added to groupformation.
+		$table = new xmldb_table('groupformation');
+		$field = new xmldb_field('onlyactivestudents', XMLDB_TYPE_INTEGER, '1', null, null, null, null, 'maxpoints');
+	
+		// Conditionally launch add field onlyactivestudents.
+		if (!$dbman->field_exists($table, $field)) {
+			$dbman->add_field($table, $field);
+		}
+		
+		// Define field emailnotifications to be added to groupformation.
+		$table = new xmldb_table('groupformation');
+		$field = new xmldb_field('emailnotifications', XMLDB_TYPE_INTEGER, '1', null, null, null, null, 'onlyactivestudents');
+		
+		// Conditionally launch add field emailnotifications.
+		if (!$dbman->field_exists($table, $field)) {
+			$dbman->add_field($table, $field);
+		}
+	
+		// Groupformation savepoint reached.
+		upgrade_mod_savepoint(true, 2015092600, 'groupformation');
+	}
+	
+	
 	return true;
 }

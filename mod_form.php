@@ -133,7 +133,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		$errors = array ();
 		
 		// check the password for beta version
-		if ($data ['password'] != 'MoodlePeersBeta') {
+		if (isset($data['password']) && $data ['password'] != 'MoodlePeersBeta') {
 			$errors ['szenario'] = get_string ( 'password_wrong', 'groupformation' );
 		}
 		
@@ -492,6 +492,22 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		// close wrapper for evaluation options
 		$mform->addElement ( 'html', '</div>' );
 		
+		// add checkbox topics
+		$mform->addElement ( 'html', '
+                    <div class="gf_pad_header">
+						<label class="gf_label" for="id_js_onlyactivestudents">
+                          <input type="checkbox" id="id_js_onlyactivestudents" name="chbOnlyactivestudents" value="onlyactivestudents">
+                          ' . get_string ( 'onlyactivestudents_description', 'groupformation' ) . '</label><span id="onlyactivestudentsStateLabel" class="optional"></span>
+                    </div>' );
+		
+		// add checkbox topics
+		$mform->addElement ( 'html', '
+                    <div class="gf_pad_header">
+						<label class="gf_label" for="id_js_emailnotifications">
+                          <input type="checkbox" id="id_js_emailnotifications" name="chbEmailnotifications" value="wantEmailnotifications">
+                          ' . get_string ( 'emailnotifications_description', 'groupformation' ) . '</label><span id="emailnotificationsStateLabel" class="optional"></span>
+                    </div>' );
+		
 		// close wrapper of the szenario
 		$mform->addElement ( 'html', '</div>' );
 		
@@ -584,6 +600,11 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		
 		$mform->disabledIf ( 'maxpoints', 'evaluationmethod', 'neq', '2' );
 		$mform->setType ( 'maxpoints', PARAM_NUMBER );
+		
+		$mform->addElement('checkbox', 'onlyactivestudents', get_string('onlyactivestudents', 'groupformation'));
+		
+		$mform->addElement('checkbox', 'emailnotifications', get_string('emailnotifications', 'groupformation'));
+		
 		
 		// close div tag for non-js related content
 		$mform->addElement ( 'html', '</div id="non-js-content">' );

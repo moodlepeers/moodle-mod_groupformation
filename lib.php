@@ -563,6 +563,18 @@ function groupformation_set_fields(stdClass $groupformation) {
 		$groupformation->maxpoints = 100;
 	}
 	
+	if (isset ( $groupformation->onlyactivestudents )) {
+		$groupformation->onlyactivestudents = 1;
+	}else{
+		$groupformation->onlyactivestudents = 0;
+	}
+	
+	if (isset ( $groupformation->emailnotifications )) {
+		$groupformation->emailnotifications = 1;
+	}else{
+		$groupformation->emailnotifications = 0;
+	}
+	
 	return $groupformation;
 }
 

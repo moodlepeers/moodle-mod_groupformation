@@ -224,4 +224,10 @@ $string['grouping_abort'] = 'Gruppenbildung abbrechen';
 $string['moodlegrouping_delete'] = 'Moodle-Gruppen l&ouml;schen';
 $string['questionaire_commited'] = 'Ihre Antworten sind abgegeben. Somit können Sie sie nicht mehr verändern.';
 $string['no_data_to_display'] = 'Keine Daten vorhanden.';
+
+$string['onlyactivestudents'] = 'Only students with at least one submitted answer should be considered for building groups';
+$string['emailnotifications'] = 'I want to be notified when the groupformation job has terminated.';
+$string['onlyactivestudents_description'] = 'Only students with at least one submitted answer should be considered for building groups';
+$string['emailnotifications_description'] = 'I want to be notified when the groupformation job finished.';
+
 // $string [''] = '';

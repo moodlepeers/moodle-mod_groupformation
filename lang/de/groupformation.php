@@ -223,6 +223,10 @@ $string['moodlegrouping_delete'] = 'Moodle-Gruppen l&ouml;schen';
 $string['questionaire_commited'] = 'Ihre Antworten sind abgegeben. Somit können Sie sie nicht mehr verändern.';
 $string['no_data_to_display'] = 'Keine Daten vorhanden.';
 // $string [''] = '';
+$string['onlyactivestudents'] = 'Zur Gruppenbildung sollen ausschließlich Studenten betrachtet werden, die mind. eine Frage beantwortet haben.';
+$string['emailnotifications'] = 'Nach Abschluss der Gruppenbildung möchte ich via Nachricht in Moodle benachrichtigt werden.';
+$string['onlyactivestudents_description'] = 'Zur Gruppenbildung sollen ausschließlich Studenten betrachtet werden, die mind. eine Frage beantwortet haben.';
+$string['emailnotifications_description'] = 'Nach Abschluss der Gruppenbildung möchte ich via Nachricht in Moodle benachrichtigt werden.';
 
 
 	
