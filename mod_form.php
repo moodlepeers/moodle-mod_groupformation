@@ -604,8 +604,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		$mform->addElement('checkbox', 'onlyactivestudents', get_string('onlyactivestudents', 'groupformation'));
 		
 		$mform->addElement('checkbox', 'emailnotifications', get_string('emailnotifications', 'groupformation'));
-		
-		
+		$mform->setDefault('emailnotifications',true);
 		// close div tag for non-js related content
 		$mform->addElement ( 'html', '</div id="non-js-content">' );
 	}
