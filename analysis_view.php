@@ -152,18 +152,12 @@ if ($create_users > 0) {
 
 // $job = null;
 
-// $groupal_cohort = null;
-// $random_cohort = null;
-// $incomplete_cohort = null;
-
 // $job = $jm::get_job ( $groupformation->id );
 
 // if (! is_null ( $job )) {
-// 	$result = $jm::do_groupal ( $job, $groupal_cohort, $random_cohort, $incomplete_cohort );
+// 	$result = $jm::do_groupal ( $job );
 // 	var_dump ( $result );
-// 	// $saved = $jm::save_result($job,$result[0],$random_cohort,$result[1]);
-// 	// var_dump($result[0]->groups);
-// 	// var_dump($result[0]->results);
+// // 	$saved = $jm::save_result($job,$result);
 // }
 
 // -----------------------------------------------

@@ -68,23 +68,14 @@ class build_groups_task extends \core\task\scheduled_task {
 		$saved = false;
 		
 		$job = null;
-		$groupal_cohort = null;
-		$random_cohort = null;
-		$incomplete_cohort = null;
 		
 		$job = \mod_groupformation_job_manager::get_next_job ();
 		
 		if (! is_null ( $job )) {
-			$result = \mod_groupformation_job_manager::do_groupal ( $job, $groupal_cohort, $random_cohort, $incomplete_cohort );
+			$result = \mod_groupformation_job_manager::do_groupal ( $job );
 			$aborted = \mod_groupformation_job_manager::is_job_aborted ( $job );
 			if (! $aborted) {
-				// --- Mathevorkurs
-// 				$saved = \mod_groupformation_job_manager::save_result ( $job, $groupal_cohort, $result [1], $result [2] );
-				// --- END: Mathevorkurs
-				
-				// --- Klassisch
-				$saved = \mod_groupformation_job_manager::save_result($job,$groupal_cohort,$random_cohort,$result[1]);
-				// --- END: Klassisch
+				$saved = \mod_groupformation_job_manager::save_result($job,$result);
 			}
 		}
 		return $saved;

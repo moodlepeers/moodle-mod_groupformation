@@ -52,17 +52,6 @@ class mod_groupformation_job_manager {
 	 */
 	public static function get_next_job() {
 		global $DB;
-		$sql = "SELECT * 
-				FROM {groupformation_jobs} 
-				WHERE 
-					waiting = 1
-					AND
-					started = 0
-					AND
-					aborted = 0
-					AND 
-					done = 0
-				ORDER BY timecreated ASC";
 		$jobs = $DB->get_records ( 'groupformation_jobs', array (
 				'waiting' => 1,
 				'started' => 0,
@@ -72,11 +61,14 @@ class mod_groupformation_job_manager {
 		
 		if (count ( $jobs ) == 0)
 			return null;
+		
 		$next = null;
+		
 		foreach ( $jobs as $id => $job ) {
 			if ($job->timecreated != null && ($next == null || $job->timecreated < $next->timecreated))
 				$next = $job;
 		}
+		
 		self::set_job ( $next, "started", true );
 		
 		groupformation_info ( null, $next->groupformationid, 'groupal job with groupformation id="' . $next->groupformationid . '" selected' );
@@ -91,6 +83,7 @@ class mod_groupformation_job_manager {
 	 */
 	public static function get_aborted_jobs() {
 		global $DB;
+		
 		$jobs = $DB->get_records ( 'groupformation_jobs', array (
 				'waiting' => 0,
 				'started' => 0,
@@ -198,79 +191,43 @@ class mod_groupformation_job_manager {
 		$data = new mod_groupformation_data ();
 		return $data->get_job_status_options ();
 	}
-	
-	/**
-	 * Generates participants with ids within interval
-	 *
-	 * @deprecated not in use?
-	 * @param unknown $id_begin        	
-	 * @param unknown $id_end        	
-	 * @return multitype:Participant
-	 */
-	private static function get_testing_data($id_begin, $id_end) {
+	public static function get_users($groupformationid) {
+		$store = new mod_groupformation_storage_manager ( $groupformationid );
 		
-		// Dummy Criterions
-		$c_vorwissen = new SpecificCriterion ( "vorwissen", array (
-				0.4,
-				0.8,
-				0.8,
-				0.4,
-				0.4,
-				0.4,
-				0.4 
-		), 0, 1, true, 1 );
-		$c_note = new SpecificCriterion ( "note", array (
-				0.4 
-		), 0, 1, true, 1 );
-		$c_persoenlichkeit = new SpecificCriterion ( "persoenlichkeit", array (
-				0.4,
-				0.4,
-				0.4,
-				0.4,
-				0.4 
-		), 0, 1, true, 1 );
-		$c_motivation = new SpecificCriterion ( "motivation", array (
-				0.4,
-				0.4,
-				0.4,
-				0.4 
-		), 0, 1, true, 1 );
-		$c_lernstil = new SpecificCriterion ( "lernstil", array (
-				0.4,
-				0.4,
-				0.4,
-				0.4 
-		), 0, 1, true, 1 );
-		$c_teamorientierung = new SpecificCriterion ( "teamorientierung", array (
-				0.4,
-				0.4,
-				0.4,
-				0.4,
-				0.4,
-				0.4 
-		), 0, 1, true, 1 );
+		$courseid = $store->getCourseID ();
+		$context = context_course::instance ( $courseid );
 		
-		$criterion_types = array (
-				$c_vorwissen,
-				$c_motivation,
-				$c_note,
-				$c_persoenlichkeit,
-				$c_lernstil,
-				$c_teamorientierung 
-		);
-		$participants = array ();
-		for($i = $id_begin; $i <= $id_end; $i ++) {
-			$participants [] = new Participant ( array (
-					$c_vorwissen,
-					$c_motivation,
-					$c_note,
-					$c_persoenlichkeit,
-					$c_lernstil,
-					$c_teamorientierung 
-			), $i );
+		// all enrolled students
+		$enrolled_students = array_keys ( get_enrolled_users ( $context, 'mod/groupformation:onlystudent' ) );
+		// var_dump("enrolled_students: ".implode(", ",$enrolled_students));
+		
+		$userfilter = new mod_groupformation_userid_filter ( $groupformationid );
+		
+		$all_answers = $userfilter->getCompletedIDs ();
+		// var_dump("all_answers: ".implode(", ",$all_answers));
+		
+		$some_answers = $userfilter->getNoneCompletedIds ();
+		// var_dump("some_answers: ".implode(", ",$some_answers));
+		
+		$diff = array_diff ( $enrolled_students, $all_answers );
+		$no_or_some_answers = array_unique ( array_merge ( $diff, $some_answers ) );
+		// var_dump("no_or_some_answers: ".implode(", ",$no_or_some_answers));
+		
+		$no_answers = array_diff ( $no_or_some_answers, $some_answers );
+		// var_dump("no_answers: ".implode(", ",$no_answers));
+		
+		$groupal_users = $all_answers;
+		
+		if ($store->get_grouping_setting ()) {
+			$random_users = $some_answers;
+		} else {
+			$random_users = $no_or_some_answers;
 		}
 		
-		return $participants;
+		return array (
+				$groupal_users,
+				$random_users 
+		);
 	}
 	
 	/**
@@ -279,94 +236,28 @@ class mod_groupformation_job_manager {
 	 * @param stdClass $job        	
 	 * @return array with 3 elements: groupal cohorts, random cohort and incomplete random cohort
 	 */
-	public static function do_groupal($job, &$groupal_cohort, &$random_cohort, &$incomplete_cohort) {
+	public static function do_groupal($job) {
 		global $CFG;
 		
 		$groupformationid = $job->groupformationid;
 		
-		$path = $CFG->dirroot . '/mod/groupformation/xml_participants/' . "php_" . $groupformationid;
-		
 		$store = new mod_groupformation_storage_manager ( $groupformationid );
 		$groupsize = intval ( $store->getGroupSize () );
 		
-		$userfilter = new mod_groupformation_userid_filter ( $groupformationid );
+		// Assign users
+		$users = self::get_users ( $groupformationid );
 		
-		$completed_users = $userfilter->getCompletedIDs ();
-		$nonecomplete_users = $userfilter->getNoneCompletedIds ();
+		$groupal_users = $users [0];
+		$incomplete_users = $users [1];
 		
-		$store = new mod_groupformation_storage_manager ( $groupformationid );
-		
-		$courseid = $store->getCourseID ();
-		
-		$context = context_course::instance ( $courseid );
-		
-		$enrolled_students = array_keys ( get_enrolled_users ( $context, 'mod/groupformation:onlystudent' ) );
-		
-		$diff = array_diff ( $enrolled_students, $completed_users );
-		$merge = array_unique ( array_merge ( $diff, $nonecomplete_users ) );
-		
-		$incomplete_users = $merge;
-		
+		// Build participants
 		$pp = new mod_groupformation_participant_parser ( $groupformationid );
-		
-		// --- Mathevorkurs
-		// if (count ( $completed_users ) > 2) {
-		// $divided_userlist = array_chunk ( $completed_users, ceil ( count ( $completed_users ) / 2.0 ) );
-		
-		// if (! is_null ( $divided_userlist [0] )) {
-		// $groupal_users = $divided_userlist [0];
-		// } else {
-		// $groupal_users = array ();
-		// }
-		// if (! is_null ( $divided_userlist [1] )) {
-		// $random_users = $divided_userlist [1];
-		// } else {
-		// $random_users = array ();
-		// }
-		// } else {
-		// $groupal_users = $completed_users;
-		// $random_users = array ();
-		// }
-		// --- END: Mathevorkurs
-		
-		// --- Klassisch
-		$groupal_users = $completed_users;
-		// --- END: Klassisch
-		
-		$starttime = microtime ( true );
-		
-		// Generate participants for Groupal
-		$participants = $pp->build_participants ( $groupal_users );
-		// $participants = self::get_testing_data ( 1, 20 );
-		$groupal_participants = $participants;
-		
-		// TODO XML WRITER : einkommentieren falls benötigt
-		// $participant_writer = new participant_writer ( $path . "_participants.xml" );
-		// $participant_writer->write ( $groupal_participants );
-		
-		// --- Mathevorkurs
-		// Generate empty participants
-		// $participants = $pp->build_empty_participants ( $random_users );
-		// $random_participants = $participants;
-		// --- END: Mathevorkurs
-		
-		// Generate empty participants
-		$participants = $pp->build_empty_participants ( $incomplete_users );
-		$incomplete_participants = $participants;
-		
-		$endtime = microtime ( true );
-		$comptime = $endtime - $starttime;
-		
-		groupformation_info ( null, $job->groupformationid, 'building participants for groupal needed ' . $comptime . 'ms' );
-		
-		// var_dump ($random_participants,$incomplete_participants);
-		
-		$store = new mod_groupformation_storage_manager ( $groupformationid );
-		$groupsize = intval ( $store->getGroupSize () );
+		$groupal_participants = $pp->build_participants ( $groupal_users );
+		$random_participants = $pp->build_empty_participants ( $incomplete_users );
 		
 		if (count ( $groupal_participants ) > 0) {
 			
-			// Matcher (einer von beiden)
+			// Matcher (TODO)
 			$matcher = new GroupALGroupCentricMatcher ();
 			
 			$starttime = microtime ( true );
@@ -379,40 +270,26 @@ class mod_groupformation_job_manager {
 			
 			groupformation_info ( null, $job->groupformationid, 'groupal needed ' . $comptime . 'ms' );
 		}
-		// --- Mathevorkurs
-		// if (count ( $random_participants ) > 0) {
-		// $gfra = new GroupFormationRandomAlgorithm ( $random_participants, $groupsize );
-		// $random_cohort = $gfra->doOneFormation ();
-		// }
-		// --- END: Mathevorkurs
 		
-		if (count ( $incomplete_participants ) > 0) {
-			$gfra = new GroupFormationRandomAlgorithm ( $incomplete_participants, $groupsize );
-			$incomplete_cohort = $gfra->doOneFormation ();
+		if (count ( $random_participants ) > 0) {
+			$gfra = new GroupFormationRandomAlgorithm ( $random_participants, $groupsize );
+			$random_cohort = $gfra->doOneFormation ();
 		}
 		
-		// var_dump ( $groupal_cohort );
-		// var_dump ( $random_cohort );
-		// var_dump ( $incomplete_cohort );
-		
-		// TODO XML WRITER : einkommentieren falls benötigt
-		// $cohort_writer = new cohort_writer($path."_cohort.xml");
-		// $cohort_writer->write($groupal_cohort);
-		
-		// --- Mathevorkurs
-		// $cohorts = array (
-		// $groupal_cohort,
-		// $random_cohort,
-		// $incomplete_cohort
-		// );
-		// --- END: Mathevorkurs
-		
-		// --- Klassisch
 		$cohorts = array (
 				$groupal_cohort,
-				$incomplete_cohort 
+				$random_cohort
 		);
-		// --- END: Klassisch
+		
+		// TODO XML WRITER : einkommentieren falls benötigt
+		// $path = $CFG->dirroot . '/mod/groupformation/xml_participants/' . "php_" . $groupformationid;
+		// $participant_writer = new participant_writer ( $path . "_participants.xml" );
+		// $participant_writer->write ( $groupal_participants );
+		
+		// TODO XML WRITER : einkommentieren falls benötigt
+		// $path = $CFG->dirroot . '/mod/groupformation/xml_participants/' . "php_" . $groupformationid;
+		// $cohort_writer = new cohort_writer($path."_cohort.xml");
+		// $cohort_writer->write($groupal_cohort);
 		
 		return $cohorts;
 	}
@@ -424,8 +301,11 @@ class mod_groupformation_job_manager {
 	 * @param stdClass $result        	
 	 * @return boolean
 	 */
-	public static function save_result($job, &$groupal_cohort = null, &$random_cohort = null, &$incomplete_cohort = null) {
+	public static function save_result($job, $result = null) {
 		global $DB;
+		
+		$groupal_cohort = $result[0];
+		$random_cohort = $result[1];
 		
 		if (! is_null ( $groupal_cohort )) {
 			
@@ -447,21 +327,6 @@ class mod_groupformation_job_manager {
 		
 		if (! is_null ( $random_cohort )) {
 			$result = $random_cohort->getResult ();
-			
-			$flags = array (
-					"groupal" => 0,
-					"random" => 0,
-					"mrandom" => 1,
-					"created" => 0 
-			);
-			
-			$idmap = self::create_groups ( $job, $result->groups, $flags );
-			
-			self::assign_users_to_groups ( $job, $result->users, $idmap );
-		}
-		
-		if (! is_null ( $incomplete_cohort )) {
-			$result = $incomplete_cohort->getResult ();
 			
 			$flags = array (
 					"groupal" => 0,

@@ -82,6 +82,7 @@ class mod_groupformation_participant_parser {
 	 * @return multitype:Participant
 	 */
 	public function build_participants($users) {
+		$starttime = microtime ( true );
 		$groupformationid = $this->groupformationID;
 		
 		$store = new mod_groupformation_storage_manager ( $groupformationid );
@@ -309,7 +310,13 @@ class mod_groupformation_participant_parser {
 		}
 		
 		// var_dump($array);
-		return $this->parse ( $array, $totalLabel );
+		$res = $this->parse ( $array, $totalLabel );
+		
+		$endtime = microtime ( true );
+		$comptime = $endtime - $starttime;
+		groupformation_info ( null, $groupformationid, 'building groupal participants needed ' . $comptime . 'ms' );
+		
+		return $res;
 	}
 	
 	/**
@@ -318,13 +325,17 @@ class mod_groupformation_participant_parser {
 	 * @param unknown $users        	
 	 */
 	public function build_empty_participants($users) {
+		$starttime = microtime ( true );
 		$participants = array ();
-		
 		foreach ( $users as $user ) {
 			$participant = new Participant ( null, $user );
 			$participants [] = $participant;
 		}
-		
+		$endtime = microtime ( true );
+		$comptime = $endtime - $starttime;
+		groupformation_info ( null, $this->groupformationID, 'building empty participants needed ' . $comptime . 'ms' );
 		return $participants;
 	}
+	
+	
 }
