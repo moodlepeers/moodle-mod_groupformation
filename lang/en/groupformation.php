@@ -177,8 +177,8 @@ $string ['info_text_student'] = 'In diesem Moodle-Kurs wird die Gruppenformation
 		http://sourceforge.net/projects/moodlepeers/ <br>
 		(erstellt und weiterentwickelt mit Mitteln zur Qualitätsverbesserung der Lehre\' der TU Darmstadt)
 ';
-$string ['info_header_teacher_analysis'] = 'Wie funktioniert die Gruppenformation?';
-$string ['info_header_teacher_settings'] = 'Wie funktioniert die Gruppenformation?';
+$string ['info_header_teacher_analysis'] = 'How does the groupformation activity work?';
+$string ['info_header_teacher_settings'] = 'How does the groupformation activity work?';
 $string ['info_text_teacher_settings'] = 'Mit diesem Plugin haben Sie die Möglichkeit die Bildung von Gruppen Ihrer Studierenden zu optimieren. Die drei erforderlichen Schritte sind:<br>
 		1.)	Sie fügen die Aktivität „Gruppenformation“ Ihrem Kurs hinzu.
 		Auf dieser Seite können Sie auswählen, welches Szenario am besten zu Ihren Vorstellungen der späteren Gruppenarbeit passt
@@ -212,11 +212,11 @@ $string ['info_text_teacher_analysis'] = 'Mit diesem Plugin haben Sie die Mögli
 		Fertig. Jetzt können auch die Studierenden Ihre Gruppenmitglieder sehen. Es ist Ihnen als Dozent/in jederzeit möglich, die Gruppen manuell in Moodle nachzubearbeiten (bspw. bei Nachzüglern).<br>
 ';
 $string['statusGrupping0'] = 'Um die Gruppenbildung starten zu können, müssen Sie die Aktivität in Overview beenden';
-$string['statusGrupping1'] = 'Sie können die Gruppenbildung jetzt starten';
-$string['statusGrupping2'] = 'Die Gruppenbildung läuft';
-$string['statusGrupping3'] = 'Die Gruppenbildung wird abgebrochen';
-$string['statusGrupping4'] = 'Gruppenbildung ist abgeschlossen. Wollen Sie die Gruppenvorschläge übernehme, oder soll ein neuer Gruppenvorschlag generiert werden';
-$string['statusGrupping5'] = 'Die realen Gruppen sind gebildet. Sie können jetzt manuelle Veränderung an den Gruppen vornehmen ';
+$string['statusGrupping1'] = 'Sie können die Gruppenbildung jetzt starten. ';
+$string['statusGrupping2'] = 'Die Gruppenbildung läuft. ';
+$string['statusGrupping3'] = 'Die Gruppenbildung wird abgebrochen. ';
+$string['statusGrupping4'] = 'Gruppenbildung ist abgeschlossen. Wollen Sie die Gruppenvorschläge übernehme, oder soll ein neuer Gruppenvorschlag generiert werden. ';
+$string['statusGrupping5'] = 'Die realen Gruppen sind gebildet. Sie können jetzt manuelle Veränderung an den Gruppen vornehmen. ';
 $string['grouping_start'] = 'Gruppenbildung starten';
 $string['grouping_delete'] = 'Gruppen l&ouml;schen';
 $string['grouping_adopt'] = 'Gruppe übernehmen';
@@ -277,4 +277,8 @@ $string['students_commited_single'] = ' student therefrom has already commited h
 $string['students_commited_multiple'] = ' students therefrom have already commited their answers.';
 $string['commited_not_completed'] = ' from the commited questionnaires are not complete.';
 $string['completed_questionaire'] = ' completely answered questionnaires.';
-// $string [''] = '';
+
+$string['emailnotifications_info'] = 'You will be notified via email when it is terminated.';
+$string['onlyactivestudents_info'] = 'Only students with at least one submitted answer will be considered for building groups. You can configure it in the {$a->url}.';
+$string ['starttime'] = 'Start time';
+$string ['endtime'] = 'End time';

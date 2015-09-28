@@ -209,12 +209,12 @@ $string ['info_text_teacher_analysis'] = 'Mit diesem Plugin haben Sie die Mögli
 		<br>
 		Fertig. Jetzt können auch die Studierenden Ihre Gruppenmitglieder sehen. Es ist Ihnen als Dozent/in jederzeit möglich, die Gruppen manuell in Moodle nachzubearbeiten (bspw. bei Nachzüglern).<br>
 ';
-$string['statusGrupping0'] = 'Um die Gruppenbildung starten zu können, müssen Sie die Aktivität in Overview beenden';
-$string['statusGrupping1'] = 'Sie können die Gruppenbildung jetzt starten';
-$string['statusGrupping2'] = 'Die Gruppenbildung läuft';
-$string['statusGrupping3'] = 'Die Gruppenbildung wird abgebrochen';
-$string['statusGrupping4'] = 'Gruppenbildung ist abgeschlossen. Sie können den Gruppenvorschlag übernehmen, oder verwerfen.';
-$string['statusGrupping5'] = 'Die realen Gruppen sind gebildet. Sie können jetzt manuelle Veränderung an den Gruppen vornehmen ';
+$string['statusGrupping0'] = 'Um die Gruppenbildung starten zu können, müssen Sie die Aktivität in Overview beenden. ';
+$string['statusGrupping1'] = 'Sie können die Gruppenbildung jetzt starten.';
+$string['statusGrupping2'] = 'Die Gruppenbildung läuft. ';
+$string['statusGrupping3'] = 'Die Gruppenbildung wird abgebrochen. ';
+$string['statusGrupping4'] = 'Gruppenbildung ist abgeschlossen. Sie können den Gruppenvorschlag übernehmen, oder verwerfen. ';
+$string['statusGrupping5'] = 'Die realen Gruppen sind gebildet. Sie können jetzt manuelle Veränderung an den Gruppen vornehmen. ';
 $string['grouping_start'] = 'Gruppenbildung starten';
 $string['grouping_delete'] = 'Gruppenvorschlag verwerfen';
 $string['grouping_adopt'] = 'Gruppenvorschlag übernehmen';
@@ -275,4 +275,7 @@ $string['students_commited_multiple'] = ' Studierender davon hat seine Antworten
 $string['commited_not_completed'] = ' von den fest abgegebenen Fragebögen sind nicht vollständig.';
 $string['completed_questionaire'] = ' vollständig beantwortete Fragebögen.';
 
-	
+$string['emailnotifications_info'] = 'Sie werden via Moodle benachrichtigt, wenn sie abgeschlossen ist.';
+$string['onlyactivestudents_info'] = 'Zur Gruppenbildung werden ausschließlich Studenten betrachtet werden, die mind. eine Frage beantwortet haben. Sie können das in den {$a->url} anpassen.';
+$string ['starttime'] = 'Startzeit';
+$string ['endtime'] = 'Endzeit';

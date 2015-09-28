@@ -279,6 +279,7 @@ class mod_groupformation_grouping_controller {
 						) 
 				) );
 				
+				$settingsGroupsView->assign ( 'emailnotifications', $this->store->get_email_setting() );
 				break;
 			
 			case 3 :
@@ -371,7 +372,6 @@ class mod_groupformation_grouping_controller {
 								'text' => get_string ( 'grouping_adopt', 'groupformation' ) 
 						) 
 				) );
-				
 				break;
 			
 			case 'default' :
@@ -389,7 +389,8 @@ class mod_groupformation_grouping_controller {
 		$count = count ( get_enrolled_users ( $context, 'mod/groupformation:onlystudent' ) );
 		
 		$settingsGroupsView->assign ( 'student_count', $count );
-		
+		$settingsGroupsView->assign ( 'onlyactivestudents', $this->store->get_grouping_setting() );
+
 		return $settingsGroupsView->loadTemplate ();
 	}
 	

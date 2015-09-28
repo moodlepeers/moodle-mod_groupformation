@@ -1005,4 +1005,14 @@ class mod_groupformation_storage_manager {
 		$numbers = $this->getNumbers ( $categories );
 		return array_sum ( $numbers );
 	}
+	
+	public function get_grouping_setting(){
+		global $DB;
+		return $DB->get_field('groupformation', 'onlyactivestudents', array('id'=>$this->groupformationid));
+	}
+	
+	public function get_email_setting(){
+		global $DB;
+		return $DB->get_field('groupformation', 'emailnotifications', array('id'=>$this->groupformationid));
+	}
 }
