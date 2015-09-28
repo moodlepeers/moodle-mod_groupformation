@@ -156,17 +156,17 @@ $string ['tab_grouping'] = 'Groupformation';
 $string ['tab_preview'] = 'Questionaire (Preview)';
 $string ['tab_evaluation'] = 'Evaluation';
 $string ['tab_group'] = 'Group assignment';
-$string ['questionaire_availability_info_future'] = 'Im Zeitraum vom {$a->start} Uhr bis {$a->end} Uhr wird der Fragebogen zur Verfügung stehen.';
-$string ['questionaire_availability_info_now'] = 'Der Fragebogen ist offen und kann bis {$a->end} ausgefüllt werden.';
+$string ['questionaire_availability_info_future'] = 'The questionnaire will be available in the perion from {$a->start} to {$a->end}.';
+$string ['questionaire_availability_info_now'] = 'The questionnaire is available till {$a->end}.';
 $string ['questionaire_availability_info_until'] = 'Der Fragebogen ist noch bis {$a->end} Uhr freigeschaltet.';
 $string ['questionaire_availability_info_from'] = 'Der Fragebogen ist ab {$a->start} Uhr freigeschaltet.';
-$string ['questionaire_available'] = 'Der Fragebogen steht zur Bearbeitung bereit.';
-$string ['questionaire_not_available_begin'] = 'Der Fragebogen ist verfügbar ab {$a->start}.';
-$string ['questionaire_available_end'] = 'Der Fragebogen ist verfügbar bis {$a->end}.';
-$string ['questionaire_not_available'] = 'Der Fragebogen ist derzeit nicht verfügbar.';
-$string ['questionaire_not_available_begin_end'] = 'Der Fragebogen ist verfügbar von {$a->start} bis {$a->end}.';
-$string ['questionaire_not_available_end'] = 'Der Fragebogen ist nicht mehr verfügbar.';
-$string ['info_header_student'] = 'Was bedeutet Gruppenformation?';
+$string ['questionaire_available'] = 'The questionnaire is ready for processing.';
+$string ['questionaire_not_available_begin'] = 'The questionnaire is available from {$a->start}.';
+$string ['questionaire_available_end'] = 'The questionnaire is available till {$a->end}.';
+$string ['questionaire_not_available'] = 'The questionnaire is currently unavailable.';
+$string ['questionaire_not_available_begin_end'] = 'The questionnaire is available from {$a->start} to {$a->end}.';
+$string ['questionaire_not_available_end'] = 'The questionnaire is not available anymore.';
+$string ['info_header_student'] = 'What is groupformation for?';
 $string ['info_text_student'] = 'In diesem Moodle-Kurs wird die Gruppenformation dazu genutzt {$a->scenario_name} für eine erfolgreiche Zusammenarbeit zu bilden.
 		Wenn Sie den Fragebogen ausgefüllt und abgeschickt haben, werden für Sie geeignete Lernpartner/innen ermittelt.
 		Alle Angaben werden vertraulich behandelt.
