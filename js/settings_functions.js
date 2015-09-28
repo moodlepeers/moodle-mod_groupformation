@@ -199,6 +199,15 @@ $(document).ready(function() {
         $('#js_groupname').val($('#id_groupname').val());
 
 
+        if ($('#id_onlyactivestudents').prop('checked')){
+            $('#id_js_onlyactivestudents').prop('checked', true);
+        }
+
+        if ($('#id_emailnotifications').prop('checked')){
+            $('#id_js_emailnotifications').prop('checked', true);
+        }
+
+
     }
 
 
@@ -583,6 +592,24 @@ $(document).ready(function() {
     
     $('#js_groupname').keyup(function(){
     	$('#id_groupname').val($(this).val());
+    });
+
+
+
+    $('#id_js_onlyactivestudents').click(function(){
+        if ($('#id_onlyactivestudents').prop('checked')){
+            $('#id_onlyactivestudents').prop('checked',false);
+        }else{
+            $('#id_onlyactivestudents').prop('checked', true);
+        }
+    });
+
+    $('#id_js_emailnotifications').click(function(){
+        if ($('#id_emailnotifications').prop('checked')){
+            $('#id_emailnotifications').prop('checked',false);
+        }else{
+            $('#id_emailnotifications').prop('checked', true);
+        }
     });
 
 
