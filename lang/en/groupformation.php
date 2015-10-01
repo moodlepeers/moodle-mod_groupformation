@@ -177,8 +177,8 @@ $string ['info_text_student'] = 'In this Moodle-course the "groupformation" is u
         http://sourceforge.net/projects/moodlepeers/ <br>
         (created and developed with means for quality improvement of teaching at TU Darmstadt)
 ';
-$string ['info_header_teacher_analysis'] = 'How does the groupformation works?';
-$string ['info_header_teacher_settings'] = 'How does the groupformation works?';
+$string ['info_header_teacher_analysis'] = 'How does the groupformation activity works?';
+$string ['info_header_teacher_settings'] = 'How does the groupformation activity works?';
 $string ['info_text_teacher_settings'] = 'With this plugin you have the ability to optimize the group formation of your students. The three required steps are:<br>
         1.) Add the activity "groupformatin" to your course.
         In the settings you can choose which scenario fits best to your needs(in case of doubt choose project teams).
@@ -218,9 +218,9 @@ $string['questionaire_commited'] = 'Yout answers are submitted. You cant change 
 $string['no_data_to_display'] = 'no data to display';
 
 $string['onlyactivestudents'] = 'Only students with at least one submitted answer should be considered for building groups';
-$string['emailnotifications'] = 'I want to be notified when the groupformation job has terminated.';
+$string['emailnotifications'] = 'I want to be notified by email when the groupformation job has terminated.';
 $string['onlyactivestudents_description'] = 'Only students with at least one submitted answer should be considered for building groups';
-$string['emailnotifications_description'] = 'I want to be notified when the groupformation job finished.';
+$string['emailnotifications_description'] = 'I want to be notified by email when the groupformation job finished.';
 
 $string['sampleGroupName'] = 'The name of your group is ';
 $string['oneManGroup'] = 'You are a one man group.';
