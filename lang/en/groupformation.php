@@ -166,64 +166,56 @@ $string ['questionaire_available_end'] = 'The questionnaire is available till {$
 $string ['questionaire_not_available'] = 'The questionnaire is currently unavailable.';
 $string ['questionaire_not_available_begin_end'] = 'The questionnaire is available from {$a->start} to {$a->end}.';
 $string ['questionaire_not_available_end'] = 'The questionnaire is not available anymore.';
-$string ['info_header_student'] = 'What is groupformation for?';
-$string ['info_text_student'] = 'In diesem Moodle-Kurs wird die Gruppenformation dazu genutzt {$a->scenario_name} für eine erfolgreiche Zusammenarbeit zu bilden.
-		Wenn Sie den Fragebogen ausgefüllt und abgeschickt haben, werden für Sie geeignete Lernpartner/innen ermittelt.
-		Alle Angaben werden vertraulich behandelt.
-		<br>Ist die Befragungszeit um, werden Gruppen unter Berücksichtigung Ihrer Angaben und Präferenzen gebildet. Sie können anschließend hier Ihre Gruppenmitglieder einsehen (und auch über Moodle kontaktieren).
-		<br><br>
-		Fragen? Probleme? Lob? Anregungen?<br>
-		Die Plugin-Entwickler/innen und Wissenschaftler/innen dazu, finden Sie unter<br>
-		http://sourceforge.net/projects/moodlepeers/ <br>
-		(erstellt und weiterentwickelt mit Mitteln zur Qualitätsverbesserung der Lehre\' der TU Darmstadt)
+$string ['info_header_student'] = 'What is the "groupformation" for?';
+$string ['info_text_student'] = 'In this Moodle-course the "groupformation" is used to build successful cooperating {$a->scenario_name}.
+        After you complete and submit the questionnaire, your appropriate learning partners will be determined.
+        All details are kept confidential.
+        <br>Once the questionnaire is expired, the groups will be generated considering your data and preferences.
+        <br><br>
+        Questions, trouble or any suggestions?
+        You can find the plugin developer and scientist under<br>
+        http://sourceforge.net/projects/moodlepeers/ <br>
+        (created and developed with means for quality improvement of teaching at TU Darmstadt)
 ';
-$string ['info_header_teacher_analysis'] = 'How does the groupformation activity work?';
-$string ['info_header_teacher_settings'] = 'How does the groupformation activity work?';
-$string ['info_text_teacher_settings'] = 'Mit diesem Plugin haben Sie die Möglichkeit die Bildung von Gruppen Ihrer Studierenden zu optimieren. Die drei erforderlichen Schritte sind:<br>
-		1.)	Sie fügen die Aktivität „Gruppenformation“ Ihrem Kurs hinzu.
-		Auf dieser Seite können Sie auswählen, welches Szenario am besten zu Ihren Vorstellungen der späteren Gruppenarbeit passt
-		(bei Unsicherheit wählen Sie Projektteams). Die weiteren Einstellungen erlauben Ihnen die gewünschte Gruppengröße und evtl. eine Themenauswahl für
-		Studierende anzugeben. Wenn Sie möchten, dass die Studierenden sich im Vorwissen gut ergänzen in den später gebildeten Gruppen, können Sie die Vorwissensthemen
-		zur Abfrage angeben.<br>
-		2.)	Studierende sehen den Fragebogen, welcher basierend auf Ihren Einstellungen erstellt wurde. Die Dauer der Verfügbarkeit der Fragen können Sie einstellen (siehe 1.).
-		Eine Vorschau des Studierenden-Fragebogens erhalten Sie beim späteren Öffnen der Aktivität als Dozent/in.<br>
-		3.)	Sie können unter dem Menüpunkt ‚Gruppenformation‘, wenn Sie die Aktivität später selbst aufrufen, sehen, wie viele Antworten bereits
-		vorliegen. Sind Sie mit dem Rücklauf zufrieden, starten Sie manuell die Bildung der Gruppen (dies geschieht niemals automatisch).<br>
-		Es dauert eine Weile, bis alle Gruppen fertig erstellt sind. Das Ergebnis können Sie sich noch einmal ansehen, bevor Sie die Gruppen so in Moodle übernehmen.<br>
-		<br>
-		Fertig. Jetzt können auch die Studierenden Ihre Gruppenmitglieder sehen. Es ist Ihnen als Dozent/in jederzeit möglich, die Gruppen manuell in Moodle nachzubearbeiten (bspw. bei Nachzüglern).<br>
+$string ['info_header_teacher_analysis'] = 'How does the groupformation works?';
+$string ['info_header_teacher_settings'] = 'How does the groupformation works?';
+$string ['info_text_teacher_settings'] = 'With this plugin you have the ability to optimize the group formation of your students. The three required steps are:<br>
+        1.) Add the activity "groupformatin" to your course.
+        In the settings you can choose which scenario fits best to your needs(in case of doubt choose project teams).
+        The further settings allow you to specify the group size and/or preknowledge of the students. If the preknowledges of students should complement to each other,
+        you can specify it in the settings.
+        2.) The students get the questionnaire which is based on your settings. You can set the period when the questionnaire is available(see step 1).
+        A preview of the questonnaire can be found later on by opening the activity as a docent.<br>
+        3.) The statistics to the answers can be found by opening the activity. If you are sutisfied with the response, you can start the groupformation manualy(it never happens automatically).<br>
+        It will takes a while till the groups are formated. You can see the generated groups before you adopt them to Moodle.<br>
+        <br>
+        Finished. Now also the students can see their groupmates. As a docent you can manually adjust the groups anytime at Moodle(e.g. with stragglers).
 ';
-$string ['info_text_teacher_analysis'] = 'Mit diesem Plugin haben Sie die Möglichkeit die Bildung von Gruppen Ihrer Studierenden zu optimieren. Die drei erforderlichen Schritte sind:<br>
-		<br>
-		1.)	Sie fügen die Aktivität „Gruppenformation“ Ihrem Kurs hinzu.
-		(Das ist bereits geschehen, wenn Sie diese Seite hier sehen).
-		In den Einstellungen können Sie auswählen, welches Szenario am besten zu Ihren Vorstellungen der späteren Gruppenarbeit passt
-		(bei Unsicherheit wählen Sie Projektteams). Die weiteren Einstellungen erlauben Ihnen die gewünschte Gruppengröße und evtl. eine Themenauswahl für
-		Studierende anzugeben. Wenn Sie möchten, dass die Studierenden sich im Vorwissen gut ergänzen in den später gebildeten Gruppen, können Sie die Vorwissensthemen
-		zur Abfrage angeben.<br>
-		<br>
-		2.)	Studierende sehen den Fragebogen, welcher basierend auf Ihren Einstellungen erstellt wurde. Die Dauer der Verfügbarkeit der Fragen können Sie einstellen (siehe 1.).
-		Eine Vorschau des Studierenden-Fragebogens erhalten Sie im Menü oben.<br>
-		<br>
-		3.)	Sie können unter dem Menüpunkt ‚Gruppenformation‘ hier auf dieser Seite sehen, wie viele Antworten bereits
-		vorliegen. Sind Sie mit dem Rücklauf zufrieden, starten Sie manuell die Bildung der Gruppen (dies geschieht niemals automatisch).<br>
-		Es dauert eine Weile, bis alle Gruppen fertig erstellt sind. Das Ergebnis können Sie sich noch einmal ansehen, bevor Sie die Gruppen so in Moodle übernehmen.<br>
-		<br>
-		Fertig. Jetzt können auch die Studierenden Ihre Gruppenmitglieder sehen. Es ist Ihnen als Dozent/in jederzeit möglich, die Gruppen manuell in Moodle nachzubearbeiten (bspw. bei Nachzüglern).<br>
+$string ['info_text_teacher_analysis'] = 'With this plugin you have the ability to optimize the group formation of your students. The three required steps are:<br>
+        1.) Add the activity "groupformatin" to your course.
+        In the settings you can choose which scenario fits best to your needs(in case of doubt choose project teams).
+        The further settings allow you to specify the group size and/or preknowledge of the students. If the preknowledges of students should complement to each other,
+        you can specify it in the settings.
+        2.) The students get the questionnaire which is based on your settings. You can set the period when the questionnaire is available(see step 1).
+        A preview of the questonnaire can be found later on by opening the activity as a docent.<br>
+        3.) The statistics to the answers can be found by opening the activity. If you are sutisfied with the response, you can start the groupformation manualy(it never happens automatically).<br>
+        It will takes a while till the groups are formated. You can see the generated groups before you adopt them to Moodle.<br>
+        <br>
+        Finished. Now also the students can see their groupmates. As a docent you can manually adjust the groups anytime at Moodle(e.g. with stragglers).<br>
 ';
-$string['statusGrupping0'] = 'Um die Gruppenbildung starten zu können, müssen Sie die Aktivität in Overview beenden';
-$string['statusGrupping1'] = 'Sie können die Gruppenbildung jetzt starten. ';
-$string['statusGrupping2'] = 'Die Gruppenbildung läuft. ';
-$string['statusGrupping3'] = 'Die Gruppenbildung wird abgebrochen. ';
-$string['statusGrupping4'] = 'Gruppenbildung ist abgeschlossen. Wollen Sie die Gruppenvorschläge übernehme, oder soll ein neuer Gruppenvorschlag generiert werden. ';
-$string['statusGrupping5'] = 'Die realen Gruppen sind gebildet. Sie können jetzt manuelle Veränderung an den Gruppen vornehmen. ';
-$string['grouping_start'] = 'Gruppenbildung starten';
-$string['grouping_delete'] = 'Gruppen l&ouml;schen';
-$string['grouping_adopt'] = 'Gruppe übernehmen';
-$string['grouping_abort'] = 'Gruppenbildung abbrechen';
-$string['moodlegrouping_delete'] = 'Moodle-Gruppen l&ouml;schen';
-$string['questionaire_commited'] = 'Ihre Antworten sind abgegeben. Somit können Sie sie nicht mehr verändern.';
-$string['no_data_to_display'] = 'Keine Daten vorhanden.';
+$string['statusGrupping0'] = 'You have to close the questionnaire to start group formation.';
+$string['statusGrupping1'] = 'You can start group formation now';
+$string['statusGrupping2'] = 'The group formation is in process';
+$string['statusGrupping3'] = 'The termination of group formation is in process';
+$string['statusGrupping4'] = 'The group formation is finished. You can adopt the groups to Moodle or generate a new results by algorithm.';
+$string['statusGrupping5'] = 'The generated groups are adopted to Moodle. You can manually adjust them.';
+$string['grouping_start'] = 'start group formation';
+$string['grouping_delete'] = 'delete groups';
+$string['grouping_adopt'] = 'adopt groups';
+$string['grouping_abort'] = 'cancel generating groups';
+$string['moodlegrouping_delete'] = 'delete moodle-groups';
+$string['questionaire_commited'] = 'Yout answers are submitted. You cant change them in this activity.';
+$string['no_data_to_display'] = 'no data to display';
 
 $string['onlyactivestudents'] = 'Only students with at least one submitted answer should be considered for building groups';
 $string['emailnotifications'] = 'I want to be notified when the groupformation job has terminated.';
