@@ -278,7 +278,7 @@ class mod_groupformation_job_manager {
 		
 		$cohorts = array (
 				$groupal_cohort,
-				$random_cohort
+				$random_cohort 
 		);
 		
 		// TODO XML WRITER : einkommentieren falls benötigt
@@ -304,8 +304,8 @@ class mod_groupformation_job_manager {
 	public static function save_result($job, $result = null) {
 		global $DB;
 		
-		$groupal_cohort = $result[0];
-		$random_cohort = $result[1];
+		$groupal_cohort = $result [0];
+		$random_cohort = $result [1];
 		
 		if (! is_null ( $groupal_cohort )) {
 			
@@ -494,5 +494,19 @@ class mod_groupformation_job_manager {
 		} else {
 			return $status_options [0];
 		}
+	}
+	
+	/**
+	 * Notifies teacher about terminated groupformation job
+	 * 
+	 * @param stdClass $job
+	 * @return NULL
+	 */
+	public static function notify_admin($job) {
+		
+		// TODO messaging to person:
+		// $job->started_by = id of receiver
+		
+		return null;
 	}
 }

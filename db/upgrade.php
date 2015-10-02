@@ -751,6 +751,21 @@ function xmldb_groupformation_upgrade($oldversion) {
 		upgrade_mod_savepoint(true, 2015092600, 'groupformation');
 	}
 	
+	if ($oldversion < 2015100100) {
+	
+		// Define field started_by to be added to groupformation_jobs.
+		$table = new xmldb_table('groupformation_jobs');
+		$field = new xmldb_field('started_by', XMLDB_TYPE_INTEGER, '20', null, null, null, null, 'done');
+	
+		// Conditionally launch add field started_by.
+		if (!$dbman->field_exists($table, $field)) {
+			$dbman->add_field($table, $field);
+		}
+	
+		// Groupformation savepoint reached.
+		upgrade_mod_savepoint(true, 2015100100, 'groupformation');
+	}
+	
 	
 	return true;
 }

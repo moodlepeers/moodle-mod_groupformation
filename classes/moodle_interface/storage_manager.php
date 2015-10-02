@@ -1013,6 +1013,8 @@ class mod_groupformation_storage_manager {
 	
 	public function get_email_setting(){
 		global $DB;
-		return $DB->get_field('groupformation', 'emailnotifications', array('id'=>$this->groupformationid));
+		// TODO Ahmed
+		return 0;
+// 		return $DB->get_field('groupformation', 'emailnotifications', array('id'=>$this->groupformationid));
 	}
 }

@@ -36,6 +36,7 @@ require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/group_genera
 require_once ($CFG->dirroot . '/mod/groupformation/locallib.php');
 class mod_groupformation_grouping_controller {
 	private $groupformationid;
+	private $cmid;
 	private $view_state = 0;
 	private $groups = array ();
 	private $incomplete_groups = array ();
@@ -50,8 +51,9 @@ class mod_groupformation_grouping_controller {
 	 *
 	 * @param int $groupformationid        	
 	 */
-	public function __construct($groupformationid) {
+	public function __construct($groupformationid, $cmid = null) {
 		$this->groupformationid = $groupformationid;
+		$this->cmid = $cmid;
 		
 		$this->store = new mod_groupformation_storage_manager ( $groupformationid );
 		
@@ -389,6 +391,7 @@ class mod_groupformation_grouping_controller {
 		$count = count ( get_enrolled_users ( $context, 'mod/groupformation:onlystudent' ) );
 		
 		$settingsGroupsView->assign ( 'student_count', $count );
+		$settingsGroupsView->assign ( 'cmid', $this->cmid);
 		$settingsGroupsView->assign ( 'onlyactivestudents', $this->store->get_grouping_setting() );
 
 		return $settingsGroupsView->loadTemplate ();
