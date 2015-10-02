@@ -1,6 +1,6 @@
 <?php if ($this->_['onlyactivestudents']):?>
 <div class="grid">
-<?php $url = new moodle_url("/course/modedit.php?update=31&return=1"); $a = new stdClass(); $a->url = '<a href="'.$url->out().'">'.get_string('settings').'</a>';?>
+<?php $url = new moodle_url("/course/modedit.php?update=".$this->_['cmid']."&return=1"); $a = new stdClass(); $a->url = '<a href="'.$url->out().'">'.get_string('settings').'</a>';?>
     <div class="col_m_87-5 alert"><?php echo get_string('onlyactivestudents_info', 'groupformation',$a);?></div>
 </div>
 <?php endif;?>
