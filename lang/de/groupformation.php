@@ -241,6 +241,7 @@ $string['analysis_status_info0'] = 'Sie müssen die Aktivität beenden, bevor si
 $string['analysis_status_info1'] = 'Sie müssen die Aktivität starten, damit Studierende den Fragebogen beantworten können.';
 $string['analysis_status_info2'] = 'Die Gruppenbildung wurde bereits angestoßen bzw. durchgeführt. Die Aktivität kann nicht mehr gestartet werden.';
 $string['analysis_status_info3'] = 'Sie können die Aktivität starten oder beenden.';
+$string['analysis_status_info4'] = 'Sie können nun die Gruppenbildung starten.';
 $string['contact_members'] = 'Um deine Gruppenmitglieder zu kontaktieren, klicke auf deren Profilnamen.';
 $string['invalid'] = 'Ungültiger Zustand';
 $string['groups_build'] = 'Gruppen sind gebildet.';
