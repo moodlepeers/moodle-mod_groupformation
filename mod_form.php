@@ -59,7 +59,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 			$mform->setExpanded ( 'password_header' );
 			// beta version info and password
 			$mform->addElement ( 'html', '<div class="beta_version_warning" id="maxmembers_error">
-                             <p>ACHTUNG: BETA-Version. Nur für Dozenten in Zusammenarbeit mit Projekt MoodlePeers gedacht.</p>
+                             <p>'.get_string('beta_version','groupformation').'</p>
                 </div>' );
 			
 			// add passwort field

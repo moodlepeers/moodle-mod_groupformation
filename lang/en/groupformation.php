@@ -27,13 +27,14 @@ defined ( 'MOODLE_INTERNAL' ) || die ();
 $string ['language'] = 'en';
 $string ['modulename'] = 'Group formation';
 $string ['modulenameplural'] = 'Group formations';
-$string ['modulename_help'] = 'ACHTUNG: BETA-Version. Nur für Dozenten in Zusammenarbeit mit Projekt MoodlePeers  gedacht. The groupformation plugin generates groups of participants based on a questionaire answers.';
+$string ['modulename_help'] = 'Attention: BETA version. Only for teachers in cooperation with project MoodlePeers. The groupformation plugin generates groups of participants based on a questionaire answers.';
+$string ['beta_version'] = 'Attention: BETA version. Only for teachers in cooperation with project MoodlePeers.';
 $string ['password_wrong'] = 'wrong password';
 $string ['groupformationfieldset'] = 'Custom example fieldset';
 $string ['groupformationname'] = 'Group formation';
 $string ['groupformationname_help'] = 'ToolTip Group formation';
 $string ['groupformation'] = 'Group formation';
-$string ['pluginadministration'] = 'Group formation administration';
+$string ['pluginadministration'] = 'Administration: Group formation';
 $string ['pluginname'] = 'groupformation';
 $string ['nogroupformation'] = 'No group formation';
 $string ['groupnameexists'] = 'This group already exists.';
@@ -180,7 +181,7 @@ $string ['info_text_student'] = 'In this Moodle-course the "groupformation" is u
 $string ['info_header_teacher_analysis'] = 'How does the groupformation activity works?';
 $string ['info_header_teacher_settings'] = 'How does the groupformation activity works?';
 $string ['info_text_teacher_settings'] = 'With this plugin you have the ability to optimize the group formation of your students. The three required steps are:<br>
-        1.) Add the activity "groupformatin" to your course.
+        1.) Add the activity "groupformation" to your course.
         In the settings you can choose which scenario fits best to your needs(in case of doubt choose project teams).
         The further settings allow you to specify the group size and/or preknowledge of the students. If the preknowledges of students should complement to each other,
         you can specify it in the settings.
@@ -192,7 +193,7 @@ $string ['info_text_teacher_settings'] = 'With this plugin you have the ability 
         Finished. Now also the students can see their groupmates. As a docent you can manually adjust the groups anytime at Moodle(e.g. with stragglers).
 ';
 $string ['info_text_teacher_analysis'] = 'With this plugin you have the ability to optimize the group formation of your students. The three required steps are:<br>
-        1.) Add the activity "groupformatin" to your course.
+        1.) Add the activity "groupformation" to your course.
         In the settings you can choose which scenario fits best to your needs(in case of doubt choose project teams).
         The further settings allow you to specify the group size and/or preknowledge of the students. If the preknowledges of students should complement to each other,
         you can specify it in the settings.
