@@ -210,7 +210,7 @@ $string ['info_text_teacher_analysis'] = 'Mit diesem Plugin haben Sie die Mögli
 		<br>
 		Fertig. Jetzt können auch die Studierenden Ihre Gruppenmitglieder sehen. Es ist Ihnen als Lehrende/r jederzeit möglich, die Gruppen manuell in Moodle nachzubearbeiten (bspw. bei Nachzüglern).<br>
 ';
-$string['statusGrupping0'] = 'Um die Gruppenbildung starten zu können, müssen Sie die Aktivität in Overview beenden. ';
+$string['statusGrupping0'] = 'Um die Gruppenbildung starten zu können, müssen Sie die Aktivität im Tab Überblick beenden. ';
 $string['statusGrupping1'] = 'Sie können die Gruppenbildung jetzt starten.';
 $string['statusGrupping2'] = 'Die Gruppenbildung läuft. ';
 $string['statusGrupping3'] = 'Die Gruppenbildung wird abgebrochen. ';
