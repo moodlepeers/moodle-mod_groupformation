@@ -195,3 +195,4 @@ function groupformation_set_activity_completion($course,$cm,$userid){
 	$completion = new completion_info ( $course );
 	$completion->set_module_viewed ( $cm, $userid );
 }
+

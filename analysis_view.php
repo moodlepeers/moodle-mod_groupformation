@@ -148,6 +148,8 @@ if ($create_users > 0) {
 
 /* ---------- / Automated test user generation ---------- */
 
+// TODO Ahmed - Einkommentieren und die notify_admin-Function testen
+
 // $jm = new mod_groupformation_job_manager ();
 
 // $job = null;
@@ -155,7 +157,7 @@ if ($create_users > 0) {
 // $job = $jm::get_job ( $groupformation->id );
 
 // if (! is_null ( $job )) {
-// 	$result = $jm::do_groupal ( $job );
+// 	$result = $jm::notify_admin($job);
 // 	var_dump ( $result );
 // // 	$saved = $jm::save_result($job,$result);
 // }
