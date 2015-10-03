@@ -125,6 +125,9 @@ class mod_groupformation_analysis_controller {
 			case 3 :
 				$statusAnalysisView->assign ( 'analysis_status_info', get_string('analysis_status_info2', 'groupformation') );
 				break;
+			case 4 :
+				$statusAnalysisView->assign ( 'analysis_status_info', get_string('analysis_status_info4', 'groupformation') );
+				break;
 			default :
 				$statusAnalysisView->assign ( 'analysis_status_info', get_string('analysis_status_info3', 'groupformation') );
 		}
@@ -173,14 +176,21 @@ class mod_groupformation_analysis_controller {
 	 * Determine status variables
 	 */
 	public function determineStatus() {
+        global $DB;
 		$this->questionnaire_available = $this->store->isQuestionaireAvailable ();
 		$this->state = 1;
 		$this->job_state = mod_groupformation_job_manager::get_status ( mod_groupformation_job_manager::get_job ( $this->groupformationid ) );
-		
+
+        $completed_q = $DB->get_records ( 'groupformation_started', array (
+            'groupformation' => $this->groupformationid, 'completed'=>1
+        ),'userid');
+
 		if ($this->job_state !== 'ready') {
 			$this->state = 3;
 		} elseif ($this->questionnaire_available) {
 			$this->state = 1;
+		} elseif ( count($completed_q) > 0) {
+			$this->state = 4;
 		} else {
 			$this->state = 2;
 		}

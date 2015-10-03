@@ -236,6 +236,7 @@ $string['analysis_status_info0'] = 'You have to stop activity before group forma
 $string['analysis_status_info1'] = 'You have to start activity so that students are able to answer the questionnaire.';
 $string['analysis_status_info2'] = 'Group formation has already startet or is done respectively. Activity cannot be stopped anymore.';
 $string['analysis_status_info3'] = 'You are able to start or end activity.';
+$string['analysis_status_info4'] = 'You can now start the group formation.';
 $string['contact_members'] = 'To contact your team members you have to click on their user names.';
 $string['invalid'] = 'invalid status';
 $string['groups_build'] = 'Groups are built.';
