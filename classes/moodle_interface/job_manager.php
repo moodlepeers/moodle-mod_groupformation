@@ -239,6 +239,9 @@ class mod_groupformation_job_manager {
 	public static function do_groupal($job) {
 		global $CFG;
 		
+		$groupal_cohort = null;
+		$random_cohort = null;
+		
 		$groupformationid = $job->groupformationid;
 		
 		$store = new mod_groupformation_storage_manager ( $groupformationid );

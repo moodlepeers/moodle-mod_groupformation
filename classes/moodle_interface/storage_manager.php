@@ -1005,16 +1005,45 @@ class mod_groupformation_storage_manager {
 		$numbers = $this->getNumbers ( $categories );
 		return array_sum ( $numbers );
 	}
-	
-	public function get_grouping_setting(){
+	public function get_grouping_setting() {
 		global $DB;
-		return $DB->get_field('groupformation', 'onlyactivestudents', array('id'=>$this->groupformationid));
+		return $DB->get_field ( 'groupformation', 'onlyactivestudents', array (
+				'id' => $this->groupformationid 
+		) );
 	}
-	
-	public function get_email_setting(){
+	public function get_email_setting() {
 		global $DB;
 		// TODO Ahmed
 		return 0;
-// 		return $DB->get_field('groupformation', 'emailnotifications', array('id'=>$this->groupformationid));
+		// return $DB->get_field('groupformation', 'emailnotifications', array('id'=>$this->groupformationid));
+	}
+	
+	/**
+	 * Returns label set
+	 * 
+	 * @return multitype:multitype:string
+	 */
+	public function getLabelSet() {
+		$array = $this->data->getLabelSet ( $this->getScenario() );
+		
+		if ($this->groupformationid != null) {
+			$hasTopic = $this->getNumber ( 'topic' );
+			$hasKnowledge = $this->getNumber ( 'knowledge' );
+			$grades = $this->askForGrade ();
+			
+			$position = 0;
+			foreach ( $array as $c ) {
+				if (('grade' == $c && $grades == false) || ($hasTopic == 0 && 'topic' == $c) || ($hasKnowledge == 0 && ('knowledge_heterogen' == $c || 'knowledge_homogen' == $c))) {
+					unset ( $array [$position] );
+				}
+				
+				$position ++;
+			}
+		}
+		return $array;
+	}
+	
+	public function getHomogenSet(){
+		return $this->data->getHomogenSet($this->getScenario());
 	}
 }
