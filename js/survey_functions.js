@@ -94,12 +94,19 @@ $(document).ready(function() {
 
 
 
+        // get map of grade/points values
+        var values = $('#grade1 option').map(function(i) {
+            return $(this).val();
+        });
+
+        values.get();
 
         // manipulate grades on change
         $( '#grade1' ).change(function() {
             var grade1 = $(this).val();
+            //alert(grade1);
             $('#grade3 option').prop('selected', false)
-                .filter('[value="' + grade1 + '"]')
+                .filter('[value="' + (parseInt(grade1) + 1) + '"]')
                 .prop('selected', true);
 
             $('#grade3 option').each(function(){
