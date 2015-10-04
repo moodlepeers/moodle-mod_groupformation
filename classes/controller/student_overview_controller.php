@@ -188,7 +188,9 @@ class mod_groupformation_student_overview_controller {
                     'id' => $this->cmid,
                     'category' => $key
                 ) );
-                if (! $prev_incomplete) {
+                // repair condition for mathevorkurs
+                // if (!$prev_incomplete) {
+                if (true || ! $prev_incomplete) {
                     $a->category = '<a href="' . $url . '">' . $a->category . '</a>';
                 }
                 if ($values ['missing'] == 0) {
