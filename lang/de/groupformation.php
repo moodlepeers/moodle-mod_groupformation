@@ -285,3 +285,4 @@ $string ['endtime'] = 'Endzeit';
 
 $string['excellent'] = 'sehr gut';
 $string['none'] = 'gar nicht';
+$string['bad'] = 'schlecht';

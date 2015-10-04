@@ -298,7 +298,7 @@ class mod_groupformation_question_controller {
 						$question [] = $record->question;
 						$question [] = $options = $options = array (
 								$this->store->get_max_points() => get_string ( 'excellent', 'groupformation' ),
-								0 => get_string ( 'none', 'groupformation' ) 
+								0 => get_string ( 'bad', 'groupformation' ) 
 						);
 						if ($this->hasAnswer) {
 							$answer = $this->store->getSingleAnswer ( $this->userId, $this->names [$this->currentCategoryPosition], $i );

@@ -280,3 +280,4 @@ $string ['endtime'] = 'End time';
 
 $string['excellent'] = 'excellent';
 $string['none'] = 'none';
+$string['bad'] = 'bad';
