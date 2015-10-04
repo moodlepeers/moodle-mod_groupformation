@@ -444,7 +444,9 @@ class mod_groupformation_storage_manager {
 	 */
 	public function getMaxOptionOfCatalogQuestion($i, $category = 'grade') {
 		global $DB;
-		
+		if ($category == 'points'){
+			return $this->get_max_points();
+		}
 		$table = "groupformation_" . $category;
 		return $DB->get_field ( $table, 'optionmax', array (
 				'language' => 'en',

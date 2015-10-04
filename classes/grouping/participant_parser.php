@@ -145,6 +145,12 @@ class mod_groupformation_participant_parser {
 			$gradeP = $calculator->getGradePosition ( $users );
 		}
 		
+		$pointsP = - 1;
+		// determines the question position with maximal variance (if grade is in questionnaire)
+		if (in_array ( 'points', $labels )) {
+			$pointsP = $calculator->getPointsPosition ( $users );
+		}
+		
 		$array = array ();
 		$totalLabel = array ();
 		$userPosition = 0;
@@ -229,6 +235,20 @@ class mod_groupformation_participant_parser {
 					// falls eine Varianz berechnet wurde
 					if ($gradeP != - 1) {
 						$value [] = $calculator->getGrade ( $gradeP, $user );
+						$value ["homogen"] = $homogen [$label];
+						// $value["minVal"] = $minVals[$label];
+						// $value["maxVal"] = $maxVals[$label];
+						$object->$label = $value;
+						if ($userPosition == 0) {
+							$totalLabel [] = $label;
+						}
+					}
+				}
+				
+				if ($label == 'points'){
+					// falls eine Varianz berechnet wurde
+					if ($pointsP != - 1) {
+						$value [] = $calculator->getPoints ( $pointsP, $user );
 						$value ["homogen"] = $homogen [$label];
 						// $value["minVal"] = $minVals[$label];
 						// $value["maxVal"] = $maxVals[$label];
