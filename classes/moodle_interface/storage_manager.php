@@ -640,9 +640,13 @@ class mod_groupformation_storage_manager {
 		$categories = array ();
 		foreach ( $category_set as $category ) {
 			if ($this->getNumber ( $category ) > 0) {
-				// if ($category != 'general' || ($category == 'general' && $this->getEvaluationMethod() != 1))
-				if ($category != 'grade' || $this->askForGrade ())
+				if ($category == 'grade' && $this->askForGrade ()) {
 					$categories [] = $category;
+				} elseif ($category == 'points' && $this->askForPoints ()) {
+					$categories [] = $category;
+				} elseif ($category != 'grade' && $category != 'points') {
+					$categories [] = $category;
+				}
 			}
 		}
 		return $categories;
@@ -661,9 +665,16 @@ class mod_groupformation_storage_manager {
 		$evaluationmethod = $DB->get_field ( 'groupformation', 'evaluationmethod', array (
 				'id' => $this->groupformationid 
 		) );
-		if ($evaluationmethod != 1 && $evaluationmethod != 2)
-			return false;
-		return true;
+		return $evaluationmethod == 1;
+	}
+	public function askForPoints() {
+		global $DB;
+		
+		$evaluationmethod = $DB->get_field ( 'groupformation', 'evaluationmethod', array (
+				'id' => $this->groupformationid 
+		) );
+		
+		return $evaluationmethod == 2;
 	}
 	
 	/**
@@ -729,6 +740,19 @@ class mod_groupformation_storage_manager {
 				'userid' => $userid,
 				'category' => $category,
 				'questionid' => $questionid 
+		) );
+	}
+	
+	/**
+	 * Returns maximum number of points
+	 *
+	 * @return mixed
+	 */
+	public function get_max_points() {
+		global $DB;
+		
+		return $DB->get_field ( 'groupformation', 'maxpoints', array (
+				'id' => $this->groupformationid 
 		) );
 	}
 	
@@ -1020,11 +1044,11 @@ class mod_groupformation_storage_manager {
 	
 	/**
 	 * Returns label set
-	 * 
+	 *
 	 * @return multitype:multitype:string
 	 */
 	public function getLabelSet() {
-		$array = $this->data->getLabelSet ( $this->getScenario() );
+		$array = $this->data->getLabelSet ( $this->getScenario () );
 		
 		if ($this->groupformationid != null) {
 			$hasTopic = $this->getNumber ( 'topic' );
@@ -1042,8 +1066,7 @@ class mod_groupformation_storage_manager {
 		}
 		return $array;
 	}
-	
-	public function getHomogenSet(){
-		return $this->data->getHomogenSet($this->getScenario());
+	public function getHomogenSet() {
+		return $this->data->getHomogenSet ( $this->getScenario () );
 	}
 }

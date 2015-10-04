@@ -45,10 +45,10 @@ class range_question{
             echo '<th scope="row">' . $this->question . '</th>';
         }
 	
-		echo '<td data-title="0 = ' . $optArray[1] . ', 100 = ' . $optArray[0] . '" class="range">
-					<span class="">0</span>
-					<input type="range" name="'. $this->category . $this->qnumber .'" class="gf_range_inputs" min="0" max="100" value="'. $answer .'" />
-					<span class="">100</span>
+		echo '<td data-title="'.min(array_keys($optArray)).' = ' . $optArray[min(array_keys($optArray))] . ', '.max(array_keys($optArray)).' = ' . $optArray[max(array_keys($optArray))] . '" class="range">
+					<span class="">'.min(array_keys($optArray)).'</span>
+					<input type="range" name="'. $this->category . $this->qnumber .'" class="gf_range_inputs" min="0" max="'.max(array_keys($optArray)).'" value="'. $answer .'" />
+					<span class="">'.max(array_keys($optArray)).'</span>
 					<input type="text" name="'. $this->category . $this->qnumber .'_valid" value="0" style="display:none;"/>
 					</td>';
 		echo '</tr>';

@@ -136,8 +136,8 @@ $string ['questionaire_submit'] = 'Abgeben';
 $string ['questionaire_submit_disabled_teacher'] = 'Abgeben ist deaktiviert, da dies nur eine Vorschau ist.';
 $string ['questionaire_preview'] = 'Das ist eine Vorschau des Fragebogens.';
 $string ['category_general'] = 'Allgemeines';
-$string ['category_grade'] = 'Ziele (Noten)';
-$string ['category_points'] = 'Ziele (Punkte)';
+$string ['category_grade'] = 'Ziele';
+$string ['category_points'] = 'Ziele';
 $string ['category_team'] = 'Gruppenaspekte';
 $string ['category_character'] = 'Persönlichkeitsmerkmale';
 $string ['category_motivation'] = 'Kurs-Motivation';
@@ -282,3 +282,6 @@ $string['emailnotifications_info'] = 'Sie werden via Moodle benachrichtigt, wenn
 $string['onlyactivestudents_info'] = 'Zur Gruppenbildung werden ausschließlich Studierende betrachtet werden, die mind. eine Frage beantwortet haben. Sie können das in den {$a->url} anpassen.';
 $string ['starttime'] = 'Startzeit';
 $string ['endtime'] = 'Endzeit';
+
+$string['excellent'] = 'sehr gut';
+$string['none'] = 'gar nicht';

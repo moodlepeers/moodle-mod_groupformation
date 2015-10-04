@@ -137,8 +137,8 @@ $string ['questionaire_submit'] = 'Submit';
 $string ['questionaire_submit_disabled_teacher'] = 'Submit is disabled because this is just a preview.';
 $string ['questionaire_preview'] = 'This is a preview of the questionaire.';
 $string ['category_general'] = 'General';
-$string ['category_grade'] = 'Goals (Grades)';
-$string ['category_points'] = 'Goals (Points)';
+$string ['category_grade'] = 'Goals';
+$string ['category_points'] = 'Goals';
 $string ['category_team'] = 'Team';
 $string ['category_character'] = 'Character';
 $string ['category_motivation'] = 'Motivation';
@@ -277,3 +277,6 @@ $string['emailnotifications_info'] = 'You will be notified via email when it is 
 $string['onlyactivestudents_info'] = 'Only students with at least one submitted answer will be considered for building groups. You can configure it in the {$a->url}.';
 $string ['starttime'] = 'Start time';
 $string ['endtime'] = 'End time';
+
+$string['excellent'] = 'excellent';
+$string['none'] = 'none';

@@ -173,6 +173,9 @@ class mod_groupformation_questionaire {
 
 		echo '<form style="width:100%; float:left;" action="' . htmlspecialchars ( $_SERVER ["PHP_SELF"] ) . '" method="post" autocomplete="off">';
 		
+		if (!is_null($questions) && count($questions)!=0){
+		
+		
 		// hier schicke ich verdeckt die momentane Kategorie und groupformationID mit
 		echo '<input type="hidden" name="category" value="' . $this->category . '"/>';
 		
@@ -209,7 +212,7 @@ class mod_groupformation_questionaire {
 				$this->radio->__printHTML ( $q, $this->category, $this->qNumber, $hasAnswer );
 			}
 			
-			if ($q [0] == 'typThema') {
+			if ($q [0] == 'type_topics') {
 				if($hasTopicNumbers){
 					$this->topics->__printHTML( $q, $this->category, $q[4]+1, true);
 				}else{
@@ -217,14 +220,23 @@ class mod_groupformation_questionaire {
 				}
 			}
 			
-			if ($q [0] == 'typVorwissen') {
+			if ($q [0] == 'type_knowledge') {
+				$this->range->__printHTML ( $q, $this->category, $this->qNumber, $hasAnswer );
+			}
+			
+			if ($q [0] == 'type_points') {
+				$this->range->__printHTML ( $q, $this->category, $this->qNumber, $hasAnswer );
+			}
+			
+			// TODO
+			if ($q [0] == 'range'){
 				$this->range->__printHTML ( $q, $this->category, $this->qNumber, $hasAnswer );
 			}
 			$this->qNumber ++;
 		}
 		
 		// closing the table or unordered list
-		if ($tableType == 'typThema') {
+		if ($tableType == 'type_topics') {
 			// close unordered list
 			echo '</ul>';
 			
@@ -239,14 +251,7 @@ class mod_groupformation_questionaire {
 		// Reset the Question Number, so each HTML table starts with 0
 		$this->qNumber = 1;
 		
-		// $hasAnswer = $this->question_manager->hasAnswers();
-		// var_dump($hasAnswer);
-		// if($hasAnswer){
-		// var_dump($this->question_manager->getAnswers());
-		// }
-		// $hasNext = $this->question_manager->hasNext();
-		// $answers = array('0');
-		// $this->question_manager->saveAnswers($answers);
+		}
 		
 		$this->printActionButtons();
 		
