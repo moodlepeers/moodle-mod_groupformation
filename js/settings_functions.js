@@ -9,7 +9,7 @@ $(document).ready(function() {
     
     
     // TODO wenn JS und nonJS fehlerfrei funktioniert, die folgende Zeile einkommentieren
-    //$("#non-js-content").hide();
+    $("#non-js-content").hide();
     $("#js-content").show();
     
 
@@ -220,7 +220,7 @@ $(document).ready(function() {
     
     //nach Beta wieder entkommentieren!!!
     //$('.szenarioLabel').click(function(){
-    
+
     // nächste Zeile nach Beta wieder löschen!!!
     $('#label_project, #label_homework').click(function(){
         if(!(typeof $("input[name='js_szenario']:checked").val() != 'undefined')){
