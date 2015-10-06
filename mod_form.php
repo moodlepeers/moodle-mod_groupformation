@@ -198,7 +198,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		                            <div class="col_m_33">
 					
 		                                <input type="radio" name="js_szenario" id="project" value="project"  />
-		                                <label class="col_m_100 szenarioLabel" for="project" ><div class="sz_header">' . get_string ( 'scenario_projectteams', 'groupformation' ) . '</div>
+		                                <label class="col_m_100 szenarioLabel" id="label_project" for="project" ><div class="sz_header">' . get_string ( 'scenario_projectteams', 'groupformation' ) . '</div>
 		                                    <p><small>' . get_string ( 'scenario_projectteams_description', 'groupformation' ) . '</small></p>
 		                                </label>
 		                            </div>
@@ -206,14 +206,14 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		                            <div class="col_m_33">
 					
 		                                <input type="radio" name="js_szenario" id="homework" value="homework" />
-		                                <label class="col_m_100 szenarioLabel" for="homework" ><div class="sz_header">' . get_string ( 'scenario_homeworkgroups', 'groupformation' ) . '</div>
+		                                <label class="col_m_100 szenarioLabel" id="label_homework" for="homework" ><div class="sz_header">' . get_string ( 'scenario_homeworkgroups', 'groupformation' ) . '</div>
 		                                    <p><small>' . get_string ( 'scenario_homeworkgroups_description', 'groupformation' ) . '</small></p>
 		                                </label>
 		                            </div>
 					
 		                            <div class="col_m_33">
 					
-		                                <input type="radio" name="js_szenario" id="presentation" value="presentation" />
+		                                <input type="radio" name="js_szenario"  value="presentation" disabled />
 		                                <label class="col_m_100 szenarioLabel" for="presentation"><div class="sz_header">' . get_string ( 'scenario_presentationgroups', 'groupformation' ) . '</div>
 		                                    <p><small>' . get_string ( 'scenario_presentationgroups_description', 'groupformation' ) . '</small></p>
 		                                </label>
@@ -334,72 +334,71 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		$mform->addElement ( 'html', '</div>' );
 		
 		// wrapper for topics
-		$mform->addElement ( 'html', '<div class="gf_settings_pad">' );
+//		$mform->addElement ( 'html', '<div class="gf_settings_pad">' );
 		
 		// add checkbox topics
-		$mform->addElement ( 'html', '
-                    <div class="gf_pad_header">
-						<label class="gf_label" for="id_js_topics">
-                          <input type="checkbox" id="id_js_topics" name="chbTopics" value="wantTopics">
-                          ' . get_string ( 'topics_description', 'groupformation' ) . '</label><span id="topicsStateLabel" class="optional"></span>
-                    </div>' );
+//		$mform->addElement ( 'html', '
+//                    <div class="gf_pad_header">
+//						<label class="gf_label" for="id_js_topics">
+//                          <input type="checkbox" id="id_js_topics" name="chbTopics" value="wantTopics">
+//                          ' . get_string ( 'topics_description', 'groupformation' ) . '</label><span id="topicsStateLabel" class="optional"></span>
+//                    </div>' );
 		
 		// add dynamic input fields topics with preview
-		$mform->addElement ( 'html', '
-                    <div class="gf_pad_content" id="js_topicsWrapper">
-
-                        <p>' . get_string ( 'topics_description_extended', 'groupformation' ) . '</p>
-
-                            <div class="grid">
-                            <div id="tpc">
-                            <div class="multi_field_wrapper persist-area">
-                                <div class="col_m_50">
-
-                                                                    
-<!--                      Die Input Felder-->
-                                    <h5>' . get_string ( 'input', 'groupformation' ) . '</h5>
-                                        <div class="multi_fields">
-                                            <div class="multi_field" id="inputtpc0">
-                                                <input class="respwidth js_topicInput" type="text">
-                                                <button type="button" class="remove_field gf_button gf_button_circle gf_button_small"></button>
-                                            </div>
-                                            <div class="multi_field" id="inputtpc1">
-                                                <input class="respwidth js_topicInput" type="text">
-                                                <button type="button" class="remove_field gf_button gf_button_circle gf_button_small"></button>
-                                            </div>
-                                            <div class="multi_field" id="inputtpc2">
-                                                <input class="respwidth js_topicInput lastInput" type="text" placeholder="' . get_string ( 'add_line', 'groupformation' ) . '">
-                                                <button type="button" class="remove_field gf_button gf_button_circle gf_button_small" disabled="disabled"></button>
-                                            </div>
-                                        </div>
-                                    </div> <!-- /col_50 -->   
-                                    
-<!--                      Die Vorschau      -->
-                                    <div class="col_m_50">
-                                        
-                                        <h5>' . get_string ( 'preview', 'groupformation' ) . '</h5>
-                    
-                                        <div class="col_m_100">' . 
-		// '<h4 class="view_on_mobile">'.get_string('topics_question','groupformation').'</h4>'.
-		
-		'<p id="topicshead">' . get_string ( 'topics_question', 'groupformation' ) . '</p>
-											<span id="topicsDummy" style="display:none;">' . get_string ( 'topics_dummy', 'groupformation' ) . '</span>
-                                            <ul class="sortable_topics" id="previewTopics">
-                                              <li class="topicLi" id="tpcRow0" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' . get_string ( 'topics_dummy', 'groupformation' ) . '1</li>
-                                              <li class="topicLi" id="tpcRow1" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' . get_string ( 'topics_dummy', 'groupformation' ) . '2</li>
-                                              <li class="topicLi" id="tpcRow2" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' . get_string ( 'topics_dummy', 'groupformation' ) . '3</li>
-                                            </ul>
-                                       </div>
-                                    </div> <!-- /col_50 -->
-                                </div>  <!-- /multi_field_wrapper-->
-                                </div> <!-- Anchor-->
-
-                            </div> <!-- /.grid -->
-                        </div> <!-- /.topicWrapper -->
-					' );
+//		$mform->addElement ( 'html', '
+//                    <div class="gf_pad_content" id="js_topicsWrapper">
+//
+//                        <p>' . get_string ( 'topics_description_extended', 'groupformation' ) . '</p>
+//
+//                            <div class="grid">
+//                            <div id="tpc">
+//                            <div class="multi_field_wrapper persist-area">
+//                                <div class="col_m_50">
+//
+//
+//<!--                      Die Input Felder-->
+//                                    <h5>' . get_string ( 'input', 'groupformation' ) . '</h5>
+//                                        <div class="multi_fields">
+//                                            <div class="multi_field" id="inputtpc0">
+//                                                <input class="respwidth js_topicInput" type="text">
+//                                                <button type="button" class="remove_field gf_button gf_button_circle gf_button_small"></button>
+//                                            </div>
+//                                            <div class="multi_field" id="inputtpc1">
+//                                                <input class="respwidth js_topicInput" type="text">
+//                                                <button type="button" class="remove_field gf_button gf_button_circle gf_button_small"></button>
+//                                            </div>
+//                                            <div class="multi_field" id="inputtpc2">
+//                                                <input class="respwidth js_topicInput lastInput" type="text" placeholder="' . get_string ( 'add_line', 'groupformation' ) . '">
+//                                                <button type="button" class="remove_field gf_button gf_button_circle gf_button_small" disabled="disabled"></button>
+//                                            </div>
+//                                        </div>
+//                                    </div> <!-- /col_50 -->
+//
+//<!--                      Die Vorschau      -->
+//                                    <div class="col_m_50">
+//
+//                                        <h5>' . get_string ( 'preview', 'groupformation' ) . '</h5>
+//
+//                                        <div class="col_m_100">' .
+//
+//		'<p id="topicshead">' . get_string ( 'topics_question', 'groupformation' ) . '</p>
+//											<span id="topicsDummy" style="display:none;">' . get_string ( 'topics_dummy', 'groupformation' ) . '</span>
+//                                            <ul class="sortable_topics" id="previewTopics">
+//                                              <li class="topicLi" id="tpcRow0" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' . get_string ( 'topics_dummy', 'groupformation' ) . '1</li>
+//                                              <li class="topicLi" id="tpcRow1" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' . get_string ( 'topics_dummy', 'groupformation' ) . '2</li>
+//                                              <li class="topicLi" id="tpcRow2" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' . get_string ( 'topics_dummy', 'groupformation' ) . '3</li>
+//                                            </ul>
+//                                       </div>
+//                                    </div> <!-- /col_50 -->
+//                                </div>  <!-- /multi_field_wrapper-->
+//                                </div> <!-- Anchor-->
+//
+//                            </div> <!-- /.grid -->
+//                        </div> <!-- /.topicWrapper -->
+//					' );
 		
 		// close wrapper for topics
-		$mform->addElement ( 'html', '</div>' );
+//		$mform->addElement ( 'html', '</div>' );
 		
 		// wrapper for Groupsize Options
 		$mform->addElement ( 'html', '<div class="gf_settings_pad">' );
