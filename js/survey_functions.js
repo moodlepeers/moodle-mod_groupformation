@@ -5,7 +5,6 @@ $(document).ready(function() {
 
 
 
-
     //get the widths of all navigation li's
     var menuWidths = $('#accordion li').map(function(i) {
         //document.getElementById('foo').offsetWidth

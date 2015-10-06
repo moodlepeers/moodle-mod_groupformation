@@ -198,7 +198,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		                            <div class="col_m_33">
 					
 		                                <input type="radio" name="js_szenario" id="project" value="project"  />
-		                                <label class="col_m_100 szenarioLabel" id="label_project" for="project" ><div class="sz_header">' . get_string ( 'scenario_projectteams', 'groupformation' ) . '</div>
+		                                <label class="col_m_100 szenarioLabel" id="label_project" for="project" ><div class="sz_header">' . get_string ( 'scenario_projectteams', 'groupformation' ) /*. '<span class="toolt" tooltip="' . get_string ( 'scenario_projectteams_description', 'groupformation' ) . '"></span>' */. '</div>
 		                                    <p><small>' . get_string ( 'scenario_projectteams_description', 'groupformation' ) . '</small></p>
 		                                </label>
 		                            </div>

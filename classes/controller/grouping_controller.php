@@ -278,8 +278,8 @@ class mod_groupformation_grouping_controller {
 								'value' => '',
 								'state' => 'disabled',
 								'text' => get_string ( 'grouping_adopt', 'groupformation' ) 
-						) 
-				) );
+						)
+                ) );
 				
 				$settingsGroupsView->assign ( 'emailnotifications', $this->store->get_email_setting() );
 				break;
