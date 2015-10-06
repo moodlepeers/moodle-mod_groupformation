@@ -99,6 +99,7 @@ $string ['knowledge_scale'] = '0 = no knowledge, 100 = big knowledge';
 $string ['groupoptions'] = 'Group settings';
 $string ['groupoption_description'] = 'Group settings description';
 $string ['groupoption_help'] = 'This parameter can be optimized after the submission of the questionaires.';
+$string ['groupoption_onlyactivestudents'] = 'Students without answers will not be assigned to any groups.';
 $string ['maxmembers'] = 'Max. number of group members';
 $string ['maxgroups'] = 'Max. number of groups';
 $string ['maxpoints'] = 'Max. points';

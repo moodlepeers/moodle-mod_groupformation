@@ -97,6 +97,7 @@ $string ['knowledge_scale'] = '0&nbsp;=&nbsp;kein&nbsp;Vorwissen, 100&nbsp;=&nbs
 $string ['groupoptions'] = 'Gruppen-Einstellungen';
 $string ['groupoption_description'] = 'Gruppen-Einstellungen';
 $string ['groupoption_help'] = 'Diese Einstellungen können bis zum Starten der Gruppenbildung geändert werden, selbst wenn schon Fragebögen von Studierenden ausgefüllt wurden.';
+$string ['groupoption_onlyactivestudents'] = 'Studierende ohne einzige Antwort werden nicht in Gruppen eingeteilt.';
 $string ['maxmembers'] = 'Max. Gruppengröße';
 $string ['maxgroups'] = 'Max. Gruppenanzahl';
 $string ['maxpoints'] = 'Max. Punktzahl';

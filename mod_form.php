@@ -491,15 +491,15 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		// close wrapper for evaluation options
 		$mform->addElement ( 'html', '</div>' );
 		
-		// add checkbox topics
+		// add checkbox only-active-students
 		$mform->addElement ( 'html', '
                     <div class="gf_pad_header">
 						<label class="gf_label" for="id_js_onlyactivestudents">
                           <input type="checkbox" id="id_js_onlyactivestudents" name="chbOnlyactivestudents" value="onlyactivestudents">
-                          ' . get_string ( 'onlyactivestudents_description', 'groupformation' ) . '</label><span id="onlyactivestudentsStateLabel" class="optional"></span>
+                          ' . get_string ( 'onlyactivestudents_description', 'groupformation' ) . '</label><span id="onlyactivestudentsStateLabel" class="optional"></span><span class="toolt" tooltip="' . get_string ( 'groupoption_onlyactivestudents', 'groupformation' ) . '"></span>
                     </div>' );
 		
-		// add checkbox topics
+		// add checkbox email-notification
 		// TODO @Ahmed: Hier das >> style="display: none;" << entfernen und du siehst die Option in den Activityeinstellungen (default selected)
 		$mform->addElement ( 'html', '
                     <div class="gf_pad_header" style="display: none;">
