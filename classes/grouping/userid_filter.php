@@ -112,19 +112,6 @@
 		return count($this->totalUserIds) - count($this->getNoneCompletedIds());
 	}
 	
-	public function getNumberOfCommitedNoneCompleted(){
-		$totalNumber = 0;
-		$ids = $this->store->getUserIdsCompleted();
-		foreach($ids as $user){
-			$number = $this->store->get_number_of_answers($user);
-			if($this->total != $number){
-				$totalNumber++;
-			}
-		}
-		
-		return $totalNumber;
-	}
-	
 	// 0 -> die Anzahl an Studenten, die den Fragebogen bearbeitet haben 
 	// 1 -> die Anzahl der Studenten, die abgegeben haben
 	public function getNumbersOfAnswerStatus(){

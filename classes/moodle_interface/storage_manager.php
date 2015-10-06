@@ -149,40 +149,11 @@ class mod_groupformation_storage_manager {
 	public function getTotalUserIds() {
 		global $DB;
 		
-		$array = array ();
-		
-		$records = $DB->get_records ( 'groupformation_started', array (
-				'groupformation' => $this->groupformationid 
-		) );
-		
-		foreach ( $records as $record ) {
-			
-			$array [] = $record->userid;
-		}
+		$array = $DB->get_fieldset_select('groupformation_started', 'userid', 'groupformation = ' . $this->groupformationid);
 		
 		return $array;
 	}
-	
-	/**
-	 * Returns all users (user IDs) who completed the questionaire
-	 *
-	 * @return multitype:NULL
-	 */
-	public function getUserIdsCompleted() {
-		global $DB;
-		
-		$array = array ();
-		$records = $DB->get_records ( 'groupformation_started', array (
-				'groupformation' => $this->groupformationid,
-				'completed' => '1' 
-		) );
-		foreach ( $records as $record ) {
-			$array [] = $record->userid;
-		}
-		
-		return $array;
-	}
-	
+
 	/**
 	 * Determines the number of answered questions of a user (in all categories or a specified category)
 	 *
