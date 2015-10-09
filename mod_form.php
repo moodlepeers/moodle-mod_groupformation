@@ -85,7 +85,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		$mform->addRule ( 'name', get_string ( 'maximumchars', '', 255 ), 'maxlength', 255, 'client' );
 		
 		// Adding the standard "intro" and "introformat" fields.
-		$this->add_intro_editor ();
+		$this->standard_intro_elements ();
 		
 		// Adding the availability settings
 		$mform->addElement ( 'header', 'timinghdr', get_string ( 'availability' ) );

@@ -581,7 +581,7 @@ function groupformation_set_fields(stdClass $groupformation) {
 // $init gibt an, ob der Aufruf von einem erstellen iner Instanz oder von einem editieren der Instanz kommt
 function groupformation_save_more_infos($groupformation, $init) {
 	
-	// speicher mir zus�tzliche Daten ab
+	// speicher mir zusätzliche Daten ab
 	$store = new mod_groupformation_storage_manager ( $groupformation->id );
 	$data = new mod_groupformation_data ();
 	
@@ -597,16 +597,14 @@ function groupformation_save_more_infos($groupformation, $init) {
 		$topicsarray = explode ( "\n", $groupformation->topiclines );
 	}
 	
-	$names = $data->getCategorySet ( $groupformation->szenario );
+	$names = $data->getCategorySet($store->getScenario());
 	
-	// �nderungen an den Katalogfragen werden erst beim Erstellen einer Instanz �bernommen
 	if ($init) {
 		
 		$xmlLoader = new mod_groupformation_xml_loader ();
-		$xmlLoader->setStore ( $store );
-		
-		// wenn die Datenbank noch komplet leer ist, speicher einfach alle Infos aus den xml's ab
-		// ansonsten �berpr�fe zu jeder Kategorie die VErsionsnummer und �ndere bei bedarf
+		$xmlLoader->setStore($store);
+		// wenn die Datenbank noch komplett leer ist, speicher einfach alle Infos aus den xml's ab
+		// ansonsten überprüfe zu jeder Kategorie die Versionsnummer und ändere bei bedarf
 		if ($store->catalogTableNotSet ()) {
 			
 			foreach ( $names as $category ) {

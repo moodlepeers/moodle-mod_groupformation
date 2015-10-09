@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="mod/groupformation/db" VERSION="20151001" COMMENT="XMLDB file for Moodle mod/groupformation"
+<XMLDB PATH="mod/groupformation/db" VERSION="20151009" COMMENT="XMLDB file for Moodle mod/groupformation"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
@@ -72,6 +72,7 @@
     <TABLE NAME="groupformation_team" COMMENT="save things according to a question">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="questionid" TYPE="int" LENGTH="20" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="type" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="question" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="options" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
@@ -86,6 +87,7 @@
     <TABLE NAME="groupformation_motivation" COMMENT="save things according to a question">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="questionid" TYPE="int" LENGTH="20" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="type" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="question" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="options" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
@@ -100,6 +102,7 @@
     <TABLE NAME="groupformation_grade" COMMENT="save things according to a question">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="questionid" TYPE="int" LENGTH="20" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="type" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="question" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="options" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
@@ -114,6 +117,7 @@
     <TABLE NAME="groupformation_points" COMMENT="save things according to a question">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="questionid" TYPE="int" LENGTH="20" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="type" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="question" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="options" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
@@ -128,6 +132,7 @@
     <TABLE NAME="groupformation_learning" COMMENT="save things according to a question">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="questionid" TYPE="int" LENGTH="20" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="type" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="question" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="options" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
@@ -142,6 +147,7 @@
     <TABLE NAME="groupformation_character" COMMENT="save things according to a question">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="questionid" TYPE="int" LENGTH="20" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="type" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="question" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="options" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
@@ -156,6 +162,7 @@
     <TABLE NAME="groupformation_general" COMMENT="save things according to a question">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="questionid" TYPE="int" LENGTH="20" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="type" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="question" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="options" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
@@ -170,6 +177,7 @@
     <TABLE NAME="groupformation_srl" COMMENT="save things according to a question">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="questionid" TYPE="int" LENGTH="20" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="type" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="question" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="options" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
@@ -184,6 +192,7 @@
     <TABLE NAME="groupformation_self" COMMENT="save things according to a question">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="questionid" TYPE="int" LENGTH="20" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="type" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="question" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="options" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
@@ -198,6 +207,7 @@
     <TABLE NAME="groupformation_sellmo" COMMENT="save things according to a question">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="questionid" TYPE="int" LENGTH="20" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="type" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="question" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="options" TYPE="text" NOTNULL="true" SEQUENCE="false"/>

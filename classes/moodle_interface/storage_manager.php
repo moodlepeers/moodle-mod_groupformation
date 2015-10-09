@@ -133,10 +133,10 @@ class mod_groupformation_storage_manager {
 		$data->question = $question ['question'];
 		$data->options = $this->convert_options ( $question ['options'] );
 		$data->position = $question ['position'];
-		// $data->questionid = $question ['questionid'];
+		$data->questionid = $question ['questionid'];
 		$data->language = $language;
 		$data->optionmax = count ( $question ['options'] );
-		
+// 		var_dump($data);
 		$DB->insert_record ( 'groupformation_' . $category, $data );
 	}
 	
@@ -421,7 +421,7 @@ class mod_groupformation_storage_manager {
 		$table = "groupformation_" . $category;
 		return $DB->get_field ( $table, 'optionmax', array (
 				'language' => 'en',
-				'position' => $i 
+				'questionid' => $i 
 		) );
 	}
 	
@@ -438,7 +438,7 @@ class mod_groupformation_storage_manager {
 		$table = "groupformation_" . $category;
 		$return = $DB->get_record ( $table, array (
 				'language' => $lang,
-				'position' => $i 
+				'questionid' => $i 
 		) );
 		
 		return $return;

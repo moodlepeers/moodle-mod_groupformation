@@ -35,8 +35,8 @@
 		
 		private $storeM;
 		
-		public function __construct(){
-				
+		public function __construct($store = null){
+			$this->storeM = $store;
 		}
 		
 		// damit die Klasse die groupformationId nicht wissen muss, �bergebe den kompletten storage_manager wenn du mir den Fragenkatalogen arbeitest
@@ -95,7 +95,7 @@
 		 */
 		private function save($category, $lang){
 			global $CFG;
-			$xmlFile = $CFG->dirroot.'/mod/groupformation/xml_question/question_'.$lang.'_'.$category.'.xml';
+			$xmlFile = $CFG->dirroot.'/mod/groupformation/xml_question/'.$lang.'_'.$category.'.xml';
 			
 			$return = array();
 			
@@ -119,7 +119,8 @@
 					$array = array('type' => trim($question['TYPE']),
 							'question' => trim($question->QUESTIONTEXT),
 							'options' => $optionArray,
-							'position' => $numbers
+							'position' => $numbers,
+							'questionid' => trim($question['ID']),
 					);
 
 					//speichert die Fragen in der Datenbank ab

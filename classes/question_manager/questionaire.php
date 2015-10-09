@@ -296,7 +296,7 @@ class mod_groupformation_questionaire {
 		//$disabled = ! $hasAnsweredEverything;
 		$disabled = false;
 		if (has_capability ( 'mod/groupformation:editsettings', $this->context ))
-			echo '<div class="col_100 questionaire_hint">' . get_string ( 'questionaire_submit_disabled_teacher', 'groupformation' ) . '</div>';
+			echo '<div class="alert col_100 questionaire_hint">' . get_string ( 'questionaire_submit_disabled_teacher', 'groupformation' ) . '</div>';
 		
 		echo '<div class="grid">';
 		echo '	<div class="questionaire_button_text">' . get_string ( 'questionaire_press_beginning_submit', 'groupformation' ) . '</div>';
