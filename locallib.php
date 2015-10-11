@@ -196,3 +196,35 @@ function groupformation_set_activity_completion($course,$cm,$userid){
 	$completion->set_module_viewed ( $cm, $userid );
 }
 
+
+
+/**
+ * send confirmation for finishing group formation
+ */
+function groupformation_send_confirmation($a) {
+	global $DB;
+
+    // get admin user for setting as "userfrom"
+    $admin = array_pop($DB->get_records('user', array('username' => 'admin')));
+
+    // Prepare the message.
+    $message = new \core\message\message();
+	$message->component = 'moodle';
+	$message->name = 'instantmessage';
+	$message->userfrom = $admin;
+	$message->userto = $a;
+	$message->subject = 'message subject 1';
+	$message->fullmessage = 'message body';
+	$message->fullmessageformat = FORMAT_MARKDOWN;
+	$message->fullmessagehtml = '<p>message body</p>';
+	$message->smallmessage = 'Die Gruppenformation ist abgeschlossen und Sie können sich nun das Ergebnis anschauen';
+	$message->notification = '0';
+	$message->contexturl = 'http://localhost:10000/mod/groupformation/analysis_view.php?id=4&do_show=analysis';
+	$message->contexturlname = 'link zum groupformation-plugin';
+	$message->replyto = "random@example.com";
+	$content = array('*' => array('header' => ' test ', 'footer' => ' test ')); // Extra content for specific processor
+	$message->set_additional_content('email', $content);
+	 
+	 // send message
+	$messageid = message_send($message);
+}

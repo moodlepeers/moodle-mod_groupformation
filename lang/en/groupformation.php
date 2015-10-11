@@ -283,3 +283,7 @@ $string ['endtime'] = 'End time';
 $string['excellent'] = 'excellent';
 $string['none'] = 'none';
 $string['bad'] = 'bad';
+
+/* messages API */
+$string['messageprovider:submission'] = 'Notify me if group formation algo finished.';
+
