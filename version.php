@@ -21,8 +21,8 @@
  */
  
 defined('MOODLE_INTERNAL') || die();
-$plugin->version   = 2015101500;
-$plugin->requires  = 2014050800; //value taken from mod "feedback"
+$plugin->version   = 2015101502;
+$plugin->requires  = 2015050500; //value taken from mod "feedback"
 $plugin->cron      = 0;//1*60; // seconds
 $plugin->component = 'mod_groupformation';
 $plugin->maturity  = MATURITY_ALPHA;

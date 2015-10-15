@@ -287,3 +287,5 @@ $string ['endtime'] = 'Endzeit';
 $string['excellent'] = 'sehr gut';
 $string['none'] = 'gar nicht';
 $string['bad'] = 'schlecht';
+
+$string['cron_job_not_running'] = 'Um die gestarteten Anfragen zur Gruppenbildung zu bearbeiten läuft im Hintergrund ein Cron-Daemon. Leider reagiert dieser in der letzten Zeit nicht oder ist gar außer Betrieb. Sollten Sie diese Meldung nach mehr als 24 Stunden noch immer sehen, kontaktieren Sie bitte den Systemadministrator.';

@@ -90,6 +90,8 @@ if ($_POST) {
 	redirect ( $returnurl );
 }
 
+// groupformation_trigger_event($cm, $course, $groupformation, $context);
+
 echo $OUTPUT->header ();
 
 // Print the tabs.
@@ -154,10 +156,10 @@ if ($create_users > 0) {
 /* ----- / function for sending confirmations when group formation algorithm finished */
 
 // $jm = new mod_groupformation_job_manager ();
-
 // $job = null;
 
 // $job = $jm::get_job ( $groupformation->id );
+// //$jm->reset_job($job);
 
 // if (! is_null ( $job )) {
 // 	$result = $jm::do_groupal($job);

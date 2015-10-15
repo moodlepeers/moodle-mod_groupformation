@@ -114,7 +114,7 @@ class mod_groupformation_job_manager {
 	 * @param string $state        	
 	 */
 	public static function set_job($job, $state = "ready", $settime = false, $resettime = false) {
-		global $DB;
+		global $DB, $USER;
 		$status_options = self::get_status_options ();
 		
 		if (array_key_exists ( $state, $status_options ))
@@ -164,6 +164,10 @@ class mod_groupformation_job_manager {
 			$job->stats_st_dev = null;
 			$job->stats_norm_st_dev = null;
 			$job->stats_performance_index = null;
+		}
+		
+		if ($job->waiting == 1){
+			$job->started_by = $USER->id;
 		}
 		
 		return $DB->update_record ( 'groupformation_jobs', $job );

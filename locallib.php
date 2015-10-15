@@ -1,5 +1,6 @@
 <?php
 
+use mod_groupformation\task\build_groups_task;
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -133,13 +134,16 @@ function groupformation_fatal($userid, $groupformationid, $message) {
  * @param stdClass $context        	
  */
 function groupformation_trigger_event($cm, $course, $groupformation, $context) {
-	$event = \mod_groupformation\event\course_module_viewed::create ( array (
-			'objectid' => $groupformation->id,
-			'context' => $context 
-	) );
-	$event->add_record_snapshot ( 'course', $course );
-	$event->add_record_snapshot ( $cm->modname, $groupformation );
-	$event->trigger ();
+	
+	// TODO Logging - We need to implement events to trigger
+	
+// 	$event = \mod_groupformation\event\job_queued::create ( array (
+// 			'objectid' => $groupformation->id,
+// 			'context' => $context 
+// 	) );
+// 	$event->add_record_snapshot ( 'course', $course );
+// 	$event->add_record_snapshot ( $cm->modname, $groupformation );
+// 	$event->trigger ();
 }
 
 /**
@@ -232,4 +236,16 @@ function groupformation_send_message($recipient, $subject, $message) {
 	 
 	 // send message
 	$messageid = message_send($message);
+}
+
+function groupformation_check_for_cron_job(){
+	global $DB;
+	
+	$record = $DB->get_record('task_scheduled',array('component'=>'mod_groupformation'));
+	$now = time();
+	$lastruntime = $record->lastruntime;
+	
+	if (($now - intval($lastruntime))>60*60*24){
+		echo '<div class="alert">'.get_string('cron_job_not_running','groupformation').'</div>';
+	}
 }
