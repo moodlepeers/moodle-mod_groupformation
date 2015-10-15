@@ -505,10 +505,14 @@ class mod_groupformation_job_manager {
 	 * @param stdClass $job
 	 * @return NULL
 	 */
-	public static function notify_admin($job) {
-		
+	public static function notify_teacher($job) {
+		global $DB;
 		// TODO messaging to person:
-		// $job->started_by = id of receiver
+		$uID = $job->started_by;
+		$recipient = array_pop($DB->get_records('user', array('id' => $uID)));
+		$subject = "Gruppenformation abgeschlossen!";
+		$message = "Ihre Gruppenformation wurde erfolgreich abgeschlossen. Sie können sich das Ergebnis jetzt anschauen.";
+		groupformation_send_message($recipient, $subject, $message);
 		
 		return null;
 	}

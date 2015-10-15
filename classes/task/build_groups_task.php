@@ -78,6 +78,10 @@ class build_groups_task extends \core\task\scheduled_task {
 				$saved = \mod_groupformation_job_manager::save_result($job,$result);
 			}
 		}
+
+		// notify teacher about finished job
+		notify_teacher($job);
+
 		return $saved;
 	}
 	

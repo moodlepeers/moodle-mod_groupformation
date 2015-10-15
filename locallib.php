@@ -200,8 +200,13 @@ function groupformation_set_activity_completion($course,$cm,$userid){
 
 /**
  * send confirmation for finishing group formation
+ *
+ * @param stdClass $recipient
+ * @param string $subject
+ * @param string $message
+ * 
  */
-function groupformation_send_confirmation($a) {
+function groupformation_send_message($recipient, $subject, $message) {
 	global $DB;
 
     // get admin user for setting as "userfrom"
@@ -212,16 +217,16 @@ function groupformation_send_confirmation($a) {
 	$message->component = 'moodle';
 	$message->name = 'instantmessage';
 	$message->userfrom = $admin;
-	$message->userto = $a;
-	$message->subject = 'message subject 1';
-	$message->fullmessage = 'message body';
+	$message->userto = $recipient;
+	$message->subject = $subject;
+	$message->fullmessage = $message;
 	$message->fullmessageformat = FORMAT_MARKDOWN;
-	$message->fullmessagehtml = '<p>message body</p>';
+	$message->fullmessagehtml = '<p>' . $message . '</p>';
 	$message->smallmessage = 'Die Gruppenformation ist abgeschlossen und Sie können sich nun das Ergebnis anschauen';
 	$message->notification = '0';
 	$message->contexturl = 'http://localhost:10000/mod/groupformation/analysis_view.php?id=4&do_show=analysis';
 	$message->contexturlname = 'link zum groupformation-plugin';
-	$message->replyto = "random@example.com";
+	$message->replyto = "noreply@moodle.com";
 	$content = array('*' => array('header' => ' test ', 'footer' => ' test ')); // Extra content for specific processor
 	$message->set_additional_content('email', $content);
 	 

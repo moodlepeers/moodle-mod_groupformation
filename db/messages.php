@@ -7,5 +7,5 @@ $messageproviders = array(
 	// Notify a teacher for finishing group formation
 	'submission' => array(
 		// array empty, so every user can get notifications
-	)
+	)/**/
 );
