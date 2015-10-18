@@ -32,14 +32,14 @@ require_once ($CFG->dirroot . '/mod/groupformation/classes/controller/logging_co
 /**
  * Adds jQuery
  *
- * @param unknown $PAGE        	
- * @param string $filename        	
+ * @param unknown $PAGE
+ * @param string $filename
  */
 function groupformation_add_jquery($PAGE, $filename = null) {
 	$PAGE->requires->jquery ();
 	$PAGE->requires->jquery_plugin ( 'ui' );
 	$PAGE->requires->jquery_plugin ( 'ui-css' );
-	
+
 	if (! is_null ( $filename )) {
 		$PAGE->requires->js ( '/mod/groupformation/js/' . $filename );
 	}
@@ -47,7 +47,7 @@ function groupformation_add_jquery($PAGE, $filename = null) {
 
 /**
  * Logs message
- * 
+ *
  * @param integer $userid
  * @param integer $groupformationid
  * @param string $message
@@ -62,7 +62,7 @@ function groupformation_log($userid, $groupformationid, $message, $level = 'info
 
 /**
  * Logs debug message
- * 
+ *
  * @param integer $userid
  * @param integer $groupformationid
  * @param string $message
@@ -88,7 +88,7 @@ function groupformation_info($userid, $groupformationid, $message) {
 
 /**
  * Logs warn message
- * 
+ *
  * @param integer $userid
  * @param integer $groupformationid
  * @param string $message
@@ -101,7 +101,7 @@ function groupformation_warn($userid, $groupformationid, $message) {
 
 /**
  * Logs error message
- * 
+ *
  * @param integer $userid
  * @param integer $groupformationid
  * @param string $message
@@ -128,18 +128,18 @@ function groupformation_fatal($userid, $groupformationid, $message) {
 /**
  * Triggers event
  *
- * @param stdClass $cm        	
- * @param stdClass $course        	
- * @param stdClass $groupformation        	
- * @param stdClass $context        	
+ * @param stdClass $cm
+ * @param stdClass $course
+ * @param stdClass $groupformation
+ * @param stdClass $context
  */
 function groupformation_trigger_event($cm, $course, $groupformation, $context) {
-	
+
 	// TODO Logging - We need to implement events to trigger
-	
+
 // 	$event = \mod_groupformation\event\job_queued::create ( array (
 // 			'objectid' => $groupformation->id,
-// 			'context' => $context 
+// 			'context' => $context
 // 	) );
 // 	$event->add_record_snapshot ( 'course', $course );
 // 	$event->add_record_snapshot ( $cm->modname, $groupformation );
@@ -149,20 +149,20 @@ function groupformation_trigger_event($cm, $course, $groupformation, $context) {
 /**
  * Determines instances of course module, course and groupformation by id
  *
- * @param int $id        	
- * @param stdClass $cm        	
- * @param stdClass $course        	
- * @param stdClass $groupformation         	
+ * @param int $id
+ * @param stdClass $cm
+ * @param stdClass $course
+ * @param stdClass $groupformation
  */
 function groupformation_determine_instance($id, &$cm, &$course, &$groupformation) {
 	global $DB;
 	if ($id) {
 		$cm = get_coursemodule_from_id ( 'groupformation', $id, 0, false, MUST_EXIST );
 		$course = $DB->get_record ( 'course', array (
-				'id' => $cm->course 
+				'id' => $cm->course
 		), '*', MUST_EXIST );
 		$groupformation = $DB->get_record ( 'groupformation', array (
-				'id' => $cm->instance 
+				'id' => $cm->instance
 		), '*', MUST_EXIST );
 		// } else if ($g) {
 		// $groupformation = $DB->get_record ( 'groupformation', array ('id' => $g ), '*', MUST_EXIST );
@@ -175,22 +175,22 @@ function groupformation_determine_instance($id, &$cm, &$course, &$groupformation
 
 /**
  * Returns context for groupformation id
- * 
+ *
  * @param int $groupformationid
  * @return context_course
  */
 function groupformation_get_context($groupformationid){
 	$store = new mod_groupformation_storage_manager($groupformationid);
-	
+
 	$courseid = $store->getCourseID ();
-	
+
 	$context = context_course::instance ( $courseid );
-	
+
 	return $context;
 }
 
 /**
- * 
+ *
  * @param stdClass $course
  * @param stdClass $cm
  * @param int $userid
@@ -208,9 +208,9 @@ function groupformation_set_activity_completion($course,$cm,$userid){
  * @param stdClass $recipient
  * @param string $subject
  * @param string $message
- * 
+ *
  */
-function groupformation_send_message($recipient, $subject, $message) {
+function groupformation_send_message($recipient, $subject, $messagetext) {
 	global $DB;
 
     // get admin user for setting as "userfrom"
@@ -218,33 +218,33 @@ function groupformation_send_message($recipient, $subject, $message) {
 
     // Prepare the message.
     $message = new \core\message\message();
-	$message->component = 'moodle';
-	$message->name = 'instantmessage';
-	$message->userfrom = $admin;
-	$message->userto = $recipient;
-	$message->subject = $subject;
-	$message->fullmessage = $message;
-	$message->fullmessageformat = FORMAT_MARKDOWN;
-	$message->fullmessagehtml = '<p>' . $message . '</p>';
-	$message->smallmessage = 'Die Gruppenformation ist abgeschlossen und Sie können sich nun das Ergebnis anschauen';
-	$message->notification = '0';
-	$message->contexturl = 'http://localhost:10000/mod/groupformation/analysis_view.php?id=4&do_show=analysis';
-	$message->contexturlname = 'link zum groupformation-plugin';
-	$message->replyto = "noreply@moodle.com";
-	$content = array('*' => array('header' => ' test ', 'footer' => ' test ')); // Extra content for specific processor
-	$message->set_additional_content('email', $content);
-	 
-	 // send message
-	$messageid = message_send($message);
+		$message->component = 'moodle';
+		$message->name = 'instantmessage';
+		$message->userfrom = $admin;
+		$message->userto = $recipient;
+		$message->subject = $subject;
+		$message->fullmessage = $messagetext;
+		$message->fullmessageformat = FORMAT_MARKDOWN;
+		$message->fullmessagehtml = '<p>' . $messagetext . '</p>';
+		$message->smallmessage = 'Die Gruppenformation ist abgeschlossen und Sie können sich nun das Ergebnis anschauen';
+		$message->notification = '0';
+		$message->contexturl = 'http://localhost:10000/mod/groupformation/analysis_view.php?id=4&do_show=analysis';
+		$message->contexturlname = 'link zum groupformation-plugin';
+		$message->replyto = "noreply@moodle.com";
+		$content = array('*' => array('header' => ' test ', 'footer' => ' test ')); // Extra content for specific processor
+		$message->set_additional_content('email', $content);
+
+		 // send message
+		$messageid = message_send($message);
 }
 
 function groupformation_check_for_cron_job(){
-	global $DB; 
-	
+	global $DB;
+
 	$record = $DB->get_record('task_scheduled',array('component'=>'mod_groupformation'));
 	$now = time();
 	$lastruntime = $record->lastruntime;
-	
+
 	if (($now - intval($lastruntime))>60 * 60*24){
 		echo '<div class="alert">'.get_string('cron_job_not_running','groupformation').'</div>';
 	}

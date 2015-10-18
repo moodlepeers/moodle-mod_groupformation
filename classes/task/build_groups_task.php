@@ -28,7 +28,7 @@ require_once ($CFG->dirroot . '/mod/groupformation/locallib.php');
 require_once ($CFG->dirroot . '/mod/groupformation/lib.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/job_manager.php');
 class build_groups_task extends \core\task\scheduled_task {
-	
+
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -39,7 +39,7 @@ class build_groups_task extends \core\task\scheduled_task {
 		//return "Gruppenbildung und Aufräumen";
 		return get_string('jobGetName', 'groupformation');
 	}
-	
+
 	/**
 	 * (non-PHPdoc)
 	 *
@@ -48,16 +48,16 @@ class build_groups_task extends \core\task\scheduled_task {
 	public function execute() {
 // 		$this->set_last_run_time(time());
 // 		groupformation_info ( null, null, 'cron job started' );
-		
+
 // // 		First reset aborted jobs; user might wanna use it soon
 		$this->reset_aborted_jobs ();
-		
+
 // // 		Look for jobs; select a job; get it done
 		$this->do_job ();
-		
+
 // 		groupformation_info ( null, null, 'cron job terminated' );
 	}
-	
+
 	/**
 	 * Selects a waiting job, runs it and saves results
 	 *
@@ -65,11 +65,11 @@ class build_groups_task extends \core\task\scheduled_task {
 	 */
 	private function do_job() {
 		$saved = false;
-		
+
 		$job = null;
-		
+
 		$job = \mod_groupformation_job_manager::get_next_job ();
-		
+
 		if (! is_null ( $job )) {
 			$result = \mod_groupformation_job_manager::do_groupal ( $job );
 			$aborted = \mod_groupformation_job_manager::is_job_aborted ( $job );
@@ -77,8 +77,10 @@ class build_groups_task extends \core\task\scheduled_task {
 				$saved = \mod_groupformation_job_manager::save_result($job,$result);
 			}
 		}
+		// notify teacher about finished group formation
+		\mod_groupformation_job_manager::notify_teacher($job);
 	}
-	
+
 	/**
 	 * Resets all aborted jobs which are not currently running
 	 */
