@@ -239,13 +239,13 @@ function groupformation_send_message($recipient, $subject, $message) {
 }
 
 function groupformation_check_for_cron_job(){
-	global $DB;
+	global $DB; 
 	
 	$record = $DB->get_record('task_scheduled',array('component'=>'mod_groupformation'));
 	$now = time();
 	$lastruntime = $record->lastruntime;
 	
-	if (($now - intval($lastruntime))>60*60*24){
+	if (($now - intval($lastruntime))>60 * 60*24){
 		echo '<div class="alert">'.get_string('cron_job_not_running','groupformation').'</div>';
 	}
 }
