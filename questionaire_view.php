@@ -155,17 +155,17 @@ if (($available || $isTeacher) && ($category == '' || $inArray)) {
 	// Print the tabs.
 	require ('tabs.php');
 	
-	$questionManager = new mod_groupformation_questionaire ( $cm->id, $groupformation->id, get_string ( 'language', 'groupformation' ), $userid, $category, $context );
+	$questionnaire = new mod_groupformation_questionnaire ( $cm->id, $groupformation->id, get_string ( 'language', 'groupformation' ), $userid, $category, $context );
 	
 	if ($direction == 0) {
-		$questionManager->goBack ();
+		$questionnaire->goBack ();
 	} else {
 	//if (! $go) {
-	//		$questionManager->goNotOn ();
+	//		$questionnaire->goNotOn ();
 	//	}
 	}
 	
-	$questionManager->printQuestionairePage ();
+	$questionnaire->print_page ();
 } else if (! $available || $category == 'no') {
 	
 	if (isset ( $_POST ["action"] ) && $_POST ["action"] == 1) {

@@ -33,7 +33,7 @@ require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/stor
 if (! defined ( 'MOODLE_INTERNAL' )) {
 	die ( 'Direct access to this script is forbidden.' ); // / It must be included from a Moodle page
 }
-class mod_groupformation_questionaire {
+class mod_groupformation_questionnaire {
 	private $cmid;
 	private $groupformationid;
 	private $lang;
@@ -50,19 +50,19 @@ class mod_groupformation_questionaire {
 	private $userid;
 	
 	// --- Mathevorkurs
-	//private $notAllAnswers = false;
+	// private $notAllAnswers = false;
 	
 	// ---
 	
 	/**
 	 * Creates instance of questionaire
-	 * 
-	 * @param unknown $cmid
-	 * @param unknown $groupformationid
-	 * @param unknown $lang
-	 * @param unknown $userId
-	 * @param unknown $category
-	 * @param unknown $context
+	 *
+	 * @param unknown $cmid        	
+	 * @param unknown $groupformationid        	
+	 * @param unknown $lang        	
+	 * @param unknown $userId        	
+	 * @param unknown $category        	
+	 * @param unknown $context        	
 	 */
 	public function __construct($cmid, $groupformationid, $lang, $userId, $category, $context) {
 		$this->cmid = $cmid;
@@ -89,32 +89,31 @@ class mod_groupformation_questionaire {
 	}
 	
 	// --- Mathevorkurs
-	//public function goNotOn() {
-	//	$this->question_manager->goNotOn ();
-	//	$this->notAllAnswers = true;
-	//}
+	// public function goNotOn() {
+	// $this->question_manager->goNotOn ();
+	// $this->notAllAnswers = true;
+	// }
 	// ---
 	
 	/**
 	 * Prints progress bar
-	 * 
-	 * @param unknown $percent
+	 *
+	 * @param unknown $percent        	
 	 */
-	private function printProgressbar($percent) {
-		
+	private function print_progressbar($percent) {
 		echo '<div class="progress">';
 		
 		echo '	<div class="questionaire_progress-bar" role="progressbar" aria-valuenow="' . $percent . '" aria-valuemin="0" aria-valuemax="100" style="width:' . $percent . '%"></div>';
 		
 		echo '</div>';
 	}
-
+	
 	/**
 	 * Prints navigation bar
-	 * 
-	 * @param string $activeCategory
+	 *
+	 * @param string $activeCategory        	
 	 */
-	private function printNavbar($activeCategory = null) {
+	private function print_navbar($activeCategory = null) {
 		$data = new mod_groupformation_data ();
 		$store = new mod_groupformation_storage_manager ( $this->groupformationid );
 		$scenario = $store->getScenario ();
@@ -142,7 +141,7 @@ class mod_groupformation_questionaire {
 			echo '<li class="' . (($activeCategory == $category) ? 'current' : 'accord_li') . '">';
 			echo '<span>' . ($positionCategory + 1) . '</span><a class="' . $class . '"  href="' . $url . '">' . get_string ( 'category_' . $category, 'groupformation' ) . '</a>';
 			echo '</li>';
-			//$prev_complete = $stats [$category] ['missing'] == 0;
+			// $prev_complete = $stats [$category] ['missing'] == 0;
 			// <li><a href="a.html" class="ui-btn-active">One</a></li>
 			// <li><a href="b.html">Two</a></li>
 		}
@@ -151,109 +150,106 @@ class mod_groupformation_questionaire {
 	}
 	
 	// --- Mathevorkurs
-	//private function notAllAnswers() {
-	//	echo '<div class="survey_warnings">
-    //                         <p>Du hast nicht alle Fragen beantwortet</p>
-    //                </div>';
-		
-		// echo 'Du hast nicht alle Fragen beantwortet';
-	//}
+	// private function notAllAnswers() {
+	// echo '<div class="survey_warnings">
+	// <p>Du hast nicht alle Fragen beantwortet</p>
+	// </div>';
+	
+	// echo 'Du hast nicht alle Fragen beantwortet';
+	// }
 	// ---
 	
 	/**
 	 * Prints table with questions
-	 * 
-	 * @param unknown $questions
-	 * @param unknown $percent
+	 *
+	 * @param unknown $questions        	
+	 * @param unknown $percent        	
 	 */
-	private function printQuestions($questions, $percent) {
+	private function print_questions($questions, $percent) {
 		$tableType = $questions [0] [0];
 		$headerOptArray = $questions [0] [2];
 		
-
 		echo '<form style="width:100%; float:left;" action="' . htmlspecialchars ( $_SERVER ["PHP_SELF"] ) . '" method="post" autocomplete="off">';
 		
-		if (!is_null($questions) && count($questions)!=0){
-		
-		
-		// hier schicke ich verdeckt die momentane Kategorie und groupformationID mit
-		echo '<input type="hidden" name="category" value="' . $this->category . '"/>';
-		
-		echo '<input type="hidden" name="percent" value="' . $percent . '"/>';
-		
-		$activity_id = optional_param ( 'id', false, PARAM_INT );
-		
-		if ($activity_id) {
-			echo '<input type="hidden" name="id" value="' . $activity_id . '"/>';
-		} else {
-			echo '<input type="hidden" name="id" value="' . $this->groupformationid . '"/>';
-		}
-		
-		// echo '<input type="hidden" name="userid" value="' . $this->userID . '"/>';
-		
-		echo ' <h4 class="view_on_mobile">' . get_string ( 'category_' . $this->category, 'groupformation' ) . '</h4>';
-		
-		// Print the Header of a table or unordered list
-		$this->header->__printHTML ( $this->category, $tableType, $headerOptArray );
-		
-		$hasAnswer = count ( $questions [0] ) == 4;
-		$hasTopicNumbers = count ($questions[0]) == 5;
-		// var_dump($questions);
-		// var_dump($this->category);
-		
-		// each question with inputs
-		
-		foreach ( $questions as $q ) {
-			if ($q [0] == 'dropdown') {
-				$this->dropdown->__printHTML ( $q, $this->category, $this->qNumber, $hasAnswer );
+		if (! is_null ( $questions ) && count ( $questions ) != 0) {
+			
+			// hier schicke ich verdeckt die momentane Kategorie und groupformationID mit
+			echo '<input type="hidden" name="category" value="' . $this->category . '"/>';
+			
+			echo '<input type="hidden" name="percent" value="' . $percent . '"/>';
+			
+			$activity_id = optional_param ( 'id', false, PARAM_INT );
+			
+			if ($activity_id) {
+				echo '<input type="hidden" name="id" value="' . $activity_id . '"/>';
+			} else {
+				echo '<input type="hidden" name="id" value="' . $this->groupformationid . '"/>';
 			}
 			
-			if ($q [0] == 'radio') {
-				$this->radio->__printHTML ( $q, $this->category, $this->qNumber, $hasAnswer );
-			}
+			// echo '<input type="hidden" name="userid" value="' . $this->userID . '"/>';
 			
-			if ($q [0] == 'type_topics') {
-				if($hasTopicNumbers){
-					$this->topics->__printHTML( $q, $this->category, $q[4]+1, true);
-				}else{
-					$this->topics->__printHTML ( $q, $this->category, $this->qNumber, $hasAnswer );
+			echo ' <h4 class="view_on_mobile">' . get_string ( 'category_' . $this->category, 'groupformation' ) . '</h4>';
+			
+			// Print the Header of a table or unordered list
+			$this->header->__printHTML ( $this->category, $tableType, $headerOptArray );
+			
+			$hasAnswer = count ( $questions [0] ) == 4;
+			$hasTopicNumbers = count ( $questions [0] ) == 5;
+			// var_dump($questions);
+			// var_dump($this->category);
+			
+			// each question with inputs
+			
+			foreach ( $questions as $q ) {
+				if ($q [0] == 'dropdown') {
+					$this->dropdown->__printHTML ( $q, $this->category, $this->qNumber, $hasAnswer );
 				}
+				
+				if ($q [0] == 'radio') {
+					$this->radio->__printHTML ( $q, $this->category, $this->qNumber, $hasAnswer );
+				}
+				
+				if ($q [0] == 'type_topics') {
+					if ($hasTopicNumbers) {
+						$this->topics->__printHTML ( $q, $this->category, $q [4] + 1, true );
+					} else {
+						$this->topics->__printHTML ( $q, $this->category, $this->qNumber, $hasAnswer );
+					}
+				}
+				
+				if ($q [0] == 'type_knowledge') {
+					$this->range->__printHTML ( $q, $this->category, $this->qNumber, $hasAnswer );
+				}
+				
+				if ($q [0] == 'type_points') {
+					$this->range->__printHTML ( $q, $this->category, $this->qNumber, $hasAnswer );
+				}
+				
+				// TODO
+				if ($q [0] == 'range') {
+					$this->range->__printHTML ( $q, $this->category, $this->qNumber, $hasAnswer );
+				}
+				$this->qNumber ++;
 			}
 			
-			if ($q [0] == 'type_knowledge') {
-				$this->range->__printHTML ( $q, $this->category, $this->qNumber, $hasAnswer );
-			}
-			
-			if ($q [0] == 'type_points') {
-				$this->range->__printHTML ( $q, $this->category, $this->qNumber, $hasAnswer );
-			}
-			
-			// TODO
-			if ($q [0] == 'range'){
-				$this->range->__printHTML ( $q, $this->category, $this->qNumber, $hasAnswer );
-			}
-			$this->qNumber ++;
-		}
-		
-		// closing the table or unordered list
-		if ($tableType == 'type_topics') {
-			// close unordered list
-			echo '</ul>';
-			
-			echo '<div id="invisible_topics_inputs">
+			// closing the table or unordered list
+			if ($tableType == 'type_topics') {
+				// close unordered list
+				echo '</ul>';
+				
+				echo '<div id="invisible_topics_inputs">
                             </div>';
-		} else {
-			// close tablebody and close table
-			echo ' </tbody>
+			} else {
+				// close tablebody and close table
+				echo ' </tbody>
 		                  </table>';
+			}
+			
+			// Reset the Question Number, so each HTML table starts with 0
+			$this->qNumber = 1;
 		}
 		
-		// Reset the Question Number, so each HTML table starts with 0
-		$this->qNumber = 1;
-		
-		}
-		
-		$this->printActionButtons();
+		$this->print_action_buttons ();
 		
 		echo '</form>';
 	}
@@ -261,7 +257,7 @@ class mod_groupformation_questionaire {
 	/**
 	 * Prints action buttons for questionaire page
 	 */
-	private function printActionButtons(){
+	private function print_action_buttons() {
 		echo '<div class="grid">
 						<div class="col_100 questionaire_button_row">
 							<button type="submit" name="direction" value="0" class="f_btn">' . get_string ( 'previous' ) . '</button>
@@ -273,7 +269,7 @@ class mod_groupformation_questionaire {
 	/**
 	 * Prints final page of questionaire
 	 */
-	private function printFinalPage() {
+	private function print_final_page() {
 		echo '<div class="col_100"><h4>' . get_string ( 'questionaire_no_more_questions', 'groupformation' ) . '</h></div>';
 		echo '	<form action="' . htmlspecialchars ( $_SERVER ["PHP_SELF"] ) . '" method="post" autocomplete="off">';
 		
@@ -293,7 +289,7 @@ class mod_groupformation_questionaire {
 		
 		$hasAnsweredEverything = $this->question_manager->hasAllAnswered ();
 		
-		//$disabled = ! $hasAnsweredEverything;
+		// $disabled = ! $hasAnsweredEverything;
 		$disabled = false;
 		if (has_capability ( 'mod/groupformation:editsettings', $this->context ))
 			echo '<div class="alert col_100 questionaire_hint">' . get_string ( 'questionaire_submit_disabled_teacher', 'groupformation' ) . '</div>';
@@ -302,7 +298,7 @@ class mod_groupformation_questionaire {
 		echo '	<div class="questionaire_button_text">' . get_string ( 'questionaire_press_beginning_submit', 'groupformation' ) . '</div>';
 		echo '	<div class="col_100 questionaire_button_row">';
 		echo '		<button type="submit" name="action" value="0" >' . get_string ( 'questionaire_go_to_start', 'groupformation' ) . '</button>';
-// 		echo '		<button type="submit" name="action" value="1" ' . (($disabled || has_capability ( 'mod/groupformation:editsettings', $this->context )) ? 'disabled' : '') . '>' . get_string ( 'questionaire_submit', 'groupformation' ) . '</button>';
+		// echo ' <button type="submit" name="action" value="1" ' . (($disabled || has_capability ( 'mod/groupformation:editsettings', $this->context )) ? 'disabled' : '') . '>' . get_string ( 'questionaire_submit', 'groupformation' ) . '</button>';
 		echo '	</div>';
 		echo '</div>';
 		
@@ -312,44 +308,42 @@ class mod_groupformation_questionaire {
 	/**
 	 * Prints questionaire page
 	 */
-	public function printQuestionairePage() {
-	//	if ($this->question_manager->questionsToAnswer () && $this->question_manager->hasNext ()) {
-			
+	public function print_page() {
 		if ($this->question_manager->hasNext ()) {
 			$isTeacher = has_capability ( 'mod/groupformation:editsettings', $this->context );
 			
 			if ($isTeacher)
 				echo '<div class="alert">' . get_string ( 'questionaire_preview', 'groupformation' ) . '</div>';
 			
-			$store = new mod_groupformation_storage_manager($this->groupformationid);
+			$store = new mod_groupformation_storage_manager ( $this->groupformationid );
 			
-			if ($this->question_manager->hasCommited() ||  !$store->isQuestionaireAvailable()){
-				echo '<div class="alert" id="commited_view">' . get_string( 'questionaire_commited', 'groupformation') . '</div>';
+			if ($this->question_manager->hasCommited () || ! $store->isQuestionaireAvailable ()) {
+				echo '<div class="alert" id="commited_view">' . get_string ( 'questionaire_commited', 'groupformation' ) . '</div>';
 			}
 			
 			$this->category = $this->question_manager->getCurrentCategory ();
 			
 			$percent = $this->question_manager->getPercent ( $this->category );
 			
-			$this->printNavbar ( $this->category );
+			$this->print_navbar ( $this->category );
 			
-			$this->printProgressbar ( $percent );
+			$this->print_progressbar ( $percent );
 			
 			// --- Mathevorkurs
-			//if ($this->notAllAnswers) {
-			//	$this->notAllAnswers ();
-			//}
+			// if ($this->notAllAnswers) {
+			// $this->notAllAnswers ();
+			// }
 			// ---
 			
 			$questions = $this->question_manager->getNextQuestions ();
 			
-			$this->printQuestions ( $questions, $percent );
+			$this->print_questions ( $questions, $percent );
 			
 			// Log access to page
 			groupformation_info ( $this->userid, $this->groupformationid, '<view_questionaire_category_' . $this->category . '>' );
 		} else {
 			
-			$this->printFinalPage ();
+			$this->print_final_page ();
 			
 			// Log access to page
 			groupformation_info ( $this->userid, $this->groupformationid, '<view_questionaire_final_page>' );
