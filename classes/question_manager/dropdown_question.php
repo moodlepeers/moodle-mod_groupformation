@@ -36,7 +36,7 @@ class dropdown_question {
 	 * @param unknown $qnumb        	
 	 * @param boolean $has_answer        	
 	 */
-	public function __printHTML($q, $category, $question_number, $has_answer) {
+	public function print_html($q, $category, $question_number, $has_answer) {
 		$question = $q [1];
 		$options = $q [2];
 		

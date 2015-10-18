@@ -25,7 +25,7 @@ class range_question {
 	private $category;
 	private $qnumber;
 	private $question;
-	public function __printHTML($q, $cat, $qnumb, $hasAnswer) {
+	public function print_html($q, $cat, $qnumb, $hasAnswer) {
 		$this->question = $q [1];
 		$optArray = $q [2];
 		$this->category = $cat;

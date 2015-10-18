@@ -29,7 +29,7 @@ class radio_question {
 	private $question;
 	private $optArray = array();
 	
-	public function __printHTML($q, $cat, $qnumb, $hasAnswer){
+	public function print_html($q, $cat, $qnumb, $hasAnswer){
 		$this->question = $q[1];
 		$this->optArray = $q[2];
 		$this->category = $cat;

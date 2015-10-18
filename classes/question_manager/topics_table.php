@@ -36,7 +36,7 @@ class topics_table{
 	 * @param unknown $qnumb
 	 * @param unknown $hasAnswer
 	 */
-	public function __printHTML($q, $cat, $qnumb, $hasAnswer){
+	public function print_html($q, $cat, $qnumb, $hasAnswer){
 		$this->question = $q[1];
 		$this->optArray = $q[2];
 		$this->category = $cat;

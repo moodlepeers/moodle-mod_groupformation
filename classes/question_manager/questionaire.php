@@ -191,7 +191,7 @@ class mod_groupformation_questionnaire {
 			echo ' <h4 class="view_on_mobile">' . get_string ( 'category_' . $this->category, 'groupformation' ) . '</h4>';
 			
 			// Print the Header of a table or unordered list
-			$this->header->__printHTML ( $this->category, $tableType, $headerOptArray );
+			$this->header->print_html ( $this->category, $tableType, $headerOptArray );
 			
 			$hasAnswer = count ( $questions [0] ) == 4;
 			$hasTopicNumbers = count ( $questions [0] ) == 5;
@@ -202,32 +202,32 @@ class mod_groupformation_questionnaire {
 			
 			foreach ( $questions as $q ) {
 				if ($q [0] == 'dropdown') {
-					$this->dropdown->__printHTML ( $q, $this->category, $this->qNumber, $hasAnswer );
+					$this->dropdown->print_html ( $q, $this->category, $this->qNumber, $hasAnswer );
 				}
 				
 				if ($q [0] == 'radio') {
-					$this->radio->__printHTML ( $q, $this->category, $this->qNumber, $hasAnswer );
+					$this->radio->print_html ( $q, $this->category, $this->qNumber, $hasAnswer );
 				}
 				
 				if ($q [0] == 'type_topics') {
 					if ($hasTopicNumbers) {
-						$this->topics->__printHTML ( $q, $this->category, $q [4] + 1, true );
+						$this->topics->print_html ( $q, $this->category, $q [4] + 1, true );
 					} else {
-						$this->topics->__printHTML ( $q, $this->category, $this->qNumber, $hasAnswer );
+						$this->topics->print_html ( $q, $this->category, $this->qNumber, $hasAnswer );
 					}
 				}
 				
 				if ($q [0] == 'type_knowledge') {
-					$this->range->__printHTML ( $q, $this->category, $this->qNumber, $hasAnswer );
+					$this->range->print_html ( $q, $this->category, $this->qNumber, $hasAnswer );
 				}
 				
 				if ($q [0] == 'type_points') {
-					$this->range->__printHTML ( $q, $this->category, $this->qNumber, $hasAnswer );
+					$this->range->print_html ( $q, $this->category, $this->qNumber, $hasAnswer );
 				}
 				
 				// TODO
 				if ($q [0] == 'range') {
-					$this->range->__printHTML ( $q, $this->category, $this->qNumber, $hasAnswer );
+					$this->range->print_html ( $q, $this->category, $this->qNumber, $hasAnswer );
 				}
 				$this->qNumber ++;
 			}

@@ -5,7 +5,7 @@ class question_table_header {
 	private $tableType;
 	private $headerOptArray;
 	
-	public function __printHTML($category, $tableType, $headerOptArray){
+	public function print_html($category, $tableType, $headerOptArray){
 		
 		$this->tableType = $tableType;
 		$this->headerOptArray = $headerOptArray;
