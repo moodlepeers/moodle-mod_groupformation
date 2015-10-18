@@ -158,7 +158,7 @@ if (($available || $isTeacher) && ($category == '' || $inArray)) {
 	$questionnaire = new mod_groupformation_questionnaire ( $cm->id, $groupformation->id, get_string ( 'language', 'groupformation' ), $userid, $category, $context );
 	
 	if ($direction == 0) {
-		$questionnaire->goBack ();
+		$questionnaire->go_back ();
 	} else {
 	//if (! $go) {
 	//		$questionnaire->goNotOn ();

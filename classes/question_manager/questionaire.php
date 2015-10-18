@@ -37,7 +37,7 @@ class mod_groupformation_questionnaire {
 	private $cmid;
 	private $groupformationid;
 	private $lang;
-	private $question_manager;
+	private $question_controller;
 	private $range;
 	private $radio;
 	private $topics;
@@ -71,7 +71,7 @@ class mod_groupformation_questionnaire {
 		$this->userid = $userId;
 		$this->context = $context;
 		
-		$this->question_manager = new mod_groupformation_question_controller ( $groupformationid, $lang, $userId, $category );
+		$this->question_controller = new mod_groupformation_question_controller ( $groupformationid, $lang, $userId, $category );
 		
 		$this->header = new question_table_header ();
 		$this->range = new range_question ();
@@ -84,13 +84,13 @@ class mod_groupformation_questionnaire {
 	/**
 	 * Go Back
 	 */
-	public function goBack() {
-		$this->question_manager->goBack ();
+	public function go_back() {
+		$this->question_controller->go_back ();
 	}
 	
 	// --- Mathevorkurs
 	// public function goNotOn() {
-	// $this->question_manager->goNotOn ();
+	// $this->question_controller->goNotOn ();
 	// $this->notAllAnswers = true;
 	// }
 	// ---
@@ -287,7 +287,7 @@ class mod_groupformation_questionnaire {
 		
 		// $hasAnsweredEverything = $store->hasAnsweredEverything($this->userId);
 		
-		$hasAnsweredEverything = $this->question_manager->hasAllAnswered ();
+		$hasAnsweredEverything = $this->question_controller->has_all_answered ();
 		
 		// $disabled = ! $hasAnsweredEverything;
 		$disabled = false;
@@ -309,7 +309,7 @@ class mod_groupformation_questionnaire {
 	 * Prints questionaire page
 	 */
 	public function print_page() {
-		if ($this->question_manager->hasNext ()) {
+		if ($this->question_controller->has_next ()) {
 			$isTeacher = has_capability ( 'mod/groupformation:editsettings', $this->context );
 			
 			if ($isTeacher)
@@ -317,13 +317,13 @@ class mod_groupformation_questionnaire {
 			
 			$store = new mod_groupformation_storage_manager ( $this->groupformationid );
 			
-			if ($this->question_manager->hasCommited () || ! $store->isQuestionaireAvailable ()) {
+			if ($this->question_controller->has_committed () || ! $store->isQuestionaireAvailable ()) {
 				echo '<div class="alert" id="commited_view">' . get_string ( 'questionaire_commited', 'groupformation' ) . '</div>';
 			}
 			
-			$this->category = $this->question_manager->getCurrentCategory ();
+			$this->category = $this->question_controller->get_current_category ();
 			
-			$percent = $this->question_manager->getPercent ( $this->category );
+			$percent = $this->question_controller->get_percent ( $this->category );
 			
 			$this->print_navbar ( $this->category );
 			
@@ -335,7 +335,7 @@ class mod_groupformation_questionnaire {
 			// }
 			// ---
 			
-			$questions = $this->question_manager->getNextQuestions ();
+			$questions = $this->question_controller->get_next_questions ();
 			
 			$this->print_questions ( $questions, $percent );
 			
