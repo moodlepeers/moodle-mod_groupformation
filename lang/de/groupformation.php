@@ -20,7 +20,7 @@
  * @package mod_groupformation
  * @author Nora Wester
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- *         
+ *
  */
 defined ( 'MOODLE_INTERNAL' ) || die ();
 
@@ -54,8 +54,8 @@ $string ['availability_nochangespossible'] = 'Der Fragebogen wurde bereits beant
 $string ['scenario'] = 'Szenario';
 $string ['scenarioLabel'] = '';
 $string ['scenario_description'] = 'Bitte wählen Sie das für Sie am Besten geeignete Szenario für die Gruppenformation aus.';
-$string ['scenarioInfo'] = 'Die drei Szenarien unterscheiden sich darin, wie die Fragebogen-Antworten bei der Gruppenbildung berücksichtigt werden.  
-			Beim Projekgruppen wird darauf geachtet, dass sich Vorwissen und Merkmale der Gruppenmitglieder ergänzen während die Motivation und angestrebten Ziele in der Gruppe möglichst ähnlich sind.    
+$string ['scenarioInfo'] = 'Die drei Szenarien unterscheiden sich darin, wie die Fragebogen-Antworten bei der Gruppenbildung berücksichtigt werden.
+			Beim Projekgruppen wird darauf geachtet, dass sich Vorwissen und Merkmale der Gruppenmitglieder ergänzen während die Motivation und angestrebten Ziele in der Gruppe möglichst ähnlich sind.
 			Bei den Hausaufgabengruppen wird so optimiert, dass für jede Gruppe die besten Vorausetzungen für gemeinsames Lernen gegeben sind.
 		    Beim Referatsgruppen steht das gemeinsame Interesse an den zur Auswahl stehenden Referatsthemen im Vordergrund.';
 $string ['groupformationsettings'] = 'Gruppenformation Einstellungen';
@@ -76,17 +76,17 @@ $string ['topicchoice'] = 'Themenauswahl';
 $string ['useOneLineForEachTopic'] = 'Pro Thema jeweils eine Zeile benutzen';
 $string ['knowledge'] = 'Vorwissen';
 $string ['knowledge_description'] = 'Das Vorwissen in bestimmten Gebieten soll in die Gruppenbildung einfließen.';
-$string ['knowledge_description_extended'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einschätzen sollen. 
+$string ['knowledge_description_extended'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einschätzen sollen.
 		Eine Vorschau des Fragebogens-Abschnittes für die Studierenden ist rechts zu sehen.';
 $string ['knowledgeChoice'] = 'Vorwissen';
-$string ['knowledge_info_presentation'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einschätzen sollen. 
-		Eine Vorschau des Fragebogens-Abschnittes für die Studierenden ist rechts zu sehen. 
+$string ['knowledge_info_presentation'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einschätzen sollen.
+		Eine Vorschau des Fragebogens-Abschnittes für die Studierenden ist rechts zu sehen.
 		Für Ihre Auswahl "Referatsgruppen" wird das Vorwissen nur berücksichtigt, falls nach Optimierung der Themenwahl noch weiter optimiert werden kann.';
-$string ['knowledge_info_homework'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einschätzen sollen. 
-		Eine Vorschau des Fragebogens-Abschnittes für die Studierenden ist rechts zu sehen. 
+$string ['knowledge_info_homework'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einschätzen sollen.
+		Eine Vorschau des Fragebogens-Abschnittes für die Studierenden ist rechts zu sehen.
 		Für Ihre Auswahl "Hausaufgabengruppen" wird so optimiert, dass das Vorwissen sich in jeder Gruppe möglichst ergänzt.';
-$string ['knowledge_info_project'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einschätzen sollen. 
-		Eine Vorschau des Studierenden-Fragebogens sehen Sie rechts. 
+$string ['knowledge_info_project'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einschätzen sollen.
+		Eine Vorschau des Studierenden-Fragebogens sehen Sie rechts.
 		Für Ihre Auswahl "Projektgruppen" wird so optimiert, dass das Vorwissen sich in jeder Gruppe möglichst ergänzt, das Wissensniveau der Studierenden aber vergleichbar ist.';
 $string ['add_line'] = 'Zeile hinzufügen';
 $string ['remove_line'] = 'Zeile entfernen';
@@ -169,8 +169,8 @@ $string ['questionaire_not_available_begin_end'] = 'Der Fragebogen ist verfügba
 $string ['questionaire_not_available_end'] = 'Der Fragebogen ist nicht mehr verfügbar.';
 $string ['info_header_student'] = 'Was bedeutet Gruppenformation?';
 $string ['info_text_student'] = 'In diesem Moodle-Kurs wird die Gruppenformation dazu genutzt {$a->scenario_name} für eine erfolgreiche Zusammenarbeit zu bilden.
-		Wenn Sie den Fragebogen ausgefüllt und abgeschickt haben, werden für Sie geeignete Lernpartner/innen ermittelt. 
-		Alle Angaben werden vertraulich behandelt. 
+		Wenn Sie den Fragebogen ausgefüllt und abgeschickt haben, werden für Sie geeignete Lernpartner/innen ermittelt.
+		Alle Angaben werden vertraulich behandelt.
 		<br>Ist die Befragungszeit um, werden Gruppen unter Berücksichtigung Ihrer Angaben und Präferenzen gebildet. Sie können anschließend hier Ihre Gruppenmitglieder einsehen (und auch über Moodle kontaktieren).
 		<br><br>
 		Fragen? Probleme? Lob? Anregungen?<br>
@@ -182,13 +182,13 @@ $string ['info_header_teacher_analysis'] = 'Wie funktioniert die Gruppenformatio
 $string ['info_header_teacher_settings'] = 'Wie funktioniert die Gruppenformation?';
 $string ['info_text_teacher_settings'] = 'Mit diesem Plugin haben Sie die Möglichkeit die Bildung von Gruppen Ihrer Studierenden zu optimieren. Die drei erforderlichen Schritte sind:<br>
 		1.)	Sie fügen die Aktivität „Gruppenformation“ Ihrem Kurs hinzu.
-		Auf dieser Seite können Sie auswählen, welches Szenario am besten zu Ihren Vorstellungen der späteren Gruppenarbeit passt 
-		(bei Unsicherheit wählen Sie Projektteams). Die weiteren Einstellungen erlauben Ihnen die gewünschte Gruppengröße und evtl. eine Themenauswahl für 
-		Studierende anzugeben. Wenn Sie möchten, dass die Studierenden sich im Vorwissen gut ergänzen in den später gebildeten Gruppen, können Sie die Vorwissensthemen 
+		Auf dieser Seite können Sie auswählen, welches Szenario am besten zu Ihren Vorstellungen der späteren Gruppenarbeit passt
+		(bei Unsicherheit wählen Sie Projektteams). Die weiteren Einstellungen erlauben Ihnen die gewünschte Gruppengröße und evtl. eine Themenauswahl für
+		Studierende anzugeben. Wenn Sie möchten, dass die Studierenden sich im Vorwissen gut ergänzen in den später gebildeten Gruppen, können Sie die Vorwissensthemen
 		zur Abfrage angeben.<br>
-		2.)	Studierende sehen den Fragebogen, welcher basierend auf Ihren Einstellungen erstellt wurde. Die Dauer der Verfügbarkeit der Fragen können Sie einstellen (siehe 1.). 
+		2.)	Studierende sehen den Fragebogen, welcher basierend auf Ihren Einstellungen erstellt wurde. Die Dauer der Verfügbarkeit der Fragen können Sie einstellen (siehe 1.).
 		Eine Vorschau des Studierenden-Fragebogens erhalten Sie beim späteren Öffnen der Aktivität als Lehrende/r.<br>
-		3.)	Sie können unter dem Menüpunkt ‚Gruppenformation‘, wenn Sie die Aktivität später selbst aufrufen, sehen, wie viele Antworten bereits 
+		3.)	Sie können unter dem Menüpunkt ‚Gruppenformation‘, wenn Sie die Aktivität später selbst aufrufen, sehen, wie viele Antworten bereits
 		vorliegen. Sind Sie mit dem Rücklauf zufrieden, starten Sie manuell die Bildung der Gruppen (dies geschieht niemals automatisch).<br>
 		Es dauert eine Weile, bis alle Gruppen fertig erstellt sind. Das Ergebnis können Sie sich noch einmal ansehen, bevor Sie die Gruppen so in Moodle übernehmen.<br>
 		<br>
@@ -289,3 +289,7 @@ $string['none'] = 'gar nicht';
 $string['bad'] = 'schlecht';
 
 $string['cron_job_not_running'] = 'Um die gestarteten Anfragen zur Gruppenbildung zu bearbeiten läuft im Hintergrund ein Cron-Daemon. Leider reagiert dieser in der letzten Zeit nicht oder ist gar außer Betrieb. Sollten Sie diese Meldung nach mehr als 24 Stunden noch immer sehen, kontaktieren Sie bitte den Systemadministrator.';
+
+// emmail benachrichtigung
+$string['groupformation_message'] = 'Die Gruppenformation ist abgeschlossen. Sie können sich nun das Ergebnis anschauen';
+$string['groupformation_subject'] = 'Gruppenformation abgeschlossen';

@@ -20,7 +20,7 @@
  * @package mod_groupformation
  * @author Nora Wester
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- *         
+ *
  */
 defined ( 'MOODLE_INTERNAL' ) || die ();
 
@@ -49,14 +49,14 @@ $string ['overview'] = 'Overview';
 $string ['generategroups'] = "Generate groups";
 $string ['edit_param'] = 'Edit';
 $string ['editparam'] = 'Edit parameters';
-$string ['nochangespossible'] = 'The questionaire has been answered already. 
+$string ['nochangespossible'] = 'The questionaire has been answered already.
 You can only change the maximum number of members or maximum number of groups. Further changes will not be saved.';
 $string ['availability_nochangespossible'] = 'The questionaire has been answered already. You cannot change the availability anymore.';
 $string ['scenario'] = 'Scenario';
 $string ['scenarioLabel'] = '';
 $string ['scenario_description'] = 'Please choose the most suitable scenario for the group formation.';
-$string ['scenarioInfo'] = 'The three scenarios differ in the way how questionaaire items influence the group formation.  
-			For project teams it considers prior knowledge and traits of the group members to amend each other while motivation (level) and personal targets should be as similar as possible.    
+$string ['scenarioInfo'] = 'The three scenarios differ in the way how questionaaire items influence the group formation.
+			For project teams it considers prior knowledge and traits of the group members to amend each other while motivation (level) and personal targets should be as similar as possible.
 			For homework groups it optimizes each group to have the best possible prerequisites for collaborative learning.
 		    For presentation groups the main aspect is a mutual interest in the same selected (and assigend) topic to work on.';
 $string ['groupformationsettings'] = 'Group formation settings';
@@ -78,16 +78,16 @@ $string ['topicchoice'] = 'Topic selection';
 $string ['useOneLineForEachTopic'] = 'Use one line for each topic';
 $string ['knowledge'] = 'Knowledge';
 $string ['knowledge_description'] = 'I want to include knowledge questions';
-$string ['knowledge_description_extended'] = 'Please list knowledge areas in which students should assess themselves. 
+$string ['knowledge_description_extended'] = 'Please list knowledge areas in which students should assess themselves.
 	Take a look at the preview on the right hand side.';
-$string ['knowledge_info_presentation'] = 'Please list knowledge areas in which students should assess themselves. 
-	Take a look at the preview on the right hand side. 
+$string ['knowledge_info_presentation'] = 'Please list knowledge areas in which students should assess themselves.
+	Take a look at the preview on the right hand side.
 	According to your selection "presentation groups" prior knowledge will be varied within each group (low priority behind topics)';
-$string ['knowledge_info_homework'] = 'Please list knowledge areas in which students should assess themselves. 
-	Take a look at the preview on the right hand side. 
+$string ['knowledge_info_homework'] = 'Please list knowledge areas in which students should assess themselves.
+	Take a look at the preview on the right hand side.
 	According to your selection "homework groups" prior knowledge will be varied within each group.';
-$string ['knowledge_info_project'] = 'Please list knowledge areas in which students should assess themselves. 
-	Take a look at the preview on the right hand side. 
+$string ['knowledge_info_project'] = 'Please list knowledge areas in which students should assess themselves.
+	Take a look at the preview on the right hand side.
 	According to your selection "project teams" prior knowledge (areas) will be varied within each group, but the level of knowledge is desired to be similar.';
 $string ['knowledgeChoice'] = 'Knowledge';
 $string ['add_line'] = 'Add line';
@@ -288,3 +288,7 @@ $string['bad'] = 'bad';
 $string['messageprovider:submission'] = 'Notify me if group formation algo finished.';
 
 $string['cron_job_not_running'] = 'In order to handle queued jobs a cron is working in the background. Unfortunately it is either not responding or not running at all. If this message keeps appearing after 24 h please contact the system administrator.';
+
+// email notification
+$string['groupformation_message'] = 'The group formation has finished. You can now view the result.';
+$string['groupformation_subject'] = 'group formation finished';
