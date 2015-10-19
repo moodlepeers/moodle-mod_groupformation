@@ -210,7 +210,7 @@ function groupformation_set_activity_completion($course,$cm,$userid){
  * @param string $message
  *
  */
-function groupformation_send_message($recipient, $subject, $messagetext) {
+function groupformation_send_message($recipient, $subject, $messagetext, $contexturl = null, $contexturlname = null) {
 	global $DB;
 
     // get admin user for setting as "userfrom"
@@ -228,8 +228,8 @@ function groupformation_send_message($recipient, $subject, $messagetext) {
 		$message->fullmessagehtml = '<p>' . $messagetext . '</p>';
 		$message->smallmessage = $messagetext;
 		$message->notification = '0';
-		$message->contexturl = 'http://localhost:10000/mod/groupformation/analysis_view.php?id=4&do_show=analysis';
-		$message->contexturlname = 'link zum groupformation-plugin';
+		$message->contexturl = $contexturl;
+		$message->contexturlname = $contexturlname;
 		$message->replyto = "noreply@moodle.com";
 		$content = array('*' => array('header' => ' test ', 'footer' => ' test ')); // Extra content for specific processor
 		$message->set_additional_content('email', $content);

@@ -510,13 +510,17 @@ class mod_groupformation_job_manager {
 	 * @return NULL
 	 */
 	public static function notify_teacher($job) {
-		global $DB;
+		global $DB, $CFG;
 		// TODO messaging to person:
 		$uID = $job->started_by;
+		$rec = array_pop($DB->get_records('course_modules', array('instance' => $job->groupformationid)));
+		$course_module_id = $rec->id;
 		$recipient = array_pop($DB->get_records('user', array('id' => $uID)));
-		$subject = get_string('groupformation_subject', 'groupformation');
+		$subject = get_string('groupformation_message_subject', 'groupformation');
 		$message = get_string('groupformation_message', 'groupformation');
-		groupformation_send_message($recipient, $subject, $message);
+		$contexturl = $CFG->wwwroot.'/mod/groupformation/grouping_view.php?id='.$course_module_id.'&do_show=grouping';
+		$contexturlname = get_string('groupformation_message_contexturlname', 'groupformation');
+		groupformation_send_message($recipient, $subject, $message, $contexturl, $contexturlname);
 
 		return null;
 	}

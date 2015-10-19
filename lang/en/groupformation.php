@@ -292,3 +292,4 @@ $string['cron_job_not_running'] = 'In order to handle queued jobs a cron is work
 // email notification
 $string['groupformation_message'] = 'The group formation has finished. You can now view the result.';
 $string['groupformation_subject'] = 'group formation finished';
+$string['groupformation_message_contexturlname'] = 'results';

@@ -292,4 +292,5 @@ $string['cron_job_not_running'] = 'Um die gestarteten Anfragen zur Gruppenbildun
 
 // emmail benachrichtigung
 $string['groupformation_message'] = 'Die Gruppenformation ist abgeschlossen. Sie können sich nun das Ergebnis anschauen';
-$string['groupformation_subject'] = 'Gruppenformation abgeschlossen';
+$string['groupformation_message_subject'] = 'Gruppenformation abgeschlossen';
+$string['groupformation_message_contexturlname'] = 'Resultate';
