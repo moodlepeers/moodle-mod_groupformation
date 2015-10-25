@@ -792,6 +792,30 @@ function xmldb_groupformation_upgrade($oldversion) {
 		upgrade_mod_savepoint(true, 2015100300, 'groupformation');
 	}
 	
+	if ($oldversion < 2015102400) {
+	
+		// Define field answers_ready to be added to groupformation_started.
+		$table = new xmldb_table('groupformation_started');
+		$field = new xmldb_field('answers_ready', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '0', 'answer_count');
+	
+		// Conditionally launch add field answers_ready.
+		if (!$dbman->field_exists($table, $field)) {
+			$dbman->add_field($table, $field);
+		}
+		
+		// Define field answers_url to be added to groupformation_started.
+		$table = new xmldb_table('groupformation_started');
+		$field = new xmldb_field('answers_url', XMLDB_TYPE_TEXT, null, null, null, null, null, 'answers_ready');
+		
+		// Conditionally launch add field answers_url.
+		if (!$dbman->field_exists($table, $field)) {
+			$dbman->add_field($table, $field);
+		}
+	
+		// Groupformation savepoint reached.
+		upgrade_mod_savepoint(true, 2015102400, 'groupformation');
+	}
+	
 	
 	
 	return true;
