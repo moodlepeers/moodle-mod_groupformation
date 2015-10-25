@@ -78,8 +78,6 @@ class mod_groupformation_student_overview_controller {
 		} else {
 			$this->view_state = 3;
 		}
-		
-		var_dump ( $this->view_state );
 	}
 	
 	/**

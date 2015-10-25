@@ -294,3 +294,10 @@ $string['cron_job_not_running'] = 'Um die gestarteten Anfragen zur Gruppenbildun
 $string['groupformation_message'] = 'Die Gruppenformation ist abgeschlossen. Sie können sich nun das Ergebnis anschauen';
 $string['groupformation_message_subject'] = 'Gruppenformation abgeschlossen';
 $string['groupformation_message_contexturlname'] = 'Resultate';
+
+// import export functionality
+$string['import'] = 'Import';
+$string['export'] = 'Export';
+$string['export_description_no'] = 'Erst wenn du Antworten in exportfähigen Kategorien gegeben hast, kannst du sie hier exportieren.';
+$string['export_description_yes'] = 'Du kannst deine Antworten exportieren.';
+$string['import_description'] = 'Du kannst Antworten von früheren Fragebögen importieren, indem du hier deine Antworten im passenden Format hochlädst (z.B. answers.xml).';

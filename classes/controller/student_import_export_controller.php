@@ -64,7 +64,7 @@ class mod_groupformation_student_import_export_controller {
 		// generate content for answer file for export
 		$content = $xmlwriter->write ( $userid, $this->groupformationid );
 		
-		$filename = 'answers.xml';
+		$filename = 'exportable_answers.xml';
 		
 		$context = context_module::instance ( $this->cmid );
 		
@@ -82,7 +82,6 @@ class mod_groupformation_student_import_export_controller {
 		if ($file_storage->file_exists ( $fileinfo ['contextid'], $fileinfo ['component'], $fileinfo ['filearea'], $fileinfo ['itemid'], $fileinfo ['filepath'], $fileinfo ['filename'] )) {
 			$file = $file_storage->get_file ( $fileinfo ['contextid'], $fileinfo ['component'], $fileinfo ['filearea'], $fileinfo ['itemid'], $fileinfo ['filepath'], $fileinfo ['filename'] );
 			$file->delete ();
-			var_dump ( "here" );
 		}
 		
 		$file = $file_storage->create_file_from_string ( $fileinfo, $content );
