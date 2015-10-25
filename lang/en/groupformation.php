@@ -293,3 +293,10 @@ $string['cron_job_not_running'] = 'In order to handle queued jobs a cron is work
 $string['groupformation_message'] = 'The group formation has finished. You can now view the result.';
 $string['groupformation_subject'] = 'group formation finished';
 $string['groupformation_message_contexturlname'] = 'results';
+
+// import export functionality
+$string['import'] = 'Import';
+$string['export'] = 'Export';
+$string['export_description_no'] = 'You cannot export your answers since you have not answered any questions in the exportable categories.';
+$string['export_description_yes'] = 'You can export your answers by clicking on the button below.';
+$string['import_description'] = 'You can import your answers from previous questionnaires by submitting an "answers.xml" file below.';

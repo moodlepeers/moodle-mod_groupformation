@@ -624,6 +624,24 @@ class mod_groupformation_storage_manager {
 		}
 		return $categories;
 	}
+	
+	/**
+	 * Returns all exportable categories
+	 * 
+	 * @return multitype:multitype:string
+	 */
+	public function get_exportable_categories(){
+		$exportable_categories = array();
+		$categories = $this->getCategories();
+		foreach ($categories as $category){
+			if (!in_array($category, array('points','knowledge','topic'))){
+				$exportable_categories[] = $category;
+			}
+		}
+		return $exportable_categories;
+	}
+	
+	
 	public function getPreviousCategory($category) {
 		$categories = $this->getCategories ();
 		$pos = $this->getPosition ( $category );

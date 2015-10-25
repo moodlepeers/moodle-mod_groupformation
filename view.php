@@ -18,94 +18,101 @@
  * Prints a particular instance of groupformation
  *
  * @package mod_groupformation
- * @author  Nora Wester
+ * @author Nora Wester
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+require_once (dirname ( dirname ( dirname ( __FILE__ ) ) ) . '/config.php');
+require_once (dirname ( __FILE__ ) . '/lib.php');
+require_once (dirname ( __FILE__ ) . '/locallib.php');
+require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/storage_manager.php');
+require_once (dirname ( __FILE__ ) . '/classes/question_manager/info_text.php');
+require_once (dirname ( __FILE__ ) . '/classes/controller/student_overview_controller.php');
 
-	require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
-	require_once(dirname(__FILE__).'/lib.php');
-	require_once(dirname(__FILE__).'/locallib.php');
-	require_once(dirname(__FILE__).'/classes/moodle_interface/storage_manager.php');
-	require_once(dirname(__FILE__).'/classes/question_manager/info_text.php');
-    require_once(dirname(__FILE__).'/classes/controller/student_overview_controller.php');
+// Read URL params
+$id = optional_param ( 'id', 0, PARAM_INT ); // Course Module ID
+                                          // $g = optional_param('g', 0, PARAM_INT); // groupformation instance ID
+$do_show = optional_param ( 'do_show', 'view', PARAM_TEXT );
+$back = optional_param ( 'back', 0, PARAM_INT );
 
-	// Read URL params
-	$id = optional_param('id', 0, PARAM_INT);   // Course Module ID
-// 	$g = optional_param('g', 0, PARAM_INT);		// groupformation instance ID
-	$do_show = optional_param('do_show', 'view', PARAM_TEXT);
-	$back = optional_param('back', 0, PARAM_INT);
-	
-	// Import jQuery and js file
-	groupformation_add_jquery ( $PAGE, 'survey_functions.js' );
-	
-	// Determine instances of course module, course, groupformation
-	groupformation_determine_instance($id, $cm, $course, $groupformation);
+// Import jQuery and js file
+groupformation_add_jquery ( $PAGE, 'survey_functions.js' );
 
-	// Require user login if not already logged in
-	require_login($course, true, $cm);
+// Determine instances of course module, course, groupformation
+groupformation_determine_instance ( $id, $cm, $course, $groupformation );
 
-	// Get useful stuff
-	$context = $PAGE->context;
-	$userid = $USER->id;
-	
-	if (has_capability('mod/groupformation:editsettings', $context)){
-		$returnurl = new moodle_url('/mod/groupformation/analysis_view.php', array('id' => $id, 'do_show' => 'analysis'));
-		redirect($returnurl);
-	}else{
-		$current_tab = $do_show;
+// Require user login if not already logged in
+require_login ( $course, true, $cm );
+
+// Get useful stuff
+$context = $PAGE->context;
+$userid = $USER->id;
+
+if (has_capability ( 'mod/groupformation:editsettings', $context )) {
+	$returnurl = new moodle_url ( '/mod/groupformation/analysis_view.php', array (
+			'id' => $id,
+			'do_show' => 'analysis' 
+	) );
+	redirect ( $returnurl );
+} else {
+	$current_tab = $do_show;
+}
+
+// Log access to page
+groupformation_info ( $USER->id, $groupformation->id, '<view_student_overview>' );
+
+$store = new mod_groupformation_storage_manager ( $groupformation->id );
+$groups_store = new mod_groupformation_groups_manager ( $groupformation->id );
+
+$info = new mod_groupformation_info_text ( $cm->id, $groupformation->id, $userid );
+
+if ($store->isQuestionaireCompleted ( $userid )) {
+	groupformation_set_activity_completion ( $course, $cm, $userid );
+}
+
+// Set PAGE config
+$PAGE->set_url ( '/mod/groupformation/view.php', array (
+		'id' => $cm->id,
+		'do_show' => $do_show 
+) );
+$PAGE->set_title ( format_string ( $groupformation->name ) );
+$PAGE->set_heading ( format_string ( $course->fullname ) );
+
+$begin = 1;
+if (isset ( $_POST ["begin"] )) {
+	$begin = $_POST ["begin"];
+} else {
+	$begin = 1;
+}
+
+if ($begin == 1) {
+	if (isset ( $_POST ["questions"] )) {
+		
+		if ($_POST ["questions"] == 1 && ! $back) {
+			
+			$returnurl = new moodle_url ( '/mod/groupformation/questionaire_view.php', array (
+					'id' => $id 
+			) );
+			
+			redirect ( $returnurl );
+		}
 	}
-	
-	// Log access to page
-	groupformation_info($USER->id,$groupformation->id,'<view_student_overview>');
-	
-	$store = new mod_groupformation_storage_manager($groupformation->id);
-	$groups_store = new mod_groupformation_groups_manager($groupformation->id);
-	
-	$info = new mod_groupformation_info_text ($cm->id, $groupformation->id, $userid );
+} else {
+	$store->statusChanged ( $userid, 1 );
+}
 
-	if ($store->isQuestionaireCompleted($userid)){
-		groupformation_set_activity_completion($course, $cm, $userid);
-	}	
-	
-	// Set PAGE config
-	$PAGE->set_url('/mod/groupformation/view.php', array('id' => $cm->id, 'do_show' => $do_show));
-	$PAGE->set_title(format_string($groupformation->name));
-	$PAGE->set_heading(format_string($course->fullname));
-	
-  	$begin = 1;		
-	if (isset($_POST["begin"])){
-  		$begin = $_POST["begin"];
-  	}else{
-  		$begin = 1;
-  	}  	
-  	  	
-  	if($begin == 1){
-  		if (isset($_POST["questions"])){
-  			
-  			if($_POST["questions"] == 1 && !$back){
-  			
-  				$returnurl = new moodle_url('/mod/groupformation/questionaire_view.php', array('id' => $id));
-  			
-  				redirect($returnurl);
-  			}
-  		}
-  	}else{
-  		$store->statusChanged($userid, 1);
-  	}
-  	
-  	echo $OUTPUT->header();
-  	
-  	// Print the tabs.
-  	require('tabs.php');
-  	
-  	// Conditions to show the intro can change to look for own settings or whatever.
-  	if ($groupformation->intro) {
-  		echo $OUTPUT->box(format_module_intro('groupformation', $groupformation, $cm->id), 'generalbox mod_introbox', 'groupformationintro');
-  	}
+echo $OUTPUT->header ();
 
-    $controller = new mod_groupformation_student_overview_controller($cm->id, $groupformation->id, $userid);
-    echo $controller->display();
-	
-	echo $OUTPUT->footer();
+// Print the tabs.
+require ('tabs.php');
+
+// Conditions to show the intro can change to look for own settings or whatever.
+if ($groupformation->intro) {
+	echo $OUTPUT->box ( format_module_intro ( 'groupformation', $groupformation, $cm->id ), 'generalbox mod_introbox', 'groupformationintro' );
+}
+
+$controller = new mod_groupformation_student_overview_controller ( $cm->id, $groupformation->id, $userid );
+echo $controller->display ();
+
+echo $OUTPUT->footer ();
 	
 

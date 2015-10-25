@@ -104,6 +104,13 @@ if (has_capability ( 'mod/groupformation:editsettings', $context )) {
 				'do_show' => 'group' 
 		) );
 		$row [] = new tabobject ( 'group', $groupurl->out (), get_string ( 'tab_group', 'groupformation' ) );
+		
+		// import/export view
+		$groupurl = new moodle_url ( '/mod/groupformation/import_export_view.php', array (
+				'id' => $usedid,
+				'do_show' => 'import_export'
+		) );
+		$row [] = new tabobject ( 'import_export', $groupurl->out (), 'Import/Export' );
 	}
 }
 
