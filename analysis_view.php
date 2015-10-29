@@ -142,7 +142,7 @@ if ($create_users > 0) {
 // if (! is_null ( $job )) {
 // 	$result = $jm::do_groupal($job);
 // 	var_dump ( $result );
-//  	$saved = $jm::save_result($job,$result);
+// //  	$saved = $jm::save_result($job,$result);
 
 // }
 

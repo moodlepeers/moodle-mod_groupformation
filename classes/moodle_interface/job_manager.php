@@ -195,6 +195,7 @@ class mod_groupformation_job_manager {
 		$data = new mod_groupformation_data ();
 		return $data->get_job_status_options ();
 	}
+	
 	public static function get_users($groupformationid) {
 		$store = new mod_groupformation_storage_manager ( $groupformationid );
 
@@ -208,17 +209,17 @@ class mod_groupformation_job_manager {
 		$userfilter = new mod_groupformation_userid_filter ( $groupformationid );
 
 		$all_answers = $userfilter->getCompletedIDs ();
-		// var_dump("all_answers: ".implode(", ",$all_answers));
+		var_dump("all_answers: ".implode(", ",$all_answers));
 
 		$some_answers = $userfilter->getNoneCompletedIds ();
-		// var_dump("some_answers: ".implode(", ",$some_answers));
+		var_dump("some_answers: ".implode(", ",$some_answers));
 
 		$diff = array_diff ( $enrolled_students, $all_answers );
 		$no_or_some_answers = array_unique ( array_merge ( $diff, $some_answers ) );
-		// var_dump("no_or_some_answers: ".implode(", ",$no_or_some_answers));
+		var_dump("no_or_some_answers: ".implode(", ",$no_or_some_answers));
 
 		$no_answers = array_diff ( $no_or_some_answers, $some_answers );
-		// var_dump("no_answers: ".implode(", ",$no_answers));
+		var_dump("no_answers: ".implode(", ",$no_answers));
 
 		$groupal_users = $all_answers;
 
@@ -253,7 +254,8 @@ class mod_groupformation_job_manager {
 
 		// Assign users
 		$users = self::get_users ( $groupformationid );
-
+		var_dump($users);
+		
 		$groupal_users = $users [0];
 		$incomplete_users = $users [1];
 
@@ -261,7 +263,6 @@ class mod_groupformation_job_manager {
 		$pp = new mod_groupformation_participant_parser ( $groupformationid );
 		$groupal_participants = $pp->build_participants ( $groupal_users );
 		$random_participants = $pp->build_empty_participants ( $incomplete_users );
-
 		if (count ( $groupal_participants ) > 0) {
 
 			// Matcher (TODO)

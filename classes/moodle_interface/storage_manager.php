@@ -463,7 +463,7 @@ class mod_groupformation_storage_manager {
 		return $settings->szenario;
 	}
 	public function getTotalNumber() {
-		$names = $this->data->getCriterionSet ( $this->getScenario (), $this->groupformationid );
+		$names = $this->getCategories();
 		$number = 0;
 		$numbers = $this->getNumbers ( $names );
 		foreach ( $numbers as $n ) {
@@ -1045,10 +1045,10 @@ class mod_groupformation_storage_manager {
 			$hasTopic = $this->getNumber ( 'topic' );
 			$hasKnowledge = $this->getNumber ( 'knowledge' );
 			$grades = $this->askForGrade ();
-			
+			$points = $this->askForPoints();
 			$position = 0;
 			foreach ( $array as $c ) {
-				if (('grade' == $c && $grades == false) || ($hasTopic == 0 && 'topic' == $c) || ($hasKnowledge == 0 && ('knowledge_heterogen' == $c || 'knowledge_homogen' == $c))) {
+				if (('points' == $c && $points == false) || ('grade' == $c && $grades == false) || ($hasTopic == 0 && 'topic' == $c) || ($hasKnowledge == 0 && ('knowledge_heterogen' == $c || 'knowledge_homogen' == $c))) {
 					unset ( $array [$position] );
 				}
 				
