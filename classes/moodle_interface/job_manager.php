@@ -209,17 +209,17 @@ class mod_groupformation_job_manager {
 		$userfilter = new mod_groupformation_userid_filter ( $groupformationid );
 
 		$all_answers = $userfilter->getCompletedIDs ();
-		var_dump("all_answers: ".implode(", ",$all_answers));
+		//var_dump("all_answers: ".implode(", ",$all_answers));
 
 		$some_answers = $userfilter->getNoneCompletedIds ();
-		var_dump("some_answers: ".implode(", ",$some_answers));
+		//var_dump("some_answers: ".implode(", ",$some_answers));
 
 		$diff = array_diff ( $enrolled_students, $all_answers );
 		$no_or_some_answers = array_unique ( array_merge ( $diff, $some_answers ) );
-		var_dump("no_or_some_answers: ".implode(", ",$no_or_some_answers));
+		//var_dump("no_or_some_answers: ".implode(", ",$no_or_some_answers));
 
 		$no_answers = array_diff ( $no_or_some_answers, $some_answers );
-		var_dump("no_answers: ".implode(", ",$no_answers));
+		//var_dump("no_answers: ".implode(", ",$no_answers));
 
 		$groupal_users = $all_answers;
 

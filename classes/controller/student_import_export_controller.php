@@ -58,11 +58,11 @@ class mod_groupformation_student_import_export_controller {
 	 * @param integer $userid
 	 * @return string
 	 */
-	private function generate_answers($userid) {
+	private function generate_answers($userid, $categories) {
 		$xmlwriter = new mod_groupformation_xml_writer ();
 		
 		// generate content for answer file for export
-		$content = $xmlwriter->write ( $userid, $this->groupformationid );
+		$content = $xmlwriter->write ( $userid, $this->groupformationid, $categories);
 		
 		$filename = 'exportable_answers.xml';
 		
@@ -105,9 +105,15 @@ class mod_groupformation_student_import_export_controller {
 		$export_button = true;
 		$export_url = '';
 		
-		if ($this->store->already_answered ()) {
+		$categories = $this->store->get_exportable_categories ();
+		
+// 		var_dump($this->store->already_answered ($userid,null));
+// 		var_dump($this->store->already_answered (null,null));
+// 		var_dump($this->store->already_answered (null,$categories));
+		
+		if ($this->store->already_answered ($userid,$categories)) {
 			
-			$url = $this->generate_answers ( $userid );
+			$url = $this->generate_answers ( $userid, $categories);
 			
 			$export_description = get_string ( 'export_description_yes', 'groupformation' );
 			$export_button = false;

@@ -26,9 +26,9 @@ class mod_groupformation_xml_writer {
 	 * @param int $groupformationid
 	 * @return boolean
 	 */
-	public function write($userid = null, $groupformationid = null) {
+	public function write($userid = null, $groupformationid = null, $categories = null) {
 		global $USER;
-		if (is_null ( $userid ) || is_null ( $groupformationid )) {
+		if (is_null ( $userid ) || is_null ( $groupformationid )|| is_null ( $categories )) {
 			return false;
 		}
 		
@@ -46,7 +46,7 @@ class mod_groupformation_xml_writer {
 		
 		$writer->writeAttribute ( 'userid', '' . $userid );
 		
-		$categories = $store->get_exportable_categories ();
+		//$categories = $store->get_exportable_categories ();
 		
 		$writer->startElement ( 'categories' ); // <categories ..>
 		

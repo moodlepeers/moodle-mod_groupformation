@@ -136,7 +136,7 @@ class mod_groupformation_storage_manager {
 		$data->questionid = $question ['questionid'];
 		$data->language = $language;
 		$data->optionmax = count ( $question ['options'] );
-// 		var_dump($data);
+		// var_dump($data);
 		$DB->insert_record ( 'groupformation_' . $category, $data );
 	}
 	
@@ -149,11 +149,11 @@ class mod_groupformation_storage_manager {
 	public function getTotalUserIds() {
 		global $DB;
 		
-		$array = $DB->get_fieldset_select('groupformation_started', 'userid', 'groupformation = ' . $this->groupformationid);
+		$array = $DB->get_fieldset_select ( 'groupformation_started', 'userid', 'groupformation = ' . $this->groupformationid );
 		
 		return $array;
 	}
-
+	
 	/**
 	 * Determines the number of answered questions of a user (in all categories or a specified category)
 	 *
@@ -415,8 +415,8 @@ class mod_groupformation_storage_manager {
 	 */
 	public function getMaxOptionOfCatalogQuestion($i, $category = 'grade') {
 		global $DB;
-		if ($category == 'points'){
-			return $this->get_max_points();
+		if ($category == 'points') {
+			return $this->get_max_points ();
 		}
 		$table = "groupformation_" . $category;
 		return $DB->get_field ( $table, 'optionmax', array (
@@ -463,7 +463,7 @@ class mod_groupformation_storage_manager {
 		return $settings->szenario;
 	}
 	public function getTotalNumber() {
-		$names = $this->getCategories();
+		$names = $this->getCategories ();
 		$number = 0;
 		$numbers = $this->getNumbers ( $names );
 		foreach ( $numbers as $n ) {
@@ -627,21 +627,23 @@ class mod_groupformation_storage_manager {
 	
 	/**
 	 * Returns all exportable categories
-	 * 
+	 *
 	 * @return multitype:multitype:string
 	 */
-	public function get_exportable_categories(){
-		$exportable_categories = array();
-		$categories = $this->getCategories();
-		foreach ($categories as $category){
-			if (!in_array($category, array('points','knowledge','topic'))){
-				$exportable_categories[] = $category;
+	public function get_exportable_categories() {
+		$exportable_categories = array ();
+		$categories = $this->getCategories ();
+		foreach ( $categories as $category ) {
+			if (! in_array ( $category, array (
+					'points',
+					'knowledge',
+					'topic' 
+			) )) {
+				$exportable_categories [] = $category;
 			}
 		}
 		return $exportable_categories;
 	}
-	
-	
 	public function getPreviousCategory($category) {
 		$categories = $this->getCategories ();
 		$pos = $this->getPosition ( $category );
@@ -673,12 +675,25 @@ class mod_groupformation_storage_manager {
 	 *
 	 * @return boolean
 	 */
-	public function already_answered() {
+	public function already_answered($userid = null,$categories = null) {
 		global $DB;
-		
-		return ! ($DB->count_records ( 'groupformation_answer', array (
-				'groupformation' => $this->groupformationid 
-		) ) == 0);
+		if (is_null ( $categories ) && is_null($userid)) {
+			return ! ($DB->count_records ( 'groupformation_answer', array (
+					'groupformation' => $this->groupformationid
+			) ) == 0);
+		}elseif (is_null ( $categories ) && !is_null($userid)){
+			return ! ($DB->count_records ( 'groupformation_answer', array (
+					'groupformation' => $this->groupformationid , 'userid'=>$userid
+			) ) == 0);
+		}else{
+			foreach ($categories as $category){
+				$answers = $this->getAnswers($userid, $category);
+				if (count($answers)>0){
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 	/**
@@ -1045,7 +1060,7 @@ class mod_groupformation_storage_manager {
 			$hasTopic = $this->getNumber ( 'topic' );
 			$hasKnowledge = $this->getNumber ( 'knowledge' );
 			$grades = $this->askForGrade ();
-			$points = $this->askForPoints();
+			$points = $this->askForPoints ();
 			$position = 0;
 			foreach ( $array as $c ) {
 				if (('points' == $c && $points == false) || ('grade' == $c && $grades == false) || ($hasTopic == 0 && 'topic' == $c) || ($hasKnowledge == 0 && ('knowledge_heterogen' == $c || 'knowledge_homogen' == $c))) {
