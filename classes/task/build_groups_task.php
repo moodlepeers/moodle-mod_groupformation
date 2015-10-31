@@ -27,6 +27,7 @@ namespace mod_groupformation\task;
 require_once ($CFG->dirroot . '/mod/groupformation/locallib.php');
 require_once ($CFG->dirroot . '/mod/groupformation/lib.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/job_manager.php');
+
 class build_groups_task extends \core\task\scheduled_task {
 
 	/**
@@ -75,10 +76,12 @@ class build_groups_task extends \core\task\scheduled_task {
 			$aborted = \mod_groupformation_job_manager::is_job_aborted ( $job );
 			if (! $aborted) {
 				$saved = \mod_groupformation_job_manager::save_result($job,$result);
+
+				// notify teacher about finished group formation
+				\mod_groupformation_job_manager::notify_teacher($job);
 			}
+			
 		}
-		// notify teacher about finished group formation
-		\mod_groupformation_job_manager::notify_teacher($job);
 	}
 
 	/**

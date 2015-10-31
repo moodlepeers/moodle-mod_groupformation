@@ -27,6 +27,11 @@
 if (! defined ( 'MOODLE_INTERNAL' )) {
 	die ( 'Direct access to this script is forbidden.' ); // / It must be included from a Moodle page
 }
+require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_parser.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
+require_once ($CFG->dirroot . '/mod/groupformation/lib.php');
+require_once ($CFG->dirroot . '/mod/groupformation/locallib.php');
 
 require_once ($CFG->dirroot . '/lib/groupal/classes/Criteria/SpecificCriterion.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/Participant.php');

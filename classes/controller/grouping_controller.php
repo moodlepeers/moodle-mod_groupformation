@@ -29,6 +29,12 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/util/xml_loader.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/util/test_user_generator.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/util/xml_writer.php');
 
 class mod_groupformation_grouping_controller {
 	private $groupformationid;
