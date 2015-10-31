@@ -28,7 +28,7 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
-require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/submit_infos.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/util/submit_infos.php');
 class mod_groupformation_analysis_controller {
 	private $groupformationid;
 	private $store = NULL;
@@ -86,19 +86,19 @@ class mod_groupformation_analysis_controller {
 		$this->activity_time = $this->store->getTime ();
 		
 		if (intval ( $this->activity_time ['start_raw'] ) == 0) {
-			$this->start_time = get_string('no_time', 'groupformation');
+			$this->start_time = get_string ( 'no_time', 'groupformation' );
 		} else {
 			$this->start_time = $this->activity_time ['start'];
 		}
 		
 		if (intval ( $this->activity_time ['end_raw'] ) == 0) {
-			$this->end_time = get_string('no_time', 'groupformation');
+			$this->end_time = get_string ( 'no_time', 'groupformation' );
 		} else {
 			$this->end_time = $this->activity_time ['end'];
 		}
 		
 		$button_name = ($this->questionnaire_available) ? "stop_questionnaire" : "start_questionnaire";
-		$button_caption = ($this->questionnaire_available) ? get_string('activity_end', 'groupformation') : get_string('activity_start', 'groupformation');
+		$button_caption = ($this->questionnaire_available) ? get_string ( 'activity_end', 'groupformation' ) : get_string ( 'activity_start', 'groupformation' );
 		$button_disabled = ($this->job_state !== "ready") ? "disabled" : "";
 		
 		$statusAnalysisView->assign ( 'button', array (
@@ -117,19 +117,19 @@ class mod_groupformation_analysis_controller {
 		
 		switch ($this->state) {
 			case 1 :
-				$statusAnalysisView->assign ( 'analysis_status_info', get_string('analysis_status_info0', 'groupformation') );
+				$statusAnalysisView->assign ( 'analysis_status_info', get_string ( 'analysis_status_info0', 'groupformation' ) );
 				break;
 			case 2 :
-				$statusAnalysisView->assign ( 'analysis_status_info', get_string('analysis_status_info1', 'groupformation') );
+				$statusAnalysisView->assign ( 'analysis_status_info', get_string ( 'analysis_status_info1', 'groupformation' ) );
 				break;
 			case 3 :
-				$statusAnalysisView->assign ( 'analysis_status_info', get_string('analysis_status_info2', 'groupformation') );
+				$statusAnalysisView->assign ( 'analysis_status_info', get_string ( 'analysis_status_info2', 'groupformation' ) );
 				break;
 			case 4 :
-				$statusAnalysisView->assign ( 'analysis_status_info', get_string('analysis_status_info4', 'groupformation') );
+				$statusAnalysisView->assign ( 'analysis_status_info', get_string ( 'analysis_status_info4', 'groupformation' ) );
 				break;
 			default :
-				$statusAnalysisView->assign ( 'analysis_status_info', get_string('analysis_status_info3', 'groupformation') );
+				$statusAnalysisView->assign ( 'analysis_status_info', get_string ( 'analysis_status_info3', 'groupformation' ) );
 		}
 		
 		return $statusAnalysisView->loadTemplate ();
@@ -176,20 +176,21 @@ class mod_groupformation_analysis_controller {
 	 * Determine status variables
 	 */
 	public function determineStatus() {
-        global $DB;
+		global $DB;
 		$this->questionnaire_available = $this->store->isQuestionaireAvailable ();
 		$this->state = 1;
 		$this->job_state = mod_groupformation_job_manager::get_status ( mod_groupformation_job_manager::get_job ( $this->groupformationid ) );
-
-        $completed_q = $DB->get_records ( 'groupformation_started', array (
-            'groupformation' => $this->groupformationid, 'completed'=>1
-        ),'userid');
-
+		
+		$completed_q = $DB->get_records ( 'groupformation_started', array (
+				'groupformation' => $this->groupformationid,
+				'completed' => 1 
+		), 'userid' );
+		
 		if ($this->job_state !== 'ready') {
 			$this->state = 3;
 		} elseif ($this->questionnaire_available) {
 			$this->state = 1;
-		} elseif ( count($completed_q) > 0) {
+		} elseif (count ( $completed_q ) > 0) {
 			$this->state = 4;
 		} else {
 			$this->state = 2;
