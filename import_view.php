@@ -57,6 +57,13 @@
 		$current_tab = $do_show;
 	}	
 	
+	$store = new mod_groupformation_storage_manager($groupformation->id);
+	
+	if (!$store->isQuestionaireAvailable() || $store->isQuestionaireCompleted($userid)){
+		$returnurl = new moodle_url('/mod/groupformation/view.php', array('id' => $id, 'do_show' => 'view'));
+		redirect($returnurl);
+	}
+	
 	// Log access to page
 	// groupformation_info($USER->id,$groupformation->id,'<view_student_group_assignment>');
 		

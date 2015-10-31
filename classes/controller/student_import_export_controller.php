@@ -17,20 +17,18 @@
 /**
  *
  * @package mod_groupformation
- * @author Nora Wester
+ * @author Rene Roepke
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-// TODO noch nicht getestet
-// defined('MOODLE_INTERNAL') || die(); -> template
-// namespace mod_groupformation\classes\lecturer_settings;
+
 if (! defined ( 'MOODLE_INTERNAL' )) {
 	die ( 'Direct access to this script is forbidden.' ); // / It must be included from a Moodle page
 }
 
-// require_once 'storage_manager.php';
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/xml_writer.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
+
 class mod_groupformation_student_import_export_controller {
 	private $store;
 	private $groupformationid;
