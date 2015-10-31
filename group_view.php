@@ -82,9 +82,6 @@
 	
 	$userid = $USER->id;
 	
-	//$groupInfo = new mod_groupformation_group_infos($groupformation->id);
-	//$groupInfo->render($userid);
-
     $groupInfo = new mod_groupformation_student_group_view_controller($groupformation->id);
     echo $groupInfo->render($userid);
 	

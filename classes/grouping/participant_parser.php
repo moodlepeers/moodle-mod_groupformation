@@ -42,16 +42,16 @@ class mod_groupformation_participant_parser {
 		foreach ( $users as $user ) {
 			$position = 0;
 			$participant = null;
-
-// 			var_dump($labels);
+			
+			// var_dump($labels);
 			foreach ( $labels as $label ) {
 				$value = $user->$label;
-// 				var_dump($label);
-// 				var_dump($value);
+				// var_dump($label);
+				// var_dump($value);
 				$count = count ( $value );
 				$homogen = $value ["homogen"];
 				unset ( $value ["homogen"] );
-// 				var_dump($value);
+				// var_dump($value);
 				// on key "minVal" is the minValue
 				// on key "maxVal is the maxValue
 				$minVal = 0.0;
@@ -60,7 +60,6 @@ class mod_groupformation_participant_parser {
 				// unset($value["maxVal"]);
 				// all remaining $value values are indexed array values
 				
-
 				/*
 				 * Sprache: Es soll ein 2-dim Vektor rauskommen. (HOMOGEN zu matchen)
 				 * Wert1: Englisch = 1 wenn Englisch ausgewählt
@@ -81,12 +80,12 @@ class mod_groupformation_participant_parser {
 				
 				$weight = 1;
 				
-				if ($label == 'general'){
-					$weight = (count($labels) - 1)/2;
+				if ($label == 'general') {
+					$weight = (count ( $labels ) - 1) / 2;
 				}
 				
-				$criterion = new SpecificCriterion ( $label, $value, $minVal, $maxVal, $homogen, $weight);
-// 				var_dump($criterion);
+				$criterion = new SpecificCriterion ( $label, $value, $minVal, $maxVal, $homogen, $weight );
+				// var_dump($criterion);
 				// $criterion = new Criterion();
 				// $criterion->setName($label);
 				// $criterion->setValues($user->$label);
@@ -100,7 +99,7 @@ class mod_groupformation_participant_parser {
 				}
 				$position ++;
 			}
-// 			var_dump($participant->getCriteria());
+			// var_dump($participant->getCriteria());
 			$participants [] = $participant;
 		}
 		
@@ -135,7 +134,7 @@ class mod_groupformation_participant_parser {
 		// $minVals = $data->getMinValSet($scenario);
 		// $maxVals = $data->getMaxValSet($scenario);
 		
-// 		var_dump ( $labels, $homogen );
+		// var_dump ( $labels, $homogen );
 		
 		$calculator = new mod_groupformation_criterion_calculator ( $groupformationid );
 		
@@ -179,8 +178,8 @@ class mod_groupformation_participant_parser {
 				// handles 'general'
 				if ($label == 'general') {
 					$values = $calculator->getGeneralValues ( $user );
-					foreach ($values as $v){
-						$value[] = $v;
+					foreach ( $values as $v ) {
+						$value [] = $v;
 					}
 					$value ["homogen"] = $homogen [$label];
 					
@@ -245,7 +244,7 @@ class mod_groupformation_participant_parser {
 					}
 				}
 				
-				if ($label == 'points'){
+				if ($label == 'points') {
 					// falls eine Varianz berechnet wurde
 					if ($pointsP != - 1) {
 						$value [] = $calculator->getPoints ( $pointsP, $user );
@@ -279,7 +278,6 @@ class mod_groupformation_participant_parser {
 						$object->$name = $value;
 						$p ++;
 					}
-					
 				}
 				
 				// Behandlung der Big5 homogen

@@ -100,14 +100,6 @@ echo $OUTPUT->header ();
 // Print the tabs.
 require ('tabs.php');
 
-// Conditions to show the intro can change to look for own settings or whatever.
-// if ($groupformation->intro) {
-// echo $OUTPUT->box ( format_module_intro ( 'groupformation', $groupformation, $cm->id ), 'generalbox mod_introbox', 'groupformationintro' );
-// }
-
-// Replace the following lines with you own code.
-// echo $OUTPUT->heading ( $groupformation->name );
-
 /* ---------- Automated test user generation ---------- */
 
 $cqt = new mod_groupformation_test_user_generator ();
@@ -130,11 +122,6 @@ if ($create_users > 0) {
 }
 
 /* ---------- / Automated test user generation ---------- */
-
-// TODO Ahmed - Einkommentieren und die notify_admin-Function testen
-/* -----  function for sending confirmations when group formation algorithm finished */
-//groupformation_send_confirmation($USER);
-/* ----- / function for sending confirmations when group formation algorithm finished */
 
 // $jm = new mod_groupformation_job_manager ();
 // $job = null;

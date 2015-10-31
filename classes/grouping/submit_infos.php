@@ -18,58 +18,63 @@
  * Prints a particular instance of groupformation
  *
  * @package mod_groupformation
- * @author  Nora Wester
+ * @author Nora Wester
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
-	if (!defined('MOODLE_INTERNAL')) {
-		die('Direct access to this script is forbidden.');    ///  It must be included from a Moodle page
+if (! defined ( 'MOODLE_INTERNAL' )) {
+	die ( 'Direct access to this script is forbidden.' ); // / It must be included from a Moodle page
+}
+class mod_groupformation_submit_infos {
+	private $groupformationid;
+	
+	/**
+	 * Creates instance
+	 *
+	 * @param unknown $groupformationid        	
+	 */
+	public function __construct($groupformationid) {
+		$this->groupformationid = $groupformationid;
 	}
-
-	class mod_groupformation_submit_infos {
+	
+	/**
+	 * Returns stats about answered questionnaires
+	 *
+	 * @return multitype:number
+	 */
+	public function get_infos() {
+		$um = new mod_groupformation_user_manager ( $this->groupformationid );
+		$store = new mod_groupformation_storage_manager ( $this->groupformationid );
 		
-		private $groupformationid;
+		$total_answer_count = $store->get_total_number_of_answers ();
 		
-		public function __construct($groupformationid){
-			$this->groupformationid = $groupformationid;
-		}
-
-		public function get_infos(){
-			$um = new mod_groupformation_user_manager($this->groupformationid);
-			$store = new mod_groupformation_storage_manager($this->groupformationid);
-			
-			$total_answer_count = $store->get_total_number_of_answers();
-			
-			$stats = array();
-			
-			$context = groupformation_get_context($this->groupformationid);
-			$students = get_enrolled_users($context,'mod/groupformation:onlystudent');
-			$student_count = count($students);
-			
-			$stats[] = $student_count;
-			
-			$started = $um->get_started();
-			$started_count = count($started);
-			
-			$stats[] = $started_count;
-			
-			$completed = $um->get_completed();
-			$completed_count = count($completed);
-			
-			$stats[] = $completed_count;
-			
-			$no_missing_answers = $um->get_completed_by_answer_count();
-			$no_missing_answers_count = count($no_missing_answers);
-			
-			$stats[] = $no_missing_answers_count;
-			
-			$missing_answers = $um->get_not_completed_but_submitted();
-			$missing_answers_count = count($missing_answers);
-			
-			$stats[] = $missing_answers_count;
-			
-            return $stats;
-		}
-
-
+		$stats = array ();
+		
+		$context = groupformation_get_context ( $this->groupformationid );
+		$students = get_enrolled_users ( $context, 'mod/groupformation:onlystudent' );
+		$student_count = count ( $students );
+		
+		$stats [] = $student_count;
+		
+		$started = $um->get_started ();
+		$started_count = count ( $started );
+		
+		$stats [] = $started_count;
+		
+		$completed = $um->get_completed ();
+		$completed_count = count ( $completed );
+		
+		$stats [] = $completed_count;
+		
+		$no_missing_answers = $um->get_completed_by_answer_count ();
+		$no_missing_answers_count = count ( $no_missing_answers );
+		
+		$stats [] = $no_missing_answers_count;
+		
+		$missing_answers = $um->get_not_completed_but_submitted ();
+		$missing_answers_count = count ( $missing_answers );
+		
+		$stats [] = $missing_answers_count;
+		
+		return $stats;
 	}
+}
