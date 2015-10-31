@@ -25,7 +25,6 @@ require_once (dirname ( dirname ( dirname ( __FILE__ ) ) ) . '/config.php');
 require_once (dirname ( __FILE__ ) . '/lib.php');
 require_once (dirname ( __FILE__ ) . '/locallib.php');
 require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/storage_manager.php');
-require_once (dirname ( __FILE__ ) . '/classes/questionnaire/info_text.php');
 require_once (dirname ( __FILE__ ) . '/classes/controller/student_overview_controller.php');
 
 // Read URL params
@@ -62,8 +61,6 @@ groupformation_info ( $USER->id, $groupformation->id, '<view_student_overview>' 
 
 $store = new mod_groupformation_storage_manager ( $groupformation->id );
 $groups_store = new mod_groupformation_groups_manager ( $groupformation->id );
-
-$info = new mod_groupformation_info_text ( $cm->id, $groupformation->id, $userid );
 
 if ($store->isQuestionaireCompleted ( $userid )) {
 	groupformation_set_activity_completion ( $course, $cm, $userid );

@@ -115,6 +115,9 @@ class mod_groupformation_student_overview_controller {
 				$hasAnsweredEverything = $this->store->hasAnsweredEverything ( $this->userid );
 				$disabled = ! $hasAnsweredEverything;
 				
+				// TODO 
+				$disabled = false;
+				
 				$this->buttons_array = array (
 						array (
 								'type' => 'submit',
