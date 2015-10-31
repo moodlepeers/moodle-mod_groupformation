@@ -25,7 +25,6 @@
 	require_once (dirname ( dirname ( dirname ( __FILE__ ) ) ) . '/config.php');
 	require_once (dirname ( __FILE__ ) . '/lib.php');
 	require_once (dirname ( __FILE__ ) . '/locallib.php');
-	//require_once (dirname (__FILE__).'/classes/grouping/group_infos.php');
     require_once (dirname (__FILE__).'/classes/controller/student_group_view_controller.php');
 
 	// Read URL params
