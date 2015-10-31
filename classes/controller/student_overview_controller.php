@@ -194,7 +194,7 @@ class mod_groupformation_student_overview_controller {
 			$a->questions = $values ['questions'];
 			$a->answered = $values ['answered'];
 			if ($values ['questions'] > 0) {
-				$url = new moodle_url ( 'questionaire_view.php', array (
+				$url = new moodle_url ( 'questionnaire_view.php', array (
 						'id' => $this->cmid,
 						'category' => $key 
 				) );

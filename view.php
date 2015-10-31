@@ -25,7 +25,7 @@ require_once (dirname ( dirname ( dirname ( __FILE__ ) ) ) . '/config.php');
 require_once (dirname ( __FILE__ ) . '/lib.php');
 require_once (dirname ( __FILE__ ) . '/locallib.php');
 require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/storage_manager.php');
-require_once (dirname ( __FILE__ ) . '/classes/question_manager/info_text.php');
+require_once (dirname ( __FILE__ ) . '/classes/questionnaire/info_text.php');
 require_once (dirname ( __FILE__ ) . '/classes/controller/student_overview_controller.php');
 
 // Read URL params
@@ -89,7 +89,7 @@ if ($begin == 1) {
 		
 		if ($_POST ["questions"] == 1 && ! $back) {
 			
-			$returnurl = new moodle_url ( '/mod/groupformation/questionaire_view.php', array (
+			$returnurl = new moodle_url ( '/mod/groupformation/questionnaire_view.php', array (
 					'id' => $id 
 			) );
 			

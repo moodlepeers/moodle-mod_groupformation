@@ -26,8 +26,8 @@ require_once (dirname ( __FILE__ ) . '/lib.php');
 require_once (dirname ( __FILE__ ) . '/locallib.php');
 require_once (dirname ( __FILE__ ) . '/classes/util/define_file.php');
 require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/storage_manager.php');
-require_once (dirname ( __FILE__ ) . '/classes/question_manager/questionaire.php');
-require_once (dirname ( __FILE__ ) . '/classes/question_manager/Save.php');
+require_once (dirname ( __FILE__ ) . '/classes/questionnaire/questionaire.php');
+require_once (dirname ( __FILE__ ) . '/classes/questionnaire/Save.php');
 
 // Read URL params
 $id = optional_param ( 'id', 0, PARAM_INT ); // Course Module ID
@@ -75,7 +75,7 @@ if (isset ( $_POST ["category"] )) {
 $number = $store->getNumber ( $category );
 
 // Set PAGE config
-$PAGE->set_url ( '/mod/groupformation/questionaire_view.php', array (
+$PAGE->set_url ( '/mod/groupformation/questionnaire_view.php', array (
 		'id' => $cm->id 
 ) );
 $PAGE->set_title ( format_string ( $groupformation->name ) );

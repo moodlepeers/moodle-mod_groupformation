@@ -63,11 +63,11 @@ if (has_capability ( 'mod/groupformation:editsettings', $context )) {
 	) );
 	$row [] = new tabobject ( 'grouping', $groupingurl->out (), get_string ( 'tab_grouping', 'groupformation' ) );
 	
-	// questionaire_view -> preview mode
-	$questionaire_viewiewurl = new moodle_url ( '/mod/groupformation/questionaire_view.php', array (
+	// questionnaire_view -> preview mode
+	$questionnaire_viewiewurl = new moodle_url ( '/mod/groupformation/questionnaire_view.php', array (
 			'id' => $usedid 
 	) );
-	$row [] = new tabobject ( 'view', $questionaire_viewiewurl->out (), get_string ( 'tab_preview', 'groupformation' ) );
+	$row [] = new tabobject ( 'view', $questionnaire_viewiewurl->out (), get_string ( 'tab_preview', 'groupformation' ) );
 } elseif (! has_capability ( 'mod/groupformation:editsettings', $context ) && has_capability ( 'mod/groupformation:onlystudent', $context )) {
 	
 	// view -> student mode
@@ -80,10 +80,10 @@ if (has_capability ( 'mod/groupformation:editsettings', $context )) {
 	// If questionaire is available for students
 	if ($store->isQuestionaireAvailable () || ($store->isQuestionaireAccessible())) {
 		// questionaire view
-		$questionaire_viewiewurl = new moodle_url ( '/mod/groupformation/questionaire_view.php', array (
+		$questionnaire_viewiewurl = new moodle_url ( '/mod/groupformation/questionnaire_view.php', array (
 				'id' => $usedid 
 		) );
-		$row [] = new tabobject ( 'answering', $questionaire_viewiewurl->out (), get_string ( 'tab_questionaire', 'groupformation' ) );
+		$row [] = new tabobject ( 'answering', $questionnaire_viewiewurl->out (), get_string ( 'tab_questionaire', 'groupformation' ) );
 	}
 	
 	// always if student meets conditions
