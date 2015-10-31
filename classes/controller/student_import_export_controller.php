@@ -47,22 +47,19 @@ class mod_groupformation_student_import_export_controller {
 		$this->cmid = $cmid;
 		
 		$this->store = new mod_groupformation_storage_manager ( $groupformationid );
-		
-		$this->view = new mod_groupformation_template_builder ();
-		$this->view->setTemplate ( 'wrapper_student_import_export' );
 	}
 	
 	/**
 	 * Generates answers and creates a file for download
-	 * 
-	 * @param integer $userid
+	 *
+	 * @param integer $userid        	
 	 * @return string
 	 */
 	private function generate_answers($userid, $categories) {
 		$xmlwriter = new mod_groupformation_xml_writer ();
 		
 		// generate content for answer file for export
-		$content = $xmlwriter->write ( $userid, $this->groupformationid, $categories);
+		$content = $xmlwriter->write ( $userid, $this->groupformationid, $categories );
 		
 		$filename = 'exportable_answers.xml';
 		
@@ -94,38 +91,202 @@ class mod_groupformation_student_import_export_controller {
 	}
 	
 	/**
-	 * Outputs import and export options
+	 * Renders import and export options
 	 *
 	 * @param integer $userid        	
 	 */
-	public function render($userid) {
+	public function render_overview($userid) {
 		global $DB;
 		
+		$this->view = new mod_groupformation_template_builder ();
+		$this->view->setTemplate ( 'wrapper_student_import_export' );
+		
 		$export_description = get_string ( 'export_description_no', 'groupformation' );
-		$export_button = true;
+		$export_button = false;
 		$export_url = '';
 		
 		$categories = $this->store->get_exportable_categories ();
 		
-// 		var_dump($this->store->already_answered ($userid,null));
-// 		var_dump($this->store->already_answered (null,null));
-// 		var_dump($this->store->already_answered (null,$categories));
-		
-		if ($this->store->already_answered ($userid,$categories)) {
+		if ($this->store->already_answered ( $userid, $categories )) {
 			
-			$url = $this->generate_answers ( $userid, $categories);
+			$url = $this->generate_answers ( $userid, $categories );
 			
 			$export_description = get_string ( 'export_description_yes', 'groupformation' );
-			$export_button = false;
+			$export_button = true;
 			$export_url = $url;
+		}
+		
+		$import_button = true;
+		$import_description = get_string ( 'import_description_yes', 'groupformation' ) ;
+		
+		if (!$this->store->isQuestionaireAvailable() || $this->store->isQuestionaireCompleted($userid)){
+			$import_button = false;
+			$import_description = get_string ( 'import_description_no', 'groupformation' ) ;
+			
 		}
 		
 		$this->view->assign ( 'export_description', $export_description );
 		$this->view->assign ( 'export_button', $export_button );
 		$this->view->assign ( 'export_url', $export_url );
 		
-		$this->view->assign ( 'import_description', get_string ( 'import_description', 'groupformation' ) );
-		$this->view->assign ( 'import_form', 'TODO import form with file submission' );
+		$this->view->assign ( 'import_description', $import_description );
+		$url = new moodle_url ( '/mod/groupformation/import_view.php', array (
+				'id' => $this->cmid 
+		) );
+		$this->view->assign ( 'import_form', $url->out () );
+		$this->view->assign ( 'import_button', $import_button );
 		return $this->view->loadTemplate ();
+	}
+	
+	/**
+	 * Renders two-parted template with form
+	 *
+	 * @param unknown $mform        	
+	 * @param string $show_warning        	
+	 */
+	public function render_form($mform, $show_warning = false) {
+		$this->view = new mod_groupformation_template_builder ();
+		$this->view->setTemplate ( 'student_import_form_header' );
+		$this->view->assign ( 'file_error', $show_warning );
+		
+		echo $this->view->loadTemplate ();
+		
+		$mform->display ();
+		
+		$this->view = new mod_groupformation_template_builder ();
+		$this->view->setTemplate ( 'student_import_form_footer' );
+		echo $this->view->loadTemplate ();
+	}
+	
+	/**
+	 * Renders result page of import
+	 *
+	 * @param unknown $mform
+	 * @param string $show_warning
+	 */
+	public function render_result($successful){
+		$this->view = new mod_groupformation_template_builder ();
+		$this->view->setTemplate ( 'student_import_result' );
+		
+		$url = new moodle_url ( '/mod/groupformation/import_view.php', array (
+				'id' => $this->cmid
+		) );
+		
+		$viewurl = new moodle_url ( '/mod/groupformation/view.php', array (
+				'id' => $this->cmid,
+				'do_show' => 'view'
+		) );
+		$this->view->assign('import_export_url',$viewurl->out());
+		$this->view->assign('import_form',$url->out());
+		$this->view->assign ( 'successful', $successful );
+		
+		echo $this->view->loadTemplate ();
+		
+	}
+	
+	/**
+	 * Handles xml string and import
+	 *
+	 * @param string $content        	
+	 * @throws InvalidArgumentException
+	 */
+	public function import_xml($content) {
+		global $DB, $USER;
+		
+// 		var_dump ( "DO FANCY STUFF HERE" );
+		
+// 		var_dump ( $content );
+		
+		$xml = simplexml_load_string ( $content );
+		
+		$name = $xml->getName ();
+		if (! ($name == 'answers')) {
+			throw new InvalidArgumentException ( "Wrong format" );
+		}
+		
+		$attr = $xml->attributes ();
+		$userid = intval ( $attr->userid );
+		if (! ($userid == $USER->id)) {
+			throw new InvalidArgumentException ( "Wrong format" );
+		}
+		
+		$categories = $this->store->getCategories ();
+		
+		$all_records = array ();
+		
+		foreach ( $xml->categories->category as $category ) {
+			
+			$name = strval ( $category->attributes ()->name );
+			
+			// check if category is needed to be imported
+			if (in_array ( $name, $categories )) {
+				
+				// try importing answers
+				$records = $this->create_answer_records ( $name, $category->answer );
+				
+				$all_records = array_merge ( $all_records, $records );
+			}
+		}
+		
+// 		var_dump ( $all_records );
+		$DB->insert_records('groupformation_answer', $all_records);
+	}
+	
+	/**
+	 * Creates answer records for import
+	 *
+	 * @param string $category        	
+	 * @param array $answers        	
+	 * @throws InvalidArgumentException
+	 * @return array
+	 */
+	public function create_answer_records($category, $answers) {
+		global $DB, $USER;
+		
+		$userid = $USER->id;
+		
+		$all_records = array ();
+		$questionids = array ();
+		
+		foreach ( $answers as $answer ) {
+			
+			$attr = $answer->attributes ();
+			$questionid = intval ( $attr->questionid );
+			$value = intval ( $attr->value );
+			// var_dump ( "questionid = " . $questionid, "value = " . $value );
+			
+			if ($questionid <= 0 || $value <= 0 || in_array ( $questionid, $questionids )) {
+				throw new InvalidArgumentException ( "Wrong format" );
+			}
+			
+			$questionids [] = $questionid;
+			
+			if ($record = $DB->get_record ( 'groupformation_answer', array (
+					'userid' => $userid,
+					'category' => $category,
+					'questionid' => $questionid 
+			) )) {
+				
+				// nothing to do here
+				// var_dump("NO NEED TO IMPORT");
+			} else {
+				
+				// create record for import
+				// var_dump("NEED TO IMPORT");
+				
+				$record = new stdClass ();
+				
+				$record->groupformation = $this->groupformationid;
+				$record->category = $category;
+				$record->questionid = $questionid;
+				$record->userid = $userid;
+				$record->answer = $value;
+				
+				// var_dump($record);
+				$all_records [] = $record;
+			}
+		}
+		
+		return $all_records;
 	}
 }

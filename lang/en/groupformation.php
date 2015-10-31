@@ -299,4 +299,10 @@ $string['import'] = 'Import';
 $string['export'] = 'Export';
 $string['export_description_no'] = 'You cannot export your answers since you have not answered any questions in the exportable categories.';
 $string['export_description_yes'] = 'You can export your answers by clicking on the button below.';
-$string['import_description'] = 'You can import your answers from previous questionnaires by submitting an "answers.xml" file below.';
+$string['import_description_yes'] = 'You can import your answers by clicking on the button below and uploading a file with exportable answer format.';
+$string['import_description_no'] = 'You cannot import your answers because you submitted your answers already or the questionnaire is not available.';
+$string['import_form_description'] = 'You can import your answers from previous questionnaires by submitting an "answers.xml" file below.';
+
+$string['file_error'] = 'You have to upload an *.xml file.' ;
+$string['failed_import'] = 'The import has failed due to an invalid format. Please upload a file with exportable answer format';
+$string['successful_import'] = 'The import was successful. You can review your answers in the questionnaire.';

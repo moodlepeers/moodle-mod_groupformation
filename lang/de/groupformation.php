@@ -299,5 +299,11 @@ $string['groupformation_message_contexturlname'] = 'Resultate';
 $string['import'] = 'Import';
 $string['export'] = 'Export';
 $string['export_description_no'] = 'Erst wenn du Antworten in exportfähigen Kategorien gegeben hast, kannst du sie hier exportieren.';
-$string['export_description_yes'] = 'Du kannst deine Antworten exportieren.';
-$string['import_description'] = 'Du kannst Antworten von früheren Fragebögen importieren, indem du hier deine Antworten im passenden Format hochlädst (z.B. answers.xml).';
+$string['export_description_yes'] = 'Klicke auf den folgenden Button, um deine Antworten für diesen Fragebogen zu exportieren.';
+$string['import_description_yes'] = 'Klicke auf den folgenden Button, um Antworten von früheren Fragebögen zu importieren.';
+$string['import_description_no'] = 'Es ist nicht möglich Antworten zu importieren, da der Fragebogen nicht mehr verfügbar ist oder bereits abgegeben wurde.';
+$string['import_form_description'] = 'Du kannst Antworten von früheren Fragebögen importieren, indem du hier deine Antworten im passenden Format hochlädst (z.B. answers.xml).';
+
+$string['file_error'] = 'Du musst eine *.xml-Datei hochladen.' ;
+$string['failed_import'] = 'Der Import ist fehlgeschlagen. Das Format der Datei war nicht korrekt. Bitte lade eine Datei mit exportierten Antworten hoch.';
+$string['successful_import'] = 'Der Import war erfolgreich. Du kannst deine Antworten im Tab "Fragebogen" einsehen.';
