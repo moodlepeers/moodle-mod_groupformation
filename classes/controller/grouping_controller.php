@@ -26,14 +26,10 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 	die ( 'Direct access to this script is forbidden.' ); // / It must be included from a Moodle page
 }
 
-require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
-require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
-
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
-require_once ($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
-require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/userid_filter.php');
-require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/group_generator.php');
-require_once ($CFG->dirroot . '/mod/groupformation/locallib.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
+
 class mod_groupformation_grouping_controller {
 	private $groupformationid;
 	private $cmid;
@@ -381,11 +377,8 @@ class mod_groupformation_grouping_controller {
 				
 				break;
 		}
-		
-		$userfilter = new mod_groupformation_userid_filter ( $this->groupformationid );
-		
-		$count = count ( $userfilter->getCompletedIDs () );
-		$count += count ( $userfilter->getNoneCompletedIDs () );
+		$um = new mod_groupformation_user_manager($this->groupformationid);
+		$count = count($um->get_started());
 		
 		$context = $PAGE->context;
 		$count = count ( get_enrolled_users ( $context, 'mod/groupformation:onlystudent' ) );
@@ -564,10 +557,10 @@ class mod_groupformation_grouping_controller {
 	/**
 	 * Handles complete questionaires (userids) and sets them to completed/commited
 	 */
-	private function handle_complete_questionaires() {
-		$userFilter = new mod_groupformation_userid_filter ( $this->groupformationid );
+	public function handle_complete_questionaires() {
+		$um = new mod_groupformation_user_manager($this->groupformationid);
 		
-		$users = $userFilter->getCompletedIDs ();
+		$users = array_keys($um->get_completed_by_answer_count(null,'userid'));
 		
 		foreach ( $users as $user ) {
 			$this->store->setCompleted ( $user, true );

@@ -189,13 +189,20 @@ class mod_groupformation_student_import_export_controller {
 	 * @throws InvalidArgumentException
 	 */
 	public function import_xml($content) {
-		global $DB, $USER;
-		
-// 		var_dump ( "DO FANCY STUFF HERE" );
-		
-// 		var_dump ( $content );
-		
+		global $DB, $USER, $CFG;
+			
+		libxml_use_internal_errors(true);
 		$xml = simplexml_load_string ( $content );
+		
+		if (!$xml) {
+			$errors = libxml_get_errors();
+		
+			foreach ($errors as $error) {
+				throw new InvalidArgumentException ( "Wrong format" );
+			}
+		
+			libxml_clear_errors();
+		}
 		
 		$name = $xml->getName ();
 		if (! ($name == 'answers')) {
@@ -203,6 +210,7 @@ class mod_groupformation_student_import_export_controller {
 		}
 		
 		$attr = $xml->attributes ();
+		
 		$userid = intval ( $attr->userid );
 		if (! ($userid == $USER->id)) {
 			throw new InvalidArgumentException ( "Wrong format" );

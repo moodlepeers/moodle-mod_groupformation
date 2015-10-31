@@ -22,8 +22,8 @@ require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/grou
 
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
-require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/userid_filter.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/group_generator.php');
+
 class mod_groupformation_student_overview_controller {
 	private $cmid;
 	private $userid;

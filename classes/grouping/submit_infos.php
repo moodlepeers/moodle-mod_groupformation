@@ -22,8 +22,6 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-	require_once(dirname(__FILE__).'/userid_filter.php');
-
 	if (!defined('MOODLE_INTERNAL')) {
 		die('Direct access to this script is forbidden.');    ///  It must be included from a Moodle page
 	}
@@ -31,17 +29,16 @@
 	class mod_groupformation_submit_infos {
 		
 		private $groupformationid;
-		private $userid_filter;
-		private $store;
 		
 		public function __construct($groupformationid){
 			$this->groupformationid = $groupformationid;
-			$this->userid_filter = new mod_groupformation_userid_filter($groupformationid);
-			$this->store = new mod_groupformation_storage_manager($groupformationid);
 		}
 
-		public function getInfos(){
-			$total_answer_count = $this->store->get_total_number_of_answers();
+		public function get_infos(){
+			$um = new mod_groupformation_user_manager($this->groupformationid);
+			$store = new mod_groupformation_storage_manager($this->groupformationid);
+			
+			$total_answer_count = $store->get_total_number_of_answers();
 			
 			$stats = array();
 			
@@ -51,33 +48,26 @@
 			
 			$stats[] = $student_count;
 			
-			$started = $this->userid_filter->get_started();
+			$started = $um->get_started();
 			$started_count = count($started);
 			
 			$stats[] = $started_count;
 			
-			$completed = $this->userid_filter->get_completed();
+			$completed = $um->get_completed();
 			$completed_count = count($completed);
 			
 			$stats[] = $completed_count;
 			
-			$no_missing_answers = array();
-			foreach($started as $userid => $record){
-				if ($record->answer_count == $total_answer_count)
-					$no_missing_answers[]=$userid;
-			}
+			$no_missing_answers = $um->get_completed_by_answer_count();
 			$no_missing_answers_count = count($no_missing_answers);
 			
 			$stats[] = $no_missing_answers_count;
 			
-			$missing_answers = array();
-			foreach($completed as $userid => $record){
-				if ($record->answer_count != $total_answer_count)
-					$missing_answers[]=$userid;
-			}
+			$missing_answers = $um->get_not_completed_but_submitted();
 			$missing_answers_count = count($missing_answers);
+			
 			$stats[] = $missing_answers_count;
-
+			
             return $stats;
 		}
 

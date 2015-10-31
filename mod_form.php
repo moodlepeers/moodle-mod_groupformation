@@ -31,6 +31,10 @@ require_once ($CFG->dirroot . '/course/moodleform_mod.php');
 require_once ($CFG->dirroot . '/mod/groupformation/lib.php'); // not in the template
 require_once ($CFG->dirroot . '/mod/groupformation/locallib.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/util/xml_loader.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
+
 class mod_groupformation_mod_form extends moodleform_mod {
 	private $store;
 	

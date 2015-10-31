@@ -143,7 +143,7 @@ class mod_groupformation_analysis_controller {
 	private function load_statistics() {
 		global $PAGE;
 		
-		$questionnaire_StatisticNumbers = $this->analyse_infos->getInfos ();
+		$questionnaire_StatisticNumbers = $this->analyse_infos->get_infos ();
 		
 		$statisticsAnalysisView = new mod_groupformation_template_builder ();
 		$statisticsAnalysisView->setTemplate ( 'analysis_statistics' );

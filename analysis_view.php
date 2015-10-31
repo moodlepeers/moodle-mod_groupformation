@@ -25,6 +25,9 @@ require_once (dirname ( __FILE__ ) . '/lib.php');
 require_once (dirname ( __FILE__ ) . '/locallib.php');
 
 require_once (dirname ( __FILE__ ) . '/classes/util/test_user_generator.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/util/xml_loader.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/storage_manager.php');
 
 // Read URL params

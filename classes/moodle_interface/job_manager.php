@@ -28,12 +28,6 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 	die ( 'Direct access to this script is forbidden.' ); // / It must be included from a Moodle page
 }
 
-require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/userid_filter.php');
-require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_parser.php');
-require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
-require_once ($CFG->dirroot . '/mod/groupformation/lib.php');
-require_once ($CFG->dirroot . '/mod/groupformation/locallib.php');
-
 require_once ($CFG->dirroot . '/lib/groupal/classes/Criteria/SpecificCriterion.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/Participant.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/Cohort.php');
@@ -43,6 +37,7 @@ require_once ($CFG->dirroot . '/lib/groupal/classes/GroupFormationRandomAlgorith
 require_once ($CFG->dirroot . '/lib/groupal/classes/Optimizer/GroupALOptimizer.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/ParticipantWriter.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/CohortWriter.php');
+
 class mod_groupformation_job_manager {
 
 	/**
@@ -206,14 +201,16 @@ class mod_groupformation_job_manager {
 		$enrolled_students = array_keys ( get_enrolled_users ( $context, 'mod/groupformation:onlystudent' ) );
 		// var_dump("enrolled_students: ".implode(", ",$enrolled_students));
 
-		$userfilter = new mod_groupformation_userid_filter ( $groupformationid );
+		$um = new mod_groupformation_user_manager($groupformationid);
+		
+		$all_answers = array_keys($um->get_completed_by_answer_count(null,'userid'));
 
-		$all_answers = $userfilter->getCompletedIDs ();
-		//var_dump("all_answers: ".implode(", ",$all_answers));
-
-		$some_answers = $userfilter->getNoneCompletedIds ();
-		//var_dump("some_answers: ".implode(", ",$some_answers));
-
+// 		var_dump("all_answers: ".implode(", ",$all_answers));
+		
+		$some_answers = array_keys($um->get_not_completed_by_answer_count(null,'userid'));
+		
+// 		var_dump("some_answers: ".implode(", ",$some_answers));
+		
 		$diff = array_diff ( $enrolled_students, $all_answers );
 		$no_or_some_answers = array_unique ( array_merge ( $diff, $some_answers ) );
 		//var_dump("no_or_some_answers: ".implode(", ",$no_or_some_answers));
@@ -254,7 +251,7 @@ class mod_groupformation_job_manager {
 
 		// Assign users
 		$users = self::get_users ( $groupformationid );
-		var_dump($users);
+// 		var_dump($users);
 		
 		$groupal_users = $users [0];
 		$incomplete_users = $users [1];
