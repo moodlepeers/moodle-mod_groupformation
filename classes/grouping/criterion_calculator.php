@@ -64,7 +64,7 @@
 		}
 		
 		private function inverse($qId, $category, $answer){
-			$max = $this->store->getMaxOptionOfCatalogQuestion($qId, $category);
+			$max = $this->store->get_max_option_of_catalog_question($qId, $category);
 			//Da intern bei 0 und nicht bei 1 angefangen wird
 			$max++;
 			return $max - $answer;
@@ -78,9 +78,9 @@
 		 * @return string
 		 */
 		public function getGeneralValues($userId){
-			$value = $this->store->getSingleAnswer($userId, 'general', 1);
+			$value = $this->store->get_single_answer($userId, 'general', 1);
 			
-			$question = $this->store->getCatalogQuestion(1, 'general', 'en');
+			$question = $this->store->get_catalog_question(1, 'general', 'en');
 			
 			if ($value == 1){
 				// ENGLISH 1.0
@@ -119,13 +119,13 @@
 			$knowledge = array();
 			$position = 0;
 			
-			$temp = $this->store->getKnowledgeOrTopicValues('knowledge');
+			$temp = $this->store->get_knowledge_or_topic_values('knowledge');
  			$values = $this->xml->xmlToArray('<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>');
 					
 			foreach($values as $question){
 			//	$t = array();
 			//	$t[] = $question;
-				$t = floatval($this->store->getSingleAnswer($userId, 'knowledge', $position));
+				$t = floatval($this->store->get_single_answer($userId, 'knowledge', $position));
 				$knowledge[] = $t/100.0;
 				$position++;
 			}
@@ -140,7 +140,7 @@
 		 */
 		public function knowledgeAverage($userId){
 			$total = 0;
-			$answers = $this->store->getAnswers($userId, 'knowledge');
+			$answers = $this->store->get_answers($userId, 'knowledge');
 			$numberOfQuestion = count($answers);
 			foreach($answers as $answer){
 				$total = $total + $answer->answer;
@@ -162,12 +162,12 @@
 		 * @return float
 		 */
 		public function getGrade($position, $userId){
-			$question = $this->store->getCatalogQuestion($position, 'grade');
+			$question = $this->store->get_catalog_question($position, 'grade');
 			$o = $question->options;
 			$options = $this->xml->xmlToArray('<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $o . ' </OPTIONS>');
-			$answer = $this->store->getSingleAnswer($userId, 'grade', $position);
+			$answer = $this->store->get_single_answer($userId, 'grade', $position);
 			//return floatval($options[$answer-1]);
-			return floatval($answer/$this->store->getMaxOptionOfCatalogQuestion($position));
+			return floatval($answer/$this->store->get_max_option_of_catalog_question($position));
 		}
 		
 		/**
@@ -178,9 +178,9 @@
 		 * @return float
 		 */
 		public function getPoints($position, $userId){
-			$question = $this->store->getCatalogQuestion($position, 'points');
+			$question = $this->store->get_catalog_question($position, 'points');
 			$max = $this->store->get_max_points();
-			$answer = $this->store->getSingleAnswer($userId, 'points', $position);
+			$answer = $this->store->get_single_answer($userId, 'points', $position);
 			//return floatval($options[$answer-1]);
 			return floatval($answer/$max);
 		}
@@ -203,10 +203,10 @@
 			for($i = 1; $i <= 3; $i++){
 		
 				// answers for catalog question in category 'grade'
-				$answers = $this->store->getAnswersToSpecialQuestion('grade', $i);
+				$answers = $this->store->get_answers_to_special_question('grade', $i);
 		
 				// number of options for catalog question
-				$totalOptions = $this->store->getMaxOptionOfCatalogQuestion($i, 'grade');
+				$totalOptions = $this->store->get_max_option_of_catalog_question($i, 'grade');
 		
 				//
 				$dist = $this->getInitialArray($totalOptions);
@@ -268,16 +268,16 @@
 			$totalOptions = 0;
 			
 			// iterates over three grade questions
-			for($i = 1; $i <= $this->store->getNumber('points'); $i++){
+			for($i = 1; $i <= $this->store->get_number('points'); $i++){
 				
 				// answers for catalog question in category 'grade'
-				$answers = $this->store->getAnswersToSpecialQuestion('points', $i);
+				$answers = $this->store->get_answers_to_special_question('points', $i);
 				
 				$min_value = 0;
 				$max_value = $this->store->get_max_points();
 				
 				// number of options for catalog question
-				$totalOptions = $this->store->getMaxOptionOfCatalogQuestion($i, 'points');
+				$totalOptions = $this->store->get_max_option_of_catalog_question($i, 'points');
 				
 				// 
 				$dist = $this->getInitialArray($totalOptions);
@@ -353,7 +353,7 @@
 			$category = 'character';
 			
 			$count = count($this->BIG5);
-			$scenario = $this->store->getScenario();
+			$scenario = $this->store->get_scenario();
 			if($scenario == 2){
 				$count = $count - 2;
 			}
@@ -361,12 +361,12 @@
 				$temp = 0;
 				$maxValue = 0;
 				foreach ($this->BIG5[$i] as $num){
-					$temp = $temp + $this->store->getSingleAnswer($userId, $category, $num);
-					$maxValue = $maxValue + $this->store->getMaxOptionOfCatalogQuestion($num, $category);
+					$temp = $temp + $this->store->get_single_answer($userId, $category, $num);
+					$maxValue = $maxValue + $this->store->get_max_option_of_catalog_question($num, $category);
 				}
 				foreach ($this->BIG5Invert[$i] as $num){
-					$temp = $temp + $this->inverse($num, $category, $this->store->getSingleAnswer($userId, $category, $num));
-					$maxValue = $maxValue + $this->store->getMaxOptionOfCatalogQuestion($num, $category);
+					$temp = $temp + $this->inverse($num, $category, $this->store->get_single_answer($userId, $category, $num));
+					$maxValue = $maxValue + $this->store->get_max_option_of_catalog_question($num, $category);
 				}
 				if(in_array($i, $this->BIG5Homogen)){
 					$homogen[] = floatval($temp)/($maxValue);
@@ -381,8 +381,8 @@
 // 			//Extraversion
 // 			$temp = 0;
 // 			$temp = $temp + $this->inverse(1, $category, 
-// 					$this->store->getSingleAnswer($this->userId, $category, 1));
-// 			$temp = $temp + $this->store->getSingleAnswer($this->userId, $category, 6);
+// 					$this->store->get_single_answer($this->userId, $category, 1));
+// 			$temp = $temp + $this->store->get_single_answer($this->userId, $category, 6);
 			
 // 			$array[] = $temp;
 			
@@ -407,8 +407,8 @@
 				$temp = 0;
 				$maxValue = 0;
 				foreach ($this->FAM[$i] as $num){
-					$temp = $temp + $this->store->getSingleAnswer($userId, $category, $num);
-					$maxValue = $maxValue + $this->store->getMaxOptionOfCatalogQuestion($num, $category);
+					$temp = $temp + $this->store->get_single_answer($userId, $category, $num);
+					$maxValue = $maxValue + $this->store->get_max_option_of_catalog_question($num, $category);
 				}
 				$array[] = floatval($temp)/($maxValue);
 			}
@@ -432,8 +432,8 @@
 				$temp = 0;
 				$maxValue = 0;
 				foreach ($this->LEARN[$i] as $num){
-					$temp = $temp + $this->store->getSingleAnswer($userId, $category, $num);
-					$maxValue = $maxValue + $this->store->getMaxOptionOfCatalogQuestion($num, $category);
+					$temp = $temp + $this->store->get_single_answer($userId, $category, $num);
+					$maxValue = $maxValue + $this->store->get_max_option_of_catalog_question($num, $category);
 				}
 				$array[] = floatval($temp)/($maxValue);
 			}
@@ -452,11 +452,11 @@
 			$total = 0.0;
 			$maxValue = 0.0;
 			$array = array();
-			$answers = $this->store->getAnswers($userId, 'team');
+			$answers = $this->store->get_answers($userId, 'team');
 			$numberOf = count($answers);
 			foreach($answers as $answer){
 				$total = $total + $answer->answer;
-				$maxValue = $maxValue + $this->store->getMaxOptionOfCatalogQuestion($numberOf, 'team');
+				$maxValue = $maxValue + $this->store->get_max_option_of_catalog_question($numberOf, 'team');
 			}
 			
 			if($numberOf != 0){

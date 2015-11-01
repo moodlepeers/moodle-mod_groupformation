@@ -27,11 +27,13 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 }
 
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/submit_infos.php');
 class mod_groupformation_analysis_controller {
 	private $groupformationid;
 	private $store = NULL;
+	private $user_manager;
 	private $view = NULL;
 	private $questionnaire_available;
 	private $activity_time;
@@ -51,8 +53,9 @@ class mod_groupformation_analysis_controller {
 	 */
 	public function __construct($groupformationid) {
 		$this->groupformationid = $groupformationid;
-		
+
 		$this->store = new mod_groupformation_storage_manager ( $groupformationid );
+		$this->user_manager = new mod_groupformation_user_manager ( $groupformationid );
 		$this->view = new mod_groupformation_template_builder ();
 		
 		$this->determineStatus ();
@@ -83,7 +86,7 @@ class mod_groupformation_analysis_controller {
 		$statusAnalysisView = new mod_groupformation_template_builder ();
 		$statusAnalysisView->setTemplate ( 'analysis_status' );
 		
-		$this->activity_time = $this->store->getTime ();
+		$this->activity_time = $this->store->get_time ();
 		
 		if (intval ( $this->activity_time ['start_raw'] ) == 0) {
 			$this->start_time = get_string ( 'no_time', 'groupformation' );
@@ -166,7 +169,7 @@ class mod_groupformation_analysis_controller {
 	 */
 	public function display() {
 		$this->view->setTemplate ( 'wrapper_analysis' );
-		$this->view->assign ( 'analysis_name', $this->store->getName () );
+		$this->view->assign ( 'analysis_name', $this->store->get_name () );
 		$this->view->assign ( 'analysis_status_template', $this->load_status () );
 		$this->view->assign ( 'analysis_statistics_template', $this->load_statistics () );
 		return $this->view->loadTemplate ();
@@ -177,20 +180,17 @@ class mod_groupformation_analysis_controller {
 	 */
 	public function determineStatus() {
 		global $DB;
-		$this->questionnaire_available = $this->store->isQuestionaireAvailable ();
+		$this->questionnaire_available = $this->store->is_questionnaire_available ();
 		$this->state = 1;
 		$this->job_state = mod_groupformation_job_manager::get_status ( mod_groupformation_job_manager::get_job ( $this->groupformationid ) );
 		
-		$completed_q = $DB->get_records ( 'groupformation_started', array (
-				'groupformation' => $this->groupformationid,
-				'completed' => 1 
-		), 'userid' );
+		$completed_q = count($this->user_manager->get_completed());
 		
 		if ($this->job_state !== 'ready') {
 			$this->state = 3;
 		} elseif ($this->questionnaire_available) {
 			$this->state = 1;
-		} elseif (count ( $completed_q ) > 0) {
+		} elseif ($completed_q > 0) {
 			$this->state = 4;
 		} else {
 			$this->state = 2;

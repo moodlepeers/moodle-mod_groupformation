@@ -54,7 +54,7 @@ class mod_groupformation_xml_writer {
 			$writer->startElement ( 'category' );
 			$writer->writeAttribute ( 'name', $category );
 			
-			$answers = $store->getAnswers ( $userid, $category );
+			$answers = $store->get_answers ( $userid, $category );
 			
 			$this->write_answers ( $answers );
 			

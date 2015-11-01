@@ -358,15 +358,6 @@ class mod_groupformation_data {
 	}
 	
 	/**
-	 * Returns names of categories
-	 *
-	 * @return multitype:string
-	 */
-	public function getNames() {
-		return $this->CATEGORY_NAMES;
-	}
-	
-	/**
 	 * Returns extra labels for criteria like fam, learning, big5_xxx
 	 *
 	 * @param unknown $label        	
@@ -423,13 +414,13 @@ class mod_groupformation_data {
 	 * @param string $groupformationid        	
 	 * @return multitype:multitype:string
 	 */
-	public function getLabelSet($scenario, $groupformationid = null) {
+	public function get_label_set($scenario, $groupformationid = null) {
 		$array = $this->LABEL_SETS [$scenario];
 		if ($groupformationid != null) {
 			$store = new mod_groupformation_storage_manager ( $groupformationid );
-			$hasTopic = $store->getNumber ( "topic" );
-			$hasKnowledge = $store->getNumber ( "knowledge" );
-			$grades = $store->askForGrade ();
+			$hasTopic = $store->get_number ( "topic" );
+			$hasKnowledge = $store->get_number ( "knowledge" );
+			$grades = $store->ask_for_grade ();
 			
 			$position = 0;
 			foreach ( $array as $c ) {
@@ -454,9 +445,9 @@ class mod_groupformation_data {
 		$array = $this->CRITERION_SETS [$scenario];
 		if ($groupformationid != null) {
 			$store = new mod_groupformation_storage_manager ( $groupformationid );
-			$hasTopic = $store->getNumber ( "topic" );
-			$hasKnowledge = $store->getNumber ( "knowledge" );
-			$grades = $store->askForGrade ();
+			$hasTopic = $store->get_number ( "topic" );
+			$hasKnowledge = $store->get_number ( "knowledge" );
+			$grades = $store->ask_for_grade ();
 			
 			$position = 0;
 			foreach ( $array as $c ) {
@@ -478,7 +469,7 @@ class mod_groupformation_data {
 	 * @param unknown $scenario        	
 	 * @return multitype:multitype:boolean
 	 */
-	public function getHomogenSet($scenario) {
+	public function get_homogen_set($scenario) {
 		return $this->HOMOGEN_SETS [$scenario];
 	}
 	

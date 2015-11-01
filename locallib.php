@@ -177,7 +177,7 @@ function groupformation_determine_instance($id, &$cm, &$course, &$groupformation
 function groupformation_get_context($groupformationid) {
 	$store = new mod_groupformation_storage_manager ( $groupformationid );
 	
-	$courseid = $store->getCourseID ();
+	$courseid = $store->get_course_id ();
 	
 	$context = context_course::instance ( $courseid );
 	

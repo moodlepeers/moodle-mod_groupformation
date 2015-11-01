@@ -35,6 +35,7 @@ require_once ($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php'
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/test_user_generator.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/xml_writer.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/group_generator.php');
 
 class mod_groupformation_grouping_controller {
 	private $groupformationid;
@@ -44,6 +45,7 @@ class mod_groupformation_grouping_controller {
 	private $incomplete_groups = array ();
 	private $store = NULL;
 	private $groups_store = NULL;
+	private $user_manager;
 	private $job = NULL;
 	private $view = NULL;
 	private $groups_created;
@@ -61,6 +63,8 @@ class mod_groupformation_grouping_controller {
 		
 		$this->groups_store = new mod_groupformation_groups_manager ( $groupformationid );
 		
+		$this->user_manager = new mod_groupformation_user_manager($this->groupformationid);
+		
 		$this->view = new mod_groupformation_template_builder ();
 		
 		$this->groups = $this->groups_store->get_generated_groups ();
@@ -74,7 +78,7 @@ class mod_groupformation_grouping_controller {
 	 * Determines status of grouping_view
 	 */
 	public function determine_status() {
-		$activity_state = $this->store->isQuestionaireAvailable ();
+		$activity_state = $this->store->is_questionnaire_available ();
 		
 		$job_status = mod_groupformation_job_manager::get_status ( $this->job );
 		
@@ -172,7 +176,7 @@ class mod_groupformation_grouping_controller {
 	public function display() {
 		$this->determine_status ();
 		$this->view->setTemplate ( 'wrapper_grouping' );
-		$this->view->assign ( 'grouping_title', $this->store->getName () );
+		$this->view->assign ( 'grouping_title', $this->store->get_name () );
 		$this->view->assign ( 'grouping_settings', $this->load_settings () );
 		$this->view->assign ( 'grouping_statistics', $this->load_statistics () );
 		$this->view->assign ( 'grouping_incomplete_groups', $this->load_incomplete_groups () );
@@ -383,8 +387,7 @@ class mod_groupformation_grouping_controller {
 				
 				break;
 		}
-		$um = new mod_groupformation_user_manager($this->groupformationid);
-		$count = count($um->get_started());
+		$count = count($this->user_manager->get_started());
 		
 		$context = $PAGE->context;
 		$count = count ( get_enrolled_users ( $context, 'mod/groupformation:onlystudent' ) );
@@ -410,7 +413,7 @@ class mod_groupformation_grouping_controller {
 			
 			$statisticsView->assign ( 'performance', $this->job->performance_index );
 			$statisticsView->assign ( 'numbOfGroups', count ( $this->groups_store->get_generated_groups () ) );
-			$statisticsView->assign ( 'maxSize', $this->store->getGroupSize () );
+			$statisticsView->assign ( 'maxSize', $this->store->get_group_size () );
 		} else {
 			$statisticsView->setTemplate ( 'grouping_no_data' );
 			$statisticsView->assign ( 'grouping_no_data', get_string ( 'no_data_to_display', 'groupformation' ) );
@@ -462,7 +465,7 @@ class mod_groupformation_grouping_controller {
 	 * Sets the array with incompleted groups
 	 */
 	private function set_incomplete_groups() {
-		$maxSize = $this->store->getGroupSize ();
+		$maxSize = $this->store->get_group_size ();
 		
 		foreach ( $this->groups as $key => $value ) {
 			$usersIDs = $this->groups_store->get_users_for_generated_group ( $key );
@@ -564,12 +567,10 @@ class mod_groupformation_grouping_controller {
 	 * Handles complete questionaires (userids) and sets them to completed/commited
 	 */
 	public function handle_complete_questionaires() {
-		$um = new mod_groupformation_user_manager($this->groupformationid);
-		
-		$users = array_keys($um->get_completed_by_answer_count(null,'userid'));
+		$users = array_keys($this->user_manager->get_completed_by_answer_count(null,'userid'));
 		
 		foreach ( $users as $user ) {
-			$this->store->setCompleted ( $user, true );
+			$this->user_manager->set_status( $user, true );
 		}
 		
 		return $users;

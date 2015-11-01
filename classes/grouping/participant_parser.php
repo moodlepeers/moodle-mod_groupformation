@@ -123,14 +123,14 @@ class mod_groupformation_participant_parser {
 		
 		$store = new mod_groupformation_storage_manager ( $groupformationid );
 		
-		$scenario = $store->getScenario ();
+		$scenario = $store->get_scenario ();
 		
 		// self::handle_complete_questionaires($groupformationid);
 		
 		$data = new mod_groupformation_data ();
 		
-		$labels = $store->getLabelSet ();
-		$homogen = $store->getHomogenSet ();
+		$labels = $store->get_label_set ();
+		$homogen = $store->get_homogen_set ();
 		// $minVals = $data->getMinValSet($scenario);
 		// $maxVals = $data->getMaxValSet($scenario);
 		
@@ -225,7 +225,7 @@ class mod_groupformation_participant_parser {
 				// TODO @Nora - Ich hab bei Bewertungsmethode nach "Just Pass" gearbeitet,
 				// sprich die Fragebogenseite "Grade" wird nicht angezeigt,
 				// keine Antwort vom Studenten gespeichert und somit hier keine Antwort gefunden!
-				// Bitte eine Abstraktion von getLabelSet und getHomogenSet in store bauen,
+				// Bitte eine Abstraktion von get_label_set und get_homogen_set in store bauen,
 				// die die Fälle von grade, points, just pass, no method löst
 				// Wegen der Abstraktion gehören solche Methoden meiner Meinung nach nicht in Data
 				

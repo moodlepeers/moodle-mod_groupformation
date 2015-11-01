@@ -29,7 +29,7 @@ class mod_groupformation_test_user_generator {
 		$store = new mod_groupformation_storage_manager ( $groupformationid );
 		
 		// we want answers for all categories
-		$categories = $store->getCategories ();
+		$categories = $store->get_categories ();
 		
 		$username = $this->get_username ( null, $groupformationid );
 			
@@ -86,7 +86,7 @@ class mod_groupformation_test_user_generator {
 				try {
 					
 					foreach ( $categories as $category ) {
-						$m = $store->getNumber ( $category );
+						$m = $store->get_number ( $category );
 						for($i = 1; $i <= $m; $i ++) {
 							$record = new stdClass ();
 							$record->groupformation = $groupformationid;
@@ -97,9 +97,9 @@ class mod_groupformation_test_user_generator {
 								$record->answer = ($j % 2 == 0) ? ($i) : ($m + 1 - $i); // $i, damit topics nur einmal, in "erstellter" Reihenfolge, sortiert sind
 							} else {
 								if ($randomized) {
-									$record->answer = rand(1, $store->getMaxOptionOfCatalogQuestion($i, $category));
+									$record->answer = rand(1, $store->get_max_option_of_catalog_question($i, $category));
 								} else {
-									$record->answer = ($j % $store->getMaxOptionOfCatalogQuestion($i, $category))+1;
+									$record->answer = ($j % $store->get_max_option_of_catalog_question($i, $category))+1;
 								}
 							}
 							$all_records [] = $record;

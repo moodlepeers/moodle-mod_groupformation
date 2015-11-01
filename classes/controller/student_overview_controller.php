@@ -19,17 +19,18 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/group_generator.php');
-
 class mod_groupformation_student_overview_controller {
 	private $cmid;
 	private $userid;
 	private $groupformationid;
 	private $store;
 	private $groups_store;
+	private $user_manager;
 	private $view_state;
 	private $groupformation_state_info = array ();
 	private $buttons_array = array ();
@@ -51,6 +52,7 @@ class mod_groupformation_student_overview_controller {
 		$this->groupformationid = $groupformationid;
 		$this->store = new mod_groupformation_storage_manager ( $groupformationid );
 		$this->groups_store = new mod_groupformation_groups_manager ( $groupformationid );
+		$this->user_manager = new mod_groupformation_user_manager ( $groupformationid );
 		
 		$this->view = new mod_groupformation_template_builder ();
 		
@@ -69,8 +71,8 @@ class mod_groupformation_student_overview_controller {
 			if ($isBuild) {
 				$this->view_state = 2;
 			} else {
-				if ($this->store->isQuestionaireAvailable ()) {
-					$this->view_state = $this->store->answeringStatus ( $this->userid );
+				if ($this->store->is_questionnaire_available ()) {
+					$this->view_state = $this->user_manager->get_answering_status( $this->userid );
 				} else {
 					$this->view_state = 4;
 				}
@@ -112,10 +114,10 @@ class mod_groupformation_student_overview_controller {
 				
 				$this->determine_survey_stats ();
 				
-				$hasAnsweredEverything = $this->store->hasAnsweredEverything ( $this->userid );
-				$disabled = ! $hasAnsweredEverything;
+				$has_answered_everything = $this->store->has_answered_everything ( $this->userid );
+				$disabled = ! $has_answered_everything;
 				
-				// TODO 
+				// TODO
 				$disabled = false;
 				
 				$this->buttons_array = array (
@@ -187,7 +189,7 @@ class mod_groupformation_student_overview_controller {
 	 * Prints stats about answered and misssing questions
 	 */
 	private function determine_survey_stats() {
-		$stats = $this->store->getStats ( $this->userid );
+		$stats = $this->store->get_stats ( $this->userid );
 		$prev_incomplete = false;
 		$array = array ();
 		foreach ( $stats as $key => $values ) {
@@ -224,12 +226,12 @@ class mod_groupformation_student_overview_controller {
 	
 	/**
 	 * return the status of the survey
-	 * 
+	 *
 	 * @return string
 	 *
 	 */
 	private function availabilityState() {
-		$a = $this->store->getTime ();
+		$a = $this->store->get_time ();
 		$begin = intval ( $a ['start_raw'] );
 		$end = intval ( $a ['end_raw'] );
 		$now = time ();
@@ -280,7 +282,7 @@ class mod_groupformation_student_overview_controller {
 		$this->view->setTemplate ( 'wrapper_students_overview' );
 		$this->view->assign ( 'cmid', $this->cmid );
 		
-		$this->view->assign ( 'student_overview_title', $this->store->getName () );
+		$this->view->assign ( 'student_overview_title', $this->store->get_name () );
 		$this->view->assign ( 'student_overview_groupformation_info', $this->groupformation_info );
 		$this->view->assign ( 'student_overview_groupformation_status', $this->groupformation_state_info );
 		

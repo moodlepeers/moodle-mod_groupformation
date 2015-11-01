@@ -30,7 +30,8 @@ $row = array ();
 $inactive = array ();
 $activated = array ();
 $store = new mod_groupformation_storage_manager ( $groupformation->id );
-$groups_store = new mod_groupformation_groups_manager($groupformation->id);
+$groups_store = new mod_groupformation_groups_manager ( $groupformation->id );
+$user_manager = new mod_groupformation_user_manager ( $groupformation->id );
 
 // some pages deliver the cmid instead the id
 if (isset ( $cmid ) and intval ( $cmid ) and $cmid > 0) {
@@ -78,7 +79,7 @@ if (has_capability ( 'mod/groupformation:editsettings', $context )) {
 	$row [] = new tabobject ( 'view', $viewurl->out (), get_string ( 'tab_overview', 'groupformation' ) );
 	
 	// If questionaire is available for students
-	if ($store->isQuestionaireAvailable () || ($store->isQuestionaireAccessible())) {
+	if ($store->is_questionnaire_available () || ($store->is_questionnaire_accessible ())) {
 		// questionaire view
 		$questionnaire_viewiewurl = new moodle_url ( '/mod/groupformation/questionnaire_view.php', array (
 				'id' => $usedid 
@@ -87,9 +88,9 @@ if (has_capability ( 'mod/groupformation:editsettings', $context )) {
 	}
 	
 	// always if student meets conditions
-	// || $store->isQuestionaireCompleted ( $userid ) || $groups_store->groups_created()) {
+	// || $user_manager->is_completed ( $userid ) || $groups_store->groups_created()) {
 	
-	if (true){ 
+	if (true) {
 		
 		// evaluation view -> later TODO
 		// $evaluationurl = new moodle_url ( '/mod/groupformation/evaluation_view.php', array (
@@ -108,7 +109,7 @@ if (has_capability ( 'mod/groupformation:editsettings', $context )) {
 		// import/export view
 		$groupurl = new moodle_url ( '/mod/groupformation/import_export_view.php', array (
 				'id' => $usedid,
-				'do_show' => 'import_export'
+				'do_show' => 'import_export' 
 		) );
 		$row [] = new tabobject ( 'import_export', $groupurl->out (), 'Import/Export' );
 	}

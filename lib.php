@@ -637,7 +637,7 @@ function groupformation_save_more_infos($groupformation, $init) {
 		$topicsarray = explode ( "\n", $groupformation->topiclines );
 	}
 	
-	$names = $data->getCategorySet ( $store->getScenario () );
+	$names = $data->getCategorySet ( $store->get_scenario () );
 	
 	if ($init) {
 		
@@ -645,7 +645,7 @@ function groupformation_save_more_infos($groupformation, $init) {
 		$xmlLoader->setStore ( $store );
 		// wenn die Datenbank noch komplett leer ist, speicher einfach alle Infos aus den xml's ab
 		// ansonsten überprüfe zu jeder Kategorie die Versionsnummer und ändere bei bedarf
-		if ($store->catalogTableNotSet ()) {
+		if ($store->catalog_table_not_set ()) {
 			
 			foreach ( $names as $category ) {
 				
@@ -662,7 +662,7 @@ function groupformation_save_more_infos($groupformation, $init) {
 			// Da müssen wir nochmal drüber sprechen
 			foreach ( $names as $category ) {
 				if ($category != 'topic' && $category != 'knowledge') {
-					$xmlLoader->latestVersion ( $category );
+					$xmlLoader->latest_version ( $category );
 				}
 			}
 		}

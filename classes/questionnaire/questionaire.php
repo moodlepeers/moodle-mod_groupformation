@@ -116,34 +116,30 @@ class mod_groupformation_questionnaire {
 	private function print_navbar($activeCategory = null) {
 		$data = new mod_groupformation_data ();
 		$store = new mod_groupformation_storage_manager ( $this->groupformationid );
-		$scenario = $store->getScenario ();
-		$temp_categories = $store->getCategories ();
+		$scenario = $store->get_scenario ();
+		$temp_categories = $store->get_categories ();
 		$categories = array ();
 		foreach ( $temp_categories as $category ) {
-			if ($store->getNumber ( $category ) > 0) {
+			if ($store->get_number ( $category ) > 0) {
 				$categories [] = $category;
 			}
 		}
 		echo '<div id="questionaire_navbar">';
 		echo '<ul id="accordion">';
-		$stats = $store->getStats ( $this->userid );
 		$prev_complete = true;
 		foreach ( $categories as $category ) {
 			$url = new moodle_url ( 'questionnaire_view.php', array (
 					'id' => $this->cmid,
 					'category' => $category 
 			) );
-			$positionActiveCategory = $store->getPosition ( $activeCategory );
-			$positionCategory = $store->getPosition ( $category );
+			$positionActiveCategory = $store->get_position ( $activeCategory );
+			$positionCategory = $store->get_position ( $category );
 			
 			$beforeActive = ($positionCategory <= $positionActiveCategory);
 			$class = (has_capability ( 'mod/groupformation:editsettings', $this->context ) || $beforeActive || $prev_complete) ? '' : 'no-active';
 			echo '<li class="' . (($activeCategory == $category) ? 'current' : 'accord_li') . '">';
 			echo '<span>' . ($positionCategory + 1) . '</span><a class="' . $class . '"  href="' . $url . '">' . get_string ( 'category_' . $category, 'groupformation' ) . '</a>';
 			echo '</li>';
-			// $prev_complete = $stats [$category] ['missing'] == 0;
-			// <li><a href="a.html" class="ui-btn-active">One</a></li>
-			// <li><a href="b.html">Two</a></li>
 		}
 		echo '</ul>';
 		echo '</div>';
@@ -285,11 +281,11 @@ class mod_groupformation_questionnaire {
 		
 		// $store = new mod_groupformation_storage_manager($this->groupformationid);
 		
-		// $hasAnsweredEverything = $store->hasAnsweredEverything($this->userId);
+		// $has_answered_everything = $store->has_answered_everything($this->userId);
 		
-		$hasAnsweredEverything = $this->question_controller->has_all_answered ();
+		$has_answered_everything = $this->question_controller->has_all_answered ();
 		
-		// $disabled = ! $hasAnsweredEverything;
+		// $disabled = ! $has_answered_everything;
 		$disabled = false;
 		if (has_capability ( 'mod/groupformation:editsettings', $this->context ))
 			echo '<div class="alert col_100 questionaire_hint">' . get_string ( 'questionaire_submit_disabled_teacher', 'groupformation' ) . '</div>';
@@ -317,7 +313,7 @@ class mod_groupformation_questionnaire {
 			
 			$store = new mod_groupformation_storage_manager ( $this->groupformationid );
 			
-			if ($this->question_controller->has_committed () || ! $store->isQuestionaireAvailable ()) {
+			if ($this->question_controller->has_committed () || ! $store->is_questionnaire_available ()) {
 				echo '<div class="alert" id="commited_view">' . get_string ( 'questionaire_commited', 'groupformation' ) . '</div>';
 			}
 			

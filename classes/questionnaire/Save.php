@@ -26,6 +26,7 @@
 	}
 
 	require_once($CFG->dirroot.'/mod/groupformation/classes/moodle_interface/storage_manager.php');
+	require_once($CFG->dirroot.'/mod/groupformation/classes/moodle_interface/user_manager.php');
 	
 	define('SAVE', 0);
 	
@@ -33,16 +34,18 @@
 
 		private $groupformationid;
 		private $store;
+		private $user_manager;
 		private $userId;
 		private $category;
 		
-		public function __construct($groupformationid, $userId, $category){
+		public function __construct($groupformationid, $userid, $category){
 			
 			$this->groupformationid = $groupformationid;
-			$this->userId = $userId;
+			$this->userId = $userid;
 			$this->category = $category;
 			$this->store = new mod_groupformation_storage_manager($groupformationid);
-			$this->status = $this->store->answeringStatus($userId);
+			$this->user_manager = new mod_groupformation_user_manager($groupformationid);
+			$this->status = $this->user_manager->get_answering_status($userid);
 		}
 		
 		/**
@@ -56,16 +59,16 @@
 			if(($this->category == 'grade' || $this->category == 'general') && $answer == '0'){
                 /*if($this->status == -1){
                     $this->status = SAVE;
-                    $this->store->statusChanged($this->userId);
+                    $this->user_manager->change_status($this->userId);
                 }*/
                 return;}
             else{
-                $this->store->saveAnswer($this->userId, $answer, $this->category, $position);
+                $this->store->save_answer($this->userId, $answer, $this->category, $position);
                 if($this->status == -1){
                     $this->status = SAVE;
-                    $this->store->statusChanged($this->userId);
+                    $this->user_manager->change_status($this->userId);
                 }
-                $this->store->set_answer_count($this->userId);
+                $this->user_manager->set_answer_count($this->userId);
             }
 		}
 	}

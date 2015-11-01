@@ -24,6 +24,7 @@
  */
 // require_once(dirname(__FILE__).'/storage_manager.php');
 // require_once(dirname(__FILE__).'/xml_loader.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/xml_loader.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
@@ -39,6 +40,7 @@ class mod_groupformation_question_controller {
 	private $names = array ();
 	private $groupformationid;
 	private $store;
+	private $user_manager;
 	private $xml;
 	private $scenario;
 	private $lang;
@@ -61,10 +63,11 @@ class mod_groupformation_question_controller {
 		$this->lang = $lang;
 		$this->userId = $userId;
 		$this->store = new mod_groupformation_storage_manager ( $groupformationid );
+		$this->user_manager = new mod_groupformation_user_manager ( $groupformationid );
 		$this->xml = new mod_groupformation_xml_loader ();
 		$this->data = new mod_groupformation_data ();
-		$this->scenario = $this->store->getScenario ();
-		$this->names = $this->store->getCategories ();
+		$this->scenario = $this->store->get_scenario ();
+		$this->names = $this->store->get_categories ();
 		$this->numberOfCategory = count ( $this->names );
 		$this->init ( $userId );
 		$this->set_internal_number ( $oldCategory );
@@ -76,7 +79,7 @@ class mod_groupformation_question_controller {
 	 * @return boolean
 	 */
 	public function has_committed() {
-		$status = $this->store->answeringStatus ( $this->userId );
+		$status = $this->user_manager->get_answering_status ( $this->userId );
 		return $status == 1;
 	}
 	
@@ -85,7 +88,7 @@ class mod_groupformation_question_controller {
 	// $this->go_internal_back(1);
 	// }
 	public function has_all_answered() {
-		return $this->store->hasAnsweredEverything ( $this->userId );
+		return $this->store->has_answered_everything ( $this->userId );
 	}
 	// ---
 	public function go_back() {
@@ -101,7 +104,7 @@ class mod_groupformation_question_controller {
 	}
 	public function get_percent($category = null) {
 		if (! is_null ( $category )) {
-			$categories = $this->store->getCategories ();
+			$categories = $this->store->get_categories ();
 			$pos = array_search ( $category, $categories );
 			return 100.0 * ((1.0 * $pos) / count ( $categories ));
 		}
@@ -124,16 +127,18 @@ class mod_groupformation_question_controller {
 		
 		return ($sub / $total) * 100;
 	}
-	private function init($userId) {
-		if (! $this->store->catalogTableNotSet ()) {
-			$this->numbers = $this->store->getNumbers ( $this->names );
+	
+	private function init($userid) {
+		if (! $this->store->catalog_table_not_set ()) {
+			$this->numbers = $this->store->get_numbers ( $this->names );
 		}
 		
-		$this->status = $this->store->answeringStatus ( $userId );
+		$this->status = $this->user_manager->get_answering_status( $userid );
 	}
+	
 	private function set_internal_number($category) {
 		if ($category != "") {
-			$this->currentCategoryPosition = $this->store->getPosition ( $category );
+			$this->currentCategoryPosition = $this->store->get_position ( $category );
 			$this->currentCategoryPosition ++;
 		}
 	}
@@ -159,14 +164,14 @@ class mod_groupformation_question_controller {
 	 * @return stdClass
 	 */
 	public function get_question($i) {
-		$record = $this->store->getCatalogQuestion ( $i, $this->names [$this->currentCategoryPosition], $this->lang );
+		$record = $this->store->get_catalog_question ( $i, $this->names [$this->currentCategoryPosition], $this->lang );
 		
 		if (empty ( $record )) {
 			if ($this->lang != 'en') {
-				$record = $this->store->getCatalogQuestion ( $i, $this->names [$this->currentCategoryPosition], 'en' );
+				$record = $this->store->get_catalog_question ( $i, $this->names [$this->currentCategoryPosition], 'en' );
 			} else {
-				$lang = $this->store->getPossibleLang ( $this->names [$this->currentCategoryPosition] );
-				$record = $this->store->getCatalogQuestion ( $i, $this->names [$this->currentCategoryPosition], $lang );
+				$lang = $this->store->get_possible_language ( $this->names [$this->currentCategoryPosition] );
+				$record = $this->store->get_catalog_question ( $i, $this->names [$this->currentCategoryPosition], $lang );
 			}
 		}
 		
@@ -178,7 +183,7 @@ class mod_groupformation_question_controller {
 	 * @return boolean
 	 */
 	public function is_topics() {
-		return $this->currentCategoryPosition == $this->store->getPosition ( 'topic' );
+		return $this->currentCategoryPosition == $this->store->get_position ( 'topic' );
 	}
 	
 	/**
@@ -187,7 +192,7 @@ class mod_groupformation_question_controller {
 	 * @return boolean
 	 */
 	public function is_knowledge() {
-		return $this->currentCategoryPosition == $this->store->getPosition ( 'knowledge' );
+		return $this->currentCategoryPosition == $this->store->get_position ( 'knowledge' );
 	}
 	
 	/**
@@ -196,7 +201,7 @@ class mod_groupformation_question_controller {
 	 * @return boolean
 	 */
 	public function is_points() {
-		return $this->currentCategoryPosition == $this->store->getPosition ( 'points' );
+		return $this->currentCategoryPosition == $this->store->get_position ( 'points' );
 	}
 	
 	/**
@@ -213,7 +218,7 @@ class mod_groupformation_question_controller {
 			
 			if ($this->is_knowledge () || $this->is_topics ()) {
 				// ---------------------------------------------------------------------------------------------------------
-				$temp = $this->store->getKnowledgeOrTopicValues ( $this->names [$this->currentCategoryPosition] );
+				$temp = $this->store->get_knowledge_or_topic_values ( $this->names [$this->currentCategoryPosition] );
 				$values = $this->xml->xmlToArray ( '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>' );
 				
 				$text = '';
@@ -241,7 +246,7 @@ class mod_groupformation_question_controller {
 					$question [] = $text . $value;
 					$question [] = $options;
 					if ($this->hasAnswer) {
-						$answer = $this->store->getSingleAnswer ( $this->userId, $this->names [$this->currentCategoryPosition], $position );
+						$answer = $this->store->get_single_answer ( $this->userId, $this->names [$this->currentCategoryPosition], $position );
 						if ($answer != false) {
 							$question [] = $answer;
 						} else {
@@ -256,7 +261,7 @@ class mod_groupformation_question_controller {
 				
 				$l = count ( $answerPosition );
 				
-				if ($l > 0 && $this->currentCategoryPosition == $this->store->getPosition ( 'topic' )) {
+				if ($l > 0 && $this->currentCategoryPosition == $this->store->get_position ( 'topic' )) {
 					for($k = 1; $k <= $l; $k ++) {
 						$h = $questionsfirst [$answerPosition [$k]];
 						$h [] = $answerPosition [$k];
@@ -281,11 +286,11 @@ class mod_groupformation_question_controller {
 						$question [] = 'type_points';
 						$question [] = $record->question;
 						$question [] = $options = $options = array (
-								$this->store->get_max_points() => get_string ( 'excellent', 'groupformation' ),
+								$this->store->get_max_points () => get_string ( 'excellent', 'groupformation' ),
 								0 => get_string ( 'bad', 'groupformation' ) 
 						);
 						if ($this->hasAnswer) {
-							$answer = $this->store->getSingleAnswer ( $this->userId, $this->names [$this->currentCategoryPosition], $i );
+							$answer = $this->store->get_single_answer ( $this->userId, $this->names [$this->currentCategoryPosition], $i );
 							if ($answer != false) {
 								$question [] = $answer;
 							} else {
@@ -332,7 +337,7 @@ class mod_groupformation_question_controller {
 			$question [] = $this->xml->xmlToArray ( '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $record->options . ' </OPTIONS>' );
 			
 			if ($this->hasAnswer) {
-				$answer = $this->store->getSingleAnswer ( $this->userId, $this->names [$this->currentCategoryPosition], $i );
+				$answer = $this->store->get_single_answer ( $this->userId, $this->names [$this->currentCategoryPosition], $i );
 				if ($answer != false) {
 					$question [] = $answer;
 				} else {
@@ -349,25 +354,17 @@ class mod_groupformation_question_controller {
 	 * @return boolean
 	 */
 	public function has_answers() {
-		$firstCondition = $this->store->answeringStatus ( $this->userId ) > - 1;
-		$second = $this->store->getAnswers ( $this->userId, $this->names [$this->currentCategoryPosition] );
-		$secondCondition = $second > 0;
+		$firstCondition = ($this->user_manager->get_answering_status ( $this->userId ) > - 1);
+		$secondCondition = ($this->store->get_answers ( $this->userId, $this->names [$this->currentCategoryPosition] ) > 0);
 		return ($firstCondition && $secondCondition);
 	}
 	
 	/**
-	 * TODO comment
+	 * Returns current category
 	 *
 	 * @return multitype:
 	 */
 	public function get_current_category() {
 		return $this->names [$this->currentCategoryPosition];
-	}
-	
-	/**
-	 * TODO comment
-	 */
-	public function commited() {
-		$this->store->statusChanged ( $this->userId );
 	}
 }

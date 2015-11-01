@@ -58,8 +58,9 @@
 	}	
 	
 	$store = new mod_groupformation_storage_manager($groupformation->id);
+	$user_manager = new mod_groupformation_user_manager($groupformation->id);
 	
-	if (!$store->isQuestionaireAvailable() || $store->isQuestionaireCompleted($userid)){
+	if (!$store->is_questionnaire_available() || $user_manager->is_completed($userid)){
 		$returnurl = new moodle_url('/mod/groupformation/view.php', array('id' => $id, 'do_show' => 'view'));
 		redirect($returnurl);
 	}

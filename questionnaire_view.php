@@ -26,6 +26,7 @@ require_once (dirname ( __FILE__ ) . '/lib.php');
 require_once (dirname ( __FILE__ ) . '/locallib.php');
 require_once (dirname ( __FILE__ ) . '/classes/util/define_file.php');
 require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/storage_manager.php');
+require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/user_manager.php');
 require_once (dirname ( __FILE__ ) . '/classes/questionnaire/questionaire.php');
 require_once (dirname ( __FILE__ ) . '/classes/questionnaire/Save.php');
 
@@ -49,10 +50,10 @@ $userid = $USER->id;
 
 $data = new mod_groupformation_data ();
 $store = new mod_groupformation_storage_manager ( $groupformation->id );
+$user_manager = new mod_groupformation_user_manager($groupformation->id);
 
-// $names = $data->getNames();
-$scenario = $store->getScenario ();
-$names = $store->getCategories ();
+$scenario = $store->get_scenario ();
+$names = $store->get_categories ();
 
 $category = "";
 
@@ -69,10 +70,10 @@ if (! has_capability ( 'mod/groupformation:editsettings', $context )) {
 if (isset ( $_POST ["category"] )) {
 	$category = $_POST ['category'];
 } elseif (! (strcmp ( $url_category, '' ) == 0)) {
-	$category = $store->getPreviousCategory ( $url_category );
+	$category = $store->get_previous_category ( $url_category );
 }
 
-$number = $store->getNumber ( $category );
+$number = $store->get_number ( $category );
 
 // Set PAGE config
 $PAGE->set_url ( '/mod/groupformation/questionnaire_view.php', array (
@@ -98,7 +99,7 @@ if (isset ( $_POST ["direction"] )) {
 $inArray = in_array ( $category, $names );
 
 if (has_capability ( 'mod/groupformation:onlystudent', $context ) && ! has_capability ( 'mod/groupformation:editsettings', $context )) {
-	$status = $store->answeringStatus ( $userid );
+	$status = $user_manager->get_answering_status ( $userid );	
 	if ($status == 0 || $status == - 1) {
 		if ($inArray) {
 			
@@ -146,7 +147,7 @@ if ($direction == 0 && $_POST ["percent"] == 0) {
 	redirect ( $returnurl );
 }
 
-$available = $store->isQuestionaireAvailable () || $store->isQuestionaireAccessible ();
+$available = $store->is_questionnaire_available () || $store->is_questionnaire_accessible ();
 $isTeacher = has_capability ( 'mod/groupformation:editsettings', $context );
 if (($available || $isTeacher) && ($category == '' || $inArray)) {
 	
@@ -169,7 +170,7 @@ if (($available || $isTeacher) && ($category == '' || $inArray)) {
 } else if (! $available || $category == 'no') {
 	
 	if (isset ( $_POST ["action"] ) && $_POST ["action"] == 1) {
-		$store->statusChanged ( $userid );
+		$user_manager->change_status ( $userid );
 	}
 	
 	$returnurl = new moodle_url ( '/mod/groupformation/view.php', array (

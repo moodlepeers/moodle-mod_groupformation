@@ -24,12 +24,13 @@
 require_once (dirname ( dirname ( dirname ( __FILE__ ) ) ) . '/config.php');
 require_once (dirname ( __FILE__ ) . '/lib.php');
 require_once (dirname ( __FILE__ ) . '/locallib.php');
+require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/user_manager.php');
 require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/storage_manager.php');
 require_once (dirname ( __FILE__ ) . '/classes/controller/student_overview_controller.php');
 
 // Read URL params
 $id = optional_param ( 'id', 0, PARAM_INT ); // Course Module ID
-                                          // $g = optional_param('g', 0, PARAM_INT); // groupformation instance ID
+                                             // $g = optional_param('g', 0, PARAM_INT); // groupformation instance ID
 $do_show = optional_param ( 'do_show', 'view', PARAM_TEXT );
 $back = optional_param ( 'back', 0, PARAM_INT );
 
@@ -61,8 +62,9 @@ groupformation_info ( $USER->id, $groupformation->id, '<view_student_overview>' 
 
 $store = new mod_groupformation_storage_manager ( $groupformation->id );
 $groups_store = new mod_groupformation_groups_manager ( $groupformation->id );
+$user_manager = new mod_groupformation_user_manager ( $groupformation->id );
 
-if ($store->isQuestionaireCompleted ( $userid )) {
+if ($user_manager->is_completed( $userid )) {
 	groupformation_set_activity_completion ( $course, $cm, $userid );
 }
 
@@ -94,7 +96,12 @@ if ($begin == 1) {
 		}
 	}
 } else {
-	$store->statusChanged ( $userid, 1 );
+	$user_manager->change_status( $userid, 1 );
+	$returnurl = new moodle_url ( '/mod/groupformation/view.php', array (
+			'id' => $id
+	) );
+		
+	redirect ( $returnurl );
 }
 
 echo $OUTPUT->header ();

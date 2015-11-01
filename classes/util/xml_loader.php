@@ -49,7 +49,7 @@
 		// ansonsten speicher die Daten f�r englisch und deutsch und gebe die jeweiligen Versionsnummern und Fragenanzahl als array in einem array zur�ck  
 		public function saveData($category){
 			$array = array();
-			$init = $this->storeM->catalogTableNotSet($category);
+			$init = $this->storeM->catalog_table_not_set($category);
 			if($init == FALSE){
 				$this->storeM->delete_all_catalog_questions($category);
 			}
@@ -61,7 +61,7 @@
 		
 		//�berpr�ft, ob die Versionsnummern im xml und der Datenbank �bereinstimmen
 		//wenn nicht, wird die Datenbank erneuert
-		public function latestVersion($category){
+		public function latest_version($category){
 			global $CFG;
 			
 			//hier m�sste man sp�ter noch die Versionsnummern von allen Sprachdateien �berpr�fen
@@ -71,7 +71,7 @@
 				$xml = simplexml_load_file($xmlFile);
 					
 				$version = trim($xml->QUESTIONS['VERSION']);
-				if($this->storeM->latestVersion($category, $version)){
+				if($this->storeM->latest_version($category, $version)){
 					
 				}else{
 					$array = $this->saveData($category);

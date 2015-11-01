@@ -23,7 +23,7 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
  * This code is extracted out of /group/autogroup.php
  *
  * @package mod_groupformation
- * @copyright Nora Wester
+ * @author Nora Wester
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -33,14 +33,14 @@ class mod_groupformation_group_generator {
 	
 	/**
 	 * Generates moodle groups and sets ids in groupal generated groups
-	 * 
-	 * @param int $groupformationID
+	 *
+	 * @param int $groupformationID        	
 	 * @return boolean
 	 */
-	public static function generate_moodle_groups($groupformationID) {
+	public static function generate_moodle_groups($groupformationid) {
 		global $COURSE;
 		
-		$groups_store = new mod_groupformation_groups_manager ( $groupformationID );
+		$groups_store = new mod_groupformation_groups_manager ( $groupformationid );
 		$groupal_groups = $groups_store->get_generated_groups ();
 		
 		if ($groups_store->groups_created ())

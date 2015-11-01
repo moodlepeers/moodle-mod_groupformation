@@ -26,11 +26,13 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 }
 
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/xml_writer.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
 
 class mod_groupformation_student_import_export_controller {
 	private $store;
+	private $user_manager;
 	private $groupformationid;
 	private $cmid;
 	private $view = NULL;
@@ -43,7 +45,8 @@ class mod_groupformation_student_import_export_controller {
 	public function __construct($groupformationid, $cmid) {
 		$this->groupformationid = $groupformationid;
 		$this->cmid = $cmid;
-		
+
+		$this->user_manager = new mod_groupformation_user_manager ( $groupformationid );
 		$this->store = new mod_groupformation_storage_manager ( $groupformationid );
 	}
 	
@@ -117,7 +120,7 @@ class mod_groupformation_student_import_export_controller {
 		$import_button = true;
 		$import_description = get_string ( 'import_description_yes', 'groupformation' ) ;
 		
-		if (!$this->store->isQuestionaireAvailable() || $this->store->isQuestionaireCompleted($userid)){
+		if (!$this->store->is_questionnaire_available() || $this->user_manager->is_completed($userid)){
 			$import_button = false;
 			$import_description = get_string ( 'import_description_no', 'groupformation' ) ;
 			
@@ -216,7 +219,7 @@ class mod_groupformation_student_import_export_controller {
 			throw new InvalidArgumentException ( "Wrong format" );
 		}
 		
-		$categories = $this->store->getCategories ();
+		$categories = $this->store->get_categories ();
 		
 		$all_records = array ();
 		

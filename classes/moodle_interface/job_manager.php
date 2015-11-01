@@ -199,7 +199,7 @@ class mod_groupformation_job_manager {
 	public static function get_users($groupformationid) {
 		$store = new mod_groupformation_storage_manager ( $groupformationid );
 
-		$courseid = $store->getCourseID ();
+		$courseid = $store->get_course_id ();
 		$context = context_course::instance ( $courseid );
 
 		// all enrolled students
@@ -252,7 +252,7 @@ class mod_groupformation_job_manager {
 		$groupformationid = $job->groupformationid;
 
 		$store = new mod_groupformation_storage_manager ( $groupformationid );
-		$groupsize = intval ( $store->getGroupSize () );
+		$groupsize = intval ( $store->get_group_size () );
 
 		// Assign users
 		$users = self::get_users ( $groupformationid );
@@ -400,10 +400,10 @@ class mod_groupformation_job_manager {
 		$store = new mod_groupformation_storage_manager ( $groupformationid );
 
 		$groupname_prefix = $store->get_group_name_setting ();
-		$groupformationname = $store->getName ();
+		$groupformationname = $store->get_name ();
 
 		$groupname = "";
-		$i = $store->getInstanceNumber ();
+		$i = $store->get_instance_number ();
 
 		if (strlen ( $groupname_prefix ) < 1) {
 			$groupname = "G" . $i . "_" . substr ( $groupformationname, 0, 8 ) . "_";

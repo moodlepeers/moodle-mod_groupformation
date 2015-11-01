@@ -38,7 +38,7 @@ class build_groups_task extends \core\task\scheduled_task {
 	public function get_name() {
 		// Shown in admin screens
 		//return "Gruppenbildung und Aufräumen";
-		return get_string('jobGetName', 'groupformation');
+		return get_string('jobget_name', 'groupformation');
 	}
 
 	/**
