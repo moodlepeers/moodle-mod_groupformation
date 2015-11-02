@@ -52,7 +52,7 @@
 		$this->groupformationid = $groupformationid;
 		$this->store = new mod_groupformation_storage_manager($groupformationid);
 		$this->totalUserIds = $this->store->getTotalUserIds();
-		$this->total = $this->store->getTotalNumber();
+		$this->total = $this->store->get_total_number_of_answers();
 	}
 	
 	/**
@@ -87,11 +87,11 @@
 		$completed = array();
 		foreach($this->totalUserIds as $user){
 			$number = $this->store->get_number_of_answers($user);
-			if($this->total == $number){
+			if($this->store->get_total_number_of_answers() == $number){
 				$completed[] = intval($user);
 			}
 		}
-		
+		var_dump($completed);
 		return $completed;
 	}
 	
