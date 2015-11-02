@@ -91,7 +91,7 @@
 				$completed[] = intval($user);
 			}
 		}
-		var_dump($completed);
+		//var_dump($completed);
 		return $completed;
 	}
 	
