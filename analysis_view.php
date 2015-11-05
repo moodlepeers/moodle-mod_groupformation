@@ -100,7 +100,7 @@ echo $OUTPUT->header ();
 // Print the tabs.
 require ('tabs.php');
 
-/* ---------- Automated test user generation ---------- */
+/* ---------- Automated test user generation ------------ */
 
 $cqt = new mod_groupformation_test_user_generator ();
 
@@ -123,6 +123,8 @@ if ($create_users > 0) {
 
 /* ---------- / Automated test user generation ---------- */
 
+/* ---------- Job Manager Usage ------------------------- */
+
 // $jm = new mod_groupformation_job_manager ();
 // $job = null;
 
@@ -130,13 +132,51 @@ if ($create_users > 0) {
 // //$jm->reset_job($job);
 // // var_dump($jm::get_next_job());
 // if (! is_null ( $job )) {
-// 	$result = $jm::do_groupal($job);
-// 	var_dump ( $result );
-// // 	$saved = $jm::save_result($job,$result);
+// $result = $jm::do_groupal($job);
+// var_dump ( $result );
+// // $saved = $jm::save_result($job,$result);
 
 // }
 
-// -----------------------------------------------
+/* ---------- / Job Manager Usage ----------------------- */
+
+/* ---------- Test Participants for Eduard -------------- */
+
+require_once ($CFG->dirroot . '/lib/groupal/classes/Criteria/SpecificCriterion.php');
+require_once ($CFG->dirroot . '/lib/groupal/classes/Participant.php');
+
+$values = array (
+		2,
+		4,
+		1,
+		5,
+		3,
+		6 
+);
+$participants = array ();
+
+for($i = 1; $i <= 20; $i = $i + 1) {
+	$criterion = new SpecificCriterion ( 'topic', $values, 1, 6, true, 1 );
+	$participant = new Participant ( array (
+			$criterion 
+	), $i );
+	$participants [] = $participant;
+	shuffle ( $values );
+}
+
+// var_dump($participants);
+
+/*
+ * Hier kannst du nun sehen wie die aussehen und außerdem kannst du dann deine 
+ * Instanz von GroupFormationTopicAlgorithm aufrufen. Ähnlich wie in job_manager::do_groupal.
+ */
+
+// $groupsize = 4
+
+// $algorithm = new GroupFormationTopicAlgorithm($participants, $groupsize);
+// $result = $algorithm->doOneFormation();
+
+/* ---------- / Test Participants for Eduard ------------ */
 
 echo '<form action="' . htmlspecialchars ( $_SERVER ["PHP_SELF"] ) . '" method="post" autocomplete="off">';
 
