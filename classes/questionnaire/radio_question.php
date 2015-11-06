@@ -22,7 +22,7 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-class radio_question {
+class mod_groupformation_radio_question {
 
 	private $category;
 	private $qnumber;

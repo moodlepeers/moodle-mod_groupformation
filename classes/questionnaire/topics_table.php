@@ -21,7 +21,7 @@
  * @author  
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class topics_table{
+class mod_groupformation_topics_table{
 
 	private $category;
 	private $qnumber;

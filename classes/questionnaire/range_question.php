@@ -21,7 +21,7 @@
  *
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class range_question {
+class mod_groupformation_range_question {
 	private $category;
 	private $qnumber;
 	private $question;

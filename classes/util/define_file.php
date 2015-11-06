@@ -42,38 +42,6 @@ class mod_groupformation_data {
 			2 => 'homeworkgroups',
 			3 => 'presentationgroups' 
 	);
-	// NORMAL
-	// private $CATEGORY_NAMES = array('topic', 'knowledge', 'general', 'grade','team', 'character', 'learning', 'motivation');
-	// private $CRITERION_CATEGORYS = array('topic', 'knowledge', 'general', 'grade','team', 'character', 'learning', 'motivation');
-	// private $LABELS = array('userid', 'lang', 'topic', 'knowledge_heterogen', 'knowledge_homogen', 'grade', 'big5', 'team', 'fam', 'learning');
-	// private $CATEGORY_SETS = array (
-	// '1' => array (
-	// 'topic',
-	// 'knowledge',
-	// 'general',
-	// 'grade',
-	// 'team',
-	// 'character',
-	// 'motivation'
-	// ),
-	// '2' => array (
-	// 'topic',
-	// 'knowledge',
-	// 'general',
-	// 'grade',
-	// 'team',
-	// 'character',
-	// 'learning'
-	// ),
-	// '3' => array (
-	// 'topic',
-	// 'knowledge',
-	// 'general',
-	// 'grade',
-	// 'character',
-	// 'motivation',
-	// )
-	// );
 	
 	// MATHEVORKURS
 	private $CATEGORY_NAMES = array (

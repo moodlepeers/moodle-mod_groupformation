@@ -22,7 +22,7 @@
  *
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class dropdown_question {
+class mod_groupformation_dropdown_question {
 	private $category;
 	private $qnumber;
 	private $question;

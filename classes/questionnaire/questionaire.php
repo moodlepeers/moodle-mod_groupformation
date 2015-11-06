@@ -73,11 +73,11 @@ class mod_groupformation_questionnaire {
 		
 		$this->question_controller = new mod_groupformation_question_controller ( $groupformationid, $lang, $userId, $category );
 		
-		$this->header = new question_table_header ();
-		$this->range = new range_question ();
-		$this->radio = new radio_question ();
-		$this->dropdown = new dropdown_question ();
-		$this->topics = new topics_table ();
+		$this->header = new mod_groupformation_question_table_header ();
+		$this->range = new mod_groupformation_range_question ();
+		$this->radio = new mod_groupformation_radio_question ();
+		$this->dropdown = new mod_groupformation_dropdown_question ();
+		$this->topics = new mod_groupformation_topics_table ();
 		$this->category = $category;
 	}
 	

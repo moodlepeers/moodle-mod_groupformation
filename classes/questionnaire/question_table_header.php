@@ -1,6 +1,6 @@
 <?php
 
-class question_table_header {
+class mod_groupformation_question_table_header {
 	
 	private $tableType;
 	private $headerOptArray;
