@@ -21,12 +21,12 @@
  * @author Nora Wester
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require_once (dirname ( __FILE__ ) . '/question_controller.php');
-require_once (dirname ( __FILE__ ) . '/radio_question.php');
-require_once (dirname ( __FILE__ ) . '/topics_table.php');
-require_once (dirname ( __FILE__ ) . '/range_question.php');
-require_once (dirname ( __FILE__ ) . '/dropdown_question.php');
-require_once (dirname ( __FILE__ ) . '/question_table_header.php');
+require_once (dirname ( __FILE__ ) . '/view_elements/question_controller.php');
+require_once (dirname ( __FILE__ ) . '/view_elements/radio_question.php');
+require_once (dirname ( __FILE__ ) . '/view_elements/topics_table.php');
+require_once (dirname ( __FILE__ ) . '/view_elements/range_question.php');
+require_once (dirname ( __FILE__ ) . '/view_elements/dropdown_question.php');
+require_once (dirname ( __FILE__ ) . '/view_elements/question_table_header.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 
