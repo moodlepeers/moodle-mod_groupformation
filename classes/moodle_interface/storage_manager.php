@@ -29,6 +29,7 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 require_once ($CFG->dirroot . '/group/lib.php');
+
 class mod_groupformation_storage_manager {
 	private $groupformationid;
 	private $data;
@@ -120,51 +121,6 @@ class mod_groupformation_storage_manager {
 		$data->optionmax = count ( $question ['options'] );
 		// var_dump($data);
 		$DB->insert_record ( 'groupformation_' . $category, $data );
-	}
-	
-	/**
-	 * Determines the number of answered questions of a user (in all categories or a specified category)
-	 *
-	 * @param int $userId        	
-	 * @param string $category        	
-	 * @return number
-	 */
-	public function get_number_of_answers($userId, $category = null) {
-		global $DB;
-		
-		if (! is_null ( $category )) {
-			return $DB->count_records ( 'groupformation_answer', array (
-					'groupformation' => $this->groupformationid,
-					'userid' => $userId,
-					'category' => $category 
-			) );
-		}
-		
-		$scenario = $this->get_scenario ();
-		$names = $this->data->getCriterionSet ( $scenario, $this->groupformationid );
-		$number = 0;
-		foreach ( $names as $name ) {
-			$number = $number + $DB->count_records ( 'groupformation_answer', array (
-					'groupformation' => $this->groupformationid,
-					'userid' => $userId,
-					'category' => $name 
-			) );
-		}
-		return $number;
-	}
-	
-	/**
-	 * Determines whether user has answered every question or not
-	 *
-	 * @param int $userid        	
-	 * @return boolean
-	 */
-	public function has_answered_everything($userid) {
-		$scenario = $this->get_scenario ();
-		$categories = $this->get_categories ();
-		$sum = array_sum ( $this->get_numbers ( $categories ) );
-		$user_sum = $this->get_number_of_answers ( $userid );
-		return $sum == $user_sum;
 	}
 	
 	/**
@@ -317,21 +273,22 @@ class mod_groupformation_storage_manager {
 	 * @param array $names        	
 	 * @return multitype:mixed
 	 */
-	public function get_numbers(array $categories) {
+	public function get_numbers($categories) {
 		global $DB;
 		
 		$array = array ();
 		foreach ( $categories as $category ) {
 			$array [] = $this->get_number ( $category );
-			// if($category == 'topic' || $category == 'knowledge'){
-			// $array[] = $DB->get_field('groupformation_q_settings', $category . 'valuesnumber', array('groupformation' => $this->groupformationid));
-			// }else{
-			// $array[] = $DB->get_field('groupformation_q_version', 'numberofquestion', array('category' => $category));
-			// }
 		}
-		
 		return $array;
 	}
+	
+	/**
+	 * Returns possible language
+	 * 
+	 * @param unknown $category
+	 * @return mixed
+	 */
 	public function get_possible_language($category) {
 		global $DB;
 		
@@ -432,26 +389,6 @@ class mod_groupformation_storage_manager {
 	}
 	
 	/**
-	 * Returns whether answer of a specific user for a specific question in a specific category exists or not
-	 *
-	 * @param int $userId        	
-	 * @param string $category        	
-	 * @param int $questionId        	
-	 * @return boolean
-	 */
-	public function has_answer($userId, $category, $questionId) {
-		global $DB;
-		
-		return $DB->record_exists ( 'groupformation_answer', array (
-				'groupformation' => $this->groupformationid,
-				'userid' => $userId,
-				'category' => $category,
-				'questionid' => $questionId 
-		) );
-		;
-	}
-	
-	/**
 	 * Returns categories with at least one question, not just the scenario-based category set
 	 *
 	 * @return multitype:multitype:string
@@ -492,6 +429,13 @@ class mod_groupformation_storage_manager {
 		}
 		return $exportable_categories;
 	}
+	
+	/**
+	 * Gets previous category
+	 * 
+	 * @param unknown $category
+	 * @return Ambigous <string, multitype:string>
+	 */
 	public function get_previous_category($category) {
 		$categories = $this->get_categories ();
 		$pos = $this->get_position ( $category );
@@ -501,6 +445,12 @@ class mod_groupformation_storage_manager {
 			$previous = '';
 		return $previous;
 	}
+	
+	/**
+	 * Returns whether the questionnaire asks for grade
+	 * 
+	 * @return boolean
+	 */
 	public function ask_for_grade() {
 		global $DB;
 		$evaluationmethod = $DB->get_field ( 'groupformation', 'evaluationmethod', array (
@@ -508,6 +458,12 @@ class mod_groupformation_storage_manager {
 		) );
 		return $evaluationmethod == 1;
 	}
+	
+	/**
+	 * Returns whether the questionnaire asks for points
+	 * 
+	 * @return boolean
+	 */
 	public function ask_for_points() {
 		global $DB;
 		
@@ -519,53 +475,21 @@ class mod_groupformation_storage_manager {
 	}
 	
 	/**
-	 * Determines if someone already answered at least one question
-	 *
+	 * Returns whether this instance is still editable or not
+	 * 
 	 * @return boolean
 	 */
-	public function already_answered($userid = null, $categories = null) {
+	public function is_editable(){
 		global $DB;
-		if (is_null ( $categories ) && is_null ( $userid )) {
-			return ! ($DB->count_records ( 'groupformation_answer', array (
+		return ($DB->count_records ( 'groupformation_answer', array (
 					'groupformation' => $this->groupformationid 
 			) ) == 0);
-		} elseif (is_null ( $categories ) && ! is_null ( $userid )) {
-			return ! ($DB->count_records ( 'groupformation_answer', array (
-					'groupformation' => $this->groupformationid,
-					'userid' => $userid 
-			) ) == 0);
-		} else {
-			foreach ( $categories as $category ) {
-				$answers = $this->get_answers ( $userid, $category );
-				if (count ( $answers ) > 0) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-	
-	/**
-	 * Returns all answers of a specific user in a specific category
-	 *
-	 * @param int $userid        	
-	 * @param string $category        	
-	 * @return array
-	 */
-	public function get_answers($userid, $category) {
-		global $DB;
-		
-		return $DB->get_records ( 'groupformation_answer', array (
-				'groupformation' => $this->groupformationid,
-				'userid' => $userid,
-				'category' => $category 
-		) );
 	}
 	
 	/**
 	 * Returns all answers to a specific question in a specific category
 	 *
-	 * @param string $category        	
+	 * @param string $category
 	 * @param int $questionid        	
 	 * @return array
 	 */
@@ -574,25 +498,6 @@ class mod_groupformation_storage_manager {
 		
 		return $DB->get_records ( 'groupformation_answer', array (
 				'groupformation' => $this->groupformationid,
-				'category' => $category,
-				'questionid' => $questionid 
-		) );
-	}
-	
-	/**
-	 * Returns answer of a specific user to a specific question in a specific category
-	 *
-	 * @param int $userid        	
-	 * @param string $category        	
-	 * @param int $questionid        	
-	 * @return int
-	 */
-	public function get_single_answer($userid, $category, $questionid) {
-		global $DB;
-		
-		return $DB->get_field ( 'groupformation_answer', 'answer', array (
-				'groupformation' => $this->groupformationid,
-				'userid' => $userid,
 				'category' => $category,
 				'questionid' => $questionid 
 		) );
@@ -609,40 +514,6 @@ class mod_groupformation_storage_manager {
 		return $DB->get_field ( 'groupformation', 'maxpoints', array (
 				'id' => $this->groupformationid 
 		) );
-	}
-	
-	/**
-	 * Saves answer of a specific user to a specific question in a specific category
-	 *
-	 * @param int $userid        	
-	 * @param int $answer        	
-	 * @param string $category        	
-	 * @param int $questionid        	
-	 */
-	public function save_answer($userid, $answer, $category, $questionid) {
-		global $DB;
-		
-		$answerAlreadyExist = $this->has_answer ( $userid, $category, $questionid );
-		
-		if ($answerAlreadyExist) {
-			$record = $DB->get_record ( 'groupformation_answer', array (
-					'groupformation' => $this->groupformationid,
-					'userid' => $userid,
-					'category' => $category,
-					'questionid' => $questionid 
-			) );
-			$record->answer = $answer;
-			$DB->update_record ( 'groupformation_answer', $record );
-		} else {
-			$record = new stdClass ();
-			$record->groupformation = $this->groupformationid;
-			
-			$record->userid = $userid;
-			$record->category = $category;
-			$record->questionid = $questionid;
-			$record->answer = $answer;
-			$DB->insert_record ( 'groupformation_answer', $record );
-		}
 	}
 	
 	/**
@@ -748,44 +619,35 @@ class mod_groupformation_storage_manager {
 	}
 	
 	/**
-	 * computes stats about answered and misssing questions
-	 *
-	 * @return multitype:multitype:number stats
+	 * Returns group name prefix
+	 * 
+	 * @return mixed
 	 */
-	public function get_stats($userid) {
-		$scenario = $this->get_scenario ();
-		
-		$category_set = $this->get_categories ();
-		
-		$categories = array ();
-		
-		foreach ( $category_set as $category ) {
-			$categories [$category] = $this->get_number ( $category );
-		}
-		
-		$stats = array ();
-		foreach ( $categories as $category => $value ) {
-			$count = $this->get_number_of_answers ( $userid, $category );
-			$stats [$category] = array (
-					'questions' => $value,
-					'answered' => $count,
-					'missing' => $value - $count 
-			);
-		}
-		return $stats;
-	}
 	public function get_group_name_setting() {
 		global $DB;
 		return $DB->get_field ( 'groupformation', 'groupname', array (
 				'id' => $this->groupformationid 
 		) );
 	}
+	
+	/**
+	 * Returns the name of the groupformation instance
+	 * 
+	 * @return mixed
+	 */
 	public function get_name() {
 		global $DB;
 		return $DB->get_field ( 'groupformation', 'name', array (
 				'id' => $this->groupformationid 
 		) );
 	}
+	
+	/**
+	 * Returns position of the category
+	 * 
+	 * @param unknown $category
+	 * @return mixed|number
+	 */
 	public function get_position($category) {
 		$categories = $this->get_categories ();
 		if (in_array ( $category, $categories )) {
@@ -817,6 +679,12 @@ class mod_groupformation_storage_manager {
 		$numbers = $this->get_numbers ( $categories );
 		return array_sum ( $numbers );
 	}
+	
+	/**
+	 * Returns whether the email setting is set or not
+	 * 
+	 * @return number
+	 */
 	public function get_email_setting() {
 		global $DB;
 		// TODO Ahmed
@@ -848,6 +716,12 @@ class mod_groupformation_storage_manager {
 		}
 		return $array;
 	}
+	
+	/**
+	 * Returns homogenous set for scenario
+	 * 
+	 * @return multitype:multitype:boolean
+	 */
 	public function get_homogen_set() {
 		return $this->data->get_homogen_set ( $this->get_scenario () );
 	}

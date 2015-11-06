@@ -87,9 +87,7 @@ class mod_groupformation_question_controller {
 	// public function goNotOn(){
 	// $this->go_internal_back(1);
 	// }
-	public function has_all_answered() {
-		return $this->store->has_answered_everything ( $this->userId );
-	}
+	
 	// ---
 	public function go_back() {
 		$this->go_internal_back ( 2 );
@@ -214,7 +212,7 @@ class mod_groupformation_question_controller {
 			
 			$questions = array ();
 			
-			$this->hasAnswer = $this->has_answers ();
+			$this->hasAnswer = $this->user_manager->has_answers ($this->userId,$this->names[$this->currentCategoryPosition]);
 			
 			if ($this->is_knowledge () || $this->is_topics ()) {
 				// ---------------------------------------------------------------------------------------------------------
@@ -246,7 +244,7 @@ class mod_groupformation_question_controller {
 					$question [] = $text . $value;
 					$question [] = $options;
 					if ($this->hasAnswer) {
-						$answer = $this->store->get_single_answer ( $this->userId, $this->names [$this->currentCategoryPosition], $position );
+						$answer = $this->user_manager->get_single_answer ( $this->userId, $this->names [$this->currentCategoryPosition], $position );
 						if ($answer != false) {
 							$question [] = $answer;
 						} else {
@@ -290,7 +288,7 @@ class mod_groupformation_question_controller {
 								0 => get_string ( 'bad', 'groupformation' ) 
 						);
 						if ($this->hasAnswer) {
-							$answer = $this->store->get_single_answer ( $this->userId, $this->names [$this->currentCategoryPosition], $i );
+							$answer = $this->user_manager->get_single_answer ( $this->userId, $this->names [$this->currentCategoryPosition], $i );
 							if ($answer != false) {
 								$question [] = $answer;
 							} else {
@@ -337,7 +335,7 @@ class mod_groupformation_question_controller {
 			$question [] = $this->xml->xmlToArray ( '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $record->options . ' </OPTIONS>' );
 			
 			if ($this->hasAnswer) {
-				$answer = $this->store->get_single_answer ( $this->userId, $this->names [$this->currentCategoryPosition], $i );
+				$answer = $this->user_manager->get_single_answer ( $this->userId, $this->names [$this->currentCategoryPosition], $i );
 				if ($answer != false) {
 					$question [] = $answer;
 				} else {
@@ -346,17 +344,6 @@ class mod_groupformation_question_controller {
 			}
 		}
 		return $question;
-	}
-	
-	/**
-	 * TODO comment
-	 *
-	 * @return boolean
-	 */
-	public function has_answers() {
-		$firstCondition = ($this->user_manager->get_answering_status ( $this->userId ) > - 1);
-		$secondCondition = ($this->store->get_answers ( $this->userId, $this->names [$this->currentCategoryPosition] ) > 0);
-		return ($firstCondition && $secondCondition);
 	}
 	
 	/**

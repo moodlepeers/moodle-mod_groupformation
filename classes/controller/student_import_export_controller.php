@@ -108,7 +108,7 @@ class mod_groupformation_student_import_export_controller {
 		
 		$categories = $this->store->get_exportable_categories ();
 		
-		if ($this->store->already_answered ( $userid, $categories )) {
+		if ($this->user_manager->already_answered ( $userid, $categories )) {
 			
 			$url = $this->generate_answers ( $userid, $categories );
 			

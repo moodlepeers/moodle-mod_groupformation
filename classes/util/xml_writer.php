@@ -34,7 +34,7 @@ class mod_groupformation_xml_writer {
 		
 		$writer = $this->writer;
 		
-		$store = new mod_groupformation_storage_manager ( $groupformationid );
+		$user_manager = new mod_groupformation_user_manager ( $groupformationid );
 		
 		$writer->openMemory ();
 		
@@ -46,15 +46,13 @@ class mod_groupformation_xml_writer {
 		
 		$writer->writeAttribute ( 'userid', '' . $userid );
 		
-		//$categories = $store->get_exportable_categories ();
-		
 		$writer->startElement ( 'categories' ); // <categories ..>
 		
 		foreach ( $categories as $category ) {
 			$writer->startElement ( 'category' );
 			$writer->writeAttribute ( 'name', $category );
 			
-			$answers = $store->get_answers ( $userid, $category );
+			$answers = $user_manager->get_answers ( $userid, $category );
 			
 			$this->write_answers ( $answers );
 			

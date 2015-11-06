@@ -269,7 +269,6 @@ class mod_groupformation_questionnaire {
 		echo '<div class="col_100"><h4>' . get_string ( 'questionaire_no_more_questions', 'groupformation' ) . '</h></div>';
 		echo '	<form action="' . htmlspecialchars ( $_SERVER ["PHP_SELF"] ) . '" method="post" autocomplete="off">';
 		
-		// hier schicke ich verdeckt die momentane Kategorie und groupformationID mit
 		echo '		<input type="hidden" name="category" value="no"/>';
 		
 		$activity_id = optional_param ( 'id', false, PARAM_INT );
@@ -279,14 +278,6 @@ class mod_groupformation_questionnaire {
 			echo '	<input type="hidden" name="id" value="' . $this->groupformationid . '"/>';
 		}
 		
-		// $store = new mod_groupformation_storage_manager($this->groupformationid);
-		
-		// $has_answered_everything = $store->has_answered_everything($this->userId);
-		
-		$has_answered_everything = $this->question_controller->has_all_answered ();
-		
-		// $disabled = ! $has_answered_everything;
-		$disabled = false;
 		if (has_capability ( 'mod/groupformation:editsettings', $this->context ))
 			echo '<div class="alert col_100 questionaire_hint">' . get_string ( 'questionaire_submit_disabled_teacher', 'groupformation' ) . '</div>';
 		

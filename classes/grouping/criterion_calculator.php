@@ -31,6 +31,7 @@
 
 //require_once 'storage_manager.php';
 	require_once($CFG->dirroot.'/mod/groupformation/classes/moodle_interface/storage_manager.php');
+	require_once($CFG->dirroot.'/mod/groupformation/classes/moodle_interface/user_manager.php');
 	require_once($CFG->dirroot.'/mod/groupformation/classes/util/xml_loader.php');
 
 
@@ -38,6 +39,7 @@
 	class mod_groupformation_criterion_calculator {
 
 		private $store;
+		private $user_manager;
 		private $groupformationid;
 		private $xml;
 		
@@ -60,6 +62,7 @@
 		public function __construct($groupformationid){
 			$this->groupformationid = $groupformationid;
 			$this->store = new mod_groupformation_storage_manager($groupformationid);
+			$this->user_manager = new mod_groupformation_user_manager($groupformationid);
 			$this->xml = new mod_groupformation_xml_loader();
 		}
 		
@@ -78,7 +81,7 @@
 		 * @return string
 		 */
 		public function getGeneralValues($userId){
-			$value = $this->store->get_single_answer($userId, 'general', 1);
+			$value = $this->user_manager->get_single_answer($userId, 'general', 1);
 			
 			$question = $this->store->get_catalog_question(1, 'general', 'en');
 			
@@ -125,7 +128,7 @@
 			foreach($values as $question){
 			//	$t = array();
 			//	$t[] = $question;
-				$t = floatval($this->store->get_single_answer($userId, 'knowledge', $position));
+				$t = floatval($this->user_manager->get_single_answer($userId, 'knowledge', $position));
 				$knowledge[] = $t/100.0;
 				$position++;
 			}
@@ -140,7 +143,7 @@
 		 */
 		public function knowledgeAverage($userId){
 			$total = 0;
-			$answers = $this->store->get_answers($userId, 'knowledge');
+			$answers = $this->user_manager->get_answers($userId, 'knowledge');
 			$numberOfQuestion = count($answers);
 			foreach($answers as $answer){
 				$total = $total + $answer->answer;
@@ -165,7 +168,7 @@
 			$question = $this->store->get_catalog_question($position, 'grade');
 			$o = $question->options;
 			$options = $this->xml->xmlToArray('<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $o . ' </OPTIONS>');
-			$answer = $this->store->get_single_answer($userId, 'grade', $position);
+			$answer = $this->user_manager->get_single_answer($userId, 'grade', $position);
 			//return floatval($options[$answer-1]);
 			return floatval($answer/$this->store->get_max_option_of_catalog_question($position));
 		}
@@ -180,7 +183,7 @@
 		public function getPoints($position, $userId){
 			$question = $this->store->get_catalog_question($position, 'points');
 			$max = $this->store->get_max_points();
-			$answer = $this->store->get_single_answer($userId, 'points', $position);
+			$answer = $this->user_manager->get_single_answer($userId, 'points', $position);
 			//return floatval($options[$answer-1]);
 			return floatval($answer/$max);
 		}
@@ -361,11 +364,11 @@
 				$temp = 0;
 				$maxValue = 0;
 				foreach ($this->BIG5[$i] as $num){
-					$temp = $temp + $this->store->get_single_answer($userId, $category, $num);
+					$temp = $temp + $this->user_manager->get_single_answer($userId, $category, $num);
 					$maxValue = $maxValue + $this->store->get_max_option_of_catalog_question($num, $category);
 				}
 				foreach ($this->BIG5Invert[$i] as $num){
-					$temp = $temp + $this->inverse($num, $category, $this->store->get_single_answer($userId, $category, $num));
+					$temp = $temp + $this->inverse($num, $category, $this->user_manager->get_single_answer($userId, $category, $num));
 					$maxValue = $maxValue + $this->store->get_max_option_of_catalog_question($num, $category);
 				}
 				if(in_array($i, $this->BIG5Homogen)){
@@ -381,8 +384,8 @@
 // 			//Extraversion
 // 			$temp = 0;
 // 			$temp = $temp + $this->inverse(1, $category, 
-// 					$this->store->get_single_answer($this->userId, $category, 1));
-// 			$temp = $temp + $this->store->get_single_answer($this->userId, $category, 6);
+// 					$this->user_manager->get_single_answer($this->userId, $category, 1));
+// 			$temp = $temp + $this->user_manager->get_single_answer($this->userId, $category, 6);
 			
 // 			$array[] = $temp;
 			
@@ -407,7 +410,7 @@
 				$temp = 0;
 				$maxValue = 0;
 				foreach ($this->FAM[$i] as $num){
-					$temp = $temp + $this->store->get_single_answer($userId, $category, $num);
+					$temp = $temp + $this->user_manager->get_single_answer($userId, $category, $num);
 					$maxValue = $maxValue + $this->store->get_max_option_of_catalog_question($num, $category);
 				}
 				$array[] = floatval($temp)/($maxValue);
@@ -432,7 +435,7 @@
 				$temp = 0;
 				$maxValue = 0;
 				foreach ($this->LEARN[$i] as $num){
-					$temp = $temp + $this->store->get_single_answer($userId, $category, $num);
+					$temp = $temp + $this->user_manager->get_single_answer($userId, $category, $num);
 					$maxValue = $maxValue + $this->store->get_max_option_of_catalog_question($num, $category);
 				}
 				$array[] = floatval($temp)/($maxValue);
@@ -452,7 +455,7 @@
 			$total = 0.0;
 			$maxValue = 0.0;
 			$array = array();
-			$answers = $this->store->get_answers($userId, 'team');
+			$answers = $this->user_manager->get_answers($userId, 'team');
 			$numberOf = count($answers);
 			foreach($answers as $answer){
 				$total = $total + $answer->answer;

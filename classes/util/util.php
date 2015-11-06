@@ -111,4 +111,34 @@ class mod_groupformation_util {
 		return null;
 	}
 	
+
+	/**
+	 * computes stats about answered and misssing questions
+	 *
+	 * @return multitype:multitype:number stats
+	 */
+	public static function get_stats($groupformationid, $userid) {
+		$user_manager = new mod_groupformation_user_manager($groupformationid);
+		$store = new mod_groupformation_storage_manager($groupformationid);
+		
+		$category_set = $store->get_categories ();
+	
+		$categories = array ();
+	
+		foreach ( $category_set as $category ) {
+			$categories [$category] = $store->get_number ( $category );
+		}
+	
+		$stats = array ();
+		foreach ( $categories as $category => $value ) {
+			$count = $user_manager->get_number_of_answers ( $userid, $category );
+			$stats [$category] = array (
+					'questions' => $value,
+					'answered' => $count,
+					'missing' => $value - $count
+			);
+		}
+		return $stats;
+	}
+	
 }

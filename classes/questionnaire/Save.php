@@ -63,7 +63,7 @@
                 }*/
                 return;}
             else{
-                $this->store->save_answer($this->userId, $answer, $this->category, $position);
+                $this->user_manager->save_answer($this->userId, $answer, $this->category, $position);
                 if($this->status == -1){
                     $this->status = SAVE;
                     $this->user_manager->change_status($this->userId);

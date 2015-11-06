@@ -131,7 +131,7 @@ if (has_capability ( 'mod/groupformation:onlystudent', $context ) && ! has_capab
 			}
 			
 			// --- Mathevorkurs
-			//if ($store->get_number_of_answers ( $userid, $category ) != $number) {
+			//if ($user_manager->get_number_of_answers ( $userid, $category ) != $number) {
 			//	$go = false;
 			//}
 			// ---

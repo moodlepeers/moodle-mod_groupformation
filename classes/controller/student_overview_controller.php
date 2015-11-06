@@ -20,10 +20,10 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
-
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/group_generator.php');
+
 class mod_groupformation_student_overview_controller {
 	private $cmid;
 	private $userid;
@@ -114,8 +114,8 @@ class mod_groupformation_student_overview_controller {
 				
 				$this->determine_survey_stats ();
 				
-				$has_answered_everything = $this->store->has_answered_everything ( $this->userid );
-				$disabled = ! $has_answered_everything;
+				$hasAnsweredEverything = $this->user_manager->has_answered_everything ( $this->userid );
+				$disabled = ! $hasAnsweredEverything;
 				
 				// TODO
 				$disabled = false;
@@ -189,7 +189,8 @@ class mod_groupformation_student_overview_controller {
 	 * Prints stats about answered and misssing questions
 	 */
 	private function determine_survey_stats() {
-		$stats = $this->store->get_stats ( $this->userid );
+		$stats = mod_groupformation_util::get_stats($this->groupformationid, $this->userid);
+		
 		$prev_incomplete = false;
 		$array = array ();
 		foreach ( $stats as $key => $values ) {
