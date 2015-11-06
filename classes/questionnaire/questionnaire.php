@@ -21,7 +21,7 @@
  * @author Nora Wester
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require_once (dirname ( __FILE__ ) . '/question_controller.php');
+require_once (dirname ( __FILE__ ) . '/questionnaire_controller.php');
 require_once (dirname ( __FILE__ ) . '/elements/radio_question.php');
 require_once (dirname ( __FILE__ ) . '/elements/topics_table.php');
 require_once (dirname ( __FILE__ ) . '/elements/range_question.php');
@@ -29,6 +29,7 @@ require_once (dirname ( __FILE__ ) . '/elements/dropdown_question.php');
 require_once (dirname ( __FILE__ ) . '/elements/question_table_header.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 
 if (! defined ( 'MOODLE_INTERNAL' )) {
 	die ( 'Direct access to this script is forbidden.' ); // / It must be included from a Moodle page
@@ -38,6 +39,8 @@ class mod_groupformation_questionnaire {
 	private $groupformationid;
 	private $lang;
 	private $question_controller;
+	private $store;
+	private $user_manager;
 	private $range;
 	private $radio;
 	private $topics;
@@ -71,7 +74,9 @@ class mod_groupformation_questionnaire {
 		$this->userid = $userId;
 		$this->context = $context;
 		
-		$this->question_controller = new mod_groupformation_question_controller ( $groupformationid, $lang, $userId, $category );
+		$this->store = new mod_groupformation_storage_manager ( $this->groupformationid );
+		$this->user_manager = new mod_groupformation_user_manager ( $this->groupformationid );
+		$this->question_controller = new mod_groupformation_questionnaire_controller ( $groupformationid, $lang, $userId, $category );
 		
 		$this->header = new mod_groupformation_question_table_header ();
 		$this->range = new mod_groupformation_range_question ();
@@ -115,12 +120,11 @@ class mod_groupformation_questionnaire {
 	 */
 	private function print_navbar($activeCategory = null) {
 		$data = new mod_groupformation_data ();
-		$store = new mod_groupformation_storage_manager ( $this->groupformationid );
-		$scenario = $store->get_scenario ();
-		$temp_categories = $store->get_categories ();
+		$scenario = $this->store->get_scenario ();
+		$temp_categories = $this->store->get_categories ();
 		$categories = array ();
 		foreach ( $temp_categories as $category ) {
-			if ($store->get_number ( $category ) > 0) {
+			if ($this->store->get_number ( $category ) > 0) {
 				$categories [] = $category;
 			}
 		}
@@ -132,8 +136,8 @@ class mod_groupformation_questionnaire {
 					'id' => $this->cmid,
 					'category' => $category 
 			) );
-			$positionActiveCategory = $store->get_position ( $activeCategory );
-			$positionCategory = $store->get_position ( $category );
+			$positionActiveCategory = $this->store->get_position ( $activeCategory );
+			$positionCategory = $this->store->get_position ( $category );
 			
 			$beforeActive = ($positionCategory <= $positionActiveCategory);
 			$class = (has_capability ( 'mod/groupformation:editsettings', $this->context ) || $beforeActive || $prev_complete) ? '' : 'no-active';
@@ -302,9 +306,7 @@ class mod_groupformation_questionnaire {
 			if ($isTeacher)
 				echo '<div class="alert">' . get_string ( 'questionaire_preview', 'groupformation' ) . '</div>';
 			
-			$store = new mod_groupformation_storage_manager ( $this->groupformationid );
-			
-			if ($this->question_controller->has_committed () || ! $store->is_questionnaire_available ()) {
+			if ($this->user_manager->is_completed($this->userid) || ! $this->store->is_questionnaire_available ()) {
 				echo '<div class="alert" id="commited_view">' . get_string ( 'questionaire_commited', 'groupformation' ) . '</div>';
 			}
 			

@@ -22,8 +22,7 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *         
  */
-// require_once(dirname(__FILE__).'/storage_manager.php');
-// require_once(dirname(__FILE__).'/xml_loader.php');
+
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/xml_loader.php');
@@ -32,7 +31,8 @@ require_once ($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php'
 if (! defined ( 'MOODLE_INTERNAL' )) {
 	die ( 'Direct access to this script is forbidden.' ); // / It must be included from a Moodle page
 }
-class mod_groupformation_question_controller {
+
+class mod_groupformation_questionnaire_controller {
 	private $SAVE = 0;
 	private $COMMIT = 1;
 	private $status;
@@ -73,25 +73,24 @@ class mod_groupformation_question_controller {
 		$this->set_internal_number ( $oldCategory );
 	}
 	
-	/**
-	 * Returns where questionnaire has been submitted or not
-	 *
-	 * @return boolean
-	 */
-	public function has_committed() {
-		$status = $this->user_manager->get_answering_status ( $this->userId );
-		return $status == 1;
-	}
-	
 	// --- Mathevorkurs
 	// public function goNotOn(){
 	// $this->go_internal_back(1);
 	// }
 	
 	// ---
+	/**
+	 * Triggers going a category page back
+	 */
 	public function go_back() {
 		$this->go_internal_back ( 2 );
 	}
+	
+	/**
+	 * Handles going back
+	 * 
+	 * @param int $back
+	 */
 	private function go_internal_back($back) {
 		while ( $back > 0 && $this->currentCategoryPosition != 0 ) {
 			if ($this->numbers [$this->currentCategoryPosition] != 0) {
@@ -100,6 +99,13 @@ class mod_groupformation_question_controller {
 			$this->currentCategoryPosition = $this->currentCategoryPosition - 1;
 		}
 	}
+	
+	/**
+	 * Returns percent of progress in questionnaire
+	 * 
+	 * @param string $category
+	 * @return number
+	 */
 	public function get_percent($category = null) {
 		if (! is_null ( $category )) {
 			$categories = $this->store->get_categories ();
@@ -126,6 +132,11 @@ class mod_groupformation_question_controller {
 		return ($sub / $total) * 100;
 	}
 	
+	/**
+	 * Handles initialization
+	 * 
+	 * @param unknown $userid
+	 */
 	private function init($userid) {
 		if (! $this->store->catalog_table_not_set ()) {
 			$this->numbers = $this->store->get_numbers ( $this->names );
@@ -134,6 +145,11 @@ class mod_groupformation_question_controller {
 		$this->status = $this->user_manager->get_answering_status( $userid );
 	}
 	
+	/**
+	 * Sets internal page number
+	 * 
+	 * @param unknown $category
+	 */
 	private function set_internal_number($category) {
 		if ($category != "") {
 			$this->currentCategoryPosition = $this->store->get_position ( $category );

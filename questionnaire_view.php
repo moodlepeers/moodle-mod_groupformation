@@ -32,9 +32,9 @@ require_once (dirname ( __FILE__ ) . '/classes/questionnaire/Save.php');
 
 // Read URL params
 $id = optional_param ( 'id', 0, PARAM_INT ); // Course Module ID
-                                          // $g = optional_param('g', 0, PARAM_INT); // groupformation instance ID
+                                             // $g = optional_param('g', 0, PARAM_INT); // groupformation instance ID
 $url_category = optional_param ( 'category', '', PARAM_TEXT ); // category name
-                                                          
+                                                               
 // Import jQuery and js file
 groupformation_add_jquery ( $PAGE, 'survey_functions.js' );
 
@@ -50,7 +50,7 @@ $userid = $USER->id;
 
 $data = new mod_groupformation_data ();
 $store = new mod_groupformation_storage_manager ( $groupformation->id );
-$user_manager = new mod_groupformation_user_manager($groupformation->id);
+$user_manager = new mod_groupformation_user_manager ( $groupformation->id );
 
 $scenario = $store->get_scenario ();
 $names = $store->get_categories ();
@@ -82,24 +82,19 @@ $PAGE->set_url ( '/mod/groupformation/questionnaire_view.php', array (
 $PAGE->set_title ( format_string ( $groupformation->name ) );
 $PAGE->set_heading ( format_string ( $course->fullname ) );
 
-// // Conditions to show the intro can change to look for own settings or whatever.
-// if ($groupformation->intro) {
-// echo $OUTPUT->box(format_module_intro('groupformation', $groupformation, $cm->id), 'generalbox mod_introbox', 'groupformationintro');
-// }
-
 $direction = 1;
 if (isset ( $_POST ["direction"] )) {
 	$direction = $_POST ["direction"];
 }
 
 // --- Mathevorkurs
-//$go = true;
+// $go = true;
 // ---
 
 $inArray = in_array ( $category, $names );
 
 if (has_capability ( 'mod/groupformation:onlystudent', $context ) && ! has_capability ( 'mod/groupformation:editsettings', $context )) {
-	$status = $user_manager->get_answering_status ( $userid );	
+	$status = $user_manager->get_answering_status ( $userid );
 	if ($status == 0 || $status == - 1) {
 		if ($inArray) {
 			
@@ -112,15 +107,6 @@ if (has_capability ( 'mod/groupformation:onlystudent', $context ) && ! has_capab
 						$save->save ( $_POST [$temp], $i );
 					}
 				}
-				/*
-				 * }else if($category == 'grade'){
-				 * for($i = 1; $i<=$number; $i++){
-				 * $temp = $category . $i;
-				 * if(isset($_POST[$temp]) && $_POST[$temp] != 0){
-				 * $save->save($_POST[$temp], $i);
-				 * }
-				 * }
-				 */
 			} else {
 				for($i = 1; $i <= $number; $i ++) {
 					$temp = $category . $i;
@@ -129,11 +115,10 @@ if (has_capability ( 'mod/groupformation:onlystudent', $context ) && ! has_capab
 					}
 				}
 			}
-			
 			// --- Mathevorkurs
-			//if ($user_manager->get_number_of_answers ( $userid, $category ) != $number) {
-			//	$go = false;
-			//}
+			// if ($user_manager->get_number_of_answers ( $userid, $category ) != $number) {
+			// $go = false;
+			// }
 			// ---
 		}
 	}
@@ -161,9 +146,9 @@ if (($available || $isTeacher) && ($category == '' || $inArray)) {
 	if ($direction == 0) {
 		$questionnaire->go_back ();
 	} else {
-	//if (! $go) {
-	//		$questionnaire->goNotOn ();
-	//	}
+		// if (! $go) {
+		// $questionnaire->goNotOn ();
+		// }
 	}
 	
 	$questionnaire->print_page ();
