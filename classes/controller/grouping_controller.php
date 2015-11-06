@@ -413,7 +413,7 @@ class mod_groupformation_grouping_controller {
 			
 			$statisticsView->assign ( 'performance', $this->job->performance_index );
 			$statisticsView->assign ( 'numbOfGroups', count ( $this->groups_store->get_generated_groups () ) );
-			$statisticsView->assign ( 'maxSize', $this->store->get_group_size () );
+			$statisticsView->assign ( 'maxSize', $this->store->get_max_members () );
 		} else {
 			$statisticsView->setTemplate ( 'grouping_no_data' );
 			$statisticsView->assign ( 'grouping_no_data', get_string ( 'no_data_to_display', 'groupformation' ) );
@@ -465,7 +465,7 @@ class mod_groupformation_grouping_controller {
 	 * Sets the array with incompleted groups
 	 */
 	private function set_incomplete_groups() {
-		$maxSize = $this->store->get_group_size ();
+		$maxSize = $this->store->get_max_members ();
 		
 		foreach ( $this->groups as $key => $value ) {
 			$usersIDs = $this->groups_store->get_users_for_generated_group ( $key );

@@ -700,15 +700,51 @@ class mod_groupformation_storage_manager {
 	}
 	
 	/**
-	 * Returns group size
+	 * Returns group size as set in settings
 	 *
 	 * @return mixed
 	 */
-	public function get_group_size() {
+	public function get_max_members() {
 		global $DB;
 		return $DB->get_field ( 'groupformation', 'maxmembers', array (
 				'id' => $this->groupformationid 
 		) );
+	}
+	
+	/**
+	 * Returns number of groups as set in settings
+	 * 
+	 * @return mixed
+	 */
+	public function get_max_groups(){
+		global $DB;
+		return $DB->get_field ( 'groupformation', 'maxgroups', array (
+				'id' => $this->groupformationid 
+		) );
+	}
+
+	/**
+	 * Returns option if students with no answers should be exluded in formation
+	 * 
+	 * @return boolean
+	 */
+	public function get_grouping_setting() {
+		global $DB;
+		return $DB->get_field ( 'groupformation', 'onlyactivestudents', array (
+				'id' => $this->groupformationid
+		) );
+	}
+	
+	/**
+	 * Returns the chosen option if whether group size or the number of group is fixed in settings
+	 * 
+	 * @return mixed
+	 */
+	public function get_group_option(){
+		global $DB;
+		return boolval($DB->get_field ( 'groupformation', 'groupoption', array (
+				'id' => $this->groupformationid
+		) ));
 	}
 	
 	/**
@@ -780,12 +816,6 @@ class mod_groupformation_storage_manager {
 		$categories = $this->get_categories ();
 		$numbers = $this->get_numbers ( $categories );
 		return array_sum ( $numbers );
-	}
-	public function get_grouping_setting() {
-		global $DB;
-		return $DB->get_field ( 'groupformation', 'onlyactivestudents', array (
-				'id' => $this->groupformationid 
-		) );
 	}
 	public function get_email_setting() {
 		global $DB;
