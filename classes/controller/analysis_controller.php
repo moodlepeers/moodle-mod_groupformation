@@ -29,7 +29,6 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
-require_once ($CFG->dirroot . '/mod/groupformation/classes/util/submit_infos.php');
 class mod_groupformation_analysis_controller {
 	private $groupformationid;
 	private $store = NULL;
@@ -42,7 +41,6 @@ class mod_groupformation_analysis_controller {
 	private $time_now;
 	// private $activity_status_info;
 	// private $activity_status_info_extend;
-	private $analyse_infos = NULL;
 	private $test;
 	private $state;
 	
@@ -60,7 +58,7 @@ class mod_groupformation_analysis_controller {
 		
 		$this->determineStatus ();
 		
-		$this->analyse_infos = new mod_groupformation_submit_infos ( $groupformationid );
+		#$this->analyse_infos = new mod_groupformation_submit_infos ( $groupformationid );
 	}
 	
 	/**
