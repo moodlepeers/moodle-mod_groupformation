@@ -239,6 +239,7 @@ class mod_groupformation_student_import_export_controller {
 		
 // 		var_dump ( $all_records );
 		$DB->insert_records('groupformation_answer', $all_records);
+		$this->user_manager->set_answer_count($userid);
 	}
 	
 	/**

@@ -135,15 +135,27 @@ class mod_groupformation_user_manager {
 	 */
 	public function set_answer_count($userid) {
 		global $DB;
-		$record = $DB->get_record ( 'groupformation_started', array (
+		if ($record = $DB->get_record ( 'groupformation_started', array (
 				'groupformation' => $this->groupformationid,
 				'userid' => $userid 
-		) );
-		$record->answer_count = $DB->count_records ( 'groupformation_answer', array (
-				'groupformation' => $this->groupformationid,
-				'userid' => $userid 
-		) );
-		$DB->update_record ( 'groupformation_started', $record );
+		) )) {
+			$record->answer_count = $DB->count_records ( 'groupformation_answer', array (
+					'groupformation' => $this->groupformationid,
+					'userid' => $userid 
+			) );
+			$DB->update_record ( 'groupformation_started', $record );
+		} else {
+			$this->change_status ( $userid );
+			$record = $DB->get_record ( 'groupformation_started', array (
+					'groupformation' => $this->groupformationid,
+					'userid' => $userid 
+			) );
+			$record->answer_count = $DB->count_records ( 'groupformation_answer', array (
+					'groupformation' => $this->groupformationid,
+					'userid' => $userid 
+			) );
+			$DB->update_record ( 'groupformation_started', $record );
+		}
 	}
 	
 	/**
