@@ -364,7 +364,7 @@ class mod_groupformation_data {
 	 * @param string $scenario        	
 	 * @return multitype:string
 	 */
-	public function getExtraLabel($label, $scenario = null) {
+	public function get_extra_label($label, $scenario = null) {
 		if ($label == 'fam') {
 			return $this->FamExtra_LABEL;
 		}
@@ -389,7 +389,7 @@ class mod_groupformation_data {
 	 * @param string $groupformationid        	
 	 * @return multitype:multitype:string
 	 */
-	public function getCategorySet($scenario, $groupformationid = null) {
+	public function get_category_set($scenario, $groupformationid = null) {
 		$array = $this->CATEGORY_SETS [$scenario];
 		if ($groupformationid != null) {
 			$store = new mod_groupformation_storage_manager ( $groupformationid );
@@ -441,7 +441,7 @@ class mod_groupformation_data {
 	 * @param string $groupformationid        	
 	 * @return multitype:multitype:string
 	 */
-	public function getCriterionSet($scenario, $groupformationid = null) {
+	public function get_criterion_set($scenario, $groupformationid = null) {
 		$array = $this->CRITERION_SETS [$scenario];
 		if ($groupformationid != null) {
 			$store = new mod_groupformation_storage_manager ( $groupformationid );
@@ -479,7 +479,7 @@ class mod_groupformation_data {
 	 * @param unknown $scenario        	
 	 * @return multitype:multitype:number
 	 */
-	public function getMinValSet($scenario) {
+	public function get_min_val_set($scenario) {
 		return $this->MINVAL_SETS [$scenario];
 	}
 	
@@ -489,7 +489,7 @@ class mod_groupformation_data {
 	 * @param unknown $scenario        	
 	 * @return multitype:multitype:number
 	 */
-	public function getMaxValSet($scenario) {
+	public function get_max_val_set($scenario) {
 		return $this->MAXVAL_SETS [$scenario];
 	}
 	

@@ -131,8 +131,6 @@ class mod_groupformation_participant_parser {
 		
 		$labels = $store->get_label_set ();
 		$homogen = $store->get_homogen_set ();
-		// $minVals = $data->getMinValSet($scenario);
-		// $maxVals = $data->getMaxValSet($scenario);
 		
 		// var_dump ( $labels, $homogen );
 		
@@ -261,7 +259,7 @@ class mod_groupformation_participant_parser {
 				// Behandlung von Big5 heterogen
 				if ($label == 'big5_heterogen') {
 					$bigTemp = $big5 [0]; // siehe init von $big5
-					$l = $data->getExtraLabel ( $label, $scenario );
+					$l = $data->get_extra_label ( $label, $scenario );
 					$p = 0;
 					$h = $homogen [$label];
 					// erstellen der detailierten Labels f�r die verschiedene Big5's
@@ -284,7 +282,7 @@ class mod_groupformation_participant_parser {
 				if ($label == 'big5_homogen') {
 					$bigTemp = $big5 [1]; // siehe init von $Big5
 					
-					$l = $data->getExtraLabel ( $label );
+					$l = $data->get_extra_label ( $label );
 					$p = 0;
 					$h = $homogen [$label];
 					// erstellen der detailierten Labels f�r die verschiedene Big5's
@@ -306,7 +304,7 @@ class mod_groupformation_participant_parser {
 				// Behandlung von FAM
 				if ($label == 'fam') {
 					$famTemp = $calculator->getFAM ( $user );
-					$l = $data->getExtraLabel ( $label );
+					$l = $data->get_extra_label ( $label );
 					$p = 0;
 					$h = $homogen [$label];
 					foreach ( $l as $ls ) {
@@ -327,7 +325,7 @@ class mod_groupformation_participant_parser {
 				// Behandlung von Learning
 				if ($label == 'learning') {
 					$learnTemp = $calculator->getLearn ( $user );
-					$l = $data->getExtraLabel ( $label );
+					$l = $data->get_extra_label ( $label );
 					$p = 0;
 					$h = $homogen [$label];
 					foreach ( $l as $ls ) {

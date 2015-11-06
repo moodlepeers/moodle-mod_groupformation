@@ -141,4 +141,47 @@ class mod_groupformation_util {
 		return $stats;
 	}
 	
+	/**
+	 * Returns stats about answered questionnaires
+	 * 
+	 * @param unknown $groupformationid
+	 * @return multitype:number
+	 */
+	public static function get_infos($groupformationid) {
+		$user_manager = new mod_groupformation_user_manager ( $groupformationid );
+		$store = new mod_groupformation_storage_manager ( $groupformationid );
+	
+		$total_answer_count = $store->get_total_number_of_answers ();
+	
+		$stats = array ();
+	
+		$context = groupformation_get_context ( $groupformationid );
+		$students = get_enrolled_users ( $context, 'mod/groupformation:onlystudent' );
+		$student_count = count ( $students );
+	
+		$stats [] = $student_count;
+	
+		$started = $user_manager->get_started ();
+		$started_count = count ( $started );
+	
+		$stats [] = $started_count;
+	
+		$completed = $user_manager->get_completed ();
+		$completed_count = count ( $completed );
+	
+		$stats [] = $completed_count;
+	
+		$no_missing_answers = $user_manager->get_completed_by_answer_count ();
+		$no_missing_answers_count = count ( $no_missing_answers );
+	
+		$stats [] = $no_missing_answers_count;
+	
+		$missing_answers = $user_manager->get_not_completed_but_submitted ();
+		$missing_answers_count = count ( $missing_answers );
+	
+		$stats [] = $missing_answers_count;
+	
+		return $stats;
+	}
+	
 }

@@ -623,7 +623,6 @@ function groupformation_save_more_infos($groupformation, $init) {
 	
 	// speicher mir zusätzliche Daten ab
 	$store = new mod_groupformation_storage_manager ( $groupformation->id );
-	$data = new mod_groupformation_data ();
 	
 	// Vorwissen ind Arrayform
 	$knowledgearray = array ();
@@ -637,7 +636,7 @@ function groupformation_save_more_infos($groupformation, $init) {
 		$topicsarray = explode ( "\n", $groupformation->topiclines );
 	}
 	
-	$names = $data->getCategorySet ( $store->get_scenario () );
+	$names = $store->get_categories();
 	
 	if ($init) {
 		

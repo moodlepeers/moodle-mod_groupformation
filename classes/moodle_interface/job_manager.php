@@ -211,11 +211,11 @@ class mod_groupformation_job_manager {
 		if (count ( $enrolled_students ) <= 0)
 			return null;
 		
-		$um = new mod_groupformation_user_manager ( $groupformationid );
+		$user_manager = new mod_groupformation_user_manager ( $groupformationid );
 		
-		$all_answers = array_keys ( $um->get_completed_by_answer_count ( null, 'userid' ) );
+		$all_answers = array_keys ( $user_manager->get_completed_by_answer_count ( null, 'userid' ) );
 		
-		$some_answers = array_keys ( $um->get_not_completed_by_answer_count ( null, 'userid' ) );
+		$some_answers = array_keys ( $user_manager->get_not_completed_by_answer_count ( null, 'userid' ) );
 		
 		$diff = array_diff ( $enrolled_students, $all_answers );
 		$no_or_some_answers = array_unique ( array_merge ( $diff, $some_answers ) );

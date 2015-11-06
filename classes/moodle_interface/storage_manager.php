@@ -394,7 +394,7 @@ class mod_groupformation_storage_manager {
 	 * @return multitype:multitype:string
 	 */
 	public function get_categories() {
-		$category_set = $this->data->getCategorySet ( $this->get_scenario () );
+		$category_set = $this->data->get_category_set ( $this->get_scenario () );
 		$categories = array ();
 		foreach ( $category_set as $category ) {
 			if ($this->get_number ( $category ) > 0) {
