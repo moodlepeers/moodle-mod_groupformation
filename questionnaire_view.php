@@ -27,7 +27,7 @@ require_once (dirname ( __FILE__ ) . '/locallib.php');
 require_once (dirname ( __FILE__ ) . '/classes/util/define_file.php');
 require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/storage_manager.php');
 require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/user_manager.php');
-require_once (dirname ( __FILE__ ) . '/classes/questionnaire/questionaire.php');
+require_once (dirname ( __FILE__ ) . '/classes/questionnaire/questionnaire.php');
 require_once (dirname ( __FILE__ ) . '/classes/questionnaire/Save.php');
 
 // Read URL params
