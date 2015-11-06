@@ -27,7 +27,7 @@ require_once (dirname ( __FILE__ ) . '/locallib.php');
 require_once (dirname ( __FILE__ ) . '/classes/util/define_file.php');
 require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/storage_manager.php');
 require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/user_manager.php');
-require_once (dirname ( __FILE__ ) . '/classes/questionnaire/questionnaire.php');
+require_once (dirname ( __FILE__ ) . '/classes/controller/questionnaire_controller.php');
 require_once (dirname ( __FILE__ ) . '/classes/questionnaire/Save.php');
 
 // Read URL params
@@ -138,20 +138,21 @@ if (($available || $isTeacher) && ($category == '' || $inArray)) {
 	
 	echo $OUTPUT->header ();
 	
+	
 	// Print the tabs.
 	require ('tabs.php');
 	
-	$questionnaire = new mod_groupformation_questionnaire ( $cm->id, $groupformation->id, get_string ( 'language', 'groupformation' ), $userid, $category, $context );
-	
+// 	$questionnaire = new mod_groupformation_questionnaire ( $cm->id, $groupformation->id, get_string ( 'language', 'groupformation' ), $userid, $category, $context );
+	$questionnaire_controller = new mod_groupformation_questionnaire_controller($groupformation->id, get_string ( 'language', 'groupformation' ), $userid, $category, $cm->id);
 	if ($direction == 0) {
-		$questionnaire->go_back ();
+		$questionnaire_controller->go_back ();
 	} else {
 		// if (! $go) {
-		// $questionnaire->goNotOn ();
+		// $questionnaire_controller->goNotOn ();
 		// }
 	}
 	
-	$questionnaire->print_page ();
+	$questionnaire_controller->print_page ();
 } else if (! $available || $category == 'no') {
 	
 	if (isset ( $_POST ["action"] ) && $_POST ["action"] == 1) {
