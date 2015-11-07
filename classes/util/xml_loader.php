@@ -135,17 +135,4 @@
 			}
 			
 		}
-		
-		// wandle den xml String aus der Datenbank (Feld options) in ein array
-		public function xml_to_array($xmlContent){
-// 			var_dump($xmlContent);
-			//$xml = simplexml_load_file($xmlContent);
-			$xml = simplexml_load_string($xmlContent);
-			$optionArray = array();
-			foreach ($xml->OPTION as $option){
-				$optionArray[] = trim($option);
-			}
-			
-			return $optionArray;
-		}
 	}

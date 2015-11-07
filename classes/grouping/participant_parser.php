@@ -24,9 +24,10 @@ require_once ($CFG->dirroot . '/lib/groupal/classes/Criteria/SpecificCriterion.p
 require_once ($CFG->dirroot . '/lib/groupal/classes/Participant.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/criterion_calculator.php');
 class mod_groupformation_participant_parser {
-	private $groupformationID;
-	public function __construct($groupformationID) {
-		$this->groupformationID = $groupformationID;
+	private $groupformationid;
+	
+	public function __construct($groupformationid) {
+		$this->groupformationid = $groupformationid;
 	}
 	
 	/**
@@ -43,22 +44,13 @@ class mod_groupformation_participant_parser {
 			$position = 0;
 			$participant = null;
 			
-			// var_dump($labels);
 			foreach ( $labels as $label ) {
 				$value = $user->$label;
-				// var_dump($label);
-				// var_dump($value);
 				$count = count ( $value );
 				$homogen = $value ["homogen"];
 				unset ( $value ["homogen"] );
-				// var_dump($value);
-				// on key "minVal" is the minValue
-				// on key "maxVal is the maxValue
 				$minVal = 0.0;
 				$maxVal = 1.0;
-				// unset($value["minVal"]);
-				// unset($value["maxVal"]);
-				// all remaining $value values are indexed array values
 				
 				/*
 				 * Sprache: Es soll ein 2-dim Vektor rauskommen. (HOMOGEN zu matchen)
@@ -85,11 +77,6 @@ class mod_groupformation_participant_parser {
 				}
 				
 				$criterion = new SpecificCriterion ( $label, $value, $minVal, $maxVal, $homogen, $weight );
-				// var_dump($criterion);
-				// $criterion = new Criterion();
-				// $criterion->setName($label);
-				// $criterion->setValues($user->$label);
-				// $criterion->setIsHomogeneous($user->homogen);
 				if ($position == 0) {
 					$participant = new Participant ( array (
 							$criterion 
@@ -99,7 +86,6 @@ class mod_groupformation_participant_parser {
 				}
 				$position ++;
 			}
-			// var_dump($participant->getCriteria());
 			$participants [] = $participant;
 		}
 		
@@ -119,20 +105,16 @@ class mod_groupformation_participant_parser {
 		
 		$starttime = microtime ( true );
 		
-		$groupformationid = $this->groupformationID;
+		$groupformationid = $this->groupformationid;
 		
 		$store = new mod_groupformation_storage_manager ( $groupformationid );
 		
 		$scenario = $store->get_scenario ();
 		
-		// self::handle_complete_questionaires($groupformationid);
-		
 		$data = new mod_groupformation_data ();
 		
 		$labels = $store->get_label_set ();
 		$homogen = $store->get_homogen_set ();
-		
-		// var_dump ( $labels, $homogen );
 		
 		$calculator = new mod_groupformation_criterion_calculator ( $groupformationid );
 		
@@ -382,13 +364,13 @@ class mod_groupformation_participant_parser {
 	public function build_empty_participants($users) {
 		$starttime = microtime ( true );
 		$participants = array ();
-		foreach ( $users as $user ) {
-			$participant = new Participant ( null, $user );
+		foreach ( $users as $userid ) {
+			$participant = new Participant ( null, $userid );
 			$participants [] = $participant;
 		}
 		$endtime = microtime ( true );
 		$comptime = $endtime - $starttime;
-		groupformation_info ( null, $this->groupformationID, 'building empty participants needed ' . $comptime . 'ms' );
+		groupformation_info ( null, $this->groupformationid, 'building empty participants needed ' . $comptime . 'ms' );
 		return $participants;
 	}
 }

@@ -184,4 +184,19 @@ class mod_groupformation_util {
 		return $stats;
 	}
 	
+	/**
+	 * Converts OPTIONS xml to array
+	 * 
+	 * @param unknown $xml_content
+	 * @return multitype:string
+	 */
+	public static function xml_to_array($xml_content){
+		$xml = simplexml_load_string($xml_content);
+		$optionArray = array();
+		foreach ($xml->OPTION as $option){
+			$optionArray[] = trim($option);
+		}
+		return $optionArray;
+	}
+	
 }

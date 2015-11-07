@@ -29,7 +29,7 @@ require_once ($CFG->dirroot . '/mod/groupformation/classes/questionnaire/dropdow
 require_once ($CFG->dirroot . '/mod/groupformation/classes/questionnaire/question_table_header.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
-require_once ($CFG->dirroot . '/mod/groupformation/classes/util/xml_loader.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 
 if (! defined ( 'MOODLE_INTERNAL' )) {
@@ -44,7 +44,6 @@ class mod_groupformation_questionnaire_controller {
 	private $groupformationid;
 	private $store;
 	private $user_manager;
-	private $xml;
 	private $scenario;
 	private $lang;
 	private $userid;
@@ -70,7 +69,6 @@ class mod_groupformation_questionnaire_controller {
 		$this->cmid = $cmid;
 		$this->store = new mod_groupformation_storage_manager ( $groupformationid );
 		$this->user_manager = new mod_groupformation_user_manager ( $groupformationid );
-		$this->xml = new mod_groupformation_xml_loader ();
 		$this->scenario = $this->store->get_scenario ();
 		$this->categories = $this->store->get_categories ();
 		$this->numberOfCategory = count ( $this->categories );
@@ -220,7 +218,7 @@ class mod_groupformation_questionnaire_controller {
 			if ($this->is_knowledge () || $this->is_topics ()) {
 				// ---------------------------------------------------------------------------------------------------------
 				$temp = $this->store->get_knowledge_or_topic_values ( $this->current_category );
-				$values = $this->xml->xml_to_array ( '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>' );
+				$values = mod_groupformation_util::xml_to_array ( '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>' );
 				
 				$text = '';
 				
@@ -335,7 +333,7 @@ class mod_groupformation_questionnaire_controller {
 			
 			$question [] = $record->type;
 			$question [] = $record->question;
-			$question [] = $this->xml->xml_to_array ( '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $record->options . ' </OPTIONS>' );
+			$question [] = mod_groupformation_util::xml_to_array ( '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $record->options . ' </OPTIONS>' );
 			
 			if ($this->hasAnswer) {
 				$answer = $this->user_manager->get_single_answer ( $this->userid, $this->current_category, $i );
