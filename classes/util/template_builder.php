@@ -38,7 +38,7 @@ class mod_groupformation_template_builder{
      *
      * @param String $template Name des Templates.
      */
-    public function setTemplate($template = 'default'){
+    public function set_template($template = 'default'){
         $this->template = $template;
     }
 
@@ -49,7 +49,7 @@ class mod_groupformation_template_builder{
      * 						über steTemplate() zugewiesen wurde).
      * @return string Der Output des Templates.
      */
-    public function loadTemplate(){
+    public function load_template(){
         $tpl = $this->template;
         // Pfad zum Template erstellen & überprüfen ob das Template existiert.
         $file = $this->path . DIRECTORY_SEPARATOR . $tpl . '.php';

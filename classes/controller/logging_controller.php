@@ -121,14 +121,4 @@ class mod_groupformation_logging_controller {
 		
 		$DB->insert_record ( self::LOGGING_TABLE_NAME, $log_entry );
 	}
-	
-	/**
-	 * Checks if message is valid
-	 *
-	 * @param string $message        	
-	 * @return boolean
-	 */
-	private function isValidMessage($message) {
-		return key_exists ( $message, $this->MESSAGES ) && $this->MESSAGES [$message] <= self::LOGGING_LEVEL;
-	}
 }

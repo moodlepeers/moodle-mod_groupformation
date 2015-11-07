@@ -29,6 +29,7 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
+
 class mod_groupformation_analysis_controller {
 	private $groupformationid;
 	private $store = NULL;
@@ -39,8 +40,6 @@ class mod_groupformation_analysis_controller {
 	private $start_time;
 	private $end_time;
 	private $time_now;
-	// private $activity_status_info;
-	// private $activity_status_info_extend;
 	private $test;
 	private $state;
 	
@@ -56,9 +55,7 @@ class mod_groupformation_analysis_controller {
 		$this->user_manager = new mod_groupformation_user_manager ( $groupformationid );
 		$this->view = new mod_groupformation_template_builder ();
 		
-		$this->determineStatus ();
-		
-		#$this->analyse_infos = new mod_groupformation_submit_infos ( $groupformationid );
+		$this->determine_status ();
 	}
 	
 	/**
@@ -82,7 +79,7 @@ class mod_groupformation_analysis_controller {
 	 */
 	private function load_status() {
 		$statusAnalysisView = new mod_groupformation_template_builder ();
-		$statusAnalysisView->setTemplate ( 'analysis_status' );
+		$statusAnalysisView->set_template ( 'analysis_status' );
 		
 		$this->activity_time = $this->store->get_time ();
 		
@@ -133,7 +130,7 @@ class mod_groupformation_analysis_controller {
 				$statusAnalysisView->assign ( 'analysis_status_info', get_string ( 'analysis_status_info3', 'groupformation' ) );
 		}
 		
-		return $statusAnalysisView->loadTemplate ();
+		return $statusAnalysisView->load_template ();
 	}
 	
 	/**
@@ -147,7 +144,7 @@ class mod_groupformation_analysis_controller {
 		$questionnaire_StatisticNumbers = mod_groupformation_util::get_infos ($this->groupformationid);
 		
 		$statisticsAnalysisView = new mod_groupformation_template_builder ();
-		$statisticsAnalysisView->setTemplate ( 'analysis_statistics' );
+		$statisticsAnalysisView->set_template ( 'analysis_statistics' );
 		$context = $PAGE->context;
 		$count = count ( get_enrolled_users ( $context, 'mod/groupformation:onlystudent' ) );
 		
@@ -157,7 +154,7 @@ class mod_groupformation_analysis_controller {
 		$statisticsAnalysisView->assign ( 'statistics_submited_incomplete', $questionnaire_StatisticNumbers [4] );
 		$statisticsAnalysisView->assign ( 'statistics_submited_complete', $questionnaire_StatisticNumbers [3] );
 		
-		return $statisticsAnalysisView->loadTemplate ();
+		return $statisticsAnalysisView->load_template ();
 	}
 	
 	/**
@@ -166,17 +163,17 @@ class mod_groupformation_analysis_controller {
 	 * @return string
 	 */
 	public function display() {
-		$this->view->setTemplate ( 'wrapper_analysis' );
+		$this->view->set_template ( 'wrapper_analysis' );
 		$this->view->assign ( 'analysis_name', $this->store->get_name () );
 		$this->view->assign ( 'analysis_status_template', $this->load_status () );
 		$this->view->assign ( 'analysis_statistics_template', $this->load_statistics () );
-		return $this->view->loadTemplate ();
+		return $this->view->load_template ();
 	}
 	
 	/**
 	 * Determine status variables
 	 */
-	public function determineStatus() {
+	public function determine_status() {
 		global $DB;
 		$this->questionnaire_available = $this->store->is_questionnaire_available ();
 		$this->state = 1;

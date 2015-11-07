@@ -641,7 +641,7 @@ function groupformation_save_more_infos($groupformation, $init) {
 	if ($init) {
 		
 		$xmlLoader = new mod_groupformation_xml_loader ();
-		$xmlLoader->setStore ( $store );
+		$xmlLoader->set_store ( $store );
 		// wenn die Datenbank noch komplett leer ist, speicher einfach alle Infos aus den xml's ab
 		// ansonsten überprüfe zu jeder Kategorie die Versionsnummer und ändere bei bedarf
 		if ($store->catalog_table_not_set ()) {
@@ -649,7 +649,7 @@ function groupformation_save_more_infos($groupformation, $init) {
 			foreach ( $names as $category ) {
 				
 				if ($category != 'topic' && $category != 'knowledge') {
-					$array = $xmlLoader->saveData ( $category );
+					$array = $xmlLoader->save_data ( $category );
 					$version = $array [0] [0];
 					$numbers = $array [0] [1];
 					$store->add_catalog_version ( $category, $numbers, $version, TRUE );

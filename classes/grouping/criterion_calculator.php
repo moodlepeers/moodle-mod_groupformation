@@ -80,7 +80,7 @@
 		 * @param int $userId
 		 * @return string
 		 */
-		public function getGeneralValues($userId){
+		public function get_general_values($userId){
 			$value = $this->user_manager->get_single_answer($userId, 'general', 1);
 			
 			$question = $this->store->get_catalog_question(1, 'general', 'en');
@@ -118,12 +118,12 @@
 		 * @param int $userId
 		 * @return multitype:multitype:mixed float
 		 */
-		public function knowledgeAll($userId){
+		public function knowledge_all($userId){
 			$knowledge = array();
 			$position = 0;
 			
 			$temp = $this->store->get_knowledge_or_topic_values('knowledge');
- 			$values = $this->xml->xmlToArray('<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>');
+ 			$values = $this->xml->xml_to_array('<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>');
 					
 			foreach($values as $question){
 			//	$t = array();
@@ -141,7 +141,7 @@
 		 * @param int $userId
 		 * @return float
 		 */
-		public function knowledgeAverage($userId){
+		public function knowledge_average($userId){
 			$total = 0;
 			$answers = $this->user_manager->get_answers($userId, 'knowledge');
 			$numberOfQuestion = count($answers);
@@ -164,10 +164,10 @@
 		 * @param int $userId
 		 * @return float
 		 */
-		public function getGrade($position, $userId){
+		public function get_grade($position, $userId){
 			$question = $this->store->get_catalog_question($position, 'grade');
 			$o = $question->options;
-			$options = $this->xml->xmlToArray('<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $o . ' </OPTIONS>');
+			$options = $this->xml->xml_to_array('<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $o . ' </OPTIONS>');
 			$answer = $this->user_manager->get_single_answer($userId, 'grade', $position);
 			//return floatval($options[$answer-1]);
 			return floatval($answer/$this->store->get_max_option_of_catalog_question($position));
@@ -180,7 +180,7 @@
 		 * @param int $userId
 		 * @return float
 		 */
-		public function getPoints($position, $userId){
+		public function get_points($position, $userId){
 			$question = $this->store->get_catalog_question($position, 'points');
 			$max = $this->store->get_max_points();
 			$answer = $this->user_manager->get_single_answer($userId, 'points', $position);
@@ -196,7 +196,7 @@
 		 * @param unknown $users
 		 * @return number
 		 */
-		public function getGradePosition($users){
+		public function get_grade_position($users){
 			$varianz = 0;
 			$position = 1;
 			$total = 0;
@@ -212,7 +212,7 @@
 				$totalOptions = $this->store->get_max_option_of_catalog_question($i, 'grade');
 		
 				//
-				$dist = $this->getInitialArray($totalOptions);
+				$dist = $this->get_initial_array($totalOptions);
 		
 				// iterates over answers for grade questions
 				foreach($answers as $answer){
@@ -264,7 +264,7 @@
 		 * @param unknown $users
 		 * @return number
 		 */
-		public function getPointsPosition($users){
+		public function get_points_position($users){
 			$varianz = 0;
 			$position = 1;
 			$total = 0;
@@ -283,7 +283,7 @@
 				$totalOptions = $this->store->get_max_option_of_catalog_question($i, 'points');
 				
 				// 
-				$dist = $this->getInitialArray($totalOptions);
+				$dist = $this->get_initial_array($totalOptions);
 				
 				// iterates over answers for grade questions
 				foreach($answers as $answer){
@@ -333,7 +333,7 @@
 		 * @param unknown $total
 		 * @return multitype:array
 		 */
-		private function getInitialArray($total){
+		private function get_initial_array($total){
 			$array = array();
 			for($i = 0; $i<$total; $i++){
 				$array[] = 0;
@@ -347,8 +347,7 @@
 		 * @param unknown $userId
 		 * @return multitype:array
 		 */
-		//array aus zwei arrays -> Position 0 heterogen | Position 1 homogen
-		public function getBig5($userId){
+		public function get_big_5($userId){
 			
 			$array = array();
 			$heterogen = array();
@@ -381,16 +380,6 @@
 			$array[] = $heterogen;
 			$array[] = $homogen;
 			return $array;
-// 			//Extraversion
-// 			$temp = 0;
-// 			$temp = $temp + $this->inverse(1, $category, 
-// 					$this->user_manager->get_single_answer($this->userId, $category, 1));
-// 			$temp = $temp + $this->user_manager->get_single_answer($this->userId, $category, 6);
-			
-// 			$array[] = $temp;
-			
-			
-			
 		}
 		
 		/**
@@ -400,7 +389,7 @@
 		 * @param unknown $userId
 		 * @return multitype:array
 		 */
-		public function getFAM($userId){
+		public function get_fam($userId){
 				
 			$array = array();
 			$category = 'motivation';
@@ -425,7 +414,7 @@
 		 * @param unknown $userId
 		 * @return multitype:array
 		 */
-		public function getLearn($userId){
+		public function get_learn($userId){
 		
 			$array = array();
 			$category = 'learning';
@@ -451,7 +440,7 @@
 		 * @param unknown $userId
 		 * @return multitype:number // later on this will be an array
 		 */
-		public function getTeam($userId){
+		public function get_team($userId){
 			$total = 0.0;
 			$maxValue = 0.0;
 			$array = array();

@@ -175,13 +175,13 @@ class mod_groupformation_grouping_controller {
 	 */
 	public function display() {
 		$this->determine_status ();
-		$this->view->setTemplate ( 'wrapper_grouping' );
+		$this->view->set_template ( 'wrapper_grouping' );
 		$this->view->assign ( 'grouping_title', $this->store->get_name () );
 		$this->view->assign ( 'grouping_settings', $this->load_settings () );
 		$this->view->assign ( 'grouping_statistics', $this->load_statistics () );
 		$this->view->assign ( 'grouping_incomplete_groups', $this->load_incomplete_groups () );
 		$this->view->assign ( 'grouping_generated_groups', $this->load_generated_groups () );
-		return $this->view->loadTemplate ();
+		return $this->view->load_template ();
 	}
 	
 	/**
@@ -192,7 +192,7 @@ class mod_groupformation_grouping_controller {
 	private function load_settings() {
 		global $PAGE;
 		$settingsGroupsView = new mod_groupformation_template_builder ();
-		$settingsGroupsView->setTemplate ( 'grouping_settings' );
+		$settingsGroupsView->set_template ( 'grouping_settings' );
 		
 		switch ($this->view_state) {
 			case 0 :
@@ -396,7 +396,7 @@ class mod_groupformation_grouping_controller {
 		$settingsGroupsView->assign ( 'cmid', $this->cmid);
 		$settingsGroupsView->assign ( 'onlyactivestudents', $this->store->get_grouping_setting() );
 
-		return $settingsGroupsView->loadTemplate ();
+		return $settingsGroupsView->load_template ();
 	}
 	
 	/**
@@ -409,16 +409,16 @@ class mod_groupformation_grouping_controller {
 		
 		if ($this->view_state == 4 || $this->view_state == 5) {
 			
-			$statisticsView->setTemplate ( 'grouping_statistics' );
+			$statisticsView->set_template ( 'grouping_statistics' );
 			
 			$statisticsView->assign ( 'performance', $this->job->performance_index );
 			$statisticsView->assign ( 'numbOfGroups', count ( $this->groups_store->get_generated_groups () ) );
 			$statisticsView->assign ( 'maxSize', $this->store->get_max_members () );
 		} else {
-			$statisticsView->setTemplate ( 'grouping_no_data' );
+			$statisticsView->set_template ( 'grouping_no_data' );
 			$statisticsView->assign ( 'grouping_no_data', get_string ( 'no_data_to_display', 'groupformation' ) );
 		}
-		return $statisticsView->loadTemplate ();
+		return $statisticsView->load_template ();
 	}
 	
 	/**
@@ -432,7 +432,7 @@ class mod_groupformation_grouping_controller {
 		if ($this->view_state == 4 || $this->view_state == 5) {
 			$this->set_incomplete_groups ();
 			
-			$incompleteGroupsView->setTemplate ( 'grouping_incomplete_groups' );
+			$incompleteGroupsView->set_template ( 'grouping_incomplete_groups' );
 			
 			foreach ( $this->incomplete_groups as $key => $value ) {
 				
@@ -444,10 +444,10 @@ class mod_groupformation_grouping_controller {
 				) );
 			}
 		} else {
-			$incompleteGroupsView->setTemplate ( 'grouping_no_data' );
+			$incompleteGroupsView->set_template ( 'grouping_no_data' );
 			$incompleteGroupsView->assign ( 'grouping_no_data', get_string ( 'no_data_to_display', 'groupformation' ) );
 		}
-		return $incompleteGroupsView->loadTemplate ();
+		return $incompleteGroupsView->load_template ();
 	}
 	
 	/**
@@ -488,7 +488,7 @@ class mod_groupformation_grouping_controller {
 		
 		if ($this->view_state == 4 || $this->view_state == 5) {
 			
-			$generatedGroupsView->setTemplate ( 'grouping_generated_groups' );
+			$generatedGroupsView->set_template ( 'grouping_generated_groups' );
 			
 			foreach ( $this->groups as $key => $value ) {
 				
@@ -502,10 +502,10 @@ class mod_groupformation_grouping_controller {
 				) );
 			}
 		} else {
-			$generatedGroupsView->setTemplate ( 'grouping_no_data' );
+			$generatedGroupsView->set_template ( 'grouping_no_data' );
 			$generatedGroupsView->assign ( 'grouping_no_data', get_string ( 'no_data_to_display', 'groupformation' ) );
 		}
-		return $generatedGroupsView->loadTemplate ();
+		return $generatedGroupsView->load_template ();
 	}
 	
 	/**

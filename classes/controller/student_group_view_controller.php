@@ -54,7 +54,7 @@ class mod_groupformation_student_group_view_controller {
         $this->groups_store = new mod_groupformation_groups_manager ( $groupformationid );
 
         $this->view = new mod_groupformation_template_builder ();
-        $this->view->setTemplate('wrapper_student_groupview');
+        $this->view->set_template('wrapper_student_groupview');
     }
 
     /**
@@ -111,6 +111,6 @@ class mod_groupformation_student_group_view_controller {
         $this->view->assign('members', $this->array);
         $this->view->assign('group_info', $this->group_info);
         $this->view->assign('group_info_contact', $this->group_info_contact);
-        return $this->view->loadTemplate();
+        return $this->view->load_template();
     }
 }

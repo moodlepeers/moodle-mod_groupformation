@@ -100,7 +100,7 @@ class mod_groupformation_student_import_export_controller {
 		global $DB;
 		
 		$this->view = new mod_groupformation_template_builder ();
-		$this->view->setTemplate ( 'wrapper_student_import_export' );
+		$this->view->set_template ( 'wrapper_student_import_export' );
 		
 		$export_description = get_string ( 'export_description_no', 'groupformation' );
 		$export_button = false;
@@ -136,7 +136,7 @@ class mod_groupformation_student_import_export_controller {
 		) );
 		$this->view->assign ( 'import_form', $url->out () );
 		$this->view->assign ( 'import_button', $import_button );
-		return $this->view->loadTemplate ();
+		return $this->view->load_template ();
 	}
 	
 	/**
@@ -147,16 +147,16 @@ class mod_groupformation_student_import_export_controller {
 	 */
 	public function render_form($mform, $show_warning = false) {
 		$this->view = new mod_groupformation_template_builder ();
-		$this->view->setTemplate ( 'student_import_form_header' );
+		$this->view->set_template ( 'student_import_form_header' );
 		$this->view->assign ( 'file_error', $show_warning );
 		
-		echo $this->view->loadTemplate ();
+		echo $this->view->load_template ();
 		
 		$mform->display ();
 		
 		$this->view = new mod_groupformation_template_builder ();
-		$this->view->setTemplate ( 'student_import_form_footer' );
-		echo $this->view->loadTemplate ();
+		$this->view->set_template ( 'student_import_form_footer' );
+		echo $this->view->load_template ();
 	}
 	
 	/**
@@ -167,7 +167,7 @@ class mod_groupformation_student_import_export_controller {
 	 */
 	public function render_result($successful){
 		$this->view = new mod_groupformation_template_builder ();
-		$this->view->setTemplate ( 'student_import_result' );
+		$this->view->set_template ( 'student_import_result' );
 		
 		$url = new moodle_url ( '/mod/groupformation/import_view.php', array (
 				'id' => $this->cmid
@@ -181,7 +181,7 @@ class mod_groupformation_student_import_export_controller {
 		$this->view->assign('import_form',$url->out());
 		$this->view->assign ( 'successful', $successful );
 		
-		echo $this->view->loadTemplate ();
+		echo $this->view->load_template ();
 		
 	}
 	

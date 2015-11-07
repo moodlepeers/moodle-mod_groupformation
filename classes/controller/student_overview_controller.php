@@ -90,7 +90,7 @@ class mod_groupformation_student_overview_controller {
 			case - 1 : // Questionaire is available but not started yet
 				$this->groupformation_info = mod_groupformation_util::get_info_text_for_student ( true, $this->groupformationid );
 				$this->groupformation_state_info = array (
-						$this->availabilityState () 
+						$this->get_availability_state () 
 				);
 				$this->buttons_info = get_string ( 'questionaire_press_to_begin', 'groupformation' );
 				$this->buttons_array = array (
@@ -107,7 +107,7 @@ class mod_groupformation_student_overview_controller {
 			case 0 : // Questionaire is available, started, not finished and not submited
 				$this->groupformation_info = mod_groupformation_util::get_info_text_for_student ( false, $this->groupformationid );
 				$this->groupformation_state_info = array (
-						$this->availabilityState (),
+						$this->get_availability_state (),
 						get_string ( 'questionaire_not_submitted', 'groupformation' ) 
 				);
 				$this->buttons_info = get_string ( 'questionaire_press_continue_submit', 'groupformation' );
@@ -168,7 +168,7 @@ class mod_groupformation_student_overview_controller {
 			case 4 : // The Questionaire is not available, but groups are not build yet
 				$this->groupformation_info = mod_groupformation_util::get_info_text_for_student ( true, $this->groupformationid );
 				$this->groupformation_state_info = array (
-						$this->availabilityState () 
+						$this->get_availability_state () 
 				);
 				$this->buttons_info = '';
 				$this->buttons_array = array ();
@@ -231,7 +231,7 @@ class mod_groupformation_student_overview_controller {
 	 * @return string
 	 *
 	 */
-	private function availabilityState() {
+	private function get_availability_state() {
 		$a = $this->store->get_time ();
 		$begin = intval ( $a ['start_raw'] );
 		$end = intval ( $a ['end_raw'] );
@@ -280,7 +280,7 @@ class mod_groupformation_student_overview_controller {
 		$this->determine_status ();
 		$this->determine_view ();
 		
-		$this->view->setTemplate ( 'wrapper_students_overview' );
+		$this->view->set_template ( 'wrapper_students_overview' );
 		$this->view->assign ( 'cmid', $this->cmid );
 		
 		$this->view->assign ( 'student_overview_title', $this->store->get_name () );
@@ -289,10 +289,10 @@ class mod_groupformation_student_overview_controller {
 		
 		if ($this->view_state == 0) {
 			$survey_stats_view = new mod_groupformation_template_builder ();
-			$survey_stats_view->setTemplate ( 'students_overview_survey_states' );
+			$survey_stats_view->set_template ( 'students_overview_survey_states' );
 			$survey_stats_view->assign ( 'survey_states', $this->survey_states_array );
 			$survey_stats_view->assign ( 'questionaire_answer_stats', $this->survey_states_title );
-			$this->view->assign ( 'student_overview_survey_state_temp', $survey_stats_view->loadTemplate () );
+			$this->view->assign ( 'student_overview_survey_state_temp', $survey_stats_view->load_template () );
 		} else {
 			$this->view->assign ( 'student_overview_survey_state_temp', '' );
 		}
@@ -300,15 +300,15 @@ class mod_groupformation_student_overview_controller {
 		if ($this->view_state == - 1 || $this->view_state == 0) {
 			$survey_options_view = new mod_groupformation_template_builder ();
 			$survey_options_view->assign ( 'cmid', $this->cmid );
-			$survey_options_view->setTemplate ( 'students_overview_options' );
+			$survey_options_view->set_template ( 'students_overview_options' );
 			$survey_options_view->assign ( 'buttons', $this->buttons_array );
 			$survey_options_view->assign ( 'buttons_infos', $this->buttons_info );
-			$this->view->assign ( 'student_overview_survey_options', $survey_options_view->loadTemplate () );
+			$this->view->assign ( 'student_overview_survey_options', $survey_options_view->load_template () );
 		} else {
 			$this->view->assign ( 'student_overview_survey_options', '' );
 		}
 		
-		return $this->view->loadTemplate ();
+		return $this->view->load_template ();
 	}
 }
 

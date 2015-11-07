@@ -139,13 +139,13 @@ class mod_groupformation_participant_parser {
 		$gradeP = - 1;
 		// determines the question position with maximal variance (if grade is in questionnaire)
 		if (in_array ( 'grade', $labels )) {
-			$gradeP = $calculator->getGradePosition ( $users );
+			$gradeP = $calculator->get_grade_position ( $users );
 		}
 		
 		$pointsP = - 1;
 		// determines the question position with maximal variance (if grade is in questionnaire)
 		if (in_array ( 'points', $labels )) {
-			$pointsP = $calculator->getPointsPosition ( $users );
+			$pointsP = $calculator->get_points_position ( $users );
 		}
 		
 		$array = array ();
@@ -165,7 +165,7 @@ class mod_groupformation_participant_parser {
 			// computes BIG5 if in labels (first part is heterogen, second part is homogen)
 			$big5 = array ();
 			if (in_array ( 'big5_homogen', $labels ) || in_array ( 'big5_heterogen', $labels )) {
-				$big5 = $calculator->getBig5 ( $user );
+				$big5 = $calculator->get_big_5 ( $user );
 			}
 			
 			$labelPosition = 0;
@@ -175,7 +175,7 @@ class mod_groupformation_participant_parser {
 				
 				// handles 'general'
 				if ($label == 'general') {
-					$values = $calculator->getGeneralValues ( $user );
+					$values = $calculator->get_general_values ( $user );
 					foreach ( $values as $v ) {
 						$value [] = $v;
 					}
@@ -194,7 +194,7 @@ class mod_groupformation_participant_parser {
 				
 				// Behandlung des Vorwissens ( alle Vorwissenwerte in einem Array zusammengefasst )
 				if ($label == 'knowledge_heterogen') {
-					$value = $calculator->knowledgeAll ( $user );
+					$value = $calculator->knowledge_all ( $user );
 					$value ["homogen"] = $homogen [$label];
 					// $value["minVal"] = $minVals[$label];
 					// $value["maxVal"] = $maxVals[$label];
@@ -210,7 +210,7 @@ class mod_groupformation_participant_parser {
 				
 				// Behandlung des Vorwissen ( Durchschnittwert )
 				if ($label == 'knowledge_homogen') {
-					$value [] = $calculator->knowledgeAverage ( $user );
+					$value [] = $calculator->knowledge_average ( $user );
 					$value ["homogen"] = $homogen [$label];
 					// $value["minVal"] = $minVals[$label];
 					// $value["maxVal"] = $maxVals[$label];
@@ -231,7 +231,7 @@ class mod_groupformation_participant_parser {
 				if ($label == 'grade') {
 					// falls eine Varianz berechnet wurde
 					if ($gradeP != - 1) {
-						$value [] = $calculator->getGrade ( $gradeP, $user );
+						$value [] = $calculator->get_grade ( $gradeP, $user );
 						$value ["homogen"] = $homogen [$label];
 						// $value["minVal"] = $minVals[$label];
 						// $value["maxVal"] = $maxVals[$label];
@@ -245,7 +245,7 @@ class mod_groupformation_participant_parser {
 				if ($label == 'points') {
 					// falls eine Varianz berechnet wurde
 					if ($pointsP != - 1) {
-						$value [] = $calculator->getPoints ( $pointsP, $user );
+						$value [] = $calculator->get_points ( $pointsP, $user );
 						$value ["homogen"] = $homogen [$label];
 						// $value["minVal"] = $minVals[$label];
 						// $value["maxVal"] = $maxVals[$label];
@@ -303,7 +303,7 @@ class mod_groupformation_participant_parser {
 				
 				// Behandlung von FAM
 				if ($label == 'fam') {
-					$famTemp = $calculator->getFAM ( $user );
+					$famTemp = $calculator->get_fam ( $user );
 					$l = $data->get_extra_label ( $label );
 					$p = 0;
 					$h = $homogen [$label];
@@ -324,7 +324,7 @@ class mod_groupformation_participant_parser {
 				
 				// Behandlung von Learning
 				if ($label == 'learning') {
-					$learnTemp = $calculator->getLearn ( $user );
+					$learnTemp = $calculator->get_learn ( $user );
 					$l = $data->get_extra_label ( $label );
 					$p = 0;
 					$h = $homogen [$label];
@@ -345,7 +345,7 @@ class mod_groupformation_participant_parser {
 				
 				// Behandlung von Teamorientierung
 				if ($label == 'team') {
-					$value = $calculator->getTeam ( $user );
+					$value = $calculator->get_team ( $user );
 					$value ["homogen"] = $homogen [$label];
 					// $value["minVal"] = $minVals[$label];
 					// $value["maxVal"] = $maxVals[$label];

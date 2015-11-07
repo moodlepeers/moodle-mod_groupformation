@@ -220,7 +220,7 @@ class mod_groupformation_questionnaire_controller {
 			if ($this->is_knowledge () || $this->is_topics ()) {
 				// ---------------------------------------------------------------------------------------------------------
 				$temp = $this->store->get_knowledge_or_topic_values ( $this->current_category );
-				$values = $this->xml->xmlToArray ( '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>' );
+				$values = $this->xml->xml_to_array ( '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>' );
 				
 				$text = '';
 				
@@ -335,7 +335,7 @@ class mod_groupformation_questionnaire_controller {
 			
 			$question [] = $record->type;
 			$question [] = $record->question;
-			$question [] = $this->xml->xmlToArray ( '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $record->options . ' </OPTIONS>' );
+			$question [] = $this->xml->xml_to_array ( '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $record->options . ' </OPTIONS>' );
 			
 			if ($this->hasAnswer) {
 				$answer = $this->user_manager->get_single_answer ( $this->userid, $this->current_category, $i );
