@@ -22,11 +22,11 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *         
  */
-require_once ($CFG->dirroot . '/mod/groupformation/classes/questionnaire/elements/radio_question.php');
-require_once ($CFG->dirroot . '/mod/groupformation/classes/questionnaire/elements/topics_table.php');
-require_once ($CFG->dirroot . '/mod/groupformation/classes/questionnaire/elements/range_question.php');
-require_once ($CFG->dirroot . '/mod/groupformation/classes/questionnaire/elements/dropdown_question.php');
-require_once ($CFG->dirroot . '/mod/groupformation/classes/questionnaire/elements/question_table_header.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/questionnaire/radio_question.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/questionnaire/topics_table.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/questionnaire/range_question.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/questionnaire/dropdown_question.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/questionnaire/question_table_header.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/xml_loader.php');
