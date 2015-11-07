@@ -28,7 +28,6 @@ require_once (dirname ( __FILE__ ) . '/classes/util/define_file.php');
 require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/storage_manager.php');
 require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/user_manager.php');
 require_once (dirname ( __FILE__ ) . '/classes/controller/questionnaire_controller.php');
-require_once (dirname ( __FILE__ ) . '/classes/questionnaire/Save.php');
 
 // Read URL params
 $id = optional_param ( 'id', 0, PARAM_INT ); // Course Module ID
@@ -98,20 +97,19 @@ if (has_capability ( 'mod/groupformation:onlystudent', $context ) && ! has_capab
 	if ($status == 0 || $status == - 1) {
 		if ($inArray) {
 			
-			$save = new mod_groupformation_save ( $groupformation->id, $userid, $category );
 			if ($category == 'knowledge') {
 				for($i = 1; $i <= $number; $i ++) {
 					$tempValidateRangeValue = $category . $i . '_valid';
 					$temp = $category . $i;
 					if (isset ( $_POST [$temp] ) && $_POST [$tempValidateRangeValue] == '1') {
-						$save->save ( $_POST [$temp], $i );
+						$user_manager->save_answer ($userid, $category, $_POST [$temp], $i );
 					}
 				}
 			} else {
 				for($i = 1; $i <= $number; $i ++) {
 					$temp = $category . $i;
 					if (isset ( $_POST [$temp] )) {
-						$save->save ( $_POST [$temp], $i );
+						$user_manager->save_answer ($userid,$category,$_POST [$temp], $i );
 					}
 				}
 			}
