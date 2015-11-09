@@ -31,7 +31,6 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
-
 class mod_groupformation_criterion_calculator {
 	private $store;
 	private $user_manager;
@@ -217,7 +216,7 @@ class mod_groupformation_criterion_calculator {
 		
 		$temp = $this->store->get_knowledge_or_topic_values ( 'knowledge' );
 		$xml_content = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>';
-		$options = mod_groupformation_util::xml_to_array($xml_content);
+		$options = mod_groupformation_util::xml_to_array ( $xml_content );
 		
 		foreach ( $options as $option ) {
 			$value = floatval ( $this->user_manager->get_single_answer ( $userid, 'knowledge', $option_number ) );
@@ -543,5 +542,17 @@ class mod_groupformation_criterion_calculator {
 		}
 		
 		return $array;
+	}
+	
+	/**
+	 * Returns topic answers as a criterion
+	 *
+	 * @param number $userid        	
+	 * @return TopicCriterion
+	 */
+	public function get_topic($userid) {
+		$choices = $this->user_manager->get_answers ( $userid, 'topic', 'questionid', 'answer' );
+		
+		return new TopicCriterion ( array_keys ( $choices ) );
 	}
 }

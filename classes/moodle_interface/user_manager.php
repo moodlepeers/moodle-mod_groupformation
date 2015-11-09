@@ -320,14 +320,14 @@ class mod_groupformation_user_manager {
 	 * @param string $category
 	 * @return array
 	 */
-	public function get_answers($userid, $category) {
+	public function get_answers($userid, $category,$sorted_by=null,$fieldset='*') {
 		global $DB;
 	
 		return $DB->get_records ( 'groupformation_answer', array (
 				'groupformation' => $this->groupformationid,
 				'userid' => $userid,
 				'category' => $category
-		) );
+		),$sorted_by,$fieldset);
 	}
 	
 	/**

@@ -21,13 +21,21 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once ($CFG->dirroot . '/lib/groupal/classes/Criteria/SpecificCriterion.php');
+require_once ($CFG->dirroot . '/lib/groupal/classes/Criteria/TopicCriterion.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/Participant.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/criterion_calculator.php');
 class mod_groupformation_participant_parser {
 	private $groupformationid;
+	private $user_manager;
+	private $criterion_calculator;
+	private $store;
 	
 	public function __construct($groupformationid) {
 		$this->groupformationid = $groupformationid;
+		$this->store = new mod_groupformation_storage_manager ( $groupformationid );
+		$this->user_manager = new mod_groupformation_user_manager ( $groupformationid );
+		$this->criterion_calculator = new mod_groupformation_criterion_calculator ( $groupformationid );
 	}
 	
 	/**
@@ -68,6 +76,7 @@ class mod_groupformation_participant_parser {
 				 * ((Dieser Code sollte sicher nach dem Code stehen, der entscheided ob die
 				 * Noten/Punkte-Angaben überhaupt als Kriterium an GroupAL übergeben werden oder
 				 * ignoriert werden.))
+				 *
 				 */
 				
 				$weight = 1;
@@ -93,6 +102,44 @@ class mod_groupformation_participant_parser {
 	}
 	
 	/**
+	 * Builds all participants wrt topic choices
+	 *
+	 * @param array $users        	
+	 * @return multitype:|multitype:multitype:
+	 */
+	public function build_topic_participants($users) {
+		if (count ( $users ) == 0) {
+			return array ();
+		}
+		
+		$starttime = microtime ( true );
+		
+		// ----------------------------------------------------------------------------------------
+		
+		$participants = array ();
+		
+		foreach ( $users as $userid ) {
+			
+			$criterion = $this->criterion_calculator->get_topic ( $userid );
+			
+			$participant = new Participant ( array (
+					$criterion 
+			), $userid );
+			
+			$participants [$userid] = $participant;
+		}
+		
+		// ----------------------------------------------------------------------------------------
+		
+		$endtime = microtime ( true );
+		$comptime = $endtime - $starttime;
+		
+		groupformation_info ( null, $this->groupformationid, 'building topic participants needed ' . $comptime . 'ms' );
+		
+		return $participants;
+	}
+	
+	/**
 	 * Builds Participants array using a parser (at the end)
 	 *
 	 * @param unknown $users        	
@@ -105,29 +152,24 @@ class mod_groupformation_participant_parser {
 		
 		$starttime = microtime ( true );
 		
-		$groupformationid = $this->groupformationid;
-		
-		$store = new mod_groupformation_storage_manager ( $groupformationid );
-		
-		$scenario = $store->get_scenario ();
+		$scenario = $this->store->get_scenario ();
 		
 		$data = new mod_groupformation_data ();
 		
-		$labels = $store->get_label_set ();
-		$homogen = $store->get_homogen_set ();
+		$labels = $this->store->get_label_set ();
+		$homogen = $this->store->get_homogen_set ();
 		
-		$calculator = new mod_groupformation_criterion_calculator ( $groupformationid );
 		
 		$gradeP = - 1;
 		// determines the question position with maximal variance (if grade is in questionnaire)
 		if (in_array ( 'grade', $labels )) {
-			$gradeP = $calculator->get_grade_position ( $users );
+			$gradeP = $this->criterion_calculator->get_grade_position ( $users );
 		}
 		
 		$pointsP = - 1;
 		// determines the question position with maximal variance (if grade is in questionnaire)
 		if (in_array ( 'points', $labels )) {
-			$pointsP = $calculator->get_points_position ( $users );
+			$pointsP = $this->criterion_calculator->get_points_position ( $users );
 		}
 		
 		$array = array ();
@@ -147,7 +189,7 @@ class mod_groupformation_participant_parser {
 			// computes BIG5 if in labels (first part is heterogen, second part is homogen)
 			$big5 = array ();
 			if (in_array ( 'big5_homogen', $labels ) || in_array ( 'big5_heterogen', $labels )) {
-				$big5 = $calculator->get_big_5 ( $user );
+				$big5 = $this->criterion_calculator->get_big_5 ( $user );
 			}
 			
 			$labelPosition = 0;
@@ -157,7 +199,7 @@ class mod_groupformation_participant_parser {
 				
 				// handles 'general'
 				if ($label == 'general') {
-					$values = $calculator->get_general_values ( $user );
+					$values = $this->criterion_calculator->get_general_values ( $user );
 					foreach ( $values as $v ) {
 						$value [] = $v;
 					}
@@ -176,7 +218,7 @@ class mod_groupformation_participant_parser {
 				
 				// Behandlung des Vorwissens ( alle Vorwissenwerte in einem Array zusammengefasst )
 				if ($label == 'knowledge_heterogen') {
-					$value = $calculator->knowledge_all ( $user );
+					$value = $this->criterion_calculator->knowledge_all ( $user );
 					$value ["homogen"] = $homogen [$label];
 					// $value["minVal"] = $minVals[$label];
 					// $value["maxVal"] = $maxVals[$label];
@@ -192,7 +234,7 @@ class mod_groupformation_participant_parser {
 				
 				// Behandlung des Vorwissen ( Durchschnittwert )
 				if ($label == 'knowledge_homogen') {
-					$value [] = $calculator->knowledge_average ( $user );
+					$value [] = $this->criterion_calculator->knowledge_average ( $user );
 					$value ["homogen"] = $homogen [$label];
 					// $value["minVal"] = $minVals[$label];
 					// $value["maxVal"] = $maxVals[$label];
@@ -213,7 +255,7 @@ class mod_groupformation_participant_parser {
 				if ($label == 'grade') {
 					// falls eine Varianz berechnet wurde
 					if ($gradeP != - 1) {
-						$value [] = $calculator->get_grade ( $gradeP, $user );
+						$value [] = $this->criterion_calculator->get_grade ( $gradeP, $user );
 						$value ["homogen"] = $homogen [$label];
 						// $value["minVal"] = $minVals[$label];
 						// $value["maxVal"] = $maxVals[$label];
@@ -227,7 +269,7 @@ class mod_groupformation_participant_parser {
 				if ($label == 'points') {
 					// falls eine Varianz berechnet wurde
 					if ($pointsP != - 1) {
-						$value [] = $calculator->get_points ( $pointsP, $user );
+						$value [] = $this->criterion_calculator->get_points ( $pointsP, $user );
 						$value ["homogen"] = $homogen [$label];
 						// $value["minVal"] = $minVals[$label];
 						// $value["maxVal"] = $maxVals[$label];
@@ -285,7 +327,7 @@ class mod_groupformation_participant_parser {
 				
 				// Behandlung von FAM
 				if ($label == 'fam') {
-					$famTemp = $calculator->get_fam ( $user );
+					$famTemp = $this->criterion_calculator->get_fam ( $user );
 					$l = $data->get_extra_label ( $label );
 					$p = 0;
 					$h = $homogen [$label];
@@ -306,7 +348,7 @@ class mod_groupformation_participant_parser {
 				
 				// Behandlung von Learning
 				if ($label == 'learning') {
-					$learnTemp = $calculator->get_learn ( $user );
+					$learnTemp = $this->criterion_calculator->get_learn ( $user );
 					$l = $data->get_extra_label ( $label );
 					$p = 0;
 					$h = $homogen [$label];
@@ -327,7 +369,7 @@ class mod_groupformation_participant_parser {
 				
 				// Behandlung von Teamorientierung
 				if ($label == 'team') {
-					$value = $calculator->get_team ( $user );
+					$value = $this->criterion_calculator->get_team ( $user );
 					$value ["homogen"] = $homogen [$label];
 					// $value["minVal"] = $minVals[$label];
 					// $value["maxVal"] = $maxVals[$label];
@@ -346,12 +388,11 @@ class mod_groupformation_participant_parser {
 			$userPosition ++;
 		}
 		
-		// var_dump($array);
 		$res = $this->parse ( $array, $totalLabel );
 		
 		$endtime = microtime ( true );
 		$comptime = $endtime - $starttime;
-		groupformation_info ( null, $groupformationid, 'building groupal participants needed ' . $comptime . 'ms' );
+		groupformation_info ( null, $this->groupformationid, 'building groupal participants needed ' . $comptime . 'ms' );
 		
 		return $res;
 	}
@@ -359,7 +400,7 @@ class mod_groupformation_participant_parser {
 	/**
 	 * Generates participants without criterions
 	 *
-	 * @param unknown $users        	
+	 * @param array $users        	
 	 */
 	public function build_empty_participants($users) {
 		$starttime = microtime ( true );
