@@ -816,6 +816,29 @@ function xmldb_groupformation_upgrade($oldversion) {
 		upgrade_mod_savepoint(true, 2015102400, 'groupformation');
 	}
 	
+	if ($oldversion < 2015110900) {
+	
+		// Define field topic_id to be added to groupformation_groups.
+		$table = new xmldb_table('groupformation_groups');
+		$field = new xmldb_field('topic_id', XMLDB_TYPE_INTEGER, '20', null, null, null, null, 'created');
+	
+		// Conditionally launch add field topic_id.
+		if (!$dbman->field_exists($table, $field)) {
+			$dbman->add_field($table, $field);
+		}
+	
+		// Define field topic_name to be added to groupformation_groups.
+		$table = new xmldb_table('groupformation_groups');
+		$field = new xmldb_field('topic_name', XMLDB_TYPE_TEXT, null, null, null, null, null, 'topic_id');
+		
+		// Conditionally launch add field topic_name.
+		if (!$dbman->field_exists($table, $field)) {
+			$dbman->add_field($table, $field);
+		}
+		
+		// Groupformation savepoint reached.
+		upgrade_mod_savepoint(true, 2015110900, 'groupformation');
+	}
 	
 	
 	return true;

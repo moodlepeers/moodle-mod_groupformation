@@ -245,7 +245,6 @@ class mod_groupformation_user_manager {
 		return $this->get_answering_status ( $userid ) == 1;
 	}
 	
-
 	/**
 	 * Determines the number of answered questions of a user (in all categories or a specified category)
 	 *
@@ -265,19 +264,19 @@ class mod_groupformation_user_manager {
 		}
 		
 		return $DB->count_records ( 'groupformation_answer', array (
-					'groupformation' => $this->groupformationid,
-					'userid' => $userid
-			) );
+				'groupformation' => $this->groupformationid,
+				'userid' => $userid 
+		) );
 	}
 	
 	/**
 	 * Determines whether user has answered every question or not
 	 *
-	 * @param int $userid
+	 * @param int $userid        	
 	 * @return boolean
 	 */
 	public function has_answered_everything($userid) {
-		$store = new mod_groupformation_storage_manager($this->groupformationid);
+		$store = new mod_groupformation_storage_manager ( $this->groupformationid );
 		
 		$categories = $store->get_categories ();
 		$sum = array_sum ( $store->get_numbers ( $categories ) );
@@ -295,12 +294,12 @@ class mod_groupformation_user_manager {
 		global $DB;
 		if (is_null ( $categories ) && is_null ( $userid )) {
 			return ! ($DB->count_records ( 'groupformation_answer', array (
-					'groupformation' => $this->groupformationid
+					'groupformation' => $this->groupformationid 
 			) ) == 0);
 		} elseif (is_null ( $categories ) && ! is_null ( $userid )) {
 			return ! ($DB->count_records ( 'groupformation_answer', array (
 					'groupformation' => $this->groupformationid,
-					'userid' => $userid
+					'userid' => $userid 
 			) ) == 0);
 		} else {
 			foreach ( $categories as $category ) {
@@ -312,119 +311,144 @@ class mod_groupformation_user_manager {
 		}
 		return false;
 	}
-
+	
 	/**
 	 * Returns all answers of a specific user in a specific category
 	 *
-	 * @param int $userid
-	 * @param string $category
+	 * @param int $userid        	
+	 * @param string $category        	
 	 * @return array
 	 */
-	public function get_answers($userid, $category,$sorted_by=null,$fieldset='*') {
+	public function get_answers($userid, $category, $sorted_by = null, $fieldset = '*') {
 		global $DB;
-	
+		
 		return $DB->get_records ( 'groupformation_answer', array (
 				'groupformation' => $this->groupformationid,
 				'userid' => $userid,
-				'category' => $category
-		),$sorted_by,$fieldset);
+				'category' => $category 
+		), $sorted_by, $fieldset );
 	}
 	
 	/**
 	 * Returns answer of a specific user to a specific question in a specific category
 	 *
-	 * @param int $userid
-	 * @param string $category
-	 * @param int $questionid
+	 * @param int $userid        	
+	 * @param string $category        	
+	 * @param int $questionid        	
 	 * @return int
 	 */
 	public function get_single_answer($userid, $category, $questionid) {
 		global $DB;
-	
+		
 		return $DB->get_field ( 'groupformation_answer', 'answer', array (
 				'groupformation' => $this->groupformationid,
 				'userid' => $userid,
 				'category' => $category,
-				'questionid' => $questionid
+				'questionid' => $questionid 
 		) );
 	}
 	
 	/**
 	 * Saves answer
 	 *
-	 * @param unknown $answer
-	 * @param unknown $position
+	 * @param unknown $answer        	
+	 * @param unknown $position        	
 	 */
-	public function save_answer($userid, $category, $answer, $questionid){
+	public function save_answer($userid, $category, $answer, $questionid) {
 		global $DB;
-		$status = $this->get_answering_status($userid);
+		$status = $this->get_answering_status ( $userid );
 		// if the answer in category "grade"(dropdowns) is default(0) - return without saving
-		if(($category == 'grade' || $category == 'general') && $answer == '0'){
-			/*if($status == -1){
-			 $status = SAVE;
-			 $this->change_status($userid);
-			 }*/
-			return;}
-			else{
-				$answerAlreadyExist = $this->has_answer ( $userid, $category, $questionid );
+		if (($category == 'grade' || $category == 'general') && $answer == '0') {
+			/*
+			 * if($status == -1){
+			 * $status = SAVE;
+			 * $this->change_status($userid);
+			 * }
+			 */
+			return;
+		} else {
+			$answerAlreadyExist = $this->has_answer ( $userid, $category, $questionid );
+			
+			if ($answerAlreadyExist) {
+				$record = $DB->get_record ( 'groupformation_answer', array (
+						'groupformation' => $this->groupformationid,
+						'userid' => $userid,
+						'category' => $category,
+						'questionid' => $questionid 
+				) );
+				$record->answer = $answer;
+				$DB->update_record ( 'groupformation_answer', $record );
+			} else {
+				$record = new stdClass ();
+				$record->groupformation = $this->groupformationid;
 				
-				if ($answerAlreadyExist) {
-					$record = $DB->get_record ( 'groupformation_answer', array (
-							'groupformation' => $this->groupformationid,
-							'userid' => $userid,
-							'category' => $category,
-							'questionid' => $questionid
-					) );
-					$record->answer = $answer;
-					$DB->update_record ( 'groupformation_answer', $record );
-				} else {
-					$record = new stdClass ();
-					$record->groupformation = $this->groupformationid;
-				
-					$record->userid = $userid;
-					$record->category = $category;
-					$record->questionid = $questionid;
-					$record->answer = $answer;
-					$DB->insert_record ( 'groupformation_answer', $record );
-				}
-				
-				if($status == -1){
-					$status = SAVE;
-					$this->change_status($userid);
-				}
-				$this->set_answer_count($userid);
+				$record->userid = $userid;
+				$record->category = $category;
+				$record->questionid = $questionid;
+				$record->answer = $answer;
+				$DB->insert_record ( 'groupformation_answer', $record );
 			}
+			
+			if ($status == - 1) {
+				$status = SAVE;
+				$this->change_status ( $userid );
+			}
+			$this->set_answer_count ( $userid );
+		}
 	}
 	
 	/**
 	 * Returns whether answer of a specific user for a specific question in a specific category exists or not
 	 *
-	 * @param int $userid
-	 * @param string $category
-	 * @param int $questionId
+	 * @param int $userid        	
+	 * @param string $category        	
+	 * @param int $questionId        	
 	 * @return boolean
 	 */
 	public function has_answer($userid, $category, $questionId) {
 		global $DB;
-	
+		
 		return $DB->record_exists ( 'groupformation_answer', array (
 				'groupformation' => $this->groupformationid,
 				'userid' => $userid,
 				'category' => $category,
-				'questionid' => $questionId
+				'questionid' => $questionId 
 		) );
 		;
 	}
-
+	
 	/**
 	 * Returns whether a user has answers in a specific category or not
 	 *
 	 * @return boolean
 	 */
-	public function has_answers($userid,$category) {
+	public function has_answers($userid, $category) {
 		$firstCondition = ($this->get_answering_status ( $userid ) > - 1);
-		$secondCondition = ($this->get_answers( $userid, $category ) > 0);
+		$secondCondition = ($this->get_answers ( $userid, $category ) > 0);
 		return ($firstCondition && $secondCondition);
 	}
 	
+	/**
+	 * Returns the most chosen topics wrt the users
+	 *
+	 * @param number $users        	
+	 */
+	public function get_most_common_topics($number_of_topics) {
+		global $DB;
+		$scores = [ ];
+		for($i = 1; $i <= $number_of_topics; $i ++) {
+			$answers = $DB->get_records('groupformation_answer',array('groupformation'=>$this->groupformationid,'category'=>'topic','questionid'=>$i));
+			$score = 0;
+			foreach ($answers as $answer){
+				$score += $answer->answer;
+			}
+			$scores[]=array('id'=>strval($i),'score'=>$score);
+		}
+		usort($scores, function($a, $b) {
+			return $b['score'] - $a['score'];
+		});
+		
+		$result = array_slice($scores, 0, $number_of_topics);
+		return $result;
+	}
 }

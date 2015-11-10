@@ -725,4 +725,28 @@ class mod_groupformation_storage_manager {
 	public function get_homogen_set() {
 		return $this->data->get_homogen_set ( $this->get_scenario () );
 	}
+
+	/**
+	 * Returns whether 'topic' is a valid category in this instance or not
+	 * @return boolean
+	 */
+	public function ask_for_topics(){
+		global $DB;
+		$evaluationmethod = $DB->get_field ( 'groupformation', 'topics', array (
+				'id' => $this->groupformationid 
+		) );
+		return $evaluationmethod == 1;
+	}
+	
+	/**
+	 * Returns whether 'knowledge' is a valid category in this instance or not
+	 * @return boolean
+	 */
+	public function ask_for_knowledge(){
+		global $DB;
+		$evaluationmethod = $DB->get_field ( 'groupformation', 'knowledge', array (
+				'id' => $this->groupformationid
+		) );
+		return $evaluationmethod == 1;
+	}
 }
