@@ -840,6 +840,20 @@ function xmldb_groupformation_upgrade($oldversion) {
 		upgrade_mod_savepoint(true, 2015110900, 'groupformation');
 	}
 	
+	if ($oldversion < 2015111000) {
+	
+		// Define field group_size to be added to groupformation_groups.
+		$table = new xmldb_table('groupformation_groups');
+		$field = new xmldb_field('group_size', XMLDB_TYPE_INTEGER, '20', null, XMLDB_NOTNULL, null, null, 'groupname');
+	
+		// Conditionally launch add field group_size.
+		if (!$dbman->field_exists($table, $field)) {
+			$dbman->add_field($table, $field);
+		}
+	
+		// Groupformation savepoint reached.
+		upgrade_mod_savepoint(true, 2015111000, 'groupformation');
+	}
 	
 	return true;
 }

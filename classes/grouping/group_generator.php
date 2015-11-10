@@ -41,7 +41,7 @@ class mod_groupformation_group_generator {
 		global $COURSE;
 		
 		$groups_store = new mod_groupformation_groups_manager ( $groupformationid );
-		$groupal_groups = $groups_store->get_generated_groups ();
+		$groupal_groups = $groups_store->get_generated_groups ('id','id, groupname,performance_index,moodlegroupid');
 		
 		if ($groups_store->groups_created ())
 			return false;

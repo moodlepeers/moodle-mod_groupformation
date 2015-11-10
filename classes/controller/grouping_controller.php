@@ -67,7 +67,7 @@ class mod_groupformation_grouping_controller {
 		
 		$this->view = new mod_groupformation_template_builder ();
 		
-		$this->groups = $this->groups_store->get_generated_groups ();
+		$this->groups = $this->groups_store->get_generated_groups ('id, groupname,performance_index,moodlegroupid');
 		
 		$this->job = mod_groupformation_job_manager::get_job ( $this->groupformationid );
 		
@@ -413,7 +413,7 @@ class mod_groupformation_grouping_controller {
 			
 			$statisticsView->assign ( 'performance', $this->job->performance_index );
 			$statisticsView->assign ( 'numbOfGroups', count ( $this->groups_store->get_generated_groups () ) );
-			$statisticsView->assign ( 'maxSize', $this->store->get_max_members () );
+			$statisticsView->assign ( 'maxSize', $this->groups_store->get_max_groups_size() );
 		} else {
 			$statisticsView->set_template ( 'grouping_no_data' );
 			$statisticsView->assign ( 'grouping_no_data', get_string ( 'no_data_to_display', 'groupformation' ) );
