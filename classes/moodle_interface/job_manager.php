@@ -37,6 +37,7 @@ require_once ($CFG->dirroot . '/lib/groupal/classes/Cohort.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/Matcher/GroupALGroupCentricMatcher.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/GroupFormationAlgorithm.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/GroupFormationRandomAlgorithm.php');
+require_once ($CFG->dirroot . '/lib/groupal/classes/GroupFormationTopicAlgorithm.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/Optimizer/GroupALOptimizer.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/ParticipantWriter.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/CohortWriter.php');
@@ -413,7 +414,7 @@ class mod_groupformation_job_manager {
 		);
 		
 		$group_sizes = self::determine_group_size ( $users, $store, $groupformationid );
-		
+		var_dump($group_sizes);
 		// In $group_sizes is an associative array where the key is 0 - (n-1) [id of topic]
 		// and the value is the group size of each topic
 		// var_dump ( $group_sizes );
@@ -433,8 +434,9 @@ class mod_groupformation_job_manager {
 			
 			$starttime = microtime ( true );
 			
-			$gfa = new GroupFormationRandomAlgorithm ( $topic_participants, 7 );
-			// ( $topic_participants, $matcher, 4 ,true);
+			Group::setGroupMembersMaxSize(max($group_sizes));
+			
+			$gfa = new GroupFormationTopicAlgorithm($group_sizes, $topic_participants);
 			$topic_cohort = $gfa->doOneFormation (); // this call takes time...
 			
 			$endtime = microtime ( true );
