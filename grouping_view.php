@@ -60,7 +60,7 @@ require_once (dirname ( __FILE__ ) . '/classes/controller/grouping_controller.ph
 $store = new mod_groupformation_storage_manager ( $groupformation->id );
 
 // set data and viewStatus of groupingView, after possible db update
-$controller = new mod_groupformation_grouping_controller ( $groupformation->id, $cm->id );
+$controller = new mod_groupformation_grouping_controller ( $groupformation->id, $cm );
 
 if ($_POST) {
 	if (isset ( $_POST ['start'] )) {

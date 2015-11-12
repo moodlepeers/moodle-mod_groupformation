@@ -49,15 +49,18 @@ class mod_groupformation_grouping_controller {
 	private $job = NULL;
 	private $view = NULL;
 	private $groups_created;
+	private $max_groups_size;
 	
 	/**
 	 * Creates an instance of grouping_controller for groupformation
 	 *
 	 * @param int $groupformationid        	
 	 */
-	public function __construct($groupformationid, $cmid = null) {
+	public function __construct($groupformationid, $cm = null) {
 		$this->groupformationid = $groupformationid;
-		$this->cmid = $cmid;
+		if(!is_null($cm)){
+			$this->cmid = $cm->id;
+		}
 		
 		$this->store = new mod_groupformation_storage_manager ( $groupformationid );
 		
@@ -70,6 +73,11 @@ class mod_groupformation_grouping_controller {
 		$this->groups = $this->groups_store->get_generated_groups ('id, groupname,performance_index,moodlegroupid');
 		
 		$this->job = mod_groupformation_job_manager::get_job ( $this->groupformationid );
+		if (is_null($this->job)){
+			$groupingid = ($cm->groupmode != 0)?$cm->groupingid:0;
+			mod_groupformation_job_manager::create_job($groupformationid,$groupingid);
+			$this->job = mod_groupformation_job_manager::get_job($this->groupformationid);
+		}
 		
 		$this->determine_status ();
 	}
@@ -115,6 +123,7 @@ class mod_groupformation_grouping_controller {
 		groupformation_info ( $USER->id, $this->groupformationid, 'groupal job queued by course manager/teacher' );
 		
 		$users = $this->handle_complete_questionaires ();
+		$this->job->groupingid = $cm->groupingid;
 		mod_groupformation_job_manager::set_job ( $this->job, "waiting", true );
 		$this->determine_status ();
 		
@@ -410,10 +419,10 @@ class mod_groupformation_grouping_controller {
 		if ($this->view_state == 4 || $this->view_state == 5) {
 			
 			$statisticsView->set_template ( 'grouping_statistics' );
-			
+			$this->max_groups_size = $this->groups_store->get_max_groups_size();
 			$statisticsView->assign ( 'performance', $this->job->performance_index );
 			$statisticsView->assign ( 'numbOfGroups', count ( $this->groups_store->get_generated_groups () ) );
-			$statisticsView->assign ( 'maxSize', $this->groups_store->get_max_groups_size() );
+			$statisticsView->assign ( 'maxSize', $this->max_groups_size );
 		} else {
 			$statisticsView->set_template ( 'grouping_no_data' );
 			$statisticsView->assign ( 'grouping_no_data', get_string ( 'no_data_to_display', 'groupformation' ) );
@@ -465,8 +474,7 @@ class mod_groupformation_grouping_controller {
 	 * Sets the array with incompleted groups
 	 */
 	private function set_incomplete_groups() {
-		$maxSize = $this->store->get_max_members ();
-		
+		$maxSize = $this->max_groups_size;
 		foreach ( $this->groups as $key => $value ) {
 			$usersIDs = $this->groups_store->get_users_for_generated_group ( $key );
 			$size = count ( $usersIDs );

@@ -855,5 +855,21 @@ function xmldb_groupformation_upgrade($oldversion) {
 		upgrade_mod_savepoint(true, 2015111000, 'groupformation');
 	}
 	
+	if ($oldversion < 2015111200) {
+	
+		// Define field groupingid to be added to groupformation_jobs.
+		$table = new xmldb_table('groupformation_jobs');
+		$field = new xmldb_field('groupingid', XMLDB_TYPE_INTEGER, '20', null, XMLDB_NOTNULL, null, null, 'groupformationid');
+	
+		// Conditionally launch add field groupingid.
+		if (!$dbman->field_exists($table, $field)) {
+			$dbman->add_field($table, $field);
+		}
+	
+		// Groupformation savepoint reached.
+		upgrade_mod_savepoint(true, 2015111200, 'groupformation');
+	}
+	
+	
 	return true;
 }

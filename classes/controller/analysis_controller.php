@@ -32,6 +32,7 @@ require_once ($CFG->dirroot . '/mod/groupformation/classes/util/template_builder
 
 class mod_groupformation_analysis_controller {
 	private $groupformationid;
+	private $cm;
 	private $store = NULL;
 	private $user_manager;
 	private $view = NULL;
@@ -48,7 +49,8 @@ class mod_groupformation_analysis_controller {
 	 *
 	 * @param int $groupformationid        	
 	 */
-	public function __construct($groupformationid) {
+	public function __construct($groupformationid,$cm) {
+		$this->cm = $cm;
 		$this->groupformationid = $groupformationid;
 
 		$this->store = new mod_groupformation_storage_manager ( $groupformationid );
@@ -177,8 +179,13 @@ class mod_groupformation_analysis_controller {
 		global $DB;
 		$this->questionnaire_available = $this->store->is_questionnaire_available ();
 		$this->state = 1;
-		$this->job_state = mod_groupformation_job_manager::get_status ( mod_groupformation_job_manager::get_job ( $this->groupformationid ) );
-		
+		$job = mod_groupformation_job_manager::get_job ( $this->groupformationid );
+		if (is_null($job)){
+			$groupingid = ($this->cm->groupmode!=0)?$this->cm->groupingid:0;
+			mod_groupformation_job_manager::create_job($this->groupformationid,$groupingid);
+			$job = mod_groupformation_job_manager::get_job($this->groupformationid);
+		}
+		$this->job_state = mod_groupformation_job_manager::get_status ( $job );
 		$completed_q = count($this->user_manager->get_completed());
 		
 		if ($this->job_state !== 'ready') {

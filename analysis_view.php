@@ -78,7 +78,7 @@ require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/job_
 require_once ($CFG->dirroot . '/mod/groupformation/classes/controller/analysis_controller.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_parser.php');
 
-$controller = new mod_groupformation_analysis_controller ( $groupformation->id );
+$controller = new mod_groupformation_analysis_controller ( $groupformation->id, $cm );
 
 if ($_POST) {
 	if (isset ( $_POST ['start_questionnaire'] )) {
@@ -125,58 +125,32 @@ if ($create_users > 0) {
 
 /* ---------- Job Manager Usage ------------------------- */
 
+$jm = new mod_groupformation_job_manager ();
+$job = null;
+
+$job = $jm::get_job ( $groupformation->id );
+//$jm->reset_job($job);
+// var_dump($jm::get_next_job());
+if (! is_null ( $job )) {
+$result = $jm::do_groupal($job);
+var_dump ( $result );
+// $saved = $jm::save_result($job,$result);
+
+}
+
+/* ---------- / Job Manager Usage ----------------------- */
+
+/* ---------- Grouping Test Space ----------------------- */
 // $jm = new mod_groupformation_job_manager ();
 // $job = null;
 
 // $job = $jm::get_job ( $groupformation->id );
-// //$jm->reset_job($job);
-// // var_dump($jm::get_next_job());
-// if (! is_null ( $job )) {
-// $result = $jm::do_groupal($job);
-// var_dump ( $result );
-// // $saved = $jm::save_result($job,$result);
-
+// $userids = array_keys(groups_get_grouping_members ( $job->groupingid ));
+// foreach ( $userids as $userid ) {
+// 	var_dump ( $userid );
 // }
 
-/* ---------- / Job Manager Usage ----------------------- */
-
-/* ---------- Test Participants for Eduard -------------- */
-
-require_once ($CFG->dirroot . '/lib/groupal/classes/Criteria/SpecificCriterion.php');
-require_once ($CFG->dirroot . '/lib/groupal/classes/Participant.php');
-
-$values = array (
-		2,
-		4,
-		1,
-		5,
-		3,
-		6 
-);
-$participants = array ();
-
-for($i = 1; $i <= 20; $i = $i + 1) {
-	$criterion = new SpecificCriterion ( 'topic', $values, 1, 6, true, 1 );
-	$participant = new Participant ( array (
-			$criterion 
-	), $i );
-	$participants [] = $participant;
-	shuffle ( $values );
-}
-
-// var_dump($participants);
-
-/*
- * Hier kannst du nun sehen wie die aussehen und außerdem kannst du dann deine 
- * Instanz von GroupFormationTopicAlgorithm aufrufen. Ähnlich wie in job_manager::do_groupal.
- */
-
-// $groupsize = 4
-
-// $algorithm = new GroupFormationTopicAlgorithm($participants, $groupsize);
-// $result = $algorithm->doOneFormation();
-
-/* ---------- / Test Participants for Eduard ------------ */
+/* ---------- / Grouping Test Space --------------------- */
 
 echo '<form action="' . htmlspecialchars ( $_SERVER ["PHP_SELF"] ) . '" method="post" autocomplete="off">';
 

@@ -121,8 +121,16 @@ class mod_groupformation_mod_form extends moodleform_mod {
 		// Add standard grading elements.
 		$this->standard_grading_coursemodule_elements ();
 		
+		$features = new stdClass();
+		$features->groups           = true;
+		$features->groupings        = true;
+		$features->groupmembersonly = true;
+		
+		$this->standard_coursemodule_elements($features);
 		// Add standard elements, common to all modules.
-		$this->standard_coursemodule_elements ();
+// 		$this->standard_coursemodule_elements ();
+		
+		$this->apply_admin_defaults();
 		
 		// Add standard buttons, common to all modules.
 		$this->add_action_buttons ();

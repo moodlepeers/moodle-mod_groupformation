@@ -51,13 +51,17 @@ function groupformation_supports($feature) {
 		case FEATURE_MOD_INTRO :
 			return true;
 		case FEATURE_SHOW_DESCRIPTION :
-			return true;
+			return false;
 		case FEATURE_BACKUP_MOODLE2 :
 			return true;
 		case FEATURE_COMPLETION_TRACKS_VIEWS :
 			return true;
-		// case FEATURE_COMPLETION_HAS_RULES :
-		// return true;
+		case FEATURE_GROUPS :
+			return true;
+		case FEATURE_GROUPINGS :
+			return true;
+		case FEATURE_GROUPMEMBERSONLY :
+			return true;
 		default :
 			return null;
 	}
@@ -76,7 +80,7 @@ function groupformation_supports($feature) {
  * @return int The id of the newly inserted groupformation record
  */
 function groupformation_add_instance(stdClass $groupformation, mod_groupformation_mod_form $mform = null) {
-	global $DB, $USER;
+	global $DB, $USER, $PAGE;
 	
 	$groupformation->timecreated = time ();
 	
@@ -96,7 +100,8 @@ function groupformation_add_instance(stdClass $groupformation, mod_groupformatio
 	
 	groupformation_save_more_infos ( $groupformation, TRUE );
 	
-	mod_groupformation_job_manager::create_job ( $groupformation->id );
+	$groupingid = ($PAGE->cm->groupmode != 0) ? $PAGE->cm->groupingid : 0;
+	mod_groupformation_job_manager::create_job ( $groupformation->id, $groupingid );
 	
 	// Log access to page
 	groupformation_info ( $USER->id, $groupformation->id, '<save_settings>' );
@@ -285,6 +290,9 @@ function groupformation_print_recent_mod_activity($activity, $courseid, $detail,
  * Function to be run periodically according to the moodle cron
  * This function searches for things that need to be done, such
  * as sending out mail, toggling flags etc .
+ *
+ *
+ *
  *
  *
  * @return boolean
@@ -493,37 +501,37 @@ function groupformation_pluginfile($course, $cm, $context, $filearea, $args, $fo
 	}
 	
 	// Make sure the user is logged in and has access to the module (plugins that are not course modules should leave out the 'cm' part).
-	require_login($course, true, $cm);
+	require_login ( $course, true, $cm );
 	
 	// Check the relevant capabilities - these may vary depending on the filearea being accessed.
-	if (!has_capability('mod/groupformation:view', $context)) {
+	if (! has_capability ( 'mod/groupformation:view', $context )) {
 		return false;
 	}
 	
 	// Leave this line out if you set the itemid to null in make_pluginfile_url (set $itemid to 0 instead).
-	$itemid = array_shift($args); // The first item in the $args array.
-	
+	$itemid = array_shift ( $args ); // The first item in the $args array.
+	                                 
 	// Use the itemid to retrieve any relevant data records and perform any security checks to see if the
-	// user really does have access to the file in question.
-	
+	                                 // user really does have access to the file in question.
+	                                 
 	// Extract the filename / filepath from the $args array.
-	$filename = array_pop($args); // The last item in the $args array.
-	if (!$args) {
+	$filename = array_pop ( $args ); // The last item in the $args array.
+	if (! $args) {
 		$filepath = '/'; // $args is empty => the path is '/'
 	} else {
-		$filepath = '/'.implode('/', $args).'/'; // $args contains elements of the filepath
+		$filepath = '/' . implode ( '/', $args ) . '/'; // $args contains elements of the filepath
 	}
 	
 	// Retrieve the file from the Files API.
-	$fs = get_file_storage();
-	$file = $fs->get_file($context->id, 'mod_groupformation', $filearea, $itemid, $filepath, $filename);
-	if (!$file) {
+	$fs = get_file_storage ();
+	$file = $fs->get_file ( $context->id, 'mod_groupformation', $filearea, $itemid, $filepath, $filename );
+	if (! $file) {
 		return false; // The file does not exist.
 	}
 	
 	// We can now send the file back to the browser - in this case with a cache lifetime of 1 day and no filtering.
 	// From Moodle 2.3, use send_stored_file instead.
-	send_stored_file($file, 86400, 0, true, $options);
+	send_stored_file ( $file, 86400, 0, true, $options );
 }
 
 /**
@@ -636,7 +644,7 @@ function groupformation_save_more_infos($groupformation, $init) {
 		$topicsarray = explode ( "\n", $groupformation->topiclines );
 	}
 	
-	$names = $store->get_categories();
+	$names = $store->get_categories ();
 	
 	if ($init) {
 		
