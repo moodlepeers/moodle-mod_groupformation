@@ -553,6 +553,7 @@ class mod_groupformation_criterion_calculator {
 	public function get_topic($userid) {
 		$choices = $this->user_manager->get_answers ( $userid, 'topic', 'questionid', 'answer' );
 		
-		return new TopicCriterion ( array_keys ( $choices ) );
+		return new SpecificCriterion("topic", array_keys ( $choices ), 1, count(array_keys ( $choices )), true, 1);
+		#return new TopicCriterion ( array_keys ( $choices ) );
 	}
 }

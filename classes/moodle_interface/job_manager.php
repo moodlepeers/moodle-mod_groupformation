@@ -414,7 +414,8 @@ class mod_groupformation_job_manager {
 		);
 		
 		$group_sizes = self::determine_group_size ( $users, $store, $groupformationid );
-		var_dump($group_sizes);
+		ksort($group_sizes);
+		
 		// In $group_sizes is an associative array where the key is 0 - (n-1) [id of topic]
 		// and the value is the group size of each topic
 		// var_dump ( $group_sizes );
@@ -424,7 +425,7 @@ class mod_groupformation_job_manager {
 		
 		// Build participants
 		$pp = new mod_groupformation_participant_parser ( $groupformationid );
-		$topic_participants = $pp->build_empty_participants ( $topic_users );
+		$topic_participants = $pp->build_topic_participants ( $topic_users );
 		$random_participants = $pp->build_empty_participants ( $incomplete_users );
 		
 		if (count ( $topic_participants ) > 0) {
