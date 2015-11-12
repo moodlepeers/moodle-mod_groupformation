@@ -40,6 +40,7 @@ require_once ($CFG->dirroot . '/lib/groupal/classes/GroupFormationRandomAlgorith
 require_once ($CFG->dirroot . '/lib/groupal/classes/Optimizer/GroupALOptimizer.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/ParticipantWriter.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/CohortWriter.php');
+
 class mod_groupformation_job_manager {
 	
 	/**
@@ -188,7 +189,7 @@ class mod_groupformation_job_manager {
 	/**
 	 * Returns status options placed in define file
 	 */
-	public static function get_status_options() {
+	private static function get_status_options() {
 		$data = new mod_groupformation_data ();
 		return $data->get_job_status_options ();
 	}
@@ -198,7 +199,7 @@ class mod_groupformation_job_manager {
 	 * @param unknown $groupformationid        	
 	 * @return NULL|multitype:multitype: Ambigous <multitype:, unknown>
 	 */
-	public static function get_users($groupformationid, mod_groupformation_storage_manager $store) {
+	private static function get_users($groupformationid, mod_groupformation_storage_manager $store) {
 		$courseid = $store->get_course_id ();
 		$context = context_course::instance ( $courseid );
 		
@@ -396,7 +397,7 @@ class mod_groupformation_job_manager {
 	 * @param unknown $job        	
 	 * @param unknown $users        	
 	 */
-	public static function run_topic_algorithm($job, $users, $store) {
+	private static function run_topic_algorithm($job, $users, $store) {
 		global $CFG;
 		
 		$groupformationid = $job->groupformationid;
@@ -502,7 +503,7 @@ class mod_groupformation_job_manager {
 	 * @param unknown $job        	
 	 * @param unknown $users        	
 	 */
-	public static function run_basic_algorithm($job, $users, $store) {
+	private static function run_basic_algorithm($job, $users, $store) {
 		global $CFG;
 		
 		$groupformationid = $job->groupformationid;
