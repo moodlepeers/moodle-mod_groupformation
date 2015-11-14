@@ -113,7 +113,6 @@
 					foreach ($options->OPTION as $option){
 						$optionArray[] = trim($option);
 					}
-					
 					$numbers++;
 					
 					$array = array('type' => trim($question['TYPE']),

@@ -32,6 +32,35 @@ require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/stor
 require_once (dirname ( __FILE__ ) . '/define_file.php');
 class mod_groupformation_util {
 	
+	public static function update_questions(mod_groupformation_storage_manager $store){
+		$names = $store->get_raw_categories ();
+		$xmlLoader = new mod_groupformation_xml_loader ();
+		$xmlLoader->set_store ( $store );
+		// wenn die Datenbank noch komplett leer ist, speicher einfach alle Infos aus den xml's ab
+		// ansonsten überprüfe zu jeder Kategorie die Versionsnummer und ändere bei bedarf
+		if ($store->catalog_table_not_set ()) {
+				
+			foreach ( $names as $category ) {
+		
+				if ($category != 'topic' && $category != 'knowledge') {
+					$array = $xmlLoader->save_data ( $category );
+					$version = $array [0] [0];
+					$numbers = $array [0] [1];
+					$store->add_catalog_version ( $category, $numbers, $version, TRUE );
+				}
+			}
+		} else {
+			// TODO Wenn man die Fragen ändert, ändern sich auch in den alten groupformation-Instanzen
+			// Da gibt es dann unter Umständen Konsistenzprobleme
+			// Da müssen wir nochmal drüber sprechen
+			foreach ( $names as $category ) {
+				if ($category != 'topic' && $category != 'knowledge') {
+					$xmlLoader->latest_version ( $category );
+				}
+			}
+		}
+	}
+	
 	/**
 	 * Returns html code for info text for teachers
 	 * 

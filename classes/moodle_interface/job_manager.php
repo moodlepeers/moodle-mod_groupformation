@@ -501,7 +501,6 @@ class mod_groupformation_job_manager {
 				$groups = array_slice ( $groups, 0, count ( $groups ) );
 				
 				$p = $random_participants [$i];
-				var_dump ( $p );
 				$groups [0] ['group']->addParticipant ( $p, true );
 				$groups [0] ['count'] ++;
 			}
@@ -819,6 +818,21 @@ class mod_groupformation_job_manager {
 		$DB->insert_record ( 'groupformation_jobs', $job );
 	}
 	
+	/**
+	 * Updates job record
+	 * 
+	 * @param unknown $groupformationid        	
+	 * @param unknown $groupingid        	
+	 */
+	public static function update_job($groupformationid, $groupingid) {
+		global $DB;
+		if ($job = $DB->get_record ( 'groupformation_jobs', array (
+				'groupformationid' => $groupformationid 
+		) )){
+			$job->groupingid = $groupingid;
+			$DB->update_record ( 'groupformation_jobs', $job );
+		}
+	}
 	/**
 	 * Returns job for groupformation
 	 *

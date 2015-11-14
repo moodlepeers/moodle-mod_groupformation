@@ -39,7 +39,6 @@ class mod_groupformation_dropdown_question {
 	public function print_html($q, $category, $question_number, $has_answer) {
 		$question = $q [1];
 		$options = $q [2];
-		
 		$answer = - 1;
 		$questionCounter = 1;
 		
@@ -59,7 +58,6 @@ class mod_groupformation_dropdown_question {
 		echo '<td class="center">
 				<select name="' . $category . $question_number . '" id="' . $category . $question_number . '">';
 		echo '<option value="0"> - </option>';
-		
 		foreach ( $options as $option ) {
 			if ($answer == $questionCounter) {
 				echo '<option value="' . $questionCounter . '" selected="selected">' . $option . '</option>';

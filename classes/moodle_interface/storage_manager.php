@@ -388,6 +388,9 @@ class mod_groupformation_storage_manager {
 		return $settings->szenario;
 	}
 	
+	public function get_raw_categories(){
+		return $this->data->get_category_set ( $this->get_scenario () );
+	}
 	/**
 	 * Returns categories with at least one question, not just the scenario-based category set
 	 *

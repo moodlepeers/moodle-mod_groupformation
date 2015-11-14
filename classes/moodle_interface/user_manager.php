@@ -386,6 +386,7 @@ class mod_groupformation_user_manager {
 				$record->category = $category;
 				$record->questionid = $questionid;
 				$record->answer = $answer;
+				$record->timestamp = time();
 				$DB->insert_record ( 'groupformation_answer', $record );
 			}
 			

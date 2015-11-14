@@ -870,6 +870,21 @@ function xmldb_groupformation_upgrade($oldversion) {
 		upgrade_mod_savepoint(true, 2015111200, 'groupformation');
 	}
 	
+	if ($oldversion < 2015111400) {
+	
+		// Define field timestamp to be added to groupformation_answer.
+		$table = new xmldb_table('groupformation_answer');
+		$field = new xmldb_field('timestamp', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null, 'answer');
+	
+		// Conditionally launch add field timestamp.
+		if (!$dbman->field_exists($table, $field)) {
+			$dbman->add_field($table, $field);
+		}
+	
+		// Groupformation savepoint reached.
+		upgrade_mod_savepoint(true, 2015111400, 'groupformation');
+	}
+	
 	
 	return true;
 }

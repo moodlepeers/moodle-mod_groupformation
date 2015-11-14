@@ -34,6 +34,7 @@ require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/storage_manager.
 require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/job_manager.php');
 require_once (dirname ( __FILE__ ) . '/classes/util/xml_loader.php');
 require_once (dirname ( __FILE__ ) . '/classes/util/define_file.php');
+require_once (dirname ( __FILE__ ) . '/classes/util/util.php');
 require_once (dirname ( __FILE__ ) . '/locallib.php');
 /**
  * Moodle core API
@@ -101,7 +102,7 @@ function groupformation_add_instance(stdClass $groupformation, mod_groupformatio
 	groupformation_save_more_infos ( $groupformation, TRUE );
 	
 	$groupingid = ($PAGE->cm->groupmode != 0) ? $PAGE->cm->groupingid : 0;
-	mod_groupformation_job_manager::create_job ( $groupformation->id, $groupingid );
+	// mod_groupformation_job_manager::create_job ( $groupformation->id, $groupingid );
 	
 	// Log access to page
 	groupformation_info ( $USER->id, $groupformation->id, '<save_settings>' );
@@ -122,7 +123,7 @@ function groupformation_add_instance(stdClass $groupformation, mod_groupformatio
  * @return boolean Success/Fail
  */
 function groupformation_update_instance(stdClass $groupformation, mod_groupformation_mod_form $mform = null) {
-	global $DB, $USER;
+	global $DB, $USER, $PAGE;
 	
 	// checks all fields and sets them properly
 	$groupformation = groupformation_set_fields ( $groupformation );
@@ -644,35 +645,8 @@ function groupformation_save_more_infos($groupformation, $init) {
 		$topicsarray = explode ( "\n", $groupformation->topiclines );
 	}
 	
-	$names = $store->get_categories ();
-	
 	if ($init) {
-		
-		$xmlLoader = new mod_groupformation_xml_loader ();
-		$xmlLoader->set_store ( $store );
-		// wenn die Datenbank noch komplett leer ist, speicher einfach alle Infos aus den xml's ab
-		// ansonsten überprüfe zu jeder Kategorie die Versionsnummer und ändere bei bedarf
-		if ($store->catalog_table_not_set ()) {
-			
-			foreach ( $names as $category ) {
-				
-				if ($category != 'topic' && $category != 'knowledge') {
-					$array = $xmlLoader->save_data ( $category );
-					$version = $array [0] [0];
-					$numbers = $array [0] [1];
-					$store->add_catalog_version ( $category, $numbers, $version, TRUE );
-				}
-			}
-		} else {
-			// TODO Wenn man die Fragen ändert, ändern sich auch in den alten groupformation-Instanzen
-			// Da gibt es dann unter Umständen Konsistenzprobleme
-			// Da müssen wir nochmal drüber sprechen
-			foreach ( $names as $category ) {
-				if ($category != 'topic' && $category != 'knowledge') {
-					$xmlLoader->latest_version ( $category );
-				}
-			}
-		}
+		mod_groupformation_util::update_questions($this->store);
 	}
 	
 	// wenn noch nichts beantwortet ist, speicher die neuen informationen f�r Vorwissen und Topics

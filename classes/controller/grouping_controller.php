@@ -77,6 +77,10 @@ class mod_groupformation_grouping_controller {
 			$groupingid = ($cm->groupmode != 0)?$cm->groupingid:0;
 			mod_groupformation_job_manager::create_job($groupformationid,$groupingid);
 			$this->job = mod_groupformation_job_manager::get_job($this->groupformationid);
+		}else{
+			$groupingid = ($cm->groupmode != 0)?$cm->groupingid:0;
+			mod_groupformation_job_manager::update_job($groupformationid,$groupingid);
+			$this->job = mod_groupformation_job_manager::get_job ( $this->groupformationid );
 		}
 		
 		$this->determine_status ();

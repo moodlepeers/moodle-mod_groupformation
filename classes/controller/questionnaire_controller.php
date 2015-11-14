@@ -255,7 +255,7 @@ class mod_groupformation_questionnaire_controller {
 						$answerPosition [$answer] = $position - 1;
 						$position ++;
 					}
-					
+
 					$questionsfirst [] = $question;
 				}
 				
@@ -298,7 +298,7 @@ class mod_groupformation_questionnaire_controller {
 							}
 						}
 					}
-					
+
 					$questions [] = $question;
 				}
 				// ---------------------------------------------------------------------------------------------------------
@@ -334,7 +334,8 @@ class mod_groupformation_questionnaire_controller {
 			
 			$question [] = $record->type;
 			$question [] = $record->question;
-			$question [] = mod_groupformation_util::xml_to_array ($record->options);
+			$temp = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $record->options . ' </OPTIONS>';
+			$question [] = mod_groupformation_util::xml_to_array ($temp);
 			
 			if ($this->hasAnswer) {
 				$answer = $this->user_manager->get_single_answer ( $this->userid, $this->current_category, $i );

@@ -29,6 +29,7 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
+require_once ($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
 
 class mod_groupformation_analysis_controller {
 	private $groupformationid;
