@@ -45,6 +45,23 @@ class mod_groupformation_storage_manager {
 		$this->gm = new mod_groupformation_groups_manager ( $groupformationid );
 	}
 	
+	public function is_accessible($userid){
+		global $PAGE;
+		$cm = $PAGE->cm;
+		$groupingid = ($cm->groupmode != 0)?$cm->groupingid:0;
+		$enrolled_students = null;
+		if (intval ( $cm->groupingid ) != 0) {
+			$enrolled_students = array_keys ( groups_get_grouping_members ( $job->groupingid ) );
+			// foreach ( $userids as $userid ) {
+			// var_dump ( $userid );
+			// }
+		} else {
+			// TODO all enrolled students later just students of grouping
+			$enrolled_students = array_keys ( get_enrolled_users ( $context, 'mod/groupformation:onlystudent' ) );
+		}
+		return in_array($userid, $enrolled_students);
+	}
+	
 	/**
 	 * Returns if DB does not contain questions for a specific category
 	 *

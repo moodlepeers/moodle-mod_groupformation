@@ -54,7 +54,7 @@ function groupformation_supports($feature) {
 		case FEATURE_SHOW_DESCRIPTION :
 			return false;
 		case FEATURE_BACKUP_MOODLE2 :
-			return true;
+			return false;
 		case FEATURE_COMPLETION_TRACKS_VIEWS :
 			return true;
 		case FEATURE_GROUPS :
@@ -101,7 +101,7 @@ function groupformation_add_instance(stdClass $groupformation, mod_groupformatio
 	
 	groupformation_save_more_infos ( $groupformation, TRUE );
 	
-	$groupingid = ($PAGE->cm->groupmode != 0) ? $PAGE->cm->groupingid : 0;
+	// $groupingid = ($PAGE->cm->groupmode != 0) ? $PAGE->cm->groupingid : 0;
 	// mod_groupformation_job_manager::create_job ( $groupformation->id, $groupingid );
 	
 	// Log access to page
@@ -646,7 +646,7 @@ function groupformation_save_more_infos($groupformation, $init) {
 	}
 	
 	if ($init) {
-		mod_groupformation_util::update_questions($this->store);
+		mod_groupformation_util::update_questions($store);
 	}
 	
 	// wenn noch nichts beantwortet ist, speicher die neuen informationen f�r Vorwissen und Topics
