@@ -71,32 +71,40 @@ class mod_groupformation_student_overview_controller {
 			if ($isBuild) {
 				$this->view_state = 2;
 			} else {
-				if ($this->store->is_questionnaire_available () && $this->store->is_accessible()) {
+				if ($this->store->is_questionnaire_available ()){// && $this->store->is_accessible($this->userid)) {
 					$this->view_state = $this->user_manager->get_answering_status( $this->userid );
 				} else {
 					$this->view_state = 4;
 				}
 			}
-			
-			// RETHINK ACCESS MODEL
-			// cases:
-			// 0001 1 - questionaire is in time
-			// 0011 11 - student can access the questionnaire
-			// 0111 111 - student can edit it
-			// 1111 1111 - student can start it
-			// 0111 1110 - student can edit it
-			// 0110 110 - student submitted it
-			// 0100 10 - student cannot access the questionaire
-			// 1010 101 - student can access the preview mode
-			// 1000 100 - NULL
-			// 0000 0 - questionaire is not in time
-			// 0010 01 - questionaire is done
-			// 0110 011 - student can access the preview mode
-			// 0000 000 - NULL
-			// 0000 00 - questionaire is not even started
 		} else {
 			$this->view_state = 3;
 		}
+		
+		/* RETHINK ACCESS MODEL
+		 * 
+		 * role in [admin,student,tutor]
+		 * time in [not yet, now, not anymore]
+		 * status in [not started, started, committed]
+		 * mode in [preview mode, edit mode, result mode]
+		 *
+		 * if role == admin
+		 * -- analysis view
+		 * if role == tutor
+		 * -- tutor_view
+		 * if role == student
+		 * -- if time == not yet
+		 * -- -- show preview mode
+		 * -- if time == now
+		 * -- -- if status == not started
+		 * -- -- -- show preview mode
+		 * -- -- if status == started
+		 * -- -- -- show edit mode
+		 * -- -- if status == committed
+		 * -- -- -- show result mode
+		 * -- if time == not anymore
+		 * -- -- show result mode
+		 */
 	}
 	
 	/**

@@ -51,7 +51,7 @@ class mod_groupformation_storage_manager {
 		$groupingid = ($cm->groupmode != 0)?$cm->groupingid:0;
 		$enrolled_students = null;
 		if (intval ( $cm->groupingid ) != 0) {
-			$enrolled_students = array_keys ( groups_get_grouping_members ( $job->groupingid ) );
+			$enrolled_students = array_keys ( groups_get_grouping_members ( $groupingid ) );
 			// foreach ( $userids as $userid ) {
 			// var_dump ( $userid );
 			// }
