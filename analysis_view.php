@@ -50,9 +50,9 @@ groupformation_determine_instance ( $id, $cm, $course, $groupformation );
 require_login ( $course, true, $cm );
 
 // Get useful stuff
-$context = $PAGE->context;
+$context = context_module::instance($cm->id);
 $userid = $USER->id;
-
+add_to_log($course->id, 'mod_groupformation', 'View');
 if (! has_capability ( 'mod/groupformation:editsettings', $context )) {
 	$returnurl = new moodle_url ( '/mod/groupformation/view.php', array (
 			'id' => $id,
