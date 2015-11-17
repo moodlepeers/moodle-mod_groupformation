@@ -38,7 +38,7 @@ class mod_groupformation_student_overview_controller {
 	private $survey_states_array = array ();
 	private $groupformation_info;
 	private $survey_states_title = '';
-	private $view = NULL;
+	private $view = null;
 	
 	/**
 	 * Creates an instance of grouping_controller for groupformation

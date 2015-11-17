@@ -43,11 +43,11 @@ class mod_groupformation_grouping_controller {
 	private $view_state = 0;
 	private $groups = array ();
 	private $incomplete_groups = array ();
-	private $store = NULL;
-	private $groups_store = NULL;
+	private $store = null;
+	private $groups_store = null;
 	private $user_manager;
-	private $job = NULL;
-	private $view = NULL;
+	private $job = null;
+	private $view = null;
 	private $groups_created;
 	private $max_groups_size;
 	

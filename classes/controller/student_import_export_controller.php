@@ -35,7 +35,7 @@ class mod_groupformation_student_import_export_controller {
 	private $user_manager;
 	private $groupformationid;
 	private $cmid;
-	private $view = NULL;
+	private $view = null;
 	
 	/**
 	 * Constructs instance of import export controller

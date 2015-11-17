@@ -36,7 +36,7 @@ class mod_groupformation_student_group_view_controller {
     private $groups_store;
     private $groupformationid;
 
-    private $view = NULL;
+    private $view = null;
 
     private $group_name = '';
     private $group_info = '';
