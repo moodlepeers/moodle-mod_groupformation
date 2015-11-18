@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Participants version="1">
+    <UsedCriteria>
+        <Criterion name="big5_heterogen_Extraversion" minValue="0" maxValue="1" isHomogeneous="false" weight="1" valueCount="1"/>
+        <Criterion name="big5_heterogen_Neurotizismus" minValue="0" maxValue="1" isHomogeneous="false" weight="1" valueCount="1"/>
+        <Criterion name="big5_heterogen_Offenheit" minValue="0" maxValue="1" isHomogeneous="false" weight="1" valueCount="1"/>
+        <Criterion name="big5_homogen_Gewissenhaftigkeit" minValue="0" maxValue="1" isHomogeneous="true" weight="1" valueCount="1"/>
+        <Criterion name="big5_homogen_Vertraeglichkeit" minValue="0" maxValue="1" isHomogeneous="true" weight="1" valueCount="1"/>
+        <Criterion name="team" minValue="0" maxValue="1" isHomogeneous="true" weight="1" valueCount="1"/>
+        <Criterion name="fam_Herausforderung" minValue="0" maxValue="1" isHomogeneous="true" weight="1" valueCount="1"/>
+        <Criterion name="fam_Interesse" minValue="0" maxValue="1" isHomogeneous="true" weight="1" valueCount="1"/>
+        <Criterion name="fam_Erfolg" minValue="0" maxValue="1" isHomogeneous="true" weight="1" valueCount="1"/>
+        <Criterion name="fam_Misserfolg" minValue="0" maxValue="1" isHomogeneous="true" weight="1" valueCount="1"/>
+    </UsedCriteria>
+    <participant id="2">
+        <Criterion name="big5_heterogen_Extraversion" minValue="0" maxValue="1" isHomogeneous="false" weight="1" valueCount="1">
+            <Value name="value0" value="0.75"/>
+        </Criterion>
+        <Criterion name="big5_heterogen_Neurotizismus" minValue="0" maxValue="1" isHomogeneous="false" weight="1" valueCount="1">
+            <Value name="value0" value="0.75"/>
+        </Criterion>
+        <Criterion name="big5_heterogen_Offenheit" minValue="0" maxValue="1" isHomogeneous="false" weight="1" valueCount="1">
+            <Value name="value0" value="0.5"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Gewissenhaftigkeit" minValue="0" maxValue="1" isHomogeneous="true" weight="1" valueCount="1">
+            <Value name="value0" value="0.5"/>
+        </Criterion>
+        <Criterion name="big5_homogen_Vertraeglichkeit" minValue="0" maxValue="1" isHomogeneous="true" weight="1" valueCount="1">
+            <Value name="value0" value="0.5"/>
+        </Criterion>
+        <Criterion name="team" minValue="0" maxValue="1" isHomogeneous="true" weight="1" valueCount="1">
+            <Value name="value0" value="0.51234567901235"/>
+        </Criterion>
+        <Criterion name="fam_Herausforderung" minValue="0" maxValue="1" isHomogeneous="true" weight="1" valueCount="1">
+            <Value name="value0" value="0.46666666666667"/>
+        </Criterion>
+        <Criterion name="fam_Interesse" minValue="0" maxValue="1" isHomogeneous="true" weight="1" valueCount="1">
+            <Value name="value0" value="0.45833333333333"/>
+        </Criterion>
+        <Criterion name="fam_Erfolg" minValue="0" maxValue="1" isHomogeneous="true" weight="1" valueCount="1">
+            <Value name="value0" value="0.54166666666667"/>
+        </Criterion>
+        <Criterion name="fam_Misserfolg" minValue="0" maxValue="1" isHomogeneous="true" weight="1" valueCount="1">
+            <Value name="value0" value="0.53333333333333"/>
+        </Criterion>
+    </participant>
+</Participants>

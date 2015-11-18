@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<GROUPFORMATION VERSION="200701" COMMENT="">
+     <QUESTIONS VERSION="1">			
+          <QUESTION TYPE="dropdown">
+               <QUESTIONTEXT>
+                    <![CDATA[Please select in which languages you can possibly communicate with your team]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[english]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[german]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[english, but german is also possible]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[german, but english is also possible]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+     </QUESTIONS>
+</GROUPFORMATION>

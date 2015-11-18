@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<GROUPFORMATION VERSION="201502" COMMENT="">
+     <QUESTIONS VERSION="1">
+     	<QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[I learn by feeling]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+         <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[I learn by doing.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[I learn by observing.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[I learn by thinking.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+         <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[When I learn I am open to new experiences.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[When I learn I first consider all possible perspectives of the subject.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+         <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[I am only satisfied when I manage to understand something conceptually.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[I prefer to try out things myself and be ensured of the possibilities.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+         <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[I learn best when I carefully observe and listen.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[I learn best when I can proceed practically.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+         <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[I learn best when intuition is needed.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[When I learn I proceed rationally.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+         <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[I like to prevent mistakes by exploring thoroughly and with critical attitude.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+
+		  <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[I learn best from personal contacts.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[I learn best when I can rely on logical ideas.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+         <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[It bothers me when I can only listen or read what others have to tell.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[I learn best when I can see the results from my work.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+         <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[I like it when systematical analysis from facts and theories are available.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+         <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[I learn best when I first gain on overview of the topic before acting.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[I learn best when I am personally involved.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[I learn best when I rely on my observations.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+         <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[I learn best when I rely on my feelings.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[I don't take special advantage from learning situations in which I have a passive role.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+         <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[When I learn I solve problems by reflecting.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[disagree]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[agree]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+     </QUESTIONS>
+</GROUPFORMATION>

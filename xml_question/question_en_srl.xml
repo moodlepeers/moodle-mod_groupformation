@@ -1,0 +1,1611 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<GROUPFORMATION VERSION="200701" COMMENT="">
+     <QUESTIONS VERSION="3">			
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich vergegenwärtige mir öfters am Tag, was ich noch alles tun will.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Vorsätze rufe ich mir immer wieder ins Gedächtnis.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich habe mir Ziele für den Mathematik-Vorkurs gesetzt.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich kontrolliere regelmäßig, ob ich noch meine Ziele verfolge.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich setze mir feste Zeitpunkte, zu denen ich meine Ziele erreichen will.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich beginne erst mit dem Lernen, wenn ich mir die notwendigen Einzelschritte klargemacht habe.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich lerne immer zu gleich bleibenden Zeiten.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Beim Lernen plane ich mir Pausen mit ein.]]>
+               </QUESTIONTEXT>
+             <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Alle wichtigen Termine und Aufgaben schreibe ich mir auf.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich setzte Prioritäten bei meinen Aufgaben und Terminen, welche ich bei meiner Zeitplanung berücksichtige.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich kontrolliere im Rückblick, ob meine Zeitplanung funktioniert hat.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+         <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich fange meist kurz vor einer Klausur oder einem Test an zu lernen.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich zögere den Beginn von Aufgaben bis zur letzten Minute hinaus.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich muss mich oft furchtbar beeilen, um Dinge noch rechtzeitig fertig zu bekommen.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich bin mit Arbeiten oft schon früher fertig als nötig.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Wenn ich lerne, sorge ich dafür, dass ich in Ruhe arbeiten kann.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Mein Arbeitsplatz ist so gestaltet, dass ich alles schnell finden kann.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Vor dem Lernen schalte ich Telefon, Handy und Kommunikationssoftware wie E-Mails oder Chatprogramme aus.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Während ich lerne, denke ich oft an andere Dinge, die mich davon ablenken.]]>
+               </QUESTIONTEXT>
+             <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich habe festgestellt, wie Musik meine Lernleistung beeinflusst.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Wenn mein Durchhaltevermögen nachlässt, weiß ich meist genau, wie ich meine Lust an der Sache verstärken kann.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich kann es schaffen, einer anfangs unangenehmen Tätigkeit zunehmend angenehme Seiten abzugewinnen.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+         <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich kann meine Stimmung so verändern, dass mir dann alles leichter von der Hand geht.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich kann mich beim Lernen gut in die Stimmung hineinbringen, die ich im Moment am besten gebrauchen kann.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Wenn ich keine Lust habe zu lernen, schaffe ich es nicht mich zum Lernen aufzuraffen.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich fertige Tabellen, Diagramme oder Schaubilder an, um den Stoff der Veranstaltung besser strukturiert vorliegen zu haben.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich mache mir kurze Zusammenfassungen der wichtigsten Inhalte als Gedankenstütze.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich versuche, den Stoff so zu ordnen, dass ich ihn mir gut einprägen kann.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich versuche, Beziehungen zu den Inhalten verwandter Fächer bzw. Lehrveranstaltungen herzustellen.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Zu neuen Konzepten stelle ich mir praktische Anwendungen vor.]]>
+               </QUESTIONTEXT>
+             <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich versuche in Gedanken, das Gelernte mit dem zu verbinden, was ich schon darüber weiß.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Am Ende des Tages wiederhole ich noch einmal kurz, was ich gelernt habe.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Nach einer Lernwoche überlege ich, was ich alles gelernt habe.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+         <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich versuche, ein tiefes Verständnis zu bekommen.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich suche nach weiterführender Literatur, wenn mir bestimmte Inhalte noch nicht ganz klar sind.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Fehlende Informationen suche ich mir aus verschiedenen Quellen zusammen (z.B. Mitschriften, Bücher, Fachzeitschriften).]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Wenn ich beim Lernen nicht alles verstehe, versuche ich, das Thema daraufhin noch einmal durchzugehen.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich stelle mir Fragen zum Stoff, um sicherzugehen, dass ich auch alles verstanden habe.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich bearbeite zusätzliche Aufgaben, um festzustellen, ob ich den Stoff wirklich verstanden habe.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich denke regelmäßig über mein Lernen nach.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Bevor ich eine Aufgabe rechne, denke ich zunächst über meine Strategie nach.]]>
+               </QUESTIONTEXT>
+             <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Nachdem ich gelernt habe, fasse ich das Gelernte in eigenen Worten zusammen.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich nehme die Hilfe anderer in Anspruch, wenn ich ernsthafte Verständnisprobleme habe.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich nehme mir Zeit, um mit Studienkollegen über den Stoff zu diskutieren.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+         <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Meine Wissenslücken finde ich, indem ich mit anderen über ein Thema spreche.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Wenn ich Aufgaben rechne, vergleiche ich meine Lösungswege mit denen meiner Studienkollegen.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Am Ende des Tages frage ich mich, ob ich zufrieden bin mit meiner Leistung.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Wenn ich ein Kapitel gelernt habe, überlege ich, was ich beim Lernen für das nächste Kapitel anders machen möchte.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Nachdem ich eine Aufgabe gerechnet habe, denke ich darüber nach, ob ich die nächste Aufgabe anders anpacken sollte.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Am Ende einer Woche denke ich darüber nach, welche Themen ich gekonnt habe und welche nicht.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Abends denke ich darüber nach, was heute beim Lernen gut gewesen ist und was ich morgen anders machen möchte.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Wenn ich bei einer Aufgabe langsamer vorankomme als erwartet, muss das an der Aufgabe liegen.]]>
+               </QUESTIONTEXT>
+             <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Wenn ich eine Aufgabe nicht lösen kann, bin ich wohl einfach nicht gut genug.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Gute Noten bekomme ich vor allem, wenn ich bei dem Lehrer / Professor beliebt bin.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Wenn ich bei einer Aufgabe gut vorankomme, liegt das daran, dass ich die richtige Herangehensweise gewählt habe.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+         <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Um meine Leistung zu bewerten, achte ich darauf, ob ich mich verbessert oder verschlechtert habe.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich versuche, meine eigene Leistung von Mal zu Mal zu steigern.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich denke an frühere Erfolge zurück, um mein Selbstbewusstsein zu stärken.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Um mich zu motivieren, rufe ich mir vor Augen, wie schön es sein wird, wenn ich ein Ziel erreicht haben werde.]]>
+               </QUESTIONTEXT>
+              <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich versuche, mir den Nutzen von Tätigkeiten zu vergegenwärtigen, um mich zu motivieren.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+          
+		 <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich suche mir Erfolgserlebnisse, um mich für schwierige Aufgaben zu motivieren.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+          </QUESTION>
+          
+          <QUESTION TYPE="radio">
+               <QUESTIONTEXT>
+                    <![CDATA[Ich kann ein langweiliges Thema spannender machen, indem ich mich länger damit beschäftige.]]>
+               </QUESTIONTEXT>
+               <OPTIONS>
+                    <OPTION>
+                    	<![CDATA[trifft nicht zu]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                    	<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[]]>
+					</OPTION>
+					<OPTION>
+						<![CDATA[trifft zu]]>
+					</OPTION>
+               </OPTIONS>
+         </QUESTION>
+	</QUESTIONS>
+</GROUPFORMATION>

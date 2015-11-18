@@ -1,0 +1,1 @@
+<p style="opacity: 0.5; margin-left: 4px;"><i><?php echo $this->_['grouping_no_data']; ?></i></p>
