@@ -50,7 +50,7 @@ class mod_groupformation_questionaire {
 	private $userid;
 	
 	// --- Mathevorkurs
-	private $notAllAnswers = false;
+	//private $notAllAnswers = false;
 	
 	// ---
 	
@@ -89,10 +89,10 @@ class mod_groupformation_questionaire {
 	}
 	
 	// --- Mathevorkurs
-	public function goNotOn() {
-		$this->question_manager->goNotOn ();
-		$this->notAllAnswers = true;
-	}
+	//public function goNotOn() {
+	//	$this->question_manager->goNotOn ();
+	//	$this->notAllAnswers = true;
+	//}
 	// ---
 	
 	/**
@@ -142,7 +142,7 @@ class mod_groupformation_questionaire {
 			echo '<li class="' . (($activeCategory == $category) ? 'current' : 'accord_li') . '">';
 			echo '<span>' . ($positionCategory + 1) . '</span><a class="' . $class . '"  href="' . $url . '">' . get_string ( 'category_' . $category, 'groupformation' ) . '</a>';
 			echo '</li>';
-			$prev_complete = $stats [$category] ['missing'] == 0;
+			//$prev_complete = $stats [$category] ['missing'] == 0;
 			// <li><a href="a.html" class="ui-btn-active">One</a></li>
 			// <li><a href="b.html">Two</a></li>
 		}
@@ -151,13 +151,13 @@ class mod_groupformation_questionaire {
 	}
 	
 	// --- Mathevorkurs
-	private function notAllAnswers() {
-		echo '<div class="survey_warnings">
-                             <p>Du hast nicht alle Fragen beantwortet</p>
-                    </div>';
+	//private function notAllAnswers() {
+	//	echo '<div class="survey_warnings">
+    //                         <p>Du hast nicht alle Fragen beantwortet</p>
+    //                </div>';
 		
 		// echo 'Du hast nicht alle Fragen beantwortet';
-	}
+	//}
 	// ---
 	
 	/**
@@ -172,6 +172,9 @@ class mod_groupformation_questionaire {
 		
 
 		echo '<form style="width:100%; float:left;" action="' . htmlspecialchars ( $_SERVER ["PHP_SELF"] ) . '" method="post" autocomplete="off">';
+		
+		if (!is_null($questions) && count($questions)!=0){
+		
 		
 		// hier schicke ich verdeckt die momentane Kategorie und groupformationID mit
 		echo '<input type="hidden" name="category" value="' . $this->category . '"/>';
@@ -194,11 +197,12 @@ class mod_groupformation_questionaire {
 		$this->header->__printHTML ( $this->category, $tableType, $headerOptArray );
 		
 		$hasAnswer = count ( $questions [0] ) == 4;
-		
+		$hasTopicNumbers = count ($questions[0]) == 5;
 		// var_dump($questions);
 		// var_dump($this->category);
 		
 		// each question with inputs
+		
 		foreach ( $questions as $q ) {
 			if ($q [0] == 'dropdown') {
 				$this->dropdown->__printHTML ( $q, $this->category, $this->qNumber, $hasAnswer );
@@ -208,18 +212,31 @@ class mod_groupformation_questionaire {
 				$this->radio->__printHTML ( $q, $this->category, $this->qNumber, $hasAnswer );
 			}
 			
-			if ($q [0] == 'typThema') {
-				$this->topics->__printHTML ( $q, $this->category, $this->qNumber, $hasAnswer );
+			if ($q [0] == 'type_topics') {
+				if($hasTopicNumbers){
+					$this->topics->__printHTML( $q, $this->category, $q[4]+1, true);
+				}else{
+					$this->topics->__printHTML ( $q, $this->category, $this->qNumber, $hasAnswer );
+				}
 			}
 			
-			if ($q [0] == 'typVorwissen') {
+			if ($q [0] == 'type_knowledge') {
+				$this->range->__printHTML ( $q, $this->category, $this->qNumber, $hasAnswer );
+			}
+			
+			if ($q [0] == 'type_points') {
+				$this->range->__printHTML ( $q, $this->category, $this->qNumber, $hasAnswer );
+			}
+			
+			// TODO
+			if ($q [0] == 'range'){
 				$this->range->__printHTML ( $q, $this->category, $this->qNumber, $hasAnswer );
 			}
 			$this->qNumber ++;
 		}
 		
 		// closing the table or unordered list
-		if ($tableType == 'typThema') {
+		if ($tableType == 'type_topics') {
 			// close unordered list
 			echo '</ul>';
 			
@@ -234,14 +251,7 @@ class mod_groupformation_questionaire {
 		// Reset the Question Number, so each HTML table starts with 0
 		$this->qNumber = 1;
 		
-		// $hasAnswer = $this->question_manager->hasAnswers();
-		// var_dump($hasAnswer);
-		// if($hasAnswer){
-		// var_dump($this->question_manager->getAnswers());
-		// }
-		// $hasNext = $this->question_manager->hasNext();
-		// $answers = array('0');
-		// $this->question_manager->saveAnswers($answers);
+		}
 		
 		$this->printActionButtons();
 		
@@ -283,7 +293,8 @@ class mod_groupformation_questionaire {
 		
 		$hasAnsweredEverything = $this->question_manager->hasAllAnswered ();
 		
-		$disabled = ! $hasAnsweredEverything;
+		//$disabled = ! $hasAnsweredEverything;
+		$disabled = false;
 		if (has_capability ( 'mod/groupformation:editsettings', $this->context ))
 			echo '<div class="col_100 questionaire_hint">' . get_string ( 'questionaire_submit_disabled_teacher', 'groupformation' ) . '</div>';
 		
@@ -291,7 +302,7 @@ class mod_groupformation_questionaire {
 		echo '	<div class="questionaire_button_text">' . get_string ( 'questionaire_press_beginning_submit', 'groupformation' ) . '</div>';
 		echo '	<div class="col_100 questionaire_button_row">';
 		echo '		<button type="submit" name="action" value="0" >' . get_string ( 'questionaire_go_to_start', 'groupformation' ) . '</button>';
-		echo '		<button type="submit" name="action" value="1" ' . (($disabled || has_capability ( 'mod/groupformation:editsettings', $this->context )) ? 'disabled' : '') . '>' . get_string ( 'questionaire_submit', 'groupformation' ) . '</button>';
+// 		echo '		<button type="submit" name="action" value="1" ' . (($disabled || has_capability ( 'mod/groupformation:editsettings', $this->context )) ? 'disabled' : '') . '>' . get_string ( 'questionaire_submit', 'groupformation' ) . '</button>';
 		echo '	</div>';
 		echo '</div>';
 		
@@ -325,9 +336,9 @@ class mod_groupformation_questionaire {
 			$this->printProgressbar ( $percent );
 			
 			// --- Mathevorkurs
-			if ($this->notAllAnswers) {
-				$this->notAllAnswers ();
-			}
+			//if ($this->notAllAnswers) {
+			//	$this->notAllAnswers ();
+			//}
 			// ---
 			
 			$questions = $this->question_manager->getNextQuestions ();

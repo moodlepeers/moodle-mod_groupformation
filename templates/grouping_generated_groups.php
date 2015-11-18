@@ -4,18 +4,18 @@
 <?php foreach($this->_ as $entry) { ?>
 
 <div class="grid bottom_stripe">
-    <div class="col_s_50">Name: <b><?php echo $entry['groupname']; ?></b></div>
-    <div class="col_s_25">Gruppenqualit&auml;t: <b><?php echo ($entry['groupquallity']!=0)?$entry['groupquallity']:"-"; ?></b>
-    <span class="toolt" tooltip="Der Gruppen-Performance-Index (GPI) gibt die Qualität der gebildeten Gruppe wieder und ist ein Wert zwischen 0 und 1. Je größer der Wert, deste besser ist die gebildete Gruppe. Ist kein Wert angegeben, so sind die Gruppen nicht algorithmisch gebildet, sondern randomisiert."></span></div>
+    <div class="col_s_50"><?php echo get_string('name_by_group', 'groupformation');?> <b><?php echo $entry['groupname']; ?></b></div>
+    <div class="col_s_25"><?php echo get_string('quality', 'groupformation');?> <b><?php echo ($entry['groupquallity']!=0)?$entry['groupquallity']:"-"; ?></b>
+    <span class="toolt" tooltip="<?php echo get_string('quality_info', 'groupformation');?>"></span></div>
 	<div class="col_m_25 bp_align_right-middle">
 	    <a href="<?php echo $entry['grouplink'][0]; ?>">
 	      <?php if (!$entry['grouplink'][1]=='disabled'){ ?> 
 		    <span class="gf_button gf_button_pill gf_button_tiny">
-		    zur Moodle Gruppenansicht
+		    <?php echo get_string('to_groupview', 'groupformation');?>
 		    </span>
 		  <?php } else {?>
 		  	<button class="gf_button gf_button_pill gf_button_tiny" disabled>
-		    zur Moodle Gruppenansicht
+		    <?php echo get_string('to_groupview', 'groupformation');?>
 		    </button>
 		  <?php } ?>
 	    </a>

@@ -92,7 +92,7 @@ if (isset ( $_POST ["direction"] )) {
 }
 
 // --- Mathevorkurs
-$go = true;
+//$go = true;
 // ---
 
 $inArray = in_array ( $category, $names );
@@ -130,9 +130,9 @@ if (has_capability ( 'mod/groupformation:onlystudent', $context ) && ! has_capab
 			}
 			
 			// --- Mathevorkurs
-			if ($store->get_number_of_answers ( $userid, $category ) != $number) {
-				$go = false;
-			}
+			//if ($store->get_number_of_answers ( $userid, $category ) != $number) {
+			//	$go = false;
+			//}
 			// ---
 		}
 	}
@@ -160,9 +160,9 @@ if (($available || $isTeacher) && ($category == '' || $inArray)) {
 	if ($direction == 0) {
 		$questionManager->goBack ();
 	} else {
-		if (! $go) {
-			$questionManager->goNotOn ();
-		}
+	//if (! $go) {
+	//		$questionManager->goNotOn ();
+	//	}
 	}
 	
 	$questionManager->printQuestionairePage ();

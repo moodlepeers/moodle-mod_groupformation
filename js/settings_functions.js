@@ -199,6 +199,15 @@ $(document).ready(function() {
         $('#js_groupname').val($('#id_groupname').val());
 
 
+        if ($('#id_onlyactivestudents').prop('checked')){
+            $('#id_js_onlyactivestudents').prop('checked', true);
+        }
+
+        if ($('#id_emailnotifications').prop('checked')){
+            $('#id_js_emailnotifications').prop('checked', true);
+        }
+
+
     }
 
 
@@ -209,8 +218,11 @@ $(document).ready(function() {
 ///////////////////////////////////////////////////////////////////////////////////////////////     
   
     
-    
-    $('.szenarioLabel').click(function(){
+    //nach Beta wieder entkommentieren!!!
+    //$('.szenarioLabel').click(function(){
+
+    // nächste Zeile nach Beta wieder löschen!!!
+    $('#label_project, #label_homework').click(function(){
         if(!(typeof $("input[name='js_szenario']:checked").val() != 'undefined')){
             $('#js_szenarioWrapper').show('2000', 'swing');
         }
@@ -583,6 +595,24 @@ $(document).ready(function() {
     
     $('#js_groupname').keyup(function(){
     	$('#id_groupname').val($(this).val());
+    });
+
+
+
+    $('#id_js_onlyactivestudents').click(function(){
+        if ($('#id_onlyactivestudents').prop('checked')){
+            $('#id_onlyactivestudents').prop('checked',false);
+        }else{
+            $('#id_onlyactivestudents').prop('checked', true);
+        }
+    });
+
+    $('#id_js_emailnotifications').click(function(){
+        if ($('#id_emailnotifications').prop('checked')){
+            $('#id_emailnotifications').prop('checked',false);
+        }else{
+            $('#id_emailnotifications').prop('checked', true);
+        }
     });
 
 

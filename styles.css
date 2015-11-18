@@ -425,6 +425,30 @@ h4 label:hover {
   .toolt[tooltip]:not([tooltip-persistent]):before {
     pointer-events: none; }
 
+  /*.sz_header .toolt:after {*/
+      /*font-family: "Times New Roman", Times, serif;*/
+      /*content: "i";*/
+      /*display: inline-block;*/
+      /*width: 24px;*/
+      /*height: 24px;*/
+      /*border-radius: 12px;*/
+      /*color: #fff;*/
+      /*line-height: 1.1em;*/
+      /*text-align: center;*/
+      /*background: #666; }*/
+
+/*.sz_header .toolt[tooltip]:hover:before {*/
+    /* needed - do not touch */
+    /*opacity: 1;*/
+    /* customizable */
+    /*text-align: center;*/
+    /*border: 1px solid #fff257;*/
+    /*background-color: #fffbb9;*/
+    /*margin-top: -50px;*/
+    /*margin-left: 20px;*/
+    /*font-size: 60% !important;}*/
+
+
 label input.check:checked + .label-text {
   background: lime; }
 

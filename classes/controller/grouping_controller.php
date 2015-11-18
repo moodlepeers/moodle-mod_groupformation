@@ -36,6 +36,7 @@ require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/group_genera
 require_once ($CFG->dirroot . '/mod/groupformation/locallib.php');
 class mod_groupformation_grouping_controller {
 	private $groupformationid;
+	private $cmid;
 	private $view_state = 0;
 	private $groups = array ();
 	private $incomplete_groups = array ();
@@ -50,8 +51,9 @@ class mod_groupformation_grouping_controller {
 	 *
 	 * @param int $groupformationid        	
 	 */
-	public function __construct($groupformationid) {
+	public function __construct($groupformationid, $cmid = null) {
 		$this->groupformationid = $groupformationid;
+		$this->cmid = $cmid;
 		
 		$this->store = new mod_groupformation_storage_manager ( $groupformationid );
 		
@@ -276,9 +278,10 @@ class mod_groupformation_grouping_controller {
 								'value' => '',
 								'state' => 'disabled',
 								'text' => get_string ( 'grouping_adopt', 'groupformation' ) 
-						) 
-				) );
+						)
+                ) );
 				
+				$settingsGroupsView->assign ( 'emailnotifications', $this->store->get_email_setting() );
 				break;
 			
 			case 3 :
@@ -371,7 +374,6 @@ class mod_groupformation_grouping_controller {
 								'text' => get_string ( 'grouping_adopt', 'groupformation' ) 
 						) 
 				) );
-				
 				break;
 			
 			case 'default' :
@@ -389,7 +391,9 @@ class mod_groupformation_grouping_controller {
 		$count = count ( get_enrolled_users ( $context, 'mod/groupformation:onlystudent' ) );
 		
 		$settingsGroupsView->assign ( 'student_count', $count );
-		
+		$settingsGroupsView->assign ( 'cmid', $this->cmid);
+		$settingsGroupsView->assign ( 'onlyactivestudents', $this->store->get_grouping_setting() );
+
 		return $settingsGroupsView->loadTemplate ();
 	}
 	
@@ -410,7 +414,7 @@ class mod_groupformation_grouping_controller {
 			$statisticsView->assign ( 'maxSize', $this->store->getGroupSize () );
 		} else {
 			$statisticsView->setTemplate ( 'grouping_no_data' );
-			$statisticsView->assign ( 'grouping_no_data', get_string('no_data_to_display','groupformation') );
+			$statisticsView->assign ( 'grouping_no_data', get_string ( 'no_data_to_display', 'groupformation' ) );
 		}
 		return $statisticsView->loadTemplate ();
 	}
@@ -439,7 +443,7 @@ class mod_groupformation_grouping_controller {
 			}
 		} else {
 			$incompleteGroupsView->setTemplate ( 'grouping_no_data' );
-			$incompleteGroupsView->assign ( 'grouping_no_data', get_string('no_data_to_display','groupformation') );
+			$incompleteGroupsView->assign ( 'grouping_no_data', get_string ( 'no_data_to_display', 'groupformation' ) );
 		}
 		return $incompleteGroupsView->loadTemplate ();
 	}
@@ -497,7 +501,7 @@ class mod_groupformation_grouping_controller {
 			}
 		} else {
 			$generatedGroupsView->setTemplate ( 'grouping_no_data' );
-			$generatedGroupsView->assign ( 'grouping_no_data', get_string('no_data_to_display','groupformation') );
+			$generatedGroupsView->assign ( 'grouping_no_data', get_string ( 'no_data_to_display', 'groupformation' ) );
 		}
 		return $generatedGroupsView->loadTemplate ();
 	}
@@ -538,7 +542,7 @@ class mod_groupformation_grouping_controller {
 	/**
 	 * Get the moodle-link to group and set state of the link(enabled || disabled)
 	 *
-	 * @param int $groupid   	
+	 * @param int $groupid        	
 	 * @return array
 	 */
 	private function get_group_link($groupid) {
@@ -547,12 +551,12 @@ class mod_groupformation_grouping_controller {
 			$url = new moodle_url ( '/group/members.php', array (
 					'group' => $groupid 
 			) );
-			$link[] = $url;
-			$link[] = '';
+			$link [] = $url;
+			$link [] = '';
 		} else {
 			
-			$link[] = '';
-			$link[] = 'disabled';
+			$link [] = '';
+			$link [] = 'disabled';
 		}
 		return $link;
 	}

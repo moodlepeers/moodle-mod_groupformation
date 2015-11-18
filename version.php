@@ -1,4 +1,3 @@
-
 <?php
 // This file is part of Moodle - http://moodle.org/
 //
@@ -22,8 +21,8 @@
  */
  
 defined('MOODLE_INTERNAL') || die();
-$plugin->version   = 2015091100; 
-$plugin->requires  = 2014050800; //value taken from mod "feedback"
+$plugin->version   = 2015100300; 
+$plugin->requires  = 2014050800; //value taken from "mod_feedback"
 $plugin->cron      = 0;//1*60; // seconds
 $plugin->component = 'mod_groupformation';
 $plugin->maturity  = MATURITY_ALPHA;

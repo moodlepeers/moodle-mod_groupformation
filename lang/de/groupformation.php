@@ -27,13 +27,12 @@ defined ( 'MOODLE_INTERNAL' ) || die ();
 $string ['language'] = 'de';
 $string ['modulename'] = 'Gruppenformation';
 $string ['modulenameplural'] = 'Gruppenformationen';
-$string ['modulename_help'] = 'ACHTUNG: BETA-Version. Nur für Dozenten in Zusammenarbeit mit Projekt MoodlePeers  gedacht. Erlaubt die automatische Erstellung von (Lern)-Gruppen Ihrer Teilnehmenden. Basierend auf Fragebogen-Antworten werden die Gruppen(zusammenstellungen) optimiert.';
-$string ['password_wrong'] = 'Das eingegebene Passwort ist falsch';
-// $string ['groupformationfieldset'] = 'Custom example fieldset';
-$string ['groupformationname'] = 'Name der Gruppenformation';
+// $string ['modulename_help'] = 'ACHTUNG: BETA-Version. Nur für Lehrende in Zusammenarbeit mit dem Projekt MoodlePeers gedacht. Erlaubt die automatische Erstellung von (Lern)-Gruppen Ihrer Teilnehmenden. Basierend auf Fragebogen-Antworten werden die Gruppen(zusammenstellungen) optimiert.';
+$string ['beta_version'] = 'ACHTUNG: BETA-Version. Nur für Lehrende in Zusammenarbeit mit dem Projekt MoodlePeers gedacht.';
+$string ['password_wrong'] = 'Das eingegebene Passwort ist falsch';$string ['groupformationname'] = 'Name der Gruppenformation';
 $string ['groupformationname_help'] = 'Dieser Titel wird auf der Kursseite angezeigt.';
 $string ['groupformation'] = 'Gruppenformation';
-$string ['pluginadministration'] = 'Gruppenformation Administration';
+$string ['pluginadministration'] = 'Administration: Gruppenformation';
 $string ['pluginname'] = 'groupformation';
 $string ['nogroupformation'] = 'keine Gruppenformation';
 $string ['groupnameexists'] = 'Dieser Gruppenname existiert schon';
@@ -63,13 +62,14 @@ $string ['scenario_projectteams_description'] = 'Projektteams arbeiten über ein
 $string ['scenario_homeworkgroups'] = 'Hausaufgabengruppen';
 $string ['scenario_homeworkgroups_description'] = 'Hausaufgabengruppen arbeiten in regelmäßigen Abständen (meist wöchentlich) an Aufgaben, die zur Vorbereitung auf eine Klausur dienen. Auch wenn die Aufgaben (oft auch "Übungen" oder "Übungszettel" genannt) grundsätzlich auf unterschiedliche Gruppenmitglieder aufgeteilt werden könnten, ist dies meist nicht sinnvoll, weil bei der abschließenden Klausur jedes Gruppenmitglied individuell benotet wird und daher alle Aufgaben selbst lösen können muss. Daher geht es bei der Zusammensetzung von Hausaufgabengruppen primär um unterschiedliches Vorwissen und unterschiedliche Lernstile, die sich ergänzen.';
 $string ['scenario_presentationgroups'] = 'Referatgruppen';
-$string ['scenario_presentationgroups_description'] = 'Referatsgruppen arbeiten nur über einen relativ kurzen Zeitraum zusammen an einer gemeinsamen Präsentation. Oft wird dabei die Aufgabenstellung schon zu Beginn auf die Gruppenmitglieder aufgeteilt (oder gewählt), dann individuell bearbeitet und erst am Ende wieder zusammengesetzt. Bewertet wird meist die gemeinsame Gruppenleistung. Daher geht es bei der Zusammensetzung von Referatsgruppen primär um gemeinsame Interessen an Themen.';
+// $string ['scenario_presentationgroups_description'] = 'Referatsgruppen arbeiten nur über einen relativ kurzen Zeitraum zusammen an einer gemeinsamen Präsentation. Oft wird dabei die Aufgabenstellung schon zu Beginn auf die Gruppenmitglieder aufgeteilt (oder gewählt), dann individuell bearbeitet und erst am Ende wieder zusammengesetzt. Bewertet wird meist die gemeinsame Gruppenleistung. Daher geht es bei der Zusammensetzung von Referatsgruppen primär um gemeinsame Interessen an Themen.';
+$string ['scenario_presentationgroups_description'] = '<span style="color: red">Nicht verfügbar bei Beta-Version </span><br/>Referatsgruppen arbeiten nur über einen relativ kurzen Zeitraum zusammen an einer gemeinsamen Präsentation. Oft wird dabei die Aufgabenstellung schon zu Beginn auf die Gruppenmitglieder aufgeteilt (oder gewählt), dann individuell bearbeitet und erst am Ende wieder zusammengesetzt. Bewertet wird meist die gemeinsame Gruppenleistung. Daher geht es bei der Zusammensetzung von Referatsgruppen primär um gemeinsame Interessen an Themen.';
 $string ['time'] = 'Zeit';
 $string ['topics'] = 'Themen';
 $string ['topics_dummy'] = 'Thema ';
 $string ['knowledge_dummy'] = 'Beispiel ';
 $string ['topics_description'] = 'Ich möchte (Gruppen-)Themen zur Auswahl anbieten';
-$string ['topics_description_extended'] = 'Geben Sie hier die Themen an, die die Gruppen bearbeiten sollen. Die Gruppenzuordnung erfolgt nach dem Priorisierungen der Studenten.';
+$string ['topics_description_extended'] = 'Geben Sie hier die Themen an, die die Gruppen bearbeiten sollen. Die Gruppenzuordnung erfolgt nach dem Priorisierungen der Studierenden.';
 $string ['topics_question'] = 'Bitte sortieren Sie die zur Wahl stehenden Themen entsprechend Ihrer Präferenz, beginnend mit Ihrem bevorzugten Thema.';
 $string ['topicchoice'] = 'Themenauswahl';
 $string ['useOneLineForEachTopic'] = 'Pro Thema jeweils eine Zeile benutzen';
@@ -85,7 +85,7 @@ $string ['knowledge_info_homework'] = 'Geben Sie hier die Wissensgebiete ein, in
 		Eine Vorschau des Fragebogens-Abschnittes für die Studierenden ist rechts zu sehen. 
 		Für Ihre Auswahl "Hausaufgabengruppen" wird so optimiert, dass das Vorwissen sich in jeder Gruppe möglichst ergänzt.';
 $string ['knowledge_info_project'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einschätzen sollen. 
-		Eine Vorschau des Studenten-Fragebogens sehen Sie rechts. 
+		Eine Vorschau des Studierenden-Fragebogens sehen Sie rechts. 
 		Für Ihre Auswahl "Projektgruppen" wird so optimiert, dass das Vorwissen sich in jeder Gruppe möglichst ergänzt, das Wissensniveau der Studierenden aber vergleichbar ist.';
 $string ['add_line'] = 'Zeile hinzufügen';
 $string ['remove_line'] = 'Zeile entfernen';
@@ -96,10 +96,11 @@ $string ['knowledge_scale'] = '0&nbsp;=&nbsp;kein&nbsp;Vorwissen, 100&nbsp;=&nbs
 $string ['groupoptions'] = 'Gruppen-Einstellungen';
 $string ['groupoption_description'] = 'Gruppen-Einstellungen';
 $string ['groupoption_help'] = 'Diese Einstellungen können bis zum Starten der Gruppenbildung geändert werden, selbst wenn schon Fragebögen von Studierenden ausgefüllt wurden.';
+$string ['groupoption_onlyactivestudents'] = 'Studierende ohne einzige Antwort werden nicht in Gruppen eingeteilt.';
 $string ['maxmembers'] = 'Max. Gruppengröße';
 $string ['maxgroups'] = 'Max. Gruppenanzahl';
 $string ['maxpoints'] = 'Max. Punktzahl';
-$string ['groupname'] = 'Gruppen-Name';
+$string ['groupname'] = 'Gruppenname';
 $string ['groupname_help'] = 'Der Gruppen-Name wird als Präfix für die generierten Moodle-Gruppen genutzt. Das Schema ist <Gruppen-Name>_XXX, wobei XXX für die Nummer der Gruppe steht.';
 $string ['evaluationmethod_description'] = 'Nach welchem Bewertungsschema wird die Leistung der Gruppen am Ende bewertet?';
 $string ['grades'] = 'Noten';
@@ -112,7 +113,7 @@ $string ['scenario_error'] = 'Bitte wäen Sie ein Szenario aus.';
 $string ['maxmembers_error'] = 'Bitte wählen Sie die maximale Gruppengröße.';
 $string ['maxgroups_error'] = 'Bitte wählen Sie die maximale Gruppenanzahl.';
 $string ['maxpoints_error'] = 'Sie müssen eine Punktzahl zwischen 1 und 100 angeben.';
-$string ['groupname_error'] = 'Der Gruppen-Name kann maximal 100 Zeichen lang sein.';
+$string ['groupname_error'] = 'Der Gruppenname kann maximal 100 Zeichen lang sein.';
 $string ['evaluationmethod_error'] = 'Bitte wählen Sie die Methode zur Bewertung aus.';
 $string ['choose_scenario'] = 'Szenario auswählen';
 $string ['choose_number'] = 'Anzahl auswählen';
@@ -129,13 +130,14 @@ $string ['questionaire_answer_stats'] = 'Aktueller Zustand des Fragebogens: ';
 $string ['questionaire_submitted'] = 'Sie haben den Fragebogen bereits abgegeben und können Ihre Antworten nicht mehr ändern.';
 $string ['questionaire_press_preview'] = 'Klicken Sie auf "Vorschau", um den Fragebogen anzusehen.';
 $string ['questionaire_no_more_questions'] = 'Es gibt keine weiteren Fragen zu beantworten.';
-$string ['questionaire_press_beginning_submit'] = 'Klicken Sie auf "Zur Anfangsseite", um zum Anfang zurückzukehren oder auf "Abgeben", um Ihre Antworten endgültig abzugeben.';
+$string ['questionaire_press_beginning_submit'] = 'Klicken Sie auf "Zur Anfangsseite", um zum Anfang zurückzukehren. Dort können Sie ihren Fragebogen entgültig abgeben.';
 $string ['questionaire_go_to_start'] = 'Zur Anfangsseite';
 $string ['questionaire_submit'] = 'Abgeben';
 $string ['questionaire_submit_disabled_teacher'] = 'Abgeben ist deaktiviert, da dies nur eine Vorschau ist.';
 $string ['questionaire_preview'] = 'Das ist eine Vorschau des Fragebogens.';
 $string ['category_general'] = 'Allgemeines';
 $string ['category_grade'] = 'Ziele';
+$string ['category_points'] = 'Ziele';
 $string ['category_team'] = 'Gruppenaspekte';
 $string ['category_character'] = 'Persönlichkeitsmerkmale';
 $string ['category_motivation'] = 'Kurs-Motivation';
@@ -184,12 +186,12 @@ $string ['info_text_teacher_settings'] = 'Mit diesem Plugin haben Sie die Mögli
 		Studierende anzugeben. Wenn Sie möchten, dass die Studierenden sich im Vorwissen gut ergänzen in den später gebildeten Gruppen, können Sie die Vorwissensthemen 
 		zur Abfrage angeben.<br>
 		2.)	Studierende sehen den Fragebogen, welcher basierend auf Ihren Einstellungen erstellt wurde. Die Dauer der Verfügbarkeit der Fragen können Sie einstellen (siehe 1.). 
-		Eine Vorschau des Studierenden-Fragebogens erhalten Sie beim späteren Öffnen der Aktivität als Dozent/in.<br>
+		Eine Vorschau des Studierenden-Fragebogens erhalten Sie beim späteren Öffnen der Aktivität als Lehrende/r.<br>
 		3.)	Sie können unter dem Menüpunkt ‚Gruppenformation‘, wenn Sie die Aktivität später selbst aufrufen, sehen, wie viele Antworten bereits 
 		vorliegen. Sind Sie mit dem Rücklauf zufrieden, starten Sie manuell die Bildung der Gruppen (dies geschieht niemals automatisch).<br>
 		Es dauert eine Weile, bis alle Gruppen fertig erstellt sind. Das Ergebnis können Sie sich noch einmal ansehen, bevor Sie die Gruppen so in Moodle übernehmen.<br>
 		<br>
-		Fertig. Jetzt können auch die Studierenden Ihre Gruppenmitglieder sehen. Es ist Ihnen als Dozent/in jederzeit möglich, die Gruppen manuell in Moodle nachzubearbeiten (bspw. bei Nachzüglern).<br>
+		Fertig. Jetzt können auch die Studierenden Ihre Gruppenmitglieder sehen. Es ist Ihnen als Lehrende/r jederzeit möglich, die Gruppen manuell in Moodle nachzubearbeiten (bspw. bei Nachzüglern).<br>
 ';
 $string ['info_text_teacher_analysis'] = 'Mit diesem Plugin haben Sie die Möglichkeit die Bildung von Gruppen Ihrer Studierenden zu optimieren. Die drei erforderlichen Schritte sind:<br>
 		<br>
@@ -207,14 +209,14 @@ $string ['info_text_teacher_analysis'] = 'Mit diesem Plugin haben Sie die Mögli
 		vorliegen. Sind Sie mit dem Rücklauf zufrieden, starten Sie manuell die Bildung der Gruppen (dies geschieht niemals automatisch).<br>
 		Es dauert eine Weile, bis alle Gruppen fertig erstellt sind. Das Ergebnis können Sie sich noch einmal ansehen, bevor Sie die Gruppen so in Moodle übernehmen.<br>
 		<br>
-		Fertig. Jetzt können auch die Studierenden Ihre Gruppenmitglieder sehen. Es ist Ihnen als Dozent/in jederzeit möglich, die Gruppen manuell in Moodle nachzubearbeiten (bspw. bei Nachzüglern).<br>
+		Fertig. Jetzt können auch die Studierenden Ihre Gruppenmitglieder sehen. Es ist Ihnen als Lehrende/r jederzeit möglich, die Gruppen manuell in Moodle nachzubearbeiten (bspw. bei Nachzüglern).<br>
 ';
-$string['statusGrupping0'] = 'Um die Gruppenbildung starten zu können, müssen Sie die Aktivität in Overview beenden';
-$string['statusGrupping1'] = 'Sie können die Gruppenbildung jetzt starten';
-$string['statusGrupping2'] = 'Die Gruppenbildung läuft';
-$string['statusGrupping3'] = 'Die Gruppenbildung wird abgebrochen';
-$string['statusGrupping4'] = 'Gruppenbildung ist abgeschlossen. Sie können den Gruppenvorschlag übernehmen, oder verwerfen.';
-$string['statusGrupping5'] = 'Die realen Gruppen sind gebildet. Sie können jetzt manuelle Veränderung an den Gruppen vornehmen ';
+$string['statusGrupping0'] = 'Um die Gruppenbildung starten zu können, müssen Sie die Aktivität im Tab Überblick beenden. ';
+$string['statusGrupping1'] = 'Sie können die Gruppenbildung jetzt starten.';
+$string['statusGrupping2'] = 'Die Gruppenbildung läuft. ';
+$string['statusGrupping3'] = 'Die Gruppenbildung wird abgebrochen. ';
+$string['statusGrupping4'] = 'Gruppenbildung ist abgeschlossen. Sie können den Gruppenvorschlag übernehmen, oder verwerfen. ';
+$string['statusGrupping5'] = 'Die realen Gruppen sind gebildet. Sie können jetzt manuelle Veränderung an den Gruppen vornehmen. ';
 $string['grouping_start'] = 'Gruppenbildung starten';
 $string['grouping_delete'] = 'Gruppenvorschlag verwerfen';
 $string['grouping_adopt'] = 'Gruppenvorschlag übernehmen';
@@ -222,7 +224,63 @@ $string['grouping_abort'] = 'Gruppenbildung abbrechen';
 $string['moodlegrouping_delete'] = 'Moodle-Gruppen l&ouml;schen';
 $string['questionaire_commited'] = 'Ihre Antworten sind abgegeben. Somit können Sie sie nicht mehr verändern.';
 $string['no_data_to_display'] = 'Keine Daten vorhanden.';
-// $string [''] = '';
+$string['onlyactivestudents'] = 'Zur Gruppenbildung sollen ausschließlich Studierende betrachtet werden, die mind. eine Frage beantwortet haben.';
+$string['emailnotifications'] = 'Nach Abschluss der Gruppenbildung möchte ich via Nachricht in Moodle benachrichtigt werden.';
+$string['onlyactivestudents_description'] = 'Zur Gruppenbildung sollen ausschließlich Studierende betrachtet werden, die mind. eine Frage beantwortet haben.';
+$string['emailnotifications_description'] = 'Nach Abschluss der Gruppenbildung möchte ich via Nachricht in Moodle benachrichtigt werden.';
+$string['sampleGroupName'] = 'Der Name deiner Gruppe ist ';
+$string['oneManGroup'] = 'Du bist allein in dieser Gruppe.';
+$string['noUser'] = 'Der Nutzer existiert nicht!';
+$string['membersAre'] = 'Deine Arbeitskollegen sind: ';
+$string['groupingNotReady'] = 'Die Gruppenbildung ist noch nicht abgeschlossen.';
+$string['jobGetName'] = 'Gruppenbildung und Aufräumen';
+$string['no_time'] = 'Kein Zeitpunkt festgelegt';
+$string['activity_end'] = 'Aktivität beenden';
+$string['activity_start'] = 'Aktivität starten';
+$string['analysis_status_info0'] = 'Sie müssen die Aktivität beenden, bevor sie Gruppen bilden können.';
+$string['analysis_status_info1'] = 'Sie müssen die Aktivität starten, damit Studierende den Fragebogen beantworten können.';
+$string['analysis_status_info2'] = 'Die Gruppenbildung wurde bereits angestoßen bzw. durchgeführt. Die Aktivität kann nicht mehr gestartet werden.';
+$string['analysis_status_info3'] = 'Sie können die Aktivität starten oder beenden.';
+$string['analysis_status_info4'] = 'Sie können die Gruppenbildung jetzt starten.';
+$string['contact_members'] = 'Um deine Gruppenmitglieder zu kontaktieren, klicke auf deren Profilnamen.';
+$string['invalid'] = 'Ungültiger Zustand';
+$string['groups_build'] = 'Gruppen sind gebildet.';
+$string['activity_visible'] = 'Die Aktivität ist für dich nicht einsehbar.';
 
+$string['are'] = 'Es gibt ';
+$string['are_now'] = 'Es gibt derzeit ';
+$string['students_available_single'] = ' eingeschriebenen Studierenden, der den Fragebogen ausfüllen kann.';
+$string['students_available_multiple'] = ' eingeschriebene Studierende, die den Fragebogen ausfüllen können.';
+$string['students_answered_single'] = 'Studierender hat den Fragebogen bearbeitet.';
+$string['students_answered_multiple'] = 'Studierende haben den Fragebogen bearbeitet.';
+$string['name_by_group'] = 'Name: ';
+$string['quality'] = 'Gruppenqualität: ';
+$string['quality_info'] = 'Der Gruppen-Performanz-Index (GPI) gibt die Qualität der gebildeten Gruppe wieder und ist ein Wert zwischen 0 und 1. Je größer der Wert, deste besser ist die gebildete Gruppe. Ist kein Wert angegeben, so sind die Gruppen nicht algorithmisch gebildet, sondern randomisiert.';
+$string['to_groupview'] = 'zur Moodle Gruppenansicht';
+$string['number_member'] = 'Anzahl Mitglieder: ';
+$string['kohort_index'] = 'Kohorten-Performanz-Index: ';
+$string['kohort_index_info'] = 'Der Kohorten-Performanz-Index (KPI) gibt die Qualität der gebildeten Gruppen wieder und ist ein Wert zwischen 0 und 1. Je größer der Wert, desto besser sind die gebildeten Gruppen.';
+$string['max_group_size'] = 'Maximale Gruppengröße: ';
+$string['number_of_groups'] = 'Anzahl gebildeter Gruppen: ';
+$string['options'] = 'Optionen';
+$string['activity'] = 'Aktivität ';
+$string['statistic'] = 'Fragebogenstatistik';
+$string['group_building'] = 'Gruppenbildung ';
+$string['evaluation'] = 'Auswertung';
+$string['group_overview'] = 'Übersicht gebildeter Gruppen';
+$string['max_group_size_not_reached'] = 'Maximale Gruppengröße wurde bei folgenden Gruppen nicht erreicht:';
+$string['your_group'] = 'Deine Gruppe ';
+$string['students_grouping_single'] = ' Studierende zur Gruppenbildung.';
+$string['students_grouping_multiple'] = ' Studierende zur Gruppenbildung.';
+$string['students_commited_single'] = ' Studierende davon haben ihre Antworten schon endgültig abgegeben.';
+$string['students_commited_multiple'] = ' Studierende davon hat seine Antworten schon endgültig abgegeben.';
+$string['commited_not_completed'] = ' von den fest abgegebenen Fragebögen sind nicht vollständig.';
+$string['completed_questionaire'] = ' vollständig beantwortete Fragebögen.';
+$string['emailnotifications_info'] = 'Sie werden via Moodle benachrichtigt, wenn sie abgeschlossen ist.';
+$string['onlyactivestudents_info'] = 'Zur Gruppenbildung werden ausschließlich Studierende betrachtet werden, die mind. eine Frage beantwortet haben. Sie können das in den {$a->url} anpassen.';
+$string ['starttime'] = 'Startzeit';
+$string ['endtime'] = 'Endzeit';
 
-	
+$string['excellent'] = 'sehr gut';
+$string['none'] = 'gar nicht';
+$string['bad'] = 'schlecht';

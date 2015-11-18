@@ -54,9 +54,9 @@ function groupformation_add_jquery($PAGE, $filename = null) {
  * @return boolean
  */
 function groupformation_log($userid, $groupformationid, $message, $level = 'info') {
-	$logging_controller = new mod_groupformation_logging_controller ();
-	
-	return $logging_controller->handle ( $userid, $groupformationid, $message, $level );
+	return false;
+// 	$logging_controller = new mod_groupformation_logging_controller ();
+// 	return $logging_controller->handle ( $userid, $groupformationid, $message, $level );
 }
 
 /**
@@ -195,3 +195,4 @@ function groupformation_set_activity_completion($course,$cm,$userid){
 	$completion = new completion_info ( $course );
 	$completion->set_module_viewed ( $cm, $userid );
 }
+

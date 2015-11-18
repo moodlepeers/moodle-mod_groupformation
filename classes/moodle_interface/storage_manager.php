@@ -40,8 +40,7 @@ class mod_groupformation_storage_manager {
 	 */
 	public function __construct($groupformationid) {
 		$this->groupformationid = $groupformationid;
-		$this->data = new mod_groupformation_data ();
-		$this->gm = new mod_groupformation_groups_manager ( $groupformationid );
+		$this->gm = new mod_groupformation_groups_manager($groupformationid);
 	}
 	
 	public function show_logging(){
@@ -115,8 +114,7 @@ class mod_groupformation_storage_manager {
 	
 	/**
 	 * Sets answer counter for user
-	 *
-	 * @param int $userid        	
+	 * @param int $userid
 	 */
 	public function set_answer_count($userid) {
 		global $DB;
@@ -218,45 +216,17 @@ class mod_groupformation_storage_manager {
 	public function getTotalUserIds() {
 		global $DB;
 		
-		$array = array ();
-		
-		$records = $DB->get_records ( 'groupformation_started', array (
-				'groupformation' => $this->groupformationid 
-		) );
-		
-		foreach ( $records as $record ) {
-			
-			$array [] = $record->userid;
-		}
+		// TODO: Check that this next line is correct here. Ambigious from merge
+		$array = $DB->get_fieldset_select('groupformation_started', 'userid', 'groupformation = ' . $this->groupformationid);
 		
 		return $array;
 	}
-	
-	/**
-	 * Returns all users (user IDs) who completed the questionaire
-	 *
-	 * @return multitype:NULL
-	 */
-	public function getUserIdsCompleted() {
-		global $DB;
-		
-		$array = array ();
-		$records = $DB->get_records ( 'groupformation_started', array (
-				'groupformation' => $this->groupformationid,
-				'completed' => '1' 
-		) );
-		foreach ( $records as $record ) {
-			$array [] = $record->userid;
-		}
-		
-		return $array;
-	}
-	
+
 	/**
 	 * Determines the number of answered questions of a user (in all categories or a specified category)
 	 *
-	 * @param int $userId        	
-	 * @param string $category        	
+	 * @param int $userId
+	 * @param string $category
 	 * @return number
 	 */
 	public function get_number_of_answers($userId, $category = null) {
@@ -462,11 +432,12 @@ class mod_groupformation_storage_manager {
 		
 		return $array;
 	}
+	
 	public function getPossibleLang($category) {
 		global $DB;
 		
 		$table = 'groupformation_' . $category;
-		$lang = $DB->get_field ( $table, 'language', array (), IGNORE_MULTIPLE );
+		$lang = $DB->get_field($table, 'language', array(), IGNORE_MULTIPLE);
 		return $lang;
 	}
 	
@@ -513,7 +484,9 @@ class mod_groupformation_storage_manager {
 	 */
 	public function getMaxOptionOfCatalogQuestion($i, $category = 'grade') {
 		global $DB;
-		
+		if ($category == 'points'){
+			return $this->get_max_points();
+		}
 		$table = "groupformation_" . $category;
 		return $DB->get_field ( $table, 'optionmax', array (
 				'language' => 'en',
@@ -553,7 +526,7 @@ class mod_groupformation_storage_manager {
 		) );
 		
 		if ($name) {
-			return $this->data->get_scenario_name ( $settings->szenario );
+			return $this->data->get_scenario_name( $settings->szenario );
 		}
 		
 		return $settings->szenario;
@@ -588,7 +561,7 @@ class mod_groupformation_storage_manager {
 		if ($status == 0) {
 			$this->setCompleted ( $userId, true );
 			// TODO Mathevorkurs
-			$this->gm->assign_to_group_AB ( $userId );
+			$this->gm->assign_to_group_AB($userId);
 		}
 	}
 	
@@ -689,7 +662,7 @@ class mod_groupformation_storage_manager {
 	 */
 	public function has_answer($userId, $category, $questionId) {
 		global $DB;
-		
+
 		return $DB->record_exists ( 'groupformation_answer', array (
 				'groupformation' => $this->groupformationid,
 				'userid' => $userId,
@@ -710,8 +683,14 @@ class mod_groupformation_storage_manager {
 		foreach ( $category_set as $category ) {
 			if ($this->getNumber ( $category ) > 0) {
 				// if ($category != 'general' || ($category == 'general' && $this->getEvaluationMethod() != 1))
-				if ($category != 'grade' || $this->askForGrade ())
+				// TODO: Check this is correctly merged (line above and all ifs below)
+				if ($category == 'grade' && $this->askForGrade ()) {
 					$categories [] = $category;
+				} elseif ($category == 'points' && $this->askForPoints ()) {
+					$categories [] = $category;
+				} elseif ($category != 'grade' && $category != 'points') {
+					$categories [] = $category;
+				}
 			}
 		}
 		return $categories;
@@ -730,9 +709,18 @@ class mod_groupformation_storage_manager {
 		$evaluationmethod = $DB->get_field ( 'groupformation', 'evaluationmethod', array (
 				'id' => $this->groupformationid 
 		) );
+		// TODO: Better use here if () {} else {} code style
 		if ($evaluationmethod != 1 && $evaluationmethod != 2)
-			return false;
-		return true;
+		return $evaluationmethod == 1;
+	}
+	public function askForPoints() {
+		global $DB;
+		
+		$evaluationmethod = $DB->get_field ( 'groupformation', 'evaluationmethod', array (
+				'id' => $this->groupformationid 
+		) );
+		
+		return $evaluationmethod == 2;
 	}
 	
 	/**
@@ -743,7 +731,7 @@ class mod_groupformation_storage_manager {
 	public function already_answered() {
 		global $DB;
 		
-		return ! ($DB->count_records ( 'groupformation_answer', array (
+		return !($DB->count_records ( 'groupformation_answer', array (
 				'groupformation' => $this->groupformationid 
 		) ) == 0);
 	}
@@ -798,6 +786,19 @@ class mod_groupformation_storage_manager {
 				'userid' => $userid,
 				'category' => $category,
 				'questionid' => $questionid 
+		) );
+	}
+	
+	/**
+	 * Returns maximum number of points
+	 *
+	 * @return mixed
+	 */
+	public function get_max_points() {
+		global $DB;
+		
+		return $DB->get_field ( 'groupformation', 'maxpoints', array (
+				'id' => $this->groupformationid 
 		) );
 	}
 	
@@ -1059,9 +1060,9 @@ class mod_groupformation_storage_manager {
 	 * @return boolean
 	 */
 	public function isQuestionaireAccessible() {
-		$times = $this->getTime ();
-		$condition = $times ['end_raw'] < time ();
-		return (! $this->isQuestionaireAvailable () && $condition);
+		$times = $this->getTime();
+		$condition = $times['end_raw'] < time ();
+		return (! $this->isQuestionaireAvailable() && $condition);
 	}
 	
 	/**
@@ -1070,8 +1071,47 @@ class mod_groupformation_storage_manager {
 	 * @return int
 	 */
 	public function get_total_number_of_answers() {
-		$categories = $this->getCategories ();
-		$numbers = $this->getNumbers ( $categories );
-		return array_sum ( $numbers );
+		return array_sum($numbers);
+	}
+	public function get_grouping_setting() {
+		global $DB;
+		return $DB->get_field ( 'groupformation', 'onlyactivestudents', array (
+				'id' => $this->groupformationid 
+		) );
+	}
+	public function get_email_setting() {
+		global $DB;
+		// TODO Ahmed
+		return 0;
+		// return $DB->get_field('groupformation', 'emailnotifications', array('id'=>$this->groupformationid));
+	}
+	
+	/**
+	 * Returns label set
+	 *
+	 * @return multitype:multitype:string
+	 */
+	public function getLabelSet() {
+		$array = $this->data->getLabelSet ( $this->getScenario () );
+		
+		if ($this->groupformationid != null) {
+			$hasTopic = $this->getNumber ( 'topic' );
+			$hasKnowledge = $this->getNumber ( 'knowledge' );
+			$grades = $this->askForGrade ();
+			$points = $this->askForPoints();
+			
+			$position = 0;
+			foreach ( $array as $c ) {
+				if (('points' == $c && $points == false) || ('grade' == $c && $grades == false) || ($hasTopic == 0 && 'topic' == $c) || ($hasKnowledge == 0 && ('knowledge_heterogen' == $c || 'knowledge_homogen' == $c))) {
+					unset ( $array [$position] );
+				}
+				
+				$position ++;
+			}
+		}
+		return $array;
+	}
+	public function getHomogenSet() {
+		return $this->data->getHomogenSet ( $this->getScenario () );
 	}
 }

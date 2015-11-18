@@ -20,7 +20,7 @@
 	 * @author Nora Wester
 	 * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 	 */
-	// TODO noch nicht getestet
+	//
 	// defined('MOODLE_INTERNAL') || die(); -> template
 	// namespace mod_groupformation\classes\lecturer_settings;
 	if (! defined ( 'MOODLE_INTERNAL' )) {
@@ -55,14 +55,14 @@
 				
 				$name = $this->groups_store->get_group_name ( $userid );
 				
-				echo 'Der Name deiner Gruppe ist ' . $name . ' (ID #' . $id . ')<br>';
+				echo get_string('sampleGroupName', 'groupformation') . $name . ' (ID #' . $id . ')<br>';
 				
 				// echo 'Deine Gruppennummer ist ' . $id . '<br>';
 				
 				$otherMembers = $this->groups_store->get_group_members ( $userid );
 				
 				if (count ( $otherMembers ) > 0) {
-					echo 'Deine Arbeitskollegen sind: <br>';
+					echo get_string('membersAre', 'groupformation') . '<br>';
 					
 					foreach ( $otherMembers as $memberid ) {
 						
@@ -71,16 +71,16 @@
 						$url = $CFG->wwwroot . '/user/view.php?id=' . $memberid . '&course=' . $COURSE->id;
 						
 						if (! $member) {
-							echo 'user does not exist!';
+							echo get_string('noUser', 'groupformation');
 						}
 						
 						echo '<a href="' . $url . '">' . fullname ( $member ) . '</a>';
 					}
 				}else{
-					echo 'Du bist allein in dieser Gruppe.';
+					echo get_string('oneManGroup', 'groupformation');
 				}
 			} else {
-				echo '<h5> Die Gruppenbildung ist noch nicht abgeschlossen. </h>';
+				echo '<h5>' . get_string('groupingNotReady', 'groupformation') . '</h>';
 			}
 		}
 	}

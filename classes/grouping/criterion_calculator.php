@@ -72,23 +72,35 @@
 		}
 		
 		/**
-		 * Determines preferred language chosen by user
+		 * Determines values in category 'general' chosen by user
 		 * 
 		 * @param int $userId
 		 * @return string
 		 */
-		
-		//TODO Sprachcodierung 
-		public function getLang($userId){
-			$lang = $this->store->getSingleAnswer($userId, 'general', 1);
-			$valueMax = $this->store->getMaxOptionOfCatalogQuestion($num, $category);
+		public function getGeneralValues($userId){
+			$value = $this->store->getSingleAnswer($userId, 'general', 1);
 			
-	//	if($lang == 1 || $lang == 3){
-	//			return 'en';
-	//		}else{
-	//			return 'de';
-	//		}
-			return $lang/$valueMax;
+			$question = $this->store->getCatalogQuestion(1, 'general', 'en');
+			
+			if ($value == 1){
+				// ENGLISH 1.0
+				// GERMAN 0.0
+				$values = array(1.0,0.0);
+			} elseif ($value == 2){
+				// ENGLISH 0.0
+				// GERMAN 1.0
+				$values = array(0.0,1.0);
+			} elseif ($value == 3){
+				// ENGLISH 1.0
+				// GERMAN 0.5
+				$values = array(1.0,0.5);
+			} elseif ($value == 4){
+				// ENGLISH 0.5
+				// GERMAN 1.0
+				$values = array(0.5,1.0);
+			}
+			
+			return $values;
 		}
 		
 		
@@ -159,10 +171,25 @@
 		}
 		
 		/**
+		 * Returns the answer of the n-th grade question
+		 *
+		 * @param int $position
+		 * @param int $userId
+		 * @return float
+		 */
+		public function getPoints($position, $userId){
+			$question = $this->store->getCatalogQuestion($position, 'points');
+			$max = $this->store->get_max_points();
+			$answer = $this->store->getSingleAnswer($userId, 'points', $position);
+			//return floatval($options[$answer-1]);
+			return floatval($answer/$max);
+		}
+		
+		/**
 		 * Returns the position of the question, which is needed for the grade criterion
-		 * 
+		 *
 		 * $users are the ids for the variance calculation
-		 * 
+		 *
 		 * @param unknown $users
 		 * @return number
 		 */
@@ -171,20 +198,107 @@
 			$position = 1;
 			$total = 0;
 			$totalOptions = 0;
-			
+				
+			// iterates over three grade questions
 			for($i = 1; $i <= 3; $i++){
+		
+				// answers for catalog question in category 'grade'
 				$answers = $this->store->getAnswersToSpecialQuestion('grade', $i);
+		
+				// number of options for catalog question
 				$totalOptions = $this->store->getMaxOptionOfCatalogQuestion($i, 'grade');
+		
+				//
 				$dist = $this->getInitialArray($totalOptions);
+		
+				// iterates over answers for grade questions
 				foreach($answers as $answer){
+					
+				// checks if answer is relevant for this group of users
 					if(in_array($answer->userid, $users)){
+		
+					// increments count for answer option
 						$dist[($answer->answer)-1]++;
+		
+						// increments count for total
+						if($i == 1){
+						$total++;
+					}
+					}
+					}
+		
+					// computes tempE for later use
+					$tempE = 0;
+					$p = 1;
+					foreach($dist as $d){
+					$tempE = $tempE + ($p * ($d / $total));
+					$p++;
+					}
+		
+						// computes tempV to find maximal variance
+						$tempV = 0;
+						$p = 1;
+						foreach($dist as $d){
+						$tempV = $tempV + ((pow(($p - $tempE),2)) * ($d / $total));
+							$p++;
+						}
+		
+						// sets position by maximal variance
+						if($varianz < $tempV){
+						$varianz = $tempV;
+						$position = $i;
+			}
+			}
+				
+			return $position;
+			}
+		
+		/**
+		 * Returns the position of the question, which is needed for the points criterion
+		 * 
+		 * $users are the ids for the variance calculation
+		 * 
+		 * @param unknown $users
+		 * @return number
+		 */
+		public function getPointsPosition($users){
+			$varianz = 0;
+			$position = 1;
+			$total = 0;
+			$totalOptions = 0;
+			
+			// iterates over three grade questions
+			for($i = 1; $i <= $this->store->getNumber('points'); $i++){
+				
+				// answers for catalog question in category 'grade'
+				$answers = $this->store->getAnswersToSpecialQuestion('points', $i);
+				
+				$min_value = 0;
+				$max_value = $this->store->get_max_points();
+				
+				// number of options for catalog question
+				$totalOptions = $this->store->getMaxOptionOfCatalogQuestion($i, 'points');
+				
+				// 
+				$dist = $this->getInitialArray($totalOptions);
+				
+				// iterates over answers for grade questions
+				foreach($answers as $answer){
+					
+					// checks if answer is relevant for this group of users
+					if(in_array($answer->userid, $users)){
+						
+						// increments count for answer option
+						$dist[($answer->answer)-1]++;
+						
+						// increments count for total
 						if($i == 1){
 							$total++;
 						}
 					}
 				}
 				
+				// computes tempE for later use
 				$tempE = 0;
 				$p = 1;
 				foreach($dist as $d){
@@ -192,6 +306,7 @@
 					$p++;
 				}
 				
+				// computes tempV to find maximal variance
 				$tempV = 0;
 				$p = 1;
 				foreach($dist as $d){
@@ -199,6 +314,7 @@
 					$p++;
 				}
 				
+				// sets position by maximal variance
 				if($varianz < $tempV){
 					$varianz = $tempV;
 					$position = $i;

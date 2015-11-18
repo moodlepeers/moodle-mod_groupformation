@@ -727,5 +727,72 @@ function xmldb_groupformation_upgrade($oldversion) {
 		upgrade_mod_savepoint(true, 2015081300, 'groupformation');
 	}
 	
+	if ($oldversion < 2015092600) {
+	
+		// Define field onlyactivestudents to be added to groupformation.
+		$table = new xmldb_table('groupformation');
+		$field = new xmldb_field('onlyactivestudents', XMLDB_TYPE_INTEGER, '1', null, null, null, null, 'maxpoints');
+	
+		// Conditionally launch add field onlyactivestudents.
+		if (!$dbman->field_exists($table, $field)) {
+			$dbman->add_field($table, $field);
+		}
+		
+		// Define field emailnotifications to be added to groupformation.
+		$table = new xmldb_table('groupformation');
+		$field = new xmldb_field('emailnotifications', XMLDB_TYPE_INTEGER, '1', null, null, null, null, 'onlyactivestudents');
+		
+		// Conditionally launch add field emailnotifications.
+		if (!$dbman->field_exists($table, $field)) {
+			$dbman->add_field($table, $field);
+		}
+	
+		// Groupformation savepoint reached.
+		upgrade_mod_savepoint(true, 2015092600, 'groupformation');
+	}
+	
+	if ($oldversion < 2015100100) {
+	
+		// Define field started_by to be added to groupformation_jobs.
+		$table = new xmldb_table('groupformation_jobs');
+		$field = new xmldb_field('started_by', XMLDB_TYPE_INTEGER, '20', null, null, null, null, 'done');
+	
+		// Conditionally launch add field started_by.
+		if (!$dbman->field_exists($table, $field)) {
+			$dbman->add_field($table, $field);
+		}
+	
+		// Groupformation savepoint reached.
+		upgrade_mod_savepoint(true, 2015100100, 'groupformation');
+	}
+	
+	if ($oldversion < 2015100300) {
+	
+		// Define table groupformation_grade to be created.
+		$table = new xmldb_table('groupformation_points');
+	
+		// Adding fields to table groupformation_grade.
+		$table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+		$table->add_field('type', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
+		$table->add_field('question', XMLDB_TYPE_TEXT, null, null, XMLDB_NOTNULL, null, null);
+		$table->add_field('options', XMLDB_TYPE_TEXT, null, null, XMLDB_NOTNULL, null, null);
+		$table->add_field('language', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
+		$table->add_field('position', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+		$table->add_field('optionmax', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+	
+		// Adding keys to table groupformation_grade.
+		$table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+	
+		// Conditionally launch create table for groupformation_grade.
+		if (!$dbman->table_exists($table)) {
+			$dbman->create_table($table);
+		}
+	
+		// Groupformation savepoint reached.
+		upgrade_mod_savepoint(true, 2015100300, 'groupformation');
+	}
+	
+	
+	
 	return true;
 }

@@ -1,4 +1,4 @@
-<div class="gf_pad_header_small"> Optionen </div>
+<div class="gf_pad_header_small"> <?php echo get_string('options', 'groupformation');?> </div>
 <div class="gf_pad_content" style="">
     <div class="grid">
         <div class="col_m_100">

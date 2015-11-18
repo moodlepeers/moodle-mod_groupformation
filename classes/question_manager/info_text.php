@@ -45,7 +45,7 @@ class mod_groupformation_info_text {
 	
 	// Anzeige, dass die Gruppen gebildet worden sind
 	public function __groupsAvailable() {
-		echo 'Gruppen sind gebildet';
+		echo get_string('groups_build', 'groupformation');
 	}
 	
 	/**

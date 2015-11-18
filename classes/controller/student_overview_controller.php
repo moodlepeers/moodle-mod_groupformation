@@ -140,14 +140,14 @@ class mod_groupformation_student_overview_controller {
 
             case 2:         // Groups are built
                 $this->groupformation_info = mod_groupformation_util::get_info_text_for_student(false, $this->groupformationid);
-                $this->groupformation_state_info = array('Gruppen sind gebildet');
+                $this->groupformation_state_info = array(get_string('groups_build', 'groupformation'));
                 $this->buttons_info = '';
                 $this->buttons_array = array();
                 break;
 
             case 3:         // The activity is not accessible for the student/teacher
                 $this->groupformation_info = mod_groupformation_util::get_info_text_for_student(false, $this->groupformationid);
-                $this->groupformation_state_info = array('Die Aktivität ist für dich nicht einsehbar.');
+                $this->groupformation_state_info = array(get_string('activity_visible', 'groupformation'));
                 $this->buttons_info = '';
                 $this->buttons_array = array();
                 break;
@@ -161,7 +161,7 @@ class mod_groupformation_student_overview_controller {
                 break;
 
             default:
-                $this->groupformation_state_info = array('invalid status');
+                $this->groupformation_state_info = array(get_string('invalid', 'groupformation'));
                 $this->buttons_info = '';
                 $this->buttons_array = array();
                 break;
@@ -188,7 +188,9 @@ class mod_groupformation_student_overview_controller {
                     'id' => $this->cmid,
                     'category' => $key
                 ) );
-                if (! $prev_incomplete) {
+                // repair condition for mathevorkurs
+                // if (!$prev_incomplete) {
+                if (true || ! $prev_incomplete) {
                     $a->category = '<a href="' . $url . '">' . $a->category . '</a>';
                 }
                 if ($values ['missing'] == 0) {
