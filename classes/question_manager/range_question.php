@@ -17,7 +17,7 @@
  * Prints a particular instance of groupformation
  *
  * @package mod_groupformation
- * @author
+ * @author Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
  *
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

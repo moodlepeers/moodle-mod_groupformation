@@ -23,7 +23,7 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
  * This code is extracted out of /group/autogroup.php
  *
  * @package mod_groupformation
- * @copyright Nora Wester
+ * @author Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

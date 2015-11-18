@@ -1,4 +1,12 @@
-$(document).ready(function() {
+/*!
+ * moodle-mod_groupformation JavaScript 
+ * https://github.com/jkonert/moodle-mod_groupformation
+ *
+ *
+ * @author Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+ $(document).ready(function() {
 
     // TODO Einkommentieren wenn die Topics in erfolgreich in DB geschrieben werden
     // $('#invisible_topics_inputs').hide();

@@ -19,7 +19,7 @@
  *
  * @package mod_groupformation
  * @category backup
- * @copyright Nora Wester
+ * @author Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 	defined('MOODLE_INTERNAL') || die();
@@ -32,7 +32,7 @@
  	*
  	* @package mod_groupformation
  	* @category backup
- 	* @copyright Nora Wester
+ 	 * @author Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
  	* @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 	*/
 	class restore_groupformation_activity_task extends restore_activity_task {

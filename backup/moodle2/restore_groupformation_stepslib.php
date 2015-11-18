@@ -19,7 +19,7 @@
  *
  * @package mod_groupformation
  * @category backup
- * @copyright Nora Wester
+ * @author Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 	
@@ -28,7 +28,7 @@
  	*
  	* @package mod_groupformation
  	* @category backup
- 	* @copyright Nora Wester
+ 	 * @author Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
  	* @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  	*/
 	class restore_groupformation_activity_structure_step extends restore_activity_structure_step {

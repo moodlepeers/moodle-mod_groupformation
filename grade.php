@@ -19,7 +19,7 @@
  *
  * @package mod_groupformation
  * @category grade
- * @copyright 2014 Nora Wester
+ * @author Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 	require_once(__DIR__ . "../../config.php");
