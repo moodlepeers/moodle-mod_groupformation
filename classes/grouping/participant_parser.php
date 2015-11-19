@@ -21,7 +21,6 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once ($CFG->dirroot . '/lib/groupal/classes/Criteria/SpecificCriterion.php');
-require_once ($CFG->dirroot . '/lib/groupal/classes/Criteria/TopicCriterion.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/Participant.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/criterion_calculator.php');
