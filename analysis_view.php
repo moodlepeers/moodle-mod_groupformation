@@ -102,7 +102,7 @@ require('tabs.php');
 
 /* ---------- Automated test user generation ------------ */
 
-$cqt = new mod_groupformation_test_user_generator ();
+$cqt = new mod_groupformation_test_user_generator ($cm);
 
 if ($delete_users) {
     $cqt->delete_test_users($groupformation->id);

@@ -91,7 +91,6 @@ class mod_groupformation_test_user_generator {
                     return false;
                 }
                 try {
-
                     foreach ($categories as $category) {
                         $m = $store->get_number($category);
                         for ($i = 1; $i <= $m; $i++) {
@@ -100,8 +99,10 @@ class mod_groupformation_test_user_generator {
                             $record->category = $category;
                             $record->questionid = $i; // $i, weil anzahl topics = anzahl id's
                             $record->userid = $userid;
+                            $record->timestamp = time();
                             if ($category == "topic" || $category == "knowledge") {
                                 $record->answer = ($j % 2 == 0) ? ($i) : ($m + 1 - $i); // $i, damit topics nur einmal, in "erstellter" Reihenfolge, sortiert sind
+
                             } else {
                                 if ($randomized) {
                                     $record->answer = rand(1, $store->get_max_option_of_catalog_question($i, $category));
@@ -112,9 +113,7 @@ class mod_groupformation_test_user_generator {
                             $all_records [] = $record;
                         }
                     }
-
                     $DB->insert_records("groupformation_answer", $all_records);
-
                 } catch (Exception $e) {
                     $this->echowarn("Error while saving answers status for user.");
                     return false;
@@ -154,7 +153,7 @@ class mod_groupformation_test_user_generator {
             foreach ($user_records as $userid => $record) {
 
                 try {
-                    $grouping_controller = new mod_groupformation_grouping_controller($groupformationid,$this->cm);
+                    $grouping_controller = new mod_groupformation_grouping_controller($groupformationid, $this->cm);
                     $grouping_controller->delete();
 
                     $DB->delete_records("user", array(

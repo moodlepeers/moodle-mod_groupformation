@@ -31,6 +31,8 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
+require_once ($CFG->dirroot . '/lib/groupal/classes/Criteria/topic_criterion.php');
+
 class mod_groupformation_criterion_calculator {
 	private $store;
 	private $user_manager;
@@ -553,7 +555,7 @@ class mod_groupformation_criterion_calculator {
 	public function get_topic($userid) {
 		$choices = $this->user_manager->get_answers ( $userid, 'topic', 'questionid', 'answer' );
 		
-		return new SpecificCriterion("topic", array_keys ( $choices ), 1, count(array_keys ( $choices )), true, 1);
+		return new lib_groupal_topic_criterion(array_keys ( $choices ));
 		#return new TopicCriterion ( array_keys ( $choices ) );
 	}
 }
