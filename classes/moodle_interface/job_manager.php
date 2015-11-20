@@ -459,7 +459,7 @@ class mod_groupformation_job_manager {
             lib_groupal_group::setGroupMembersMaxSize(max($group_sizes));
 
             $gfa = new lib_groupal_topic_algorithm ($group_sizes, $topic_participants);
-            $topic_cohort = $gfa->doOneFormation(); // this call takes time...
+            $topic_cohort = $gfa->do_one_formation(); // this call takes time...
 
             $endtime = microtime(true);
             $comptime = $endtime - $starttime;
@@ -510,7 +510,7 @@ class mod_groupformation_job_manager {
             // pure random groups because no answers
             $max = max($group_sizes);
             $gfra = new lib_groupal_random_algorithm ($random_participants, $max);
-            $random_cohort = $gfra->doOneFormation();
+            $random_cohort = $gfra->do_one_formation();
         }
 
         // if (count ( $random_participants ) > 0) {
@@ -568,7 +568,7 @@ class mod_groupformation_job_manager {
             $starttime = microtime(true);
 
             $gfa = new lib_groupal_basic_algorithm ($groupal_participants, $matcher, $group_size [0]);
-            $groupal_cohort = $gfa->doOneFormation(); // this call takes time...
+            $groupal_cohort = $gfa->do_one_formation(); // this call takes time...
 
             $endtime = microtime(true);
             $comptime = $endtime - $starttime;
@@ -578,7 +578,7 @@ class mod_groupformation_job_manager {
 
         if (count($random_participants) > 0) {
             $gfra = new lib_groupal_random_algorithm ($random_participants, $group_size [1]);
-            $random_cohort = $gfra->doOneFormation();
+            $random_cohort = $gfra->do_one_formation();
         }
 
         $cohorts = array(
