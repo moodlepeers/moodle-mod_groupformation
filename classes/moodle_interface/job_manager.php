@@ -452,7 +452,7 @@ class mod_groupformation_job_manager {
         $pp = new mod_groupformation_participant_parser ($groupformationid);
         $topic_participants = $pp->build_topic_participants($topic_users);
         $random_participants = $pp->build_empty_participants($incomplete_users);
-
+        var_dump($topic_participants,$random_participants);
         if (count($topic_participants) > 0) {
             $starttime = microtime(true);
 

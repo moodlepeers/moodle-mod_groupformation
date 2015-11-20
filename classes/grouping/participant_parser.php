@@ -405,7 +405,7 @@ class mod_groupformation_participant_parser {
 		$starttime = microtime ( true );
 		$participants = array ();
 		foreach ( $users as $userid ) {
-			$participant = new lib_groupal_participant ( null, $userid );
+			$participant = new lib_groupal_participant ( array(), $userid );
 			$participants [] = $participant;
 		}
 		$endtime = microtime ( true );
