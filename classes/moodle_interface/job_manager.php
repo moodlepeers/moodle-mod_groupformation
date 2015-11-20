@@ -39,8 +39,8 @@ require_once($CFG->dirroot . '/lib/groupal/classes/algorithms/basic_algorithm.ph
 require_once($CFG->dirroot . '/lib/groupal/classes/algorithms/random_algorithm.php');
 require_once($CFG->dirroot . '/lib/groupal/classes/algorithms/topic_algorithm.php');
 require_once($CFG->dirroot . '/lib/groupal/classes/Optimizer/optimizer.php');
-require_once($CFG->dirroot . '/lib/groupal/classes/participant_writer.php');
-require_once($CFG->dirroot . '/lib/groupal/classes/cohort_writer.php');
+require_once($CFG->dirroot . '/lib/groupal/classes/xml_writer/participant_writer.php');
+require_once($CFG->dirroot . '/lib/groupal/classes/xml_writer/cohort_writer.php');
 
 class mod_groupformation_job_manager {
 
