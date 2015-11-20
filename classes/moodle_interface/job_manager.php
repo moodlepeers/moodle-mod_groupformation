@@ -32,8 +32,8 @@ require_once ($CFG->dirroot . '/mod/groupformation/lib.php');
 require_once ($CFG->dirroot . '/mod/groupformation/locallib.php');
 
 require_once ($CFG->dirroot . '/lib/groupal/classes/Criteria/specific_criterion.php');
-require_once ($CFG->dirroot . '/lib/groupal/classes/Participant.php');
-require_once ($CFG->dirroot . '/lib/groupal/classes/Cohort.php');
+require_once ($CFG->dirroot . '/lib/groupal/classes/participant.php');
+require_once ($CFG->dirroot . '/lib/groupal/classes/cohort.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/Matcher/group_centric_matcher.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/basic_algorithm.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/random_algorithm.php');
