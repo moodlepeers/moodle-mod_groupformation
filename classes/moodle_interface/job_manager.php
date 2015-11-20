@@ -31,16 +31,16 @@ require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/grou
 require_once ($CFG->dirroot . '/mod/groupformation/lib.php');
 require_once ($CFG->dirroot . '/mod/groupformation/locallib.php');
 
-require_once ($CFG->dirroot . '/lib/groupal/classes/Criteria/SpecificCriterion.php');
+require_once ($CFG->dirroot . '/lib/groupal/classes/Criteria/specific_criterion.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/Participant.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/Cohort.php');
-require_once ($CFG->dirroot . '/lib/groupal/classes/Matcher/GroupALGroupCentricMatcher.php');
-require_once ($CFG->dirroot . '/lib/groupal/classes/GroupFormationAlgorithm.php');
-require_once ($CFG->dirroot . '/lib/groupal/classes/GroupFormationRandomAlgorithm.php');
-require_once ($CFG->dirroot . '/lib/groupal/classes/GroupFormationTopicAlgorithm.php');
-require_once ($CFG->dirroot . '/lib/groupal/classes/Optimizer/GroupALOptimizer.php');
-require_once ($CFG->dirroot . '/lib/groupal/classes/ParticipantWriter.php');
-require_once ($CFG->dirroot . '/lib/groupal/classes/CohortWriter.php');
+require_once ($CFG->dirroot . '/lib/groupal/classes/Matcher/group_centric_matcher.php');
+require_once ($CFG->dirroot . '/lib/groupal/classes/basic_algorithm.php');
+require_once ($CFG->dirroot . '/lib/groupal/classes/random_algorithm.php');
+require_once ($CFG->dirroot . '/lib/groupal/classes/topic_algorithm.php');
+require_once ($CFG->dirroot . '/lib/groupal/classes/Optimizer/optimizer.php');
+require_once ($CFG->dirroot . '/lib/groupal/classes/participant_writer.php');
+require_once ($CFG->dirroot . '/lib/groupal/classes/cohort_writer.php');
 class mod_groupformation_job_manager {
 	
 	/**
@@ -455,13 +455,13 @@ class mod_groupformation_job_manager {
 		
 		if (count ( $topic_participants ) > 0) {
 			// TODO Choose matcher
-			$matcher = new GroupALGroupCentricMatcher ();
+			$matcher = new lib_groupal_group_centric_matcher ();
 			
 			$starttime = microtime ( true );
 			
-			Group::setGroupMembersMaxSize ( max ( $group_sizes ) );
+			lib_groupal_group::setGroupMembersMaxSize ( max ( $group_sizes ) );
 			
-			$gfa = new GroupFormationTopicAlgorithm ( $group_sizes, $topic_participants );
+			$gfa = new lib_groupal_topic_algorithm ( $group_sizes, $topic_participants );
 			$topic_cohort = $gfa->doOneFormation (); // this call takes time...
 			
 			$endtime = microtime ( true );
@@ -474,7 +474,7 @@ class mod_groupformation_job_manager {
 			// now we have to add the remaining participants
 			$size = ceil ( (count ( $users [0] ) + count ( $users [1] )) / count ( $topic_cohort->groups ) );
 			// var_dump($size);
-			Group::setGroupMembersMaxSize ( $size );
+			lib_groupal_group::setGroupMembersMaxSize ( $size );
 			
 			$counts = array ();
 			$max = null;
@@ -511,12 +511,12 @@ class mod_groupformation_job_manager {
 		} else {
 			// pure random groups because no answers
 			$max = max ( $group_sizes );
-			$gfra = new GroupFormationRandomAlgorithm ( $random_participants, $max );
+			$gfra = new lib_groupal_random_algorithm ( $random_participants, $max );
 			$random_cohort = $gfra->doOneFormation ();
 		}
 		
 		// if (count ( $random_participants ) > 0) {
-		// $gfra = new GroupFormationRandomAlgorithm ( $random_participants, $group_size [1] );
+		// $gfra = new lib_groupal_random_algorithm ( $random_participants, $group_size [1] );
 		// $random_cohort = $gfra->doOneFormation ();
 		// }
 		
@@ -565,11 +565,11 @@ class mod_groupformation_job_manager {
 		if (count ( $groupal_participants ) > 0) {
 			
 			// TODO Choose matcher
-			$matcher = new GroupALGroupCentricMatcher ();
+			$matcher = new lib_groupal_group_centric_matcher ();
 			
 			$starttime = microtime ( true );
 			
-			$gfa = new GroupFormationAlgorithm ( $groupal_participants, $matcher, $group_size [0] );
+			$gfa = new lib_groupal_basic_algorithm ( $groupal_participants, $matcher, $group_size [0] );
 			$groupal_cohort = $gfa->doOneFormation (); // this call takes time...
 			
 			$endtime = microtime ( true );
@@ -579,7 +579,7 @@ class mod_groupformation_job_manager {
 		}
 		
 		if (count ( $random_participants ) > 0) {
-			$gfra = new GroupFormationRandomAlgorithm ( $random_participants, $group_size [1] );
+			$gfra = new lib_groupal_random_algorithm ( $random_participants, $group_size [1] );
 			$random_cohort = $gfra->doOneFormation ();
 		}
 		
@@ -591,12 +591,12 @@ class mod_groupformation_job_manager {
 		
 		// TODO XML WRITER : einkommentieren falls benötigt
 		// $path = $CFG->dirroot . '/mod/groupformation/xml_participants/' . "php_" . $groupformationid;
-		// $participant_writer = new participant_writer ( $path . "_participants.xml" );
+		// $participant_writer = new lib_groupal_participant_writer ( $path . "_participants.xml" );
 		// $participant_writer->write ( $groupal_participants );
 		
 		// TODO XML WRITER : einkommentieren falls benötigt
 		// $path = $CFG->dirroot . '/mod/groupformation/xml_participants/' . "php_" . $groupformationid;
-		// $cohort_writer = new cohort_writer($path."_cohort.xml");
+		// $cohort_writer = new lib_groupal_cohort_writer($path."_cohort.xml");
 		// $cohort_writer->write($groupal_cohort);
 		
 		return $cohorts;

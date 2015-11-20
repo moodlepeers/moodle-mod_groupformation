@@ -20,7 +20,7 @@
  * @author Nora Wester
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require_once ($CFG->dirroot . '/lib/groupal/classes/Criteria/SpecificCriterion.php');
+require_once ($CFG->dirroot . '/lib/groupal/classes/Criteria/specific_criterion.php');
 require_once ($CFG->dirroot . '/lib/groupal/classes/Participant.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/criterion_calculator.php');
@@ -43,7 +43,7 @@ class mod_groupformation_participant_parser {
 	 * @param unknown $users        	
 	 * @param unknown $labels        	
 	 * @param unknown $groupsize        	
-	 * @return multitype:Participant
+	 * @return multitype:lib_groupal_participant
 	 */
 	private function parse($users, $labels) {
 		$participants = array ();
@@ -84,9 +84,9 @@ class mod_groupformation_participant_parser {
 					$weight = (count ( $labels ) - 1) / 2;
 				}
 				
-				$criterion = new SpecificCriterion ( $label, $value, $minVal, $maxVal, $homogen, $weight );
+				$criterion = new lib_groupal_specific_criterion ( $label, $value, $minVal, $maxVal, $homogen, $weight );
 				if ($position == 0) {
-					$participant = new Participant ( array (
+					$participant = new lib_groupal_participant ( array (
 							$criterion 
 					), $user->id );
 				} else {
@@ -121,7 +121,7 @@ class mod_groupformation_participant_parser {
 			
 			$criterion = $this->criterion_calculator->get_topic ( $userid );
 			
-			$participant = new Participant ( array (
+			$participant = new lib_groupal_participant ( array (
 					$criterion 
 			), $userid );
 			
@@ -142,7 +142,7 @@ class mod_groupformation_participant_parser {
 	 * Builds Participants array using a parser (at the end)
 	 *
 	 * @param unknown $users        	
-	 * @return multitype:Participant
+	 * @return multitype:lib_groupal_participant
 	 */
 	public function build_participants($users) {
 		if (count ( $users ) == 0) {
@@ -405,7 +405,7 @@ class mod_groupformation_participant_parser {
 		$starttime = microtime ( true );
 		$participants = array ();
 		foreach ( $users as $userid ) {
-			$participant = new Participant ( null, $userid );
+			$participant = new lib_groupal_participant ( null, $userid );
 			$participants [] = $participant;
 		}
 		$endtime = microtime ( true );
