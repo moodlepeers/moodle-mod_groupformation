@@ -31,7 +31,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/group
 require_once($CFG->dirroot . '/mod/groupformation/lib.php');
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 
-require_once($CFG->dirroot . '/lib/groupal/classes/criterions/specific_criterion.php');
+require_once($CFG->dirroot . '/lib/groupal/classes/criteria/specific_criterion.php');
 require_once($CFG->dirroot . '/lib/groupal/classes/participant.php');
 require_once($CFG->dirroot . '/lib/groupal/classes/matchers/group_centric_matcher.php');
 require_once($CFG->dirroot . '/lib/groupal/classes/algorithms/basic_algorithm.php');
