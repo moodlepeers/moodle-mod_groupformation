@@ -31,7 +31,7 @@ if (! defined ( 'MOODLE_INTERNAL' )) {
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once ($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
-require_once ($CFG->dirroot . '/lib/groupal/classes/Criteria/topic_criterion.php');
+require_once ($CFG->dirroot . '/lib/groupal/classes/criterions/topic_criterion.php');
 
 class mod_groupformation_criterion_calculator {
 	private $store;

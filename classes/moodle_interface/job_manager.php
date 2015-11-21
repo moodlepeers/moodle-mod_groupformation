@@ -31,16 +31,15 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/group
 require_once($CFG->dirroot . '/mod/groupformation/lib.php');
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 
-require_once($CFG->dirroot . '/lib/groupal/classes/Criteria/specific_criterion.php');
+require_once($CFG->dirroot . '/lib/groupal/classes/criterions/specific_criterion.php');
 require_once($CFG->dirroot . '/lib/groupal/classes/participant.php');
-require_once($CFG->dirroot . '/lib/groupal/classes/cohort.php');
-require_once($CFG->dirroot . '/lib/groupal/classes/Matcher/group_centric_matcher.php');
+require_once($CFG->dirroot . '/lib/groupal/classes/matchers/group_centric_matcher.php');
 require_once($CFG->dirroot . '/lib/groupal/classes/algorithms/basic_algorithm.php');
 require_once($CFG->dirroot . '/lib/groupal/classes/algorithms/random_algorithm.php');
 require_once($CFG->dirroot . '/lib/groupal/classes/algorithms/topic_algorithm.php');
-require_once($CFG->dirroot . '/lib/groupal/classes/Optimizer/optimizer.php');
-require_once($CFG->dirroot . '/lib/groupal/classes/xml_writer/participant_writer.php');
-require_once($CFG->dirroot . '/lib/groupal/classes/xml_writer/cohort_writer.php');
+require_once($CFG->dirroot . '/lib/groupal/classes/optimizers/optimizer.php');
+require_once($CFG->dirroot . '/lib/groupal/classes/xml_writers/participant_writer.php');
+require_once($CFG->dirroot . '/lib/groupal/classes/xml_writers/cohort_writer.php');
 
 class mod_groupformation_job_manager {
 
@@ -452,7 +451,7 @@ class mod_groupformation_job_manager {
         $pp = new mod_groupformation_participant_parser ($groupformationid);
         $topic_participants = $pp->build_topic_participants($topic_users);
         $random_participants = $pp->build_empty_participants($incomplete_users);
-        var_dump($topic_participants,$random_participants);
+        // var_dump($topic_participants,$random_participants);
         if (count($topic_participants) > 0) {
             $starttime = microtime(true);
 
