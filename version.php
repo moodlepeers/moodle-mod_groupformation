@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -8,20 +9,20 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
- 
+// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
 /**
- * @package   mod_groupformation
- * @copyright 2014, Nora Wester
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * Version information
+ *
+ * @package mod_groupformation
+ * @author Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
- 
 defined('MOODLE_INTERNAL') || die();
-$plugin->version   = 2015111400;
+$plugin->version   = 2015112201;
 $plugin->requires  = 2015050500; //value taken from mod "feedback"
 $plugin->cron      = 0;//1*60; // seconds
 $plugin->component = 'mod_groupformation';

@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -8,16 +9,16 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
 /**
- * Task - Cron
+ * Scheduled Task for building groups and releasing aborted job requests
  *
  * @package mod_groupformation
- * @author Rene & Ahmed
+ * @author Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace mod_groupformation\task;
@@ -25,6 +26,7 @@ namespace mod_groupformation\task;
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 require_once($CFG->dirroot . '/mod/groupformation/lib.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/job_manager.php');
+
 class build_groups_task extends \core\task\scheduled_task {
 
     /**
@@ -33,7 +35,7 @@ class build_groups_task extends \core\task\scheduled_task {
      * @see \core\task\scheduled_task::get_name()
      */
     public function get_name() {
-        return get_string( 'jobget_name', 'groupformation' );
+        return get_string('jobget_name', 'groupformation');
     }
 
     /**
@@ -61,14 +63,14 @@ class build_groups_task extends \core\task\scheduled_task {
 
         $job = \mod_groupformation_job_manager::get_next_job();
 
-        if (! is_null( $job )) {
-            $result = \mod_groupformation_job_manager::do_groupal( $job );
-            $aborted = \mod_groupformation_job_manager::is_job_aborted( $job );
-            if (! $aborted) {
-                $saved = \mod_groupformation_job_manager::save_result( $job, $result );
+        if (!is_null($job)) {
+            $result = \mod_groupformation_job_manager::do_groupal($job);
+            $aborted = \mod_groupformation_job_manager::is_job_aborted($job);
+            if (!$aborted) {
+                $saved = \mod_groupformation_job_manager::save_result($job, $result);
 
                 // Notify teacher about finished group formation.
-                \mod_groupformation_job_manager::notify_teacher( $job );
+                \mod_groupformation_job_manager::notify_teacher($job);
             }
         }
     }
@@ -79,7 +81,7 @@ class build_groups_task extends \core\task\scheduled_task {
     private function reset_aborted_jobs() {
         $jobs = \mod_groupformation_job_manager::get_aborted_jobs();
         foreach ($jobs as $key => $job) {
-            \mod_groupformation_job_manager::reset_job( $job );
+            \mod_groupformation_job_manager::reset_job($job);
         }
     }
 }

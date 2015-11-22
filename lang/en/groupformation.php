@@ -22,7 +22,7 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
  */
-defined ( 'MOODLE_INTERNAL' ) || die ();
+defined('MOODLE_INTERNAL') || die ();
 
 $string ['language'] = 'en';
 $string ['modulename'] = 'Group formation';
@@ -303,6 +303,8 @@ $string['import_description_yes'] = 'You can import your answers by clicking on 
 $string['import_description_no'] = 'You cannot import your answers because you submitted your answers already or the questionnaire is not available.';
 $string['import_form_description'] = 'You can import your answers from previous questionnaires by submitting an "answers.xml" file below.';
 
-$string['file_error'] = 'You have to upload an *.xml file.' ;
+$string['file_error'] = 'You have to upload an *.xml file.';
 $string['failed_import'] = 'The import has failed due to an invalid format. Please upload a file with exportable answer format';
 $string['successful_import'] = 'The import was successful. You can review your answers in the questionnaire.';
+
+$string['archive_activity_task'] = 'Archiving old activities';

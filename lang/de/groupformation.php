@@ -307,3 +307,5 @@ $string['import_form_description'] = 'Du kannst Antworten von früheren Fragebö
 $string['file_error'] = 'Du musst eine *.xml-Datei hochladen.' ;
 $string['failed_import'] = 'Der Import ist fehlgeschlagen. Das Format der Datei war nicht korrekt. Bitte lade eine Datei mit exportierten Antworten hoch.';
 $string['successful_import'] = 'Der Import war erfolgreich. Du kannst deine Antworten im Tab "Fragebogen" einsehen.';
+
+$string['archive_activity_task'] = 'Archivierung alter Aktivitäten';

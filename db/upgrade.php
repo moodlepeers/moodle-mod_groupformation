@@ -15,17 +15,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
 /**
- * This file keeps track of upgrades to the groupformation module
- *
- * Sometimes, changes between versions involve alterations to database
- * structures and other major things that may break installations. The upgrade
- * function in this file will attempt to perform all the necessary actions to
- * upgrade your older installation to the current version. If there's something
- * it cannot do itself, it will tell you what you need to do. The commands in
- * here will all be database-neutral, using the functions defined in DLL libraries.
+ * Upgrade function for database changes
  *
  * @package mod_groupformation
- * @copyright 2014 Nora Wester
+ * @author Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined ( 'MOODLE_INTERNAL' ) || die ();
@@ -884,7 +877,19 @@ function xmldb_groupformation_upgrade($oldversion) {
 		// Groupformation savepoint reached.
 		upgrade_mod_savepoint(true, 2015111400, 'groupformation');
 	}
-	
-	
+
+	if ($oldversion < 2015112100) {
+
+		// Rename field szenario on table groupformation_q_settings to archived.
+		$table = new xmldb_table('groupformation_q_settings');
+		$field = new xmldb_field('szenario', XMLDB_TYPE_CHAR, '255', null, null, null, null, 'groupformation');
+
+		// Launch rename field szenario.
+		$dbman->rename_field($table, $field, 'archived');
+
+		// Groupformation savepoint reached.
+		upgrade_mod_savepoint(true, 2015112100, 'groupformation');
+	}
+
 	return true;
 }

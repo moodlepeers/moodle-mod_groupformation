@@ -122,12 +122,12 @@ if ($create_users > 0) {
 }
 
 /* ---------- / Automated test user generation ---------- */
-
+//
 /* ---------- Job Manager Usage ------------------------- */
 
 // $jm = new mod_groupformation_job_manager ();
 // $job = null;
-
+//
 // $job = $jm::get_job ( $groupformation->id );
 // //$jm->reset_job($job);
 // // var_dump($jm::get_next_job());
@@ -135,22 +135,10 @@ if ($create_users > 0) {
 // $result = $jm::do_groupal($job);
 // var_dump ( $result );
 // // $saved = $jm::save_result($job,$result);
-
+//
 // }
 
 /* ---------- / Job Manager Usage ----------------------- */
-
-/* ---------- Grouping Test Space ----------------------- */
-// $jm = new mod_groupformation_job_manager ();
-// $job = null;
-
-// $job = $jm::get_job ( $groupformation->id );
-// $userids = array_keys(groups_get_grouping_members ( $job->groupingid ));
-// foreach ( $userids as $userid ) {
-// 	var_dump ( $userid );
-// }
-
-/* ---------- / Grouping Test Space --------------------- */
 
 echo '<form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
 
