@@ -139,13 +139,15 @@ if ($create_users > 0) {
 // }
 
 /* ---------- / Job Manager Usage ----------------------- */
+if (groupformation_is_archived($groupformation->id) && has_capability('mod/groupformation:editsettings', $context)) {
+    echo '<div class="alert" id="commited_view">' . get_string('archived_activity_admin', 'groupformation') . '</div>';
+} else {
+    echo '<form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
 
-echo '<form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
+    echo '<input type="hidden" name="id" value="' . $id . '"/>';
 
-echo '<input type="hidden" name="id" value="' . $id . '"/>';
+    echo $controller->display();
 
-echo $controller->display();
-
-echo '</form>';
-
+    echo '</form>';
+}
 echo $OUTPUT->footer();

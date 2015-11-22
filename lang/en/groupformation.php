@@ -309,3 +309,4 @@ $string['successful_import'] = 'The import was successful. You can review your a
 
 $string['archive_activity_task'] = 'Archiving old activities';
 $string['archived_activity_answers'] = 'The activity has been archived. Your answers are no longer stored and there is nothing to do here.';
+$string['archived_activity_admin'] = 'The activity has been archived. There is nothing to do here.';

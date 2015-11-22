@@ -21,66 +21,66 @@
  * @author Nora Wester,
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require_once (dirname ( dirname ( dirname ( __FILE__ ) ) ) . '/config.php');
-require_once (dirname ( __FILE__ ) . '/lib.php');
-require_once (dirname ( __FILE__ ) . '/locallib.php');
+require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
+require_once(dirname(__FILE__) . '/lib.php');
+require_once(dirname(__FILE__) . '/locallib.php');
 // require_once (dirname(__FILE__).'/classes/grouping/group_generator.php');
 
 // Read URL params
-$id = optional_param ( 'id', 0, PARAM_INT ); // Course Module ID
-                                             // $g = optional_param ( 'g', 0, PARAM_INT ); // groupformation instance ID
-$do_show = optional_param ( 'do_show', 'grouping', PARAM_TEXT );
+$id = optional_param('id', 0, PARAM_INT); // Course Module ID
+// $g = optional_param ( 'g', 0, PARAM_INT ); // groupformation instance ID
+$do_show = optional_param('do_show', 'grouping', PARAM_TEXT);
 
 // Import jQuery and js file
-groupformation_add_jquery ( $PAGE, 'survey_functions.js' );
+groupformation_add_jquery($PAGE, 'survey_functions.js');
 
 // Determine instances of course module, course, groupformation
-groupformation_determine_instance ( $id, $cm, $course, $groupformation );
+groupformation_determine_instance($id, $cm, $course, $groupformation);
 
 // Require user login if not already logged in
-require_login ( $course, true, $cm );
+require_login($course, true, $cm);
 
 // Get useful stuff
 $context = $PAGE->context;
 $userid = $USER->id;
 
-if (! has_capability ( 'mod/groupformation:editsettings', $context )) {
-	$returnurl = new moodle_url ( '/mod/groupformation/view.php', array (
-			'id' => $id,
-			'do_show' => 'view' 
-	) );
-	redirect ( $returnurl );
+if (!has_capability('mod/groupformation:editsettings', $context)) {
+    $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
+        'id' => $id,
+        'do_show' => 'view'
+    ));
+    redirect($returnurl);
 } else {
-	$current_tab = $do_show;
+    $current_tab = $do_show;
 }
 
 // Get data for HTML output
-require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/storage_manager.php');
-require_once (dirname ( __FILE__ ) . '/classes/controller/grouping_controller.php');
-$store = new mod_groupformation_storage_manager ( $groupformation->id );
+require_once(dirname(__FILE__) . '/classes/moodle_interface/storage_manager.php');
+require_once(dirname(__FILE__) . '/classes/controller/grouping_controller.php');
+$store = new mod_groupformation_storage_manager ($groupformation->id);
 
 // set data and viewStatus of groupingView, after possible db update
-$controller = new mod_groupformation_grouping_controller ( $groupformation->id, $cm );
+$controller = new mod_groupformation_grouping_controller ($groupformation->id, $cm);
 
 if ($_POST) {
-	if (isset ( $_POST ['start'] )) {
-		$controller->start ($course,$cm);
-		unset ( $_POST ['start'] );
-	} elseif (isset ( $_POST ['abort'] )) {
-		$controller->abort ();
-		unset ( $_POST ['abort'] );
-	} elseif (isset ( $_POST ['adopt'] )) {
-		$controller->adopt ();
-		unset ( $_POST ['adopt'] );
-	} elseif (isset ( $_POST ['delete'] )) {
-		$controller->delete ();
-		unset ( $_POST ['delete'] );
-	}
-	$returnurl = new moodle_url ( '/mod/groupformation/grouping_view.php', array (
-			'id' => $id,
-			'do_show' => 'grouping' 
-	) );
-	redirect ( $returnurl );
+    if (isset ($_POST ['start'])) {
+        $controller->start($course, $cm);
+        unset ($_POST ['start']);
+    } elseif (isset ($_POST ['abort'])) {
+        $controller->abort();
+        unset ($_POST ['abort']);
+    } elseif (isset ($_POST ['adopt'])) {
+        $controller->adopt();
+        unset ($_POST ['adopt']);
+    } elseif (isset ($_POST ['delete'])) {
+        $controller->delete();
+        unset ($_POST ['delete']);
+    }
+    $returnurl = new moodle_url ('/mod/groupformation/grouping_view.php', array(
+        'id' => $id,
+        'do_show' => 'grouping'
+    ));
+    redirect($returnurl);
 }
 
 /*
@@ -92,38 +92,31 @@ if ($_POST) {
  */
 
 // Log access to page
-groupformation_info ( $USER->id, $groupformation->id, '<view_teacher_grouping>' );
+groupformation_info($USER->id, $groupformation->id, '<view_teacher_grouping>');
 
 // Set PAGE config
-$PAGE->set_url ( '/mod/groupformation/grouping_view.php', array (
-		'id' => $cm->id,
-		'do_show' => $do_show 
-) );
-$PAGE->set_title ( format_string ( $groupformation->name ) );
-$PAGE->set_heading ( format_string ( $course->fullname ) );
+$PAGE->set_url('/mod/groupformation/grouping_view.php', array(
+    'id' => $cm->id,
+    'do_show' => $do_show
+));
+$PAGE->set_title(format_string($groupformation->name));
+$PAGE->set_heading(format_string($course->fullname));
 
-echo $OUTPUT->header ();
+echo $OUTPUT->header();
 
 // Print the tabs.
-require ('tabs.php');
+require('tabs.php');
+if (groupformation_is_archived($groupformation->id) && has_capability('mod/groupformation:editsettings', $context)) {
+    echo '<div class="alert" id="commited_view">' . get_string('archived_activity_admin', 'groupformation') . '</div>';
+} else {
+    groupformation_check_for_cron_job();
 
-// if($s == 1){
-// mod_groupformation_startGrouping::start($groupformation->id);
-// }
-// Replace the following lines with you own code.
-// echo $OUTPUT->heading ( $groupformation->name );
+    echo '<form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
 
-// echo '<div style="color:red;">Diese Seite ist soweit fertig; Rückmeldung, wenn es etwas fehlt oder unverständlich ist, wäre super.</div>';
-// TODO @EG : form in das template packen?
+    echo '<input type="hidden" name="id" value="' . $id . '"/>';
 
-groupformation_check_for_cron_job();
+    echo $controller->display();
 
-echo '<form action="' . htmlspecialchars ( $_SERVER ["PHP_SELF"] ) . '" method="post" autocomplete="off">';
-
-echo '<input type="hidden" name="id" value="' . $id . '"/>';
-
-echo $controller->display ();
-
-echo '</form>';
-
-echo $OUTPUT->footer ();
+    echo '</form>';
+}
+echo $OUTPUT->footer();

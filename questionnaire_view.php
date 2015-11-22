@@ -141,10 +141,11 @@ if (($available || $isTeacher) && ($category == '' || $inArray)) {
     // Print the tabs.
     require('tabs.php');
 
-    if (groupformation_is_archived($groupformation->id)) {
+    if (groupformation_is_archived($groupformation->id) && !has_capability('mod/groupformation:editsettings', $context)) {
         echo '<div class="alert" id="commited_view">' . get_string('archived_activity_answers', 'groupformation') . '</div>';
+    } else if (groupformation_is_archived($groupformation->id) && has_capability('mod/groupformation:editsettings', $context)) {
+        echo '<div class="alert" id="commited_view">' . get_string('archived_activity_admin', 'groupformation') . '</div>';
     } else {
-
         // $questionnaire = new mod_groupformation_questionnaire ( $cm->id, $groupformation->id, get_string ( 'language', 'groupformation' ), $userid, $category, $context );
         $questionnaire_controller = new mod_groupformation_questionnaire_controller($groupformation->id, get_string('language', 'groupformation'), $userid, $category, $cm->id);
         if ($direction == 0) {

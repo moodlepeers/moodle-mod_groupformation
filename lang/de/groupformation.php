@@ -310,3 +310,4 @@ $string['successful_import'] = 'Der Import war erfolgreich. Du kannst deine Antw
 
 $string['archive_activity_task'] = 'Archivierung alter Aktivitäten';
 $string['archived_activity_answers'] = 'Die Aktitivät ist archiviert worden. Ihre Antworten sind nicht mehr gespeichert und es ist keine Interaktion mehr möglich.';
+$string['archived_activity_admin'] = 'Die Aktitivät ist archiviert worden. Es ist keine Interaktion mehr möglich.';
