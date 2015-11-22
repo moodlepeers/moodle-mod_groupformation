@@ -241,7 +241,7 @@ function groupformation_check_for_cron_job() {
 	global $DB;
 	
 	$record = $DB->get_record ( 'task_scheduled', array (
-			'component' => 'mod_groupformation' 
+			'component' => 'mod_groupformation', 'classname'=>'\mod_groupformation\task\build_groups_task'
 	) );
 	$now = time ();
 	$lastruntime = $record->lastruntime;
@@ -249,4 +249,13 @@ function groupformation_check_for_cron_job() {
 	if (($now - intval ( $lastruntime )) > 60 * 60 * 24) {
 		echo '<div class="alert">' . get_string ( 'cron_job_not_running', 'groupformation' ) . '</div>';
 	}
+}
+
+function groupformation_is_archived($id){
+	global $DB;
+	$record = $DB->get_record ( 'groupformation_q_settings', array (
+			'groupformation' => $id
+	) );
+
+	return $record->archived == 1;
 }

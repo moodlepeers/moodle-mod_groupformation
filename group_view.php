@@ -22,66 +22,68 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-	require_once (dirname ( dirname ( dirname ( __FILE__ ) ) ) . '/config.php');
-	require_once (dirname ( __FILE__ ) . '/lib.php');
-	require_once (dirname ( __FILE__ ) . '/locallib.php');
-    require_once (dirname (__FILE__).'/classes/controller/student_group_view_controller.php');
+require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
+require_once(dirname(__FILE__) . '/lib.php');
+require_once(dirname(__FILE__) . '/locallib.php');
+require_once(dirname(__FILE__) . '/classes/controller/student_group_view_controller.php');
 
-	// Read URL params
-	$id = optional_param ( 'id', 0, PARAM_INT ); // Course Module ID
+// Read URL params
+$id = optional_param('id', 0, PARAM_INT); // Course Module ID
 // 	$g = optional_param ( 'g', 0, PARAM_INT ); // groupformation instance ID
-	$do_show = optional_param('do_show', 'group', PARAM_TEXT);
-	
-	
-	// Import jQuery and js file
-	groupformation_add_jquery ( $PAGE, 'survey_functions.js' );
-	
-	// Determine instances of course module, course, groupformation
-	groupformation_determine_instance($id, $cm, $course, $groupformation);
-		
-	// Require user login if not already logged in
-	require_login ( $course, true, $cm );
-	
-	// Get useful stuff
-	$context = $PAGE->context;
-	$userid = $USER->id;
-	
-	if (has_capability('mod/groupformation:editsettings', $context)){
-		$returnurl = new moodle_url('/mod/groupformation/analysis_view.php', array('id' => $id, 'do_show' => 'analysis'));
-		redirect($returnurl);
-	}else{
-		$current_tab = $do_show;
-	}	
-	
-	// Log access to page
-	groupformation_info($USER->id,$groupformation->id,'<view_student_group_assignment>');
-		
-	// Trigger event TODO @Nora why?
-	groupformation_trigger_event($cm, $course, $groupformation, $context);
+$do_show = optional_param('do_show', 'group', PARAM_TEXT);
 
-	// Set PAGE config
-	$PAGE->set_url ( '/mod/groupformation/group_view.php', array ('id' => $cm->id, 'do_show' => $do_show ) );
-	$PAGE->set_title ( format_string ( $groupformation->name ) );
-	$PAGE->set_heading ( format_string ( $course->fullname ) );
-	
-	echo $OUTPUT->header ();
-	
-	// Print the tabs.
-	require ('tabs.php');
-	
-	// Conditions to show the intro can change to look for own settings or whatever.
-	if ($groupformation->intro) {
-		echo $OUTPUT->box ( format_module_intro ( 'groupformation', $groupformation, $cm->id ), 'generalbox mod_introbox', 'groupformationintro' );
-	}
-	
-	// Replace the following lines with you own code.
-	//echo $OUTPUT->heading ( $groupformation->name );
-	
+
+// Import jQuery and js file
+groupformation_add_jquery($PAGE, 'survey_functions.js');
+
+// Determine instances of course module, course, groupformation
+groupformation_determine_instance($id, $cm, $course, $groupformation);
+
+// Require user login if not already logged in
+require_login($course, true, $cm);
+
+// Get useful stuff
+$context = $PAGE->context;
+$userid = $USER->id;
+
+if (has_capability('mod/groupformation:editsettings', $context)) {
+    $returnurl = new moodle_url('/mod/groupformation/analysis_view.php', array('id' => $id, 'do_show' => 'analysis'));
+    redirect($returnurl);
+} else {
+    $current_tab = $do_show;
+}
+
+// Log access to page
+groupformation_info($USER->id, $groupformation->id, '<view_student_group_assignment>');
+
+// Trigger event TODO @Nora why?
+groupformation_trigger_event($cm, $course, $groupformation, $context);
+
+// Set PAGE config
+$PAGE->set_url('/mod/groupformation/group_view.php', array('id' => $cm->id, 'do_show' => $do_show));
+$PAGE->set_title(format_string($groupformation->name));
+$PAGE->set_heading(format_string($course->fullname));
+
+echo $OUTPUT->header();
+
+// Print the tabs.
+require('tabs.php');
+
+// Conditions to show the intro can change to look for own settings or whatever.
+if ($groupformation->intro) {
+    echo $OUTPUT->box(format_module_intro('groupformation', $groupformation, $cm->id), 'generalbox mod_introbox', 'groupformationintro');
+}
+
+// Replace the following lines with you own code.
+//echo $OUTPUT->heading ( $groupformation->name );
+
 // 	echo '<div style="color:red;">Diese Seite ist noch in der Entwicklung. Die Inhalte sind ggf. noch rein statisch und haben keinen Effekt oder keine Funktion</div>';
-	
-	$userid = $USER->id;
-	
+
+$userid = $USER->id;
+if (groupformation_is_archived($groupformation->id)) {
+    echo '<div class="alert" id="commited_view">' . get_string('archived_activity_answers', 'groupformation') . '</div>';
+} else {
     $groupInfo = new mod_groupformation_student_group_view_controller($groupformation->id);
     echo $groupInfo->render($userid);
-	
-	echo $OUTPUT->footer ();
+}
+echo $OUTPUT->footer();

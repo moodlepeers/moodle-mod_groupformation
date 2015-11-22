@@ -22,50 +22,49 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-	require_once (dirname ( dirname ( dirname ( __FILE__ ) ) ) . '/config.php');
-	require_once (dirname ( __FILE__ ) . '/lib.php');
-	require_once (dirname ( __FILE__ ) . '/locallib.php');
-    require_once (dirname (__FILE__).'/classes/controller/student_import_export_controller.php');
+require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
+require_once(dirname(__FILE__) . '/lib.php');
+require_once(dirname(__FILE__) . '/locallib.php');
+require_once(dirname(__FILE__) . '/classes/controller/student_import_export_controller.php');
 
-	// Read URL params
-	$id = optional_param ( 'id', 0, PARAM_INT ); // Course Module ID
-	$do_show = optional_param('do_show', 'import_export', PARAM_TEXT);
-	
-	// Determine instances of course module, course, groupformation
-	groupformation_determine_instance($id, $cm, $course, $groupformation);
-		
-	// Require user login if not already logged in
-	require_login ( $course, true, $cm );
-	
-	// Get useful stuff
-	$context = $PAGE->context;
-	$userid = $USER->id;
-	
-	// redirect if no access is granted for user
-	if (has_capability('mod/groupformation:editsettings', $context)){
-		$returnurl = new moodle_url('/mod/groupformation/analysis_view.php', array('id' => $id, 'do_show' => 'analysis'));
-		redirect($returnurl);
-	}else{
-		$current_tab = $do_show;
-	}	
-	
-	// Log access to page
+// Read URL params
+$id = optional_param('id', 0, PARAM_INT); // Course Module ID
+$do_show = optional_param('do_show', 'import_export', PARAM_TEXT);
+
+// Determine instances of course module, course, groupformation
+groupformation_determine_instance($id, $cm, $course, $groupformation);
+
+// Require user login if not already logged in
+require_login($course, true, $cm);
+
+// Get useful stuff
+$context = $PAGE->context;
+$userid = $USER->id;
+
+// redirect if no access is granted for user
+if (has_capability('mod/groupformation:editsettings', $context)) {
+    $returnurl = new moodle_url('/mod/groupformation/analysis_view.php', array('id' => $id, 'do_show' => 'analysis'));
+    redirect($returnurl);
+} else {
+    $current_tab = $do_show;
+}
+
+// Log access to page
 // 	groupformation_info($USER->id,$groupformation->id,'<view_student_group_assignment>');
-		
-	// Trigger event TODO @Nora why?
-// 	groupformation_trigger_event($cm, $course, $groupformation, $context);
 
-	// Set PAGE config
-	$PAGE->set_url ( '/mod/groupformation/import_export_view.php', array ('id' => $cm->id, 'do_show' => $do_show ) );
-	$PAGE->set_title ( format_string ( $groupformation->name ) );
-	$PAGE->set_heading ( format_string ( $course->fullname ) );
-	
-	echo $OUTPUT->header ();
-	
-	// Print the tabs.
-	require ('tabs.php');
-	
-    $import_export_controller = new mod_groupformation_student_import_export_controller($groupformation->id,$cm->id);
+// Set PAGE config
+$PAGE->set_url('/mod/groupformation/import_export_view.php', array('id' => $cm->id, 'do_show' => $do_show));
+$PAGE->set_title(format_string($groupformation->name));
+$PAGE->set_heading(format_string($course->fullname));
+
+echo $OUTPUT->header();
+
+// Print the tabs.
+require('tabs.php');
+if (groupformation_is_archived($groupformation->id)) {
+    echo '<div class="alert" id="commited_view">' . get_string('archived_activity_answers', 'groupformation') . '</div>';
+} else {
+    $import_export_controller = new mod_groupformation_student_import_export_controller($groupformation->id, $cm->id);
     echo $import_export_controller->render_overview($userid);
-	
-	echo $OUTPUT->footer ();
+}
+echo $OUTPUT->footer();

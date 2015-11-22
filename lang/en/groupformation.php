@@ -308,3 +308,4 @@ $string['failed_import'] = 'The import has failed due to an invalid format. Plea
 $string['successful_import'] = 'The import was successful. You can review your answers in the questionnaire.';
 
 $string['archive_activity_task'] = 'Archiving old activities';
+$string['archived_activity_answers'] = 'The activity has been archived. Your answers are no longer stored and there is nothing to do here.';

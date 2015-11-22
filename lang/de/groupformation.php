@@ -309,3 +309,4 @@ $string['failed_import'] = 'Der Import ist fehlgeschlagen. Das Format der Datei 
 $string['successful_import'] = 'Der Import war erfolgreich. Du kannst deine Antworten im Tab "Fragebogen" einsehen.';
 
 $string['archive_activity_task'] = 'Archivierung alter Aktivitäten';
+$string['archived_activity_answers'] = 'Die Aktitivät ist archiviert worden. Ihre Antworten sind nicht mehr gespeichert und es ist keine Interaktion mehr möglich.';
