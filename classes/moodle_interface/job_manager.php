@@ -43,6 +43,14 @@ require_once($CFG->dirroot . '/lib/groupal/classes/xml_writers/cohort_writer.php
 
 class mod_groupformation_job_manager {
 
+    private static $job_status_options = array(
+        'ready' => '0000',
+        'waiting' => '1000',
+        'started' => '0100',
+        'aborted' => '0010',
+        'done' => '0001'
+    );
+
     /**
      * Selects next job and sets it on "started"
      *
@@ -113,7 +121,7 @@ class mod_groupformation_job_manager {
      */
     public static function set_job($job, $state = "ready", $settime = false, $resettime = false, $groupingid = null) {
         global $DB, $USER;
-        $status_options = self::get_status_options();
+        $status_options = self::$job_status_options;
 
         if (array_key_exists($state, $status_options))
             $status = $status_options [$state];
@@ -190,8 +198,7 @@ class mod_groupformation_job_manager {
      * Returns status options placed in define file
      */
     private static function get_status_options() {
-        $data = new mod_groupformation_data ();
-        return $data->get_job_status_options();
+        return self::job_status_options;
     }
 
     /**
@@ -859,8 +866,7 @@ class mod_groupformation_job_manager {
      * @return String
      */
     public static function get_status($job) {
-        $data = new mod_groupformation_data ();
-        $status_options = array_keys($data->get_job_status_options());
+        $status_options = array_keys(self::$job_status_options);
         if ($job->waiting) {
             return $status_options [1];
         } elseif ($job->started) {

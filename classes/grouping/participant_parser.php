@@ -156,7 +156,7 @@ class mod_groupformation_participant_parser {
 		$data = new mod_groupformation_data ();
 		
 		$labels = $this->store->get_label_set ();
-		$homogen = $this->store->get_homogen_set ();
+		$homogen = $this->store->get_homogeneous_set ();
 		
 		
 		$gradeP = - 1;
