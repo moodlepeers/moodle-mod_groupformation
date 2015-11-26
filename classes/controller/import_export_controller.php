@@ -341,13 +341,13 @@ class mod_groupformation_import_export_controller {
      * @throws file_exception
      * @throws stored_file_creation_exception
      */
-    private function generate_export_url($type='answers') {
-        $cvswriter = new mod_groupformation_cvs_writer ($this->cm,$this->groupformationid);
+    private function generate_export_url($type = 'answers') {
+        $cvswriter = new mod_groupformation_cvs_writer ($this->cm, $this->groupformationid);
 
         // generate content for answer file for export
         $content = $cvswriter->get_data($type);
 
-        $filename = 'exportable_'.$type.'.cvs';
+        $filename = 'archived_' . $type . '.cvs';
 
         $context = context_module::instance($this->cmid);
 
