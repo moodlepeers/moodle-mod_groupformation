@@ -106,7 +106,7 @@ echo $OUTPUT->header();
 
 // Print the tabs.
 require('tabs.php');
-if (groupformation_is_archived($groupformation->id) && has_capability('mod/groupformation:editsettings', $context)) {
+if ($store->is_archived() && has_capability('mod/groupformation:editsettings', $context)) {
     echo '<div class="alert" id="commited_view">' . get_string('archived_activity_admin', 'groupformation') . '</div>';
 } else {
     groupformation_check_for_cron_job();

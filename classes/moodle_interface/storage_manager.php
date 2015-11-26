@@ -44,7 +44,16 @@ class mod_groupformation_storage_manager {
 		$this->data = new mod_groupformation_data ();
 		$this->gm = new mod_groupformation_groups_manager ( $groupformationid );
 	}
-	
+
+	public function is_archived() {
+		global $DB;
+		$record = $DB->get_record('groupformation_q_settings', array(
+				'groupformation' => $this->groupformationid
+		));
+
+		return $record->archived == 1;
+	}
+
 	public function is_accessible($userid){
 		global $PAGE;
 		$cm = $PAGE->cm;

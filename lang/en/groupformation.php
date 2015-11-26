@@ -297,6 +297,10 @@ $string['groupformation_message_contexturlname'] = 'results';
 // import export functionality
 $string['import'] = 'Import';
 $string['export'] = 'Export';
+$string['export_answers'] = 'You can download all answers with anonymized user ids here: ';
+$string['export_groups'] = 'You can download all groups with anonymized user ids here: ';
+$string['export_group_users'] = 'You can download all group-users relations with anonymized user ids here: ';
+$string['export_logging'] = 'You can download all logging data with anonymized user ids here: ';
 $string['export_description_no'] = 'You cannot export your answers since you have not answered any questions in the exportable categories.';
 $string['export_description_yes'] = 'You can export your answers by clicking on the button below.';
 $string['import_description_yes'] = 'You can import your answers by clicking on the button below and uploading a file with exportable answer format.';

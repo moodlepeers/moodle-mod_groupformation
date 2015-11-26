@@ -34,6 +34,7 @@ require_once(dirname(__FILE__) . '/classes/moodle_interface/storage_manager.php'
 $id = optional_param('id', 0, PARAM_INT); // Course Module ID
 // $g = optional_param ( 'g', 0, PARAM_INT ); // groupformation instance ID
 $do_show = optional_param('do_show', 'analysis', PARAM_TEXT);
+$export_all = optional_param('export_all', null, PARAM_TEXT);
 
 $create_users = optional_param('create_users', 0, PARAM_INT);
 $create_answers = optional_param('create_answers', false, PARAM_BOOL);
@@ -139,7 +140,7 @@ if ($create_users > 0) {
 // }
 
 /* ---------- / Job Manager Usage ----------------------- */
-if (groupformation_is_archived($groupformation->id) && has_capability('mod/groupformation:editsettings', $context)) {
+if ($store->is_archived() && has_capability('mod/groupformation:editsettings', $context)) {
     echo '<div class="alert" id="commited_view">' . get_string('archived_activity_admin', 'groupformation') . '</div>';
 } else {
     echo '<form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
@@ -150,4 +151,5 @@ if (groupformation_is_archived($groupformation->id) && has_capability('mod/group
 
     echo '</form>';
 }
+
 echo $OUTPUT->footer();

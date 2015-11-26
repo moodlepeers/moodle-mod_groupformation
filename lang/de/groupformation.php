@@ -298,6 +298,10 @@ $string['groupformation_message_contexturlname'] = 'Resultate';
 // import export functionality
 $string['import'] = 'Import';
 $string['export'] = 'Export';
+$string['export_answers'] = 'Sie können die Antworten mit anonymisierten Teilnehmerkennungen hier herunterladen: ';
+$string['export_groups'] = 'Sie können die Gruppen mit anonymisierten Teilnehmerkennungen hier herunterladen: ';
+$string['export_group_users'] = 'Sie können die Gruppen-Nutzer-Zuordnungen mit anonymisierten Teilnehmerkennungen hier herunterladen: ';
+$string['export_logging'] = 'Sie können die Loggingdaten mit anonymisierten Teilnehmerkennungen hier herunterladen: ';
 $string['export_description_no'] = 'Erst wenn du Antworten in exportfähigen Kategorien gegeben hast, kannst du sie hier exportieren.';
 $string['export_description_yes'] = 'Klicke auf den folgenden Button, um deine Antworten für diesen Fragebogen zu exportieren.';
 $string['import_description_yes'] = 'Klicke auf den folgenden Button, um Antworten von früheren Fragebögen zu importieren.';

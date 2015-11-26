@@ -41,13 +41,13 @@ require_login($course, true, $cm);
 $context = $PAGE->context;
 $userid = $USER->id;
 
-//// redirect if no access is granted for user
-//if (has_capability('mod/groupformation:editsettings', $context)) {
-//    $returnurl = new moodle_url('/mod/groupformation/analysis_view.php', array('id' => $id, 'do_show' => 'analysis'));
-//    redirect($returnurl);
-//} else {
-//    $current_tab = $do_show;
-//}
+// redirect if no access is granted for user
+if (!has_capability('mod/groupformation:editsettings', $context)) {
+    $returnurl = new moodle_url('/mod/groupformation/view.php', array('id' => $id, 'do_show' => 'view'));
+    redirect($returnurl);
+} else {
+    $current_tab = $do_show;
+}
 
 // Log access to page
 // 	groupformation_info($USER->id,$groupformation->id,'<view_student_group_assignment>');
@@ -61,10 +61,8 @@ echo $OUTPUT->header();
 
 // Print the tabs.
 require('tabs.php');
-if ($store->is_archived()) {
-    echo '<div class="alert" id="commited_view">' . get_string('archived_activity_answers', 'groupformation') . '</div>';
-} else {
-    $import_export_controller = new mod_groupformation_import_export_controller($groupformation->id, $cm);
-    echo $import_export_controller->render_overview($userid);
-}
+
+$import_export_controller = new mod_groupformation_import_export_controller($groupformation->id, $cm);
+echo $import_export_controller->render_export();
+
 echo $OUTPUT->footer();

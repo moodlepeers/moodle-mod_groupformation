@@ -108,7 +108,7 @@ echo $OUTPUT->header();
 
 // Print the tabs.
 require('tabs.php');
-if (groupformation_is_archived($groupformation->id)) {
+if ($store->is_archived()) {
     echo '<div class="alert" id="commited_view">' . get_string('archived_activity_answers', 'groupformation') . '</div>';
 } else {
     // Conditions to show the intro can change to look for own settings or whatever.

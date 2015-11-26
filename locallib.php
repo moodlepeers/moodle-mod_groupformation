@@ -1,5 +1,6 @@
 <?php
 use mod_groupformation\task\build_groups_task;
+
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -24,238 +25,234 @@ use mod_groupformation\task\build_groups_task;
  * @copyright 2015 MoodlePeers
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined ( 'MOODLE_INTERNAL' ) || die ();
+defined('MOODLE_INTERNAL') || die ();
 
-require_once ($CFG->dirroot . '/mod/groupformation/classes/controller/logging_controller.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/controller/logging_controller.php');
 
 /**
  * Adds jQuery
  *
- * @param unknown $PAGE        	
- * @param string $filename        	
+ * @param unknown $PAGE
+ * @param string $filename
  */
 function groupformation_add_jquery($PAGE, $filename = null) {
-	$PAGE->requires->jquery ();
-	$PAGE->requires->jquery_plugin ( 'ui' );
-	$PAGE->requires->jquery_plugin ( 'ui-css' );
-	
-	if (! is_null ( $filename )) {
-		$PAGE->requires->js ( '/mod/groupformation/js/' . $filename );
-	}
+    $PAGE->requires->jquery();
+    $PAGE->requires->jquery_plugin('ui');
+    $PAGE->requires->jquery_plugin('ui-css');
+
+    if (!is_null($filename)) {
+        $PAGE->requires->js('/mod/groupformation/js/' . $filename);
+    }
 }
 
 /**
  * Logs message
  *
- * @param integer $userid        	
- * @param integer $groupformationid        	
- * @param string $message        	
- * @param string $level        	
+ * @param integer $userid
+ * @param integer $groupformationid
+ * @param string $message
+ * @param string $level
  * @return boolean
  */
 function groupformation_log($userid, $groupformationid, $message, $level = 'info') {
-	return false;
-	// $logging_controller = new mod_groupformation_logging_controller ();
-	// return $logging_controller->handle ( $userid, $groupformationid, $message, $level );
+    return false;
+    // $logging_controller = new mod_groupformation_logging_controller ();
+    // return $logging_controller->handle ( $userid, $groupformationid, $message, $level );
 }
 
 /**
  * Logs debug message
  *
- * @param integer $userid        	
- * @param integer $groupformationid        	
- * @param string $message        	
- * @param string $level        	
+ * @param integer $userid
+ * @param integer $groupformationid
+ * @param string $message
+ * @param string $level
  * @return boolean
  */
 function groupformation_debug($userid, $groupformationid, $message) {
-	return groupformation_log ( $userid, $groupformationid, $message, $level = 'debug' );
+    return groupformation_log($userid, $groupformationid, $message, $level = 'debug');
 }
 
 /**
  * Logs info message
  *
- * @param integer $userid        	
- * @param integer $groupformationid        	
- * @param string $message        	
- * @param string $level        	
+ * @param integer $userid
+ * @param integer $groupformationid
+ * @param string $message
+ * @param string $level
  * @return boolean
  */
 function groupformation_info($userid, $groupformationid, $message) {
-	return groupformation_log ( $userid, $groupformationid, $message, $level = 'info' );
+    return groupformation_log($userid, $groupformationid, $message, $level = 'info');
 }
 
 /**
  * Logs warn message
  *
- * @param integer $userid        	
- * @param integer $groupformationid        	
- * @param string $message        	
- * @param string $level        	
+ * @param integer $userid
+ * @param integer $groupformationid
+ * @param string $message
+ * @param string $level
  * @return boolean
  */
 function groupformation_warn($userid, $groupformationid, $message) {
-	return groupformation_log ( $userid, $groupformationid, $message, $level = 'warn' );
+    return groupformation_log($userid, $groupformationid, $message, $level = 'warn');
 }
 
 /**
  * Logs error message
  *
- * @param integer $userid        	
- * @param integer $groupformationid        	
- * @param string $message        	
- * @param string $level        	
+ * @param integer $userid
+ * @param integer $groupformationid
+ * @param string $message
+ * @param string $level
  * @return boolean
  */
 function groupformation_error($userid, $groupformationid, $message) {
-	return groupformation_log ( $userid, $groupformationid, $message, $level = 'error' );
+    return groupformation_log($userid, $groupformationid, $message, $level = 'error');
 }
 
 /**
  * Logs fatal message
  *
- * @param integer $userid        	
- * @param integer $groupformationid        	
- * @param string $message        	
- * @param string $level        	
+ * @param integer $userid
+ * @param integer $groupformationid
+ * @param string $message
+ * @param string $level
  * @return boolean
  */
 function groupformation_fatal($userid, $groupformationid, $message) {
-	return groupformation_log ( $userid, $groupformationid, $message, $level = 'fatal' );
+    return groupformation_log($userid, $groupformationid, $message, $level = 'fatal');
 }
 
 /**
  * Triggers event
  *
- * @param stdClass $cm        	
- * @param stdClass $course        	
- * @param stdClass $groupformation        	
- * @param stdClass $context        	
+ * @param stdClass $cm
+ * @param stdClass $course
+ * @param stdClass $groupformation
+ * @param stdClass $context
  */
 function groupformation_trigger_event($cm, $course, $groupformation, $context) {
-	
-	// TODO Logging - We need to implement events to trigger
-	
-	// $event = \mod_groupformation\event\job_queued::create ( array (
-	// 'objectid' => $groupformation->id,
-	// 'context' => $context
-	// ) );
-	// $event->add_record_snapshot ( 'course', $course );
-	// $event->add_record_snapshot ( $cm->modname, $groupformation );
-	// $event->trigger ();
+
+    // TODO Logging - We need to implement events to trigger
+
+    // $event = \mod_groupformation\event\job_queued::create ( array (
+    // 'objectid' => $groupformation->id,
+    // 'context' => $context
+    // ) );
+    // $event->add_record_snapshot ( 'course', $course );
+    // $event->add_record_snapshot ( $cm->modname, $groupformation );
+    // $event->trigger ();
 }
 
 /**
  * Determines instances of course module, course and groupformation by id
  *
- * @param int $id        	
- * @param stdClass $cm        	
- * @param stdClass $course        	
- * @param stdClass $groupformation        	
+ * @param int $id
+ * @param stdClass $cm
+ * @param stdClass $course
+ * @param stdClass $groupformation
  */
 function groupformation_determine_instance($id, &$cm, &$course, &$groupformation) {
-	global $DB;
-	if ($id) {
-		$cm = get_coursemodule_from_id ( 'groupformation', $id, 0, false, MUST_EXIST );
-		$course = $DB->get_record ( 'course', array (
-				'id' => $cm->course 
-		), '*', MUST_EXIST );
-		$groupformation = $DB->get_record ( 'groupformation', array (
-				'id' => $cm->instance 
-		), '*', MUST_EXIST );
-	} else {
-		error ( 'You must specify a course_module ID or an instance ID' );
-	}
+    global $DB;
+    if ($id) {
+        $cm = get_coursemodule_from_id('groupformation', $id, 0, false, MUST_EXIST);
+        $course = $DB->get_record('course', array(
+            'id' => $cm->course
+        ), '*', MUST_EXIST);
+        $groupformation = $DB->get_record('groupformation', array(
+            'id' => $cm->instance
+        ), '*', MUST_EXIST);
+    } else {
+        error('You must specify a course_module ID or an instance ID');
+    }
 }
 
 /**
  * Returns context for groupformation id
  *
- * @param int $groupformationid        	
+ * @param int $groupformationid
  * @return context_course
  */
 function groupformation_get_context($groupformationid) {
-	$store = new mod_groupformation_storage_manager ( $groupformationid );
-	
-	$courseid = $store->get_course_id ();
-	
-	$context = context_course::instance ( $courseid );
-	
-	return $context;
+    $store = new mod_groupformation_storage_manager ($groupformationid);
+
+    $courseid = $store->get_course_id();
+
+    $context = context_course::instance($courseid);
+
+    return $context;
 }
 
 /**
  *
- * @param stdClass $course        	
- * @param stdClass $cm        	
- * @param int $userid        	
+ * @param stdClass $course
+ * @param stdClass $cm
+ * @param int $userid
  */
 function groupformation_set_activity_completion($course, $cm, $userid) {
-	$completion = new completion_info ( $course );
-	$completion->set_module_viewed ( $cm, $userid );
+    $completion = new completion_info ($course);
+    $completion->set_module_viewed($cm, $userid);
 }
 
 /**
  * send confirmation for finishing group formation
  *
- * @param stdClass $recipient        	
- * @param string $subject        	
- * @param string $message        	
+ * @param stdClass $recipient
+ * @param string $subject
+ * @param string $message
  *
  */
 function groupformation_send_message($recipient, $subject, $messagetext, $contexturl = null, $contexturlname = null) {
-	global $DB;
-	
-	// get admin user for setting as "userfrom"
-	$admin = array_pop ( $DB->get_records ( 'user', array (
-			'username' => 'admin' 
-	) ) );
-	
-	// Prepare the message.
-	$message = new \core\message\message ();
-	$message->component = 'moodle';
-	$message->name = 'instantmessage';
-	$message->userfrom = $admin;
-	$message->userto = $recipient;
-	$message->subject = $subject;
-	$message->fullmessage = $messagetext;
-	$message->fullmessageformat = FORMAT_MARKDOWN;
-	$message->fullmessagehtml = '<p>' . $messagetext . '</p>';
-	$message->smallmessage = $messagetext;
-	$message->notification = '0';
-	$message->contexturl = $contexturl;
-	$message->contexturlname = $contexturlname;
-	$message->replyto = "noreply@moodle.com";
-	$content = array (
-			'*' => array (
-					'header' => ' test ',
-					'footer' => ' test ' 
-			) 
-	); // Extra content for specific processor
-	$message->set_additional_content ( 'email', $content );
-	
-	// send message
-	$messageid = message_send ( $message );
+    global $DB;
+
+    // get admin user for setting as "userfrom"
+    $admin = array_pop($DB->get_records('user', array(
+        'username' => 'admin'
+    )));
+
+    // Prepare the message.
+    $message = new \core\message\message ();
+    $message->component = 'moodle';
+    $message->name = 'instantmessage';
+    $message->userfrom = $admin;
+    $message->userto = $recipient;
+    $message->subject = $subject;
+    $message->fullmessage = $messagetext;
+    $message->fullmessageformat = FORMAT_MARKDOWN;
+    $message->fullmessagehtml = '<p>' . $messagetext . '</p>';
+    $message->smallmessage = $messagetext;
+    $message->notification = '0';
+    $message->contexturl = $contexturl;
+    $message->contexturlname = $contexturlname;
+    $message->replyto = "noreply@moodle.com";
+    $content = array(
+        '*' => array(
+            'header' => ' test ',
+            'footer' => ' test '
+        )
+    ); // Extra content for specific processor
+    $message->set_additional_content('email', $content);
+
+    // send message
+    $messageid = message_send($message);
 }
+
+/**
+ * Checks for cronjob whether it is running or not
+ * @throws coding_exception
+ */
 function groupformation_check_for_cron_job() {
-	global $DB;
-	
-	$record = $DB->get_record ( 'task_scheduled', array (
-			'component' => 'mod_groupformation', 'classname'=>'\mod_groupformation\task\build_groups_task'
-	) );
-	$now = time ();
-	$lastruntime = $record->lastruntime;
-	
-	if (($now - intval ( $lastruntime )) > 60 * 60 * 24) {
-		echo '<div class="alert">' . get_string ( 'cron_job_not_running', 'groupformation' ) . '</div>';
-	}
-}
+    global $DB;
 
-function groupformation_is_archived($id){
-	global $DB;
-	$record = $DB->get_record ( 'groupformation_q_settings', array (
-			'groupformation' => $id
-	) );
+    $record = $DB->get_record('task_scheduled', array(
+        'component' => 'mod_groupformation', 'classname' => '\mod_groupformation\task\build_groups_task'
+    ));
+    $now = time();
+    $lastruntime = $record->lastruntime;
 
-	return $record->archived == 1;
+    if (($now - intval($lastruntime)) > 60 * 60 * 24) {
+        echo '<div class="alert">' . get_string('cron_job_not_running', 'groupformation') . '</div>';
+    }
 }

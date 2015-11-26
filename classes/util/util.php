@@ -272,4 +272,11 @@ class mod_groupformation_util {
         }
     }
 
+    public static function get_logging_data($groupformationid, $sorted_by=null,$fieldset='*') {
+        global $DB;
+        return $DB->get_records ( 'groupformation_group_users', array (
+            'groupformation' => $groupformationid
+        ), $sorted_by, $fieldset );
+    }
+
 }
