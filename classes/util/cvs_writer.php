@@ -170,7 +170,7 @@ class mod_groupformation_cvs_writer {
      * @return string
      */
     public function get_logging_data() {
-        $groups = mod_groupformation_util::get_logging_data($this->groupformationid,'userid');
+        $groups = $this->store->get_logging_data('userid');
 
         $cvs = $this->records_to_cvs($groups);
 

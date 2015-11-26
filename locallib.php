@@ -256,3 +256,33 @@ function groupformation_check_for_cron_job() {
         echo '<div class="alert">' . get_string('cron_job_not_running', 'groupformation') . '</div>';
     }
 }
+
+/**
+ * Updates questions in DB with xml files
+ *
+ * @param mod_groupformation_storage_manager $store
+ */
+function groupformation_update_questions(mod_groupformation_storage_manager $store) {
+    $names = $store->get_raw_categories();
+    $xmlLoader = new mod_groupformation_xml_loader ();
+    $xmlLoader->set_store($store);
+
+    if ($store->catalog_table_not_set()) {
+        foreach ($names as $category) {
+            if ($category != 'topic' && $category != 'knowledge') {
+                $array = $xmlLoader->save_data($category);
+                $version = $array [0] [0];
+                $numbers = $array [0] [1];
+                $store->add_catalog_version($category, $numbers, $version, TRUE);
+            }
+        }
+
+    } else {
+        // TODO until now just one type of questionnaires supported
+        foreach ($names as $category) {
+            if ($category != 'topic' && $category != 'knowledge') {
+                $xmlLoader->latest_version($category);
+            }
+        }
+    }
+}

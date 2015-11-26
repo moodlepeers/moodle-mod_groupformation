@@ -30,41 +30,13 @@ require_once(dirname(__FILE__) . '/define_file.php');
 
 class mod_groupformation_util {
 
-    public static function update_questions(mod_groupformation_storage_manager $store) {
-        $names = $store->get_raw_categories();
-        $xmlLoader = new mod_groupformation_xml_loader ();
-        $xmlLoader->set_store($store);
-        // wenn die Datenbank noch komplett leer ist, speicher einfach alle Infos aus den xml's ab
-        // ansonsten überprüfe zu jeder Kategorie die Versionsnummer und ändere bei bedarf
-        if ($store->catalog_table_not_set()) {
-
-            foreach ($names as $category) {
-
-                if ($category != 'topic' && $category != 'knowledge') {
-                    $array = $xmlLoader->save_data($category);
-                    $version = $array [0] [0];
-                    $numbers = $array [0] [1];
-                    $store->add_catalog_version($category, $numbers, $version, TRUE);
-                }
-            }
-        } else {
-            // TODO Wenn man die Fragen ändert, ändern sich auch in den alten groupformation-Instanzen
-            // Da gibt es dann unter Umständen Konsistenzprobleme
-            // Da müssen wir nochmal drüber sprechen
-            foreach ($names as $category) {
-                if ($category != 'topic' && $category != 'knowledge') {
-                    $xmlLoader->latest_version($category);
-                }
-            }
-        }
-    }
-
     /**
      * Returns html code for info text for teachers
      *
-     * @param string $unfolded
+     * @param bool|false $unfolded
      * @param string $page
      * @return string
+     * @throws coding_exception
      */
     public static function get_info_text_for_teacher($unfolded = false, $page = "settings") {
         $s = '<p><a class="show">' . get_string('info_header_teacher_' . $page, 'groupformation') . '</a></p>';
@@ -90,16 +62,18 @@ class mod_groupformation_util {
         $s .= '	    	});';
         $s .= '		});';
         $s .= '</script>';
+
         return $s;
     }
 
     /**
      * Returns html code for info text for students
      *
-     * @param string $unfolded
-     * @param int $groupformationid
+     * @param bool|false $unfolded
+     * @param null $groupformationid
      * @param string $role
      * @return string
+     * @throws coding_exception
      */
     public static function get_info_text_for_student($unfolded = false, $groupformationid = null, $role = "student") {
         if (is_null($groupformationid)) {
@@ -128,22 +102,25 @@ class mod_groupformation_util {
      */
     public static function get_user_record($userid) {
         global $DB;
-        if ($DB->record_exists('user', array(
-            'id' => $userid
-        ))
-        ) {
-            return $DB->get_record('user', array(
+        if ($record = $DB->get_record('user',
+            array(
                 'id' => $userid
-            ));
+            )
+        )
+        ) {
+            return $record;
+        } else {
+            return null;
         }
-        return null;
     }
 
 
     /**
-     * computes stats about answered and misssing questions
+     * Computes stats about answered and misssing questions
      *
-     * @return multitype:multitype:number stats
+     * @param $groupformationid
+     * @param $userid
+     * @return array
      */
     public static function get_stats($groupformationid, $userid) {
         $user_manager = new mod_groupformation_user_manager($groupformationid);
@@ -166,20 +143,19 @@ class mod_groupformation_util {
                 'missing' => $value - $count
             );
         }
+
         return $stats;
     }
 
     /**
      * Returns stats about answered questionnaires
      *
-     * @param unknown $groupformationid
-     * @return multitype:number
+     * @param $groupformationid
+     * @return array
      */
     public static function get_infos($groupformationid) {
         $user_manager = new mod_groupformation_user_manager ($groupformationid);
         $store = new mod_groupformation_storage_manager ($groupformationid);
-
-        $total_answer_count = $store->get_total_number_of_answers();
 
         $stats = array();
 
@@ -215,8 +191,8 @@ class mod_groupformation_util {
     /**
      * Converts OPTIONS xml to array
      *
-     * @param unknown $xml_content
-     * @return multitype:string
+     * @param $xml_content
+     * @return array
      */
     public static function xml_to_array($xml_content) {
         $xml = simplexml_load_string($xml_content);
@@ -224,6 +200,7 @@ class mod_groupformation_util {
         foreach ($xml->OPTION as $option) {
             $optionArray[] = trim($option);
         }
+
         return $optionArray;
     }
 
@@ -270,13 +247,6 @@ class mod_groupformation_util {
                 self::archive_activity($groupformation->id);
             }
         }
-    }
-
-    public static function get_logging_data($groupformationid, $sorted_by=null,$fieldset='*') {
-        global $DB;
-        return $DB->get_records ( 'groupformation_group_users', array (
-            'groupformation' => $groupformationid
-        ), $sorted_by, $fieldset );
     }
 
 }

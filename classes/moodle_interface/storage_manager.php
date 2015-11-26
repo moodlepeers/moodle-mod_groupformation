@@ -426,6 +426,26 @@ class mod_groupformation_storage_manager {
         return $settings->szenario;
     }
 
+    /**
+     * Returns logging data
+     *
+     * @param null $sorted_by
+     * @param string $fieldset
+     * @return array
+     */
+    public function get_logging_data($sorted_by = null, $fieldset = '*') {
+        global $DB;
+
+        return $DB->get_records('groupformation_group_users', array(
+            'groupformation' => $this->groupformationid
+        ), $sorted_by, $fieldset);
+    }
+
+    /**
+     * Returns raw categories without applying any activity based restrictions
+     *
+     * @return array
+     */
     public function get_raw_categories() {
         return $this->data->get_category_set($this->get_scenario());
     }
@@ -433,7 +453,7 @@ class mod_groupformation_storage_manager {
     /**
      * Returns categories with at least one question, not just the scenario-based category set
      *
-     * @return multitype:multitype:string
+     * @return array
      */
     public function get_categories() {
         $category_set = $this->data->get_category_set($this->get_scenario());
@@ -456,7 +476,7 @@ class mod_groupformation_storage_manager {
     /**
      * Returns all exportable categories
      *
-     * @return multitype:multitype:string
+     * @return array
      */
     public function get_exportable_categories() {
         $exportable_categories = array();
@@ -478,8 +498,8 @@ class mod_groupformation_storage_manager {
     /**
      * Gets previous category
      *
-     * @param unknown $category
-     * @return Ambigous <string, multitype:string>
+     * @param string $category
+     * @return string
      */
     public function get_previous_category($category) {
         $categories = $this->get_categories();
@@ -565,12 +585,11 @@ class mod_groupformation_storage_manager {
     }
 
     /**
-     * Returns whether questionaire is available or not
+     * Returns whether questionnaire is available or not
      *
      * @return boolean
      */
     public function is_questionnaire_available() {
-        global $DB;
         $now = time();
 
         $time = $this->get_time();
@@ -753,7 +772,7 @@ class mod_groupformation_storage_manager {
     /**
      * Returns label set
      *
-     * @return multitype:multitype:string
+     * @return array
      */
     public function get_label_set() {
         $array = $this->data->get_label_set($this->get_scenario());
@@ -777,9 +796,9 @@ class mod_groupformation_storage_manager {
     }
 
     /**
-     * Returns homogenous set for scenario
+     * Returns homogeneous set for scenario
      *
-     * @return multitype:multitype:boolean
+     * @return array
      */
     public function get_homogeneous_set() {
         return $this->data->get_homogeneous_set($this->get_scenario());

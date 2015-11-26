@@ -627,7 +627,7 @@ function groupformation_save_more_infos($groupformation, $init) {
     }
 
     if ($init) {
-        mod_groupformation_util::update_questions($store);
+        groupformation_update_questions($store);
     }
 
     if ($store->is_editable()) {
