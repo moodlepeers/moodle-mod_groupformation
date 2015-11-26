@@ -24,9 +24,9 @@
 require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
 require_once(dirname(__FILE__) . '/lib.php');
 require_once(dirname(__FILE__) . '/locallib.php');
-require_once(dirname(__FILE__) . '/classes/moodle_interface/user_manager.php');
-require_once(dirname(__FILE__) . '/classes/moodle_interface/storage_manager.php');
-require_once(dirname(__FILE__) . '/classes/controller/student_overview_controller.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/controller/student_overview_controller.php');
 
 // Read URL params
 $id = optional_param('id', 0, PARAM_INT); // Course Module ID

@@ -23,15 +23,14 @@ require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
 require_once(dirname(__FILE__) . '/lib.php');
 require_once(dirname(__FILE__) . '/locallib.php');
 
-require_once(dirname(__FILE__) . '/classes/util/test_user_generator.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/util/test_user_generator.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/xml_loader.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
-require_once(dirname(__FILE__) . '/classes/moodle_interface/storage_manager.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 
 // Read URL params
-$id = optional_param('id', 0, PARAM_INT); // Course Module ID
-// $g = optional_param ( 'g', 0, PARAM_INT ); // groupformation instance ID
+$id = optional_param('id', 0, PARAM_INT);
 $do_show = optional_param('do_show', 'analysis', PARAM_TEXT);
 $export_all = optional_param('export_all', null, PARAM_TEXT);
 
@@ -54,14 +53,37 @@ $context = context_module::instance($cm->id);
 $userid = $USER->id;
 
 if (!has_capability('mod/groupformation:editsettings', $context)) {
-    $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
+    $return = new moodle_url ('/mod/groupformation/view.php', array(
         'id' => $id,
         'do_show' => 'view'
     ));
-    redirect($returnurl);
+    redirect($return->out());
 } else {
     $current_tab = $do_show;
 }
+
+/* ---------- Automated test user generation ------------ */
+
+$cqt = new mod_groupformation_test_user_generator ($cm);
+
+if ($delete_users) {
+    $cqt->delete_test_users($groupformation->id);
+    $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
+        'id' => $id,
+        'do_show' => 'analysis'
+    ));
+    redirect($return->out());
+}
+if ($create_users > 0) {
+    $cqt->create_test_users($create_users, $groupformation->id, $create_answers, $random_answers);
+    $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
+        'id' => $id,
+        'do_show' => 'analysis'
+    ));
+    redirect($return->out());
+}
+
+/* ---------- / Automated test user generation ---------- */
 
 // Log access to page
 groupformation_info($USER->id, $groupformation->id, '<view_teacher_overview>');
@@ -86,59 +108,18 @@ if ($_POST) {
     } elseif (isset ($_POST ['stop_questionnaire'])) {
         $controller->stop_questionnaire();
     }
-    $returnurl = new moodle_url ('/mod/groupformation/analysis_view.php', array(
+    $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
         'id' => $id,
         'do_show' => 'analysis'
     ));
-    redirect($returnurl);
+    redirect($return->out());
 }
-
-// groupformation_trigger_event($cm, $course, $groupformation, $context);
 
 echo $OUTPUT->header();
 
 // Print the tabs.
 require('tabs.php');
 
-/* ---------- Automated test user generation ------------ */
-
-$cqt = new mod_groupformation_test_user_generator ($cm);
-
-if ($delete_users) {
-    $cqt->delete_test_users($groupformation->id);
-    $returnurl = new moodle_url ('/mod/groupformation/analysis_view.php', array(
-        'id' => $id,
-        'do_show' => 'analysis'
-    ));
-    redirect($returnurl);
-}
-if ($create_users > 0) {
-    $cqt->create_test_users($create_users, $groupformation->id, $create_answers, $random_answers);
-    $returnurl = new moodle_url ('/mod/groupformation/analysis_view.php', array(
-        'id' => $id,
-        'do_show' => 'analysis'
-    ));
-    redirect($returnurl);
-}
-
-/* ---------- / Automated test user generation ---------- */
-//
-/* ---------- Job Manager Usage ------------------------- */
-
-// $jm = new mod_groupformation_job_manager ();
-// $job = null;
-//
-// $job = $jm::get_job ( $groupformation->id );
-// //$jm->reset_job($job);
-// // var_dump($jm::get_next_job());
-// if (! is_null ( $job )) {
-// $result = $jm::do_groupal($job);
-// var_dump ( $result );
-// // $saved = $jm::save_result($job,$result);
-//
-// }
-
-/* ---------- / Job Manager Usage ----------------------- */
 if ($store->is_archived() && has_capability('mod/groupformation:editsettings', $context)) {
     echo '<div class="alert" id="commited_view">' . get_string('archived_activity_admin', 'groupformation') . '</div>';
 } else {

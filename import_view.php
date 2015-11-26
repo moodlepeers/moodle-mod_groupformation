@@ -25,7 +25,7 @@
 	require_once (dirname ( dirname ( dirname ( __FILE__ ) ) ) . '/config.php');
 	require_once (dirname ( __FILE__ ) . '/lib.php');
 	require_once (dirname ( __FILE__ ) . '/locallib.php');
-    require_once(dirname(__FILE__) . '/classes/controller/import_export_controller.php');
+    require_once($CFG->dirroot . '/mod/groupformation/classes/controller/import_export_controller.php');
     require_once($CFG->dirroot . '/mod/groupformation/classes/forms/import_form.php');
     
     // Read URL params
