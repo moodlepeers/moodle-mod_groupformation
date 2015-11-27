@@ -19,20 +19,20 @@
  * Defines the view event.
  *
  * @package mod_groupformation
- * @copyright 2014 Nora Wester
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-	namespace mod_groupformation\event;
-	
-	defined('MOODLE_INTERNAL') || die();
-	
-	class course_module_viewed extends \core\event\course_module_viewed {
-	
-		protected function init() {
-			$this->data['objecttable'] = 'groupformation';
-			parent::init();
-		}
-		
-		// You might need to override get_url() and get_legacy_log_data() if view mode needs to be stored as well.
-	}
+namespace mod_groupformation\event;
+
+defined('MOODLE_INTERNAL') || die();
+
+class course_module_viewed extends \core\event\course_module_viewed {
+
+    protected function init() {
+        $this->data['objecttable'] = 'groupformation';
+        parent::init();
+    }
+
+    // You might need to override get_url() and get_legacy_log_data() if view mode needs to be stored as well.
+}
