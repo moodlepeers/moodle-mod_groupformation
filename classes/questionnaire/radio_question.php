@@ -13,7 +13,6 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 /**
  * Prints a particular instance of groupformation questionnaire
  *
@@ -23,20 +22,12 @@
  */
 class mod_groupformation_radio_question {
 
-    private $category;
-    private $qnumber;
-    private $question;
-    private $optArray = array();
+    public function print_html($q, $category, $qnumber, $hasanswer) {
+        $question = $q[1];
+        $options = $q[2];
 
-    public function print_html($q, $cat, $qnumb, $hasAnswer) {
-        $this->question = $q[1];
-        $this->optArray = $q[2];
-        $this->category = $cat;
-        $this->qnumber = $qnumb;
-        $radioCounter = 1;
         $answer = -1;
-        if ($hasAnswer) {
-            // An $answer is the position in optionArray of the answer.
+        if ($hasanswer) {
             $answer = $q[3];
         }
 
@@ -45,18 +36,19 @@ class mod_groupformation_radio_question {
         } else {
             echo '<tr>';
         }
-        echo '<th scope="row">' . $this->question . '</th>';
+        echo '<th scope="row">' . $question . '</th>';
 
-        foreach ($this->optArray as $option) {
-            if ($answer == $radioCounter) {
+        $radiocount = 1;
+        foreach ($options as $option) {
+            if ($answer == $radiocount) {
                 echo '<td data-title="' . $option .
-                    '" class="radioleft select-area selected_label"><input type="radio" name="' . $this->category .
-                    $this->qnumber . '" value="' . $radioCounter . '" checked="checked"/></td>';
+                    '" class="radioleft select-area selected_label"><input type="radio" name="' . $category .
+                    $qnumber . '" value="' . $radiocount . '" checked="checked"/></td>';
             } else {
                 echo '<td data-title="' . $option . '" class="radioleft select-area"><input type="radio" name="' .
-                    $this->category . $this->qnumber . '" value="' . $radioCounter . '"/></td>';
+                    $category . $qnumber . '" value="' . $radiocount . '"/></td>';
             }
-            $radioCounter++;
+            $radiocount++;
         }
         echo '</tr>';
 

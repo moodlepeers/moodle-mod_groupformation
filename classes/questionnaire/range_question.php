@@ -13,7 +13,6 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 /**
  * Prints a particular instance of groupformation questionnaire
  *
@@ -22,35 +21,28 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class mod_groupformation_range_question {
-    private $category;
-    private $qnumber;
-    private $question;
 
-    public function print_html($q, $cat, $qnumb, $hasAnswer) {
-        $this->question = $q [1];
-        $optArray = $q [2];
-        $this->category = $cat;
-        $this->qnumber = $qnumb;
+    public function print_html($q, $category, $qnumber, $hasanswer) {
+        $question = $q [1];
+        $options = $q [2];
 
         $answer = 0;
-        if ($hasAnswer && $q [3] != -1) {
-            // An $answer is the position in optionArray or/and the given range in the answer
+        if ($hasanswer && $q [3] != -1) {
             $answer = $q [3];
             echo '<tr>';
-            echo '<th scope="row">' . $this->question . '</th>';
+            echo '<th scope="row">' . $question . '</th>';
         } else {
             echo '<tr class="noAnswer">';
-            echo '<th scope="row">' . $this->question . '</th>';
+            echo '<th scope="row">' . $question . '</th>';
         }
 
-        echo '<td data-title="' . min(array_keys($optArray)) . ' = ' . $optArray [min(array_keys($optArray))] . ', ' .
-            max(array_keys($optArray)) . ' = ' . $optArray [max(array_keys($optArray))] . '" class="range">
-					<span class="">' . min(array_keys($optArray)) . '</span>
-					<input type="range" name="' . $this->category . $this->qnumber .
-            '" class="gf_range_inputs" min="0" max="' . max(array_keys($optArray)) . '" value="' . $answer . '" />
-					<span class="">' . max(array_keys($optArray)) . '</span>
-					<input type="text" name="' . $this->category . $this->qnumber . '_valid" value="0" style="display:none;"/>
-					</td>';
+        echo '<td data-title="' . min(array_keys($options)) . ' = ' . $options [min(array_keys($options))] . ', ' .
+            max(array_keys($options)) . ' = ' . $options [max(array_keys($options))] . '" class="range">';
+        echo '<span class="">' . min(array_keys($options)) . '</span>';
+        echo '<input type="range" name="' . $category . $qnumber . '" class="gf_range_inputs" min="0" max="';
+        echo max(array_keys($options)) . '" value="' . $answer . '" />';
+        echo '<span class="">' . max(array_keys($options)) . '</span><input type="text" name="' . $category . $qnumber;
+        echo '_valid" value="0" style="display:none;"/></td>';
         echo '</tr>';
     }
 }

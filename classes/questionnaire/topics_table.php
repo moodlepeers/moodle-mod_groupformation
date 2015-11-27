@@ -23,36 +23,20 @@
  */
 class mod_groupformation_topics_table {
 
-    private $category;
-    private $qnumber;
-    private $question;
-
     /**
+     * Print HTML for topics table
      *
-     * print HTML for topics table
-     *
-     * @param unknown $q
-     * @param unknown $cat
-     * @param unknown $qnumb
-     * @param unknown $hasAnswer
+     * @param $q
+     * @param $category
+     * @param $qnumber
      */
-    public function print_html($q, $cat, $qnumb, $hasAnswer) {
-        $this->question = $q[1];
-        $this->optArray = $q[2];
-        $this->category = $cat;
-        $this->qnumber = $qnumb;
+    public function print_html($q, $category, $qnumber) {
+        $question = $q[1];
 
-        echo
-            '<li id="' . $this->category . $this->qnumber . '"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' .
-            $this->question . '</li>';
-
-        if ($hasAnswer) {
-            $answer = $q[3];
-        }
+        echo '<li id="' . $category . $qnumber . '"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' .
+            $question . '</li>';
 
     }
 }
-
-?>
 
 

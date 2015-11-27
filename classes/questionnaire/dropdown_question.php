@@ -13,7 +13,6 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 /**
  * Prints a particular instance of groupformation questionnaire
  *
@@ -22,31 +21,26 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class mod_groupformation_dropdown_question {
-    private $category;
-    private $qnumber;
-    private $question;
-    private $optArray = array();
 
     /**
-     * Print HTML of Dropdown Input
+     * Print HTML of drop-down inputs
      *
-     * @param unknown $q
-     * @param unknown $cat
-     * @param unknown $qnumb
-     * @param boolean $has_answer
+     * @param $q
+     * @param $category
+     * @param $questionnumber
+     * @param $hasanswer
      */
-    public function print_html($q, $category, $question_number, $has_answer) {
+    public function print_html($q, $category, $questionnumber, $hasanswer) {
         $question = $q [1];
         $options = $q [2];
         $answer = -1;
-        $questionCounter = 1;
+        $questioncounter = 1;
 
-        if ($has_answer) {
-            // An $answer is the position in optionArray of the answer.
+        if ($hasanswer) {
             $answer = $q [3];
         }
 
-        if ($has_answer && $q [3] != -1) {
+        if ($hasanswer && $q [3] != -1) {
             echo '<tr>';
             echo '<th scope="row">' . $question . '</th>';
         } else {
@@ -55,16 +49,16 @@ class mod_groupformation_dropdown_question {
         }
 
         echo '<td class="center">
-				<select name="' . $category . $question_number . '" id="' . $category . $question_number . '">';
+				<select name="' . $category . $questionnumber . '" id="' . $category . $questionnumber . '">';
         echo '<option value="0"> - </option>';
         foreach ($options as $option) {
-            if ($answer == $questionCounter) {
-                echo '<option value="' . $questionCounter . '" selected="selected">' . $option . '</option>';
+            if ($answer == $questioncounter) {
+                echo '<option value="' . $questioncounter . '" selected="selected">' . $option . '</option>';
             } else {
 
-                echo '<option value="' . $questionCounter . '">' . $option . '</option>';
+                echo '<option value="' . $questioncounter . '">' . $option . '</option>';
             }
-            $questionCounter++;
+            $questioncounter++;
         }
 
         echo '</select>

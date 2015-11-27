@@ -532,9 +532,9 @@ class mod_groupformation_questionnaire_controller {
 
                 if ($q [0] == 'type_topics') {
                     if ($hasTopicNumbers) {
-                        $topics->print_html($q, $category, $q [4] + 1, true);
+                        $topics->print_html($q, $category, $q [4] + 1);
                     } else {
-                        $topics->print_html($q, $category, $i, $hasAnswer);
+                        $topics->print_html($q, $category, $i);
                     }
                 }
 
