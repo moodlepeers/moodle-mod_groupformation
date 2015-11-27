@@ -436,8 +436,8 @@ class mod_groupformation_storage_manager {
     public function get_logging_data($sorted_by = null, $fieldset = '*') {
         global $DB;
 
-        return $DB->get_records('groupformation_group_users', array(
-            'groupformation' => $this->groupformationid
+        return $DB->get_records('groupformation_logging', array(
+            'groupformationid' => $this->groupformationid
         ), $sorted_by, $fieldset);
     }
 

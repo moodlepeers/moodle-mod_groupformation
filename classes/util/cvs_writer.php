@@ -17,10 +17,10 @@
 /**
  * This is a cvs writer for exporting DB data
  *
- * @package    mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @copyright  2015 MoodlePeers
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
@@ -39,16 +39,16 @@ class mod_groupformation_cvs_writer {
     private $store = null;
 
     /** @var mod_groupformation_user_manager */
-    private $user_manager = null;
+    private $usermanager = null;
 
     /** @var mod_groupformation_groups_manager */
-    private $groups_manager = null;
+    private $groupsmanager = null;
 
     /** @var array This is the user_to_new_id mapping */
-    private $user_map = array();
+    private $usermap = array();
 
     /** @var bool This determines whether the userids are replaced or not */
-    private $replace_userids = false;
+    private $replaceuserids = true;
 
     /**
      * mod_groupformation_cvs_writer constructor.
@@ -60,8 +60,8 @@ class mod_groupformation_cvs_writer {
         $this->groupformationid = $groupformationid;
 
         $this->store = new mod_groupformation_storage_manager($groupformationid);
-        $this->user_manager = new mod_groupformation_user_manager($groupformationid);
-        $this->groups_manager = new mod_groupformation_groups_manager($groupformationid);
+        $this->usermanager = new mod_groupformation_user_manager($groupformationid);
+        $this->groupsmanager = new mod_groupformation_groups_manager($groupformationid);
     }
 
     /**
@@ -69,12 +69,16 @@ class mod_groupformation_cvs_writer {
      * @param $type
      * @return string
      */
-    public function get_data($type){
-        switch($type){
-            case 'answers': return $this->get_answers();
-            case 'groups': return $this->get_groups();
-            case 'group_users': return $this->get_group_users();
-            case 'logging': return $this->get_logging_data();
+    public function get_data($type) {
+        switch ($type) {
+            case 'answers':
+                return $this->get_answers();
+            case 'groups':
+                return $this->get_groups();
+            case 'group_users':
+                return $this->get_group_users();
+            case 'logging':
+                return $this->get_logging_data();
         }
     }
 
@@ -87,10 +91,12 @@ class mod_groupformation_cvs_writer {
     public function record_to_cvs($record, $title = false) {
         $array = get_object_vars($record);
         unset($array['id']);
-        if ($title)
+
+        if ($title) {
             return implode(",", array_keys($array));
-        else
+        } else {
             return implode(",", array_values($array));
+        }
     }
 
     /**
@@ -105,18 +111,19 @@ class mod_groupformation_cvs_writer {
             if (is_null($cvs)) {
                 $cvs = $this->record_to_cvs($record, true) . "\n";
             }
-            if (isset($record->userid) && $this->replace_userids) {
-                $orig_userid = $record->userid;
-                if (array_key_exists($orig_userid, $this->user_map)) {
-                    $record->userid = $this->user_map[$orig_userid];
+            if (isset($record->userid) && $this->replaceuserids) {
+                $origuserid = $record->userid;
+                if (array_key_exists($origuserid, $this->usermap)) {
+                    $record->userid = $this->usermap[$origuserid];
                 } else {
-                    $next = count($this->user_map);
-                    $this->user_map[$orig_userid] = $next;
+                    $next = count($this->usermap);
+                    $this->usermap[$origuserid] = $next;
                     $record->userid = $next;
                 }
             }
             $cvs .= $this->record_to_cvs($record) . "\n";
         }
+
         return $cvs;
     }
 
@@ -127,7 +134,7 @@ class mod_groupformation_cvs_writer {
      */
     public function get_answers() {
 
-        $answers = $this->user_manager->get_answers(null, null, 'id', 'id,userid,category,questionid,answer');
+        $answers = $this->usermanager->get_answers(null, null, 'id', 'id,groupformation,userid,category,questionid,answer');
 
         $cvs = $this->records_to_cvs($answers);
 
@@ -140,11 +147,10 @@ class mod_groupformation_cvs_writer {
      * @return string
      */
     public function get_groups() {
-        $groups = $this->groups_manager->get_generated_groups(null, 'id,groupname,group_size,performance_index,groupal,random,mrandom,created');
+        $groups = $this->groupsmanager->get_generated_groups(null,
+            'id,groupformation,groupname,group_size,performance_index,groupal,random,mrandom,created');
 
         $cvs = $this->records_to_cvs($groups);
-
-        // var_dump($cvs);
 
         return $cvs;
     }
@@ -155,11 +161,9 @@ class mod_groupformation_cvs_writer {
      * @return string
      */
     public function get_group_users() {
-        $groups = $this->groups_manager->get_group_users(null, 'id,userid,groupid');
+        $groups = $this->groupsmanager->get_group_users(null, 'id,groupformation,userid,groupid');
 
         $cvs = $this->records_to_cvs($groups);
-
-        // var_dump($cvs);
 
         return $cvs;
     }
@@ -170,11 +174,9 @@ class mod_groupformation_cvs_writer {
      * @return string
      */
     public function get_logging_data() {
-        $groups = $this->store->get_logging_data('userid');
+        $groups = $this->store->get_logging_data('timestamp');
 
         $cvs = $this->records_to_cvs($groups);
-
-        // var_dump($cvs);
 
         return $cvs;
     }
