@@ -17,19 +17,16 @@
 /**
  *
  * @package mod_groupformation
- * @author Nora Wester
+ * @@author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-// TODO noch nicht getestet
-// defined('MOODLE_INTERNAL') || die(); -> template
-// namespace mod_groupformation\classes\lecturer_settings;
-if (! defined ( 'MOODLE_INTERNAL' )) {
-    die ( 'Direct access to this script is forbidden.' ); // / It must be included from a Moodle page
+
+if (!defined('MOODLE_INTERNAL')) {
+    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
 }
 
-// require_once 'storage_manager.php';
-require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
-require_once ($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
 
 
 class mod_groupformation_student_group_view_controller {
@@ -51,7 +48,7 @@ class mod_groupformation_student_group_view_controller {
      */
     public function __construct($groupformationid) {
         $this->groupformationid = $groupformationid;
-        $this->groups_store = new mod_groupformation_groups_manager ( $groupformationid );
+        $this->groups_store = new mod_groupformation_groups_manager ($groupformationid);
 
         $this->view = new mod_groupformation_template_builder ();
         $this->view->set_template('wrapper_student_groupview');
@@ -64,47 +61,37 @@ class mod_groupformation_student_group_view_controller {
      */
     public function render($userid) {
         global $CFG, $COURSE;
-        if ($this->groups_store->has_group ( $userid ) && $this->groups_store->groups_created()) {
-            $id = $this->groups_store->get_group_id ( $userid );
+        if ($this->groups_store->has_group($userid) && $this->groups_store->groups_created()) {
+            $id = $this->groups_store->get_group_id($userid);
 
-            $name = $this->groups_store->get_group_name ( $userid );
+            $name = $this->groups_store->get_group_name($userid);
 
-            //echo 'Der Name deiner Gruppe ist ' . $name . ' (ID #' . $id . ')<br>';
             $this->group_name = $name . ' (ID #' . $id . ')';
 
+            $otherMembers = $this->groups_store->get_group_members($userid);
 
-            // echo 'Deine Gruppennummer ist ' . $id . '<br>';
-
-            $otherMembers = $this->groups_store->get_group_members ( $userid );
-
-            if (count ( $otherMembers ) > 0) {
-                //echo 'Deine Arbeitskollegen sind: <br>';
-
+            if (count($otherMembers) > 0) {
                 $this->group_info = get_string('membersAre', 'groupformation');
                 $this->group_info_contact = get_string('contact_members', 'groupformation');
 
-                //$array = array();
-                foreach ( $otherMembers as $memberid ) {
+                foreach ($otherMembers as $memberid) {
 
-                    $member = get_complete_user_data ( 'id', $memberid );
+                    $member = get_complete_user_data('id', $memberid);
 
                     $url = $CFG->wwwroot . '/user/view.php?id=' . $memberid . '&course=' . $COURSE->id;
 
-                    if (! $member) {
-                        $this->array[] =  get_string('noUser', 'groupformation');
+                    if (!$member) {
+                        $this->array[] = get_string('noUser', 'groupformation');
                     }
 
-                    $this->array[] = '<a href="' . $url . '">' . fullname ( $member ) . '</a>';
-                    //echo '<a href="' . $url . '">' . fullname ( $member ) . '</a>';
+                    $this->array[] = '<a href="' . $url . '">' . fullname($member) . '</a>';
                 }
 
-            }else{
+            } else {
                 $this->group_info = get_string('oneManGroup', 'groupformation');
-                //echo 'Du bist allein in dieser Gruppe.';
             }
         } else {
             $this->group_info = get_string('groupingNotReady', 'groupformation');
-            //echo '<h5> Die Gruppenbildung ist noch nicht abgeschlossen. </h>';
         }
 
         $this->view->assign('group_name', $this->group_name);
