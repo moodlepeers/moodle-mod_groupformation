@@ -269,10 +269,10 @@ class mod_groupformation_participant_parser {
                 // Handling the big5 heterogen.
                 if ($label == 'big5_heterogen') {
                     $bigTemp = $big5 [0]; // See init of $big5.
-                    $l = $data->get_extra_label($label, $scenario);
+                    $l = $data->get_extra_label($label);
                     $p = 0;
                     $h = $homogen [$label];
-                    // Create the detailed labels of differen big5's.
+                    // Create the detailed labels of different big5's.
                     foreach ($bigTemp as $ls) {
                         $value = array();
                         $name = $label . '_' . $l [$p];

@@ -8,11 +8,11 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
  * Define file for questionnaires
  *
@@ -21,18 +21,18 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.'); // / It must be included from a Moodle page
+    die ('Direct access to this script is forbidden.');
 }
 
 class mod_groupformation_data {
 
-    private $SCENARIO_NAMES = array(
+    private $scenarionames = array(
         1 => 'projectteams',
         2 => 'homeworkgroups',
         3 => 'presentationgroups'
     );
 
-    private $CRITERIA_LABELS = array(
+    private $criterialabels = array(
         '1' => array(
             'topic' => true,
             'knowledge_heterogen' => false,
@@ -61,28 +61,24 @@ class mod_groupformation_data {
             'general' => true
         )
     );
-    private $Big5HomogenExtra_LABEL = array(
-        'Gewissenhaftigkeit',
-        'Vertraeglichkeit'
+
+    private $extralabels = array(
+        'big5_homogen' => array('Gewissenhaftigkeit',
+            'Vertraeglichkeit'),
+        'big5_heterogen' => array('Extraversion',
+            'Neurotizismus',
+            'Offenheit'),
+        'fam' => array('Herausforderung',
+            'Interesse',
+            'Erfolg',
+            'Misserfolg'),
+        'learning' => array('KE',
+            'AE',
+            'RB',
+            'AB')
     );
-    private $Big5HeterogenExtra_LABEL = array(
-        'Extraversion',
-        'Neurotizismus',
-        'Offenheit'
-    );
-    private $FamExtra_LABEL = array(
-        'Herausforderung',
-        'Interesse',
-        'Erfolg',
-        'Misserfolg'
-    );
-    private $LearnExtra_LABEL = array(
-        'KE',
-        'AE',
-        'RB',
-        'AB'
-    );
-    private $CATEGORY_SETS = array(
+
+    private $categorysets = array(
         '1' => array(
             'topic',
             'knowledge',
@@ -116,7 +112,7 @@ class mod_groupformation_data {
      * @return string
      */
     public function get_scenario_name($scenario) {
-        return $this->SCENARIO_NAMES [$scenario];
+        return $this->scenarionames [$scenario];
     }
 
     /**
@@ -126,20 +122,10 @@ class mod_groupformation_data {
      * @return array
      */
     public function get_extra_label($label) {
-        if ($label == 'fam') {
-            return $this->FamExtra_LABEL;
-        }
-
-        if ($label == 'learning') {
-            return $this->LearnExtra_LABEL;
-        }
-
-        if ($label == 'big5_homogen') {
-            return $this->Big5HomogenExtra_LABEL;
-        }
-
-        if ($label == 'big5_heterogen') {
-            return $this->Big5HeterogenExtra_LABEL;
+        if (array_key_exists($label, $this->extralabels)) {
+            return $this->extralabels[$label];
+        } else {
+            return array();
         }
     }
 
@@ -150,7 +136,7 @@ class mod_groupformation_data {
      * @return array
      */
     public function get_category_set($scenario) {
-        return $this->CATEGORY_SETS [$scenario];
+        return $this->categorysets [$scenario];
     }
 
     /**
@@ -160,7 +146,7 @@ class mod_groupformation_data {
      * @return string
      */
     public function get_label_set($scenario) {
-        return array_keys($this->CRITERIA_LABELS [$scenario]);
+        return array_keys($this->criterialabels [$scenario]);
     }
 
     /**
@@ -170,8 +156,6 @@ class mod_groupformation_data {
      * @return array
      */
     public function get_homogeneous_set($scenario) {
-        return $this->CRITERIA_LABELS [$scenario];
+        return $this->criterialabels [$scenario];
     }
-}	
-
-
+}

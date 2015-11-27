@@ -137,6 +137,45 @@ class mod_groupformation_analysis_controller {
     }
 
     /**
+     * Returns stats about answered questionnaires
+     *
+     * @return array
+     */
+    private function get_infos() {
+
+        $usermanager = $this->usermanager;
+        $stats = array();
+
+        $context = groupformation_get_context($this->groupformationid);
+        $students = get_enrolled_users($context, 'mod/groupformation:onlystudent');
+        $studentcount = count($students);
+
+        $stats [] = $studentcount;
+
+        $started = $usermanager->get_started();
+        $startedcount = count($started);
+
+        $stats [] = $startedcount;
+
+        $completed = $usermanager->get_completed();
+        $completedcount = count($completed);
+
+        $stats [] = $completedcount;
+
+        $nomissinganswers = $usermanager->get_completed_by_answer_count();
+        $nomissinganswerscount = count($nomissinganswers);
+
+        $stats [] = $nomissinganswerscount;
+
+        $missinganswers = $usermanager->get_not_completed_but_submitted();
+        $missinganswerscount = count($missinganswers);
+
+        $stats [] = $missinganswerscount;
+
+        return $stats;
+    }
+
+    /**
      * Loads statistics for template
      *
      * @return string
@@ -144,7 +183,7 @@ class mod_groupformation_analysis_controller {
     private function load_statistics() {
         global $PAGE;
 
-        $questionnairestats = mod_groupformation_util::get_infos($this->groupformationid);
+        $questionnairestats = $this->get_infos($this->groupformationid);
 
         $statisticsanalysisview = new mod_groupformation_template_builder();
         $statisticsanalysisview->set_template('analysis_statistics');

@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -9,11 +8,11 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
  * Utility class for various methods
  *
@@ -81,9 +80,9 @@ class mod_groupformation_util {
         }
         $store = new mod_groupformation_storage_manager ($groupformationid);
 
-        $scenario_name = get_string('scenario_' . $store->get_scenario(true), 'groupformation');
+        $scenarioname = get_string('scenario_' . $store->get_scenario(true), 'groupformation');
         $a = new stdClass ();
-        $a->scenario_name = $scenario_name;
+        $a->scenario_name = $scenarioname;
 
         $s = '<p><a class="show">' . get_string('info_header_' . $role, 'groupformation') . '</a></p>';
         $s .= '<div id="info_text" style="display: ' . (($unfolded) ? 'block' : 'none') . ';">';
@@ -123,20 +122,20 @@ class mod_groupformation_util {
      * @return array
      */
     public static function get_stats($groupformationid, $userid) {
-        $user_manager = new mod_groupformation_user_manager($groupformationid);
+        $usermanager = new mod_groupformation_user_manager($groupformationid);
         $store = new mod_groupformation_storage_manager($groupformationid);
 
-        $category_set = $store->get_categories();
+        $categoryset = $store->get_categories();
 
         $categories = array();
 
-        foreach ($category_set as $category) {
+        foreach ($categoryset as $category) {
             $categories [$category] = $store->get_number($category);
         }
 
         $stats = array();
         foreach ($categories as $category => $value) {
-            $count = $user_manager->get_number_of_answers($userid, $category);
+            $count = $usermanager->get_number_of_answers($userid, $category);
             $stats [$category] = array(
                 'questions' => $value,
                 'answered' => $count,
@@ -148,60 +147,19 @@ class mod_groupformation_util {
     }
 
     /**
-     * Returns stats about answered questionnaires
-     *
-     * @param $groupformationid
-     * @return array
-     */
-    public static function get_infos($groupformationid) {
-        $user_manager = new mod_groupformation_user_manager ($groupformationid);
-        $store = new mod_groupformation_storage_manager ($groupformationid);
-
-        $stats = array();
-
-        $context = groupformation_get_context($groupformationid);
-        $students = get_enrolled_users($context, 'mod/groupformation:onlystudent');
-        $student_count = count($students);
-
-        $stats [] = $student_count;
-
-        $started = $user_manager->get_started();
-        $started_count = count($started);
-
-        $stats [] = $started_count;
-
-        $completed = $user_manager->get_completed();
-        $completed_count = count($completed);
-
-        $stats [] = $completed_count;
-
-        $no_missing_answers = $user_manager->get_completed_by_answer_count();
-        $no_missing_answers_count = count($no_missing_answers);
-
-        $stats [] = $no_missing_answers_count;
-
-        $missing_answers = $user_manager->get_not_completed_but_submitted();
-        $missing_answers_count = count($missing_answers);
-
-        $stats [] = $missing_answers_count;
-
-        return $stats;
-    }
-
-    /**
      * Converts OPTIONS xml to array
      *
-     * @param $xml_content
+     * @param $xmlcontent
      * @return array
      */
-    public static function xml_to_array($xml_content) {
-        $xml = simplexml_load_string($xml_content);
-        $optionArray = array();
+    public static function xml_to_array($xmlcontent) {
+        $xml = simplexml_load_string($xmlcontent);
+        $options = array();
         foreach ($xml->OPTION as $option) {
-            $optionArray[] = trim($option);
+            $options[] = trim($option);
         }
 
-        return $optionArray;
+        return $options;
     }
 
     /**
@@ -239,9 +197,9 @@ class mod_groupformation_util {
 
         foreach ($instances as $groupformation) {
             $query = "SELECT MAX(timecreated) FROM {logstore_standard_log} WHERE courseid = :courseid";
-            $last_activity = intval($DB->get_field_sql($query, array('courseid' => $groupformation->course)));
+            $lastactivity = intval($DB->get_field_sql($query, array('courseid' => $groupformation->course)));
 
-            if (($now - $last_activity) > $difference) {
+            if (($now - $lastactivity) > $difference) {
 
                 self::delete_user_related_data($groupformation->id);
                 self::archive_activity($groupformation->id);

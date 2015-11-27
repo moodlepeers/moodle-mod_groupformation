@@ -264,8 +264,7 @@ function groupformation_check_for_cron_job() {
  */
 function groupformation_update_questions(mod_groupformation_storage_manager $store) {
     $names = $store->get_raw_categories();
-    $xmlLoader = new mod_groupformation_xml_loader ();
-    $xmlLoader->set_store($store);
+    $xmlLoader = new mod_groupformation_xml_loader ($store);
 
     if ($store->catalog_table_not_set()) {
         foreach ($names as $category) {
