@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -15,58 +14,53 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
 /**
- * Prints a particular instance of groupformation
+ * Prints a particular instance of groupformation questionnaire
  *
  * @package mod_groupformation
- * @author  
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 class mod_groupformation_radio_question {
 
-	private $category;
-	private $qnumber;
-	private $question;
-	private $optArray = array();
-	
-	public function print_html($q, $cat, $qnumb, $hasAnswer){
-		$this->question = $q[1];
-		$this->optArray = $q[2];
-		$this->category = $cat;
-		$this->qnumber = $qnumb;
-		$radioCounter = 1;
-		$answer = -1;
-		if($hasAnswer){
-			//$answer ist die position im optionArray von der Antwort
-			$answer = $q[3];
-		}
+    private $category;
+    private $qnumber;
+    private $question;
+    private $optArray = array();
 
-		if($answer == -1){
-			echo '<tr class="noAnswer">';
-		}else{
-			echo '<tr>';
-		}
-		echo '<th scope="row">' . $this->question . '</th>';
+    public function print_html($q, $cat, $qnumb, $hasAnswer) {
+        $this->question = $q[1];
+        $this->optArray = $q[2];
+        $this->category = $cat;
+        $this->qnumber = $qnumb;
+        $radioCounter = 1;
+        $answer = -1;
+        if ($hasAnswer) {
+            // An $answer is the position in optionArray of the answer.
+            $answer = $q[3];
+        }
 
-		foreach ($this->optArray as $option){
-			if($answer == $radioCounter){
-				echo '<td data-title="' . $option .
-				'" class="radioleft select-area selected_label"><input type="radio" name="' .
-				$this->category . $this->qnumber .
-				'" value="' . $radioCounter . '" checked="checked"/></td>';
-			}else{
-				echo '<td data-title="' . $option .
-				'" class="radioleft select-area"><input type="radio" name="' .
-				$this->category . $this->qnumber .
-				'" value="' . $radioCounter . '"/></td>';
-			}
-			$radioCounter++;
-		}
-		echo '</tr>';
-		
-	}
-	
-	
-}	
-	
-?>
+        if ($answer == -1) {
+            echo '<tr class="noAnswer">';
+        } else {
+            echo '<tr>';
+        }
+        echo '<th scope="row">' . $this->question . '</th>';
+
+        foreach ($this->optArray as $option) {
+            if ($answer == $radioCounter) {
+                echo '<td data-title="' . $option .
+                    '" class="radioleft select-area selected_label"><input type="radio" name="' . $this->category .
+                    $this->qnumber . '" value="' . $radioCounter . '" checked="checked"/></td>';
+            } else {
+                echo '<td data-title="' . $option . '" class="radioleft select-area"><input type="radio" name="' .
+                    $this->category . $this->qnumber . '" value="' . $radioCounter . '"/></td>';
+            }
+            $radioCounter++;
+        }
+        echo '</tr>';
+
+    }
+
+
+}
+

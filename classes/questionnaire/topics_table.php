@@ -13,43 +13,45 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
-
 /**
- * Prints a particular instance of groupformation
+ * Prints a particular instance of groupformation questionnaire
  *
  * @package mod_groupformation
- * @author  
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class mod_groupformation_topics_table{
+class mod_groupformation_topics_table {
 
-	private $category;
-	private $qnumber;
-	private $question;	
-	
-	/**
-	 * 
-	 * print HTML for topics table
-	 * 
-	 * @param unknown $q
-	 * @param unknown $cat
-	 * @param unknown $qnumb
-	 * @param unknown $hasAnswer
-	 */
-	public function print_html($q, $cat, $qnumb, $hasAnswer){
-		$this->question = $q[1];
-		$this->optArray = $q[2];
-		$this->category = $cat;
-		$this->qnumber = $qnumb;
-		
-		echo '<li id="'. $this->category .  $this->qnumber .'"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' . $this->question . '</li>';
-		
-		if($hasAnswer){
-			$answer = $q[3];
-		}
-		
-	}
+    private $category;
+    private $qnumber;
+    private $question;
+
+    /**
+     *
+     * print HTML for topics table
+     *
+     * @param unknown $q
+     * @param unknown $cat
+     * @param unknown $qnumb
+     * @param unknown $hasAnswer
+     */
+    public function print_html($q, $cat, $qnumb, $hasAnswer) {
+        $this->question = $q[1];
+        $this->optArray = $q[2];
+        $this->category = $cat;
+        $this->qnumber = $qnumb;
+
+        echo
+            '<li id="' . $this->category . $this->qnumber . '"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' .
+            $this->question . '</li>';
+
+        if ($hasAnswer) {
+            $answer = $q[3];
+        }
+
+    }
 }
+
 ?>
 
 
