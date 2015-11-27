@@ -16,11 +16,11 @@
 /**
  *
  * @package mod_groupformation
- * @author Rene Roepke
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.'); // / It must be included from a Moodle page
+    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
 }
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
@@ -60,7 +60,7 @@ class mod_groupformation_import_export_controller {
     private function generate_answers_url($userid, $categories) {
         $xmlwriter = new mod_groupformation_xml_writer ();
 
-        // generate content for answer file for export
+        // Generate content for answer file for export.
         $content = $xmlwriter->write($userid, $this->groupformationid, $categories);
 
         $filename = 'exportable_answers.xml';
@@ -68,24 +68,23 @@ class mod_groupformation_import_export_controller {
         $context = context_module::instance($this->cmid);
 
         $fileinfo = array(
-            'contextid' => $context->id,
-            'component' => 'mod_groupformation',
-            'filearea' => 'groupformation_answers',
-            'itemid' => $userid,
-            'filepath' => '/',
-            'filename' => $filename
-        );
+            'contextid' => $context->id, 'component' => 'mod_groupformation', 'filearea' => 'groupformation_answers',
+            'itemid' => $userid, 'filepath' => '/', 'filename' => $filename);
 
         $file_storage = get_file_storage();
 
-        if ($file_storage->file_exists($fileinfo ['contextid'], $fileinfo ['component'], $fileinfo ['filearea'], $fileinfo ['itemid'], $fileinfo ['filepath'], $fileinfo ['filename'])) {
-            $file = $file_storage->get_file($fileinfo ['contextid'], $fileinfo ['component'], $fileinfo ['filearea'], $fileinfo ['itemid'], $fileinfo ['filepath'], $fileinfo ['filename']);
+        if ($file_storage->file_exists($fileinfo ['contextid'], $fileinfo ['component'], $fileinfo ['filearea'],
+                                       $fileinfo ['itemid'], $fileinfo ['filepath'], $fileinfo ['filename'])
+        ) {
+            $file = $file_storage->get_file($fileinfo ['contextid'], $fileinfo ['component'], $fileinfo ['filearea'],
+                                            $fileinfo ['itemid'], $fileinfo ['filepath'], $fileinfo ['filename']);
             $file->delete();
         }
 
         $file = $file_storage->create_file_from_string($fileinfo, $content);
 
-        $url = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(), $file->get_filearea(), $file->get_itemid(), $file->get_filepath(), $file->get_filename());
+        $url = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(), $file->get_filearea(),
+                                               $file->get_itemid(), $file->get_filepath(), $file->get_filename());
 
         $urlstring = $url->out();
 
@@ -133,8 +132,7 @@ class mod_groupformation_import_export_controller {
 
         $this->view->assign('import_description', $import_description);
         $url = new moodle_url ('/mod/groupformation/import_view.php', array(
-            'id' => $this->cmid
-        ));
+            'id' => $this->cmid));
         $this->view->assign('import_form', $url->out());
         $this->view->assign('import_button', $import_button);
 
@@ -172,13 +170,10 @@ class mod_groupformation_import_export_controller {
         $this->view->set_template('student_import_result');
 
         $url = new moodle_url ('/mod/groupformation/import_view.php', array(
-            'id' => $this->cmid
-        ));
+            'id' => $this->cmid));
 
         $viewurl = new moodle_url ('/mod/groupformation/view.php', array(
-            'id' => $this->cmid,
-            'do_show' => 'view'
-        ));
+            'id' => $this->cmid, 'do_show' => 'view'));
         $this->view->assign('import_export_url', $viewurl->out());
         $this->view->assign('import_form', $url->out());
         $this->view->assign('successful', $successful);
@@ -229,17 +224,16 @@ class mod_groupformation_import_export_controller {
 
             $name = strval($category->attributes()->name);
 
-            // check if category is needed to be imported
+            // Check if category is needed to be imported.
             if (in_array($name, $categories)) {
 
-                // try importing answers
+                // Try importing answers.
                 $records = $this->create_answer_records($name, $category->answer);
 
                 $all_records = array_merge($all_records, $records);
             }
         }
 
-// 		var_dump ( $all_records );
         $DB->insert_records('groupformation_answer', $all_records);
         $this->user_manager->set_answer_count($userid);
     }
@@ -265,7 +259,6 @@ class mod_groupformation_import_export_controller {
             $attr = $answer->attributes();
             $questionid = intval($attr->questionid);
             $value = intval($attr->value);
-            // var_dump ( "questionid = " . $questionid, "value = " . $value );
 
             if ($questionid <= 0 || $value <= 0 || in_array($questionid, $questionids)) {
                 throw new InvalidArgumentException ("Wrong format");
@@ -274,19 +267,13 @@ class mod_groupformation_import_export_controller {
             $questionids [] = $questionid;
 
             if ($record = $DB->get_record('groupformation_answer', array(
-                'userid' => $userid,
-                'category' => $category,
-                'questionid' => $questionid
-            ))
+                'userid' => $userid, 'category' => $category, 'questionid' => $questionid))
             ) {
 
-                // nothing to do here
-                // var_dump("NO NEED TO IMPORT");
+                // Nothing to do here.
             } else {
 
-                // create record for import
-                // var_dump("NEED TO IMPORT");
-
+                // Create record for import.
                 $record = new stdClass ();
 
                 $record->groupformation = $this->groupformationid;
@@ -295,7 +282,6 @@ class mod_groupformation_import_export_controller {
                 $record->userid = $userid;
                 $record->answer = $value;
 
-                // var_dump($record);
                 $all_records [] = $record;
             }
         }
@@ -344,7 +330,7 @@ class mod_groupformation_import_export_controller {
     private function generate_export_url($type = 'answers') {
         $cvswriter = new mod_groupformation_cvs_writer ($this->cm, $this->groupformationid);
 
-        // generate content for answer file for export
+        // Generate content for answer file for export.
         $content = $cvswriter->get_data($type);
 
         $filename = 'archived_' . $type . '.cvs';
@@ -352,24 +338,23 @@ class mod_groupformation_import_export_controller {
         $context = context_module::instance($this->cmid);
 
         $fileinfo = array(
-            'contextid' => $context->id,
-            'component' => 'mod_groupformation',
-            'filearea' => 'groupformation_answers',
-            'itemid' => $this->groupformationid,
-            'filepath' => '/',
-            'filename' => $filename
-        );
+            'contextid' => $context->id, 'component' => 'mod_groupformation', 'filearea' => 'groupformation_answers',
+            'itemid' => $this->groupformationid, 'filepath' => '/', 'filename' => $filename);
 
         $file_storage = get_file_storage();
 
-        if ($file_storage->file_exists($fileinfo ['contextid'], $fileinfo ['component'], $fileinfo ['filearea'], $fileinfo ['itemid'], $fileinfo ['filepath'], $fileinfo ['filename'])) {
-            $file = $file_storage->get_file($fileinfo ['contextid'], $fileinfo ['component'], $fileinfo ['filearea'], $fileinfo ['itemid'], $fileinfo ['filepath'], $fileinfo ['filename']);
+        if ($file_storage->file_exists($fileinfo ['contextid'], $fileinfo ['component'], $fileinfo ['filearea'],
+                                       $fileinfo ['itemid'], $fileinfo ['filepath'], $fileinfo ['filename'])
+        ) {
+            $file = $file_storage->get_file($fileinfo ['contextid'], $fileinfo ['component'], $fileinfo ['filearea'],
+                                            $fileinfo ['itemid'], $fileinfo ['filepath'], $fileinfo ['filename']);
             $file->delete();
         }
 
         $file = $file_storage->create_file_from_string($fileinfo, $content);
 
-        $url = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(), $file->get_filearea(), $file->get_itemid(), $file->get_filepath(), $file->get_filename());
+        $url = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(), $file->get_filearea(),
+                                               $file->get_itemid(), $file->get_filepath(), $file->get_filename());
 
         $urlstring = $url->out();
 

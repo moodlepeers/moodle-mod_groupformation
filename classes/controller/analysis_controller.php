@@ -17,6 +17,7 @@
 /**
  * Controller for analysis view
  *
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @package    mod_groupformation
  * @copyright  2015 MoodlePeers
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -102,17 +103,12 @@ class mod_groupformation_analysis_controller {
         }
 
         $buttonname = ($this->questionnaireavailable) ? "stop_questionnaire" : "start_questionnaire";
-        $buttoncaption = ($this->questionnaireavailable) ? get_string('activity_end', 'groupformation') :
-            get_string('activity_start', 'groupformation');
+        $buttoncaption = ($this->questionnaireavailable) ? get_string('activity_end', 'groupformation') : get_string('activity_start', 'groupformation');
         $buttondisabled = ($this->jobstate !== "ready") ? "disabled" : "";
 
         $statusanalysisview->assign('button', array(
-            'type' => 'submit',
-            'name' => $buttonname,
-            'value' => '',
-            'state' => $buttondisabled,
-            'text' => $buttoncaption,
-        ));
+            'type' => 'submit', 'name' => $buttonname, 'value' => '', 'state' => $buttondisabled,
+            'text' => $buttoncaption,));
 
         $infoteacher = mod_groupformation_util::get_info_text_for_teacher(false, "analysis");
 

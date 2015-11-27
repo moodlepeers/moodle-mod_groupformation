@@ -18,7 +18,7 @@
  * Controller for grouping view
  *
  * @package mod_groupformation
- * @author MoodlePeers
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
@@ -96,16 +96,16 @@ class mod_groupformation_grouping_controller {
         $this->groups_created = $this->groups_store->groups_created();
 
         if ($activity_state == 'true') {
-            /* Survey läuft noch */
+            /* Questionnaire is still on */
             $this->view_state = 0;
         } elseif ($job_status == 'ready') {
-            /* Survey beendet, aber keine Gruppen generiert */
+            /* Questionnaire closed, but no groups are generated yet. */
             $this->view_state = 1;
         } elseif ($job_status == 'waiting' || $job_status == 'started') {
-            /* Gruppenbildung läuft */
+            /* Groupbuilding is in progress */
             $this->view_state = 2;
         } elseif ($job_status == 'aborted') {
-            /* Gruppen generiert, aber nicht ins Moodle integriert */
+            /* Groupbuilding is done, but not integrated to moodle-groups */
             $this->view_state = 3;
         } elseif ($job_status == 'done' && !$this->groups_created) {
             // Moodlegroups are created
@@ -122,7 +122,7 @@ class mod_groupformation_grouping_controller {
     public function start($course, $cm) {
         global $USER;
 
-        // logging
+        // Logging.
         groupformation_info($USER->id, $this->groupformationid, 'groupal job queued by course manager/teacher');
 
         $users = $this->handle_complete_questionaires();
@@ -146,7 +146,7 @@ class mod_groupformation_grouping_controller {
     public function abort() {
         global $USER;
 
-        // logging
+        // Logging.
         groupformation_info($USER->id, $this->groupformationid, 'groupal job aborted by course manager/teacher');
 
         mod_groupformation_job_manager::set_job($this->job, "aborted", false, false);
@@ -159,7 +159,7 @@ class mod_groupformation_grouping_controller {
     public function adopt() {
         global $USER;
 
-        // logging
+        // Logging.
         groupformation_info($USER->id, $this->groupformationid, 'groupal job results adopted to moodle groups by course manager/teacher');
 
         mod_groupformation_group_generator::generate_moodle_groups($this->groupformationid);
@@ -172,7 +172,7 @@ class mod_groupformation_grouping_controller {
     public function delete() {
         global $USER;
 
-        // logging
+        // Logging.
         groupformation_info($USER->id, $this->groupformationid, 'groupal job results deleted by course manager/teacher');
 
         mod_groupformation_job_manager::set_job($this->job, "ready", false, true);
@@ -208,190 +208,88 @@ class mod_groupformation_grouping_controller {
 
         switch ($this->view_state) {
             case 0 :
-                // zweiter Parameter des Array gibt an, ob wichtiger Hinweis (1) oder nicht (0)
+                // Secound parametor of the array says if it a important note (1) or not (0).
                 $settingsGroupsView->assign('status', array(
-                    get_string('statusGrupping0', 'groupformation'),
-                    0
-                ));
+                    get_string('statusGrupping0', 'groupformation'), 0));
                 $settingsGroupsView->assign('buttons', array(
                     'button1' => array(
-                        'type' => 'submit',
-                        'name' => 'start',
-                        'value' => '',
-                        'state' => 'disabled',
-                        'text' => get_string('grouping_start', 'groupformation')
-                    ),
-                    'button2' => array(
-                        'type' => 'submit',
-                        'name' => 'delete',
-                        'value' => '',
-                        'state' => 'disabled',
-                        'text' => get_string('grouping_delete', 'groupformation')
-                    ),
-                    'button3' => array(
-                        'type' => 'submit',
-                        'name' => 'adopt',
-                        'value' => '',
-                        'state' => 'disabled',
-                        'text' => get_string('grouping_adopt', 'groupformation')
-                    )
-                ));
+                        'type' => 'submit', 'name' => 'start', 'value' => '', 'state' => 'disabled',
+                        'text' => get_string('grouping_start', 'groupformation')), 'button2' => array(
+                        'type' => 'submit', 'name' => 'delete', 'value' => '', 'state' => 'disabled',
+                        'text' => get_string('grouping_delete', 'groupformation')), 'button3' => array(
+                        'type' => 'submit', 'name' => 'adopt', 'value' => '', 'state' => 'disabled',
+                        'text' => get_string('grouping_adopt', 'groupformation'))));
 
                 break;
 
             case 1 :
                 $settingsGroupsView->assign('status', array(
-                    get_string('statusGrupping1', 'groupformation'),
-                    0
-                ));
+                    get_string('statusGrupping1', 'groupformation'), 0));
                 $settingsGroupsView->assign('buttons', array(
                     'button1' => array(
-                        'type' => 'submit',
-                        'name' => 'start',
-                        'value' => '',
-                        'state' => '',
-                        'text' => get_string('grouping_start', 'groupformation')
-                    ),
-                    'button2' => array(
-                        'type' => 'submit',
-                        'name' => 'delete',
-                        'value' => '',
-                        'state' => 'disabled',
-                        'text' => get_string('grouping_delete', 'groupformation')
-                    ),
-                    'button3' => array(
-                        'type' => 'submit',
-                        'name' => 'adopt',
-                        'value' => '',
-                        'state' => 'disabled',
-                        'text' => get_string('grouping_adopt', 'groupformation')
-                    )
-                ));
+                        'type' => 'submit', 'name' => 'start', 'value' => '', 'state' => '',
+                        'text' => get_string('grouping_start', 'groupformation')), 'button2' => array(
+                        'type' => 'submit', 'name' => 'delete', 'value' => '', 'state' => 'disabled',
+                        'text' => get_string('grouping_delete', 'groupformation')), 'button3' => array(
+                        'type' => 'submit', 'name' => 'adopt', 'value' => '', 'state' => 'disabled',
+                        'text' => get_string('grouping_adopt', 'groupformation'))));
 
                 break;
 
             case 2 :
                 $settingsGroupsView->assign('status', array(
-                    get_string('statusGrupping2', 'groupformation'),
-                    1
-                ));
+                    get_string('statusGrupping2', 'groupformation'), 1));
                 $settingsGroupsView->assign('buttons', array(
                     'button1' => array(
-                        'type' => 'submit',
-                        'name' => 'abort',
-                        'value' => '',
-                        'state' => '',
-                        'text' => get_string('grouping_abort', 'groupformation')
-                    ),
-                    'button2' => array(
-                        'type' => 'submit',
-                        'name' => 'delete',
-                        'value' => '',
-                        'state' => 'disabled',
-                        'text' => get_string('grouping_delete', 'groupformation')
-                    ),
-                    'button3' => array(
-                        'type' => 'submit',
-                        'name' => 'adopt',
-                        'value' => '',
-                        'state' => 'disabled',
-                        'text' => get_string('grouping_adopt', 'groupformation')
-                    )
-                ));
+                        'type' => 'submit', 'name' => 'abort', 'value' => '', 'state' => '',
+                        'text' => get_string('grouping_abort', 'groupformation')), 'button2' => array(
+                        'type' => 'submit', 'name' => 'delete', 'value' => '', 'state' => 'disabled',
+                        'text' => get_string('grouping_delete', 'groupformation')), 'button3' => array(
+                        'type' => 'submit', 'name' => 'adopt', 'value' => '', 'state' => 'disabled',
+                        'text' => get_string('grouping_adopt', 'groupformation'))));
 
                 $settingsGroupsView->assign('emailnotifications', $this->store->get_email_setting());
                 break;
 
             case 3 :
                 $settingsGroupsView->assign('status', array(
-                    get_string('statusGrupping3', 'groupformation'),
-                    1
-                ));
+                    get_string('statusGrupping3', 'groupformation'), 1));
                 $settingsGroupsView->assign('buttons', array(
                     'button1' => array(
-                        'type' => 'submit',
-                        'name' => 'start',
-                        'value' => '',
-                        'state' => 'disabled',
-                        'text' => get_string('grouping_start', 'groupformation')
-                    ),
-                    'button2' => array(
-                        'type' => 'submit',
-                        'name' => 'delete',
-                        'value' => '',
-                        'state' => 'disabled',
-                        'text' => get_string('grouping_delete', 'groupformation')
-                    ),
-                    'button3' => array(
-                        'type' => 'submit',
-                        'name' => 'adopt',
-                        'value' => '',
-                        'state' => 'disabled',
-                        'text' => get_string('grouping_adopt', 'groupformation')
-                    )
-                ));
+                        'type' => 'submit', 'name' => 'start', 'value' => '', 'state' => 'disabled',
+                        'text' => get_string('grouping_start', 'groupformation')), 'button2' => array(
+                        'type' => 'submit', 'name' => 'delete', 'value' => '', 'state' => 'disabled',
+                        'text' => get_string('grouping_delete', 'groupformation')), 'button3' => array(
+                        'type' => 'submit', 'name' => 'adopt', 'value' => '', 'state' => 'disabled',
+                        'text' => get_string('grouping_adopt', 'groupformation'))));
 
                 break;
 
             case 4 :
                 $settingsGroupsView->assign('status', array(
-                    get_string('statusGrupping4', 'groupformation'),
-                    0
-                ));
+                    get_string('statusGrupping4', 'groupformation'), 0));
                 $settingsGroupsView->assign('buttons', array(
                     'button1' => array(
-                        'type' => 'submit',
-                        'name' => 'start',
-                        'value' => '',
-                        'state' => 'disabled',
-                        'text' => get_string('grouping_start', 'groupformation')
-                    ),
-                    'button2' => array(
-                        'type' => 'submit',
-                        'name' => 'delete',
-                        'value' => '',
-                        'state' => '',
-                        'text' => get_string('grouping_delete', 'groupformation')
-                    ),
-                    'button3' => array(
-                        'type' => 'submit',
-                        'name' => 'adopt',
-                        'value' => '',
-                        'state' => '',
-                        'text' => get_string('grouping_adopt', 'groupformation')
-                    )
-                ));
+                        'type' => 'submit', 'name' => 'start', 'value' => '', 'state' => 'disabled',
+                        'text' => get_string('grouping_start', 'groupformation')), 'button2' => array(
+                        'type' => 'submit', 'name' => 'delete', 'value' => '', 'state' => '',
+                        'text' => get_string('grouping_delete', 'groupformation')), 'button3' => array(
+                        'type' => 'submit', 'name' => 'adopt', 'value' => '', 'state' => '',
+                        'text' => get_string('grouping_adopt', 'groupformation'))));
 
                 break;
 
             case 5 :
                 $settingsGroupsView->assign('status', array(
-                    get_string('statusGrupping5', 'groupformation'),
-                    0
-                ));
+                    get_string('statusGrupping5', 'groupformation'), 0));
                 $settingsGroupsView->assign('buttons', array(
                     'button1' => array(
-                        'type' => 'submit',
-                        'name' => 'start',
-                        'value' => '',
-                        'state' => 'disabled',
-                        'text' => get_string('grouping_start', 'groupformation')
-                    ),
-                    'button2' => array(
-                        'type' => 'submit',
-                        'name' => 'delete',
-                        'value' => '',
-                        'state' => '',
-                        'text' => get_string('moodlegrouping_delete', 'groupformation')
-                    ),
-                    'button3' => array(
-                        'type' => 'submit',
-                        'name' => 'adopt',
-                        'value' => '',
-                        'state' => 'disabled',
-                        'text' => get_string('grouping_adopt', 'groupformation')
-                    )
-                ));
+                        'type' => 'submit', 'name' => 'start', 'value' => '', 'state' => 'disabled',
+                        'text' => get_string('grouping_start', 'groupformation')), 'button2' => array(
+                        'type' => 'submit', 'name' => 'delete', 'value' => '', 'state' => '',
+                        'text' => get_string('moodlegrouping_delete', 'groupformation')), 'button3' => array(
+                        'type' => 'submit', 'name' => 'adopt', 'value' => '', 'state' => 'disabled',
+                        'text' => get_string('grouping_adopt', 'groupformation'))));
                 break;
 
             case 'default' :
@@ -449,11 +347,8 @@ class mod_groupformation_grouping_controller {
             foreach ($this->incomplete_groups as $key => $value) {
 
                 $incompleteGroupsView->assign($key, array(
-                    'groupname' => $value->groupname,
-                    'scrollTo_group' => $this->get_scroll_to_link($key),
-                    'grouplink' => $this->get_group_link($value->moodlegroupid),
-                    'groupsize' => $value->groupsize
-                ));
+                    'groupname' => $value->groupname, 'scrollTo_group' => $this->get_scroll_to_link($key),
+                    'grouplink' => $this->get_group_link($value->moodlegroupid), 'groupsize' => $value->groupsize));
             }
         } else {
             $incompleteGroupsView->set_template('grouping_no_data');
@@ -482,9 +377,9 @@ class mod_groupformation_grouping_controller {
             $usersIDs = $this->groups_store->get_users_for_generated_group($key);
             $size = count($usersIDs);
             if ($size < $maxSize) {
-                $a = ( array )$this->groups [$key];
+                $a = ( array ) $this->groups [$key];
                 $a ['groupsize'] = $size;
-                $this->incomplete_groups [$key] = ( object )$a;
+                $this->incomplete_groups [$key] = ( object ) $a;
             }
         }
     }
@@ -506,11 +401,9 @@ class mod_groupformation_grouping_controller {
                 $gpi = (is_null($value->performance_index)) ? '-' : $value->performance_index;
 
                 $generatedGroupsView->assign($key, array(
-                    'groupname' => $value->groupname,
-                    'groupquallity' => $gpi,
+                    'groupname' => $value->groupname, 'groupquallity' => $gpi,
                     'grouplink' => $this->get_group_link($value->moodlegroupid),
-                    'group_members' => $this->get_group_members($key)
-                ));
+                    'group_members' => $this->get_group_members($key)));
             }
         } else {
             $generatedGroupsView->set_template('grouping_no_data');
@@ -536,8 +429,9 @@ class mod_groupformation_grouping_controller {
 
             $userName = $user->userid;
             $user_record = mod_groupformation_util::get_user_record($user->userid);
-            if (!is_null($user_record))
+            if (!is_null($user_record)) {
                 $userName = fullname($user_record);
+            }
 
             if (!(strlen($userName) > 2)) {
                 $userName = $user->userid;
@@ -545,9 +439,7 @@ class mod_groupformation_grouping_controller {
             $userLink = $url;
 
             $groupMembers [$user->userid] = [
-                'name' => $userName,
-                'link' => $userLink
-            ];
+                'name' => $userName, 'link' => $userLink];
         }
         return $groupMembers;
     }
@@ -562,8 +454,7 @@ class mod_groupformation_grouping_controller {
         $link = array();
         if ($this->groups_created) {
             $url = new moodle_url ('/group/members.php', array(
-                'group' => $groupid
-            ));
+                'group' => $groupid));
             $link [] = $url;
             $link [] = '';
         } else {
@@ -588,4 +479,3 @@ class mod_groupformation_grouping_controller {
     }
 }
 
-?>
