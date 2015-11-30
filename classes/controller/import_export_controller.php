@@ -27,7 +27,7 @@ if (!defined('MOODLE_INTERNAL')) {
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/xml_writer.php');
-require_once($CFG->dirroot . '/mod/groupformation/classes/util/cvs_writer.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/util/csv_writer.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
 
 class mod_groupformation_import_export_controller {
@@ -321,7 +321,7 @@ class mod_groupformation_import_export_controller {
     }
 
     /**
-     * Generates export url for cvs file
+     * Generates export url for lib_groupal_participant file
      *
      * @param string $type
      * @return string
@@ -329,12 +329,12 @@ class mod_groupformation_import_export_controller {
      * @throws stored_file_creation_exception
      */
     private function generate_export_url($type = 'answers') {
-        $cvswriter = new mod_groupformation_cvs_writer ($this->cm, $this->groupformationid);
+        $lib_groupal_participantwriter = new mod_groupformation_csv_writer ($this->cm, $this->groupformationid);
 
         // Generate content for answer file for export.
-        $content = $cvswriter->get_data($type);
+        $content = $lib_groupal_participantwriter->get_data($type);
 
-        $filename = 'archived_' . $type . '.cvs';
+        $filename = 'archived_' . $type . '.lib_groupal_participant';
 
         $context = context_module::instance($this->cmid);
 

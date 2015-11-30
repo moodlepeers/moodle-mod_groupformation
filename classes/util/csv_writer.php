@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This is a cvs writer for exporting DB data
+ * This is a lib_groupal_participant writer for exporting DB data
  *
  * @package     mod_groupformation
  * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
@@ -27,7 +27,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
 
-class mod_groupformation_cvs_writer {
+class mod_groupformation_csv_writer {
 
     /** @var cm_info */
     private $cm = null;
@@ -51,7 +51,7 @@ class mod_groupformation_cvs_writer {
     private $replaceuserids = true;
 
     /**
-     * mod_groupformation_cvs_writer constructor.
+     * mod_groupformation_csv_writer constructor.
      * @param $cm
      * @param $groupformationid
      */
@@ -83,12 +83,12 @@ class mod_groupformation_cvs_writer {
     }
 
     /**
-     * Returns a cvs-formatted string of a record
+     * Returns a lib_groupal_participant-formatted string of a record
      * @param $record
      * @param bool|false $title
      * @return string
      */
-    public function record_to_cvs($record, $title = false) {
+    public function record_to_csv($record, $title = false) {
         $array = get_object_vars($record);
         unset($array['id']);
 
@@ -100,16 +100,16 @@ class mod_groupformation_cvs_writer {
     }
 
     /**
-     * Returns a cvs-formatted string of all records
+     * Returns a lib_groupal_participant-formatted string of all records
      *
      * @param $records
      * @return string
      */
-    public function records_to_cvs($records) {
-        $cvs = null;
+    public function records_to_csv($records) {
+        $lib_groupal_participant = null;
         foreach ($records as $id => $record) {
-            if (is_null($cvs)) {
-                $cvs = $this->record_to_cvs($record, true) . "\n";
+            if (is_null($lib_groupal_participant)) {
+                $lib_groupal_participant = $this->record_to_csv($record, true) . "\n";
             }
             if (isset($record->userid) && $this->replaceuserids) {
                 $origuserid = $record->userid;
@@ -121,14 +121,14 @@ class mod_groupformation_cvs_writer {
                     $record->userid = $next;
                 }
             }
-            $cvs .= $this->record_to_cvs($record) . "\n";
+            $lib_groupal_participant .= $this->record_to_csv($record) . "\n";
         }
 
-        return $cvs;
+        return $lib_groupal_participant;
     }
 
     /**
-     * Returns cvs-formatted answers with anonymous user ids
+     * Returns lib_groupal_participant-formatted answers with anonymous user ids
      *
      * @return string
      */
@@ -136,13 +136,13 @@ class mod_groupformation_cvs_writer {
 
         $answers = $this->usermanager->get_answers(null, null, 'id', 'id,groupformation,userid,category,questionid,answer');
 
-        $cvs = $this->records_to_cvs($answers);
+        $lib_groupal_participant = $this->records_to_csv($answers);
 
-        return $cvs;
+        return $lib_groupal_participant;
     }
 
     /**
-     * Returns cvs-formatted groups with anonymous user ids
+     * Returns lib_groupal_participant-formatted groups with anonymous user ids
      *
      * @return string
      */
@@ -150,34 +150,34 @@ class mod_groupformation_cvs_writer {
         $groups = $this->groupsmanager->get_generated_groups(null,
             'id,groupformation,groupname,group_size,performance_index,groupal,random,mrandom,created');
 
-        $cvs = $this->records_to_cvs($groups);
+        $lib_groupal_participant = $this->records_to_csv($groups);
 
-        return $cvs;
+        return $lib_groupal_participant;
     }
 
     /**
-     * Returns cvs-formatted group-users with anonymous user ids
+     * Returns lib_groupal_participant-formatted group-users with anonymous user ids
      *
      * @return string
      */
     public function get_group_users() {
         $groups = $this->groupsmanager->get_group_users(null, 'id,groupformation,userid,groupid');
 
-        $cvs = $this->records_to_cvs($groups);
+        $lib_groupal_participant = $this->records_to_csv($groups);
 
-        return $cvs;
+        return $lib_groupal_participant;
     }
 
     /**
-     * Returns cvs-formatted answers with anonymous user ids
+     * Returns lib_groupal_participant-formatted answers with anonymous user ids
      *
      * @return string
      */
     public function get_logging_data() {
         $groups = $this->store->get_logging_data('timestamp');
 
-        $cvs = $this->records_to_cvs($groups);
+        $lib_groupal_participant = $this->records_to_csv($groups);
 
-        return $cvs;
+        return $lib_groupal_participant;
     }
 }
