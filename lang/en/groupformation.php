@@ -298,6 +298,7 @@ $string['groupformation_message_contexturlname'] = 'results';
 $string['import'] = 'Import';
 $string['export'] = 'Export';
 $string['export_answers'] = 'You can download all answers with anonymized user ids here: ';
+$string['export_users'] = 'You can download all user-related data with anonymized user ids here: ';
 $string['export_groups'] = 'You can download all groups with anonymized user ids here: ';
 $string['export_group_users'] = 'You can download all group-users relations with anonymized user ids here: ';
 $string['export_logging'] = 'You can download all logging data with anonymized user ids here: ';

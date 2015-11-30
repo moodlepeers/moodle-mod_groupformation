@@ -299,6 +299,7 @@ $string['groupformation_message_contexturlname'] = 'Resultate';
 $string['import'] = 'Import';
 $string['export'] = 'Export';
 $string['export_answers'] = 'Sie können die Antworten mit anonymisierten Teilnehmerkennungen hier herunterladen: ';
+$string['export_users'] = 'Sie können die Teilnehmer-bezogenen Daten mit anonymisierten Teilnehmerkennungen hier herunterladen: ';
 $string['export_groups'] = 'Sie können die Gruppen mit anonymisierten Teilnehmerkennungen hier herunterladen: ';
 $string['export_group_users'] = 'Sie können die Gruppen-Nutzer-Zuordnungen mit anonymisierten Teilnehmerkennungen hier herunterladen: ';
 $string['export_logging'] = 'Sie können die Loggingdaten mit anonymisierten Teilnehmerkennungen hier herunterladen: ';

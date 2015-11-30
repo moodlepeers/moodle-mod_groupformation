@@ -82,7 +82,7 @@ class mod_groupformation_data {
         '1' => array(
             'topic',
             'knowledge',
-            'general',
+//            'general',
             'grade',
             'points',
             'team',
@@ -92,7 +92,7 @@ class mod_groupformation_data {
         '2' => array(
             'topic',
             'knowledge',
-            'general',
+//            'general',
             'grade',
             'points',
             'team',
@@ -101,7 +101,7 @@ class mod_groupformation_data {
         ),
         '3' => array(
             'topic',
-            'general'
+//            'general'
         )
     );
 

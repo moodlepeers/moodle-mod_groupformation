@@ -302,6 +302,11 @@ class mod_groupformation_import_export_controller {
         $this->view->assign('export_answers', $export_answers);
         $this->view->assign('export_answers_url', $export_answers_url);
 
+        $export_users = get_string('export_users', 'groupformation');
+        $export_users_url = $this->generate_export_url('users');
+        $this->view->assign('export_users', $export_users);
+        $this->view->assign('export_users_url', $export_users_url);
+
         $export_groups = get_string('export_groups', 'groupformation');
         $export_groups_url = $this->generate_export_url('groups');
         $this->view->assign('export_groups', $export_groups);

@@ -62,6 +62,7 @@ class mod_groupformation_csv_writer {
         $this->store = new mod_groupformation_storage_manager($groupformationid);
         $this->usermanager = new mod_groupformation_user_manager($groupformationid);
         $this->groupsmanager = new mod_groupformation_groups_manager($groupformationid);
+
     }
 
     /**
@@ -73,6 +74,8 @@ class mod_groupformation_csv_writer {
         switch ($type) {
             case 'answers':
                 return $this->get_answers();
+            case 'users':
+                return $this->get_users();
             case 'groups':
                 return $this->get_groups();
             case 'group_users':
@@ -120,6 +123,9 @@ class mod_groupformation_csv_writer {
                     $this->usermap[$origuserid] = $next;
                     $record->userid = $next;
                 }
+            }
+            if (isset($record->timestamp)) {
+                $record->timestamp = date('d/m/Y H:i:s', $record->timestamp);
             }
             $csv .= $this->record_to_csv($record) . "\n";
         }
@@ -177,6 +183,79 @@ class mod_groupformation_csv_writer {
         $groups = $this->store->get_logging_data('timestamp');
 
         $csv = $this->records_to_csv($groups);
+
+        return $csv;
+    }
+
+    public function get_users() {
+        $group_users = $this->groupsmanager->get_group_users('userid', 'userid,groupid,groupformation');
+        $categories = $this->store->get_categories();
+        $users = array_keys($group_users);
+
+        $user_data = array();
+        foreach ($users as $userid) {
+            $user_data[$userid] = array();
+            $user_data[$userid]['groupformation'] = $this->groupformationid;
+            $user_data[$userid]['groupid'] = $group_users[$userid]->groupid;
+            foreach ($categories as $category) {
+                $user_data[$userid][$category] = array();
+                $answers = $this->usermanager->get_answers($userid, $category, 'questionid', 'questionid,answer');
+                foreach ($answers as $answer) {
+                    $questionid = $answer->questionid;
+                    $user_data[$userid][$category][$questionid] = $answer->answer;
+                }
+            }
+        }
+
+        $csv = "";
+
+        for ($j = 0; $j < count($users); $j++) {
+            if ($j == 0) {
+                $csv .= "groupformationid,userid,groupid,";
+                foreach ($categories as $category) {
+                    if ($category == "knowledge" || $category == "topic") {
+                        $temp = $this->store->get_knowledge_or_topic_values($category);
+                        $xml_content = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>';
+                        $options = mod_groupformation_util::xml_to_array($xml_content);
+                        $csv .= implode(",", $options) . ",";
+                    } else {
+                        $csv .= implode('_' . $category . ',', range(1, $this->store->get_number($category))) . '_' . $category . ",";
+                    }
+                }
+                $csv = rtrim($csv, ",");
+                $csv .= "\n";
+            }
+            $origuserid = $users[$j];
+            $userid = null;
+            if ($this->replaceuserids) {
+                $origuserid = $users[$j];
+                if (array_key_exists($origuserid, $this->usermap)) {
+                    $userid = $this->usermap[$origuserid];
+                } else {
+                    $next = count($this->usermap);
+                    $this->usermap[$origuserid] = $next;
+                    $userid = $next;
+                }
+            }else{
+                $userid =  $users[$j];
+            }
+            $csv .= $user_data[$origuserid]['groupformation'] . ",";
+            $csv .= $userid . ",";
+            $csv .= $user_data[$origuserid]['groupid'] . ",";
+            foreach ($categories as $category) {
+                $number_of_questions = $this->store->get_number($category);
+                $answers = $user_data[$origuserid][$category];
+                for ($i = 1; $i <= $number_of_questions; $i++) {
+                    if (array_key_exists($i, $answers)) {
+                        $csv .= $answers[$i] . ",";
+                    } else {
+                        $csv .= ",";
+                    }
+                }
+            }
+            $csv = rtrim($csv, ",");
+            $csv .= "\n";
+        }
 
         return $csv;
     }
