@@ -45,7 +45,9 @@ function groupformation_add_jquery($PAGE, $filename = null) {
     }
 }
 
-/**
+
+
+/** TODO @Rene auskommentierter Code
  * Logs message
  *
  * @param integer $userid
@@ -135,7 +137,7 @@ function groupformation_fatal($userid, $groupformationid, $message) {
  */
 function groupformation_trigger_event($cm, $course, $groupformation, $context) {
 
-    // TODO Logging - We need to implement events to trigger
+    // TODO @Rene? Logging - We need to implement events to trigger
 
     // $event = \mod_groupformation\event\job_queued::create ( array (
     // 'objectid' => $groupformation->id,
@@ -159,11 +161,9 @@ function groupformation_determine_instance($id, &$cm, &$course, &$groupformation
     if ($id) {
         $cm = get_coursemodule_from_id('groupformation', $id, 0, false, MUST_EXIST);
         $course = $DB->get_record('course', array(
-            'id' => $cm->course
-        ), '*', MUST_EXIST);
+            'id' => $cm->course), '*', MUST_EXIST);
         $groupformation = $DB->get_record('groupformation', array(
-            'id' => $cm->instance
-        ), '*', MUST_EXIST);
+            'id' => $cm->instance), '*', MUST_EXIST);
     } else {
         error('You must specify a course_module ID or an instance ID');
     }
@@ -207,10 +207,9 @@ function groupformation_set_activity_completion($course, $cm, $userid) {
 function groupformation_send_message($recipient, $subject, $messagetext, $contexturl = null, $contexturlname = null) {
     global $DB;
 
-    // get admin user for setting as "userfrom"
+    // Get admin user for setting as "userfrom".
     $admin = array_pop($DB->get_records('user', array(
-        'username' => 'admin'
-    )));
+        'username' => 'admin')));
 
     // Prepare the message.
     $message = new \core\message\message ();
@@ -229,13 +228,10 @@ function groupformation_send_message($recipient, $subject, $messagetext, $contex
     $message->replyto = "noreply@moodle.com";
     $content = array(
         '*' => array(
-            'header' => ' test ',
-            'footer' => ' test '
-        )
-    ); // Extra content for specific processor
+            'header' => ' test ', 'footer' => ' test ')); // Extra content for specific processor.
     $message->set_additional_content('email', $content);
 
-    // send message
+    // Send message.
     $messageid = message_send($message);
 }
 
@@ -247,8 +243,7 @@ function groupformation_check_for_cron_job() {
     global $DB;
 
     $record = $DB->get_record('task_scheduled', array(
-        'component' => 'mod_groupformation', 'classname' => '\mod_groupformation\task\build_groups_task'
-    ));
+        'component' => 'mod_groupformation', 'classname' => '\mod_groupformation\task\build_groups_task'));
     $now = time();
     $lastruntime = $record->lastruntime;
 
@@ -272,12 +267,12 @@ function groupformation_update_questions(mod_groupformation_storage_manager $sto
                 $array = $xmlLoader->save_data($category);
                 $version = $array [0] [0];
                 $numbers = $array [0] [1];
-                $store->add_catalog_version($category, $numbers, $version, TRUE);
+                $store->add_catalog_version($category, $numbers, $version, true);
             }
         }
 
     } else {
-        // TODO until now just one type of questionnaires supported
+        // TODO @Rene? until now just one type of questionnaires supported
         foreach ($names as $category) {
             if ($category != 'topic' && $category != 'knowledge') {
                 $xmlLoader->latest_version($category);

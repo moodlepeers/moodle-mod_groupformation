@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -9,11 +8,11 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
  * Prints a particular instance of groupformation
  *
@@ -30,34 +29,32 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/controller/student_ove
 
 // Read URL params
 $id = optional_param('id', 0, PARAM_INT); // Course Module ID
-// $g = optional_param('g', 0, PARAM_INT); // groupformation instance ID
+
 $do_show = optional_param('do_show', 'view', PARAM_TEXT);
 $back = optional_param('back', 0, PARAM_INT);
 
-// Import jQuery and js file
+// Import jQuery and js file.
 groupformation_add_jquery($PAGE, 'survey_functions.js');
 
-// Determine instances of course module, course, groupformation
+// Determine instances of course module, course, groupformation.
 groupformation_determine_instance($id, $cm, $course, $groupformation);
 
-// Require user login if not already logged in
+// Require user login if not already logged in.
 require_login($course, true, $cm);
 
-// Get useful stuff
+// Get useful stuff.
 $context = $PAGE->context;
 $userid = $USER->id;
 
 if (has_capability('mod/groupformation:editsettings', $context)) {
     $returnurl = new moodle_url ('/mod/groupformation/analysis_view.php', array(
-        'id' => $id,
-        'do_show' => 'analysis'
-    ));
+        'id' => $id, 'do_show' => 'analysis'));
     redirect($returnurl);
 } else {
     $current_tab = $do_show;
 }
 
-// Log access to page
+// Log access to page.
 groupformation_info($USER->id, $groupformation->id, '<view_student_overview>');
 
 $store = new mod_groupformation_storage_manager ($groupformation->id);
@@ -68,11 +65,9 @@ if ($user_manager->is_completed($userid)) {
     groupformation_set_activity_completion($course, $cm, $userid);
 }
 
-// Set PAGE config
+// Set PAGE config.
 $PAGE->set_url('/mod/groupformation/view.php', array(
-    'id' => $cm->id,
-    'do_show' => $do_show
-));
+    'id' => $cm->id, 'do_show' => $do_show));
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 
@@ -89,8 +84,7 @@ if ($begin == 1) {
         if ($_POST ["questions"] == 1 && !$back) {
 
             $returnurl = new moodle_url ('/mod/groupformation/questionnaire_view.php', array(
-                'id' => $id
-            ));
+                'id' => $id));
 
             redirect($returnurl);
         }
@@ -98,8 +92,7 @@ if ($begin == 1) {
 } else {
     $user_manager->change_status($userid, 1);
     $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
-        'id' => $id
-    ));
+        'id' => $id));
 
     redirect($returnurl);
 }
@@ -109,16 +102,18 @@ echo $OUTPUT->header();
 // Print the tabs.
 require('tabs.php');
 if ($store->is_archived()) {
-    echo '<div class="alert" id="commited_view">' . get_string('archived_activity_answers', 'groupformation') . '</div>';
+    echo '<div class="alert" id="commited_view">' . get_string('archived_activity_answers', 'groupformation') .
+        '</div>';
 } else {
     // Conditions to show the intro can change to look for own settings or whatever.
     if ($groupformation->intro) {
-        echo $OUTPUT->box(format_module_intro('groupformation', $groupformation, $cm->id), 'generalbox mod_introbox', 'groupformationintro');
+        echo $OUTPUT->box(format_module_intro('groupformation', $groupformation, $cm->id), 'generalbox mod_introbox',
+                          'groupformationintro');
     }
 
     $controller = new mod_groupformation_student_overview_controller ($cm->id, $groupformation->id, $userid);
     echo $controller->display();
 }
 echo $OUTPUT->footer();
-	
+
 

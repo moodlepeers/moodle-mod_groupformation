@@ -8,11 +8,11 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
  * Library of interface functions and constants for module groupformation
  *
@@ -80,26 +80,22 @@ function groupformation_add_instance(stdClass $groupformation, mod_groupformatio
 
     $groupformation->timecreated = time();
 
-    // checks all fields and sets them properly
+    // Checks all fields and sets them properly.
     $groupformation = groupformation_set_fields($groupformation);
 
     $id = $DB->insert_record('groupformation', $groupformation);
 
-    // get current DB record (with all DB defaults)
+    // Get current DB record (with all DB defaults).
     $groupformation = $DB->get_record('groupformation', array(
-        'id' => $id
-    ));
+        'id' => $id));
 
-    // Log access to page
+    // Log access to page.
     groupformation_info($USER->id, $groupformation->id, '<create_instance>');
     groupformation_grade_item_update($groupformation);
 
-    groupformation_save_more_infos($groupformation, TRUE);
+    groupformation_save_more_infos($groupformation, true);
 
-    // $groupingid = ($PAGE->cm->groupmode != 0) ? $PAGE->cm->groupingid : 0;
-    // mod_groupformation_job_manager::create_job ( $groupformation->id, $groupingid );
-
-    // Log access to page
+    // Log access to page.
     groupformation_info($USER->id, $groupformation->id, '<save_settings>');
 
     return $groupformation->id;
@@ -119,40 +115,37 @@ function groupformation_add_instance(stdClass $groupformation, mod_groupformatio
 function groupformation_update_instance(stdClass $groupformation, mod_groupformation_mod_form $mform = null) {
     global $DB, $USER, $PAGE;
 
-    // checks all fields and sets them properly
+    // Checks all fields and sets them properly.
     $groupformation = groupformation_set_fields($groupformation);
 
     $groupformation->timemodified = time();
     $groupformation->id = $groupformation->instance;
 
-    // Log access to page
+    // Log access to page.
     groupformation_info($USER->id, $groupformation->id, '<update_instance>');
 
     if ($DB->count_records('groupformation_answer', array(
-            'groupformation' => $groupformation->id
-        )) == 0
+            'groupformation' => $groupformation->id)) == 0
     ) {
         $result = $DB->update_record('groupformation', $groupformation);
     } else {
         $orig_record = $DB->get_record('groupformation', array(
-            'id' => $groupformation->id
-        ));
+            'id' => $groupformation->id));
         $orig_record->groupoption = $groupformation->groupoption;
         $orig_record->maxmembers = $groupformation->maxmembers;
         $orig_record->maxgroups = $groupformation->maxgroups;
         $result = $DB->update_record('groupformation', $orig_record);
     }
 
-    // get current DB record (with all DB defaults)
+    // Get current DB record (with all DB defaults).
     $groupformation = $DB->get_record('groupformation', array(
-        'id' => $groupformation->id
-    ));
+        'id' => $groupformation->id));
 
     groupformation_grade_item_update($groupformation);
 
-    groupformation_save_more_infos($groupformation, FALSE);
+    groupformation_save_more_infos($groupformation, false);
 
-    // Log access to page
+    // Log access to page.
     groupformation_info($USER->id, $groupformation->id, '<save_settings>');
 
     return $result;
@@ -172,33 +165,27 @@ function groupformation_delete_instance($id) {
     global $DB, $USER;
 
     if (!$groupformation = $DB->get_record('groupformation', array(
-        'id' => $id
-    ))
+        'id' => $id))
     ) {
         return false;
     }
 
-    // Log access to page
+    // Log access to page.
     groupformation_info($USER->id, $groupformation->id, '<delete_instance>');
 
     // Delete any dependent records here.
     $result = $DB->delete_records('groupformation', array(
-        'id' => $groupformation->id
-    ));
+        'id' => $groupformation->id));
 
-    // cascading deletion of all related db entries
+    // Cascading deletion of all related db entries.
     $DB->delete_records('groupformation_answer', array(
-        'groupformation' => $id
-    ));
+        'groupformation' => $id));
     $DB->delete_records('groupformation_q_settings', array(
-        'groupformation' => $id
-    ));
+        'groupformation' => $id));
     $DB->delete_records('groupformation_started', array(
-        'groupformation' => $id
-    ));
+        'groupformation' => $id));
     $DB->delete_records('groupformation_jobs', array(
-        'groupformationid' => $id
-    ));
+        'groupformationid' => $id));
     groupformation_grade_item_delete($groupformation);
 
     return true;
@@ -272,7 +259,8 @@ function groupformation_print_recent_activity($course, $viewfullnames, $timestar
  *            check for a particular group's activity only, defaults to 0 (all groups)
  * @return void adds items into $activities and increases $index
  */
-function groupformation_get_recent_mod_activity(&$activities, &$index, $timestart, $courseid, $cmid, $userid = 0, $groupid = 0) {
+function groupformation_get_recent_mod_activity(&$activities, &$index, $timestart, $courseid, $cmid, $userid = 0,
+                                                $groupid = 0) {
 }
 
 /**
@@ -323,9 +311,7 @@ function groupformation_scale_used($groupformationid, $scaleid) {
     global $DB;
     /* @example */
     if ($scaleid and $DB->record_exists('groupformation', array(
-            'id' => $groupformationid,
-            'grade' => -$scaleid
-        ))
+            'id' => $groupformationid, 'grade' => -$scaleid))
     ) {
         return true;
     } else {
@@ -345,8 +331,7 @@ function groupformation_scale_used_anywhere($scaleid) {
     global $DB;
     /* @example */
     if ($scaleid and $DB->record_exists('groupformation', array(
-            'grade' => -$scaleid
-        ))
+            'grade' => -$scaleid))
     ) {
         return true;
     } else {
@@ -387,7 +372,8 @@ function groupformation_grade_item_update(stdClass $groupformation, $reset = fal
         $item ['reset'] = true;
     }
 
-    grade_update('mod/groupformation', $groupformation->course, 'mod', 'groupformation', $groupformation->id, 0, null, $item);
+    grade_update('mod/groupformation', $groupformation->course, 'mod', 'groupformation', $groupformation->id, 0, null,
+                 $item);
 }
 
 /**
@@ -401,9 +387,9 @@ function groupformation_grade_item_delete($groupformation) {
     global $CFG;
     require_once($CFG->libdir . '/gradelib.php');
 
-    return grade_update('mod/groupformation', $groupformation->course, 'mod', 'groupformation', $groupformation->id, 0, null, array(
-        'deleted' => 1
-    ));
+    return grade_update('mod/groupformation', $groupformation->course, 'mod', 'groupformation', $groupformation->id, 0,
+                        null, array(
+            'deleted' => 1));
 }
 
 /**
@@ -419,7 +405,8 @@ function groupformation_grade_item_delete($groupformation) {
  */
 function groupformation_update_grades(stdClass $groupformation, $userid = 0) {
     $grades = array(); // Populate array of grade objects indexed by userid. @example .
-    grade_update('mod/groupformation', $groupformation->course, 'mod', 'groupformation', $groupformation->id, 0, $grades);
+    grade_update('mod/groupformation', $groupformation->course, 'mod', 'groupformation', $groupformation->id, 0,
+                 $grades);
 }
 
 /**
@@ -454,7 +441,8 @@ function groupformation_get_file_areas($course, $cm, $context) {
  * @param string $filename
  * @return file_info instance or null if not found
  */
-function groupformation_get_file_info($browser, $areas, $course, $cm, $context, $filearea, $itemid, $filepath, $filename) {
+function groupformation_get_file_info($browser, $areas, $course, $cm, $context, $filearea, $itemid, $filepath,
+                                      $filename) {
     return null;
 }
 
@@ -482,7 +470,8 @@ function groupformation_pluginfile($course, $cm, $context, $filearea, $args, $fo
         return false;
     }
 
-    // Make sure the user is logged in and has access to the module (plugins that are not course modules should leave out the 'cm' part).
+    // Make sure the user is logged in and has access to the module
+    // (plugins that are not course modules should leave out the 'cm' part).
     require_login($course, true, $cm);
 
     // Check the relevant capabilities - these may vary depending on the filearea being accessed.
@@ -499,9 +488,9 @@ function groupformation_pluginfile($course, $cm, $context, $filearea, $args, $fo
     // Extract the filename / filepath from the $args array.
     $filename = array_pop($args); // The last item in the $args array.
     if (!$args) {
-        $filepath = '/'; // $args is empty => the path is '/'
+        $filepath = '/'; // The $args is empty => the path is '/' .
     } else {
-        $filepath = '/' . implode('/', $args) . '/'; // $args contains elements of the filepath
+        $filepath = '/' . implode('/', $args) . '/'; // The $args contains elements of the filepath .
     }
 
     // Retrieve the file from the Files API.
@@ -550,7 +539,8 @@ function groupformation_extend_navigation(navigation_node $navref, stdclass $cou
  * @param navigation_node $groupformationnode
  *            {@link navigation_node}
  */
-function groupformation_extend_settings_navigation(settings_navigation $settingsnav, navigation_node $groupformationnode = null) {
+function groupformation_extend_settings_navigation(settings_navigation $settingsnav,
+                                                   navigation_node $groupformationnode = null) {
 }
 
 /**
@@ -563,10 +553,12 @@ function groupformation_set_fields(stdClass $groupformation) {
     if (isset ($groupformation->knowledge) && $groupformation->knowledge == 0) {
         $groupformation->knowledge = 0;
         $groupformation->knowledgelines = "";
-    } elseif (!isset ($groupformation->knowledge)) {
+    } else if (!isset ($groupformation->knowledge)) {
         $groupformation->knowledge = 0;
         $groupformation->knowledgelines = "";
-    } elseif (isset ($groupformation->knowledge) && $groupformation->knowledge == 1 && isset ($groupformation->knowledgelines) && $groupformation->knowledgelines == "") {
+    } else if (isset ($groupformation->knowledge) && $groupformation->knowledge == 1 &&
+        isset ($groupformation->knowledgelines) && $groupformation->knowledgelines == ""
+    ) {
         $groupformation->knowledge = 0;
         $groupformation->knowledgelines = "";
     }
@@ -574,17 +566,19 @@ function groupformation_set_fields(stdClass $groupformation) {
     if (isset ($groupformation->topics) && $groupformation->topics == 0) {
         $groupformation->topics = 0;
         $groupformation->topiclines = "";
-    } elseif (!isset ($groupformation->topics)) {
+    } else if (!isset ($groupformation->topics)) {
         $groupformation->topics = 0;
         $groupformation->topiclines = "";
-    } elseif (isset ($groupformation->topics) && $groupformation->topics == 1 && isset ($groupformation->topiclines) && $groupformation->topiclines == "") {
+    } else if (isset ($groupformation->topics) && $groupformation->topics == 1 && isset ($groupformation->topiclines) &&
+        $groupformation->topiclines == ""
+    ) {
         $groupformation->topics = 0;
         $groupformation->topiclines = "";
     }
 
     if (isset ($groupformation->groupoption) && $groupformation->groupoption == 1) {
         $groupformation->maxmembers = 0;
-    } elseif (isset ($groupformation->groupoption) && $groupformation->groupoption == 0) {
+    } else if (isset ($groupformation->groupoption) && $groupformation->groupoption == 0) {
         $groupformation->maxgroups = 0;
     }
 
@@ -634,4 +628,3 @@ function groupformation_save_more_infos($groupformation, $init) {
         $store->add_setting_question($knowledgearray, $topicsarray, $init);
     }
 }
-	
