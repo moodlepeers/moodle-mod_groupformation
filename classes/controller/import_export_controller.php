@@ -321,7 +321,7 @@ class mod_groupformation_import_export_controller {
     }
 
     /**
-     * Generates export url for lib_groupal_participant file
+     * Generates export url for csv file
      *
      * @param string $type
      * @return string
@@ -329,12 +329,12 @@ class mod_groupformation_import_export_controller {
      * @throws stored_file_creation_exception
      */
     private function generate_export_url($type = 'answers') {
-        $lib_groupal_participantwriter = new mod_groupformation_csv_writer ($this->cm, $this->groupformationid);
+        $csvwriter = new mod_groupformation_csv_writer ($this->cm, $this->groupformationid);
 
         // Generate content for answer file for export.
-        $content = $lib_groupal_participantwriter->get_data($type);
+        $content = $csvwriter->get_data($type);
 
-        $filename = 'archived_' . $type . '.lib_groupal_participant';
+        $filename = 'archived_' . $type . '.csv';
 
         $context = context_module::instance($this->cmid);
 
