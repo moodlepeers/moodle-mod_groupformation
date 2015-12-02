@@ -173,8 +173,8 @@ class mod_groupformation_groups_manager {
     /**
      * Returns members (userids) of group of user
      *
-     * @param integer $userid
-     * @return multitype:unknown
+     * @param $userid
+     * @return array
      */
     public function get_group_members($userid) {
         global $DB;

@@ -193,12 +193,12 @@ class mod_groupformation_job_manager {
     }
 
     /**
-     *
-     * @param unknown $groupformationid
-     * @return NULL|multitype:multitype: Ambigous <multitype:, unknown>
+     * @param $job
+     * @param $groupformationid
+     * @param mod_groupformation_storage_manager $store
+     * @return array|null
      */
     private static function get_users($job, $groupformationid, mod_groupformation_storage_manager $store) {
-        global $CM;
         $courseid = $store->get_course_id();
         $context = context_course::instance($courseid);
 
@@ -221,7 +221,6 @@ class mod_groupformation_job_manager {
         $all_answers = array();
         $some_answers = array();
         $no_or_some_answers = array();
-        $no_answers = array();
 
         foreach ($enrolled_students as $userid) {
             if ($user_manager->is_completed($userid)) {

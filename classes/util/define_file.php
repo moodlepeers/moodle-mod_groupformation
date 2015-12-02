@@ -40,10 +40,10 @@ class mod_groupformation_data {
             'general' => true,
             'grade' => true,
             'points' => true,
-            'big5_heterogen' => false,
-            'big5_homogen' => true,
+            'big5' => false,
             'team' => true,
-            'fam' => true
+            'fam' => true,
+            'learning' => false // TODO delete later
         ),
         '2' => array(
             'topic' => true,
@@ -51,8 +51,7 @@ class mod_groupformation_data {
             'general' => true,
             'grade' => false,
             'points' => true,
-            'big5_heterogen' => false,
-            'big5_homogen' => true,
+            'big5' => false,
             'team' => true,
             'learning' => false
         ),
@@ -62,37 +61,83 @@ class mod_groupformation_data {
         )
     );
 
+    private $evallabels = array(
+        1 => array(
+            "big5",
+            "fam",
+            "learning" // TODO delete later
+        ),
+        2 => array(
+            "big5",
+            "learning"
+        ),
+        3 => array()
+    );
+
     private $extralabels = array(
-        'big5_homogen' => array('Gewissenhaftigkeit',
-            'Vertraeglichkeit'),
-        'big5_heterogen' => array('Extraversion',
-            'Neurotizismus',
-            'Offenheit'),
-        'fam' => array('Herausforderung',
-            'Interesse',
-            'Erfolg',
-            'Misserfolg'),
-        'learning' => array('KE',
-            'AE',
-            'RB',
-            'AB')
+        "big5" => array(
+            "extraversion" => array(
+                "homogeneous" => false,
+                "questionids" => array(-1, 6)),
+            "gewissenhaftigkeit" => array(
+                "homogeneous" => true,
+                "questionids" => array(-3, 8)),
+            "vertraeglichkeit" => array(
+                "homogeneous" => true,
+                "questionids" => array(2, -7, 11)),
+            "neurotizismus" => array(
+                "homogeneous" => false,
+                "questionids" => array(9, -4)),
+            "offenheit" => array(
+                "homogeneous" => false,
+                "questionids" => array(10, -5))
+        ),
+        "fam" => array(
+            "herausforderung" => array(
+                "homogeneous" => false,
+                "questionids" => array(6, 8, 10, 15, 17)),
+            "interesse" => array(
+                "homogeneous" => false,
+                "questionids" => array(1, 4, 7, 11)),
+            "erfolgswahrscheinlichkeit" => array(
+                "homogeneous" => false,
+                "questionids" => array(2, 3, 13, 14)),
+            "misserfolgsbefuerchtung" => array(
+                "homogeneous" => false,
+                "questionids" => array(5, 9, 12, 16, 18))
+        ),
+        "learning" => array(
+            "konkreteerfahrung" => array(
+                "homogeneous" => false,
+                "questionids" => array(1, 5, 11, 14, 20, 22)),
+            "aktivesexperimentieren" => array(
+                "homogeneous" => false,
+                "questionids" => array(2, 8, 10, 16, 17, 23)),
+            "reflektiertebeobachtung" => array(
+                "homogeneous" => false,
+                "questionids" => array(3, 6, 9, 13, 19, 21)),
+            "abstraktebegriffsbildung" => array(
+                "homogeneous" => false,
+                "questionids" => array(4, 7, 12, 15, 18, 24))
+        )
     );
 
     private $categorysets = array(
         '1' => array(
             'topic',
             'knowledge',
-//            'general',
+            'general',
             'grade',
             'points',
             'team',
             'character',
-            'motivation'
+            'motivation',
+            'learning', // TODO delete later
         ),
         '2' => array(
             'topic',
             'knowledge',
-//            'general',
+            'general',
             'grade',
             'points',
             'team',
@@ -101,7 +146,7 @@ class mod_groupformation_data {
         ),
         '3' => array(
             'topic',
-//            'general'
+            'general'
         )
     );
 
@@ -121,9 +166,9 @@ class mod_groupformation_data {
      * @param $label
      * @return array
      */
-    public function get_extra_label($label) {
+    public function get_extra_labels($label) {
         if (array_key_exists($label, $this->extralabels)) {
-            return $this->extralabels[$label];
+            return array_keys($this->extralabels[$label]);
         } else {
             return array();
         }
@@ -157,5 +202,19 @@ class mod_groupformation_data {
      */
     public function get_homogeneous_set($scenario) {
         return $this->criterialabels [$scenario];
+    }
+
+    /**
+     * Returns critetion specification
+     *
+     * @param $name
+     * @return mixed
+     */
+    public function get_criterion_specification($name) {
+        return $this->extralabels[$name];
+    }
+
+    public function get_eval_label_set($scenario) {
+        return $this->evallabels[$scenario];
     }
 }

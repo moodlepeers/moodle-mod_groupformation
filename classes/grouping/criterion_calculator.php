@@ -33,54 +33,31 @@ require_once($CFG->dirroot . '/lib/groupal/classes/criteria/topic_criterion.php'
 class mod_groupformation_criterion_calculator {
     private $store;
     private $user_manager;
+    private $data;
     private $groupformationid;
 
-    // TODO translate this please
-    // Extraversion | Gewissenhaftigkeit | Vertr�glichkeit | Neurotizismus | Offenheit
-    // 12 14 8 17 15 16.
-    private $BIG5 = array(
-        array(
-            6), array(
-            8), array(
-            2, 11), array(
-            9), array(
-            10));
-    // -7 -9 -13 -10 -11.
-    private $BIG5Invert = array(
-        array(
-            1), array(
-            3), array(
-            7), array(
-            4), array(
-            5));
-    private $BIG5Homogen = array(
-        1, 2);
-    // Herausforderung | Interesse | Ergolgswahrscheinlichkeit | Misserfolgsbef�rchtung.
-    private $FAM = array(
-        array(
-            6, 8, 10, 15, 17), array(
-            1, 4, 7, 11), array(
-            2, 3, 13, 14), array(
-            5, 9, 12, 16, 18));
-    // Konkrete Erfahrung | Aktives Experimentieren | Reflektierte Beobachtung | Abstrakte Begriffsbildung.
-    private $LEARN = array(
-        array(
-            1, 5, 11, 14, 20, 22), array(
-            2, 8, 10, 16, 17, 23), array(
-            3, 6, 9, 13, 19, 21), array(
-            4, 7, 12, 15, 18, 24));
+    private $BIG5 = null;
+
+    private $FAM = null;
+
+    private $LEARN = null;
 
     /**
      *
-     * @param unknown $groupformationid
+     * @param $groupformationid
      */
     public function __construct($groupformationid) {
         $this->groupformationid = $groupformationid;
         $this->store = new mod_groupformation_storage_manager ($groupformationid);
         $this->user_manager = new mod_groupformation_user_manager ($groupformationid);
+        $this->data = new mod_groupformation_data();
+        $this->BIG5 = $this->data->get_criterion_specification('big5');
+        $this->LEARN = $this->data->get_criterion_specification('learning');
+        $this->FAM = $this->data->get_criterion_specification('fam');
     }
 
     /**
+     * Inverts given answer by considering maximum
      *
      * @param number $questionid
      * @param string $category
@@ -89,6 +66,7 @@ class mod_groupformation_criterion_calculator {
      */
     private function invert_answer($questionid, $category, $answer) {
         $max = $this->store->get_max_option_of_catalog_question($questionid, $category);
+
         // Because internally we start with 0 instead of 1.
         return $max + 1 - $answer;
     }
@@ -102,7 +80,7 @@ class mod_groupformation_criterion_calculator {
     public function get_general_values($userid) {
         $value = $this->user_manager->get_single_answer($userid, 'general', 1);
 
-        // Ab array(x,y) with x = ENGLISH and y = GERMAN.
+        // array(x,y) with x = ENGLISH and y = GERMAN.
         if ($value == 1) {
             $values = array(
                 1.0, 0.0);
@@ -116,6 +94,7 @@ class mod_groupformation_criterion_calculator {
             $values = array(
                 0.5, 1.0);
         }
+
         return $values;
     }
 
@@ -126,22 +105,21 @@ class mod_groupformation_criterion_calculator {
      * position_0 -> knowledge area
      * position_1 -> answer
      *
-     * @param int $userid
-     * @return multitype:multitype:mixed float
+     * @param $userid
+     * @return array
      */
     public function knowledge_all($userid) {
         $knowledge_values = array();
-        $option_number = 0;
 
         $temp = $this->store->get_knowledge_or_topic_values('knowledge');
         $temp = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>';
         $options = mod_groupformation_util::xml_to_array($temp);
 
-        foreach ($options as $option) {
-            $value = floatval($this->user_manager->get_single_answer($userid, 'knowledge', $option_number));
+        for ($i = 0; $i < count($options); $i++) {
+            $value = floatval($this->user_manager->get_single_answer($userid, 'knowledge', $i));
             $knowledge_values [] = $value / 100.0;
-            $option_number++;
         }
+
         return $knowledge_values;
     }
 
@@ -161,6 +139,7 @@ class mod_groupformation_criterion_calculator {
 
         if ($number_of_questions != 0) {
             $temp = floatval($total) / ($number_of_questions);
+
             return floatval($temp) / 100;
         } else {
             return 0.0;
@@ -176,6 +155,7 @@ class mod_groupformation_criterion_calculator {
      */
     public function get_grade($questionid, $userid) {
         $answer = $this->user_manager->get_single_answer($userid, 'grade', $questionid);
+
         return floatval($answer / $this->store->get_max_option_of_catalog_question($questionid));
     }
 
@@ -189,6 +169,7 @@ class mod_groupformation_criterion_calculator {
     public function get_points($position, $userid) {
         $max = $this->store->get_max_points();
         $answer = $this->user_manager->get_single_answer($userid, 'points', $position);
+
         return floatval($answer / $max);
     }
 
@@ -204,7 +185,6 @@ class mod_groupformation_criterion_calculator {
         $variance = 0;
         $position = 1;
         $total = 0;
-        $totalOptions = 0;
 
         // Iterates over three grade questions.
         for ($i = 1; $i <= 3; $i++) {
@@ -271,16 +251,12 @@ class mod_groupformation_criterion_calculator {
         $variance = 0;
         $position = 1;
         $total = 0;
-        $totalOptions = 0;
 
         // Iterates over three grade questions.
         for ($i = 1; $i <= $this->store->get_number('points'); $i++) {
 
             // Answers for catalog question in category 'grade'.
             $answers = $this->store->get_answers_to_special_question('points', $i);
-
-            $min_value = 0;
-            $max_value = $this->store->get_max_points();
 
             // Number of options for catalog question.
             $totalOptions = $this->store->get_max_option_of_catalog_question($i, 'points');
@@ -330,115 +306,107 @@ class mod_groupformation_criterion_calculator {
     }
 
     /**
-     * returns an array with n = $total fields
+     * Returns an array with n = $total fields
      *
-     * @param unknown $total
-     * @return multitype:array
+     * @param $total
+     * @return array
      */
     private function get_initial_array($total) {
         $array = array();
         for ($i = 0; $i < $total; $i++) {
             $array [] = 0;
         }
+
         return $array;
     }
 
     /**
-     * returns the Big 5 by user
+     * Returns the Big5 criterion by userid
      *
-     * @param unknown $userid
-     * @return multitype:array
+     * @param $userid
+     * @return array
      */
-    public function get_big_5($userid) {
+    public function get_big5($userid) {
         $array = array();
-        $heterogen = array();
-        $homogen = array();
         $category = 'character';
-
-        $count = count($this->BIG5);
-        $scenario = $this->store->get_scenario();
-        if ($scenario == 2) {
-            $count = $count - 2;
+        if (!$this->user_manager->has_answered_everything($userid)) {
+            return null;
         }
-        for ($i = 0; $i < $count; $i++) {
+        foreach (array_keys($this->BIG5) as $key) {
             $temp = 0;
             $max_value = 0;
-            foreach ($this->BIG5 [$i] as $num) {
-                $temp = $temp + $this->user_manager->get_single_answer($userid, $category, $num);
-                $max_value = $max_value + $this->store->get_max_option_of_catalog_question($num, $category);
+            foreach ($this->BIG5[$key]['questionids'] as $num) {
+                $qid = $num;
+                if ($num < 0) {
+                    $qid = abs($num);
+                    if ($this->user_manager->has_answer($userid, $category, $qid)) {
+                        $temp = $temp + $this->invert_answer($qid, $category,
+                                $this->user_manager->get_single_answer($userid, $category, $qid));
+                    }
+                } else {
+                    if ($this->user_manager->has_answer($userid, $category, $qid)) {
+                        $temp = $temp + $this->user_manager->get_single_answer($userid, $category, $qid);
+                    }
+                }
+                $max_value = $max_value + $this->store->get_max_option_of_catalog_question($qid, $category);
             }
-            foreach ($this->BIG5Invert [$i] as $num) {
-                $temp = $temp + $this->invert_answer($num, $category,
-                                                     $this->user_manager->get_single_answer($userid, $category, $num));
-                $max_value = $max_value + $this->store->get_max_option_of_catalog_question($num, $category);
-            }
-            if (in_array($i, $this->BIG5Homogen)) {
-                $homogen [] = floatval($temp) / ($max_value);
-            } else {
-                $heterogen [] = floatval($temp) / ($max_value);
-            }
+
+            $array [$key] = array('homogeneous' => $this->BIG5[$key]['homogeneous'], "value" => floatval($temp) / ($max_value));
         }
 
-        $array [] = $heterogen;
-        $array [] = $homogen;
         return $array;
     }
 
     /**
-     * returns the FAM (motivation criterion) of the user specified by �userId
+     * Returns the FAM (motivation criterion) of the user specified by userId
      *
-     *
-     * @param unknown $userid
-     * @return multitype:array
+     * @param $userid
+     * @return array
      */
     public function get_fam($userid) {
         $array = array();
         $category = 'motivation';
-
-        $count = count($this->FAM);
-        for ($i = 0; $i < $count; $i++) {
+        foreach (array_keys($this->FAM) as $key) {
             $temp = 0;
             $max_value = 0;
-            foreach ($this->FAM [$i] as $num) {
+            foreach ($this->FAM [$key]['questionids'] as $num) {
                 $temp = $temp + $this->user_manager->get_single_answer($userid, $category, $num);
                 $max_value = $max_value + $this->store->get_max_option_of_catalog_question($num, $category);
             }
-            $array [] = floatval($temp) / ($max_value);
+            $array [$key] = array('homogeneous' => $this->FAM[$key]['homogeneous'], 'value' => floatval($temp) / ($max_value));
         }
 
         return $array;
     }
 
     /**
-     * returns the learning criterion of the user specified by �userId
+     * Returns the learning criterion of the user specified by userId
      *
-     * @param unknown $userid
-     * @return multitype:array
+     * @param $userid
+     * @return array
      */
-    public function get_learn($userid) {
+    public function get_learning($userid) {
         $array = array();
         $category = 'learning';
 
-        $count = count($this->LEARN);
-        for ($i = 0; $i < $count; $i++) {
+        foreach (array_keys($this->LEARN) as $key) {
             $temp = 0;
             $max_value = 0;
-            foreach ($this->LEARN [$i] as $num) {
+            foreach ($this->LEARN [$key]['questionids'] as $num) {
                 $temp = $temp + $this->user_manager->get_single_answer($userid, $category, $num);
                 $max_value = $max_value + $this->store->get_max_option_of_catalog_question($num, $category);
             }
-            $array [] = floatval($temp) / ($max_value);
+            $array [$key] = array('homogeneous' => $this->LEARN[$key]['homogeneous'], 'value' => floatval($temp) / ($max_value));
         }
 
         return $array;
     }
 
     /**
-     * returns the team (Teamorientierung) criterion of the user specified by �userId
+     * Returns the team criterion of the user specified by userid
      *
-     *
-     * @param unknown $userid
-     * @return multitype:number // later on this will be an array
+     * @param $userid
+     * @return array
      */
     public function get_team($userid) {
         $total = 0.0;
@@ -472,5 +440,116 @@ class mod_groupformation_criterion_calculator {
         $choices = $this->user_manager->get_answers($userid, 'topic', 'questionid', 'answer');
 
         return new lib_groupal_topic_criterion(array_keys($choices));
+    }
+
+    public function get_eval($userid, $group_users, $course_users) {
+        $eval = array();
+        $criteria = $this->store->get_eval_labels();
+        foreach ($criteria as $criterion) {
+            var_dump($criterion);
+            $eval[$criterion] = $this->get_eval_infos($criterion, $userid, $group_users, $course_users);
+            var_dump($eval[$criterion]);
+        }
+
+        return $eval;
+    }
+
+    public function get_values_for_user($criterion, $userid) {
+        $function = 'get_' . $criterion;
+
+        return $this->$function($userid);
+    }
+
+    public function get_avg_values_for_users($criterion, $group_users) {
+        $function = 'get_' . $criterion;
+        $avg_values = null;
+        $groupsize = count($group_users);
+        if ($groupsize > 0) {
+            foreach ($group_users as $group_user) {
+                $user_values = $this->$function($group_user);
+                if (is_null($avg_values)) {
+                    $avg_values = $user_values;
+                } else{
+                    if (!is_null($user_values)) {
+                        foreach ($user_values as $key => $user_value) {
+                            $avg_values[$key]['value'] += $user_value['value'];
+                        }
+                    } else {
+                        $groupsize = max(1,$groupsize-1);
+                    }
+                }
+            }
+            foreach ($avg_values as $key => $avg_value) {
+                $avg_values[$key]['value'] /= $groupsize;
+            }
+        }
+        return $avg_values;
+    }
+
+    /**
+     * Returns big5 values for user, group and course
+     *
+     * @param $userid
+     * @param $group_user
+     * @param $course_users
+     * @return array
+     */
+    public function get_eval_infos($criterion, $userid, $group_users, $course_users) {
+        $completed_users = array_keys($this->user_manager->get_completed_by_answer_count('userid','userid'));
+        $group_and_completed = array_intersect($completed_users,$group_users);
+        $course_and_completed = array_intersect($completed_users,$course_users);
+        $completed = count($course_and_completed);
+        $groupsize = count($group_and_completed);
+        $coursesize = count($course_users);
+        var_dump($group_and_completed,$groupsize,$course_and_completed,$coursesize);
+
+        $labels = $this->data->get_extra_labels($criterion);
+
+        $eval_infos = array();
+        $user_values = $this->get_values_for_user($criterion, $userid);
+        $group_values = $this->get_avg_values_for_users($criterion, $group_and_completed);
+        $course_values = $this->get_avg_values_for_users($criterion, $course_and_completed);
+
+        foreach ($labels as $label) {
+            $user = $user_values[$label]['value'];
+            $group = null;
+            $course = null;
+
+            if (!(count($group_and_completed)<3 || is_null($group_values))){
+                $group = $group_values[$label]['value'];
+            }
+            if (!(count($course_and_completed)<3 || is_null($course_values))){
+                $course = $course_values[$label]['value'];
+            }
+
+            $mode = 1;
+            $array = array();
+            $array["values"] = array("user" => $user, "group" => $group, "course" => $course);
+            $array["range"] = array("min" => 0, "max" => 1);
+            $array["mode"] = $mode;
+            $array["captions"] = $this->get_captions($mode,$completed,$coursesize);
+            $eval_infos[$label] = $array;
+        }
+
+        return $eval_infos;
+    }
+
+    private function get_captions($mode,$completed,$coursesize){
+        $percent = round($completed/$coursesize*100,2);
+        $a = new stdClass();
+        $a->percent = $percent;
+        $a->completed = $completed;
+        $a->coursesize = $coursesize;
+        $captions = array(
+            "maxCaption" => "max caption",
+            "maxText" => "max text",
+            "finalText" => get_string("eval_final_text","groupformation",$a)
+        );
+        if ($mode == 2){
+            $captions["mean"]=0.5;
+            $captions["minCaption"] = "min caption";
+            $captions["minText"] = "min text";
+        }
+        return $captions;
     }
 }

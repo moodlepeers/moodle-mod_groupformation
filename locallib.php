@@ -232,7 +232,7 @@ function groupformation_send_message($recipient, $subject, $messagetext, $contex
     $message->set_additional_content('email', $content);
 
     // Send message.
-    $messageid = message_send($message);
+    message_send($message);
 }
 
 /**

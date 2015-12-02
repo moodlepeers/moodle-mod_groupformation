@@ -420,7 +420,6 @@ class mod_groupformation_user_manager {
             }
 
             if ($status == -1) {
-                $status = SAVE;
                 $this->change_status($userid);
             }
             $this->set_answer_count($userid);

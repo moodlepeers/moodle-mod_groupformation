@@ -88,7 +88,7 @@ class mod_groupformation_participant_parser {
                 $criterion = new lib_groupal_specific_criterion ($label, $value, $minVal, $maxVal, $homogen, $weight);
                 if ($position == 0) {
                     $participant = new lib_groupal_participant (array(
-                                                                    $criterion), $user->id);
+                        $criterion), $user->id);
                 } else {
                     $participant->addCriterion($criterion);
                 }
@@ -122,7 +122,7 @@ class mod_groupformation_participant_parser {
             $criterion = $this->criterion_calculator->get_topic($userid);
 
             $participant = new lib_groupal_participant (array(
-                                                            $criterion), $userid);
+                $criterion), $userid);
 
             $participants [$userid] = $participant;
         }
@@ -172,10 +172,6 @@ class mod_groupformation_participant_parser {
 
         $array = array();
         $totalLabel = array();
-        $userPosition = 0;
-
-
-        // Building the labels for kategories.
 
         // Iterates over set of users.
         foreach ($users as $user) {
@@ -183,12 +179,6 @@ class mod_groupformation_participant_parser {
             // Precomputes values and generates and object which can be parsed into participants with criteria.
             $object = new stdClass ();
             $object->id = $user;
-
-            // Computes BIG5 if in labels (first part is heterogen, second part is homogen).
-            $big5 = array();
-            if (in_array('big5_homogen', $labels) || in_array('big5_heterogen', $labels)) {
-                $big5 = $this->criterion_calculator->get_big_5($user);
-            }
 
             $labelPosition = 0;
             foreach ($labels as $label) {
@@ -204,14 +194,7 @@ class mod_groupformation_participant_parser {
                     $value ["homogen"] = $homogen [$label];
 
                     $object->$label = $value;
-                    if ($userPosition == 0) {
-                        $totalLabel [] = $label;
-                    }
-                }
-
-                // Hanles Topics.
-                if ($label == 'topic') {
-                    // TODO @Rene: What ist this for?
+                    $totalLabel [] = $label;
                 }
 
                 // Handles preknowledge (colects preknowledge values in array).
@@ -219,9 +202,8 @@ class mod_groupformation_participant_parser {
                     $value = $this->criterion_calculator->knowledge_all($user);
                     $value ["homogen"] = $homogen [$label];
                     $object->$label = $value;
-                    if ($userPosition == 0) {
-                        $totalLabel [] = $label;
-                    }
+                    $totalLabel [] = $label;
+
                 }
 
                 // Handles the preknowledge ( avarage values )
@@ -230,16 +212,9 @@ class mod_groupformation_participant_parser {
                     $value ["homogen"] = $homogen [$label];
                     $object->$label = $value;
                     // With the first "Users" the names of the labels will be safed.
-                    if ($userPosition == 0) {
-                        $totalLabel [] = $label;
-                    }
+                    $totalLabel [] = $label;
+
                 }
-                // TODO @Nora - Ich hab bei Bewertungsmethode nach "Just Pass" gearbeitet,
-                // sprich die Fragebogenseite "Grade" wird nicht angezeigt,
-                // keine Antwort vom Studenten gespeichert und somit hier keine Antwort gefunden!
-                // Bitte eine Abstraktion von get_label_set und get_homogen_set in store bauen,
-                // die die Fälle von grade, points, just pass, no method löst
-                // Wegen der Abstraktion gehören solche Methoden meiner Meinung nach nicht in Data.
 
                 // Handles the grades.
                 if ($label == 'grade') {
@@ -248,9 +223,8 @@ class mod_groupformation_participant_parser {
                         $value [] = $this->criterion_calculator->get_grade($gradeP, $user);
                         $value ["homogen"] = $homogen [$label];
                         $object->$label = $value;
-                        if ($userPosition == 0) {
-                            $totalLabel [] = $label;
-                        }
+                        $totalLabel [] = $label;
+
                     }
                 }
 
@@ -260,88 +234,48 @@ class mod_groupformation_participant_parser {
                         $value [] = $this->criterion_calculator->get_points($pointsP, $user);
                         $value ["homogen"] = $homogen [$label];
                         $object->$label = $value;
-                        if ($userPosition == 0) {
-                            $totalLabel [] = $label;
-                        }
+                        $totalLabel [] = $label;
+
                     }
                 }
 
                 // Handling the big5 heterogen.
-                if ($label == 'big5_heterogen') {
-                    $bigTemp = $big5 [0]; // See init of $big5.
-                    $l = $data->get_extra_label($label);
-                    $p = 0;
-                    $h = $homogen [$label];
+                if ($label == 'big5') {
+                    $big5 = $this->criterion_calculator->get_big5($user);
                     // Create the detailed labels of different big5's.
-                    foreach ($bigTemp as $ls) {
+                    foreach ($big5 as $key => $ls) {
                         $value = array();
-                        $name = $label . '_' . $l [$p];
-                        if ($userPosition == 0) {
-                            $totalLabel [] = $name;
-                        }
-                        $value [] = $ls;
-                        $value ["homogen"] = $h;
+                        $name = $label . '_' . $key;
+                        $totalLabel [] = $name;
+                        $value [] = $ls['value'];
+                        $value ["homogen"] = $ls['homogeneous'];
                         $object->$name = $value;
-                        $p++;
-                    }
-                }
-
-                // Handling the big5 homogen.
-                if ($label == 'big5_homogen') {
-                    $bigTemp = $big5 [1]; // See init von $Big5.
-
-                    $l = $data->get_extra_label($label);
-                    $p = 0;
-                    $h = $homogen [$label];
-                    // Create the detailed labels of differen big5's.
-                    foreach ($bigTemp as $ls) {
-                        $value = array();
-                        $name = $label . '_' . $l [$p];
-                        if ($userPosition == 0) {
-                            $totalLabel [] = $name;
-                        }
-                        $value [] = $ls;
-                        $value ["homogen"] = $h;
-                        $object->$name = $value;
-                        $p++;
                     }
                 }
 
                 // Handles the FAM.
                 if ($label == 'fam') {
                     $famTemp = $this->criterion_calculator->get_fam($user);
-                    $l = $data->get_extra_label($label);
-                    $p = 0;
-                    $h = $homogen [$label];
-                    foreach ($l as $ls) {
+                    foreach ($famTemp as $key=>$ls) {
                         $value = array();
-                        $name = $label . '_' . $ls;
-                        if ($userPosition == 0) {
-                            $totalLabel [] = $name;
-                        }
-                        $value [] = $famTemp [$p];
-                        $value ["homogen"] = $h;
+                        $name = $label . '_' . $key;
+                        $totalLabel [] = $name;
+                        $value [] = $ls['value'];
+                        $value ["homogen"] = $ls['homogeneous'];
                         $object->$name = $value;
-                        $p++;
                     }
                 }
 
                 // Handles the learning
                 if ($label == 'learning') {
-                    $learnTemp = $this->criterion_calculator->get_learn($user);
-                    $l = $data->get_extra_label($label);
-                    $p = 0;
-                    $h = $homogen [$label];
-                    foreach ($l as $ls) {
+                    $learnTemp = $this->criterion_calculator->get_learning($user);
+                    foreach ($learnTemp as $key=>$ls) {
                         $value = array();
-                        $name = $label . '_' . $ls;
-                        if ($userPosition == 0) {
-                            $totalLabel [] = $name;
-                        }
-                        $value [] = $learnTemp [$p];
-                        $value ["homogen"] = $h;
+                        $name = $label . '_' . $key;
+                        $totalLabel [] = $name;
+                        $value [] = $ls['value'];
+                        $value ["homogen"] = $ls['homogeneous'];
                         $object->$name = $value;
-                        $p++;
                     }
                 }
 
@@ -350,15 +284,14 @@ class mod_groupformation_participant_parser {
                     $value = $this->criterion_calculator->get_team($user);
                     $value ["homogen"] = $homogen [$label];
                     $object->$label = $value;
-                    if ($userPosition == 0) {
-                        $totalLabel [] = $label;
-                    }
+                    $totalLabel [] = $label;
                 }
 
                 $labelPosition++;
             }
             $array [] = $object;
-            $userPosition++;
+            $totalLabel = array_unique($totalLabel);
+            var_dump($totalLabel);
         }
 
         $res = $this->parse($array, $totalLabel);
@@ -385,6 +318,7 @@ class mod_groupformation_participant_parser {
         $endtime = microtime(true);
         $comptime = $endtime - $starttime;
         groupformation_info(null, $this->groupformationid, 'building empty participants needed ' . $comptime . 'ms');
+
         return $participants;
     }
 }

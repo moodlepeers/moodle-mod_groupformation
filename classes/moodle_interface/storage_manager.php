@@ -46,6 +46,10 @@ class mod_groupformation_storage_manager {
         $this->gm = new mod_groupformation_groups_manager ($groupformationid);
     }
 
+    public function get_eval_labels(){
+        return $this->data->get_eval_label_set($this->get_scenario());
+    }
+
     public function is_archived() {
         global $DB;
         $record = $DB->get_record('groupformation_q_settings', array(
@@ -828,5 +832,25 @@ class mod_groupformation_storage_manager {
         ));
 
         return $evaluationmethod == 1;
+    }
+
+    public function get_users(){
+        global $PAGE;
+        $courseid = $this->get_course_id();
+        $context = context_course::instance($courseid);
+
+        $enrolled_students = null;
+
+        if (intval($PAGE->cm->groupingid) != 0) {
+            $enrolled_students = array_keys(groups_get_grouping_members($PAGE->cm->groupingid));
+        } else {
+            $enrolled_students = array_keys(get_enrolled_users($context, 'mod/groupformation:onlystudent'));
+        }
+
+        if (is_null($enrolled_students) || count($enrolled_students) <= 0) {
+            return array();
+        }
+
+        return $enrolled_students;
     }
 }

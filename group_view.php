@@ -75,7 +75,7 @@ if ($groupformation->intro) {
 }
 
 $userid = $USER->id;
-if (groupformation_is_archived($groupformation->id)) {
+if ($store->is_archived()) {
     echo '<div class="alert" id="commited_view">' . get_string('archived_activity_answers', 'groupformation') . '</div>';
 } else {
     $groupInfo = new mod_groupformation_student_group_view_controller($groupformation->id);

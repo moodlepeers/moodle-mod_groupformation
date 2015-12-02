@@ -92,11 +92,11 @@ if (has_capability('mod/groupformation:editsettings', $context)) {
     if (true) {
 
         // evaluation view -> later TODO
-        // $evaluationurl = new moodle_url ( '/mod/groupformation/evaluation_view.php', array (
-        // 'id' => $usedid,
-        // 'do_show' => 'evaluation'
-        // ) );
-        // $row [] = new tabobject ( 'evaluation', $evaluationurl->out (), get_string ( 'tab_evaluation', 'groupformation' ) );
+         $evaluationurl = new moodle_url ( '/mod/groupformation/evaluation_view.php', array (
+         'id' => $usedid,
+         'do_show' => 'evaluation'
+         ) );
+         $row [] = new tabobject ( 'evaluation', $evaluationurl->out (), get_string ( 'tab_evaluation', 'groupformation' ) );
 
         // The group view.
         $groupurl = new moodle_url ('/mod/groupformation/group_view.php', array(
