@@ -292,8 +292,7 @@ class mod_groupformation_user_manager {
         $sum = array_sum($store->get_numbers($categories));
 
         $user_sum = $this->get_number_of_answers($userid);
-
-        return $sum == $user_sum;
+        return $sum <= $user_sum;
     }
 
     /**
@@ -371,9 +370,9 @@ class mod_groupformation_user_manager {
 
         return $DB->get_field('groupformation_answer', 'answer', array(
             'groupformation' => $this->groupformationid,
-            'userid' => $userid,
-            'category' => $category,
-            'questionid' => $questionid
+            'userid' => strval($userid),
+            'category' => strval($category),
+            'questionid' => strval($questionid)
         ));
     }
 

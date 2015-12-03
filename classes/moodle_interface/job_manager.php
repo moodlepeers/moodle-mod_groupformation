@@ -103,11 +103,14 @@ class mod_groupformation_job_manager {
     }
 
     /**
-     *
      * Sets job to state e.g. 1000
      *
-     * @param stdClass $job
+     * @param $job
      * @param string $state
+     * @param bool|false $settime
+     * @param bool|false $resettime
+     * @param null $groupingid
+     * @return bool
      */
     public static function set_job($job, $state = "ready", $settime = false, $resettime = false, $groupingid = null) {
         global $DB, $USER;
@@ -407,7 +410,6 @@ class mod_groupformation_job_manager {
 
         // In $group_sizes is an associative array where the key is 0 - (n-1) [id of topic]
         // and the value is the group size of each topic
-        // var_dump ( $group_sizes );
 
         $topic_users = $users [0];
         $incomplete_users = $users [1];
@@ -416,7 +418,6 @@ class mod_groupformation_job_manager {
         $pp = new mod_groupformation_participant_parser ($groupformationid);
         $topic_participants = $pp->build_topic_participants($topic_users);
         $random_participants = $pp->build_empty_participants($incomplete_users);
-        // var_dump($topic_participants,$random_participants);
         if (count($topic_participants) > 0) {
             $starttime = microtime(true);
 
@@ -431,11 +432,9 @@ class mod_groupformation_job_manager {
             groupformation_info(null, $job->groupformationid, 'groupal needed ' . $comptime . 'ms');
         }
         if (!is_null($topic_cohort)) {
-            // var_dump($random_participants);
             // now we have to add the remaining participants
 
             $size = ceil((count($users [0]) + count($users [1])) / count($topic_cohort->groups));
-            // var_dump($size);
             lib_groupal_group::setGroupMembersMaxSize($size);
 
             $counts = array();
@@ -520,7 +519,6 @@ class mod_groupformation_job_manager {
             $matcher = new lib_groupal_group_centric_matcher ();
 
             $starttime = microtime(true);
-
             $gfa = new lib_groupal_basic_algorithm ($groupal_participants, $matcher, $group_size [0]);
             $groupal_cohort = $gfa->do_one_formation(); // this call takes time...
 
@@ -569,7 +567,6 @@ class mod_groupformation_job_manager {
 
         // Assign users
         $users = self::get_users($job, $groupformationid, $store);
-        // var_dump ( $users );
 
         if (is_null($users)) {
             return $cohorts;

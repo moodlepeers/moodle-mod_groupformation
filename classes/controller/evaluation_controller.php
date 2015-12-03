@@ -58,11 +58,9 @@ class mod_groupformation_evaluation_controller {
     public function render($userid) {
         $pp = new mod_groupformation_participant_parser($this->groupformationid);
 
-        $participants = $pp->build_participants(array(3));
-//      var_dump($participants[0]->criteria);
+        $participants = $pp->build_participants(array($userid));
 
         $course_users = $this->store->get_users();
-//      var_dump($course_users);
 
         $group_users = array();
         $has_group = $this->groups_store->has_group($userid, true);
@@ -70,17 +68,17 @@ class mod_groupformation_evaluation_controller {
             $group_users = $this->groups_store->get_group_members($userid);
         }
 
-//        if (!count($course_users) >= 3) {
-//            $course_users = array();
-//        }
-//
-//        if (!count($group_users) >= 3) {
-//            $group_users = array();
-//        }
+        if (!count($course_users) >= 3) {
+            $course_users = array();
+        }
+
+        if (!count($group_users) >= 3) {
+            $group_users = array();
+        }
 
         $cc = new mod_groupformation_criterion_calculator($this->groupformationid);
 
-        $eval = $cc->get_eval($userid,$group_users,$course_users);//array(3,59,60), array(3, 59,60,61));
+        $eval = $cc->get_eval($userid,$group_users,$course_users);//array(3,59), array(3, 59));
 
         $json = json_encode($eval);
 

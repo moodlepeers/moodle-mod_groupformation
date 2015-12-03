@@ -30,21 +30,22 @@ class mod_groupformation_participant_parser {
     private $user_manager;
     private $criterion_calculator;
     private $store;
+    private $data;
 
     public function __construct($groupformationid) {
         $this->groupformationid = $groupformationid;
         $this->store = new mod_groupformation_storage_manager ($groupformationid);
         $this->user_manager = new mod_groupformation_user_manager ($groupformationid);
         $this->criterion_calculator = new mod_groupformation_criterion_calculator ($groupformationid);
+        $this->data = new mod_groupformation_data();
     }
 
     /**
      * Parses infos to Participants
      *
-     * @param unknown $users
-     * @param unknown $labels
-     * @param unknown $groupsize
-     * @return multitype:lib_groupal_participant
+     * @param $users
+     * @param $labels
+     * @return array
      */
     private function parse($users, $labels) {
         $participants = array();
@@ -55,8 +56,8 @@ class mod_groupformation_participant_parser {
             foreach ($labels as $label) {
                 $value = $user->$label;
                 $count = count($value);
-                $homogen = $value ["homogen"];
-                unset ($value ["homogen"]);
+                $homogen = $value ["homogeneous"];
+                unset ($value ["homogeneous"]);
                 $minVal = 0.0;
                 $maxVal = 1.0;
 
@@ -150,25 +151,19 @@ class mod_groupformation_participant_parser {
 
         $starttime = microtime(true);
 
+        $labels = $this->store->get_label_set();
+        $criteriaspecs = array();
+        foreach($labels as $label) {
+            $criteriaspecs[$label] = $this->data->get_criterion_specification($label);
+        }
+
         $scenario = $this->store->get_scenario();
 
-        $data = new mod_groupformation_data ();
-
-        $labels = $this->store->get_label_set();
-        $homogen = $this->store->get_homogeneous_set();
+        $pointsP = null;
 
 
-        $gradeP = -1;
-        // Determines the question position with maximal variance (if grade is in questionnaire).
-        if (in_array('grade', $labels)) {
-            $gradeP = $this->criterion_calculator->get_grade_position($users);
-        }
-
-        $pointsP = -1;
-        // Determines the question position with maximal variance (if grade is in questionnaire).
-        if (in_array('points', $labels)) {
-            $pointsP = $this->criterion_calculator->get_points_position($users);
-        }
+        $gradeP = null;
+        $criteriaspecs = $this->criterion_calculator->filter_criteria_specs($criteriaspecs, $users);
 
         $array = array();
         $totalLabel = array();
@@ -176,124 +171,32 @@ class mod_groupformation_participant_parser {
         // Iterates over set of users.
         foreach ($users as $user) {
 
-            // Precomputes values and generates and object which can be parsed into participants with criteria.
+            // Pre-computes values and generates and object which can be parsed into participants with criteria.
             $object = new stdClass ();
             $object->id = $user;
 
-            $labelPosition = 0;
-            foreach ($labels as $label) {
+            foreach ($criteriaspecs as $criterion => $spec) {
 
-                $value = array();
-
-                // Handles the 'general'.
-                if ($label == 'general') {
-                    $values = $this->criterion_calculator->get_general_values($user);
-                    foreach ($values as $v) {
-                        $value [] = $v;
-                    }
-                    $value ["homogen"] = $homogen [$label];
-
-                    $object->$label = $value;
-                    $totalLabel [] = $label;
-                }
-
-                // Handles preknowledge (colects preknowledge values in array).
-                if ($label == 'knowledge_heterogen') {
-                    $value = $this->criterion_calculator->knowledge_all($user);
-                    $value ["homogen"] = $homogen [$label];
-                    $object->$label = $value;
-                    $totalLabel [] = $label;
-
-                }
-
-                // Handles the preknowledge ( avarage values )
-                if ($label == 'knowledge_homogen') {
-                    $value [] = $this->criterion_calculator->knowledge_average($user);
-                    $value ["homogen"] = $homogen [$label];
-                    $object->$label = $value;
-                    // With the first "Users" the names of the labels will be safed.
-                    $totalLabel [] = $label;
-
-                }
-
-                // Handles the grades.
-                if ($label == 'grade') {
-                    // If a variance was calculated.
-                    if ($gradeP != -1) {
-                        $value [] = $this->criterion_calculator->get_grade($gradeP, $user);
-                        $value ["homogen"] = $homogen [$label];
-                        $object->$label = $value;
-                        $totalLabel [] = $label;
-
-                    }
-                }
-
-                if ($label == 'points') {
-                    // If a variance was calculated.
-                    if ($pointsP != -1) {
-                        $value [] = $this->criterion_calculator->get_points($pointsP, $user);
-                        $value ["homogen"] = $homogen [$label];
-                        $object->$label = $value;
-                        $totalLabel [] = $label;
-
-                    }
-                }
-
-                // Handling the big5 heterogen.
-                if ($label == 'big5') {
-                    $big5 = $this->criterion_calculator->get_big5($user);
-                    // Create the detailed labels of different big5's.
-                    foreach ($big5 as $key => $ls) {
+                if (in_array($scenario, $spec['scenario'])) {
+                    $points = $this->criterion_calculator->get_values_for_user($criterion, $user, $spec);
+                    foreach ($spec['labels'] as $label => $lspec) {
                         $value = array();
-                        $name = $label . '_' . $key;
-                        $totalLabel [] = $name;
-                        $value [] = $ls['value'];
-                        $value ["homogen"] = $ls['homogeneous'];
+                        $vs = $points[$label]["values"];
+                        foreach ($vs as $v) {
+                            $value[] = $v;
+                        }
+                        $value ["homogeneous"] = $lspec['homogeneous'];
+                        $name = $criterion . '_' . $label;
                         $object->$name = $value;
+                        $totalLabel [] = $name;
                     }
                 }
 
-                // Handles the FAM.
-                if ($label == 'fam') {
-                    $famTemp = $this->criterion_calculator->get_fam($user);
-                    foreach ($famTemp as $key=>$ls) {
-                        $value = array();
-                        $name = $label . '_' . $key;
-                        $totalLabel [] = $name;
-                        $value [] = $ls['value'];
-                        $value ["homogen"] = $ls['homogeneous'];
-                        $object->$name = $value;
-                    }
-                }
-
-                // Handles the learning
-                if ($label == 'learning') {
-                    $learnTemp = $this->criterion_calculator->get_learning($user);
-                    foreach ($learnTemp as $key=>$ls) {
-                        $value = array();
-                        $name = $label . '_' . $key;
-                        $totalLabel [] = $name;
-                        $value [] = $ls['value'];
-                        $value ["homogen"] = $ls['homogeneous'];
-                        $object->$name = $value;
-                    }
-                }
-
-                // Handles teamorientation
-                if ($label == 'team') {
-                    $value = $this->criterion_calculator->get_team($user);
-                    $value ["homogen"] = $homogen [$label];
-                    $object->$label = $value;
-                    $totalLabel [] = $label;
-                }
-
-                $labelPosition++;
             }
-            $array [] = $object;
-            $totalLabel = array_unique($totalLabel);
-            var_dump($totalLabel);
-        }
 
+            $array [] = $object;
+        }
+        $totalLabel = array_unique($totalLabel);
         $res = $this->parse($array, $totalLabel);
 
         $endtime = microtime(true);

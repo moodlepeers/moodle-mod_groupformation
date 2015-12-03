@@ -25,6 +25,7 @@
 require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
 require_once(dirname(__FILE__) . '/lib.php');
 require_once(dirname(__FILE__) . '/locallib.php');
+require_once($CFG->dirroot . "/mod/groupformation/classes/controller/evaluation_controller.php");
 
 // Read URL params
 $id = optional_param('id', 0, PARAM_INT); // Course Module ID
@@ -67,11 +68,14 @@ require('tabs.php');
 // Conditions to show the intro can change to look for own settings or whatever.
 if ($groupformation->intro) {
     echo $OUTPUT->box(format_module_intro('groupformation', $groupformation, $cm->id), 'generalbox mod_introbox',
-                      'groupformationintro');
+        'groupformationintro');
 }
 
-// Replace the following lines with you own code.
-
-echo '<div style="color:red;">Diese Seite ist noch in der Entwicklung. Die Inhalte sind ggf. noch rein statisch und haben keinen Effekt oder keine Funktion.</div>';
+if ($store->is_archived()) {
+    echo '<div class="alert" id="commited_view">' . get_string('archived_activity_answers', 'groupformation') . '</div>';
+} else {
+    $evaluator = new mod_groupformation_evaluation_controller($groupformation->id);
+    echo $evaluator->render($userid);
+}
 
 echo $OUTPUT->footer();

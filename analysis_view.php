@@ -112,6 +112,19 @@ echo $OUTPUT->header();
 // Print the tabs.
 require('tabs.php');
 
+// $jm = new mod_groupformation_job_manager ();
+// $job = null;
+//
+// $job = $jm::get_job ( $groupformation->id );
+// //$jm->reset_job($job);
+// // var_dump($jm::get_next_job());
+// if (! is_null ( $job )) {
+// 	$result = $jm::do_groupal($job);
+// 	var_dump ( $result );
+// // 	$saved = $jm::save_result($job,$result);
+//
+// }
+
 if ($store->is_archived() && has_capability('mod/groupformation:editsettings', $context)) {
     echo '<div class="alert" id="commited_view">' . get_string('archived_activity_admin', 'groupformation') . '</div>';
 } else {

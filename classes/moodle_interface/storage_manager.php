@@ -46,10 +46,6 @@ class mod_groupformation_storage_manager {
         $this->gm = new mod_groupformation_groups_manager ($groupformationid);
     }
 
-    public function get_eval_labels(){
-        return $this->data->get_eval_label_set($this->get_scenario());
-    }
-
     public function is_archived() {
         global $DB;
         $record = $DB->get_record('groupformation_q_settings', array(
@@ -66,9 +62,6 @@ class mod_groupformation_storage_manager {
         $enrolled_students = null;
         if (intval($cm->groupingid) != 0) {
             $enrolled_students = array_keys(groups_get_grouping_members($groupingid));
-            // foreach ( $userids as $userid ) {
-            // var_dump ( $userid );
-            // }
         } else {
             // TODO all enrolled students later just students of grouping
             $enrolled_students = array_keys(get_enrolled_users($context, 'mod/groupformation:onlystudent'));
@@ -87,8 +80,6 @@ class mod_groupformation_storage_manager {
         global $DB;
         // $indexes = $DB->get_indexes('groupformation_en_team');
         $count = $DB->count_records('groupformation_' . $category);
-
-        // var_dump($count);
         return $count == 0;
     }
 
@@ -154,7 +145,6 @@ class mod_groupformation_storage_manager {
         $data->questionid = $question ['questionid'];
         $data->language = $language;
         $data->optionmax = count($question ['options']);
-        // var_dump($data);
         $DB->insert_record('groupformation_' . $category, $data);
     }
 
