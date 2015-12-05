@@ -82,32 +82,31 @@ if (has_capability('mod/groupformation:editsettings', $context)) {
         $questionnaire_viewiewurl = new moodle_url ('/mod/groupformation/questionnaire_view.php', array(
             'id' => $usedid));
         $row [] = new tabobject ('answering', $questionnaire_viewiewurl->out(),
-                                 get_string('tab_questionaire', 'groupformation'));
+            get_string('tab_questionaire', 'groupformation'));
     }
 
     // TODO @Rene : auskommentierter Code!
     // always if student meets conditions
     // || $user_manager->is_completed ( $userid ) || $groups_store->groups_created()) {
 
-    if (true) {
 
-        // evaluation view -> later TODO
-         $evaluationurl = new moodle_url ( '/mod/groupformation/evaluation_view.php', array (
-         'id' => $usedid,
-         'do_show' => 'evaluation'
-         ) );
-         $row [] = new tabobject ( 'evaluation', $evaluationurl->out (), get_string ( 'tab_evaluation', 'groupformation' ) );
+    // evaluation view -> later TODO
+    $evaluationurl = new moodle_url ('/mod/groupformation/evaluation_view.php', array(
+        'id' => $usedid,
+        'do_show' => 'evaluation'
+    ));
+    $row [] = new tabobject ('evaluation', $evaluationurl->out(), get_string('tab_evaluation', 'groupformation'));
 
-        // The group view.
-        $groupurl = new moodle_url ('/mod/groupformation/group_view.php', array(
-            'id' => $usedid, 'do_show' => 'group'));
-        $row [] = new tabobject ('group', $groupurl->out(), get_string('tab_group', 'groupformation'));
+    // The group view.
+    $groupurl = new moodle_url ('/mod/groupformation/group_view.php', array(
+        'id' => $usedid, 'do_show' => 'group'));
+    $row [] = new tabobject ('group', $groupurl->out(), get_string('tab_group', 'groupformation'));
 
-        // The import/export view.
-        $groupurl = new moodle_url ('/mod/groupformation/import_export_view.php', array(
-            'id' => $usedid, 'do_show' => 'import_export'));
-        $row [] = new tabobject ('import_export', $groupurl->out(), 'Import/Export');
-    }
+    // The import/export view.
+    $groupurl = new moodle_url ('/mod/groupformation/import_export_view.php', array(
+        'id' => $usedid, 'do_show' => 'import_export'));
+    $row [] = new tabobject ('import_export', $groupurl->out(), 'Import/Export');
+
 }
 
 if (count($row) >= 1) {

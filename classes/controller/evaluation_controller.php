@@ -30,10 +30,20 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.
 
 
 class mod_groupformation_evaluation_controller {
+
+    /** @var mod_groupformation_storage_manager  */
     private $store;
+
+    /** @var mod_groupformation_groups_manager  */
     private $groups_store;
+
+    /** @var mod_groupformation_user_manager  */
+    private $user_manager;
+
+    /** @var int This is the id of the activity */
     private $groupformationid;
 
+    /** @var mod_groupformation_template_builder|null  */
     private $view = null;
 
     /**
@@ -46,7 +56,7 @@ class mod_groupformation_evaluation_controller {
 
         $this->store = new mod_groupformation_storage_manager ($groupformationid);
         $this->groups_store = new mod_groupformation_groups_manager ($groupformationid);
-
+        $this->user_manager = new mod_groupformation_user_manager ($groupformationid);
         $this->view = new mod_groupformation_template_builder ();
         $this->view->set_template('wrapper_student_evaluation');
     }
@@ -56,32 +66,37 @@ class mod_groupformation_evaluation_controller {
      * @return string
      */
     public function render($userid) {
-        $pp = new mod_groupformation_participant_parser($this->groupformationid);
 
-        $course_users = $this->store->get_users();
+        if (!$this->user_manager->has_answered_everything($userid)){
+            $this->view->assign('eval_text',true);
+            $json = json_encode(null);
+            $this->view->assign('json_content', $json);
+        }else {
+            $this->view->assign('eval_text',false);
+            $course_users = $this->store->get_users();
 
-        $group_users = array();
-        $has_group = $this->groups_store->has_group($userid, true);
-        if ($has_group) {
-            $group_users = $this->groups_store->get_group_members($userid);
-        }
-
-        if (!count($course_users) >= 3) {
-            $course_users = array();
-        }
-
-        if (!count($group_users) >= 3) {
             $group_users = array();
+            $has_group = $this->groups_store->has_group($userid, true);
+            if ($has_group) {
+                $group_users = $this->groups_store->get_group_members($userid);
+            }
+
+            if (!count($course_users) >= 3) {
+                $course_users = array();
+            }
+
+            if (!count($group_users) >= 3) {
+                $group_users = array();
+            }
+
+            $cc = new mod_groupformation_criterion_calculator($this->groupformationid);
+
+            $eval = $cc->get_eval($userid, $group_users, $course_users);
+
+            $json = json_encode($eval);
+
+            $this->view->assign('json_content', $json);
         }
-
-        $cc = new mod_groupformation_criterion_calculator($this->groupformationid);
-
-        $eval = $cc->get_eval($userid,$group_users,$course_users);
-        
-        $json = json_encode($eval);
-
-        $this->view->assign('json_content', $json);
-
         return $this->view->load_template();
     }
 }
