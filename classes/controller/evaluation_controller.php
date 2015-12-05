@@ -58,8 +58,6 @@ class mod_groupformation_evaluation_controller {
     public function render($userid) {
         $pp = new mod_groupformation_participant_parser($this->groupformationid);
 
-        $participants = $pp->build_participants(array($userid));
-
         $course_users = $this->store->get_users();
 
         $group_users = array();
@@ -78,8 +76,8 @@ class mod_groupformation_evaluation_controller {
 
         $cc = new mod_groupformation_criterion_calculator($this->groupformationid);
 
-        $eval = $cc->get_eval($userid,$group_users,$course_users);//array(3,59), array(3, 59));
-
+        $eval = $cc->get_eval($userid,$group_users,$course_users);
+        
         $json = json_encode($eval);
 
         $this->view->assign('json_content', $json);
