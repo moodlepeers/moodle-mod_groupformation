@@ -42,7 +42,6 @@ class mod_groupformation_data {
             'big5' => false,
             'team' => true,
             'fam' => true,
-            'learning' => false,
         ),
         2 => array(
             'topic' => true,
@@ -140,32 +139,32 @@ class mod_groupformation_data {
         ),
         "learning" => array(
             "category" => "learning",
-            "scenario" => array(1, 2),
+            "scenario" => array(2),
             "evaluation" => true,
             "labels" => array(
                 "konkreteerfahrung" => array(
-                    "scenario" => array(1 => false, 2 => false),
+                    "scenario" => array(2 => false),
                     "evaluation" => true,
                     "homogeneous" => false,
                     "questionids" => array(1, 5, 11, 14, 20, 22),
                     "significant_id_only" => false,
                 ),
                 "aktivesexperimentieren" => array(
-                    "scenario" => array(1 => false, 2 => false),
+                    "scenario" => array(2 => false),
                     "evaluation" => true,
                     "homogeneous" => false,
                     "questionids" => array(2, 8, 10, 16, 17, 23),
                     "significant_id_only" => false,
                 ),
                 "reflektiertebeobachtung" => array(
-                    "scenario" => array(1 => false, 2 => false),
+                    "scenario" => array(2 => false),
                     "evaluation" => true,
                     "homogeneous" => false,
                     "questionids" => array(3, 6, 9, 13, 19, 21),
                     "significant_id_only" => false,
                 ),
                 "abstraktebegriffsbildung" => array(
-                    "scenario" => array(1 => false, 2 => false),
+                    "scenario" => array(2 => false),
                     "evaluation" => true,
                     "homogeneous" => false,
                     "questionids" => array(4, 7, 12, 15, 18, 24),
