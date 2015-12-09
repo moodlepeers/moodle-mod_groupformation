@@ -349,7 +349,7 @@ class mod_groupformation_questionnaire_controller {
      */
     public function print_action_buttons() {
         echo '<div class="grid">
-						<div class="col_100 questionaire_button_row">
+						<div class="col_m_100 questionaire_button_row">
 							<button type="submit" name="direction" value="0" class="gf_button gf_button_pill gf_button_small">' .
             get_string('previous') . '</button>
 							<button type="submit" name="direction" value="1" class="gf_button gf_button_pill gf_button_small">' .
@@ -397,7 +397,7 @@ class mod_groupformation_questionnaire_controller {
      * Prints final page of questionaire
      */
     public function print_final_page() {
-        echo '<div class="col_100"><h4>' . get_string('questionaire_no_more_questions', 'groupformation') .
+        echo '<div class="col_m_100"><h4>' . get_string('questionaire_no_more_questions', 'groupformation') .
             '</h></div>';
         echo '	<form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
 
@@ -411,7 +411,7 @@ class mod_groupformation_questionnaire_controller {
         }
 
         if (has_capability('mod/groupformation:editsettings', $this->context)) {
-            echo '<div class="alert col_100 questionaire_hint">' .
+            echo '<div class="alert col_m_100 questionaire_hint">' .
                 get_string('questionaire_submit_disabled_teacher', 'groupformation') . '</div>';
         }
 
@@ -421,7 +421,7 @@ class mod_groupformation_questionnaire_controller {
         echo '<div class="grid">';
         echo '	<div class="questionaire_button_text">' .
             get_string('questionaire_press_beginning_submit', 'groupformation') . '</div>';
-        echo '	<div class="col_100 questionaire_button_row">';
+        echo '	<div class="col_m_100 questionaire_button_row">';
         echo '		<a href=' . $url->out() . '><span class="gf_button gf_button_pill gf_button_small">' .
             get_string('questionaire_go_to_start', 'groupformation') . '</span></a>';
         // echo ' <button class="gf_button gf_button_pill gf_button_small" type="submit" name="action" value="1" '
