@@ -74,7 +74,7 @@ class mod_groupformation_criterion_calculator {
      */
     public function get_general($userid, $specs = null) {
         if (is_null($specs)) {
-            $specs = $this->data->get_criterion_specification("big5");
+            $specs = $this->data->get_criterion_specification("general");
         }
 
         $labels = $specs['labels'];
@@ -128,7 +128,7 @@ class mod_groupformation_criterion_calculator {
         if (is_null($specs)) {
             $specs = $this->data->get_criterion_specification('knowledge');
         }
-
+        $scenario = $this->scenario;
         $labels = $specs['labels'];
         $array = array();
         $category = $specs['category'];
@@ -136,7 +136,7 @@ class mod_groupformation_criterion_calculator {
             $knowledge_values = array();
             $temp = 0;
             $max_value = 100;
-            if ($spec['homogeneous']) {
+            if ($spec['scenarios'][$scenario]) {
                 $total = 0;
                 $answers = $this->user_manager->get_answers($userid, $category);
                 $number_of_questions = count($answers);
@@ -246,11 +246,11 @@ class mod_groupformation_criterion_calculator {
         foreach ($criteriaspecs as $criterion => $spec) {
             $category = $spec['category'];
             $labels = $spec['labels'];
-            if (in_array($this->scenario, $spec['scenario']) && (!$eval || $spec['evaluation'])) {
+            if (in_array($this->scenario, $spec['scenarios']) && (!$eval || $spec['evaluation'])) {
                 $positions = array();
 
                 foreach ($labels as $label => $specs) {
-                    if (array_key_exists($this->scenario, $specs['scenario']) && (!$eval || $specs['evaluation'])) {
+                    if (array_key_exists($this->scenario, $specs['scenarios']) && (!$eval || $specs['evaluation'])) {
                         if ($specs['significant_id_only']) {
                             $variance = 0;
                             $position = 1;
@@ -495,8 +495,10 @@ class mod_groupformation_criterion_calculator {
 
         foreach ($criteria as $criterion) {
             $labels = $this->data->get_criterion_specification($criterion);
-            $labels = $this->filter_criterion_specs_for_eval($criterion, $labels);
-            if (count($labels) > 0) {
+            if (!is_null($labels)) {
+                $labels = $this->filter_criterion_specs_for_eval($criterion, $labels);
+            }
+            if (!is_null($labels) && count($labels) > 0) {
                 $eval[$criterion] = $this->get_eval_infos($criterion, $labels, $userid, $group_users, $course_users);
             }
         }
@@ -571,12 +573,12 @@ class mod_groupformation_criterion_calculator {
         $setfinaltext = $coursesize > 2;
 
         $eval_infos = array();
-
-        $user_values = $this->get_values_for_user($criterion, $userid);
-        $group_values = $this->get_avg_values_for_users($criterion, $group_and_completed);
-        $course_values = $this->get_avg_values_for_users($criterion, $course_and_completed);
+        if ($criterion == 'general')
+            var_dump($labels);
+        $user_values = $this->get_values_for_user($criterion, $userid, $labels);
+        $group_values = $this->get_avg_values_for_users($criterion, $group_and_completed, $labels);
+        $course_values = $this->get_avg_values_for_users($criterion, $course_and_completed, $labels);
         foreach ($labels['labels'] as $label => $spec) {
-
             $user = $user_values[$label]['values'][0];
             $group = null;
             $course = null;

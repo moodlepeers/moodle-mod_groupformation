@@ -542,9 +542,8 @@ class mod_groupformation_mod_form extends moodleform_mod {
                     </div>');
 
         // Add checkbox email-notification.
-        // TODO @Ahmed: Hier das >> style="display: none;" << entfernen und du siehst die Option in den Activityeinstellungen (default selected)
-        $mform->addElement('html', '
-                    <div class="gf_pad_header" style="display: none;">
+         $mform->addElement('html', '
+                    <div class="gf_pad_header">
 						<label class="gf_label" for="id_js_emailnotifications">
                           <input type="checkbox" id="id_js_emailnotifications" name="chbEmailnotifications" value="wantEmailnotifications">
                           ' . get_string('emailnotifications_description', 'groupformation') . '</label><span id="emailnotificationsStateLabel" class="optional"></span>

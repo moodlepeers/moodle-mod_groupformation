@@ -41,15 +41,6 @@ require_login($course, true, $cm);
 $context = $PAGE->context;
 $userid = $USER->id;
 
-//TODO: @Rene Wird das drunter noch benötigt?
-//// redirect if no access is granted for user
-//if (has_capability('mod/groupformation:editsettings', $context)) {
-//    $returnurl = new moodle_url('/mod/groupformation/analysis_view.php', array('id' => $id, 'do_show' => 'analysis'));
-//    redirect($returnurl);
-//} else {
-//    $current_tab = $do_show;
-//}
-
 // Log access to page
 // 	groupformation_info($USER->id,$groupformation->id,'<view_student_group_assignment>');
 

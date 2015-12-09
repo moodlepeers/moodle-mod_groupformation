@@ -85,12 +85,7 @@ if (has_capability('mod/groupformation:editsettings', $context)) {
             get_string('tab_questionaire', 'groupformation'));
     }
 
-    // TODO @Rene : auskommentierter Code!
-    // always if student meets conditions
-    // || $user_manager->is_completed ( $userid ) || $groups_store->groups_created()) {
-
-
-    // evaluation view -> later TODO
+    // evaluation view
     $evaluationurl = new moodle_url ('/mod/groupformation/evaluation_view.php', array(
         'id' => $usedid,
         'do_show' => 'evaluation'

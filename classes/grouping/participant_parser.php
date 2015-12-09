@@ -177,7 +177,7 @@ class mod_groupformation_participant_parser {
 
             foreach ($criteriaspecs as $criterion => $spec) {
 
-                if (in_array($scenario, $spec['scenario'])) {
+                if (in_array($scenario, $spec['scenarios'])) {
                     $points = $this->criterion_calculator->get_values_for_user($criterion, $user, $spec);
                     foreach ($spec['labels'] as $label => $lspec) {
                         $value = array();
@@ -185,7 +185,7 @@ class mod_groupformation_participant_parser {
                         foreach ($vs as $v) {
                             $value[] = $v;
                         }
-                        $value ["homogeneous"] = $lspec['homogeneous'];
+                        $value ["homogeneous"] = $lspec['scenarios'][$scenario];
                         $name = $criterion . '_' . $label;
                         $object->$name = $value;
                         $totalLabel [] = $name;

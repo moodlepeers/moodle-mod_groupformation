@@ -210,7 +210,7 @@ class mod_groupformation_job_manager {
         if (intval($job->groupingid) != 0) {
             $enrolled_students = array_keys(groups_get_grouping_members($job->groupingid));
         } else {
-            // TODO all enrolled students later just students of grouping
+            // all enrolled students later just students of grouping
             $enrolled_students = array_keys(get_enrolled_users($context, 'mod/groupformation:onlystudent'));
         }
         if (is_null($enrolled_students) || count($enrolled_students) <= 0) {
@@ -515,7 +515,7 @@ class mod_groupformation_job_manager {
         $random_participants = $pp->build_empty_participants($incomplete_users);
         if (count($groupal_participants) > 0) {
 
-            // TODO Choose matcher
+            // Choose matcher
             $matcher = new lib_groupal_group_centric_matcher ();
 
             $starttime = microtime(true);
@@ -536,12 +536,12 @@ class mod_groupformation_job_manager {
         $cohorts = array(
             $groupal_cohort, $random_cohort, $topic_cohort);
 
-        // TODO XML WRITER : einkommentieren falls benötigt
+        // XML WRITER : einkommentieren falls benötigt
         // $path = $CFG->dirroot . '/mod/groupformation/xml_participants/' . "php_" . $groupformationid;
         // $participant_writer = new lib_groupal_participant_writer ( $path . "_participants.xml" );
         // $participant_writer->write ( $groupal_participants );
 
-        // TODO XML WRITER : einkommentieren falls benötigt
+        // XML WRITER : einkommentieren falls benötigt
         // $path = $CFG->dirroot . '/mod/groupformation/xml_participants/' . "php_" . $groupformationid;
         // $cohort_writer = new lib_groupal_cohort_writer($path."_cohort.xml");
         // $cohort_writer->write($groupal_cohort);
@@ -809,7 +809,6 @@ class mod_groupformation_job_manager {
      */
     public static function notify_teacher($job) {
         global $DB, $CFG;
-        // TODO messaging to person:
         $uID = $job->started_by;
         $rec = array_pop($DB->get_records('course_modules', array(
             'instance' => $job->groupformationid)));

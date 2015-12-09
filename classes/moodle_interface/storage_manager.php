@@ -63,7 +63,7 @@ class mod_groupformation_storage_manager {
         if (intval($cm->groupingid) != 0) {
             $enrolled_students = array_keys(groups_get_grouping_members($groupingid));
         } else {
-            // TODO all enrolled students later just students of grouping
+            // all enrolled students later just students of grouping
             $enrolled_students = array_keys(get_enrolled_users($context, 'mod/groupformation:onlystudent'));
         }
 
@@ -149,7 +149,7 @@ class mod_groupformation_storage_manager {
     }
 
     /**
-     * TODO @Nora
+     * TODO
      *
      * @param string $category
      * @param int $numbers
@@ -452,6 +452,12 @@ class mod_groupformation_storage_manager {
     public function get_categories() {
         $category_set = $this->data->get_category_set($this->get_scenario());
         $categories = array();
+
+        $hasKnowledge = $this->get_number('knowledge');
+        if($this->ask_for_knowledge() && $hasKnowledge!=0){
+            $categories[]='knowledge';
+        }
+
         foreach ($category_set as $category) {
             if ($this->get_number($category) > 0) {
                 if ($category == 'grade' && $this->ask_for_grade()) {
@@ -462,6 +468,11 @@ class mod_groupformation_storage_manager {
                     $categories [] = $category;
                 }
             }
+        }
+
+        $hasTopic = $this->get_number('topic');
+        if ($this->ask_for_topics() && $hasTopic!=0){
+            $categories = arraY('topic');
         }
 
         return $categories;
@@ -784,18 +795,12 @@ class mod_groupformation_storage_manager {
 
                 $position++;
             }
+            if ($hasTopic != 0){
+                $array = array('topic');
+            }
         }
 
         return $array;
-    }
-
-    /**
-     * Returns homogeneous set for scenario
-     *
-     * @return array
-     */
-    public function get_homogeneous_set() {
-        return $this->data->get_homogeneous_set($this->get_scenario());
     }
 
     /**

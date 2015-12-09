@@ -26,77 +26,45 @@ if (!defined('MOODLE_INTERNAL')) {
 
 class mod_groupformation_data {
 
-    private $scenarionames = array(
+    private $scenarios = array(
         1 => 'projectteams',
         2 => 'homeworkgroups',
         3 => 'presentationgroups',
     );
 
-    private $criterialabels = array(
-        1 => array(
-            'topic' => true,
-            'knowledge' => true,
-            'general' => true,
-            'grade' => true,
-            'points' => true,
-            'big5' => false,
-            'team' => true,
-            'fam' => true,
-        ),
-        2 => array(
-            'topic' => true,
-            'knowledge' => false,
-            'general' => true,
-            'grade' => false,
-            'points' => false,
-            'big5' => false,
-            'team' => true,
-            'learning' => false,
-        ),
-        3 => array(
-            'topic' => true,
-//            'general' => true,
-        ),
-    );
-
-    private $extralabels = array(
+    private $criteria = array(
         "big5" => array(
             "category" => "character",
-            "scenario" => array(1, 2),
+            "scenarios" => array(1, 2),
             "evaluation" => true,
             "labels" => array(
                 "extraversion" => array(
-                    "scenario" => array(1=>false,2 => false),
+                    "scenarios" => array(1=>false,2 => false),
                     "evaluation" => true,
-                    "homogeneous" => false,
                     "questionids" => array(-1, 6),
                     "significant_id_only" => false,
                 ),
                 "gewissenhaftigkeit" => array(
-                    "scenario" => array(1 => true, 2 => true),
+                    "scenarios" => array(1 => true, 2 => true),
                     "evaluation" => true,
-                    "homogeneous" => true,
                     "questionids" => array(-3, 8),
                     "significant_id_only" => false,
                 ),
                 "vertraeglichkeit" => array(
-                    "scenario" => array(1 => true, 2 => true),
+                    "scenarios" => array(1 => true, 2 => true),
                     "evaluation" => true,
-                    "homogeneous" => true,
                     "questionids" => array(2, -7, 11),
                     "significant_id_only" => false,
                 ),
                 "neurotizismus" => array(
-                    "scenario" => array(1 => false, 2 => false),
+                    "scenarios" => array(1 => false, 2 => false),
                     "evaluation" => true,
-                    "homogeneous" => false,
                     "questionids" => array(9, -4),
                     "significant_id_only" => false,
                 ),
                 "offenheit" => array(
-                    "scenario" => array(1 => false, 2 => false),
+                    "scenarios" => array(1 => false, 2 => false),
                     "evaluation" => true,
-                    "homogeneous" => false,
                     "questionids" => array(10, -5),
                     "significant_id_only" => false,
                 ),
@@ -104,34 +72,30 @@ class mod_groupformation_data {
         ),
         "fam" => array(
             "category" => "motivation",
-            "scenario" => array(1),
+            "scenarios" => array(1),
             "evaluation" => true,
             "labels" => array(
                 "herausforderung" => array(
-                    "scenario" => array(1 => false),
+                    "scenarios" => array(1 => false),
                     "evaluation" => true,
-                    "homogeneous" => false,
                     "questionids" => array(6, 8, 10, 15, 17),
                     "significant_id_only" => false,
                 ),
                 "interesse" => array(
-                    "scenario" => array(1 => false),
+                    "scenarios" => array(1 => false),
                     "evaluation" => true,
-                    "homogeneous" => false,
                     "questionids" => array(1, 4, 7, 11),
                     "significant_id_only" => false,
                 ),
                 "erfolgswahrscheinlichkeit" => array(
-                    "scenario" => array(1 => false),
+                    "scenarios" => array(1 => false),
                     "evaluation" => true,
-                    "homogeneous" => false,
                     "questionids" => array(2, 3, 13, 14),
                     "significant_id_only" => false,
                 ),
                 "misserfolgsbefuerchtung" => array(
-                    "scenario" => array(1 => false),
+                    "scenarios" => array(1 => false),
                     "evaluation" => true,
-                    "homogeneous" => false,
                     "questionids" => array(5, 9, 12, 16, 18),
                     "significant_id_only" => false,
                 ),
@@ -139,34 +103,30 @@ class mod_groupformation_data {
         ),
         "learning" => array(
             "category" => "learning",
-            "scenario" => array(2),
-            "evaluation" => true,
+            "scenarios" => array(2),
+            "evaluation" => false,
             "labels" => array(
                 "konkreteerfahrung" => array(
-                    "scenario" => array(2 => false),
-                    "evaluation" => true,
-                    "homogeneous" => false,
+                    "scenarios" => array(2 => false),
+                    "evaluation" => false,
                     "questionids" => array(1, 5, 11, 14, 20, 22),
                     "significant_id_only" => false,
                 ),
                 "aktivesexperimentieren" => array(
-                    "scenario" => array(2 => false),
-                    "evaluation" => true,
-                    "homogeneous" => false,
+                    "scenarios" => array(2 => false),
+                    "evaluation" => false,
                     "questionids" => array(2, 8, 10, 16, 17, 23),
                     "significant_id_only" => false,
                 ),
                 "reflektiertebeobachtung" => array(
-                    "scenario" => array(2 => false),
-                    "evaluation" => true,
-                    "homogeneous" => false,
+                    "scenarios" => array(2 => false),
+                    "evaluation" => false,
                     "questionids" => array(3, 6, 9, 13, 19, 21),
                     "significant_id_only" => false,
                 ),
                 "abstraktebegriffsbildung" => array(
-                    "scenario" => array(2 => false),
-                    "evaluation" => true,
-                    "homogeneous" => false,
+                    "scenarios" => array(2 => false),
+                    "evaluation" => false,
                     "questionids" => array(4, 7, 12, 15, 18, 24),
                     "significant_id_only" => false,
                 ),
@@ -174,13 +134,12 @@ class mod_groupformation_data {
         ),
         "general" => array(
             "category" => "general",
-            "scenario" => array(1, 2),
+            "scenarios" => array(1, 2),
             "evaluation" => false,
             "labels" => array(
                 "language" => array(
-                    "scenario" => array(1 => true, 2 => true),
+                    "scenarios" => array(1 => true, 2 => true),
                     "evaluation" => false,
-                    "homogeneous" => true,
                     "questionids" => array(1),
                     "significant_id_only" => false,
                 ),
@@ -188,13 +147,12 @@ class mod_groupformation_data {
         ),
         "grade" => array(
             "category" => "grade",
-            "scenario" => array(1, 2),
+            "scenarios" => array(1, 2),
             "evaluation" => false,
             "labels" => array(
                 "one" => array(
-                    "scenario" => array(1 => true, 2 => false),
+                    "scenarios" => array(1 => true, 2 => false),
                     "evaluation" => false,
-                    "homogeneous" => null,
                     "questionids" => array(1, 2, 3),
                     "significant_id_only" => true,
                 ),
@@ -202,13 +160,12 @@ class mod_groupformation_data {
         ),
         "points" => array(
             "category" => "points",
-            "scenario" => array(1, 2),
+            "scenarios" => array(1, 2),
             "evaluation" => false,
             "labels" => array(
                 "one" => array(
-                    "scenario" => array(1 => true, 2 => false),
+                    "scenarios" => array(1 => true, 2 => false),
                     "evaluation" => false,
-                    "homogeneous" => true,
                     "questionids" => array(1, 2, 3),
                     "significant_id_only" => true,
                 ),
@@ -216,13 +173,12 @@ class mod_groupformation_data {
         ),
         "team" => array(
             "category" => "team",
-            "scenario" => array(1, 2),
-            "evaluation" => false,
+            "scenarios" => array(1, 2),
+            "evaluation" => true,
             "labels" => array(
                 "one" => array(
-                    "scenario" => array(1 => true, 2 => true),
-                    "evaluation" => false,
-                    "homogeneous" => true,
+                    "scenarios" => array(1 => true, 2 => true),
+                    "evaluation" => true,
                     "questionids" => array(
                         1, 2, 3, 4, 5, 6, 7, 8, 9,
                         10, 11, 12, 13, 14, 15, 16, 17, 18,
@@ -233,20 +189,18 @@ class mod_groupformation_data {
         ),
         "knowledge" => array(
             "category" => "knowledge",
-            "scenario" => array(1, 2),
+            "scenarios" => array(1, 2),
             "evaluation" => false,
             "labels" => array(
                 "one" => array(
-                    "scenario" => array(1 => true),
+                    "scenarios" => array(1 => true),
                     "evaluation" => false,
-                    "homogeneous" => true,
                     "questionids" => null,
                     "significant_id_only" => false,
                 ),
                 "two" => array(
-                    "scenario" => array(1 => false, 2 => false),
+                    "scenarios" => array(1 => false, 2 => false),
                     "evaluation" => false,
-                    "homogeneous" => false,
                     "questionids" => null,
                     "significant_id_only" => false,
                 ),
@@ -256,8 +210,6 @@ class mod_groupformation_data {
 
     private $categorysets = array(
         '1' => array(
-            'topic',
-            'knowledge',
             'general',
             'grade',
             'points',
@@ -266,8 +218,6 @@ class mod_groupformation_data {
             'motivation',
         ),
         '2' => array(
-            'topic',
-            'knowledge',
             'general',
             'grade',
             'points',
@@ -277,7 +227,6 @@ class mod_groupformation_data {
         ),
         '3' => array(
             'topic',
-            'general',
         ),
     );
 
@@ -288,7 +237,7 @@ class mod_groupformation_data {
      * @return string
      */
     public function get_scenario_name($scenario) {
-        return $this->scenarionames [$scenario];
+        return $this->scenarios [$scenario];
     }
 
     /**
@@ -298,8 +247,8 @@ class mod_groupformation_data {
      * @return array
      */
     public function get_extra_labels($label) {
-        if (array_key_exists($label, $this->extralabels)) {
-            return array_keys($this->extralabels[$label]);
+        if (array_key_exists($label, $this->criteria)) {
+            return array_keys($this->criteria[$label]);
         } else {
             return array();
         }
@@ -322,17 +271,14 @@ class mod_groupformation_data {
      * @return string
      */
     public function get_label_set($scenario) {
-        return array_keys($this->criterialabels [$scenario]);
-    }
-
-    /**
-     * Returns homogeneous criteria set
-     *
-     * @param string $scenario
-     * @return array
-     */
-    public function get_homogeneous_set($scenario) {
-        return $this->criterialabels [$scenario];
+        $labels = array();
+        foreach($this->criteria as $label => $criterion) {
+            $scenarios = $criterion["scenarios"];
+            if (in_array($scenario,$scenarios)){
+                $labels[]=$label;
+            }
+        }
+        return $labels;
     }
 
     /**
@@ -343,10 +289,10 @@ class mod_groupformation_data {
      */
     public function get_criterion_specification($name = null) {
         if (is_null($name)) {
-            return $this->extralabels;
+            return $this->criteria;
         }
-        if (array_key_exists($name, $this->extralabels)) {
-            return $this->extralabels[$name];
+        if (array_key_exists($name, $this->criteria)) {
+            return $this->criteria[$name];
         } else {
             return null;
         }

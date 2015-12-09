@@ -212,8 +212,6 @@ class mod_groupformation_user_manager {
 
         if ($status == 0) {
             $this->set_status($userid, true);
-            // TODO Mathevorkurs
-            // $this->gm->assign_to_group_AB( $userid);
         }
     }
 

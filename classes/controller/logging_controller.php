@@ -51,20 +51,6 @@ class mod_groupformation_logging_controller {
         '<view_questionaire_category_team>' => 3, '<view_questionaire_category_character>' => 3,
         '<view_questionaire_category_motivation>' => 3, '<view_questionaire_category_learning>' => 3,
         '<view_questionaire_final_page>' => 3,
-
-
-        // TODO @Rene Whats up whit this?
-        // 			'<begin_questionaire>' => 3,
-        // 			'<view_category_questionaire>' => 3,
-        // 			'<continue_questionaire>' => 3,
-        // 			'<submit_questionaire>' => 3,
-        // 			'<start_groupal>' => 3,
-        // 			'<cancel_groupal>' => 3,
-        // 			'<restart_groupal>' => 3,
-        // 			'<view_results_groupal>' => 3,
-        // 			'<accept_results_groupal>' => 3,
-        // 			'<delete_results_groupal>' => 3,
-        // 			'<unknown>' => 3
     );
 
     /**

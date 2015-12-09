@@ -137,18 +137,12 @@ if (($available || $isTeacher) && ($category == '' || $inArray)) {
         echo '<div class="alert" id="commited_view">' . get_string('archived_activity_admin', 'groupformation') .
             '</div>';
     } else {
-        // TODO @Rene auskommentierter code!
-        // $questionnaire = new mod_groupformation_questionnaire ( $cm->id, $groupformation->id, get_string ( 'language', 'groupformation' ), $userid, $category, $context );
         $questionnaire_controller = new mod_groupformation_questionnaire_controller($groupformation->id,
                                                                                     get_string('language',
                                                                                                'groupformation'),
                                                                                     $userid, $category, $cm->id);
         if ($direction == 0) {
             $questionnaire_controller->go_back();
-        } else {    // TODO @Rene auskommentierter code!
-            // if (! $go) {
-            // $questionnaire_controller->goNotOn ();
-            // }
         }
 
         $questionnaire_controller->print_page();

@@ -317,5 +317,6 @@ $string['archive_activity_task'] = 'Archivierung alter Aktivitäten';
 $string['archived_activity_answers'] = 'Die Aktitivät ist archiviert worden. Ihre Antworten sind nicht mehr gespeichert und es ist keine Interaktion mehr möglich.';
 $string['archived_activity_admin'] = 'Die Aktitivät ist archiviert worden. Es ist keine Interaktion mehr möglich.';
 
+$string['no_evaluation_text'] = 'Es gibt für diese Aktivität keine Auswertung.';
 $string['no_evaluation_ready'] = 'Es gibt keine Auswertung, da nicht alle Fragen beantwortet wurden. Erst wenn alle Fragen beantwortet wurden, gibt eine Auswertung ihrer Antworten';
 $string['eval_final_text']='Die Vergleichswerte basieren auf derzeit {$a->percent}% gegebener Antworten ({$a->completed} von {$a->coursesize} Personen haben bisher geantwortet).';

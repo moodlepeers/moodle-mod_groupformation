@@ -68,7 +68,6 @@ function groupformation_log($userid, $groupformationid, $message, $level = 'info
  * @param integer $userid
  * @param integer $groupformationid
  * @param string $message
- * @param string $level
  * @return boolean
  */
 function groupformation_debug($userid, $groupformationid, $message) {
@@ -81,7 +80,6 @@ function groupformation_debug($userid, $groupformationid, $message) {
  * @param integer $userid
  * @param integer $groupformationid
  * @param string $message
- * @param string $level
  * @return boolean
  */
 function groupformation_info($userid, $groupformationid, $message) {
@@ -94,7 +92,6 @@ function groupformation_info($userid, $groupformationid, $message) {
  * @param integer $userid
  * @param integer $groupformationid
  * @param string $message
- * @param string $level
  * @return boolean
  */
 function groupformation_warn($userid, $groupformationid, $message) {
@@ -107,7 +104,6 @@ function groupformation_warn($userid, $groupformationid, $message) {
  * @param integer $userid
  * @param integer $groupformationid
  * @param string $message
- * @param string $level
  * @return boolean
  */
 function groupformation_error($userid, $groupformationid, $message) {
@@ -120,7 +116,6 @@ function groupformation_error($userid, $groupformationid, $message) {
  * @param integer $userid
  * @param integer $groupformationid
  * @param string $message
- * @param string $level
  * @return boolean
  */
 function groupformation_fatal($userid, $groupformationid, $message) {
@@ -272,7 +267,6 @@ function groupformation_update_questions(mod_groupformation_storage_manager $sto
         }
 
     } else {
-        // TODO @Rene? until now just one type of questionnaires supported
         foreach ($names as $category) {
             if ($category != 'topic' && $category != 'knowledge') {
                 $xmlLoader->latest_version($category);

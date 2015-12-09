@@ -28,9 +28,3 @@ $plugin->component = 'mod_groupformation';
 $plugin->maturity = MATURITY_ALPHA;
 $plugin->release = 'v1.1';
 $plugin->dependencies = array();
-
-// TODO @Rene auskommentierter Code!
-// $plugin->dependencies = array(
-//     'mod_forum' => ANY_VERSION,
-//     'mod_data'  => TODO
-// );

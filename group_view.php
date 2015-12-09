@@ -56,7 +56,6 @@ if (has_capability('mod/groupformation:editsettings', $context)) {
 // Log access to page.
 groupformation_info($USER->id, $groupformation->id, '<view_student_group_assignment>');
 
-// Trigger event TODO @Nora why?
 groupformation_trigger_event($cm, $course, $groupformation, $context);
 
 // Set PAGE config.

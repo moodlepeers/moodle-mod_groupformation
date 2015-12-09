@@ -316,5 +316,6 @@ $string['archive_activity_task'] = 'Archiving old activities';
 $string['archived_activity_answers'] = 'The activity has been archived. Your answers are no longer stored and there is nothing to do here.';
 $string['archived_activity_admin'] = 'The activity has been archived. There is nothing to do here.';
 
+$string['no_evaluation_text'] = 'There will is no evaluation for this activity.';
 $string['no_evaluation_ready'] = 'There is no evaluation for you. The evaluation of your answers is possible when you answered everything and submitted your answers.';
 $string['eval_final_text'] = 'The comparison is based on {$a->percent}% of the users answers ({$a->completed} of {$a->coursesize} users have answered already).';
