@@ -27,10 +27,9 @@ require_once(dirname(__FILE__) . '/lib.php');
 require_once(dirname(__FILE__) . '/locallib.php');
 require_once($CFG->dirroot . "/mod/groupformation/classes/controller/evaluation_controller.php");
 
-// Read URL params
-$id = optional_param('id', 0, PARAM_INT); // Course Module ID
-// 	$g = optional_param ( 'g', 0, PARAM_INT ); // groupformation instance ID
-$do_show = optional_param('do_show', 'evaluation', PARAM_TEXT);
+// Read URL params.
+$id = optional_param('id', 0, PARAM_INT);
+$doshow = optional_param('do_show', 'evaluation', PARAM_TEXT);
 
 // Import jQuery and js file.
 groupformation_add_jquery($PAGE, 'survey_functions.js');
@@ -49,14 +48,14 @@ if (has_capability('mod/groupformation:editsettings', $context)) {
     $returnurl = new moodle_url('/mod/groupformation/analysis_view.php', array('id' => $id, 'do_show' => 'analysis'));
     redirect($returnurl);
 } else {
-    $current_tab = $do_show;
+    $currenttab = $doshow;
 }
 
 // Log access to page.
 groupformation_info($USER->id, $groupformation->id, '<view_student_evaluation>');
 
 // Set PAGE config.
-$PAGE->set_url('/mod/groupformation/evaluation_view.php', array('id' => $cm->id, 'do_show' => $do_show));
+$PAGE->set_url('/mod/groupformation/evaluation_view.php', array('id' => $cm->id, 'do_show' => $doshow));
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 

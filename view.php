@@ -27,10 +27,10 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/controller/student_overview_controller.php');
 
-// Read URL params
-$id = optional_param('id', 0, PARAM_INT); // Course Module ID
+// Read URL params.
+$id = optional_param('id', 0, PARAM_INT); // Course Module ID.
 
-$do_show = optional_param('do_show', 'view', PARAM_TEXT);
+$doshow = optional_param('do_show', 'view', PARAM_TEXT);
 $back = optional_param('back', 0, PARAM_INT);
 
 // Import jQuery and js file.
@@ -51,23 +51,23 @@ if (has_capability('mod/groupformation:editsettings', $context)) {
         'id' => $id, 'do_show' => 'analysis'));
     redirect($returnurl);
 } else {
-    $current_tab = $do_show;
+    $currenttab = $doshow;
 }
 
 // Log access to page.
 groupformation_info($USER->id, $groupformation->id, '<view_student_overview>');
 
 $store = new mod_groupformation_storage_manager ($groupformation->id);
-$groups_store = new mod_groupformation_groups_manager ($groupformation->id);
-$user_manager = new mod_groupformation_user_manager ($groupformation->id);
+$groupsmanager = new mod_groupformation_groups_manager ($groupformation->id);
+$usermanager = new mod_groupformation_user_manager ($groupformation->id);
 
-if ($user_manager->is_completed($userid)) {
+if ($usermanager->is_completed($userid)) {
     groupformation_set_activity_completion($course, $cm, $userid);
 }
 
 // Set PAGE config.
 $PAGE->set_url('/mod/groupformation/view.php', array(
-    'id' => $cm->id, 'do_show' => $do_show));
+    'id' => $cm->id, 'do_show' => $doshow));
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 
@@ -90,7 +90,7 @@ if ($begin == 1) {
         }
     }
 } else {
-    $user_manager->change_status($userid, 1);
+    $usermanager->change_status($userid, 1);
     $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
         'id' => $id));
 

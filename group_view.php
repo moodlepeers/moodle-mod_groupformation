@@ -27,10 +27,9 @@ require_once(dirname(__FILE__) . '/lib.php');
 require_once(dirname(__FILE__) . '/locallib.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/controller/student_group_view_controller.php');
 
-// Read URL params
-$id = optional_param('id', 0, PARAM_INT); // Course Module ID
-// 	$g = optional_param ( 'g', 0, PARAM_INT ); // groupformation instance ID
-$do_show = optional_param('do_show', 'group', PARAM_TEXT);
+// Read URL params.
+$id = optional_param('id', 0, PARAM_INT);
+$doshow = optional_param('do_show', 'group', PARAM_TEXT);
 
 
 // Import jQuery and js file.
@@ -50,16 +49,14 @@ if (has_capability('mod/groupformation:editsettings', $context)) {
     $returnurl = new moodle_url('/mod/groupformation/analysis_view.php', array('id' => $id, 'do_show' => 'analysis'));
     redirect($returnurl);
 } else {
-    $current_tab = $do_show;
+    $currenttab = $doshow;
 }
 
 // Log access to page.
 groupformation_info($USER->id, $groupformation->id, '<view_student_group_assignment>');
 
-groupformation_trigger_event($cm, $course, $groupformation, $context);
-
 // Set PAGE config.
-$PAGE->set_url('/mod/groupformation/group_view.php', array('id' => $cm->id, 'do_show' => $do_show));
+$PAGE->set_url('/mod/groupformation/group_view.php', array('id' => $cm->id, 'do_show' => $doshow));
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 
@@ -70,14 +67,15 @@ require('tabs.php');
 
 // Conditions to show the intro can change to look for own settings or whatever.
 if ($groupformation->intro) {
-    echo $OUTPUT->box(format_module_intro('groupformation', $groupformation, $cm->id), 'generalbox mod_introbox', 'groupformationintro');
+    echo $OUTPUT->box(
+        format_module_intro('groupformation', $groupformation, $cm->id), 'generalbox mod_introbox', 'groupformationintro');
 }
 
 $userid = $USER->id;
 if ($store->is_archived()) {
     echo '<div class="alert" id="commited_view">' . get_string('archived_activity_answers', 'groupformation') . '</div>';
 } else {
-    $groupInfo = new mod_groupformation_student_group_view_controller($groupformation->id);
-    echo $groupInfo->render($userid);
+    $groupinfo = new mod_groupformation_student_group_view_controller($groupformation->id);
+    echo $groupinfo->render($userid);
 }
 echo $OUTPUT->footer();

@@ -39,7 +39,7 @@ class mod_groupformation_data {
             "evaluation" => true,
             "labels" => array(
                 "extraversion" => array(
-                    "scenarios" => array(1=>false,2 => false),
+                    "scenarios" => array(1 => false, 2 => false),
                     "evaluation" => true,
                     "questionids" => array(-1, 6),
                     "significant_id_only" => false,
@@ -272,12 +272,13 @@ class mod_groupformation_data {
      */
     public function get_label_set($scenario) {
         $labels = array();
-        foreach($this->criteria as $label => $criterion) {
+        foreach ($this->criteria as $label => $criterion) {
             $scenarios = $criterion["scenarios"];
-            if (in_array($scenario,$scenarios)){
-                $labels[]=$label;
+            if (in_array($scenario, $scenarios)) {
+                $labels[] = $label;
             }
         }
+
         return $labels;
     }
 

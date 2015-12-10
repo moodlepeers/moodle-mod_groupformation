@@ -41,7 +41,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
      *
      * @see moodleform::definition()
      */
-    function definition() {
+    public function definition() {
         global $PAGE, $USER;
 
         $this->store = new mod_groupformation_storage_manager ($this->_instance);
@@ -122,8 +122,6 @@ class mod_groupformation_mod_form extends moodleform_mod {
         $features->groupmembersonly = true;
 
         $this->standard_coursemodule_elements($features);
-        // Add standard elements, common to all modules.
-        // 		$this->standard_coursemodule_elements ();
 
         $this->apply_admin_defaults();
 
@@ -136,7 +134,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
      *
      * @see moodleform_mod::validation()
      */
-    function validation($data, $files) {
+    public function validation($data, $files) {
         $errors = array();
 
         // Check the password for beta version.
@@ -149,7 +147,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
             $errors ['szenario'] = get_string('scenario_error', 'groupformation');
         }
 
-        // check if groupname is too long.
+        // Check if groupname is too long.
         if (strlen($data ['groupname']) > 100) {
             $errors ['groupname'] = get_string('groupname_error', 'groupformation');
         }
@@ -176,6 +174,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
         ) {
             $errors ['maxpoints'] = get_string('maxpoints_error', 'groupformation');
         }
+
         return $errors;
     }
 
@@ -184,7 +183,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
      *
      * @param unknown $mform
      */
-    function generate_html_for_js(&$mform) {
+    private function generate_html_for_js(&$mform) {
         global $PAGE;
         // Open div tag for js related content.
         $mform->addElement('html', '<div id="js-content" style="display:none;">');
@@ -193,55 +192,47 @@ class mod_groupformation_mod_form extends moodleform_mod {
         // Add scenario related HTML.
         $mform->addElement('html', '
                     <div class="gf_settings_pad">
-                            <div class="gf_pad_header">' . get_string('scenario_description', 'groupformation') . '
-                                <span class="required"></span>
-                            </div>
-				
-							<div class="js_errors" id="szenario_error">
-		                            <p></p>
-		                    </div>
-			
+                <div class="gf_pad_header">' . get_string('scenario_description', 'groupformation') . '
+                    <span class="required"></span>
+                </div>
+                <div class="js_errors" id="szenario_error">
+                    <p></p>
+                </div>
 
-		                    <div id="szenarioradios">
-		                        <div class="grid gf_grid_m_minus">
-					
-		                            <div class="col_m_33">
-					
-		                                <input type="radio" name="js_szenario" id="project" value="project"  />
-		                                <label class="col_m_100 szenarioLabel" id="label_project" for="project" ><div class="sz_header">' .
-                                 get_string('scenario_projectteams', 'groupformation')
-                                 /*. '<span class="toolt" tooltip="' . get_string ( 'scenario_projectteams_description', 'groupformation' ) . '"></span>' */ . '</div>
-		                                    <p><small>' .
-                                 get_string('scenario_projectteams_description', 'groupformation') . '</small></p>
+                <div id="szenarioradios">
+                    <div class="grid gf_grid_m_minus">
+                    <div class="col_m_33">
+                        <input type="radio" name="js_szenario" id="project" value="project"  />
+                        <label class="col_m_100 szenarioLabel" id="label_project" for="project" ><div class="sz_header">' .
+            get_string('scenario_projectteams', 'groupformation')
+            /*. '<span class="toolt" tooltip="' .
+            get_string ( 'scenario_projectteams_description', 'groupformation' ) .
+            '"></span>' */
+            . '</div><p><small>' .
+            get_string('scenario_projectteams_description', 'groupformation') . '</small></p>
 		                                </label>
-		                            </div>
-					
-		                            <div class="col_m_33">
-					
-		                                <input type="radio" name="js_szenario" id="homework" value="homework" />
-		                                <label class="col_m_100 szenarioLabel" id="label_homework" for="homework" ><div class="sz_header">' .
-                                 get_string('scenario_homeworkgroups', 'groupformation') . '</div>
-		                                    <p><small>' .
-                                 get_string('scenario_homeworkgroups_description', 'groupformation') . '</small></p>
-		                                </label>
-		                            </div>
-					
-		                            <div class="col_m_33">
-					
-		                                <input type="radio" name="js_szenario"  value="presentation" disabled />
-		                                <label class="col_m_100 szenarioLabel" for="presentation"><div class="sz_header">' .
-                                 get_string('scenario_presentationgroups', 'groupformation') . '</div>
-		                                    <p><small>' .
-                                 get_string('scenario_presentationgroups_description', 'groupformation') . '</small></p>
-		                                </label>
-		                            </div>
-					
-		                        </div> <!-- /grid  -->
-		                    </div> <!-- /szenarioRadios -->
-
-                	</div> <!-- /gf_setting_pad -->
-
-	        		');
+                </div>
+                <div class="col_m_33">
+                    <input type="radio" name="js_szenario" id="homework" value="homework" />
+                    <label class="col_m_100 szenarioLabel" id="label_homework" for="homework" ><div class="sz_header">' .
+            get_string('scenario_homeworkgroups', 'groupformation') .
+            '</div>
+                        <p><small>' .
+            get_string('scenario_homeworkgroups_description', 'groupformation') . '</small></p>
+                    </label>
+                </div>
+                         <div class="col_m_33">
+                            <input type="radio" name="js_szenario"  value="presentation" disabled />
+                            <label class="col_m_100 szenarioLabel" for="presentation"><div class="sz_header">' .
+            get_string('scenario_presentationgroups', 'groupformation') . '</div>
+                                <p><small>' .
+            get_string('scenario_presentationgroups_description', 'groupformation') . '</small></p>
+                            </label>
+                        </div>
+                    </div> <!-- /grid  -->
+                </div> <!-- /szenarioRadios -->
+            </div> <!-- /gf_setting_pad -->
+		');
 
         // Wrapper of the szenario.
         $mform->addElement('html', '<div id="js_szenarioWrapper">');
@@ -260,104 +251,93 @@ class mod_groupformation_mod_form extends moodleform_mod {
         // Add dynamic input fields preknowledge and Preview.
         $mform->addElement('html', '
 					<div class="gf_pad_content" id="js_knowledgeWrapper">
-
-                       <!-- <p>' . get_string('knowledge_description_extended', 'groupformation') . '</p> -->
-
-						<p id="knowledeInfo"></p>
-				
+					<!-- <p>' . get_string('knowledge_description_extended', 'groupformation') . '</p> -->
+                       <p id="knowledeInfo"></p>
 						<p id="knowledeInfoProject" style="display:none;">' .
-                                 get_string('knowledge_info_project', 'groupformation') . '</p>
-                        
+            get_string('knowledge_info_project', 'groupformation') . '</p>
                         <p id="knowledeInfoHomework" style="display:none;">' .
-                                 get_string('knowledge_info_homework', 'groupformation') . '</p>
-                        
-                        <p id="knowledeInfoPresentation" style="display:none;">' .
-                                 get_string('knowledge_info_presentation', 'groupformation') . '</p>
-
-				        <p id="stringAddInput" style="display:none;">' . get_string('add_line', 'groupformation') . '</p>
-				
-                            <div class="grid">
-                            <div id="prk">    
-                            <div class="multi_field_wrapper persist-area">
+            get_string('knowledge_info_homework', 'groupformation') . '</p>
+            <p id="knowledeInfoPresentation" style="display:none;">' .
+            get_string('knowledge_info_presentation', 'groupformation') . '</p>
+            <p id="stringAddInput" style="display:none;">' . get_string('add_line', 'groupformation') . '</p>
+            <div class="grid">
+            <div id="prk">
+            <div class="multi_field_wrapper persist-area">
                                 <div class="col_m_50">
-                                <!-- <div id="" class="btn_wrap">
-                                    <label>
-                                        <button type="button" class="add_field gf_button gf_button_circle gf_button_small"></button>' .
-                                 get_string('add_line', 'groupformation') . '</label>
+            <!-- <div id="" class="btn_wrap">
+            <label>
+            <button type="button" class="add_field gf_button gf_button_circle gf_button_small"></button>' .
+            get_string('add_line', 'groupformation') . '</label>
                                 </div> -->
-                                   
-                                                                    
-<!--                      Die Input Felder-->
-                                <h5>' . get_string('input', 'groupformation') . '</h5>
-                                    
-                                        <div class="multi_fields">
-                                            <div class="multi_field" id="inputprk0">
-                                                <input class="respwidth js_preknowledgeInput" type="text">
-                                                <button type="button" class="remove_field gf_button gf_button_circle gf_button_small"></button>
-                                            </div>
-                                            <div class="multi_field" id="inputprk1">
-                                                <input class="respwidth js_preknowledgeInput" type="text">
-                                                <button type="button" class="remove_field gf_button gf_button_circle gf_button_small"></button>
-                                            </div>
-                                            <div class="multi_field" id="inputprk2">
-                                                <input class="respwidth js_preknowledgeInput lastInput" type="text" placeholder="' .
-                                 get_string('add_line', 'groupformation') . '">
-                                                <button type="button" class="remove_field gf_button gf_button_circle gf_button_small" disabled="disabled"></button>
-                                            </div>
-                                        </div>
-                                    </div> <!-- /col_50 -->   
-                                    
-<!--                      Die Vorschau      -->
-                                    <div class="col_m_50">
-                                        
-                                        <h5>' . get_string('preview', 'groupformation') . '</h5>
-                    
-                                            <div class="col_m_100">' .
-                                 // '<h4 class="view_on_mobile">'.get_string('knowledge_question','groupformation').'</h4>'.
+                <h5>' . get_string('input', 'groupformation') . '</h5>
+                <div class="multi_fields">
+                    <div class="multi_field" id="inputprk0">
+                        <input class="respwidth js_preknowledgeInput" type="text">
+                        <button type="button" class="remove_field gf_button gf_button_circle gf_button_small"></button>
+                    </div>
+                    <div class="multi_field" id="inputprk1">
+                        <input class="respwidth js_preknowledgeInput" type="text">
+                        <button type="button" class="remove_field gf_button gf_button_circle gf_button_small"></button>
+                    </div>
+                    <div class="multi_field" id="inputprk2">
+                        <input class="respwidth js_preknowledgeInput lastInput" type="text" placeholder="' .
+            get_string('add_line', 'groupformation') . '">
+                        <button type="button" class="remove_field gf_button gf_button_circle gf_button_small" disabled="disabled">
+                        </button>
+                    </div>
+                        </div>
+                    </div> <!-- /col_50 -->
+                    <!-- Die Vorschau      -->
+                    <div class="col_m_50">
+                        <h5>' . get_string('preview', 'groupformation') . '</h5>
+                    <div class="col_m_100">' .
+            /* '<h4 class="view_on_mobile">'.get_string('knowledge_question','groupformation').'</h4>'. */
 
-                                 '<table class="responsive-table">
-                                                    <colgroup>
-                                                        <col class="firstCol">
-                                                        <col width="36%">
-                                                    </colgroup>
+            '<table class="responsive-table">
+            <colgroup><col class="firstCol">
+                <col width="36%">
+            </colgroup>
 
-                                                    <thead>
-                                                      <tr>
-                                                          <th scope="col">' .
-                                 get_string('knowledge_question', 'groupformation') . '</th>
-                                                        <th scope="col"><div class="legend">' .
-                                 get_string('knowledge_scale', 'groupformation') . '</div></th>
-                                                      </tr>
-                                                    </thead>
-                                                    <tbody id="preknowledges">
-                                                      <tr class="knowlRow" id="prkRow0">
-                                                        <th scope="row">' .
-                                 get_string('knowledge_dummy', 'groupformation') . ' 1</th>
-                                                        <td data-title="' .
-                                 get_string('knowledge_scale', 'groupformation') . '" class="range"><span >0</span><input type="range" min="0" max="100" value="0" /><span>100</span></td>
-                                                      </tr>
-                                                    <tr class="knowlRow" id="prkRow1">
-                                                        <th scope="row">' .
-                                 get_string('knowledge_dummy', 'groupformation') . ' 2</th>
-                                                        <td data-title="' .
-                                 get_string('knowledge_scale', 'groupformation') . '" class="range"><span >0</span><input type="range" min="0" max="100" value="0" /><span>100</span></td>
-                                                      </tr>
-                                                    <tr class="knowlRow" id="prkRow2">
-                                                        <th scope="row">' .
-                                 get_string('knowledge_dummy', 'groupformation') . ' 3</th>
-                                                        <td data-title="' .
-                                 get_string('knowledge_scale', 'groupformation') . '" class="range"><span >0</span><input type="range" min="0" max="100" value="0" /><span>100</span></td>
-                                                      </tr>
-                                                    </tbody>
-                                                  </table>
-                                            </div>
+            <thead>
+              <tr>
+            <th scope="col">' .
+            get_string('knowledge_question', 'groupformation') . '</th>
+            <th scope="col"><div class="legend">' .
+            get_string('knowledge_scale', 'groupformation') . '</div></th>
+            </tr>
+            </thead>
+            <tbody id="preknowledges">
+            <tr class="knowlRow" id="prkRow0">
+            <th scope="row">' .
+            get_string('knowledge_dummy', 'groupformation') . ' 1</th>
+                                            <td data-title="' .
+            get_string('knowledge_scale', 'groupformation') . '" class="range"><span >0</span>
+            <input type="range" min="0" max="100" value="0" /><span>100</span></td>
+                                          </tr>
+                                        <tr class="knowlRow" id="prkRow1">
+                                            <th scope="row">' .
+            get_string('knowledge_dummy', 'groupformation') . ' 2</th>
+                                            <td data-title="' .
+            get_string('knowledge_scale', 'groupformation') . '" class="range"><span >0</span>
+            <input type="range" min="0" max="100" value="0" /><span>100</span></td>
+                                          </tr>
+                                        <tr class="knowlRow" id="prkRow2">
+                                            <th scope="row">' .
+            get_string('knowledge_dummy', 'groupformation') . ' 3</th>
+                                            <td data-title="' .
+            get_string('knowledge_scale', 'groupformation') . '" class="range"><span >0</span>
+            <input type="range" min="0" max="100" value="0" /><span>100</span></td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                </div>
 
-                                    </div> <!-- /col_50 --> 
-                                </div>  <!-- /multi_field_wrapper-->
-                                </div> <!-- Anchor-->
-                                
-                            </div> <!-- /.grid -->
-                        </div> <!-- /.js_knowledgeWrapper -->
+                        </div> <!-- /col_50 -->
+                    </div>  <!-- /multi_field_wrapper-->
+                    </div> <!-- Anchor-->
+
+                </div> <!-- /.grid -->
+            </div> <!-- /.js_knowledgeWrapper -->
                 ');
 
         // Close wrapper for preknowledge.
@@ -371,11 +351,12 @@ class mod_groupformation_mod_form extends moodleform_mod {
                         <div class="gf_pad_header">
                             <label class="gf_label" for="id_js_topics">
                               <input type="checkbox" id="id_js_topics" name="chbTopics" value="wantTopics">
-                              ' . get_string('topics_description', 'groupformation') . '</label><span id="topicsStateLabel" class="optional"></span>
+                              ' . get_string('topics_description', 'groupformation') . '</label>
+                              <span id="topicsStateLabel" class="optional"></span>
                         </div>');
 
         // Add dynamic input fields topics with preview.
-        		$mform->addElement('html', '
+        $mform->addElement('html', '
                             <div class="gf_pad_content" id="js_topicsWrapper">
 
                                 <p>' . get_string('topics_description_extended', 'groupformation') . '</p>
@@ -387,23 +368,24 @@ class mod_groupformation_mod_form extends moodleform_mod {
 
 
         <!--                      Die Input Felder-->
-                                            <h5>' . get_string('input', 'groupformation') . '</h5>
-                                                <div class="multi_fields">
-                                                    <div class="multi_field" id="inputtpc0">
-                                                        <input class="respwidth js_topicInput" type="text">
-                                                        <button type="button" class="remove_field gf_button gf_button_circle gf_button_small"></button>
-                                                    </div>
-                                                    <div class="multi_field" id="inputtpc1">
-                                                        <input class="respwidth js_topicInput" type="text">
-                                                        <button type="button" class="remove_field gf_button gf_button_circle gf_button_small"></button>
-                                                    </div>
-                                                    <div class="multi_field" id="inputtpc2">
-                                                        <input class="respwidth js_topicInput lastInput" type="text" placeholder="' .
-                                         get_string('add_line', 'groupformation') . '">
-                                                        <button type="button" class="remove_field gf_button gf_button_circle gf_button_small" disabled="disabled"></button>
-                                                    </div>
-                                                </div>
-                                            </div> <!-- /col_50 -->
+        <h5>' . get_string('input', 'groupformation') . '</h5>
+            <div class="multi_fields">
+                <div class="multi_field" id="inputtpc0">
+                    <input class="respwidth js_topicInput" type="text">
+                    <button type="button" class="remove_field gf_button gf_button_circle gf_button_small"></button>
+                </div>
+                <div class="multi_field" id="inputtpc1">
+                    <input class="respwidth js_topicInput" type="text">
+                    <button type="button" class="remove_field gf_button gf_button_circle gf_button_small"></button>
+                </div>
+                <div class="multi_field" id="inputtpc2">
+                    <input class="respwidth js_topicInput lastInput" type="text" placeholder="' .
+            get_string('add_line', 'groupformation') . '">
+            <button type="button" class="remove_field gf_button gf_button_circle gf_button_small" disabled="disabled">
+                    </button>
+                </div>
+            </div>
+        </div> <!-- /col_50 -->
 
         <!--                      Die Vorschau      -->
                                             <div class="col_m_50">
@@ -412,17 +394,17 @@ class mod_groupformation_mod_form extends moodleform_mod {
 
                                                 <div class="col_m_100">' .
 
-                                         '<p id="topicshead">' . get_string('topics_question', 'groupformation') . '</p>
-        											<span id="topicsDummy" style="display:none;">' .
-                                         get_string('topics_dummy', 'groupformation') . '</span>
-                                                    <ul class="sortable_topics" id="previewTopics">
-                                                      <li class="topicLi" id="tpcRow0" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' .
-                                         get_string('topics_dummy', 'groupformation') . '1</li>
-                                                      <li class="topicLi" id="tpcRow1" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' .
-                                         get_string('topics_dummy', 'groupformation') . '2</li>
-                                                      <li class="topicLi" id="tpcRow2" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' .
-                                         get_string('topics_dummy', 'groupformation') . '3</li>
-                                                    </ul>
+                '<p id="topicshead">' . get_string('topics_question', 'groupformation') . '</p>
+                    <span id="topicsDummy" style="display:none;">' .
+                get_string('topics_dummy', 'groupformation') . '</span>
+                    <ul class="sortable_topics" id="previewTopics">
+                      <li class="topicLi" id="tpcRow0" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' .
+                get_string('topics_dummy', 'groupformation') . '1</li>
+                      <li class="topicLi" id="tpcRow1" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' .
+                get_string('topics_dummy', 'groupformation') . '2</li>
+                      <li class="topicLi" id="tpcRow2" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' .
+                get_string('topics_dummy', 'groupformation') . '3</li>
+                    </ul>
                                                </div>
                                             </div> <!-- /col_50 -->
                                         </div>  <!-- /multi_field_wrapper-->
@@ -442,8 +424,8 @@ class mod_groupformation_mod_form extends moodleform_mod {
         $mform->addElement('html', '
 
                 <div class="gf_pad_header">' . get_string('groupoption_description', 'groupformation') .
-                                 '<span class="required"></span><span class="toolt" tooltip="' .
-                                 get_string('groupoption_help', 'groupformation') . '"></span>
+            '<span class="required"></span><span class="toolt" tooltip="' .
+            get_string('groupoption_help', 'groupformation') . '"></span>
 
                 </div>
 
@@ -465,15 +447,16 @@ class mod_groupformation_mod_form extends moodleform_mod {
         $count = count(get_enrolled_users($context, 'mod/groupformation:onlystudent'));
 
         $mform->addElement('html', $count . '</b></span> ' . get_string('students_enrolled_info', 'groupformation') . '</p>
-                    <div class="grid">
-                    <div class="col_m_50"><label><input type="radio" name="group_opt" id="group_opt_size" value="group_size" checked="checked" />
-                                ' . get_string('maxmembers', 'groupformation') . '</label>
-								<input type="number" class="group_opt" id="group_size" min="0" max="100" value="0" /></div>
-                    <div class="col_m_50"><label><input type="radio" name="group_opt" id="group_opt_numb" value="numb_of_groups"/>
-                                ' . get_string('maxgroups', 'groupformation') . '</label>
-								<input type="number" class="group_opt" id="numb_of_groups"  min="0" max="100" value="0" disabled="disabled" /></div>
-                </div>
-                </div> <!-- /grid -->
+            <div class="grid">
+            <div class="col_m_50"><label>
+            <input type="radio" name="group_opt" id="group_opt_size" value="group_size" checked="checked" />
+            ' . get_string('maxmembers', 'groupformation') . '</label>
+            <input type="number" class="group_opt" id="group_size" min="0" max="100" value="0" /></div>
+            <div class="col_m_50"><label><input type="radio" name="group_opt" id="group_opt_numb" value="numb_of_groups"/>
+            ' . get_string('maxgroups', 'groupformation') . '</label>
+            <input type="number" class="group_opt" id="numb_of_groups"  min="0" max="100" value="0" disabled="disabled" /></div>
+            </div>
+            </div> <!-- /grid -->
                 ');
 
         // Close wrapper for Groupsize Options.
@@ -485,9 +468,9 @@ class mod_groupformation_mod_form extends moodleform_mod {
         $mform->addElement('html', '
                 <div class="gf_pad_header">' .
 
-                                 get_string('groupname', 'groupformation') .
-                                 '<span class="optional"></span><span class="toolt" tooltip="' .
-                                 get_string('groupname_help', 'groupformation') . '"></span>
+            get_string('groupname', 'groupformation') .
+            '<span class="optional"></span><span class="toolt" tooltip="' .
+            get_string('groupname_help', 'groupformation') . '"></span>
                 </div>
                 <div class="gf_pad_content">
                     <input type="text" class="respwidth" id="js_groupname" />
@@ -502,30 +485,27 @@ class mod_groupformation_mod_form extends moodleform_mod {
 
         // Add evaluation options.
         $mform->addElement('html', '
-                
-                <div class="gf_pad_header">' . get_string('evaluationmethod_description', 'groupformation') . '<span class="required"></span>
+            <div class="gf_pad_header">' . get_string('evaluationmethod_description', 'groupformation') . '
+            <span class="required"></span>
+            </div>
+            <div class="js_errors" id="evaluationmethod_error">
+                        <p></p>
                 </div>
-				
-					<div class="js_errors" id="evaluationmethod_error">
-                            <p></p>
-                    </div>
-
-                    <div class="js_errors" id="maxpoints_error">
-                            <p></p>
-                    </div>
-				
-				
-                    <div class="gf_pad_content">
-                        <select id="js_evaluationmethod">
-							<option value="chooseM">' . get_string('choose_evaluationmethod', 'groupformation') . '</option>
-                            <option value="grades">' . get_string('grades', 'groupformation') . '</option>
-                            <option value="points">' . get_string('points', 'groupformation') . '</option>
-                            <option value="justpass">' . get_string('justpass', 'groupformation') . '</option>
-                            <option value="novaluation">' . get_string('noevaluation', 'groupformation') . '</option>
-                        </select>
-						<span id="max_points_wrapper"><input type="number" id="max_points"  min="0" max="100" value="100" /><span class="toolt" tooltip="' .
-                                 get_string('evaluation_point_info', 'groupformation') . '"></span></span>
-                    </div>
+                <div class="js_errors" id="maxpoints_error">
+                        <p></p>
+                </div>
+                <div class="gf_pad_content">
+                    <select id="js_evaluationmethod">
+                        <option value="chooseM">' . get_string('choose_evaluationmethod', 'groupformation') . '</option>
+                        <option value="grades">' . get_string('grades', 'groupformation') . '</option>
+                        <option value="points">' . get_string('points', 'groupformation') . '</option>
+                        <option value="justpass">' . get_string('justpass', 'groupformation') . '</option>
+                        <option value="novaluation">' . get_string('noevaluation', 'groupformation') . '</option>
+                    </select>
+                    <span id="max_points_wrapper"><input type="number" id="max_points"  min="0" max="100" value="100" />
+                    <span class="toolt" tooltip="' .
+        get_string('evaluation_point_info', 'groupformation') . '"></span></span>
+                </div>
                 ');
 
         // Close wrapper for evaluation options.
@@ -533,20 +513,21 @@ class mod_groupformation_mod_form extends moodleform_mod {
 
         // Add checkbox only-active-students.
         $mform->addElement('html', '
-                    <div class="gf_pad_header">
-						<label class="gf_label" for="id_js_onlyactivestudents">
-                          <input type="checkbox" id="id_js_onlyactivestudents" name="chbOnlyactivestudents" value="onlyactivestudents">
-                          ' . get_string('onlyactivestudents_description', 'groupformation') .
-                                 '</label><span id="onlyactivestudentsStateLabel" class="optional"></span><span class="toolt" tooltip="' .
-                                 get_string('groupoption_onlyactivestudents', 'groupformation') . '"></span>
-                    </div>');
+            <div class="gf_pad_header">
+                <label class="gf_label" for="id_js_onlyactivestudents">
+                  <input type="checkbox" id="id_js_onlyactivestudents" name="chbOnlyactivestudents" value="onlyactivestudents">
+                  ' . get_string('onlyactivestudents_description', 'groupformation') .
+            '</label><span id="onlyactivestudentsStateLabel" class="optional"></span><span class="toolt" tooltip="' .
+            get_string('groupoption_onlyactivestudents', 'groupformation') . '"></span>
+                            </div>');
 
         // Add checkbox email-notification.
-         $mform->addElement('html', '
+        $mform->addElement('html', '
                     <div class="gf_pad_header">
-						<label class="gf_label" for="id_js_emailnotifications">
-                          <input type="checkbox" id="id_js_emailnotifications" name="chbEmailnotifications" value="wantEmailnotifications">
-                          ' . get_string('emailnotifications_description', 'groupformation') . '</label><span id="emailnotificationsStateLabel" class="optional"></span>
+                <label class="gf_label" for="id_js_emailnotifications">
+                  <input type="checkbox" id="id_js_emailnotifications" name="chbEmailnotifications" value="wantEmailnotifications">
+                  ' . get_string('emailnotifications_description', 'groupformation') . '</label>
+                  <span id="emailnotificationsStateLabel" class="optional"></span>
                     </div>');
 
         // Close wrapper of the szenario.
@@ -561,7 +542,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
      *
      * @param moodleform_mod $mform
      */
-    function generate_html_for_non_js(&$mform) {
+    public function generate_html_for_non_js(&$mform) {
         $changemsg = '<div class="fitem" id="nochangespossible"';
         if (!$this->store->is_editable()) {
             $changemsg .= ' ><span value="1"';
@@ -585,23 +566,21 @@ class mod_groupformation_mod_form extends moodleform_mod {
         // Add fields for Knowledge questions.
         $mform->addElement('checkbox', 'knowledge', get_string('knowledge', 'groupformation'));
         $mform->addElement('textarea', 'knowledgelines', get_string('knowledge', 'groupformation'),
-                           'wrap="virtual" rows="10" cols="50"');
+            'wrap="virtual" rows="10" cols="50"');
 
         $mform->disabledIf('knowledgelines', 'knowledge', 'notchecked');
 
         // Add fields for topic choices.
         $mform->addElement('checkbox', 'topics', get_string('topics', 'groupformation'));
         $mform->addElement('textarea', 'topiclines', get_string('topics', 'groupformation'),
-                           'wrap="virtual" rows="10" cols="50"');
+            'wrap="virtual" rows="10" cols="50"');
 
         $mform->disabledIf('topiclines', 'topics', 'notchecked');
 
         // Add fields for max members or max groups.
         $radioarray = array();
-        $radioarray [] = &
-            $mform->createElement('radio', 'groupoption', '', get_string('maxmembers', 'groupformation'), 0, null);
-        $radioarray [] = &
-            $mform->createElement('radio', 'groupoption', '', get_string('maxgroups', 'groupformation'), 1, null);
+        $radioarray [] = &$mform->createElement('radio', 'groupoption', '', get_string('maxmembers', 'groupformation'), 0, null);
+        $radioarray [] = &$mform->createElement('radio', 'groupoption', '', get_string('maxgroups', 'groupformation'), 1, null);
         $mform->addGroup($radioarray, 'radioar', get_string('groupoptions', 'groupformation'), array(
             ' '), false);
         $mform->addRule('radioar', get_string('maxmembers_error', 'groupformation'), 'required', null, 'client');
@@ -628,14 +607,14 @@ class mod_groupformation_mod_form extends moodleform_mod {
 
         // Add field for evaluation method.
         $mform->addElement('select', 'evaluationmethod', get_string('evaluationmethod_description', 'groupformation'),
-                           array(
-                               get_string('choose_evaluationmethod', 'groupformation'),
-                               get_string('grades', 'groupformation'), get_string('points', 'groupformation'),
-                               get_string('justpass', 'groupformation'), get_string('noevaluation', 'groupformation')),
-                           null);
+            array(
+                get_string('choose_evaluationmethod', 'groupformation'),
+                get_string('grades', 'groupformation'), get_string('points', 'groupformation'),
+                get_string('justpass', 'groupformation'), get_string('noevaluation', 'groupformation')),
+            null);
 
         $mform->addRule('evaluationmethod', get_string('evaluationmethod_error', 'groupformation'), 'required', null,
-                        'client');
+            'client');
 
         $mform->addElement('text', 'maxpoints', get_string('maxpoints', 'groupformation'));
 

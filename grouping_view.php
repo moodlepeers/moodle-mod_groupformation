@@ -25,10 +25,9 @@ require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
 require_once(dirname(__FILE__) . '/lib.php');
 require_once(dirname(__FILE__) . '/locallib.php');
 
-// Read URL params
-$id = optional_param('id', 0, PARAM_INT); // Course Module ID
-// $g = optional_param ( 'g', 0, PARAM_INT ); // groupformation instance ID
-$do_show = optional_param('do_show', 'grouping', PARAM_TEXT);
+// Read URL params.
+$id = optional_param('id', 0, PARAM_INT);
+$doshow = optional_param('do_show', 'grouping', PARAM_TEXT);
 
 // Import jQuery and js file.
 groupformation_add_jquery($PAGE, 'survey_functions.js');
@@ -48,7 +47,7 @@ if (!has_capability('mod/groupformation:editsettings', $context)) {
         'id' => $id, 'do_show' => 'view'));
     redirect($returnurl);
 } else {
-    $current_tab = $do_show;
+    $currenttab = $doshow;
 }
 
 // Get data for HTML output.
@@ -81,9 +80,9 @@ if ($_POST) {
 // Log access to page.
 groupformation_info($USER->id, $groupformation->id, '<view_teacher_grouping>');
 
-// Set PAGE config
+// Set PAGE config.
 $PAGE->set_url('/mod/groupformation/grouping_view.php', array(
-    'id' => $cm->id, 'do_show' => $do_show));
+    'id' => $cm->id, 'do_show' => $doshow));
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 

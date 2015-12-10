@@ -28,9 +28,9 @@ require_once(dirname(__FILE__) . '/locallib.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/controller/import_export_controller.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/forms/import_form.php');
 
-// Read URL params
-$id = optional_param('id', 0, PARAM_INT); // Course Module ID.
-$do_show = optional_param('do_show', 'import_export', PARAM_TEXT);
+// Read URL params.
+$id = optional_param('id', 0, PARAM_INT);
+$doshow = optional_param('do_show', 'import_export', PARAM_TEXT);
 
 // Import jQuery and js file.
 groupformation_add_jquery($PAGE, 'settings_functions.js');
@@ -54,20 +54,20 @@ if (has_capability('mod/groupformation:editsettings', $context)) {
     $returnurl = new moodle_url('/mod/groupformation/analysis_view.php', array('id' => $id, 'do_show' => 'analysis'));
     redirect($returnurl);
 } else {
-    $current_tab = $do_show;
+    $currenttab = $doshow;
 }
 
 $store = new mod_groupformation_storage_manager($groupformation->id);
-$user_manager = new mod_groupformation_user_manager($groupformation->id);
+$usermanager = new mod_groupformation_user_manager($groupformation->id);
 
-if (!$store->is_questionnaire_available() || $user_manager->is_completed($userid)) {
+if (!$store->is_questionnaire_available() || $usermanager->is_completed($userid)) {
     $returnurl = new moodle_url('/mod/groupformation/view.php', array('id' => $id, 'do_show' => 'view'));
     redirect($returnurl);
 }
 
 
 // Set PAGE config.
-$PAGE->set_url('/mod/groupformation/import_view.php', array('id' => $cm->id, 'do_show' => $do_show));
+$PAGE->set_url('/mod/groupformation/import_view.php', array('id' => $cm->id, 'do_show' => $doshow));
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 
@@ -92,31 +92,32 @@ if (isset($_POST['cancel'])) {
     $toform = array('cmid' => $cm->id);
     $mform->set_data($toform);
 
-    $import_export_controller = new mod_groupformation_import_export_controller($groupformation->id, $cm);
+    $controller = new mod_groupformation_import_export_controller($groupformation->id, $cm);
 
     if ($fromform = $mform->get_data()) {
 
-        // In this case you process validated data. $mform->get_data() returns data posted in form.
+        // In this case you process validated data.
+        // $mform->get_data() returns data posted in form.
         if ($content = $mform->get_file_content('userfile') && ($name = $mform->get_new_filename('userfile')) &&
             (substr($name, strlen($name) - 4, 4) == '.xml')
         ) {
 
             $content = $mform->get_file_content('userfile');
             try {
-                $import_export_controller->import_xml($content);
-                $import_export_controller->render_result(true);
+                $controller->import_xml($content);
+                $controller->render_result(true);
             } catch (Exception $e) {
-                $import_export_controller->render_result(false);
+                $controller->render_result(false);
             }
         } else {
             // Render form for file upload.
-            $import_export_controller->render_form($mform, true);
+            $controller->render_form($mform, true);
         }
 
     } else {
 
         // Render form for file upload.
-        $import_export_controller->render_form($mform);
+        $controller->render_form($mform);
 
     }
 }

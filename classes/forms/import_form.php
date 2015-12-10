@@ -23,14 +23,18 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require_once("$CFG->libdir/formslib.php");
+require_once($CFG->dirroot . "/lib/formslib.php");
 
 class mod_groupformation_import_form extends moodleform {
-    // Add elements to form.
+
+    /**
+     * Adds elements to form
+     *
+     * @throws coding_exception
+     */
     public function definition() {
-        global $CFG;
-        $maxbytes = 2 * 2000000; // 2 * pow(10,8)
-        $mform = $this->_form; // Don't forget the underscore!
+        $maxbytes = 2 * 2000000;
+        $mform = $this->_form;
         $mform->addElement('filepicker', 'userfile', get_string('file'), null, array(
             'maxbytes' => $maxbytes, 'accepted_types' => '*.xml'));
 
@@ -48,8 +52,14 @@ class mod_groupformation_import_form extends moodleform {
         $mform->closeHeaderBefore('buttonar');
     }
 
-    // Custom validation should be added here.
-    function validation($data, $files) {
+    /**
+     * Custom validation should be added here.
+     *
+     * @param array $data
+     * @param array $files
+     * @return array
+     */
+    public function validation($data, $files) {
         return array();
     }
 
@@ -59,7 +69,7 @@ class mod_groupformation_import_form extends moodleform {
      * @param string $element
      * @param string $msg
      */
-    function set_error($element, $msg) {
+    public function set_error($element, $msg) {
         $this->_form->setElementError($element, $msg);
     }
 }

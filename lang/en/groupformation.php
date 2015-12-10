@@ -1,5 +1,4 @@
 ﻿<?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -15,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
 /**
- * German strings for newmodule
+ * German strings for module
  *
  * @package mod_groupformation
  * @author Nora Wester
@@ -62,7 +61,7 @@ $string ['scenarioInfo'] = 'The three scenarios differ in the way how questionaa
 $string ['groupformationsettings'] = 'Group formation settings';
 $string ['scenario_projectteams'] = 'Project teams';
 $string ['scenario_projectteams_description'] = 'Project teams work intensively together to finish a project (e.g. conduct a study, delivery of a report, etc.). Often, duties and tasks can be split among the team members. Consequently it is beneficial to have a mixture of amending comptencies in the team. Usually, such a collective work result is graded with a equal group mark for all members. Thus, groupformation aims for similar motivation and similar objectives (beside the prerequisites).';
-//$string ['scenario_projectteams_description_short'] = '<ul><li><b>Zeitraum: </b>lang</li><li><b>Zusammensetzung nach: </b>ähnliche Motivation/Zielsetzung</li><li><b>Benotung. </b>meist gemeinsam</li><li><b>Beispiele: </b>gemeinsame Ausarbeitung, Projektarbeit</li></ul>';
+
 $string ['scenario_homeworkgroups'] = 'Homework groups';
 $string ['scenario_homeworkgroups_description'] = 'Homework groups complete (smaller) assignments in regular intervals (often weekly) as a preperation for examination. Even though the assigment tasks (often called exercises, practice, control questions or homework) are principally subdividable among group members, this is not intended as with the final examination each member will be graded individually and needs to be able to solve all tasks alone. Consequently, groupformation aims for diverse prior knowledge and diverse learning styles that benefit from each other.';
 $string ['scenario_presentationgroups'] = 'Presentation groups';
@@ -284,17 +283,14 @@ $string['excellent'] = 'excellent';
 $string['none'] = 'none';
 $string['bad'] = 'bad';
 
-/* messages API */
 $string['messageprovider:submission'] = 'Notify me if group formation algo finished.';
 
 $string['cron_job_not_running'] = 'In order to handle queued jobs a cron is working in the background. Unfortunately it is either not responding or not running at all. If this message keeps appearing after 24 h please contact the system administrator.';
 
-// email notification
 $string['groupformation_message'] = 'The group formation has finished. You can now view the result.';
 $string['groupformation_subject'] = 'group formation finished';
 $string['groupformation_message_contexturlname'] = 'results';
 
-// import export functionality
 $string['import'] = 'Import';
 $string['export'] = 'Export';
 $string['export_answers'] = 'You can download all answers with anonymized user ids here: ';

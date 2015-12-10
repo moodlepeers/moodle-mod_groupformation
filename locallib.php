@@ -46,8 +46,7 @@ function groupformation_add_jquery($PAGE, $filename = null) {
 }
 
 
-
-/** TODO @Rene auskommentierter Code
+/**
  * Logs message
  *
  * @param integer $userid
@@ -120,27 +119,6 @@ function groupformation_error($userid, $groupformationid, $message) {
  */
 function groupformation_fatal($userid, $groupformationid, $message) {
     return groupformation_log($userid, $groupformationid, $message, $level = 'fatal');
-}
-
-/**
- * Triggers event
- *
- * @param stdClass $cm
- * @param stdClass $course
- * @param stdClass $groupformation
- * @param stdClass $context
- */
-function groupformation_trigger_event($cm, $course, $groupformation, $context) {
-
-    // TODO @Rene? Logging - We need to implement events to trigger
-
-    // $event = \mod_groupformation\event\job_queued::create ( array (
-    // 'objectid' => $groupformation->id,
-    // 'context' => $context
-    // ) );
-    // $event->add_record_snapshot ( 'course', $course );
-    // $event->add_record_snapshot ( $cm->modname, $groupformation );
-    // $event->trigger ();
 }
 
 /**
@@ -254,12 +232,12 @@ function groupformation_check_for_cron_job() {
  */
 function groupformation_update_questions(mod_groupformation_storage_manager $store) {
     $names = $store->get_raw_categories();
-    $xmlLoader = new mod_groupformation_xml_loader ($store);
+    $xmlloader = new mod_groupformation_xml_loader ($store);
 
     if ($store->catalog_table_not_set()) {
         foreach ($names as $category) {
             if ($category != 'topic' && $category != 'knowledge') {
-                $array = $xmlLoader->save_data($category);
+                $array = $xmlloader->save_data($category);
                 $version = $array [0] [0];
                 $numbers = $array [0] [1];
                 $store->add_catalog_version($category, $numbers, $version, true);
@@ -269,7 +247,7 @@ function groupformation_update_questions(mod_groupformation_storage_manager $sto
     } else {
         foreach ($names as $category) {
             if ($category != 'topic' && $category != 'knowledge') {
-                $xmlLoader->latest_version($category);
+                $xmlloader->latest_version($category);
             }
         }
     }

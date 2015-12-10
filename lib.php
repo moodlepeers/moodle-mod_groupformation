@@ -129,12 +129,12 @@ function groupformation_update_instance(stdClass $groupformation, mod_groupforma
     ) {
         $result = $DB->update_record('groupformation', $groupformation);
     } else {
-        $orig_record = $DB->get_record('groupformation', array(
+        $origrecord = $DB->get_record('groupformation', array(
             'id' => $groupformation->id));
-        $orig_record->groupoption = $groupformation->groupoption;
-        $orig_record->maxmembers = $groupformation->maxmembers;
-        $orig_record->maxgroups = $groupformation->maxgroups;
-        $result = $DB->update_record('groupformation', $orig_record);
+        $origrecord->groupoption = $groupformation->groupoption;
+        $origrecord->maxmembers = $groupformation->maxmembers;
+        $origrecord->maxgroups = $groupformation->maxgroups;
+        $result = $DB->update_record('groupformation', $origrecord);
     }
 
     // Get current DB record (with all DB defaults).
@@ -373,7 +373,7 @@ function groupformation_grade_item_update(stdClass $groupformation, $reset = fal
     }
 
     grade_update('mod/groupformation', $groupformation->course, 'mod', 'groupformation', $groupformation->id, 0, null,
-                 $item);
+        $item);
 }
 
 /**
@@ -388,7 +388,7 @@ function groupformation_grade_item_delete($groupformation) {
     require_once($CFG->libdir . '/gradelib.php');
 
     return grade_update('mod/groupformation', $groupformation->course, 'mod', 'groupformation', $groupformation->id, 0,
-                        null, array(
+        null, array(
             'deleted' => 1));
 }
 
@@ -406,7 +406,7 @@ function groupformation_grade_item_delete($groupformation) {
 function groupformation_update_grades(stdClass $groupformation, $userid = 0) {
     $grades = array(); // Populate array of grade objects indexed by userid. @example .
     grade_update('mod/groupformation', $groupformation->course, 'mod', 'groupformation', $groupformation->id, 0,
-                 $grades);
+        $grades);
 }
 
 /**

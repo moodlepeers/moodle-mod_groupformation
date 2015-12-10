@@ -33,13 +33,12 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/stora
 
 // Read URL params.
 $id = optional_param('id', 0, PARAM_INT);
-$do_show = optional_param('do_show', 'analysis', PARAM_TEXT);
-$export_all = optional_param('export_all', null, PARAM_TEXT);
+$doshow = optional_param('do_show', 'analysis', PARAM_TEXT);
 
-$create_users = optional_param('create_users', 0, PARAM_INT);
-$create_answers = optional_param('create_answers', false, PARAM_BOOL);
-$random_answers = optional_param('random_answers', false, PARAM_BOOL);
-$delete_users = optional_param('delete_users', false, PARAM_BOOL);
+$createusers = optional_param('create_users', 0, PARAM_INT);
+$createanswers = optional_param('create_answers', false, PARAM_BOOL);
+$randomanswers = optional_param('random_answers', false, PARAM_BOOL);
+$deleteusers = optional_param('delete_users', false, PARAM_BOOL);
 
 // Import jQuery and js file.
 groupformation_add_jquery($PAGE, 'survey_functions.js');
@@ -59,21 +58,21 @@ if (!has_capability('mod/groupformation:editsettings', $context)) {
         'id' => $id, 'do_show' => 'view'));
     redirect($return->out());
 } else {
-    $current_tab = $do_show;
+    $currenttab = $doshow;
 }
 
 /* ---------- Automated test user generation ------------ */
 
 $cqt = new mod_groupformation_test_user_generator ($cm);
 
-if ($delete_users) {
+if ($deleteusers) {
     $cqt->delete_test_users($groupformation->id);
     $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
         'id' => $id, 'do_show' => 'analysis'));
     redirect($return->out());
 }
-if ($create_users > 0) {
-    $cqt->create_test_users($create_users, $groupformation->id, $create_answers, $random_answers);
+if ($createusers > 0) {
+    $cqt->create_test_users($createusers, $groupformation->id, $createanswers, $randomanswers);
     $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
         'id' => $id, 'do_show' => 'analysis'));
     redirect($return->out());
@@ -86,7 +85,7 @@ groupformation_info($USER->id, $groupformation->id, '<view_teacher_overview>');
 
 // Set PAGE config.
 $PAGE->set_url('/mod/groupformation/analysis_view.php', array(
-    'id' => $cm->id, 'do_show' => $do_show));
+    'id' => $cm->id, 'do_show' => $doshow));
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 

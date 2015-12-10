@@ -1,5 +1,4 @@
 ﻿<?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -15,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
 /**
- * German strings for newmodule
+ * German strings for module
  *
  * @package mod_groupformation
  * @author Nora Wester
@@ -30,7 +29,6 @@ $string ['modulenameplural'] = 'Gruppenformationen';
 $string ['modulename_help'] = 'ACHTUNG: BETA-Version. Nur für Lehrende in Zusammenarbeit mit dem Projekt MoodlePeers gedacht. Erlaubt die automatische Erstellung von (Lern)-Gruppen Ihrer Teilnehmenden. Basierend auf Fragebogen-Antworten werden die Gruppen(zusammenstellungen) optimiert.';
 $string ['beta_version'] = 'ACHTUNG: BETA-Version. Nur für Lehrende in Zusammenarbeit mit dem Projekt MoodlePeers gedacht.';
 $string ['password_wrong'] = 'Das eingegebene Passwort ist falsch';
-// $string ['groupformationfieldset'] = 'Custom example fieldset';
 $string ['groupformationname'] = 'Name der Gruppenformation';
 $string ['groupformationname_help'] = 'Dieser Titel wird auf der Kursseite angezeigt.';
 $string ['groupformation'] = 'Gruppenformation';
@@ -225,7 +223,7 @@ $string['grouping_abort'] = 'Gruppenbildung abbrechen';
 $string['moodlegrouping_delete'] = 'Moodle-Gruppen l&ouml;schen';
 $string['questionnaire_commited'] = 'Ihre Antworten sind abgegeben. Somit können Sie sie nicht mehr verändern.';
 $string['no_data_to_display'] = 'Keine Daten vorhanden.';
-// $string [''] = '';
+
 $string['onlyactivestudents'] = 'Zur Gruppenbildung sollen ausschließlich Studierende betrachtet werden, die mind. eine Frage beantwortet haben.';
 $string['emailnotifications'] = 'Nach Abschluss der Gruppenbildung möchte ich via Nachricht in Moodle benachrichtigt werden.';
 $string['onlyactivestudents_description'] = 'Zur Gruppenbildung sollen ausschließlich Studierende betrachtet werden, die mind. eine Frage beantwortet haben.';
@@ -290,12 +288,10 @@ $string['bad'] = 'schlecht';
 
 $string['cron_job_not_running'] = 'Um die gestarteten Anfragen zur Gruppenbildung zu bearbeiten läuft im Hintergrund ein Cron-Daemon. Leider reagiert dieser in der letzten Zeit nicht oder ist gar außer Betrieb. Sollten Sie diese Meldung nach mehr als 24 Stunden noch immer sehen, kontaktieren Sie bitte den Systemadministrator.';
 
-// emmail benachrichtigung
 $string['groupformation_message'] = 'Die Gruppenformation ist abgeschlossen. Sie können sich nun das Ergebnis anschauen';
 $string['groupformation_message_subject'] = 'Gruppenformation abgeschlossen';
 $string['groupformation_message_contexturlname'] = 'Resultate';
 
-// import export functionality
 $string['import'] = 'Import';
 $string['export'] = 'Export';
 $string['export_answers'] = 'Sie können die Antworten mit anonymisierten Teilnehmerkennungen hier herunterladen: ';

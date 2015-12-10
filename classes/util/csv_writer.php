@@ -188,21 +188,21 @@ class mod_groupformation_csv_writer {
     }
 
     public function get_users() {
-        $group_users = $this->groupsmanager->get_group_users('userid', 'userid,groupid,groupformation');
+        $groupusers = $this->groupsmanager->get_group_users('userid', 'userid,groupid,groupformation');
         $categories = $this->store->get_categories();
-        $users = array_keys($group_users);
+        $users = array_keys($groupusers);
 
-        $user_data = array();
+        $userdata = array();
         foreach ($users as $userid) {
-            $user_data[$userid] = array();
-            $user_data[$userid]['groupformation'] = $this->groupformationid;
-            $user_data[$userid]['groupid'] = $group_users[$userid]->groupid;
+            $userdata[$userid] = array();
+            $userdata[$userid]['groupformation'] = $this->groupformationid;
+            $userdata[$userid]['groupid'] = $groupusers[$userid]->groupid;
             foreach ($categories as $category) {
-                $user_data[$userid][$category] = array();
+                $userdata[$userid][$category] = array();
                 $answers = $this->usermanager->get_answers($userid, $category, 'questionid', 'questionid,answer');
                 foreach ($answers as $answer) {
                     $questionid = $answer->questionid;
-                    $user_data[$userid][$category][$questionid] = $answer->answer;
+                    $userdata[$userid][$category][$questionid] = $answer->answer;
                 }
             }
         }
@@ -215,11 +215,12 @@ class mod_groupformation_csv_writer {
                 foreach ($categories as $category) {
                     if ($category == "knowledge" || $category == "topic") {
                         $temp = $this->store->get_knowledge_or_topic_values($category);
-                        $xml_content = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>';
-                        $options = mod_groupformation_util::xml_to_array($xml_content);
+                        $xmlcontent = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>';
+                        $options = mod_groupformation_util::xml_to_array($xmlcontent);
                         $csv .= implode(",", $options) . ",";
                     } else {
-                        $csv .= implode('_' . $category . ',', range(1, $this->store->get_number($category))) . '_' . $category . ",";
+                        $csv .= implode('_' . $category . ',', range(1, $this->store->get_number($category))) .
+                            '_' . $category . ",";
                     }
                 }
                 $csv = rtrim($csv, ",");
@@ -236,16 +237,16 @@ class mod_groupformation_csv_writer {
                     $this->usermap[$origuserid] = $next;
                     $userid = $next;
                 }
-            }else{
-                $userid =  $users[$j];
+            } else {
+                $userid = $users[$j];
             }
-            $csv .= $user_data[$origuserid]['groupformation'] . ",";
+            $csv .= $userdata[$origuserid]['groupformation'] . ",";
             $csv .= $userid . ",";
-            $csv .= $user_data[$origuserid]['groupid'] . ",";
+            $csv .= $userdata[$origuserid]['groupid'] . ",";
             foreach ($categories as $category) {
-                $number_of_questions = $this->store->get_number($category);
-                $answers = $user_data[$origuserid][$category];
-                for ($i = 1; $i <= $number_of_questions; $i++) {
+                $numberofquestions = $this->store->get_number($category);
+                $answers = $userdata[$origuserid][$category];
+                for ($i = 1; $i <= $numberofquestions; $i++) {
                     if (array_key_exists($i, $answers)) {
                         $csv .= $answers[$i] . ",";
                     } else {

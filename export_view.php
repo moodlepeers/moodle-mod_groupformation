@@ -27,33 +27,30 @@ require_once(dirname(__FILE__) . '/lib.php');
 require_once(dirname(__FILE__) . '/locallib.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/controller/import_export_controller.php');
 
-// Read URL params
-$id = optional_param('id', 0, PARAM_INT); // Course Module ID
-$do_show = optional_param('do_show', 'import_export', PARAM_TEXT);
+// Read URL params.
+$id = optional_param('id', 0, PARAM_INT);
+$doshow = optional_param('do_show', 'import_export', PARAM_TEXT);
 
-// Determine instances of course module, course, groupformation
+// Determine instances of course module, course.
 groupformation_determine_instance($id, $cm, $course, $groupformation);
 
-// Require user login if not already logged in
+// Require user login if not already logged in.
 require_login($course, true, $cm);
 
-// Get useful stuff
+// Get useful stuff.
 $context = $PAGE->context;
 $userid = $USER->id;
 
-// redirect if no access is granted for user
+// Redirect if no access is granted for user.
 if (!has_capability('mod/groupformation:editsettings', $context)) {
     $returnurl = new moodle_url('/mod/groupformation/view.php', array('id' => $id, 'do_show' => 'view'));
     redirect($returnurl);
 } else {
-    $current_tab = $do_show;
+    $currenttab = $doshow;
 }
 
-// Log access to page
-// 	groupformation_info($USER->id,$groupformation->id,'<view_student_group_assignment>');
-
-// Set PAGE config
-$PAGE->set_url('/mod/groupformation/import_export_view.php', array('id' => $cm->id, 'do_show' => $do_show));
+// Set PAGE config.
+$PAGE->set_url('/mod/groupformation/import_export_view.php', array('id' => $cm->id, 'do_show' => $doshow));
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 
@@ -62,7 +59,7 @@ echo $OUTPUT->header();
 // Print the tabs.
 require('tabs.php');
 
-$import_export_controller = new mod_groupformation_import_export_controller($groupformation->id, $cm);
-echo $import_export_controller->render_export();
+$controller = new mod_groupformation_import_export_controller($groupformation->id, $cm);
+echo $controller->render_export();
 
 echo $OUTPUT->footer();

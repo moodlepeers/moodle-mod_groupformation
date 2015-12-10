@@ -27,9 +27,9 @@ require_once(dirname(__FILE__) . '/lib.php');
 require_once(dirname(__FILE__) . '/locallib.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/controller/import_export_controller.php');
 
-// Read URL params
-$id = optional_param('id', 0, PARAM_INT); // Course Module ID
-$do_show = optional_param('do_show', 'import_export', PARAM_TEXT);
+// Read URL params.
+$id = optional_param('id', 0, PARAM_INT);
+$doshow = optional_param('do_show', 'import_export', PARAM_TEXT);
 
 // Determine instances of course module, course, groupformation.
 groupformation_determine_instance($id, $cm, $course, $groupformation);
@@ -41,11 +41,8 @@ require_login($course, true, $cm);
 $context = $PAGE->context;
 $userid = $USER->id;
 
-// Log access to page
-// 	groupformation_info($USER->id,$groupformation->id,'<view_student_group_assignment>');
-
-// Set PAGE config
-$PAGE->set_url('/mod/groupformation/import_export_view.php', array('id' => $cm->id, 'do_show' => $do_show));
+// Set PAGE config.
+$PAGE->set_url('/mod/groupformation/import_export_view.php', array('id' => $cm->id, 'do_show' => $doshow));
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 
@@ -56,7 +53,7 @@ require('tabs.php');
 if ($store->is_archived()) {
     echo '<div class="alert" id="commited_view">' . get_string('archived_activity_answers', 'groupformation') . '</div>';
 } else {
-    $import_export_controller = new mod_groupformation_import_export_controller($groupformation->id, $cm);
-    echo $import_export_controller->render_overview($userid);
+    $controller = new mod_groupformation_import_export_controller($groupformation->id, $cm);
+    echo $controller->render_overview($userid);
 }
 echo $OUTPUT->footer();
