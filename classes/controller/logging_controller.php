@@ -42,15 +42,15 @@ class mod_groupformation_logging_controller {
 
         '<view_settings>' => 3, '<save_settings>' => 3,
 
-        '<view_student_overview>' => 3, '<view_student_questionaire>' => 3, '<view_student_evaluation>' => 3,
+        '<view_student_overview>' => 3, '<view_student_questionnaire>' => 3, '<view_student_evaluation>' => 3,
         '<view_student_group_assignment>' => 3,
 
-        '<view_teacher_overview>' => 3, '<view_teacher_grouping>' => 3, '<view_teacher_questionaire_preview>' => 3,
+        '<view_teacher_overview>' => 3, '<view_teacher_grouping>' => 3, '<view_teacher_questionnaire_preview>' => 3,
 
-        '<view_questionaire_category_topic>' => 3, '<view_questionaire_category_knowledge>' => 3,
-        '<view_questionaire_category_team>' => 3, '<view_questionaire_category_character>' => 3,
-        '<view_questionaire_category_motivation>' => 3, '<view_questionaire_category_learning>' => 3,
-        '<view_questionaire_final_page>' => 3,
+        '<view_questionnaire_category_topic>' => 3, '<view_questionnaire_category_knowledge>' => 3,
+        '<view_questionnaire_category_team>' => 3, '<view_questionnaire_category_character>' => 3,
+        '<view_questionnaire_category_motivation>' => 3, '<view_questionnaire_category_learning>' => 3,
+        '<view_questionnaire_final_page>' => 3,
     );
 
     /**

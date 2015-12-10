@@ -82,7 +82,7 @@ if (has_capability('mod/groupformation:editsettings', $context)) {
         $questionnaire_viewiewurl = new moodle_url ('/mod/groupformation/questionnaire_view.php', array(
             'id' => $usedid));
         $row [] = new tabobject ('answering', $questionnaire_viewiewurl->out(),
-            get_string('tab_questionaire', 'groupformation'));
+            get_string('tab_questionnaire', 'groupformation'));
     }
 
     // evaluation view

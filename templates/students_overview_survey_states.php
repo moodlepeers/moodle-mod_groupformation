@@ -1,5 +1,5 @@
 <div class="gf_pad_header_small">
-    <?php echo $this->_['questionaire_answer_stats']; ?>
+    <?php echo $this->_['questionnaire_answer_stats']; ?>
 </div>
 <div class="gf_pad_content">
     <?php foreach($this->_['survey_states'] as $row) { ?>

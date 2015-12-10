@@ -273,7 +273,7 @@ class mod_groupformation_questionnaire_controller {
 
                     if (count($record) == 0) {
                         echo '<div class="alert">';
-                        echo 'This questionaire site is neither available in your favorite language nor in english!';
+                        echo 'This questionnaire site is neither available in your favorite language nor in english!';
                         echo '</div>';
 
                         return null;
@@ -323,7 +323,7 @@ class mod_groupformation_questionnaire_controller {
     public function prepare_question($i, $record) {
         $question = array();
         if (count($record) == 0) {
-            echo '<div class="alert">This questionaire site is neither available in your favorite language nor in english!</div>';
+            echo '<div class="alert">This questionnaire site is neither available in your favorite language nor in english!</div>';
 
             return null;
         } else {
@@ -399,7 +399,7 @@ class mod_groupformation_questionnaire_controller {
      * Prints final page of questionaire
      */
     public function print_final_page() {
-        echo '<div class="col_m_100"><h4>' . get_string('questionaire_no_more_questions', 'groupformation') .
+        echo '<div class="col_m_100"><h4>' . get_string('questionnaire_no_more_questions', 'groupformation') .
             '</h></div>';
         echo '	<form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
 
@@ -414,7 +414,7 @@ class mod_groupformation_questionnaire_controller {
 
         if (has_capability('mod/groupformation:editsettings', $this->context)) {
             echo '<div class="alert col_m_100 questionaire_hint">' .
-                get_string('questionaire_submit_disabled_teacher', 'groupformation') . '</div>';
+                get_string('questionnaire_submit_disabled_teacher', 'groupformation') . '</div>';
         }
 
         $url = new moodle_url ('/mod/groupformation/view.php', array(
@@ -422,10 +422,10 @@ class mod_groupformation_questionnaire_controller {
 
         echo '<div class="grid">';
         echo '	<div class="questionaire_button_text">' .
-            get_string('questionaire_press_beginning_submit', 'groupformation') . '</div>';
+            get_string('questionnaire_press_beginning_submit', 'groupformation') . '</div>';
         echo '	<div class="col_m_100 questionaire_button_row">';
         echo '		<a href=' . $url->out() . '><span class="gf_button gf_button_pill gf_button_small">' .
-            get_string('questionaire_go_to_start', 'groupformation') . '</span></a>';
+            get_string('questionnaire_go_to_start', 'groupformation') . '</span></a>';
         echo '	</div>';
         echo '</div>';
 
@@ -441,11 +441,11 @@ class mod_groupformation_questionnaire_controller {
             $isteacher = has_capability('mod/groupformation:editsettings', $this->context);
 
             if ($isteacher) {
-                echo '<div class="alert">' . get_string('questionaire_preview', 'groupformation') . '</div>';
+                echo '<div class="alert">' . get_string('questionnaire_preview', 'groupformation') . '</div>';
             }
 
             if ($this->usermanager->is_completed($this->userid) || !$this->store->is_questionnaire_available()) {
-                echo '<div class="alert" id="commited_view">' . get_string('questionaire_commited', 'groupformation') .
+                echo '<div class="alert" id="commited_view">' . get_string('questionnaire_commited', 'groupformation') .
                     '</div>';
             }
 
@@ -463,13 +463,13 @@ class mod_groupformation_questionnaire_controller {
 
             // Log access to page.
             groupformation_info($this->userid, $this->groupformationid,
-                '<view_questionaire_category_' . $category . '>');
+                '<view_questionnaire_category_' . $category . '>');
         } else {
 
             $this->print_final_page();
 
             // Log access to page.
-            groupformation_info($this->userid, $this->groupformationid, '<view_questionaire_final_page>');
+            groupformation_info($this->userid, $this->groupformationid, '<view_questionnaire_final_page>');
         }
     }
 

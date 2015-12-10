@@ -87,7 +87,7 @@ class mod_groupformation_test_user_generator {
                     $DB->insert_record("groupformation_started", $record);
 
                 } catch (Exception $e) {
-                    $this->echowarn("Error while saving questionaire status for user.");
+                    $this->echowarn("Error while saving questionnaire status for user.");
                     return false;
                 }
                 try {

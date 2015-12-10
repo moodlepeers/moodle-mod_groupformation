@@ -100,7 +100,7 @@ class mod_groupformation_student_overview_controller {
                     mod_groupformation_util::get_info_text_for_student(true, $this->groupformationid);
                 $this->groupformationstateinfo = array(
                     $this->get_availability_state());
-                $this->buttonsinfo = get_string('questionaire_press_to_begin', 'groupformation');
+                $this->buttonsinfo = get_string('questionnaire_press_to_begin', 'groupformation');
                 $this->buttonsarray = array(
                     array(
                         'type' => 'submit', 'name' => '', 'value' => get_string("next"), 'state' => '',
@@ -111,8 +111,8 @@ class mod_groupformation_student_overview_controller {
                 $this->groupformationinfo =
                     mod_groupformation_util::get_info_text_for_student(false, $this->groupformationid);
                 $this->groupformationstateinfo = array(
-                    $this->get_availability_state(), get_string('questionaire_not_submitted', 'groupformation'));
-                $this->buttonsinfo = get_string('questionaire_press_continue_submit', 'groupformation');
+                    $this->get_availability_state(), get_string('questionnaire_not_submitted', 'groupformation'));
+                $this->buttonsinfo = get_string('questionnaire_press_continue_submit', 'groupformation');
 
                 $this->determine_survey_stats();
 
@@ -122,14 +122,14 @@ class mod_groupformation_student_overview_controller {
                         'text' => get_string('edit')), array(
                         'type' => 'submit', 'name' => 'begin', 'value' => '0',
                         'state' => '',
-                        'text' => get_string('questionaire_submit', 'groupformation')));
+                        'text' => get_string('questionnaire_submit', 'groupformation')));
                 break;
 
             case 1 : // Questionaire is submitted.
                 $this->groupformationinfo =
                     mod_groupformation_util::get_info_text_for_student(true, $this->groupformationid);
                 $this->groupformationstateinfo = array(
-                    get_string('questionaire_submitted', 'groupformation'));
+                    get_string('questionnaire_submitted', 'groupformation'));
                 $this->buttonsinfo = '';
                 $this->buttonsarray = array();
                 break;
@@ -152,7 +152,7 @@ class mod_groupformation_student_overview_controller {
                 $this->buttonsarray = array();
                 break;
 
-            case 4 : // The Questionaire is not available, but groups are not build yet.
+            case 4 : // The questionnaire is not available, but groups are not build yet.
                 $this->groupformationinfo =
                     mod_groupformation_util::get_info_text_for_student(true, $this->groupformationid);
                 $this->groupformationstateinfo = array(
@@ -206,7 +206,7 @@ class mod_groupformation_student_overview_controller {
                 }
             }
         }
-        $this->surveystatestitle = get_string('questionaire_answer_stats', 'groupformation');
+        $this->surveystatestitle = get_string('questionnaire_answer_stats', 'groupformation');
         $this->surveystatesarray = $array;
     }
 
@@ -222,36 +222,36 @@ class mod_groupformation_student_overview_controller {
         $end = intval($a ['end_raw']);
         $now = time();
         if ($begin == 0 & $end == 0) {
-            return get_string('questionaire_available', 'groupformation', $a);
+            return get_string('questionnaire_available', 'groupformation', $a);
         } else if ($begin != 0 & $end == 0) {
             // Available from $begin.
             if ($now < $begin) {
                 // Not available now.
-                return get_string('questionaire_not_available_begin', 'groupformation', $a);
+                return get_string('questionnaire_not_available_begin', 'groupformation', $a);
             } else if ($now >= $begin) {
                 // Available.
-                return get_string('questionaire_available', 'groupformation', $a);
+                return get_string('questionnaire_available', 'groupformation', $a);
             }
         } else if ($begin == 0 & $end != 0) {
             // Just available till $end.
             if ($now <= $end) {
                 // Available.
-                return get_string('questionaire_available_end', 'groupformation', $a);
+                return get_string('questionnaire_available_end', 'groupformation', $a);
             } else if ($now > $end) {
                 // Not available any more.
-                return get_string('questionaire_not_available', 'groupformation', $a);
+                return get_string('questionnaire_not_available', 'groupformation', $a);
             }
         } else if ($begin != 0 & $end != 0) {
             // Available between $begin and $end.
             if ($now < $begin & $now < $end) {
                 // Not available yet.
-                return get_string('questionaire_not_available_begin_end', 'groupformation', $a);
+                return get_string('questionnaire_not_available_begin_end', 'groupformation', $a);
             } else if ($now >= $begin & $now <= $end) {
                 // Available.
-                return get_string('questionaire_available', 'groupformation', $a);
+                return get_string('questionnaire_available', 'groupformation', $a);
             } else if ($now > $begin & $now > $end) {
                 // Not available any more.
-                return get_string('questionaire_not_available_end', 'groupformation', $a);
+                return get_string('questionnaire_not_available_end', 'groupformation', $a);
             }
         }
     }
@@ -276,7 +276,7 @@ class mod_groupformation_student_overview_controller {
             $surveystatsview = new mod_groupformation_template_builder ();
             $surveystatsview->set_template('students_overview_survey_states');
             $surveystatsview->assign('survey_states', $this->surveystatesarray);
-            $surveystatsview->assign('questionaire_answer_stats', $this->surveystatestitle);
+            $surveystatsview->assign('questionnaire_answer_stats', $this->surveystatestitle);
             $this->view->assign('student_overview_survey_state_temp', $surveystatsview->load_template());
         } else {
             $this->view->assign('student_overview_survey_state_temp', '');

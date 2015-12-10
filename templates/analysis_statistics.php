@@ -18,6 +18,6 @@
 <div class="grid row_highlight">
     <div class="col_m_100"><?php echo get_string('are_now', 'groupformation');?> <b>
             <?php echo $this->_['statistics_submited_complete']; ?></b>
-        <?php echo get_string('completed_questionaire', 'groupformation');?></div>
+        <?php echo get_string('completed_questionnaire', 'groupformation');?></div>
 </div>
 

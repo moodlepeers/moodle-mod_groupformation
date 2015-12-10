@@ -22,7 +22,7 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
  */
-defined ( 'MOODLE_INTERNAL' ) || die ();
+defined('MOODLE_INTERNAL') || die ();
 
 $string ['language'] = 'de';
 $string ['modulename'] = 'Gruppenformation';
@@ -123,19 +123,19 @@ $string ['evaluation_point_info'] = 'Bitte maximale Punktzahl eingeben';
 $string ['students_enrolled_info'] = 'Studierenden sind im Kurs eingeschrieben';
 $string ['groupSettingsInfo'] = 'Sie haben Themen zur Auswahl angegeben. Daraus bestimmt sich die Anzahl der Gruppen und deren Größe.';
 $string ['analyse'] = 'Analyse';
-$string ['questionaire_not_started'] = 'Der Fragebogen wartet noch auf Ihre Bearbeitung.';
-$string ['questionaire_press_to_begin'] = 'Klicken Sie auf "Weiter", um zu beginnen.';
-$string ['questionaire_not_submitted'] = 'Sie haben den Fragebogen noch nicht abgegeben.';
-$string ['questionaire_press_continue_submit'] = 'Klicken Sie auf "Bearbeiten", um den Fragebogen weiter auszufüllen oder auf "Abgeben", um ihn abzugeben.';
-$string ['questionaire_answer_stats'] = 'Aktueller Zustand des Fragebogens: ';
-$string ['questionaire_submitted'] = 'Sie haben den Fragebogen bereits abgegeben und können Ihre Antworten nicht mehr ändern.';
-$string ['questionaire_press_preview'] = 'Klicken Sie auf "Vorschau", um den Fragebogen anzusehen.';
-$string ['questionaire_no_more_questions'] = 'Es gibt keine weiteren Fragen zu beantworten.';
-$string ['questionaire_press_beginning_submit'] = 'Klicken Sie auf "Zur Anfangsseite", um zum Anfang zurückzukehren. Dort können Sie ihren Fragebogen entgültig abgeben.';
-$string ['questionaire_go_to_start'] = 'Zur Anfangsseite';
-$string ['questionaire_submit'] = 'Abgeben';
-$string ['questionaire_submit_disabled_teacher'] = 'Abgeben ist deaktiviert, da dies nur eine Vorschau ist.';
-$string ['questionaire_preview'] = 'Das ist eine Vorschau des Fragebogens.';
+$string ['questionnaire_not_started'] = 'Der Fragebogen wartet noch auf Ihre Bearbeitung.';
+$string ['questionnaire_press_to_begin'] = 'Klicken Sie auf "Weiter", um zu beginnen.';
+$string ['questionnaire_not_submitted'] = 'Sie haben den Fragebogen noch nicht abgegeben.';
+$string ['questionnaire_press_continue_submit'] = 'Klicken Sie auf "Bearbeiten", um den Fragebogen weiter auszufüllen oder auf "Abgeben", um ihn abzugeben.';
+$string ['questionnaire_answer_stats'] = 'Aktueller Zustand des Fragebogens: ';
+$string ['questionnaire_submitted'] = 'Sie haben den Fragebogen bereits abgegeben und können Ihre Antworten nicht mehr ändern.';
+$string ['questionnaire_press_preview'] = 'Klicken Sie auf "Vorschau", um den Fragebogen anzusehen.';
+$string ['questionnaire_no_more_questions'] = 'Es gibt keine weiteren Fragen zu beantworten.';
+$string ['questionnaire_press_beginning_submit'] = 'Klicken Sie auf "Zur Anfangsseite", um zum Anfang zurückzukehren. Dort können Sie ihren Fragebogen entgültig abgeben.';
+$string ['questionnaire_go_to_start'] = 'Zur Anfangsseite';
+$string ['questionnaire_submit'] = 'Abgeben';
+$string ['questionnaire_submit_disabled_teacher'] = 'Abgeben ist deaktiviert, da dies nur eine Vorschau ist.';
+$string ['questionnaire_preview'] = 'Das ist eine Vorschau des Fragebogens.';
 $string ['category_general'] = 'Allgemeines';
 $string ['category_grade'] = 'Ziele';
 $string ['category_points'] = 'Ziele';
@@ -151,22 +151,22 @@ $string ['category_srl'] = 'Selbstreguliertes Lernen';
 $string ['stats_partly'] = 'In der Kategorie "{$a->category}" haben Sie {$a->answered} von {$a->questions} Fragen beantwortet.';
 $string ['stats_all'] = 'In der Kategorie "{$a->category}" haben Sie alle Fragen beantwortet.';
 $string ['stats_none'] = 'In der Kategorie "{$a->category}" haben Sie noch keine Frage beantwortet.';
-$string ['tab_questionaire'] = 'Fragebogen';
+$string ['tab_questionnaire'] = 'Fragebogen';
 $string ['tab_overview'] = 'Überblick';
 $string ['tab_grouping'] = 'Gruppenbildung';
 $string ['tab_preview'] = 'Fragebogen-Vorschau';
 $string ['tab_evaluation'] = 'Auswertung';
 $string ['tab_group'] = 'Gruppenzuordnung';
-$string ['questionaire_availability_info_future'] = 'Im Zeitraum vom {$a->start} Uhr bis {$a->end} Uhr wird der Fragebogen zur Verfügung stehen.';
-$string ['questionaire_availability_info_now'] = 'Der Fragebogen ist offen und kann bis {$a->end} ausgefüllt werden.';
-$string ['questionaire_availability_info_until'] = 'Der Fragebogen ist noch bis {$a->end} Uhr freigeschaltet.';
-$string ['questionaire_availability_info_from'] = 'Der Fragebogen ist ab {$a->start} Uhr freigeschaltet.';
-$string ['questionaire_available'] = 'Der Fragebogen steht zur Bearbeitung bereit.';
-$string ['questionaire_not_available_begin'] = 'Der Fragebogen ist verfügbar ab {$a->start}.';
-$string ['questionaire_available_end'] = 'Der Fragebogen ist verfügbar bis {$a->end}.';
-$string ['questionaire_not_available'] = 'Der Fragebogen ist derzeit nicht verfügbar.';
-$string ['questionaire_not_available_begin_end'] = 'Der Fragebogen ist verfügbar von {$a->start} bis {$a->end}.';
-$string ['questionaire_not_available_end'] = 'Der Fragebogen ist nicht mehr verfügbar.';
+$string ['questionnaire_availability_info_future'] = 'Im Zeitraum vom {$a->start} Uhr bis {$a->end} Uhr wird der Fragebogen zur Verfügung stehen.';
+$string ['questionnaire_availability_info_now'] = 'Der Fragebogen ist offen und kann bis {$a->end} ausgefüllt werden.';
+$string ['questionnaire_availability_info_until'] = 'Der Fragebogen ist noch bis {$a->end} Uhr freigeschaltet.';
+$string ['questionnaire_availability_info_from'] = 'Der Fragebogen ist ab {$a->start} Uhr freigeschaltet.';
+$string ['questionnaire_available'] = 'Der Fragebogen steht zur Bearbeitung bereit.';
+$string ['questionnaire_not_available_begin'] = 'Der Fragebogen ist verfügbar ab {$a->start}.';
+$string ['questionnaire_available_end'] = 'Der Fragebogen ist verfügbar bis {$a->end}.';
+$string ['questionnaire_not_available'] = 'Der Fragebogen ist derzeit nicht verfügbar.';
+$string ['questionnaire_not_available_begin_end'] = 'Der Fragebogen ist verfügbar von {$a->start} bis {$a->end}.';
+$string ['questionnaire_not_available_end'] = 'Der Fragebogen ist nicht mehr verfügbar.';
 $string ['info_header_student'] = 'Was bedeutet Gruppenformation?';
 $string ['info_text_student'] = 'In diesem Moodle-Kurs wird die Gruppenformation dazu genutzt {$a->scenario_name} für eine erfolgreiche Zusammenarbeit zu bilden.
 		Wenn Sie den Fragebogen ausgefüllt und abgeschickt haben, werden für Sie geeignete Lernpartner/innen ermittelt.
@@ -223,7 +223,7 @@ $string['grouping_delete'] = 'Gruppenvorschlag verwerfen';
 $string['grouping_adopt'] = 'Gruppenvorschlag übernehmen';
 $string['grouping_abort'] = 'Gruppenbildung abbrechen';
 $string['moodlegrouping_delete'] = 'Moodle-Gruppen l&ouml;schen';
-$string['questionaire_commited'] = 'Ihre Antworten sind abgegeben. Somit können Sie sie nicht mehr verändern.';
+$string['questionnaire_commited'] = 'Ihre Antworten sind abgegeben. Somit können Sie sie nicht mehr verändern.';
 $string['no_data_to_display'] = 'Keine Daten vorhanden.';
 // $string [''] = '';
 $string['onlyactivestudents'] = 'Zur Gruppenbildung sollen ausschließlich Studierende betrachtet werden, die mind. eine Frage beantwortet haben.';
@@ -277,7 +277,7 @@ $string['students_grouping_multiple'] = ' Studierende zur Gruppenbildung.';
 $string['students_commited_single'] = ' Studierende davon haben ihre Antworten schon endgültig abgegeben.';
 $string['students_commited_multiple'] = ' Studierende davon hat seine Antworten schon endgültig abgegeben.';
 $string['commited_not_completed'] = ' von den fest abgegebenen Fragebögen sind nicht vollständig.';
-$string['completed_questionaire'] = ' vollständig beantwortete Fragebögen.';
+$string['completed_questionnaire'] = ' vollständig beantwortete Fragebögen.';
 
 $string['emailnotifications_info'] = 'Sie werden via Moodle benachrichtigt, wenn sie abgeschlossen ist.';
 $string['onlyactivestudents_info'] = 'Zur Gruppenbildung werden ausschließlich Studierende betrachtet werden, die mind. eine Frage beantwortet haben. Sie können das in den {$a->url} anpassen.';
@@ -309,7 +309,7 @@ $string['import_description_yes'] = 'Klicke auf den folgenden Button, um Antwort
 $string['import_description_no'] = 'Es ist nicht möglich Antworten zu importieren, da der Fragebogen nicht mehr verfügbar ist oder bereits abgegeben wurde.';
 $string['import_form_description'] = 'Du kannst Antworten von früheren Fragebögen importieren, indem du hier deine Antworten im passenden Format hochlädst (z.B. answers.xml).';
 
-$string['file_error'] = 'Du musst eine *.xml-Datei hochladen.' ;
+$string['file_error'] = 'Du musst eine *.xml-Datei hochladen.';
 $string['failed_import'] = 'Der Import ist fehlgeschlagen. Das Format der Datei war nicht korrekt. Bitte lade eine Datei mit exportierten Antworten hoch.';
 $string['successful_import'] = 'Der Import war erfolgreich. Du kannst deine Antworten im Tab "Fragebogen" einsehen.';
 
@@ -319,4 +319,4 @@ $string['archived_activity_admin'] = 'Die Aktitivät ist archiviert worden. Es i
 
 $string['no_evaluation_text'] = 'Es gibt für diese Aktivität keine Auswertung.';
 $string['no_evaluation_ready'] = 'Es gibt keine Auswertung, da nicht alle Fragen beantwortet wurden. Erst wenn alle Fragen beantwortet wurden, gibt eine Auswertung ihrer Antworten';
-$string['eval_final_text']='Die Vergleichswerte basieren auf derzeit {$a->percent}% gegebener Antworten ({$a->completed} von {$a->coursesize} Personen haben bisher geantwortet).';
+$string['eval_final_text'] = 'Die Vergleichswerte basieren auf derzeit {$a->percent}% gegebener Antworten ({$a->completed} von {$a->coursesize} Personen haben bisher geantwortet).';
