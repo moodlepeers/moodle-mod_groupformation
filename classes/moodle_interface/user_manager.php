@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-
 /**
  * Interface for user-related activity data in DB
  *
@@ -23,7 +22,7 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.'); // / It must be included from a Moodle page
+    die ('Direct access to this script is forbidden.');
 }
 
 class mod_groupformation_user_manager {
@@ -42,77 +41,84 @@ class mod_groupformation_user_manager {
     /**
      * Returns array of records of table groupformation_started where completed is 1
      *
+     * @param null $sortedby
+     * @param string $fieldset
      * @return array
      */
-    public function get_completed($sorted_by = null, $fieldset = '*') {
+    public function get_completed($sortedby = null, $fieldset = '*') {
         global $DB;
 
         return $DB->get_records('groupformation_started', array(
             'groupformation' => $this->groupformationid,
             'completed' => 1
-        ), $sorted_by, $fieldset);
+        ), $sortedby, $fieldset);
     }
 
     /**
      * Returns array of records of table groupformation_started where completed is 0
      *
+     * @param null $sortedby
+     * @param string $fieldset
      * @return array
      */
-    public function get_not_completed($sorted_by = null, $fieldset = '*') {
+    public function get_not_completed($sortedby = null, $fieldset = '*') {
         global $DB;
 
         return $DB->get_records('groupformation_started', array(
             'groupformation' => $this->groupformationid,
             'completed' => 0
-        ), $sorted_by, $fieldset);
+        ), $sortedby, $fieldset);
     }
 
     /**
      * Returns array of records of table groupformation_started
      *
+     * @param null $sortedby
+     * @param string $fieldset
      * @return array
      */
-    public function get_started($sorted_by = null, $fieldset = '*') {
+    public function get_started($sortedby = null, $fieldset = '*') {
         global $DB;
 
         return $DB->get_records('groupformation_started', array(
             'groupformation' => $this->groupformationid
-        ), $sorted_by, $fieldset);
+        ), $sortedby, $fieldset);
     }
 
     /**
      * Returns array of records of table_groupformation_started if answer_count is equal to
      * the total answer count for this activity
      *
-     * @param string $sorted_by
+     * @param string $sortedby
      * @param string $fieldset
      * @return multitype:unknown
      */
-    public function get_completed_by_answer_count($sorted_by = null, $fieldset = '*') {
+    public function get_completed_by_answer_count($sortedby = null, $fieldset = '*') {
         global $DB;
 
         return $DB->get_records('groupformation_started', array(
             'groupformation' => $this->groupformationid,
             'answer_count' => $this->store->get_total_number_of_answers()
-        ), $sorted_by, $fieldset);
+        ), $sortedby, $fieldset);
     }
 
     /**
      * Returns array of records of table_groupformation_started if answer_count is not equal to
      * the total answer count for this activity
      *
-     * @param string $sorted_by
+     * @param string $sortedby
      * @param string $fieldset
      * @return multitype:unknown
      */
-    public function get_not_completed_by_answer_count($sorted_by = null, $fieldset = '*') {
+    public function get_not_completed_by_answer_count($sortedby = null, $fieldset = '*') {
         global $DB;
         $tablename = 'groupformation_started';
-
-        return $DB->get_records_sql("SELECT " . $fieldset . " FROM {{$tablename}} WHERE groupformation = ? AND answer_count <> ? ORDER BY ?" . $sorted_by, array(
+        $query = "SELECT " . $fieldset . " FROM {{$tablename}} ".
+            "WHERE groupformation = ? AND answer_count <> ? ORDER BY ?" . $sortedby;
+        return $DB->get_records_sql($query, array(
             $this->groupformationid,
             $this->store->get_total_number_of_answers(),
-            $sorted_by
+            $sortedby
         ));
     }
 
@@ -120,18 +126,19 @@ class mod_groupformation_user_manager {
      * Returns array of records of table_groupformation_started if answer_count is not equal to
      * the total answer count for this activity but the record was submitted
      *
-     * @param string $sorted_by
+     * @param string $sortedby
      * @param string $fieldset
      * @return multitype:unknown
      */
-    public function get_not_completed_but_submitted($sorted_by = null, $fieldset = '*') {
+    public function get_not_completed_but_submitted($sortedby = null, $fieldset = '*') {
         global $DB;
         $tablename = 'groupformation_started';
-
-        return $DB->get_records_sql("SELECT " . $fieldset . " FROM {{$tablename}} WHERE groupformation = ? AND completed = 1 AND answer_count <> ? ORDER BY ?" . $sorted_by, array(
+        $query = "SELECT " . $fieldset . " FROM {{$tablename}} ".
+            "WHERE groupformation = ? AND completed = 1 AND answer_count <> ? ORDER BY ?" . $sortedby;
+        return $DB->get_records_sql($query, array(
             $this->groupformationid,
             $this->store->get_total_number_of_answers(),
-            $sorted_by
+            $sortedby
         ));
     }
 
@@ -169,7 +176,8 @@ class mod_groupformation_user_manager {
     /**
      * set status to complete
      *
-     * @param int $userid
+     * @param $userid
+     * @param bool|false $completed
      */
     public function set_status($userid, $completed = false) {
         global $DB;
@@ -196,7 +204,7 @@ class mod_groupformation_user_manager {
 
     /**
      * Changes status of questionaire for a specific user
-     * 
+     *
      * @param $userid
      * @param bool|false $complete
      */
@@ -248,7 +256,6 @@ class mod_groupformation_user_manager {
      * @return boolean
      */
     public function is_completed($userid) {
-        global $DB;
 
         return $this->get_answering_status($userid) == 1;
     }
@@ -289,14 +296,17 @@ class mod_groupformation_user_manager {
         $categories = $store->get_categories();
         $sum = array_sum($store->get_numbers($categories));
 
-        $user_sum = $this->get_number_of_answers($userid);
-        return $sum <= $user_sum;
+        $usersum = $this->get_number_of_answers($userid);
+
+        return $sum <= $usersum;
     }
 
     /**
      * Determines if someone already answered at least one question
      *
-     * @return boolean
+     * @param null $userid
+     * @param null $categories
+     * @return bool
      */
     public function already_answered($userid = null, $categories = null) {
         global $DB;
@@ -326,34 +336,34 @@ class mod_groupformation_user_manager {
      *
      * @param $userid
      * @param $category
-     * @param null $sorted_by
+     * @param null $sortedby
      * @param string $fieldset
      * @return array
      */
-    public function get_answers($userid, $category, $sorted_by = null, $fieldset = '*') {
+    public function get_answers($userid, $category, $sortedby = null, $fieldset = '*') {
         global $DB;
         if (is_null($userid) && is_null($category)) {
             return $DB->get_records('groupformation_answer', array(
                 'groupformation' => $this->groupformationid,
-            ), $sorted_by, $fieldset);
+            ), $sortedby, $fieldset);
         } else if (is_null($userid)) {
 
             return $DB->get_records('groupformation_answer', array(
                 'groupformation' => $this->groupformationid,
                 'category' => $category
-            ), $sorted_by, $fieldset);
+            ), $sortedby, $fieldset);
         } else if (is_null($category)) {
 
             return $DB->get_records('groupformation_answer', array(
                 'groupformation' => $this->groupformationid,
                 'userid' => $userid
-            ), $sorted_by, $fieldset);
+            ), $sortedby, $fieldset);
         } else {
             return $DB->get_records('groupformation_answer', array(
                 'groupformation' => $this->groupformationid,
                 'userid' => $userid,
                 'category' => $category
-            ), $sorted_by, $fieldset);
+            ), $sortedby, $fieldset);
         }
     }
 
@@ -387,19 +397,13 @@ class mod_groupformation_user_manager {
     public function save_answer($userid, $category, $answer, $questionid) {
         global $DB;
         $status = $this->get_answering_status($userid);
-        // if the answer in category "grade"(dropdowns) is default(0) - return without saving
+
         if (($category == 'grade' || $category == 'general') && $answer == '0') {
-            /*
-             * if($status == -1){
-             * $status = SAVE;
-             * $this->change_status($userid);
-             * }
-             */
             return;
         } else {
-            $answerAlreadyExist = $this->has_answer($userid, $category, $questionid);
+            $answeralreadyexists = $this->has_answer($userid, $category, $questionid);
 
-            if ($answerAlreadyExist) {
+            if ($answeralreadyexists) {
                 $record = $DB->get_record('groupformation_answer', array(
                     'groupformation' => $this->groupformationid,
                     'userid' => $userid,
@@ -432,43 +436,46 @@ class mod_groupformation_user_manager {
      *
      * @param int $userid
      * @param string $category
-     * @param int $questionId
+     * @param int $questionid
      * @return boolean
      */
-    public function has_answer($userid, $category, $questionId) {
+    public function has_answer($userid, $category, $questionid) {
         global $DB;
 
         return $DB->record_exists('groupformation_answer', array(
             'groupformation' => $this->groupformationid,
             'userid' => $userid,
             'category' => $category,
-            'questionid' => $questionId
+            'questionid' => $questionid
         ));;
     }
 
     /**
      * Returns whether a user has answers in a specific category or not
      *
-     * @return boolean
+     * @param $userid
+     * @param $category
+     * @return bool
      */
     public function has_answers($userid, $category) {
-        $firstCondition = ($this->get_answering_status($userid) > -1);
-        $secondCondition = ($this->get_answers($userid, $category) > 0);
+        $firstcondition = ($this->get_answering_status($userid) > -1);
+        $secondcondition = ($this->get_answers($userid, $category) > 0);
 
-        return ($firstCondition && $secondCondition);
+        return ($firstcondition && $secondcondition);
     }
 
     /**
      * Returns the most chosen topics wrt the users
      *
-     * @param $number_of_topics
+     * @param $numberoftopics
      * @return array
      */
-    public function get_most_common_topics($number_of_topics) {
+    public function get_most_common_topics($numberoftopics) {
         global $DB;
         $scores = [];
-        for ($i = 1; $i <= $number_of_topics; $i++) {
-            $answers = $DB->get_records('groupformation_answer', array('groupformation' => $this->groupformationid, 'category' => 'topic', 'questionid' => $i));
+        for ($i = 1; $i <= $numberoftopics; $i++) {
+            $answers = $DB->get_records('groupformation_answer',
+                array('groupformation' => $this->groupformationid, 'category' => 'topic', 'questionid' => $i));
             $score = 0;
             foreach ($answers as $answer) {
                 $score += $answer->answer;
@@ -479,7 +486,7 @@ class mod_groupformation_user_manager {
             return $b['score'] - $a['score'];
         });
 
-        $result = array_slice($scores, 0, $number_of_topics);
+        $result = array_slice($scores, 0, $numberoftopics);
 
         return $result;
     }

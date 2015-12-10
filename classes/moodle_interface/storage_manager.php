@@ -23,7 +23,7 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.'); // / It must be included from a Moodle page
+    die ('Direct access to this script is forbidden.');
 }
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
@@ -46,6 +46,11 @@ class mod_groupformation_storage_manager {
         $this->gm = new mod_groupformation_groups_manager ($groupformationid);
     }
 
+    /**
+     * Returns whether the activity is archived
+     *
+     * @return bool
+     */
     public function is_archived() {
         global $DB;
         $record = $DB->get_record('groupformation_q_settings', array(
@@ -55,19 +60,25 @@ class mod_groupformation_storage_manager {
         return $record->archived == 1;
     }
 
+    /**
+     * Returns whether the activity is accessible
+     *
+     * @param $userid
+     * @return bool
+     */
     public function is_accessible($userid) {
         global $PAGE;
         $cm = $PAGE->cm;
+        $context = context_module::instance($cm->id);
         $groupingid = ($cm->groupmode != 0) ? $cm->groupingid : 0;
-        $enrolled_students = null;
+        $enrolledstudents = null;
         if (intval($cm->groupingid) != 0) {
-            $enrolled_students = array_keys(groups_get_grouping_members($groupingid));
+            $enrolledstudents = array_keys(groups_get_grouping_members($groupingid));
         } else {
-            // all enrolled students later just students of grouping
-            $enrolled_students = array_keys(get_enrolled_users($context, 'mod/groupformation:onlystudent'));
+            $enrolledstudents = array_keys(get_enrolled_users($context, 'mod/groupformation:onlystudent'));
         }
 
-        return in_array($userid, $enrolled_students);
+        return in_array($userid, $enrolledstudents);
     }
 
     /**
@@ -78,8 +89,9 @@ class mod_groupformation_storage_manager {
      */
     public function catalog_table_not_set($category = 'grade') {
         global $DB;
-        // $indexes = $DB->get_indexes('groupformation_en_team');
+
         $count = $DB->count_records('groupformation_' . $category);
+
         return $count == 0;
     }
 
@@ -107,10 +119,11 @@ class mod_groupformation_storage_manager {
         ), 'id', 'id');
         $i = 1;
         foreach ($records as $id => $record) {
-            if ($id == $this->groupformationid)
+            if ($id == $this->groupformationid) {
                 return $i;
-            else
+            } else {
                 $i++;
+            }
         }
 
         return $i;
@@ -134,7 +147,7 @@ class mod_groupformation_storage_manager {
      * @param string $category
      */
     public function add_catalog_question($question, $language, $category) {
-        global $CFG, $DB;
+        global $DB;
 
         $data = new stdClass ();
 
@@ -149,7 +162,7 @@ class mod_groupformation_storage_manager {
     }
 
     /**
-     * TODO
+     * Add new question from XML to DB
      *
      * @param string $category
      * @param int $numbers
@@ -195,7 +208,6 @@ class mod_groupformation_storage_manager {
         return $count == 1;
     }
 
-    // $init true, wenn es eine initialisierung ist | false wenn es ein Update ist
     /**
      * Adds/Updates knowledge and topic setting of groupformation
      *
@@ -226,7 +238,6 @@ class mod_groupformation_storage_manager {
         }
     }
 
-    // gibt ein array zur�ck, in dem auf der ersten Position die Startzeit gespeichert ist und auf der zweiten Position die Endzeit
     /**
      * Returns map with availability times (xxx_raw is timestamp, xxx is formatted time for display)
      *
@@ -277,9 +288,6 @@ class mod_groupformation_storage_manager {
             $times ['end'] = strtr(date($format, $times ['end_raw']), $trans) . ' Uhr';
         }
 
-        // $times ['start'] = date ( $format, $times ['start_raw'] );
-        // $times ['end'] = date ( $format, $times ['end_raw'] );
-
         return $times;
     }
 
@@ -298,11 +306,10 @@ class mod_groupformation_storage_manager {
     /**
      * Returns an array with number of questions in each category
      *
-     * @param array $names
-     * @return multitype:mixed
+     * @param $categories
+     * @return array
      */
     public function get_numbers($categories) {
-        global $DB;
 
         $array = array();
         foreach ($categories as $category) {
@@ -423,16 +430,16 @@ class mod_groupformation_storage_manager {
     /**
      * Returns logging data
      *
-     * @param null $sorted_by
+     * @param null $sortedby
      * @param string $fieldset
      * @return array
      */
-    public function get_logging_data($sorted_by = null, $fieldset = '*') {
+    public function get_logging_data($sortedby = null, $fieldset = '*') {
         global $DB;
 
         return $DB->get_records('groupformation_logging', array(
             'groupformationid' => $this->groupformationid
-        ), $sorted_by, $fieldset);
+        ), $sortedby, $fieldset);
     }
 
     /**
@@ -450,15 +457,15 @@ class mod_groupformation_storage_manager {
      * @return array
      */
     public function get_categories() {
-        $category_set = $this->data->get_category_set($this->get_scenario());
+        $categoryset = $this->data->get_category_set($this->get_scenario());
         $categories = array();
 
-        $hasKnowledge = $this->get_number('knowledge');
-        if($this->ask_for_knowledge() && $hasKnowledge!=0){
-            $categories[]='knowledge';
+        $hasknowledge = $this->get_number('knowledge');
+        if ($this->ask_for_knowledge() && $hasknowledge != 0) {
+            $categories[] = 'knowledge';
         }
 
-        foreach ($category_set as $category) {
+        foreach ($categoryset as $category) {
             if ($this->get_number($category) > 0) {
                 if ($category == 'grade' && $this->ask_for_grade()) {
                     $categories [] = $category;
@@ -470,8 +477,8 @@ class mod_groupformation_storage_manager {
             }
         }
 
-        $hasTopic = $this->get_number('topic');
-        if ($this->ask_for_topics() && $hasTopic!=0){
+        $hastopic = $this->get_number('topic');
+        if ($this->ask_for_topics() && $hastopic != 0) {
             $categories = arraY('topic');
         }
 
@@ -484,7 +491,7 @@ class mod_groupformation_storage_manager {
      * @return array
      */
     public function get_exportable_categories() {
-        $exportable_categories = array();
+        $exportablecategories = array();
         $categories = $this->get_categories();
         foreach ($categories as $category) {
             if (!in_array($category, array(
@@ -493,11 +500,11 @@ class mod_groupformation_storage_manager {
                 'topic'
             ))
             ) {
-                $exportable_categories [] = $category;
+                $exportablecategories [] = $category;
             }
         }
 
-        return $exportable_categories;
+        return $exportablecategories;
     }
 
     /**
@@ -509,10 +516,11 @@ class mod_groupformation_storage_manager {
     public function get_previous_category($category) {
         $categories = $this->get_categories();
         $pos = $this->get_position($category);
-        if ($pos >= 1)
+        if ($pos >= 1) {
             $previous = $categories [$pos - 1];
-        else
+        } else {
             $previous = '';
+        }
 
         return $previous;
     }
@@ -769,9 +777,7 @@ class mod_groupformation_storage_manager {
     public function get_email_setting() {
         global $DB;
 
-        // TODO Ahmed
-        return 0;
-        // return $DB->get_field('groupformation', 'emailnotifications', array('id'=>$this->groupformationid));
+        return $DB->get_field('groupformation', 'emailnotifications', array('id' => $this->groupformationid));
     }
 
     /**
@@ -783,19 +789,22 @@ class mod_groupformation_storage_manager {
         $array = $this->data->get_label_set($this->get_scenario());
 
         if ($this->groupformationid != null) {
-            $hasTopic = $this->get_number('topic');
-            $hasKnowledge = $this->get_number('knowledge');
+            $hastopic = $this->get_number('topic');
+            $hasknowledge = $this->get_number('knowledge');
             $grades = $this->ask_for_grade();
             $points = $this->ask_for_points();
             $position = 0;
             foreach ($array as $c) {
-                if (('points' == $c && $points == false) || ('grade' == $c && $grades == false) || ($hasTopic == 0 && 'topic' == $c) || ($hasKnowledge == 0 && ('knowledge_heterogen' == $c || 'knowledge_homogen' == $c))) {
+                if (('points' == $c && $points == false) ||
+                    ('grade' == $c && $grades == false) ||
+                    ($hastopic == 0 && 'topic' == $c) ||
+                    ($hasknowledge == 0 && ('knowledge_heterogen' == $c || 'knowledge_homogen' == $c))) {
                     unset ($array [$position]);
                 }
 
                 $position++;
             }
-            if ($hasTopic != 0){
+            if ($hastopic != 0) {
                 $array = array('topic');
             }
         }
@@ -829,23 +838,23 @@ class mod_groupformation_storage_manager {
         return $evaluationmethod == 1;
     }
 
-    public function get_users(){
+    public function get_users() {
         global $PAGE;
         $courseid = $this->get_course_id();
         $context = context_course::instance($courseid);
 
-        $enrolled_students = null;
+        $enrolledstudents = null;
 
         if (intval($PAGE->cm->groupingid) != 0) {
-            $enrolled_students = array_keys(groups_get_grouping_members($PAGE->cm->groupingid));
+            $enrolledstudents = array_keys(groups_get_grouping_members($PAGE->cm->groupingid));
         } else {
-            $enrolled_students = array_keys(get_enrolled_users($context, 'mod/groupformation:onlystudent'));
+            $enrolledstudents = array_keys(get_enrolled_users($context, 'mod/groupformation:onlystudent'));
         }
 
-        if (is_null($enrolled_students) || count($enrolled_students) <= 0) {
+        if (is_null($enrolledstudents) || count($enrolledstudents) <= 0) {
             return array();
         }
 
-        return $enrolled_students;
+        return $enrolledstudents;
     }
 }

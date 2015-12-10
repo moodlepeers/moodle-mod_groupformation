@@ -45,10 +45,11 @@ class mod_groupformation_groups_manager {
     /**
      * Creats user-group instance in DB
      *
-     * @param integer $groupformationid
-     * @param integer $userid
-     * @param unknown $usergroup
-     * @param unknown $idmap
+     * @param $groupformationid
+     * @param $userid
+     * @param $groupalid
+     * @param $idmap
+     * @return bool|int
      */
     public function assign_user_to_group($groupformationid, $userid, $groupalid, $idmap) {
         global $DB;
@@ -68,6 +69,7 @@ class mod_groupformation_groups_manager {
         $temp = $this->store->get_knowledge_or_topic_values('topic');
         $temp = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>';
         $options = mod_groupformation_util::xml_to_array($temp);
+
         return $options [$id - 1];
     }
 
@@ -103,8 +105,7 @@ class mod_groupformation_groups_manager {
 
     /**
      * Returns whether groups are created in moodle or not
-     *
-     * @param unknown $groupformationID
+     * @return bool
      */
     public function groups_created() {
         global $DB;
@@ -141,8 +142,9 @@ class mod_groupformation_groups_manager {
     /**
      * Saves moodlegroupid in database
      *
-     * @param int $groupid
-     * @param int $moodlegroupid
+     * @param $groupid
+     * @param $moodlegroupid
+     * @return bool
      */
     public function save_moodlegroup_id($groupid, $moodlegroupid) {
         global $DB;
@@ -203,6 +205,7 @@ class mod_groupformation_groups_manager {
         global $DB;
         $count = $DB->count_records('groupformation_group_users', array(
             'groupformation' => $this->groupformationid, 'userid' => $userid));
+
         return ($count == 1);
     }
 
@@ -229,6 +232,7 @@ class mod_groupformation_groups_manager {
         $table = 'groupformation_groups';
         $count = $DB->count_records($table, array(
             'groupformation' => $this->groupformationid, 'created' => 1));
+
         return $count > 0;
     }
 
@@ -242,6 +246,7 @@ class mod_groupformation_groups_manager {
                 $max = $group->group_size;
             }
         }
+
         return $max;
     }
 
@@ -250,10 +255,11 @@ class mod_groupformation_groups_manager {
      *
      * @return mixed
      */
-    public function get_generated_groups($sorted_by = null, $fieldset = '*') {
+    public function get_generated_groups($sortedby = null, $fieldset = '*') {
         global $DB;
+
         return $DB->get_records('groupformation_groups', array(
-            'groupformation' => $this->groupformationid), $sorted_by, $fieldset);
+            'groupformation' => $this->groupformationid), $sortedby, $fieldset);
     }
 
     /**
@@ -261,10 +267,11 @@ class mod_groupformation_groups_manager {
      *
      * @return mixed
      */
-    public function get_group_users($sorted_by = null, $fieldset = '*') {
+    public function get_group_users($sortedby = null, $fieldset = '*') {
         global $DB;
+
         return $DB->get_records('groupformation_group_users', array(
-            'groupformation' => $this->groupformationid), $sorted_by, $fieldset);
+            'groupformation' => $this->groupformationid), $sortedby, $fieldset);
     }
 
     /**
@@ -274,6 +281,7 @@ class mod_groupformation_groups_manager {
      */
     public function get_users_for_generated_group($groupid) {
         global $DB;
+
         return $DB->get_records('groupformation_group_users', array(
             'groupformation' => $this->groupformationid, 'groupid' => $groupid), null, 'userid');
     }
@@ -304,7 +312,7 @@ class mod_groupformation_groups_manager {
      * @param int $userid
      * @deprecated only Mathevorkurs
      */
-    public function assign_to_group_AB($userid) {
+    public function assign_to_groups_a_and_b($userid) {
         global $DB, $COURSE;
         $completed = 1;
 
@@ -331,7 +339,7 @@ class mod_groupformation_groups_manager {
 
         $records = $DB->get_records('groupformation_started', array(
             'groupformation' => $this->groupformationid, 'completed' => $completed), 'timecompleted',
-                                    'id, userid, timecompleted');
+            'id, userid, timecompleted');
 
         if (count($records) > 0) {
             $i = 0;
