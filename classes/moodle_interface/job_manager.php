@@ -790,11 +790,11 @@ class mod_groupformation_job_manager {
         $status_options = array_keys(self::$job_status_options);
         if ($job->waiting) {
             return $status_options [1];
-        } elseif ($job->started) {
+        } else if ($job->started) {
             return $status_options [2];
-        } elseif ($job->aborted) {
+        } else if ($job->aborted) {
             return $status_options [3];
-        } elseif ($job->done) {
+        } else if ($job->done) {
             return $status_options [4];
         } else {
             return $status_options [0];

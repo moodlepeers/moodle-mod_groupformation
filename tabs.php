@@ -67,7 +67,7 @@ if (has_capability('mod/groupformation:editsettings', $context)) {
     $exporturl = new moodle_url ('/mod/groupformation/export_view.php', array(
         'id' => $usedid, 'do_show' => 'export'));
     $row [] = new tabobject ('import_export', $exporturl->out(), 'Export');
-} elseif (!has_capability('mod/groupformation:editsettings', $context) &&
+} else if (!has_capability('mod/groupformation:editsettings', $context) &&
     has_capability('mod/groupformation:onlystudent', $context)
 ) {
 

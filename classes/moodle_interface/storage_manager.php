@@ -215,7 +215,7 @@ class mod_groupformation_storage_manager {
 
         if ($init) {
             $DB->insert_record('groupformation_q_settings', $data);
-        } elseif ($DB->count_records('groupformation_answer', array(
+        } else if ($DB->count_records('groupformation_answer', array(
                 'groupformation' => $this->groupformationid
             )) == 0
         ) {
@@ -247,7 +247,7 @@ class mod_groupformation_storage_manager {
             $trans = array();
             $times ['start'] = strtr(date($format, $times ['start_raw']), $trans);
             $times ['end'] = strtr(date($format, $times ['end_raw']), $trans);
-        } elseif ('de' == get_string("language", "groupformation")) {
+        } else if ('de' == get_string("language", "groupformation")) {
             $format = "l, d.m.y, H:m";
             $trans = array(
                 'Monday' => 'Montag',
@@ -462,9 +462,9 @@ class mod_groupformation_storage_manager {
             if ($this->get_number($category) > 0) {
                 if ($category == 'grade' && $this->ask_for_grade()) {
                     $categories [] = $category;
-                } elseif ($category == 'points' && $this->ask_for_points()) {
+                } else if ($category == 'points' && $this->ask_for_points()) {
                     $categories [] = $category;
-                } elseif ($category != 'grade' && $category != 'points') {
+                } else if ($category != 'grade' && $category != 'points') {
                     $categories [] = $category;
                 }
             }
@@ -604,11 +604,11 @@ class mod_groupformation_storage_manager {
 
         if (($start == 0) && ($end == 0)) {
             return true;
-        } elseif (($start == 0) && ($now <= $end)) {
+        } else if (($start == 0) && ($now <= $end)) {
             return true;
-        } elseif (($now >= $start) && ($end == 0)) {
+        } else if (($now >= $start) && ($end == 0)) {
             return true;
-        } elseif (($now >= $start) && ($now <= $end)) {
+        } else if (($now >= $start) && ($now <= $end)) {
             return true;
         }
 

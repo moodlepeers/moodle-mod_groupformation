@@ -196,9 +196,9 @@ class mod_groupformation_user_manager {
 
     /**
      * Changes status of questionaire for a specific user
-     *
-     * @param unknown $userId
-     * @param number $complete
+     * 
+     * @param $userid
+     * @param bool|false $complete
      */
     public function change_status($userid, $complete = false) {
         $status = 0;
@@ -221,8 +221,8 @@ class mod_groupformation_user_manager {
      * 1 completed
      * -1 otherwise
      *
-     * @param unknown $userId
-     * @return number
+     * @param $userid
+     * @return int|mixed
      */
     public function get_answering_status($userid) {
         global $DB;
@@ -304,7 +304,7 @@ class mod_groupformation_user_manager {
             return !($DB->count_records('groupformation_answer', array(
                     'groupformation' => $this->groupformationid
                 )) == 0);
-        } elseif (is_null($categories) && !is_null($userid)) {
+        } else if (is_null($categories) && !is_null($userid)) {
             return !($DB->count_records('groupformation_answer', array(
                     'groupformation' => $this->groupformationid,
                     'userid' => $userid
@@ -324,8 +324,10 @@ class mod_groupformation_user_manager {
     /**
      * Returns all answers of a specific user in a specific category
      *
-     * @param int $userid
-     * @param string $category
+     * @param $userid
+     * @param $category
+     * @param null $sorted_by
+     * @param string $fieldset
      * @return array
      */
     public function get_answers($userid, $category, $sorted_by = null, $fieldset = '*') {
@@ -377,8 +379,10 @@ class mod_groupformation_user_manager {
     /**
      * Saves answer
      *
-     * @param unknown $answer
-     * @param unknown $position
+     * @param $userid
+     * @param $category
+     * @param $answer
+     * @param $questionid
      */
     public function save_answer($userid, $category, $answer, $questionid) {
         global $DB;
@@ -457,7 +461,8 @@ class mod_groupformation_user_manager {
     /**
      * Returns the most chosen topics wrt the users
      *
-     * @param number $users
+     * @param $number_of_topics
+     * @return array
      */
     public function get_most_common_topics($number_of_topics) {
         global $DB;

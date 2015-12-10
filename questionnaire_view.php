@@ -67,7 +67,7 @@ if (!has_capability('mod/groupformation:editsettings', $context)) {
 
 if (isset ($_POST ["category"])) {
     $category = $_POST ['category'];
-} elseif (!(strcmp($url_category, '') == 0)) {
+} else if (!(strcmp($url_category, '') == 0)) {
     $category = $store->get_previous_category($url_category);
 }
 
