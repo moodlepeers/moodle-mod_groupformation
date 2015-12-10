@@ -54,21 +54,6 @@ class mod_groupformation_mod_form extends moodleform_mod {
 
         $mform = &$this->_form;
 
-        if (!isset ($this->_cm)) {
-
-            $mform->addElement('header', 'password_header', get_string('password'));
-            $mform->setExpanded('password_header');
-
-            // Beta version info and password.
-            $mform->addElement('html', '<div class="beta_version_warning" id="maxmembers_error">
-                             <p>' . get_string('beta_version', 'groupformation') . '</p>
-                </div>');
-
-            // Add passwort field.
-            $mform->addElement('password', 'password', get_string('password'), array(
-                'size' => '64'));
-            $mform->addRule('password', null, 'required', null, 'client');
-        }
         // Adding the "general" fieldset, where all the common settings are showed.
         $mform->addElement('header', 'general', get_string('general', 'form'));
         $mform->setExpanded('general');
@@ -137,11 +122,6 @@ class mod_groupformation_mod_form extends moodleform_mod {
     public function validation($data, $files) {
         $errors = array();
 
-        // Check the password for beta version.
-        if (isset($data['password']) && $data ['password'] != 'MoodlePeersBeta') {
-            $errors ['szenario'] = get_string('password_wrong', 'groupformation');
-        }
-
         // Check if szenario is selected.
         if ($data ['szenario'] == 0) {
             $errors ['szenario'] = get_string('scenario_error', 'groupformation');
@@ -205,9 +185,6 @@ class mod_groupformation_mod_form extends moodleform_mod {
                         <input type="radio" name="js_szenario" id="project" value="project"  />
                         <label class="col_m_100 szenarioLabel" id="label_project" for="project" ><div class="sz_header">' .
             get_string('scenario_projectteams', 'groupformation')
-            /*. '<span class="toolt" tooltip="' .
-            get_string ( 'scenario_projectteams_description', 'groupformation' ) .
-            '"></span>' */
             . '</div><p><small>' .
             get_string('scenario_projectteams_description', 'groupformation') . '</small></p>
 		                                </label>
@@ -222,7 +199,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
                     </label>
                 </div>
                          <div class="col_m_33">
-                            <input type="radio" name="js_szenario"  value="presentation" disabled />
+                            <input type="radio" name="js_szenario" id="presentation" value="presentation" />
                             <label class="col_m_100 szenarioLabel" for="presentation"><div class="sz_header">' .
             get_string('scenario_presentationgroups', 'groupformation') . '</div>
                                 <p><small>' .
