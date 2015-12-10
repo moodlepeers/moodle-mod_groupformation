@@ -32,19 +32,19 @@ require_once($CFG->dirroot . '/lib/groupal/classes/criteria/topic_criterion.php'
 
 class mod_groupformation_criterion_calculator {
     private $store;
-    private $user_manager;
+    private $usermanager;
     private $data;
     private $groupformationid;
     private $scenario;
 
     /**
-     *
+     * mod_groupformation_criterion_calculator constructor.
      * @param $groupformationid
      */
     public function __construct($groupformationid) {
         $this->groupformationid = $groupformationid;
         $this->store = new mod_groupformation_storage_manager ($groupformationid);
-        $this->user_manager = new mod_groupformation_user_manager ($groupformationid);
+        $this->usermanager = new mod_groupformation_user_manager ($groupformationid);
         $this->data = new mod_groupformation_data();
 
         $this->scenario = $this->store->get_scenario();
@@ -61,7 +61,6 @@ class mod_groupformation_criterion_calculator {
     private function invert_answer($questionid, $category, $answer) {
         $max = $this->store->get_max_option_of_catalog_question($questionid, $category);
 
-        // Because internally we start with 0 instead of 1.
         return $max + 1 - $answer;
     }
 
@@ -80,7 +79,7 @@ class mod_groupformation_criterion_calculator {
         $labels = $specs['labels'];
         $array = array();
         $category = $specs['category'];
-        if (!$this->user_manager->has_answered_everything($userid)) {
+        if (!$this->usermanager->has_answered_everything($userid)) {
             return null;
         }
         foreach ($labels as $key => $spec) {
@@ -89,10 +88,10 @@ class mod_groupformation_criterion_calculator {
 
             $value = 0;
             foreach ($qids as $qid) {
-                $value += $this->user_manager->get_single_answer($userid, $category, $qid);
+                $value += $this->usermanager->get_single_answer($userid, $category, $qid);
             }
 
-            // array(x,y) with x = ENGLISH and y = GERMAN.
+            // An array(x,y) with x = ENGLISH and y = GERMAN.
             $values = array(1.0, 0.0);
             if ($value == 1) {
                 $values = array(
@@ -113,7 +112,6 @@ class mod_groupformation_criterion_calculator {
             $array[$key] = $tmp;
         }
 
-
         return $array;
     }
 
@@ -133,39 +131,37 @@ class mod_groupformation_criterion_calculator {
         $array = array();
         $category = $specs['category'];
         foreach ($labels as $key => $spec) {
-            $knowledge_values = array();
-            $temp = 0;
-            $max_value = 100;
+            $knowledgevalues = array();
+            $maxvalue = 100;
             if ($spec['scenarios'][$scenario]) {
                 $total = 0;
-                $answers = $this->user_manager->get_answers($userid, $category);
-                $number_of_questions = count($answers);
+                $answers = $this->usermanager->get_answers($userid, $category);
+                $numberofquestions = count($answers);
                 foreach ($answers as $answer) {
                     $total = $total + $answer->answer;
                 }
 
-                if ($number_of_questions != 0) {
-                    $temp = floatval($total) / ($number_of_questions);
-                    $knowledge_values = array(floatval($temp) / $max_value);
+                if ($numberofquestions != 0) {
+                    $temp = floatval($total) / ($numberofquestions);
+                    $knowledgevalues = array(floatval($temp) / $maxvalue);
                 } else {
-                    $knowledge_values = array(0.0);
+                    $knowledgevalues = array(0.0);
                 }
-
 
             } else {
                 if (is_null($spec['questionids'])) {
 
-                    $tmp = $this->store->get_knowledge_or_topic_values('knowledge');
-                    $tmp = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $tmp . ' </OPTIONS>';
-                    $options = mod_groupformation_util::xml_to_array($tmp);
+                    $xmlcontent = $this->store->get_knowledge_or_topic_values('knowledge');
+                    $xmlcontent = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $xmlcontent . ' </OPTIONS>';
+                    $options = mod_groupformation_util::xml_to_array($xmlcontent);
 
                     for ($qid = 0; $qid < count($options); $qid++) {
-                        $value = floatval($this->user_manager->get_single_answer($userid, $category, $qid));
-                        $knowledge_values [] = $value / $max_value;
+                        $value = floatval($this->usermanager->get_single_answer($userid, $category, $qid));
+                        $knowledgevalues [] = $value / $maxvalue;
                     }
                 }
             }
-            $array[$key] = array('values' => $knowledge_values);
+            $array[$key] = array('values' => $knowledgevalues);
         }
 
         return $array;
@@ -190,12 +186,12 @@ class mod_groupformation_criterion_calculator {
         $max = $this->store->get_max_points();
         foreach ($labels as $key => $positions) {
             $answer = 0;
-            $max_answer = 0;
+            $maxanswer = 0;
             foreach ($positions['questionids'] as $k => $p) {
-                $answer += $this->user_manager->get_single_answer($userid, $category, $p);
-                $max_answer += $max;
+                $answer += $this->usermanager->get_single_answer($userid, $category, $p);
+                $maxanswer += $max;
             }
-            $answer = floatval($answer / $max_answer);
+            $answer = floatval($answer / $maxanswer);
             $answers[$key] = array("values" => array($answer));
         }
 
@@ -221,12 +217,12 @@ class mod_groupformation_criterion_calculator {
         $max = $this->store->get_max_points();
         foreach ($labels as $key => $positions) {
             $answer = 0;
-            $max_answer = 0;
+            $maxanswer = 0;
             foreach ($positions['questionids'] as $k => $p) {
-                $answer += $this->user_manager->get_single_answer($userid, $category, $p);
-                $max_answer += $max;
+                $answer += $this->usermanager->get_single_answer($userid, $category, $p);
+                $maxanswer += $max;
             }
-            $answer = floatval($answer / $max_answer);
+            $answer = floatval($answer / $maxanswer);
             $answers[$key] = array("values" => array($answer));
         }
 
@@ -255,18 +251,18 @@ class mod_groupformation_criterion_calculator {
                             $variance = 0;
                             $position = 1;
                             $total = 0;
-                            $initial_id = null;
+                            $initialid = null;
                             foreach ($specs['questionids'] as $id) {
-                                if (is_null($initial_id)){
-                                    $initial_id = $id;
+                                if (is_null($initialid)) {
+                                    $initialid = $id;
                                 }
                                 // Answers for catalog question in category $criterion.
                                 $answers = $this->store->get_answers_to_special_question($category, $id);
 
                                 // Number of options for catalog question.
-                                $totalOptions = $this->store->get_max_option_of_catalog_question($id, $category);
+                                $totaloptions = $this->store->get_max_option_of_catalog_question($id, $category);
 
-                                $dist = array_fill(0, $totalOptions, 0);
+                                $dist = array_fill(0, $totaloptions, 0);
 
                                 // Iterates over answers for grade questions.
                                 foreach ($answers as $answer) {
@@ -277,31 +273,31 @@ class mod_groupformation_criterion_calculator {
                                         $dist [($answer->answer) - 1]++;
 
                                         // Increments count for total.
-                                        if ($id == $initial_id) {
+                                        if ($id == $initialid) {
                                             $total++;
                                         }
                                     }
                                 }
 
-                                // Computes tempE for later use.
-                                $tempE = 0;
+                                // Computes tempexp for later use.
+                                $tempexp = 0;
                                 $p = 1;
                                 foreach ($dist as $d) {
-                                    $tempE = $tempE + ($p * ($d / $total));
+                                    $tempexp = $tempexp + ($p * ($d / $total));
                                     $p++;
                                 }
 
-                                // Computes tempV to find maximal variance.
-                                $temp_variance = 0;
+                                // Computes tempvariance to find maximal variance.
+                                $tempvariance = 0;
                                 $p = 1;
                                 foreach ($dist as $d) {
-                                    $temp_variance = $temp_variance + ((pow(($p - $tempE), 2)) * ($d / $total));
+                                    $tempvariance = $tempvariance + ((pow(($p - $tempexp), 2)) * ($d / $total));
                                     $p++;
                                 }
 
                                 // Sets position by maximal variance.
-                                if ($variance < $temp_variance) {
-                                    $variance = $temp_variance;
+                                if ($variance < $tempvariance) {
+                                    $variance = $tempvariance;
                                     $position = $id;
                                 }
 
@@ -358,29 +354,29 @@ class mod_groupformation_criterion_calculator {
         $labels = $specs['labels'];
         $array = array();
         $category = $specs['category'];
-        if (!$this->user_manager->has_answered_everything($userid)) {
+        if (!$this->usermanager->has_answered_everything($userid)) {
             return null;
         }
         foreach ($labels as $key => $spec) {
             $temp = 0;
-            $max_value = 0;
+            $maxvalue = 0;
             foreach ($spec['questionids'] as $num) {
                 $qid = $num;
                 if ($num < 0) {
                     $qid = abs($num);
-                    if ($this->user_manager->has_answer($userid, $category, $qid)) {
+                    if ($this->usermanager->has_answer($userid, $category, $qid)) {
                         $temp = $temp + $this->invert_answer($qid, $category,
-                                $this->user_manager->get_single_answer($userid, $category, $qid));
+                                $this->usermanager->get_single_answer($userid, $category, $qid));
                     }
                 } else {
-                    if ($this->user_manager->has_answer($userid, $category, $qid)) {
-                        $temp = $temp + $this->user_manager->get_single_answer($userid, $category, $qid);
+                    if ($this->usermanager->has_answer($userid, $category, $qid)) {
+                        $temp = $temp + $this->usermanager->get_single_answer($userid, $category, $qid);
                     }
                 }
-                $max_value = $max_value + $this->store->get_max_option_of_catalog_question($qid, $category);
+                $maxvalue = $maxvalue + $this->store->get_max_option_of_catalog_question($qid, $category);
             }
 
-            $array [$key] = array("values" => array(floatval($temp) / ($max_value)));
+            $array [$key] = array("values" => array(floatval($temp) / ($maxvalue)));
         }
 
         return $array;
@@ -402,12 +398,12 @@ class mod_groupformation_criterion_calculator {
         $category = $specs['category'];
         foreach ($labels as $key => $spec) {
             $temp = 0;
-            $max_value = 0;
+            $maxvalue = 0;
             foreach ($spec['questionids'] as $num) {
-                $temp = $temp + $this->user_manager->get_single_answer($userid, $category, $num);
-                $max_value = $max_value + $this->store->get_max_option_of_catalog_question($num, $category);
+                $temp = $temp + $this->usermanager->get_single_answer($userid, $category, $num);
+                $maxvalue = $maxvalue + $this->store->get_max_option_of_catalog_question($num, $category);
             }
-            $array [$key] = array('values' => array(floatval($temp) / ($max_value)));
+            $array [$key] = array('values' => array(floatval($temp) / ($maxvalue)));
         }
 
         return $array;
@@ -430,12 +426,12 @@ class mod_groupformation_criterion_calculator {
 
         foreach ($labels as $key => $spec) {
             $temp = 0;
-            $max_value = 0;
+            $maxvalue = 0;
             foreach ($spec['questionids'] as $num) {
-                $temp = $temp + $this->user_manager->get_single_answer($userid, $category, $num);
-                $max_value = $max_value + $this->store->get_max_option_of_catalog_question($num, $category);
+                $temp = $temp + $this->usermanager->get_single_answer($userid, $category, $num);
+                $maxvalue = $maxvalue + $this->store->get_max_option_of_catalog_question($num, $category);
             }
-            $array [$key] = array('values' => array(floatval($temp) / ($max_value)));
+            $array [$key] = array('values' => array(floatval($temp) / ($maxvalue)));
         }
 
         return $array;
@@ -458,12 +454,12 @@ class mod_groupformation_criterion_calculator {
 
         foreach ($labels as $key => $spec) {
             $temp = 0;
-            $max_value = 0;
+            $maxvalue = 0;
             foreach ($spec['questionids'] as $num) {
-                $temp = $temp + $this->user_manager->get_single_answer($userid, $category, $num);
-                $max_value = $max_value + $this->store->get_max_option_of_catalog_question($num, $category);
+                $temp = $temp + $this->usermanager->get_single_answer($userid, $category, $num);
+                $maxvalue = $maxvalue + $this->store->get_max_option_of_catalog_question($num, $category);
             }
-            $array [$key] = array('values' => array(floatval($temp) / ($max_value)));
+            $array [$key] = array('values' => array(floatval($temp) / ($maxvalue)));
         }
 
         return $array;
@@ -476,7 +472,7 @@ class mod_groupformation_criterion_calculator {
      * @return TopicCriterion
      */
     public function get_topic($userid) {
-        $choices = $this->user_manager->get_answers($userid, 'topic', 'questionid', 'answer');
+        $choices = $this->usermanager->get_answers($userid, 'topic', 'questionid', 'answer');
 
         return new lib_groupal_topic_criterion(array_keys($choices));
     }
@@ -485,11 +481,11 @@ class mod_groupformation_criterion_calculator {
      * Returns eval data for user
      *
      * @param $userid
-     * @param $group_users
-     * @param $course_users
+     * @param $groupusers
+     * @param $courseusers
      * @return array
      */
-    public function get_eval($userid, $group_users, $course_users) {
+    public function get_eval($userid, $groupusers, $courseusers) {
         $eval = array();
         $criteria = $this->store->get_label_set();
 
@@ -499,7 +495,7 @@ class mod_groupformation_criterion_calculator {
                 $labels = $this->filter_criterion_specs_for_eval($criterion, $labels);
             }
             if (!is_null($labels) && count($labels) > 0) {
-                $eval[$criterion] = $this->get_eval_infos($criterion, $labels, $userid, $group_users, $course_users);
+                $eval[$criterion] = $this->get_eval_infos($criterion, $labels, $userid, $groupusers, $courseusers);
             }
         }
 
@@ -524,34 +520,34 @@ class mod_groupformation_criterion_calculator {
      * Returns average values for the users
      *
      * @param $criterion
-     * @param $group_users
+     * @param $groupusers
      * @return null
      */
-    public function get_avg_values_for_users($criterion, $group_users) {
+    public function get_avg_values_for_users($criterion, $groupusers) {
         $function = 'get_' . $criterion;
-        $avg_values = null;
-        $groupsize = count($group_users);
+        $avgvalues = null;
+        $groupsize = count($groupusers);
         if ($groupsize > 0) {
-            foreach ($group_users as $group_user) {
-                $user_values = $this->$function($group_user);
-                if (is_null($avg_values)) {
-                    $avg_values = $user_values;
+            foreach ($groupusers as $groupuser) {
+                $uservalues = $this->$function($groupuser);
+                if (is_null($avgvalues)) {
+                    $avgvalues = $uservalues;
                 } else {
-                    if (!is_null($user_values)) {
-                        foreach ($user_values as $key => $user_value) {
-                            $avg_values[$key]['value'] += $user_value['value'];
+                    if (!is_null($uservalues)) {
+                        foreach ($uservalues as $key => $uservalue) {
+                            $avgvalues[$key]['value'] += $uservalue['value'];
                         }
                     } else {
                         $groupsize = max(1, $groupsize - 1);
                     }
                 }
             }
-            foreach ($avg_values as $key => $avg_value) {
-                $avg_values[$key]['value'] /= $groupsize;
+            foreach ($avgvalues as $key => $avgvalue) {
+                $avgvalues[$key]['value'] /= $groupsize;
             }
         }
 
-        return $avg_values;
+        return $avgvalues;
     }
 
     /**
@@ -560,34 +556,32 @@ class mod_groupformation_criterion_calculator {
      * @param $criterion
      * @param $labels
      * @param $userid
-     * @param $group_users
-     * @param $course_users
+     * @param $groupusers
+     * @param $courseusers
      * @return array
      */
-    public function get_eval_infos($criterion, $labels, $userid, $group_users, $course_users) {
-        $completed_users = array_keys($this->user_manager->get_completed_by_answer_count('userid', 'userid'));
-        $group_and_completed = array_intersect($completed_users, $group_users);
-        $course_and_completed = array_intersect($completed_users, $course_users);
-        $completed = count($course_and_completed);
-        $coursesize = count($course_users);
+    public function get_eval_infos($criterion, $labels, $userid, $groupusers, $courseusers) {
+        $completedusers = array_keys($this->usermanager->get_completed_by_answer_count('userid', 'userid'));
+        $groupandcompleted = array_intersect($completedusers, $groupusers);
+        $courseandcompleted = array_intersect($completedusers, $courseusers);
+        $completed = count($courseandcompleted);
+        $coursesize = count($courseusers);
         $setfinaltext = $coursesize > 2;
 
-        $eval_infos = array();
-        if ($criterion == 'general')
-            var_dump($labels);
-        $user_values = $this->get_values_for_user($criterion, $userid, $labels);
-        $group_values = $this->get_avg_values_for_users($criterion, $group_and_completed, $labels);
-        $course_values = $this->get_avg_values_for_users($criterion, $course_and_completed, $labels);
+        $evalinfos = array();
+        $uservalues = $this->get_values_for_user($criterion, $userid, $labels);
+        $groupvalues = $this->get_avg_values_for_users($criterion, $groupandcompleted, $labels);
+        $coursevalues = $this->get_avg_values_for_users($criterion, $courseandcompleted, $labels);
         foreach ($labels['labels'] as $label => $spec) {
-            $user = $user_values[$label]['values'][0];
+            $user = $uservalues[$label]['values'][0];
             $group = null;
             $course = null;
 
-            if (!(count($group_and_completed) < 3 || is_null($group_values))) {
-                $group = $group_values[$label]['value'];
+            if (!(count($groupandcompleted) < 3 || is_null($groupvalues))) {
+                $group = $groupvalues[$label]['value'];
             }
-            if (!(count($course_and_completed) < 3 || is_null($course_values))) {
-                $course = $course_values[$label]['value'];
+            if (!(count($courseandcompleted) < 3 || is_null($coursevalues))) {
+                $course = $coursevalues[$label]['value'];
             }
 
             $mode = 1;
@@ -597,11 +591,11 @@ class mod_groupformation_criterion_calculator {
             $array["range"] = array("min" => 0, "max" => 1);
             $array["mode"] = $mode;
             $array["captions"] = $this->get_captions($mode, $setfinaltext, $completed, $coursesize);
-            $eval_infos[] = $array;
+            $evalinfos[] = $array;
 
         }
 
-        return $eval_infos;
+        return $evalinfos;
     }
 
     /**

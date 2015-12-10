@@ -27,16 +27,14 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/criterion_cal
 
 class mod_groupformation_participant_parser {
     private $groupformationid;
-    private $user_manager;
-    private $criterion_calculator;
+    private $criterioncalculator;
     private $store;
     private $data;
 
     public function __construct($groupformationid) {
         $this->groupformationid = $groupformationid;
         $this->store = new mod_groupformation_storage_manager ($groupformationid);
-        $this->user_manager = new mod_groupformation_user_manager ($groupformationid);
-        $this->criterion_calculator = new mod_groupformation_criterion_calculator ($groupformationid);
+        $this->criterioncalculator = new mod_groupformation_criterion_calculator ($groupformationid);
         $this->data = new mod_groupformation_data();
     }
 
@@ -55,38 +53,17 @@ class mod_groupformation_participant_parser {
 
             foreach ($labels as $label) {
                 $value = $user->$label;
-                $count = count($value);
                 $homogen = $value ["homogeneous"];
                 unset ($value ["homogeneous"]);
-                $minVal = 0.0;
-                $maxVal = 1.0;
-
-                /*
-                 * Sprache: Es soll ein 2-dim Vektor rauskommen. (HOMOGEN zu matchen)
-                 * Wert1: Englisch = 1 wenn Englisch ausgewählt
-                 * Wert2: Deutsch = 1 wenn Deutsch ausgewählt
-                 *
-                 * Wurde Deutsch bevorzugt ausgewählt, wird Englisch nicht auf 0 sondern
-                 * auf 0.5 gesetzt. Ebenso bei Englisch bevorzugt wird Deutsch auf 0.5 gesetzt.
-                 *
-                 * Gewichtung: Bei Übergabe an GroupAL folgender PseudoCode:
-                 * var numCrit = Anzahl aller Kriterien die aktuell an GroupAL übergeben
-                 * werden sollen (die haben standardmäßig ein Gewicht von 1 (weight=1).
-                 * var weightLanguage = (numCrit-1)/2
-                 *
-                 * ((Dieser Code sollte sicher nach dem Code stehen, der entscheided ob die
-                 * Noten/Punkte-Angaben überhaupt als Kriterium an GroupAL übergeben werden oder
-                 * ignoriert werden.))
-                 *
-                 */
-
+                $minval = 0.0;
+                $maxval = 1.0;
                 $weight = 1;
 
                 if ($label == 'general') {
                     $weight = (count($labels) - 1) / 2;
                 }
 
-                $criterion = new lib_groupal_specific_criterion ($label, $value, $minVal, $maxVal, $homogen, $weight);
+                $criterion = new lib_groupal_specific_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
                 if ($position == 0) {
                     $participant = new lib_groupal_participant (array(
                         $criterion), $user->id);
@@ -104,8 +81,8 @@ class mod_groupformation_participant_parser {
     /**
      * Builds all participants wrt topic choices
      *
-     * @param array $users
-     * @return multitype:|multitype:multitype:
+     * @param $users
+     * @return array
      */
     public function build_topic_participants($users) {
         if (count($users) == 0) {
@@ -120,7 +97,7 @@ class mod_groupformation_participant_parser {
 
         foreach ($users as $userid) {
 
-            $criterion = $this->criterion_calculator->get_topic($userid);
+            $criterion = $this->criterioncalculator->get_topic($userid);
 
             $participant = new lib_groupal_participant (array(
                 $criterion), $userid);
@@ -141,8 +118,8 @@ class mod_groupformation_participant_parser {
     /**
      * Builds Participants array using a parser (at the end)
      *
-     * @param unknown $users
-     * @return multitype:lib_groupal_participant
+     * @param $users
+     * @return array
      */
     public function build_participants($users) {
         if (count($users) == 0) {
@@ -153,20 +130,16 @@ class mod_groupformation_participant_parser {
 
         $labels = $this->store->get_label_set();
         $criteriaspecs = array();
-        foreach($labels as $label) {
+        foreach ($labels as $label) {
             $criteriaspecs[$label] = $this->data->get_criterion_specification($label);
         }
 
         $scenario = $this->store->get_scenario();
 
-        $pointsP = null;
-
-
-        $gradeP = null;
-        $criteriaspecs = $this->criterion_calculator->filter_criteria_specs($criteriaspecs, $users);
+        $criteriaspecs = $this->criterioncalculator->filter_criteria_specs($criteriaspecs, $users);
 
         $array = array();
-        $totalLabel = array();
+        $totallabel = array();
 
         // Iterates over set of users.
         foreach ($users as $user) {
@@ -178,7 +151,7 @@ class mod_groupformation_participant_parser {
             foreach ($criteriaspecs as $criterion => $spec) {
 
                 if (in_array($scenario, $spec['scenarios'])) {
-                    $points = $this->criterion_calculator->get_values_for_user($criterion, $user, $spec);
+                    $points = $this->criterioncalculator->get_values_for_user($criterion, $user, $spec);
                     foreach ($spec['labels'] as $label => $lspec) {
                         $value = array();
                         $vs = $points[$label]["values"];
@@ -188,7 +161,7 @@ class mod_groupformation_participant_parser {
                         $value ["homogeneous"] = $lspec['scenarios'][$scenario];
                         $name = $criterion . '_' . $label;
                         $object->$name = $value;
-                        $totalLabel [] = $name;
+                        $totallabel [] = $name;
                     }
                 }
 
@@ -196,8 +169,8 @@ class mod_groupformation_participant_parser {
 
             $array [] = $object;
         }
-        $totalLabel = array_unique($totalLabel);
-        $res = $this->parse($array, $totalLabel);
+        $totallabel = array_unique($totallabel);
+        $res = $this->parse($array, $totallabel);
 
         $endtime = microtime(true);
         $comptime = $endtime - $starttime;
@@ -209,7 +182,8 @@ class mod_groupformation_participant_parser {
     /**
      * Generates participants without criterions
      *
-     * @param array $users
+     * @param $users
+     * @return array
      */
     public function build_empty_participants($users) {
         $starttime = microtime(true);
