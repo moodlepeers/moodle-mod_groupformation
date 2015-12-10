@@ -103,12 +103,13 @@ class mod_groupformation_analysis_controller {
         }
 
         $buttonname = ($this->questionnaireavailable) ? "stop_questionnaire" : "start_questionnaire";
-        $buttoncaption = ($this->questionnaireavailable) ? get_string('activity_end', 'groupformation') : get_string('activity_start', 'groupformation');
+        $buttoncaption = ($this->questionnaireavailable) ?
+            get_string('activity_end', 'groupformation') : get_string('activity_start', 'groupformation');
         $buttondisabled = ($this->jobstate !== "ready") ? "disabled" : "";
 
         $statusanalysisview->assign('button', array(
             'type' => 'submit', 'name' => $buttonname, 'value' => '', 'state' => $buttondisabled,
-            'text' => $buttoncaption,));
+            'text' => $buttoncaption));
 
         $infoteacher = mod_groupformation_util::get_info_text_for_teacher(false, "analysis");
 
@@ -209,6 +210,7 @@ class mod_groupformation_analysis_controller {
         $this->view->assign('analysis_name', $this->store->get_name());
         $this->view->assign('analysis_status_template', $this->load_status());
         $this->view->assign('analysis_statistics_template', $this->load_statistics());
+
         return $this->view->load_template();
     }
 

@@ -30,25 +30,18 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.
 
 
 class mod_groupformation_student_group_view_controller {
-    private $groups_store;
+    private $groupsmanager;
     private $groupformationid;
 
     private $view = null;
 
-    private $group_name = '';
-    private $group_info = '';
-    private $group_info_contact = '';
-
-    private $array = array();
-
     /**
-     * Constructs instance of groupInfos
-     *
-     * @param integer $groupformationid
+     * mod_groupformation_student_group_view_controller constructor.
+     * @param $groupformationid
      */
     public function __construct($groupformationid) {
         $this->groupformationid = $groupformationid;
-        $this->groups_store = new mod_groupformation_groups_manager ($groupformationid);
+        $this->groupsmanager = new mod_groupformation_groups_manager ($groupformationid);
 
         $this->view = new mod_groupformation_template_builder ();
         $this->view->set_template('wrapper_student_groupview');
@@ -57,47 +50,51 @@ class mod_groupformation_student_group_view_controller {
     /**
      * Outputs group with its members
      *
-     * @param integer $userid
+     * @param $userid
+     * @return string
+     * @throws coding_exception
      */
     public function render($userid) {
         global $CFG, $COURSE;
-        if ($this->groups_store->has_group($userid) && $this->groups_store->groups_created()) {
-            $id = $this->groups_store->get_group_id($userid);
+        $array = array();
+        $groupinfocontact = '';
+        $groupname = '';
+        if ($this->groupsmanager->has_group($userid) && $this->groupsmanager->groups_created()) {
+            $id = $this->groupsmanager->get_group_id($userid);
 
-            $name = $this->groups_store->get_group_name($userid);
+            $name = $this->groupsmanager->get_group_name($userid);
 
-            $this->group_name = $name . ' (ID #' . $id . ')';
+            $groupname = $name . ' (ID #' . $id . ')';
+            $othermembers = $this->groupsmanager->get_group_members($userid);
 
-            $otherMembers = $this->groups_store->get_group_members($userid);
+            if (count($othermembers) > 0) {
+                $groupinfo = get_string('membersAre', 'groupformation');
+                $groupinfocontact = get_string('contact_members', 'groupformation');
 
-            if (count($otherMembers) > 0) {
-                $this->group_info = get_string('membersAre', 'groupformation');
-                $this->group_info_contact = get_string('contact_members', 'groupformation');
-
-                foreach ($otherMembers as $memberid) {
+                foreach ($othermembers as $memberid) {
 
                     $member = get_complete_user_data('id', $memberid);
 
                     $url = $CFG->wwwroot . '/user/view.php?id=' . $memberid . '&course=' . $COURSE->id;
 
                     if (!$member) {
-                        $this->array[] = get_string('noUser', 'groupformation');
+                        $array[] = get_string('noUser', 'groupformation');
                     }
 
-                    $this->array[] = '<a href="' . $url . '">' . fullname($member) . '</a>';
+                    $array[] = '<a href="' . $url . '">' . fullname($member) . '</a>';
                 }
 
             } else {
-                $this->group_info = get_string('oneManGroup', 'groupformation');
+                $groupinfo = get_string('oneManGroup', 'groupformation');
             }
         } else {
-            $this->group_info = get_string('groupingNotReady', 'groupformation');
+            $groupinfo = get_string('groupingNotReady', 'groupformation');
         }
 
-        $this->view->assign('group_name', $this->group_name);
-        $this->view->assign('members', $this->array);
-        $this->view->assign('group_info', $this->group_info);
-        $this->view->assign('group_info_contact', $this->group_info_contact);
+        $this->view->assign('group_name', $groupname);
+        $this->view->assign('members', $array);
+        $this->view->assign('group_info', $groupinfo);
+        $this->view->assign('group_info_contact', $groupinfocontact);
         return $this->view->load_template();
     }
 }

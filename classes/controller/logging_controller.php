@@ -23,19 +23,19 @@
  *
  */
 if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.'); // / It must be included from a Moodle page
+    die ('Direct access to this script is forbidden.');
 }
 
 class mod_groupformation_logging_controller {
-    const LOGGING_LEVEL = 4; // <= Sperre
+    const LOGGING_LEVEL = 4;
     const FATAL = 0;
     const ERROR = 1;
     const WARNING = 2;
     const INFO = 3;
     const DEBUG = 4;
-    private $LOGGING_LEVELS;
+    private $logginglevels;
     const LOGGING_TABLE_NAME = "groupformation_logging";
-    private $MESSAGES = array(
+    private $messages = array(
         '<index>' => 3,
 
         '<create_instance>' => 3, '<update_instance>' => 3, '<delete_instance>' => 3,
@@ -57,7 +57,7 @@ class mod_groupformation_logging_controller {
      * Creates logging controller instance
      */
     public function __construct() {
-        $this->LOGGING_LEVELS = array(
+        $this->logginglevels = array(
             self::FATAL => 'fatal', self::ERROR => 'error', self::WARNING => 'warning', self::INFO => 'info',
             self::DEBUG => 'debug');
     }
@@ -89,12 +89,12 @@ class mod_groupformation_logging_controller {
         global $DB;
         $timestamp = microtime(true);
 
-        $log_entry = new stdClass ();
-        $log_entry->timestamp = $timestamp;
-        $log_entry->userid = $userid;
-        $log_entry->groupformationid = $groupformationid;
-        $log_entry->message = $message;
+        $logentry = new stdClass ();
+        $logentry->timestamp = $timestamp;
+        $logentry->userid = $userid;
+        $logentry->groupformationid = $groupformationid;
+        $logentry->message = $message;
 
-        $DB->insert_record(self::LOGGING_TABLE_NAME, $log_entry);
+        $DB->insert_record(self::LOGGING_TABLE_NAME, $logentry);
     }
 }
