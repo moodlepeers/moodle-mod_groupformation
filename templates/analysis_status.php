@@ -1,11 +1,11 @@
 <div class="grid">
 	<div class="col_m_100 bp_align_left-middle">
-        <span><?php echo $this->_['info_teacher']; ?></span></br>
+        <span><?php echo $this->_['info_teacher']; ?></span><br>
         <span><i></i></span>
     </div>
     <div class="col_m_66 bp_align_left-middle">
-        <span><b><?php echo get_string('starttime','groupformation');?>: </b><?php echo $this->_['analysis_time_start']; ?></span></br>
-        <span><b><?php echo get_string('endtime','groupformation');?>: </b><?php echo $this->_['analysis_time_end']; ?></span></br></br>
+        <span><b><?php echo get_string('starttime','groupformation');?>: </b><?php echo $this->_['analysis_time_start']; ?></span><br>
+        <span><b><?php echo get_string('endtime','groupformation');?>: </b><?php echo $this->_['analysis_time_end']; ?></span><br><br>
         <span><i><?php echo $this->_['analysis_status_info']; ?></i></span>
         <span><i></i></span>
     </div>

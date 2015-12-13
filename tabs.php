@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -9,107 +8,108 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
-
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
  * prints the tabbed bar
  *
- * @author Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
+ * @author Nora Wester
  * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
  * @package mod_groupformation
- *         
+ *
  */
-defined ( 'MOODLE_INTERNAL' ) or die ( 'not allowed' );
+defined('MOODLE_INTERNAL') or die ('not allowed');
 
-$tabs = array ();
-$row = array ();
-$inactive = array ();
-$activated = array ();
-$store = new mod_groupformation_storage_manager ( $groupformation->id );
-$groups_store = new mod_groupformation_groups_manager($groupformation->id);
+$tabs = array();
+$row = array();
+$inactive = array();
+$activated = array();
+$store = new mod_groupformation_storage_manager ($groupformation->id);
+$groupsstore = new mod_groupformation_groups_manager ($groupformation->id);
+$usermanager = new mod_groupformation_user_manager ($groupformation->id);
 
-// some pages deliver the cmid instead the id
-if (isset ( $cmid ) and intval ( $cmid ) and $cmid > 0) {
-	$usedid = $cmid;
+// Some pages deliver the cmid instead the id.
+if (isset ($cmid) and intval($cmid) and $cmid > 0) {
+    $usedid = $cmid;
 } else {
-	$usedid = $id;
+    $usedid = $id;
 }
 
-$context = context_module::instance ( $usedid );
+$context = context_module::instance($usedid);
 
-$courseid = optional_param ( 'courseid', false, PARAM_INT );
+$courseid = optional_param('courseid', false, PARAM_INT);
 
-if (! isset ( $current_tab )) {
-	$current_tab = '';
+if (!isset ($currenttab)) {
+    $currenttab = '';
 }
 
-// has editing rights -> course manager or higher
-if (has_capability ( 'mod/groupformation:editsettings', $context )) {
-	// analysis_view
-	$analyseurl = new moodle_url ( '/mod/groupformation/analysis_view.php', array (
-			'id' => $usedid,
-			'do_show' => 'analysis' 
-	) );
-	$row [] = new tabobject ( 'analysis', $analyseurl->out (), get_string ( 'tab_overview', 'groupformation' ) );
-	
-	// grouping_view
-	$groupingurl = new moodle_url ( '/mod/groupformation/grouping_view.php', array (
-			'id' => $usedid,
-			'do_show' => 'grouping' 
-	) );
-	$row [] = new tabobject ( 'grouping', $groupingurl->out (), get_string ( 'tab_grouping', 'groupformation' ) );
-	
-	// questionaire_view -> preview mode
-	$questionaire_viewiewurl = new moodle_url ( '/mod/groupformation/questionaire_view.php', array (
-			'id' => $usedid 
-	) );
-	$row [] = new tabobject ( 'view', $questionaire_viewiewurl->out (), get_string ( 'tab_preview', 'groupformation' ) );
-} elseif (! has_capability ( 'mod/groupformation:editsettings', $context ) && has_capability ( 'mod/groupformation:onlystudent', $context )) {
-	
-	// view -> student mode
-	$viewurl = new moodle_url ( '/mod/groupformation/view.php', array (
-			'id' => $usedid,
-			'do_show' => 'view' 
-	) );
-	$row [] = new tabobject ( 'view', $viewurl->out (), get_string ( 'tab_overview', 'groupformation' ) );
-	
-	// If questionaire is available for students
-	if ($store->isQuestionaireAvailable () || ($store->isQuestionaireAccessible())) {
-		// questionaire view
-		$questionaire_viewiewurl = new moodle_url ( '/mod/groupformation/questionaire_view.php', array (
-				'id' => $usedid 
-		) );
-		$row [] = new tabobject ( 'answering', $questionaire_viewiewurl->out (), get_string ( 'tab_questionaire', 'groupformation' ) );
-	}
-	
-	// always if student meets conditions
-	// || $store->isQuestionaireCompleted ( $userid ) || $groups_store->groups_created()) {
-	
-	if (true){ 
-		
-		// evaluation view -> later TODO
-		// $evaluationurl = new moodle_url ( '/mod/groupformation/evaluation_view.php', array (
-		// 'id' => $usedid,
-		// 'do_show' => 'evaluation'
-		// ) );
-		// $row [] = new tabobject ( 'evaluation', $evaluationurl->out (), get_string ( 'tab_evaluation', 'groupformation' ) );
-		
-		// group view
-		$groupurl = new moodle_url ( '/mod/groupformation/group_view.php', array (
-				'id' => $usedid,
-				'do_show' => 'group' 
-		) );
-		$row [] = new tabobject ( 'group', $groupurl->out (), get_string ( 'tab_group', 'groupformation' ) );
-	}
+// Has editing rights -> course manager or higher.
+if (has_capability('mod/groupformation:editsettings', $context)) {
+    // Analysis_view.
+    $analyseurl = new moodle_url ('/mod/groupformation/analysis_view.php', array(
+        'id' => $usedid, 'do_show' => 'analysis'));
+    $row [] = new tabobject ('analysis', $analyseurl->out(), get_string('tab_overview', 'groupformation'));
+
+    // The grouping_view.
+    $groupingurl = new moodle_url ('/mod/groupformation/grouping_view.php', array(
+        'id' => $usedid, 'do_show' => 'grouping'));
+    $row [] = new tabobject ('grouping', $groupingurl->out(), get_string('tab_grouping', 'groupformation'));
+
+    // The questionnaire_view -> preview mode .
+    $questionnaireviewurl = new moodle_url ('/mod/groupformation/questionnaire_view.php', array(
+        'id' => $usedid));
+    $row [] = new tabobject ('view', $questionnaireviewurl->out(), get_string('tab_preview', 'groupformation'));
+
+    // The import/export view.
+    if (false) {
+        $exporturl = new moodle_url ('/mod/groupformation/export_view.php', array(
+            'id' => $usedid, 'do_show' => 'export'));
+        $row [] = new tabobject ('import_export', $exporturl->out(), 'Export');
+    }
+} else if (!has_capability('mod/groupformation:editsettings', $context) &&
+    has_capability('mod/groupformation:onlystudent', $context)
+) {
+    // The view -> student mode.
+    $viewurl = new moodle_url ('/mod/groupformation/view.php', array(
+        'id' => $usedid, 'do_show' => 'view'));
+    $row [] = new tabobject ('view', $viewurl->out(), get_string('tab_overview', 'groupformation'));
+
+    // If questionaire is available for students.
+    if ($store->is_questionnaire_available() || ($store->is_questionnaire_accessible())) {
+        // The questionaire view.
+        $questionnaireviewurl = new moodle_url ('/mod/groupformation/questionnaire_view.php', array(
+            'id' => $usedid));
+        $row [] = new tabobject ('answering', $questionnaireviewurl->out(),
+            get_string('tab_questionnaire', 'groupformation'));
+    }
+
+    // Evaluation view.
+    if (false) {
+        $evaluationurl = new moodle_url ('/mod/groupformation/evaluation_view.php', array(
+            'id' => $usedid,
+            'do_show' => 'evaluation'
+        ));
+        $row [] = new tabobject ('evaluation', $evaluationurl->out(), get_string('tab_evaluation', 'groupformation'));
+    }
+
+    // The group view.
+    $groupurl = new moodle_url ('/mod/groupformation/group_view.php', array(
+        'id' => $usedid, 'do_show' => 'group'));
+    $row [] = new tabobject ('group', $groupurl->out(), get_string('tab_group', 'groupformation'));
+
+    // The import/export view.
+    $groupurl = new moodle_url ('/mod/groupformation/import_export_view.php', array(
+        'id' => $usedid, 'do_show' => 'import_export'));
+    $row [] = new tabobject ('import_export', $groupurl->out(), 'Import/Export');
+
 }
 
-if (count ( $row ) >= 1) {
-	$tabs [] = $row;
-	
-	print_tabs ( $tabs, $current_tab, $inactive, $activated );
+if (count($row) >= 1) {
+    $tabs [] = $row;
+
+    print_tabs($tabs, $currenttab, $inactive, $activated);
 }
 

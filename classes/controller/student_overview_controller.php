@@ -8,59 +8,63 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-if (! defined ( 'MOODLE_INTERNAL' )) {
-    die ( 'Direct access to this script is forbidden.' ); // / It must be included from a Moodle page
+/**
+ *
+ * @package mod_groupformation
+ * @@author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+if (!defined('MOODLE_INTERNAL')) {
+    die ('Direct access to this script is forbidden.');
 }
 
-require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
-require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
-
-require_once ($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
-require_once ($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
-require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/userid_filter.php');
-require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/group_generator.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/group_generator.php');
 
 class mod_groupformation_student_overview_controller {
-
     private $cmid;
     private $userid;
     private $groupformationid;
     private $store;
-    private $groups_store;
-
-    private $view_state;
-
-    private $groupformation_state_info = array();
-    private $buttons_array = array();
-    private $buttons_info;
-    private $survey_states_array = array();
-    private $groupformation_info;
-    private $survey_states_title = '';
-
-    private $view = NULL;
+    private $groupsmanager;
+    private $usermanager;
+    private $viewstate;
+    private $groupformationstateinfo = array();
+    private $buttonsarray = array();
+    private $buttonsinfo;
+    private $surveystatesarray = array();
+    private $groupformationinfo;
+    private $surveystatestitle = '';
+    private $view = null;
 
     /**
-     * Creates an instance of grouping_controller for groupformation
-     *
-     * @param unknown $groupformationID
+     * mod_groupformation_student_overview_controller constructor.
+     * @param $cmid
+     * @param $groupformationid
+     * @param $userid
      */
     public function __construct($cmid, $groupformationid, $userid) {
-        // its not the groupformation id -> its also unused so far
         $this->cmid = $cmid;
         $this->userid = $userid;
         $this->groupformationid = $groupformationid;
-        $this->store = new mod_groupformation_storage_manager ( $groupformationid );
-        $this->groups_store = new mod_groupformation_groups_manager($groupformationid);
+        $this->store = new mod_groupformation_storage_manager ($groupformationid);
+        $this->groupsmanager = new mod_groupformation_groups_manager ($groupformationid);
+        $this->usermanager = new mod_groupformation_user_manager ($groupformationid);
 
         $this->view = new mod_groupformation_template_builder ();
 
-        $this->determine_status ();
+        $this->determine_status();
         $this->determine_view();
     }
 
@@ -70,192 +74,187 @@ class mod_groupformation_student_overview_controller {
     public function determine_status() {
         global $PAGE;
 
-        if (has_capability('mod/groupformation:onlystudent', $PAGE->context)){
-            $isBuild = $this->groups_store->is_build();
-            if($isBuild){
-                $this->view_state = 2;
-            }else{
-                if ($this->store->isQuestionaireAvailable()) {
-                    $this->view_state = $this->store->answeringStatus($this->userid);
-                }else{$this->view_state = 4;}
+        if (has_capability('mod/groupformation:onlystudent', $PAGE->context)) {
+            $isbuild = $this->groupsmanager->is_build();
+            if ($isbuild) {
+                $this->viewstate = 2;
+            } else {
+                if ($this->store->is_questionnaire_available()) {
+                    $this->viewstate = $this->usermanager->get_answering_status($this->userid);
+                } else {
+                    $this->viewstate = 4;
+                }
             }
-        }else{
-            $this->view_state = 3;
+        } else {
+            $this->viewstate = 3;
         }
-
     }
-
 
     /**
      * set all variable to the current state
      */
-    private function determine_view(){
-        switch ($this->view_state) {
-            case -1 :       // Questionaire is available but not started yet
-                $this->groupformation_info = mod_groupformation_util::get_info_text_for_student(true, $this->groupformationid);
-                $this->groupformation_state_info = array($this->availabilityState());
-                $this->buttons_info = get_string ( 'questionaire_press_to_begin', 'groupformation' );
-                $this->buttons_array = array(
-                    array('type' => 'submit',
-                        'name' => '',
-                        'value' => get_string("next"),
-                        'state' => '',
-                        'text' => get_string("next")
-                    )
-                );
+    private function determine_view() {
+        switch ($this->viewstate) {
+            case -1 : // Questionaire is available but not started yet.
+                $this->groupformationinfo =
+                    mod_groupformation_util::get_info_text_for_student(true, $this->groupformationid);
+                $this->groupformationstateinfo = array(
+                    $this->get_availability_state());
+                $this->buttonsinfo = get_string('questionnaire_press_to_begin', 'groupformation');
+                $this->buttonsarray = array(
+                    array(
+                        'type' => 'submit', 'name' => '', 'value' => get_string("next"), 'state' => '',
+                        'text' => get_string("next")));
                 break;
 
-            case 0:         // Questionaire is available, started, not finished and not submited
-                $this->groupformation_info = mod_groupformation_util::get_info_text_for_student(false, $this->groupformationid);
-                $this->groupformation_state_info = array( $this->availabilityState(), get_string ( 'questionaire_not_submitted', 'groupformation' ));
-                $this->buttons_info = get_string ( 'questionaire_press_continue_submit', 'groupformation' );
+            case 0 : // Questionaire is available, started, not finished and not submited.
+                $this->groupformationinfo =
+                    mod_groupformation_util::get_info_text_for_student(false, $this->groupformationid);
+                $this->groupformationstateinfo = array(
+                    $this->get_availability_state(), get_string('questionnaire_not_submitted', 'groupformation'));
+                $this->buttonsinfo = get_string('questionnaire_press_continue_submit', 'groupformation');
 
                 $this->determine_survey_stats();
 
-                $hasAnsweredEverything = $this->store->hasAnsweredEverything ( $this->userid );
-                $disabled = ! $hasAnsweredEverything;
-
-                $this->buttons_array = array(
-                    array('type' => 'submit',
-                        'name' => 'begin',
-                        'value' => '1',
+                $this->buttonsarray = array(
+                    array(
+                        'type' => 'submit', 'name' => 'begin', 'value' => '1', 'state' => '',
+                        'text' => get_string('edit')), array(
+                        'type' => 'submit', 'name' => 'begin', 'value' => '0',
                         'state' => '',
-                        'text' => get_string ( 'edit' )
-                    ),
-                    array('type' => 'submit',
-                        'name' => 'begin',
-                        'value' => '0',
-                        'state' => (($disabled) ? 'disabled' : ''),
-                        'text' => get_string ( 'questionaire_submit', 'groupformation' )
-                    ),
-                );
+                        'text' => get_string('questionnaire_submit', 'groupformation')));
                 break;
 
-            case 1:         // Questionaire is submitted
-                $this->groupformation_info = mod_groupformation_util::get_info_text_for_student(true, $this->groupformationid);
-                $this->groupformation_state_info = array(get_string ( 'questionaire_submitted', 'groupformation' ));
-                $this->buttons_info = '';
-                $this->buttons_array = array();
+            case 1 : // Questionaire is submitted.
+                $this->groupformationinfo =
+                    mod_groupformation_util::get_info_text_for_student(true, $this->groupformationid);
+                $this->groupformationstateinfo = array(
+                    get_string('questionnaire_submitted', 'groupformation'));
+                $this->buttonsinfo = '';
+                $this->buttonsarray = array();
                 break;
 
-            case 2:         // Groups are built
-                $this->groupformation_info = mod_groupformation_util::get_info_text_for_student(false, $this->groupformationid);
-                $this->groupformation_state_info = array(get_string('groups_build', 'groupformation'));
-                $this->buttons_info = '';
-                $this->buttons_array = array();
+            case 2 : // Groups are built.
+                $this->groupformationinfo =
+                    mod_groupformation_util::get_info_text_for_student(false, $this->groupformationid);
+                $this->groupformationstateinfo = array(
+                    get_string('groups_build', 'groupformation'));
+                $this->buttonsinfo = '';
+                $this->buttonsarray = array();
                 break;
 
-            case 3:         // The activity is not accessible for the student/teacher
-                $this->groupformation_info = mod_groupformation_util::get_info_text_for_student(false, $this->groupformationid);
-                $this->groupformation_state_info = array(get_string('activity_visible', 'groupformation'));
-                $this->buttons_info = '';
-                $this->buttons_array = array();
+            case 3 : // The activity is not accessible for the student/teacher.
+                $this->groupformationinfo =
+                    mod_groupformation_util::get_info_text_for_student(false, $this->groupformationid);
+                $this->groupformationstateinfo = array(
+                    get_string('activity_visible', 'groupformation'));
+                $this->buttonsinfo = '';
+                $this->buttonsarray = array();
                 break;
 
-            case 4;         // The Questionaire is not available, but groups are not build yet
-                $this->groupformation_info = mod_groupformation_util::get_info_text_for_student(true, $this->groupformationid);
-                $this->groupformation_state_info = array($this->availabilityState());
-                $this->buttons_info = '';
-                $this->buttons_array = array();
+            case 4 : // The questionnaire is not available, but groups are not build yet.
+                $this->groupformationinfo =
+                    mod_groupformation_util::get_info_text_for_student(true, $this->groupformationid);
+                $this->groupformationstateinfo = array(
+                    $this->get_availability_state());
+                $this->buttonsinfo = '';
+                $this->buttonsarray = array();
 
                 break;
 
-            default:
-                $this->groupformation_state_info = array(get_string('invalid', 'groupformation'));
-                $this->buttons_info = '';
-                $this->buttons_array = array();
+            default :
+                $this->groupformationstateinfo = array(
+                    get_string('invalid', 'groupformation'));
+                $this->buttonsinfo = '';
+                $this->buttonsarray = array();
                 break;
         }
-
     }
 
     /**
      * Prints stats about answered and misssing questions
      */
     private function determine_survey_stats() {
+        $stats = mod_groupformation_util::get_stats($this->groupformationid, $this->userid);
 
-        $stats = $this->store->getStats ( $this->userid );
-        $prev_incomplete = false;
+        $previncomplete = false;
         $array = array();
-        foreach ( $stats as $key => $values ) {
+        foreach ($stats as $key => $values) {
 
             $a = new stdClass ();
-            $a->category = get_string ( 'category_' . $key, 'groupformation' );
+            $a->category = get_string('category_' . $key, 'groupformation');
             $a->questions = $values ['questions'];
             $a->answered = $values ['answered'];
             if ($values ['questions'] > 0) {
-                $url = new moodle_url ( 'questionaire_view.php', array (
-                    'id' => $this->cmid,
-                    'category' => $key
-                ) );
-                // repair condition for mathevorkurs
-                // if (!$prev_incomplete) {
-                if (true || ! $prev_incomplete) {
+                $url = new moodle_url ('questionnaire_view.php', array(
+                    'id' => $this->cmid, 'category' => $key));
+
+                if (true || !$previncomplete) {
                     $a->category = '<a href="' . $url . '">' . $a->category . '</a>';
                 }
                 if ($values ['missing'] == 0) {
-                    $array[] = get_string ( 'stats_all', 'groupformation', $a ) . ' <span class="questionaire_all">&#10004;</span>';
-                    $prev_incomplete = false;
-                } elseif ($values ['answered'] == 0) {
-                    $array[] = get_string ( 'stats_none', 'groupformation', $a ) . ' <span class="questionaire_none">&#10008;</span>';
-                    $prev_incomplete = true;
+                    $array [] = get_string('stats_all', 'groupformation', $a) .
+                        ' <span class="questionaire_all">&#10004;</span>';
+                    $previncomplete = false;
+                } else if ($values ['answered'] == 0) {
+                    $array [] = get_string('stats_none', 'groupformation', $a) .
+                        ' <span class="questionaire_none">&#10008;</span>';
+                    $previncomplete = true;
                 } else {
-                    $array[] = get_string ( 'stats_partly', 'groupformation', $a );
-                    $prev_incomplete = true;
+                    $array [] = get_string('stats_partly', 'groupformation', $a);
+                    $previncomplete = true;
                 }
             }
         }
-        $this->survey_states_title = get_string ( 'questionaire_answer_stats', 'groupformation' );
-        $this->survey_states_array = $array;
+        $this->surveystatestitle = get_string('questionnaire_answer_stats', 'groupformation');
+        $this->surveystatesarray = $array;
     }
-
 
     /**
      * return the status of the survey
+     *
      * @return string
      *
      */
-    private  function availabilityState() {
-        $a = $this->store->getTime ();
-        $begin = intval ( $a ['start_raw'] );
-        $end = intval ( $a ['end_raw'] );
-        $now = time ();
+    private function get_availability_state() {
+        $a = $this->store->get_time();
+        $begin = intval($a ['start_raw']);
+        $end = intval($a ['end_raw']);
+        $now = time();
         if ($begin == 0 & $end == 0) {
-            return get_string ( 'questionaire_available', 'groupformation', $a );
-        } elseif ($begin != 0 & $end == 0) {
-            // erst ab $begin verfügbar
+            return get_string('questionnaire_available', 'groupformation', $a);
+        } else if ($begin != 0 & $end == 0) {
+            // Available from $begin.
             if ($now < $begin) {
-                // noch nicht verfügbar
-                return get_string ( 'questionaire_not_available_begin', 'groupformation', $a );
-            } elseif ($now >= $begin) {
-                // verfügbar
-                return get_string ( 'questionaire_available', 'groupformation', $a );
+                // Not available now.
+                return get_string('questionnaire_not_available_begin', 'groupformation', $a);
+            } else if ($now >= $begin) {
+                // Available.
+                return get_string('questionnaire_available', 'groupformation', $a);
             }
-        } elseif ($begin == 0 & $end != 0) {
-            // nur verfügbar bis $end
+        } else if ($begin == 0 & $end != 0) {
+            // Just available till $end.
             if ($now <= $end) {
-                // verfügbar
-                return get_string ( 'questionaire_available_end', 'groupformation', $a );
-            } elseif ($now > $end) {
-                // nicht mehr verfügbar
-                return get_string ( 'questionaire_not_available', 'groupformation', $a );
+                // Available.
+                return get_string('questionnaire_available_end', 'groupformation', $a);
+            } else if ($now > $end) {
+                // Not available any more.
+                return get_string('questionnaire_not_available', 'groupformation', $a);
             }
-        } elseif ($begin != 0 & $end != 0) {
-            // verfügbar zwischen $begin und $end
+        } else if ($begin != 0 & $end != 0) {
+            // Available between $begin and $end.
             if ($now < $begin & $now < $end) {
-                // noch nicht verfügbar
-                return get_string ( 'questionaire_not_available_begin_end', 'groupformation', $a );
-            } elseif ($now >= $begin & $now <= $end) {
-                // verfügbar
-                return get_string ( 'questionaire_available', 'groupformation', $a );
-            } elseif ($now > $begin & $now > $end) {
-                // nicht mehr verfügbar
-                return get_string ( 'questionaire_not_available_end', 'groupformation', $a );
+                // Not available yet.
+                return get_string('questionnaire_not_available_begin_end', 'groupformation', $a);
+            } else if ($now >= $begin & $now <= $end) {
+                // Available.
+                return get_string('questionnaire_available', 'groupformation', $a);
+            } else if ($now > $begin & $now > $end) {
+                // Not available any more.
+                return get_string('questionnaire_not_available_end', 'groupformation', $a);
             }
         }
     }
-
-
 
     /**
      * Generate and return the HTMl Page with templates and data
@@ -263,46 +262,38 @@ class mod_groupformation_student_overview_controller {
      * @return string
      */
     public function display() {
-        $this->determine_status ();
+        $this->determine_status();
         $this->determine_view();
 
-        $this->view->setTemplate ( 'wrapper_students_overview' );
+        $this->view->set_template('wrapper_students_overview');
         $this->view->assign('cmid', $this->cmid);
-        
-        $this->view->assign ( 'student_overview_title', $this->store->getName() );
-        $this->view->assign('student_overview_groupformation_info', $this->groupformation_info);
-        $this->view->assign('student_overview_groupformation_status', $this->groupformation_state_info);
 
-        if($this->view_state == 0){
-            $survey_stats_view = new mod_groupformation_template_builder ();
-            $survey_stats_view->setTemplate ( 'students_overview_survey_states' );
-            $survey_stats_view->assign('survey_states', $this->survey_states_array);
-            $survey_stats_view->assign('questionaire_answer_stats', $this->survey_states_title);
-            $this->view->assign('student_overview_survey_state_temp', $survey_stats_view->loadTemplate());
-        }else{
+        $this->view->assign('student_overview_title', $this->store->get_name());
+        $this->view->assign('student_overview_groupformation_info', $this->groupformationinfo);
+        $this->view->assign('student_overview_groupformation_status', $this->groupformationstateinfo);
+
+        if ($this->viewstate == 0) {
+            $surveystatsview = new mod_groupformation_template_builder ();
+            $surveystatsview->set_template('students_overview_survey_states');
+            $surveystatsview->assign('survey_states', $this->surveystatesarray);
+            $surveystatsview->assign('questionnaire_answer_stats', $this->surveystatestitle);
+            $this->view->assign('student_overview_survey_state_temp', $surveystatsview->load_template());
+        } else {
             $this->view->assign('student_overview_survey_state_temp', '');
         }
 
-
-        
-        if($this->view_state == -1 || $this->view_state == 0){
-            $survey_options_view = new mod_groupformation_template_builder ();
-            $survey_options_view->assign('cmid', $this->cmid);
-            $survey_options_view->setTemplate ( 'students_overview_options' );
-            $survey_options_view->assign('buttons', $this->buttons_array);
-            $survey_options_view->assign('buttons_infos', $this->buttons_info);
-            $this->view->assign('student_overview_survey_options', $survey_options_view->loadTemplate());
-        }else{
+        if ($this->viewstate == -1 || $this->viewstate == 0) {
+            $surveyoptionsview = new mod_groupformation_template_builder ();
+            $surveyoptionsview->assign('cmid', $this->cmid);
+            $surveyoptionsview->set_template('students_overview_options');
+            $surveyoptionsview->assign('buttons', $this->buttonsarray);
+            $surveyoptionsview->assign('buttons_infos', $this->buttonsinfo);
+            $this->view->assign('student_overview_survey_options', $surveyoptionsview->load_template());
+        } else {
             $this->view->assign('student_overview_survey_options', '');
         }
 
-
-
-        return $this->view->loadTemplate ();
+        return $this->view->load_template();
     }
-
-
-
 }
 
-?>

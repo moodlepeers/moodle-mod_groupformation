@@ -1,5 +1,4 @@
 ﻿<?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -15,21 +14,22 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
 /**
- * German strings for newmodule
+ * German strings for module
  *
  * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
+ * @author Nora Wester
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- *         
+ *
  */
-defined ( 'MOODLE_INTERNAL' ) || die ();
+defined('MOODLE_INTERNAL') || die ();
 
 $string ['language'] = 'de';
 $string ['modulename'] = 'Gruppenformation';
 $string ['modulenameplural'] = 'Gruppenformationen';
-// $string ['modulename_help'] = 'ACHTUNG: BETA-Version. Nur für Lehrende in Zusammenarbeit mit dem Projekt MoodlePeers gedacht. Erlaubt die automatische Erstellung von (Lern)-Gruppen Ihrer Teilnehmenden. Basierend auf Fragebogen-Antworten werden die Gruppen(zusammenstellungen) optimiert.';
-$string ['beta_version'] = 'ACHTUNG: BETA-Version. Nur für Lehrende in Zusammenarbeit mit dem Projekt MoodlePeers gedacht.';
-$string ['password_wrong'] = 'Das eingegebene Passwort ist falsch';$string ['groupformationname'] = 'Name der Gruppenformation';
+$string ['modulename_help'] = 'Erlaubt die automatische Erstellung von (Lern)-Gruppen Ihrer Teilnehmenden. Basierend auf Fragebogen-Antworten werden die Gruppen(zusammenstellungen) optimiert.';
+$string ['beta_version'] = '';
+$string ['password_wrong'] = 'Das eingegebene Passwort ist falsch';
+$string ['groupformationname'] = 'Name der Gruppenformation';
 $string ['groupformationname_help'] = 'Dieser Titel wird auf der Kursseite angezeigt.';
 $string ['groupformation'] = 'Gruppenformation';
 $string ['pluginadministration'] = 'Administration: Gruppenformation';
@@ -52,8 +52,8 @@ $string ['availability_nochangespossible'] = 'Der Fragebogen wurde bereits beant
 $string ['scenario'] = 'Szenario';
 $string ['scenarioLabel'] = '';
 $string ['scenario_description'] = 'Bitte wählen Sie das für Sie am Besten geeignete Szenario für die Gruppenformation aus.';
-$string ['scenarioInfo'] = 'Die drei Szenarien unterscheiden sich darin, wie die Fragebogen-Antworten bei der Gruppenbildung berücksichtigt werden.  
-			Beim Projekgruppen wird darauf geachtet, dass sich Vorwissen und Merkmale der Gruppenmitglieder ergänzen während die Motivation und angestrebten Ziele in der Gruppe möglichst ähnlich sind.    
+$string ['scenarioInfo'] = 'Die drei Szenarien unterscheiden sich darin, wie die Fragebogen-Antworten bei der Gruppenbildung berücksichtigt werden.
+			Beim Projekgruppen wird darauf geachtet, dass sich Vorwissen und Merkmale der Gruppenmitglieder ergänzen während die Motivation und angestrebten Ziele in der Gruppe möglichst ähnlich sind.
 			Bei den Hausaufgabengruppen wird so optimiert, dass für jede Gruppe die besten Vorausetzungen für gemeinsames Lernen gegeben sind.
 		    Beim Referatsgruppen steht das gemeinsame Interesse an den zur Auswahl stehenden Referatsthemen im Vordergrund.';
 $string ['groupformationsettings'] = 'Gruppenformation Einstellungen';
@@ -62,8 +62,7 @@ $string ['scenario_projectteams_description'] = 'Projektteams arbeiten über ein
 $string ['scenario_homeworkgroups'] = 'Hausaufgabengruppen';
 $string ['scenario_homeworkgroups_description'] = 'Hausaufgabengruppen arbeiten in regelmäßigen Abständen (meist wöchentlich) an Aufgaben, die zur Vorbereitung auf eine Klausur dienen. Auch wenn die Aufgaben (oft auch "Übungen" oder "Übungszettel" genannt) grundsätzlich auf unterschiedliche Gruppenmitglieder aufgeteilt werden könnten, ist dies meist nicht sinnvoll, weil bei der abschließenden Klausur jedes Gruppenmitglied individuell benotet wird und daher alle Aufgaben selbst lösen können muss. Daher geht es bei der Zusammensetzung von Hausaufgabengruppen primär um unterschiedliches Vorwissen und unterschiedliche Lernstile, die sich ergänzen.';
 $string ['scenario_presentationgroups'] = 'Referatgruppen';
-// $string ['scenario_presentationgroups_description'] = 'Referatsgruppen arbeiten nur über einen relativ kurzen Zeitraum zusammen an einer gemeinsamen Präsentation. Oft wird dabei die Aufgabenstellung schon zu Beginn auf die Gruppenmitglieder aufgeteilt (oder gewählt), dann individuell bearbeitet und erst am Ende wieder zusammengesetzt. Bewertet wird meist die gemeinsame Gruppenleistung. Daher geht es bei der Zusammensetzung von Referatsgruppen primär um gemeinsame Interessen an Themen.';
-$string ['scenario_presentationgroups_description'] = '<span style="color: red">Nicht verfügbar bei Beta-Version </span><br/>Referatsgruppen arbeiten nur über einen relativ kurzen Zeitraum zusammen an einer gemeinsamen Präsentation. Oft wird dabei die Aufgabenstellung schon zu Beginn auf die Gruppenmitglieder aufgeteilt (oder gewählt), dann individuell bearbeitet und erst am Ende wieder zusammengesetzt. Bewertet wird meist die gemeinsame Gruppenleistung. Daher geht es bei der Zusammensetzung von Referatsgruppen primär um gemeinsame Interessen an Themen.';
+$string ['scenario_presentationgroups_description'] = 'Referatsgruppen arbeiten nur über einen relativ kurzen Zeitraum zusammen an einer gemeinsamen Präsentation. Oft wird dabei die Aufgabenstellung schon zu Beginn auf die Gruppenmitglieder aufgeteilt (oder gewählt), dann individuell bearbeitet und erst am Ende wieder zusammengesetzt. Bewertet wird meist die gemeinsame Gruppenleistung. Daher geht es bei der Zusammensetzung von Referatsgruppen primär um gemeinsame Interessen an Themen.';
 $string ['time'] = 'Zeit';
 $string ['topics'] = 'Themen';
 $string ['topics_dummy'] = 'Thema ';
@@ -75,17 +74,17 @@ $string ['topicchoice'] = 'Themenauswahl';
 $string ['useOneLineForEachTopic'] = 'Pro Thema jeweils eine Zeile benutzen';
 $string ['knowledge'] = 'Vorwissen';
 $string ['knowledge_description'] = 'Das Vorwissen in bestimmten Gebieten soll in die Gruppenbildung einfließen.';
-$string ['knowledge_description_extended'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einschätzen sollen. 
+$string ['knowledge_description_extended'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einschätzen sollen.
 		Eine Vorschau des Fragebogens-Abschnittes für die Studierenden ist rechts zu sehen.';
 $string ['knowledgeChoice'] = 'Vorwissen';
-$string ['knowledge_info_presentation'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einschätzen sollen. 
-		Eine Vorschau des Fragebogens-Abschnittes für die Studierenden ist rechts zu sehen. 
+$string ['knowledge_info_presentation'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einschätzen sollen.
+		Eine Vorschau des Fragebogens-Abschnittes für die Studierenden ist rechts zu sehen.
 		Für Ihre Auswahl "Referatsgruppen" wird das Vorwissen nur berücksichtigt, falls nach Optimierung der Themenwahl noch weiter optimiert werden kann.';
-$string ['knowledge_info_homework'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einschätzen sollen. 
-		Eine Vorschau des Fragebogens-Abschnittes für die Studierenden ist rechts zu sehen. 
+$string ['knowledge_info_homework'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einschätzen sollen.
+		Eine Vorschau des Fragebogens-Abschnittes für die Studierenden ist rechts zu sehen.
 		Für Ihre Auswahl "Hausaufgabengruppen" wird so optimiert, dass das Vorwissen sich in jeder Gruppe möglichst ergänzt.';
-$string ['knowledge_info_project'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einschätzen sollen. 
-		Eine Vorschau des Studierenden-Fragebogens sehen Sie rechts. 
+$string ['knowledge_info_project'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einschätzen sollen.
+		Eine Vorschau des Studierenden-Fragebogens sehen Sie rechts.
 		Für Ihre Auswahl "Projektgruppen" wird so optimiert, dass das Vorwissen sich in jeder Gruppe möglichst ergänzt, das Wissensniveau der Studierenden aber vergleichbar ist.';
 $string ['add_line'] = 'Zeile hinzufügen';
 $string ['remove_line'] = 'Zeile entfernen';
@@ -122,19 +121,19 @@ $string ['evaluation_point_info'] = 'Bitte maximale Punktzahl eingeben';
 $string ['students_enrolled_info'] = 'Studierenden sind im Kurs eingeschrieben';
 $string ['groupSettingsInfo'] = 'Sie haben Themen zur Auswahl angegeben. Daraus bestimmt sich die Anzahl der Gruppen und deren Größe.';
 $string ['analyse'] = 'Analyse';
-$string ['questionaire_not_started'] = 'Der Fragebogen wartet noch auf Ihre Bearbeitung.';
-$string ['questionaire_press_to_begin'] = 'Klicken Sie auf "Weiter", um zu beginnen.';
-$string ['questionaire_not_submitted'] = 'Sie haben den Fragebogen noch nicht abgegeben.';
-$string ['questionaire_press_continue_submit'] = 'Klicken Sie auf "Bearbeiten", um den Fragebogen weiter auszufüllen oder auf "Abgeben", um ihn abzugeben.';
-$string ['questionaire_answer_stats'] = 'Aktueller Zustand des Fragebogens: ';
-$string ['questionaire_submitted'] = 'Sie haben den Fragebogen bereits abgegeben und können Ihre Antworten nicht mehr ändern.';
-$string ['questionaire_press_preview'] = 'Klicken Sie auf "Vorschau", um den Fragebogen anzusehen.';
-$string ['questionaire_no_more_questions'] = 'Es gibt keine weiteren Fragen zu beantworten.';
-$string ['questionaire_press_beginning_submit'] = 'Klicken Sie auf "Zur Anfangsseite", um zum Anfang zurückzukehren. Dort können Sie ihren Fragebogen entgültig abgeben.';
-$string ['questionaire_go_to_start'] = 'Zur Anfangsseite';
-$string ['questionaire_submit'] = 'Abgeben';
-$string ['questionaire_submit_disabled_teacher'] = 'Abgeben ist deaktiviert, da dies nur eine Vorschau ist.';
-$string ['questionaire_preview'] = 'Das ist eine Vorschau des Fragebogens.';
+$string ['questionnaire_not_started'] = 'Der Fragebogen wartet noch auf Ihre Bearbeitung.';
+$string ['questionnaire_press_to_begin'] = 'Klicken Sie auf "Weiter", um zu beginnen.';
+$string ['questionnaire_not_submitted'] = 'Sie haben den Fragebogen noch nicht abgegeben.';
+$string ['questionnaire_press_continue_submit'] = 'Klicken Sie auf "Bearbeiten", um den Fragebogen weiter auszufüllen oder auf "Abgeben", um ihn abzugeben.';
+$string ['questionnaire_answer_stats'] = 'Aktueller Zustand des Fragebogens: ';
+$string ['questionnaire_submitted'] = 'Sie haben den Fragebogen bereits abgegeben und können Ihre Antworten nicht mehr ändern.';
+$string ['questionnaire_press_preview'] = 'Klicken Sie auf "Vorschau", um den Fragebogen anzusehen.';
+$string ['questionnaire_no_more_questions'] = 'Es gibt keine weiteren Fragen zu beantworten.';
+$string ['questionnaire_press_beginning_submit'] = 'Klicken Sie auf "Zur Anfangsseite", um zum Anfang zurückzukehren. Dort können Sie ihren Fragebogen entgültig abgeben.';
+$string ['questionnaire_go_to_start'] = 'Zur Anfangsseite';
+$string ['questionnaire_submit'] = 'Abgeben';
+$string ['questionnaire_submit_disabled_teacher'] = 'Abgeben ist deaktiviert, da dies nur eine Vorschau ist.';
+$string ['questionnaire_preview'] = 'Das ist eine Vorschau des Fragebogens.';
 $string ['category_general'] = 'Allgemeines';
 $string ['category_grade'] = 'Ziele';
 $string ['category_points'] = 'Ziele';
@@ -150,26 +149,26 @@ $string ['category_srl'] = 'Selbstreguliertes Lernen';
 $string ['stats_partly'] = 'In der Kategorie "{$a->category}" haben Sie {$a->answered} von {$a->questions} Fragen beantwortet.';
 $string ['stats_all'] = 'In der Kategorie "{$a->category}" haben Sie alle Fragen beantwortet.';
 $string ['stats_none'] = 'In der Kategorie "{$a->category}" haben Sie noch keine Frage beantwortet.';
-$string ['tab_questionaire'] = 'Fragebogen';
+$string ['tab_questionnaire'] = 'Fragebogen';
 $string ['tab_overview'] = 'Überblick';
 $string ['tab_grouping'] = 'Gruppenbildung';
 $string ['tab_preview'] = 'Fragebogen-Vorschau';
 $string ['tab_evaluation'] = 'Auswertung';
 $string ['tab_group'] = 'Gruppenzuordnung';
-$string ['questionaire_availability_info_future'] = 'Im Zeitraum vom {$a->start} Uhr bis {$a->end} Uhr wird der Fragebogen zur Verfügung stehen.';
-$string ['questionaire_availability_info_now'] = 'Der Fragebogen ist offen und kann bis {$a->end} ausgefüllt werden.';
-$string ['questionaire_availability_info_until'] = 'Der Fragebogen ist noch bis {$a->end} Uhr freigeschaltet.';
-$string ['questionaire_availability_info_from'] = 'Der Fragebogen ist ab {$a->start} Uhr freigeschaltet.';
-$string ['questionaire_available'] = 'Der Fragebogen steht zur Bearbeitung bereit.';
-$string ['questionaire_not_available_begin'] = 'Der Fragebogen ist verfügbar ab {$a->start}.';
-$string ['questionaire_available_end'] = 'Der Fragebogen ist verfügbar bis {$a->end}.';
-$string ['questionaire_not_available'] = 'Der Fragebogen ist derzeit nicht verfügbar.';
-$string ['questionaire_not_available_begin_end'] = 'Der Fragebogen ist verfügbar von {$a->start} bis {$a->end}.';
-$string ['questionaire_not_available_end'] = 'Der Fragebogen ist nicht mehr verfügbar.';
+$string ['questionnaire_availability_info_future'] = 'Im Zeitraum vom {$a->start} Uhr bis {$a->end} Uhr wird der Fragebogen zur Verfügung stehen.';
+$string ['questionnaire_availability_info_now'] = 'Der Fragebogen ist offen und kann bis {$a->end} ausgefüllt werden.';
+$string ['questionnaire_availability_info_until'] = 'Der Fragebogen ist noch bis {$a->end} Uhr freigeschaltet.';
+$string ['questionnaire_availability_info_from'] = 'Der Fragebogen ist ab {$a->start} Uhr freigeschaltet.';
+$string ['questionnaire_available'] = 'Der Fragebogen steht zur Bearbeitung bereit.';
+$string ['questionnaire_not_available_begin'] = 'Der Fragebogen ist verfügbar ab {$a->start}.';
+$string ['questionnaire_available_end'] = 'Der Fragebogen ist verfügbar bis {$a->end}.';
+$string ['questionnaire_not_available'] = 'Der Fragebogen ist derzeit nicht verfügbar.';
+$string ['questionnaire_not_available_begin_end'] = 'Der Fragebogen ist verfügbar von {$a->start} bis {$a->end}.';
+$string ['questionnaire_not_available_end'] = 'Der Fragebogen ist nicht mehr verfügbar.';
 $string ['info_header_student'] = 'Was bedeutet Gruppenformation?';
 $string ['info_text_student'] = 'In diesem Moodle-Kurs wird die Gruppenformation dazu genutzt {$a->scenario_name} für eine erfolgreiche Zusammenarbeit zu bilden.
-		Wenn Sie den Fragebogen ausgefüllt und abgeschickt haben, werden für Sie geeignete Lernpartner/innen ermittelt. 
-		Alle Angaben werden vertraulich behandelt. 
+		Wenn Sie den Fragebogen ausgefüllt und abgeschickt haben, werden für Sie geeignete Lernpartner/innen ermittelt.
+		Alle Angaben werden vertraulich behandelt.
 		<br>Ist die Befragungszeit um, werden Gruppen unter Berücksichtigung Ihrer Angaben und Präferenzen gebildet. Sie können anschließend hier Ihre Gruppenmitglieder einsehen (und auch über Moodle kontaktieren).
 		<br><br>
 		Fragen? Probleme? Lob? Anregungen?<br>
@@ -181,13 +180,13 @@ $string ['info_header_teacher_analysis'] = 'Wie funktioniert die Gruppenformatio
 $string ['info_header_teacher_settings'] = 'Wie funktioniert die Gruppenformation?';
 $string ['info_text_teacher_settings'] = 'Mit diesem Plugin haben Sie die Möglichkeit die Bildung von Gruppen Ihrer Studierenden zu optimieren. Die drei erforderlichen Schritte sind:<br>
 		1.)	Sie fügen die Aktivität „Gruppenformation“ Ihrem Kurs hinzu.
-		Auf dieser Seite können Sie auswählen, welches Szenario am besten zu Ihren Vorstellungen der späteren Gruppenarbeit passt 
-		(bei Unsicherheit wählen Sie Projektteams). Die weiteren Einstellungen erlauben Ihnen die gewünschte Gruppengröße und evtl. eine Themenauswahl für 
-		Studierende anzugeben. Wenn Sie möchten, dass die Studierenden sich im Vorwissen gut ergänzen in den später gebildeten Gruppen, können Sie die Vorwissensthemen 
+		Auf dieser Seite können Sie auswählen, welches Szenario am besten zu Ihren Vorstellungen der späteren Gruppenarbeit passt
+		(bei Unsicherheit wählen Sie Projektteams). Die weiteren Einstellungen erlauben Ihnen die gewünschte Gruppengröße und evtl. eine Themenauswahl für
+		Studierende anzugeben. Wenn Sie möchten, dass die Studierenden sich im Vorwissen gut ergänzen in den später gebildeten Gruppen, können Sie die Vorwissensthemen
 		zur Abfrage angeben.<br>
-		2.)	Studierende sehen den Fragebogen, welcher basierend auf Ihren Einstellungen erstellt wurde. Die Dauer der Verfügbarkeit der Fragen können Sie einstellen (siehe 1.). 
+		2.)	Studierende sehen den Fragebogen, welcher basierend auf Ihren Einstellungen erstellt wurde. Die Dauer der Verfügbarkeit der Fragen können Sie einstellen (siehe 1.).
 		Eine Vorschau des Studierenden-Fragebogens erhalten Sie beim späteren Öffnen der Aktivität als Lehrende/r.<br>
-		3.)	Sie können unter dem Menüpunkt ‚Gruppenformation‘, wenn Sie die Aktivität später selbst aufrufen, sehen, wie viele Antworten bereits 
+		3.)	Sie können unter dem Menüpunkt ‚Gruppenformation‘, wenn Sie die Aktivität später selbst aufrufen, sehen, wie viele Antworten bereits
 		vorliegen. Sind Sie mit dem Rücklauf zufrieden, starten Sie manuell die Bildung der Gruppen (dies geschieht niemals automatisch).<br>
 		Es dauert eine Weile, bis alle Gruppen fertig erstellt sind. Das Ergebnis können Sie sich noch einmal ansehen, bevor Sie die Gruppen so in Moodle übernehmen.<br>
 		<br>
@@ -222,8 +221,9 @@ $string['grouping_delete'] = 'Gruppenvorschlag verwerfen';
 $string['grouping_adopt'] = 'Gruppenvorschlag übernehmen';
 $string['grouping_abort'] = 'Gruppenbildung abbrechen';
 $string['moodlegrouping_delete'] = 'Moodle-Gruppen l&ouml;schen';
-$string['questionaire_commited'] = 'Ihre Antworten sind abgegeben. Somit können Sie sie nicht mehr verändern.';
+$string['questionnaire_commited'] = 'Ihre Antworten sind abgegeben. Somit können Sie sie nicht mehr verändern.';
 $string['no_data_to_display'] = 'Keine Daten vorhanden.';
+
 $string['onlyactivestudents'] = 'Zur Gruppenbildung sollen ausschließlich Studierende betrachtet werden, die mind. eine Frage beantwortet haben.';
 $string['emailnotifications'] = 'Nach Abschluss der Gruppenbildung möchte ich via Nachricht in Moodle benachrichtigt werden.';
 $string['onlyactivestudents_description'] = 'Zur Gruppenbildung sollen ausschließlich Studierende betrachtet werden, die mind. eine Frage beantwortet haben.';
@@ -233,7 +233,7 @@ $string['oneManGroup'] = 'Du bist allein in dieser Gruppe.';
 $string['noUser'] = 'Der Nutzer existiert nicht!';
 $string['membersAre'] = 'Deine Arbeitskollegen sind: ';
 $string['groupingNotReady'] = 'Die Gruppenbildung ist noch nicht abgeschlossen.';
-$string['jobGetName'] = 'Gruppenbildung und Aufräumen';
+$string['jobget_name'] = 'Gruppenbildung und Aufräumen';
 $string['no_time'] = 'Kein Zeitpunkt festgelegt';
 $string['activity_end'] = 'Aktivität beenden';
 $string['activity_start'] = 'Aktivität starten';
@@ -275,7 +275,8 @@ $string['students_grouping_multiple'] = ' Studierende zur Gruppenbildung.';
 $string['students_commited_single'] = ' Studierende davon haben ihre Antworten schon endgültig abgegeben.';
 $string['students_commited_multiple'] = ' Studierende davon hat seine Antworten schon endgültig abgegeben.';
 $string['commited_not_completed'] = ' von den fest abgegebenen Fragebögen sind nicht vollständig.';
-$string['completed_questionaire'] = ' vollständig beantwortete Fragebögen.';
+$string['completed_questionnaire'] = ' vollständig beantwortete Fragebögen.';
+
 $string['emailnotifications_info'] = 'Sie werden via Moodle benachrichtigt, wenn sie abgeschlossen ist.';
 $string['onlyactivestudents_info'] = 'Zur Gruppenbildung werden ausschließlich Studierende betrachtet werden, die mind. eine Frage beantwortet haben. Sie können das in den {$a->url} anpassen.';
 $string ['starttime'] = 'Startzeit';
@@ -284,3 +285,34 @@ $string ['endtime'] = 'Endzeit';
 $string['excellent'] = 'sehr gut';
 $string['none'] = 'gar nicht';
 $string['bad'] = 'schlecht';
+
+$string['cron_job_not_running'] = 'Um die gestarteten Anfragen zur Gruppenbildung zu bearbeiten läuft im Hintergrund ein Cron-Daemon. Leider reagiert dieser in der letzten Zeit nicht oder ist gar außer Betrieb. Sollten Sie diese Meldung nach mehr als 24 Stunden noch immer sehen, kontaktieren Sie bitte den Systemadministrator.';
+
+$string['groupformation_message'] = 'Die Gruppenformation ist abgeschlossen. Sie können sich nun das Ergebnis anschauen';
+$string['groupformation_message_subject'] = 'Gruppenformation abgeschlossen';
+$string['groupformation_message_contexturlname'] = 'Resultate';
+
+$string['import'] = 'Import';
+$string['export'] = 'Export';
+$string['export_answers'] = 'Sie können die Antworten mit anonymisierten Teilnehmerkennungen hier herunterladen: ';
+$string['export_users'] = 'Sie können die Teilnehmer-bezogenen Daten mit anonymisierten Teilnehmerkennungen hier herunterladen: ';
+$string['export_groups'] = 'Sie können die Gruppen mit anonymisierten Teilnehmerkennungen hier herunterladen: ';
+$string['export_group_users'] = 'Sie können die Gruppen-Nutzer-Zuordnungen mit anonymisierten Teilnehmerkennungen hier herunterladen: ';
+$string['export_logging'] = 'Sie können die Loggingdaten mit anonymisierten Teilnehmerkennungen hier herunterladen: ';
+$string['export_description_no'] = 'Erst wenn du Antworten in exportfähigen Kategorien gegeben hast, kannst du sie hier exportieren.';
+$string['export_description_yes'] = 'Klicke auf den folgenden Button, um deine Antworten für diesen Fragebogen zu exportieren.';
+$string['import_description_yes'] = 'Klicke auf den folgenden Button, um Antworten von früheren Fragebögen zu importieren.';
+$string['import_description_no'] = 'Es ist nicht möglich Antworten zu importieren, da der Fragebogen nicht mehr verfügbar ist oder bereits abgegeben wurde.';
+$string['import_form_description'] = 'Du kannst Antworten von früheren Fragebögen importieren, indem du hier deine Antworten im passenden Format hochlädst (z.B. answers.xml).';
+
+$string['file_error'] = 'Du musst eine *.xml-Datei hochladen.';
+$string['failed_import'] = 'Der Import ist fehlgeschlagen. Das Format der Datei war nicht korrekt. Bitte lade eine Datei mit exportierten Antworten hoch.';
+$string['successful_import'] = 'Der Import war erfolgreich. Du kannst deine Antworten im Tab "Fragebogen" einsehen.';
+
+$string['archive_activity_task'] = 'Archivierung alter Aktivitäten';
+$string['archived_activity_answers'] = 'Die Aktitivät ist archiviert worden. Ihre Antworten sind nicht mehr gespeichert und es ist keine Interaktion mehr möglich.';
+$string['archived_activity_admin'] = 'Die Aktitivät ist archiviert worden. Es ist keine Interaktion mehr möglich.';
+
+$string['no_evaluation_text'] = 'Es gibt für diese Aktivität keine Auswertung.';
+$string['no_evaluation_ready'] = 'Es gibt keine Auswertung, da nicht alle Fragen beantwortet wurden. Erst wenn alle Fragen beantwortet wurden, gibt eine Auswertung ihrer Antworten';
+$string['eval_final_text'] = 'Die Vergleichswerte basieren auf derzeit {$a->percent}% gegebener Antworten ({$a->completed} von {$a->coursesize} Personen haben bisher geantwortet).';

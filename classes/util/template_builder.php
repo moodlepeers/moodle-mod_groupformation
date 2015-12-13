@@ -1,79 +1,87 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
+ * Class mod_groupformation_template_builder
  *
+ * @package mod_groupformation
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+class mod_groupformation_template_builder {
 
-class mod_groupformation_template_builder{
-    // Pfad zum Template
+    /** @var string This is the path for the template file which is used */
     private $path;
 
-    // Name des Templates, in dem Fall das Standardtemplate.
+    /** @var string This is the template name */
     private $template = 'default';
 
-    /**
-     * Enthält die Variablen, die in das Template eingebetet
-     * werden sollen.
-     */
+    /** @var array This array contains all assigned variables used in a template */
     private $_ = array();
 
-
-    public function __construct(){
+    /**
+     * mod_groupformation_template_builder constructor.
+     */
+    public function __construct() {
         global $CFG;
         $this->path = $CFG->dirroot . '/mod/groupformation/templates';
     }
 
     /**
-     * Ordnet eine Variable einem bestimmten Schluessel zu.
+     * Assigns a value to a key
      *
-     * @param String $key Schluessel
-     * @param String $value Variable
+     * @param String $key
+     * @param String $value
      */
-    public function assign($key, $value){
+    public function assign($key, $value) {
         $this->_[$key] = $value;
     }
 
 
     /**
-     * Setzt den Namen des Templates.
+     * Sets template name
      *
      * @param String $template Name des Templates.
      */
-    public function setTemplate($template = 'default'){
+    public function set_template($template = 'default') {
         $this->template = $template;
     }
 
     /**
-     * Das Template-File laden und zurückgeben
+     * Loads prior defined template
      *
-     * @param string $tpl Der Name des Template-Files (falls es nicht vorher
-     * 						über steTemplate() zugewiesen wurde).
-     * @return string Der Output des Templates.
+     * @return string
      */
-    public function loadTemplate(){
-        $tpl = $this->template;
-        // Pfad zum Template erstellen & überprüfen ob das Template existiert.
-        $file = $this->path . DIRECTORY_SEPARATOR . $tpl . '.php';
+    public function load_template() {
+        $file = $this->path . DIRECTORY_SEPARATOR . $this->template . '.php';
         $exists = file_exists($file);
 
-        if ($exists){
+        if ($exists) {
 
-            // Der Output des Scripts wird n einen Buffer gespeichert, d.h.
-            // nicht gleich ausgegeben.
             ob_start();
 
-            // Das Template-File wird eingebunden und dessen Ausgabe in
-            // $output gespeichert.
-            include $file;
+            require($file);
+
             $output = ob_get_contents();
+
             ob_end_clean();
 
-            // Output zurückgeben.
             return $output;
 
-        }
-        else {
-            // Template-File existiert nicht-> Fehlermeldung.
-            return 'could not find template';
+        } else {
+            throw new InvalidArgumentException('could not find template');
         }
     }
 

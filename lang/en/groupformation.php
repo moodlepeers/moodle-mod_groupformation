@@ -1,5 +1,4 @@
 ﻿<?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -15,21 +14,20 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle. If not, see <http://www.gnu.org/licenses/>.
 /**
- * German strings for newmodule
+ * German strings for module
  *
  * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
+ * @author Nora Wester
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- *         
+ *
  */
-defined ( 'MOODLE_INTERNAL' ) || die ();
+defined('MOODLE_INTERNAL') || die ();
 
 $string ['language'] = 'en';
 $string ['modulename'] = 'Group formation';
 $string ['modulenameplural'] = 'Group formations';
-// $string ['modulename_help'] = 'The groupformation plugin generates groups of participants based on a questionaire answers.';
-$string ['modulename_help'] = 'Attention: BETA version. Only for teachers in cooperation with project MoodlePeers. The groupformation plugin generates groups of participants based on a questionaire answers.';
-$string ['beta_version'] = 'Attention: BETA version. Only for teachers in cooperation with project MoodlePeers.';
+$string ['modulename_help'] = ' The groupformation plugin generates groups of participants based on a questionnaire answers.';
+$string ['beta_version'] = '';
 $string ['password_wrong'] = 'wrong password';
 $string ['groupformationfieldset'] = 'Custom example fieldset';
 $string ['groupformationname'] = 'Group formation';
@@ -44,30 +42,30 @@ $string ['namingschema'] = 'Naming scheme';
 $string ['userpergroup'] = 'How many users in a group?';
 $string ['notOpen'] = 'Submission is closed.';
 $string ['continueTheForm'] = 'Continue';
-$string ['completeTheForm'] = 'Complete questionaire';
+$string ['completeTheForm'] = 'Complete questionnaire';
 $string ['alreadySubmitted'] = 'Already submitted';
 $string ['overview'] = 'Overview';
 $string ['generategroups'] = "Generate groups";
 $string ['edit_param'] = 'Edit';
 $string ['editparam'] = 'Edit parameters';
-$string ['nochangespossible'] = 'The questionaire has been answered already. 
+$string ['nochangespossible'] = 'The questionnaire has been answered already.
 You can only change the maximum number of members or maximum number of groups. Further changes will not be saved.';
-$string ['availability_nochangespossible'] = 'The questionaire has been answered already. You cannot change the availability anymore.';
+$string ['availability_nochangespossible'] = 'The questionnaire has been answered already. You cannot change the availability anymore.';
 $string ['scenario'] = 'Scenario';
 $string ['scenarioLabel'] = '';
 $string ['scenario_description'] = 'Please choose the most suitable scenario for the group formation.';
-$string ['scenarioInfo'] = 'The three scenarios differ in the way how questionaaire items influence the group formation.  
-			For project teams it considers prior knowledge and traits of the group members to amend each other while motivation (level) and personal targets should be as similar as possible.    
+$string ['scenarioInfo'] = 'The three scenarios differ in the way how questionaaire items influence the group formation.
+			For project teams it considers prior knowledge and traits of the group members to amend each other while motivation (level) and personal targets should be as similar as possible.
 			For homework groups it optimizes each group to have the best possible prerequisites for collaborative learning.
 		    For presentation groups the main aspect is a mutual interest in the same selected (and assigend) topic to work on.';
 $string ['groupformationsettings'] = 'Group formation settings';
 $string ['scenario_projectteams'] = 'Project teams';
 $string ['scenario_projectteams_description'] = 'Project teams work intensively together to finish a project (e.g. conduct a study, delivery of a report, etc.). Often, duties and tasks can be split among the team members. Consequently it is beneficial to have a mixture of amending comptencies in the team. Usually, such a collective work result is graded with a equal group mark for all members. Thus, groupformation aims for similar motivation and similar objectives (beside the prerequisites).';
+
 $string ['scenario_homeworkgroups'] = 'Homework groups';
 $string ['scenario_homeworkgroups_description'] = 'Homework groups complete (smaller) assignments in regular intervals (often weekly) as a preperation for examination. Even though the assigment tasks (often called exercises, practice, control questions or homework) are principally subdividable among group members, this is not intended as with the final examination each member will be graded individually and needs to be able to solve all tasks alone. Consequently, groupformation aims for diverse prior knowledge and diverse learning styles that benefit from each other.';
 $string ['scenario_presentationgroups'] = 'Presentation groups';
-// $string ['scenario_presentationgroups_description'] = 'Presentation groups work together for a relatively short time period to finish a presentation (usually to be held in class). Often in the beginning a specific sub-task is assigned to (or selected by) each student, individually worked on, and in the end re-assembled to a complete presentation. Grading is usually done for the perforance of the whole group together. Therefore, groupformation aims primarily for mutual interest in the same topic.';
-$string ['scenario_presentationgroups_description'] = '<span style="color: red">Disabled on Beta </span><br/>Presentation groups work together for a relatively short time period to finish a presentation (usually to be held in class). Often in the beginning a specific sub-task is assigned to (or selected by) each student, individually worked on, and in the end re-assembled to a complete presentation. Grading is usually done for the perforance of the whole group together. Therefore, groupformation aims primarily for mutual interest in the same topic.';
+$string ['scenario_presentationgroups_description'] = 'Presentation groups work together for a relatively short time period to finish a presentation (usually to be held in class). Often in the beginning a specific sub-task is assigned to (or selected by) each student, individually worked on, and in the end re-assembled to a complete presentation. Grading is usually done for the perforance of the whole group together. Therefore, groupformation aims primarily for mutual interest in the same topic.';
 $string ['time'] = 'Time';
 $string ['topics'] = 'Topics';
 $string ['topics_dummy'] = 'Topic ';
@@ -79,16 +77,16 @@ $string ['topicchoice'] = 'Topic selection';
 $string ['useOneLineForEachTopic'] = 'Use one line for each topic';
 $string ['knowledge'] = 'Knowledge';
 $string ['knowledge_description'] = 'I want to include knowledge questions';
-$string ['knowledge_description_extended'] = 'Please list knowledge areas in which students should assess themselves. 
+$string ['knowledge_description_extended'] = 'Please list knowledge areas in which students should assess themselves.
 	Take a look at the preview on the right hand side.';
-$string ['knowledge_info_presentation'] = 'Please list knowledge areas in which students should assess themselves. 
-	Take a look at the preview on the right hand side. 
+$string ['knowledge_info_presentation'] = 'Please list knowledge areas in which students should assess themselves.
+	Take a look at the preview on the right hand side.
 	According to your selection "presentation groups" prior knowledge will be varied within each group (low priority behind topics)';
-$string ['knowledge_info_homework'] = 'Please list knowledge areas in which students should assess themselves. 
-	Take a look at the preview on the right hand side. 
+$string ['knowledge_info_homework'] = 'Please list knowledge areas in which students should assess themselves.
+	Take a look at the preview on the right hand side.
 	According to your selection "homework groups" prior knowledge will be varied within each group.';
-$string ['knowledge_info_project'] = 'Please list knowledge areas in which students should assess themselves. 
-	Take a look at the preview on the right hand side. 
+$string ['knowledge_info_project'] = 'Please list knowledge areas in which students should assess themselves.
+	Take a look at the preview on the right hand side.
 	According to your selection "project teams" prior knowledge (areas) will be varied within each group, but the level of knowledge is desired to be similar.';
 $string ['knowledgeChoice'] = 'Knowledge';
 $string ['add_line'] = 'Add line';
@@ -99,7 +97,7 @@ $string ['knowledge_question'] = 'How much do you know about the following topic
 $string ['knowledge_scale'] = '0 = no knowledge, 100 = big knowledge';
 $string ['groupoptions'] = 'Group settings';
 $string ['groupoption_description'] = 'Group settings description';
-$string ['groupoption_help'] = 'This parameter can be optimized after the submission of the questionaires.';
+$string ['groupoption_help'] = 'This parameter can be optimized after the submission of the questionnaires.';
 $string ['groupoption_onlyactivestudents'] = 'Students without answers will not be assigned to any groups.';
 $string ['maxmembers'] = 'Max. number of group members';
 $string ['maxgroups'] = 'Max. number of groups';
@@ -126,19 +124,19 @@ $string ['evaluation_point_info'] = 'indicate the maximum available points';
 $string ['students_enrolled_info'] = 'Students are enrolled in this course';
 $string ['groupSettingsInfo'] = 'You have choosen to define topics. Thereof the number of groups and their size will be calculated, as you can see below.';
 $string ['analyse'] = 'Analysis';
-$string ['questionaire_not_started'] = 'The questionaire is ready.';
-$string ['questionaire_press_to_begin'] = 'Press "Next" to begin.';
-$string ['questionaire_not_submitted'] = 'Your answers are not submitted yet.';
-$string ['questionaire_press_continue_submit'] = 'Press "Edit" to continue the questionaire or "Submit" to submit your current answers.';
-$string ['questionaire_answer_stats'] = 'Current state of the questionaire: ';
-$string ['questionaire_submitted'] = 'You have submitted your answers. You cannot change them anymore.';
-$string ['questionaire_press_preview'] = 'Press "Preview" to take a look at the questionaire.';
-$string ['questionaire_no_more_questions'] = 'There are no more questions to answer.';
-$string ['questionaire_press_beginning_submit'] = 'Press "Go to Start" to go back to the start page. There you can submit your current answers.';
-$string ['questionaire_go_to_start'] = 'Go to Start';
-$string ['questionaire_submit'] = 'Submit';
-$string ['questionaire_submit_disabled_teacher'] = 'Submit is disabled because this is just a preview.';
-$string ['questionaire_preview'] = 'This is a preview of the questionaire.';
+$string ['questionnaire_not_started'] = 'The questionnaire is ready.';
+$string ['questionnaire_press_to_begin'] = 'Press "Next" to begin.';
+$string ['questionnaire_not_submitted'] = 'Your answers are not submitted yet.';
+$string ['questionnaire_press_continue_submit'] = 'Press "Edit" to continue the questionnaire or "Submit" to submit your current answers.';
+$string ['questionnaire_answer_stats'] = 'Current state of the questionnaire: ';
+$string ['questionnaire_submitted'] = 'You have submitted your answers. You cannot change them anymore.';
+$string ['questionnaire_press_preview'] = 'Press "Preview" to take a look at the questionnaire.';
+$string ['questionnaire_no_more_questions'] = 'There are no more questions to answer.';
+$string ['questionnaire_press_beginning_submit'] = 'Press "Go to Start" to go back to the start page. There you can submit your current answers.';
+$string ['questionnaire_go_to_start'] = 'Go to Start';
+$string ['questionnaire_submit'] = 'Submit';
+$string ['questionnaire_submit_disabled_teacher'] = 'Submit is disabled because this is just a preview.';
+$string ['questionnaire_preview'] = 'This is a preview of the questionnaire.';
 $string ['category_general'] = 'General';
 $string ['category_grade'] = 'Goals';
 $string ['category_points'] = 'Goals';
@@ -155,22 +153,22 @@ $string ['stats_partly'] = 'You answered {$a->answered} out of {$a->questions} q
 $string ['stats_all'] = 'You answered all questions in the category "{$a->category}".';
 $string ['stats_none'] = 'You did not answer any question in the category "{$a->category}".';
 $string ['tab_overview'] = 'Overview';
-$string ['tab_questionaire'] = 'Questionaire';
+$string ['tab_questionnaire'] = 'Questionnaire';
 $string ['tab_analysis'] = 'Analysis';
 $string ['tab_grouping'] = 'Group formation';
-$string ['tab_preview'] = 'Questionaire (Preview)';
+$string ['tab_preview'] = 'Questionnaire (Preview)';
 $string ['tab_evaluation'] = 'Evaluation';
 $string ['tab_group'] = 'Group assignment';
-$string ['questionaire_availability_info_future'] = 'The questionnaire will be available in the perion from {$a->start} to {$a->end}.';
-$string ['questionaire_availability_info_now'] = 'The questionnaire is available till {$a->end}.';
-$string ['questionaire_availability_info_until'] = 'Der Fragebogen ist noch bis {$a->end} Uhr freigeschaltet.';
-$string ['questionaire_availability_info_from'] = 'Der Fragebogen ist ab {$a->start} Uhr freigeschaltet.';
-$string ['questionaire_available'] = 'The questionnaire is ready for processing.';
-$string ['questionaire_not_available_begin'] = 'The questionnaire is available from {$a->start}.';
-$string ['questionaire_available_end'] = 'The questionnaire is available till {$a->end}.';
-$string ['questionaire_not_available'] = 'The questionnaire is currently unavailable.';
-$string ['questionaire_not_available_begin_end'] = 'The questionnaire is available from {$a->start} to {$a->end}.';
-$string ['questionaire_not_available_end'] = 'The questionnaire is not available anymore.';
+$string ['questionnaire_availability_info_future'] = 'The questionnaire will be available in the perion from {$a->start} to {$a->end}.';
+$string ['questionnaire_availability_info_now'] = 'The questionnaire is available till {$a->end}.';
+$string ['questionnaire_availability_info_until'] = 'Der Fragebogen ist noch bis {$a->end} Uhr freigeschaltet.';
+$string ['questionnaire_availability_info_from'] = 'Der Fragebogen ist ab {$a->start} Uhr freigeschaltet.';
+$string ['questionnaire_available'] = 'The questionnaire is ready for processing.';
+$string ['questionnaire_not_available_begin'] = 'The questionnaire is available from {$a->start}.';
+$string ['questionnaire_available_end'] = 'The questionnaire is available till {$a->end}.';
+$string ['questionnaire_not_available'] = 'The questionnaire is currently unavailable.';
+$string ['questionnaire_not_available_begin_end'] = 'The questionnaire is available from {$a->start} to {$a->end}.';
+$string ['questionnaire_not_available_end'] = 'The questionnaire is not available anymore.';
 $string ['info_header_student'] = 'What is the "groupformation" for?';
 $string ['info_text_student'] = 'In this Moodle-course the "groupformation" is used to build successful cooperating {$a->scenario_name}.
         After you complete and submit the questionnaire, your appropriate learning partners will be determined.
@@ -219,7 +217,7 @@ $string['grouping_delete'] = 'delete groups';
 $string['grouping_adopt'] = 'adopt groups';
 $string['grouping_abort'] = 'cancel generating groups';
 $string['moodlegrouping_delete'] = 'delete moodle-groups';
-$string['questionaire_commited'] = 'Yout answers are submitted. You cant change them in this activity.';
+$string['questionnaire_commited'] = 'Yout answers are submitted. You cant change them in this activity.';
 $string['no_data_to_display'] = 'no data to display';
 
 $string['onlyactivestudents'] = 'Only students with at least one submitted answer should be considered for building groups';
@@ -232,7 +230,7 @@ $string['oneManGroup'] = 'You are a one man group.';
 $string['noUser'] = 'User does not exist';
 $string['membersAre'] = 'Your team members are: ';
 $string['groupingNotReady'] = 'Group formation is not finished yet.';
-$string['jobGetName'] = 'Group formation and clean up';
+$string['jobget_name'] = 'Group formation and clean up';
 $string['no_time'] = 'No time fixed';
 $string['activity_end'] = 'End activity';
 $string['activity_start'] = 'Start activity';
@@ -274,7 +272,7 @@ $string['students_grouping_multiple'] = ' students for group building.';
 $string['students_commited_single'] = ' student therefrom has already commited his/her answers.';
 $string['students_commited_multiple'] = ' students therefrom have already commited their answers.';
 $string['commited_not_completed'] = ' from the commited questionnaires are not complete.';
-$string['completed_questionaire'] = ' completely answered questionnaires.';
+$string['completed_questionnaire'] = ' completely answered questionnaires.';
 
 $string['emailnotifications_info'] = 'You will be notified via email when it is terminated.';
 $string['onlyactivestudents_info'] = 'Only students with at least one submitted answer will be considered for building groups. You can configure it in the {$a->url}.';
@@ -284,3 +282,36 @@ $string ['endtime'] = 'End time';
 $string['excellent'] = 'excellent';
 $string['none'] = 'none';
 $string['bad'] = 'bad';
+
+$string['messageprovider:submission'] = 'Notify me if group formation algo finished.';
+
+$string['cron_job_not_running'] = 'In order to handle queued jobs a cron is working in the background. Unfortunately it is either not responding or not running at all. If this message keeps appearing after 24 h please contact the system administrator.';
+
+$string['groupformation_message'] = 'The group formation has finished. You can now view the result.';
+$string['groupformation_subject'] = 'group formation finished';
+$string['groupformation_message_contexturlname'] = 'results';
+
+$string['import'] = 'Import';
+$string['export'] = 'Export';
+$string['export_answers'] = 'You can download all answers with anonymized user ids here: ';
+$string['export_users'] = 'You can download all user-related data with anonymized user ids here: ';
+$string['export_groups'] = 'You can download all groups with anonymized user ids here: ';
+$string['export_group_users'] = 'You can download all group-users relations with anonymized user ids here: ';
+$string['export_logging'] = 'You can download all logging data with anonymized user ids here: ';
+$string['export_description_no'] = 'You cannot export your answers since you have not answered any questions in the exportable categories.';
+$string['export_description_yes'] = 'You can export your answers by clicking on the button below.';
+$string['import_description_yes'] = 'You can import your answers by clicking on the button below and uploading a file with exportable answer format.';
+$string['import_description_no'] = 'You cannot import your answers because you submitted your answers already or the questionnaire is not available.';
+$string['import_form_description'] = 'You can import your answers from previous questionnaires by submitting an "answers.xml" file below.';
+
+$string['file_error'] = 'You have to upload an *.xml file.';
+$string['failed_import'] = 'The import has failed due to an invalid format. Please upload a file with exportable answer format';
+$string['successful_import'] = 'The import was successful. You can review your answers in the questionnaire.';
+
+$string['archive_activity_task'] = 'Archiving old activities';
+$string['archived_activity_answers'] = 'The activity has been archived. Your answers are no longer stored and there is nothing to do here.';
+$string['archived_activity_admin'] = 'The activity has been archived. There is nothing to do here.';
+
+$string['no_evaluation_text'] = 'There will is no evaluation for this activity.';
+$string['no_evaluation_ready'] = 'There is no evaluation for you. The evaluation of your answers is possible when you answered everything and submitted your answers.';
+$string['eval_final_text'] = 'The comparison is based on {$a->percent}% of the users answers ({$a->completed} of {$a->coursesize} users have answered already).';

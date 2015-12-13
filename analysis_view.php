@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -9,194 +8,132 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * Prints a particular instance of groupformation
  *
  * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require_once (dirname ( dirname ( dirname ( __FILE__ ) ) ) . '/config.php');
-require_once (dirname ( __FILE__ ) . '/lib.php');
-require_once (dirname ( __FILE__ ) . '/locallib.php');
+require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
+require_once(dirname(__FILE__) . '/lib.php');
+require_once(dirname(__FILE__) . '/locallib.php');
 
-require_once (dirname ( __FILE__ ) . '/classes/util/test_user_generator.php');
-require_once (dirname ( __FILE__ ) . '/classes/moodle_interface/storage_manager.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/util/test_user_generator.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/util/xml_loader.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 
-// Read URL params
-$id = optional_param ( 'id', 0, PARAM_INT ); // Course Module ID
-                                             // $g = optional_param ( 'g', 0, PARAM_INT ); // groupformation instance ID
-$do_show = optional_param ( 'do_show', 'analysis', PARAM_TEXT );
+// Read URL params.
+$id = optional_param('id', 0, PARAM_INT);
+$doshow = optional_param('do_show', 'analysis', PARAM_TEXT);
 
-$create_users = optional_param ( 'create_users', 0, PARAM_INT );
-$create_answers = optional_param ( 'create_answers', false, PARAM_BOOL );
-$random_answers = optional_param ( 'random_answers', false, PARAM_BOOL );
-$delete_users = optional_param ( 'delete_users', false, PARAM_BOOL );
-$show_users = optional_param ( 'show_users', false, PARAM_BOOL );
-$repair_activity = optional_param ( 'repair_activity', false, PARAM_BOOL );
-$show_logging = optional_param ( 'show_logging', false, PARAM_BOOL );
-// Import jQuery and js file
-groupformation_add_jquery ( $PAGE, 'survey_functions.js' );
+$createusers = optional_param('create_users', 0, PARAM_INT);
+$createanswers = optional_param('create_answers', false, PARAM_BOOL);
+$randomanswers = optional_param('random_answers', false, PARAM_BOOL);
+$deleteusers = optional_param('delete_users', false, PARAM_BOOL);
 
-// Determine instances of course module, course, groupformation
-groupformation_determine_instance ( $id, $cm, $course, $groupformation );
+// Import jQuery and js file.
+groupformation_add_jquery($PAGE, 'survey_functions.js');
 
-// Require user login if not already logged in
-require_login ( $course, true, $cm );
+// Determine instances of course module, course, groupformation.
+groupformation_determine_instance($id, $cm, $course, $groupformation);
 
-// Get useful stuff
-$context = $PAGE->context;
+// Require user login if not already logged in.
+require_login($course, true, $cm);
+
+// Get useful stuff.
+$context = context_module::instance($cm->id);
 $userid = $USER->id;
 
-if (! has_capability ( 'mod/groupformation:editsettings', $context )) {
-	$returnurl = new moodle_url ( '/mod/groupformation/view.php', array (
-			'id' => $id,
-			'do_show' => 'view' 
-	) );
-	redirect ( $returnurl );
+if (!has_capability('mod/groupformation:editsettings', $context)) {
+    $return = new moodle_url ('/mod/groupformation/view.php', array(
+        'id' => $id, 'do_show' => 'view'));
+    redirect($return->out());
 } else {
-	$current_tab = $do_show;
+    $currenttab = $doshow;
 }
 
-// Log access to page
-groupformation_info ( $USER->id, $groupformation->id, '<view_teacher_overview>' );
+/* ---------- Automated test user generation ------------ */
 
-// Set PAGE config
-$PAGE->set_url ( '/mod/groupformation/analysis_view.php', array (
-		'id' => $cm->id,
-		'do_show' => $do_show 
-) );
-$PAGE->set_title ( format_string ( $groupformation->name ) );
-$PAGE->set_heading ( format_string ( $course->fullname ) );
+$cqt = new mod_groupformation_test_user_generator ($cm);
 
-require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/job_manager.php');
-require_once ($CFG->dirroot . '/mod/groupformation/classes/controller/analysis_controller.php');
-require_once ($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_parser.php');
-
-$controller = new mod_groupformation_analysis_controller ( $groupformation->id );
-
-if ($_POST) {
-	if (isset ( $_POST ['start_questionnaire'] )) {
-		$controller->start_questionnaire ();
-	} elseif (isset ( $_POST ['stop_questionnaire'] )) {
-		$controller->stop_questionnaire ();
-	}
-	$returnurl = new moodle_url ( '/mod/groupformation/analysis_view.php', array (
-			'id' => $id,
-			'do_show' => 'analysis' 
-	) );
-	redirect ( $returnurl );
+if ($deleteusers) {
+    $cqt->delete_test_users($groupformation->id);
+    $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
+        'id' => $id, 'do_show' => 'analysis'));
+    redirect($return->out());
+}
+if ($createusers > 0) {
+    $cqt->create_test_users($createusers, $groupformation->id, $createanswers, $randomanswers);
+    $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
+        'id' => $id, 'do_show' => 'analysis'));
+    redirect($return->out());
 }
 
-echo $OUTPUT->header ();
-
-// Print the tabs.
-require ('tabs.php');
-
-// Conditions to show the intro can change to look for own settings or whatever.
-// if ($groupformation->intro) {
-// echo $OUTPUT->box ( format_module_intro ( 'groupformation', $groupformation, $cm->id ), 'generalbox mod_introbox', 'groupformationintro' );
-// }
-
-// Replace the following lines with you own code.
-// echo $OUTPUT->heading ( $groupformation->name );
-
-// ---------------------------------------------
-
-// require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/answer_manager.php');
-// require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/question_manager.php');
-// require_once ($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/version_manager.php');
-// require_once ($CFG->dirroot . '/mod/groupformation/classes/model/range_question.php');
-
-// $vm = new mod_groupformation_version_manager($groupformation->id);
-
-// $filename = 'definition_2015100100.xml';
-
-// $vm->read_file($filename);
-
-// $b = $qm->add_setting_question(array('V1','V2'), array('T1','T2','T3'));
-// var_dump($b);
-
-// var_dump($question->is_valid());
-// $question->save();
-
-// var_dump($question->get_knowledge_values());
-// $radio_question = new mod_groupformation_radio_question('motivation',19);
-
-/* ---------- Automated test user generation ---------- */
-
-$cqt = new mod_groupformation_test_user_generator ();
-
-if ($delete_users) {
-	$cqt->delete_test_users ( $groupformation->id );
-	$returnurl = new moodle_url ( '/mod/groupformation/analysis_view.php', array (
-			'id' => $id,
-			'do_show' => 'analysis' 
-	) );
-	redirect ( $returnurl );
-}
-if ($create_users > 0) {
-	$cqt->create_test_users ( $create_users, $groupformation->id, $create_answers, $random_answers );
-	$returnurl = new moodle_url ( '/mod/groupformation/analysis_view.php', array (
-			'id' => $id,
-			'do_show' => 'analysis' 
-	) );
-	redirect ( $returnurl );
-}
-
- if ($show_users){
- 	$store->show_students(); 
- }
- 
- if ($repair_activity){
- 	$store->repair_activity();
- 	$returnurl = new moodle_url ( '/mod/groupformation/analysis_view.php', array (
- 			'id' => $id,
- 			'do_show' => 'analysis'
- 	) );
- 	redirect ( $returnurl );
- }
- 
- if ($show_logging){
- 	$store->show_logging();
- 	$returnurl = new moodle_url ( '/mod/groupformation/analysis_view.php', array (
- 			'id' => $id,
- 			'do_show' => 'analysis'
- 	) );
- 	redirect ( $returnurl );
- }
- 
 /* ---------- / Automated test user generation ---------- */
 
-// TODO Ahmed - Einkommentieren und die notify_admin-Function testen
+// Log access to page.
+groupformation_info($USER->id, $groupformation->id, '<view_teacher_overview>');
+
+// Set PAGE config.
+$PAGE->set_url('/mod/groupformation/analysis_view.php', array(
+    'id' => $cm->id, 'do_show' => $doshow));
+$PAGE->set_title(format_string($groupformation->name));
+$PAGE->set_heading(format_string($course->fullname));
+
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/job_manager.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/controller/analysis_controller.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_parser.php');
+
+$controller = new mod_groupformation_analysis_controller ($groupformation->id, $cm);
+
+if ($_POST) {
+    if (isset ($_POST ['start_questionnaire'])) {
+        $controller->start_questionnaire();
+    } else if (isset ($_POST ['stop_questionnaire'])) {
+        $controller->stop_questionnaire();
+    }
+    $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
+        'id' => $id, 'do_show' => 'analysis'));
+    redirect($return->out());
+}
+
+echo $OUTPUT->header();
+
+// Print the tabs.
+require('tabs.php');
 
 // $jm = new mod_groupformation_job_manager ();
-
 // $job = null;
-
+//
 // $job = $jm::get_job ( $groupformation->id );
-
+// //$jm->reset_job($job);
+// // var_dump($jm::get_next_job());
 // if (! is_null ( $job )) {
 // 	$result = $jm::do_groupal($job);
 // 	var_dump ( $result );
 // // 	$saved = $jm::save_result($job,$result);
+//
 // }
 
-// -----------------------------------------------
+if ($store->is_archived() && has_capability('mod/groupformation:editsettings', $context)) {
+    echo '<div class="alert" id="commited_view">' . get_string('archived_activity_admin', 'groupformation') . '</div>';
+} else {
+    echo '<form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
 
-// echo '<div style="color:red;">Diese Seite ist soweit fertig; Rückmeldung, wenn es etwas fehlt oder unverständlich ist, wäre super.</div>';
+    echo '<input type="hidden" name="id" value="' . $id . '"/>';
 
-echo '<form action="' . htmlspecialchars ( $_SERVER ["PHP_SELF"] ) . '" method="post" autocomplete="off">';
+    echo $controller->display();
 
-echo '<input type="hidden" name="id" value="' . $id . '"/>';
+    echo '</form>';
+}
 
-echo $controller->display ();
-
-echo '</form>';
-
-echo $OUTPUT->footer ();
+echo $OUTPUT->footer();
