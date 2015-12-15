@@ -23,7 +23,7 @@
  * Moodle is performing actions across all modules.
  *
  * @package mod_groupformation
- * @author Nora Wester
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
  */

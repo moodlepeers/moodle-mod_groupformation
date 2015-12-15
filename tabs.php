@@ -16,9 +16,9 @@
 /**
  * prints the tabbed bar
  *
- * @author Nora Wester
- * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
  * @package mod_groupformation
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
  */
 defined('MOODLE_INTERNAL') or die ('not allowed');

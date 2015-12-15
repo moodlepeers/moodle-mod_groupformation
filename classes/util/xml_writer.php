@@ -16,8 +16,9 @@
 /**
  * An XML Writer for student
  *
- * @author Rene Roepke
- *
+ * @package mod_groupformation
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class mod_groupformation_xml_writer {
 
