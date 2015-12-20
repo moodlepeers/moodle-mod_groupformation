@@ -30,7 +30,8 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
 require_once($CFG->dirroot . '/lib/groupal/classes/criteria/topic_criterion.php');
 
-class mod_groupformation_criterion_calculator {
+class mod_groupformation_criterion_calculator
+{
     private $store;
     private $usermanager;
     private $data;
@@ -41,7 +42,8 @@ class mod_groupformation_criterion_calculator {
      * mod_groupformation_criterion_calculator constructor.
      * @param $groupformationid
      */
-    public function __construct($groupformationid) {
+    public function __construct($groupformationid)
+    {
         $this->groupformationid = $groupformationid;
         $this->store = new mod_groupformation_storage_manager ($groupformationid);
         $this->usermanager = new mod_groupformation_user_manager ($groupformationid);
@@ -58,7 +60,8 @@ class mod_groupformation_criterion_calculator {
      * @param number $answer
      * @return number
      */
-    private function invert_answer($questionid, $category, $answer) {
+    private function invert_answer($questionid, $category, $answer)
+    {
         $max = $this->store->get_max_option_of_catalog_question($questionid, $category);
 
         return $max + 1 - $answer;
@@ -71,7 +74,8 @@ class mod_groupformation_criterion_calculator {
      * @param array $specs
      * @return string
      */
-    public function get_general($userid, $specs = null) {
+    public function get_general($userid, $specs = null)
+    {
         if (is_null($specs)) {
             $specs = $this->data->get_criterion_specification("general");
         }
@@ -122,7 +126,8 @@ class mod_groupformation_criterion_calculator {
      * @param null $specs
      * @return array
      */
-    public function get_knowledge($userid, $specs = null) {
+    public function get_knowledge($userid, $specs = null)
+    {
         if (is_null($specs)) {
             $specs = $this->data->get_criterion_specification('knowledge');
         }
@@ -174,7 +179,8 @@ class mod_groupformation_criterion_calculator {
      * @param array $specs
      * @return float
      */
-    public function get_points($userid, $specs = null) {
+    public function get_points($userid, $specs = null)
+    {
         if (is_null($specs)) {
             $specs = $this->data->get_criterion_specification('points');
         }
@@ -205,7 +211,8 @@ class mod_groupformation_criterion_calculator {
      * @param array $specs
      * @return float
      */
-    public function get_grade($userid, $specs = null) {
+    public function get_grade($userid, $specs = null)
+    {
         if (is_null($specs)) {
             $specs = $this->data->get_criterion_specification('grade');
         }
@@ -237,7 +244,8 @@ class mod_groupformation_criterion_calculator {
      * @param bool|false $eval
      * @return array
      */
-    public function filter_criteria_specs($criteriaspecs, $users, $eval = false) {
+    public function filter_criteria_specs($criteriaspecs, $users, $eval = false)
+    {
         $filteredspecs = array();
         foreach ($criteriaspecs as $criterion => $spec) {
             $category = $spec['category'];
@@ -329,7 +337,8 @@ class mod_groupformation_criterion_calculator {
      * @param null $users
      * @return array
      */
-    public function filter_criterion_specs_for_eval($criterion, $criterionspecs, $users = null) {
+    public function filter_criterion_specs_for_eval($criterion, $criterionspecs, $users = null)
+    {
         $array = array($criterion => $criterionspecs);
         $result = $this->filter_criteria_specs($array, $users, true);
         if (count($result) > 0) {
@@ -346,7 +355,8 @@ class mod_groupformation_criterion_calculator {
      * @param array $specs
      * @return array
      */
-    public function get_big5($userid, $specs = null) {
+    public function get_big5($userid, $specs = null)
+    {
         if (is_null($specs)) {
             $specs = $this->data->get_criterion_specification("big5");
         }
@@ -389,7 +399,8 @@ class mod_groupformation_criterion_calculator {
      * @param $specs
      * @return array
      */
-    public function get_fam($userid, $specs = null) {
+    public function get_fam($userid, $specs = null)
+    {
         if (is_null($specs)) {
             $specs = $this->data->get_criterion_specification("fam");
         }
@@ -416,7 +427,8 @@ class mod_groupformation_criterion_calculator {
      * @param array $specs
      * @return array
      */
-    public function get_learning($userid, $specs = null) {
+    public function get_learning($userid, $specs = null)
+    {
         if (is_null($specs)) {
             $specs = $this->data->get_criterion_specification("learning");
         }
@@ -444,7 +456,8 @@ class mod_groupformation_criterion_calculator {
      * @param $specs
      * @return array
      */
-    public function get_team($userid, $specs = null) {
+    public function get_team($userid, $specs = null)
+    {
         if (is_null($specs)) {
             $specs = $this->data->get_criterion_specification("team");
         }
@@ -471,7 +484,8 @@ class mod_groupformation_criterion_calculator {
      * @param number $userid
      * @return TopicCriterion
      */
-    public function get_topic($userid) {
+    public function get_topic($userid)
+    {
         $choices = $this->usermanager->get_answers($userid, 'topic', 'questionid', 'answer');
 
         return new lib_groupal_topic_criterion(array_keys($choices));
@@ -485,7 +499,8 @@ class mod_groupformation_criterion_calculator {
      * @param $courseusers
      * @return array
      */
-    public function get_eval($userid, $groupusers, $courseusers) {
+    public function get_eval($userid, $groupusers, $courseusers)
+    {
         $eval = array();
         $criteria = $this->store->get_label_set();
 
@@ -510,7 +525,8 @@ class mod_groupformation_criterion_calculator {
      * @param array $specs
      * @return mixed
      */
-    public function get_values_for_user($criterion, $userid, $specs = null) {
+    public function get_values_for_user($criterion, $userid, $specs = null)
+    {
         $function = 'get_' . $criterion;
 
         return $this->$function($userid, $specs);
@@ -523,7 +539,8 @@ class mod_groupformation_criterion_calculator {
      * @param $groupusers
      * @return null
      */
-    public function get_avg_values_for_users($criterion, $groupusers) {
+    public function get_avg_values_for_users($criterion, $groupusers)
+    {
         $function = 'get_' . $criterion;
         $avgvalues = null;
         $groupsize = count($groupusers);
@@ -560,7 +577,8 @@ class mod_groupformation_criterion_calculator {
      * @param $courseusers
      * @return array
      */
-    public function get_eval_infos($criterion, $labels, $userid, $groupusers, $courseusers) {
+    public function get_eval_infos($criterion, $labels, $userid, $groupusers, $courseusers)
+    {
         $completedusers = array_keys($this->usermanager->get_completed_by_answer_count('userid', 'userid'));
         $groupandcompleted = array_intersect($completedusers, $groupusers);
         $courseandcompleted = array_intersect($completedusers, $courseusers);
@@ -591,11 +609,32 @@ class mod_groupformation_criterion_calculator {
             $array["range"] = array("min" => 0, "max" => 1);
             $array["mode"] = $mode;
             $array["captions"] = $this->get_captions($mode, $setfinaltext, $completed, $coursesize);
+            $array["cutoff"] = $this->get_eval_text($criterion,$label, $spec["cutoffs"], $user);
             $evalinfos[] = $array;
+            var_dump($array);
 
         }
 
         return $evalinfos;
+    }
+
+
+    private function get_eval_text($criterion,$label, $cutoffs, $uservalue)
+    {
+        if (is_null($cutoffs)) {
+            return "eval_text_".$criterion."_" . $label;
+        } else {
+
+            $i = 1;
+
+            foreach ($cutoffs as $cutoff) {
+                if ($uservalue >= $cutoff) {
+                    $i += 1;
+                }
+            }
+            return "eval_text_".$criterion."_" . $label . "_" . $i;//get_string("eval_text_".$label."_".$i,"groupformation");
+        }
+
     }
 
     /**
@@ -608,7 +647,8 @@ class mod_groupformation_criterion_calculator {
      * @return array
      * @throws coding_exception
      */
-    private function get_captions($mode, $setfinaltext, $completed, $coursesize) {
+    private function get_captions($mode, $setfinaltext, $completed, $coursesize)
+    {
         $percent = round($completed / $coursesize * 100, 2);
         $a = new stdClass();
         $a->percent = $percent;
