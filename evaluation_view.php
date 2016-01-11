@@ -33,6 +33,9 @@ $doshow = optional_param('do_show', 'evaluation', PARAM_TEXT);
 
 // Import jQuery and js file.
 groupformation_add_jquery($PAGE, 'survey_functions.js');
+groupformation_add_jquery($PAGE, 'd3.min.js');
+groupformation_add_jquery($PAGE, 'd3tooltip.js');
+groupformation_add_jquery($PAGE, 'bulk2.js');
 
 // Determine instances of course module, course, groupformation.
 groupformation_determine_instance($id, $cm, $course, $groupformation);
@@ -76,5 +79,7 @@ if ($store->is_archived()) {
     $evaluator = new mod_groupformation_evaluation_controller($groupformation->id);
     echo $evaluator->render($userid);
 }
+
+
 
 echo $OUTPUT->footer();

@@ -1,0 +1,195 @@
+{
+   "big5":[
+      {
+		  	"name": "Extraversion",
+        	"values":{
+	            "user":80,
+	            "group":null,
+	            "course":72
+	         },
+	         "range":{
+	            "min":0,
+	            "max":100
+	         },
+	         "mode":2,
+	         "captions":{
+	            "mean":50,
+	            "minCaption":"min caption",
+	            "minText":"min text",
+	            "maxCaption":"max caption",
+	            "maxText":"max text",
+	            "finalText":"Die Vergleichswerte basieren auf derzeit 4% gegebener Antworten (23 von 622 Personen haben bisher geantwortet)."
+	         }
+      },
+      {
+		  "name": "Gewissenhaftigkeit",
+         "values":{
+            "user":80,
+            "group":null,
+            "course":72
+         },
+         "range":{
+            "min":0,
+            "max":100
+         },
+         "mode":2,
+         "captions":{
+            "mean":50,
+            "minCaption":"min caption",
+            "minText":"min text",
+            "maxCaption":"max caption",
+            "maxText":"max text",
+            "finalText":"Die Vergleichswerte basieren auf derzeit 4% gegebener Antworten (23 von 622 Personen haben bisher geantwortet)."
+         }
+      },
+	  {
+      	"name": "Verträglichkeit",
+         "values":{
+            "user":80,
+            "group":null,
+            "course":72
+         },
+         "range":{
+            "min":0,
+            "max":100
+         },
+         "mode":2,
+         "captions":{
+            "mean":50,
+            "minCaption":"min caption",
+            "minText":"min text",
+            "maxCaption":"max caption",
+            "maxText":"max text",
+            "finalText":"Die Vergleichswerte basieren auf derzeit 4% gegebener Antworten (23 von 622 Personen haben bisher geantwortet)."
+         }
+      },
+      {
+		  "name": "Neurotizismus",
+         "values":{
+            "user":80,
+            "group":null,
+            "course":72
+         },
+         "range":{
+            "min":0,
+            "max":100
+         },
+         "mode":2,
+         "captions":{
+            "mean":50,
+            "minCaption":"min caption",
+            "minText":"min text",
+            "maxCaption":"max caption",
+            "maxText":"max text",
+            "finalText":"Die Vergleichswerte basieren auf derzeit 4% gegebener Antworten (23 von 622 Personen haben bisher geantwortet)."
+         }
+      },
+      {
+		  "name": "Offenheit",
+         "values":{
+            "user":80,
+            "group":null,
+            "course":72
+         },
+         "range":{
+            "min":0,
+            "max":100
+         },
+         "mode":2,
+         "captions":{
+            "mean":50,
+            "minCaption":"min caption",
+            "minText":"min text",
+            "maxCaption":"max caption",
+            "maxText":"max text",
+            "finalText":"Die Vergleichswerte basieren auf derzeit 4% gegebener Antworten (23 von 622 Personen haben bisher geantwortet)."
+         }
+      }
+  ],
+   "fam":[
+      	{
+			"name":"Herausforderung",
+         "values":{
+            "user":80,
+            "group":null,
+            "course":72
+         },
+         "range":{
+            "min":0,
+            "max":100
+         },
+         "mode":2,
+         "captions":{
+            "mean":50,
+            "minCaption":"min caption",
+            "minText":"min text",
+            "maxCaption":"max caption",
+            "maxText":"max text",
+            "finalText":"Die Vergleichswerte basieren auf derzeit 4% gegebener Antworten (23 von 622 Personen haben bisher geantwortet)."
+         }
+      },
+      {
+		  "name":"Interesse",
+         "values":{
+            "user":80,
+            "group":null,
+            "course":72
+         },
+         "range":{
+            "min":0,
+            "max":100
+         },
+         "mode":2,
+         "captions":{
+            "mean":50,
+            "minCaption":"min caption",
+            "minText":"min text",
+            "maxCaption":"max caption",
+            "maxText":"max text",
+            "finalText":"Die Vergleichswerte basieren auf derzeit 4% gegebener Antworten (23 von 622 Personen haben bisher geantwortet)."
+         }
+      },
+      {
+		  "name":"Erfolgswahrscheinlichkeit",
+         "values":{
+            "user":80,
+            "group":null,
+            "course":72
+         },
+         "range":{
+            "min":0,
+            "max":100
+         },
+         "mode":2,
+         "captions":{
+            "mean":50,
+            "minCaption":"min caption",
+            "minText":"min text",
+            "maxCaption":"max caption",
+            "maxText":"max text",
+            "finalText":"Die Vergleichswerte basieren auf derzeit 4% gegebener Antworten (23 von 622 Personen haben bisher geantwortet)."
+         }
+      },
+      {
+		  "name": "Misserfolgsbefürchtung",
+         "values":{
+            "user":80,
+            "group":null,
+            "course":72
+         },
+         "range":{
+            "min":0,
+            "max":100
+         },
+         "mode":2,
+         "captions":{
+            "mean":50,
+            "minCaption":"min caption",
+            "minText":"min text",
+            "maxCaption":"max caption",
+            "maxText":"max text",
+            "finalText":"Die Vergleichswerte basieren auf derzeit 4% gegebener Antworten (23 von 622 Personen haben bisher geantwortet)."
+         }
+      }
+  ]
+}

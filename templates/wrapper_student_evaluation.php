@@ -25,6 +25,9 @@
         <?php if ($this->_['eval_show_text']): ?>
             <?php echo $this->_['eval_text']; ?>
         <?php endif; ?>
+        <!-- adding chart -->
+        <div id="gf_chart"></div>
+
         <div id="json-content" style="display:none;"><?php echo $this->_['json_content']; ?>
         </div>
     </div>
