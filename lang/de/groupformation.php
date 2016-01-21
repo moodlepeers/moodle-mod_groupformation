@@ -220,6 +220,7 @@ $string['grouping_start'] = 'Gruppenbildung starten';
 $string['grouping_delete'] = 'Gruppenvorschlag verwerfen';
 $string['grouping_adopt'] = 'Gruppenvorschlag übernehmen';
 $string['grouping_abort'] = 'Gruppenbildung abbrechen';
+$string['grouping_edit'] = 'Gruppen bearbeiten';
 $string['moodlegrouping_delete'] = 'Moodle-Gruppen l&ouml;schen';
 $string['questionnaire_commited'] = 'Ihre Antworten sind abgegeben. Somit können Sie sie nicht mehr verändern.';
 $string['no_data_to_display'] = 'Keine Daten vorhanden.';
@@ -312,6 +313,9 @@ $string['successful_import'] = 'Der Import war erfolgreich. Du kannst deine Antw
 $string['archive_activity_task'] = 'Archivierung alter Aktivitäten';
 $string['archived_activity_answers'] = 'Die Aktitivät ist archiviert worden. Ihre Antworten sind nicht mehr gespeichert und es ist keine Interaktion mehr möglich.';
 $string['archived_activity_admin'] = 'Die Aktitivät ist archiviert worden. Es ist keine Interaktion mehr möglich.';
+
+$string['students_selected']='Teilnehmer ausgewählt';
+$string['drop_selection']='Selektion aufheben';
 
 $string['no_evaluation_text'] = 'Es gibt für diese Aktivität keine Auswertung.';
 $string['no_evaluation_ready'] = 'Es gibt keine Auswertung, da nicht alle Fragen beantwortet wurden. Erst wenn alle Fragen beantwortet wurden, gibt eine Auswertung ihrer Antworten';

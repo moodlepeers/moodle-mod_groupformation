@@ -216,6 +216,7 @@ $string['grouping_start'] = 'start group formation';
 $string['grouping_delete'] = 'delete groups';
 $string['grouping_adopt'] = 'adopt groups';
 $string['grouping_abort'] = 'cancel generating groups';
+$string['grouping_edit'] = 'edit groups';
 $string['moodlegrouping_delete'] = 'delete moodle-groups';
 $string['questionnaire_commited'] = 'Yout answers are submitted. You cant change them in this activity.';
 $string['no_data_to_display'] = 'no data to display';
@@ -311,6 +312,9 @@ $string['successful_import'] = 'The import was successful. You can review your a
 $string['archive_activity_task'] = 'Archiving old activities';
 $string['archived_activity_answers'] = 'The activity has been archived. Your answers are no longer stored and there is nothing to do here.';
 $string['archived_activity_admin'] = 'The activity has been archived. There is nothing to do here.';
+
+$string['students_selected']='Students selected';
+$string['drop_selection']='Unselect all';
 
 $string['no_evaluation_text'] = 'There will is no evaluation for this activity.';
 $string['no_evaluation_ready'] = 'There is no evaluation for you. The evaluation of your answers is possible when you answered everything and submitted your answers.';

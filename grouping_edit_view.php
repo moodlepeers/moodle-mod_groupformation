@@ -27,7 +27,7 @@ require_once(dirname(__FILE__) . '/locallib.php');
 
 // Read URL params.
 $id = optional_param('id', 0, PARAM_INT);
-$doshow = optional_param('do_show', 'grouping', PARAM_TEXT);
+$doshow = optional_param('do_show', 'grouping_edit', PARAM_TEXT);
 
 // Import jQuery and js file.
 groupformation_add_jquery($PAGE, 'survey_functions.js');
@@ -68,9 +68,6 @@ if ($_POST) {
     } else if (isset ($_POST ['adopt'])) {
         $controller->adopt();
         unset ($_POST ['adopt']);
-    } else if (isset ($_POST ['edit'])) {
-        $controller->edit($cm);
-        unset ($_POST ['adopt']);
     } else if (isset ($_POST ['delete'])) {
         $controller->delete();
         unset ($_POST ['delete']);
@@ -84,7 +81,7 @@ if ($_POST) {
 groupformation_info($USER->id, $groupformation->id, '<view_teacher_grouping>');
 
 // Set PAGE config.
-$PAGE->set_url('/mod/groupformation/grouping_view.php', array(
+$PAGE->set_url('/mod/groupformation/grouping_edit_view.php', array(
     'id' => $cm->id, 'do_show' => $doshow));
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
@@ -96,13 +93,11 @@ require('tabs.php');
 if ($store->is_archived() && has_capability('mod/groupformation:editsettings', $context)) {
     echo '<div class="alert" id="commited_view">' . get_string('archived_activity_admin', 'groupformation') . '</div>';
 } else {
-    groupformation_check_for_cron_job();
-
     echo '<form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
 
     echo '<input type="hidden" name="id" value="' . $id . '"/>';
 
-    echo $controller->display();
+    echo $controller->display_edit();
 
     echo '</form>';
 }
