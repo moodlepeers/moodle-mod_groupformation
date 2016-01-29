@@ -27,7 +27,7 @@ require_once(dirname(__FILE__) . '/locallib.php');
 
 // Read URL params.
 $id = optional_param('id', 0, PARAM_INT);
-$doshow = optional_param('do_show', 'grouping_edit', PARAM_TEXT);
+$doshow = optional_param('do_show', 'grouping', PARAM_TEXT);
 
 // Import jQuery and js file.
 groupformation_add_jquery($PAGE, 'survey_functions.js');
@@ -59,18 +59,11 @@ $store = new mod_groupformation_storage_manager ($groupformation->id);
 $controller = new mod_groupformation_grouping_controller ($groupformation->id, $cm);
 
 if ($_POST) {
-    if (isset ($_POST ['start'])) {
-        $controller->start($course, $cm);
-        unset ($_POST ['start']);
-    } else if (isset ($_POST ['abort'])) {
-        $controller->abort();
-        unset ($_POST ['abort']);
-    } else if (isset ($_POST ['adopt'])) {
-        $controller->adopt();
-        unset ($_POST ['adopt']);
-    } else if (isset ($_POST ['delete'])) {
-        $controller->delete();
-        unset ($_POST ['delete']);
+    if (isset ($_POST ['save_edit'])) {
+        if (isset ($_POST['groups_string'])) {
+            $controller->save_edit($_POST['groups_string']);
+        }
+        unset ($_POST ['save_edit']);
     }
     $returnurl = new moodle_url ('/mod/groupformation/grouping_view.php', array(
         'id' => $id, 'do_show' => 'grouping'));

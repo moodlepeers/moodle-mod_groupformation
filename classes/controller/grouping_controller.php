@@ -179,7 +179,7 @@ class mod_groupformation_grouping_controller
     public function edit($cm)
     {
         $returnurl = new moodle_url ('/mod/groupformation/grouping_edit_view.php', array(
-            'id' => $cm->id, 'do_show' => 'grouping_edit'));
+            'id' => $cm->id, 'do_show' => 'grouping'));
         redirect($returnurl);
     }
 
@@ -196,6 +196,36 @@ class mod_groupformation_grouping_controller
         mod_groupformation_job_manager::set_job($this->job, "ready", false, true);
         $this->groupsmanager->delete_generated_groups();
         $this->determine_status();
+    }
+
+    public function save_edit($groups_string)
+    {
+        $groups_array_after = json_decode($groups_string, true);
+        $groups_keys_after = array_keys($groups_array_after);
+        $user_ids_after = array();
+        foreach ($groups_array_after as $array) {
+            $user_ids_after = array_merge($user_ids_after, $array);
+        }
+
+        $groups_array_before = array();
+        $user_ids_before = array();
+
+        foreach ($this->groups as $key => $value) {
+            $group_members = array_keys($this->get_group_members($key));
+
+            $groups_array_before["".$key] = $group_members;
+            $user_ids_before = array_merge($user_ids_before, $group_members);
+        }
+
+        $groups_keys_before = array_keys($groups_array_before);
+
+        $same_groupids = count(array_intersect($groups_keys_before, $groups_keys_after)) == count($groups_array_after) && count($groups_array_before) == count($groups_array_after);
+        $no_user_twice = (count(array_unique($user_ids_after))==count($user_ids_before));
+        $same_number_of_users = count($user_ids_after) == count($user_ids_before);
+        $no_user_missing = count(array_intersect($user_ids_before, $user_ids_after)) == count($user_ids_after);
+        if ($same_groupids && $no_user_twice && $no_user_missing && $same_number_of_users){
+            $this->groupsmanager->update_groups($groups_array_after,$groups_array_before);
+        }
     }
 
     /**
@@ -547,24 +577,39 @@ class mod_groupformation_grouping_controller
             ));
 
             $groups_string = "";
-
+            $groups_array = array();
             foreach ($this->groups as $key => $value) {
 
                 $gpi = (is_null($value->performance_index)) ? '-' : $value->performance_index;
 
                 $group_members = $this->get_group_members($key);
-                $g_ids = implode(',',array_keys($group_members));
-                $groups_string .= $g_ids."\n";
+                $groups_array[$key] = array_keys($group_members);
+
+                $g_ids = implode(',', array_keys($group_members));
+                $groups_string .= $g_ids . "\n";
 
                 $generatedgroupsview->assign($key, array(
-                    'id'=>$key,
+                    'id' => $key,
                     'groupname' => $value->groupname,
                     'groupquallity' => $gpi,
                     'grouplink' => $this->get_group_link($value->moodlegroupid),
                     'group_members' => $group_members));
             }
 
-            $generatedgroupsview->assign('groups_string',$groups_string);
+            $v = array();
+            foreach ($groups_array as $array) {
+                $v = array_merge($v, $array);
+            }
+
+            // $string = '{"21":[],"22":[12,8,16,20],"23":[13,9,17,21],"24":[14,6,22,18],"25":[15,5,4,10]}';
+            // $array = json_decode($string,true);
+
+            // $this->groupsmanager->update_groups($array);
+            // var_dump(json_encode($groups_array));
+
+            $groups_string = json_encode($groups_array);
+
+            $generatedgroupsview->assign('groups_string', $groups_string);
 
         } else {
             $generatedgroupsview->set_template('grouping_no_data');
@@ -602,7 +647,7 @@ class mod_groupformation_grouping_controller
             $userlink = $url;
 
             $groupmembers [$user->userid] = [
-                'name' => $username, 'link' => $userlink, 'id'=>$user->userid];
+                'name' => $username, 'link' => $userlink, 'id' => $user->userid];
         }
 
         return $groupmembers;

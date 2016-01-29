@@ -370,4 +370,66 @@ class mod_groupformation_groups_manager {
             }
         }
     }
+
+    public function remove_users($groupid){
+        global $DB;
+
+        $DB->delete_records('groupformation_group_users',array('groupformation'=>$this->groupformationid,'groupid'=>$groupid));
+    }
+
+    public function add_users($groupid, $userids){
+        global $DB;
+
+        $records = array();
+        foreach($userids as $key => $userid){
+            $record = new stdClass();
+            $record->groupformation = $this->groupformationid;
+            $record->groupid = $groupid;
+            $record->userid = $userid;
+            $records[] = $record;
+        }
+        $DB->insert_records('groupformation_group_users',$records);
+    }
+
+    public function delete_group($groupid){
+        global $DB;
+
+        $this->remove_users($groupid);
+
+        $DB->delete_records('groupformation_groups',array('id'=>$groupid,'groupformation'=>$this->groupformationid));
+
+    }
+
+    public function update_group($groupid,$group_size){
+        global $DB;
+
+        $record = $DB->get_record('groupformation_groups',array('id'=>$groupid));
+        $record->group_size = $group_size;
+        $record->performance_index = NULL;
+
+        $DB->update_record('groupformation_groups',$record);
+    }
+
+    public function update_groups($groups_array_after,$groups_array_before){
+        $updated = false;
+        foreach($groups_array_after as $groupid => $userids){
+
+            if (is_null($userids) || count($userids)==0){
+                $this->delete_group($groupid);
+                $updated |= true;
+            }else {
+                $userids_before = $groups_array_before[$groupid];
+                $same = count(array_intersect($userids, $userids_before)) == count($userids) && count($userids) == count($userids_before);
+                if (!$same) {
+                    $this->remove_users($groupid);
+                    $this->add_users($groupid, $userids);
+                    $this->update_group($groupid, count($userids));
+                    $updated |= true;
+                }
+            }
+        }
+        if ($updated){
+            // UPDATE PERFORMANCE VALUES WITH NEW GROUPS
+        }
+    }
 }
