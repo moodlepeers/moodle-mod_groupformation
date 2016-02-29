@@ -17,7 +17,7 @@
  * Prints a particular instance of groupformation
  *
  * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
+ * @author Eduard Gallwas, Johannes Konert, Renï¿½ Rï¿½pke, Neora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
@@ -71,23 +71,24 @@ $PAGE->set_url('/mod/groupformation/view.php', array(
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 
-$begin = 1;
-if (isset ($_POST ["begin"])) {
-    $begin = $_POST ["begin"];
-} else {
+//$begin = 1;
+if ( data_submitted() && confirm_sesskey()){
+    $begin = optional_param('begin', null, PARAM_BOOL);
+    $questions = optional_param('questions', null, PARAM_BOOL);
+}
+if (!isset ($begin)) {
     $begin = 1;
 }
 
+
 if ($begin == 1) {
-    if (isset ($_POST ["questions"])) {
 
-        if ($_POST ["questions"] == 1 && !$back) {
+    if (isset($questions) && $questions == 1 && !$back) {
 
-            $returnurl = new moodle_url ('/mod/groupformation/questionnaire_view.php', array(
-                'id' => $id));
+        $returnurl = new moodle_url ('/mod/groupformation/questionnaire_view.php', array(
+            'id' => $id));
 
-            redirect($returnurl);
-        }
+        redirect($returnurl);
     }
 } else {
     $usermanager->change_status($userid, 1);
@@ -110,9 +111,21 @@ if ($store->is_archived()) {
         echo $OUTPUT->box(format_module_intro('groupformation', $groupformation, $cm->id), 'generalbox mod_introbox',
                           'groupformationintro');
     }
+    
+//    $controller = new mod_groupformation_student_overview_controller ($cm->id, $groupformation->id, $userid);
+//    echo $controller->display();
+    
+    echo '<form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
+    echo '<input type="hidden" name="questions" value="1"/>';
+
+    echo '<input type="hidden" name="sesskey" value="'. sesskey(). '" />';
 
     $controller = new mod_groupformation_student_overview_controller ($cm->id, $groupformation->id, $userid);
     echo $controller->display();
+
+    echo '</form>';
+
+
 }
 echo $OUTPUT->footer();
 
