@@ -516,7 +516,7 @@ class mod_groupformation_criterion_calculator
      */
     public function get_eval($userid, $groupusers, $courseusers)
     {
-        $eval = array();
+        $eval = array("first"=>array("name"=>get_string("eval_first_page_title","groupformation"),"text"=>get_string("eval_first_page_text","groupformation")));
         $criteria = $this->store->get_label_set();
 
         foreach ($criteria as $criterion) {
@@ -525,7 +525,8 @@ class mod_groupformation_criterion_calculator
                 $labels = $this->filter_criterion_specs_for_eval($criterion, $labels);
             }
             if (!is_null($labels) && count($labels) > 0) {
-                $eval[$criterion] = $this->get_eval_infos($criterion, $labels, $userid, $groupusers, $courseusers);
+                $array = $this->get_eval_infos($criterion, $labels, $userid, $groupusers, $courseusers);
+                $eval[$criterion] = array("name"=>get_string('eval_name_'.$criterion,'groupformation'),"criteria"=>$array);
             }
         }
 
@@ -746,7 +747,7 @@ class mod_groupformation_criterion_calculator
 
             $mode = 1;
             $array = array();
-            $array["name"] = $label;
+            $array["name"] = $label;//get_string('eval_'.$label,'groupformation');
             $array["values"] = array("user" => $user, "group" => $group, "course" => $course);
             $array["range"] = array("min" => 0, "max" => 1);
             $array["mode"] = $mode;
@@ -789,7 +790,7 @@ class mod_groupformation_criterion_calculator
      * @return array
      * @throws coding_exception
      */
-    private function get_captions($criterion,$mode, $setfinaltext, $completed, $coursesize)
+    private function get_captions($label, $mode, $setfinaltext, $completed, $coursesize)
     {
         $percent = round($completed / $coursesize * 100, 2);
         $a = new stdClass();
@@ -797,14 +798,14 @@ class mod_groupformation_criterion_calculator
         $a->completed = $completed;
         $a->coursesize = $coursesize;
         $captions = array(
-            "maxCaption" => get_string("eval_max_caption_".$criterion,"groupformation"),
-            "maxText" => get_string("eval_max_text_".$criterion,"groupformation"),
+            "maxCaption" => get_string("eval_max_caption_".$label,"groupformation"),
+            "maxText" => get_string("eval_max_text_".$label,"groupformation"),
             "finalText" => (($setfinaltext) ? get_string("eval_final_text", "groupformation", $a) : null)
         );
         if ($mode == 2) {
             $captions["mean"] = 0.5;
-            $captions["minCaption"] = get_string("eval_min_caption_".$criterion,"groupformation");
-            $captions["minText"] = get_string("eval_min_text_".$criterion,"groupformation");
+            $captions["minCaption"] = get_string("eval_min_caption_".$label,"groupformation");
+            $captions["minText"] = get_string("eval_min_text_".$label,"groupformation");
         }
 
         return $captions;

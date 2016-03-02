@@ -320,6 +320,14 @@ $string['no_evaluation_text'] = 'There will is no evaluation for this activity.'
 $string['no_evaluation_ready'] = 'There is no evaluation for you. The evaluation of your answers is possible when you answered everything and submitted your answers.';
 $string['eval_final_text'] = 'The comparison is based on {$a->percent}% of the users answers ({$a->completed} of {$a->coursesize} users have answered already).';
 
+$string['eval_first_page_title']="General Information";
+$string['eval_first_page_text'] = "Hereby you receive your personalized feedback regarding your answers given in the questionnaire. For this purpose, questions related to the same subject were clustered and average values were calculated and compared with a student’s sample. So-called percentile ranks were calculated, not with the intention of judging whether a certain obtained value was good or bad, but how frequent those values are within a student’s sample. A percentile rank of 10 % means, that 10 % of the comparison sample had an equal or smaller value. On the other hand, a percentile rank of 90 % means, that 90 % of the comparison sample obtained an equal or smaller value.
+
+First, you receive feedback on five personality characteristics, that can be understood as relatively stable, that is, independent of specific situations: extraversion, neuroticism, conscientiousness, social agreeableness and openness to experience. You will then receive feedback on four dimensions of motivation, which relate to the current academic course or exercise and thus may vary from situation to situation: interest, challenge, probability of success and expectation of failure.";
+
+$string['eval_name_big5'] = 'Personality';
+$string['eval_name_fam'] = 'Motivation';
+
 $string['eval_max_caption_extraversion']='Extraversion';
 $string['eval_min_caption_extraversion']='Extraversion';
 $string['eval_max_caption_neurotizismus']='Neuroticism';
@@ -374,7 +382,7 @@ $string['eval_text_big5_gewissenhaftigkeit_2']='You appear to have an average sc
 $string['eval_text_big5_gewissenhaftigkeit_1']='You seem to have a rather low score on conscientiousness. Accordingly one can conclude that you tend to be spontaneous and that you act rather careless and inaccurate.';
 $string['eval_text_big5_vertraeglichkeit_3']='Your high scores on agreeableness indicate that in general you are more altruistic. You treat others with understanding, kindness and empathy, and you try to help others and assume that the others will act helpful as well. You tend to interpersonal trust, cooperation and compliance.';
 $string['eval_text_big5_vertraeglichkeit_2']='Your average scores on agreeableness indicate that you are predisposed neither strongly egocentric nor altruistic. One would describe you neither as particularly suspicious nor particularly fast trusting, neither extremely yielding nor extremely stubborn.';
-$string['eval_text_big5_vertraeglichkeit_1']='Your low scores on agreeableness indicate that you are basically rather argumentative, egocentric and suspicious of the intentions of other people. You behave more competitively than cooperatively, have the ability to fight for your own interests and you are less yielding. ';
+$string['eval_text_big5_vertraeglichkeit_1']='Your low scores on agreeableness indicate that you are basically rather argumentative, egocentric and suspicious of the intentions of other people. You behave more competitively than cooperatively, have the ability to fight for your own interests and you are less yielding.';
 $string['eval_text_big5_offenheit_3']='You have obtained rather high scores on openness. This suggests that you have an active fantasy life and that you are interested in many private and public processes. Such people are often described as intellectual, experimental and with artistic interest, they often behave unconventionally and prefer variety.';
 $string['eval_text_big5_offenheit_2']='You have obtained average openness values. This indicates that you do not tend to very conventional nor to very unconventional attitudes and behavior. For you, visonary, imaginative disposition is balanced with pragmatic living in the here and now.';
 $string['eval_text_big5_offenheit_1']='You have achieved rather low openness scores. This suggests that you are more prone to conventional behavior and conservative attitudes. You prefer established and approved things over new things and perceive your emotional reactions rather attenuated. You act pragmatically in the here and now.';
