@@ -46,11 +46,11 @@
         <div class="grid bottom_stripe">
             <div class="col_s_50"><?php echo get_string('name_by_group', 'groupformation'); ?>
                 <b><?php echo $entry['groupname']; ?></b></div>
-            <div class="col_s_100 gf_group_links">
+            <ul id="group_id_<?php echo $entry['id'];?>" class="col_s_100 gf_group_links">
                 <?php foreach ($entry['group_members'] as $user) { ?>
-                    <?php echo '<span class="gf_button gf_button_pill gf_button_small">' . $user['name'] . '</span>'; ?>
+                    <?php echo '<li class="gf_button gf_button_pill gf_button_small" id="'.$user['id'].'">' . $user['name'] . '</li>'; ?>
                 <?php } ?>
-            </div>
+            </ul>
         </div>
     <?php endif; ?>
 <?php } ?>
