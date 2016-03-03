@@ -516,7 +516,7 @@ class mod_groupformation_criterion_calculator
      */
     public function get_eval($userid, $groupusers, $courseusers)
     {
-        $eval = array("first"=>array("name"=>get_string("eval_first_page_title","groupformation"),"text"=>get_string("eval_first_page_text","groupformation")));
+        $eval = array(array("name"=>"first_page","mode"=>"text","caption"=>get_string("eval_first_page_title","groupformation"),"text"=>get_string("eval_first_page_text","groupformation")));
         $criteria = $this->store->get_label_set();
 
         foreach ($criteria as $criterion) {
@@ -526,7 +526,7 @@ class mod_groupformation_criterion_calculator
             }
             if (!is_null($labels) && count($labels) > 0) {
                 $array = $this->get_eval_infos($criterion, $labels, $userid, $groupusers, $courseusers);
-                $eval[$criterion] = array("name"=>get_string('eval_name_'.$criterion,'groupformation'),"criteria"=>$array);
+                $eval[] = array("name"=>$criterion,"mode"=>"chart","caption"=>get_string('eval_name_'.$criterion,'groupformation'),"criteria"=>$array);
             }
         }
 
