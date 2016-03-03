@@ -59,21 +59,11 @@ $store = new mod_groupformation_storage_manager ($groupformation->id);
 $controller = new mod_groupformation_grouping_controller ($groupformation->id, $cm);
 
 if ($_POST) {
-    if (isset ($_POST ['start'])) {
-        $controller->start($course, $cm);
-        unset ($_POST ['start']);
-    } else if (isset ($_POST ['abort'])) {
-        $controller->abort();
-        unset ($_POST ['abort']);
-    } else if (isset ($_POST ['adopt'])) {
-        $controller->adopt();
-        unset ($_POST ['adopt']);
-    } else if (isset ($_POST ['edit'])) {
-        $controller->edit($cm);
-        unset ($_POST ['adopt']);
-    } else if (isset ($_POST ['delete'])) {
-        $controller->delete();
-        unset ($_POST ['delete']);
+    if (isset ($_POST ['save_edit'])) {
+        if (isset ($_POST['groups_string'])) {
+            $controller->save_edit($_POST['groups_string']);
+        }
+        unset ($_POST ['save_edit']);
     }
     $returnurl = new moodle_url ('/mod/groupformation/grouping_view.php', array(
         'id' => $id, 'do_show' => 'grouping'));
@@ -84,7 +74,7 @@ if ($_POST) {
 groupformation_info($USER->id, $groupformation->id, '<view_teacher_grouping>');
 
 // Set PAGE config.
-$PAGE->set_url('/mod/groupformation/grouping_view.php', array(
+$PAGE->set_url('/mod/groupformation/grouping_edit_view.php', array(
     'id' => $cm->id, 'do_show' => $doshow));
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
@@ -96,13 +86,11 @@ require('tabs.php');
 if ($store->is_archived() && has_capability('mod/groupformation:editsettings', $context)) {
     echo '<div class="alert" id="commited_view">' . get_string('archived_activity_admin', 'groupformation') . '</div>';
 } else {
-    groupformation_check_for_cron_job();
-
     echo '<form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
 
     echo '<input type="hidden" name="id" value="' . $id . '"/>';
 
-    echo $controller->display();
+    echo $controller->display_edit();
 
     echo '</form>';
 }

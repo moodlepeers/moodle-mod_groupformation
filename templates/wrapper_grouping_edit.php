@@ -14,17 +14,32 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * Version information
- *
  * @package mod_groupformation
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die();
-$plugin->version = 2016011800;
-$plugin->requires = 2015050500;
-$plugin->cron = 0;
-$plugin->component = 'mod_groupformation';
-$plugin->maturity = MATURITY_ALPHA;
-$plugin->release = 'v1.1';
-$plugin->dependencies = array();
+?>
+<div class="gf_settings_pad">
+    <div class="gf_pad_header">
+        <?php echo get_string('group_building', 'groupformation'); ?> - <?php echo $this->_['grouping_title']; ?>
+    </div>
+
+<!--    <div class="gf_pad_header_small">-->
+<!--        --><?php //echo get_string('evaluation', 'groupformation'); ?>
+<!--    </div>-->
+<!--    <div class="gf_pad_content">-->
+<!--        --><?php //echo $this->_['grouping_statistics']; ?>
+<!--    </div>-->
+
+<!--    <div class="gf_pad_header_small">-->
+<!--        --><?php //echo get_string('max_group_size_not_reached', 'groupformation'); ?>
+<!--    </div>-->
+<!--    <div class="gf_pad_content">-->
+<!--        --><?php //echo $this->_['grouping_incomplete_groups']; ?>
+<!--    </div>-->
+
+    <div class="gf_pad_content">
+        <?php echo $this->_['grouping_generated_groups']; ?>
+    </div>
+</div>
+

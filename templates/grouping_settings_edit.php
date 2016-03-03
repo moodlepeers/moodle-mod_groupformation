@@ -25,9 +25,6 @@
     <div class="col_m_87-5 alert"><?php echo get_string('onlyactivestudents_info', 'groupformation',$a);?></div>
 </div>
 <?php endif;?>
-<div class="grid">
-    <div class="col_m_87-5"><?php echo get_string('are', 'groupformation');?> <b><?php echo $this->_['student_count']; ?></b> <?php echo ' '.($this->_['student_count']==1)? get_string('students_grouping_single', 'groupformation'):get_string('students_grouping_multiple', 'groupformation');?></div>
-</div>
 
 <?php foreach($this->_['buttons'] as $button) { ?>
 
@@ -35,8 +32,8 @@
 
 <?php } ?>
 
-<div>
-	<div style="<?php if($this->_['status'][1] == 0) { echo 'opacity:0.5;';} else {echo 'opacity:1.0;';} ?>margin-left: 4px; <?php if($this->_['status'][1] == 1) { echo 'color: red;';}?>"> <i><?php echo $this->_['status'][0];?><?php if (isset($this->_['emailnotifications']) && $this->_['emailnotifications']) { echo get_string('emailnotifications_info','groupformation');}?></i></div>
+<div class="grid">
+    <div class="col_m_87-5"> <span id="howmany_selected">0</span><?php echo ' '.get_string('students_selected','groupformation').' (<a id="unselect">'.get_string('drop_selection','groupformation').'</a>)'?></div>
 </div>
 
 <!--<p>Statusanzeige "Gruppenbildung l&auml;uft..." mit %Zahl oder voraussichtlicher Endzeit</p>-->
