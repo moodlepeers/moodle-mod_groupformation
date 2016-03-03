@@ -71,6 +71,8 @@ class build_groups_task extends \core\task\scheduled_task {
 
                 // Notify teacher about finished group formation.
                 \mod_groupformation_job_manager::notify_teacher($job);
+            }else{
+                \mod_groupformation_job_manager::reset_job($job);
             }
         }
     }
