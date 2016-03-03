@@ -208,7 +208,7 @@ $string ['info_text_teacher_analysis'] = 'With this plugin you have the ability 
 ';
 $string['statusGrupping0'] = 'You have to close the questionnaire to start group formation.';
 $string['statusGrupping1'] = 'You can start group formation now';
-$string['statusGrupping2'] = 'The group formation is in process';
+$string['statusGrupping2'] = 'The group formation is in process.';
 $string['statusGrupping3'] = 'The termination of group formation is in process';
 $string['statusGrupping4'] = 'The group formation is finished. You can adopt the groups to Moodle or generate a new results by algorithm.';
 $string['statusGrupping5'] = 'The generated groups are adopted to Moodle. You can manually adjust them.';

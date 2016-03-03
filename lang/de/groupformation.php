@@ -212,8 +212,8 @@ $string ['info_text_teacher_analysis'] = 'Mit diesem Plugin haben Sie die Mögli
 ';
 $string['statusGrupping0'] = 'Um die Gruppenbildung starten zu können, müssen Sie die Aktivität im Tab Überblick beenden. ';
 $string['statusGrupping1'] = 'Sie können die Gruppenbildung jetzt starten.';
-$string['statusGrupping2'] = 'Die Gruppenbildung läuft. ';
-$string['statusGrupping3'] = 'Die Gruppenbildung wird abgebrochen. ';
+$string['statusGrupping2'] = 'Die Gruppenbildung läuft.';
+$string['statusGrupping3'] = 'Die Gruppenbildung wird abgebrochen.';
 $string['statusGrupping4'] = 'Gruppenbildung ist abgeschlossen. Sie können den Gruppenvorschlag übernehmen, oder verwerfen. ';
 $string['statusGrupping5'] = 'Die realen Gruppen sind gebildet. Sie können jetzt manuelle Veränderung an den Gruppen vornehmen. ';
 $string['grouping_start'] = 'Gruppenbildung starten';
