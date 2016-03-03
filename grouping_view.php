@@ -71,7 +71,7 @@ if ( (data_submitted()) && confirm_sesskey()){
         $controller->start($course, $cm);
     } else if (isset ($abort) && $abort == 1) {
         $controller->abort();
-    } else if (isset ($dopt) && $adopt == 1) {
+    } else if (isset ($adopt) && $adopt == 1) {
         $controller->adopt();
     } else if (isset ($delete) && $delete == 1) {
         $controller->delete();
