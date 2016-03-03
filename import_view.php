@@ -29,14 +29,18 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/controller/import_expo
 require_once($CFG->dirroot . '/mod/groupformation/classes/forms/import_form.php');
 
 // Read URL params.
-$id = optional_param('id', 0, PARAM_INT);
+$id = optional_param('id', null, PARAM_INT);
 $doshow = optional_param('do_show', 'import_export', PARAM_TEXT);
 
 // Import jQuery and js file.
 groupformation_add_jquery($PAGE, 'settings_functions.js');
 
-if (isset($_POST['cmid'])) {
-    $id = $_POST['cmid'];
+//if (isset($_POST['cmid'])) {
+//    $id = $_POST['cmid'];
+//}
+
+if ( data_submitted() && confirm_sesskey()){
+    $id = optional_param('cmid', null, PARAM_INT);
 }
 
 // Determine instances of course module, course, groupformation.
@@ -71,8 +75,8 @@ $PAGE->set_url('/mod/groupformation/import_view.php', array('id' => $cm->id, 'do
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 
-if (isset($_POST['cancel'])) {
-
+//if (isset($_POST['cancel'])) {
+if ($mform->is_cancelled()) {
     // Handle form cancel operation.
     $returnurl = new moodle_url('/mod/groupformation/import_export_view.php', array('id' => $id, 'do_show' => 'import_export'));
     redirect($returnurl);

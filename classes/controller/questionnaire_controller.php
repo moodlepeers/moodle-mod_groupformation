@@ -404,6 +404,7 @@ class mod_groupformation_questionnaire_controller {
         echo '	<form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
 
         echo '		<input type="hidden" name="category" value="no"/>';
+        echo '<input type="hidden" name="sesskey" value="'.sesskey().'" />';
 
         $activityid = optional_param('id', false, PARAM_INT);
         if ($activityid) {
@@ -498,6 +499,8 @@ class mod_groupformation_questionnaire_controller {
             echo '<input type="hidden" name="category" value="' . $category . '"/>';
 
             echo '<input type="hidden" name="percent" value="' . $percent . '"/>';
+
+            echo '<input type="hidden" name="sesskey" value="'.sesskey().'" />';
 
             $activityid = optional_param('id', false, PARAM_INT);
 
