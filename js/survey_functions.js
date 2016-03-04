@@ -8,8 +8,7 @@
  */
  $(document).ready(function() {
 
-    // TODO Einkommentieren wenn die Topics in erfolgreich in DB geschrieben werden
-    // $('#invisible_topics_inputs').hide();
+     $('#invisible_topics_inputs').hide();
 
 
 
@@ -75,16 +74,10 @@
 
                 $('#invisible_topics_inputs').find('input').remove();
                 createTopicInputs();
-
-                /*$.ajax({
-                 data: oData,
-                 type: 'POST',
-                 url: '/your/url/here'
-                 });*/
             }
         });
 
-        // create hidden Inputs of Topics to write the order of Topics to db with $_POST method
+        // create hidden Inputs of Topics to write their order to db.
         function createTopicInputs(){
             var sortedIDs = $( ".sortable_topics" ).sortable( "toArray" );
             $.each(sortedIDs, function(index, value){
