@@ -71,7 +71,6 @@ $PAGE->set_url('/mod/groupformation/import_view.php', array('id' => $cm->id, 'do
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 
-//if (isset($_POST['cancel'])) {
 $cancel = optional_param('cancel',null,PARAM_BOOL);
 if (isset($cancel) && $cancel) {
     // Handle form cancel operation.
