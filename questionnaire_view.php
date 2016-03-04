@@ -90,8 +90,13 @@ $PAGE->set_url('/mod/groupformation/questionnaire_view.php', array(
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 
+$consent = $usermanager->get_consent($userid);
 
-
+if (!$consent) {
+    $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
+        'id' => $cm->id, 'giveconsent' => '1'));
+    redirect($returnurl);
+}
 
 $inarray = in_array($category, $names);
 

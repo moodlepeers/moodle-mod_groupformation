@@ -490,4 +490,29 @@ class mod_groupformation_user_manager {
 
         return $result;
     }
+
+    public function get_consent($userid){
+        global $DB;
+        if ($DB->record_exists('groupformation_started',
+            array('groupformation'=>$this->groupformationid,'userid'=>$userid))){
+            return boolval($DB->get_field('groupformation_started','consent',array('groupformation'=>$this->groupformationid,'userid'=>$userid)));
+        }else{
+            return false;
+        }
+    }
+
+    public function set_consent($userid,$value){
+        global $DB;
+        $this->set_status($userid);
+        $record = $DB->get_record('groupformation_started',array('groupformation'=>$this->groupformationid,'userid'=>$userid));
+        $record->consent = $value;
+        $DB->update_record('groupformation_started',$record);
+    }
+
+    public function delete_answers($userid){
+        global $DB;
+        $DB->delete_records('groupformation_started',array('groupformation'=>$this->groupformationid,'userid'=>$userid));
+        $DB->delete_records('groupformation_answer',array('groupformation'=>$this->groupformationid,'userid'=>$userid));
+    }
+
 }

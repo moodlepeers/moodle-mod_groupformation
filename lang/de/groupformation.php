@@ -122,9 +122,11 @@ $string ['students_enrolled_info'] = 'Studierenden sind im Kurs eingeschrieben';
 $string ['groupSettingsInfo'] = 'Sie haben Themen zur Auswahl angegeben. Daraus bestimmt sich die Anzahl der Gruppen und deren Größe.';
 $string ['analyse'] = 'Analyse';
 $string ['questionnaire_not_started'] = 'Der Fragebogen wartet noch auf Ihre Bearbeitung.';
-$string ['questionnaire_press_to_begin'] = 'Klicken Sie auf "Weiter", um zu beginnen.';
+$string ['questionnaire_press_to_begin'] = 'Geben Sie ihre Zustimmung und klicken Sie auf "Weiter", um zu beginnen.';
 $string ['questionnaire_not_submitted'] = 'Sie haben den Fragebogen noch nicht abgegeben.';
-$string ['questionnaire_press_continue_submit'] = 'Klicken Sie auf "Bearbeiten", um den Fragebogen weiter auszufüllen oder auf "Abgeben", um ihn abzugeben.';
+$string ['questionnaire_press_continue_submit'] = 'Klicken Sie auf "Bearbeiten", um den Fragebogen weiter auszufüllen oder auf "Abgeben", um ihn abzugeben. Durch "Zustimmung wiederrufen" können sie ihre Zustimmung wiederrufen und alle ihre Antworten werden dadurch gelöscht.
+
+Wenn Sie den Fragebogen abgegeben haben, können Sie ihre Zustimmung nicht mehr wiederrufen.';
 $string ['questionnaire_answer_stats'] = 'Aktueller Zustand des Fragebogens: ';
 $string ['questionnaire_submitted'] = 'Sie haben den Fragebogen bereits abgegeben und können Ihre Antworten nicht mehr ändern.';
 $string ['questionnaire_press_preview'] = 'Klicken Sie auf "Vorschau", um den Fragebogen anzusehen.';
@@ -400,6 +402,10 @@ $string['eval_text_fam_misserfolgsbefuerchtung_3']='Ihre Ergebnisse legen die An
 $string['eval_text_fam_misserfolgsbefuerchtung_2']='Ihre Ergebnisse legen die Annahme nahe, dass die Misserfolgsbefürchtung bei Ihnen moderat ausgeprägt ist. Dies könnte sich aus einer allgemeinen Furcht vor Misserfolg oder Prüfungsängstlichkeit ableiten, sich aber auch auf speziellere, situative Faktoren der aktuellen Lehrveranstaltung oder Aufgabe beziehen. Im Allgemeinen geht man davon aus, dass sich Misserfolgsbefürchtungen negativ auf den Lernerfolg auswirken.';
 $string['eval_text_fam_misserfolgsbefuerchtung_1']='Ihre Ergebnisse legen die Annahme nahe, dass die Misserfolgsbefürchtung bei Ihnen niedrig ausgeprägt ist. Dies könnte sich aus einer allgemein nicht vorhandenen Furcht vor Misserfolg oder Prüfungsängstlichkeit ableiten, sich aber auch auf speziellere, situative Faktoren der aktuellen Lehrveranstaltung oder Aufgabe beziehen. Im Allgemeinen geht man davon aus, dass sich fehlende Misserfolgsbefürchtungen positiv auf den Lernerfolg auswirken.';
 
+$string['consent_alert_message'] = 'Sie müssen den Nutzungsbedingungen zustimmen, um den Fragebogen zu beantworten. Lesen und akzeptieren sie die Nutzungsbedingungen, bevor sie auf "Weiter" klicken.';
+$string['consent_message'] = 'Ich erlaube, dass meine Angaben in anonymisierter Form für wissenschaftliche Zwecke weiterverarbeitet werden dürfen. Ein Rückschluss auf meine Person ist dabei zu keinem Zeitpunkt möglich. Die Forscher/innen der TU Darmstadt haben damit die Möglichkeit, Lerngruppenbildung weiter zu erforschen und zu verbessern.';
+
+$string['questionnaire_delete'] = 'Zustimmung wiederrufen';
 
 
 
