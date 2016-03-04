@@ -61,24 +61,6 @@ if (!has_capability('mod/groupformation:editsettings', $context)) {
     $currenttab = $doshow;
 }
 
-/* ---------- Automated test user generation ------------ */
-
-$cqt = new mod_groupformation_test_user_generator ($cm);
-
-if ($deleteusers) {
-    $cqt->delete_test_users($groupformation->id);
-    $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
-        'id' => $id, 'do_show' => 'analysis'));
-    redirect($return->out());
-}
-if ($createusers > 0) {
-    $cqt->create_test_users($createusers, $groupformation->id, $createanswers, $randomanswers);
-    $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
-        'id' => $id, 'do_show' => 'analysis'));
-    redirect($return->out());
-}
-
-/* ---------- / Automated test user generation ---------- */
 
 // Log access to page.
 groupformation_info($USER->id, $groupformation->id, '<view_teacher_overview>');
@@ -95,34 +77,25 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_p
 
 $controller = new mod_groupformation_analysis_controller ($groupformation->id, $cm);
 
-if ($_POST) {
-    if (isset ($_POST ['start_questionnaire'])) {
-        $controller->start_questionnaire();
-    } else if (isset ($_POST ['stop_questionnaire'])) {
-        $controller->stop_questionnaire();
+
+if ( (data_submitted()) && confirm_sesskey()){
+    $switcher = optional_param('questionnaire_switcher', null, PARAM_INT);
+
+    if ( isset($switcher)) {
+        $controller->trigger_questionnaire($switcher);
     }
     $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
         'id' => $id, 'do_show' => 'analysis'));
     redirect($return->out());
 }
 
+
+
 echo $OUTPUT->header();
 
 // Print the tabs.
 require('tabs.php');
 
-// $jm = new mod_groupformation_job_manager ();
-// $job = null;
-//
-// $job = $jm::get_job ( $groupformation->id );
-// //$jm->reset_job($job);
-// // var_dump($jm::get_next_job());
-// if (! is_null ( $job )) {
-// 	$result = $jm::do_groupal($job);
-// 	var_dump ( $result );
-// // 	$saved = $jm::save_result($job,$result);
-//
-// }
 
 if ($store->is_archived() && has_capability('mod/groupformation:editsettings', $context)) {
     echo '<div class="alert" id="commited_view">' . get_string('archived_activity_admin', 'groupformation') . '</div>';
@@ -130,6 +103,7 @@ if ($store->is_archived() && has_capability('mod/groupformation:editsettings', $
     echo '<form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
 
     echo '<input type="hidden" name="id" value="' . $id . '"/>';
+    echo '<input type="hidden" name="sesskey" value="'.sesskey().'" />';
 
     echo $controller->display();
 

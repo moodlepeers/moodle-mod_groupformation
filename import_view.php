@@ -35,10 +35,6 @@ $doshow = optional_param('do_show', 'import_export', PARAM_TEXT);
 // Import jQuery and js file.
 groupformation_add_jquery($PAGE, 'settings_functions.js');
 
-//if (isset($_POST['cmid'])) {
-//    $id = $_POST['cmid'];
-//}
-
 if ( data_submitted() && confirm_sesskey()){
     $id = optional_param('cmid', null, PARAM_INT);
 }
@@ -75,7 +71,6 @@ $PAGE->set_url('/mod/groupformation/import_view.php', array('id' => $cm->id, 'do
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 
-//if (isset($_POST['cancel'])) {
 $cancel = optional_param('cancel',null,PARAM_BOOL);
 if (isset($cancel) && $cancel) {
     // Handle form cancel operation.

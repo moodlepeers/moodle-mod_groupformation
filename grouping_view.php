@@ -56,7 +56,7 @@ require_once(dirname(__FILE__) . '/classes/controller/grouping_controller.php');
 $store = new mod_groupformation_storage_manager ($groupformation->id);
 
 // Set data and viewStatus of groupingView, after possible db update.
-$controller = new mod_groupformation_grouping_controller ($groupformation->id, $cm, $course);
+$controller = new mod_groupformation_grouping_controller ($groupformation->id, $cm);
 
 
 if ( (data_submitted()) && confirm_sesskey()){
