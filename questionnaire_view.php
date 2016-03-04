@@ -92,7 +92,7 @@ $PAGE->set_heading(format_string($course->fullname));
 
 $consent = $usermanager->get_consent($userid);
 
-if (!$consent) {
+if (!$consent && !has_capability('mod/groupformation:editsettings',$context)) {
     $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
         'id' => $cm->id, 'giveconsent' => '1'));
     redirect($returnurl);
