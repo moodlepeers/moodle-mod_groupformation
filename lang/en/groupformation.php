@@ -402,7 +402,12 @@ $string['eval_text_fam_misserfolgsbefuerchtung_2']='You score suggests the assum
 $string['eval_text_fam_misserfolgsbefuerchtung_1']='Your score suggests the assumption that your expectation of failure is little pronounced in you. This could be derived from a generally non-existent fear of failure or test anxiety, but could also relate to more specific, situational factors of the current course or exercise. Generally it is believed that the lack of expectancy of failure has a positive effect on learning.';
 
 $string['consent_alert_message'] = 'You need give consent before accessing the questionnaire. Scroll down and agree to terms before clicking on "Next".';
-$string['consent_message'] = 'I agree that my answers can be stored and processed anonymously for scientific purposes. No data can be traced back to my person at all times. The researchers at TU Darmstadt can use my data to improve and learn more about learning groups.';
+$string['consent_opt_in'] = 'Consent (opt-in)';
+$string['consent_message'] = '<ul><li>
+The teacher has no direct access to my answers for the group formation (just I am able to access the evaluation about my personality as well as the group average).
+</li><li>
+My personal data will be deleted when the course ends - latest after 360 days.</li></ul>';
+$string['consent_agree']='I agree to the terms';
 
 $string['questionnaire_delete'] = 'Remove consent';
 

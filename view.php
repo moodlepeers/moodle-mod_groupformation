@@ -112,8 +112,10 @@ if ($begin == 1) {
 
 echo $OUTPUT->header();
 
-// Print the tabs.
-require('tabs.php');
+if ($usermanager->get_consent($userid)) {
+    // Print the tabs.
+    require('tabs.php');
+}
 
 if ($giveconsent) {
     echo '<div class="alert alert-danger">' . get_string('consent_alert_message', 'groupformation') .

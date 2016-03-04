@@ -26,9 +26,28 @@
 <!--            <form action="--><?php //echo htmlspecialchars ( $_SERVER ["PHP_SELF"] ) ; ?><!--" method="post" autocomplete="off">-->
 <!--                <input type="hidden" name="questions" value="1"/>-->
                 <input type="hidden" name="id" value="<?php echo $this->_['cmid']; ?>"/>
-                <p><input type="checkbox" name="consent" <?php echo ($this->_['consentvalue'])?'checked disabled':''?> value="<?php echo $this->_['consentvalue'];?>"/>
-                <?php echo $this->_['consenttext'];?></p>
-                <p><br></p>
+                <div style="padding-bottom: 10px;">
+                    <div>
+                        <p>
+                            <b>
+                                <?php echo get_string('consent_opt_in','groupformation');?>
+                            </b>
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            <?php echo get_string('consent_message','groupformation');?>
+                        </p>
+                    </div>
+                    <div>
+                        <p style="margin-left: 10px;">
+                            <input type="checkbox" name="consent"
+                                <?php echo ($this->_['consentvalue'])?'checked disabled':''?>
+                                   value="<?php echo $this->_['consentvalue'];?>"/>
+                            <?php echo ' '.get_string('consent_agree','groupformation');?>
+                        </p>
+                    </div>
+                </div>
                 <p><?php echo $this->_['buttons_infos']; ?></p>
                 <?php foreach ($this->_['buttons'] as $button) { ?>
                     <button type="<?php echo $button['type']; ?>" name="<?php echo $button['name']; ?>"

@@ -403,7 +403,13 @@ $string['eval_text_fam_misserfolgsbefuerchtung_2']='Ihre Ergebnisse legen die An
 $string['eval_text_fam_misserfolgsbefuerchtung_1']='Ihre Ergebnisse legen die Annahme nahe, dass die Misserfolgsbefürchtung bei Ihnen niedrig ausgeprägt ist. Dies könnte sich aus einer allgemein nicht vorhandenen Furcht vor Misserfolg oder Prüfungsängstlichkeit ableiten, sich aber auch auf speziellere, situative Faktoren der aktuellen Lehrveranstaltung oder Aufgabe beziehen. Im Allgemeinen geht man davon aus, dass sich fehlende Misserfolgsbefürchtungen positiv auf den Lernerfolg auswirken.';
 
 $string['consent_alert_message'] = 'Sie müssen den Nutzungsbedingungen zustimmen, um den Fragebogen zu beantworten. Lesen und akzeptieren sie die Nutzungsbedingungen, bevor sie auf "Weiter" klicken.';
-$string['consent_message'] = 'Ich erlaube, dass meine Angaben in anonymisierter Form für wissenschaftliche Zwecke weiterverarbeitet werden dürfen. Ein Rückschluss auf meine Person ist dabei zu keinem Zeitpunkt möglich. Die Forscher/innen der TU Darmstadt haben damit die Möglichkeit, Lerngruppenbildung weiter zu erforschen und zu verbessern.';
+$string['consent_opt_in'] = 'Einwilligung (opt-in)';
+$string['consent_message'] = '<ul><li>
+Der Kursleiter/in oder Dozent/in sieht meine persönlichen Angaben für die Gruppenformation nicht (nur ich selbst
+erhalten Feedback zu meinen Persönlichkeitsmerkmalen, sowie zum Durchschnittsvergleich mit der Gruppe).
+</li><li>
+Meine Angaben werden am Kursende - spätestens nach 360 Tagen gelöscht.</li></ul>';
+$string['consent_agree']='Ich bin einverstanden';
 
 $string['questionnaire_delete'] = 'Zustimmung wiederrufen';
 
