@@ -31,7 +31,7 @@
 /////////////////
 
 			/* SVG Leinwand */
-			var width 		= $(window).width(),
+			var width 		= $(window).width() * 0.8,
 			/* labels section */
 			labelsSection 	= 30,
 			/* scale bar height (x-achsis) */
@@ -43,7 +43,7 @@
 
 			/* svgMitte: Chart */
 			var middleWidth 	= width * 0.6,
-				middleHeight 	= (data.fam.length * (bulkHeight * 2)) - 20;
+				middleHeight 	= (data.fam.criteria.length * (bulkHeight * 2)) - 20;
 
 			/* set master-div height */
 			$("#gf_fam_chart").height(middleHeight + labelsSection + scaleBarHeight);
@@ -151,7 +151,7 @@
 
 			/* links: Label Group Boxes */
 			var gBoxLeft = svgLinks.selectAll("g")
-						.data(data.fam)
+						.data(data.fam.criteria)
 						.enter()
 							.append("g");
 
@@ -221,7 +221,7 @@
 						userBars = svgMitte.append("g")
 									 .attr("class", "userBars")
 									 .selectAll("rect")
-									 .data(data.fam)
+									 .data(data.fam.criteria)
 									 .enter()
 									 	.append("g")
 									 	.append("rect")
@@ -245,7 +245,7 @@
 				var groupBars = svgMitte.append("g")
 								 .attr("class", "groupBars")
 								 .selectAll("rect")
-								 .data(data.fam)
+								 .data(data.fam.criteria)
 								 .enter()
 									.append("g")
 									.append("rect")
@@ -261,7 +261,7 @@
 				var globalBars = svgMitte.append("g")
 								 .attr("class", "globalBars")
 								 .selectAll("rect")
-								 .data(data.fam)
+								 .data(data.fam.criteria)
 								 .enter()
 									.append("g")
 									.append("rect")
@@ -290,7 +290,7 @@
 // Collapse Box Definitions //
 //////////////////////////////
 			var pan = d3.select("#gf-fam-accordion").selectAll("div .panel .panel-default")
-				.data(data.fam)
+				.data(data.fam.criteria)
 				.enter()
 					.append("div")
 					.attr("class", "panel panel-default");
@@ -315,10 +315,9 @@
 						.text(function(d) {return d.name;});
 				/* Header Info Button */
 				panHead
-					.append("sup")
 					.append("span")
 					.attr("class", "glyphicon glyphicon-info-sign")
-					.style("font-size", "0.8em")
+					.style("margin-left", "5px")
 					.attr("data-toggle", "popover")
 					.attr("data-trigger", "hover")
 					.attr("title", function(d) {return d.name;})

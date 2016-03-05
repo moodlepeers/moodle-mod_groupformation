@@ -31,7 +31,7 @@
 /////////////////
 
 			/* SVG Leinwand */
-			var width 		= $(window).width(),
+			var width 		= $(window).width() * 0.7,
 			/* labels section */
 			labelsSection 	= 30,
 			/* scale bar height (x-achsis) */
@@ -43,7 +43,7 @@
 
 			/* svgMitte: Chart */
 			var middleWidth 	= width * 0.6,
-				middleHeight 	= (data.big5.length * (bulkHeight * 2)) - 20;
+				middleHeight 	= (data.big5.criteria.length * (bulkHeight * 2)) - 20;
 
 			/* set master-div height */
 			$("#gf_chart").height(middleHeight + labelsSection + scaleBarHeight);
@@ -151,7 +151,7 @@
 
 			/* links: Label Group Boxes */
 			var gBoxLeft = svgLinks.selectAll("g")
-						.data(data.big5)
+						.data(data.big5.criteria)
 						.enter()
 							.append("g");
 
@@ -201,7 +201,7 @@
 
 			/* links: Label Group Boxes */
 			var gBoxRight = svgRechts.selectAll("g")
-						.data(data.big5)
+						.data(data.big5.criteria)
 						.enter()
 							.append("g");
 
@@ -274,7 +274,7 @@
 						userBars = svgMitte.append("g")
 									 .attr("class", "userBars")
 									 .selectAll("rect")
-									 .data(data.big5)
+									 .data(data.big5.criteria)
 									 .enter()
 									 	.append("g")
 									 	.append("rect")
@@ -298,7 +298,7 @@
 				var groupBars = svgMitte.append("g")
 								 .attr("class", "groupBars")
 								 .selectAll("rect")
-								 .data(data.big5)
+								 .data(data.big5.criteria)
 								 .enter()
 									.append("g")
 									.append("rect")
@@ -316,7 +316,7 @@
 				var globalBars = svgMitte.append("g")
 								 .attr("class", "globalBars")
 								 .selectAll("rect")
-								 .data(data.big5)
+								 .data(data.big5.criteria)
 								 .enter()
 									.append("g")
 									.append("rect")
@@ -377,7 +377,7 @@
 			// 	.attr		("id", "gf-modal-accordion");
 			//
 			// modalPan = modalAccordion.selectAll("div .panel .panel-default")
-			// 	.data(data.big5)
+			// 	.data(data.big5.criteria)
 			// 	.enter()
 			// 		.append		("div")
 			// 		.attr		("class", "panel panel-info");
@@ -411,7 +411,7 @@
 // Collapse Box Definitions //
 //////////////////////////////
 			var pan = d3.select("#gf-accordion").selectAll("div .panel .panel-default")
-				.data(data.big5)
+				.data(data.big5.criteria)
 				.enter()
 					.append("div")
 					.attr("class", "panel panel-default");
@@ -435,14 +435,13 @@
 						.text(function(d) {return d.name;});
 				/* Header Info Button */
 				panHead
-					.append("sup")
 					.append("span")
 					.attr("class", "glyphicon glyphicon-info-sign")
-					.style("font-size", "0.8em")
+					.style("margin-left", "5px")
 					.attr("data-toggle", "popover")
 					.attr("data-trigger", "hover")
 					.attr("title", function(d) {return d.name;})
-					.attr("data-content", function(d) {return d.captions.maxText})
+					.attr("data-content", function(d) {return 'eval_text_fam_herausforderung_2]]"},{"name":"intere:"[[eval_max_caption_erfolgswahrscheinlichkeit]]","maxText":"[[eval_max_text_erfolgswahrscheinlichkeit]]","finalText":null},"cutoff":"[[eval_text_fam_erfolgswahrscheinlichkeit_2]]"},{"name":"misserfolgsbefuerchtung","values":{"user":0.46666666666667,"group":null,"course":null},"range":{"min":0,"max":1},"mode":1,"captions":{"maxCaption":"[[eval_max_caption_misserfolgsbefuerchtung]]","maxText":"[[eval_max_text_misserfolgsbefuerchtung]]","finalText":null},"cutoff":"[[eval_text_fam_misserfolgsbefuerchtung_2]]"}]}}        '})
 					.attr("data-placement", "right");
 				/* panel body */
 				pan

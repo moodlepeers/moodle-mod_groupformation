@@ -66,7 +66,7 @@
 
 			<div class="item">
 			<!-- adding chart -->
-				<h2 class="text-center">FAM-Visualisierung</h2>
+				<h2 class="text-center">FAM-Visualisierun</h2>
 				<div id="gf_fam_chart"></div>
 
 				<!-- <div class="carousel-caption">
