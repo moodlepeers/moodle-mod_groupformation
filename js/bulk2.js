@@ -1,12 +1,12 @@
 
-//d3.json("example_evaluation_data.json", function(data) {
-	var data = $.parseJSON($("#json-content").html());
-	var buildChart = function buildChart() {
-			// remove svg for resize-effect
-			$("#gf_chart svg").remove();
+// d3.json("example_evaluation_data.json", function(data) {
+// get data from hidden div#json-content
 
-			// get data from hidden div#json-content
-			//var data = $.parseJSON($("#json-content").html());
+	function buildChartDoubleSide (chartid, data) {
+			// remove svg for resize-effect
+			$(chartid+" svg").remove();
+
+
 
 
 /////////////////////
@@ -31,7 +31,7 @@
 /////////////////
 
 			/* SVG Leinwand */
-			var width 		= $(window).width() * 0.7,
+			var width 		= $(window).width(),
 			/* labels section */
 			labelsSection 	= 30,
 			/* scale bar height (x-achsis) */
@@ -39,14 +39,14 @@
 
 
 			/* set div width */
-			$("#gf_chart").width(width);
+			$(chartid).width(width);
 
 			/* svgMitte: Chart */
 			var middleWidth 	= width * 0.6,
-				middleHeight 	= (data.big5.criteria.length * (bulkHeight * 2)) - 20;
+				middleHeight 	= (data.criteria.length * (bulkHeight * 2)) - 20;
 
 			/* set master-div height */
-			$("#gf_chart").height(middleHeight + labelsSection + scaleBarHeight);
+			$(chartid).height(middleHeight + labelsSection + scaleBarHeight);
 
 			var widthScaleLeft = d3.scale.linear()
 			                .domain	([100, 0])
@@ -73,7 +73,7 @@
 /////////////
 //Leinwand //
 /////////////
-			var svg = d3.select("div#gf_chart")
+			var svg = d3.select("div"+chartid)
 						   .append	("svg")
 						   .attr	("width", width)
 						   .attr	("height", svgHeight)
@@ -125,7 +125,7 @@
 			globalLabel.append("text").attr("dx", 50).attr("dy", 11).text("global").attr("font-size", 12);
 
 			// styling extra
-			var verticalLines = d3.select("div#gf_chart svg");
+			var verticalLines = d3.select("div"+chartid+" svg");
 			for (i = 1; i < 10; i++) {
 				verticalLines
 					.append("line")
@@ -151,7 +151,7 @@
 
 			/* links: Label Group Boxes */
 			var gBoxLeft = svgLinks.selectAll("g")
-						.data(data.big5.criteria)
+						.data(data.criteria)
 						.enter()
 							.append("g");
 
@@ -201,7 +201,7 @@
 
 			/* links: Label Group Boxes */
 			var gBoxRight = svgRechts.selectAll("g")
-						.data(data.big5.criteria)
+						.data(data.criteria)
 						.enter()
 							.append("g");
 
@@ -274,7 +274,7 @@
 						userBars = svgMitte.append("g")
 									 .attr("class", "userBars")
 									 .selectAll("rect")
-									 .data(data.big5.criteria)
+									 .data(data.criteria)
 									 .enter()
 									 	.append("g")
 									 	.append("rect")
@@ -298,7 +298,7 @@
 				var groupBars = svgMitte.append("g")
 								 .attr("class", "groupBars")
 								 .selectAll("rect")
-								 .data(data.big5.criteria)
+								 .data(data.criteria)
 								 .enter()
 									.append("g")
 									.append("rect")
@@ -316,7 +316,7 @@
 				var globalBars = svgMitte.append("g")
 								 .attr("class", "globalBars")
 								 .selectAll("rect")
-								 .data(data.big5.criteria)
+								 .data(data.criteria)
 								 .enter()
 									.append("g")
 									.append("rect")
@@ -343,130 +343,5 @@
 
 	} // build chart function
 
-///////////////////////
-// Modal Definition  //
-///////////////////////
-			// configure modal
-			// var modalContent = d3.select("#gf-modal")
-			// 	.append		("div")
-			// 	.attr		("class", "modal-dialog")
-			// 		.append		("div")
-			// 		.attr		("class", "modal-content");
-			//
-			// modalContent.append("div").attr("class", "modal-header");
-			//
-			// modalContent.select(".modal-header")
-			// 	.append		("button")
-			// 	.attr		("class", "close")
-			// 	.attr		("data-dismiss", "modal")
-			// 	.attr		("aria-label", "Close")
-			// 		.append		("span")
-			// 		.attr		("aria-hidden", "true")
-			// 		.html		("&times;");
-			//
-			// modalContent.select(".modal-header")
-			// 	.append		("h4")
-			// 	.attr		("class", "modal-title")
-			// 	.attr		("id", "myModalLabel")
-			// 	.text		("Info-Box");
-			//
-			// var modalAccordion = modalContent
-			// 	.append		("div")
-			// 	.attr		("class", "modal-body")
-			// 	.append		("div")
-			// 	.attr		("id", "gf-modal-accordion");
-			//
-			// modalPan = modalAccordion.selectAll("div .panel .panel-default")
-			// 	.data(data.big5.criteria)
-			// 	.enter()
-			// 		.append		("div")
-			// 		.attr		("class", "panel panel-info");
-			// /* panel heading */
-			// modalPan
-			// 	.append("div")
-			// 	.attr("class", "panel-heading")
-			// 	.attr("role", "tab")
-			// 	.attr("id", function(d, i) {return "mHeading"+i;})
-			// 		.append("h4")
-			// 		.attr("class", "panel-title")
-			// 			.append("a")
-			// 			.attr("role", "button")
-			// 			.attr("data-toggle", "collapse")
-			// 			.attr("data-parent", "#gf-modal-accordion")		// close all other panels
-			// 			.attr("href", function(d, i) {return "#mCollapse"+i;})
-			// 			.attr("aria-expanded", "true")
-			// 			.attr("aria-controls", function(d, i) {return "mCollapse"+i;})
-			// 			.text(function(d) {return d.name;});
-			// /* panel body */
-			// modalPan
-			// 	.append("div")
-			// 	.attr("id", function(d, i) {return "mCollapse"+i;})
-			// 	.attr("class", "panel-collapse collapse")
-			// 	.attr("role", "tabpanel")
-			// 	.attr("aria-labelledBy", function(d, i) {return "mCollapse"+i;})
-			// 		.append("div")
-			// 		.attr("class", "panel-body");
-
-//////////////////////////////
-// Collapse Box Definitions //
-//////////////////////////////
-			var pan = d3.select("#gf-accordion").selectAll("div .panel .panel-default")
-				.data(data.big5.criteria)
-				.enter()
-					.append("div")
-					.attr("class", "panel panel-default");
-				/* panel heading */
-			var	panHead = pan
-					.append("div")
-					.attr("class", "panel-heading")
-					.attr("role", "tab")
-					.attr("id", function(d, i) {return "heading"+i;})
-						.append("h4")
-						.attr("class", "panel-title");
-				/* Header Text */
-				panHead
-						.append("a")
-						.attr("role", "button")
-						.attr("data-toggle", "collapse")
-						//.attr("data-parent", "#gf-accordion")		// close all other panels
-						.attr("href", function(d, i) {return "#collapse"+i;})
-						.attr("aria-expanded", "true")
-						.attr("aria-controls", function(d, i) {return "collapse"+i;})
-						.text(function(d) {return d.name;});
-				/* Header Info Button */
-				panHead
-					.append("span")
-					.attr("class", "glyphicon glyphicon-info-sign")
-					.style("margin-left", "5px")
-					.attr("data-toggle", "popover")
-					.attr("data-trigger", "hover")
-					.attr("title", function(d) {return d.name;})
-					.attr("data-content", function(d) {return 'eval_text_fam_herausforderung_2]]"},{"name":"intere:"[[eval_max_caption_erfolgswahrscheinlichkeit]]","maxText":"[[eval_max_text_erfolgswahrscheinlichkeit]]","finalText":null},"cutoff":"[[eval_text_fam_erfolgswahrscheinlichkeit_2]]"},{"name":"misserfolgsbefuerchtung","values":{"user":0.46666666666667,"group":null,"course":null},"range":{"min":0,"max":1},"mode":1,"captions":{"maxCaption":"[[eval_max_caption_misserfolgsbefuerchtung]]","maxText":"[[eval_max_text_misserfolgsbefuerchtung]]","finalText":null},"cutoff":"[[eval_text_fam_misserfolgsbefuerchtung_2]]"}]}}        '})
-					.attr("data-placement", "right");
-				/* panel body */
-				pan
-					.append("div")
-					.attr("id", function(d, i) {return "collapse"+i;})
-					.attr("class", "panel-collapse collapse in")
-					.attr("role", "tabpanel")
-					.attr("aria-labelledBy", function(d, i) {return "collapse"+i;})
-						.append("div")
-						.attr("class", "panel-body")
-						.text("Lorem ipsum und so");
-
-
-	/* if DOM ready, go on */
-	$(document).ready(function () {
-		/* build chart first time */
-		buildChart();
-		/* resize-event */
-		$(window).bind('resize', buildChart);
-
-		/* activate popover info */
-		$(function () {
-		  $('[data-toggle="popover"]').popover()
-		})
-	});
-
-
-//}); // d3.json-grabber
+//export {buildChartDoubleSide};
+// }); // d3.json-grabber

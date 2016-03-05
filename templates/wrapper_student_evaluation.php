@@ -43,56 +43,29 @@
 		</div>
 
 		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval=0>
-		  <!-- Indicators -->
-			<!-- <ol class="carousel-indicators">
-			    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-			    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-			    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-			</ol> -->
 
-			  <!-- Wrapper for slides -->
-				<div class="carousel-inner" role="listbox">
+		  	<!-- Wrapper for slides -->
+			<div class="carousel-inner" role="listbox">
 
-					<div class="item">
-			<!-- adding chart -->
-				<h2 class="text-center">Big5-Visualisierung</h2>
-				<div id="gf_chart"></div>
 
-				<!-- <div class="carousel-caption">
-			  BIG 5
-		  		</div> -->
 
 	    	</div>
 
-			<div class="item">
-			<!-- adding chart -->
-				<h2 class="text-center">FAM-Visualisierun</h2>
-				<div id="gf_fam_chart"></div>
-
-				<!-- <div class="carousel-caption">
-			  BIG 5
-		  		</div> -->
-
-	    	</div>
-
-			<div class="item active">
-				<h2 class="text-center">Deine Bewertung BIG 5</h2>
-				<!-- panel-group for Information -->
-				<div class="panel-group" id="gf-accordion" role="tablist" aria-multiselectable="true">
-				</div>
-				<h2 class="text-center">Deine Bewertung FAM</h2>
-				<!-- panel-group for Information -->
-				<div class="panel-group" id="gf-fam-accordion" role="tablist" aria-multiselectable="true">
-				</div>
+				<!-- <div class="item active">
+					<h2 class="text-center">Deine Bewertung BIG 5</h2>
+					<!-- panel-group for Information --
+					<div class="panel-group" id="gf-accordion" role="tablist" aria-multiselectable="true">
+					</div>
+					<h2 class="text-center">Deine Bewertung FAM</h2>
+					<!-- panel-group for Information --
+					<div class="panel-group" id="gf-fam-accordion" role="tablist" aria-multiselectable="true">
+					</div>
 
 
-	    	</div>
+		    	</div> -->
 			</div>
 
 
 
-		</div>
-</div>
-
-    </div>
-</div>
+		</div> <!-- gf_pad_content -->
+</div> <!-- gf_settings_pad -->

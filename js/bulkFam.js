@@ -1,9 +1,10 @@
 
-//d3.json("example_evaluation_data.json", function(data) {
-	var data = $.parseJSON($("#json-content").html());
-	var buildChartFam = function buildChartFam() {
+// d3.json("example_evaluation_data.json", function(data) {
+	 function buildChartOneSide (chartid, datam) {
+
+		 	console.log("build chart astarted");
 			// remove svg for resize-effect
-			$("#gf_fam_chart svg").remove();
+			$(chartid + " svg").remove();
 
 			// get data from hidden div#json-content
 			//var data = $.parseJSON($("#json-content").html());
@@ -39,14 +40,14 @@
 
 
 			/* set div width */
-			$("#gf_fam_chart").width(width);
+			$(chartid).width(width);
 
 			/* svgMitte: Chart */
 			var middleWidth 	= width * 0.6,
-				middleHeight 	= (data.fam.criteria.length * (bulkHeight * 2)) - 20;
+				middleHeight 	= (datam.length * (bulkHeight * 2)) - 20;
 
 			/* set master-div height */
-			$("#gf_fam_chart").height(middleHeight + labelsSection + scaleBarHeight);
+			$(chartid).height(middleHeight + labelsSection + scaleBarHeight);
 
 			var widthScale = d3.scale.linear()
 			                .domain	([0, 100])
@@ -73,7 +74,7 @@
 /////////////
 //Leinwand //
 /////////////
-			var svg = d3.select("div#gf_fam_chart")
+			var svg = d3.select("div"+chartid)
 						   .append	("svg")
 						   .attr	("width", width)
 						   .attr	("height", svgHeight)
@@ -125,7 +126,7 @@
 			globalLabel.append("text").attr("dx", 50).attr("dy", 11).text("global").attr("font-size", 12);
 
 			// styling extra
-			var verticalLines = d3.select("div#gf_fam_chart svg");
+			var verticalLines = d3.select("div"+chartid+" svg");
 			for (i = 1; i < 10; i++) {
 				verticalLines
 					.append("line")
@@ -151,7 +152,7 @@
 
 			/* links: Label Group Boxes */
 			var gBoxLeft = svgLinks.selectAll("g")
-						.data(data.fam.criteria)
+						.data(datam)
 						.enter()
 							.append("g");
 
@@ -221,7 +222,7 @@
 						userBars = svgMitte.append("g")
 									 .attr("class", "userBars")
 									 .selectAll("rect")
-									 .data(data.fam.criteria)
+									 .data(datam)
 									 .enter()
 									 	.append("g")
 									 	.append("rect")
@@ -245,7 +246,7 @@
 				var groupBars = svgMitte.append("g")
 								 .attr("class", "groupBars")
 								 .selectAll("rect")
-								 .data(data.fam.criteria)
+								 .data(datam)
 								 .enter()
 									.append("g")
 									.append("rect")
@@ -261,7 +262,7 @@
 				var globalBars = svgMitte.append("g")
 								 .attr("class", "globalBars")
 								 .selectAll("rect")
-								 .data(data.fam.criteria)
+								 .data(datam)
 								 .enter()
 									.append("g")
 									.append("rect")
@@ -285,66 +286,3 @@
 
 
 	} // build fam chart function
-
-//////////////////////////////
-// Collapse Box Definitions //
-//////////////////////////////
-			var pan = d3.select("#gf-fam-accordion").selectAll("div .panel .panel-default")
-				.data(data.fam.criteria)
-				.enter()
-					.append("div")
-					.attr("class", "panel panel-default");
-				/* panel heading */
-			var panHead = pan
-					.append("div")
-					.attr("class", "panel-heading")
-					.attr("role", "tab")
-					.attr("id", function(d, i) {return "heading"+(i+5);})
-						.append("h4")
-						.attr("class", "panel-title");
-
-				/* Header Text */
-				panHead
-						.append("a")
-						.attr("role", "button")
-						.attr("data-toggle", "collapse")
-						//.attr("data-parent", "#gf-accordion")		// close all other panels
-						.attr("href", function(d, i) {return "#collapse"+i;})
-						.attr("aria-expanded", "true")
-						.attr("aria-controls", function(d, i) {return "collapse"+i;})
-						.text(function(d) {return d.name;});
-				/* Header Info Button */
-				panHead
-					.append("span")
-					.attr("class", "glyphicon glyphicon-info-sign")
-					.style("margin-left", "5px")
-					.attr("data-toggle", "popover")
-					.attr("data-trigger", "hover")
-					.attr("title", function(d) {return d.name;})
-					.attr("data-content", function(d) {return d.captions.maxText})
-					.attr("data-placement", "right");
-				/* panel body */
-				pan
-					.append("div")
-					.attr("id", function(d, i) {return "collapse"+(i+5);})
-					.attr("class", "panel-collapse collapse in")
-					.attr("role", "tabpanel")
-					.attr("aria-labelledBy", function(d, i) {return "collapse"+(i+5);})
-						.append("div")
-						.attr("class", "panel-body")
-						.text("Lorem ipsum und so");
-	/* if DOM ready, go on */
-	$(document).ready(function () {
-		/* build chart first time */
-		buildChartFam();
-		/* resize-event */
-		$(window).bind('resize', buildChartFam);
-
-		/* activate info popover */
-		$(function () {
-		  $('[data-toggle="popover"]').popover()
-		})
-	});
-
-
-//}); // d3.json-grabber
