@@ -125,14 +125,15 @@ $string ['students_enrolled_info'] = 'Students are enrolled in this course';
 $string ['groupSettingsInfo'] = 'You have choosen to define topics. Thereof the number of groups and their size will be calculated, as you can see below.';
 $string ['analyse'] = 'Analysis';
 $string ['questionnaire_not_started'] = 'The questionnaire is ready.';
-$string ['questionnaire_press_to_begin'] = 'Press "Next" to begin.';
+$string ['questionnaire_press_to_begin'] = 'Give your consent and click "Next" to begin.';
 $string ['questionnaire_not_submitted'] = 'Your answers are not submitted yet.';
-$string ['questionnaire_press_continue_submit'] = 'Press "Edit" to continue the questionnaire or "Submit" to submit your current answers.';
+$string ['questionnaire_press_continue_submit'] = 'Click "Edit" to continue the questionnaire or "Submit" to submit your current answers.
+You can also remove your consent, which also deletes all given answers, by clicking on "Remove consent". After submitting your answers you cannot remove your consent anymore.';
 $string ['questionnaire_answer_stats'] = 'Current state of the questionnaire: ';
 $string ['questionnaire_submitted'] = 'You have submitted your answers. You cannot change them anymore.';
 $string ['questionnaire_press_preview'] = 'Press "Preview" to take a look at the questionnaire.';
 $string ['questionnaire_no_more_questions'] = 'There are no more questions to answer.';
-$string ['questionnaire_press_beginning_submit'] = 'Press "Go to Start" to go back to the start page. There you can submit your current answers.';
+$string ['questionnaire_press_beginning_submit'] = 'Click "Go to Start" to go back to the start page. There you can submit your current answers.';
 $string ['questionnaire_go_to_start'] = 'Go to Start';
 $string ['questionnaire_submit'] = 'Submit';
 $string ['questionnaire_submit_disabled_teacher'] = 'Submit is disabled because this is just a preview.';
@@ -208,7 +209,7 @@ $string ['info_text_teacher_analysis'] = 'With this plugin you have the ability 
 ';
 $string['statusGrupping0'] = 'You have to close the questionnaire to start group formation.';
 $string['statusGrupping1'] = 'You can start group formation now';
-$string['statusGrupping2'] = 'The group formation is in process';
+$string['statusGrupping2'] = 'The group formation is in process.';
 $string['statusGrupping3'] = 'The termination of group formation is in process';
 $string['statusGrupping4'] = 'The group formation is finished. You can adopt the groups to Moodle or generate a new results by algorithm.';
 $string['statusGrupping5'] = 'The generated groups are adopted to Moodle. You can manually adjust them.';
@@ -301,7 +302,7 @@ $string['export_group_users'] = 'You can download all group-users relations with
 $string['export_logging'] = 'You can download all logging data with anonymized user ids here: ';
 $string['export_description_no'] = 'You cannot export your answers since you have not answered any questions in the exportable categories.';
 $string['export_description_yes'] = 'You can export your answers by clicking on the button below.';
-$string['import_description_yes'] = 'You can import your answers by clicking on the button below and uploading a file with exportable answer format.';
+$string['import_description_yes'] = 'You can import your answers by clicking on the button below and uploading a file with exportable answer format. With uploading your answers you automatically agree to the following terms:';
 $string['import_description_no'] = 'You cannot import your answers because you submitted your answers already or the questionnaire is not available.';
 $string['import_form_description'] = 'You can import your answers from previous questionnaires by submitting an "answers.xml" file below.';
 
@@ -399,3 +400,14 @@ $string['eval_text_fam_erfolgswahrscheinlichkeit_1']='You have considered you wi
 $string['eval_text_fam_misserfolgsbefuerchtung_3']='Your score suggests the assumption that the expectation of failure is very pronounced in you. This could be derived from a general fear of failure or test anxiety, but could also relate to more specific, situational factors of the current course or exercise. Generally it is believed that expectation of failure has a negative impact on studying.';
 $string['eval_text_fam_misserfolgsbefuerchtung_2']='You score suggests the assumption that your expectation of failure is moderate. This could be derived from a general fear of failure or test anxiety, but could also relate to more specific, situational factors of the current course or exercise. Generally it is believed that expectations of failure have a negative impact on studying.';
 $string['eval_text_fam_misserfolgsbefuerchtung_1']='Your score suggests the assumption that your expectation of failure is little pronounced in you. This could be derived from a generally non-existent fear of failure or test anxiety, but could also relate to more specific, situational factors of the current course or exercise. Generally it is believed that the lack of expectancy of failure has a positive effect on learning.';
+
+$string['consent_alert_message'] = 'You need give consent before accessing the questionnaire. Scroll down and agree to terms before clicking on "Next".';
+$string['consent_opt_in'] = 'Consent (opt-in)';
+$string['consent_message'] = '<ul><li>
+The teacher has no direct access to my answers for the group formation (just I am able to access the evaluation about my personality as well as the group average).
+</li><li>
+My personal data will be deleted when the course ends - latest after 360 days.</li></ul>';
+$string['consent_agree']='I agree to the terms';
+
+$string['questionnaire_delete'] = 'Remove consent';
+

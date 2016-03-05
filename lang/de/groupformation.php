@@ -122,9 +122,11 @@ $string ['students_enrolled_info'] = 'Studierenden sind im Kurs eingeschrieben';
 $string ['groupSettingsInfo'] = 'Sie haben Themen zur Auswahl angegeben. Daraus bestimmt sich die Anzahl der Gruppen und deren Größe.';
 $string ['analyse'] = 'Analyse';
 $string ['questionnaire_not_started'] = 'Der Fragebogen wartet noch auf Ihre Bearbeitung.';
-$string ['questionnaire_press_to_begin'] = 'Klicken Sie auf "Weiter", um zu beginnen.';
+$string ['questionnaire_press_to_begin'] = 'Geben Sie ihre Zustimmung und klicken Sie auf "Weiter", um zu beginnen.';
 $string ['questionnaire_not_submitted'] = 'Sie haben den Fragebogen noch nicht abgegeben.';
-$string ['questionnaire_press_continue_submit'] = 'Klicken Sie auf "Bearbeiten", um den Fragebogen weiter auszufüllen oder auf "Abgeben", um ihn abzugeben.';
+$string ['questionnaire_press_continue_submit'] = 'Klicken Sie auf "Bearbeiten", um den Fragebogen weiter auszufüllen oder auf "Abgeben", um ihn abzugeben. Durch "Zustimmung wiederrufen" können sie ihre Zustimmung wiederrufen und alle ihre Antworten werden dadurch gelöscht.
+
+Wenn Sie den Fragebogen abgegeben haben, können Sie ihre Zustimmung nicht mehr wiederrufen.';
 $string ['questionnaire_answer_stats'] = 'Aktueller Zustand des Fragebogens: ';
 $string ['questionnaire_submitted'] = 'Sie haben den Fragebogen bereits abgegeben und können Ihre Antworten nicht mehr ändern.';
 $string ['questionnaire_press_preview'] = 'Klicken Sie auf "Vorschau", um den Fragebogen anzusehen.';
@@ -212,8 +214,8 @@ $string ['info_text_teacher_analysis'] = 'Mit diesem Plugin haben Sie die Mögli
 ';
 $string['statusGrupping0'] = 'Um die Gruppenbildung starten zu können, müssen Sie die Aktivität im Tab Überblick beenden. ';
 $string['statusGrupping1'] = 'Sie können die Gruppenbildung jetzt starten.';
-$string['statusGrupping2'] = 'Die Gruppenbildung läuft. ';
-$string['statusGrupping3'] = 'Die Gruppenbildung wird abgebrochen. ';
+$string['statusGrupping2'] = 'Die Gruppenbildung läuft.';
+$string['statusGrupping3'] = 'Die Gruppenbildung wird abgebrochen.';
 $string['statusGrupping4'] = 'Gruppenbildung ist abgeschlossen. Sie können den Gruppenvorschlag übernehmen, oder verwerfen. ';
 $string['statusGrupping5'] = 'Die realen Gruppen sind gebildet. Sie können jetzt manuelle Veränderung an den Gruppen vornehmen. ';
 $string['grouping_start'] = 'Gruppenbildung starten';
@@ -400,6 +402,16 @@ $string['eval_text_fam_misserfolgsbefuerchtung_3']='Ihre Ergebnisse legen die An
 $string['eval_text_fam_misserfolgsbefuerchtung_2']='Ihre Ergebnisse legen die Annahme nahe, dass die Misserfolgsbefürchtung bei Ihnen moderat ausgeprägt ist. Dies könnte sich aus einer allgemeinen Furcht vor Misserfolg oder Prüfungsängstlichkeit ableiten, sich aber auch auf speziellere, situative Faktoren der aktuellen Lehrveranstaltung oder Aufgabe beziehen. Im Allgemeinen geht man davon aus, dass sich Misserfolgsbefürchtungen negativ auf den Lernerfolg auswirken.';
 $string['eval_text_fam_misserfolgsbefuerchtung_1']='Ihre Ergebnisse legen die Annahme nahe, dass die Misserfolgsbefürchtung bei Ihnen niedrig ausgeprägt ist. Dies könnte sich aus einer allgemein nicht vorhandenen Furcht vor Misserfolg oder Prüfungsängstlichkeit ableiten, sich aber auch auf speziellere, situative Faktoren der aktuellen Lehrveranstaltung oder Aufgabe beziehen. Im Allgemeinen geht man davon aus, dass sich fehlende Misserfolgsbefürchtungen positiv auf den Lernerfolg auswirken.';
 
+$string['consent_alert_message'] = 'Sie müssen den Nutzungsbedingungen zustimmen, um den Fragebogen zu beantworten. Lesen und akzeptieren sie die Nutzungsbedingungen, bevor sie auf "Weiter" klicken.';
+$string['consent_opt_in'] = 'Einwilligung (opt-in)';
+$string['consent_message'] = '<ul><li>
+Der Kursleiter/in oder Dozent/in sieht meine persönlichen Angaben für die Gruppenformation nicht (nur ich selbst
+erhalten Feedback zu meinen Persönlichkeitsmerkmalen, sowie zum Durchschnittsvergleich mit der Gruppe).
+</li><li>
+Meine Angaben werden am Kursende - spätestens nach 360 Tagen gelöscht.</li></ul>';
+$string['consent_agree']='Ich bin einverstanden';
+
+$string['questionnaire_delete'] = 'Zustimmung wiederrufen';
 
 
 

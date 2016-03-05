@@ -119,10 +119,16 @@ class mod_groupformation_student_overview_controller {
                 $this->buttonsarray = array(
                     array(
                         'type' => 'submit', 'name' => 'begin', 'value' => '1', 'state' => '',
-                        'text' => get_string('edit')), array(
+                        'text' => get_string('edit')),
+                    array(
                         'type' => 'submit', 'name' => 'begin', 'value' => '0',
                         'state' => '',
-                        'text' => get_string('questionnaire_submit', 'groupformation')));
+                        'text' => get_string('questionnaire_submit', 'groupformation')),
+                    array(
+                        'type' => 'submit', 'name' => 'begin', 'value' => '-1',
+                        'state' => '',
+                        'text' => get_string('questionnaire_delete', 'groupformation'))
+                );
                 break;
 
             case 1 : // Questionaire is submitted.
@@ -288,6 +294,8 @@ class mod_groupformation_student_overview_controller {
             $surveyoptionsview->set_template('students_overview_options');
             $surveyoptionsview->assign('buttons', $this->buttonsarray);
             $surveyoptionsview->assign('buttons_infos', $this->buttonsinfo);
+            $surveyoptionsview->assign('consenttext',get_string('consent_message','groupformation'));
+            $surveyoptionsview->assign('consentvalue',$this->usermanager->get_consent($this->userid));
             $this->view->assign('student_overview_survey_options', $surveyoptionsview->load_template());
         } else {
             $this->view->assign('student_overview_survey_options', '');

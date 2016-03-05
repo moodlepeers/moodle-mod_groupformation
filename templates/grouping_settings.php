@@ -36,7 +36,7 @@
 <?php } ?>
 
 <div>
-	<div style="<?php if($this->_['status'][1] == 0) { echo 'opacity:0.5;';} else {echo 'opacity:1.0;';} ?>margin-left: 4px; <?php if($this->_['status'][1] == 1) { echo 'color: red;';}?>"> <i><?php echo $this->_['status'][0];?><?php if (isset($this->_['emailnotifications']) && $this->_['emailnotifications']) { echo get_string('emailnotifications_info','groupformation');}?></i></div>
+	<div style="<?php if($this->_['status'][1] == 0) { echo 'opacity:0.5;';} else {echo 'opacity:1.0;';} ?>margin-left: 4px; <?php if($this->_['status'][1] == 1) { echo 'color: red;';}?>"> <i><?php echo $this->_['status'][0];?><?php if (isset($this->_['emailnotifications']) && $this->_['emailnotifications']) { echo " ".get_string('emailnotifications_info','groupformation');}?></i></div>
 </div>
 
 <!--<p>Statusanzeige "Gruppenbildung l&auml;uft..." mit %Zahl oder voraussichtlicher Endzeit</p>-->

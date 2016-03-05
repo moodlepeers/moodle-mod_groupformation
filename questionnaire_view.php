@@ -30,6 +30,8 @@ require_once(dirname(__FILE__) . '/classes/controller/questionnaire_controller.p
 
 // Read URL params.
 $id = optional_param('id', 0, PARAM_INT);
+
+// TODO: after fixing db issue, change param to url?
 $urlcategory = optional_param('category', '', PARAM_TEXT);
 
 // Import jQuery and js file.
@@ -52,7 +54,6 @@ $usermanager = new mod_groupformation_user_manager ($groupformation->id);
 $scenario = $store->get_scenario();
 $names = $store->get_categories();
 
-$category = "";
 
 if (!has_capability('mod/groupformation:editsettings', $context)) {
     $currenttab = 'answering';
@@ -64,11 +65,22 @@ if (!has_capability('mod/groupformation:editsettings', $context)) {
     groupformation_info($USER->id, $groupformation->id, '<view_teacher_questionnaire_preview>');
 }
 
-if (isset ($_POST ["category"])) {
-    $category = $_POST ['category'];
-} else if (!(strcmp($urlcategory, '') == 0)) {
+
+if ( data_submitted() && confirm_sesskey()){
+    $category = optional_param('category', null, PARAM_ALPHA);
+    $direction = optional_param('direction', null, PARAM_BOOL);
+    $percent = optional_param('percent', null, PARAM_INT);
+    $action = optional_param('action', null, PARAM_BOOL);
+}
+
+if (!isset ($category)) {
     $category = $store->get_previous_category($urlcategory);
 }
+
+if (!isset ($direction)) {
+    $direction = 1;
+}
+
 
 $number = $store->get_number($category);
 
@@ -78,16 +90,19 @@ $PAGE->set_url('/mod/groupformation/questionnaire_view.php', array(
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 
-$direction = 1;
-if (isset ($_POST ["direction"])) {
-    $direction = $_POST ["direction"];
-}
+$consent = $usermanager->get_consent($userid);
 
+if (!$consent && !has_capability('mod/groupformation:editsettings',$context)) {
+    $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
+        'id' => $cm->id, 'giveconsent' => '1'));
+    redirect($returnurl);
+}
 
 $inarray = in_array($category, $names);
 
 if (has_capability('mod/groupformation:onlystudent', $context) &&
-    !has_capability('mod/groupformation:editsettings', $context)
+    !has_capability('mod/groupformation:editsettings', $context) &&
+    ( data_submitted() && confirm_sesskey())
 ) {
     $status = $usermanager->get_answering_status($userid);
     if ($status == 0 || $status == -1) {
@@ -97,15 +112,19 @@ if (has_capability('mod/groupformation:onlystudent', $context) &&
                 for ($i = 1; $i <= $number; $i++) {
                     $tempvalidaterangevalue = $category . $i . '_valid';
                     $temp = $category . $i;
-                    if (isset ($_POST [$temp]) && $_POST [$tempvalidaterangevalue] == '1') {
-                        $usermanager->save_answer($userid, $category, $_POST [$temp], $i);
+                    $para_tempvalidaterangevalue = optional_param($tempvalidaterangevalue, null, PARAM_ALPHANUM);
+                    $para_temp = optional_param($temp, null, PARAM_ALPHANUM);
+
+                    if (isset ($para_temp) && $para_tempvalidaterangevalue == '1') {
+                        $usermanager->save_answer($userid, $category, $para_temp, $i);
                     }
                 }
             } else {
                 for ($i = 1; $i <= $number; $i++) {
                     $temp = $category . $i;
-                    if (isset ($_POST [$temp])) {
-                        $usermanager->save_answer($userid, $category, $_POST [$temp], $i);
+                    $para_temp = optional_param($temp, null, PARAM_ALPHANUM);
+                    if (isset ($para_temp)) {
+                        $usermanager->save_answer($userid, $category, $para_temp, $i);
                     }
                 }
             }
@@ -113,7 +132,8 @@ if (has_capability('mod/groupformation:onlystudent', $context) &&
     }
 }
 
-if ($direction == 0 && $_POST ["percent"] == 0) {
+
+if ($direction == 0 && $percent == 0) {
     $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
         'id' => $cm->id, 'back' => '1'));
     redirect($returnurl);
@@ -148,7 +168,7 @@ if (($available || $isteacher) && ($category == '' || $inarray)) {
     }
 } else if (!$available || $category == 'no') {
 
-    if (isset ($_POST ["action"]) && $_POST ["action"] == 1) {
+    if (isset ($action) && $action == 1) {
         $usermanager->change_status($userid);
     }
 

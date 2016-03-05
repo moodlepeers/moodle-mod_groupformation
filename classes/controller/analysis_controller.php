@@ -65,19 +65,26 @@ class mod_groupformation_analysis_controller {
         $this->determine_status();
     }
 
-    /**
-     * Sets start time of questionnaire to now
-     */
-    public function start_questionnaire() {
-        $this->store->open_questionnaire();
+
+
+    public function trigger_questionnaire($switcher){
+
+        switch($switcher){
+            /**
+             * Sets start time of questionnaire to now
+             */
+            case 1: $this->store->open_questionnaire();
+                break;
+
+            /**
+             * Sets end time of questionnaire to now
+             */
+            case -1: $this->store->close_questionnaire();
+                break;
+        }
     }
 
-    /**
-     * Sets end time of questionnaire to now
-     */
-    public function stop_questionnaire() {
-        $this->store->close_questionnaire();
-    }
+
 
     /**
      * Loads status for template
@@ -102,13 +109,13 @@ class mod_groupformation_analysis_controller {
             $this->endtime = $this->activitytime ['end'];
         }
 
-        $buttonname = ($this->questionnaireavailable) ? "stop_questionnaire" : "start_questionnaire";
+        $buttonvalue = ($this->questionnaireavailable) ? -1 : 1;
         $buttoncaption = ($this->questionnaireavailable) ?
             get_string('activity_end', 'groupformation') : get_string('activity_start', 'groupformation');
         $buttondisabled = ($this->jobstate !== "ready") ? "disabled" : "";
 
         $statusanalysisview->assign('button', array(
-            'type' => 'submit', 'name' => $buttonname, 'value' => '', 'state' => $buttondisabled,
+            'type' => 'submit', 'name' => 'questionnaire_switcher', 'value' => $buttonvalue, 'state' => $buttondisabled,
             'text' => $buttoncaption));
 
         $infoteacher = mod_groupformation_util::get_info_text_for_teacher(false, "analysis");
