@@ -2,7 +2,6 @@
 // d3.json("example_evaluation_data.json", function(data) {
 	 function buildChartOneSide (chartid, datam) {
 
-		 	console.log("build chart astarted");
 			// remove svg for resize-effect
 			$(chartid + " svg").remove();
 
@@ -63,7 +62,7 @@
 			// var color = d3.scale.linear()
 			//             .domain([0, 100])
 			//             .range(["red", "blue"]);
-			var color = ["blue", "green", "purple"];
+			var color = ["rgb(136, 222, 0)", "rgb(65, 207, 68)", "rgb(83, 147, 78)"];
 
 			/* svg sidebars labels */
 			var sideBarHeight 	= middleHeight,
@@ -89,11 +88,11 @@
 
 			// labels section
 			svgLabels.append("rect").attr("transform", "translate(" + leftWidth + ",0 )")
-				.attr("width", middleWidth).attr("height", "30").attr("fill", "#fff");
+				.attr("width", middleWidth).attr("height", "30").attr("fill", "none");
 
 			// user Label
 			var userLabel = svgLabels.append("g").attr("transform", "translate(" + leftWidth + ",7 )");
-			userLabel.append("rect").attr("width", 15).attr("height", 15).attr("fill", "blue")
+			userLabel.append("rect").attr("width", 15).attr("height", 15).attr("fill", color[0])
 				.attr("stroke", "black").attr("stroke-width", 2);
 			userLabel.append("text").attr("dx", 50).attr("dy", 11).text("user").attr("font-size", 12);
 			// group label
