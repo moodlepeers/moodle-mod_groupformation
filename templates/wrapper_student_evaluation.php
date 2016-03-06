@@ -43,27 +43,10 @@
 		</div>
 
 		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval=0>
-
 		  	<!-- Wrapper for slides -->
 			<div class="carousel-inner" role="listbox">
-
-
-
 	    	</div>
-
-				<!-- <div class="item active">
-					<h2 class="text-center">Deine Bewertung BIG 5</h2>
-					<!-- panel-group for Information --
-					<div class="panel-group" id="gf-accordion" role="tablist" aria-multiselectable="true">
-					</div>
-					<h2 class="text-center">Deine Bewertung FAM</h2>
-					<!-- panel-group for Information --
-					<div class="panel-group" id="gf-fam-accordion" role="tablist" aria-multiselectable="true">
-					</div>
-
-
-		    	</div> -->
-			</div>
+		</div>
 
 
 

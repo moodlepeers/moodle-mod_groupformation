@@ -14,6 +14,12 @@ $(document).ready(function () {
 			.append("h2")
 			.attr("class", "text-center")
 			.text(function(d) {return d.caption});
+		/* if first page, add intro */
+		caption
+			.each(function(d, i) {
+				if (d.mode == "text")
+				d3.select(this).append("div").attr("class", "well").text(d.text);
+			});
 
 		caption
 			.append("div")
@@ -32,7 +38,7 @@ $(document).ready(function () {
 //////////////////////////////
 function buildPersonalResult(datam) {
 
-	var pan = d3.select("#gf-accordion").append("g").selectAll("div .panel .panel-default")
+	var pan = d3.select("#gf-accordion").selectAll("div .panel .panel-default")
 		.data(datam)
 		.enter()
 			.append("div")
