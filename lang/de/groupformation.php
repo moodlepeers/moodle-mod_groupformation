@@ -402,6 +402,11 @@ $string['eval_text_fam_misserfolgsbefuerchtung_3']='Ihre Ergebnisse legen die An
 $string['eval_text_fam_misserfolgsbefuerchtung_2']='Ihre Ergebnisse legen die Annahme nahe, dass die Misserfolgsbefürchtung bei Ihnen moderat ausgeprägt ist. Dies könnte sich aus einer allgemeinen Furcht vor Misserfolg oder Prüfungsängstlichkeit ableiten, sich aber auch auf speziellere, situative Faktoren der aktuellen Lehrveranstaltung oder Aufgabe beziehen. Im Allgemeinen geht man davon aus, dass sich Misserfolgsbefürchtungen negativ auf den Lernerfolg auswirken.';
 $string['eval_text_fam_misserfolgsbefuerchtung_1']='Ihre Ergebnisse legen die Annahme nahe, dass die Misserfolgsbefürchtung bei Ihnen niedrig ausgeprägt ist. Dies könnte sich aus einer allgemein nicht vorhandenen Furcht vor Misserfolg oder Prüfungsängstlichkeit ableiten, sich aber auch auf speziellere, situative Faktoren der aktuellen Lehrveranstaltung oder Aufgabe beziehen. Im Allgemeinen geht man davon aus, dass sich fehlende Misserfolgsbefürchtungen positiv auf den Lernerfolg auswirken.';
 
+$string['eval_caption_user']='Teilnehmer';
+$string['eval_caption_group']='Gruppe';
+$string['eval_caption_course']='Kurs';
+
+
 $string['consent_alert_message'] = 'Sie müssen den Nutzungsbedingungen zustimmen, um den Fragebogen zu beantworten. Lesen und akzeptieren sie die Nutzungsbedingungen, bevor sie auf "Weiter" klicken.';
 $string['consent_opt_in'] = 'Einwilligung (opt-in)';
 $string['consent_message'] = '<ul><li>
