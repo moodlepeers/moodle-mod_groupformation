@@ -401,6 +401,10 @@ $string['eval_text_fam_misserfolgsbefuerchtung_3']='Your score suggests the assu
 $string['eval_text_fam_misserfolgsbefuerchtung_2']='You score suggests the assumption that your expectation of failure is moderate. This could be derived from a general fear of failure or test anxiety, but could also relate to more specific, situational factors of the current course or exercise. Generally it is believed that expectations of failure have a negative impact on studying.';
 $string['eval_text_fam_misserfolgsbefuerchtung_1']='Your score suggests the assumption that your expectation of failure is little pronounced in you. This could be derived from a generally non-existent fear of failure or test anxiety, but could also relate to more specific, situational factors of the current course or exercise. Generally it is believed that the lack of expectancy of failure has a positive effect on learning.';
 
+$string['eval_caption_user']='User';
+$string['eval_caption_group']='Group';
+$string['eval_caption_course']='Course';
+
 $string['consent_alert_message'] = 'You need give consent before accessing the questionnaire. Scroll down and agree to terms before clicking on "Next".';
 $string['consent_opt_in'] = 'Consent (opt-in)';
 $string['consent_message'] = '<ul><li>

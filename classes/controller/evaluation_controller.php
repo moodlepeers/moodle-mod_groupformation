@@ -89,7 +89,7 @@ class mod_groupformation_evaluation_controller {
                 $courseusers = array();
             }
 
-            if (!count($groupusers) >= 3) {
+            if (!count($groupusers) >= 2 || !$this->groupsmanager->groups_created()) {
                 $groupusers = array();
             }
 

@@ -647,6 +647,7 @@ class mod_groupformation_criterion_calculator
             if (is_null($variance)) {
                 $variance = $labels;
             }
+
             foreach ($labels as $label => $labelvalues) {
                 $values = $labelvalues['values'];
                 foreach ($values as $k => $value) {
@@ -657,15 +658,8 @@ class mod_groupformation_criterion_calculator
                     $variance[$label]['values'][$k] += pow($value - $meanvalue, 2)/$size;
                 }
             }
-            $i += 1;
+            $i+=1;
         }
-
-//        foreach ($variance as $label => $labelvalues) {
-//            $values = $labelvalues['values'];
-//            foreach ($values as $k => $value) {
-//                $variance[$label]['values'][$k] /= $size;
-//            }
-//        }
 
         $stddeviation = $variance;
 
@@ -683,7 +677,14 @@ class mod_groupformation_criterion_calculator
                     $meanvalue = $mean[$label]['values'][$k];
                     $stdvvalue = $stddeviation[$label]['values'][$k];
                     $xvalue = $labels[$label]['values'][$k];
-                    $zscore = ($xvalue-$meanvalue)/$stdvvalue;
+                    $diff = $xvalue - $meanvalue;
+                    if ($diff == 0){
+                        $zscore = 0;
+                    }else if ($stdvvalue == 0){
+                        $zscore = 0;
+                    }else {
+                        $zscore = ($xvalue - $meanvalue) / $stdvvalue;
+                    }
                     $labels[$label]['values'][$k] = $this->lookup_z($zscore);
                 }
             }
@@ -751,7 +752,7 @@ class mod_groupformation_criterion_calculator
             $array["values"] = array("user" => $user, "group" => $group, "course" => $course);
             $array["range"] = array("min" => 0, "max" => 1);
             $array["mode"] = $mode;
-            $array["captions"] = $this->get_captions($label,$mode, $setfinaltext, $completed, $coursesize);
+            $array["captions"] = $this->get_captions($label,$mode, $array["values"], $setfinaltext, $completed, $coursesize);
             $array["cutoff"] = $this->get_eval_text($criterion, $label, $spec["cutoffs"], $user);
             $evalinfos[] = $array;
             // var_dump($array);
@@ -790,7 +791,7 @@ class mod_groupformation_criterion_calculator
      * @return array
      * @throws coding_exception
      */
-    private function get_captions($label, $mode, $setfinaltext, $completed, $coursesize)
+    private function get_captions($label, $mode,$values, $setfinaltext, $completed, $coursesize)
     {
         $percent = round($completed / $coursesize * 100, 2);
         $a = new stdClass();
@@ -802,6 +803,9 @@ class mod_groupformation_criterion_calculator
             "maxText" => get_string("eval_max_text_".$label,"groupformation"),
             "finalText" => (($setfinaltext) ? get_string("eval_final_text", "groupformation", $a) : null)
         );
+        foreach($values as $key=>$value){
+            $captions[$key]= get_string("eval_caption_".$key,"groupformation");
+        }
         if ($mode == 2) {
             $captions["mean"] = 0.5;
             $captions["minCaption"] = get_string("eval_min_caption_".$label,"groupformation");
