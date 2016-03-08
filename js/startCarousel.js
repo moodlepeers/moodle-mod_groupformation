@@ -18,7 +18,7 @@ $(document).ready(function () {
 		caption
 			.each(function(d, i) {
 				if (d.mode == "text")
-				d3.select(this).append("div").attr("class", "well").text(d.text);
+				d3.select(this).append("div").attr("class", "well").html("<p>"+d.text.replace(/\\n/g,"<br>")+"</p>");
 			});
 
 		caption

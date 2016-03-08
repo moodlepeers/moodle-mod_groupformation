@@ -325,9 +325,9 @@ $string['eval_final_text'] = 'Die Vergleichswerte basieren auf derzeit {$a->perc
 
 $string['eval_first_page_title']="Allgemeine Informationen";
 $string['eval_first_page_text'] = "Sie erhalten nun eine individuelle Rückmeldung auf die Antworten, die Sie im Fragebogen gegeben haben. Dabei werden jeweils mehrere Antworten, die sich auf dasselbe Thema beziehen, zu einem Mittelwert zusammengefasst und mit einer Vergleichsstichprobe anderer Studierender verglichen. Daraus wird ein sogenannter Prozentrang berechnet; dieser bewertet nicht, ob eine Eigenschaft gut oder schlecht ist, sondern nur, wie häufig solche Werte unter Studierenden vorkommen. Ein Prozentrang von 10 bedeutet, dass 10% der Vergleichsstichprobe ein gleiches oder kleineres Ergebnis hatten; ein Prozentrang von 90 hingegen bedeutet, dass 90% der Vergleichsstichprobe ein gleiches oder kleineres Ergebnis hatten.
-
+\\n\\n
 Zunächst erhalten Sie Rückmeldung zu fünf Persönlichkeitseigenschaften, die als relativ stabil, das heißt unabhängig von bestimmten Situationen, betrachtet werden können: Extraversion, Neurotizismus, Gewissenhaftigkeit, soziale Verträglichkeit und Offenheit für Erfahrungen.
-
+\\n\\n
 Anschließend erhalten Sie Rückmeldung zu vier Dimensionen von Motivation, die sich auf die aktuelle Lehrveranstaltung oder Aufgabe beziehen und insofern von Situation zu Situation variieren können: Interesse, Herausforderung, Erfolgswahrscheinlichkeit und Misserfolgsbefürchtung.";
 
 $string['eval_name_big5'] = 'Persönlichkeit';

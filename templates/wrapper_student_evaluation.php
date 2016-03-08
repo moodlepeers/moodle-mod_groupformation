@@ -34,10 +34,10 @@
 		<div class="fluid-container">
 			<div class="row">
 				<button type="button" class="btn btn-warning col-md-2 col-xs-2 pull-left" href="#carousel-example-generic" role="button" data-slide="prev">
-					left
+					<?php echo get_string("back");?>
 				</button>
 				<button type="button" class="btn btn-warning col-md-2 col-xs-2 pull-right" href="#carousel-example-generic" role="button" data-slide="next">
-					right
+					<?php echo get_string("next");?>
 				</button>
 			</div>
 		</div>
