@@ -4,7 +4,7 @@ $(document).ready(function () {
 	// get data
 	var data = $.parseJSON($("#json-content").html());
 	/* caption */
-	var caption = d3.select("#carousel-example-generic .carousel-inner")
+	var caption = d3.select("#gf-carousel .carousel-inner")
 		.selectAll("div")
 		.data(data)
 		.enter()
@@ -50,9 +50,6 @@ $(document).ready(function () {
 
 
 });
-
-
-
 
 
 //////////////////////////////
