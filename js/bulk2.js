@@ -1,4 +1,4 @@
-function buildChartDoubleSide (chartid, data) {
+function buildChartDoubleSide (chartid, datam, bars) {
 		// remove svg for resize-effect
 		$(chartid+" svg").remove();
 
@@ -24,7 +24,7 @@ function buildChartDoubleSide (chartid, data) {
 /////////////////
 
 		/* SVG Leinwand */
-		var width 		= $(window).width(),
+		var width 		= $(window).width() * 0.7,
 		/* labels section */
 		labelsSection 	= 30,
 		/* scale bar height (x-achsis) */
@@ -36,7 +36,7 @@ function buildChartDoubleSide (chartid, data) {
 
 		/* svgMitte: Chart */
 		var middleWidth 	= width * 0.6,
-			middleHeight 	= (data.criteria.length * (bulkHeight * 2)) - 20;
+			middleHeight 	= (datam.length * (bulkHeight * 2)) - 20;
 
 		/* set master-div height */
 		$(chartid).height(middleHeight + labelsSection + scaleBarHeight);
@@ -55,7 +55,7 @@ function buildChartDoubleSide (chartid, data) {
 		// var color = d3.scale.linear()
 		//             .domain([0, 100])
 		//             .range(["red", "blue"]);
-		var color = ["blue", "green", "purple"];
+		var color = ["rgb(136, 222, 0)", "rgb(65, 207, 68)", "rgb(83, 147, 78)"];
 
 		/* svg sidebars labels */
 		var sideBarHeight 	= middleHeight,
@@ -81,13 +81,13 @@ function buildChartDoubleSide (chartid, data) {
 
 		// labels section
 		svgLabels.append("rect").attr("transform", "translate(" + leftWidth + ",0 )")
-			.attr("width", middleWidth).attr("height", "30").attr("fill", "#fff");
+			.attr("width", middleWidth).attr("height", "30").attr("fill", "none");
 
 		// user Label
 		var userLabel = svgLabels.append("g").attr("transform", "translate(" + leftWidth + ",7 )");
-		userLabel.append("rect").attr("width", 15).attr("height", 15).attr("fill", "blue")
+		userLabel.append("rect").attr("width", 15).attr("height", 15).attr("fill", color[0])
 			.attr("stroke", "black").attr("stroke-width", 2);
-		userLabel.append("text").attr("dx", 50).attr("dy", 11).text("user").attr("font-size", 12);
+		userLabel.append("text").attr("dx", 50).attr("dy", 11).text(bars.user).attr("font-size", 12);
 		// group label
 		var groupLabel = svgLabels.append("g").attr("transform", "translate(" + (leftWidth+100) + ",7 )");
 		groupLabel.append("rect").attr("width", 15).attr("height", 15).attr("fill", "white")
@@ -101,7 +101,7 @@ function buildChartDoubleSide (chartid, data) {
 					$("g.groupBars g rect").show();
 				}
 			});
-		groupLabel.append("text").attr("dx", 50).attr("dy", 11).text("group").attr("font-size", 12);
+		groupLabel.append("text").attr("dx", 50).attr("dy", 11).text(bars.group).attr("font-size", 12);
 		// global label
 		var globalLabel = svgLabels.append("g").attr("transform", "translate(" + (leftWidth+200) + ",7 )");
 		globalLabel.append("rect").attr("width", 15).attr("height", 15).attr("fill", "white")
@@ -115,7 +115,7 @@ function buildChartDoubleSide (chartid, data) {
 					$("g.globalBars g rect").show();
 				}
 			});
-		globalLabel.append("text").attr("dx", 50).attr("dy", 11).text("global").attr("font-size", 12);
+		globalLabel.append("text").attr("dx", 50).attr("dy", 11).text(bars.course).attr("font-size", 12);
 
 		// styling extra
 		var verticalLines = d3.select("div"+chartid+" svg");
@@ -144,7 +144,7 @@ function buildChartDoubleSide (chartid, data) {
 
 		/* links: Label Group Boxes */
 		var gBoxLeft = svgLinks.selectAll("g")
-					.data(data.criteria)
+					.data(datam)
 					.enter()
 						.append("g");
 
@@ -194,7 +194,7 @@ function buildChartDoubleSide (chartid, data) {
 
 		/* links: Label Group Boxes */
 		var gBoxRight = svgRechts.selectAll("g")
-					.data(data.criteria)
+					.data(datam)
 					.enter()
 						.append("g");
 
@@ -267,7 +267,7 @@ function buildChartDoubleSide (chartid, data) {
 					userBars = svgMitte.append("g")
 								 .attr("class", "userBars")
 								 .selectAll("rect")
-								 .data(data.criteria)
+								 .data(datam)
 								 .enter()
 								 	.append("g")
 								 	.append("rect")
@@ -291,7 +291,7 @@ function buildChartDoubleSide (chartid, data) {
 			var groupBars = svgMitte.append("g")
 							 .attr("class", "groupBars")
 							 .selectAll("rect")
-							 .data(data.criteria)
+							 .data(datam)
 							 .enter()
 								.append("g")
 								.append("rect")
@@ -309,7 +309,7 @@ function buildChartDoubleSide (chartid, data) {
 			var globalBars = svgMitte.append("g")
 							 .attr("class", "globalBars")
 							 .selectAll("rect")
-							 .data(data.criteria)
+							 .data(datam)
 							 .enter()
 								.append("g")
 								.append("rect")

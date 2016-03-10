@@ -760,6 +760,8 @@ class mod_groupformation_criterion_calculator
             }
 
             $mode = 1;
+			if ($criterion == "big5")
+				$mode = 2;
             $array = array();
             $array["name"] = $label;//get_string('eval_'.$label,'groupformation');
             $array["values"] = array("user" => $user, "group" => $group, "course" => $course);
