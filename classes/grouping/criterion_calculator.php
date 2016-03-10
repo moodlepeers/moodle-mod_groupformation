@@ -526,7 +526,20 @@ class mod_groupformation_criterion_calculator
             }
             if (!is_null($labels) && count($labels) > 0) {
                 $array = $this->get_eval_infos($criterion, $labels, $userid, $groupusers, $courseusers);
-                $eval[] = array("name"=>$criterion,"mode"=>"chart","caption"=>get_string('eval_name_'.$criterion,'groupformation'),"criteria"=>$array);
+
+                $bars = array();
+                $values = array('user'=>1,'group'=>4,'course'=>2);
+
+                foreach($values as $key=>$value){
+                    $bars[$key]= get_string("eval_caption_".$key,"groupformation");
+                }
+
+                $directions = 1;
+                if ($criterion == 'big5'){
+                    $directions = 2;
+                }
+
+                $eval[] = array("name"=>$criterion,"directions"=>$directions,"mode"=>"chart","caption"=>get_string('eval_name_'.$criterion,'groupformation'),"bars"=>$bars,"criteria"=>$array);
             }
         }
 
@@ -803,9 +816,9 @@ class mod_groupformation_criterion_calculator
             "maxText" => get_string("eval_max_text_".$label,"groupformation"),
             "finalText" => (($setfinaltext) ? get_string("eval_final_text", "groupformation", $a) : null)
         );
-        foreach($values as $key=>$value){
-            $captions[$key]= get_string("eval_caption_".$key,"groupformation");
-        }
+        // foreach($values as $key=>$value){
+        //    $captions[$key]= get_string("eval_caption_".$key,"groupformation");
+        //}
         if ($mode == 2) {
             $captions["mean"] = 0.5;
             $captions["minCaption"] = get_string("eval_min_caption_".$label,"groupformation");
