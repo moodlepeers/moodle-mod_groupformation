@@ -61,7 +61,7 @@ function buildPersonalResult(datam) {
 				.attr("href", function(d, i) {return "#collapse"+i;})
 				.attr("aria-expanded", "true")
 				.attr("aria-controls", function(d, i) {return "collapse"+i;})
-				.text(function(d) {return d.name;});
+				.text(function(d) {return d.captions.maxCaption;});
 		/* Header Info Button */
 		panHead
 			.append("span")
