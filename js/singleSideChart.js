@@ -90,10 +90,10 @@
 			.on("click", function() {
 				if ((d3.select(this).attr("fill") == color[1])) {
 					d3.select(this).attr("fill", "white");
-					$("g.groupBars g rect").hide();
+					$("g.groupBars g g rect").hide();
 				} else {
 					d3.select(this).attr("fill", color[1]);
-					$("g.groupBars g rect").show();
+					$("g.groupBars g g rect").show();
 				}
 			});
 		groupLabel.append("text").attr("dx", 50).attr("dy", 11).text(bars.group).attr("font-size", 12);
@@ -104,10 +104,10 @@
 			.on("click", function() {
 				if ((d3.select(this).attr("fill") == color[2])) {
 					d3.select(this).attr("fill", "white");
-					$("g.globalBars g rect").hide();
+					$("g.globalBars g g rect").hide();
 				} else {
 					d3.select(this).attr("fill", color[2]);
-					$("g.globalBars g rect").show();
+					$("g.globalBars g g rect").show();
 				}
 			});
 		globalLabel.append("text").attr("dx", 50).attr("dy", 11).text(bars.course).attr("font-size", 12);
@@ -204,6 +204,7 @@
 								 .data(datam)
 								 .enter()
 								 	.append("g")
+									.append("g")
 								 	.append("rect")
 									.attr("width", function (d) {return getBulkWidth(d.values.user); })
 									.attr("height", bulkHeight / 3)
@@ -228,6 +229,7 @@
 							 .data(datam)
 							 .enter()
 								.append("g")
+								.append("g")
 								.append("rect")
 								.attr("width", function (d) {return getBulkWidth(d.values.group); })
 								.attr("height", bulkHeight / 3)
@@ -243,6 +245,7 @@
 							 .selectAll("rect")
 							 .data(datam)
 							 .enter()
+								.append("g")
 								.append("g")
 								.append("rect")
 								.attr("width", function (d) {return getBulkWidth(d.values.course); })
@@ -260,8 +263,8 @@
 		/* check if groupbox activated and activate bulk if yes */
 		addGlobalBulks();
 		/* first, hide other bulks than user */
-		$("g.groupBars g rect").hide();
-		$("g.globalBars g rect").hide();
+		$("g.groupBars g g rect").hide();
+		$("g.globalBars g g rect").hide();
 
 
 } // build fam chart function
