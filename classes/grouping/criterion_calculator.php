@@ -516,6 +516,19 @@ class mod_groupformation_criterion_calculator
      */
     public function get_eval($userid, $groupusers, $courseusers)
     {
+        $completedusers = array_keys($this->usermanager->get_completed_by_answer_count('userid', 'userid'));
+        $groupandcompleted = array_intersect($completedusers, $groupusers);
+        $courseandcompleted = array_intersect($completedusers, $courseusers);
+        $completed = count($courseandcompleted);
+
+        $vals = array('user');
+        if (count($groupandcompleted)>0){
+            $vals[]='group';
+        }
+        if (count($courseandcompleted)>1){
+            $vals[]='course';
+        }
+
         $eval = array(array("name"=>"first_page","mode"=>"text","caption"=>get_string("eval_first_page_title","groupformation"),"text"=>get_string("eval_first_page_text","groupformation")));
         $criteria = $this->store->get_label_set();
 
@@ -539,7 +552,7 @@ class mod_groupformation_criterion_calculator
                     $directions = 2;
                 }
 
-                $eval[] = array("name"=>$criterion,"directions"=>$directions,"mode"=>"chart","caption"=>get_string('eval_name_'.$criterion,'groupformation'),"bars"=>$bars,"criteria"=>$array);
+                $eval[] = array("name"=>$criterion,"directions"=>$directions,"mode"=>"chart","caption"=>get_string('eval_name_'.$criterion,'groupformation'),"values"=>$vals,"bars"=>$bars,"criteria"=>$array);
             }
         }
 
