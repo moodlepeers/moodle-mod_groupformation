@@ -8,7 +8,6 @@ function buildChartDoubleSide (chartid, datam, bars) {
 
 		/* bulk height size */
 		var bulkHeight = 50;
-			//bulksPerCat = d3.sum(bulkMode) +1; // + 1, cause we have 3 different bulks, an user bulk is always active
 
 		/* calc scaling value for bulk width */
 		function getBulkWidth(value) {
@@ -51,10 +50,7 @@ function buildChartDoubleSide (chartid, datam, bars) {
 		svgHeight = middleHeight + labelsSection + scaleBarHeight; // 20 = Scale + Border height
 
 
-		/* Balken Farben Domain */
-		// var color = d3.scale.linear()
-		//             .domain([0, 100])
-		//             .range(["red", "blue"]);
+		/* bulk colors */
 		var color = ["rgb(136, 222, 0)", "rgb(65, 207, 68)", "rgb(83, 147, 78)"];
 
 		/* svg sidebars labels */
@@ -155,9 +151,6 @@ function buildChartDoubleSide (chartid, datam, bars) {
 						.attr("width", leftWidth)
 						.attr("height", bulkHeight)
 						.attr("y", function (d, i) { return (i * (bulkHeight * 2) + 11); });
-						// .attr("stroke", "black")
-						// .attr("stroke-width", 0.5);
-						// .attr("stroke-dasharray", "10 5");
 
 
 		/* Labels */
@@ -177,7 +170,7 @@ function buildChartDoubleSide (chartid, datam, bars) {
 						.attr("dy", (bulkHeight / 2))
 						/* font format */
 						.style("font", "1.2em sans-serif")
-						.text(function (d) {return d.name });
+						.text(function (d) {return d.captions.maxCaption });
 
 
 
@@ -205,9 +198,6 @@ function buildChartDoubleSide (chartid, datam, bars) {
 						.attr("width", leftWidth)
 						.attr("height", bulkHeight)
 						.attr("y", function (d, i) { return (i * (bulkHeight * 2) + 11); });
-						// .attr("stroke", "black")
-						// .attr("stroke-width", 0.5);
-						// .attr("stroke-dasharray", "10 5");
 
 		/* Labels */
 		var barsTextRight = gBoxRight
@@ -226,7 +216,7 @@ function buildChartDoubleSide (chartid, datam, bars) {
 						.attr("dy", (bulkHeight / 2))
 						/* font format */
 						.style("font", "1.2em sans-serif")
-						.text(function (d) {return d.name });
+						.text(function (d) {return d.captions.minCaption });
 
 ///////////////
 // SVG Mitte //
@@ -335,6 +325,3 @@ function buildChartDoubleSide (chartid, datam, bars) {
 
 
 } // build chart function
-
-//export {buildChartDoubleSide};
-// }); // d3.json-grabber

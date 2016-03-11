@@ -33,16 +33,16 @@
 
 		<div class="fluid-container">
 			<div class="row">
-				<button type="button" class="btn btn-warning col-md-2 col-xs-2 pull-left" href="#carousel-example-generic" role="button" data-slide="prev">
+				<button type="button" class="btn btn-warning col-md-2 col-xs-2 pull-left" href="#gf-carousel" role="button" data-slide="prev">
 					<?php echo get_string("back");?>
 				</button>
-				<button type="button" class="btn btn-warning col-md-2 col-xs-2 pull-right" href="#carousel-example-generic" role="button" data-slide="next">
+				<button type="button" class="btn btn-warning col-md-2 col-xs-2 pull-right" href="#gf-carousel" role="button" data-slide="next">
 					<?php echo get_string("next");?>
 				</button>
 			</div>
 		</div>
 
-		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval=0>
+		<div id="gf-carousel" class="carousel slide" data-ride="carousel" data-interval=0>
 		  	<!-- Wrapper for slides -->
 			<div class="carousel-inner" role="listbox">
 	    	</div>

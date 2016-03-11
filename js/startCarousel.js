@@ -4,7 +4,7 @@ $(document).ready(function () {
 	// get data
 	var data = $.parseJSON($("#json-content").html());
 	/* caption */
-	var caption = d3.select("#carousel-example-generic .carousel-inner")
+	var caption = d3.select("#gf-carousel .carousel-inner")
 		.selectAll("div")
 		.data(data)
 		.enter()
@@ -32,11 +32,11 @@ $(document).ready(function () {
 					d3.select(this).append("div").attr("id", divv);
 					if (d.directions == 1) {
 						buildChartOneSide("#gf_chart"+i, d.criteria, d.bars);
-						buildPersonalResult(d.criteria, (i*10), "#"+divv);
+						buildPersonalResult(d.criteria, i, "#"+divv);
 						$(window).bind('resize', buildChartOneSide("#gf_chart"+i, d.criteria, d.bars)); /* resize event */
 					} else {
 						buildChartDoubleSide("#gf_chart"+i, d.criteria, d.bars);
-						buildPersonalResult(d.criteria, (i*10), "#"+divv);
+						buildPersonalResult(d.criteria, i, "#"+divv);
 						$(window).bind('resize', buildChartDoubleSide("#gf_chart"+i, d.criteria, d.bars)); /* resize event */
 					}
 				}
@@ -50,9 +50,6 @@ $(document).ready(function () {
 
 
 });
-
-
-
 
 
 //////////////////////////////
@@ -70,7 +67,7 @@ function buildPersonalResult(datam, index, divId) {
 			.append("div")
 			.attr("class", "panel-heading")
 			.attr("role", "tab")
-			.attr("id", function(d, i) {return "heading"+((index*i));})
+			.attr("id", function(d, i) {return "heading"+index+i;})
 				.append("h4")
 				.attr("class", "panel-title");
 
@@ -80,9 +77,9 @@ function buildPersonalResult(datam, index, divId) {
 				.attr("role", "button")
 				.attr("data-toggle", "collapse")
 				//.attr("data-parent", "#gf-accordion")		// close all other panels
-				.attr("href", function(d, i) {return "#collapse"+(index*i);})
+				.attr("href", function(d, i) {return "#collapse"+index+i;})
 				.attr("aria-expanded", "true")
-				.attr("aria-controls", function(d, i) {return "collapse"+(index*i);})
+				.attr("aria-controls", function(d, i) {return "collapse"+index+i;})
 				.text(function(d) {return d.captions.maxCaption;});
 		/* Header Info Button */
 		panHead
@@ -97,10 +94,10 @@ function buildPersonalResult(datam, index, divId) {
 		/* panel body */
 		pan
 			.append("div")
-			.attr("id", function(d, i) {return "collapse"+((index*i));})
+			.attr("id", function(d, i) {return "collapse"+index+i;})
 			.attr("class", "panel-collapse collapse in")
 			.attr("role", "tabpanel")
-			.attr("aria-labelledBy", function(d, i) {return "collapse"+((index*i));})
+			.attr("aria-labelledBy", function(d, i) {return "collapse"+index+i;})
 				.append("div")
 				.attr("class", "panel-body")
 						.text(function (d, i) {return d.cutoff;});
