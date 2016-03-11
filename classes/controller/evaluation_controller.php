@@ -85,7 +85,7 @@ class mod_groupformation_evaluation_controller {
                 $groupusers = $this->groupsmanager->get_group_members($userid);
             }
 
-            if (!count($courseusers) >= 3) {
+            if (!count($courseusers) >= 2) {
                 $courseusers = array();
             }
 
