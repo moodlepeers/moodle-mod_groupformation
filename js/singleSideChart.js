@@ -82,7 +82,7 @@
 		var userLabel = svgLabels.append("g").attr("transform", "translate(" + leftWidth + ",7 )");
 		userLabel.append("rect").attr("width", 15).attr("height", 15).attr("fill", color[0])
 			.attr("stroke", "black").attr("stroke-width", 2);
-		userLabel.append("text").attr("dx", 50).attr("dy", 11).text(bars.user).attr("font-size", 12);
+		userLabel.append("text").attr("dx", 20).attr("dy", 11).text(bars.user).attr("font-size", 12);
 		// group label
 		var groupLabel = svgLabels.append("g").attr("transform", "translate(" + (leftWidth+100) + ",7 )");
 		groupLabel.append("rect").attr("width", 15).attr("height", 15).attr("fill", "white")
@@ -96,7 +96,7 @@
 					$("g.groupBars g g rect").show();
 				}
 			});
-		groupLabel.append("text").attr("dx", 50).attr("dy", 11).text(bars.group).attr("font-size", 12);
+		groupLabel.append("text").attr("dx", 20).attr("dy", 11).text(bars.group).attr("font-size", 12);
 		// global label
 		var globalLabel = svgLabels.append("g").attr("transform", "translate(" + (leftWidth+200) + ",7 )");
 		globalLabel.append("rect").attr("width", 15).attr("height", 15).attr("fill", "white")
@@ -110,7 +110,7 @@
 					$("g.globalBars g g rect").show();
 				}
 			});
-		globalLabel.append("text").attr("dx", 50).attr("dy", 11).text(bars.course).attr("font-size", 12);
+		globalLabel.append("text").attr("dx", 20).attr("dy", 11).text(bars.course).attr("font-size", 12);
 
 		// styling extra
 		var verticalLines = d3.select("div"+chartid+" svg");
@@ -168,7 +168,7 @@
 						.attr("dy", (bulkHeight / 2))
 						/* font format */
 						.style("font", "1.2em sans-serif")
-						.text(function (d) {return d.name });
+						.text(function (d) {return d.captions.maxCaption });
 
 ///////////////
 // SVG Mitte //

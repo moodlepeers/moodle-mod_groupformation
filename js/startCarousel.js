@@ -80,7 +80,7 @@ function buildPersonalResult(datam, index, divId) {
 				.attr("href", function(d, i) {return "#collapse"+index+i;})
 				.attr("aria-expanded", "true")
 				.attr("aria-controls", function(d, i) {return "collapse"+index+i;})
-				.text(function(d) {return d.captions.maxCaption;});
+				.text(function(d) {return d.captions.cutoffCaption;});
 		/* Header Info Button */
 		panHead
 			.append("span")

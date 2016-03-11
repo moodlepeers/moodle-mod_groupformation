@@ -83,7 +83,7 @@ function buildChartDoubleSide (chartid, datam, bars) {
 		var userLabel = svgLabels.append("g").attr("transform", "translate(" + leftWidth + ",7 )");
 		userLabel.append("rect").attr("width", 15).attr("height", 15).attr("fill", color[0])
 			.attr("stroke", "black").attr("stroke-width", 2);
-		userLabel.append("text").attr("dx", 50).attr("dy", 11).text(bars.user).attr("font-size", 12);
+		userLabel.append("text").attr("dx", 20).attr("dy", 11).text(bars.user).attr("font-size", 12);
 		// group label
 		var groupLabel = svgLabels.append("g").attr("transform", "translate(" + (leftWidth+100) + ",7 )");
 		groupLabel.append("rect").attr("width", 15).attr("height", 15).attr("fill", "white")
@@ -97,7 +97,7 @@ function buildChartDoubleSide (chartid, datam, bars) {
 					$("g.groupBars g rect").show();
 				}
 			});
-		groupLabel.append("text").attr("dx", 50).attr("dy", 11).text(bars.group).attr("font-size", 12);
+		groupLabel.append("text").attr("dx", 20).attr("dy", 11).text(bars.group).attr("font-size", 12);
 		// global label
 		var globalLabel = svgLabels.append("g").attr("transform", "translate(" + (leftWidth+200) + ",7 )");
 		globalLabel.append("rect").attr("width", 15).attr("height", 15).attr("fill", "white")
@@ -111,7 +111,7 @@ function buildChartDoubleSide (chartid, datam, bars) {
 					$("g.globalBars g rect").show();
 				}
 			});
-		globalLabel.append("text").attr("dx", 50).attr("dy", 11).text(bars.course).attr("font-size", 12);
+		globalLabel.append("text").attr("dx", 20).attr("dy", 11).text(bars.course).attr("font-size", 12);
 
 		// styling extra
 		var verticalLines = d3.select("div"+chartid+" svg");
