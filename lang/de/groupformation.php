@@ -333,16 +333,21 @@ Anschließend erhalten Sie Rückmeldung zu vier Dimensionen von Motivation, die 
 $string['eval_name_big5'] = 'Persönlichkeit';
 $string['eval_name_fam'] = 'Motivation';
 
-$string['eval_max_caption_extraversion']='Extraversion';
-$string['eval_min_caption_extraversion']='Extraversion';
-$string['eval_max_caption_neurotizismus']='Neurotizismus';
-$string['eval_min_caption_neurotizismus']='Neurotizismus';
-$string['eval_max_caption_gewissenhaftigkeit']='Gewissenhaftigkeit';
-$string['eval_min_caption_gewissenhaftigkeit']='Gewissenhaftigkeit';
-$string['eval_max_caption_vertraeglichkeit']='Soziale Verträglichkeit';
-$string['eval_min_caption_vertraeglichkeit']='Soziale Verträglichkeit';
-$string['eval_max_caption_offenheit']='Offenheit für Erfahrungen';
-$string['eval_min_caption_offenheit']='Offenheit für Erfahrungen';
+$string['eval_max_caption_neurotizismus']='emotional stabil';
+$string['eval_min_caption_neurotizismus']='emotional labil';
+$string['eval_max_caption_extraversion']='extravertiert';
+$string['eval_min_caption_extraversion']='introvertiert';
+$string['eval_max_caption_gewissenhaftigkeit']='gewissenhaft';
+$string['eval_min_caption_gewissenhaftigkeit']='nachlässig';
+$string['eval_max_caption_vertraeglichkeit']='verträglich';
+$string['eval_min_caption_vertraeglichkeit']='kompetitiv';
+$string['eval_max_caption_offenheit']='offen';
+$string['eval_min_caption_offenheit']='konservativ';
+$string['eval_cutoff_caption_extraversion']='Extraversion';
+$string['eval_cutoff_caption_neurotizismus']='Neurotizismus';
+$string['eval_cutoff_caption_gewissenhaftigkeit']='Gewissenhaftigkeit';
+$string['eval_cutoff_caption_vertraeglichkeit']='Soziale Verträglichkeit';
+$string['eval_cutoff_caption_offenheit']='Offenheit für Erfahrung';
 
 $string['eval_max_text_extraversion']='Introversion und Extraversion sind zwei Pole einer Persönlichkeitseigenschaft, die durch die Interaktion mit der Umwelt charakterisiert wird. Introversion bezeichnet dabei eine nach innen, Extraversion eine nach außen gewandte Haltung.';
 $string['eval_min_text_extraversion']='Introversion und Extraversion sind zwei Pole einer Persönlichkeitseigenschaft, die durch die Interaktion mit der Umwelt charakterisiert wird. Introversion bezeichnet dabei eine nach innen, Extraversion eine nach außen gewandte Haltung.';

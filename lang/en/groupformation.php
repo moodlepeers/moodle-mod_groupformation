@@ -329,16 +329,21 @@ First, you receive feedback on five personality characteristics, that can be und
 $string['eval_name_big5'] = 'Personality';
 $string['eval_name_fam'] = 'Motivation';
 
-$string['eval_max_caption_extraversion']='Extraversion';
-$string['eval_min_caption_extraversion']='Extraversion';
-$string['eval_max_caption_neurotizismus']='Neuroticism';
-$string['eval_min_caption_neurotizismus']='Neuroticism';
-$string['eval_max_caption_gewissenhaftigkeit']='Conscientiousness';
-$string['eval_min_caption_gewissenhaftigkeit']='Conscientiousness';
-$string['eval_max_caption_vertraeglichkeit']='Social Agreeableness';
-$string['eval_min_caption_vertraeglichkeit']='Social Agreeableness';
-$string['eval_max_caption_offenheit']='Openness to experience';
-$string['eval_min_caption_offenheit']='Openness to experience';
+$string['eval_cutoff_caption_extraversion']='Extraversion';
+$string['eval_cutoff_caption_neurotizismus']='Neuroticism';
+$string['eval_cutoff_caption_gewissenhaftigkeit']='Conscientiousness';
+$string['eval_cutoff_caption_vertraeglichkeit']='Social Agreeableness';
+$string['eval_cutoff_caption_offenheit']='Openness to experience';
+$string['eval_max_caption_extraversion']='extraverted';
+$string['eval_min_caption_extraversion']='introverted';
+$string['eval_max_caption_neurotizismus']='emotionally stable';
+$string['eval_min_caption_neurotizismus']='emotionally unstable';
+$string['eval_max_caption_gewissenhaftigkeit']='conscientious';
+$string['eval_min_caption_gewissenhaftigkeit']='careless';
+$string['eval_max_caption_vertraeglichkeit']='agreeable';
+$string['eval_min_caption_vertraeglichkeit']='competitive';
+$string['eval_max_caption_offenheit']='open';
+$string['eval_min_caption_offenheit']='conservative';
 
 $string['eval_max_text_extraversion']='Introversion and extraversion are two poles of a personality trait that is characterized by the interaction with the environment. Introversion denotes an inward facing attitude whereas extraversion denotes an outwardly one.';
 $string['eval_min_text_extraversion']='Introversion and extraversion are two poles of a personality trait that is characterized by the interaction with the environment. Introversion denotes an inward facing attitude whereas extraversion denotes an outwardly one.';
@@ -359,6 +364,10 @@ $string['eval_max_caption_erfolgswahrscheinlichkeit']='Probability of Success';
 $string['eval_min_caption_erfolgswahrscheinlichkeit']='Probability of Success';
 $string['eval_max_caption_misserfolgsbefuerchtung']='Expectation of Failure';
 $string['eval_min_caption_misserfolgsbefuerchtung']='Expectation of Failure';
+$string['eval_cutoff_caption_herausforderung']='Challenge';
+$string['eval_cutoff_caption_interesse']='Interest';
+$string['eval_cutoff_caption_erfolgswahrscheinlichkeit']='Probability of Success';
+$string['eval_cutoff_caption_misserfolgsbefuerchtung']='Expectation of Failure';
 
 $string['eval_max_text_herausforderung']='Challenge is a dimension of motivation, which expresses to which extent the current course or exercise is at all interpreted as related to performance, that is, to which extent you feel like exercising your own skills and your abilities.';
 $string['eval_min_text_herausforderung']='Challenge is a dimension of motivation, which expresses to which extent the current course or exercise is at all interpreted as related to performance, that is, to which extent you feel like exercising your own skills and your abilities.';

@@ -812,6 +812,7 @@ class mod_groupformation_criterion_calculator
         $a->completed = $completed;
         $a->coursesize = $coursesize;
         $captions = array(
+            "cutoffCaption" => get_string("eval_cutoff_caption_".$label,"groupformation"),
             "maxCaption" => get_string("eval_max_caption_".$label,"groupformation"),
             "maxText" => get_string("eval_max_text_".$label,"groupformation"),
             "finalText" => (($setfinaltext) ? get_string("eval_final_text", "groupformation", $a) : null)
