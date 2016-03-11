@@ -25,7 +25,7 @@
 /////////////////
 
 		/* SVG Leinwand */
-		var width 		= $(window).width() * 0.8,
+		var width 		= $("#gf-carousel").width(),
 		/* labels section */
 		labelsSection 	= 30,
 		/* scale bar height (x-achsis) */
@@ -36,7 +36,7 @@
 		$(chartid).width(width);
 
 		/* svgMitte: Chart */
-		var middleWidth 	= width * 0.6,
+		var middleWidth 	= width * 0.7,
 			middleHeight 	= (datam.length * (bulkHeight * 2)) - 20;
 
 		/* set master-div height */

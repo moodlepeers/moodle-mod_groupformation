@@ -23,7 +23,7 @@ function buildChartDoubleSide (chartid, datam, bars) {
 /////////////////
 
 		/* SVG Leinwand */
-		var width 		= $(window).width() * 0.7,
+		var width = $("#gf-carousel").width(),
 		/* labels section */
 		labelsSection 	= 30,
 		/* scale bar height (x-achsis) */
@@ -31,7 +31,7 @@ function buildChartDoubleSide (chartid, datam, bars) {
 
 
 		/* set div width */
-		$(chartid).width(width);
+		//$(chartid).width(width);
 
 		/* svgMitte: Chart */
 		var middleWidth 	= width * 0.6,
