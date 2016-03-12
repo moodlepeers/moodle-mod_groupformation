@@ -33,7 +33,7 @@ $(document).ready(function () {
 					if (d.directions == 1) {
 						buildChartOneSide("#gf_chart"+i, d.criteria, d.bars);
 						buildPersonalResult(d.criteria, i, "#"+divv);
-						$(window).bind('resize', buildChartOneSide("#gf_chart"+i, d.criteria, d.bars)); /* resize event */
+						$(window).resize(buildChartOneSide("#gf_chart"+i, d.criteria, d.bars)); /* resize event */
 					} else {
 						buildChartDoubleSide("#gf_chart"+i, d.criteria, d.bars);
 						buildPersonalResult(d.criteria, i, "#"+divv);

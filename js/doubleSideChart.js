@@ -285,7 +285,7 @@ function buildChartDoubleSide (chartid, datam, bars) {
 							 .enter()
 								.append("g")
 								.append("rect")
-								.attr("width", function (d) {return getBulkWidth(d.values.group); })
+								.attr("width", function (d) {return getBulkWidth(d.values.group == null? 0.5 : d.values.group); })
 								.attr("height", bulkHeight / 3)
 								.attr("fill", color[1])
 								.attr("y", function (d, i) {
@@ -303,7 +303,7 @@ function buildChartDoubleSide (chartid, datam, bars) {
 							 .enter()
 								.append("g")
 								.append("rect")
-								.attr("width", function (d) {return getBulkWidth(d.values.course); })
+								.attr("width", function (d) {return getBulkWidth(d.values.course == null? 0.5 : d.values.course); })
 								.attr("height", bulkHeight / 3)
 								.attr("fill", color[2])
 								.attr("y", function (d, i) {
