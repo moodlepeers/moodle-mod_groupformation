@@ -50,7 +50,9 @@
 
 
 		/* bulk colors */
-		var color = ["rgb(136, 222, 0)", "rgb(65, 207, 68)", "rgb(83, 147, 78)"];
+		var color = ["rgb(136, 222, 0)",
+		 			datam[0].values.group != null? "rgb(65, 207, 68)" : "white",
+					datam[0].values.cousre != null? "rgb(83, 147, 78)" : "white"];
 
 		/* svg sidebars labels */
 		var sideBarHeight 	= middleHeight,
