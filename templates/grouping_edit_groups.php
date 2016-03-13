@@ -20,6 +20,7 @@
  */
 ?>
 
+<!--        TODO style="display:none;" rauskommentieren zm debuggen-->
         <div style="display:none;">
             <textarea id="groups_string" name="groups_string" cols="35"
                       rows="<?php echo count($this->_) - 2 ?>">
