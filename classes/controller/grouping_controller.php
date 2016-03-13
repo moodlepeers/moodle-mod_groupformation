@@ -273,7 +273,11 @@ class mod_groupformation_grouping_controller
                         'text' => get_string('grouping_delete', 'groupformation')),
                     'button3' => array(
                         'type' => 'submit', 'name' => 'adopt', 'value' => '0', 'state' => 'disabled',
-                        'text' => get_string('grouping_adopt', 'groupformation'))));
+                        'text' => get_string('grouping_adopt', 'groupformation')),
+                    'button4' => array(
+                        'type' => 'submit', 'name' => 'edit', 'value' => '0', 'state' => 'disabled',
+                        'text' => get_string('grouping_edit', 'groupformation'))
+                ));
 
                 break;
 
@@ -289,7 +293,11 @@ class mod_groupformation_grouping_controller
                         'text' => get_string('grouping_delete', 'groupformation')),
                     'button3' => array(
                         'type' => 'submit', 'name' => 'adopt', 'value' => '0', 'state' => 'disabled',
-                        'text' => get_string('grouping_adopt', 'groupformation'))));
+                        'text' => get_string('grouping_adopt', 'groupformation')),
+                    'button4' => array(
+                        'type' => 'submit', 'name' => 'edit', 'value' => '0', 'state' => 'disabled',
+                        'text' => get_string('grouping_edit', 'groupformation'))
+                ));
 
                 break;
 
@@ -305,7 +313,11 @@ class mod_groupformation_grouping_controller
                         'text' => get_string('grouping_delete', 'groupformation')),
                     'button3' => array(
                         'type' => 'submit', 'name' => 'adopt', 'value' => '0', 'state' => 'disabled',
-                        'text' => get_string('grouping_adopt', 'groupformation'))));
+                        'text' => get_string('grouping_adopt', 'groupformation')),
+                    'button4' => array(
+                        'type' => 'submit', 'name' => 'edit', 'value' => '0', 'state' => 'disabled',
+                        'text' => get_string('grouping_edit', 'groupformation'))
+                ));
 
                 $settingsgroupview->assign('emailnotifications', $this->store->get_email_setting());
                 break;
@@ -322,8 +334,11 @@ class mod_groupformation_grouping_controller
                         'text' => get_string('grouping_delete', 'groupformation')),
                     'button3' => array(
                         'type' => 'submit', 'name' => 'adopt', 'value' => '0', 'state' => 'disabled',
-                        'text' => get_string('grouping_adopt', 'groupformation'))));
-
+                        'text' => get_string('grouping_adopt', 'groupformation')),
+                    'button4' => array(
+                        'type' => 'submit', 'name' => 'edit', 'value' => '0', 'state' => 'disabled',
+                        'text' => get_string('grouping_edit', 'groupformation'))
+                ));
                 break;
 
             case 4 :
@@ -338,7 +353,11 @@ class mod_groupformation_grouping_controller
                         'text' => get_string('grouping_delete', 'groupformation')),
                     'button3' => array(
                         'type' => 'submit', 'name' => 'adopt', 'value' => '1', 'state' => '',
-                        'text' => get_string('grouping_adopt', 'groupformation'))));
+                        'text' => get_string('grouping_adopt', 'groupformation')),
+                    'button4' => array(
+                        'type' => 'submit', 'name' => 'edit', 'value' => '1', 'state' => '',
+                        'text' => get_string('grouping_edit', 'groupformation'))
+                ));
 
                 break;
 
@@ -354,7 +373,11 @@ class mod_groupformation_grouping_controller
                         'text' => get_string('moodlegrouping_delete', 'groupformation')),
                     'button3' => array(
                         'type' => 'submit', 'name' => 'adopt', 'value' => '0', 'state' => 'disabled',
-                        'text' => get_string('grouping_adopt', 'groupformation'))));
+                        'text' => get_string('grouping_adopt', 'groupformation')),
+                    'button4' => array(
+                        'type' => 'submit', 'name' => 'edit', 'value' => '0', 'state' => 'disabled',
+                        'text' => get_string('grouping_edit', 'groupformation'))
+                ));
                 break;
 
             case 'default' :

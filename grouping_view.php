@@ -61,6 +61,7 @@ if ( (data_submitted()) && confirm_sesskey()){
     $start = optional_param('start', null, PARAM_BOOL);
     $abort = optional_param('abort', null, PARAM_BOOL);
     $adopt = optional_param('adopt', null, PARAM_BOOL);
+    $edit = optional_param('edit', null, PARAM_BOOL);
     $delete = optional_param('delete', null, PARAM_BOOL);
 
     if (isset ($start) && $start == 1) {
