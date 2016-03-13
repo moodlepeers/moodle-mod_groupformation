@@ -57,28 +57,28 @@ $store = new mod_groupformation_storage_manager ($groupformation->id);
 
 // Set data and viewStatus of groupingView, after possible db update.
 $controller = new mod_groupformation_grouping_controller ($groupformation->id, $cm);
-
-if ($_POST) {
-    if (isset ($_POST ['save_edit'])) {
-        if (isset ($_POST['groups_string'])) {
-            $controller->save_edit($_POST['groups_string']);
-        }
-        unset ($_POST ['save_edit']);
-    }
-    $returnurl = new moodle_url ('/mod/groupformation/grouping_view.php', array(
-        'id' => $id, 'do_show' => 'grouping'));
-    redirect($returnurl);
-}
-//if ( (data_submitted()) && confirm_sesskey()){
-//    $save_edit = optional_param('save_edit', null, PARAM_BOOL);
-//    if (isset ($save_edit) && $save_edit == 1) {
-//        $groups_string = optional_param('groups_string', null, PARAM_TEXT);
-//        $controller->save_edit($groups_string);
+//
+//if ($_POST) {
+//    if (isset ($_POST ['save_edit'])) {
+//        if (isset ($_POST['groups_string'])) {
+//            $controller->save_edit($_POST['groups_string']);
+//        }
+//        unset ($_POST ['save_edit']);
 //    }
 //    $returnurl = new moodle_url ('/mod/groupformation/grouping_view.php', array(
 //        'id' => $id, 'do_show' => 'grouping'));
 //    redirect($returnurl);
 //}
+if ( (data_submitted()) && confirm_sesskey()){
+    $save_edit = optional_param('save_edit', null, PARAM_BOOL);
+    if (true || (isset ($save_edit) && $save_edit == 1)) {
+        $groups_string = optional_param('groups_string', null, PARAM_TEXT);
+        $controller->save_edit($groups_string);
+    }
+    $returnurl = new moodle_url ('/mod/groupformation/grouping_view.php', array(
+        'id' => $id, 'do_show' => 'grouping'));
+    redirect($returnurl);
+}
 
 // Log access to page.
 groupformation_info($USER->id, $groupformation->id, '<view_teacher_grouping>');

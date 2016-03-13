@@ -15,13 +15,18 @@
         </div>
         <div class="col_m_25 bp_align_right-middle">
             <?php foreach ($this->_['buttons'] as $button) { ?>
-
+                <?php if ($button['type']=='submit'):?>
                 <button id="<?php echo $button['id']; ?>" type="<?php echo $button['type']; ?>" name="<?php echo $button['name']; ?>"
                         value="<?php echo $button['value']; ?>"
-                        class="gf_button gf_button_pill gf_button_small" <?php echo $button['state']; ?>><?php echo $button['text']; ?></button>
-
+                        class="gf_button gf_button_pill gf_button_small" <?php echo $button['state']; ?>><?php echo $button['text']; ?>
+                </button>
+                <?php endif;?>
+                <?php if ($button['type']=='cancel'):?>
+                    <a href="<?php echo $button['value']?>"><span class="gf_button gf_button_pill gf_button_small">
+		                <?php echo $button['text']; ?>
+		            </span></a>
+                <?php endif;?>
             <?php } ?>
-
         </div>
     </div>
 </div>

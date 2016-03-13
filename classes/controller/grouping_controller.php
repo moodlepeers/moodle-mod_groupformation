@@ -535,7 +535,8 @@ class mod_groupformation_grouping_controller
         global $PAGE;
         $settingsgroupview = new mod_groupformation_template_builder ();
         $settingsgroupview->set_template('grouping_edit_header');
-
+        $url = new moodle_url ('/mod/groupformation/grouping_view.php', array(
+            'id' => $this->cmid));
 //        $settingsgroupview->assign('status', array(
 //            get_string('statusGrupping1', 'groupformation'), 0));
         $settingsgroupview->assign('buttons', array(
@@ -543,7 +544,7 @@ class mod_groupformation_grouping_controller
                 'id' => 'submit_groups', 'type' => 'submit', 'name' => 'save_edit', 'value' => '1', 'state' => '',
                 'text' => get_string('submit')),
             'button2' => array(
-                'id' => 'cancel_groups', 'type' => 'submit', 'name' => 'cancel_edit', 'value' => '1', 'state' => '',
+                'id' => 'cancel_groups', 'type' => 'cancel', 'name' => 'cancel_edit', 'value' => $url->out(), 'state' => '',
                 'text' => get_string('cancel'))
         ));
 
