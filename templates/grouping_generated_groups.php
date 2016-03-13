@@ -23,11 +23,14 @@
 <?php foreach ($this->_ as $entry) { ?>
 
     <div class="grid bottom_stripe">
-        <div class="col_s_50"><?php echo get_string('name_by_group', 'groupformation'); ?>
-            <b><?php echo $entry['groupname']; ?></b></div>
-        <div class="col_s_25"><?php echo get_string('quality', 'groupformation'); ?>
-            <b><?php echo ($entry['groupquallity'] != 0) ? $entry['groupquallity'] : "-"; ?></b>
-            <span class="toolt" tooltip="<?php echo get_string('quality_info', 'groupformation'); ?>"></span></div>
+    <div class="col_m_75">
+        <div class="group_params"><b><?php echo get_string('name_by_group', 'groupformation'); ?></b> <?php echo $entry['groupname']; ?></div>
+    </div>
+<!--        <div class="col_s_50">--><?php //echo get_string('name_by_group', 'groupformation'); ?>
+<!--            <b>--><?php //echo $entry['groupname']; ?><!--</b><<grou>git git a</grou>
+<!--        <div class="col_s_25">--><?php //echo get_string('quality', 'groupformation'); ?>
+<!--            <b>--><?php //echo ($entry['groupquallity'] != 0) ? $entry['groupquallity'] : "-"; ?><!--</b>-->
+<!--            <span class="toolt" tooltip="--><?php //echo get_string('quality_info', 'groupformation'); ?><!--"></span></div>-->
         <div class="col_m_25 bp_align_right-middle">
             <a href="<?php echo $entry['grouplink'][0]; ?>">
                 <?php if (!$entry['grouplink'][1] == 'disabled') { ?>

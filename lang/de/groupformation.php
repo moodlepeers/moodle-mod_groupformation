@@ -422,7 +422,10 @@ Meine Angaben werden am Kursende - spätestens nach 360 Tagen gelöscht.</li></u
 $string['consent_agree']='Ich bin einverstanden';
 
 $string['questionnaire_delete'] = 'Zustimmung wiederrufen';
-
+$string['groupsize'] = 'Gruppengröße';
+$string['unselect_all'] = 'Auswahl aufheben';
+$string['students_selected'] = 'Studenten in Auswahl';
+$string['select_info'] = 'Wählen Sie die Gruppenmitglieder aus um Gruppen zu bearbeiten';
 
 
 

@@ -58,24 +58,22 @@ $store = new mod_groupformation_storage_manager ($groupformation->id);
 // Set data and viewStatus of groupingView, after possible db update.
 $controller = new mod_groupformation_grouping_controller ($groupformation->id, $cm);
 
-
-if ( (data_submitted()) && confirm_sesskey()){
-
-    $start = optional_param('start', null, PARAM_BOOL);
-    $abort = optional_param('abort', null, PARAM_BOOL);
-    $adopt = optional_param('adopt', null, PARAM_BOOL);
-    $delete = optional_param('delete', null, PARAM_BOOL);
-
-
-    if (isset ($start) && $start == 1) {
+if ($_POST) {
+    if (isset ($_POST ['start'])) {
         $controller->start($course, $cm);
-    } else if (isset ($abort) && $abort == 1) {
+        unset ($_POST ['start']);
+    } else if (isset ($_POST ['abort'])) {
         $controller->abort();
-    } else if (isset ($adopt) && $adopt == 1) {
+        unset ($_POST ['abort']);
+    } else if (isset ($_POST ['adopt'])) {
         $controller->adopt();
-    } else if (isset ($edit) && $edit == 1) {
+        unset ($_POST ['adopt']);
+    } else if (isset ($_POST ['edit'])) {
         $controller->edit($cm);
-    } else if (isset ($delete) && $delete == 1) {         $controller->delete();
+        unset ($_POST ['adopt']);
+    } else if (isset ($_POST ['delete'])) {
+        $controller->delete();
+        unset ($_POST ['delete']);
     }
     $returnurl = new moodle_url ('/mod/groupformation/grouping_view.php', array(
         'id' => $id, 'do_show' => 'grouping'));
@@ -103,8 +101,6 @@ if ($store->is_archived() && has_capability('mod/groupformation:editsettings', $
     echo '<form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
 
     echo '<input type="hidden" name="id" value="' . $id . '"/>';
-    echo '<input type="hidden" name="sesskey" value="'.sesskey().'" />';
-
 
     echo $controller->display();
 

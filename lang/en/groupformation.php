@@ -424,3 +424,7 @@ $string['consent_agree']='I agree to the terms';
 
 $string['questionnaire_delete'] = 'Remove consent';
 
+$string['groupsize'] = 'Groupsize';
+$string['unselect_all'] = 'unselect all';
+$string['students_selected'] = 'Students selected';
+$string['select_info'] = 'Select group members to move them to another group';

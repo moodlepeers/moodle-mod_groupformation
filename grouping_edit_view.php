@@ -30,7 +30,7 @@ $id = optional_param('id', 0, PARAM_INT);
 $doshow = optional_param('do_show', 'grouping', PARAM_TEXT);
 
 // Import jQuery and js file.
-groupformation_add_jquery($PAGE, 'survey_functions.js');
+groupformation_add_jquery($PAGE, 'edit_groups.js');
 
 // Determine instances of course module, course, groupformation.
 groupformation_determine_instance($id, $cm, $course, $groupformation);
@@ -69,6 +69,16 @@ if ($_POST) {
         'id' => $id, 'do_show' => 'grouping'));
     redirect($returnurl);
 }
+//if ( (data_submitted()) && confirm_sesskey()){
+//    $save_edit = optional_param('save_edit', null, PARAM_BOOL);
+//    if (isset ($save_edit) && $save_edit == 1) {
+//        $groups_string = optional_param('groups_string', null, PARAM_TEXT);
+//        $controller->save_edit($groups_string);
+//    }
+//    $returnurl = new moodle_url ('/mod/groupformation/grouping_view.php', array(
+//        'id' => $id, 'do_show' => 'grouping'));
+//    redirect($returnurl);
+//}
 
 // Log access to page.
 groupformation_info($USER->id, $groupformation->id, '<view_teacher_grouping>');
@@ -86,8 +96,8 @@ require('tabs.php');
 if ($store->is_archived() && has_capability('mod/groupformation:editsettings', $context)) {
     echo '<div class="alert" id="commited_view">' . get_string('archived_activity_admin', 'groupformation') . '</div>';
 } else {
-    echo '<form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
-
+    echo '<form  action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
+    echo '<input type="hidden" name="sesskey" value="'.sesskey().'" />';
     echo '<input type="hidden" name="id" value="' . $id . '"/>';
 
     echo $controller->display_edit();
