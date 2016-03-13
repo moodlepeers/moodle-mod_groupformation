@@ -939,7 +939,11 @@
     background-color: rgb(235, 235, 235)!important;
     color: rgb(180, 180, 180) !important;
     border: 1px dashed rgb(180, 180, 180);
+    height: 34px;
+    font-size: inherit;
+
 }
+
 
 .path-mod-groupformation ul.memb_list li.add_one:hover{
     box-shadow:none;
@@ -1018,8 +1022,15 @@
 }
 
 .path-mod-groupformation .add_membs_to_g{
-    max-width: 18px;
-
+    /*background-image:url([[pix:groupformation|plus_s]]);*/
+    font-size: 2.6em;
+    line-height: 1.2em;
+    font-weight: bold;
+    color: rgb(51,51,51);
+    width: 24px;
+    height: 24px;
+    border: 0;
+    border-color: unset;
     -moz-transition: all 0.2s linear;
     -webkit-transition: all 0.2s linear;
     transition: all 0.2s linear;

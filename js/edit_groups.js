@@ -25,7 +25,7 @@ $(document).ready(function () {
         $('#groups_string').val(json);
 
         // TODO: auskommentieren um zu debuggen!
-        $('form').submit();
+        $('#edit_groups_form').submit();
 
     });
 

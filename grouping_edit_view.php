@@ -96,7 +96,7 @@ require('tabs.php');
 if ($store->is_archived() && has_capability('mod/groupformation:editsettings', $context)) {
     echo '<div class="alert" id="commited_view">' . get_string('archived_activity_admin', 'groupformation') . '</div>';
 } else {
-    echo '<form  action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
+    echo '<form id="edit_groups_form" action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
     echo '<input type="hidden" name="sesskey" value="'.sesskey().'" />';
     echo '<input type="hidden" name="id" value="' . $id . '"/>';
 

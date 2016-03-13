@@ -41,7 +41,8 @@
                 </div>
                 <div class="col_s_100 gf_group_links">
                     <div class="add_membs_block">
-                        <img id="add_to_group_img" src="<?php global $CFG; echo $CFG->dirroot . '/mod/groupformation/img/plus.png' ?>" class="add_membs_to_g"></img>
+<!--                        <img id="add_to_group_img" src="--><?php //global $CFG; echo $CFG->dirroot . '/mod/groupformation/img/plus.png' ?><!--" class="add_membs_to_g" />-->
+                        <span class="add_membs_to_g">+</span>
                     </div>
                     <ul id="<?php echo $entry['id']; ?>" class="memb_list">
                         <?php foreach ($entry['group_members'] as $user) { ?>
