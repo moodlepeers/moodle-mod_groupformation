@@ -13,23 +13,18 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
- 
 /**
- * @package   mod_groupformation
- * @copyright 2014, Nora Wester
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * Version information
+ *
+ * @package mod_groupformation
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
- 
 defined('MOODLE_INTERNAL') || die();
-$plugin->version   = 2015100300; 
-$plugin->requires  = 2014050800; //value taken from "mod_feedback"
-$plugin->cron      = 0;//1*60; // seconds
+$plugin->version = 2016030400;
+$plugin->requires = 2015050500;
+$plugin->cron = 0;
 $plugin->component = 'mod_groupformation';
-$plugin->maturity  = MATURITY_ALPHA;
-$plugin->release   = 'v1.1';
+$plugin->maturity = MATURITY_ALPHA;
+$plugin->release = 'v1.1';
 $plugin->dependencies = array();
- 
-// $plugin->dependencies = array(
-//     'mod_forum' => ANY_VERSION,
-//     'mod_data'  => TODO
-// );

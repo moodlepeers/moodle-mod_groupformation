@@ -224,13 +224,10 @@ $(document).ready(function() {
     // End of Load Settings    
     
 ///////////////////////////////////////////////////////////////////////////////////////////////     
-  
-    
-    //nach Beta wieder entkommentieren!!!
-    //$('.szenarioLabel').click(function(){
 
-    // nächste Zeile nach Beta wieder löschen!!!
-    $('#label_project, #label_homework').click(function(){
+
+    //nach Beta wieder entkommentieren!!!
+    $('.szenarioLabel').click(function(){
         if(!(typeof $("input[name='js_szenario']:checked").val() != 'undefined')){
             $('#js_szenarioWrapper').show('2000', 'swing');
         }
