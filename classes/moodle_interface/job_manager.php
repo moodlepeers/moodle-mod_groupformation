@@ -284,9 +284,18 @@ class mod_groupformation_job_manager {
 
                 return $result;
             } else {
-                $maxmembers = intval($store->get_max_members());
+                $maxgroups = intval($store->get_max_groups());
+                $topicvalues = $store->get_knowledge_or_topic_values('topic');
+                $topicvalues = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $topicvalues . ' </OPTIONS>';
+                $topicsoptions = mod_groupformation_util::xml_to_array($topicvalues);
+                $topicscount = count($topicsoptions);
 
-                return null;
+                $maxmembers = intval($store->get_max_members());
+                $array = array();
+                for ($i = 0;$i<$topicscount;$i=$i+1){
+                    $array[]=$maxmembers;
+                }
+                return $array;
             }
 
             return $sizearray;
@@ -401,6 +410,8 @@ class mod_groupformation_job_manager {
         $cohorts = array(
             $groupalcohort, $randomcohort, $topiccohort);
 
+
+
         $groupsizes = self::determine_group_size($users, $store, $groupformationid);
         ksort($groupsizes);
 
@@ -497,7 +508,6 @@ class mod_groupformation_job_manager {
 
         // Determine group sizes.
         $groupsize = self::determine_group_size($users, $store);
-
         $groupalusers = $users [0];
         $incompleteusers = $users [1];
 

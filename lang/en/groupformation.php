@@ -171,7 +171,7 @@ $string ['questionnaire_not_available'] = 'The questionnaire is currently unavai
 $string ['questionnaire_not_available_begin_end'] = 'The questionnaire is available from {$a->start} to {$a->end}.';
 $string ['questionnaire_not_available_end'] = 'The questionnaire is not available anymore.';
 $string ['info_header_student'] = 'What is the "groupformation" for?';
-$string ['info_text_student'] = 'In this Moodle-course the "groupformation" is used to build successful cooperating {$a->scenario_name}.
+$string ['info_text_student'] = 'In this Moodle course the "groupformation" is used to build successful cooperating {$a->scenario_name}.
         After you complete and submit the questionnaire, your appropriate learning partners will be determined.
         All details are kept confidential.
         <br>Once the questionnaire is expired, the groups will be generated considering your data and preferences.
@@ -213,19 +213,19 @@ $string['statusGrupping2'] = 'The group formation is in process.';
 $string['statusGrupping3'] = 'The termination of group formation is in process';
 $string['statusGrupping4'] = 'The group formation is finished. You can adopt the groups to Moodle or generate a new results by algorithm.';
 $string['statusGrupping5'] = 'The generated groups are adopted to Moodle. You can manually adjust them.';
-$string['grouping_start'] = 'start group formation';
-$string['grouping_delete'] = 'delete groups';
-$string['grouping_adopt'] = 'adopt groups';
-$string['grouping_abort'] = 'cancel generating groups';
-$string['grouping_edit'] = 'edit groups';
-$string['moodlegrouping_delete'] = 'delete moodle-groups';
+$string['grouping_start'] = 'Start group formation';
+$string['grouping_delete'] = 'Delete groups';
+$string['grouping_adopt'] = 'Adopt groups';
+$string['grouping_abort'] = 'Cancel generating groups';
+$string['grouping_edit'] = 'Edit groups';
+$string['moodlegrouping_delete'] = 'Delete moodle groups';
 $string['questionnaire_commited'] = 'Yout answers are submitted. You cant change them in this activity.';
-$string['no_data_to_display'] = 'no data to display';
+$string['no_data_to_display'] = 'No data to display';
 
 $string['onlyactivestudents'] = 'Only students with at least one submitted answer should be considered for building groups';
-$string['emailnotifications'] = 'I want to be notified by email when the groupformation job has terminated.';
+$string['emailnotifications'] = 'I want to be notified by message when the groupformation job has terminated.';
 $string['onlyactivestudents_description'] = 'Only students with at least one submitted answer should be considered for building groups';
-$string['emailnotifications_description'] = 'I want to be notified by email when the groupformation job finished.';
+$string['emailnotifications_description'] = 'I want to be notified by message when the groupformation job finished.';
 
 $string['sampleGroupName'] = 'The name of your group is ';
 $string['oneManGroup'] = 'You are a one man group.';
@@ -256,7 +256,7 @@ $string['name_by_group'] = 'Name: ';
 $string['quality'] = 'Group quality ';
 $string['quality_info'] = 'Group-Performance-Index (GPI) represents the quality of the built group and has a range between 0 and 1. The bigger the value, so much better the group. Is no value mentioned, the group is not built algorithmically, but by random.';
 $string['to_groupview'] = 'to Moodle group view';
-$string['number_member'] = 'Number of memebers: ';
+$string['number_member'] = 'Number of members: ';
 $string['kohort_index'] = 'Cohorts-Performance-Index: ';
 $string['kohort_index_info'] = 'The Cohorts-Performance-Index (KPI) represents the quality of the built groups and has a range between 0 and 1. The bigger the value, so much better the built groups.';
 $string['max_group_size'] = 'max. group size: ';
@@ -267,7 +267,7 @@ $string['statistic'] = 'Statistics of questionnaire';
 $string['group_building'] = 'Group building ';
 $string['evaluation'] = 'Evaluation';
 $string['group_overview'] = 'Overview of built groups';
-$string['max_group_size_not_reached'] = 'maximum group size has not been reached by the following groups:';
+$string['max_group_size_not_reached'] = 'Maximum group size has not been reached by the following groups:';
 $string['your_group'] = 'Your group ';
 $string['students_grouping_single'] = 'student for group building.';
 $string['students_grouping_multiple'] = 'students for group building.';
@@ -276,7 +276,7 @@ $string['students_commited_multiple'] = 'students therefrom have already commite
 $string['commited_not_completed'] = 'from the commited questionnaires are not complete.';
 $string['completed_questionnaire'] = 'completely answered questionnaires.';
 
-$string['emailnotifications_info'] = 'You will be notified via email when it is terminated.';
+$string['emailnotifications_info'] = 'You will be notified via message when it is terminated.';
 $string['onlyactivestudents_info'] = 'Only students with at least one submitted answer will be considered for building groups. You can configure it in the {$a->url}.';
 $string ['starttime'] = 'Start time';
 $string ['endtime'] = 'End time';
@@ -424,7 +424,7 @@ $string['consent_agree']='I agree to the terms';
 
 $string['questionnaire_delete'] = 'Remove consent';
 
-$string['groupsize'] = 'Groupsize';
-$string['unselect_all'] = 'unselect all';
-$string['students_selected'] = 'Students selected';
+$string['groupsize'] = 'Group size:';
+$string['unselect_all'] = 'Unselect All';
+$string['students_selected'] = 'students selected';
 $string['select_info'] = 'Select group members to move them to another group';
