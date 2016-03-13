@@ -75,6 +75,31 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/job_m
 require_once($CFG->dirroot . '/mod/groupformation/classes/controller/analysis_controller.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_parser.php');
 
+
+/* ---------- Automated test user generation ------------ */
+
+if($CFG->debug === 32767){
+    $cqt = new mod_groupformation_test_user_generator ($cm);
+
+    if ($deleteusers) {
+        $cqt->delete_test_users($groupformation->id);
+        $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
+            'id' => $id, 'do_show' => 'analysis'));
+        redirect($return->out());
+    }
+    if ($createusers > 0) {
+        $cqt->create_test_users($createusers, $groupformation->id, $createanswers, $randomanswers);
+        $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
+            'id' => $id, 'do_show' => 'analysis'));
+        redirect($return->out());
+    }
+}
+
+/* ---------- / Automated test user generation ---------- */
+
+
+
+
 $controller = new mod_groupformation_analysis_controller ($groupformation->id, $cm);
 
 
