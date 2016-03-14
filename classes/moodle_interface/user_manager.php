@@ -132,14 +132,16 @@ class mod_groupformation_user_manager {
      */
     public function get_not_completed_but_submitted($sortedby = null, $fieldset = '*') {
         global $DB;
-        $tablename = 'groupformation_started';
-        $query = "SELECT " . $fieldset . " FROM {{$tablename}} ".
-            "WHERE groupformation = ? AND completed = 1 AND answer_count <> ? ORDER BY ?" . $sortedby;
-        return $DB->get_records_sql($query, array(
-            $this->groupformationid,
-            $this->store->get_total_number_of_answers(),
-            $sortedby
-        ));
+        // HOTFIX FOR HRZ SOSE2016
+        return array();
+//        $tablename = 'groupformation_started';
+//        $query = "SELECT " . $fieldset . " FROM {{$tablename}} ".
+//            "WHERE groupformation = ? AND completed = 1 AND answer_count <> ? ORDER BY ?" . $sortedby;
+//        return $DB->get_records_sql($query, array(
+//            $this->groupformationid,
+//            $this->store->get_total_number_of_answers(),
+//            $sortedby
+//        ));
     }
 
     /**

@@ -32,10 +32,11 @@
     <div class="col_m_100"><b><?php echo $this->_['statistics_submited']; ?></b>
         <?php echo ' '.($this->_['statistics_submited']==1) ? get_string('students_commited_single', 'groupformation') : get_string('students_commited_multiple', 'groupformation'); ?></div>
 </div>
+<!-- HOTFIX FOR HRZ SOSE2016
 <div class="grid row_highlight">
-	<div class="col_m_100"><b><?php echo $this->_['statistics_submited_incomplete']; ?></b>
-        <?php echo ' '.get_string('commited_not_completed', 'groupformation');?></div>
-</div>
+	<div class="col_m_100"><b><?php //echo $this->_['statistics_submited_incomplete']; ?></b>
+        <?php //echo ' '.get_string('commited_not_completed', 'groupformation');?></div>
+</div> -->
 <div class="grid row_highlight">
     <div class="col_m_100"><?php echo get_string('are_now', 'groupformation');?> <b>
             <?php echo $this->_['statistics_submited_complete']; ?></b>
