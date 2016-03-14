@@ -461,7 +461,7 @@ class mod_groupformation_user_manager {
      */
     public function has_answers($userid, $category) {
         $firstcondition = ($this->get_answering_status($userid) > -1);
-        $secondcondition = ($this->get_answers($userid, $category) > 0);
+        $secondcondition = (count($this->get_answers($userid, $category)) > 0);
 
         return ($firstcondition && $secondcondition);
     }
