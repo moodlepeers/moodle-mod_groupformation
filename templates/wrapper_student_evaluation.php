@@ -25,7 +25,7 @@
     <div class="gf_pad_content">
         <?php if ($this->_['eval_show_text']): ?>
             <?php echo $this->_['eval_text']; ?>
-        <?php endif; ?>
+        <?php else: ?>
         <div id="json-content" style="display:none;"><?php echo $this->_['json_content']; ?>
         </div>
 
@@ -48,7 +48,7 @@
 	    	</div>
 		</div>
 
-
+		<?php endif;?>
 
 		</div> <!-- gf_pad_content -->
 </div> <!-- gf_settings_pad -->
