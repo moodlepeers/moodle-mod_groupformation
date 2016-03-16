@@ -30,7 +30,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/controller/import_expo
 // Read URL params.
 $id = optional_param('id', 0, PARAM_INT);
 $doshow = optional_param('do_show', 'import_export', PARAM_TEXT);
-
+$currenttab = $doshow;
 // Determine instances of course module, course, groupformation.
 groupformation_determine_instance($id, $cm, $course, $groupformation);
 
