@@ -427,7 +427,8 @@ $string['unselect_all'] = 'Auswahl aufheben';
 $string['students_selected'] = 'Studenten in Auswahl';
 $string['select_info'] = 'Wählen Sie die Gruppenmitglieder aus, um Gruppen zu bearbeiten';
 
-
+$string['topic_group_info'] = 'Euer Thema ist';
+$string['topic'] = "Thema";
 
 
 

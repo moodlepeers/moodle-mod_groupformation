@@ -428,3 +428,6 @@ $string['groupsize'] = 'Group size:';
 $string['unselect_all'] = 'Unselect All';
 $string['students_selected'] = 'students selected';
 $string['select_info'] = 'Select group members to move them to another group';
+
+$string['topic_group_info'] = 'Your topic is';
+$string['topic'] = "Topic";

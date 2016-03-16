@@ -488,6 +488,14 @@ class mod_groupformation_grouping_controller
     {
         $generatedgroupsview = new mod_groupformation_template_builder ();
 
+        $topics = $this->store->ask_for_topics();
+        $options = null;
+        if ($topics){
+            $xmlcontent = $this->store->get_knowledge_or_topic_values('topic');
+            $xmlcontent = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $xmlcontent . ' </OPTIONS>';
+            $options = mod_groupformation_util::xml_to_array($xmlcontent);
+        }
+
         if ($this->viewstate == 4 || $this->viewstate == 5) {
 
             $generatedgroupsview->set_template('grouping_generated_groups');
@@ -496,7 +504,15 @@ class mod_groupformation_grouping_controller
 
                 $gpi = (is_null($value->performance_index)) ? '-' : $value->performance_index;
 
+                $pos = strrpos($value->groupname,"_");
+                $number = substr($value->groupname,$pos+1,strlen($value->groupname)-$pos);
+                $title = "";
+                if ($topics){
+                    $title = $options[$number-1];
+                }
+
                 $generatedgroupsview->assign($key, array(
+                    'topic' => $title,
                     'groupname' => $value->groupname, 'groupquallity' => $gpi,
                     'grouplink' => $this->get_group_link($value->moodlegroupid),
                     'group_members' => $this->get_group_members($key)));
@@ -612,7 +628,6 @@ class mod_groupformation_grouping_controller
 //                        'group_members' => $group_members)
 //                ));
             }
-
             $generatedgroupsview->assign('generated_groups', $generated_groups);
 
             $v = array();

@@ -24,7 +24,10 @@
 
     <div class="grid bottom_stripe">
     <div class="col_m_75">
-        <div class="group_params"><b><?php echo get_string('name_by_group', 'groupformation'); ?></b> <?php echo $entry['groupname']; ?></div>
+        <div class="group_params"><b><?php echo get_string('name_by_group', 'groupformation'); ?></b> <?php echo $entry['groupname']; ?></div><br>
+        <?php if (strlen($entry['topic'])>0){ ?>
+            <div class="group_params"><b><?php echo get_string('topic', 'groupformation').": "; ?></b> <?php echo $entry['topic']; ?></div>
+        <?php }?>
     </div>
 <!--        <div class="col_s_50">--><?php //echo get_string('name_by_group', 'groupformation'); ?>
 <!--            <b>--><?php //echo $entry['groupname']; ?><!--</b><<grou>git git a</grou>

@@ -611,11 +611,11 @@ class mod_groupformation_job_manager {
 
         if (!is_null($topiccohort)) {
             $result = $topiccohort->getResult();
-
+            var_dump($result);
             $flags = array(
-                "groupal" => 0, "random" => 1, "mrandom" => 0, "created" => 0, "topic" => 1);
+                "groupal" => 0, "random" => 0, "mrandom" => 0, "created" => 0, "topic" => 1);
 
-            $idmap = self::create_groups($job, $result->groups, $flags);
+            $idmap = self::create_groups($job, $result->groups, $flags, true);
 
             self::assign_users_to_groups($job, $result->users, $idmap);
         }
@@ -663,7 +663,7 @@ class mod_groupformation_job_manager {
      * @param $flags
      * @return array
      */
-    private static function create_groups($job, $groups, $flags) {
+    private static function create_groups($job, $groups, $flags, $topics = false) {
         $groupformationid = $job->groupformationid;
 
         $groupsmanager = new mod_groupformation_groups_manager ($groupformationid);
@@ -675,16 +675,28 @@ class mod_groupformation_job_manager {
 
         $i = $store->get_instance_number();
 
-        $groupname = "G" . $i . "_" . $groupnameprefix . "_";
+        $groupname = "G" . $i . "_" . $groupnameprefix;
 
         if (strlen($groupnameprefix) < 1) {
-            $groupname = "G" . $i . "_" . substr($groupformationname, 0, 8) . "_";
+            $groupname = "G" . $i . "_" . substr($groupformationname, 0, 8);
+        }
+
+        if ($topics){
+            $xmlcontent = $store->get_knowledge_or_topic_values('topic');
+            $xmlcontent = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $xmlcontent . ' </OPTIONS>';
+            $options = mod_groupformation_util::xml_to_array($xmlcontent);
         }
 
         $ids = array();
         foreach ($groups as $groupalid => $group) {
+            $name = "";
+            if ($topics){
+                $name = $groupname . "_" .$options[$groupalid-1];
+            }else{
+                $name = $groupname;
+            }
             if (count($group ['users']) > 0) {
-                $name = $groupname . strval($groupalid);
+                $name = $name . "_" . strval($groupalid);
                 $dbid = $groupsmanager->create_group($groupalid, $group, $name, $groupformationid, $flags);
                 $ids [$groupalid] = $dbid;
             }

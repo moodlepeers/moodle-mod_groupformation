@@ -24,6 +24,7 @@
     </div>
     <div class="gf_pad_content">
         <p><?php echo $this->_['group_info_contact']; ?></p>
+        <p><?php echo $this->_['topic_info'];?></p>
         <p><?php echo $this->_['group_info']; ?></p>
 
         <?php foreach($this->_['members'] as $row) { ?>
