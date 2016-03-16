@@ -421,7 +421,7 @@ erhalten Feedback zu meinen Persönlichkeitsmerkmalen, sowie zum Durchschnittsve
 Meine Angaben werden am Kursende - spätestens nach 360 Tagen gelöscht.</li></ul>';
 $string['consent_agree']='Ich bin einverstanden';
 
-$string['questionnaire_delete'] = 'Zustimmung wiederrufen';
+$string['questionnaire_delete'] = 'Zustimmung widerrufen';
 $string['groupsize'] = 'Gruppengröße: ';
 $string['unselect_all'] = 'Auswahl aufheben';
 $string['students_selected'] = 'Studenten in Auswahl';
