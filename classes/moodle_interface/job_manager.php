@@ -691,7 +691,7 @@ class mod_groupformation_job_manager {
         foreach ($groups as $groupalid => $group) {
             $name = "";
             if ($topics){
-                $name = $groupname . "_" .$options[$groupalid-1];
+                $name = $groupname . "_" .substr($options[$groupalid-1],0,5);
             }else{
                 $name = $groupname;
             }
