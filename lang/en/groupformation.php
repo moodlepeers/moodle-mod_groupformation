@@ -302,7 +302,7 @@ $string['export_group_users'] = 'You can download all group-users relations with
 $string['export_logging'] = 'You can download all logging data with anonymized user ids here: ';
 $string['export_description_no'] = 'You cannot export your answers since you have not answered any questions in the exportable categories.';
 $string['export_description_yes'] = 'You can export your answers by clicking on the button below.';
-$string['import_description_yes'] = 'You can import your answers by clicking on the button below and uploading a file with exportable answer format. With uploading your answers you automatically agree to the following terms:';
+$string['import_description_yes'] = 'You can import your answers by clicking on the button below and uploading a file with exportable answer format.';
 $string['import_description_no'] = 'You cannot import your answers because you submitted your answers already or the questionnaire is not available.';
 $string['import_form_description'] = 'You can import your answers from previous questionnaires by submitting an "answers.xml" file below.';
 
@@ -417,6 +417,7 @@ $string['eval_caption_course']='Course';
 $string['consent_alert_message'] = 'You need give consent before accessing the questionnaire. Scroll down and agree to terms before clicking on "Next".';
 $string['consent_opt_in'] = 'Consent (opt-in)';
 $string['consent_header'] = 'I want to participate in the groupformation plugin and agree to submit answers to the questionnaire. The participation or non-participation has no impact on the grading process (or the credit points).';
+$string['consent_header_import'] = 'By importing your answers, you agree to participate in the groupformation plugin and you agree to submit answers to the questionnaire. The participation or non-participation has no impact on the grading process (or the credit points).';
 $string['consent_message'] = '<ul><li>
 The teacher has no direct access to my answers for the group formation (just I am able to access the evaluation about my personality as well as the group average).
 </li><li>

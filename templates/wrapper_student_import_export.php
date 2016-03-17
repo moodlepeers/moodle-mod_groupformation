@@ -23,6 +23,7 @@
     <div class="gf_pad_header"><?php echo get_string('import', 'groupformation'); ?></div>
     <div class="gf_pad_content">
         <p><?php echo $this->_['import_description']; ?></p>
+        <p><?php echo get_string('consent_header_import','groupformation'); ?><p>
         <p><?php echo get_string('consent_message', 'groupformation'); ?></p>
 
         <p>
