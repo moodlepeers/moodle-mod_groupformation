@@ -20,7 +20,7 @@
  */
 ?>
 <div class="gf_settings_pad">
-    <div class="gf_pad_header"><?php echo get_string('group_building', 'groupformation'); ?>
+    <div class="gf_pad_header"><?php echo get_string('overview', 'groupformation'); ?>
         - <?php echo $this->_['student_overview_title']; ?>
     </div>
     <div class="gf_pad_content">
