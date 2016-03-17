@@ -294,6 +294,7 @@ class mod_groupformation_student_overview_controller {
             $surveyoptionsview->set_template('students_overview_options');
             $surveyoptionsview->assign('buttons', $this->buttonsarray);
             $surveyoptionsview->assign('buttons_infos', $this->buttonsinfo);
+            $surveyoptionsview->assign('consentheader',get_string('consent_header','groupformation'));
             $surveyoptionsview->assign('consenttext',get_string('consent_message','groupformation'));
             $surveyoptionsview->assign('consentvalue',$this->usermanager->get_consent($this->userid));
             $this->view->assign('student_overview_survey_options', $surveyoptionsview->load_template());

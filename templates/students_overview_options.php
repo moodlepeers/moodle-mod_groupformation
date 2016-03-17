@@ -36,6 +36,9 @@
                     </div>
                     <div>
                         <p>
+                            <?php echo get_string('consent_header','groupformation');?>
+                        </p>
+                        <p>
                             <?php echo get_string('consent_message','groupformation');?>
                         </p>
                     </div>

@@ -416,6 +416,7 @@ $string['eval_caption_course']='Course';
 
 $string['consent_alert_message'] = 'You need give consent before accessing the questionnaire. Scroll down and agree to terms before clicking on "Next".';
 $string['consent_opt_in'] = 'Consent (opt-in)';
+$string['consent_header'] = 'I want to participate in the groupformation plugin and agree to submit answers to the questionnaire. The participation or non-participation has no impact on the grading process (or the credit points).';
 $string['consent_message'] = '<ul><li>
 The teacher has no direct access to my answers for the group formation (just I am able to access the evaluation about my personality as well as the group average).
 </li><li>
