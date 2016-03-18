@@ -13,12 +13,14 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
- * Load the xml-based questions
+ * This file contains a xml loader class
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
 
@@ -27,7 +29,13 @@ if (!defined('MOODLE_INTERNAL')) {
 }
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
-
+/**
+ * Load the xml-based questions
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_xml_loader {
 
     /** @var mod_groupformation_storage_manager */
@@ -35,7 +43,8 @@ class mod_groupformation_xml_loader {
 
     /**
      * mod_groupformation_xml_loader constructor.
-     * @param mod_groupformation_storage_manager|null $store
+     *
+     * @param mod_groupformation_storage_manager $store
      */
     public function __construct(mod_groupformation_storage_manager $store = null) {
         $this->store = $store;
@@ -44,7 +53,7 @@ class mod_groupformation_xml_loader {
     /**
      * Deletes old questions and updates with new questions
      *
-     * @param $category
+     * @param string $category
      * @return array
      */
     public function save_data($category) {
@@ -62,7 +71,7 @@ class mod_groupformation_xml_loader {
     /**
      * Checks whether the version is old and needs to be updated and updates the version
      *
-     * @param $category
+     * @param string $category
      */
     public function latest_version($category) {
         global $CFG;
@@ -91,8 +100,8 @@ class mod_groupformation_xml_loader {
     /**
      * Returns an array with version and number of answers
      *
-     * @param $category
-     * @param $lang
+     * @param string $category
+     * @param string $lang
      * @return array
      */
     private function save($category, $lang) {

@@ -16,22 +16,32 @@
 /**
  * Define file for questionnaires
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.');
 }
 
+/**
+ * This is the data class with all useful definitions and config values
+ *
+ * @package     mod_groupformation
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_data {
 
+    /** @var array scenarios for activity */
     private $scenarios = array(
         1 => 'projectteams',
         2 => 'homeworkgroups',
         3 => 'presentationgroups',
     );
 
+    /** @var array criteria for groupal etc. */
     private $criteria = array(
         "big5" => array(
             "category" => "character",
@@ -208,6 +218,7 @@ class mod_groupformation_data {
         ),
     );
 
+    /** @var array category sets for scenarios */
     private $categorysets = array(
         '1' => array(
             'general',
@@ -243,7 +254,7 @@ class mod_groupformation_data {
     /**
      * Returns extra labels for criteria like fam, learning, big5_xxx
      *
-     * @param $label
+     * @param string $label
      * @return array
      */
     public function get_extra_labels($label) {
@@ -285,7 +296,7 @@ class mod_groupformation_data {
     /**
      * Returns critetion specification
      *
-     * @param $name
+     * @param string $name
      * @return mixed
      */
     public function get_criterion_specification($name = null) {

@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This is a csv writer for exporting DB data
+ * This file contains a csv writer class
  *
  * @package     mod_groupformation
  * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
@@ -27,6 +27,13 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
 
+/**
+ * This is a csv writer for exporting DB data
+ *
+ * @package     mod_groupformation
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_csv_writer {
 
     /** @var cm_info */
@@ -52,8 +59,9 @@ class mod_groupformation_csv_writer {
 
     /**
      * mod_groupformation_csv_writer constructor.
-     * @param $cm
-     * @param $groupformationid
+     *
+     * @param cm_info $cm
+     * @param int $groupformationid
      */
     public function __construct($cm, $groupformationid) {
         $this->cm = $cm;
@@ -67,7 +75,8 @@ class mod_groupformation_csv_writer {
 
     /**
      * Returns data by type
-     * @param $type
+     *
+     * @param string $type
      * @return string
      */
     public function get_data($type) {
@@ -87,7 +96,8 @@ class mod_groupformation_csv_writer {
 
     /**
      * Returns a csv-formatted string of a record
-     * @param $record
+     *
+     * @param stdClass $record
      * @param bool|false $title
      * @return string
      */
@@ -105,7 +115,7 @@ class mod_groupformation_csv_writer {
     /**
      * Returns a csv-formatted string of all records
      *
-     * @param $records
+     * @param array $records
      * @return string
      */
     public function records_to_csv($records) {
@@ -187,6 +197,11 @@ class mod_groupformation_csv_writer {
         return $csv;
     }
 
+    /**
+     * Returns users for activity
+     *
+     * @return string
+     */
     public function get_users() {
         $groupusers = $this->groupsmanager->get_group_users('userid', 'userid,groupid,groupformation');
         $categories = $this->store->get_categories();

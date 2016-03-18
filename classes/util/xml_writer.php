@@ -14,16 +14,31 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
+ * This file contains a xml writer class
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+if (!defined('MOODLE_INTERNAL')) {
+    die ('Direct access to this script is forbidden.');
+}
+/**
  * An XML Writer for student
  *
- * @author Rene Roepke
- *
+ * @package     mod_groupformation
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class mod_groupformation_xml_writer {
 
     /** @var XMLWriter This is the writer instance used to create xml */
     private $writer;
 
+    /**
+     * mod_groupformation_xml_writer constructor.
+     */
     public function __construct() {
         $this->writer = new XMLWriter ();
         $this->writer->openMemory();

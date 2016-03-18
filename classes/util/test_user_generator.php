@@ -15,21 +15,36 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Test user generator
+ * this file contains a test user generator class
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+if (!defined('MOODLE_INTERNAL')) {
+    die ('Direct access to this script is forbidden.');
+}
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/controller/grouping_controller.php');
-
+/**
+ * Test user generator class
+ *
+ * @package     mod_groupformation
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_test_user_generator {
 
-    /** @var cm_info */
+    /** @var cm_info course module infos*/
     private $cm;
 
+    /**
+     * mod_groupformation_test_user_generator constructor.
+     *
+     * @param cm_info $cm
+     */
     public function __construct($cm = null) {
         $this->cm = $cm;
     }
@@ -46,8 +61,10 @@ class mod_groupformation_test_user_generator {
     }
 
     /**
-     * @param $n
-     * @param $groupformationid
+     * Creates test users
+     *
+     * @param int $n
+     * @param int $groupformationid
      * @param bool|false $setanswers
      * @param bool|false $randomized
      * @return bool
@@ -163,7 +180,9 @@ class mod_groupformation_test_user_generator {
     }
 
     /**
-     * @param $groupformationid
+     * Deletes test users
+     *
+     * @param int $groupformationid
      * @return bool
      */
     public function delete_test_users($groupformationid) {

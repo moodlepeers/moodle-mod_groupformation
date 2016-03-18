@@ -14,11 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * Utility class for various methods
+ * This file contains a utility class
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.');
@@ -26,7 +27,13 @@ if (!defined('MOODLE_INTERNAL')) {
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once(dirname(__FILE__) . '/define_file.php');
-
+/**
+ * Utility class for various methods
+ *
+ * @package     mod_groupformation
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_util {
 
     /**
@@ -117,8 +124,8 @@ class mod_groupformation_util {
     /**
      * Computes stats about answered and misssing questions
      *
-     * @param $groupformationid
-     * @param $userid
+     * @param int $groupformationid
+     * @param int $userid
      * @return array
      */
     public static function get_stats($groupformationid, $userid) {
@@ -149,7 +156,7 @@ class mod_groupformation_util {
     /**
      * Converts OPTIONS xml to array
      *
-     * @param $xmlcontent
+     * @param string $xmlcontent
      * @return array
      */
     public static function xml_to_array($xmlcontent) {
