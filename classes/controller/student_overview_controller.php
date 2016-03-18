@@ -15,10 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * This file contains a controller class for overview
  *
- * @package mod_groupformation
- * @@author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author     Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 if (!defined('MOODLE_INTERNAL')) {
@@ -32,24 +34,57 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/group_generator.php');
 
+/**
+ * Controller for student overview
+ *
+ * @package     mod_groupformation
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_student_overview_controller {
+
+    /** @var int id of the course module */
     private $cmid;
+
+    /** @var int id of the user */
     private $userid;
+
+    /** @var int id of the activity */
     private $groupformationid;
+
+    /** @var mod_groupformation_storage_manager Storage manager */
     private $store;
+
+    /** @var mod_groupformation_groups_manager Groups manager */
     private $groupsmanager;
+
+    /** @var mod_groupformation_user_manager User manager */
     private $usermanager;
+
+    /** @var int current view state of the activity */
     private $viewstate;
+
+    /** @var array current activity state information */
     private $groupformationstateinfo = array();
+
+    /** @var array current buttons */
     private $buttonsarray = array();
+
+    /** @var string current button info */
     private $buttonsinfo;
-    private $surveystatesarray = array();
+
+    /** @var array current questionnaire state information */
+    private $questionnairestatearray = array();
+
+    /** @var string current information text for student */
     private $groupformationinfo;
-    private $surveystatestitle = '';
+
+    /** @var mod_groupformation_template_builder template builder for view */
     private $view = null;
 
     /**
-     * mod_groupformation_student_overview_controller constructor.
+     * Constructor for studentent overview controller
+     *
      * @param $cmid
      * @param $groupformationid
      * @param $userid
@@ -206,8 +241,7 @@ class mod_groupformation_student_overview_controller {
                 }
             }
         }
-        $this->surveystatestitle = get_string('questionnaire_answer_stats', 'groupformation');
-        $this->surveystatesarray = $array;
+        $this->questionnairestatearray = $array;
     }
 
     /**
@@ -275,8 +309,8 @@ class mod_groupformation_student_overview_controller {
         if ($this->viewstate == 0) {
             $surveystatsview = new mod_groupformation_template_builder ();
             $surveystatsview->set_template('students_overview_survey_states');
-            $surveystatsview->assign('survey_states', $this->surveystatesarray);
-            $surveystatsview->assign('questionnaire_answer_stats', $this->surveystatestitle);
+            $surveystatsview->assign('survey_states', $this->questionnairestatearray);
+            $surveystatsview->assign('questionnaire_answer_stats',get_string('questionnaire_answer_stats', 'groupformation'));
             $this->view->assign('student_overview_survey_state_temp', $surveystatsview->load_template());
         } else {
             $this->view->assign('student_overview_survey_state_temp', '');
