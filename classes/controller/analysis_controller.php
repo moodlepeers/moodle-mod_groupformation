@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Controller for analysis view
+ * This file contains an controller class for analysis view
  *
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @package    mod_groupformation
@@ -29,11 +29,22 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
 
+/**
+ * Controller for analysis view
+ *
+ * @package     mod_groupformation
+ * @copyright   2015 MoodlePeers
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_analysis_controller {
 
     /** @var int The id of the groupformation activity */
     private $groupformationid;
+
+    /** @var cm_info The course module info */
     private $cm;
+
+    /** @var string state of the current job */
     private $jobstate;
 
     /** @var mod_groupformation_storage_manager The manager of activity data */
@@ -42,19 +53,20 @@ class mod_groupformation_analysis_controller {
     /** @var mod_groupformation_user_manager The manager of user data */
     private $usermanager;
 
+    /** @var mod_groupformation_template_builder The template builder for the view */
     private $view = null;
+
+    /** @var bool Indicates whether the questionnaire is currently available or not */
     private $questionnaireavailable;
-    private $activitytime;
-    private $starttime;
-    private $endtime;
-    private $timenow;
-    private $test;
+
+    /** @var int Current state of the activity */
     private $state;
 
     /**
      * Creates instance of analysis controller
      *
-     * @param int $groupformationid
+     * @param $groupformationid
+     * @param $cm
      */
     public function __construct($groupformationid, $cm) {
         $this->cm = $cm;
@@ -65,8 +77,11 @@ class mod_groupformation_analysis_controller {
         $this->determine_status();
     }
 
-
-
+    /**
+     * Switches the questionnaire between open and closed
+     *
+     * @param $switcher
+     */
     public function trigger_questionnaire($switcher){
 
         switch($switcher){
@@ -95,18 +110,16 @@ class mod_groupformation_analysis_controller {
         $statusanalysisview = new mod_groupformation_template_builder();
         $statusanalysisview->set_template('analysis_status');
 
-        $this->activitytime = $this->store->get_time();
+        $activitytime = $this->store->get_time();
+        $starttime = $activitytime ['start'];
+        $endtime = $activitytime ['end'];
 
-        if (intval($this->activitytime ['start_raw']) == 0) {
-            $this->starttime = get_string('no_time', 'groupformation');
-        } else {
-            $this->starttime = $this->activitytime ['start'];
+        if (intval($activitytime ['start_raw']) == 0) {
+            $starttime = get_string('no_time', 'groupformation');
         }
 
-        if (intval($this->activitytime ['end_raw']) == 0) {
-            $this->endtime = get_string('no_time', 'groupformation');
-        } else {
-            $this->endtime = $this->activitytime ['end'];
+        if (intval($activitytime ['end_raw']) == 0) {
+            $endtime = get_string('no_time', 'groupformation');
         }
 
         $buttonvalue = ($this->questionnaireavailable) ? -1 : 1;
@@ -121,8 +134,8 @@ class mod_groupformation_analysis_controller {
         $infoteacher = mod_groupformation_util::get_info_text_for_teacher(false, "analysis");
 
         $statusanalysisview->assign('info_teacher', $infoteacher);
-        $statusanalysisview->assign('analysis_time_start', $this->starttime);
-        $statusanalysisview->assign('analysis_time_end', $this->endtime);
+        $statusanalysisview->assign('analysis_time_start', $starttime);
+        $statusanalysisview->assign('analysis_time_end', $endtime);
 
         switch ($this->state) {
             case 1 :
