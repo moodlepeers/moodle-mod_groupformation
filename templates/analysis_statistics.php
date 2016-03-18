@@ -13,6 +13,14 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+/**
+ * Analysis statistics view for template builder
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 ?>
 <div class="grid row_highlight">
     <div class="col_m_100"><?php echo get_string('are', 'groupformation');?>
