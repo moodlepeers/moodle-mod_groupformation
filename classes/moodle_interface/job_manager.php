@@ -15,11 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Handles job
+ * This file contains the job manager class
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.');
@@ -41,8 +42,16 @@ require_once($CFG->dirroot . '/lib/groupal/classes/optimizers/optimizer.php');
 require_once($CFG->dirroot . '/lib/groupal/classes/xml_writers/participant_writer.php');
 require_once($CFG->dirroot . '/lib/groupal/classes/xml_writers/cohort_writer.php');
 
+/**
+ * Job manager class
+ *
+ * @package     mod_groupformation
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_job_manager {
 
+    /** @var array job status options */
     private static $jobstatusoptions = array(
         'ready' => '0000', 'waiting' => '1000', 'started' => '0100', 'aborted' => '0010', 'done' => '0001');
 
@@ -105,10 +114,10 @@ class mod_groupformation_job_manager {
     /**
      * Sets job to state e.g. 1000
      *
-     * @param $job
+     * @param stdClass $job
      * @param string $state
-     * @param bool|false $settime
-     * @param bool|false $resettime
+     * @param bool $settime
+     * @param bool $resettime
      * @param null $groupingid
      * @return bool
      */
@@ -175,7 +184,6 @@ class mod_groupformation_job_manager {
     }
 
     /**
-     *
      * Checks whether job is aborted or not
      *
      * @param stdClass $job
@@ -189,10 +197,12 @@ class mod_groupformation_job_manager {
     }
 
     /**
-     * @param $job
-     * @param $groupformationid
+     * Returns users for job
+     *
+     * @param stdClass $job
+     * @param int $groupformationid
      * @param mod_groupformation_storage_manager $store
-     * @return array|null
+     * @return array|null#
      */
     private static function get_users($job, $groupformationid, mod_groupformation_storage_manager $store) {
         $courseid = $store->get_course_id();
@@ -242,7 +252,7 @@ class mod_groupformation_job_manager {
     /**
      * Determines the group size for groupal and random algorithm
      *
-     * @param $users
+     * @param array $users
      * @param mod_groupformation_storage_manager $store
      * @param null $groupformationid
      * @return array|null
@@ -386,9 +396,9 @@ class mod_groupformation_job_manager {
     /**
      * Runs topic-based algorithm
      *
-     * @param $job
-     * @param $users
-     * @param $store
+     * @param stdClass $job
+     * @param array $users
+     * @param mod_groupformation_storage_manager $store
      * @return array
      */
     private static function run_topic_algorithm($job, $users, $store) {
@@ -477,9 +487,9 @@ class mod_groupformation_job_manager {
     /**
      * Runs basic groupal-based algorithm
      *
-     * @param $job
-     * @param $users
-     * @param $store
+     * @param stdClass $job
+     * @param array $users
+     * @param mod_groupformation_storage_manager $store
      * @return array
      */
     private static function run_basic_algorithm($job, $users, $store) {
@@ -620,7 +630,7 @@ class mod_groupformation_job_manager {
     /**
      * Saves stats for computed job
      *
-     * @param $job
+     * @param stdClass $job
      * @param null $groupalcohort
      */
     private static function save_stats($job, &$groupalcohort = null) {
@@ -648,9 +658,9 @@ class mod_groupformation_job_manager {
     /**
      * Creates groups
      *
-     * @param $job
-     * @param $groups
-     * @param $flags
+     * @param stdClass$job
+     * @param array $groups
+     * @param array $flags
      * @return array
      */
     private static function create_groups($job, $groups, $flags) {
@@ -684,12 +694,11 @@ class mod_groupformation_job_manager {
     }
 
     /**
-     *
      * Assign users to groups
      *
      * @param stdClass $job
-     * @param unknown $users
-     * @param unknown $idmap
+     * @param array $users
+     * @param array $idmap
      */
     private static function assign_users_to_groups($job, $users, $idmap) {
         $groupformationid = $job->groupformationid;
@@ -704,7 +713,8 @@ class mod_groupformation_job_manager {
     /**
      * Creates job for groupformation instance
      *
-     * @param integer $groupformationid
+     * @param int $groupformationid
+     * @param int $groupingid
      */
     public static function create_job($groupformationid, $groupingid = 0) {
         global $DB;
@@ -726,8 +736,8 @@ class mod_groupformation_job_manager {
     /**
      * Updates job record
      *
-     * @param unknown $groupformationid
-     * @param unknown $groupingid
+     * @param int $groupformationid
+     * @param int $groupingid
      */
     public static function update_job($groupformationid, $groupingid) {
         global $DB;
@@ -761,7 +771,7 @@ class mod_groupformation_job_manager {
      * Returns job status -> to compare use $data->get_job_status_options()
      *
      * @param stdClass $job
-     * @return String
+     * @return string
      */
     public static function get_status($job) {
         $statusoptions = array_keys(self::$jobstatusoptions);
@@ -782,7 +792,7 @@ class mod_groupformation_job_manager {
      * Notifies teacher about terminated groupformation job
      *
      * @param stdClass $job
-     * @return NULL
+     * @return null
      */
     public static function notify_teacher($job) {
         global $DB, $CFG;

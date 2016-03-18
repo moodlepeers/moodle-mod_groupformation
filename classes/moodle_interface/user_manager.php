@@ -15,17 +15,27 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Interface for user-related activity data in DB
+ * This file contains the user manager class
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.');
 }
 
+/**
+ * User manager class
+ *
+ * @package     mod_groupformation
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_user_manager {
+
+    /** @var int id of groupformation */
     private $groupformationid;
 
     /**
@@ -174,9 +184,9 @@ class mod_groupformation_user_manager {
     }
 
     /**
-     * set status to complete
+     * Set status to complete
      *
-     * @param $userid
+     * @param int $userid
      * @param bool|false $completed
      */
     public function set_status($userid, $completed = false) {
@@ -205,7 +215,7 @@ class mod_groupformation_user_manager {
     /**
      * Changes status of questionaire for a specific user
      *
-     * @param $userid
+     * @param int $userid
      * @param bool|false $complete
      */
     public function change_status($userid, $complete = false) {
@@ -229,7 +239,7 @@ class mod_groupformation_user_manager {
      * 1 completed
      * -1 otherwise
      *
-     * @param $userid
+     * @param int $userid
      * @return int|mixed
      */
     public function get_answering_status($userid) {
@@ -334,8 +344,8 @@ class mod_groupformation_user_manager {
     /**
      * Returns all answers of a specific user in a specific category
      *
-     * @param $userid
-     * @param $category
+     * @param int $userid
+     * @param string $category
      * @param null $sortedby
      * @param string $fieldset
      * @return array
@@ -389,10 +399,10 @@ class mod_groupformation_user_manager {
     /**
      * Saves answer
      *
-     * @param $userid
-     * @param $category
-     * @param $answer
-     * @param $questionid
+     * @param int $userid
+     * @param string $category
+     * @param int $answer
+     * @param int $questionid
      */
     public function save_answer($userid, $category, $answer, $questionid) {
         global $DB;
@@ -453,8 +463,8 @@ class mod_groupformation_user_manager {
     /**
      * Returns whether a user has answers in a specific category or not
      *
-     * @param $userid
-     * @param $category
+     * @param int $userid
+     * @param string $category
      * @return bool
      */
     public function has_answers($userid, $category) {
@@ -467,7 +477,7 @@ class mod_groupformation_user_manager {
     /**
      * Returns the most chosen topics wrt the users
      *
-     * @param $numberoftopics
+     * @param int $numberoftopics
      * @return array
      */
     public function get_most_common_topics($numberoftopics) {

@@ -16,11 +16,12 @@
 
 
 /**
- * Interface betweeen DB and Plugin
+ * This file contains the storage manager class
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.');
@@ -30,10 +31,23 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/group
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 require_once($CFG->dirroot . '/group/lib.php');
 
+/**
+ * Storage manager class
+ *
+ * @package     mod_groupformation
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_storage_manager {
-    private $groupformationid;
+
+    /** @var mod_groupformation_data Define file class*/
     private $data;
-    private $gm;
+
+    /** @var int id of groupformation */
+    private $groupformationid;
+
+    /** @var mod_groupformation_groups_manager Groups manager */
+    private $groupsmanager;
 
     /**
      * Constructs storage manager for a specific groupformation
@@ -43,7 +57,7 @@ class mod_groupformation_storage_manager {
     public function __construct($groupformationid) {
         $this->groupformationid = $groupformationid;
         $this->data = new mod_groupformation_data ();
-        $this->gm = new mod_groupformation_groups_manager ($groupformationid);
+        $this->groupsmanager = new mod_groupformation_groups_manager ($groupformationid);
     }
 
     /**
@@ -63,7 +77,7 @@ class mod_groupformation_storage_manager {
     /**
      * Returns whether the activity is accessible
      *
-     * @param $userid
+     * @param int $userid
      * @return bool
      */
     public function is_accessible($userid) {
@@ -306,7 +320,7 @@ class mod_groupformation_storage_manager {
     /**
      * Returns an array with number of questions in each category
      *
-     * @param $categories
+     * @param array $categories
      * @return array
      */
     public function get_numbers($categories) {
@@ -322,7 +336,7 @@ class mod_groupformation_storage_manager {
     /**
      * Returns possible language
      *
-     * @param unknown $category
+     * @param string $category
      * @return mixed
      */
     public function get_possible_language($category) {
@@ -838,6 +852,11 @@ class mod_groupformation_storage_manager {
         return $evaluationmethod == 1;
     }
 
+    /**
+     * Returns users for activity
+     *
+     * @return array
+     */
     public function get_users() {
         global $PAGE;
         $courseid = $this->get_course_id();
