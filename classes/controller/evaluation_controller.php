@@ -51,7 +51,7 @@ class mod_groupformation_evaluation_controller {
     /** @var int This is the id of the activity */
     private $groupformationid;
 
-    /** @var mod_groupformation_template_builder|null */
+    /** @var mod_groupformation_template_builder Template builder for view */
     private $view = null;
 
     /**
