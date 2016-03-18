@@ -324,7 +324,7 @@ class mod_groupformation_questionnaire_controller {
 
     /**
      * Returns question array constructed by question record
-     * 
+     *
      * @param $i
      * @param $record
      * @param $hasanswers
