@@ -14,11 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * The main groupformation configuration form
+ * This file contains the main groupformation configuration form
  *
- * @package mod_groupformation
- * @copyright 2014 Nora Wester
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 if (!defined('MOODLE_INTERNAL')) {
@@ -33,7 +34,16 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/util/xml_loader.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 
+/**
+ * The main groupformation configuration form
+ *
+ * @package     mod_groupformation
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_mod_form extends moodleform_mod {
+
+    /** @var mod_groupformation_storage_manager Storage manager */
     private $store;
 
     /**
@@ -115,9 +125,12 @@ class mod_groupformation_mod_form extends moodleform_mod {
     }
 
     /**
-     * (non-PHPdoc)
+     * Validation method
      *
-     * @see moodleform_mod::validation()
+     * @param array $data
+     * @param array $files
+     * @return array
+     * @throws coding_exception
      */
     public function validation($data, $files) {
         $errors = array();

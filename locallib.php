@@ -20,10 +20,10 @@
  * All the newmodule specific functions, needed to implement the module
  * logic, should go here. Never include this file from your lib.php!
  *
- * @package    mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @copyright  2015 MoodlePeers
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die ();
 
@@ -159,6 +159,7 @@ function groupformation_get_context($groupformationid) {
 }
 
 /**
+ * Set activity completion
  *
  * @param stdClass $course
  * @param stdClass $cm
@@ -170,12 +171,14 @@ function groupformation_set_activity_completion($course, $cm, $userid) {
 }
 
 /**
- * send confirmation for finishing group formation
+ * Send confirmation for finishing group formation
  *
- * @param stdClass $recipient
+ * @param string $recipient
  * @param string $subject
- * @param string $message
- *
+ * @param string $messagetext
+ * @param null $contexturl
+ * @param null $contexturlname
+ * @throws coding_exception
  */
 function groupformation_send_message($recipient, $subject, $messagetext, $contexturl = null, $contexturlname = null) {
     global $DB;
