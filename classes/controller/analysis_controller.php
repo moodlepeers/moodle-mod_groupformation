@@ -82,18 +82,14 @@ class mod_groupformation_analysis_controller {
      *
      * @param $switcher
      */
-    public function trigger_questionnaire($switcher){
+    public function trigger_questionnaire($switcher) {
 
         switch($switcher){
-            /**
-             * Sets start time of questionnaire to now
-             */
+            // Sets start time of questionnaire to now.
             case 1: $this->store->open_questionnaire();
                 break;
 
-            /**
-             * Sets end time of questionnaire to now
-             */
+            // Sets end time of questionnaire to now.
             case -1: $this->store->close_questionnaire();
                 break;
         }
@@ -123,8 +119,8 @@ class mod_groupformation_analysis_controller {
         }
 
         $buttonvalue = ($this->questionnaireavailable) ? -1 : 1;
-        $buttoncaption = ($this->questionnaireavailable) ?
-            get_string('activity_end', 'groupformation') : get_string('activity_start', 'groupformation');
+        $buttoncaption = ($this->questionnaireavailable) ? get_string('activity_end',
+            'groupformation') : get_string('activity_start', 'groupformation');
         $buttondisabled = ($this->jobstate !== "ready") ? "disabled" : "";
 
         $statusanalysisview->assign('button', array(
