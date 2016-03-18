@@ -152,8 +152,6 @@ if (($available || $isteacher) && ($category == '' || $inarray)) {
             '</div>';
     } else {
         $controller = new mod_groupformation_questionnaire_controller($groupformation->id,
-            get_string('language',
-                'groupformation'),
             $userid, $category, $cm->id);
         if ($direction == 0) {
             $controller->go_back();
