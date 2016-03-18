@@ -16,9 +16,10 @@
 
 /**
  *
- * @package mod_groupformation
- * @@author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author     Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 if (!defined('MOODLE_INTERNAL')) {
@@ -28,15 +29,27 @@ if (!defined('MOODLE_INTERNAL')) {
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
 
-
+/**
+ * Controller for student group view
+ *
+ * @package     mod_groupformation
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_student_group_view_controller {
+
+    /** @var mod_groupformation_groups_manager Groups manager */
     private $groupsmanager;
+
+    /** @var int This is the id of the activity */
     private $groupformationid;
 
+    /** @var mod_groupformation_template_builder template builder for view  */
     private $view = null;
 
     /**
-     * mod_groupformation_student_group_view_controller constructor.
+     * Constructor for student group controller
+     *
      * @param $groupformationid
      */
     public function __construct($groupformationid) {
