@@ -13,16 +13,38 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * This file contains the radio question class
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+if (!defined('MOODLE_INTERNAL')) {
+    die ('Direct access to this script is forbidden.');
+}
+
 /**
  * Prints a particular instance of groupformation questionnaire
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class mod_groupformation_radio_question {
 
-    public function print_html($q, $category, $qnumber, $hasanswer) {
+    /**
+     * Prints radio question
+     *
+     * @param array $q
+     * @param string $category
+     * @param int $questionnumber
+     * @param bool $hasanswer
+     */
+    public function print_html($q, $category, $questionnumber, $hasanswer) {
         $question = $q[1];
         $options = $q[2];
 
@@ -43,10 +65,10 @@ class mod_groupformation_radio_question {
             if ($answer == $radiocount) {
                 echo '<td data-title="' . $option .
                     '" class="radioleft select-area selected_label"><input type="radio" name="' . $category .
-                    $qnumber . '" value="' . $radiocount . '" checked="checked"/></td>';
+                    $questionnumber . '" value="' . $radiocount . '" checked="checked"/></td>';
             } else {
                 echo '<td data-title="' . $option . '" class="radioleft select-area"><input type="radio" name="' .
-                    $category . $qnumber . '" value="' . $radiocount . '"/></td>';
+                    $category . $questionnumber . '" value="' . $radiocount . '"/></td>';
             }
             $radiocount++;
         }

@@ -13,16 +13,38 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * This file contains the range question class
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+if (!defined('MOODLE_INTERNAL')) {
+    die ('Direct access to this script is forbidden.');
+}
+
 /**
  * Prints a particular instance of groupformation questionnaire
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class mod_groupformation_range_question {
 
-    public function print_html($q, $category, $qnumber, $hasanswer) {
+    /**
+     * Prints html for range question
+     *
+     * @param array $q
+     * @param string $category
+     * @param int $questionnumber
+     * @param bool $hasanswer
+     */
+    public function print_html($q, $category, $questionnumber, $hasanswer) {
         $question = $q [1];
         $options = $q [2];
 
@@ -39,9 +61,9 @@ class mod_groupformation_range_question {
         echo '<td data-title="' . min(array_keys($options)) . ' = ' . $options [min(array_keys($options))] . ', ' .
             max(array_keys($options)) . ' = ' . $options [max(array_keys($options))] . '" class="range">';
         echo '<span class="">' . min(array_keys($options)) . '</span>';
-        echo '<input type="range" name="' . $category . $qnumber . '" class="gf_range_inputs" min="0" max="';
+        echo '<input type="range" name="' . $category . $questionnumber . '" class="gf_range_inputs" min="0" max="';
         echo max(array_keys($options)) . '" value="' . $answer . '" />';
-        echo '<span class="">' . max(array_keys($options)) . '</span><input type="text" name="' . $category . $qnumber;
+        echo '<span class="">' . max(array_keys($options)) . '</span><input type="text" name="' . $category . $questionnumber;
         echo '_valid" value="0" style="display:none;"/></td>';
         echo '</tr>';
     }
