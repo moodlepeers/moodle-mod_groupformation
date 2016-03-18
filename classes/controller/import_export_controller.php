@@ -15,10 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * This file contains an controller for import export view
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
@@ -30,22 +32,38 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/util/xml_writer.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/csv_writer.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
 
+/**
+ * Controller for import export view
+ *
+ * @package     mod_groupformation
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_import_export_controller {
+
+    /** @var mod_groupformation_storage_manager */
     private $store;
+
+    /** @var mod_groupformation_user_manager */
     private $usermanager;
+
+    /** @var int This is the id of the activity */
     private $groupformationid;
+
+    /** @var cm_info The course module info */
     private $cm;
-    private $cmid;
+
+    /** @var mod_groupformation_template_builder Template builder for view */
     private $view = null;
 
     /**
      * Constructs instance of import export controller
      *
-     * @param integer $groupformationid
+     * @param $groupformationid
+     * @param $cm
      */
     public function __construct($groupformationid, $cm) {
         $this->groupformationid = $groupformationid;
-        $this->cmid = $cm->id;
         $this->cm = $cm;
 
         $this->usermanager = new mod_groupformation_user_manager ($groupformationid);
@@ -69,7 +87,7 @@ class mod_groupformation_import_export_controller {
 
         $filename = 'exportable_answers.xml';
 
-        $context = context_module::instance($this->cmid);
+        $context = context_module::instance($this->cm->id);
 
         $fileinfo = array(
             'contextid' => $context->id, 'component' => 'mod_groupformation', 'filearea' => 'groupformation_answers',
@@ -138,7 +156,7 @@ class mod_groupformation_import_export_controller {
 
         $this->view->assign('import_description', $importdescription);
         $url = new moodle_url ('/mod/groupformation/import_view.php', array(
-            'id' => $this->cmid));
+            'id' => $this->cm->id));
         $this->view->assign('import_form', $url->out());
         $this->view->assign('import_button', $importbutton);
 
@@ -149,7 +167,7 @@ class mod_groupformation_import_export_controller {
      * Renders two-parted template with form
      *
      * @param $mform
-     * @param bool|false $showwarning
+     * @param bool $showwarning
      */
     public function render_form($mform, $showwarning = false) {
         $this->view = new mod_groupformation_template_builder ();
@@ -175,10 +193,10 @@ class mod_groupformation_import_export_controller {
         $this->view->set_template('student_import_result');
 
         $url = new moodle_url ('/mod/groupformation/import_view.php', array(
-            'id' => $this->cmid));
+            'id' => $this->cm->id));
 
         $viewurl = new moodle_url ('/mod/groupformation/view.php', array(
-            'id' => $this->cmid, 'do_show' => 'view'));
+            'id' => $this->cm->id, 'do_show' => 'view'));
         $this->view->assign('import_export_url', $viewurl->out());
         $this->view->assign('import_form', $url->out());
         $this->view->assign('successful', $successful);
@@ -343,7 +361,7 @@ class mod_groupformation_import_export_controller {
 
         $filename = 'archived_' . $type . '.csv';
 
-        $context = context_module::instance($this->cmid);
+        $context = context_module::instance($this->cm->id);
 
         $fileinfo = array(
             'contextid' => $context->id, 'component' => 'mod_groupformation', 'filearea' => 'groupformation_answers',
