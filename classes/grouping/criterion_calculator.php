@@ -15,10 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * This file contains the criterion calculator class
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 if (!defined('MOODLE_INTERNAL')) {
@@ -30,15 +32,30 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
 require_once($CFG->dirroot . '/lib/groupal/classes/criteria/topic_criterion.php');
 
+/**
+ * Criterion calculator class
+ *
+ * @package     mod_groupformation
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_criterion_calculator {
+
+    /** @var mod_groupformation_storage_manager Storage manager */
     private $store;
+
+    /** @var mod_groupformation_user_manager User manager */
     private $usermanager;
+
+    /** @var mod_groupformation_data Define file class*/
     private $data;
+
+    /** @var int id of groupformation */
     private $groupformationid;
-    private $scenario;
 
     /**
      * mod_groupformation_criterion_calculator constructor.
+     *
      * @param $groupformationid
      */
     public function __construct($groupformationid) {
@@ -46,8 +63,6 @@ class mod_groupformation_criterion_calculator {
         $this->store = new mod_groupformation_storage_manager ($groupformationid);
         $this->usermanager = new mod_groupformation_user_manager ($groupformationid);
         $this->data = new mod_groupformation_data();
-
-        $this->scenario = $this->store->get_scenario();
     }
 
     /**
@@ -126,7 +141,7 @@ class mod_groupformation_criterion_calculator {
         if (is_null($specs)) {
             $specs = $this->data->get_criterion_specification('knowledge');
         }
-        $scenario = $this->scenario;
+        $scenario = $this->store->get_scenario();
         $labels = $specs['labels'];
         $array = array();
         $category = $specs['category'];
@@ -234,19 +249,20 @@ class mod_groupformation_criterion_calculator {
      *
      * @param $criteriaspecs
      * @param $users
-     * @param bool|false $eval
+     * @param bool $eval
      * @return array
      */
     public function filter_criteria_specs($criteriaspecs, $users, $eval = false) {
         $filteredspecs = array();
+        $scenario = $this->store->get_scenario();
         foreach ($criteriaspecs as $criterion => $spec) {
             $category = $spec['category'];
             $labels = $spec['labels'];
-            if (in_array($this->scenario, $spec['scenarios']) && (!$eval || $spec['evaluation'])) {
+            if (in_array($scenario, $spec['scenarios']) && (!$eval || $spec['evaluation'])) {
                 $positions = array();
 
                 foreach ($labels as $label => $specs) {
-                    if (array_key_exists($this->scenario, $specs['scenarios']) && (!$eval || $specs['evaluation'])) {
+                    if (array_key_exists($scenario, $specs['scenarios']) && (!$eval || $specs['evaluation'])) {
                         if ($specs['significant_id_only']) {
                             $variance = 0;
                             $position = 1;
@@ -385,8 +401,8 @@ class mod_groupformation_criterion_calculator {
     /**
      * Returns fam criterion values
      *
-     * @param $userid
-     * @param $specs
+     * @param int $userid
+     * @param null $specs
      * @return array
      */
     public function get_fam($userid, $specs = null) {
@@ -440,8 +456,8 @@ class mod_groupformation_criterion_calculator {
     /**
      * Returns team criterion values
      *
-     * @param $userid
-     * @param $specs
+     * @param int $userid
+     * @param array $specs
      * @return array
      */
     public function get_team($userid, $specs = null) {
@@ -480,9 +496,9 @@ class mod_groupformation_criterion_calculator {
     /**
      * Returns eval data for user
      *
-     * @param $userid
-     * @param $groupusers
-     * @param $courseusers
+     * @param int $userid
+     * @param array $groupusers
+     * @param array $courseusers
      * @return array
      */
     public function get_eval($userid, $groupusers, $courseusers) {
@@ -519,9 +535,9 @@ class mod_groupformation_criterion_calculator {
     /**
      * Returns average values for the users
      *
-     * @param $criterion
-     * @param $groupusers
-     * @return null
+     * @param string $criterion
+     * @param array $groupusers
+     * @return array
      */
     public function get_avg_values_for_users($criterion, $groupusers) {
         $function = 'get_' . $criterion;
@@ -553,11 +569,11 @@ class mod_groupformation_criterion_calculator {
     /**
      * Returns eval values for user, group and course
      *
-     * @param $criterion
-     * @param $labels
-     * @param $userid
-     * @param $groupusers
-     * @param $courseusers
+     * @param string $criterion
+     * @param array $labels
+     * @param int $userid
+     * @param array $groupusers
+     * @param array $courseusers
      * @return array
      */
     public function get_eval_infos($criterion, $labels, $userid, $groupusers, $courseusers) {
@@ -601,10 +617,10 @@ class mod_groupformation_criterion_calculator {
     /**
      * Returns captions for evaluation data
      *
-     * @param $mode
-     * @param $setfinaltext
-     * @param $completed
-     * @param $coursesize
+     * @param int $mode
+     * @param bool $setfinaltext
+     * @param bool $completed
+     * @param int $coursesize
      * @return array
      * @throws coding_exception
      */

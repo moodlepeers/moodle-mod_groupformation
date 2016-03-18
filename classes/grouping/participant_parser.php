@@ -15,22 +15,44 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * This file contains the participant parser class
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once($CFG->dirroot . '/lib/groupal/classes/criteria/specific_criterion.php');
 require_once($CFG->dirroot . '/lib/groupal/classes/participant.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/criterion_calculator.php');
 
+
+/**
+ * This class parses participants to fit the libraries' needs
+ *
+ * @package     mod_groupformation
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_participant_parser {
-    private $groupformationid;
-    private $criterioncalculator;
+    /** @var mod_groupformation_storage_manager Storage manager */
     private $store;
+
+    /** @var int id of groupformation */
+    private $groupformationid;
+
+    /** @var mod_groupformation_criterion_calculator Criterion calculator */
+    private $criterioncalculator;
+
+    /** @var mod_groupformation_data Define file class*/
     private $data;
 
+    /**
+     * mod_groupformation_participant_parser constructor.
+     *
+     * @param int $groupformationid
+     */
     public function __construct($groupformationid) {
         $this->groupformationid = $groupformationid;
         $this->store = new mod_groupformation_storage_manager ($groupformationid);
@@ -41,8 +63,8 @@ class mod_groupformation_participant_parser {
     /**
      * Parses infos to Participants
      *
-     * @param $users
-     * @param $labels
+     * @param array $users
+     * @param array $labels
      * @return array
      */
     private function parse($users, $labels) {
@@ -81,7 +103,7 @@ class mod_groupformation_participant_parser {
     /**
      * Builds all participants wrt topic choices
      *
-     * @param $users
+     * @param array $users
      * @return array
      */
     public function build_topic_participants($users) {
@@ -118,7 +140,7 @@ class mod_groupformation_participant_parser {
     /**
      * Builds Participants array using a parser (at the end)
      *
-     * @param $users
+     * @param array $users
      * @return array
      */
     public function build_participants($users) {
@@ -182,7 +204,7 @@ class mod_groupformation_participant_parser {
     /**
      * Generates participants without criterions
      *
-     * @param $users
+     * @param array $users
      * @return array
      */
     public function build_empty_participants($users) {
