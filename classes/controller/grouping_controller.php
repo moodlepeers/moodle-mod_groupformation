@@ -465,7 +465,7 @@ class mod_groupformation_grouping_controller {
 
     /**
      * Gets the name and moodle link of group members
-     * 
+     *
      * @param $groupid
      * @return array
      */
