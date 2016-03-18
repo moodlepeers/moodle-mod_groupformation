@@ -17,10 +17,10 @@
 /**
  * This file contains an controller class for analysis view
  *
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @package    mod_groupformation
- * @copyright  2015 MoodlePeers
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @package     mod_groupformation
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die('Direct access to this script is forbidden.');
 
@@ -34,7 +34,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
  *
  * @package     mod_groupformation
  * @copyright   2015 MoodlePeers
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class mod_groupformation_analysis_controller {
 
