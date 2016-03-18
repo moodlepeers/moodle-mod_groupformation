@@ -17,9 +17,10 @@
 /**
  * Scheduled Task for building groups and releasing aborted job requests
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace mod_groupformation\task;
 
@@ -27,6 +28,13 @@ require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 require_once($CFG->dirroot . '/mod/groupformation/lib.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/job_manager.php');
 
+/**
+ * Build groups task class
+ *
+ * @package     mod_groupformation
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class build_groups_task extends \core\task\scheduled_task {
 
     /**
