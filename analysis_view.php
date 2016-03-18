@@ -17,9 +17,10 @@
 /**
  * Prints a particular instance of groupformation
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
 require_once(dirname(__FILE__) . '/lib.php');
@@ -89,7 +90,26 @@ if ( (data_submitted()) && confirm_sesskey()){
     redirect($return->out());
 }
 
+/* ---------- Automated test user generation ------------ */
 
+if($CFG->debug === 32767){
+    $cqt = new mod_groupformation_test_user_generator ($cm);
+
+    if ($deleteusers) {
+        $cqt->delete_test_users($groupformation->id);
+        $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
+            'id' => $id, 'do_show' => 'analysis'));
+        redirect($return->out());
+    }
+    if ($createusers > 0) {
+        $cqt->create_test_users($createusers, $groupformation->id, $createanswers, $randomanswers);
+        $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
+            'id' => $id, 'do_show' => 'analysis'));
+        redirect($return->out());
+    }
+}
+
+/* ---------- / Automated test user generation ---------- */
 
 echo $OUTPUT->header();
 
