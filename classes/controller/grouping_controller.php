@@ -14,13 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-
 /**
  * Controller for grouping view
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.');
@@ -37,24 +37,56 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/xml_writer.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/group_generator.php');
 
+/**
+ * Controller for grouping view
+ *
+ * @package     mod_groupformation
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_grouping_controller {
+
+    /** @var int The id of the groupformation activity */
     private $groupformationid;
+
+    /** @var int The id of the course module */
     private $cmid;
+
+    /** @var int The view state of grouping view */
     private $viewstate = 0;
+
+    /** @var array The generated groups */
     private $groups = array();
+
+    /** @var array The incomplete groups */
     private $incompletegroups = array();
+
+    /** @var mod_groupformation_storage_manager Storage manager */
     private $store = null;
+
+    /** @var mod_groupformation_groups_manager Groups manager */
     private $groupsmanager = null;
+
+    /** @var mod_groupformation_user_manager User manager */
     private $usermanager;
+
+    /** @var stdClass The job object of the activity */
     private $job = null;
+
+    /** @var mod_groupformation_template_builder Template builder for view */
     private $view = null;
+
+    /** @var bool Indicates whether groups are created or not */
     private $groupscreated;
+
+    /** @var bool The maximum size of a group */
     private $maxgroupssize;
 
     /**
      * Creates an instance of grouping_controller for groupformation
      *
-     * @param int $groupformationid
+     * @param $groupformationid
+     * @param null $cm
      */
     public function __construct($groupformationid, $cm = null) {
         $this->groupformationid = $groupformationid;
@@ -119,6 +151,10 @@ class mod_groupformation_grouping_controller {
 
     /**
      * POST action to start job, sets it to 'waiting'
+     *
+     * @param $course
+     * @param $cm
+     * @return array
      */
     public function start($course, $cm) {
         global $USER;
@@ -375,8 +411,7 @@ class mod_groupformation_grouping_controller {
     /**
      * Returns link for scrollTo function
      *
-     * @param
-     *            $groupID
+     * @param $groupid
      * @return string
      */
     private function get_scroll_to_link($groupid) {
@@ -430,9 +465,8 @@ class mod_groupformation_grouping_controller {
 
     /**
      * Gets the name and moodle link of group members
-     *
-     * @param
-     *            $groupID
+     * 
+     * @param $groupid
      * @return array
      */
     private function get_group_members($groupid) {
