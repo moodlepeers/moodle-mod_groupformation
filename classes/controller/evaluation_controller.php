@@ -15,10 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * This file contains a controller class for evaluation view
  *
- * @package mod_groupformation
- * @@author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author     Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @coppyright  2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 if (!defined('MOODLE_INTERNAL')) {
@@ -28,7 +30,13 @@ if (!defined('MOODLE_INTERNAL')) {
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
 
-
+/**
+ * Controller for evaluation view
+ *
+ * @package     mod_groupformation
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_evaluation_controller {
 
     /** @var mod_groupformation_storage_manager */
@@ -61,6 +69,8 @@ class mod_groupformation_evaluation_controller {
     }
 
     /**
+     * Renders all content for evaluation view
+     *
      * @param $userid
      * @return string
      */
