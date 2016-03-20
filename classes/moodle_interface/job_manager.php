@@ -204,6 +204,9 @@ class mod_groupformation_job_manager {
             $enrolledstudents = array_keys(groups_get_grouping_members($job->groupingid));
         } else {
             $enrolledstudents = array_keys(get_enrolled_users($context, 'mod/groupformation:onlystudent'));
+            $enrolledprevusers = array_keys(get_enrolled_users($context, 'mod/groupformation:editsettings'));
+            $diff = array_diff($enrolledstudents,$enrolledprevusers);
+            $enrolledstudents = $diff;
         }
         if (is_null($enrolledstudents) || count($enrolledstudents) <= 0) {
             return null;
@@ -410,7 +413,7 @@ class mod_groupformation_job_manager {
         $cohorts = array(
             $groupalcohort, $randomcohort, $topiccohort);
 
-
+        var_dump($users);
 
         $groupsizes = self::determine_group_size($users, $store, $groupformationid);
         ksort($groupsizes);
