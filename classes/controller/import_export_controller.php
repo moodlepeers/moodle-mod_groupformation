@@ -196,6 +196,8 @@ class mod_groupformation_import_export_controller {
     public function import_xml($content) {
         global $DB, $USER, $CFG;
 
+
+
         libxml_use_internal_errors(true);
         $xml = simplexml_load_string($content);
 
@@ -213,15 +215,14 @@ class mod_groupformation_import_export_controller {
         if (!($name == 'answers')) {
             throw new InvalidArgumentException ("Wrong format");
         }
-
         $attr = $xml->attributes();
 
         $userid = intval($attr->userid);
-        if (!($userid == $USER->id)) {
+        if (!($userid == intval($USER->id))) {
             throw new InvalidArgumentException ("Wrong format");
         }
-
         $categories = $this->store->get_categories();
+
 
         $allrecords = array();
 
@@ -254,13 +255,12 @@ class mod_groupformation_import_export_controller {
     public function create_answer_records($category, $answers) {
         global $DB, $USER;
 
-        $userid = $USER->id;
+        $userid = intval($USER->id);
 
         $allrecords = array();
         $questionids = array();
 
         foreach ($answers as $answer) {
-
             $attr = $answer->attributes();
             $questionid = intval($attr->questionid);
             $value = intval($attr->value);
@@ -284,11 +284,11 @@ class mod_groupformation_import_export_controller {
                 $record->questionid = $questionid;
                 $record->userid = $userid;
                 $record->answer = $value;
+                $record->timestamp = time();
 
                 $allrecords [] = $record;
             }
         }
-
         return $allrecords;
     }
 

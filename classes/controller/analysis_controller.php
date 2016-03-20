@@ -158,6 +158,8 @@ class mod_groupformation_analysis_controller {
         $students = get_enrolled_users($context, 'mod/groupformation:onlystudent');
         $studentcount = count($students);
 
+        $studentcount = count(mod_groupformation_util::get_users($this->store));
+
         $stats [] = $studentcount;
 
         $started = $usermanager->get_started();

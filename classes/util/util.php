@@ -101,13 +101,17 @@ class mod_groupformation_util {
      */
     public static function get_user_record($userid) {
         global $DB;
-        if ($record = $DB->get_record('user',
+        if ($DB->record_exists('user',
             array(
                 'id' => $userid
             )
         )
         ) {
-            return $record;
+            return $DB->get_record('user',
+                array(
+                    'id' => $userid
+                )
+            );
         } else {
             return null;
         }

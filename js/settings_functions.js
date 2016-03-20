@@ -523,10 +523,10 @@ $(document).ready(function() {
 
     function calculateSizeParameter($maxMembers, $maxGroups){
         if($maxMembers == 0){
-            $maxMembers = Math.round(studentsInCourse / $maxGroups);
+            $maxMembers = Math.ceil(studentsInCourse / $maxGroups);
             if ($maxMembers == 0) return $maxMembers == 1;
         }else if($maxGroups == 0){
-            $maxGroups = Math.round(studentsInCourse / $maxMembers);
+            $maxGroups = Math.ceil(studentsInCourse / $maxMembers);
         }else{
             $('#group_size').val($maxMembers);
             $('#numb_of_groups').val($maxGroups);

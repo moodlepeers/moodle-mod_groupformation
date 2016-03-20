@@ -172,7 +172,7 @@ function buildChartDoubleSide (chartid, datam, bars) {
 						.attr("dy", (bulkHeight / 2))
 						/* font format */
 						.style("font", "1.2em sans-serif")
-						.text(function (d) {return d.captions.maxCaption });
+						.text(function (d) {return d.captions.minCaption });
 
 
 
@@ -218,7 +218,7 @@ function buildChartDoubleSide (chartid, datam, bars) {
 						.attr("dy", (bulkHeight / 2))
 						/* font format */
 						.style("font", "1.2em sans-serif")
-						.text(function (d) {return d.captions.minCaption });
+						.text(function (d) {return d.captions.maxCaption });
 
 ///////////////
 // SVG Mitte //

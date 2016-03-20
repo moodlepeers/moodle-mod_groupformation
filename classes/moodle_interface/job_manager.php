@@ -287,13 +287,14 @@ class mod_groupformation_job_manager {
 
                 return $result;
             } else {
-                $maxgroups = intval($store->get_max_groups());
                 $topicvalues = $store->get_knowledge_or_topic_values('topic');
                 $topicvalues = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $topicvalues . ' </OPTIONS>';
                 $topicsoptions = mod_groupformation_util::xml_to_array($topicvalues);
                 $topicscount = count($topicsoptions);
 
                 $maxmembers = intval($store->get_max_members());
+                $users = mod_groupformation_util::get_users($store);
+                $maxmembers = max($maxmembers,ceil(count($users)/$topicscount));
                 $array = array();
                 for ($i = 0;$i<$topicscount;$i=$i+1){
                     $array[]=$maxmembers;

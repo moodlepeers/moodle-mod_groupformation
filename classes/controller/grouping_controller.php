@@ -666,12 +666,14 @@ class mod_groupformation_grouping_controller
         global $CFG, $COURSE, $USER;
         $userids = $this->groupsmanager->get_users_for_generated_group($groupid);
         $groupmembers = array();
-
+        global $DB;
+        $userrecords = $DB->get_records('user');
         foreach ($userids as $user) {
             $url = $CFG->wwwroot . '/user/view.php?id=' . $user->userid . '&course=' . $COURSE->id;
 
             $username = $user->userid;
-            $userrecord = mod_groupformation_util::get_user_record($user->userid);
+            $userrecord = $userrecords[$username];
+
             if (!is_null($userrecord)) {
                 $username = fullname($userrecord);
             }
