@@ -194,7 +194,7 @@ class mod_groupformation_job_manager {
      * @param mod_groupformation_storage_manager $store
      * @return array|null
      */
-    private static function get_users($job, $groupformationid, mod_groupformation_storage_manager $store) {
+    public static function get_users($job, $groupformationid, mod_groupformation_storage_manager $store) {
         $courseid = $store->get_course_id();
         $context = context_course::instance($courseid);
 
@@ -413,8 +413,6 @@ class mod_groupformation_job_manager {
         $cohorts = array(
             $groupalcohort, $randomcohort, $topiccohort);
 
-        var_dump($users);
-
         $groupsizes = self::determine_group_size($users, $store, $groupformationid);
         ksort($groupsizes);
 
@@ -614,7 +612,7 @@ class mod_groupformation_job_manager {
 
         if (!is_null($topiccohort)) {
             $result = $topiccohort->getResult();
-            var_dump($result);
+
             $flags = array(
                 "groupal" => 0, "random" => 0, "mrandom" => 0, "created" => 0, "topic" => 1);
 

@@ -386,8 +386,9 @@ class mod_groupformation_grouping_controller
                 break;
         }
 
-        $context = $PAGE->context;
-        $count = count(get_enrolled_users($context, 'mod/groupformation:onlystudent'));
+        $enrolledstudents = mod_groupformation_util::get_users($this->store);
+
+        $count = count($enrolledstudents);
 
         $settingsgroupview->assign('student_count', $count);
         $settingsgroupview->assign('cmid', $this->cmid);

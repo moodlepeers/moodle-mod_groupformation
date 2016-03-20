@@ -207,4 +207,21 @@ class mod_groupformation_util {
         }
     }
 
+    /**
+     * Returns student user ids of the course
+     *
+     * @param $store
+     * @return array
+     */
+    public static function get_users($store,$context = null){
+        if (is_null($context)) {
+            $courseid = $store->get_course_id();
+            $context = context_course::instance($courseid);
+        }
+        $enrolledstudents = array_keys(get_enrolled_users($context, 'mod/groupformation:onlystudent'));
+        $enrolledprevusers = array_keys(get_enrolled_users($context, 'mod/groupformation:editsettings'));
+        $diff = array_diff($enrolledstudents,$enrolledprevusers);
+        return $diff;
+    }
+
 }
