@@ -219,7 +219,7 @@ $string['grouping_adopt'] = 'Adopt groups';
 $string['grouping_abort'] = 'Cancel generating groups';
 $string['grouping_edit'] = 'Edit groups';
 $string['moodlegrouping_delete'] = 'Delete moodle groups';
-$string['questionnaire_commited'] = 'Yout answers are submitted. You cant change them in this activity.';
+$string['questionnaire_commited'] = 'Your answers are submitted. You cannot change them in this activity.';
 $string['no_data_to_display'] = 'No data to display';
 
 $string['onlyactivestudents'] = 'Only students with at least one submitted answer should be considered for building groups';
@@ -317,7 +317,7 @@ $string['archived_activity_admin'] = 'The activity has been archived. There is n
 $string['students_selected']='Students selected';
 $string['drop_selection']='Unselect all';
 
-$string['no_evaluation_text'] = 'There will is no evaluation for this activity.';
+$string['no_evaluation_text'] = 'There is no evaluation for this group formation activity.';
 $string['no_evaluation_ready'] = 'There is no evaluation for you. The evaluation of your answers is possible when you answered everything and submitted your answers.';
 $string['eval_final_text'] = 'The comparison is based on {$a->percent}% of the users answers ({$a->completed} of {$a->coursesize} users have answered already).';
 
