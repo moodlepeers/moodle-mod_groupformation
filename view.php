@@ -112,7 +112,7 @@ if ($begin == 1) {
 
 echo $OUTPUT->header();
 
-if ($usermanager->get_consent($userid)) {
+if ($usermanager->get_consent($userid) || $groupsmanager->groups_created()) {
     // Print the tabs.
     require('tabs.php');
 }

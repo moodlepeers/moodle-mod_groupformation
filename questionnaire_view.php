@@ -50,6 +50,7 @@ $userid = $USER->id;
 $data = new mod_groupformation_data ();
 $store = new mod_groupformation_storage_manager ($groupformation->id);
 $usermanager = new mod_groupformation_user_manager ($groupformation->id);
+$groupsmanager = new mod_groupformation_groups_manager ($groupformation->id);
 
 $scenario = $store->get_scenario();
 $names = $store->get_categories();
@@ -92,7 +93,7 @@ $PAGE->set_heading(format_string($course->fullname));
 
 $consent = $usermanager->get_consent($userid);
 
-if (!$consent && !has_capability('mod/groupformation:editsettings',$context)) {
+if ((!$consent && !$groupsmanager->groups_created()) && !has_capability('mod/groupformation:editsettings',$context)) {
     $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
         'id' => $cm->id, 'giveconsent' => '1'));
     redirect($returnurl);
