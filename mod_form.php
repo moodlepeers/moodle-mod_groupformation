@@ -421,8 +421,11 @@ class mod_groupformation_mod_form extends moodleform_mod {
                 <p><span id="studentsInCourse"><b>');
 
         $context = $PAGE->context;
-        $users = mod_groupformation_util::get_users($this->store,$context);
-        $count = count($users);
+        $enrolledstudents = array_keys(get_enrolled_users($context, 'mod/groupformation:onlystudent'));
+        $enrolledprevusers = array_keys(get_enrolled_users($context, 'mod/groupformation:editsettings'));
+        $diff = array_diff($enrolledstudents,$enrolledprevusers);
+
+        $count = count($diff);
 
         $mform->addElement('html', $count . '</b></span> ' . get_string('students_enrolled_info', 'groupformation') . '</p>
             <div class="grid">

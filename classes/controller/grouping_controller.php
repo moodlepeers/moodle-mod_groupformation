@@ -386,7 +386,7 @@ class mod_groupformation_grouping_controller
                 break;
         }
 
-        $enrolledstudents = mod_groupformation_util::get_users($this->store);
+        $enrolledstudents = mod_groupformation_util::get_users($this->groupformationid);
 
         $count = count($enrolledstudents);
 

@@ -194,7 +194,15 @@ class mod_groupformation_job_manager {
      * @param mod_groupformation_storage_manager $store
      * @return array|null
      */
-    public static function get_users($job, $groupformationid, mod_groupformation_storage_manager $store) {
+    public static function get_users($groupformationid, $job = null, mod_groupformation_storage_manager $store = null) {
+        if (is_null($job)){
+            $job = self::get_job($groupformationid);
+        }
+
+        if (is_null($store)){
+            $store = new mod_groupformation_storage_manager($groupformationid);
+        }
+
         $courseid = $store->get_course_id();
         $context = context_course::instance($courseid);
 
@@ -293,8 +301,8 @@ class mod_groupformation_job_manager {
                 $topicscount = count($topicsoptions);
 
                 $maxmembers = intval($store->get_max_members());
-                $users = mod_groupformation_util::get_users($store);
-                $maxmembers = max($maxmembers,ceil(count($users)/$topicscount));
+                $userscount0 = count($users [0] + $users [1]);
+                $maxmembers = ceil($userscount0/$topicscount);
                 $array = array();
                 for ($i = 0;$i<$topicscount;$i=$i+1){
                     $array[]=$maxmembers;
@@ -558,7 +566,7 @@ class mod_groupformation_job_manager {
         $store = new mod_groupformation_storage_manager ($groupformationid);
 
         // Assign users.
-        $users = self::get_users($job, $groupformationid, $store);
+        $users = self::get_users($groupformationid, $job, $store);
 
         if (is_null($users)) {
             return $cohorts;

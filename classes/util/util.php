@@ -217,15 +217,38 @@ class mod_groupformation_util {
      * @param $store
      * @return array
      */
-    public static function get_users($store,$context = null){
+    public static function get_users($groupformationid = null,$store = null,$context = null, $job = null){
+        if (is_null($job)){
+            $job = mod_groupformation_job_manager::get_job($groupformationid);
+        }
+
+        if (is_null($store)){
+            $store = new mod_groupformation_storage_manager($groupformationid);
+        }
+
         if (is_null($context)) {
             $courseid = $store->get_course_id();
             $context = context_course::instance($courseid);
         }
-        $enrolledstudents = array_keys(get_enrolled_users($context, 'mod/groupformation:onlystudent'));
-        $enrolledprevusers = array_keys(get_enrolled_users($context, 'mod/groupformation:editsettings'));
-        $diff = array_diff($enrolledstudents,$enrolledprevusers);
-        return $diff;
+
+        $courseid = $store->get_course_id();
+        $context = context_course::instance($courseid);
+
+        $enrolledstudents = null;
+
+        if (intval($job->groupingid) != 0) {
+            $enrolledstudents = array_keys(groups_get_grouping_members($job->groupingid));
+        } else {
+            $enrolledstudents = array_keys(get_enrolled_users($context, 'mod/groupformation:onlystudent'));
+            $enrolledprevusers = array_keys(get_enrolled_users($context, 'mod/groupformation:editsettings'));
+            $diff = array_diff($enrolledstudents,$enrolledprevusers);
+            $enrolledstudents = $diff;
+        }
+        if (is_null($enrolledstudents) || count($enrolledstudents) <= 0) {
+            return null;
+        }
+
+        return $enrolledstudents;
     }
 
 }
