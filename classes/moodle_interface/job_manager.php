@@ -804,8 +804,10 @@ class mod_groupformation_job_manager {
             'id' => $userid)));
         $subject = get_string('groupformation_message_subject', 'groupformation');
         $message = get_string('groupformation_message', 'groupformation');
-        $contexturl =
-            $CFG->wwwroot . '/mod/groupformation/grouping_view.php?id=' . $coursemoduleid . '&do_show=grouping';
+        $contexturl = $CFG->wwwroot;
+        $contexturl .= '/mod/groupformation/grouping_view.php?id=';
+        $contexturl .= $coursemoduleid;
+        $contexturl .= '&do_show=grouping';
         $contexturlname = get_string('groupformation_message_contexturlname', 'groupformation');
         groupformation_send_message($recipient, $subject, $message, $contexturl, $contexturlname);
 

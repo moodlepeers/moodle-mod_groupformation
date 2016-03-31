@@ -79,7 +79,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_p
 $controller = new mod_groupformation_analysis_controller ($groupformation->id, $cm);
 
 
-if ( (data_submitted()) && confirm_sesskey()){
+if (data_submitted() && confirm_sesskey()){
     $switcher = optional_param('questionnaire_switcher' , null, PARAM_INT);
 
     if ( isset($switcher)) {
@@ -92,7 +92,7 @@ if ( (data_submitted()) && confirm_sesskey()){
 
 /* ---------- Automated test user generation ------------ */
 
-if($CFG->debug === 32767){
+if ($CFG->debug === 32767) {
     $cqt = new mod_groupformation_test_user_generator ($cm);
 
     if ($deleteusers) {

@@ -53,8 +53,8 @@ class mod_groupformation_question_table_header {
             echo '<table class="responsive-table">' . '<colgroup><col class="firstCol"><colgroup>';
 
             echo '<thead><tr><th scope="col">' .
-                (($tabletype == 'type_knowledge') ? get_string('knowledge_question', 'groupformation') :
-                    get_string('category_' . $category, 'groupformation')) . '</th>';
+                (($tabletype == 'type_knowledge') ? get_string('knowledge_question',
+                    'groupformation') : get_string('category_' . $category, 'groupformation')) . '</th>';
             if ($tabletype == 'radio') {
                 $headersize = count($headeroptarray);
 

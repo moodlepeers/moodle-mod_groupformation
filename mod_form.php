@@ -200,7 +200,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
             get_string('scenario_projectteams', 'groupformation')
             . '</div><p><small>' .
             get_string('scenario_projectteams_description', 'groupformation') . '</small></p>
-		                                </label>
+                                        </label>
                 </div>
                 <div class="col_m_33">
                     <input type="radio" name="js_szenario" id="homework" value="homework" />
@@ -222,7 +222,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
                     </div> <!-- /grid  -->
                 </div> <!-- /szenarioRadios -->
             </div> <!-- /gf_setting_pad -->
-		');
+        ');
 
         // Wrapper of the szenario.
         $mform->addElement('html', '<div id="js_szenarioWrapper">');
@@ -240,10 +240,10 @@ class mod_groupformation_mod_form extends moodleform_mod {
 
         // Add dynamic input fields preknowledge and Preview.
         $mform->addElement('html', '
-					<div class="gf_pad_content" id="js_knowledgeWrapper">
-					<!-- <p>' . get_string('knowledge_description_extended', 'groupformation') . '</p> -->
+                    <div class="gf_pad_content" id="js_knowledgeWrapper">
+                    <!-- <p>' . get_string('knowledge_description_extended', 'groupformation') . '</p> -->
                        <p id="knowledeInfo"></p>
-						<p id="knowledeInfoProject" style="display:none;">' .
+                        <p id="knowledeInfoProject" style="display:none;">' .
             get_string('knowledge_info_project', 'groupformation') . '</p>
                         <p id="knowledeInfoHomework" style="display:none;">' .
             get_string('knowledge_info_homework', 'groupformation') . '</p>
@@ -281,8 +281,6 @@ class mod_groupformation_mod_form extends moodleform_mod {
                     <div class="col_m_50">
                         <h5>' . get_string('preview', 'groupformation') . '</h5>
                     <div class="col_m_100">' .
-            /* '<h4 class="view_on_mobile">'.get_string('knowledge_question','groupformation').'</h4>'. */
-
             '<table class="responsive-table">
             <colgroup><col class="firstCol">
                 <col width="36%">
@@ -402,7 +400,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 
                                     </div> <!-- /.grid -->
                                 </div> <!-- /.topicWrapper -->
-        					');
+                            ');
 
         // Close wrapper for topics.
         $mform->addElement('html', '</div>');

@@ -72,8 +72,7 @@ $PAGE->set_url('/mod/groupformation/view.php', array(
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 
-//$begin = 1;
-if ( data_submitted() && confirm_sesskey()){
+if (data_submitted() && confirm_sesskey()) {
     $begin = optional_param('begin', null, PARAM_BOOL);
     $questions = optional_param('questions', null, PARAM_BOOL);
 }
@@ -112,10 +111,7 @@ if ($store->is_archived()) {
         echo $OUTPUT->box(format_module_intro('groupformation', $groupformation, $cm->id), 'generalbox mod_introbox',
                           'groupformationintro');
     }
-    
-//    $controller = new mod_groupformation_student_overview_controller ($cm->id, $groupformation->id, $userid);
-//    echo $controller->display();
-    
+
     echo '<form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
     echo '<input type="hidden" name="questions" value="1"/>';
 

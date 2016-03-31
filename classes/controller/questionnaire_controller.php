@@ -163,10 +163,11 @@ class mod_groupformation_questionnaire_controller {
      * @return stdClass
      */
     public function get_question($i) {
-        $record = $this->store->get_catalog_question($i, $this->currentcategory, get_string('language','groupformation'));
+        $record = $this->store->get_catalog_question($i, $this->currentcategory, get_string('language',
+            'groupformation'));
 
         if (empty ($record)) {
-            if (get_string('language','groupformation') != 'en') {
+            if (get_string('language', 'groupformation') != 'en') {
                 $record = $this->store->get_catalog_question($i, $this->currentcategory, 'en');
             } else {
                 $lang = $this->store->get_possible_language($this->currentcategory);
@@ -246,8 +247,8 @@ class mod_groupformation_questionnaire_controller {
                     $question [] = $text . $value;
                     $question [] = $options;
                     if ($hasanswers) {
-                        $answer =
-                            $this->usermanager->get_single_answer($this->userid, $this->currentcategory, $position);
+                        $answer = $this->usermanager->get_single_answer($this->userid,
+                            $this->currentcategory, $position);
                         if ($answer != false) {
                             $question [] = $answer;
                         } else {
@@ -293,8 +294,8 @@ class mod_groupformation_questionnaire_controller {
                             $this->store->get_max_points() => get_string('excellent', 'groupformation'),
                             0 => get_string('bad', 'groupformation'));
                         if ($hasanswers) {
-                            $answer =
-                                $this->usermanager->get_single_answer($this->userid, $this->currentcategory, $i);
+                            $answer = $this->usermanager->get_single_answer($this->userid,
+                                $this->currentcategory, $i);
                             if ($answer != false) {
                                 $question [] = $answer;
                             } else {
@@ -393,9 +394,8 @@ class mod_groupformation_questionnaire_controller {
             $positioncategory = $this->store->get_position($category);
 
             $beforeactive = ($positioncategory <= $positionactivecategory);
-            $class =
-                (has_capability('mod/groupformation:editsettings', $this->context) || $beforeactive || $prevcomplete) ?
-                    '' : 'no-active';
+            $class = (has_capability('mod/groupformation:editsettings',
+                    $this->context) || $beforeactive || $prevcomplete) ? '' : 'no-active';
             echo '<li class="' . (($activecategory == $category) ? 'current' : 'accord_li') . '">';
             echo '<span>' . ($positioncategory + 1) . '</span><a class="' . $class . '"  href="' . $url . '">' .
                 get_string('category_' . $category, 'groupformation') . '</a>';

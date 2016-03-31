@@ -350,7 +350,7 @@ function groupformation_scale_used_anywhere($scaleid) {
 }
 
 /**
- *Creates or updates grade item for the give groupformation instance
+ * Creates or updates grade item for the give groupformation instance
  *
  * Needed by grade_update_mod_grades() in lib/gradelib.php
  *

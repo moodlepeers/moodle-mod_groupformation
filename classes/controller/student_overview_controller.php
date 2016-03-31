@@ -131,8 +131,8 @@ class mod_groupformation_student_overview_controller {
     private function determine_view() {
         switch ($this->viewstate) {
             case -1 : // Questionaire is available but not started yet.
-                $this->groupformationinfo =
-                    mod_groupformation_util::get_info_text_for_student(true, $this->groupformationid);
+                $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(true,
+                    $this->groupformationid);
                 $this->groupformationstateinfo = array(
                     $this->get_availability_state());
                 $this->buttonsinfo = get_string('questionnaire_press_to_begin', 'groupformation');
@@ -143,8 +143,8 @@ class mod_groupformation_student_overview_controller {
                 break;
 
             case 0 : // Questionaire is available, started, not finished and not submited.
-                $this->groupformationinfo =
-                    mod_groupformation_util::get_info_text_for_student(false, $this->groupformationid);
+                $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(false,
+                    $this->groupformationid);
                 $this->groupformationstateinfo = array(
                     $this->get_availability_state(), get_string('questionnaire_not_submitted', 'groupformation'));
                 $this->buttonsinfo = get_string('questionnaire_press_continue_submit', 'groupformation');
@@ -161,8 +161,8 @@ class mod_groupformation_student_overview_controller {
                 break;
 
             case 1 : // Questionaire is submitted.
-                $this->groupformationinfo =
-                    mod_groupformation_util::get_info_text_for_student(true, $this->groupformationid);
+                $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(true,
+                    $this->groupformationid);
                 $this->groupformationstateinfo = array(
                     get_string('questionnaire_submitted', 'groupformation'));
                 $this->buttonsinfo = '';
@@ -170,8 +170,8 @@ class mod_groupformation_student_overview_controller {
                 break;
 
             case 2 : // Groups are built.
-                $this->groupformationinfo =
-                    mod_groupformation_util::get_info_text_for_student(false, $this->groupformationid);
+                $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(false,
+                    $this->groupformationid);
                 $this->groupformationstateinfo = array(
                     get_string('groups_build', 'groupformation'));
                 $this->buttonsinfo = '';
@@ -179,8 +179,8 @@ class mod_groupformation_student_overview_controller {
                 break;
 
             case 3 : // The activity is not accessible for the student/teacher.
-                $this->groupformationinfo =
-                    mod_groupformation_util::get_info_text_for_student(false, $this->groupformationid);
+                $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(false,
+                    $this->groupformationid);
                 $this->groupformationstateinfo = array(
                     get_string('activity_visible', 'groupformation'));
                 $this->buttonsinfo = '';
@@ -188,8 +188,8 @@ class mod_groupformation_student_overview_controller {
                 break;
 
             case 4 : // The questionnaire is not available, but groups are not build yet.
-                $this->groupformationinfo =
-                    mod_groupformation_util::get_info_text_for_student(true, $this->groupformationid);
+                $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(true,
+                    $this->groupformationid);
                 $this->groupformationstateinfo = array(
                     $this->get_availability_state());
                 $this->buttonsinfo = '';
@@ -310,7 +310,7 @@ class mod_groupformation_student_overview_controller {
             $surveystatsview = new mod_groupformation_template_builder ();
             $surveystatsview->set_template('students_overview_survey_states');
             $surveystatsview->assign('survey_states', $this->questionnairestatearray);
-            $surveystatsview->assign('questionnaire_answer_stats',get_string('questionnaire_answer_stats', 'groupformation'));
+            $surveystatsview->assign('questionnaire_answer_stats', get_string('questionnaire_answer_stats', 'groupformation'));
             $this->view->assign('student_overview_survey_state_temp', $surveystatsview->load_template());
         } else {
             $this->view->assign('student_overview_survey_state_temp', '');

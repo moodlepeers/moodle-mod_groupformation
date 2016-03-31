@@ -67,7 +67,7 @@ if (!has_capability('mod/groupformation:editsettings', $context)) {
 }
 
 
-if ( data_submitted() && confirm_sesskey()){
+if (data_submitted() && confirm_sesskey()){
     $category = optional_param('category', null, PARAM_ALPHA);
     $direction = optional_param('direction', null, PARAM_BOOL);
     $percent = optional_param('percent', null, PARAM_INT);
@@ -108,19 +108,19 @@ if (has_capability('mod/groupformation:onlystudent', $context) &&
                 for ($i = 1; $i <= $number; $i++) {
                     $tempvalidaterangevalue = $category . $i . '_valid';
                     $temp = $category . $i;
-                    $para_tempvalidaterangevalue = optional_param($tempvalidaterangevalue, null, PARAM_ALPHANUM);
-                    $para_temp = optional_param($temp, null, PARAM_ALPHANUM);
+                    $paratempvalidaterangevalue = optional_param($tempvalidaterangevalue, null, PARAM_ALPHANUM);
+                    $paratemp = optional_param($temp, null, PARAM_ALPHANUM);
 
-                    if (isset ($para_temp) && $para_tempvalidaterangevalue == '1') {
-                        $usermanager->save_answer($userid, $category, $para_temp, $i);
+                    if (isset ($paratemp) && $paratempvalidaterangevalue == '1') {
+                        $usermanager->save_answer($userid, $category, $paratemp, $i);
                     }
                 }
             } else {
                 for ($i = 1; $i <= $number; $i++) {
                     $temp = $category . $i;
-                    $para_temp = optional_param($temp, null, PARAM_ALPHANUM);
-                    if (isset ($para_temp)) {
-                        $usermanager->save_answer($userid, $category, $para_temp, $i);
+                    $paratemp = optional_param($temp, null, PARAM_ALPHANUM);
+                    if (isset ($paratemp)) {
+                        $usermanager->save_answer($userid, $category, $paratemp, $i);
                     }
                 }
             }

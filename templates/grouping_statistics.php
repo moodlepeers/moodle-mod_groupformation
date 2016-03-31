@@ -25,7 +25,7 @@
 <p>
     <?php echo get_string('kohort_index', 'groupformation');?>
     <b>
-        <?php echo (is_null($this->_['performance']))?"-":$this->_['performance'];?>
+        <?php echo (is_null($this->_['performance'])) ? "-" : $this->_['performance'];?>
     </b>
     <span class="toolt" tooltip="<?php echo get_string('kohort_index_info', 'groupformation');?>">
     </span>
