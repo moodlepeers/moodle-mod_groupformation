@@ -80,7 +80,7 @@ $controller = new mod_groupformation_analysis_controller ($groupformation->id, $
 
 
 if ( (data_submitted()) && confirm_sesskey()){
-    $switcher = optional_param('questionnaire_switcher', null, PARAM_INT);
+    $switcher = optional_param('questionnaire_switcher' , null, PARAM_INT);
 
     if ( isset($switcher)) {
         $controller->trigger_questionnaire($switcher);
