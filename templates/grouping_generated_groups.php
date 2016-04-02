@@ -33,7 +33,7 @@
         </div>
         <div class="col_s_25"><?php echo get_string('quality', 'groupformation');?>
             <b>
-                <?php echo ($entry['groupquallity'] != 0)?$entry['groupquallity']:"-"; ?>
+                <?php echo ($entry['groupquallity'] != 0) ? $entry['groupquallity'] : "-"; ?>
             </b>
             <span class="toolt" tooltip="<?php echo get_string('quality_info', 'groupformation');?>">
 
@@ -62,4 +62,4 @@
 
         </div>
     </div>
-<?php endforeach; ?>
+<?php endforeach;

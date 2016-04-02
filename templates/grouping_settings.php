@@ -30,7 +30,7 @@
         <?php $a->url = '<a href="'.$url->out().'">'.get_string('settings').'</a>';?>
 
         <div class="col_m_87-5 alert">
-            <?php echo get_string('onlyactivestudents_info', 'groupformation',$a);?>
+            <?php echo get_string('onlyactivestudents_info', 'groupformation', $a);?>
         </div>
     </div>
 <?php endif;?>
@@ -61,7 +61,9 @@
 <?php } ?>
 
 <div>
-	<div style="<?php if($this->_['status'][1] == 0) { echo 'opacity:0.5;';} else {echo 'opacity:1.0;';} ?>margin-left: 4px; <?php if($this->_['status'][1] == 1) { echo 'color: red;';}?>">
+    <?php $opacity = ($this->_['status'][1] == 0) ? "0.5" : "1.0"?>
+    <?php $red = ($this->_['status'][1] == 1) ? "color: red;" : "";?>
+	<div style="margin-left: 4px;opacity:<?php echo $opacity.";".$red;?>">
         <i>
             <?php echo $this->_['status'][0];?>
             <?php if (isset($this->_['emailnotifications']) && $this->_['emailnotifications']):?>

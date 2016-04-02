@@ -60,7 +60,7 @@ $store = new mod_groupformation_storage_manager ($groupformation->id);
 $controller = new mod_groupformation_grouping_controller ($groupformation->id, $cm);
 
 
-if (data_submitted() && confirm_sesskey()){
+if (data_submitted() && confirm_sesskey()) {
 
     $start = optional_param('start', null, PARAM_BOOL);
     $abort = optional_param('abort', null, PARAM_BOOL);

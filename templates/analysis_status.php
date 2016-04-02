@@ -23,7 +23,7 @@
  */
 ?>
 <div class="grid">
-	<div class="col_m_100 bp_align_left-middle">
+    <div class="col_m_100 bp_align_left-middle">
         <span>
             <?php echo $this->_['info_teacher']; ?>
         </span>

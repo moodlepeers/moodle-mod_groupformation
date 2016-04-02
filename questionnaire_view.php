@@ -67,7 +67,7 @@ if (!has_capability('mod/groupformation:editsettings', $context)) {
 }
 
 
-if (data_submitted() && confirm_sesskey()){
+if (data_submitted() && confirm_sesskey()) {
     $category = optional_param('category', null, PARAM_ALPHA);
     $direction = optional_param('direction', null, PARAM_BOOL);
     $percent = optional_param('percent', null, PARAM_INT);

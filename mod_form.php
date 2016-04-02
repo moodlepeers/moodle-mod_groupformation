@@ -600,17 +600,13 @@ class mod_groupformation_mod_form extends moodleform_mod {
                 get_string('grades', 'groupformation'), get_string('points', 'groupformation'),
                 get_string('justpass', 'groupformation'), get_string('noevaluation', 'groupformation')),
             null);
-
         $mform->addRule('evaluationmethod', get_string('evaluationmethod_error', 'groupformation'), 'required', null,
             'client');
 
         $mform->addElement('text', 'maxpoints', get_string('maxpoints', 'groupformation'));
-
         $mform->disabledIf('maxpoints', 'evaluationmethod', 'neq', '2');
         $mform->setType('maxpoints', PARAM_NUMBER);
-
         $mform->addElement('checkbox', 'onlyactivestudents', get_string('onlyactivestudents', 'groupformation'));
-
         $mform->addElement('checkbox', 'emailnotifications', get_string('emailnotifications', 'groupformation'));
         $mform->setDefault('emailnotifications', true);
         // Close div tag for non-js related content.

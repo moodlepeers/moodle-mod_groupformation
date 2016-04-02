@@ -29,7 +29,7 @@
     <div class="gf_pad_content">
         <?php if ($this->_['successful']):?>
             <p>
-                <?php echo get_string('successful_import','groupformation')?>
+                <?php echo get_string('successful_import', 'groupformation')?>
             </p>
             <p>
                 <a href="<?php echo $this->_['import_export_url']; ?>">
@@ -50,5 +50,5 @@
                 </a>
             </p>
         <?php endif;?>
-	</div>
+    </div>
 </div>

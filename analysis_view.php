@@ -79,7 +79,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_p
 $controller = new mod_groupformation_analysis_controller ($groupformation->id, $cm);
 
 
-if (data_submitted() && confirm_sesskey()){
+if (data_submitted() && confirm_sesskey()) {
     $switcher = optional_param('questionnaire_switcher' , null, PARAM_INT);
 
     if ( isset($switcher)) {

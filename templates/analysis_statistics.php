@@ -53,7 +53,7 @@
     </div>
 </div>
 <div class="grid row_highlight">
-	<div class="col_m_100">
+    <div class="col_m_100">
         <b><?php echo $this->_['statistics_submited_incomplete']; ?></b>
         <?php echo get_string('commited_not_completed', 'groupformation');?>
     </div>

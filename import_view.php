@@ -36,7 +36,7 @@ $doshow = optional_param('do_show', 'import_export', PARAM_TEXT);
 // Import jQuery and js file.
 groupformation_add_jquery($PAGE, 'settings_functions.js');
 
-if (data_submitted() && confirm_sesskey()){
+if (data_submitted() && confirm_sesskey()) {
     $id = optional_param('cmid', null, PARAM_INT);
 }
 
