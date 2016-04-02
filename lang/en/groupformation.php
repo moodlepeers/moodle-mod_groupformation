@@ -21,10 +21,12 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 defined('MOODLE_INTERNAL') || die ();
 
 $string ['language'] = 'en';
 $string ['modulename'] = 'Group formation';
+$string ['addinstance'] = 'Add instance';
 $string ['modulenameplural'] = 'Group formations';
 $string ['modulename_help'] = ' The groupformation plugin generates groups of participants based on a questionnaire answers.';
 $string ['beta_version'] = '';

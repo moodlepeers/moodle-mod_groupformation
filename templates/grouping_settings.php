@@ -63,7 +63,7 @@
 <div>
     <?php $opacity = ($this->_['status'][1] == 0) ? "0.5" : "1.0"?>
     <?php $red = ($this->_['status'][1] == 1) ? "color: red;" : "";?>
-	<div style="margin-left: 4px;opacity:<?php echo $opacity.";".$red;?>">
+    <div style="margin-left: 4px;opacity:<?php echo $opacity.";".$red;?>">
         <i>
             <?php echo $this->_['status'][0];?>
             <?php if (isset($this->_['emailnotifications']) && $this->_['emailnotifications']):?>

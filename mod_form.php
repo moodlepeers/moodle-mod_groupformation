@@ -52,7 +52,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
      * @see moodleform::definition()
      */
     public function definition() {
-        global $PAGE, $USER;
+        global $PAGE, $USER, $CFG;
 
         $this->store = new mod_groupformation_storage_manager ($this->_instance);
 
@@ -531,6 +531,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
      * @param moodleform_mod $mform
      */
     public function generate_html_for_non_js(&$mform) {
+        global $CFG;
         $changemsg = '<div class="fitem" id="nochangespossible"';
         if (!$this->store->is_editable()) {
             $changemsg .= ' ><span value="1"';
@@ -595,22 +596,21 @@ class mod_groupformation_mod_form extends moodleform_mod {
 
         // Add field for evaluation method.
         $mform->addElement('select', 'evaluationmethod', get_string('evaluationmethod_description', 'groupformation'),
-            array(
-                get_string('choose_evaluationmethod', 'groupformation'),
+            array(get_string('choose_evaluationmethod', 'groupformation'),
                 get_string('grades', 'groupformation'), get_string('points', 'groupformation'),
                 get_string('justpass', 'groupformation'), get_string('noevaluation', 'groupformation')),
             null);
-        $mform->addRule('evaluationmethod', get_string('evaluationmethod_error', 'groupformation'), 'required', null,
+            $mform->addRule('evaluationmethod', get_string('evaluationmethod_error', 'groupformation'), 'required', null,
             'client');
 
-        $mform->addElement('text', 'maxpoints', get_string('maxpoints', 'groupformation'));
-        $mform->disabledIf('maxpoints', 'evaluationmethod', 'neq', '2');
-        $mform->setType('maxpoints', PARAM_NUMBER);
-        $mform->addElement('checkbox', 'onlyactivestudents', get_string('onlyactivestudents', 'groupformation'));
-        $mform->addElement('checkbox', 'emailnotifications', get_string('emailnotifications', 'groupformation'));
-        $mform->setDefault('emailnotifications', true);
-        // Close div tag for non-js related content.
-        $mform->addElement('html', '</div id="non-js-content">');
+            $mform->addElement('text', 'maxpoints', get_string('maxpoints', 'groupformation'));
+            $mform->disabledIf('maxpoints', 'evaluationmethod', 'neq', '2');
+            $mform->setType('maxpoints', PARAM_NUMBER);
+            $mform->addElement('checkbox', 'onlyactivestudents', get_string('onlyactivestudents', 'groupformation'));
+            $mform->addElement('checkbox', 'emailnotifications', get_string('emailnotifications', 'groupformation'));
+            $mform->setDefault('emailnotifications', true);
+            // Close div tag for non-js related content.
+            $mform->addElement('html', '</div id="non-js-content">');
     }
 }
 

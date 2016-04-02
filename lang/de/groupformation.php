@@ -21,10 +21,12 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 defined('MOODLE_INTERNAL') || die ();
 
 $string ['language'] = 'de';
 $string ['modulename'] = 'Gruppenformation';
+$string ['addinstance'] = 'Aktivität hinzufügen';
 $string ['modulenameplural'] = 'Gruppenformationen';
 $string ['modulename_help'] = 'Erlaubt die automatische Erstellung von (Lern)-Gruppen Ihrer Teilnehmenden. Basierend auf Fragebogen-Antworten werden die Gruppen(zusammenstellungen) optimiert.';
 $string ['beta_version'] = '';

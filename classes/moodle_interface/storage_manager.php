@@ -132,7 +132,7 @@ class mod_groupformation_storage_manager {
             'course' => $courseid
         ), 'id', 'id');
         $i = 1;
-        foreach ($records as $id => $record) {
+        foreach (array_keys($records) as $id) {
             if ($id == $this->groupformationid) {
                 return $i;
             } else {
@@ -695,7 +695,7 @@ class mod_groupformation_storage_manager {
      *
      * @return boolean
      */
-    public function get_grouping_setting() {
+    public function has_grouping_setting() {
         global $DB;
 
         return $DB->get_field('groupformation', 'onlyactivestudents', array(

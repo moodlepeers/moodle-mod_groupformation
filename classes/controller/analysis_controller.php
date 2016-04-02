@@ -204,8 +204,6 @@ class mod_groupformation_analysis_controller {
 
         $statisticsanalysisview = new mod_groupformation_template_builder();
         $statisticsanalysisview->set_template('analysis_statistics');
-        $context = $PAGE->context;
-        $count = count(get_enrolled_users($context, 'mod/groupformation:onlystudent'));
 
         $statisticsanalysisview->assign('statistics_enrolled', $questionnairestats [0]);
         $statisticsanalysisview->assign('statistics_processed', $questionnairestats [1]);
@@ -234,7 +232,6 @@ class mod_groupformation_analysis_controller {
      * Determine status variables
      */
     public function determine_status() {
-        global $DB;
         $this->questionnaireavailable = $this->store->is_questionnaire_available();
         $this->state = 1;
         $job = mod_groupformation_job_manager::get_job($this->groupformationid);

@@ -71,7 +71,7 @@ class mod_groupformation_job_manager {
 
         $next = null;
 
-        foreach ($jobs as $id => $job) {
+        foreach (array_values($jobs) as $job) {
             if ($job->timecreated != null && ($next == null || $job->timecreated < $next->timecreated)) {
                 $next = $job;
             }
@@ -121,7 +121,7 @@ class mod_groupformation_job_manager {
      * @param null $groupingid
      * @return bool
      */
-    public static function set_job($job, $state = "ready", $settime = false, $resettime = false, $groupingid = null) {
+    public static function set_job($job, $state = "ready", $settime = false, $resettime = false) {
         global $DB, $USER;
         $statusoptions = self::$jobstatusoptions;
 
@@ -221,7 +221,7 @@ class mod_groupformation_job_manager {
 
         $usermanager = new mod_groupformation_user_manager ($groupformationid);
 
-        $groupingsetting = $store->get_grouping_setting();
+        $groupingsetting = $store->has_grouping_setting();
 
         $allanswers = array();
         $someanswers = array();
@@ -239,7 +239,7 @@ class mod_groupformation_job_manager {
 
         $groupalusers = $allanswers;
 
-        if ($store->get_grouping_setting()) {
+        if ($store->has_grouping_setting()) {
             $randomusers = $someanswers;
         } else {
             $randomusers = $noorsomeanswers;
@@ -283,7 +283,7 @@ class mod_groupformation_job_manager {
                 $result = array();
 
                 $i = 0;
-                foreach ($topics as $key => $topic) {
+                foreach (array_values($topics) as $topic) {
                     if ($i < $remaininguserscount) {
                         $result [intval($topic ['id']) - 1] = intval(round($basegroupsize + 1));
                     } else {
@@ -298,8 +298,6 @@ class mod_groupformation_job_manager {
 
                 return null;
             }
-
-            return $sizearray;
         } else {
 
             $userscount0 = count($users [0]);
@@ -443,7 +441,6 @@ class mod_groupformation_job_manager {
             $size = ceil((count($users [0]) + count($users [1])) / count($topiccohort->groups));
             lib_groupal_group::setGroupMembersMaxSize($size);
 
-            $counts = array();
             $max = null;
             foreach ($topiccohort->groups as $group) {
                 $value = count($group->getParticipants());

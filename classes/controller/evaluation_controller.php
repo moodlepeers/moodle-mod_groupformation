@@ -90,7 +90,7 @@ class mod_groupformation_evaluation_controller {
             $courseusers = $this->store->get_users();
 
             $groupusers = array();
-            $hasgroup = $this->groupsmanager->has_group($userid, true);
+            $hasgroup = $this->groupsmanager->has_group($userid);
             if ($hasgroup) {
                 $groupusers = $this->groupsmanager->get_group_members($userid);
             }

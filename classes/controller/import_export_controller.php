@@ -121,8 +121,6 @@ class mod_groupformation_import_export_controller {
      * @throws coding_exception
      */
     public function render_overview($userid) {
-        global $DB;
-
         $this->view = new mod_groupformation_template_builder ();
         $this->view->set_template('wrapper_student_import_export');
 
@@ -212,7 +210,7 @@ class mod_groupformation_import_export_controller {
      * @throws InvalidArgumentException
      */
     public function import_xml($content) {
-        global $DB, $USER, $CFG;
+        global $DB, $USER;
 
         libxml_use_internal_errors(true);
         $xml = simplexml_load_string($content);

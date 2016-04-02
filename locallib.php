@@ -68,7 +68,7 @@ function groupformation_log($userid, $groupformationid, $message, $level = 'info
  * @return boolean
  */
 function groupformation_debug($userid, $groupformationid, $message) {
-    return groupformation_log($userid, $groupformationid, $message, $level = 'debug');
+    return groupformation_log($userid, $groupformationid, $message, 'debug');
 }
 
 /**
@@ -80,7 +80,7 @@ function groupformation_debug($userid, $groupformationid, $message) {
  * @return boolean
  */
 function groupformation_info($userid, $groupformationid, $message) {
-    return groupformation_log($userid, $groupformationid, $message, $level = 'info');
+    return groupformation_log($userid, $groupformationid, $message, 'info');
 }
 
 /**
@@ -92,7 +92,7 @@ function groupformation_info($userid, $groupformationid, $message) {
  * @return boolean
  */
 function groupformation_warn($userid, $groupformationid, $message) {
-    return groupformation_log($userid, $groupformationid, $message, $level = 'warn');
+    return groupformation_log($userid, $groupformationid, $message, 'warn');
 }
 
 /**
@@ -104,7 +104,7 @@ function groupformation_warn($userid, $groupformationid, $message) {
  * @return boolean
  */
 function groupformation_error($userid, $groupformationid, $message) {
-    return groupformation_log($userid, $groupformationid, $message, $level = 'error');
+    return groupformation_log($userid, $groupformationid, $message, 'error');
 }
 
 /**
@@ -116,7 +116,7 @@ function groupformation_error($userid, $groupformationid, $message) {
  * @return boolean
  */
 function groupformation_fatal($userid, $groupformationid, $message) {
-    return groupformation_log($userid, $groupformationid, $message, $level = 'fatal');
+    return groupformation_log($userid, $groupformationid, $message, 'fatal');
 }
 
 /**

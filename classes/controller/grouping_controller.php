@@ -170,7 +170,7 @@ class mod_groupformation_grouping_controller {
         $context = groupformation_get_context($this->groupformationid);
         $enrolledusers = get_enrolled_users($context, 'mod/groupformation:onlystudent');
 
-        foreach ($enrolledusers as $key => $user) {
+        foreach (array_keys($enrolledusers) as $user) {
             groupformation_set_activity_completion($course, $cm, $user->id);
         }
 
@@ -353,7 +353,7 @@ class mod_groupformation_grouping_controller {
 
         $settingsgroupview->assign('student_count', $count);
         $settingsgroupview->assign('cmid', $this->cmid);
-        $settingsgroupview->assign('onlyactivestudents', $this->store->get_grouping_setting());
+        $settingsgroupview->assign('onlyactivestudents', $this->store->has_grouping_setting());
 
         return $settingsgroupview->load_template();
     }
@@ -423,7 +423,7 @@ class mod_groupformation_grouping_controller {
      */
     private function set_incomplete_groups() {
         $maxsize = $this->maxgroupssize;
-        foreach ($this->groups as $key => $value) {
+        foreach (array_keys($this->groups) as $key) {
             $userids = $this->groupsmanager->get_users_for_generated_group($key);
             $size = count($userids);
             if ($size < $maxsize) {
@@ -470,7 +470,7 @@ class mod_groupformation_grouping_controller {
      * @return array
      */
     private function get_group_members($groupid) {
-        global $CFG, $COURSE, $USER;
+        global $CFG, $COURSE;
         $userids = $this->groupsmanager->get_users_for_generated_group($groupid);
         $groupmembers = array();
 

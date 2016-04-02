@@ -193,7 +193,7 @@ class mod_groupformation_test_user_generator {
         $userrecords = $DB->get_records_sql('SELECT * FROM {user} WHERE username LIKE \'' . $username . '%\'');
 
         if (count($userrecords) > 0) {
-            foreach ($userrecords as $userid => $record) {
+            foreach (array_keys($userrecords) as $userid) {
 
                 try {
                     $groupingcontroller = new mod_groupformation_grouping_controller($groupformationid, $this->cm);

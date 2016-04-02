@@ -45,7 +45,7 @@ class mod_groupformation_logging_controller {
      * @param $level
      * @return bool
      */
-    public function handle($userid, $groupformationid, $message, $level) {
+    public function handle($userid, $groupformationid, $message) {
         if (!is_null($message) && is_string($message)) {
             $this->create_log_entry($userid, $groupformationid, $message);
         } else {

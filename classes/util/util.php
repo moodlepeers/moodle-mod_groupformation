@@ -44,7 +44,7 @@ class mod_groupformation_util {
      * @return string
      * @throws coding_exception
      */
-    public static function get_info_text_for_teacher($unfolded = false, $page = "settings") {
+    public static function get_info_text_for_teacher($unfolded, $page = "settings") {
         $s = '<p><a class="show">' . get_string('info_header_teacher_' . $page, 'groupformation') . '</a></p>';
         $s .= '<div id="info_text" style="display: ' . (($unfolded) ? 'block' : 'none') . ';">';
         $s .= '<p style="padding-left: 10px;">' . get_string('info_text_teacher_' . $page, 'groupformation') . '</p>';

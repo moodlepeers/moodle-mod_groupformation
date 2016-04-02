@@ -93,7 +93,7 @@ class mod_groupformation_xml_loader {
                 $this->store->add_catalog_version($category, $number, $version, false);
             }
         } else {
-            exit("The file $xmlfile cannot be opened or found.");
+            die("The file $xmlfile cannot be opened or found.");
         }
     }
 
@@ -141,7 +141,7 @@ class mod_groupformation_xml_loader {
             return $return;
 
         } else {
-            exit("The file $xmlfile cannot be opened or found.");
+            die("The file $xmlfile cannot be opened or found.");
         }
 
     }

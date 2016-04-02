@@ -90,7 +90,7 @@ class build_groups_task extends \core\task\scheduled_task {
      */
     private function reset_aborted_jobs() {
         $jobs = \mod_groupformation_job_manager::get_aborted_jobs();
-        foreach ($jobs as $key => $job) {
+        foreach (array_values($jobs) as $job) {
             \mod_groupformation_job_manager::reset_job($job);
         }
     }

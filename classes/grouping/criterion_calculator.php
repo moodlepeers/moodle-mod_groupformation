@@ -202,7 +202,7 @@ class mod_groupformation_criterion_calculator {
         foreach ($labels as $key => $positions) {
             $answer = 0;
             $maxanswer = 0;
-            foreach ($positions['questionids'] as $k => $p) {
+            foreach (array_values($positions['questionids']) as $p) {
                 $answer += $this->usermanager->get_single_answer($userid, $category, $p);
                 $maxanswer += $max;
             }
@@ -233,7 +233,7 @@ class mod_groupformation_criterion_calculator {
         foreach ($labels as $key => $positions) {
             $answer = 0;
             $maxanswer = 0;
-            foreach ($positions['questionids'] as $k => $p) {
+            foreach (array_values($positions['questionids']) as $p) {
                 $answer += $this->usermanager->get_single_answer($userid, $category, $p);
                 $maxanswer += $max;
             }
@@ -558,7 +558,7 @@ class mod_groupformation_criterion_calculator {
                     }
                 }
             }
-            foreach ($avgvalues as $key => $avgvalue) {
+            foreach (array_keys($avgvalues) as $key) {
                 $avgvalues[$key]['value'] /= $groupsize;
             }
         }
@@ -588,7 +588,7 @@ class mod_groupformation_criterion_calculator {
         $uservalues = $this->get_values_for_user($criterion, $userid, $labels);
         $groupvalues = $this->get_avg_values_for_users($criterion, $groupandcompleted, $labels);
         $coursevalues = $this->get_avg_values_for_users($criterion, $courseandcompleted, $labels);
-        foreach ($labels['labels'] as $label => $spec) {
+        foreach (array_keys($labels['labels']) as $label) {
             $user = $uservalues[$label]['values'][0];
             $group = null;
             $course = null;

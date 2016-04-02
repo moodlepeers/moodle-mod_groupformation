@@ -63,17 +63,6 @@ class mod_groupformation_import_form extends moodleform {
     }
 
     /**
-     * Custom validation should be added here.
-     *
-     * @param array $data
-     * @param array $files
-     * @return array
-     */
-    public function validation($data, $files) {
-        return array();
-    }
-
-    /**
      * Adds error to element
      *
      * @param string $element
