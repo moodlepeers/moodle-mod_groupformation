@@ -66,6 +66,12 @@ $string ['scenario_homeworkgroups'] = 'Homework groups';
 $string ['scenario_homeworkgroups_description'] = 'Homework groups complete (smaller) assignments in regular intervals (often weekly) as a preperation for examination. Even though the assigment tasks (often called exercises, practice, control questions or homework) are principally subdividable among group members, this is not intended as with the final examination each member will be graded individually and needs to be able to solve all tasks alone. Consequently, groupformation aims for diverse prior knowledge and diverse learning styles that benefit from each other.';
 $string ['scenario_presentationgroups'] = 'Presentation groups';
 $string ['scenario_presentationgroups_description'] = 'Presentation groups work together for a relatively short time period to finish a presentation (usually to be held in class). Often in the beginning a specific sub-task is assigned to (or selected by) each student, individually worked on, and in the end re-assembled to a complete presentation. Grading is usually done for the perforance of the whole group together. Therefore, groupformation aims primarily for mutual interest in the same topic.';
+$string ['scenario_usage_header'] = 'Questionnaire-Usage';
+$string ['scenario_usage_header_presentation'] = 'Students set preferences';
+$string ['scenario_projectteams_short'] = 'Knowledge and characteristics are heterogen, motivation and targeted goals are homogen.';
+$string ['scenario_homeworkgroups_short'] = 'Knowledge, learnstyle and targeted goals are heterogen';
+$string ['scenario_presentationgroups_short'] = 'Enables to order a list of topics by Drag&Drop. "first-come, first-served" procedure is avoided to distribute a fairer topic distribution.';
+
 $string ['time'] = 'Time';
 $string ['topics'] = 'Topics';
 $string ['topics_dummy'] = 'Topic ';

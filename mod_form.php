@@ -185,7 +185,8 @@ class mod_groupformation_mod_form extends moodleform_mod {
                         <input type="radio" name="js_szenario" id="project" value="project"  />
                         <label class="col_m_100 szenarioLabel" id="label_project" for="project" ><div class="sz_header">' .
             get_string('scenario_projectteams', 'groupformation')
-            . '</div><p><small>' .
+            . '</div><p><small><b><i>'.get_string('scenario_usage_header', 'groupformation'). '</i></b><br>'
+                                 .get_string('scenario_projectteams_short', 'groupformation'). '</p><p>' .
             get_string('scenario_projectteams_description', 'groupformation') . '</small></p>
 		                                </label>
                 </div>
@@ -193,16 +194,17 @@ class mod_groupformation_mod_form extends moodleform_mod {
                     <input type="radio" name="js_szenario" id="homework" value="homework" />
                     <label class="col_m_100 szenarioLabel" id="label_homework" for="homework" ><div class="sz_header">' .
             get_string('scenario_homeworkgroups', 'groupformation') .
-            '</div>
-                        <p><small>' .
+            '</div><p><small><b><i>'.get_string('scenario_usage_header', 'groupformation'). '</i></b><br>'
+                                 .get_string('scenario_homeworkgroups_short', 'groupformation'). '</p><p>' .
             get_string('scenario_homeworkgroups_description', 'groupformation') . '</small></p>
                     </label>
                 </div>
                          <div class="col_m_33">
                             <input type="radio" name="js_szenario" id="presentation" value="presentation" />
                             <label class="col_m_100 szenarioLabel" for="presentation"><div class="sz_header">' .
-            get_string('scenario_presentationgroups', 'groupformation') . '</div>
-                                <p><small>' .
+            get_string('scenario_presentationgroups', 'groupformation') . '</div><p><small><b><i>'
+                                 .get_string('scenario_usage_header_presentation', 'groupformation'). '</i></b><br>'
+                                 .get_string('scenario_presentationgroups_short', 'groupformation'). '</p><p>' .
             get_string('scenario_presentationgroups_description', 'groupformation') . '</small></p>
                             </label>
                         </div>

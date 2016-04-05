@@ -63,6 +63,12 @@ $string ['scenario_homeworkgroups'] = 'Hausaufgabengruppen';
 $string ['scenario_homeworkgroups_description'] = 'Hausaufgabengruppen arbeiten in regelmäßigen Abständen (meist wöchentlich) an Aufgaben, die zur Vorbereitung auf eine Klausur dienen. Auch wenn die Aufgaben (oft auch "Übungen" oder "Übungszettel" genannt) grundsätzlich auf unterschiedliche Gruppenmitglieder aufgeteilt werden könnten, ist dies meist nicht sinnvoll, weil bei der abschließenden Klausur jedes Gruppenmitglied individuell benotet wird und daher alle Aufgaben selbst lösen können muss. Daher geht es bei der Zusammensetzung von Hausaufgabengruppen primär um unterschiedliches Vorwissen und unterschiedliche Lernstile, die sich ergänzen.';
 $string ['scenario_presentationgroups'] = 'Referatgruppen';
 $string ['scenario_presentationgroups_description'] = 'Referatsgruppen arbeiten nur über einen relativ kurzen Zeitraum zusammen an einer gemeinsamen Präsentation. Oft wird dabei die Aufgabenstellung schon zu Beginn auf die Gruppenmitglieder aufgeteilt (oder gewählt), dann individuell bearbeitet und erst am Ende wieder zusammengesetzt. Bewertet wird meist die gemeinsame Gruppenleistung. Daher geht es bei der Zusammensetzung von Referatsgruppen primär um gemeinsame Interessen an Themen.';
+$string ['scenario_usage_header'] = 'Fragebogen-Nutzung';
+$string ['scenario_usage_header_presentation'] = 'Studierende geben Präferenzen an';
+$string ['scenario_projectteams_short'] = 'Vorwissen und Merkmale heterogen, Motivation und angestrebten Ziele homogen';
+$string ['scenario_homeworkgroups_short'] = 'Vorwissen, Lernstile und angestrebte Ziele heterogen';
+$string ['scenario_presentationgroups_short'] = 'Ermöglicht das Ordnen einer Liste mittels Drag&Drop, wodurch das Windhundverfahren vermieden und eine gerechtere Einteilung möglich wird.';
+
 $string ['time'] = 'Zeit';
 $string ['topics'] = 'Themen';
 $string ['topics_dummy'] = 'Thema ';
