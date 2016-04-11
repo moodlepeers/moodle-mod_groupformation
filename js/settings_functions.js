@@ -1,5 +1,5 @@
 /*!
- * moodle-mod_groupformation JavaScript 
+ * moodle-mod_groupformation JavaScript
  * https://github.com/jkonert/moodle-mod_groupformation
  *
  *
@@ -7,19 +7,15 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 $(document).ready(function() {
-    
-    // hide validation error alerts and show them if needed
-    // if css attribute "display:none" and show on validation error, they will not displayed properly
+    // Hide validation error alerts and show them if needed
+    // If css attribute "display:none" and show on validation error, they will not displayed properly
     $(".js_errors").hide();
 
     $(".settings_info").hide();
-    
-    
-    
-    // TODO wenn JS und nonJS fehlerfrei funktioniert, die folgende Zeile einkommentieren
+
     $("#non-js-content").hide();
     $("#js-content").show();
-    
+
 
     var studentsInCourse = $('#studentsInCourse').text();
 
@@ -28,29 +24,20 @@ $(document).ready(function() {
     var stringOfTopics = "";
 
     var stringAddInput = $('#stringAddInput').text();
-    
 
+
+// Sortable Topics in preview 
     $('.sortable_topics').sortable({
   	  axis: 'y',
   	  stop: function (event, ui) {
   	      var data = $(this).sortable('serialize');
   	      $('span#order').text(data);
-  	      /*$.ajax({
-  	              data: oData,
-  	          type: 'POST',
-  	          url: '/your/url/here'
-  	      });*/
   	 }
   	});
 
+///////////// Load Settings from moodle nativ input fields to customized HTML UI
 
-///////////////////////////////////////////////////////////////////////////////////////////////      
-///////////////////////////////////////////////////////////////////////////////////////////////    
-
-
-///////////// Load Settings
-
-// check errors
+// Check errors, validation
 
     if($('.error').length > 0){
         var messages = $('span.error').map(function(i) {
@@ -64,15 +51,11 @@ $(document).ready(function() {
         $.each(ids, function(index, value){
         	$(value).show();
             $(value).find('p').text(messages.get(index));
-            
         });
-
-        //    alert(ids.get().join(', '));
-        //    alert(messages.get().join(', '));
     }
 
 
-// check if possible to set settings
+// Check if possible to set settings
 
     loadGroupformationSettings();
 
@@ -85,7 +68,6 @@ $(document).ready(function() {
         }else{
             $('#js-content').find('#group_size, #group_size, #group_opt_numb, #numb_of_groups').removeAttr('disabled');
         }
-        
         $("select[id*='id_timeopen']").prop('disabled', true);
         $("input[id*='id_timeopen']").prop('disabled', true);
         $("select[id*='id_timeclose']").prop('disabled', true);
@@ -94,29 +76,20 @@ $(document).ready(function() {
 
     function loadGroupformationSettings(){
 
-        //load the szenario which been choosen before
+        // Load the szenario which been choosen before
         if ($('#id_szenario option:selected').val() != 0){
             $('#js_szenarioWrapper').show('2000', 'swing');
             var szenario = $('#id_szenario option:selected').val();
             if(szenario == 1){
                 $("input[name='js_szenario'][value='project']").attr("checked","checked");
-                //check browser support first, before delete this
                 $('#knowledeInfo').text($('#knowledeInfoProject').text());
                 $('#topicsStateLabel').removeClass('required').addClass('optional');
-                //$('#id_js_topics').prop('disabled', false);
-
-//	    		setSzenario('project');
             }else if(szenario == 2){
                 $("input[name='js_szenario'][value='homework']").attr("checked","checked");
-                //check browser support first, before delete this
                 $('#knowledeInfo').text($('#knowledeInfoHomework').text());
                 $('#topicsStateLabel').removeClass('required').addClass('optional');
-                //$('#id_js_topics').prop('disabled', false);
-
-//	    		setSzenario('homework');
             }else if(szenario == 3){
                 $("input[name='js_szenario'][value='presentation']").attr("checked","checked");
-                //check browser support first, before delete this
                 $('#knowledeInfo').text($('#knowledeInfoPresentation').text());
                 $('#topicsStateLabel').removeClass('optional').addClass('required');
                 $('#id_js_topics').prop('disabled', true);
@@ -126,19 +99,18 @@ $(document).ready(function() {
                 adjustGropOptions('none', 0, 0);
 
                 $("#js_topicsWrapper").show('2000', 'swing');
-
             }
         }
 
 
 
-        //if knowledge was checked before
+        // If knowledge was checked before
         if ($('#id_knowledge').prop('checked')){
             $('#id_js_knowledge').prop('checked',true);
             $('#id_knowledge').prop('checked',true);
             $("#js_knowledgeWrapper").show('2000', 'swing');
 
-            //get the value of Moodle nativ field #id_knowledgelines, parse it and create dynamic input fields
+            // Get the value of Moodle nativ field #id_knowledgelines, parse it and create dynamic input fields
             var lines = $('textarea[name=knowledgelines]').val().split('\n');
             $wrapper = $('#prk').find('.multi_fields');
             $cat = 'prk';
@@ -146,19 +118,19 @@ $(document).ready(function() {
                 addInput($wrapper, $cat, this);
             });
             for( var i = 0, l = 3; i < l; i++){
-                //remove the first 3 dynamic fields which been created by default
+                // Removes the first 3 dynamic fields which been created by default
                 removeInput($wrapper, $cat, i);
             }
             addInput($wrapper, $cat, '');
         }
 
-        //if topics was checked before
+        // If topics was checked before
         if ($('#id_topics').prop('checked')){
             $('#id_js_topics').prop('checked',true);
             $('#id_topics').prop('checked',true);
             $("#js_topicsWrapper").show('2000', 'swing');
 
-            //get the value of Moodle nativ field #id_topiclines, parse it and create dynamic input fields
+            // Get the value of Moodle nativ field #id_topiclines, parse it and create dynamic input fields
             var lines = $('textarea[name=topiclines]').val().split('\n');
             $wrapper = $('#tpc').find('.multi_fields');
             $cat = 'tpc';
@@ -166,20 +138,17 @@ $(document).ready(function() {
                 addInput($wrapper, $cat, this);
             });
             for( var i = 0, l = 3; i < l; i++){
-                //remove the first 3 dynamic fields which been created by default
+                //  Remove the first 3 dynamic fields which been created by default
                 removeInput($wrapper, $cat, i);
             }
             addInput($wrapper, $cat, '');
-            // set the groupotions depending on topics
+            // Set the groupotions depending on topics
             adjustGropOptions('none', 0, 0);
             $('#groupSettingsInfo').show('2000', 'swing');
-
         }else{
-
-            //set the groupotions from the Moodle native inputs
+            // Set the groupotions from the Moodle native inputs
             if($('input[name=groupoption]:checked').val() == '0'){
                 calculateSizeParameter($('#id_maxmembers').val(), 0);
-
             }else{
                 calculateSizeParameter(0, $('#id_maxgroups').val());
             }
@@ -203,10 +172,7 @@ $(document).ready(function() {
                 $('#js_evaluationmethod option').prop('selected', false).filter('[value=novaluation]').prop('selected', true);
             }
         }
-        
         $('#js_groupname').val($('#id_groupname').val());
-
-
         if ($('#id_onlyactivestudents').prop('checked')){
             $('#id_js_onlyactivestudents').prop('checked', true);
         }
@@ -218,40 +184,35 @@ $(document).ready(function() {
 
     }
 
-
-
-
-    // End of Load Settings    
-    
+    // End of Load Settings
 ///////////////////////////////////////////////////////////////////////////////////////////////     
 
 
-    //nach Beta wieder entkommentieren!!!
+// Set the scenario configurations 
+
     $('.szenarioLabel').click(function(){
         if(!(typeof $("input[name='js_szenario']:checked").val() != 'undefined')){
             $('#js_szenarioWrapper').show('2000', 'swing');
         }
     });
-    
+
     $("input[name='js_szenario']").change(function(){
         var szenario = $(this).val();
         setSzenario(szenario);
     });
-    
+
     function setSzenario($szenario){
         if($szenario == 'project'){
         	$('#id_szenario option').prop('selected', false).filter('[value=1]').prop('selected', true);
-        	
+
             $('#knowledeInfo').text($('#knowledeInfoProject').text());
             switchTopics('off');
             $('#topicsStateLabel').removeClass('required').addClass('optional');
             $('#id_js_topics').prop('disabled', false);
 
             setGroupSettings();
-            
         }else if($szenario == 'homework'){
         	$('#id_szenario option').prop('selected', false).filter('[value=2]').prop('selected', true);
-        	
             $('#knowledeInfo').text($('#knowledeInfoHomework').text());
             switchTopics('off');
             $('#topicsStateLabel').removeClass('required').addClass('optional');
@@ -261,7 +222,6 @@ $(document).ready(function() {
 
         }else if($szenario == 'presentation'){
         	$('#id_szenario option').prop('selected', false).filter('[value=3]').prop('selected', true);
-        	
             $('#knowledeInfo').text($('#knowledeInfoPresentation').text());
             switchTopics('on');
             $('#topicsStateLabel').removeClass('optional').addClass('required');
@@ -270,27 +230,24 @@ $(document).ready(function() {
             setGroupSettings();
         }
     }
-    
-    
-    
-    
- //if knowledge gets checked
+
+
+
+
+ // If knowledge gets checked
     $('#id_js_knowledge').click(function(){
     	if ($('#id_knowledge').prop('checked')){
     		$('#id_knowledge').prop('checked',false);
     		$('#id_knowledgelines').attr('disabled', 'disabled');
-            
             $("#js_knowledgeWrapper").hide('2000', 'swing');
     	}else{
     		$('#id_knowledge').prop('checked', true);
     		$('#id_knowledgelines').removeAttr('disabled');
-            
             $("#js_knowledgeWrapper").show('2000', 'swing');
     	}
-    	
     });
-    
-    //if topics gets checked
+
+    // If topics gets checked
     $('#id_js_topics').click(function(){
     	if ($('#id_topics').prop('checked')){
             switchTopics('off');
@@ -298,12 +255,11 @@ $(document).ready(function() {
             switchTopics('on');
     	}
     });
-    
+
     function switchTopics($state){
         if($state == 'on'){
             $('#id_topics').prop('checked', true);
     		$('#id_topiclines').removeAttr('disabled');
-            
             $('#id_js_topics').prop('checked',true);
 
             adjustGropOptions('none', 0, 0);
@@ -314,25 +270,21 @@ $(document).ready(function() {
         if($state == 'off'){
             $('#id_topics').prop('checked',false);
     		$('#id_topiclines').attr('disabled', 'disabled');
-            
             $('#id_js_topics').prop('checked',false);
-            
+
             var activeElID = 'group_size';
             var activeElVal = 0;
             var nonActiveElVal = 0;
             adjustGropOptions(activeElID, activeElVal, nonActiveElVal);
-            
             $("#group_opt_numb").removeAttr('disabled');
             $("#group_opt_size").removeAttr('disabled');
-
             $('#groupSettingsInfo').hide('2000', 'swing');
             $("#js_topicsWrapper").hide('2000', 'swing');
         }
     }
-    
-    
-    
-    
+
+
+// Add Knowledge or Topic functions 
     function addInput($wrapper, $cat, $value){
         $thisID = parseInt($('.multi_field:last-child', $wrapper).attr('id').substr(8));
         $theNextID = $thisID + 1;
@@ -340,18 +292,19 @@ $(document).ready(function() {
         $thisMultifieldID = 'input' + $cat + $thisID;
         $nextMultifieldID = 'input' + $cat + $theNextID;
 
-        //last field change style
+        // Last field change style
         $('.multi_field:last-child', $wrapper).find('input[type="text"]').removeClass('lastInput').removeAttr('placeholder');
         $('.multi_field:last-child', $wrapper).find('button').removeAttr('disabled');
 
-        // add input field
+        // Add input field
         $('.multi_field:first-child', $wrapper).clone(true).attr('id',$nextMultifieldID)
                                                             .appendTo($wrapper).find('input').val($value).addClass('lastInput').attr('placeholder', stringAddInput);
         $('.multi_field:last-child', $wrapper).find('button').attr('disabled', true);
 
         addPreview($wrapper, $cat, $theNextID, $value);
     }
-    
+
+// Add the preview of knowledge or topics
     function addPreview($wrapper, $cat, $theID, $value){
         $previewRowID = $cat + 'Row' +  $theID;
         
@@ -364,17 +317,17 @@ $(document).ready(function() {
                                                                 .appendTo('#previewTopics').html('<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' + $value);
         }
     }
-    
+
+// Removes certain knowledge or topic within the corresponding preview
     function removeInput($wrapper, $cat, $theID){
         if ($('.multi_field', $wrapper).length > 1){
             $previewRowID = $cat + 'Row' +  $theID;
             $multifieldID = 'input' + $cat + $theID;
-            //remove Preview
+            // Remove Preview
             $('#' + $previewRowID).remove();
-            //remove Input
+            // Remove Input
             $('#' + $multifieldID).remove();
-            
-            //remove from Moodle native input field
+            // Remove from Moodle native input field
             if($cat == 'prk'){
                 synchronizePreknowledge();
             }
@@ -385,31 +338,24 @@ $(document).ready(function() {
             }
         }
     }
-    
-    
-    //dynamic inputs function
+
+
+    // Dynamic inputs listener
     $('.multi_field_wrapper').each(function dynamicInputs() {
         var $wrapper = $('.multi_fields', this);
         var $cat = $(this).parent().attr('id');
-        
-        //add new empty field on button
- /*       $(".add_field", $(this)).click(function() {
-            $value = '';
-            addInput($wrapper, $cat, $value);
-        });*/
 
-        //add new empty field with click on last input field
+        // Add new empty field with click on last input field
         $('.multi_field input:text', $wrapper).click(function(){
             if($('.multi_field:last-child', $wrapper).attr('id') == $(this).parent().attr('id')){
                 $value = '';
                 addInput($wrapper, $cat, $value);
             }
         });
-        
-        //removes field on button
+
+        // Removes field on button
         $('.multi_field .remove_field', $wrapper).click(function() {
             $theID = parseInt($(this).parent().attr('id').substr(8));
-            
             removeInput($wrapper, $cat, $theID);    
         });
 
@@ -428,9 +374,9 @@ $(document).ready(function() {
                   }
               });
     });
-    
-        
-  
+
+
+// synchronize knowledge-input with the moodle fields
     function synchronizePreknowledge(){
       stringOfPreknowledge = '';
       $('.js_preknowledgeInput').each(function(){
