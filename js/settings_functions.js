@@ -8,14 +8,13 @@
  */
 $(document).ready(function() {
     // Hide validation error alerts and show them if needed
-    // If css attribute "display:none" and show on validation error, they will not displayed properly
+    // If css attribute "display:none" and show on validation error, they will not displayed properly.
     $(".js_errors").hide();
 
     $(".settings_info").hide();
 
     $("#non-js-content").hide();
     $("#js-content").show();
-
 
     var studentsInCourse = $('#studentsInCourse').text();
 
@@ -25,19 +24,18 @@ $(document).ready(function() {
 
     var stringAddInput = $('#stringAddInput').text();
 
-
-// Sortable Topics in preview 
+// Sortable Topics in preview
     $('.sortable_topics').sortable({
-  	  axis: 'y',
-  	  stop: function (event, ui) {
-  	      var data = $(this).sortable('serialize');
-  	      $('span#order').text(data);
-  	 }
-  	});
+        axis: 'y',
+        stop: function (event, ui) {
+            var data = $(this).sortable('serialize');
+            $('span#order').text(data);
+        }
+    });
 
-///////////// Load Settings from moodle nativ input fields to customized HTML UI
+// Load Settings from moodle nativ input fields to customized HTML UI.
 
-// Check errors, validation
+// Check errors, validation.
 
     if($('.error').length > 0){
         var messages = $('span.error').map(function(i) {
@@ -49,7 +47,7 @@ $(document).ready(function() {
         });
 
         $.each(ids, function(index, value){
-        	$(value).show();
+            $(value).show();
             $(value).find('p').text(messages.get(index));
         });
     }
@@ -180,13 +178,10 @@ $(document).ready(function() {
         if ($('#id_emailnotifications').prop('checked')){
             $('#id_js_emailnotifications').prop('checked', true);
         }
-
-
     }
 
     // End of Load Settings
-///////////////////////////////////////////////////////////////////////////////////////////////     
-
+    //
 
 // Set the scenario configurations 
 
@@ -203,7 +198,7 @@ $(document).ready(function() {
 
     function setSzenario($szenario){
         if($szenario == 'project'){
-        	$('#id_szenario option').prop('selected', false).filter('[value=1]').prop('selected', true);
+            $('#id_szenario option').prop('selected', false).filter('[value=1]').prop('selected', true);
 
             $('#knowledeInfo').text($('#knowledeInfoProject').text());
             switchTopics('off');
@@ -236,30 +231,30 @@ $(document).ready(function() {
 
  // If knowledge gets checked
     $('#id_js_knowledge').click(function(){
-    	if ($('#id_knowledge').prop('checked')){
-    		$('#id_knowledge').prop('checked',false);
-    		$('#id_knowledgelines').attr('disabled', 'disabled');
+        if ($('#id_knowledge').prop('checked')){
+            $('#id_knowledge').prop('checked',false);
+            $('#id_knowledgelines').attr('disabled', 'disabled');
             $("#js_knowledgeWrapper").hide('2000', 'swing');
-    	}else{
-    		$('#id_knowledge').prop('checked', true);
-    		$('#id_knowledgelines').removeAttr('disabled');
+        }else{
+            $('#id_knowledge').prop('checked', true);
+            $('#id_knowledgelines').removeAttr('disabled');
             $("#js_knowledgeWrapper").show('2000', 'swing');
-    	}
+        }
     });
 
     // If topics gets checked
     $('#id_js_topics').click(function(){
-    	if ($('#id_topics').prop('checked')){
+        if ($('#id_topics').prop('checked')){
             switchTopics('off');
-    	}else{
+        }else{
             switchTopics('on');
-    	}
+        }
     });
 
     function switchTopics($state){
         if($state == 'on'){
             $('#id_topics').prop('checked', true);
-    		$('#id_topiclines').removeAttr('disabled');
+            $('#id_topiclines').removeAttr('disabled');
             $('#id_js_topics').prop('checked',true);
 
             adjustGropOptions('none', 0, 0);
@@ -269,7 +264,7 @@ $(document).ready(function() {
         }
         if($state == 'off'){
             $('#id_topics').prop('checked',false);
-    		$('#id_topiclines').attr('disabled', 'disabled');
+            $('#id_topiclines').attr('disabled', 'disabled');
             $('#id_js_topics').prop('checked',false);
 
             var activeElID = 'group_size';
@@ -304,7 +299,7 @@ $(document).ready(function() {
         addPreview($wrapper, $cat, $theNextID, $value);
     }
 
-// Add the preview of knowledge or topics
+// Add the preview of knowledge or topics.
     function addPreview($wrapper, $cat, $theID, $value){
         $previewRowID = $cat + 'Row' +  $theID;
         
@@ -318,7 +313,7 @@ $(document).ready(function() {
         }
     }
 
-// Removes certain knowledge or topic within the corresponding preview
+// Removes certain knowledge or topic within the corresponding preview.
     function removeInput($wrapper, $cat, $theID){
         if ($('.multi_field', $wrapper).length > 1){
             $previewRowID = $cat + 'Row' +  $theID;
@@ -327,7 +322,7 @@ $(document).ready(function() {
             $('#' + $previewRowID).remove();
             // Remove Input
             $('#' + $multifieldID).remove();
-            // Remove from Moodle native input field
+            // Remove from Moodle native input field.
             if($cat == 'prk'){
                 synchronizePreknowledge();
             }
@@ -340,12 +335,12 @@ $(document).ready(function() {
     }
 
 
-    // Dynamic inputs listener
+    // Dynamic inputs listener.
     $('.multi_field_wrapper').each(function dynamicInputs() {
         var $wrapper = $('.multi_fields', this);
         var $cat = $(this).parent().attr('id');
 
-        // Add new empty field with click on last input field
+        // Add new empty field with click on last input field.
         $('.multi_field input:text', $wrapper).click(function(){
             if($('.multi_field:last-child', $wrapper).attr('id') == $(this).parent().attr('id')){
                 $value = '';
@@ -353,13 +348,13 @@ $(document).ready(function() {
             }
         });
 
-        // Removes field on button
+        // Removes field on button.
         $('.multi_field .remove_field', $wrapper).click(function() {
             $theID = parseInt($(this).parent().attr('id').substr(8));
             removeInput($wrapper, $cat, $theID);    
         });
 
-        // Create Preview and write to the native Moodle input
+        // Create Preview and write to the native Moodle input.
         $('.multi_field input:text', $wrapper).keyup(function() {
         	$previewRowID = ($cat + 'Row' + parseInt($(this).parent().attr('id').substr(8)));
                   if ($cat == 'prk'){
@@ -376,7 +371,7 @@ $(document).ready(function() {
     });
 
 
-// synchronize knowledge-input with the moodle fields
+// Synchronize knowledge-input with the moodle fields.
     function synchronizePreknowledge(){
       stringOfPreknowledge = '';
       $('.js_preknowledgeInput').each(function(){
@@ -396,10 +391,8 @@ $(document).ready(function() {
       });
       $('#id_topiclines').val(stringOfTopics.slice(0, -1));
     }
-    
-    
 
-    //Groupoptions radiobutton listener
+    // Groupoptions radiobutton listener.
     $('input[name=group_opt]').click(function(e){
         var activeElVal = '0';
         var nonActiveElVal = '0';
@@ -407,56 +400,50 @@ $(document).ready(function() {
         adjustGropOptions(activeElID, activeElVal, nonActiveElVal);
     });
     
-    //Groupoptions values listener
+    // Groupoptions values listener.
     $('input[class=group_opt]').bind('keyup change', function(){
             var elID = $(this).attr('id');
             var elValue = $(this).val();
             if(elID == 'group_size'){
                 calculateSizeParameter(elValue, 0);
                 setGroupSettings();
-
             }else{
                 calculateSizeParameter(0, elValue);
                 setGroupSettings();
-
             }
         });
-    
-    
-    
+
+
+
     function adjustGropOptions($activeEllID, $activeElVal, $nonActiveElVal){
         if($activeEllID == 'group_size'){
         	$('#group_opt_size').prop('checked', true);
             $('#group_size').removeAttr('disabled').val($activeElVal);
             $('#numb_of_groups').attr('disabled', 'disabled').val($nonActiveElVal);
             
-            //Moodle nativ fields
+            //Moodle nativ fields.
             $('#id_groupoption_0').prop('checked', true);
             $('#id_maxmembers').removeAttr('disabled');
             $('#id_maxgroups').attr('disabled', 'disabled');
             setGroupSettings();
-
-
         }else if($activeEllID == 'numb_of_groups'){
         	$('#group_opt_numb').prop('checked', true);
             $('#numb_of_groups').removeAttr('disabled').val($activeElVal);
             $('#group_size').attr('disabled', 'disabled').val($nonActiveElVal);
 
-            //Moodle nativ fields
+            // Moodle nativ fields.
             $('#id_groupoption_1').prop('checked', true);
             $('#id_maxgroups').removeAttr('disabled');
             $('#id_maxmembers').attr('disabled', 'disabled');
             setGroupSettings();
-
         }else{
             $('#group_opt_numb').prop('checked', true);
-
             $("#group_size").attr('disabled', 'disabled');
             $("#numb_of_groups").attr('disabled', 'disabled');
             $("#group_opt_numb").attr('disabled', 'disabled');
             $("#group_opt_size").attr('disabled', 'disabled');
 
-            //Moodle nativ fields
+            // Moodle nativ fields.
             $('#id_groupoption_0').prop('checked', true);
             $('#id_maxmembers').removeAttr('disabled');
             $('#id_maxgroups').attr('disabled', 'disabled');
@@ -481,7 +468,7 @@ $(document).ready(function() {
         $('#numb_of_groups').val($maxGroups);
     }
 
-    
+
     function getTopicsNumb(){
         var topicsCounter = 0;
         $('.js_topicInput').each(function(){
@@ -565,133 +552,4 @@ $(document).ready(function() {
             $('#id_emailnotifications').prop('checked', true);
         }
     });
-
-
-
-
-    //////////////////////////////////////////////
-    //////////////////////////////////////////////
-    ///////////////NOT IN USE ANYMORE ////////////
-    //////////////////////////////////////////////
-
-  /////////////////////// Sticky buttons ///////////////////////////////////////////////////////////
-    
-    function UpdateBtnWrapp() {
-        $(".persist-area").each(function() {
-
-        var el             = $(this),
-           offset         = el.offset(),
-           scrollTop      = $(window).scrollTop(),
-           floatingWrapper = $(".floatingWrapper", this)
-
-        if ((scrollTop > offset.top) && (scrollTop < offset.top + el.height())) {
-            floatingWrapper.css({
-            "visibility": "visible"
-            });
-        } else {
-            floatingWrapper.css({
-            "visibility": "hidden"
-            });      
-        };
-    });
-}
-
-// DOM Ready      
-    $(function() {
-
-        var clonedWrapper,
-            theWidth = $('.col_100 h4').width();
-
-
-       $(".persist-area").each(function() {
-           clonedWrapper = $(".btn_wrap", this);       
-           clonedWrapper
-             .before(clonedWrapper.clone(true))
-    //            .css('width', widthYeah)
-    //             .css("width", clonedWrapper.width())
-           .css('width', theWidth)
-             .addClass("floatingWrapper");
-
-       });
-
-       $(window).scroll(UpdateBtnWrapp).trigger("scroll");
-        //    alert(theWidth);
-
-    });
-
-
-    
-    //
-    //  Datepicker + validation of dates on submit
-    //
-    
-    
-    
-    $.datepicker.regional['de'] = {
-        dateFormat: 'dd.mm.yy',
-        monthNames: ['Januar','Februar','M\u00e4rz','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
-        dayNames: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag','Samstag'],
-        dayNamesMin: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa']
-    };
-    
-    $("#startDate, #endDate").datepicker(); // initialize Datepicker 
-    if(true){                               //TODO Welche Sprache/Land wird verwendet, bei deutsch: true
-        $.datepicker.setDefaults( $.datepicker.regional[ 'de' ] );
-    }else $.datepicker.setDefaults( $.datepicker.regional[ '' ] ); //else default: engl.
-    
-    $("#startDate").datepicker("setDate", new Date() ); // Set default startDate as current date
-//    $("#endDate").datepicker("setDate", new Date() );
-//    var currentDate = $( "#startDate" ).datepicker( "getDate" );
-    $('#endDate').datepicker("setDate", "+7");
-    
-    
-    //set endDate + 7 Days from startDate by default
-    $( '#startDate' ).change(function() {
-            var date = $(this).datepicker('getDate');
-            date.setDate(date.getDate() + 7); // Add 7 days
-            $('#endDate').datepicker('setDate', date); // Set as default
-      });
-
-
-
-
-    // validating the docent form page 2
-    $( "#docent_settings_2" ).submit(function( event ){
-        var proceed = true;
-        
-        var startDate = $( "#startDate" ).datepicker( "getDate" );
-        var endDate = $( "#endDate" ).datepicker( "getDate" );
-
-        // check the date
-        if (startDate >= endDate){
-            proceed = false;
-            
-            $('#error_date').css({display: "inline-block"});
-        }
-        
-        if(proceed){ //if form is valid submit form
-            return true;
-        }
-        
-        event.preventDefault();         // prevent submitting 
-        
-        scrollTo('.errors');            //scroll to the error messages
-        
-//        $('html, body').animate({       
-//            scrollTop: $('.errors').offset().top
-//        }, 80);
-//        
-    });
-    
-    // scroll to function
-    function scrollTo($param) {
-        $('html, body').animate({    
-            scrollTop: $($param).offset().top
-        }, 80);
-    }
-
-    // Drag & Drop the topics/objects to sort them 
-	  
-    
-    
 });
