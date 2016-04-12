@@ -312,7 +312,7 @@ $(document).ready(function () {
             $multifieldID = 'input' + $cat + $theID;
             // Remove Preview.
             $('#' + $previewRowID).remove();
-            // Remove Input
+            // Remove Input.
             $('#' + $multifieldID).remove();
             // Remove from Moodle native input field.
             if ($cat == 'prk') {

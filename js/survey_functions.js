@@ -12,7 +12,7 @@ $(document).ready(function () {
 
     // Get the widths of all navigation li's.
     var menuWidths = $('#accordion li').map(function (i) {
-        //document.getElementById('foo').offsetWidth
+        // ... document.getElementById('foo').offsetWidth;
         return $(this).outerWidth();
     });
 
@@ -48,7 +48,7 @@ $(document).ready(function () {
     if ($('#commited_view').length) {
         $('table.responsive-table').find('input, select').prop('disabled', true);
     } else {
-        // clickable wraper for input radios // Fragebogen
+        // Clickable wraper for input radios.
         $(".select-area").click(function () {
             var name = $(this).find('input:radio').attr('name');
             $('input[name="' + name + '"]').parent().removeClass('selected_label');
@@ -62,7 +62,7 @@ $(document).ready(function () {
             axis: 'y',
             stop: function (event, ui) {
                 var data = $(this).sortable('serialize');
-                //$('span#order').text(data);
+                // ... $('span#order').text(data);
 
                 $('#invisible_topics_inputs').find('input').remove();
                 createTopicInputs();
@@ -84,7 +84,7 @@ $(document).ready(function () {
             $('input[name="' + $(this).prop('name') + '_valid"]').val(1);
         });
 
-        // Get map of grade/points values
+        // Get map of grade/points values.
         var values = $('#grade1 option').map(function (i) {
             return $(this).val();
         });
