@@ -24,7 +24,7 @@ $(document).ready(function () {
 
     var stringAddInput = $('#stringAddInput').text();
 
-    // Sortable Topics in preview
+    // Sortable Topics in preview.
     $('.sortable_topics').sortable({
         axis: 'y',
         stop: function (event, ui) {
@@ -52,7 +52,7 @@ $(document).ready(function () {
         });
     }
 
-    // Check if possible to set settings
+    // Check if possible to set settings.
 
     loadGroupformationSettings();
 
@@ -73,7 +73,7 @@ $(document).ready(function () {
 
     function loadGroupformationSettings() {
 
-        // Load the szenario which been choosen before
+        // Load the szenario which been choosen before.
         if ($('#id_szenario option:selected').val() != 0) {
             $('#js_szenarioWrapper').show('2000', 'swing');
             var szenario = $('#id_szenario option:selected').val();
@@ -99,13 +99,13 @@ $(document).ready(function () {
             }
         }
 
-        // If knowledge was checked before
+        // If knowledge was checked before.
         if ($('#id_knowledge').prop('checked')) {
             $('#id_js_knowledge').prop('checked', true);
             $('#id_knowledge').prop('checked', true);
             $("#js_knowledgeWrapper").show('2000', 'swing');
 
-            // Get the value of Moodle nativ field #id_knowledgelines, parse it and create dynamic input fields
+            // Get the value of Moodle nativ field #id_knowledgelines, parse it and create dynamic input fields.
             var lines = $('textarea[name=knowledgelines]').val().split('\n');
             $wrapper = $('#prk').find('.multi_fields');
             $cat = 'prk';
@@ -113,19 +113,19 @@ $(document).ready(function () {
                 addInput($wrapper, $cat, this);
             });
             for (var i = 0, l = 3; i < l; i++) {
-                // Removes the first 3 dynamic fields which been created by default
+                // Removes the first 3 dynamic fields which been created by default.
                 removeInput($wrapper, $cat, i);
             }
             addInput($wrapper, $cat, '');
         }
 
-        // If topics was checked before
+        // If topics was checked before.
         if ($('#id_topics').prop('checked')) {
             $('#id_js_topics').prop('checked', true);
             $('#id_topics').prop('checked', true);
             $("#js_topicsWrapper").show('2000', 'swing');
 
-            // Get the value of Moodle nativ field #id_topiclines, parse it and create dynamic input fields
+            // Get the value of Moodle nativ field #id_topiclines, parse it and create dynamic input fields.
             var lines = $('textarea[name=topiclines]').val().split('\n');
             $wrapper = $('#tpc').find('.multi_fields');
             $cat = 'tpc';
@@ -133,15 +133,15 @@ $(document).ready(function () {
                 addInput($wrapper, $cat, this);
             });
             for (var i = 0, l = 3; i < l; i++) {
-                //  Remove the first 3 dynamic fields which been created by default
+                // Remove the first 3 dynamic fields which been created by default.
                 removeInput($wrapper, $cat, i);
             }
             addInput($wrapper, $cat, '');
-            // Set the groupotions depending on topics
+            // Set the groupotions depending on topics.
             adjustGropOptions('none', 0, 0);
             $('#groupSettingsInfo').show('2000', 'swing');
         } else {
-            // Set the groupotions from the Moodle native inputs
+            // Set the groupotions from the Moodle native inputs.
             if ($('input[name=groupoption]:checked').val() == '0') {
                 calculateSizeParameter($('#id_maxmembers').val(), 0);
             } else {
@@ -176,10 +176,10 @@ $(document).ready(function () {
         }
     }
 
-    // End of Load Settings
+    // End of Load Settings.
     //
 
-    // Set the scenario configurations
+    // Set the scenario configurations.
 
     $('.szenarioLabel').click(function () {
         if (!(typeof $("input[name='js_szenario']:checked").val() != 'undefined')) {
@@ -222,7 +222,7 @@ $(document).ready(function () {
         }
     }
 
-    // If knowledge gets checked
+    // If knowledge gets checked.
     $('#id_js_knowledge').click(function () {
         if ($('#id_knowledge').prop('checked')) {
             $('#id_knowledge').prop('checked', false);
@@ -235,7 +235,7 @@ $(document).ready(function () {
         }
     });
 
-    // If topics gets checked
+    // If topics gets checked.
     $('#id_js_topics').click(function () {
         if ($('#id_topics').prop('checked')) {
             switchTopics('off');
@@ -271,7 +271,7 @@ $(document).ready(function () {
         }
     }
 
-    // Add Knowledge or Topic functions
+    // Add Knowledge or Topic functions.
     function addInput($wrapper, $cat, $value) {
         $thisID = parseInt($('.multi_field:last-child', $wrapper).attr('id').substr(8));
         $theNextID = $thisID + 1;
@@ -279,11 +279,11 @@ $(document).ready(function () {
         $thisMultifieldID = 'input' + $cat + $thisID;
         $nextMultifieldID = 'input' + $cat + $theNextID;
 
-        // Last field change style
+        // Last field change style.
         $('.multi_field:last-child', $wrapper).find('input[type="text"]').removeClass('lastInput').removeAttr('placeholder');
         $('.multi_field:last-child', $wrapper).find('button').removeAttr('disabled');
 
-        // Add input field
+        // Add input field.
         $('.multi_field:first-child', $wrapper).clone(true).attr('id', $nextMultifieldID)
             .appendTo($wrapper).find('input').val($value).addClass('lastInput').attr('placeholder', stringAddInput);
         $('.multi_field:last-child', $wrapper).find('button').attr('disabled', true);
@@ -310,7 +310,7 @@ $(document).ready(function () {
         if ($('.multi_field', $wrapper).length > 1) {
             $previewRowID = $cat + 'Row' + $theID;
             $multifieldID = 'input' + $cat + $theID;
-            // Remove Preview
+            // Remove Preview.
             $('#' + $previewRowID).remove();
             // Remove Input
             $('#' + $multifieldID).remove();
@@ -409,7 +409,7 @@ $(document).ready(function () {
             $('#group_size').removeAttr('disabled').val($activeElVal);
             $('#numb_of_groups').attr('disabled', 'disabled').val($nonActiveElVal);
 
-            //Moodle nativ fields.
+            // Moodle nativ fields.
             $('#id_groupoption_0').prop('checked', true);
             $('#id_maxmembers').removeAttr('disabled');
             $('#id_maxgroups').attr('disabled', 'disabled');
@@ -444,7 +444,9 @@ $(document).ready(function () {
     function calculateSizeParameter($maxMembers, $maxGroups) {
         if ($maxMembers == 0) {
             $maxMembers = Math.round(studentsInCourse / $maxGroups);
-            if ($maxMembers == 0) return $maxMembers == 1;
+            if ($maxMembers == 0){
+                return $maxMembers == 1;
+            }
         } else if ($maxGroups == 0) {
             $maxGroups = Math.round(studentsInCourse / $maxMembers);
         } else {
@@ -470,11 +472,11 @@ $(document).ready(function () {
         $('#id_maxmembers').val($('#group_size').val());
     }
 
-    // evaluation method listener
+    // Evaluation method listener.
     $('#js_evaluationmethod').change(function () {
         if ($(this).val() == 'grades') {
             $('#id_evaluationmethod option').prop('selected', false).filter('[value=1]').prop('selected', true);
-            $('#max_points_wrapper').prop('disabled', true).hide();
+            $('#max_points_wrapper').prop('disabled', true).hide();ne
 
         } else if ($(this).val() == 'points') {
             $('#id_evaluationmethod option').prop('selected', false).filter('[value=2]').prop('selected', true);
@@ -495,7 +497,7 @@ $(document).ready(function () {
         }
     });
 
-    // write max points to Moodle native Input
+    // Write max points to Moodle native Input.
     $('#max_points').bind('keyup change', function () {
         $('#id_maxpoints').val($(this).val());
     });
