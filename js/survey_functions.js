@@ -12,7 +12,7 @@ $(document).ready(function () {
 
     // Get the widths of all navigation li's.
     var menuWidths = $('#accordion li').map(function (i) {
-        // ... document.getElementById('foo').offsetWidth;
+        // ... document.getElementById('foo').offsetWidth; ?
         return $(this).outerWidth();
     });
 
@@ -62,7 +62,7 @@ $(document).ready(function () {
             axis: 'y',
             stop: function (event, ui) {
                 var data = $(this).sortable('serialize');
-                // ... $('span#order').text(data);
+                // ... $('span#order').text(data); ?
 
                 $('#invisible_topics_inputs').find('input').remove();
                 createTopicInputs();
