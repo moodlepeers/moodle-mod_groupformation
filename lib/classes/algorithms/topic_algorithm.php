@@ -24,13 +24,13 @@
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/lgpl.html GNU LGPL v3 or later
  */
-require_once($CFG->dirroot . "/lib/groupal/classes/algorithms/ialgorithm.php");
-require_once($CFG->dirroot . "/lib/groupal/classes/group.php");
-require_once($CFG->dirroot . "/lib/groupal/classes/cohorts/topic_cohort.php");
-require_once($CFG->dirroot . "/lib/groupal/classes/participant.php");
-require_once($CFG->dirroot . "/lib/groupal/classes/topics_solver/choicedata.php");
-require_once($CFG->dirroot . "/lib/groupal/classes/topics_solver/rating_for_topic.php");
-require_once($CFG->dirroot . "/lib/groupal/classes/topics_solver/edmonds-karp.php");
+require_once($CFG->dirroot . "/mod/groupformation/lib/classes/algorithms/ialgorithm.php");
+require_once($CFG->dirroot . "/mod/groupformation/lib/classes/group.php");
+require_once($CFG->dirroot . "/mod/groupformation/lib/classes/cohorts/topic_cohort.php");
+require_once($CFG->dirroot . "/mod/groupformation/lib/classes/participant.php");
+require_once($CFG->dirroot . "/mod/groupformation/lib/classes/topics_solver/choicedata.php");
+require_once($CFG->dirroot . "/mod/groupformation/lib/classes/topics_solver/rating_for_topic.php");
+require_once($CFG->dirroot . "/mod/groupformation/lib/classes/topics_solver/edmonds-karp.php");
 
 
 class lib_groupal_topic_algorithm implements lib_groupal_ialgorithm {

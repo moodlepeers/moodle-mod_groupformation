@@ -24,7 +24,7 @@
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/lgpl.html GNU LGPL v3 or later
  */
-require_once($CFG->dirroot . "/lib/groupal/classes/util/hash_map.php");
+require_once($CFG->dirroot . "/mod/groupformation/lib/classes/util/hash_map.php");
 
 class lib_groupal_criterion_weight {
 

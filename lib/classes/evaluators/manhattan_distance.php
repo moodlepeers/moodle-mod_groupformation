@@ -25,8 +25,8 @@
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/lgpl.html GNU LGPL v3 or later
  */
-require_once($CFG->dirroot . "/lib/groupal/classes/evaluators/idistance.php");
-require_once($CFG->dirroot . "/lib/groupal/classes/criteria/criterion.php");
+require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/idistance.php");
+require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion.php");
 
 class lib_groupal_manhattan_distance implements lib_groupal_idistance {
 

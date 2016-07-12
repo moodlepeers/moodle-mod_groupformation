@@ -24,9 +24,9 @@
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/lgpl.html GNU LGPL v3 or later
  */
-require_once($CFG->dirroot . '/lib/groupal/classes/algorithms/ialgorithm.php');
-require_once($CFG->dirroot . '/lib/groupal/classes/group.php');
-require_once($CFG->dirroot . '/lib/groupal/classes/cohorts/random_cohort.php');
+require_once($CFG->dirroot . '/mod/groupformation/lib/classes/algorithms/ialgorithm.php');
+require_once($CFG->dirroot . '/mod/groupformation/lib/classes/group.php');
+require_once($CFG->dirroot . '/mod/groupformation/lib/classes/cohorts/random_cohort.php');
 
 class lib_groupal_random_algorithm implements lib_groupal_ialgorithm {
 

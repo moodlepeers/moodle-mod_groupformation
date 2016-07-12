@@ -31,7 +31,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 
-require_once($CFG->dirroot . '/lib/groupal/classes/topics_solver/solver-template.php');
+require_once($CFG->dirroot . '/mod/groupformation/lib/classes/topics_solver/solver-template.php');
 
 class groupformation_solver_edmonds_karp extends topic_distributor {
 

@@ -31,15 +31,15 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/group
 require_once($CFG->dirroot . '/mod/groupformation/lib.php');
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 
-require_once($CFG->dirroot . '/lib/groupal/classes/criteria/specific_criterion.php');
-require_once($CFG->dirroot . '/lib/groupal/classes/participant.php');
-require_once($CFG->dirroot . '/lib/groupal/classes/matchers/group_centric_matcher.php');
-require_once($CFG->dirroot . '/lib/groupal/classes/algorithms/basic_algorithm.php');
-require_once($CFG->dirroot . '/lib/groupal/classes/algorithms/random_algorithm.php');
-require_once($CFG->dirroot . '/lib/groupal/classes/algorithms/topic_algorithm.php');
-require_once($CFG->dirroot . '/lib/groupal/classes/optimizers/optimizer.php');
-require_once($CFG->dirroot . '/lib/groupal/classes/xml_writers/participant_writer.php');
-require_once($CFG->dirroot . '/lib/groupal/classes/xml_writers/cohort_writer.php');
+require_once($CFG->dirroot . '/mod/groupformation/lib/classes/criteria/specific_criterion.php');
+require_once($CFG->dirroot . '/mod/groupformation/lib/classes/participant.php');
+require_once($CFG->dirroot . '/mod/groupformation/lib/classes/matchers/group_centric_matcher.php');
+require_once($CFG->dirroot . '/mod/groupformation/lib/classes/algorithms/basic_algorithm.php');
+require_once($CFG->dirroot . '/mod/groupformation/lib/classes/algorithms/random_algorithm.php');
+require_once($CFG->dirroot . '/mod/groupformation/lib/classes/algorithms/topic_algorithm.php');
+require_once($CFG->dirroot . '/mod/groupformation/lib/classes/optimizers/optimizer.php');
+require_once($CFG->dirroot . '/mod/groupformation/lib/classes/xml_writers/participant_writer.php');
+require_once($CFG->dirroot . '/mod/groupformation/lib/classes/xml_writers/cohort_writer.php');
 
 class mod_groupformation_job_manager {
 

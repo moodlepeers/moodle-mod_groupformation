@@ -25,8 +25,8 @@
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/lgpl.html GNU LGPL v3 or later
  */
-require_once($CFG->dirroot . "/lib/groupal/classes/matchers/imatcher.php");
-require_once($CFG->dirroot . "/lib/groupal/classes/group.php");
+require_once($CFG->dirroot . "/mod/groupformation/lib/classes/matchers/imatcher.php");
+require_once($CFG->dirroot . "/mod/groupformation/lib/classes/group.php");
 
 class lib_groupal_participant_centric_matcher implements lib_groupal_imatcher {
     /**

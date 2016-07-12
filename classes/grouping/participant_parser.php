@@ -20,8 +20,8 @@
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require_once($CFG->dirroot . '/lib/groupal/classes/criteria/specific_criterion.php');
-require_once($CFG->dirroot . '/lib/groupal/classes/participant.php');
+require_once($CFG->dirroot . '/mod/groupformation/lib/classes/criteria/specific_criterion.php');
+require_once($CFG->dirroot . '/mod/groupformation/lib/classes/participant.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/criterion_calculator.php');
 
