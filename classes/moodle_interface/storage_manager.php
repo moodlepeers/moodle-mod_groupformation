@@ -857,4 +857,15 @@ class mod_groupformation_storage_manager {
 
         return $enrolledstudents;
     }
+
+    /**
+     * Returns whether a participant code is wanted or not
+     * 
+     * @return bool
+     */
+    public function ask_for_participant_code(){
+        $data = new mod_groupformation_data();
+        return $data->ask_for_participant_code();
+    }
+
 }

@@ -33,6 +33,7 @@ $id = optional_param('id', 0, PARAM_INT); // Course Module ID.
 $doshow = optional_param('do_show', 'view', PARAM_TEXT);
 $back = optional_param('back', 0, PARAM_INT);
 $giveconsent = optional_param('giveconsent',false,PARAM_BOOL);
+$giveparticipantcode = optional_param('giveparticipantcode',false,PARAM_BOOL);
 
 // Import jQuery and js file.
 groupformation_add_jquery($PAGE, 'survey_functions.js');
@@ -77,19 +78,25 @@ if ( data_submitted() && confirm_sesskey()){
     $consent = optional_param('consent',null,PARAM_BOOL);
     $begin = optional_param('begin', null, PARAM_INT);
     $questions = optional_param('questions', null, PARAM_BOOL);
+    $participantcode = optional_param('participantcode','',PARAM_TEXT);
 }
 if (!isset ($begin)) {
     $begin = 1;
 }
 
-
 if ($begin == 1) {
 
     if (isset($questions) && $questions == 1 && !$back) {
-
         if (isset($consent)){
             $dbconsent = $usermanager->get_consent($userid);
             $usermanager->set_consent($userid,true);
+        }
+        if (isset($participantcode) && $participantcode !== ''){
+            if ($usermanager->validate_participant_code($participantcode)){
+                $usermanager->register_participant_code($userid,$participantcode);
+            }else{
+                //die();
+            }
         }
         $returnurl = new moodle_url ('/mod/groupformation/questionnaire_view.php', array(
             'id' => $id));
@@ -119,6 +126,11 @@ if ($usermanager->get_consent($userid) || $groupsmanager->groups_created()) {
 
 if ($giveconsent) {
     echo '<div class="alert alert-danger">' . get_string('consent_alert_message', 'groupformation') .
+        '</div>';
+}
+
+if ($giveparticipantcode) {
+    echo '<div class="alert alert-danger">' . get_string('participant_code_alert_message', 'groupformation') .
         '</div>';
 }
 

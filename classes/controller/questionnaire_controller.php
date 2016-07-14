@@ -36,7 +36,8 @@ if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
 }
 
-class mod_groupformation_questionnaire_controller {
+class mod_groupformation_questionnaire_controller
+{
     private $status;
     private $numbers = array();
     private $categories = array();
@@ -404,7 +405,7 @@ class mod_groupformation_questionnaire_controller {
         echo '	<form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
 
         echo '		<input type="hidden" name="category" value="no"/>';
-        echo '<input type="hidden" name="sesskey" value="'.sesskey().'" />';
+        echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
 
         $activityid = optional_param('id', false, PARAM_INT);
         if ($activityid) {
@@ -454,6 +455,10 @@ class mod_groupformation_questionnaire_controller {
 
             $percent = $this->get_percent($category);
 
+            if ($this->store->ask_for_participant_code()) {
+                $this->print_participant_code();
+            }
+
             $this->print_navbar($category);
 
             $this->print_progressbar($percent);
@@ -500,7 +505,7 @@ class mod_groupformation_questionnaire_controller {
 
             echo '<input type="hidden" name="percent" value="' . $percent . '"/>';
 
-            echo '<input type="hidden" name="sesskey" value="'.sesskey().'" />';
+            echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
 
             $activityid = optional_param('id', false, PARAM_INT);
 
@@ -584,6 +589,14 @@ class mod_groupformation_questionnaire_controller {
 
         echo '	<div class="questionaire_progress-bar" role="progressbar" aria-valuenow="' . $percent .
             '" aria-valuemin="0" aria-valuemax="100" style="width:' . $percent . '%"></div>';
+
+        echo '</div>';
+    }
+
+    public function print_participant_code() {
+        echo '<div class="participantcode">';
+
+        echo get_string('participant_code_footer', 'groupformation') . ': ' . $this->usermanager->get_participant_code($this->userid);
 
         echo '</div>';
     }

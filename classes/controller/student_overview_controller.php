@@ -100,7 +100,9 @@ class mod_groupformation_student_overview_controller {
                     mod_groupformation_util::get_info_text_for_student(true, $this->groupformationid);
                 $this->groupformationstateinfo = array(
                     $this->get_availability_state());
-                $this->buttonsinfo = get_string('questionnaire_press_to_begin', 'groupformation');
+                $pc = $this->store->ask_for_participant_code();
+                $buttoncaption = ($pc)?"questionnaire_press_to_begin_participant_code":"questionnaire_press_to_begin";
+                $this->buttonsinfo = get_string($buttoncaption, 'groupformation');
                 $this->buttonsarray = array(
                     array(
                         'type' => 'submit', 'name' => '', 'value' => get_string("next"), 'state' => '',
@@ -283,6 +285,9 @@ class mod_groupformation_student_overview_controller {
             $surveystatsview->set_template('students_overview_survey_states');
             $surveystatsview->assign('survey_states', $this->surveystatesarray);
             $surveystatsview->assign('questionnaire_answer_stats', $this->surveystatestitle);
+            $surveystatsview->assign('participant_code', $this->store->ask_for_participant_code());
+            $surveystatsview->assign('participant_code_user', $this->usermanager->get_participant_code($this->userid));
+
             $this->view->assign('student_overview_survey_state_temp', $surveystatsview->load_template());
         } else {
             $this->view->assign('student_overview_survey_state_temp', '');
@@ -294,6 +299,9 @@ class mod_groupformation_student_overview_controller {
             $surveyoptionsview->set_template('students_overview_options');
             $surveyoptionsview->assign('buttons', $this->buttonsarray);
             $surveyoptionsview->assign('buttons_infos', $this->buttonsinfo);
+            $surveyoptionsview->assign('participant_code', $this->store->ask_for_participant_code());
+            $surveyoptionsview->assign('participant_code_user', $this->usermanager->get_participant_code($this->userid));
+
             $surveyoptionsview->assign('consentheader',get_string('consent_header','groupformation'));
             $surveyoptionsview->assign('consenttext',get_string('consent_message','groupformation'));
             $surveyoptionsview->assign('consentvalue',$this->usermanager->get_consent($this->userid));
@@ -301,7 +309,6 @@ class mod_groupformation_student_overview_controller {
         } else {
             $this->view->assign('student_overview_survey_options', '');
         }
-
         return $this->view->load_template();
     }
 }

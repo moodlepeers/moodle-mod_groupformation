@@ -46,6 +46,14 @@ $PAGE->set_url('/mod/groupformation/import_export_view.php', array('id' => $cm->
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 
+$store = new mod_groupformation_storage_manager($groupformation->id);
+$data = new mod_groupformation_data();
+
+if (!$data->import_export_enabled()) {
+    $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
+        'id' => $cm->id));
+    redirect($returnurl);
+}
 echo $OUTPUT->header();
 
 // Print the tabs.

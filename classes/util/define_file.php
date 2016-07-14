@@ -249,6 +249,9 @@ class mod_groupformation_data {
         ),
     );
 
+    private $participant_code = true;
+    private $import_export_enabled = false;
+
     /**
      * Returns scenario name
      *
@@ -316,5 +319,13 @@ class mod_groupformation_data {
         } else {
             return null;
         }
+    }
+
+    public function ask_for_participant_code(){
+        return $this->participant_code;
+    }
+
+    public function import_export_enabled(){
+        return $this->import_export_enabled;
     }
 }

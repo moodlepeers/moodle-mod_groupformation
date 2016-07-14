@@ -92,10 +92,23 @@ $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 
 $consent = $usermanager->get_consent($userid);
+$participantcode = $usermanager->has_participant_code($userid);
+
+if ((!$consent && !$participantcode && !$groupsmanager->groups_created()) && !has_capability('mod/groupformation:editsettings',$context)) {
+    $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
+        'id' => $cm->id, 'giveconsent' => '1', 'giveparticipantcode' => '1'));
+    redirect($returnurl);
+}
 
 if ((!$consent && !$groupsmanager->groups_created()) && !has_capability('mod/groupformation:editsettings',$context)) {
     $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
         'id' => $cm->id, 'giveconsent' => '1'));
+    redirect($returnurl);
+}
+
+if ((!$participantcode && !$groupsmanager->groups_created()) && !has_capability('mod/groupformation:editsettings',$context)) {
+    $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
+        'id' => $cm->id, 'giveparticipantcode' => '1'));
     redirect($returnurl);
 }
 

@@ -28,6 +28,7 @@ $row = array();
 $inactive = array();
 $activated = array();
 $store = new mod_groupformation_storage_manager ($groupformation->id);
+$data = new mod_groupformation_data();
 $groupsstore = new mod_groupformation_groups_manager ($groupformation->id);
 $usermanager = new mod_groupformation_user_manager ($groupformation->id);
 
@@ -93,7 +94,7 @@ if (has_capability('mod/groupformation:editsettings', $context)) {
         'do_show' => 'evaluation'
     ));
     $row [] = new tabobject ('evaluation', $evaluationurl->out(), get_string('tab_evaluation', 'groupformation'));
-    
+
 
     // The group view.
     $groupurl = new moodle_url ('/mod/groupformation/group_view.php', array(
@@ -101,10 +102,11 @@ if (has_capability('mod/groupformation:editsettings', $context)) {
     $row [] = new tabobject ('group', $groupurl->out(), get_string('tab_group', 'groupformation'));
 
     // The import/export view.
-    $groupurl = new moodle_url ('/mod/groupformation/import_export_view.php', array(
-        'id' => $usedid, 'do_show' => 'import_export'));
-    $row [] = new tabobject ('import_export', $groupurl->out(), 'Import/Export');
-
+    if($data->import_export_enabled()) {
+        $groupurl = new moodle_url ('/mod/groupformation/import_export_view.php', array(
+            'id' => $usedid, 'do_show' => 'import_export'));
+        $row [] = new tabobject ('import_export', $groupurl->out(), 'Import/Export');
+    }
 }
 
 if (count($row) >= 1) {

@@ -1032,6 +1032,19 @@ function xmldb_groupformation_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2016030400, 'groupformation');
     }
 
+    if ($oldversion < 2016071300) {
 
+        // Define field participantcode to be added to groupformation_started.
+        $table = new xmldb_table('groupformation_started');
+        $field = new xmldb_field('participantcode', XMLDB_TYPE_TEXT, null, null, null, null, null, 'consent');
+
+        // Conditionally launch add field participantcode.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2016071300, 'groupformation');
+    }
     return true;
 }

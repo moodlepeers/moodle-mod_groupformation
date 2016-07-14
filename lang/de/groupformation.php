@@ -438,6 +438,20 @@ $string['select_info'] = 'Wählen Sie die Gruppenmitglieder aus, um Gruppen zu b
 $string['topic_group_info'] = 'Euer Thema ist';
 $string['topic'] = "Thema";
 
+$string['participant_code_title'] = "Persönlicher Teilnehmercode";
+$string['participant_code_header'] = "Bitte legen Sie sich einen persönlichen Teilnehmercode nach dem folgenden Schema an:";
+$string['participant_code_rules'] = "1. Vorname Ihrer Mutter (erste 2 Buchstaben, z.B. EV für Eva)<br>
+2. Geburtsjahr Ihrer Mutter (letzte 2 Ziffern, z.B. 00 für 1900)<br>
+3. Vorname Ihres Vaters (erste 2 Buchstaben, z.B. AD für Adam)<br>
+4. Geburtsjahr Ihres Vaters (letzte 2 Ziffern, z.B. 01 für 1901)<br><br>
+Bitte verwenden Sie keine Umlaute, sondern ersetzen Sie diese durch normale Buchstaben<br>
+(Ä &rarr; A; Ö &rarr; O; Ü &rarr; U; ß &rarr; S)";
+$string['participant_code_example'] = "Beispiel: EV00AD01";
+$string['participant_code_footer'] = "Ihr persönlicher Teilnehmercode lautet";
+
+$string['participant_code_alert_message'] = 'Sie müssen einen gültigen Teilnehmercode eingeben bevor Sie den Fragebogen beantworten können.';
+
+$string ['questionnaire_press_to_begin_participant_code'] = 'Geben Sie ihren Teilnehmercode ein und stimmen Sie den Bedingungen zu. Klicken Sie auf "Weiter", um fortzufahren.';
 
 
 

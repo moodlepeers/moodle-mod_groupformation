@@ -23,41 +23,78 @@
 <div class="gf_pad_content" style="">
     <div class="grid">
         <div class="col_m_100">
-<!--            <form action="--><?php //echo htmlspecialchars ( $_SERVER ["PHP_SELF"] ) ; ?><!--" method="post" autocomplete="off">-->
-<!--                <input type="hidden" name="questions" value="1"/>-->
-                <input type="hidden" name="id" value="<?php echo $this->_['cmid']; ?>"/>
+            <!--            <form action="-->
+            <?php //echo htmlspecialchars ( $_SERVER ["PHP_SELF"] ) ; ?><!--" method="post" autocomplete="off">-->
+            <!--                <input type="hidden" name="questions" value="1"/>-->
+            <input type="hidden" name="id" value="<?php echo $this->_['cmid']; ?>"/>
+            <div style="padding-bottom: 10px;">
+                <div>
+                    <p>
+                        <b>
+                            <?php echo get_string('consent_opt_in', 'groupformation'); ?>
+                        </b>
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        <?php echo get_string('consent_header', 'groupformation'); ?>
+                    </p>
+                    <p>
+                        <?php echo get_string('consent_message', 'groupformation'); ?>
+                    </p>
+                </div>
+                <div>
+                    <p style="margin-left: 10px;">
+                        <input type="checkbox" name="consent"
+                            <?php echo ($this->_['consentvalue']) ? 'checked disabled' : '' ?>
+                               value="<?php echo $this->_['consentvalue']; ?>"/>
+                        <?php echo ' ' . get_string('consent_agree', 'groupformation'); ?>
+                    </p>
+                </div>
+            </div>
+            <?php if ($this->_['participant_code']): ?>
                 <div style="padding-bottom: 10px;">
                     <div>
                         <p>
                             <b>
-                                <?php echo get_string('consent_opt_in','groupformation');?>
+                                <?php echo get_string('participant_code_title', 'groupformation'); ?>
                             </b>
                         </p>
                     </div>
-                    <div>
+
+                    <div><?php if ($this->_['participant_code_user'] === ''):?>
                         <p>
-                            <?php echo get_string('consent_header','groupformation');?>
+                            <?php echo get_string('participant_code_header', 'groupformation'); ?>
                         </p>
                         <p>
-                            <?php echo get_string('consent_message','groupformation');?>
+                            <?php echo get_string('participant_code_rules', 'groupformation'); ?>
+                        </p>
+                        <p>
+                            <?php echo get_string('participant_code_example', 'groupformation'); ?>
+                        </p>
+                        <?php endif;?>
+                        <p>
+                            <?php echo get_string('participant_code_footer', 'groupformation'); ?>
                         </p>
                     </div>
+
                     <div>
                         <p style="margin-left: 10px;">
-                            <input type="checkbox" name="consent"
-                                <?php echo ($this->_['consentvalue'])?'checked disabled':''?>
-                                   value="<?php echo $this->_['consentvalue'];?>"/>
-                            <?php echo ' '.get_string('consent_agree','groupformation');?>
+                            <input type="text"
+                                <?php echo ($this->_['participant_code_user'] !== '') ? 'checked disabled' : '' ?>
+                                   name="participantcode"
+                                   value="<?php echo $this->_['participant_code_user'];?>"/>
                         </p>
                     </div>
                 </div>
-                <p><?php echo $this->_['buttons_infos']; ?></p>
-                <?php foreach ($this->_['buttons'] as $button) { ?>
-                    <button type="<?php echo $button['type']; ?>" name="<?php echo $button['name']; ?>"
-                            value="<?php echo $button['value']; ?>"
-                            class="gf_button gf_button_pill gf_button_small" <?php echo $button['state']; ?>><?php echo $button['text']; ?></button>
-                <?php } ?>
-<!--            </form>-->
+            <?php endif; ?>
+            <p><?php echo $this->_['buttons_infos']; ?></p>
+            <?php foreach ($this->_['buttons'] as $button) { ?>
+                <button type="<?php echo $button['type']; ?>" name="<?php echo $button['name']; ?>"
+                        value="<?php echo $button['value']; ?>"
+                        class="gf_button gf_button_pill gf_button_small" <?php echo $button['state']; ?>><?php echo $button['text']; ?></button>
+            <?php } ?>
+            <!--            </form>-->
         </div>
     </div>
 </div>
