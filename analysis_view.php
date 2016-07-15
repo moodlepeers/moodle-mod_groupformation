@@ -78,7 +78,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_p
 
 /* ---------- Automated test user generation ------------ */
 
-if($CFG->debug === 32767){
+if(true){//$CFG->debug === 32767){
     $cqt = new mod_groupformation_test_user_generator ($cm);
 
     if ($deleteusers) {
