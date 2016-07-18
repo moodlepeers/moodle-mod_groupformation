@@ -45,6 +45,9 @@ class lib_groupal_cohort {
     /** @var int This is the number of groups */
     public $countOfGroups = 0;
 
+    /** @var number This is the cohort performance index */
+    public $cohortPerformanceIndex = null;
+
     /**
      * lib_groupal_cohort constructor.
      * @param $numberofgroups

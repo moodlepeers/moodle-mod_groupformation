@@ -27,6 +27,7 @@ if (!defined('MOODLE_INTERNAL')) {
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_parser.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/scientific_grouping.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/lib.php');
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
@@ -195,11 +196,11 @@ class mod_groupformation_job_manager {
      * @return array|null
      */
     public static function get_users($groupformationid, $job = null, mod_groupformation_storage_manager $store = null) {
-        if (is_null($job)){
+        if (is_null($job)) {
             $job = self::get_job($groupformationid);
         }
 
-        if (is_null($store)){
+        if (is_null($store)) {
             $store = new mod_groupformation_storage_manager($groupformationid);
         }
 
@@ -213,7 +214,7 @@ class mod_groupformation_job_manager {
         } else {
             $enrolledstudents = array_keys(get_enrolled_users($context, 'mod/groupformation:onlystudent'));
             $enrolledprevusers = array_keys(get_enrolled_users($context, 'mod/groupformation:editsettings'));
-            $diff = array_diff($enrolledstudents,$enrolledprevusers);
+            $diff = array_diff($enrolledstudents, $enrolledprevusers);
             $enrolledstudents = $diff;
         }
         if (is_null($enrolledstudents) || count($enrolledstudents) <= 0) {
@@ -258,8 +259,8 @@ class mod_groupformation_job_manager {
      * @param null $groupformationid
      * @return array|null
      */
-    private static function determine_group_size($users, mod_groupformation_storage_manager $store,
-                                                 $groupformationid = null) {
+    public static function determine_group_size($users, mod_groupformation_storage_manager $store,
+                                                $groupformationid = null) {
         if ($store->ask_for_topics()) {
             $groupoption = $store->get_group_option();
             if ($groupoption) {
@@ -302,10 +303,10 @@ class mod_groupformation_job_manager {
 
                 $maxmembers = intval($store->get_max_members());
                 $userscount0 = count($users [0] + $users [1]);
-                $maxmembers = ceil($userscount0/$topicscount);
+                $maxmembers = ceil($userscount0 / $topicscount);
                 $array = array();
-                for ($i = 0;$i<$topicscount;$i=$i+1){
-                    $array[]=$maxmembers;
+                for ($i = 0; $i < $topicscount; $i = $i + 1) {
+                    $array[] = $maxmembers;
                 }
                 return $array;
             }
@@ -489,8 +490,7 @@ class mod_groupformation_job_manager {
             $randomcohort = $gfra->do_one_formation();
         }
 
-        $cohorts = array(
-            $groupalcohort, $randomcohort, $topiccohort);
+        $cohorts = array("groupal:1" => $groupalcohort, "random:1" => $randomcohort, "topic:1" => $topiccohort);
 
         return $cohorts;
     }
@@ -544,8 +544,7 @@ class mod_groupformation_job_manager {
             $randomcohort = $gfra->do_one_formation();
         }
 
-        $cohorts = array(
-            $groupalcohort, $randomcohort, $topiccohort);
+        $cohorts = array("groupal:1" => $groupalcohort, "random:1" => $randomcohort, "topic:1" => $topiccohort);
 
         return $cohorts;
     }
@@ -572,13 +571,16 @@ class mod_groupformation_job_manager {
             return $cohorts;
         }
 
-        if ($store->ask_for_topics()) {
-            $cohorts = self::run_topic_algorithm($job, $users, $store);
-        } else {
-            $cohorts = self::run_basic_algorithm($job, $users, $store);
+        if ($store->is_math_prep_course_mode()) {
+            $sg = new mod_groupformation_scientific_grouping($job->groupformationid);
+            return $sg->run_grouping($users);
         }
 
-        return $cohorts;
+        if ($store->ask_for_topics()) {
+            return $cohorts = self::run_topic_algorithm($job, $users, $store);
+        } else {
+            return $cohorts = self::run_basic_algorithm($job, $users, $store);
+        }
     }
 
     /**
@@ -588,81 +590,107 @@ class mod_groupformation_job_manager {
      * @param stdClass $result
      * @return boolean
      */
-    public static function save_result($job, $result = null) {
+    public static function save_result($job, $result = null, $store = null) {
 
-        $groupalcohort = $result [0];
-        $randomcohort = $result [1];
-        $topiccohort = $result [2];
-
-        if (!is_null($groupalcohort)) {
-
-            $result = $groupalcohort->getResult();
-
-            $flags = array(
-                "groupal" => 1, "random" => 0, "mrandom" => 0, "created" => 0, "topic" => 0);
-
-            $idmap = self::create_groups($job, $result->groups, $flags);
-
-            self::assign_users_to_groups($job, $result->users, $idmap);
-
-            self::save_stats($job, $groupalcohort);
+        if (is_null($store)) {
+            $store = new mod_groupformation_storage_manager($job->groupformationid);
         }
 
-        if (!is_null($randomcohort)) {
-            $result = $randomcohort->getResult();
+        if (false && $store->is_math_prep_course_mode()) {
 
-            $flags = array(
-                "groupal" => 0, "random" => 1, "mrandom" => 0, "created" => 0, "topic" => 0);
+            self::delete_stats($job);
 
-            $idmap = self::create_groups($job, $result->groups, $flags);
+            foreach ($result as $group_key => $cohort) {
 
-            self::assign_users_to_groups($job, $result->users, $idmap);
+                $cohortresult = $cohort->getResult();
+
+                $flags = array('group_key' => $group_key);
+
+                $idmap = self::create_groups($job, $cohortresult->groups, $flags);
+
+                self::assign_users_to_groups($job, $cohortresult->users, $idmap);
+
+                self::save_stats($job, $cohort, $group_key);
+            }
+
+            return true;
         }
 
-        if (!is_null($topiccohort)) {
-            $result = $topiccohort->getResult();
+        self::delete_stats($job);
+
+        foreach ($result as $group_key => $cohort) {
+
+            if (is_null($cohort)){
+                continue;
+            }
+
+            $cohortresult = $cohort->getResult();
 
             $flags = array(
-                "groupal" => 0, "random" => 0, "mrandom" => 0, "created" => 0, "topic" => 1);
+                "groupal" => (strpos($group_key, "groupal:1")) ? 1 : 0,
+                "random" => (strpos($group_key, "random:1")) ? 1 : 0,
+                "mrandom" => 0,
+                "created" => 0,
+                "topic" => (strpos($group_key, "topic:1")) ? 1 : 0,
+                "group_key" => $group_key
+            );
 
-            $idmap = self::create_groups($job, $result->groups, $flags, true);
+            $idmap = self::create_groups($job, $cohortresult->groups, $flags);
 
-            self::assign_users_to_groups($job, $result->users, $idmap);
+            self::assign_users_to_groups($job, $cohortresult->users, $idmap);
+
+            self::save_stats($job, $cohort, $group_key);
         }
 
         self::set_job($job, 'done', true);
 
-        groupformation_info(null, $job->groupformationid, 'groupal results saved');
-
         return true;
+    }
+
+    /**
+     * Deletes all stats from previous job runs
+     *
+     * @param $job
+     */
+    public static function delete_stats($job) {
+        global $DB;
+
+        $DB->delete_records('groupformation_stats', array('groupformationid' => $job->groupformationid));
+
     }
 
     /**
      * Saves stats for computed job
      *
      * @param $job
-     * @param null $groupalcohort
+     * @param null $cohort
      */
-    private static function save_stats($job, &$groupalcohort = null) {
+    private static function save_stats($job, &$cohort = null, $group_key = null) {
         global $DB;
 
-        $job->matcher_used = strval($groupalcohort->whichMatcherUsed);
-        $job->count_groups = floatval($groupalcohort->countOfGroups);
-        $job->performance_index = floatval($groupalcohort->cohortPerformanceIndex);
+        $record = new stdClass();
 
-        groupformation_info(null, null, $job->matcher_used . "yay");
+        $record->groupformationid = $job->groupformationid;
+        $record->group_key = $group_key;
 
-        $stats = $groupalcohort->results;
+        $record->matcher_used = strval($cohort->whichMatcherUsed);
+        $record->count_groups = floatval($cohort->countOfGroups);
+        $record->performance_index = floatval($cohort->cohortPerformanceIndex);
 
-        $job->stats_avg_variance = $stats->averageVariance;
-        $job->stats_variance = $stats->variance;
-        $job->stats_n = $stats->n;
-        $job->stats_avg = $stats->avg;
-        $job->stats_st_dev = $stats->stDev;
-        $job->stats_norm_st_dev = $stats->normStDev;
-        $job->stats_performance_index = $stats->performanceIndex;
+        $stats = $cohort->results;
 
-        $DB->update_record('groupformation_jobs', $job);
+        if (!is_null($stats)) {
+            $record->stats_avg_variance = $stats->averageVariance;
+            $record->stats_variance = $stats->variance;
+            $record->stats_n = $stats->n;
+            $record->stats_avg = $stats->avg;
+            $record->stats_st_dev = $stats->stDev;
+            $record->stats_norm_st_dev = $stats->normStDev;
+            $record->stats_performance_index = $stats->performanceIndex;
+        }
+
+        $DB->insert_record('groupformation_stats', $record);
+
     }
 
     /**
@@ -691,7 +719,7 @@ class mod_groupformation_job_manager {
             $groupname = "G" . $i . "_" . substr($groupformationname, 0, 8);
         }
 
-        if ($topics){
+        if ($topics) {
             $xmlcontent = $store->get_knowledge_or_topic_values('topic');
             $xmlcontent = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $xmlcontent . ' </OPTIONS>';
             $options = mod_groupformation_util::xml_to_array($xmlcontent);
@@ -700,9 +728,9 @@ class mod_groupformation_job_manager {
         $ids = array();
         foreach ($groups as $groupalid => $group) {
             $name = "";
-            if ($topics){
-                $name = $groupname . "_" .substr($options[$groupalid-1],0,5);
-            }else{
+            if ($topics) {
+                $name = $groupname . "_" . substr($options[$groupalid - 1], 0, 5);
+            } else {
                 $name = $groupname;
             }
             if (count($group ['users']) > 0) {

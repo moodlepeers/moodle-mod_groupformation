@@ -864,8 +864,10 @@ class mod_groupformation_storage_manager {
      * @return bool
      */
     public function ask_for_participant_code(){
-        $data = new mod_groupformation_data();
-        return $data->ask_for_participant_code();
+        return $this->data->ask_for_participant_code();
     }
 
+    public function is_math_prep_course_mode(){
+        return $this->data->is_math_prep_course_mode();
+    }
 }

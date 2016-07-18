@@ -43,7 +43,7 @@ class lib_groupal_random_cohort {
     public $whichMatcherUsed = "";
 
     /** @var int This is the number of groups */
-    public $numberofgroups = 0;
+    public $countOfGroups = 0;
 
     /**
      * lib_groupal_cohort constructor.
@@ -58,7 +58,7 @@ class lib_groupal_random_cohort {
                 $this->addGroup($groups[$i]);
             }
         }
-        $this->numberofgroups = $numberofgroups;
+        $this->countOfGroups = $numberofgroups;
     }
 
     /**
@@ -87,7 +87,7 @@ class lib_groupal_random_cohort {
         }
 
         array_splice($this->groups, index, 1);
-        $this->numberofgroups--;
+        $this->countOfGroups--;
         return true;
     }
 
@@ -133,7 +133,7 @@ class lib_groupal_random_cohort {
         // Do it from 0-n because highest indices are at the beginning in $removeCandidates.
         for ($i = 0; $i < count($removeCandidates); $i++) {
             array_splice($this->groups, $removeCandidates[$i], 1);
-            $this->numberofgroups--;
+            $this->countOfGroups--;
         }
         return true;
     }

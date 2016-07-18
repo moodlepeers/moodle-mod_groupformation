@@ -251,6 +251,17 @@ class mod_groupformation_data {
 
     private $participant_code = true;
     private $import_export_enabled = false;
+    private $math_prep_course_mode = false;
+
+    /**
+     * Returns whether this instance is running in math prep course mode;
+     * default should be false, since math prep course mode is only for research
+     *
+     * @return bool
+     */
+    public function is_math_prep_course_mode(){
+        return $this->math_prep_course_mode;
+    }
 
     /**
      * Returns scenario name

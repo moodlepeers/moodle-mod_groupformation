@@ -78,7 +78,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_p
 
 /* ---------- Automated test user generation ------------ */
 
-if(true){//$CFG->debug === 32767){
+if (true) {//$CFG->debug === 32767){
     $cqt = new mod_groupformation_test_user_generator ($cm);
 
     if ($deleteusers) {
@@ -97,23 +97,37 @@ if(true){//$CFG->debug === 32767){
 
 /* ---------- / Automated test user generation ---------- */
 
+/* ---------- Job Manager Usage ------------------------- */
 
+$jm = new mod_groupformation_job_manager ();
+$job = null;
+
+$job = $jm::get_job($groupformation->id);
+//$jm->reset_job($job);
+// var_dump($jm::get_next_job());
+if (!is_null($job)) {
+    $result = $jm::do_groupal($job);
+    //var_dump($result);
+    //$saved = $jm::save_result($job,$result);
+
+}
+
+/* ---------- / Job Manager Usage ----------------------- */
 
 
 $controller = new mod_groupformation_analysis_controller ($groupformation->id, $cm);
 
 
-if ( (data_submitted()) && confirm_sesskey()){
+if ((data_submitted()) && confirm_sesskey()) {
     $switcher = optional_param('questionnaire_switcher', null, PARAM_INT);
 
-    if ( isset($switcher)) {
+    if (isset($switcher)) {
         $controller->trigger_questionnaire($switcher);
     }
     $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
         'id' => $id, 'do_show' => 'analysis'));
     redirect($return->out());
 }
-
 
 
 echo $OUTPUT->header();
@@ -128,7 +142,7 @@ if ($store->is_archived() && has_capability('mod/groupformation:editsettings', $
     echo '<form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
 
     echo '<input type="hidden" name="id" value="' . $id . '"/>';
-    echo '<input type="hidden" name="sesskey" value="'.sesskey().'" />';
+    echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
 
     echo $controller->display();
 

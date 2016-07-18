@@ -1046,5 +1046,144 @@ function xmldb_groupformation_upgrade($oldversion) {
         // Groupformation savepoint reached.
         upgrade_mod_savepoint(true, 2016071300, 'groupformation');
     }
+
+    if ($oldversion < 2016071800) {
+
+        // Define field group_key to be added to groupformation_groups.
+        $table = new xmldb_table('groupformation_groups');
+        $field = new xmldb_field('group_key', XMLDB_TYPE_CHAR, 255, null, null, null, null, 'topic_name');
+
+        // Conditionally launch add field group_key.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2016071800, 'groupformation');
+    }
+
+    if ($oldversion < 2016071801) {
+
+        // Define table groupformation_stats to be created.
+        $table = new xmldb_table('groupformation_stats');
+
+        // Adding fields to table groupformation_stats.
+        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+        $table->add_field('groupformationid', XMLDB_TYPE_INTEGER, '20', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('group_key', XMLDB_TYPE_CHAR, 255, null, null, null, null);
+
+        // Adding keys to table groupformation_stats.
+        $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+
+        // Conditionally launch create table for groupformation_stats.
+        if (!$dbman->table_exists($table)) {
+            $dbman->create_table($table);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2016071801, 'groupformation');
+    }
+
+    if ($oldversion < 2016071802) {
+
+        $tablename = 'groupformation_stats';
+        // Define field matcher_used to be added to groupformation_jobs.
+        $table = new xmldb_table ($tablename);
+        $field = new xmldb_field ('matcher_used', XMLDB_TYPE_TEXT, null, null, null, null, null, 'group_key');
+
+        // Conditionally launch add field matcher_used.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field count_groups to be added to groupformation_jobs.
+        $table = new xmldb_table ($tablename);
+        $field = new xmldb_field ('count_groups', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'matcher_used');
+
+        // Conditionally launch add field count_groups.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field performance_index to be added to groupformation_jobs.
+        $table = new xmldb_table ($tablename);
+        $field = new xmldb_field ('performance_index', XMLDB_TYPE_NUMBER, '20, 8', null, null, null, null, 'count_groups');
+
+        // Conditionally launch add field performance_index.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field stats_avg_variance to be added to groupformation_jobs.
+        $table = new xmldb_table ($tablename);
+        $field = new xmldb_field ('stats_avg_variance', XMLDB_TYPE_NUMBER, '20, 8', null, null, null, null,
+            'performance_index');
+
+        // Conditionally launch add field stats_avg_variance.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field stats_variance to be added to groupformation_jobs.
+        $table = new xmldb_table ($tablename);
+        $field = new xmldb_field ('stats_variance', XMLDB_TYPE_NUMBER, '20, 8', null, null, null, null,
+            'stats_avg_variance');
+
+        // Conditionally launch add field stats_variance.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field stats_n to be added to groupformation_jobs.
+        $table = new xmldb_table ($tablename);
+        $field = new xmldb_field ('stats_n', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'stats_variance');
+
+        // Conditionally launch add field stats_n.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field stats_avg to be added to groupformation_jobs.
+        $table = new xmldb_table ($tablename);
+        $field = new xmldb_field ('stats_avg', XMLDB_TYPE_NUMBER, '20, 8', null, null, null, null, 'stats_n');
+
+        // Conditionally launch add field stats_avg.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field stats_st_dev to be added to groupformation_jobs.
+        $table = new xmldb_table ($tablename);
+        $field = new xmldb_field ('stats_st_dev', XMLDB_TYPE_NUMBER, '20, 8', null, null, null, null, 'stats_avg');
+
+        // Conditionally launch add field stats_st_dev.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field stats_norm_st_dev to be added to groupformation_jobs.
+        $table = new xmldb_table ($tablename);
+        $field = new xmldb_field ('stats_norm_st_dev', XMLDB_TYPE_NUMBER, '20, 8', null, null, null, null, 'stats_st_dev');
+
+        // Conditionally launch add field stats_norm_st_dev.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field stats_performance_index to be added to groupformation_jobs.
+        $table = new xmldb_table ($tablename);
+        $field = new xmldb_field ('stats_performance_index', XMLDB_TYPE_NUMBER, '20, 8', null, null, null, null,
+            'stats_norm_st_dev');
+
+        // Conditionally launch add field stats_performance_index.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2016071802, 'groupformation');
+    }
+
+
     return true;
 }

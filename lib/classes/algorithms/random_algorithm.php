@@ -192,6 +192,8 @@ class lib_groupal_random_algorithm implements lib_groupal_ialgorithm {
 
         $this->cohort = new lib_groupal_random_cohort (count($groups), $groups);
         $this->cohort->whichMatcherUsed = self::class;
+        $this->cohort->countOfGroups = $this->cohort->countOfGroups;
+        $this->cohort->cohortPerformanceIndex = null;
         return $this->cohort;
     }
 }

@@ -165,6 +165,9 @@ class mod_groupformation_mod_form extends moodleform_mod {
      */
     private function generate_html_for_js(&$mform) {
         global $PAGE;
+
+        $data = new mod_groupformation_data();
+
         // Open div tag for js related content.
         $mform->addElement('html', '<div id="js-content" style="display:none;">');
 
@@ -199,15 +202,17 @@ class mod_groupformation_mod_form extends moodleform_mod {
             get_string('scenario_homeworkgroups_description', 'groupformation') . '</small></p>
                     </label>
                 </div>
-                         <div class="col_m_33">
+                        '.(($data->is_math_prep_course_mode())?'':'<div class="col_m_33">
                             <input type="radio" name="js_szenario" id="presentation" value="presentation" />
-                            <label class="col_m_100 szenarioLabel" for="presentation"><div class="sz_header">' .
-            get_string('scenario_presentationgroups', 'groupformation') . '</div><p><small><b><i>'
+                                <label class="col_m_100 szenarioLabel" for="presentation">
+                                    <div class="sz_header">' .
+            get_string('scenario_presentationgroups', 'groupformation') . '</div>
+                                    <p><small><b><i>'
                                  .get_string('scenario_usage_header_presentation', 'groupformation'). '</i></b><br>'
                                  .get_string('scenario_presentationgroups_short', 'groupformation'). '</p><p>' .
             get_string('scenario_presentationgroups_description', 'groupformation') . '</small></p>
-                            </label>
-                        </div>
+                                </label>
+                        </div>').'
                     </div> <!-- /grid  -->
                 </div> <!-- /szenarioRadios -->
             </div> <!-- /gf_setting_pad -->
@@ -435,9 +440,14 @@ class mod_groupformation_mod_form extends moodleform_mod {
             <input type="radio" name="group_opt" id="group_opt_size" value="group_size" checked="checked" />
             ' . get_string('maxmembers', 'groupformation') . '</label>
             <input type="number" class="group_opt" id="group_size" min="0" max="100" value="0" /></div>
-            <div class="col_m_50"><label><input type="radio" name="group_opt" id="group_opt_numb" value="numb_of_groups"/>
-            ' . get_string('maxgroups', 'groupformation') . '</label>
-            <input type="number" class="group_opt" id="numb_of_groups"  min="0" max="100" value="0" disabled="disabled" /></div>
+            '.
+            (($data->is_math_prep_course_mode())?'':'<div class="col_m_50">
+                <label>
+                    <input type="radio" name="group_opt" id="group_opt_numb" value="numb_of_groups"/>
+                    ' . get_string('maxgroups', 'groupformation') . '
+                </label>
+                <input type="number" class="group_opt" id="numb_of_groups"  min="0" max="100" value="0" disabled="disabled" />
+            </div>'). '
             </div>
             </div> <!-- /grid -->
                 ');

@@ -264,8 +264,7 @@ class mod_groupformation_user_manager
      * @return boolean
      */
     public function is_completed($userid) {
-
-        return $this->get_answering_status($userid) == 1;
+        return array_key_exists($userid,$this->get_completed(null,'userid'));
     }
 
     /**

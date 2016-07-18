@@ -89,16 +89,17 @@ class mod_groupformation_groups_manager {
         $record->moodlegroupid = null;
         $record->groupname = $name;
         $record->performance_index = $group ['gpi'];
-        $record->groupal = $flags ['groupal'];
-        $record->random = $flags ['random'];
-        $record->mrandom = $flags ['random'];
-        $record->created = $flags ['created'];
+        $record->groupal = (array_key_exists('groupal',$flags))?$flags ['groupal']:0;
+        $record->random = (array_key_exists('random',$flags))?$flags ['random']:0;
+        $record->mrandom = (array_key_exists('mrandom',$flags))?$flags ['mrandom']:0;
+        $record->created = (array_key_exists('created',$flags))?$flags ['created']:0;
         $record->group_size = count($group['users']);
-        if ($flags ['topic']) {
+        $record->group_key = (array_key_exists('group_key',$flags))?$flags['group_key']:0;
+        if (array_key_exists('topic',$flags) && $flags ['topic']) {
             $record->topic_id = $groupalid;
             $record->topic_name = $this->get_topic_name($groupalid);
         }
-        $id = $DB->insert_record('groupformation_groups', $record);
+        $id = $DB->insert_record('groupformation_groups', $record,true,true);
 
         return $id;
     }
