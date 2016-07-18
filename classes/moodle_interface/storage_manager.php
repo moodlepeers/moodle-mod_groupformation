@@ -465,21 +465,26 @@ class mod_groupformation_storage_manager {
             $categories[] = 'knowledge';
         }
 
+        if (!$this->is_math_prep_course_mode()){
+            $categories[] = 'general';
+        }
+
         foreach ($categoryset as $category) {
             if ($this->get_number($category) > 0) {
                 if ($category == 'grade' && $this->ask_for_grade()) {
                     $categories [] = $category;
                 } else if ($category == 'points' && $this->ask_for_points()) {
                     $categories [] = $category;
-                } else if ($category != 'grade' && $category != 'points') {
+                } else if ($category != 'grade' && $category != 'points' && $category != 'general') {
                     $categories [] = $category;
                 }
             }
         }
 
         $hastopic = $this->get_number('topic');
+
         if ($this->ask_for_topics() && $hastopic != 0) {
-            $categories = arraY('topic');
+            $categories = array('topic');
         }
 
         return $categories;

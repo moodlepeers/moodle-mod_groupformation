@@ -439,7 +439,7 @@ class mod_groupformation_questionnaire_controller
      */
     public function print_page() {
         if ($this->has_next()) {
-            $this->currentcategory = $this->categories [$this->currentcategoryposition];
+            $this->currentcategory = $this->categories[$this->currentcategoryposition];
             $isteacher = has_capability('mod/groupformation:editsettings', $this->context);
 
             if ($isteacher) {

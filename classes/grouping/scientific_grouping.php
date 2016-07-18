@@ -127,6 +127,10 @@ class mod_groupformation_scientific_grouping {
 
         $groupsizes = mod_groupformation_job_manager::determine_group_size($users,$this->store);
 
+        if (count($users[0])<$numberofslices){
+            return array();
+        }
+
         // divide users into n slices
         $slices = $this->slicing($users[0], $numberofslices);
 

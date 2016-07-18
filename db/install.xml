@@ -307,7 +307,7 @@
         <FIELD NAME="created" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Gibt an, ob die Gruppen die generiert wurden auch in Moodle erstellt wurden (sprich echte Moodlegruppen)"/>
         <FIELD NAME="topic_id" TYPE="int" LENGTH="20" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="topic_name" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
-        <FIELD NAME="group_key" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="group_key" TYPE="text" LENGTH="255" NOTNULL="false" SEQUENCE="false"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
@@ -330,7 +330,17 @@
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="groupformationid" TYPE="int" LENGTH="20" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="group_key" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="group_key" TYPE="text" LENGTH="255" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="matcher_used" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="count_groups" TYPE="number" LENGTH="10" NOTNULL="false" SEQUENCE="false" DECIMALS="8"/>
+        <FIELD NAME="performance_index" TYPE="number" LENGTH="20" NOTNULL="false" SEQUENCE="false" DECIMALS="8"/>
+        <FIELD NAME="stats_avg_variance" TYPE="number" LENGTH="20" NOTNULL="false" SEQUENCE="false" DECIMALS="8"/>
+        <FIELD NAME="stats_variance" TYPE="number" LENGTH="20" NOTNULL="false" SEQUENCE="false" DECIMALS="8"/>
+        <FIELD NAME="stats_n" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="stats_avg" TYPE="number" LENGTH="20" NOTNULL="false" SEQUENCE="false" DECIMALS="8"/>
+        <FIELD NAME="stats_st_dev" TYPE="number" LENGTH="20" NOTNULL="false" SEQUENCE="false" DECIMALS="8"/>
+        <FIELD NAME="stats_norm_st_dev" TYPE="number" LENGTH="20" NOTNULL="false" SEQUENCE="false" DECIMALS="8"/>
+        <FIELD NAME="stats_performance_index" TYPE="number" LENGTH="20" NOTNULL="false" SEQUENCE="false" DECIMALS="8"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>

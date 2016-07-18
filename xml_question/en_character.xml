@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="">
-     <QUESTIONS VERSION="5">
+     <QUESTIONS VERSION="6">
      	<QUESTION ID="1" TYPE="radio">
                <QUESTIONTEXT>
                     <![CDATA[I see myself as someone who is reserved.]]>
