@@ -1181,8 +1181,52 @@ function xmldb_groupformation_upgrade($oldversion) {
         }
 
         // Groupformation savepoint reached.
-        upgrade_mod_savepoint(true, 2016071802, 'groupformation');
+        upgrade_mod_savepoint(true, 2016071900, 'groupformation');
     }
+
+    if ($oldversion < 2016071901) {
+
+        // Changing type of field version on table groupformation_q_version to int.
+        $table = new xmldb_table('groupformation_q_version');
+        $field = new xmldb_field('version', XMLDB_TYPE_INTEGER, '12', null, XMLDB_NOTNULL, null, '0', 'category');
+
+        // Launch change of type for field version.
+        $dbman->change_field_type($table, $field);
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2016071901, 'groupformation');
+    }
+
+    if ($oldversion < 2016071903) {
+
+        // Define table groupformation_question to be created.
+        $table = new xmldb_table('groupformation_question');
+
+        // Adding fields to table groupformation_question.
+        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+        $table->add_field('category', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('questionid', XMLDB_TYPE_INTEGER, '20', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('type', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('question', XMLDB_TYPE_TEXT, null, null, XMLDB_NOTNULL, null, null);
+        $table->add_field('options', XMLDB_TYPE_TEXT, null, null, XMLDB_NOTNULL, null, null);
+        $table->add_field('language', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('position', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+        $table->add_field('optionmax', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+        $table->add_field('version', XMLDB_TYPE_INTEGER, '12', null, XMLDB_NOTNULL, null, null);
+
+        // Adding keys to table groupformation_question.
+        $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+
+        // Conditionally launch create table for groupformation_question.
+        if (!$dbman->table_exists($table)) {
+            $dbman->create_table($table);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2016071903, 'groupformation');
+    }
+
+
 
 
     return true;

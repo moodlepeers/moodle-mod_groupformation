@@ -621,7 +621,9 @@ function groupformation_save_more_infos($groupformation, $init) {
     }
 
     if ($init) {
-        groupformation_update_questions($store);
+        // TODO
+        // groupformation_update_questions($store);
+        groupformation_import_questionnaire_configuration($store);
     }
 
     if ($store->is_editable()) {

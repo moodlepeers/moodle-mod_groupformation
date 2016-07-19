@@ -133,7 +133,7 @@ class mod_groupformation_user_manager
      */
     public function get_not_completed_but_submitted($sortedby = null, $fieldset = '*') {
         global $DB;
-        // HOTFIX FOR HRZ SOSE2016
+        // TODO HOTFIX FOR HRZ SOSE2016
         return array();
 //        $tablename = 'groupformation_started';
 //        $query = "SELECT " . $fieldset . " FROM {{$tablename}} ".

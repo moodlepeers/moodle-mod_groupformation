@@ -455,7 +455,7 @@ class mod_groupformation_questionnaire_controller
 
             $percent = $this->get_percent($category);
 
-            if ($this->store->ask_for_participant_code()) {
+            if ($this->store->ask_for_participant_code() && !$isteacher) {
                 $this->print_participant_code();
             }
 

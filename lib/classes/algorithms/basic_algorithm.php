@@ -171,7 +171,7 @@ class lib_groupal_basic_algorithm implements lib_groupal_ialgorithm {
     public function do_one_formation() {
         $this->matcher->matchToGroups($this->notmatchedparticipants, $this->cohort->groups);
         $this->cohort->countOfGroups = count($this->cohort->groups);
-        $this->cohort->whichMatcherUsed = self::class;
+        $this->cohort->whichMatcherUsed = get_class($this);
         $this->cohort->calculateCohortPerformanceIndex();
         return $this->cohort;
     }

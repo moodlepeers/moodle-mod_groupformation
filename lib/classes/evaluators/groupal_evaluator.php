@@ -78,7 +78,7 @@ class lib_groupal_evaluator implements lib_groupal_ievaluator {
             }
         }
 
-        $group->results = self::getPerformanceIndex($NPIs);
+        $group->results = $this->getPerformanceIndex($NPIs);
         $gpi = $group->results->performanceIndex;
         $group->setGroupPerformanceIndex($gpi);
         return $gpi;
@@ -99,7 +99,7 @@ class lib_groupal_evaluator implements lib_groupal_ievaluator {
             $cohort->groups[$i]->calculateGroupPerformanceIndex();
             $GPIs[] = $cohort->groups[$i]->getGroupPerformanceIndex();
         }
-        $results = self::getPerformanceIndex($GPIs); // Results: Statistics.
+        $results = $this->getPerformanceIndex($GPIs);
         $cohort->results = $results;
         return $results->performanceIndex;
 

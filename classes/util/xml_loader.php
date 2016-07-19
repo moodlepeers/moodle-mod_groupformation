@@ -136,4 +136,67 @@ class mod_groupformation_xml_loader {
         }
 
     }
+
+    /**
+     * Save2
+     *
+     * @param $category
+     * @param $lang
+     * @return array
+     */
+    public function save4($category, $lang, $version) {
+        global $CFG;
+        $xmlfile = $CFG->dirroot . '/mod/groupformation/xml_question/' . $lang . '_' . $category . '.xml';
+
+        $return = array();
+        $questions = array();
+
+        if (file_exists($xmlfile)) {
+            $xml = simplexml_load_file($xmlfile);
+
+            $return[] = trim($xml->QUESTIONS['VERSION']);
+            $numbers = 0;
+
+            foreach ($xml->QUESTIONS->QUESTION as $question) {
+                $options = $question->OPTIONS;
+                $optionsarray = array();
+
+                foreach ($options->OPTION as $option) {
+                    $optionsarray[] = trim($option);
+                }
+
+                $numbers++;
+
+                $array = array('type' => trim($question['TYPE']),
+                    'question' => trim($question->QUESTIONTEXT),
+                    'options' => $optionsarray,
+                    'position' => $numbers,
+                    'questionid' => trim($question['ID']),
+                );
+
+                $data = new stdClass ();
+                $data->category = $category;
+                $data->questionid = $array ['questionid'];
+                $data->type = $array ['type'];
+                $data->question = $array ['question'];
+                $data->options = $this->store->convert_options($array ['options']);
+                $data->language = $lang;
+                $data->position = $array ['position'];
+                $data->optionmax = count($array ['options']);
+                $data->version = $version;
+
+                //$this->store->add_catalog_question($array, $lang, $category);
+                $questions[] = $data;
+            }
+
+            $return[] = $numbers;
+            $return[] = $questions;
+
+            return $return;
+
+        } else {
+            exit("The file $xmlfile cannot be opened or found.");
+        }
+
+    }
 }

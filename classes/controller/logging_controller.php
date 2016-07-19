@@ -58,8 +58,8 @@ class mod_groupformation_logging_controller {
      */
     public function __construct() {
         $this->logginglevels = array(
-            self::FATAL => 'fatal', self::ERROR => 'error', self::WARNING => 'warning', self::INFO => 'info',
-            self::DEBUG => 'debug');
+            static::FATAL => 'fatal', static::ERROR => 'error', static::WARNING => 'warning', static::INFO => 'info',
+            static::DEBUG => 'debug');
     }
 
     /**
@@ -95,6 +95,6 @@ class mod_groupformation_logging_controller {
         $logentry->groupformationid = $groupformationid;
         $logentry->message = $message;
 
-        $DB->insert_record(self::LOGGING_TABLE_NAME, $logentry);
+        $DB->insert_record(static::LOGGING_TABLE_NAME, $logentry);
     }
 }

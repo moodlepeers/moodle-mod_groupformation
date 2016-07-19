@@ -103,17 +103,22 @@ $jm = new mod_groupformation_job_manager ();
 $job = null;
 
 $job = $jm::get_job($groupformation->id);
-// $jm->reset_job($job);
-// var_dump($jm::get_next_job());
+
 if (!is_null($job)) {
-    $result = $jm::do_groupal($job);
+    // $result = $jm::do_groupal($job);
     // var_dump($result);
     // $saved = $jm::save_result($job,$result);
-
 }
 
 /* ---------- / Job Manager Usage ----------------------- */
 
+/* ------------ Questionnaire Update -------------------- */
+
+//$store = new mod_groupformation_storage_manager($groupformation->id);
+
+//groupformation_read_questionnaire_config($store);
+
+/* ---------- / Questionnaire Update -------------------- */
 
 $controller = new mod_groupformation_analysis_controller ($groupformation->id, $cm);
 

@@ -36,8 +36,8 @@ class lib_groupal_criterion_weight {
      * Initializes the weights
      */
     public static function init() {
-        if (self::$criterionWeights == null) {
-            self::$criterionWeights = new lib_groupal_hash_map();
+        if (static::$criterionWeights == null) {
+            static::$criterionWeights = new lib_groupal_hash_map();
         }
     }
 
@@ -51,7 +51,7 @@ class lib_groupal_criterion_weight {
      */
     public static function addCriterionWeight($k, $v) {
         self::init();
-        if (self::$criterionWeights->containsKey($k)) {
+        if (static::$criterionWeights->containsKey($k)) {
             throw new Exception("key already in use");
         }
         static::$criterionWeights->add($k, $v);
@@ -73,7 +73,7 @@ class lib_groupal_criterion_weight {
         // TODO foreach loop on values and calculate the sum of values.
         $sumOfValues = 1;
         if ($sumOfValues == 1 && isSameKeySet) {
-            self::$criterionWeights = $newWeights;
+            static::$criterionWeights = $newWeights;
             return true;
         }
         return false;

@@ -92,7 +92,7 @@ class lib_groupal_topic_algorithm implements lib_groupal_ialgorithm {
         }
 
         $this->cohort = new lib_groupal_topic_cohort(count($groups), $groups);
-        $this->cohort->whichMatcherUsed = self::class;
+        $this->cohort->whichMatcherUsed = get_class($this);
         return $this->cohort;
     }
 

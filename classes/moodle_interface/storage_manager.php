@@ -90,7 +90,9 @@ class mod_groupformation_storage_manager {
     public function catalog_table_not_set($category = 'grade') {
         global $DB;
 
-        $count = $DB->count_records('groupformation_' . $category);
+        // $count = $DB->count_records('groupformation_' . $category);
+        // TODO
+        $count = $DB->count_records('groupformation_question', array('category' => $category));
 
         return $count == 0;
     }
@@ -136,7 +138,20 @@ class mod_groupformation_storage_manager {
      */
     public function delete_all_catalog_questions($category) {
         global $DB;
-        $DB->delete_records('groupformation_' . $category);
+        // $DB->delete_records('groupformation_' . $category);
+        // TODO
+        $DB->delete_records('groupformation_question', array('category' => $category));
+    }
+
+    /**
+     * Deletes all questions in a specific category
+     *
+     * @param string $category
+     */
+    public function delete_all_catalog_questions2($category, $language) {
+        global $DB;
+
+        $DB->delete_records('groupformation_question', array('category' => $category, 'language' => $language));
     }
 
     /**
@@ -146,11 +161,10 @@ class mod_groupformation_storage_manager {
      * @param string $language
      * @param string $category
      */
-    public function add_catalog_question($question, $language, $category) {
+    public function add_catalog_question($question, $language, $category, $version = '0000000000') {
         global $DB;
 
         $data = new stdClass ();
-
         $data->type = $question ['type'];
         $data->question = $question ['question'];
         $data->options = $this->convert_options($question ['options']);
@@ -158,7 +172,13 @@ class mod_groupformation_storage_manager {
         $data->questionid = $question ['questionid'];
         $data->language = $language;
         $data->optionmax = count($question ['options']);
-        $DB->insert_record('groupformation_' . $category, $data);
+
+        // $DB->insert_record('groupformation_' . $category, $data);
+
+        // TODO
+        $data->category = $category;
+        $data->version = $version;
+        $DB->insert_record('groupformation_question', $data);
     }
 
     /**
@@ -297,7 +317,7 @@ class mod_groupformation_storage_manager {
      * @param unknown $options
      * @return string
      */
-    private function convert_options($options) {
+    public function convert_options($options) {
         $op = implode("</OPTION>  <OPTION>", $options);
 
         return "<OPTION>" . $op . "</OPTION>";
@@ -328,7 +348,10 @@ class mod_groupformation_storage_manager {
     public function get_possible_language($category) {
         global $DB;
 
-        $table = 'groupformation_' . $category;
+        // $table = 'groupformation_' . $category;
+        // TODO
+        $table = 'groupformation_question';
+
         $lang = $DB->get_field($table, 'language', array(), IGNORE_MULTIPLE);
 
         return $lang;
@@ -380,12 +403,19 @@ class mod_groupformation_storage_manager {
         if ($category == 'points') {
             return $this->get_max_points();
         }
-        $table = "groupformation_" . $category;
 
+        // $table = 'groupformation_' . $category;
+        // TODO
+        $table = 'groupformation_question';
         return $DB->get_field($table, 'optionmax', array(
-            'language' => 'en',
+            'language' => 'en', 'category' => $category,
             'questionid' => $i
         ));
+
+        //return $DB->get_field($table, 'optionmax', array(
+        //    'language' => 'en',
+        //    'questionid' => $i
+        //));
     }
 
     /**
@@ -399,12 +429,33 @@ class mod_groupformation_storage_manager {
     public function get_catalog_question($i, $category = 'general', $lang = 'en') {
         global $DB;
         $table = "groupformation_" . $category;
+        // TODO
+        $table = 'groupformation_question';
         $return = $DB->get_record($table, array(
-            'language' => $lang,
+            'language' => $lang, 'category' => $category,
             'questionid' => $i
         ));
 
+        // $return = $DB->get_record($table, array(
+        //     'language' => $lang,
+        //     'questionid' => $i
+        // ));
+
         return $return;
+    }
+
+    /**
+     * Returns version of requested category stored in DB
+     *
+     * @param $category
+     * @return mixed
+     */
+    public function get_catalog_version($category) {
+        global $DB;
+
+        $table = "groupformation_q_version";
+
+        return $DB->get_field($table, 'version', array('category' => $category));
     }
 
     /**
@@ -465,7 +516,7 @@ class mod_groupformation_storage_manager {
             $categories[] = 'knowledge';
         }
 
-        if (!$this->is_math_prep_course_mode()){
+        if (!$this->is_math_prep_course_mode()) {
             $categories[] = 'general';
         }
 
@@ -803,7 +854,8 @@ class mod_groupformation_storage_manager {
                 if (('points' == $c && $points == false) ||
                     ('grade' == $c && $grades == false) ||
                     ($hastopic == 0 && 'topic' == $c) ||
-                    ($hasknowledge == 0 && ('knowledge_heterogen' == $c || 'knowledge_homogen' == $c))) {
+                    ($hasknowledge == 0 && ('knowledge_heterogen' == $c || 'knowledge_homogen' == $c))
+                ) {
                     unset ($array [$position]);
                 }
 
@@ -865,14 +917,31 @@ class mod_groupformation_storage_manager {
 
     /**
      * Returns whether a participant code is wanted or not
-     * 
+     *
      * @return bool
      */
-    public function ask_for_participant_code(){
+    public function ask_for_participant_code() {
         return $this->data->ask_for_participant_code();
     }
 
-    public function is_math_prep_course_mode(){
+    /**
+     * Returns whether current mode is math prep course mode
+     *
+     * @return bool
+     */
+    public function is_math_prep_course_mode() {
         return $this->data->is_math_prep_course_mode();
     }
+
+    /**
+     * Returns current version number of the questionnaire
+     *
+     * @return mixed
+     */
+    public function get_questionnaire_version() {
+        global $DB;
+
+        return $DB->get_field('groupformation_q_version', 'version', array('category' => 'questionnaire'));
+    }
+
 }

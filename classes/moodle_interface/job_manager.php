@@ -69,7 +69,7 @@ class mod_groupformation_job_manager {
             }
         }
 
-        self::set_job($next, "started", true);
+        static::set_job($next, "started", true);
 
         groupformation_info(null, $next->groupformationid,
             'groupal job with groupformation id="' . $next->groupformationid . '" selected');
@@ -98,7 +98,7 @@ class mod_groupformation_job_manager {
      * @param stdClass $job
      */
     public static function reset_job($job) {
-        self::set_job($job, "ready", false, true);
+        static::set_job($job, "ready", false, true);
         groupformation_info(null, $job->groupformationid,
             'groupal job with groupformation id="' . $job->groupformationid . '" resetted');
     }
@@ -115,7 +115,7 @@ class mod_groupformation_job_manager {
      */
     public static function set_job($job, $state = "ready", $settime = false, $resettime = false, $groupingid = null) {
         global $DB, $USER;
-        $statusoptions = self::$jobstatusoptions;
+        $statusoptions = static::$jobstatusoptions;
 
         if (array_key_exists($state, $statusoptions)) {
             $status = $statusoptions [$state];
