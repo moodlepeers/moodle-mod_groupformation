@@ -622,7 +622,7 @@ function groupformation_save_more_infos($groupformation, $init) {
 
     if ($init) {
         // TODO
-        // groupformation_update_questions($store);
+        //groupformation_update_questions($store);
         groupformation_import_questionnaire_configuration($store);
     }
 

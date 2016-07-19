@@ -136,49 +136,10 @@ class mod_groupformation_storage_manager {
      *
      * @param string $category
      */
-    public function delete_all_catalog_questions($category) {
-        global $DB;
-        // $DB->delete_records('groupformation_' . $category);
-        // TODO
-        $DB->delete_records('groupformation_question', array('category' => $category));
-    }
-
-    /**
-     * Deletes all questions in a specific category
-     *
-     * @param string $category
-     */
-    public function delete_all_catalog_questions2($category, $language) {
+    public function delete_all_catalog_questions($category, $language) {
         global $DB;
 
         $DB->delete_records('groupformation_question', array('category' => $category, 'language' => $language));
-    }
-
-    /**
-     * Adds a catalog question in a specific language and category
-     *
-     * @param array $question
-     * @param string $language
-     * @param string $category
-     */
-    public function add_catalog_question($question, $language, $category, $version = '0000000000') {
-        global $DB;
-
-        $data = new stdClass ();
-        $data->type = $question ['type'];
-        $data->question = $question ['question'];
-        $data->options = $this->convert_options($question ['options']);
-        $data->position = $question ['position'];
-        $data->questionid = $question ['questionid'];
-        $data->language = $language;
-        $data->optionmax = count($question ['options']);
-
-        // $DB->insert_record('groupformation_' . $category, $data);
-
-        // TODO
-        $data->category = $category;
-        $data->version = $version;
-        $DB->insert_record('groupformation_question', $data);
     }
 
     /**
@@ -208,24 +169,6 @@ class mod_groupformation_storage_manager {
             ));
             $DB->update_record('groupformation_q_version', $data);
         }
-    }
-
-    /**
-     * Determines whether the DB contains for a specific category a specific version or not
-     *
-     * @param string $category
-     * @param string $version
-     * @return boolean
-     */
-    public function latest_version($category, $version) {
-        global $DB;
-
-        $count = $DB->count_records('groupformation_q_version', array(
-            'category' => $category,
-            'version' => $version
-        ));
-
-        return $count == 1;
     }
 
     /**
@@ -352,7 +295,7 @@ class mod_groupformation_storage_manager {
         // TODO
         $table = 'groupformation_question';
 
-        $lang = $DB->get_field($table, 'language', array(), IGNORE_MULTIPLE);
+        $lang = $DB->get_field($table, 'language', array('category'=>$category), IGNORE_MULTIPLE);
 
         return $lang;
     }
@@ -895,6 +838,11 @@ class mod_groupformation_storage_manager {
         return $evaluationmethod == 1;
     }
 
+    /**
+     * Returns users
+     *
+     * @return array|null
+     */
     public function get_users() {
         global $PAGE;
         $courseid = $this->get_course_id();

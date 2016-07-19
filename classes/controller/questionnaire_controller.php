@@ -77,7 +77,6 @@ class mod_groupformation_questionnaire_controller
         $this->context = context_module::instance($this->cmid);
     }
 
-
     /**
      * Triggers going a category page back
      */
@@ -593,6 +592,9 @@ class mod_groupformation_questionnaire_controller
         echo '</div>';
     }
 
+    /**
+     * Prints participant code for user
+     */
     public function print_participant_code() {
         echo '<div class="participantcode">';
 

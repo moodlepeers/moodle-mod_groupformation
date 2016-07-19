@@ -44,7 +44,6 @@ function groupformation_add_jquery($PAGE, $filename = null) {
     }
 }
 
-
 /**
  * Logs message
  *
@@ -224,45 +223,11 @@ function groupformation_check_for_cron_job() {
     }
 }
 
-function groupformation_check_version(mod_groupformation_storage_manager $store) {
-
-}
-
-/**
- * Updates questions in DB with xml files
- *
- * @param mod_groupformation_storage_manager $store
- */
-function groupformation_update_questions(mod_groupformation_storage_manager $store) {
-
-    $names = $store->get_raw_categories();
-    $xmlloader = new mod_groupformation_xml_loader ($store);
-
-    if ($store->catalog_table_not_set()) {
-        foreach ($names as $category) {
-            if ($category != 'topic' && $category != 'knowledge') {
-                $array = $xmlloader->save_data($category);
-                $version = $array [0] [0];
-                $numbers = $array [0] [1];
-                $store->add_catalog_version($category, $numbers, $version, true);
-            }
-        }
-
-    } else {
-        foreach ($names as $category) {
-            if ($category != 'topic' && $category != 'knowledge') {
-                $xmlloader->latest_version($category);
-            }
-        }
-    }
-}
-
 /**
  * Reads questionnaire file
  *
- * @param mod_groupformation_store $store
+ * @param mod_groupformation_storage_manager $store
  * @param string $filename
- * @param null $store
  */
 function groupformation_import_questionnaire_configuration($store, $filename = 'questionnaire.xml') {
     global $CFG, $DB;
@@ -300,14 +265,14 @@ function groupformation_import_questionnaire_configuration($store, $filename = '
 
                 foreach ($new_languages as $language) {
 
-                    $data = $xmlloader->save4($category, $language, $new_version);
+                    $data = $xmlloader->save($category, $language, $new_version);
 
                     $version = $data[0];
                     $numberofquestions = $data[1];
                     $questions = $data[2];
 
                     if ($version > $prev_version || !$prev_version) {
-                        $store->delete_all_catalog_questions2($category,$language);
+                        $store->delete_all_catalog_questions($category,$language);
 
                         $DB->insert_records('groupformation_question', $questions);
                         $store->add_catalog_version($category, $numberofquestions, $version, false);

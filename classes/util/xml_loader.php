@@ -42,109 +42,13 @@ class mod_groupformation_xml_loader {
     }
 
     /**
-     * Deletes old questions and updates with new questions
-     *
-     * @param $category
-     * @return array
-     */
-    public function save_data($category) {
-        $array = array();
-        $init = $this->store->catalog_table_not_set($category);
-        if (!$init) {
-            $this->store->delete_all_catalog_questions($category);
-        }
-        $array[] = $this->save($category, 'en');
-        $array[] = $this->save($category, 'de');
-
-        return $array;
-    }
-
-    /**
-     * Checks whether the version is old and needs to be updated and updates the version
-     *
-     * @param $category
-     */
-    public function latest_version($category) {
-        global $CFG;
-
-        $xmlfile = $CFG->dirroot . '/mod/groupformation/xml_question/question_de_' . $category . '.xml';
-
-        if (file_exists($xmlfile)) {
-            $xml = simplexml_load_file($xmlfile);
-
-            $version = trim($xml->QUESTIONS['VERSION']);
-            if (!$this->store->latest_version($category, $version)) {
-                $array = $this->save_data($category);
-                $number = $array[0][1];
-
-                if ($array[1][1] > $number) {
-                    $number = $array[1][1];
-                }
-
-                $this->store->add_catalog_version($category, $number, $version, false);
-            }
-        } else {
-            exit("The file $xmlfile cannot be opened or found.");
-        }
-    }
-
-    /**
      * Returns an array with version and number of answers
      *
      * @param $category
      * @param $lang
      * @return array
      */
-    private function save($category, $lang) {
-        global $CFG;
-        $xmlfile = $CFG->dirroot . '/mod/groupformation/xml_question/' . $lang . '_' . $category . '.xml';
-
-        $return = array();
-
-        if (file_exists($xmlfile)) {
-            $xml = simplexml_load_file($xmlfile);
-
-            $return[] = trim($xml->QUESTIONS['VERSION']);
-            $numbers = 0;
-
-            foreach ($xml->QUESTIONS->QUESTION as $question) {
-                $options = $question->OPTIONS;
-                $optionsarray = array();
-
-                foreach ($options->OPTION as $option) {
-                    $optionsarray[] = trim($option);
-                }
-
-                $numbers++;
-
-                $array = array('type' => trim($question['TYPE']),
-                    'question' => trim($question->QUESTIONTEXT),
-                    'options' => $optionsarray,
-                    'position' => $numbers,
-                    'questionid' => trim($question['ID']),
-                );
-
-                $this->store->add_catalog_question($array, $lang, $category);
-            }
-
-            $return[] = $numbers;
-
-            return $return;
-
-        } else {
-            exit("The file $xmlfile cannot be opened or found.");
-        }
-
-    }
-
-    /**
-     * Save2
-     *
-     * @param $category
-     * @param $lang
-     * @return array
-     */
-    public function save4($category, $lang, $version) {
+    public function save($category, $lang, $version) {
         global $CFG;
         $xmlfile = $CFG->dirroot . '/mod/groupformation/xml_question/' . $lang . '_' . $category . '.xml';
 
@@ -158,6 +62,7 @@ class mod_groupformation_xml_loader {
             $numbers = 0;
 
             foreach ($xml->QUESTIONS->QUESTION as $question) {
+
                 $options = $question->OPTIONS;
                 $optionsarray = array();
 
@@ -167,25 +72,17 @@ class mod_groupformation_xml_loader {
 
                 $numbers++;
 
-                $array = array('type' => trim($question['TYPE']),
-                    'question' => trim($question->QUESTIONTEXT),
-                    'options' => $optionsarray,
-                    'position' => $numbers,
-                    'questionid' => trim($question['ID']),
-                );
-
                 $data = new stdClass ();
                 $data->category = $category;
-                $data->questionid = $array ['questionid'];
-                $data->type = $array ['type'];
-                $data->question = $array ['question'];
-                $data->options = $this->store->convert_options($array ['options']);
+                $data->questionid = trim($question['ID']);
+                $data->type = trim($question['TYPE']);
+                $data->question = trim($question->QUESTIONTEXT);
+                $data->options = $this->store->convert_options($optionsarray);
                 $data->language = $lang;
-                $data->position = $array ['position'];
-                $data->optionmax = count($array ['options']);
+                $data->position = $numbers;
+                $data->optionmax = count($optionsarray);
                 $data->version = $version;
 
-                //$this->store->add_catalog_question($array, $lang, $category);
                 $questions[] = $data;
             }
 
