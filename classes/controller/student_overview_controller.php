@@ -95,7 +95,7 @@ class mod_groupformation_student_overview_controller {
      */
     private function determine_view() {
         switch ($this->viewstate) {
-            case -1 : // Questionaire is available but not started yet.
+            case -1 : // Questionnaire is available but not started yet.
                 $this->groupformationinfo =
                     mod_groupformation_util::get_info_text_for_student(true, $this->groupformationid);
                 $this->groupformationstateinfo = array(
@@ -109,7 +109,7 @@ class mod_groupformation_student_overview_controller {
                         'text' => get_string("next")));
                 break;
 
-            case 0 : // Questionaire is available, started, not finished and not submited.
+            case 0 : // Questionnaire is available, started, not finished and not submited.
                 $this->groupformationinfo =
                     mod_groupformation_util::get_info_text_for_student(false, $this->groupformationid);
                 $this->groupformationstateinfo = array(
@@ -133,7 +133,7 @@ class mod_groupformation_student_overview_controller {
                 );
                 break;
 
-            case 1 : // Questionaire is submitted.
+            case 1 : // Questionnaire is submitted.
                 $this->groupformationinfo =
                     mod_groupformation_util::get_info_text_for_student(true, $this->groupformationid);
                 $this->groupformationstateinfo = array(

@@ -623,7 +623,7 @@ class mod_groupformation_storage_manager {
     }
 
     /**
-     * Sets timestamp in groupformation in order to close/terminate questionaire
+     * Sets timestamp in groupformation in order to close/terminate questionnaire
      */
     public function close_questionnaire() {
         global $DB;
@@ -636,7 +636,7 @@ class mod_groupformation_storage_manager {
     }
 
     /**
-     * Sets timestamp in groupformation in order to open/begin questionaire
+     * Sets timestamp in groupformation in order to open/begin questionnaire
      */
     public function open_questionnaire() {
         global $DB;
@@ -745,7 +745,7 @@ class mod_groupformation_storage_manager {
     }
 
     /**
-     * Returns if questionaire is closed
+     * Returns if questionnaire is closed
      *
      * @return boolean
      */

@@ -206,7 +206,7 @@ class mod_groupformation_user_manager
     }
 
     /**
-     * Changes status of questionaire for a specific user
+     * Changes status of questionnaire for a specific user
      *
      * @param $userid
      * @param bool|false $complete
@@ -258,7 +258,7 @@ class mod_groupformation_user_manager
     }
 
     /**
-     * Returns whether questionaire was completed and send by user or not
+     * Returns whether questionnaire was completed and send by user or not
      *
      * @param int $userid
      * @return boolean

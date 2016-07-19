@@ -130,7 +130,7 @@ class mod_groupformation_grouping_controller
         // Logging.
         groupformation_info($USER->id, $this->groupformationid, 'groupal job queued by course manager/teacher');
 
-        $users = $this->handle_complete_questionaires();
+        $users = $this->handle_complete_questionnaires();
         $this->job->groupingid = $cm->groupingid;
         mod_groupformation_job_manager::set_job($this->job, "waiting", true);
         $this->determine_status();
@@ -714,9 +714,9 @@ class mod_groupformation_grouping_controller
     }
 
     /**
-     * Handles complete questionaires (userids) and sets them to completed/commited
+     * Handles complete questionnaires (userids) and sets them to completed/commited
      */
-    public function handle_complete_questionaires()
+    public function handle_complete_questionnaires()
     {
         $users = array_keys($this->usermanager->get_completed_by_answer_count(null, 'userid'));
 

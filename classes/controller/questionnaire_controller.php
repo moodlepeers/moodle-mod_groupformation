@@ -347,7 +347,7 @@ class mod_groupformation_questionnaire_controller
     }
 
     /**
-     * Prints action buttons for questionaire page
+     * Prints action buttons for questionnaire page
      */
     public function print_action_buttons() {
         echo '<div class="grid">
@@ -396,7 +396,7 @@ class mod_groupformation_questionnaire_controller
     }
 
     /**
-     * Prints final page of questionaire
+     * Prints final page of questionnaire
      */
     public function print_final_page() {
         echo '<div class="col_m_100"><h4>' . get_string('questionnaire_no_more_questions', 'groupformation') .
@@ -434,7 +434,7 @@ class mod_groupformation_questionnaire_controller
     }
 
     /**
-     * Prints questionaire page
+     * Prints questionnaire page
      */
     public function print_page() {
         if ($this->has_next()) {
