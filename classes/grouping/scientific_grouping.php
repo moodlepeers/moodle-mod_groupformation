@@ -214,8 +214,7 @@ class mod_groupformation_scientific_grouping {
      * @return array
      */
     public function slicing($users, $numberofslices) {
-        // TODO
-        // shuffle($users);
+        shuffle($users);
         $slices = array();
 
         for ($i = 0; $i < count($users); $i++) {
