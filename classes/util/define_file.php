@@ -232,17 +232,23 @@ class mod_groupformation_data {
             'general',
             'grade',
             'points',
-            'team',
             'character',
             'motivation',
+            'team',
+            'srl',
+            'sellmo',
+            'self',
         ),
         '2' => array(
             'general',
             'grade',
             'points',
-            'team',
             'character',
+            'team',
             'learning',
+            'srl',
+            'sellmo',
+            'self',
         ),
         '3' => array(
             'topic',
@@ -332,10 +338,19 @@ class mod_groupformation_data {
         }
     }
 
+    /**
+     * Returns whether a participant code is required or not
+     *
+     * @return bool
+     */
     public function ask_for_participant_code(){
         return $this->participant_code;
     }
 
+    /**
+     * Returns whether import export is enabled or not
+     * @return bool
+     */
     public function import_export_enabled(){
         return $this->import_export_enabled;
     }

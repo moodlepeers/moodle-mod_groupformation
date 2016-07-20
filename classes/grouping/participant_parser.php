@@ -31,6 +31,10 @@ class mod_groupformation_participant_parser {
     private $store;
     private $data;
 
+    /**
+     * mod_groupformation_participant_parser constructor.
+     * @param $groupformationid
+     */
     public function __construct($groupformationid) {
         $this->groupformationid = $groupformationid;
         $this->store = new mod_groupformation_storage_manager ($groupformationid);

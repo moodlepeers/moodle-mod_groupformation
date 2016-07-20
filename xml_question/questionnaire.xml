@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<questionnaire version="2016071901">
+<questionnaire version="2016071902">
 	<categories>
 		<category>general</category>
-		<category>team</category>
-		<category>motivation</category>
-		<category>character</category>
 		<category>points</category>
 		<category>grade</category>
-		<category>learning</category>
+		<category>character</category>
+		<category>motivation</category>
+		<category>team</category>
+		<category>srl</category>
+		<category>sellmo</category>
+		<category>self</category>
 	</categories>
 	<languages>
 		<language>en</language>

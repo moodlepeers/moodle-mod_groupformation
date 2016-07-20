@@ -65,8 +65,11 @@ class mod_groupformation_analysis_controller {
         $this->determine_status();
     }
 
-
-
+    /**
+     * Triggers questionnaire
+     *
+     * @param $switcher
+     */
     public function trigger_questionnaire($switcher){
 
         switch($switcher){
@@ -83,8 +86,6 @@ class mod_groupformation_analysis_controller {
                 break;
         }
     }
-
-
 
     /**
      * Loads status for template

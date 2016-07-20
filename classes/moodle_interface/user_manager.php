@@ -601,6 +601,12 @@ class mod_groupformation_user_manager
         $DB->update_record('groupformation_started', $record);
     }
 
+    /**
+     * Returns participant code
+     *
+     * @param $userid
+     * @return mixed|string
+     */
     public function get_participant_code($userid) {
         global $DB;
         $exists = $DB->record_exists('groupformation_started', array(

@@ -22,6 +22,14 @@
  */
 class mod_groupformation_radio_question {
 
+    /**
+     * Print HTML of radio inputs
+     *
+     * @param $q
+     * @param $category
+     * @param $qnumber
+     * @param $hasanswer
+     */
     public function print_html($q, $category, $qnumber, $hasanswer) {
         $question = $q[1];
         $options = $q[2];
