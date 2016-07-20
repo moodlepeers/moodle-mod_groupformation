@@ -53,6 +53,12 @@ class mod_groupformation_criterion_calculator
         $this->scenario = $this->store->get_scenario();
     }
 
+    /**
+     * Lookup z-score
+     *
+     * @param $z
+     * @return float|mixed
+     */
     function lookup_z($z){
         $z = strval(round($z,2));
         $val = 0.0;
@@ -791,7 +797,15 @@ class mod_groupformation_criterion_calculator
         return $evalinfos;
     }
 
-
+    /**
+     * Returns evaluation text
+     *
+     * @param $criterion
+     * @param $label
+     * @param $cutoffs
+     * @param $uservalue
+     * @return string
+     */
     private function get_eval_text($criterion, $label, $cutoffs, $uservalue)
     {
         if (is_null($cutoffs)) {

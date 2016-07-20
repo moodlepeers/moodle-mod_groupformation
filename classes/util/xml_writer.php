@@ -25,6 +25,9 @@ class mod_groupformation_xml_writer {
     /** @var XMLWriter This is the writer instance used to create xml */
     private $writer;
 
+    /**
+     * mod_groupformation_xml_writer constructor.
+     */
     public function __construct() {
         $this->writer = new XMLWriter ();
         $this->writer->openMemory();

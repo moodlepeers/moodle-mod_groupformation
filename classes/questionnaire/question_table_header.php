@@ -23,6 +23,13 @@
  */
 class mod_groupformation_question_table_header {
 
+    /**
+     * Print HTML of table header
+     *
+     * @param $category
+     * @param $tabletype
+     * @param $headeroptarray
+     */
     public function print_html($category, $tabletype, $headeroptarray) {
 
         if ($tabletype == 'type_topics') {

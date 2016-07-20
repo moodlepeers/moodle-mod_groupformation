@@ -106,6 +106,7 @@ class mod_groupformation_scientific_grouping {
      * Scientific division of users and creation of participants
      *
      * @param $users Two parted array - first part is all groupal users, second part are all random users
+     * @return array
      */
     public function run_grouping($users) {
 
@@ -214,8 +215,7 @@ class mod_groupformation_scientific_grouping {
      * @return array
      */
     public function slicing($users, $numberofslices) {
-        // TODO
-        // shuffle($users);
+        shuffle($users);
         $slices = array();
 
         for ($i = 0; $i < count($users); $i++) {

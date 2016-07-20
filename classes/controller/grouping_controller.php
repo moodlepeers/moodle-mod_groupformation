@@ -246,8 +246,6 @@ class mod_groupformation_grouping_controller
         return $this->view->load_template();
     }
 
-
-
     /**
      * sets the buttons of grouping settings
      *
@@ -396,8 +394,6 @@ class mod_groupformation_grouping_controller
 
         return $settingsgroupview->load_template();
     }
-
-
 
     /**
      * Loads statistics
@@ -576,7 +572,6 @@ class mod_groupformation_grouping_controller
 
         return $settingsgroupview->load_template();
     }
-
 
     /**
      * Assign groups-data to template

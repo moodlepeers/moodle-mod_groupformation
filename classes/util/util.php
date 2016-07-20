@@ -117,7 +117,6 @@ class mod_groupformation_util {
         }
     }
 
-
     /**
      * Computes stats about answered and misssing questions
      *

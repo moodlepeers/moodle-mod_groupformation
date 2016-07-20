@@ -62,6 +62,12 @@ class mod_groupformation_groups_manager {
         return $DB->insert_record('groupformation_group_users', $record);
     }
 
+    /**
+     * Returns topic name
+     *
+     * @param $id
+     * @return mixed
+     */
     public function get_topic_name($id) {
         if (is_null($this->store)) {
             $this->store = new mod_groupformation_storage_manager ($this->groupformationid);
@@ -237,7 +243,11 @@ class mod_groupformation_groups_manager {
         return $count > 0;
     }
 
-
+    /**
+     * Returns max groups size
+     *
+     * @return null
+     */
     public function get_max_groups_size() {
         global $DB;
         $groups = $this->get_generated_groups('id', 'id,group_size');
@@ -372,12 +382,23 @@ class mod_groupformation_groups_manager {
         }
     }
 
+    /**
+     * Removes users from group
+     *
+     * @param $groupid
+     */
     public function remove_users($groupid){
         global $DB;
 
         $DB->delete_records('groupformation_group_users',array('groupformation'=>$this->groupformationid,'groupid'=>$groupid));
     }
 
+    /**
+     * Adds users to a group
+     *
+     * @param $groupid
+     * @param $userids
+     */
     public function add_users($groupid, $userids){
         global $DB;
 
@@ -392,6 +413,11 @@ class mod_groupformation_groups_manager {
         $DB->insert_records('groupformation_group_users',$records);
     }
 
+    /**
+     * Deletes group
+     *
+     * @param $groupid
+     */
     public function delete_group($groupid){
         global $DB;
 
@@ -401,6 +427,12 @@ class mod_groupformation_groups_manager {
 
     }
 
+    /**
+     * Updates group
+     *
+     * @param $groupid
+     * @param $group_size
+     */
     public function update_group($groupid,$group_size){
         global $DB;
 
@@ -411,6 +443,12 @@ class mod_groupformation_groups_manager {
         $DB->update_record('groupformation_groups',$record);
     }
 
+    /**
+     * Updates groups
+     *
+     * @param $groups_array_after
+     * @param $groups_array_before
+     */
     public function update_groups($groups_array_after,$groups_array_before){
         $updated = false;
         foreach($groups_array_after as $groupid => $userids){

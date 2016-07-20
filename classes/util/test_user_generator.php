@@ -30,6 +30,10 @@ class mod_groupformation_test_user_generator {
     /** @var cm_info */
     private $cm;
 
+    /**
+     * mod_groupformation_test_user_generator constructor.
+     * @param null $cm
+     */
     public function __construct($cm = null) {
         $this->cm = $cm;
     }
