@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Scientific grouping interface
+ * Basic grouping interface
  *
  * @package mod_groupformation
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
@@ -43,7 +43,7 @@ require_once($CFG->dirroot . '/mod/groupformation/lib/classes/optimizers/optimiz
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/xml_writers/participant_writer.php');
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/xml_writers/cohort_writer.php');
 
-class mod_groupformation_scientific_grouping extends mod_groupformation_grouping{
+class mod_groupformation_topic_grouping extends mod_groupformation_grouping {
 
     private $groupformationid;
     private $usermanager;
@@ -71,70 +71,68 @@ class mod_groupformation_scientific_grouping extends mod_groupformation_grouping
      * @return array
      */
     public function run_grouping($users) {
-        $specs = array(
-            "big5" => array(
-                "category" => "character",
-                "scenarios" => array(1, 2),
-                "labels" => array(
-                    "extraversion" => array(
-                        "scenarios" => array(1 => false, 2 => false),
-                        "questionids" => array(-1, 6),
-                    ),
-                    "gewissenhaftigkeit" => array(
-                        "scenarios" => array(1 => true, 2 => true),
-                        "questionids" => array(-3, 8),
-                    ),
-                ),
-            ),
-        );
 
-        $configurations = array(
-            "mrand:0;ex:1;gh:1" => array('big5_extraversion' => true, 'big5_gewissenhaftigkeit' => true),
-            "mrand:0;ex:1;gh:0" => array('big5_extraversion' => true, 'big5_gewissenhaftigkeit' => false),
-            "mrand:0;ex:0;gh:0" => array('big5_extraversion' => false, 'big5_gewissenhaftigkeit' => false),
-            "mrand:0;ex:0;gh:1" => array('big5_extraversion' => false, 'big5_gewissenhaftigkeit' => true),
-            "mrand:0;ex:1;gh:_" => array('big5_extraversion' => true, 'big5_gewissenhaftigkeit' => null),
-            "mrand:0;ex:0;gh:_" => array('big5_extraversion' => false, 'big5_gewissenhaftigkeit' => null),
-            "mrand:0;ex:_;gh:1" => array('big5_extraversion' => null, 'big5_gewissenhaftigkeit' => true),
-            "mrand:0;ex:_;gh:0" => array('big5_extraversion' => null, 'big5_gewissenhaftigkeit' => false),
-            "mrand:1;ex:_;gh:_" => array(),
-        );
-
-        $configurationkeys = array_keys($configurations);
-
-        $numberofslices = count($configurationkeys);
-
-        $groupsizes = $this->store->determine_group_size($users);
-
-        if (count($users[0])<$numberofslices){
+        if (count($users[0]) == 0) {
             return array();
         }
 
-        // divide users into n slices
-        $slices = $this->slicing($users[0], $numberofslices);
+        $groupsizes = $this->store->determine_group_size($users, $this->groupformationid);
+        ksort($groupsizes);
 
         $cohorts = array();
 
-        for ($i = 0; $i < $numberofslices; $i++) {
-            $slice = $slices[$i];
+        lib_groupal_group::setGroupMembersMaxSize(max($groupsizes));
 
-            $configurationkey = $configurationkeys[$i];
-            $configuration = $configurations[$configurationkey];
+        $configurationkey = "topic:1";
 
-            $raw_participants = $this->participantparser->build_participants($slice,$specs);
+        $raw_participants = $this->participantparser->build_topic_participants($users[0]);
 
-            $participants = $this->configure_participants($raw_participants, $configuration);
-
-            $cohorts[$configurationkey] = $this->build_cohort($participants, $groupsizes[0], $configurationkey);
-        }
-
-        // Handle all users with incomplete or no questionnaire submission
-        $randomparticipantskey = "rand:1;mrand:_;ex:_;gh:_";
-
+        $participants = $raw_participants;
         $randomparticipants = $this->participantparser->build_empty_participants($users[1]);
-        $randomcohort = $this->build_cohort($randomparticipants, $groupsizes[1],$randomparticipantskey);
 
-        $cohorts[$randomparticipantskey] = $randomcohort;
+        $cohort = $this->build_cohort($participants, $groupsizes, $configurationkey);
+
+        if (!is_null($cohort)) {
+            $size = ceil((count($users [0]) + count($users [1])) / count($cohort->groups));
+            lib_groupal_group::setGroupMembersMaxSize($size);
+
+            $max = null;
+            foreach ($cohort->groups as $group) {
+                $value = count($group->getParticipants());
+                $groups [] = array(
+                    'id' => $group->getID(), 'count' => $value, 'group' => $group, 'participants' => array());
+                if ($max == null || $max < $value) {
+                    $max = $value;
+                }
+            }
+            usort($groups, function ($a, $b) {
+                return $a ['count'] - $b ['count'];
+            });
+            $groups = array_slice($groups, 0, count($groups));
+            for ($i = 0; $i < count($randomparticipants); $i++) {
+                usort($groups, function ($a, $b) {
+                    return $a ['count'] - $b ['count'];
+                });
+                $groups = array_slice($groups, 0, count($groups));
+
+                $p = $randomparticipants [$i];
+                $groups [0] ['group']->addParticipant($p, true);
+                $groups [0] ['count']++;
+            }
+
+            usort($groups, function ($a, $b) {
+                return $a ['count'] - $b ['count'];
+            });
+
+            $cohorts[$configurationkey] = $cohort;
+        } else {
+            $configurationkey = 'random:1';
+
+            // Pure random groups because no answers.
+            $max = max($groupsizes);
+
+            $cohorts[$configurationkey] = $this->build_random_cohort($randomparticipants, $max);
+        }
 
         return $cohorts;
     }

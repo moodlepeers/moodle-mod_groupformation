@@ -27,10 +27,12 @@ if (!defined('MOODLE_INTERNAL')) {
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_parser.php');
-require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/scientific_grouping.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/lib.php');
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/scientific_grouping.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/basic_grouping.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/topic_grouping.php');
 
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/criteria/specific_criterion.php');
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/participant.php');
@@ -92,7 +94,6 @@ class mod_groupformation_job_manager {
     }
 
     /**
-     *
      * Resets job to "ready"
      *
      * @param stdClass $job
@@ -176,7 +177,6 @@ class mod_groupformation_job_manager {
     }
 
     /**
-     *
      * Checks whether job is aborted or not
      *
      * @param stdClass $job
@@ -190,6 +190,8 @@ class mod_groupformation_job_manager {
     }
 
     /**
+     * Returns users
+     *
      * @param $job
      * @param $groupformationid
      * @param mod_groupformation_storage_manager $store
@@ -252,304 +254,6 @@ class mod_groupformation_job_manager {
     }
 
     /**
-     * Determines the group size for groupal and random algorithm
-     *
-     * @param $users
-     * @param mod_groupformation_storage_manager $store
-     * @param null $groupformationid
-     * @return array|null
-     */
-    public static function determine_group_size($users, mod_groupformation_storage_manager $store,
-                                                $groupformationid = null) {
-        if ($store->ask_for_topics()) {
-            $groupoption = $store->get_group_option();
-            if ($groupoption) {
-                $maxgroups = intval($store->get_max_groups());
-                $topicvalues = $store->get_knowledge_or_topic_values('topic');
-                $topicvalues = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $topicvalues . ' </OPTIONS>';
-                $topicsoptions = mod_groupformation_util::xml_to_array($topicvalues);
-                $topicscount = count($topicsoptions);
-
-                $userscount0 = count($users [0] + $users [1]);
-                $ratio0 = $userscount0 / $maxgroups;
-
-                $basegroupsize = floor($ratio0);
-
-                $covereduserscount = $basegroupsize * $maxgroups;
-                $remaininguserscount = $userscount0 - $covereduserscount;
-
-                $usermanager = new mod_groupformation_user_manager ($groupformationid);
-
-                $topics = $usermanager->get_most_common_topics($topicscount);
-
-                $result = array();
-
-                $i = 0;
-                foreach ($topics as $key => $topic) {
-                    if ($i < $remaininguserscount) {
-                        $result [intval($topic ['id']) - 1] = intval(round($basegroupsize + 1));
-                    } else {
-                        $result [intval($topic ['id']) - 1] = intval(round($basegroupsize));
-                    }
-                    $i++;
-                }
-
-                return $result;
-            } else {
-                $topicvalues = $store->get_knowledge_or_topic_values('topic');
-                $topicvalues = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $topicvalues . ' </OPTIONS>';
-                $topicsoptions = mod_groupformation_util::xml_to_array($topicvalues);
-                $topicscount = count($topicsoptions);
-
-                $maxmembers = intval($store->get_max_members());
-                $userscount0 = count($users [0] + $users [1]);
-                $maxmembers = ceil($userscount0 / $topicscount);
-                $array = array();
-                for ($i = 0; $i < $topicscount; $i = $i + 1) {
-                    $array[] = $maxmembers;
-                }
-                return $array;
-            }
-
-            return $sizearray;
-        } else {
-
-            $userscount0 = count($users [0]);
-            $userscount1 = count($users [1]);
-            $userscount = $userscount0 + $userscount1;
-
-            if ($userscount <= 0) {
-                return null;
-            }
-            $groupoption = $store->get_group_option();
-            if ($groupoption) {
-                $maxgroups = intval($store->get_max_groups());
-
-                if ($userscount0 == 0) {
-                    return array(
-                        null, intval(ceil($userscount1 / $maxgroups)));
-                } else if ($userscount1 == 0) {
-                    return array(
-                        intval(ceil($userscount0 / $maxgroups)), null);
-                }
-
-                $optimalsize = ceil($userscount / $maxgroups);
-
-                $optimalsize0 = $optimalsize;
-                $optimalsize1 = $optimalsize;
-
-                $check0 = false;
-                $check1 = false;
-
-                $ratio0 = $userscount0 / $userscount;
-                $ratio1 = $userscount1 / $userscount;
-
-                $groupnumber0 = round($ratio0 * $maxgroups);
-                $groupnumber1 = round($ratio1 * $maxgroups);
-
-                if ($groupnumber0 + $groupnumber1 > $maxgroups) {
-                    if ($userscount0 > $userscount1) {
-                        $groupnumber0--;
-                    } else {
-                        $groupnumber1--;
-                    }
-                }
-
-                if ($groupnumber0 == 0) {
-                    $groupnumber0 = $groupnumber0 + 1;
-                    $groupnumber1 = $groupnumber1 - 1;
-                } else if ($groupnumber1 == 0) {
-                    $groupnumber0 = $groupnumber0 - 1;
-                    $groupnumber1 = $groupnumber1 + 1;
-                } else if ($maxgroups == 2) {
-                    $groupnumber0 = 1;
-                    $groupnumber1 = 1;
-                }
-
-                do {
-                    $cond = ($groupnumber0 * $optimalsize0 > $userscount0) || ($optimalsize0 > $userscount0) ||
-                        ($userscount0 % $optimalsize0 == 0);
-                    if ($cond) {
-                        $check0 = true;
-                    } else {
-                        $optimalsize0++;
-                    }
-                } while (!$check0);
-
-                do {
-                    $cond = ($groupnumber1 * $optimalsize1 > $userscount1) || ($optimalsize1 > $userscount1) ||
-                        ($userscount1 % $optimalsize1 == 0);
-                    if ($cond) {
-                        $check1 = true;
-                    } else {
-                        $optimalsize1++;
-                    }
-                } while (!$check1);
-
-                $basegroupsize = $optimalsize0;
-                $groupsize1 = $optimalsize1;
-
-                $cond = $maxgroups < (ceil($userscount0 / $basegroupsize) + ceil($userscount1 / $groupsize1));
-                if ($cond) {
-                    return null;
-                }
-
-                return array(
-                    $basegroupsize, $groupsize1);
-            } else {
-                $maxmembers = intval($store->get_max_members());
-
-                return array(
-                    $maxmembers, $maxmembers);
-            }
-        }
-    }
-
-    /**
-     * Runs topic-based algorithm
-     *
-     * @param $job
-     * @param $users
-     * @param $store
-     * @return array
-     */
-    private static function run_topic_algorithm($job, $users, $store) {
-        $groupformationid = $job->groupformationid;
-
-        $groupalcohort = null;
-        $randomcohort = null;
-        $topiccohort = null;
-
-        $cohorts = array(
-            $groupalcohort, $randomcohort, $topiccohort);
-
-        $groupsizes = self::determine_group_size($users, $store, $groupformationid);
-        ksort($groupsizes);
-
-        // In $groupsizes is an associative array where the key is 0 - (n-1) [id of topic].
-        // And the value is the group size of each topic.
-
-        $topicusers = $users [0];
-        $incompleteusers = $users [1];
-
-        // Build participants.
-        $pp = new mod_groupformation_participant_parser ($groupformationid);
-        $topicparticipants = $pp->build_topic_participants($topicusers);
-        $randomparticipants = $pp->build_empty_participants($incompleteusers);
-        if (count($topicparticipants) > 0) {
-            $starttime = microtime(true);
-
-            lib_groupal_group::setGroupMembersMaxSize(max($groupsizes));
-
-            $gfa = new lib_groupal_topic_algorithm ($groupsizes, $topicparticipants);
-            $topiccohort = $gfa->do_one_formation(); // This call takes time.
-
-            $endtime = microtime(true);
-            $comptime = $endtime - $starttime;
-
-            groupformation_info(null, $job->groupformationid, 'groupal needed ' . $comptime . 'ms');
-        }
-        if (!is_null($topiccohort)) {
-            // Now we have to add the remaining participants.
-
-            $size = ceil((count($users [0]) + count($users [1])) / count($topiccohort->groups));
-            lib_groupal_group::setGroupMembersMaxSize($size);
-
-            $counts = array();
-            $max = null;
-            foreach ($topiccohort->groups as $group) {
-                $value = count($group->getParticipants());
-                $groups [] = array(
-                    'id' => $group->getID(), 'count' => $value, 'group' => $group, 'participants' => array());
-                if ($max == null || $max < $value) {
-                    $max = $value;
-                }
-            }
-            usort($groups, function ($a, $b) {
-                return $a ['count'] - $b ['count'];
-            });
-            $groups = array_slice($groups, 0, count($groups));
-            for ($i = 0; $i < count($randomparticipants); $i++) {
-                usort($groups, function ($a, $b) {
-                    return $a ['count'] - $b ['count'];
-                });
-                $groups = array_slice($groups, 0, count($groups));
-
-                $p = $randomparticipants [$i];
-                $groups [0] ['group']->addParticipant($p, true);
-                $groups [0] ['count']++;
-            }
-
-            usort($groups, function ($a, $b) {
-                return $a ['count'] - $b ['count'];
-            });
-        } else {
-            // Pure random groups because no answers.
-            $max = max($groupsizes);
-            $gfra = new lib_groupal_random_algorithm ($randomparticipants, $max);
-            $randomcohort = $gfra->do_one_formation();
-        }
-
-        $cohorts = array("groupal:1" => $groupalcohort, "random:1" => $randomcohort, "topic:1" => $topiccohort);
-
-        return $cohorts;
-    }
-
-    /**
-     * Runs basic groupal-based algorithm
-     *
-     * @param $job
-     * @param $users
-     * @param $store
-     * @return array
-     */
-    private static function run_basic_algorithm($job, $users, $store) {
-
-        $groupformationid = $job->groupformationid;
-
-        $groupalcohort = null;
-        $randomcohort = null;
-        $topiccohort = null;
-
-        $cohorts = array(
-            $groupalcohort, $randomcohort, $topiccohort);
-
-        $store = new mod_groupformation_storage_manager ($groupformationid);
-
-        // Determine group sizes.
-        $groupsize = self::determine_group_size($users, $store);
-        $groupalusers = $users [0];
-        $incompleteusers = $users [1];
-
-        // Build participants.
-        $pp = new mod_groupformation_participant_parser ($groupformationid);
-        $groupalparticipants = $pp->build_participants($groupalusers);
-        $randomparticipants = $pp->build_empty_participants($incompleteusers);
-        if (count($groupalparticipants) > 0) {
-
-            // Choose matcher.
-            $matcher = new lib_groupal_group_centric_matcher ();
-
-            $starttime = microtime(true);
-            $gfa = new lib_groupal_basic_algorithm ($groupalparticipants, $matcher, $groupsize [0]);
-            $groupalcohort = $gfa->do_one_formation(); // This call takes time.
-            $endtime = microtime(true);
-            $comptime = $endtime - $starttime;
-
-            groupformation_info(null, $job->groupformationid, 'groupal needed ' . $comptime . 'ms');
-        }
-
-        if (count($randomparticipants) > 0) {
-            $gfra = new lib_groupal_random_algorithm ($randomparticipants, $groupsize [1]);
-            $randomcohort = $gfra->do_one_formation();
-        }
-
-        $cohorts = array("groupal:1" => $groupalcohort, "random:1" => $randomcohort, "topic:1" => $topiccohort);
-
-        return $cohorts;
-    }
-
-    /**
      * Runs groupal with job
      *
      * @param stdClass $job
@@ -574,12 +278,12 @@ class mod_groupformation_job_manager {
         if ($store->is_math_prep_course_mode()) {
             $sg = new mod_groupformation_scientific_grouping($job->groupformationid);
             return $sg->run_grouping($users);
-        }
-
-        if ($store->ask_for_topics()) {
-            return $cohorts = self::run_topic_algorithm($job, $users, $store);
+        }else if ($store->ask_for_topics()) {
+            $tg = new mod_groupformation_topic_grouping($groupformationid);
+            return $tg->run_grouping($users);
         } else {
-            return $cohorts = self::run_basic_algorithm($job, $users, $store);
+            $bg = new mod_groupformation_basic_grouping($groupformationid);
+            return $bg->run_grouping($users);
         }
     }
 
@@ -744,7 +448,6 @@ class mod_groupformation_job_manager {
     }
 
     /**
-     *
      * Assign users to groups
      *
      * @param stdClass $job

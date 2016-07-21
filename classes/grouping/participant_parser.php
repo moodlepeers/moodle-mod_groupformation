@@ -125,20 +125,25 @@ class mod_groupformation_participant_parser {
      * @param $users
      * @return array
      */
-    public function build_participants($users) {
+    public function build_participants($users,$specs = null) {
         if (count($users) == 0) {
             return array();
         }
 
+        $scenario = $this->store->get_scenario();
+
         $starttime = microtime(true);
 
-        $labels = $this->store->get_label_set();
         $criteriaspecs = array();
-        foreach ($labels as $label) {
-            $criteriaspecs[$label] = $this->data->get_criterion_specification($label);
-        }
 
-        $scenario = $this->store->get_scenario();
+        if (is_null($specs)){
+            $labels = $this->store->get_label_set();
+            foreach ($labels as $label) {
+                $criteriaspecs[$label] = $this->data->get_criterion_specification($label);
+            }
+        }else{
+            $criteriaspecs = $specs;
+        }
 
         $criteriaspecs = $this->criterioncalculator->filter_criteria_specs($criteriaspecs, $users);
 

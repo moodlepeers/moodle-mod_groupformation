@@ -892,4 +892,148 @@ class mod_groupformation_storage_manager {
         return $DB->get_field('groupformation_q_version', 'version', array('category' => 'questionnaire'));
     }
 
+    public function determine_group_size($users, $groupformationid = null) {
+        if ($this->ask_for_topics()) {
+            $groupoption = $this->get_group_option();
+            if ($groupoption) {
+                $maxgroups = intval($this->get_max_groups());
+                $topicvalues = $this->get_knowledge_or_topic_values('topic');
+                $topicvalues = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $topicvalues . ' </OPTIONS>';
+                $topicsoptions = mod_groupformation_util::xml_to_array($topicvalues);
+                $topicscount = count($topicsoptions);
+
+                $userscount0 = count($users [0] + $users [1]);
+                $ratio0 = $userscount0 / $maxgroups;
+
+                $basegroupsize = floor($ratio0);
+
+                $covereduserscount = $basegroupsize * $maxgroups;
+                $remaininguserscount = $userscount0 - $covereduserscount;
+
+                $usermanager = new mod_groupformation_user_manager ($groupformationid);
+
+                $topics = $usermanager->get_most_common_topics($topicscount);
+
+                $result = array();
+
+                $i = 0;
+                foreach ($topics as $key => $topic) {
+                    if ($i < $remaininguserscount) {
+                        $result [intval($topic ['id']) - 1] = intval(round($basegroupsize + 1));
+                    } else {
+                        $result [intval($topic ['id']) - 1] = intval(round($basegroupsize));
+                    }
+                    $i++;
+                }
+
+                return $result;
+            } else {
+                $topicvalues = $this->get_knowledge_or_topic_values('topic');
+                $topicvalues = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $topicvalues . ' </OPTIONS>';
+                $topicsoptions = mod_groupformation_util::xml_to_array($topicvalues);
+                $topicscount = count($topicsoptions);
+
+                $maxmembers = intval($this->get_max_members());
+                $userscount0 = count($users [0] + $users [1]);
+                $maxmembers = ceil($userscount0 / $topicscount);
+                $array = array();
+                for ($i = 0; $i < $topicscount; $i = $i + 1) {
+                    $array[] = $maxmembers;
+                }
+                return $array;
+            }
+
+            return $sizearray;
+        } else {
+
+            $userscount0 = count($users [0]);
+            $userscount1 = count($users [1]);
+            $userscount = $userscount0 + $userscount1;
+
+            if ($userscount <= 0) {
+                return null;
+            }
+            $groupoption = $this->get_group_option();
+            if ($groupoption) {
+                $maxgroups = intval($this->get_max_groups());
+
+                if ($userscount0 == 0) {
+                    return array(
+                        null, intval(ceil($userscount1 / $maxgroups)));
+                } else if ($userscount1 == 0) {
+                    return array(
+                        intval(ceil($userscount0 / $maxgroups)), null);
+                }
+
+                $optimalsize = ceil($userscount / $maxgroups);
+
+                $optimalsize0 = $optimalsize;
+                $optimalsize1 = $optimalsize;
+
+                $check0 = false;
+                $check1 = false;
+
+                $ratio0 = $userscount0 / $userscount;
+                $ratio1 = $userscount1 / $userscount;
+
+                $groupnumber0 = round($ratio0 * $maxgroups);
+                $groupnumber1 = round($ratio1 * $maxgroups);
+
+                if ($groupnumber0 + $groupnumber1 > $maxgroups) {
+                    if ($userscount0 > $userscount1) {
+                        $groupnumber0--;
+                    } else {
+                        $groupnumber1--;
+                    }
+                }
+
+                if ($groupnumber0 == 0) {
+                    $groupnumber0 = $groupnumber0 + 1;
+                    $groupnumber1 = $groupnumber1 - 1;
+                } else if ($groupnumber1 == 0) {
+                    $groupnumber0 = $groupnumber0 - 1;
+                    $groupnumber1 = $groupnumber1 + 1;
+                } else if ($maxgroups == 2) {
+                    $groupnumber0 = 1;
+                    $groupnumber1 = 1;
+                }
+
+                do {
+                    $cond = ($groupnumber0 * $optimalsize0 > $userscount0) || ($optimalsize0 > $userscount0) ||
+                        ($userscount0 % $optimalsize0 == 0);
+                    if ($cond) {
+                        $check0 = true;
+                    } else {
+                        $optimalsize0++;
+                    }
+                } while (!$check0);
+
+                do {
+                    $cond = ($groupnumber1 * $optimalsize1 > $userscount1) || ($optimalsize1 > $userscount1) ||
+                        ($userscount1 % $optimalsize1 == 0);
+                    if ($cond) {
+                        $check1 = true;
+                    } else {
+                        $optimalsize1++;
+                    }
+                } while (!$check1);
+
+                $basegroupsize = $optimalsize0;
+                $groupsize1 = $optimalsize1;
+
+                $cond = $maxgroups < (ceil($userscount0 / $basegroupsize) + ceil($userscount1 / $groupsize1));
+                if ($cond) {
+                    return null;
+                }
+
+                return array(
+                    $basegroupsize, $groupsize1);
+            } else {
+                $maxmembers = intval($this->get_max_members());
+
+                return array(
+                    $maxmembers, $maxmembers);
+            }
+        }
+    }
 }

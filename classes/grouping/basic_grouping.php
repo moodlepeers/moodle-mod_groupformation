@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Scientific grouping interface
+ * Basic grouping interface
  *
  * @package mod_groupformation
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
@@ -43,7 +43,7 @@ require_once($CFG->dirroot . '/mod/groupformation/lib/classes/optimizers/optimiz
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/xml_writers/participant_writer.php');
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/xml_writers/cohort_writer.php');
 
-class mod_groupformation_scientific_grouping extends mod_groupformation_grouping{
+class mod_groupformation_basic_grouping extends mod_groupformation_grouping{
 
     private $groupformationid;
     private $usermanager;
@@ -71,33 +71,8 @@ class mod_groupformation_scientific_grouping extends mod_groupformation_grouping
      * @return array
      */
     public function run_grouping($users) {
-        $specs = array(
-            "big5" => array(
-                "category" => "character",
-                "scenarios" => array(1, 2),
-                "labels" => array(
-                    "extraversion" => array(
-                        "scenarios" => array(1 => false, 2 => false),
-                        "questionids" => array(-1, 6),
-                    ),
-                    "gewissenhaftigkeit" => array(
-                        "scenarios" => array(1 => true, 2 => true),
-                        "questionids" => array(-3, 8),
-                    ),
-                ),
-            ),
-        );
-
         $configurations = array(
-            "mrand:0;ex:1;gh:1" => array('big5_extraversion' => true, 'big5_gewissenhaftigkeit' => true),
-            "mrand:0;ex:1;gh:0" => array('big5_extraversion' => true, 'big5_gewissenhaftigkeit' => false),
-            "mrand:0;ex:0;gh:0" => array('big5_extraversion' => false, 'big5_gewissenhaftigkeit' => false),
-            "mrand:0;ex:0;gh:1" => array('big5_extraversion' => false, 'big5_gewissenhaftigkeit' => true),
-            "mrand:0;ex:1;gh:_" => array('big5_extraversion' => true, 'big5_gewissenhaftigkeit' => null),
-            "mrand:0;ex:0;gh:_" => array('big5_extraversion' => false, 'big5_gewissenhaftigkeit' => null),
-            "mrand:0;ex:_;gh:1" => array('big5_extraversion' => null, 'big5_gewissenhaftigkeit' => true),
-            "mrand:0;ex:_;gh:0" => array('big5_extraversion' => null, 'big5_gewissenhaftigkeit' => false),
-            "mrand:1;ex:_;gh:_" => array(),
+            "groupal:1" => array(),
         );
 
         $configurationkeys = array_keys($configurations);
@@ -106,10 +81,9 @@ class mod_groupformation_scientific_grouping extends mod_groupformation_grouping
 
         $groupsizes = $this->store->determine_group_size($users);
 
-        if (count($users[0])<$numberofslices){
+        if (count($users[0]) < $numberofslices) {
             return array();
         }
-
         // divide users into n slices
         $slices = $this->slicing($users[0], $numberofslices);
 
@@ -119,20 +93,19 @@ class mod_groupformation_scientific_grouping extends mod_groupformation_grouping
             $slice = $slices[$i];
 
             $configurationkey = $configurationkeys[$i];
-            $configuration = $configurations[$configurationkey];
 
-            $raw_participants = $this->participantparser->build_participants($slice,$specs);
+            $raw_participants = $this->participantparser->build_participants($slice);
 
-            $participants = $this->configure_participants($raw_participants, $configuration);
+            $participants = $raw_participants;
 
             $cohorts[$configurationkey] = $this->build_cohort($participants, $groupsizes[0], $configurationkey);
         }
 
         // Handle all users with incomplete or no questionnaire submission
-        $randomparticipantskey = "rand:1;mrand:_;ex:_;gh:_";
+        $randomparticipantskey = "random:1";
 
         $randomparticipants = $this->participantparser->build_empty_participants($users[1]);
-        $randomcohort = $this->build_cohort($randomparticipants, $groupsizes[1],$randomparticipantskey);
+        $randomcohort = $this->build_cohort($randomparticipants, $groupsizes[1], $randomparticipantskey);
 
         $cohorts[$randomparticipantskey] = $randomcohort;
 

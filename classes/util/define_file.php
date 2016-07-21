@@ -244,8 +244,8 @@ class mod_groupformation_data {
             'grade',
             'points',
             'character',
+            'motivation',
             'team',
-            'learning',
             'srl',
             'sellmo',
             'self',
@@ -257,7 +257,7 @@ class mod_groupformation_data {
 
     private $participant_code = true;
     private $import_export_enabled = false;
-    private $math_prep_course_mode = true;
+    private $math_prep_course_mode = false;
 
     /**
      * Returns whether this instance is running in math prep course mode;

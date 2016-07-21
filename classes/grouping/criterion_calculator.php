@@ -271,12 +271,14 @@ class mod_groupformation_criterion_calculator
         foreach ($criteriaspecs as $criterion => $spec) {
             $category = $spec['category'];
             $labels = $spec['labels'];
-            if (in_array($this->scenario, $spec['scenarios']) && (!$eval || $spec['evaluation'])) {
+            if (in_array($this->scenario, $spec['scenarios']) && (!$eval || (array_key_exists('evaluation',$spec) && $spec['evaluation']))) {
+
                 $positions = array();
 
                 foreach ($labels as $label => $specs) {
-                    if (array_key_exists($this->scenario, $specs['scenarios']) && (!$eval || $specs['evaluation'])) {
-                        if ($specs['significant_id_only']) {
+                    if (array_key_exists($this->scenario, $specs['scenarios']) && (!$eval || (array_key_exists('evaluation',$spec) && $spec['evaluation']))) {
+                        if (array_key_exists('significant_id_only',$specs) && $specs['significant_id_only']) {
+                            //var_dump($criterion,$label);
                             $variance = 0;
                             $position = 1;
                             $total = 0;
