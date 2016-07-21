@@ -29,6 +29,7 @@ if (!defined('MOODLE_INTERNAL')) {
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 require_once($CFG->dirroot . '/group/lib.php');
+require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 
 class mod_groupformation_storage_manager {
     private $groupformationid;
@@ -44,6 +45,12 @@ class mod_groupformation_storage_manager {
         $this->groupformationid = $groupformationid;
         $this->data = new mod_groupformation_data ();
         $this->gm = new mod_groupformation_groups_manager ($groupformationid);
+    }
+
+    public function get_version() {
+        global $DB;
+
+        return $DB->get_field('groupformation','version',array('id'=>$this->groupformationid));
     }
 
     /**
@@ -132,46 +139,6 @@ class mod_groupformation_storage_manager {
     }
 
     /**
-     * Deletes all questions in a specific category
-     *
-     * @param string $category
-     */
-    public function delete_all_catalog_questions($category, $language) {
-        global $DB;
-
-        $DB->delete_records('groupformation_question', array('category' => $category, 'language' => $language));
-    }
-
-    /**
-     * Add new question from XML to DB
-     *
-     * @param string $category
-     * @param int $numbers
-     * @param unknown $version
-     * @param boolean $init
-     */
-    public function add_catalog_version($category, $numbers, $version, $init) {
-        global $DB;
-
-        $data = new stdClass ();
-        $data->category = $category;
-        $data->version = $version;
-        $data->numberofquestion = $numbers;
-
-        if ($init || $DB->count_records('groupformation_q_version', array(
-                'category' => $category
-            )) == 0
-        ) {
-            $DB->insert_record('groupformation_q_version', $data);
-        } else {
-            $data->id = $DB->get_field('groupformation_q_version', 'id', array(
-                'category' => $category
-            ));
-            $DB->update_record('groupformation_q_version', $data);
-        }
-    }
-
-    /**
      * Adds/Updates knowledge and topic setting of groupformation
      *
      * @param unknown $knowledge
@@ -183,8 +150,8 @@ class mod_groupformation_storage_manager {
 
         $data = new stdClass ();
         $data->groupformation = $this->groupformationid;
-        $data->topicvalues = $this->convert_options($topics);
-        $data->knowledgevalues = $this->convert_options($knowledge);
+        $data->topicvalues = groupformation_convert_options($topics);
+        $data->knowledgevalues = groupformation_convert_options($knowledge);
         $data->topicvaluesnumber = count($topics);
         $data->knowledgevaluesnumber = count($knowledge);
 
@@ -295,7 +262,7 @@ class mod_groupformation_storage_manager {
         // TODO
         $table = 'groupformation_question';
 
-        $lang = $DB->get_field($table, 'language', array('category'=>$category), IGNORE_MULTIPLE);
+        $lang = $DB->get_field($table, 'language', array('category' => $category), IGNORE_MULTIPLE);
 
         return $lang;
     }
@@ -369,19 +336,19 @@ class mod_groupformation_storage_manager {
      * @param string $lang
      * @return mixed
      */
-    public function get_catalog_question($i, $category = 'general', $lang = 'en') {
+    public function get_catalog_question($i, $category = 'general', $lang = 'en', $version = null) {
         global $DB;
         $table = "groupformation_" . $category;
         // TODO
         $table = 'groupformation_question';
         $return = $DB->get_record($table, array(
             'language' => $lang, 'category' => $category,
-            'questionid' => $i
+            'position' => $i, 'version' => $version
         ));
 
         // $return = $DB->get_record($table, array(
         //     'language' => $lang,
-        //     'questionid' => $i
+        //     'position' => $i
         // ));
 
         return $return;
@@ -879,17 +846,6 @@ class mod_groupformation_storage_manager {
      */
     public function is_math_prep_course_mode() {
         return $this->data->is_math_prep_course_mode();
-    }
-
-    /**
-     * Returns current version number of the questionnaire
-     *
-     * @return mixed
-     */
-    public function get_questionnaire_version() {
-        global $DB;
-
-        return $DB->get_field('groupformation_q_version', 'version', array('category' => 'questionnaire'));
     }
 
     public function determine_group_size($users, $groupformationid = null) {

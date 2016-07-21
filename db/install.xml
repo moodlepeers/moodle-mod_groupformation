@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="mod/groupformation/db" VERSION="20160719" COMMENT="XMLDB file for Moodle mod/groupformation"
+<XMLDB PATH="mod/groupformation/db" VERSION="20160721" COMMENT="XMLDB file for Moodle mod/groupformation"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
@@ -29,6 +29,7 @@
         <FIELD NAME="maxpoints" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="100" SEQUENCE="false" COMMENT="Maximum number of points if evaluationmethod is 2 (points)."/>
         <FIELD NAME="onlyactivestudents" TYPE="binary" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="emailnotifications" TYPE="binary" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="version" TYPE="int" LENGTH="12" NOTNULL="false" SEQUENCE="false"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>

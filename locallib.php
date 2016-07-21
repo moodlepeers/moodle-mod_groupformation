@@ -229,7 +229,7 @@ function groupformation_check_for_cron_job() {
  * @param mod_groupformation_storage_manager $store
  * @param string $filename
  */
-function groupformation_import_questionnaire_configuration($store, $filename = 'questionnaire.xml') {
+function groupformation_import_questionnaire_configuration($filename = 'questionnaire.xml') {
     global $CFG, $DB;
 
     $xmlfile = $CFG->dirroot . '/mod/groupformation/xml_question/' . $filename;
@@ -237,7 +237,7 @@ function groupformation_import_questionnaire_configuration($store, $filename = '
     if (file_exists($xmlfile)) {
         $xml = simplexml_load_file($xmlfile);
 
-        $current_version = $store->get_questionnaire_version();
+        $current_version = groupformation_get_current_questionnaire_version();
         $new_version = intval(trim($xml['version']));
 
 
@@ -255,36 +255,117 @@ function groupformation_import_questionnaire_configuration($store, $filename = '
 
         if ($new_version > $current_version) {
 
-            $xmlloader = new mod_groupformation_xml_loader($store);
+            $xmlloader = new mod_groupformation_xml_loader();
 
             $number = 0;
 
             foreach ($new_categories as $category) {
 
-                $prev_version = $store->get_catalog_version($category);
+                $prev_version = groupformation_get_catalog_version($category);
 
                 foreach ($new_languages as $language) {
 
-                    $data = $xmlloader->save($category, $language, $new_version);
+                    $data = $xmlloader->save($category, $language);
 
                     $version = $data[0];
                     $numberofquestions = $data[1];
                     $questions = $data[2];
 
                     if ($version > $prev_version || !$prev_version) {
-                        $store->delete_all_catalog_questions($category,$language);
+                        groupformation_delete_all_catalog_questions($category, $language);
 
                         $DB->insert_records('groupformation_question', $questions);
-                        $store->add_catalog_version($category, $numberofquestions, $version, false);
+                        groupformation_add_catalog_version($category, $numberofquestions, $version, false);
                     }
                 }
                 $number += $numberofquestions;
             }
 
-            $store->add_catalog_version('questionnaire', $number, $new_version, false);
+            groupformation_add_catalog_version('questionnaire', $number, $new_version, false);
 
         }
 
     }
 
+}
+
+/**
+ * Add new question from XML to DB
+ *
+ * @param string $category
+ * @param int $numbers
+ * @param unknown $version
+ * @param boolean $init
+ */
+function groupformation_add_catalog_version($category, $numbers, $version, $init) {
+    global $DB;
+
+    $data = new stdClass ();
+    $data->category = $category;
+    $data->version = $version;
+    $data->numberofquestion = $numbers;
+
+    if ($init || $DB->count_records('groupformation_q_version', array(
+            'category' => $category
+        )) == 0
+    ) {
+        $DB->insert_record('groupformation_q_version', $data);
+    } else {
+        $data->id = $DB->get_field('groupformation_q_version', 'id', array(
+            'category' => $category
+        ));
+        $DB->update_record('groupformation_q_version', $data);
+    }
+}
+
+/**
+ * Deletes all questions in a specific category
+ *
+ * @param string $category
+ */
+function groupformation_delete_all_catalog_questions($category, $language) {
+    global $DB;
+
+    $DB->delete_records('groupformation_question', array('category' => $category, 'language' => $language));
+}
+
+/**
+ * Returns current questionnaire version
+ *
+ * @return mixed|null
+ */
+function groupformation_get_current_questionnaire_version() {
+    global $DB;
+
+    $field = $DB->get_field('groupformation_q_version', 'version', array('category' => 'questionnaire'));
+
+    if ($field !== false) {
+        return $field;
+    } else {
+        return 0;
+    }
+}
+
+function groupformation_get_catalog_version($category){
+    global $DB;
+
+    $field = $DB->get_field('groupformation_q_version', 'version', array('category' => $category));
+
+    if ($field !== false) {
+        return $field;
+    } else {
+        return 0;
+    }
+}
+
+/**
+ * Converts knowledge or topic array into XML-based syntax
+ *
+ * @param unknown $options
+ * @return string
+ */
+function groupformation_convert_options($options) {
+    $op = implode("</OPTION>  <OPTION>", $options);
+
+    return "<OPTION>" . $op . "</OPTION>";
 }

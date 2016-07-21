@@ -133,7 +133,9 @@ if ($giveparticipantcode) {
     echo '<div class="alert alert-danger">' . get_string('participant_code_alert_message', 'groupformation') .
         '</div>';
 }
-
+if (groupformation_get_current_questionnaire_version() > $store->get_version()){
+    echo '<div class="alert">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
+}
 if ($store->is_archived()) {
     echo '<div class="alert" id="commited_view">' . get_string('archived_activity_answers', 'groupformation') .
         '</div>';

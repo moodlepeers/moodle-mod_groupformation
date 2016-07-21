@@ -58,6 +58,9 @@ echo $OUTPUT->header();
 
 // Print the tabs.
 require('tabs.php');
+if (groupformation_get_current_questionnaire_version() > $store->get_version()){
+    echo '<div class="alert">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
+}
 if ($store->is_archived()) {
     echo '<div class="alert" id="commited_view">' . get_string('archived_activity_answers', 'groupformation') . '</div>';
 } else {

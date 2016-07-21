@@ -454,3 +454,5 @@ $string['participant_code_footer'] = "Your personal participant code is";
 $string['participant_code_alert_message'] = 'You need enter a valid participant code before accessing the questionnaire. Scroll down and enter your participant code.';
 
 $string ['questionnaire_press_to_begin_participant_code'] = 'Enter your participant code and give your consent. Click "Next" to begin.';
+
+$string['questionnaire_outdated'] = 'This activity is too old. The correct functionality cannot be ensured. Please create a new activity to enjoy the full functionality.';

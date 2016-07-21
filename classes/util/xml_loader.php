@@ -27,18 +27,16 @@ if (!defined('MOODLE_INTERNAL')) {
 }
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
+require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 
 class mod_groupformation_xml_loader {
-
-    /** @var mod_groupformation_storage_manager */
-    private $store;
 
     /**
      * mod_groupformation_xml_loader constructor.
      * @param mod_groupformation_storage_manager|null $store
      */
-    public function __construct(mod_groupformation_storage_manager $store = null) {
-        $this->store = $store;
+    public function __construct() {
     }
 
     /**
@@ -48,7 +46,7 @@ class mod_groupformation_xml_loader {
      * @param $lang
      * @return array
      */
-    public function save($category, $lang, $version) {
+    public function save($category, $lang) {
         global $CFG;
         $xmlfile = $CFG->dirroot . '/mod/groupformation/xml_question/' . $lang . '_' . $category . '.xml';
 
@@ -58,6 +56,7 @@ class mod_groupformation_xml_loader {
         if (file_exists($xmlfile)) {
             $xml = simplexml_load_file($xmlfile);
 
+            $v = trim($xml->QUESTIONS['VERSION']);
             $return[] = trim($xml->QUESTIONS['VERSION']);
             $numbers = 0;
 
@@ -77,11 +76,11 @@ class mod_groupformation_xml_loader {
                 $data->questionid = trim($question['ID']);
                 $data->type = trim($question['TYPE']);
                 $data->question = trim($question->QUESTIONTEXT);
-                $data->options = $this->store->convert_options($optionsarray);
+                $data->options = groupformation_convert_options($optionsarray);
                 $data->language = $lang;
                 $data->position = $numbers;
                 $data->optionmax = count($optionsarray);
-                $data->version = $version;
+                $data->version = $v;
 
                 $questions[] = $data;
             }

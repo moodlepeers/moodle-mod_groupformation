@@ -31,6 +31,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
+require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
@@ -157,15 +158,15 @@ class mod_groupformation_questionnaire_controller
      * @param int $i
      * @return stdClass
      */
-    public function get_question($i) {
-        $record = $this->store->get_catalog_question($i, $this->currentcategory, $this->lang);
+    public function get_question($i,$version) {
+        $record = $this->store->get_catalog_question($i, $this->currentcategory, $this->lang,$version);
 
         if (empty ($record)) {
             if ($this->lang != 'en') {
-                $record = $this->store->get_catalog_question($i, $this->currentcategory, 'en');
+                $record = $this->store->get_catalog_question($i, $this->currentcategory,$version);
             } else {
                 $lang = $this->store->get_possible_language($this->currentcategory);
-                $record = $this->store->get_catalog_question($i, $this->currentcategory, $lang);
+                $record = $this->store->get_catalog_question($i, $this->currentcategory,$version);
             }
         }
 
@@ -210,6 +211,8 @@ class mod_groupformation_questionnaire_controller
             $questions = array();
 
             $this->hasanswer = $this->usermanager->has_answers($this->userid, $this->currentcategory);
+
+            $version = groupformation_get_catalog_version($this->currentcategory);
 
             if ($this->is_knowledge() || $this->is_topics()) {
                 // ---------------------------------------------------------------------------------------------------------
@@ -267,7 +270,7 @@ class mod_groupformation_questionnaire_controller
             } else if ($this->is_points()) {
                 // ---------------------------------------------------------------------------------------------------------
                 for ($i = 1; $i <= $this->numbers [$this->currentcategoryposition]; $i++) {
-                    $record = $this->get_question($i);
+                    $record = $this->get_question($i,$version);
 
                     $question = array();
 
@@ -301,7 +304,7 @@ class mod_groupformation_questionnaire_controller
             } else {
                 // ---------------------------------------------------------------------------------------------------------
                 for ($i = 1; $i <= $this->numbers [$this->currentcategoryposition]; $i++) {
-                    $record = $this->get_question($i);
+                    $record = $this->get_question($i,$version);
 
                     $question = $this->prepare_question($i, $record);
 

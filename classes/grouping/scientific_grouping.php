@@ -78,11 +78,17 @@ class mod_groupformation_scientific_grouping extends mod_groupformation_grouping
                 "labels" => array(
                     "extraversion" => array(
                         "scenarios" => array(1 => false, 2 => false),
-                        "questionids" => array(-1, 6),
+                        "evaluation" => true,
+                        "questionids" => array(12,-1,13,14,-15,16,-17,6),
+                        "significant_id_only" => false,
+                        "cutoffs" => array(0.313169217,0.776242547),
                     ),
                     "gewissenhaftigkeit" => array(
                         "scenarios" => array(1 => true, 2 => true),
-                        "questionids" => array(-3, 8),
+                        "evaluation" => true,
+                        "questionids" => array(8,-32,33,-34,-35,21,22,23,-24),
+                        "significant_id_only" => false,
+                        "cutoffs" => array(0.456596974,0.831246163),
                     ),
                 ),
             ),

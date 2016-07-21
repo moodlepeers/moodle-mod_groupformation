@@ -34,7 +34,6 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/job_m
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/xml_loader.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
-require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 require_once($CFG->libdir . '/gradelib.php');
 
 /**
@@ -78,9 +77,13 @@ function groupformation_supports($feature) {
 function groupformation_add_instance(stdClass $groupformation, mod_groupformation_mod_form $mform = null) {
     global $DB, $USER, $PAGE;
 
+    groupformation_import_questionnaire_configuration();
+
     $groupformation->timecreated = time();
 
-    // Checks all fields and sets them properly.
+    $groupformation->version = groupformation_get_current_questionnaire_version();
+
+        // Checks all fields and sets them properly.
     $groupformation = groupformation_set_fields($groupformation);
 
     $id = $DB->insert_record('groupformation', $groupformation);
@@ -618,12 +621,6 @@ function groupformation_save_more_infos($groupformation, $init) {
     $topicsarray = array();
     if ($groupformation->topics != 0) {
         $topicsarray = explode("\n", $groupformation->topiclines);
-    }
-
-    if ($init) {
-        // TODO
-        //groupformation_update_questions($store);
-        groupformation_import_questionnaire_configuration($store);
     }
 
     if ($store->is_editable()) {

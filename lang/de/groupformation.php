@@ -453,6 +453,7 @@ $string['participant_code_alert_message'] = 'Sie müssen einen gültigen Teilneh
 
 $string ['questionnaire_press_to_begin_participant_code'] = 'Geben Sie ihren Teilnehmercode ein und stimmen Sie den Bedingungen zu. Klicken Sie auf "Weiter", um fortzufahren.';
 
+$string['questionnaire_outdated'] = 'Diese Aktivität ist veraltet. Die fehlerfreie Nutzung kann nicht gewährleistet werden. Bitte erstellen Sie eine neue Aktivität, um den vollen Funktionsumfang nutzen zu können.';
 
 
 

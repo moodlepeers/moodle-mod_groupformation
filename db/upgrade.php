@@ -1226,6 +1226,20 @@ function xmldb_groupformation_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2016071903, 'groupformation');
     }
 
+    if ($oldversion < 2016072100) {
+
+        // Define field version to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('version', XMLDB_TYPE_INTEGER, '12', null, null, null, null, 'emailnotifications');
+
+        // Conditionally launch add field version.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2016072100, 'groupformation');
+    }
 
 
 

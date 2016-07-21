@@ -41,6 +41,7 @@ if (isset ($cmid) and intval($cmid) and $cmid > 0) {
 
 $context = context_module::instance($usedid);
 
+
 $courseid = optional_param('courseid', false, PARAM_INT);
 
 if (!isset ($currenttab)) {
@@ -108,6 +109,7 @@ if (has_capability('mod/groupformation:editsettings', $context)) {
         $row [] = new tabobject ('import_export', $groupurl->out(), 'Import/Export');
     }
 }
+
 
 if (count($row) >= 1) {
     $tabs [] = $row;
