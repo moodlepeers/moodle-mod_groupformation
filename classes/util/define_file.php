@@ -257,7 +257,7 @@ class mod_groupformation_data {
 
     private $participant_code = true;
     private $import_export_enabled = false;
-    private $math_prep_course_mode = false;
+    private $math_prep_course_mode = true;
 
     /**
      * Returns whether this instance is running in math prep course mode;
