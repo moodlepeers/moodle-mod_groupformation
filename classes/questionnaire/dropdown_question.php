@@ -30,7 +30,7 @@ class mod_groupformation_dropdown_question {
      * @param $questionnumber
      * @param $hasanswer
      */
-    public function print_html($q, $category, $questionnumber, $hasanswer) {
+    public function print_html($q, $category, $questionnumber, $hasanswer,$highlight_missing_answers) {
         $question = $q [1];
         $options = $q [2];
         $answer = -1;
@@ -43,8 +43,11 @@ class mod_groupformation_dropdown_question {
         if ($hasanswer && $q [3] != -1) {
             echo '<tr>';
             echo '<th scope="row">' . $question . '</th>';
-        } else {
+        } else if (!$hasanswer && $highlight_missing_answers){
             echo '<tr class="noAnswer">';
+            echo '<th scope="row">' . $question . '</th>';
+        } else{
+            echo '<tr>';
             echo '<th scope="row">' . $question . '</th>';
         }
 

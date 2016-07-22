@@ -37,6 +37,7 @@ class mod_groupformation_student_overview_controller {
     private $userid;
     private $groupformationid;
     private $store;
+    private $data;
     private $groupsmanager;
     private $usermanager;
     private $viewstate;
@@ -59,6 +60,7 @@ class mod_groupformation_student_overview_controller {
         $this->userid = $userid;
         $this->groupformationid = $groupformationid;
         $this->store = new mod_groupformation_storage_manager ($groupformationid);
+        $this->data = new mod_groupformation_data();
         $this->groupsmanager = new mod_groupformation_groups_manager ($groupformationid);
         $this->usermanager = new mod_groupformation_user_manager ($groupformationid);
 
@@ -197,7 +199,7 @@ class mod_groupformation_student_overview_controller {
                 $url = new moodle_url ('questionnaire_view.php', array(
                     'id' => $this->cmid, 'category' => $key));
 
-                if (true || !$previncomplete) {
+                if (!$this->data->all_answers_required() || !$previncomplete) {
                     $a->category = '<a href="' . $url . '">' . $a->category . '</a>';
                 }
                 if ($values ['missing'] == 0) {

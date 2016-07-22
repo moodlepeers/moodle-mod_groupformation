@@ -30,7 +30,7 @@ class mod_groupformation_range_question {
      * @param $qnumber
      * @param $hasanswer
      */
-    public function print_html($q, $category, $qnumber, $hasanswer) {
+    public function print_html($q, $category, $qnumber, $hasanswer, $highlight_missing_answers) {
         $question = $q [1];
         $options = $q [2];
 
@@ -39,8 +39,11 @@ class mod_groupformation_range_question {
             $answer = $q [3];
             echo '<tr>';
             echo '<th scope="row">' . $question . '</th>';
-        } else {
+        } else if (!$hasanswer && $highlight_missing_answers){
             echo '<tr class="noAnswer">';
+            echo '<th scope="row">' . $question . '</th>';
+        } else{
+            echo '<tr>';
             echo '<th scope="row">' . $question . '</th>';
         }
 

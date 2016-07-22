@@ -45,11 +45,11 @@
 
     // if no survey_warnings appear - remove the ccs class "noAnswer" from questions(with radiobuttons) without answer.
     // This happens when questions are viewed by student first time
-    if($('.survey_warnings').length < 1){
-        $('.responsive-table>tbody>tr.noAnswer').each(function(){
-            $(this).removeClass('noAnswer');
-        });
-    }
+    // if($('.survey_warnings').length < 1){
+    //     $('.responsive-table>tbody>tr.noAnswer').each(function(){
+    //         $(this).removeClass('noAnswer');
+    //     });
+    // }
 
 
     // if the questionnaire still available but the answers already submited

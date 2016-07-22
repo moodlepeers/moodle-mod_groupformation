@@ -44,6 +44,7 @@ class mod_groupformation_questionnaire_controller
     private $categories = array();
     private $groupformationid;
     private $store;
+    private $data;
     private $usermanager;
     private $scenario;
     private $lang;
@@ -54,6 +55,7 @@ class mod_groupformation_questionnaire_controller
     private $numberofcategory;
     private $hasanswer;
     private $currentcategory;
+    private $highlight_missing_answers = false;
 
     /**
      * mod_groupformation_questionnaire_controller constructor.
@@ -69,6 +71,7 @@ class mod_groupformation_questionnaire_controller
         $this->userid = $userid;
         $this->cmid = $cmid;
         $this->store = new mod_groupformation_storage_manager ($groupformationid);
+        $this->data = new mod_groupformation_data();
         $this->usermanager = new mod_groupformation_user_manager ($groupformationid);
         $this->scenario = $this->store->get_scenario();
         $this->categories = $this->store->get_categories();
@@ -83,6 +86,11 @@ class mod_groupformation_questionnaire_controller
      */
     public function go_back() {
         $this->currentcategoryposition = max($this->currentcategoryposition - 2, 0);
+    }
+
+    public function not_go_on(){
+        $this->currentcategoryposition = max($this->currentcategoryposition - 1, 0);
+        $this->highlight_missing_answers = true;
     }
 
     /**
@@ -378,7 +386,7 @@ class mod_groupformation_questionnaire_controller
         }
         echo '<div id="questionaire_navbar">';
         echo '<ul id="accordion">';
-        $prevcomplete = true;
+        $prevcomplete = !$this->data->all_answers_required();
         foreach ($categories as $category) {
             $url = new moodle_url ('questionnaire_view.php', array(
                 'id' => $this->cmid, 'category' => $category));
@@ -530,11 +538,11 @@ class mod_groupformation_questionnaire_controller
 
             foreach ($questions as $q) {
                 if ($q [0] == 'dropdown') {
-                    $dropdown->print_html($q, $category, $i, $hasanswer);
+                    $dropdown->print_html($q, $category, $i, $hasanswer, $this->highlight_missing_answers);
                 }
 
                 if ($q [0] == 'radio') {
-                    $radio->print_html($q, $category, $i, $hasanswer);
+                    $radio->print_html($q, $category, $i, $hasanswer, $this->highlight_missing_answers);
                 }
 
                 if ($q [0] == 'type_topics') {
@@ -546,15 +554,15 @@ class mod_groupformation_questionnaire_controller
                 }
 
                 if ($q [0] == 'type_knowledge') {
-                    $range->print_html($q, $category, $i, $hasanswer);
+                    $range->print_html($q, $category, $i, $hasanswer, $this->highlight_missing_answers);
                 }
 
                 if ($q [0] == 'type_points') {
-                    $range->print_html($q, $category, $i, $hasanswer);
+                    $range->print_html($q, $category, $i, $hasanswer, $this->highlight_missing_answers);
                 }
 
                 if ($q [0] == 'range') {
-                    $range->print_html($q, $category, $i, $hasanswer);
+                    $range->print_html($q, $category, $i, $hasanswer, $this->highlight_missing_answers);
                 }
                 $i++;
             }

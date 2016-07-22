@@ -255,6 +255,7 @@ class mod_groupformation_data {
     private $participant_code = true;
     private $import_export_enabled = false;
     private $math_prep_course_mode = true;
+    private $all_answers_required = true;
 
     /**
      * Returns whether this instance is running in math prep course mode;
@@ -350,5 +351,9 @@ class mod_groupformation_data {
      */
     public function import_export_enabled(){
         return $this->import_export_enabled;
+    }
+
+    public function all_answers_required(){
+        return $this->all_answers_required;
     }
 }

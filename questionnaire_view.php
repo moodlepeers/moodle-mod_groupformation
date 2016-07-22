@@ -82,6 +82,7 @@ if (!isset ($direction)) {
     $direction = 1;
 }
 
+$go = true;
 
 $number = $store->get_number($category);
 
@@ -141,6 +142,11 @@ if (has_capability('mod/groupformation:onlystudent', $context) &&
                         $usermanager->save_answer($userid, $category, $para_temp, $i);
                     }
                 }
+                // --- Mathevorkurs
+                if ($data->all_answers_required() && $usermanager->get_number_of_answers( $userid, $category ) != $number) {
+                    $go = false;
+                }
+                // ---
             }
         }
     }
@@ -179,6 +185,8 @@ if (($available || $isteacher) && ($category == '' || $inarray)) {
             $userid, $category, $cm->id);
         if ($direction == 0) {
             $controller->go_back();
+        }else if (!$go){
+            $controller->not_go_on();
         }
 
         $controller->print_page();
