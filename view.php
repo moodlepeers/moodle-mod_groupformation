@@ -111,6 +111,7 @@ if ($begin == 1) {
     redirect($returnurl);
 } else {
     $usermanager->change_status($userid, 1);
+    $groupsmanager->assign_to_groups_a_and_b($userid);
     $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
         'id' => $id));
 
@@ -145,9 +146,6 @@ if ($store->is_archived()) {
         echo $OUTPUT->box(format_module_intro('groupformation', $groupformation, $cm->id), 'generalbox mod_introbox',
                           'groupformationintro');
     }
-    
-//    $controller = new mod_groupformation_student_overview_controller ($cm->id, $groupformation->id, $userid);
-//    echo $controller->display();
     
     echo '<form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
     echo '<input type="hidden" name="questions" value="1"/>';

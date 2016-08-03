@@ -848,6 +848,13 @@ class mod_groupformation_storage_manager {
         return $this->data->is_math_prep_course_mode();
     }
 
+    /**
+     * Determines group size
+     *
+     * @param $users
+     * @param null $groupformationid
+     * @return array|null
+     */
     public function determine_group_size($users, $groupformationid = null) {
         if ($this->ask_for_topics()) {
             $groupoption = $this->get_group_option();
@@ -991,5 +998,18 @@ class mod_groupformation_storage_manager {
                     $maxmembers, $maxmembers);
             }
         }
+    }
+
+    /**
+     * Returns questions
+     *
+     * @param $category
+     * @param $version
+     * @return array
+     */
+    public function get_questions($category,$version){
+        global $DB;
+
+        return $DB->get_records('groupformation_question',array('category'=>$category,'language'=>'en'));
     }
 }

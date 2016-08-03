@@ -61,6 +61,8 @@ class mod_groupformation_test_user_generator {
 
         $store = new mod_groupformation_storage_manager ($groupformationid);
 
+        $version = $store->get_version();
+
         $categories = $store->get_categories();
 
         $username = $this->get_username(null, $groupformationid);
@@ -120,21 +122,25 @@ class mod_groupformation_test_user_generator {
                 }
                 try {
                     foreach ($categories as $category) {
+                        $questions = array_values($store->get_questions($category,$version));
                         $m = $store->get_number($category);
+
                         for ($i = 1; $i <= $m; $i++) {
+                            $question = $questions[$i-1];
+                            $qid = ($question->questionid);
                             $record = new stdClass ();
                             $record->groupformation = $groupformationid;
                             $record->category = $category;
-                            $record->questionid = $i;
+                            $record->questionid = $qid;
                             $record->userid = $userid;
                             $record->timestamp = time();
                             if ($category == "topic" || $category == "knowledge") {
-                                $record->answer = ($j % 2 == 0) ? ($i) : ($m + 1 - $i);
+                                $record->answer = ($j % 2 == 0) ? ($i) : ($m + 1 - $qid);
                             } else {
                                 if ($randomized) {
-                                    $record->answer = rand(1, $store->get_max_option_of_catalog_question($i, $category));
+                                    $record->answer = rand(1, $store->get_max_option_of_catalog_question($qid, $category));
                                 } else {
-                                    $record->answer = ($j % $store->get_max_option_of_catalog_question($i, $category)) + 1;
+                                    $record->answer = ($j % $store->get_max_option_of_catalog_question($qid, $category)) + 1;
                                 }
                             }
                             $allrecords [] = $record;

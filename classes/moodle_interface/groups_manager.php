@@ -321,7 +321,6 @@ class mod_groupformation_groups_manager {
      * Assigns user to group A or group B (creates those if they do not exist)
      *
      * @param int $userid
-     * @deprecated only Mathevorkurs
      */
     public function assign_to_groups_a_and_b($userid) {
         global $DB, $COURSE;

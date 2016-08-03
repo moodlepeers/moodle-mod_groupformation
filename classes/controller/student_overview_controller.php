@@ -120,13 +120,15 @@ class mod_groupformation_student_overview_controller {
 
                 $this->determine_survey_stats();
 
+                $disabled = $this->data->all_answers_required() && !$this->usermanager->has_answered_everything($this->userid);
+
                 $this->buttonsarray = array(
                     array(
                         'type' => 'submit', 'name' => 'begin', 'value' => '1', 'state' => '',
                         'text' => get_string('edit')),
                     array(
                         'type' => 'submit', 'name' => 'begin', 'value' => '0',
-                        'state' => '',
+                        'state' => (($disabled)?'disabled':''),
                         'text' => get_string('questionnaire_submit', 'groupformation')),
                     array(
                         'type' => 'submit', 'name' => 'begin', 'value' => '-1',
