@@ -528,6 +528,10 @@ class mod_groupformation_storage_manager {
     public function is_editable() {
         global $DB;
 
+        if (is_null($this->groupformationid) || $this->groupformationid == ''){
+            return true;
+        }
+
         return ($DB->count_records('groupformation_answer', array(
                 'groupformation' => $this->groupformationid
             )) == 0);
