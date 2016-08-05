@@ -81,7 +81,7 @@
                     <div>
                         <p style="margin-left: 10px;">
                             <input type="text"
-                                <?php echo ($this->_['participant_code_user'] !== '') ? 'checked disabled' : '' ?>
+                                <?php echo ($this->_['participant_code_user'] != '') ? 'checked disabled' : '' ?>
                                    name="participantcode"
                                    value="<?php echo $this->_['participant_code_user'];?>"/>
                         </p>

@@ -300,7 +300,7 @@ class mod_groupformation_job_manager {
             $store = new mod_groupformation_storage_manager($job->groupformationid);
         }
 
-        if (false && $store->is_math_prep_course_mode()) {
+        if ($store->is_math_prep_course_mode()) {
 
             self::delete_stats($job);
 
@@ -316,6 +316,8 @@ class mod_groupformation_job_manager {
 
                 self::save_stats($job, $cohort, $group_key);
             }
+
+            self::set_job($job, 'done', true);
 
             return true;
         }

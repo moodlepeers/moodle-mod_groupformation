@@ -597,7 +597,7 @@ class mod_groupformation_user_manager
         global $DB;
         $this->set_status($userid);
         $record = $DB->get_record('groupformation_started', array('groupformation' => $this->groupformationid, 'userid' => $userid));
-        $record->participantcode = $participantcode;
+        $record->participantcode = strtoupper($participantcode);
         $DB->update_record('groupformation_started', $record);
     }
 

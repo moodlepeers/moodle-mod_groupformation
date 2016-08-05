@@ -39,7 +39,7 @@ $createusers = optional_param('create_users', 0, PARAM_INT);
 $createanswers = optional_param('create_answers', false, PARAM_BOOL);
 $randomanswers = optional_param('random_answers', false, PARAM_BOOL);
 $deleteusers = optional_param('delete_users', false, PARAM_BOOL);
-
+$reset_job = optional_param('reset_job', false, PARAM_BOOL);
 // Import jQuery and js file.
 groupformation_add_jquery($PAGE, 'survey_functions.js');
 
@@ -95,6 +95,12 @@ if (true) {//$CFG->debug === 32767){
     }
 }
 
+if ($reset_job) {
+    global $DB;
+
+    $DB->delete_records('groupformation_jobs',array('groupformationid'=>$groupformation->id));
+}
+
 /* ---------- / Automated test user generation ---------- */
 
 /* ---------- Job Manager Usage ------------------------- */
@@ -103,10 +109,14 @@ if (true) {//$CFG->debug === 32767){
 //$job = null;
 //
 //$job = $jm::get_job($groupformation->id);
+//$aborted = \mod_groupformation_job_manager::is_job_aborted($job);
+//
+//var_dump($aborted);
+//
 //
 //if (!is_null($job)) {
-//    $result = $jm::do_groupal($job);
-//    var_dump($result);
+//    //$result = $jm::do_groupal($job);
+//    //var_dump($result);
 //    // $saved = $jm::save_result($job,$result);
 //}
 
