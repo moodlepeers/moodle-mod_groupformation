@@ -122,12 +122,23 @@ class mod_groupformation_test_user_generator {
                 }
                 try {
                     foreach ($categories as $category) {
-                        $questions = array_values($store->get_questions($category,$version));
+
+                        if ($category == "topic" || $category == "knowledge"){
+                            $temp = $store->get_knowledge_or_topic_values($category);
+                            $xmlcontent = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>';
+                            $questions = mod_groupformation_util::xml_to_array($xmlcontent);
+                        }else{
+                            $questions = array_values($store->get_questions($category,$version));
+                        }
                         $m = $store->get_number($category);
 
                         for ($i = 1; $i <= $m; $i++) {
                             $question = $questions[$i-1];
-                            $qid = ($question->questionid);
+                            if ($category == "topic" || $category == "knowledge"){
+                                $qid = $i;
+                            } else {
+                                $qid = ($question->questionid);
+                            }
                             $record = new stdClass ();
                             $record->groupformation = $groupformationid;
                             $record->category = $category;
