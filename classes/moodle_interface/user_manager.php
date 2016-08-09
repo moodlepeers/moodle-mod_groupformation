@@ -509,7 +509,7 @@ class mod_groupformation_user_manager
         if ($DB->record_exists('groupformation_started',
             array('groupformation' => $this->groupformationid, 'userid' => $userid))
         ) {
-            return boolval($DB->get_field('groupformation_started', 'consent', array('groupformation' => $this->groupformationid, 'userid' => $userid)));
+            return (bool)($DB->get_field('groupformation_started', 'consent', array('groupformation' => $this->groupformationid, 'userid' => $userid)));
         } else {
             return false;
         }

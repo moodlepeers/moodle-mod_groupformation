@@ -667,7 +667,7 @@ class mod_groupformation_storage_manager {
     public function get_group_option() {
         global $DB;
 
-        return boolval($DB->get_field('groupformation', 'groupoption', array(
+        return (bool)($DB->get_field('groupformation', 'groupoption', array(
             'id' => $this->groupformationid
         )));
     }
