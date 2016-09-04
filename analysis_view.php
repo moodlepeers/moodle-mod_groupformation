@@ -78,7 +78,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_p
 
 /* ---------- Automated test user generation ------------ */
 
-if (true) {//$CFG->debug === 32767){
+if ($CFG->debug === 32767){ //true) {
     $cqt = new mod_groupformation_test_user_generator ($cm);
 
     if ($deleteusers) {
@@ -111,11 +111,11 @@ if ($reset_job) {
 //$job = $jm::get_job($groupformation->id);
 //$aborted = \mod_groupformation_job_manager::is_job_aborted($job);
 //
-//var_dump($aborted);
+////var_dump($aborted);
 //
 //
 //if (!is_null($job)) {
-//    //$result = $jm::do_groupal($job);
+//    $result = $jm::do_groupal($job);
 //    //var_dump($result);
 //    // $saved = $jm::save_result($job,$result);
 //}

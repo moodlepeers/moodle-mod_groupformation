@@ -238,7 +238,7 @@ class mod_groupformation_user_manager
     public function get_answering_status($userid) {
         global $DB;
 
-        if (!$this->get_consent($userid) || !$this->has_participant_code($userid)) {
+        if (!$this->get_consent($userid) || (!$this->has_participant_code($userid) && $this->store->ask_for_participant_code())) {
             return -1;
         }
 

@@ -232,9 +232,9 @@ class mod_groupformation_data {
             'character',
             'motivation',
             'team',
-            'srl',
-            'sellmo',
-            'self',
+//            'srl',
+//            'sellmo',
+//            'self',
         ),
         '2' => array(
             'general',
@@ -243,19 +243,19 @@ class mod_groupformation_data {
             'character',
             'motivation',
             'team',
-            'srl',
-            'sellmo',
-            'self',
+//            'srl',
+//            'sellmo',
+//            'self',
         ),
         '3' => array(
             'topic',
         ),
     );
 
-    private $participant_code = true;
+    private $participant_code = false;
     private $import_export_enabled = false;
-    private $math_prep_course_mode = true;
-    private $all_answers_required = true;
+    private $math_prep_course_mode = false;
+    private $all_answers_required = false;
 
     /**
      * Returns whether this instance is running in math prep course mode;

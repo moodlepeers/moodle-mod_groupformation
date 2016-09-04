@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<questionnaire version="2016072102">
+<questionnaire version="2016090400">
 	<categories>
 		<category>general</category>
 		<category>points</category>
@@ -7,9 +7,6 @@
 		<category>character</category>
 		<category>motivation</category>
 		<category>team</category>
-		<category>srl</category>
-		<category>sellmo</category>
-		<category>self</category>
 	</categories>
 	<languages>
 		<language>en</language>

@@ -93,7 +93,7 @@ $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 
 $consent = $usermanager->get_consent($userid);
-$participantcode = $usermanager->has_participant_code($userid);
+$participantcode = $usermanager->has_participant_code($userid) || !$data->ask_for_participant_code();
 
 if ((!$consent && !$participantcode && !$groupsmanager->groups_created()) && !has_capability('mod/groupformation:editsettings',$context)) {
     $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
