@@ -258,9 +258,7 @@ class mod_groupformation_analysis_controller {
         );
 
         foreach ($answers as $answer){
-            var_dump($answer->questionid);
             $question = $this->store->get_question_by_position('character',$answer->questionid);
-            var_dump($question->questionid);
             $answer->questionid = $question->questionid;
             $DB->update_record('groupformation_answer',$answer,true);
         }
