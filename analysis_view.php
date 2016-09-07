@@ -126,8 +126,12 @@ if ($reset_job) {
 
 $controller = new mod_groupformation_analysis_controller ($groupformation->id, $cm);
 
-if (false && $fix_answers) {
+if (true && $fix_answers) {
     $controller->fix_answers();
+    echo '<div class="alert">Answers fixed - do not repeat this action!</div>';
+    $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
+        'id' => $id, 'do_show' => 'analysis'));
+    redirect($return->out());
 }
 
 if ((data_submitted()) && confirm_sesskey()) {
