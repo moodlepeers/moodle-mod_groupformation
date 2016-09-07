@@ -759,6 +759,8 @@ class mod_groupformation_criterion_calculator
         // var_dump($users);
 
         $uservalues = $this->get_values_for_user($criterion, $userid, $labels);
+
+        // var_dump($uservalues);
         $usersvalues = $this->get_values_for_users($criterion, $users, $labels);
 
         // var_dump($usersvalues);
