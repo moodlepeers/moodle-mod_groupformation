@@ -592,7 +592,7 @@ function xmldb_groupformation_upgrade($oldversion) {
 
         // Define field count_groups to be added to groupformation_jobs.
         $table = new xmldb_table ('groupformation_jobs');
-        $field = new xmldb_field ('count_groups', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'matcher_used');
+        $field = new xmldb_field ('count_groups', XMLDB_TYPE_INTEGER, '20', null, null, null, null, 'matcher_used');
 
         // Conditionally launch add field count_groups.
         if (!$dbman->field_exists($table, $field)) {
@@ -1096,9 +1096,9 @@ function xmldb_groupformation_upgrade($oldversion) {
             $dbman->add_field($table, $field);
         }
 
-        // Define field count_groups to be added to groupformation_jobs.
+        // Define field count_groups to be added to groupformation_stats.
         $table = new xmldb_table ($tablename);
-        $field = new xmldb_field ('count_groups', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'matcher_used');
+        $field = new xmldb_field ('count_groups', XMLDB_TYPE_INTEGER, '20', null, null, null, null, 'matcher_used');
 
         // Conditionally launch add field count_groups.
         if (!$dbman->field_exists($table, $field)) {
@@ -1239,6 +1239,30 @@ function xmldb_groupformation_upgrade($oldversion) {
 
         // Groupformation savepoint reached.
         upgrade_mod_savepoint(true, 2016072100, 'groupformation');
+    }
+    if ($oldversion < 2016090700) {
+    	// Define field count_groups to be added to groupformation_jobs and groupformation_stats
+    	$tablename = 'groupformation_jobs';
+    	$table = new xmldb_table ($tablename);
+    	$field = new xmldb_field ('count_groups', XMLDB_TYPE_INTEGER, '20', null, null, null, null, 'matcher_used');
+    	
+    	if (!$dbman->field_exists($table, $field)) {
+    		$dbman->add_field($table, $field);
+    	}
+    	else {
+    		$dbman->change_field_type($table, $field, $continue=true, $feedback=true);
+    	}
+		// same now for stats
+    	$tablename = 'groupformation_stats';
+    	$table = new xmldb_table ($tablename);    	 
+    	if (!$dbman->field_exists($table, $field)) {
+    		$dbman->add_field($table, $field);
+    	}
+    	else {
+    		$dbman->change_field_type($table, $field, $continue=true, $feedback=true);
+    	}
+    	// Groupformation savepoint reached.
+    	upgrade_mod_savepoint(true, 2016090700, 'groupformation');
     }
 
 

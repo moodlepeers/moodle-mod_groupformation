@@ -280,7 +280,7 @@
         <FIELD NAME="timestarted" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="timefinished" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="matcher_used" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
-        <FIELD NAME="count_groups" TYPE="number" LENGTH="10" NOTNULL="false" SEQUENCE="false" DECIMALS="8"/>
+        <FIELD NAME="count_groups" TYPE="number" LENGTH="20" NOTNULL="false" SEQUENCE="false" DECIMALS="8"/>
         <FIELD NAME="performance_index" TYPE="number" LENGTH="20" NOTNULL="false" SEQUENCE="false" DECIMALS="8"/>
         <FIELD NAME="stats_avg_variance" TYPE="number" LENGTH="20" NOTNULL="false" SEQUENCE="false" DECIMALS="8"/>
         <FIELD NAME="stats_variance" TYPE="number" LENGTH="20" NOTNULL="false" SEQUENCE="false" DECIMALS="8"/>
@@ -333,7 +333,7 @@
         <FIELD NAME="groupformationid" TYPE="int" LENGTH="20" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="group_key" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="matcher_used" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
-        <FIELD NAME="count_groups" TYPE="number" LENGTH="10" NOTNULL="false" SEQUENCE="false" DECIMALS="8"/>
+        <FIELD NAME="count_groups" TYPE="number" LENGTH="20" NOTNULL="false" SEQUENCE="false" DECIMALS="8"/>
         <FIELD NAME="performance_index" TYPE="number" LENGTH="20" NOTNULL="false" SEQUENCE="false" DECIMALS="8"/>
         <FIELD NAME="stats_avg_variance" TYPE="number" LENGTH="20" NOTNULL="false" SEQUENCE="false" DECIMALS="8"/>
         <FIELD NAME="stats_variance" TYPE="number" LENGTH="20" NOTNULL="false" SEQUENCE="false" DECIMALS="8"/>
