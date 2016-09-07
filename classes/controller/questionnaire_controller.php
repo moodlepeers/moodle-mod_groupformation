@@ -297,7 +297,7 @@ class mod_groupformation_questionnaire_controller
                             0 => get_string('bad', 'groupformation'));
                         if ($this->hasanswer) {
                             $answer =
-                                $this->usermanager->get_single_answer($this->userid, $this->currentcategory, $i);
+                                $this->usermanager->get_single_answer($this->userid, $this->currentcategory, $record->questionid);
                             if ($answer != false) {
                                 $question [] = $answer;
                             } else {
@@ -313,8 +313,7 @@ class mod_groupformation_questionnaire_controller
                 // ---------------------------------------------------------------------------------------------------------
                 for ($i = 1; $i <= $this->numbers [$this->currentcategoryposition]; $i++) {
                     $record = $this->get_question($i,$version);
-
-                    $question = $this->prepare_question($i, $record);
+                    $question = $this->prepare_question($record->questionid, $record);
 
                     $questions [] = $question;
                 }
@@ -346,14 +345,14 @@ class mod_groupformation_questionnaire_controller
 
             if ($this->hasanswer) {
                 $answer = $this->usermanager->get_single_answer($this->userid, $this->currentcategory, $i);
+
                 if ($answer != false) {
-                    $question [] = $answer;
+                    $question [] = intval($answer);
                 } else {
                     $question [] = -1;
                 }
             }
         }
-
         return $question;
     }
 

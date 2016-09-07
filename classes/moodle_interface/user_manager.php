@@ -238,7 +238,7 @@ class mod_groupformation_user_manager
     public function get_answering_status($userid) {
         global $DB;
 
-        if (!$this->get_consent($userid) || !$this->has_participant_code($userid)) {
+        if (!$this->get_consent($userid) || (!$this->has_participant_code($userid) && $this->store->ask_for_participant_code())) {
             return -1;
         }
 
@@ -399,11 +399,20 @@ class mod_groupformation_user_manager
      * @param $userid
      * @param $category
      * @param $answer
-     * @param $questionid
+     * @param $position
      */
-    public function save_answer($userid, $category, $answer, $questionid) {
+    public function save_answer($userid, $category, $answer, $position) {
         global $DB;
         $status = $this->get_answering_status($userid);
+
+        $questionid = $position;
+
+        if (!in_array($category,array('knowledge','topics'))){
+            $question = $this->store->get_question_by_position($category,$position);
+            $questionid = $question->questionid;
+        }
+
+
 
         if (($category == 'grade' || $category == 'general') && $answer == '0') {
             return;
