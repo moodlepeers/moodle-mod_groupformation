@@ -158,7 +158,6 @@ class mod_groupformation_participant_parser {
             $object->id = $user;
 
             foreach ($criteriaspecs as $criterion => $spec) {
-
                 if (in_array($scenario, $spec['scenarios'])) {
                     $points = $this->criterioncalculator->get_values_for_user($criterion, $user, $spec);
                     foreach ($spec['labels'] as $label => $lspec) {
