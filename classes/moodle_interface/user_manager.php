@@ -399,11 +399,20 @@ class mod_groupformation_user_manager
      * @param $userid
      * @param $category
      * @param $answer
-     * @param $questionid
+     * @param $position
      */
-    public function save_answer($userid, $category, $answer, $questionid) {
+    public function save_answer($userid, $category, $answer, $position) {
         global $DB;
         $status = $this->get_answering_status($userid);
+
+        $questionid = $position;
+
+        if (!in_array($category,array('knowledge','topics'))){
+            $question = $this->store->get_question_by_position($category,$position);
+            $questionid = $question->questionid;
+        }
+
+
 
         if (($category == 'grade' || $category == 'general') && $answer == '0') {
             return;
