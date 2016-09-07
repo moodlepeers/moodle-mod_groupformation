@@ -105,20 +105,19 @@ if ($reset_job) {
 
 /* ---------- Job Manager Usage ------------------------- */
 
-//$jm = new mod_groupformation_job_manager ();
-//$job = null;
-//
-//$job = $jm::get_job($groupformation->id);
-//$aborted = \mod_groupformation_job_manager::is_job_aborted($job);
-//
-////var_dump($aborted);
-//
-//
-//if (!is_null($job)) {
+// $jm = new mod_groupformation_job_manager ();
+// $job = null;
+
+// $job = $jm::get_job($groupformation->id);
+// $aborted = \mod_groupformation_job_manager::is_job_aborted($job);
+
+// var_dump($aborted);
+
+// if (!is_null($job)) {
 //    $result = $jm::do_groupal($job);
-//    //var_dump($result);
-//    // $saved = $jm::save_result($job,$result);
-//}
+//    var_dump($result);
+//    $saved = $jm::save_result($job,$result);
+// }
 
 /* ---------- / Job Manager Usage ----------------------- */
 
