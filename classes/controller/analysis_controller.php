@@ -248,4 +248,21 @@ class mod_groupformation_analysis_controller {
             $this->state = 2;
         }
     }
+
+    /** hot fix for answers */
+    public function fix_answers(){
+        global $DB;
+
+        $answers = $DB->get_records('groupformation_answer',
+            array('groupformation'=>$this->groupformationid, 'category'=>'character')
+        );
+
+        foreach ($answers as $answer){
+            var_dump($answer->questionid);
+            $question = $this->store->get_question_by_position('character',$answer->questionid);
+            var_dump($question->questionid);
+            $answer->questionid = $question->questionid;
+            $DB->update_record('groupformation_answer',$answer,true);
+        }
+    }
 }

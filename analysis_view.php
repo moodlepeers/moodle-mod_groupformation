@@ -40,6 +40,8 @@ $createanswers = optional_param('create_answers', false, PARAM_BOOL);
 $randomanswers = optional_param('random_answers', false, PARAM_BOOL);
 $deleteusers = optional_param('delete_users', false, PARAM_BOOL);
 $reset_job = optional_param('reset_job', false, PARAM_BOOL);
+$fix_answers = optional_param('fix_answers', false, PARAM_BOOL);
+
 // Import jQuery and js file.
 groupformation_add_jquery($PAGE, 'survey_functions.js');
 
@@ -78,7 +80,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_p
 
 /* ---------- Automated test user generation ------------ */
 
-if ($CFG->debug === 32767){ //true) {
+if ($CFG->debug === 32767) { //true) {
     $cqt = new mod_groupformation_test_user_generator ($cm);
 
     if ($deleteusers) {
@@ -98,7 +100,7 @@ if ($CFG->debug === 32767){ //true) {
 if ($reset_job) {
     global $DB;
 
-    $DB->delete_records('groupformation_jobs',array('groupformationid'=>$groupformation->id));
+    $DB->delete_records('groupformation_jobs', array('groupformationid' => $groupformation->id));
 }
 
 /* ---------- / Automated test user generation ---------- */
@@ -124,6 +126,9 @@ if ($reset_job) {
 
 $controller = new mod_groupformation_analysis_controller ($groupformation->id, $cm);
 
+if (false && $fix_answers) {
+    $controller->fix_answers();
+}
 
 if ((data_submitted()) && confirm_sesskey()) {
     $switcher = optional_param('questionnaire_switcher', null, PARAM_INT);
@@ -143,7 +148,7 @@ echo $OUTPUT->header();
 require('tabs.php');
 
 
-if (groupformation_get_current_questionnaire_version() > $store->get_version()){
+if (groupformation_get_current_questionnaire_version() > $store->get_version()) {
     echo '<div class="alert">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
 }
 if ($store->is_archived() && has_capability('mod/groupformation:editsettings', $context)) {
