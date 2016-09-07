@@ -1011,9 +1011,19 @@ class mod_groupformation_storage_manager {
      * @param $version
      * @return array
      */
-    public function get_questions($category,$version){
+    public function get_questions($category,$version=0){
         global $DB;
 
         return $DB->get_records('groupformation_question',array('category'=>$category,'language'=>'en'));
+    }
+
+    /**
+     * Returns question by position
+     */
+    public function get_question_by_position($category,$position){
+        global $DB;
+
+        return $DB->get_record('groupformation_question',array('category'=>$category,'language'=>'en','position'=>$position));
+
     }
 }
