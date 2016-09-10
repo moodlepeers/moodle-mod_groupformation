@@ -77,6 +77,13 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/job_m
 require_once($CFG->dirroot . '/mod/groupformation/classes/controller/analysis_controller.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_parser.php');
 
+/* --------- Hard Reset a pending groupformation job ---- */
+if ($reset_job) {
+	global $DB;
+
+	$DB->delete_records('groupformation_jobs', array('groupformationid' => $groupformation->id));
+}
+/* ----------- / Hard Reset a pending job -------------- */
 
 /* ---------- Automated test user generation ------------ */
 
@@ -96,13 +103,6 @@ if ($CFG->debug === 32767) { //true) {
         redirect($return->out());
     }
 }
-
-if ($reset_job) {
-    global $DB;
-
-    $DB->delete_records('groupformation_jobs', array('groupformationid' => $groupformation->id));
-}
-
 /* ---------- / Automated test user generation ---------- */
 
 /* ---------- Job Manager Usage ------------------------- */
@@ -126,13 +126,15 @@ if ($reset_job) {
 
 $controller = new mod_groupformation_analysis_controller ($groupformation->id, $cm);
 
-if (true && $fix_answers) {
+/* ---- Code for fixing Answers can be removed after 15-09-2016 ---- */
+if ($CFG->debug === 32767 && $fix_answers) {
     $controller->fix_answers();
     echo '<div class="alert">Answers fixed - do not repeat this action!</div>';
     $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
         'id' => $id, 'do_show' => 'analysis'));
     redirect($return->out());
 }
+/* ---------------------------------------------------------------- */
 
 if ((data_submitted()) && confirm_sesskey()) {
     $switcher = optional_param('questionnaire_switcher', null, PARAM_INT);
