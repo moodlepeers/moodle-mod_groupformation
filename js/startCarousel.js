@@ -88,7 +88,7 @@ function buildPersonalResult(datam, index, divId) {
 			.style("margin-left", "5px")
 			.attr("data-toggle", "popover")
 			.attr("data-trigger", "hover")
-			.attr("title", function(d) {return d.name;})
+			.attr("title", function(d) {return d.captions.cutoffCaption;})
 			.attr("data-content", function(d) {return d.captions.maxText})
 			.attr("data-placement", "right");
 		/* panel body */

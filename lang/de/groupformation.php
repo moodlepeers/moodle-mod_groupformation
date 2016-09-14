@@ -374,6 +374,10 @@ $string['eval_max_caption_erfolgswahrscheinlichkeit']='Erfolgswahrscheinlichkeit
 $string['eval_min_caption_erfolgswahrscheinlichkeit']='Erfolgswahrscheinlichkeit';
 $string['eval_max_caption_misserfolgsbefuerchtung']='Misserfolgsbefürchtung';
 $string['eval_min_caption_misserfolgsbefuerchtung']='Misserfolgsbefürchtung';
+$string['eval_cutoff_caption_herausforderung']='Herausforderung';
+$string['eval_cutoff_caption_interesse']='Interesse';
+$string['eval_cutoff_caption_erfolgswahrscheinlichkeit']='Erfolgswahrscheinlichkeit';
+$string['eval_cutoff_caption_misserfolgsbefuerchtung']='Misserfolgsbefürchtung';
 
 $string['eval_max_text_herausforderung']='Die Herausforderung ist eine Dimension der Motivation, die ausdrückt, wie sehr die aktuelle Lehrveranstaltung oder Aufgabe überhaupt leistungsthematisch interpretiert wird, also ob Sie Ihre eigenen Fähigkeiten und Ihre Tüchtigkeit erproben oder unter Beweis stellen wollen.';
 $string['eval_min_text_herausforderung']='Die Herausforderung ist eine Dimension der Motivation, die ausdrückt, wie sehr die aktuelle Lehrveranstaltung oder Aufgabe überhaupt leistungsthematisch interpretiert wird, also ob Sie Ihre eigenen Fähigkeiten und Ihre Tüchtigkeit erproben oder unter Beweis stellen wollen.';
