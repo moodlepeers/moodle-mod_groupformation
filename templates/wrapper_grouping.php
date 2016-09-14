@@ -21,7 +21,7 @@
 ?>
 <div class="gf_settings_pad">
     <div class="gf_pad_header">
-        <?php echo get_string('group_building', 'groupformation'); ?> - <?php echo $this->_['grouping_title']; ?>
+        <?php echo get_string('group_building', 'groupformation').' - '; ?><?php echo $this->_['grouping_title']; ?>
     </div>
     <div class="gf_pad_content bp_align_left-middle">
         <?php echo $this->_['grouping_settings']; ?>
