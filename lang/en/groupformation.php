@@ -187,8 +187,8 @@ $string ['info_text_student'] = 'In this Moodle course the "groupformation" is u
         http://sourceforge.net/projects/moodlepeers/ <br>
         (created and developed with means for quality improvement of teaching at TU Darmstadt)
 ';
-$string ['info_header_teacher_analysis'] = 'How does the groupformation activity works?';
-$string ['info_header_teacher_settings'] = 'How does the groupformation activity works?';
+$string ['info_header_teacher_analysis'] = 'How does the groupformation activity work?';
+$string ['info_header_teacher_settings'] = 'How does the groupformation activity work?';
 $string ['info_text_teacher_settings'] = 'With this plugin you have the ability to optimize the group formation of your students. The three required steps are:<br>
         1.) Add the activity "groupformation" to your course.
         In the settings you can choose which scenario fits best to your needs(in case of doubt choose project teams).
@@ -214,7 +214,7 @@ $string ['info_text_teacher_analysis'] = 'With this plugin you have the ability 
         Finished. Now also the students can see their groupmates. As a docent you can manually adjust the groups anytime at Moodle(e.g. with stragglers).<br>
 ';
 $string['statusGrupping0'] = 'You have to close the questionnaire to start group formation.';
-$string['statusGrupping1'] = 'You can start group formation now';
+$string['statusGrupping1'] = 'You can start the group formation now';
 $string['statusGrupping2'] = 'The group formation is in progress.';
 $string['statusGrupping3'] = 'The termination of group formation is in progress';
 $string['statusGrupping4'] = 'The group formation is finished. You can adopt the groups to Moodle or generate a new results by algorithm.';
@@ -244,7 +244,7 @@ $string['activity_end'] = 'Stop activity';
 $string['activity_start'] = 'Start activity';
 $string['analysis_status_info0'] = 'You have to stop the activity before group formation.';
 $string['analysis_status_info1'] = 'You have to start activity so that students are able to answer the questionnaire.';
-$string['analysis_status_info2'] = 'Group formation has already started or is done respectively. Activity cannot be stopped anymore.';
+$string['analysis_status_info2'] = 'Group formation has already started or is done respectively. Activity cannot be started anymore. If you want to start the activity again, you need to delete generated groups.';
 $string['analysis_status_info3'] = 'You are able to start or end activity.';
 $string['analysis_status_info4'] = 'You can now start the group formation.';
 $string['contact_members'] = 'To contact your team members you can click on their user names.';
@@ -252,8 +252,8 @@ $string['invalid'] = 'invalid status';
 $string['groups_build'] = 'Groups are built.';
 $string['activity_visible'] = 'Activity is not visible for you.';
 
-$string['are'] = 'You have';
-$string['are_now'] = 'There are';
+$string['are'] = 'There are';
+$string['are_now'] = 'Now, there are';
 $string['students_available_single'] = 'enrolled student who can fill out the questionnaire.';
 $string['students_available_multiple'] = 'enrolled students who can fill out the questionnaire.';
 $string['students_answered_single'] = 'student has answered the questionnaire.';
