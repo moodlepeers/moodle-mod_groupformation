@@ -24,7 +24,7 @@
 
     <div class="grid bottom_stripe">
     <div class="col_m_75">
-        <div class="group_params"><b><?php echo get_string('name_by_group', 'groupformation'); ?></b> <?php echo $entry['groupname']; ?></div><br>
+        <div class="group_params"><b><?php echo get_string('name_by_group', 'groupformation').' '; ?></b> <?php echo $entry['groupname']; ?></div><br>
         <?php if (strlen($entry['topic'])>0){ ?>
             <div class="group_params"><b><?php echo get_string('topic', 'groupformation').": "; ?></b> <?php echo $entry['topic']; ?></div>
         <?php }?>

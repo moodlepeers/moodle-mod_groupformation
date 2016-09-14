@@ -293,21 +293,21 @@ class mod_groupformation_mod_form extends moodleform_mod {
             <tbody id="preknowledges">
             <tr class="knowlRow" id="prkRow0">
             <th scope="row">' .
-            get_string('knowledge_dummy', 'groupformation') . ' 1</th>
+            get_string('knowledge_dummy', 'groupformation') . ' ' . ' 1</th>
                                             <td data-title="' .
             get_string('knowledge_scale', 'groupformation') . '" class="range"><span >0</span>
             <input type="range" min="0" max="100" value="0" /><span>100</span></td>
                                           </tr>
                                         <tr class="knowlRow" id="prkRow1">
                                             <th scope="row">' .
-            get_string('knowledge_dummy', 'groupformation') . ' 2</th>
+            get_string('knowledge_dummy', 'groupformation') . ' ' . ' 2</th>
                                             <td data-title="' .
             get_string('knowledge_scale', 'groupformation') . '" class="range"><span >0</span>
             <input type="range" min="0" max="100" value="0" /><span>100</span></td>
                                           </tr>
                                         <tr class="knowlRow" id="prkRow2">
                                             <th scope="row">' .
-            get_string('knowledge_dummy', 'groupformation') . ' 3</th>
+            get_string('knowledge_dummy', 'groupformation') . ' ' . ' 3</th>
                                             <td data-title="' .
             get_string('knowledge_scale', 'groupformation') . '" class="range"><span >0</span>
             <input type="range" min="0" max="100" value="0" /><span>100</span></td>
@@ -380,14 +380,14 @@ class mod_groupformation_mod_form extends moodleform_mod {
 
                 '<p id="topicshead">' . get_string('topics_question', 'groupformation') . '</p>
                     <span id="topicsDummy" style="display:none;">' .
-                get_string('topics_dummy', 'groupformation') . '</span>
+                get_string('topics_dummy', 'groupformation'). ' ' . '</span>
                     <ul class="sortable_topics" id="previewTopics">
                       <li class="topicLi" id="tpcRow0" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' .
-                get_string('topics_dummy', 'groupformation') . '1</li>
+                get_string('topics_dummy', 'groupformation') . ' ' . '1</li>
                       <li class="topicLi" id="tpcRow1" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' .
-                get_string('topics_dummy', 'groupformation') . '2</li>
+                get_string('topics_dummy', 'groupformation') . ' ' . '2</li>
                       <li class="topicLi" id="tpcRow2" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' .
-                get_string('topics_dummy', 'groupformation') . '3</li>
+                get_string('topics_dummy', 'groupformation') . ' ' . '3</li>
                     </ul>
                                                </div>
                                             </div> <!-- /col_50 -->

@@ -21,7 +21,7 @@
 ?>
 <div class="grid row_highlight">
     <div class="col_m_100"><?php echo get_string('are', 'groupformation');?>
-        <b><?php echo $this->_['statistics_enrolled']; ?></b>
+        <b><?php echo ' '.$this->_['statistics_enrolled']; ?></b>
         <?php echo ' '.(($this->_['statistics_enrolled']==1) ? get_string('students_available_single', 'groupformation') : get_string('students_available_multiple', 'groupformation')); ?></div>
 </div>
 <div class="grid row_highlight">
@@ -39,7 +39,7 @@
 </div> -->
 <div class="grid row_highlight">
     <div class="col_m_100"><?php echo get_string('are_now', 'groupformation');?> <b>
-            <?php echo $this->_['statistics_submited_complete']; ?></b>
+            <?php echo ' '.$this->_['statistics_submited_complete']; ?></b>
         <?php echo ' '.get_string('completed_questionnaire', 'groupformation');?></div>
 </div>
 
