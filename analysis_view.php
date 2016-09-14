@@ -77,6 +77,13 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/job_m
 require_once($CFG->dirroot . '/mod/groupformation/classes/controller/analysis_controller.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_parser.php');
 
+/* --------- Hard Reset a pending groupformation job ---- */
+if ($reset_job) {
+	global $DB;
+
+	$DB->delete_records('groupformation_jobs', array('groupformationid' => $groupformation->id));
+}
+/* ----------- / Hard Reset a pending job -------------- */
 
 /* ---------- Automated test user generation ------------ */
 
@@ -96,13 +103,6 @@ if ($CFG->debug === 32767) { //true) {
         redirect($return->out());
     }
 }
-
-if ($reset_job) {
-    global $DB;
-
-    $DB->delete_records('groupformation_jobs', array('groupformationid' => $groupformation->id));
-}
-
 /* ---------- / Automated test user generation ---------- */
 
 /* ---------- Job Manager Usage ------------------------- */
@@ -131,6 +131,7 @@ if ($fix_answers) {
         'id' => $id, 'do_show' => 'analysis'));
     redirect($return->out());
 }
+/* ---------------------------------------------------------------- */
 
 if ((data_submitted()) && confirm_sesskey()) {
     $switcher = optional_param('questionnaire_switcher', null, PARAM_INT);
