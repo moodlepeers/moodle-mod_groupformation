@@ -213,19 +213,19 @@ $string ['info_text_teacher_analysis'] = 'With this plugin you have the ability 
         <br>
         Finished. Now also the students can see their groupmates. As a docent you can manually adjust the groups anytime at Moodle(e.g. with stragglers).<br>
 ';
-$string['statusGrupping0'] = 'You have to close the questionnaire to start group formation.';
-$string['statusGrupping1'] = 'You can start the group formation now';
-$string['statusGrupping2'] = 'The group formation is in progress.';
-$string['statusGrupping3'] = 'The termination of group formation is in progress';
-$string['statusGrupping4'] = 'The group formation is finished. You can adopt the groups to Moodle or generate a new results by algorithm.';
-$string['statusGrupping5'] = 'The generated groups are adopted to Moodle. You can manually adjust them.';
+$string['grouping_status_0'] = 'You have to close the questionnaire to start group formation.';
+$string['grouping_status_1'] = 'You can start the group formation now';
+$string['grouping_status_2'] = 'The group formation is in progress.';
+$string['grouping_status_3'] = 'The termination of group formation is in progress';
+$string['grouping_status_4'] = 'The group formation is finished. You can adopt the groups to Moodle or generate a new results by algorithm.';
+$string['grouping_status_5'] = 'The generated groups are adopted to Moodle. You can manually adjust them.';
 $string['grouping_start'] = 'Start group formation';
 $string['grouping_delete'] = 'Delete groups';
 $string['grouping_adopt'] = 'Adopt groups';
 $string['grouping_abort'] = 'Cancel generating groups';
 $string['grouping_edit'] = 'Edit groups';
-$string['moodlegrouping_delete'] = 'Delete moodle groups';
-$string['questionnaire_commited'] = 'Your answers are submitted. You cannot change them in this activity.';
+$string['grouping_delete_moodle_groups'] = 'Delete moodle groups';
+$string['questionnaire_committed'] = 'Your answers are submitted. You cannot change them in this activity.';
 $string['no_data_to_display'] = 'No data to display';
 
 $string['onlyactivestudents'] = 'Only students with at least one submitted answer should be considered for building groups';
@@ -261,10 +261,10 @@ $string['students_answered_multiple'] = 'students have answered the questionnair
 $string['name_by_group'] = 'Name:';
 $string['quality'] = 'Group quality';
 $string['quality_info'] = 'Group-Performance-Index (GPI) represents the quality of the built group and has a range between 0 and 1. The bigger the value, so much better the group. Is no value mentioned, the group is not built algorithmically, but by random.';
-$string['to_groupview'] = 'to Moodle group view';
+$string['go_to_group_view'] = 'to Moodle group view';
 $string['number_member'] = 'Number of members:';
-$string['kohort_index'] = 'Cohorts-Performance-Index:';
-$string['kohort_index_info'] = 'The Cohorts-Performance-Index (KPI) represents the quality of the built groups and has a range between 0 and 1. The bigger the value, so much better the built groups.';
+$string['cohort_index'] = 'Cohorts-Performance-Index:';
+$string['cohort_index_info'] = 'The Cohorts-Performance-Index (KPI) represents the quality of the built groups and has a range between 0 and 1. The bigger the value, so much better the built groups.';
 $string['max_group_size'] = 'Max. group size:';
 $string['number_of_groups'] = 'Number of built groups:';
 $string['options'] = 'Options';
@@ -277,9 +277,9 @@ $string['max_group_size_not_reached'] = 'Maximum group size has not been reached
 $string['your_group'] = 'Your group';
 $string['students_grouping_single'] = 'student for group building.';
 $string['students_grouping_multiple'] = 'students for group building.';
-$string['students_commited_single'] = 'student therefrom has already committed his/her answers.';
-$string['students_commited_multiple'] = 'students have also committed their answers already.';
-$string['commited_not_completed'] = 'from the committed questionnaires are not complete.';
+$string['students_committed_single'] = 'student therefrom has already committed his/her answers.';
+$string['students_committed_multiple'] = 'students have also committed their answers already.';
+$string['committed_not_completed'] = 'from the committed questionnaires are not complete.';
 $string['completed_questionnaire'] = 'completely answered questionnaires.';
 
 $string['emailnotifications_info'] = 'You will be notified via message when it is terminated.';

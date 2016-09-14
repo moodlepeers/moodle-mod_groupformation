@@ -38,11 +38,11 @@
             <a href="<?php echo $entry['grouplink'][0]; ?>">
                 <?php if (!$entry['grouplink'][1] == 'disabled') { ?>
                     <span class="gf_button gf_button_pill gf_button_tiny">
-		    <?php echo get_string('to_groupview', 'groupformation'); ?>
+		    <?php echo get_string('go_to_group_view', 'groupformation'); ?>
 		    </span>
                 <?php } else { ?>
                     <button class="gf_button gf_button_pill gf_button_tiny" disabled>
-                        <?php echo get_string('to_groupview', 'groupformation'); ?>
+                        <?php echo get_string('go_to_group_view', 'groupformation'); ?>
                     </button>
                 <?php } ?>
             </a>
