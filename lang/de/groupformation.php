@@ -218,19 +218,19 @@ $string ['info_text_teacher_analysis'] = 'Mit diesem Plugin haben Sie die Mögli
 		<br>
 		Fertig. Jetzt können auch die Studierenden Ihre Gruppenmitglieder sehen. Es ist Ihnen als Lehrende/r jederzeit möglich, die Gruppen manuell in Moodle nachzubearbeiten (bspw. bei Nachzüglern).<br>
 ';
-$string['statusGrupping0'] = 'Um die Gruppenbildung starten zu können, müssen Sie die Aktivität im Tab Überblick beenden.';
-$string['statusGrupping1'] = 'Sie können die Gruppenbildung jetzt starten.';
-$string['statusGrupping2'] = 'Die Gruppenbildung läuft.';
-$string['statusGrupping3'] = 'Die Gruppenbildung wird abgebrochen.';
-$string['statusGrupping4'] = 'Gruppenbildung ist abgeschlossen. Sie können den Gruppenvorschlag übernehmen, oder verwerfen.';
-$string['statusGrupping5'] = 'Die realen Gruppen sind gebildet. Sie können jetzt manuelle Veränderung an den Gruppen vornehmen.';
+$string['grouping_status_0'] = 'Um die Gruppenbildung starten zu können, müssen Sie die Aktivität im Tab Überblick beenden.';
+$string['grouping_status_1'] = 'Sie können die Gruppenbildung jetzt starten.';
+$string['grouping_status_2'] = 'Die Gruppenbildung läuft.';
+$string['grouping_status_3'] = 'Die Gruppenbildung wird abgebrochen.';
+$string['grouping_status_4'] = 'Gruppenbildung ist abgeschlossen. Sie können den Gruppenvorschlag übernehmen, oder verwerfen.';
+$string['grouping_status_5'] = 'Die realen Gruppen sind gebildet. Sie können jetzt manuelle Veränderung an den Gruppen vornehmen.';
 $string['grouping_start'] = 'Gruppenbildung starten';
 $string['grouping_delete'] = 'Gruppenvorschlag verwerfen';
 $string['grouping_adopt'] = 'Gruppenvorschlag übernehmen';
 $string['grouping_abort'] = 'Gruppenbildung abbrechen';
 $string['grouping_edit'] = 'Gruppen bearbeiten';
-$string['moodlegrouping_delete'] = 'Moodle-Gruppen l&ouml;schen';
-$string['questionnaire_commited'] = 'Ihre Antworten sind abgegeben. Somit können Sie sie nicht mehr verändern.';
+$string['grouping_delete_moodle_groups'] = 'Moodle-Gruppen l&ouml;schen';
+$string['questionnaire_committed'] = 'Ihre Antworten sind abgegeben. Somit können Sie sie nicht mehr verändern.';
 $string['no_data_to_display'] = 'Keine Daten vorhanden.';
 
 $string['onlyactivestudents'] = 'Zur Gruppenbildung sollen ausschließlich Studierende betrachtet werden, die mind. eine Frage beantwortet haben.';
@@ -265,10 +265,10 @@ $string['students_answered_multiple'] = 'Studierende haben den Fragebogen bearbe
 $string['name_by_group'] = 'Name:';
 $string['quality'] = 'Gruppenqualität:';
 $string['quality_info'] = 'Der Gruppen-Performanz-Index (GPI) gibt die Qualität der gebildeten Gruppe wieder und ist ein Wert zwischen 0 und 1. Je größer der Wert, deste besser ist die gebildete Gruppe. Ist kein Wert angegeben, so sind die Gruppen nicht algorithmisch gebildet, sondern randomisiert.';
-$string['to_groupview'] = 'zur Moodle Gruppenansicht';
+$string['go_to_group_view'] = 'zur Moodle Gruppenansicht';
 $string['number_member'] = 'Anzahl Mitglieder:';
-$string['kohort_index'] = 'Kohorten-Performanz-Index:';
-$string['kohort_index_info'] = 'Der Kohorten-Performanz-Index (KPI) gibt die Qualität der gebildeten Gruppen wieder und ist ein Wert zwischen 0 und 1. Je größer der Wert, desto besser sind die gebildeten Gruppen.';
+$string['cohort_index'] = 'Kohorten-Performanz-Index:';
+$string['cohort_index_info'] = 'Der Kohorten-Performanz-Index (KPI) gibt die Qualität der gebildeten Gruppen wieder und ist ein Wert zwischen 0 und 1. Je größer der Wert, desto besser sind die gebildeten Gruppen.';
 $string['max_group_size'] = 'Maximale Gruppengröße:';
 $string['number_of_groups'] = 'Anzahl gebildeter Gruppen:';
 $string['options'] = 'Optionen';
@@ -281,9 +281,9 @@ $string['max_group_size_not_reached'] = 'Maximale Gruppengröße wurde bei folge
 $string['your_group'] = 'Deine Gruppe';
 $string['students_grouping_single'] = 'Studierende zur Gruppenbildung.';
 $string['students_grouping_multiple'] = 'Studierende zur Gruppenbildung.';
-$string['students_commited_single'] = 'Studierende davon haben ihre Antworten schon endgültig abgegeben.';
-$string['students_commited_multiple'] = 'Studierende davon hat seine Antworten schon endgültig abgegeben.';
-$string['commited_not_completed'] = 'von den fest abgegebenen Fragebögen sind nicht vollständig.';
+$string['students_committed_single'] = 'Studierende davon haben ihre Antworten schon endgültig abgegeben.';
+$string['students_committed_multiple'] = 'Studierende davon hat seine Antworten schon endgültig abgegeben.';
+$string['committed_not_completed'] = 'von den fest abgegebenen Fragebögen sind nicht vollständig.';
 $string['completed_questionnaire'] = 'vollständig beantwortete Fragebögen.';
 
 $string['emailnotifications_info'] = 'Sie werden via Moodle benachrichtigt, wenn sie abgeschlossen ist.';

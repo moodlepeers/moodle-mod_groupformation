@@ -261,7 +261,7 @@ class mod_groupformation_grouping_controller
             case 0 :
                 // Secound parametor of the array says if it a important note (1) or not (0).
                 $settingsgroupview->assign('status', array(
-                    get_string('statusGrupping0', 'groupformation'), 0));
+                    get_string('grouping_status_0', 'groupformation'), 0));
                 $settingsgroupview->assign('buttons', array(
                     'button1' => array(
                         'type' => 'submit', 'name' => 'start', 'value' => '0', 'state' => 'disabled',
@@ -281,7 +281,7 @@ class mod_groupformation_grouping_controller
 
             case 1 :
                 $settingsgroupview->assign('status', array(
-                    get_string('statusGrupping1', 'groupformation'), 0));
+                    get_string('grouping_status_1', 'groupformation'), 0));
                 $settingsgroupview->assign('buttons', array(
                     'button1' => array(
                         'type' => 'submit', 'name' => 'start', 'value' => '1', 'state' => '',
@@ -301,7 +301,7 @@ class mod_groupformation_grouping_controller
 
             case 2 :
                 $settingsgroupview->assign('status', array(
-                    get_string('statusGrupping2', 'groupformation'), 1));
+                    get_string('grouping_status_2', 'groupformation'), 1));
                 $settingsgroupview->assign('buttons', array(
                     'button1' => array(
                         'type' => 'submit', 'name' => 'abort', 'value' => '1', 'state' => '',
@@ -322,7 +322,7 @@ class mod_groupformation_grouping_controller
 
             case 3 :
                 $settingsgroupview->assign('status', array(
-                    get_string('statusGrupping3', 'groupformation'), 1));
+                    get_string('grouping_status_3', 'groupformation'), 1));
                 $settingsgroupview->assign('buttons', array(
                     'button1' => array(
                         'type' => 'submit', 'name' => 'start', 'value' => '0', 'state' => 'disabled',
@@ -341,7 +341,7 @@ class mod_groupformation_grouping_controller
 
             case 4 :
                 $settingsgroupview->assign('status', array(
-                    get_string('statusGrupping4', 'groupformation'), 0));
+                    get_string('grouping_status_4', 'groupformation'), 0));
                 $settingsgroupview->assign('buttons', array(
                     'button1' => array(
                         'type' => 'submit', 'name' => 'start', 'value' => '0', 'state' => 'disabled',
@@ -361,14 +361,14 @@ class mod_groupformation_grouping_controller
 
             case 5 :
                 $settingsgroupview->assign('status', array(
-                    get_string('statusGrupping5', 'groupformation'), 0));
+                    get_string('grouping_status_5', 'groupformation'), 0));
                 $settingsgroupview->assign('buttons', array(
                     'button1' => array(
                         'type' => 'submit', 'name' => 'start', 'value' => '0', 'state' => 'disabled',
                         'text' => get_string('grouping_start', 'groupformation')),
                     'button2' => array(
                         'type' => 'submit', 'name' => 'delete', 'value' => '1', 'state' => '',
-                        'text' => get_string('moodlegrouping_delete', 'groupformation')),
+                        'text' => get_string('grouping_delete_moodle_groups', 'groupformation')),
                     'button3' => array(
                         'type' => 'submit', 'name' => 'adopt', 'value' => '0', 'state' => 'disabled',
                         'text' => get_string('grouping_adopt', 'groupformation')),
@@ -553,7 +553,7 @@ class mod_groupformation_grouping_controller
         $url = new moodle_url ('/mod/groupformation/grouping_view.php', array(
             'id' => $this->cmid));
 //        $settingsgroupview->assign('status', array(
-//            get_string('statusGrupping1', 'groupformation'), 0));
+//            get_string('grouping_status_1', 'groupformation'), 0));
         $settingsgroupview->assign('buttons', array(
             'button1' => array(
                 'id' => 'submit_groups', 'type' => 'submit', 'name' => 'save_edit', 'value' => '1', 'state' => '',

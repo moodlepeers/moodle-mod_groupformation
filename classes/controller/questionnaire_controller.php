@@ -456,7 +456,7 @@ class mod_groupformation_questionnaire_controller
             }
 
             if ($this->usermanager->is_completed($this->userid) || !$this->store->is_questionnaire_available()) {
-                echo '<div class="alert" id="commited_view">' . get_string('questionnaire_commited', 'groupformation') .
+                echo '<div class="alert" id="commited_view">' . get_string('questionnaire_committed', 'groupformation') .
                     '</div>';
             }
 
