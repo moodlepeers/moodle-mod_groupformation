@@ -386,7 +386,9 @@ class mod_groupformation_grouping_controller
 
         $enrolledstudents = mod_groupformation_util::get_users($this->groupformationid);
 
-        $count = count($enrolledstudents);
+        $users = mod_groupformation_job_manager::get_users($this->groupformationid);
+
+        $count = count($users[0])+count($users[1]);
 
         $settingsgroupview->assign('student_count', $count);
         $settingsgroupview->assign('cmid', $this->cmid);

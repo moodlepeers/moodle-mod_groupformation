@@ -234,7 +234,7 @@ class mod_groupformation_job_manager {
         foreach ($enrolledstudents as $userid) {
             if ($usermanager->is_completed($userid)) {
                 $allanswers [] = $userid;
-            } else if ($groupingsetting) {
+            } else if ($groupingsetting && $usermanager->get_number_of_answers($userid)>0) {
                 $someanswers [] = $userid;
             } else {
                 $noorsomeanswers [] = $userid;
@@ -243,7 +243,7 @@ class mod_groupformation_job_manager {
 
         $groupalusers = $allanswers;
 
-        if ($store->get_grouping_setting()) {
+        if ($groupingsetting) {
             $randomusers = $someanswers;
         } else {
             $randomusers = $noorsomeanswers;
@@ -270,6 +270,7 @@ class mod_groupformation_job_manager {
 
         // Assign users.
         $users = self::get_users($groupformationid, $job, $store);
+        var_dump($users);
 
         if (is_null($users)) {
             return $cohorts;

@@ -111,14 +111,10 @@ if ($CFG->debug === 32767) { //true) {
 //$job = null;
 //
 //$job = $jm::get_job($groupformation->id);
-//$aborted = \mod_groupformation_job_manager::is_job_aborted($job);
-//
-////var_dump($aborted);
-//
 //
 //if (!is_null($job)) {
 //    $result = $jm::do_groupal($job);
-//    //var_dump($result);
+//    var_dump($result);
 //    // $saved = $jm::save_result($job,$result);
 //}
 
