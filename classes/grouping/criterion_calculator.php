@@ -776,12 +776,11 @@ class mod_groupformation_criterion_calculator
             $group = null;
             $course = null;
 
-            if (!(count($groupandcompleted) < 3 || is_null($groupvalues))) {
+            if (count($groupandcompleted) >= 2 &&  !is_null($groupvalues)) {
                 $group = $groupvalues[$label]['values'][0];
             }
 
-            // var_dump($coursevalues);
-            if (!(count($courseandcompleted) < 3 || is_null($coursevalues))) {
+            if (count($courseandcompleted) >=2 && !is_null($coursevalues)) {
                 $course = $coursevalues[$label]['values'][0];
             }
 
