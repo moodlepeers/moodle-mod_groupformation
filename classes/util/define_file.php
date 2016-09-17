@@ -253,7 +253,7 @@ class mod_groupformation_data {
     );
 
     private $participant_code = false;
-    private $import_export_enabled = false;
+    private $import_export_enabled = true;
     private $math_prep_course_mode = false;
     private $all_answers_required = false;
 
