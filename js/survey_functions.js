@@ -11,6 +11,14 @@
      $('#invisible_topics_inputs').hide();
 
 
+     $(".maxgroupsizenotreached_header").click(function(){
+         // $(".maxgroupsizenotreached_body").toggle("slow");
+     });
+
+     $(".groupsbuilt_header").click(function(){
+         // $(".groupsbuilt_body").toggle("slow");
+     });
+
 
     //get the widths of all navigation li's
     var menuWidths = $('#accordion li').map(function(i) {

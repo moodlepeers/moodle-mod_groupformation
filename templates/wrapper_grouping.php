@@ -34,17 +34,17 @@
         <?php echo $this->_['grouping_statistics']; ?>
     </div>
 
-    <div class="gf_pad_header_small">
+    <div class="maxgroupsizenotreached_header gf_pad_header_small">
         <?php echo get_string('max_group_size_not_reached', 'groupformation'); ?>
     </div>
-    <div class="gf_pad_content">
+    <div class="maxgroupsizenotreached_body gf_pad_content">
         <?php echo $this->_['grouping_incomplete_groups']; ?>
     </div>
 
-    <div class="gf_pad_header_small">
+    <div class="groupsbuilt_header gf_pad_header_small">
         <?php echo get_string('group_overview', 'groupformation'); ?>
     </div>
-    <div class="gf_pad_content">
+    <div class="groupsbuilt_body gf_pad_content">
         <?php echo $this->_['grouping_generated_groups']; ?>
     </div>
 </div>
