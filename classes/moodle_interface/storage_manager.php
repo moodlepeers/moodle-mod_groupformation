@@ -1018,6 +1018,22 @@ class mod_groupformation_storage_manager {
     }
 
     /**
+     * Returns questions for a user in randomized order (with user-specific seed)
+     *
+     * @param $category
+     * @param $userid
+     * @return array
+     */
+    public function get_questions_randomized_for_user($category,$userid){
+        $questions = array_values($this->get_questions($category));
+
+        srand($userid);
+        usort($questions,function($a,$b){return rand(-1,1);});
+
+        return $questions;
+    }
+
+    /**
      * Returns question by position
      */
     public function get_question_by_position($category,$position){

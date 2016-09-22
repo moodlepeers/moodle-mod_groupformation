@@ -31,12 +31,12 @@ class mod_groupformation_range_question {
      * @param $hasanswer
      */
     public function print_html($q, $category, $qnumber, $hasanswer, $highlight_missing_answers) {
-        $question = $q [1];
-        $options = $q [2];
+        $question = $q ['question'];
+        $options = $q ['options'];
 
         $answer = 0;
-        if ($hasanswer && $q [3] != -1) {
-            $answer = $q [3];
+        if ($hasanswer && $q ['answer'] != -1) {
+            $answer = $q ['answer'];
             echo '<tr>';
             echo '<th scope="row">' . $question . '</th>';
         } else if (!$hasanswer && $highlight_missing_answers){

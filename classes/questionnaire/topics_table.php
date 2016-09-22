@@ -31,7 +31,7 @@ class mod_groupformation_topics_table {
      * @param $qnumber
      */
     public function print_html($q, $category, $qnumber) {
-        $question = $q[1];
+        $question = $q['question'];
 
         echo '<li id="' . $category . $qnumber . '"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' .
             $question . '</li>';

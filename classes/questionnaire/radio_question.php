@@ -31,12 +31,12 @@ class mod_groupformation_radio_question {
      * @param $hasanswer
      */
     public function print_html($q, $category, $qnumber, $hasanswer, $highlight_missing_answers) {
-        $question = $q[1];
-        $options = $q[2];
+        $question = $q['question'];
+        $options = $q['options'];
 
         $answer = -1;
         if ($hasanswer) {
-            $answer = $q[3];
+            $answer = $q['answer'];
         }
 
         if ($answer == -1 && $highlight_missing_answers) {

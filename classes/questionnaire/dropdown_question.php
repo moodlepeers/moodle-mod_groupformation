@@ -31,16 +31,16 @@ class mod_groupformation_dropdown_question {
      * @param $hasanswer
      */
     public function print_html($q, $category, $questionnumber, $hasanswer,$highlight_missing_answers) {
-        $question = $q [1];
-        $options = $q [2];
+        $question = $q ['question'];
+        $options = $q ['options'];
         $answer = -1;
         $questioncounter = 1;
 
         if ($hasanswer) {
-            $answer = $q [3];
+            $answer = $q ['answer'];
         }
 
-        if ($hasanswer && $q [3] != -1) {
+        if ($hasanswer && $q ['answer'] != -1) {
             echo '<tr>';
             echo '<th scope="row">' . $question . '</th>';
         } else if (!$hasanswer && $highlight_missing_answers){

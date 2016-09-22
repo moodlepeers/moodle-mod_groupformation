@@ -122,8 +122,15 @@ if (has_capability('mod/groupformation:onlystudent', $context) &&
     $status = $usermanager->get_answering_status($userid);
     if ($status == 0 || $status == -1) {
         if ($inarray) {
-
-            if ($category == 'knowledge') {
+            if ($category == 'topic') {
+                for ($i = 1; $i <= $number; $i++) {
+                    $temp = $category . $i;
+                    $para_temp = optional_param($temp, null, PARAM_ALPHANUM);
+                    if (isset ($para_temp)) {
+                        $usermanager->save_answer($userid, $category, $para_temp, $i);
+                    }
+                }
+            } else if ($category == 'knowledge') {
                 for ($i = 1; $i <= $number; $i++) {
                     $tempvalidaterangevalue = $category . $i . '_valid';
                     $temp = $category . $i;
@@ -135,13 +142,33 @@ if (has_capability('mod/groupformation:onlystudent', $context) &&
                     }
                 }
             } else {
-                for ($i = 1; $i <= $number; $i++) {
-                    $temp = $category . $i;
+                $questions = $store->get_questions_randomized_for_user($category,$userid);
+
+                foreach ($questions as $question){
+                    $temp = $category . $question->questionid;
                     $para_temp = optional_param($temp, null, PARAM_ALPHANUM);
-                    if (isset ($para_temp)) {
-                        $usermanager->save_answer($userid, $category, $para_temp, $i);
+                    if (isset($para_temp)){
+                        $usermanager->save_answer($userid, $category, $para_temp, $question->questionid);
                     }
                 }
+//
+//                for ($i = 0; $i <= count($questions); $i++){
+//                    $temp = $category . strval($i+1);
+//                    $para_temp = optional_param($temp, null, PARAM_ALPHANUM);
+//
+//                    if (isset($para_temp)){
+//
+//                    }
+//                }
+//
+//                for ($i = 1; $i <= $number; $i++) {
+//
+//                    $temp = $category . $i;
+//                    $para_temp = optional_param($temp, null, PARAM_ALPHANUM);
+//                    if (isset ($para_temp)) {
+//                        $usermanager->save_answer($userid, $category, $para_temp, $i);
+//                    }
+//                }
                 // --- Mathevorkurs
                 if ($data->all_answers_required() && $usermanager->get_number_of_answers( $userid, $category ) != $number) {
                     $go = false;

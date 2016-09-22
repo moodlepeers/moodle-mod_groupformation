@@ -270,7 +270,7 @@ class mod_groupformation_job_manager {
 
         // Assign users.
         $users = self::get_users($groupformationid, $job, $store);
-        var_dump($users);
+        //var_dump($users);
 
         if (is_null($users)) {
             return $cohorts;
