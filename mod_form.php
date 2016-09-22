@@ -439,7 +439,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
             <div class="col_m_50"><label>
             <input type="radio" name="group_opt" id="group_opt_size" value="group_size" checked="checked" />
             ' . get_string('maxmembers', 'groupformation') . '</label>
-            <input type="number" class="group_opt" id="group_size" min="0" max="100" value="0" /></div>
+            <input type="number" class="group_opt" id="group_size" min="0" value="0" /></div>
             ' .
             (($data->is_math_prep_course_mode()) ? '' : '<div class="col_m_50">
                 <label>
