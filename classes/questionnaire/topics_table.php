@@ -26,14 +26,13 @@ class mod_groupformation_topics_table {
     /**
      * Print HTML for topics table
      *
-     * @param $q
+     * @param $question
      * @param $category
-     * @param $qnumber
+     * @param $questionid
      */
-    public function print_html($q, $category, $qnumber) {
-        $question = $q['question'];
+    public function print_html($question, $category, $questionid) {
 
-        echo '<li id="' . $category . $qnumber . '"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' .
+        echo '<li id="' . $category . $questionid . '"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' .
             $question . '</li>';
 
     }

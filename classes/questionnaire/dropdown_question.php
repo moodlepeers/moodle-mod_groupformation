@@ -25,25 +25,20 @@ class mod_groupformation_dropdown_question {
     /**
      * Print HTML of drop-down inputs
      *
-     * @param $q
      * @param $category
-     * @param $questionnumber
-     * @param $hasanswer
+     * @param $questionid
+     * @param $question
+     * @param $options
+     * @param $answer
+     * @param $highlightmissinganswers
      */
-    public function print_html($q, $category, $questionnumber, $hasanswer,$highlight_missing_answers) {
-        $question = $q ['question'];
-        $options = $q ['options'];
-        $answer = -1;
+    public function print_html($category, $questionid, $question, $options, $answer, $highlightmissinganswers) {
         $questioncounter = 1;
 
-        if ($hasanswer) {
-            $answer = $q ['answer'];
-        }
-
-        if ($hasanswer && $q ['answer'] != -1) {
+        if ($answer != -1) {
             echo '<tr>';
             echo '<th scope="row">' . $question . '</th>';
-        } else if (!$hasanswer && $highlight_missing_answers){
+        } else if ($highlightmissinganswers){
             echo '<tr class="noAnswer">';
             echo '<th scope="row">' . $question . '</th>';
         } else{
@@ -52,7 +47,7 @@ class mod_groupformation_dropdown_question {
         }
 
         echo '<td class="center">
-				<select name="' . $category . $questionnumber . '" id="' . $category . $questionnumber . '">';
+				<select name="' . $category . $questionid . '" id="' . $category . $questionid . '">';
         echo '<option value="0"> - </option>';
         foreach ($options as $option) {
             if ($answer == $questioncounter) {

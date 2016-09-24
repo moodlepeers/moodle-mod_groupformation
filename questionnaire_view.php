@@ -151,24 +151,6 @@ if (has_capability('mod/groupformation:onlystudent', $context) &&
                         $usermanager->save_answer($userid, $category, $para_temp, $question->questionid);
                     }
                 }
-//
-//                for ($i = 0; $i <= count($questions); $i++){
-//                    $temp = $category . strval($i+1);
-//                    $para_temp = optional_param($temp, null, PARAM_ALPHANUM);
-//
-//                    if (isset($para_temp)){
-//
-//                    }
-//                }
-//
-//                for ($i = 1; $i <= $number; $i++) {
-//
-//                    $temp = $category . $i;
-//                    $para_temp = optional_param($temp, null, PARAM_ALPHANUM);
-//                    if (isset ($para_temp)) {
-//                        $usermanager->save_answer($userid, $category, $para_temp, $i);
-//                    }
-//                }
                 // --- Mathevorkurs
                 if ($data->all_answers_required() && $usermanager->get_number_of_answers( $userid, $category ) != $number) {
                     $go = false;

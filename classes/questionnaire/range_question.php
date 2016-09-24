@@ -25,21 +25,19 @@ class mod_groupformation_range_question {
     /**
      * Print HTML of range inputs
      *
-     * @param $q
      * @param $category
-     * @param $qnumber
-     * @param $hasanswer
+     * @param $questionid
+     * @param $question
+     * @param $options
+     * @param $answer
+     * @param $highlightmissinganswers
      */
-    public function print_html($q, $category, $qnumber, $hasanswer, $highlight_missing_answers) {
-        $question = $q ['question'];
-        $options = $q ['options'];
+    public function print_html($category, $questionid, $question, $options, $answer, $highlightmissinganswers) {
 
-        $answer = 0;
-        if ($hasanswer && $q ['answer'] != -1) {
-            $answer = $q ['answer'];
+        if ($answer != -1) {
             echo '<tr>';
             echo '<th scope="row">' . $question . '</th>';
-        } else if (!$hasanswer && $highlight_missing_answers){
+        } else if ($highlightmissinganswers){
             echo '<tr class="noAnswer">';
             echo '<th scope="row">' . $question . '</th>';
         } else{
@@ -50,9 +48,9 @@ class mod_groupformation_range_question {
         echo '<td data-title="' . min(array_keys($options)) . ' = ' . $options [min(array_keys($options))] . ', ' .
             max(array_keys($options)) . ' = ' . $options [max(array_keys($options))] . '" class="range">';
         echo '<span class="">' . min(array_keys($options)) . '</span>';
-        echo '<input type="range" name="' . $category . $qnumber . '" class="gf_range_inputs" min="0" max="';
+        echo '<input type="range" name="' . $category . $questionid . '" class="gf_range_inputs" min="0" max="';
         echo max(array_keys($options)) . '" value="' . $answer . '" />';
-        echo '<span class="">' . max(array_keys($options)) . '</span><input type="text" name="' . $category . $qnumber;
+        echo '<span class="">' . max(array_keys($options)) . '</span><input type="text" name="' . $category . $questionid;
         echo '_valid" value="0" style="display:none;"/></td>';
         echo '</tr>';
     }

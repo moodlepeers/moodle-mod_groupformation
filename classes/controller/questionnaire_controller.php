@@ -26,7 +26,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/radio_qu
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/topics_table.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/range_question.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/dropdown_question.php');
-require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/question_table_header.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/question_table.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
@@ -37,8 +37,7 @@ if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
 }
 
-class mod_groupformation_questionnaire_controller
-{
+class mod_groupformation_questionnaire_controller {
     private $status;
     private $numbers = array();
     private $categories = array();
@@ -88,7 +87,10 @@ class mod_groupformation_questionnaire_controller
         $this->currentcategoryposition = max($this->currentcategoryposition - 2, 0);
     }
 
-    public function not_go_on(){
+    /**
+     * Regulates not going on and highlighting missing answers
+     */
+    public function not_go_on() {
         $this->currentcategoryposition = max($this->currentcategoryposition - 1, 0);
         $this->highlight_missing_answers = true;
     }
@@ -103,13 +105,11 @@ class mod_groupformation_questionnaire_controller
         if (!is_null($category)) {
             $categories = $this->store->get_categories();
             $pos = array_search($category, $categories);
-
             return 100.0 * ((1.0 * $pos) / count($categories));
         }
 
         $total = 0;
         $sub = 0;
-
         $temp = 0;
 
         foreach ($this->numbers as $num) {
@@ -119,7 +119,6 @@ class mod_groupformation_questionnaire_controller
                     $sub++;
                 }
             }
-
             $temp++;
         }
 
@@ -135,7 +134,6 @@ class mod_groupformation_questionnaire_controller
         if (!$this->store->catalog_table_not_set()) {
             $this->numbers = $this->store->get_numbers($this->categories);
         }
-
         $this->status = $this->usermanager->get_answering_status($userid);
     }
 
@@ -164,17 +162,18 @@ class mod_groupformation_questionnaire_controller
      * Returns question in current language or possible default language
      *
      * @param int $i
+     * @param int $version
      * @return stdClass
      */
-    public function get_question($i,$version) {
-        $record = $this->store->get_catalog_question($i, $this->currentcategory, $this->lang,$version);
+    public function get_question($i, $version) {
+        $record = $this->store->get_catalog_question($i, $this->currentcategory, $this->lang, $version);
 
         if (empty ($record)) {
             if ($this->lang != 'en') {
-                $record = $this->store->get_catalog_question($i, $this->currentcategory,$version);
+                $record = $this->store->get_catalog_question($i, $this->currentcategory, $this->lang, $version);
             } else {
                 $lang = $this->store->get_possible_language($this->currentcategory);
-                $record = $this->store->get_catalog_question($i, $this->currentcategory,$version);
+                $record = $this->store->get_catalog_question($i, $this->currentcategory, $lang, $version);
             }
         }
 
@@ -220,20 +219,17 @@ class mod_groupformation_questionnaire_controller
 
             $this->hasanswer = $this->usermanager->has_answers($this->userid, $this->currentcategory);
 
-            $version = groupformation_get_catalog_version($this->currentcategory);
-
             if ($this->is_knowledge() || $this->is_topics()) {
-                // ---------------------------------------------------------------------------------------------------------
                 $temp = $this->store->get_knowledge_or_topic_values($this->currentcategory);
                 $xmlcontent = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>';
                 $values = mod_groupformation_util::xml_to_array($xmlcontent);
 
                 $text = '';
 
-                $type = 'type_knowledge';
+                $type = 'range';
 
                 if ($this->is_topics()) {
-                    $type = 'type_topics';
+                    $type = 'topics';
                 }
 
                 $options = $options = array(
@@ -243,11 +239,13 @@ class mod_groupformation_questionnaire_controller
                 $questionsfirst = array();
                 $answerposition = array();
 
+                $i = 1;
                 foreach ($values as $value) {
                     $question = array();
                     $question ['type'] = $type;
                     $question ['question'] = $text . $value;
                     $question ['options'] = $options;
+
                     if ($this->hasanswer) {
                         $answer =
                             $this->usermanager->get_single_answer($this->userid, $this->currentcategory, $position);
@@ -258,10 +256,13 @@ class mod_groupformation_questionnaire_controller
                         }
                         $answerposition [$answer] = $position - 1;
                         $position++;
+                    }else{
+                        $question ['answer'] = -1;
                     }
-                    $question ['questionid'] = $value;
+                    $question ['questionid'] = $i;
 
                     $questionsfirst [] = $question;
+                    $i++;
                 }
 
                 $l = count($answerposition);
@@ -275,13 +276,10 @@ class mod_groupformation_questionnaire_controller
                 } else {
                     $questions = $questionsfirst;
                 }
-                // ---------------------------------------------------------------------------------------------------------
             } else if ($this->is_points()) {
-                // ---------------------------------------------------------------------------------------------------------
+                $question_records = $this->store->get_questions_randomized_for_user($this->currentcategory, $this->userid);
 
-                $question_records = $this->store->get_questions_randomized_for_user($this->currentcategory,$this->userid);
-
-                foreach($question_records as $record){
+                foreach ($question_records as $record) {
 
                     $question = array();
 
@@ -293,38 +291,33 @@ class mod_groupformation_questionnaire_controller
                         return null;
                     } else {
 
-                        $question ['type'] = 'type_points';
+                        $question ['type'] = 'range';
                         $question ['question'] = $record->question;
-                        $question ['options'] = $options = $options = array(
+                        $question ['questionid'] = $record->questionid;
+                        $question ['options'] = array(
                             $this->store->get_max_points() => get_string('excellent', 'groupformation'),
                             0 => get_string('bad', 'groupformation'));
-                        if ($this->hasanswer) {
-                            $answer =
-                                $this->usermanager->get_single_answer($this->userid, $this->currentcategory, $record->questionid);
-                            if ($answer != false) {
-                                $question ['answer'] = $answer;
-                            } else {
-                                $question ['answer'] = -1;
-                            }
+
+                        $answer = $this->usermanager->get_single_answer($this->userid, $this->currentcategory, $record->questionid);
+                        if ($answer != false) {
+                            $question ['answer'] = $answer;
+                        } else {
+                            $question ['answer'] = -1;
                         }
-                        $question ['questionid'] = $record->questionid;
                     }
 
                     $questions [] = $question;
                 }
 
-                // ---------------------------------------------------------------------------------------------------------
             } else {
-                // ---------------------------------------------------------------------------------------------------------
-                $question_records = $this->store->get_questions_randomized_for_user($this->currentcategory,$this->userid);
+                $question_records = $this->store->get_questions_randomized_for_user($this->currentcategory, $this->userid);
 
-                foreach($question_records as $question_record){
-                    $question = $this->prepare_question($question_record->questionid,$question_record);
+                foreach ($question_records as $question_record) {
+                    $question = $this->prepare_question( $question_record);
 
                     $questions [] = $question;
                 }
 
-                // ---------------------------------------------------------------------------------------------------------
             }
 
             return $questions;
@@ -334,10 +327,11 @@ class mod_groupformation_questionnaire_controller
     /**
      * Returns question array constructed by question record
      *
+     *
      * @param unknown $record
      * @return multitype:number NULL multitype:string Ambigous <number, mixed>
      */
-    public function prepare_question($i, $record) {
+    public function prepare_question($record) {
         $question = array();
         if (count($record) == 0) {
             echo '<div class="alert">This questionnaire site is neither available in your favorite language nor in english!</div>';
@@ -347,19 +341,19 @@ class mod_groupformation_questionnaire_controller
 
             $question ['type'] = $record->type;
             $question ['question'] = $record->question;
+            $question ['questionid'] = $record->questionid;
+
             $temp = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $record->options . ' </OPTIONS>';
             $question ['options'] = mod_groupformation_util::xml_to_array($temp);
 
-            if ($this->hasanswer) {
-                $answer = $this->usermanager->get_single_answer($this->userid, $this->currentcategory, $i);
+            $answer = $this->usermanager->get_single_answer($this->userid, $this->currentcategory, $record->questionid);
 
-                if ($answer != false) {
-                    $question ['answer'] = intval($answer);
-                } else {
-                    $question ['answer'] = -1;
-                }
+            if ($answer != false) {
+                $question ['answer'] = intval($answer);
+            } else {
+                $question ['answer'] = -1;
             }
-            $question ['questionid'] = $record->questionid;
+
         }
         return $question;
     }
@@ -424,12 +418,8 @@ class mod_groupformation_questionnaire_controller
         echo '		<input type="hidden" name="category" value="no"/>';
         echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
 
-        $activityid = optional_param('id', false, PARAM_INT);
-        if ($activityid) {
-            echo '	<input type="hidden" name="id" value="' . $activityid . '"/>';
-        } else {
-            echo '	<input type="hidden" name="id" value="' . $this->groupformationid . '"/>';
-        }
+        $activityid = optional_param('id', $this->groupformationid, PARAM_INT);
+        echo '	<input type="hidden" name="id" value="' . $activityid . '"/>';
 
         if (has_capability('mod/groupformation:editsettings', $this->context)) {
             echo '<div class="alert col_m_100 questionaire_hint">' .
@@ -499,23 +489,21 @@ class mod_groupformation_questionnaire_controller
     /**
      * Prints table with questions
      *
-     * @param unknown $questions
+     * @param array $questions
      * @param unknown $percent
      */
     public function print_questions($questions, $percent) {
-        $tabletype = $questions [0]['type'];
-        $headeroptarray = $questions [0] ['options'];
-        $category = $this->currentcategory;
-        $header = new mod_groupformation_question_table_header ();
-        $range = new mod_groupformation_range_question ();
-        $radio = new mod_groupformation_radio_question ();
-        $dropdown = new mod_groupformation_dropdown_question ();
-        $topics = new mod_groupformation_topics_table ();
 
         echo '<form style="width:100%; float:left;" action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) .
             '" method="post" autocomplete="off">';
 
         if (!is_null($questions) && count($questions) != 0) {
+
+            $tabletype = $questions [0]['type'];
+            $headeroptarray = $questions [0] ['options'];
+            $category = $this->currentcategory;
+            $table = new mod_groupformation_question_table ();
+            $topics = new mod_groupformation_topics_table ();
 
             // Here is the actual category and groupformationid is sent hidden.
             echo '<input type="hidden" name="category" value="' . $category . '"/>';
@@ -524,73 +512,33 @@ class mod_groupformation_questionnaire_controller
 
             echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
 
-            $activityid = optional_param('id', false, PARAM_INT);
+            $activityid = optional_param('id', $this->groupformationid, PARAM_INT);
 
-            if ($activityid) {
-                echo '<input type="hidden" name="id" value="' . $activityid . '"/>';
-            } else {
-                echo '<input type="hidden" name="id" value="' . $this->groupformationid . '"/>';
-            }
+            echo '<input type="hidden" name="id" value="' . $activityid . '"/>';
 
             echo ' <h4 class="view_on_mobile">' . get_string('category_' . $category, 'groupformation') . '</h4>';
 
-            // Print the Header of a table or unordered list.
-            $header->print_html($category, $tabletype, $headeroptarray);
-
-            $hasanswer = count($questions [0]) == 5;
-            $hastopicnumbers = count($questions [0]) == 5;
-
-            // Each question with inputs.
-            $i = 1;
+            // Print the header of a table or unordered list.
+            $table->print_header($category, $tabletype, $headeroptarray);
 
             foreach ($questions as $q) {
+                $questionid = $q['questionid'];
+                $question = $q ['question'];
+                $options = $q ['options'];
+                $answer = $q ['answer'];
                 $type = $q['type'];
 
-                if ($type == 'dropdown') {
-                    $dropdown->print_html($q, $category, $i, $hasanswer, $this->highlight_missing_answers);
+                if ($type == 'topics') {
+                    $topics->print_html($question, $category, $answer + 1);
+                } else {
+                    $name = 'mod_groupformation_' . $type . '_question';
+                    $object = new $name();
+                    $object->print_html($category, $questionid, $question, $options, $answer, $this->highlight_missing_answers);
                 }
-
-                if ($type == 'radio') {
-                    $radio->print_html($q, $category, $q['questionid'], $hasanswer, $this->highlight_missing_answers);
-                }
-
-                if ($type == 'type_topics') {
-                    if ($hastopicnumbers) {
-                        $topics->print_html($q, $category, $q ['answer'] + 1);
-                    } else {
-                        $topics->print_html($q, $category, $i);
-                    }
-                }
-
-                if ($type == 'type_knowledge') {
-                    $range->print_html($q, $category, $i, $hasanswer, $this->highlight_missing_answers);
-                }
-
-                if ($type == 'type_points') {
-                    $range->print_html($q, $category, $q['questionid'], $hasanswer, $this->highlight_missing_answers);
-                }
-
-                if ($type == 'range') {
-                    $range->print_html($q, $category, $i, $hasanswer, $this->highlight_missing_answers);
-                }
-                $i++;
             }
 
-            // Closing the table or unordered list.
-            if ($tabletype == 'type_topics') {
-                // Close unordered list.
-                echo '</ul>';
-
-                echo '<div id="invisible_topics_inputs">
-                            </div>';
-            } else {
-                // Close tablebody and close table.
-                echo ' </tbody>
-		                  </table>';
-            }
-
-            // Reset the Question Number, so each HTML table starts with 0.
-            $i = 1;
+            // Print the footer of a table or unordered list.
+            $table->print_footer($tabletype);
         }
 
         $this->print_action_buttons();

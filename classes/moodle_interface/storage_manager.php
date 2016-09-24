@@ -258,8 +258,6 @@ class mod_groupformation_storage_manager {
     public function get_possible_language($category) {
         global $DB;
 
-        // $table = 'groupformation_' . $category;
-        // TODO
         $table = 'groupformation_question';
 
         $lang = $DB->get_field($table, 'language', array('category' => $category), IGNORE_MULTIPLE);
@@ -338,18 +336,12 @@ class mod_groupformation_storage_manager {
      */
     public function get_catalog_question($i, $category = 'general', $lang = 'en', $version = null) {
         global $DB;
-        $table = "groupformation_" . $category;
-        // TODO
+
         $table = 'groupformation_question';
         $return = $DB->get_record($table, array(
             'language' => $lang, 'category' => $category,
             'position' => $i, 'version' => $version
         ));
-
-        // $return = $DB->get_record($table, array(
-        //     'language' => $lang,
-        //     'position' => $i
-        // ));
 
         return $return;
     }
