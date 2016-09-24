@@ -1265,6 +1265,91 @@ function xmldb_groupformation_upgrade($oldversion) {
     	upgrade_mod_savepoint(true, 2016090700, 'groupformation');
     }
 
+    if ($oldversion < 2016092400) {
+
+        // Define table groupformation_team to be dropped.
+        $table = new xmldb_table('groupformation_team');
+
+        // Conditionally launch drop table for groupformation_team.
+        if ($dbman->table_exists($table)) {
+            $dbman->drop_table($table);
+        }
+
+        // Define table groupformation_motivation to be dropped.
+        $table = new xmldb_table('groupformation_motivation');
+
+        // Conditionally launch drop table for groupformation_motivation.
+        if ($dbman->table_exists($table)) {
+            $dbman->drop_table($table);
+        }
+
+        // Define table groupformation_grade to be dropped.
+        $table = new xmldb_table('groupformation_grade');
+
+        // Conditionally launch drop table for groupformation_grade.
+        if ($dbman->table_exists($table)) {
+            $dbman->drop_table($table);
+        }
+
+        // Define table groupformation_points to be dropped.
+        $table = new xmldb_table('groupformation_points');
+
+        // Conditionally launch drop table for groupformation_points.
+        if ($dbman->table_exists($table)) {
+            $dbman->drop_table($table);
+        }
+
+        // Define table groupformation_learning to be dropped.
+        $table = new xmldb_table('groupformation_learning');
+
+        // Conditionally launch drop table for groupformation_learning.
+        if ($dbman->table_exists($table)) {
+            $dbman->drop_table($table);
+        }
+
+        // Define table groupformation_character to be dropped.
+        $table = new xmldb_table('groupformation_character');
+
+        // Conditionally launch drop table for groupformation_character.
+        if ($dbman->table_exists($table)) {
+            $dbman->drop_table($table);
+        }
+
+        // Define table groupformation_general to be dropped.
+        $table = new xmldb_table('groupformation_general');
+
+        // Conditionally launch drop table for groupformation_general.
+        if ($dbman->table_exists($table)) {
+            $dbman->drop_table($table);
+        }
+
+        // Define table groupformation_srl to be dropped.
+        $table = new xmldb_table('groupformation_srl');
+
+        // Conditionally launch drop table for groupformation_srl.
+        if ($dbman->table_exists($table)) {
+            $dbman->drop_table($table);
+        }
+
+        // Define table groupformation_self to be dropped.
+        $table = new xmldb_table('groupformation_self');
+
+        // Conditionally launch drop table for groupformation_self.
+        if ($dbman->table_exists($table)) {
+            $dbman->drop_table($table);
+        }
+
+        // Define table groupformation_sellmo to be dropped.
+        $table = new xmldb_table('groupformation_sellmo');
+
+        // Conditionally launch drop table for groupformation_sellmo.
+        if ($dbman->table_exists($table)) {
+            $dbman->drop_table($table);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2016092400, 'groupformation');
+    }
 
 
     return true;
