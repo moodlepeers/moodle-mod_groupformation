@@ -570,4 +570,55 @@ class mod_groupformation_questionnaire_controller {
 
         echo '</div>';
     }
+
+    /**
+     * Saves answers for user
+     *
+     * @param $category
+     * @return bool
+     */
+    public function save_answers($category){
+        $go = true;
+        $number = $this->store->get_number($category);
+        if ($category == 'topic') {
+            for ($i = 1; $i <= $number; $i++) {
+                $temp = $category . $i;
+                $para_temp = optional_param($temp, null, PARAM_ALPHANUM);
+                if (isset ($para_temp)) {
+                    $this->usermanager->save_answer($this->userid, $category, $para_temp, $i);
+                }
+            }
+            if ($this->data->all_answers_required() && $this->usermanager->get_number_of_answers($this->userid, $category ) != $number) {
+                $go = false;
+            }
+        } else if ($category == 'knowledge') {
+            for ($i = 1; $i <= $number; $i++) {
+                $tempvalidaterangevalue = $category . $i . '_valid';
+                $temp = $category . $i;
+                $para_tempvalidaterangevalue = optional_param($tempvalidaterangevalue, null, PARAM_ALPHANUM);
+                $para_temp = optional_param($temp, null, PARAM_ALPHANUM);
+
+                if (isset ($para_temp) && $para_tempvalidaterangevalue == '1') {
+                    $this->usermanager->save_answer($this->userid, $category, $para_temp, $i);
+                }
+            }
+            if ($this->data->all_answers_required() && $this->usermanager->get_number_of_answers( $this->userid, $category ) != $number) {
+                $go = false;
+            }
+        } else {
+            $questions = $this->store->get_questions_randomized_for_user($category,$this->userid);
+
+            foreach ($questions as $question){
+                $temp = $category . $question->questionid;
+                $para_temp = optional_param($temp, null, PARAM_ALPHANUM);
+                if (isset($para_temp)){
+                    $this->usermanager->save_answer($this->userid, $category, $para_temp, $question->questionid);
+                }
+            }
+            if ($this->data->all_answers_required() && $this->usermanager->get_number_of_answers( $this->userid, $category ) != $number) {
+                $go = false;
+            }
+        }
+        return $go;
+    }
 }
