@@ -740,7 +740,7 @@ class mod_groupformation_criterion_calculator
      * @param $courseusers
      * @return array
      */
-    public function get_eval_infos($criterion, $labels, $userid, $groupusers, $courseusers)
+    public function get_eval_infos($criterion, $labels, $userid, $groupusers = array(), $courseusers = array())
     {
         $completedusers = array_keys($this->usermanager->get_completed_by_answer_count('userid', 'userid'));
         $groupandcompleted = array_intersect($completedusers, $groupusers);
@@ -841,7 +841,7 @@ class mod_groupformation_criterion_calculator
      */
     private function get_captions($label, $mode,$values, $setfinaltext, $completed, $coursesize)
     {
-        $percent = round($completed / $coursesize * 100, 2);
+        $percent = round($completed / ($coursesize+1) * 100, 2);
         $a = new stdClass();
         $a->percent = $percent;
         $a->completed = $completed;
