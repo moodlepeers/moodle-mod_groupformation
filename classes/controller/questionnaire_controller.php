@@ -481,6 +481,10 @@ class mod_groupformation_questionnaire_controller {
 
             $this->print_final_page();
 
+            if ($this->usermanager->has_answered_everything($this->userid)){
+                $this->usermanager->set_evaluation_values($this->userid);
+            }
+
             // Log access to page.
             groupformation_info($this->userid, $this->groupformationid, '<view_questionnaire_final_page>');
         }

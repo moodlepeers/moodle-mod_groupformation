@@ -123,6 +123,7 @@ class mod_groupformation_participant_parser {
      * Builds Participants array using a parser (at the end)
      *
      * @param $users
+     * @param $specs
      * @return array
      */
     public function build_participants($users,$specs = null) {
