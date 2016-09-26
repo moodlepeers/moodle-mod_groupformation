@@ -1378,6 +1378,26 @@ function xmldb_groupformation_upgrade($oldversion) {
     }
 
 
+    if ($oldversion < 2016092600) {
+
+        // Changing type of field criterion on table groupformation_user_values to char.
+        $table = new xmldb_table('groupformation_user_values');
+        $field = new xmldb_field('criterion', XMLDB_TYPE_CHAR, '40', null, XMLDB_NOTNULL, null, null, 'userid');
+
+        // Launch change of type for field criterion.
+        $dbman->change_field_type($table, $field);
+
+        // Changing type of field label on table groupformation_user_values to char.
+        $table = new xmldb_table('groupformation_user_values');
+        $field = new xmldb_field('label', XMLDB_TYPE_CHAR, '40', null, XMLDB_NOTNULL, null, null, 'criterion');
+
+        // Launch change of type for field label.
+        $dbman->change_field_type($table, $field);
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2016092600, 'groupformation');
+    }
+
 
     return true;
 }
