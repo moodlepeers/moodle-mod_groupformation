@@ -147,7 +147,7 @@ class mod_groupformation_data {
         ),
         "general" => array(
             "category" => "general",
-            "scenarios" => array(),
+            "scenarios" => array(1,2),
             "evaluation" => false,
             "labels" => array(
                 "language" => array(
@@ -203,7 +203,7 @@ class mod_groupformation_data {
         ),
         "knowledge" => array(
             "category" => "knowledge",
-            "scenarios" => array(1, 2),
+            "scenarios" => array(),
             "evaluation" => false,
             "labels" => array(
                 "one" => array(
@@ -211,6 +211,7 @@ class mod_groupformation_data {
                     "evaluation" => false,
                     "questionids" => null,
                     "significant_id_only" => false,
+                    "separate_dimensions" => false,
                     "cutoffs" => null,
                 ),
                 "two" => array(
@@ -218,6 +219,7 @@ class mod_groupformation_data {
                     "evaluation" => false,
                     "questionids" => null,
                     "significant_id_only" => false,
+                    "separate_dimensions" => true,
                     "cutoffs" => null,
                 ),
             ),
@@ -241,7 +243,7 @@ class mod_groupformation_data {
             'grade',
             'points',
             'character',
-            'motivation',
+            'learning',
             'team',
 //            'srl',
 //            'sellmo',
