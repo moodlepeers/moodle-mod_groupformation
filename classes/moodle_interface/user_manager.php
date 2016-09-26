@@ -649,9 +649,6 @@ class mod_groupformation_user_manager
 
         foreach ($criteria as $criterion) {
             $labels = $this->data->get_criterion_specification($criterion);
-            if (false && !is_null($labels)) {
-                $labels = $cc->filter_criterion_specs_for_eval($criterion, $labels);
-            }
             if (!is_null($labels) && count($labels) > 0) {
                 $uservalues = $cc->get_values_for_user($criterion, $userid, $labels);
                 foreach($uservalues as $label => $values){

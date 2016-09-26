@@ -28,6 +28,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/criterion_cal
 class mod_groupformation_participant_parser {
     private $groupformationid;
     private $criterioncalculator;
+    private $usermanager;
     private $store;
     private $data;
 
@@ -38,6 +39,7 @@ class mod_groupformation_participant_parser {
     public function __construct($groupformationid) {
         $this->groupformationid = $groupformationid;
         $this->store = new mod_groupformation_storage_manager ($groupformationid);
+        $this->usermanager = new mod_groupformation_user_manager($this->groupformationid);
         $this->criterioncalculator = new mod_groupformation_criterion_calculator ($groupformationid);
         $this->data = new mod_groupformation_data();
     }
@@ -158,9 +160,13 @@ class mod_groupformation_participant_parser {
             $object = new stdClass ();
             $object->id = $user;
 
+
             foreach ($criteriaspecs as $criterion => $spec) {
                 if (in_array($scenario, $spec['scenarios'])) {
-                    $points = $this->criterioncalculator->get_values_for_user($criterion, $user, $spec);
+                    $points = array();
+                    if ($this->usermanager->has_answered_everything($user)){
+                        $points = $this->criterioncalculator->read_values_for_user($criterion, $user, $spec);
+                    }
                     foreach ($spec['labels'] as $label => $lspec) {
                         $value = array();
                         $vs = $points[$label]["values"];

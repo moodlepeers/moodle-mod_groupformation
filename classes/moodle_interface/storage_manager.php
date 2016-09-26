@@ -275,13 +275,13 @@ class mod_groupformation_storage_manager {
         global $DB;
 
         if ($category == 'topic' || $category == 'knowledge') {
-            return $DB->get_field('groupformation_q_settings', $category . 'valuesnumber', array(
+            return intval($DB->get_field('groupformation_q_settings', $category . 'valuesnumber', array(
                 'groupformation' => $this->groupformationid
-            ));
+            )));
         } else {
-            return $DB->get_field('groupformation_q_version', 'numberofquestion', array(
+            return intval($DB->get_field('groupformation_q_version', 'numberofquestion', array(
                 'category' => $category
-            ));
+            )));
         }
     }
 

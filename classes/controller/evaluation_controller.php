@@ -96,6 +96,7 @@ class mod_groupformation_evaluation_controller {
             $cc = new mod_groupformation_criterion_calculator($this->groupformationid);
 
             $eval = $cc->get_eval($userid, $groupusers, $courseusers);
+
             if (is_null($eval) || count($eval) == 0) {
                 $this->view->assign('eval_show_text', true);
                 $this->view->assign('eval_text', get_string('no_evaluation_text', 'groupformation'));

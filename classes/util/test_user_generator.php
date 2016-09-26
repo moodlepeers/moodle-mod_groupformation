@@ -23,6 +23,7 @@
  */
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/controller/grouping_controller.php');
 
 class mod_groupformation_test_user_generator {
@@ -60,6 +61,8 @@ class mod_groupformation_test_user_generator {
         global $COURSE, $DB;
 
         $store = new mod_groupformation_storage_manager ($groupformationid);
+
+        $usermanager = new mod_groupformation_user_manager($groupformationid);
 
         $version = $store->get_version();
 
@@ -158,6 +161,11 @@ class mod_groupformation_test_user_generator {
                         }
                     }
                     $DB->insert_records("groupformation_answer", $allrecords);
+
+
+                    if ($usermanager->has_answered_everything($userid)){
+                        $usermanager->set_evaluation_values($userid);
+                    }
                 } catch (Exception $e) {
                     $this->echowarn("Error while saving answers status for user.");
 
