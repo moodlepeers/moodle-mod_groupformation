@@ -220,10 +220,19 @@ class mod_groupformation_test_user_generator {
                     $DB->delete_records("groupformation_started", array(
                         'userid' => $userid
                     ));
+                    
+                    $DB->delete_records('groupformation_user_values', array(
+                        'userid' => $userid
+                    ));
+
+                    $DB->delete_records("groupformation_group_users", array(
+                        'userid' => $userid
+                    ));
 
                     $DB->delete_records("user_enrolments", array(
                         'userid' => $userid
                     ));
+
                 } catch (Exception $e) {
                     $this->echowarn('User with ID=' . $userid . ' has not been deleted.');
 

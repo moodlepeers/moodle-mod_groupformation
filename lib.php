@@ -189,6 +189,12 @@ function groupformation_delete_instance($id) {
         'groupformation' => $id));
     $DB->delete_records('groupformation_jobs', array(
         'groupformationid' => $id));
+    $DB->delete_records('groupformation_user_values', array(
+        'groupformationid' => $id));
+    $DB->delete_records('groupformation_groups', array(
+        'groupformation' => $id));
+    $DB->delete_records('groupformation_group_users', array(
+        'groupformation' => $id));
     groupformation_grade_item_delete($groupformation);
 
     return true;
