@@ -275,7 +275,6 @@ class mod_groupformation_mod_form extends moodleform_mod {
                     <div class="col_m_50">
                         <h5>' . get_string('preview', 'groupformation') . '</h5>
                     <div class="col_m_100">' .
-            /* '<h4 class="view_on_mobile">'.get_string('knowledge_question','groupformation').'</h4>'. */
 
             '<table class="responsive-table">
             <colgroup><col class="firstCol">
@@ -604,8 +603,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
             array(
                 get_string('choose_evaluationmethod', 'groupformation'),
                 get_string('grades', 'groupformation'), get_string('points', 'groupformation'),
-                get_string('justpass', 'groupformation'), get_string('noevaluation', 'groupformation')),
-            null);
+                get_string('justpass', 'groupformation'), get_string('noevaluation', 'groupformation')), null);
 
         $mform->addRule('evaluationmethod', get_string('evaluationmethod_error', 'groupformation'), 'required', null,
             'client');
@@ -620,6 +618,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
         $mform->addElement('checkbox', 'emailnotifications', get_string('emailnotifications', 'groupformation'));
         $mform->setDefault('emailnotifications', true);
         // Close div tag for non-js related content.
+
         $mform->addElement('html', '</div id="non-js-content">');
     }
 }

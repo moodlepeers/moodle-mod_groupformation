@@ -19,7 +19,7 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 ?>
-<?php foreach ($this->_ as $entry) { ?>
+<?php foreach ($this->_ as $entry):?>
     <div class="grid row_highlight">
         <div class="col_m_75"><?php echo $entry['groupname']; ?>
             - <?php echo get_string('number_member', 'groupformation') . ' ' ?>
@@ -41,4 +41,4 @@
         </div>
 
     </div>
-<?php } ?>
+<?php endforeach;

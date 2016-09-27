@@ -19,8 +19,6 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 ?>
-
-<!--        TODO style="display:none;" rauskommentieren zm debuggen-->
 <div style="display:none;">
             <textarea id="groups_string" name="groups_string" cols="35"
                       rows="<?php echo count($this->_) - 2 ?>">
@@ -42,8 +40,6 @@
             </div>
             <div class="col_s_100 gf_group_links">
                 <div class="add_membs_block">
-                    <!--                        <img id="add_to_group_img" src="-->
-                    <?php //global $CFG; echo $CFG->dirroot . '/mod/groupformation/img/plus.png' ?><!--" class="add_membs_to_g" />-->
                     <span class="add_membs_to_g">+</span>
                 </div>
                 <ul id="<?php echo $entry['id']; ?>" class="memb_list">

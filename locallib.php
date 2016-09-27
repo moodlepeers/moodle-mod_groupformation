@@ -55,8 +55,6 @@ function groupformation_add_jquery($PAGE, $filename = null) {
  */
 function groupformation_log($userid, $groupformationid, $message, $level = 'info') {
     return false;
-    // $logging_controller = new mod_groupformation_logging_controller ();
-    // return $logging_controller->handle ( $userid, $groupformationid, $message, $level );
 }
 
 /**
@@ -237,33 +235,32 @@ function groupformation_import_questionnaire_configuration($filename = 'question
     if (file_exists($xmlfile)) {
         $xml = simplexml_load_file($xmlfile);
 
-        $current_version = groupformation_get_current_questionnaire_version();
-        $new_version = intval(trim($xml['version']));
+        $currentversion = groupformation_get_current_questionnaire_version();
+        $newversion = intval(trim($xml['version']));
 
-
-        $new_categories = array();
+        $newcategories = array();
 
         foreach ($xml->categories->category as $cat) {
-            $new_categories[] = trim($cat);
+            $newcategories[] = trim($cat);
         }
 
-        $new_languages = array();
+        $newlanguages = array();
 
         foreach ($xml->languages->language as $lang) {
-            $new_languages[] = trim($lang);
+            $newlanguages[] = trim($lang);
         }
 
-        if ($new_version > $current_version) {
+        if ($newversion > $currentversion) {
 
             $xmlloader = new mod_groupformation_xml_loader();
 
             $number = 0;
 
-            foreach ($new_categories as $category) {
+            foreach ($newcategories as $category) {
 
-                $prev_version = groupformation_get_catalog_version($category);
+                $prevversion = groupformation_get_catalog_version($category);
 
-                foreach ($new_languages as $language) {
+                foreach ($newlanguages as $language) {
 
                     $data = $xmlloader->save($category, $language);
 
@@ -271,7 +268,7 @@ function groupformation_import_questionnaire_configuration($filename = 'question
                     $numberofquestions = $data[1];
                     $questions = $data[2];
 
-                    if ($version > $prev_version || !$prev_version) {
+                    if ($version > $prevversion || !$prevversion) {
                         groupformation_delete_all_catalog_questions($category, $language);
 
                         $DB->insert_records('groupformation_question', $questions);
@@ -281,7 +278,7 @@ function groupformation_import_questionnaire_configuration($filename = 'question
                 $number += $numberofquestions;
             }
 
-            groupformation_add_catalog_version('questionnaire', $number, $new_version, false);
+            groupformation_add_catalog_version('questionnaire', $number, $newversion, false);
 
         }
 

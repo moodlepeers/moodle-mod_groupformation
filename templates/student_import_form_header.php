@@ -24,4 +24,12 @@
     <div class="gf_pad_content">
         <p><?php echo get_string('import_form_description', 'groupformation'); ?>
 
-        <p><?php echo ($this->_['file_error']) ? '<div class="beta_version_warning"><p>' . get_string('file_error', 'groupformation') . '</p></div>' : '' ?></p>
+        <p>
+            <?php if ($this->_['file_error']): ?>
+                <div class="beta_version_warning">
+                    <p>
+                    <?php echo get_string('file_error', 'groupformation')?>
+                    </p>
+                </div>
+            <?php endif; ?>
+        </p>

@@ -73,7 +73,6 @@ $PAGE->set_url('/mod/groupformation/view.php', array(
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 
-//$begin = 1;
 if (data_submitted() && confirm_sesskey()) {
     $consent = optional_param('consent', null, PARAM_BOOL);
     $begin = optional_param('begin', null, PARAM_INT);
@@ -94,8 +93,6 @@ if ($begin == 1) {
         if (isset($participantcode) && $participantcode !== '') {
             if ($usermanager->validate_participant_code($participantcode)) {
                 $usermanager->register_participant_code($userid, $participantcode);
-            } else {
-                //die();
             }
         }
         $returnurl = new moodle_url ('/mod/groupformation/questionnaire_view.php', array(

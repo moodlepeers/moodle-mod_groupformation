@@ -34,9 +34,13 @@
     </div>
 
     <div class="col_m_33 bp_align_right-middle">
-        <!--<span class="toolt" tooltip="Aktivität stoppen, um Gruppen zu bilden." style="margin-right:0.7em;"></span>-->
-        <button type="<?php echo $this->_['button']['type']; ?>" name="<?php echo $this->_['button']['name']; ?>"
+        <button type="<?php echo $this->_['button']['type']; ?>"
+                name="<?php echo $this->_['button']['name']; ?>"
                 value="<?php echo $this->_['button']['value']; ?>"
-                class="gf_button gf_button_pill gf_button_small"<?php echo $this->_['button']['state']; ?> ><?php echo $this->_['button']['text']; ?></button>
+                class="gf_button gf_button_pill gf_button_small"
+            <?php echo $this->_['button']['state']; ?>
+        >
+            <?php echo $this->_['button']['text']; ?>
+        </button>
     </div>
 </div>
