@@ -95,6 +95,10 @@ class mod_groupformation_evaluation_controller {
 
             $cc = new mod_groupformation_criterion_calculator($this->groupformationid);
 
+            if ($this->usermanager->has_answered_everything($userid) && !$this->usermanager->has_evaluation_values($userid)){
+                $this->usermanager->set_evaluation_values($userid);
+            }
+
             $eval = $cc->get_eval($userid, $groupusers, $courseusers);
 
             if (is_null($eval) || count($eval) == 0) {
