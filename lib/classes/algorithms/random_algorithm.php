@@ -110,8 +110,6 @@ class lib_groupal_random_algorithm implements lib_groupal_ialgorithm {
             $incomplete_part = 0;
         }
 
-        // var_dump ( $complete_part, $incomplete_part );
-
         // NOW WE HAVE
         // $complete_part = number of participants which form complete groups
         // and

@@ -85,7 +85,6 @@ class mod_groupformation_criterion_calculator {
                 foreach ($labels as $label => $specs) {
                     if (array_key_exists($this->scenario, $specs['scenarios']) && (!$eval || (array_key_exists('evaluation', $spec) && $spec['evaluation']))) {
                         if (array_key_exists('significant_id_only', $specs) && $specs['significant_id_only']) {
-                            //var_dump($criterion,$label);
                             $variance = 0;
                             $position = 1;
                             $total = 0;
@@ -650,20 +649,12 @@ class mod_groupformation_criterion_calculator {
 
         $evalinfos = array();
 
-        // var_dump($userid,$groupusers,$courseusers);
-
         $users = array_merge(array(intval($userid)), $groupandcompleted, $courseandcompleted);
         $users = array_unique($users);
 
-        // var_dump($users);
-
         $uservalues = $this->read_values_for_user($criterion, $userid, $labels);
 
-        // var_dump($uservalues);
-
         $usersvalues = $this->get_values_for_users($criterion, $users, $labels);
-
-        // var_dump($usersvalues);
 
         $usersvalues = $this->compute_z_score($usersvalues);
 
@@ -695,8 +686,6 @@ class mod_groupformation_criterion_calculator {
             $array["captions"] = $this->get_captions($label, $mode, $array["values"], $setfinaltext, $completed, $coursesize);
             $array["cutoff"] = $this->get_eval_text($criterion, $label, $spec["cutoffs"], $user);
             $evalinfos[] = $array;
-            // var_dump($array);
-
         }
 
         return $evalinfos;

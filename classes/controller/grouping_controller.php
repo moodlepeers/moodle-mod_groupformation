@@ -633,12 +633,6 @@ class mod_groupformation_grouping_controller
                 $v = array_merge($v, $array);
             }
 
-            // $string = '{"21":[],"22":[12,8,16,20],"23":[13,9,17,21],"24":[14,6,22,18],"25":[15,5,4,10]}';
-            // $array = json_decode($string,true);
-
-            // $this->groupsmanager->update_groups($array);
-            // var_dump(json_encode($groups_array));
-
             $groups_string = json_encode($groups_array);
 
             $generatedgroupsview->assign('groups_string', $groups_string);
