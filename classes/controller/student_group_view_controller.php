@@ -66,7 +66,7 @@ class mod_groupformation_student_group_view_controller {
 
         $options = null;
         $topics = $this->store->ask_for_topics();
-        if ($topics){
+        if ($topics) {
             $xmlcontent = $this->store->get_knowledge_or_topic_values('topic');
             $xmlcontent = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $xmlcontent . ' </OPTIONS>';
             $options = mod_groupformation_util::xml_to_array($xmlcontent);
@@ -79,11 +79,11 @@ class mod_groupformation_student_group_view_controller {
             $groupname = $name;
             $othermembers = $this->groupsmanager->get_group_members($userid);
 
-            $pos = strrpos($groupname,"_");
-            $number = substr($groupname,$pos+1,strlen($groupname)-$pos);
+            $pos = strrpos($groupname, "_");
+            $number = substr($groupname, $pos + 1, strlen($groupname) - $pos);
 
-            if ($topics){
-                $topicinfo = get_string("topic_group_info","groupformation").": <b>".$options[$number-1]."</b>";
+            if ($topics) {
+                $topicinfo = get_string("topic_group_info", "groupformation") . ": <b>" . $options[$number - 1] . "</b>";
             }
 
             if (count($othermembers) > 0) {

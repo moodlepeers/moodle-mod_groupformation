@@ -128,7 +128,7 @@ class mod_groupformation_participant_parser {
      * @param $specs
      * @return array
      */
-    public function build_participants($users,$specs = null) {
+    public function build_participants($users, $specs = null) {
         if (count($users) == 0) {
             return array();
         }
@@ -139,12 +139,12 @@ class mod_groupformation_participant_parser {
 
         $criteriaspecs = array();
 
-        if (is_null($specs)){
+        if (is_null($specs)) {
             $labels = $this->store->get_label_set();
             foreach ($labels as $label) {
                 $criteriaspecs[$label] = $this->data->get_criterion_specification($label);
             }
-        }else{
+        } else {
             $criteriaspecs = $specs;
         }
 
@@ -164,7 +164,7 @@ class mod_groupformation_participant_parser {
             foreach ($criteriaspecs as $criterion => $spec) {
                 if (in_array($scenario, $spec['scenarios'])) {
                     $points = array();
-                    if ($this->usermanager->has_answered_everything($user)){
+                    if ($this->usermanager->has_answered_everything($user)) {
                         $points = $this->criterioncalculator->read_values_for_user($criterion, $user, $spec);
                     }
                     foreach ($spec['labels'] as $label => $lspec) {

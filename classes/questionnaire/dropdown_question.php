@@ -38,16 +38,16 @@ class mod_groupformation_dropdown_question {
         if ($answer != -1) {
             echo '<tr>';
             echo '<th scope="row">' . $question . '</th>';
-        } else if ($highlight){
+        } else if ($highlight) {
             echo '<tr class="noAnswer">';
             echo '<th scope="row">' . $question . '</th>';
-        } else{
+        } else {
             echo '<tr>';
             echo '<th scope="row">' . $question . '</th>';
         }
 
         echo '<td class="center">
-				<select name="' . $category . $questionid . '" id="' . $category . $questionid . '">';
+                <select name="' . $category . $questionid . '" id="' . $category . $questionid . '">';
         echo '<option value="0"> - </option>';
         foreach ($options as $option) {
             if ($answer == $questioncounter) {
@@ -60,7 +60,7 @@ class mod_groupformation_dropdown_question {
         }
 
         echo '</select>
-			</td>
-		</tr>';
+            </td>
+        </tr>';
     }
 }

@@ -89,8 +89,7 @@ class groupformation_solver_edmonds_karp extends topic_distributor {
         for ($i = 0; $i < $count; $i++) { // for each vertex v in vertices:
             if ($i == $from) {  // If v is source then weight[v] := 0 .
                 $dists[$i] = 0;
-            }
-            else {    // Else weight[v] := infinity .
+            } else {    // Else weight[v] := infinity .
                 $dists[$i] = INF;
             }
             $preds[$i] = null; // Predecessor[v] := null .

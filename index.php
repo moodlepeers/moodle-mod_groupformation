@@ -51,7 +51,7 @@ echo $OUTPUT->heading($strname);
 
 if (!$groupformations = get_all_instances_in_course('groupformation', $course)) {
     notice(get_string('nogroupformation', 'groupformation'),
-           new moodle_url('/course/view.php', array('id' => $course->id)));
+        new moodle_url('/course/view.php', array('id' => $course->id)));
 }
 
 $usesections = course_format_uses_sections($course->format);

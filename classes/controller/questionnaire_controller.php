@@ -256,7 +256,7 @@ class mod_groupformation_questionnaire_controller {
                         }
                         $answerposition [$answer] = $position - 1;
                         $position++;
-                    }else{
+                    } else {
                         $question ['answer'] = -1;
                     }
                     $question ['questionid'] = $i;
@@ -313,7 +313,7 @@ class mod_groupformation_questionnaire_controller {
                 $question_records = $this->store->get_questions_randomized_for_user($this->currentcategory, $this->userid);
 
                 foreach ($question_records as $question_record) {
-                    $question = $this->prepare_question( $question_record);
+                    $question = $this->prepare_question($question_record);
 
                     $questions [] = $question;
                 }
@@ -363,13 +363,13 @@ class mod_groupformation_questionnaire_controller {
      */
     public function print_action_buttons() {
         echo '<div class="grid">
-						<div class="col_m_100 questionaire_button_row">
-							<button type="submit" name="direction" value="0" class="gf_button gf_button_pill gf_button_small">' .
+                        <div class="col_m_100 questionaire_button_row">
+                            <button type="submit" name="direction" value="0" class="gf_button gf_button_pill gf_button_small">' .
             get_string('previous') . '</button>
-							<button type="submit" name="direction" value="1" class="gf_button gf_button_pill gf_button_small">' .
+                            <button type="submit" name="direction" value="1" class="gf_button gf_button_pill gf_button_small">' .
             get_string('next') . '</button>
-						</div>
-						</div>';
+                        </div>
+                        </div>';
     }
 
     /**
@@ -413,13 +413,13 @@ class mod_groupformation_questionnaire_controller {
     public function print_final_page() {
         echo '<div class="col_m_100"><h4>' . get_string('questionnaire_no_more_questions', 'groupformation') .
             '</h></div>';
-        echo '	<form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
+        echo '    <form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
 
-        echo '		<input type="hidden" name="category" value="no"/>';
+        echo '        <input type="hidden" name="category" value="no"/>';
         echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
 
         $activityid = optional_param('id', $this->groupformationid, PARAM_INT);
-        echo '	<input type="hidden" name="id" value="' . $activityid . '"/>';
+        echo '    <input type="hidden" name="id" value="' . $activityid . '"/>';
 
         if (has_capability('mod/groupformation:editsettings', $this->context)) {
             echo '<div class="alert col_m_100 questionaire_hint">' .
@@ -430,12 +430,12 @@ class mod_groupformation_questionnaire_controller {
             'id' => $this->cmid, 'do_show' => 'view'));
 
         echo '<div class="grid">';
-        echo '	<div class="questionaire_button_text">' .
+        echo '    <div class="questionaire_button_text">' .
             get_string('questionnaire_press_beginning_submit', 'groupformation') . '</div>';
-        echo '	<div class="col_m_100 questionaire_button_row">';
-        echo '		<a href=' . $url->out() . '><span class="gf_button gf_button_pill gf_button_small">' .
+        echo '    <div class="col_m_100 questionaire_button_row">';
+        echo '        <a href=' . $url->out() . '><span class="gf_button gf_button_pill gf_button_small">' .
             get_string('questionnaire_go_to_start', 'groupformation') . '</span></a>';
-        echo '	</div>';
+        echo '    </div>';
         echo '</div>';
 
         echo '</form>';
@@ -481,7 +481,7 @@ class mod_groupformation_questionnaire_controller {
 
             $this->print_final_page();
 
-            if ($this->usermanager->has_answered_everything($this->userid)){
+            if ($this->usermanager->has_answered_everything($this->userid)) {
                 $this->usermanager->set_evaluation_values($this->userid);
             }
 
@@ -558,7 +558,7 @@ class mod_groupformation_questionnaire_controller {
     public function print_progressbar($percent) {
         echo '<div class="progress">';
 
-        echo '	<div class="questionaire_progress-bar" role="progressbar" aria-valuenow="' . $percent .
+        echo '    <div class="questionaire_progress-bar" role="progressbar" aria-valuenow="' . $percent .
             '" aria-valuemin="0" aria-valuemax="100" style="width:' . $percent . '%"></div>';
 
         echo '</div>';
@@ -581,7 +581,7 @@ class mod_groupformation_questionnaire_controller {
      * @param $category
      * @return bool
      */
-    public function save_answers($category){
+    public function save_answers($category) {
         $go = true;
         $number = $this->store->get_number($category);
         if ($category == 'topic') {
@@ -592,7 +592,7 @@ class mod_groupformation_questionnaire_controller {
                     $this->usermanager->save_answer($this->userid, $category, $paratemp, $i);
                 }
             }
-            if ($this->data->all_answers_required() && $this->usermanager->get_number_of_answers($this->userid, $category ) != $number) {
+            if ($this->data->all_answers_required() && $this->usermanager->get_number_of_answers($this->userid, $category) != $number) {
                 $go = false;
             }
         } else if ($category == 'knowledge') {
@@ -606,20 +606,20 @@ class mod_groupformation_questionnaire_controller {
                     $this->usermanager->save_answer($this->userid, $category, $paratemp, $i);
                 }
             }
-            if ($this->data->all_answers_required() && $this->usermanager->get_number_of_answers( $this->userid, $category ) != $number) {
+            if ($this->data->all_answers_required() && $this->usermanager->get_number_of_answers($this->userid, $category) != $number) {
                 $go = false;
             }
         } else {
-            $questions = $this->store->get_questions_randomized_for_user($category,$this->userid);
+            $questions = $this->store->get_questions_randomized_for_user($category, $this->userid);
 
-            foreach ($questions as $question){
+            foreach ($questions as $question) {
                 $temp = $category . $question->questionid;
                 $paratemp = optional_param($temp, null, PARAM_ALPHANUM);
-                if (isset($paratemp)){
+                if (isset($paratemp)) {
                     $this->usermanager->save_answer($this->userid, $category, $paratemp, $question->questionid);
                 }
             }
-            if ($this->data->all_answers_required() && $this->usermanager->get_number_of_answers( $this->userid, $category ) != $number) {
+            if ($this->data->all_answers_required() && $this->usermanager->get_number_of_answers($this->userid, $category) != $number) {
                 $go = false;
             }
         }

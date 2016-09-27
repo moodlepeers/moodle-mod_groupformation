@@ -57,7 +57,7 @@ $store = new mod_groupformation_storage_manager ($groupformation->id);
 
 // Set data and viewStatus of groupingView, after possible db update.
 $controller = new mod_groupformation_grouping_controller ($groupformation->id, $cm);
-if ( (data_submitted()) && confirm_sesskey()){
+if ((data_submitted()) && confirm_sesskey()) {
     $start = optional_param('start', null, PARAM_BOOL);
     $abort = optional_param('abort', null, PARAM_BOOL);
     $adopt = optional_param('adopt', null, PARAM_BOOL);
@@ -66,17 +66,13 @@ if ( (data_submitted()) && confirm_sesskey()){
 
     if (isset ($start) && $start == 1) {
         $controller->start($course, $cm);
-    }
-    else if (isset ($abort) && $abort == 1) {
+    } else if (isset ($abort) && $abort == 1) {
         $controller->abort();
-    }
-    else if (isset ($adopt) && $adopt == 1) {
+    } else if (isset ($adopt) && $adopt == 1) {
         $controller->adopt();
-    }
-    else if (isset ($edit) && $edit == 1) {
+    } else if (isset ($edit) && $edit == 1) {
         $controller->edit($cm);
-    }
-    else if (isset ($delete) && $delete == 1) {
+    } else if (isset ($delete) && $delete == 1) {
         $controller->delete();
     }
     $returnurl = new moodle_url ('/mod/groupformation/grouping_view.php', array(
@@ -118,7 +114,7 @@ echo $OUTPUT->header();
 
 // Print the tabs.
 require('tabs.php');
-if (groupformation_get_current_questionnaire_version() > $store->get_version()){
+if (groupformation_get_current_questionnaire_version() > $store->get_version()) {
     echo '<div class="alert">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
 }
 if ($store->is_archived() && has_capability('mod/groupformation:editsettings', $context)) {
@@ -129,7 +125,7 @@ if ($store->is_archived() && has_capability('mod/groupformation:editsettings', $
     echo '<form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
 
     echo '<input type="hidden" name="id" value="' . $id . '"/>';
-    echo '<input type="hidden" name="sesskey" value="'.sesskey().'" />';
+    echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
 
     echo $controller->display();
 

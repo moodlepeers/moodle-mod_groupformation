@@ -79,9 +79,9 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_p
 
 /* --------- Hard Reset a pending groupformation job ---- */
 if ($reset_job) {
-	global $DB;
+    global $DB;
 
-	$DB->delete_records('groupformation_jobs', array('groupformationid' => $groupformation->id));
+    $DB->delete_records('groupformation_jobs', array('groupformationid' => $groupformation->id));
 }
 /* ----------- / Hard Reset a pending job -------------- */
 

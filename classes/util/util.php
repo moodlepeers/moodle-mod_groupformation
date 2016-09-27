@@ -55,11 +55,11 @@ class mod_groupformation_util {
     private static function get_js_for_info_text() {
         $s = "";
         $s .= '<script type="text/javascript">';
-        $s .= '		$(function() {';
-        $s .= '			$(\'.show\').click(function() {';
-        $s .= '				$(\'#info_text\').slideToggle();';
-        $s .= '	    	});';
-        $s .= '		});';
+        $s .= '        $(function() {';
+        $s .= '            $(\'.show\').click(function() {';
+        $s .= '                $(\'#info_text\').slideToggle();';
+        $s .= '            });';
+        $s .= '        });';
         $s .= '</script>';
 
         return $s;
@@ -216,12 +216,12 @@ class mod_groupformation_util {
      * @param $store
      * @return array
      */
-    public static function get_users($groupformationid = null,$store = null,$context = null, $job = null){
-        if (is_null($job)){
+    public static function get_users($groupformationid = null, $store = null, $context = null, $job = null) {
+        if (is_null($job)) {
             $job = mod_groupformation_job_manager::get_job($groupformationid);
         }
 
-        if (is_null($store)){
+        if (is_null($store)) {
             $store = new mod_groupformation_storage_manager($groupformationid);
         }
 
@@ -240,7 +240,7 @@ class mod_groupformation_util {
         } else {
             $enrolledstudents = array_keys(get_enrolled_users($context, 'mod/groupformation:onlystudent'));
             $enrolledprevusers = array_keys(get_enrolled_users($context, 'mod/groupformation:editsettings'));
-            $diff = array_diff($enrolledstudents,$enrolledprevusers);
+            $diff = array_diff($enrolledstudents, $enrolledprevusers);
             $enrolledstudents = $diff;
         }
         if (is_null($enrolledstudents) || count($enrolledstudents) <= 0) {

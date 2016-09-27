@@ -43,7 +43,7 @@ require_once($CFG->dirroot . '/mod/groupformation/lib/classes/optimizers/optimiz
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/xml_writers/participant_writer.php');
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/xml_writers/cohort_writer.php');
 
-class mod_groupformation_basic_grouping extends mod_groupformation_grouping{
+class mod_groupformation_basic_grouping extends mod_groupformation_grouping {
 
     private $groupformationid;
     private $usermanager;
@@ -105,7 +105,7 @@ class mod_groupformation_basic_grouping extends mod_groupformation_grouping{
         $randomkey = "random:1";
         $randomcohort = null;
 
-        if (count($users[1])>0){
+        if (count($users[1]) > 0) {
 
             $randomparticipants = $this->participantparser->build_empty_participants($users[1]);
             $randomcohort = $this->build_cohort($randomparticipants, $groupsizes[1], $randomkey);

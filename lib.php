@@ -83,7 +83,7 @@ function groupformation_add_instance(stdClass $groupformation, mod_groupformatio
 
     $groupformation->version = groupformation_get_current_questionnaire_version();
 
-        // Checks all fields and sets them properly.
+    // Checks all fields and sets them properly.
     $groupformation = groupformation_set_fields($groupformation);
 
     $id = $DB->insert_record('groupformation', $groupformation);

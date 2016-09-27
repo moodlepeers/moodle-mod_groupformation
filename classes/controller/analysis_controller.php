@@ -68,19 +68,21 @@ class mod_groupformation_analysis_controller {
      *
      * @param $switcher
      */
-    public function trigger_questionnaire($switcher){
+    public function trigger_questionnaire($switcher) {
 
-        switch($switcher){
+        switch ($switcher) {
             /**
              * Sets start time of questionnaire to now
              */
-            case 1: $this->store->open_questionnaire();
+            case 1:
+                $this->store->open_questionnaire();
                 break;
 
             /**
              * Sets end time of questionnaire to now
              */
-            case -1: $this->store->close_questionnaire();
+            case -1:
+                $this->store->close_questionnaire();
                 break;
         }
     }
@@ -234,27 +236,28 @@ class mod_groupformation_analysis_controller {
     }
 
     /** hot fix for answers */
-    public function fix_answers(){
+    public function fix_answers() {
         global $DB;
 
         $answers = $DB->get_records('groupformation_answer',
-            array('groupformation'=>$this->groupformationid, 'category'=>'srl')
+            array('groupformation' => $this->groupformationid, 'category' => 'srl')
         );
 
-        $map = array(1=>63,2=>64,3=>65,4=>66,5=>67,6=>68,7=>69,8=>70,9=>71,10=>72,11=>73,12=>74,13=>75,14=>76,15=>77,16=>78,17=>79,18=>80,19=>81,20=>82,21=>83,22=>84,23=>85,24=>86,25=>87,26=>88);
+        $map = array(1 => 63, 2 => 64, 3 => 65, 4 => 66, 5 => 67, 6 => 68, 7 => 69, 8 => 70, 9 => 71, 10 => 72, 11 => 73, 12 => 74, 13 => 75, 14 => 76, 15 => 77, 16 => 78, 17 => 79, 18 => 80, 19 => 81, 20 => 82, 21 => 83, 22 => 84, 23 => 85, 24 => 86, 25 => 87, 26 => 88);
 
-        foreach ($answers as $answer){
-            if (intval($answer->questionid) <= 26){
+        foreach ($answers as $answer) {
+            if (intval($answer->questionid) <= 26) {
                 $qid = $map[$answer->questionid];
                 if ($DB->record_exists('groupformation_answer',
-                    array('groupformation'=>$this->groupformationid, 'category'=>'srl','userid'=>$answer->userid,'questionid'=>$qid))){
+                    array('groupformation' => $this->groupformationid, 'category' => 'srl', 'userid' => $answer->userid, 'questionid' => $qid))
+                ) {
                     $DB->delete_records('groupformation_answer',
-                        array('groupformation'=>$this->groupformationid, 'category'=>'srl','userid'=>$answer->userid,'questionid'=>$answer->questionid));
-                }else{
+                        array('groupformation' => $this->groupformationid, 'category' => 'srl', 'userid' => $answer->userid, 'questionid' => $answer->questionid));
+                } else {
                     $answer->questionid = $qid;
-                    $DB->update_record('groupformation_answer',$answer,true);
+                    $DB->update_record('groupformation_answer', $answer, true);
                 }
-            }elseif (intval($answer->questionid) <= 63){
+            } elseif (intval($answer->questionid) <= 63) {
 
             }
         }

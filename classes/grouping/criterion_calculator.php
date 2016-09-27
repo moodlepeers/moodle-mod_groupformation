@@ -51,7 +51,7 @@ class mod_groupformation_criterion_calculator {
         $this->scenario = $this->store->get_scenario();
     }
 
-        /**
+    /**
      * Inverts given answer by considering maximum
      *
      * @param number $questionid
@@ -205,7 +205,7 @@ class mod_groupformation_criterion_calculator {
 
             $questionids = $spec['questionids'];
 
-            if (array_key_exists($this->scenario,$spec['scenarios'])) {
+            if (array_key_exists($this->scenario, $spec['scenarios'])) {
                 foreach (array_values($questionids) as $tempquestionid) {
                     $questionid = $tempquestionid;
                     if ($tempquestionid < 0) {
@@ -258,7 +258,7 @@ class mod_groupformation_criterion_calculator {
      * @return array
      */
     public function get_learning($userid, $specs = null) {
-        return $this->get_values('learning',$userid,$specs);
+        return $this->get_values('learning', $userid, $specs);
     }
 
     /**
@@ -456,7 +456,7 @@ class mod_groupformation_criterion_calculator {
      * @return array
      */
     public function get_team($userid, $specs = null) {
-        return $this->get_values('team',$userid,$specs);
+        return $this->get_values('team', $userid, $specs);
     }
 
     /**
@@ -771,17 +771,17 @@ class mod_groupformation_criterion_calculator {
     public function read_values_for_user($criterion, $userid) {
         global $DB;
 
-        $recs = $DB->get_records('groupformation_user_values',array('groupformationid'=>$this->groupformationid,'userid'=>$userid,'criterion'=>$criterion));
+        $recs = $DB->get_records('groupformation_user_values', array('groupformationid' => $this->groupformationid, 'userid' => $userid, 'criterion' => $criterion));
 
         $array = array();
-        foreach(array_values($recs) as $rec){
-            if (!array_key_exists($rec->label,$array)){
+        foreach (array_values($recs) as $rec) {
+            if (!array_key_exists($rec->label, $array)) {
                 $array[$rec->label] = array();
             }
-            if (!array_key_exists('values',$array[$rec->label])){
-                $array[$rec->label]['values']=array();
+            if (!array_key_exists('values', $array[$rec->label])) {
+                $array[$rec->label]['values'] = array();
             }
-            $array[$rec->label]['values'][$rec->dimension]=floatval($rec->value);
+            $array[$rec->label]['values'][$rec->dimension] = floatval($rec->value);
         }
 
         return $array;
@@ -799,7 +799,7 @@ class mod_groupformation_criterion_calculator {
         $usersvalues = array();
 
         foreach (array_values($users) as $userid) {
-            $usersvalues[$userid] = $this->read_values_for_user($criterion,$userid);
+            $usersvalues[$userid] = $this->read_values_for_user($criterion, $userid);
         }
 
         return $usersvalues;

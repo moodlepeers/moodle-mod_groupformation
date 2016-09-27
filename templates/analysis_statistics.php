@@ -20,21 +20,24 @@
  */
 ?>
 <div class="grid row_highlight">
-    <div class="col_m_100"><?php echo get_string('are', 'groupformation');?>
-        <b><?php echo ' '.$this->_['statistics_enrolled']; ?></b>
-        <?php echo ' '.(($this->_['statistics_enrolled']==1) ? get_string('students_available_single', 'groupformation') : get_string('students_available_multiple', 'groupformation')); ?></div>
+    <div class="col_m_100"><?php echo get_string('are', 'groupformation'); ?>
+        <b><?php echo ' ' . $this->_['statistics_enrolled']; ?></b>
+        <?php echo ' ' . (($this->_['statistics_enrolled'] == 1) ? get_string('students_available_single', 'groupformation') : get_string('students_available_multiple', 'groupformation')); ?>
+    </div>
 </div>
 <div class="grid row_highlight">
     <div class="col_m_100"><b><?php echo $this->_['statistics_processed']; ?></b>
-        <?php echo ($this->_['statistics_processed']==1) ? get_string('students_answered_single', 'groupformation') : get_string('students_answered_multiple', 'groupformation'); ?></div>
+        <?php echo ($this->_['statistics_processed'] == 1) ? get_string('students_answered_single', 'groupformation') : get_string('students_answered_multiple', 'groupformation'); ?>
+    </div>
 </div>
 <div class="grid row_highlight">
     <div class="col_m_100"><b><?php echo $this->_['statistics_submitted']; ?></b>
-        <?php echo ' '.($this->_['statistics_submitted']==1) ? get_string('students_committed_single', 'groupformation') : get_string('students_committed_multiple', 'groupformation'); ?></div>
+        <?php echo ' ' . ($this->_['statistics_submitted'] == 1) ? get_string('students_committed_single', 'groupformation') : get_string('students_committed_multiple', 'groupformation'); ?>
+    </div>
 </div>
 <div class="grid row_highlight">
-    <div class="col_m_100"><?php echo get_string('are_now', 'groupformation');?> <b>
-            <?php echo ' '.$this->_['statistics_submitted_complete']; ?></b>
-        <?php echo ' '.get_string('completed_questionnaire', 'groupformation');?></div>
+    <div class="col_m_100"><?php echo get_string('are_now', 'groupformation'); ?> <b>
+            <?php echo ' ' . $this->_['statistics_submitted_complete']; ?></b>
+        <?php echo ' ' . get_string('completed_questionnaire', 'groupformation'); ?></div>
 </div>
 

@@ -62,17 +62,17 @@
                         </p>
                     </div>
 
-                    <div><?php if ($this->_['participant_code_user'] === ''):?>
-                        <p>
-                            <?php echo get_string('participant_code_header', 'groupformation'); ?>
-                        </p>
-                        <p>
-                            <?php echo get_string('participant_code_rules', 'groupformation'); ?>
-                        </p>
-                        <p>
-                            <?php echo get_string('participant_code_example', 'groupformation'); ?>
-                        </p>
-                        <?php endif;?>
+                    <div><?php if ($this->_['participant_code_user'] === ''): ?>
+                            <p>
+                                <?php echo get_string('participant_code_header', 'groupformation'); ?>
+                            </p>
+                            <p>
+                                <?php echo get_string('participant_code_rules', 'groupformation'); ?>
+                            </p>
+                            <p>
+                                <?php echo get_string('participant_code_example', 'groupformation'); ?>
+                            </p>
+                        <?php endif; ?>
                         <p>
                             <?php echo get_string('participant_code_footer', 'groupformation'); ?>
                         </p>
@@ -83,7 +83,7 @@
                             <input type="text"
                                 <?php echo ($this->_['participant_code_user'] != '') ? 'checked disabled' : '' ?>
                                    name="participantcode"
-                                   value="<?php echo $this->_['participant_code_user'];?>"/>
+                                   value="<?php echo $this->_['participant_code_user']; ?>"/>
                         </p>
                     </div>
                 </div>

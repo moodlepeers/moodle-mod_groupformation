@@ -75,7 +75,7 @@ if ($groupformation->intro) {
         'groupformationintro');
 }
 
-if (groupformation_get_current_questionnaire_version() > $store->get_version()){
+if (groupformation_get_current_questionnaire_version() > $store->get_version()) {
     echo '<div class="alert">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
 }
 if ($store->is_archived()) {
@@ -84,7 +84,6 @@ if ($store->is_archived()) {
     $evaluator = new mod_groupformation_evaluation_controller($groupformation->id);
     echo $evaluator->render($userid);
 }
-
 
 
 echo $OUTPUT->footer();

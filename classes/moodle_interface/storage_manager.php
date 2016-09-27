@@ -50,7 +50,7 @@ class mod_groupformation_storage_manager {
     public function get_version() {
         global $DB;
 
-        return $DB->get_field('groupformation','version',array('id'=>$this->groupformationid));
+        return $DB->get_field('groupformation', 'version', array('id' => $this->groupformationid));
     }
 
     /**
@@ -520,7 +520,7 @@ class mod_groupformation_storage_manager {
     public function is_editable() {
         global $DB;
 
-        if (is_null($this->groupformationid) || $this->groupformationid == ''){
+        if (is_null($this->groupformationid) || $this->groupformationid == '') {
             return true;
         }
 
@@ -1000,10 +1000,10 @@ class mod_groupformation_storage_manager {
      * @param $version
      * @return array
      */
-    public function get_questions($category){
+    public function get_questions($category) {
         global $DB;
 
-        return $DB->get_records('groupformation_question',array('category'=>$category,'language'=>'en'));
+        return $DB->get_records('groupformation_question', array('category' => $category, 'language' => 'en'));
     }
 
     /**
@@ -1013,11 +1013,13 @@ class mod_groupformation_storage_manager {
      * @param $userid
      * @return array
      */
-    public function get_questions_randomized_for_user($category,$userid){
+    public function get_questions_randomized_for_user($category, $userid) {
         $questions = array_values($this->get_questions($category));
 
         srand($userid);
-        usort($questions,function($a,$b){return rand(-1,1);});
+        usort($questions, function ($a, $b) {
+            return rand(-1, 1);
+        });
 
         return $questions;
     }
@@ -1025,10 +1027,10 @@ class mod_groupformation_storage_manager {
     /**
      * Returns question by position
      */
-    public function get_question_by_position($category,$position){
+    public function get_question_by_position($category, $position) {
         global $DB;
 
-        return $DB->get_record('groupformation_question',array('category'=>$category,'language'=>'en','position'=>$position));
+        return $DB->get_record('groupformation_question', array('category' => $category, 'language' => 'en', 'position' => $position));
 
     }
 }

@@ -103,7 +103,7 @@ class mod_groupformation_student_overview_controller {
                 $this->groupformationstateinfo = array(
                     $this->get_availability_state());
                 $pc = $this->store->ask_for_participant_code();
-                $buttoncaption = ($pc)?"questionnaire_press_to_begin_participant_code":"questionnaire_press_to_begin";
+                $buttoncaption = ($pc) ? "questionnaire_press_to_begin_participant_code" : "questionnaire_press_to_begin";
                 $this->buttonsinfo = get_string($buttoncaption, 'groupformation');
                 $this->buttonsarray = array(
                     array(
@@ -128,7 +128,7 @@ class mod_groupformation_student_overview_controller {
                         'text' => get_string('edit')),
                     array(
                         'type' => 'submit', 'name' => 'begin', 'value' => '0',
-                        'state' => (($disabled)?'disabled':''),
+                        'state' => (($disabled) ? 'disabled' : ''),
                         'text' => get_string('questionnaire_submit', 'groupformation')),
                     array(
                         'type' => 'submit', 'name' => 'begin', 'value' => '-1',
@@ -306,9 +306,9 @@ class mod_groupformation_student_overview_controller {
             $surveyoptionsview->assign('participant_code', $this->store->ask_for_participant_code());
             $surveyoptionsview->assign('participant_code_user', $this->usermanager->get_participant_code($this->userid));
 
-            $surveyoptionsview->assign('consentheader',get_string('consent_header','groupformation'));
-            $surveyoptionsview->assign('consenttext',get_string('consent_message','groupformation'));
-            $surveyoptionsview->assign('consentvalue',$this->usermanager->get_consent($this->userid));
+            $surveyoptionsview->assign('consentheader', get_string('consent_header', 'groupformation'));
+            $surveyoptionsview->assign('consenttext', get_string('consent_message', 'groupformation'));
+            $surveyoptionsview->assign('consentvalue', $this->usermanager->get_consent($this->userid));
             $this->view->assign('student_overview_survey_options', $surveyoptionsview->load_template());
         } else {
             $this->view->assign('student_overview_survey_options', '');

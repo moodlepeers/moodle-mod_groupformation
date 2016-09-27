@@ -115,7 +115,7 @@ class lib_groupal_evaluator implements lib_groupal_ievaluator {
         }
 
         // Calculate avergae of NPIs
-        $avg = ((float) array_sum($arrayOfPerformanceIndices)) / count($arrayOfPerformanceIndices); // float.
+        $avg = ((float)array_sum($arrayOfPerformanceIndices)) / count($arrayOfPerformanceIndices); // float.
 
 
         // Calculate standard deviation   (which is all diffs of elements and avg squared and finally summed up.
@@ -125,7 +125,7 @@ class lib_groupal_evaluator implements lib_groupal_ievaluator {
             $sumOfQuadErrors += pow($diff, 2);
         }
 
-        $stdDev = (float) 0.0;
+        $stdDev = (float)0.0;
 
         // Standard deaviation of all npi values (NPIs) in one Groups.
         if (count($arrayOfPerformanceIndices) != 1) {
@@ -206,8 +206,7 @@ class lib_groupal_evaluator implements lib_groupal_ievaluator {
             $wd = $d * $c1->getWeight();
             if ($c1->getIsHomogeneous()) {
                 $homVal += $wd;
-            }
-            else {
+            } else {
                 $hetVal += $wd;
             }
         }

@@ -346,7 +346,7 @@ function groupformation_get_current_questionnaire_version() {
     }
 }
 
-function groupformation_get_catalog_version($category){
+function groupformation_get_catalog_version($category) {
     global $DB;
 
     $field = $DB->get_field('groupformation_q_version', 'version', array('category' => $category));

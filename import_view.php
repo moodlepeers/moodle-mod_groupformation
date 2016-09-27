@@ -35,7 +35,7 @@ $doshow = optional_param('do_show', 'import_export', PARAM_TEXT);
 // Import jQuery and js file.
 groupformation_add_jquery($PAGE, 'settings_functions.js');
 
-if ( data_submitted() && confirm_sesskey()){
+if (data_submitted() && confirm_sesskey()) {
     $id = optional_param('cmid', null, PARAM_INT);
 }
 
@@ -71,7 +71,7 @@ $PAGE->set_url('/mod/groupformation/import_view.php', array('id' => $cm->id, 'do
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 
-$cancel = optional_param('cancel',null,PARAM_BOOL);
+$cancel = optional_param('cancel', null, PARAM_BOOL);
 if (isset($cancel) && $cancel) {
     // Handle form cancel operation.
     $returnurl = new moodle_url('/mod/groupformation/import_export_view.php', array('id' => $id, 'do_show' => 'import_export'));
@@ -117,7 +117,7 @@ if (isset($cancel) && $cancel) {
     } else {
 
         // Render form for file upload.
-        $controller->render_form($mform,false);
+        $controller->render_form($mform, false);
 
     }
 }

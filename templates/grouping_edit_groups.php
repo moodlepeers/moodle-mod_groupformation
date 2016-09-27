@@ -21,35 +21,37 @@
 ?>
 
 <!--        TODO style="display:none;" rauskommentieren zm debuggen-->
-        <div style="display:none;">
+<div style="display:none;">
             <textarea id="groups_string" name="groups_string" cols="35"
                       rows="<?php echo count($this->_) - 2 ?>">
                 <?php echo $this->_['groups_string']; ?></textarea>
-        </div>
+</div>
 
 
-<?php $i=0;?>
-    <div class="gf_pad_content">
-<?php foreach ($this->_['generated_groups'] as $key => $entry) { ?>
+<?php $i = 0; ?>
+<div class="gf_pad_content">
+    <?php foreach ($this->_['generated_groups'] as $key => $entry) { ?>
 
-            <div id="<?php echo $i==0 ? 'first_group':`` ;?>" class="grid bottom_stripe">
-                <?php $i++;?>
-                <div class="col_s_100">
-                    <div class="group_params"><b><?php echo get_string('name_by_group', 'groupformation'); ?></b>
+        <div id="<?php echo $i == 0 ? 'first_group' : ``; ?>" class="grid bottom_stripe">
+            <?php $i++; ?>
+            <div class="col_s_100">
+                <div class="group_params"><b><?php echo get_string('name_by_group', 'groupformation'); ?></b>
                     <?php echo $entry['groupname']; ?></div>
-                    <div class="group_params"><b><?php echo get_string('groupsize', 'groupformation'); ?></b><span class="g_memb_counter"> </span></div>
-                </div>
-                <div class="col_s_100 gf_group_links">
-                    <div class="add_membs_block">
-<!--                        <img id="add_to_group_img" src="--><?php //global $CFG; echo $CFG->dirroot . '/mod/groupformation/img/plus.png' ?><!--" class="add_membs_to_g" />-->
-                        <span class="add_membs_to_g">+</span>
-                    </div>
-                    <ul id="<?php echo $entry['id']; ?>" class="memb_list">
-                        <?php foreach ($entry['group_members'] as $user) { ?>
-                            <?php echo '<li id="'. $user['id'] .'">' . $user['name'] . '</li>'; ?>
-                        <?php } ?>
-                    </ul>
-                </div>
+                <div class="group_params"><b><?php echo get_string('groupsize', 'groupformation'); ?></b><span
+                        class="g_memb_counter"> </span></div>
             </div>
-<?php } ?>
-    </div>
+            <div class="col_s_100 gf_group_links">
+                <div class="add_membs_block">
+                    <!--                        <img id="add_to_group_img" src="-->
+                    <?php //global $CFG; echo $CFG->dirroot . '/mod/groupformation/img/plus.png' ?><!--" class="add_membs_to_g" />-->
+                    <span class="add_membs_to_g">+</span>
+                </div>
+                <ul id="<?php echo $entry['id']; ?>" class="memb_list">
+                    <?php foreach ($entry['group_members'] as $user) { ?>
+                        <?php echo '<li id="' . $user['id'] . '">' . $user['name'] . '</li>'; ?>
+                    <?php } ?>
+                </ul>
+            </div>
+        </div>
+    <?php } ?>
+</div>

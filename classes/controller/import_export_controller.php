@@ -201,7 +201,7 @@ class mod_groupformation_import_export_controller {
         if (!$xml) {
             $errors = libxml_get_errors();
 
-            if (count($errors)>0){
+            if (count($errors) > 0) {
                 throw new InvalidArgumentException ("Wrong format");
             }
 
@@ -296,27 +296,27 @@ class mod_groupformation_import_export_controller {
         $this->view = new mod_groupformation_template_builder ();
         $this->view->set_template('wrapper_teacher_export');
 
-        $exportanswers = get_string('export_answers', 'groupformation').' ';
+        $exportanswers = get_string('export_answers', 'groupformation') . ' ';
         $exportanswersurl = $this->generate_export_url('answers');
         $this->view->assign('export_answers', $exportanswers);
         $this->view->assign('export_answers_url', $exportanswersurl);
 
-        $exportusers = get_string('export_users', 'groupformation').' ';
+        $exportusers = get_string('export_users', 'groupformation') . ' ';
         $exportusersurl = $this->generate_export_url('users');
         $this->view->assign('export_users', $exportusers);
         $this->view->assign('export_users_url', $exportusersurl);
 
-        $exportgroups = get_string('export_groups', 'groupformation').' ';
+        $exportgroups = get_string('export_groups', 'groupformation') . ' ';
         $exportgroupsurl = $this->generate_export_url('groups');
         $this->view->assign('export_groups', $exportgroups);
         $this->view->assign('export_groups_url', $exportgroupsurl);
 
-        $exportgroupusers = get_string('export_group_users', 'groupformation').' ';
+        $exportgroupusers = get_string('export_group_users', 'groupformation') . ' ';
         $exportgroupusersurl = $this->generate_export_url('group_users');
         $this->view->assign('export_group_users', $exportgroupusers);
         $this->view->assign('export_group_users_url', $exportgroupusersurl);
 
-        $exportlogging = get_string('export_logging', 'groupformation').' ';
+        $exportlogging = get_string('export_logging', 'groupformation') . ' ';
         $exportloggingurl = $this->generate_export_url('logging');
         $this->view->assign('export_logging', $exportlogging);
         $this->view->assign('export_logging_url', $exportloggingurl);

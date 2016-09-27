@@ -43,7 +43,7 @@ require_once($CFG->dirroot . '/mod/groupformation/lib/classes/optimizers/optimiz
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/xml_writers/participant_writer.php');
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/xml_writers/cohort_writer.php');
 
-class mod_groupformation_scientific_grouping extends mod_groupformation_grouping{
+class mod_groupformation_scientific_grouping extends mod_groupformation_grouping {
 
     private $groupformationid;
     private $usermanager;
@@ -79,16 +79,16 @@ class mod_groupformation_scientific_grouping extends mod_groupformation_grouping
                     "extraversion" => array(
                         "scenarios" => array(1 => false, 2 => false),
                         "evaluation" => true,
-                        "questionids" => array(12,-1,13,14,-15,16,-17,6),
+                        "questionids" => array(12, -1, 13, 14, -15, 16, -17, 6),
                         "significant_id_only" => false,
-                        "cutoffs" => array(0.313169217,0.776242547),
+                        "cutoffs" => array(0.313169217, 0.776242547),
                     ),
                     "gewissenhaftigkeit" => array(
                         "scenarios" => array(1 => true, 2 => true),
                         "evaluation" => true,
-                        "questionids" => array(8,-32,33,-34,-35,21,22,23,-24),
+                        "questionids" => array(8, -32, 33, -34, -35, 21, 22, 23, -24),
                         "significant_id_only" => false,
-                        "cutoffs" => array(0.456596974,0.831246163),
+                        "cutoffs" => array(0.456596974, 0.831246163),
                     ),
                 ),
             ),
@@ -112,7 +112,7 @@ class mod_groupformation_scientific_grouping extends mod_groupformation_grouping
 
         $groupsizes = $this->store->determine_group_size($users);
 
-        if (count($users[0])<$numberofslices){
+        if (count($users[0]) < $numberofslices) {
             return array();
         }
 
@@ -127,7 +127,7 @@ class mod_groupformation_scientific_grouping extends mod_groupformation_grouping
             $configurationkey = $configurationkeys[$i];
             $configuration = $configurations[$configurationkey];
 
-            $raw_participants = $this->participantparser->build_participants($slice,$specs);
+            $raw_participants = $this->participantparser->build_participants($slice, $specs);
 
             $participants = $this->configure_participants($raw_participants, $configuration);
 
@@ -138,7 +138,7 @@ class mod_groupformation_scientific_grouping extends mod_groupformation_grouping
         $randomkey = "rand:1;mrand:_;ex:_;gh:_";
 
         $randomparticipants = $this->participantparser->build_empty_participants($users[1]);
-        $randomcohort = $this->build_cohort($randomparticipants, $groupsizes[1],$randomkey);
+        $randomcohort = $this->build_cohort($randomparticipants, $groupsizes[1], $randomkey);
 
         $cohorts[$randomkey] = $randomcohort;
 

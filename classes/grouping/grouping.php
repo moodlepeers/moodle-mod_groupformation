@@ -120,7 +120,7 @@ class mod_groupformation_grouping {
         } else if (strpos($configurationkey, "rand:0") !== false || strpos($configurationkey, "topic:1") !== false) {
             // Not Random
             return $this->build_topic_cohort($users, $groupsize);
-        }else {
+        } else {
             // Random
             return $this->build_random_cohort($users, $groupsize);
         }
@@ -178,7 +178,7 @@ class mod_groupformation_grouping {
         shuffle($users);
         $slices = array();
 
-        if ($numberofslices == 1){
+        if ($numberofslices == 1) {
             return array($users);
         }
 

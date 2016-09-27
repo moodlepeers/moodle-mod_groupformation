@@ -88,7 +88,7 @@ class lib_groupal_participant_centric_matcher implements lib_groupal_imatcher {
             if ($hasProgress === true) {
                 $delta_old = 0.0; // TODO float.MinValue.
                 $bestGroup->addParticipant($p);
-                // 	Remove $p from $notYetMatched-List.
+                //     Remove $p from $notYetMatched-List.
                 array_splice($notYetMatched, array_search($p, $notYetMatched), 1);
             } // Do not set hasProgress= false, this happens in while above.
         }

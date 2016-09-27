@@ -27,8 +27,7 @@ if (!defined('MOODLE_INTERNAL')) {
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/criterion_calculator.php');
 
-class mod_groupformation_user_manager
-{
+class mod_groupformation_user_manager {
     private $groupformationid;
 
     /**
@@ -245,7 +244,7 @@ class mod_groupformation_user_manager
      * @return boolean
      */
     public function is_completed($userid) {
-        return array_key_exists($userid,$this->get_completed(null,'userid'));
+        return array_key_exists($userid, $this->get_completed(null, 'userid'));
     }
 
     /**
@@ -295,10 +294,10 @@ class mod_groupformation_user_manager
      * @param $userid
      * @return bool
      */
-    public function has_evaluation_values($userid){
+    public function has_evaluation_values($userid) {
         global $DB;
 
-        return 0 < $DB->count_records('groupformation_user_values',array('groupformationid'=>$this->groupformationid,'userid'=>$userid));
+        return 0 < $DB->count_records('groupformation_user_values', array('groupformationid' => $this->groupformationid, 'userid' => $userid));
 
     }
 
@@ -405,7 +404,6 @@ class mod_groupformation_user_manager
 //            $question = $this->store->get_question_by_position($category,$position);
 //            $questionid = $question->questionid;
 //        }
-
 
 
         if (($category == 'grade' || $category == 'general') && $answer == '0') {
@@ -627,10 +625,10 @@ class mod_groupformation_user_manager
         return '';
     }
 
-    public function set_evaluation_values($userid){
+    public function set_evaluation_values($userid) {
         global $DB;
 
-        $DB->delete_records('groupformation_user_values',array('groupformationid'=>$this->groupformationid,'userid'=>$userid));
+        $DB->delete_records('groupformation_user_values', array('groupformationid' => $this->groupformationid, 'userid' => $userid));
 
         $cc = new mod_groupformation_criterion_calculator($this->groupformationid);
 
@@ -642,9 +640,9 @@ class mod_groupformation_user_manager
             $labels = $this->data->get_criterion_specification($criterion);
             if (!is_null($labels) && count($labels) > 0) {
                 $uservalues = $cc->get_values_for_user($criterion, $userid, $labels);
-                foreach($uservalues as $label => $values){
+                foreach ($uservalues as $label => $values) {
                     $values = $values['values'];
-                    foreach($values as $dimension => $value){
+                    foreach ($values as $dimension => $value) {
                         $record = new stdClass();
                         $record->groupformationid = $this->groupformationid;
                         $record->userid = $userid;
@@ -658,14 +656,13 @@ class mod_groupformation_user_manager
                 }
             }
         }
-        $DB->insert_records('groupformation_user_values',$records);
+        $DB->insert_records('groupformation_user_values', $records);
     }
 
     /**
      * Handles complete questionnaires (userids) and sets them to completed/commited
      */
-    public function handle_complete_questionnaires()
-    {
+    public function handle_complete_questionnaires() {
         $users = array_keys($this->get_completed_by_answer_count(null, 'userid'));
 
         foreach ($users as $user) {

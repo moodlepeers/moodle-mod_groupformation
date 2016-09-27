@@ -191,7 +191,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
             . '</div><p><small><b><i>' . get_string('scenario_usage_header', 'groupformation') . '</i></b><br>'
             . get_string('scenario_projectteams_short', 'groupformation') . '</p><p>' .
             get_string('scenario_projectteams_description', 'groupformation') . '</small></p>
-		                                </label>
+                                        </label>
                 </div>
                 <div class="col_m_33">
                     <input type="radio" name="js_szenario" id="homework" value="homework" />
@@ -216,7 +216,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
                     </div> <!-- /grid  -->
                 </div> <!-- /szenarioRadios -->
             </div> <!-- /gf_setting_pad -->
-		');
+        ');
 
         // Wrapper of the szenario.
         $mform->addElement('html', '<div id="js_szenarioWrapper">');
@@ -234,10 +234,10 @@ class mod_groupformation_mod_form extends moodleform_mod {
 
         // Add dynamic input fields preknowledge and Preview.
         $mform->addElement('html', '
-					<div class="gf_pad_content" id="js_knowledgeWrapper">
-					<!-- <p>' . get_string('knowledge_description_extended', 'groupformation') . '</p> -->
+                    <div class="gf_pad_content" id="js_knowledgeWrapper">
+                    <!-- <p>' . get_string('knowledge_description_extended', 'groupformation') . '</p> -->
                        <p id="knowledeInfo"></p>
-						<p id="knowledeInfoProject" style="display:none;">' .
+                        <p id="knowledeInfoProject" style="display:none;">' .
             get_string('knowledge_info_project', 'groupformation') . '</p>
                         <p id="knowledeInfoHomework" style="display:none;">' .
             get_string('knowledge_info_homework', 'groupformation') . '</p>
@@ -380,7 +380,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 
                 '<p id="topicshead">' . get_string('topics_question', 'groupformation') . '</p>
                     <span id="topicsDummy" style="display:none;">' .
-                get_string('topics_dummy', 'groupformation'). ' ' . '</span>
+                get_string('topics_dummy', 'groupformation') . ' ' . '</span>
                     <ul class="sortable_topics" id="previewTopics">
                       <li class="topicLi" id="tpcRow0" class=""><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' .
                 get_string('topics_dummy', 'groupformation') . ' ' . '1</li>
@@ -396,7 +396,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 
                                     </div> <!-- /.grid -->
                                 </div> <!-- /.topicWrapper -->
-        					');
+                            ');
 
             // Close wrapper for topics.
             $mform->addElement('html', '</div>');

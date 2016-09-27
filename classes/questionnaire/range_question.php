@@ -37,10 +37,10 @@ class mod_groupformation_range_question {
         if ($answer != -1) {
             echo '<tr>';
             echo '<th scope="row">' . $question . '</th>';
-        } else if ($highlight){
+        } else if ($highlight) {
             echo '<tr class="noAnswer">';
             echo '<th scope="row">' . $question . '</th>';
-        } else{
+        } else {
             echo '<tr>';
             echo '<th scope="row">' . $question . '</th>';
         }

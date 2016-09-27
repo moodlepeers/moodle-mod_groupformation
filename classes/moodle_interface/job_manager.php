@@ -234,7 +234,7 @@ class mod_groupformation_job_manager {
         foreach ($enrolledstudents as $userid) {
             if ($usermanager->is_completed($userid)) {
                 $allanswers [] = $userid;
-            } else if ($groupingsetting && $usermanager->get_number_of_answers($userid)>0) {
+            } else if ($groupingsetting && $usermanager->get_number_of_answers($userid) > 0) {
                 $someanswers [] = $userid;
             } else {
                 $noorsomeanswers [] = $userid;
@@ -278,7 +278,7 @@ class mod_groupformation_job_manager {
         if ($store->is_math_prep_course_mode()) {
             $sg = new mod_groupformation_scientific_grouping($job->groupformationid);
             return $sg->run_grouping($users);
-        }else if ($store->ask_for_topics()) {
+        } else if ($store->ask_for_topics()) {
             $tg = new mod_groupformation_topic_grouping($groupformationid);
             return $tg->run_grouping($users);
         } else {
@@ -326,7 +326,7 @@ class mod_groupformation_job_manager {
 
         foreach ($result as $group_key => $cohort) {
 
-            if (is_null($cohort)){
+            if (is_null($cohort)) {
                 continue;
             }
 

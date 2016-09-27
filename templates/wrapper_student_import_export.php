@@ -23,7 +23,7 @@
     <div class="gf_pad_header"><?php echo get_string('import', 'groupformation'); ?></div>
     <div class="gf_pad_content">
         <p><?php echo $this->_['import_description']; ?></p>
-        <p><?php echo get_string('consent_header_import','groupformation'); ?><p>
+        <p><?php echo get_string('consent_header_import', 'groupformation'); ?><p>
         <p><?php echo get_string('consent_message', 'groupformation'); ?></p>
 
         <p>
@@ -33,9 +33,9 @@
                 </button>
             <?php else: ?>
                 <a href="<?php echo $this->_['import_form']; ?>">
-				<span class="gf_button gf_button_pill gf_button_small">
-		    		<?php echo get_string('import', 'groupformation'); ?>
-		   		</span></a>
+                <span class="gf_button gf_button_pill gf_button_small">
+                    <?php echo get_string('import', 'groupformation'); ?>
+                   </span></a>
             <?php endif; ?>
         </p>
     </div>
@@ -50,9 +50,9 @@
                 </button>
             <?php else: ?>
                 <a href="<?php echo $this->_['export_url']; ?>" target="_blank">
-				<span class="gf_button gf_button_pill gf_button_small">
-		    		<?php echo get_string('export', 'groupformation'); ?>
-		   		</span></a>
+                <span class="gf_button gf_button_pill gf_button_small">
+                    <?php echo get_string('export', 'groupformation'); ?>
+                   </span></a>
             <?php endif; ?>
         </p>
     </div>

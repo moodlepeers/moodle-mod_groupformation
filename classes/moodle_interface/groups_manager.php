@@ -95,17 +95,17 @@ class mod_groupformation_groups_manager {
         $record->moodlegroupid = null;
         $record->groupname = $name;
         $record->performance_index = $group ['gpi'];
-        $record->groupal = (array_key_exists('groupal',$flags))?$flags ['groupal']:0;
-        $record->random = (array_key_exists('random',$flags))?$flags ['random']:0;
-        $record->mrandom = (array_key_exists('mrandom',$flags))?$flags ['mrandom']:0;
-        $record->created = (array_key_exists('created',$flags))?$flags ['created']:0;
+        $record->groupal = (array_key_exists('groupal', $flags)) ? $flags ['groupal'] : 0;
+        $record->random = (array_key_exists('random', $flags)) ? $flags ['random'] : 0;
+        $record->mrandom = (array_key_exists('mrandom', $flags)) ? $flags ['mrandom'] : 0;
+        $record->created = (array_key_exists('created', $flags)) ? $flags ['created'] : 0;
         $record->group_size = count($group['users']);
-        $record->group_key = (array_key_exists('group_key',$flags))?$flags['group_key']:0;
-        if (array_key_exists('topic',$flags) && $flags ['topic']) {
+        $record->group_key = (array_key_exists('group_key', $flags)) ? $flags['group_key'] : 0;
+        if (array_key_exists('topic', $flags) && $flags ['topic']) {
             $record->topic_id = $groupalid;
             $record->topic_name = $this->get_topic_name($groupalid);
         }
-        $id = $DB->insert_record('groupformation_groups', $record,true,true);
+        $id = $DB->insert_record('groupformation_groups', $record, true, true);
 
         return $id;
     }
@@ -385,10 +385,10 @@ class mod_groupformation_groups_manager {
      *
      * @param $groupid
      */
-    public function remove_users($groupid){
+    public function remove_users($groupid) {
         global $DB;
 
-        $DB->delete_records('groupformation_group_users',array('groupformation'=>$this->groupformationid,'groupid'=>$groupid));
+        $DB->delete_records('groupformation_group_users', array('groupformation' => $this->groupformationid, 'groupid' => $groupid));
     }
 
     /**
@@ -397,18 +397,18 @@ class mod_groupformation_groups_manager {
      * @param $groupid
      * @param $userids
      */
-    public function add_users($groupid, $userids){
+    public function add_users($groupid, $userids) {
         global $DB;
 
         $records = array();
-        foreach(array_values($userids) as $userid){
+        foreach (array_values($userids) as $userid) {
             $record = new stdClass();
             $record->groupformation = $this->groupformationid;
             $record->groupid = $groupid;
             $record->userid = $userid;
             $records[] = $record;
         }
-        $DB->insert_records('groupformation_group_users',$records);
+        $DB->insert_records('groupformation_group_users', $records);
     }
 
     /**
@@ -416,12 +416,12 @@ class mod_groupformation_groups_manager {
      *
      * @param $groupid
      */
-    public function delete_group($groupid){
+    public function delete_group($groupid) {
         global $DB;
 
         $this->remove_users($groupid);
 
-        $DB->delete_records('groupformation_groups',array('id'=>$groupid,'groupformation'=>$this->groupformationid));
+        $DB->delete_records('groupformation_groups', array('id' => $groupid, 'groupformation' => $this->groupformationid));
 
     }
 
@@ -431,14 +431,14 @@ class mod_groupformation_groups_manager {
      * @param $groupid
      * @param $group_size
      */
-    public function update_group($groupid,$group_size){
+    public function update_group($groupid, $group_size) {
         global $DB;
 
-        $record = $DB->get_record('groupformation_groups',array('id'=>$groupid));
+        $record = $DB->get_record('groupformation_groups', array('id' => $groupid));
         $record->group_size = $group_size;
         $record->performance_index = NULL;
 
-        $DB->update_record('groupformation_groups',$record);
+        $DB->update_record('groupformation_groups', $record);
     }
 
     /**
@@ -447,14 +447,14 @@ class mod_groupformation_groups_manager {
      * @param $groups_array_after
      * @param $groups_array_before
      */
-    public function update_groups($groups_array_after,$groups_array_before){
+    public function update_groups($groups_array_after, $groups_array_before) {
         $updated = false;
-        foreach($groups_array_after as $groupid => $userids){
+        foreach ($groups_array_after as $groupid => $userids) {
 
-            if (is_null($userids) || count($userids)==0){
+            if (is_null($userids) || count($userids) == 0) {
                 $this->delete_group($groupid);
                 $updated |= true;
-            }else {
+            } else {
                 $userids_before = $groups_array_before[$groupid];
                 $same = count(array_intersect($userids, $userids_before)) == count($userids) && count($userids) == count($userids_before);
                 if (!$same) {
@@ -465,7 +465,7 @@ class mod_groupformation_groups_manager {
                 }
             }
         }
-        if ($updated){
+        if ($updated) {
             // UPDATE PERFORMANCE VALUES WITH NEW GROUPS
         }
     }

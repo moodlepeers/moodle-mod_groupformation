@@ -45,7 +45,7 @@ class mod_groupformation_question_table {
                 $headersize = count($headeroptarray);
 
                 echo '<th scope="col" colspan="' . $headersize . '"><span style="float:left">' . $headeroptarray[0] . '</span>
-																						<span style="float:right">' .
+                                                                                        <span style="float:right">' .
                     $headeroptarray[$headersize - 1] . '</span></th>';
             } else if ($tabletype == 'type_knowledge') {
                 echo '<th scope="col"><div class="legend">' . get_string('knowledge_scale', 'groupformation') .
@@ -63,7 +63,7 @@ class mod_groupformation_question_table {
      *
      * @param $tabletype
      */
-    public function print_footer($tabletype){
+    public function print_footer($tabletype) {
         // Closing the table or unordered list.
         if ($tabletype == 'topics') {
             // Close unordered list.
@@ -74,7 +74,7 @@ class mod_groupformation_question_table {
         } else {
             // Close tablebody and close table.
             echo ' </tbody>
-		                  </table>';
+                          </table>';
         }
     }
 }
