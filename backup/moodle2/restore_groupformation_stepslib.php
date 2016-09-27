@@ -53,7 +53,6 @@ class restore_groupformation_activity_structure_step extends restore_activity_st
     protected function process_groupformation($data) {
         global $DB;
         $data = (object) $data;
-        $oldid = $data->id;
         $data->course = $this->get_courseid();
         if (empty($data->timecreated)) {
             $data->timecreated = time();

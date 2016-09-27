@@ -117,7 +117,7 @@ if (isset($cancel) && $cancel) {
     } else {
 
         // Render form for file upload.
-        $controller->render_form($mform);
+        $controller->render_form($mform,false);
 
     }
 }

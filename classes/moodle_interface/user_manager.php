@@ -127,28 +127,6 @@ class mod_groupformation_user_manager
     }
 
     /**
-     * Returns array of records of table_groupformation_started if answer_count is not equal to
-     * the total answer count for this activity but the record was submitted
-     *
-     * @param string $sortedby
-     * @param string $fieldset
-     * @return multitype:unknown
-     */
-    public function get_not_completed_but_submitted($sortedby = null, $fieldset = '*') {
-        global $DB;
-        // TODO HOTFIX FOR HRZ SOSE2016
-        return array();
-//        $tablename = 'groupformation_started';
-//        $query = "SELECT " . $fieldset . " FROM {{$tablename}} ".
-//            "WHERE groupformation = ? AND completed = 1 AND answer_count <> ? ORDER BY ?" . $sortedby;
-//        return $DB->get_records_sql($query, array(
-//            $this->groupformationid,
-//            $this->store->get_total_number_of_answers(),
-//            $sortedby
-//        ));
-    }
-
-    /**
      * Sets answer counter for user
      *
      * @param int $userid
@@ -681,6 +659,20 @@ class mod_groupformation_user_manager
             }
         }
         $DB->insert_records('groupformation_user_values',$records);
+    }
+
+    /**
+     * Handles complete questionnaires (userids) and sets them to completed/commited
+     */
+    public function handle_complete_questionnaires()
+    {
+        $users = array_keys($this->get_completed_by_answer_count(null, 'userid'));
+
+        foreach ($users as $user) {
+            $this->set_status($user, true);
+        }
+
+        return $users;
     }
 
 }

@@ -34,7 +34,6 @@ class mod_groupformation_xml_loader {
 
     /**
      * mod_groupformation_xml_loader constructor.
-     * @param mod_groupformation_storage_manager|null $store
      */
     public function __construct() {
     }
@@ -45,6 +44,7 @@ class mod_groupformation_xml_loader {
      * @param $category
      * @param $lang
      * @return array
+     * @throws Exception
      */
     public function save($category, $lang) {
         global $CFG;
@@ -91,7 +91,7 @@ class mod_groupformation_xml_loader {
             return $return;
 
         } else {
-            exit("The file $xmlfile cannot be opened or found.");
+            throw new Exception("The file $xmlfile cannot be opened or found.");
         }
 
     }

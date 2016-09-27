@@ -119,7 +119,7 @@ class mod_groupformation_groups_manager {
         $records = $DB->get_records('groupformation_groups', array(
             'groupformation' => $this->groupformationid));
 
-        foreach ($records as $key => $record) {
+        foreach (array_values($records) as $record) {
             if ($record->created == 1) {
                 return true;
             }
@@ -208,7 +208,7 @@ class mod_groupformation_groups_manager {
      * @param int $userid
      * @return boolean
      */
-    public function has_group($userid, $moodlegroup = false) {
+    public function has_group($userid) {
         global $DB;
         $count = $DB->count_records('groupformation_group_users', array(
             'groupformation' => $this->groupformationid, 'userid' => $userid));
@@ -249,7 +249,6 @@ class mod_groupformation_groups_manager {
      * @return null
      */
     public function get_max_groups_size() {
-        global $DB;
         $groups = $this->get_generated_groups('id', 'id,group_size');
         $max = null;
         foreach ($groups as $group) {
@@ -306,7 +305,7 @@ class mod_groupformation_groups_manager {
         $records = $DB->get_records('groupformation_groups', array(
             'groupformation' => $this->groupformationid));
 
-        foreach ($records as $key => $record) {
+        foreach (array_values($records) as $record) {
             if ($record->created == 1) {
                 groups_delete_group($record->moodlegroupid);
             }
@@ -353,7 +352,7 @@ class mod_groupformation_groups_manager {
 
         if (count($records) > 0) {
             $i = 0;
-            foreach ($records as $id => $record) {
+            foreach (array_values($records) as $record) {
                 if ($record->userid == $userid) {
                     break;
                 }
@@ -402,7 +401,7 @@ class mod_groupformation_groups_manager {
         global $DB;
 
         $records = array();
-        foreach($userids as $key => $userid){
+        foreach(array_values($userids) as $userid){
             $record = new stdClass();
             $record->groupformation = $this->groupformationid;
             $record->groupid = $groupid;

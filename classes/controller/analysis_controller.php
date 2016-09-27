@@ -47,8 +47,6 @@ class mod_groupformation_analysis_controller {
     private $activitytime;
     private $starttime;
     private $endtime;
-    private $timenow;
-    private $test;
     private $state;
 
     /**
@@ -155,10 +153,6 @@ class mod_groupformation_analysis_controller {
         $usermanager = $this->usermanager;
         $stats = array();
 
-        $context = groupformation_get_context($this->groupformationid);
-        $students = get_enrolled_users($context, 'mod/groupformation:onlystudent');
-        $studentcount = count($students);
-
         $studentcount = count(mod_groupformation_util::get_users($this->groupformationid));
 
         $stats [] = $studentcount;
@@ -174,14 +168,9 @@ class mod_groupformation_analysis_controller {
         $stats [] = $completedcount;
 
         $nomissinganswers = $usermanager->get_completed_by_answer_count();
-        $nomissinganswerscount = count($nomissinganswers);
+        $nomissingcount = count($nomissinganswers);
 
-        $stats [] = $nomissinganswerscount;
-
-        $missinganswers = $usermanager->get_not_completed_but_submitted();
-        $missinganswerscount = count($missinganswers);
-
-        $stats [] = $missinganswerscount;
+        $stats [] = $nomissingcount;
 
         return $stats;
     }
@@ -192,22 +181,18 @@ class mod_groupformation_analysis_controller {
      * @return string
      */
     private function load_statistics() {
-        global $PAGE;
 
         $questionnairestats = $this->get_infos($this->groupformationid);
 
-        $statisticsanalysisview = new mod_groupformation_template_builder();
-        $statisticsanalysisview->set_template('analysis_statistics');
-        $context = $PAGE->context;
-        $count = count(get_enrolled_users($context, 'mod/groupformation:onlystudent'));
+        $statsanalysisview = new mod_groupformation_template_builder();
+        $statsanalysisview->set_template('analysis_statistics');
 
-        $statisticsanalysisview->assign('statistics_enrolled', $questionnairestats [0]);
-        $statisticsanalysisview->assign('statistics_processed', $questionnairestats [1]);
-        $statisticsanalysisview->assign('statistics_submited', $questionnairestats [2]);
-        $statisticsanalysisview->assign('statistics_submited_incomplete', $questionnairestats [4]);
-        $statisticsanalysisview->assign('statistics_submited_complete', $questionnairestats [3]);
+        $statsanalysisview->assign('statistics_enrolled', $questionnairestats [0]);
+        $statsanalysisview->assign('statistics_processed', $questionnairestats [1]);
+        $statsanalysisview->assign('statistics_submitted', $questionnairestats [2]);
+        $statsanalysisview->assign('statistics_submitted_complete', $questionnairestats [3]);
 
-        return $statisticsanalysisview->load_template();
+        return $statsanalysisview->load_template();
     }
 
     /**
@@ -228,7 +213,6 @@ class mod_groupformation_analysis_controller {
      * Determine status variables
      */
     public function determine_status() {
-        global $DB;
         $this->questionnaireavailable = $this->store->is_questionnaire_available();
         $this->state = 1;
         $job = mod_groupformation_job_manager::get_job($this->groupformationid);

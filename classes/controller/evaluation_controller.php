@@ -61,32 +61,37 @@ class mod_groupformation_evaluation_controller {
     }
 
     /**
+     * Renders for no evaluation
+     */
+    public function no_evaluation($caption = 'no_evaluation_text') {
+        $this->view->assign('eval_show_text', true);
+        $this->view->assign('eval_text', get_string($caption, 'groupformation'));
+        $json = json_encode(null);
+        $this->view->assign('json_content', $json);
+    }
+
+    /**
+     * Renders eval values
+     *
      * @param $userid
      * @return string
      */
     public function render($userid) {
         if ($this->store->ask_for_topics()) {
-            $this->view->assign('eval_show_text', true);
-            $this->view->assign('eval_text', get_string('no_evaluation_text', 'groupformation'));
-            $json = json_encode(null);
-            $this->view->assign('json_content', $json);
+            $this->no_evaluation();
         } else if (!$this->usermanager->has_answered_everything($userid)) {
-            $this->view->assign('eval_show_text', true);
-            $this->view->assign('eval_text', get_string('no_evaluation_ready', 'groupformation'));
-            $json = json_encode(null);
-            $this->view->assign('json_content', $json);
+            $this->no_evaluation('no_evaluation_ready');
         } else {
-            $this->view->assign('eval_text', false);
             $courseusers = $this->store->get_users();
-
-            $groupusers = array();
-            $hasgroup = $this->groupsmanager->has_group($userid, true);
-            if ($hasgroup) {
-                $groupusers = $this->groupsmanager->get_group_members($userid);
-            }
 
             if (!count($courseusers) >= 2) {
                 $courseusers = array();
+            }
+
+            $groupusers = array();
+            $hasgroup = $this->groupsmanager->has_group($userid);
+            if ($hasgroup) {
+                $groupusers = $this->groupsmanager->get_group_members($userid);
             }
 
             if (!count($groupusers) >= 2 || !$this->groupsmanager->groups_created()) {
@@ -95,18 +100,16 @@ class mod_groupformation_evaluation_controller {
 
             $cc = new mod_groupformation_criterion_calculator($this->groupformationid);
 
-            if ($this->usermanager->has_answered_everything($userid) && !$this->usermanager->has_evaluation_values($userid)){
+            if (!$this->usermanager->has_evaluation_values($userid)){
                 $this->usermanager->set_evaluation_values($userid);
             }
 
             $eval = $cc->get_eval($userid, $groupusers, $courseusers);
 
             if (is_null($eval) || count($eval) == 0) {
-                $this->view->assign('eval_show_text', true);
-                $this->view->assign('eval_text', get_string('no_evaluation_text', 'groupformation'));
-                $json = json_encode(null);
-                $this->view->assign('json_content', $json);
+                $this->no_evaluation();
             } else {
+                $this->view->assign('eval_text', false);
                 $this->view->assign('eval_show_text', false);
                 $json = json_encode($eval);
                 $this->view->assign('json_content', $json);

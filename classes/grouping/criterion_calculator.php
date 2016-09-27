@@ -206,10 +206,10 @@ class mod_groupformation_criterion_calculator {
             $questionids = $spec['questionids'];
 
             if (array_key_exists($this->scenario,$spec['scenarios'])) {
-                foreach ($questionids as $k => $v) {
-                    $questionid = $v;
-                    if ($v < 0) {
-                        $questionid = abs($v);
+                foreach (array_values($questionids) as $tempquestionid) {
+                    $questionid = $tempquestionid;
+                    if ($tempquestionid < 0) {
+                        $questionid = abs($tempquestionid);
                         if ($this->usermanager->has_answer($userid, $category, $questionid)) {
                             $temp = $temp + $this->invert_answer($questionid, $category,
                                     $this->usermanager->get_single_answer($userid, $category, $questionid));
@@ -403,8 +403,8 @@ class mod_groupformation_criterion_calculator {
             if (array_key_exists($scenario, $spec['scenarios'])) {
 
                 // sums up all answers with respect to given questionids
-                foreach ($spec['questionids'] as $k => $p) {
-                    $answer += $this->usermanager->get_single_answer($userid, $category, $p);
+                foreach (array_values($spec['questionids']) as $questionid) {
+                    $answer += $this->usermanager->get_single_answer($userid, $category, $questionid);
                     $maxanswer += $maxvalue;
                 }
 
@@ -437,7 +437,7 @@ class mod_groupformation_criterion_calculator {
         foreach ($labels as $key => $positions) {
             $answer = 0;
             $maxanswer = 0;
-            foreach ($positions['questionids'] as $k => $p) {
+            foreach (array_values($positions['questionids']) as $p) {
                 $answer += $this->usermanager->get_single_answer($userid, $category, $p);
                 $maxanswer += $max;
             }
@@ -587,7 +587,6 @@ class mod_groupformation_criterion_calculator {
         $completedusers = array_keys($this->usermanager->get_completed_by_answer_count('userid', 'userid'));
         $groupandcompleted = array_intersect($completedusers, $groupusers);
         $courseandcompleted = array_intersect($completedusers, $courseusers);
-        $completed = count($courseandcompleted);
 
         $vals = array('user');
         if (count($groupandcompleted) > 0) {
@@ -612,7 +611,7 @@ class mod_groupformation_criterion_calculator {
                 $bars = array();
                 $values = array('user' => 1, 'group' => 4, 'course' => 2);
 
-                foreach ($values as $key => $value) {
+                foreach (array_keys($values) as $key) {
                     $bars[$key] = get_string("eval_caption_" . $key, "groupformation");
                 }
 
@@ -654,13 +653,13 @@ class mod_groupformation_criterion_calculator {
 
         $uservalues = $this->read_values_for_user($criterion, $userid, $labels);
 
-        $usersvalues = $this->get_values_for_users($criterion, $users, $labels);
+        $usersvalues = $this->get_values_for_users($criterion, $users);
 
         $usersvalues = $this->compute_z_score($usersvalues);
 
 
-        $groupvalues = $this->get_avg_values_for_users($criterion, $groupandcompleted, $usersvalues);
-        $coursevalues = $this->get_avg_values_for_users($criterion, $courseandcompleted, $usersvalues);
+        $groupvalues = $this->get_avg_values_for_users($groupandcompleted, $usersvalues);
+        $coursevalues = $this->get_avg_values_for_users($courseandcompleted, $usersvalues);
 
         foreach ($labels['labels'] as $label => $spec) {
             $user = $uservalues[$label]['values'][0];
@@ -683,7 +682,7 @@ class mod_groupformation_criterion_calculator {
             $array["values"] = array("user" => $user, "group" => $group, "course" => $course);
             $array["range"] = array("min" => 0, "max" => 1);
             $array["mode"] = $mode;
-            $array["captions"] = $this->get_captions($label, $mode, $array["values"], $setfinaltext, $completed, $coursesize);
+            $array["captions"] = $this->get_captions($label, $mode, $setfinaltext, $completed, $coursesize);
             $array["cutoff"] = $this->get_eval_text($criterion, $label, $spec["cutoffs"], $user);
             $evalinfos[] = $array;
         }
@@ -727,7 +726,7 @@ class mod_groupformation_criterion_calculator {
      * @return array
      * @throws coding_exception
      */
-    private function get_captions($label, $mode, $values, $setfinaltext, $completed, $coursesize) {
+    private function get_captions($label, $mode, $setfinaltext, $completed, $coursesize) {
         $percent = round($completed / ($coursesize + 1) * 100, 2);
         $a = new stdClass();
         $a->percent = $percent;
@@ -739,9 +738,6 @@ class mod_groupformation_criterion_calculator {
             "maxText" => get_string("eval_max_text_" . $label, "groupformation"),
             "finalText" => (($setfinaltext) ? get_string("eval_final_text", "groupformation", $a) : null)
         );
-        // foreach($values as $key=>$value){
-        //    $captions[$key]= get_string("eval_caption_".$key,"groupformation");
-        //}
         if ($mode == 2) {
             $captions["mean"] = 0.5;
             $captions["minCaption"] = get_string("eval_min_caption_" . $label, "groupformation");
@@ -778,7 +774,7 @@ class mod_groupformation_criterion_calculator {
         $recs = $DB->get_records('groupformation_user_values',array('groupformationid'=>$this->groupformationid,'userid'=>$userid,'criterion'=>$criterion));
 
         $array = array();
-        foreach($recs as $key=>$rec){
+        foreach(array_values($recs) as $rec){
             if (!array_key_exists($rec->label,$array)){
                 $array[$rec->label] = array();
             }
@@ -799,10 +795,10 @@ class mod_groupformation_criterion_calculator {
      * @param null $specs
      * @return mixed
      */
-    public function get_values_for_users($criterion, $users, $specs = null) {
+    public function get_values_for_users($criterion, $users) {
         $usersvalues = array();
 
-        foreach ($users as $key => $userid) {
+        foreach (array_values($users) as $userid) {
             $usersvalues[$userid] = $this->read_values_for_user($criterion,$userid);
         }
 
@@ -816,7 +812,7 @@ class mod_groupformation_criterion_calculator {
      * @param $groupusers
      * @return null
      */
-    public function get_avg_values_for_users($criterion, $groupusers, $usersvalues) {
+    public function get_avg_values_for_users($groupusers, $usersvalues) {
         $avgvalues = null;
         $groupsize = count($groupusers);
         if ($groupsize > 0) {
@@ -838,7 +834,7 @@ class mod_groupformation_criterion_calculator {
                     }
                 }
             }
-            foreach ($avgvalues as $key => $avgvalue) {
+            foreach (array_keys($avgvalues) as $key) {
                 foreach ($avgvalues[$key]['values'] as $k => $v) {
                     $avgvalues[$key]['values'][$k] /= $groupsize;
                 }

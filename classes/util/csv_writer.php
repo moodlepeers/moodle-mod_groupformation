@@ -109,7 +109,7 @@ class mod_groupformation_csv_writer {
      */
     public function records_to_csv($records) {
         $csv = null;
-        foreach ($records as $id => $record) {
+        foreach (array_values($records) as $record) {
             if (is_null($csv)) {
                 $csv = $this->record_to_csv($record, true) . "\n";
             }

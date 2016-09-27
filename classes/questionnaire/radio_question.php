@@ -30,10 +30,10 @@ class mod_groupformation_radio_question {
      * @param $question
      * @param $options
      * @param $answer
-     * @param $highlightmissinganswers
+     * @param $highlight
      */
-    public function print_html($category, $questionid, $question, $options, $answer, $highlightmissinganswers) {
-        if ($answer == -1 && $highlightmissinganswers) {
+    public function print_html($category, $questionid, $question, $options, $answer, $highlight) {
+        if ($answer == -1 && $highlight) {
             echo '<tr class="noAnswer">';
         } else {
             echo '<tr>';

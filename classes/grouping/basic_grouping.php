@@ -102,17 +102,17 @@ class mod_groupformation_basic_grouping extends mod_groupformation_grouping{
         }
 
         // Handle all users with incomplete or no questionnaire submission
-        $randomparticipantskey = "random:1";
+        $randomkey = "random:1";
         $randomcohort = null;
 
         if (count($users[1])>0){
 
             $randomparticipants = $this->participantparser->build_empty_participants($users[1]);
-            $randomcohort = $this->build_cohort($randomparticipants, $groupsizes[1], $randomparticipantskey);
+            $randomcohort = $this->build_cohort($randomparticipants, $groupsizes[1], $randomkey);
 
         }
 
-        $cohorts[$randomparticipantskey] = $randomcohort;
+        $cohorts[$randomkey] = $randomcohort;
 
         return $cohorts;
     }

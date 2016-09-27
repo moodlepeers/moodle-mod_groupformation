@@ -73,11 +73,10 @@ class mod_groupformation_student_group_view_controller {
         }
 
         if ($this->groupsmanager->has_group($userid) && $this->groupsmanager->groups_created()) {
-            $id = $this->groupsmanager->get_group_id($userid);
 
             $name = $this->groupsmanager->get_group_name($userid);
 
-            $groupname = $name;// . ' (ID #' . $id . ')';
+            $groupname = $name;
             $othermembers = $this->groupsmanager->get_group_members($userid);
 
             $pos = strrpos($groupname,"_");

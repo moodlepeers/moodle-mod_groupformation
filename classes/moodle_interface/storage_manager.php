@@ -876,7 +876,7 @@ class mod_groupformation_storage_manager {
                 $result = array();
 
                 $i = 0;
-                foreach ($topics as $key => $topic) {
+                foreach (array_values($topics) as $topic) {
                     if ($i < $remaininguserscount) {
                         $result [intval($topic ['id']) - 1] = intval(round($basegroupsize + 1));
                     } else {
@@ -892,7 +892,6 @@ class mod_groupformation_storage_manager {
                 $topicsoptions = mod_groupformation_util::xml_to_array($topicvalues);
                 $topicscount = count($topicsoptions);
 
-                $maxmembers = intval($this->get_max_members());
                 $userscount0 = count($users [0] + $users [1]);
                 $maxmembers = ceil($userscount0 / $topicscount);
                 $array = array();
@@ -901,8 +900,6 @@ class mod_groupformation_storage_manager {
                 }
                 return $array;
             }
-
-            return $sizearray;
         } else {
 
             $userscount0 = count($users [0]);
@@ -1003,7 +1000,7 @@ class mod_groupformation_storage_manager {
      * @param $version
      * @return array
      */
-    public function get_questions($category,$version=0){
+    public function get_questions($category){
         global $DB;
 
         return $DB->get_records('groupformation_question',array('category'=>$category,'language'=>'en'));

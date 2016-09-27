@@ -103,7 +103,6 @@ class mod_groupformation_import_export_controller {
      * @throws coding_exception
      */
     public function render_overview($userid) {
-        global $DB;
 
         $this->view = new mod_groupformation_template_builder ();
         $this->view->set_template('wrapper_student_import_export');
@@ -151,7 +150,7 @@ class mod_groupformation_import_export_controller {
      * @param $mform
      * @param bool|false $showwarning
      */
-    public function render_form($mform, $showwarning = false) {
+    public function render_form($mform, $showwarning) {
         $this->view = new mod_groupformation_template_builder ();
         $this->view->set_template('student_import_form_header');
         $this->view->assign('file_error', $showwarning);
@@ -194,9 +193,7 @@ class mod_groupformation_import_export_controller {
      * @throws InvalidArgumentException
      */
     public function import_xml($content) {
-        global $DB, $USER, $CFG;
-
-
+        global $DB, $USER;
 
         libxml_use_internal_errors(true);
         $xml = simplexml_load_string($content);
@@ -204,7 +201,7 @@ class mod_groupformation_import_export_controller {
         if (!$xml) {
             $errors = libxml_get_errors();
 
-            foreach ($errors as $error) {
+            if (count($errors)>0){
                 throw new InvalidArgumentException ("Wrong format");
             }
 

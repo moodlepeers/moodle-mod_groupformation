@@ -30,14 +30,14 @@ class mod_groupformation_range_question {
      * @param $question
      * @param $options
      * @param $answer
-     * @param $highlightmissinganswers
+     * @param $highlight
      */
-    public function print_html($category, $questionid, $question, $options, $answer, $highlightmissinganswers) {
+    public function print_html($category, $questionid, $question, $options, $answer, $highlight) {
 
         if ($answer != -1) {
             echo '<tr>';
             echo '<th scope="row">' . $question . '</th>';
-        } else if ($highlightmissinganswers){
+        } else if ($highlight){
             echo '<tr class="noAnswer">';
             echo '<th scope="row">' . $question . '</th>';
         } else{

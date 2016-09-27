@@ -57,7 +57,6 @@ class build_groups_task extends \core\task\scheduled_task {
      * @return boolean
      */
     private function do_job() {
-        $saved = false;
 
         $job = null;
 
@@ -67,7 +66,7 @@ class build_groups_task extends \core\task\scheduled_task {
             $result = \mod_groupformation_job_manager::do_groupal($job);
             $aborted = \mod_groupformation_job_manager::is_job_aborted($job);
             if (!$aborted) {
-                $saved = \mod_groupformation_job_manager::save_result($job, $result);
+                \mod_groupformation_job_manager::save_result($job, $result);
 
                 // Notify teacher about finished group formation.
                 \mod_groupformation_job_manager::notify_teacher($job);
@@ -82,7 +81,7 @@ class build_groups_task extends \core\task\scheduled_task {
      */
     private function reset_aborted_jobs() {
         $jobs = \mod_groupformation_job_manager::get_aborted_jobs();
-        foreach ($jobs as $key => $job) {
+        foreach (array_values($jobs) as $job) {
             \mod_groupformation_job_manager::reset_job($job);
         }
     }

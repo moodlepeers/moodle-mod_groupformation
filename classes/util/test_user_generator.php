@@ -131,7 +131,7 @@ class mod_groupformation_test_user_generator {
                             $xmlcontent = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>';
                             $questions = mod_groupformation_util::xml_to_array($xmlcontent);
                         }else{
-                            $questions = array_values($store->get_questions($category,$version));
+                            $questions = array_values($store->get_questions($category));
                         }
                         $m = $store->get_number($category);
 
@@ -203,7 +203,7 @@ class mod_groupformation_test_user_generator {
         $userrecords = $DB->get_records_sql('SELECT * FROM {user} WHERE username LIKE \'' . $username . '%\'');
 
         if (count($userrecords) > 0) {
-            foreach ($userrecords as $userid => $record) {
+            foreach (array_keys($userrecords) as $userid) {
 
                 try {
                     $groupingcontroller = new mod_groupformation_grouping_controller($groupformationid, $this->cm);
