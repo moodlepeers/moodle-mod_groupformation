@@ -23,6 +23,8 @@
 class lib_groupal_statistics {
     public $n = 0;
     public $avg = 0.0;
+    public $avgvariance = 0.0;
+    public $variance = 0.0;
     public $stddev = 0.0;
     public $normstddev = 0.0;
     public $performanceindex = 0.0;

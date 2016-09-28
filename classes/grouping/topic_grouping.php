@@ -84,7 +84,7 @@ class mod_groupformation_topic_grouping extends mod_groupformation_grouping {
 
             $max = null;
             foreach ($cohort->groups as $group) {
-                $value = count($group->getParticipants());
+                $value = count($group->get_participants());
                 $groups [] = array(
                     'id' => $group->get_id(), 'count' => $value, 'group' => $group, 'participants' => array());
                 if ($max == null || $max < $value) {
@@ -102,7 +102,7 @@ class mod_groupformation_topic_grouping extends mod_groupformation_grouping {
                 $groups = array_slice($groups, 0, count($groups));
 
                 $p = $randomparticipants [$i];
-                $groups [0] ['group']->addParticipant($p, true);
+                $groups [0] ['group']->add_participant($p, true);
                 $groups [0] ['count']++;
             }
 

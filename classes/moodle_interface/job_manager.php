@@ -232,7 +232,7 @@ class mod_groupformation_job_manager {
         $noorsomeanswers = array();
 
         foreach ($enrolledstudents as $userid) {
-            if ($usermanager->is_completed($userid)) {
+            if ($usermanager->has_answered_everything($userid)) {
                 $allanswers [] = $userid;
             } else if ($groupingsetting && $usermanager->get_number_of_answers($userid) > 0) {
                 $someanswers [] = $userid;
@@ -306,7 +306,7 @@ class mod_groupformation_job_manager {
 
             foreach ($result as $groupkey => $cohort) {
 
-                $cohortresult = $cohort->getResult();
+                $cohortresult = $cohort->get_result();
 
                 $flags = array('group_key' => $groupkey);
 
@@ -330,7 +330,7 @@ class mod_groupformation_job_manager {
                 continue;
             }
 
-            $cohortresult = $cohort->getResult();
+            $cohortresult = $cohort->get_result();
 
             $flags = array(
                 "groupal" => (strpos($groupkey, "groupal:1")) ? 1 : 0,
@@ -369,9 +369,9 @@ class mod_groupformation_job_manager {
      * Saves stats for computed job
      *
      * @param $job
-     * @param null $cohort
+     * @param lib_groupal_cohort $cohort
      */
-    private static function save_stats($job, &$cohort = null, $groupkey = null) {
+    private static function save_stats($job, $cohort = null, $groupkey = null) {
         global $DB;
 
         $record = new stdClass();
@@ -379,20 +379,20 @@ class mod_groupformation_job_manager {
         $record->groupformationid = $job->groupformationid;
         $record->group_key = $groupkey;
 
-        $record->matcher_used = strval($cohort->whichMatcherUsed);
-        $record->count_groups = floatval($cohort->countOfGroups);
-        $record->performance_index = floatval($cohort->cohortPerformanceIndex);
+        $record->matcher_used = strval($cohort->whichmatcherused);
+        $record->count_groups = floatval($cohort->countofgroups);
+        $record->performance_index = floatval($cohort->cpi);
 
         $stats = $cohort->results;
 
         if (!is_null($stats)) {
-            $record->stats_avg_variance = $stats->averageVariance;
+            $record->stats_avg_variance = $stats->avgvariance;
             $record->stats_variance = $stats->variance;
             $record->stats_n = $stats->n;
             $record->stats_avg = $stats->avg;
-            $record->stats_st_dev = $stats->stDev;
-            $record->stats_norm_st_dev = $stats->normStDev;
-            $record->stats_performance_index = $stats->performanceIndex;
+            $record->stats_st_dev = $stats->stddev;
+            $record->stats_norm_st_dev = $stats->normstddev;
+            $record->stats_performance_index = $stats->performanceindex;
         }
 
         $DB->insert_record('groupformation_stats', $record);

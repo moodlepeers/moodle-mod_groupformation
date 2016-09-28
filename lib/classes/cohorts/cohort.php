@@ -95,72 +95,6 @@ class lib_groupal_cohort {
     }
 
     /**
-     * remove one group from this Cohort
-     * @param $g lib_groupal_group
-     * @return boolean
-     */
-    public function remove_group(lib_groupal_group $g) {
-        $index = array_search($g, $this->groups);
-        if ($index == false) {
-            return false;
-        }
-
-        array_splice($this->groups, index, 1);
-        $this->countofgroups--;
-
-        return true;
-    }
-
-    /**
-     * Remove Participant from this Cohort (from all groups that are member of this Cohort)
-     * @param lib_groupal_participant $p
-     * @return bool true if any change happend
-     */
-    public function remove_participant(lib_groupal_participant $p) {
-        $result = false;
-        foreach ($this->groups as $g) {
-            $i = array_search($p, $g);
-            if ($i != false) {
-                array_splice($g, $i, 1);
-                $result = true;
-            }
-        }
-        if (result) {
-            $this->remove_empty_groups();
-            $this->calculate_cpi();
-        }
-
-        return $result;
-    }
-
-    /**
-     * Removes all empty groups in this Cohort
-     * @return bool  true if any change happened
-     */
-    public function remove_empty_groups() {
-        $result = false;
-        $removecandidates = array(); // Remember indices of groups to delete.
-        for ($i = count($this->groups) - 1; $i >= 0; $i--) {
-            if (count($this->groups[$i]) == 0) {
-                $removecandidates[] = $i;
-            }
-        }
-
-        if (!$result) {
-            return false;
-        }
-
-        // Remove now groups in extra loop due to concurrent modification exception
-        // Do it from 0-n because highest indices are at the beginning in $removecandidates.
-        for ($i = 0; $i < count($removecandidates); $i++) {
-            array_splice($this->groups, $removecandidates[$i], 1);
-            $this->countofgroups--;
-        }
-
-        return true;
-    }
-
-    /**
      * adds empty Group
      */
     public function add_empty_group() {
@@ -174,13 +108,9 @@ class lib_groupal_cohort {
      */
     public function get_result() {
         $result = new stdClass();
-        // Collect groupsIDs und Groups.
         $result->groups = array();
         $result->users = array();
-
-        // Get groupids.
         foreach ($this->groups as $g) {
-            // GroupIds.
             $groupid = $g->get_id();
             $gpi = $g->get_gpi();
             $participantsids = $g->get_participants_ids();
@@ -188,9 +118,7 @@ class lib_groupal_cohort {
             foreach ($participantsids as $participantid) {
                 $result->users[$participantid] = $groupid;
             }
-
         }
-
         return $result;
     }
 }

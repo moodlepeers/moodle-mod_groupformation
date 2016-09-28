@@ -23,23 +23,9 @@
  */
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/groupal_evaluator.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/group.php");
+require_once($CFG->dirroot . "/mod/groupformation/lib/classes/cohorts/cohort.php");
 
-class lib_groupal_topic_cohort {
-
-    /** @var lib_groupal_ievaluator This is the evaluator instance for all cohorts */
-    public static $evaluator;
-
-    /** @var array This array contains all computed groups */
-    public $groups = array();
-
-    /** @var lib_groupal_statistics This contains all statistics */
-    public $results = null;
-
-    /** @var string This is the class name of the used matcher */
-    public $whichmatcherused = "";
-
-    /** @var int This is the number of groups */
-    public $numberofgroups = 0;
+class lib_groupal_topic_cohort extends lib_groupal_cohort{
 
     /**
      * lib_groupal_topic_cohort constructor.
@@ -53,7 +39,7 @@ class lib_groupal_topic_cohort {
                 $this->add_group($groups[$i]);
             }
         }
-        $this->numberofgroups = $numberofgroups;
+        $this->countofgroups = $numberofgroups;
     }
 
     /**
@@ -70,114 +56,4 @@ class lib_groupal_topic_cohort {
         $this->groups[] = $g;
         return true;
     }
-
-    /**
-     * remove one group from this Cohort.
-     *
-     * @param $g lib_groupal_group
-     * @return boolean
-     */
-    public function remove_group(lib_groupal_group $g) {
-        $index = array_search($g, $this->groups);
-        if ($index == false) {
-            return false;
-        }
-
-        array_splice($this->groups, index, 1);
-        $this->numberofgroups--;
-        return true;
-    }
-
-    /**
-     * Remove Participant from this Cohort (from all groups that are member of this Cohort).
-     *
-     * @param lib_groupal_participant $p
-     * @return bool true if any change happend
-     */
-    public function remove_participant(lib_groupal_participant $p) {
-        $result = false;
-        foreach ($this->groups as $g) {
-            $i = array_search($p, $g);
-            if ($i != false) {
-                array_splice($g, $i, 1);
-                $result = true;
-            }
-        }
-        if (result) {
-            $this->remove_empty_groups();
-            $this->calculate_cpi();
-        }
-        return $result;
-    }
-
-    /**
-     * Removes all empty groups in this Cohort.
-     * @return bool  true if any change happened
-     */
-    public function remove_empty_groups() {
-        $result = false;
-        $removecandidates = array(); // Remember indices of groups to delete.
-        for ($i = count($this->groups) - 1; $i >= 0; $i--) {
-            if (count($this->groups[$i]) == 0) {
-                $removecandidates[] = $i;
-            }
-        }
-
-        if (!$result) {
-            return false;
-        }
-
-        // Remove now groups in extra loop due to concurrent modification exception.
-        // Do it from 0-n because highest indices are at the beginning in $removecandidates.
-        for ($i = 0; $i < count($removecandidates); $i++) {
-            array_splice($this->groups, $removecandidates[$i], 1);
-            $this->numberofgroups--;
-        }
-        return true;
-    }
-
-    /**
-     * adds empty Group.
-     */
-    public function add_empty_group() {
-        $this->add_group(new lib_groupal_group());
-    }
-
-    /**
-     * evaluates the Performance of this Cohort using the evaluator GroupALEvaluator
-     * @return float with CohortPerformanceIndex
-     * @throws Exception
-     */
-    public function calculate_cpi() {
-        if (static::$evaluator == null) {
-            $string = "no evaluator set";
-            throw new Exception($string);
-        }
-        $this->cohortPerformanceIndex = static::$evaluator->evaluate_cpi($this);
-        return $this->cohortPerformanceIndex;
-    }
-
-    /**
-     * Hilfsfunktion für cron-job, Ergebnisse werden ausgelesen.
-     *
-     * @return stdClass
-     */
-    public function get_result() {
-        $result = new stdClass();
-        $result->groups = array();
-        $result->users = array();
-        foreach ($this->groups as $g) {
-            $groupid = $g->get_id();
-            $gpi = $g->getGroupPerformanceIndex();
-            $participantsids = $g->get_participants_ids();
-            $result->groups[$groupid] = array('gpi' => $gpi, 'users' => $participantsids);
-            foreach ($participantsids as $participantid) {
-                $result->users[$participantid] = $groupid;
-            }
-
-        }
-
-        return $result;
-    }
-
 }

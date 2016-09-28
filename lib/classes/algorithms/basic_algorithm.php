@@ -129,32 +129,6 @@ class lib_groupal_basic_algorithm implements lib_groupal_ialgorithm {
     }
 
     /**
-     * Removes a participant from the participants which need to be matched
-     *
-     * @param lib_groupal_participant $participant
-     * @return bool
-     */
-    public function remove_participant(lib_groupal_participant $participant) {
-        $index = array_search($participant, $this->participants);
-        if ($this->participants == null || $index == false) {
-            return false;
-        }
-        // Decrease count of Participants.
-        $this->numberofparticipants--;
-        $this->cohort->remove_participant($participant);
-
-        // Remove participant.
-        array_splice($this->participants, $index);
-
-        // If in non-matched, remove there as well.
-        $index = array_search($participant, $this->notmatchedparticipants);
-        if ($index != false) {
-            array_splice($this->notmatchedparticipants, $index);
-        }
-
-    }
-
-    /**
      *  The main method to call for getting a formation "run" (this takes a while)
      *  Uses the global set matcher to assign evry not yet matched participant to a group
      *

@@ -80,12 +80,12 @@ class mod_groupformation_grouping {
             } else {
                 for ($j = 0; $j < count($criteria); $j++) {
                     $criterion = $criteria[$j];
-                    if (array_key_exists($criterion->getName(), $configuration)) {
-                        $mode = $configuration[$criterion->getName()];
+                    if (array_key_exists($criterion->get_name(), $configuration)) {
+                        $mode = $configuration[$criterion->get_name()];
                         if (is_null($mode)) {
                             $criterion = null;
                         } else {
-                            $criterion->setIsHomogeneous($mode);
+                            $criterion->set_homogeneous($mode);
                         }
                     } else {
                         $criterion = null;

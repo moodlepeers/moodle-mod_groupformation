@@ -70,6 +70,7 @@ class mod_groupformation_basic_grouping extends mod_groupformation_grouping {
         if (count($users[0]) < $numberofslices) {
             return array();
         }
+
         // Divide users into n slices.
         $slices = $this->slicing($users[0], $numberofslices);
 

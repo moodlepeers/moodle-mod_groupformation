@@ -54,7 +54,7 @@ class lib_groupal_topic_algorithm implements lib_groupal_ialgorithm {
     public function __construct($topics, $participants) {
 
         foreach ($participants as $p) {
-            $this->participants[$p->ID] = clone($p);
+            $this->participants[$p->id] = clone($p);
         }
 
         $this->participantscount = count($participants);
@@ -103,9 +103,9 @@ class lib_groupal_topic_algorithm implements lib_groupal_ialgorithm {
 
         // TODO Participant with just topics as criterions? can the values of criterion be empty?
         foreach (array_values($this->participants) as $user) {
-            $currentuserid = $user->ID;
+            $currentuserid = $user->id;
             foreach ($user->criteria as $cr) {
-                if ($cr->getName() == 'topic') {
+                if ($cr->get_name() == 'topic') {
                     $ratings = $cr->get_values();
                     foreach ($ratings as $choiceid => $rating) {
                         $ratingsarray[] = new rating_for_topic($choiceid, $currentuserid, $rating);
