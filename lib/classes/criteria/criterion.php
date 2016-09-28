@@ -1,23 +1,19 @@
 <?php
-// This file is part of PHP implementation of GroupAL
-// http://sourceforge.net/projects/groupal/
+// This file is part of Moodle - http://moodle.org/
 //
-// GroupAL is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// GroupAL implementations are distributed in the hope that it will be useful,
+// Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU Lesser General Public License for more details.
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 //
-// You should have received a copy of the GNU Lesser General Public License
-// along with GroupAL. If not, see <http://www.gnu.org/licenses/>.
-//
-//  This code CAN be used as a code-base in Moodle
-// (e.g. for moodle-mod_groupformation). Then put this code in a folder
-// <moodle>\lib\groupal
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * This abstract class contains method signatures and field variables for organizing
  * values based on users answers
@@ -35,25 +31,25 @@ abstract class lib_groupal_criterion {
     protected $value = array();
 
     /** @var float Max valid value of an criterion */
-    protected $maxValue = 1.0;
+    protected $maxvalue = 1.0;
 
     /** @var float Min valid value of an criterion */
-    protected $minValue = 0.0;
+    protected $minvalue = 0.0;
 
     /** @var bool  flag to mark Criterion as homogeneous or as not homogeneous (heterogeneous) */
-    protected $isHomogeneous = false;
+    protected $homogeneous = false;
 
     /**
      * @return String
      */
-    public function getName() {
+    public function get_name() {
         return $this->name;
     }
 
     /**
      * @param String $n
      */
-    public function setName($n) {
+    public function set_name($n) {
         $this->name = $n;
     }
 
@@ -61,7 +57,7 @@ abstract class lib_groupal_criterion {
      * @param $i int index
      * @return float value at index i
      */
-    public function getValue($i) {
+    public function get_value($i) {
         return $this->value[$i];
     }
 
@@ -69,20 +65,22 @@ abstract class lib_groupal_criterion {
     /**
      * @return float[]
      */
-    public function getValues() {
+    public function get_values() {
         return $this->value;
     }
 
 
     /**
      * Adds or replaces value at index. Checks for min/max value conformity
-     * @param int $i index
-     * @param float $v value
+     *
+     * @param $i
+     * @param $v
+     * @throws Exception
      */
-    public function setValue($i, $v) {
-        if ($v < $this->getMinValue() || $v > $this->getMaxValue()) {
-            throw new Exception("value (" . $v . ") is out of min/max value area! (" . $this->getMinValue() . " to " .
-                $this->getMaxValue() . ") [" . $this->getName() . "]");
+    public function set_value($i, $v) {
+        if ($v < $this->get_min_value() || $v > $this->get_max_value()) {
+            throw new Exception("value (" . $v . ") is out of min/max value area! (" . $this->get_min_value() . " to " .
+                $this->get_max_value() . ") [" . $this->get_name() . "]");
         }
         $this->value[$i] = $v;
     }
@@ -91,9 +89,9 @@ abstract class lib_groupal_criterion {
     /**
      * @param float[] $v iterates and copies each value
      */
-    public function setValues(&$v) {
+    public function set_values(&$v) {
         for ($i = 0; $i < count($v); $i++) {
-            $this->setValue($i, $v[$i]);
+            $this->set_value($i, $v[$i]);
         }
     }
 
@@ -101,50 +99,51 @@ abstract class lib_groupal_criterion {
     /**
      * @return float
      */
-    public function getMaxValue() {
-        return $this->maxValue;
+    public function get_max_value() {
+        return $this->maxvalue;
     }
 
 
     /**
-     * @param float $number
+     * @param $number
+     * @throws Exception
      */
-    public function setMaxValue($number) {
-        if ($this->getMinValue() > $number) {
-            throw new Exception("maxVal cannot be lower than minVal (" . $this->getMinValue() . ")");
+    public function set_max_value($number) {
+        if ($this->get_min_value() > $number) {
+            throw new Exception("maxVal cannot be lower than minVal (" . $this->get_min_value() . ")");
         }
-        $this->maxValue = $number;
+        $this->maxvalue = $number;
     }
 
 
     /**
      * @return float
      */
-    function getMinValue() {
-        return $this->minValue;
+    function get_min_value() {
+        return $this->minvalue;
     }
 
 
     /**
      * @param float $number
      */
-    function setMinValue($number) {
-        $this->minValue = $number;
+    function set_min_value($number) {
+        $this->minvalue = $number;
     }
 
 
     /**
      * @return bool
      */
-    public function getIsHomogeneous() {
-        return $this->isHomogeneous;
+    public function is_homogeneous() {
+        return $this->homogeneous;
     }
 
     /**
      * @param bool $bool
      */
-    public function setIsHomogeneous($bool) {
-        $this->isHomogeneous = $bool;
+    public function set_homogeneous($bool) {
+        $this->homogeneous = $bool;
     }
 
 
@@ -152,8 +151,8 @@ abstract class lib_groupal_criterion {
      * @return float
      * @throws Exception if Criterion (this) not valid
      */
-    public function getWeight() {
-        return lib_groupal_criterion_weight::getWeight($this->name);
+    public function get_weight() {
+        return lib_groupal_criterion_weight::get_weight($this->name);
     }
 
 }

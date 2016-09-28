@@ -1,23 +1,19 @@
 <?php
-// This file is part of PHP implementation of GroupAL
-// http://sourceforge.net/projects/groupal/
+// This file is part of Moodle - http://moodle.org/
 //
-// GroupAL is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// GroupAL implementations are distributed in the hope that it will be useful,
+// Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU Lesser General Public License for more details.
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 //
-// You should have received a copy of the GNU Lesser General Public License
-// along with GroupAL. If not, see <http://www.gnu.org/licenses/>.
-//
-//  This code CAN be used as a code-base in Moodle
-// (e.g. for moodle-mod_groupformation). Then put this code in a folder
-// <moodle>\lib\groupal
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * This class contains an implementation of xml_writer based on a cohort object in order
  * to export the result of the group formation
@@ -66,13 +62,13 @@ class lib_groupal_cohort_writer {
         $writer->setIndent(true);
         $writer->setIndentString("    ");
 
-        $writer->startElement('Instance'); // <Instance ..>
+        $writer->startElement('Instance');
 
         $writer->writeAttribute('id', '2015');
 
         $this->write_groups($cohort);
 
-        $writer->endElement();    // </Instance>
+        $writer->endElement();
 
         $writer->endDocument();
 
@@ -90,8 +86,8 @@ class lib_groupal_cohort_writer {
         $writer = $this->writer;
 
         $writer->startElement('Groups');
-        $writer->writeAttribute('usedMatcher', $cohort->whichMatcherUsed);
-        $writer->writeAttribute('CohortPerformanceIndex', $cohort->calculateCohortPerformanceIndex());
+        $writer->writeAttribute('usedMatcher', $cohort->whichmatcherused);
+        $writer->writeAttribute('CohortPerformanceIndex', $cohort->calculate_cpi());
         $writer->writeAttribute('CohortAveragePerformanceIndex', "-");
         $writer->writeAttribute('CohortNormStDev', "-");
 
@@ -111,12 +107,12 @@ class lib_groupal_cohort_writer {
         $writer = $this->writer;
 
         $writer->startElement('Group');
-        $writer->writeAttribute('id', $group->getID());
-        $writer->writeAttribute('groupPerformanceIndex', $group->getGroupPerformanceIndex());
+        $writer->writeAttribute('id', $group->get_id());
+        $writer->writeAttribute('groupPerformanceIndex', $group->get_gpi());
         $writer->writeAttribute('groupAverage', '-');
         $writer->writeAttribute('normalizedStDev', '-');
 
-        foreach ($group->getParticipants() as $p) {
+        foreach ($group->get_participants() as $p) {
             $this->write_participant($p);
         }
 
@@ -132,9 +128,9 @@ class lib_groupal_cohort_writer {
         $writer = $this->writer;
 
         $writer->startElement('participant');
-        $writer->writeAttribute('id', $p->getID());
+        $writer->writeAttribute('id', $p->get_id());
 
-        $criteria = $p->getCriteria();
+        $criteria = $p->get_criteria();
 
         $this->write_criteria($criteria);
 
@@ -174,10 +170,10 @@ class lib_groupal_cohort_writer {
      */
     private function write_criterion_attributes(lib_groupal_criterion $c) {
         $writer = $this->writer;
-        $writer->writeAttribute('name', $c->getName());
-        $writer->writeAttribute('isHomogeneous', $c->getIsHomogeneous());
-        $writer->writeAttribute('minValue', $c->getMinValue());
-        $writer->writeAttribute('maxValue', $c->getMaxValue());
-        $writer->writeAttribute('value0', array_sum($c->getValues()) / count($c->getValues()));
+        $writer->writeAttribute('name', $c->get_name());
+        $writer->writeAttribute('isHomogeneous', $c->is_homogeneous());
+        $writer->writeAttribute('minValue', $c->get_min_value());
+        $writer->writeAttribute('maxValue', $c->get_max_value());
+        $writer->writeAttribute('value0', array_sum($c->get_values()) / count($c->get_values()));
     }
 }

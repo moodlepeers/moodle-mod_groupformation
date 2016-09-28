@@ -1,23 +1,19 @@
 <?php
-// This file is part of PHP implementation of GroupAL
-// http://sourceforge.net/projects/groupal/
+// This file is part of Moodle - http://moodle.org/
 //
-// GroupAL is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// GroupAL implementations are distributed in the hope that it will be useful,
+// Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU Lesser General Public License for more details.
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 //
-// You should have received a copy of the GNU Lesser General Public License
-// along with GroupAL. If not, see <http://www.gnu.org/licenses/>.
-//
-//  This code CAN be used as a code-base in Moodle
-// (e.g. for moodle-mod_groupformation). Then put this code in a folder
-// <moodle>\lib\groupal
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * This class contains an implementation of an xml writer for participants with criteria
  *
@@ -63,17 +59,17 @@ class lib_groupal_participant_writer {
         $writer->setIndent(true);
         $writer->setIndentString("    ");
 
-        $writer->startElement('Participants'); // <Participants ..>
+        $writer->startElement('Participants');
 
         $writer->writeAttribute('version', '1');
 
-        $criteria_types = $participants[0]->getCriteria();
+        $criteriatypes = $participants[0]->getCriteria();
 
-        $this->write_criteria_types($criteria_types);
+        $this->write_criteria_types($criteriatypes);
 
         $this->write_participants($participants);
 
-        $writer->endElement();    // </Participants>
+        $writer->endElement();
 
         $writer->endDocument();
 
@@ -102,9 +98,9 @@ class lib_groupal_participant_writer {
         $writer = $this->writer;
 
         $writer->startElement('participant');
-        $writer->writeAttribute('id', $p->getID());
+        $writer->writeAttribute('id', $p->get_id());
 
-        $criteria = $p->getCriteria();
+        $criteria = $p->get_criteria();
 
         $this->write_criteria($criteria);
 
@@ -134,7 +130,7 @@ class lib_groupal_participant_writer {
 
         $this->write_criterion_attributes($c);
 
-        $values = $c->getValues();
+        $values = $c->get_values();
 
         $this->write_criterion_values($values);
 
@@ -174,26 +170,26 @@ class lib_groupal_participant_writer {
      */
     private function write_criterion_attributes(lib_groupal_criterion $c) {
         $writer = $this->writer;
-        $writer->writeAttribute('name', $c->getName());
-        $writer->writeAttribute('minValue', $c->getMinValue());
-        $writer->writeAttribute('maxValue', $c->getMaxValue());
-        $writer->writeAttribute('isHomogeneous', ($c->getIsHomogeneous() == 1) ? "true" : "false");
-        $writer->writeAttribute('weight', $c->getWeight());
-        $writer->writeAttribute('valueCount', count($c->getValues()));
+        $writer->writeAttribute('name', $c->get_name());
+        $writer->writeAttribute('minValue', $c->get_min_value());
+        $writer->writeAttribute('maxValue', $c->get_max_value());
+        $writer->writeAttribute('isHomogeneous', ($c->is_homogeneous() == 1) ? "true" : "false");
+        $writer->writeAttribute('weight', $c->get_weight());
+        $writer->writeAttribute('valueCount', count($c->get_values()));
     }
 
     /**
      * Writes XML for an array of criterion types
      *
-     * @param array $criteria_types
+     * @param array $criteriatypes
      */
-    private function write_criteria_types($criteria_types) {
+    private function write_criteria_types($criteriatypes) {
         $writer = $this->writer;
 
         $writer->startElement('UsedCriteria');
 
-        foreach ($criteria_types as $c_type) {
-            $this->write_criterion_type($c_type);
+        foreach ($criteriatypes as $ctype) {
+            $this->write_criterion_type($ctype);
         }
 
         $writer->endElement();

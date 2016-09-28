@@ -107,16 +107,16 @@ if ($CFG->debug === 32767) { //true) {
 
 /* ---------- Job Manager Usage ------------------------- */
 
-//$jm = new mod_groupformation_job_manager ();
-//$job = null;
-//
-//$job = $jm::get_job($groupformation->id);
-//
-//if (!is_null($job)) {
-//    $result = $jm::do_groupal($job);
-//    var_dump($result);
-//    // $saved = $jm::save_result($job,$result);
-//}
+$jm = new mod_groupformation_job_manager ();
+$job = null;
+
+$job = $jm::get_job($groupformation->id);
+
+if (!is_null($job)) {
+    $result = $jm::do_groupal($job);
+    var_dump($result);
+    // $saved = $jm::save_result($job,$result);
+}
 
 /* ---------- / Job Manager Usage ----------------------- */
 

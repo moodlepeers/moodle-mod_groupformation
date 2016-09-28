@@ -74,7 +74,7 @@ class mod_groupformation_participant_parser {
                     $participant = new lib_groupal_participant (array(
                         $criterion), $user->id);
                 } else {
-                    $participant->addCriterion($criterion);
+                    $participant->add_criterion($criterion);
                 }
                 $position++;
             }

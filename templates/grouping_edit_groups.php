@@ -30,7 +30,7 @@
 <div class="gf_pad_content">
     <?php foreach ($this->_['generated_groups'] as $key => $entry) { ?>
 
-        <div id="<?php echo $i == 0 ? 'first_group' : ``; ?>" class="grid bottom_stripe">
+        <div id="<?php echo $i == 0 ? 'first_group' : ''; ?>" class="grid bottom_stripe">
             <?php $i++; ?>
             <div class="col_s_100">
                 <div class="group_params"><b><?php echo get_string('name_by_group', 'groupformation'); ?></b>

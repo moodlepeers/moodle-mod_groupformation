@@ -1,23 +1,19 @@
 <?php
-// This file is part of PHP implementation of GroupAL
-// http://sourceforge.net/projects/groupal/
+// This file is part of Moodle - http://moodle.org/
 //
-// GroupAL is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// GroupAL implementations are distributed in the hope that it will be useful,
+// Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU Lesser General Public License for more details.
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 //
-// You should have received a copy of the GNU Lesser General Public License
-// along with GroupAL. If not, see <http://www.gnu.org/licenses/>.
-//
-//  This code CAN be used as a code-base in Moodle
-// (e.g. for moodle-mod_groupformation). Then put this code in a folder
-// <moodle>\lib\groupal
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * This class contains the results of a group formation as a cohort consisting
  * of groups filled with participants
@@ -40,33 +36,33 @@ class lib_groupal_topic_cohort {
     public $results = null;
 
     /** @var string This is the class name of the used matcher */
-    public $whichMatcherUsed = "";
+    public $whichmatcherused = "";
 
     /** @var int This is the number of groups */
     public $numberofgroups = 0;
 
     /**
-     * lib_groupal_cohort constructor.
+     * lib_groupal_topic_cohort constructor.
      * @param $numberofgroups
      * @param null $groups
-     * @param bool|false $random
      */
     public function __construct($numberofgroups, $groups = null) {
         $this->groups = array();
         if ($groups != null) {
             for ($i = 0; $i < count($groups); $i++) {
-                $this->addGroup($groups[$i]);
+                $this->add_group($groups[$i]);
             }
         }
         $this->numberofgroups = $numberofgroups;
     }
 
     /**
-     * Adds a Group to this Cohort if not already a member
+     * Adds a Group to this Cohort if not already a member.
+     *
      * @param $g lib_groupal_group
      * @return boolean
      */
-    public function addGroup(lib_groupal_group $g) {
+    public function add_group(lib_groupal_group $g) {
         if (in_array($g, $this->groups)) {
             return false;
         }
@@ -76,7 +72,8 @@ class lib_groupal_topic_cohort {
     }
 
     /**
-     * remove one group from this Cohort
+     * remove one group from this Cohort.
+     *
      * @param $g lib_groupal_group
      * @return boolean
      */
@@ -92,7 +89,8 @@ class lib_groupal_topic_cohort {
     }
 
     /**
-     * Remove Participant from this Cohort (from all groups that are member of this Cohort)
+     * Remove Participant from this Cohort (from all groups that are member of this Cohort).
+     *
      * @param lib_groupal_participant $p
      * @return bool true if any change happend
      */
@@ -106,22 +104,22 @@ class lib_groupal_topic_cohort {
             }
         }
         if (result) {
-            $this->removeEmptyGroups();
-            $this->calculateCohortPerformanceIndex();
+            $this->remove_empty_groups();
+            $this->calculate_cpi();
         }
         return $result;
     }
 
     /**
-     * Removes all empty groups in this Cohort
+     * Removes all empty groups in this Cohort.
      * @return bool  true if any change happened
      */
-    public function removeEmptyGroups() {
+    public function remove_empty_groups() {
         $result = false;
-        $removeCandidates = array(); // Remember indices of groups to delete.
+        $removecandidates = array(); // Remember indices of groups to delete.
         for ($i = count($this->groups) - 1; $i >= 0; $i--) {
             if (count($this->groups[$i]) == 0) {
-                $removeCandidates[] = $i;
+                $removecandidates[] = $i;
             }
         }
 
@@ -130,19 +128,19 @@ class lib_groupal_topic_cohort {
         }
 
         // Remove now groups in extra loop due to concurrent modification exception.
-        // Do it from 0-n because highest indices are at the beginning in $removeCandidates.
-        for ($i = 0; $i < count($removeCandidates); $i++) {
-            array_splice($this->groups, $removeCandidates[$i], 1);
+        // Do it from 0-n because highest indices are at the beginning in $removecandidates.
+        for ($i = 0; $i < count($removecandidates); $i++) {
+            array_splice($this->groups, $removecandidates[$i], 1);
             $this->numberofgroups--;
         }
         return true;
     }
 
     /**
-     * adds empty Group
+     * adds empty Group.
      */
-    public function addEmptyGroup() {
-        $this->addGroup(new lib_groupal_group());
+    public function add_empty_group() {
+        $this->add_group(new lib_groupal_group());
     }
 
     /**
@@ -150,33 +148,30 @@ class lib_groupal_topic_cohort {
      * @return float with CohortPerformanceIndex
      * @throws Exception
      */
-    public function calculateCohortPerformanceIndex() {
+    public function calculate_cpi() {
         if (static::$evaluator == null) {
             throw new Exception("Cohort.evaluateCohortPerformanceIndex(): setEvaluator() before execute evaluateCohortPerformanceIndex()");
         }
-        $this->cohortPerformanceIndex = static::$evaluator->evaluateCohortPerformanceIndex($this);
+        $this->cohortPerformanceIndex = static::$evaluator->evaluate_cpi($this);
         return $this->cohortPerformanceIndex;
     }
 
     /**
-     * Hilfsfunktion für cron-job, Ergebnisse werden ausgelesen
+     * Hilfsfunktion für cron-job, Ergebnisse werden ausgelesen.
      *
      * @return stdClass
      */
-    public function getResult() {
+    public function get_result() {
         $result = new stdClass();
         $result->groups = array();
         $result->users = array();
-
-        // Get groupids.
         foreach ($this->groups as $g) {
-            // Groupids
-            $g_id = $g->getID();
-            $g_gpi = $g->getGroupPerformanceIndex();
-            $p_ids = $g->get_participants_ids();
-            $result->groups[$g_id] = array('gpi' => $g_gpi, 'users' => $p_ids);
-            foreach ($p_ids as $p_id) {
-                $result->users[$p_id] = $g_id;
+            $groupid = $g->get_id();
+            $gpi = $g->getGroupPerformanceIndex();
+            $participantsids = $g->get_participants_ids();
+            $result->groups[$groupid] = array('gpi' => $gpi, 'users' => $participantsids);
+            foreach ($participantsids as $participantid) {
+                $result->users[$participantid] = $groupid;
             }
 
         }

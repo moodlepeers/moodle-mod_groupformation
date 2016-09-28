@@ -1,23 +1,19 @@
 <?php
-// This file is part of PHP implementation of GroupAL
-// http://sourceforge.net/projects/groupal/
+// This file is part of Moodle - http://moodle.org/
 //
-// GroupAL is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// GroupAL implementations are distributed in the hope that it will be useful,
+// Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU Lesser General Public License for more details.
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 //
-// You should have received a copy of the GNU Lesser General Public License
-// along with GroupAL. If not, see <http://www.gnu.org/licenses/>.
-//
-//  This code CAN be used as a code-base in Moodle
-// (e.g. for moodle-mod_groupformation). Then put this code in a folder
-// <moodle>\lib\groupal
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * This class contains the results of a group formation as a cohort consisting
  * of groups filled with participants
@@ -40,10 +36,10 @@ class lib_groupal_cohort {
     public $results;
 
     /** @var string This is the class name of the used matcher */
-    public $whichMatcherUsed = "";
+    public $whichmatcherused = "";
 
     /** @var int This is the number of groups */
-    public $countOfGroups = 0;
+    public $countofgroups = 0;
 
     /** @var number This is the cohort performance index */
     public $cpi = null;
@@ -52,19 +48,18 @@ class lib_groupal_cohort {
      * lib_groupal_cohort constructor.
      * @param $numberofgroups
      * @param null $groups
-     * @param bool|false $random
      */
     public function __construct($numberofgroups, $groups = null) {
         $this->groups = array();
         if ($groups != null) {
             for ($i = 0; $i < count($groups); $i++) {
-                $this->addGroup($groups[$i]);
+                $this->add_group($groups[$i]);
             }
         }
 
         for ($i = count($this->groups); $i < $numberofgroups; $i++) {
             $g = new lib_groupal_group();
-            $this->addGroup($g);
+            $this->add_group($g);
         }
 
     }
@@ -74,13 +69,13 @@ class lib_groupal_cohort {
      * @param $g lib_groupal_group
      * @return boolean
      */
-    public function addGroup(lib_groupal_group $g) {
+    public function add_group(lib_groupal_group $g) {
         if (in_array($g, $this->groups)) {
             return false;
         }
 
         $this->groups[] = $g;
-        $this->calculateCohortPerformanceIndex();
+        $this->calculate_cpi();
 
         return true;
     }
@@ -90,11 +85,11 @@ class lib_groupal_cohort {
      * @return float with CohortPerformanceIndex
      * @throws Exception
      */
-    public function calculateCohortPerformanceIndex() {
+    public function calculate_cpi() {
         if (static::$evaluator == null) {
             throw new Exception("Cohort.evaluateCohortPerformanceIndex(): setEvaluator() before execute evaluateCohortPerformanceIndex()");
         }
-        $this->cpi = static::$evaluator->evaluateCohortPerformanceIndex($this);
+        $this->cpi = static::$evaluator->evaluate_cpi($this);
 
         return $this->cpi;
     }
@@ -104,14 +99,14 @@ class lib_groupal_cohort {
      * @param $g lib_groupal_group
      * @return boolean
      */
-    public function removeGroup(lib_groupal_group $g) {
+    public function remove_group(lib_groupal_group $g) {
         $index = array_search($g, $this->groups);
         if ($index == false) {
             return false;
         }
 
         array_splice($this->groups, index, 1);
-        $this->countOfGroups--;
+        $this->countofgroups--;
 
         return true;
     }
@@ -121,7 +116,7 @@ class lib_groupal_cohort {
      * @param lib_groupal_participant $p
      * @return bool true if any change happend
      */
-    public function removeParticipant(lib_groupal_participant $p) {
+    public function remove_participant(lib_groupal_participant $p) {
         $result = false;
         foreach ($this->groups as $g) {
             $i = array_search($p, $g);
@@ -131,8 +126,8 @@ class lib_groupal_cohort {
             }
         }
         if (result) {
-            $this->removeEmptyGroups();
-            $this->calculateCohortPerformanceIndex();
+            $this->remove_empty_groups();
+            $this->calculate_cpi();
         }
 
         return $result;
@@ -142,12 +137,12 @@ class lib_groupal_cohort {
      * Removes all empty groups in this Cohort
      * @return bool  true if any change happened
      */
-    public function removeEmptyGroups() {
+    public function remove_empty_groups() {
         $result = false;
-        $removeCandidates = array(); // Remember indices of groups to delete.
+        $removecandidates = array(); // Remember indices of groups to delete.
         for ($i = count($this->groups) - 1; $i >= 0; $i--) {
             if (count($this->groups[$i]) == 0) {
-                $removeCandidates[] = $i;
+                $removecandidates[] = $i;
             }
         }
 
@@ -156,10 +151,10 @@ class lib_groupal_cohort {
         }
 
         // Remove now groups in extra loop due to concurrent modification exception
-        // Do it from 0-n because highest indices are at the beginning in $removeCandidates.
-        for ($i = 0; $i < count($removeCandidates); $i++) {
-            array_splice($this->groups, $removeCandidates[$i], 1);
-            $this->countOfGroups--;
+        // Do it from 0-n because highest indices are at the beginning in $removecandidates.
+        for ($i = 0; $i < count($removecandidates); $i++) {
+            array_splice($this->groups, $removecandidates[$i], 1);
+            $this->countofgroups--;
         }
 
         return true;
@@ -168,8 +163,8 @@ class lib_groupal_cohort {
     /**
      * adds empty Group
      */
-    public function addEmptyGroup() {
-        $this->addGroup(new lib_groupal_group());
+    public function add_empty_group() {
+        $this->add_group(new lib_groupal_group());
     }
 
     /**
@@ -177,7 +172,7 @@ class lib_groupal_cohort {
      *
      * @return stdClass
      */
-    public function getResult() {
+    public function get_result() {
         $result = new stdClass();
         // Collect groupsIDs und Groups.
         $result->groups = array();
@@ -186,12 +181,12 @@ class lib_groupal_cohort {
         // Get groupids.
         foreach ($this->groups as $g) {
             // GroupIds.
-            $g_id = $g->getID();
-            $g_gpi = $g->getGroupPerformanceIndex();
-            $p_ids = $g->get_participants_ids();
-            $result->groups[$g_id] = array('gpi' => $g_gpi, 'users' => $p_ids);
-            foreach ($p_ids as $p_id) {
-                $result->users[$p_id] = $g_id;
+            $groupid = $g->get_id();
+            $gpi = $g->get_gpi();
+            $participantsids = $g->get_participants_ids();
+            $result->groups[$groupid] = array('gpi' => $gpi, 'users' => $participantsids);
+            foreach ($participantsids as $p_id) {
+                $result->users[$p_id] = $groupid;
             }
 
         }

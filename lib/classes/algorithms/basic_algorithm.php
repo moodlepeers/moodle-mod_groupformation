@@ -1,23 +1,19 @@
 <?php
-// This file is part of PHP implementation of GroupAL
-// http://sourceforge.net/projects/groupal/
+// This file is part of Moodle - http://moodle.org/
 //
-// GroupAL is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// GroupAL implementations are distributed in the hope that it will be useful,
+// Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU Lesser General Public License for more details.
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 //
-// You should have received a copy of the GNU Lesser General Public License
-// along with GroupAL. If not, see <http://www.gnu.org/licenses/>.
-//
-//  This code CAN be used as a code-base in Moodle 
-// (e.g. for moodle-mod_groupformation). Then put this code in a folder
-// <moodle>\lib\groupal
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * main class to be used for group formations. get an instance of this and run your
  * groupformations using the provided API of this class.
@@ -65,21 +61,19 @@ class lib_groupal_basic_algorithm implements lib_groupal_ialgorithm {
 
     /**
      * lib_groupal_basic_algorithm constructor.
-     * @param $_participants
+     * @param $participants
      * @param lib_groupal_imatcher $matcher
      * @param $groupsize
      */
-    public function __construct($_participants, lib_groupal_imatcher $matcher, $groupsize) {
+    public function __construct($participants, lib_groupal_imatcher $matcher, $groupsize) {
 
-        foreach ($_participants as $p) {
+        foreach ($participants as $p) {
             $this->participants[] = clone($p);
         }
 
         $this->matcher = $matcher;
 
-        $this->evaluator = new lib_groupal_evaluator(); // this SHOULD be a parameter!
-
-        // $this->optimizer = $_optimizer;
+        $this->evaluator = new lib_groupal_evaluator();
 
         $this->groupsize = $groupsize;
 
@@ -92,16 +86,16 @@ class lib_groupal_basic_algorithm implements lib_groupal_ialgorithm {
     private function init() {
         $this->numberofparticipants = count($this->participants);
 
-        lib_groupal_group::setGroupMembersMaxSize($this->groupsize);
+        lib_groupal_group::set_group_members_max_size($this->groupsize);
 
         lib_groupal_group::$evaluator = $this->evaluator;
 
         lib_groupal_cohort::$evaluator = $this->evaluator;
 
-        // set cohort: generate empty groups in cohort to fill with participants
+        // set cohort: generate empty groups in cohort to fill with participants.
         $this->cohort = new lib_groupal_cohort(ceil($this->numberofparticipants / $this->groupsize));
 
-        // set the list of not yet matched participants; the array is automatically copied in PHP
+        // set the list of not yet matched participants; the array is automatically copied in PHP.
         $this->notmatchedparticipants = $this->participants;
 
         $this->numberofgroups = 0;
@@ -113,23 +107,23 @@ class lib_groupal_basic_algorithm implements lib_groupal_ialgorithm {
      * @param lib_groupal_participant $participant
      * @return bool
      */
-    public function addNewParticipant(lib_groupal_participant $participant) {
+    public function add_new_participant(lib_groupal_participant $participant) {
         if ($this->participants == null || in_array($participant, $this->participants)) {
             return false;
         }
 
-        // increase count of participants
+        // increase count of participants.
         $this->numberofparticipants++;
         $tmpX = ceil($this->numberofparticipants / $this->groupsize);
-        // if count of groups changed, then new empty Group
+        // if count of groups changed, then new empty Group.
         if ($tmpX != $this->numberofgroups) {
             $this->numberofgroups = $tmpX;
-            $this->cohort->addEmptyGroup();
+            $this->cohort->add_empty_group();
         }
 
-        // add the new participant to entries
+        // add the new participant to entries.
         $this->participants[] = $participant;
-        // add new participant to the set of not yet matched entries
+        // add new participant to the set of not yet matched entries.
         $this->notmatchedparticipants[] = $participant;
         return true;
     }
@@ -140,19 +134,19 @@ class lib_groupal_basic_algorithm implements lib_groupal_ialgorithm {
      * @param lib_groupal_participant $participant
      * @return bool
      */
-    public function removeParticipant(lib_groupal_participant $participant) {
+    public function remove_participant(lib_groupal_participant $participant) {
         $index = array_search($participant, $this->participants);
         if ($this->participants == null || $index == false) {
             return false;
         }
-        // decrease count of Participants
+        // decrease count of Participants.
         $this->numberofparticipants--;
-        $this->cohort->removeParticipant($participant);
+        $this->cohort->remove_participant($participant);
 
-        // remove participant
+        // remove participant.
         array_splice($this->participants, $index);
 
-        // if in non-matched, remove there as well
+        // if in non-matched, remove there as well.
         $index = array_search($participant, $this->notmatchedparticipants);
         if ($index != false) {
             array_splice($this->notmatchedparticipants, $index);
@@ -168,10 +162,10 @@ class lib_groupal_basic_algorithm implements lib_groupal_ialgorithm {
      * @throws Exception
      */
     public function do_one_formation() {
-        $this->matcher->matchToGroups($this->notmatchedparticipants, $this->cohort->groups);
-        $this->cohort->countOfGroups = count($this->cohort->groups);
-        $this->cohort->whichMatcherUsed = get_class($this);
-        $this->cohort->calculateCohortPerformanceIndex();
+        $this->matcher->match_to_groups($this->notmatchedparticipants, $this->cohort->groups);
+        $this->cohort->countofgroups = count($this->cohort->groups);
+        $this->cohort->whichmatcherused = get_class($this);
+        $this->cohort->calculate_cpi();
         return $this->cohort;
     }
 }

@@ -1,23 +1,19 @@
 <?php
-// This file is part of PHP implementation of GroupAL
-// http://sourceforge.net/projects/groupal/
+// This file is part of Moodle - http://moodle.org/
 //
-// GroupAL is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// GroupAL implementations are distributed in the hope that it will be useful,
+// Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU Lesser General Public License for more details.
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 //
-// You should have received a copy of the GNU Lesser General Public License
-// along with GroupAL. If not, see <http://www.gnu.org/licenses/>.
-//
-//  This code CAN be used as a code-base in Moodle
-// (e.g. for moodle-mod_groupformation). Then put this code in a folder
-// <moodle>\lib\groupal
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * This class contains an implementation of a random group formation algorithm
  *
@@ -54,38 +50,15 @@ class lib_groupal_random_algorithm implements lib_groupal_ialgorithm {
      * @return lib_groupal_cohort
      */
     public function do_one_formation() {
-        lib_groupal_group::setGroupMembersMaxSize($this->groupsize);
+        lib_groupal_group::set_group_members_max_size($this->groupsize);
 
         $participants = $this->participants;
-        $groupsize = $this->groupsize; // 6;
-
-        // Komplexere Variante mit seeds.
-
-        // // hier später die groupformationid
-        // $seed = 2;
-        // $randomArray = array ();
-        // for($i = 0; $i < count ( $this->participants ); $i ++) {
-        // $randomArray [$i] = mt_srand ( $seed );
-        // }
-
-        // // sortiere
-        // asort ( $randomArray );
-
-        // $participants = array ();
-        // foreach ( $randomArray as $key => $value ) {
-        // $participants [] = $this->participants [$key];
-        // }
+        $groupsize = $this->groupsize;
 
         shuffle($participants);
 
-        // MORE EQUAL DIVIDED GROUPS WITH THIS!
-        // Example: 189 is not divisible by 6,
-        // but 186 is: 186/6=31
-        // the 32nd group would have 3 of 6 members
-        // better would be to have multiple 5er-Gruppen
-
         $n = count($participants);
-        $g = $groupsize; // 6;
+        $g = $groupsize;
 
         $completepart = null;
         $incompletepart = null;
@@ -110,26 +83,18 @@ class lib_groupal_random_algorithm implements lib_groupal_ialgorithm {
             $incompletepart = 0;
         }
 
-        // NOW WE HAVE
-        // $completepart = number of participants which form complete groups
-        // and
-        // $incompletepart = number of participants which form incomplete groups with equal sizes
-        // example: n = 189, g = 6
-        // $completepart = 174 --> 29x 6er-Gruppe
-        // $incompletepart = 15 --> 3x 5er-Gruppe.
-
         $completeusers = array();
         $incompleteusers = array();
         if ($completepart < 0 && $incompletepart < 0) {
             $completeusers = $participants;
             $incompleteusers = array();
-        } elseif ($completepart == 0 && $incompletepart == $n) {
+        } else if ($completepart == 0 && $incompletepart == $n) {
             $completeusers = array();
             $incompleteusers = $participants;
-        } elseif ($completepart == $n && $incompletepart == 0) {
+        } else if ($completepart == $n && $incompletepart == 0) {
             $completeusers = $participants;
             $incompleteusers = array();
-        } elseif ($completepart != 0 && $incompletepart != 0) {
+        } else if ($completepart != 0 && $incompletepart != 0) {
             $completeusers = array();
             $incompleteusers = array();
 
@@ -152,7 +117,7 @@ class lib_groupal_random_algorithm implements lib_groupal_ialgorithm {
                     $onegroup = new lib_groupal_group ();
                 }
 
-                $onegroup->addParticipant($p, true);
+                $onegroup->add_participant($p, true);
 
                 if (($position + 1) == $groupsize) {
                     $position = 0;
@@ -162,8 +127,9 @@ class lib_groupal_random_algorithm implements lib_groupal_ialgorithm {
                 }
             }
 
-            if ($position != 0)
+            if ($position != 0){
                 $groups [] = $onegroup;
+            }
         }
         if (count($incompleteusers) > 0) {
             $position = 0;
@@ -174,7 +140,7 @@ class lib_groupal_random_algorithm implements lib_groupal_ialgorithm {
                     $onegroup = new lib_groupal_group ();
                 }
 
-                $onegroup->addParticipant($p, true);
+                $onegroup->add_participant($p, true);
 
                 if (($position + 1) == ($groupsize - 1)) {
                     $position = 0;
@@ -184,13 +150,14 @@ class lib_groupal_random_algorithm implements lib_groupal_ialgorithm {
                 }
             }
 
-            if ($position != 0)
+            if ($position != 0) {
                 $groups [] = $onegroup;
+            }
         }
 
         $this->cohort = new lib_groupal_random_cohort (count($groups), $groups);
-        $this->cohort->whichMatcherUsed = get_class($this);
-        $this->cohort->countOfGroups = $this->cohort->countOfGroups;
+        $this->cohort->whichmatcherused = get_class($this);
+        $this->cohort->countofgroups = $this->cohort->countofgroups;
         $this->cohort->cpi = null;
         return $this->cohort;
     }

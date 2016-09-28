@@ -1,23 +1,19 @@
 <?php
-// This file is part of PHP implementation of GroupAL
-// http://sourceforge.net/projects/groupal/
+// This file is part of Moodle - http://moodle.org/
 //
-// GroupAL is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// GroupAL implementations are distributed in the hope that it will be useful,
+// Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU Lesser General Public License for more details.
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 //
-// You should have received a copy of the GNU Lesser General Public License
-// along with GroupAL. If not, see <http://www.gnu.org/licenses/>.
-//
-//  This code CAN be used as a code-base in Moodle
-// (e.g. for moodle-mod_groupformation). Then put this code in a folder
-// <moodle>\lib\groupal
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * This class contains an implementation of an ListItem as an Participant
  *
@@ -29,16 +25,16 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion
 class lib_groupal_participant {
 
     /** @var int This is the static ID count which assigns ids if they are not given */
-    private static $IDcount = 0;
+    private static $idcount = 0;
 
     /** @var array This array contains all criteria of a participant */
     public $criteria = array();
 
     /** @var int This will contain the group id of the group of the participant */
-    public $actualGroup = null;
+    public $actualgroup = null;
 
     /** @var int This is the participants id */
-    public $ID = 0; // int
+    public $id = 0;
 
     /**
      * lib_groupal_participant constructor.
@@ -49,14 +45,14 @@ class lib_groupal_participant {
     public function __construct($criteria = array(), $id = null) {
 
         if (is_null($id)) {
-            $this->ID = static::$IDcount;
-            static::$IDcount++;
+            $this->id = static::$idcount;
+            static::$idcount++;
         } else {
-            $this->ID = $id;
+            $this->id = $id;
         }
 
         foreach ($criteria as $criterion) {
-            $this->addCriterion($criterion);
+            $this->add_criterion($criterion);
         }
     }
 
@@ -65,7 +61,7 @@ class lib_groupal_participant {
      *
      * @return array
      */
-    public function getCriteria() {
+    public function get_criteria() {
         return $this->criteria;
     }
 
@@ -74,7 +70,7 @@ class lib_groupal_participant {
      *
      * @param lib_groupal_criterion $c
      */
-    public function addCriterion(lib_groupal_criterion $c) {
+    public function add_criterion(lib_groupal_criterion $c) {
         $this->criteria[] = $c;
     }
 
@@ -83,7 +79,7 @@ class lib_groupal_participant {
      *
      * @return int|null
      */
-    public function getID() {
-        return $this->ID;
+    public function get_id() {
+        return $this->id;
     }
 }

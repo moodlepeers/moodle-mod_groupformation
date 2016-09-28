@@ -1,23 +1,18 @@
 <?php
-// This file is part of PHP implementation of GroupAL
-// http://sourceforge.net/projects/groupal/
+// This file is part of Moodle - http://moodle.org/
 //
-// GroupAL is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// GroupAL implementations are distributed in the hope that it will be useful,
+// Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU Lesser General Public License for more details.
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 //
-// You should have received a copy of the GNU Lesser General Public License
-// along with GroupAL. If not, see <http://www.gnu.org/licenses/>.
-//
-//  This code CAN be used as a code-base in Moodle
-// (e.g. for moodle-mod_groupformation). Then put this code in a folder
-// <moodle>\lib\groupal
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  * Internal library of functions for module groupdistribution.
@@ -109,7 +104,7 @@ class topic_distributor {
      * Entry-point for the \ratingallocate object to call a topics_solver
      * @param \ratingallocate $ratingallocate
      */
-    public function distribute_users($ratings, $topics, $participants_numb) {
+    public function distribute_users($ratings, $topics, $participantscount) {
 
         // Get data for the algo.
         $choicerecords = $topics;
@@ -117,26 +112,9 @@ class topic_distributor {
         // Randomize the order of the enrties to prevent advantages for early entry.
         shuffle($ratings);
 
-        $usercount = $participants_numb;
-
-        $distributions = $this->compute_distribution($choicerecords, $ratings, $usercount);
-
-        // TODO - clear allocations or groups if already made?
-
-        //        $transaction = $ratingallocate_lib->db->start_delegated_transaction(); // perform all allocation manipulation / inserts in one transaction
-
-
-        //        $ratingallocate_lib->clear_all_allocations();
-        //        $allocations_array = array();
-        //        foreach ($distributions as $choiceid => $users) {
-        //            foreach ($users as $userid) {
-        ////                $ratingallocate_lib->add_allocation($choiceid, $userid, $ratingallocate->ratingallocate->id);
-        //                $allocations_array[] = new allocation($choiceid, $userid);
-        //            }
-        //        }
+        $distributions = $this->compute_distribution($choicerecords, $ratings, $participantscount);
 
         return $distributions;
-        //        $transaction->allow_commit();
     }
 
     /**
@@ -152,7 +130,6 @@ class topic_distributor {
             $group = $this->graph[$index];
             $distribution[$groupid] = array();
             foreach ($group as $assignment) {
-                /* @var $assignment topic_edge */
                 $user = intval($assignment->to);
                 if (array_key_exists($user, $touserid)) {
                     $distribution[$groupid][] = $touserid[$user];
@@ -185,18 +162,17 @@ class topic_distributor {
 
         // Fill the conversion tables for group and user ids.
         foreach ($ratings as $rating) {
-            if (!array_key_exists($rating->getUserid(), $fromuserid)) {
-                $fromuserid[$rating->getUserid()] = $ui;
-                $touserid[$ui] = $rating->getUserid();
+            if (!array_key_exists($rating->get_userid(), $fromuserid)) {
+                $fromuserid[$rating->get_userid()] = $ui;
+                $touserid[$ui] = $rating->get_userid();
                 $ui++;
             }
-            if (!array_key_exists($rating->getChoiceid(), $fromchoiceid)) {
-                $fromchoiceid[$rating->getChoiceid()] = $gi;
-                $tochoiceid[$gi] = $rating->getChoiceid();
+            if (!array_key_exists($rating->get_choiceid(), $fromchoiceid)) {
+                $fromchoiceid[$rating->get_choiceid()] = $gi;
+                $tochoiceid[$gi] = $rating->get_choiceid();
                 $gi++;
             }
         }
-
 
         return array($fromuserid, $touserid, $fromchoiceid, $tochoiceid);
     }
@@ -212,7 +188,8 @@ class topic_distributor {
      * @param type $source
      * @param type $sink
      */
-    protected function setup_graph($choicecount, $usercount, $fromuserid, $fromchoiceid, $ratings, $choicedata, $source, $sink, $weightmult = 1) {
+    protected function setup_graph($choicecount, $usercount, $fromuserid, $fromchoiceid, $ratings, $choicedata,
+                                   $source, $sink, $weightmult = 1) {
         // Construct the datastructures for the algorithm
         // A directed weighted bipartite graph.
         // A source is connected to all users with unit cost.
@@ -232,14 +209,14 @@ class topic_distributor {
 
         foreach ($fromchoiceid as $id => $choice) {
             $this->graph[$choice] = array();
-            $this->graph[$choice][] = new topic_edge($choice, $sink, 0, $choicedata[$id]->getMaxsize());
+            $this->graph[$choice][] = new topic_edge($choice, $sink, 0, $choicedata[$id]->get_max_size());
         }
 
         // Add the edges representing the ratings to the graph.
         foreach ($ratings as $id => $rating) {
-            $user = $fromuserid[$rating->getUserid()];
-            $choice = $fromchoiceid[$rating->getChoiceid()];
-            $weight = $rating->getRating();
+            $user = $fromuserid[$rating->get_userid()];
+            $choice = $fromchoiceid[$rating->get_choiceid()];
+            $weight = $rating->get_rating();
             if ($weight > 0) {
                 $this->graph[$user][] = new topic_edge($user, $choice, $weightmult * $weight);
             }
@@ -265,7 +242,6 @@ class topic_distributor {
             $foundedgeid = -1;
             // Find the edge.
             foreach ($this->graph[$from] as $index => &$edge) {
-                /* @var $edge topic_edge */
                 if ($edge->to == $to) {
                     $foundedgeid = $index;
                     break;
