@@ -35,23 +35,6 @@ class mod_groupformation_logging_controller {
     const DEBUG = 4;
     private $logginglevels;
     const LOGGING_TABLE_NAME = "groupformation_logging";
-    private $messages = array(
-        '<index>' => 3,
-
-        '<create_instance>' => 3, '<update_instance>' => 3, '<delete_instance>' => 3,
-
-        '<view_settings>' => 3, '<save_settings>' => 3,
-
-        '<view_student_overview>' => 3, '<view_student_questionnaire>' => 3, '<view_student_evaluation>' => 3,
-        '<view_student_group_assignment>' => 3,
-
-        '<view_teacher_overview>' => 3, '<view_teacher_grouping>' => 3, '<view_teacher_questionnaire_preview>' => 3,
-
-        '<view_questionnaire_category_topic>' => 3, '<view_questionnaire_category_knowledge>' => 3,
-        '<view_questionnaire_category_team>' => 3, '<view_questionnaire_category_character>' => 3,
-        '<view_questionnaire_category_motivation>' => 3, '<view_questionnaire_category_learning>' => 3,
-        '<view_questionnaire_final_page>' => 3,
-    );
 
     /**
      * Creates logging controller instance
@@ -70,7 +53,7 @@ class mod_groupformation_logging_controller {
      * @param string $message
      * @return boolean
      */
-    public function handle($userid, $groupformationid, $message, $level) {
+    public function handle($userid, $groupformationid, $message) {
         if (!is_null($message) && is_string($message)) {
             $this->create_log_entry($userid, $groupformationid, $message);
         } else {

@@ -64,8 +64,6 @@ class mod_groupformation_test_user_generator {
 
         $usermanager = new mod_groupformation_user_manager($groupformationid);
 
-        $version = $store->get_version();
-
         $categories = $store->get_categories();
 
         $username = $this->get_username(null, $groupformationid);

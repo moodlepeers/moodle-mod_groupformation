@@ -65,7 +65,7 @@ class mod_groupformation_job_manager {
 
         $next = null;
 
-        foreach ($jobs as $id => $job) {
+        foreach (array_values($jobs) as $job) {
             if ($job->timecreated != null && ($next == null || $job->timecreated < $next->timecreated)) {
                 $next = $job;
             }

@@ -162,7 +162,7 @@ class mod_groupformation_user_manager {
      * @param $userid
      * @param bool|false $completed
      */
-    public function set_status($userid, $completed = false) {
+    public function set_status($userid, $completed) {
         global $DB;
         if ($data = $DB->get_record('groupformation_started', array(
             'groupformation' => $this->groupformationid,
@@ -524,7 +524,7 @@ class mod_groupformation_user_manager {
      */
     public function set_consent($userid, $value) {
         global $DB;
-        $this->set_status($userid);
+        $this->set_status($userid,false);
         $record = $DB->get_record('groupformation_started', array('groupformation' => $this->groupformationid, 'userid' => $userid));
         $record->consent = $value;
         $DB->update_record('groupformation_started', $record);
@@ -596,7 +596,7 @@ class mod_groupformation_user_manager {
      */
     public function register_participant_code($userid, $participantcode) {
         global $DB;
-        $this->set_status($userid);
+        $this->set_status($userid,false);
         $record = $DB->get_record('groupformation_started', array('groupformation' => $this->groupformationid, 'userid' => $userid));
         $record->participantcode = strtoupper($participantcode);
         $DB->update_record('groupformation_started', $record);

@@ -80,7 +80,7 @@ class mod_groupformation_util {
         }
         $store = new mod_groupformation_storage_manager ($groupformationid);
 
-        $scenarioname = get_string('scenario_' . $store->get_scenario(true), 'groupformation');
+        $scenarioname = get_string('scenario_' . $store->get_scenario_name(), 'groupformation');
         $a = new stdClass ();
         $a->scenario_name = $scenarioname;
 

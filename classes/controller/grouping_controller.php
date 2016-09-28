@@ -129,7 +129,7 @@ class mod_groupformation_grouping_controller {
         $context = groupformation_get_context($this->groupformationid);
         $enrolledusers = get_enrolled_users($context, 'mod/groupformation:onlystudent');
 
-        foreach ($enrolledusers as $key => $user) {
+        foreach (array_values($enrolledusers) as $user) {
             groupformation_set_activity_completion($course, $cm, $user->id);
         }
 
@@ -181,7 +181,7 @@ class mod_groupformation_grouping_controller {
         $groups_array_before = array();
         $user_ids_before = array();
 
-        foreach ($this->groups as $key => $value) {
+        foreach (array_keys($this->groups) as $key) {
             $group_members = array_keys($this->get_group_members($key));
 
             $groups_array_before["" . $key] = $group_members;
