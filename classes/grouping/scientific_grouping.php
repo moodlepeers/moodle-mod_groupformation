@@ -36,6 +36,7 @@ class mod_groupformation_scientific_grouping extends mod_groupformation_grouping
     private $store;
     private $groupsmanager;
     private $criterioncalculator;
+    private $data;
 
     /**
      * mod_groupformation_job_manager constructor.
@@ -48,6 +49,7 @@ class mod_groupformation_scientific_grouping extends mod_groupformation_grouping
         $this->groupsmanager = new mod_groupformation_groups_manager($groupformationid);
         $this->criterioncalculator = new mod_groupformation_criterion_calculator($groupformationid);
         $this->participantparser = new mod_groupformation_participant_parser($groupformationid);
+        $this->data = new mod_groupformation_data();
     }
 
     /**
@@ -57,27 +59,15 @@ class mod_groupformation_scientific_grouping extends mod_groupformation_grouping
      * @return array
      */
     public function run_grouping($users) {
+
+        $big5specs = $this->data->get_criterion_specification('big5');
+
+        unset($big5specs['labels']['neurotizismus']);
+        unset($big5specs['labels']['offenheit']);
+        unset($big5specs['labels']['vertraeglichkeit']);
+
         $specs = array(
-            "big5" => array(
-                "category" => "character",
-                "scenarios" => array(1, 2),
-                "labels" => array(
-                    "extraversion" => array(
-                        "scenarios" => array(1 => false, 2 => false),
-                        "evaluation" => true,
-                        "questionids" => array(12, -1, 13, 14, -15, 16, -17, 6),
-                        "significant_id_only" => false,
-                        "cutoffs" => array(0.313169217, 0.776242547),
-                    ),
-                    "gewissenhaftigkeit" => array(
-                        "scenarios" => array(1 => true, 2 => true),
-                        "evaluation" => true,
-                        "questionids" => array(8, -32, 33, -34, -35, 21, 22, 23, -24),
-                        "significant_id_only" => false,
-                        "cutoffs" => array(0.456596974, 0.831246163),
-                    ),
-                ),
-            ),
+            "big5" => $big5specs
         );
 
         $configurations = array(

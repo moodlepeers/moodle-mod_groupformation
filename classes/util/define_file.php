@@ -250,7 +250,7 @@ class mod_groupformation_data {
 
     private $participantcode = false;
     private $importexportenabled = true;
-    private $mathprepcoursemode = false;
+    private $mathprepcoursemode = true;
     private $allanswersrequired = false;
 
     /**
