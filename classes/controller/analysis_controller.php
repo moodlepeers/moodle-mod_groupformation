@@ -89,56 +89,52 @@ class mod_groupformation_analysis_controller {
      * @return string
      */
     private function load_status() {
-        $statusanalysisview = new mod_groupformation_template_builder();
-        $statusanalysisview->set_template('analysis_status');
 
         $this->activitytime = $this->store->get_time();
 
+        $this->starttime = $this->activitytime ['start'];
         if (intval($this->activitytime ['start_raw']) == 0) {
             $this->starttime = get_string('no_time', 'groupformation');
-        } else {
-            $this->starttime = $this->activitytime ['start'];
         }
 
+        $this->endtime = $this->activitytime ['end'];
         if (intval($this->activitytime ['end_raw']) == 0) {
             $this->endtime = get_string('no_time', 'groupformation');
-        } else {
-            $this->endtime = $this->activitytime ['end'];
         }
 
-        $buttonvalue = ($this->questionnaireavailable) ? -1 : 1;
         $buttoncaption = get_string('activity_start', 'groupformation');
         if ($this->questionnaireavailable) {
             $buttoncaption = get_string('activity_end', 'groupformation');
         }
-        $buttondisabled = ($this->jobstate !== "ready") ? "disabled" : "";
 
-        $statusanalysisview->assign('button', array(
-            'type' => 'submit', 'name' => 'questionnaire_switcher', 'value' => $buttonvalue, 'state' => $buttondisabled,
-            'text' => $buttoncaption));
+        $buttondisabled = "";
+        if ($this->jobstate !== "ready") {
+            $buttondisabled = "disabled";
+        }
 
-        $infoteacher = mod_groupformation_util::get_info_text_for_teacher(false, "analysis");
+        $buttonvalue = 1;
+        if ($this->questionnaireavailable) {
+            $buttonvalue = -1;
+        }
 
-        $statusanalysisview->assign('info_teacher', $infoteacher);
+        $statusanalysisview = new mod_groupformation_template_builder();
+        $statusanalysisview->set_template('analysis_status');
+        $statusanalysisview->assign('button',
+            array(
+                'type' => 'submit',
+                'name' => 'questionnaire_switcher',
+                'value' => $buttonvalue,
+                'state' => $buttondisabled,
+                'text' => $buttoncaption
+            )
+        );
+        $statusanalysisview->assign('info_teacher',
+            mod_groupformation_util::get_info_text_for_teacher(false, "analysis"));
         $statusanalysisview->assign('analysis_time_start', $this->starttime);
         $statusanalysisview->assign('analysis_time_end', $this->endtime);
-
-        switch ($this->state) {
-            case 1 :
-                $statusanalysisview->assign('analysis_status_info', get_string('analysis_status_info0', 'groupformation'));
-                break;
-            case 2 :
-                $statusanalysisview->assign('analysis_status_info', get_string('analysis_status_info1', 'groupformation'));
-                break;
-            case 3 :
-                $statusanalysisview->assign('analysis_status_info', get_string('analysis_status_info2', 'groupformation'));
-                break;
-            case 4 :
-                $statusanalysisview->assign('analysis_status_info', get_string('analysis_status_info4', 'groupformation'));
-                break;
-            default :
-                $statusanalysisview->assign('analysis_status_info', get_string('analysis_status_info3', 'groupformation'));
-        }
+        $statusanalysisview->assign('analysis_status_info',
+            get_string('analysis_status_info'.strval($this->state), 'groupformation')
+        );
 
         return $statusanalysisview->load_template();
     }
