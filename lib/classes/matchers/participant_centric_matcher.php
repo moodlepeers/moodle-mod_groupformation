@@ -65,7 +65,7 @@ class lib_groupal_participant_centric_matcher implements lib_groupal_imatcher {
                 // Calculate the delta between gpi of the group and the gpi of the group + 1 participant.
                 $delta = $gpitmp - $gpi;
                 // Convert to percentages.
-                if ($gpi > 0.001) {  // never use !== 0 on floats
+                if ($gpi > 0.001) {
                     $delta = $delta / $gpi;
                 }
 

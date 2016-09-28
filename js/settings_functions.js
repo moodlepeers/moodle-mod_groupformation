@@ -1,5 +1,5 @@
-/*!
- * moodle-mod_groupformation JavaScript 
+/**
+ * moodle-mod_groupformation JavaScript
  * https://github.com/jkonert/moodle-mod_groupformation
  *
  *
@@ -16,7 +16,6 @@ $(document).ready(function () {
 
     $("#non-js-content").hide();
     $("#js-content").show();
-
 
     var studentsInCourse = $('#studentsInCourse').text();
 
@@ -226,7 +225,6 @@ $(document).ready(function () {
         }
     }
 
-
     // If knowledge gets checked.
     $('#id_js_knowledge').click(function () {
         if ($('#id_knowledge').prop('checked')) {
@@ -283,7 +281,6 @@ $(document).ready(function () {
         }
     }
 
-
     function addInput($wrapper, $cat, $value) {
         $thisID = parseInt($('.multi_field:last-child', $wrapper).attr('id').substr(8));
         $theNextID = $thisID + 1;
@@ -336,7 +333,6 @@ $(document).ready(function () {
         }
     }
 
-
     // Dynamic inputs function.
     $('.multi_field_wrapper').each(function dynamicInputs() {
         var $wrapper = $('.multi_fields', this);
@@ -373,7 +369,6 @@ $(document).ready(function () {
         });
     });
 
-
     function synchronizePreknowledge() {
         stringOfPreknowledge = '';
         $('.js_preknowledgeInput').each(function () {
@@ -393,7 +388,6 @@ $(document).ready(function () {
         });
         $('#id_topiclines').val(stringOfTopics.slice(0, -1));
     }
-
 
     // Groupoptions radiobutton listener.
     $('input[name=group_opt]').click(function (e) {
@@ -418,7 +412,6 @@ $(document).ready(function () {
         }
     });
 
-
     function adjustGropOptions($activeEllID, $activeElVal, $nonActiveElVal) {
         if ($activeEllID == 'group_size') {
             $('#group_opt_size').prop('checked', true);
@@ -430,7 +423,6 @@ $(document).ready(function () {
             $('#id_maxmembers').removeAttr('disabled');
             $('#id_maxgroups').attr('disabled', 'disabled');
             setGroupSettings();
-
 
         } else if ($activeEllID == 'numb_of_groups') {
             $('#group_opt_numb').prop('checked', true);
@@ -464,7 +456,9 @@ $(document).ready(function () {
     function calculateSizeParameter($maxMembers, $maxGroups) {
         if ($maxMembers == 0) {
             $maxMembers = Math.ceil(studentsInCourse / $maxGroups);
-            if ($maxMembers == 0) return $maxMembers == 1;
+            if ($maxMembers == 0) {
+                return $maxMembers == 1;
+            }
         } else if ($maxGroups == 0) {
             $maxGroups = Math.ceil(studentsInCourse / $maxMembers);
         } else {
@@ -495,7 +489,6 @@ $(document).ready(function () {
         if ($(this).val() == 'grades') {
             $('#id_evaluationmethod option').prop('selected', false).filter('[value=1]').prop('selected', true);
             $('#max_points_wrapper').prop('disabled', true).hide();
-
 
         } else if ($(this).val() == 'points') {
             $('#id_evaluationmethod option').prop('selected', false).filter('[value=2]').prop('selected', true);
@@ -559,8 +552,7 @@ $(document).ready(function () {
                 floatingWrapper.css({
                     "visibility": "hidden"
                 });
-            }
-            ;
+            };
         });
     }
 
@@ -594,13 +586,13 @@ $(document).ready(function () {
     $("#startDate, #endDate").datepicker();
 
     if (true) {
-        //TODO Welche Sprache/Land wird verwendet, bei deutsch: true
         $.datepicker.setDefaults($.datepicker.regional['de']);
-    } else $.datepicker.setDefaults($.datepicker.regional['']);
+    } else {
+        $.datepicker.setDefaults($.datepicker.regional['']);
+    }
 
     $("#startDate").datepicker("setDate", new Date()); // Set default startDate as current date.
     $('#endDate').datepicker("setDate", "+7");
-
 
     // Set endDate + 7 Days from startDate by default.
     $('#startDate').change(function () {
@@ -608,7 +600,6 @@ $(document).ready(function () {
         date.setDate(date.getDate() + 7); // Add 7 days.
         $('#endDate').datepicker('setDate', date); // Set as default.
     });
-
 
     // Validating the docent form page 2.
     $("#docent_settings_2").submit(function (event) {
@@ -641,5 +632,4 @@ $(document).ready(function () {
             scrollTop: $($param).offset().top
         }, 80);
     }
-
 });

@@ -160,7 +160,6 @@ class mod_groupformation_participant_parser {
             $object = new stdClass ();
             $object->id = $user;
 
-
             foreach ($criteriaspecs as $criterion => $spec) {
                 if (in_array($scenario, $spec['scenarios'])) {
                     $points = array();

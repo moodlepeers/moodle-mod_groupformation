@@ -1,3 +1,11 @@
+/**
+ * moodle-mod_groupformation JavaScript
+ * https://github.com/jkonert/moodle-mod_groupformation
+ *
+ *
+ * @author Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 $(document).ready(function () {
 
     $('#submit_groups').on('click', function(e){

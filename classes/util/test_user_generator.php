@@ -160,7 +160,6 @@ class mod_groupformation_test_user_generator {
                     }
                     $DB->insert_records("groupformation_answer", $allrecords);
 
-
                     if ($usermanager->has_answered_everything($userid)) {
                         $usermanager->set_evaluation_values($userid);
                     }

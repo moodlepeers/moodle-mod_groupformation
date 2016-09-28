@@ -57,12 +57,12 @@ $store = new mod_groupformation_storage_manager ($groupformation->id);
 
 // Set data and viewStatus of groupingView, after possible db update.
 $controller = new mod_groupformation_grouping_controller ($groupformation->id, $cm);
-//}
+
 if ((data_submitted()) && confirm_sesskey()) {
-    $save_edit = optional_param('save_edit', null, PARAM_BOOL);
-    if (true || (isset ($save_edit) && $save_edit == 1)) {
-        $groups_string = optional_param('groups_string', null, PARAM_TEXT);
-        $controller->save_edit($groups_string);
+    $saveedit = optional_param('save_edit', null, PARAM_BOOL);
+    if (true || (isset ($saveedit) && $saveedit == 1)) {
+        $groupsstring = optional_param('groups_string', null, PARAM_TEXT);
+        $controller->save_edit($groupsstring);
     }
     $returnurl = new moodle_url ('/mod/groupformation/grouping_view.php', array(
         'id' => $id, 'do_show' => 'grouping'));

@@ -74,9 +74,9 @@ class mod_groupformation_grouping {
 
         foreach ($participants as $participant) {
             $criteria = $participant->criteria;
-            $configured_criteria = array();
+            $configuredcriteria = array();
             if (count($configuration) == 0) {
-                $configured_criteria = null;
+                $configuredcriteria = null;
             } else {
                 for ($j = 0; $j < count($criteria); $j++) {
                     $criterion = $criteria[$j];
@@ -92,11 +92,11 @@ class mod_groupformation_grouping {
                     }
 
                     if (!is_null($criterion)) {
-                        $configured_criteria[] = $criterion;
+                        $configuredcriteria[] = $criterion;
                     }
                 }
             }
-            $participant->criteria = $configured_criteria;
+            $participant->criteria = $configuredcriteria;
         }
 
         return $participants;
@@ -112,16 +112,16 @@ class mod_groupformation_grouping {
      */
     public function build_cohort($users, $groupsize, $configurationkey) {
         if (strpos($configurationkey, "rand:1") !== false) {
-            // Random
+            // Random.
             return $this->build_random_cohort($users, $groupsize);
         } else if (strpos($configurationkey, "rand:0") !== false || strpos($configurationkey, "groupal:1") !== false) {
-            // Not Random
+            // Not Random.
             return $this->build_groupal_cohort($users, $groupsize);
         } else if (strpos($configurationkey, "rand:0") !== false || strpos($configurationkey, "topic:1") !== false) {
-            // Not Random
+            // Not Random.
             return $this->build_topic_cohort($users, $groupsize);
         } else {
-            // Random
+            // Random.
             return $this->build_random_cohort($users, $groupsize);
         }
     }

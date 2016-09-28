@@ -304,17 +304,17 @@ class mod_groupformation_job_manager {
 
             self::delete_stats($job);
 
-            foreach ($result as $group_key => $cohort) {
+            foreach ($result as $groupkey => $cohort) {
 
                 $cohortresult = $cohort->getResult();
 
-                $flags = array('group_key' => $group_key);
+                $flags = array('group_key' => $groupkey);
 
                 $idmap = self::create_groups($job, $cohortresult->groups, $flags);
 
                 self::assign_users_to_groups($job, $cohortresult->users, $idmap);
 
-                self::save_stats($job, $cohort, $group_key);
+                self::save_stats($job, $cohort, $groupkey);
             }
 
             self::set_job($job, 'done', true);
@@ -324,7 +324,7 @@ class mod_groupformation_job_manager {
 
         self::delete_stats($job);
 
-        foreach ($result as $group_key => $cohort) {
+        foreach ($result as $groupkey => $cohort) {
 
             if (is_null($cohort)) {
                 continue;
@@ -333,19 +333,19 @@ class mod_groupformation_job_manager {
             $cohortresult = $cohort->getResult();
 
             $flags = array(
-                "groupal" => (strpos($group_key, "groupal:1")) ? 1 : 0,
-                "random" => (strpos($group_key, "random:1")) ? 1 : 0,
+                "groupal" => (strpos($groupkey, "groupal:1")) ? 1 : 0,
+                "random" => (strpos($groupkey, "random:1")) ? 1 : 0,
                 "mrandom" => 0,
                 "created" => 0,
-                "topic" => (strpos($group_key, "topic:1")) ? 1 : 0,
-                "group_key" => $group_key
+                "topic" => (strpos($groupkey, "topic:1")) ? 1 : 0,
+                "group_key" => $groupkey
             );
 
             $idmap = self::create_groups($job, $cohortresult->groups, $flags);
 
             self::assign_users_to_groups($job, $cohortresult->users, $idmap);
 
-            self::save_stats($job, $cohort, $group_key);
+            self::save_stats($job, $cohort, $groupkey);
         }
 
         self::set_job($job, 'done', true);
@@ -371,13 +371,13 @@ class mod_groupformation_job_manager {
      * @param $job
      * @param null $cohort
      */
-    private static function save_stats($job, &$cohort = null, $group_key = null) {
+    private static function save_stats($job, &$cohort = null, $groupkey = null) {
         global $DB;
 
         $record = new stdClass();
 
         $record->groupformationid = $job->groupformationid;
-        $record->group_key = $group_key;
+        $record->group_key = $groupkey;
 
         $record->matcher_used = strval($cohort->whichMatcherUsed);
         $record->count_groups = floatval($cohort->countOfGroups);
@@ -559,8 +559,10 @@ class mod_groupformation_job_manager {
             'id' => $userid)));
         $subject = get_string('groupformation_message_subject', 'groupformation');
         $message = get_string('groupformation_message', 'groupformation');
-        $contexturl =
-            $CFG->wwwroot . '/mod/groupformation/grouping_view.php?id=' . $coursemoduleid . '&do_show=grouping';
+        $contexturl = $CFG->wwwroot;
+        $contexturl .= '/mod/groupformation/grouping_view.php?id=';
+        $contexturl .= $coursemoduleid;
+        $contexturl .= '&do_show=grouping';
         $contexturlname = get_string('groupformation_message_contexturlname', 'groupformation');
         groupformation_send_message($recipient, $subject, $message, $contexturl, $contexturlname);
 

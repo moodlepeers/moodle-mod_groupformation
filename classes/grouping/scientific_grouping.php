@@ -116,7 +116,7 @@ class mod_groupformation_scientific_grouping extends mod_groupformation_grouping
             return array();
         }
 
-        // divide users into n slices
+        // Divide users into n slices.
         $slices = $this->slicing($users[0], $numberofslices);
 
         $cohorts = array();
@@ -127,14 +127,14 @@ class mod_groupformation_scientific_grouping extends mod_groupformation_grouping
             $configurationkey = $configurationkeys[$i];
             $configuration = $configurations[$configurationkey];
 
-            $raw_participants = $this->participantparser->build_participants($slice, $specs);
+            $rawparticipants = $this->participantparser->build_participants($slice, $specs);
 
-            $participants = $this->configure_participants($raw_participants, $configuration);
+            $participants = $this->configure_participants($rawparticipants, $configuration);
 
             $cohorts[$configurationkey] = $this->build_cohort($participants, $groupsizes[0], $configurationkey);
         }
 
-        // Handle all users with incomplete or no questionnaire submission
+        // Handle all users with incomplete or no questionnaire submission.
         $randomkey = "rand:1;mrand:_;ex:_;gh:_";
 
         $randomparticipants = $this->participantparser->build_empty_participants($users[1]);

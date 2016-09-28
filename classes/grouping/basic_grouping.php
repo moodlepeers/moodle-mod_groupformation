@@ -84,7 +84,7 @@ class mod_groupformation_basic_grouping extends mod_groupformation_grouping {
         if (count($users[0]) < $numberofslices) {
             return array();
         }
-        // divide users into n slices
+        // Divide users into n slices.
         $slices = $this->slicing($users[0], $numberofslices);
 
         $cohorts = array();
@@ -94,14 +94,14 @@ class mod_groupformation_basic_grouping extends mod_groupformation_grouping {
 
             $configurationkey = $configurationkeys[$i];
 
-            $raw_participants = $this->participantparser->build_participants($slice);
+            $rawparticipants = $this->participantparser->build_participants($slice);
 
-            $participants = $raw_participants;
+            $participants = $rawparticipants;
 
             $cohorts[$configurationkey] = $this->build_cohort($participants, $groupsizes[0], $configurationkey);
         }
 
-        // Handle all users with incomplete or no questionnaire submission
+        // Handle all users with incomplete or no questionnaire submission.
         $randomkey = "random:1";
         $randomcohort = null;
 

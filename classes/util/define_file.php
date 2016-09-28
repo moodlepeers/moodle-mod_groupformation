@@ -234,9 +234,6 @@ class mod_groupformation_data {
             'character',
             'motivation',
             'team',
-//            'srl',
-//            'sellmo',
-//            'self',
         ),
         '2' => array(
             'general',
@@ -245,19 +242,16 @@ class mod_groupformation_data {
             'character',
             'learning',
             'team',
-//            'srl',
-//            'sellmo',
-//            'self',
         ),
         '3' => array(
             'topic',
         ),
     );
 
-    private $participant_code = false;
-    private $import_export_enabled = true;
-    private $math_prep_course_mode = false;
-    private $all_answers_required = false;
+    private $participantcode = false;
+    private $importexportenabled = true;
+    private $mathprepcoursemode = false;
+    private $allanswersrequired = false;
 
     /**
      * Returns whether this instance is running in math prep course mode;
@@ -266,7 +260,7 @@ class mod_groupformation_data {
      * @return bool
      */
     public function is_math_prep_course_mode() {
-        return $this->math_prep_course_mode;
+        return $this->mathprepcoursemode;
     }
 
     /**
@@ -344,7 +338,7 @@ class mod_groupformation_data {
      * @return bool
      */
     public function ask_for_participant_code() {
-        return $this->participant_code;
+        return $this->participantcode;
     }
 
     /**
@@ -352,10 +346,10 @@ class mod_groupformation_data {
      * @return bool
      */
     public function import_export_enabled() {
-        return $this->import_export_enabled;
+        return $this->importexportenabled;
     }
 
     public function all_answers_required() {
-        return $this->all_answers_required;
+        return $this->allanswersrequired;
     }
 }

@@ -170,32 +170,34 @@ class mod_groupformation_grouping_controller {
         $this->determine_status();
     }
 
-    public function save_edit($groups_string) {
-        $groups_array_after = json_decode($groups_string, true);
-        $groups_keys_after = array_keys($groups_array_after);
-        $user_ids_after = array();
-        foreach ($groups_array_after as $array) {
-            $user_ids_after = array_merge($user_ids_after, $array);
+    public function save_edit($groupsstring) {
+        $groupsarrayafter = json_decode($groupsstring, true);
+        $groupskeysafter = array_keys($groupsarrayafter);
+        $useridsafter = array();
+        foreach ($groupsarrayafter as $array) {
+            $useridsafter = array_merge($useridsafter, $array);
         }
 
-        $groups_array_before = array();
-        $user_ids_before = array();
+        $groupsarraybefore = array();
+        $useridsbefore = array();
 
         foreach (array_keys($this->groups) as $key) {
-            $group_members = array_keys($this->get_group_members($key));
+            $groupmembers = array_keys($this->get_group_members($key));
 
-            $groups_array_before["" . $key] = $group_members;
-            $user_ids_before = array_merge($user_ids_before, $group_members);
+            $groupsarraybefore["" . $key] = $groupmembers;
+            $useridsbefore = array_merge($useridsbefore, $groupmembers);
         }
 
-        $groups_keys_before = array_keys($groups_array_before);
+        $groupskeysbefore = array_keys($groupsarraybefore);
 
-        $same_groupids = count(array_intersect($groups_keys_before, $groups_keys_after)) == count($groups_array_after) && count($groups_array_before) == count($groups_array_after);
-        $no_user_twice = (count(array_unique($user_ids_after)) == count($user_ids_before));
-        $same_number_of_users = count($user_ids_after) == count($user_ids_before);
-        $no_user_missing = count(array_intersect($user_ids_before, $user_ids_after)) == count($user_ids_after);
-        if ($same_groupids && $no_user_twice && $no_user_missing && $same_number_of_users) {
-            $this->groupsmanager->update_groups($groups_array_after, $groups_array_before);
+        $samegroupids = count(
+            array_intersect($groupskeysbefore, $groupskeysafter)) == count(
+            $groupsarrayafter) && count($groupsarraybefore) == count($groupsarrayafter);
+        $nousertwice = (count(array_unique($useridsafter)) == count($useridsbefore));
+        $samenumberofusers = count($useridsafter) == count($useridsbefore);
+        $nousermissing = count(array_intersect($useridsbefore, $useridsafter)) == count($useridsafter);
+        if ($samegroupids && $nousertwice && $nousermissing && $samenumberofusers) {
+            $this->groupsmanager->update_groups($groupsarrayafter, $groupsarraybefore);
         }
     }
 
@@ -471,9 +473,6 @@ class mod_groupformation_grouping_controller {
                 'id' => 'cancel_groups', 'type' => 'cancel', 'name' => 'cancel_edit', 'value' => $url->out(), 'state' => '',
                 'text' => get_string('cancel'))
         ));
-
-
-        //TODO @Rene: Was macht das?
         $context = $PAGE->context;
         $count = count(get_enrolled_users($context, 'mod/groupformation:onlystudent'));
 
@@ -496,36 +495,36 @@ class mod_groupformation_grouping_controller {
 
             $generatedgroupsview->set_template('grouping_edit_groups');
 
-            $groups_string = "";
-            $groups_array = array();
-            $generated_groups = array();
+            $groupsstring = "";
+            $groupsarray = array();
+            $generatedgroups = array();
             foreach ($this->groups as $key => $value) {
 
                 $gpi = (is_null($value->performance_index)) ? '-' : $value->performance_index;
 
-                $group_members = $this->get_group_members($key);
-                $groups_array[$key] = array_keys($group_members);
+                $groupmembers = $this->get_group_members($key);
+                $groupsarray[$key] = array_keys($groupmembers);
 
-                $g_ids = implode(',', array_keys($group_members));
-                $groups_string .= $g_ids . "\n";
+                $gids = implode(',', array_keys($groupmembers));
+                $groupsstring .= $gids . "\n";
 
-                $generated_groups[$key] = array(
+                $generatedgroups[$key] = array(
                     'id' => 'group_id_' . $key,
                     'groupname' => $value->groupname,
                     'groupquallity' => $gpi,
                     'grouplink' => $this->get_group_link($value->moodlegroupid),
-                    'group_members' => $group_members);
+                    'group_members' => $groupmembers);
             }
-            $generatedgroupsview->assign('generated_groups', $generated_groups);
+            $generatedgroupsview->assign('generated_groups', $generatedgroups);
 
             $v = array();
-            foreach ($groups_array as $array) {
+            foreach ($groupsarray as $array) {
                 $v = array_merge($v, $array);
             }
 
-            $groups_string = json_encode($groups_array);
+            $groupsstring = json_encode($groupsarray);
 
-            $generatedgroupsview->assign('groups_string', $groups_string);
+            $generatedgroupsview->assign('groups_string', $groupsstring);
 
         } else {
             $generatedgroupsview->set_template('grouping_no_data');

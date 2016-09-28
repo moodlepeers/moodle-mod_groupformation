@@ -85,9 +85,9 @@ class mod_groupformation_topic_grouping extends mod_groupformation_grouping {
 
         $configurationkey = "topic:1";
 
-        $raw_participants = $this->participantparser->build_topic_participants($users[0]);
+        $rawparticipants = $this->participantparser->build_topic_participants($users[0]);
 
-        $participants = $raw_participants;
+        $participants = $rawparticipants;
         $randomparticipants = $this->participantparser->build_empty_participants($users[1]);
 
         $cohort = $this->build_cohort($participants, $groupsizes, $configurationkey);

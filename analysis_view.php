@@ -39,8 +39,8 @@ $createusers = optional_param('create_users', 0, PARAM_INT);
 $createanswers = optional_param('create_answers', false, PARAM_BOOL);
 $randomanswers = optional_param('random_answers', false, PARAM_BOOL);
 $deleteusers = optional_param('delete_users', false, PARAM_BOOL);
-$reset_job = optional_param('reset_job', false, PARAM_BOOL);
-$fix_answers = optional_param('fix_answers', false, PARAM_BOOL);
+$resetjob = optional_param('reset_job', false, PARAM_BOOL);
+$fixanswers = optional_param('fix_answers', false, PARAM_BOOL);
 
 // Import jQuery and js file.
 groupformation_add_jquery($PAGE, 'survey_functions.js');
@@ -78,7 +78,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/controller/analysis_co
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_parser.php');
 
 /* --------- Hard Reset a pending groupformation job ---- */
-if ($reset_job) {
+if ($resetjob) {
     global $DB;
 
     $DB->delete_records('groupformation_jobs', array('groupformationid' => $groupformation->id));
@@ -87,7 +87,7 @@ if ($reset_job) {
 
 /* ---------- Automated test user generation ------------ */
 
-if ($CFG->debug === 32767) { //true) {
+if ($CFG->debug === 32767) {
     $cqt = new mod_groupformation_test_user_generator ($cm);
 
     if ($deleteusers) {
@@ -123,7 +123,7 @@ if (!is_null($job)) {
 $controller = new mod_groupformation_analysis_controller ($groupformation->id, $cm);
 
 /* ---- Code for fixing Answers can be removed after 15-09-2016 ---- */
-if ($CFG->debug === 32767 && $fix_answers) {
+if ($CFG->debug === 32767 && $fixanswers) {
     $controller->fix_answers();
     echo '<div class="alert">Answers fixed - do not repeat this action!</div>';
     $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(

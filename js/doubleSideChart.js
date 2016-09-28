@@ -1,10 +1,14 @@
+/**
+ * moodle-mod_groupformation JavaScript
+ * https://github.com/jkonert/moodle-mod_groupformation
+ *
+ *
+ * @author Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 function buildChartDoubleSide(chartid, datam, bars) {
-    // remove svg for resize-effect
+    // Remove svg for resize-effect.
     $(chartid + " svg").remove();
-
-/////////////////////
-//Helper functions //
-/////////////////////
 
     /* bulk height size */
     var bulkHeight = 50;
@@ -19,20 +23,12 @@ function buildChartDoubleSide(chartid, datam, bars) {
         return ((100 * value) < 50 ? widthScaleLeft(2 * (50 - (100 * value))) : widthScaleRight(0));
     }
 
-/////////////////
-// PROPERTIES  //
-/////////////////
-
     /* SVG Leinwand */
     var width = $("#gf-carousel").width(),
         /* labels section */
         labelsSection = 30,
         /* scale bar height (x-achsis) */
         scaleBarHeight = 20;
-
-
-    /* set div width */
-    //$(chartid).width(width);
 
     /* svgMitte: Chart */
     var middleWidth = width * 0.6,
@@ -48,8 +44,7 @@ function buildChartDoubleSide(chartid, datam, bars) {
             .domain([0, 100])
             .range([middleWidth / 2, middleWidth]);
 
-    svgHeight = middleHeight + labelsSection + scaleBarHeight; // 20 = Scale + Border height
-
+    svgHeight = middleHeight + labelsSection + scaleBarHeight; // 20 = Scale + Border height.
 
     /* bulk colors */
     var color = ["rgb(136, 222, 0)",
@@ -61,10 +56,6 @@ function buildChartDoubleSide(chartid, datam, bars) {
         leftWidth = width * 0.2,
         leftBackground = "none";
 
-
-/////////////
-//Leinwand //
-/////////////
     var svg = d3.select("div" + chartid)
         .append("svg")
         .attr("width", width)
@@ -78,16 +69,16 @@ function buildChartDoubleSide(chartid, datam, bars) {
         svgRechts = svg.append("g").attr("id", "rechts"),
         svgMitte = svg.append("g").attr("id", "mitte");
 
-    // labels section
+    // Labels section.
     svgLabels.append("rect").attr("transform", "translate(" + leftWidth + ",0 )")
         .attr("width", middleWidth).attr("height", "30").attr("fill", "none");
 
-    // user Label
+    // User Label.
     var userLabel = svgLabels.append("g").attr("transform", "translate(" + leftWidth + ",7 )");
     userLabel.append("rect").attr("width", 15).attr("height", 15).attr("fill", color[0])
         .attr("stroke", "black").attr("stroke-width", 2);
     userLabel.append("text").attr("dx", 20).attr("dy", 11).text(bars.user).attr("font-size", 12);
-    // group label
+    // Group label.
     var groupLabel = svgLabels.append("g").attr("transform", "translate(" + (leftWidth + 100) + ",7 )");
     groupLabel.append("rect").attr("width", 15).attr("height", 15).attr("fill", "white")
         .attr("stroke", "black").attr("stroke-width", 2)
@@ -101,7 +92,7 @@ function buildChartDoubleSide(chartid, datam, bars) {
             }
         });
     groupLabel.append("text").attr("dx", 20).attr("dy", 11).text(bars.group).attr("font-size", 12);
-    // global label
+    // Global label.
     var globalLabel = svgLabels.append("g").attr("transform", "translate(" + (leftWidth + 200) + ",7 )");
     globalLabel.append("rect").attr("width", 15).attr("height", 15).attr("fill", "white")
         .attr("stroke", "black").attr("stroke-width", 2)
@@ -116,7 +107,7 @@ function buildChartDoubleSide(chartid, datam, bars) {
         });
     globalLabel.append("text").attr("dx", 20).attr("dy", 11).text(bars.course).attr("font-size", 12);
 
-    // styling extra
+    // Styling extra.
     var verticalLines = d3.select("div" + chartid + " svg");
     for (i = 1; i < 10; i++) {
         verticalLines
@@ -133,9 +124,6 @@ function buildChartDoubleSide(chartid, datam, bars) {
             .attr("stroke-width", (i == 5) ? 3 : 1);
     }
 
-////////////////
-// SVG left  //
-////////////////
     svgLinks
         .attr("transform", "translate(0, " + (labelsSection + scaleBarHeight) + ")")
         /* background */
@@ -143,7 +131,6 @@ function buildChartDoubleSide(chartid, datam, bars) {
         .attr("width", leftWidth)
         .attr("height", sideBarHeight)
         .attr("fill", leftBackground);
-    //.attr("stroke", "blue");
 
     /* links: Label Group Boxes */
     var gBoxLeft = svgLinks.selectAll("g")
@@ -161,7 +148,6 @@ function buildChartDoubleSide(chartid, datam, bars) {
             return (i * (bulkHeight * 2) + 11);
         });
 
-
     /* Labels */
     var barsText = gBoxLeft
         .append("text")
@@ -169,9 +155,7 @@ function buildChartDoubleSide(chartid, datam, bars) {
         /* position im SVG */
         .attr("x", 0)
         .attr("y", function (d, i) {
-            return ((i * (bulkHeight * 2)) // how many categories
-                + (scaleBarHeight - 5) // axis Height
-            );
+            return ((i * (bulkHeight * 2)) + (scaleBarHeight - 5));
         })
         .attr("text-anchor", "middle")
         /* position innerhalb der box */
@@ -183,10 +167,6 @@ function buildChartDoubleSide(chartid, datam, bars) {
             return d.captions.minCaption
         });
 
-
-/////////////////
-// SVG Rechts  //
-/////////////////
     svgRechts
         .attr("transform", "translate(" + (leftWidth + middleWidth) + ", " + (labelsSection + scaleBarHeight) + ")")
         /* background */
@@ -218,9 +198,7 @@ function buildChartDoubleSide(chartid, datam, bars) {
         /* position im SVG */
         .attr("x", 0)
         .attr("y", function (d, i) {
-            return ((i * (bulkHeight * 2)) // how many categories
-                + (scaleBarHeight - 5) // axis Height - half of font-size
-            );
+            return ((i * (bulkHeight * 2)) + (scaleBarHeight - 5));
         })
         .attr("text-anchor", "middle")
         /* position innerhalb der box */
@@ -232,9 +210,6 @@ function buildChartDoubleSide(chartid, datam, bars) {
             return d.captions.maxCaption
         });
 
-///////////////
-// SVG Mitte //
-///////////////
     svgMitte
         .attr("transform", "translate(" + leftWidth + ", " + labelsSection + ")")
         /* background color */
@@ -264,7 +239,6 @@ function buildChartDoubleSide(chartid, datam, bars) {
         .attr("transform", "translate(0, " + scaleBarHeight + ")")
         .call(axisRight);
 
-
     var userBars;
     /* add user bulks */
     function addUserBulks() {
@@ -281,14 +255,12 @@ function buildChartDoubleSide(chartid, datam, bars) {
             .attr("height", bulkHeight / 3)
             .attr("fill", color[0])
             .attr("y", function (d, i) {
-                return (i * (bulkHeight * 2)
-                + (bulkHeight / 3));
+                return (i * (bulkHeight * 2) + (bulkHeight / 3));
             })
             /* nach links wachsen oder rechts */
             .attr("transform", function (d) {
                 return "translate(" + getTransformWidth(d.values.user) + ", 30)";
             });
-
     }
 
     /* remove user bulks */
@@ -334,8 +306,7 @@ function buildChartDoubleSide(chartid, datam, bars) {
             .attr("height", bulkHeight / 3)
             .attr("fill", color[2])
             .attr("y", function (d, i) {
-                return ((i * (bulkHeight * 2) + 30)
-                + (bulkHeight / 3) * 2 );
+                return ((i * (bulkHeight * 2) + 30) + (bulkHeight / 3) * 2 );
             })
             /* nach links wachsen oder rechts */
             .attr("transform", function (d) {

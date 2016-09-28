@@ -1,7 +1,13 @@
-/* if DOM ready, go on */
-$(document).ready(function () {
-    // get data
+/**
+ * moodle-mod_groupformation JavaScript
+ * https://github.com/jkonert/moodle-mod_groupformation
+ *
+ *
+ * @author Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
+$(document).ready(function () {
     var data = $.parseJSON($("#json-content").html());
     /* caption */
     var caption = d3.select("#gf-carousel .carousel-inner")
@@ -21,8 +27,9 @@ $(document).ready(function () {
     /* if first page, add intro */
     caption
         .each(function (d, i) {
-            if (d.mode == "text")
+            if (d.mode == "text"){
                 d3.select(this).append("div").attr("class", "well").html("<p>" + d.text.replace(/\\n/g, "<br>") + "</p>");
+            }
         });
 
     caption
@@ -50,19 +57,13 @@ $(document).ready(function () {
             }
         });
 
-
     /* activate popover info */
     $(function () {
         $('[data-toggle="popover"]').popover();
     });
 
-
 });
 
-
-//////////////////////////////
-// Collapse Box Definitions -- FOR EACH CHART//
-//////////////////////////////
 function buildPersonalResult(datam, index, divId) {
 
     var pan = d3.select(divId).selectAll("div .panel .panel-default")
@@ -86,7 +87,6 @@ function buildPersonalResult(datam, index, divId) {
         .append("a")
         .attr("role", "button")
         .attr("data-toggle", "collapse")
-        //.attr("data-parent", "#gf-accordion")		// close all other panels
         .attr("href", function (d, i) {
             return "#collapse" + index + i;
         })

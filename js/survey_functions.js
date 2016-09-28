@@ -1,21 +1,20 @@
-/*!
- * moodle-mod_groupformation JavaScript 
+/**
+ * moodle-mod_groupformation JavaScript
  * https://github.com/jkonert/moodle-mod_groupformation
  *
  *
  * @author Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 $(document).ready(function () {
 
     $('#invisible_topics_inputs').hide();
 
     $(".maxgroupsizenotreached_header").click(function () {
-        // $(".maxgroupsizenotreached_body").toggle("slow");
     });
 
     $(".groupsbuilt_header").click(function () {
-        // $(".groupsbuilt_body").toggle("slow");
     });
 
     // Get the widths of all navigation li's.
@@ -60,9 +59,6 @@ $(document).ready(function () {
         $('.sortable_topics').sortable({
             axis: 'y',
             stop: function (event, ui) {
-                var data = $(this).sortable('serialize');
-                //$('span#order').text(data);
-
                 $('#invisible_topics_inputs').find('input').remove();
                 createTopicInputs();
             }

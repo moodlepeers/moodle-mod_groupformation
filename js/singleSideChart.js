@@ -1,36 +1,25 @@
 function buildChartOneSide(chartid, datam, bars) {
-
-    // remove svg for resize-effect
+    // Remove svg for resize-effect.
     $(chartid + " svg").remove();
 
-/////////////////////
-//Helper functions //
-/////////////////////
-
-    /* bulk height size */
+    // Bulk height size.
     var bulkHeight = 50;
 
-    /* calc scaling value for bulk width */
+    // Calc scaling value for bulk width.
     function getBulkWidth(value) {
         return widthScale(100 * value);
     }
 
-    /* calc scaling value for tranform width (for right horizontal positioning) */
+    // Calc scaling value for tranform width (for right horizontal positioning)
     function getTransformWidth(value) {
         return widthScale(100 * value);
     }
 
-/////////////////
-// PROPERTIES  //
-/////////////////
-
-    /* SVG Leinwand */
     var width = $("#gf-carousel").width(),
         /* labels section */
         labelsSection = 30,
         /* scale bar height (x-achsis) */
         scaleBarHeight = 20;
-
 
     /* set div width */
     $(chartid).width(width);
@@ -48,7 +37,6 @@ function buildChartOneSide(chartid, datam, bars) {
 
     svgHeight = middleHeight + labelsSection + scaleBarHeight; // 20 = Scale + Border height
 
-
     /* bulk colors */
     var color = ["rgb(136, 222, 0)",
         datam[0].values.group != null ? "rgb(65, 207, 68)" : "white",
@@ -59,10 +47,6 @@ function buildChartOneSide(chartid, datam, bars) {
         leftWidth = width * 0.2,
         leftBackground = "none";
 
-
-/////////////
-//Leinwand //
-/////////////
     var svg = d3.select("div" + chartid)
         .append("svg")
         .attr("width", width)
@@ -70,7 +54,7 @@ function buildChartOneSide(chartid, datam, bars) {
         .style("overflow", "visible")
         .attr("font-size", 10);
 
-    /* 4 Bereiche: oberer Rand ScaleBar / links Beschriftung / Chart / rechts Beschriftung */
+    // 4 Bereiche: oberer Rand ScaleBar / links Beschriftung / Chart / rechts Beschriftung
     var svgLabels = svg.append("g").attr("id", "labels"),
         svgLinks = svg.append("g").attr("id", "links"),
         svgRechts = svg.append("g").attr("id", "rechts"),
@@ -80,7 +64,7 @@ function buildChartOneSide(chartid, datam, bars) {
     svgLabels.append("rect").attr("transform", "translate(" + leftWidth + ",0 )")
         .attr("width", middleWidth).attr("height", "30").attr("fill", "none");
 
-    // user Label
+    // User Label.
     var userLabel = svgLabels.append("g").attr("transform", "translate(" + leftWidth + ",7 )");
     userLabel.append("rect").attr("width", 15).attr("height", 15).attr("fill", color[0])
         .attr("stroke", "black").attr("stroke-width", 2);
@@ -99,7 +83,7 @@ function buildChartOneSide(chartid, datam, bars) {
             }
         });
     groupLabel.append("text").attr("dx", 20).attr("dy", 11).text(bars.group).attr("font-size", 12);
-    // global label
+    // Global label.
     var globalLabel = svgLabels.append("g").attr("transform", "translate(" + (leftWidth + 200) + ",7 )");
     globalLabel.append("rect").attr("width", 15).attr("height", 15).attr("fill", "white")
         .attr("stroke", "black").attr("stroke-width", 2)
@@ -114,7 +98,7 @@ function buildChartOneSide(chartid, datam, bars) {
         });
     globalLabel.append("text").attr("dx", 20).attr("dy", 11).text(bars.course).attr("font-size", 12);
 
-    // styling extra
+    // Styling extra.
     var verticalLines = d3.select("div" + chartid + " svg");
     for (i = 1; i < 10; i++) {
         verticalLines
@@ -131,9 +115,7 @@ function buildChartOneSide(chartid, datam, bars) {
             .attr("stroke-width", 1);
     }
 
-////////////////
-// SVG left  //
-////////////////
+
     svgLinks
         .attr("transform", "translate(0, " + (labelsSection + scaleBarHeight) + ")")
         /* background */
@@ -158,8 +140,6 @@ function buildChartOneSide(chartid, datam, bars) {
             return (i * (bulkHeight * 2) + 11);
         });
 
-
-    /* Labels */
     var barsText = gBoxLeft
         .append("text")
         .attr("fill", "black")
@@ -179,10 +159,6 @@ function buildChartOneSide(chartid, datam, bars) {
         .text(function (d) {
             return d.captions.maxCaption
         });
-
-///////////////
-// SVG Mitte //
-///////////////
     svgMitte
         .attr("transform", "translate(" + leftWidth + ", " + labelsSection + ")")
         /* background color */
@@ -225,19 +201,11 @@ function buildChartOneSide(chartid, datam, bars) {
                 return (i * (bulkHeight * 2)
                 + (bulkHeight / 3));
             })
-            /* nach links wachsen oder rechts */
             .attr("transform", function (d) {
                 return "translate(0, 30)";
             });
-
     }
 
-    /* remove user bulks */
-    function removeUserBulks() {
-        svgMitte.select(".userBars").remove();
-    }
-
-    /* add group bulks */
     function addGroupBulks() {
         var groupBars = svgMitte.append("g")
             .attr("class", "groupBars")
@@ -257,7 +225,6 @@ function buildChartOneSide(chartid, datam, bars) {
             });
     }
 
-    /* add global bulks */
     function addGlobalBulks() {
         var globalBars = svgMitte.append("g")
             .attr("class", "globalBars")
@@ -277,16 +244,9 @@ function buildChartOneSide(chartid, datam, bars) {
                 + (bulkHeight / 3) * 2 );
             });
     }
-
-    /* check if groupbox activated and activate bulk if yes */
     addGroupBulks();
-    /* init userBulks */
     addUserBulks();
-    /* check if groupbox activated and activate bulk if yes */
     addGlobalBulks();
-    /* first, hide other bulks than user */
     $("g.groupBars g g rect").hide();
     $("g.globalBars g g rect").hide();
-
-
-} // build fam chart function
+}

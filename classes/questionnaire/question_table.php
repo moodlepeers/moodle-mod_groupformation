@@ -38,9 +38,14 @@ class mod_groupformation_question_table {
         } else {
             echo '<table class="responsive-table">' . '<colgroup><col class="firstCol"><colgroup>';
 
-            echo '<thead><tr><th scope="col">' .
-                (($tabletype == 'type_knowledge') ? get_string('knowledge_question', 'groupformation') :
-                    get_string('category_' . $category, 'groupformation')) . '</th>';
+            echo '<thead><tr><th scope="col">';
+
+            if ($tabletype == 'type_knowledge') {
+                echo get_string('knowledge_question', 'groupformation');
+            } else {
+                echo get_string('category_' . $category, 'groupformation');
+            }
+            echo '</th>';
             if ($tabletype == 'radio') {
                 $headersize = count($headeroptarray);
 

@@ -220,7 +220,6 @@ class mod_groupformation_import_export_controller {
         }
         $categories = $this->store->get_categories();
 
-
         $allrecords = array();
 
         foreach ($xml->categories->category as $category) {

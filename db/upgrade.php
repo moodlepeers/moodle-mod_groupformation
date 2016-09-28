@@ -899,7 +899,6 @@ function xmldb_groupformation_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2015100303, 'groupformation');
     }
 
-
     if ($oldversion < 2015102400) {
 
         // Define field answers_ready to be added to groupformation_started.
@@ -1251,7 +1250,7 @@ function xmldb_groupformation_upgrade($oldversion) {
         } else {
             $dbman->change_field_type($table, $field, $continue = true, $feedback = true);
         }
-        // same now for stats
+        // Same now for stats.
         $tablename = 'groupformation_stats';
         $table = new xmldb_table ($tablename);
         if (!$dbman->field_exists($table, $field)) {
@@ -1375,7 +1374,6 @@ function xmldb_groupformation_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2016092401, 'groupformation');
     }
 
-
     if ($oldversion < 2016092600) {
 
         // Changing type of field criterion on table groupformation_user_values to char.
@@ -1395,7 +1393,5 @@ function xmldb_groupformation_upgrade($oldversion) {
         // Groupformation savepoint reached.
         upgrade_mod_savepoint(true, 2016092600, 'groupformation');
     }
-
-
     return true;
 }

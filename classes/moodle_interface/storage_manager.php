@@ -97,8 +97,6 @@ class mod_groupformation_storage_manager {
     public function catalog_table_not_set($category = 'grade') {
         global $DB;
 
-        // $count = $DB->count_records('groupformation_' . $category);
-        // TODO
         $count = $DB->count_records('groupformation_question', array('category' => $category));
 
         return $count == 0;
@@ -311,19 +309,11 @@ class mod_groupformation_storage_manager {
         if ($category == 'points') {
             return $this->get_max_points();
         }
-
-        // $table = 'groupformation_' . $category;
-        // TODO
         $table = 'groupformation_question';
         return $DB->get_field($table, 'optionmax', array(
             'language' => 'en', 'category' => $category,
             'questionid' => $i
         ));
-
-        //return $DB->get_field($table, 'optionmax', array(
-        //    'language' => 'en',
-        //    'questionid' => $i
-        //));
     }
 
     /**
@@ -385,7 +375,7 @@ class mod_groupformation_storage_manager {
      *
      * @return string
      */
-    public function get_scenario_name(){
+    public function get_scenario_name() {
         global $DB;
 
         $settings = $DB->get_record('groupformation', array(
@@ -1039,12 +1029,13 @@ class mod_groupformation_storage_manager {
     }
 
     /**
-     * Returns question by position
+     * Returns question by position.
      */
     public function get_question_by_position($category, $position) {
         global $DB;
 
-        return $DB->get_record('groupformation_question', array('category' => $category, 'language' => 'en', 'position' => $position));
+        return $DB->get_record('groupformation_question',
+            array('category' => $category, 'language' => 'en', 'position' => $position));
 
     }
 }
