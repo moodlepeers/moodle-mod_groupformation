@@ -91,12 +91,12 @@ class lib_groupal_evaluator implements lib_groupal_ievaluator {
         if (count($cohort->groups) == 0) {
             return 0;
         }
-        $GPIs = array(); // Double list.
+        $gpis = array(); // Double list.
         for ($i = 0; $i < count($cohort->groups); $i++) {
             $cohort->groups[$i]->calculate_gpi();
-            $GPIs[] = $cohort->groups[$i]->get_gpi();
+            $gpis[] = $cohort->groups[$i]->get_gpi();
         }
-        $results = $this->get_performance_index($GPIs);
+        $results = $this->get_performance_index($gpis);
         $cohort->results = $results;
         return $results->performanceindex;
 
@@ -113,7 +113,6 @@ class lib_groupal_evaluator implements lib_groupal_ievaluator {
 
         // Calculate avergae of NPIs
         $avg = ((float)array_sum($performanceindices)) / count($performanceindices); // float.
-
 
         // Calculate standard deviation   (which is all diffs of elements and avg squared and finally summed up.
         $sumquadraticerrors = 0.0; // Double.

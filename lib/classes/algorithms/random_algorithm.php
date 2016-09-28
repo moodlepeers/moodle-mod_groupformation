@@ -127,7 +127,7 @@ class lib_groupal_random_algorithm implements lib_groupal_ialgorithm {
                 }
             }
 
-            if ($position != 0){
+            if ($position != 0) {
                 $groups [] = $onegroup;
             }
         }

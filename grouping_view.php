@@ -79,27 +79,6 @@ if ((data_submitted()) && confirm_sesskey()) {
         'id' => $id, 'do_show' => 'grouping'));
     redirect($returnurl);
 }
-//if ($_POST) {
-//    if (isset ($_POST ['start'])) {
-//        $controller->start($course, $cm);
-//        unset ($_POST ['start']);
-//    } else if (isset ($_POST ['abort'])) {
-//        $controller->abort();
-//        unset ($_POST ['abort']);
-//    } else if (isset ($_POST ['adopt'])) {
-//        $controller->adopt();
-//        unset ($_POST ['adopt']);
-//    } else if (isset ($_POST ['edit'])) {
-//        $controller->edit($cm);
-//        unset ($_POST ['adopt']);
-//    } else if (isset ($_POST ['delete'])) {
-//        $controller->delete();
-//        unset ($_POST ['delete']);
-//    }
-//    $returnurl = new moodle_url ('/mod/groupformation/grouping_view.php', array(
-//        'id' => $id, 'do_show' => 'grouping'));
-//    redirect($returnurl);
-//}
 
 // Log access to page.
 groupformation_info($USER->id, $groupformation->id, '<view_teacher_grouping>');

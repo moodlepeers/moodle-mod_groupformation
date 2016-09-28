@@ -198,13 +198,13 @@ class lib_groupal_participant_writer {
     /**
      * Writes XML for a single criterion type
      *
-     * @param lib_groupal_criterion $c_type
+     * @param lib_groupal_criterion $ctype
      */
-    private function write_criterion_type(lib_groupal_criterion $c_type) {
+    private function write_criterion_type(lib_groupal_criterion $ctype) {
         $writer = $this->writer;
         $writer->startElement('Criterion');
 
-        $this->write_criterion_attributes($c_type);
+        $this->write_criterion_attributes($ctype);
 
         $writer->endElement();
     }

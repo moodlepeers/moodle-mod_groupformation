@@ -27,8 +27,8 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/cohorts/cohort.php
 
 interface lib_groupal_ievaluator {
 
-    function evaluate_gpi(lib_groupal_group $g);
+    public function evaluate_gpi(lib_groupal_group $g);
 
-    function evaluate_cpi(lib_groupal_cohort $c);
+    public function evaluate_cpi(lib_groupal_cohort $c);
 
 }

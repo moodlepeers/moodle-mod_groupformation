@@ -50,7 +50,7 @@ class lib_groupal_random_cohort {
         $this->groups = array();
         if ($groups != null) {
             for ($i = 0; $i < count($groups); $i++) {
-                $this->addGroup($groups[$i]);
+                $this->add_group($groups[$i]);
             }
         }
         $this->countofgroups = $numberofgroups;
@@ -61,7 +61,7 @@ class lib_groupal_random_cohort {
      * @param $g lib_groupal_group
      * @return boolean
      */
-    public function addGroup(lib_groupal_group $g) {
+    public function add_group(lib_groupal_group $g) {
         if (in_array($g, $this->groups)) {
             return false;
         }
@@ -137,7 +137,7 @@ class lib_groupal_random_cohort {
      * adds empty Group
      */
     public function add_empty_group() {
-        $this->addGroup(new lib_groupal_group());
+        $this->add_group(new lib_groupal_group());
     }
 
     /**
@@ -147,7 +147,7 @@ class lib_groupal_random_cohort {
      */
     public function calculate_cpi() {
         if (static::$evaluator == null) {
-            throw new Exception("Cohort.evaluateCohortPerformanceIndex(): setEvaluator() before execute evaluateCohortPerformanceIndex()");
+            throw new Exception("No evaluator set");
         }
         $this->cohortPerformanceIndex = static::$evaluator->evaluate_cpi($this);
         return $this->cohortPerformanceIndex;

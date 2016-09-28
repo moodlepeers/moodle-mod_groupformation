@@ -29,19 +29,19 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/participant.php");
 class lib_groupal_group_centric_matcher implements lib_groupal_imatcher {
 
     /**
-     * @param $notyetmatched : list of participants  (referenced!)
-     * @param $groups : list of groups (!referenced)
-     * @return : list of groups (as given)
+     * @param $notyetmatched
+     * @param $groups
+     * @return mixed
      */
     public function match_to_groups(&$notyetmatched, &$groups) {
         $deltaold = -INF;
         $bestparticipant = null; // Participant instance to add.
 
-        // Search the best participant for the group
+        // Search the best participant for the group.
         foreach ($groups as $g) {
 
-            for ($j = 0; $j <
-            lib_groupal_group::get_group_members_max_size(); $j++) {  // Loop for a max of n rounds to fill up
+            for ($j = 0; $j < lib_groupal_group::get_group_members_max_size(); $j++) {
+                // Loop for a max of n rounds to fill up.
                 // If the group is full then go on with the next group.
                 if (count($g->get_participants()) >= lib_groupal_group::get_group_members_max_size()) {
                     break;
@@ -64,11 +64,11 @@ class lib_groupal_group_centric_matcher implements lib_groupal_imatcher {
                     // Add an participant to the group.
                     // Calculate new $gpi.
                     $g->add_participant($notyetmatched[$i]);
-                    $gpi_tmp = $g->get_gpi();
+                    $gpitmp = $g->get_gpi();
                     // Remove participant from group.
                     $g->remove_participant($notyetmatched[$i]);
                     // Calculate the delta between gpi of the group and the gpi of the group + 1 participant.
-                    $delta = $gpi_tmp - $gpi;
+                    $delta = $gpitmp - $gpi;
                     // Transform to percentages.
                     if (abs($gpi) > 0.001) {  // Never use !== 0 on floats!
                         $delta = $delta / $gpi;

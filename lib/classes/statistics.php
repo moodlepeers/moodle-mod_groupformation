@@ -15,15 +15,15 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This class contains an implementation of statistics collection to store all statistics in it
+ * This class contains an implementation of statistics collection to store all statistics in it.
  *
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/lgpl.html GNU LGPL v3 or later
  */
 class lib_groupal_statistics {
-    public $n = 0; // int
-    public $avg = 0.0; // Float
-    public $stddev = 0.0; // Float
-    public $normstddev = 0.0; // Float
-    public $performanceindex = 0.0; // Float
+    public $n = 0;
+    public $avg = 0.0;
+    public $stddev = 0.0;
+    public $normstddev = 0.0;
+    public $performanceindex = 0.0;
 }

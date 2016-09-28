@@ -119,7 +119,7 @@ abstract class lib_groupal_criterion {
     /**
      * @return float
      */
-    function get_min_value() {
+    public function get_min_value() {
         return $this->minvalue;
     }
 
@@ -127,7 +127,7 @@ abstract class lib_groupal_criterion {
     /**
      * @param float $number
      */
-    function set_min_value($number) {
+    public function set_min_value($number) {
         $this->minvalue = $number;
     }
 

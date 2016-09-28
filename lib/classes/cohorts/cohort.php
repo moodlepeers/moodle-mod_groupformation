@@ -87,7 +87,7 @@ class lib_groupal_cohort {
      */
     public function calculate_cpi() {
         if (static::$evaluator == null) {
-            throw new Exception("Cohort.evaluateCohortPerformanceIndex(): setEvaluator() before execute evaluateCohortPerformanceIndex()");
+            throw new Exception("No evaluator set");
         }
         $this->cpi = static::$evaluator->evaluate_cpi($this);
 
@@ -185,8 +185,8 @@ class lib_groupal_cohort {
             $gpi = $g->get_gpi();
             $participantsids = $g->get_participants_ids();
             $result->groups[$groupid] = array('gpi' => $gpi, 'users' => $participantsids);
-            foreach ($participantsids as $p_id) {
-                $result->users[$p_id] = $groupid;
+            foreach ($participantsids as $participantid) {
+                $result->users[$participantid] = $groupid;
             }
 
         }

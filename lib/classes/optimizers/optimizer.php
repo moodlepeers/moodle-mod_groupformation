@@ -59,13 +59,12 @@ class lib_groupal_optimizer implements lib_groupal_ioptimizer {
         // Randomize position of entries.
         $this->shuffle($localngt);
 
-        // match the groups new.
+        // Match the groups new.
         $g1 = new lib_groupal_group();
         $g2 = new lib_groupal_group();
 
         $newgroups = array($g1, $g2);
         $this->matcher->match_to_groups($localngt, $newgroups);
-        // First condition for a better PerformanceIndex: the AVGGroupPerformanceIndex raises.
         $oldavg = ($goodgroup->get_gpi() - $badgroup->get_gpi()) / 2;
         $newavg = ($g1->get_gpi() - $g2->get_gpi()) / 2;
         $firstcondition = $newavg > $oldavg;

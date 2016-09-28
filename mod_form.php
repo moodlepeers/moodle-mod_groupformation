@@ -42,7 +42,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
      * @see moodleform::definition()
      */
     public function definition() {
-        global $PAGE, $USER,$CFG;
+        global $PAGE, $USER, $CFG;
 
         $this->store = new mod_groupformation_storage_manager ($this->_instance);
 

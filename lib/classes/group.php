@@ -92,7 +92,7 @@ class lib_groupal_group {
         if ($index == false) {
             return false;
         }
-        $this->participants[$index]->actualGroup = null;  // What for??
+        $this->participants[$index]->actualGroup = null;
         array_splice($this->participants, $index, 1);
         $this->calculate_gpi();
         return true;

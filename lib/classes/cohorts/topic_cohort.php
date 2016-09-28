@@ -77,7 +77,7 @@ class lib_groupal_topic_cohort {
      * @param $g lib_groupal_group
      * @return boolean
      */
-    public function removeGroup(lib_groupal_group $g) {
+    public function remove_group(lib_groupal_group $g) {
         $index = array_search($g, $this->groups);
         if ($index == false) {
             return false;
@@ -94,7 +94,7 @@ class lib_groupal_topic_cohort {
      * @param lib_groupal_participant $p
      * @return bool true if any change happend
      */
-    public function removeParticipant(lib_groupal_participant $p) {
+    public function remove_participant(lib_groupal_participant $p) {
         $result = false;
         foreach ($this->groups as $g) {
             $i = array_search($p, $g);
@@ -150,7 +150,8 @@ class lib_groupal_topic_cohort {
      */
     public function calculate_cpi() {
         if (static::$evaluator == null) {
-            throw new Exception("Cohort.evaluateCohortPerformanceIndex(): setEvaluator() before execute evaluateCohortPerformanceIndex()");
+            $string = "no evaluator set";
+            throw new Exception($string);
         }
         $this->cohortPerformanceIndex = static::$evaluator->evaluate_cpi($this);
         return $this->cohortPerformanceIndex;

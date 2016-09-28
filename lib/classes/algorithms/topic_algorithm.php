@@ -41,7 +41,7 @@ class lib_groupal_topic_algorithm implements lib_groupal_ialgorithm {
     public $participants = array();
 
     /** @var int This is the number of participants */
-    public $participants_numb;
+    public $participantscount;
 
     /** @var lib_groupal_cohort This is the resulting cohort */
     public $cohort;
@@ -57,7 +57,7 @@ class lib_groupal_topic_algorithm implements lib_groupal_ialgorithm {
             $this->participants[$p->ID] = clone($p);
         }
 
-        $this->participants_numb = count($participants);
+        $this->participantscount = count($participants);
 
         foreach ($topics as $key => $value) {
             $this->topics[] = new lib_groupal_choicedata($key, $value);
@@ -76,7 +76,7 @@ class lib_groupal_topic_algorithm implements lib_groupal_ialgorithm {
     public function do_one_formation() {
         // Run algorithm.
         $distributor = new groupformation_solver_edmonds_karp();
-        $results = $distributor->distribute_users($this->ratings, $this->topics, $this->participants_numb);
+        $results = $distributor->distribute_users($this->ratings, $this->topics, $this->participantscount);
         $groups = array();
         foreach (array_values($results) as $participantsids) {
             $group = new lib_groupal_group();

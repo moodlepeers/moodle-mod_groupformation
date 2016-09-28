@@ -92,10 +92,10 @@ class lib_groupal_basic_algorithm implements lib_groupal_ialgorithm {
 
         lib_groupal_cohort::$evaluator = $this->evaluator;
 
-        // set cohort: generate empty groups in cohort to fill with participants.
+        // Set cohort: generate empty groups in cohort to fill with participants.
         $this->cohort = new lib_groupal_cohort(ceil($this->numberofparticipants / $this->groupsize));
 
-        // set the list of not yet matched participants; the array is automatically copied in PHP.
+        // Set the list of not yet matched participants; the array is automatically copied in PHP.
         $this->notmatchedparticipants = $this->participants;
 
         $this->numberofgroups = 0;
@@ -112,18 +112,18 @@ class lib_groupal_basic_algorithm implements lib_groupal_ialgorithm {
             return false;
         }
 
-        // increase count of participants.
+        // Increase count of participants.
         $this->numberofparticipants++;
-        $tmpX = ceil($this->numberofparticipants / $this->groupsize);
-        // if count of groups changed, then new empty Group.
-        if ($tmpX != $this->numberofgroups) {
-            $this->numberofgroups = $tmpX;
+        $tmp = ceil($this->numberofparticipants / $this->groupsize);
+        // If count of groups changed, then new empty Group.
+        if ($tmp != $this->numberofgroups) {
+            $this->numberofgroups = $tmp;
             $this->cohort->add_empty_group();
         }
 
-        // add the new participant to entries.
+        // Add the new participant to entries.
         $this->participants[] = $participant;
-        // add new participant to the set of not yet matched entries.
+        // Add new participant to the set of not yet matched entries.
         $this->notmatchedparticipants[] = $participant;
         return true;
     }
@@ -139,14 +139,14 @@ class lib_groupal_basic_algorithm implements lib_groupal_ialgorithm {
         if ($this->participants == null || $index == false) {
             return false;
         }
-        // decrease count of Participants.
+        // Decrease count of Participants.
         $this->numberofparticipants--;
         $this->cohort->remove_participant($participant);
 
-        // remove participant.
+        // Remove participant.
         array_splice($this->participants, $index);
 
-        // if in non-matched, remove there as well.
+        // If in non-matched, remove there as well.
         $index = array_search($participant, $this->notmatchedparticipants);
         if ($index != false) {
             array_splice($this->notmatchedparticipants, $index);
