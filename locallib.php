@@ -372,7 +372,7 @@ function groupformation_convert_options($options) {
  *
  * @return array
  */
-function groupformation_z_lookup_table(){
+function groupformation_z_lookup_table() {
     $zlookuptable = array();
     $zlookuptable['-3.0'] = 0.0013;
     $zlookuptable['-3'] = 0.0013;

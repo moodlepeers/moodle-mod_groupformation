@@ -695,7 +695,7 @@ class mod_groupformation_criterion_calculator {
             }
 
             $mode = 1;
-            if ($criterion == "big5"){
+            if ($criterion == "big5") {
                 $mode = 2;
             }
             $array = array();
@@ -793,7 +793,10 @@ class mod_groupformation_criterion_calculator {
         global $DB;
 
         $recs = $DB->get_records('groupformation_user_values',
-            array('groupformationid' => $this->groupformationid,'userid' => $userid, 'criterion' => $criterion)
+            array('groupformationid' => $this->groupformationid,
+                'userid' => $userid,
+                'criterion' => $criterion
+            )
         );
 
         $array = array();

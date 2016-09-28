@@ -10,7 +10,7 @@ function buildChartOneSide(chartid, datam, bars) {
         return widthScale(100 * value);
     }
 
-    // Calc scaling value for tranform width (for right horizontal positioning)
+    // Calc scaling value for tranform width (for right horizontal positioning).
     function getTransformWidth(value) {
         return widthScale(100 * value);
     }
@@ -35,7 +35,7 @@ function buildChartOneSide(chartid, datam, bars) {
         .domain([0, 100])
         .range([0, middleWidth]);
 
-    svgHeight = middleHeight + labelsSection + scaleBarHeight; // 20 = Scale + Border height
+    svgHeight = middleHeight + labelsSection + scaleBarHeight;
 
     /* bulk colors */
     var color = ["rgb(136, 222, 0)",
@@ -54,13 +54,13 @@ function buildChartOneSide(chartid, datam, bars) {
         .style("overflow", "visible")
         .attr("font-size", 10);
 
-    // 4 Bereiche: oberer Rand ScaleBar / links Beschriftung / Chart / rechts Beschriftung
+    // 4 Bereiche: oberer Rand ScaleBar / links Beschriftung / Chart / rechts Beschriftung.
     var svgLabels = svg.append("g").attr("id", "labels"),
         svgLinks = svg.append("g").attr("id", "links"),
         svgRechts = svg.append("g").attr("id", "rechts"),
         svgMitte = svg.append("g").attr("id", "mitte");
 
-    // labels section
+    // Labels section.
     svgLabels.append("rect").attr("transform", "translate(" + leftWidth + ",0 )")
         .attr("width", middleWidth).attr("height", "30").attr("fill", "none");
 
@@ -69,7 +69,7 @@ function buildChartOneSide(chartid, datam, bars) {
     userLabel.append("rect").attr("width", 15).attr("height", 15).attr("fill", color[0])
         .attr("stroke", "black").attr("stroke-width", 2);
     userLabel.append("text").attr("dx", 20).attr("dy", 11).text(bars.user).attr("font-size", 12);
-    // group label
+    // Group label.
     var groupLabel = svgLabels.append("g").attr("transform", "translate(" + (leftWidth + 100) + ",7 )");
     groupLabel.append("rect").attr("width", 15).attr("height", 15).attr("fill", "white")
         .attr("stroke", "black").attr("stroke-width", 2)
@@ -115,7 +115,6 @@ function buildChartOneSide(chartid, datam, bars) {
             .attr("stroke-width", 1);
     }
 
-
     svgLinks
         .attr("transform", "translate(0, " + (labelsSection + scaleBarHeight) + ")")
         /* background */
@@ -146,8 +145,7 @@ function buildChartOneSide(chartid, datam, bars) {
         /* position im SVG */
         .attr("x", 0)
         .attr("y", function (d, i) {
-            return ((i * (bulkHeight * 2)) // how many categories
-                + (scaleBarHeight - 5) // axis Height
+            return ((i * (bulkHeight * 2)) + (scaleBarHeight - 5)
             );
         })
         .attr("text-anchor", "middle")
@@ -180,7 +178,6 @@ function buildChartOneSide(chartid, datam, bars) {
         .attr("transform", "translate(0, " + scaleBarHeight + ")")
         .call(axisLeft);
 
-
     var userBars;
     /* add user bulks */
     function addUserBulks() {
@@ -198,8 +195,7 @@ function buildChartOneSide(chartid, datam, bars) {
             .attr("height", bulkHeight / 3)
             .attr("fill", color[0])
             .attr("y", function (d, i) {
-                return (i * (bulkHeight * 2)
-                + (bulkHeight / 3));
+                return (i * (bulkHeight * 2) + (bulkHeight / 3));
             })
             .attr("transform", function (d) {
                 return "translate(0, 30)";
@@ -240,8 +236,7 @@ function buildChartOneSide(chartid, datam, bars) {
             .attr("height", bulkHeight / 3)
             .attr("fill", color[2])
             .attr("y", function (d, i) {
-                return ((i * (bulkHeight * 2) + 30)
-                + (bulkHeight / 3) * 2 );
+                return ((i * (bulkHeight * 2) + 30) + (bulkHeight / 3) * 2 );
             });
     }
     addGroupBulks();

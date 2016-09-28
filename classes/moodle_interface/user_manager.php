@@ -596,7 +596,7 @@ class mod_groupformation_user_manager {
      */
     public function register_participant_code($userid, $participantcode) {
         global $DB;
-        $this->set_status($userid,false);
+        $this->set_status($userid, false);
         $record = $DB->get_record('groupformation_started',
             array('groupformation' => $this->groupformationid, 'userid' => $userid)
         );

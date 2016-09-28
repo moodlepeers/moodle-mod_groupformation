@@ -150,8 +150,8 @@ class mod_groupformation_student_overview_controller {
 
             case 2 :
                 // Groups are built.
-                $this->groupformationinfo =
-                    mod_groupformation_util::get_info_text_for_student(false, $this->groupformationid);
+                $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(
+                    false, $this->groupformationid);
                 $this->groupformationstateinfo = array(
                     get_string('groups_build', 'groupformation'));
                 $this->buttonsinfo = '';

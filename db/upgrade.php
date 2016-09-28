@@ -448,15 +448,12 @@ function xmldb_groupformation_upgrade($oldversion) {
         // Adding keys to table groupformation_groups.
         $table->add_key('primary', XMLDB_KEY_PRIMARY, array(
             'id'));
-        $table->add_key('groupformation', XMLDB_KEY_FOREIGN, array(
-            'groupformation'), 'groupformation', array(
-            'id'));
+        $table->add_key('groupformation', XMLDB_KEY_FOREIGN, array('groupformation'), 'groupformation', array('id'));
 
         // Conditionally launch create table for groupformation_groups.
         if (!$dbman->table_exists($table)) {
             $dbman->create_table($table);
         }
-
         // Define table groupformation_group_users to be created.
         $table = new xmldb_table ('groupformation_group_users');
 
@@ -469,9 +466,7 @@ function xmldb_groupformation_upgrade($oldversion) {
         // Adding keys to table groupformation_group_users.
         $table->add_key('primary', XMLDB_KEY_PRIMARY, array(
             'id'));
-        $table->add_key('groupformation', XMLDB_KEY_FOREIGN, array(
-            'groupformation'), 'groupformation', array(
-            'id'));
+        $table->add_key('groupformation', XMLDB_KEY_FOREIGN, array('groupformation'), 'groupformation', array('id'));
 
         // Conditionally launch create table for groupformation_group_users.
         if (!$dbman->table_exists($table)) {
