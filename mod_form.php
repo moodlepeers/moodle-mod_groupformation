@@ -536,6 +536,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
      * @param moodleform_mod $mform
      */
     public function generate_html_for_non_js(&$mform) {
+        global $CFG;
         $changemsg = '<div class="fitem" id="nochangespossible"';
         if (!$this->store->is_editable()) {
             $changemsg .= ' ><span value="1"';
