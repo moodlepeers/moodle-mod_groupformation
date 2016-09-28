@@ -46,7 +46,7 @@ class lib_groupal_cohort {
     public $countOfGroups = 0;
 
     /** @var number This is the cohort performance index */
-    public $cohortPerformanceIndex = null;
+    public $cpi = null;
 
     /**
      * lib_groupal_cohort constructor.
@@ -94,9 +94,9 @@ class lib_groupal_cohort {
         if (static::$evaluator == null) {
             throw new Exception("Cohort.evaluateCohortPerformanceIndex(): setEvaluator() before execute evaluateCohortPerformanceIndex()");
         }
-        $this->cohortPerformanceIndex = static::$evaluator->evaluateCohortPerformanceIndex($this);
+        $this->cpi = static::$evaluator->evaluateCohortPerformanceIndex($this);
 
-        return $this->cohortPerformanceIndex;
+        return $this->cpi;
     }
 
     /**

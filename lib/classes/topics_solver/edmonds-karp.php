@@ -98,9 +98,9 @@ class groupformation_solver_edmonds_karp extends topic_distributor {
         // Step 2: relax edges repeatedly
         for ($i = 0; $i < $count; $i++) { // For i from 1 to size(vertices)-1 .
             $updatedsomething = false;
-            foreach ($this->graph as $key => $edges) { // For each edge (u, v) with weight w in edges .
+            foreach (array_values($this->graph) as $edges) { // For each edge (u, v) with weight w in edges .
                 if (is_array($edges)) {
-                    foreach ($edges as $key2 => $edge) {
+                    foreach (array_values($edges) as $edge) {
                         /* @var $edge topic_edge */
                         if ($dists[$edge->from] + $edge->weight < $dists[$edge->to]) { // If weight[u] + w < weight[v] .
                             $dists[$edge->to] = $dists[$edge->from] + $edge->weight; // Weight[v] := weight[u] + w .

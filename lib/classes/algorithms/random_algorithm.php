@@ -34,7 +34,7 @@ class lib_groupal_random_algorithm implements lib_groupal_ialgorithm {
     private $participants;
 
     /** @var  int This is the maximum group size of a computed group */
-    private $group_size;
+    private $groupsize;
 
     /** @var  lib_groupal_cohort This contains the final result */
     private $cohort;
@@ -43,10 +43,10 @@ class lib_groupal_random_algorithm implements lib_groupal_ialgorithm {
      * lib_groupal_random_algorithm constructor.
      *
      * @param $participants
-     * @param $group_size
+     * @param $groupsize
      */
-    public function __construct($participants, $group_size) {
-        $this->group_size = $group_size;
+    public function __construct($participants, $groupsize) {
+        $this->groupsize = $groupsize;
         $this->participants = $participants;
     }
 
@@ -54,10 +54,10 @@ class lib_groupal_random_algorithm implements lib_groupal_ialgorithm {
      * @return lib_groupal_cohort
      */
     public function do_one_formation() {
-        lib_groupal_group::setGroupMembersMaxSize($this->group_size);
+        lib_groupal_group::setGroupMembersMaxSize($this->groupsize);
 
         $participants = $this->participants;
-        $groupsize = $this->group_size; // 6;
+        $groupsize = $this->groupsize; // 6;
 
         // Komplexere Variante mit seeds.
 
@@ -87,8 +87,8 @@ class lib_groupal_random_algorithm implements lib_groupal_ialgorithm {
         $n = count($participants);
         $g = $groupsize; // 6;
 
-        $complete_part = null;
-        $incomplete_part = null;
+        $completepart = null;
+        $incompletepart = null;
 
         $quotient = intval($n / $g);
         $reminder = $n % $g;
@@ -97,101 +97,101 @@ class lib_groupal_random_algorithm implements lib_groupal_ialgorithm {
         $tt = $t - $reminder;
 
         if ($n % $g == 0) {
-            $complete_part = $n;
-            $incomplete_part = 0;
+            $completepart = $n;
+            $incompletepart = 0;
         } else if ($n > $g * $tt) {
-            $complete_part = $n - $reminder - $g * $tt;
-            $incomplete_part = $n - $complete_part;
+            $completepart = $n - $reminder - $g * $tt;
+            $incompletepart = $n - $completepart;
         } else if ($n > $g) {
-            $complete_part = $quotient * $g;
-            $incomplete_part = $reminder;
+            $completepart = $quotient * $g;
+            $incompletepart = $reminder;
         } else if ($g >= $n) {
-            $complete_part = $n;
-            $incomplete_part = 0;
+            $completepart = $n;
+            $incompletepart = 0;
         }
 
         // NOW WE HAVE
-        // $complete_part = number of participants which form complete groups
+        // $completepart = number of participants which form complete groups
         // and
-        // $incomplete_part = number of participants which form incomplete groups with equal sizes
+        // $incompletepart = number of participants which form incomplete groups with equal sizes
         // example: n = 189, g = 6
-        // $complete_part = 174 --> 29x 6er-Gruppe
-        // $incomplete_part = 15 --> 3x 5er-Gruppe.
+        // $completepart = 174 --> 29x 6er-Gruppe
+        // $incompletepart = 15 --> 3x 5er-Gruppe.
 
-        $complete_participants = array();
-        $incomplete_participants = array();
-        if ($complete_part < 0 && $incomplete_part < 0) {
-            $complete_participants = $participants;
-            $incomplete_participants = array();
-        } elseif ($complete_part == 0 && $incomplete_part == $n) {
-            $complete_participants = array();
-            $incomplete_participants = $participants;
-        } elseif ($complete_part == $n && $incomplete_part == 0) {
-            $complete_participants = $participants;
-            $incomplete_participants = array();
-        } elseif ($complete_part != 0 && $incomplete_part != 0) {
-            $complete_participants = array();
-            $incomplete_participants = array();
+        $completeusers = array();
+        $incompleteusers = array();
+        if ($completepart < 0 && $incompletepart < 0) {
+            $completeusers = $participants;
+            $incompleteusers = array();
+        } elseif ($completepart == 0 && $incompletepart == $n) {
+            $completeusers = array();
+            $incompleteusers = $participants;
+        } elseif ($completepart == $n && $incompletepart == 0) {
+            $completeusers = $participants;
+            $incompleteusers = array();
+        } elseif ($completepart != 0 && $incompletepart != 0) {
+            $completeusers = array();
+            $incompleteusers = array();
 
             for ($i = 0; $i < $n; $i++) {
-                if ($i < $complete_part) {
-                    $complete_participants [] = $participants [$i];
+                if ($i < $completepart) {
+                    $completeusers [] = $participants [$i];
                 } else {
-                    $incomplete_participants [] = $participants [$i];
+                    $incompleteusers [] = $participants [$i];
                 }
             }
         }
         $groups = array();
 
-        if (count($complete_participants) > 0) {
+        if (count($completeusers) > 0) {
             $position = 0;
-            $oneGroup = null;
+            $onegroup = null;
 
-            foreach ($complete_participants as $p) {
+            foreach ($completeusers as $p) {
                 if ($position == 0) {
-                    $oneGroup = new lib_groupal_group ();
+                    $onegroup = new lib_groupal_group ();
                 }
 
-                $oneGroup->addParticipant($p, true);
+                $onegroup->addParticipant($p, true);
 
                 if (($position + 1) == $groupsize) {
                     $position = 0;
-                    $groups [] = $oneGroup;
+                    $groups [] = $onegroup;
                 } else {
                     $position++;
                 }
             }
 
             if ($position != 0)
-                $groups [] = $oneGroup;
+                $groups [] = $onegroup;
         }
-        if (count($incomplete_participants) > 0) {
+        if (count($incompleteusers) > 0) {
             $position = 0;
-            $oneGroup = null;
+            $onegroup = null;
 
-            foreach ($incomplete_participants as $p) {
+            foreach ($incompleteusers as $p) {
                 if ($position == 0) {
-                    $oneGroup = new lib_groupal_group ();
+                    $onegroup = new lib_groupal_group ();
                 }
 
-                $oneGroup->addParticipant($p, true);
+                $onegroup->addParticipant($p, true);
 
                 if (($position + 1) == ($groupsize - 1)) {
                     $position = 0;
-                    $groups [] = $oneGroup;
+                    $groups [] = $onegroup;
                 } else {
                     $position++;
                 }
             }
 
             if ($position != 0)
-                $groups [] = $oneGroup;
+                $groups [] = $onegroup;
         }
 
         $this->cohort = new lib_groupal_random_cohort (count($groups), $groups);
         $this->cohort->whichMatcherUsed = get_class($this);
         $this->cohort->countOfGroups = $this->cohort->countOfGroups;
-        $this->cohort->cohortPerformanceIndex = null;
+        $this->cohort->cpi = null;
         return $this->cohort;
     }
 }

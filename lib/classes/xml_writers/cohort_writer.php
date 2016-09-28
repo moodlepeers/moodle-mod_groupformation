@@ -46,9 +46,8 @@ class lib_groupal_cohort_writer {
     /**
      * Creates XML file with participants
      *
-     * @param array $criteria_types
-     * @param array $participants
-     * @return boolean
+     * @param null $cohort
+     * @return bool
      */
     public function write($cohort = null) {
         if (is_null($cohort)) {
@@ -71,11 +70,6 @@ class lib_groupal_cohort_writer {
 
         $writer->writeAttribute('id', '2015');
 
-        $participants = $cohort->groups[0]->getParticipants();
-        $criteria_types = $participants[0]->getCriteria();
-
-        //$this->write_criteria_types ( $criteria_types );
-
         $this->write_groups($cohort);
 
         $writer->endElement();    // </Instance>
@@ -90,7 +84,7 @@ class lib_groupal_cohort_writer {
     /**
      * Writes XML for an array participants
      *
-     * @param array $participants
+     * @param lib_groupal_cohort $cohort
      */
     private function write_groups(lib_groupal_cohort $cohort) {
         $writer = $this->writer;
@@ -170,37 +164,6 @@ class lib_groupal_cohort_writer {
 
         $this->write_criterion_attributes($c);
 
-        //$values = $c->getValues ();
-
-        //$this->write_criterion_values ( $values );
-
-        $writer->endElement();
-    }
-
-    /**
-     * Writes XML for an array of criterion values
-     *
-     * @param array $values
-     */
-    private function write_criterion_values($values) {
-        $writer = $this->writer;
-
-        foreach ($values as $key => $value) {
-            $this->write_criterion_value($key, $value);
-        }
-    }
-
-    /**
-     * Writes XML for a single criterion value
-     *
-     * @param int $key
-     * @param float $value
-     */
-    private function write_criterion_value($key, $value) {
-        $writer = $this->writer;
-        $writer->startElement('Value');
-        $writer->writeAttribute('name', 'value' . $key);
-        $writer->writeAttribute('value', $value);
         $writer->endElement();
     }
 
@@ -215,39 +178,6 @@ class lib_groupal_cohort_writer {
         $writer->writeAttribute('isHomogeneous', $c->getIsHomogeneous());
         $writer->writeAttribute('minValue', $c->getMinValue());
         $writer->writeAttribute('maxValue', $c->getMaxValue());
-        //$writer->writeAttribute ( 'weight', $c->getWeight () );
-        //$writer->writeAttribute ( 'valueCount', count ( $c->getValues () ) );
         $writer->writeAttribute('value0', array_sum($c->getValues()) / count($c->getValues()));
-    }
-
-    /**
-     * Writes XML for an array of criterion types
-     *
-     * @param array $criteria_types
-     */
-    private function write_criteria_types($criteria_types) {
-        $writer = $this->writer;
-
-        $writer->startElement('UsedCriteria');
-
-        foreach ($criteria_types as $c_type) {
-            $this->write_criterion_type($c_type);
-        }
-
-        $writer->endElement();
-    }
-
-    /**
-     * Writes XML for a single criterion type
-     *
-     * @param lib_groupal_criterion $c_type
-     */
-    private function write_criterion_type(lib_groupal_criterion $c_type) {
-        $writer = $this->writer;
-        $writer->startElement('Criterion');
-
-        $this->write_criterion_attributes($c_type);
-
-        $writer->endElement();
     }
 }

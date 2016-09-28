@@ -38,7 +38,7 @@ class lib_groupal_group {
 
     public $statistics;
 
-    public $groupPerformanceIndex = 0;
+    public $gpi = 0;
 
 
     private $participants; // Generic array: Participant .
@@ -132,7 +132,7 @@ class lib_groupal_group {
      * @return float[]
      */
     public function getGroupPerformanceIndex() {
-        return $this->groupPerformanceIndex;
+        return $this->gpi;
     }
 
     /**
@@ -140,7 +140,7 @@ class lib_groupal_group {
      * @param float $index
      */
     public function setGroupPerformanceIndex($index) {
-        $this->groupPerformanceIndex = $index;
+        $this->gpi = $index;
     }
 
 
@@ -166,7 +166,7 @@ class lib_groupal_group {
      * void
      */
     public function calculateGroupPerformanceIndex() {
-        $this->groupPerformanceIndex = static::$evaluator->evaluateGroupPerformanceIndex($this);
+        $this->gpi = static::$evaluator->evaluateGroupPerformanceIndex($this);
     }
 
 
@@ -178,7 +178,7 @@ class lib_groupal_group {
     public function clear() {
         // Empty participants list.
         $this->participants = array();
-        $this->groupPerformanceIndex = 0;
+        $this->gpi = 0;
     }
 
 

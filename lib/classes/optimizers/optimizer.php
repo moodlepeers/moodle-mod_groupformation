@@ -36,7 +36,6 @@ class lib_groupal_optimizer implements lib_groupal_ioptimizer {
     }
 
     public function optimizeCohort(lib_groupal_cohort $cohort) {
-        $groups = $cohort->groups;
         // Throw new NotImplementedException("optimize if it really optimizes, not else
         // sort cohort by group performance index.
         try {
@@ -82,12 +81,6 @@ class lib_groupal_optimizer implements lib_groupal_ioptimizer {
         $oldAvg = ($goodgroup->getGroupPerformanceIndex() - $badgroup->getGroupPerformanceIndex()) / 2;
         $newAvg = ($g1->getGroupPerformanceIndex() - $g2->getGroupPerformanceIndex()) / 2;
         $firstCondition = $newAvg > $oldAvg;
-        // Second condition for a better PerformanceIndex: the stdDiaviation gets smaller so
-        // the AVGGroupPerformanceIndex becomes more equal
-        // on the other hand the average gets just.
-        $oldStd = abs($goodgroup->getGroupPerformanceIndex() - $badgroup->getGroupPerformanceIndex());
-        $newStd = abs($g1->getGroupPerformanceIndex() - $g2->getGroupPerformanceIndex());
-        $secondCondition = $newStd < $oldStd && abs($newAvg - $oldAvg) < 0.01;
         if ($firstCondition) {
             $goodgroup->set_participants($g1->get_participants());
             $goodgroup->setGroupPerformanceIndex($g1->getGroupPerformanceIndex());

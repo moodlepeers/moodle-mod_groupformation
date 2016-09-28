@@ -82,7 +82,7 @@ class lib_groupal_topic_algorithm implements lib_groupal_ialgorithm {
         $distributor = new groupformation_solver_edmonds_karp();
         $results = $distributor->distribute_users($this->ratings, $this->topics, $this->participants_numb);
         $groups = array();
-        foreach ($results as $topic_id => $participants_ids) {
+        foreach (array_values($results) as $participants_ids) {
             $group = new lib_groupal_group();
             foreach ($participants_ids as $id) {
                 $p = $this->participants[$id];
@@ -106,7 +106,7 @@ class lib_groupal_topic_algorithm implements lib_groupal_ialgorithm {
         $ratings_array = array();
 
         // TODO Participant with just topics as criterions? can the values of criterion be empty?
-        foreach ($this->participants as $key => $user) {
+        foreach (array_values($this->participants) as $user) {
             $current_user_id = $user->ID;
             foreach ($user->criteria as $cr) {
                 if ($cr->getName() == 'topic') {

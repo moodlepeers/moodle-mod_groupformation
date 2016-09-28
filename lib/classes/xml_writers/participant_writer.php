@@ -43,9 +43,8 @@ class lib_groupal_participant_writer {
     /**
      * Creates XML file with participants
      *
-     * @param array $criteria_types
-     * @param array $participants
-     * @return boolean
+     * @param null $participants
+     * @return bool
      */
     public function write($participants = null) {
         if (is_null($participants)) {
@@ -148,7 +147,6 @@ class lib_groupal_participant_writer {
      * @param array $values
      */
     private function write_criterion_values($values) {
-        $writer = $this->writer;
 
         foreach ($values as $key => $value) {
             $this->write_criterion_value($key, $value);

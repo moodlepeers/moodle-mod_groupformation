@@ -147,7 +147,6 @@ class lib_groupal_basic_algorithm implements lib_groupal_ialgorithm {
         }
         // decrease count of Participants
         $this->numberofparticipants--;
-        $tmpX = ceil($this->numberofparticipants / $this->groupsize);
         $this->cohort->removeParticipant($participant);
 
         // remove participant
