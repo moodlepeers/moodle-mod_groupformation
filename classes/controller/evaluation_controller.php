@@ -82,30 +82,7 @@ class mod_groupformation_evaluation_controller {
         } else if (!$this->usermanager->has_answered_everything($userid)) {
             $this->no_evaluation('no_evaluation_ready');
         } else {
-            $courseusers = $this->store->get_users();
-
-            if (!count($courseusers) >= 2) {
-                $courseusers = array();
-            }
-
-            $groupusers = array();
-            $hasgroup = $this->groupsmanager->has_group($userid);
-            if ($hasgroup) {
-                $groupusers = $this->groupsmanager->get_group_members($userid);
-            }
-
-            if (!count($groupusers) >= 2 || !$this->groupsmanager->groups_created()) {
-                $groupusers = array();
-            }
-
-            $cc = new mod_groupformation_criterion_calculator($this->groupformationid);
-
-            if (!$this->usermanager->has_evaluation_values($userid)) {
-                $this->usermanager->set_evaluation_values($userid);
-            }
-
-            $eval = $cc->get_eval($userid, $groupusers, $courseusers);
-
+            $eval = $this->get_eval($userid);
             if (is_null($eval) || count($eval) == 0) {
                 $this->no_evaluation();
             } else {
@@ -117,5 +94,37 @@ class mod_groupformation_evaluation_controller {
         }
 
         return $this->view->load_template();
+    }
+
+    /**
+     * Returns eval array for user.
+     *
+     * @param $userid
+     * @return array
+     */
+    public function get_eval($userid) {
+        $courseusers = $this->store->get_users();
+
+        if (!count($courseusers) >= 2) {
+            $courseusers = array();
+        }
+
+        $groupusers = array();
+        $hasgroup = $this->groupsmanager->has_group($userid);
+        if ($hasgroup) {
+            $groupusers = $this->groupsmanager->get_group_members($userid);
+        }
+
+        if (!count($groupusers) >= 2 || !$this->groupsmanager->groups_created()) {
+            $groupusers = array();
+        }
+
+        $cc = new mod_groupformation_criterion_calculator($this->groupformationid);
+
+        if (!$this->usermanager->has_evaluation_values($userid)) {
+            $this->usermanager->set_evaluation_values($userid);
+        }
+
+        return $cc->get_eval($userid, $groupusers, $courseusers);
     }
 }

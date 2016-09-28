@@ -25,23 +25,9 @@ if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.');
 }
 
-require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
-require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
-require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_parser.php');
-require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/lib.php');
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/grouping.php');
-
-require_once($CFG->dirroot . '/mod/groupformation/lib/classes/criteria/specific_criterion.php');
-require_once($CFG->dirroot . '/mod/groupformation/lib/classes/participant.php');
-require_once($CFG->dirroot . '/mod/groupformation/lib/classes/matchers/group_centric_matcher.php');
-require_once($CFG->dirroot . '/mod/groupformation/lib/classes/algorithms/basic_algorithm.php');
-require_once($CFG->dirroot . '/mod/groupformation/lib/classes/algorithms/random_algorithm.php');
-require_once($CFG->dirroot . '/mod/groupformation/lib/classes/algorithms/topic_algorithm.php');
-require_once($CFG->dirroot . '/mod/groupformation/lib/classes/optimizers/optimizer.php');
-require_once($CFG->dirroot . '/mod/groupformation/lib/classes/xml_writers/participant_writer.php');
-require_once($CFG->dirroot . '/mod/groupformation/lib/classes/xml_writers/cohort_writer.php');
 
 class mod_groupformation_scientific_grouping extends mod_groupformation_grouping {
 

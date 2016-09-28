@@ -77,11 +77,15 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/job_m
 require_once($CFG->dirroot . '/mod/groupformation/classes/controller/analysis_controller.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_parser.php');
 
+/* --------- Hard Reset a pending groupformation job ---- */
 if ($resetjob) {
     global $DB;
 
     $DB->delete_records('groupformation_jobs', array('groupformationid' => $groupformation->id));
 }
+/* ----------- / Hard Reset a pending job -------------- */
+
+/* ---------- Automated test user generation ------------ */
 
 if ($CFG->debug === 32767) {
     $cqt = new mod_groupformation_test_user_generator ($cm);
@@ -99,6 +103,22 @@ if ($CFG->debug === 32767) {
         redirect($return->out());
     }
 }
+/* ---------- / Automated test user generation ---------- */
+
+/* ---------- Job Manager Usage ------------------------- */
+
+$jm = new mod_groupformation_job_manager ();
+$job = null;
+
+$job = $jm::get_job($groupformation->id);
+
+if (!is_null($job)) {
+    $result = $jm::do_groupal($job);
+    var_dump($result);
+}
+
+/* ---------- / Job Manager Usage ----------------------- */
+
 $controller = new mod_groupformation_analysis_controller ($groupformation->id, $cm);
 
 /* ---- Code for fixing Answers can be removed after 15-09-2016 ---- */
@@ -109,6 +129,7 @@ if ($CFG->debug === 32767 && $fixanswers) {
         'id' => $id, 'do_show' => 'analysis'));
     redirect($return->out());
 }
+/* ---------------------------------------------------------------- */
 
 if ((data_submitted()) && confirm_sesskey()) {
     $switcher = optional_param('questionnaire_switcher', null, PARAM_INT);

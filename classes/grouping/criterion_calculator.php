@@ -114,7 +114,7 @@ class mod_groupformation_criterion_calculator {
                                     if (is_null($users) || in_array($answer->userid, $users)) {
 
                                         // Increments count for answer option.
-                                        $dist [($answer->answer) - 1]++;
+                                        $dist [($answer->answer)]++;
 
                                         // Increments count for total.
                                         if ($id == $initialid) {
