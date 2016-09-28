@@ -69,7 +69,7 @@ class mod_groupformation_import_export_controller {
 
         $filename = 'exportable_answers.xml';
 
-        return $this->get_urlstring($filename,$content,$userid);
+        return $this->get_urlstring($filename, $content, $userid);
     }
 
     /**
@@ -356,6 +356,6 @@ class mod_groupformation_import_export_controller {
 
         $filename = 'archived_' . $type . '.csv';
 
-        return $this->get_urlstring($filename,$content,$this->groupformationid);
+        return $this->get_urlstring($filename, $content, $this->groupformationid);
     }
 }
