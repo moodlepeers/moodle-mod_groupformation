@@ -69,11 +69,28 @@ class mod_groupformation_import_export_controller {
 
         $filename = 'exportable_answers.xml';
 
+        return $this->get_urlstring($filename,$content,$userid);
+    }
+
+    /**
+     * Returns urlstring based on content
+     *
+     * @param $filename
+     * @param $content
+     * @param $id
+     * @return string
+     */
+    private function get_urlstring($filename, $content, $id) {
         $context = context_module::instance($this->cmid);
 
         $fileinfo = array(
-            'contextid' => $context->id, 'component' => 'mod_groupformation', 'filearea' => 'groupformation_answers',
-            'itemid' => $userid, 'filepath' => '/', 'filename' => $filename);
+            'contextid' => $context->id,
+            'component' => 'mod_groupformation',
+            'filearea' => 'groupformation_answers',
+            'itemid' => $id,
+            'filepath' => '/',
+            'filename' => $filename
+        );
 
         $filestorage = get_file_storage();
 
@@ -90,9 +107,7 @@ class mod_groupformation_import_export_controller {
         $url = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(), $file->get_filearea(),
             $file->get_itemid(), $file->get_filepath(), $file->get_filename());
 
-        $urlstring = $url->out();
-
-        return $urlstring;
+        return $url->out();
     }
 
     /**
@@ -155,7 +170,9 @@ class mod_groupformation_import_export_controller {
         $this->view->set_template('student_import_form_header');
         $this->view->assign('file_error', $showwarning);
 
+        echo '<div class="gf_settings_pad">';
         echo $this->view->load_template();
+        echo '</div>';
 
         $mform->display();
 
@@ -339,29 +356,6 @@ class mod_groupformation_import_export_controller {
 
         $filename = 'archived_' . $type . '.csv';
 
-        $context = context_module::instance($this->cmid);
-
-        $fileinfo = array(
-            'contextid' => $context->id, 'component' => 'mod_groupformation', 'filearea' => 'groupformation_answers',
-            'itemid' => $this->groupformationid, 'filepath' => '/', 'filename' => $filename);
-
-        $filestorage = get_file_storage();
-
-        if ($filestorage->file_exists($fileinfo ['contextid'], $fileinfo ['component'], $fileinfo ['filearea'],
-            $fileinfo ['itemid'], $fileinfo ['filepath'], $fileinfo ['filename'])
-        ) {
-            $file = $filestorage->get_file($fileinfo ['contextid'], $fileinfo ['component'], $fileinfo ['filearea'],
-                $fileinfo ['itemid'], $fileinfo ['filepath'], $fileinfo ['filename']);
-            $file->delete();
-        }
-
-        $file = $filestorage->create_file_from_string($fileinfo, $content);
-
-        $url = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(), $file->get_filearea(),
-            $file->get_itemid(), $file->get_filepath(), $file->get_filename());
-
-        $urlstring = $url->out();
-
-        return $urlstring;
+        return $this->get_urlstring($filename,$content,$this->groupformationid);
     }
 }

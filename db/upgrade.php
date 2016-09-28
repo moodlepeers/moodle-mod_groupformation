@@ -1235,7 +1235,7 @@ function xmldb_groupformation_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2016072100, 'groupformation');
     }
     if ($oldversion < 2016090700) {
-        // Define field count_groups to be added to groupformation_jobs and groupformation_stats
+        // Define field count_groups to be added to groupformation_jobs and groupformation_stats.
         $tablename = 'groupformation_jobs';
         $table = new xmldb_table ($tablename);
         $field = new xmldb_field ('count_groups', XMLDB_TYPE_INTEGER, '20', null, null, null, null, 'matcher_used');
