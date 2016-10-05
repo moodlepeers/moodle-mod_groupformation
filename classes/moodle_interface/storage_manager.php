@@ -16,12 +16,11 @@
 
 
 /**
- * This file contains the storage manager class
+ * Interface betweeen DB and Plugin
  *
- * @package     mod_groupformation
- * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package mod_groupformation
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.');
@@ -30,24 +29,12 @@ if (!defined('MOODLE_INTERNAL')) {
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 require_once($CFG->dirroot . '/group/lib.php');
+require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 
-/**
- * Storage manager class
- *
- * @package     mod_groupformation
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
 class mod_groupformation_storage_manager {
-
-    /** @var mod_groupformation_data Define file class*/
-    private $data;
-
-    /** @var int id of groupformation */
     private $groupformationid;
-
-    /** @var mod_groupformation_groups_manager Groups manager */
-    private $groupsmanager;
+    private $data;
+    private $gm;
 
     /**
      * Constructs storage manager for a specific groupformation
@@ -57,7 +44,13 @@ class mod_groupformation_storage_manager {
     public function __construct($groupformationid) {
         $this->groupformationid = $groupformationid;
         $this->data = new mod_groupformation_data ();
-        $this->groupsmanager = new mod_groupformation_groups_manager ($groupformationid);
+        $this->gm = new mod_groupformation_groups_manager ($groupformationid);
+    }
+
+    public function get_version() {
+        global $DB;
+
+        return $DB->get_field('groupformation','version',array('id'=>$this->groupformationid));
     }
 
     /**
@@ -77,7 +70,7 @@ class mod_groupformation_storage_manager {
     /**
      * Returns whether the activity is accessible
      *
-     * @param int $userid
+     * @param $userid
      * @return bool
      */
     public function is_accessible($userid) {
@@ -104,7 +97,9 @@ class mod_groupformation_storage_manager {
     public function catalog_table_not_set($category = 'grade') {
         global $DB;
 
-        $count = $DB->count_records('groupformation_' . $category);
+        // $count = $DB->count_records('groupformation_' . $category);
+        // TODO
+        $count = $DB->count_records('groupformation_question', array('category' => $category));
 
         return $count == 0;
     }
@@ -132,7 +127,7 @@ class mod_groupformation_storage_manager {
             'course' => $courseid
         ), 'id', 'id');
         $i = 1;
-        foreach (array_keys($records) as $id) {
+        foreach ($records as $id => $record) {
             if ($id == $this->groupformationid) {
                 return $i;
             } else {
@@ -141,85 +136,6 @@ class mod_groupformation_storage_manager {
         }
 
         return $i;
-    }
-
-    /**
-     * Deletes all questions in a specific category
-     *
-     * @param string $category
-     */
-    public function delete_all_catalog_questions($category) {
-        global $DB;
-        $DB->delete_records('groupformation_' . $category);
-    }
-
-    /**
-     * Adds a catalog question in a specific language and category
-     *
-     * @param array $question
-     * @param string $language
-     * @param string $category
-     */
-    public function add_catalog_question($question, $language, $category) {
-        global $DB;
-
-        $data = new stdClass ();
-
-        $data->type = $question ['type'];
-        $data->question = $question ['question'];
-        $data->options = $this->convert_options($question ['options']);
-        $data->position = $question ['position'];
-        $data->questionid = $question ['questionid'];
-        $data->language = $language;
-        $data->optionmax = count($question ['options']);
-        $DB->insert_record('groupformation_' . $category, $data);
-    }
-
-    /**
-     * Add new question from XML to DB
-     *
-     * @param string $category
-     * @param int $numbers
-     * @param unknown $version
-     * @param boolean $init
-     */
-    public function add_catalog_version($category, $numbers, $version, $init) {
-        global $DB;
-
-        $data = new stdClass ();
-        $data->category = $category;
-        $data->version = $version;
-        $data->numberofquestion = $numbers;
-
-        if ($init || $DB->count_records('groupformation_q_version', array(
-                'category' => $category
-            )) == 0
-        ) {
-            $DB->insert_record('groupformation_q_version', $data);
-        } else {
-            $data->id = $DB->get_field('groupformation_q_version', 'id', array(
-                'category' => $category
-            ));
-            $DB->update_record('groupformation_q_version', $data);
-        }
-    }
-
-    /**
-     * Determines whether the DB contains for a specific category a specific version or not
-     *
-     * @param string $category
-     * @param string $version
-     * @return boolean
-     */
-    public function latest_version($category, $version) {
-        global $DB;
-
-        $count = $DB->count_records('groupformation_q_version', array(
-            'category' => $category,
-            'version' => $version
-        ));
-
-        return $count == 1;
     }
 
     /**
@@ -234,8 +150,8 @@ class mod_groupformation_storage_manager {
 
         $data = new stdClass ();
         $data->groupformation = $this->groupformationid;
-        $data->topicvalues = $this->convert_options($topics);
-        $data->knowledgevalues = $this->convert_options($knowledge);
+        $data->topicvalues = groupformation_convert_options($topics);
+        $data->knowledgevalues = groupformation_convert_options($knowledge);
         $data->topicvaluesnumber = count($topics);
         $data->knowledgevaluesnumber = count($knowledge);
 
@@ -311,7 +227,7 @@ class mod_groupformation_storage_manager {
      * @param unknown $options
      * @return string
      */
-    private function convert_options($options) {
+    public function convert_options($options) {
         $op = implode("</OPTION>  <OPTION>", $options);
 
         return "<OPTION>" . $op . "</OPTION>";
@@ -320,7 +236,7 @@ class mod_groupformation_storage_manager {
     /**
      * Returns an array with number of questions in each category
      *
-     * @param array $categories
+     * @param $categories
      * @return array
      */
     public function get_numbers($categories) {
@@ -336,14 +252,17 @@ class mod_groupformation_storage_manager {
     /**
      * Returns possible language
      *
-     * @param string $category
+     * @param unknown $category
      * @return mixed
      */
     public function get_possible_language($category) {
         global $DB;
 
-        $table = 'groupformation_' . $category;
-        $lang = $DB->get_field($table, 'language', array(), IGNORE_MULTIPLE);
+        // $table = 'groupformation_' . $category;
+        // TODO
+        $table = 'groupformation_question';
+
+        $lang = $DB->get_field($table, 'language', array('category' => $category), IGNORE_MULTIPLE);
 
         return $lang;
     }
@@ -394,12 +313,19 @@ class mod_groupformation_storage_manager {
         if ($category == 'points') {
             return $this->get_max_points();
         }
-        $table = "groupformation_" . $category;
 
+        // $table = 'groupformation_' . $category;
+        // TODO
+        $table = 'groupformation_question';
         return $DB->get_field($table, 'optionmax', array(
-            'language' => 'en',
+            'language' => 'en', 'category' => $category,
             'questionid' => $i
         ));
+
+        //return $DB->get_field($table, 'optionmax', array(
+        //    'language' => 'en',
+        //    'questionid' => $i
+        //));
     }
 
     /**
@@ -410,15 +336,36 @@ class mod_groupformation_storage_manager {
      * @param string $lang
      * @return mixed
      */
-    public function get_catalog_question($i, $category = 'general', $lang = 'en') {
+    public function get_catalog_question($i, $category = 'general', $lang = 'en', $version = null) {
         global $DB;
         $table = "groupformation_" . $category;
+        // TODO
+        $table = 'groupformation_question';
         $return = $DB->get_record($table, array(
-            'language' => $lang,
-            'questionid' => $i
+            'language' => $lang, 'category' => $category,
+            'position' => $i, 'version' => $version
         ));
 
+        // $return = $DB->get_record($table, array(
+        //     'language' => $lang,
+        //     'position' => $i
+        // ));
+
         return $return;
+    }
+
+    /**
+     * Returns version of requested category stored in DB
+     *
+     * @param $category
+     * @return mixed
+     */
+    public function get_catalog_version($category) {
+        global $DB;
+
+        $table = "groupformation_q_version";
+
+        return $DB->get_field($table, 'version', array('category' => $category));
     }
 
     /**
@@ -479,21 +426,26 @@ class mod_groupformation_storage_manager {
             $categories[] = 'knowledge';
         }
 
+        if (!$this->is_math_prep_course_mode()) {
+            $categories[] = 'general';
+        }
+
         foreach ($categoryset as $category) {
             if ($this->get_number($category) > 0) {
                 if ($category == 'grade' && $this->ask_for_grade()) {
                     $categories [] = $category;
                 } else if ($category == 'points' && $this->ask_for_points()) {
                     $categories [] = $category;
-                } else if ($category != 'grade' && $category != 'points') {
+                } else if ($category != 'grade' && $category != 'points' && $category != 'general') {
                     $categories [] = $category;
                 }
             }
         }
 
         $hastopic = $this->get_number('topic');
+
         if ($this->ask_for_topics() && $hastopic != 0) {
-            $categories = arraY('topic');
+            $categories = array('topic');
         }
 
         return $categories;
@@ -576,6 +528,10 @@ class mod_groupformation_storage_manager {
     public function is_editable() {
         global $DB;
 
+        if (is_null($this->groupformationid) || $this->groupformationid == ''){
+            return true;
+        }
+
         return ($DB->count_records('groupformation_answer', array(
                 'groupformation' => $this->groupformationid
             )) == 0);
@@ -638,7 +594,7 @@ class mod_groupformation_storage_manager {
     }
 
     /**
-     * Sets timestamp in groupformation in order to close/terminate questionaire
+     * Sets timestamp in groupformation in order to close/terminate questionnaire
      */
     public function close_questionnaire() {
         global $DB;
@@ -651,7 +607,7 @@ class mod_groupformation_storage_manager {
     }
 
     /**
-     * Sets timestamp in groupformation in order to open/begin questionaire
+     * Sets timestamp in groupformation in order to open/begin questionnaire
      */
     public function open_questionnaire() {
         global $DB;
@@ -695,7 +651,7 @@ class mod_groupformation_storage_manager {
      *
      * @return boolean
      */
-    public function has_grouping_setting() {
+    public function get_grouping_setting() {
         global $DB;
 
         return $DB->get_field('groupformation', 'onlyactivestudents', array(
@@ -711,7 +667,7 @@ class mod_groupformation_storage_manager {
     public function get_group_option() {
         global $DB;
 
-        return boolval($DB->get_field('groupformation', 'groupoption', array(
+        return (bool)($DB->get_field('groupformation', 'groupoption', array(
             'id' => $this->groupformationid
         )));
     }
@@ -760,7 +716,7 @@ class mod_groupformation_storage_manager {
     }
 
     /**
-     * Returns if questionaire is closed
+     * Returns if questionnaire is closed
      *
      * @return boolean
      */
@@ -812,7 +768,8 @@ class mod_groupformation_storage_manager {
                 if (('points' == $c && $points == false) ||
                     ('grade' == $c && $grades == false) ||
                     ($hastopic == 0 && 'topic' == $c) ||
-                    ($hasknowledge == 0 && ('knowledge_heterogen' == $c || 'knowledge_homogen' == $c))) {
+                    ($hasknowledge == 0 && ('knowledge_heterogen' == $c || 'knowledge_homogen' == $c))
+                ) {
                     unset ($array [$position]);
                 }
 
@@ -853,9 +810,9 @@ class mod_groupformation_storage_manager {
     }
 
     /**
-     * Returns users for activity
+     * Returns users
      *
-     * @return array
+     * @return array|null
      */
     public function get_users() {
         global $PAGE;
@@ -875,5 +832,198 @@ class mod_groupformation_storage_manager {
         }
 
         return $enrolledstudents;
+    }
+
+    /**
+     * Returns whether a participant code is wanted or not
+     *
+     * @return bool
+     */
+    public function ask_for_participant_code() {
+        return $this->data->ask_for_participant_code();
+    }
+
+    /**
+     * Returns whether current mode is math prep course mode
+     *
+     * @return bool
+     */
+    public function is_math_prep_course_mode() {
+        return $this->data->is_math_prep_course_mode();
+    }
+
+    /**
+     * Determines group size
+     *
+     * @param $users
+     * @param null $groupformationid
+     * @return array|null
+     */
+    public function determine_group_size($users, $groupformationid = null) {
+        if ($this->ask_for_topics()) {
+            $groupoption = $this->get_group_option();
+            if ($groupoption) {
+                $maxgroups = intval($this->get_max_groups());
+                $topicvalues = $this->get_knowledge_or_topic_values('topic');
+                $topicvalues = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $topicvalues . ' </OPTIONS>';
+                $topicsoptions = mod_groupformation_util::xml_to_array($topicvalues);
+                $topicscount = count($topicsoptions);
+
+                $userscount0 = count($users [0] + $users [1]);
+                $ratio0 = $userscount0 / $maxgroups;
+
+                $basegroupsize = floor($ratio0);
+
+                $covereduserscount = $basegroupsize * $maxgroups;
+                $remaininguserscount = $userscount0 - $covereduserscount;
+
+                $usermanager = new mod_groupformation_user_manager ($groupformationid);
+
+                $topics = $usermanager->get_most_common_topics($topicscount);
+
+                $result = array();
+
+                $i = 0;
+                foreach ($topics as $key => $topic) {
+                    if ($i < $remaininguserscount) {
+                        $result [intval($topic ['id']) - 1] = intval(round($basegroupsize + 1));
+                    } else {
+                        $result [intval($topic ['id']) - 1] = intval(round($basegroupsize));
+                    }
+                    $i++;
+                }
+
+                return $result;
+            } else {
+                $topicvalues = $this->get_knowledge_or_topic_values('topic');
+                $topicvalues = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $topicvalues . ' </OPTIONS>';
+                $topicsoptions = mod_groupformation_util::xml_to_array($topicvalues);
+                $topicscount = count($topicsoptions);
+
+                $maxmembers = intval($this->get_max_members());
+                $userscount0 = count($users [0] + $users [1]);
+                $maxmembers = ceil($userscount0 / $topicscount);
+                $array = array();
+                for ($i = 0; $i < $topicscount; $i = $i + 1) {
+                    $array[] = $maxmembers;
+                }
+                return $array;
+            }
+
+            return $sizearray;
+        } else {
+
+            $userscount0 = count($users [0]);
+            $userscount1 = count($users [1]);
+            $userscount = $userscount0 + $userscount1;
+
+            if ($userscount <= 0) {
+                return null;
+            }
+            $groupoption = $this->get_group_option();
+            if ($groupoption) {
+                $maxgroups = intval($this->get_max_groups());
+
+                if ($userscount0 == 0) {
+                    return array(
+                        null, intval(ceil($userscount1 / $maxgroups)));
+                } else if ($userscount1 == 0) {
+                    return array(
+                        intval(ceil($userscount0 / $maxgroups)), null);
+                }
+
+                $optimalsize = ceil($userscount / $maxgroups);
+
+                $optimalsize0 = $optimalsize;
+                $optimalsize1 = $optimalsize;
+
+                $check0 = false;
+                $check1 = false;
+
+                $ratio0 = $userscount0 / $userscount;
+                $ratio1 = $userscount1 / $userscount;
+
+                $groupnumber0 = round($ratio0 * $maxgroups);
+                $groupnumber1 = round($ratio1 * $maxgroups);
+
+                if ($groupnumber0 + $groupnumber1 > $maxgroups) {
+                    if ($userscount0 > $userscount1) {
+                        $groupnumber0--;
+                    } else {
+                        $groupnumber1--;
+                    }
+                }
+
+                if ($groupnumber0 == 0) {
+                    $groupnumber0 = $groupnumber0 + 1;
+                    $groupnumber1 = $groupnumber1 - 1;
+                } else if ($groupnumber1 == 0) {
+                    $groupnumber0 = $groupnumber0 - 1;
+                    $groupnumber1 = $groupnumber1 + 1;
+                } else if ($maxgroups == 2) {
+                    $groupnumber0 = 1;
+                    $groupnumber1 = 1;
+                }
+
+                do {
+                    $cond = ($groupnumber0 * $optimalsize0 > $userscount0) || ($optimalsize0 > $userscount0) ||
+                        ($userscount0 % $optimalsize0 == 0);
+                    if ($cond) {
+                        $check0 = true;
+                    } else {
+                        $optimalsize0++;
+                    }
+                } while (!$check0);
+
+                do {
+                    $cond = ($groupnumber1 * $optimalsize1 > $userscount1) || ($optimalsize1 > $userscount1) ||
+                        ($userscount1 % $optimalsize1 == 0);
+                    if ($cond) {
+                        $check1 = true;
+                    } else {
+                        $optimalsize1++;
+                    }
+                } while (!$check1);
+
+                $basegroupsize = $optimalsize0;
+                $groupsize1 = $optimalsize1;
+
+                $cond = $maxgroups < (ceil($userscount0 / $basegroupsize) + ceil($userscount1 / $groupsize1));
+                if ($cond) {
+                    return null;
+                }
+
+                return array(
+                    $basegroupsize, $groupsize1);
+            } else {
+                $maxmembers = intval($this->get_max_members());
+
+                return array(
+                    $maxmembers, $maxmembers);
+            }
+        }
+    }
+
+    /**
+     * Returns questions
+     *
+     * @param $category
+     * @param $version
+     * @return array
+     */
+    public function get_questions($category,$version=0){
+        global $DB;
+
+        return $DB->get_records('groupformation_question',array('category'=>$category,'language'=>'en'));
+    }
+
+    /**
+     * Returns question by position
+     */
+    public function get_question_by_position($category,$position){
+        global $DB;
+
+        return $DB->get_record('groupformation_question',array('category'=>$category,'language'=>'en','position'=>$position));
+
     }
 }

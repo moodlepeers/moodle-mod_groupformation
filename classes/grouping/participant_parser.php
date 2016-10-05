@@ -15,43 +15,25 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This file contains the participant parser class
  *
- * @package     mod_groupformation
- * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package mod_groupformation
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require_once($CFG->dirroot . '/lib/groupal/classes/criteria/specific_criterion.php');
-require_once($CFG->dirroot . '/lib/groupal/classes/participant.php');
+require_once($CFG->dirroot . '/mod/groupformation/lib/classes/criteria/specific_criterion.php');
+require_once($CFG->dirroot . '/mod/groupformation/lib/classes/participant.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/criterion_calculator.php');
 
-
-/**
- * This class parses participants to fit the libraries' needs
- *
- * @package     mod_groupformation
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
 class mod_groupformation_participant_parser {
-    /** @var mod_groupformation_storage_manager Storage manager */
-    private $store;
-
-    /** @var int id of groupformation */
     private $groupformationid;
-
-    /** @var mod_groupformation_criterion_calculator Criterion calculator */
     private $criterioncalculator;
-
-    /** @var mod_groupformation_data Define file class*/
+    private $store;
     private $data;
 
     /**
      * mod_groupformation_participant_parser constructor.
-     *
-     * @param int $groupformationid
+     * @param $groupformationid
      */
     public function __construct($groupformationid) {
         $this->groupformationid = $groupformationid;
@@ -63,8 +45,8 @@ class mod_groupformation_participant_parser {
     /**
      * Parses infos to Participants
      *
-     * @param array $users
-     * @param array $labels
+     * @param $users
+     * @param $labels
      * @return array
      */
     private function parse($users, $labels) {
@@ -103,7 +85,7 @@ class mod_groupformation_participant_parser {
     /**
      * Builds all participants wrt topic choices
      *
-     * @param array $users
+     * @param $users
      * @return array
      */
     public function build_topic_participants($users) {
@@ -140,23 +122,28 @@ class mod_groupformation_participant_parser {
     /**
      * Builds Participants array using a parser (at the end)
      *
-     * @param array $users
+     * @param $users
      * @return array
      */
-    public function build_participants($users) {
+    public function build_participants($users,$specs = null) {
         if (count($users) == 0) {
             return array();
         }
 
+        $scenario = $this->store->get_scenario();
+
         $starttime = microtime(true);
 
-        $labels = $this->store->get_label_set();
         $criteriaspecs = array();
-        foreach ($labels as $label) {
-            $criteriaspecs[$label] = $this->data->get_criterion_specification($label);
-        }
 
-        $scenario = $this->store->get_scenario();
+        if (is_null($specs)){
+            $labels = $this->store->get_label_set();
+            foreach ($labels as $label) {
+                $criteriaspecs[$label] = $this->data->get_criterion_specification($label);
+            }
+        }else{
+            $criteriaspecs = $specs;
+        }
 
         $criteriaspecs = $this->criterioncalculator->filter_criteria_specs($criteriaspecs, $users);
 
@@ -171,7 +158,6 @@ class mod_groupformation_participant_parser {
             $object->id = $user;
 
             foreach ($criteriaspecs as $criterion => $spec) {
-
                 if (in_array($scenario, $spec['scenarios'])) {
                     $points = $this->criterioncalculator->get_values_for_user($criterion, $user, $spec);
                     foreach ($spec['labels'] as $label => $lspec) {
@@ -204,7 +190,7 @@ class mod_groupformation_participant_parser {
     /**
      * Generates participants without criterions
      *
-     * @param array $users
+     * @param $users
      * @return array
      */
     public function build_empty_participants($users) {

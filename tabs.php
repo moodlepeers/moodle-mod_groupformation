@@ -16,10 +16,10 @@
 /**
  * prints the tabbed bar
  *
- * @package     mod_groupformation
- * @author      Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package mod_groupformation
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ *
  */
 defined('MOODLE_INTERNAL') or die ('not allowed');
 
@@ -28,6 +28,7 @@ $row = array();
 $inactive = array();
 $activated = array();
 $store = new mod_groupformation_storage_manager ($groupformation->id);
+$data = new mod_groupformation_data();
 $groupsstore = new mod_groupformation_groups_manager ($groupformation->id);
 $usermanager = new mod_groupformation_user_manager ($groupformation->id);
 
@@ -39,6 +40,7 @@ if (isset ($cmid) and intval($cmid) and $cmid > 0) {
 }
 
 $context = context_module::instance($usedid);
+
 
 $courseid = optional_param('courseid', false, PARAM_INT);
 
@@ -77,9 +79,9 @@ if (has_capability('mod/groupformation:editsettings', $context)) {
         'id' => $usedid, 'do_show' => 'view'));
     $row [] = new tabobject ('view', $viewurl->out(), get_string('tab_overview', 'groupformation'));
 
-    // If questionaire is available for students.
+    // If questionnaire is available for students.
     if ($store->is_questionnaire_available() || ($store->is_questionnaire_accessible())) {
-        // The questionaire view.
+        // The questionnaire view.
         $questionnaireviewurl = new moodle_url ('/mod/groupformation/questionnaire_view.php', array(
             'id' => $usedid));
         $row [] = new tabobject ('answering', $questionnaireviewurl->out(),
@@ -87,13 +89,13 @@ if (has_capability('mod/groupformation:editsettings', $context)) {
     }
 
     // Evaluation view.
-    if (false) {
-        $evaluationurl = new moodle_url ('/mod/groupformation/evaluation_view.php', array(
-            'id' => $usedid,
-            'do_show' => 'evaluation'
-        ));
-        $row [] = new tabobject ('evaluation', $evaluationurl->out(), get_string('tab_evaluation', 'groupformation'));
-    }
+
+    $evaluationurl = new moodle_url ('/mod/groupformation/evaluation_view.php', array(
+        'id' => $usedid,
+        'do_show' => 'evaluation'
+    ));
+    $row [] = new tabobject ('evaluation', $evaluationurl->out(), get_string('tab_evaluation', 'groupformation'));
+
 
     // The group view.
     $groupurl = new moodle_url ('/mod/groupformation/group_view.php', array(
@@ -101,11 +103,13 @@ if (has_capability('mod/groupformation:editsettings', $context)) {
     $row [] = new tabobject ('group', $groupurl->out(), get_string('tab_group', 'groupformation'));
 
     // The import/export view.
-    $groupurl = new moodle_url ('/mod/groupformation/import_export_view.php', array(
-        'id' => $usedid, 'do_show' => 'import_export'));
-    $row [] = new tabobject ('import_export', $groupurl->out(), 'Import/Export');
-
+    if($data->import_export_enabled()) {
+        $groupurl = new moodle_url ('/mod/groupformation/import_export_view.php', array(
+            'id' => $usedid, 'do_show' => 'import_export'));
+        $row [] = new tabobject ('import_export', $groupurl->out(), 'Import/Export');
+    }
 }
+
 
 if (count($row) >= 1) {
     $tabs [] = $row;

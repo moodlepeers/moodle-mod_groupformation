@@ -15,12 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This file contains a controller class for overview
  *
- * @package     mod_groupformation
- * @author     Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package mod_groupformation
+ * @@author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 if (!defined('MOODLE_INTERNAL')) {
@@ -34,57 +32,25 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/group_generator.php');
 
-/**
- * Controller for student overview
- *
- * @package     mod_groupformation
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
 class mod_groupformation_student_overview_controller {
-
-    /** @var int id of the course module */
     private $cmid;
-
-    /** @var int id of the user */
     private $userid;
-
-    /** @var int id of the activity */
     private $groupformationid;
-
-    /** @var mod_groupformation_storage_manager Storage manager */
     private $store;
-
-    /** @var mod_groupformation_groups_manager Groups manager */
+    private $data;
     private $groupsmanager;
-
-    /** @var mod_groupformation_user_manager User manager */
     private $usermanager;
-
-    /** @var int current view state of the activity */
     private $viewstate;
-
-    /** @var array current activity state information */
     private $groupformationstateinfo = array();
-
-    /** @var array current buttons */
     private $buttonsarray = array();
-
-    /** @var string current button info */
     private $buttonsinfo;
-
-    /** @var array current questionnaire state information */
-    private $questionnairestatearray = array();
-
-    /** @var string current information text for student */
+    private $surveystatesarray = array();
     private $groupformationinfo;
-
-    /** @var mod_groupformation_template_builder template builder for view */
+    private $surveystatestitle = '';
     private $view = null;
 
     /**
-     * Constructor for studentent overview controller
-     *
+     * mod_groupformation_student_overview_controller constructor.
      * @param $cmid
      * @param $groupformationid
      * @param $userid
@@ -94,6 +60,7 @@ class mod_groupformation_student_overview_controller {
         $this->userid = $userid;
         $this->groupformationid = $groupformationid;
         $this->store = new mod_groupformation_storage_manager ($groupformationid);
+        $this->data = new mod_groupformation_data();
         $this->groupsmanager = new mod_groupformation_groups_manager ($groupformationid);
         $this->usermanager = new mod_groupformation_user_manager ($groupformationid);
 
@@ -130,39 +97,49 @@ class mod_groupformation_student_overview_controller {
      */
     private function determine_view() {
         switch ($this->viewstate) {
-            case -1 : // Questionaire is available but not started yet.
-                $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(true,
-                    $this->groupformationid);
+            case -1 : // Questionnaire is available but not started yet.
+                $this->groupformationinfo =
+                    mod_groupformation_util::get_info_text_for_student(true, $this->groupformationid);
                 $this->groupformationstateinfo = array(
                     $this->get_availability_state());
-                $this->buttonsinfo = get_string('questionnaire_press_to_begin', 'groupformation');
+                $pc = $this->store->ask_for_participant_code();
+                $buttoncaption = ($pc)?"questionnaire_press_to_begin_participant_code":"questionnaire_press_to_begin";
+                $this->buttonsinfo = get_string($buttoncaption, 'groupformation');
                 $this->buttonsarray = array(
                     array(
                         'type' => 'submit', 'name' => '', 'value' => get_string("next"), 'state' => '',
                         'text' => get_string("next")));
                 break;
 
-            case 0 : // Questionaire is available, started, not finished and not submited.
-                $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(false,
-                    $this->groupformationid);
+            case 0 : // Questionnaire is available, started, not finished and not submited.
+                $this->groupformationinfo =
+                    mod_groupformation_util::get_info_text_for_student(false, $this->groupformationid);
                 $this->groupformationstateinfo = array(
                     $this->get_availability_state(), get_string('questionnaire_not_submitted', 'groupformation'));
                 $this->buttonsinfo = get_string('questionnaire_press_continue_submit', 'groupformation');
 
                 $this->determine_survey_stats();
 
+                $disabled = $this->data->all_answers_required() && !$this->usermanager->has_answered_everything($this->userid);
+
                 $this->buttonsarray = array(
                     array(
                         'type' => 'submit', 'name' => 'begin', 'value' => '1', 'state' => '',
-                        'text' => get_string('edit')), array(
+                        'text' => get_string('edit')),
+                    array(
                         'type' => 'submit', 'name' => 'begin', 'value' => '0',
+                        'state' => (($disabled)?'disabled':''),
+                        'text' => get_string('questionnaire_submit', 'groupformation')),
+                    array(
+                        'type' => 'submit', 'name' => 'begin', 'value' => '-1',
                         'state' => '',
-                        'text' => get_string('questionnaire_submit', 'groupformation')));
+                        'text' => get_string('questionnaire_delete', 'groupformation'))
+                );
                 break;
 
-            case 1 : // Questionaire is submitted.
-                $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(true,
-                    $this->groupformationid);
+            case 1 : // Questionnaire is submitted.
+                $this->groupformationinfo =
+                    mod_groupformation_util::get_info_text_for_student(true, $this->groupformationid);
                 $this->groupformationstateinfo = array(
                     get_string('questionnaire_submitted', 'groupformation'));
                 $this->buttonsinfo = '';
@@ -170,8 +147,8 @@ class mod_groupformation_student_overview_controller {
                 break;
 
             case 2 : // Groups are built.
-                $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(false,
-                    $this->groupformationid);
+                $this->groupformationinfo =
+                    mod_groupformation_util::get_info_text_for_student(false, $this->groupformationid);
                 $this->groupformationstateinfo = array(
                     get_string('groups_build', 'groupformation'));
                 $this->buttonsinfo = '';
@@ -179,8 +156,8 @@ class mod_groupformation_student_overview_controller {
                 break;
 
             case 3 : // The activity is not accessible for the student/teacher.
-                $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(false,
-                    $this->groupformationid);
+                $this->groupformationinfo =
+                    mod_groupformation_util::get_info_text_for_student(false, $this->groupformationid);
                 $this->groupformationstateinfo = array(
                     get_string('activity_visible', 'groupformation'));
                 $this->buttonsinfo = '';
@@ -188,8 +165,8 @@ class mod_groupformation_student_overview_controller {
                 break;
 
             case 4 : // The questionnaire is not available, but groups are not build yet.
-                $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(true,
-                    $this->groupformationid);
+                $this->groupformationinfo =
+                    mod_groupformation_util::get_info_text_for_student(true, $this->groupformationid);
                 $this->groupformationstateinfo = array(
                     $this->get_availability_state());
                 $this->buttonsinfo = '';
@@ -224,7 +201,7 @@ class mod_groupformation_student_overview_controller {
                 $url = new moodle_url ('questionnaire_view.php', array(
                     'id' => $this->cmid, 'category' => $key));
 
-                if (true || !$previncomplete) {
+                if (!$this->data->all_answers_required() || !$previncomplete) {
                     $a->category = '<a href="' . $url . '">' . $a->category . '</a>';
                 }
                 if ($values ['missing'] == 0) {
@@ -241,7 +218,8 @@ class mod_groupformation_student_overview_controller {
                 }
             }
         }
-        $this->questionnairestatearray = $array;
+        $this->surveystatestitle = get_string('questionnaire_answer_stats', 'groupformation');
+        $this->surveystatesarray = $array;
     }
 
     /**
@@ -309,8 +287,11 @@ class mod_groupformation_student_overview_controller {
         if ($this->viewstate == 0) {
             $surveystatsview = new mod_groupformation_template_builder ();
             $surveystatsview->set_template('students_overview_survey_states');
-            $surveystatsview->assign('survey_states', $this->questionnairestatearray);
-            $surveystatsview->assign('questionnaire_answer_stats', get_string('questionnaire_answer_stats', 'groupformation'));
+            $surveystatsview->assign('survey_states', $this->surveystatesarray);
+            $surveystatsview->assign('questionnaire_answer_stats', $this->surveystatestitle);
+            $surveystatsview->assign('participant_code', $this->store->ask_for_participant_code());
+            $surveystatsview->assign('participant_code_user', $this->usermanager->get_participant_code($this->userid));
+
             $this->view->assign('student_overview_survey_state_temp', $surveystatsview->load_template());
         } else {
             $this->view->assign('student_overview_survey_state_temp', '');
@@ -322,11 +303,16 @@ class mod_groupformation_student_overview_controller {
             $surveyoptionsview->set_template('students_overview_options');
             $surveyoptionsview->assign('buttons', $this->buttonsarray);
             $surveyoptionsview->assign('buttons_infos', $this->buttonsinfo);
+            $surveyoptionsview->assign('participant_code', $this->store->ask_for_participant_code());
+            $surveyoptionsview->assign('participant_code_user', $this->usermanager->get_participant_code($this->userid));
+
+            $surveyoptionsview->assign('consentheader',get_string('consent_header','groupformation'));
+            $surveyoptionsview->assign('consenttext',get_string('consent_message','groupformation'));
+            $surveyoptionsview->assign('consentvalue',$this->usermanager->get_consent($this->userid));
             $this->view->assign('student_overview_survey_options', $surveyoptionsview->load_template());
         } else {
             $this->view->assign('student_overview_survey_options', '');
         }
-
         return $this->view->load_template();
     }
 }

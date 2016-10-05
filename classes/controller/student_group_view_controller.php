@@ -16,10 +16,9 @@
 
 /**
  *
- * @package     mod_groupformation
- * @author     Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package mod_groupformation
+ * @@author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 if (!defined('MOODLE_INTERNAL')) {
@@ -28,32 +27,23 @@ if (!defined('MOODLE_INTERNAL')) {
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 
-/**
- * Controller for student group view
- *
- * @package     mod_groupformation
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
+
 class mod_groupformation_student_group_view_controller {
-
-    /** @var mod_groupformation_groups_manager Groups manager */
     private $groupsmanager;
-
-    /** @var int This is the id of the activity */
+    private $store;
     private $groupformationid;
 
-    /** @var mod_groupformation_template_builder template builder for view  */
     private $view = null;
 
     /**
-     * Constructor for student group controller
-     *
+     * mod_groupformation_student_group_view_controller constructor.
      * @param $groupformationid
      */
     public function __construct($groupformationid) {
         $this->groupformationid = $groupformationid;
+        $this->store = new mod_groupformation_storage_manager($groupformationid);
         $this->groupsmanager = new mod_groupformation_groups_manager ($groupformationid);
 
         $this->view = new mod_groupformation_template_builder ();
@@ -72,13 +62,30 @@ class mod_groupformation_student_group_view_controller {
         $array = array();
         $groupinfocontact = '';
         $groupname = '';
+        $topicinfo = '';
+
+        $options = null;
+        $topics = $this->store->ask_for_topics();
+        if ($topics){
+            $xmlcontent = $this->store->get_knowledge_or_topic_values('topic');
+            $xmlcontent = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $xmlcontent . ' </OPTIONS>';
+            $options = mod_groupformation_util::xml_to_array($xmlcontent);
+        }
+
         if ($this->groupsmanager->has_group($userid) && $this->groupsmanager->groups_created()) {
             $id = $this->groupsmanager->get_group_id($userid);
 
             $name = $this->groupsmanager->get_group_name($userid);
 
-            $groupname = $name . ' (ID #' . $id . ')';
+            $groupname = $name;// . ' (ID #' . $id . ')';
             $othermembers = $this->groupsmanager->get_group_members($userid);
+
+            $pos = strrpos($groupname,"_");
+            $number = substr($groupname,$pos+1,strlen($groupname)-$pos);
+
+            if ($topics){
+                $topicinfo = get_string("topic_group_info","groupformation").": <b>".$options[$number-1]."</b>";
+            }
 
             if (count($othermembers) > 0) {
                 $groupinfo = get_string('membersAre', 'groupformation');
@@ -104,6 +111,7 @@ class mod_groupformation_student_group_view_controller {
             $groupinfo = get_string('groupingNotReady', 'groupformation');
         }
 
+        $this->view->assign('topic_info', $topicinfo);
         $this->view->assign('group_name', $groupname);
         $this->view->assign('members', $array);
         $this->view->assign('group_info', $groupinfo);

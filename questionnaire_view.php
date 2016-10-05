@@ -16,10 +16,9 @@
 /**
  * Prints a particular instance of groupformation
  *
- * @package     mod_groupformation
- * @author      Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package mod_groupformation
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
 require_once(dirname(__FILE__) . '/lib.php');
@@ -51,6 +50,7 @@ $userid = $USER->id;
 $data = new mod_groupformation_data ();
 $store = new mod_groupformation_storage_manager ($groupformation->id);
 $usermanager = new mod_groupformation_user_manager ($groupformation->id);
+$groupsmanager = new mod_groupformation_groups_manager ($groupformation->id);
 
 $scenario = $store->get_scenario();
 $names = $store->get_categories();
@@ -67,7 +67,7 @@ if (!has_capability('mod/groupformation:editsettings', $context)) {
 }
 
 
-if (data_submitted() && confirm_sesskey()) {
+if ( data_submitted() && confirm_sesskey()){
     $category = optional_param('category', null, PARAM_ALPHA);
     $direction = optional_param('direction', null, PARAM_BOOL);
     $percent = optional_param('percent', null, PARAM_INT);
@@ -82,6 +82,7 @@ if (!isset ($direction)) {
     $direction = 1;
 }
 
+$go = true;
 
 $number = $store->get_number($category);
 
@@ -91,8 +92,26 @@ $PAGE->set_url('/mod/groupformation/questionnaire_view.php', array(
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 
+$consent = $usermanager->get_consent($userid);
+$participantcode = $usermanager->has_participant_code($userid) || !$data->ask_for_participant_code();
 
+if ((!$consent && !$participantcode && !$groupsmanager->groups_created()) && !has_capability('mod/groupformation:editsettings',$context)) {
+    $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
+        'id' => $cm->id, 'giveconsent' => '1', 'giveparticipantcode' => '1'));
+    redirect($returnurl);
+}
 
+if ((!$consent && !$groupsmanager->groups_created()) && !has_capability('mod/groupformation:editsettings',$context)) {
+    $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
+        'id' => $cm->id, 'giveconsent' => '1'));
+    redirect($returnurl);
+}
+
+if ((!$participantcode && !$groupsmanager->groups_created()) && !has_capability('mod/groupformation:editsettings',$context)) {
+    $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
+        'id' => $cm->id, 'giveparticipantcode' => '1'));
+    redirect($returnurl);
+}
 
 $inarray = in_array($category, $names);
 
@@ -108,21 +127,26 @@ if (has_capability('mod/groupformation:onlystudent', $context) &&
                 for ($i = 1; $i <= $number; $i++) {
                     $tempvalidaterangevalue = $category . $i . '_valid';
                     $temp = $category . $i;
-                    $paratempvalidaterangevalue = optional_param($tempvalidaterangevalue, null, PARAM_ALPHANUM);
-                    $paratemp = optional_param($temp, null, PARAM_ALPHANUM);
+                    $para_tempvalidaterangevalue = optional_param($tempvalidaterangevalue, null, PARAM_ALPHANUM);
+                    $para_temp = optional_param($temp, null, PARAM_ALPHANUM);
 
-                    if (isset ($paratemp) && $paratempvalidaterangevalue == '1') {
-                        $usermanager->save_answer($userid, $category, $paratemp, $i);
+                    if (isset ($para_temp) && $para_tempvalidaterangevalue == '1') {
+                        $usermanager->save_answer($userid, $category, $para_temp, $i);
                     }
                 }
             } else {
                 for ($i = 1; $i <= $number; $i++) {
                     $temp = $category . $i;
-                    $paratemp = optional_param($temp, null, PARAM_ALPHANUM);
-                    if (isset ($paratemp)) {
-                        $usermanager->save_answer($userid, $category, $paratemp, $i);
+                    $para_temp = optional_param($temp, null, PARAM_ALPHANUM);
+                    if (isset ($para_temp)) {
+                        $usermanager->save_answer($userid, $category, $para_temp, $i);
                     }
                 }
+                // --- Mathevorkurs
+                if ($data->all_answers_required() && $usermanager->get_number_of_answers( $userid, $category ) != $number) {
+                    $go = false;
+                }
+                // ---
             }
         }
     }
@@ -145,6 +169,9 @@ if (($available || $isteacher) && ($category == '' || $inarray)) {
     // Print the tabs.
     require('tabs.php');
 
+    if (groupformation_get_current_questionnaire_version() > $store->get_version()){
+        echo '<div class="alert">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
+    }
     if ($store->is_archived() && !has_capability('mod/groupformation:editsettings', $context)) {
         echo '<div class="alert" id="commited_view">' . get_string('archived_activity_answers', 'groupformation') .
             '</div>';
@@ -153,9 +180,13 @@ if (($available || $isteacher) && ($category == '' || $inarray)) {
             '</div>';
     } else {
         $controller = new mod_groupformation_questionnaire_controller($groupformation->id,
+            get_string('language',
+                'groupformation'),
             $userid, $category, $cm->id);
         if ($direction == 0) {
             $controller->go_back();
+        }else if (!$go){
+            $controller->not_go_on();
         }
 
         $controller->print_page();

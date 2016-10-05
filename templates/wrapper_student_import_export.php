@@ -14,45 +14,46 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * wrapper import export for template builder
- *
- * @package     mod_groupformation
- * @author      Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package mod_groupformation
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 ?>
 <div class="gf_settings_pad">
-    <div class="gf_pad_header"><?php echo get_string('import', 'groupformation');?></div>
+    <div class="gf_pad_header"><?php echo get_string('import', 'groupformation'); ?></div>
     <div class="gf_pad_content">
         <p><?php echo $this->_['import_description']; ?></p>
+        <p><?php echo get_string('consent_header_import','groupformation'); ?><p>
+        <p><?php echo get_string('consent_message', 'groupformation'); ?></p>
+
         <p>
-            <?php if (!$this->_['import_button']):?>
+            <?php if (!$this->_['import_button']): ?>
                 <button class="gf_button gf_button_pill gf_button_small" disabled>
-                    <?php echo get_string('import', 'groupformation');?>
+                    <?php echo get_string('import', 'groupformation'); ?>
                 </button>
-            <?php else:?>
+            <?php else: ?>
                 <a href="<?php echo $this->_['import_form']; ?>">
-                <span class="gf_button gf_button_pill gf_button_small">
-                    <?php echo get_string('import', 'groupformation');?>
-                </span></a>
-            <?php endif;?>
+				<span class="gf_button gf_button_pill gf_button_small">
+		    		<?php echo get_string('import', 'groupformation'); ?>
+		   		</span></a>
+            <?php endif; ?>
         </p>
     </div>
-    <div class="gf_pad_header"><?php echo get_string('export', 'groupformation');?></div>
+    <div class="gf_pad_header"><?php echo get_string('export', 'groupformation'); ?></div>
     <div class="gf_pad_content">
         <p><?php echo $this->_['export_description']; ?></p>
+
         <p>
-            <?php if (!$this->_['export_button']):?>
+            <?php if (!$this->_['export_button']): ?>
                 <button class="gf_button gf_button_pill gf_button_small" disabled>
-                    <?php echo get_string('export', 'groupformation');?>
+                    <?php echo get_string('export', 'groupformation'); ?>
                 </button>
-            <?php else:?>
+            <?php else: ?>
                 <a href="<?php echo $this->_['export_url']; ?>" target="_blank">
-                <span class="gf_button gf_button_pill gf_button_small">
-                    <?php echo get_string('export', 'groupformation');?>
-                </span></a>
-            <?php endif;?>
+				<span class="gf_button gf_button_pill gf_button_small">
+		    		<?php echo get_string('export', 'groupformation'); ?>
+		   		</span></a>
+            <?php endif; ?>
         </p>
     </div>
 </div>

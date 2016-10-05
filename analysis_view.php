@@ -17,10 +17,9 @@
 /**
  * Prints a particular instance of groupformation
  *
- * @package     mod_groupformation
- * @author      Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package mod_groupformation
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
 require_once(dirname(__FILE__) . '/lib.php');
@@ -40,6 +39,8 @@ $createusers = optional_param('create_users', 0, PARAM_INT);
 $createanswers = optional_param('create_answers', false, PARAM_BOOL);
 $randomanswers = optional_param('random_answers', false, PARAM_BOOL);
 $deleteusers = optional_param('delete_users', false, PARAM_BOOL);
+$reset_job = optional_param('reset_job', false, PARAM_BOOL);
+$fix_answers = optional_param('fix_answers', false, PARAM_BOOL);
 
 // Import jQuery and js file.
 groupformation_add_jquery($PAGE, 'survey_functions.js');
@@ -76,23 +77,17 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/job_m
 require_once($CFG->dirroot . '/mod/groupformation/classes/controller/analysis_controller.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_parser.php');
 
-$controller = new mod_groupformation_analysis_controller ($groupformation->id, $cm);
+/* --------- Hard Reset a pending groupformation job ---- */
+if ($reset_job) {
+	global $DB;
 
-
-if (data_submitted() && confirm_sesskey()) {
-    $switcher = optional_param('questionnaire_switcher' , null, PARAM_INT);
-
-    if ( isset($switcher)) {
-        $controller->trigger_questionnaire($switcher);
-    }
-    $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
-        'id' => $id, 'do_show' => 'analysis'));
-    redirect($return->out());
+	$DB->delete_records('groupformation_jobs', array('groupformationid' => $groupformation->id));
 }
+/* ----------- / Hard Reset a pending job -------------- */
 
 /* ---------- Automated test user generation ------------ */
 
-if ($CFG->debug === 32767) {
+if ($CFG->debug === 32767) { //true) {
     $cqt = new mod_groupformation_test_user_generator ($cm);
 
     if ($deleteusers) {
@@ -108,8 +103,46 @@ if ($CFG->debug === 32767) {
         redirect($return->out());
     }
 }
-
 /* ---------- / Automated test user generation ---------- */
+
+/* ---------- Job Manager Usage ------------------------- */
+
+//$jm = new mod_groupformation_job_manager ();
+//$job = null;
+//
+//$job = $jm::get_job($groupformation->id);
+//
+//if (!is_null($job)) {
+//    $result = $jm::do_groupal($job);
+//    var_dump($result);
+//    // $saved = $jm::save_result($job,$result);
+//}
+
+/* ---------- / Job Manager Usage ----------------------- */
+
+$controller = new mod_groupformation_analysis_controller ($groupformation->id, $cm);
+
+/* ---- Code for fixing Answers can be removed after 15-09-2016 ---- */
+if ($CFG->debug === 32767 && $fix_answers) {
+    $controller->fix_answers();
+    echo '<div class="alert">Answers fixed - do not repeat this action!</div>';
+    $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
+        'id' => $id, 'do_show' => 'analysis'));
+    redirect($return->out());
+}
+/* ---------------------------------------------------------------- */
+
+if ((data_submitted()) && confirm_sesskey()) {
+    $switcher = optional_param('questionnaire_switcher', null, PARAM_INT);
+
+    if (isset($switcher)) {
+        $controller->trigger_questionnaire($switcher);
+    }
+    $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
+        'id' => $id, 'do_show' => 'analysis'));
+    redirect($return->out());
+}
+
 
 echo $OUTPUT->header();
 
@@ -117,13 +150,16 @@ echo $OUTPUT->header();
 require('tabs.php');
 
 
+if (groupformation_get_current_questionnaire_version() > $store->get_version()) {
+    echo '<div class="alert">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
+}
 if ($store->is_archived() && has_capability('mod/groupformation:editsettings', $context)) {
     echo '<div class="alert" id="commited_view">' . get_string('archived_activity_admin', 'groupformation') . '</div>';
 } else {
     echo '<form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
 
     echo '<input type="hidden" name="id" value="' . $id . '"/>';
-    echo '<input type="hidden" name="sesskey" value="'.sesskey().'" />';
+    echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
 
     echo $controller->display();
 

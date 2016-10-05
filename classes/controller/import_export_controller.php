@@ -212,6 +212,8 @@ class mod_groupformation_import_export_controller {
     public function import_xml($content) {
         global $DB, $USER;
 
+
+
         libxml_use_internal_errors(true);
         $xml = simplexml_load_string($content);
 
@@ -229,15 +231,14 @@ class mod_groupformation_import_export_controller {
         if (!($name == 'answers')) {
             throw new InvalidArgumentException ("Wrong format");
         }
-
         $attr = $xml->attributes();
 
         $userid = intval($attr->userid);
-        if (!($userid == $USER->id)) {
+        if (!($userid == intval($USER->id))) {
             throw new InvalidArgumentException ("Wrong format");
         }
-
         $categories = $this->store->get_categories();
+
 
         $allrecords = array();
 
@@ -270,13 +271,12 @@ class mod_groupformation_import_export_controller {
     public function create_answer_records($category, $answers) {
         global $DB, $USER;
 
-        $userid = $USER->id;
+        $userid = intval($USER->id);
 
         $allrecords = array();
         $questionids = array();
 
         foreach ($answers as $answer) {
-
             $attr = $answer->attributes();
             $questionid = intval($attr->questionid);
             $value = intval($attr->value);
@@ -300,11 +300,11 @@ class mod_groupformation_import_export_controller {
                 $record->questionid = $questionid;
                 $record->userid = $userid;
                 $record->answer = $value;
+                $record->timestamp = time();
 
                 $allrecords [] = $record;
             }
         }
-
         return $allrecords;
     }
 
@@ -315,27 +315,27 @@ class mod_groupformation_import_export_controller {
         $this->view = new mod_groupformation_template_builder ();
         $this->view->set_template('wrapper_teacher_export');
 
-        $exportanswers = get_string('export_answers', 'groupformation');
+        $exportanswers = get_string('export_answers', 'groupformation').' ';
         $exportanswersurl = $this->generate_export_url('answers');
         $this->view->assign('export_answers', $exportanswers);
         $this->view->assign('export_answers_url', $exportanswersurl);
 
-        $exportusers = get_string('export_users', 'groupformation');
+        $exportusers = get_string('export_users', 'groupformation').' ';
         $exportusersurl = $this->generate_export_url('users');
         $this->view->assign('export_users', $exportusers);
         $this->view->assign('export_users_url', $exportusersurl);
 
-        $exportgroups = get_string('export_groups', 'groupformation');
+        $exportgroups = get_string('export_groups', 'groupformation').' ';
         $exportgroupsurl = $this->generate_export_url('groups');
         $this->view->assign('export_groups', $exportgroups);
         $this->view->assign('export_groups_url', $exportgroupsurl);
 
-        $exportgroupusers = get_string('export_group_users', 'groupformation');
+        $exportgroupusers = get_string('export_group_users', 'groupformation').' ';
         $exportgroupusersurl = $this->generate_export_url('group_users');
         $this->view->assign('export_group_users', $exportgroupusers);
         $this->view->assign('export_group_users_url', $exportgroupusersurl);
 
-        $exportlogging = get_string('export_logging', 'groupformation');
+        $exportlogging = get_string('export_logging', 'groupformation').' ';
         $exportloggingurl = $this->generate_export_url('logging');
         $this->view->assign('export_logging', $exportlogging);
         $this->view->assign('export_logging_url', $exportloggingurl);

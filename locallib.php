@@ -20,10 +20,9 @@
  * All the newmodule specific functions, needed to implement the module
  * logic, should go here. Never include this file from your lib.php!
  *
- * @package     mod_groupformation
- * @author      Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package mod_groupformation
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die ();
 
@@ -45,7 +44,6 @@ function groupformation_add_jquery($PAGE, $filename = null) {
     }
 }
 
-
 /**
  * Logs message
  *
@@ -57,6 +55,8 @@ function groupformation_add_jquery($PAGE, $filename = null) {
  */
 function groupformation_log($userid, $groupformationid, $message, $level = 'info') {
     return false;
+    // $logging_controller = new mod_groupformation_logging_controller ();
+    // return $logging_controller->handle ( $userid, $groupformationid, $message, $level );
 }
 
 /**
@@ -68,7 +68,7 @@ function groupformation_log($userid, $groupformationid, $message, $level = 'info
  * @return boolean
  */
 function groupformation_debug($userid, $groupformationid, $message) {
-    return groupformation_log($userid, $groupformationid, $message, 'debug');
+    return groupformation_log($userid, $groupformationid, $message, $level = 'debug');
 }
 
 /**
@@ -80,7 +80,7 @@ function groupformation_debug($userid, $groupformationid, $message) {
  * @return boolean
  */
 function groupformation_info($userid, $groupformationid, $message) {
-    return groupformation_log($userid, $groupformationid, $message, 'info');
+    return groupformation_log($userid, $groupformationid, $message, $level = 'info');
 }
 
 /**
@@ -92,7 +92,7 @@ function groupformation_info($userid, $groupformationid, $message) {
  * @return boolean
  */
 function groupformation_warn($userid, $groupformationid, $message) {
-    return groupformation_log($userid, $groupformationid, $message, 'warn');
+    return groupformation_log($userid, $groupformationid, $message, $level = 'warn');
 }
 
 /**
@@ -104,7 +104,7 @@ function groupformation_warn($userid, $groupformationid, $message) {
  * @return boolean
  */
 function groupformation_error($userid, $groupformationid, $message) {
-    return groupformation_log($userid, $groupformationid, $message, 'error');
+    return groupformation_log($userid, $groupformationid, $message, $level = 'error');
 }
 
 /**
@@ -116,7 +116,7 @@ function groupformation_error($userid, $groupformationid, $message) {
  * @return boolean
  */
 function groupformation_fatal($userid, $groupformationid, $message) {
-    return groupformation_log($userid, $groupformationid, $message, 'fatal');
+    return groupformation_log($userid, $groupformationid, $message, $level = 'fatal');
 }
 
 /**
@@ -157,7 +157,6 @@ function groupformation_get_context($groupformationid) {
 }
 
 /**
- * Set activity completion
  *
  * @param stdClass $course
  * @param stdClass $cm
@@ -169,14 +168,12 @@ function groupformation_set_activity_completion($course, $cm, $userid) {
 }
 
 /**
- * Send confirmation for finishing group formation
+ * send confirmation for finishing group formation
  *
- * @param string $recipient
+ * @param stdClass $recipient
  * @param string $subject
- * @param string $messagetext
- * @param null $contexturl
- * @param null $contexturlname
- * @throws coding_exception
+ * @param string $message
+ *
  */
 function groupformation_send_message($recipient, $subject, $messagetext, $contexturl = null, $contexturlname = null) {
     global $DB;
@@ -227,29 +224,148 @@ function groupformation_check_for_cron_job() {
 }
 
 /**
- * Updates questions in DB with xml files
+ * Reads questionnaire file
  *
  * @param mod_groupformation_storage_manager $store
+ * @param string $filename
  */
-function groupformation_update_questions(mod_groupformation_storage_manager $store) {
-    $names = $store->get_raw_categories();
-    $xmlloader = new mod_groupformation_xml_loader ($store);
+function groupformation_import_questionnaire_configuration($filename = 'questionnaire.xml') {
+    global $CFG, $DB;
 
-    if ($store->catalog_table_not_set()) {
-        foreach ($names as $category) {
-            if ($category != 'topic' && $category != 'knowledge') {
-                $array = $xmlloader->save_data($category);
-                $version = $array [0] [0];
-                $numbers = $array [0] [1];
-                $store->add_catalog_version($category, $numbers, $version, true);
-            }
+    $xmlfile = $CFG->dirroot . '/mod/groupformation/xml_question/' . $filename;
+
+    if (file_exists($xmlfile)) {
+        $xml = simplexml_load_file($xmlfile);
+
+        $current_version = groupformation_get_current_questionnaire_version();
+        $new_version = intval(trim($xml['version']));
+
+
+        $new_categories = array();
+
+        foreach ($xml->categories->category as $cat) {
+            $new_categories[] = trim($cat);
         }
 
-    } else {
-        foreach ($names as $category) {
-            if ($category != 'topic' && $category != 'knowledge') {
-                $xmlloader->latest_version($category);
-            }
+        $new_languages = array();
+
+        foreach ($xml->languages->language as $lang) {
+            $new_languages[] = trim($lang);
         }
+
+        if ($new_version > $current_version) {
+
+            $xmlloader = new mod_groupformation_xml_loader();
+
+            $number = 0;
+
+            foreach ($new_categories as $category) {
+
+                $prev_version = groupformation_get_catalog_version($category);
+
+                foreach ($new_languages as $language) {
+
+                    $data = $xmlloader->save($category, $language);
+
+                    $version = $data[0];
+                    $numberofquestions = $data[1];
+                    $questions = $data[2];
+
+                    if ($version > $prev_version || !$prev_version) {
+                        groupformation_delete_all_catalog_questions($category, $language);
+
+                        $DB->insert_records('groupformation_question', $questions);
+                        groupformation_add_catalog_version($category, $numberofquestions, $version, false);
+                    }
+                }
+                $number += $numberofquestions;
+            }
+
+            groupformation_add_catalog_version('questionnaire', $number, $new_version, false);
+
+        }
+
     }
+
+}
+
+/**
+ * Add new question from XML to DB
+ *
+ * @param string $category
+ * @param int $numbers
+ * @param unknown $version
+ * @param boolean $init
+ */
+function groupformation_add_catalog_version($category, $numbers, $version, $init) {
+    global $DB;
+
+    $data = new stdClass ();
+    $data->category = $category;
+    $data->version = $version;
+    $data->numberofquestion = $numbers;
+
+    if ($init || $DB->count_records('groupformation_q_version', array(
+            'category' => $category
+        )) == 0
+    ) {
+        $DB->insert_record('groupformation_q_version', $data);
+    } else {
+        $data->id = $DB->get_field('groupformation_q_version', 'id', array(
+            'category' => $category
+        ));
+        $DB->update_record('groupformation_q_version', $data);
+    }
+}
+
+/**
+ * Deletes all questions in a specific category
+ *
+ * @param string $category
+ */
+function groupformation_delete_all_catalog_questions($category, $language) {
+    global $DB;
+
+    $DB->delete_records('groupformation_question', array('category' => $category, 'language' => $language));
+}
+
+/**
+ * Returns current questionnaire version
+ *
+ * @return mixed|null
+ */
+function groupformation_get_current_questionnaire_version() {
+    global $DB;
+
+    $field = $DB->get_field('groupformation_q_version', 'version', array('category' => 'questionnaire'));
+
+    if ($field !== false) {
+        return $field;
+    } else {
+        return 0;
+    }
+}
+
+function groupformation_get_catalog_version($category){
+    global $DB;
+
+    $field = $DB->get_field('groupformation_q_version', 'version', array('category' => $category));
+
+    if ($field !== false) {
+        return $field;
+    } else {
+        return 0;
+    }
+}
+
+/**
+ * Converts knowledge or topic array into XML-based syntax
+ *
+ * @param unknown $options
+ * @return string
+ */
+function groupformation_convert_options($options) {
+    $op = implode("</OPTION>  <OPTION>", $options);
+
+    return "<OPTION>" . $op . "</OPTION>";
 }

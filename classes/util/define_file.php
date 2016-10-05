@@ -16,32 +16,22 @@
 /**
  * Define file for questionnaires
  *
- * @package     mod_groupformation
- * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package mod_groupformation
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.');
 }
 
-/**
- * This is the data class with all useful definitions and config values
- *
- * @package     mod_groupformation
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
 class mod_groupformation_data {
 
-    /** @var array scenarios for activity */
     private $scenarios = array(
         1 => 'projectteams',
         2 => 'homeworkgroups',
         3 => 'presentationgroups',
     );
 
-    /** @var array criteria for groupal etc. */
     private $criteria = array(
         "big5" => array(
             "category" => "character",
@@ -51,32 +41,37 @@ class mod_groupformation_data {
                 "extraversion" => array(
                     "scenarios" => array(1 => false, 2 => false),
                     "evaluation" => true,
-                    "questionids" => array(-1, 6),
+                    "questionids" => array(12,-1,13,14,-15,16,-17,6),
                     "significant_id_only" => false,
+                    "cutoffs" => array(0.313169217,0.776242547),
                 ),
                 "gewissenhaftigkeit" => array(
                     "scenarios" => array(1 => true, 2 => true),
                     "evaluation" => true,
-                    "questionids" => array(-3, 8),
+                    "questionids" => array(8,-32,33,-34,-35,21,22,23,-24),
                     "significant_id_only" => false,
+                    "cutoffs" => array(0.456596974,0.831246163),
                 ),
                 "vertraeglichkeit" => array(
                     "scenarios" => array(1 => true, 2 => true),
                     "evaluation" => true,
-                    "questionids" => array(2, -7, 11),
+                    "questionids" => array(-7,2,-25,-26),
                     "significant_id_only" => false,
+                    "cutoffs" => array(0.492136484,0.799889659),
                 ),
                 "neurotizismus" => array(
                     "scenarios" => array(1 => false, 2 => false),
                     "evaluation" => true,
-                    "questionids" => array(9, -4),
+                    "questionids" => array(27,-4,28,9),
                     "significant_id_only" => false,
+                    "cutoffs" => array(0.195135503,0.602511556),
                 ),
                 "offenheit" => array(
                     "scenarios" => array(1 => false, 2 => false),
                     "evaluation" => true,
-                    "questionids" => array(10, -5),
+                    "questionids" => array(29,30,10,31,-5),
                     "significant_id_only" => false,
+                    "cutoffs" => array(0.348454964,0.829192095),
                 ),
             ),
         ),
@@ -90,24 +85,28 @@ class mod_groupformation_data {
                     "evaluation" => true,
                     "questionids" => array(6, 8, 10, 15, 17),
                     "significant_id_only" => false,
+                    "cutoffs" => array(0.518934813,0.830866774),
                 ),
                 "interesse" => array(
                     "scenarios" => array(1 => false),
                     "evaluation" => true,
                     "questionids" => array(1, 4, 7, 11),
                     "significant_id_only" => false,
+                    "cutoffs" => array(0.439861739,0.751249372),
                 ),
                 "erfolgswahrscheinlichkeit" => array(
                     "scenarios" => array(1 => false),
                     "evaluation" => true,
                     "questionids" => array(2, 3, 13, 14),
                     "significant_id_only" => false,
+                    "cutoffs" => array(0.314297404,0.511297834),
                 ),
                 "misserfolgsbefuerchtung" => array(
                     "scenarios" => array(1 => false),
                     "evaluation" => true,
                     "questionids" => array(5, 9, 12, 16, 18),
                     "significant_id_only" => false,
+                    "cutoffs" => array(0.186185044,0.601275274),
                 ),
             ),
         ),
@@ -121,30 +120,34 @@ class mod_groupformation_data {
                     "evaluation" => false,
                     "questionids" => array(1, 5, 11, 14, 20, 22),
                     "significant_id_only" => false,
+                    "cutoffs" => null,
                 ),
                 "aktivesexperimentieren" => array(
                     "scenarios" => array(2 => false),
                     "evaluation" => false,
                     "questionids" => array(2, 8, 10, 16, 17, 23),
                     "significant_id_only" => false,
+                    "cutoffs" => null,
                 ),
                 "reflektiertebeobachtung" => array(
                     "scenarios" => array(2 => false),
                     "evaluation" => false,
                     "questionids" => array(3, 6, 9, 13, 19, 21),
                     "significant_id_only" => false,
+                    "cutoffs" => null,
                 ),
                 "abstraktebegriffsbildung" => array(
                     "scenarios" => array(2 => false),
                     "evaluation" => false,
                     "questionids" => array(4, 7, 12, 15, 18, 24),
                     "significant_id_only" => false,
+                    "cutoffs" => null,
                 ),
             ),
         ),
         "general" => array(
             "category" => "general",
-            "scenarios" => array(1, 2),
+            "scenarios" => array(),
             "evaluation" => false,
             "labels" => array(
                 "language" => array(
@@ -152,6 +155,7 @@ class mod_groupformation_data {
                     "evaluation" => false,
                     "questionids" => array(1),
                     "significant_id_only" => false,
+                    "cutoffs" => null,
                 ),
             ),
         ),
@@ -165,6 +169,7 @@ class mod_groupformation_data {
                     "evaluation" => false,
                     "questionids" => array(1, 2, 3),
                     "significant_id_only" => true,
+                    "cutoffs" => null,
                 ),
             ),
         ),
@@ -178,22 +183,21 @@ class mod_groupformation_data {
                     "evaluation" => false,
                     "questionids" => array(1, 2, 3),
                     "significant_id_only" => true,
+                    "cutoffs" => null,
                 ),
             ),
         ),
         "team" => array(
             "category" => "team",
             "scenarios" => array(1, 2),
-            "evaluation" => true,
+            "evaluation" => false,
             "labels" => array(
                 "one" => array(
                     "scenarios" => array(1 => true, 2 => true),
-                    "evaluation" => true,
-                    "questionids" => array(
-                        1, 2, 3, 4, 5, 6, 7, 8, 9,
-                        10, 11, 12, 13, 14, 15, 16, 17, 18,
-                        19, 20, 21, 22, 23, 24, 25, 26, 27),
+                    "evaluation" => false,
+                    "questionids" => array(14, 15, 16),
                     "significant_id_only" => false,
+                    "cutoffs" => null,
                 ),
             ),
         ),
@@ -207,39 +211,61 @@ class mod_groupformation_data {
                     "evaluation" => false,
                     "questionids" => null,
                     "significant_id_only" => false,
+                    "cutoffs" => null,
                 ),
                 "two" => array(
                     "scenarios" => array(1 => false, 2 => false),
                     "evaluation" => false,
                     "questionids" => null,
                     "significant_id_only" => false,
+                    "cutoffs" => null,
                 ),
             ),
         ),
     );
 
-    /** @var array category sets for scenarios */
     private $categorysets = array(
         '1' => array(
             'general',
             'grade',
             'points',
-            'team',
             'character',
             'motivation',
+            'team',
+//            'srl',
+//            'sellmo',
+//            'self',
         ),
         '2' => array(
             'general',
             'grade',
             'points',
-            'team',
             'character',
-            'learning',
+            'motivation',
+            'team',
+//            'srl',
+//            'sellmo',
+//            'self',
         ),
         '3' => array(
             'topic',
         ),
     );
+
+    private $participant_code = false;
+    private $import_export_enabled = true;
+    private $math_prep_course_mode = false;
+    private $all_answers_required = false;
+
+    /**
+     * Returns whether this instance is running in math prep course mode;
+     * default should be false, since math prep course mode is only for research
+     *
+     * @return bool
+     */
+    public function is_math_prep_course_mode(){
+        return $this->math_prep_course_mode;
+    }
 
     /**
      * Returns scenario name
@@ -254,7 +280,7 @@ class mod_groupformation_data {
     /**
      * Returns extra labels for criteria like fam, learning, big5_xxx
      *
-     * @param string $label
+     * @param $label
      * @return array
      */
     public function get_extra_labels($label) {
@@ -296,7 +322,7 @@ class mod_groupformation_data {
     /**
      * Returns critetion specification
      *
-     * @param string $name
+     * @param $name
      * @return mixed
      */
     public function get_criterion_specification($name = null) {
@@ -308,5 +334,26 @@ class mod_groupformation_data {
         } else {
             return null;
         }
+    }
+
+    /**
+     * Returns whether a participant code is required or not
+     *
+     * @return bool
+     */
+    public function ask_for_participant_code(){
+        return $this->participant_code;
+    }
+
+    /**
+     * Returns whether import export is enabled or not
+     * @return bool
+     */
+    public function import_export_enabled(){
+        return $this->import_export_enabled;
+    }
+
+    public function all_answers_required(){
+        return $this->all_answers_required;
     }
 }

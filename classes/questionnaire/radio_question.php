@@ -13,38 +13,24 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
-/**
- * This file contains the radio question class
- *
- * @package     mod_groupformation
- * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.');
-}
-
 /**
  * Prints a particular instance of groupformation questionnaire
  *
- * @package     mod_groupformation
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package mod_groupformation
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class mod_groupformation_radio_question {
 
     /**
-     * Prints radio question
+     * Print HTML of radio inputs
      *
-     * @param array $q
-     * @param string $category
-     * @param int $questionnumber
-     * @param bool $hasanswer
+     * @param $q
+     * @param $category
+     * @param $qnumber
+     * @param $hasanswer
      */
-    public function print_html($q, $category, $questionnumber, $hasanswer) {
+    public function print_html($q, $category, $qnumber, $hasanswer, $highlight_missing_answers) {
         $question = $q[1];
         $options = $q[2];
 
@@ -53,7 +39,7 @@ class mod_groupformation_radio_question {
             $answer = $q[3];
         }
 
-        if ($answer == -1) {
+        if ($answer == -1 && $highlight_missing_answers) {
             echo '<tr class="noAnswer">';
         } else {
             echo '<tr>';
@@ -65,10 +51,10 @@ class mod_groupformation_radio_question {
             if ($answer == $radiocount) {
                 echo '<td data-title="' . $option .
                     '" class="radioleft select-area selected_label"><input type="radio" name="' . $category .
-                    $questionnumber . '" value="' . $radiocount . '" checked="checked"/></td>';
+                    $qnumber . '" value="' . $radiocount . '" checked="checked"/></td>';
             } else {
                 echo '<td data-title="' . $option . '" class="radioleft select-area"><input type="radio" name="' .
-                    $category . $questionnumber . '" value="' . $radiocount . '"/></td>';
+                    $category . $qnumber . '" value="' . $radiocount . '"/></td>';
             }
             $radiocount++;
         }

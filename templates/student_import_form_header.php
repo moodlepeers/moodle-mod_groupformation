@@ -14,28 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * Import form header view for template builder
- *
- * @package     mod_groupformation
- * @author      Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package mod_groupformation
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 ?>
 <div class="gf_settings_pad">
-    <div class="gf_pad_header">
-        <?php echo get_string('import', 'groupformation');?>
-    </div>
+    <div class="gf_pad_header"><?php echo get_string('import', 'groupformation'); ?></div>
     <div class="gf_pad_content">
-        <p>
-            <?php echo get_string('import_form_description', 'groupformation');?>
-        </p>
-        <p>
-            <?php if ($this->_['file_error']): ?>
-                <div class="beta_version_warning">
-                    <p>
-                        <?php echo get_string('file_error', 'groupformation');?>
-                    </p>
-                </div>
-            <?php endif; ?>
-        </p>
+        <p><?php echo get_string('import_form_description', 'groupformation'); ?>
+
+        <p><?php echo ($this->_['file_error']) ? '<div class="beta_version_warning"><p>' . get_string('file_error', 'groupformation') . '</p></div>' : '' ?></p>

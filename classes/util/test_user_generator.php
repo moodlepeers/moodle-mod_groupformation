@@ -15,35 +15,24 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * this file contains a test user generator class
+ * Test user generator
  *
- * @package     mod_groupformation
- * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package mod_groupformation
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.');
-}
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/controller/grouping_controller.php');
-/**
- * Test user generator class
- *
- * @package     mod_groupformation
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
+
 class mod_groupformation_test_user_generator {
 
-    /** @var cm_info course module infos*/
+    /** @var cm_info */
     private $cm;
 
     /**
      * mod_groupformation_test_user_generator constructor.
-     *
-     * @param cm_info $cm
+     * @param null $cm
      */
     public function __construct($cm = null) {
         $this->cm = $cm;
@@ -61,10 +50,8 @@ class mod_groupformation_test_user_generator {
     }
 
     /**
-     * Creates test users
-     *
-     * @param int $n
-     * @param int $groupformationid
+     * @param $n
+     * @param $groupformationid
      * @param bool|false $setanswers
      * @param bool|false $randomized
      * @return bool
@@ -73,6 +60,8 @@ class mod_groupformation_test_user_generator {
         global $COURSE, $DB;
 
         $store = new mod_groupformation_storage_manager ($groupformationid);
+
+        $version = $store->get_version();
 
         $categories = $store->get_categories();
 
@@ -133,21 +122,36 @@ class mod_groupformation_test_user_generator {
                 }
                 try {
                     foreach ($categories as $category) {
+
+                        if ($category == "topic" || $category == "knowledge"){
+                            $temp = $store->get_knowledge_or_topic_values($category);
+                            $xmlcontent = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>';
+                            $questions = mod_groupformation_util::xml_to_array($xmlcontent);
+                        }else{
+                            $questions = array_values($store->get_questions($category,$version));
+                        }
                         $m = $store->get_number($category);
+
                         for ($i = 1; $i <= $m; $i++) {
+                            $question = $questions[$i-1];
+                            if ($category == "topic" || $category == "knowledge"){
+                                $qid = $i;
+                            } else {
+                                $qid = ($question->questionid);
+                            }
                             $record = new stdClass ();
                             $record->groupformation = $groupformationid;
                             $record->category = $category;
-                            $record->questionid = $i;
+                            $record->questionid = $qid;
                             $record->userid = $userid;
                             $record->timestamp = time();
                             if ($category == "topic" || $category == "knowledge") {
-                                $record->answer = ($j % 2 == 0) ? ($i) : ($m + 1 - $i);
+                                $record->answer = ($j % 2 == 0) ? ($i) : ($m + 1 - $qid);
                             } else {
                                 if ($randomized) {
-                                    $record->answer = rand(1, $store->get_max_option_of_catalog_question($i, $category));
+                                    $record->answer = rand(1, $store->get_max_option_of_catalog_question($qid, $category));
                                 } else {
-                                    $record->answer = ($j % $store->get_max_option_of_catalog_question($i, $category)) + 1;
+                                    $record->answer = ($j % $store->get_max_option_of_catalog_question($qid, $category)) + 1;
                                 }
                             }
                             $allrecords [] = $record;
@@ -180,9 +184,7 @@ class mod_groupformation_test_user_generator {
     }
 
     /**
-     * Deletes test users
-     *
-     * @param int $groupformationid
+     * @param $groupformationid
      * @return bool
      */
     public function delete_test_users($groupformationid) {
@@ -193,7 +195,7 @@ class mod_groupformation_test_user_generator {
         $userrecords = $DB->get_records_sql('SELECT * FROM {user} WHERE username LIKE \'' . $username . '%\'');
 
         if (count($userrecords) > 0) {
-            foreach (array_keys($userrecords) as $userid) {
+            foreach ($userrecords as $userid => $record) {
 
                 try {
                     $groupingcontroller = new mod_groupformation_grouping_controller($groupformationid, $this->cm);

@@ -866,3 +866,272 @@
     padding-right: 10px; }
 .path-mod-groupformation [class*='col_s']:last-of-type {
     padding-right: 20px; }
+
+/*******************************/
+/*******************************/
+/* edit groups styles*/
+/*******************************/
+
+.path-mod-groupformation #sticky.stick {
+    position: fixed;
+    top: 0;
+    z-index: 10000;
+    border-radius: 0 0 0.5em 0.5em;
+}
+
+.path-mod-groupformation #selected_membs{
+
+    border: 1px dashed #666666;
+    background-color: rgb(240, 240, 240);
+    min-height: 90px;
+}
+
+.path-mod-groupformation .gf_group_links{
+    display: table;
+    position: relative;
+    border-spacing: 2px;
+}
+
+.path-mod-groupformation ul.memb_list{
+    display: table-cell;
+    padding-left: 0;
+}
+
+.path-mod-groupformation ul.memb_list li {
+    display: inline;
+    float: left;
+
+
+    white-space: nowrap;
+    padding: 6px 14px;
+    margin: 4px 3px;
+
+    background-color: #ffffff;
+    color: #73AD21;
+
+
+    border: 1px dashed rgb(255, 255, 255);
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.path-mod-groupformation ul.memb_list li:hover {
+    cursor: pointer;
+    background-color: #73AD21;
+    color: #ffffff;
+    border: 1px dashed #73AD21;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.path-mod-groupformation ul.memb_list li:active {
+
+    box-shadow: none;
+    background-color: #dddddd;
+    border: 1px dashed #dddddd;
+}
+
+.path-mod-groupformation ul.memb_list li.memb_selected{
+    border: 1px dashed #dddddd;
+    background-color: #dddddd
+}
+
+.path-mod-groupformation ul.memb_list li.add_one{
+    background-color: rgb(235, 235, 235)!important;
+    color: rgb(180, 180, 180) !important;
+    border: 1px dashed rgb(180, 180, 180);
+    height: 34px;
+    font-size: inherit;
+
+}
+
+
+.path-mod-groupformation ul.memb_list li.add_one:hover{
+    box-shadow:none;
+    cursor:auto;
+}
+
+
+.path-mod-groupformation ul.selected_memb_list{
+    padding-left: 0;
+    margin: 2px 0;
+    max-height: 86px;
+    overflow: hidden;
+}
+
+.path-mod-groupformation ul.selected_memb_list li {
+    display: inline;
+    float: left;
+
+
+    white-space: nowrap;
+    padding: 6px 14px;
+    margin: 4px 3px;
+
+    background-color: #ffffff;
+    color: #73AD21;
+
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.path-mod-groupformation ul.selected_memb_list li:hover {
+    cursor: pointer;
+    background-color: #73AD21;
+    color: #ffffff;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.path-mod-groupformation ul.selected_memb_list li:active {
+    box-shadow: none;
+    background-color: #dddddd;
+}
+
+
+
+/*fix the settings of group_edit*/
+
+.path-mod-groupformation .floatingHeader {
+    position: fixed;
+    top: 0;
+    visibility: hidden;
+}
+
+/*group overview group parameters*/
+.path-mod-groupformation .group_params{
+    float: left;
+    margin: 0 0.8em;
+}
+
+/*rotated "+" button */
+
+.path-mod-groupformation .add_membs_block{
+    display: table-cell;
+    cursor: pointer;
+
+    width: 36px;
+    min-height: 36px;
+
+    vertical-align: middle;
+    padding: 0 1em;
+}
+.path-mod-groupformation .add_membs_block:hover{
+    background-color: rgb(235, 235, 235);
+}
+.path-mod-groupformation .add_membs_block.group_active{
+    background-color: rgb(235, 235, 235)!important;
+}
+
+.path-mod-groupformation .add_membs_to_g{
+    /*background-image:url([[pix:groupformation|plus_s]]);*/
+    font-size: 2.6em;
+    line-height: 1.2em;
+    font-weight: bold;
+    color: rgb(51,51,51);
+    width: 24px;
+    height: 24px;
+    border: 0;
+    border-color: unset;
+    -moz-transition: all 0.2s linear;
+    -webkit-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+}
+
+.path-mod-groupformation .add_membs_to_g.down{
+    -moz-transform:rotate(45deg);
+    -webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
+}
+
+.path-mod-groupformation .gf_pad_select_membs {
+    background-color: whitesmoke;
+    padding: 2em 1.6em 0.5em; }
+@media (max-width: 48em) {
+    .path-mod-groupformation .gf_pad_select_membs {
+        padding: 0 0.6em 0; } }
+
+.path-mod-groupformation .opaque{
+    font-weight: bold;
+    padding: .5em 1.6em .5em;
+    border-bottom: 1px solid white;
+    background-color: #ebebeb;
+
+
+    /* Theoretically for IE 8 & 9 (more valid) */
+    /* ...but not required as filter works too */
+    /* should come BEFORE filter */
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";  /*IE8*/
+
+    /* This works in IE 8 & 9 too */
+    /* ... but also 5, 6, 7 */
+    filter: alpha(opacity=50); /* IE 5-7*/
+
+    /* Modern Browsers */
+    opacity: 0.5;
+}
+
+.path-mod-groupformation .gf_pad_header_opaque {
+    /*font-weight: bold;*/
+    /*padding: .5em 1.6em .5em;*/
+    height: 40px;
+    border-bottom: 1px solid white;
+    background-color: #ebebeb; }
+@media (max-width: 48em) {
+    .path-mod-groupformation .gf_pad_header_small {
+        /*padding: 1em 0.4em 1em;*/ } }
+
+.path-mod-groupformation .selected_memb_info{
+    float: left;
+    padding: 1em 1em;
+}
+
+.path-mod-groupformation #unselect_all{
+    cursor: pointer;
+    color: #73AD21;
+}
+
+.path-mod-groupformation #unselect_all:active{
+    color: rgb(155, 213, 73);
+}
+
+.path-mod-groupformation #ux_hint_1{
+    display: block;
+    float: left;
+    padding: 2.2em;
+    color: rgb(150,150,150);
+}
+
+/******************/
+
+
+
+.path-mod-groupformation li.add_one.tooltip{
+    display: inline;
+    position: relative;
+}
+
+.path-mod-groupformation li.add_one.tooltip:hover:after{
+    background: #333;
+    background: rgba(0,0,0,.8);
+    border-radius: 5px;
+    bottom: 26px;
+    color: #fff;
+    content: attr(title);
+    left: 20%;
+    padding: 5px 15px;
+    position: absolute;
+    z-index: 98;
+    width: 340px;
+    content: attr(title);
+}
+
+
+.path-mod-groupformation li.add_one.tooltip:hover:before{
+    border: solid;
+    border-color: #333 transparent;
+    border-width: 6px 6px 0 6px;
+    bottom: 20px;
+    content: "";
+    left: 50%;
+    position: absolute;
+    z-index: 99;
+}

@@ -14,21 +14,41 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * wrapper student evaluation for template builder
- *
- * @package     mod_groupformation
- * @author      Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package mod_groupformation
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 ?>
 <div class="gf_settings_pad">
-    <div class="gf_pad_header"><?php echo get_string('evaluation', 'groupformation');?></div>
+	<link href="js/bootstrap.min.css" rel="stylesheet">
+    <div class="gf_pad_header"><?php echo get_string('evaluation', 'groupformation'); ?></div>
     <div class="gf_pad_content">
-        <?php if ($this->_['eval_show_text']):?>
-        <?php echo $this->_['eval_text']; ?>
-        <?php endif; ?>
-        <div id="json-content" style="display:none;"><?php echo $this->_['json_content'];?>
+        <?php if ($this->_['eval_show_text']): ?>
+            <?php echo $this->_['eval_text']; ?>
+        <?php else: ?>
+        <div id="json-content" style="display:none;"><?php echo $this->_['json_content']; ?>
         </div>
-    </div>
-</div>
+
+
+
+		<div class="fluid-container">
+			<div class="row">
+				<button type="button" class="btn btn-warning col-md-2 col-xs-2 pull-left" href="#gf-carousel" role="button" data-slide="prev">
+					<?php echo get_string("back");?>
+				</button>
+				<button type="button" class="btn btn-warning col-md-2 col-xs-2 pull-right" href="#gf-carousel" role="button" data-slide="next">
+					<?php echo get_string("next");?>
+				</button>
+			</div>
+		</div>
+
+		<div id="gf-carousel" class="carousel slide" data-ride="carousel" data-interval=0>
+		  	<!-- Wrapper for slides -->
+			<div class="carousel-inner" role="listbox">
+	    	</div>
+		</div>
+
+		<?php endif;?>
+
+		</div> <!-- gf_pad_content -->
+</div> <!-- gf_settings_pad -->

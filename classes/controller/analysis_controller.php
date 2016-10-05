@@ -15,12 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This file contains an controller class for analysis view
+ * Controller for analysis view
  *
- * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @package     mod_groupformation
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @package    mod_groupformation
+ * @copyright  2015 MoodlePeers
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die('Direct access to this script is forbidden.');
 
@@ -29,22 +29,11 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
 
-/**
- * Controller for analysis view
- *
- * @package     mod_groupformation
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
 class mod_groupformation_analysis_controller {
 
     /** @var int The id of the groupformation activity */
     private $groupformationid;
-
-    /** @var cm_info The course module info */
     private $cm;
-
-    /** @var string state of the current job */
     private $jobstate;
 
     /** @var mod_groupformation_storage_manager The manager of activity data */
@@ -53,20 +42,19 @@ class mod_groupformation_analysis_controller {
     /** @var mod_groupformation_user_manager The manager of user data */
     private $usermanager;
 
-    /** @var mod_groupformation_template_builder The template builder for the view */
     private $view = null;
-
-    /** @var bool Indicates whether the questionnaire is currently available or not */
     private $questionnaireavailable;
-
-    /** @var int Current state of the activity */
+    private $activitytime;
+    private $starttime;
+    private $endtime;
+    private $timenow;
+    private $test;
     private $state;
 
     /**
      * Creates instance of analysis controller
      *
-     * @param $groupformationid
-     * @param $cm
+     * @param int $groupformationid
      */
     public function __construct($groupformationid, $cm) {
         $this->cm = $cm;
@@ -78,24 +66,26 @@ class mod_groupformation_analysis_controller {
     }
 
     /**
-     * Switches the questionnaire between open and closed
+     * Triggers questionnaire
      *
      * @param $switcher
      */
-    public function trigger_questionnaire($switcher) {
+    public function trigger_questionnaire($switcher){
 
         switch($switcher){
-            // Sets start time of questionnaire to now.
+            /**
+             * Sets start time of questionnaire to now
+             */
             case 1: $this->store->open_questionnaire();
                 break;
 
-            // Sets end time of questionnaire to now.
+            /**
+             * Sets end time of questionnaire to now
+             */
             case -1: $this->store->close_questionnaire();
                 break;
         }
     }
-
-
 
     /**
      * Loads status for template
@@ -106,21 +96,23 @@ class mod_groupformation_analysis_controller {
         $statusanalysisview = new mod_groupformation_template_builder();
         $statusanalysisview->set_template('analysis_status');
 
-        $activitytime = $this->store->get_time();
-        $starttime = $activitytime ['start'];
-        $endtime = $activitytime ['end'];
+        $this->activitytime = $this->store->get_time();
 
-        if (intval($activitytime ['start_raw']) == 0) {
-            $starttime = get_string('no_time', 'groupformation');
+        if (intval($this->activitytime ['start_raw']) == 0) {
+            $this->starttime = get_string('no_time', 'groupformation');
+        } else {
+            $this->starttime = $this->activitytime ['start'];
         }
 
-        if (intval($activitytime ['end_raw']) == 0) {
-            $endtime = get_string('no_time', 'groupformation');
+        if (intval($this->activitytime ['end_raw']) == 0) {
+            $this->endtime = get_string('no_time', 'groupformation');
+        } else {
+            $this->endtime = $this->activitytime ['end'];
         }
 
         $buttonvalue = ($this->questionnaireavailable) ? -1 : 1;
-        $buttoncaption = ($this->questionnaireavailable) ? get_string('activity_end',
-            'groupformation') : get_string('activity_start', 'groupformation');
+        $buttoncaption = ($this->questionnaireavailable) ?
+            get_string('activity_end', 'groupformation') : get_string('activity_start', 'groupformation');
         $buttondisabled = ($this->jobstate !== "ready") ? "disabled" : "";
 
         $statusanalysisview->assign('button', array(
@@ -130,8 +122,8 @@ class mod_groupformation_analysis_controller {
         $infoteacher = mod_groupformation_util::get_info_text_for_teacher(false, "analysis");
 
         $statusanalysisview->assign('info_teacher', $infoteacher);
-        $statusanalysisview->assign('analysis_time_start', $starttime);
-        $statusanalysisview->assign('analysis_time_end', $endtime);
+        $statusanalysisview->assign('analysis_time_start', $this->starttime);
+        $statusanalysisview->assign('analysis_time_end', $this->endtime);
 
         switch ($this->state) {
             case 1 :
@@ -166,6 +158,8 @@ class mod_groupformation_analysis_controller {
         $context = groupformation_get_context($this->groupformationid);
         $students = get_enrolled_users($context, 'mod/groupformation:onlystudent');
         $studentcount = count($students);
+
+        $studentcount = count(mod_groupformation_util::get_users($this->groupformationid));
 
         $stats [] = $studentcount;
 
@@ -204,6 +198,8 @@ class mod_groupformation_analysis_controller {
 
         $statisticsanalysisview = new mod_groupformation_template_builder();
         $statisticsanalysisview->set_template('analysis_statistics');
+        $context = $PAGE->context;
+        $count = count(get_enrolled_users($context, 'mod/groupformation:onlystudent'));
 
         $statisticsanalysisview->assign('statistics_enrolled', $questionnairestats [0]);
         $statisticsanalysisview->assign('statistics_processed', $questionnairestats [1]);
@@ -232,6 +228,7 @@ class mod_groupformation_analysis_controller {
      * Determine status variables
      */
     public function determine_status() {
+        global $DB;
         $this->questionnaireavailable = $this->store->is_questionnaire_available();
         $this->state = 1;
         $job = mod_groupformation_job_manager::get_job($this->groupformationid);
@@ -249,6 +246,33 @@ class mod_groupformation_analysis_controller {
             $this->state = 4;
         } else {
             $this->state = 2;
+        }
+    }
+
+    /** hot fix for answers */
+    public function fix_answers(){
+        global $DB;
+
+        $answers = $DB->get_records('groupformation_answer',
+            array('groupformation'=>$this->groupformationid, 'category'=>'srl')
+        );
+
+        $map = array(1=>63,2=>64,3=>65,4=>66,5=>67,6=>68,7=>69,8=>70,9=>71,10=>72,11=>73,12=>74,13=>75,14=>76,15=>77,16=>78,17=>79,18=>80,19=>81,20=>82,21=>83,22=>84,23=>85,24=>86,25=>87,26=>88);
+
+        foreach ($answers as $answer){
+            if (intval($answer->questionid) <= 26){
+                $qid = $map[$answer->questionid];
+                if ($DB->record_exists('groupformation_answer',
+                    array('groupformation'=>$this->groupformationid, 'category'=>'srl','userid'=>$answer->userid,'questionid'=>$qid))){
+                    $DB->delete_records('groupformation_answer',
+                        array('groupformation'=>$this->groupformationid, 'category'=>'srl','userid'=>$answer->userid,'questionid'=>$answer->questionid));
+                }else{
+                    $answer->questionid = $qid;
+                    $DB->update_record('groupformation_answer',$answer,true);
+                }
+            }elseif (intval($answer->questionid) <= 63){
+
+            }
         }
     }
 }

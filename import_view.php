@@ -17,10 +17,9 @@
 /**
  * Prints a particular instance of groupformation
  *
- * @package     mod_groupformation
- * @author      Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package mod_groupformation
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
@@ -36,7 +35,7 @@ $doshow = optional_param('do_show', 'import_export', PARAM_TEXT);
 // Import jQuery and js file.
 groupformation_add_jquery($PAGE, 'settings_functions.js');
 
-if (data_submitted() && confirm_sesskey()) {
+if ( data_submitted() && confirm_sesskey()){
     $id = optional_param('cmid', null, PARAM_INT);
 }
 
@@ -72,7 +71,7 @@ $PAGE->set_url('/mod/groupformation/import_view.php', array('id' => $cm->id, 'do
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 
-$cancel = optional_param('cancel', null, PARAM_BOOL);
+$cancel = optional_param('cancel',null,PARAM_BOOL);
 if (isset($cancel) && $cancel) {
     // Handle form cancel operation.
     $returnurl = new moodle_url('/mod/groupformation/import_export_view.php', array('id' => $id, 'do_show' => 'import_export'));

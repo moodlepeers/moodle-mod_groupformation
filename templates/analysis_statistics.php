@@ -14,55 +14,32 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * Analysis statistics view for template builder
- *
- * @package     mod_groupformation
- * @author      Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package mod_groupformation
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 ?>
 <div class="grid row_highlight">
     <div class="col_m_100"><?php echo get_string('are', 'groupformation');?>
-        <b><?php echo $this->_['statistics_enrolled']; ?></b>
-        <?php if ($this->_['statistics_enrolled'] == 1): ?>
-            <?php echo get_string('students_available_single', 'groupformation');?>
-        <?php else: ?>
-            <?php echo get_string('students_available_multiple', 'groupformation');?>
-        <?php endif; ?>
-    </div>
+        <b><?php echo ' '.$this->_['statistics_enrolled']; ?></b>
+        <?php echo ' '.(($this->_['statistics_enrolled']==1) ? get_string('students_available_single', 'groupformation') : get_string('students_available_multiple', 'groupformation')); ?></div>
 </div>
 <div class="grid row_highlight">
-    <div class="col_m_100">
-        <b><?php echo $this->_['statistics_processed']; ?></b>
-        <?php if ($this->_['statistics_processed'] == 1): ?>
-            <?php echo get_string('students_answered_single', 'groupformation');?>
-        <?php else: ?>
-            <?php echo get_string('students_answered_multiple', 'groupformation');?>
-        <?php endif; ?>
-    </div>
+    <div class="col_m_100"><b><?php echo $this->_['statistics_processed']; ?></b>
+        <?php echo ($this->_['statistics_processed']==1) ? get_string('students_answered_single', 'groupformation') : get_string('students_answered_multiple', 'groupformation'); ?></div>
 </div>
 <div class="grid row_highlight">
-    <div class="col_m_100">
-        <b><?php echo $this->_['statistics_submited']; ?></b>
-        <?php if ($this->_['statistics_submited'] == 1): ?>
-            <?php echo get_string('students_commited_single', 'groupformation');?>
-        <?php else: ?>
-            <?php echo get_string('students_commited_multiple', 'groupformation');?>
-        <?php endif; ?>
-    </div>
+    <div class="col_m_100"><b><?php echo $this->_['statistics_submited']; ?></b>
+        <?php echo ' '.($this->_['statistics_submited']==1) ? get_string('students_committed_single', 'groupformation') : get_string('students_committed_multiple', 'groupformation'); ?></div>
 </div>
+<!-- HOTFIX FOR HRZ SOSE2016
 <div class="grid row_highlight">
-    <div class="col_m_100">
-        <b><?php echo $this->_['statistics_submited_incomplete']; ?></b>
-        <?php echo get_string('commited_not_completed', 'groupformation');?>
-    </div>
-</div>
+	<div class="col_m_100"><b><?php //echo $this->_['statistics_submited_incomplete']; ?></b>
+        <?php //echo ' '.get_string('committed_not_completed', 'groupformation');?></div>
+</div> -->
 <div class="grid row_highlight">
-    <div class="col_m_100">
-        <?php echo get_string('are_now', 'groupformation');?> <b>
-            <?php echo $this->_['statistics_submited_complete']; ?></b>
-        <?php echo get_string('completed_questionnaire', 'groupformation');?>
-    </div>
+    <div class="col_m_100"><?php echo get_string('are_now', 'groupformation');?> <b>
+            <?php echo ' '.$this->_['statistics_submited_complete']; ?></b>
+        <?php echo ' '.get_string('completed_questionnaire', 'groupformation');?></div>
 </div>
 

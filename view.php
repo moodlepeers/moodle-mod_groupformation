@@ -16,10 +16,9 @@
 /**
  * Prints a particular instance of groupformation
  *
- * @package     mod_groupformation
- * @author      Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package mod_groupformation
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
 require_once(dirname(__FILE__) . '/lib.php');
@@ -33,6 +32,8 @@ $id = optional_param('id', 0, PARAM_INT); // Course Module ID.
 
 $doshow = optional_param('do_show', 'view', PARAM_TEXT);
 $back = optional_param('back', 0, PARAM_INT);
+$giveconsent = optional_param('giveconsent',false,PARAM_BOOL);
+$giveparticipantcode = optional_param('giveparticipantcode',false,PARAM_BOOL);
 
 // Import jQuery and js file.
 groupformation_add_jquery($PAGE, 'survey_functions.js');
@@ -72,26 +73,45 @@ $PAGE->set_url('/mod/groupformation/view.php', array(
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 
-if (data_submitted() && confirm_sesskey()) {
-    $begin = optional_param('begin', null, PARAM_BOOL);
+//$begin = 1;
+if ( data_submitted() && confirm_sesskey()){
+    $consent = optional_param('consent',null,PARAM_BOOL);
+    $begin = optional_param('begin', null, PARAM_INT);
     $questions = optional_param('questions', null, PARAM_BOOL);
+    $participantcode = optional_param('participantcode','',PARAM_TEXT);
 }
 if (!isset ($begin)) {
     $begin = 1;
 }
 
-
 if ($begin == 1) {
 
     if (isset($questions) && $questions == 1 && !$back) {
-
+        if (isset($consent)){
+            $dbconsent = $usermanager->get_consent($userid);
+            $usermanager->set_consent($userid,true);
+        }
+        if (isset($participantcode) && $participantcode !== ''){
+            if ($usermanager->validate_participant_code($participantcode)){
+                $usermanager->register_participant_code($userid,$participantcode);
+            }else{
+                //die();
+            }
+        }
         $returnurl = new moodle_url ('/mod/groupformation/questionnaire_view.php', array(
             'id' => $id));
 
         redirect($returnurl);
     }
+} else if ($begin == -1){
+    $usermanager->delete_answers($userid);
+    $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
+        'id' => $id));
+
+    redirect($returnurl);
 } else {
     $usermanager->change_status($userid, 1);
+    $groupsmanager->assign_to_groups_a_and_b($userid);
     $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
         'id' => $id));
 
@@ -100,8 +120,23 @@ if ($begin == 1) {
 
 echo $OUTPUT->header();
 
-// Print the tabs.
-require('tabs.php');
+if ($usermanager->get_consent($userid) || $groupsmanager->groups_created()) {
+    // Print the tabs.
+    require('tabs.php');
+}
+
+if ($giveconsent) {
+    echo '<div class="alert alert-danger">' . get_string('consent_alert_message', 'groupformation') .
+        '</div>';
+}
+
+if ($giveparticipantcode) {
+    echo '<div class="alert alert-danger">' . get_string('participant_code_alert_message', 'groupformation') .
+        '</div>';
+}
+if (groupformation_get_current_questionnaire_version() > $store->get_version()){
+    echo '<div class="alert">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
+}
 if ($store->is_archived()) {
     echo '<div class="alert" id="commited_view">' . get_string('archived_activity_answers', 'groupformation') .
         '</div>';
@@ -111,10 +146,9 @@ if ($store->is_archived()) {
         echo $OUTPUT->box(format_module_intro('groupformation', $groupformation, $cm->id), 'generalbox mod_introbox',
                           'groupformationintro');
     }
-
+    
     echo '<form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
     echo '<input type="hidden" name="questions" value="1"/>';
-
     echo '<input type="hidden" name="sesskey" value="'. sesskey(). '" />';
 
     $controller = new mod_groupformation_student_overview_controller ($cm->id, $groupformation->id, $userid);

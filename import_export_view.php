@@ -17,10 +17,9 @@
 /**
  * Prints a particular instance of groupformation
  *
- * @package     mod_groupformation
- * @author      Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package mod_groupformation
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
@@ -31,7 +30,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/controller/import_expo
 // Read URL params.
 $id = optional_param('id', 0, PARAM_INT);
 $doshow = optional_param('do_show', 'import_export', PARAM_TEXT);
-
+$currenttab = $doshow;
 // Determine instances of course module, course, groupformation.
 groupformation_determine_instance($id, $cm, $course, $groupformation);
 
@@ -47,10 +46,21 @@ $PAGE->set_url('/mod/groupformation/import_export_view.php', array('id' => $cm->
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 
+$store = new mod_groupformation_storage_manager($groupformation->id);
+$data = new mod_groupformation_data();
+
+if (!$data->import_export_enabled()) {
+    $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
+        'id' => $cm->id));
+    redirect($returnurl);
+}
 echo $OUTPUT->header();
 
 // Print the tabs.
 require('tabs.php');
+if (groupformation_get_current_questionnaire_version() > $store->get_version()){
+    echo '<div class="alert">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
+}
 if ($store->is_archived()) {
     echo '<div class="alert" id="commited_view">' . get_string('archived_activity_answers', 'groupformation') . '</div>';
 } else {

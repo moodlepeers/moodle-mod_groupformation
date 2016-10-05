@@ -16,16 +16,15 @@
 /**
  * Version information
  *
- * @package     mod_groupformation
- * @author      Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package mod_groupformation
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
-$plugin->version = 2015112600;
+$plugin->version = 2016090700;
 $plugin->requires = 2015050500;
 $plugin->cron = 0;
 $plugin->component = 'mod_groupformation';
-$plugin->maturity = MATURITY_ALPHA;
-$plugin->release = 'v1.1';
+$plugin->maturity = MATURITY_BETA;
+$plugin->release = 'v1.1-b';
 $plugin->dependencies = array();

@@ -13,14 +13,12 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 /**
- * This file contains a xml loader class
+ * Load the xml-based questions
  *
- * @package     mod_groupformation
- * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package mod_groupformation
+ * @author Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
 
@@ -29,94 +27,41 @@ if (!defined('MOODLE_INTERNAL')) {
 }
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
-/**
- * Load the xml-based questions
- *
- * @package     mod_groupformation
- * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-class mod_groupformation_xml_loader {
+require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
+require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 
-    /** @var mod_groupformation_storage_manager */
-    private $store;
+class mod_groupformation_xml_loader {
 
     /**
      * mod_groupformation_xml_loader constructor.
-     *
-     * @param mod_groupformation_storage_manager $store
+     * @param mod_groupformation_storage_manager|null $store
      */
-    public function __construct(mod_groupformation_storage_manager $store = null) {
-        $this->store = $store;
-    }
-
-    /**
-     * Deletes old questions and updates with new questions
-     *
-     * @param string $category
-     * @return array
-     */
-    public function save_data($category) {
-        $array = array();
-        $init = $this->store->catalog_table_not_set($category);
-        if (!$init) {
-            $this->store->delete_all_catalog_questions($category);
-        }
-        $array[] = $this->save($category, 'en');
-        $array[] = $this->save($category, 'de');
-
-        return $array;
-    }
-
-    /**
-     * Checks whether the version is old and needs to be updated and updates the version
-     *
-     * @param string $category
-     */
-    public function latest_version($category) {
-        global $CFG;
-
-        $xmlfile = $CFG->dirroot . '/mod/groupformation/xml_question/question_de_' . $category . '.xml';
-
-        if (file_exists($xmlfile)) {
-            $xml = simplexml_load_file($xmlfile);
-
-            $version = trim($xml->QUESTIONS['VERSION']);
-            if (!$this->store->latest_version($category, $version)) {
-                $array = $this->save_data($category);
-                $number = $array[0][1];
-
-                if ($array[1][1] > $number) {
-                    $number = $array[1][1];
-                }
-
-                $this->store->add_catalog_version($category, $number, $version, false);
-            }
-        } else {
-            die("The file $xmlfile cannot be opened or found.");
-        }
+    public function __construct() {
     }
 
     /**
      * Returns an array with version and number of answers
      *
-     * @param string $category
-     * @param string $lang
+     * @param $category
+     * @param $lang
      * @return array
      */
-    private function save($category, $lang) {
+    public function save($category, $lang) {
         global $CFG;
         $xmlfile = $CFG->dirroot . '/mod/groupformation/xml_question/' . $lang . '_' . $category . '.xml';
 
         $return = array();
+        $questions = array();
 
         if (file_exists($xmlfile)) {
             $xml = simplexml_load_file($xmlfile);
 
+            $v = trim($xml->QUESTIONS['VERSION']);
             $return[] = trim($xml->QUESTIONS['VERSION']);
             $numbers = 0;
 
             foreach ($xml->QUESTIONS->QUESTION as $question) {
+
                 $options = $question->OPTIONS;
                 $optionsarray = array();
 
@@ -126,22 +71,27 @@ class mod_groupformation_xml_loader {
 
                 $numbers++;
 
-                $array = array('type' => trim($question['TYPE']),
-                    'question' => trim($question->QUESTIONTEXT),
-                    'options' => $optionsarray,
-                    'position' => $numbers,
-                    'questionid' => trim($question['ID']),
-                );
+                $data = new stdClass ();
+                $data->category = $category;
+                $data->questionid = trim($question['ID']);
+                $data->type = trim($question['TYPE']);
+                $data->question = trim($question->QUESTIONTEXT);
+                $data->options = groupformation_convert_options($optionsarray);
+                $data->language = $lang;
+                $data->position = $numbers;
+                $data->optionmax = count($optionsarray);
+                $data->version = $v;
 
-                $this->store->add_catalog_question($array, $lang, $category);
+                $questions[] = $data;
             }
 
             $return[] = $numbers;
+            $return[] = $questions;
 
             return $return;
 
         } else {
-            die("The file $xmlfile cannot be opened or found.");
+            exit("The file $xmlfile cannot be opened or found.");
         }
 
     }

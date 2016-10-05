@@ -14,22 +14,20 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * wrapper student group for template builder
- *
- * @package     mod_groupformation
- * @author      Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package mod_groupformation
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 ?>
 <div class="gf_settings_pad">
-    <div class="gf_pad_header"><?php echo get_string('your_group', 'groupformation');?> - <?php echo $this->_['group_name']; ?>
+    <div class="gf_pad_header"><?php echo get_string('your_group', 'groupformation').' - ';?><?php echo $this->_['group_name']; ?>
     </div>
     <div class="gf_pad_content">
         <p><?php echo $this->_['group_info_contact']; ?></p>
+        <p><?php echo $this->_['topic_info'];?></p>
         <p><?php echo $this->_['group_info']; ?></p>
 
-        <?php foreach ($this->_['members'] as $row) { ?>
+        <?php foreach($this->_['members'] as $row) { ?>
             <p><b><?php echo $row; ?></b></p>
         <?php } ?>
 

@@ -15,27 +15,18 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This file contains the user manager class
+ * Interface for user-related activity data in DB
  *
- * @package     mod_groupformation
- * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package mod_groupformation
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.');
 }
 
-/**
- * User manager class
- *
- * @package     mod_groupformation
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-class mod_groupformation_user_manager {
-
-    /** @var int id of groupformation */
+class mod_groupformation_user_manager
+{
     private $groupformationid;
 
     /**
@@ -123,7 +114,7 @@ class mod_groupformation_user_manager {
     public function get_not_completed_by_answer_count($sortedby = null, $fieldset = '*') {
         global $DB;
         $tablename = 'groupformation_started';
-        $query = "SELECT " . $fieldset . " FROM {{$tablename}} ".
+        $query = "SELECT " . $fieldset . " FROM {{$tablename}} " .
             "WHERE groupformation = ? AND answer_count <> ? ORDER BY ?" . $sortedby;
         return $DB->get_records_sql($query, array(
             $this->groupformationid,
@@ -142,14 +133,16 @@ class mod_groupformation_user_manager {
      */
     public function get_not_completed_but_submitted($sortedby = null, $fieldset = '*') {
         global $DB;
-        $tablename = 'groupformation_started';
-        $query = "SELECT " . $fieldset . " FROM {{$tablename}} ".
-            "WHERE groupformation = ? AND completed = 1 AND answer_count <> ? ORDER BY ?" . $sortedby;
-        return $DB->get_records_sql($query, array(
-            $this->groupformationid,
-            $this->store->get_total_number_of_answers(),
-            $sortedby
-        ));
+        // TODO HOTFIX FOR HRZ SOSE2016
+        return array();
+//        $tablename = 'groupformation_started';
+//        $query = "SELECT " . $fieldset . " FROM {{$tablename}} ".
+//            "WHERE groupformation = ? AND completed = 1 AND answer_count <> ? ORDER BY ?" . $sortedby;
+//        return $DB->get_records_sql($query, array(
+//            $this->groupformationid,
+//            $this->store->get_total_number_of_answers(),
+//            $sortedby
+//        ));
     }
 
     /**
@@ -184,9 +177,9 @@ class mod_groupformation_user_manager {
     }
 
     /**
-     * Set status to complete
+     * set status to complete
      *
-     * @param int $userid
+     * @param $userid
      * @param bool|false $completed
      */
     public function set_status($userid, $completed = false) {
@@ -213,9 +206,9 @@ class mod_groupformation_user_manager {
     }
 
     /**
-     * Changes status of questionaire for a specific user
+     * Changes status of questionnaire for a specific user
      *
-     * @param int $userid
+     * @param $userid
      * @param bool|false $complete
      */
     public function change_status($userid, $complete = false) {
@@ -239,35 +232,39 @@ class mod_groupformation_user_manager {
      * 1 completed
      * -1 otherwise
      *
-     * @param int $userid
+     * @param $userid
      * @return int|mixed
      */
     public function get_answering_status($userid) {
         global $DB;
+
+        if (!$this->get_consent($userid) || (!$this->has_participant_code($userid) && $this->store->ask_for_participant_code())) {
+            return -1;
+        }
 
         $exists = $DB->record_exists('groupformation_started', array(
             'groupformation' => $this->groupformationid,
             'userid' => $userid
         ));
         if ($exists) {
-            return $DB->get_field('groupformation_started', 'completed', array(
+            $value = $DB->get_field('groupformation_started', 'completed', array(
                 'groupformation' => $this->groupformationid,
                 'userid' => $userid
             ));
+            return $value;
         } else {
             return -1;
         }
     }
 
     /**
-     * Returns whether questionaire was completed and send by user or not
+     * Returns whether questionnaire was completed and send by user or not
      *
      * @param int $userid
      * @return boolean
      */
     public function is_completed($userid) {
-
-        return $this->get_answering_status($userid) == 1;
+        return array_key_exists($userid,$this->get_completed(null,'userid'));
     }
 
     /**
@@ -344,8 +341,8 @@ class mod_groupformation_user_manager {
     /**
      * Returns all answers of a specific user in a specific category
      *
-     * @param int $userid
-     * @param string $category
+     * @param $userid
+     * @param $category
      * @param null $sortedby
      * @param string $fieldset
      * @return array
@@ -399,14 +396,23 @@ class mod_groupformation_user_manager {
     /**
      * Saves answer
      *
-     * @param int $userid
-     * @param string $category
-     * @param int $answer
-     * @param int $questionid
+     * @param $userid
+     * @param $category
+     * @param $answer
+     * @param $position
      */
-    public function save_answer($userid, $category, $answer, $questionid) {
+    public function save_answer($userid, $category, $answer, $position) {
         global $DB;
         $status = $this->get_answering_status($userid);
+
+        $questionid = $position;
+
+        if (!in_array($category,array('knowledge','topics'))){
+            $question = $this->store->get_question_by_position($category,$position);
+            $questionid = $question->questionid;
+        }
+
+
 
         if (($category == 'grade' || $category == 'general') && $answer == '0') {
             return;
@@ -463,13 +469,13 @@ class mod_groupformation_user_manager {
     /**
      * Returns whether a user has answers in a specific category or not
      *
-     * @param int $userid
-     * @param string $category
+     * @param $userid
+     * @param $category
      * @return bool
      */
     public function has_answers($userid, $category) {
         $firstcondition = ($this->get_answering_status($userid) > -1);
-        $secondcondition = ($this->get_answers($userid, $category) > 0);
+        $secondcondition = (count($this->get_answers($userid, $category)) > 0);
 
         return ($firstcondition && $secondcondition);
     }
@@ -477,7 +483,7 @@ class mod_groupformation_user_manager {
     /**
      * Returns the most chosen topics wrt the users
      *
-     * @param int $numberoftopics
+     * @param $numberoftopics
      * @return array
      */
     public function get_most_common_topics($numberoftopics) {
@@ -499,5 +505,131 @@ class mod_groupformation_user_manager {
         $result = array_slice($scores, 0, $numberoftopics);
 
         return $result;
+    }
+
+    /**
+     * Returns consent value for user
+     *
+     * @param $userid
+     * @return bool
+     */
+    public function get_consent($userid) {
+        global $DB;
+        if ($DB->record_exists('groupformation_started',
+            array('groupformation' => $this->groupformationid, 'userid' => $userid))
+        ) {
+            return (bool)($DB->get_field('groupformation_started', 'consent', array('groupformation' => $this->groupformationid, 'userid' => $userid)));
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Sets consent by value
+     *
+     * @param $userid
+     * @param $value
+     */
+    public function set_consent($userid, $value) {
+        global $DB;
+        $this->set_status($userid);
+        $record = $DB->get_record('groupformation_started', array('groupformation' => $this->groupformationid, 'userid' => $userid));
+        $record->consent = $value;
+        $DB->update_record('groupformation_started', $record);
+    }
+
+    /**
+     * Deletes all answers
+     *
+     * @param $userid
+     */
+    public function delete_answers($userid) {
+        global $DB;
+        $DB->delete_records('groupformation_started', array('groupformation' => $this->groupformationid, 'userid' => $userid));
+        $DB->delete_records('groupformation_answer', array('groupformation' => $this->groupformationid, 'userid' => $userid));
+    }
+
+    /**
+     * Returns whether participant code is correctly computed or not
+     *
+     * @param $participantcode
+     * @return bool
+     */
+    public function validate_participant_code($participantcode) {
+        if (strlen($participantcode) !== 8) {
+            return false;
+        }
+        $array = array(true, false, true, false);
+        $valid = true;
+        $i = 0;
+        $d = 2;
+        foreach ($array as $a) {
+            if ($a) {
+                $valid &= ctype_alpha(substr($participantcode, $i, $d));
+            } else {
+                $valid &= ctype_digit(substr($participantcode, $i, $d));
+            }
+            $i += 2;
+        }
+        return $valid;
+    }
+
+    /**
+     * Returns whether the user has a valid participant code or not
+     *
+     * @param $userid
+     * @return bool
+     */
+    public function has_participant_code($userid) {
+        global $DB;
+        $exists = $DB->record_exists('groupformation_started', array(
+            'groupformation' => $this->groupformationid,
+            'userid' => $userid
+        ));
+        if ($exists) {
+            $value = $DB->get_field('groupformation_started', 'participantcode', array(
+                'groupformation' => $this->groupformationid,
+                'userid' => $userid
+            ));
+            return $this->validate_participant_code($value);
+        }
+        return false;
+    }
+
+    /**
+     * Registers participant code for user
+     *
+     * @param $userid
+     * @param $participantcode
+     */
+    public function register_participant_code($userid, $participantcode) {
+        global $DB;
+        $this->set_status($userid);
+        $record = $DB->get_record('groupformation_started', array('groupformation' => $this->groupformationid, 'userid' => $userid));
+        $record->participantcode = strtoupper($participantcode);
+        $DB->update_record('groupformation_started', $record);
+    }
+
+    /**
+     * Returns participant code
+     *
+     * @param $userid
+     * @return mixed|string
+     */
+    public function get_participant_code($userid) {
+        global $DB;
+        $exists = $DB->record_exists('groupformation_started', array(
+            'groupformation' => $this->groupformationid,
+            'userid' => $userid
+        ));
+        if ($exists) {
+            $value = $DB->get_field('groupformation_started', 'participantcode', array(
+                'groupformation' => $this->groupformationid,
+                'userid' => $userid
+            ));
+            return $value;
+        }
+
+        return '';
     }
 }

@@ -14,12 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * This file contains a utility class
+ * Utility class for various methods
  *
- * @package     mod_groupformation
- * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package mod_groupformation
+ * @author Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.');
@@ -27,13 +26,7 @@ if (!defined('MOODLE_INTERNAL')) {
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once(dirname(__FILE__) . '/define_file.php');
-/**
- * Utility class for various methods
- *
- * @package     mod_groupformation
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
+
 class mod_groupformation_util {
 
     /**
@@ -44,7 +37,7 @@ class mod_groupformation_util {
      * @return string
      * @throws coding_exception
      */
-    public static function get_info_text_for_teacher($unfolded, $page = "settings") {
+    public static function get_info_text_for_teacher($unfolded = false, $page = "settings") {
         $s = '<p><a class="show">' . get_string('info_header_teacher_' . $page, 'groupformation') . '</a></p>';
         $s .= '<div id="info_text" style="display: ' . (($unfolded) ? 'block' : 'none') . ';">';
         $s .= '<p style="padding-left: 10px;">' . get_string('info_text_teacher_' . $page, 'groupformation') . '</p>';
@@ -108,24 +101,27 @@ class mod_groupformation_util {
      */
     public static function get_user_record($userid) {
         global $DB;
-        if ($record = $DB->get_record('user',
+        if ($DB->record_exists('user',
             array(
                 'id' => $userid
             )
         )
         ) {
-            return $record;
+            return $DB->get_record('user',
+                array(
+                    'id' => $userid
+                )
+            );
         } else {
             return null;
         }
     }
 
-
     /**
      * Computes stats about answered and misssing questions
      *
-     * @param int $groupformationid
-     * @param int $userid
+     * @param $groupformationid
+     * @param $userid
      * @return array
      */
     public static function get_stats($groupformationid, $userid) {
@@ -156,7 +152,7 @@ class mod_groupformation_util {
     /**
      * Converts OPTIONS xml to array
      *
-     * @param string $xmlcontent
+     * @param $xmlcontent
      * @return array
      */
     public static function xml_to_array($xmlcontent) {
@@ -212,6 +208,46 @@ class mod_groupformation_util {
                 self::archive_activity($groupformation->id);
             }
         }
+    }
+
+    /**
+     * Returns student user ids of the course
+     *
+     * @param $store
+     * @return array
+     */
+    public static function get_users($groupformationid = null,$store = null,$context = null, $job = null){
+        if (is_null($job)){
+            $job = mod_groupformation_job_manager::get_job($groupformationid);
+        }
+
+        if (is_null($store)){
+            $store = new mod_groupformation_storage_manager($groupformationid);
+        }
+
+        if (is_null($context)) {
+            $courseid = $store->get_course_id();
+            $context = context_course::instance($courseid);
+        }
+
+        $courseid = $store->get_course_id();
+        $context = context_course::instance($courseid);
+
+        $enrolledstudents = null;
+
+        if (intval($job->groupingid) != 0) {
+            $enrolledstudents = array_keys(groups_get_grouping_members($job->groupingid));
+        } else {
+            $enrolledstudents = array_keys(get_enrolled_users($context, 'mod/groupformation:onlystudent'));
+            $enrolledprevusers = array_keys(get_enrolled_users($context, 'mod/groupformation:editsettings'));
+            $diff = array_diff($enrolledstudents,$enrolledprevusers);
+            $enrolledstudents = $diff;
+        }
+        if (is_null($enrolledstudents) || count($enrolledstudents) <= 0) {
+            return null;
+        }
+
+        return $enrolledstudents;
     }
 
 }
