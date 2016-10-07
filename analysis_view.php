@@ -78,7 +78,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/controller/analysis_co
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_parser.php');
 
 /* --------- Hard Reset a pending groupformation job ---- */
-if ($resetjob) {
+if ($CFG->debug === 32767 && $resetjob) {
     global $DB;
 
     $DB->delete_records('groupformation_jobs', array('groupformationid' => $groupformation->id));
