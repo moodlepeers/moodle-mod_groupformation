@@ -26,6 +26,7 @@ $string ['modulename'] = 'Group formation';
 $string ['modulenameplural'] = 'Group formations';
 $string ['modulename_help'] = 'The groupformation plugin generates groups of participants based on a questionnaire answers.';
 $string ['beta_version'] = '';
+$string ['groupformation:addinstance'] = 'Add groupformation';
 $string ['password_wrong'] = 'wrong password';
 $string ['groupformationfieldset'] = 'Custom example fieldset';
 $string ['groupformationname'] = 'Group formation';

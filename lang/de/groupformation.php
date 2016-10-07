@@ -26,6 +26,7 @@ $string ['modulename'] = 'Gruppenformation';
 $string ['modulenameplural'] = 'Gruppenformationen';
 $string ['modulename_help'] = 'Erlaubt die automatische Erstellung von (Lern)-Gruppen Ihrer Teilnehmenden. Basierend auf Fragebogen-Antworten werden die Gruppen(zusammenstellungen) optimiert.';
 $string ['beta_version'] = '';
+$string ['groupformation:addinstance'] = 'Gruppenformation hinzufügen';
 $string ['password_wrong'] = 'Das eingegebene Passwort ist falsch';
 $string ['groupformationname'] = 'Name der Gruppenformation';
 $string ['groupformationname_help'] = 'Dieser Titel wird auf der Kursseite angezeigt.';
