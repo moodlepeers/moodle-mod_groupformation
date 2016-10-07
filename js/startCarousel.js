@@ -28,7 +28,7 @@ $(document).ready(function () {
     caption
         .each(function (d, i) {
             if (d.mode == "text"){
-                d3.select(this).append("div").attr("class", "well").html("<p>" + d.text.replace(/\\n/g, "<br>") + "</p>");
+                d3.select(this).append("div").attr("class", "gf_well").html("<p>" + d.text.replace(/\\n/g, "<br>") + "</p>");
             }
         });
 
@@ -124,6 +124,8 @@ function buildPersonalResult(datam, index, divId) {
         })
         .append("div")
         .attr("class", "panel-body")
+        .append("p")
+        .attr("class", "gf_p_accordion")
         .text(function (d, i) {
             return d.cutoff;
         });
