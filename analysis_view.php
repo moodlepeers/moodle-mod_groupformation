@@ -105,21 +105,6 @@ if ($CFG->debug === 32767) {
 }
 /* ---------- / Automated test user generation ---------- */
 
-/* ---------- Job Manager Usage ------------------------- */
-
-//$jm = new mod_groupformation_job_manager ();
-//$job = null;
-//
-//$job = $jm::get_job($groupformation->id);
-//
-//if (!is_null($job)) {
-//    $result = $jm::do_groupal($job);
-//    var_dump($result);
-//    // $jm::save_result($job,$result);
-//}
-
-/* ---------- / Job Manager Usage ----------------------- */
-
 $controller = new mod_groupformation_analysis_controller ($groupformation->id, $cm);
 
 /* ---- Code for fixing Answers can be removed after 15-09-2016 ---- */
