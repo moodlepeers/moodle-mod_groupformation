@@ -22,7 +22,7 @@
  */
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion.php");
 
-class lib_groupal_participant {
+class mod_groupformation_participant {
 
     /** @var int This is the static ID count which assigns ids if they are not given */
     private static $idcount = 0;
@@ -37,7 +37,7 @@ class lib_groupal_participant {
     public $id = 0;
 
     /**
-     * lib_groupal_participant constructor.
+     * mod_groupformation_participant constructor.
      * @param $criteria  array of criteria (will be copied/iterated)
      * @param $id to be set as id of participant (otherwise generated automatically), but pay attention not to
      * mix given and non-given IDs!
@@ -68,9 +68,9 @@ class lib_groupal_participant {
     /**
      * Add criterion without checking for duplicates
      *
-     * @param lib_groupal_criterion $c
+     * @param mod_groupformation_criterion $c
      */
-    public function add_criterion(lib_groupal_criterion $c) {
+    public function add_criterion(mod_groupformation_criterion $c) {
         $this->criteria[] = $c;
     }
 

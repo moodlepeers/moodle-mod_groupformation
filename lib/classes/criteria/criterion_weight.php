@@ -22,9 +22,9 @@
  */
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/util/hash_map.php");
 
-class lib_groupal_criterion_weight {
+class mod_groupformation_criterion_weight {
 
-    /** @var lib_groupal_hash_map This hash map contains all criterion weights */
+    /** @var mod_groupformation_hash_map This hash map contains all criterion weights */
     public static $criterionweights;
 
 
@@ -33,7 +33,7 @@ class lib_groupal_criterion_weight {
      */
     public static function init() {
         if (static::$criterionweights == null) {
-            static::$criterionweights = new lib_groupal_hash_map();
+            static::$criterionweights = new mod_groupformation_hash_map();
         }
     }
 
@@ -58,10 +58,10 @@ class lib_groupal_criterion_weight {
     /**
      * Changing CriterionWeights; only allowed if keys are equal to existing ones and the sum of all weights is 1.
      *
-     * @param lib_groupal_hash_map $newweights
+     * @param mod_groupformation_hash_map $newweights
      * @return bool
      */
-    public static function change_weights(lib_groupal_hash_map $newweights) {
+    public static function change_weights(mod_groupformation_hash_map $newweights) {
         $issamekeyset = true;
         foreach ($newweights->keys as $s) {
             $issamekeyset &= self::$criterionweights->contains_key($s);
@@ -85,7 +85,7 @@ class lib_groupal_criterion_weight {
         try {
             return self::$criterionweights->get_value($criterionname);
         } catch (Exception $e) {
-            throw new Exception("lib_groupal_criterion_weight does not contain the CriterionName you are looking for!", $e);
+            throw new Exception("mod_groupformation_criterion_weight does not contain the CriterionName you are looking for!", $e);
         }
     }
 
@@ -101,7 +101,7 @@ class lib_groupal_criterion_weight {
         self::init();
         if (self::$criterionweights->contains_key($name) && self::$criterionweights->get_value($name) != $weight
         ) {
-            throw new Exception("lib_groupal_criterion_weight: the given CriterionName has already an other weight");
+            throw new Exception("mod_groupformation_criterion_weight: the given CriterionName has already an other weight");
         }
         // Do not call addCriterionWeight as it throws exceptions on repetive calls.
         self::$criterionweights->add($name, $weight);

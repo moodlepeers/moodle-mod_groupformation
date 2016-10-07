@@ -25,10 +25,10 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/group.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/cohorts/cohort.php");
 
 
-interface lib_groupal_ievaluator {
+interface mod_groupformation_ievaluator {
 
-    public function evaluate_gpi(lib_groupal_group $g);
+    public function evaluate_gpi(mod_groupformation_group $g);
 
-    public function evaluate_cpi(lib_groupal_cohort $c);
+    public function evaluate_cpi(mod_groupformation_cohort $c);
 
 }

@@ -108,7 +108,7 @@ class mod_groupformation_grouping {
      * @param $users
      * @param $groupsize
      * @param $configurationkey
-     * @return lib_groupal_cohort
+     * @return mod_groupformation_cohort
      */
     public function build_cohort($users, $groupsize, $configurationkey) {
         if (strpos($configurationkey, "rand:1") !== false) {
@@ -131,10 +131,10 @@ class mod_groupformation_grouping {
      *
      * @param $users
      * @param $groupsize
-     * @return lib_groupal_cohort
+     * @return mod_groupformation_cohort
      */
     public function build_random_cohort($users, $groupsize) {
-        $gfra = new lib_groupal_random_algorithm ($users, $groupsize);
+        $gfra = new mod_groupformation_random_algorithm ($users, $groupsize);
 
         return $gfra->do_one_formation();
     }
@@ -144,13 +144,13 @@ class mod_groupformation_grouping {
      *
      * @param $users
      * @param $groupsize
-     * @return lib_groupal_cohort
+     * @return mod_groupformation_cohort
      */
     public function build_groupal_cohort($users, $groupsize) {
         // Choose matcher.
-        $matcher = new lib_groupal_group_centric_matcher ();
+        $matcher = new mod_groupformation_group_centric_matcher ();
 
-        $gfa = new lib_groupal_basic_algorithm ($users, $matcher, $groupsize);
+        $gfa = new mod_groupformation_basic_algorithm ($users, $matcher, $groupsize);
         return $gfa->do_one_formation();
     }
 
@@ -159,11 +159,11 @@ class mod_groupformation_grouping {
      *
      * @param $users
      * @param $groupsize
-     * @return lib_groupal_cohort
+     * @return mod_groupformation_cohort
      */
     public function build_topic_cohort($users, $groupsizes) {
 
-        $gfa = new lib_groupal_topic_algorithm ($groupsizes, $users);
+        $gfa = new mod_groupformation_topic_algorithm ($groupsizes, $users);
         return $gfa->do_one_formation();
     }
 

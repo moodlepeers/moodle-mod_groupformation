@@ -20,6 +20,6 @@
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/lgpl.html GNU LGPL v3 or later
  */
-interface lib_groupal_ioptimizer {
-    public function optimize_cohort(lib_groupal_cohort $cohort);
+interface mod_groupformation_ioptimizer {
+    public function optimize_cohort(mod_groupformation_cohort $cohort);
 }

@@ -22,11 +22,11 @@
  */
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion.php");
 
-interface lib_groupal_idistance {
+interface mod_groupformation_idistance {
     /**
-     * @param lib_groupal_criterion $c1
-     * @param lib_groupal_criterion $c2
+     * @param mod_groupformation_criterion $c1
+     * @param mod_groupformation_criterion $c2
      * @return float  ( a value normalized to (0...1) )
      */
-    public function normalized_distance(lib_groupal_criterion $c1, lib_groupal_criterion $c2);
+    public function normalized_distance(mod_groupformation_criterion $c1, mod_groupformation_criterion $c2);
 }

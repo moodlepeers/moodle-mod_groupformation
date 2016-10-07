@@ -21,7 +21,7 @@
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/lgpl.html GNU LGPL v3 or later
  */
-interface lib_groupal_imatcher {
+interface mod_groupformation_imatcher {
     /**
      * @param $entries : list of Participants
      * @param $groups : list of groups

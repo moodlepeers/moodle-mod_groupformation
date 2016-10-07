@@ -26,7 +26,7 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/cohorts/cohort.php
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/participant.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/group.php");
 
-class lib_groupal_cohort_writer {
+class mod_groupformation_cohort_writer {
     private $writer;
     private $uri;
 
@@ -80,9 +80,9 @@ class lib_groupal_cohort_writer {
     /**
      * Writes XML for an array participants
      *
-     * @param lib_groupal_cohort $cohort
+     * @param mod_groupformation_cohort $cohort
      */
-    private function write_groups(lib_groupal_cohort $cohort) {
+    private function write_groups(mod_groupformation_cohort $cohort) {
         $writer = $this->writer;
 
         $writer->startElement('Groups');
@@ -101,9 +101,9 @@ class lib_groupal_cohort_writer {
     /**
      * Writes XML for a single group
      *
-     * @param lib_groupal_group $group
+     * @param mod_groupformation_group $group
      */
-    private function write_group(lib_groupal_group $group) {
+    private function write_group(mod_groupformation_group $group) {
         $writer = $this->writer;
 
         $writer->startElement('Group');
@@ -122,9 +122,9 @@ class lib_groupal_cohort_writer {
     /**
      * Writes XML for a single participant
      *
-     * @param lib_groupal_participant $p
+     * @param mod_groupformation_participant $p
      */
-    private function write_participant(lib_groupal_participant $p) {
+    private function write_participant(mod_groupformation_participant $p) {
         $writer = $this->writer;
 
         $writer->startElement('participant');
@@ -151,9 +151,9 @@ class lib_groupal_cohort_writer {
     /**
      * Writes XML for a single criterion
      *
-     * @param lib_groupal_criterion $c
+     * @param mod_groupformation_criterion $c
      */
-    private function write_criterion(lib_groupal_criterion $c) {
+    private function write_criterion(mod_groupformation_criterion $c) {
         $writer = $this->writer;
 
         $writer->startElement('Criterion');
@@ -166,9 +166,9 @@ class lib_groupal_cohort_writer {
     /**
      * Writes XML for criterion attributes
      *
-     * @param lib_groupal_criterion $c
+     * @param mod_groupformation_criterion $c
      */
-    private function write_criterion_attributes(lib_groupal_criterion $c) {
+    private function write_criterion_attributes(mod_groupformation_criterion $c) {
         $writer = $this->writer;
         $writer->writeAttribute('name', $c->get_name());
         $writer->writeAttribute('isHomogeneous', $c->is_homogeneous());

@@ -23,10 +23,10 @@
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion_weight.php");
 
-class lib_groupal_topic_criterion extends lib_groupal_criterion {
+class mod_groupformation_topic_criterion extends mod_groupformation_criterion {
 
     /**
-     * lib_groupal_topic_criterion constructor.
+     * mod_groupformation_topic_criterion constructor.
      *
      * @param $valuearray The ratings for each topic
      */
@@ -36,6 +36,6 @@ class lib_groupal_topic_criterion extends lib_groupal_criterion {
         $this->set_max_value(count($valuearray));
         $this->set_values($valuearray);
         $this->set_homogeneous(true);
-        lib_groupal_criterion_weight::add_if_not_allready_exist('topics', 1);
+        mod_groupformation_criterion_weight::add_if_not_allready_exist('topics', 1);
     }
 }

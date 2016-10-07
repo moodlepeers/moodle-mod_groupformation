@@ -24,17 +24,17 @@
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/idistance.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion.php");
 
-class lib_groupal_manhattan_distance implements lib_groupal_idistance {
+class mod_groupformation_manhattan_distance implements mod_groupformation_idistance {
 
     /**
      * normes distance for each dimension (INTERNAL method)
      * return max value is number of dimensions.
      *
-     * @param lib_groupal_criterion $cr1
-     * @param lib_groupal_criterion $cr2
+     * @param mod_groupformation_criterion $cr1
+     * @param mod_groupformation_criterion $cr2
      * @return float|number
      */
-    private function get_distance(lib_groupal_criterion $cr1, lib_groupal_criterion $cr2) {
+    private function get_distance(mod_groupformation_criterion $cr1, mod_groupformation_criterion $cr2) {
         $distance = 0.0;
         for ($i = 0; $i < count($cr1->get_values()); $i++) {
             $distance += abs(($cr1->get_value($i) - $cr2->get_value($i)) / $cr1->get_max_value());
@@ -45,11 +45,11 @@ class lib_groupal_manhattan_distance implements lib_groupal_idistance {
     /**
      * Both given crtieria must be of same type and same number of values.
      *
-     * @param lib_groupal_criterion $c1
-     * @param lib_groupal_criterion $c2
+     * @param mod_groupformation_criterion $c1
+     * @param mod_groupformation_criterion $c2
      * @return float  in [0,1] normalized distance (divided by number of criteria values and value interval space)
      */
-    public function normalized_distance(lib_groupal_criterion $c1, lib_groupal_criterion $c2) {
+    public function normalized_distance(mod_groupformation_criterion $c1, mod_groupformation_criterion $c2) {
 
         $result = ($this->get_distance($c1, $c2) / count($c1->get_values()));
         return $result;

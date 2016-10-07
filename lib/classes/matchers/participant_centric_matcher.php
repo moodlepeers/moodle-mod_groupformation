@@ -24,7 +24,7 @@
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/matchers/imatcher.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/group.php");
 
-class lib_groupal_participant_centric_matcher implements lib_groupal_imatcher {
+class mod_groupformation_participant_centric_matcher implements mod_groupformation_imatcher {
     /**
      * @param $notyetmatched : array of participants
      * @param $groups : array of groups
@@ -50,7 +50,7 @@ class lib_groupal_participant_centric_matcher implements lib_groupal_imatcher {
             $hasprogress = false; // Indicate that at least one group got a new member.
 
             foreach ($groups as $g) {
-                if (count($g->getParticipants()) >= lib_groupal_group::get_group_members_max_size()) {
+                if (count($g->getParticipants()) >= mod_groupformation_group::get_group_members_max_size()) {
                     continue;
                 }
 

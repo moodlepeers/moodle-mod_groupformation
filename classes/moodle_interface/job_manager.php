@@ -231,7 +231,7 @@ class mod_groupformation_job_manager {
         $someanswers = array();
         $noorsomeanswers = array();
 
-        foreach ($enrolledstudents as $userid) {
+        foreach (array_values($enrolledstudents) as $userid) {
             if ($usermanager->has_answered_everything($userid)) {
                 $allanswers [] = $userid;
             } else if ($groupingsetting && $usermanager->get_number_of_answers($userid) > 0) {
@@ -369,7 +369,7 @@ class mod_groupformation_job_manager {
      * Saves stats for computed job
      *
      * @param $job
-     * @param lib_groupal_cohort $cohort
+     * @param mod_groupformation_cohort $cohort
      */
     private static function save_stats($job, $cohort = null, $groupkey = null) {
         global $DB;

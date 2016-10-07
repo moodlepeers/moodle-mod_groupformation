@@ -20,7 +20,7 @@
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/lgpl.html GNU LGPL v3 or later
  */
-class lib_groupal_statistics {
+class mod_groupformation_statistics {
     public $n = 0;
     public $avg = 0.0;
     public $avgvariance = 0.0;

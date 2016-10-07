@@ -31,7 +31,7 @@
 /**
  * Class allocation: user asociated with group found by algo
  */
-class topic_allocation {
+class mod_groupformation_topic_allocation {
 
     public $choiceid;
     public $userid;
@@ -48,7 +48,7 @@ class topic_allocation {
 /**
  * Represents an Edge in the graph to have fixed fields instead of array-fields
  */
-class topic_edge {
+class mod_groupformation_topic_edge {
     /** @var from int */
     public $from;
     /** @var to int */
@@ -70,7 +70,7 @@ class topic_edge {
 /**
  * Template Class for distribution algorithms
  */
-class topic_distributor {
+class mod_groupformation_topic_distributor {
 
     /** @var $graph Flow-Graph built */
     protected $graph;
@@ -204,12 +204,12 @@ class topic_distributor {
         // Add users and choices to the graph and connect them to the source and sink.
         foreach ($fromuserid as $id => $user) {
             $this->graph[$user] = array();
-            $this->graph[$source][] = new topic_edge($source, $user, 0);
+            $this->graph[$source][] = new mod_groupformation_topic_edge($source, $user, 0);
         }
 
         foreach ($fromchoiceid as $id => $choice) {
             $this->graph[$choice] = array();
-            $this->graph[$choice][] = new topic_edge($choice, $sink, 0, $choicedata[$id]->get_max_size());
+            $this->graph[$choice][] = new mod_groupformation_topic_edge($choice, $sink, 0, $choicedata[$id]->get_max_size());
         }
 
         // Add the edges representing the ratings to the graph.
@@ -218,7 +218,7 @@ class topic_distributor {
             $choice = $fromchoiceid[$rating->get_choiceid()];
             $weight = $rating->get_rating();
             if ($weight > 0) {
-                $this->graph[$user][] = new topic_edge($user, $choice, $weightmult * $weight);
+                $this->graph[$user][] = new mod_groupformation_topic_edge($user, $choice, $weightmult * $weight);
             }
         }
     }
@@ -255,7 +255,7 @@ class topic_distributor {
                 // Remove the edge.
                 array_splice($this->graph[$from], $foundedgeid, 1);
                 // Add a new edge in the opposite direction whose weight has an opposite sign.
-                $this->graph[$to][] = new topic_edge($to, $from, -1 * $edge->weight);
+                $this->graph[$to][] = new mod_groupformation_topic_edge($to, $from, -1 * $edge->weight);
             }
         }
     }

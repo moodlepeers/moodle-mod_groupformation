@@ -28,7 +28,7 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/topics_solver/solver-template.php');
 
-class groupformation_solver_edmonds_karp extends topic_distributor {
+class mod_groupformation_solver_edmonds_karp extends mod_groupformation_topic_distributor {
 
     public function get_name() {
         return 'edmonds_karp';

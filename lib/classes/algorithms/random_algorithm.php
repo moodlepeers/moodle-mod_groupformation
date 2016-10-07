@@ -24,7 +24,7 @@ require_once($CFG->dirroot . '/mod/groupformation/lib/classes/algorithms/ialgori
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/group.php');
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/cohorts/random_cohort.php');
 
-class lib_groupal_random_algorithm implements lib_groupal_ialgorithm {
+class mod_groupformation_random_algorithm implements mod_groupformation_ialgorithm {
 
     /** @var  array This array contains all participants which need to be matched */
     private $participants;
@@ -32,11 +32,11 @@ class lib_groupal_random_algorithm implements lib_groupal_ialgorithm {
     /** @var  int This is the maximum group size of a computed group */
     private $groupsize;
 
-    /** @var  lib_groupal_cohort This contains the final result */
+    /** @var  mod_groupformation_cohort This contains the final result */
     private $cohort;
 
     /**
-     * lib_groupal_random_algorithm constructor.
+     * mod_groupformation_random_algorithm constructor.
      *
      * @param $participants
      * @param $groupsize
@@ -47,10 +47,10 @@ class lib_groupal_random_algorithm implements lib_groupal_ialgorithm {
     }
 
     /**
-     * @return lib_groupal_cohort
+     * @return mod_groupformation_cohort
      */
     public function do_one_formation() {
-        lib_groupal_group::set_group_members_max_size($this->groupsize);
+        mod_groupformation_group::set_group_members_max_size($this->groupsize);
 
         $participants = $this->participants;
         $groupsize = $this->groupsize;
@@ -114,7 +114,7 @@ class lib_groupal_random_algorithm implements lib_groupal_ialgorithm {
 
             foreach ($completeusers as $p) {
                 if ($position == 0) {
-                    $onegroup = new lib_groupal_group ();
+                    $onegroup = new mod_groupformation_group ();
                 }
 
                 $onegroup->add_participant($p, true);
@@ -137,7 +137,7 @@ class lib_groupal_random_algorithm implements lib_groupal_ialgorithm {
 
             foreach ($incompleteusers as $p) {
                 if ($position == 0) {
-                    $onegroup = new lib_groupal_group ();
+                    $onegroup = new mod_groupformation_group ();
                 }
 
                 $onegroup->add_participant($p, true);
@@ -155,7 +155,7 @@ class lib_groupal_random_algorithm implements lib_groupal_ialgorithm {
             }
         }
 
-        $this->cohort = new lib_groupal_random_cohort (count($groups), $groups);
+        $this->cohort = new mod_groupformation_random_cohort (count($groups), $groups);
         $this->cohort->whichmatcherused = get_class($this);
         $this->cohort->countofgroups = $this->cohort->countofgroups;
         $this->cohort->cpi = null;

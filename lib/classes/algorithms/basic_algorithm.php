@@ -30,7 +30,7 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/matchers/imatcher.
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/participant.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/statistics.php");
 
-class lib_groupal_basic_algorithm implements lib_groupal_ialgorithm {
+class mod_groupformation_basic_algorithm implements mod_groupformation_ialgorithm {
 
     /** @var array This array contains all participants which need to be matched to groups */
     public $participants = array();
@@ -38,16 +38,16 @@ class lib_groupal_basic_algorithm implements lib_groupal_ialgorithm {
     /** @var array This array contains all non-matched participants */
     public $notmatchedparticipants = array();
 
-    /** @var lib_groupal_cohort This object contains the final cohort with all computed groups and some stats */
+    /** @var mod_groupformation_cohort This object contains the final cohort with all computed groups and some stats */
     public $cohort;
 
-    /** @var lib_groupal_evaluator This is the evaluator which is needed to compute performance indices */
+    /** @var mod_groupformation_evaluator This is the evaluator which is needed to compute performance indices */
     public $evaluator;
 
-    /** @var lib_groupal_imatcher This is the matcher which is used to match participants to groups */
+    /** @var mod_groupformation_imatcher This is the matcher which is used to match participants to groups */
     public $matcher;
 
-    /** @var lib_groupal_optimizer This is the optimizer which is used to optimize the computed groups */
+    /** @var mod_groupformation_optimizer This is the optimizer which is used to optimize the computed groups */
     public $optimizer;
 
     /** @var int This is the number of participants which need to be matched */
@@ -60,12 +60,12 @@ class lib_groupal_basic_algorithm implements lib_groupal_ialgorithm {
     public $numberofgroups = 0;
 
     /**
-     * lib_groupal_basic_algorithm constructor.
+     * mod_groupformation_basic_algorithm constructor.
      * @param $participants
-     * @param lib_groupal_imatcher $matcher
+     * @param mod_groupformation_imatcher $matcher
      * @param $groupsize
      */
-    public function __construct($participants, lib_groupal_imatcher $matcher, $groupsize) {
+    public function __construct($participants, mod_groupformation_imatcher $matcher, $groupsize) {
 
         foreach ($participants as $p) {
             $this->participants[] = clone($p);
@@ -73,7 +73,7 @@ class lib_groupal_basic_algorithm implements lib_groupal_ialgorithm {
 
         $this->matcher = $matcher;
 
-        $this->evaluator = new lib_groupal_evaluator();
+        $this->evaluator = new mod_groupformation_evaluator();
 
         $this->groupsize = $groupsize;
 
@@ -86,14 +86,14 @@ class lib_groupal_basic_algorithm implements lib_groupal_ialgorithm {
     private function init() {
         $this->numberofparticipants = count($this->participants);
 
-        lib_groupal_group::set_group_members_max_size($this->groupsize);
+        mod_groupformation_group::set_group_members_max_size($this->groupsize);
 
-        lib_groupal_group::$evaluator = $this->evaluator;
+        mod_groupformation_group::$evaluator = $this->evaluator;
 
-        lib_groupal_cohort::$evaluator = $this->evaluator;
+        mod_groupformation_cohort::$evaluator = $this->evaluator;
 
         // Set cohort: generate empty groups in cohort to fill with participants.
-        $this->cohort = new lib_groupal_cohort(ceil($this->numberofparticipants / $this->groupsize));
+        $this->cohort = new mod_groupformation_cohort(ceil($this->numberofparticipants / $this->groupsize));
 
         // Set the list of not yet matched participants; the array is automatically copied in PHP.
         $this->notmatchedparticipants = $this->participants;
@@ -104,10 +104,10 @@ class lib_groupal_basic_algorithm implements lib_groupal_ialgorithm {
     /**
      * Adds a participant to the participants which need to be matched
      *
-     * @param lib_groupal_participant $participant
+     * @param mod_groupformation_participant $participant
      * @return bool
      */
-    public function add_new_participant(lib_groupal_participant $participant) {
+    public function add_new_participant(mod_groupformation_participant $participant) {
         if ($this->participants == null || in_array($participant, $this->participants)) {
             return false;
         }
@@ -132,7 +132,7 @@ class lib_groupal_basic_algorithm implements lib_groupal_ialgorithm {
      *  The main method to call for getting a formation "run" (this takes a while)
      *  Uses the global set matcher to assign evry not yet matched participant to a group
      *
-     * @return lib_groupal_cohort
+     * @return mod_groupformation_cohort
      * @throws Exception
      */
     public function do_one_formation() {

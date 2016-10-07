@@ -23,7 +23,7 @@
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/participant.php");
 
-class lib_groupal_participant_writer {
+class mod_groupformation_participant_writer {
 
     private $writer;
 
@@ -92,9 +92,9 @@ class lib_groupal_participant_writer {
     /**
      * Writes XML for a single participant
      *
-     * @param lib_groupal_participant $p
+     * @param mod_groupformation_participant $p
      */
-    private function write_participant(lib_groupal_participant $p) {
+    private function write_participant(mod_groupformation_participant $p) {
         $writer = $this->writer;
 
         $writer->startElement('participant');
@@ -121,9 +121,9 @@ class lib_groupal_participant_writer {
     /**
      * Writes XML for a single criterion
      *
-     * @param lib_groupal_criterion $c
+     * @param mod_groupformation_criterion $c
      */
-    private function write_criterion(lib_groupal_criterion $c) {
+    private function write_criterion(mod_groupformation_criterion $c) {
         $writer = $this->writer;
 
         $writer->startElement('Criterion');
@@ -166,9 +166,9 @@ class lib_groupal_participant_writer {
     /**
      * Writes XML for criterion attributes
      *
-     * @param lib_groupal_criterion $c
+     * @param mod_groupformation_criterion $c
      */
-    private function write_criterion_attributes(lib_groupal_criterion $c) {
+    private function write_criterion_attributes(mod_groupformation_criterion $c) {
         $writer = $this->writer;
         $writer->writeAttribute('name', $c->get_name());
         $writer->writeAttribute('minValue', $c->get_min_value());
@@ -198,9 +198,9 @@ class lib_groupal_participant_writer {
     /**
      * Writes XML for a single criterion type
      *
-     * @param lib_groupal_criterion $ctype
+     * @param mod_groupformation_criterion $ctype
      */
-    private function write_criterion_type(lib_groupal_criterion $ctype) {
+    private function write_criterion_type(mod_groupformation_criterion $ctype) {
         $writer = $this->writer;
         $writer->startElement('Criterion');
 

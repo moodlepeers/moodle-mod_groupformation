@@ -69,9 +69,9 @@ class mod_groupformation_participant_parser {
                     $weight = (count($labels) - 1) / 2;
                 }
 
-                $criterion = new lib_groupal_specific_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
+                $criterion = new mod_groupformation_specific_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
                 if ($position == 0) {
-                    $participant = new lib_groupal_participant (array(
+                    $participant = new mod_groupformation_participant (array(
                         $criterion), $user->id);
                 } else {
                     $participant->add_criterion($criterion);
@@ -105,7 +105,7 @@ class mod_groupformation_participant_parser {
 
             $criterion = $this->criterioncalculator->get_topic($userid);
 
-            $participant = new lib_groupal_participant (array(
+            $participant = new mod_groupformation_participant (array(
                 $criterion), $userid);
 
             $participants [$userid] = $participant;
@@ -203,7 +203,7 @@ class mod_groupformation_participant_parser {
         $starttime = microtime(true);
         $participants = array();
         foreach ($users as $userid) {
-            $participant = new lib_groupal_participant (array(), $userid);
+            $participant = new mod_groupformation_participant (array(), $userid);
             $participants [] = $participant;
         }
         $endtime = microtime(true);

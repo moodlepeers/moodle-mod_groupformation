@@ -67,25 +67,24 @@ class mod_groupformation_basic_grouping extends mod_groupformation_grouping {
 
         $groupsizes = $this->store->determine_group_size($users);
 
-        if (count($users[0]) < $numberofslices) {
-            return array();
-        }
-
-        // Divide users into n slices.
-        $slices = $this->slicing($users[0], $numberofslices);
-
         $cohorts = array();
 
-        for ($i = 0; $i < $numberofslices; $i++) {
-            $slice = $slices[$i];
+        if (count($users[0]) >= $numberofslices) {
 
-            $configurationkey = $configurationkeys[$i];
+            // Divide users into n slices.
+            $slices = $this->slicing($users[0], $numberofslices);
 
-            $rawparticipants = $this->participantparser->build_participants($slice);
+            for ($i = 0; $i < $numberofslices; $i++) {
+                $slice = $slices[$i];
 
-            $participants = $rawparticipants;
+                $configurationkey = $configurationkeys[$i];
 
-            $cohorts[$configurationkey] = $this->build_cohort($participants, $groupsizes[0], $configurationkey);
+                $rawparticipants = $this->participantparser->build_participants($slice);
+
+                $participants = $rawparticipants;
+
+                $cohorts[$configurationkey] = $this->build_cohort($participants, $groupsizes[0], $configurationkey);
+            }
         }
 
         // Handle all users with incomplete or no questionnaire submission.

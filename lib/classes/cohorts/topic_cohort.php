@@ -25,10 +25,10 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/groupal
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/group.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/cohorts/cohort.php");
 
-class lib_groupal_topic_cohort extends lib_groupal_cohort{
+class mod_groupformation_topic_cohort extends mod_groupformation_cohort{
 
     /**
-     * lib_groupal_topic_cohort constructor.
+     * mod_groupformation_topic_cohort constructor.
      * @param $numberofgroups
      * @param null $groups
      */
@@ -45,10 +45,10 @@ class lib_groupal_topic_cohort extends lib_groupal_cohort{
     /**
      * Adds a Group to this Cohort if not already a member.
      *
-     * @param $g lib_groupal_group
+     * @param $g mod_groupformation_group
      * @return boolean
      */
-    public function add_group(lib_groupal_group $g) {
+    public function add_group(mod_groupformation_group $g) {
         if (in_array($g, $this->groups)) {
             return false;
         }

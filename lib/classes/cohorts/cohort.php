@@ -24,15 +24,15 @@
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/groupal_evaluator.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/group.php");
 
-class lib_groupal_cohort {
+class mod_groupformation_cohort {
 
-    /** @var lib_groupal_ievaluator This is the evaluator instance for all cohorts */
+    /** @var mod_groupformation_ievaluator This is the evaluator instance for all cohorts */
     public static $evaluator;
 
     /** @var array This array contains all computed groups */
     public $groups;
 
-    /** @var lib_groupal_statistics This contains all statistics */
+    /** @var mod_groupformation_statistics This contains all statistics */
     public $results;
 
     /** @var string This is the class name of the used matcher */
@@ -45,7 +45,7 @@ class lib_groupal_cohort {
     public $cpi = null;
 
     /**
-     * lib_groupal_cohort constructor.
+     * mod_groupformation_cohort constructor.
      * @param $numberofgroups
      * @param null $groups
      */
@@ -58,7 +58,7 @@ class lib_groupal_cohort {
         }
 
         for ($i = count($this->groups); $i < $numberofgroups; $i++) {
-            $g = new lib_groupal_group();
+            $g = new mod_groupformation_group();
             $this->add_group($g);
         }
 
@@ -66,10 +66,10 @@ class lib_groupal_cohort {
 
     /**
      * Adds a Group to this Cohort if not already a member
-     * @param $g lib_groupal_group
+     * @param $g mod_groupformation_group
      * @return boolean
      */
-    public function add_group(lib_groupal_group $g) {
+    public function add_group(mod_groupformation_group $g) {
         if (in_array($g, $this->groups)) {
             return false;
         }
@@ -98,7 +98,7 @@ class lib_groupal_cohort {
      * adds empty Group
      */
     public function add_empty_group() {
-        $this->add_group(new lib_groupal_group());
+        $this->add_group(new mod_groupformation_group());
     }
 
     /**

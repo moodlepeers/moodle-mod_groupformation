@@ -26,13 +26,13 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/ievalua
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/group.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion.php");
 
-class lib_groupal_evaluator implements lib_groupal_ievaluator {
+class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
 
 
     private $distancefunction; // Object which implements IDistance.
 
     public function __construct() {
-        $this->distancefunction = new lib_groupal_manhattan_distance();
+        $this->distancefunction = new mod_groupformation_manhattan_distance();
     }
 
 
@@ -49,11 +49,11 @@ class lib_groupal_evaluator implements lib_groupal_ievaluator {
      *      e.g. for a Group of 3 persons with 2 heterogen Criterion each with 4 values
      *      the best posible GroupPerformanceIndex would be (3+2+1)*2*4
      *
-     * @param lib_groupal_group $group
+     * @param mod_groupformation_group $group
      * @return float|int
      */
 
-    public function evaluate_gpi(lib_groupal_group $group) {
+    public function evaluate_gpi(mod_groupformation_group $group) {
         // All Normalized paar performance indices of a Group
         $npis = array(); // Generic List: float.
 
@@ -84,10 +84,10 @@ class lib_groupal_evaluator implements lib_groupal_ievaluator {
 
 
     /**
-     * @param lib_groupal_cohort $cohort
+     * @param mod_groupformation_cohort $cohort
      * @return double
      */
-    public function evaluate_cpi(lib_groupal_cohort $cohort) {
+    public function evaluate_cpi(mod_groupformation_cohort $cohort) {
         if (count($cohort->groups) == 0) {
             return 0;
         }
@@ -104,11 +104,11 @@ class lib_groupal_evaluator implements lib_groupal_ievaluator {
 
     /**
      * @param float[] $performanceindices (generic List)
-     * @return lib_groupal_statistics
+     * @return mod_groupformation_statistics
      */
     public static function get_performance_index($performanceindices) {
         if (count($performanceindices) < 1) {
-            return new lib_groupal_statistics();
+            return new mod_groupformation_statistics();
         }
 
         // Calculate avergae of NPIs
@@ -131,7 +131,7 @@ class lib_groupal_evaluator implements lib_groupal_ievaluator {
         // Normalize stdNPIs
         $nstddev = 1 / (1 + $stddev); // float.
         $performanceindex = count($performanceindices) < 2 ? $avg : $avg * $nstddev;
-        $s = new lib_groupal_statistics();
+        $s = new mod_groupformation_statistics();
 
         $s->n = count($performanceindices);
         $s->avg = $avg;
@@ -157,13 +157,13 @@ class lib_groupal_evaluator implements lib_groupal_ievaluator {
      *              e.g. for a Group of 3 persons with 2 heterogen Criterion each with 4 values the best
      *              posible GroupPerformanceIndex would be (3+2+1)*2*4
      *
-     * @param lib_groupal_participant $p1
-     * @param lib_groupal_participant $p2
+     * @param mod_groupformation_participant $p1
+     * @param mod_groupformation_participant $p2
      * @return float
      * @throws Exception
      */
 
-    public function calc_normalized_pair_performance(lib_groupal_participant $p1, lib_groupal_participant $p2) {
+    public function calc_normalized_pair_performance(mod_groupformation_participant $p1, mod_groupformation_participant $p2) {
         // The summed distances of all hommogeneous values.
         $homval = 0.0; // float
         // The summed distances of all heterogeneous values.

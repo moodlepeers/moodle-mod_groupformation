@@ -67,7 +67,7 @@ class mod_groupformation_topic_grouping extends mod_groupformation_grouping {
 
         $cohorts = array();
 
-        lib_groupal_group::set_group_members_max_size(max($groupsizes));
+        mod_groupformation_group::set_group_members_max_size(max($groupsizes));
 
         $configurationkey = "topic:1";
 
@@ -80,7 +80,7 @@ class mod_groupformation_topic_grouping extends mod_groupformation_grouping {
 
         if (!is_null($cohort)) {
             $size = ceil((count($users [0]) + count($users [1])) / count($cohort->groups));
-            lib_groupal_group::set_group_members_max_size($size);
+            mod_groupformation_group::set_group_members_max_size($size);
 
             $max = null;
             foreach ($cohort->groups as $group) {

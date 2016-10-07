@@ -26,7 +26,7 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/cohorts/cohort.php
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/group.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/participant.php");
 
-class lib_groupal_group_centric_matcher implements lib_groupal_imatcher {
+class mod_groupformation_group_centric_matcher implements mod_groupformation_imatcher {
 
     /**
      * @param $notyetmatched
@@ -40,10 +40,10 @@ class lib_groupal_group_centric_matcher implements lib_groupal_imatcher {
         // Search the best participant for the group.
         foreach ($groups as $g) {
 
-            for ($j = 0; $j < lib_groupal_group::get_group_members_max_size(); $j++) {
+            for ($j = 0; $j < mod_groupformation_group::get_group_members_max_size(); $j++) {
                 // Loop for a max of n rounds to fill up.
                 // If the group is full then go on with the next group.
-                if (count($g->get_participants()) >= lib_groupal_group::get_group_members_max_size()) {
+                if (count($g->get_participants()) >= mod_groupformation_group::get_group_members_max_size()) {
                     break;
                 }
                 if (count($notyetmatched) == 0) {

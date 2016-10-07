@@ -23,7 +23,7 @@
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/statistics.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/groupal_evaluator.php");
 
-class lib_groupal_group {
+class mod_groupformation_group {
 
     public static $groupcount = 0; // Int.
     public static $evaluator;  // IEvaluator.
@@ -41,7 +41,7 @@ class lib_groupal_group {
 
 
     /**
-     * lib_groupal_group constructor.
+     * mod_groupformation_group constructor.
      */
     public function __construct() {
         static::$groupcount++;
@@ -84,10 +84,10 @@ class lib_groupal_group {
     /**
      * Removes an Participant from this Group and calculates the new GroupPerformanceIndex
      *
-     * @param lib_groupal_participant $p
+     * @param mod_groupformation_participant $p
      * @return bool  true if successfull
      */
-    public function remove_participant(lib_groupal_participant $p) {
+    public function remove_participant(mod_groupformation_participant $p) {
         $index = array_search($p, $this->participants);
         if ($index == false) {
             return false;
@@ -102,10 +102,10 @@ class lib_groupal_group {
     /**
      * Adds an Participant to this Group and calculates the new GroupPerformanceIndex
      *
-     * @param lib_groupal_participant $p
+     * @param mod_groupformation_participant $p
      * @return bool, true: if was succesful, otherwise false
      */
-    public function add_participant(lib_groupal_participant $p, $random = false) {
+    public function add_participant(mod_groupformation_participant $p, $random = false) {
 
         if (count($this->participants) >= static::$groupmembersmaxsize) {
             return false;

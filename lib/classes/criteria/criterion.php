@@ -21,7 +21,7 @@
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/lgpl.html GNU LGPL v3 or later
  */
-abstract class lib_groupal_criterion {
+abstract class mod_groupformation_criterion {
 
 
     /** @var string The name of an Criterion e.g. "learner style after Silvermann & Felder" */
@@ -152,7 +152,7 @@ abstract class lib_groupal_criterion {
      * @throws Exception if Criterion (this) not valid
      */
     public function get_weight() {
-        return lib_groupal_criterion_weight::get_weight($this->name);
+        return mod_groupformation_criterion_weight::get_weight($this->name);
     }
 
 }

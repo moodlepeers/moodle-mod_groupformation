@@ -29,7 +29,7 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/topics_solver/rati
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/topics_solver/edmonds-karp.php");
 
 
-class lib_groupal_topic_algorithm implements lib_groupal_ialgorithm {
+class mod_groupformation_topic_algorithm implements mod_groupformation_ialgorithm {
 
     /** @var array This array contains the ratings of all participants */
     public $ratings = array();
@@ -43,11 +43,11 @@ class lib_groupal_topic_algorithm implements lib_groupal_ialgorithm {
     /** @var int This is the number of participants */
     public $participantscount;
 
-    /** @var lib_groupal_cohort This is the resulting cohort */
+    /** @var mod_groupformation_cohort This is the resulting cohort */
     public $cohort;
 
     /**
-     * lib_groupal_topic_algorithm constructor.
+     * mod_groupformation_topic_algorithm constructor.
      * @param $topics
      * @param $participants
      */
@@ -60,7 +60,7 @@ class lib_groupal_topic_algorithm implements lib_groupal_ialgorithm {
         $this->participantscount = count($participants);
 
         foreach ($topics as $key => $value) {
-            $this->topics[] = new lib_groupal_choicedata($key, $value);
+            $this->topics[] = new mod_groupformation_choicedata($key, $value);
         }
 
         $this->ratings = $this->get_ratings_from_participants();
@@ -71,15 +71,15 @@ class lib_groupal_topic_algorithm implements lib_groupal_ialgorithm {
      * The main method to call for getting a formation "run" (this takes a while)
      * Uses the global set matcher to assign evry not yet matched participant to a group
      *
-     * @return lib_groupal_cohort
+     * @return mod_groupformation_cohort
      */
     public function do_one_formation() {
         // Run algorithm.
-        $distributor = new groupformation_solver_edmonds_karp();
+        $distributor = new mod_groupformation_solver_edmonds_karp();
         $results = $distributor->distribute_users($this->ratings, $this->topics, $this->participantscount);
         $groups = array();
         foreach (array_values($results) as $participantsids) {
-            $group = new lib_groupal_group();
+            $group = new mod_groupformation_group();
             foreach ($participantsids as $id) {
                 $p = $this->participants[$id];
                 $group->add_participant($p, true);
@@ -87,7 +87,7 @@ class lib_groupal_topic_algorithm implements lib_groupal_ialgorithm {
             $groups[] = $group;
         }
 
-        $this->cohort = new lib_groupal_topic_cohort(count($groups), $groups);
+        $this->cohort = new mod_groupformation_topic_cohort(count($groups), $groups);
         $this->cohort->whichmatcherused = get_class($this);
         return $this->cohort;
     }
@@ -108,7 +108,7 @@ class lib_groupal_topic_algorithm implements lib_groupal_ialgorithm {
                 if ($cr->get_name() == 'topic') {
                     $ratings = $cr->get_values();
                     foreach ($ratings as $choiceid => $rating) {
-                        $ratingsarray[] = new rating_for_topic($choiceid, $currentuserid, $rating);
+                        $ratingsarray[] = new mod_groupformation_rating_for_topic($choiceid, $currentuserid, $rating);
                     }
                 }
             }

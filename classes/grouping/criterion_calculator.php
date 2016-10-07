@@ -474,7 +474,7 @@ class mod_groupformation_criterion_calculator {
     public function get_topic($userid) {
         $choices = $this->usermanager->get_answers($userid, 'topic', 'questionid', 'answer');
 
-        return new lib_groupal_topic_criterion(array_keys($choices));
+        return new mod_groupformation_topic_criterion(array_keys($choices));
     }
 
     /**

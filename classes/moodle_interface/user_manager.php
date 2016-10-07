@@ -265,10 +265,10 @@ class mod_groupformation_user_manager {
             ));
         }
 
-        return $DB->count_records('groupformation_answer', array(
-            'groupformation' => $this->groupformationid,
-            'userid' => $userid
-        ));
+        return count($DB->get_records('groupformation_answer', array(
+            'groupformation' => strval($this->groupformationid),
+            'userid' => strval($userid)
+        )));
     }
 
     /**

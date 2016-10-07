@@ -23,15 +23,15 @@
  */
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/optimizers/ioptimizer.php");
 
-class lib_groupal_optimizer implements lib_groupal_ioptimizer {
+class mod_groupformation_optimizer implements mod_groupformation_ioptimizer {
 
     public $matcher;
 
-    public function __construct(lib_groupal_imatcher $matcher) {
+    public function __construct(mod_groupformation_imatcher $matcher) {
         $this->matcher = $matcher;
     }
 
-    public function optimize_cohort(lib_groupal_cohort $cohort) {
+    public function optimize_cohort(mod_groupformation_cohort $cohort) {
         // For each pair of good and bad group try to average them.
         for ($i = 0; $i < count($this->groups / 2); $i++) {
             $goodgroup = $this->groups[$i];
@@ -42,7 +42,7 @@ class lib_groupal_optimizer implements lib_groupal_ioptimizer {
     }
 
 
-    public function average_two_groups(lib_groupal_group &$goodgroup, lib_groupal_group &$badgroup) {
+    public function average_two_groups(mod_groupformation_group &$goodgroup, mod_groupformation_group &$badgroup) {
 
         if (abs($goodgroup->get_gpi() - $badgroup->get_gpi()) < 0.02) {
             return;
@@ -60,8 +60,8 @@ class lib_groupal_optimizer implements lib_groupal_ioptimizer {
         $this->shuffle($localngt);
 
         // Match the groups new.
-        $g1 = new lib_groupal_group();
-        $g2 = new lib_groupal_group();
+        $g1 = new mod_groupformation_group();
+        $g2 = new mod_groupformation_group();
 
         $newgroups = array($g1, $g2);
         $this->matcher->match_to_groups($localngt, $newgroups);

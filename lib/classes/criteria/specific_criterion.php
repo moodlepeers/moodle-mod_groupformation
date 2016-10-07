@@ -23,11 +23,11 @@
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion_weight.php");
 
-class lib_groupal_specific_criterion extends lib_groupal_criterion {
+class mod_groupformation_specific_criterion extends mod_groupformation_criterion {
 
 
     /**
-     * lib_groupal_specific_criterion constructor.
+     * mod_groupformation_specific_criterion constructor.
      * @param $name
      * @param $valuearray
      * @param $minval
@@ -41,6 +41,6 @@ class lib_groupal_specific_criterion extends lib_groupal_criterion {
         $this->set_max_value($maxval);
         $this->set_values($valuearray);
         $this->set_homogeneous($ishomo);
-        lib_groupal_criterion_weight::add_if_not_allready_exist($name, $weight);
+        mod_groupformation_criterion_weight::add_if_not_allready_exist($name, $weight);
     }
 }
