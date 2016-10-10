@@ -1,23 +1,19 @@
 <?php
-// This file is part of PHP implementation of GroupAL
-// http://sourceforge.net/projects/groupal/
+// This file is part of Moodle - http://moodle.org/
 //
-// GroupAL is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// GroupAL implementations are distributed in the hope that it will be useful,
+// Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU Lesser General Public License for more details.
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 //
-// You should have received a copy of the GNU Lesser General Public License
-// along with GroupAL. If not, see <http://www.gnu.org/licenses/>.
-//
-//  This code CAN be used as a code-base in Moodle
-// (e.g. for moodle-mod_groupformation). Then put this code in a folder
-// <moodle>\lib\groupal
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * This class contains an implementation of an distance interface which is based
  * manhattan distance
@@ -28,30 +24,34 @@
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/idistance.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion.php");
 
-class lib_groupal_manhattan_distance implements lib_groupal_idistance {
+class mod_groupformation_manhattan_distance implements mod_groupformation_idistance {
 
     /**
      * normes distance for each dimension (INTERNAL method)
-     * return max value is number of dimensions
-     * @params Criterion $c1
-     * @params Criterion $c1
+     * return max value is number of dimensions.
+     *
+     * @param mod_groupformation_criterion $cr1
+     * @param mod_groupformation_criterion $cr2
+     * @return float|number
      */
-    private function getDistance(lib_groupal_criterion $cr1, lib_groupal_criterion $cr2) {
-        $distance = 0.0; // float
-        for ($i = 0; $i < count($cr1->getValues()); $i++) {
-            $distance += abs(($cr1->getValue($i) - $cr2->getValue($i)) / $cr1->getMaxValue());
+    private function get_distance(mod_groupformation_criterion $cr1, mod_groupformation_criterion $cr2) {
+        $distance = 0.0;
+        for ($i = 0; $i < count($cr1->get_values()); $i++) {
+            $distance += abs(($cr1->get_value($i) - $cr2->get_value($i)) / $cr1->get_max_value());
         }
         return $distance;
     }
 
-    /** Both given crtieria must be of same type and same number of values
-     * @param lib_groupal_criterion $c1
-     * @param lib_groupal_criterion $c2
+    /**
+     * Both given crtieria must be of same type and same number of values.
+     *
+     * @param mod_groupformation_criterion $c1
+     * @param mod_groupformation_criterion $c2
      * @return float  in [0,1] normalized distance (divided by number of criteria values and value interval space)
      */
-    public function normalizedDistance(lib_groupal_criterion $c1, lib_groupal_criterion $c2) {
+    public function normalized_distance(mod_groupformation_criterion $c1, mod_groupformation_criterion $c2) {
 
-        $result = ($this->getDistance($c1, $c2) / count($c1->getValues()));
+        $result = ($this->get_distance($c1, $c2) / count($c1->get_values()));
         return $result;
     }
 

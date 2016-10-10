@@ -1,23 +1,19 @@
 <?php
-// This file is part of PHP implementation of GroupAL
-// http://sourceforge.net/projects/groupal/
+// This file is part of Moodle - http://moodle.org/
 //
-// GroupAL is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// GroupAL implementations are distributed in the hope that it will be useful,
+// Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU Lesser General Public License for more details.
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 //
-// You should have received a copy of the GNU Lesser General Public License
-// along with GroupAL. If not, see <http://www.gnu.org/licenses/>.
-//
-//  This code CAN be used as a code-base in Moodle
-// (e.g. for moodle-mod_groupformation). Then put this code in a folder
-// <moodle>\lib\groupal
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * This class contains an implementation of an evaluator interface which handles
  * the evaluation of groups
@@ -30,13 +26,13 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/ievalua
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/group.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion.php");
 
-class lib_groupal_evaluator implements lib_groupal_ievaluator {
+class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
 
 
-    private $distanceFunction; // Object which implements IDistance.
+    private $distancefunction; // Object which implements IDistance.
 
     public function __construct() {
-        $this->distanceFunction = new lib_groupal_manhattan_distance();
+        $this->distancefunction = new mod_groupformation_manhattan_distance();
     }
 
 
@@ -53,95 +49,95 @@ class lib_groupal_evaluator implements lib_groupal_ievaluator {
      *      e.g. for a Group of 3 persons with 2 heterogen Criterion each with 4 values
      *      the best posible GroupPerformanceIndex would be (3+2+1)*2*4
      *
-     * @return float
+     * @param mod_groupformation_group $group
+     * @return float|int
      */
 
-    public function evaluateGroupPerformanceIndex(lib_groupal_group $group) {
+    public function evaluate_gpi(mod_groupformation_group $group) {
         // All Normalized paar performance indices of a Group
-        $NPIs = array(); // Generic List: float.
+        $npis = array(); // Generic List: float.
 
         // One Normalized paar performance index of a minimal Group (two entries)
         $npi = 0.0; // float.
         $gpi = 0.0; // float.
-        $participants = $group->getParticipants();
-        $numParticipants = count($participants);
-        if ($numParticipants == 0) {
+        $participants = $group->get_participants();
+        $participantcount = count($participants);
+        if ($participantcount == 0) {
             return 0;
         }
 
         // Calculate npi for every pair of entries in the  group g (but not double and not compare with oneself!)
-        for ($i = 0; $i < $numParticipants - 1; $i++) {
-            for ($j = $i + 1; $j < $numParticipants; $j++) {
+        for ($i = 0; $i < $participantcount - 1; $i++) {
+            for ($j = $i + 1; $j < $participantcount; $j++) {
                 // Calulate normlizedPaarperformance index.
-                $npi = $this->calcNormalizedPairPerformance($participants[$i], $participants[$j]);
-                $NPIs[] = $npi;
+                $npi = $this->calc_normalized_pair_performance($participants[$i], $participants[$j]);
+                $npis[] = $npi;
             }
         }
 
-        $group->results = $this->getPerformanceIndex($NPIs);
-        $gpi = $group->results->performanceIndex;
-        $group->setGroupPerformanceIndex($gpi);
+        $group->results = $this->get_performance_index($npis);
+        $gpi = $group->results->performanceindex;
+        $group->set_gpi($gpi);
         return $gpi;
         // TODO Test functionality  (yes!); Issue #3.
     }
 
 
     /**
-     * @param lib_groupal_cohort $cohort
+     * @param mod_groupformation_cohort $cohort
      * @return double
      */
-    public function evaluateCohortPerformanceIndex(lib_groupal_cohort $cohort) {
+    public function evaluate_cpi(mod_groupformation_cohort $cohort) {
         if (count($cohort->groups) == 0) {
             return 0;
         }
-        $GPIs = array(); // Double list.
+        $gpis = array(); // Double list.
         for ($i = 0; $i < count($cohort->groups); $i++) {
-            $cohort->groups[$i]->calculateGroupPerformanceIndex();
-            $GPIs[] = $cohort->groups[$i]->getGroupPerformanceIndex();
+            $cohort->groups[$i]->calculate_gpi();
+            $gpis[] = $cohort->groups[$i]->get_gpi();
         }
-        $results = $this->getPerformanceIndex($GPIs);
+        $results = $this->get_performance_index($gpis);
         $cohort->results = $results;
-        return $results->performanceIndex;
+        return $results->performanceindex;
 
     }
 
     /**
-     * @param float[] $arrayOfPerformanceIndices (generic List)
-     * @return lib_groupal_statistics
+     * @param float[] $performanceindices (generic List)
+     * @return mod_groupformation_statistics
      */
-    public static function getPerformanceIndex($arrayOfPerformanceIndices) {
-        if (count($arrayOfPerformanceIndices) < 1) {
-            return new lib_groupal_statistics();
+    public static function get_performance_index($performanceindices) {
+        if (count($performanceindices) < 1) {
+            return new mod_groupformation_statistics();
         }
 
         // Calculate avergae of NPIs
-        $avg = ((float) array_sum($arrayOfPerformanceIndices)) / count($arrayOfPerformanceIndices); // float.
-
+        $avg = ((float)array_sum($performanceindices)) / count($performanceindices); // float.
 
         // Calculate standard deviation   (which is all diffs of elements and avg squared and finally summed up.
-        $sumOfQuadErrors = 0.0; // Double.
-        foreach ($arrayOfPerformanceIndices as $pi) {
+        $sumquadraticerrors = 0.0; // Double.
+        foreach ($performanceindices as $pi) {
             $diff = $pi - $avg;
-            $sumOfQuadErrors += pow($diff, 2);
+            $sumquadraticerrors += pow($diff, 2);
         }
 
-        $stdDev = (float) 0.0;
+        $stddev = (float)0.0;
 
         // Standard deaviation of all npi values (NPIs) in one Groups.
-        if (count($arrayOfPerformanceIndices) != 1) {
-            $stdDev = sqrt($sumOfQuadErrors) / (count($arrayOfPerformanceIndices) - 1); // Float.
+        if (count($performanceindices) != 1) {
+            $stddev = sqrt($sumquadraticerrors) / (count($performanceindices) - 1); // Float.
         }
 
         // Normalize stdNPIs
-        $nStd = 1 / (1 + $stdDev); // float.
-        $performanceIndex = count($arrayOfPerformanceIndices) < 2 ? $avg : $avg * $nStd;
-        $s = new lib_groupal_statistics();
+        $nstddev = 1 / (1 + $stddev); // float.
+        $performanceindex = count($performanceindices) < 2 ? $avg : $avg * $nstddev;
+        $s = new mod_groupformation_statistics();
 
-        $s->n = count($arrayOfPerformanceIndices);
+        $s->n = count($performanceindices);
         $s->avg = $avg;
-        $s->stDev = $stdDev;
-        $s->normStDev = $nStd;
-        $s->performanceIndex = $performanceIndex;
+        $s->stddev = $stddev;
+        $s->normstddev = $nstddev;
+        $s->performanceindex = $performanceindex;
 
         return $s;
 
@@ -160,35 +156,37 @@ class lib_groupal_evaluator implements lib_groupal_ievaluator {
      *                  (the sum of the count of each criterions values)
      *              e.g. for a Group of 3 persons with 2 heterogen Criterion each with 4 values the best
      *              posible GroupPerformanceIndex would be (3+2+1)*2*4
-     * @param lib_groupal_participant $p1
-     * @param lib_groupal_participant $p2
+     *
+     * @param mod_groupformation_participant $p1
+     * @param mod_groupformation_participant $p2
      * @return float
+     * @throws Exception
      */
 
-    public function calcNormalizedPairPerformance(lib_groupal_participant $p1, lib_groupal_participant $p2) {
-        // The summed distances of all hommogeneous values
-        $homVal = 0.0; // float
-        // The summed distances of all heterogeneous values
-        $hetVal = 0.0; // float
-        // Not normalized pairperformance index (hetVal - homVal)
-        $pairPerformanceIndex = 0; // float
+    public function calc_normalized_pair_performance(mod_groupformation_participant $p1, mod_groupformation_participant $p2) {
+        // The summed distances of all hommogeneous values.
+        $homval = 0.0; // float
+        // The summed distances of all heterogeneous values.
+        $hetval = 0.0; // float
+        // Not normalized pairperformance index (hetval - homval).
+        $pairperformanceindex = 0; // float
         $c2 = null; // Criterion for comparison
-        // Distance between two Criteria
+        // Distance between two Criteria.
         $d = 0.0; // float
-        // weighted distance
+        // weighted distance.
         $wd = 0.0; // float
-        // Normlized pair performance index
+        // Normlized pair performance index.
         $npi = 0.0; // float.
 
-        if (count($p1->getCriteria()) !== count($p2->getCriteria())) {
+        if (count($p1->get_criteria()) !== count($p2->get_criteria())) {
             throw new Exception("calcPairPerformance: the entries have different count of criteria!!!");
         }
 
-        foreach ($p1->getCriteria() as $c1) {
+        foreach ($p1->get_criteria() as $c1) {
             // Get the same Criterion of the other participant (first criterion of $p2, that matches condition same as ).
             $c2 = null;
-            foreach ($p2->getCriteria() as $cc) {
-                if ($c1->getName() == $cc->getName()) {
+            foreach ($p2->get_criteria() as $cc) {
+                if ($c1->get_name() == $cc->get_name()) {
                     $c2 = $cc;
                     break;
                 }
@@ -197,40 +195,37 @@ class lib_groupal_evaluator implements lib_groupal_ievaluator {
                 throw new Exception("code error; unreachable state reached.");
             }
 
-            // Calculate Manhattan distanze for both Criteria
-            // and normalize the distanze over the maximal amount of dimensions so evry criterion gets a value between 0 and 1
+            // Calculate Manhattan distanze for both Criteria.
+            // and normalize the distanze over the maximal amount of dimensions so evry criterion gets a value between 0 and 1.
             // (otherwise the criterion will be unthought weighted ).
 
-            $d = $this->distanceFunction->normalizedDistance($c1, $c2);
+            $d = $this->distancefunction->normalized_distance($c1, $c2);
 
-            $wd = $d * $c1->getWeight();
-            if ($c1->getIsHomogeneous()) {
-                $homVal += $wd;
-            }
-            else {
-                $hetVal += $wd;
+            $wd = $d * $c1->get_weight();
+            if ($c1->is_homogeneous()) {
+                $homval += $wd;
+            } else {
+                $hetval += $wd;
             }
         }
-        $pairPerformanceIndex = $hetVal - $homVal;
-        $maxDist = 0.0; // Float.
-        // Worst case Heterogen criteria is 0 and hom is 1 than the value for pairPerformanceIndex < 0.
-        // therfore the worst possible value for hom criteria is added to the pairPerformanceIndex: and the target
-        // set lies between 0 and 1
-        $homMaxDist = 0.0; // Float.
-        // Beacuse i normalize each distance of two criterions over their highest possible value
-        // here i neede to normalize pairPerformanceIndex by the count of the Criterions multiplied by its weight.
-        foreach ($p1->getCriteria() as $c) {
-            if ($c->getIsHomogeneous()) {
-                $homMaxDist += 1 * $c->getWeight();
+        $pairperformanceindex = $hetval - $homval;
+        $maxdist = 0.0; // Float.
+        // Worst case Heterogen criteria is 0 and hom is 1 than the value for pairperformanceindex < 0.
+        // therfore the worst possible value for hom criteria is added to the pairperformanceindex: and the target.
+        // set lies between 0 and 1.
+        $hommaxdist = 0.0; // Float.
+        // Beacuse i normalize each distance of two criterions over their highest possible value.
+        // here i neede to normalize pairperformanceindex by the count of the Criterions multiplied by its weight.
+        foreach ($p1->get_criteria() as $c) {
+            if ($c->is_homogeneous()) {
+                $hommaxdist += 1 * $c->get_weight();
             }
-            $maxDist += 1 * $c->getWeight();
+            $maxdist += 1 * $c->get_weight();
         }
 
-        $npi = ($pairPerformanceIndex + $homMaxDist) / $maxDist;
+        $npi = ($pairperformanceindex + $hommaxdist) / $maxdist;
 
         return $npi;
-
-        // TODO test functionality (oh yes!); Issue #3.
     }
 
 }

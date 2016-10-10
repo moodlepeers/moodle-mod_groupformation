@@ -98,12 +98,12 @@ class mod_groupformation_student_overview_controller {
     private function determine_view() {
         switch ($this->viewstate) {
             case -1 : // Questionnaire is available but not started yet.
-                $this->groupformationinfo =
-                    mod_groupformation_util::get_info_text_for_student(true, $this->groupformationid);
+                $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(
+                    true, $this->groupformationid);
                 $this->groupformationstateinfo = array(
                     $this->get_availability_state());
                 $pc = $this->store->ask_for_participant_code();
-                $buttoncaption = ($pc)?"questionnaire_press_to_begin_participant_code":"questionnaire_press_to_begin";
+                $buttoncaption = ($pc) ? "questionnaire_press_to_begin_participant_code" : "questionnaire_press_to_begin";
                 $this->buttonsinfo = get_string($buttoncaption, 'groupformation');
                 $this->buttonsarray = array(
                     array(
@@ -111,9 +111,10 @@ class mod_groupformation_student_overview_controller {
                         'text' => get_string("next")));
                 break;
 
-            case 0 : // Questionnaire is available, started, not finished and not submited.
-                $this->groupformationinfo =
-                    mod_groupformation_util::get_info_text_for_student(false, $this->groupformationid);
+            case 0 :
+                // Questionnaire is available, started, not finished and not submited.
+                $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(
+                    false, $this->groupformationid);
                 $this->groupformationstateinfo = array(
                     $this->get_availability_state(), get_string('questionnaire_not_submitted', 'groupformation'));
                 $this->buttonsinfo = get_string('questionnaire_press_continue_submit', 'groupformation');
@@ -128,7 +129,7 @@ class mod_groupformation_student_overview_controller {
                         'text' => get_string('edit')),
                     array(
                         'type' => 'submit', 'name' => 'begin', 'value' => '0',
-                        'state' => (($disabled)?'disabled':''),
+                        'state' => (($disabled) ? 'disabled' : ''),
                         'text' => get_string('questionnaire_submit', 'groupformation')),
                     array(
                         'type' => 'submit', 'name' => 'begin', 'value' => '-1',
@@ -137,36 +138,40 @@ class mod_groupformation_student_overview_controller {
                 );
                 break;
 
-            case 1 : // Questionnaire is submitted.
-                $this->groupformationinfo =
-                    mod_groupformation_util::get_info_text_for_student(true, $this->groupformationid);
+            case 1 :
+                // Questionnaire is submitted.
+                $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(
+                    true, $this->groupformationid);
                 $this->groupformationstateinfo = array(
                     get_string('questionnaire_submitted', 'groupformation'));
                 $this->buttonsinfo = '';
                 $this->buttonsarray = array();
                 break;
 
-            case 2 : // Groups are built.
-                $this->groupformationinfo =
-                    mod_groupformation_util::get_info_text_for_student(false, $this->groupformationid);
+            case 2 :
+                // Groups are built.
+                $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(
+                    false, $this->groupformationid);
                 $this->groupformationstateinfo = array(
                     get_string('groups_build', 'groupformation'));
                 $this->buttonsinfo = '';
                 $this->buttonsarray = array();
                 break;
 
-            case 3 : // The activity is not accessible for the student/teacher.
-                $this->groupformationinfo =
-                    mod_groupformation_util::get_info_text_for_student(false, $this->groupformationid);
+            case 3 :
+                // The activity is not accessible for the student/teacher.
+                $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(
+                    false, $this->groupformationid);
                 $this->groupformationstateinfo = array(
                     get_string('activity_visible', 'groupformation'));
                 $this->buttonsinfo = '';
                 $this->buttonsarray = array();
                 break;
 
-            case 4 : // The questionnaire is not available, but groups are not build yet.
-                $this->groupformationinfo =
-                    mod_groupformation_util::get_info_text_for_student(true, $this->groupformationid);
+            case 4 :
+                // The questionnaire is not available, but groups are not build yet.
+                $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(
+                    true, $this->groupformationid);
                 $this->groupformationstateinfo = array(
                     $this->get_availability_state());
                 $this->buttonsinfo = '';
@@ -306,9 +311,9 @@ class mod_groupformation_student_overview_controller {
             $surveyoptionsview->assign('participant_code', $this->store->ask_for_participant_code());
             $surveyoptionsview->assign('participant_code_user', $this->usermanager->get_participant_code($this->userid));
 
-            $surveyoptionsview->assign('consentheader',get_string('consent_header','groupformation'));
-            $surveyoptionsview->assign('consenttext',get_string('consent_message','groupformation'));
-            $surveyoptionsview->assign('consentvalue',$this->usermanager->get_consent($this->userid));
+            $surveyoptionsview->assign('consentheader', get_string('consent_header', 'groupformation'));
+            $surveyoptionsview->assign('consenttext', get_string('consent_message', 'groupformation'));
+            $surveyoptionsview->assign('consentvalue', $this->usermanager->get_consent($this->userid));
             $this->view->assign('student_overview_survey_options', $surveyoptionsview->load_template());
         } else {
             $this->view->assign('student_overview_survey_options', '');

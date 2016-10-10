@@ -20,6 +20,7 @@ if (!defined('MOODLE_INTERNAL')) {
 
 require_once($CFG->dirroot . '/group/lib.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
+
 /**
  * Create and allocate users to groups
  * This code is extracted out of /group/autogroup.php

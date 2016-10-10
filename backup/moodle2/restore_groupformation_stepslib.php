@@ -13,6 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * Define all the restore steps that will be used by the restore_groupformation_activity_task
  *
@@ -51,8 +52,7 @@ class restore_groupformation_activity_structure_step extends restore_activity_st
      */
     protected function process_groupformation($data) {
         global $DB;
-        $data = (object) $data;
-        $oldid = $data->id;
+        $data = (object)$data;
         $data->course = $this->get_courseid();
         if (empty($data->timecreated)) {
             $data->timecreated = time();

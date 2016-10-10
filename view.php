@@ -32,8 +32,8 @@ $id = optional_param('id', 0, PARAM_INT); // Course Module ID.
 
 $doshow = optional_param('do_show', 'view', PARAM_TEXT);
 $back = optional_param('back', 0, PARAM_INT);
-$giveconsent = optional_param('giveconsent',false,PARAM_BOOL);
-$giveparticipantcode = optional_param('giveparticipantcode',false,PARAM_BOOL);
+$giveconsent = optional_param('giveconsent', false, PARAM_BOOL);
+$giveparticipantcode = optional_param('giveparticipantcode', false, PARAM_BOOL);
 
 // Import jQuery and js file.
 groupformation_add_jquery($PAGE, 'survey_functions.js');
@@ -73,12 +73,11 @@ $PAGE->set_url('/mod/groupformation/view.php', array(
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 
-//$begin = 1;
-if ( data_submitted() && confirm_sesskey()){
-    $consent = optional_param('consent',null,PARAM_BOOL);
+if (data_submitted() && confirm_sesskey()) {
+    $consent = optional_param('consent', null, PARAM_BOOL);
     $begin = optional_param('begin', null, PARAM_INT);
     $questions = optional_param('questions', null, PARAM_BOOL);
-    $participantcode = optional_param('participantcode','',PARAM_TEXT);
+    $participantcode = optional_param('participantcode', '', PARAM_TEXT);
 }
 if (!isset ($begin)) {
     $begin = 1;
@@ -87,15 +86,13 @@ if (!isset ($begin)) {
 if ($begin == 1) {
 
     if (isset($questions) && $questions == 1 && !$back) {
-        if (isset($consent)){
+        if (isset($consent)) {
             $dbconsent = $usermanager->get_consent($userid);
-            $usermanager->set_consent($userid,true);
+            $usermanager->set_consent($userid, true);
         }
-        if (isset($participantcode) && $participantcode !== ''){
-            if ($usermanager->validate_participant_code($participantcode)){
-                $usermanager->register_participant_code($userid,$participantcode);
-            }else{
-                //die();
+        if (isset($participantcode) && $participantcode !== '') {
+            if ($usermanager->validate_participant_code($participantcode)) {
+                $usermanager->register_participant_code($userid, $participantcode);
             }
         }
         $returnurl = new moodle_url ('/mod/groupformation/questionnaire_view.php', array(
@@ -103,7 +100,7 @@ if ($begin == 1) {
 
         redirect($returnurl);
     }
-} else if ($begin == -1){
+} else if ($begin == -1) {
     $usermanager->delete_answers($userid);
     $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
         'id' => $id));
@@ -134,7 +131,7 @@ if ($giveparticipantcode) {
     echo '<div class="alert alert-danger">' . get_string('participant_code_alert_message', 'groupformation') .
         '</div>';
 }
-if (groupformation_get_current_questionnaire_version() > $store->get_version()){
+if (groupformation_get_current_questionnaire_version() > $store->get_version()) {
     echo '<div class="alert">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
 }
 if ($store->is_archived()) {
@@ -144,12 +141,12 @@ if ($store->is_archived()) {
     // Conditions to show the intro can change to look for own settings or whatever.
     if ($groupformation->intro) {
         echo $OUTPUT->box(format_module_intro('groupformation', $groupformation, $cm->id), 'generalbox mod_introbox',
-                          'groupformationintro');
+            'groupformationintro');
     }
-    
+
     echo '<form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
     echo '<input type="hidden" name="questions" value="1"/>';
-    echo '<input type="hidden" name="sesskey" value="'. sesskey(). '" />';
+    echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
 
     $controller = new mod_groupformation_student_overview_controller ($cm->id, $groupformation->id, $userid);
     echo $controller->display();

@@ -65,7 +65,7 @@ class mod_groupformation_job_manager {
 
         $next = null;
 
-        foreach ($jobs as $id => $job) {
+        foreach (array_values($jobs) as $job) {
             if ($job->timecreated != null && ($next == null || $job->timecreated < $next->timecreated)) {
                 $next = $job;
             }
@@ -231,10 +231,10 @@ class mod_groupformation_job_manager {
         $someanswers = array();
         $noorsomeanswers = array();
 
-        foreach ($enrolledstudents as $userid) {
-            if ($usermanager->is_completed($userid)) {
+        foreach (array_values($enrolledstudents) as $userid) {
+            if ($usermanager->has_answered_everything($userid)) {
                 $allanswers [] = $userid;
-            } else if ($groupingsetting && $usermanager->get_number_of_answers($userid)>0) {
+            } else if ($groupingsetting && $usermanager->get_number_of_answers($userid) > 0) {
                 $someanswers [] = $userid;
             } else {
                 $noorsomeanswers [] = $userid;
@@ -270,7 +270,6 @@ class mod_groupformation_job_manager {
 
         // Assign users.
         $users = self::get_users($groupformationid, $job, $store);
-        var_dump($users);
 
         if (is_null($users)) {
             return $cohorts;
@@ -279,7 +278,7 @@ class mod_groupformation_job_manager {
         if ($store->is_math_prep_course_mode()) {
             $sg = new mod_groupformation_scientific_grouping($job->groupformationid);
             return $sg->run_grouping($users);
-        }else if ($store->ask_for_topics()) {
+        } else if ($store->ask_for_topics()) {
             $tg = new mod_groupformation_topic_grouping($groupformationid);
             return $tg->run_grouping($users);
         } else {
@@ -305,17 +304,17 @@ class mod_groupformation_job_manager {
 
             self::delete_stats($job);
 
-            foreach ($result as $group_key => $cohort) {
+            foreach ($result as $groupkey => $cohort) {
 
-                $cohortresult = $cohort->getResult();
+                $cohortresult = $cohort->get_result();
 
-                $flags = array('group_key' => $group_key);
+                $flags = array('group_key' => $groupkey);
 
                 $idmap = self::create_groups($job, $cohortresult->groups, $flags);
 
                 self::assign_users_to_groups($job, $cohortresult->users, $idmap);
 
-                self::save_stats($job, $cohort, $group_key);
+                self::save_stats($job, $cohort, $groupkey);
             }
 
             self::set_job($job, 'done', true);
@@ -325,28 +324,28 @@ class mod_groupformation_job_manager {
 
         self::delete_stats($job);
 
-        foreach ($result as $group_key => $cohort) {
+        foreach ($result as $groupkey => $cohort) {
 
-            if (is_null($cohort)){
+            if (is_null($cohort)) {
                 continue;
             }
 
-            $cohortresult = $cohort->getResult();
+            $cohortresult = $cohort->get_result();
 
             $flags = array(
-                "groupal" => (strpos($group_key, "groupal:1")) ? 1 : 0,
-                "random" => (strpos($group_key, "random:1")) ? 1 : 0,
+                "groupal" => (strpos($groupkey, "groupal:1")) ? 1 : 0,
+                "random" => (strpos($groupkey, "random:1")) ? 1 : 0,
                 "mrandom" => 0,
                 "created" => 0,
-                "topic" => (strpos($group_key, "topic:1")) ? 1 : 0,
-                "group_key" => $group_key
+                "topic" => (strpos($groupkey, "topic:1")) ? 1 : 0,
+                "group_key" => $groupkey
             );
 
             $idmap = self::create_groups($job, $cohortresult->groups, $flags);
 
             self::assign_users_to_groups($job, $cohortresult->users, $idmap);
 
-            self::save_stats($job, $cohort, $group_key);
+            self::save_stats($job, $cohort, $groupkey);
         }
 
         self::set_job($job, 'done', true);
@@ -370,30 +369,30 @@ class mod_groupformation_job_manager {
      * Saves stats for computed job
      *
      * @param $job
-     * @param null $cohort
+     * @param mod_groupformation_cohort $cohort
      */
-    private static function save_stats($job, &$cohort = null, $group_key = null) {
+    private static function save_stats($job, $cohort = null, $groupkey = null) {
         global $DB;
 
         $record = new stdClass();
 
         $record->groupformationid = $job->groupformationid;
-        $record->group_key = $group_key;
+        $record->group_key = $groupkey;
 
-        $record->matcher_used = strval($cohort->whichMatcherUsed);
-        $record->count_groups = floatval($cohort->countOfGroups);
-        $record->performance_index = floatval($cohort->cohortPerformanceIndex);
+        $record->matcher_used = strval($cohort->whichmatcherused);
+        $record->count_groups = floatval($cohort->countofgroups);
+        $record->performance_index = floatval($cohort->cpi);
 
         $stats = $cohort->results;
 
         if (!is_null($stats)) {
-            $record->stats_avg_variance = $stats->averageVariance;
+            $record->stats_avg_variance = $stats->avgvariance;
             $record->stats_variance = $stats->variance;
             $record->stats_n = $stats->n;
             $record->stats_avg = $stats->avg;
-            $record->stats_st_dev = $stats->stDev;
-            $record->stats_norm_st_dev = $stats->normStDev;
-            $record->stats_performance_index = $stats->performanceIndex;
+            $record->stats_st_dev = $stats->stddev;
+            $record->stats_norm_st_dev = $stats->normstddev;
+            $record->stats_performance_index = $stats->performanceindex;
         }
 
         $DB->insert_record('groupformation_stats', $record);
@@ -560,8 +559,10 @@ class mod_groupformation_job_manager {
             'id' => $userid)));
         $subject = get_string('groupformation_message_subject', 'groupformation');
         $message = get_string('groupformation_message', 'groupformation');
-        $contexturl =
-            $CFG->wwwroot . '/mod/groupformation/grouping_view.php?id=' . $coursemoduleid . '&do_show=grouping';
+        $contexturl = $CFG->wwwroot;
+        $contexturl .= '/mod/groupformation/grouping_view.php?id=';
+        $contexturl .= $coursemoduleid;
+        $contexturl .= '&do_show=grouping';
         $contexturlname = get_string('groupformation_message_contexturlname', 'groupformation');
         groupformation_send_message($recipient, $subject, $message, $contexturl, $contexturlname);
 

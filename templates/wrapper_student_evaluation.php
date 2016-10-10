@@ -20,35 +20,38 @@
  */
 ?>
 <div class="gf_settings_pad">
-	<link href="js/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
     <div class="gf_pad_header"><?php echo get_string('evaluation', 'groupformation'); ?></div>
     <div class="gf_pad_content">
         <?php if ($this->_['eval_show_text']): ?>
             <?php echo $this->_['eval_text']; ?>
         <?php else: ?>
-        <div id="json-content" style="display:none;"><?php echo $this->_['json_content']; ?>
-        </div>
+            <div id="json-content" style="display:none;"><?php echo $this->_['json_content']; ?>
+            </div>
 
 
+            <div class="fluid-container">
+                <div class="row">
+                    <button type="button" class="btn btn-warning col-md-2 col-xs-2 pull-left" href="#gf-carousel"
+                            role="button" data-slide="prev">
+                        <?php echo get_string("back"); ?>
+                    </button>
+                    <button type="button" class="btn btn-warning col-md-2 col-xs-2 pull-right" href="#gf-carousel"
+                            role="button" data-slide="next">
+                        <?php echo get_string("next"); ?>
+                    </button>
+                </div>
+            </div>
 
-		<div class="fluid-container">
-			<div class="row">
-				<button type="button" class="btn btn-warning col-md-2 col-xs-2 pull-left" href="#gf-carousel" role="button" data-slide="prev">
-					<?php echo get_string("back");?>
-				</button>
-				<button type="button" class="btn btn-warning col-md-2 col-xs-2 pull-right" href="#gf-carousel" role="button" data-slide="next">
-					<?php echo get_string("next");?>
-				</button>
-			</div>
-		</div>
+            <div id="gf-carousel" class="carousel slide" data-ride="carousel" data-interval=0>
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                </div>
+            </div>
 
-		<div id="gf-carousel" class="carousel slide" data-ride="carousel" data-interval=0>
-		  	<!-- Wrapper for slides -->
-			<div class="carousel-inner" role="listbox">
-	    	</div>
-		</div>
+        <?php endif; ?>
 
-		<?php endif;?>
-
-		</div> <!-- gf_pad_content -->
+    </div> <!-- gf_pad_content -->
 </div> <!-- gf_settings_pad -->

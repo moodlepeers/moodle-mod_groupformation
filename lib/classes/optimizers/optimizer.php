@@ -1,23 +1,19 @@
 <?php
-// This file is part of PHP implementation of GroupAL
-// http://sourceforge.net/projects/groupal/
+// This file is part of Moodle - http://moodle.org/
 //
-// GroupAL is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// GroupAL implementations are distributed in the hope that it will be useful,
+// Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU Lesser General Public License for more details.
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 //
-// You should have received a copy of the GNU Lesser General Public License
-// along with GroupAL. If not, see <http://www.gnu.org/licenses/>.
-//
-//  This code CAN be used as a code-base in Moodle
-// (e.g. for moodle-mod_groupformation). Then put this code in a folder
-// <moodle>\lib\groupal
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * This class contains an implementation of an evaluator interface which handles
  * the evaluation of groups
@@ -27,72 +23,56 @@
  */
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/optimizers/ioptimizer.php");
 
-class lib_groupal_optimizer implements lib_groupal_ioptimizer {
+class mod_groupformation_optimizer implements mod_groupformation_ioptimizer {
 
     public $matcher;
 
-    public function __construct(lib_groupal_imatcher $matcher) {
+    public function __construct(mod_groupformation_imatcher $matcher) {
         $this->matcher = $matcher;
     }
 
-    public function optimizeCohort(lib_groupal_cohort $cohort) {
-        $groups = $cohort->groups;
-        // Throw new NotImplementedException("optimize if it really optimizes, not else
-        // sort cohort by group performance index.
-        try {
-            // TODO wie genau sortieren.
-        } catch (Exception $e) {
-            throw new Exception("DefaultOptimizer optimizeCohort: something seems wrong with sorting groups by their performance index value" +
-                $e->getTrace());
-        }
-
+    public function optimize_cohort(mod_groupformation_cohort $cohort) {
         // For each pair of good and bad group try to average them.
         for ($i = 0; $i < count($this->groups / 2); $i++) {
-            $goodGroup = $this->groups[$i];
-            $badGroup = $this->groups[(count($this->groups) - 1) - $i];
-            $this->averageTwoGroups($goodGroup, $badGroup);
+            $goodgroup = $this->groups[$i];
+            $badgroup = $this->groups[(count($this->groups) - 1) - $i];
+            $this->average_two_groups($goodgroup, $badgroup);
         }
-        $cohort->calculateCohortPerformanceIndex();
+        $cohort->calculate_cpi();
     }
 
 
-    public function averageTwoGroups(lib_groupal_group &$goodgroup, lib_groupal_group &$badgroup) {
-        if (abs($goodgroup->getGroupPerformanceIndex() - $badgroup->getGroupPerformanceIndex()) < 0.02) {
+    public function average_two_groups(mod_groupformation_group &$goodgroup, mod_groupformation_group &$badgroup) {
+
+        if (abs($goodgroup->get_gpi() - $badgroup->get_gpi()) < 0.02) {
             return;
         }
         // Dissolve the groups and randomize the position of participant.
-        $localNGT = array(); // List of Participants.
+        $localngt = array(); // List of Participants.
         foreach ($goodgroup->get_participants() as $p) {
-            $localNGT[] = $p;
+            $localngt[] = $p;
         }
         foreach ($badgroup->get_participants() as $p) {
-            $localNGT[] = $p;
+            $localngt[] = $p;
         }
 
         // Randomize position of entries.
-        $this->shuffle($localNGT);
+        $this->shuffle($localngt);
 
-        // match the groups new
-        $g1 = new lib_groupal_group();
-        $g2 = new lib_groupal_group();
+        // Match the groups new.
+        $g1 = new mod_groupformation_group();
+        $g2 = new mod_groupformation_group();
 
-        $newGroups = array($g1, $g2);
-        $this->matcher->matchToGroups($localNGT, $newGroups);
-        // First condition for a better PerformanceIndex: the AVGGroupPerformanceIndex raises.
-        $oldAvg = ($goodgroup->getGroupPerformanceIndex() - $badgroup->getGroupPerformanceIndex()) / 2;
-        $newAvg = ($g1->getGroupPerformanceIndex() - $g2->getGroupPerformanceIndex()) / 2;
-        $firstCondition = $newAvg > $oldAvg;
-        // Second condition for a better PerformanceIndex: the stdDiaviation gets smaller so
-        // the AVGGroupPerformanceIndex becomes more equal
-        // on the other hand the average gets just.
-        $oldStd = abs($goodgroup->getGroupPerformanceIndex() - $badgroup->getGroupPerformanceIndex());
-        $newStd = abs($g1->getGroupPerformanceIndex() - $g2->getGroupPerformanceIndex());
-        $secondCondition = $newStd < $oldStd && abs($newAvg - $oldAvg) < 0.01;
-        if ($firstCondition) {
+        $newgroups = array($g1, $g2);
+        $this->matcher->match_to_groups($localngt, $newgroups);
+        $oldavg = ($goodgroup->get_gpi() - $badgroup->get_gpi()) / 2;
+        $newavg = ($g1->get_gpi() - $g2->get_gpi()) / 2;
+        $firstcondition = $newavg > $oldavg;
+        if ($firstcondition) {
             $goodgroup->set_participants($g1->get_participants());
-            $goodgroup->setGroupPerformanceIndex($g1->getGroupPerformanceIndex());
+            $goodgroup->set_gpi($g1->get_gpi());
             $badgroup->set_participants($g2->get_participants());
-            $badgroup->setGroupPerformanceIndex($g2->getGroupPerformanceIndex());
+            $badgroup->set_gpi($g2->get_gpi());
         }
     }
 

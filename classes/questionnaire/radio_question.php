@@ -25,21 +25,15 @@ class mod_groupformation_radio_question {
     /**
      * Print HTML of radio inputs
      *
-     * @param $q
      * @param $category
-     * @param $qnumber
-     * @param $hasanswer
+     * @param $questionid
+     * @param $question
+     * @param $options
+     * @param $answer
+     * @param $highlight
      */
-    public function print_html($q, $category, $qnumber, $hasanswer, $highlight_missing_answers) {
-        $question = $q[1];
-        $options = $q[2];
-
-        $answer = -1;
-        if ($hasanswer) {
-            $answer = $q[3];
-        }
-
-        if ($answer == -1 && $highlight_missing_answers) {
+    public function print_html($category, $questionid, $question, $options, $answer, $highlight) {
+        if ($answer == -1 && $highlight) {
             echo '<tr class="noAnswer">';
         } else {
             echo '<tr>';
@@ -51,10 +45,10 @@ class mod_groupformation_radio_question {
             if ($answer == $radiocount) {
                 echo '<td data-title="' . $option .
                     '" class="radioleft select-area selected_label"><input type="radio" name="' . $category .
-                    $qnumber . '" value="' . $radiocount . '" checked="checked"/></td>';
+                    $questionid . '" value="' . $radiocount . '" checked="checked"/></td>';
             } else {
                 echo '<td data-title="' . $option . '" class="radioleft select-area"><input type="radio" name="' .
-                    $category . $qnumber . '" value="' . $radiocount . '"/></td>';
+                    $category . $questionid . '" value="' . $radiocount . '"/></td>';
             }
             $radiocount++;
         }

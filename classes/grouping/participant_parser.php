@@ -28,6 +28,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/criterion_cal
 class mod_groupformation_participant_parser {
     private $groupformationid;
     private $criterioncalculator;
+    private $usermanager;
     private $store;
     private $data;
 
@@ -38,6 +39,7 @@ class mod_groupformation_participant_parser {
     public function __construct($groupformationid) {
         $this->groupformationid = $groupformationid;
         $this->store = new mod_groupformation_storage_manager ($groupformationid);
+        $this->usermanager = new mod_groupformation_user_manager($this->groupformationid);
         $this->criterioncalculator = new mod_groupformation_criterion_calculator ($groupformationid);
         $this->data = new mod_groupformation_data();
     }
@@ -67,12 +69,12 @@ class mod_groupformation_participant_parser {
                     $weight = (count($labels) - 1) / 2;
                 }
 
-                $criterion = new lib_groupal_specific_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
+                $criterion = new mod_groupformation_specific_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
                 if ($position == 0) {
-                    $participant = new lib_groupal_participant (array(
+                    $participant = new mod_groupformation_participant (array(
                         $criterion), $user->id);
                 } else {
-                    $participant->addCriterion($criterion);
+                    $participant->add_criterion($criterion);
                 }
                 $position++;
             }
@@ -103,7 +105,7 @@ class mod_groupformation_participant_parser {
 
             $criterion = $this->criterioncalculator->get_topic($userid);
 
-            $participant = new lib_groupal_participant (array(
+            $participant = new mod_groupformation_participant (array(
                 $criterion), $userid);
 
             $participants [$userid] = $participant;
@@ -123,9 +125,10 @@ class mod_groupformation_participant_parser {
      * Builds Participants array using a parser (at the end)
      *
      * @param $users
+     * @param $specs
      * @return array
      */
-    public function build_participants($users,$specs = null) {
+    public function build_participants($users, $specs = null) {
         if (count($users) == 0) {
             return array();
         }
@@ -136,12 +139,12 @@ class mod_groupformation_participant_parser {
 
         $criteriaspecs = array();
 
-        if (is_null($specs)){
+        if (is_null($specs)) {
             $labels = $this->store->get_label_set();
             foreach ($labels as $label) {
                 $criteriaspecs[$label] = $this->data->get_criterion_specification($label);
             }
-        }else{
+        } else {
             $criteriaspecs = $specs;
         }
 
@@ -159,7 +162,10 @@ class mod_groupformation_participant_parser {
 
             foreach ($criteriaspecs as $criterion => $spec) {
                 if (in_array($scenario, $spec['scenarios'])) {
-                    $points = $this->criterioncalculator->get_values_for_user($criterion, $user, $spec);
+                    $points = array();
+                    if ($this->usermanager->has_answered_everything($user)) {
+                        $points = $this->criterioncalculator->read_values_for_user($criterion, $user, $spec);
+                    }
                     foreach ($spec['labels'] as $label => $lspec) {
                         $value = array();
                         $vs = $points[$label]["values"];
@@ -197,7 +203,7 @@ class mod_groupformation_participant_parser {
         $starttime = microtime(true);
         $participants = array();
         foreach ($users as $userid) {
-            $participant = new lib_groupal_participant (array(), $userid);
+            $participant = new mod_groupformation_participant (array(), $userid);
             $participants [] = $participant;
         }
         $endtime = microtime(true);

@@ -1,23 +1,19 @@
 <?php
-// This file is part of PHP implementation of GroupAL
-// http://sourceforge.net/projects/groupal/
+// This file is part of Moodle - http://moodle.org/
 //
-// GroupAL is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// GroupAL implementations are distributed in the hope that it will be useful,
+// Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU Lesser General Public License for more details.
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 //
-// You should have received a copy of the GNU Lesser General Public License
-// along with GroupAL. If not, see <http://www.gnu.org/licenses/>.
-//
-//  This code CAN be used as a code-base in Moodle
-// (e.g. for moodle-mod_groupformation). Then put this code in a folder
-// <moodle>\lib\groupal
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * This class contains an implementation of a topic-based group formation algorithm
  *
@@ -33,7 +29,7 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/topics_solver/rati
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/topics_solver/edmonds-karp.php");
 
 
-class lib_groupal_topic_algorithm implements lib_groupal_ialgorithm {
+class mod_groupformation_topic_algorithm implements mod_groupformation_ialgorithm {
 
     /** @var array This array contains the ratings of all participants */
     public $ratings = array();
@@ -45,26 +41,26 @@ class lib_groupal_topic_algorithm implements lib_groupal_ialgorithm {
     public $participants = array();
 
     /** @var int This is the number of participants */
-    public $participants_numb;
+    public $participantscount;
 
-    /** @var lib_groupal_cohort This is the resulting cohort */
+    /** @var mod_groupformation_cohort This is the resulting cohort */
     public $cohort;
 
     /**
-     * lib_groupal_topic_algorithm constructor.
-     * @param $_topics
-     * @param $_participants
+     * mod_groupformation_topic_algorithm constructor.
+     * @param $topics
+     * @param $participants
      */
-    public function __construct($_topics, $_participants) {
+    public function __construct($topics, $participants) {
 
-        foreach ($_participants as $p) {
-            $this->participants[$p->ID] = clone($p);
+        foreach ($participants as $p) {
+            $this->participants[$p->id] = clone($p);
         }
 
-        $this->participants_numb = count($_participants);
+        $this->participantscount = count($participants);
 
-        foreach ($_topics as $key => $value) {
-            $this->topics[] = new choicedata($key, $value);
+        foreach ($topics as $key => $value) {
+            $this->topics[] = new mod_groupformation_choicedata($key, $value);
         }
 
         $this->ratings = $this->get_ratings_from_participants();
@@ -75,24 +71,24 @@ class lib_groupal_topic_algorithm implements lib_groupal_ialgorithm {
      * The main method to call for getting a formation "run" (this takes a while)
      * Uses the global set matcher to assign evry not yet matched participant to a group
      *
-     * @return lib_groupal_cohort
+     * @return mod_groupformation_cohort
      */
     public function do_one_formation() {
         // Run algorithm.
-        $distributor = new groupformation_solver_edmonds_karp();
-        $results = $distributor->distribute_users($this->ratings, $this->topics, $this->participants_numb);
+        $distributor = new mod_groupformation_solver_edmonds_karp();
+        $results = $distributor->distribute_users($this->ratings, $this->topics, $this->participantscount);
         $groups = array();
-        foreach ($results as $topic_id => $participants_ids) {
-            $group = new lib_groupal_group();
-            foreach ($participants_ids as $id) {
+        foreach (array_values($results) as $participantsids) {
+            $group = new mod_groupformation_group();
+            foreach ($participantsids as $id) {
                 $p = $this->participants[$id];
-                $group->addParticipant($p, true);
+                $group->add_participant($p, true);
             }
             $groups[] = $group;
         }
 
-        $this->cohort = new lib_groupal_topic_cohort(count($groups), $groups);
-        $this->cohort->whichMatcherUsed = get_class($this);
+        $this->cohort = new mod_groupformation_topic_cohort(count($groups), $groups);
+        $this->cohort->whichmatcherused = get_class($this);
         return $this->cohort;
     }
 
@@ -103,22 +99,22 @@ class lib_groupal_topic_algorithm implements lib_groupal_ialgorithm {
      */
     private function get_ratings_from_participants() {
 
-        $ratings_array = array();
+        $ratingsarray = array();
 
         // TODO Participant with just topics as criterions? can the values of criterion be empty?
-        foreach ($this->participants as $key => $user) {
-            $current_user_id = $user->ID;
+        foreach (array_values($this->participants) as $user) {
+            $currentuserid = $user->id;
             foreach ($user->criteria as $cr) {
-                if ($cr->getName() == 'topic') {
-                    $ratings = $cr->getValues();
-                    foreach ($ratings as $choice_id => $rating) {
-                        $ratings_array[] = new rating_for_topic($choice_id, $current_user_id, $rating);
+                if ($cr->get_name() == 'topic') {
+                    $ratings = $cr->get_values();
+                    foreach ($ratings as $choiceid => $rating) {
+                        $ratingsarray[] = new mod_groupformation_rating_for_topic($choiceid, $currentuserid, $rating);
                     }
                 }
             }
         }
 
-        return $ratings_array;  // Array with all ratings.
+        return $ratingsarray;  // Array with all ratings.
 
     }
 

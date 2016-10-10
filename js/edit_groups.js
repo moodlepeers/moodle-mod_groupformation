@@ -1,10 +1,12 @@
+/**
+ * moodle-mod_groupformation JavaScript
+ * https://github.com/jkonert/moodle-mod_groupformation
+ *
+ *
+ * @author Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 $(document).ready(function () {
-
-    /*
-     edit student groups page
-     */
-
-    //form actions: preventDefault, collect data and build string with groups, submit form
 
     $('#submit_groups').on('click', function(e){
         e.preventDefault();
@@ -29,9 +31,6 @@ $(document).ready(function () {
 
     });
 
-
-    /*sticky settings block*/
-
     function sticky_relocate() {
         var window_top = $(window).scrollTop();
         var div_top = $('#sticky-anchor').offset().top;
@@ -54,13 +53,7 @@ $(document).ready(function () {
         sticky_relocate();
     });
 
-
-    /*edit groups functions*/
-
     var edit_group_id = '';
-
-
-    /*activate group to add members*/
 
     $(".add_membs_block").click(function(){
 
@@ -81,12 +74,6 @@ $(document).ready(function () {
             edit_group_id = temp_id;
         }
     });
-
-
-
-
-
-    /*select members*/
 
     $('ul.memb_list').on('click', 'li', function(){
         var memb_id = $(this).attr('id');
@@ -109,9 +96,6 @@ $(document).ready(function () {
         count_members();
     });
 
-
-    /*add members to group*/
-
     $('ul.selected_memb_list').on('click', 'li', function(){
 
         var selected_memb_id = $(this).attr('id').substr(9);
@@ -124,16 +108,12 @@ $(document).ready(function () {
 
     });
 
-
-    /*unselect all members*/
-
     $('#unselect_all').click(function(){
         $('ul.selected_memb_list li').remove();
         $('.memb_selected').removeClass('memb_selected');
         $('#memb_counter').html(0 + ' ');
         count_members();
     });
-
 
     function addMembToGroup(memb_id){
 
@@ -143,9 +123,6 @@ $(document).ready(function () {
         $(the_member).insertBefore($('.gf_pad_content').find('#' + edit_group_id).find('li:last-child'));
         count_members();
     }
-
-
-    /*counting selected members*/
 
     function count_members(){
         var sel_counter = $('ul.selected_memb_list li').length;
@@ -162,6 +139,5 @@ $(document).ready(function () {
     };
 
     count_members();
-
 
 });

@@ -21,10 +21,10 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
-$plugin->version = 2016090700;
+$plugin->version = 2016100800;
 $plugin->requires = 2015050500;
 $plugin->cron = 0;
 $plugin->component = 'mod_groupformation';
 $plugin->maturity = MATURITY_BETA;
-$plugin->release = 'v1.1-b';
+$plugin->release = 'v1.2-b';
 $plugin->dependencies = array();

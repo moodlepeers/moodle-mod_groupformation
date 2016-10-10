@@ -47,8 +47,6 @@ class mod_groupformation_analysis_controller {
     private $activitytime;
     private $starttime;
     private $endtime;
-    private $timenow;
-    private $test;
     private $state;
 
     /**
@@ -70,19 +68,17 @@ class mod_groupformation_analysis_controller {
      *
      * @param $switcher
      */
-    public function trigger_questionnaire($switcher){
+    public function trigger_questionnaire($switcher) {
 
-        switch($switcher){
-            /**
-             * Sets start time of questionnaire to now
-             */
-            case 1: $this->store->open_questionnaire();
+        switch ($switcher) {
+            // Sets start time of questionnaire to now.
+            case 1:
+                $this->store->open_questionnaire();
                 break;
 
-            /**
-             * Sets end time of questionnaire to now
-             */
-            case -1: $this->store->close_questionnaire();
+            // Sets end time of questionnaire to now.
+            case -1:
+                $this->store->close_questionnaire();
                 break;
         }
     }
@@ -93,54 +89,52 @@ class mod_groupformation_analysis_controller {
      * @return string
      */
     private function load_status() {
-        $statusanalysisview = new mod_groupformation_template_builder();
-        $statusanalysisview->set_template('analysis_status');
 
         $this->activitytime = $this->store->get_time();
 
+        $this->starttime = $this->activitytime ['start'];
         if (intval($this->activitytime ['start_raw']) == 0) {
             $this->starttime = get_string('no_time', 'groupformation');
-        } else {
-            $this->starttime = $this->activitytime ['start'];
         }
 
+        $this->endtime = $this->activitytime ['end'];
         if (intval($this->activitytime ['end_raw']) == 0) {
             $this->endtime = get_string('no_time', 'groupformation');
-        } else {
-            $this->endtime = $this->activitytime ['end'];
         }
 
-        $buttonvalue = ($this->questionnaireavailable) ? -1 : 1;
-        $buttoncaption = ($this->questionnaireavailable) ?
-            get_string('activity_end', 'groupformation') : get_string('activity_start', 'groupformation');
-        $buttondisabled = ($this->jobstate !== "ready") ? "disabled" : "";
+        $buttoncaption = get_string('activity_start', 'groupformation');
+        if ($this->questionnaireavailable) {
+            $buttoncaption = get_string('activity_end', 'groupformation');
+        }
 
-        $statusanalysisview->assign('button', array(
-            'type' => 'submit', 'name' => 'questionnaire_switcher', 'value' => $buttonvalue, 'state' => $buttondisabled,
-            'text' => $buttoncaption));
+        $buttondisabled = "";
+        if ($this->jobstate !== "ready") {
+            $buttondisabled = "disabled";
+        }
 
-        $infoteacher = mod_groupformation_util::get_info_text_for_teacher(false, "analysis");
+        $buttonvalue = 1;
+        if ($this->questionnaireavailable) {
+            $buttonvalue = -1;
+        }
 
-        $statusanalysisview->assign('info_teacher', $infoteacher);
+        $statusanalysisview = new mod_groupformation_template_builder();
+        $statusanalysisview->set_template('analysis_status');
+        $statusanalysisview->assign('button',
+            array(
+                'type' => 'submit',
+                'name' => 'questionnaire_switcher',
+                'value' => $buttonvalue,
+                'state' => $buttondisabled,
+                'text' => $buttoncaption
+            )
+        );
+        $statusanalysisview->assign('info_teacher',
+            mod_groupformation_util::get_info_text_for_teacher(false, "analysis"));
         $statusanalysisview->assign('analysis_time_start', $this->starttime);
         $statusanalysisview->assign('analysis_time_end', $this->endtime);
-
-        switch ($this->state) {
-            case 1 :
-                $statusanalysisview->assign('analysis_status_info', get_string('analysis_status_info0', 'groupformation'));
-                break;
-            case 2 :
-                $statusanalysisview->assign('analysis_status_info', get_string('analysis_status_info1', 'groupformation'));
-                break;
-            case 3 :
-                $statusanalysisview->assign('analysis_status_info', get_string('analysis_status_info2', 'groupformation'));
-                break;
-            case 4 :
-                $statusanalysisview->assign('analysis_status_info', get_string('analysis_status_info4', 'groupformation'));
-                break;
-            default :
-                $statusanalysisview->assign('analysis_status_info', get_string('analysis_status_info3', 'groupformation'));
-        }
+        $statusanalysisview->assign('analysis_status_info',
+            get_string('analysis_status_info'.strval($this->state), 'groupformation')
+        );
 
         return $statusanalysisview->load_template();
     }
@@ -154,10 +148,6 @@ class mod_groupformation_analysis_controller {
 
         $usermanager = $this->usermanager;
         $stats = array();
-
-        $context = groupformation_get_context($this->groupformationid);
-        $students = get_enrolled_users($context, 'mod/groupformation:onlystudent');
-        $studentcount = count($students);
 
         $studentcount = count(mod_groupformation_util::get_users($this->groupformationid));
 
@@ -174,14 +164,9 @@ class mod_groupformation_analysis_controller {
         $stats [] = $completedcount;
 
         $nomissinganswers = $usermanager->get_completed_by_answer_count();
-        $nomissinganswerscount = count($nomissinganswers);
+        $nomissingcount = count($nomissinganswers);
 
-        $stats [] = $nomissinganswerscount;
-
-        $missinganswers = $usermanager->get_not_completed_but_submitted();
-        $missinganswerscount = count($missinganswers);
-
-        $stats [] = $missinganswerscount;
+        $stats [] = $nomissingcount;
 
         return $stats;
     }
@@ -192,22 +177,18 @@ class mod_groupformation_analysis_controller {
      * @return string
      */
     private function load_statistics() {
-        global $PAGE;
 
         $questionnairestats = $this->get_infos($this->groupformationid);
 
-        $statisticsanalysisview = new mod_groupformation_template_builder();
-        $statisticsanalysisview->set_template('analysis_statistics');
-        $context = $PAGE->context;
-        $count = count(get_enrolled_users($context, 'mod/groupformation:onlystudent'));
+        $statsanalysisview = new mod_groupformation_template_builder();
+        $statsanalysisview->set_template('analysis_statistics');
 
-        $statisticsanalysisview->assign('statistics_enrolled', $questionnairestats [0]);
-        $statisticsanalysisview->assign('statistics_processed', $questionnairestats [1]);
-        $statisticsanalysisview->assign('statistics_submited', $questionnairestats [2]);
-        $statisticsanalysisview->assign('statistics_submited_incomplete', $questionnairestats [4]);
-        $statisticsanalysisview->assign('statistics_submited_complete', $questionnairestats [3]);
+        $statsanalysisview->assign('statistics_enrolled', $questionnairestats [0]);
+        $statsanalysisview->assign('statistics_processed', $questionnairestats [1]);
+        $statsanalysisview->assign('statistics_submitted', $questionnairestats [2]);
+        $statsanalysisview->assign('statistics_submitted_complete', $questionnairestats [3]);
 
-        return $statisticsanalysisview->load_template();
+        return $statsanalysisview->load_template();
     }
 
     /**
@@ -228,7 +209,6 @@ class mod_groupformation_analysis_controller {
      * Determine status variables
      */
     public function determine_status() {
-        global $DB;
         $this->questionnaireavailable = $this->store->is_questionnaire_available();
         $this->state = 1;
         $job = mod_groupformation_job_manager::get_job($this->groupformationid);
@@ -250,28 +230,61 @@ class mod_groupformation_analysis_controller {
     }
 
     /** hot fix for answers */
-    public function fix_answers(){
+    public function fix_answers() {
         global $DB;
 
         $answers = $DB->get_records('groupformation_answer',
-            array('groupformation'=>$this->groupformationid, 'category'=>'srl')
+            array('groupformation' => $this->groupformationid, 'category' => 'srl')
         );
 
-        $map = array(1=>63,2=>64,3=>65,4=>66,5=>67,6=>68,7=>69,8=>70,9=>71,10=>72,11=>73,12=>74,13=>75,14=>76,15=>77,16=>78,17=>79,18=>80,19=>81,20=>82,21=>83,22=>84,23=>85,24=>86,25=>87,26=>88);
+        $map = array(
+            1 => 63,
+            2 => 64,
+            3 => 65,
+            4 => 66,
+            5 => 67,
+            6 => 68,
+            7 => 69,
+            8 => 70,
+            9 => 71,
+            10 => 72,
+            11 => 73,
+            12 => 74,
+            13 => 75,
+            14 => 76,
+            15 => 77,
+            16 => 78,
+            17 => 79,
+            18 => 80,
+            19 => 81,
+            20 => 82,
+            21 => 83,
+            22 => 84,
+            23 => 85,
+            24 => 86,
+            25 => 87,
+            26 => 88
+        );
 
-        foreach ($answers as $answer){
-            if (intval($answer->questionid) <= 26){
+        foreach ($answers as $answer) {
+            if (intval($answer->questionid) <= 26) {
                 $qid = $map[$answer->questionid];
                 if ($DB->record_exists('groupformation_answer',
-                    array('groupformation'=>$this->groupformationid, 'category'=>'srl','userid'=>$answer->userid,'questionid'=>$qid))){
+                    array('groupformation' => $this->groupformationid,
+                        'category' => 'srl',
+                        'userid' => $answer->userid,
+                        'questionid' => $qid))
+                ) {
                     $DB->delete_records('groupformation_answer',
-                        array('groupformation'=>$this->groupformationid, 'category'=>'srl','userid'=>$answer->userid,'questionid'=>$answer->questionid));
-                }else{
+                        array('groupformation' => $this->groupformationid,
+                            'category' => 'srl',
+                            'userid' => $answer->userid,
+                            'questionid' => $answer->questionid)
+                    );
+                } else {
                     $answer->questionid = $qid;
-                    $DB->update_record('groupformation_answer',$answer,true);
+                    $DB->update_record('groupformation_answer', $answer, true);
                 }
-            }elseif (intval($answer->questionid) <= 63){
-
             }
         }
     }

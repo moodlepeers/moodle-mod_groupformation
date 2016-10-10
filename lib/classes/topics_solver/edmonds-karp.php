@@ -1,23 +1,18 @@
 <?php
-// This file is part of PHP implementation of GroupAL
-// http://sourceforge.net/projects/groupal/
+// This file is part of Moodle - http://moodle.org/
 //
-// GroupAL is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// GroupAL implementations are distributed in the hope that it will be useful,
+// Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU Lesser General Public License for more details.
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 //
-// You should have received a copy of the GNU Lesser General Public License
-// along with GroupAL. If not, see <http://www.gnu.org/licenses/>.
-//
-//  This code CAN be used as a code-base in Moodle
-// (e.g. for moodle-mod_groupformation). Then put this code in a folder
-// <moodle>\lib\groupal
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
  *
@@ -33,7 +28,7 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/topics_solver/solver-template.php');
 
-class groupformation_solver_edmonds_karp extends topic_distributor {
+class mod_groupformation_solver_edmonds_karp extends mod_groupformation_topic_distributor {
 
     public function get_name() {
         return 'edmonds_karp';
@@ -43,7 +38,7 @@ class groupformation_solver_edmonds_karp extends topic_distributor {
 
         $choicedata = array();
         foreach ($choicerecords as $record) {
-            $choicedata[$record->getId()] = $record;
+            $choicedata[$record->get_id()] = $record;
         }
 
         $choicecount = count($choicedata);
@@ -89,8 +84,7 @@ class groupformation_solver_edmonds_karp extends topic_distributor {
         for ($i = 0; $i < $count; $i++) { // for each vertex v in vertices:
             if ($i == $from) {  // If v is source then weight[v] := 0 .
                 $dists[$i] = 0;
-            }
-            else {    // Else weight[v] := infinity .
+            } else {    // Else weight[v] := infinity .
                 $dists[$i] = INF;
             }
             $preds[$i] = null; // Predecessor[v] := null .
@@ -99,10 +93,9 @@ class groupformation_solver_edmonds_karp extends topic_distributor {
         // Step 2: relax edges repeatedly
         for ($i = 0; $i < $count; $i++) { // For i from 1 to size(vertices)-1 .
             $updatedsomething = false;
-            foreach ($this->graph as $key => $edges) { // For each edge (u, v) with weight w in edges .
+            foreach (array_values($this->graph) as $edges) { // For each edge (u, v) with weight w in edges .
                 if (is_array($edges)) {
-                    foreach ($edges as $key2 => $edge) {
-                        /* @var $edge topic_edge */
+                    foreach (array_values($edges) as $edge) {
                         if ($dists[$edge->from] + $edge->weight < $dists[$edge->to]) { // If weight[u] + w < weight[v] .
                             $dists[$edge->to] = $dists[$edge->from] + $edge->weight; // Weight[v] := weight[u] + w .
                             $preds[$edge->to] = $edge->from; // Predecessor[v] := u .
@@ -115,18 +108,6 @@ class groupformation_solver_edmonds_karp extends topic_distributor {
                 break; // Leave.
             }
         }
-
-        // Step 3: check for negative-weight cycles
-        /*foreach ($graph as $key => $edges) { // for each edge (u, v) with weight w in edges:
-            if (is_array($edges)) {
-                foreach ($edges as $key2 => $edge) {
-
-                    if ($dists[$edge->to] + $edge->weight < $dists[$edge->to]) { // if weight[u] + w < weight[v]:
-                        print_error('negative_cycle', 'ratingallocate');
-                    }
-                }
-            }
-        }*/
 
         // If there is no path to $to, return null.
         if (is_null($preds[$to])) {

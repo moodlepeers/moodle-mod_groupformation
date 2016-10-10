@@ -57,7 +57,7 @@ $store = new mod_groupformation_storage_manager ($groupformation->id);
 
 // Set data and viewStatus of groupingView, after possible db update.
 $controller = new mod_groupformation_grouping_controller ($groupformation->id, $cm);
-if ( (data_submitted()) && confirm_sesskey()){
+if ((data_submitted()) && confirm_sesskey()) {
     $start = optional_param('start', null, PARAM_BOOL);
     $abort = optional_param('abort', null, PARAM_BOOL);
     $adopt = optional_param('adopt', null, PARAM_BOOL);
@@ -66,44 +66,19 @@ if ( (data_submitted()) && confirm_sesskey()){
 
     if (isset ($start) && $start == 1) {
         $controller->start($course, $cm);
-    }
-    else if (isset ($abort) && $abort == 1) {
+    } else if (isset ($abort) && $abort == 1) {
         $controller->abort();
-    }
-    else if (isset ($adopt) && $adopt == 1) {
+    } else if (isset ($adopt) && $adopt == 1) {
         $controller->adopt();
-    }
-    else if (isset ($edit) && $edit == 1) {
+    } else if (isset ($edit) && $edit == 1) {
         $controller->edit($cm);
-    }
-    else if (isset ($delete) && $delete == 1) {
+    } else if (isset ($delete) && $delete == 1) {
         $controller->delete();
     }
     $returnurl = new moodle_url ('/mod/groupformation/grouping_view.php', array(
         'id' => $id, 'do_show' => 'grouping'));
     redirect($returnurl);
 }
-//if ($_POST) {
-//    if (isset ($_POST ['start'])) {
-//        $controller->start($course, $cm);
-//        unset ($_POST ['start']);
-//    } else if (isset ($_POST ['abort'])) {
-//        $controller->abort();
-//        unset ($_POST ['abort']);
-//    } else if (isset ($_POST ['adopt'])) {
-//        $controller->adopt();
-//        unset ($_POST ['adopt']);
-//    } else if (isset ($_POST ['edit'])) {
-//        $controller->edit($cm);
-//        unset ($_POST ['adopt']);
-//    } else if (isset ($_POST ['delete'])) {
-//        $controller->delete();
-//        unset ($_POST ['delete']);
-//    }
-//    $returnurl = new moodle_url ('/mod/groupformation/grouping_view.php', array(
-//        'id' => $id, 'do_show' => 'grouping'));
-//    redirect($returnurl);
-//}
 
 // Log access to page.
 groupformation_info($USER->id, $groupformation->id, '<view_teacher_grouping>');
@@ -118,7 +93,7 @@ echo $OUTPUT->header();
 
 // Print the tabs.
 require('tabs.php');
-if (groupformation_get_current_questionnaire_version() > $store->get_version()){
+if (groupformation_get_current_questionnaire_version() > $store->get_version()) {
     echo '<div class="alert">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
 }
 if ($store->is_archived() && has_capability('mod/groupformation:editsettings', $context)) {
@@ -129,7 +104,7 @@ if ($store->is_archived() && has_capability('mod/groupformation:editsettings', $
     echo '<form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
 
     echo '<input type="hidden" name="id" value="' . $id . '"/>';
-    echo '<input type="hidden" name="sesskey" value="'.sesskey().'" />';
+    echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
 
     echo $controller->display();
 

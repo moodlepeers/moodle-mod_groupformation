@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -8,26 +8,25 @@
 //
 // Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle. If not, see <http://www.gnu.org/licenses/>.
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
- * German strings for module
  *
  * @package mod_groupformation
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- *
  */
-defined('MOODLE_INTERNAL') || die ();
 
 $string ['language'] = 'de';
 $string ['modulename'] = 'Gruppenformation';
 $string ['modulenameplural'] = 'Gruppenformationen';
 $string ['modulename_help'] = 'Erlaubt die automatische Erstellung von (Lern)-Gruppen Ihrer Teilnehmenden. Basierend auf Fragebogen-Antworten werden die Gruppen(zusammenstellungen) optimiert.';
 $string ['beta_version'] = '';
+$string ['groupformation:addinstance'] = 'Gruppenformation hinzufügen';
 $string ['password_wrong'] = 'Das eingegebene Passwort ist falsch';
 $string ['groupformationname'] = 'Name der Gruppenformation';
 $string ['groupformationname_help'] = 'Dieser Titel wird auf der Kursseite angezeigt.';
@@ -246,10 +245,10 @@ $string['jobget_name'] = 'Gruppenbildung und Aufräumen';
 $string['no_time'] = 'Kein Zeitpunkt festgelegt';
 $string['activity_end'] = 'Aktivität beenden';
 $string['activity_start'] = 'Aktivität starten';
-$string['analysis_status_info0'] = 'Sie müssen die Aktivität beenden, bevor sie Gruppen bilden können.';
-$string['analysis_status_info1'] = 'Sie müssen die Aktivität starten, damit Studierende den Fragebogen beantworten können.';
-$string['analysis_status_info2'] = 'Die Gruppenbildung wurde bereits angestoßen bzw. durchgeführt. Die Aktivität kann nicht mehr gestartet werden.';
-$string['analysis_status_info3'] = 'Sie können die Aktivität starten oder beenden.';
+$string['analysis_status_info1'] = 'Sie müssen die Aktivität beenden, bevor sie Gruppen bilden können.';
+$string['analysis_status_info2'] = 'Sie müssen die Aktivität starten, damit Studierende den Fragebogen beantworten können.';
+$string['analysis_status_info3'] = 'Die Gruppenbildung wurde bereits angestoßen bzw. durchgeführt. Die Aktivität kann nicht mehr gestartet werden.';
+$string['analysis_status_info0'] = 'Sie können die Aktivität starten oder beenden.';
 $string['analysis_status_info4'] = 'Sie können die Gruppenbildung jetzt starten.';
 $string['contact_members'] = 'Um deine Gruppenmitglieder zu kontaktieren, klicke auf deren Profilnamen.';
 $string['invalid'] = 'Ungültiger Zustand';
@@ -322,14 +321,14 @@ $string['archive_activity_task'] = 'Archivierung alter Aktivitäten';
 $string['archived_activity_answers'] = 'Die Aktitivät ist archiviert worden. Ihre Antworten sind nicht mehr gespeichert und es ist keine Interaktion mehr möglich.';
 $string['archived_activity_admin'] = 'Die Aktitivät ist archiviert worden. Es ist keine Interaktion mehr möglich.';
 
-$string['students_selected']='Teilnehmer ausgewählt';
-$string['drop_selection']='Selektion aufheben';
+$string['students_selected'] = 'Teilnehmer ausgewählt';
+$string['drop_selection'] = 'Selektion aufheben';
 
 $string['no_evaluation_text'] = 'Es gibt für diese Aktivität keine Auswertung.';
 $string['no_evaluation_ready'] = 'Es gibt keine Auswertung, da nicht alle Fragen beantwortet wurden. Erst wenn alle Fragen beantwortet wurden, gibt eine Auswertung ihrer Antworten';
 $string['eval_final_text'] = 'Die Vergleichswerte basieren auf derzeit {$a->percent}% gegebener Antworten ({$a->completed} von {$a->coursesize} Personen haben bisher geantwortet).';
 
-$string['eval_first_page_title']="Allgemeine Informationen";
+$string['eval_first_page_title'] = "Allgemeine Informationen";
 $string['eval_first_page_text'] = "Sie erhalten nun eine individuelle Rückmeldung auf die Antworten, die Sie im Fragebogen gegeben haben. Dabei werden jeweils mehrere Antworten, die sich auf dasselbe Thema beziehen, zu einem Mittelwert zusammengefasst und mit einer Vergleichsstichprobe anderer Studierender verglichen. Daraus wird ein sogenannter Prozentrang berechnet; dieser bewertet nicht, ob eine Eigenschaft gut oder schlecht ist, sondern nur, wie häufig solche Werte unter Studierenden vorkommen. Ein Prozentrang von 10 bedeutet, dass 10% der Vergleichsstichprobe ein gleiches oder kleineres Ergebnis hatten; ein Prozentrang von 90 hingegen bedeutet, dass 90% der Vergleichsstichprobe ein gleiches oder kleineres Ergebnis hatten.
 \\n\\n
 Zunächst erhalten Sie Rückmeldung zu fünf Persönlichkeitseigenschaften, die als relativ stabil, das heißt unabhängig von bestimmten Situationen, betrachtet werden können: Extraversion, Neurotizismus, Gewissenhaftigkeit, soziale Verträglichkeit und Offenheit für Erfahrungen.
@@ -339,87 +338,87 @@ Anschließend erhalten Sie Rückmeldung zu vier Dimensionen von Motivation, die 
 $string['eval_name_big5'] = 'Persönlichkeit';
 $string['eval_name_fam'] = 'Motivation';
 
-$string['eval_max_caption_neurotizismus']='emotional stabil';
-$string['eval_min_caption_neurotizismus']='emotional labil';
-$string['eval_max_caption_extraversion']='extravertiert';
-$string['eval_min_caption_extraversion']='introvertiert';
-$string['eval_max_caption_gewissenhaftigkeit']='gewissenhaft';
-$string['eval_min_caption_gewissenhaftigkeit']='nachlässig';
-$string['eval_max_caption_vertraeglichkeit']='verträglich';
-$string['eval_min_caption_vertraeglichkeit']='kompetitiv';
-$string['eval_max_caption_offenheit']='offen';
-$string['eval_min_caption_offenheit']='konservativ';
-$string['eval_cutoff_caption_extraversion']='Extraversion';
-$string['eval_cutoff_caption_neurotizismus']='Neurotizismus';
-$string['eval_cutoff_caption_gewissenhaftigkeit']='Gewissenhaftigkeit';
-$string['eval_cutoff_caption_vertraeglichkeit']='Soziale Verträglichkeit';
-$string['eval_cutoff_caption_offenheit']='Offenheit für Erfahrung';
+$string['eval_max_caption_neurotizismus'] = 'emotional stabil';
+$string['eval_min_caption_neurotizismus'] = 'emotional labil';
+$string['eval_max_caption_extraversion'] = 'extravertiert';
+$string['eval_min_caption_extraversion'] = 'introvertiert';
+$string['eval_max_caption_gewissenhaftigkeit'] = 'gewissenhaft';
+$string['eval_min_caption_gewissenhaftigkeit'] = 'nachlässig';
+$string['eval_max_caption_vertraeglichkeit'] = 'verträglich';
+$string['eval_min_caption_vertraeglichkeit'] = 'kompetitiv';
+$string['eval_max_caption_offenheit'] = 'offen';
+$string['eval_min_caption_offenheit'] = 'konservativ';
+$string['eval_cutoff_caption_extraversion'] = 'Extraversion';
+$string['eval_cutoff_caption_neurotizismus'] = 'Neurotizismus';
+$string['eval_cutoff_caption_gewissenhaftigkeit'] = 'Gewissenhaftigkeit';
+$string['eval_cutoff_caption_vertraeglichkeit'] = 'Soziale Verträglichkeit';
+$string['eval_cutoff_caption_offenheit'] = 'Offenheit für Erfahrung';
 
-$string['eval_max_text_extraversion']='Introversion und Extraversion sind zwei Pole einer Persönlichkeitseigenschaft, die durch die Interaktion mit der Umwelt charakterisiert wird. Introversion bezeichnet dabei eine nach innen, Extraversion eine nach außen gewandte Haltung.';
-$string['eval_min_text_extraversion']='Introversion und Extraversion sind zwei Pole einer Persönlichkeitseigenschaft, die durch die Interaktion mit der Umwelt charakterisiert wird. Introversion bezeichnet dabei eine nach innen, Extraversion eine nach außen gewandte Haltung.';
-$string['eval_max_text_neurotizismus']='Der Persönlichkeitsfaktor „Neurotizismus“ spiegelt individuelle Unterschiede im Erleben von negativen Emotionen wider und wird auch als emotionale Labilität bezeichnet. Der Gegenpol wird auch als emotionale Stabilität bezeichnet.';
-$string['eval_min_text_neurotizismus']='Der Persönlichkeitsfaktor „Neurotizismus“ spiegelt individuelle Unterschiede im Erleben von negativen Emotionen wider und wird auch als emotionale Labilität bezeichnet. Der Gegenpol wird auch als emotionale Stabilität bezeichnet.';
-$string['eval_max_text_gewissenhaftigkeit']='Der Faktor „Gewissenhaftigkeit“ beschreibt in erster Linie den Grad an Selbstkontrolle, Genauigkeit und Zielstrebigkeit.';
-$string['eval_min_text_gewissenhaftigkeit']='Der Faktor „Gewissenhaftigkeit“ beschreibt in erster Linie den Grad an Selbstkontrolle, Genauigkeit und Zielstrebigkeit.';
-$string['eval_max_text_vertraeglichkeit']='Soziale Verträglichkeit bezieht sich auf das Verhalten gegenüber anderen Menschen.';
-$string['eval_min_text_vertraeglichkeit']='Soziale Verträglichkeit bezieht sich auf das Verhalten gegenüber anderen Menschen.';
-$string['eval_max_text_offenheit']='Mit dem Faktor „Offenheit für Erfahrungen“ wird das Interesse und das Ausmaß der Beschäftigung mit neuen Erfahrungen, Erlebnissen und Eindrücken beschrieben.';
-$string['eval_min_text_offenheit']='Mit dem Faktor „Offenheit für Erfahrungen“ wird das Interesse und das Ausmaß der Beschäftigung mit neuen Erfahrungen, Erlebnissen und Eindrücken beschrieben.';
+$string['eval_max_text_extraversion'] = 'Introversion und Extraversion sind zwei Pole einer Persönlichkeitseigenschaft, die durch die Interaktion mit der Umwelt charakterisiert wird. Introversion bezeichnet dabei eine nach innen, Extraversion eine nach außen gewandte Haltung.';
+$string['eval_min_text_extraversion'] = 'Introversion und Extraversion sind zwei Pole einer Persönlichkeitseigenschaft, die durch die Interaktion mit der Umwelt charakterisiert wird. Introversion bezeichnet dabei eine nach innen, Extraversion eine nach außen gewandte Haltung.';
+$string['eval_max_text_neurotizismus'] = 'Der Persönlichkeitsfaktor „Neurotizismus“ spiegelt individuelle Unterschiede im Erleben von negativen Emotionen wider und wird auch als emotionale Labilität bezeichnet. Der Gegenpol wird auch als emotionale Stabilität bezeichnet.';
+$string['eval_min_text_neurotizismus'] = 'Der Persönlichkeitsfaktor „Neurotizismus“ spiegelt individuelle Unterschiede im Erleben von negativen Emotionen wider und wird auch als emotionale Labilität bezeichnet. Der Gegenpol wird auch als emotionale Stabilität bezeichnet.';
+$string['eval_max_text_gewissenhaftigkeit'] = 'Der Faktor „Gewissenhaftigkeit“ beschreibt in erster Linie den Grad an Selbstkontrolle, Genauigkeit und Zielstrebigkeit.';
+$string['eval_min_text_gewissenhaftigkeit'] = 'Der Faktor „Gewissenhaftigkeit“ beschreibt in erster Linie den Grad an Selbstkontrolle, Genauigkeit und Zielstrebigkeit.';
+$string['eval_max_text_vertraeglichkeit'] = 'Soziale Verträglichkeit bezieht sich auf das Verhalten gegenüber anderen Menschen.';
+$string['eval_min_text_vertraeglichkeit'] = 'Soziale Verträglichkeit bezieht sich auf das Verhalten gegenüber anderen Menschen.';
+$string['eval_max_text_offenheit'] = 'Mit dem Faktor „Offenheit für Erfahrungen“ wird das Interesse und das Ausmaß der Beschäftigung mit neuen Erfahrungen, Erlebnissen und Eindrücken beschrieben.';
+$string['eval_min_text_offenheit'] = 'Mit dem Faktor „Offenheit für Erfahrungen“ wird das Interesse und das Ausmaß der Beschäftigung mit neuen Erfahrungen, Erlebnissen und Eindrücken beschrieben.';
 
-$string['eval_max_caption_herausforderung']='Herausforderung';
-$string['eval_min_caption_herausforderung']='Herausforderung';
-$string['eval_max_caption_interesse']='Interesse';
-$string['eval_min_caption_interesse']='Interesse';
-$string['eval_max_caption_erfolgswahrscheinlichkeit']='Erfolgswahrscheinlichkeit';
-$string['eval_min_caption_erfolgswahrscheinlichkeit']='Erfolgswahrscheinlichkeit';
-$string['eval_max_caption_misserfolgsbefuerchtung']='Misserfolgsbefürchtung';
-$string['eval_min_caption_misserfolgsbefuerchtung']='Misserfolgsbefürchtung';
-$string['eval_cutoff_caption_herausforderung']='Herausforderung';
-$string['eval_cutoff_caption_interesse']='Interesse';
-$string['eval_cutoff_caption_erfolgswahrscheinlichkeit']='Erfolgswahrscheinlichkeit';
-$string['eval_cutoff_caption_misserfolgsbefuerchtung']='Misserfolgsbefürchtung';
+$string['eval_max_caption_herausforderung'] = 'Herausforderung';
+$string['eval_min_caption_herausforderung'] = 'Herausforderung';
+$string['eval_max_caption_interesse'] = 'Interesse';
+$string['eval_min_caption_interesse'] = 'Interesse';
+$string['eval_max_caption_erfolgswahrscheinlichkeit'] = 'Erfolgswahrscheinlichkeit';
+$string['eval_min_caption_erfolgswahrscheinlichkeit'] = 'Erfolgswahrscheinlichkeit';
+$string['eval_max_caption_misserfolgsbefuerchtung'] = 'Misserfolgsbefürchtung';
+$string['eval_min_caption_misserfolgsbefuerchtung'] = 'Misserfolgsbefürchtung';
+$string['eval_cutoff_caption_herausforderung'] = 'Herausforderung';
+$string['eval_cutoff_caption_interesse'] = 'Interesse';
+$string['eval_cutoff_caption_erfolgswahrscheinlichkeit'] = 'Erfolgswahrscheinlichkeit';
+$string['eval_cutoff_caption_misserfolgsbefuerchtung'] = 'Misserfolgsbefürchtung';
 
-$string['eval_max_text_herausforderung']='Die Herausforderung ist eine Dimension der Motivation, die ausdrückt, wie sehr die aktuelle Lehrveranstaltung oder Aufgabe überhaupt leistungsthematisch interpretiert wird, also ob Sie Ihre eigenen Fähigkeiten und Ihre Tüchtigkeit erproben oder unter Beweis stellen wollen.';
-$string['eval_min_text_herausforderung']='Die Herausforderung ist eine Dimension der Motivation, die ausdrückt, wie sehr die aktuelle Lehrveranstaltung oder Aufgabe überhaupt leistungsthematisch interpretiert wird, also ob Sie Ihre eigenen Fähigkeiten und Ihre Tüchtigkeit erproben oder unter Beweis stellen wollen.';
-$string['eval_max_text_interesse']='Mit dem Faktor „Offenheit für Erfahrungen“ wird das Interesse und das Ausmaß der Beschäftigung mit neuen Erfahrungen, Erlebnissen und Eindrücken beschrieben.';
-$string['eval_min_text_interesse']='Mit dem Faktor „Offenheit für Erfahrungen“ wird das Interesse und das Ausmaß der Beschäftigung mit neuen Erfahrungen, Erlebnissen und Eindrücken beschrieben.';
-$string['eval_max_text_erfolgswahrscheinlichkeit']='Erfolgswahrscheinlichkeit enthält Annahmen darüber, wie sicher man sich ist, in der aktuellen Lehrveranstaltung oder Aufgabe gut abzuschneiden. Hohe Erfolgswahrscheinlichkeit kann daraus erwachsen, dass man sich als hinreichend fähig einschätzt oder die Aufgabe generell für leicht hält.';
-$string['eval_min_text_erfolgswahrscheinlichkeit']='Erfolgswahrscheinlichkeit enthält Annahmen darüber, wie sicher man sich ist, in der aktuellen Lehrveranstaltung oder Aufgabe gut abzuschneiden. Hohe Erfolgswahrscheinlichkeit kann daraus erwachsen, dass man sich als hinreichend fähig einschätzt oder die Aufgabe generell für leicht hält.';
-$string['eval_max_text_misserfolgsbefuerchtung']='Bei der Misserfolgsbefürchtung handelt es sich um eine Form von Motivation, die sich aus der Angst vor Misserfolg ergibt, verbunden mit der Annahme, durch den Druck der Situation nicht optimal lernen zu können.';
-$string['eval_min_text_misserfolgsbefuerchtung']='Bei der Misserfolgsbefürchtung handelt es sich um eine Form von Motivation, die sich aus der Angst vor Misserfolg ergibt, verbunden mit der Annahme, durch den Druck der Situation nicht optimal lernen zu können.';
+$string['eval_max_text_herausforderung'] = 'Die Herausforderung ist eine Dimension der Motivation, die ausdrückt, wie sehr die aktuelle Lehrveranstaltung oder Aufgabe überhaupt leistungsthematisch interpretiert wird, also ob Sie Ihre eigenen Fähigkeiten und Ihre Tüchtigkeit erproben oder unter Beweis stellen wollen.';
+$string['eval_min_text_herausforderung'] = 'Die Herausforderung ist eine Dimension der Motivation, die ausdrückt, wie sehr die aktuelle Lehrveranstaltung oder Aufgabe überhaupt leistungsthematisch interpretiert wird, also ob Sie Ihre eigenen Fähigkeiten und Ihre Tüchtigkeit erproben oder unter Beweis stellen wollen.';
+$string['eval_max_text_interesse'] = 'Mit dem Faktor „Offenheit für Erfahrungen“ wird das Interesse und das Ausmaß der Beschäftigung mit neuen Erfahrungen, Erlebnissen und Eindrücken beschrieben.';
+$string['eval_min_text_interesse'] = 'Mit dem Faktor „Offenheit für Erfahrungen“ wird das Interesse und das Ausmaß der Beschäftigung mit neuen Erfahrungen, Erlebnissen und Eindrücken beschrieben.';
+$string['eval_max_text_erfolgswahrscheinlichkeit'] = 'Erfolgswahrscheinlichkeit enthält Annahmen darüber, wie sicher man sich ist, in der aktuellen Lehrveranstaltung oder Aufgabe gut abzuschneiden. Hohe Erfolgswahrscheinlichkeit kann daraus erwachsen, dass man sich als hinreichend fähig einschätzt oder die Aufgabe generell für leicht hält.';
+$string['eval_min_text_erfolgswahrscheinlichkeit'] = 'Erfolgswahrscheinlichkeit enthält Annahmen darüber, wie sicher man sich ist, in der aktuellen Lehrveranstaltung oder Aufgabe gut abzuschneiden. Hohe Erfolgswahrscheinlichkeit kann daraus erwachsen, dass man sich als hinreichend fähig einschätzt oder die Aufgabe generell für leicht hält.';
+$string['eval_max_text_misserfolgsbefuerchtung'] = 'Bei der Misserfolgsbefürchtung handelt es sich um eine Form von Motivation, die sich aus der Angst vor Misserfolg ergibt, verbunden mit der Annahme, durch den Druck der Situation nicht optimal lernen zu können.';
+$string['eval_min_text_misserfolgsbefuerchtung'] = 'Bei der Misserfolgsbefürchtung handelt es sich um eine Form von Motivation, die sich aus der Angst vor Misserfolg ergibt, verbunden mit der Annahme, durch den Druck der Situation nicht optimal lernen zu können.';
 
-$string['eval_text_big5_extraversion_3']='Ihre Antworten deuten auf eine hohe Ausprägung in Extraversion hin. Entsprechend tendieren Sie vermutlich eher zu Geselligkeit, aktivem, gesprächigen Verhalten, Optimismus und Herzlichkeit, sowie einer höheren Empfänglichkeit für Anregungen und Aufregungen.';
-$string['eval_text_big5_extraversion_2']='Ihre Antworten deuten auf eine mittlere Ausprägung in Extraversion hin. Entsprechend sind Sie vermutlich in eher moderatem Umfang gesprächig, nicht besonders dominant und enthusiastisch.';
-$string['eval_text_big5_extraversion_1']='Ihre Antworten deuten auf eine niedrige Ausprägung in Extraversion hin. Entsprechend tendieren Sie vermutlich eher zu introvertiertem, zurückhaltenden Verhalten bei sozialen Interaktionen und sind gerne allein und unabhängig. Introvertierte Personen werden oft als ruhig, still und zurückhaltend beschrieben.';
-$string['eval_text_big5_neurotizismus_3']='Sie scheinen eine eher hohe Ausprägung in Neurotizismus aufzuweisen. Demnach erleben Sie häufiger Angst, Nervosität, Anspannung, Trauer, Unsicherheit und Verlegenheit. Zudem bleiben diese Empfindungen bei Ihnen länger bestehen und werden leichter ausgelöst. Sie tendieren zu mehr Sorgen um Ihre Gesundheit, neigen zu unrealistischen Ideen und haben Schwierigkeiten, in Stresssituationen angemessen zu reagieren.';
-$string['eval_text_big5_neurotizismus_2']='Sie scheinen eine mittelmäßige Ausprägung in Neurotizismus aufzuweisen. Demnach erleben Sie weder besonders häufig noch besonders selten Angst, Nervosität, Anspannung, Trauer, Unsicherheit und Verlegenheit. In Stresssituationen sind Sie weder besonders anfällig für Probleme noch in besonderem Maße robust dagegen.';
-$string['eval_text_big5_neurotizismus_1']='Sie scheinen eine niedrige Ausprägung in Neurotizismus aufzuweisen. Demnach sind Sie eher ruhig, zufrieden, stabil, entspannt und sicher und können mit Stresssituationen oft besser umgehen.';
-$string['eval_text_big5_gewissenhaftigkeit_3']='Sie scheinen hohe Gewissenhaftigkeitswerte aufzuweisen. Entsprechend kann angenommen werden, dass sie organisiert, sorgfältig, planend, effektiv, verantwortlich, zuverlässig und überlegt handeln.';
-$string['eval_text_big5_gewissenhaftigkeit_2']='Sie scheinen mittelmäßige Gewissenhaftigkeitswerte aufzuweisen. Entsprechend kann angenommen werden, dass Sie ein ausgeglichenes Verhältnis zwischen Gewissenhaftigkeit und Lockerheit aufweisen und weder besonders streng organisiert noch unorganisiert sind.';
-$string['eval_text_big5_gewissenhaftigkeit_1']='Sie scheinen eher niedrige Gewissenhaftigkeitswerte aufzuweisen. Entsprechend kann man darauf schließen, dass sie tendenziell spontan sind und eher unsorgfältig und ungenau handeln.';
-$string['eval_text_big5_vertraeglichkeit_3']='Ihre hohen Werte in Verträglichkeit weisen darauf hin, dass Sie grundsätzlich eher altruistisch sind. Sie begegnen anderen mit Verständnis, Wohlwollen und Mitgefühl, sind bemüht, anderen zu helfen und gehen meist davon aus, dass diese sich ebenso hilfsbereit verhalten werden. Sie neigen zu zwischenmenschlichem Vertrauen, zu Kooperation und Nachgiebigkeit.';
-$string['eval_text_big5_vertraeglichkeit_2']='Ihre mittleren Werte in Verträglichkeit weisen darauf hin, dass Sie weder stark egozentrisch noch altruistisch veranlagt sind. Man würde Sie weder als besonders misstrauisch noch als besonders schnell vertrauensvoll, weder als extrem nachgiebig noch als extrem stur beschreiben.';
-$string['eval_text_big5_vertraeglichkeit_1']='Ihre niedrigen Werte in Verträglichkeit weisen darauf hin, dass Sie grundsätzlich eher streitlustig, egozentrisch und misstrauisch gegenüber den Absichten anderer Menschen sind. Sie verhalten sich eher kompetitiv als kooperativ, besitzen die Fähigkeit, für eigene Interessen zu kämpfen und sind weniger nachgiebig.';
-$string['eval_text_big5_offenheit_3']='Sie haben eher hohe Offenheitswerten erzielt. Dies spricht dafür, dass Sie ein reges Fantasieleben haben sowie an vielen persönlichen und öffentlichen Vorgängen interessiert sind. Man beschreibt solche Personen oft als intellektuell, experimentierfreudig und künstlerisch interessiert, sie verhalten sich häufig unkonventionell und bevorzugen Abwechslung.';
-$string['eval_text_big5_offenheit_2']='Sie haben mittlere Offenheitswerten erzielt. Dies spricht dafür, dass Sie weder zu besonders konventionellen noch besonders unkonventionellen Einstellungen und Verhalten neigen. Visionärer, fantasievoller Veranlagung und pragmatischer Hier-jetzt-Bezug halten sich offenbar bei Ihnen die Waage.';
-$string['eval_text_big5_offenheit_1']='Sie haben eher niedrige Offenheitswerte erzielt. Dies spricht dafür, dass Sie eher zu konventionellem Verhalten und zu konservativen Einstellungen neigen. Sie ziehen Bekanntes und Bewährtes dem Neuen vor und nehmen ihre emotionalen Reaktionen eher gedämpft wahr, handeln pragmatisch mit Hier-jetzt-Bezug.';
+$string['eval_text_big5_extraversion_3'] = 'Ihre Antworten deuten auf eine hohe Ausprägung in Extraversion hin. Entsprechend tendieren Sie vermutlich eher zu Geselligkeit, aktivem, gesprächigen Verhalten, Optimismus und Herzlichkeit, sowie einer höheren Empfänglichkeit für Anregungen und Aufregungen.';
+$string['eval_text_big5_extraversion_2'] = 'Ihre Antworten deuten auf eine mittlere Ausprägung in Extraversion hin. Entsprechend sind Sie vermutlich in eher moderatem Umfang gesprächig, nicht besonders dominant und enthusiastisch.';
+$string['eval_text_big5_extraversion_1'] = 'Ihre Antworten deuten auf eine niedrige Ausprägung in Extraversion hin. Entsprechend tendieren Sie vermutlich eher zu introvertiertem, zurückhaltenden Verhalten bei sozialen Interaktionen und sind gerne allein und unabhängig. Introvertierte Personen werden oft als ruhig, still und zurückhaltend beschrieben.';
+$string['eval_text_big5_neurotizismus_3'] = 'Sie scheinen eine eher hohe Ausprägung in Neurotizismus aufzuweisen. Demnach erleben Sie häufiger Angst, Nervosität, Anspannung, Trauer, Unsicherheit und Verlegenheit. Zudem bleiben diese Empfindungen bei Ihnen länger bestehen und werden leichter ausgelöst. Sie tendieren zu mehr Sorgen um Ihre Gesundheit, neigen zu unrealistischen Ideen und haben Schwierigkeiten, in Stresssituationen angemessen zu reagieren.';
+$string['eval_text_big5_neurotizismus_2'] = 'Sie scheinen eine mittelmäßige Ausprägung in Neurotizismus aufzuweisen. Demnach erleben Sie weder besonders häufig noch besonders selten Angst, Nervosität, Anspannung, Trauer, Unsicherheit und Verlegenheit. In Stresssituationen sind Sie weder besonders anfällig für Probleme noch in besonderem Maße robust dagegen.';
+$string['eval_text_big5_neurotizismus_1'] = 'Sie scheinen eine niedrige Ausprägung in Neurotizismus aufzuweisen. Demnach sind Sie eher ruhig, zufrieden, stabil, entspannt und sicher und können mit Stresssituationen oft besser umgehen.';
+$string['eval_text_big5_gewissenhaftigkeit_3'] = 'Sie scheinen hohe Gewissenhaftigkeitswerte aufzuweisen. Entsprechend kann angenommen werden, dass sie organisiert, sorgfältig, planend, effektiv, verantwortlich, zuverlässig und überlegt handeln.';
+$string['eval_text_big5_gewissenhaftigkeit_2'] = 'Sie scheinen mittelmäßige Gewissenhaftigkeitswerte aufzuweisen. Entsprechend kann angenommen werden, dass Sie ein ausgeglichenes Verhältnis zwischen Gewissenhaftigkeit und Lockerheit aufweisen und weder besonders streng organisiert noch unorganisiert sind.';
+$string['eval_text_big5_gewissenhaftigkeit_1'] = 'Sie scheinen eher niedrige Gewissenhaftigkeitswerte aufzuweisen. Entsprechend kann man darauf schließen, dass sie tendenziell spontan sind und eher unsorgfältig und ungenau handeln.';
+$string['eval_text_big5_vertraeglichkeit_3'] = 'Ihre hohen Werte in Verträglichkeit weisen darauf hin, dass Sie grundsätzlich eher altruistisch sind. Sie begegnen anderen mit Verständnis, Wohlwollen und Mitgefühl, sind bemüht, anderen zu helfen und gehen meist davon aus, dass diese sich ebenso hilfsbereit verhalten werden. Sie neigen zu zwischenmenschlichem Vertrauen, zu Kooperation und Nachgiebigkeit.';
+$string['eval_text_big5_vertraeglichkeit_2'] = 'Ihre mittleren Werte in Verträglichkeit weisen darauf hin, dass Sie weder stark egozentrisch noch altruistisch veranlagt sind. Man würde Sie weder als besonders misstrauisch noch als besonders schnell vertrauensvoll, weder als extrem nachgiebig noch als extrem stur beschreiben.';
+$string['eval_text_big5_vertraeglichkeit_1'] = 'Ihre niedrigen Werte in Verträglichkeit weisen darauf hin, dass Sie grundsätzlich eher streitlustig, egozentrisch und misstrauisch gegenüber den Absichten anderer Menschen sind. Sie verhalten sich eher kompetitiv als kooperativ, besitzen die Fähigkeit, für eigene Interessen zu kämpfen und sind weniger nachgiebig.';
+$string['eval_text_big5_offenheit_3'] = 'Sie haben eher hohe Offenheitswerten erzielt. Dies spricht dafür, dass Sie ein reges Fantasieleben haben sowie an vielen persönlichen und öffentlichen Vorgängen interessiert sind. Man beschreibt solche Personen oft als intellektuell, experimentierfreudig und künstlerisch interessiert, sie verhalten sich häufig unkonventionell und bevorzugen Abwechslung.';
+$string['eval_text_big5_offenheit_2'] = 'Sie haben mittlere Offenheitswerten erzielt. Dies spricht dafür, dass Sie weder zu besonders konventionellen noch besonders unkonventionellen Einstellungen und Verhalten neigen. Visionärer, fantasievoller Veranlagung und pragmatischer Hier-jetzt-Bezug halten sich offenbar bei Ihnen die Waage.';
+$string['eval_text_big5_offenheit_1'] = 'Sie haben eher niedrige Offenheitswerte erzielt. Dies spricht dafür, dass Sie eher zu konventionellem Verhalten und zu konservativen Einstellungen neigen. Sie ziehen Bekanntes und Bewährtes dem Neuen vor und nehmen ihre emotionalen Reaktionen eher gedämpft wahr, handeln pragmatisch mit Hier-jetzt-Bezug.';
 
-$string['eval_text_fam_herausforderung_3']='Die aktuelle Lehrveranstaltung oder Aufgabe wurde von Ihnen als besonders herausfordernd eingeschätzt. Bei fremdgesteuerten Aufgaben kann dies negative, bei selbstgesteuerten Aufgaben hingegen jedoch sehr positive Auswirkungen haben.';
-$string['eval_text_fam_herausforderung_2']='Die aktuelle Lehrveranstaltung oder Aufgabe wurde von Ihnen als weder besonders herausfordernd noch einfach eingeschätzt.';
-$string['eval_text_fam_herausforderung_1']='Die aktuelle Lehrveranstaltung oder Aufgabe wurde von Ihnen als wenig herausfordernd eingeschätzt. Bei fremdgesteuerten Aufgaben kann dies positive, bei selbstgesteuerten Aufgaben hingegen jedoch sehr negative Auswirkungen haben.';
-$string['eval_text_fam_interesse_3']='Sie scheinen ein hohes Interesse am Inhalt der aktuellen Lehrveranstaltung oder Aufgabe zu haben, was gut für Ihr Lernen sein sollte, sofern der Prozess in höherem Maße selbstgesteuert stattfindet.';
-$string['eval_text_fam_interesse_2']='Sie scheinen ein moderates Interesse am Inhalt der aktuellen Lehrveranstaltung oder Aufgabe zu haben.';
-$string['eval_text_fam_interesse_1']='Sie scheinen ein niedriges Interesse am Inhalt der aktuellen Lehrveranstaltung oder Aufgabe zu haben, was schlecht für Ihr Lernen sein kann, sofern der Prozess in höherem Maße selbstgesteuert stattfindet.';
-$string['eval_text_fam_erfolgswahrscheinlichkeit_3']='Den eigenen Erfolg bei der aktuellen Lehrveranstaltung oder Aufgabe haben Sie als hoch wahrscheinlich eingeschätzt. Üblicherweise sollte dies Ihren Lernprozess begünstigen.';
-$string['eval_text_fam_erfolgswahrscheinlichkeit_2']='Den eigenen Erfolg bei der aktuellen Lehrveranstaltung oder Aufgabe haben Sie als moderat wahrscheinlich eingeschätzt, was weder besonders guten noch schlechten Einfluss auf Ihren Lernprozess haben sollte.';
-$string['eval_text_fam_erfolgswahrscheinlichkeit_1']='Den eigenen Erfolg bei der aktuellen Lehrveranstaltung oder Aufgabe haben Sie als niedrig wahrscheinlich eingeschätzt. Üblicherweise wirkt sich dies negativ auf Ihren Lernprozess aus.';
-$string['eval_text_fam_misserfolgsbefuerchtung_3']='Ihre Ergebnisse legen die Annahme nahe, dass die Misserfolgsbefürchtung bei Ihnen hoch ausgeprägt ist. Dies könnte sich aus einer allgemeinen Furcht vor Misserfolg oder Prüfungsängstlichkeit ableiten, sich aber auch auf speziellere, situative Faktoren der aktuellen Lehrveranstaltung oder Aufgabe beziehen. Im Allgemeinen geht man davon aus, dass sich Misserfolgsbefürchtungen negativ auf den Lernerfolg auswirken.';
-$string['eval_text_fam_misserfolgsbefuerchtung_2']='Ihre Ergebnisse legen die Annahme nahe, dass die Misserfolgsbefürchtung bei Ihnen moderat ausgeprägt ist. Dies könnte sich aus einer allgemeinen Furcht vor Misserfolg oder Prüfungsängstlichkeit ableiten, sich aber auch auf speziellere, situative Faktoren der aktuellen Lehrveranstaltung oder Aufgabe beziehen. Im Allgemeinen geht man davon aus, dass sich Misserfolgsbefürchtungen negativ auf den Lernerfolg auswirken.';
-$string['eval_text_fam_misserfolgsbefuerchtung_1']='Ihre Ergebnisse legen die Annahme nahe, dass die Misserfolgsbefürchtung bei Ihnen niedrig ausgeprägt ist. Dies könnte sich aus einer allgemein nicht vorhandenen Furcht vor Misserfolg oder Prüfungsängstlichkeit ableiten, sich aber auch auf speziellere, situative Faktoren der aktuellen Lehrveranstaltung oder Aufgabe beziehen. Im Allgemeinen geht man davon aus, dass sich fehlende Misserfolgsbefürchtungen positiv auf den Lernerfolg auswirken.';
+$string['eval_text_fam_herausforderung_3'] = 'Die aktuelle Lehrveranstaltung oder Aufgabe wurde von Ihnen als besonders herausfordernd eingeschätzt. Bei fremdgesteuerten Aufgaben kann dies negative, bei selbstgesteuerten Aufgaben hingegen jedoch sehr positive Auswirkungen haben.';
+$string['eval_text_fam_herausforderung_2'] = 'Die aktuelle Lehrveranstaltung oder Aufgabe wurde von Ihnen als weder besonders herausfordernd noch einfach eingeschätzt.';
+$string['eval_text_fam_herausforderung_1'] = 'Die aktuelle Lehrveranstaltung oder Aufgabe wurde von Ihnen als wenig herausfordernd eingeschätzt. Bei fremdgesteuerten Aufgaben kann dies positive, bei selbstgesteuerten Aufgaben hingegen jedoch sehr negative Auswirkungen haben.';
+$string['eval_text_fam_interesse_3'] = 'Sie scheinen ein hohes Interesse am Inhalt der aktuellen Lehrveranstaltung oder Aufgabe zu haben, was gut für Ihr Lernen sein sollte, sofern der Prozess in höherem Maße selbstgesteuert stattfindet.';
+$string['eval_text_fam_interesse_2'] = 'Sie scheinen ein moderates Interesse am Inhalt der aktuellen Lehrveranstaltung oder Aufgabe zu haben.';
+$string['eval_text_fam_interesse_1'] = 'Sie scheinen ein niedriges Interesse am Inhalt der aktuellen Lehrveranstaltung oder Aufgabe zu haben, was schlecht für Ihr Lernen sein kann, sofern der Prozess in höherem Maße selbstgesteuert stattfindet.';
+$string['eval_text_fam_erfolgswahrscheinlichkeit_3'] = 'Den eigenen Erfolg bei der aktuellen Lehrveranstaltung oder Aufgabe haben Sie als hoch wahrscheinlich eingeschätzt. Üblicherweise sollte dies Ihren Lernprozess begünstigen.';
+$string['eval_text_fam_erfolgswahrscheinlichkeit_2'] = 'Den eigenen Erfolg bei der aktuellen Lehrveranstaltung oder Aufgabe haben Sie als moderat wahrscheinlich eingeschätzt, was weder besonders guten noch schlechten Einfluss auf Ihren Lernprozess haben sollte.';
+$string['eval_text_fam_erfolgswahrscheinlichkeit_1'] = 'Den eigenen Erfolg bei der aktuellen Lehrveranstaltung oder Aufgabe haben Sie als niedrig wahrscheinlich eingeschätzt. Üblicherweise wirkt sich dies negativ auf Ihren Lernprozess aus.';
+$string['eval_text_fam_misserfolgsbefuerchtung_3'] = 'Ihre Ergebnisse legen die Annahme nahe, dass die Misserfolgsbefürchtung bei Ihnen hoch ausgeprägt ist. Dies könnte sich aus einer allgemeinen Furcht vor Misserfolg oder Prüfungsängstlichkeit ableiten, sich aber auch auf speziellere, situative Faktoren der aktuellen Lehrveranstaltung oder Aufgabe beziehen. Im Allgemeinen geht man davon aus, dass sich Misserfolgsbefürchtungen negativ auf den Lernerfolg auswirken.';
+$string['eval_text_fam_misserfolgsbefuerchtung_2'] = 'Ihre Ergebnisse legen die Annahme nahe, dass die Misserfolgsbefürchtung bei Ihnen moderat ausgeprägt ist. Dies könnte sich aus einer allgemeinen Furcht vor Misserfolg oder Prüfungsängstlichkeit ableiten, sich aber auch auf speziellere, situative Faktoren der aktuellen Lehrveranstaltung oder Aufgabe beziehen. Im Allgemeinen geht man davon aus, dass sich Misserfolgsbefürchtungen negativ auf den Lernerfolg auswirken.';
+$string['eval_text_fam_misserfolgsbefuerchtung_1'] = 'Ihre Ergebnisse legen die Annahme nahe, dass die Misserfolgsbefürchtung bei Ihnen niedrig ausgeprägt ist. Dies könnte sich aus einer allgemein nicht vorhandenen Furcht vor Misserfolg oder Prüfungsängstlichkeit ableiten, sich aber auch auf speziellere, situative Faktoren der aktuellen Lehrveranstaltung oder Aufgabe beziehen. Im Allgemeinen geht man davon aus, dass sich fehlende Misserfolgsbefürchtungen positiv auf den Lernerfolg auswirken.';
 
-$string['eval_caption_user']='Teilnehmer';
-$string['eval_caption_group']='Gruppe';
-$string['eval_caption_course']='Kurs';
+$string['eval_caption_user'] = 'Teilnehmer';
+$string['eval_caption_group'] = 'Gruppe';
+$string['eval_caption_course'] = 'Kurs';
 
 
 $string['consent_alert_message'] = 'Sie müssen den Nutzungsbedingungen zustimmen, um den Fragebogen zu beantworten. Lesen und akzeptieren sie die Nutzungsbedingungen, bevor sie auf "Weiter" klicken.';
@@ -431,7 +430,7 @@ Der Kursleiter/in oder Dozent/in sieht meine persönlichen Angaben für die Grup
 erhalten Feedback zu meinen Persönlichkeitsmerkmalen, sowie zum Durchschnittsvergleich mit der Gruppe).
 </li><li>
 Meine Angaben werden am Kursende - spätestens nach 360 Tagen gelöscht.</li></ul>';
-$string['consent_agree']='Ich bin einverstanden';
+$string['consent_agree'] = 'Ich bin einverstanden';
 
 $string['questionnaire_delete'] = 'Zustimmung widerrufen';
 $string['groupsize'] = 'Gruppengröße:';

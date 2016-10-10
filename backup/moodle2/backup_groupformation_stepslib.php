@@ -13,6 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * Define all the backup steps that will be used by the backup_groupformation_activity_task
  *
@@ -40,7 +41,7 @@ class backup_groupformation_activity_structure_step extends backup_activity_stru
      */
     protected function define_structure() {
         // Get know if we are including userinfo.
-        $userinfo = $this->get_setting_value('userinfo');
+        $this->get_setting_value('userinfo');
         // Define the root element describing the groupformation instance.
         $groupformation = new backup_nested_element('groupformation', array('id'), array(
             'name', 'intro', 'introformat', 'grade'));

@@ -41,37 +41,37 @@ class mod_groupformation_data {
                 "extraversion" => array(
                     "scenarios" => array(1 => false, 2 => false),
                     "evaluation" => true,
-                    "questionids" => array(12,-1,13,14,-15,16,-17,6),
+                    "questionids" => array(12, -1, 13, 14, -15, 16, -17, 6),
                     "significant_id_only" => false,
-                    "cutoffs" => array(0.313169217,0.776242547),
+                    "cutoffs" => array(0.313169217, 0.776242547),
                 ),
                 "gewissenhaftigkeit" => array(
                     "scenarios" => array(1 => true, 2 => true),
                     "evaluation" => true,
-                    "questionids" => array(8,-32,33,-34,-35,21,22,23,-24),
+                    "questionids" => array(8, -32, 33, -34, -35, 21, 22, 23, -24),
                     "significant_id_only" => false,
-                    "cutoffs" => array(0.456596974,0.831246163),
+                    "cutoffs" => array(0.456596974, 0.831246163),
                 ),
                 "vertraeglichkeit" => array(
                     "scenarios" => array(1 => true, 2 => true),
                     "evaluation" => true,
-                    "questionids" => array(-7,2,-25,-26),
+                    "questionids" => array(-7, 2, -25, -26),
                     "significant_id_only" => false,
-                    "cutoffs" => array(0.492136484,0.799889659),
+                    "cutoffs" => array(0.492136484, 0.799889659),
                 ),
                 "neurotizismus" => array(
                     "scenarios" => array(1 => false, 2 => false),
                     "evaluation" => true,
-                    "questionids" => array(27,-4,28,9),
+                    "questionids" => array(27, -4, 28, 9),
                     "significant_id_only" => false,
-                    "cutoffs" => array(0.195135503,0.602511556),
+                    "cutoffs" => array(0.195135503, 0.602511556),
                 ),
                 "offenheit" => array(
                     "scenarios" => array(1 => false, 2 => false),
                     "evaluation" => true,
-                    "questionids" => array(29,30,10,31,-5),
+                    "questionids" => array(29, 30, 10, 31, -5),
                     "significant_id_only" => false,
-                    "cutoffs" => array(0.348454964,0.829192095),
+                    "cutoffs" => array(0.348454964, 0.829192095),
                 ),
             ),
         ),
@@ -85,28 +85,28 @@ class mod_groupformation_data {
                     "evaluation" => true,
                     "questionids" => array(6, 8, 10, 15, 17),
                     "significant_id_only" => false,
-                    "cutoffs" => array(0.518934813,0.830866774),
+                    "cutoffs" => array(0.518934813, 0.830866774),
                 ),
                 "interesse" => array(
                     "scenarios" => array(1 => false),
                     "evaluation" => true,
                     "questionids" => array(1, 4, 7, 11),
                     "significant_id_only" => false,
-                    "cutoffs" => array(0.439861739,0.751249372),
+                    "cutoffs" => array(0.439861739, 0.751249372),
                 ),
                 "erfolgswahrscheinlichkeit" => array(
                     "scenarios" => array(1 => false),
                     "evaluation" => true,
                     "questionids" => array(2, 3, 13, 14),
                     "significant_id_only" => false,
-                    "cutoffs" => array(0.314297404,0.511297834),
+                    "cutoffs" => array(0.314297404, 0.511297834),
                 ),
                 "misserfolgsbefuerchtung" => array(
                     "scenarios" => array(1 => false),
                     "evaluation" => true,
                     "questionids" => array(5, 9, 12, 16, 18),
                     "significant_id_only" => false,
-                    "cutoffs" => array(0.186185044,0.601275274),
+                    "cutoffs" => array(0.186185044, 0.601275274),
                 ),
             ),
         ),
@@ -147,7 +147,7 @@ class mod_groupformation_data {
         ),
         "general" => array(
             "category" => "general",
-            "scenarios" => array(),
+            "scenarios" => array(1, 2),
             "evaluation" => false,
             "labels" => array(
                 "language" => array(
@@ -203,7 +203,7 @@ class mod_groupformation_data {
         ),
         "knowledge" => array(
             "category" => "knowledge",
-            "scenarios" => array(1, 2),
+            "scenarios" => array(),
             "evaluation" => false,
             "labels" => array(
                 "one" => array(
@@ -211,6 +211,7 @@ class mod_groupformation_data {
                     "evaluation" => false,
                     "questionids" => null,
                     "significant_id_only" => false,
+                    "separate_dimensions" => false,
                     "cutoffs" => null,
                 ),
                 "two" => array(
@@ -218,6 +219,7 @@ class mod_groupformation_data {
                     "evaluation" => false,
                     "questionids" => null,
                     "significant_id_only" => false,
+                    "separate_dimensions" => true,
                     "cutoffs" => null,
                 ),
             ),
@@ -232,30 +234,24 @@ class mod_groupformation_data {
             'character',
             'motivation',
             'team',
-//            'srl',
-//            'sellmo',
-//            'self',
         ),
         '2' => array(
             'general',
             'grade',
             'points',
             'character',
-            'motivation',
+            'learning',
             'team',
-//            'srl',
-//            'sellmo',
-//            'self',
         ),
         '3' => array(
             'topic',
         ),
     );
 
-    private $participant_code = false;
-    private $import_export_enabled = true;
-    private $math_prep_course_mode = false;
-    private $all_answers_required = false;
+    private $participantcode = false;
+    private $importexportenabled = true;
+    private $mathprepcoursemode = false;
+    private $allanswersrequired = false;
 
     /**
      * Returns whether this instance is running in math prep course mode;
@@ -263,8 +259,8 @@ class mod_groupformation_data {
      *
      * @return bool
      */
-    public function is_math_prep_course_mode(){
-        return $this->math_prep_course_mode;
+    public function is_math_prep_course_mode() {
+        return $this->mathprepcoursemode;
     }
 
     /**
@@ -341,19 +337,19 @@ class mod_groupformation_data {
      *
      * @return bool
      */
-    public function ask_for_participant_code(){
-        return $this->participant_code;
+    public function ask_for_participant_code() {
+        return $this->participantcode;
     }
 
     /**
      * Returns whether import export is enabled or not
      * @return bool
      */
-    public function import_export_enabled(){
-        return $this->import_export_enabled;
+    public function import_export_enabled() {
+        return $this->importexportenabled;
     }
 
-    public function all_answers_required(){
-        return $this->all_answers_required;
+    public function all_answers_required() {
+        return $this->allanswersrequired;
     }
 }

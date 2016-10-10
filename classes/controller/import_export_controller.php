@@ -15,12 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This file contains an controller for import export view
  *
- * @package     mod_groupformation
- * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package mod_groupformation
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
@@ -32,38 +30,22 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/util/xml_writer.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/csv_writer.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
 
-/**
- * Controller for import export view
- *
- * @package     mod_groupformation
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
 class mod_groupformation_import_export_controller {
-
-    /** @var mod_groupformation_storage_manager */
     private $store;
-
-    /** @var mod_groupformation_user_manager */
     private $usermanager;
-
-    /** @var int This is the id of the activity */
     private $groupformationid;
-
-    /** @var cm_info The course module info */
     private $cm;
-
-    /** @var mod_groupformation_template_builder Template builder for view */
+    private $cmid;
     private $view = null;
 
     /**
      * Constructs instance of import export controller
      *
-     * @param $groupformationid
-     * @param $cm
+     * @param integer $groupformationid
      */
     public function __construct($groupformationid, $cm) {
         $this->groupformationid = $groupformationid;
+        $this->cmid = $cm->id;
         $this->cm = $cm;
 
         $this->usermanager = new mod_groupformation_user_manager ($groupformationid);
@@ -87,11 +69,28 @@ class mod_groupformation_import_export_controller {
 
         $filename = 'exportable_answers.xml';
 
-        $context = context_module::instance($this->cm->id);
+        return $this->get_urlstring($filename, $content, $userid);
+    }
+
+    /**
+     * Returns urlstring based on content
+     *
+     * @param $filename
+     * @param $content
+     * @param $id
+     * @return string
+     */
+    private function get_urlstring($filename, $content, $id) {
+        $context = context_module::instance($this->cmid);
 
         $fileinfo = array(
-            'contextid' => $context->id, 'component' => 'mod_groupformation', 'filearea' => 'groupformation_answers',
-            'itemid' => $userid, 'filepath' => '/', 'filename' => $filename);
+            'contextid' => $context->id,
+            'component' => 'mod_groupformation',
+            'filearea' => 'groupformation_answers',
+            'itemid' => $id,
+            'filepath' => '/',
+            'filename' => $filename
+        );
 
         $filestorage = get_file_storage();
 
@@ -108,9 +107,7 @@ class mod_groupformation_import_export_controller {
         $url = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(), $file->get_filearea(),
             $file->get_itemid(), $file->get_filepath(), $file->get_filename());
 
-        $urlstring = $url->out();
-
-        return $urlstring;
+        return $url->out();
     }
 
     /**
@@ -121,6 +118,7 @@ class mod_groupformation_import_export_controller {
      * @throws coding_exception
      */
     public function render_overview($userid) {
+
         $this->view = new mod_groupformation_template_builder ();
         $this->view->set_template('wrapper_student_import_export');
 
@@ -154,7 +152,7 @@ class mod_groupformation_import_export_controller {
 
         $this->view->assign('import_description', $importdescription);
         $url = new moodle_url ('/mod/groupformation/import_view.php', array(
-            'id' => $this->cm->id));
+            'id' => $this->cmid));
         $this->view->assign('import_form', $url->out());
         $this->view->assign('import_button', $importbutton);
 
@@ -165,14 +163,16 @@ class mod_groupformation_import_export_controller {
      * Renders two-parted template with form
      *
      * @param $mform
-     * @param bool $showwarning
+     * @param bool|false $showwarning
      */
-    public function render_form($mform, $showwarning = false) {
+    public function render_form($mform, $showwarning) {
         $this->view = new mod_groupformation_template_builder ();
         $this->view->set_template('student_import_form_header');
         $this->view->assign('file_error', $showwarning);
 
+        echo '<div class="gf_settings_pad">';
         echo $this->view->load_template();
+        echo '</div>';
 
         $mform->display();
 
@@ -191,10 +191,10 @@ class mod_groupformation_import_export_controller {
         $this->view->set_template('student_import_result');
 
         $url = new moodle_url ('/mod/groupformation/import_view.php', array(
-            'id' => $this->cm->id));
+            'id' => $this->cmid));
 
         $viewurl = new moodle_url ('/mod/groupformation/view.php', array(
-            'id' => $this->cm->id, 'do_show' => 'view'));
+            'id' => $this->cmid, 'do_show' => 'view'));
         $this->view->assign('import_export_url', $viewurl->out());
         $this->view->assign('import_form', $url->out());
         $this->view->assign('successful', $successful);
@@ -212,15 +212,13 @@ class mod_groupformation_import_export_controller {
     public function import_xml($content) {
         global $DB, $USER;
 
-
-
         libxml_use_internal_errors(true);
         $xml = simplexml_load_string($content);
 
         if (!$xml) {
             $errors = libxml_get_errors();
 
-            foreach ($errors as $error) {
+            if (count($errors) > 0) {
                 throw new InvalidArgumentException ("Wrong format");
             }
 
@@ -238,7 +236,6 @@ class mod_groupformation_import_export_controller {
             throw new InvalidArgumentException ("Wrong format");
         }
         $categories = $this->store->get_categories();
-
 
         $allrecords = array();
 
@@ -315,27 +312,27 @@ class mod_groupformation_import_export_controller {
         $this->view = new mod_groupformation_template_builder ();
         $this->view->set_template('wrapper_teacher_export');
 
-        $exportanswers = get_string('export_answers', 'groupformation').' ';
+        $exportanswers = get_string('export_answers', 'groupformation') . ' ';
         $exportanswersurl = $this->generate_export_url('answers');
         $this->view->assign('export_answers', $exportanswers);
         $this->view->assign('export_answers_url', $exportanswersurl);
 
-        $exportusers = get_string('export_users', 'groupformation').' ';
+        $exportusers = get_string('export_users', 'groupformation') . ' ';
         $exportusersurl = $this->generate_export_url('users');
         $this->view->assign('export_users', $exportusers);
         $this->view->assign('export_users_url', $exportusersurl);
 
-        $exportgroups = get_string('export_groups', 'groupformation').' ';
+        $exportgroups = get_string('export_groups', 'groupformation') . ' ';
         $exportgroupsurl = $this->generate_export_url('groups');
         $this->view->assign('export_groups', $exportgroups);
         $this->view->assign('export_groups_url', $exportgroupsurl);
 
-        $exportgroupusers = get_string('export_group_users', 'groupformation').' ';
+        $exportgroupusers = get_string('export_group_users', 'groupformation') . ' ';
         $exportgroupusersurl = $this->generate_export_url('group_users');
         $this->view->assign('export_group_users', $exportgroupusers);
         $this->view->assign('export_group_users_url', $exportgroupusersurl);
 
-        $exportlogging = get_string('export_logging', 'groupformation').' ';
+        $exportlogging = get_string('export_logging', 'groupformation') . ' ';
         $exportloggingurl = $this->generate_export_url('logging');
         $this->view->assign('export_logging', $exportlogging);
         $this->view->assign('export_logging_url', $exportloggingurl);
@@ -359,29 +356,6 @@ class mod_groupformation_import_export_controller {
 
         $filename = 'archived_' . $type . '.csv';
 
-        $context = context_module::instance($this->cm->id);
-
-        $fileinfo = array(
-            'contextid' => $context->id, 'component' => 'mod_groupformation', 'filearea' => 'groupformation_answers',
-            'itemid' => $this->groupformationid, 'filepath' => '/', 'filename' => $filename);
-
-        $filestorage = get_file_storage();
-
-        if ($filestorage->file_exists($fileinfo ['contextid'], $fileinfo ['component'], $fileinfo ['filearea'],
-            $fileinfo ['itemid'], $fileinfo ['filepath'], $fileinfo ['filename'])
-        ) {
-            $file = $filestorage->get_file($fileinfo ['contextid'], $fileinfo ['component'], $fileinfo ['filearea'],
-                $fileinfo ['itemid'], $fileinfo ['filepath'], $fileinfo ['filename']);
-            $file->delete();
-        }
-
-        $file = $filestorage->create_file_from_string($fileinfo, $content);
-
-        $url = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(), $file->get_filearea(),
-            $file->get_itemid(), $file->get_filepath(), $file->get_filename());
-
-        $urlstring = $url->out();
-
-        return $urlstring;
+        return $this->get_urlstring($filename, $content, $this->groupformationid);
     }
 }

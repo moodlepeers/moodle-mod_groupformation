@@ -1,25 +1,21 @@
 <?php
-// This file is part of PHP implementation of GroupAL
-// http://sourceforge.net/projects/groupal/
+// This file is part of Moodle - http://moodle.org/
 //
-// GroupAL is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// GroupAL implementations are distributed in the hope that it will be useful,
+// Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU Lesser General Public License for more details.
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 //
-// You should have received a copy of the GNU Lesser General Public License
-// along with GroupAL. If not, see <http://www.gnu.org/licenses/>.
-//
-//  This code CAN be used as a code-base in Moodle
-// (e.g. for moodle-mod_groupformation). Then put this code in a folder
-// <moodle>\lib\groupal
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
- * This class contains values based on users characteristics and skills
+ * This class contains values based on users characteristics and skills.
  *
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/lgpl.html GNU LGPL v3 or later
@@ -27,19 +23,19 @@
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion_weight.php");
 
-class lib_groupal_topic_criterion extends lib_groupal_criterion {
+class mod_groupformation_topic_criterion extends mod_groupformation_criterion {
 
     /**
-     * lib_groupal_topic_criterion constructor.
+     * mod_groupformation_topic_criterion constructor.
      *
-     * @param $value_array The ratings for each topic
+     * @param $valuearray The ratings for each topic
      */
-    public function __construct($value_array) {
-        $this->setName('topic');
-        $this->setMinValue(1);
-        $this->setMaxValue(count($value_array));
-        $this->setValues($value_array);
-        $this->setIsHomogeneous(true);
-        lib_groupal_criterion_weight::addIfNotAllreadyExist('topics', 1);
+    public function __construct($valuearray) {
+        $this->set_name('topic');
+        $this->set_min_value(1);
+        $this->set_max_value(count($valuearray));
+        $this->set_values($valuearray);
+        $this->set_homogeneous(true);
+        mod_groupformation_criterion_weight::add_if_not_allready_exist('topics', 1);
     }
 }

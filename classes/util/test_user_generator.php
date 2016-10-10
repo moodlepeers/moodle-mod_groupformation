@@ -23,6 +23,7 @@
  */
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/controller/grouping_controller.php');
 
 class mod_groupformation_test_user_generator {
@@ -61,7 +62,7 @@ class mod_groupformation_test_user_generator {
 
         $store = new mod_groupformation_storage_manager ($groupformationid);
 
-        $version = $store->get_version();
+        $usermanager = new mod_groupformation_user_manager($groupformationid);
 
         $categories = $store->get_categories();
 
@@ -123,18 +124,18 @@ class mod_groupformation_test_user_generator {
                 try {
                     foreach ($categories as $category) {
 
-                        if ($category == "topic" || $category == "knowledge"){
+                        if ($category == "topic" || $category == "knowledge") {
                             $temp = $store->get_knowledge_or_topic_values($category);
                             $xmlcontent = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>';
                             $questions = mod_groupformation_util::xml_to_array($xmlcontent);
-                        }else{
-                            $questions = array_values($store->get_questions($category,$version));
+                        } else {
+                            $questions = array_values($store->get_questions($category));
                         }
                         $m = $store->get_number($category);
 
                         for ($i = 1; $i <= $m; $i++) {
-                            $question = $questions[$i-1];
-                            if ($category == "topic" || $category == "knowledge"){
+                            $question = $questions[$i - 1];
+                            if ($category == "topic" || $category == "knowledge") {
                                 $qid = $i;
                             } else {
                                 $qid = ($question->questionid);
@@ -158,6 +159,10 @@ class mod_groupformation_test_user_generator {
                         }
                     }
                     $DB->insert_records("groupformation_answer", $allrecords);
+
+                    if ($usermanager->has_answered_everything($userid)) {
+                        $usermanager->set_evaluation_values($userid);
+                    }
                 } catch (Exception $e) {
                     $this->echowarn("Error while saving answers status for user.");
 
@@ -195,7 +200,7 @@ class mod_groupformation_test_user_generator {
         $userrecords = $DB->get_records_sql('SELECT * FROM {user} WHERE username LIKE \'' . $username . '%\'');
 
         if (count($userrecords) > 0) {
-            foreach ($userrecords as $userid => $record) {
+            foreach (array_keys($userrecords) as $userid) {
 
                 try {
                     $groupingcontroller = new mod_groupformation_grouping_controller($groupformationid, $this->cm);
@@ -213,9 +218,18 @@ class mod_groupformation_test_user_generator {
                         'userid' => $userid
                     ));
 
+                    $DB->delete_records('groupformation_user_values', array(
+                        'userid' => $userid
+                    ));
+
+                    $DB->delete_records("groupformation_group_users", array(
+                        'userid' => $userid
+                    ));
+
                     $DB->delete_records("user_enrolments", array(
                         'userid' => $userid
                     ));
+
                 } catch (Exception $e) {
                     $this->echowarn('User with ID=' . $userid . ' has not been deleted.');
 

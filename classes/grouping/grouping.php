@@ -74,29 +74,29 @@ class mod_groupformation_grouping {
 
         foreach ($participants as $participant) {
             $criteria = $participant->criteria;
-            $configured_criteria = array();
+            $configuredcriteria = array();
             if (count($configuration) == 0) {
-                $configured_criteria = null;
+                $configuredcriteria = null;
             } else {
                 for ($j = 0; $j < count($criteria); $j++) {
                     $criterion = $criteria[$j];
-                    if (array_key_exists($criterion->getName(), $configuration)) {
-                        $mode = $configuration[$criterion->getName()];
+                    if (array_key_exists($criterion->get_name(), $configuration)) {
+                        $mode = $configuration[$criterion->get_name()];
                         if (is_null($mode)) {
                             $criterion = null;
                         } else {
-                            $criterion->setIsHomogeneous($mode);
+                            $criterion->set_homogeneous($mode);
                         }
                     } else {
                         $criterion = null;
                     }
 
                     if (!is_null($criterion)) {
-                        $configured_criteria[] = $criterion;
+                        $configuredcriteria[] = $criterion;
                     }
                 }
             }
-            $participant->criteria = $configured_criteria;
+            $participant->criteria = $configuredcriteria;
         }
 
         return $participants;
@@ -108,20 +108,20 @@ class mod_groupformation_grouping {
      * @param $users
      * @param $groupsize
      * @param $configurationkey
-     * @return lib_groupal_cohort
+     * @return mod_groupformation_cohort
      */
     public function build_cohort($users, $groupsize, $configurationkey) {
         if (strpos($configurationkey, "rand:1") !== false) {
-            // Random
+            // Random.
             return $this->build_random_cohort($users, $groupsize);
         } else if (strpos($configurationkey, "rand:0") !== false || strpos($configurationkey, "groupal:1") !== false) {
-            // Not Random
+            // Not Random.
             return $this->build_groupal_cohort($users, $groupsize);
         } else if (strpos($configurationkey, "rand:0") !== false || strpos($configurationkey, "topic:1") !== false) {
-            // Not Random
+            // Not Random.
             return $this->build_topic_cohort($users, $groupsize);
-        }else {
-            // Random
+        } else {
+            // Random.
             return $this->build_random_cohort($users, $groupsize);
         }
     }
@@ -131,10 +131,10 @@ class mod_groupformation_grouping {
      *
      * @param $users
      * @param $groupsize
-     * @return lib_groupal_cohort
+     * @return mod_groupformation_cohort
      */
     public function build_random_cohort($users, $groupsize) {
-        $gfra = new lib_groupal_random_algorithm ($users, $groupsize);
+        $gfra = new mod_groupformation_random_algorithm ($users, $groupsize);
 
         return $gfra->do_one_formation();
     }
@@ -144,13 +144,13 @@ class mod_groupformation_grouping {
      *
      * @param $users
      * @param $groupsize
-     * @return lib_groupal_cohort
+     * @return mod_groupformation_cohort
      */
     public function build_groupal_cohort($users, $groupsize) {
         // Choose matcher.
-        $matcher = new lib_groupal_group_centric_matcher ();
+        $matcher = new mod_groupformation_group_centric_matcher ();
 
-        $gfa = new lib_groupal_basic_algorithm ($users, $matcher, $groupsize);
+        $gfa = new mod_groupformation_basic_algorithm ($users, $matcher, $groupsize);
         return $gfa->do_one_formation();
     }
 
@@ -159,11 +159,11 @@ class mod_groupformation_grouping {
      *
      * @param $users
      * @param $groupsize
-     * @return lib_groupal_cohort
+     * @return mod_groupformation_cohort
      */
     public function build_topic_cohort($users, $groupsizes) {
 
-        $gfa = new lib_groupal_topic_algorithm ($groupsizes, $users);
+        $gfa = new mod_groupformation_topic_algorithm ($groupsizes, $users);
         return $gfa->do_one_formation();
     }
 
@@ -178,7 +178,7 @@ class mod_groupformation_grouping {
         shuffle($users);
         $slices = array();
 
-        if ($numberofslices == 1){
+        if ($numberofslices == 1) {
             return array($users);
         }
 

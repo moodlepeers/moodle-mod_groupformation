@@ -15,12 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This file contains a controller class for evaluation view
  *
- * @package     mod_groupformation
- * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @coppyright  2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package mod_groupformation
+ * @@author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 if (!defined('MOODLE_INTERNAL')) {
@@ -30,13 +28,7 @@ if (!defined('MOODLE_INTERNAL')) {
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
 
-/**
- * Controller for evaluation view
- *
- * @package     mod_groupformation
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
+
 class mod_groupformation_evaluation_controller {
 
     /** @var mod_groupformation_storage_manager */
@@ -51,7 +43,7 @@ class mod_groupformation_evaluation_controller {
     /** @var int This is the id of the activity */
     private $groupformationid;
 
-    /** @var mod_groupformation_template_builder Template builder for view */
+    /** @var mod_groupformation_template_builder|null */
     private $view = null;
 
     /**
@@ -69,49 +61,32 @@ class mod_groupformation_evaluation_controller {
     }
 
     /**
-     * Renders all content for evaluation view
+     * Renders for no evaluation
+     */
+    public function no_evaluation($caption = 'no_evaluation_text') {
+        $this->view->assign('eval_show_text', true);
+        $this->view->assign('eval_text', get_string($caption, 'groupformation'));
+        $json = json_encode(null);
+        $this->view->assign('json_content', $json);
+    }
+
+    /**
+     * Renders eval values
      *
      * @param $userid
      * @return string
      */
     public function render($userid) {
         if ($this->store->ask_for_topics()) {
-            $this->view->assign('eval_show_text', true);
-            $this->view->assign('eval_text', get_string('no_evaluation_text', 'groupformation'));
-            $json = json_encode(null);
-            $this->view->assign('json_content', $json);
+            $this->no_evaluation();
         } else if (!$this->usermanager->has_answered_everything($userid)) {
-            $this->view->assign('eval_show_text', true);
-            $this->view->assign('eval_text', get_string('no_evaluation_ready', 'groupformation'));
-            $json = json_encode(null);
-            $this->view->assign('json_content', $json);
+            $this->no_evaluation('no_evaluation_ready');
         } else {
-            $this->view->assign('eval_text', false);
-            $courseusers = $this->store->get_users();
-
-            $groupusers = array();
-            $hasgroup = $this->groupsmanager->has_group($userid);
-            if ($hasgroup) {
-                $groupusers = $this->groupsmanager->get_group_members($userid);
-            }
-
-            if (!count($courseusers) >= 2) {
-                $courseusers = array();
-            }
-
-            if (!count($groupusers) >= 2 || !$this->groupsmanager->groups_created()) {
-                $groupusers = array();
-            }
-
-            $cc = new mod_groupformation_criterion_calculator($this->groupformationid);
-
-            $eval = $cc->get_eval($userid, $groupusers, $courseusers);
+            $eval = $this->get_eval($userid);
             if (is_null($eval) || count($eval) == 0) {
-                $this->view->assign('eval_show_text', true);
-                $this->view->assign('eval_text', get_string('no_evaluation_text', 'groupformation'));
-                $json = json_encode(null);
-                $this->view->assign('json_content', $json);
+                $this->no_evaluation();
             } else {
+                $this->view->assign('eval_text', false);
                 $this->view->assign('eval_show_text', false);
                 $json = json_encode($eval);
                 $this->view->assign('json_content', $json);
@@ -119,5 +94,37 @@ class mod_groupformation_evaluation_controller {
         }
 
         return $this->view->load_template();
+    }
+
+    /**
+     * Returns eval array for user.
+     *
+     * @param $userid
+     * @return array
+     */
+    public function get_eval($userid) {
+        $courseusers = $this->store->get_users();
+
+        if (!count($courseusers) >= 2) {
+            $courseusers = array();
+        }
+
+        $groupusers = array();
+        $hasgroup = $this->groupsmanager->has_group($userid);
+        if ($hasgroup) {
+            $groupusers = $this->groupsmanager->get_group_members($userid);
+        }
+
+        if (!count($groupusers) >= 2 || !$this->groupsmanager->groups_created()) {
+            $groupusers = array();
+        }
+
+        $cc = new mod_groupformation_criterion_calculator($this->groupformationid);
+
+        if (!$this->usermanager->has_evaluation_values($userid)) {
+            $this->usermanager->set_evaluation_values($userid);
+        }
+
+        return $cc->get_eval($userid, $groupusers, $courseusers);
     }
 }

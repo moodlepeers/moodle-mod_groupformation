@@ -21,7 +21,7 @@
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class mod_groupformation_question_table_header {
+class mod_groupformation_question_table {
 
     /**
      * Print HTML of table header
@@ -30,22 +30,27 @@ class mod_groupformation_question_table_header {
      * @param $tabletype
      * @param $headeroptarray
      */
-    public function print_html($category, $tabletype, $headeroptarray) {
+    public function print_header($category, $tabletype, $headeroptarray) {
 
-        if ($tabletype == 'type_topics') {
+        if ($tabletype == 'topics') {
             echo '<div id="topicshead">' . get_string('topics_question', 'groupformation') . '</div><ul class="sortable_topics">';
 
         } else {
             echo '<table class="responsive-table">' . '<colgroup><col class="firstCol"><colgroup>';
 
-            echo '<thead><tr><th scope="col">' .
-                (($tabletype == 'type_knowledge') ? get_string('knowledge_question', 'groupformation') :
-                    get_string('category_' . $category, 'groupformation')) . '</th>';
+            echo '<thead><tr><th scope="col">';
+
+            if ($tabletype == 'type_knowledge') {
+                echo get_string('knowledge_question', 'groupformation');
+            } else {
+                echo get_string('category_' . $category, 'groupformation');
+            }
+            echo '</th>';
             if ($tabletype == 'radio') {
                 $headersize = count($headeroptarray);
 
                 echo '<th scope="col" colspan="' . $headersize . '"><span style="float:left">' . $headeroptarray[0] . '</span>
-																						<span style="float:right">' .
+                                                                                        <span style="float:right">' .
                     $headeroptarray[$headersize - 1] . '</span></th>';
             } else if ($tabletype == 'type_knowledge') {
                 echo '<th scope="col"><div class="legend">' . get_string('knowledge_scale', 'groupformation') .
@@ -55,6 +60,26 @@ class mod_groupformation_question_table_header {
             }
 
             echo '</tr></thead><tbody>';
+        }
+    }
+
+    /**
+     * Print HTML for table footer
+     *
+     * @param $tabletype
+     */
+    public function print_footer($tabletype) {
+        // Closing the table or unordered list.
+        if ($tabletype == 'topics') {
+            // Close unordered list.
+            echo '</ul>';
+
+            echo '<div id="invisible_topics_inputs">
+                            </div>';
+        } else {
+            // Close tablebody and close table.
+            echo ' </tbody>
+                          </table>';
         }
     }
 }

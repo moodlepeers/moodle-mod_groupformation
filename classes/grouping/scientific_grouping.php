@@ -25,31 +25,18 @@ if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.');
 }
 
-require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
-require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
-require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_parser.php');
-require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/lib.php');
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/grouping.php');
 
-require_once($CFG->dirroot . '/mod/groupformation/lib/classes/criteria/specific_criterion.php');
-require_once($CFG->dirroot . '/mod/groupformation/lib/classes/participant.php');
-require_once($CFG->dirroot . '/mod/groupformation/lib/classes/matchers/group_centric_matcher.php');
-require_once($CFG->dirroot . '/mod/groupformation/lib/classes/algorithms/basic_algorithm.php');
-require_once($CFG->dirroot . '/mod/groupformation/lib/classes/algorithms/random_algorithm.php');
-require_once($CFG->dirroot . '/mod/groupformation/lib/classes/algorithms/topic_algorithm.php');
-require_once($CFG->dirroot . '/mod/groupformation/lib/classes/optimizers/optimizer.php');
-require_once($CFG->dirroot . '/mod/groupformation/lib/classes/xml_writers/participant_writer.php');
-require_once($CFG->dirroot . '/mod/groupformation/lib/classes/xml_writers/cohort_writer.php');
-
-class mod_groupformation_scientific_grouping extends mod_groupformation_grouping{
+class mod_groupformation_scientific_grouping extends mod_groupformation_grouping {
 
     private $groupformationid;
     private $usermanager;
     private $store;
     private $groupsmanager;
     private $criterioncalculator;
+    private $data;
 
     /**
      * mod_groupformation_job_manager constructor.
@@ -62,6 +49,7 @@ class mod_groupformation_scientific_grouping extends mod_groupformation_grouping
         $this->groupsmanager = new mod_groupformation_groups_manager($groupformationid);
         $this->criterioncalculator = new mod_groupformation_criterion_calculator($groupformationid);
         $this->participantparser = new mod_groupformation_participant_parser($groupformationid);
+        $this->data = new mod_groupformation_data();
     }
 
     /**
@@ -71,27 +59,15 @@ class mod_groupformation_scientific_grouping extends mod_groupformation_grouping
      * @return array
      */
     public function run_grouping($users) {
+
+        $big5specs = $this->data->get_criterion_specification('big5');
+
+        unset($big5specs['labels']['neurotizismus']);
+        unset($big5specs['labels']['offenheit']);
+        unset($big5specs['labels']['vertraeglichkeit']);
+
         $specs = array(
-            "big5" => array(
-                "category" => "character",
-                "scenarios" => array(1, 2),
-                "labels" => array(
-                    "extraversion" => array(
-                        "scenarios" => array(1 => false, 2 => false),
-                        "evaluation" => true,
-                        "questionids" => array(12,-1,13,14,-15,16,-17,6),
-                        "significant_id_only" => false,
-                        "cutoffs" => array(0.313169217,0.776242547),
-                    ),
-                    "gewissenhaftigkeit" => array(
-                        "scenarios" => array(1 => true, 2 => true),
-                        "evaluation" => true,
-                        "questionids" => array(8,-32,33,-34,-35,21,22,23,-24),
-                        "significant_id_only" => false,
-                        "cutoffs" => array(0.456596974,0.831246163),
-                    ),
-                ),
-            ),
+            "big5" => $big5specs
         );
 
         $configurations = array(
@@ -112,11 +88,11 @@ class mod_groupformation_scientific_grouping extends mod_groupformation_grouping
 
         $groupsizes = $this->store->determine_group_size($users);
 
-        if (count($users[0])<$numberofslices){
+        if (count($users[0]) < $numberofslices) {
             return array();
         }
 
-        // divide users into n slices
+        // Divide users into n slices.
         $slices = $this->slicing($users[0], $numberofslices);
 
         $cohorts = array();
@@ -127,20 +103,20 @@ class mod_groupformation_scientific_grouping extends mod_groupformation_grouping
             $configurationkey = $configurationkeys[$i];
             $configuration = $configurations[$configurationkey];
 
-            $raw_participants = $this->participantparser->build_participants($slice,$specs);
+            $rawparticipants = $this->participantparser->build_participants($slice, $specs);
 
-            $participants = $this->configure_participants($raw_participants, $configuration);
+            $participants = $this->configure_participants($rawparticipants, $configuration);
 
             $cohorts[$configurationkey] = $this->build_cohort($participants, $groupsizes[0], $configurationkey);
         }
 
-        // Handle all users with incomplete or no questionnaire submission
-        $randomparticipantskey = "rand:1;mrand:_;ex:_;gh:_";
+        // Handle all users with incomplete or no questionnaire submission.
+        $randomkey = "rand:1;mrand:_;ex:_;gh:_";
 
         $randomparticipants = $this->participantparser->build_empty_participants($users[1]);
-        $randomcohort = $this->build_cohort($randomparticipants, $groupsizes[1],$randomparticipantskey);
+        $randomcohort = $this->build_cohort($randomparticipants, $groupsizes[1], $randomkey);
 
-        $cohorts[$randomparticipantskey] = $randomcohort;
+        $cohorts[$randomkey] = $randomcohort;
 
         return $cohorts;
     }

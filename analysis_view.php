@@ -35,12 +35,13 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/stora
 $id = optional_param('id', 0, PARAM_INT);
 $doshow = optional_param('do_show', 'analysis', PARAM_TEXT);
 
+$runjob = optional_param('runjob', false, PARAM_BOOL);
 $createusers = optional_param('create_users', 0, PARAM_INT);
 $createanswers = optional_param('create_answers', false, PARAM_BOOL);
 $randomanswers = optional_param('random_answers', false, PARAM_BOOL);
 $deleteusers = optional_param('delete_users', false, PARAM_BOOL);
-$reset_job = optional_param('reset_job', false, PARAM_BOOL);
-$fix_answers = optional_param('fix_answers', false, PARAM_BOOL);
+$resetjob = optional_param('reset_job', false, PARAM_BOOL);
+$fixanswers = optional_param('fix_answers', false, PARAM_BOOL);
 
 // Import jQuery and js file.
 groupformation_add_jquery($PAGE, 'survey_functions.js');
@@ -77,17 +78,26 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/job_m
 require_once($CFG->dirroot . '/mod/groupformation/classes/controller/analysis_controller.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_parser.php');
 
-/* --------- Hard Reset a pending groupformation job ---- */
-if ($reset_job) {
-	global $DB;
+if ($CFG->debug === 32767 && $resetjob) {
+    global $DB;
 
-	$DB->delete_records('groupformation_jobs', array('groupformationid' => $groupformation->id));
+    $DB->delete_records('groupformation_jobs', array('groupformationid' => $groupformation->id));
 }
-/* ----------- / Hard Reset a pending job -------------- */
 
-/* ---------- Automated test user generation ------------ */
+if ($CFG->debug === 32767 && $runjob) {
+    $jm = new mod_groupformation_job_manager ();
+    $job = null;
 
-if ($CFG->debug === 32767) { //true) {
+    $job = $jm::get_job($groupformation->id);
+
+    if (!is_null($job)) {
+        $result = $jm::do_groupal($job);
+        var_dump($result);
+        // $saved = $jm::save_result($job,$result);
+    }
+}
+
+if ($CFG->debug === 32767) {
     $cqt = new mod_groupformation_test_user_generator ($cm);
 
     if ($deleteusers) {
@@ -103,34 +113,17 @@ if ($CFG->debug === 32767) { //true) {
         redirect($return->out());
     }
 }
-/* ---------- / Automated test user generation ---------- */
-
-/* ---------- Job Manager Usage ------------------------- */
-
-//$jm = new mod_groupformation_job_manager ();
-//$job = null;
-//
-//$job = $jm::get_job($groupformation->id);
-//
-//if (!is_null($job)) {
-//    $result = $jm::do_groupal($job);
-//    var_dump($result);
-//    // $saved = $jm::save_result($job,$result);
-//}
-
-/* ---------- / Job Manager Usage ----------------------- */
 
 $controller = new mod_groupformation_analysis_controller ($groupformation->id, $cm);
 
 /* ---- Code for fixing Answers can be removed after 15-09-2016 ---- */
-if ($CFG->debug === 32767 && $fix_answers) {
+if ($CFG->debug === 32767 && $fixanswers) {
     $controller->fix_answers();
     echo '<div class="alert">Answers fixed - do not repeat this action!</div>';
     $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
         'id' => $id, 'do_show' => 'analysis'));
     redirect($return->out());
 }
-/* ---------------------------------------------------------------- */
 
 if ((data_submitted()) && confirm_sesskey()) {
     $switcher = optional_param('questionnaire_switcher', null, PARAM_INT);

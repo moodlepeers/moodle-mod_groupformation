@@ -25,25 +25,11 @@ if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.');
 }
 
-require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
-require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
-require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_parser.php');
-require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/lib.php');
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/grouping.php');
 
-require_once($CFG->dirroot . '/mod/groupformation/lib/classes/criteria/specific_criterion.php');
-require_once($CFG->dirroot . '/mod/groupformation/lib/classes/participant.php');
-require_once($CFG->dirroot . '/mod/groupformation/lib/classes/matchers/group_centric_matcher.php');
-require_once($CFG->dirroot . '/mod/groupformation/lib/classes/algorithms/basic_algorithm.php');
-require_once($CFG->dirroot . '/mod/groupformation/lib/classes/algorithms/random_algorithm.php');
-require_once($CFG->dirroot . '/mod/groupformation/lib/classes/algorithms/topic_algorithm.php');
-require_once($CFG->dirroot . '/mod/groupformation/lib/classes/optimizers/optimizer.php');
-require_once($CFG->dirroot . '/mod/groupformation/lib/classes/xml_writers/participant_writer.php');
-require_once($CFG->dirroot . '/mod/groupformation/lib/classes/xml_writers/cohort_writer.php');
-
-class mod_groupformation_basic_grouping extends mod_groupformation_grouping{
+class mod_groupformation_basic_grouping extends mod_groupformation_grouping {
 
     private $groupformationid;
     private $usermanager;
@@ -81,38 +67,38 @@ class mod_groupformation_basic_grouping extends mod_groupformation_grouping{
 
         $groupsizes = $this->store->determine_group_size($users);
 
-        if (count($users[0]) < $numberofslices) {
-            return array();
-        }
-        // divide users into n slices
-        $slices = $this->slicing($users[0], $numberofslices);
-
         $cohorts = array();
 
-        for ($i = 0; $i < $numberofslices; $i++) {
-            $slice = $slices[$i];
+        if (count($users[0]) >= $numberofslices) {
 
-            $configurationkey = $configurationkeys[$i];
+            // Divide users into n slices.
+            $slices = $this->slicing($users[0], $numberofslices);
 
-            $raw_participants = $this->participantparser->build_participants($slice);
+            for ($i = 0; $i < $numberofslices; $i++) {
+                $slice = $slices[$i];
 
-            $participants = $raw_participants;
+                $configurationkey = $configurationkeys[$i];
 
-            $cohorts[$configurationkey] = $this->build_cohort($participants, $groupsizes[0], $configurationkey);
+                $rawparticipants = $this->participantparser->build_participants($slice);
+
+                $participants = $rawparticipants;
+
+                $cohorts[$configurationkey] = $this->build_cohort($participants, $groupsizes[0], $configurationkey);
+            }
         }
 
-        // Handle all users with incomplete or no questionnaire submission
-        $randomparticipantskey = "random:1";
+        // Handle all users with incomplete or no questionnaire submission.
+        $randomkey = "random:1";
         $randomcohort = null;
 
-        if (count($users[1])>0){
+        if (count($users[1]) > 0) {
 
             $randomparticipants = $this->participantparser->build_empty_participants($users[1]);
-            $randomcohort = $this->build_cohort($randomparticipants, $groupsizes[1], $randomparticipantskey);
+            $randomcohort = $this->build_cohort($randomparticipants, $groupsizes[1], $randomkey);
 
         }
 
-        $cohorts[$randomparticipantskey] = $randomcohort;
+        $cohorts[$randomkey] = $randomcohort;
 
         return $cohorts;
     }

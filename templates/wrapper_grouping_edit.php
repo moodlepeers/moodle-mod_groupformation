@@ -28,16 +28,16 @@
 
         <?php echo $this->_['grouping_edit_header']; ?>
 
-<!--        <div class="gf_pad_header_small">-->
-<!--            &Uuml;bersicht gebildeter Gruppen-->
-<!--        </div>-->
+        <!--        <div class="gf_pad_header_small">-->
+        <!--            &Uuml;bersicht gebildeter Gruppen-->
+        <!--        </div>-->
         <div class="gf_pad_header_opaque">
 
         </div>
     </div>
 
-<!--    <div class="gf_pad_content">-->
-        <?php echo $this->_['grouping_generated_groups']; ?>
-<!--    </div>-->
+    <!--    <div class="gf_pad_content">-->
+    <?php echo $this->_['grouping_generated_groups']; ?>
+    <!--    </div>-->
 </div>
 

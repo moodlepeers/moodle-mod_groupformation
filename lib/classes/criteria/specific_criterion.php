@@ -1,23 +1,19 @@
 <?php
-// This file is part of PHP implementation of GroupAL
-// http://sourceforge.net/projects/groupal/
+// This file is part of Moodle - http://moodle.org/
 //
-// GroupAL is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// GroupAL implementations are distributed in the hope that it will be useful,
+// Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU Lesser General Public License for more details.
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 //
-// You should have received a copy of the GNU Lesser General Public License
-// along with GroupAL. If not, see <http://www.gnu.org/licenses/>.
-//
-//  This code CAN be used as a code-base in Moodle
-// (e.g. for moodle-mod_groupformation). Then put this code in a folder
-// <moodle>\lib\groupal
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
  * This class contains values based on users characteristics and skills
  *
@@ -27,24 +23,24 @@
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion_weight.php");
 
-class lib_groupal_specific_criterion extends lib_groupal_criterion {
+class mod_groupformation_specific_criterion extends mod_groupformation_criterion {
 
 
     /**
-     * lib_groupal_specific_criterion constructor.
+     * mod_groupformation_specific_criterion constructor.
      * @param $name
-     * @param $valueArray
-     * @param $minVal
-     * @param $maxVal
-     * @param $isHomo
+     * @param $valuearray
+     * @param $minval
+     * @param $maxval
+     * @param $ishomo
      * @param $weight
      */
-    public function __construct($name, $valueArray, $minVal, $maxVal, $isHomo, $weight) {
-        $this->setName($name);
-        $this->setMinValue($minVal);
-        $this->setMaxValue($maxVal);
-        $this->setValues($valueArray);
-        $this->setIsHomogeneous($isHomo);
-        lib_groupal_criterion_weight::addIfNotAllreadyExist($name, $weight);
+    public function __construct($name, $valuearray, $minval, $maxval, $ishomo, $weight) {
+        $this->set_name($name);
+        $this->set_min_value($minval);
+        $this->set_max_value($maxval);
+        $this->set_values($valuearray);
+        $this->set_homogeneous($ishomo);
+        mod_groupformation_criterion_weight::add_if_not_allready_exist($name, $weight);
     }
 }

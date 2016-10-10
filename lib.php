@@ -83,7 +83,7 @@ function groupformation_add_instance(stdClass $groupformation, mod_groupformatio
 
     $groupformation->version = groupformation_get_current_questionnaire_version();
 
-        // Checks all fields and sets them properly.
+    // Checks all fields and sets them properly.
     $groupformation = groupformation_set_fields($groupformation);
 
     $id = $DB->insert_record('groupformation', $groupformation);
@@ -189,6 +189,12 @@ function groupformation_delete_instance($id) {
         'groupformation' => $id));
     $DB->delete_records('groupformation_jobs', array(
         'groupformationid' => $id));
+    $DB->delete_records('groupformation_user_values', array(
+        'groupformationid' => $id));
+    $DB->delete_records('groupformation_groups', array(
+        'groupformation' => $id));
+    $DB->delete_records('groupformation_group_users', array(
+        'groupformation' => $id));
     groupformation_grade_item_delete($groupformation);
 
     return true;

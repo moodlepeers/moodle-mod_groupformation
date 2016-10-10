@@ -1,79 +1,75 @@
 <?php
-// This file is part of PHP implementation of GroupAL
-// http://sourceforge.net/projects/groupal/
+// This file is part of Moodle - http://moodle.org/
 //
-// GroupAL is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// GroupAL implementations are distributed in the hope that it will be useful,
+// Moodle is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU Lesser General Public License for more details.
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 //
-// You should have received a copy of the GNU Lesser General Public License
-// along with GroupAL. If not, see <http://www.gnu.org/licenses/>.
-//
-//  This code CAN be used as a code-base in Moodle
-// (e.g. for moodle-mod_groupformation). Then put this code in a folder
-// <moodle>\lib\groupal
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
- * This class contains a static array of criteria weights
+ * This class contains a static array of criteria weights.
  *
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/lgpl.html GNU LGPL v3 or later
  */
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/util/hash_map.php");
 
-class lib_groupal_criterion_weight {
+class mod_groupformation_criterion_weight {
 
-    /** @var lib_groupal_hash_map This hash map contains all criterion weights */
-    public static $criterionWeights;
+    /** @var mod_groupformation_hash_map This hash map contains all criterion weights */
+    public static $criterionweights;
 
 
     /**
-     * Initializes the weights
+     * Initializes the weights.
      */
     public static function init() {
-        if (static::$criterionWeights == null) {
-            static::$criterionWeights = new lib_groupal_hash_map();
+        if (static::$criterionweights == null) {
+            static::$criterionweights = new mod_groupformation_hash_map();
         }
     }
 
     /**
-     * Adds criterion weight to static collection of all weights
+     * Adds criterion weight to static collection of all weights.
      *
      * @param $k String
      * @param $v float
      * @throws Exception if key already exists
      * @return true
      */
-    public static function addCriterionWeight($k, $v) {
+    public static function add_criterion_weight($k, $v) {
         self::init();
-        if (static::$criterionWeights->containsKey($k)) {
+        if (static::$criterionweights->contains_key($k)) {
             throw new Exception("key already in use");
         }
-        static::$criterionWeights->add($k, $v);
+        static::$criterionweights->add($k, $v);
         return true;
     }
 
 
     /**
-     * Changing CriterionWeights; only allowed if keys are equal to existing ones and the sum of all weights is 1 (normed)
+     * Changing CriterionWeights; only allowed if keys are equal to existing ones and the sum of all weights is 1.
      *
-     * @param CriterionWeights as HashMap
+     * @param mod_groupformation_hash_map $newweights
      * @return bool
      */
-    public static function changeWeights(lib_groupal_hash_map $newWeights) {
-        $isSameKeySet = true;
-        foreach ($newWeights->keys as $s) {
-            $isSameKeySet &= self::$criterionWeights->containsKey($s);
+    public static function change_weights(mod_groupformation_hash_map $newweights) {
+        $issamekeyset = true;
+        foreach ($newweights->keys as $s) {
+            $issamekeyset &= self::$criterionweights->contains_key($s);
         }
         // TODO foreach loop on values and calculate the sum of values.
-        $sumOfValues = 1;
-        if ($sumOfValues == 1 && isSameKeySet) {
-            static::$criterionWeights = $newWeights;
+        $sumofvalues = 1;
+        if ($sumofvalues == 1 && $issamekeyset) {
+            static::$criterionweights = $newweights;
             return true;
         }
         return false;
@@ -81,15 +77,15 @@ class lib_groupal_criterion_weight {
     // TODO wieso muss Summer der Values 1 ergeben? warum diese überprüfung? (JK: Normalisierung prüfen).
 
     /**
-     * @param String $criterionName
+     * @param String $criterionname
      * @return float
      * @throws Exception if $criterionName does not exist
      */
-    public static function getWeight($criterionName) {
+    public static function get_weight($criterionname) {
         try {
-            return self::$criterionWeights->getValue($criterionName);
+            return self::$criterionweights->get_value($criterionname);
         } catch (Exception $e) {
-            throw new Exception("lib_groupal_criterion_weight does not contain the CriterionName you are looking for!", $e);
+            throw new Exception("mod_groupformation_criterion_weight does not contain the CriterionName you are looking for!", $e);
         }
     }
 
@@ -101,16 +97,14 @@ class lib_groupal_criterion_weight {
      * @throws Exception if key exists already with different value
      * @return true
      */
-    public static function addIfNotAllreadyExist($name, $weight) {
+    public static function add_if_not_allready_exist($name, $weight) {
         self::init();
-        if (self::$criterionWeights->containsKey($name) && self::$criterionWeights->getValue($name) != $weight
+        if (self::$criterionweights->contains_key($name) && self::$criterionweights->get_value($name) != $weight
         ) {
-            throw new Exception("lib_groupal_criterion_weight: the given CriterionName has already an other weight");
+            throw new Exception("mod_groupformation_criterion_weight: the given CriterionName has already an other weight");
         }
         // Do not call addCriterionWeight as it throws exceptions on repetive calls.
-        self::$criterionWeights->add($name, $weight);
+        self::$criterionweights->add($name, $weight);
         return true;
     }
-    // TODO Was soll diese Funktion machen??? was ist daran anders als an addCriterionWeights?
-    // Die function kann mehrfach aufgerufen werden mit den gleichen key/values ohne exceptions zu werfen.
 }
