@@ -272,7 +272,6 @@ class mod_groupformation_grouping_controller {
                 break;
 
             case 3 :
-
                 $settingsgroupview->assign('status', array(
                     get_string('grouping_status_3', 'groupformation'), 1));
                 $settingsgroupview->assign('buttons', $array);
@@ -282,6 +281,7 @@ class mod_groupformation_grouping_controller {
 
                 $settingsgroupview->assign('status', array(
                     get_string('grouping_status_4', 'groupformation'), 0));
+
                 $array['button2']['value'] = 1;
                 $array['button2']['state'] = '';
                 $array['button3']['value'] = 1;
@@ -297,6 +297,8 @@ class mod_groupformation_grouping_controller {
                     get_string('grouping_status_5', 'groupformation'), 0));
                 $array['button2']['value'] = 1;
                 $array['button2']['state'] = '';
+                $array['button2']['text'] = get_string('grouping_delete_moodle_groups', 'groupformation');
+
                 $settingsgroupview->assign('buttons', $array);
                 break;
 
