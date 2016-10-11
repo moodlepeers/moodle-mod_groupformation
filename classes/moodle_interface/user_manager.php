@@ -407,7 +407,7 @@ class mod_groupformation_user_manager
 
         $questionid = $position;
 
-        if (!in_array($category,array('knowledge','topics'))){
+        if (!in_array($category,array('knowledge','topic'))){
             $question = $this->store->get_question_by_position($category,$position);
             $questionid = $question->questionid;
         }
