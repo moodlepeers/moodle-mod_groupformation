@@ -181,7 +181,7 @@ $string ['info_text_student'] = 'In diesem Moodle-Kurs wird die Gruppenformation
 		<br><br>
 		Fragen? Probleme? Lob? Anregungen?<br>
 		Die Plugin-Entwickler/innen und Wissenschaftler/innen dazu, finden Sie unter<br>
-		http://sourceforge.net/projects/moodlepeers/ <br>
+		https://github.com/moodlepeers <br>
 		(erstellt und weiterentwickelt mit Mitteln zur Qualitätsverbesserung der Lehre\' der TU Darmstadt)
 ';
 $string ['info_header_teacher_analysis'] = 'Wie funktioniert die Gruppenformation?';
