@@ -78,13 +78,14 @@ class mod_groupformation_topic_algorithm implements mod_groupformation_ialgorith
         $distributor = new mod_groupformation_solver_edmonds_karp();
         $results = $distributor->distribute_users($this->ratings, $this->topics, $this->participantscount);
         $groups = array();
-        foreach (array_values($results) as $participantsids) {
-            $group = new mod_groupformation_group();
+        var_dump($results);
+        foreach ($results as $topicid => $participantsids) {
+            $group = new mod_groupformation_group($topicid+1);
             foreach ($participantsids as $id) {
                 $p = $this->participants[$id];
                 $group->add_participant($p, true);
             }
-            $groups[] = $group;
+            $groups[$topicid] = $group;
         }
 
         $this->cohort = new mod_groupformation_topic_cohort(count($groups), $groups);

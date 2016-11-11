@@ -42,10 +42,14 @@ class mod_groupformation_group {
 
     /**
      * mod_groupformation_group constructor.
+     * @param null $id
      */
-    public function __construct() {
+    public function __construct($id = null) {
         static::$groupcount++;
         $this->groupid = static::$groupcount;
+        if (is_null($id)){
+            $this->groupid = $id;
+        }
         $this->participants = array();
 
     }
