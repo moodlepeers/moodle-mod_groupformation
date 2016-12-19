@@ -50,7 +50,7 @@ class mod_groupformation_storage_manager {
     public function get_version() {
         global $DB;
 
-        return $DB->get_field('groupformation', 'version', array('id' => $this->groupformationid));
+        return $DB->get_field('groupformation','version',array('id'=>$this->groupformationid));
     }
 
     /**
@@ -97,6 +97,8 @@ class mod_groupformation_storage_manager {
     public function catalog_table_not_set($category = 'grade') {
         global $DB;
 
+        // $count = $DB->count_records('groupformation_' . $category);
+        // TODO
         $count = $DB->count_records('groupformation_question', array('category' => $category));
 
         return $count == 0;
@@ -125,7 +127,7 @@ class mod_groupformation_storage_manager {
             'course' => $courseid
         ), 'id', 'id');
         $i = 1;
-        foreach (array_keys($records) as $id) {
+        foreach ($records as $id => $record) {
             if ($id == $this->groupformationid) {
                 return $i;
             } else {
@@ -256,6 +258,8 @@ class mod_groupformation_storage_manager {
     public function get_possible_language($category) {
         global $DB;
 
+        // $table = 'groupformation_' . $category;
+        // TODO
         $table = 'groupformation_question';
 
         $lang = $DB->get_field($table, 'language', array('category' => $category), IGNORE_MULTIPLE);
@@ -273,13 +277,13 @@ class mod_groupformation_storage_manager {
         global $DB;
 
         if ($category == 'topic' || $category == 'knowledge') {
-            return intval($DB->get_field('groupformation_q_settings', $category . 'valuesnumber', array(
+            return $DB->get_field('groupformation_q_settings', $category . 'valuesnumber', array(
                 'groupformation' => $this->groupformationid
-            )));
+            ));
         } else {
-            return intval($DB->get_field('groupformation_q_version', 'numberofquestion', array(
+            return $DB->get_field('groupformation_q_version', 'numberofquestion', array(
                 'category' => $category
-            )));
+            ));
         }
     }
 
@@ -309,11 +313,19 @@ class mod_groupformation_storage_manager {
         if ($category == 'points') {
             return $this->get_max_points();
         }
+
+        // $table = 'groupformation_' . $category;
+        // TODO
         $table = 'groupformation_question';
         return $DB->get_field($table, 'optionmax', array(
             'language' => 'en', 'category' => $category,
             'questionid' => $i
         ));
+
+        //return $DB->get_field($table, 'optionmax', array(
+        //    'language' => 'en',
+        //    'questionid' => $i
+        //));
     }
 
     /**
@@ -326,12 +338,18 @@ class mod_groupformation_storage_manager {
      */
     public function get_catalog_question($i, $category = 'general', $lang = 'en', $version = null) {
         global $DB;
-
+        $table = "groupformation_" . $category;
+        // TODO
         $table = 'groupformation_question';
         $return = $DB->get_record($table, array(
             'language' => $lang, 'category' => $category,
             'position' => $i, 'version' => $version
         ));
+
+        // $return = $DB->get_record($table, array(
+        //     'language' => $lang,
+        //     'position' => $i
+        // ));
 
         return $return;
     }
@@ -368,20 +386,6 @@ class mod_groupformation_storage_manager {
         }
 
         return $settings->szenario;
-    }
-
-    /**
-     * Returns scenario name
-     *
-     * @return string
-     */
-    public function get_scenario_name() {
-        global $DB;
-
-        $settings = $DB->get_record('groupformation', array(
-            'id' => $this->groupformationid
-        ));
-        return $this->data->get_scenario_name($settings->szenario);
     }
 
     /**
@@ -524,7 +528,7 @@ class mod_groupformation_storage_manager {
     public function is_editable() {
         global $DB;
 
-        if (is_null($this->groupformationid) || $this->groupformationid == '') {
+        if (is_null($this->groupformationid) || $this->groupformationid == ''){
             return true;
         }
 
@@ -880,7 +884,7 @@ class mod_groupformation_storage_manager {
                 $result = array();
 
                 $i = 0;
-                foreach (array_values($topics) as $topic) {
+                foreach ($topics as $key => $topic) {
                     if ($i < $remaininguserscount) {
                         $result [intval($topic ['id']) - 1] = intval(round($basegroupsize + 1));
                     } else {
@@ -896,6 +900,7 @@ class mod_groupformation_storage_manager {
                 $topicsoptions = mod_groupformation_util::xml_to_array($topicvalues);
                 $topicscount = count($topicsoptions);
 
+                $maxmembers = intval($this->get_max_members());
                 $userscount0 = count($users [0] + $users [1]);
                 $maxmembers = ceil($userscount0 / $topicscount);
                 $array = array();
@@ -904,6 +909,8 @@ class mod_groupformation_storage_manager {
                 }
                 return $array;
             }
+
+            return $sizearray;
         } else {
 
             $userscount0 = count($users [0]);
@@ -1004,38 +1011,19 @@ class mod_groupformation_storage_manager {
      * @param $version
      * @return array
      */
-    public function get_questions($category) {
+    public function get_questions($category,$version=0){
         global $DB;
 
-        return $DB->get_records('groupformation_question', array('category' => $category, 'language' => 'en'));
+        return $DB->get_records('groupformation_question',array('category'=>$category,'language'=>'de'));
     }
 
     /**
-     * Returns questions for a user in randomized order (with user-specific seed)
-     *
-     * @param $category
-     * @param $userid
-     * @return array
+     * Returns question by position
      */
-    public function get_questions_randomized_for_user($category, $userid) {
-        $questions = array_values($this->get_questions($category));
-
-        srand($userid);
-        usort($questions, function ($a, $b) {
-            return rand(-1, 1);
-        });
-
-        return $questions;
-    }
-
-    /**
-     * Returns question by position.
-     */
-    public function get_question_by_position($category, $position) {
+    public function get_question_by_position($category,$position){
         global $DB;
 
-        return $DB->get_record('groupformation_question',
-            array('category' => $category, 'language' => 'en', 'position' => $position));
+        return $DB->get_record('groupformation_question',array('category'=>$category,'language'=>'en','position'=>$position));
 
     }
 }

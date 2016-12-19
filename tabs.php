@@ -66,7 +66,7 @@ if (has_capability('mod/groupformation:editsettings', $context)) {
     $row [] = new tabobject ('view', $questionnaireviewurl->out(), get_string('tab_preview', 'groupformation'));
 
     // The import/export view.
-    if (false) {
+    if (true) {
         $exporturl = new moodle_url ('/mod/groupformation/export_view.php', array(
             'id' => $usedid, 'do_show' => 'export'));
         $row [] = new tabobject ('import_export', $exporturl->out(), 'Export');
