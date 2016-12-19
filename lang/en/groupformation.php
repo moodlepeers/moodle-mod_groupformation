@@ -455,3 +455,17 @@ $string['participant_code_alert_message'] = 'You need enter a valid participant 
 $string ['questionnaire_press_to_begin_participant_code'] = 'Enter your participant code and give your consent. Click "Next" to begin.';
 
 $string['questionnaire_outdated'] = 'This activity is too old. The correct functionality cannot be ensured. Please create a new activity to enjoy the full functionality.';
+
+$string['settings_header'] = 'General';
+$string['settings_description'] = 'Settings for archiving and additional functionality.';
+
+$string['settings_archiving_time'] = 'Archiving time';
+$string['settings_archiving_time_description'] = 'After x days the activity will be archived.';
+
+$string['settings_import_export'] = 'Import/Export of answers';
+$string['settings_import_export_description'] = 'If set, students can export their answers and import answers in another instance.';
+
+$string['settings_participant_code'] = 'Participant code';
+$string['settings_participant_code_description'] = 'Students need to enter a participant code (as used in psychological tests).';
+
+

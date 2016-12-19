@@ -458,17 +458,17 @@ $string ['questionnaire_press_to_begin_participant_code'] = 'Geben Sie ihren Tei
 
 $string['questionnaire_outdated'] = 'Diese Aktivität ist veraltet. Die fehlerfreie Nutzung kann nicht gewährleistet werden. Bitte erstellen Sie eine neue Aktivität, um den vollen Funktionsumfang nutzen zu können.';
 
+$string['settings_header'] = 'Allgemeines';
+$string['settings_description'] = 'Einstellungen für Archivierung und zusätzliche Funktionen.';
 
+$string['settings_archiving_time'] = 'Archivierungszeitpunkt';
+$string['settings_archiving_time_description'] = 'Nach der gesetzten Anzahl an Tagen wird die Aktivität archiviert.';
 
+$string['settings_import_export'] = 'Import/Export von Antworten';
+$string['settings_import_export_description'] = 'Wenn aktiviert, können Studierende ihre Antworten importieren bzw. exportieren.';
 
-
-
-
-
-
-
-
-
+$string['settings_participant_code'] = 'Teilnehmercode';
+$string['settings_participant_code_description'] = 'Studierende müssen einen Teilnehmercode eingeben (so wie in psychologischen Tests).';
 
 
 

@@ -234,6 +234,9 @@ class mod_groupformation_data {
             'character',
             'motivation',
             'team',
+            'srl',
+            'sellmo',
+            'self',
         ),
         '2' => array(
             'general',
@@ -242,14 +245,15 @@ class mod_groupformation_data {
             'character',
             'learning',
             'team',
+            'srl',
+            'sellmo',
+            'self',
         ),
         '3' => array(
             'topic',
         ),
     );
 
-    private $participantcode = false;
-    private $importexportenabled = true;
     private $mathprepcoursemode = false;
     private $allanswersrequired = false;
 
@@ -338,7 +342,11 @@ class mod_groupformation_data {
      * @return bool
      */
     public function ask_for_participant_code() {
-        return $this->participantcode;
+        $config_value = get_config('groupformation','participant_code');
+        if (!is_null($config_value)){
+            return $config_value;
+        }
+        return false;
     }
 
     /**
@@ -346,7 +354,11 @@ class mod_groupformation_data {
      * @return bool
      */
     public function import_export_enabled() {
-        return $this->importexportenabled;
+        $config_value = get_config('groupformation','import_export');
+        if (!is_null($config_value)){
+            return $config_value;
+        }
+        return true;
     }
 
     public function all_answers_required() {

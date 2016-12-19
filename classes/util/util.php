@@ -195,7 +195,14 @@ class mod_groupformation_util {
     public static function handling_old_instances() {
         global $DB;
         $now = time();
-        $difference = 360 * 24 * 60 * 60;
+
+        $config_value = get_config('groupformation','archiving_time');
+
+        if(is_null($config_value) || intval($config_value)<=0) {
+            $config_value = 360;
+        }
+
+        $difference = intval($config_value) * 24 * 60 * 60;
         $instances = $DB->get_records('groupformation');
 
         foreach ($instances as $groupformation) {
