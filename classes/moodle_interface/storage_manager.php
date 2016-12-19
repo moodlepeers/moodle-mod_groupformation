@@ -338,18 +338,11 @@ class mod_groupformation_storage_manager {
      */
     public function get_catalog_question($i, $category = 'general', $lang = 'en', $version = null) {
         global $DB;
-        $table = "groupformation_" . $category;
-        // TODO
         $table = 'groupformation_question';
         $return = $DB->get_record($table, array(
             'language' => $lang, 'category' => $category,
             'position' => $i, 'version' => $version
         ));
-
-        // $return = $DB->get_record($table, array(
-        //     'language' => $lang,
-        //     'position' => $i
-        // ));
 
         return $return;
     }
@@ -1011,11 +1004,28 @@ class mod_groupformation_storage_manager {
      * @param $version
      * @return array
      */
-    public function get_questions($category,$version=0){
+    public function get_questions($category,$lang = 'en'){
         global $DB;
 
-        return $DB->get_records('groupformation_question',array('category'=>$category,'language'=>'de'));
+        return $DB->get_records('groupformation_question',array('category'=>$category,'language'=>$lang));
     }
+
+    /**
+     * Returns questions for a user in randomized order (with user-specific seed)
+     *
+     * @param $category
+     * @param $userid
+     * @return array
+     */
+    public function get_questions_randomized_for_user($category, $userid, $lang = 'en') {
+        $questions = array_values($this->get_questions($category, $lang));
+        srand($userid);
+        usort($questions, function ($a, $b) {
+            return rand(-1, 1);
+        });
+        return $questions;
+    }
+
 
     /**
      * Returns question by position

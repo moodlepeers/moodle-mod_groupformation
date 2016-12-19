@@ -213,6 +213,7 @@ class mod_groupformation_questionnaire_controller {
      * @return array
      */
     public function get_next_questions() {
+        $lang = $this->lang;
         if ($this->currentcategoryposition != -1) {
 
             $questions = array();
@@ -277,7 +278,7 @@ class mod_groupformation_questionnaire_controller {
                     $questions = $questionsfirst;
                 }
             } else if ($this->is_points()) {
-                $records = $this->store->get_questions_randomized_for_user($this->currentcategory, $this->userid);
+                $records = $this->store->get_questions_randomized_for_user($this->currentcategory, $this->userid, $lang);
 
                 foreach ($records as $record) {
 
@@ -310,7 +311,7 @@ class mod_groupformation_questionnaire_controller {
                 }
 
             } else {
-                $records = $this->store->get_questions_randomized_for_user($this->currentcategory, $this->userid);
+                $records = $this->store->get_questions_randomized_for_user($this->currentcategory, $this->userid, $lang);
 
                 foreach ($records as $record) {
                     $question = $this->prepare_question($record);
@@ -587,6 +588,7 @@ class mod_groupformation_questionnaire_controller {
     public function save_answers($category) {
         $go = true;
         $number = $this->store->get_number($category);
+        $lang = $this->lang;
         if ($category == 'topic') {
             for ($i = 1; $i <= $number; $i++) {
                 $temp = $category . $i;
@@ -607,7 +609,7 @@ class mod_groupformation_questionnaire_controller {
                 }
             }
         } else {
-            $questions = $this->store->get_questions_randomized_for_user($category, $this->userid);
+            $questions = $this->store->get_questions_randomized_for_user($category, $this->userid, $lang);
 
             foreach ($questions as $question) {
                 $temp = $category . $question->questionid;

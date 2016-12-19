@@ -114,7 +114,6 @@ if ((!$participantcode && !$groupsmanager->groups_created()) && !has_capability(
 
 $inarray = in_array($category, $names);
 $go = true;
-
 $controller = new mod_groupformation_questionnaire_controller($groupformation->id,
     get_string('language',
         'groupformation'),
