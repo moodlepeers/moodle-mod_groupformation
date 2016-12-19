@@ -294,6 +294,7 @@ $string['messageprovider:submission'] = 'Notify me if group formation algorithm 
 
 $string['cron_job_not_running'] = 'In order to handle queued jobs a cron is working in the background. Unfortunately it is either not responding or not running at all. If this message keeps appearing after 24 h please contact the system administrator.';
 
+$string['groupformation_message_subject'] = 'Gruppenformation abgeschlossen';
 $string['groupformation_message'] = 'The group formation has finished. You can now view the result.';
 $string['groupformation_subject'] = 'group formation finished';
 $string['groupformation_message_contexturlname'] = 'results';
