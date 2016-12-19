@@ -1026,6 +1026,18 @@ class mod_groupformation_storage_manager {
         return $questions;
     }
 
+    /**
+     * Returns scenario name
+     *
+     * @return string
+     */
+    public function get_scenario_name() {
+        global $DB;
+        $settings = $DB->get_record('groupformation', array(
+            'id' => $this->groupformationid
+        ));
+        return $this->data->get_scenario_name($settings->szenario);
+    }
 
     /**
      * Returns question by position

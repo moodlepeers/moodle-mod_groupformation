@@ -77,6 +77,7 @@ $(document).ready(function () {
         // Write to hidden inputs to mark range-inputs as valid when they get clicked.
         $('.gf_range_inputs').click(function () {
             $('input[name="' + $(this).prop('name') + '_valid"]').val(1);
+            $('#text'+$(this).prop('name')).text($(this).prop('value'));
         });
 
         // Get map of grade/points values.

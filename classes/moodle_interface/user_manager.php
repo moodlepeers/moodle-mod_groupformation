@@ -418,11 +418,10 @@ class mod_groupformation_user_manager
         $questionid = $position;
 
         if (!in_array($category,array('knowledge','topics'))){
+
             $question = $this->store->get_question_by_position($category,$position);
             $questionid = $question->questionid;
         }
-
-
 
         if (($category == 'grade' || $category == 'general') && $answer == '0') {
             return;
