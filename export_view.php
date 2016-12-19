@@ -17,10 +17,9 @@
 /**
  * Prints a particular instance of groupformation
  *
- * @package     mod_groupformation
- * @author      Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
- * @copyright   2015 MoodlePeers
- * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package mod_groupformation
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
@@ -31,6 +30,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/controller/import_expo
 // Read URL params.
 $id = optional_param('id', 0, PARAM_INT);
 $doshow = optional_param('do_show', 'import_export', PARAM_TEXT);
+$manualid = optional_param('gid', null, PARAM_INT);
 
 // Determine instances of course module, course.
 groupformation_determine_instance($id, $cm, $course, $groupformation);
@@ -41,6 +41,10 @@ require_login($course, true, $cm);
 // Get useful stuff.
 $context = $PAGE->context;
 $userid = $USER->id;
+
+if (is_null($manualid)){
+    $manualid = $groupformation->id;
+}
 
 // Redirect if no access is granted for user.
 if (!has_capability('mod/groupformation:editsettings', $context)) {
@@ -60,7 +64,7 @@ echo $OUTPUT->header();
 // Print the tabs.
 require('tabs.php');
 
-$controller = new mod_groupformation_import_export_controller($groupformation->id, $cm);
+$controller = new mod_groupformation_import_export_controller($manualid, $cm);
 echo $controller->render_export();
 
 echo $OUTPUT->footer();
