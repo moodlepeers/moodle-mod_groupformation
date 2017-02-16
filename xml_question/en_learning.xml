@@ -3,7 +3,7 @@
      <QUESTIONS VERSION="2016092600">
      	<QUESTION ID="1" TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[I learn by feeling]]>
+                    <![CDATA[I learn by feeling.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -107,7 +107,7 @@
           
          <QUESTION ID="5" TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[When I learn I am open to new experiences.]]>
+                    <![CDATA[When I learn, I am open to new experiences.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -133,7 +133,7 @@
           
 		 <QUESTION ID="6" TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[When I learn I first consider all possible perspectives of the subject.]]>
+                    <![CDATA[When I learn, I first consider all possible perspectives of the subject.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -185,7 +185,7 @@
           
 		 <QUESTION ID="8" TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[I prefer to try out things myself and be ensured of the possibilities.]]>
+                    <![CDATA[I prefer to try out things for myself to be sure of the possibilities.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -289,7 +289,7 @@
           
 		 <QUESTION ID="12" TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[When I learn I proceed rationally.]]>
+                    <![CDATA[When I learn, I proceed rationally.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -315,7 +315,7 @@
           
          <QUESTION ID="13" TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[I like to prevent mistakes by exploring thoroughly and with critical attitude.]]>
+                    <![CDATA[I like to prevent mistakes by exploring ideas thoroughly and with a critical attitude.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -393,7 +393,7 @@
           
          <QUESTION ID="16" TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[It bothers me when I can only listen or read what others have to tell.]]>
+                    <![CDATA[It bothers me when I can only listen or read what others have to say.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -419,7 +419,7 @@
           
 		 <QUESTION ID="17" TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[I learn best when I can see the results from my work.]]>
+                    <![CDATA[I learn best when I can see the results of my work.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -445,7 +445,7 @@
           
          <QUESTION ID="18" TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[I like it when systematical analysis from facts and theories are available.]]>
+                    <![CDATA[I like it when systematic analysis from facts and theories are available.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -471,7 +471,7 @@
           
          <QUESTION ID="19" TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[I learn best when I first gain on overview of the topic before acting.]]>
+                    <![CDATA[I learn best when I first gain an overview of the topic before acting.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -575,7 +575,7 @@
           
 		 <QUESTION ID="23" TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[I don't take special advantage from learning situations in which I have a passive role.]]>
+                    <![CDATA[I don't take advantage of learning situations in which I have a passive role.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
@@ -601,7 +601,7 @@
           
          <QUESTION ID="24" TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[When I learn I solve problems by reflecting.]]>
+                    <![CDATA[When I learn, I solve problems by reflecting.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
