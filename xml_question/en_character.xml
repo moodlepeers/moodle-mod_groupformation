@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<GROUPFORMATION COMMENT="">
+<GROUP COMMENT="">
     <QUESTIONS VERSION="2016072102">
         <QUESTION ID="12" TYPE="radio">
             <QUESTIONTEXT>
-                <![CDATA[Ich bin gesprächig, unterhalte mich gern.]]>
+                <![CDATA[I am talkative, I like to entertain myself.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[False]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -22,17 +22,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[True]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="1" TYPE="radio">
             <QUESTIONTEXT>
-                <![CDATA[Ich bin eher zurückhaltend, reserviert.]]>
+                <![CDATA[I am reserved, introverted.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[False]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -47,17 +47,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[True]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="13" TYPE="radio">
             <QUESTIONTEXT>
-                <![CDATA[Ich bin voller Energie und Tatendrang.]]>
+                <![CDATA[I am full of energy, proactive.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[False]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -72,17 +72,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[True]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="14" TYPE="radio">
             <QUESTIONTEXT>
-                <![CDATA[Ich bin begeisterungsfähig und kann andere leicht mitreißen.]]>
+                <![CDATA[I am enthusiastic and can easily motivate others.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[False]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -97,17 +97,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[True]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="15" TYPE="radio">
             <QUESTIONTEXT>
-                <![CDATA[Ich bin eher der „stille Typ“, wortkarg.]]>
+                <![CDATA[I am more of the silent type, quiet or introverted.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[False]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -122,17 +122,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[True]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="16" TYPE="radio">
             <QUESTIONTEXT>
-                <![CDATA[Ich bin durchsetzungsfähig, energisch.]]>
+                <![CDATA[I am assertive, energetic.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[False]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -147,17 +147,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[True]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="17" TYPE="radio">
             <QUESTIONTEXT>
-                <![CDATA[Ich bin manchmal schüchtern und gehemmt.]]>
+                <![CDATA[I am sometimes shy and inhibited.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[False]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -172,17 +172,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[True]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="6" TYPE="radio">
             <QUESTIONTEXT>
-                <![CDATA[Ich gehe aus mir heraus, bin gesellig.]]>
+                <![CDATA[I like to get out, I am sociable.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[False]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -197,18 +197,18 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[True]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
 
         <QUESTION ID="8" TYPE="radio">
             <QUESTIONTEXT>
-                <![CDATA[Ich erledige Aufgaben gründlich.]]>
+                <![CDATA[I perform tasks thoroughly, paying attention to details.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[False]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -223,17 +223,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[True]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="32" TYPE="radio">
             <QUESTIONTEXT>
-                <![CDATA[Ich bin manchmal unsorgfältig und schluderig.]]>
+                <![CDATA[I prefer to look at the big picture, I am not a details person.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[False]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -248,17 +248,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[True]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="33" TYPE="radio">
             <QUESTIONTEXT>
-                <![CDATA[Ich arbeite zuverlässig und gewissenhaft.]]>
+                <![CDATA[I work reliably and conscientiously.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[False]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -273,17 +273,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[True]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="34" TYPE="radio">
             <QUESTIONTEXT>
-                <![CDATA[Ich bin eher unordentlich.]]>
+                <![CDATA[I prefer to leave organisation to others, I do not like the tedium of details.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[False]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -298,17 +298,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[True]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="35" TYPE="radio">
             <QUESTIONTEXT>
-                <![CDATA[Ich bin bequem, neige zur Faulheit.]]>
+                <![CDATA[I am relaxed, I like to take it easy.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[False]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -323,17 +323,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[True]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="21" TYPE="radio">
             <QUESTIONTEXT>
-                <![CDATA[Ich harre aus (und arbeite weiter), bis die Aufgabe fertig ist.]]>
+                <![CDATA[I  am persistent (and keep working) until a task is finished.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[False]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -348,17 +348,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[True]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="22" TYPE="radio">
             <QUESTIONTEXT>
-                <![CDATA[Ich bin tüchtig und arbeite flott.]]>
+                <![CDATA[I am efficient and work quickly.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[False]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -373,17 +373,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[True]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="23" TYPE="radio">
             <QUESTIONTEXT>
-                <![CDATA[Ich mache Pläne und führe sie auch durch.]]>
+                <![CDATA[I make plans and carry them through to completion.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[False]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -398,17 +398,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[True]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="24" TYPE="radio">
             <QUESTIONTEXT>
-                <![CDATA[Ich bin leicht ablenkbar, bleibe nicht bei der Sache.]]>
+                <![CDATA[I like to multitask or switch-task rather than focus on one thing at a time.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[False]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -423,18 +423,18 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[True]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
 
         <QUESTION ID="7" TYPE="radio">
             <QUESTIONTEXT>
-                <![CDATA[Ich neige dazu, andere zu kritisieren.]]>
+                <![CDATA[I can easily find fault or the weakness in something.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[False]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -449,17 +449,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[True]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="2" TYPE="radio">
             <QUESTIONTEXT>
-                <![CDATA[Ich schenke anderen leicht vertrauen, glaube an das Gute im Menschen.]]>
+                <![CDATA[I am trusting of others, I assume the best about people.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[False]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -474,17 +474,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[True]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="25" TYPE="radio">
             <QUESTIONTEXT>
-                <![CDATA[Ich kann mich kalt und distanziert verhalten.]]>
+                <![CDATA[I can be cold and distant.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[False]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -499,17 +499,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[True]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="26" TYPE="radio">
             <QUESTIONTEXT>
-                <![CDATA[Ich kann mich schroff und abweisend anderen gegenüber verhalten.]]>
+                <![CDATA[I can be abrasive and off-putting to others.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[False]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -524,18 +524,18 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[True]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
 
         <QUESTION ID="27" TYPE="radio">
             <QUESTIONTEXT>
-                <![CDATA[Ich werde leicht deprimiert, niedergeschlagen.]]>
+                <![CDATA[I am easily disappointed.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[False]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -550,17 +550,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[True]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="4" TYPE="radio">
             <QUESTIONTEXT>
-                <![CDATA[Ich bin entspannt, lasse mich durch Stress nicht aus der Ruhe bringen.]]>
+                <![CDATA[I am carefree, I am not easily stressed.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[False]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -575,17 +575,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[True]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="28" TYPE="radio">
             <QUESTIONTEXT>
-                <![CDATA[Ich mache mir viele Sorgen.]]>
+                <![CDATA[I tend to worry about things.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[False]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -600,17 +600,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[True]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="9" TYPE="radio">
             <QUESTIONTEXT>
-                <![CDATA[Ich werde leicht nervös und unsicher.]]>
+                <![CDATA[I am slightly nervous or insecure.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[False]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -625,18 +625,18 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[True]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
 
         <QUESTION ID="29" TYPE="radio">
             <QUESTIONTEXT>
-                <![CDATA[Ich bin vielseitig interessiert.]]>
+                <![CDATA[I have a wide range of interests.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[False]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -651,17 +651,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[True]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="30" TYPE="radio">
             <QUESTIONTEXT>
-                <![CDATA[Ich bin tiefsinnig, denke gerne über Sachen nach.]]>
+                <![CDATA[I am pensive, I like to ponder things.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[False]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -676,17 +676,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[True]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="10" TYPE="radio">
             <QUESTIONTEXT>
-                <![CDATA[Ich habe eine aktive Vorstellungskraft, bin phantasievoll.]]>
+                <![CDATA[I am imaginative.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[False]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -701,17 +701,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[True]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="31" TYPE="radio">
             <QUESTIONTEXT>
-                <![CDATA[Ich schätze künstlerische und ästhetische Eindrücke.]]>
+                <![CDATA[I am artistic, I have an appreciation for aesthetics.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[False]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -726,17 +726,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[True]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="5" TYPE="radio">
             <QUESTIONTEXT>
-                <![CDATA[Ich habe nur wenig künstlerisches Interesse.]]>
+                <![CDATA[I am more analytical than creative or artistic.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[False]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -751,9 +751,9 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[True]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
     </QUESTIONS>
-</GROUPFORMATION>
+</GROUP>
