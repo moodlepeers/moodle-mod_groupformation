@@ -106,7 +106,7 @@ class mod_groupformation_criterion_calculator {
                                 // Number of options for catalog question.
                                 $totaloptions = $this->store->get_max_option_of_catalog_question($id, $category);
 
-                                $dist = array_fill(0, $totaloptions, 0);
+                                $dist = array_fill(1, $totaloptions, 0);
 
                                 // Iterates over answers for grade questions.
                                 foreach ($answers as $answer) {
@@ -114,8 +114,7 @@ class mod_groupformation_criterion_calculator {
                                     if (is_null($users) || in_array($answer->userid, $users)) {
 
                                         // Increments count for answer option.
-                                        $dist [($answer->answer)]++;
-
+                                        $dist [intval($answer->answer)]++;
                                         // Increments count for total.
                                         if ($id == $initialid) {
                                             $total++;

@@ -92,7 +92,7 @@ if ($CFG->debug === 32767 && $runjob) {
 
     if (!is_null($job)) {
         $result = $jm::do_groupal($job);
-        var_dump($result);
+        xdebug_var_dump($result);
         // $saved = $jm::save_result($job,$result);
     }
 }

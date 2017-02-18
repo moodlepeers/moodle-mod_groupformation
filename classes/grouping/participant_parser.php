@@ -159,7 +159,6 @@ class mod_groupformation_participant_parser {
             // Pre-computes values and generates and object which can be parsed into participants with criteria.
             $object = new stdClass ();
             $object->id = $user;
-
             foreach ($criteriaspecs as $criterion => $spec) {
                 if (in_array($scenario, $spec['scenarios'])) {
                     $points = array();

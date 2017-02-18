@@ -29,6 +29,10 @@ class mod_groupformation_user_manager
 {
     private $groupformationid;
 
+    private $store;
+
+    private $data;
+
     /**
      * Creates instance
      *
@@ -37,6 +41,7 @@ class mod_groupformation_user_manager
     public function __construct($groupformationid = null) {
         $this->groupformationid = $groupformationid;
         $this->store = new mod_groupformation_storage_manager ($groupformationid);
+        $this->data = new mod_groupformation_data();
     }
 
     /**
@@ -417,7 +422,7 @@ class mod_groupformation_user_manager
 
         $questionid = $position;
 
-        if (!in_array($category,array('knowledge','topics'))){
+        if (!in_array($category,array('knowledge','topics','character','team'))){
 
             $question = $this->store->get_question_by_position($category,$position);
             $questionid = $question->questionid;
@@ -639,5 +644,50 @@ class mod_groupformation_user_manager
             return $value;
         }
         return '';
+    }
+
+    /**
+     * Sets all values for a user.
+     *
+     * @param $userid
+     */
+    public function set_evaluation_values($userid) {
+        global $DB;
+        $DB->delete_records('groupformation_user_values',
+            array('groupformationid' => $this->groupformationid, 'userid' => $userid)
+        );
+        $cc = new mod_groupformation_criterion_calculator($this->groupformationid);
+        $criteria = $this->store->get_label_set();
+        $records = array();
+        foreach ($criteria as $criterion) {
+            $labels = $this->data->get_criterion_specification($criterion);
+            if (!is_null($labels) && count($labels) > 0) {
+                $uservalues = $cc->get_values_for_user($criterion, $userid, $labels);
+                foreach ($uservalues as $label => $values) {
+                    $values = $values['values'];
+                    foreach ($values as $dimension => $value) {
+                        $record = new stdClass();
+                        $record->groupformationid = $this->groupformationid;
+                        $record->userid = $userid;
+                        $record->criterion = $criterion;
+                        $record->label = $label;
+                        $record->dimension = $dimension;
+                        $record->value = $value;
+                        $records[] = $record;
+                    }
+                }
+            }
+        }
+        $DB->insert_records('groupformation_user_values', $records);
+    }
+    /**
+     * Handles complete questionnaires (userids) and sets them to completed/commited.
+     */
+    public function handle_complete_questionnaires() {
+        $users = array_keys($this->get_completed_by_answer_count(null, 'userid'));
+        foreach ($users as $user) {
+            $this->set_status($user, true);
+        }
+        return $users;
     }
 }

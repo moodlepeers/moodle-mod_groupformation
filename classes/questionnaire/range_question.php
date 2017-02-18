@@ -56,7 +56,7 @@ class mod_groupformation_range_question {
                 echo '<span class="">' . max(array_keys($options)) . '</span><input type="text" name="' . $category . $questionid;
         echo '_valid" value="' . $answer . '" style="display:none;"/>';
         if ($category == 'points') {
-            echo '<label id="text' . $category . $questionid . '">' . ((intval($answer)==-1)?'0':$answer) . '</label>';
+            echo '<br><label id="text' . $category . $questionid . '">' . ((intval($answer)==-1)?'0':$answer) . '</label>';
         }
         echo '</td>';
         echo '</tr>';
