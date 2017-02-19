@@ -690,4 +690,17 @@ class mod_groupformation_user_manager
         }
         return $users;
     }
+
+    /**
+     * Returns whether the count of user_values is larger than zero to express that a user has evaluation values already
+     *
+     * @param $userid
+     * @return bool
+     */
+    public function has_evaluation_values($userid) {
+        global $DB;
+        return 0 < $DB->count_records('groupformation_user_values',
+                array('groupformationid' => $this->groupformationid, 'userid' => $userid)
+            );
+    }
 }

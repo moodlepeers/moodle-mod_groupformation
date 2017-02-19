@@ -16,11 +16,12 @@ $(document).ready(function () {
         .enter()
         .append("div")
         .attr("class", function (d, i) {
-            return i == 0 ? "item active" : "item";
+            return i == 0 ? "carousel-item active" : "carousel-item";
         });
     caption
         .append("h2")
         .attr("class", "text-center")
+        .attr("style", "margin:1em;")
         .text(function (d) {
             return d.caption
         });
@@ -36,13 +37,14 @@ $(document).ready(function () {
         .append("div")
         .attr("id", function (d, i) {
             return d.mode == "text" ? "gf-accordion" : "gf_chart" + i;
-        });
+        })
+        .attr("style","margin-bottom:2em;");
 
     caption
         .each(function (d, i) {
             if (d.mode == "chart") {
                 var divv = "gf_chart" + i + "accordion";
-                d3.select(this).append("div").attr("id", divv);
+                d3.select(this).append("div").attr("id", divv).attr("class","panel-group");
                 if (d.directions == 1) {
                     buildChartOneSide("#gf_chart" + i, d.criteria, d.bars);
                     buildPersonalResult(d.criteria, i, "#" + divv);
@@ -59,48 +61,48 @@ $(document).ready(function () {
 
     /* activate popover info */
     $(function () {
-        $('[data-toggle="popover"]').popover();
+       $('[data-toggle="popover"]').popover();
     });
 
 });
 
 function buildPersonalResult(datam, index, divId) {
 
-    var pan = d3.select(divId).selectAll("div .panel .panel-default")
+    var pan = d3.select(divId).selectAll("div .card")
         .data(datam)
         .enter()
         .append("div")
-        .attr("class", "panel panel-default");
+        .attr("class", "card");
     /* panel heading */
     var panHead = pan
         .append("div")
-        .attr("class", "panel-heading")
+        .attr("class", "card-header")
         .attr("role", "tab")
         .attr("id", function (d, i) {
             return "heading" + index + i;
         })
         .append("h4")
-        .attr("class", "panel-title");
+        //.attr("class", "card-title");
 
     /* Header Text */
     panHead
-        .append("a")
-        .attr("role", "button")
-        .attr("data-toggle", "collapse")
-        .attr("href", function (d, i) {
-            return "#collapse" + index + i;
-        })
-        .attr("aria-expanded", "true")
-        .attr("aria-controls", function (d, i) {
-            return "collapse" + index + i;
-        })
+        // .append("a")
+        // .attr("role", "button")
+        // .attr("data-toggle", "collapse")
+        // .attr("href", function (d, i) {
+        //     return "#collapse" + index + i;
+        // })
+        // .attr("aria-expanded", "true")
+        // .attr("aria-controls", function (d, i) {
+        //     return "collapse" + index + i;
+        // })
         .text(function (d) {
             return d.captions.cutoffCaption;
         });
     /* Header Info Button */
     panHead
         .append("span")
-        .attr("class", "glyphicon glyphicon-info-sign")
+        .attr("class", "fa fa-info-circle")
         .style("margin-left", "5px")
         .attr("data-toggle", "popover")
         .attr("data-trigger", "hover")
@@ -117,13 +119,13 @@ function buildPersonalResult(datam, index, divId) {
         .attr("id", function (d, i) {
             return "collapse" + index + i;
         })
-        .attr("class", "panel-collapse collapse in")
+        .attr("class", "card-collapse collapse in")
         .attr("role", "tabpanel")
         .attr("aria-labelledBy", function (d, i) {
             return "collapse" + index + i;
         })
         .append("div")
-        .attr("class", "panel-body")
+        .attr("class", "card-block")
         .append("p")
         .attr("class", "gf_p_accordion")
         .text(function (d, i) {

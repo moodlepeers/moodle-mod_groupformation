@@ -64,17 +64,21 @@ $PAGE->set_url('/mod/groupformation/evaluation_view.php', array('id' => $cm->id,
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 
+echo '<link rel="stylesheet" href="fonts/fontawesome/css/font-awesome.min.css">';
+
 echo $OUTPUT->header();
 
 // Print the tabs.
 require('tabs.php');
+
+
 
 // Conditions to show the intro can change to look for own settings or whatever.
 if ($groupformation->intro) {
     echo $OUTPUT->box(format_module_intro('groupformation', $groupformation, $cm->id), 'generalbox mod_introbox',
         'groupformationintro');
 }
-
+//
 if (groupformation_get_current_questionnaire_version() > $store->get_version()) {
     echo '<div class="alert">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
 }
@@ -87,3 +91,6 @@ if ($store->is_archived()) {
 
 
 echo $OUTPUT->footer();
+//echo '<link rel="stylesheet" href=".css">';
+//echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">';
+

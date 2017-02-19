@@ -35,7 +35,7 @@ function buildChartOneSide(chartid, datam, bars) {
         .domain([0, 100])
         .range([0, middleWidth]);
 
-    svgHeight = middleHeight + labelsSection + scaleBarHeight;
+    svgHeight = middleHeight + labelsSection + scaleBarHeight + 20;
 
     /* bulk colors */
     var color = ["rgb(136, 222, 0)",
@@ -52,7 +52,7 @@ function buildChartOneSide(chartid, datam, bars) {
         .attr("width", width)
         .attr("height", svgHeight)
         .style("overflow", "visible")
-        .attr("font-size", 10);
+        .attr("font-size", 12);
 
     // 4 Bereiche: oberer Rand ScaleBar / links Beschriftung / Chart / rechts Beschriftung.
     var svgLabels = svg.append("g").attr("id", "labels"),

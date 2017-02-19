@@ -127,4 +127,6 @@ class mod_groupformation_evaluation_controller {
 
         return $cc->get_eval($userid, $groupusers, $courseusers);
     }
+
+
 }
