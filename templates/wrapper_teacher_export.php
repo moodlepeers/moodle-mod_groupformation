@@ -26,9 +26,9 @@
 
         <p>
             <a href="<?php echo $this->_['export_users_url']; ?>" target="_blank">
-				<span class="gf_button gf_button_pill gf_button_small">
-		    		<?php echo get_string('export', 'groupformation'); ?>
-		   		</span></a>
+                <span class="gf_button gf_button_pill gf_button_small">
+                    <?php echo get_string('export', 'groupformation'); ?>
+                </span></a>
         </p>
     </div>
 </div>

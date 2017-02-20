@@ -196,13 +196,13 @@ class mod_groupformation_util {
         global $DB;
         $now = time();
 
-        $configValue = get_config('groupformation', 'archiving_time');
+        $configvalue = get_config('groupformation', 'archiving_time');
 
-        if (is_null($configValue) || intval($configValue) <= 0) {
-            $configValue = 360;
+        if (is_null($configvalue) || intval($configvalue) <= 0) {
+            $configvalue = 360;
         }
 
-        $difference = intval($configValue) * 24 * 60 * 60;
+        $difference = intval($configvalue) * 24 * 60 * 60;
         $instances = $DB->get_records('groupformation');
 
         foreach ($instances as $groupformation) {

@@ -325,10 +325,10 @@ class mod_groupformation_storage_manager {
                 'questionid' => $i
         ));
 
-        //return $DB->get_field($table, 'optionmax', array(
-        //    'language' => 'en',
-        //    'questionid' => $i
-        //));
+        /*return $DB->get_field($table, 'optionmax', array(
+           'language' => 'en',
+           'questionid' => $i
+        ));*/
     }
 
     /**

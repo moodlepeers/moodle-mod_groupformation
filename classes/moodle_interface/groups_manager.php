@@ -471,13 +471,13 @@ class mod_groupformation_groups_manager {
      * Updates group
      *
      * @param $groupid
-     * @param $group_size
+     * @param $groupsize
      */
-    public function update_group($groupid, $group_size) {
+    public function update_group($groupid, $groupsize) {
         global $DB;
 
         $record = $DB->get_record('groupformation_groups', array('id' => $groupid));
-        $record->group_size = $group_size;
+        $record->group_size = $groupsize;
         $record->performance_index = null;
 
         $DB->update_record('groupformation_groups', $record);
@@ -486,20 +486,20 @@ class mod_groupformation_groups_manager {
     /**
      * Updates groups
      *
-     * @param $groups_array_after
-     * @param $groups_array_before
+     * @param $groupsarrayafter
+     * @param $groupsarraybefore
      */
-    public function update_groups($groups_array_after, $groups_array_before) {
+    public function update_groups($groupsarrayafter, $groupsarraybefore) {
         $updated = false;
-        foreach ($groups_array_after as $groupid => $userids) {
+        foreach ($groupsarrayafter as $groupid => $userids) {
 
             if (is_null($userids) || count($userids) == 0) {
                 $this->delete_group($groupid);
                 $updated |= true;
             } else {
-                $userids_before = $groups_array_before[$groupid];
-                $same = count(array_intersect($userids, $userids_before)) == count($userids) &&
-                        count($userids) == count($userids_before);
+                $useridsbefore = $groupsarraybefore[$groupid];
+                $same = count(array_intersect($userids, $useridsbefore)) == count($userids) &&
+                        count($userids) == count($useridsbefore);
                 if (!$same) {
                     $this->remove_users($groupid);
                     $this->add_users($groupid, $userids);
@@ -508,8 +508,8 @@ class mod_groupformation_groups_manager {
                 }
             }
         }
-        if ($updated) {
-            // UPDATE PERFORMANCE VALUES WITH NEW GROUPS
-        }
+        /*if ($updated) {
+            // TODO: UPDATE PERFORMANCE VALUES WITH NEW GROUPS
+        }*/
     }
 }
