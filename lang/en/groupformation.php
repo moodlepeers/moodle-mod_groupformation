@@ -140,9 +140,10 @@ $string ['questionnaire_not_started'] = 'The questionnaire is ready.';
 $string ['questionnaire_press_to_begin'] = 'Give your consent and click "Next" to begin.';
 $string ['questionnaire_not_submitted'] = 'Your answers are not submitted yet.';
 $string ['questionnaire_press_continue_submit'] = 'Click "Edit" to continue the questionnaire or "Submit" to submit your current answers.
-You can also remove your consent, which also deletes all given answers, by clicking on "Remove consent". After submitting your answers you cannot remove your consent anymore.';
+You can also remove your consent, which also deletes all given answers, by clicking on "Remove consent".';
+$string ['questionnaire_press_revert'] = 'Click "Revert" to revert your decision to submit the questionnaire. You can also remove your consent, which also deletes all given answers, by clicking on "Remove consent".';
 $string ['questionnaire_answer_stats'] = 'Current state of the questionnaire:';
-$string ['questionnaire_submitted'] = 'You have submitted your answers. You cannot change them anymore.';
+$string ['questionnaire_submitted'] = 'You have submitted your answers. Revert your submission or remove consent to start over.';
 $string ['questionnaire_press_preview'] = 'Press "Preview" to take a look at the questionnaire.';
 $string ['questionnaire_no_more_questions'] = 'There are no more questions to answer.';
 $string ['questionnaire_press_beginning_submit'] = 'Click "Go to Start" to go back to the start page. There you can submit your current answers.';

@@ -688,4 +688,22 @@ class mod_groupformation_user_manager {
                         array('groupformationid' => $this->groupformationid, 'userid' => $userid)
                 );
     }
+
+    /**
+     * Sets completed status for user
+     *
+     * @param $userid
+     * @param $value
+     */
+    public function set_complete($userid, $value) {
+        global $DB;
+
+        $data = $DB->get_record('groupformation_started', array(
+            'groupformation' => $this->groupformationid,
+            'userid' => $userid
+        ));
+        $data->completed = $value;
+        $data->timecompleted = time();
+        $DB->update_record('groupformation_started', $data);
+    }
 }
