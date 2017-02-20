@@ -17,7 +17,7 @@ env:
   - MOODLE_BRANCH=MOODLE_32_STABLE
   - MOODLE_BRANCH=MOODLE_30_STABLE
   - MOODLE_BRANCH=MOODLE_27_STABLE
-  
+
  matrix:
   - DB=mysqli
   - DB=pgsql
