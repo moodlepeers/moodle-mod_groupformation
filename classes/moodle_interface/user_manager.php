@@ -147,16 +147,16 @@ class mod_groupformation_user_manager {
      */
     public function get_not_completed_but_submitted($sortedby = null, $fieldset = '*') {
         global $DB;
-        // TODO HOTFIX FOR HRZ SOSE2016
+        // FIXME HOTFIX FOR HRZ SOSE2016  (-> what is correct?)
         return array();
-        //        $tablename = 'groupformation_started';
-        //        $query = "SELECT " . $fieldset . " FROM {{$tablename}} ".
-        //            "WHERE groupformation = ? AND completed = 1 AND answer_count <> ? ORDER BY ?" . $sortedby;
-        //        return $DB->get_records_sql($query, array(
-        //            $this->groupformationid,
-        //            $this->store->get_total_number_of_answers(),
-        //            $sortedby
-        //        ));
+        /*       $tablename = 'groupformation_started';
+               $query = "SELECT " . $fieldset . " FROM {{$tablename}} ".
+                   "WHERE groupformation = ? AND completed = 1 AND answer_count <> ? ORDER BY ?" . $sortedby;
+               return $DB->get_records_sql($query, array(
+                   $this->groupformationid,
+                   $this->store->get_total_number_of_answers(),
+                   $sortedby
+               ));*/
     }
 
     /**
@@ -553,8 +553,7 @@ class mod_groupformation_user_manager {
     public function set_consent($userid, $value) {
         global $DB;
         $this->set_status($userid);
-        $record =
-                $DB->get_record('groupformation_started', array('groupformation' => $this->groupformationid, 'userid' => $userid));
+        $record = $DB->get_record('groupformation_started', array('groupformation' => $this->groupformationid, 'userid' => $userid));
         $record->consent = $value;
         $DB->update_record('groupformation_started', $record);
     }
@@ -626,8 +625,7 @@ class mod_groupformation_user_manager {
     public function register_participant_code($userid, $participantcode) {
         global $DB;
         $this->set_status($userid);
-        $record =
-                $DB->get_record('groupformation_started', array('groupformation' => $this->groupformationid, 'userid' => $userid));
+        $record = $DB->get_record('groupformation_started', array('groupformation' => $this->groupformationid, 'userid' => $userid));
         $record->participantcode = strtoupper($participantcode);
         $DB->update_record('groupformation_started', $record);
     }

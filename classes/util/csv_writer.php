@@ -204,16 +204,16 @@ class mod_groupformation_csv_writer {
             $userids[$u] = 1;
         }
 
-        $users_current = array_keys($userids);
+        $userscurrent = array_keys($userids);
 
         if ($this->groupformationid == 3 || $this->groupformationid == 4) {
-            $gid_orig = $this->groupformationid - 2;
+            $gidorig = $this->groupformationid - 2;
 
-            $um_orig = new mod_groupformation_user_manager($gid_orig);
-            $gm_orig = new mod_groupformation_groups_manager($gid_orig);
+            $umorig = new mod_groupformation_user_manager($gidorig);
+            $gmorig = new mod_groupformation_groups_manager($gidorig);
 
-            $users = $um_orig->get_users_started('userid', 'userid');
-            $groupusers = $gm_orig->get_group_users('userid', 'userid,groupid,groupformation');
+            $users = $umorig->get_users_started('userid', 'userid');
+            $groupusers = $gmorig->get_group_users('userid', 'userid,groupid,groupformation');
 
             $us = array_values(array_keys($users));
             $gs = array_values(array_keys($groupusers));
@@ -225,35 +225,35 @@ class mod_groupformation_csv_writer {
                 $userids[$u] = 1;
             }
 
-            $users_orig = array_keys($userids);
+            $usersorig = array_keys($userids);
 
-            $only_current = array();
-            $both_current = array();
-            foreach ($users_current as $user_current) {
-                if (!in_array($user_current, $users_orig)) {
-                    $only_current[] = $user_current;
+            $onlycurrent = array();
+            $bothcurrent = array();
+            foreach ($userscurrent as $usercurrent) {
+                if (!in_array($usercurrent, $usersorig)) {
+                    $onlycurrent[] = $usercurrent;
                 }
-                if (in_array($user_current, $users_orig)) {
-                    $both_current[] = $user_current;
-                }
-            }
-
-            $only_orig = array();
-            $both_orig = array();
-
-            foreach ($users_orig as $us2u) {
-                if (!in_array($us2u, $users_current)) {
-                    $only_orig[] = $us2u;
-                }
-                if (in_array($us2u, $users_current)) {
-                    $both_orig[] = $us2u;
+                if (in_array($usercurrent, $usersorig)) {
+                    $bothcurrent[] = $usercurrent;
                 }
             }
 
-            return $only_current;
+            $onlyorig = array();
+            $bothorig = array();
+
+            foreach ($usersorig as $us2u) {
+                if (!in_array($us2u, $userscurrent)) {
+                    $onlyorig[] = $us2u;
+                }
+                if (in_array($us2u, $userscurrent)) {
+                    $bothorig[] = $us2u;
+                }
+            }
+
+            return $onlycurrent;
         }
 
-        return $users_current;
+        return $userscurrent;
     }
 
     public function get_users() {
@@ -331,10 +331,10 @@ class mod_groupformation_csv_writer {
                     $groupid = $DB->get_field('groups_members', 'groupid', array('userid' => $userid));
                     $courseid = $DB->get_field('groups', 'courseid', array('id' => $groupid));
                     if ($courseid == $this->groupformationid || $courseid + 2 == $this->groupformationid) {
-                        //var_dump($userid . " in group ".($groupid - 394));
+                        // var_dump($userid . " in group ".($groupid - 394));
                         $members = $DB->get_records('groups_members', array('groupid' => $groupid), 'userid', 'userid');
                         $unknown = array_merge($unknown, array_keys($members));
-                        //var_dump(implode(', ',$unknown));
+                        // var_dump(implode(', ',$unknown));
                         $userdata[$userid]['groupid'] = $groupid - 394;
                         $userdata[$userid]['random'] = 2;
                     }
@@ -381,9 +381,9 @@ class mod_groupformation_csv_writer {
 
         $csv = "";
 
-        //var_dump($us);
+        // var_dump($us);
         $us = array_values(array_unique(array_merge(array_values($us), array_values($unknown))));
-        //var_dump($us);
+        // var_dump($us);
         for ($j = 0; $j < count($us); $j++) {
 
             if ($j == 0) {

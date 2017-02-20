@@ -342,9 +342,9 @@ class mod_groupformation_data {
      * @return bool
      */
     public function ask_for_participant_code() {
-        $config_value = get_config('groupformation', 'participant_code');
-        if (!is_null($config_value)) {
-            return $config_value;
+        $configvalue = get_config('groupformation', 'participant_code');
+        if (!is_null($configvalue)) {
+            return $configvalue;
         }
         return false;
     }
@@ -355,9 +355,9 @@ class mod_groupformation_data {
      * @return bool
      */
     public function import_export_enabled() {
-        $config_value = get_config('groupformation', 'import_export');
-        if (!is_null($config_value)) {
-            return $config_value;
+        $configvalue = get_config('groupformation', 'import_export');
+        if (!is_null($configvalue)) {
+            return $configvalue;
         }
         return true;
     }

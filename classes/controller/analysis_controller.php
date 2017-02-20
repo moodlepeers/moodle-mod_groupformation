@@ -257,8 +257,6 @@ class mod_groupformation_analysis_controller {
                     $answer->questionid = $qid;
                     $DB->update_record('groupformation_answer', $answer, true);
                 }
-            } elseif (intval($answer->questionid) <= 16) {
-
             }
         }
 
@@ -284,8 +282,6 @@ class mod_groupformation_analysis_controller {
                     $answer->questionid = $qid;
                     $DB->update_record('groupformation_answer', $answer, true);
                 }
-            } elseif (intval($answer->questionid) <= 63) {
-
             }
         }
     }
