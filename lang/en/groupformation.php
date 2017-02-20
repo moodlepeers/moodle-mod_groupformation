@@ -183,7 +183,7 @@ $string ['info_text_student'] = 'In this Moodle course the "groupformation" is u
         <br><br>
         Questions, trouble or any suggestions?
         You can find the plugin developer and scientist under<br>
-        http://sourceforge.net/projects/moodlepeers/ <br>
+        https://github.com/moodlepeers <br>
         (created and developed with means for quality improvement of teaching at TU Darmstadt)
 ';
 $string ['info_header_teacher_analysis'] = 'How does the groupformation activity work?';
