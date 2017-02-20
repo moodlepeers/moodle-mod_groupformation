@@ -28,7 +28,7 @@ $(document).ready(function () {
     /* if first page, add intro */
     caption
         .each(function (d, i) {
-            if (d.mode == "text"){
+            if (d.mode == "text") {
                 d3.select(this).append("div").attr("class", "gf_well").html("<p>" + d.text.replace(/\\n/g, "<br>") + "</p>");
             }
         });
@@ -38,13 +38,13 @@ $(document).ready(function () {
         .attr("id", function (d, i) {
             return d.mode == "text" ? "gf-accordion" : "gf_chart" + i;
         })
-        .attr("style","margin-bottom:2em;");
+        .attr("style", "margin-bottom:2em;");
 
     caption
         .each(function (d, i) {
             if (d.mode == "chart") {
                 var divv = "gf_chart" + i + "accordion";
-                d3.select(this).append("div").attr("id", divv).attr("class","panel-group");
+                d3.select(this).append("div").attr("id", divv).attr("class", "panel-group");
                 if (d.directions == 1) {
                     buildChartOneSide("#gf_chart" + i, d.criteria, d.bars);
                     buildPersonalResult(d.criteria, i, "#" + divv);
@@ -61,7 +61,7 @@ $(document).ready(function () {
 
     /* activate popover info */
     $(function () {
-       $('[data-toggle="popover"]').popover();
+        $('[data-toggle="popover"]').popover();
     });
 
 });
@@ -82,20 +82,21 @@ function buildPersonalResult(datam, index, divId) {
             return "heading" + index + i;
         })
         .append("h4")
-        //.attr("class", "card-title");
+    // .attr("class", "card-title");
 
     /* Header Text */
     panHead
-        // .append("a")
-        // .attr("role", "button")
-        // .attr("data-toggle", "collapse")
-        // .attr("href", function (d, i) {
-        //     return "#collapse" + index + i;
-        // })
-        // .attr("aria-expanded", "true")
-        // .attr("aria-controls", function (d, i) {
-        //     return "collapse" + index + i;
-        // })
+    /* .append("a")
+    .attr("role", "button")
+    .attr("data-toggle", "collapse")
+    .attr("href", function (d, i) {
+        return "#collapse" + index + i;
+    })
+    .attr("aria-expanded", "true")
+    .attr("aria-controls", function (d, i) {
+        return "collapse" + index + i;
+    })
+    */
         .text(function (d) {
             return d.captions.cutoffCaption;
         });

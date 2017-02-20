@@ -37,26 +37,28 @@ class mod_groupformation_range_question {
         if ($answer != -1) {
             echo '<tr>';
             echo '<th scope="row">' . $question . '</th>';
-        } else if ($highlight) {
-            echo '<tr class="noAnswer">';
-            echo '<th scope="row">' . $question . '</th>';
         } else {
-            echo '<tr>';
-            echo '<th scope="row">' . $question . '</th>';
+            if ($highlight) {
+                echo '<tr class="noAnswer">';
+                echo '<th scope="row">' . $question . '</th>';
+            } else {
+                echo '<tr>';
+                echo '<th scope="row">' . $question . '</th>';
+            }
         }
 
         echo '<td data-title="' . min(array_keys($options)) . ' = ' . $options [min(array_keys($options))] . ', ' .
-            max(array_keys($options)) . ' = ' . $options [max(array_keys($options))] . '" class="range">';
+                max(array_keys($options)) . ' = ' . $options [max(array_keys($options))] . '" class="range">';
         echo '<span class="">' . min(array_keys($options)) . '</span>';
         // echo '<input type="range" name="' . $category . $questionid . '" class="gf_range_inputs" min="0" max="';
         // echo max(array_keys($options)) . '" value="' . $answer . '" />';
 
         echo '<input class="gf_range_inputs" type="range" name="' . $category . $questionid . '" min="0" max="';
         echo max(array_keys($options)) . '" value="' . $answer . '" />';
-                echo '<span class="">' . max(array_keys($options)) . '</span><input type="text" name="' . $category . $questionid;
+        echo '<span class="">' . max(array_keys($options)) . '</span><input type="text" name="' . $category . $questionid;
         echo '_valid" value="' . $answer . '" style="display:none;"/>';
         if ($category == 'points') {
-            echo '<br><label id="text' . $category . $questionid . '">' . ((intval($answer)==-1)?'0':$answer) . '</label>';
+            echo '<br><label id="text' . $category . $questionid . '">' . ((intval($answer) == -1) ? '0' : $answer) . '</label>';
         }
         echo '</td>';
         echo '</tr>';

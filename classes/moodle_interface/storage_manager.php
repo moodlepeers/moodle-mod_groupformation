@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-
 /**
  * Interface betweeen DB and Plugin
  *
@@ -50,7 +49,7 @@ class mod_groupformation_storage_manager {
     public function get_version() {
         global $DB;
 
-        return $DB->get_field('groupformation','version',array('id'=>$this->groupformationid));
+        return $DB->get_field('groupformation', 'version', array('id' => $this->groupformationid));
     }
 
     /**
@@ -61,7 +60,7 @@ class mod_groupformation_storage_manager {
     public function is_archived() {
         global $DB;
         $record = $DB->get_record('groupformation_q_settings', array(
-            'groupformation' => $this->groupformationid
+                'groupformation' => $this->groupformationid
         ));
 
         return $record->archived == 1;
@@ -113,7 +112,7 @@ class mod_groupformation_storage_manager {
         global $DB;
 
         return $DB->get_field('groupformation', 'course', array(
-            'id' => $this->groupformationid
+                'id' => $this->groupformationid
         ));
     }
 
@@ -124,7 +123,7 @@ class mod_groupformation_storage_manager {
         global $DB;
         $courseid = $this->get_course_id();
         $records = $DB->get_records('groupformation', array(
-            'course' => $courseid
+                'course' => $courseid
         ), 'id', 'id');
         $i = 1;
         foreach ($records as $id => $record) {
@@ -157,14 +156,16 @@ class mod_groupformation_storage_manager {
 
         if ($init) {
             $DB->insert_record('groupformation_q_settings', $data);
-        } else if ($DB->count_records('groupformation_answer', array(
-                'groupformation' => $this->groupformationid
-            )) == 0
-        ) {
-            $data->id = $DB->get_field('groupformation_q_settings', 'id', array(
-                'groupformation' => $this->groupformationid
-            ));
-            $DB->update_record('groupformation_q_settings', $data);
+        } else {
+            if ($DB->count_records('groupformation_answer', array(
+                            'groupformation' => $this->groupformationid
+                    )) == 0
+            ) {
+                $data->id = $DB->get_field('groupformation_q_settings', 'id', array(
+                        'groupformation' => $this->groupformationid
+                ));
+                $DB->update_record('groupformation_q_settings', $data);
+            }
         }
     }
 
@@ -177,10 +178,10 @@ class mod_groupformation_storage_manager {
         global $DB;
         $times = array();
         $times ['start_raw'] = $DB->get_field('groupformation', 'timeopen', array(
-            'id' => $this->groupformationid
+                'id' => $this->groupformationid
         ));
         $times ['end_raw'] = $DB->get_field('groupformation', 'timeclose', array(
-            'id' => $this->groupformationid
+                'id' => $this->groupformationid
         ));
 
         if ('en' == get_string("language", "groupformation")) {
@@ -188,34 +189,36 @@ class mod_groupformation_storage_manager {
             $trans = array();
             $times ['start'] = strtr(date($format, $times ['start_raw']), $trans);
             $times ['end'] = strtr(date($format, $times ['end_raw']), $trans);
-        } else if ('de' == get_string("language", "groupformation")) {
-            $format = "l, d.m.y, H:m";
-            $trans = array(
-                'Monday' => 'Montag',
-                'Tuesday' => 'Dienstag',
-                'Wednesday' => 'Mittwoch',
-                'Thursday' => 'Donnerstag',
-                'Friday' => 'Freitag',
-                'Saturday' => 'Samstag',
-                'Sunday' => 'Sonntag',
-                'Mon' => 'Mo',
-                'Tue' => 'Di',
-                'Wed' => 'Mi',
-                'Thu' => 'Do',
-                'Fri' => 'Fr',
-                'Sat' => 'Sa',
-                'Sun' => 'So',
-                'January' => 'Januar',
-                'February' => 'Februar',
-                'March' => 'März',
-                'May' => 'Mai',
-                'June' => 'Juni',
-                'July' => 'Juli',
-                'October' => 'Oktober',
-                'December' => 'Dezember'
-            );
-            $times ['start'] = strtr(date($format, $times ['start_raw']), $trans) . ' Uhr';
-            $times ['end'] = strtr(date($format, $times ['end_raw']), $trans) . ' Uhr';
+        } else {
+            if ('de' == get_string("language", "groupformation")) {
+                $format = "l, d.m.y, H:m";
+                $trans = array(
+                        'Monday' => 'Montag',
+                        'Tuesday' => 'Dienstag',
+                        'Wednesday' => 'Mittwoch',
+                        'Thursday' => 'Donnerstag',
+                        'Friday' => 'Freitag',
+                        'Saturday' => 'Samstag',
+                        'Sunday' => 'Sonntag',
+                        'Mon' => 'Mo',
+                        'Tue' => 'Di',
+                        'Wed' => 'Mi',
+                        'Thu' => 'Do',
+                        'Fri' => 'Fr',
+                        'Sat' => 'Sa',
+                        'Sun' => 'So',
+                        'January' => 'Januar',
+                        'February' => 'Februar',
+                        'March' => 'März',
+                        'May' => 'Mai',
+                        'June' => 'Juni',
+                        'July' => 'Juli',
+                        'October' => 'Oktober',
+                        'December' => 'Dezember'
+                );
+                $times ['start'] = strtr(date($format, $times ['start_raw']), $trans) . ' Uhr';
+                $times ['end'] = strtr(date($format, $times ['end_raw']), $trans) . ' Uhr';
+            }
         }
 
         return $times;
@@ -278,11 +281,11 @@ class mod_groupformation_storage_manager {
 
         if ($category == 'topic' || $category == 'knowledge') {
             return $DB->get_field('groupformation_q_settings', $category . 'valuesnumber', array(
-                'groupformation' => $this->groupformationid
+                    'groupformation' => $this->groupformationid
             ));
         } else {
             return $DB->get_field('groupformation_q_version', 'numberofquestion', array(
-                'category' => $category
+                    'category' => $category
             ));
         }
     }
@@ -297,7 +300,7 @@ class mod_groupformation_storage_manager {
         global $DB;
 
         return $DB->get_field('groupformation_q_settings', $category . 'values', array(
-            'groupformation' => $this->groupformationid
+                'groupformation' => $this->groupformationid
         ));
     }
 
@@ -318,8 +321,8 @@ class mod_groupformation_storage_manager {
         // TODO
         $table = 'groupformation_question';
         return $DB->get_field($table, 'optionmax', array(
-            'language' => 'en', 'category' => $category,
-            'questionid' => $i
+                'language' => 'en', 'category' => $category,
+                'questionid' => $i
         ));
 
         //return $DB->get_field($table, 'optionmax', array(
@@ -340,8 +343,8 @@ class mod_groupformation_storage_manager {
         global $DB;
         $table = 'groupformation_question';
         $return = $DB->get_record($table, array(
-            'language' => $lang, 'category' => $category,
-            'position' => $i, 'version' => $version
+                'language' => $lang, 'category' => $category,
+                'position' => $i, 'version' => $version
         ));
 
         return $return;
@@ -371,7 +374,7 @@ class mod_groupformation_storage_manager {
         global $DB;
 
         $settings = $DB->get_record('groupformation', array(
-            'id' => $this->groupformationid
+                'id' => $this->groupformationid
         ));
 
         if ($name) {
@@ -392,7 +395,7 @@ class mod_groupformation_storage_manager {
         global $DB;
 
         return $DB->get_records('groupformation_logging', array(
-            'groupformationid' => $this->groupformationid
+                'groupformationid' => $this->groupformationid
         ), $sortedby, $fieldset);
     }
 
@@ -427,10 +430,14 @@ class mod_groupformation_storage_manager {
             if ($this->get_number($category) > 0) {
                 if ($category == 'grade' && $this->ask_for_grade()) {
                     $categories [] = $category;
-                } else if ($category == 'points' && $this->ask_for_points()) {
-                    $categories [] = $category;
-                } else if ($category != 'grade' && $category != 'points' && $category != 'general') {
-                    $categories [] = $category;
+                } else {
+                    if ($category == 'points' && $this->ask_for_points()) {
+                        $categories [] = $category;
+                    } else {
+                        if ($category != 'grade' && $category != 'points' && $category != 'general') {
+                            $categories [] = $category;
+                        }
+                    }
                 }
             }
         }
@@ -454,9 +461,9 @@ class mod_groupformation_storage_manager {
         $categories = $this->get_categories();
         foreach ($categories as $category) {
             if (!in_array($category, array(
-                'points',
-                'knowledge',
-                'topic'
+                    'points',
+                    'knowledge',
+                    'topic'
             ))
             ) {
                 $exportablecategories [] = $category;
@@ -492,7 +499,7 @@ class mod_groupformation_storage_manager {
     public function ask_for_grade() {
         global $DB;
         $evaluationmethod = $DB->get_field('groupformation', 'evaluationmethod', array(
-            'id' => $this->groupformationid
+                'id' => $this->groupformationid
         ));
 
         return $evaluationmethod == 1;
@@ -507,7 +514,7 @@ class mod_groupformation_storage_manager {
         global $DB;
 
         $evaluationmethod = $DB->get_field('groupformation', 'evaluationmethod', array(
-            'id' => $this->groupformationid
+                'id' => $this->groupformationid
         ));
 
         return $evaluationmethod == 2;
@@ -521,13 +528,13 @@ class mod_groupformation_storage_manager {
     public function is_editable() {
         global $DB;
 
-        if (is_null($this->groupformationid) || $this->groupformationid == ''){
+        if (is_null($this->groupformationid) || $this->groupformationid == '') {
             return true;
         }
 
         return ($DB->count_records('groupformation_answer', array(
-                'groupformation' => $this->groupformationid
-            )) == 0);
+                        'groupformation' => $this->groupformationid
+                )) == 0);
     }
 
     /**
@@ -541,9 +548,9 @@ class mod_groupformation_storage_manager {
         global $DB;
 
         return $DB->get_records('groupformation_answer', array(
-            'groupformation' => $this->groupformationid,
-            'category' => $category,
-            'questionid' => $questionid
+                'groupformation' => $this->groupformationid,
+                'category' => $category,
+                'questionid' => $questionid
         ));
     }
 
@@ -556,7 +563,7 @@ class mod_groupformation_storage_manager {
         global $DB;
 
         return $DB->get_field('groupformation', 'maxpoints', array(
-            'id' => $this->groupformationid
+                'id' => $this->groupformationid
         ));
     }
 
@@ -575,12 +582,18 @@ class mod_groupformation_storage_manager {
 
         if (($start == 0) && ($end == 0)) {
             return true;
-        } else if (($start == 0) && ($now <= $end)) {
-            return true;
-        } else if (($now >= $start) && ($end == 0)) {
-            return true;
-        } else if (($now >= $start) && ($now <= $end)) {
-            return true;
+        } else {
+            if (($start == 0) && ($now <= $end)) {
+                return true;
+            } else {
+                if (($now >= $start) && ($end == 0)) {
+                    return true;
+                } else {
+                    if (($now >= $start) && ($now <= $end)) {
+                        return true;
+                    }
+                }
+            }
         }
 
         return false;
@@ -622,7 +635,7 @@ class mod_groupformation_storage_manager {
         global $DB;
 
         return $DB->get_field('groupformation', 'maxmembers', array(
-            'id' => $this->groupformationid
+                'id' => $this->groupformationid
         ));
     }
 
@@ -635,7 +648,7 @@ class mod_groupformation_storage_manager {
         global $DB;
 
         return $DB->get_field('groupformation', 'maxgroups', array(
-            'id' => $this->groupformationid
+                'id' => $this->groupformationid
         ));
     }
 
@@ -648,7 +661,7 @@ class mod_groupformation_storage_manager {
         global $DB;
 
         return $DB->get_field('groupformation', 'onlyactivestudents', array(
-            'id' => $this->groupformationid
+                'id' => $this->groupformationid
         ));
     }
 
@@ -660,8 +673,8 @@ class mod_groupformation_storage_manager {
     public function get_group_option() {
         global $DB;
 
-        return (bool)($DB->get_field('groupformation', 'groupoption', array(
-            'id' => $this->groupformationid
+        return (bool) ($DB->get_field('groupformation', 'groupoption', array(
+                'id' => $this->groupformationid
         )));
     }
 
@@ -674,7 +687,7 @@ class mod_groupformation_storage_manager {
         global $DB;
 
         return $DB->get_field('groupformation', 'groupname', array(
-            'id' => $this->groupformationid
+                'id' => $this->groupformationid
         ));
     }
 
@@ -687,7 +700,7 @@ class mod_groupformation_storage_manager {
         global $DB;
 
         return $DB->get_field('groupformation', 'name', array(
-            'id' => $this->groupformationid
+                'id' => $this->groupformationid
         ));
     }
 
@@ -759,9 +772,9 @@ class mod_groupformation_storage_manager {
             $position = 0;
             foreach ($array as $c) {
                 if (('points' == $c && $points == false) ||
-                    ('grade' == $c && $grades == false) ||
-                    ($hastopic == 0 && 'topic' == $c) ||
-                    ($hasknowledge == 0 && ('knowledge_heterogen' == $c || 'knowledge_homogen' == $c))
+                        ('grade' == $c && $grades == false) ||
+                        ($hastopic == 0 && 'topic' == $c) ||
+                        ($hasknowledge == 0 && ('knowledge_heterogen' == $c || 'knowledge_homogen' == $c))
                 ) {
                     unset ($array [$position]);
                 }
@@ -778,12 +791,13 @@ class mod_groupformation_storage_manager {
 
     /**
      * Returns whether 'topic' is a valid category in this instance or not
+     *
      * @return boolean
      */
     public function ask_for_topics() {
         global $DB;
         $evaluationmethod = $DB->get_field('groupformation', 'topics', array(
-            'id' => $this->groupformationid
+                'id' => $this->groupformationid
         ));
 
         return $evaluationmethod == 1;
@@ -791,12 +805,13 @@ class mod_groupformation_storage_manager {
 
     /**
      * Returns whether 'knowledge' is a valid category in this instance or not
+     *
      * @return boolean
      */
     public function ask_for_knowledge() {
         global $DB;
         $evaluationmethod = $DB->get_field('groupformation', 'knowledge', array(
-            'id' => $this->groupformationid
+                'id' => $this->groupformationid
         ));
 
         return $evaluationmethod == 1;
@@ -919,10 +934,12 @@ class mod_groupformation_storage_manager {
 
                 if ($userscount0 == 0) {
                     return array(
-                        null, intval(ceil($userscount1 / $maxgroups)));
-                } else if ($userscount1 == 0) {
-                    return array(
-                        intval(ceil($userscount0 / $maxgroups)), null);
+                            null, intval(ceil($userscount1 / $maxgroups)));
+                } else {
+                    if ($userscount1 == 0) {
+                        return array(
+                                intval(ceil($userscount0 / $maxgroups)), null);
+                    }
                 }
 
                 $optimalsize = ceil($userscount / $maxgroups);
@@ -950,17 +967,21 @@ class mod_groupformation_storage_manager {
                 if ($groupnumber0 == 0) {
                     $groupnumber0 = $groupnumber0 + 1;
                     $groupnumber1 = $groupnumber1 - 1;
-                } else if ($groupnumber1 == 0) {
-                    $groupnumber0 = $groupnumber0 - 1;
-                    $groupnumber1 = $groupnumber1 + 1;
-                } else if ($maxgroups == 2) {
-                    $groupnumber0 = 1;
-                    $groupnumber1 = 1;
+                } else {
+                    if ($groupnumber1 == 0) {
+                        $groupnumber0 = $groupnumber0 - 1;
+                        $groupnumber1 = $groupnumber1 + 1;
+                    } else {
+                        if ($maxgroups == 2) {
+                            $groupnumber0 = 1;
+                            $groupnumber1 = 1;
+                        }
+                    }
                 }
 
                 do {
                     $cond = ($groupnumber0 * $optimalsize0 > $userscount0) || ($optimalsize0 > $userscount0) ||
-                        ($userscount0 % $optimalsize0 == 0);
+                            ($userscount0 % $optimalsize0 == 0);
                     if ($cond) {
                         $check0 = true;
                     } else {
@@ -970,7 +991,7 @@ class mod_groupformation_storage_manager {
 
                 do {
                     $cond = ($groupnumber1 * $optimalsize1 > $userscount1) || ($optimalsize1 > $userscount1) ||
-                        ($userscount1 % $optimalsize1 == 0);
+                            ($userscount1 % $optimalsize1 == 0);
                     if ($cond) {
                         $check1 = true;
                     } else {
@@ -987,12 +1008,12 @@ class mod_groupformation_storage_manager {
                 }
 
                 return array(
-                    $basegroupsize, $groupsize1);
+                        $basegroupsize, $groupsize1);
             } else {
                 $maxmembers = intval($this->get_max_members());
 
                 return array(
-                    $maxmembers, $maxmembers);
+                        $maxmembers, $maxmembers);
             }
         }
     }
@@ -1004,10 +1025,10 @@ class mod_groupformation_storage_manager {
      * @param $version
      * @return array
      */
-    public function get_questions($category,$lang = 'en'){
+    public function get_questions($category, $lang = 'en') {
         global $DB;
 
-        return $DB->get_records('groupformation_question',array('category'=>$category,'language'=>$lang));
+        return $DB->get_records('groupformation_question', array('category' => $category, 'language' => $lang));
     }
 
     /**
@@ -1020,7 +1041,7 @@ class mod_groupformation_storage_manager {
     public function get_questions_randomized_for_user($category, $userid, $lang = 'en') {
         $questions = array_values($this->get_questions($category, $lang));
         srand($userid);
-        usort($questions, function ($a, $b) {
+        usort($questions, function($a, $b) {
             return rand(-1, 1);
         });
         return $questions;
@@ -1034,7 +1055,7 @@ class mod_groupformation_storage_manager {
     public function get_scenario_name() {
         global $DB;
         $settings = $DB->get_record('groupformation', array(
-            'id' => $this->groupformationid
+                'id' => $this->groupformationid
         ));
         return $this->data->get_scenario_name($settings->szenario);
     }
@@ -1042,10 +1063,11 @@ class mod_groupformation_storage_manager {
     /**
      * Returns question by position
      */
-    public function get_question_by_position($category,$position){
+    public function get_question_by_position($category, $position) {
         global $DB;
 
-        return $DB->get_record('groupformation_question',array('category'=>$category,'language'=>'en','position'=>$position));
+        return $DB->get_record('groupformation_question',
+                array('category' => $category, 'language' => 'en', 'position' => $position));
 
     }
 }

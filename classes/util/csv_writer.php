@@ -51,6 +51,7 @@ class mod_groupformation_csv_writer {
 
     /**
      * mod_groupformation_csv_writer constructor.
+     *
      * @param $cm
      * @param $groupformationid
      */
@@ -66,6 +67,7 @@ class mod_groupformation_csv_writer {
 
     /**
      * Returns data by type
+     *
      * @param $type
      * @return string
      */
@@ -86,6 +88,7 @@ class mod_groupformation_csv_writer {
 
     /**
      * Returns a csv-formatted string of a record
+     *
      * @param $record
      * @param bool|false $title
      * @return string
@@ -153,7 +156,7 @@ class mod_groupformation_csv_writer {
      */
     public function get_groups() {
         $groups = $this->groupsmanager->get_generated_groups(null,
-            'id,groupformation,groupname,group_size,performance_index,groupal,random,mrandom,created');
+                'id,groupformation,groupname,group_size,performance_index,groupal,random,mrandom,created');
 
         $csv = $this->records_to_csv($groups);
 
@@ -323,14 +326,14 @@ class mod_groupformation_csv_writer {
                 $userdata[$userid]['ex'] = $ex;
                 $userdata[$userid]['gh'] = $gh;
             } else {
-                $result = $DB->record_exists('groups_members',array('userid'=>$userid));
-                if ($result){
-                    $groupid = $DB->get_field('groups_members','groupid',array('userid'=>$userid));
-                    $courseid = $DB->get_field('groups','courseid',array('id'=>$groupid));
-                    if ($courseid == $this->groupformationid || $courseid + 2 == $this->groupformationid){
+                $result = $DB->record_exists('groups_members', array('userid' => $userid));
+                if ($result) {
+                    $groupid = $DB->get_field('groups_members', 'groupid', array('userid' => $userid));
+                    $courseid = $DB->get_field('groups', 'courseid', array('id' => $groupid));
+                    if ($courseid == $this->groupformationid || $courseid + 2 == $this->groupformationid) {
                         //var_dump($userid . " in group ".($groupid - 394));
-                        $members = $DB->get_records('groups_members',array('groupid'=>$groupid),'userid','userid');
-                        $unknown = array_merge($unknown,array_keys($members));
+                        $members = $DB->get_records('groups_members', array('groupid' => $groupid), 'userid', 'userid');
+                        $unknown = array_merge($unknown, array_keys($members));
                         //var_dump(implode(', ',$unknown));
                         $userdata[$userid]['groupid'] = $groupid - 394;
                         $userdata[$userid]['random'] = 2;
@@ -351,10 +354,10 @@ class mod_groupformation_csv_writer {
 
         $unknown = array_values(array_unique($unknown));
 
-        foreach($unknown as $userid){
-            if (!array_key_exists($userid, $userdata)){
+        foreach ($unknown as $userid) {
+            if (!array_key_exists($userid, $userdata)) {
                 $userdata[$userid] = array();
-                $groupid = $DB->get_field('groups_members','groupid',array('userid'=>$userid));
+                $groupid = $DB->get_field('groups_members', 'groupid', array('userid' => $userid));
                 $userdata[$userid]['groupid'] = $groupid - 394;
                 $userdata[$userid]['code'] = $this->usermanager->get_participant_code($userid);
                 $userdata[$userid]['groupformation'] = $this->groupformationid;
@@ -379,7 +382,7 @@ class mod_groupformation_csv_writer {
         $csv = "";
 
         //var_dump($us);
-        $us = array_values(array_unique(array_merge(array_values($us),array_values($unknown))));
+        $us = array_values(array_unique(array_merge(array_values($us), array_values($unknown))));
         //var_dump($us);
         for ($j = 0; $j < count($us); $j++) {
 
@@ -401,7 +404,7 @@ class mod_groupformation_csv_writer {
                         }
 
                         $csv .= implode('_' . $category . ",", $questionids) .
-                            '_' . $category . ",";
+                                '_' . $category . ",";
                     }
                 }
                 $csv = rtrim($csv, ",");

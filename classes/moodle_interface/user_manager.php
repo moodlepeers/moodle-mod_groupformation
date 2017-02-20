@@ -25,8 +25,7 @@ if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.');
 }
 
-class mod_groupformation_user_manager
-{
+class mod_groupformation_user_manager {
     private $groupformationid;
 
     private $store;
@@ -55,18 +54,18 @@ class mod_groupformation_user_manager
         global $DB;
 
         return $DB->get_records('groupformation_started', array(
-            'groupformation' => $this->groupformationid,
-            'completed' => 1
+                'groupformation' => $this->groupformationid,
+                'completed' => 1
         ), $sortedby, $fieldset);
     }
 
     /**
      *
      */
-    public function get_users_started($sortedby = null, $fieldset = '*'){
+    public function get_users_started($sortedby = null, $fieldset = '*') {
         global $DB;
         return $DB->get_records('groupformation_started', array(
-            'groupformation' => $this->groupformationid,
+                'groupformation' => $this->groupformationid,
         ), $sortedby, $fieldset);
     }
 
@@ -81,8 +80,8 @@ class mod_groupformation_user_manager
         global $DB;
 
         return $DB->get_records('groupformation_started', array(
-            'groupformation' => $this->groupformationid,
-            'completed' => 0
+                'groupformation' => $this->groupformationid,
+                'completed' => 0
         ), $sortedby, $fieldset);
     }
 
@@ -97,7 +96,7 @@ class mod_groupformation_user_manager
         global $DB;
 
         return $DB->get_records('groupformation_started', array(
-            'groupformation' => $this->groupformationid
+                'groupformation' => $this->groupformationid
         ), $sortedby, $fieldset);
     }
 
@@ -113,8 +112,8 @@ class mod_groupformation_user_manager
         global $DB;
 
         return $DB->get_records('groupformation_started', array(
-            'groupformation' => $this->groupformationid,
-            'answer_count' => $this->store->get_total_number_of_answers()
+                'groupformation' => $this->groupformationid,
+                'answer_count' => $this->store->get_total_number_of_answers()
         ), $sortedby, $fieldset);
     }
 
@@ -130,11 +129,11 @@ class mod_groupformation_user_manager
         global $DB;
         $tablename = 'groupformation_started';
         $query = "SELECT " . $fieldset . " FROM {{$tablename}} " .
-            "WHERE groupformation = ? AND answer_count <> ? ORDER BY ?" . $sortedby;
+                "WHERE groupformation = ? AND answer_count <> ? ORDER BY ?" . $sortedby;
         return $DB->get_records_sql($query, array(
-            $this->groupformationid,
-            $this->store->get_total_number_of_answers(),
-            $sortedby
+                $this->groupformationid,
+                $this->store->get_total_number_of_answers(),
+                $sortedby
         ));
     }
 
@@ -150,14 +149,14 @@ class mod_groupformation_user_manager
         global $DB;
         // TODO HOTFIX FOR HRZ SOSE2016
         return array();
-//        $tablename = 'groupformation_started';
-//        $query = "SELECT " . $fieldset . " FROM {{$tablename}} ".
-//            "WHERE groupformation = ? AND completed = 1 AND answer_count <> ? ORDER BY ?" . $sortedby;
-//        return $DB->get_records_sql($query, array(
-//            $this->groupformationid,
-//            $this->store->get_total_number_of_answers(),
-//            $sortedby
-//        ));
+        //        $tablename = 'groupformation_started';
+        //        $query = "SELECT " . $fieldset . " FROM {{$tablename}} ".
+        //            "WHERE groupformation = ? AND completed = 1 AND answer_count <> ? ORDER BY ?" . $sortedby;
+        //        return $DB->get_records_sql($query, array(
+        //            $this->groupformationid,
+        //            $this->store->get_total_number_of_answers(),
+        //            $sortedby
+        //        ));
     }
 
     /**
@@ -168,24 +167,24 @@ class mod_groupformation_user_manager
     public function set_answer_count($userid) {
         global $DB;
         if ($record = $DB->get_record('groupformation_started', array(
-            'groupformation' => $this->groupformationid,
-            'userid' => $userid
+                'groupformation' => $this->groupformationid,
+                'userid' => $userid
         ))
         ) {
             $record->answer_count = $DB->count_records('groupformation_answer', array(
-                'groupformation' => $this->groupformationid,
-                'userid' => $userid
+                    'groupformation' => $this->groupformationid,
+                    'userid' => $userid
             ));
             $DB->update_record('groupformation_started', $record);
         } else {
             $this->change_status($userid);
             $record = $DB->get_record('groupformation_started', array(
-                'groupformation' => $this->groupformationid,
-                'userid' => $userid
+                    'groupformation' => $this->groupformationid,
+                    'userid' => $userid
             ));
             $record->answer_count = $DB->count_records('groupformation_answer', array(
-                'groupformation' => $this->groupformationid,
-                'userid' => $userid
+                    'groupformation' => $this->groupformationid,
+                    'userid' => $userid
             ));
             $DB->update_record('groupformation_started', $record);
         }
@@ -200,13 +199,13 @@ class mod_groupformation_user_manager
     public function set_status($userid, $completed = false) {
         global $DB;
         if ($data = $DB->get_record('groupformation_started', array(
-            'groupformation' => $this->groupformationid,
-            'userid' => $userid
+                'groupformation' => $this->groupformationid,
+                'userid' => $userid
         ))
         ) {
             $data = $DB->get_record('groupformation_started', array(
-                'groupformation' => $this->groupformationid,
-                'userid' => $userid
+                    'groupformation' => $this->groupformationid,
+                    'userid' => $userid
             ));
             $data->completed = $completed;
             $data->timecompleted = time();
@@ -258,13 +257,13 @@ class mod_groupformation_user_manager
         }
 
         $exists = $DB->record_exists('groupformation_started', array(
-            'groupformation' => $this->groupformationid,
-            'userid' => $userid
+                'groupformation' => $this->groupformationid,
+                'userid' => $userid
         ));
         if ($exists) {
             $value = $DB->get_field('groupformation_started', 'completed', array(
-                'groupformation' => $this->groupformationid,
-                'userid' => $userid
+                    'groupformation' => $this->groupformationid,
+                    'userid' => $userid
             ));
             return $value;
         } else {
@@ -279,7 +278,7 @@ class mod_groupformation_user_manager
      * @return boolean
      */
     public function is_completed($userid) {
-        return array_key_exists($userid,$this->get_completed(null,'userid'));
+        return array_key_exists($userid, $this->get_completed(null, 'userid'));
     }
 
     /**
@@ -294,15 +293,15 @@ class mod_groupformation_user_manager
 
         if (!is_null($category)) {
             return $DB->count_records('groupformation_answer', array(
-                'groupformation' => $this->groupformationid,
-                'userid' => $userid,
-                'category' => $category
+                    'groupformation' => $this->groupformationid,
+                    'userid' => $userid,
+                    'category' => $category
             ));
         }
 
         return $DB->count_records('groupformation_answer', array(
-            'groupformation' => $this->groupformationid,
-            'userid' => $userid
+                'groupformation' => $this->groupformationid,
+                'userid' => $userid
         ));
     }
 
@@ -334,18 +333,20 @@ class mod_groupformation_user_manager
         global $DB;
         if (is_null($categories) && is_null($userid)) {
             return !($DB->count_records('groupformation_answer', array(
-                    'groupformation' => $this->groupformationid
-                )) == 0);
-        } else if (is_null($categories) && !is_null($userid)) {
-            return !($DB->count_records('groupformation_answer', array(
-                    'groupformation' => $this->groupformationid,
-                    'userid' => $userid
-                )) == 0);
+                            'groupformation' => $this->groupformationid
+                    )) == 0);
         } else {
-            foreach ($categories as $category) {
-                $answers = $this->get_answers($userid, $category);
-                if (count($answers) > 0) {
-                    return true;
+            if (is_null($categories) && !is_null($userid)) {
+                return !($DB->count_records('groupformation_answer', array(
+                                'groupformation' => $this->groupformationid,
+                                'userid' => $userid
+                        )) == 0);
+            } else {
+                foreach ($categories as $category) {
+                    $answers = $this->get_answers($userid, $category);
+                    if (count($answers) > 0) {
+                        return true;
+                    }
                 }
             }
         }
@@ -366,26 +367,30 @@ class mod_groupformation_user_manager
         global $DB;
         if (is_null($userid) && is_null($category)) {
             return $DB->get_records('groupformation_answer', array(
-                'groupformation' => $this->groupformationid,
-            ), $sortedby, $fieldset);
-        } else if (is_null($userid)) {
-
-            return $DB->get_records('groupformation_answer', array(
-                'groupformation' => $this->groupformationid,
-                'category' => $category
-            ), $sortedby, $fieldset);
-        } else if (is_null($category)) {
-
-            return $DB->get_records('groupformation_answer', array(
-                'groupformation' => $this->groupformationid,
-                'userid' => $userid
+                    'groupformation' => $this->groupformationid,
             ), $sortedby, $fieldset);
         } else {
-            return $DB->get_records('groupformation_answer', array(
-                'groupformation' => $this->groupformationid,
-                'userid' => $userid,
-                'category' => $category
-            ), $sortedby, $fieldset);
+            if (is_null($userid)) {
+
+                return $DB->get_records('groupformation_answer', array(
+                        'groupformation' => $this->groupformationid,
+                        'category' => $category
+                ), $sortedby, $fieldset);
+            } else {
+                if (is_null($category)) {
+
+                    return $DB->get_records('groupformation_answer', array(
+                            'groupformation' => $this->groupformationid,
+                            'userid' => $userid
+                    ), $sortedby, $fieldset);
+                } else {
+                    return $DB->get_records('groupformation_answer', array(
+                            'groupformation' => $this->groupformationid,
+                            'userid' => $userid,
+                            'category' => $category
+                    ), $sortedby, $fieldset);
+                }
+            }
         }
     }
 
@@ -401,10 +406,10 @@ class mod_groupformation_user_manager
         global $DB;
 
         return $DB->get_field('groupformation_answer', 'answer', array(
-            'groupformation' => $this->groupformationid,
-            'userid' => strval($userid),
-            'category' => strval($category),
-            'questionid' => strval($questionid)
+                'groupformation' => $this->groupformationid,
+                'userid' => strval($userid),
+                'category' => strval($category),
+                'questionid' => strval($questionid)
         ));
     }
 
@@ -422,9 +427,9 @@ class mod_groupformation_user_manager
 
         $questionid = $position;
 
-        if (!in_array($category,array('knowledge','topics','character','team'))){
+        if (!in_array($category, array('knowledge', 'topics', 'character', 'team'))) {
 
-            $question = $this->store->get_question_by_position($category,$position);
+            $question = $this->store->get_question_by_position($category, $position);
             $questionid = $question->questionid;
         }
 
@@ -435,10 +440,10 @@ class mod_groupformation_user_manager
 
             if ($answeralreadyexists) {
                 $record = $DB->get_record('groupformation_answer', array(
-                    'groupformation' => $this->groupformationid,
-                    'userid' => $userid,
-                    'category' => $category,
-                    'questionid' => $questionid
+                        'groupformation' => $this->groupformationid,
+                        'userid' => $userid,
+                        'category' => $category,
+                        'questionid' => $questionid
                 ));
                 $record->answer = $answer;
                 $DB->update_record('groupformation_answer', $record);
@@ -473,10 +478,10 @@ class mod_groupformation_user_manager
         global $DB;
 
         return $DB->record_exists('groupformation_answer', array(
-            'groupformation' => $this->groupformationid,
-            'userid' => $userid,
-            'category' => $category,
-            'questionid' => $questionid
+                'groupformation' => $this->groupformationid,
+                'userid' => $userid,
+                'category' => $category,
+                'questionid' => $questionid
         ));;
     }
 
@@ -505,14 +510,14 @@ class mod_groupformation_user_manager
         $scores = [];
         for ($i = 1; $i <= $numberoftopics; $i++) {
             $answers = $DB->get_records('groupformation_answer',
-                array('groupformation' => $this->groupformationid, 'category' => 'topic', 'questionid' => $i));
+                    array('groupformation' => $this->groupformationid, 'category' => 'topic', 'questionid' => $i));
             $score = 0;
             foreach ($answers as $answer) {
                 $score += $answer->answer;
             }
             $scores[] = array('id' => strval($i), 'score' => $score);
         }
-        usort($scores, function ($a, $b) {
+        usort($scores, function($a, $b) {
             return $b['score'] - $a['score'];
         });
 
@@ -530,9 +535,10 @@ class mod_groupformation_user_manager
     public function get_consent($userid) {
         global $DB;
         if ($DB->record_exists('groupformation_started',
-            array('groupformation' => $this->groupformationid, 'userid' => $userid))
+                array('groupformation' => $this->groupformationid, 'userid' => $userid))
         ) {
-            return (bool)($DB->get_field('groupformation_started', 'consent', array('groupformation' => $this->groupformationid, 'userid' => $userid)));
+            return (bool) ($DB->get_field('groupformation_started', 'consent',
+                    array('groupformation' => $this->groupformationid, 'userid' => $userid)));
         } else {
             return false;
         }
@@ -547,7 +553,8 @@ class mod_groupformation_user_manager
     public function set_consent($userid, $value) {
         global $DB;
         $this->set_status($userid);
-        $record = $DB->get_record('groupformation_started', array('groupformation' => $this->groupformationid, 'userid' => $userid));
+        $record =
+                $DB->get_record('groupformation_started', array('groupformation' => $this->groupformationid, 'userid' => $userid));
         $record->consent = $value;
         $DB->update_record('groupformation_started', $record);
     }
@@ -597,13 +604,13 @@ class mod_groupformation_user_manager
     public function has_participant_code($userid) {
         global $DB;
         $exists = $DB->record_exists('groupformation_started', array(
-            'groupformation' => $this->groupformationid,
-            'userid' => $userid
+                'groupformation' => $this->groupformationid,
+                'userid' => $userid
         ));
         if ($exists) {
             $value = $DB->get_field('groupformation_started', 'participantcode', array(
-                'groupformation' => $this->groupformationid,
-                'userid' => $userid
+                    'groupformation' => $this->groupformationid,
+                    'userid' => $userid
             ));
             return $this->validate_participant_code($value);
         }
@@ -619,7 +626,8 @@ class mod_groupformation_user_manager
     public function register_participant_code($userid, $participantcode) {
         global $DB;
         $this->set_status($userid);
-        $record = $DB->get_record('groupformation_started', array('groupformation' => $this->groupformationid, 'userid' => $userid));
+        $record =
+                $DB->get_record('groupformation_started', array('groupformation' => $this->groupformationid, 'userid' => $userid));
         $record->participantcode = strtoupper($participantcode);
         $DB->update_record('groupformation_started', $record);
     }
@@ -633,13 +641,13 @@ class mod_groupformation_user_manager
     public function get_participant_code($userid) {
         global $DB;
         $exists = $DB->record_exists('groupformation_started', array(
-            'groupformation' => $this->groupformationid,
-            'userid' => $userid
+                'groupformation' => $this->groupformationid,
+                'userid' => $userid
         ));
         if ($exists) {
             $value = $DB->get_field('groupformation_started', 'participantcode', array(
-                'groupformation' => $this->groupformationid,
-                'userid' => $userid
+                    'groupformation' => $this->groupformationid,
+                    'userid' => $userid
             ));
             return $value;
         }
@@ -654,7 +662,7 @@ class mod_groupformation_user_manager
     public function set_evaluation_values($userid) {
         global $DB;
         $DB->delete_records('groupformation_user_values',
-            array('groupformationid' => $this->groupformationid, 'userid' => $userid)
+                array('groupformationid' => $this->groupformationid, 'userid' => $userid)
         );
         $cc = new mod_groupformation_criterion_calculator($this->groupformationid);
         $criteria = $this->store->get_label_set();
@@ -680,6 +688,7 @@ class mod_groupformation_user_manager
         }
         $DB->insert_records('groupformation_user_values', $records);
     }
+
     /**
      * Handles complete questionnaires (userids) and sets them to completed/commited.
      */
@@ -700,7 +709,7 @@ class mod_groupformation_user_manager
     public function has_evaluation_values($userid) {
         global $DB;
         return 0 < $DB->count_records('groupformation_user_values',
-                array('groupformationid' => $this->groupformationid, 'userid' => $userid)
-            );
+                        array('groupformationid' => $this->groupformationid, 'userid' => $userid)
+                );
     }
 }

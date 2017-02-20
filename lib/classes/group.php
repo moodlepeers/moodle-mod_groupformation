@@ -36,18 +36,17 @@ class mod_groupformation_group {
 
     public $gpi = 0;
 
-
     private $participants; // Generic array: Participant .
-
 
     /**
      * mod_groupformation_group constructor.
+     *
      * @param null $id
      */
     public function __construct($id = null) {
         static::$groupcount++;
         $this->groupid = static::$groupcount;
-        if (is_null($id)){
+        if (is_null($id)) {
             $this->groupid = $id;
         }
         $this->participants = array();
@@ -102,7 +101,6 @@ class mod_groupformation_group {
         return true;
     }
 
-
     /**
      * Adds an Participant to this Group and calculates the new GroupPerformanceIndex
      *
@@ -126,7 +124,6 @@ class mod_groupformation_group {
         }
     }
 
-
     /**
      * @return float[]
      */
@@ -141,7 +138,6 @@ class mod_groupformation_group {
     public function set_gpi($index) {
         $this->gpi = $index;
     }
-
 
     /**
      *

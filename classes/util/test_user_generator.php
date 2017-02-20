@@ -33,6 +33,7 @@ class mod_groupformation_test_user_generator {
 
     /**
      * mod_groupformation_test_user_generator constructor.
+     *
      * @param null $cm
      */
     public function __construct($cm = null) {
@@ -207,27 +208,27 @@ class mod_groupformation_test_user_generator {
                     $groupingcontroller->delete();
 
                     $DB->delete_records("user", array(
-                        'id' => $userid
+                            'id' => $userid
                     ));
 
                     $DB->delete_records("groupformation_answer", array(
-                        'userid' => $userid
+                            'userid' => $userid
                     ));
 
                     $DB->delete_records("groupformation_started", array(
-                        'userid' => $userid
+                            'userid' => $userid
                     ));
 
                     $DB->delete_records('groupformation_user_values', array(
-                        'userid' => $userid
+                            'userid' => $userid
                     ));
 
                     $DB->delete_records("groupformation_group_users", array(
-                        'userid' => $userid
+                            'userid' => $userid
                     ));
 
                     $DB->delete_records("user_enrolments", array(
-                        'userid' => $userid
+                            'userid' => $userid
                     ));
 
                 } catch (Exception $e) {
