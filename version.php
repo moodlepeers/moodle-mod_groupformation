@@ -21,10 +21,10 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
-$plugin->version = 2016100800;
-$plugin->requires = 2015050500;
+$plugin->version = 2017022100;
+$plugin->requires = 2016120500; // Moodle 3.2 due to new bootstrap 4
 $plugin->cron = 0;
 $plugin->component = 'mod_groupformation';
-$plugin->maturity = MATURITY_BETA;
-$plugin->release = 'v1.2-b';
+$plugin->maturity = MATURITY_STABLE;
+$plugin->release = 'v1.3'; // we do not use the Moodle versions as prefix; we use semantic versioning: http://semver.org/
 $plugin->dependencies = array();
