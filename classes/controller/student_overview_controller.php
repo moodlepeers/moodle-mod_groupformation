@@ -144,8 +144,16 @@ class mod_groupformation_student_overview_controller {
                     true, $this->groupformationid);
                 $this->groupformationstateinfo = array(
                     get_string('questionnaire_submitted', 'groupformation'));
-                $this->buttonsinfo = '';
-                $this->buttonsarray = array();
+                $this->buttonsinfo = get_string('questionnaire_press_revert', 'groupformation');
+                $this->buttonsarray = array(
+                    array(
+                        'type' => 'submit', 'name' => 'begin', 'value' => '0', 'state' => '',
+                        'text' => get_string('revert')),
+                    array(
+                        'type' => 'submit', 'name' => 'begin', 'value' => '-1',
+                        'state' => '',
+                        'text' => get_string('questionnaire_delete', 'groupformation'))
+                );
                 break;
 
             case 2 :
@@ -186,45 +194,6 @@ class mod_groupformation_student_overview_controller {
                 $this->buttonsarray = array();
                 break;
         }
-    }
-
-    /**
-     * Prints stats about answered and misssing questions
-     */
-    private function determine_survey_stats() {
-        $stats = mod_groupformation_util::get_stats($this->groupformationid, $this->userid);
-
-        $previncomplete = false;
-        $array = array();
-        foreach ($stats as $key => $values) {
-
-            $a = new stdClass ();
-            $a->category = get_string('category_' . $key, 'groupformation');
-            $a->questions = $values ['questions'];
-            $a->answered = $values ['answered'];
-            if ($values ['questions'] > 0) {
-                $url = new moodle_url ('questionnaire_view.php', array(
-                    'id' => $this->cmid, 'category' => $key));
-
-                if (!$this->data->all_answers_required() || !$previncomplete) {
-                    $a->category = '<a href="' . $url . '">' . $a->category . '</a>';
-                }
-                if ($values ['missing'] == 0) {
-                    $array [] = get_string('stats_all', 'groupformation', $a) .
-                        ' <span class="questionaire_all">&#10004;</span>';
-                    $previncomplete = false;
-                } else if ($values ['answered'] == 0) {
-                    $array [] = get_string('stats_none', 'groupformation', $a) .
-                        ' <span class="questionaire_none">&#10008;</span>';
-                    $previncomplete = true;
-                } else {
-                    $array [] = get_string('stats_partly', 'groupformation', $a);
-                    $previncomplete = true;
-                }
-            }
-        }
-        $this->surveystatestitle = get_string('questionnaire_answer_stats', 'groupformation');
-        $this->surveystatesarray = $array;
     }
 
     /**
@@ -274,6 +243,45 @@ class mod_groupformation_student_overview_controller {
     }
 
     /**
+     * Prints stats about answered and misssing questions
+     */
+    private function determine_survey_stats() {
+        $stats = mod_groupformation_util::get_stats($this->groupformationid, $this->userid);
+
+        $previncomplete = false;
+        $array = array();
+        foreach ($stats as $key => $values) {
+
+            $a = new stdClass ();
+            $a->category = get_string('category_' . $key, 'groupformation');
+            $a->questions = $values ['questions'];
+            $a->answered = $values ['answered'];
+            if ($values ['questions'] > 0) {
+                $url = new moodle_url ('questionnaire_view.php', array(
+                    'id' => $this->cmid, 'category' => $key));
+
+                if (!$this->data->all_answers_required() || !$previncomplete) {
+                    $a->category = '<a href="' . $url . '">' . $a->category . '</a>';
+                }
+                if ($values ['missing'] == 0) {
+                    $array [] = get_string('stats_all', 'groupformation', $a) .
+                        ' <span class="questionaire_all">&#10004;</span>';
+                    $previncomplete = false;
+                } else if ($values ['answered'] == 0) {
+                    $array [] = get_string('stats_none', 'groupformation', $a) .
+                        ' <span class="questionaire_none">&#10008;</span>';
+                    $previncomplete = true;
+                } else {
+                    $array [] = get_string('stats_partly', 'groupformation', $a);
+                    $previncomplete = true;
+                }
+            }
+        }
+        $this->surveystatestitle = get_string('questionnaire_answer_stats', 'groupformation');
+        $this->surveystatesarray = $array;
+    }
+
+    /**
      * Generate and return the HTMl Page with templates and data
      *
      * @return string
@@ -316,7 +324,12 @@ class mod_groupformation_student_overview_controller {
             $surveyoptionsview->assign('consentvalue', $this->usermanager->get_consent($this->userid));
             $this->view->assign('student_overview_survey_options', $surveyoptionsview->load_template());
         } else {
-            $this->view->assign('student_overview_survey_options', '');
+            $surveyoptionsview = new mod_groupformation_template_builder ();
+            $surveyoptionsview->assign('cmid', $this->cmid);
+            $surveyoptionsview->set_template('students_overview_options');
+            $surveyoptionsview->assign('buttons', $this->buttonsarray);
+            $surveyoptionsview->assign('buttons_infos', $this->buttonsinfo);
+            $this->view->assign('student_overview_survey_options', $surveyoptionsview->load_template());
         }
         return $this->view->load_template();
     }

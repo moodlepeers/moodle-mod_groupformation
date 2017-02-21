@@ -136,11 +136,10 @@ $string ['analyse'] = 'Analyse';
 $string ['questionnaire_not_started'] = 'Der Fragebogen wartet noch auf Ihre Bearbeitung.';
 $string ['questionnaire_press_to_begin'] = 'Geben Sie ihre Zustimmung und klicken Sie auf "Weiter", um zu beginnen.';
 $string ['questionnaire_not_submitted'] = 'Sie haben den Fragebogen noch nicht abgegeben.';
-$string ['questionnaire_press_continue_submit'] = 'Klicken Sie auf "Bearbeiten", um den Fragebogen weiter auszufüllen oder auf "Abgeben", um ihn abzugeben. Durch "Zustimmung wiederrufen" können sie ihre Zustimmung wiederrufen und alle ihre Antworten werden dadurch gelöscht.
-
-Wenn Sie den Fragebogen abgegeben haben, können Sie ihre Zustimmung nicht mehr wiederrufen.';
+$string ['questionnaire_press_continue_submit'] = 'Klicken Sie auf "Bearbeiten", um den Fragebogen weiter auszufüllen oder auf "Abgeben", um ihn abzugeben. Durch "Zustimmung widerrufen" können sie ihre Zustimmung widerrufen und alle ihre Antworten werden dadurch gelöscht.';
+$string ['questionnaire_press_revert'] = 'Klicken Sie auf "Zurücksetzen", um ihre Entscheidung den Fragebogen abzugeben rückgängig zu machen. Durch "Zustimmung widerrufen" können sie ihre Zustimmung widerrufen und alle ihre Antworten werden dadurch gelöscht.';
 $string ['questionnaire_answer_stats'] = 'Aktueller Zustand des Fragebogens:';
-$string ['questionnaire_submitted'] = 'Sie haben den Fragebogen bereits abgegeben und können Ihre Antworten nicht mehr ändern.';
+$string ['questionnaire_submitted'] = 'Sie haben den Fragebogen bereits abgegeben und können Ihre Antworten nur ändern indem sie ihre Abgabe zurücksetzen oder ihre Zustimmeung widerrufen.';
 $string ['questionnaire_press_preview'] = 'Klicken Sie auf "Vorschau", um den Fragebogen anzusehen.';
 $string ['questionnaire_no_more_questions'] = 'Es gibt keine weiteren Fragen zu beantworten.';
 $string ['questionnaire_press_beginning_submit'] = 'Klicken Sie auf "Zur Anfangsseite", um zum Anfang zurückzukehren. Dort können Sie ihren Fragebogen entgültig abgeben.';

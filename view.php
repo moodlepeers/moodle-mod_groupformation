@@ -106,6 +106,8 @@ if ($begin == 1) {
         'id' => $id));
 
     redirect($returnurl);
+} else if ($usermanager->is_completed($userid)) {
+    $usermanager->set_complete($userid, 0);
 } else {
     $usermanager->change_status($userid, 1);
     $groupsmanager->assign_to_groups_a_and_b($userid);

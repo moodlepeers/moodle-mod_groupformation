@@ -34,6 +34,8 @@ class mod_groupformation_range_question {
      */
     public function print_html($category, $questionid, $question, $options, $answer, $highlight) {
 
+        $question = html_entity_decode($question);
+
         if ($answer != -1) {
             echo '<tr>';
             echo '<th scope="row">' . $question . '</th>';
