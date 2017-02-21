@@ -363,7 +363,7 @@ function groupformation_get_catalog_version($category) {
  */
 function groupformation_convert_options($options) {
     $ops = array();
-    foreach($options as $option){
+    foreach ($options as $option) {
         $ops[] = htmlentities($option);
     }
     $op = implode("]]></OPTION>  <OPTION><![CDATA[", $ops);

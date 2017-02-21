@@ -24,7 +24,7 @@
     <div class="grid">
         <div class="col_m_100">
             <input type="hidden" name="id" value="<?php echo $this->_['cmid']; ?>"/>
-            <?php if (array_key_exists('consentvalue',$this->_)): ?>
+            <?php if (array_key_exists('consentvalue', $this->_)): ?>
             <div style="padding-bottom: 10px;">
                 <div>
                     <p>
@@ -51,7 +51,7 @@
                 </div>
             </div>
             <?php endif; ?>
-            <?php if (array_key_exists('participant_code',$this->_) && $this->_['participant_code']): ?>
+            <?php if (array_key_exists('participant_code', $this->_) && $this->_['participant_code']): ?>
                 <div style="padding-bottom: 10px;">
                     <div>
                         <p>
