@@ -16,7 +16,7 @@ $(document).ready(function () {
         .enter()
         .append("div")
         .attr("class", function (d, i) {
-            return i == 0 ? "carousel-item active" : "carousel-item";
+            return i == 0 ? "carousel-item item active" : "carousel-item item";
         });
     caption
         .append("h2")
@@ -44,7 +44,7 @@ $(document).ready(function () {
         .each(function (d, i) {
             if (d.mode == "chart") {
                 var divv = "gf_chart" + i + "accordion";
-                d3.select(this).append("div").attr("id", divv).attr("class", "panel-group");
+                d3.select(this).append("div").attr("id", divv);//.attr("class", "panel-group");
                 if (d.directions == 1) {
                     buildChartOneSide("#gf_chart" + i, d.criteria, d.bars);
                     buildPersonalResult(d.criteria, i, "#" + divv);
@@ -68,21 +68,20 @@ $(document).ready(function () {
 
 function buildPersonalResult(datam, index, divId) {
 
-    var pan = d3.select(divId).selectAll("div .card")
+    var pan = d3.select(divId).selectAll("div .card .panel .panel-default")
         .data(datam)
         .enter()
         .append("div")
-        .attr("class", "card");
+        .attr("class", "card panel panel-default");
     /* panel heading */
     var panHead = pan
         .append("div")
-        .attr("class", "card-header")
+        .attr("class", "card-header panel-heading")
         .attr("role", "tab")
         .attr("id", function (d, i) {
             return "heading" + index + i;
         })
-        .append("h4")
-    // .attr("class", "card-title");
+        .append("h4");
 
     /* Header Text */
     panHead
@@ -120,13 +119,13 @@ function buildPersonalResult(datam, index, divId) {
         .attr("id", function (d, i) {
             return "collapse" + index + i;
         })
-        .attr("class", "card-collapse collapse in")
+        .attr("class", "card-collapse panel-collapse collapse in")
         .attr("role", "tabpanel")
         .attr("aria-labelledBy", function (d, i) {
             return "collapse" + index + i;
         })
         .append("div")
-        .attr("class", "card-block")
+        .attr("class", "card-block panel-body")
         .append("p")
         .attr("class", "gf_p_accordion")
         .text(function (d, i) {
