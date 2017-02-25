@@ -343,13 +343,6 @@ a:hover, a:focus {
     padding: 10px 20px 0 0;
 }
 
-/* contributed by nkpellier pull request */
-.path-mod-groupformation #accordion li a:hover:focus {
-    float: right;
-    padding: 10px 0 0 0;
-    margin-top: -30px;
-}
-
 .path-mod-groupformation #accordion li span {
     width: 40px;
     height: 30px;
