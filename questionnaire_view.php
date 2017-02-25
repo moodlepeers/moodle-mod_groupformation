@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * Prints a particular instance of groupformation
+ * displays the questionnaire page with the categories relevant for the configured scenario
  *
  * @package mod_groupformation
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic

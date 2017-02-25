@@ -121,9 +121,9 @@ function groupformation_fatal($userid, $groupformationid, $message) {
  * Determines instances of course module, course and groupformation by id
  *
  * @param int $id
- * @param stdClass $cm
- * @param stdClass $course
- * @param stdClass $groupformation
+ * @param stdClass $cm  (return parameter of course module)
+ * @param stdClass $course (return parameter of course instance)
+ * @param stdClass $groupformation (return parameter of groupformation instance)
  */
 function groupformation_determine_instance($id, &$cm, &$course, &$groupformation) {
     global $DB;
@@ -364,7 +364,7 @@ function groupformation_get_catalog_version($category) {
 function groupformation_convert_options($options) {
     $ops = array();
     foreach ($options as $option) {
-        $ops[] = htmlentities($option);
+        $ops[] = htmlentities($option, ENT_QUOTES | ENT_XHTML);
     }
     $op = implode("]]></OPTION>  <OPTION><![CDATA[", $ops);
 
