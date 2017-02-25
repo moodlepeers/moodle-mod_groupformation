@@ -20,9 +20,6 @@
  */
 ?>
 <div class="gf_settings_pad">
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
     <div class="gf_pad_header"><?php echo get_string('evaluation', 'groupformation'); ?></div>
     <div class="gf_pad_content">
         <?php if ($this->_['eval_show_text']): ?>

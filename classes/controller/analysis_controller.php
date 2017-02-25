@@ -120,20 +120,20 @@ class mod_groupformation_analysis_controller {
         $statusanalysisview = new mod_groupformation_template_builder();
         $statusanalysisview->set_template('analysis_status');
         $statusanalysisview->assign('button',
-            array(
-                'type' => 'submit',
-                'name' => 'questionnaire_switcher',
-                'value' => $buttonvalue,
-                'state' => $buttondisabled,
-                'text' => $buttoncaption
-            )
+                array(
+                        'type' => 'submit',
+                        'name' => 'questionnaire_switcher',
+                        'value' => $buttonvalue,
+                        'state' => $buttondisabled,
+                        'text' => $buttoncaption
+                )
         );
         $statusanalysisview->assign('info_teacher',
-            mod_groupformation_util::get_info_text_for_teacher(false, "analysis"));
+                mod_groupformation_util::get_info_text_for_teacher(false, "analysis"));
         $statusanalysisview->assign('analysis_time_start', $this->starttime);
         $statusanalysisview->assign('analysis_time_end', $this->endtime);
         $statusanalysisview->assign('analysis_status_info',
-            get_string('analysis_status_info'.strval($this->state), 'groupformation')
+                get_string('analysis_status_info' . strval($this->state), 'groupformation')
         );
 
         return $statusanalysisview->load_template();
@@ -220,60 +220,68 @@ class mod_groupformation_analysis_controller {
         $this->jobstate = mod_groupformation_job_manager::get_status($job);
         if ($this->jobstate !== 'ready') {
             $this->state = 3;
-        } else if ($this->questionnaireavailable) {
-            $this->state = 1;
-        } else if (count($this->usermanager->get_completed()) > 0) {
-            $this->state = 4;
         } else {
-            $this->state = 2;
+            if ($this->questionnaireavailable) {
+                $this->state = 1;
+            } else {
+                if (count($this->usermanager->get_completed()) > 0) {
+                    $this->state = 4;
+                } else {
+                    $this->state = 2;
+                }
+            }
         }
     }
 
     /** hot fix for answers */
-    public function fix_answers(){
+    public function fix_answers() {
         global $DB;
 
         $answers = $DB->get_records('groupformation_answer',
-            array('groupformation'=>$this->groupformationid, 'category'=>'team')
+                array('groupformation' => $this->groupformationid, 'category' => 'team')
         );
 
-        $map = array(1=>14,2=>15,3=>16);
+        $map = array(1 => 14, 2 => 15, 3 => 16);
 
-        foreach ($answers as $answer){
-            if (intval($answer->questionid) <= 3){
+        foreach ($answers as $answer) {
+            if (intval($answer->questionid) <= 3) {
                 $qid = $map[$answer->questionid];
                 if ($DB->record_exists('groupformation_answer',
-                    array('groupformation'=>$this->groupformationid, 'category'=>'team','userid'=>$answer->userid,'questionid'=>$qid))){
+                        array('groupformation' => $this->groupformationid, 'category' => 'team', 'userid' => $answer->userid,
+                                'questionid' => $qid))
+                ) {
                     $DB->delete_records('groupformation_answer',
-                        array('groupformation'=>$this->groupformationid, 'category'=>'team','userid'=>$answer->userid,'questionid'=>$answer->questionid));
-                }else{
+                            array('groupformation' => $this->groupformationid, 'category' => 'team', 'userid' => $answer->userid,
+                                    'questionid' => $answer->questionid));
+                } else {
                     $answer->questionid = $qid;
-                    $DB->update_record('groupformation_answer',$answer,true);
+                    $DB->update_record('groupformation_answer', $answer, true);
                 }
-            }elseif (intval($answer->questionid) <= 16){
-
             }
         }
 
         $answers = $DB->get_records('groupformation_answer',
-            array('groupformation'=>$this->groupformationid, 'category'=>'srl')
+                array('groupformation' => $this->groupformationid, 'category' => 'srl')
         );
 
-        $map = array(1=>63,2=>64,3=>65,4=>66,5=>67,6=>68,7=>69,8=>70,9=>71,10=>72,11=>73,12=>74,13=>75,14=>76,15=>77,16=>78,17=>79,18=>80,19=>81,20=>82,21=>83,22=>84,23=>85,24=>86,25=>87,26=>88);
+        $map = array(1 => 63, 2 => 64, 3 => 65, 4 => 66, 5 => 67, 6 => 68, 7 => 69, 8 => 70, 9 => 71, 10 => 72, 11 => 73, 12 => 74,
+                13 => 75, 14 => 76, 15 => 77, 16 => 78, 17 => 79, 18 => 80, 19 => 81, 20 => 82, 21 => 83, 22 => 84, 23 => 85,
+                24 => 86, 25 => 87, 26 => 88);
 
-        foreach ($answers as $answer){
-            if (intval($answer->questionid) <= 26){
+        foreach ($answers as $answer) {
+            if (intval($answer->questionid) <= 26) {
                 $qid = $map[$answer->questionid];
                 if ($DB->record_exists('groupformation_answer',
-                    array('groupformation'=>$this->groupformationid, 'category'=>'srl','userid'=>$answer->userid,'questionid'=>$qid))){
+                        array('groupformation' => $this->groupformationid, 'category' => 'srl', 'userid' => $answer->userid,
+                                'questionid' => $qid))
+                ) {
                     $DB->delete_records('groupformation_answer',
-                        array('groupformation'=>$this->groupformationid, 'category'=>'srl','userid'=>$answer->userid,'questionid'=>$answer->questionid));
-                }else{
+                            array('groupformation' => $this->groupformationid, 'category' => 'srl', 'userid' => $answer->userid,
+                                    'questionid' => $answer->questionid));
+                } else {
                     $answer->questionid = $qid;
-                    $DB->update_record('groupformation_answer',$answer,true);
+                    $DB->update_record('groupformation_answer', $answer, true);
                 }
-            }elseif (intval($answer->questionid) <= 63){
-
             }
         }
     }

@@ -28,7 +28,6 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/topics_solver/choi
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/topics_solver/rating_for_topic.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/topics_solver/edmonds-karp.php");
 
-
 class mod_groupformation_topic_algorithm implements mod_groupformation_ialgorithm {
 
     /** @var array This array contains the ratings of all participants */
@@ -48,6 +47,7 @@ class mod_groupformation_topic_algorithm implements mod_groupformation_ialgorith
 
     /**
      * mod_groupformation_topic_algorithm constructor.
+     *
      * @param $topics
      * @param $participants
      */
@@ -80,7 +80,7 @@ class mod_groupformation_topic_algorithm implements mod_groupformation_ialgorith
         $groups = array();
         var_dump($results);
         foreach ($results as $topicid => $participantsids) {
-            $group = new mod_groupformation_group($topicid+1);
+            $group = new mod_groupformation_group($topicid + 1);
             foreach ($participantsids as $id) {
                 $p = $this->participants[$id];
                 $group->add_participant($p, true);
@@ -118,6 +118,5 @@ class mod_groupformation_topic_algorithm implements mod_groupformation_ialgorith
         return $ratingsarray;  // Array with all ratings.
 
     }
-
 
 }

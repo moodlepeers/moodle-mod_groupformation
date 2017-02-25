@@ -42,7 +42,7 @@ require_login($course, true, $cm);
 $context = $PAGE->context;
 $userid = $USER->id;
 
-if (is_null($manualid)){
+if (is_null($manualid)) {
     $manualid = $groupformation->id;
 }
 

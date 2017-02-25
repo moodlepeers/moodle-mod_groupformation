@@ -123,7 +123,6 @@ function groupformation_update_instance(stdClass $groupformation, mod_groupforma
 
     $groupformation->timemodified = time();
     $groupformation->id = $groupformation->instance;
-
     // Log access to page.
     groupformation_info($USER->id, $groupformation->id, '<update_instance>');
 
@@ -134,6 +133,7 @@ function groupformation_update_instance(stdClass $groupformation, mod_groupforma
     } else {
         $origrecord = $DB->get_record('groupformation', array(
             'id' => $groupformation->id));
+        $origrecord->intro = $groupformation->intro;
         $origrecord->groupoption = $groupformation->groupoption;
         $origrecord->maxmembers = $groupformation->maxmembers;
         $origrecord->maxgroups = $groupformation->maxgroups;

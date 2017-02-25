@@ -362,9 +362,13 @@ function groupformation_get_catalog_version($category) {
  * @return string
  */
 function groupformation_convert_options($options) {
-    $op = implode("</OPTION>  <OPTION>", $options);
+    $ops = array();
+    foreach ($options as $option) {
+        $ops[] = htmlentities($option);
+    }
+    $op = implode("]]></OPTION>  <OPTION><![CDATA[", $ops);
 
-    return "<OPTION>" . $op . "</OPTION>";
+    return "<OPTION><![CDATA[" . $op . "]]></OPTION>";
 }
 
 /**

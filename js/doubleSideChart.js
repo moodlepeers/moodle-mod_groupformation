@@ -61,7 +61,7 @@ function buildChartDoubleSide(chartid, datam, bars) {
         .attr("width", width)
         .attr("height", svgHeight)
         .style("overflow", "visible")
-        .attr("font-size", 10);
+        .attr("font-size", 12);
 
     /* 4 Bereiche: oberer Rand ScaleBar / links Beschriftung / Chart / rechts Beschriftung */
     var svgLabels = svg.append("g").attr("id", "labels"),

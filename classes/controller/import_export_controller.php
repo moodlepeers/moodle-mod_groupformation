@@ -72,27 +72,10 @@ class mod_groupformation_import_export_controller {
         $context = context_module::instance($this->cmid);
 
         $fileinfo = array(
-            'contextid' => $context->id, 'component' => 'mod_groupformation', 'filearea' => 'groupformation_answers',
-            'itemid' => $userid, 'filepath' => '/', 'filename' => $filename);
+                'contextid' => $context->id, 'component' => 'mod_groupformation', 'filearea' => 'groupformation_answers',
+                'itemid' => $userid, 'filepath' => '/', 'filename' => $filename);
 
-        $filestorage = get_file_storage();
-
-        if ($filestorage->file_exists($fileinfo ['contextid'], $fileinfo ['component'], $fileinfo ['filearea'],
-            $fileinfo ['itemid'], $fileinfo ['filepath'], $fileinfo ['filename'])
-        ) {
-            $file = $filestorage->get_file($fileinfo ['contextid'], $fileinfo ['component'], $fileinfo ['filearea'],
-                $fileinfo ['itemid'], $fileinfo ['filepath'], $fileinfo ['filename']);
-            $file->delete();
-        }
-
-        $file = $filestorage->create_file_from_string($fileinfo, $content);
-
-        $url = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(), $file->get_filearea(),
-            $file->get_itemid(), $file->get_filepath(), $file->get_filename());
-
-        $urlstring = $url->out();
-
-        return $urlstring;
+        return $this->save_file_and_get_url($fileinfo, $content);
     }
 
     /**
@@ -138,7 +121,7 @@ class mod_groupformation_import_export_controller {
 
         $this->view->assign('import_description', $importdescription);
         $url = new moodle_url ('/mod/groupformation/import_view.php', array(
-            'id' => $this->cmid));
+                'id' => $this->cmid));
         $this->view->assign('import_form', $url->out());
         $this->view->assign('import_button', $importbutton);
 
@@ -175,10 +158,10 @@ class mod_groupformation_import_export_controller {
         $this->view->set_template('student_import_result');
 
         $url = new moodle_url ('/mod/groupformation/import_view.php', array(
-            'id' => $this->cmid));
+                'id' => $this->cmid));
 
         $viewurl = new moodle_url ('/mod/groupformation/view.php', array(
-            'id' => $this->cmid, 'do_show' => 'view'));
+                'id' => $this->cmid, 'do_show' => 'view'));
         $this->view->assign('import_export_url', $viewurl->out());
         $this->view->assign('import_form', $url->out());
         $this->view->assign('successful', $successful);
@@ -195,8 +178,6 @@ class mod_groupformation_import_export_controller {
      */
     public function import_xml($content) {
         global $DB, $USER, $CFG;
-
-
 
         libxml_use_internal_errors(true);
         $xml = simplexml_load_string($content);
@@ -222,7 +203,6 @@ class mod_groupformation_import_export_controller {
             throw new InvalidArgumentException ("Wrong format");
         }
         $categories = $this->store->get_categories();
-
 
         $allrecords = array();
 
@@ -272,7 +252,7 @@ class mod_groupformation_import_export_controller {
             $questionids [] = $questionid;
 
             if (!($record = $DB->get_record('groupformation_answer', array('groupformation' => $this->groupformationid,
-                'userid' => $userid, 'category' => $category, 'questionid' => $questionid))
+                    'userid' => $userid, 'category' => $category, 'questionid' => $questionid))
             )
             ) {
 
@@ -299,30 +279,30 @@ class mod_groupformation_import_export_controller {
         $this->view = new mod_groupformation_template_builder ();
         $this->view->set_template('wrapper_teacher_export');
 
-//        $exportanswers = get_string('export_answers', 'groupformation');
-//        $exportanswersurl = $this->generate_export_url('answers');
-//        $this->view->assign('export_answers', $exportanswers);
-//        $this->view->assign('export_answers_url', $exportanswersurl);
+                // $exportanswers = get_string('export_answers', 'groupformation');
+                // $exportanswersurl = $this->generate_export_url('answers');
+                // $this->view->assign('export_answers', $exportanswers);
+                // $this->view->assign('export_answers_url', $exportanswersurl);
 
         $exportusers = get_string('export_users', 'groupformation');
         $exportusersurl = $this->generate_export_url('users');
         $this->view->assign('export_users', $exportusers);
         $this->view->assign('export_users_url', $exportusersurl);
-//
-//        $exportgroups = get_string('export_groups', 'groupformation');
-//        $exportgroupsurl = $this->generate_export_url('groups');
-//        $this->view->assign('export_groups', $exportgroups);
-//        $this->view->assign('export_groups_url', $exportgroupsurl);
-//
-//        $exportgroupusers = get_string('export_group_users', 'groupformation');
-//        $exportgroupusersurl = $this->generate_export_url('group_users');
-//        $this->view->assign('export_group_users', $exportgroupusers);
-//        $this->view->assign('export_group_users_url', $exportgroupusersurl);
-//
-//        $exportlogging = get_string('export_logging', 'groupformation');
-//        $exportloggingurl = $this->generate_export_url('logging');
-//        $this->view->assign('export_logging', $exportlogging);
-//        $this->view->assign('export_logging_url', $exportloggingurl);
+               //
+               // $exportgroups = get_string('export_groups', 'groupformation');
+               // $exportgroupsurl = $this->generate_export_url('groups');
+               // $this->view->assign('export_groups', $exportgroups);
+               // $this->view->assign('export_groups_url', $exportgroupsurl);
+               //
+               // $exportgroupusers = get_string('export_group_users', 'groupformation');
+               // $exportgroupusersurl = $this->generate_export_url('group_users');
+               // $this->view->assign('export_group_users', $exportgroupusers);
+               // $this->view->assign('export_group_users_url', $exportgroupusersurl);
+               //
+               // $exportlogging = get_string('export_logging', 'groupformation');
+               // $exportloggingurl = $this->generate_export_url('logging');
+               // $this->view->assign('export_logging', $exportlogging);
+               // $this->view->assign('export_logging_url', $exportloggingurl);
 
         return $this->view->load_template();
     }
@@ -346,23 +326,32 @@ class mod_groupformation_import_export_controller {
         $context = context_module::instance($this->cmid);
 
         $fileinfo = array(
-            'contextid' => $context->id, 'component' => 'mod_groupformation', 'filearea' => 'groupformation_answers',
-            'itemid' => $this->groupformationid, 'filepath' => '/', 'filename' => $filename);
+                'contextid' => $context->id, 'component' => 'mod_groupformation', 'filearea' => 'groupformation_answers',
+                'itemid' => $this->groupformationid, 'filepath' => '/', 'filename' => $filename);
 
+        return $this->save_file_and_get_url($fileinfo, $content);
+    }
+
+    /**
+     * @param $fileinfo
+     * @param $content
+     * @return string
+     */
+    private function save_file_and_get_url($fileinfo, $content) {
         $filestorage = get_file_storage();
 
         if ($filestorage->file_exists($fileinfo ['contextid'], $fileinfo ['component'], $fileinfo ['filearea'],
-            $fileinfo ['itemid'], $fileinfo ['filepath'], $fileinfo ['filename'])
+                $fileinfo ['itemid'], $fileinfo ['filepath'], $fileinfo ['filename'])
         ) {
             $file = $filestorage->get_file($fileinfo ['contextid'], $fileinfo ['component'], $fileinfo ['filearea'],
-                $fileinfo ['itemid'], $fileinfo ['filepath'], $fileinfo ['filename']);
+                    $fileinfo ['itemid'], $fileinfo ['filepath'], $fileinfo ['filename']);
             $file->delete();
         }
 
         $file = $filestorage->create_file_from_string($fileinfo, $content);
 
         $url = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(), $file->get_filearea(),
-            $file->get_itemid(), $file->get_filepath(), $file->get_filename());
+                $file->get_itemid(), $file->get_filepath(), $file->get_filename());
 
         $urlstring = $url->out();
 

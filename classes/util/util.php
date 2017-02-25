@@ -102,15 +102,15 @@ class mod_groupformation_util {
     public static function get_user_record($userid) {
         global $DB;
         if ($DB->record_exists('user',
-            array(
-                'id' => $userid
-            )
+                array(
+                        'id' => $userid
+                )
         )
         ) {
             return $DB->get_record('user',
-                array(
-                    'id' => $userid
-                )
+                    array(
+                            'id' => $userid
+                    )
             );
         } else {
             return null;
@@ -140,9 +140,9 @@ class mod_groupformation_util {
         foreach ($categories as $category => $value) {
             $count = $usermanager->get_number_of_answers($userid, $category);
             $stats [$category] = array(
-                'questions' => $value,
-                'answered' => $count,
-                'missing' => $value - $count
+                    'questions' => $value,
+                    'answered' => $count,
+                    'missing' => $value - $count
             );
         }
 
@@ -196,13 +196,13 @@ class mod_groupformation_util {
         global $DB;
         $now = time();
 
-        $config_value = get_config('groupformation','archiving_time');
+        $configvalue = get_config('groupformation', 'archiving_time');
 
-        if(is_null($config_value) || intval($config_value)<=0) {
-            $config_value = 360;
+        if (is_null($configvalue) || intval($configvalue) <= 0) {
+            $configvalue = 360;
         }
 
-        $difference = intval($config_value) * 24 * 60 * 60;
+        $difference = intval($configvalue) * 24 * 60 * 60;
         $instances = $DB->get_records('groupformation');
 
         foreach ($instances as $groupformation) {

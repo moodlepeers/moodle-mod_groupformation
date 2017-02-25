@@ -361,7 +361,8 @@ $(document).ready(function () {
                 synchronizePreknowledge();
             }
             if ($cat == 'tpc') {
-                $('#' + $previewRowID).html('<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' + $(this).val());
+                $('#' + $previewRowID).html('<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>');
+                $('#' + $previewRowID).append(document.createTextNode($(this).val()));
                 synchronizeTopics();
                 calculateSizeParameter(0, getTopicsNumb());
                 setGroupSettings();
