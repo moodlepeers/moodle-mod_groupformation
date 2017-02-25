@@ -309,7 +309,7 @@ $(document).ready(function () {
         }
         if ($cat == 'tpc') {
             $('.topicLi:first-child', '#previewTopics').clone(true).attr('id', $previewRowID)
-                .appendTo('#previewTopics').html('<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' + $value);
+                .appendTo('#previewTopics').html('<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>').append(document.createTextNode($value));
         }
     }
 
@@ -543,7 +543,7 @@ $(document).ready(function () {
             var el = $(this),
                 offset = el.offset(),
                 scrollTop = $(window).scrollTop(),
-                floatingWrapper = $(".floatingWrapper", this)
+                floatingWrapper = $(".floatingWrapper", this);
 
             if ((scrollTop > offset.top) && (scrollTop < offset.top + el.height())) {
                 floatingWrapper.css({
