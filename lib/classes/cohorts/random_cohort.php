@@ -48,7 +48,7 @@ class mod_groupformation_random_cohort extends mod_groupformation_cohort {
      * @return boolean
      */
     public function add_group(mod_groupformation_group $g) {
-        if (in_array($g, $this->groups)) {
+        if (in_array($g, $this->groups, TRUE)) {
             return false;
         }
 

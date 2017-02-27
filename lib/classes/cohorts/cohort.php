@@ -56,7 +56,6 @@ class mod_groupformation_cohort {
                 $this->add_group($groups[$i]);
             }
         }
-
         for ($i = count($this->groups); $i < $numberofgroups; $i++) {
             $g = new mod_groupformation_group();
             $this->add_group($g);
@@ -70,7 +69,7 @@ class mod_groupformation_cohort {
      * @return boolean
      */
     public function add_group(mod_groupformation_group $g) {
-        if (in_array($g, $this->groups)) {
+        if (in_array($g, $this->groups, TRUE)) {
             return false;
         }
 
@@ -102,7 +101,7 @@ class mod_groupformation_cohort {
     }
 
     /**
-     * Hilfsfunktion für cron-job, Ergebnisse werden ausgelesen
+     * helper function for cron-job, deliver results as a copy structure
      *
      * @return stdClass
      */

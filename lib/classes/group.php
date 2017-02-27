@@ -46,7 +46,7 @@ class mod_groupformation_group {
     public function __construct($id = null) {
         static::$groupcount++;
         $this->groupid = static::$groupcount;
-        if (is_null($id)) {
+        if (!is_null($id)) {
             $this->groupid = $id;
         }
         $this->participants = array();
@@ -112,7 +112,7 @@ class mod_groupformation_group {
         if (count($this->participants) >= static::$groupmembersmaxsize) {
             return false;
         }
-        if (in_array($p, $this->participants)) {
+        if (in_array($p, $this->participants, TRUE)) {
             return false;
         }
         $this->participants[] = $p;

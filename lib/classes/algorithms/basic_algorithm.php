@@ -61,22 +61,19 @@ class mod_groupformation_basic_algorithm implements mod_groupformation_ialgorith
 
     /**
      * mod_groupformation_basic_algorithm constructor.
+     *
      * @param $participants
      * @param mod_groupformation_imatcher $matcher
      * @param $groupsize
      */
     public function __construct($participants, mod_groupformation_imatcher $matcher, $groupsize) {
-
         foreach ($participants as $p) {
             $this->participants[] = clone($p);
         }
 
         $this->matcher = $matcher;
-
         $this->evaluator = new mod_groupformation_evaluator();
-
         $this->groupsize = $groupsize;
-
         $this->init();
     }
 
@@ -85,19 +82,13 @@ class mod_groupformation_basic_algorithm implements mod_groupformation_ialgorith
      */
     private function init() {
         $this->numberofparticipants = count($this->participants);
-
         mod_groupformation_group::set_group_members_max_size($this->groupsize);
-
         mod_groupformation_group::$evaluator = $this->evaluator;
-
         mod_groupformation_cohort::$evaluator = $this->evaluator;
-
         // Set cohort: generate empty groups in cohort to fill with participants.
         $this->cohort = new mod_groupformation_cohort(ceil($this->numberofparticipants / $this->groupsize));
-
         // Set the list of not yet matched participants; the array is automatically copied in PHP.
         $this->notmatchedparticipants = $this->participants;
-
         $this->numberofgroups = 0;
     }
 
@@ -108,10 +99,9 @@ class mod_groupformation_basic_algorithm implements mod_groupformation_ialgorith
      * @return bool
      */
     public function add_new_participant(mod_groupformation_participant $participant) {
-        if ($this->participants == null || in_array($participant, $this->participants)) {
+        if ($this->participants == null || in_array($participant, $this->participants, true)) {
             return false;
         }
-
         // Increase count of participants.
         $this->numberofparticipants++;
         $tmp = ceil($this->numberofparticipants / $this->groupsize);
@@ -120,7 +110,6 @@ class mod_groupformation_basic_algorithm implements mod_groupformation_ialgorith
             $this->numberofgroups = $tmp;
             $this->cohort->add_empty_group();
         }
-
         // Add the new participant to entries.
         $this->participants[] = $participant;
         // Add new participant to the set of not yet matched entries.
