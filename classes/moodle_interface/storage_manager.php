@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Interface betweeen DB and Plugin
+ * Adapter class betweeen DB and Plugin
  *
  * @package mod_groupformation
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
@@ -774,7 +774,7 @@ class mod_groupformation_storage_manager {
                 if (('points' == $c && $points == false) ||
                         ('grade' == $c && $grades == false) ||
                         ($hastopic == 0 && 'topic' == $c) ||
-                        ($hasknowledge == 0 && ('knowledge_heterogen' == $c || 'knowledge_homogen' == $c))
+                        ($hasknowledge == 0 && ('knowledge' == $c))
                 ) {
                     unset ($array [$position]);
                 }
