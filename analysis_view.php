@@ -35,6 +35,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/stora
 $id = optional_param('id', 0, PARAM_INT);
 $doshow = optional_param('do_show', 'analysis', PARAM_TEXT);
 
+// admin params in URL (only work in DEBUG mode)
 $runjob = optional_param('runjob', false, PARAM_BOOL);
 $createusers = optional_param('create_users', 0, PARAM_INT);
 $createanswers = optional_param('create_answers', false, PARAM_BOOL);
@@ -85,14 +86,12 @@ if ($CFG->debug === 32767 && $resetjob) {
 }
 
 if ($CFG->debug === 32767 && $runjob) {
-    $jm = new mod_groupformation_job_manager ();
+    $jm = new mod_groupformation_job_manager();
     $job = null;
 
     $job = $jm::get_job($groupformation->id);
-
     if (!is_null($job)) {
         $result = $jm::do_groupal($job);
-        xdebug_var_dump($result);
         // $saved = $jm::save_result($job,$result);
     }
 }
