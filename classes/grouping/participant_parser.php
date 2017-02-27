@@ -59,8 +59,8 @@ class mod_groupformation_participant_parser {
 
             foreach ($labels as $label) {
                 $value = $user->$label;
-                $homogen = $value ["homogeneous"];
-                unset ($value ["homogeneous"]);
+                $homogen = $value["homogeneous"];
+                unset ($value["homogeneous"]);
                 $minval = 0.0;
                 $maxval = 1.0;
                 $weight = 1;
@@ -184,7 +184,6 @@ class mod_groupformation_participant_parser {
         }
         $totallabel = array_unique($totallabel);
         $res = $this->parse($array, $totallabel);
-
         $endtime = microtime(true);
         $comptime = $endtime - $starttime;
         groupformation_info(null, $this->groupformationid, 'building groupal participants needed ' . $comptime . 'ms');

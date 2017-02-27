@@ -270,7 +270,6 @@ class mod_groupformation_job_manager {
 
         // Assign users.
         $users = self::get_users($groupformationid, $job, $store);
-
         if (is_null($users)) {
             return $cohorts;
         }
@@ -299,37 +298,24 @@ class mod_groupformation_job_manager {
         if (is_null($store)) {
             $store = new mod_groupformation_storage_manager($job->groupformationid);
         }
-
         if ($store->is_math_prep_course_mode()) {
-
             self::delete_stats($job);
-
             foreach ($result as $groupkey => $cohort) {
-
                 $cohortresult = $cohort->get_result();
-
                 $flags = array('group_key' => $groupkey);
-
                 $idmap = self::create_groups($job, $cohortresult->groups, $flags);
-
                 self::assign_users_to_groups($job, $cohortresult->users, $idmap);
-
                 self::save_stats($job, $cohort, $groupkey);
             }
-
             self::set_job($job, 'done', true);
-
             return true;
         }
 
         self::delete_stats($job);
-
         foreach ($result as $groupkey => $cohort) {
-
             if (is_null($cohort)) {
                 continue;
             }
-
             $cohortresult = $cohort->get_result();
 
             $flags = array(
@@ -459,7 +445,7 @@ class mod_groupformation_job_manager {
     private static function assign_users_to_groups($job, $users, $idmap) {
         $groupformationid = $job->groupformationid;
 
-        $groupsmanager = new mod_groupformation_groups_manager ($groupformationid);
+        $groupsmanager = new mod_groupformation_groups_manager($groupformationid);
 
         foreach ($users as $userid => $groupalid) {
             $groupsmanager->assign_user_to_group($groupformationid, $userid, $groupalid, $idmap);

@@ -86,7 +86,6 @@ class mod_groupformation_criterion_calculator {
                         $spec['evaluation']))) {
 
                 $positions = array();
-
                 foreach ($labels as $label => $specs) {
                     $condition1 = array_key_exists($this->scenario, $specs['scenarios']);
                     $condition2 = (!$eval || (array_key_exists('evaluation', $spec) && $spec['evaluation']));
@@ -610,14 +609,12 @@ class mod_groupformation_criterion_calculator {
             )
         );
         $criteria = $this->store->get_label_set();
-
         foreach ($criteria as $criterion) {
             $labels = $this->data->get_criterion_specification($criterion);
             if (!is_null($labels)) {
                 $labels = $this->filter_criterion_specs_for_eval($criterion, $labels);
             }
             if (!is_null($labels) && count($labels) > 0) {
-
                 $array = $this->get_eval_infos($criterion, $labels, $userid, $groupusers, $courseusers);
 
                 $bars = array();

@@ -63,12 +63,12 @@ class mod_groupformation_basic_grouping extends mod_groupformation_grouping {
 
         $configurationkeys = array_keys($configurations);
 
+        // here only 1 slice (groupal:1)
         $numberofslices = count($configurationkeys);
 
         $groupsizes = $this->store->determine_group_size($users);
 
         $cohorts = array();
-
         if (count($users[0]) >= $numberofslices) {
 
             // Divide users into n slices.
@@ -76,13 +76,9 @@ class mod_groupformation_basic_grouping extends mod_groupformation_grouping {
 
             for ($i = 0; $i < $numberofslices; $i++) {
                 $slice = $slices[$i];
-
                 $configurationkey = $configurationkeys[$i];
-
                 $rawparticipants = $this->participantparser->build_participants($slice);
-
                 $participants = $rawparticipants;
-
                 $cohorts[$configurationkey] = $this->build_cohort($participants, $groupsizes[0], $configurationkey);
             }
         }
