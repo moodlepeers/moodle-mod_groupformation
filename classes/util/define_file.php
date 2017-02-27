@@ -39,37 +39,37 @@ class mod_groupformation_data {
                     "evaluation" => true,
                     "labels" => array(
                             "extraversion" => array(
-                                    "scenarios" => array(1 => false, 2 => false),
-                                    "evaluation" => true,
-                                    "questionids" => array(12, -1, 13, 14, -15, 16, -17, 6),
-                                    "significant_id_only" => false,
+                                    "scenarios" => array(1 => false, 2 => false),  // false=heterogeneous, true=homogeneous
+                                    "evaluation" => true,  // use for displaying it to user (to compare to group and course)
+                                    "questionids" => array(-1, 6), // inverse questions=negative
+                                    "significant_id_only" => false, // true=only use the one questionid with most significant differences between users
                                     "cutoffs" => array(0.313169217, 0.776242547),
                             ),
-                            "gewissenhaftigkeit" => array(
+                            "conscientiousness" => array(
                                     "scenarios" => array(1 => true, 2 => true),
                                     "evaluation" => true,
-                                    "questionids" => array(8, -32, 33, -34, -35, 21, 22, 23, -24),
+                                    "questionids" => array(-3, 8),
                                     "significant_id_only" => false,
                                     "cutoffs" => array(0.456596974, 0.831246163),
                             ),
-                            "vertraeglichkeit" => array(
+                            "agreeableness" => array(
                                     "scenarios" => array(1 => true, 2 => true),
                                     "evaluation" => true,
-                                    "questionids" => array(-7, 2, -25, -26),
+                                    "questionids" => array(2, -7, 11),
                                     "significant_id_only" => false,
                                     "cutoffs" => array(0.492136484, 0.799889659),
                             ),
-                            "neurotizismus" => array(
+                            "neuroticism" => array(
                                     "scenarios" => array(1 => false, 2 => false),
                                     "evaluation" => true,
-                                    "questionids" => array(27, -4, 28, 9),
+                                    "questionids" => array(-4, 9),
                                     "significant_id_only" => false,
                                     "cutoffs" => array(0.195135503, 0.602511556),
                             ),
-                            "offenheit" => array(
+                            "openness" => array(
                                     "scenarios" => array(1 => false, 2 => false),
                                     "evaluation" => true,
-                                    "questionids" => array(29, 30, 10, 31, -5),
+                                    "questionids" => array(-5, 10),
                                     "significant_id_only" => false,
                                     "cutoffs" => array(0.348454964, 0.829192095),
                             ),
@@ -80,28 +80,28 @@ class mod_groupformation_data {
                     "scenarios" => array(1),
                     "evaluation" => true,
                     "labels" => array(
-                            "herausforderung" => array(
-                                    "scenarios" => array(1 => false),
+                            "challenge" => array(
+                                    "scenarios" => array(1 => false), // TODO: support scenariocriteriontypes and allow "none" to not use it for grouping, (added for displaying feedback to user; no true/false asignment to prevent algorithmic usage)
                                     "evaluation" => true,
                                     "questionids" => array(6, 8, 10, 15, 17),
                                     "significant_id_only" => false,
                                     "cutoffs" => array(0.518934813, 0.830866774),
                             ),
-                            "interesse" => array(
+                            "interest" => array(
                                     "scenarios" => array(1 => false),
                                     "evaluation" => true,
-                                    "questionids" => array(1, 4, 7, 11),
+                                    "questionids" => array(1, 7, 11, 17), // replaced 4 with 17 (because scient. work question does not suit so well generally)
                                     "significant_id_only" => false,
                                     "cutoffs" => array(0.439861739, 0.751249372),
                             ),
-                            "erfolgswahrscheinlichkeit" => array(
+                            "successprobability" => array(
                                     "scenarios" => array(1 => false),
-                                    "evaluation" => true,
+                                    "evaluation" => true, // not used for matching, only displayed
                                     "questionids" => array(2, 3, 13, 14),
                                     "significant_id_only" => false,
                                     "cutoffs" => array(0.314297404, 0.511297834),
                             ),
-                            "misserfolgsbefuerchtung" => array(
+                            "lackofconfidence" => array(
                                     "scenarios" => array(1 => false),
                                     "evaluation" => true,
                                     "questionids" => array(5, 9, 12, 16, 18),
@@ -110,34 +110,48 @@ class mod_groupformation_data {
                             ),
                     ),
             ),
+            "team" => array(
+                    "category" => "team",
+                    "scenarios" => array(1, 2),
+                    "evaluation" => false,
+                    "labels" => array(
+                            "teamorientation" => array(
+                                    "scenarios" => array(1 => true, 2 => true),
+                                    "evaluation" => false,
+                                    "questionids" => array(14, 15, 16),
+                                    "significant_id_only" => false,
+                                    "cutoffs" => null,
+                            ),
+                    ),
+            ),
             "learning" => array(
                     "category" => "learning",
-                    "scenarios" => array(2),
+                    "scenarios" => array(),  // empty=not used in any scenario
                     "evaluation" => false,
                     "labels" => array(
                             "konkreteerfahrung" => array(
-                                    "scenarios" => array(2 => false),
+                                    "scenarios" => array(),
                                     "evaluation" => false,
                                     "questionids" => array(1, 5, 11, 14, 20, 22),
                                     "significant_id_only" => false,
                                     "cutoffs" => null,
                             ),
                             "aktivesexperimentieren" => array(
-                                    "scenarios" => array(2 => false),
+                                    "scenarios" => array(),
                                     "evaluation" => false,
                                     "questionids" => array(2, 8, 10, 16, 17, 23),
                                     "significant_id_only" => false,
                                     "cutoffs" => null,
                             ),
                             "reflektiertebeobachtung" => array(
-                                    "scenarios" => array(2 => false),
+                                    "scenarios" => array(),
                                     "evaluation" => false,
                                     "questionids" => array(3, 6, 9, 13, 19, 21),
                                     "significant_id_only" => false,
                                     "cutoffs" => null,
                             ),
                             "abstraktebegriffsbildung" => array(
-                                    "scenarios" => array(2 => false),
+                                    "scenarios" => array(),
                                     "evaluation" => false,
                                     "questionids" => array(4, 7, 12, 15, 18, 24),
                                     "significant_id_only" => false,
@@ -187,23 +201,9 @@ class mod_groupformation_data {
                             ),
                     ),
             ),
-            "team" => array(
-                    "category" => "team",
-                    "scenarios" => array(1, 2),
-                    "evaluation" => false,
-                    "labels" => array(
-                            "one" => array(
-                                    "scenarios" => array(1 => true, 2 => true),
-                                    "evaluation" => false,
-                                    "questionids" => array(14, 15, 16),
-                                    "significant_id_only" => false,
-                                    "cutoffs" => null,
-                            ),
-                    ),
-            ),
             "knowledge" => array(
                     "category" => "knowledge",
-                    "scenarios" => array(),
+                    "scenarios" => array(1,2),
                     "evaluation" => false,
                     "labels" => array(
                             "one" => array(
@@ -211,7 +211,7 @@ class mod_groupformation_data {
                                     "evaluation" => false,
                                     "questionids" => null,
                                     "significant_id_only" => false,
-                                    "separate_dimensions" => false,
+                                    "separate_dimensions" => false,  // for all questions the mean is used
                                     "cutoffs" => null,
                             ),
                             "two" => array(
@@ -219,13 +219,16 @@ class mod_groupformation_data {
                                     "evaluation" => false,
                                     "questionids" => null,
                                     "significant_id_only" => false,
-                                    "separate_dimensions" => true,
+                                    "separate_dimensions" => true,  // all questions remain seperate
                                     "cutoffs" => null,
                             ),
                     ),
             ),
     );
 
+    // the following arrays values must match the filenames (without language prefix), e.g. en_general.xml => 'general'
+    // do NOT include 'knowledge' or 'topics' as these are not XML-based, but dynamically created.
+    // numbers 1,2,3 are the scenarios available for selection
     private $categorysets = array(
             '1' => array(
                     'general',
@@ -234,9 +237,6 @@ class mod_groupformation_data {
                     'character',
                     'motivation',
                     'team',
-                    'srl',
-                    'sellmo',
-                    'self',
             ),
             '2' => array(
                     'general',
@@ -245,15 +245,13 @@ class mod_groupformation_data {
                     'character',
                     'learning',
                     'team',
-                    'srl',
-                    'sellmo',
-                    'self',
             ),
             '3' => array(
                     'topic',
             ),
     );
 
+    // special mode booleans (can be ignored in normal use cases)
     private $mathprepcoursemode = false;
     private $allanswersrequired = false;
 
@@ -320,7 +318,7 @@ class mod_groupformation_data {
     }
 
     /**
-     * Returns critetion specification
+     * Returns criterion specification
      *
      * @param $name
      * @return mixed

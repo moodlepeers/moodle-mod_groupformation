@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<GROUPFORMATION COMMENT="">
+<GROUPFORMATION COMMENT="FAM questionnaire">
      <QUESTIONS VERSION="2016072100">
 		 <QUESTION ID="1" TYPE="radio">
                <QUESTIONTEXT>
@@ -263,7 +263,7 @@
           
 		 <QUESTION ID="11" TYPE="radio">
                <QUESTIONTEXT>
-                    <![CDATA[I dont't need any reward for this kind of course, I enjoy doing it.]]>
+                    <![CDATA[I don't need any reward for this kind of course; I enjoy doing it.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
