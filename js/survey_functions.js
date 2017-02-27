@@ -29,18 +29,26 @@ $(document).ready(function () {
 
     var activeItem = $();
 
-    $("#accordion li.accord_li").hover(
-        // Hover event.
-        function () {
-            $(activeItem).animate({width: "50px"}, {duration: 300, queue: false});
-            var a_width = menuWidths.get($(this).index()) + 1;
-            $(this).animate({width: a_width}, {duration: 300, queue: false});
-            activeItem = this;
-        },
-        // Mouse leave event.
-        function () {
-            $(activeItem).animate({width: "50px"}, {duration: 300, queue: false});
-        });
+    // Hover event.
+    function accordion_rollout() {
+        $(activeItem).animate({width: "50px"}, {duration: 300, queue: false});
+        var a_width = menuWidths.get($(this).index()) + 1;
+        $(this).animate({width: a_width}, {duration: 300, queue: false});
+        activeItem = this;
+    }
+
+    // Mouse leave event.
+    function accordion_rollin() {
+        $(activeItem).animate({width: "50px"}, {duration: 300, queue: false});
+    }
+
+    $("#accordion li.accord_li").hover(accordion_rollout, accordion_rollin);
+    $("#accordion li.accord_li a").focus(function() {
+        accordion_rollout.call($(this).parent());
+    }, function() {
+        accordion_rollin.call($(this).parent());
+    });
+
 
     // If the questionnaire still available but the answers already submitted.
     if ($('#commited_view').length) {
