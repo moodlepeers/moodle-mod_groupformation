@@ -1,6 +1,15 @@
 /* =============================
     Grid related styles
 ===============================*/
+/* general box-sizing, childs inherit it */
+.path-mod-groupformation .grid [class*='col_'],
+.path-mod-groupformation form.groupformation_questionnaire *,
+.path-mod-groupformation .gf_button
+{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
 
 .path-mod-groupformation .respwidth, .path-mod-groupformation #group_size, .path-mod-groupformation #numb_of_groups,
 .path-mod-groupformation #max_points {
@@ -341,11 +350,6 @@ a:hover, a:focus {
     padding: 10px 0 0 5px;
 }
 
-.path-mod-groupformation form.groupformation_questionnaire * {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
 
 .path-mod-groupformation .legend {
     font-size: 0.8em;
@@ -859,9 +863,6 @@ a:hover, a:focus {
     appearance: none;
     cursor: pointer;
     border: none;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
     -webkit-transition-property: all;
     transition-property: all;
     -webkit-transition-duration: .3s;
@@ -974,9 +975,6 @@ a:hover, a:focus {
 /* grid */
 
 .path-mod-groupformation .grid [class*='col_'] {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
     float: left;
     border-right: 20px solid rgba(255, 255, 255, 0); /* some separation, margin wont be correct in border-box */
 }
