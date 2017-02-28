@@ -416,7 +416,7 @@ class mod_groupformation_questionnaire_controller {
     public function print_final_page() {
         echo '<div class="col_m_100"><h4>' . get_string('questionnaire_no_more_questions', 'groupformation') .
             '</h></div>';
-        echo '    <form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
+        echo '    <form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off" class="groupformation_questionnaire">';
 
         echo '        <input type="hidden" name="category" value="no"/>';
         echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
@@ -502,7 +502,7 @@ class mod_groupformation_questionnaire_controller {
     public function print_questions($questions, $percent) {
 
         echo '<form style="width:100%; float:left;" action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) .
-            '" method="post" autocomplete="off">';
+            '" method="post" autocomplete="off" class="groupformation_questionnaire">';
 
         if (!is_null($questions) && count($questions) != 0) {
 

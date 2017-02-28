@@ -31,12 +31,8 @@
     }
 }
 
-.path-mod-groupformation .js_errors {
-    width: 100%;
-}
 
 .path-mod-groupformation .js_errors p {
-    width: 100%;
     background-color: #fff0f0;
     border-color: #ffdce1;
     color: #c83025;
@@ -74,18 +70,13 @@
     content: "* ";
 }
 
-.path-mod-groupformation .settings_info {
-    float: left;
-    width: 100%;
-}
-
 .path-mod-groupformation .settings_info p {
-    width: 100%;
     background-color: #d9edf7;
     color: #31708f;
     border: 1px solid #bce8f1;
     border-radius: 4px;
     padding: 8px 35px 8px 14px;
+    margin-bottom: 0;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
@@ -348,6 +339,12 @@ a:hover, a:focus {
     height: 30px;
     float: left;
     padding: 10px 0 0 5px;
+}
+
+.path-mod-groupformation form.groupformation_questionnaire * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .path-mod-groupformation .legend {

@@ -411,20 +411,18 @@ class mod_groupformation_mod_form extends moodleform_mod {
             get_string('groupoption_help', 'groupformation') . '"></span>
 
                 </div>
-
+                <div class="js_errors" id="maxmembers_error">
+                    <p></p>
+                </div>
+                <div class="js_errors" id="maxgroups_error">
+                    <p></p>
+                </div>
                 <div class="settings_info" id="groupSettingsInfo">
                         <p>' . get_string('groupSettingsInfo', 'groupformation') . '</p>
                 </div>
-
-                <div class="js_errors" id="maxmembers_error">
-                             <p></p>
-                </div>
-                <div class="js_errors" id="maxgroups_error">
-                        <p></p>
-                </div>
-
-                <div class="gf_pad_content">
-                <p><span id="studentsInCourse"><b>');
+                    
+                <div class="gf_pad_content">                                                        
+                    <p><span id="studentsInCourse"><b>');
 
         $context = $PAGE->context;
         $enrolledstudents = array_keys(get_enrolled_users($context, 'mod/groupformation:onlystudent'));
