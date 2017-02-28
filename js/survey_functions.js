@@ -76,8 +76,9 @@ $(document).ready(function () {
         function createTopicInputs() {
             var sortedIDs = $(".sortable_topics").sortable("toArray");
             $.each(sortedIDs, function (index, value) {
-                $('<input type="text" name="' + value + '"/>').val(index + 1).appendTo('#invisible_topics_inputs');
+                $('<input type="text" name="' + value + '" value="'+(sortedIDs.length - index )+'">').appendTo('#invisible_topics_inputs');
             });
+
         }
 
         createTopicInputs();

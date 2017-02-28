@@ -224,7 +224,6 @@ class mod_groupformation_questionnaire_controller {
                 $temp = $this->store->get_knowledge_or_topic_values($this->currentcategory);
                 $xmlcontent = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>';
                 $values = mod_groupformation_util::xml_to_array($xmlcontent);
-
                 $text = '';
 
                 $type = 'range';
@@ -255,24 +254,26 @@ class mod_groupformation_questionnaire_controller {
                         } else {
                             $question ['answer'] = -1;
                         }
-                        $answerposition [$answer] = $position - 1;
+                        $answerposition[$answer] = $position - 1;
                         $position++;
                     } else {
                         $question ['answer'] = -1;
                     }
                     $question ['questionid'] = $i;
 
-                    $questionsfirst [] = $question;
+                    $questionsfirst[] = $question;
                     $i++;
                 }
 
                 $l = count($answerposition);
 
                 if ($l > 0 && $this->currentcategoryposition == $this->store->get_position('topic')) {
-                    for ($k = 1; $k <= $l; $k++) {
-                        $h = $questionsfirst [$answerposition [$k]];
-                        $h ['answer'] = $answerposition [$k];
-                        $questions [] = $h;
+                    // topics are rated by users as: the topmost=most wanted=rating value highest number
+                    // therefore here we sort them accordingly top downwards by rating
+                    for ($k = $l; $k >= 1; $k--) {
+                        $h = $questionsfirst[$answerposition[$k]];
+                        $h['answer'] = $answerposition[$k];
+                        $questions[] = $h;
                     }
                 } else {
                     $questions = $questionsfirst;
@@ -535,7 +536,7 @@ class mod_groupformation_questionnaire_controller {
                 $type = $q['type'];
 
                 if ($type == 'topics') {
-                    $topics->print_html($question, $category, $answer + 1);
+                    $topics->print_html($category, $questionid, $question);
                 } else {
                     $name = 'mod_groupformation_' . $type . '_question';
                     $object = new $name();

@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Handles job
+ * Handles jobs for cron  (groupformation jobs)
  *
  * @package mod_groupformation
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
@@ -105,21 +105,20 @@ class mod_groupformation_job_manager {
     }
 
     /**
-     * Sets job to state e.g. 1000
+     * Sets job to state e.g. 1000 by passing state = ready, waiting, started, aborted, done
      *
      * @param $job
-     * @param string $state
+     * @param string $state, keywords: ready, waiting, started, aborted, done; you can pass a 4 digit bit-mask e.g 0000 for ready, 1000 for waiting etc.
      * @param bool|false $settime
      * @param bool|false $resettime
-     * @param null $groupingid
      * @return bool
      */
-    public static function set_job($job, $state = "ready", $settime = false, $resettime = false, $groupingid = null) {
+    public static function set_job($job, $state = "ready", $settime = false, $resettime = false) {
         global $DB, $USER;
         $statusoptions = static::$jobstatusoptions;
 
         if (array_key_exists($state, $statusoptions)) {
-            $status = $statusoptions [$state];
+            $status = $statusoptions[$state];
         } else {
             $status = $state;
         }
@@ -127,11 +126,10 @@ class mod_groupformation_job_manager {
             return false;
         }
 
-        $job->waiting = $status [0];
-        $job->started = $status [1];
-        $job->aborted = $status [2];
-        $job->done = $status [3];
-
+        $job->waiting = $status[0];
+        $job->started = $status[1];
+        $job->aborted = $status[2];
+        $job->done = $status[3];
         if ($job->waiting == 1 && $settime) {
             $job->timecreated = time();
             groupformation_info(null, $job->groupformationid, 'groupal job set to waiting');
@@ -317,20 +315,16 @@ class mod_groupformation_job_manager {
                 continue;
             }
             $cohortresult = $cohort->get_result();
-
             $flags = array(
-                "groupal" => (strpos($groupkey, "groupal:1")) ? 1 : 0,
-                "random" => (strpos($groupkey, "random:1")) ? 1 : 0,
+                "groupal" => (strpos($groupkey, "groupal:1") !== FALSE) ? 1 : 0,
+                "random" => (strpos($groupkey, "random:1") !== FALSE) ? 1 : 0,
                 "mrandom" => 0,
                 "created" => 0,
-                "topic" => (strpos($groupkey, "topic:1")) ? 1 : 0,
+                "topic" => (strpos($groupkey, "topic:1") !== FALSE) ? 1 : 0,
                 "group_key" => $groupkey
             );
-
             $idmap = self::create_groups($job, $cohortresult->groups, $flags);
-
             self::assign_users_to_groups($job, $cohortresult->users, $idmap);
-
             self::save_stats($job, $cohort, $groupkey);
         }
 
@@ -393,45 +387,43 @@ class mod_groupformation_job_manager {
      * @param $flags
      * @return array
      */
-    private static function create_groups($job, $groups, $flags, $topics = false) {
+    private static function create_groups($job, $groups, $flags) {
         $groupformationid = $job->groupformationid;
-
-        $groupsmanager = new mod_groupformation_groups_manager ($groupformationid);
-
-        $store = new mod_groupformation_storage_manager ($groupformationid);
+        $groupsmanager = new mod_groupformation_groups_manager($groupformationid);
+        $store = new mod_groupformation_storage_manager($groupformationid);
 
         $groupnameprefix = $store->get_group_name_setting();
         $groupformationname = $store->get_name();
-
         $i = $store->get_instance_number();
-
         $groupname = "G" . $i . "_" . $groupnameprefix;
 
         if (strlen($groupnameprefix) < 1) {
             $groupname = "G" . $i . "_" . substr($groupformationname, 0, 8);
         }
 
-        if ($topics) {
+        $topicoptions = null;
+        $istopic = (!!$flags['topic']); // fast boolean casting of 0 and 1
+
+        if ($istopic) {
             $xmlcontent = $store->get_knowledge_or_topic_values('topic');
             $xmlcontent = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $xmlcontent . ' </OPTIONS>';
-            $options = mod_groupformation_util::xml_to_array($xmlcontent);
+            $topicoptions = mod_groupformation_util::xml_to_array($xmlcontent);
         }
 
         $ids = array();
         foreach ($groups as $groupalid => $group) {
             $name = "";
-            if ($topics) {
-                $name = $groupname . "_" . substr($options[$groupalid - 1], 0, 5);
+            if ($istopic) {
+                $name = $groupname."_".substr($topicoptions[$groupalid - 1], 0, 5);
             } else {
                 $name = $groupname;
             }
-            if (count($group ['users']) > 0) {
-                $name = $name . "_" . strval($groupalid);
+            if (count($group['users']) > 0 || $istopic) { // in case of topic groups create as well empty groups
+                $name = $name."_".strval($groupalid);
                 $dbid = $groupsmanager->create_group($groupalid, $group, $name, $groupformationid, $flags);
-                $ids [$groupalid] = $dbid;
+                $ids[$groupalid] = $dbid;
             }
         }
-
         return $ids;
     }
 
@@ -444,9 +436,7 @@ class mod_groupformation_job_manager {
      */
     private static function assign_users_to_groups($job, $users, $idmap) {
         $groupformationid = $job->groupformationid;
-
         $groupsmanager = new mod_groupformation_groups_manager($groupformationid);
-
         foreach ($users as $userid => $groupalid) {
             $groupsmanager->assign_user_to_group($groupformationid, $userid, $groupalid, $idmap);
         }

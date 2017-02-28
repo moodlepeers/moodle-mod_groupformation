@@ -161,8 +161,7 @@ class mod_groupformation_grouping {
      * @return mod_groupformation_cohort
      */
     public function build_topic_cohort($users, $groupsizes) {
-
-        $gfa = new mod_groupformation_topic_algorithm ($groupsizes, $users);
+        $gfa = new mod_groupformation_topic_algorithm($groupsizes, $users);
         return $gfa->do_one_formation();
     }
 

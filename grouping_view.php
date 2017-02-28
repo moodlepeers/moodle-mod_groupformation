@@ -56,7 +56,7 @@ require_once(dirname(__FILE__) . '/classes/controller/grouping_controller.php');
 $store = new mod_groupformation_storage_manager ($groupformation->id);
 
 // Set data and viewStatus of groupingView, after possible db update.
-$controller = new mod_groupformation_grouping_controller ($groupformation->id, $cm);
+$controller = new mod_groupformation_grouping_controller($groupformation->id, $cm);
 if ((data_submitted()) && confirm_sesskey()) {
     $start = optional_param('start', null, PARAM_BOOL);
     $abort = optional_param('abort', null, PARAM_BOOL);
@@ -94,17 +94,17 @@ echo $OUTPUT->header();
 // Print the tabs.
 require('tabs.php');
 if (groupformation_get_current_questionnaire_version() > $store->get_version()) {
-    echo '<div class="alert">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
+    echo '<div class="alert">'.get_string('questionnaire_outdated', 'groupformation').'</div>';
 }
 if ($store->is_archived() && has_capability('mod/groupformation:editsettings', $context)) {
-    echo '<div class="alert" id="commited_view">' . get_string('archived_activity_admin', 'groupformation') . '</div>';
+    echo '<div class="alert" id="commited_view">'.get_string('archived_activity_admin', 'groupformation').'</div>';
 } else {
     groupformation_check_for_cron_job();
 
-    echo '<form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
+    echo '<form action="'.htmlspecialchars($_SERVER ["PHP_SELF"]).'" method="post" autocomplete="off">';
 
-    echo '<input type="hidden" name="id" value="' . $id . '"/>';
-    echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
+    echo '<input type="hidden" name="id" value="'.$id.'"/>';
+    echo '<input type="hidden" name="sesskey" value="'.sesskey().'" />';
 
     echo $controller->display();
 

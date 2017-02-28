@@ -30,7 +30,7 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/topics_solver/edmo
 
 class mod_groupformation_topic_algorithm implements mod_groupformation_ialgorithm {
 
-    /** @var array This array contains the ratings of all participants */
+    /** @var array This array contains the ratings of all participants, the higher the rating, the better */
     public $ratings = array();
 
     /** @var array This array contains all topics */
@@ -69,7 +69,7 @@ class mod_groupformation_topic_algorithm implements mod_groupformation_ialgorith
 
     /**
      * The main method to call for getting a formation "run" (this takes a while)
-     * Uses the global set matcher to assign evry not yet matched participant to a group
+     * Uses the global set matcher to assign every not yet matched participant to a group
      *
      * @return mod_groupformation_cohort
      */

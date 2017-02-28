@@ -57,8 +57,7 @@ class mod_groupformation_groups_manager {
         $record = new stdClass ();
         $record->groupformation = $groupformationid;
         $record->userid = $userid;
-        $record->groupid = $idmap [$groupalid];
-
+        $record->groupid = $idmap[$groupalid];
         return $DB->insert_record('groupformation_group_users', $record);
     }
 

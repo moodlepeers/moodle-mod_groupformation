@@ -104,7 +104,6 @@ class mod_groupformation_participant_parser {
         foreach ($users as $userid) {
 
             $criterion = $this->criterioncalculator->get_topic($userid);
-
             $participant = new mod_groupformation_participant (array(
                 $criterion), $userid);
 

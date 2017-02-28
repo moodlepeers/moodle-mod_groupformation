@@ -39,6 +39,7 @@ class mod_groupformation_topic_grouping extends mod_groupformation_grouping {
 
     /**
      * mod_groupformation_job_manager constructor.
+     *
      * @param $groupformationid
      */
     public function __construct($groupformationid) {
@@ -57,26 +58,20 @@ class mod_groupformation_topic_grouping extends mod_groupformation_grouping {
      * @return array
      */
     public function run_grouping($users) {
-
         if (count($users[0]) == 0) {
             return array();
         }
+        $cohorts = array();
+        $configurationkey = "topic:1";
 
         $groupsizes = $this->store->determine_group_size($users, $this->groupformationid);
         ksort($groupsizes);
-
-        $cohorts = array();
-
         mod_groupformation_group::set_group_members_max_size(max($groupsizes));
 
-        $configurationkey = "topic:1";
-
-        $rawparticipants = $this->participantparser->build_topic_participants($users[0]);
-
-        $participants = $rawparticipants;
-        $randomparticipants = $this->participantparser->build_empty_participants($users[1]);
-
+        $participants = $this->participantparser->build_topic_participants($users[0]);
         $cohort = $this->build_cohort($participants, $groupsizes, $configurationkey);
+
+        $randomparticipants = $this->participantparser->build_empty_participants($users[1]);
 
         if (!is_null($cohort)) {
             $size = ceil((count($users [0]) + count($users [1])) / count($cohort->groups));
@@ -85,42 +80,37 @@ class mod_groupformation_topic_grouping extends mod_groupformation_grouping {
             $max = null;
             foreach ($cohort->groups as $group) {
                 $value = count($group->get_participants());
-                $groups [] = array(
-                    'id' => $group->get_id(), 'count' => $value, 'group' => $group, 'participants' => array());
+                $groups[] = array(
+                        'id' => $group->get_id(), 'count' => $value, 'group' => $group, 'participants' => array());
                 if ($max == null || $max < $value) {
                     $max = $value;
                 }
             }
-            usort($groups, function ($a, $b) {
+            usort($groups, function($a, $b) {
                 return $a ['count'] - $b ['count'];
             });
             $groups = array_slice($groups, 0, count($groups));
             for ($i = 0; $i < count($randomparticipants); $i++) {
-                usort($groups, function ($a, $b) {
+                usort($groups, function($a, $b) {
                     return $a ['count'] - $b ['count'];
                 });
                 $groups = array_slice($groups, 0, count($groups));
 
-                $p = $randomparticipants [$i];
-                $groups [0] ['group']->add_participant($p, true);
-                $groups [0] ['count']++;
+                $p = $randomparticipants[$i];
+                $groups[0]['group']->add_participant($p, true);
+                $groups[0]['count']++;
             }
 
-            usort($groups, function ($a, $b) {
+            usort($groups, function($a, $b) {
                 return $a ['count'] - $b ['count'];
             });
-
             $cohorts[$configurationkey] = $cohort;
-        } else {
+
+        } else { // Pure random groups because no answers.
             $configurationkey = 'random:1';
-
-            // Pure random groups because no answers.
             $max = max($groupsizes);
-
             $cohorts[$configurationkey] = $this->build_random_cohort($randomparticipants, $max);
         }
-
         return $cohorts;
     }
-
 }
