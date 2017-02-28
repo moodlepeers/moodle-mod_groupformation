@@ -1,6 +1,6 @@
 /**
  * moodle-mod_groupformation JavaScript
- * https://github.com/jkonert/moodle-mod_groupformation
+ * https://github.com/moodlepeers/moodle-mod_groupformation
  *
  *
  * @author Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
