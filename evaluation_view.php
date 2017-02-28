@@ -32,11 +32,13 @@ $id = optional_param('id', 0, PARAM_INT);
 $doshow = optional_param('do_show', 'evaluation', PARAM_TEXT);
 
 // Import jQuery and js file.
-groupformation_add_jquery($PAGE, 'bootstrap.min.js');
-groupformation_add_jquery($PAGE, 'survey_functions.js');
-groupformation_add_jquery($PAGE, 'd3.min.js');
-groupformation_add_jquery($PAGE, 'doubleSideChart.js');
-groupformation_add_jquery($PAGE, 'singleSideChart.js');
+// groupformation_add_js_amd($PAGE, 'tether.js');
+//groupformation_add_js_amd($PAGE, 'bootstrap.js');
+// groupformation_add_jquery($PAGE, 'requirejsconfig.js');
+// groupformation_add_jquery($PAGE, 'd3.min.js');
+//groupformation_add_jquery($PAGE, 'doublesidechart.min.js');
+// groupformation_add_jquery($PAGE, 'singleSideChart.js');
+groupformation_add_jquery($PAGE);
 groupformation_add_jquery($PAGE, 'startCarousel.js');
 
 // Determine instances of course module, course, groupformation.

@@ -26,7 +26,7 @@
  */
 defined('MOODLE_INTERNAL') || die ();
 
-require_once($CFG->dirroot . '/mod/groupformation/classes/controller/logging_controller.php');
+require_once($CFG->dirroot.'/mod/groupformation/classes/controller/logging_controller.php');
 
 /**
  * Adds jQuery
@@ -40,8 +40,33 @@ function groupformation_add_jquery($PAGE, $filename = null) {
     $PAGE->requires->jquery_plugin('ui-css');
 
     if (!is_null($filename)) {
-        $PAGE->requires->js('/mod/groupformation/js/' . $filename);
+        $PAGE->requires->js(new moodle_url('/mod/groupformation/js/'.$filename));
+        // better prefix with new moodle_url($CFG->wwwroot.'/mod/groupformation/js/'.$filename
     }
+}
+
+/**
+ * Adds jQuery
+ *
+ * @param unknown $PAGE
+ * @param string $filename in amd folder of mod
+ */
+function groupformation_add_js_amd($PAGE, $filename) {
+    $PAGE->requires->js(new moodle_url('/mod/groupformation/amd/src/'.$filename));
+        // better prefix with new moodle_url($CFG->wwwroot.'/mod/groupformation/js/'.$filename
+}
+
+/**
+ * Calls a JavaScript AMD module
+ * @link https://docs.moodle.org/dev/Javascript_Modules
+ *
+ * @param unknown $PAGE
+ * @param string moudlname AMD conform modulname. prefix it with groupformation if it is internal (e.g. groupformation/mymodule)
+ * @param method  method to call as initialize in return object of AMD
+ * @param params optional params to send to this initialize js method
+ */
+function groupformation_call_js_amd($PAGE, $modulname, $method, $params=null) {
+    $PAGE->requires->js_call_amd($modulname, $method, $params);
 }
 
 /**
