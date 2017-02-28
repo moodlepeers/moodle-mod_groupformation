@@ -339,7 +339,7 @@ $(document).ready(function () {
         var $cat = $(this).parent().attr('id');
 
         // Add new empty field with click on last input field.
-        $('.multi_field input:text', $wrapper).click(function () {
+        $('.multi_field input:text', $wrapper).bind("click focus", function () {
             if ($('.multi_field:last-child', $wrapper).attr('id') == $(this).parent().attr('id')) {
                 $value = '';
                 addInput($wrapper, $cat, $value);
