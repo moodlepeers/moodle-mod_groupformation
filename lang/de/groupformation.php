@@ -80,7 +80,7 @@ $string ['topics'] = 'Themen';
 $string ['topics_dummy'] = 'Thema';
 $string ['knowledge_dummy'] = 'Beispiel';
 $string ['topics_description'] = 'Ich möchte (Gruppen-)Themen zur Auswahl anbieten';
-$string ['topics_description_extended'] = 'Geben Sie hier die Themen an, die die Gruppen bearbeiten sollen. Die Gruppenzuordnung erfolgt nach dem Priorisierungen der Studierenden.';
+$string ['topics_description_extended'] = 'Geben Sie hier die Themen an, die die Gruppen bearbeiten sollen. <strong>Die Gruppenzuordnung erfolgt ausschließlich nach den Priorisierungen der Studierenden.</strong> Alle anderen Fragebogenteile werden dann nicht berücksichtigt.';
 $string ['topics_question'] = 'Bitte sortieren Sie die zur Wahl stehenden Themen entsprechend Ihrer Präferenz, beginnend mit Ihrem bevorzugten Thema. Zum Sortieren verwenden Sie bitte Drag & Drop.';
 $string ['topicchoice'] = 'Themenauswahl';
 $string ['useOneLineForEachTopic'] = 'Pro Thema jeweils eine Zeile benutzen';
@@ -91,7 +91,7 @@ $string ['knowledge_description_extended'] = 'Geben Sie hier die Wissensgebiete 
 $string ['knowledgeChoice'] = 'Vorwissen';
 $string ['knowledge_info_presentation'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einschätzen sollen.
 		Eine Vorschau des Fragebogens-Abschnittes für die Studierenden ist rechts zu sehen.
-		Für Ihre Auswahl "Referatsgruppen" wird das Vorwissen nur berücksichtigt, falls nach Optimierung der Themenwahl noch weiter optimiert werden kann.';
+		Für Ihre Auswahl "Referatsgruppen" wird das Vorwissen beim Gruppenbilden nicht berücksichtigt (auschließlich die Themenwahl).';
 $string ['knowledge_info_homework'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einschätzen sollen.
 		Eine Vorschau des Fragebogens-Abschnittes für die Studierenden ist rechts zu sehen.
 		Für Ihre Auswahl "Hausaufgabengruppen" wird so optimiert, dass das Vorwissen sich in jeder Gruppe möglichst ergänzt.';

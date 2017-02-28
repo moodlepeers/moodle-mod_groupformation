@@ -83,7 +83,7 @@ $string ['topics'] = 'Topics';
 $string ['topics_dummy'] = 'Topic';
 $string ['knowledge_dummy'] = 'Example';
 $string ['topics_description'] = 'I want to define topics';
-$string ['topics_description_extended'] = 'Please list topics for the students to choose from. Students are supposed to sort the topics regarding their interests. Take a look at the preview on the right hand side.';
+$string ['topics_description_extended'] = 'Please list topics for the students to choose from. <strong>Then group formation optimizes using the topic selection preferences exclusively.</strong> All other questionnaire parts will be ignored.';
 $string ['topics_question'] = 'Please sort the following topics regarding your personal interests and start with your favorite topic. Sort via drag and drop.';
 $string ['topicchoice'] = 'Topic selection';
 $string ['useOneLineForEachTopic'] = 'Use one line for each topic';
@@ -93,7 +93,7 @@ $string ['knowledge_description_extended'] = 'Please list knowledge areas in whi
 	Take a look at the preview on the right hand side.';
 $string ['knowledge_info_presentation'] = 'Please list knowledge areas in which students should assess themselves.
 	Take a look at the preview on the right hand side.
-	According to your selection "presentation groups" prior knowledge will be varied within each group (low priority behind topics)';
+	According to your selection "presentation groups" prior knowledge will be varied within each group (ignored when topics are set)';
 $string ['knowledge_info_homework'] = 'Please list knowledge areas in which students should assess themselves.
 	Take a look at the preview on the right hand side.
 	According to your selection "homework groups" prior knowledge will be varied within each group.';
