@@ -358,6 +358,7 @@ class mod_groupformation_groups_manager {
 
     /**
      * Assigns user to group A or group B (creates those if they do not exist)
+     * (uses order of user submissions and assigns one %2 to A or B)
      *
      * @param int $userid
      */

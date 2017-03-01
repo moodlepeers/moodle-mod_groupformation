@@ -84,7 +84,6 @@ if (!isset ($begin)) {
 }
 
 if ($begin == 1) {
-
     if (isset($questions) && $questions == 1 && !$back) {
         if (isset($consent)) {
             $dbconsent = $usermanager->get_consent($userid);
@@ -97,20 +96,18 @@ if ($begin == 1) {
         }
         $returnurl = new moodle_url ('/mod/groupformation/questionnaire_view.php', array(
             'id' => $id));
-
         redirect($returnurl);
     }
 } else if ($begin == -1) {
     $usermanager->delete_answers($userid);
     $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
         'id' => $id));
-
     redirect($returnurl);
 } else if ($usermanager->is_completed($userid)) {
     $usermanager->set_complete($userid, 0);
 } else {
     $usermanager->change_status($userid, 1);
-    $groupsmanager->assign_to_groups_a_and_b($userid);
+    // XXX: scientific studies A/B sampling $groupsmanager->assign_to_groups_a_and_b($userid);
     $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
         'id' => $id));
 
