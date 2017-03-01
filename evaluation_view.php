@@ -80,10 +80,10 @@ if ($groupformation->intro) {
 }
 
 if (groupformation_get_current_questionnaire_version() > $store->get_version()) {
-    echo '<div class="alert">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
+    echo '<div class="alert">'.get_string('questionnaire_outdated', 'groupformation') . '</div>';
 }
 if ($store->is_archived()) {
-    echo '<div class="alert" id="commited_view">' . get_string('archived_activity_answers', 'groupformation') . '</div>';
+    echo '<div class="alert" id="commited_view">'.get_string('archived_activity_answers', 'groupformation') . '</div>';
 } else {
     $evaluator = new mod_groupformation_evaluation_controller($groupformation->id);
     echo $evaluator->render($userid);

@@ -2,7 +2,8 @@
  * moodle-mod_groupformation JavaScript
  * https://github.com/moodlepeers/moodle-mod_groupformation
  *
- * This layouts the evaluation view for users based on the embedded JSON data (using d3.js)
+ * This layouts the evaluation view for users based on the embedded JSON data (using d3.js).
+ * For feedback info-boxes bootstrap.js colapse toggles and popovers are used.
  *
  * @author Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -46,7 +47,7 @@ require(['jquery','mod_groupformation/d3', 'mod_groupformation/singlesidechart',
             .each(function (d, i) {
                 if (d.mode == "chart") {
                     var divv = "gf_chart" + i + "accordion";
-                    d3.select(this).append("div").attr("id", divv);//.attr("class", "panel-group");
+                    d3.select(this).append("div").attr("id", divv).attr("role", "tablist").attr("aria-multiselectable", "true");
                     if (d.directions == 1) {
                         buildChartSingleSide("#gf_chart" + i, d.criteria, d.bars);
                         buildPersonalResult(d.criteria, i, "#" + divv);
@@ -70,39 +71,37 @@ require(['jquery','mod_groupformation/d3', 'mod_groupformation/singlesidechart',
 
     function buildPersonalResult(datam, index, divId) {
 
-        var pan = d3.select(divId).selectAll("div .card .panel .panel-default")
+        var pan = d3.select(divId).selectAll("div")
             .data(datam)
             .enter()
             .append("div")
-            .attr("class", "card panel panel-default");
+            .attr("class", "gfcard");
         /* panel heading */
         var panDiv = pan
             .append("div")
-            .attr("class", "card-header panel-heading")
+            .attr("class", "gfcard-header")
             .attr("role", "tab")
             .attr("id", function (d, i) {
                 return "heading" + index + i;
+            })
+            .attr("data-toggle", "collapse")
+            .attr("data-target", function (d, i) {
+                return "#collapse" + index + i;
+            })
+            //.attr("data-parent", divId)
+            .attr("aria-expanded", "true")
+            .attr("aria-controls", function (d, i) {
+                return "collapse" + index + i;
             });
-        var panHead = panDiv.append("h4");
 
         /* Header Text */
+        var panHead = panDiv.append("h5");
         panHead
-        /* .append("a")
-        .attr("role", "button")
-        .attr("data-toggle", "collapse")
-        .attr("href", function (d, i) {
-            return "#collapse" + index + i;
-        })
-        .attr("aria-expanded", "true")
-        .attr("aria-controls", function (d, i) {
-            return "collapse" + index + i;
-        })
-        */
             .text(function (d) {
                 return d.captions.cutoffCaption;
             });
         /* Header Info Button */
-        panHead
+        panDiv
             .append("span")
             .attr("class", "fa fa-info-circle")
             .style("margin-left", "5px")
@@ -115,21 +114,20 @@ require(['jquery','mod_groupformation/d3', 'mod_groupformation/singlesidechart',
                 return d.captions.maxText
             })
             .attr("data-placement", "right");
+
         /* panel body */
         pan
             .append("div")
             .attr("id", function (d, i) {
                 return "collapse" + index + i;
             })
-            .attr("class", "card-collapse panel-collapse collapse in")
+            .attr("class", "show in collapse")
             .attr("role", "tabpanel")
-            .attr("aria-labelledBy", function (d, i) {
-                return "collapse" + index + i;
+            .attr("aria-labelledby", function (d, i) {
+                return "heading" + index + i;
             })
             .append("div")
-            .attr("class", "card-block panel-body")
-            .append("p")
-            .attr("class", "gf_p_accordion")
+            .attr("class", "gfcard-block")
             .text(function (d, i) {
                 return d.cutoff;
             });

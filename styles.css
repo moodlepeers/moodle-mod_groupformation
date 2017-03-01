@@ -1129,15 +1129,6 @@ a:hover, a:focus {
     width: 100%;
 }
 
-/*.path-mod-groupformation [class*='col_s'] {
-    float: left;
-    margin: 5px 0;
-    padding-right: 10px;
-}
-
-.path-mod-groupformation [class*='col_s']:last-of-type {
-    padding-right: 20px;
-}*/
 
 /*******************************/
 /* edit groups styles*/
@@ -1263,6 +1254,7 @@ a:hover, a:focus {
 /*group overview group parameters*/
 .path-mod-groupformation .group_params {
     float: left;
+    clear:left;
     margin: 0 0.8em;
 }
 
@@ -1427,6 +1419,42 @@ a:hover, a:focus {
     cursor: pointer;
 }
 
-.card-greyicsh {
-    background-color: rgba(171, 171, 171, 0.81);
+.path-mod-groupformation .gf_pad_content .row {
+    margin-left: inherit;
+}
+/* cards in evaluation */
+/* inspired by http://v4-alpha.getbootstrap.com/components/collapse/ */
+.path-mod-groupformation .gfcard {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    margin-top: 1em;
+}
+.path-mod-groupformation .gfcard-header {
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: #f7f7f9;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+.path-mod-groupformation .gfcard-header h5 {
+    margin: 0;
+}
+.path-mod-groupformation .gfcard-header h5, .gfcard-header .fa-info-circle {
+    float:left;
+}
+
+.path-mod-groupformation .gfcard-header[data-toggle="collapse"] {
+    cursor: pointer;
+}
+.path-mod-groupformation .gfcard-header .popover {
+    font-size: 80%;
+    min-font-size: 8px;
+}
+
+.path-mod-groupformation .gfcard-block {
+    flex: 1 1 auto;
+    padding: 1.25rem;
 }
