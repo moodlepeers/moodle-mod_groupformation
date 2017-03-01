@@ -316,11 +316,11 @@ class mod_groupformation_job_manager {
             }
             $cohortresult = $cohort->get_result();
             $flags = array(
-                "groupal" => (strpos($groupkey, "groupal:1") !== FALSE) ? 1 : 0,
-                "random" => (strpos($groupkey, "random:1") !== FALSE) ? 1 : 0,
+                "groupal" => (strpos($groupkey, "groupal:1") !== false) ? 1 : 0,
+                "random" => (strpos($groupkey, "random:1") !== false) ? 1 : 0,
                 "mrandom" => 0,
                 "created" => 0,
-                "topic" => (strpos($groupkey, "topic:1") !== FALSE) ? 1 : 0,
+                "topic" => (strpos($groupkey, "topic:1") !== false) ? 1 : 0,
                 "group_key" => $groupkey
             );
             $idmap = self::create_groups($job, $cohortresult->groups, $flags);

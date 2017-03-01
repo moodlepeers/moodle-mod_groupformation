@@ -405,11 +405,8 @@ class mod_groupformation_mod_form extends moodleform_mod {
 
         // Add Groupsize Options.
         $mform->addElement('html', '
-
-                <div class="gf_pad_header">' . get_string('groupoption_description', 'groupformation') .
-            '<span class="required"></span><span class="toolt" tooltip="' .
-            get_string('groupoption_help', 'groupformation') . '"></span>
-
+                <div class="gf_pad_header">'.get_string('groupoption_description', 'groupformation').
+            '<span class="required"></span><span class="toolt" tooltip="'.get_string('groupoption_help', 'groupformation').'"></span>
                 </div>
                 <div class="js_errors" id="maxmembers_error">
                     <p></p>
@@ -418,10 +415,9 @@ class mod_groupformation_mod_form extends moodleform_mod {
                     <p></p>
                 </div>
                 <div class="settings_info" id="groupSettingsInfo">
-                        <p>' . get_string('groupSettingsInfo', 'groupformation') . '</p>
+                        <p>'. get_string('groupSettingsInfo', 'groupformation').'</p>
                 </div>
-                    
-                <div class="gf_pad_content">                                                        
+                <div class="gf_pad_content">
                     <p><span id="studentsInCourse"><b>');
 
         $context = $PAGE->context;

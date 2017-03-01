@@ -112,7 +112,7 @@ class mod_groupformation_group {
         if (count($this->participants) >= static::$groupmembersmaxsize) {
             return false;
         }
-        if (in_array($p, $this->participants, TRUE)) {
+        if (in_array($p, $this->participants, true)) {
             return false;
         }
         $this->participants[] = $p;

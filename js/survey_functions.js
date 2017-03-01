@@ -6,15 +6,11 @@
  * @author Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require(['jquery','jqueryui'], function($) {
-
+require(['jquery', 'jqueryui'], function ($) {
     $(document).ready(function () {
-
         $('#invisible_topics_inputs').hide();
-
         $(".maxgroupsizenotreached_header").click(function () {
         });
-
         $(".groupsbuilt_header").click(function () {
         });
 
@@ -49,7 +45,6 @@ require(['jquery','jqueryui'], function($) {
         }, function () {
             accordion_rollin.call($(this).parent());
         });
-
 
         // If the questionnaire still available but the answers already submitted.
         if ($('#commited_view').length) {
@@ -113,4 +108,3 @@ require(['jquery','jqueryui'], function($) {
         }
     });
 });
-

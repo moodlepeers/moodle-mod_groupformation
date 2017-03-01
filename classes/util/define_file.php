@@ -81,7 +81,9 @@ class mod_groupformation_data {
                     "evaluation" => true,
                     "labels" => array(
                             "challenge" => array(
-                                    "scenarios" => array(1 => false), // TODO: support scenariocriteriontypes and allow "none" to not use it for grouping, (added for displaying feedback to user; no true/false asignment to prevent algorithmic usage)
+                                    // TODO: support scenariocriteriontypes and allow "none" to not use it for grouping,
+                                   // (added for displaying feedback to user; no true/false asignment to prevent algorithmic usage)
+                                    "scenarios" => array(1 => false),
                                     "evaluation" => true,
                                     "questionids" => array(6, 8, 10, 15, 17),
                                     "significant_id_only" => false,
@@ -203,7 +205,7 @@ class mod_groupformation_data {
             ),
             "knowledge" => array(
                     "category" => "knowledge",
-                    "scenarios" => array(1,2),
+                    "scenarios" => array(1, 2),
                     "evaluation" => false,
                     "labels" => array(
                             "one" => array(

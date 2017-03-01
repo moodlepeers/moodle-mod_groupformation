@@ -1,4 +1,4 @@
-define(['mod_groupformation/d3','jquery'],function(d3, $) {
+define(['mod_groupformation/d3', 'jquery'], function (d3, $) {
 
     return function buildChartSingleSide(chartid, datam, bars) {
         // Remove svg for resize-effect.
@@ -249,4 +249,3 @@ define(['mod_groupformation/d3','jquery'],function(d3, $) {
         $("g.globalBars g g rect").hide();
     }
 });
-

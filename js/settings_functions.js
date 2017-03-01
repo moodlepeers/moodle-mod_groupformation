@@ -554,7 +554,6 @@ require(['jquery', 'jqueryui'], function($) {
                         "visibility": "hidden"
                     });
                 }
-                ;
             });
         }
 

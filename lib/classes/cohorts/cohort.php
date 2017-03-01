@@ -69,7 +69,7 @@ class mod_groupformation_cohort {
      * @return boolean
      */
     public function add_group(mod_groupformation_group $g) {
-        if (in_array($g, $this->groups, TRUE)) {
+        if (in_array($g, $this->groups, true)) {
             return false;
         }
 
