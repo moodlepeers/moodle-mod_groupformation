@@ -21,8 +21,8 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
-$plugin->version = 2017022100;
-$plugin->requires = 2016052300; // (set here to Moodle 3.1) ; best use Moodle 3.2 (2016120500) due to new bootstrap 4
+$plugin->version = 2017030100;
+$plugin->requires = 2016120500; // (could be set here to Moodle 3.1 2016052300 [untested!]) ; best use Moodle 3.2 (2016120500) due to new bootstrap 4
 $plugin->cron = 0;
 $plugin->component = 'mod_groupformation';
 $plugin->maturity = MATURITY_STABLE;
