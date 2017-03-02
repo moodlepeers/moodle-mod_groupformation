@@ -18,14 +18,20 @@
                 var descriptor = props[i];
                 descriptor.enumerable = descriptor.enumerable || false;
                 descriptor.configurable = true;
-                if ('value' in descriptor) descriptor.writable = true;
+                if ('value' in descriptor) {
+                    descriptor.writable = true;
+                }
                 Object.defineProperty(target, descriptor.key, descriptor);
             }
         }
 
         return function (Constructor, protoProps, staticProps) {
-            if (protoProps) defineProperties(Constructor.prototype, protoProps);
-            if (staticProps) defineProperties(Constructor, staticProps);
+            if (protoProps) {
+                defineProperties(Constructor.prototype, protoProps);
+            }
+            if (staticProps) {
+                defineProperties(Constructor, staticProps);
+            }
             return Constructor;
         };
     })();
@@ -161,8 +167,7 @@
             document.body.removeChild(zeroElement);
         }
         zeroElement = null;
-    };
-
+    }
     function getBounds(el) {
         var doc = undefined;
         if (el === document) {
@@ -443,16 +448,22 @@
             try {
                 for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
                     _arr.push(_s.value);
-                    if (i && _arr.length === i) break;
+                    if (i && _arr.length === i) {
+                        break;
+                    }
                 }
             } catch (err) {
                 _d = true;
                 _e = err;
             } finally {
                 try {
-                    if (!_n && _i['return']) _i['return']();
+                    if (!_n && _i['return']) {
+                        _i['return']();
+                    }
                 } finally {
-                    if (_d) throw _e;
+                    if (_d) {
+                        throw _e;
+                    }
                 }
             }
             return _arr;
@@ -475,24 +486,32 @@
                 var descriptor = props[i];
                 descriptor.enumerable = descriptor.enumerable || false;
                 descriptor.configurable = true;
-                if ('value' in descriptor) descriptor.writable = true;
+                if ('value' in descriptor) {
+                    descriptor.writable = true;
+                }
                 Object.defineProperty(target, descriptor.key, descriptor);
             }
         }
 
         return function (Constructor, protoProps, staticProps) {
-            if (protoProps) defineProperties(Constructor.prototype, protoProps);
-            if (staticProps) defineProperties(Constructor, staticProps);
+            if (protoProps) {
+                defineProperties(Constructor.prototype, protoProps);
+            }
+            if (staticProps) {
+                defineProperties(Constructor, staticProps);
+            }
             return Constructor;
         };
     })();
 
     var _get = function get(_x6, _x7, _x8) {
         var _again = true;
-        _function: while (_again) {
+        while (_again) {
             var object = _x6, property = _x7, receiver = _x8;
             _again = false;
-            if (object === null) object = Function.prototype;
+            if (object === null) {
+                object = Function.prototype;
+            }
             var desc = Object.getOwnPropertyDescriptor(object, property);
             if (desc === undefined) {
                 var parent = Object.getPrototypeOf(object);
@@ -504,7 +523,7 @@
                     _x8 = receiver;
                     _again = true;
                     desc = parent = undefined;
-                    continue _function;
+
                 }
             } else if ('value' in desc) {
                 return desc.value;
@@ -529,7 +548,9 @@
             throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
         }
         subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {value: subClass, enumerable: false, writable: true, configurable: true}});
-        if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+        if (superClass) {
+            Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+        }
     }
 
     if (typeof TetherBase === 'undefined') {
@@ -1133,7 +1154,7 @@
                     if (ret === false) {
                         return false;
                     } else if (typeof ret === 'undefined' || typeof ret !== 'object') {
-                        continue;
+
                     } else {
                         top = ret.top;
                         left = ret.left;
