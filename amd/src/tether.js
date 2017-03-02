@@ -49,8 +49,8 @@
 
     var zeroElement = null;
 
-// Same as native getBoundingClientRect, except it takes into account parent <frame> offsets
-// if the element lies within a nested document (<frame> or <iframe>-like).
+    // Same as native getBoundingClientRect, except it takes into account parent <frame> offsets
+    // if the element lies within a nested document (<frame> or <iframe>-like).
     function getActualBoundingClientRect(node) {
         var boundingRect = node.getBoundingClientRect();
 
@@ -1422,16 +1422,22 @@
             try {
                 for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
                     _arr.push(_s.value);
-                    if (i && _arr.length === i) break;
+                    if (i && _arr.length === i) {
+                        break;
+                    }
                 }
             } catch (err) {
                 _d = true;
                 _e = err;
             } finally {
                 try {
-                    if (!_n && _i['return']) _i['return']();
+                    if (!_n && _i['return']) {
+                        _i['return']();
+                    }
                 } finally {
-                    if (_d) throw _e;
+                    if (_d) {
+                        throw _e;
+                    }
                 }
             }
             return _arr;
@@ -1917,16 +1923,22 @@
             try {
                 for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
                     _arr.push(_s.value);
-                    if (i && _arr.length === i) break;
+                    if (i && _arr.length === i) {
+                        break;
+                    }
                 }
             } catch (err) {
                 _d = true;
                 _e = err;
             } finally {
                 try {
-                    if (!_n && _i['return']) _i['return']();
+                    if (!_n && _i['return']) {
+                        _i['return']();
+                    }
                 } finally {
-                    if (_d) throw _e;
+                    if (_d) {
+                        throw _e;
+                    }
                 }
             }
             return _arr;
