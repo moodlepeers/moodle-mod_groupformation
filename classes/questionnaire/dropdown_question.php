@@ -47,7 +47,7 @@ class mod_groupformation_dropdown_question {
         }
 
         echo '<td class="center">
-                <select class="form-control" name="' . $category . $questionid . '" id="' . $category . $questionid . '">';
+                <select style="height:35px" class="form-control" name="' . $category . $questionid . '" id="' . $category . $questionid . '">';
         echo '<option value="0"> - </option>';
         foreach ($options as $option) {
             if ($answer == $questioncounter) {
