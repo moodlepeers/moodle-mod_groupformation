@@ -62,23 +62,23 @@ class mod_groupformation_scientific_grouping extends mod_groupformation_grouping
 
         $big5specs = $this->data->get_criterion_specification('big5');
 
-        unset($big5specs['labels']['neurotizismus']);
-        unset($big5specs['labels']['offenheit']);
-        unset($big5specs['labels']['vertraeglichkeit']);
+        unset($big5specs['labels']['neuroticism']);
+        unset($big5specs['labels']['openness']);
+        unset($big5specs['labels']['agreeableness']);
 
         $specs = array(
             "big5" => $big5specs
         );
 
         $configurations = array(
-            "mrand:0;ex:1;gh:1" => array('big5_extraversion' => true, 'big5_gewissenhaftigkeit' => true),
-            "mrand:0;ex:1;gh:0" => array('big5_extraversion' => true, 'big5_gewissenhaftigkeit' => false),
-            "mrand:0;ex:0;gh:0" => array('big5_extraversion' => false, 'big5_gewissenhaftigkeit' => false),
-            "mrand:0;ex:0;gh:1" => array('big5_extraversion' => false, 'big5_gewissenhaftigkeit' => true),
-            "mrand:0;ex:1;gh:_" => array('big5_extraversion' => true, 'big5_gewissenhaftigkeit' => null),
-            "mrand:0;ex:0;gh:_" => array('big5_extraversion' => false, 'big5_gewissenhaftigkeit' => null),
-            "mrand:0;ex:_;gh:1" => array('big5_extraversion' => null, 'big5_gewissenhaftigkeit' => true),
-            "mrand:0;ex:_;gh:0" => array('big5_extraversion' => null, 'big5_gewissenhaftigkeit' => false),
+            "mrand:0;ex:1;gh:1" => array('big5_extraversion' => true, 'big5_conscientiousness' => true),
+            "mrand:0;ex:1;gh:0" => array('big5_extraversion' => true, 'big5_conscientiousness' => false),
+            "mrand:0;ex:0;gh:0" => array('big5_extraversion' => false, 'big5_conscientiousness' => false),
+            "mrand:0;ex:0;gh:1" => array('big5_extraversion' => false, 'big5_conscientiousness' => true),
+            "mrand:0;ex:1;gh:_" => array('big5_extraversion' => true, 'big5_conscientiousness' => null),
+            "mrand:0;ex:0;gh:_" => array('big5_extraversion' => false, 'big5_conscientiousness' => null),
+            "mrand:0;ex:_;gh:1" => array('big5_extraversion' => null, 'big5_conscientiousness' => true),
+            "mrand:0;ex:_;gh:0" => array('big5_extraversion' => null, 'big5_conscientiousness' => false),
             "mrand:1;ex:_;gh:_" => array(),
         );
 

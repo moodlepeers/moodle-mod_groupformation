@@ -476,5 +476,6 @@ $string['settings_import_export_description'] = 'Wenn aktiviert, können Studier
 $string['settings_participant_code'] = 'Teilnehmercode';
 $string['settings_participant_code_description'] = 'Studierende müssen einen Teilnehmercode eingeben (so wie in psychologischen Tests).';
 
+$string['answers_for_eval_text'] = 'Wenn alle Fragen beantwortet sind, wird im Reiter Evaluation eine Auswertung angezeigt. Bei unvollständiger Bearbeitung des Fragebogens steht diese Funktion nicht zur Verfügung.';
 
 

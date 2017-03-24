@@ -392,7 +392,7 @@ $string['eval_min_text_successprobability'] = 'Probability of success includes a
 $string['eval_max_text_lackofconfidence'] = 'Expectation of failure is a form of motivation, which arises from the fear of not succeeding in the task, combined with the idea that due to the pressure of the situation one will not be able to study optimally.';
 $string['eval_min_text_lackofconfidence'] = 'Expectation of failure is a form of motivation, which arises from the fear of not succeeding in the task, combined with the idea that due to the pressure of the situation one will not be able to study optimally.';
 
-$string['blbubl'] = 'neurotizismus,extraversion,gewissenhaftigkeit,vertraeglichkeit,openness';
+$string['blbubl'] = 'neurotizismus,extraversion,gewissenhaftigkeit,agreeableness,openness';
 $string['dlfdss'] = 'herausforderung,interesse,erfolgswahrscheinlichkeit,misserfolgsbefuerchtung';
 
 $string['eval_text_big5_extraversion_3'] = 'Your answers indicate a high score on extraversion. Accordingly, you probably tend towards socializing, expressing active and talkative behavior, being optimistic and warm, and you probably react with higher susceptibility to stimuli and excitements.';
@@ -477,4 +477,5 @@ $string['settings_import_export_description'] = 'If set, students can export the
 $string['settings_participant_code'] = 'Participant code';
 $string['settings_participant_code_description'] = 'Students need to enter a participant code (as used in psychological tests).';
 
+$string['answers_for_eval_text'] = 'If all questions are answered, you can receive feedback in the evaluation tab. If your answers are incomplete the evaluation is not possible due to missing answers.';
 
