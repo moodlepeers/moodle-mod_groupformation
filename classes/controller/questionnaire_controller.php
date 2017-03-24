@@ -402,7 +402,7 @@ class mod_groupformation_questionnaire_controller {
                 $class = '';
             }
             echo '<li class="' . (($activecategory == $category) ? 'current' : 'accord_li') . '">';
-            echo '<span>' . ($positioncategory + 1) . '</span><a class="' . $class . '"  href="' . $url . '">' .
+            echo '<a class="' . $class . '"  href="' . $url . '"><span>' . ($positioncategory + 1) . '</span>' .
                 get_string('category_' . $category, 'groupformation') . '</a>';
             echo '</li>';
         }
