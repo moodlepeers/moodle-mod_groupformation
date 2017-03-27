@@ -236,9 +236,9 @@ $string['questionnaire_committed'] = 'Your answers are submitted. You cannot cha
 $string['no_data_to_display'] = 'No data to display';
 
 $string['onlyactivestudents'] = 'Only students with at least one submitted answer should be considered for building groups';
-$string['emailnotifications'] = 'I want to be notified by message when the groupformation job has terminated.';
+$string['emailnotifications'] = '<i style="color:red;">Currently disabled due to technical difficulties!</i> I want to be notified by message when the groupformation job has terminated.';
 $string['onlyactivestudents_description'] = 'Only students with at least one submitted answer should be considered for building groups';
-$string['emailnotifications_description'] = 'I want to be notified by message when the groupformation job finished.';
+$string['emailnotifications_description'] = '<i style="color:red;">Currently disabled due to technical difficulties!</i> I want to be notified by message when the groupformation job finished.';
 
 $string['sampleGroupName'] = 'The name of your group is';
 $string['oneManGroup'] = 'You are a one man group.';

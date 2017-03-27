@@ -291,8 +291,14 @@ $string['students_committed_multiple'] = 'Studierende davon hat seine Antworten 
 $string['committed_not_completed'] = 'von den fest abgegebenen Fragebögen sind nicht vollständig.';
 $string['completed_questionnaire'] = 'vollständig beantwortete Fragebögen.';
 
-$string['emailnotifications_info'] = 'Sie werden via Moodle benachrichtigt, wenn sie abgeschlossen ist.';
+$string['emailnotifications_info'] = '<i style="color:red;">Aktuell aufgrund technischer Schwierigkeiten deaktiviert!</i> Sie werden via Moodle benachrichtigt, wenn sie abgeschlossen ist.';
 $string['onlyactivestudents_info'] = 'Zur Gruppenbildung werden ausschließlich Studierende betrachtet werden, die mind. eine Frage beantwortet haben. Sie können das in den {$a->url} anpassen.';
+$string['onlyactivestudents'] = 'Zur Gruppenbildung werden ausschließlich Studierende betrachtet werden, die mind. eine Frage beantwortet haben. Sie können das in den {$a->url} anpassen.';
+$string['emailnotifications'] = '<i style="color:red;">Aktuell aufgrund technischer Schwierigkeiten deaktiviert!</i> Sie werden via Moodle benachrichtigt, wenn sie abgeschlossen ist.';
+$string['onlyactivestudents_description'] = 'Zur Gruppenbildung werden ausschließlich Studierende betrachtet werden, die mind. eine Frage beantwortet haben. Sie können das in den {$a->url} anpassen.';
+$string['emailnotifications_description'] = '<i style="color:red;">Aktuell aufgrund technischer Schwierigkeiten deaktiviert!</i> Sie werden via Moodle benachrichtigt, wenn sie abgeschlossen ist.';
+
+
 $string ['starttime'] = 'Startzeit';
 $string ['endtime'] = 'Endzeit';
 

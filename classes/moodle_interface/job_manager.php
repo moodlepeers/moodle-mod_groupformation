@@ -526,21 +526,23 @@ class mod_groupformation_job_manager {
      * @return NULL
      */
     public static function notify_teacher($job) {
-        global $DB, $CFG;
-        $userid = $job->started_by;
-        $rec = array_pop($DB->get_records('course_modules', array(
-            'instance' => $job->groupformationid)));
-        $coursemoduleid = $rec->id;
-        $recipient = array_pop($DB->get_records('user', array(
-            'id' => $userid)));
-        $subject = get_string('groupformation_message_subject', 'groupformation');
-        $message = get_string('groupformation_message', 'groupformation');
-        $contexturl = $CFG->wwwroot;
-        $contexturl .= '/mod/groupformation/grouping_view.php?id=';
-        $contexturl .= $coursemoduleid;
-        $contexturl .= '&do_show=grouping';
-        $contexturlname = get_string('groupformation_message_contexturlname', 'groupformation');
-        groupformation_send_message($recipient, $subject, $message, $contexturl, $contexturlname);
+        // Disabled for now
+
+        //global $DB, $CFG;
+        //$userid = $job->started_by;
+        //$rec = array_pop($DB->get_records('course_modules', array(
+        //    'instance' => $job->groupformationid)));
+        //$coursemoduleid = $rec->id;
+        //$recipient = array_pop($DB->get_records('user', array(
+        //    'id' => $userid)));
+        //$subject = get_string('groupformation_message_subject', 'groupformation');
+        //$message = get_string('groupformation_message', 'groupformation');
+        //$contexturl = $CFG->wwwroot;
+        //$contexturl .= '/mod/groupformation/grouping_view.php?id=';
+        //$contexturl .= $coursemoduleid;
+        //$contexturl .= '&do_show=grouping';
+        //$contexturlname = get_string('groupformation_message_contexturlname', 'groupformation');
+        //groupformation_send_message($recipient, $subject, $message, $contexturl, $contexturlname);
 
         return null;
     }
