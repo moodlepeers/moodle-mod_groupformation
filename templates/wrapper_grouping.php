@@ -27,25 +27,14 @@
         <?php echo $this->_['grouping_settings']; ?>
     </div>
 
-    <div class="gf_pad_header_small">
-        <?php echo get_string('evaluation', 'groupformation'); ?>
-    </div>
-    <div class="gf_pad_content">
+    <?php if (array_key_exists('grouping_statistics',$this->_)):?>
         <?php echo $this->_['grouping_statistics']; ?>
-    </div>
+    <?php endif;?>
 
-    <div class="maxgroupsizenotreached_header gf_pad_header_small">
-        <?php echo get_string('max_group_size_not_reached', 'groupformation'); ?>
-    </div>
-    <div class="maxgroupsizenotreached_body gf_pad_content">
+    <?php if (array_key_exists('grouping_incomplete_groups',$this->_)):?>
         <?php echo $this->_['grouping_incomplete_groups']; ?>
-    </div>
+    <?php endif;?>
 
-    <div class="groupsbuilt_header gf_pad_header_small">
-        <?php echo get_string('group_overview', 'groupformation'); ?>
-    </div>
-    <div class="groupsbuilt_body gf_pad_content">
-        <?php echo $this->_['grouping_generated_groups']; ?>
-    </div>
+    <?php echo $this->_['grouping_generated_groups']; ?>
 </div>
 

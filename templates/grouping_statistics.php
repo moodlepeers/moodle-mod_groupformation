@@ -19,6 +19,16 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 ?>
-<p><?php echo get_string('number_of_groups', 'groupformation') . ' '; ?> <b><?php echo $this->_['numbOfGroups']; ?></b>
-</p>
-<p><?php echo get_string('max_group_size', 'groupformation') . ' '; ?> <b><?php echo $this->_['maxSize']; ?></b></p>
+
+<div class="gf_pad_header_small">
+    <?php echo get_string('evaluation', 'groupformation'); ?>
+</div>
+
+<div class="gf_pad_content">
+    <p>
+        <?php echo get_string('number_of_groups', 'groupformation') . ' '; ?> <b><?php echo $this->_['numbOfGroups']; ?></b>
+    </p>
+    <p>
+        <?php echo get_string('max_group_size', 'groupformation') . ' '; ?> <b><?php echo $this->_['maxSize']; ?></b>
+    </p>
+</div>

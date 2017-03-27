@@ -212,7 +212,7 @@ class mod_groupformation_grouping_controller {
         $this->view->assign('grouping_title', $this->store->get_name());
         $this->view->assign('grouping_settings', $this->load_settings());
         $this->view->assign('grouping_statistics', $this->load_statistics());
-        $this->view->assign('grouping_incomplete_groups', $this->load_incomplete_groups());
+        // $this->view->assign('grouping_incomplete_groups', $this->load_incomplete_groups());
         $this->view->assign('grouping_generated_groups', $this->load_generated_groups());
 
         return $this->view->load_template();
@@ -336,6 +336,7 @@ class mod_groupformation_grouping_controller {
             $statisticsview->assign('maxSize', $this->maxgroupssize);
         } else {
             $statisticsview->set_template('grouping_no_data');
+            $statisticsview->assign('title','evaluation');
             $statisticsview->assign('grouping_no_data', get_string('no_data_to_display', 'groupformation'));
         }
 
@@ -363,6 +364,7 @@ class mod_groupformation_grouping_controller {
             }
         } else {
             $incompletegroupsview->set_template('grouping_no_data');
+            $incompletegroupsview->assign('title','incomplete_groups');
             $incompletegroupsview->assign('grouping_no_data', get_string('no_data_to_display', 'groupformation'));
         }
 
@@ -435,6 +437,7 @@ class mod_groupformation_grouping_controller {
             }
         } else {
             $generatedgroupsview->set_template('grouping_no_data');
+            $generatedgroupsview->assign('title','group_overview');
             $generatedgroupsview->assign('grouping_no_data', get_string('no_data_to_display', 'groupformation'));
         }
 

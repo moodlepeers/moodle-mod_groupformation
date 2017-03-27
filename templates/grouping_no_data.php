@@ -19,4 +19,15 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 ?>
-<p style="opacity: 0.5; margin-left: 4px;"><i><?php echo $this->_['grouping_no_data']; ?></i></p>
+
+<div class="gf_pad_header_small">
+    <?php echo get_string($this->_['title'], 'groupformation'); ?>
+</div>
+
+<div class="gf_pad_content">
+    <p style="opacity: 0.5; margin-left: 4px;">
+        <i>
+            <?php echo $this->_['grouping_no_data']; ?>
+        </i>
+    </p>
+</div>
