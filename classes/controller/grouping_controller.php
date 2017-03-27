@@ -51,12 +51,16 @@ class mod_groupformation_grouping_controller {
     private $groupscreated;
     private $maxgroupssize;
 
+    private $num_of_groups = 0;
+
     /**
      * Creates an instance of grouping_controller for groupformation
      *
      * @param int $groupformationid
      */
     public function __construct($groupformationid, $cm = null) {
+        global $DB;
+
         $this->groupformationid = $groupformationid;
         if (!is_null($cm)) {
             $this->cmid = $cm->id;
@@ -71,6 +75,19 @@ class mod_groupformation_grouping_controller {
         $this->view = new mod_groupformation_template_builder ();
 
         $this->groups = $this->groupsmanager->get_generated_groups('id, groupname,performance_index,moodlegroupid');
+        $this->num_of_groups = count($this->groups);
+        $this->maxgroupssize = $this->groupsmanager->get_max_groups_size($this->groups);
+
+        $this->users = $this->groupsmanager->get_group_users();
+
+        foreach ($this->users as $user){
+            if (!isset($this->groups[$user->groupid]->users)){
+                $this->groups[$user->groupid]->users = array();
+            }
+            $this->groups[$user->groupid]->users[$user->userid] = $user;
+        }
+
+        $this->userrecords = $DB->get_records('user');
 
         $this->job = mod_groupformation_job_manager::get_job($this->groupformationid);
         if (is_null($this->job)) {
@@ -170,6 +187,9 @@ class mod_groupformation_grouping_controller {
         $this->determine_status();
     }
 
+    /**
+     * @param $groupsstring
+     */
     public function save_edit($groupsstring) {
         $groupsarrayafter = json_decode($groupsstring, true);
         $groupskeysafter = array_keys($groupsarrayafter);
@@ -330,9 +350,8 @@ class mod_groupformation_grouping_controller {
         if ($this->viewstate == 4 || $this->viewstate == 5) {
 
             $statisticsview->set_template('grouping_statistics');
-            $this->maxgroupssize = $this->groupsmanager->get_max_groups_size();
             $statisticsview->assign('performance', $this->job->performance_index);
-            $statisticsview->assign('numbOfGroups', count($this->groupsmanager->get_generated_groups()));
+            $statisticsview->assign('numbOfGroups', $this->num_of_groups);
             $statisticsview->assign('maxSize', $this->maxgroupssize);
         } else {
             $statisticsview->set_template('grouping_no_data');
@@ -548,27 +567,26 @@ class mod_groupformation_grouping_controller {
      */
     private function get_group_members($groupid) {
         global $CFG, $COURSE;
-        $userids = $this->groupsmanager->get_users_for_generated_group($groupid);
-        $groupmembers = array();
-        global $DB;
-        $userrecords = $DB->get_records('user');
-        foreach ($userids as $user) {
-            $url = $CFG->wwwroot . '/user/view.php?id=' . $user->userid . '&course=' . $COURSE->id;
+        $userids = array_keys($this->groups[$groupid]->users);
 
-            $username = $user->userid;
-            $userrecord = $userrecords[$username];
+        $groupmembers = array();
+        foreach ($userids as $user) {
+            $url = $CFG->wwwroot . '/user/view.php?id=' . $user . '&course=' . $COURSE->id;
+
+            $username = $user;
+            $userrecord = $this->userrecords[$username];
 
             if (!is_null($userrecord)) {
                 $username = fullname($userrecord);
             }
 
             if (!(strlen($username) > 2)) {
-                $username = $user->userid;
+                $username = $user;
             }
             $userlink = $url;
 
-            $groupmembers [$user->userid] = [
-                'name' => $username, 'link' => $userlink, 'id' => $user->userid];
+            $groupmembers [$user] = [
+                'name' => $username, 'link' => $userlink, 'id' => $user];
         }
 
         return $groupmembers;

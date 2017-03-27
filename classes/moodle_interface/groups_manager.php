@@ -287,9 +287,10 @@ class mod_groupformation_groups_manager {
      *
      * @return null
      */
-    public function get_max_groups_size() {
-        global $DB;
-        $groups = $this->get_generated_groups('id', 'id,group_size');
+    public function get_max_groups_size($groups = null) {
+        if (is_null($groups)){
+            $groups = $this->get_generated_groups('id', 'id,group_size');
+        }
         $max = null;
         foreach ($groups as $group) {
             if (is_null($max) || $max < $group->group_size) {
