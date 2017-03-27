@@ -39,7 +39,7 @@ groupformation_determine_instance($id, $cm, $course, $groupformation);
 require_login($course, true, $cm);
 
 // Get useful stuff.
-$context = $PAGE->context;
+$context = context_module::instance($cm->id);
 $userid = $USER->id;
 
 if (!has_capability('mod/groupformation:editsettings', $context)) {
