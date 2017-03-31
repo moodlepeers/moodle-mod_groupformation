@@ -51,7 +51,7 @@ class mod_groupformation_grouping_controller {
     private $groupscreated;
     private $maxgroupssize;
 
-    private $num_of_groups = 0;
+    private $numofgroups = 0;
 
     /**
      * Creates an instance of grouping_controller for groupformation
@@ -75,21 +75,24 @@ class mod_groupformation_grouping_controller {
         $this->view = new mod_groupformation_template_builder ();
 
         $this->groups = $this->groupsmanager->get_generated_groups('id, groupname,performance_index,moodlegroupid');
-        $this->num_of_groups = count($this->groups);
+        $this->numofgroups = count($this->groups);
         $this->maxgroupssize = $this->groupsmanager->get_max_groups_size($this->groups);
 
         $this->users = $this->groupsmanager->get_group_users();
 
-        foreach ($this->users as $user){
-            if (!isset($this->groups[$user->groupid]->users)){
+        foreach ($this->users as $user) {
+            if (!isset($this->groups[$user->groupid]->users)) {
                 $this->groups[$user->groupid]->users = array();
             }
             $this->groups[$user->groupid]->users[$user->userid] = $user;
-        }
+        };
 
-        $userids = array_map(function($u) { return $u->userid; }, $this->users);
-        $selectFields = implode(',', ['id', get_all_user_name_fields(true)]);
-        $this->userrecords = $DB->get_records_list('user', 'id', $userids, null, $selectFields);
+        $userids = array_map(function($u) { 
+        	return $u->userid;
+        }, $this->users);
+        
+        $selectfields = implode(',', ['id', get_all_user_name_fields(true)]);
+        $this->userrecords = $DB->get_records_list('user', 'id', $userids, null, $selectfields);
 
         $this->job = mod_groupformation_job_manager::get_job($this->groupformationid);
         if (is_null($this->job)) {
@@ -353,11 +356,11 @@ class mod_groupformation_grouping_controller {
 
             $statisticsview->set_template('grouping_statistics');
             $statisticsview->assign('performance', $this->job->performance_index);
-            $statisticsview->assign('numbOfGroups', $this->num_of_groups);
+            $statisticsview->assign('numbOfGroups', $this->numofgroups);
             $statisticsview->assign('maxSize', $this->maxgroupssize);
         } else {
             $statisticsview->set_template('grouping_no_data');
-            $statisticsview->assign('title','evaluation');
+            $statisticsview->assign('title', 'evaluation');
             $statisticsview->assign('grouping_no_data', get_string('no_data_to_display', 'groupformation'));
         }
 
@@ -385,7 +388,7 @@ class mod_groupformation_grouping_controller {
             }
         } else {
             $incompletegroupsview->set_template('grouping_no_data');
-            $incompletegroupsview->assign('title','incomplete_groups');
+            $incompletegroupsview->assign('title', 'incomplete_groups');
             $incompletegroupsview->assign('grouping_no_data', get_string('no_data_to_display', 'groupformation'));
         }
 
@@ -458,7 +461,7 @@ class mod_groupformation_grouping_controller {
             }
         } else {
             $generatedgroupsview->set_template('grouping_no_data');
-            $generatedgroupsview->assign('title','group_overview');
+            $generatedgroupsview->assign('title', 'group_overview');
             $generatedgroupsview->assign('grouping_no_data', get_string('no_data_to_display', 'groupformation'));
         }
 
@@ -616,4 +619,3 @@ class mod_groupformation_grouping_controller {
         return $link;
     }
 }
-
