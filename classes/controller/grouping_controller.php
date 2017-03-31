@@ -87,7 +87,9 @@ class mod_groupformation_grouping_controller {
             $this->groups[$user->groupid]->users[$user->userid] = $user;
         }
 
-        $this->userrecords = $DB->get_records('user');
+        $userids = array_map(function($u) { return $u->userid; }, $this->users);
+        $selectFields = implode(',', ['id', get_all_user_name_fields(true)]);
+        $this->userrecords = $DB->get_records_list('user', 'id', $userids, null, $selectFields);
 
         $this->job = mod_groupformation_job_manager::get_job($this->groupformationid);
         if (is_null($this->job)) {
