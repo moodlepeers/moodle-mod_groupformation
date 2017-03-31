@@ -229,14 +229,30 @@ class mod_groupformation_job_manager {
         $someanswers = array();
         $noorsomeanswers = array();
 
+        // has_answered_everything
+        $store = new mod_groupformation_storage_manager ($groupformationid);
+        $categories = $store->get_categories();
+        $sum = array_sum($store->get_numbers($categories));
+        
+        // get userids of groupformation answers
+        $userids = $DB->get_fieldset_select('groupformation_answer', 'userid', 'groupformation = ?', array($groupformationid));
+        
+        // returns an array using the userids as keys and their frequency in answers as values
+        $user_frequencies = array_count_values($userids);
+        
+        $number_of_answers = function($userid) use ($sum, $user_frequencies) {
+        	return array_key_exists($userid, $user_frequencies) ? $user_frequencies[$userid] : 0;
+        };
+        
         foreach (array_values($enrolledstudents) as $userid) {
-            if ($usermanager->has_answered_everything($userid)) {
-                $allanswers [] = $userid;
-            } else if ($groupingsetting && $usermanager->get_number_of_answers($userid) > 0) {
-                $someanswers [] = $userid;
-            } else {
-                $noorsomeanswers [] = $userid;
-            }
+        		
+        	if($sum <= $number_of_answers($userid)) {
+        		$allanswers [] = $userid;
+        	} else if($groupingsetting && $number_of_answers($userid) > 0) {
+        		$someanswers [] = $userid;
+        	} else {
+        		$noorsomeanswers [] = $userid;
+        	}
         }
 
         $groupalusers = $allanswers;
