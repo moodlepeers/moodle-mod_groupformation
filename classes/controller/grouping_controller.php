@@ -87,17 +87,11 @@ class mod_groupformation_grouping_controller {
             $this->groups[$user->groupid]->users[$user->userid] = $user;
         };
 
-<<<<<<< HEAD
         $getuserid = function($u) {
             return $u->userid;
         };
         
         $userids = array_map($getuserid, $this->users);
-=======
-        $userids = array_map(function($u) { 
-        	return $u->userid;
-        }, $this->users);
->>>>>>> 94f58dd34d8bc80462a2bcfa7c1d5801e15f36ba
         
         $selectfields = implode(',', ['id', get_all_user_name_fields(true)]);
         $this->userrecords = $DB->get_records_list('user', 'id', $userids, null, $selectfields);
