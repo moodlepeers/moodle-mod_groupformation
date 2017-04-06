@@ -512,7 +512,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
         $mform->addElement('html', '
                     <div class="gf_pad_header">
                 <label class="gf_label" for="id_js_emailnotifications">
-                  <input disabled type="checkbox" id="id_js_emailnotifications" name="chbEmailnotifications" value="wantEmailnotifications">
+                  <input disabled type="checkbox"> <!-- id="id_js_emailnotifications" name="chbEmailnotifications" value="wantEmailnotifications"> !-->
                   ' . get_string('emailnotifications_description', 'groupformation') . '</label>
                   <span id="emailnotificationsStateLabel" class="optional"></span>
                     </div>');
@@ -612,7 +612,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
         $mform->setType('maxpoints', PARAM_NUMBER);
         $mform->addElement('checkbox', 'onlyactivestudents', get_string('onlyactivestudents', 'groupformation'));
         $mform->addElement('checkbox', 'emailnotifications', get_string('emailnotifications', 'groupformation'));
-        $mform->setDefault('emailnotifications', true);
+        $mform->setDefault('emailnotifications', false); // TODO delete if feature is fixed // true);
 
         // Close div tag for non-js related content.
         $mform->addElement('html', '</div id="non-js-content">');
