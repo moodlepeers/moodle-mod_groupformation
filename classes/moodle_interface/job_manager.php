@@ -196,6 +196,7 @@ class mod_groupformation_job_manager {
      * @return array|null
      */
     public static function get_users($groupformationid, $job = null, mod_groupformation_storage_manager $store = null) {
+        global $DB;
         if (is_null($job)) {
             $job = self::get_job($groupformationid);
         }
@@ -221,8 +222,6 @@ class mod_groupformation_job_manager {
             return null;
         }
 
-        $usermanager = new mod_groupformation_user_manager ($groupformationid);
-
         $groupingsetting = $store->get_grouping_setting();
 
         $allanswers = array();
@@ -241,18 +240,17 @@ class mod_groupformation_job_manager {
         $user_frequencies = array_count_values($userids);
         
         $number_of_answers = function($userid) use ($sum, $user_frequencies) {
-        	return array_key_exists($userid, $user_frequencies) ? $user_frequencies[$userid] : 0;
+            return array_key_exists($userid, $user_frequencies) ? $user_frequencies[$userid] : 0;
         };
         
         foreach (array_values($enrolledstudents) as $userid) {
-        		
-        	if($sum <= $number_of_answers($userid)) {
-        		$allanswers [] = $userid;
-        	} else if($groupingsetting && $number_of_answers($userid) > 0) {
-        		$someanswers [] = $userid;
-        	} else {
-        		$noorsomeanswers [] = $userid;
-        	}
+            if($sum <= $number_of_answers($userid)) {
+                $allanswers [] = $userid;
+            } else if($groupingsetting && $number_of_answers($userid) > 0) {
+                $someanswers [] = $userid;
+            } else {
+                $noorsomeanswers [] = $userid;
+                }
         }
 
         $groupalusers = $allanswers;

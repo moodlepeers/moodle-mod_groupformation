@@ -90,6 +90,7 @@ if ($CFG->debug === 32767 && $runjob) {
     $job = null;
 
     $job = $jm::get_job($groupformation->id);
+
     if (!is_null($job)) {
         $result = $jm::do_groupal($job);
         // $saved = $jm::save_result($job,$result);
