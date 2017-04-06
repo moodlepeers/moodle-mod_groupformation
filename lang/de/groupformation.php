@@ -292,10 +292,10 @@ $string['committed_not_completed'] = 'von den fest abgegebenen Fragebögen sind 
 $string['completed_questionnaire'] = 'vollständig beantwortete Fragebögen.';
 
 $string['emailnotifications_info'] = '<i style="color:red;">Die automatische Benachrichtigung über abgeschlossene Gruppenformationen ist momentan leider nicht verfügbar.</i> Sie werden via Moodle benachrichtigt, wenn sie abgeschlossen ist.';
-$string['onlyactivestudents_info'] = 'Zur Gruppenbildung werden ausschließlich Studierende betrachtet werden, die mind. eine Frage beantwortet haben. Sie können das in den {$a->url} anpassen.';
+$string['onlyactivestudents_info'] = 'Zur Gruppenbildung werden ausschließlich Studierende betrachtet werden, die mind. eine Frage beantwortet haben.';
 $string['onlyactivestudents'] = 'Zur Gruppenbildung werden ausschließlich Studierende betrachtet werden, die mind. eine Frage beantwortet haben. Sie können das in den {$a->url} anpassen.';
 $string['emailnotifications'] = '<i style="color:red;">Die automatische Benachrichtigung über abgeschlossene Gruppenformationen ist momentan leider nicht verfügbar.</i> Sie werden via Moodle benachrichtigt, wenn sie abgeschlossen ist.';
-$string['onlyactivestudents_description'] = 'Zur Gruppenbildung werden ausschließlich Studierende betrachtet werden, die mind. eine Frage beantwortet haben. Sie können das in den {$a->url} anpassen.';
+$string['onlyactivestudents_description'] = 'Zur Gruppenbildung werden ausschließlich Studierende betrachtet werden, die mind. eine Frage beantwortet haben.';
 $string['emailnotifications_description'] = '<i style="color:red;">Die automatische Benachrichtigung über abgeschlossene Gruppenformationen ist momentan leider nicht verfügbar.</i> Sie werden via Moodle benachrichtigt, wenn sie abgeschlossen ist.';
 
 
