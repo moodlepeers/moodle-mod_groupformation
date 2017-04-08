@@ -29,13 +29,16 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/group
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 
+class mod_groupformation_group_controller {
 
-class mod_groupformation_student_group_view_controller {
+    /** @var mod_groupformation_groups_manager The manager of groups data */
     private $groupsmanager;
-    private $store;
-    private $groupformationid;
 
-    private $view = null;
+    /** @var int The id of the groupformation activity */
+    private $groupformationid = null;
+
+    /** @var mod_groupformation_storage_manager The manager of activity data */
+    private $store = null;
 
     /**
      * mod_groupformation_student_group_view_controller constructor.
@@ -45,23 +48,20 @@ class mod_groupformation_student_group_view_controller {
         $this->groupformationid = $groupformationid;
         $this->store = new mod_groupformation_storage_manager($groupformationid);
         $this->groupsmanager = new mod_groupformation_groups_manager ($groupformationid);
-
-        $this->view = new mod_groupformation_template_builder ();
-        $this->view->set_template('wrapper_student_groupview');
     }
 
     /**
-     * Outputs group with its members
+     * Returns infos for template
      *
-     * @param $userid
-     * @return string
-     * @throws coding_exception
+     * @return array
      */
-    public function render($userid) {
-        global $CFG, $COURSE;
+    public function load_info() {
+        global $CFG, $COURSE, $USER;
+
+        $assigns = array();
+
+        $userid = $USER->id;
         $array = array();
-        $groupinfocontact = '';
-        $groupname = '';
         $topicinfo = '';
 
         $options = null;
@@ -76,6 +76,8 @@ class mod_groupformation_student_group_view_controller {
 
             $name = $this->groupsmanager->get_group_name($userid);
 
+
+
             $groupname = $name;
             $othermembers = $this->groupsmanager->get_group_members($userid);
 
@@ -88,7 +90,6 @@ class mod_groupformation_student_group_view_controller {
 
             if (count($othermembers) > 0) {
                 $groupinfo = get_string('membersAre', 'groupformation');
-                $groupinfocontact = get_string('contact_members', 'groupformation');
 
                 foreach ($othermembers as $memberid) {
 
@@ -106,15 +107,20 @@ class mod_groupformation_student_group_view_controller {
             } else {
                 $groupinfo = get_string('oneManGroup', 'groupformation');
             }
+            $assigns['topic_info'] = $topicinfo;
+            $assigns['group_name'] = $groupname;
+            $assigns['members'] = $array;
+            $assigns['group_info'] = $groupinfo;
         } else {
-            $groupinfo = get_string('groupingNotReady', 'groupformation');
+            if ($this->groupsmanager->groups_created()) {
+                $groupinfo = get_string('noGroup', 'groupformation');
+                $assigns['group_info'] = $groupinfo;
+            }else{
+                $groupinfo = get_string('groupingNotReady', 'groupformation');
+                $assigns['group_info'] = $groupinfo;
+            }
         }
 
-        $this->view->assign('topic_info', $topicinfo);
-        $this->view->assign('group_name', $groupname);
-        $this->view->assign('members', $array);
-        $this->view->assign('group_info', $groupinfo);
-        $this->view->assign('group_info_contact', $groupinfocontact);
-        return $this->view->load_template();
+        return $assigns;
     }
 }

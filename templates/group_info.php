@@ -19,18 +19,33 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 ?>
-<div class="gf_settings_pad">
-    <div
-        class="gf_pad_header"><?php echo get_string('your_group', 'groupformation') . ' - '; ?><?php echo $this->_['group_name']; ?>
-    </div>
-    <div class="gf_pad_content">
-        <p><?php echo $this->_['group_info_contact']; ?></p>
-        <p><?php echo $this->_['topic_info']; ?></p>
-        <p><?php echo $this->_['group_info']; ?></p>
+
+<div class="gf_pad_content">
+    <?php if (array_key_exists('group_name',$this->_)): ?>
+        <p>
+            <?php echo get_string('your_group', 'groupformation'); ?>
+            <?php echo "<b>". $this->_['group_name'] ."</b>"; ?>
+        </p>
+    <?php endif; ?>
+    <?php if (array_key_exists('topic_info',$this->_)): ?>
+        <p>
+            <?php echo $this->_['topic_info']; ?>
+        </p>
+    <?php endif; ?>
+    <?php if (array_key_exists('group_info',$this->_)): ?>
+        <p>
+            <?php echo $this->_['group_info']; ?>
+        </p>
+    <?php endif; ?>
+    <?php if (array_key_exists('members',$this->_)): ?>
 
         <?php foreach ($this->_['members'] as $row) { ?>
-            <p><b><?php echo $row; ?></b></p>
+            <p>
+                <b>
+                    <?php echo $row; ?>
+                </b>
+            </p>
         <?php } ?>
 
-    </div>
+    <?php endif; ?>
 </div>

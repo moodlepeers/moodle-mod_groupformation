@@ -281,7 +281,7 @@ $string['group_building'] = 'Group building';
 $string['evaluation'] = 'Evaluation';
 $string['group_overview'] = 'Overview of built groups';
 $string['max_group_size_not_reached'] = 'Maximum group size has not been reached by the following groups:';
-$string['your_group'] = 'Your group';
+$string['your_group'] = 'The name of your group is: ';
 $string['students_grouping_single'] = 'student for group building.';
 $string['students_grouping_multiple'] = 'students for group building.';
 $string['students_committed_single'] = 'student therefrom has already committed his/her answers.';
@@ -332,7 +332,7 @@ $string['students_selected'] = 'Students selected';
 $string['drop_selection'] = 'Unselect all';
 
 $string['no_evaluation_text'] = 'There is no evaluation for this group formation activity.';
-$string['no_evaluation_ready'] = 'There is no evaluation for you. The evaluation of your answers is possible when you answered everything and submitted your answers.';
+$string['no_evaluation_ready'] = 'There is no evaluation for you. The evaluation of your answers is possible if you answered everything and submitted your answers.';
 $string['eval_final_text'] = 'The comparison is based on {$a->percent}% of the users answers ({$a->completed} of {$a->coursesize} users have answered already).';
 
 $string['eval_first_page_title'] = "General Information";
@@ -481,4 +481,6 @@ $string['answers_for_eval_text'] = 'If all questions are answered, you can recei
 
 $string['page_title_analysis'] = 'Activity';
 $string['page_title_grouping'] = 'Group formation';
+$string['page_title_group'] = 'Group assignment';
 $string['page_title_grouping_edit'] = 'Group formation - Edit mode';
+$string['noGroup'] = 'You haven\'t been assigned any group because you did not answer the questionnaire.';

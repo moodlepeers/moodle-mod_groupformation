@@ -25,7 +25,8 @@
 require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
 require_once(dirname(__FILE__) . '/lib.php');
 require_once(dirname(__FILE__) . '/locallib.php');
-require_once($CFG->dirroot . '/mod/groupformation/classes/controller/student_group_view_controller.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/controller/group_controller.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/group_view_controller.php');
 
 // Read URL params.
 $id = optional_param('id', 0, PARAM_INT);
@@ -75,7 +76,8 @@ $userid = $USER->id;
 if ($store->is_archived()) {
     echo '<div class="alert" id="commited_view">' . get_string('archived_activity_answers', 'groupformation') . '</div>';
 } else {
-    $groupinfo = new mod_groupformation_student_group_view_controller($groupformation->id);
-    echo $groupinfo->render($userid);
+    $controller = new mod_groupformation_group_controller($groupformation->id);
+    $viewcontroller = new mod_groupformation_group_view_controller($groupformation->id,$controller);
+    echo $viewcontroller->render();
 }
 echo $OUTPUT->footer();
