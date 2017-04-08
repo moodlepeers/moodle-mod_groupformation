@@ -190,6 +190,8 @@ class mod_groupformation_criterion_calculator {
      * @return array|null
      */
     public function get_values($criterion, $userid, $specs = null) {
+
+
         if (is_null($specs)) {
             $specs = $this->data->get_criterion_specification($criterion);
         }
@@ -216,8 +218,9 @@ class mod_groupformation_criterion_calculator {
                     if ($tempquestionid < 0) {
                         $questionid = abs($tempquestionid);
                         if ($this->usermanager->has_answer($userid, $category, $questionid)) {
+                            $singleanswer = $this->usermanager->get_single_answer($userid, $category, $questionid);
                             $temp = $temp + $this->invert_answer($questionid, $category,
-                                    $this->usermanager->get_single_answer($userid, $category, $questionid));
+                                    $singleanswer);
                         }
                     } else {
                         if ($this->usermanager->has_answer($userid, $category, $questionid)) {
