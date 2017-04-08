@@ -47,7 +47,6 @@ class mod_groupformation_student_overview_controller {
     private $surveystatesarray = array();
     private $groupformationinfo;
     private $surveystatestitle = '';
-    private $view = null;
 
     /**
      * mod_groupformation_student_overview_controller constructor.
@@ -63,8 +62,6 @@ class mod_groupformation_student_overview_controller {
         $this->data = new mod_groupformation_data();
         $this->groupsmanager = new mod_groupformation_groups_manager ($groupformationid);
         $this->usermanager = new mod_groupformation_user_manager ($groupformationid);
-
-        $this->view = new mod_groupformation_template_builder ();
 
         $this->determine_status();
         $this->determine_view();
@@ -281,57 +278,50 @@ class mod_groupformation_student_overview_controller {
         $this->surveystatesarray = $array;
     }
 
-    /**
-     * Generate and return the HTMl Page with templates and data
-     *
-     * @return string
-     */
-    public function display() {
-        $this->determine_status();
-        $this->determine_view();
+    public function load_info() {
+        $assigns = array();
 
-        $this->view->set_template('wrapper_students_overview');
-        $this->view->assign('cmid', $this->cmid);
+        $assigns['cmid'] = $this->cmid;
+        $assigns['student_overview_title'] = $this->store->get_name();
+        $assigns['student_overview_groupformation_info'] = $this->groupformationinfo;
+        $assigns['student_overview_groupformation_status'] = $this->groupformationstateinfo;
 
-        $this->view->assign('student_overview_title', $this->store->get_name());
-        $this->view->assign('student_overview_groupformation_info', $this->groupformationinfo);
-        $this->view->assign('student_overview_groupformation_status', $this->groupformationstateinfo);
+        return $assigns;
+    }
 
-        if ($this->viewstate == 0) {
-            $surveystatsview = new mod_groupformation_template_builder ();
-            $surveystatsview->set_template('students_overview_survey_states');
-            $surveystatsview->assign('survey_states', $this->surveystatesarray);
-            $surveystatsview->assign('questionnaire_answer_stats', $this->surveystatestitle);
-            $surveystatsview->assign('participant_code', $this->store->ask_for_participant_code());
-            $surveystatsview->assign('participant_code_user', $this->usermanager->get_participant_code($this->userid));
+    public function load_statistics() {
+        $assigns = array();
 
-            $this->view->assign('student_overview_survey_state_temp', $surveystatsview->load_template());
-        } else {
-            $this->view->assign('student_overview_survey_state_temp', '');
+        if ($this->viewstate == 0){
+            $assigns['survey_states'] = $this->surveystatesarray;
+            $assigns['questionnaire_answer_stats'] = $this->surveystatestitle;
+            $assigns['participant_code'] = $this->store->ask_for_participant_code();
+            $assigns['participant_code_user'] = $this->usermanager->get_participant_code($this->userid);
+            $assigns[''] = '';
         }
+
+        return $assigns;
+    }
+
+    public function load_settings(){
+        $assigns = array();
 
         if ($this->viewstate == -1 || $this->viewstate == 0) {
-            $surveyoptionsview = new mod_groupformation_template_builder ();
-            $surveyoptionsview->assign('cmid', $this->cmid);
-            $surveyoptionsview->set_template('students_overview_options');
-            $surveyoptionsview->assign('buttons', $this->buttonsarray);
-            $surveyoptionsview->assign('buttons_infos', $this->buttonsinfo);
-            $surveyoptionsview->assign('participant_code', $this->store->ask_for_participant_code());
-            $surveyoptionsview->assign('participant_code_user', $this->usermanager->get_participant_code($this->userid));
-
-            $surveyoptionsview->assign('consentheader', get_string('consent_header', 'groupformation'));
-            $surveyoptionsview->assign('consenttext', get_string('consent_message', 'groupformation'));
-            $surveyoptionsview->assign('consentvalue', $this->usermanager->get_consent($this->userid));
-            $this->view->assign('student_overview_survey_options', $surveyoptionsview->load_template());
+            $assigns['cmid'] = $this->cmid;
+            $assigns['buttons'] = $this->buttonsarray;
+            $assigns['buttons_infos'] = $this->buttonsinfo;
+            $assigns['participant_code'] = $this->store->ask_for_participant_code();
+            $assigns['participant_code_user'] = $this->usermanager->get_participant_code($this->userid);
+            $assigns['consentheader'] = get_string('consent_header', 'groupformation');
+            $assigns['consenttext'] = get_string('consent_message', 'groupformation');
+            $assigns['consentvalue'] = $this->usermanager->get_consent($this->userid);
         } else {
-            $surveyoptionsview = new mod_groupformation_template_builder ();
-            $surveyoptionsview->assign('cmid', $this->cmid);
-            $surveyoptionsview->set_template('students_overview_options');
-            $surveyoptionsview->assign('buttons', $this->buttonsarray);
-            $surveyoptionsview->assign('buttons_infos', $this->buttonsinfo);
-            $this->view->assign('student_overview_survey_options', $surveyoptionsview->load_template());
+            $assigns['cmid'] = $this->cmid;
+            $assigns['buttons'] = $this->buttonsarray;
+            $assigns['buttons_infos'] = $this->buttonsinfo;
         }
-        return $this->view->load_template();
+
+        return $assigns;
     }
 }
 

@@ -25,7 +25,8 @@ require_once(dirname(__FILE__) . '/lib.php');
 require_once(dirname(__FILE__) . '/locallib.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
-require_once($CFG->dirroot . '/mod/groupformation/classes/controller/student_overview_controller.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/controller/overview_controller.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/overview_view_controller.php');
 
 // Read URL params.
 $id = optional_param('id', 0, PARAM_INT); // Course Module ID.
@@ -148,7 +149,9 @@ if ($store->is_archived()) {
     echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
 
     $controller = new mod_groupformation_student_overview_controller ($cm->id, $groupformation->id, $userid);
-    echo $controller->display();
+
+    $viewcontroller = new mod_groupformation_overview_view_controller($groupformation->id,$controller);
+    echo $viewcontroller->render();
 
     echo '</form>';
 

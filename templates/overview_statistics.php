@@ -19,16 +19,18 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 ?>
-<div class="gf_pad_header_small">
-    <?php echo $this->_['questionnaire_answer_stats']; ?>
-</div>
-<div class="gf_pad_content">
-    <p>
-       <?php echo get_string('answers_for_eval_text','groupformation');?>
-    </p>
-    <?php foreach ($this->_['survey_states'] as $row) { ?>
-        <div class="grid row_highlight">
-            <div class="col_m_100"><?php echo $row; ?></div>
-        </div>
-    <?php } ?>
-</div>
+<?php if (array_key_exists('questionnaire_answer_stats',$this->_)): ?>
+    <div class="gf_pad_header_small">
+        <?php echo $this->_['questionnaire_answer_stats']; ?>
+    </div>
+    <div class="gf_pad_content">
+        <p>
+           <?php echo get_string('answers_for_eval_text','groupformation');?>
+        </p>
+        <?php foreach ($this->_['survey_states'] as $row) { ?>
+            <div class="grid row_highlight">
+                <div class="col_m_100"><?php echo $row; ?></div>
+            </div>
+        <?php } ?>
+    </div>
+<?php endif;?>
