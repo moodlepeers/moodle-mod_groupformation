@@ -484,3 +484,5 @@ $string['page_title_grouping'] = 'Group formation';
 $string['page_title_group'] = 'Group assignment';
 $string['page_title_grouping_edit'] = 'Group formation - Edit mode';
 $string['noGroup'] = 'You haven\'t been assigned any group because you did not answer the questionnaire.';
+
+
