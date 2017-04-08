@@ -111,7 +111,7 @@ class mod_groupformation_analysis_controller {
      *
      * @return array
      */
-    public function load_analysis_statistics(){
+    public function load_statistics(){
         $assigns = array();
 
         $usermanager = $this->usermanager;
@@ -152,7 +152,7 @@ class mod_groupformation_analysis_controller {
      *
      * @return array
      */
-    public function load_analysis_info(){
+    public function load_info(){
         $activitytime = $this->store->get_time();
 
         $starttime = $activitytime ['start'];

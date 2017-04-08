@@ -227,7 +227,7 @@ class mod_groupformation_grouping_controller {
         }
     }
 
-    public function load_grouping_settings() {
+    public function load_settings() {
         $assigns = array();
 
         $array = array(
@@ -320,7 +320,7 @@ class mod_groupformation_grouping_controller {
         return $assigns;
     }
 
-    public function load_grouping_statistics() {
+    public function load_statistics() {
         $assigns = array();
         if ($this->viewstate == 4 || $this->viewstate == 5) {
 
@@ -334,7 +334,7 @@ class mod_groupformation_grouping_controller {
         return $assigns;
     }
 
-    public function load_grouping_generated_groups() {
+    public function load_generated_groups() {
         $assigns = array();
 
         $topics = $this->store->ask_for_topics();

@@ -65,7 +65,7 @@ class mod_groupformation_analysis_view_controller extends mod_groupformation_bas
     public function render_analysis_info() {
         $overviewoptions = new mod_groupformation_template_builder();
         $overviewoptions->set_template('analysis_info');
-        $overviewoptions->assign_multiple($this->controller->load_analysis_info());
+        $overviewoptions->assign_multiple($this->controller->load_info());
 
         return $overviewoptions->load_template();
     }
@@ -73,7 +73,7 @@ class mod_groupformation_analysis_view_controller extends mod_groupformation_bas
     public function render_analysis_statistics() {
         $overviewoptions = new mod_groupformation_template_builder();
         $overviewoptions->set_template('analysis_statistics');
-        $overviewoptions->assign_multiple($this->controller->load_analysis_statistics());
+        $overviewoptions->assign_multiple($this->controller->load_statistics());
 
         return $overviewoptions->load_template();
     }
@@ -81,7 +81,7 @@ class mod_groupformation_analysis_view_controller extends mod_groupformation_bas
     public function render_analysis_topics() {
         $overviewoptions = new mod_groupformation_template_builder();
         $overviewoptions->set_template('analysis_topics');
-        $overviewoptions->assign_multiple($this->controller->load_analysis_statistics());
+        $overviewoptions->assign_multiple($this->controller->load_statistics());
 
         return $overviewoptions->load_template();
     }

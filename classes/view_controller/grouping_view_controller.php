@@ -64,7 +64,7 @@ class mod_groupformation_grouping_view_controller extends mod_groupformation_bas
     public function render_grouping_settings() {
         $overviewoptions = new mod_groupformation_template_builder();
         $overviewoptions->set_template('grouping_settings');
-        $overviewoptions->assign_multiple($this->controller->load_grouping_settings());
+        $overviewoptions->assign_multiple($this->controller->load_settings());
 
         return $overviewoptions->load_template();
     }
@@ -72,7 +72,7 @@ class mod_groupformation_grouping_view_controller extends mod_groupformation_bas
     public function render_grouping_statistics() {
         $overviewoptions = new mod_groupformation_template_builder();
         $overviewoptions->set_template('grouping_statistics');
-        $overviewoptions->assign_multiple($this->controller->load_grouping_statistics());
+        $overviewoptions->assign_multiple($this->controller->load_statistics());
 
         return $overviewoptions->load_template();
     }
@@ -80,7 +80,7 @@ class mod_groupformation_grouping_view_controller extends mod_groupformation_bas
     public function render_grouping_generated_groups() {
         $overviewoptions = new mod_groupformation_template_builder();
         $overviewoptions->set_template('grouping_generated_groups');
-        $overviewoptions->assign_multiple($this->controller->load_grouping_generated_groups());
+        $overviewoptions->assign_multiple($this->controller->load_generated_groups());
 
         return $overviewoptions->load_template();
     }
