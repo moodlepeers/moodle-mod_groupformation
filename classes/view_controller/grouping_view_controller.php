@@ -22,15 +22,14 @@
  */
 defined('MOODLE_INTERNAL') || die();
 
-// require_once($CFG->dirroot . '/blocks/pseudolearner/classes/controller/instance_controller.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/basic_view_controller.php');
 
-class mod_groupformation_analysis_view_controller extends mod_groupformation_basic_view_controller {
+class mod_groupformation_grouping_view_controller extends mod_groupformation_basic_view_controller {
 
     /** @var array Template names */
-    protected $templatenames = array('analysis_info', 'analysis_statistics'); //, 'analysis_topics');
+    protected $templatenames = array('grouping_settings', 'grouping_statistics', 'grouping_generated_groups'); //, 'analysis_topics');
     /** @var string Title of page */
-    protected $title = 'analysis';
+    protected $title = 'grouping';
 
     public function __construct($groupformationid, $controller) {
         parent::__construct($groupformationid, $controller);
@@ -62,26 +61,26 @@ class mod_groupformation_analysis_view_controller extends mod_groupformation_bas
      *
      * @return string
      */
-    public function render_analysis_info() {
+    public function render_grouping_settings() {
         $overviewoptions = new mod_groupformation_template_builder();
-        $overviewoptions->set_template('analysis_info');
-        $overviewoptions->assign_multiple($this->controller->load_analysis_info());
+        $overviewoptions->set_template('grouping_settings');
+        $overviewoptions->assign_multiple($this->controller->load_grouping_settings());
 
         return $overviewoptions->load_template();
     }
 
-    public function render_analysis_statistics() {
+    public function render_grouping_statistics() {
         $overviewoptions = new mod_groupformation_template_builder();
-        $overviewoptions->set_template('analysis_statistics');
-        $overviewoptions->assign_multiple($this->controller->load_analysis_statistics());
+        $overviewoptions->set_template('grouping_statistics');
+        $overviewoptions->assign_multiple($this->controller->load_grouping_statistics());
 
         return $overviewoptions->load_template();
     }
 
-    public function render_analysis_topics() {
+    public function render_grouping_generated_groups() {
         $overviewoptions = new mod_groupformation_template_builder();
-        $overviewoptions->set_template('analysis_topics');
-        $overviewoptions->assign_multiple($this->controller->load_analysis_statistics());
+        $overviewoptions->set_template('grouping_generated_groups');
+        $overviewoptions->assign_multiple($this->controller->load_grouping_generated_groups());
 
         return $overviewoptions->load_template();
     }

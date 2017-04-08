@@ -25,10 +25,18 @@
 </div>
 
 <div class="gf_pad_content">
-    <p>
-        <?php echo get_string('number_of_groups', 'groupformation') . ' '; ?> <b><?php echo $this->_['numbOfGroups']; ?></b>
-    </p>
-    <p>
-        <?php echo get_string('max_group_size', 'groupformation') . ' '; ?> <b><?php echo $this->_['maxSize']; ?></b>
-    </p>
+    <?php if (array_key_exists('grouping_no_data',$this->_)): ?>
+        <p style="opacity: 0.5; margin-left: 4px;">
+            <i>
+                <?php echo $this->_['grouping_no_data']; ?>
+            </i>
+        </p>
+    <?php else: ?>
+        <p>
+            <?php echo get_string('number_of_groups', 'groupformation') . ' '; ?> <b><?php echo $this->_['numbOfGroups']; ?></b>
+        </p>
+        <p>
+            <?php echo get_string('max_group_size', 'groupformation') . ' '; ?> <b><?php echo $this->_['maxSize']; ?></b>
+        </p>
+    <?php endif; ?>
 </div>

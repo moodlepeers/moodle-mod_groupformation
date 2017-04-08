@@ -24,40 +24,48 @@
     <?php echo get_string('group_overview', 'groupformation'); ?>
 </div>
 <div class="groupsbuilt_body gf_pad_content">
-    <?php foreach ($this->_ as $entry): ?>
+    <?php if (array_key_exists('grouping_no_data',$this->_)): ?>
+        <p style="opacity: 0.5; margin-left: 4px;">
+            <i>
+                <?php echo $this->_['grouping_no_data']; ?>
+            </i>
+        </p>
+    <?php else: ?>
+        <?php foreach ($this->_ as $entry): ?>
 
-        <div class="grid bottom_stripe">
-            <div class="col_m_75">
-                <div class="group_params">
-                    <b><?php echo get_string('name_by_group', 'groupformation') . ' '; ?></b> <?php echo $entry['groupname']; ?>
-                </div>
-                <br>
-                <?php if (strlen($entry['topic']) > 0) { ?>
+            <div class="grid bottom_stripe">
+                <div class="col_m_75">
                     <div class="group_params">
-                        <b><?php echo get_string('topic', 'groupformation') . ": "; ?></b> <?php echo $entry['topic']; ?>
+                        <b><?php echo get_string('name_by_group', 'groupformation') . ' '; ?></b> <?php echo $entry['groupname']; ?>
                     </div>
-                <?php } ?>
-            </div>
-            <div class="col_m_25 bp_align_right-middle">
-                <a href="<?php echo $entry['grouplink'][0]; ?>">
-                    <?php if (!$entry['grouplink'][1] == 'disabled') { ?>
-                        <span class="gf_button gf_button_pill gf_button_tiny">
-                <?php echo get_string('go_to_group_view', 'groupformation'); ?>
-                </span>
-                    <?php } else { ?>
-                        <button class="gf_button gf_button_pill gf_button_tiny" disabled>
-                            <?php echo get_string('go_to_group_view', 'groupformation'); ?>
-                        </button>
+                    <br>
+                    <?php if (strlen($entry['topic']) > 0) { ?>
+                        <div class="group_params">
+                            <b><?php echo get_string('topic', 'groupformation') . ": "; ?></b> <?php echo $entry['topic']; ?>
+                        </div>
                     <?php } ?>
-                </a>
-            </div>
-            <div class="col_s_100 gf_group_links">
+                </div>
+                <div class="col_m_25 bp_align_right-middle">
+                    <a href="<?php echo $entry['grouplink'][0]; ?>">
+                        <?php if (!$entry['grouplink'][1] == 'disabled') { ?>
+                            <span class="gf_button gf_button_pill gf_button_tiny">
+                    <?php echo get_string('go_to_group_view', 'groupformation'); ?>
+                    </span>
+                        <?php } else { ?>
+                            <button class="gf_button gf_button_pill gf_button_tiny" disabled>
+                                <?php echo get_string('go_to_group_view', 'groupformation'); ?>
+                            </button>
+                        <?php } ?>
+                    </a>
+                </div>
+                <div class="col_s_100 gf_group_links">
 
-                <?php foreach ($entry['group_members'] as $user) { ?>
-                    <a href="<?php echo $user['link']; ?>"><?php echo $user['name']; ?></a>
-                <?php } ?>
+                    <?php foreach ($entry['group_members'] as $user) { ?>
+                        <a href="<?php echo $user['link']; ?>"><?php echo $user['name']; ?></a>
+                    <?php } ?>
 
+                </div>
             </div>
-        </div>
-    <?php endforeach;?>
+        <?php endforeach;?>
+    <?php endif; ?>
     </div>
