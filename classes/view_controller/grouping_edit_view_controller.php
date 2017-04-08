@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * Class mod_groupformation_grouping_view_controller
+ * Class mod_groupformation_grouping_edit_view_controller
  *
  * @package mod_groupformation
  * @author Rene Roepke
@@ -24,22 +24,22 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/basic_view_controller.php');
 
-class mod_groupformation_grouping_view_controller extends mod_groupformation_basic_view_controller {
+class mod_groupformation_grouping_edit_view_controller extends mod_groupformation_basic_view_controller {
 
     /** @var array Template names */
-    protected $templatenames = array('grouping_settings', 'grouping_statistics', 'grouping_generated_groups'); //, 'analysis_topics');
+    protected $templatenames = array('grouping_edit_header', 'grouping_edit_groups'); //, 'analysis_topics');
     /** @var string Title of page */
-    protected $title = 'grouping';
+    protected $title = 'grouping_edit';
 
     /**
      * Renders 'grouping_settings' template.
      *
      * @return string
      */
-    public function render_grouping_settings() {
+    public function render_grouping_edit_header() {
         $overviewoptions = new mod_groupformation_template_builder();
-        $overviewoptions->set_template('grouping_settings');
-        $overviewoptions->assign_multiple($this->controller->load_settings());
+        $overviewoptions->set_template('grouping_edit_header');
+        $overviewoptions->assign_multiple($this->controller->load_edit_header());
 
         return $overviewoptions->load_template();
     }
@@ -49,23 +49,10 @@ class mod_groupformation_grouping_view_controller extends mod_groupformation_bas
      *
      * @return string
      */
-    public function render_grouping_statistics() {
+    public function render_grouping_edit_groups() {
         $overviewoptions = new mod_groupformation_template_builder();
-        $overviewoptions->set_template('grouping_statistics');
-        $overviewoptions->assign_multiple($this->controller->load_statistics());
-
-        return $overviewoptions->load_template();
-    }
-
-    /**
-     * Renders 'grouping_generated_groups' template
-     *
-     * @return string
-     */
-    public function render_grouping_generated_groups() {
-        $overviewoptions = new mod_groupformation_template_builder();
-        $overviewoptions->set_template('grouping_generated_groups');
-        $overviewoptions->assign_multiple($this->controller->load_generated_groups());
+        $overviewoptions->set_template('grouping_edit_groups');
+        $overviewoptions->assign_multiple($this->controller->load_edit_groups());
 
         return $overviewoptions->load_template();
     }

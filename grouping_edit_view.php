@@ -51,8 +51,10 @@ if (!has_capability('mod/groupformation:editsettings', $context)) {
 }
 
 // Get data for HTML output.
-require_once(dirname(__FILE__) . '/classes/moodle_interface/storage_manager.php');
-require_once(dirname(__FILE__) . '/classes/controller/grouping_controller.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/controller/grouping_controller.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/grouping_edit_view_controller.php');
+
 $store = new mod_groupformation_storage_manager ($groupformation->id);
 
 // Set data and viewStatus of groupingView, after possible db update.
@@ -92,7 +94,8 @@ if ($store->is_archived() && has_capability('mod/groupformation:editsettings', $
     echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
     echo '<input type="hidden" name="id" value="' . $id . '"/>';
 
-    echo $controller->display_edit();
+    $viewcontroller = new mod_groupformation_grouping_edit_view_controller($groupformation->id,$controller);
+    echo $viewcontroller->render();
 
     echo '</form>';
 }

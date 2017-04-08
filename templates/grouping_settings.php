@@ -30,6 +30,7 @@
             <div class="col_m_100 alert"><?php echo get_string('onlyactivestudents_info', 'groupformation', $a); ?></div>
         </div>
     <?php endif; ?>
+
     <div class="grid">
         <div class="col_m_87-5">
             <?php echo get_string('are', 'groupformation'); ?>

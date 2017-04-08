@@ -44,7 +44,7 @@ abstract class mod_groupformation_basic_view_controller {
     /**
      * block_pseudolearner_basic_controller constructor.
      *
-     * @param $courseid
+     * @param $groupformationid
      * @param $controller
      */
     public function __construct($groupformationid, $controller) {
@@ -78,28 +78,4 @@ abstract class mod_groupformation_basic_view_controller {
 
         return $this->view->load_template();
     }
-
-    /**
-     * Renders options.
-     *
-     * @return string
-     */
-    public function render_options() {
-        $overviewoptions = new block_pseudolearner_template_builder();
-        $overviewoptions->set_template('options');
-        $overviewoptions->assign('id', $this->groupformationid);
-
-        $buttons = $this->get_option_buttons();
-
-        $overviewoptions->assign('buttons', $buttons);
-
-        return $overviewoptions->load_template();
-    }
-
-    /**
-     * Returns all option buttons.
-     *
-     * @return array
-     */
-    public abstract function get_option_buttons();
 }

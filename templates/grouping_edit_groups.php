@@ -19,6 +19,8 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 ?>
+
+
 <div style="display:none;">
             <textarea id="groups_string" name="groups_string" cols="35"
                       rows="<?php echo count($this->_) - 2 ?>">

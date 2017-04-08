@@ -481,3 +481,4 @@ $string['answers_for_eval_text'] = 'If all questions are answered, you can recei
 
 $string['page_title_analysis'] = 'Activity';
 $string['page_title_grouping'] = 'Group formation';
+$string['page_title_grouping_edit'] = 'Group formation - Edit mode';
