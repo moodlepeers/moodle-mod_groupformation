@@ -61,6 +61,17 @@ class mod_groupformation_template_builder {
         $this->_[$key] = $value;
     }
 
+    /**
+     * Assigns multiple values according to an associative array
+     *
+     * @param $map
+     */
+    public function assign_multiple($map) {
+        foreach($map as $key => $value) {
+            $this->_[$key] = $value;
+        }
+    }
+
 
     /**
      * Sets template name

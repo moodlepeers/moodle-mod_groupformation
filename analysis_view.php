@@ -78,6 +78,7 @@ $PAGE->set_heading(format_string($course->fullname));
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/job_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/controller/analysis_controller.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_parser.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/analysis_view_controller.php');
 
 if ($CFG->debug === 32767 && $resetjob) {
     global $DB;
@@ -91,8 +92,16 @@ if ($CFG->debug === 32767 && $runjob) {
 
     $job = $jm::get_job($groupformation->id);
 
+    function print_array($aArray) {
+        // Print a nicely formatted array representation:
+        echo '<pre>';
+        print_r($aArray);
+        echo '</pre>';
+    }
+
     if (!is_null($job)) {
         $result = $jm::do_groupal($job);
+        print_array($result);
         // $saved = $jm::save_result($job,$result);
     }
 }
@@ -115,15 +124,6 @@ if ($CFG->debug === 32767) {
 }
 
 $controller = new mod_groupformation_analysis_controller ($groupformation->id, $cm);
-
-/* ---- Code for fixing Answers can be removed after 15-09-2016 ---- */
-if ($CFG->debug === 32767 && $fixanswers) {
-    $controller->fix_answers();
-    echo '<div class="alert">Answers fixed - do not repeat this action!</div>';
-    $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
-        'id' => $id, 'do_show' => 'analysis'));
-    redirect($return->out());
-}
 
 if ((data_submitted()) && confirm_sesskey()) {
     $switcher = optional_param('questionnaire_switcher', null, PARAM_INT);
@@ -154,7 +154,8 @@ if ($store->is_archived() && has_capability('mod/groupformation:editsettings', $
     echo '<input type="hidden" name="id" value="' . $id . '"/>';
     echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
 
-    echo $controller->display();
+    $viewcontroller = new mod_groupformation_analysis_view_controller($groupformation->id,$controller);
+    echo $viewcontroller->render();
 
     echo '</form>';
 }

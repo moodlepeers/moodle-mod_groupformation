@@ -15,23 +15,20 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
  * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @author Rene Roepke
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+defined('MOODLE_INTERNAL') || die();
+
 ?>
+
+<link href="styles.css" rel="stylesheet">
 <div class="gf_settings_pad">
-    <div class="gf_pad_header"><?php echo get_string('activity', 'groupformation'); ?>
-        - <?php echo $this->_['analysis_name']; ?>
+    <div class="gf_pad_header">
+        <?php echo $this->_['title']; ?>
     </div>
-    <div class="gf_pad_content">
-
-        <?php echo $this->_['analysis_status_template']; ?>
-    </div>
-
-    <div class="gf_pad_header_small">
-        <?php echo get_string('statistic', 'groupformation'); ?>
-    </div>
-    <div class="gf_pad_content">
-        <?php echo $this->_['analysis_statistics_template']; ?>
-    </div>
+    <?php foreach ($this->_['templates'] as $template): ?>
+        <?php echo $template; ?>
+    <?php endforeach; ?>
 </div>

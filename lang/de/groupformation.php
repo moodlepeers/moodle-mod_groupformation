@@ -484,4 +484,4 @@ $string['settings_participant_code_description'] = 'Studierende müssen einen Te
 
 $string['answers_for_eval_text'] = 'Wenn alle Fragen beantwortet sind, wird im Reiter Evaluation eine Auswertung angezeigt. Bei unvollständiger Bearbeitung des Fragebogens steht diese Funktion nicht zur Verfügung.';
 
-
+$string['page_title_analysis'] = 'Aktivität';

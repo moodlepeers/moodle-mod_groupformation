@@ -58,7 +58,7 @@ class mod_groupformation_participant_parser {
             $participant = null;
 
             foreach ($labels as $label) {
-                $value = $user->$label;
+                $value = abs($user->$label);
                 $homogen = $value["homogeneous"];
                 unset ($value["homogeneous"]);
                 $minval = 0.0;

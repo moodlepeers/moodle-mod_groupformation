@@ -479,3 +479,4 @@ $string['settings_participant_code_description'] = 'Students need to enter a par
 
 $string['answers_for_eval_text'] = 'If all questions are answered, you can receive feedback in the evaluation tab. If your answers are incomplete the evaluation is not possible due to missing answers.';
 
+$string['page_title_analysis'] = 'Activity';

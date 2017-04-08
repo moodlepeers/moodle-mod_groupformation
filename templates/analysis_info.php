@@ -14,12 +14,17 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @package block_pseudolearner
+ * @author Rene Roepke
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+defined('MOODLE_INTERNAL') || die();
+
+global $USER;
 ?>
-<div class="grid">
+
+<div class="gf_pad_content">
     <div class="col_m_100 bp_align_left-middle">
         <span><?php echo $this->_['info_teacher']; ?></span><br>
         <span><i></i></span>
@@ -38,7 +43,7 @@
                 name="<?php echo $this->_['button']['name']; ?>"
                 value="<?php echo $this->_['button']['value']; ?>"
                 class="gf_button gf_button_pill gf_button_small"
-            <?php echo $this->_['button']['state']; ?>
+                <?php echo $this->_['button']['state']; ?>
         >
             <?php echo $this->_['button']['text']; ?>
         </button>
