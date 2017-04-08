@@ -26,6 +26,7 @@ require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
 require_once(dirname(__FILE__) . '/lib.php');
 require_once(dirname(__FILE__) . '/locallib.php');
 require_once($CFG->dirroot . "/mod/groupformation/classes/controller/evaluation_controller.php");
+require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/evaluation_view_controller.php');
 
 // Read URL params.
 $id = optional_param('id', 0, PARAM_INT);
@@ -78,11 +79,10 @@ if (groupformation_get_current_questionnaire_version() > $store->get_version()) 
 if ($store->is_archived()) {
     echo '<div class="alert" id="commited_view">'.get_string('archived_activity_answers', 'groupformation') . '</div>';
 } else {
-    $evaluator = new mod_groupformation_evaluation_controller($groupformation->id);
-    echo $evaluator->render($userid);
+    $controller = new mod_groupformation_evaluation_controller($groupformation->id);
+
+    $viewcontroller = new mod_groupformation_evaluation_view_controller($groupformation->id,$controller);
+    echo $viewcontroller->render();
 }
 
 echo $OUTPUT->footer();
-// echo '<link rel="stylesheet" href=".css">';
-// echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">';
-
