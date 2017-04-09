@@ -25,9 +25,13 @@ defined('MOODLE_INTERNAL') || die();
 
 <link href="styles.css" rel="stylesheet">
 <div class="gf_settings_pad">
-    <div class="gf_pad_header">
-        <?php echo $this->_['title'] . (array_key_exists('title_append',$this->_)?$this->_['title_append']:""); ?>
-    </div>
+
+    <?php if (!is_null($this->_['title'])): ?>
+        <div class="gf_pad_header">
+            <?php echo $this->_['title'] . (array_key_exists('title_append',$this->_)?$this->_['title_append']:""); ?>
+        </div>
+    <?php endif; ?>
+
     <?php foreach ($this->_['templates'] as $template): ?>
         <?php echo $template; ?>
     <?php endforeach; ?>

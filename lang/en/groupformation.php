@@ -481,9 +481,12 @@ $string['answers_for_eval_text'] = 'If all questions are answered, you can recei
 
 $string['page_title_analysis'] = 'Activity';
 $string['page_title_overview'] = 'Overview';
+$string['page_title_evaluation'] = 'Evaluation';
+$string['page_title_export'] = 'Export';
 $string['page_title_grouping'] = 'Group formation';
 $string['page_title_group'] = 'Group assignment';
 $string['page_title_grouping_edit'] = 'Group formation - Edit mode';
+$string['page_title_import_export'] = 'Import & Export';
 $string['noGroup'] = 'You haven\'t been assigned any group because you did not answer the questionnaire.';
 
 

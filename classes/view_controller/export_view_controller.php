@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * Class mod_groupformation_evaluation_view_controller
+ * Class mod_groupformation_export_view_controller
  *
  * @package mod_groupformation
  * @author Rene Roepke
@@ -24,25 +24,31 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/basic_view_controller.php');
 
-class mod_groupformation_evaluation_view_controller extends mod_groupformation_basic_view_controller {
+class mod_groupformation_export_view_controller extends mod_groupformation_basic_view_controller {
 
     /** @var array Template names */
-    protected $templatenames = array('evaluation_info'); //, 'evaluation_topics');
+    protected $templatenames = array('export_info');
     /** @var string Title of page */
-    protected $title = 'evaluation';
+    protected $title = 'export';
 
+    /**
+     * mod_groupformation_export_view_controller constructor.
+     *
+     * @param $groupformationid
+     * @param $controller
+     */
     public function __construct($groupformationid, $controller) {
         parent::__construct($groupformationid, $controller);
     }
 
     /**
-     * Renders 'evaluation_info' template.
+     * Renders 'export_info' template.
      *
      * @return string
      */
-    public function render_evaluation_info() {
+    public function render_export_info() {
         $overviewoptions = new mod_groupformation_template_builder();
-        $overviewoptions->set_template('evaluation_info');
+        $overviewoptions->set_template('export_info');
         $overviewoptions->assign_multiple($this->controller->load_info());
 
         return $overviewoptions->load_template();

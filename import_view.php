@@ -72,7 +72,9 @@ $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 
 $cancel = optional_param('cancel', null, PARAM_BOOL);
+
 if (isset($cancel) && $cancel) {
+
     // Handle form cancel operation.
     $returnurl = new moodle_url('/mod/groupformation/import_export_view.php', array('id' => $id, 'do_show' => 'import_export'));
     redirect($returnurl);

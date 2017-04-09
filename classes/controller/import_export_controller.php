@@ -78,18 +78,12 @@ class mod_groupformation_import_export_controller {
         return $this->save_file_and_get_url($fileinfo, $content);
     }
 
-    /**
-     * Renders import and export options
-     *
-     * @param $userid
-     * @return string
-     * @throws coding_exception
-     */
-    public function render_overview($userid) {
-        global $DB;
+    public function load_info() {
+        global $USER;
 
-        $this->view = new mod_groupformation_template_builder ();
-        $this->view->set_template('wrapper_student_import_export');
+        $assigns = array();
+
+        $userid = $USER->id;
 
         $exportdescription = get_string('export_description_no', 'groupformation');
         $exportbutton = false;
@@ -115,17 +109,17 @@ class mod_groupformation_import_export_controller {
 
         }
 
-        $this->view->assign('export_description', $exportdescription);
-        $this->view->assign('export_button', $exportbutton);
-        $this->view->assign('export_url', $exporturl);
+        $assigns['export_description'] = $exportdescription;
+        $assigns['export_button'] = $exportbutton;
+        $assigns['export_url'] = $exporturl;
 
-        $this->view->assign('import_description', $importdescription);
+        $assigns['import_description'] = $importdescription;
         $url = new moodle_url ('/mod/groupformation/import_view.php', array(
                 'id' => $this->cmid));
-        $this->view->assign('import_form', $url->out());
-        $this->view->assign('import_button', $importbutton);
+        $assigns['import_form'] = $url->out();
+        $assigns['import_button'] = $importbutton;
 
-        return $this->view->load_template();
+        return $assigns;
     }
 
     /**

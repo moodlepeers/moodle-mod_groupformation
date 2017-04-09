@@ -19,15 +19,15 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 ?>
-<div class="gf_settings_pad">
-    <div class="gf_pad_header"><?php echo get_string('export', 'groupformation'); ?></div>
-    <div class="gf_pad_content">
-        <p><?php echo $this->_['export_users']; ?></p>
-        <p>
-            <a href="<?php echo $this->_['export_users_url']; ?>" target="_blank">
-                <span class="gf_button gf_button_pill gf_button_small">
-                    <?php echo get_string('export', 'groupformation'); ?>
-                </span></a>
-        </p>
-    </div>
+<div class="gf_pad_content">
+    <p>
+        <?php echo $this->_['export_users']; ?>
+    </p>
+    <p>
+        <a href="<?php echo $this->_['export_users_url']; ?>" target="_blank">
+            <span class="gf_button gf_button_pill gf_button_small">
+                <?php echo get_string('export', 'groupformation'); ?>
+            </span>
+        </a>
+    </p>
 </div>

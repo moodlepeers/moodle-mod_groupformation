@@ -26,6 +26,7 @@ require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
 require_once(dirname(__FILE__) . '/lib.php');
 require_once(dirname(__FILE__) . '/locallib.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/controller/import_export_controller.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/import_export_view_controller.php');
 
 // Read URL params.
 $id = optional_param('id', 0, PARAM_INT);
@@ -65,6 +66,7 @@ if ($store->is_archived()) {
     echo '<div class="alert" id="commited_view">' . get_string('archived_activity_answers', 'groupformation') . '</div>';
 } else {
     $controller = new mod_groupformation_import_export_controller($groupformation->id, $cm);
-    echo $controller->render_overview($userid);
+    $viewcontroller = new mod_groupformation_import_export_view_controller($groupformation->id, $controller);
+    echo $viewcontroller->render();
 }
 echo $OUTPUT->footer();
