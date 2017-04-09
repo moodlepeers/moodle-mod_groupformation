@@ -492,3 +492,8 @@ $string['page_title_evaluation'] = 'Evaluation';
 $string['page_title_import_export'] = 'Import & Export';
 $string['page_title_grouping_edit'] = 'Gruppenbildung - Bearbeitungsmodus';
 $string['noGroup'] = 'Du wurdest einer Gruppe zugewiesen, da du den Fragebogen nicht beantwortet hast.';
+$string['page_title_export'] = 'Export';
+
+$string['topics_statistics'] = 'Statistik über angebotene Themen';
+$string['topics_statistics_score'] = 'Wert [0-1]';
+$string['topics_statistics_description'] = 'Die folgenden Werte stellen eine Statistik dar, wie beliebt die angebotenen Themen sind. Ein Thema mit einem höheren Wert ist beliebter als ein Thema mit niedrigen Wert.';

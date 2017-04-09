@@ -26,8 +26,6 @@
  */
 defined('MOODLE_INTERNAL') || die ();
 
-require_once($CFG->dirroot.'/mod/groupformation/classes/controller/logging_controller.php');
-
 /**
  * Adds jQuery
  *

@@ -111,7 +111,7 @@ class mod_groupformation_analysis_controller {
      *
      * @return array
      */
-    public function load_statistics(){
+    public function load_statistics() {
         $assigns = array();
 
         $usermanager = $this->usermanager;
@@ -152,7 +152,7 @@ class mod_groupformation_analysis_controller {
      *
      * @return array
      */
-    public function load_info(){
+    public function load_info() {
         $activitytime = $this->store->get_time();
 
         $starttime = $activitytime ['start'];
@@ -196,6 +196,32 @@ class mod_groupformation_analysis_controller {
         $assigns['analysis_status_info'] =
                 get_string('analysis_status_info' . strval($this->state), 'groupformation')
         ;
+
+        return $assigns;
+    }
+
+    public function load_topic_statistics() {
+        $assigns = array();
+
+        $topics = $this->store->ask_for_topics();
+        $options = null;
+        if ($topics) {
+            $xmlcontent = $this->store->get_knowledge_or_topic_values('topic');
+            $xmlcontent = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $xmlcontent . ' </OPTIONS>';
+            $options = mod_groupformation_util::xml_to_array($xmlcontent);
+        }
+
+        $topics = array();
+
+        foreach($options as $key => $option){
+            $topic = new stdClass();
+            $topic->name = $option;
+            $topic->score = $this->usermanager->get_topic_score($key + 1);
+
+            $topics[] = $topic;
+        }
+
+        $assigns['topics'] = $topics;
 
         return $assigns;
     }

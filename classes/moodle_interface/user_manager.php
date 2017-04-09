@@ -705,4 +705,21 @@ class mod_groupformation_user_manager {
         $data->timecompleted = time();
         $DB->update_record('groupformation_started', $data);
     }
+
+    public function get_topic_score($topic_number) {
+        global $DB;
+
+        $score = 0;
+
+        $questionid = $topic_number;
+
+        $num = $this->store->get_number('topic');
+
+        $answers = $DB->get_records('groupformation_answer',array('groupformation' => $this->groupformationid, 'category' => 'topic', 'questionid' => $questionid));
+
+        foreach ($answers as $answer) {
+            $score += $answer->answer;
+        }
+        return ($score / count($answers))/$num;
+    }
 }

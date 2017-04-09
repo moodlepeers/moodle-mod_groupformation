@@ -25,11 +25,39 @@ global $USER;
 ?>
 
 <div class="gf_pad_header_small">
-    <?php echo get_string('topics', 'groupformation'); ?>
+    <?php echo get_string('topics_statistics', 'groupformation'); ?>
 </div>
 
 <div class="gf_pad_content">
     <p>
-        --- Currently under development ---
+        <?php echo get_string('topics_statistics_description', 'groupformation'); ?>
+    </p>
+    <p>
+        <div>
+            <table class="table table-sm table-striped table-responsive">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th class="col-md-2"><?php echo get_string('topics_dummy', 'groupformation');?></th>
+                    <th><?php echo get_string('topics_statistics_score', 'groupformation')?></th>
+                </tr>
+                </thead>
+                <tbody>
+                    <?php $i = 1; ?>
+                    <?php foreach($this->_['topics'] as $topic): ?>
+                        <tr>
+                            <th scope="row"><?php echo $i; ?></th>
+                            <td>
+                                <?php echo $topic->name; ?>
+                            </td>
+                            <td>
+                                <?php echo round($topic->score,2); ?>
+                            </td>
+                        </tr>
+                        <?php $i+=1; ?>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     </p>
 </div>
