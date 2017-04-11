@@ -485,6 +485,7 @@ class mod_groupformation_grouping_controller {
      */
     private function get_group_members($groupid) {
         global $CFG, $COURSE;
+
         $userids = array_keys($this->groups[$groupid]->users);
 
         $groupmembers = array();

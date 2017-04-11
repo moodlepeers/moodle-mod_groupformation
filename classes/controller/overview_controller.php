@@ -293,6 +293,7 @@ class mod_groupformation_student_overview_controller {
         $assigns = array();
 
         if ($this->viewstate == 0){
+            $assigns['ask_for_topics'] = $this->store->ask_for_topics();
             $assigns['survey_states'] = $this->surveystatesarray;
             $assigns['questionnaire_answer_stats'] = $this->surveystatestitle;
             $assigns['participant_code'] = $this->store->ask_for_participant_code();

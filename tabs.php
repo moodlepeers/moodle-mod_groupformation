@@ -66,7 +66,7 @@ if (has_capability('mod/groupformation:editsettings', $context)) {
     $row [] = new tabobject ('view', $questionnaireviewurl->out(), get_string('tab_preview', 'groupformation'));
 
     // The import/export view.
-    if (true) {
+    if (false) {
         $exporturl = new moodle_url ('/mod/groupformation/export_view.php', array(
             'id' => $usedid, 'do_show' => 'export'));
         $row [] = new tabobject ('export', $exporturl->out(), 'Export');
@@ -89,13 +89,13 @@ if (has_capability('mod/groupformation:editsettings', $context)) {
     }
 
     // Evaluation view.
-
-    $evaluationurl = new moodle_url ('/mod/groupformation/evaluation_view.php', array(
-        'id' => $usedid,
-        'do_show' => 'evaluation'
-    ));
-    $row [] = new tabobject ('evaluation', $evaluationurl->out(), get_string('tab_evaluation', 'groupformation'));
-
+    if (!$store->ask_for_topics()) {
+        $evaluationurl = new moodle_url ('/mod/groupformation/evaluation_view.php', array(
+                'id' => $usedid,
+                'do_show' => 'evaluation'
+        ));
+        $row [] = new tabobject ('evaluation', $evaluationurl->out(), get_string('tab_evaluation', 'groupformation'));
+    }
 
     // The group view.
     $groupurl = new moodle_url ('/mod/groupformation/group_view.php', array(

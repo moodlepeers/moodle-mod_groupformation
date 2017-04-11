@@ -25,7 +25,9 @@
     </div>
     <div class="gf_pad_content">
         <p>
-           <?php echo get_string('answers_for_eval_text','groupformation');?>
+            <?php if(!$this->_['ask_for_topics']): ?>
+                <?php echo get_string('answers_for_eval_text','groupformation');?>
+            <?php endif; ?>
         </p>
         <?php foreach ($this->_['survey_states'] as $row) { ?>
             <div class="grid row_highlight">
