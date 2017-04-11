@@ -81,7 +81,7 @@
 
 .path-mod-groupformation .settings_info p {
     background-color: #d9edf7;
-    color: #31708f;
+    /*color: #31708f;*/
     border: 1px solid #bce8f1;
     border-radius: 4px;
     padding: 8px 35px 8px 14px;
@@ -217,14 +217,6 @@
     pointer-events: none;
 }
 
-.path-mod-groupformation a {
-    color: #337aa8;
-}
-
-a:hover, a:focus {
-    color: #4b8ab2;
-}
-
 /* =============================
     survey style
 ===============================*/
@@ -348,7 +340,6 @@ a:hover, a:focus {
     height: 30px;
     float: left;
 }
-
 
 .path-mod-groupformation .legend {
     font-size: 0.8em;

@@ -337,7 +337,7 @@ $string['students_selected'] = 'Teilnehmer ausgewählt';
 $string['drop_selection'] = 'Selektion aufheben';
 
 $string['no_evaluation_text'] = 'Es gibt für diese Aktivität keine Auswertung.';
-$string['no_evaluation_ready'] = 'Es gibt keine Auswertung, da nicht alle Fragen beantwortet wurden. Erst wenn alle Fragen beantwortet wurden, gibt eine Auswertung ihrer Antworten';
+$string['no_evaluation_ready'] = 'Es gibt keine Auswertung, da nicht alle Fragen beantwortet wurden. Erst wenn alle Fragen beantwortet wurden, gibt es eine Auswertung ihrer Antworten.';
 $string['eval_final_text'] = 'Die Vergleichswerte basieren auf derzeit {$a->percent}% gegebener Antworten ({$a->completed} von {$a->coursesize} Personen haben bisher geantwortet).';
 
 $string['eval_first_page_title'] = "Allgemeine Informationen";
