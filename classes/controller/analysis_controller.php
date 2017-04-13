@@ -90,8 +90,8 @@ class mod_groupformation_analysis_controller {
         if (is_null($job)) {
             $groupingid = ($cm->groupmode != 0) ? $cm->groupingid : 0;
             $ajm::create_job($this->groupformationid, $groupingid);
-            $job = $ajm::get_job($this->groupformationid);
         }
+        $job = $ajm::get_job($this->groupformationid);
         $jobstate = $ajm::get_state($job);
         if ($jobstate !== 'ready') {
             $this->state = 3;

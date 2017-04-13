@@ -26,8 +26,8 @@ namespace mod_groupformation\task;
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 require_once($CFG->dirroot . '/mod/groupformation/lib.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/advanced_job_manager.php');
-
-class build_groups_task extends \core\task\scheduled_task {
+require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/group_generator.php');
+class adopt_groups_task extends \core\task\scheduled_task {
 
     /**
      * (non-PHPdoc)
@@ -35,7 +35,7 @@ class build_groups_task extends \core\task\scheduled_task {
      * @see \core\task\scheduled_task::get_name()
      */
     public function get_name() {
-        return get_string('build_groups_task', 'groupformation');
+        return get_string('adopt_groups_task', 'groupformation');
     }
 
     /**
@@ -44,8 +44,6 @@ class build_groups_task extends \core\task\scheduled_task {
      * @see \core\task\task_base::execute()
      */
     public function execute() {
-        // First reset aborted jobs; user might wanna use it soon.
-        $this->reset_aborted_jobs();
 
         // Look for jobs; select a job; get it done.
         $this->do_job();
@@ -62,31 +60,12 @@ class build_groups_task extends \core\task\scheduled_task {
 
         $job = null;
 
-        $job = $ajm::get_next_job();
+        $job = $ajm::get_next_job('waiting_groups');
 
         if (!is_null($job)) {
-            $result = $ajm::do_groupal($job);
-            $aborted = $ajm::check_state($job, 'aborted');
-            if (!$aborted) {
-                $ajm::save_result($job, $result);
+            \mod_groupformation_group_generator::generate_moodle_groups($job->groupformationid);
 
-                // Notify teacher about finished group formation.
-                $ajm::notify_teacher($job);
-            } else {
-                $ajm::reset_job($job);
-            }
-        }
-    }
-
-    /**
-     * Resets all aborted jobs which are not currently running
-     */
-    private function reset_aborted_jobs() {
-        $ajm = new \mod_groupformation_advanced_job_manager();
-
-        $jobs = $ajm::get_jobs('aborted');
-        foreach (array_values($jobs) as $job) {
-            $ajm::reset_job($job);
+            $ajm::set_job($job, 'done_groups');
         }
     }
 }

@@ -228,7 +228,8 @@ $string['grouping_status_1'] = 'Sie können die Gruppenbildung jetzt starten.';
 $string['grouping_status_2'] = 'Die Gruppenbildung läuft.';
 $string['grouping_status_3'] = 'Die Gruppenbildung wird abgebrochen.';
 $string['grouping_status_4'] = 'Gruppenbildung ist abgeschlossen. Sie können den Gruppenvorschlag übernehmen, oder verwerfen.';
-$string['grouping_status_5'] = 'Die realen Gruppen sind gebildet. Sie können jetzt manuelle Veränderung an den Gruppen vornehmen.';
+$string['grouping_status_5'] = 'Die Moodle-Gruppen sind gebildet. Sie können jetzt manuelle Veränderung an den Gruppen vornehmen.';
+$string['grouping_status_6'] = 'Die Moodle-Gruppen werden gebildet. Dieser Prozess kann einen Moment dauern.';
 $string['grouping_start'] = 'Gruppenbildung starten';
 $string['grouping_delete'] = 'Gruppenvorschlag verwerfen';
 $string['grouping_adopt'] = 'Gruppenvorschlag übernehmen';
@@ -248,6 +249,9 @@ $string['noUser'] = 'Der Nutzer existiert nicht!';
 $string['membersAre'] = 'Deine Arbeitskollegen sind:';
 $string['groupingNotReady'] = 'Die Gruppenbildung ist noch nicht abgeschlossen.';
 $string['jobget_name'] = 'Gruppenbildung und Aufräumen';
+$string['build_groups_task'] = 'Task zur Gruppenbildung';
+$string['adopt_groups_task'] = 'Task zur Gruppenadoption';
+$string['archive_activity_task'] = 'Task zur Archivierung alter Aktivitäten';
 $string['no_time'] = 'Kein Zeitpunkt festgelegt';
 $string['activity_end'] = 'Aktivität beenden';
 $string['activity_start'] = 'Aktivität starten';
@@ -329,7 +333,6 @@ $string['file_error'] = 'Du musst eine *.xml-Datei hochladen.';
 $string['failed_import'] = 'Der Import ist fehlgeschlagen. Das Format der Datei war nicht korrekt. Bitte lade eine Datei mit exportierten Antworten hoch.';
 $string['successful_import'] = 'Der Import war erfolgreich. Du kannst deine Antworten im Tab "Fragebogen" einsehen.';
 
-$string['archive_activity_task'] = 'Archivierung alter Aktivitäten';
 $string['archived_activity_answers'] = 'Die Aktitivät ist archiviert worden. Ihre Antworten sind nicht mehr gespeichert und es ist keine Interaktion mehr möglich.';
 $string['archived_activity_admin'] = 'Die Aktitivät ist archiviert worden. Es ist keine Interaktion mehr möglich.';
 

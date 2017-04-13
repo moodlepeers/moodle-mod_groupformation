@@ -70,7 +70,7 @@
             <i>
                 <?php echo $this->_['status'][0]; ?>
 
-                <?php if (isset($this->_['emailnotifications']) && $this->_['emailnotifications']): ?>
+                <?php if (false && isset($this->_['emailnotifications']) && $this->_['emailnotifications']): ?>
 
                     <?php echo " " . get_string('emailnotifications_info', 'groupformation'); ?>
 

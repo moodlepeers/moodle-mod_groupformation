@@ -85,14 +85,10 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/advan
 
 $ajm = new mod_groupformation_advanced_job_manager();
 
-$job = $ajm::get_next_job('ready');
+$job = $ajm::get_next_job('waiting_groups');
 
 if (!is_null($job)) {
-    $ajm::reset_job($job);
-
-    $ajm::create_job($groupformation->id, 0);
-
-    $job = $ajm::get_job($groupformation->id);
+    print_r($job);
 }
 
 //----------------------------------------------------------------------------------

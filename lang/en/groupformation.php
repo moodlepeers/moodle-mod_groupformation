@@ -226,6 +226,7 @@ $string['grouping_status_2'] = 'The group formation is in progress.';
 $string['grouping_status_3'] = 'The termination of group formation is in progress';
 $string['grouping_status_4'] = 'The group formation is finished. You can adopt the groups to Moodle or generate a new results by algorithm.';
 $string['grouping_status_5'] = 'The generated groups are adopted to Moodle. You can manually adjust them.';
+$string['grouping_status_6'] = 'The generated groups are going to be adopted to Moodle. This process might take some time.';
 $string['grouping_start'] = 'Start group formation';
 $string['grouping_delete'] = 'Delete groups';
 $string['grouping_adopt'] = 'Adopt groups';
@@ -246,6 +247,9 @@ $string['noUser'] = 'User does not exist';
 $string['membersAre'] = 'Your team members are:';
 $string['groupingNotReady'] = 'Group formation is not finished yet.';
 $string['jobget_name'] = 'Group formation and clean up';
+$string['build_groups_task'] = 'Group formation task';
+$string['adopt_groups_task'] = 'Group adoption task';
+$string['archive_activity_task'] = 'Archiving Task';
 $string['no_time'] = 'No time set';
 $string['activity_end'] = 'Stop activity';
 $string['activity_start'] = 'Start activity';
@@ -324,7 +328,6 @@ $string['file_error'] = 'You have to upload an *.xml file.';
 $string['failed_import'] = 'The import has failed due to an invalid format. Please upload a file with exportable answer format';
 $string['successful_import'] = 'The import was successful. You can review your answers in the questionnaire.';
 
-$string['archive_activity_task'] = 'Archiving old activities';
 $string['archived_activity_answers'] = 'The activity has been archived. Your answers are no longer stored and there is nothing to do here.';
 $string['archived_activity_admin'] = 'The activity has been archived. There is nothing to do here.';
 

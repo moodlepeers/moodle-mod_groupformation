@@ -1351,5 +1351,126 @@ function xmldb_groupformation_upgrade($oldversion) {
         // Groupformation savepoint reached.
         upgrade_mod_savepoint(true, 2016092600, 'groupformation');
     }
+
+    if ($oldversion < 2017041300) {
+
+        // Define field matcher_used to be dropped from groupformation_jobs.
+        $table = new xmldb_table('groupformation_jobs');
+        $field = new xmldb_field('matcher_used');
+
+        // Conditionally launch drop field matcher_used.
+        if ($dbman->field_exists($table, $field)) {
+            $dbman->drop_field($table, $field);
+        }
+
+        // Define field count_groups to be dropped from groupformation_jobs.
+        $table = new xmldb_table('groupformation_jobs');
+        $field = new xmldb_field('count_groups');
+
+        // Conditionally launch drop field count_groups.
+        if ($dbman->field_exists($table, $field)) {
+            $dbman->drop_field($table, $field);
+        }
+
+        // Define field performance_index to be dropped from groupformation_jobs.
+        $table = new xmldb_table('groupformation_jobs');
+        $field = new xmldb_field('performance_index');
+
+        // Conditionally launch drop field performance_index.
+        if ($dbman->field_exists($table, $field)) {
+            $dbman->drop_field($table, $field);
+        }
+
+        // Define field stats_avg_variance to be dropped from groupformation_jobs.
+        $table = new xmldb_table('groupformation_jobs');
+        $field = new xmldb_field('stats_avg_variance');
+
+        // Conditionally launch drop field stats_variance.
+        if ($dbman->field_exists($table, $field)) {
+            $dbman->drop_field($table, $field);
+        }
+        // Define field stats_variance to be dropped from groupformation_jobs.
+        $table = new xmldb_table('groupformation_jobs');
+        $field = new xmldb_field('stats_variance');
+
+        // Conditionally launch drop field stats_variance.
+        if ($dbman->field_exists($table, $field)) {
+            $dbman->drop_field($table, $field);
+        }
+
+        // Define field stats_n to be dropped from groupformation_jobs.
+        $table = new xmldb_table('groupformation_jobs');
+        $field = new xmldb_field('stats_n');
+
+        // Conditionally launch drop field stats_n.
+        if ($dbman->field_exists($table, $field)) {
+            $dbman->drop_field($table, $field);
+        }
+
+        // Define field stats_avg to be dropped from groupformation_jobs.
+        $table = new xmldb_table('groupformation_jobs');
+        $field = new xmldb_field('stats_avg');
+
+        // Conditionally launch drop field stats_avg.
+        if ($dbman->field_exists($table, $field)) {
+            $dbman->drop_field($table, $field);
+        }
+
+        // Define field stats_st_dev to be dropped from groupformation_jobs.
+        $table = new xmldb_table('groupformation_jobs');
+        $field = new xmldb_field('stats_st_dev');
+
+        // Conditionally launch drop field stats_st_dev.
+        if ($dbman->field_exists($table, $field)) {
+            $dbman->drop_field($table, $field);
+        }
+
+        // Define field stats_norm_st_dev to be dropped from groupformation_jobs.
+        $table = new xmldb_table('groupformation_jobs');
+        $field = new xmldb_field('stats_norm_st_dev');
+
+        // Conditionally launch drop field stats_norm_st_dev.
+        if ($dbman->field_exists($table, $field)) {
+            $dbman->drop_field($table, $field);
+        }
+
+        // Define field stats_performance_index to be dropped from groupformation_jobs.
+        $table = new xmldb_table('groupformation_jobs');
+        $field = new xmldb_field('stats_performance_index');
+
+        // Conditionally launch drop field stats_performance_index.
+        if ($dbman->field_exists($table, $field)) {
+            $dbman->drop_field($table, $field);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2017041300, 'groupformation');
+    }
+
+    if ($oldversion < 2017041301) {
+
+        // Define field groups_generated to be added to groupformation_jobs.
+        $table = new xmldb_table('groupformation_jobs');
+        $field = new xmldb_field('groups_generated', XMLDB_TYPE_INTEGER, '1', null, null, null, '0', 'done');
+
+        // Conditionally launch add field groups_generated.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field groups_adopted to be added to groupformation_jobs.
+        $table = new xmldb_table('groupformation_jobs');
+        $field = new xmldb_field('groups_adopted', XMLDB_TYPE_INTEGER, '1', null, null, null, '0', 'groups_generated');
+
+        // Conditionally launch add field groups_adopted.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2017041301, 'groupformation');
+    }
+
+
     return true;
 }

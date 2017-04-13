@@ -47,18 +47,26 @@ require_once($CFG->dirroot . '/mod/groupformation/lib/classes/xml_writers/cohort
 class mod_groupformation_advanced_job_manager {
 
     static $jobstates = array(
-            'ready' => array('waiting' => 0, 'started' => 0, 'aborted' => 0, 'done' => 0),
-            'waiting' => array('waiting' => 1, 'started' => 0, 'aborted' => 0, 'done' => 0),
-            'started' => array('waiting' => 0, 'started' => 1, 'aborted' => 0, 'done' => 0),
-            'aborted' => array('waiting' => 0, 'started' => 0, 'aborted' => 1, 'done' => 0),
-            'done' => array('waiting' => 0, 'started' => 0, 'aborted' => 0, 'done' => 1),
-            );
+            'ready' => array('waiting' => 0, 'started' => 0, 'aborted' => 0, 'done' => 0, 'groups_generated' => 0, 'groups_adopted' => 0),
+            'waiting' => array('waiting' => 1, 'started' => 0, 'aborted' => 0, 'done' => 0, 'groups_generated' => 0, 'groups_adopted' => 0),
+            'started' => array('waiting' => 0, 'started' => 1, 'aborted' => 0, 'done' => 0, 'groups_generated' => 0, 'groups_adopted' => 0),
+            'aborted' => array('waiting' => 0, 'started' => 0, 'aborted' => 1, 'done' => 0, 'groups_generated' => 0, 'groups_adopted' => 0),
+            'done' => array('waiting' => 0, 'started' => 0, 'aborted' => 0, 'done' => 1, 'groups_generated' => 1, 'groups_adopted' => 0),
+            'waiting_groups' => array('waiting' => 1, 'started' => 0, 'aborted' => 0, 'done' => 0, 'groups_generated' => 1, 'groups_adopted' => 0),
+            'started_groups' => array('waiting' => 1, 'started' => 0, 'aborted' => 0, 'done' => 0, 'groups_generated' => 1, 'groups_adopted' => 0),
+            'aborted_groups' => array('waiting' => 0, 'started' => 0, 'aborted' => 1, 'done' => 0, 'groups_generated' => 1, 'groups_adopted' => 0),
+            'done_groups' => array('waiting' => 0, 'started' => 0, 'aborted' => 0, 'done' => 1, 'groups_generated' => 1, 'groups_adopted' => 1),
+    );
 
     static $timesstatesmap = array(
             'waiting' => 'timecreated',
             'started' => 'timestarted',
             'aborted' => 'timefinished',
-            'done' => 'timefinished'
+            'done' => 'timefinished',
+            'waiting_groups' => 'timecreated',
+            'started_groups' => 'timestarted',
+            'aborted_groups' => 'timefinished',
+            'done_groups' => 'timefinished'
     );
 
     /**
@@ -152,6 +160,10 @@ class mod_groupformation_advanced_job_manager {
 
         if ($job->waiting == 1) {
             $job->started_by = $USER->id;
+        }
+
+        if ($job->done == 1) {
+            $job->groups_generated = 1;
         }
 
         return $DB->update_record('groupformation_jobs',$job);

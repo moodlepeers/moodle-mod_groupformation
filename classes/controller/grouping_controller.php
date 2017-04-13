@@ -125,6 +125,8 @@ class mod_groupformation_grouping_controller {
 
         $ajm = new mod_groupformation_advanced_job_manager();
 
+        $job = $ajm::get_job($this->groupformationid);
+
         $jobstatus = $ajm::get_state($this->job);
 
         $this->groupscreated = $this->groupsmanager->groups_created();
@@ -144,10 +146,16 @@ class mod_groupformation_grouping_controller {
         } else if ($jobstatus == 'done' && !$this->groupscreated) {
             /* Moodlegroups are created */
             $this->viewstate = 4;
-        } else if ($jobstatus == 'done' && $this->groupscreated) {
+        } else if ($jobstatus == 'done_groups' && $this->groupscreated) {
             /* currently everything block til job is aborted and reset by cron */
             $this->viewstate = 5;
         }
+
+        $ajm = new mod_groupformation_advanced_job_manager();
+
+        $job = $ajm::get_job($this->groupformationid);
+
+        $this->state = $ajm::get_state($job);
     }
 
     /**
@@ -190,8 +198,13 @@ class mod_groupformation_grouping_controller {
      * POST action to adopt groups to moodle
      */
     public function adopt() {
-        mod_groupformation_group_generator::generate_moodle_groups($this->groupformationid);
-        $this->determine_status();
+        $ajm = new mod_groupformation_advanced_job_manager();
+
+        $ajm::set_job($this->job, "waiting_groups", false, false);
+
+        // mod_groupformation_group_generator::generate_moodle_groups($this->groupformationid);
+
+        // $ajm::set_job($this->job, "done_groups");
     }
 
     /**
@@ -207,12 +220,13 @@ class mod_groupformation_grouping_controller {
      * POST action to delete generated and/or adopted groups (moodle groups)
      */
     public function delete() {
+        $this->groupsmanager->delete_generated_groups();
 
         $ajm = new mod_groupformation_advanced_job_manager();
 
-        $ajm::set_job($this->job, "ready", false, true);
-        $this->groupsmanager->delete_generated_groups();
-        $this->determine_status();
+        $job = $ajm::get_job($this->groupformationid);
+
+        $ajm::reset_job($job);
     }
 
     /**
@@ -272,7 +286,107 @@ class mod_groupformation_grouping_controller {
                         'text' => get_string('grouping_edit', 'groupformation'))
         );
 
-        switch ($this->viewstate) {
+        switch ($this->state) {
+            case 'ready':
+                // 000000
+
+                $assigns['status'] = array(
+                        get_string('grouping_status_1', 'groupformation'), 0);
+
+                $array['button1']['value'] = 1;
+                $array['button1']['state'] = '';
+
+                break;
+
+            case 'waiting':
+                // 100000 = waiting
+                // or
+                // 010000 = started
+
+                $assigns['status'] = array(
+                        get_string('grouping_status_2', 'groupformation'), 1);
+
+                $array['button1']['name'] = 'abort';
+                $array['button1']['text'] = get_string('grouping_abort', 'groupformation');
+                $array['button1']['value'] = 1;
+                $array['button1']['state'] = '';
+
+                $assigns['emailnotifications'] = $this->store->get_email_setting();
+                break;
+
+            case 'started':
+                // 100000 = waiting
+                // or
+                // 010000 = started
+
+                $assigns['status'] = array(
+                        get_string('grouping_status_2', 'groupformation'), 1);
+
+                $array['button1']['name'] = 'abort';
+                $array['button1']['text'] = get_string('grouping_abort', 'groupformation');
+                $array['button1']['value'] = 1;
+                $array['button1']['state'] = '';
+
+                $assigns['emailnotifications'] = $this->store->get_email_setting();
+                break;
+
+            case 'aborted' :
+                // 001000 = aborted
+
+                $assigns['status'] = array(
+                        get_string('grouping_status_3', 'groupformation'), 1);
+                break;
+
+            case 'done' :
+                // 000110 = done - groups_generated
+
+                $assigns['status'] = array(
+                        get_string('grouping_status_4', 'groupformation'), 0);
+
+                $array['button2']['value'] = 1;
+                $array['button2']['state'] = '';
+                $array['button3']['value'] = 1;
+                $array['button3']['state'] = '';
+                $array['button4']['value'] = 1;
+                $array['button4']['state'] = '';
+
+                break;
+
+            case 'done_groups' :
+                // 000111 = done - groups_generated - groups_adopted
+                $assigns['status'] = array(
+                        get_string('grouping_status_5', 'groupformation'), 0);
+
+                $array['button2']['value'] = 1;
+                $array['button2']['state'] = '';
+                $array['button2']['text'] = get_string('grouping_delete_moodle_groups', 'groupformation');
+
+                break;
+
+            case 'waiting_groups':
+                // 100000 = waiting - groups_generated
+                // or
+                // 010000 = started - groups_generated
+
+                $assigns['status'] = array(
+                        get_string('grouping_status_6', 'groupformation'), 1);
+
+                /*$array['button1']['name'] = 'abort';
+                $array['button1']['text'] = get_string('grouping_abort', 'groupformation');
+                $array['button1']['value'] = 1;
+                $array['button1']['state'] = '';*/
+
+                $assigns['emailnotifications'] = $this->store->get_email_setting();
+                break;
+
+            default:
+                $assigns['status'] = array(
+                        get_string('grouping_status_0', 'groupformation'), 0);
+
+                break;
+        }
+
+        /*switch ($this->viewstate) {
             case 0 :
                 $assigns['status'] = array(
                         get_string('grouping_status_0', 'groupformation'), 0);
@@ -280,6 +394,8 @@ class mod_groupformation_grouping_controller {
                 break;
 
             case 1 :
+                // 000000
+
                 $assigns['status'] = array(
                         get_string('grouping_status_1', 'groupformation'), 0);
 
@@ -289,6 +405,10 @@ class mod_groupformation_grouping_controller {
                 break;
 
             case 2 :
+                // 100000 = waiting
+                // or
+                // 010000 = started
+
                 $assigns['status'] = array(
                         get_string('grouping_status_2', 'groupformation'), 1);
 
@@ -301,11 +421,14 @@ class mod_groupformation_grouping_controller {
                 break;
 
             case 3 :
+                // 001000 = aborted
+
                 $assigns['status'] = array(
                         get_string('grouping_status_3', 'groupformation'), 1);
                 break;
 
             case 4 :
+                // 000110 = done - groups_generated
 
                 $assigns['status'] = array(
                         get_string('grouping_status_4', 'groupformation'), 0);
@@ -320,6 +443,7 @@ class mod_groupformation_grouping_controller {
                 break;
 
             case 5 :
+                // 000111 = done - groups_generated - groups_adopted
                 $assigns['status'] = array(
                         get_string('grouping_status_5', 'groupformation'), 0);
 
@@ -333,7 +457,7 @@ class mod_groupformation_grouping_controller {
             default :
 
                 break;
-        }
+        }*/
 
         $assigns['buttons'] = $array;
 
@@ -354,9 +478,9 @@ class mod_groupformation_grouping_controller {
      */
     public function load_statistics() {
         $assigns = array();
-        if ($this->viewstate == 4 || $this->viewstate == 5) {
+        if ($this->state == 'done' || $this->state == 'done_groups') {
 
-            $assigns['performance'] = $this->job->performance_index;
+            //$assigns['performance'] = $this->job->performance_index;
             $assigns['numbOfGroups'] = count($this->groups);
             $assigns['maxSize'] = $this->groupsmanager->get_max_groups_size($this->groups);
 
@@ -383,7 +507,7 @@ class mod_groupformation_grouping_controller {
             $options = mod_groupformation_util::xml_to_array($xmlcontent);
         }
 
-        if ($this->viewstate == 4 || $this->viewstate == 5) {
+        if ($this->state == 'done' || $this->state == 'done_groups') {
 
             foreach ($this->groups as $key => $value) {
 
