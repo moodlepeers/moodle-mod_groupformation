@@ -39,7 +39,8 @@ class mod_groupformation_scientific_grouping extends mod_groupformation_grouping
     private $data;
 
     /**
-     * mod_groupformation_job_manager constructor.
+     * mod_groupformation_scientific_grouping constructor.
+     *
      * @param $groupformationid
      */
     public function __construct($groupformationid) {

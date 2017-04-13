@@ -75,10 +75,27 @@ $PAGE->set_url('/mod/groupformation/analysis_view.php', array(
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 
-require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/job_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/controller/analysis_controller.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_parser.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/analysis_view_controller.php');
+
+//----------------------------------------------------------------------------------
+
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/advanced_job_manager.php');
+
+$ajm = new mod_groupformation_advanced_job_manager();
+
+$job = $ajm::get_next_job('ready');
+
+if (!is_null($job)) {
+    $ajm::reset_job($job);
+
+    $ajm::create_job($groupformation->id, 0);
+
+    $job = $ajm::get_job($groupformation->id);
+}
+
+//----------------------------------------------------------------------------------
 
 if ($CFG->debug === 32767 && $resetjob) {
     global $DB;
@@ -87,10 +104,9 @@ if ($CFG->debug === 32767 && $resetjob) {
 }
 
 if ($CFG->debug === 32767 && $runjob) {
-    $jm = new mod_groupformation_job_manager();
     $job = null;
 
-    $job = $jm::get_job($groupformation->id);
+    $job = $ajm::get_job($groupformation->id);
 
     function print_array($aArray) {
         // Print a nicely formatted array representation:
@@ -100,9 +116,10 @@ if ($CFG->debug === 32767 && $runjob) {
     }
 
     if (!is_null($job)) {
-        $result = $jm::do_groupal($job);
+        $result = $ajm::do_groupal($job);
         print_array($result);
-        // $saved = $jm::save_result($job,$result);
+        $saved = $ajm::save_result($job,$result);
+        $ajm::set_job('done');
     }
 }
 

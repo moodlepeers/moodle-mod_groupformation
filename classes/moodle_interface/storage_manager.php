@@ -29,6 +29,8 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/group
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 require_once($CFG->dirroot . '/group/lib.php');
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/advanced_job_manager.php');
+
 
 class mod_groupformation_storage_manager {
     private $groupformationid;
@@ -1069,5 +1071,116 @@ class mod_groupformation_storage_manager {
         return $DB->get_record('groupformation_question',
                 array('category' => $category, 'language' => 'en', 'position' => $position));
 
+    }
+
+    /**
+     * Saves statistics of groupformation cohort
+     *
+     * @param $groupkey
+     * @param $cohort
+     */
+    public function save_statistics($groupkey, $cohort) {
+        global $DB;
+
+        $record = new stdClass();
+
+        $record->groupformationid = $this->groupformationid;
+        $record->group_key = $groupkey;
+
+        $record->matcher_used = strval($cohort->whichmatcherused);
+        $record->count_groups = floatval($cohort->countofgroups);
+        $record->performance_index = floatval($cohort->cpi);
+
+        $stats = $cohort->results;
+
+        if (!is_null($stats)) {
+            $record->stats_avg_variance = $stats->avgvariance;
+            $record->stats_variance = $stats->variance;
+            $record->stats_n = $stats->n;
+            $record->stats_avg = $stats->avg;
+            $record->stats_st_dev = $stats->stddev;
+            $record->stats_norm_st_dev = $stats->normstddev;
+            $record->stats_performance_index = $stats->performanceindex;
+        }
+
+        $DB->insert_record('groupformation_stats', $record);
+    }
+
+    /**
+     * Deletes all statistics of previous groupformations
+     */
+    public function delete_statistics() {
+        global $DB;
+
+        $DB->delete_records('groupformation_stats', array('groupformationid' => $this->groupformationid));
+    }
+
+    public function get_users_for_grouping($job = null) {
+        global $DB;
+
+        $ajm = new mod_groupformation_advanced_job_manager();
+
+        if (is_null($job)) {
+
+            $job = $ajm::get_job($this->groupformationid);
+        }
+
+        $courseid = $this->get_course_id();
+        $context = context_course::instance($courseid);
+
+        $enrolledstudents = null;
+
+        if (intval($job->groupingid) != 0) {
+            $enrolledstudents = array_keys(groups_get_grouping_members($job->groupingid));
+        } else {
+            $enrolledstudents = array_keys(get_enrolled_users($context, 'mod/groupformation:onlystudent'));
+            $enrolledprevusers = array_keys(get_enrolled_users($context, 'mod/groupformation:editsettings'));
+            $diff = array_diff($enrolledstudents, $enrolledprevusers);
+            $enrolledstudents = $diff;
+        }
+        if (is_null($enrolledstudents) || count($enrolledstudents) <= 0) {
+            return null;
+        }
+
+        $groupingsetting = $this->get_grouping_setting();
+
+        $allanswers = array();
+        $someanswers = array();
+        $noorsomeanswers = array();
+
+        // has_answered_everything
+        $categories = $this->get_categories();
+        $sum = array_sum($this->get_numbers($categories));
+
+        // get userids of groupformation answers
+        $userids = $DB->get_fieldset_select('groupformation_answer', 'userid', 'groupformation = ?', array($this->groupformationid));
+
+        // returns an array using the userids as keys and their frequency in answers as values
+        $user_frequencies = array_count_values($userids);
+
+        $number_of_answers = function($userid) use ($sum, $user_frequencies) {
+            return array_key_exists($userid, $user_frequencies) ? $user_frequencies[$userid] : 0;
+        };
+
+        foreach (array_values($enrolledstudents) as $userid) {
+            if($sum <= $number_of_answers($userid)) {
+                $allanswers [] = $userid;
+            } else if($groupingsetting && $number_of_answers($userid) > 0) {
+                $someanswers [] = $userid;
+            } else {
+                $noorsomeanswers [] = $userid;
+            }
+        }
+
+        $groupalusers = $allanswers;
+
+        if ($groupingsetting) {
+            $randomusers = $someanswers;
+        } else {
+            $randomusers = $noorsomeanswers;
+        }
+
+        return array(
+                $groupalusers, $randomusers);
     }
 }

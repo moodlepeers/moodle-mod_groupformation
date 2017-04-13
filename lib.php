@@ -30,7 +30,6 @@
 defined('MOODLE_INTERNAL') || die ();
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
-require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/job_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/xml_loader.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');

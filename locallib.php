@@ -1012,3 +1012,7 @@ function groupformation_z_lookup_table() {
     $zlookuptable['3'] = 0.9987;
     return $zlookuptable;
 }
+
+function groupformation_get_users($groupformationid) {
+
+}

@@ -28,6 +28,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/stora
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/advanced_job_manager.php');
 
 class mod_groupformation_analysis_controller {
 
@@ -84,13 +85,14 @@ class mod_groupformation_analysis_controller {
     public function determine_status($cm) {
         $questionnaireavailable = $this->store->is_questionnaire_available();
         $this->state = 1;
-        $job = mod_groupformation_job_manager::get_job($this->groupformationid);
+        $ajm = new mod_groupformation_advanced_job_manager();
+        $job = $ajm::get_job($this->groupformationid);
         if (is_null($job)) {
             $groupingid = ($cm->groupmode != 0) ? $cm->groupingid : 0;
-            mod_groupformation_job_manager::create_job($this->groupformationid, $groupingid);
-            $job = mod_groupformation_job_manager::get_job($this->groupformationid);
+            $ajm::create_job($this->groupformationid, $groupingid);
+            $job = $ajm::get_job($this->groupformationid);
         }
-        $jobstate = mod_groupformation_job_manager::get_status($job);
+        $jobstate = $ajm::get_state($job);
         if ($jobstate !== 'ready') {
             $this->state = 3;
         } else {

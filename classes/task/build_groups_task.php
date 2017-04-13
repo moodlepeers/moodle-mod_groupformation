@@ -25,7 +25,7 @@ namespace mod_groupformation\task;
 
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 require_once($CFG->dirroot . '/mod/groupformation/lib.php');
-require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/job_manager.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/advanced_job_manager.php');
 
 class build_groups_task extends \core\task\scheduled_task {
 
@@ -58,20 +58,22 @@ class build_groups_task extends \core\task\scheduled_task {
      */
     private function do_job() {
 
+        $ajm = new \mod_groupformation_advanced_job_manager();
+
         $job = null;
 
-        $job = \mod_groupformation_job_manager::get_next_job();
+        $job = $ajm::get_next_job();
 
         if (!is_null($job)) {
-            $result = \mod_groupformation_job_manager::do_groupal($job);
-            $aborted = \mod_groupformation_job_manager::is_job_aborted($job);
+            $result = $ajm::do_groupal($job);
+            $aborted = $ajm::check_state($job, 'aborted');
             if (!$aborted) {
-                \mod_groupformation_job_manager::save_result($job, $result);
+                $ajm::save_result($job, $result);
 
                 // Notify teacher about finished group formation.
-                \mod_groupformation_job_manager::notify_teacher($job);
+                $ajm::notify_teacher($job);
             } else {
-                \mod_groupformation_job_manager::reset_job($job);
+                $ajm::reset_job($job);
             }
         }
     }
@@ -80,9 +82,11 @@ class build_groups_task extends \core\task\scheduled_task {
      * Resets all aborted jobs which are not currently running
      */
     private function reset_aborted_jobs() {
-        $jobs = \mod_groupformation_job_manager::get_aborted_jobs();
+        $ajm = new \mod_groupformation_advanced_job_manager();
+
+        $jobs = $ajm::get_jobs('aborted');
         foreach (array_values($jobs) as $job) {
-            \mod_groupformation_job_manager::reset_job($job);
+            $ajm::reset_job($job);
         }
     }
 }

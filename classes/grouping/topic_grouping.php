@@ -38,7 +38,7 @@ class mod_groupformation_topic_grouping extends mod_groupformation_grouping {
     private $criterioncalculator;
 
     /**
-     * mod_groupformation_job_manager constructor.
+     * mod_groupformation_topic_grouping constructor.
      *
      * @param $groupformationid
      */

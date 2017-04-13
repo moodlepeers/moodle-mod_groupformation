@@ -36,6 +36,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/util/test_user_generat
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/xml_writer.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/group_generator.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/advanced_job_manager.php');
 
 class mod_groupformation_grouping_controller {
 
@@ -100,15 +101,17 @@ class mod_groupformation_grouping_controller {
         $selectfields = implode(',', ['id', get_all_user_name_fields(true)]);
         $this->userrecords = $DB->get_records_list('user', 'id', $userids, null, $selectfields);
 
-        $this->job = mod_groupformation_job_manager::get_job($this->groupformationid);
+        $ajm = new mod_groupformation_advanced_job_manager();
+
+        $this->job = $ajm::get_job($this->groupformationid);
         if (is_null($this->job)) {
             $groupingid = ($cm->groupmode != 0) ? $cm->groupingid : 0;
-            mod_groupformation_job_manager::create_job($groupformationid, $groupingid);
-            $this->job = mod_groupformation_job_manager::get_job($this->groupformationid);
+            $ajm::create_job($groupformationid, $groupingid);
+            $this->job = $ajm::get_job($this->groupformationid);
         } else {
             $groupingid = ($cm->groupmode != 0) ? $cm->groupingid : 0;
-            mod_groupformation_job_manager::update_job($groupformationid, $groupingid);
-            $this->job = mod_groupformation_job_manager::get_job($this->groupformationid);
+            $ajm::update_job($this->job, $groupingid);
+            $this->job = $ajm::get_job($this->groupformationid);
         }
 
         $this->determine_status();
@@ -120,7 +123,9 @@ class mod_groupformation_grouping_controller {
     public function determine_status() {
         $activitystate = $this->store->is_questionnaire_available();
 
-        $jobstatus = mod_groupformation_job_manager::get_status($this->job);
+        $ajm = new mod_groupformation_advanced_job_manager();
+
+        $jobstatus = $ajm::get_state($this->job);
 
         $this->groupscreated = $this->groupsmanager->groups_created();
 
@@ -150,12 +155,14 @@ class mod_groupformation_grouping_controller {
      */
     public function start($course, $cm) {
 
+        $ajm = new mod_groupformation_advanced_job_manager();
+
         $usermanager = new mod_groupformation_user_manager($this->groupformationid);
 
         $users = $usermanager->handle_complete_questionnaires();
 
         $this->job->groupingid = $cm->groupingid;
-        mod_groupformation_job_manager::set_job($this->job, "waiting", true);
+        $ajm::set_job($this->job, "waiting", true);
         $this->determine_status();
 
         $context = groupformation_get_context($this->groupformationid);
@@ -172,7 +179,10 @@ class mod_groupformation_grouping_controller {
      * POST action to abort current waiting or running job
      */
     public function abort() {
-        mod_groupformation_job_manager::set_job($this->job, "aborted", false, false);
+
+        $ajm = new mod_groupformation_advanced_job_manager();
+
+        $ajm::set_job($this->job, "aborted", false, false);
         $this->determine_status();
     }
 
@@ -197,7 +207,10 @@ class mod_groupformation_grouping_controller {
      * POST action to delete generated and/or adopted groups (moodle groups)
      */
     public function delete() {
-        mod_groupformation_job_manager::set_job($this->job, "ready", false, true);
+
+        $ajm = new mod_groupformation_advanced_job_manager();
+
+        $ajm::set_job($this->job, "ready", false, true);
         $this->groupsmanager->delete_generated_groups();
         $this->determine_status();
     }
@@ -324,7 +337,7 @@ class mod_groupformation_grouping_controller {
 
         $assigns['buttons'] = $array;
 
-        $users = mod_groupformation_job_manager::get_users($this->groupformationid);
+        $users = $this->store->get_users_for_grouping();
         $count = count($users[0]) + count($users[1]);
 
         $assigns['student_count'] = $count;

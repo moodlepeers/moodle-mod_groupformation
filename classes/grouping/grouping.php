@@ -51,7 +51,8 @@ class mod_groupformation_grouping {
     private $criterioncalculator;
 
     /**
-     * mod_groupformation_job_manager constructor.
+     * mod_groupformation_grouping constructor.
+     *
      * @param $groupformationid
      */
     public function __construct($groupformationid) {

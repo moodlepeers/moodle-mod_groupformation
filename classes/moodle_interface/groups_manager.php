@@ -513,4 +513,63 @@ class mod_groupformation_groups_manager {
             // TODO: UPDATE PERFORMANCE VALUES WITH NEW GROUPS
         }*/
     }
+
+    /**
+     * Creates groups of groupformation
+     *
+     * @param $groups
+     * @param $flags
+     * @return array
+     */
+    public function create_groups($groups, $flags) {
+        $this->store = new mod_groupformation_storage_manager($this->groupformationid);
+
+        $groupnameprefix = $this->store->get_group_name_setting();
+        $groupformationname = $this->store->get_name();
+        $i = $this->store->get_instance_number();
+        $groupname = "G" . $i . "_" . $groupnameprefix;
+
+        if (strlen($groupnameprefix) < 1) {
+            $groupname = "G" . $i . "_" . substr($groupformationname, 0, 8);
+        }
+
+        $topicoptions = null;
+        $istopic = (!!$flags['topic']); // fast boolean casting of 0 and 1
+
+        if ($istopic) {
+            $xmlcontent = $this->store->get_knowledge_or_topic_values('topic');
+            $xmlcontent = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $xmlcontent . ' </OPTIONS>';
+            $topicoptions = mod_groupformation_util::xml_to_array($xmlcontent);
+        }
+
+        $ids = array();
+        foreach ($groups as $groupalid => $group) {
+            $name = "";
+            if ($istopic) {
+                $name = $groupname."_".substr($topicoptions[$groupalid - 1], 0, 5);
+            } else {
+                $name = $groupname;
+            }
+            if (count($group['users']) > 0 || $istopic) { // in case of topic groups create as well empty groups
+                $name = $name."_".strval($groupalid);
+                $dbid = $this->create_group($groupalid, $group, $name, $this->groupformationid, $flags);
+                $ids[$groupalid] = $dbid;
+            }
+        }
+        return $ids;
+    }
+
+    /**
+     * Assign users to groups
+     *
+     * @param stdClass $job
+     * @param unknown $users
+     * @param unknown $idmap
+     */
+    public function assign_users_to_groups($users, $idmap) {
+        foreach ($users as $userid => $groupalid) {
+            $this->assign_user_to_group($this->groupformationid, $userid, $groupalid, $idmap);
+        }
+    }
+
 }

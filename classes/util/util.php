@@ -224,8 +224,10 @@ class mod_groupformation_util {
      * @return array
      */
     public static function get_users($groupformationid = null, $store = null, $context = null, $job = null) {
+        $ajm = new mod_groupformation_advanced_job_manager();
+
         if (is_null($job)) {
-            $job = mod_groupformation_job_manager::get_job($groupformationid);
+            $job = $ajm::get_job($groupformationid);
         }
 
         if (is_null($store)) {
