@@ -81,15 +81,15 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/analys
 
 //----------------------------------------------------------------------------------
 
-require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/advanced_job_manager.php');
-
-$ajm = new mod_groupformation_advanced_job_manager();
-
-$job = $ajm::get_next_job('waiting_groups');
-
-if (!is_null($job)) {
-    print_r($job);
-}
+//require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/advanced_job_manager.php');
+//
+//$ajm = new mod_groupformation_advanced_job_manager();
+//
+//$job = $ajm::get_next_job('waiting_groups');
+//
+//if (!is_null($job)) {
+//    print_r($job);
+//}
 
 //----------------------------------------------------------------------------------
 
