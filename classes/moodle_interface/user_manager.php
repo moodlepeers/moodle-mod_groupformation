@@ -717,7 +717,8 @@ class mod_groupformation_user_manager {
 
         $num = $this->store->get_number('topic');
 
-        $answers = $DB->get_records('groupformation_answer', array('groupformation' => $this->groupformationid, 'category' => 'topic', 'questionid' => $questionid));
+        $answers = $DB->get_records('groupformation_answer',
+                array('groupformation' => $this->groupformationid, 'category' => 'topic', 'questionid' => $questionid));
 
         foreach ($answers as $answer) {
             $score += $answer->answer;

@@ -18,6 +18,10 @@
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+if (!defined('MOODLE_INTERNAL')) {
+    die ('Direct access to this script is forbidden.');
+}
+
 ?>
 <div class="maxgroupsizenotreached_header gf_pad_header_small">
     <?php echo get_string('max_group_size_not_reached', 'groupformation'); ?>

@@ -40,7 +40,6 @@ function groupformation_add_jquery($PAGE, $filename = null) {
 
     if (!is_null($filename)) {
         $PAGE->requires->js(new moodle_url($CFG->wwwroot.'/mod/groupformation/js/'.$filename));
-        // better prefix with new moodle_url($CFG->wwwroot.'/mod/groupformation/js/'.$filename
     }
 }
 
@@ -66,79 +65,6 @@ function groupformation_add_js_amd($PAGE, $filename) {
  */
 function groupformation_call_js_amd($PAGE, $modulname, $method, $params=null) {
     $PAGE->requires->js_call_amd($modulname, $method, $params);
-}
-
-/**
- * Logs message
- *
- * @param integer $userid
- * @param integer $groupformationid
- * @param string $message
- * @param string $level
- * @return boolean
- */
-function groupformation_log($userid, $groupformationid, $message, $level = 'info') {
-    return false;
-}
-
-/**
- * Logs debug message
- *
- * @param integer $userid
- * @param integer $groupformationid
- * @param string $message
- * @return boolean
- */
-function groupformation_debug($userid, $groupformationid, $message) {
-    return groupformation_log($userid, $groupformationid, $message, $level = 'debug');
-}
-
-/**
- * Logs info message
- *
- * @param integer $userid
- * @param integer $groupformationid
- * @param string $message
- * @return boolean
- */
-function groupformation_info($userid, $groupformationid, $message) {
-    return groupformation_log($userid, $groupformationid, $message, $level = 'info');
-}
-
-/**
- * Logs warn message
- *
- * @param integer $userid
- * @param integer $groupformationid
- * @param string $message
- * @return boolean
- */
-function groupformation_warn($userid, $groupformationid, $message) {
-    return groupformation_log($userid, $groupformationid, $message, $level = 'warn');
-}
-
-/**
- * Logs error message
- *
- * @param integer $userid
- * @param integer $groupformationid
- * @param string $message
- * @return boolean
- */
-function groupformation_error($userid, $groupformationid, $message) {
-    return groupformation_log($userid, $groupformationid, $message, $level = 'error');
-}
-
-/**
- * Logs fatal message
- *
- * @param integer $userid
- * @param integer $groupformationid
- * @param string $message
- * @return boolean
- */
-function groupformation_fatal($userid, $groupformationid, $message) {
-    return groupformation_log($userid, $groupformationid, $message, $level = 'fatal');
 }
 
 /**
@@ -1012,8 +938,4 @@ function groupformation_z_lookup_table() {
     $zlookuptable['3.0'] = 0.9987;
     $zlookuptable['3'] = 0.9987;
     return $zlookuptable;
-}
-
-function groupformation_get_users($groupformationid) {
-
 }

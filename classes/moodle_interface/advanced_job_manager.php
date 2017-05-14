@@ -47,32 +47,23 @@ require_once($CFG->dirroot . '/mod/groupformation/lib/classes/xml_writers/cohort
 class mod_groupformation_advanced_job_manager {
 
     static private $jobstates = array(
-            'ready' =>
-                    array('waiting' => 0, 'started' => 0, 'aborted' => 0, 'done' => 0, 'groups_generated' => 0,
+            'ready' => array('waiting' => 0, 'started' => 0, 'aborted' => 0, 'done' => 0, 'groups_generated' => 0,
                             'groups_adopted' => 0),
-            'waiting' =>
-                    array('waiting' => 1, 'started' => 0, 'aborted' => 0, 'done' => 0, 'groups_generated' => 0,
+            'waiting' => array('waiting' => 1, 'started' => 0, 'aborted' => 0, 'done' => 0, 'groups_generated' => 0,
                             'groups_adopted' => 0),
-            'started' =>
-                    array('waiting' => 0, 'started' => 1, 'aborted' => 0, 'done' => 0, 'groups_generated' => 0,
+            'started' => array('waiting' => 0, 'started' => 1, 'aborted' => 0, 'done' => 0, 'groups_generated' => 0,
                             'groups_adopted' => 0),
-            'aborted' =>
-                    array('waiting' => 0, 'started' => 0, 'aborted' => 1, 'done' => 0, 'groups_generated' => 0,
+            'aborted' => array('waiting' => 0, 'started' => 0, 'aborted' => 1, 'done' => 0, 'groups_generated' => 0,
                             'groups_adopted' => 0),
-            'done' =>
-                    array('waiting' => 0, 'started' => 0, 'aborted' => 0, 'done' => 1, 'groups_generated' => 1,
+            'done' => array('waiting' => 0, 'started' => 0, 'aborted' => 0, 'done' => 1, 'groups_generated' => 1,
                             'groups_adopted' => 0),
-            'waiting_groups' =>
-                    array('waiting' => 1, 'started' => 0, 'aborted' => 0, 'done' => 0, 'groups_generated' => 1,
+            'waiting_groups' => array('waiting' => 1, 'started' => 0, 'aborted' => 0, 'done' => 0, 'groups_generated' => 1,
                             'groups_adopted' => 0),
-            'started_groups' =>
-                    array('waiting' => 1, 'started' => 0, 'aborted' => 0, 'done' => 0, 'groups_generated' => 1,
+            'started_groups' => array('waiting' => 1, 'started' => 0, 'aborted' => 0, 'done' => 0, 'groups_generated' => 1,
                             'groups_adopted' => 0),
-            'aborted_groups' =>
-                    array('waiting' => 0, 'started' => 0, 'aborted' => 1, 'done' => 0, 'groups_generated' => 1,
+            'aborted_groups' => array('waiting' => 0, 'started' => 0, 'aborted' => 1, 'done' => 0, 'groups_generated' => 1,
                             'groups_adopted' => 0),
-            'done_groups' =>
-                    array('waiting' => 0, 'started' => 0, 'aborted' => 0, 'done' => 1, 'groups_generated' => 1,
+            'done_groups' => array('waiting' => 0, 'started' => 0, 'aborted' => 0, 'done' => 1, 'groups_generated' => 1,
                             'groups_adopted' => 1),
     );
 

@@ -406,7 +406,8 @@ class mod_groupformation_mod_form extends moodleform_mod {
         // Add Groupsize Options.
         $mform->addElement('html', '
                 <div class="gf_pad_header">'.get_string('groupoption_description', 'groupformation').
-            '<span class="required"></span><span class="toolt" tooltip="'.get_string('groupoption_help', 'groupformation').'"></span>
+            '<span class="required"></span><span class="toolt" tooltip="'.get_string('groupoption_help', 'groupformation').'">
+            </span>
                 </div>
                 <div class="js_errors" id="maxmembers_error">
                     <p></p>
@@ -512,7 +513,8 @@ class mod_groupformation_mod_form extends moodleform_mod {
         $mform->addElement('html', '
                     <div class="gf_pad_header">
                 <label class="gf_label" for="id_js_emailnotifications">
-                  <input disabled type="checkbox"> <!-- id="id_js_emailnotifications" name="chbEmailnotifications" value="wantEmailnotifications"> !-->
+                  <input disabled type="checkbox"> 
+                  <!-- id="id_js_emailnotifications" name="chbEmailnotifications" value="wantEmailnotifications"> !-->
                   ' . get_string('emailnotifications_description', 'groupformation') . '</label>
                   <span id="emailnotificationsStateLabel" class="optional"></span>
                     </div>');

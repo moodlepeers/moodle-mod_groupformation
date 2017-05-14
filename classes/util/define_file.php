@@ -42,7 +42,8 @@ class mod_groupformation_data {
                                     "scenarios" => array(1 => false, 2 => false),  // False = heterogeneous, True = homogeneous.
                                     "evaluation" => true,  // Use for displaying it to user (to compare to group and course).
                                     "questionids" => array(12, -1, 13, 14, -15, 16, -17, 18, 6), // Inverse questions = negative.
-                                    "significant_id_only" => false, // True = only use the one questionid with most significant differences between users.
+                                    "significant_id_only" => false,
+                                // True = only use the one questionid with most significant differences between users.
                                     "cutoffs" => array(0.313169217, 0.776242547),
                             ),
                             "conscientiousness" => array(
@@ -214,7 +215,7 @@ class mod_groupformation_data {
                                     "evaluation" => false,
                                     "questionids" => null,
                                     "significant_id_only" => false,
-                                    "separate_dimensions" => false,  // for all questions the mean is used
+                                    "separate_dimensions" => false,  // For all questions the mean is used.
                                     "cutoffs" => null,
                             ),
                             "two" => array(
@@ -222,7 +223,7 @@ class mod_groupformation_data {
                                     "evaluation" => false,
                                     "questionids" => null,
                                     "significant_id_only" => false,
-                                    "separate_dimensions" => true,  // all questions remain seperate
+                                    "separate_dimensions" => true,  // All questions remain seperate.
                                     "cutoffs" => null,
                             ),
                     ),

@@ -18,6 +18,11 @@
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+if (!defined('MOODLE_INTERNAL')) {
+    die ('Direct access to this script is forbidden.');
+}
+
 ?>
 <div class="gf_settings_pad">
     <div class="gf_pad_header"><?php echo get_string('import', 'groupformation'); ?></div>

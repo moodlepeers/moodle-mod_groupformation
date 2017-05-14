@@ -283,7 +283,7 @@ class mod_groupformation_grouping_controller {
 
         switch ($this->state) {
             case 'ready':
-                // 000000
+                // 000000.
                 $assigns['status'] = array(
                         get_string('grouping_status_1', 'groupformation'), 0);
                 $array['button1']['value'] = 1;
@@ -291,9 +291,8 @@ class mod_groupformation_grouping_controller {
                 break;
 
             case 'waiting':
-                // 100000 = waiting
-                // or
-                // 010000 = started
+                // 100000 = waiting.
+                // 010000 = started.
                 $assigns['status'] = array(
                         get_string('grouping_status_2', 'groupformation'), 1);
                 $array['button1']['name'] = 'abort';
@@ -304,9 +303,8 @@ class mod_groupformation_grouping_controller {
                 break;
 
             case 'started':
-                // 100000 = waiting
-                // or
-                // 010000 = started
+                // 100000 = waiting.
+                // 010000 = started.
                 $assigns['status'] = array(
                         get_string('grouping_status_2', 'groupformation'), 1);
                 $array['button1']['name'] = 'abort';
@@ -317,13 +315,13 @@ class mod_groupformation_grouping_controller {
                 break;
 
             case 'aborted' :
-                // 001000 = aborted
+                // 001000 = aborted.
                 $assigns['status'] = array(
                         get_string('grouping_status_3', 'groupformation'), 1);
                 break;
 
             case 'done' :
-                // 000110 = done - groups_generated
+                // 000110 = done - groups_generated.
                 $assigns['status'] = array(
                         get_string('grouping_status_4', 'groupformation'), 0);
                 $array['button2']['value'] = 1;
@@ -335,7 +333,7 @@ class mod_groupformation_grouping_controller {
                 break;
 
             case 'done_groups' :
-                // 000111 = done - groups_generated - groups_adopted
+                // 000111 = done - groups_generated - groups_adopted.
                 $assigns['status'] = array(
                         get_string('grouping_status_5', 'groupformation'), 0);
                 $array['button2']['value'] = 1;
@@ -344,9 +342,8 @@ class mod_groupformation_grouping_controller {
                 break;
 
             case 'waiting_groups':
-                // 100000 = waiting - groups_generated
-                // or
-                // 010000 = started - groups_generated
+                // 100000 = waiting - groups_generated.
+                // 010000 = started - groups_generated.
                 $assigns['status'] = array(
                         get_string('grouping_status_6', 'groupformation'), 1);
                 $assigns['emailnotifications'] = $this->store->get_email_setting();

@@ -18,8 +18,12 @@
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+if (!defined('MOODLE_INTERNAL')) {
+    die ('Direct access to this script is forbidden.');
+}
+
 ?>
-<?php if (count($this->_['buttons'])>0): ?>
+<?php if (count($this->_['buttons']) > 0): ?>
     <div class="gf_pad_header_small"> <?php echo get_string('options', 'groupformation'); ?> </div>
     <div class="gf_pad_content" style="">
         <div class="grid">
@@ -103,4 +107,4 @@
             </div>
         </div>
     </div>
-<?php endif;?>
+<?php endif;

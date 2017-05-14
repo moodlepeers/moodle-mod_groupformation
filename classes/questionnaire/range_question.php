@@ -54,8 +54,6 @@ class mod_groupformation_range_question {
         echo '<td data-title="' . min(array_keys($options)) . ' = ' . $options [min(array_keys($options))] . ', ' .
                 max(array_keys($options)) . ' = ' . $options [max(array_keys($options))] . '" class="range">';
         echo '<span class="">' . min(array_keys($options)) . '</span>';
-        // echo '<input type="range" name="' . $category . $questionid . '" class="gf_range_inputs" min="0" max="';
-        // echo max(array_keys($options)) . '" value="' . $answer . '" />';
 
         echo '<input class="gf_range_inputs" type="range" name="' . $category . $questionid . '" min="0" max="';
         echo max(array_keys($options)) . '" value="' . $answer . '" />';

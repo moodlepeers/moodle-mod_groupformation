@@ -1142,7 +1142,8 @@ class mod_groupformation_storage_manager {
         $sum = array_sum($this->get_numbers($categories));
 
         // Get userids of groupformation answers.
-        $userids = $DB->get_fieldset_select('groupformation_answer', 'userid', 'groupformation = ?', array($this->groupformationid));
+        $userids = $DB->get_fieldset_select('groupformation_answer', 'userid', 'groupformation = ?',
+                array($this->groupformationid));
 
         // Returns an array using the userids as keys and their frequency in answers as values.
         $userfrequencies = array_count_values($userids);
