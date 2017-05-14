@@ -51,10 +51,10 @@ global $USER;
                                 <?php echo $topic->name; ?>
                             </td>
                             <td>
-                                <?php echo round($topic->score,2); ?>
+                                <?php echo round($topic->score, 2); ?>
                             </td>
                         </tr>
-                        <?php $i+=1; ?>
+                        <?php $i += 1; ?>
                     <?php endforeach; ?>
                 </tbody>
             </table>

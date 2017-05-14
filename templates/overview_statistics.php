@@ -19,14 +19,14 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 ?>
-<?php if (array_key_exists('questionnaire_answer_stats',$this->_)): ?>
+<?php if (array_key_exists('questionnaire_answer_stats', $this->_)): ?>
     <div class="gf_pad_header_small">
         <?php echo $this->_['questionnaire_answer_stats']; ?>
     </div>
     <div class="gf_pad_content">
         <p>
             <?php if(!$this->_['ask_for_topics']): ?>
-                <?php echo get_string('answers_for_eval_text','groupformation');?>
+                <?php echo get_string('answers_for_eval_text','groupformation'); ?>
             <?php endif; ?>
         </p>
         <?php foreach ($this->_['survey_states'] as $row) { ?>
@@ -35,4 +35,4 @@
             </div>
         <?php } ?>
     </div>
-<?php endif;?>
+<?php endif;

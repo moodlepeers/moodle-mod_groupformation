@@ -95,9 +95,9 @@ class mod_groupformation_grouping_controller {
         $getuserid = function($u) {
             return $u->userid;
         };
-        
+
         $userids = array_map($getuserid, $this->users);
-        
+
         $selectfields = implode(',', ['id', get_all_user_name_fields(true)]);
         $this->userrecords = $DB->get_records_list('user', 'id', $userids, null, $selectfields);
 
@@ -199,12 +199,7 @@ class mod_groupformation_grouping_controller {
      */
     public function adopt() {
         $ajm = new mod_groupformation_advanced_job_manager();
-
         $ajm::set_job($this->job, "waiting_groups", false, false);
-
-        // mod_groupformation_group_generator::generate_moodle_groups($this->groupformationid);
-
-        // $ajm::set_job($this->job, "done_groups");
     }
 
     /**
@@ -289,28 +284,22 @@ class mod_groupformation_grouping_controller {
         switch ($this->state) {
             case 'ready':
                 // 000000
-
                 $assigns['status'] = array(
                         get_string('grouping_status_1', 'groupformation'), 0);
-
                 $array['button1']['value'] = 1;
                 $array['button1']['state'] = '';
-
                 break;
 
             case 'waiting':
                 // 100000 = waiting
                 // or
                 // 010000 = started
-
                 $assigns['status'] = array(
                         get_string('grouping_status_2', 'groupformation'), 1);
-
                 $array['button1']['name'] = 'abort';
                 $array['button1']['text'] = get_string('grouping_abort', 'groupformation');
                 $array['button1']['value'] = 1;
                 $array['button1']['state'] = '';
-
                 $assigns['emailnotifications'] = $this->store->get_email_setting();
                 break;
 
@@ -318,146 +307,56 @@ class mod_groupformation_grouping_controller {
                 // 100000 = waiting
                 // or
                 // 010000 = started
-
                 $assigns['status'] = array(
                         get_string('grouping_status_2', 'groupformation'), 1);
-
                 $array['button1']['name'] = 'abort';
                 $array['button1']['text'] = get_string('grouping_abort', 'groupformation');
                 $array['button1']['value'] = 1;
                 $array['button1']['state'] = '';
-
                 $assigns['emailnotifications'] = $this->store->get_email_setting();
                 break;
 
             case 'aborted' :
                 // 001000 = aborted
-
                 $assigns['status'] = array(
                         get_string('grouping_status_3', 'groupformation'), 1);
                 break;
 
             case 'done' :
                 // 000110 = done - groups_generated
-
                 $assigns['status'] = array(
                         get_string('grouping_status_4', 'groupformation'), 0);
-
                 $array['button2']['value'] = 1;
                 $array['button2']['state'] = '';
                 $array['button3']['value'] = 1;
                 $array['button3']['state'] = '';
                 $array['button4']['value'] = 1;
                 $array['button4']['state'] = '';
-
                 break;
 
             case 'done_groups' :
                 // 000111 = done - groups_generated - groups_adopted
                 $assigns['status'] = array(
                         get_string('grouping_status_5', 'groupformation'), 0);
-
                 $array['button2']['value'] = 1;
                 $array['button2']['state'] = '';
                 $array['button2']['text'] = get_string('grouping_delete_moodle_groups', 'groupformation');
-
                 break;
 
             case 'waiting_groups':
                 // 100000 = waiting - groups_generated
                 // or
                 // 010000 = started - groups_generated
-
                 $assigns['status'] = array(
                         get_string('grouping_status_6', 'groupformation'), 1);
-
-                /*$array['button1']['name'] = 'abort';
-                $array['button1']['text'] = get_string('grouping_abort', 'groupformation');
-                $array['button1']['value'] = 1;
-                $array['button1']['state'] = '';*/
-
                 $assigns['emailnotifications'] = $this->store->get_email_setting();
                 break;
 
             default:
                 $assigns['status'] = array(
                         get_string('grouping_status_0', 'groupformation'), 0);
-
                 break;
         }
-
-        /*switch ($this->viewstate) {
-            case 0 :
-                $assigns['status'] = array(
-                        get_string('grouping_status_0', 'groupformation'), 0);
-
-                break;
-
-            case 1 :
-                // 000000
-
-                $assigns['status'] = array(
-                        get_string('grouping_status_1', 'groupformation'), 0);
-
-                $array['button1']['value'] = 1;
-                $array['button1']['state'] = '';
-
-                break;
-
-            case 2 :
-                // 100000 = waiting
-                // or
-                // 010000 = started
-
-                $assigns['status'] = array(
-                        get_string('grouping_status_2', 'groupformation'), 1);
-
-                $array['button1']['name'] = 'abort';
-                $array['button1']['text'] = get_string('grouping_abort', 'groupformation');
-                $array['button1']['value'] = 1;
-                $array['button1']['state'] = '';
-
-                $assigns['emailnotifications'] = $this->store->get_email_setting();
-                break;
-
-            case 3 :
-                // 001000 = aborted
-
-                $assigns['status'] = array(
-                        get_string('grouping_status_3', 'groupformation'), 1);
-                break;
-
-            case 4 :
-                // 000110 = done - groups_generated
-
-                $assigns['status'] = array(
-                        get_string('grouping_status_4', 'groupformation'), 0);
-
-                $array['button2']['value'] = 1;
-                $array['button2']['state'] = '';
-                $array['button3']['value'] = 1;
-                $array['button3']['state'] = '';
-                $array['button4']['value'] = 1;
-                $array['button4']['state'] = '';
-
-                break;
-
-            case 5 :
-                // 000111 = done - groups_generated - groups_adopted
-                $assigns['status'] = array(
-                        get_string('grouping_status_5', 'groupformation'), 0);
-
-                $array['button2']['value'] = 1;
-                $array['button2']['state'] = '';
-                $array['button2']['text'] = get_string('grouping_delete_moodle_groups', 'groupformation');
-
-                break;
-
-            case 'default' :
-            default :
-
-                break;
-        }*/
 
         $assigns['buttons'] = $array;
 
@@ -480,7 +379,6 @@ class mod_groupformation_grouping_controller {
         $assigns = array();
         if ($this->state == 'done' || $this->state == 'done_groups') {
 
-            //$assigns['performance'] = $this->job->performance_index;
             $assigns['numbOfGroups'] = count($this->groups);
             $assigns['maxSize'] = $this->groupsmanager->get_max_groups_size($this->groups);
 

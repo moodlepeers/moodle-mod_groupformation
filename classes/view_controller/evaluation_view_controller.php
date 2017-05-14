@@ -27,13 +27,9 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/basic_
 class mod_groupformation_evaluation_view_controller extends mod_groupformation_basic_view_controller {
 
     /** @var array Template names */
-    protected $templatenames = array('evaluation_info'); //, 'evaluation_topics');
+    protected $templatenames = array('evaluation_info');
     /** @var string Title of page */
     protected $title = 'evaluation';
-
-    public function __construct($groupformationid, $controller) {
-        parent::__construct($groupformationid, $controller);
-    }
 
     /**
      * Renders 'evaluation_info' template.

@@ -191,7 +191,6 @@ class mod_groupformation_criterion_calculator {
      */
     public function get_values($criterion, $userid, $specs = null) {
 
-
         if (is_null($specs)) {
             $specs = $this->data->get_criterion_specification($criterion);
         }

@@ -150,7 +150,7 @@ if ($store->is_archived()) {
 
     $controller = new mod_groupformation_student_overview_controller ($cm->id, $groupformation->id, $userid);
 
-    $viewcontroller = new mod_groupformation_overview_view_controller($groupformation->id,$controller);
+    $viewcontroller = new mod_groupformation_overview_view_controller($groupformation->id, $controller);
     echo $viewcontroller->render();
 
     echo '</form>';

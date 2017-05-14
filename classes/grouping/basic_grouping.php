@@ -21,8 +21,9 @@
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.');
+    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
 }
 
 require_once($CFG->dirroot . '/mod/groupformation/lib.php');
@@ -64,7 +65,7 @@ class mod_groupformation_basic_grouping extends mod_groupformation_grouping {
 
         $configurationkeys = array_keys($configurations);
 
-        // here only 1 slice (groupal:1)
+        // Here only 1 slice (groupal:1).
         $numberofslices = count($configurationkeys);
 
         $groupsizes = $this->store->determine_group_size($users);

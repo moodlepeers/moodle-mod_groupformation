@@ -23,14 +23,10 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-/**
- * Structure step to restore one groupformation activity
- *
- * @package mod_groupformation
- * @category backup
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
+if (!defined('MOODLE_INTERNAL')) {
+    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
+}
+
 class restore_groupformation_activity_structure_step extends restore_activity_structure_step {
 
     /**

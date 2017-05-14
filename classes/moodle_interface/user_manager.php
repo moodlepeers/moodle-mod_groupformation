@@ -530,7 +530,8 @@ class mod_groupformation_user_manager {
     public function set_consent($userid, $value) {
         global $DB;
         $this->set_status($userid);
-        $record = $DB->get_record('groupformation_started', array('groupformation' => $this->groupformationid, 'userid' => $userid));
+        $record = $DB->get_record('groupformation_started',
+                array('groupformation' => $this->groupformationid, 'userid' => $userid));
         $record->consent = $value;
         $DB->update_record('groupformation_started', $record);
     }
@@ -602,7 +603,8 @@ class mod_groupformation_user_manager {
     public function register_participant_code($userid, $participantcode) {
         global $DB;
         $this->set_status($userid);
-        $record = $DB->get_record('groupformation_started', array('groupformation' => $this->groupformationid, 'userid' => $userid));
+        $record = $DB->get_record('groupformation_started',
+                array('groupformation' => $this->groupformationid, 'userid' => $userid));
         $record->participantcode = strtoupper($participantcode);
         $DB->update_record('groupformation_started', $record);
     }
@@ -706,20 +708,20 @@ class mod_groupformation_user_manager {
         $DB->update_record('groupformation_started', $data);
     }
 
-    public function get_topic_score($topic_number) {
+    public function get_topic_score($topicnumber) {
         global $DB;
 
         $score = 0;
 
-        $questionid = $topic_number;
+        $questionid = $topicnumber;
 
         $num = $this->store->get_number('topic');
 
-        $answers = $DB->get_records('groupformation_answer',array('groupformation' => $this->groupformationid, 'category' => 'topic', 'questionid' => $questionid));
+        $answers = $DB->get_records('groupformation_answer', array('groupformation' => $this->groupformationid, 'category' => 'topic', 'questionid' => $questionid));
 
         foreach ($answers as $answer) {
             $score += $answer->answer;
         }
-        return ($score / count($answers))/$num;
+        return ($score / count($answers)) / $num;
     }
 }

@@ -20,7 +20,9 @@
  * @author Rene Roepke
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die();
+if (!defined('MOODLE_INTERNAL')) {
+    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
+}
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/basic_view_controller.php');
 
@@ -30,16 +32,6 @@ class mod_groupformation_export_view_controller extends mod_groupformation_basic
     protected $templatenames = array('export_info');
     /** @var string Title of page */
     protected $title = 'export';
-
-    /**
-     * mod_groupformation_export_view_controller constructor.
-     *
-     * @param $groupformationid
-     * @param $controller
-     */
-    public function __construct($groupformationid, $controller) {
-        parent::__construct($groupformationid, $controller);
-    }
 
     /**
      * Renders 'export_info' template.

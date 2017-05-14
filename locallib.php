@@ -33,12 +33,13 @@ defined('MOODLE_INTERNAL') || die ();
  * @param string $filename
  */
 function groupformation_add_jquery($PAGE, $filename = null) {
+    global $CFG;
     $PAGE->requires->jquery();
     $PAGE->requires->jquery_plugin('ui');
     $PAGE->requires->jquery_plugin('ui-css');
 
     if (!is_null($filename)) {
-        $PAGE->requires->js(new moodle_url('/mod/groupformation/js/'.$filename));
+        $PAGE->requires->js(new moodle_url($CFG->wwwroot.'/mod/groupformation/js/'.$filename));
         // better prefix with new moodle_url($CFG->wwwroot.'/mod/groupformation/js/'.$filename
     }
 }
@@ -50,8 +51,8 @@ function groupformation_add_jquery($PAGE, $filename = null) {
  * @param string $filename in amd folder of mod
  */
 function groupformation_add_js_amd($PAGE, $filename) {
-    $PAGE->requires->js(new moodle_url('/mod/groupformation/amd/src/'.$filename));
-        // better prefix with new moodle_url($CFG->wwwroot.'/mod/groupformation/js/'.$filename
+    global $CFG;
+    $PAGE->requires->js(new moodle_url($CFG->wwwroot.'/mod/groupformation/amd/src/'.$filename));
 }
 
 /**

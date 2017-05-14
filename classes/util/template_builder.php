@@ -67,7 +67,7 @@ class mod_groupformation_template_builder {
      * @param $map
      */
     public function assign_multiple($map) {
-        foreach($map as $key => $value) {
+        foreach ($map as $key => $value) {
             $this->_[$key] = $value;
         }
     }

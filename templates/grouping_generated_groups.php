@@ -24,7 +24,7 @@
     <?php echo get_string('group_overview', 'groupformation'); ?>
 </div>
 <div class="groupsbuilt_body gf_pad_content">
-    <?php if (array_key_exists('grouping_no_data',$this->_)): ?>
+    <?php if (array_key_exists('grouping_no_data', $this->_)): ?>
         <p style="opacity: 0.5; margin-left: 4px;">
             <i>
                 <?php echo $this->_['grouping_no_data']; ?>

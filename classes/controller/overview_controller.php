@@ -292,7 +292,7 @@ class mod_groupformation_student_overview_controller {
     public function load_statistics() {
         $assigns = array();
 
-        if ($this->viewstate == 0){
+        if ($this->viewstate == 0) {
             $assigns['ask_for_topics'] = $this->store->ask_for_topics();
             $assigns['survey_states'] = $this->surveystatesarray;
             $assigns['questionnaire_answer_stats'] = $this->surveystatestitle;
@@ -304,7 +304,7 @@ class mod_groupformation_student_overview_controller {
         return $assigns;
     }
 
-    public function load_settings(){
+    public function load_settings() {
         $assigns = array();
 
         if ($this->viewstate == -1 || $this->viewstate == 0) {

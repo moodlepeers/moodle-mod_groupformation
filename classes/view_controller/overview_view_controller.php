@@ -39,7 +39,7 @@ class mod_groupformation_overview_view_controller extends mod_groupformation_bas
      */
     public function __construct($groupformationid, $controller) {
         parent::__construct($groupformationid, $controller);
-        $this->view->assign('title_append'," - ".$this->store->get_name());
+        $this->view->assign('title_append', " - ".$this->store->get_name());
     }
 
     /**

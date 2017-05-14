@@ -81,7 +81,7 @@ if ($store->is_archived()) {
 } else {
     $controller = new mod_groupformation_evaluation_controller($groupformation->id);
 
-    $viewcontroller = new mod_groupformation_evaluation_view_controller($groupformation->id,$controller);
+    $viewcontroller = new mod_groupformation_evaluation_view_controller($groupformation->id, $controller);
     echo $viewcontroller->render();
 }
 

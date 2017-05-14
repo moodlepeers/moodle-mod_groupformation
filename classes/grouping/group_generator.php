@@ -14,13 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.');
-}
-
-require_once($CFG->dirroot . '/group/lib.php');
-require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
-
 /**
  * Create and allocate users to groups
  * This code is extracted out of /group/autogroup.php
@@ -29,6 +22,14 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/group
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+if (!defined('MOODLE_INTERNAL')) {
+    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
+}
+
+require_once($CFG->dirroot . '/group/lib.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
+
 class mod_groupformation_group_generator {
 
     /**

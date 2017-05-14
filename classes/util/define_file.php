@@ -39,10 +39,10 @@ class mod_groupformation_data {
                     "evaluation" => true,
                     "labels" => array(
                             "extraversion" => array(
-                                    "scenarios" => array(1 => false, 2 => false),  // false=heterogeneous, true=homogeneous
-                                    "evaluation" => true,  // use for displaying it to user (to compare to group and course)
-                                    "questionids" => array(12, -1, 13, 14, -15, 16, -17, 18, 6), // inverse questions=negative
-                                    "significant_id_only" => false, // true=only use the one questionid with most significant differences between users
+                                    "scenarios" => array(1 => false, 2 => false),  // False = heterogeneous, True = homogeneous.
+                                    "evaluation" => true,  // Use for displaying it to user (to compare to group and course).
+                                    "questionids" => array(12, -1, 13, 14, -15, 16, -17, 18, 6), // Inverse questions = negative.
+                                    "significant_id_only" => false, // True = only use the one questionid with most significant differences between users.
                                     "cutoffs" => array(0.313169217, 0.776242547),
                             ),
                             "conscientiousness" => array(
@@ -81,8 +81,8 @@ class mod_groupformation_data {
                     "evaluation" => true,
                     "labels" => array(
                             "challenge" => array(
-                                    // TODO: support scenariocriteriontypes and allow "none" to not use it for grouping,
-                                   // (added for displaying feedback to user; no true/false asignment to prevent algorithmic usage)
+                                    // TODO: support scenariocriteriontypes and allow "none" to not use it for grouping.
+                                   // Added for displaying feedback to user; no true/false asignment to prevent algorithmic usage.
                                     "scenarios" => array(1 => false),
                                     "evaluation" => true,
                                     "questionids" => array(6, 8, 10, 15, 17),
@@ -92,13 +92,14 @@ class mod_groupformation_data {
                             "interest" => array(
                                     "scenarios" => array(1 => false),
                                     "evaluation" => true,
-                                    "questionids" => array(1, 7, 11, 17), // replaced 4 with 17 (because scient. work question does not suit so well generally)
+                                    "questionids" => array(1, 7, 11, 17),
+                                // Replaced 4 with 17 (because scient. work question does not suit so well generally).
                                     "significant_id_only" => false,
                                     "cutoffs" => array(0.439861739, 0.751249372),
                             ),
                             "successprobability" => array(
                                     "scenarios" => array(1 => false),
-                                    "evaluation" => true, // not used for matching, only displayed
+                                    "evaluation" => true, // Not used for matching, only displayed.
                                     "questionids" => array(2, 3, 13, 14),
                                     "significant_id_only" => false,
                                     "cutoffs" => array(0.314297404, 0.511297834),
@@ -128,7 +129,7 @@ class mod_groupformation_data {
             ),
             "learning" => array(
                     "category" => "learning",
-                    "scenarios" => array(),  // empty=not used in any scenario
+                    "scenarios" => array(),  // Empty = not used in any scenario.
                     "evaluation" => false,
                     "labels" => array(
                             "konkreteerfahrung" => array(
@@ -228,9 +229,9 @@ class mod_groupformation_data {
             ),
     );
 
-    // the following arrays values must match the filenames (without language prefix), e.g. en_general.xml => 'general'
-    // do NOT include 'knowledge' or 'topics' as these are not XML-based, but dynamically created.
-    // numbers 1,2,3 are the scenarios available for selection
+    // The following arrays values must match the filenames (without language prefix), e.g. en_general.xml => 'general'.
+    // Do NOT include 'knowledge' or 'topics' as these are not XML-based, but dynamically created.
+    // Numbers 1,2,3 are the scenarios available for selection.
     private $categorysets = array(
             '1' => array(
                     'general',
@@ -253,7 +254,7 @@ class mod_groupformation_data {
             ),
     );
 
-    // special mode booleans (can be ignored in normal use cases)
+    // Special mode booleans (can be ignored in normal use cases).
     private $mathprepcoursemode = false;
     private $allanswersrequired = false;
 

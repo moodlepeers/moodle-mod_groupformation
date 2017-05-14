@@ -98,8 +98,6 @@ class mod_groupformation_storage_manager {
     public function catalog_table_not_set($category = 'grade') {
         global $DB;
 
-        // $count = $DB->count_records('groupformation_' . $category);
-        // TODO
         $count = $DB->count_records('groupformation_question', array('category' => $category));
 
         return $count == 0;
@@ -263,8 +261,6 @@ class mod_groupformation_storage_manager {
     public function get_possible_language($category) {
         global $DB;
 
-        // $table = 'groupformation_' . $category;
-        // TODO
         $table = 'groupformation_question';
 
         $lang = $DB->get_field($table, 'language', array('category' => $category), IGNORE_MULTIPLE);
@@ -319,18 +315,11 @@ class mod_groupformation_storage_manager {
             return $this->get_max_points();
         }
 
-        // $table = 'groupformation_' . $category;
-        // TODO
         $table = 'groupformation_question';
         return $DB->get_field($table, 'optionmax', array(
                 'language' => 'en', 'category' => $category,
                 'questionid' => $i
         ));
-
-        /*return $DB->get_field($table, 'optionmax', array(
-           'language' => 'en',
-           'questionid' => $i
-        ));*/
     }
 
     /**
@@ -1148,24 +1137,24 @@ class mod_groupformation_storage_manager {
         $someanswers = array();
         $noorsomeanswers = array();
 
-        // has_answered_everything
+        // Has_answered_everything.
         $categories = $this->get_categories();
         $sum = array_sum($this->get_numbers($categories));
 
-        // get userids of groupformation answers
+        // Get userids of groupformation answers.
         $userids = $DB->get_fieldset_select('groupformation_answer', 'userid', 'groupformation = ?', array($this->groupformationid));
 
-        // returns an array using the userids as keys and their frequency in answers as values
-        $user_frequencies = array_count_values($userids);
+        // Returns an array using the userids as keys and their frequency in answers as values.
+        $userfrequencies = array_count_values($userids);
 
-        $number_of_answers = function($userid) use ($sum, $user_frequencies) {
-            return array_key_exists($userid, $user_frequencies) ? $user_frequencies[$userid] : 0;
+        $numberofanswers = function($userid) use ($sum, $userfrequencies) {
+            return array_key_exists($userid, $userfrequencies) ? $userfrequencies[$userid] : 0;
         };
 
         foreach (array_values($enrolledstudents) as $userid) {
-            if($sum <= $number_of_answers($userid)) {
+            if ($sum <= $numberofanswers($userid)) {
                 $allanswers [] = $userid;
-            } else if($groupingsetting && $number_of_answers($userid) > 0) {
+            } else if ($groupingsetting && $numberofanswers($userid) > 0) {
                 $someanswers [] = $userid;
             } else {
                 $noorsomeanswers [] = $userid;

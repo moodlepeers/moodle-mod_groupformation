@@ -21,6 +21,10 @@
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+if (!defined('MOODLE_INTERNAL')) {
+    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
+}
+
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
@@ -331,10 +335,8 @@ class mod_groupformation_csv_writer {
                     $groupid = $DB->get_field('groups_members', 'groupid', array('userid' => $userid));
                     $courseid = $DB->get_field('groups', 'courseid', array('id' => $groupid));
                     if ($courseid == $this->groupformationid || $courseid + 2 == $this->groupformationid) {
-                        // var_dump($userid . " in group ".($groupid - 394));
                         $members = $DB->get_records('groups_members', array('groupid' => $groupid), 'userid', 'userid');
                         $unknown = array_merge($unknown, array_keys($members));
-                        // var_dump(implode(', ',$unknown));
                         $userdata[$userid]['groupid'] = $groupid - 394;
                         $userdata[$userid]['random'] = 2;
                     }
@@ -381,14 +383,11 @@ class mod_groupformation_csv_writer {
 
         $csv = "";
 
-        // var_dump($us);
         $us = array_values(array_unique(array_merge(array_values($us), array_values($unknown))));
-        // var_dump($us);
         for ($j = 0; $j < count($us); $j++) {
 
             if ($j == 0) {
                 $csv .= "userid,participantcode,groupformationid,groupid,groupname,performance_index,";
-                // $csv .= "groupkey,";
                 $csv .= "random,manual_random,criterion_extraversion,criterion_gewissenhaftigkeit,";
                 foreach ($categories as $category) {
                     if ($category == "knowledge" || $category == "topic") {
@@ -420,7 +419,6 @@ class mod_groupformation_csv_writer {
             $line .= $userdata[$userid]['groupid'] . ",";
             $line .= $userdata[$userid]['groupname'] . ",";
             $line .= $userdata[$userid]['performance_index'] . ",";
-            // $line .= $userdata[$userid]['groupkey'] . ",";
             $line .= $userdata[$userid]['rand'] . ",";
             $line .= $userdata[$userid]['mrand'] . ",";
             $line .= $userdata[$userid]['ex'] . ",";

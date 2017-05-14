@@ -76,8 +76,6 @@ class mod_groupformation_group_controller {
 
             $name = $this->groupsmanager->get_group_name($userid);
 
-
-
             $groupname = $name;
             $othermembers = $this->groupsmanager->get_group_members($userid);
 
@@ -115,7 +113,7 @@ class mod_groupformation_group_controller {
             if ($this->groupsmanager->groups_created()) {
                 $groupinfo = get_string('noGroup', 'groupformation');
                 $assigns['group_info'] = $groupinfo;
-            }else{
+            } else {
                 $groupinfo = get_string('groupingNotReady', 'groupformation');
                 $assigns['group_info'] = $groupinfo;
             }

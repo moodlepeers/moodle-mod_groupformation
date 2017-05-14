@@ -27,7 +27,7 @@ require(['jquery'], function($) {
             var json = JSON.stringify(group_string);
             $('#groups_string').val(json);
 
-            // comment this out for debugging
+            // Comment this out for debugging.
             $('#edit_groups_form').submit();
 
         });

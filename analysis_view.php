@@ -35,7 +35,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/stora
 $id = optional_param('id', 0, PARAM_INT);
 $doshow = optional_param('do_show', 'analysis', PARAM_TEXT);
 
-// admin params in URL (only work in DEBUG mode)
+// Admin params in URL (only work in DEBUG mode).
 $runjob = optional_param('runjob', false, PARAM_BOOL);
 $createusers = optional_param('create_users', 0, PARAM_INT);
 $createanswers = optional_param('create_answers', false, PARAM_BOOL);
@@ -79,20 +79,6 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/controller/analysis_co
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_parser.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/analysis_view_controller.php');
 
-//----------------------------------------------------------------------------------
-
-//require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/advanced_job_manager.php');
-//
-//$ajm = new mod_groupformation_advanced_job_manager();
-//
-//$job = $ajm::get_next_job('waiting_groups');
-//
-//if (!is_null($job)) {
-//    print_r($job);
-//}
-
-//----------------------------------------------------------------------------------
-
 if ($CFG->debug === 32767 && $resetjob) {
     global $DB;
 
@@ -104,17 +90,9 @@ if ($CFG->debug === 32767 && $runjob) {
 
     $job = $ajm::get_job($groupformation->id);
 
-    function print_array($aArray) {
-        // Print a nicely formatted array representation:
-        echo '<pre>';
-        print_r($aArray);
-        echo '</pre>';
-    }
-
     if (!is_null($job)) {
         $result = $ajm::do_groupal($job);
-        print_array($result);
-        $saved = $ajm::save_result($job,$result);
+        $saved = $ajm::save_result($job, $result);
         $ajm::set_job('done');
     }
 }
@@ -167,7 +145,7 @@ if ($store->is_archived() && has_capability('mod/groupformation:editsettings', $
     echo '<input type="hidden" name="id" value="' . $id . '"/>';
     echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
 
-    $viewcontroller = new mod_groupformation_analysis_view_controller($groupformation->id,$controller);
+    $viewcontroller = new mod_groupformation_analysis_view_controller($groupformation->id, $controller);
     echo $viewcontroller->render();
 
     echo '</form>';

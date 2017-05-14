@@ -195,9 +195,7 @@ class mod_groupformation_analysis_controller {
         $assigns['info_teacher'] = mod_groupformation_util::get_info_text_for_teacher(false, "analysis");
         $assigns['analysis_time_start'] = $starttime;
         $assigns['analysis_time_end'] = $endtime;
-        $assigns['analysis_status_info'] =
-                get_string('analysis_status_info' . strval($this->state), 'groupformation')
-        ;
+        $assigns['analysis_status_info'] = get_string('analysis_status_info' . strval($this->state), 'groupformation');
 
         return $assigns;
     }
@@ -215,7 +213,7 @@ class mod_groupformation_analysis_controller {
 
         $topics = array();
 
-        foreach($options as $key => $option){
+        foreach ($options as $key => $option) {
             $topic = new stdClass();
             $topic->name = $option;
             $topic->score = $this->usermanager->get_topic_score($key + 1);

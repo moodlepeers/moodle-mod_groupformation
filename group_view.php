@@ -77,7 +77,7 @@ if ($store->is_archived()) {
     echo '<div class="alert" id="commited_view">' . get_string('archived_activity_answers', 'groupformation') . '</div>';
 } else {
     $controller = new mod_groupformation_group_controller($groupformation->id);
-    $viewcontroller = new mod_groupformation_group_view_controller($groupformation->id,$controller);
+    $viewcontroller = new mod_groupformation_group_view_controller($groupformation->id, $controller);
     echo $viewcontroller->render();
 }
 echo $OUTPUT->footer();

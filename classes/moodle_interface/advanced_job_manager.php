@@ -46,19 +46,37 @@ require_once($CFG->dirroot . '/mod/groupformation/lib/classes/xml_writers/cohort
 
 class mod_groupformation_advanced_job_manager {
 
-    static $jobstates = array(
-            'ready' => array('waiting' => 0, 'started' => 0, 'aborted' => 0, 'done' => 0, 'groups_generated' => 0, 'groups_adopted' => 0),
-            'waiting' => array('waiting' => 1, 'started' => 0, 'aborted' => 0, 'done' => 0, 'groups_generated' => 0, 'groups_adopted' => 0),
-            'started' => array('waiting' => 0, 'started' => 1, 'aborted' => 0, 'done' => 0, 'groups_generated' => 0, 'groups_adopted' => 0),
-            'aborted' => array('waiting' => 0, 'started' => 0, 'aborted' => 1, 'done' => 0, 'groups_generated' => 0, 'groups_adopted' => 0),
-            'done' => array('waiting' => 0, 'started' => 0, 'aborted' => 0, 'done' => 1, 'groups_generated' => 1, 'groups_adopted' => 0),
-            'waiting_groups' => array('waiting' => 1, 'started' => 0, 'aborted' => 0, 'done' => 0, 'groups_generated' => 1, 'groups_adopted' => 0),
-            'started_groups' => array('waiting' => 1, 'started' => 0, 'aborted' => 0, 'done' => 0, 'groups_generated' => 1, 'groups_adopted' => 0),
-            'aborted_groups' => array('waiting' => 0, 'started' => 0, 'aborted' => 1, 'done' => 0, 'groups_generated' => 1, 'groups_adopted' => 0),
-            'done_groups' => array('waiting' => 0, 'started' => 0, 'aborted' => 0, 'done' => 1, 'groups_generated' => 1, 'groups_adopted' => 1),
+    static private $jobstates = array(
+            'ready' =>
+                    array('waiting' => 0, 'started' => 0, 'aborted' => 0, 'done' => 0, 'groups_generated' => 0,
+                            'groups_adopted' => 0),
+            'waiting' =>
+                    array('waiting' => 1, 'started' => 0, 'aborted' => 0, 'done' => 0, 'groups_generated' => 0,
+                            'groups_adopted' => 0),
+            'started' =>
+                    array('waiting' => 0, 'started' => 1, 'aborted' => 0, 'done' => 0, 'groups_generated' => 0,
+                            'groups_adopted' => 0),
+            'aborted' =>
+                    array('waiting' => 0, 'started' => 0, 'aborted' => 1, 'done' => 0, 'groups_generated' => 0,
+                            'groups_adopted' => 0),
+            'done' =>
+                    array('waiting' => 0, 'started' => 0, 'aborted' => 0, 'done' => 1, 'groups_generated' => 1,
+                            'groups_adopted' => 0),
+            'waiting_groups' =>
+                    array('waiting' => 1, 'started' => 0, 'aborted' => 0, 'done' => 0, 'groups_generated' => 1,
+                            'groups_adopted' => 0),
+            'started_groups' =>
+                    array('waiting' => 1, 'started' => 0, 'aborted' => 0, 'done' => 0, 'groups_generated' => 1,
+                            'groups_adopted' => 0),
+            'aborted_groups' =>
+                    array('waiting' => 0, 'started' => 0, 'aborted' => 1, 'done' => 0, 'groups_generated' => 1,
+                            'groups_adopted' => 0),
+            'done_groups' =>
+                    array('waiting' => 0, 'started' => 0, 'aborted' => 0, 'done' => 1, 'groups_generated' => 1,
+                            'groups_adopted' => 1),
     );
 
-    static $timesstatesmap = array(
+    static private $timesstatesmap = array(
             'waiting' => 'timecreated',
             'started' => 'timestarted',
             'aborted' => 'timefinished',
@@ -147,12 +165,12 @@ class mod_groupformation_advanced_job_manager {
         foreach (self::$jobstates[$state] as $key => $value) {
             $job->$key = $value;
 
-            if ($value && $settime){
+            if ($value && $settime) {
                 $timekey = self::$timesstatesmap[$state];
                 $job->$timekey = time();
             }
 
-            if (!$value && $resettime){
+            if (!$value && $resettime) {
                 $timekey = self::$timesstatesmap[$state];
                 $job->$timekey = 0;
             }
@@ -166,7 +184,7 @@ class mod_groupformation_advanced_job_manager {
             $job->groups_generated = 1;
         }
 
-        return $DB->update_record('groupformation_jobs',$job);
+        return $DB->update_record('groupformation_jobs', $job);
     }
 
     /**
@@ -194,7 +212,7 @@ class mod_groupformation_advanced_job_manager {
     public static function get_state($job) {
         foreach (self::$jobstates as $state => $values) {
             $bool = true;
-            foreach ($values as $key => $value){
+            foreach ($values as $key => $value) {
                 $bool &= ($job->$key == $value);
             }
             if ($bool) {
@@ -252,23 +270,24 @@ class mod_groupformation_advanced_job_manager {
      * @return null
      */
     public static function notify_teacher($job) {
-        // Disabled for now
+        global $DB, $CFG;
 
-        //global $DB, $CFG;
-        //$userid = $job->started_by;
-        //$rec = array_pop($DB->get_records('course_modules', array(
-        //    'instance' => $job->groupformationid)));
-        //$coursemoduleid = $rec->id;
-        //$recipient = array_pop($DB->get_records('user', array(
-        //    'id' => $userid)));
-        //$subject = get_string('groupformation_message_subject', 'groupformation');
-        //$message = get_string('groupformation_message', 'groupformation');
-        //$contexturl = $CFG->wwwroot;
-        //$contexturl .= '/mod/groupformation/grouping_view.php?id=';
-        //$contexturl .= $coursemoduleid;
-        //$contexturl .= '&do_show=grouping';
-        //$contexturlname = get_string('groupformation_message_contexturlname', 'groupformation');
-        //groupformation_send_message($recipient, $subject, $message, $contexturl, $contexturlname);
+        if (false) {
+            $userid = $job->started_by;
+            $rec = array_pop($DB->get_records('course_modules', array(
+                    'instance' => $job->groupformationid)));
+            $coursemoduleid = $rec->id;
+            $recipient = array_pop($DB->get_records('user', array(
+                    'id' => $userid)));
+            $subject = get_string('groupformation_message_subject', 'groupformation');
+            $message = get_string('groupformation_message', 'groupformation');
+            $contexturl = $CFG->wwwroot;
+            $contexturl .= '/mod/groupformation/grouping_view.php?id=';
+            $contexturl .= $coursemoduleid;
+            $contexturl .= '&do_show=grouping';
+            $contexturlname = get_string('groupformation_message_contexturlname', 'groupformation');
+            groupformation_send_message($recipient, $subject, $message, $contexturl, $contexturlname);
+        }
 
         return null;
     }

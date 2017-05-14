@@ -94,7 +94,7 @@ if ($store->is_archived() && has_capability('mod/groupformation:editsettings', $
     echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
     echo '<input type="hidden" name="id" value="' . $id . '"/>';
 
-    $viewcontroller = new mod_groupformation_grouping_edit_view_controller($groupformation->id,$controller);
+    $viewcontroller = new mod_groupformation_grouping_edit_view_controller($groupformation->id, $controller);
     echo $viewcontroller->render();
 
     echo '</form>';

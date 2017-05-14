@@ -288,7 +288,7 @@ class mod_groupformation_groups_manager {
      * @return null
      */
     public function get_max_groups_size($groups = null) {
-        if (is_null($groups)){
+        if (is_null($groups)) {
             $groups = $this->get_generated_groups('id', 'id,group_size');
         }
         $max = null;
@@ -534,7 +534,7 @@ class mod_groupformation_groups_manager {
         }
 
         $topicoptions = null;
-        $istopic = (!!$flags['topic']); // fast boolean casting of 0 and 1
+        $istopic = (!!$flags['topic']); // Fast boolean casting of 0 and 1.
 
         if ($istopic) {
             $xmlcontent = $this->store->get_knowledge_or_topic_values('topic');
@@ -544,13 +544,12 @@ class mod_groupformation_groups_manager {
 
         $ids = array();
         foreach ($groups as $groupalid => $group) {
-            $name = "";
             if ($istopic) {
                 $name = $groupname."_".substr($topicoptions[$groupalid - 1], 0, 5);
             } else {
                 $name = $groupname;
             }
-            if (count($group['users']) > 0 || $istopic) { // in case of topic groups create as well empty groups
+            if (count($group['users']) > 0 || $istopic) { // In case of topic groups create as well empty groups.
                 $name = $name."_".strval($groupalid);
                 $dbid = $this->create_group($groupalid, $group, $name, $this->groupformationid, $flags);
                 $ids[$groupalid] = $dbid;
@@ -562,7 +561,6 @@ class mod_groupformation_groups_manager {
     /**
      * Assign users to groups
      *
-     * @param stdClass $job
      * @param unknown $users
      * @param unknown $idmap
      */

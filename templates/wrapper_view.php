@@ -28,7 +28,7 @@ defined('MOODLE_INTERNAL') || die();
 
     <?php if (!is_null($this->_['title'])): ?>
         <div class="gf_pad_header">
-            <?php echo $this->_['title'] . (array_key_exists('title_append',$this->_)?$this->_['title_append']:""); ?>
+            <?php echo $this->_['title'] . (array_key_exists('title_append', $this->_) ? $this->_['title_append'] : ""); ?>
         </div>
     <?php endif; ?>
 

@@ -612,7 +612,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
         $mform->setType('maxpoints', PARAM_NUMBER);
         $mform->addElement('checkbox', 'onlyactivestudents', get_string('onlyactivestudents', 'groupformation'));
         $mform->addElement('checkbox', 'emailnotifications', get_string('emailnotifications', 'groupformation'));
-        $mform->setDefault('emailnotifications', false); // TODO delete if feature is fixed // true);
+        $mform->setDefault('emailnotifications', false); // TODO delete if feature is fixed.
 
         // Close div tag for non-js related content.
         $mform->addElement('html', '</div id="non-js-content">');

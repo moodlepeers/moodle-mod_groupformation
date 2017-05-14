@@ -106,7 +106,7 @@ class mod_groupformation_evaluation_controller {
      *
      * @return array
      */
-    public function load_info(){
+    public function load_info() {
         global $USER;
 
         $assigns = array();

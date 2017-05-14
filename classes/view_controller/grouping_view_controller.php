@@ -27,7 +27,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/basic_
 class mod_groupformation_grouping_view_controller extends mod_groupformation_basic_view_controller {
 
     /** @var array Template names */
-    protected $templatenames = array('grouping_settings', 'grouping_statistics', 'grouping_generated_groups'); //, 'analysis_topics');
+    protected $templatenames = array('grouping_settings', 'grouping_statistics', 'grouping_generated_groups');
     /** @var string Title of page */
     protected $title = 'grouping';
 

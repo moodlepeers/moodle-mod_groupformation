@@ -22,6 +22,10 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
  */
+if (!defined('MOODLE_INTERNAL')) {
+    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
+}
+
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/radio_question.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/topics_table.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/range_question.php');
@@ -32,10 +36,6 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/stora
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
-
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
-}
 
 class mod_groupformation_questionnaire_controller {
     private $status;
@@ -268,8 +268,8 @@ class mod_groupformation_questionnaire_controller {
                 $l = count($answerposition);
 
                 if ($l > 0 && $this->currentcategoryposition == $this->store->get_position('topic')) {
-                    // topics are rated by users as: the topmost=most wanted=rating value highest number
-                    // therefore here we sort them accordingly top downwards by rating
+                    // Topics are rated by users as: the topmost = most wanted=rating value highest number.
+                    // Therefore here we sort them accordingly top downwards by rating.
                     for ($k = $l; $k >= 1; $k--) {
                         $h = $questionsfirst[$answerposition[$k]];
                         $h['answer'] = $answerposition[$k];
@@ -416,7 +416,8 @@ class mod_groupformation_questionnaire_controller {
     public function print_final_page() {
         echo '<div class="col_m_100"><h4>' . get_string('questionnaire_no_more_questions', 'groupformation') .
             '</h></div>';
-        echo '    <form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off" class="groupformation_questionnaire">';
+        echo '    <form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off" ';
+        echo ' class="groupformation_questionnaire">';
 
         echo '        <input type="hidden" name="category" value="no"/>';
         echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
