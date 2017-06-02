@@ -56,11 +56,14 @@ class mod_groupformation_range_question {
         echo '<span class="">' . min(array_keys($options)) . '</span>';
 
         echo '<input class="gf_range_inputs" type="range" name="' . $category . $questionid . '" min="0" max="';
-        echo max(array_keys($options)) . '" value="' . $answer . '" />';
-        echo '<span class="">' . max(array_keys($options)) . '</span><input type="text" name="' . $category . $questionid;
-        echo '_valid" value="' . $answer . '" style="display:none;"/>';
+        echo max(array_keys($options)) . '" value="' . intval($answer) . '" />';
+        echo '<span class="">';
+        echo max(array_keys($options));
+        echo '</span>';
+        echo '<input type="text" name="' . $category . $questionid;
+        echo '_valid" value="' . intval($answer) . '" style="display:none;"/>';
         if ($category == 'points') {
-            echo '<br><label id="text' . $category . $questionid . '">' . ((intval($answer) == -1) ? '0' : $answer) . '</label>';
+            echo '<br><label id="text' . $category . $questionid . '">' . ((intval($answer) == -1) ? '0' : intval($answer)) . '</label>';
         }
         echo '</td>';
         echo '</tr>';

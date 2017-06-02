@@ -46,7 +46,7 @@ class mod_groupformation_radio_question {
 
         $radiocount = 1;
         foreach ($options as $option) {
-            if ($answer == $radiocount) {
+            if (intval($answer) == $radiocount) {
                 echo '<td data-title="' . $option .
                     '" class="radioleft select-area selected_label"><input type="radio" name="' . $category .
                     $questionid . '" value="' . $radiocount . '" checked="checked"/></td>';

@@ -392,6 +392,25 @@ class mod_groupformation_user_manager {
     }
 
     /**
+     * Delete answer
+     *
+     * @param $userid
+     * @param $category
+     * @param $questionid
+     */
+    public function delete_answer($userid, $category, $questionid) {
+        global $DB;
+
+        $DB->delete_records('groupformation_answer',
+                array('groupformation' => $this->groupformationid,
+                        'category' => $category,
+                        'userid' => $userid,
+                        'questionid' => $questionid
+                )
+        );
+    }
+
+    /**
      * Saves answer
      *
      * @param $userid

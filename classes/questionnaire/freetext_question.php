@@ -24,10 +24,10 @@ if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
 }
 
-class mod_groupformation_dropdown_question {
+class mod_groupformation_freetext_question {
 
     /**
-     * Print HTML of drop-down inputs
+     * Print HTML of range inputs
      *
      * @param $category
      * @param $questionid
@@ -37,35 +37,33 @@ class mod_groupformation_dropdown_question {
      * @param $highlight
      */
     public function print_html($category, $questionid, $question, $options, $answer, $highlight) {
-        $questioncounter = 1;
 
         if ($answer != -1) {
             echo '<tr>';
             echo '<th scope="row">' . $question . '</th>';
-        } else if ($highlight) {
-            echo '<tr class="noAnswer">';
-            echo '<th scope="row">' . $question . '</th>';
         } else {
-            echo '<tr>';
-            echo '<th scope="row">' . $question . '</th>';
-        }
-
-        echo '<td class="center">';
-        $categoryquestionid = $category . $questionid;
-        echo '<select style="height:35px" class="form-control" name="' . $categoryquestionid . '" id="' . $categoryquestionid . '">';
-        echo '<option value="0"> - </option>';
-        foreach ($options as $option) {
-            if (intval($answer) == $questioncounter) {
-                echo '<option value="' . $questioncounter . '" selected="selected">' . $option . '</option>';
+            if ($highlight) {
+                echo '<tr class="noAnswer">';
+                echo '<th scope="row">' . $question . '</th>';
             } else {
-
-                echo '<option value="' . $questioncounter . '">' . $option . '</option>';
+                echo '<tr>';
+                echo '<th scope="row">' . $question . '</th>';
             }
-            $questioncounter++;
         }
 
-        echo '</select>
-            </td>
-        </tr>';
+        echo '<td class="freetext">';
+        echo '<textarea maxlength="255" class="freetext-textarea form-control" rows="5" 
+                name="' . $category . $questionid . '" style="width: 100%;">'.((intval($answer) == -1)?"":$answer).'</textarea>';
+        echo '<br>';
+        echo '<div class="form-check">';
+        echo '    <label class="form-check-label">';
+        echo '        <input class="freetext-checkbox" type="checkbox" name="'.$category.$questionid.'_noanswer"/>';
+        echo get_string('freetext_noanswer','groupformation');
+        echo '    </label>';
+        echo '</div>';
+        echo '</td>';
+
+        echo '</tr>';
     }
 }
+

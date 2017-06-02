@@ -30,6 +30,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/radio_qu
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/topics_table.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/range_question.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/dropdown_question.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/freetext_question.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/question_table.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
@@ -312,6 +313,7 @@ class mod_groupformation_questionnaire_controller {
                 }
 
             } else {
+
                 $records = $this->store->get_questions_randomized_for_user($this->currentcategory, $this->userid, $lang);
 
                 foreach ($records as $record) {
@@ -351,7 +353,7 @@ class mod_groupformation_questionnaire_controller {
             $answer = $this->usermanager->get_single_answer($this->userid, $this->currentcategory, $record->questionid);
 
             if ($answer != false) {
-                $question ['answer'] = intval($answer);
+                $question ['answer'] = $answer;
             } else {
                 $question ['answer'] = -1;
             }
@@ -605,12 +607,26 @@ class mod_groupformation_questionnaire_controller {
                     $this->usermanager->save_answer($this->userid, $category, $paratemp, $i);
                 }
             }
+        } elseif ($category == 'newcategory') {
+            $questions = $this->store->get_questions_randomized_for_user($category, $this->userid, $lang);
+            foreach ($questions as $question) {
+                $temp = $category . $question->questionid;
+                $paratemp1 = optional_param($temp, null, PARAM_RAW);
+                $temp = $category . $question->questionid.'_noanswer';
+                $paratemp2 = optional_param($temp, null, PARAM_RAW);
+                if (isset($paratemp2) && $paratemp2 == "on") {
+                    $this->usermanager->delete_answer($this->userid, $category, $question->questionid);
+                }
+                if (isset($paratemp1) && $paratemp1 != "") {
+                    $this->usermanager->save_answer($this->userid, $category, $paratemp1, $question->questionid);
+                }
+            }
         } else {
             $questions = $this->store->get_questions_randomized_for_user($category, $this->userid, $lang);
 
             foreach ($questions as $question) {
                 $temp = $category . $question->questionid;
-                $paratemp = optional_param($temp, null, PARAM_ALPHANUM);
+                $paratemp = optional_param($temp, null, PARAM_RAW);
                 if (isset($paratemp)) {
                     $this->usermanager->save_answer($this->userid, $category, $paratemp, $question->questionid);
                 }

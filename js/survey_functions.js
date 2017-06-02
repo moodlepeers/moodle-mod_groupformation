@@ -6,12 +6,20 @@
  * @author Eduard Gallwas, Johannes Konert, René Röpke, Neora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require(['jquery', 'jqueryui'], function ($) {
+require(['jquery', 'jqueryui'], function ($, jqueryui) {
     $(document).ready(function () {
         $('#invisible_topics_inputs').hide();
         $(".maxgroupsizenotreached_header").click(function () {
         });
         $(".groupsbuilt_header").click(function () {
+        });
+
+        $('.freetext-checkbox').click(function() {
+            console.log($(this).parent().parent().parent().find($(".freetext-textarea")));
+            name = $(this).attr("name");
+            textarea = $(this).parent().parent().parent().find($(".freetext-textarea"));
+            $(textarea).prop('disabled', function(i, v) { return !v; });
+            //$(textarea).val('');
         });
 
         // Get the widths of all navigation li's.
