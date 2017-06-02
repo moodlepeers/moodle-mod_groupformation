@@ -57,9 +57,6 @@ if (has_capability('mod/groupformation:editsettings', $context)) {
     $currenttab = $doshow;
 }
 
-// Log access to page.
-groupformation_info($USER->id, $groupformation->id, '<view_student_overview>');
-
 $store = new mod_groupformation_storage_manager ($groupformation->id);
 $groupsmanager = new mod_groupformation_groups_manager ($groupformation->id);
 $usermanager = new mod_groupformation_user_manager ($groupformation->id);

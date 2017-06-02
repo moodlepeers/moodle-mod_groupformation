@@ -119,8 +119,6 @@ class mod_groupformation_participant_parser {
         $endtime = microtime(true);
         $comptime = $endtime - $starttime;
 
-        groupformation_info(null, $this->groupformationid, 'building topic participants needed ' . $comptime . 'ms');
-
         return $participants;
     }
 
@@ -189,7 +187,6 @@ class mod_groupformation_participant_parser {
         $res = $this->parse($array, $totallabel);
         $endtime = microtime(true);
         $comptime = $endtime - $starttime;
-        groupformation_info(null, $this->groupformationid, 'building groupal participants needed ' . $comptime . 'ms');
 
         return $res;
     }
@@ -209,7 +206,6 @@ class mod_groupformation_participant_parser {
         }
         $endtime = microtime(true);
         $comptime = $endtime - $starttime;
-        groupformation_info(null, $this->groupformationid, 'building empty participants needed ' . $comptime . 'ms');
 
         return $participants;
     }

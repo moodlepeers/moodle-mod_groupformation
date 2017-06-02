@@ -53,9 +53,6 @@ if (has_capability('mod/groupformation:editsettings', $context)) {
     $currenttab = $doshow;
 }
 
-// Log access to page.
-groupformation_info($USER->id, $groupformation->id, '<view_student_group_assignment>');
-
 // Set PAGE config.
 $PAGE->set_url('/mod/groupformation/group_view.php', array('id' => $cm->id, 'do_show' => $doshow));
 $PAGE->set_title(format_string($groupformation->name));

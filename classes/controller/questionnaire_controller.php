@@ -478,9 +478,6 @@ class mod_groupformation_questionnaire_controller {
 
             $this->print_questions($questions, $percent);
 
-            // Log access to page.
-            groupformation_info($this->userid, $this->groupformationid,
-                '<view_questionnaire_category_' . $category . '>');
         } else {
 
             $this->print_final_page();
@@ -489,8 +486,6 @@ class mod_groupformation_questionnaire_controller {
                 $this->usermanager->set_evaluation_values($this->userid);
             }
 
-            // Log access to page.
-            groupformation_info($this->userid, $this->groupformationid, '<view_questionnaire_final_page>');
         }
     }
 

@@ -83,9 +83,6 @@ if ((data_submitted()) && confirm_sesskey()) {
     redirect($returnurl);
 }
 
-// Log access to page.
-groupformation_info($USER->id, $groupformation->id, '<view_teacher_grouping>');
-
 // Set PAGE config.
 $PAGE->set_url('/mod/groupformation/grouping_view.php', array(
     'id' => $cm->id, 'do_show' => $doshow));

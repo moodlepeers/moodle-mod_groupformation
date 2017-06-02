@@ -91,14 +91,9 @@ function groupformation_add_instance(stdClass $groupformation, mod_groupformatio
     $groupformation = $DB->get_record('groupformation', array(
         'id' => $id));
 
-    // Log access to page.
-    groupformation_info($USER->id, $groupformation->id, '<create_instance>');
     groupformation_grade_item_update($groupformation);
 
     groupformation_save_more_infos($groupformation, true);
-
-    // Log access to page.
-    groupformation_info($USER->id, $groupformation->id, '<save_settings>');
 
     return $groupformation->id;
 }
@@ -122,8 +117,6 @@ function groupformation_update_instance(stdClass $groupformation, mod_groupforma
 
     $groupformation->timemodified = time();
     $groupformation->id = $groupformation->instance;
-    // Log access to page.
-    groupformation_info($USER->id, $groupformation->id, '<update_instance>');
 
     if ($DB->count_records('groupformation_answer', array(
             'groupformation' => $groupformation->id)) == 0
@@ -147,9 +140,6 @@ function groupformation_update_instance(stdClass $groupformation, mod_groupforma
 
     groupformation_save_more_infos($groupformation, false);
 
-    // Log access to page.
-    groupformation_info($USER->id, $groupformation->id, '<save_settings>');
-
     return $result;
 }
 
@@ -171,9 +161,6 @@ function groupformation_delete_instance($id) {
     ) {
         return false;
     }
-
-    // Log access to page.
-    groupformation_info($USER->id, $groupformation->id, '<delete_instance>');
 
     // Delete any dependent records here.
     $result = $DB->delete_records('groupformation', array(

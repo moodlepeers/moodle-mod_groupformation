@@ -65,10 +65,6 @@ if (!has_capability('mod/groupformation:editsettings', $context)) {
     $currenttab = $doshow;
 }
 
-
-// Log access to page.
-groupformation_info($USER->id, $groupformation->id, '<view_teacher_overview>');
-
 // Set PAGE config.
 $PAGE->set_url('/mod/groupformation/analysis_view.php', array(
     'id' => $cm->id, 'do_show' => $doshow));
