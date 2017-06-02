@@ -27,7 +27,7 @@ if (!defined('MOODLE_INTERNAL')) {
 class mod_groupformation_freetext_question {
 
     /**
-     * Print HTML of range inputs
+     * Prints HTML of a freetext question
      *
      * @param $category
      * @param $questionid
