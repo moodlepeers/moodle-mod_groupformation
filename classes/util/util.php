@@ -157,11 +157,12 @@ class mod_groupformation_util {
      */
     public static function xml_to_array($xmlcontent) {
         $xml = simplexml_load_string($xmlcontent);
+
         $options = array();
-        foreach ($xml->OPTION as $option) {
+
+        foreach ($xml->children() as $option) {
             $options[] = trim($option);
         }
-
         return $options;
     }
 

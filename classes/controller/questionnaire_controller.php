@@ -31,6 +31,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/topics_t
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/range_question.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/dropdown_question.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/freetext_question.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/number_question.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/question_table.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
@@ -354,6 +355,8 @@ class mod_groupformation_questionnaire_controller {
 
             if ($answer != false) {
                 $question ['answer'] = $answer;
+            } else if ($record->type == "number") {
+                $question ['answer'] = "";
             } else {
                 $question ['answer'] = -1;
             }
@@ -607,7 +610,7 @@ class mod_groupformation_questionnaire_controller {
                     $this->usermanager->save_answer($this->userid, $category, $paratemp, $i);
                 }
             }
-        } elseif ($category == 'newcategory') {
+        } elseif ($category == 'catfreetext' || $category == 'catnumber') {
             $questions = $this->store->get_questions_randomized_for_user($category, $this->userid, $lang);
             foreach ($questions as $question) {
                 $temp = $category . $question->questionid;

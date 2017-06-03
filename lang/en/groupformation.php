@@ -496,7 +496,8 @@ $string['topics_statistics'] = 'Statistics of offered topics';
 $string['topics_statistics_score'] = 'Score [0-1]';
 $string['topics_statistics_description'] = 'The following scores indicate which topics have been favored by the students, i.e. a score close to 1 indicates that the topic is more liked than topics with a lower score.';
 
-$string['category_newcategory'] = 'Newcategory';
+$string['category_catfreetext'] = 'Freetext';
+$string['category_catnumber'] = 'Number';
 $string['freetext_noanswer'] = 'No answer';
 
 

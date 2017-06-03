@@ -24,7 +24,7 @@ if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
 }
 
-class mod_groupformation_freetext_question {
+class mod_groupformation_number_question {
 
     /**
      * Prints HTML of a freetext question
@@ -52,8 +52,7 @@ class mod_groupformation_freetext_question {
         }
 
         echo '<td class="freetext">';
-        echo '<textarea maxlength="255" class="freetext-textarea form-control" rows="5" 
-                name="' . $category . $questionid . '" style="width: 100%;">'.((intval($answer) == -1)?"":$answer).'</textarea>';
+        echo '<input class="freetext-textarea form-control" type="number" min="'.$options[0].'" max="'.$options[1].'" value="'.intval($answer).'" name="' . $category . $questionid . '">';
         echo '<br>';
         echo '<div class="form-check">';
         echo '    <label class="form-check-label">';

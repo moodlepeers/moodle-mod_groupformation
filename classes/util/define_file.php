@@ -235,7 +235,7 @@ class mod_groupformation_data {
     // Numbers 1,2,3 are the scenarios available for selection.
     private $categorysets = array(
             '1' => array(
-                    'newcategory',
+                    'catnumber',
                     'general',
                     'grade',
                     'points',
@@ -258,7 +258,7 @@ class mod_groupformation_data {
 
     // Special mode booleans (can be ignored in normal use cases).
     private $mathprepcoursemode = false;
-    private $allanswersrequired = false;
+    private $allanswersrequired = true;
 
     /**
      * Returns whether this instance is running in math prep course mode;
