@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="KOLB learning styles">
-     <QUESTIONS VERSION="2017060312">
+     <QUESTIONS VERSION="2017060313">
           <QUESTION ID="1" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Ich lerne durch fühlen]]>

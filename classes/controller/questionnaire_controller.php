@@ -31,6 +31,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/topics_t
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/range_question.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/dropdown_question.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/freetext_question.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/multiselect_question.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/number_question.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/question_table.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
@@ -622,6 +623,20 @@ class mod_groupformation_questionnaire_controller {
                 }
                 if (isset($paratemp1) && $paratemp1 != "") {
                     $this->usermanager->save_answer($this->userid, $category, $paratemp1, $question->questionid);
+                }
+            }
+        } elseif ($category == 'catmultiselect') {
+            $questions = $this->store->get_questions_randomized_for_user($category, $this->userid, $lang);
+
+            foreach ($questions as $question) {
+                $temp = $category . $question->questionid. '';
+                $paratemp = optional_param_array($temp, array(), PARAM_RAW);
+                $paratemp = 'list:' . implode(",",$paratemp);
+                if (isset($paratemp) && $paratemp == 'list:') {
+                    $this->usermanager->delete_answer($this->userid, $category, $question->questionid);
+                }
+                if (isset($paratemp) && $paratemp != 'list:') {
+                    $this->usermanager->save_answer($this->userid, $category, $paratemp, $question->questionid);
                 }
             }
         } else {

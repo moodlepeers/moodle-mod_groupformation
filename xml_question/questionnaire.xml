@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<questionnaire version="2017060312">
+<questionnaire version="2017060313">
 	<categories>
 		<category>general</category>
 		<category>catfreetext</category>
 		<category>catnumber</category>
+		<category>catmultiselect</category>
 		<category>points</category>
 		<category>grade</category>
 		<category>character</category>

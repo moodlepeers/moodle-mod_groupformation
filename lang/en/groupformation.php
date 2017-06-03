@@ -498,6 +498,7 @@ $string['topics_statistics_description'] = 'The following scores indicate which 
 
 $string['category_catfreetext'] = 'Freetext';
 $string['category_catnumber'] = 'Number';
+$string['category_catmultiselect'] = 'Multiselect';
 $string['freetext_noanswer'] = 'No answer';
 
 

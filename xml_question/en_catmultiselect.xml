@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<GROUPFORMATION COMMENT="multiselect questions">
+    <QUESTIONS VERSION="2017060313">
+        <QUESTION ID="1" TYPE="multiselect">
+            <QUESTIONTEXT>
+                <![CDATA[What do you study?]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[Informatik]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Mathematik]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Chemie]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Bauingenieurwesen]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Wirtschaftsingenieurwesen]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Biologie]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="2" TYPE="multiselect">
+            <QUESTIONTEXT>
+                <![CDATA[What school degree do you have?]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[Fachabitur]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Abitur]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+    </QUESTIONS>
+</GROUPFORMATION>
