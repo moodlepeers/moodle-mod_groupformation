@@ -36,7 +36,7 @@ class mod_groupformation_dropdown_question {
      * @param $answer
      * @param $highlight
      */
-    public function print_html($category, $questionid, $question, $options, $answer, $highlight) {
+    public function print_html($category, $questionid, $question, $options, $answer, $highlight, $required) {
         $questioncounter = 1;
 
         if ($answer != -1) {

@@ -50,7 +50,7 @@ class mod_groupformation_question_table {
                 echo get_string('category_' . $category, 'groupformation');
             }
             echo '</th>';
-            if ($tabletype == 'radio') {
+            if ($tabletype == 'likert') {
                 $headersize = count($headeroptarray);
 
                 echo '<th scope="col" colspan="' . $headersize . '"><span style="float:left">' . $headeroptarray[0] . '</span>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="">
-     <QUESTIONS VERSION="2016072100">
-          <QUESTION ID="1" TYPE="radio">
+     <QUESTIONS VERSION="2017060312">
+          <QUESTION ID="1" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Im Studium geht es mir darum, neue Ideen zu bekommen.]]>
                </QUESTIONTEXT>
@@ -24,7 +24,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="2" TYPE="radio">
+		 <QUESTION ID="2" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Im Studium geht es mir darum, zu zeigen, dass ich bei einer Sache gut bin.]]>
                </QUESTIONTEXT>
@@ -47,7 +47,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="3" TYPE="radio">
+          <QUESTION ID="3" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Im Studium geht es mir darum, dass andere Studierende nicht denken, ich sei dumm.]]>
                </QUESTIONTEXT>
@@ -70,7 +70,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="4" TYPE="radio">
+		 <QUESTION ID="4" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Im Studium geht es mir darum, keine schwierigen Prüfungen oder Klausuren zu haben.]]>
                </QUESTIONTEXT>
@@ -93,7 +93,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="5" TYPE="radio">
+          <QUESTION ID="5" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Im Studium geht es mir darum, etwas Interessantes zu lernen.]]>
                </QUESTIONTEXT>
@@ -116,7 +116,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="6" TYPE="radio">
+		 <QUESTION ID="6" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Im Studium geht es mir darum, mich nicht zu blamieren (z.B. durch falsche Ergebnisse oder dumme Fragen).]]>
                </QUESTIONTEXT>
@@ -139,7 +139,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="7" TYPE="radio">
+          <QUESTION ID="7" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Im Studium geht es mir darum, zu Hause keine Arbeiten erledigen zu müssen.]]>
                </QUESTIONTEXT>
@@ -162,7 +162,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="8" TYPE="radio">
+		 <QUESTION ID="8" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Im Studium geht es mir darum, später knifflige Probleme lösen zu können.]]>
                </QUESTIONTEXT>
@@ -185,7 +185,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="9" TYPE="radio">
+          <QUESTION ID="9" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Im Studium geht es mir darum, Arbeiten besser zu schaffen als andere.]]>
                </QUESTIONTEXT>
@@ -208,7 +208,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="10" TYPE="radio">
+		 <QUESTION ID="10" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Im Studium geht es mir darum, dass niemand merkt, wenn ich etwas nicht verstehe.]]>
                </QUESTIONTEXT>
@@ -231,7 +231,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="11" TYPE="radio">
+          <QUESTION ID="11" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Im Studium geht es mir darum, keine schwierigen Fragen oder Aufgaben lösen zu müssen.]]>
                </QUESTIONTEXT>
@@ -253,7 +253,7 @@
 					</OPTION>
                </OPTIONS>
          </QUESTION>
-         <QUESTION ID="12" TYPE="radio">
+         <QUESTION ID="12" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Im Studium geht es mir darum, komplizierte Inhalte zu verstehen.]]>
                </QUESTIONTEXT>
@@ -276,7 +276,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="13" TYPE="radio">
+		 <QUESTION ID="13" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Im Studium geht es mir darum, bessere Noten oder Beurteilungen zu bekommen als andere.]]>
                </QUESTIONTEXT>
@@ -299,7 +299,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="14" TYPE="radio">
+          <QUESTION ID="14" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Im Studium geht es mir darum, dass niemand denkt, ich sei weniger schlau als andere.]]>
                </QUESTIONTEXT>
@@ -322,7 +322,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="15" TYPE="radio">
+		 <QUESTION ID="15" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Im Studium geht es mir darum, nicht so schwer zu arbeiten.]]>
                </QUESTIONTEXT>
@@ -345,7 +345,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="16" TYPE="radio">
+          <QUESTION ID="16" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Im Studium geht es mir darum, dass das Gelernte für mich Sinn ergibt.]]>
                </QUESTIONTEXT>
@@ -368,7 +368,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="17" TYPE="radio">
+		 <QUESTION ID="17" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Im Studium geht es mir darum, dass andere denken, dass ich klug bin.]]>
                </QUESTIONTEXT>
@@ -391,7 +391,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="18" TYPE="radio">
+          <QUESTION ID="18" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Im Studium geht es mir darum, zu verbergen, wenn ich weniger weiß als andere.]]>
                </QUESTIONTEXT>
@@ -414,7 +414,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="19" TYPE="radio">
+		 <QUESTION ID="19" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Im Studium geht es mir darum, dass die Arbeit leicht ist.]]>
                </QUESTIONTEXT>
@@ -437,7 +437,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="20" TYPE="radio">
+          <QUESTION ID="20" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Im Studium geht es mir darum, zum Nachdenken angeregt zu werden.]]>
                </QUESTIONTEXT>
@@ -460,7 +460,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="21" TYPE="radio">
+		 <QUESTION ID="21" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Im Studium geht es mir darum, zu zeigen, dass ich die Inhalte beherrsche.]]>
                </QUESTIONTEXT>
@@ -483,7 +483,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="22" TYPE="radio">
+          <QUESTION ID="22" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Im Studium geht es mir darum, keine falschen Antworten auf Fragen der Dozenten zu geben.]]>
                </QUESTIONTEXT>
@@ -505,7 +505,7 @@
 					</OPTION>
                </OPTIONS>
          </QUESTION>
-         <QUESTION ID="23" TYPE="radio">
+         <QUESTION ID="23" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Im Studium geht es mir darum, aufwendige Aufgaben nicht selber erledigen zu müssen.]]>
                </QUESTIONTEXT>
@@ -528,7 +528,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="24" TYPE="radio">
+		 <QUESTION ID="24" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Im Studium geht es mir darum, so viel wie möglich zu lernen.]]>
                </QUESTIONTEXT>
@@ -551,7 +551,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="25" TYPE="radio">
+          <QUESTION ID="25" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Im Studium geht es mir darum, das was ich kann und weiß auch zu zeigen.]]>
                </QUESTIONTEXT>
@@ -574,7 +574,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="26" TYPE="radio">
+		 <QUESTION ID="26" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Im Studium geht es mir darum, nicht durch dumme Fragen aufzufallen.]]>
                </QUESTIONTEXT>
@@ -597,7 +597,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="27" TYPE="radio">
+          <QUESTION ID="27" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Im Studium geht es mir darum, mit wenig Arbeit durchs Studium zu kommen.]]>
                </QUESTIONTEXT>
@@ -620,7 +620,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="28" TYPE="radio">
+		 <QUESTION ID="28" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Im Studium geht es mir darum, ein tiefes Verständnis für die Inhalte zu erwerben.]]>
                </QUESTIONTEXT>
@@ -643,7 +643,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="29" TYPE="radio">
+          <QUESTION ID="29" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Im Studium geht es mir darum, dass die anderen merken, wenn ich in Tests und Prüfungen gut abschneide.]]>
                </QUESTIONTEXT>
@@ -666,7 +666,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="30" TYPE="radio">
+		 <QUESTION ID="30" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Im Studium geht es mir darum, nicht zu zeigen, wenn mir eine Aufgabe schwerer fällt als den anderen.]]>
                </QUESTIONTEXT>
@@ -689,7 +689,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="31" TYPE="radio">
+          <QUESTION ID="31" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Im Studium geht es mir darum, den Arbeitsaufwand stets gering zu halten.]]>
                </QUESTIONTEXT>

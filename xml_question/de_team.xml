@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="team orientation">
-    <QUESTIONS VERSION="2016072100">
-        <QUESTION ID="14" TYPE="radio">
+    <QUESTIONS VERSION="2017060312">
+        <QUESTION ID="14" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Wenn ich die Wahl habe, arbeite ich lieber im Team als allein.]]>
             </QUESTIONTEXT>
@@ -26,7 +26,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="15" TYPE="radio">
+        <QUESTION ID="15" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Ich finde, Teamarbeit hilft mir dabei, effektiver zu arbeiten.]]>
             </QUESTIONTEXT>
@@ -51,7 +51,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="16" TYPE="radio">
+        <QUESTION ID="16" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Im Allgemeinen bevorzuge ich es, als Teil eines Teams zu arbeiten.]]>
             </QUESTIONTEXT>

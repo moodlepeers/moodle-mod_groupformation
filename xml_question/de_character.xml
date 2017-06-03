@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="Big5 short version regular">
-    <QUESTIONS VERSION="2017022500">
-        <QUESTION ID="1" TYPE="radio">
+    <QUESTIONS VERSION="2017060312">
+        <QUESTION ID="1" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Ich bin eher zurückhaltend, reserviert.]]>
             </QUESTIONTEXT>
@@ -26,7 +26,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="2" TYPE="radio">
+        <QUESTION ID="2" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Ich schenke anderen leicht vertrauen, glaube an das Gute im Menschen.]]>
             </QUESTIONTEXT>
@@ -51,7 +51,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="3" TYPE="radio">
+        <QUESTION ID="3" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Ich bin bequem, neige zur Faulheit.]]>
             </QUESTIONTEXT>
@@ -76,7 +76,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="4" TYPE="radio">
+        <QUESTION ID="4" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Ich bin entspannt, lasse mich durch Stress nicht aus der Ruhe bringen.]]>
             </QUESTIONTEXT>
@@ -101,7 +101,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="5" TYPE="radio">
+        <QUESTION ID="5" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Ich habe nur wenig künstlerisches Interesse.]]>
             </QUESTIONTEXT>
@@ -126,7 +126,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="6" TYPE="radio">
+        <QUESTION ID="6" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Ich gehe aus mir heraus, bin gesellig.]]>
             </QUESTIONTEXT>
@@ -151,7 +151,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="7" TYPE="radio">
+        <QUESTION ID="7" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Ich neige dazu, andere zu kritisieren.]]>
             </QUESTIONTEXT>
@@ -176,7 +176,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="8" TYPE="radio">
+        <QUESTION ID="8" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Ich erledige Aufgaben gründlich.]]>
             </QUESTIONTEXT>
@@ -201,7 +201,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="9" TYPE="radio">
+        <QUESTION ID="9" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Ich werde leicht nervös und unsicher.]]>
             </QUESTIONTEXT>
@@ -226,7 +226,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="10" TYPE="radio">
+        <QUESTION ID="10" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Ich habe eine aktive Vorstellungskraft, bin phantasievoll.]]>
             </QUESTIONTEXT>
@@ -251,7 +251,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="11" TYPE="radio">
+        <QUESTION ID="11" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Ich bin rücksichtigsvoll zu anderen, einfühlsam.]]>
             </QUESTIONTEXT>

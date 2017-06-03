@@ -50,6 +50,9 @@ groupformation_add_jquery($PAGE, 'survey_functions.js');
 // Determine instances of course module, course, groupformation.
 groupformation_determine_instance($id, $cm, $course, $groupformation);
 
+
+groupformation_import_questionnaire_configuration();
+
 // Require user login if not already logged in.
 require_login($course, true, $cm);
 

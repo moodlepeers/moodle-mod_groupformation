@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<GROUPFORMATION COMMENT="free text questions">
+    <QUESTIONS VERSION="2017060312">
+        <QUESTION ID="1" TYPE="freetext">
+            <QUESTIONTEXT>
+                <![CDATA[Wenn ich die Wahl habe, arbeite ich lieber im Team als allein.]]>
+            </QUESTIONTEXT>
+        </QUESTION>
+        <QUESTION ID="2" TYPE="freetext">
+            <QUESTIONTEXT>
+                <![CDATA[Ich finde, Teamarbeit hilft mir dabei, effektiver zu arbeiten.]]>
+            </QUESTIONTEXT>
+        </QUESTION>
+    </QUESTIONS>
+</GROUPFORMATION>

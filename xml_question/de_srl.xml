@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="">
-    <QUESTIONS VERSION="2016072100">
-        <QUESTION ID="63" TYPE="radio">
+    <QUESTIONS VERSION="2017060312">
+        <QUESTION ID="63" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Ich habe feste Ziele im Leben.]]>
             </QUESTIONTEXT>
@@ -26,7 +26,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="64" TYPE="radio">
+        <QUESTION ID="64" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Ich kann überprüfen, ob ich meine Ziele erreicht habe.]]>
             </QUESTIONTEXT>
@@ -51,7 +51,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="65" TYPE="radio">
+        <QUESTION ID="65" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Ich wähle meine Ziele so, dass sie eine Herausforderung für mich sind.]]>
             </QUESTIONTEXT>
@@ -76,7 +76,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="66" TYPE="radio">
+        <QUESTION ID="66" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Ich versuche, meine eigene Leistung von Mal zu Mal zu steigern.]]>
             </QUESTIONTEXT>
@@ -101,7 +101,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="67" TYPE="radio">
+        <QUESTION ID="67" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Ich setze mir feste Zeitpunkte, zu denen ich meine Ziele erreichen will.]]>
             </QUESTIONTEXT>
@@ -126,7 +126,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="68" TYPE="radio">
+        <QUESTION ID="68" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Wenn ich viel zu lernen habe, mache ich mir einen Zeitplan, was ich wann lerne.]]>
             </QUESTIONTEXT>
@@ -151,7 +151,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="69" TYPE="radio">
+        <QUESTION ID="69" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Ich lerne immer zu gleich bleibenden Zeiten.]]>
             </QUESTIONTEXT>
@@ -176,7 +176,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="70" TYPE="radio">
+        <QUESTION ID="70" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Alle wichtigen Termine und Aufgaben schreibe ich mir auf.]]>
             </QUESTIONTEXT>
@@ -201,7 +201,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="71" TYPE="radio">
+        <QUESTION ID="71" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Ich denke an frühere Erfolge zurück, um mein Selbstbewußtsein zu stärken.]]>
             </QUESTIONTEXT>
@@ -226,7 +226,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="72" TYPE="radio">
+        <QUESTION ID="72" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Um mich zu motivieren, rufe ich mir vor Augen, wie schön es sein wird, wenn ich ein Ziel erreicht haben werde.]]>
             </QUESTIONTEXT>
@@ -251,7 +251,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="73" TYPE="radio">
+        <QUESTION ID="73" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Ich suche mir Erfolgserlebnisse, um mich für schwierige Aufgaben zu motivieren.]]>
             </QUESTIONTEXT>
@@ -276,7 +276,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="74" TYPE="radio">
+        <QUESTION ID="74" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Wenn mein Durchhaltevermögen nachlässt, weiß ich meist genau, wie ich meine Lust an der Sache verstärken kann.]]>
             </QUESTIONTEXT>
@@ -301,7 +301,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="75" TYPE="radio">
+        <QUESTION ID="75" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Ich kann es schaffen, einer anfangs unangenehmen Tätigkeit zunehmend angenehme Seiten abzugewinnen.]]>
             </QUESTIONTEXT>
@@ -326,7 +326,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="76" TYPE="radio">
+        <QUESTION ID="76" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Ich kann meine Stimmung so verändern, dass mir dann alles leichter von der Hand geht.]]>
             </QUESTIONTEXT>
@@ -351,7 +351,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="77" TYPE="radio">
+        <QUESTION ID="77" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Ich kann mich beim Lernen gut in die Stimmung hineinbringen, die ich im Moment am besten gebrauchen kann.]]>
             </QUESTIONTEXT>
@@ -376,7 +376,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="78" TYPE="radio">
+        <QUESTION ID="78" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Ich versuche, Beziehungen zu den Inhalten verwandter Fächer bzw. Lehrveranstaltungen herzustellen.]]>
             </QUESTIONTEXT>
@@ -401,7 +401,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="79" TYPE="radio">
+        <QUESTION ID="79" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Zu neuen Konzepten stelle ich mir praktische Anwendungen vor.]]>
             </QUESTIONTEXT>
@@ -426,7 +426,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="80" TYPE="radio">
+        <QUESTION ID="80" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Ich versuche in Gedanken, das Gelernte mit dem zu verbinden, was ich schon darüber weiß.]]>
             </QUESTIONTEXT>
@@ -451,7 +451,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="81" TYPE="radio">
+        <QUESTION ID="81" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Ich beginne erst mit dem Lernen, wenn ich mir die notwendigen Einzelschritte klargemacht habe.]]>
             </QUESTIONTEXT>
@@ -476,7 +476,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="82" TYPE="radio">
+        <QUESTION ID="82" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Ich denke regelmäßig über mein Lernen nach.]]>
             </QUESTIONTEXT>
@@ -501,7 +501,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="83" TYPE="radio">
+        <QUESTION ID="83" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Ich mache mir Aufzeichnungen über mein Lernverhalten.]]>
             </QUESTIONTEXT>
@@ -526,7 +526,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="84" TYPE="radio">
+        <QUESTION ID="84" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Ich notiere mir Strategien, die ich beim Lernen ausprobieren möchte.]]>
             </QUESTIONTEXT>
@@ -551,7 +551,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="85" TYPE="radio">
+        <QUESTION ID="85" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Nach einer Lernwoche überlege ich, was ich alles gelernt habe.]]>
             </QUESTIONTEXT>
@@ -576,7 +576,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="86" TYPE="radio">
+        <QUESTION ID="86" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Am Ende des Tages frage ich mich, ob ich zufrieden bin mit meiner Leistung.]]>
             </QUESTIONTEXT>
@@ -601,7 +601,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="87" TYPE="radio">
+        <QUESTION ID="87" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Wenn ich eine Kapitel gelernt habe, überlege ich, was ich beim Lernen für das nächste Kapitel anders machen möchte.]]>
             </QUESTIONTEXT>
@@ -626,7 +626,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="88" TYPE="radio">
+        <QUESTION ID="88" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Am Ende einer Woche denke ich nach darüber, welche Themen ich gekonnt habe und welche nicht.]]>
             </QUESTIONTEXT>

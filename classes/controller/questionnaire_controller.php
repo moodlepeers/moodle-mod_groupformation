@@ -26,7 +26,7 @@ if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
 }
 
-require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/radio_question.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/likert_question.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/topics_table.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/range_question.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/dropdown_question.php');
@@ -355,7 +355,7 @@ class mod_groupformation_questionnaire_controller {
 
             if ($answer != false) {
                 $question ['answer'] = $answer;
-            } else if ($record->type == "number") {
+            } else if ($record->type == "number" || $record->type == "freetext") {
                 $question ['answer'] = "";
             } else {
                 $question ['answer'] = -1;
@@ -541,7 +541,7 @@ class mod_groupformation_questionnaire_controller {
                 } else {
                     $name = 'mod_groupformation_' . $type . '_question';
                     $object = new $name();
-                    $object->print_html($category, $questionid, $question, $options, $answer, $this->highlight);
+                    $object->print_html($category, $questionid, $question, $options, $answer, $this->highlight, $this->data->all_answers_required());
                 }
             }
 
@@ -617,7 +617,7 @@ class mod_groupformation_questionnaire_controller {
                 $paratemp1 = optional_param($temp, null, PARAM_RAW);
                 $temp = $category . $question->questionid.'_noanswer';
                 $paratemp2 = optional_param($temp, null, PARAM_RAW);
-                if (isset($paratemp2) && $paratemp2 == "on") {
+                if ((isset($paratemp2) && $paratemp2 == "on") || $paratemp1 == "") {
                     $this->usermanager->delete_answer($this->userid, $category, $question->questionid);
                 }
                 if (isset($paratemp1) && $paratemp1 != "") {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="Big5 short version regular">
-    <QUESTIONS VERSION="2017022500">
-        <QUESTION ID="1" TYPE="radio">
+    <QUESTIONS VERSION="2017060312">
+        <QUESTION ID="1" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[I see myself as someone who is reserved.]]>
             </QUESTIONTEXT>
@@ -26,7 +26,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="2" TYPE="radio">
+        <QUESTION ID="2" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[I see myself as someone who is generally trusting.]]>
             </QUESTIONTEXT>
@@ -51,7 +51,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="3" TYPE="radio">
+        <QUESTION ID="3" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[I see myself as someone who tends to be lazy.]]>
             </QUESTIONTEXT>
@@ -76,7 +76,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="4" TYPE="radio">
+        <QUESTION ID="4" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[I see myself as someone who is relaxed, handles stress well.]]>
             </QUESTIONTEXT>
@@ -101,7 +101,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="5" TYPE="radio">
+        <QUESTION ID="5" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[I see myself as someone who has few artistic interests.]]>
             </QUESTIONTEXT>
@@ -126,7 +126,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="6" TYPE="radio">
+        <QUESTION ID="6" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[I see myself as someone who is outgoing, sociable.]]>
             </QUESTIONTEXT>
@@ -151,7 +151,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="7" TYPE="radio">
+        <QUESTION ID="7" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[I see myself as someone who tends to find fault with others.]]>
             </QUESTIONTEXT>
@@ -176,7 +176,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="8" TYPE="radio">
+        <QUESTION ID="8" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[I see myself as someone who does a thorough job.]]>
             </QUESTIONTEXT>
@@ -201,7 +201,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="9" TYPE="radio">
+        <QUESTION ID="9" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[I see myself as someone who gets nervous easily.]]>
             </QUESTIONTEXT>
@@ -226,7 +226,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="10" TYPE="radio">
+        <QUESTION ID="10" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[I see myself as someone who has an active imagination.]]>
             </QUESTIONTEXT>
@@ -251,7 +251,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="11" TYPE="radio">
+        <QUESTION ID="11" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[I see myself as someone who is considerate and kind to almost everyone.]]>
             </QUESTIONTEXT>

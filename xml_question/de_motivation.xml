@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="FAM questionnaire">
-     <QUESTIONS VERSION="2016072100">
-		 <QUESTION ID="1" TYPE="radio">
+     <QUESTIONS VERSION="2017060312">
+		 <QUESTION ID="1" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Ich mag diese Art von Lehrveranstaltungen.]]>
                </QUESTIONTEXT>
@@ -27,7 +27,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="2" TYPE="radio">
+          <QUESTION ID="2" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Ich glaube, der Schwierigkeit dieser Lehrveranstaltung gewachsen zu sein.]]>
                </QUESTIONTEXT>
@@ -53,7 +53,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="3" TYPE="radio">
+          <QUESTION ID="3" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Wahrscheinlich werde ich die Lernveranstaltung nicht schaffen]]>
                </QUESTIONTEXT>
@@ -79,7 +79,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="4" TYPE="radio">
+		 <QUESTION ID="4" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Bei der Lehrveranstaltung mag ich das wissenschaftliche Arbeiten.]]>
                </QUESTIONTEXT>
@@ -105,7 +105,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="5" TYPE="radio">
+          <QUESTION ID="5" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Ich fühle mich unter Druck, bei der Lehrveranstaltung gut abschneiden zu müssen.]]>
                </QUESTIONTEXT>
@@ -131,7 +131,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="6" TYPE="radio">
+		 <QUESTION ID="6" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Die Lehrveranstaltung ist eine richtige Herausforderung für mich.]]>
                </QUESTIONTEXT>
@@ -157,7 +157,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="7" TYPE="radio">
+          <QUESTION ID="7" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Nach dem Lesen der Kursinformation erscheint mir die Lehrveranstaltung sehr interessant.]]>
                </QUESTIONTEXT>
@@ -183,7 +183,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="8" TYPE="radio">
+		 <QUESTION ID="8" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Ich bin sehr gespannt darauf, wie gut ich hier abschneiden werde.]]>
                </QUESTIONTEXT>
@@ -209,7 +209,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="9" TYPE="radio">
+          <QUESTION ID="9" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Ich fürchte mich ein wenig davor, dass ich mich blamieren könnte.]]>
                </QUESTIONTEXT>
@@ -235,7 +235,7 @@
                </OPTIONS>
           </QUESTION>
           
-		  <QUESTION ID="10" TYPE="radio">
+		  <QUESTION ID="10" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Ich bin fest entschlossen, mich bei dieser Lehrveranstaltung voll anzustrengen.]]>
                </QUESTIONTEXT>
@@ -261,7 +261,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="11" TYPE="radio">
+          <QUESTION ID="11" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Bei Lehrveranstaltungen wie dieser brauche ich keine Belohnung; sie machen mir auch so viel Spaß.]]>
                </QUESTIONTEXT>
@@ -287,7 +287,7 @@
                </OPTIONS>
           </QUESTION>
           
-		  <QUESTION ID="12" TYPE="radio">
+		  <QUESTION ID="12" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Es ist mir etwas peinlich, hier zu versagen.]]>
                </QUESTIONTEXT>
@@ -313,7 +313,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="13" TYPE="radio">
+          <QUESTION ID="13" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Ich glaube, dass kann jeder schaffen.]]>
                </QUESTIONTEXT>
@@ -339,7 +339,7 @@
                </OPTIONS>
           </QUESTION>
 
-		  <QUESTION ID="14" TYPE="radio">
+		  <QUESTION ID="14" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Ich glaube, ich schaffe diese Lehrveranstaltung nicht.]]>
                </QUESTIONTEXT>
@@ -365,7 +365,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="15" TYPE="radio">
+		 <QUESTION ID="15" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Wenn ich die Lehrveranstaltung schaffe, werde ich schon ein wenig stolz auf meine Tüchtigkeit sein.]]>
                </QUESTIONTEXT>
@@ -391,7 +391,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="16" TYPE="radio">
+          <QUESTION ID="16" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Wenn ich an die Lernveranstaltung denke, bin ich etwas beunruhigt.]]>
                </QUESTIONTEXT>
@@ -417,7 +417,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="17" TYPE="radio">
+		 <QUESTION ID="17" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Aufgaben, wie die in dieser Lehrveranstaltung, würde ich auch in meiner Freizeit bearbeiten.]]>
                </QUESTIONTEXT>
@@ -443,7 +443,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="18" TYPE="radio">
+          <QUESTION ID="18" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Die konkreten Leistungsanforderungen hier lähmen mich.]]>
                </QUESTIONTEXT>

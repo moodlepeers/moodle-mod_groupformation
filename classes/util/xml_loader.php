@@ -61,14 +61,6 @@ class mod_groupformation_xml_loader {
             $numbers = 0;
 
             foreach ($xml->QUESTIONS->QUESTION as $question) {
-
-                $options = $question->OPTIONS;
-                $optionsarray = array();
-
-                foreach ($options->OPTION as $option) {
-                    $optionsarray[] = trim($option);
-                }
-
                 $numbers++;
 
                 $data = new stdClass ();
@@ -76,11 +68,26 @@ class mod_groupformation_xml_loader {
                 $data->questionid = trim($question['ID']);
                 $data->type = trim($question['TYPE']);
                 $data->question = trim($question->QUESTIONTEXT);
-                $data->options = groupformation_convert_options($optionsarray);
+                $data->optionmax = 0;
+                $data->options = "";
                 $data->language = $lang;
                 $data->position = $numbers;
-                $data->optionmax = count($optionsarray);
                 $data->version = $v;
+                $options = $question->OPTIONS;
+
+                if ($options->count() > 0) {
+
+                    $optionsarray = array();
+                    foreach ($options->children() as $key => $option) {
+                        if ($key == 'OPTION') {
+                            $optionsarray[] = trim($option);
+                        } else {
+                            $optionsarray[$key] = trim($option);
+                        }
+                    }
+                    $data->options = groupformation_convert_options($optionsarray);
+                    $data->optionmax = count($optionsarray);
+                }
 
                 $questions[] = $data;
             }

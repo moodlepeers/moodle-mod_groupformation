@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="self-efficacy (untranslated yet)">
-     <QUESTIONS VERSION="2016072100">
-          <QUESTION ID="1" TYPE="radio">
+     <QUESTIONS VERSION="2017060312">
+          <QUESTION ID="1" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Wenn sich Widerstände auftun, finde ich Mittel und Wege, mich durchzusetzen.]]>
                </QUESTIONTEXT>
@@ -27,7 +27,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="2" TYPE="radio">
+		 <QUESTION ID="2" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Die Lösung schwieriger Probleme gelingt mir immer, wenn ich mich darum bemühe.]]>
                </QUESTIONTEXT>
@@ -53,7 +53,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="3" TYPE="radio">
+          <QUESTION ID="3" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Es bereitet mir keine Schwierigkeiten, meine Absichten und Ziele zu verwirklichen.]]>
                </QUESTIONTEXT>
@@ -79,7 +79,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="4" TYPE="radio">
+		 <QUESTION ID="4" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[In unerwarteten Situationen weiß ich immer, wie ich mich verhalten soll.]]>
                </QUESTIONTEXT>
@@ -105,7 +105,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="5" TYPE="radio">
+          <QUESTION ID="5" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Auch bei überraschenden Ereignissen glaube ich, dass ich gut mit ihnen zurechtkommen kann.]]>
                </QUESTIONTEXT>
@@ -131,7 +131,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="6" TYPE="radio">
+		 <QUESTION ID="6" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Schwierigkeiten sehe ich gelassen entgegen, weil ich meinen Fähigkeiten immer vertrauen kann.]]>
                </QUESTIONTEXT>
@@ -157,7 +157,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="7" TYPE="radio">
+          <QUESTION ID="7" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Was auch immer passiert, ich werde schon klarkommen.]]>
                </QUESTIONTEXT>
@@ -183,7 +183,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="8" TYPE="radio">
+		 <QUESTION ID="8" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Für jedes Problem kann ich eine Lösung finden.]]>
                </QUESTIONTEXT>
@@ -209,7 +209,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="9" TYPE="radio">
+          <QUESTION ID="9" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Wenn eine neue Sache auf mich zukommt, weiß ich, wie ich damit umgehen kann.]]>
                </QUESTIONTEXT>
@@ -235,7 +235,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="10" TYPE="radio">
+		 <QUESTION ID="10" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Wenn ein Problem auftaucht, kann ich es aus eigener Kraft meistern.]]>
                </QUESTIONTEXT>

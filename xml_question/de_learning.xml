@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="KOLB learning styles">
-     <QUESTIONS VERSION="2016092600">
-          <QUESTION ID="1" TYPE="radio">
+     <QUESTIONS VERSION="2017060312">
+          <QUESTION ID="1" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Ich lerne durch fühlen]]>
                </QUESTIONTEXT>
@@ -27,7 +27,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="2" TYPE="radio">
+          <QUESTION ID="2" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Ich lerne durch Tun.]]>
                </QUESTIONTEXT>
@@ -53,7 +53,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="3" TYPE="radio">
+          <QUESTION ID="3" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Ich lerne durch Beobachten.]]>
                </QUESTIONTEXT>
@@ -79,7 +79,7 @@
                </OPTIONS>
           </QUESTION>
           
-		 <QUESTION ID="4" TYPE="radio">
+		 <QUESTION ID="4" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Ich lerne durch Nachdenken.]]>
                </QUESTIONTEXT>
@@ -105,7 +105,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="5" TYPE="radio">
+          <QUESTION ID="5" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Wenn ich lerne, bin ich offen für neue Erfahrungen.]]>
                </QUESTIONTEXT>
@@ -131,7 +131,7 @@
                </OPTIONS>
           </QUESTION>
           
-		  <QUESTION ID="6" TYPE="radio">
+		  <QUESTION ID="6" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Wenn ich lerne, betrachte ich vorher alle Seiten einer Aufgabe.]]>
                </QUESTIONTEXT>
@@ -157,7 +157,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="7" TYPE="radio">
+          <QUESTION ID="7" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Ich bin erst zufrieden, wenn ich etwas "auf den Begriff" bringen kann.]]>
                </QUESTIONTEXT>
@@ -183,7 +183,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="8" TYPE="radio">
+		 <QUESTION ID="8" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Ich ziehe es vor, die Dinge selbst zu erproben und mich davon zu überzeugen, was möglich ist.]]>
                </QUESTIONTEXT>
@@ -209,7 +209,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="9" TYPE="radio">
+          <QUESTION ID="9" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Ich lerne am besten, wenn ich zunächst sorgfältig beobachte und zuhöre.]]>
                </QUESTIONTEXT>
@@ -235,7 +235,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="10" TYPE="radio">
+		 <QUESTION ID="10" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Ich lerne am besten, wenn ich praktisch damit umgehen kann.]]>
                </QUESTIONTEXT>
@@ -262,7 +262,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="11" TYPE="radio">
+          <QUESTION ID="11" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Ich lerne am besten, wenn meine Intuition angesprochen ist.]]>
                </QUESTIONTEXT>
@@ -288,7 +288,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="12" TYPE="radio">
+		 <QUESTION ID="12" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Wenn ich lerne, bin ich jemand, der rational vorgeht.]]>
                </QUESTIONTEXT>
@@ -314,7 +314,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="13" TYPE="radio">
+          <QUESTION ID="13" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Ich erspare mir gern durch gründliches Erkunden und kritisches Abwägen überflüssige Irrwege.]]>
                </QUESTIONTEXT>
@@ -340,7 +340,7 @@
                </OPTIONS>
           </QUESTION>
 
-		  <QUESTION ID="14" TYPE="radio">
+		  <QUESTION ID="14" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Ich lerne am besten durch persönliche Kontakte.]]>
                </QUESTIONTEXT>
@@ -366,7 +366,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="15" TYPE="radio">
+		 <QUESTION ID="15" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Ich lerne am besten, wenn ich mich auf logische Überlegungen stützen kann.]]>
                </QUESTIONTEXT>
@@ -392,7 +392,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="16" TYPE="radio">
+          <QUESTION ID="16" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Für mich ist es eine Zumutung, wenn ich nur zuhören und lesen darf, was andere mir zu sagen haben.]]>
                </QUESTIONTEXT>
@@ -418,7 +418,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="17" TYPE="radio">
+		 <QUESTION ID="17" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Ich lerne am besten, wenn ich Ergebnisse aus meiner Arbeit sehen kann.]]>
                </QUESTIONTEXT>
@@ -444,7 +444,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="18" TYPE="radio">
+          <QUESTION ID="18" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Ich habe es gern, wenn systematische Analysen von Tatsachen und Theorien vorherrschen.]]>
                </QUESTIONTEXT>
@@ -470,7 +470,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="19" TYPE="radio">
+          <QUESTION ID="19" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Ich lerne am besten, wenn ich mich zurückhalte, bis ich das Thema überblicke.]]>
                </QUESTIONTEXT>
@@ -496,7 +496,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="20" TYPE="radio">
+          <QUESTION ID="20" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Ich lerne am besten, wenn es mich persönlich betrifft.]]>
                </QUESTIONTEXT>
@@ -522,7 +522,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="21" TYPE="radio">
+		 <QUESTION ID="21" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Ich lerne am besten, wenn ich mich auf meine Beobachtungen stütze.]]>
                </QUESTIONTEXT>
@@ -548,7 +548,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="22" TYPE="radio">
+          <QUESTION ID="22" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Ich lerne am besten, wenn ich mich auf mein Gefühl verlasse.]]>
                </QUESTIONTEXT>
@@ -574,7 +574,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="23" TYPE="radio">
+		 <QUESTION ID="23" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Ich gewinne nicht viel aus Lernsituationen, in denen ich eine passive Rolle habe.]]>
                </QUESTIONTEXT>
@@ -600,7 +600,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="24" TYPE="radio">
+          <QUESTION ID="24" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[Wenn ich lerne, löse ich Probleme durch Nachdenken.]]>
                </QUESTIONTEXT>

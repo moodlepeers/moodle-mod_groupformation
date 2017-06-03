@@ -36,7 +36,7 @@ class mod_groupformation_freetext_question {
      * @param $answer
      * @param $highlight
      */
-    public function print_html($category, $questionid, $question, $options, $answer, $highlight) {
+    public function print_html($category, $questionid, $question, $options, $answer, $highlight, $required) {
 
         if ($answer != "") {
             echo '<tr>';
@@ -55,12 +55,14 @@ class mod_groupformation_freetext_question {
         echo '<textarea maxlength="255" class="freetext-textarea form-control" rows="5" 
                 name="' . $category . $questionid . '" style="width: 100%;">'.((intval($answer) == -1)?"":$answer).'</textarea>';
         echo '<br>';
-        echo '<div class="form-check">';
-        echo '    <label class="form-check-label">';
-        echo '        <input class="freetext-checkbox" type="checkbox" name="'.$category.$questionid.'_noanswer"/>';
-        echo get_string('freetext_noanswer','groupformation');
-        echo '    </label>';
-        echo '</div>';
+        if (!$required) {
+            echo '<div class="form-check">';
+            echo '    <label class="form-check-label">';
+            echo '        <input class="freetext-checkbox" type="checkbox" name="'.$category.$questionid.'_noanswer"/>';
+            echo get_string('freetext_noanswer','groupformation');
+            echo '    </label>';
+            echo '</div>';
+        }
         echo '</td>';
 
         echo '</tr>';

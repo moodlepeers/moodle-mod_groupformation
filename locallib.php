@@ -313,12 +313,18 @@ function groupformation_get_catalog_version($category) {
  */
 function groupformation_convert_options($options) {
     $ops = array();
-    foreach ($options as $option) {
-        $ops[] = htmlentities($option, ENT_QUOTES | ENT_XHTML);
+    foreach ($options as $key => $option) {
+        if (is_number($key)){
+            $key = 'OPTION';
+        }
+        $s = '<' . $key . '><![CDATA[';
+        $s .= htmlentities($option, ENT_QUOTES | ENT_XHTML);
+        $s .= ']]></' . $key . '>';
+        $ops[] = $s;
     }
-    $op = implode("]]></OPTION>  <OPTION><![CDATA[", $ops);
+    $op = implode("", $ops);
 
-    return "<OPTION><![CDATA[" . $op . "]]></OPTION>";
+    return $op;
 }
 
 /**

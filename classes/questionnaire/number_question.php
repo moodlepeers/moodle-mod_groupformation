@@ -27,7 +27,7 @@ if (!defined('MOODLE_INTERNAL')) {
 class mod_groupformation_number_question {
 
     /**
-     * Prints HTML of a freetext question
+     * Prints HTML of a number question
      *
      * @param $category
      * @param $questionid
@@ -36,7 +36,7 @@ class mod_groupformation_number_question {
      * @param $answer
      * @param $highlight
      */
-    public function print_html($category, $questionid, $question, $options, $answer, $highlight) {
+    public function print_html($category, $questionid, $question, $options, $answer, $highlight, $required) {
 
         if ($answer != "") {
             echo '<tr>';
@@ -54,12 +54,15 @@ class mod_groupformation_number_question {
         echo '<td class="freetext">';
         echo '<input class="freetext-textarea form-control" type="number" min="'.$options[0].'" max="'.$options[1].'" value="'.intval($answer).'" name="' . $category . $questionid . '">';
         echo '<br>';
-        echo '<div class="form-check">';
-        echo '    <label class="form-check-label">';
-        echo '        <input class="freetext-checkbox" type="checkbox" name="'.$category.$questionid.'_noanswer"/>';
-        echo get_string('freetext_noanswer','groupformation');
-        echo '    </label>';
-        echo '</div>';
+        if (!$required) {
+            echo '<div class="form-check">';
+            echo '    <label class="form-check-label">';
+            echo '        <input class="freetext-checkbox" type="checkbox" name="'.$category.$questionid.'_noanswer"/>';
+            echo get_string('freetext_noanswer','groupformation');
+            echo '    </label>';
+            echo '</div>';
+        }
+
         echo '</td>';
 
         echo '</tr>';

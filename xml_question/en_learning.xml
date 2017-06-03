@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="KOLB learning styles">
-     <QUESTIONS VERSION="2016092600">
-     	<QUESTION ID="1" TYPE="radio">
+     <QUESTIONS VERSION="2017060312">
+     	<QUESTION ID="1" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[I learn by feeling.]]>
                </QUESTIONTEXT>
@@ -27,7 +27,7 @@
                </OPTIONS>
          </QUESTION>
           
-         <QUESTION ID="2" TYPE="radio">
+         <QUESTION ID="2" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[I learn by doing.]]>
                </QUESTIONTEXT>
@@ -53,7 +53,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="3" TYPE="radio">
+          <QUESTION ID="3" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[I learn by observing.]]>
                </QUESTIONTEXT>
@@ -79,7 +79,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="4" TYPE="radio">
+		 <QUESTION ID="4" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[I learn by thinking.]]>
                </QUESTIONTEXT>
@@ -105,7 +105,7 @@
                </OPTIONS>
          </QUESTION>
           
-         <QUESTION ID="5" TYPE="radio">
+         <QUESTION ID="5" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[When I learn, I am open to new experiences.]]>
                </QUESTIONTEXT>
@@ -131,7 +131,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="6" TYPE="radio">
+		 <QUESTION ID="6" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[When I learn, I first consider all possible perspectives of the subject.]]>
                </QUESTIONTEXT>
@@ -157,7 +157,7 @@
                </OPTIONS>
          </QUESTION>
           
-         <QUESTION ID="7" TYPE="radio">
+         <QUESTION ID="7" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[I am only satisfied when I manage to understand something conceptually.]]>
                </QUESTIONTEXT>
@@ -183,7 +183,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="8" TYPE="radio">
+		 <QUESTION ID="8" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[I prefer to try out things for myself to be sure of the possibilities.]]>
                </QUESTIONTEXT>
@@ -209,7 +209,7 @@
                </OPTIONS>
          </QUESTION>
           
-         <QUESTION ID="9" TYPE="radio">
+         <QUESTION ID="9" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[I learn best when I carefully observe and listen.]]>
                </QUESTIONTEXT>
@@ -235,7 +235,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="10" TYPE="radio">
+		 <QUESTION ID="10" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[I learn best when I can proceed practically.]]>
                </QUESTIONTEXT>
@@ -261,7 +261,7 @@
                </OPTIONS>
          </QUESTION>
           
-         <QUESTION ID="11" TYPE="radio">
+         <QUESTION ID="11" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[I learn best when intuition is needed.]]>
                </QUESTIONTEXT>
@@ -287,7 +287,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="12" TYPE="radio">
+		 <QUESTION ID="12" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[When I learn, I proceed rationally.]]>
                </QUESTIONTEXT>
@@ -313,7 +313,7 @@
                </OPTIONS>
          </QUESTION>
           
-         <QUESTION ID="13" TYPE="radio">
+         <QUESTION ID="13" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[I like to prevent mistakes by exploring ideas thoroughly and with a critical attitude.]]>
                </QUESTIONTEXT>
@@ -339,7 +339,7 @@
                </OPTIONS>
           </QUESTION>
 
-		  <QUESTION ID="14" TYPE="radio">
+		  <QUESTION ID="14" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[I learn best from personal contacts.]]>
                </QUESTIONTEXT>
@@ -365,7 +365,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="15" TYPE="radio">
+		 <QUESTION ID="15" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[I learn best when I can rely on logical ideas.]]>
                </QUESTIONTEXT>
@@ -391,7 +391,7 @@
                </OPTIONS>
          </QUESTION>
           
-         <QUESTION ID="16" TYPE="radio">
+         <QUESTION ID="16" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[It bothers me when I can only listen or read what others have to say.]]>
                </QUESTIONTEXT>
@@ -417,7 +417,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="17" TYPE="radio">
+		 <QUESTION ID="17" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[I learn best when I can see the results of my work.]]>
                </QUESTIONTEXT>
@@ -443,7 +443,7 @@
                </OPTIONS>
          </QUESTION>
           
-         <QUESTION ID="18" TYPE="radio">
+         <QUESTION ID="18" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[I like it when systematic analysis from facts and theories are available.]]>
                </QUESTIONTEXT>
@@ -469,7 +469,7 @@
                </OPTIONS>
          </QUESTION>
           
-         <QUESTION ID="19" TYPE="radio">
+         <QUESTION ID="19" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[I learn best when I first gain an overview of the topic before acting.]]>
                </QUESTIONTEXT>
@@ -495,7 +495,7 @@
                </OPTIONS>
           </QUESTION>
           
-          <QUESTION ID="20" TYPE="radio">
+          <QUESTION ID="20" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[I learn best when I am personally involved.]]>
                </QUESTIONTEXT>
@@ -521,7 +521,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="21" TYPE="radio">
+		 <QUESTION ID="21" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[I learn best when I rely on my observations.]]>
                </QUESTIONTEXT>
@@ -547,7 +547,7 @@
                </OPTIONS>
          </QUESTION>
           
-         <QUESTION ID="22" TYPE="radio">
+         <QUESTION ID="22" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[I learn best when I rely on my feelings.]]>
                </QUESTIONTEXT>
@@ -573,7 +573,7 @@
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="23" TYPE="radio">
+		 <QUESTION ID="23" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[I don't take advantage of learning situations in which I have a passive role.]]>
                </QUESTIONTEXT>
@@ -599,7 +599,7 @@
                </OPTIONS>
          </QUESTION>
           
-         <QUESTION ID="24" TYPE="radio">
+         <QUESTION ID="24" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[When I learn, I solve problems by reflecting.]]>
                </QUESTIONTEXT>

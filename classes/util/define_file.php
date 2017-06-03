@@ -235,6 +235,7 @@ class mod_groupformation_data {
     // Numbers 1,2,3 are the scenarios available for selection.
     private $categorysets = array(
             '1' => array(
+                    'catnumber',
                     'general',
                     'grade',
                     'points',
