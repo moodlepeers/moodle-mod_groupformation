@@ -236,6 +236,8 @@ class mod_groupformation_data {
     private $categorysets = array(
             '1' => array(
                     'catmultiselect',
+                    'catfreetext',
+                    'catnumber',
                     'general',
                     'grade',
                     'points',

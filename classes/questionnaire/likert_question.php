@@ -24,19 +24,30 @@ if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
 }
 
-class mod_groupformation_likert_question {
+require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/basic_question.php');
+
+class mod_groupformation_likert_question extends mod_groupformation_basic_question {
+
+    protected $type = 'likert';
 
     /**
      * Print HTML of radio inputs
      *
-     * @param $category
-     * @param $questionid
-     * @param $question
-     * @param $options
-     * @param $answer
      * @param $highlight
+     * @param $required
      */
-    public function print_html($category, $questionid, $question, $options, $answer, $highlight) {
+    public function print_html($highlight, $required) {
+
+        $category = $this->category;
+        $questionid = $this->questionid;
+        $question = $this->question;
+        $options = $this->options;
+        $answer = $this->answer;
+
+        if ($answer == false) {
+            $answer = -1;
+        }
+
         if ($answer == -1 && $highlight) {
             echo '<tr class="noAnswer">';
         } else {

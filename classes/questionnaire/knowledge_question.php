@@ -24,12 +24,12 @@ if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
 }
 
-require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/basic_question.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/range_question.php');
 
-class mod_groupformation_multiselect_question extends mod_groupformation_basic_question {
+class mod_groupformation_knowledge_question extends mod_groupformation_range_question {
 
     /**
-     * Prints HTML of a multiselect question
+     * Print HTML of range inputs
      *
      * @param $highlight
      * @param $required
@@ -42,11 +42,7 @@ class mod_groupformation_multiselect_question extends mod_groupformation_basic_q
         $options = $this->options;
         $answer = $this->answer;
 
-        if ($answer == false) {
-            $answer = -1;
-        }
-
-        if ($answer != "") {
+        if ($answer != -1) {
             echo '<tr>';
             echo '<th scope="row">' . $question . '</th>';
         } else {
@@ -59,32 +55,21 @@ class mod_groupformation_multiselect_question extends mod_groupformation_basic_q
             }
         }
 
-        $answers = array();
-        if ($answer != -1) {
-            $answer = substr($answer,5);
-            $answers = explode(",",$answer);
-        }
+        echo '<td data-title="' . min(array_keys($options)) . ' = ' . $options [min(array_keys($options))] . ', ' .
+                max(array_keys($options)) . ' = ' . $options [max(array_keys($options))] . '" class="range">';
+        echo '<span class="">' . min(array_keys($options)) . '</span>';
 
-        echo '<td class="freetext">';
-        echo '<div class="form-group">';
-        echo '  <select multiple class="freetext-textarea form-control" name="' . $category . $questionid . '[]" style="width: 80%;">';
-        foreach ($options as $key => $option) {
-            echo '      <option value="' . $key . '" '.((in_array($key,$answers))?'selected':'').'>'.$option.'</option>';
+        echo '<input class="gf_range_inputs" type="range" name="' . $category . $questionid . '" min="0" max="';
+        echo max(array_keys($options)) . '" value="' . intval($answer) . '" />';
+        echo '<span class="">';
+        echo max(array_keys($options));
+        echo '</span>';
+        echo '<input type="text" name="' . $category . $questionid;
+        echo '_valid" value="' . intval($answer) . '" style="display:none;"/>';
+        if ($category == 'points') {
+            echo '<br><label id="text' . $category . $questionid . '">' . ((intval($answer) == -1) ? '0' : intval($answer)) . '</label>';
         }
-        echo '  </select>';
-        echo '</div>';
-        if (!$required) {
-            echo '<br>';
-            echo '<div class="form-check">';
-            echo '    <label class="form-check-label">';
-            echo '        <input class="freetext-checkbox" type="checkbox" name="'.$category.$questionid.'_noanswer"/>';
-            echo get_string('freetext_noanswer','groupformation');
-            echo '    </label>';
-            echo '</div>';
-        }
-
         echo '</td>';
-
         echo '</tr>';
     }
 }

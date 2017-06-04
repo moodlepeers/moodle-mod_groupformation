@@ -742,6 +742,11 @@ class mod_groupformation_user_manager {
         foreach ($answers as $answer) {
             $score += $answer->answer;
         }
+
+        if (count($answers) == 0 || $num == 0){
+            return "-";
+        }
+
         return ($score / count($answers)) / $num;
     }
 }
