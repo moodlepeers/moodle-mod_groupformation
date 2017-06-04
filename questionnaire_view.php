@@ -55,13 +55,31 @@ $groupsmanager = new mod_groupformation_groups_manager ($groupformation->id);
 $scenario = $store->get_scenario();
 $names = $store->get_categories();
 
-
 if (!has_capability('mod/groupformation:editsettings', $context)) {
     $currenttab = 'answering';
 } else {
     $currenttab = 'view';
 }
 
+$consent = $usermanager->get_consent($userid);
+$participantcode = $usermanager->has_participant_code($userid) || !$data->ask_for_participant_code();
+if (((!$consent || !$participantcode) && !$groupsmanager->groups_created()) &&
+        !has_capability('mod/groupformation:editsettings', $context)) {
+    $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
+            'id' => $cm->id, 'giveconsent' => !$consent, 'giveparticipantcode' => !$participantcode));
+    redirect($returnurl);
+}
+
+// Set PAGE config.
+$PAGE->set_url('/mod/groupformation/questionnaire_view.php', array(
+    'id' => $cm->id));
+$PAGE->set_title(format_string($groupformation->name));
+$PAGE->set_heading(format_string($course->fullname));
+
+$category = $store->get_previous_category($urlcategory);
+$direction = 1;
+$percent = 0;
+$action = 0;
 
 if (data_submitted() && confirm_sesskey()) {
     $category = optional_param('category', null, PARAM_ALPHA);
@@ -70,55 +88,16 @@ if (data_submitted() && confirm_sesskey()) {
     $action = optional_param('action', null, PARAM_BOOL);
 }
 
-if (!isset ($category)) {
-    $category = $store->get_previous_category($urlcategory);
-}
-
-if (!isset ($direction)) {
-    $direction = 1;
-}
-
-
-// Set PAGE config.
-$PAGE->set_url('/mod/groupformation/questionnaire_view.php', array(
-    'id' => $cm->id));
-$PAGE->set_title(format_string($groupformation->name));
-$PAGE->set_heading(format_string($course->fullname));
-
-$consent = $usermanager->get_consent($userid);
-$participantcode = $usermanager->has_participant_code($userid) || !$data->ask_for_participant_code();
-
-if (
-    (!$consent && !$participantcode && !$groupsmanager->groups_created()) &&
-    !has_capability('mod/groupformation:editsettings', $context)) {
-    $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
-        'id' => $cm->id, 'giveconsent' => '1', 'giveparticipantcode' => '1'));
-    redirect($returnurl);
-}
-
-if ((!$consent && !$groupsmanager->groups_created()) && !has_capability('mod/groupformation:editsettings', $context)) {
-    $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
-        'id' => $cm->id, 'giveconsent' => '1'));
-    redirect($returnurl);
-}
-
-if ((!$participantcode && !$groupsmanager->groups_created()) && !has_capability('mod/groupformation:editsettings', $context)) {
-    $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
-        'id' => $cm->id, 'giveparticipantcode' => '1'));
-    redirect($returnurl);
-}
-
+$controller = new mod_groupformation_questionnaire_controller($groupformation->id,
+        get_string('language',
+                'groupformation'),
+        $userid, $category, $cm->id);
 $inarray = in_array($category, $names);
 $go = true;
-$controller = new mod_groupformation_questionnaire_controller($groupformation->id,
-    get_string('language',
-        'groupformation'),
-    $userid, $category, $cm->id);
 
 if (has_capability('mod/groupformation:onlystudent', $context) &&
-    !has_capability('mod/groupformation:editsettings', $context) &&
-    (data_submitted() && confirm_sesskey())
-) {
+        !has_capability('mod/groupformation:editsettings', $context) &&
+        (data_submitted() && confirm_sesskey())) {
     $status = $usermanager->get_answering_status($userid);
     if ($status == 0 || $status == -1) {
         if ($inarray) {
@@ -127,42 +106,38 @@ if (has_capability('mod/groupformation:onlystudent', $context) &&
     }
 }
 
-
 if ($direction == 0 && $percent == 0) {
     $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
-        'id' => $cm->id, 'back' => '1'));
+            'id' => $cm->id, 'back' => '1'));
     redirect($returnurl);
 }
 
+$next = $controller->has_next();
+
 $available = $store->is_questionnaire_available() || $store->is_questionnaire_accessible();
 $isteacher = has_capability('mod/groupformation:editsettings', $context);
-if (($available || $isteacher) && ($category == '' || $inarray)) {
+
+if ($next && ($available || $isteacher) && ($category == '' || $inarray)) {
 
     echo $OUTPUT->header();
-
 
     // Print the tabs.
     require('tabs.php');
 
-    if (groupformation_get_current_questionnaire_version() > $store->get_version()) {
-        echo '<div class="alert">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
-    }
     if ($store->is_archived() && !has_capability('mod/groupformation:editsettings', $context)) {
-        echo '<div class="alert" id="commited_view">' . get_string('archived_activity_answers', 'groupformation') .
-            '</div>';
-    } else if ($store->is_archived() && has_capability('mod/groupformation:editsettings', $context)) {
-        echo '<div class="alert" id="commited_view">' . get_string('archived_activity_admin', 'groupformation') .
-            '</div>';
+        echo '<div class="alert" id="commited_view">';
+        $tmp = has_capability('mod/groupformation:editsettings', $context) ? "admin" : "answers";
+        echo get_string('archived_activity_' . $tmp, 'groupformation');
+        echo '</div>';
     } else {
         if ($direction == 0) {
             $controller->go_back();
         } else if (!$go) {
             $controller->not_go_on();
         }
-
-        $controller->print_page();
+        $controller->render();
     }
-} else if (!$available || $category == 'no') {
+} else if (!$next ||!$available || $category == 'no') {
 
     if (isset ($action) && $action == 1) {
         $usermanager->change_status($userid);
@@ -172,10 +147,8 @@ if (($available || $isteacher) && ($category == '' || $inarray)) {
         'id' => $cm->id, 'do_show' => 'view', 'back' => '1'));
     redirect($returnurl);
 } else {
-
     echo $OUTPUT->heading('Category has been manipulated');
 }
-
 
 echo $OUTPUT->footer();
 

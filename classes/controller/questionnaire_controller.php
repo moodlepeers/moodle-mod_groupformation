@@ -74,12 +74,15 @@ class mod_groupformation_questionnaire_controller {
         $this->lang = $lang;
         $this->userid = $userid;
         $this->cmid = $cmid;
+
         $this->store = new mod_groupformation_storage_manager ($groupformationid);
         $this->data = new mod_groupformation_data();
         $this->usermanager = new mod_groupformation_user_manager ($groupformationid);
+
         $this->scenario = $this->store->get_scenario();
         $this->categories = $this->store->get_categories();
         $this->numberofcategory = count($this->categories);
+
         $this->init($userid);
         $this->set_internal_number($oldcategory);
         $this->context = context_module::instance($this->cmid);
@@ -442,7 +445,12 @@ class mod_groupformation_questionnaire_controller {
     /**
      * Prints questionnaire page
      */
-    public function print_page() {
+    public function render() {
+
+        if (groupformation_get_current_questionnaire_version() > $this->store->get_version()) {
+            echo '<div class="alert">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
+        }
+
         if ($this->has_next()) {
             $this->currentcategory = $this->categories[$this->currentcategoryposition];
             $isteacher = has_capability('mod/groupformation:editsettings', $this->context);
@@ -474,12 +482,13 @@ class mod_groupformation_questionnaire_controller {
 
         } else {
 
-            $this->print_final_page();
-
             if ($this->usermanager->has_answered_everything($this->userid)) {
                 $this->usermanager->set_evaluation_values($this->userid);
             }
 
+            $returnurl = new moodle_url ('/mod/groupformation/analysis_view.php', array(
+                    'id' => $this->cmid, 'do_show' => 'analysis'));
+            redirect($returnurl);
         }
     }
 
