@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="free text questions">
-    <QUESTIONS VERSION="2017060313">
+    <QUESTIONS VERSION="2017060319">
         <QUESTION ID="1" TYPE="freetext">
             <QUESTIONTEXT>
                 <![CDATA[Wenn ich die Wahl habe, arbeite ich lieber im Team als allein.]]>

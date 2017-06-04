@@ -327,7 +327,7 @@ class mod_groupformation_questionnaire_controller {
 
             return $questions;
         }
-    
+
     }
 
     /**

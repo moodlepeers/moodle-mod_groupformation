@@ -26,18 +26,13 @@ if (!defined('MOODLE_INTERNAL')) {
 
 class mod_groupformation_data {
 
-    private $scenarios = array(
-            1 => 'projectteams',
-            2 => 'homeworkgroups',
-            3 => 'presentationgroups',
-    );
-
     private $criteria = array(
             "big5" => array(
                     "category" => "character",
                     "scenarios" => array(1, 2),
                     "evaluation" => true,
                     "labels" => array(
+                            // TODO discuss with Henrik which questions to use how
                             "extraversion" => array(
                                     "scenarios" => array(1 => false, 2 => false),  // False = heterogeneous, True = homogeneous.
                                     "evaluation" => true,  // Use for displaying it to user (to compare to group and course).
@@ -230,34 +225,6 @@ class mod_groupformation_data {
             ),
     );
 
-    // The following arrays values must match the filenames (without language prefix), e.g. en_general.xml => 'general'.
-    // Do NOT include 'knowledge' or 'topics' as these are not XML-based, but dynamically created.
-    // Numbers 1,2,3 are the scenarios available for selection.
-    private $categorysets = array(
-            '1' => array(
-                    'catmultiselect',
-                    'catfreetext',
-                    'catnumber',
-                    'general',
-                    'grade',
-                    'points',
-                    'character',
-                    'motivation',
-                    'team',
-            ),
-            '2' => array(
-                    'general',
-                    'grade',
-                    'points',
-                    'character',
-                    'learning',
-                    'team',
-            ),
-            '3' => array(
-                    'topic',
-            ),
-    );
-
     // Special mode booleans (can be ignored in normal use cases).
     private $mathprepcoursemode = false;
     private $allanswersrequired = false;
@@ -273,16 +240,6 @@ class mod_groupformation_data {
     }
 
     /**
-     * Returns scenario name
-     *
-     * @param int $scenario
-     * @return string
-     */
-    public function get_scenario_name($scenario) {
-        return $this->scenarios [$scenario];
-    }
-
-    /**
      * Returns extra labels for criteria like fam, learning, big5_xxx
      *
      * @param $label
@@ -294,16 +251,6 @@ class mod_groupformation_data {
         } else {
             return array();
         }
-    }
-
-    /**
-     * Returns category set
-     *
-     * @param int $scenario
-     * @return array
-     */
-    public function get_category_set($scenario) {
-        return $this->categorysets [$scenario];
     }
 
     /**

@@ -1471,5 +1471,49 @@ function xmldb_groupformation_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2017041301, 'groupformation');
     }
 
+    if ($oldversion < 2017060400) {
+
+        // Define table groupformation_scenario to be created.
+        $table = new xmldb_table('groupformation_scenario');
+
+        // Adding fields to table groupformation_scenario.
+        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+        $table->add_field('name', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('version', XMLDB_TYPE_INTEGER, '12', null, XMLDB_NOTNULL, null, null);
+
+        // Adding keys to table groupformation_scenario.
+        $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+
+        // Conditionally launch create table for groupformation_scenario.
+        if (!$dbman->table_exists($table)) {
+            $dbman->create_table($table);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2017060400, 'groupformation');
+    }
+
+    if ($oldversion < 2017060401) {
+
+        // Define table groupformation_scenario_cats to be created.
+        $table = new xmldb_table('groupformation_scenario_cats');
+
+        // Adding fields to table groupformation_scenario_cats.
+        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+        $table->add_field('scenario', XMLDB_TYPE_INTEGER, '20', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('category', XMLDB_TYPE_INTEGER, '20', null, XMLDB_NOTNULL, null, null);
+
+        // Adding keys to table groupformation_scenario_cats.
+        $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+
+        // Conditionally launch create table for groupformation_scenario_cats.
+        if (!$dbman->table_exists($table)) {
+            $dbman->create_table($table);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2017060401, 'groupformation');
+    }
+
     return true;
 }

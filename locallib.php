@@ -188,6 +188,18 @@ function groupformation_import_questionnaire_configuration($filename = 'question
         $currentversion = groupformation_get_current_questionnaire_version();
         $newversion = intval(trim($xml['version']));
 
+        $newscenarios = array();
+
+        foreach ($xml->scenarios->scenario as $scenarioname) {
+            $categories = $scenarioname->categories;
+            $scenariocats = array();
+            foreach ($categories->category as $cat) {
+                $scenariocats[] = trim($cat);
+            }
+
+            $newscenarios[trim($scenarioname->name)] = $scenariocats;
+        }
+
         $newcategories = array();
 
         foreach ($xml->categories->category as $cat) {
@@ -228,8 +240,24 @@ function groupformation_import_questionnaire_configuration($filename = 'question
                 $number += $numberofquestions;
             }
 
-            groupformation_add_catalog_version('questionnaire', $number, $newversion, false);
+            $DB->delete_records('groupformation_scenario');
+            $DB->delete_records('groupformation_scenario_cats');
 
+            foreach($newscenarios as $name => $categories) {
+                $record = new stdClass();
+                $record->name = $name;
+                $record->version = $newversion;
+                $scenarioid = $DB->insert_record('groupformation_scenario', $record);
+                foreach($categories as $category) {
+                    $record = $DB->get_record('groupformation_q_version', array('category' => $category));
+                    $newrecord = new stdClass();
+                    $newrecord->scenario = $scenarioid;
+                    $newrecord->category = $record->id;
+                    $DB->insert_record('groupformation_scenario_cats', $newrecord);
+                }
+            }
+
+            groupformation_add_catalog_version('questionnaire', $number, $newversion, false);
         }
 
     }

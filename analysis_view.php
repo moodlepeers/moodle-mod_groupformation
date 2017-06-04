@@ -132,6 +132,7 @@ echo $OUTPUT->header();
 // Print the tabs.
 require('tabs.php');
 
+var_dump($store->get_scenario_name());
 
 if (groupformation_get_current_questionnaire_version() > $store->get_version()) {
     echo '<div class="alert">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';

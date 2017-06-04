@@ -361,16 +361,12 @@ class mod_groupformation_storage_manager {
      * @param bool|false $name
      * @return string
      */
-    public function get_scenario($name = false) {
+    public function get_scenario() {
         global $DB;
 
         $settings = $DB->get_record('groupformation', array(
                 'id' => $this->groupformationid
         ));
-
-        if ($name) {
-            return $this->data->get_scenario_name($settings->szenario);
-        }
 
         return $settings->szenario;
     }
@@ -396,7 +392,15 @@ class mod_groupformation_storage_manager {
      * @return array
      */
     public function get_raw_categories() {
-        return $this->data->get_category_set($this->get_scenario());
+        global $DB;
+
+        $cats = $DB->get_records('groupformation_scenario_cats', array('scenario'=> $this->get_scenario()));
+        $categories = array();
+        foreach($cats as $cat) {
+            $categories[] = $DB->get_field('groupformation_q_version','category', array('id'=>$cat->category));
+        }
+        return $categories;
+        // return $this->data->get_category_set($this->get_scenario());
     }
 
     /**
@@ -405,7 +409,7 @@ class mod_groupformation_storage_manager {
      * @return array
      */
     public function get_categories() {
-        $categoryset = $this->data->get_category_set($this->get_scenario());
+        $categoryset = $this->get_raw_categories();
         $categories = array();
 
         $hasknowledge = $this->get_number('knowledge');
@@ -1045,10 +1049,12 @@ class mod_groupformation_storage_manager {
      */
     public function get_scenario_name() {
         global $DB;
-        $settings = $DB->get_record('groupformation', array(
+        $scenario = $DB->get_field('groupformation', 'szenario', array(
                 'id' => $this->groupformationid
         ));
-        return $this->data->get_scenario_name($settings->szenario);
+        $scenarioname = $DB->get_field('groupformation_scenario', 'name', array('id' => $scenario));
+        return $scenarioname;
+        // return $this->data->get_scenario_name($scenario);
     }
 
     /**
