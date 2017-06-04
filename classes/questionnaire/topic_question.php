@@ -25,7 +25,7 @@ if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
 }
 
-class mod_groupformation_topics_question extends mod_groupformation_basic_question {
+class mod_groupformation_topic_question extends mod_groupformation_basic_question {
 
     protected $type = 'topics';
 
@@ -44,6 +44,15 @@ class mod_groupformation_topics_question extends mod_groupformation_basic_questi
         echo '<li id="' . $category . $questionid . '"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' .
             $question . '</li>';
 
+    }
+
+    /**
+     * Sets answer
+     *
+     * @param $answer
+     */
+    public function set_answer($answer){
+        $this->answer = $answer;
     }
 }
 

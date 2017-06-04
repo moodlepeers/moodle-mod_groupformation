@@ -27,7 +27,7 @@ if (!defined('MOODLE_INTERNAL')) {
 }
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/likert_question.php');
-require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/topics_question.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/topic_question.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/basic_question.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/range_question.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/knowledge_question.php');
@@ -270,7 +270,7 @@ class mod_groupformation_questionnaire_controller {
                     // Therefore here we sort them accordingly top downwards by rating.
                     for ($k = $l; $k >= 1; $k--) {
                         $h = $questionsfirst[$answerposition[$k]];
-                        $h['answer'] = $answerposition[$k];
+                        $h->set_answer($answerposition[$k]);
                         $questions[] = $h;
                     }
                 } else {
@@ -327,6 +327,7 @@ class mod_groupformation_questionnaire_controller {
 
             return $questions;
         }
+    
     }
 
     /**
