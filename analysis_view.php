@@ -50,7 +50,6 @@ groupformation_add_jquery($PAGE, 'survey_functions.js');
 // Determine instances of course module, course, groupformation.
 groupformation_determine_instance($id, $cm, $course, $groupformation);
 
-
 groupformation_import_questionnaire_configuration();
 
 // Require user login if not already logged in.
@@ -133,10 +132,15 @@ echo $OUTPUT->header();
 require('tabs.php');
 
 if (groupformation_get_current_questionnaire_version() > $store->get_version()) {
-    echo '<div class="alert">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
+    echo '<div class="alert">';
+    echo get_string('questionnaire_outdated', 'groupformation');
+    echo '</div>';
 }
+
 if ($store->is_archived() && has_capability('mod/groupformation:editsettings', $context)) {
-    echo '<div class="alert" id="commited_view">' . get_string('archived_activity_admin', 'groupformation') . '</div>';
+    echo '<div class="alert" id="commited_view">';
+    echo get_string('archived_activity_admin', 'groupformation');
+    echo '</div>';
 } else {
     echo '<form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
 
