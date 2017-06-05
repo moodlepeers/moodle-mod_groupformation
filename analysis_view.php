@@ -132,8 +132,6 @@ echo $OUTPUT->header();
 // Print the tabs.
 require('tabs.php');
 
-var_dump($store->get_scenario_name());
-
 if (groupformation_get_current_questionnaire_version() > $store->get_version()) {
     echo '<div class="alert">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
 }
@@ -151,4 +149,59 @@ if ($store->is_archived() && has_capability('mod/groupformation:editsettings', $
     echo '</form>';
 }
 
+if ($CFG->debug === 32767) {
+    echo '<div class="gf_pad_header">';
+    echo 'Developer options';
+    echo '</div>';
+    echo '<div class="gf_pad_content">';
+
+    echo '<a href="' . (new moodle_url('/mod/groupformation/analysis_view.php', array(
+                    'id' => $id, 'do_show' => 'analysis', 'create_users' => 10, 'create_answers' => 1)))->out() . '">';
+    echo '<span class="gf_button gf_button_pill gf_button_small">';
+    echo 'Create 10 users with answers';
+    echo '</span>';
+    echo '</a>';
+    echo '<br>';
+
+    echo '<a href="' . (new moodle_url('/mod/groupformation/analysis_view.php', array(
+                    'id' => $id, 'do_show' => 'analysis', 'create_users' => 1, 'create_answers' => 1)))->out() . '">';
+    echo '<span class="gf_button gf_button_pill gf_button_small">';
+    echo 'Create 1 user with answers';
+    echo '</span>';
+    echo '</a>';
+    echo '<br>';
+
+    echo '<a href="' . (new moodle_url('/mod/groupformation/analysis_view.php', array(
+                    'id' => $id, 'do_show' => 'analysis', 'create_users' => 10)))->out() . '">';
+    echo '<span class="gf_button gf_button_pill gf_button_small">';
+    echo 'Create 10 users without answers';
+    echo '</span>';
+    echo '</a>';
+    echo '<br>';
+
+    echo '<a href="' . (new moodle_url('/mod/groupformation/analysis_view.php', array(
+                    'id' => $id, 'do_show' => 'analysis', 'create_users' => 1)))->out() . '">';
+    echo '<span class="gf_button gf_button_pill gf_button_small">';
+    echo 'Create 1 user without answers';
+    echo '</span>';
+    echo '</a>';
+    echo '<br>';
+
+    echo '<a href="' . (new moodle_url('/mod/groupformation/analysis_view.php', array(
+                    'id' => $id, 'do_show' => 'analysis', 'delete_users' => 1)))->out() . '">';
+    echo '<span class="gf_button gf_button_pill gf_button_small">';
+    echo 'Delete all users with answers';
+    echo '</span>';
+    echo '</a>';
+    echo '<br>';
+
+    echo '<a href="' . (new moodle_url('/mod/groupformation/analysis_view.php', array(
+                    'id' => $id, 'do_show' => 'analysis', 'reset_job' => 1)))->out() . '">';
+    echo '<span class="gf_button gf_button_pill gf_button_small">';
+    echo 'Delete jobs of this activity';
+    echo '</span>';
+    echo '</a>';
+
+    echo '</div>';
+}
 echo $OUTPUT->footer();

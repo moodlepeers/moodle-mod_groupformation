@@ -35,4 +35,5 @@ defined('MOODLE_INTERNAL') || die();
     <?php foreach ($this->_['templates'] as $template): ?>
         <?php echo $template; ?>
     <?php endforeach; ?>
+
 </div>
