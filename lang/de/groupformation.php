@@ -159,6 +159,21 @@ $string ['category_topic'] = 'Themenauswahl';
 $string ['category_sellmo'] = 'Lern- und Leistungsmotivation';
 $string ['category_self'] = 'Selbsteinschätzung';
 $string ['category_srl'] = 'Selbstreguliertes Lernen';
+
+$string ['tabletitle_general'] = 'Allgemeines';
+$string ['tabletitle_grade'] = 'Ziele';
+$string ['tabletitle_points'] = 'Ziele';
+$string ['tabletitle_team'] = 'Gruppenaspekte';
+$string ['tabletitle_character'] = 'Persönlichkeitsmerkmale';
+$string ['tabletitle_motivation'] = 'Kurs-Motivation';
+$string ['tabletitle_learning'] = 'Lernstile';
+$string ['tabletitle_knowledge'] = 'Vorwissen';
+$string ['tabletitle_topic'] = 'Themenauswahl';
+$string ['tabletitle_sellmo'] = 'Lern- und Leistungsmotivation';
+$string ['tabletitle_self'] = 'Selbsteinschätzung';
+$string ['tabletitle_srl'] = 'Selbstreguliertes Lernen';
+$string ['tabletitle_knowledge'] = 'Wie schätzen Sie Ihr persönliches Vorwissen in folgenden Gebieten ein?';
+
 $string ['stats_partly'] = 'In der Kategorie "{$a->category}" haben Sie {$a->answered} von {$a->questions} Fragen beantwortet.';
 $string ['stats_all'] = 'In der Kategorie "{$a->category}" haben Sie alle Fragen beantwortet.';
 $string ['stats_none'] = 'In der Kategorie "{$a->category}" haben Sie noch keine Frage beantwortet.';

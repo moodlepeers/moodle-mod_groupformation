@@ -27,41 +27,49 @@ if (!defined('MOODLE_INTERNAL')) {
 
 class mod_groupformation_question_table {
 
+    private $category;
+
+    function __construct($category) {
+        $this->category = $category;
+    }
+
     /**
      * Print HTML of table header
-     *
-     * @param $category
-     * @param $tabletype
-     * @param $headeroptarray
      */
-    public function print_header($category, $tabletype, $headeroptarray) {
+    public function print_header() {
 
-        if ($tabletype == 'topics') {
-            echo '<div id="topicshead">' . get_string('topics_question', 'groupformation') . '</div><ul class="sortable_topics">';
+        if ($this->category == 'topic') {
+            echo '<div id="topicshead">';
+            echo get_string('topics_question', 'groupformation');
+            echo '</div>';
+            echo '<ul class="sortable_topics">';
 
         } else {
-            echo '<table class="responsive-table">' . '<colgroup><col class="firstCol"><colgroup>';
-
-            echo '<thead><tr><th scope="col">';
-
-            if ($tabletype == 'type_knowledge') {
-                echo get_string('knowledge_question', 'groupformation');
-            } else {
-                echo get_string('category_' . $category, 'groupformation');
-            }
+            echo '<table class="responsive-table">';
+            echo '<colgroup><col class="firstCol"></colgroup>';
+            echo '<thead>';
+            echo '<tr>';
+            echo '<th scope="col">';
+            echo get_string('tabletitle_' . $this->category, 'groupformation');
             echo '</th>';
-            if ($tabletype == 'likert') {
-                $headersize = count($headeroptarray);
 
-                echo '<th scope="col" colspan="' . $headersize . '"><span style="float:left">' . $headeroptarray[0] . '</span>
-                                                                                        <span style="float:right">' .
-                    $headeroptarray[$headersize - 1] . '</span></th>';
-            } else if ($tabletype == 'type_knowledge') {
-                echo '<th scope="col"><div class="legend">' . get_string('knowledge_scale', 'groupformation') .
-                    '</div></th>';
-            } else {
-                echo '<th scope="col"></th>';
-            }
+            //if ($tabletype == 'likert') {
+            //
+            //    $headersize = count($headeroptarray);
+            //
+            //    echo '<th scope="col" colspan="' . $headersize . '"><span style="float:left">' . $headeroptarray[0] . '</span>
+            //                                                                            <span style="float:right">' .
+            //        $headeroptarray[$headersize - 1] . '</span></th>';
+            //} else if ($tabletype == 'type_knowledge') {
+            //    echo '<th scope="col">';
+            //    echo '<div class="legend">';
+            //    echo get_string('knowledge_scale', 'groupformation');
+            //    echo '</div>';
+            //    echo '</th>';
+            //} else {
+                echo '<th scope="col" colspan="100%">';
+                echo '</th>';
+            //}
 
             echo '</tr></thead><tbody>';
         }
@@ -69,12 +77,10 @@ class mod_groupformation_question_table {
 
     /**
      * Print HTML for table footer
-     *
-     * @param $tabletype
      */
-    public function print_footer($tabletype) {
+    public function print_footer() {
         // Closing the table or unordered list.
-        if ($tabletype == 'topics') {
+        if ($this->category == 'topics') {
             // Close unordered list.
             echo '</ul>';
 

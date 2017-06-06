@@ -416,50 +416,38 @@ class mod_groupformation_user_manager {
      * @param $userid
      * @param $category
      * @param $answer
-     * @param $position
+     * @param $questionid
      */
-    public function save_answer($userid, $category, $answer, $position) {
+    public function save_answer($userid, $category, $answer, $questionid) {
         global $DB;
         $status = $this->get_answering_status($userid);
 
-        $questionid = $position;
+        if ($record = $DB->get_record('groupformation_answer', array(
+                'groupformation' => $this->groupformationid,
+                'userid' => $userid,
+                'category' => $category,
+                'questionid' => $questionid
+        ))) {
 
-        if (!in_array($category, array('knowledge', 'topic', 'character', 'team'))) {
-            $question = $this->store->get_question_by_position($category, $position);
-            $questionid = $question->questionid;
-        }
-
-        if (($category == 'grade' || $category == 'general') && $answer == '0') {
-            return;
+            $record->answer = $answer;
+            $DB->update_record('groupformation_answer', $record);
         } else {
-            $answeralreadyexists = $this->has_answer($userid, $category, $questionid);
+            $record = new stdClass ();
+            $record->groupformation = $this->groupformationid;
 
-            if ($answeralreadyexists) {
-                $record = $DB->get_record('groupformation_answer', array(
-                        'groupformation' => $this->groupformationid,
-                        'userid' => $userid,
-                        'category' => $category,
-                        'questionid' => $questionid
-                ));
-                $record->answer = $answer;
-                $DB->update_record('groupformation_answer', $record);
-            } else {
-                $record = new stdClass ();
-                $record->groupformation = $this->groupformationid;
-
-                $record->userid = $userid;
-                $record->category = $category;
-                $record->questionid = $questionid;
-                $record->answer = $answer;
-                $record->timestamp = time();
-                $DB->insert_record('groupformation_answer', $record);
-            }
-
-            if ($status == -1) {
-                $this->change_status($userid);
-            }
-            $this->set_answer_count($userid);
+            $record->userid = $userid;
+            $record->category = $category;
+            $record->questionid = $questionid;
+            $record->answer = $answer;
+            $record->timestamp = time();
+            $DB->insert_record('groupformation_answer', $record);
         }
+
+        if ($status == -1) {
+            $this->change_status($userid);
+        }
+        $this->set_answer_count($userid);
+
     }
 
     /**

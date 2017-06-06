@@ -55,7 +55,7 @@ class mod_groupformation_knowledge_question extends mod_groupformation_range_que
             }
         }
 
-        echo '<td data-title="' . min(array_keys($options)) . ' = ' . $options [min(array_keys($options))] . ', ' .
+        echo '<td colspan="100%" data-title="' . min(array_keys($options)) . ' = ' . $options [min(array_keys($options))] . ', ' .
                 max(array_keys($options)) . ' = ' . $options [max(array_keys($options))] . '" class="range">';
         echo '<span class="">' . min(array_keys($options)) . '</span>';
 
@@ -71,6 +71,18 @@ class mod_groupformation_knowledge_question extends mod_groupformation_range_que
         }
         echo '</td>';
         echo '</tr>';
+    }
+
+    public function read_answer() {
+        $answerparameter = $this->category . $this->questionid;
+        $validityparameter = $answerparameter . '_valid';
+
+        $answer = optional_param($answerparameter, null, PARAM_ALPHANUM);
+        $answervalidity = optional_param($validityparameter, null, PARAM_ALPHANUM);
+
+        if (isset ($answer) && $answervalidity == '1') {
+            return array("save", $answer);
+        }
     }
 }
 

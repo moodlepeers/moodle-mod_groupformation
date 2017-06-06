@@ -357,6 +357,7 @@ class mod_groupformation_questionnaire_controller {
     public function print_navbar($activecategory = null) {
 
         $tempcategories = $this->store->get_categories();
+
         $categories = array();
 
         foreach ($tempcategories as $category) {
@@ -506,12 +507,9 @@ class mod_groupformation_questionnaire_controller {
 
         if (!is_null($questions) && count($questions) != 0) {
 
-            $question = $questions[0];
-            $tabletype = $question->get_type();
-            $headeroptarray = $question->get_options();
             $category = $this->currentcategory;
 
-            $table = new mod_groupformation_question_table ();
+            $table = new mod_groupformation_question_table ($category);
 
             // Here is the actual category and groupformationid is sent hidden.
             echo '<input type="hidden" name="category" value="' . $category . '"/>';
@@ -529,7 +527,7 @@ class mod_groupformation_questionnaire_controller {
             echo '</h4>';
 
             // Print the header of a table or unordered list.
-            $table->print_header($category, $tabletype, $headeroptarray);
+            $table->print_header();
 
             foreach ($questions as $q) {
 
@@ -538,7 +536,7 @@ class mod_groupformation_questionnaire_controller {
             }
 
             // Print the footer of a table or unordered list.
-            $table->print_footer($tabletype);
+            $table->print_footer();
         }
 
         $this->print_action_buttons();
@@ -583,69 +581,54 @@ class mod_groupformation_questionnaire_controller {
     public function save_answers($category) {
         $go = true;
         $number = $this->store->get_number($category);
-        $lang = $this->lang;
-        if ($category == 'topic') {
-            for ($i = 1; $i <= $number; $i++) {
-                $temp = $category . $i;
-                $paratemp = optional_param($temp, null, PARAM_ALPHANUM);
-                if (isset ($paratemp)) {
-                    $this->usermanager->save_answer($this->userid, $category, $paratemp, $i);
-                }
-            }
-        } else if ($category == 'knowledge') {
-            for ($i = 1; $i <= $number; $i++) {
-                $tempvalidaterangevalue = $category . $i . '_valid';
-                $temp = $category . $i;
-                $paravalidaterange = optional_param($tempvalidaterangevalue, null, PARAM_ALPHANUM);
-                $paratemp = optional_param($temp, null, PARAM_ALPHANUM);
 
-                if (isset ($paratemp) && $paravalidaterange == '1') {
-                    $this->usermanager->save_answer($this->userid, $category, $paratemp, $i);
-                }
-            }
-        } elseif ($category == 'catfreetext' || $category == 'catnumber') {
-            $questions = $this->store->get_questions_randomized_for_user($category, $this->userid, $lang);
-            foreach ($questions as $question) {
-                $temp = $category . $question->questionid;
-                $paratemp1 = optional_param($temp, null, PARAM_RAW);
-                $temp = $category . $question->questionid.'_noanswer';
-                $paratemp2 = optional_param($temp, null, PARAM_RAW);
-                if ((isset($paratemp2) && $paratemp2 == "on") || $paratemp1 == "") {
-                    $this->usermanager->delete_answer($this->userid, $category, $question->questionid);
-                }
-                if (isset($paratemp1) && $paratemp1 != "") {
-                    $this->usermanager->save_answer($this->userid, $category, $paratemp1, $question->questionid);
-                }
-            }
-        } elseif ($category == 'catmultiselect') {
-            $questions = $this->store->get_questions_randomized_for_user($category, $this->userid, $lang);
-
-            foreach ($questions as $question) {
-                $temp = $category . $question->questionid. '';
-                $paratemp = optional_param_array($temp, array(), PARAM_RAW);
-                $paratemp = 'list:' . implode(",",$paratemp);
-                if (isset($paratemp) && $paratemp == 'list:') {
-                    $this->usermanager->delete_answer($this->userid, $category, $question->questionid);
-                }
-                if (isset($paratemp) && $paratemp != 'list:') {
-                    $this->usermanager->save_answer($this->userid, $category, $paratemp, $question->questionid);
-                }
+        if ($category == 'knowledge' || $category == 'topic') {
+            for ($i = 1; $i <= $number; $i++) {
+                $question = new stdClass();
+                $question->type = $category;
+                $question->questionid = $i;
+                $this->handle_answer($this->userid, $category, $question);
             }
         } else {
-            $questions = $this->store->get_questions_randomized_for_user($category, $this->userid, $lang);
+            $questions = $this->store->get_questions_randomized_for_user($category, $this->userid, $this->lang);
 
             foreach ($questions as $question) {
-                $temp = $category . $question->questionid;
-                $paratemp = optional_param($temp, null, PARAM_RAW);
-                if (isset($paratemp)) {
-                    $this->usermanager->save_answer($this->userid, $category, $paratemp, $question->questionid);
-                }
+                $this->handle_answer($this->userid, $category, $question);
             }
         }
+
         if ($this->data->all_answers_required() && $this->usermanager->get_number_of_answers(
                 $this->userid, $category) != $number) {
             $go = false;
         }
+
         return $go;
+    }
+
+    /**
+     * Handles answers
+     *
+     * @param $userid
+     * @param $category
+     * @param $question
+     */
+    public function handle_answer($userid, $category, $question){
+
+        $type = $question->type;
+        $questionid = $question->questionid;
+        $name = 'mod_groupformation_' . $type . '_question';
+        $questionobj = new $name($category, $questionid);
+
+        $answer = $questionobj->read_answer();
+
+        if (is_null($answer)){
+            return;
+        }
+
+        if ($answer[0] == "save") {
+            $this->usermanager->save_answer($userid, $category, $answer[1], $questionid);
+        }else if ($answer[0] == "delete"){
+            $this->usermanager->delete_answer($userid, $category, $questionid);
+        }
     }
 }

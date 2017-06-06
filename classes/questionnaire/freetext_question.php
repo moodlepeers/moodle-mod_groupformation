@@ -60,7 +60,7 @@ class mod_groupformation_freetext_question extends mod_groupformation_basic_ques
             }
         }
 
-        echo '<td class="freetext">';
+        echo '<td colspan="100%" class="freetext">';
         echo '<textarea maxlength="255" class="freetext-textarea form-control" rows="5" 
                 name="' . $category . $questionid . '" style="width: 100%;">'.((intval($answer) == -1)?"":$answer).'</textarea>';
         echo '<br>';
@@ -75,6 +75,27 @@ class mod_groupformation_freetext_question extends mod_groupformation_basic_ques
         echo '</td>';
 
         echo '</tr>';
+    }
+
+    /**
+     * Reads answer
+     *
+     * @return array|null
+     */
+    public function read_answer() {
+
+        $answerparameter = $this->category . $this->questionid;
+        $noanswerparameter = $answerparameter.'_noanswer';
+
+        $answer = optional_param($answerparameter, null, PARAM_RAW);
+        $noanswer = optional_param($noanswerparameter, null, PARAM_RAW);
+
+        if ((isset($noanswer) && $noanswer == "on") || $answer == "") {
+            return array('delete', null);
+        } else if (isset($answer) && $answer != "") {
+            return array('save', $answer);
+        }
+        return null;
     }
 }
 

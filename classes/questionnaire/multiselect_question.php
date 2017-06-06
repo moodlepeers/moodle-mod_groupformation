@@ -65,7 +65,7 @@ class mod_groupformation_multiselect_question extends mod_groupformation_basic_q
             $answers = explode(",",$answer);
         }
 
-        echo '<td class="freetext">';
+        echo '<td colspan="0" class="freetext">';
         echo '<div class="form-group">';
         echo '  <select multiple class="freetext-textarea form-control" name="' . $category . $questionid . '[]" style="width: 80%;">';
         foreach ($options as $key => $option) {
@@ -86,6 +86,26 @@ class mod_groupformation_multiselect_question extends mod_groupformation_basic_q
         echo '</td>';
 
         echo '</tr>';
+    }
+
+    /**
+     * Reads answer
+     *
+     * @return array|null
+     */
+    public function read_answer() {
+
+        $parameter = $this->category . $this->questionid;
+
+        $answer = optional_param_array($parameter, array(), PARAM_RAW);
+        $answer = 'list:' . implode(",",$answer);
+
+        if (isset($answer) && $answer == 'list:') {
+            return array('delete', null);
+        } else if (isset($answer) && $answer != 'list:') {
+            return array('save', $answer);
+        }
+        return null;
     }
 }
 

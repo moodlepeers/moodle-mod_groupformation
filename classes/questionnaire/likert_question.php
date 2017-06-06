@@ -58,12 +58,12 @@ class mod_groupformation_likert_question extends mod_groupformation_basic_questi
         $radiocount = 1;
         foreach ($options as $option) {
             if (intval($answer) == $radiocount) {
-                echo '<td data-title="' . $option .
-                    '" class="radioleft select-area selected_label"><input type="radio" name="' . $category .
-                    $questionid . '" value="' . $radiocount . '" checked="checked"/></td>';
+                echo '<td title="'.$option.'" data-title="' . $option .
+                    '" class="toolt2 radioleft select-area selected_label"><input type="radio" name="' . $category .
+                    $questionid . '" value="' . $radiocount . '" checked="checked"/>'.$option.'</td>';
             } else {
-                echo '<td data-title="' . $option . '" class="radioleft select-area"><input type="radio" name="' .
-                    $category . $questionid . '" value="' . $radiocount . '"/></td>';
+                echo '<td title="'.$option.'" data-title="' . $option . '" class="toolt2 radioleft select-area"><input type="radio" name="' .
+                    $category . $questionid . '" value="' . $radiocount . '"/>'.$option.'</td>';
             }
             $radiocount++;
         }
@@ -71,6 +71,18 @@ class mod_groupformation_likert_question extends mod_groupformation_basic_questi
 
     }
 
+    /**
+     * @return array|null
+     */
+    public function read_answer() {
+        $parameter = $this->category . $this->questionid;
+        $answer = optional_param($parameter, null, PARAM_RAW);
+        if (isset($answer)) {
+            return array('save', $answer);
+        } else {
+            return null;
+        }
+    }
 
 }
 

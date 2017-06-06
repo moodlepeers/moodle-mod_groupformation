@@ -59,7 +59,7 @@ class mod_groupformation_number_question extends mod_groupformation_basic_questi
             }
         }
 
-        echo '<td class="freetext">';
+        echo '<td colspan="0" class="freetext">';
         echo '<input class="freetext-textarea form-control" type="number" min="'.$options[0].'" max="'.$options[1].'" value="'.intval($answer).'" name="' . $category . $questionid . '">';
         echo '<br>';
         if (!$required) {
@@ -74,6 +74,27 @@ class mod_groupformation_number_question extends mod_groupformation_basic_questi
         echo '</td>';
 
         echo '</tr>';
+    }
+
+    /**
+     * Reads answer
+     *
+     * @return array|null
+     */
+    public function read_answer() {
+
+        $answerparameter = $this->category . $this->questionid;
+        $noanswerparameter = $answerparameter.'_noanswer';
+
+        $answer = optional_param($answerparameter, null, PARAM_RAW);
+        $noanswer = optional_param($noanswerparameter, null, PARAM_RAW);
+
+        if ((isset($noanswer) && $noanswer == "on") || $answer == "") {
+            return array('delete', null);
+        } else if (isset($answer) && $answer != "") {
+            return array('save', $answer);
+        }
+        return null;
     }
 }
 

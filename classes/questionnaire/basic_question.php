@@ -36,7 +36,7 @@ abstract class mod_groupformation_basic_question {
     /**
      * mod_groupformation_dropdown_question constructor.
      */
-    function __construct($category, $questionid, $question, $options, $answer) {
+    function __construct($category, $questionid, $question = null, $options = null, $answer = null) {
         $this->category = $category;
         $this->questionid = $questionid;
         $this->question = $question;
@@ -67,7 +67,10 @@ abstract class mod_groupformation_basic_question {
      *
      * @return mixed
      */
-    public function get_options(){
+    public function get_options() {
         return $this->options;
     }
+
+
+    public abstract function read_answer();
 }

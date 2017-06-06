@@ -61,7 +61,7 @@ class mod_groupformation_dropdown_question extends mod_groupformation_basic_ques
             echo '<th scope="row">' . $question . '</th>';
         }
 
-        echo '<td class="center">';
+        echo '<td colspan="100%" class="center">';
         $categoryquestionid = $category . $questionid;
         echo '<select style="height:35px" class="form-control" name="' . $categoryquestionid . '" id="' . $categoryquestionid . '">';
         echo '<option value="0"> - </option>';
@@ -78,5 +78,18 @@ class mod_groupformation_dropdown_question extends mod_groupformation_basic_ques
         echo '</select>
             </td>
         </tr>';
+    }
+
+    /**
+     * @return array|null
+     */
+    public function read_answer() {
+        $parameter = $this->category . $this->questionid;
+        $answer = optional_param($parameter, null, PARAM_RAW);
+        if (isset($answer) && $answer != 0) {
+            return array('save', $answer);
+        }else{
+            return null;
+        }
     }
 }
