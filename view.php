@@ -61,10 +61,6 @@ $store = new mod_groupformation_storage_manager ($groupformation->id);
 $groupsmanager = new mod_groupformation_groups_manager ($groupformation->id);
 $usermanager = new mod_groupformation_user_manager ($groupformation->id);
 
-if ($usermanager->is_completed($userid)) {
-    groupformation_set_activity_completion($course, $cm, $userid);
-}
-
 // Set PAGE config.
 $PAGE->set_url('/mod/groupformation/view.php', array(
     'id' => $cm->id, 'do_show' => $doshow));
@@ -101,18 +97,20 @@ if ($begin == 1) {
     $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
         'id' => $id));
     redirect($returnurl);
-} else if ($usermanager->is_completed($userid)) {
-    $usermanager->set_complete($userid, 0);
-} else {
-    $usermanager->change_status($userid, 1);
-    if ($store->is_math_prep_course_mode()) {
-        // XXX: scientific studies A/B sampling
-        $groupsmanager->assign_to_groups_a_and_b($userid);
+} else if ($begin == 0) {
+    if ($usermanager->is_completed($userid)) {
+        $usermanager->set_complete($userid, 0);
+    } else {
+        $usermanager->change_status($userid, 1);
+        groupformation_set_activity_completion($course, $cm, $userid);
+        if ($store->is_math_prep_course_mode()) {
+            // XXX: scientific studies A/B sampling
+            $groupsmanager->assign_to_groups_a_and_b($userid);
+        }
+        $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
+                'id' => $id));
+        redirect($returnurl);
     }
-    $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
-        'id' => $id));
-
-    redirect($returnurl);
 }
 
 echo $OUTPUT->header();

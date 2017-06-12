@@ -387,14 +387,16 @@ class mod_groupformation_groups_manager {
         $records = $DB->get_records('groupformation_started', array(
                 'groupformation' => $this->groupformationid, 'completed' => $completed), 'timecompleted',
                 'id, userid, timecompleted');
+        $field = $DB->get_field('groupformation_started', 'groupid', array(
+                'groupformation' => $this->groupformationid, 'completed' => $completed, 'userid' => $userid));
 
-        if (count($records) > 0) {
+        if (is_null($field) && count($records) > 0) {
             $i = 0;
-            foreach ($records as $id => $record) {
-                if ($record->userid == $userid) {
+            foreach ($records as $record) {
+                if ($record->userid == $userid){
                     break;
                 }
-                $i++;
+                $i += 1;
             }
 
             $a = $DB->get_field('groups', 'id', array(

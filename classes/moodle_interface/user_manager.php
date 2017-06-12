@@ -408,6 +408,7 @@ class mod_groupformation_user_manager {
                         'questionid' => $questionid
                 )
         );
+        $this->set_answer_count($userid);
     }
 
     /**
