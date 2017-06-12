@@ -105,7 +105,10 @@ if ($begin == 1) {
     $usermanager->set_complete($userid, 0);
 } else {
     $usermanager->change_status($userid, 1);
-    // XXX: scientific studies A/B sampling $groupsmanager->assign_to_groups_a_and_b($userid);.
+    if ($store->is_math_prep_course_mode()) {
+        // XXX: scientific studies A/B sampling
+        $groupsmanager->assign_to_groups_a_and_b($userid);
+    }
     $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
         'id' => $id));
 
