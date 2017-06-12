@@ -39,7 +39,7 @@ $string ['groupformationname'] = 'Name der Gruppenformation';
 $string ['groupformationname_help'] = 'Dieser Titel wird auf der Kursseite angezeigt.';
 $string ['groupformation'] = 'Gruppenformation';
 $string ['pluginadministration'] = 'Administration: Gruppenformation';
-$string ['pluginname'] = 'groupformation';
+$string ['pluginname'] = 'Gruppenformation';
 $string ['nogroupformation'] = 'keine Gruppenformation';
 $string ['groupnameexists'] = 'Dieser Gruppenname existiert schon';
 $string ['generategroups'] = 'Gruppengenerierung';
@@ -324,6 +324,8 @@ $string ['endtime'] = 'Endzeit';
 $string['excellent'] = 'sehr gut';
 $string['none'] = 'gar nicht';
 $string['bad'] = 'schlecht';
+
+$string ['messageprovider:submission'] = 'Benachrichtige mich wenn die Gruppenformation beendet ist';
 
 $string['cron_job_not_running'] = 'Um die gestarteten Anfragen zur Gruppenbildung zu bearbeiten läuft im Hintergrund ein Cron-Daemon. Leider reagiert dieser in der letzten Zeit nicht oder ist gar außer Betrieb. Sollten Sie diese Meldung nach mehr als 24 Stunden noch immer sehen, kontaktieren Sie bitte den Systemadministrator.';
 

@@ -40,7 +40,7 @@ $string ['groupformationname'] = 'Group formation';
 $string ['groupformationname_help'] = 'ToolTip Group formation';
 $string ['groupformation'] = 'Group formation';
 $string ['pluginadministration'] = 'Administration: Group formation';
-$string ['pluginname'] = 'groupformation';
+$string ['pluginname'] = 'Groupformation';
 $string ['nogroupformation'] = 'No group formation';
 $string ['groupnameexists'] = 'This group already exists.';
 $string ['generategroups'] = 'Generation of groups';
@@ -338,7 +338,7 @@ $string ['excellent'] = 'excellent';
 $string ['none'] = 'none';
 $string ['bad'] = 'bad';
 
-$string ['messageprovider:submission'] = 'Notify me if group formation algorithm finished.';
+$string ['messageprovider:submission'] = 'Notify me if group formation algorithm finished';
 
 $string ['cron_job_not_running'] =
         'In order to handle queued jobs a cron is working in the background. Unfortunately it is either not responding or not running at all. If this message keeps appearing after 24 h please contact the system administrator.';
