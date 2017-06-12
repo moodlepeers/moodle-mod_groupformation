@@ -367,9 +367,7 @@ class mod_groupformation_groups_manager {
         global $DB, $COURSE;
         $completed = 1;
 
-        if (!$DB->record_exists('groups', array(
-                'courseid' => $COURSE->id, 'name' => 'Gruppe A'))
-        ) {
+        if (!$DB->record_exists('groups', array('courseid' => $COURSE->id, 'name' => 'Gruppe A'))) {
             $record = new stdClass ();
             $record->courseid = $COURSE->id;
             $record->name = "Gruppe A";
@@ -377,9 +375,7 @@ class mod_groupformation_groups_manager {
 
             $a = groups_create_group($record);
         }
-        if (!$DB->record_exists('groups', array(
-                'courseid' => $COURSE->id, 'name' => 'Gruppe B'))
-        ) {
+        if (!$DB->record_exists('groups', array('courseid' => $COURSE->id, 'name' => 'Gruppe B'))) {
             $record = new stdClass ();
             $record->courseid = $COURSE->id;
             $record->name = "Gruppe B";

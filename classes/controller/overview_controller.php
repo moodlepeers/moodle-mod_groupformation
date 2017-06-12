@@ -141,10 +141,11 @@ class mod_groupformation_student_overview_controller {
                     true, $this->groupformationid);
                 $this->groupformationstateinfo = array(
                     get_string('questionnaire_submitted', 'groupformation'));
+                $math = $this->store->is_math_prep_course_mode();
                 $this->buttonsinfo = get_string('questionnaire_press_revert', 'groupformation');
                 $this->buttonsarray = array(
                     array(
-                        'type' => 'submit', 'name' => 'begin', 'value' => '0', 'state' => '',
+                        'type' => 'submit', 'name' => 'begin', 'value' => '0', 'state' => $math?'disabled':'',
                         'text' => get_string('revert')),
                     array(
                         'type' => 'submit', 'name' => 'begin', 'value' => '-1',
