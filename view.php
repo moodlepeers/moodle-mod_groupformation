@@ -115,15 +115,6 @@ if ($begin == 1) {
 
 echo $OUTPUT->header();
 
-/*$users = $store->get_users_for_grouping();
-var_dump($users);
-
-foreach($users[0] as $user){
-    var_dump($usermanager->get_eval_score($user));
-}
-
-// var_dump($v);
-*/
 if ($usermanager->get_consent($userid) || $groupsmanager->groups_created()) {
     // Print the tabs.
     require('tabs.php');

@@ -71,9 +71,7 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
         unset($big5specs['labels']['openness']);
         unset($big5specs['labels']['agreeableness']);
 
-        $specs = array(
-            "big5" => $big5specs
-        );
+        $specs = ["big5" => $big5specs];
 
         $configurations = array(
             "mrand:0;ex:1;gh:1" => array('big5_extraversion' => true, 'big5_conscientiousness' => true),
@@ -94,11 +92,12 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
         $groupsizes = $this->store->determine_group_size($users);
 
         if (count($users[0]) < $numberofslices) {
-            return array();
+            return [];
         }
 
         // Divide users into n slices.
-        $slices = $this->slicing($users[0], $numberofslices);
+        $slices = $this->get_user_slices($users[0], $numberofslices);
+        //$slices = $this->slicing($users[0], $numberofslices);
 
         $cohorts = array();
 
@@ -124,6 +123,49 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
         $cohorts[$randomkey] = $randomcohort;
 
         return $cohorts;
+    }
+
+    /**
+     * Creates evenly distributed slices by using the linearized eval score
+     *
+     * @param $users
+     * @param $numberofslices
+     * @return array
+     */
+    private function get_user_slices($users, $numberofslices) {
+        $scores = [];
+
+        foreach($users as $user){
+            $scores[] = array($user, $this->usermanager->get_eval_score($user));
+        }
+
+        function cmp($a, $b){
+            return $a[1]<$b[1];
+        }
+        usort($scores, "cmp");
+
+        $slices = range(1,$numberofslices);
+        $userslices = [];
+        foreach($scores as $tuple) {
+            if (count($slices)==0){
+                $slices = range(1,$numberofslices);
+            }
+
+            $user = $tuple[0];
+            $score = $tuple[1];
+
+            $assignto = array_rand($slices);
+
+            if (!isset($userslices[$assignto])) {
+                $userslices[$assignto] = [];
+            }
+
+            $userslices[$assignto] = array_merge([$user],$userslices[$assignto]);
+
+            unset($slices[$assignto]);
+        }
+
+        return $userslices;
     }
 
 }

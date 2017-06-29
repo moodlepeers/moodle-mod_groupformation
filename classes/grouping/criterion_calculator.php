@@ -211,8 +211,8 @@ class mod_groupformation_criterion_calculator {
             $maxvalue = 0;
 
             $questionids = $spec['questionids'];
-
             if (array_key_exists($this->scenario, $spec['scenarios'])) {
+
                 foreach (array_values($questionids) as $tempquestionid) {
                     $questionid = $tempquestionid;
                     if ($tempquestionid < 0) {

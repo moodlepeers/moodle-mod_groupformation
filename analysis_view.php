@@ -75,6 +75,7 @@ $PAGE->set_heading(format_string($course->fullname));
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/controller/analysis_controller.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_parser.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/scientific_grouping_2.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/analysis_view_controller.php');
 
 if ($CFG->debug === 32767 && $resetjob) {
@@ -127,6 +128,17 @@ if ((data_submitted()) && confirm_sesskey()) {
 
 
 echo $OUTPUT->header();
+
+$store = new mod_groupformation_storage_manager($groupformation->id);
+$usermanager = new mod_groupformation_user_manager($groupformation->id);
+$sg = new mod_groupformation_scientific_grouping_2($groupformation->id);
+
+$users = $store->get_users_for_grouping();
+
+$results = $sg->run_grouping($users);
+
+var_dump($results);
+
 
 // Print the tabs.
 require('tabs.php');

@@ -98,7 +98,7 @@ class mod_groupformation_range_question extends mod_groupformation_basic_questio
      * @return int
      */
     public function create_random_answer() {
-        return random_int(1,max(array_keys($this->options)));
+        return rand(1,max(array_keys($this->options)));
     }
 
 
