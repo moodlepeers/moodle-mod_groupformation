@@ -55,17 +55,32 @@ class mod_groupformation_likert_question extends mod_groupformation_basic_questi
         }
         echo '<th scope="row">' . $question . '</th>';
 
-        $radiocount = 1;
-        foreach ($options as $option) {
-            if (intval($answer) == $radiocount) {
-                echo '<td title="'.$option.'" data-title="' . $option .
-                    '" class="toolt2 radioleft select-area selected_label"><input type="radio" name="' . $category .
-                    $questionid . '" value="' . $radiocount . '" checked="checked"/>'.$option.'</td>';
-            } else {
-                echo '<td title="'.$option.'" data-title="' . $option . '" class="toolt2 radioleft select-area"><input type="radio" name="' .
-                    $category . $questionid . '" value="' . $radiocount . '"/>'.$option.'</td>';
+        if (count($options) > 2) {
+            $radiocount = 1;
+            foreach ($options as $option) {
+                if (intval($answer) == $radiocount) {
+                    echo '<td title="'.$option.'" data-title="' . $option .
+                        '" class="toolt2 radioleft select-area selected_label"><input type="radio" name="' . $category .
+                        $questionid . '" value="' . $radiocount . '" checked="checked"/></td>';
+                } else {
+                    echo (($option!="" && $radiocount==1)?'<td class="td-extra">'.$option.'</td>':"").'<td title="'.$option.'" data-title="' . $option . '" class="toolt2 radioleft select-area"><input type="radio" name="' .
+                        $category . $questionid . '" value="' . $radiocount . '"/></td>'.(($option!="" && $radiocount==count($options))?'<td class="td-extra">'.$option.'</td>':"");
+                }
+                $radiocount++;
             }
-            $radiocount++;
+        } else {
+            $radiocount = 1;
+            foreach ($options as $option) {
+                if (intval($answer) == $radiocount) {
+                    echo '<td title="'.$option.'" data-title="' . $option .
+                        '" class="toolt2 radioleft select-area selected_label"><input type="radio" name="' . $category .
+                        $questionid . '" value="' . $radiocount . '" checked="checked"/>'.$option.'</td>';
+                } else {
+                    echo '<td title="'.$option.'" data-title="' . $option . '" class="toolt2 radioleft select-area"><input type="radio" name="' .
+                        $category . $questionid . '" value="' . $radiocount . '"/>'.$option.'</td>';
+                }
+                $radiocount++;
+            }
         }
         echo '</tr>';
 

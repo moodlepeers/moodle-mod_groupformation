@@ -85,13 +85,11 @@ if ($CFG->debug === 32767 && $resetjob) {
 
 if ($CFG->debug === 32767 && $runjob) {
     $job = null;
-
+    $ajm = new mod_groupformation_advanced_job_manager();
     $job = $ajm::get_job($groupformation->id);
-
-    if (!is_null($job)) {
+    if (!is_null($job) && $ajm::get_state($job) == 'waiting') {
         $result = $ajm::do_groupal($job);
         $saved = $ajm::save_result($job, $result);
-        $ajm::set_job('done');
     }
 }
 

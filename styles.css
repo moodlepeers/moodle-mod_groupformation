@@ -624,6 +624,18 @@
     color: white;
 }
 
+.path-mod-groupformation .responsive-table tbody td.td-extra {
+    visibility: hidden;
+    display: none;
+}
+
+@media (min-width: 64em) {
+    .path-mod-groupformation .responsive-table tbody td.td-extra {
+        visibility: visible;
+        display: table-cell;
+    }
+}
+
 @media (min-width: 64em) {
     .path-mod-groupformation .responsive-table tbody th[scope="row"] {
         background-color: transparent;
@@ -659,7 +671,7 @@
 }
 
 .path-mod-groupformation .responsive-table tbody td.radioleft[data-title]:after {
-    content: ""; /*attr(data-title);*/
+    content: attr(data-title);
     margin: 2% 2%;
     font-size: .8em;
     color: rgba(94, 93, 82, 0.75);
