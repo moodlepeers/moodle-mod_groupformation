@@ -91,5 +91,33 @@ class mod_groupformation_range_question extends mod_groupformation_basic_questio
             return array("save", $answer);
         }
     }
+
+    /**
+     * Creates random answer
+     *
+     * @return int
+     */
+    public function create_random_answer() {
+        return random_int(1,max(array_keys($this->options)));
+    }
+
+
+
+    /**
+     * Converts options if string
+     *
+     * @param $options
+     * @return array
+     */
+    protected function convert_options($options) {
+
+        if (!is_null($options) && is_string($options)){
+            $options = array(
+                    100 => get_string('excellent', 'groupformation'),
+                    0 => get_string('bad', 'groupformation'));
+        }
+
+        return $options;
+    }
 }
 

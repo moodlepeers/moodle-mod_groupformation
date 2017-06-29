@@ -107,5 +107,10 @@ class mod_groupformation_multiselect_question extends mod_groupformation_basic_q
         }
         return null;
     }
+
+    public function create_random_answer() {
+        var_dump($this->options);
+        return "1,2";
+    }
 }
 

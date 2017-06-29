@@ -358,7 +358,6 @@ class mod_groupformation_storage_manager {
     /**
      * Returns the scenario
      *
-     * @param bool|false $name
      * @return string
      */
     public function get_scenario() {
@@ -368,7 +367,11 @@ class mod_groupformation_storage_manager {
                 'id' => $this->groupformationid
         ));
 
-        return $settings->szenario;
+        $scenarios = $DB->get_records('groupformation_scenario');
+
+        $scenario = (array_values($scenarios)[$settings->szenario-1]);
+
+        return $scenario->id;
     }
 
     /**
@@ -1013,7 +1016,7 @@ class mod_groupformation_storage_manager {
      * Returns questions
      *
      * @param $category
-     * @param $version
+     * @param string $lang
      * @return array
      */
     public function get_questions($category, $lang = 'en') {
@@ -1031,6 +1034,7 @@ class mod_groupformation_storage_manager {
      */
     public function get_questions_randomized_for_user($category, $userid, $lang = 'en') {
         $questions = array_values($this->get_questions($category, $lang));
+        return $questions;
         srand($userid);
         usort($questions, function($a, $b) {
             return rand(-1, 1);

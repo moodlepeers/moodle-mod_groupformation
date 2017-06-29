@@ -92,4 +92,13 @@ class mod_groupformation_dropdown_question extends mod_groupformation_basic_ques
             return null;
         }
     }
+
+    /**
+     * Returns random answer
+     *
+     * @return int
+     */
+    public function create_random_answer() {
+        return rand(1, count($this->options));
+    }
 }

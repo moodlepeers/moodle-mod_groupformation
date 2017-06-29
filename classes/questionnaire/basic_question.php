@@ -35,12 +35,18 @@ abstract class mod_groupformation_basic_question {
 
     /**
      * mod_groupformation_dropdown_question constructor.
+     *
+     * @param $category
+     * @param $questionid
+     * @param null $question
+     * @param null $options
+     * @param null $answer
      */
     function __construct($category, $questionid, $question = null, $options = null, $answer = null) {
         $this->category = $category;
         $this->questionid = $questionid;
         $this->question = $question;
-        $this->options = $options;
+        $this->options = $this->convert_options($options);
         $this->answer = $answer;
     }
 
@@ -73,4 +79,23 @@ abstract class mod_groupformation_basic_question {
 
 
     public abstract function read_answer();
+
+    public abstract function create_random_answer();
+
+
+
+    /**
+     * Converts options if string
+     *
+     * @param $options
+     * @return array
+     */
+    protected function convert_options($options) {
+        if (!is_null($options) && is_string($options)){
+            $temp = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $options . ' </OPTIONS>';
+            $options = mod_groupformation_util::xml_to_array($temp);
+        }
+
+        return $options;
+    }
 }

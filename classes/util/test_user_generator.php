@@ -27,6 +27,16 @@ if (!defined('MOODLE_INTERNAL')) {
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/likert_question.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/topic_question.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/basic_question.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/range_question.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/knowledge_question.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/dropdown_question.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/freetext_question.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/multiselect_question.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/number_question.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/question_table.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/controller/grouping_controller.php');
 
 class mod_groupformation_test_user_generator {
@@ -127,7 +137,24 @@ class mod_groupformation_test_user_generator {
                 }
                 try {
                     foreach ($categories as $category) {
+                        $questions2 = $store->get_questions($category);
+                        foreach (array_values($questions2) as $key => $question){
+                            $options = $question->options;
+                            $name = 'mod_groupformation_' . $question->type . '_question';
+                            /** @var mod_groupformation_basic_question $questionobj */
+                            $questionobj = new $name($category, $question->id, $question->question, $options);
+                            $answer = $questionobj->create_random_answer();
+                            $record = new stdClass ();
+                            $record->groupformation = $groupformationid;
+                            $record->category = $category;
+                            $record->questionid = $question->id;
+                            $record->userid = $userid;
+                            $record->timestamp = time();
+                            $record->answer = $answer;
+                            $allrecords [] = $record;
+                        }
 
+                        /*
                         if ($category == "topic" || $category == "knowledge") {
                             $temp = $store->get_knowledge_or_topic_values($category);
                             $xmlcontent = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>';
@@ -160,7 +187,7 @@ class mod_groupformation_test_user_generator {
                                 }
                             }
                             $allrecords [] = $record;
-                        }
+                        }*/
                     }
                     $DB->insert_records("groupformation_answer", $allrecords);
 

@@ -47,7 +47,6 @@ class mod_groupformation_likert_question extends mod_groupformation_basic_questi
         if ($answer == false) {
             $answer = -1;
         }
-
         if ($answer == -1 && $highlight) {
             echo '<tr class="noAnswer">';
         } else {
@@ -84,5 +83,13 @@ class mod_groupformation_likert_question extends mod_groupformation_basic_questi
         }
     }
 
+    /**
+     * Returns random answer
+     *
+     * @return int
+     */
+    public function create_random_answer() {
+        return rand(1,count($this->options));
+    }
 }
 

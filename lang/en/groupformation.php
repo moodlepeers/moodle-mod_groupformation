@@ -20,7 +20,6 @@
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 $string ['language'] = 'en';
 $string ['modulename'] = 'Group formation';
 $string ['modulenameplural'] = 'Group formations';
@@ -596,6 +595,15 @@ $string ['category_catmultiselect'] = 'Multiselect';
 $string ['tabletitle_catfreetext'] = 'Freetext';
 $string ['tabletitle_catnumber'] = 'Number';
 $string ['tabletitle_catmultiselect'] = 'Multiselect';
+
+$string ['category_demographic'] = 'Demographic';
+$string ['tabletitle_demographic'] = 'Demographic';
+
+$string ['category_times'] = 'Availability';
+$string ['tabletitle_times'] = 'Availability';
+
+$string ['category_skills'] = 'Experience';
+$string ['tabletitle_skills'] = 'Experience';
 
 $string ['freetext_noanswer'] = 'No answer';
 

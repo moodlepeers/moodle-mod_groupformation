@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<GROUPFORMATION COMMENT="demographic questions">
+    <QUESTIONS VERSION="2017062800">
+        <QUESTION ID="1" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Geschlecht]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[männlich]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[weiblich]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="2" TYPE="number">
+            <QUESTIONTEXT>
+                <![CDATA[Alter]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <MIN>
+                    <![CDATA[0]]>
+                </MIN>
+                <MAX>
+                    <![CDATA[100]]>
+                </MAX>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="3" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ist Deutsch ihre Muttersprache?]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[Ja]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Nein]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="4" TYPE="number">
+            <QUESTIONTEXT>
+                <![CDATA[Wenn nein, wie viele Jahre leben Sie schon in Deutschland?]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <MIN>
+                    <![CDATA[0]]>
+                </MIN>
+                <MAX>
+                    <![CDATA[100]]>
+                </MAX>
+            </OPTIONS>
+        </QUESTION>
+    </QUESTIONS>
+</GROUPFORMATION>

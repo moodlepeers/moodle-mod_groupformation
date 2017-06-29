@@ -97,5 +97,22 @@ class mod_groupformation_freetext_question extends mod_groupformation_basic_ques
         }
         return null;
     }
+
+    /**
+     * Creates random answer
+     */
+    public function create_random_answer() {
+        return str_shuffle ('ABCDEFGH');
+    }
+
+    /**
+     * Converts options if string
+     *
+     * @param $options
+     * @return array
+     */
+    protected function convert_options($options) {
+        return null;
+    }
 }
 

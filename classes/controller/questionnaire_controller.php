@@ -234,7 +234,7 @@ class mod_groupformation_questionnaire_controller {
                 $xmlcontent = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>';
                 $values = mod_groupformation_util::xml_to_array($xmlcontent);
 
-                $options = $options = array(
+                $options = array(
                     100 => get_string('excellent', 'groupformation'), 0 => get_string('none', 'groupformation'));
 
                 $position = 1;

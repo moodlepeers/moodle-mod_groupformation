@@ -205,6 +205,7 @@ class mod_groupformation_criterion_calculator {
         }
 
         foreach ($labels as $key => $spec) {
+
             $temp = 0;
             $minvalue = 0;
             $maxvalue = 0;
@@ -589,7 +590,7 @@ class mod_groupformation_criterion_calculator {
      * @param $courseusers
      * @return array
      */
-    public function get_eval($userid, $groupusers, $courseusers) {
+    public function get_eval($userid, $groupusers = array(), $courseusers = array()) {
         $completedusers = array_keys($this->usermanager->get_completed_by_answer_count('userid', 'userid'));
         $groupandcompleted = array_intersect($completedusers, $groupusers);
         $courseandcompleted = array_intersect($completedusers, $courseusers);
@@ -776,7 +777,6 @@ class mod_groupformation_criterion_calculator {
      */
     public function get_values_for_user($criterion, $userid, $specs = null) {
         $function = 'get_' . $criterion;
-
         return $this->$function($userid, $specs);
     }
 

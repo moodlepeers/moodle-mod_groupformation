@@ -517,3 +517,12 @@ $string['page_title_export'] = 'Export';
 $string['topics_statistics'] = 'Statistik über angebotene Themen';
 $string['topics_statistics_score'] = 'Wert [0-1]';
 $string['topics_statistics_description'] = 'Die folgenden Werte stellen eine Statistik dar, wie beliebt die angebotenen Themen sind. Ein Thema mit einem höheren Wert ist beliebter als ein Thema mit niedrigen Wert.';
+
+$string ['category_demographic'] = 'Demografie';
+$string ['tabletitle_demographic'] = 'Demografie';
+
+$string ['category_times'] = 'Verfügbarkeit';
+$string ['tabletitle_times'] = 'Verfügbarkeit';
+
+$string ['category_skills'] = 'Erfahrung';
+$string ['tabletitle_skills'] = 'Erfahrung';

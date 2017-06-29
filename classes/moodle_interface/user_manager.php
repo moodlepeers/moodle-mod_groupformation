@@ -553,6 +553,7 @@ class mod_groupformation_user_manager {
         global $DB;
         $DB->delete_records('groupformation_started', array('groupformation' => $this->groupformationid, 'userid' => $userid));
         $DB->delete_records('groupformation_answer', array('groupformation' => $this->groupformationid, 'userid' => $userid));
+        $DB->delete_records('groupformation_user_values', array('groupformation' => $this->groupformationid, 'userid' => $userid));
     }
 
     /**
@@ -696,6 +697,29 @@ class mod_groupformation_user_manager {
         return 0 < $DB->count_records('groupformation_user_values',
                         array('groupformationid' => $this->groupformationid, 'userid' => $userid)
                 );
+    }
+
+    /**
+     * Returns (linearized) eval score for user
+     * @param $userid
+     * @return float
+     */
+    public function get_eval_score($userid) {
+        global $DB;
+
+        if (!$this->has_evaluation_values($userid)){
+            $this->set_evaluation_values($userid);
+        }
+
+        $records = $DB->get_records('groupformation_user_values', array('userid' => $userid));
+
+        $product = 1.0;
+
+        foreach ($records as $record) {
+            $product *= ($record->value + 1);
+        }
+
+        return $product;
     }
 
     /**

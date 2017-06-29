@@ -66,6 +66,20 @@ class mod_groupformation_topic_question extends mod_groupformation_basic_questio
             return null;
         }
     }
+
+    public function create_random_answer() {
+        return null;
+    }
+
+    /**
+     * Converts options if string
+     *
+     * @param $options
+     * @return array
+     */
+    protected function convert_options($options) {
+        return null;
+    }
 }
 
 

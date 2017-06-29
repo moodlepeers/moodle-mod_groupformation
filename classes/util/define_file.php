@@ -36,7 +36,7 @@ class mod_groupformation_data {
                             "extraversion" => array(
                                     "scenarios" => array(1 => false, 2 => false),  // False = heterogeneous, True = homogeneous.
                                     "evaluation" => true,  // Use for displaying it to user (to compare to group and course).
-                                    "questionids" => array(12, -1, 13, 14, -15, 16, -17, 18, 6), // Inverse questions = negative.
+                                    "questionids" => array(-1,6), // Inverse questions = negative.
                                     "significant_id_only" => false,
                                 // True = only use the one questionid with most significant differences between users.
                                     "cutoffs" => array(0.313169217, 0.776242547),
@@ -44,28 +44,28 @@ class mod_groupformation_data {
                             "conscientiousness" => array(
                                     "scenarios" => array(1 => true, 2 => true),
                                     "evaluation" => true,
-                                    "questionids" => array(8, -32, 33, -34, -35, 21, 22, 23, -24),
+                                    "questionids" => array(-3,8),
                                     "significant_id_only" => false,
                                     "cutoffs" => array(0.456596974, 0.831246163),
                             ),
                             "agreeableness" => array(
                                     "scenarios" => array(1 => true, 2 => true),
                                     "evaluation" => true,
-                                    "questionids" => array(-7, 2, -25, -26),
+                                    "questionids" => array(2,-7,11),
                                     "significant_id_only" => false,
                                     "cutoffs" => array(0.492136484, 0.799889659),
                             ),
                             "neuroticism" => array(
                                     "scenarios" => array(1 => false, 2 => false),
                                     "evaluation" => true,
-                                    "questionids" => array(27, -4, 28, 9),
+                                    "questionids" => array(-4,9),
                                     "significant_id_only" => false,
                                     "cutoffs" => array(0.195135503, 0.602511556),
                             ),
                             "openness" => array(
                                     "scenarios" => array(1 => false, 2 => false),
                                     "evaluation" => true,
-                                    "questionids" => array(29, 39, 10, 31, -5),
+                                    "questionids" => array(-5,10),
                                     "significant_id_only" => false,
                                     "cutoffs" => array(0.348454964, 0.829192095),
                             ),
@@ -227,7 +227,7 @@ class mod_groupformation_data {
 
     // Special mode booleans (can be ignored in normal use cases).
     private $mathprepcoursemode = false;
-    private $allanswersrequired = false;
+    private $allanswersrequired = true;
 
     /**
      * Returns whether this instance is running in math prep course mode;
