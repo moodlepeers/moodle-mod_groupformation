@@ -60,7 +60,7 @@ class mod_groupformation_number_question extends mod_groupformation_basic_questi
         }
 
         echo '<td colspan="100%" class="freetext">';
-        echo '<input class="freetext-textarea form-control" type="number" min="'.$options[0].'" max="'.$options[1].'" value="'.((is_number($answer))?intval($answer):"").'" name="' . $category . $questionid . '">';
+        echo '<input style="height:35px" class="freetext-textarea form-control" type="number" min="'.$options[0].'" max="'.$options[1].'" value="'.((is_number($answer))?intval($answer):"").'" name="' . $category . $questionid . '">';
         echo '<br>';
         if (!$required) {
             echo '<div class="form-check">';
