@@ -77,12 +77,6 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
             "mrand:0;ex:1;gh:1" => array('big5_extraversion' => true, 'big5_conscientiousness' => true),
             "mrand:0;ex:1;gh:0" => array('big5_extraversion' => true, 'big5_conscientiousness' => false),
             "mrand:0;ex:0;gh:0" => array('big5_extraversion' => false, 'big5_conscientiousness' => false),
-            "mrand:0;ex:0;gh:1" => array('big5_extraversion' => false, 'big5_conscientiousness' => true),
-            "mrand:0;ex:1;gh:_" => array('big5_extraversion' => true, 'big5_conscientiousness' => null),
-            "mrand:0;ex:0;gh:_" => array('big5_extraversion' => false, 'big5_conscientiousness' => null),
-            "mrand:0;ex:_;gh:1" => array('big5_extraversion' => null, 'big5_conscientiousness' => true),
-            "mrand:0;ex:_;gh:0" => array('big5_extraversion' => null, 'big5_conscientiousness' => false),
-            "mrand:1;ex:_;gh:_" => array(),
         );
 
         $configurationkeys = array_keys($configurations);
@@ -97,7 +91,6 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
 
         // Divide users into n slices.
         $slices = $this->get_user_slices($users[0], $numberofslices);
-        //$slices = $this->slicing($users[0], $numberofslices);
 
         $cohorts = array();
 

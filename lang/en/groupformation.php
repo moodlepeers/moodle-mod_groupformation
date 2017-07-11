@@ -264,11 +264,11 @@ $string ['grouping_delete_moodle_groups'] = 'Delete moodle groups';
 $string ['questionnaire_committed'] = 'Your answers are submitted. You cannot change them in this activity.';
 $string ['no_data_to_display'] = 'No data to display';
 
-$string ['onlyactivestudents'] = 'Only students with at least one submitted answer should be considered for building groups';
+$string ['onlyactivestudents'] = 'Only students with at least one submitted answer should be considered for building groups.';
 $string ['emailnotifications'] =
         '<i style="color:red;">The automated notification when the groupformation is finished is currently unavailable.</i>';
 $string ['onlyactivestudents_description'] =
-        'Only students with at least one submitted answer should be considered for building groups';
+        'Only students with at least one submitted answer should be considered for building groups.';
 $string ['emailnotifications_description'] =
         '<i style="color:red;">The automated notification when the groupformation is finished is currently unavailable.</i>';
 
@@ -607,4 +607,6 @@ $string ['tabletitle_skills'] = 'Experience';
 
 $string ['freetext_noanswer'] = 'No answer';
 
-
+$string ['allanswersrequired'] = 'All questions need to be answered in order to complete the activity.';
+$string ['allanswersrequired_description'] = 'All questions need to be answered in order to complete the activity.';
+$string ['groupoption_allanswersrequired'] = 'Before continuing to the next page of the questionnaire one has to answer all questions.';

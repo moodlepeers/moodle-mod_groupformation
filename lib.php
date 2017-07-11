@@ -114,7 +114,6 @@ function groupformation_update_instance(stdClass $groupformation, mod_groupforma
 
     // Checks all fields and sets them properly.
     $groupformation = groupformation_set_fields($groupformation);
-
     $groupformation->timemodified = time();
     $groupformation->id = $groupformation->instance;
 
@@ -545,6 +544,7 @@ function groupformation_extend_settings_navigation(settings_navigation $settings
  * @return stdClass
  */
 function groupformation_set_fields(stdClass $groupformation) {
+
     if (isset ($groupformation->knowledge) && $groupformation->knowledge == 0) {
         $groupformation->knowledge = 0;
         $groupformation->knowledgelines = "";
@@ -591,6 +591,12 @@ function groupformation_set_fields(stdClass $groupformation) {
         $groupformation->emailnotifications = 1;
     } else {
         $groupformation->emailnotifications = 0;
+    }
+
+    if (isset ($groupformation->allanswersrequired)) {
+        $groupformation->allanswersrequired = 1;
+    } else {
+        $groupformation->allanswersrequired = 0;
     }
 
     return $groupformation;

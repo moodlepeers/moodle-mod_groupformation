@@ -516,6 +516,15 @@ class mod_groupformation_mod_form extends moodleform_mod {
                   <span id="emailnotificationsStateLabel" class="optional"></span>
                     </div>');
 
+        $mform->addElement('html', '
+            <div class="gf_pad_header">
+                <label class="gf_label" for="id_js_allanswersrequired">
+                  <input type="checkbox" id="id_js_allanswersrequired" name="chbAllanswersrequired" value="allanswersrequired">
+                  ' . get_string('allanswersrequired_description', 'groupformation') .
+            '</label><span id="allanswersrequiredStateLabel" class="optional"></span><span class="toolt" tooltip="' .
+            get_string('groupoption_allanswersrequired', 'groupformation') . '"></span>
+                            </div>');
+
         // Close wrapper of the szenario.
         $mform->addElement('html', '</div>');
 
@@ -610,8 +619,10 @@ class mod_groupformation_mod_form extends moodleform_mod {
         $mform->disabledIf('maxpoints', 'evaluationmethod', 'neq', '2');
         $mform->setType('maxpoints', PARAM_NUMBER);
         $mform->addElement('checkbox', 'onlyactivestudents', get_string('onlyactivestudents', 'groupformation'));
+        $mform->addElement('checkbox', 'allanswersrequired', get_string('allanswersrequired', 'groupformation'));
         $mform->addElement('checkbox', 'emailnotifications', get_string('emailnotifications', 'groupformation'));
         $mform->setDefault('emailnotifications', false); // TODO delete if feature is fixed.
+
 
         // Close div tag for non-js related content.
         $mform->addElement('html', '</div id="non-js-content">');

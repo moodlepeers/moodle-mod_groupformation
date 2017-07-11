@@ -133,12 +133,11 @@ $store = new mod_groupformation_storage_manager($groupformation->id);
 $usermanager = new mod_groupformation_user_manager($groupformation->id);
 $sg = new mod_groupformation_scientific_grouping_2($groupformation->id);
 
-$users = $store->get_users_for_grouping();
+// $users = $store->get_users_for_grouping();
 
-$results = $sg->run_grouping($users);
+// $results = $sg->run_grouping($users);
 
-var_dump($results);
-
+//var_dump($results);
 
 // Print the tabs.
 require('tabs.php');
