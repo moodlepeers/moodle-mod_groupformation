@@ -55,6 +55,17 @@ class mod_groupformation_storage_manager {
     }
 
     /**
+     * Returns whether all answers are required or not
+     *
+     * @return bool
+     */
+    public function all_answers_required() {
+        global $DB;
+
+        return boolval($DB->get_field('groupformation', 'allanswersrequired', array('id' => $this->groupformationid )));
+    }
+
+    /**
      * Returns whether the activity is archived
      *
      * @return bool

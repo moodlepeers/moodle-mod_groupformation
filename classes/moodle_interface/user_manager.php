@@ -553,7 +553,7 @@ class mod_groupformation_user_manager {
         global $DB;
         $DB->delete_records('groupformation_started', array('groupformation' => $this->groupformationid, 'userid' => $userid));
         $DB->delete_records('groupformation_answer', array('groupformation' => $this->groupformationid, 'userid' => $userid));
-        $DB->delete_records('groupformation_user_values', array('groupformation' => $this->groupformationid, 'userid' => $userid));
+        $DB->delete_records('groupformation_user_values', array('groupformationid' => $this->groupformationid, 'userid' => $userid));
     }
 
     /**

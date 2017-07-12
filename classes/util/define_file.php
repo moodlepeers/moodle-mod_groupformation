@@ -313,8 +313,4 @@ class mod_groupformation_data {
         }
         return true;
     }
-
-    public function all_answers_required() {
-        return $this->allanswersrequired;
-    }
 }

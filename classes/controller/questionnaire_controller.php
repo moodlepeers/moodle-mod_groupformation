@@ -370,7 +370,7 @@ class mod_groupformation_questionnaire_controller {
 
         echo '<div id="questionaire_navbar">';
         echo '<ul id="accordion">';
-        $prevcomplete = !$this->data->all_answers_required();
+        $prevcomplete = !$this->store->all_answers_required();
 
         foreach ($categories as $category) {
 
@@ -531,7 +531,7 @@ class mod_groupformation_questionnaire_controller {
 
             foreach ($questions as $q) {
 
-                $q->print_html($this->highlight, $this->data->all_answers_required());
+                $q->print_html($this->highlight, $this->store->all_answers_required());
 
             }
 
@@ -597,7 +597,7 @@ class mod_groupformation_questionnaire_controller {
             }
         }
 
-        if ($this->data->all_answers_required() && $this->usermanager->get_number_of_answers(
+        if ($this->store->all_answers_required() && $this->usermanager->get_number_of_answers(
                 $this->userid, $category) != $number) {
             $go = false;
         }

@@ -118,7 +118,7 @@ class mod_groupformation_student_overview_controller {
 
                 $this->determine_survey_stats();
 
-                $disabled = $this->data->all_answers_required() && !$this->usermanager->has_answered_everything($this->userid);
+                $disabled = $this->store->all_answers_required() && !$this->usermanager->has_answered_everything($this->userid);
 
                 $this->buttonsarray = array(
                     array(
@@ -258,7 +258,7 @@ class mod_groupformation_student_overview_controller {
                 $url = new moodle_url ('questionnaire_view.php', array(
                     'id' => $this->cmid, 'category' => $key));
 
-                if (!$this->data->all_answers_required() || !$previncomplete) {
+                if (!$this->store->all_answers_required() || !$previncomplete) {
                     $a->category = '<a href="' . $url . '">' . $a->category . '</a>';
                 }
                 if ($values ['missing'] == 0) {
