@@ -58,7 +58,7 @@ class mod_groupformation_likert_question extends mod_groupformation_basic_questi
             $radiocount = 1;
             foreach ($options as $option) {
                 if (intval($answer) == $radiocount) {
-                    echo '<td title="'.$option.'" data-title="' . $option .
+                    echo (($option!="" && $radiocount==1)?'<td class="td-extra">'.$option.'</td>':"").'<td title="'.$option.'" data-title="' . $option .
                         '" class="toolt2 radioleft select-area selected_label"><input type="radio" name="' . $category .
                         $questionid . '" value="' . $radiocount . '" checked="checked"/></td>';
                 } else {
