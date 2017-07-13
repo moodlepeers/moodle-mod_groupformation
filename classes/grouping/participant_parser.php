@@ -56,15 +56,17 @@ class mod_groupformation_participant_parser {
      * @return array
      */
     private function parse($users, $labels) {
+
         $participants = array();
         foreach ($users as $user) {
             $position = 0;
             $participant = null;
 
             foreach ($labels as $label) {
-                $value = abs($user->$label);
+                $value = $user->$label;
                 $homogen = $value["homogeneous"];
                 unset ($value["homogeneous"]);
+                $value = array_map('abs', $value);
                 $minval = 0.0;
                 $maxval = 1.0;
                 $weight = 1;
@@ -84,7 +86,6 @@ class mod_groupformation_participant_parser {
             }
             $participants [] = $participant;
         }
-
         return $participants;
     }
 
@@ -161,6 +162,7 @@ class mod_groupformation_participant_parser {
             $object = new stdClass ();
             $object->id = $user;
             foreach ($criteriaspecs as $criterion => $spec) {
+
                 if (in_array($scenario, $spec['scenarios'])) {
                     $points = array();
                     if ($this->usermanager->has_answered_everything($user)) {
@@ -178,7 +180,6 @@ class mod_groupformation_participant_parser {
                         $totallabel [] = $name;
                     }
                 }
-
             }
 
             $array [] = $object;

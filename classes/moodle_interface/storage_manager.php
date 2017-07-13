@@ -1033,6 +1033,26 @@ class mod_groupformation_storage_manager {
     public function get_questions($category, $lang = 'en') {
         global $DB;
 
+        if ($category == 'topic' || $category == 'knowledge') {
+            $type = 'range';
+            $temp = $this->get_knowledge_or_topic_values($category);
+            $xmlcontent = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>';
+            $values = mod_groupformation_util::xml_to_array($xmlcontent);
+            $createquestion = function(&$v, $key) use ($category) {
+                $q = new stdClass();
+                $q->id = $key+1;
+                $q->category = $category;
+                $q->questionid = $key+1;
+                $q->question = $v;
+                $q->options = array(
+                    100 => get_string('excellent', 'groupformation'), 0 => get_string('none', 'groupformation'));
+                $q->type = $category;
+                $v = $q;
+            };
+            array_walk($values, $createquestion);
+            return $values;
+        }
+
         return $DB->get_records('groupformation_question', array('category' => $category, 'language' => $lang));
     }
 

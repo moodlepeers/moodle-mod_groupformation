@@ -68,7 +68,7 @@ class mod_groupformation_topic_question extends mod_groupformation_basic_questio
     }
 
     public function create_random_answer() {
-        return null;
+        return $this->questionid;
     }
 
     /**

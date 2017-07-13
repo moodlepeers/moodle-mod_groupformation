@@ -81,7 +81,7 @@ class mod_groupformation_criterion_calculator {
         foreach ($criteriaspecs as $criterion => $spec) {
             $category = $spec['category'];
             $labels = $spec['labels'];
-            if (in_array($this->scenario, $spec['scenarios']) &&
+            if (!is_null($spec) && in_array($this->scenario, $spec['scenarios']) &&
                 (!$eval || (array_key_exists('evaluation', $spec) &&
                         $spec['evaluation']))) {
 
