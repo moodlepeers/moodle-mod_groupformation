@@ -704,7 +704,7 @@ class mod_groupformation_user_manager {
      * @param $userid
      * @return float
      */
-    public function get_eval_score($userid) {
+    public function get_eval_score($userid, $specs = null) {
         global $DB;
 
         if (!$this->has_evaluation_values($userid)){

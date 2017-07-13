@@ -32,6 +32,7 @@ if (!defined('MOODLE_INTERNAL')) {
 require_once($CFG->dirroot . '/mod/groupformation/lib.php');
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/grouping.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/util/statistics.php');
 
 class mod_groupformation_scientific_grouping_2 extends mod_groupformation_grouping {
 
@@ -58,12 +59,166 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
     }
 
     /**
+     * Returns equally distributed slices by checking mean and std deviation.
+     *
+     * @param $users
+     * @param $numberofslices
+     * @return array
+     */
+    public function get_optimal_slices($users, $numberofslices) {
+        $statistics = new mod_groupformation_statistics();
+        // TODO Set cutoff value.
+        $cutoff = 0.02;
+
+        // Loop preparation.
+        $best = null;
+        $bestslices = null;
+        $bestfound = false;
+        $bestdistmean = null;
+        $bestdiststddev = null;
+        $i = 0;
+        // Loop to determine best slice based on mean and stddev.
+        // Idea: all slices should have very similar mean and stddev (distance smaller cutoff).
+        while ($i < 100 && !$bestfound) {
+            $i++;
+            $slices = $this->get_slices($users, $numberofslices);
+            $func = function($value, $key = 1) { return $value[$key]; };
+
+            // Loop preparation.
+            $means = [];
+            $stddevs = [];
+            // Loop to compute means and stddevs for all slices.
+            foreach ($slices as $slice) {
+                $values = array_map($func, $slice);
+                $means[] = $statistics::mean($values);
+                $stddevs[] = $statistics::std_deviation($values);
+            }
+
+            // Computes avg/mean of mean values and std deviation values.
+            $avgmean = array_sum($means) / count($means);
+            $avgstddev = array_sum($stddevs) / count($stddevs);
+
+            // Loop preparation.
+            $boolmean = true;
+            $boolstddev = true;
+            $distsummean = 0.0;
+            $distsumstddev = 0.0;
+
+            // Loop to determine if distance is smaller than cutoff value and to compute sum of all distances.
+            // Track the following conditions when iterating over all means and stddevs:
+            // Condition 1: The distance between all means and the mean of means is smaller than cutoff.
+            // Condition 2: The distance between all stddevs and the mean of stddevs is smaller than cutoff.
+            for($k = 0; $k < count($means); $k++) {
+                $mean = $means[$k];
+                $stddev = $stddevs[$k];
+                $distmean = abs($mean-$avgmean)/$avgmean;
+                $diststddev = abs ($stddev - $avgstddev) / $avgstddev;
+                $boolmean &= ($distmean < $cutoff);
+                $boolstddev &= ($diststddev < $cutoff);
+                $distsummean += $distmean;
+                $distsumstddev += $diststddev;
+            }
+
+            // Check whether both conditions are true:
+            // Condition 1: The distance between all means and the mean of means is smaller than cutoff.
+            // Condition 2: The distance between all stddevs and the mean of stddevs is smaller than cutoff.
+            if ($boolmean && $boolstddev) {
+                $bestfound = true;
+                $best = $slices;
+            } else if ((is_null($bestdistmean) || $distsummean < $bestdistmean) &&
+                (is_null($bestdiststddev) || $distsumstddev < $bestdiststddev)) {
+                // If the conditions are not fulfilled => keep the best slice based on the summed distances.
+                $bestdistmean = $distsummean;
+                $bestdiststddev = $distsumstddev;
+                $best = $slices;
+            }
+        }
+
+        $func2 = function($a) {
+            $func3 = function($b) {
+                return $b[0];
+            };
+            return array_map($func3,$a);
+        };
+
+        return array_map($func2, $best);
+    }
+
+    /**
      * Scientific division of users and creation of participants
      *
      * @param $users Two parted array - first part is all groupal users, second part are all random users
      * @return array
      */
     public function run_grouping($users) {
+
+        $groupsizes = $this->store->determine_group_size($users);
+
+        $specification = $this->get_specification();
+
+        $numberofslices = count($specification[0]);
+
+        if (count($users[0]) < $numberofslices) {
+            return [];
+        }
+
+        $slices = $this->get_optimal_slices($users[0], $numberofslices);
+
+        // Divide users into n slices.
+        //$slices = $this->get_user_slices($users[0], $numberofslices);
+
+        $cohorts = $this->build_cohorts($slices, $groupsizes[0], $specification);
+
+        // Handle all users with incomplete or no questionnaire submission.
+        $randomkey = "rand:1;mrand:_;ex:_;gh:_";
+
+        $randomparticipants = $this->participantparser->build_empty_participants($users[1]);
+        $randomcohort = $this->build_cohort($randomparticipants, $groupsizes[1], $randomkey);
+
+        $cohorts[$randomkey] = $randomcohort;
+
+        return $cohorts;
+    }
+
+
+    /**
+     * Computes cohorts by slices and configurations
+     *
+     * @param $slices
+     * @param $groupsize
+     * @param $specification
+     * @return array
+     */
+    private function build_cohorts($slices, $groupsize, $specification) {
+
+        // Loop preparation.
+        $numberofslices = count($slices);
+        list ($configurations, $specs) = $specification;
+        $configurationkeys = array_keys($configurations);
+        $cohorts = array();
+        // Loop to iterate over slices and run GroupAL for each slice.
+        for ($i = 0; $i < $numberofslices; $i++) {
+            $slice = $slices[$i];
+
+            $configurationkey = $configurationkeys[$i];
+            $configuration = $configurations[$configurationkey];
+
+            $rawparticipants = $this->participantparser->build_participants($slice, $specs);
+
+            $participants = $this->configure_participants($rawparticipants, $configuration);
+
+            $cohorts[$configurationkey] = $this->build_cohort($participants, $groupsize, $configurationkey);
+        }
+
+        return $cohorts;
+    }
+
+    /**
+     * Returns specification for different algorithmic formations
+     *
+     * @return array
+     */
+    private function get_specification() {
 
         $big5specs = $this->data->get_criterion_specification('big5');
 
@@ -79,43 +234,7 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
             "mrand:0;ex:0;gh:0" => array('big5_extraversion' => false, 'big5_conscientiousness' => false),
         );
 
-        $configurationkeys = array_keys($configurations);
-
-        $numberofslices = count($configurationkeys);
-
-        $groupsizes = $this->store->determine_group_size($users);
-
-        if (count($users[0]) < $numberofslices) {
-            return [];
-        }
-
-        // Divide users into n slices.
-        $slices = $this->get_user_slices($users[0], $numberofslices);
-
-        $cohorts = array();
-
-        for ($i = 0; $i < $numberofslices; $i++) {
-            $slice = $slices[$i];
-
-            $configurationkey = $configurationkeys[$i];
-            $configuration = $configurations[$configurationkey];
-
-            $rawparticipants = $this->participantparser->build_participants($slice, $specs);
-
-            $participants = $this->configure_participants($rawparticipants, $configuration);
-
-            $cohorts[$configurationkey] = $this->build_cohort($participants, $groupsizes[0], $configurationkey);
-        }
-
-        // Handle all users with incomplete or no questionnaire submission.
-        $randomkey = "rand:1;mrand:_;ex:_;gh:_";
-
-        $randomparticipants = $this->participantparser->build_empty_participants($users[1]);
-        $randomcohort = $this->build_cohort($randomparticipants, $groupsizes[1], $randomkey);
-
-        $cohorts[$randomkey] = $randomcohort;
-
-        return $cohorts;
+        return [$configurations, $specs];
     }
 
     /**
@@ -125,17 +244,18 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
      * @param $numberofslices
      * @return array
      */
-    private function get_user_slices($users, $numberofslices) {
+    private function get_slices($users, $numberofslices, $specs = null) {
         $scores = [];
 
         foreach($users as $user){
-            $scores[] = array($user, $this->usermanager->get_eval_score($user));
+            $scores[] = array($user, $this->usermanager->get_eval_score($user, $specs));
         }
 
-        function cmp($a, $b){
+        $cmp = function($a, $b){
             return $a[1]<$b[1];
-        }
-        usort($scores, "cmp");
+        };
+
+        usort($scores, $cmp);
 
         $slices = range(1,$numberofslices);
         $userslices = [];
@@ -153,7 +273,7 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
                 $userslices[$assignto] = [];
             }
 
-            $userslices[$assignto] = array_merge([$user],$userslices[$assignto]);
+            $userslices[$assignto] = array_merge([[$user, $score]],$userslices[$assignto]);
 
             unset($slices[$assignto]);
         }
