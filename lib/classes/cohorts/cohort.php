@@ -36,7 +36,7 @@ class mod_groupformation_cohort {
     /** @var array This array contains all computed groups */
     public $groups;
 
-    /** @var mod_groupformation_statistics This contains all statistics */
+    /** @var mod_groupformation_stats This contains all statistics */
     public $results;
 
     /** @var string This is the class name of the used matcher */
