@@ -29,15 +29,15 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/stora
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/criteria/topic_criterion.php');
-require_once($CFG->dirroot . '/group/lib.php');
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
+require_once($CFG->dirroot . '/group/lib.php');
 
 class mod_groupformation_criterion_calculator {
 
     private $zlookuptable = array();
     private $store;
     private $usermanager;
-    private $data;
     private $groupformationid;
     private $scenario;
 
@@ -49,7 +49,6 @@ class mod_groupformation_criterion_calculator {
         $this->groupformationid = $groupformationid;
         $this->store = new mod_groupformation_storage_manager ($groupformationid);
         $this->usermanager = new mod_groupformation_user_manager ($groupformationid);
-        $this->data = new mod_groupformation_data();
         $this->scenario = $this->store->get_scenario();
         $this->zlookuptable = groupformation_z_lookup_table();
     }
@@ -192,7 +191,7 @@ class mod_groupformation_criterion_calculator {
     public function get_values($criterion, $userid, $specs = null) {
 
         if (is_null($specs)) {
-            $specs = $this->data->get_criterion_specification($criterion);
+            $specs = mod_groupformation_data::get_criterion_specification($criterion);
         }
 
         $labels = $specs['labels'];
@@ -278,7 +277,7 @@ class mod_groupformation_criterion_calculator {
      */
     public function get_general($userid, $specs = null) {
         if (is_null($specs)) {
-            $specs = $this->data->get_criterion_specification("general");
+            $specs = mod_groupformation_data::get_criterion_specification("general");
         }
 
         $labels = $specs['labels'];
@@ -330,7 +329,7 @@ class mod_groupformation_criterion_calculator {
     public function get_knowledge($userid, $specs = null) {
 
         if (is_null($specs)) {
-            $specs = $this->data->get_criterion_specification('knowledge');
+            $specs = mod_groupformation_data::get_criterion_specification('knowledge');
         }
         $scenario = $this->scenario;
         $labels = $specs['labels'];
@@ -392,7 +391,7 @@ class mod_groupformation_criterion_calculator {
      */
     public function get_points($userid, $specs = null) {
         if (is_null($specs)) {
-            $specs = $this->data->get_criterion_specification('points');
+            $specs = mod_groupformation_data::get_criterion_specification('points');
         }
 
         $scenario = $this->scenario;
@@ -433,7 +432,7 @@ class mod_groupformation_criterion_calculator {
      */
     public function get_grade($userid, $specs = null) {
         if (is_null($specs)) {
-            $specs = $this->data->get_criterion_specification('grade');
+            $specs = mod_groupformation_data::get_criterion_specification('grade');
         }
 
         $labels = $specs['labels'];
@@ -613,7 +612,7 @@ class mod_groupformation_criterion_calculator {
         );
         $criteria = $this->store->get_label_set();
         foreach ($criteria as $criterion) {
-            $labels = $this->data->get_criterion_specification($criterion);
+            $labels = mod_groupformation_data::get_criterion_specification($criterion);
             if (!is_null($labels)) {
                 $labels = $this->filter_criterion_specs_for_eval($criterion, $labels);
             }

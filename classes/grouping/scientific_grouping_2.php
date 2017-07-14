@@ -33,6 +33,7 @@ require_once($CFG->dirroot . '/mod/groupformation/lib.php');
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/grouping.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/statistics.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 
 class mod_groupformation_scientific_grouping_2 extends mod_groupformation_grouping {
 
@@ -41,7 +42,6 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
     private $store;
     private $groupsmanager;
     private $criterioncalculator;
-    private $data;
 
     /**
      * mod_groupformation_scientific_grouping constructor.
@@ -55,7 +55,6 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
         $this->groupsmanager = new mod_groupformation_groups_manager($groupformationid);
         $this->criterioncalculator = new mod_groupformation_criterion_calculator($groupformationid);
         $this->participantparser = new mod_groupformation_participant_parser($groupformationid);
-        $this->data = new mod_groupformation_data();
     }
 
     /**
@@ -220,7 +219,7 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
      */
     private function get_specification() {
 
-        $big5specs = $this->data->get_criterion_specification('big5');
+        $big5specs = mod_groupformation_data::get_criterion_specification('big5');
 
         unset($big5specs['labels']['neuroticism']);
         unset($big5specs['labels']['openness']);

@@ -28,13 +28,13 @@ require_once($CFG->dirroot . '/mod/groupformation/lib/classes/criteria/specific_
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/participant.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/criterion_calculator.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 
 class mod_groupformation_participant_parser {
     private $groupformationid;
     private $criterioncalculator;
     private $usermanager;
     private $store;
-    private $data;
 
     /**
      * mod_groupformation_participant_parser constructor.
@@ -45,7 +45,6 @@ class mod_groupformation_participant_parser {
         $this->store = new mod_groupformation_storage_manager ($groupformationid);
         $this->usermanager = new mod_groupformation_user_manager($this->groupformationid);
         $this->criterioncalculator = new mod_groupformation_criterion_calculator ($groupformationid);
-        $this->data = new mod_groupformation_data();
     }
 
     /**
@@ -144,7 +143,7 @@ class mod_groupformation_participant_parser {
         if (is_null($specs)) {
             $labels = $this->store->get_label_set();
             foreach ($labels as $label) {
-                $criteriaspecs[$label] = $this->data->get_criterion_specification($label);
+                $criteriaspecs[$label] = mod_groupformation_data::get_criterion_specification($label);
             }
         } else {
             $criteriaspecs = $specs;

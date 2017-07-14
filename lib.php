@@ -625,3 +625,9 @@ function groupformation_save_more_infos($groupformation, $init) {
         $store->add_setting_question($knowledgearray, $topicsarray, $init);
     }
 }
+
+function groupformation_get_by_id($id) {
+    global $DB;
+
+    return $DB->get_record('groupformation', ['id' => $id]);
+}

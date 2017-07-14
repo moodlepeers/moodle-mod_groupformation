@@ -227,7 +227,6 @@ class mod_groupformation_data {
 
     // Special mode booleans (can be ignored in normal use cases).
     private $mathprepcoursemode = false;
-    private $allanswersrequired = true;
 
     /**
      * Returns whether this instance is running in math prep course mode;
@@ -235,22 +234,8 @@ class mod_groupformation_data {
      *
      * @return bool
      */
-    public function is_math_prep_course_mode() {
-        return $this->mathprepcoursemode;
-    }
-
-    /**
-     * Returns extra labels for criteria like fam, learning, big5_xxx
-     *
-     * @param $label
-     * @return array
-     */
-    public function get_extra_labels($label) {
-        if (array_key_exists($label, $this->criteria)) {
-            return array_keys($this->criteria[$label]);
-        } else {
-            return array();
-        }
+    public static function is_math_prep_course_mode() {
+        return self::$mathprepcoursemode;
     }
 
     /**
@@ -259,9 +244,9 @@ class mod_groupformation_data {
      * @param int $scenario
      * @return string
      */
-    public function get_label_set($scenario) {
+    public static function get_label_set($scenario) {
         $labels = array();
-        foreach ($this->criteria as $label => $criterion) {
+        foreach (self::criteria as $label => $criterion) {
             $scenarios = $criterion["scenarios"];
             if (in_array($scenario, $scenarios)) {
                 $labels[] = $label;
@@ -277,12 +262,12 @@ class mod_groupformation_data {
      * @param $name
      * @return mixed
      */
-    public function get_criterion_specification($name = null) {
+    public static function get_criterion_specification($name = null) {
         if (is_null($name)) {
-            return $this->criteria;
+            return self::$criteria;
         }
-        if (array_key_exists($name, $this->criteria)) {
-            return $this->criteria[$name];
+        if (array_key_exists($name, self::$criteria)) {
+            return self::$criteria[$name];
         } else {
             return null;
         }
@@ -293,7 +278,7 @@ class mod_groupformation_data {
      *
      * @return bool
      */
-    public function ask_for_participant_code() {
+    public static function ask_for_participant_code() {
         $configvalue = get_config('groupformation', 'participant_code');
         if (!is_null($configvalue)) {
             return $configvalue;
@@ -306,7 +291,7 @@ class mod_groupformation_data {
      *
      * @return bool
      */
-    public function import_export_enabled() {
+    public static function import_export_enabled() {
         $configvalue = get_config('groupformation', 'import_export');
         if (!is_null($configvalue)) {
             return $configvalue;

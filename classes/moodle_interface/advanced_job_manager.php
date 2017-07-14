@@ -33,6 +33,7 @@ require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/scientific_grouping.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/basic_grouping.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/topic_grouping.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/criteria/specific_criterion.php');
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/participant.php');
@@ -103,7 +104,6 @@ class mod_groupformation_advanced_job_manager {
      * @return stdClass|null
      */
     public static function get_next_job($state = 'waiting') {
-        global $DB;
 
         $jobs = self::get_jobs($state);
 
@@ -304,7 +304,7 @@ class mod_groupformation_advanced_job_manager {
             return $cohorts;
         }
 
-        if ($store->is_math_prep_course_mode()) {
+        if (mod_groupformation_data::is_math_prep_course_mode()) {
             $sg = new mod_groupformation_scientific_grouping($groupformationid);
             return $sg->run_grouping($users);
         } else if ($store->ask_for_topics()) {
@@ -330,7 +330,7 @@ class mod_groupformation_advanced_job_manager {
 
         $store->delete_statistics();
 
-        $mathprepcourse = $store->is_math_prep_course_mode();
+        $mathprepcourse = mod_groupformation_data::is_math_prep_course_mode();
 
         foreach ($result as $groupkey => $cohort) {
             if (is_null($cohort)) {

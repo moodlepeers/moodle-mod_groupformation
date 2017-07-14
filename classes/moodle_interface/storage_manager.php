@@ -34,7 +34,6 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/advan
 
 class mod_groupformation_storage_manager {
     private $groupformationid;
-    private $data;
     private $gm;
 
     /**
@@ -44,7 +43,6 @@ class mod_groupformation_storage_manager {
      */
     public function __construct($groupformationid) {
         $this->groupformationid = $groupformationid;
-        $this->data = new mod_groupformation_data ();
         $this->gm = new mod_groupformation_groups_manager ($groupformationid);
     }
 
@@ -414,7 +412,6 @@ class mod_groupformation_storage_manager {
             $categories[] = $DB->get_field('groupformation_q_version','category', array('id'=>$cat->category));
         }
         return $categories;
-        // return $this->data->get_category_set($this->get_scenario());
     }
 
     /**
@@ -767,7 +764,7 @@ class mod_groupformation_storage_manager {
      * @return array
      */
     public function get_label_set() {
-        $array = $this->data->get_label_set($this->get_scenario());
+        $array = mod_groupformation_data::get_label_set($this->get_scenario());
 
         if ($this->groupformationid != null) {
             $hastopic = $this->get_number('topic');
@@ -845,24 +842,6 @@ class mod_groupformation_storage_manager {
         }
 
         return $enrolledstudents;
-    }
-
-    /**
-     * Returns whether a participant code is wanted or not
-     *
-     * @return bool
-     */
-    public function ask_for_participant_code() {
-        return $this->data->ask_for_participant_code();
-    }
-
-    /**
-     * Returns whether current mode is math prep course mode
-     *
-     * @return bool
-     */
-    public function is_math_prep_course_mode() {
-        return $this->data->is_math_prep_course_mode();
     }
 
     /**
@@ -1085,7 +1064,6 @@ class mod_groupformation_storage_manager {
         ));
         $scenarioname = $DB->get_field('groupformation_scenario', 'name', array('id' => $scenario));
         return $scenarioname;
-        // return $this->data->get_scenario_name($scenario);
     }
 
     /**

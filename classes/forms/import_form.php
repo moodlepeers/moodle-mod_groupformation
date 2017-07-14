@@ -59,7 +59,12 @@ class mod_groupformation_import_form extends moodleform {
         $mform->addElement('hidden', 'cmid', 0);
         $mform->setType('cmid', PARAM_TEXT);
 
+        $mform->addElement('hidden', 'id', 0);
+        $mform->setType('id', PARAM_TEXT);
+
         $mform->closeHeaderBefore('buttonar');
+
+        $this->add_action_buttons(true);
     }
 
     /**

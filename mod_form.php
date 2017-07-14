@@ -163,7 +163,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
     private function generate_html_for_js(&$mform) {
         global $PAGE;
 
-        $data = new mod_groupformation_data();
+        $math_prep_course = mod_groupformation_data::is_math_prep_course_mode();
 
         // Open div tag for js related content.
         $mform->addElement('html', '<div id="js-content" style="display:none;">');
@@ -199,7 +199,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
             get_string('scenario_homeworkgroups_description', 'groupformation') . '</small></p>
                     </label>
                 </div>
-                        ' . (($data->is_math_prep_course_mode()) ? '' : '<div class="col_m_33">
+                        ' . (($math_prep_course) ? '' : '<div class="col_m_33">
                             <input type="radio" name="js_szenario" id="presentation" value="presentation" />
                                 <label class="col_m_100 szenarioLabel" for="presentation">
                                     <div class="sz_header">' .
@@ -322,7 +322,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 
         // Close wrapper for preknowledge.
         $mform->addElement('html', '</div>');
-        if (!$data->is_math_prep_course_mode()) {
+        if (!$math_prep_course) {
             // Wrapper for topics.
             $mform->addElement('html', '<div class="gf_settings_pad">');
 
@@ -432,7 +432,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
             ' . get_string('maxmembers', 'groupformation') . '</label>
             <input type="number" class="group_opt" id="group_size" min="0" value="0" /></div>
             ' .
-            (($data->is_math_prep_course_mode()) ? '' : '<div class="col_m_50">
+            (($math_prep_course) ? '' : '<div class="col_m_50">
                 <label>
                     <input type="radio" name="group_opt" id="group_opt_numb" value="numb_of_groups"/>
                     ' . get_string('maxgroups', 'groupformation') . '
@@ -495,7 +495,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
         // Close wrapper for evaluation options.
         $mform->addElement('html', '</div>');
 
-        if (!$data->is_math_prep_course_mode()) {
+        if (!$math_prep_course) {
             // Add checkbox only-active-students.
             $mform->addElement('html', '
             <div class="gf_pad_header">

@@ -71,21 +71,12 @@ function groupformation_call_js_amd($PAGE, $modulname, $method, $params=null) {
  * Determines instances of course module, course and groupformation by id
  *
  * @param int $id
- * @param stdClass $cm  (return parameter of course module)
- * @param stdClass $course (return parameter of course instance)
- * @param stdClass $groupformation (return parameter of groupformation instance)
+ * @return array
  */
-function groupformation_determine_instance($id, &$cm, &$course, &$groupformation) {
-    global $DB;
-    if ($id) {
-        $cm = get_coursemodule_from_id('groupformation', $id, 0, false, MUST_EXIST);
-        $course = $DB->get_record('course', array(
-            'id' => $cm->course), '*', MUST_EXIST);
-        $groupformation = $DB->get_record('groupformation', array(
-            'id' => $cm->instance), '*', MUST_EXIST);
-    } else {
-        error('You must specify a course_module ID or an instance ID');
-    }
+function groupformation_determine_instance($id) {
+    list ($course, $cm) = get_course_and_cm_from_cmid($id, 'groupformation');
+    $groupformation = groupformation_get_by_id($cm->instance);
+    return [$course, $cm, $groupformation];
 }
 
 /**

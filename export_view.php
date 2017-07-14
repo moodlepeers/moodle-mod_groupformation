@@ -22,27 +22,20 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
-require_once(dirname(__FILE__) . '/lib.php');
-require_once(dirname(__FILE__) . '/locallib.php');
+require('header.php');
+
 require_once($CFG->dirroot . '/mod/groupformation/classes/controller/export_controller.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/export_view_controller.php');
 
-// Read URL params.
-$id = optional_param('id', 0, PARAM_INT);
-$doshow = optional_param('do_show', 'export', PARAM_TEXT);
+$filename = substr(__FILE__, strrpos(__FILE__, '\\')+1);
+$url = new moodle_url('/mod/groupformation/' . $filename, $urlparams);
+
+// Set PAGE config.
+$PAGE->set_url($url);
+$PAGE->set_title(format_string($groupformation->name));
+$PAGE->set_heading(format_string($course->fullname));
+
 $manualid = optional_param('gid', null, PARAM_INT);
-
-// Determine instances of course module, course.
-groupformation_determine_instance($id, $cm, $course, $groupformation);
-
-// Require user login if not already logged in.
-require_login($course, true, $cm);
-
-// Get useful stuff.
-$context = $PAGE->context;
-$userid = $USER->id;
-
 if (is_null($manualid)) {
     $manualid = $groupformation->id;
 }
@@ -54,11 +47,6 @@ if (!has_capability('mod/groupformation:editsettings', $context)) {
 } else {
     $currenttab = $doshow;
 }
-
-// Set PAGE config.
-$PAGE->set_url('/mod/groupformation/import_export_view.php', array('id' => $cm->id, 'do_show' => $doshow));
-$PAGE->set_title(format_string($groupformation->name));
-$PAGE->set_heading(format_string($course->fullname));
 
 echo $OUTPUT->header();
 

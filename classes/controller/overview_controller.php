@@ -30,6 +30,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/group
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/group_generator.php');
 
 class mod_groupformation_student_overview_controller {
@@ -37,7 +38,6 @@ class mod_groupformation_student_overview_controller {
     private $userid;
     private $groupformationid;
     private $store;
-    private $data;
     private $groupsmanager;
     private $usermanager;
     private $viewstate;
@@ -59,7 +59,6 @@ class mod_groupformation_student_overview_controller {
         $this->userid = $userid;
         $this->groupformationid = $groupformationid;
         $this->store = new mod_groupformation_storage_manager ($groupformationid);
-        $this->data = new mod_groupformation_data();
         $this->groupsmanager = new mod_groupformation_groups_manager ($groupformationid);
         $this->usermanager = new mod_groupformation_user_manager ($groupformationid);
 
@@ -99,7 +98,7 @@ class mod_groupformation_student_overview_controller {
                     true, $this->groupformationid);
                 $this->groupformationstateinfo = array(
                     $this->get_availability_state());
-                $pc = $this->store->ask_for_participant_code();
+                $pc = mod_groupformation_data::ask_for_participant_code();
                 $buttoncaption = ($pc) ? "questionnaire_press_to_begin_participant_code" : "questionnaire_press_to_begin";
                 $this->buttonsinfo = get_string($buttoncaption, 'groupformation');
                 $this->buttonsarray = array(
@@ -141,7 +140,7 @@ class mod_groupformation_student_overview_controller {
                     true, $this->groupformationid);
                 $this->groupformationstateinfo = array(
                     get_string('questionnaire_submitted', 'groupformation'));
-                $math = $this->store->is_math_prep_course_mode();
+                $math = mod_groupformation_data::is_math_prep_course_mode();
                 $this->buttonsinfo = get_string('questionnaire_press_revert', 'groupformation');
                 $this->buttonsarray = array(
                     array(
@@ -297,7 +296,7 @@ class mod_groupformation_student_overview_controller {
             $assigns['ask_for_topics'] = $this->store->ask_for_topics();
             $assigns['survey_states'] = $this->surveystatesarray;
             $assigns['questionnaire_answer_stats'] = $this->surveystatestitle;
-            $assigns['participant_code'] = $this->store->ask_for_participant_code();
+            $assigns['participant_code'] = mod_groupformation_data::ask_for_participant_code();
             $assigns['participant_code_user'] = $this->usermanager->get_participant_code($this->userid);
             $assigns[''] = '';
         }
@@ -312,7 +311,7 @@ class mod_groupformation_student_overview_controller {
             $assigns['cmid'] = $this->cmid;
             $assigns['buttons'] = $this->buttonsarray;
             $assigns['buttons_infos'] = $this->buttonsinfo;
-            $assigns['participant_code'] = $this->store->ask_for_participant_code();
+            $assigns['participant_code'] = mod_groupformation_data::ask_for_participant_code();
             $assigns['participant_code_user'] = $this->usermanager->get_participant_code($this->userid);
             $assigns['consentheader'] = get_string('consent_header', 'groupformation');
             $assigns['consenttext'] = get_string('consent_message', 'groupformation');

@@ -76,7 +76,6 @@ class mod_groupformation_questionnaire_controller {
         $this->cmid = $cmid;
 
         $this->store = new mod_groupformation_storage_manager ($groupformationid);
-        $this->data = new mod_groupformation_data();
         $this->usermanager = new mod_groupformation_user_manager ($groupformationid);
 
         $this->scenario = $this->store->get_scenario();
@@ -469,7 +468,7 @@ class mod_groupformation_questionnaire_controller {
 
             $percent = $this->get_percent($category);
 
-            if ($this->store->ask_for_participant_code() && !$isteacher) {
+            if (mod_groupformation_data::ask_for_participant_code() && !$isteacher) {
                 $this->print_participant_code();
             }
 

@@ -30,8 +30,6 @@ class mod_groupformation_user_manager {
 
     private $store;
 
-    private $data;
-
     /**
      * Creates instance
      *
@@ -40,7 +38,6 @@ class mod_groupformation_user_manager {
     public function __construct($groupformationid = null) {
         $this->groupformationid = $groupformationid;
         $this->store = new mod_groupformation_storage_manager ($groupformationid);
-        $this->data = new mod_groupformation_data();
     }
 
     /**
@@ -230,7 +227,9 @@ class mod_groupformation_user_manager {
     public function get_answering_status($userid) {
         global $DB;
 
-        if (!$this->get_consent($userid) || (!$this->has_participant_code($userid) && $this->store->ask_for_participant_code())) {
+        $ask_for_participant_code = mod_groupformation_data::ask_for_participant_code();
+
+        if (!$this->get_consent($userid) || (!$this->has_participant_code($userid) && $ask_for_participant_code)) {
             return -1;
         }
 
@@ -654,7 +653,7 @@ class mod_groupformation_user_manager {
         $criteria = $this->store->get_label_set();
         $records = array();
         foreach ($criteria as $criterion) {
-            $labels = $this->data->get_criterion_specification($criterion);
+            $labels = mod_groupformation_data::get_criterion_specification($criterion);
             if (!is_null($labels) && count($labels) > 0) {
                 $uservalues = $cc->get_values_for_user($criterion, $userid, $labels);
                 foreach ($uservalues as $label => $values) {
