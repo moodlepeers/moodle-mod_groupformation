@@ -15,12 +15,14 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Header part for each view file in the module
+ * Debugging actions and buttons for analysis view
  *
  * @package mod_groupformation
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+// Reads URL parameters.
 $runjob = optional_param('runjob', false, PARAM_BOOL);
 $createusers = optional_param('create_users', 0, PARAM_INT);
 $createanswers = optional_param('create_answers', false, PARAM_BOOL);
@@ -30,14 +32,17 @@ $resetjob = optional_param('reset_job', false, PARAM_BOOL);
 
 $debug_buttons = "";
 
+// Only if debug mode is activated.
 if ($CFG->debug === 32767) {
 
+    // Reset job action.
     if ($resetjob) {
         global $DB;
 
         $DB->delete_records('groupformation_jobs', array('groupformationid' => $groupformation->id));
     }
 
+    // Run job action.
     if ($runjob) {
         $job = null;
 
@@ -52,6 +57,7 @@ if ($CFG->debug === 32767) {
 
     $cqt = new mod_groupformation_test_user_generator ($cm);
 
+    // Delete test users with all answers.
     if ($deleteusers) {
         $cqt->delete_test_users($groupformation->id);
         $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
@@ -59,6 +65,7 @@ if ($CFG->debug === 32767) {
         redirect($return->out());
     }
 
+    // Create test users with or without answers.
     if ($createusers > 0) {
         $cqt->create_test_users($createusers, $groupformation->id, $createanswers, $randomanswers);
         $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
@@ -66,6 +73,7 @@ if ($CFG->debug === 32767) {
         redirect($return->out());
     }
 
+    // Generate debug actions as buttons.
     $debug_buttons = "";
     $debug_buttons .= '<div class="gf_pad_header">';
     $debug_buttons .= 'Developer options';

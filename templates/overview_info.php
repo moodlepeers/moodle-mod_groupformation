@@ -25,8 +25,11 @@ if (!defined('MOODLE_INTERNAL')) {
 ?>
 
 <div class="gf_pad_content">
+    <p>
+        <?php echo $this->_['intro_box']; ?>
+    </p>
     <p><?php echo $this->_['student_overview_groupformation_info']; ?></p>
-    <?php foreach ($this->_['student_overview_groupformation_status'] as $row) { ?>
+    <?php foreach ($this->_['student_overview_groupformation_status'] as $row): ?>
         <p><b><?php echo $row; ?></b></p>
-    <?php } ?>
+    <?php endforeach; ?>
 </div>

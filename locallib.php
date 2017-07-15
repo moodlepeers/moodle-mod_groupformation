@@ -101,7 +101,8 @@ function groupformation_get_context($groupformationid) {
  * @param stdClass $cm
  * @param int $userid
  */
-function groupformation_set_activity_completion($course, $cm, $userid) {
+function groupformation_set_activity_completion($id, $userid) {
+    list($course, $cm) = get_course_and_cm_from_cmid($id);
     $completion = new completion_info ($course);
     $completion->set_module_viewed($cm, $userid);
 }

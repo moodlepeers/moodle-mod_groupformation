@@ -177,7 +177,7 @@ class mod_groupformation_grouping_controller {
         $enrolledusers = get_enrolled_users($context, 'mod/groupformation:onlystudent');
 
         foreach (array_values($enrolledusers) as $user) {
-            groupformation_set_activity_completion($course, $cm, $user->id);
+            groupformation_set_activity_completion($cm->id, $user->id);
         }
 
         return $users;

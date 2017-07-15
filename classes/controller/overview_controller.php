@@ -34,9 +34,9 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php')
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/group_generator.php');
 
 class mod_groupformation_student_overview_controller {
-    private $cmid;
-    private $userid;
-    private $groupformationid;
+    public $cmid;
+    public $userid;
+    public $groupformationid;
     private $store;
     private $groupsmanager;
     private $usermanager;
@@ -282,6 +282,7 @@ class mod_groupformation_student_overview_controller {
         $assigns = array();
 
         $assigns['cmid'] = $this->cmid;
+        $assigns['intro_box'] = $this->store->get_intro($this->cmid);
         $assigns['student_overview_title'] = $this->store->get_name();
         $assigns['student_overview_groupformation_info'] = $this->groupformationinfo;
         $assigns['student_overview_groupformation_status'] = $this->groupformationstateinfo;

@@ -26,7 +26,7 @@ if (!defined('MOODLE_INTERNAL')) {
 
 class mod_groupformation_data {
 
-    private $criteria = array(
+    private static $criteria = array(
             "big5" => array(
                     "category" => "character",
                     "scenarios" => array(1, 2),
@@ -226,7 +226,7 @@ class mod_groupformation_data {
     );
 
     // Special mode booleans (can be ignored in normal use cases).
-    private $mathprepcoursemode = false;
+    private static $mathprepcoursemode = false;
 
     /**
      * Returns whether this instance is running in math prep course mode;

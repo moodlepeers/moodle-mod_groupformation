@@ -46,6 +46,29 @@ class mod_groupformation_storage_manager {
         $this->gm = new mod_groupformation_groups_manager ($groupformationid);
     }
 
+    /**
+     * Returns intro box if intro is set
+     *
+     * @param $id
+     * @return string
+     */
+    public function get_intro($id) {
+        global $OUTPUT;
+
+        $box = "";
+        $gf = groupformation_get_by_id($this->groupformationid);
+
+        if ($gf->intro) {
+            $box = $OUTPUT->box(format_module_intro('groupformation', $gf, $id), 'generalbox mod_introbox',
+                    'groupformationintro');
+        }
+
+        return $box;
+    }
+
+    /**
+     * @return mixed
+     */
     public function get_version() {
         global $DB;
 
