@@ -149,6 +149,9 @@ class mod_groupformation_overview_view_controller extends mod_groupformation_bas
         }
     }
 
+    /**
+     * Handles access to view
+     */
     public function handle_access() {
         $id = $this->controller->cmid;
         $context = context_module::instance($id);

@@ -43,23 +43,33 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php')
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 
 class mod_groupformation_questionnaire_controller {
-    private $status;
-    private $numbers = array();
-    private $categories = array();
-    private $groupformationid;
-    private $store;
-    private $data;
-    private $usermanager;
-    private $scenario;
-    private $lang;
-    private $userid;
+
+    /** @var int The id of the groupformation activity */
+    private $groupformationid = null;
+
+    /** @var mod_groupformation_storage_manager instance of storage manager */
+    private $store = null;
+
+    /** @var mod_groupformation_user_manager The manager of user data */
+    private $usermanager = null;
+
+    /** @var int ID of user */
+    public $userid;
+
+    /** @var int The id of the course module */
     private $cmid;
-    private $context;
-    private $currentcategoryposition = 0;
-    private $numberofcategory;
-    private $hasanswer;
-    private $currentcategory;
-    private $highlight = false;
+
+    /** @var bool Flag for highlighting missing answers */
+    private $highlightmissinganswers = false;
+
+    /** @var int Position of category */
+    private $categoryposition = 0;
+
+    /** @var string Current category */
+    private $category;
+
+    /** @var array Categories of questionnaire */
+    private $categories = array();
 
     /**
      * mod_groupformation_questionnaire_controller constructor.
@@ -69,37 +79,31 @@ class mod_groupformation_questionnaire_controller {
      * @param $oldcategory
      * @param $cmid
      */
-    public function __construct($groupformationid, $lang, $userid, $oldcategory, $cmid) {
+    public function __construct($groupformationid, $userid, $oldcategory, $cmid) {
         $this->groupformationid = $groupformationid;
-        $this->lang = $lang;
         $this->userid = $userid;
         $this->cmid = $cmid;
 
         $this->store = new mod_groupformation_storage_manager ($groupformationid);
         $this->usermanager = new mod_groupformation_user_manager ($groupformationid);
 
-        $this->scenario = $this->store->get_scenario();
         $this->categories = $this->store->get_categories();
-        $this->numberofcategory = count($this->categories);
-
-        $this->init($userid);
         $this->set_internal_number($oldcategory);
-        $this->context = context_module::instance($this->cmid);
     }
 
     /**
      * Triggers going a category page back
      */
     public function go_back() {
-        $this->currentcategoryposition = max($this->currentcategoryposition - 2, 0);
+        $this->categoryposition = max($this->categoryposition - 2, 0);
     }
 
     /**
      * Regulates not going on and highlighting missing answers
      */
     public function not_go_on() {
-        $this->currentcategoryposition = max($this->currentcategoryposition - 1, 0);
-        $this->highlight = true;
+        $this->categoryposition = max($this->categoryposition - 1, 0);
+        $this->highlightmissinganswers = true;
     }
 
     /**
@@ -119,10 +123,12 @@ class mod_groupformation_questionnaire_controller {
         $sub = 0;
         $temp = 0;
 
-        foreach ($this->numbers as $num) {
+        $numbers = $this->store->get_numbers($this->categories);
+
+        foreach ($numbers as $num) {
             if ($num != 0) {
                 $total++;
-                if ($temp < $this->currentcategoryposition) {
+                if ($temp < $this->categoryposition) {
                     $sub++;
                 }
             }
@@ -133,26 +139,13 @@ class mod_groupformation_questionnaire_controller {
     }
 
     /**
-     * Handles initialization
-     *
-     * @param unknown $userid
-     */
-    private function init($userid) {
-        if (!$this->store->catalog_table_not_set()) {
-            $this->numbers = $this->store->get_numbers($this->categories);
-        }
-        $this->status = $this->usermanager->get_answering_status($userid);
-    }
-
-    /**
      * Sets internal page number
      *
      * @param unknown $category
      */
     private function set_internal_number($category) {
         if ($category != "") {
-            $this->currentcategoryposition = $this->store->get_position($category);
-            $this->currentcategoryposition++;
+            $this->categoryposition = $this->store->get_position($category) + 1;
         }
     }
 
@@ -162,7 +155,7 @@ class mod_groupformation_questionnaire_controller {
      * @return boolean
      */
     public function has_next() {
-        return ($this->currentcategoryposition != -1 && $this->currentcategoryposition < $this->numberofcategory);
+        return ($this->categoryposition != -1 && $this->categoryposition < count($this->categories));
     }
 
     /**
@@ -173,14 +166,17 @@ class mod_groupformation_questionnaire_controller {
      * @return stdClass
      */
     public function get_question($i, $version) {
-        $record = $this->store->get_catalog_question($i, $this->currentcategory, $this->lang, $version);
+        $category = $this->category;
+        $lang = get_string('language', 'groupformation');
+
+        $record = $this->store->get_catalog_question($i, $category, $lang, $version);
 
         if (empty ($record)) {
-            if ($this->lang != 'en') {
-                $record = $this->store->get_catalog_question($i, $this->currentcategory, $this->lang, $version);
+            if ($lang != 'en') {
+                $record = $this->store->get_catalog_question($i, $category, $lang, $version);
             } else {
-                $lang = $this->store->get_possible_language($this->currentcategory);
-                $record = $this->store->get_catalog_question($i, $this->currentcategory, $lang, $version);
+                $lang = $this->store->get_possible_language($category);
+                $record = $this->store->get_catalog_question($i, $category, $lang, $version);
             }
         }
 
@@ -193,7 +189,7 @@ class mod_groupformation_questionnaire_controller {
      * @return boolean
      */
     public function is_topics() {
-        return $this->currentcategoryposition == $this->store->get_position('topic');
+        return $this->categoryposition == $this->store->get_position('topic');
     }
 
     /**
@@ -202,7 +198,7 @@ class mod_groupformation_questionnaire_controller {
      * @return boolean
      */
     public function is_knowledge() {
-        return $this->currentcategoryposition == $this->store->get_position('knowledge');
+        return $this->categoryposition == $this->store->get_position('knowledge');
     }
 
     /**
@@ -211,7 +207,7 @@ class mod_groupformation_questionnaire_controller {
      * @return boolean
      */
     public function is_points() {
-        return $this->currentcategoryposition == $this->store->get_position('points');
+        return $this->categoryposition == $this->store->get_position('points');
     }
 
     /**
@@ -220,16 +216,15 @@ class mod_groupformation_questionnaire_controller {
      * @return array
      */
     public function get_next_questions() {
-        $lang = $this->lang;
-        $category = $this->currentcategory;
-        if ($this->currentcategoryposition != -1) {
+        $category = $this->category;
+        if ($this->categoryposition != -1) {
 
             $questions = array();
 
-            $this->hasanswer = $this->usermanager->has_answers($this->userid, $this->currentcategory);
+            $hasanswer = $this->usermanager->has_answers($this->userid, $category);
 
             if ($this->is_knowledge() || $this->is_topics()) {
-                $temp = $this->store->get_knowledge_or_topic_values($this->currentcategory);
+                $temp = $this->store->get_knowledge_or_topic_values($category);
                 $xmlcontent = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>';
                 $values = mod_groupformation_util::xml_to_array($xmlcontent);
 
@@ -243,9 +238,9 @@ class mod_groupformation_questionnaire_controller {
                 $i = 1;
                 foreach ($values as $value) {
 
-                    if ($this->hasanswer) {
+                    if ($hasanswer) {
                         $answer = $this->usermanager->get_single_answer(
-                            $this->userid, $this->currentcategory, $position);
+                            $this->userid, $category, $position);
                         if ($answer == false) {
                             $answer = -1;
                         }
@@ -267,7 +262,7 @@ class mod_groupformation_questionnaire_controller {
 
                 $l = count($answerposition);
 
-                if ($l > 0 && $this->currentcategoryposition == $this->store->get_position('topic')) {
+                if ($l > 0 && $this->categoryposition == $this->store->get_position('topic')) {
                     // Topics are rated by users as: the topmost = most wanted=rating value highest number.
                     // Therefore here we sort them accordingly top downwards by rating.
                     for ($k = $l; $k >= 1; $k--) {
@@ -280,7 +275,7 @@ class mod_groupformation_questionnaire_controller {
                 }
             } else if ($this->is_points()) {
 
-                $records = $this->store->get_questions_randomized_for_user($this->currentcategory, $this->userid, $lang);
+                $records = $this->store->get_questions_randomized_for_user($category, $this->userid);
 
                 foreach ($records as $record) {
 
@@ -290,7 +285,7 @@ class mod_groupformation_questionnaire_controller {
                         $this->store->get_max_points() => get_string('excellent', 'groupformation'),
                         0 => get_string('bad', 'groupformation'));
 
-                    $answer = $this->usermanager->get_single_answer($this->userid, $this->currentcategory, $record->questionid);
+                    $answer = $this->usermanager->get_single_answer($this->userid, $category, $record->questionid);
                     if ($answer == false) {
                         $answer = -1;
                     }
@@ -306,7 +301,7 @@ class mod_groupformation_questionnaire_controller {
 
             } else {
 
-                $records = $this->store->get_questions_randomized_for_user($this->currentcategory, $this->userid, $lang);
+                $records = $this->store->get_questions_randomized_for_user($category, $this->userid);
 
                 foreach ($records as $record) {
 
@@ -317,7 +312,7 @@ class mod_groupformation_questionnaire_controller {
                     $temp = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $record->options . ' </OPTIONS>';
                     $options = mod_groupformation_util::xml_to_array($temp);
 
-                    $answer = $this->usermanager->get_single_answer($this->userid, $this->currentcategory, $record->questionid);
+                    $answer = $this->usermanager->get_single_answer($this->userid, $category, $record->questionid);
 
                     $name = 'mod_groupformation_' . $type . '_question';
                     $questionobj = new $name($category, $questionid, $question, $options, $answer);
@@ -354,6 +349,7 @@ class mod_groupformation_questionnaire_controller {
      * @param string $activecategory
      */
     public function print_navbar($activecategory = null) {
+        $context = context_module::instance($this->cmid);
 
         $tempcategories = $this->store->get_categories();
 
@@ -380,7 +376,7 @@ class mod_groupformation_questionnaire_controller {
 
             $beforeactive = ($positioncategory <= $positionactivecategory);
             $class = 'no-active';
-            if (has_capability('mod/groupformation:editsettings', $this->context) || $beforeactive || $prevcomplete) {
+            if (has_capability('mod/groupformation:editsettings', $context) || $beforeactive || $prevcomplete) {
                 $class = '';
             }
 
@@ -405,6 +401,8 @@ class mod_groupformation_questionnaire_controller {
      * Prints final page of questionnaire
      */
     public function print_final_page() {
+        $context = context_module::instance($this->cmid);
+
         echo '<div class="col_m_100">';
         echo '<h4>';
         echo get_string('questionnaire_no_more_questions', 'groupformation');
@@ -419,7 +417,7 @@ class mod_groupformation_questionnaire_controller {
         $activityid = optional_param('id', $this->groupformationid, PARAM_INT);
         echo '<input type="hidden" name="id" value="' . $activityid . '"/>';
 
-        if (has_capability('mod/groupformation:editsettings', $this->context)) {
+        if (has_capability('mod/groupformation:editsettings', $context)) {
             echo '<div class="alert col_m_100 questionaire_hint">' .
                 get_string('questionnaire_submit_disabled_teacher', 'groupformation') . '</div>';
         }
@@ -446,14 +444,17 @@ class mod_groupformation_questionnaire_controller {
      * Prints questionnaire page
      */
     public function render() {
+        $context = context_module::instance($this->cmid);
 
         if (groupformation_get_current_questionnaire_version() > $this->store->get_version()) {
             echo '<div class="alert">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
         }
 
         if ($this->has_next()) {
-            $this->currentcategory = $this->categories[$this->currentcategoryposition];
-            $isteacher = has_capability('mod/groupformation:editsettings', $this->context);
+            $category = $this->categories[$this->categoryposition];
+            $this->category = $category;
+
+            $isteacher = has_capability('mod/groupformation:editsettings', $context);
 
             if ($isteacher) {
                 echo '<div class="alert">' . get_string('questionnaire_preview', 'groupformation') . '</div>';
@@ -464,7 +465,7 @@ class mod_groupformation_questionnaire_controller {
                     '</div>';
             }
 
-            $category = $this->currentcategory;
+
 
             $percent = $this->get_percent($category);
 
@@ -506,7 +507,7 @@ class mod_groupformation_questionnaire_controller {
 
         if (!is_null($questions) && count($questions) != 0) {
 
-            $category = $this->currentcategory;
+            $category = $this->category;
 
             $table = new mod_groupformation_question_table ($category);
 
@@ -530,7 +531,7 @@ class mod_groupformation_questionnaire_controller {
 
             foreach ($questions as $q) {
 
-                $q->print_html($this->highlight, $this->store->all_answers_required());
+                $q->print_html($this->highlightmissinganswers, $this->store->all_answers_required());
 
             }
 
@@ -589,7 +590,7 @@ class mod_groupformation_questionnaire_controller {
                 $this->handle_answer($this->userid, $category, $question);
             }
         } else {
-            $questions = $this->store->get_questions_randomized_for_user($category, $this->userid, $this->lang);
+            $questions = $this->store->get_questions_randomized_for_user($category, $this->userid);
 
             foreach ($questions as $question) {
                 $this->handle_answer($this->userid, $category, $question);

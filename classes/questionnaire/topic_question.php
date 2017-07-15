@@ -27,6 +27,7 @@ if (!defined('MOODLE_INTERNAL')) {
 
 class mod_groupformation_topic_question extends mod_groupformation_basic_question {
 
+    /** @var string Type of question */
     protected $type = 'topics';
 
     /**

@@ -1030,8 +1030,10 @@ class mod_groupformation_storage_manager {
      * @param string $lang
      * @return array
      */
-    public function get_questions($category, $lang = 'en') {
+    public function get_questions($category) {
         global $DB;
+
+        $lang = get_string('language', 'groupformation');
 
         if ($category == 'topic' || $category == 'knowledge') {
             $type = 'range';
@@ -1063,13 +1065,16 @@ class mod_groupformation_storage_manager {
      * @param $userid
      * @return array
      */
-    public function get_questions_randomized_for_user($category, $userid, $lang = 'en') {
-        $questions = array_values($this->get_questions($category, $lang));
-        return $questions;
-        srand($userid);
-        usort($questions, function($a, $b) {
-            return rand(-1, 1);
-        });
+    public function get_questions_randomized_for_user($category, $userid) {
+        $questions = array_values($this->get_questions($category));
+
+        if (false) {
+            srand($userid);
+            usort($questions, function($a, $b) {
+                return rand(-1, 1);
+            });
+        }
+
         return $questions;
     }
 

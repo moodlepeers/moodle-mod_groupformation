@@ -32,9 +32,6 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
 
 class mod_groupformation_csv_writer {
 
-    /** @var cm_info */
-    private $cm = null;
-
     /** @var int This is the id of the activity */
     private $groupformationid = null;
 
@@ -56,11 +53,9 @@ class mod_groupformation_csv_writer {
     /**
      * mod_groupformation_csv_writer constructor.
      *
-     * @param $cm
      * @param $groupformationid
      */
-    public function __construct($cm, $groupformationid) {
-        $this->cm = $cm;
+    public function __construct($groupformationid) {
         $this->groupformationid = $groupformationid;
 
         $this->store = new mod_groupformation_storage_manager($groupformationid);

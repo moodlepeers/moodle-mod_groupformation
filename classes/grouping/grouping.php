@@ -44,10 +44,19 @@ require_once($CFG->dirroot . '/mod/groupformation/lib/classes/xml_writers/cohort
 
 class mod_groupformation_grouping {
 
-    private $groupformationid;
-    private $usermanager;
+    /** @var int ID of module instance */
+    public $groupformationid;
+
+    /** @var mod_groupformation_storage_manager The manager of activity data */
     private $store;
+
+    /** @var mod_groupformation_groups_manager The manager of groups data */
     private $groupsmanager;
+
+    /** @var mod_groupformation_user_manager The manager of user data */
+    private $usermanager;
+
+    /** @var mod_groupformation_criterion_calculator The calculator for criteria */
     private $criterioncalculator;
 
     /**

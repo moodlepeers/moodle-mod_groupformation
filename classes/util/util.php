@@ -235,11 +235,6 @@ class mod_groupformation_util {
             $store = new mod_groupformation_storage_manager($groupformationid);
         }
 
-        if (is_null($context)) {
-            $courseid = $store->get_course_id();
-            $context = context_course::instance($courseid);
-        }
-
         $courseid = $store->get_course_id();
         $context = context_course::instance($courseid);
 

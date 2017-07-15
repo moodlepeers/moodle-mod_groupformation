@@ -26,11 +26,21 @@ if (!defined('MOODLE_INTERNAL')) {
 
 abstract class mod_groupformation_basic_question {
 
+    /** @var string Category of question */
     protected $category;
+
+    /** @var int ID of question */
     protected $questionid;
+
+    /** @var string Text of question  */
     protected $question;
+    /** @var array Options of question */
     protected $options;
+
+    /** @var mixed Answer of question */
     protected $answer;
+
+    /** @var string Type of question */
     protected $type = 'basic';
 
     /**
@@ -77,12 +87,18 @@ abstract class mod_groupformation_basic_question {
         return $this->options;
     }
 
-
+    /**
+     * Reads answer from POST request
+     * @return mixed
+     */
     public abstract function read_answer();
 
+    /**
+     * Creates random answer
+     *
+     * @return mixed
+     */
     public abstract function create_random_answer();
-
-
 
     /**
      * Converts options if string

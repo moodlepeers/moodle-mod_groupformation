@@ -246,7 +246,7 @@ class mod_groupformation_data {
      */
     public static function get_label_set($scenario) {
         $labels = array();
-        foreach (self::criteria as $label => $criterion) {
+        foreach (self::$criteria as $label => $criterion) {
             $scenarios = $criterion["scenarios"];
             if (in_array($scenario, $scenarios)) {
                 $labels[] = $label;

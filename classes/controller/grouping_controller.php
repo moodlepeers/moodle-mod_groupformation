@@ -161,7 +161,7 @@ class mod_groupformation_grouping_controller {
     /**
      * POST action to start job, sets it to 'waiting'
      */
-    public function start($course, $cm) {
+    public function start($cm) {
 
         $ajm = new mod_groupformation_advanced_job_manager();
 

@@ -78,8 +78,6 @@ if (data_submitted() && confirm_sesskey()) {
 }
 
 $controller = new mod_groupformation_questionnaire_controller($groupformation->id,
-        get_string('language',
-                'groupformation'),
         $userid, $category, $cm->id);
 $inarray = in_array($category, $names);
 $go = true;

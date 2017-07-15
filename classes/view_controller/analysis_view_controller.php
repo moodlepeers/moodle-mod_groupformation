@@ -82,4 +82,69 @@ class mod_groupformation_analysis_view_controller extends mod_groupformation_bas
 
         return $overviewoptions->load_template();
     }
+
+    /**
+     * Handles access to view
+     */
+    public function handle_access() {
+        $id = $this->controller->cmid;
+        $context = context_module::instance($id);
+
+        // Check capability.
+        if (!has_capability('mod/groupformation:editsettings', $context)) {
+            // Redirect.
+            $return = new moodle_url ('/mod/groupformation/view.php', array(
+                    'id' => $id, 'do_show' => 'view'));
+            redirect($return->out());
+        }
+    }
+
+    /**
+     * Handle actions on submit or click
+     */
+    public function handle_actions() {
+        $id = $this->controller->cmid;
+
+        if ((data_submitted()) && confirm_sesskey()) {
+            $switcher = optional_param('questionnaire_switcher', null, PARAM_INT);
+
+            if (isset($switcher)) {
+                $this->controller->trigger_questionnaire($switcher);
+            }
+            $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
+                    'id' => $id, 'do_show' => 'analysis'));
+            redirect($return->out());
+        }
+    }
+
+
+    public function render() {
+        $id = $this->controller->cmid;
+        $context = context_module::instance($id);
+
+        $output = "";
+
+        if (groupformation_get_current_questionnaire_version() > $this->store->get_version()) {
+            $output .= '<div class="alert">';
+            $output .= get_string('questionnaire_outdated', 'groupformation');
+            $output .= '</div>';
+        }
+
+        if ($this->store->is_archived() && has_capability('mod/groupformation:editsettings', $context)) {
+            $output .= '<div class="alert" id="commited_view">';
+            $output .= get_string('archived_activity_admin', 'groupformation');
+            $output .= '</div>';
+        } else {
+            $output .= '<form action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
+
+            $output .= '<input type="hidden" name="id" value="' . $id . '"/>';
+            $output .= '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
+
+            $output .= parent::render();
+
+            $output .= '</form>';
+        }
+
+        return $output;
+    }
 }

@@ -58,7 +58,7 @@ if ((data_submitted()) && confirm_sesskey()) {
     $delete = optional_param('delete', null, PARAM_BOOL);
 
     if (isset ($start) && $start == 1) {
-        $controller->start($course, $cm);
+        $controller->start($cm);
     } else if (isset ($abort) && $abort == 1) {
         $controller->abort();
     } else if (isset ($adopt) && $adopt == 1) {

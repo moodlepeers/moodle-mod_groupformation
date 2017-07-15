@@ -31,22 +31,27 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/util/csv_writer.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
 
 class mod_groupformation_export_controller {
-    private $store;
-    private $usermanager;
-    private $groupformationid;
-    private $cm;
-    private $cmid;
-    private $view = null;
+
+    /** @var mod_groupformation_storage_manager The manager of activity data */
+    private $store = null;
+
+    /** @var mod_groupformation_user_manager The manager of user data */
+    private $usermanager = null;
+
+    /** @var int ID of module instance */
+    private $groupformationid = null;
+
+    /** @var int ID of course module*/
+    public $cmid = null;
 
     /**
      * Constructs instance of import export controller
      *
      * @param integer $groupformationid
      */
-    public function __construct($groupformationid, $cm) {
+    public function __construct($groupformationid, $cmid) {
         $this->groupformationid = $groupformationid;
-        $this->cmid = $cm->id;
-        $this->cm = $cm;
+        $this->cmid = $cmid;
 
         $this->usermanager = new mod_groupformation_user_manager ($groupformationid);
         $this->store = new mod_groupformation_storage_manager ($groupformationid);
@@ -78,7 +83,7 @@ class mod_groupformation_export_controller {
      * @throws stored_file_creation_exception
      */
     private function generate_export_url($type = 'answers') {
-        $csvwriter = new mod_groupformation_csv_writer ($this->cm, $this->groupformationid);
+        $csvwriter = new mod_groupformation_csv_writer ($this->groupformationid);
 
         // Generate content for answer file for export.
         $content = $csvwriter->get_data($type);

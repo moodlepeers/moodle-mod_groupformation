@@ -33,20 +33,31 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/group_generator.php');
 
-class mod_groupformation_student_overview_controller {
+class mod_groupformation_overview_controller {
+
+    /** @var int ID of course module*/
     public $cmid;
+
+    /** @var int ID of user */
     public $userid;
+
+    /** @var int ID of module instance */
     public $groupformationid;
+
+    /** @var mod_groupformation_storage_manager The manager of activity data */
     private $store;
+
+    /** @var mod_groupformation_groups_manager The manager of groups data */
     private $groupsmanager;
+
+    /** @var mod_groupformation_user_manager The manager of user data */
     private $usermanager;
+
     private $viewstate;
     private $groupformationstateinfo = array();
     private $buttonsarray = array();
     private $buttonsinfo;
-    private $surveystatesarray = array();
     private $groupformationinfo;
-    private $surveystatestitle = '';
 
     /**
      * mod_groupformation_student_overview_controller constructor.
@@ -62,14 +73,13 @@ class mod_groupformation_student_overview_controller {
         $this->groupsmanager = new mod_groupformation_groups_manager ($groupformationid);
         $this->usermanager = new mod_groupformation_user_manager ($groupformationid);
 
-        $this->determine_status();
         $this->determine_view();
     }
 
     /**
-     * Determines status of grouping_view
+     * set all variable to the current state
      */
-    public function determine_status() {
+    private function determine_view() {
         global $PAGE;
 
         if (has_capability('mod/groupformation:onlystudent', $PAGE->context)) {
@@ -86,12 +96,7 @@ class mod_groupformation_student_overview_controller {
         } else {
             $this->viewstate = 3;
         }
-    }
 
-    /**
-     * set all variable to the current state
-     */
-    private function determine_view() {
         switch ($this->viewstate) {
             case -1 : // Questionnaire is available but not started yet.
                 $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(
@@ -114,8 +119,6 @@ class mod_groupformation_student_overview_controller {
                 $this->groupformationstateinfo = array(
                     $this->get_availability_state(), get_string('questionnaire_not_submitted', 'groupformation'));
                 $this->buttonsinfo = get_string('questionnaire_press_continue_submit', 'groupformation');
-
-                $this->determine_survey_stats();
 
                 $disabled = $this->store->all_answers_required() && !$this->usermanager->has_answered_everything($this->userid);
 
@@ -274,10 +277,14 @@ class mod_groupformation_student_overview_controller {
                 }
             }
         }
-        $this->surveystatestitle = get_string('questionnaire_answer_stats', 'groupformation');
-        $this->surveystatesarray = $array;
+        return $array;
     }
 
+    /**
+     * Returns info about activity
+     *
+     * @return array
+     */
     public function load_info() {
         $assigns = array();
 
@@ -290,13 +297,18 @@ class mod_groupformation_student_overview_controller {
         return $assigns;
     }
 
+    /**
+     * Returns statistics about questionnaire
+     *
+     * @return array
+     */
     public function load_statistics() {
         $assigns = array();
 
         if ($this->viewstate == 0) {
             $assigns['ask_for_topics'] = $this->store->ask_for_topics();
-            $assigns['survey_states'] = $this->surveystatesarray;
-            $assigns['questionnaire_answer_stats'] = $this->surveystatestitle;
+            $assigns['survey_states'] = $this->determine_survey_stats();
+            $assigns['questionnaire_answer_stats'] = get_string('questionnaire_answer_stats', 'groupformation');
             $assigns['participant_code'] = mod_groupformation_data::ask_for_participant_code();
             $assigns['participant_code_user'] = $this->usermanager->get_participant_code($this->userid);
             $assigns[''] = '';
@@ -305,6 +317,11 @@ class mod_groupformation_student_overview_controller {
         return $assigns;
     }
 
+    /**
+     * Returns settings buttons
+     *
+     * @return array
+     */
     public function load_settings() {
         $assigns = array();
 

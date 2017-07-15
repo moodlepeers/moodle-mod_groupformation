@@ -35,10 +35,16 @@ require_once($CFG->dirroot . '/group/lib.php');
 
 class mod_groupformation_criterion_calculator {
 
-    private $zlookuptable = array();
+    /** @var mod_groupformation_storage_manager The manager of activity data */
     private $store;
+
+    /** @var mod_groupformation_user_manager The manager of user data */
     private $usermanager;
-    private $groupformationid;
+
+    /** @var int ID of module instance */
+    public $groupformationid;
+
+    /** @var string Scenario of the activity */
     private $scenario;
 
     /**
@@ -50,7 +56,6 @@ class mod_groupformation_criterion_calculator {
         $this->store = new mod_groupformation_storage_manager ($groupformationid);
         $this->usermanager = new mod_groupformation_user_manager ($groupformationid);
         $this->scenario = $this->store->get_scenario();
-        $this->zlookuptable = groupformation_z_lookup_table();
     }
 
     /**
@@ -571,7 +576,7 @@ class mod_groupformation_criterion_calculator {
         $z = strval(round($z, 2));
         $val = 0.0;
         if (-3.00 <= $z && $z <= 3.00) {
-            $val = $this->zlookuptable[$z];
+            $val = groupformation_z_lookup_table($z);
         } else if (-3.00 > $z) {
             $val = 0.0;
         } else if (3.00 < $z) {

@@ -53,7 +53,7 @@ echo $OUTPUT->header();
 // Print the tabs.
 require('tabs.php');
 
-$controller = new mod_groupformation_export_controller($manualid, $cm);
+$controller = new mod_groupformation_export_controller($groupformation->id, $id);
 $viewcontroller = new mod_groupformation_export_view_controller($groupformation->id, $controller);
 echo $viewcontroller->render();
 

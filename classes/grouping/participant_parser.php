@@ -31,10 +31,18 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/criterion_cal
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 
 class mod_groupformation_participant_parser {
-    private $groupformationid;
+
+    /** @var int ID of module instance */
+    public $groupformationid;
+
+    /** @var mod_groupformation_criterion_calculator The calculator for criteria */
     private $criterioncalculator;
-    private $usermanager;
+
+    /** @var mod_groupformation_storage_manager The manager of activity data */
     private $store;
+
+    /** @var mod_groupformation_user_manager The manager of user data */
+    private $usermanager;
 
     /**
      * mod_groupformation_participant_parser constructor.

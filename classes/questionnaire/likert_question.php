@@ -28,6 +28,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/basic_qu
 
 class mod_groupformation_likert_question extends mod_groupformation_basic_question {
 
+    /** @var string Type of question */
     protected $type = 'likert';
 
     /**

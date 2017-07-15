@@ -39,7 +39,7 @@ $PAGE->set_heading(format_string($course->fullname));
 // Import jQuery and js file.
 groupformation_add_jquery($PAGE, 'survey_functions.js');
 
-$controller = new mod_groupformation_student_overview_controller ($cm->id, $groupformation->id, $userid);
+$controller = new mod_groupformation_overview_controller ($cm->id, $groupformation->id, $userid);
 $viewcontroller = new mod_groupformation_overview_view_controller($groupformation->id, $controller);
 
 $viewcontroller->handle_access();

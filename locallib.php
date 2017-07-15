@@ -358,7 +358,7 @@ function groupformation_convert_options($options) {
  *
  * @return array
  */
-function groupformation_z_lookup_table() {
+function groupformation_z_lookup_table($z) {
     $zlookuptable = array();
     $zlookuptable['-3.0'] = 0.0013;
     $zlookuptable['-3'] = 0.0013;
@@ -969,5 +969,5 @@ function groupformation_z_lookup_table() {
     $zlookuptable['2.99'] = 0.9986;
     $zlookuptable['3.0'] = 0.9987;
     $zlookuptable['3'] = 0.9987;
-    return $zlookuptable;
+    return $zlookuptable[$z];
 }
