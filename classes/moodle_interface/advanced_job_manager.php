@@ -47,7 +47,8 @@ require_once($CFG->dirroot . '/mod/groupformation/lib/classes/xml_writers/cohort
 
 class mod_groupformation_advanced_job_manager {
 
-    static private $jobstates = array(
+    /** @var array Job states */
+    private static $jobstates = array(
             'ready' => array('waiting' => 0, 'started' => 0, 'aborted' => 0, 'done' => 0, 'groups_generated' => 0,
                             'groups_adopted' => 0),
             'waiting' => array('waiting' => 1, 'started' => 0, 'aborted' => 0, 'done' => 0, 'groups_generated' => 0,
@@ -68,7 +69,8 @@ class mod_groupformation_advanced_job_manager {
                             'groups_adopted' => 1),
     );
 
-    static private $timesstatesmap = array(
+    /** @var array Mapping of times and states */
+    private static $timesstatesmap = array(
             'waiting' => 'timecreated',
             'started' => 'timestarted',
             'aborted' => 'timefinished',

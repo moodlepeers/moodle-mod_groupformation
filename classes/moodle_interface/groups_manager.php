@@ -30,7 +30,11 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/stora
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
 
 class mod_groupformation_groups_manager {
+
+    /** @var int ID of module instance */
     private $groupformationid;
+
+    /** @var mod_groupformation_storage_manager */
     private $store = null;
 
     /**

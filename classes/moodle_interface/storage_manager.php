@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Adapter class betweeen DB and Plugin
+ * Adapter class between DB and Plugin
  *
  * @package mod_groupformation
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
@@ -25,16 +25,15 @@ if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.');
 }
 
-require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
-require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
-require_once($CFG->dirroot . '/group/lib.php');
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/advanced_job_manager.php');
-
+require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
+require_once($CFG->dirroot . '/group/lib.php');
 
 class mod_groupformation_storage_manager {
+
+    /** @var int ID of module instance */
     private $groupformationid;
-    private $gm;
 
     /**
      * Constructs storage manager for a specific groupformation
@@ -43,7 +42,6 @@ class mod_groupformation_storage_manager {
      */
     public function __construct($groupformationid) {
         $this->groupformationid = $groupformationid;
-        $this->gm = new mod_groupformation_groups_manager ($groupformationid);
     }
 
     /**
@@ -1142,6 +1140,12 @@ class mod_groupformation_storage_manager {
         $DB->delete_records('groupformation_stats', array('groupformationid' => $this->groupformationid));
     }
 
+    /**
+     * Returns users that are available for group formation
+     *
+     * @param null $job
+     * @return array
+     */
     public function get_users_for_grouping($job = null) {
         global $DB;
 

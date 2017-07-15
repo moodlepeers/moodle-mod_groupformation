@@ -26,8 +26,11 @@ if (!defined('MOODLE_INTERNAL')) {
 }
 
 class mod_groupformation_user_manager {
+
+    /** @var int ID of module instance */
     private $groupformationid;
 
+    /** @var mod_groupformation_storage_manager */
     private $store;
 
     /**
@@ -57,7 +60,11 @@ class mod_groupformation_user_manager {
     }
 
     /**
+     * Returns users started table content
      *
+     * @param null $sortedby
+     * @param string $fieldset
+     * @return array
      */
     public function get_users_started($sortedby = null, $fieldset = '*') {
         global $DB;
@@ -739,6 +746,12 @@ class mod_groupformation_user_manager {
         $DB->update_record('groupformation_started', $data);
     }
 
+    /**
+     * Returns score for a specific topic
+     *
+     * @param int $topicnumber
+     * @return float|string
+     */
     public function get_topic_score($topicnumber) {
         global $DB;
 
@@ -759,6 +772,6 @@ class mod_groupformation_user_manager {
             return "-";
         }
 
-        return ($score / count($answers)) / $num;
+        return floatval(floatval($score) / count($answers)) / $num;
     }
 }

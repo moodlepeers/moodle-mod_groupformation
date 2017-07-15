@@ -96,9 +96,9 @@ function groupformation_get_context($groupformationid) {
 }
 
 /**
+ * Sets activity completion
  *
- * @param stdClass $course
- * @param stdClass $cm
+ * @param $id
  * @param int $userid
  */
 function groupformation_set_activity_completion($id, $userid) {
@@ -212,7 +212,7 @@ function groupformation_import_questionnaire_configuration($filename = 'question
 
             foreach ($newcategories as $category) {
 
-                $prevversion = groupformation_get_catalog_version($category);
+                $prevversion = groupformation_get_category_version($category);
 
                 foreach ($newlanguages as $language) {
 
@@ -313,7 +313,13 @@ function groupformation_get_current_questionnaire_version() {
     }
 }
 
-function groupformation_get_catalog_version($category) {
+/**
+ * Returns current category version
+ *
+ * @param string $category
+ * @return int|mixed
+ */
+function groupformation_get_category_version($category) {
     global $DB;
 
     $field = $DB->get_field('groupformation_q_version', 'version', array('category' => $category));
