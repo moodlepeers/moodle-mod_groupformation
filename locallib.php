@@ -971,3 +971,24 @@ function groupformation_z_lookup_table($z) {
     $zlookuptable['3'] = 0.9987;
     return $zlookuptable[$z];
 }
+
+function groupformation_get_url($fileinfo, $content) {
+    $filestorage = get_file_storage();
+
+    if ($filestorage->file_exists($fileinfo ['contextid'], $fileinfo ['component'], $fileinfo ['filearea'],
+            $fileinfo ['itemid'], $fileinfo ['filepath'], $fileinfo ['filename'])
+    ) {
+        $file = $filestorage->get_file($fileinfo ['contextid'], $fileinfo ['component'], $fileinfo ['filearea'],
+                $fileinfo ['itemid'], $fileinfo ['filepath'], $fileinfo ['filename']);
+        $file->delete();
+    }
+
+    $file = $filestorage->create_file_from_string($fileinfo, $content);
+
+    $url = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(), $file->get_filearea(),
+            $file->get_itemid(), $file->get_filepath(), $file->get_filename());
+
+    $urlstring = $url->out();
+
+    return $urlstring;
+}
