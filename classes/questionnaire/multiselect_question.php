@@ -65,7 +65,7 @@ class mod_groupformation_multiselect_question extends mod_groupformation_basic_q
             $answers = explode(",", $answer);
         }
 
-        echo '<td colspan="0" class="freetext">';
+        echo '<td colspan="100%" class="freetext">';
         echo '<div class="form-group">';
         echo '<select multiple class="freetext-textarea form-control" name="';
         echo $category . $questionid . '[]" style="width: 80%;">';

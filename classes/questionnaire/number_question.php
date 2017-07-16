@@ -24,79 +24,30 @@ if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
 }
 
-require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/basic_question.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/input_question.php');
 
-class mod_groupformation_number_question extends mod_groupformation_basic_question {
+class mod_groupformation_number_question extends mod_groupformation_input_question {
 
     /**
-     * Prints HTML of a number question
+     * Returns input of question
      *
-     * @param $highlight
-     * @param $required
+     * @return string
      */
-    public function print_html($highlight, $required) {
-
+    public function get_input() {
         $category = $this->category;
         $questionid = $this->questionid;
-        $question = $this->question;
         $options = $this->options;
         $answer = $this->answer;
 
-        if ($answer == false) {
-            $answer = "";
-        }
+        $input = "";
 
-        if ($answer != "") {
-            echo '<tr>';
-            echo '<th scope="row">' . $question . '</th>';
-        } else {
-            if ($highlight) {
-                echo '<tr class="noAnswer">';
-                echo '<th scope="row">' . $question . '</th>';
-            } else {
-                echo '<tr>';
-                echo '<th scope="row">' . $question . '</th>';
-            }
-        }
+        $input .= '<input style="height:35px" class="freetext-textarea form-control" type="number" min="';
+        $input .= $options[0] . '" max="' . $options[1] . '" value="' . ((is_number($answer)) ? intval($answer) : "") . '" name="';
+        $input .= $category;
+        $input .= $questionid;
+        $input .= '">';
 
-        echo '<td colspan="100%" class="freetext">';
-        echo '<input style="height:35px" class="freetext-textarea form-control" type="number" min="';
-        echo $options[0] . '" max="' . $options[1] . '" value="' . ((is_number($answer)) ? intval($answer) : "") . '" name="';
-        echo $category . $questionid . '">';
-        echo '<br>';
-        if (!$required) {
-            echo '<div class="form-check">';
-            echo '    <label class="form-check-label">';
-            echo '        <input class="freetext-checkbox" type="checkbox" name="'.$category.$questionid.'_noanswer"/>';
-            echo get_string('freetext_noanswer', 'groupformation');
-            echo '    </label>';
-            echo '</div>';
-        }
-
-        echo '</td>';
-
-        echo '</tr>';
-    }
-
-    /**
-     * Reads answer
-     *
-     * @return array|null
-     */
-    public function read_answer() {
-
-        $answerparameter = $this->category . $this->questionid;
-        $noanswerparameter = $answerparameter.'_noanswer';
-
-        $answer = optional_param($answerparameter, null, PARAM_RAW);
-        $noanswer = optional_param($noanswerparameter, null, PARAM_RAW);
-
-        if ((isset($noanswer) && $noanswer == "on") || $answer == "") {
-            return array('delete', null);
-        } else if (isset($answer) && $answer != "") {
-            return array('save', $answer);
-        }
-        return null;
+        return $input;
     }
 
     /**

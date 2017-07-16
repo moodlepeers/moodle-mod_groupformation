@@ -28,64 +28,10 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/range_qu
 
 class mod_groupformation_knowledge_question extends mod_groupformation_range_question {
 
-    /**
-     * Print HTML of range inputs
-     *
-     * @param $highlight
-     * @param $required
-     */
-    public function print_html($highlight, $required) {
-
-        $category = $this->category;
-        $questionid = $this->questionid;
-        $question = $this->question;
-        $options = $this->options;
+    public function get_answer() {
         $answer = $this->answer;
-
-        if ($answer != -1) {
-            echo '<tr>';
-            echo '<th scope="row">' . $question . '</th>';
-        } else {
-            if ($highlight) {
-                echo '<tr class="noAnswer">';
-                echo '<th scope="row">' . $question . '</th>';
-            } else {
-                echo '<tr>';
-                echo '<th scope="row">' . $question . '</th>';
-            }
-        }
-
-        echo '<td colspan="100%" data-title="' . min(array_keys($options)) . ' = ' . $options [min(array_keys($options))] . ', ' .
-                max(array_keys($options)) . ' = ' . $options [max(array_keys($options))] . '" class="range">';
-        echo '<span class="">' . min(array_keys($options)) . '</span>';
-
-        echo '<input class="gf_range_inputs" type="range" name="' . $category . $questionid . '" min="0" max="';
-        echo max(array_keys($options)) . '" value="' . intval($answer) . '" />';
-        echo '<span class="">';
-        echo max(array_keys($options));
-        echo '</span>';
-        echo '<input type="text" name="' . $category . $questionid;
-        echo '_valid" value="' . intval($answer) . '" style="display:none;"/>';
-        if ($category == 'points') {
-            echo '<br>';
-            echo '<label id="text' . $category . $questionid . '">';
-            echo ((intval($answer) == -1) ? '0' : intval($answer));
-            echo '</label>';
-        }
-        echo '</td>';
-        echo '</tr>';
+        return $answer;
     }
 
-    public function read_answer() {
-        $answerparameter = $this->category . $this->questionid;
-        $validityparameter = $answerparameter . '_valid';
-
-        $answer = optional_param($answerparameter, null, PARAM_ALPHANUM);
-        $answervalidity = optional_param($validityparameter, null, PARAM_ALPHANUM);
-
-        if (isset ($answer) && $answervalidity == '1') {
-            return array("save", $answer);
-        }
-    }
 }
 
