@@ -627,7 +627,7 @@ class mod_groupformation_questionnaire_controller {
 
         if ($answer[0] == "save") {
             $this->usermanager->save_answer($userid, $category, $answer[1], $questionid);
-        }else if ($answer[0] == "delete") {
+        } else if ($answer[0] == "delete") {
             $this->usermanager->delete_answer($userid, $category, $questionid);
         }
     }

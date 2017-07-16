@@ -70,7 +70,7 @@ class mod_groupformation_multiselect_question extends mod_groupformation_basic_q
         echo '<select multiple class="freetext-textarea form-control" name="';
         echo $category . $questionid . '[]" style="width: 80%;">';
         foreach ($options as $key => $option) {
-            echo '<option value="' . $key . '" ' . ((in_array($key,$answers)) ? 'selected' : '') . '>' . $option . '</option>';
+            echo '<option value="' . $key . '" ' . ((in_array($key, $answers)) ? 'selected' : '') . '>' . $option . '</option>';
         }
         echo '  </select>';
         echo '</div>';

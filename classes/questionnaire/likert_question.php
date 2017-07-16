@@ -59,18 +59,18 @@ class mod_groupformation_likert_question extends mod_groupformation_basic_questi
             $radiocount = 1;
             foreach ($options as $option) {
                 if (intval($answer) == $radiocount) {
-                    echo (($option!="" && $radiocount == 1) ? '<td class="td-extra">' . $option . '</td>' : '');
+                    echo (($option != "" && $radiocount == 1) ? '<td class="td-extra">' . $option . '</td>' : '');
                     echo '<td title="'.$option.'" data-title="';
                     echo $option;
                     echo '" class="toolt2 radioleft select-area selected_label">';
                     echo '<input type="radio" name="' . $category .
                         $questionid . '" value="' . $radiocount . '" checked="checked"/></td>';
                 } else {
-                    echo (($option!="" && $radiocount == 1) ? '<td class="td-extra">' . $option . '</td>' : '');
+                    echo (($option != "" && $radiocount == 1) ? '<td class="td-extra">' . $option . '</td>' : '');
                     echo '<td title="' . $option . '" data-title="' . $option . '" class="toolt2 radioleft select-area">';
                     echo '<input type="radio" name="' . $category . $questionid . '" value="' . $radiocount . '"/>';
                     echo '</td>';
-                    echo (($option!="" && $radiocount == count($options)) ? '<td class="td-extra">' . $option . '</td>' : '');
+                    echo (($option != "" && $radiocount == count($options)) ? '<td class="td-extra">' . $option . '</td>' : '');
                 }
                 $radiocount++;
             }

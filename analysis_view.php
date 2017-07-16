@@ -20,6 +20,7 @@
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+require_once('../../config.php');
 require('header.php');
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/test_user_generator.php');

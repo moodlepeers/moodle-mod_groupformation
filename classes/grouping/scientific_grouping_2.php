@@ -254,7 +254,7 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
     private function get_slices($users, $numberofslices, $specs = null) {
         $scores = [];
 
-        foreach($users as $user) {
+        foreach ($users as $user) {
             $scores[] = array($user, $this->usermanager->get_eval_score($user, $specs));
         }
 
@@ -266,8 +266,8 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
 
         $slices = range(1, $numberofslices);
         $userslices = [];
-        foreach($scores as $tuple) {
-            if (count($slices) == 0){
+        foreach ($scores as $tuple) {
+            if (count($slices) == 0) {
                 $slices = range(1, $numberofslices);
             }
 
