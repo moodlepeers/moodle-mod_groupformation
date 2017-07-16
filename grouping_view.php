@@ -28,7 +28,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/stora
 require_once($CFG->dirroot . '/mod/groupformation/classes/controller/grouping_controller.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/grouping_view_controller.php');
 
-$filename = substr(__FILE__, strrpos(__FILE__, '\\')+1);
+$filename = substr(__FILE__, strrpos(__FILE__, '\\') + 1);
 $url = new moodle_url('/mod/groupformation/' . $filename, $urlparams);
 
 // Set PAGE config.

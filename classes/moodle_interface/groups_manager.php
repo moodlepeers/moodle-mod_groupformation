@@ -397,7 +397,7 @@ class mod_groupformation_groups_manager {
         if (is_null($field) && count($records) > 0) {
             $i = 0;
             foreach ($records as $record) {
-                if ($record->userid == $userid){
+                if ($record->userid == $userid) {
                     break;
                 }
                 $i += 1;

@@ -64,7 +64,9 @@ class mod_groupformation_dropdown_question extends mod_groupformation_basic_ques
 
         echo '<td colspan="100%" class="center">';
         $categoryquestionid = $category . $questionid;
-        echo '<select style="height:35px" class="form-control" name="' . $categoryquestionid . '" id="' . $categoryquestionid . '">';
+        echo '<select style="height:35px" class="form-control" name="';
+        echo $categoryquestionid;
+        echo '" id="' . $categoryquestionid . '">';
         echo '<option value="0"> - </option>';
         foreach ($options as $option) {
             if (intval($answer) == $questioncounter) {
@@ -89,7 +91,7 @@ class mod_groupformation_dropdown_question extends mod_groupformation_basic_ques
         $answer = optional_param($parameter, null, PARAM_RAW);
         if (isset($answer) && $answer != 0) {
             return array('save', $answer);
-        }else{
+        } else {
             return null;
         }
     }

@@ -28,7 +28,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/controller/overview_co
 require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/overview_view_controller.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 
-$filename = substr(__FILE__, strrpos(__FILE__, '\\')+1);
+$filename = substr(__FILE__, strrpos(__FILE__, '\\') + 1);
 $url = new moodle_url('/mod/groupformation/' . $filename, $urlparams);
 
 // Set PAGE config.

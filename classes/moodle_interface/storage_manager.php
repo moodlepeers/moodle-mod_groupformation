@@ -399,7 +399,7 @@ class mod_groupformation_storage_manager {
 
         $scenarios = $DB->get_records('groupformation_scenario');
 
-        $scenario = (array_values($scenarios)[$settings->szenario-1]);
+        $scenario = array_values($scenarios)[$settings->szenario - 1];
 
         return $scenario->id;
     }
@@ -427,10 +427,10 @@ class mod_groupformation_storage_manager {
     public function get_raw_categories() {
         global $DB;
 
-        $cats = $DB->get_records('groupformation_scenario_cats', array('scenario'=> $this->get_scenario()));
+        $cats = $DB->get_records('groupformation_scenario_cats', array('scenario' => $this->get_scenario()));
         $categories = array();
-        foreach($cats as $cat) {
-            $categories[] = $DB->get_field('groupformation_q_version','category', array('id'=>$cat->category));
+        foreach ($cats as $cat) {
+            $categories[] = $DB->get_field('groupformation_q_version', 'category', array('id' => $cat->category));
         }
         return $categories;
     }
@@ -1042,9 +1042,9 @@ class mod_groupformation_storage_manager {
             $values = mod_groupformation_util::xml_to_array($xmlcontent);
             $createquestion = function(&$v, $key) use ($category) {
                 $q = new stdClass();
-                $q->id = $key+1;
+                $q->id = $key + 1;
                 $q->category = $category;
-                $q->questionid = $key+1;
+                $q->questionid = $key + 1;
                 $q->question = $v;
                 $q->options = array(
                     100 => get_string('excellent', 'groupformation'), 0 => get_string('none', 'groupformation'));

@@ -235,12 +235,12 @@ function groupformation_import_questionnaire_configuration($filename = 'question
             $DB->delete_records('groupformation_scenario');
             $DB->delete_records('groupformation_scenario_cats');
 
-            foreach($newscenarios as $name => $categories) {
+            foreach ($newscenarios as $name => $categories) {
                 $record = new stdClass();
                 $record->name = $name;
                 $record->version = $newversion;
                 $scenarioid = $DB->insert_record('groupformation_scenario', $record);
-                foreach($categories as $category) {
+                foreach ($categories as $category) {
                     $record = $DB->get_record('groupformation_q_version', array('category' => $category));
                     $newrecord = new stdClass();
                     $newrecord->scenario = $scenarioid;
@@ -340,7 +340,7 @@ function groupformation_get_category_version($category) {
 function groupformation_convert_options($options) {
     $ops = array();
     foreach ($options as $key => $option) {
-        if (is_number($key)){
+        if (is_number($key)) {
             $key = 'OPTION';
         }
         $s = '<' . $key . '><![CDATA[';

@@ -27,7 +27,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/stora
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/controller/questionnaire_controller.php');
 
-$filename = substr(__FILE__, strrpos(__FILE__, '\\')+1);
+$filename = substr(__FILE__, strrpos(__FILE__, '\\') + 1);
 $url = new moodle_url('/mod/groupformation/' . $filename, $urlparams);
 
 // Set PAGE config.
@@ -55,8 +55,8 @@ if (!has_capability('mod/groupformation:editsettings', $context)) {
 }
 
 $consent = $usermanager->get_consent($userid);
-$ask_for_participant_code = mod_groupformation_data::ask_for_participant_code();
-$participantcode = $usermanager->has_participant_code($userid) || !$ask_for_participant_code;
+$askforparticipantcode = mod_groupformation_data::ask_for_participant_code();
+$participantcode = $usermanager->has_participant_code($userid) || !$askforparticipantcode;
 
 if (((!$consent || !$participantcode) && !$groupsmanager->groups_created()) &&
         !has_capability('mod/groupformation:editsettings', $context)) {

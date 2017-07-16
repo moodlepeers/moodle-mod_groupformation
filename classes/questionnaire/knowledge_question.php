@@ -67,7 +67,10 @@ class mod_groupformation_knowledge_question extends mod_groupformation_range_que
         echo '<input type="text" name="' . $category . $questionid;
         echo '_valid" value="' . intval($answer) . '" style="display:none;"/>';
         if ($category == 'points') {
-            echo '<br><label id="text' . $category . $questionid . '">' . ((intval($answer) == -1) ? '0' : intval($answer)) . '</label>';
+            echo '<br>';
+            echo '<label id="text' . $category . $questionid . '">';
+            echo ((intval($answer) == -1) ? '0' : intval($answer));
+            echo '</label>';
         }
         echo '</td>';
         echo '</tr>';

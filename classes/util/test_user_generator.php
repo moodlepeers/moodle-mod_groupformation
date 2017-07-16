@@ -138,7 +138,7 @@ class mod_groupformation_test_user_generator {
                 try {
                     foreach ($categories as $category) {
                         $questions2 = $store->get_questions($category);
-                        foreach (array_values($questions2) as $key => $question){
+                        foreach (array_values($questions2) as $key => $question) {
                             $options = $question->options;
                             $name = 'mod_groupformation_' . $question->type . '_question';
                             /** @var mod_groupformation_basic_question $questionobj */

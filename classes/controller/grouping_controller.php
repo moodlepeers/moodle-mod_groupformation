@@ -283,7 +283,7 @@ class mod_groupformation_grouping_controller {
 
         switch ($this->state) {
             case 'ready':
-                // 000000.
+                // 000000 = none.
                 $assigns['status'] = array(
                         get_string('grouping_status_1', 'groupformation'), 0);
                 $array['button1']['value'] = 1;

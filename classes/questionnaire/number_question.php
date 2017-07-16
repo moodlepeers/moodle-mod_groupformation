@@ -60,13 +60,15 @@ class mod_groupformation_number_question extends mod_groupformation_basic_questi
         }
 
         echo '<td colspan="100%" class="freetext">';
-        echo '<input style="height:35px" class="freetext-textarea form-control" type="number" min="'.$options[0].'" max="'.$options[1].'" value="'.((is_number($answer))?intval($answer):"").'" name="' . $category . $questionid . '">';
+        echo '<input style="height:35px" class="freetext-textarea form-control" type="number" min="';
+        echo $options[0] . '" max="' . $options[1] . '" value="' . ((is_number($answer)) ? intval($answer) : "") . '" name="';
+        echo $category . $questionid . '">';
         echo '<br>';
         if (!$required) {
             echo '<div class="form-check">';
             echo '    <label class="form-check-label">';
             echo '        <input class="freetext-checkbox" type="checkbox" name="'.$category.$questionid.'_noanswer"/>';
-            echo get_string('freetext_noanswer','groupformation');
+            echo get_string('freetext_noanswer', 'groupformation');
             echo '    </label>';
             echo '</div>';
         }
@@ -104,7 +106,7 @@ class mod_groupformation_number_question extends mod_groupformation_basic_questi
      */
     public function create_random_answer() {
         $options = $this->options;
-        return rand($options[0],$options[1]);
+        return rand($options[0], $options[1]);
     }
 }
 

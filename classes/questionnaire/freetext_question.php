@@ -36,7 +36,6 @@ class mod_groupformation_freetext_question extends mod_groupformation_basic_ques
      */
     public function print_html($highlight, $required) {
 
-
         $category = $this->category;
         $questionid = $this->questionid;
         $question = $this->question;
@@ -61,14 +60,15 @@ class mod_groupformation_freetext_question extends mod_groupformation_basic_ques
         }
 
         echo '<td colspan="100%" class="freetext">';
-        echo '<textarea maxlength="255" class="freetext-textarea form-control" rows="5" 
-                name="' . $category . $questionid . '" style="width: 100%;">'.((intval($answer) == -1)?"":$answer).'</textarea>';
+        echo '<textarea maxlength="255" class="freetext-textarea form-control" rows="5" name="';
+        echo $category . $questionid;
+        echo '" style="width: 100%;">' . ((intval($answer) == -1) ? '' : $answer) . '</textarea>';
         echo '<br>';
         if (!$required) {
             echo '<div class="form-check">';
             echo '    <label class="form-check-label">';
             echo '        <input class="freetext-checkbox" type="checkbox" name="'.$category.$questionid.'_noanswer"/>';
-            echo get_string('freetext_noanswer','groupformation');
+            echo get_string('freetext_noanswer', 'groupformation');
             echo '    </label>';
             echo '</div>';
         }

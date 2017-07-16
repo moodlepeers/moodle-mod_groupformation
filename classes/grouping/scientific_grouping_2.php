@@ -90,7 +90,9 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
         while ($i < 100 && !$bestfound) {
             $i++;
             $slices = $this->get_slices($users, $numberofslices);
-            $func = function($value, $key = 1) { return $value[$key]; };
+            $func = function($value, $key = 1) {
+                return $value[$key];
+            };
 
             // Loop preparation.
             $means = [];
@@ -116,10 +118,10 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
             // Track the following conditions when iterating over all means and stddevs:
             // Condition 1: The distance between all means and the mean of means is smaller than cutoff.
             // Condition 2: The distance between all stddevs and the mean of stddevs is smaller than cutoff.
-            for($k = 0; $k < count($means); $k++) {
+            for ($k = 0; $k < count($means); $k++) {
                 $mean = $means[$k];
                 $stddev = $stddevs[$k];
-                $distmean = abs($mean-$avgmean)/$avgmean;
+                $distmean = abs($mean - $avgmean) / $avgmean;
                 $diststddev = abs ($stddev - $avgstddev) / $avgstddev;
                 $boolmean &= ($distmean < $cutoff);
                 $boolstddev &= ($diststddev < $cutoff);
@@ -146,7 +148,7 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
             $func3 = function($b) {
                 return $b[0];
             };
-            return array_map($func3,$a);
+            return array_map($func3, $a);
         };
 
         return array_map($func2, $best);
@@ -171,9 +173,6 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
         }
 
         $slices = $this->get_optimal_slices($users[0], $numberofslices);
-
-        // Divide users into n slices.
-        //$slices = $this->get_user_slices($users[0], $numberofslices);
 
         $cohorts = $this->build_cohorts($slices, $groupsizes[0], $specification);
 
@@ -255,21 +254,21 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
     private function get_slices($users, $numberofslices, $specs = null) {
         $scores = [];
 
-        foreach($users as $user){
+        foreach($users as $user) {
             $scores[] = array($user, $this->usermanager->get_eval_score($user, $specs));
         }
 
-        $cmp = function($a, $b){
-            return $a[1]<$b[1];
+        $cmp = function($a, $b) {
+            return $a[1] < $b[1];
         };
 
         usort($scores, $cmp);
 
-        $slices = range(1,$numberofslices);
+        $slices = range(1, $numberofslices);
         $userslices = [];
         foreach($scores as $tuple) {
-            if (count($slices)==0){
-                $slices = range(1,$numberofslices);
+            if (count($slices) == 0){
+                $slices = range(1, $numberofslices);
             }
 
             $user = $tuple[0];
@@ -281,7 +280,7 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
                 $userslices[$assignto] = [];
             }
 
-            $userslices[$assignto] = array_merge([[$user, $score]],$userslices[$assignto]);
+            $userslices[$assignto] = array_merge([[$user, $score]], $userslices[$assignto]);
 
             unset($slices[$assignto]);
         }

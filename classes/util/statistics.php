@@ -52,7 +52,7 @@ class mod_groupformation_statistics {
         }
         $temp = 0;
 
-        foreach($values as $user){
+        foreach($values as $user) {
             $temp += pow($user - $mean, 2);
         }
         return floatval($temp) / count($values);

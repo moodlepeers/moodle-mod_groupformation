@@ -61,15 +61,16 @@ class mod_groupformation_multiselect_question extends mod_groupformation_basic_q
 
         $answers = array();
         if ($answer != -1) {
-            $answer = substr($answer,5);
-            $answers = explode(",",$answer);
+            $answer = substr($answer, 5);
+            $answers = explode(",", $answer);
         }
 
         echo '<td colspan="0" class="freetext">';
         echo '<div class="form-group">';
-        echo '  <select multiple class="freetext-textarea form-control" name="' . $category . $questionid . '[]" style="width: 80%;">';
+        echo '<select multiple class="freetext-textarea form-control" name="';
+        echo $category . $questionid . '[]" style="width: 80%;">';
         foreach ($options as $key => $option) {
-            echo '      <option value="' . $key . '" '.((in_array($key,$answers))?'selected':'').'>'.$option.'</option>';
+            echo '<option value="' . $key . '" ' . ((in_array($key,$answers)) ? 'selected' : '') . '>' . $option . '</option>';
         }
         echo '  </select>';
         echo '</div>';
@@ -78,7 +79,7 @@ class mod_groupformation_multiselect_question extends mod_groupformation_basic_q
             echo '<div class="form-check">';
             echo '    <label class="form-check-label">';
             echo '        <input class="freetext-checkbox" type="checkbox" name="'.$category.$questionid.'_noanswer"/>';
-            echo get_string('freetext_noanswer','groupformation');
+            echo get_string('freetext_noanswer', 'groupformation');
             echo '    </label>';
             echo '</div>';
         }
@@ -98,7 +99,7 @@ class mod_groupformation_multiselect_question extends mod_groupformation_basic_q
         $parameter = $this->category . $this->questionid;
 
         $answer = optional_param_array($parameter, array(), PARAM_RAW);
-        $answer = 'list:' . implode(",",$answer);
+        $answer = 'list:' . implode(",", $answer);
 
         if (isset($answer) && $answer == 'list:') {
             return array('delete', null);

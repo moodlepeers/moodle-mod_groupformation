@@ -27,7 +27,7 @@ require_once('lib.php');
 require_once('locallib.php');
 
 // Reads URL params.
-$id = required_param('id',PARAM_INT);
+$id = required_param('id', PARAM_INT);
 $doshow = optional_param('do_show', 'view', PARAM_TEXT);
 
 $urlparams = ['id' => $id, 'do_show' => $doshow];

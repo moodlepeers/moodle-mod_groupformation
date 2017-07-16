@@ -52,7 +52,7 @@ class mod_groupformation_topic_question extends mod_groupformation_basic_questio
      *
      * @param $answer
      */
-    public function set_answer($answer){
+    public function set_answer($answer) {
         $this->answer = $answer;
     }
 

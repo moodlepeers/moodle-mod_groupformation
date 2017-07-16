@@ -52,7 +52,7 @@ abstract class mod_groupformation_basic_question {
      * @param null $options
      * @param null $answer
      */
-    function __construct($category, $questionid, $question = null, $options = null, $answer = null) {
+    public function __construct($category, $questionid, $question = null, $options = null, $answer = null) {
         $this->category = $category;
         $this->questionid = $questionid;
         $this->question = $question;
@@ -107,7 +107,7 @@ abstract class mod_groupformation_basic_question {
      * @return array
      */
     protected function convert_options($options) {
-        if (!is_null($options) && is_string($options)){
+        if (!is_null($options) && is_string($options)) {
             $temp = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $options . ' </OPTIONS>';
             $options = mod_groupformation_util::xml_to_array($temp);
         }

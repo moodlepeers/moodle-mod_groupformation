@@ -30,7 +30,12 @@ class mod_groupformation_question_table {
     /** @var string Category of questionnaire page */
     private $category;
 
-    function __construct($category) {
+    /**
+     * mod_groupformation_question_table constructor.
+     *
+     * @param $category
+     */
+    public function __construct($category) {
         $this->category = $category;
     }
 

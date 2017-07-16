@@ -71,7 +71,10 @@ class mod_groupformation_range_question extends mod_groupformation_basic_questio
         echo '<input type="text" name="' . $category . $questionid;
         echo '_valid" value="' . intval($answer) . '" style="display:none;"/>';
         if ($category == 'points') {
-            echo '<br><label id="text' . $category . $questionid . '">' . ((intval($answer) == -1) ? '0' : intval($answer)) . '</label>';
+            echo '<br>';
+            echo '<label id="text' . $category . $questionid . '">';
+            echo ((intval($answer) == -1) ? '0' : intval($answer));
+            echo '</label>';
         }
         echo '</td>';
         echo '</tr>';
@@ -98,7 +101,7 @@ class mod_groupformation_range_question extends mod_groupformation_basic_questio
      * @return int
      */
     public function create_random_answer() {
-        return rand(1,max(array_keys($this->options)));
+        return rand(1, max(array_keys($this->options)));
     }
 
 
@@ -111,7 +114,7 @@ class mod_groupformation_range_question extends mod_groupformation_basic_questio
      */
     protected function convert_options($options) {
 
-        if (!is_null($options) && is_string($options)){
+        if (!is_null($options) && is_string($options)) {
             $options = array(
                     100 => get_string('excellent', 'groupformation'),
                     0 => get_string('bad', 'groupformation'));

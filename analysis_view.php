@@ -32,7 +32,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_p
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/scientific_grouping_2.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/analysis_view_controller.php');
 
-$filename = substr(__FILE__, strrpos(__FILE__, '\\')+1);
+$filename = substr(__FILE__, strrpos(__FILE__, '\\') + 1);
 $url = new moodle_url('/mod/groupformation/' . $filename, $urlparams);
 
 // Set PAGE config.
@@ -43,7 +43,7 @@ $PAGE->set_heading(format_string($course->fullname));
 // Import jQuery and js file.
 groupformation_add_jquery($PAGE, 'survey_functions.js');
 
-// Update questionnaire config if necessary
+// Update questionnaire config if necessary.
 groupformation_import_questionnaire_configuration();
 
 $store = new mod_groupformation_storage_manager($groupformation->id);
@@ -63,6 +63,6 @@ require('tabs.php');
 
 echo $viewcontroller->render();
 
-echo $debug_buttons;
+echo $debugbuttons;
 
 echo $OUTPUT->footer();

@@ -234,9 +234,9 @@ class mod_groupformation_user_manager {
     public function get_answering_status($userid) {
         global $DB;
 
-        $ask_for_participant_code = mod_groupformation_data::ask_for_participant_code();
+        $askforparticipantcode = mod_groupformation_data::ask_for_participant_code();
 
-        if (!$this->get_consent($userid) || (!$this->has_participant_code($userid) && $ask_for_participant_code)) {
+        if (!$this->get_consent($userid) || (!$this->has_participant_code($userid) && $askforparticipantcode)) {
             return -1;
         }
 
@@ -559,7 +559,8 @@ class mod_groupformation_user_manager {
         global $DB;
         $DB->delete_records('groupformation_started', array('groupformation' => $this->groupformationid, 'userid' => $userid));
         $DB->delete_records('groupformation_answer', array('groupformation' => $this->groupformationid, 'userid' => $userid));
-        $DB->delete_records('groupformation_user_values', array('groupformationid' => $this->groupformationid, 'userid' => $userid));
+        $DB->delete_records('groupformation_user_values',
+                array('groupformationid' => $this->groupformationid, 'userid' => $userid));
     }
 
     /**
@@ -713,7 +714,7 @@ class mod_groupformation_user_manager {
     public function get_eval_score($userid, $specs = null) {
         global $DB;
 
-        if (!$this->has_evaluation_values($userid)){
+        if (!$this->has_evaluation_values($userid)) {
             $this->set_evaluation_values($userid);
         }
 
@@ -768,7 +769,7 @@ class mod_groupformation_user_manager {
             $score += $answer->answer;
         }
 
-        if (count($answers) == 0 || $num == 0){
+        if (count($answers) == 0 || $num == 0) {
             return "-";
         }
 

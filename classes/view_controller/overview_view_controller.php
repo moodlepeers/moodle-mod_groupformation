@@ -136,7 +136,7 @@ class mod_groupformation_overview_view_controller extends mod_groupformation_bas
 
                     // If math prep course, divide participants into A/B sampling groups.
                     if (mod_groupformation_data::is_math_prep_course_mode()) {
-                        // TODO scientific studies A/B sampling groups
+                        // TODO scientific studies A/B sampling groups.
                         $groupsmanager->assign_to_groups_a_and_b($userid);
                     }
 
@@ -156,7 +156,7 @@ class mod_groupformation_overview_view_controller extends mod_groupformation_bas
         $id = $this->controller->cmid;
         $context = context_module::instance($id);
 
-        // Check capability for access
+        // Check capability for access.
         if (has_capability('mod/groupformation:editsettings', $context)) {
             // Redirect.
             $returnurl = new moodle_url ('/mod/groupformation/analysis_view.php', array(

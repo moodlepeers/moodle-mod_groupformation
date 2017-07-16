@@ -73,11 +73,12 @@ class mod_groupformation_questionnaire_controller {
 
     /**
      * mod_groupformation_questionnaire_controller constructor.
+     *
      * @param $groupformationid
-     * @param $lang
      * @param $userid
      * @param $oldcategory
      * @param $cmid
+     * @internal param $lang
      */
     public function __construct($groupformationid, $userid, $oldcategory, $cmid) {
         $this->groupformationid = $groupformationid;
@@ -461,11 +462,10 @@ class mod_groupformation_questionnaire_controller {
             }
 
             if ($this->usermanager->is_completed($this->userid) || !$this->store->is_questionnaire_available()) {
-                echo '<div class="alert" id="commited_view">' . get_string('questionnaire_committed', 'groupformation') .
-                    '</div>';
+                echo '<div class="alert" id="commited_view">';
+                echo get_string('questionnaire_committed', 'groupformation');
+                echo '</div>';
             }
-
-
 
             $percent = $this->get_percent($category);
 
@@ -612,7 +612,7 @@ class mod_groupformation_questionnaire_controller {
      * @param $category
      * @param $question
      */
-    public function handle_answer($userid, $category, $question){
+    public function handle_answer($userid, $category, $question) {
 
         $type = $question->type;
         $questionid = $question->questionid;
@@ -621,13 +621,13 @@ class mod_groupformation_questionnaire_controller {
 
         $answer = $questionobj->read_answer();
 
-        if (is_null($answer)){
+        if (is_null($answer)) {
             return;
         }
 
         if ($answer[0] == "save") {
             $this->usermanager->save_answer($userid, $category, $answer[1], $questionid);
-        }else if ($answer[0] == "delete"){
+        }else if ($answer[0] == "delete") {
             $this->usermanager->delete_answer($userid, $category, $questionid);
         }
     }

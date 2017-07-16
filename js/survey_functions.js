@@ -19,7 +19,6 @@ require(['jquery', 'jqueryui'], function ($, jqueryui) {
             name = $(this).attr("name");
             textarea = $(this).parent().parent().parent().find($(".freetext-textarea"));
             $(textarea).prop('disabled', function(i, v) { return !v; });
-            //$(textarea).val('');
         });
 
         // Get the widths of all navigation li's.

@@ -63,7 +63,7 @@ if ($editsettings) {
     $row [] = new tabobject ('view', $questionnaireviewurl->out(), get_string('tab_preview', 'groupformation'));
 
     // The import/export view.
-    // TODO Only activate if export of study is needed
+    // TODO Only activate if export of study is needed.
     if (false) {
         $exporturl = new moodle_url ('/mod/groupformation/export_view.php', array(
             'id' => $usedid, 'do_show' => 'export'));
