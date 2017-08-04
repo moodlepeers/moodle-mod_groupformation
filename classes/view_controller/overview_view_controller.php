@@ -98,7 +98,6 @@ class mod_groupformation_overview_view_controller extends mod_groupformation_bas
             $begin = optional_param('begin', 1, PARAM_INT);
             $questions = optional_param('questions', null, PARAM_BOOL);
             $participantcode = optional_param('participantcode', '', PARAM_TEXT);
-
             if ($begin == 1 && isset($questions) && $questions == 1 && !$back) {
                 // If consent was given, set internal.
                 if (isset($consent)) {
@@ -139,12 +138,12 @@ class mod_groupformation_overview_view_controller extends mod_groupformation_bas
                         // TODO scientific studies A/B sampling groups.
                         $groupsmanager->assign_to_groups_a_and_b($userid);
                     }
-
-                    // Redirect.
-                    $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
-                            'id' => $id));
-                    redirect($returnurl);
                 }
+
+                // Redirect.
+                $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
+                    'id' => $id));
+                redirect($returnurl);
             }
         }
     }

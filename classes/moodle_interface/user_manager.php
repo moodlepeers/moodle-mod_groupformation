@@ -742,7 +742,7 @@ class mod_groupformation_user_manager {
             'groupformation' => $this->groupformationid,
             'userid' => $userid
         ));
-        $data->completed = $value;
+        $data->completed = intval($value);
         $data->timecompleted = time();
         $DB->update_record('groupformation_started', $data);
     }

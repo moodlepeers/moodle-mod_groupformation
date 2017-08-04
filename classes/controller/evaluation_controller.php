@@ -97,9 +97,7 @@ class mod_groupformation_evaluation_controller {
 
         $cc = new mod_groupformation_criterion_calculator($this->groupformationid);
 
-        if (!$this->usermanager->has_evaluation_values($userid)) {
-            $this->usermanager->set_evaluation_values($userid);
-        }
+        $this->usermanager->set_evaluation_values($userid);
 
         return $cc->get_eval($userid, $groupusers, $courseusers);
     }

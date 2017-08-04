@@ -65,6 +65,7 @@ class mod_groupformation_likert_question extends mod_groupformation_basic_questi
                     echo '" class="toolt2 radioleft select-area selected_label">';
                     echo '<input type="radio" name="' . $category .
                         $questionid . '" value="' . $radiocount . '" checked="checked"/></td>';
+                    echo (($option != "" && $radiocount == count($options)) ? '<td class="td-extra">' . $option . '</td>' : '');
                 } else {
                     echo (($option != "" && $radiocount == 1) ? '<td class="td-extra">' . $option . '</td>' : '');
                     echo '<td title="' . $option . '" data-title="' . $option . '" class="toolt2 radioleft select-area">';

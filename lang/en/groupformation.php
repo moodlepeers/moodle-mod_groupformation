@@ -468,12 +468,12 @@ $string ['topic'] = "Topic";
 $string ['participant_code_title'] = "Participant Code";
 $string ['participant_code_header'] = "Please enter a personal participant code based on the following rules:";
 $string ['participant_code_rules'] = "1. Your mother's first name (first two characters, capitalized, z.B. EV for Eva)<br>
-2. Your mother's year of birth (last two digits, z.B. 34 for 1934)<br>
+2. Your mother's month of birth (as two digits, z.B. 07 for July)<br>
 3. Your father's first name (first two characters, capitalized, z.B. AD for Adam)<br>
-4. Your father's year of birth (last two digits, z.B. 25 for 1925)<br><br>
+4. Your father's month of birth (as two digits, z.B. 11 for November)<br><br>
 Replace \"Umlaute\" and special characters as follows<br>
 Ä &rarr; A; Ö &rarr; O; Ü &rarr; U; ß &rarr; S";
-$string ['participant_code_example'] = "Example: EV34AD25";
+$string ['participant_code_example'] = "Example: EV04AD12";
 $string ['participant_code_footer'] = "Your personal participant code is";
 
 $string ['participant_code_alert_message'] = 'You need enter a valid participant code before accessing the questionnaire. Scroll down and enter your participant code.';

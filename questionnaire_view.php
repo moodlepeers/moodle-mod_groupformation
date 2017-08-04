@@ -127,6 +127,9 @@ if ($next && ($available || $isteacher) && ($category == '' || $inarray)) {
     }
 } else if (!$next ||!$available || $category == 'no') {
 
+    if ($usermanager->has_answered_everything($userid)) {
+        $usermanager->set_evaluation_values($userid);
+    }
     if (isset ($action) && $action == 1) {
         $usermanager->change_status($userid);
     }
