@@ -65,7 +65,7 @@ $job = $ajm::get_job($groupformation->id);
 
 $results = $ajm::do_groupal($job);
 
-var_dump($results);
+// var_dump($results);
 // Print the tabs.
 require('tabs.php');
 
