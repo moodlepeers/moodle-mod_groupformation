@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Adapter class betweeen DB and Plugin
+ * Adapter class between DB and Plugin
  *
  * @package mod_groupformation
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
@@ -25,17 +25,15 @@ if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.');
 }
 
-require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
-require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
-require_once($CFG->dirroot . '/group/lib.php');
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/advanced_job_manager.php');
-
+require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
+require_once($CFG->dirroot . '/group/lib.php');
 
 class mod_groupformation_storage_manager {
+
+    /** @var int ID of module instance */
     private $groupformationid;
-    private $data;
-    private $gm;
 
     /**
      * Constructs storage manager for a specific groupformation
@@ -44,14 +42,46 @@ class mod_groupformation_storage_manager {
      */
     public function __construct($groupformationid) {
         $this->groupformationid = $groupformationid;
-        $this->data = new mod_groupformation_data ();
-        $this->gm = new mod_groupformation_groups_manager ($groupformationid);
     }
 
+    /**
+     * Returns intro box if intro is set
+     *
+     * @param $id
+     * @return string
+     */
+    public function get_intro($id) {
+        global $OUTPUT;
+
+        $box = "";
+        $gf = groupformation_get_by_id($this->groupformationid);
+
+        if ($gf->intro) {
+            $box = $OUTPUT->box(format_module_intro('groupformation', $gf, $id), 'generalbox mod_introbox',
+                    'groupformationintro');
+        }
+
+        return $box;
+    }
+
+    /**
+     * @return mixed
+     */
     public function get_version() {
         global $DB;
 
         return $DB->get_field('groupformation', 'version', array('id' => $this->groupformationid));
+    }
+
+    /**
+     * Returns whether all answers are required or not
+     *
+     * @return bool
+     */
+    public function all_answers_required() {
+        global $DB;
+
+        return boolval($DB->get_field('groupformation', 'allanswersrequired', array('id' => $this->groupformationid )));
     }
 
     /**
@@ -358,7 +388,6 @@ class mod_groupformation_storage_manager {
     /**
      * Returns the scenario
      *
-     * @param bool|false $name
      * @return string
      */
     public function get_scenario() {
@@ -368,7 +397,11 @@ class mod_groupformation_storage_manager {
                 'id' => $this->groupformationid
         ));
 
-        return $settings->szenario;
+        $scenarios = $DB->get_records('groupformation_scenario');
+
+        $scenario = array_values($scenarios)[$settings->szenario - 1];
+
+        return $scenario->id;
     }
 
     /**
@@ -394,13 +427,12 @@ class mod_groupformation_storage_manager {
     public function get_raw_categories() {
         global $DB;
 
-        $cats = $DB->get_records('groupformation_scenario_cats', array('scenario'=> $this->get_scenario()));
+        $cats = $DB->get_records('groupformation_scenario_cats', array('scenario' => $this->get_scenario()));
         $categories = array();
-        foreach($cats as $cat) {
-            $categories[] = $DB->get_field('groupformation_q_version','category', array('id'=>$cat->category));
+        foreach ($cats as $cat) {
+            $categories[] = $DB->get_field('groupformation_q_version', 'category', array('id' => $cat->category));
         }
         return $categories;
-        // return $this->data->get_category_set($this->get_scenario());
     }
 
     /**
@@ -753,7 +785,7 @@ class mod_groupformation_storage_manager {
      * @return array
      */
     public function get_label_set() {
-        $array = $this->data->get_label_set($this->get_scenario());
+        $array = mod_groupformation_data::get_label_set($this->get_scenario());
 
         if ($this->groupformationid != null) {
             $hastopic = $this->get_number('topic');
@@ -831,24 +863,6 @@ class mod_groupformation_storage_manager {
         }
 
         return $enrolledstudents;
-    }
-
-    /**
-     * Returns whether a participant code is wanted or not
-     *
-     * @return bool
-     */
-    public function ask_for_participant_code() {
-        return $this->data->ask_for_participant_code();
-    }
-
-    /**
-     * Returns whether current mode is math prep course mode
-     *
-     * @return bool
-     */
-    public function is_math_prep_course_mode() {
-        return $this->data->is_math_prep_course_mode();
     }
 
     /**
@@ -1013,11 +1027,33 @@ class mod_groupformation_storage_manager {
      * Returns questions
      *
      * @param $category
-     * @param $version
+     * @param string $lang
      * @return array
      */
-    public function get_questions($category, $lang = 'en') {
+    public function get_questions($category) {
         global $DB;
+
+        $lang = get_string('language', 'groupformation');
+
+        if ($category == 'topic' || $category == 'knowledge') {
+            $type = 'range';
+            $temp = $this->get_knowledge_or_topic_values($category);
+            $xmlcontent = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>';
+            $values = mod_groupformation_util::xml_to_array($xmlcontent);
+            $createquestion = function(&$v, $key) use ($category) {
+                $q = new stdClass();
+                $q->id = $key + 1;
+                $q->category = $category;
+                $q->questionid = $key + 1;
+                $q->question = $v;
+                $q->options = array(
+                    100 => get_string('excellent', 'groupformation'), 0 => get_string('none', 'groupformation'));
+                $q->type = $category;
+                $v = $q;
+            };
+            array_walk($values, $createquestion);
+            return $values;
+        }
 
         return $DB->get_records('groupformation_question', array('category' => $category, 'language' => $lang));
     }
@@ -1029,12 +1065,16 @@ class mod_groupformation_storage_manager {
      * @param $userid
      * @return array
      */
-    public function get_questions_randomized_for_user($category, $userid, $lang = 'en') {
-        $questions = array_values($this->get_questions($category, $lang));
-        srand($userid);
-        usort($questions, function($a, $b) {
-            return rand(-1, 1);
-        });
+    public function get_questions_randomized_for_user($category, $userid) {
+        $questions = array_values($this->get_questions($category));
+
+        if (false) {
+            srand($userid);
+            usort($questions, function($a, $b) {
+                return rand(-1, 1);
+            });
+        }
+
         return $questions;
     }
 
@@ -1050,7 +1090,6 @@ class mod_groupformation_storage_manager {
         ));
         $scenarioname = $DB->get_field('groupformation_scenario', 'name', array('id' => $scenario));
         return $scenarioname;
-        // return $this->data->get_scenario_name($scenario);
     }
 
     /**
@@ -1106,6 +1145,12 @@ class mod_groupformation_storage_manager {
         $DB->delete_records('groupformation_stats', array('groupformationid' => $this->groupformationid));
     }
 
+    /**
+     * Returns users that are available for group formation
+     *
+     * @param null $job
+     * @return array
+     */
     public function get_users_for_grouping($job = null) {
         global $DB;
 

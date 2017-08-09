@@ -26,17 +26,17 @@ if (!defined('MOODLE_INTERNAL')) {
 
 class mod_groupformation_data {
 
-    private $criteria = array(
+    private static $criteria = array(
             "big5" => array(
                     "category" => "character",
                     "scenarios" => array(1, 2),
                     "evaluation" => true,
                     "labels" => array(
-                            // TODO discuss with Henrik which questions to use how
+                            // TODO discuss with Henrik which questions to use how.
                             "extraversion" => array(
                                     "scenarios" => array(1 => false, 2 => false),  // False = heterogeneous, True = homogeneous.
                                     "evaluation" => true,  // Use for displaying it to user (to compare to group and course).
-                                    "questionids" => array(12, -1, 13, 14, -15, 16, -17, 18, 6), // Inverse questions = negative.
+                                    "questionids" => array(-1, 6), // Inverse questions = negative.
                                     "significant_id_only" => false,
                                 // True = only use the one questionid with most significant differences between users.
                                     "cutoffs" => array(0.313169217, 0.776242547),
@@ -44,28 +44,28 @@ class mod_groupformation_data {
                             "conscientiousness" => array(
                                     "scenarios" => array(1 => true, 2 => true),
                                     "evaluation" => true,
-                                    "questionids" => array(8, -32, 33, -34, -35, 21, 22, 23, -24),
+                                    "questionids" => array(-3, 8),
                                     "significant_id_only" => false,
                                     "cutoffs" => array(0.456596974, 0.831246163),
                             ),
                             "agreeableness" => array(
                                     "scenarios" => array(1 => true, 2 => true),
                                     "evaluation" => true,
-                                    "questionids" => array(-7, 2, -25, -26),
+                                    "questionids" => array(2, -7, 11),
                                     "significant_id_only" => false,
                                     "cutoffs" => array(0.492136484, 0.799889659),
                             ),
                             "neuroticism" => array(
                                     "scenarios" => array(1 => false, 2 => false),
                                     "evaluation" => true,
-                                    "questionids" => array(27, -4, 28, 9),
+                                    "questionids" => array(-4, 9),
                                     "significant_id_only" => false,
                                     "cutoffs" => array(0.195135503, 0.602511556),
                             ),
                             "openness" => array(
                                     "scenarios" => array(1 => false, 2 => false),
                                     "evaluation" => true,
-                                    "questionids" => array(29, 39, 10, 31, -5),
+                                    "questionids" => array(-5, 10),
                                     "significant_id_only" => false,
                                     "cutoffs" => array(0.348454964, 0.829192095),
                             ),
@@ -226,8 +226,7 @@ class mod_groupformation_data {
     );
 
     // Special mode booleans (can be ignored in normal use cases).
-    private $mathprepcoursemode = false;
-    private $allanswersrequired = false;
+    private static $mathprepcoursemode = true;
 
     /**
      * Returns whether this instance is running in math prep course mode;
@@ -235,22 +234,8 @@ class mod_groupformation_data {
      *
      * @return bool
      */
-    public function is_math_prep_course_mode() {
-        return $this->mathprepcoursemode;
-    }
-
-    /**
-     * Returns extra labels for criteria like fam, learning, big5_xxx
-     *
-     * @param $label
-     * @return array
-     */
-    public function get_extra_labels($label) {
-        if (array_key_exists($label, $this->criteria)) {
-            return array_keys($this->criteria[$label]);
-        } else {
-            return array();
-        }
+    public static function is_math_prep_course_mode() {
+        return self::$mathprepcoursemode;
     }
 
     /**
@@ -259,9 +244,9 @@ class mod_groupformation_data {
      * @param int $scenario
      * @return string
      */
-    public function get_label_set($scenario) {
+    public static function get_label_set($scenario) {
         $labels = array();
-        foreach ($this->criteria as $label => $criterion) {
+        foreach (self::$criteria as $label => $criterion) {
             $scenarios = $criterion["scenarios"];
             if (in_array($scenario, $scenarios)) {
                 $labels[] = $label;
@@ -277,12 +262,12 @@ class mod_groupformation_data {
      * @param $name
      * @return mixed
      */
-    public function get_criterion_specification($name = null) {
+    public static function get_criterion_specification($name = null) {
         if (is_null($name)) {
-            return $this->criteria;
+            return self::$criteria;
         }
-        if (array_key_exists($name, $this->criteria)) {
-            return $this->criteria[$name];
+        if (array_key_exists($name, self::$criteria)) {
+            return self::$criteria[$name];
         } else {
             return null;
         }
@@ -293,7 +278,7 @@ class mod_groupformation_data {
      *
      * @return bool
      */
-    public function ask_for_participant_code() {
+    public static function ask_for_participant_code() {
         $configvalue = get_config('groupformation', 'participant_code');
         if (!is_null($configvalue)) {
             return $configvalue;
@@ -306,15 +291,11 @@ class mod_groupformation_data {
      *
      * @return bool
      */
-    public function import_export_enabled() {
+    public static function import_export_enabled() {
         $configvalue = get_config('groupformation', 'import_export');
         if (!is_null($configvalue)) {
             return $configvalue;
         }
         return true;
-    }
-
-    public function all_answers_required() {
-        return $this->allanswersrequired;
     }
 }

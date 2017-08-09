@@ -33,12 +33,6 @@ require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 class mod_groupformation_xml_loader {
 
     /**
-     * mod_groupformation_xml_loader constructor.
-     */
-    public function __construct() {
-    }
-
-    /**
      * Returns an array with version and number of answers
      *
      * @param $category

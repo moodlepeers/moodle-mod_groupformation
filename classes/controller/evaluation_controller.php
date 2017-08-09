@@ -30,17 +30,17 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.
 
 class mod_groupformation_evaluation_controller {
 
-    /** @var mod_groupformation_storage_manager */
-    private $store;
+    /** @var mod_groupformation_storage_manager The manager of activity data */
+    private $store = null;
 
-    /** @var mod_groupformation_groups_manager */
+    /** @var mod_groupformation_groups_manager The manager of groups data */
     private $groupsmanager;
 
-    /** @var mod_groupformation_user_manager */
-    private $usermanager;
+    /** @var mod_groupformation_user_manager The manager of user data */
+    private $usermanager = null;
 
-    /** @var int This is the id of the activity */
-    private $groupformationid;
+    /** @var int ID of module instance */
+    private $groupformationid = null;
 
     /**
      * mod_groupformation_evaluation_controller constructor.
@@ -56,6 +56,9 @@ class mod_groupformation_evaluation_controller {
 
     /**
      * Renders for no evaluation
+     *
+     * @param string $caption
+     * @return array
      */
     public function no_evaluation($caption = 'no_evaluation_text') {
 
@@ -94,9 +97,7 @@ class mod_groupformation_evaluation_controller {
 
         $cc = new mod_groupformation_criterion_calculator($this->groupformationid);
 
-        if (!$this->usermanager->has_evaluation_values($userid)) {
-            $this->usermanager->set_evaluation_values($userid);
-        }
+        $this->usermanager->set_evaluation_values($userid);
 
         return $cc->get_eval($userid, $groupusers, $courseusers);
     }

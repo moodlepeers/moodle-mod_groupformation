@@ -28,6 +28,7 @@ if (!defined('MOODLE_INTERNAL')) {
     <div class="gf_pad_content" style="">
         <div class="grid">
             <div class="col_m_100">
+
                 <input type="hidden" name="id" value="<?php echo $this->_['cmid']; ?>"/>
                 <?php if (array_key_exists('consentvalue', $this->_)): ?>
                     <div style="padding-bottom: 10px;">
@@ -93,16 +94,51 @@ if (!defined('MOODLE_INTERNAL')) {
                     </div>
                 <?php endif; ?>
                 <p><?php echo $this->_['buttons_infos']; ?></p>
+
+
+
                 <?php foreach ($this->_['buttons'] as $button) { ?>
-                    <button type="<?php echo $button['type']; ?>"
-                            name="<?php echo $button['name']; ?>"
-                            value="<?php echo $button['value']; ?>"
-                            class="gf_button gf_button_pill gf_button_small"
+
+                    <?php if (array_key_exists('modal-id', $button)): ?>
+                        <button type="button" class="gf_button gf_button_pill gf_button_small"
+                                data-toggle="modal" data-target="#<?php echo $button['modal-id']; ?>"
+                                <?php echo $button['state']; ?>
+                        >
+                            <?php echo $button['text']; ?>
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="<?php echo $button['modal-id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel"><?php echo $button['modal-title']; ?></h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <?php echo $button['modal-text']; ?>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo get_string('cancel');?></button>
+                                        <button type="<?php echo $button['type']; ?>"
+                                                name="<?php echo $button['name']; ?>"
+                                                value="<?php echo $button['value']; ?>"
+                                                class="btn btn-primary"><?php echo $button['text']; ?></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php else: ?>
+                        <button type="<?php echo $button['type']; ?>"
+                                name="<?php echo $button['name']; ?>"
+                                value="<?php echo $button['value']; ?>"
+                                class="gf_button gf_button_pill gf_button_small"
                             <?php echo $button['state']; ?>
-                    >
-                        <?php echo $button['text']; ?>
-                    </button>
+                        >
+                            <?php echo $button['text']; ?>
+                        </button>
+                    <?php endif; ?>
                 <?php } ?>
+
                 <!--            </form>-->
             </div>
         </div>

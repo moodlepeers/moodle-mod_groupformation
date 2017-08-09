@@ -28,16 +28,22 @@ abstract class mod_groupformation_basic_view_controller {
 
     /** @var int ID of the course */
     protected $groupformationid = null;
+
     /** @var Controller instance for user */
     protected $controller = null;
+
     /** @var mod_groupformation_storage_manager instance of store */
     protected $store = null;
+
     /** @var mod_groupformation_template_builder View builder */
     protected $view = null;
+
     /** @var string File name for wrapper */
     protected $wrappername = 'wrapper_view';
+
     /** @var array Template names */
     protected $templatenames = array();
+
     /** @var string Title of page */
     protected $title = '<title>';
 

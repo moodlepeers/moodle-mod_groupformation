@@ -163,7 +163,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
     private function generate_html_for_js(&$mform) {
         global $PAGE;
 
-        $data = new mod_groupformation_data();
+        $mathprepcourse = mod_groupformation_data::is_math_prep_course_mode();
 
         // Open div tag for js related content.
         $mform->addElement('html', '<div id="js-content" style="display:none;">');
@@ -199,7 +199,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
             get_string('scenario_homeworkgroups_description', 'groupformation') . '</small></p>
                     </label>
                 </div>
-                        ' . (($data->is_math_prep_course_mode()) ? '' : '<div class="col_m_33">
+                        ' . (($mathprepcourse) ? '' : '<div class="col_m_33">
                             <input type="radio" name="js_szenario" id="presentation" value="presentation" />
                                 <label class="col_m_100 szenarioLabel" for="presentation">
                                     <div class="sz_header">' .
@@ -322,7 +322,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 
         // Close wrapper for preknowledge.
         $mform->addElement('html', '</div>');
-        if (!$data->is_math_prep_course_mode()) {
+        if (!$mathprepcourse) {
             // Wrapper for topics.
             $mform->addElement('html', '<div class="gf_settings_pad">');
 
@@ -432,7 +432,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
             ' . get_string('maxmembers', 'groupformation') . '</label>
             <input type="number" class="group_opt" id="group_size" min="0" value="0" /></div>
             ' .
-            (($data->is_math_prep_course_mode()) ? '' : '<div class="col_m_50">
+            (($mathprepcourse) ? '' : '<div class="col_m_50">
                 <label>
                     <input type="radio" name="group_opt" id="group_opt_numb" value="numb_of_groups"/>
                     ' . get_string('maxgroups', 'groupformation') . '
@@ -495,7 +495,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
         // Close wrapper for evaluation options.
         $mform->addElement('html', '</div>');
 
-        if (!$data->is_math_prep_course_mode()) {
+        if (!$mathprepcourse) {
             // Add checkbox only-active-students.
             $mform->addElement('html', '
             <div class="gf_pad_header">
@@ -515,6 +515,15 @@ class mod_groupformation_mod_form extends moodleform_mod {
                   ' . get_string('emailnotifications_description', 'groupformation') . '</label>
                   <span id="emailnotificationsStateLabel" class="optional"></span>
                     </div>');
+
+        $mform->addElement('html', '
+            <div class="gf_pad_header">
+                <label class="gf_label" for="id_js_allanswersrequired">
+                  <input type="checkbox" id="id_js_allanswersrequired" name="chbAllanswersrequired" value="allanswersrequired">
+                  ' . get_string('allanswersrequired_description', 'groupformation') .
+            '</label><span id="allanswersrequiredStateLabel" class="optional"></span><span class="toolt" tooltip="' .
+            get_string('groupoption_allanswersrequired', 'groupformation') . '"></span>
+                            </div>');
 
         // Close wrapper of the szenario.
         $mform->addElement('html', '</div>');
@@ -610,6 +619,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
         $mform->disabledIf('maxpoints', 'evaluationmethod', 'neq', '2');
         $mform->setType('maxpoints', PARAM_NUMBER);
         $mform->addElement('checkbox', 'onlyactivestudents', get_string('onlyactivestudents', 'groupformation'));
+        $mform->addElement('checkbox', 'allanswersrequired', get_string('allanswersrequired', 'groupformation'));
         $mform->addElement('checkbox', 'emailnotifications', get_string('emailnotifications', 'groupformation'));
         $mform->setDefault('emailnotifications', false); // TODO delete if feature is fixed.
 

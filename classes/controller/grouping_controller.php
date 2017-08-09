@@ -161,7 +161,7 @@ class mod_groupformation_grouping_controller {
     /**
      * POST action to start job, sets it to 'waiting'
      */
-    public function start($course, $cm) {
+    public function start($cm) {
 
         $ajm = new mod_groupformation_advanced_job_manager();
 
@@ -177,7 +177,7 @@ class mod_groupformation_grouping_controller {
         $enrolledusers = get_enrolled_users($context, 'mod/groupformation:onlystudent');
 
         foreach (array_values($enrolledusers) as $user) {
-            groupformation_set_activity_completion($course, $cm, $user->id);
+            groupformation_set_activity_completion($cm->id, $user->id);
         }
 
         return $users;
@@ -283,7 +283,7 @@ class mod_groupformation_grouping_controller {
 
         switch ($this->state) {
             case 'ready':
-                // 000000.
+                // 000000 = none.
                 $assigns['status'] = array(
                         get_string('grouping_status_1', 'groupformation'), 0);
                 $array['button1']['value'] = 1;

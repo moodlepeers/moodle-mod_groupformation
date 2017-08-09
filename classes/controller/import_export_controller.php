@@ -31,11 +31,20 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/util/csv_writer.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
 
 class mod_groupformation_import_export_controller {
-    private $store;
-    private $usermanager;
-    private $groupformationid;
-    private $cm;
+
+    /** @var int ID of module instance */
+    private $groupformationid = null;
+
+    /** @var mod_groupformation_storage_manager The manager of activity data */
+    private $store = null;
+
+    /** @var mod_groupformation_user_manager The manager of user data */
+    private $usermanager = null;
+
+    /** @var int ID of the course module */
     private $cmid;
+
+    /** @var mod_groupformation_template_builder View template  */
     private $view = null;
 
     /**
@@ -75,9 +84,14 @@ class mod_groupformation_import_export_controller {
                 'contextid' => $context->id, 'component' => 'mod_groupformation', 'filearea' => 'groupformation_answers',
                 'itemid' => $userid, 'filepath' => '/', 'filename' => $filename);
 
-        return $this->save_file_and_get_url($fileinfo, $content);
+        return groupformation_get_url($fileinfo, $content);
     }
 
+    /**
+     * Returns infos about import export
+     *
+     * @return array
+     */
     public function load_info() {
         global $USER;
 

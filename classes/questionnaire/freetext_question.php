@@ -24,57 +24,29 @@ if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
 }
 
-require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/basic_question.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/input_question.php');
 
-class mod_groupformation_freetext_question extends mod_groupformation_basic_question {
+class mod_groupformation_freetext_question extends mod_groupformation_input_question {
 
     /**
-     * Prints HTML of a freetext question
+     * Returns input of question
      *
-     * @param $highlight
-     * @param $required
+     * @return string
      */
-    public function print_html($highlight, $required) {
-
-
+    public function get_input() {
         $category = $this->category;
         $questionid = $this->questionid;
-        $question = $this->question;
-        $options = $this->options;
         $answer = $this->answer;
 
-        if ($answer == false) {
-            $answer = "";
-        }
+        $input = "";
 
-        if ($answer != "") {
-            echo '<tr>';
-            echo '<th scope="row">' . $question . '</th>';
-        } else {
-            if ($highlight) {
-                echo '<tr class="noAnswer">';
-                echo '<th scope="row">' . $question . '</th>';
-            } else {
-                echo '<tr>';
-                echo '<th scope="row">' . $question . '</th>';
-            }
-        }
+        $input .= '<textarea maxlength="255" class="freetext-textarea form-control" rows="5" name="';
+        $input .= $category . $questionid;
+        $input .= '" style="width: 100%;">';
+        $input .= ((intval($answer) == -1) ? '' : $answer);
+        $input .= '</textarea>';
 
-        echo '<td colspan="100%" class="freetext">';
-        echo '<textarea maxlength="255" class="freetext-textarea form-control" rows="5" 
-                name="' . $category . $questionid . '" style="width: 100%;">'.((intval($answer) == -1)?"":$answer).'</textarea>';
-        echo '<br>';
-        if (!$required) {
-            echo '<div class="form-check">';
-            echo '    <label class="form-check-label">';
-            echo '        <input class="freetext-checkbox" type="checkbox" name="'.$category.$questionid.'_noanswer"/>';
-            echo get_string('freetext_noanswer','groupformation');
-            echo '    </label>';
-            echo '</div>';
-        }
-        echo '</td>';
-
-        echo '</tr>';
+        return $input;
     }
 
     /**
@@ -95,6 +67,23 @@ class mod_groupformation_freetext_question extends mod_groupformation_basic_ques
         } else if (isset($answer) && $answer != "") {
             return array('save', $answer);
         }
+        return null;
+    }
+
+    /**
+     * Creates random answer
+     */
+    public function create_random_answer() {
+        return str_shuffle ('ABCDEFGH');
+    }
+
+    /**
+     * Converts options if string
+     *
+     * @param $options
+     * @return array
+     */
+    protected function convert_options($options) {
         return null;
     }
 }

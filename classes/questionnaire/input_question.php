@@ -26,10 +26,17 @@ if (!defined('MOODLE_INTERNAL')) {
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/basic_question.php');
 
-class mod_groupformation_multiselect_question extends mod_groupformation_basic_question {
+abstract class mod_groupformation_input_question extends mod_groupformation_basic_question {
 
     /**
-     * Prints HTML of a multiselect question
+     * Returns input of question
+     *
+     * @return string
+     */
+    public abstract function get_input();
+
+    /**
+     * Prints HTML of a freetext question
      *
      * @param $highlight
      * @param $required
@@ -43,7 +50,7 @@ class mod_groupformation_multiselect_question extends mod_groupformation_basic_q
         $answer = $this->answer;
 
         if ($answer == false) {
-            $answer = -1;
+            $answer = "";
         }
 
         if ($answer != "") {
@@ -59,23 +66,12 @@ class mod_groupformation_multiselect_question extends mod_groupformation_basic_q
             }
         }
 
-        $answers = array();
-        if ($answer != -1) {
-            $answer = substr($answer, 5);
-            $answers = explode(",", $answer);
-        }
-
         echo '<td colspan="100%" class="freetext">';
-        echo '<div class="form-group">';
-        echo '<select multiple class="freetext-textarea form-control" name="';
-        echo $category . $questionid . '[]" style="width: 80%;">';
-        foreach ($options as $key => $option) {
-            echo '<option value="' . $key . '" ' . ((in_array($key, $answers)) ? 'selected' : '') . '>' . $option . '</option>';
-        }
-        echo '  </select>';
-        echo '</div>';
+
+        echo $this->get_input();
+
+        echo '<br>';
         if (!$required) {
-            echo '<br>';
             echo '<div class="form-check">';
             echo '    <label class="form-check-label">';
             echo '        <input class="freetext-checkbox" type="checkbox" name="'.$category.$questionid.'_noanswer"/>';
@@ -83,7 +79,6 @@ class mod_groupformation_multiselect_question extends mod_groupformation_basic_q
             echo '    </label>';
             echo '</div>';
         }
-
         echo '</td>';
 
         echo '</tr>';
@@ -96,22 +91,35 @@ class mod_groupformation_multiselect_question extends mod_groupformation_basic_q
      */
     public function read_answer() {
 
-        $parameter = $this->category . $this->questionid;
+        $answerparameter = $this->category . $this->questionid;
+        $noanswerparameter = $answerparameter.'_noanswer';
 
-        $answer = optional_param_array($parameter, array(), PARAM_RAW);
-        $answer = 'list:' . implode(",", $answer);
+        $answer = optional_param($answerparameter, null, PARAM_RAW);
+        $noanswer = optional_param($noanswerparameter, null, PARAM_RAW);
 
-        if (isset($answer) && $answer == 'list:') {
+        if ((isset($noanswer) && $noanswer == "on") || $answer == "") {
             return array('delete', null);
-        } else if (isset($answer) && $answer != 'list:') {
+        } else if (isset($answer) && $answer != "") {
             return array('save', $answer);
         }
         return null;
     }
 
+    /**
+     * Creates random answer
+     */
     public function create_random_answer() {
-        var_dump($this->options);
-        return "1,2";
+        return str_shuffle ('ABCDEFGH');
+    }
+
+    /**
+     * Converts options if string
+     *
+     * @param $options
+     * @return array
+     */
+    protected function convert_options($options) {
+        return null;
     }
 }
 

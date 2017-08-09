@@ -1515,5 +1515,20 @@ function xmldb_groupformation_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2017060401, 'groupformation');
     }
 
+    if ($oldversion < 2017071100) {
+
+        // Define field allanswersrequired to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('allanswersrequired', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '0', 'version');
+
+        // Conditionally launch add field allanswersrequired.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2017071100, 'groupformation');
+    }
+
     return true;
 }

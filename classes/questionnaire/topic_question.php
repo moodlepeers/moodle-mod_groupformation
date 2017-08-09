@@ -27,6 +27,7 @@ if (!defined('MOODLE_INTERNAL')) {
 
 class mod_groupformation_topic_question extends mod_groupformation_basic_question {
 
+    /** @var string Type of question */
     protected $type = 'topics';
 
     /**
@@ -51,7 +52,7 @@ class mod_groupformation_topic_question extends mod_groupformation_basic_questio
      *
      * @param $answer
      */
-    public function set_answer($answer){
+    public function set_answer($answer) {
         $this->answer = $answer;
     }
 
@@ -65,6 +66,20 @@ class mod_groupformation_topic_question extends mod_groupformation_basic_questio
         } else {
             return null;
         }
+    }
+
+    public function create_random_answer() {
+        return $this->questionid;
+    }
+
+    /**
+     * Converts options if string
+     *
+     * @param $options
+     * @return array
+     */
+    protected function convert_options($options) {
+        return null;
     }
 }
 

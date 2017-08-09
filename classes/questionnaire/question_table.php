@@ -27,9 +27,15 @@ if (!defined('MOODLE_INTERNAL')) {
 
 class mod_groupformation_question_table {
 
+    /** @var string Category of questionnaire page */
     private $category;
 
-    function __construct($category) {
+    /**
+     * mod_groupformation_question_table constructor.
+     *
+     * @param $category
+     */
+    public function __construct($category) {
         $this->category = $category;
     }
 
@@ -52,24 +58,8 @@ class mod_groupformation_question_table {
             echo '<th scope="col">';
             echo get_string('tabletitle_' . $this->category, 'groupformation');
             echo '</th>';
-
-            //if ($tabletype == 'likert') {
-            //
-            //    $headersize = count($headeroptarray);
-            //
-            //    echo '<th scope="col" colspan="' . $headersize . '"><span style="float:left">' . $headeroptarray[0] . '</span>
-            //                                                                            <span style="float:right">' .
-            //        $headeroptarray[$headersize - 1] . '</span></th>';
-            //} else if ($tabletype == 'type_knowledge') {
-            //    echo '<th scope="col">';
-            //    echo '<div class="legend">';
-            //    echo get_string('knowledge_scale', 'groupformation');
-            //    echo '</div>';
-            //    echo '</th>';
-            //} else {
-                echo '<th scope="col" colspan="100%">';
-                echo '</th>';
-            //}
+            echo '<th scope="col" colspan="100%">';
+            echo '</th>';
 
             echo '</tr></thead><tbody>';
         }

@@ -21,43 +21,34 @@
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
-require_once(dirname(__FILE__) . '/lib.php');
-require_once(dirname(__FILE__) . '/locallib.php');
-
-// Read URL params.
-$id = optional_param('id', 0, PARAM_INT);
-$doshow = optional_param('do_show', 'grouping', PARAM_TEXT);
-
-// Import jQuery and js file.
-groupformation_add_jquery($PAGE, 'survey_functions.js');
-
-// Determine instances of course module, course, groupformation.
-groupformation_determine_instance($id, $cm, $course, $groupformation);
-
-// Require user login if not already logged in.
-require_login($course, true, $cm);
-
-// Get useful stuff.
-$context = context_module::instance($cm->id);
-$userid = $USER->id;
-
-if (!has_capability('mod/groupformation:editsettings', $context)) {
-    $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
-        'id' => $id, 'do_show' => 'view'));
-    redirect($returnurl);
-} else {
-    $currenttab = $doshow;
-}
+require_once('../../config.php');
+require('header.php');
 
 // Get data for HTML output.
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/controller/grouping_controller.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/grouping_view_controller.php');
 
-$store = new mod_groupformation_storage_manager ($groupformation->id);
+$filename = substr(__FILE__, strrpos(__FILE__, '\\') + 1);
+$url = new moodle_url('/mod/groupformation/' . $filename, $urlparams);
 
-// Set data and viewStatus of groupingView, after possible db update.
+// Set PAGE config.
+$PAGE->set_url($url);
+$PAGE->set_title(format_string($groupformation->name));
+$PAGE->set_heading(format_string($course->fullname));
+
+// Import jQuery and js file.
+groupformation_add_jquery($PAGE, 'survey_functions.js');
+
+if (!has_capability('mod/groupformation:editsettings', $context)) {
+    $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
+            'id' => $id, 'do_show' => 'view'));
+    redirect($returnurl);
+} else {
+    $currenttab = $doshow;
+}
+
+$store = new mod_groupformation_storage_manager ($groupformation->id);
 $controller = new mod_groupformation_grouping_controller($groupformation->id, $cm);
 
 if ((data_submitted()) && confirm_sesskey()) {
@@ -68,7 +59,7 @@ if ((data_submitted()) && confirm_sesskey()) {
     $delete = optional_param('delete', null, PARAM_BOOL);
 
     if (isset ($start) && $start == 1) {
-        $controller->start($course, $cm);
+        $controller->start($cm);
     } else if (isset ($abort) && $abort == 1) {
         $controller->abort();
     } else if (isset ($adopt) && $adopt == 1) {
@@ -82,12 +73,6 @@ if ((data_submitted()) && confirm_sesskey()) {
         'id' => $id, 'do_show' => 'grouping'));
     redirect($returnurl);
 }
-
-// Set PAGE config.
-$PAGE->set_url('/mod/groupformation/grouping_view.php', array(
-    'id' => $cm->id, 'do_show' => $doshow));
-$PAGE->set_title(format_string($groupformation->name));
-$PAGE->set_heading(format_string($course->fullname));
 
 echo $OUTPUT->header();
 

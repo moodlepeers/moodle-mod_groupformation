@@ -26,21 +26,37 @@ if (!defined('MOODLE_INTERNAL')) {
 
 abstract class mod_groupformation_basic_question {
 
+    /** @var string Category of question */
     protected $category;
+
+    /** @var int ID of question */
     protected $questionid;
+
+    /** @var string Text of question  */
     protected $question;
+    /** @var array Options of question */
     protected $options;
+
+    /** @var mixed Answer of question */
     protected $answer;
+
+    /** @var string Type of question */
     protected $type = 'basic';
 
     /**
      * mod_groupformation_dropdown_question constructor.
+     *
+     * @param $category
+     * @param $questionid
+     * @param null $question
+     * @param null $options
+     * @param null $answer
      */
-    function __construct($category, $questionid, $question = null, $options = null, $answer = null) {
+    public function __construct($category, $questionid, $question = null, $options = null, $answer = null) {
         $this->category = $category;
         $this->questionid = $questionid;
         $this->question = $question;
-        $this->options = $options;
+        $this->options = $this->convert_options($options);
         $this->answer = $answer;
     }
 
@@ -71,6 +87,31 @@ abstract class mod_groupformation_basic_question {
         return $this->options;
     }
 
-
+    /**
+     * Reads answer from POST request
+     * @return mixed
+     */
     public abstract function read_answer();
+
+    /**
+     * Creates random answer
+     *
+     * @return mixed
+     */
+    public abstract function create_random_answer();
+
+    /**
+     * Converts options if string
+     *
+     * @param $options
+     * @return array
+     */
+    protected function convert_options($options) {
+        if (!is_null($options) && is_string($options)) {
+            $temp = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $options . ' </OPTIONS>';
+            $options = mod_groupformation_util::xml_to_array($temp);
+        }
+
+        return $options;
+    }
 }

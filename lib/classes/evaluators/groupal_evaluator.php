@@ -108,11 +108,11 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
 
     /**
      * @param float[] $performanceindices (generic List)
-     * @return mod_groupformation_statistics
+     * @return mod_groupformation_stats
      */
     public static function get_performance_index($performanceindices) {
         if (count($performanceindices) < 1) {
-            return new mod_groupformation_statistics();
+            return new mod_groupformation_stats();
         }
 
         // Calculate avergae of NPIs
@@ -135,7 +135,7 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
         // Normalize stdNPIs
         $nstddev = 1 / (1 + $stddev); // float.
         $performanceindex = count($performanceindices) < 2 ? $avg : $avg * $nstddev;
-        $s = new mod_groupformation_statistics();
+        $s = new mod_groupformation_stats();
 
         $s->n = count($performanceindices);
         $s->avg = $avg;
@@ -204,7 +204,7 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
             // (otherwise the criterion will be unthought weighted ).
 
             $d = $this->distancefunction->normalized_distance($c1, $c2);
-
+            /** @var mod_groupformation_specific_criterion $c1 */
             $wd = $d * $c1->get_weight();
             if ($c1->is_homogeneous()) {
                 $homval += $wd;

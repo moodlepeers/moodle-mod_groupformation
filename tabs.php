@@ -21,15 +21,15 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
  */
-defined('MOODLE_INTERNAL') or die ('not allowed');
+require_once('../../config.php');
 
 $tabs = array();
 $row = array();
 $inactive = array();
 $activated = array();
+
 $store = new mod_groupformation_storage_manager ($groupformation->id);
-$data = new mod_groupformation_data();
-$groupsstore = new mod_groupformation_groups_manager ($groupformation->id);
+$groupsmanager = new mod_groupformation_groups_manager ($groupformation->id);
 $usermanager = new mod_groupformation_user_manager ($groupformation->id);
 
 // Some pages deliver the cmid instead the id.
@@ -39,17 +39,16 @@ if (isset ($cmid) and intval($cmid) and $cmid > 0) {
     $usedid = $id;
 }
 
-$context = context_module::instance($usedid);
-
-
-$courseid = optional_param('courseid', false, PARAM_INT);
-
 if (!isset ($currenttab)) {
-    $currenttab = '';
+    $currenttab = 'view';
 }
 
+$editsettings = has_capability('mod/groupformation:editsettings', $context);
+$onlystudent = has_capability('mod/groupformation:onlystudent', $context);
+
 // Has editing rights -> course manager or higher.
-if (has_capability('mod/groupformation:editsettings', $context)) {
+if ($editsettings) {
+
     // Analysis_view.
     $analyseurl = new moodle_url ('/mod/groupformation/analysis_view.php', array(
         'id' => $usedid, 'do_show' => 'analysis'));
@@ -66,14 +65,14 @@ if (has_capability('mod/groupformation:editsettings', $context)) {
     $row [] = new tabobject ('view', $questionnaireviewurl->out(), get_string('tab_preview', 'groupformation'));
 
     // The import/export view.
+    // TODO Only activate if export of study is needed.
     if (false) {
         $exporturl = new moodle_url ('/mod/groupformation/export_view.php', array(
             'id' => $usedid, 'do_show' => 'export'));
         $row [] = new tabobject ('export', $exporturl->out(), 'Export');
     }
-} else if (!has_capability('mod/groupformation:editsettings', $context) &&
-    has_capability('mod/groupformation:onlystudent', $context)
-) {
+
+} else if (!$editsettings && $onlystudent) {
     // The view -> student mode.
     $viewurl = new moodle_url ('/mod/groupformation/view.php', array(
         'id' => $usedid, 'do_show' => 'view'));
@@ -103,15 +102,16 @@ if (has_capability('mod/groupformation:editsettings', $context)) {
     $row [] = new tabobject ('group', $groupurl->out(), get_string('tab_group', 'groupformation'));
 
     // The import/export view.
-    if ($data->import_export_enabled()) {
+    if (mod_groupformation_data::import_export_enabled()) {
+
         $groupurl = new moodle_url ('/mod/groupformation/import_export_view.php', array(
             'id' => $usedid, 'do_show' => 'import_export'));
         $row [] = new tabobject ('import_export', $groupurl->out(), 'Import/Export');
+
     }
 }
 
-
-if (count($row) >= 1) {
+if (count($row) >= 1 && ($editsettings || $usermanager->get_consent($userid) || $groupsmanager->groups_created())) {
     $tabs [] = $row;
 
     print_tabs($tabs, $currenttab, $inactive, $activated);

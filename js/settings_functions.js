@@ -179,6 +179,11 @@ require(['jquery', 'jqueryui'], function($) {
             if ($('#id_emailnotifications').prop('checked')) {
                 $('#id_js_emailnotifications').prop('checked', true);
             }
+
+            if ($('#id_allanswersrequired').prop('checked')) {
+                $('#id_js_allanswersrequired').prop('checked', true);
+            }
+
         }
 
         $('.szenarioLabel').click(function () {
@@ -524,6 +529,14 @@ require(['jquery', 'jqueryui'], function($) {
                 $('#id_onlyactivestudents').prop('checked', false);
             } else {
                 $('#id_onlyactivestudents').prop('checked', true);
+            }
+        });
+
+        $('#id_js_allanswersrequired').click(function () {
+            if ($('#id_allanswersrequired').prop('checked')) {
+                $('#id_allanswersrequired').prop('checked', false);
+            } else {
+                $('#id_allanswersrequired').prop('checked', true);
             }
         });
 

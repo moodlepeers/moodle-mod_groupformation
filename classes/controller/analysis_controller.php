@@ -32,7 +32,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/advan
 
 class mod_groupformation_analysis_controller {
 
-    /** @var int The id of the groupformation activity */
+    /** @var int ID of module instance */
     private $groupformationid = null;
 
     /** @var mod_groupformation_storage_manager The manager of activity data */
@@ -44,12 +44,16 @@ class mod_groupformation_analysis_controller {
     /** @var int state of questionnaire */
     private $state = null;
 
+    /** @var int ID of course module*/
+    public $cmid = null;
+
     /**
      * Creates instance of analysis controller
      *
      * @param int $groupformationid
      */
     public function __construct($groupformationid, $cm) {
+        $this->cmid = $cm->id;
         $this->groupformationid = $groupformationid;
         $this->store = new mod_groupformation_storage_manager($groupformationid);
         $this->usermanager = new mod_groupformation_user_manager($groupformationid);
@@ -200,6 +204,11 @@ class mod_groupformation_analysis_controller {
         return $assigns;
     }
 
+    /**
+     * Returns topic statistics
+     *
+     * @return array
+     */
     public function load_topic_statistics() {
         $assigns = array();
 

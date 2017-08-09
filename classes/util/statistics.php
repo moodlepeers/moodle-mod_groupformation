@@ -13,8 +13,9 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
- * Prints a particular instance of groupformation questionnaire
+ * This is a csv writer for exporting DB data
  *
  * @package mod_groupformation
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
@@ -24,40 +25,51 @@ if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
 }
 
-require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/input_question.php');
-
-class mod_groupformation_number_question extends mod_groupformation_input_question {
+class mod_groupformation_statistics {
 
     /**
-     * Returns input of question
+     * Returns mean of values
      *
-     * @return string
+     * @param array $values
+     * @return float
      */
-    public function get_input() {
-        $category = $this->category;
-        $questionid = $this->questionid;
-        $options = $this->options;
-        $answer = $this->answer;
+    public static function mean($values) {
+        $sum = array_sum($values);
 
-        $input = "";
-
-        $input .= '<input style="height:35px" class="freetext-textarea form-control" type="number" min="';
-        $input .= $options[0] . '" max="' . $options[1] . '" value="' . ((is_number($answer)) ? intval($answer) : "") . '" name="';
-        $input .= $category;
-        $input .= $questionid;
-        $input .= '">';
-
-        return $input;
+        return floatval($sum) / count($values);
     }
 
     /**
-     * Returns random answer
+     * Returns variance for values
      *
-     * @return int
+     * @param array $values
+     * @param null $mean
+     * @return float
      */
-    public function create_random_answer() {
-        $options = $this->options;
-        return rand($options[0], $options[1]);
+    public static function variance($values, $mean = null) {
+        if (is_null($mean)) {
+            $mean = self::mean($values);
+        }
+        $temp = 0;
+
+        foreach ($values as $user) {
+            $temp += pow($user - $mean, 2);
+        }
+        return floatval($temp) / count($values);
     }
+
+    /**
+     * Returns standard deviation for values
+     *
+     * @param array $values
+     * @param null $variance
+     * @return float
+     */
+    public static function std_deviation($values, $variance = null) {
+        if (is_null($variance)) {
+            $variance = self::variance($values);
+        }
+        return sqrt($variance);
+    }
+
 }
-

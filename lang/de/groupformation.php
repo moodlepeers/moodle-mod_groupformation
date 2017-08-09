@@ -144,7 +144,7 @@ $string ['questionnaire_press_preview'] = 'Klicken Sie auf "Vorschau", um den Fr
 $string ['questionnaire_no_more_questions'] = 'Es gibt keine weiteren Fragen zu beantworten.';
 $string ['questionnaire_press_beginning_submit'] = 'Klicken Sie auf "Zur Anfangsseite", um zum Anfang zurückzukehren. Dort können Sie ihren Fragebogen entgültig abgeben.';
 $string ['questionnaire_go_to_start'] = 'Zur Anfangsseite';
-$string ['questionnaire_submit'] = 'Abgeben';
+$string ['questionnaire_submit'] = 'Antworten abgeben';
 $string ['questionnaire_submit_disabled_teacher'] = 'Abgeben ist deaktiviert, da dies nur eine Vorschau ist.';
 $string ['questionnaire_preview'] = 'Das ist eine Vorschau des Fragebogens.';
 $string ['category_general'] = 'Allgemeines';
@@ -476,15 +476,21 @@ $string['topic'] = "Thema";
 $string['participant_code_title'] = "Persönlicher Teilnehmercode";
 $string['participant_code_header'] = "Bitte legen Sie sich einen persönlichen Teilnehmercode nach dem folgenden Schema an:";
 $string['participant_code_rules'] = "1. Vorname Ihrer Mutter (erste 2 Buchstaben, z.B. EV für Eva)<br>
-2. Geburtsjahr Ihrer Mutter (letzte 2 Ziffern, z.B. 00 für 1900)<br>
+2. Geburtsmonat Ihrer Mutter (als zwei Ziffern, z.B. 07 für Juli)<br>
 3. Vorname Ihres Vaters (erste 2 Buchstaben, z.B. AD für Adam)<br>
-4. Geburtsjahr Ihres Vaters (letzte 2 Ziffern, z.B. 01 für 1901)<br><br>
+4. Geburtsmonat Ihres Vaters (als zwei Ziffern, z.B. 11 für November)<br><br>
 Bitte verwenden Sie keine Umlaute, sondern ersetzen Sie diese durch normale Buchstaben<br>
 (Ä &rarr; A; Ö &rarr; O; Ü &rarr; U; ß &rarr; S)";
-$string['participant_code_example'] = "Beispiel: EV00AD01";
+$string['participant_code_example'] = "Beispiel: EV07AD11";
 $string['participant_code_footer'] = "Ihr persönlicher Teilnehmercode lautet";
 
 $string['participant_code_alert_message'] = 'Sie müssen einen gültigen Teilnehmercode eingeben bevor Sie den Fragebogen beantworten können.';
+
+$string['submit-modal-title'] = 'Antworten abgeben';
+$string['submit-modal-text'] = 'Für die wissenschaftliche Studie und die Bildung von Lerngruppen ist es wichtig, dass sie ehrlich und konzentriert die Fragen beantworten. Wir würden uns freuen, wenn Sie uns dabei unterstützen.
+
+Klicken Sie auf \'Abbrechen\' falls Sie ihre Antworten überarbeiten möchten';
+
 
 $string ['questionnaire_press_to_begin_participant_code'] = 'Geben Sie ihren Teilnehmercode ein und stimmen Sie den Bedingungen zu. Klicken Sie auf "Weiter", um fortzufahren.';
 
@@ -517,3 +523,17 @@ $string['page_title_export'] = 'Export';
 $string['topics_statistics'] = 'Statistik über angebotene Themen';
 $string['topics_statistics_score'] = 'Wert [0-1]';
 $string['topics_statistics_description'] = 'Die folgenden Werte stellen eine Statistik dar, wie beliebt die angebotenen Themen sind. Ein Thema mit einem höheren Wert ist beliebter als ein Thema mit niedrigen Wert.';
+
+$string ['category_demographic'] = 'Demografie';
+$string ['tabletitle_demographic'] = 'Demografie';
+
+$string ['category_times'] = 'Verfügbarkeit';
+$string ['tabletitle_times'] = 'Verfügbarkeit';
+
+$string ['category_skills'] = 'Erfahrung';
+$string ['tabletitle_skills'] = 'Erfahrung';
+
+$string ['allanswersrequired'] = 'Es müssen alle Fragen des Fragebogens beantwortet werden.';
+$string ['allanswersrequired_description'] = 'Es müssen alle Fragen des Fragebogens beantwortet werden.';
+$string ['groupoption_allanswersrequired'] = 'Damit optimierte Gruppen gebildet werden können, werden alle Antworten eines Studierenden benötigt. Beantwortet ein Studierender den Fragebogen nicht vollständig wird dieser lediglich randomisiert gruppiert.';
+

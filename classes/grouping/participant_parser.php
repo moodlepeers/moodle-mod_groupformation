@@ -28,13 +28,21 @@ require_once($CFG->dirroot . '/mod/groupformation/lib/classes/criteria/specific_
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/participant.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/criterion_calculator.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 
 class mod_groupformation_participant_parser {
-    private $groupformationid;
+
+    /** @var int ID of module instance */
+    public $groupformationid;
+
+    /** @var mod_groupformation_criterion_calculator The calculator for criteria */
     private $criterioncalculator;
-    private $usermanager;
+
+    /** @var mod_groupformation_storage_manager The manager of activity data */
     private $store;
-    private $data;
+
+    /** @var mod_groupformation_user_manager The manager of user data */
+    private $usermanager;
 
     /**
      * mod_groupformation_participant_parser constructor.
@@ -45,7 +53,6 @@ class mod_groupformation_participant_parser {
         $this->store = new mod_groupformation_storage_manager ($groupformationid);
         $this->usermanager = new mod_groupformation_user_manager($this->groupformationid);
         $this->criterioncalculator = new mod_groupformation_criterion_calculator ($groupformationid);
-        $this->data = new mod_groupformation_data();
     }
 
     /**
@@ -53,24 +60,33 @@ class mod_groupformation_participant_parser {
      *
      * @param $users
      * @param $labels
+     * @param $weights
+     *
      * @return array
      */
-    private function parse($users, $labels) {
+    private function parse($users, $labels, $weights = null) {
+
         $participants = array();
         foreach ($users as $user) {
             $position = 0;
             $participant = null;
 
             foreach ($labels as $label) {
-                $value = abs($user->$label);
+                $value = $user->$label;
                 $homogen = $value["homogeneous"];
                 unset ($value["homogeneous"]);
+                $value = array_map('abs', $value);
                 $minval = 0.0;
                 $maxval = 1.0;
-                $weight = 1;
 
-                if ($label == 'general') {
-                    $weight = (count($labels) - 1) / 2;
+                if (!is_null($weights)) {
+                    $weight = $weights[$label];
+                } else {
+                    $weight = 1;
+
+                    if ($label == 'general') {
+                        $weight = (count($labels) - 1) / 2;
+                    }
                 }
 
                 $criterion = new mod_groupformation_specific_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
@@ -84,7 +100,6 @@ class mod_groupformation_participant_parser {
             }
             $participants [] = $participant;
         }
-
         return $participants;
     }
 
@@ -129,7 +144,7 @@ class mod_groupformation_participant_parser {
      * @param $specs
      * @return array
      */
-    public function build_participants($users, $specs = null) {
+    public function build_participants($users, $specs = null, $weights = null) {
         if (count($users) == 0) {
             return array();
         }
@@ -143,7 +158,7 @@ class mod_groupformation_participant_parser {
         if (is_null($specs)) {
             $labels = $this->store->get_label_set();
             foreach ($labels as $label) {
-                $criteriaspecs[$label] = $this->data->get_criterion_specification($label);
+                $criteriaspecs[$label] = mod_groupformation_data::get_criterion_specification($label);
             }
         } else {
             $criteriaspecs = $specs;
@@ -161,6 +176,7 @@ class mod_groupformation_participant_parser {
             $object = new stdClass ();
             $object->id = $user;
             foreach ($criteriaspecs as $criterion => $spec) {
+
                 if (in_array($scenario, $spec['scenarios'])) {
                     $points = array();
                     if ($this->usermanager->has_answered_everything($user)) {
@@ -178,13 +194,12 @@ class mod_groupformation_participant_parser {
                         $totallabel [] = $name;
                     }
                 }
-
             }
 
             $array [] = $object;
         }
         $totallabel = array_unique($totallabel);
-        $res = $this->parse($array, $totallabel);
+        $res = $this->parse($array, $totallabel, $weights);
         $endtime = microtime(true);
         $comptime = $endtime - $starttime;
 

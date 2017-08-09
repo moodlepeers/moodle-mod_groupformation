@@ -15,18 +15,29 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version information
+ * Header part for each view file in the module
  *
  * @package mod_groupformation
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+require_once('../../config.php');
 
-defined('MOODLE_INTERNAL') || die();
-$plugin->version = 2017071301;
-$plugin->requires = 2016052300; // Could be set to Moodle 3.1 2016052300; Best use Moodle 3.2 (2016120500) due to new bootstrap 4.
-$plugin->cron = 0;
-$plugin->component = 'mod_groupformation';
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = 'v1.4'; // We do not use the Moodle versions as prefix; we use semantic versioning (http://semver.org/).
-$plugin->dependencies = array();
+require_once('lib.php');
+require_once('locallib.php');
+
+// Reads URL params.
+$id = required_param('id', PARAM_INT);
+$doshow = optional_param('do_show', 'view', PARAM_TEXT);
+
+$urlparams = ['id' => $id, 'do_show' => $doshow];
+
+// Determines instances of course, course module and groupformation.
+list ($course, $cm, $groupformation) = groupformation_determine_instance($id);
+
+// Requires user to login if not already logged in.
+require_login($course, true, $cm);
+
+// Get useful stuff.
+$context = context_module::instance($cm->id);
+$userid = $USER->id;

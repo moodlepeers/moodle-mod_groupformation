@@ -28,6 +28,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/basic_qu
 
 class mod_groupformation_dropdown_question extends mod_groupformation_basic_question {
 
+    /** @var string Type of question */
     protected $type = 'dropdown';
 
     /**
@@ -63,7 +64,9 @@ class mod_groupformation_dropdown_question extends mod_groupformation_basic_ques
 
         echo '<td colspan="100%" class="center">';
         $categoryquestionid = $category . $questionid;
-        echo '<select style="height:35px" class="form-control" name="' . $categoryquestionid . '" id="' . $categoryquestionid . '">';
+        echo '<select style="height:35px" class="form-control" name="';
+        echo $categoryquestionid;
+        echo '" id="' . $categoryquestionid . '">';
         echo '<option value="0"> - </option>';
         foreach ($options as $option) {
             if (intval($answer) == $questioncounter) {
@@ -88,8 +91,17 @@ class mod_groupformation_dropdown_question extends mod_groupformation_basic_ques
         $answer = optional_param($parameter, null, PARAM_RAW);
         if (isset($answer) && $answer != 0) {
             return array('save', $answer);
-        }else{
+        } else {
             return null;
         }
+    }
+
+    /**
+     * Returns random answer
+     *
+     * @return int
+     */
+    public function create_random_answer() {
+        return rand(1, count($this->options));
     }
 }

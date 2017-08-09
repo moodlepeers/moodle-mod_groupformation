@@ -71,21 +71,12 @@ function groupformation_call_js_amd($PAGE, $modulname, $method, $params=null) {
  * Determines instances of course module, course and groupformation by id
  *
  * @param int $id
- * @param stdClass $cm  (return parameter of course module)
- * @param stdClass $course (return parameter of course instance)
- * @param stdClass $groupformation (return parameter of groupformation instance)
+ * @return array
  */
-function groupformation_determine_instance($id, &$cm, &$course, &$groupformation) {
-    global $DB;
-    if ($id) {
-        $cm = get_coursemodule_from_id('groupformation', $id, 0, false, MUST_EXIST);
-        $course = $DB->get_record('course', array(
-            'id' => $cm->course), '*', MUST_EXIST);
-        $groupformation = $DB->get_record('groupformation', array(
-            'id' => $cm->instance), '*', MUST_EXIST);
-    } else {
-        error('You must specify a course_module ID or an instance ID');
-    }
+function groupformation_determine_instance($id) {
+    list ($course, $cm) = get_course_and_cm_from_cmid($id, 'groupformation');
+    $groupformation = groupformation_get_by_id($cm->instance);
+    return [$course, $cm, $groupformation];
 }
 
 /**
@@ -105,12 +96,13 @@ function groupformation_get_context($groupformationid) {
 }
 
 /**
+ * Sets activity completion
  *
- * @param stdClass $course
- * @param stdClass $cm
+ * @param $id
  * @param int $userid
  */
-function groupformation_set_activity_completion($course, $cm, $userid) {
+function groupformation_set_activity_completion($id, $userid) {
+    list($course, $cm) = get_course_and_cm_from_cmid($id);
     $completion = new completion_info ($course);
     $completion->set_module_viewed($cm, $userid);
 }
@@ -220,7 +212,7 @@ function groupformation_import_questionnaire_configuration($filename = 'question
 
             foreach ($newcategories as $category) {
 
-                $prevversion = groupformation_get_catalog_version($category);
+                $prevversion = groupformation_get_category_version($category);
 
                 foreach ($newlanguages as $language) {
 
@@ -243,12 +235,12 @@ function groupformation_import_questionnaire_configuration($filename = 'question
             $DB->delete_records('groupformation_scenario');
             $DB->delete_records('groupformation_scenario_cats');
 
-            foreach($newscenarios as $name => $categories) {
+            foreach ($newscenarios as $name => $categories) {
                 $record = new stdClass();
                 $record->name = $name;
                 $record->version = $newversion;
                 $scenarioid = $DB->insert_record('groupformation_scenario', $record);
-                foreach($categories as $category) {
+                foreach ($categories as $category) {
                     $record = $DB->get_record('groupformation_q_version', array('category' => $category));
                     $newrecord = new stdClass();
                     $newrecord->scenario = $scenarioid;
@@ -321,7 +313,13 @@ function groupformation_get_current_questionnaire_version() {
     }
 }
 
-function groupformation_get_catalog_version($category) {
+/**
+ * Returns current category version
+ *
+ * @param string $category
+ * @return int|mixed
+ */
+function groupformation_get_category_version($category) {
     global $DB;
 
     $field = $DB->get_field('groupformation_q_version', 'version', array('category' => $category));
@@ -342,7 +340,7 @@ function groupformation_get_catalog_version($category) {
 function groupformation_convert_options($options) {
     $ops = array();
     foreach ($options as $key => $option) {
-        if (is_number($key)){
+        if (is_number($key)) {
             $key = 'OPTION';
         }
         $s = '<' . $key . '><![CDATA[';
@@ -360,7 +358,7 @@ function groupformation_convert_options($options) {
  *
  * @return array
  */
-function groupformation_z_lookup_table() {
+function groupformation_z_lookup_table($z) {
     $zlookuptable = array();
     $zlookuptable['-3.0'] = 0.0013;
     $zlookuptable['-3'] = 0.0013;
@@ -971,5 +969,26 @@ function groupformation_z_lookup_table() {
     $zlookuptable['2.99'] = 0.9986;
     $zlookuptable['3.0'] = 0.9987;
     $zlookuptable['3'] = 0.9987;
-    return $zlookuptable;
+    return $zlookuptable[$z];
+}
+
+function groupformation_get_url($fileinfo, $content) {
+    $filestorage = get_file_storage();
+
+    if ($filestorage->file_exists($fileinfo ['contextid'], $fileinfo ['component'], $fileinfo ['filearea'],
+            $fileinfo ['itemid'], $fileinfo ['filepath'], $fileinfo ['filename'])
+    ) {
+        $file = $filestorage->get_file($fileinfo ['contextid'], $fileinfo ['component'], $fileinfo ['filearea'],
+                $fileinfo ['itemid'], $fileinfo ['filepath'], $fileinfo ['filename']);
+        $file->delete();
+    }
+
+    $file = $filestorage->create_file_from_string($fileinfo, $content);
+
+    $url = moodle_url::make_pluginfile_url($file->get_contextid(), $file->get_component(), $file->get_filearea(),
+            $file->get_itemid(), $file->get_filepath(), $file->get_filename());
+
+    $urlstring = $url->out();
+
+    return $urlstring;
 }

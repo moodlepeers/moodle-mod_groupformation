@@ -13,7 +13,6 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 /**
  * This class contains an implementation of statistics collection to store all statistics in it.
  *
@@ -24,7 +23,7 @@ if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
 }
 
-class mod_groupformation_statistics {
+class mod_groupformation_stats {
     public $n = 0;
     public $avg = 0.0;
     public $avgvariance = 0.0;

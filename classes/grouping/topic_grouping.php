@@ -31,10 +31,19 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/grouping.php'
 
 class mod_groupformation_topic_grouping extends mod_groupformation_grouping {
 
-    private $groupformationid;
+    /** @var int ID of module instance */
+    public $groupformationid;
+
+    /** @var mod_groupformation_user_manager The manager of user data */
     private $usermanager;
+
+    /** @var mod_groupformation_storage_manager The manager of activity data */
     private $store;
+
+    /** @var mod_groupformation_groups_manager The manager of groups data */
     private $groupsmanager;
+
+    /** @var mod_groupformation_criterion_calculator The calculator for criteria */
     private $criterioncalculator;
 
     /**

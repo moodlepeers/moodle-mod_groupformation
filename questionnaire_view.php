@@ -20,34 +20,28 @@
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
-require_once(dirname(__FILE__) . '/lib.php');
-require_once(dirname(__FILE__) . '/locallib.php');
-require_once(dirname(__FILE__) . '/classes/util/define_file.php');
-require_once(dirname(__FILE__) . '/classes/moodle_interface/storage_manager.php');
-require_once(dirname(__FILE__) . '/classes/moodle_interface/user_manager.php');
-require_once(dirname(__FILE__) . '/classes/controller/questionnaire_controller.php');
+require_once('../../config.php');
+require('header.php');
 
-// Read URL params.
-$id = optional_param('id', 0, PARAM_INT);
+require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/controller/questionnaire_controller.php');
 
-// TODO: after fixing db issue, change param to url?
-$urlcategory = optional_param('category', '', PARAM_TEXT);
+$filename = substr(__FILE__, strrpos(__FILE__, '\\') + 1);
+$url = new moodle_url('/mod/groupformation/' . $filename, $urlparams);
+
+// Set PAGE config.
+$PAGE->set_url($url);
+$PAGE->set_title(format_string($groupformation->name));
+$PAGE->set_heading(format_string($course->fullname));
 
 // Import jQuery and js file.
 groupformation_add_jquery($PAGE, 'survey_functions.js');
 
-// Determine instances of course module, course, groupformation.
-groupformation_determine_instance($id, $cm, $course, $groupformation);
+// TODO: after fixing db issue, change param to url?
+$urlcategory = optional_param('category', '', PARAM_TEXT);
 
-// Require user login if not already logged in.
-require_login($course, true, $cm);
-
-// Get useful stuff.
-$context = $PAGE->context;
-$userid = $USER->id;
-
-$data = new mod_groupformation_data ();
 $store = new mod_groupformation_storage_manager ($groupformation->id);
 $usermanager = new mod_groupformation_user_manager ($groupformation->id);
 $groupsmanager = new mod_groupformation_groups_manager ($groupformation->id);
@@ -62,19 +56,15 @@ if (!has_capability('mod/groupformation:editsettings', $context)) {
 }
 
 $consent = $usermanager->get_consent($userid);
-$participantcode = $usermanager->has_participant_code($userid) || !$data->ask_for_participant_code();
+$askforparticipantcode = mod_groupformation_data::ask_for_participant_code();
+$participantcode = $usermanager->has_participant_code($userid) || !$askforparticipantcode;
+
 if (((!$consent || !$participantcode) && !$groupsmanager->groups_created()) &&
         !has_capability('mod/groupformation:editsettings', $context)) {
     $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
             'id' => $cm->id, 'giveconsent' => !$consent, 'giveparticipantcode' => !$participantcode));
     redirect($returnurl);
 }
-
-// Set PAGE config.
-$PAGE->set_url('/mod/groupformation/questionnaire_view.php', array(
-    'id' => $cm->id));
-$PAGE->set_title(format_string($groupformation->name));
-$PAGE->set_heading(format_string($course->fullname));
 
 $category = $store->get_previous_category($urlcategory);
 $direction = 1;
@@ -89,8 +79,6 @@ if (data_submitted() && confirm_sesskey()) {
 }
 
 $controller = new mod_groupformation_questionnaire_controller($groupformation->id,
-        get_string('language',
-                'groupformation'),
         $userid, $category, $cm->id);
 $inarray = in_array($category, $names);
 $go = true;
@@ -139,6 +127,9 @@ if ($next && ($available || $isteacher) && ($category == '' || $inarray)) {
     }
 } else if (!$next ||!$available || $category == 'no') {
 
+    if ($usermanager->has_answered_everything($userid)) {
+        $usermanager->set_evaluation_values($userid);
+    }
     if (isset ($action) && $action == 1) {
         $usermanager->change_status($userid);
     }
@@ -147,7 +138,7 @@ if ($next && ($available || $isteacher) && ($category == '' || $inarray)) {
         'id' => $cm->id, 'do_show' => 'view', 'back' => '1'));
     redirect($returnurl);
 } else {
-    echo $OUTPUT->heading('Category has been manipulated');
+    echo $OUTPUT->notification('Category has been manipulated');
 }
 
 echo $OUTPUT->footer();

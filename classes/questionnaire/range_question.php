@@ -28,6 +28,14 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/basic_qu
 
 class mod_groupformation_range_question extends mod_groupformation_basic_question {
 
+    public function get_answer() {
+        $answer = $this->answer;
+        if ($answer == false) {
+            $answer = -1;
+        }
+        return $answer;
+    }
+
     /**
      * Print HTML of range inputs
      *
@@ -40,11 +48,8 @@ class mod_groupformation_range_question extends mod_groupformation_basic_questio
         $questionid = $this->questionid;
         $question = $this->question;
         $options = $this->options;
-        $answer = $this->answer;
 
-        if ($answer == false) {
-            $answer = -1;
-        }
+        $answer = $this->get_answer();
 
         if ($answer != -1) {
             echo '<tr>';
@@ -59,8 +64,10 @@ class mod_groupformation_range_question extends mod_groupformation_basic_questio
             }
         }
 
-        echo '<td colspan="0" data-title="' . min(array_keys($options)) . ' = ' . $options [min(array_keys($options))] . ', ' .
-                max(array_keys($options)) . ' = ' . $options [max(array_keys($options))] . '" class="range">';
+        echo '<td colspan="100%" data-title="';
+        echo min(array_keys($options)) . ' = ' . $options [min(array_keys($options))];
+        echo ', ' . max(array_keys($options)) . ' = ' . $options [max(array_keys($options))];
+        echo '" class="range">';
         echo '<span class="">' . min(array_keys($options)) . '</span>';
 
         echo '<input class="gf_range_inputs" type="range" name="' . $category . $questionid . '" min="0" max="';
@@ -71,7 +78,10 @@ class mod_groupformation_range_question extends mod_groupformation_basic_questio
         echo '<input type="text" name="' . $category . $questionid;
         echo '_valid" value="' . intval($answer) . '" style="display:none;"/>';
         if ($category == 'points') {
-            echo '<br><label id="text' . $category . $questionid . '">' . ((intval($answer) == -1) ? '0' : intval($answer)) . '</label>';
+            echo '<br>';
+            echo '<label id="text' . $category . $questionid . '">';
+            echo ((intval($answer) == -1) ? '0' : intval($answer));
+            echo '</label>';
         }
         echo '</td>';
         echo '</tr>';
@@ -90,6 +100,34 @@ class mod_groupformation_range_question extends mod_groupformation_basic_questio
         if (isset ($answer) && $answervalidity == '1') {
             return array("save", $answer);
         }
+    }
+
+    /**
+     * Creates random answer
+     *
+     * @return int
+     */
+    public function create_random_answer() {
+        return rand(1, max(array_keys($this->options)));
+    }
+
+
+
+    /**
+     * Converts options if string
+     *
+     * @param $options
+     * @return array
+     */
+    protected function convert_options($options) {
+
+        if (!is_null($options) && is_string($options)) {
+            $options = array(
+                    100 => get_string('excellent', 'groupformation'),
+                    0 => get_string('bad', 'groupformation'));
+        }
+
+        return $options;
     }
 }
 

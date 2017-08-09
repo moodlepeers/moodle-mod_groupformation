@@ -31,8 +31,10 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/group
 require_once($CFG->dirroot . '/mod/groupformation/lib.php');
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/scientific_grouping.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/scientific_grouping_2.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/basic_grouping.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/topic_grouping.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/criteria/specific_criterion.php');
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/participant.php');
@@ -46,7 +48,8 @@ require_once($CFG->dirroot . '/mod/groupformation/lib/classes/xml_writers/cohort
 
 class mod_groupformation_advanced_job_manager {
 
-    static private $jobstates = array(
+    /** @var array Job states */
+    private static $jobstates = array(
             'ready' => array('waiting' => 0, 'started' => 0, 'aborted' => 0, 'done' => 0, 'groups_generated' => 0,
                             'groups_adopted' => 0),
             'waiting' => array('waiting' => 1, 'started' => 0, 'aborted' => 0, 'done' => 0, 'groups_generated' => 0,
@@ -67,7 +70,8 @@ class mod_groupformation_advanced_job_manager {
                             'groups_adopted' => 1),
     );
 
-    static private $timesstatesmap = array(
+    /** @var array Mapping of times and states */
+    private static $timesstatesmap = array(
             'waiting' => 'timecreated',
             'started' => 'timestarted',
             'aborted' => 'timefinished',
@@ -103,7 +107,6 @@ class mod_groupformation_advanced_job_manager {
      * @return stdClass|null
      */
     public static function get_next_job($state = 'waiting') {
-        global $DB;
 
         $jobs = self::get_jobs($state);
 
@@ -304,8 +307,8 @@ class mod_groupformation_advanced_job_manager {
             return $cohorts;
         }
 
-        if ($store->is_math_prep_course_mode()) {
-            $sg = new mod_groupformation_scientific_grouping($groupformationid);
+        if (mod_groupformation_data::is_math_prep_course_mode()) {
+            $sg = new mod_groupformation_scientific_grouping_2($groupformationid);
             return $sg->run_grouping($users);
         } else if ($store->ask_for_topics()) {
             $tg = new mod_groupformation_topic_grouping($groupformationid);
@@ -330,7 +333,7 @@ class mod_groupformation_advanced_job_manager {
 
         $store->delete_statistics();
 
-        $mathprepcourse = $store->is_math_prep_course_mode();
+        $mathprepcourse = mod_groupformation_data::is_math_prep_course_mode();
 
         foreach ($result as $groupkey => $cohort) {
             if (is_null($cohort)) {

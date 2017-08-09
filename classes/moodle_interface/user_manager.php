@@ -26,11 +26,12 @@ if (!defined('MOODLE_INTERNAL')) {
 }
 
 class mod_groupformation_user_manager {
+
+    /** @var int ID of module instance */
     private $groupformationid;
 
+    /** @var mod_groupformation_storage_manager */
     private $store;
-
-    private $data;
 
     /**
      * Creates instance
@@ -40,7 +41,6 @@ class mod_groupformation_user_manager {
     public function __construct($groupformationid = null) {
         $this->groupformationid = $groupformationid;
         $this->store = new mod_groupformation_storage_manager ($groupformationid);
-        $this->data = new mod_groupformation_data();
     }
 
     /**
@@ -60,7 +60,11 @@ class mod_groupformation_user_manager {
     }
 
     /**
+     * Returns users started table content
      *
+     * @param null $sortedby
+     * @param string $fieldset
+     * @return array
      */
     public function get_users_started($sortedby = null, $fieldset = '*') {
         global $DB;
@@ -230,7 +234,9 @@ class mod_groupformation_user_manager {
     public function get_answering_status($userid) {
         global $DB;
 
-        if (!$this->get_consent($userid) || (!$this->has_participant_code($userid) && $this->store->ask_for_participant_code())) {
+        $askforparticipantcode = mod_groupformation_data::ask_for_participant_code();
+
+        if (!$this->get_consent($userid) || (!$this->has_participant_code($userid) && $askforparticipantcode)) {
             return -1;
         }
 
@@ -553,6 +559,8 @@ class mod_groupformation_user_manager {
         global $DB;
         $DB->delete_records('groupformation_started', array('groupformation' => $this->groupformationid, 'userid' => $userid));
         $DB->delete_records('groupformation_answer', array('groupformation' => $this->groupformationid, 'userid' => $userid));
+        $DB->delete_records('groupformation_user_values',
+                array('groupformationid' => $this->groupformationid, 'userid' => $userid));
     }
 
     /**
@@ -653,7 +661,7 @@ class mod_groupformation_user_manager {
         $criteria = $this->store->get_label_set();
         $records = array();
         foreach ($criteria as $criterion) {
-            $labels = $this->data->get_criterion_specification($criterion);
+            $labels = mod_groupformation_data::get_criterion_specification($criterion);
             if (!is_null($labels) && count($labels) > 0) {
                 $uservalues = $cc->get_values_for_user($criterion, $userid, $labels);
                 foreach ($uservalues as $label => $values) {
@@ -699,6 +707,37 @@ class mod_groupformation_user_manager {
     }
 
     /**
+     * Returns (linearized) eval score for user
+     * @param $userid
+     * @return float
+     */
+    public function get_eval_score($userid, $specs = null) {
+        global $DB;
+
+        if (!$this->has_evaluation_values($userid)) {
+            $this->set_evaluation_values($userid);
+        }
+
+        $records = $DB->get_records('groupformation_user_values', array('userid' => $userid));
+
+        $product = 1.0;
+
+        foreach ($records as $record) {
+            if (!is_null($specs)){
+                if (array_key_exists($record->criterion,$specs)){
+                    if (array_key_exists($record->label, $specs[$record->criterion]['labels'])){
+                        $product *= ($record->value + 1);
+                    }
+                }
+            } else {
+                $product *= ($record->value + 1);
+            }
+        }
+
+        return $product;
+    }
+
+    /**
      * Sets completed status for user
      *
      * @param $userid
@@ -711,11 +750,17 @@ class mod_groupformation_user_manager {
             'groupformation' => $this->groupformationid,
             'userid' => $userid
         ));
-        $data->completed = $value;
+        $data->completed = intval($value);
         $data->timecompleted = time();
         $DB->update_record('groupformation_started', $data);
     }
 
+    /**
+     * Returns score for a specific topic
+     *
+     * @param int $topicnumber
+     * @return float|string
+     */
     public function get_topic_score($topicnumber) {
         global $DB;
 
@@ -732,10 +777,10 @@ class mod_groupformation_user_manager {
             $score += $answer->answer;
         }
 
-        if (count($answers) == 0 || $num == 0){
+        if (count($answers) == 0 || $num == 0) {
             return "-";
         }
 
-        return ($score / count($answers)) / $num;
+        return floatval(floatval($score) / count($answers)) / $num;
     }
 }
