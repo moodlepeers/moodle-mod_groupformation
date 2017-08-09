@@ -723,7 +723,15 @@ class mod_groupformation_user_manager {
         $product = 1.0;
 
         foreach ($records as $record) {
-            $product *= ($record->value + 1);
+            if (!is_null($specs)){
+                if (array_key_exists($record->criterion,$specs)){
+                    if (array_key_exists($record->label, $specs[$record->criterion]['labels'])){
+                        $product *= ($record->value + 1);
+                    }
+                }
+            } else {
+                $product *= ($record->value + 1);
+            }
         }
 
         return $product;

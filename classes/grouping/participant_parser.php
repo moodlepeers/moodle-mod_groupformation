@@ -60,9 +60,11 @@ class mod_groupformation_participant_parser {
      *
      * @param $users
      * @param $labels
+     * @param $weights
+     *
      * @return array
      */
-    private function parse($users, $labels) {
+    private function parse($users, $labels, $weights = null) {
 
         $participants = array();
         foreach ($users as $user) {
@@ -76,10 +78,15 @@ class mod_groupformation_participant_parser {
                 $value = array_map('abs', $value);
                 $minval = 0.0;
                 $maxval = 1.0;
-                $weight = 1;
 
-                if ($label == 'general') {
-                    $weight = (count($labels) - 1) / 2;
+                if (!is_null($weights)) {
+                    $weight = $weights[$label];
+                } else {
+                    $weight = 1;
+
+                    if ($label == 'general') {
+                        $weight = (count($labels) - 1) / 2;
+                    }
                 }
 
                 $criterion = new mod_groupformation_specific_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
@@ -137,7 +144,7 @@ class mod_groupformation_participant_parser {
      * @param $specs
      * @return array
      */
-    public function build_participants($users, $specs = null) {
+    public function build_participants($users, $specs = null, $weights = null) {
         if (count($users) == 0) {
             return array();
         }
@@ -192,7 +199,7 @@ class mod_groupformation_participant_parser {
             $array [] = $object;
         }
         $totallabel = array_unique($totallabel);
-        $res = $this->parse($array, $totallabel);
+        $res = $this->parse($array, $totallabel, $weights);
         $endtime = microtime(true);
         $comptime = $endtime - $starttime;
 

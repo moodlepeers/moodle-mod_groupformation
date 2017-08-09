@@ -59,6 +59,13 @@ require('debug_actions.php');
 
 echo $OUTPUT->header();
 
+$ajm = new mod_groupformation_advanced_job_manager();
+
+$job = $ajm::get_job($groupformation->id);
+
+$results = $ajm::do_groupal($job);
+
+var_dump($results);
 // Print the tabs.
 require('tabs.php');
 

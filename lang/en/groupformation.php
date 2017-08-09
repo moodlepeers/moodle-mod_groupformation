@@ -147,7 +147,7 @@ $string ['questionnaire_press_preview'] = 'Press "Preview" to take a look at the
 $string ['questionnaire_no_more_questions'] = 'There are no more questions to answer.';
 $string ['questionnaire_press_beginning_submit'] = 'Click "Go to Start" to go back to the start page. There you can submit your current answers.';
 $string ['questionnaire_go_to_start'] = 'Go to Start';
-$string ['questionnaire_submit'] = 'Submit';
+$string ['questionnaire_submit'] = 'Submit answers';
 $string ['questionnaire_submit_disabled_teacher'] = 'Submit is disabled because this is just a preview.';
 $string ['questionnaire_preview'] = 'This is a preview of the questionnaire.';
 $string ['category_general'] = 'General';
@@ -473,12 +473,17 @@ $string ['participant_code_rules'] = "1. Your mother's first name (first two cha
 4. Your father's month of birth (as two digits, z.B. 11 for November)<br><br>
 Replace \"Umlaute\" and special characters as follows<br>
 Ä &rarr; A; Ö &rarr; O; Ü &rarr; U; ß &rarr; S";
-$string ['participant_code_example'] = "Example: EV04AD12";
+$string ['participant_code_example'] = "Example: EV07AD11";
 $string ['participant_code_footer'] = "Your personal participant code is";
 
 $string ['participant_code_alert_message'] = 'You need enter a valid participant code before accessing the questionnaire. Scroll down and enter your participant code.';
 
 $string ['questionnaire_press_to_begin_participant_code'] = 'Enter your participant code and give your consent. Click "Next" to begin.';
+
+$string['submit-modal-title'] = 'Submit your answers';
+$string['submit-modal-text'] = 'For scientific purposes and the group formation process it is important that you answer all questions truthfully and correctly. We would appreciate your support.
+
+Click on \'Cancel\' if you want to edit your answers before submitting them.';
 
 $string ['questionnaire_outdated'] = 'This activity is too old. The correct functionality cannot be ensured. Please create a new activity to enjoy the full functionality.';
 

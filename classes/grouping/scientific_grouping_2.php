@@ -73,7 +73,7 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
      * @param $numberofslices
      * @return array
      */
-    public function get_optimal_slices($users, $numberofslices) {
+    public function get_optimal_slices($users, $numberofslices, $specs = null) {
         $statistics = new mod_groupformation_statistics();
         // TODO Set cutoff value.
         $cutoff = 0.02;
@@ -87,9 +87,25 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
         $i = 0;
         // Loop to determine best slice based on mean and stddev.
         // Idea: all slices should have very similar mean and stddev (distance smaller cutoff).
+
+        $scores = [];
+
+        //var_dump($specs);
+        foreach ($users as $user) {
+            $scores[] = array($user, $this->usermanager->get_eval_score($user, $specs));
+        }
+
+        $cmp = function($a, $b) {
+            return $a[1] < $b[1];
+        };
+
+        usort($scores, $cmp);
+
+        //var_dump($scores);
+
         while ($i < 100 && !$bestfound) {
             $i++;
-            $slices = $this->get_slices($users, $numberofslices);
+            $slices = $this->get_slices($scores, $numberofslices);
             $func = function($value, $key = 1) {
                 return $value[$key];
             };
@@ -154,6 +170,17 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
         return array_map($func2, $best);
     }
 
+
+    /**
+     * Returns weights for criterions
+     *
+     * @return array
+     */
+    public function get_weights() {
+
+        return array('big5_extraversion' => 4, 'big5_conscientiousness' => 4, 'knowledge_two' => 2);
+    }
+
     /**
      * Scientific division of users and creation of participants
      *
@@ -165,6 +192,8 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
         $groupsizes = $this->store->determine_group_size($users);
 
         $specification = $this->get_specification();
+        list ($configurations, $specs) = $specification;
+        $weights = $this->get_weights();
 
         $numberofslices = count($specification[0]);
 
@@ -172,9 +201,9 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
             return [];
         }
 
-        $slices = $this->get_optimal_slices($users[0], $numberofslices);
+        $slices = $this->get_optimal_slices($users[0], $numberofslices, $specs);
 
-        $cohorts = $this->build_cohorts($slices, $groupsizes[0], $specification);
+        $cohorts = $this->build_cohorts($slices, $groupsizes[0], $specification, $weights);
 
         // Handle all users with incomplete or no questionnaire submission.
         $randomkey = "rand:1;mrand:_;ex:_;gh:_";
@@ -196,7 +225,7 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
      * @param $specification
      * @return array
      */
-    private function build_cohorts($slices, $groupsize, $specification) {
+    private function build_cohorts($slices, $groupsize, $specification, $weights = null) {
 
         // Loop preparation.
         $numberofslices = count($slices);
@@ -210,8 +239,7 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
             $configurationkey = $configurationkeys[$i];
             $configuration = $configurations[$configurationkey];
 
-            $rawparticipants = $this->participantparser->build_participants($slice, $specs);
-
+            $rawparticipants = $this->participantparser->build_participants($slice, $specs, $weights);
             $participants = $this->configure_participants($rawparticipants, $configuration);
 
             $cohorts[$configurationkey] = $this->build_cohort($participants, $groupsize, $configurationkey);
@@ -228,17 +256,20 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
     private function get_specification() {
 
         $big5specs = mod_groupformation_data::get_criterion_specification('big5');
+        $knowledgespecs = mod_groupformation_data::get_criterion_specification('knowledge');
 
         unset($big5specs['labels']['neuroticism']);
         unset($big5specs['labels']['openness']);
         unset($big5specs['labels']['agreeableness']);
+        unset($knowledgespecs['labels']['one']);
 
-        $specs = ["big5" => $big5specs];
+        $specs = ["big5" => $big5specs, 'knowledge'=>$knowledgespecs];
 
         $configurations = array(
-            "mrand:0;ex:1;gh:1" => array('big5_extraversion' => true, 'big5_conscientiousness' => true),
-            "mrand:0;ex:1;gh:0" => array('big5_extraversion' => true, 'big5_conscientiousness' => false),
-            "mrand:0;ex:0;gh:0" => array('big5_extraversion' => false, 'big5_conscientiousness' => false),
+            "mrand:0;ex:1;gh:1;vw:0" => array('big5_extraversion' => true, 'big5_conscientiousness' => true, 'knowledge_two' => false),
+            "mrand:0;ex:1;gh:0;vw:0" => array('big5_extraversion' => true, 'big5_conscientiousness' => false, 'knowledge_two' => false),
+            "mrand:0;ex:0;gh:0;vw:0" => array('big5_extraversion' => false, 'big5_conscientiousness' => false, 'knowledge_two' => false),
+            "mrand:0;ex:0;gh:1;vw:0" => array('big5_extraversion' => false, 'big5_conscientiousness' => true, 'knowledge_two' => false),
         );
 
         return [$configurations, $specs];
@@ -247,22 +278,12 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
     /**
      * Creates evenly distributed slices by using the linearized eval score
      *
-     * @param $users
+     * @param $scores
      * @param $numberofslices
      * @return array
      */
-    private function get_slices($users, $numberofslices, $specs = null) {
-        $scores = [];
+    private function get_slices($scores, $numberofslices) {
 
-        foreach ($users as $user) {
-            $scores[] = array($user, $this->usermanager->get_eval_score($user, $specs));
-        }
-
-        $cmp = function($a, $b) {
-            return $a[1] < $b[1];
-        };
-
-        usort($scores, $cmp);
 
         $slices = range(1, $numberofslices);
         $userslices = [];

@@ -8,6 +8,26 @@
  */
 require(['jquery', 'jqueryui'], function ($, jqueryui) {
     $(document).ready(function () {
+
+        $("#dialog").dialog({
+            bgiframe: true,
+            autoOpen: false,
+            height: 300,
+            modal: true,
+            buttons: {
+                OK: function() {
+                    $("#dialog > form").submit();
+                    $(this).dialog('close');
+                },
+                Abbrechen: function() {
+                    $(this).dialog('close');
+                }
+            }
+        });
+        $('#benutzerDel').click(function() {
+            $('#dialog').dialog('open');
+        });
+
         $('#invisible_topics_inputs').hide();
         $(".maxgroupsizenotreached_header").click(function () {
         });

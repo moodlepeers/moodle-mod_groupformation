@@ -113,7 +113,7 @@ class mod_groupformation_overview_controller {
                 break;
 
             case 0 :
-                // Questionnaire is available, started, not finished and not submited.
+                // Questionnaire is available, started, not finished and not submitted.
                 $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(
                     false, $this->groupformationid);
                 $this->groupformationstateinfo = array(
@@ -129,11 +129,14 @@ class mod_groupformation_overview_controller {
                     array(
                         'type' => 'submit', 'name' => 'begin', 'value' => '0',
                         'state' => (($disabled) ? 'disabled' : ''),
+                        'modal-id' => 'deleteModal',
+                        'modal-text' => get_string('submit-modal-text', 'groupformation'),
+                        'modal-title' => get_string('submit-modal-title', 'groupformation'),
                         'text' => get_string('questionnaire_submit', 'groupformation')),
                     array(
                         'type' => 'submit', 'name' => 'begin', 'value' => '-1',
                         'state' => '',
-                        'text' => get_string('questionnaire_delete', 'groupformation'))
+                        'text' => get_string('questionnaire_delete', 'groupformation')),
                 );
                 break;
 

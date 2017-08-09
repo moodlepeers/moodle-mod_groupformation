@@ -31,6 +31,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/group
 require_once($CFG->dirroot . '/mod/groupformation/lib.php');
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/scientific_grouping.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/scientific_grouping_2.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/basic_grouping.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/topic_grouping.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
@@ -307,7 +308,7 @@ class mod_groupformation_advanced_job_manager {
         }
 
         if (mod_groupformation_data::is_math_prep_course_mode()) {
-            $sg = new mod_groupformation_scientific_grouping($groupformationid);
+            $sg = new mod_groupformation_scientific_grouping_2($groupformationid);
             return $sg->run_grouping($users);
         } else if ($store->ask_for_topics()) {
             $tg = new mod_groupformation_topic_grouping($groupformationid);

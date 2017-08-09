@@ -40,7 +40,7 @@ if (isset ($cmid) and intval($cmid) and $cmid > 0) {
 }
 
 if (!isset ($currenttab)) {
-    $currenttab = '';
+    $currenttab = 'view';
 }
 
 $editsettings = has_capability('mod/groupformation:editsettings', $context);
