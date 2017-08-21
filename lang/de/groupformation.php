@@ -533,6 +533,9 @@ $string ['tabletitle_times'] = 'Verfügbarkeit';
 $string ['category_skills'] = 'Erfahrung';
 $string ['tabletitle_skills'] = 'Erfahrung';
 
+$string ['category_honesty'] = 'Ehrlichkeit';
+$string ['tabletitle_honesty'] = 'Ehrlichkeit';
+
 $string ['allanswersrequired'] = 'Es müssen alle Fragen des Fragebogens beantwortet werden.';
 $string ['allanswersrequired_description'] = 'Es müssen alle Fragen des Fragebogens beantwortet werden.';
 $string ['groupoption_allanswersrequired'] = 'Damit optimierte Gruppen gebildet werden können, werden alle Antworten eines Studierenden benötigt. Beantwortet ein Studierender den Fragebogen nicht vollständig wird dieser lediglich randomisiert gruppiert.';

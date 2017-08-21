@@ -399,9 +399,9 @@ class mod_groupformation_storage_manager {
 
         $scenarios = $DB->get_records('groupformation_scenario');
 
-        $scenario = array_values($scenarios)[$settings->szenario - 1];
+        $scenarioid = $settings->szenario;
 
-        return $scenario->id;
+        return $DB->get_field('groupformation_scenario', 'id', array('assigned_id' => $scenarioid));
     }
 
     /**
@@ -1068,7 +1068,7 @@ class mod_groupformation_storage_manager {
     public function get_questions_randomized_for_user($category, $userid) {
         $questions = array_values($this->get_questions($category));
 
-        if (false) {
+        if (in_array($category, ['character', 'motivation', 'srl', 'self', 'sellmo', 'team'])) {
             srand($userid);
             usort($questions, function($a, $b) {
                 return rand(-1, 1);
@@ -1088,7 +1088,7 @@ class mod_groupformation_storage_manager {
         $scenario = $DB->get_field('groupformation', 'szenario', array(
                 'id' => $this->groupformationid
         ));
-        $scenarioname = $DB->get_field('groupformation_scenario', 'name', array('id' => $scenario));
+        $scenarioname = $DB->get_field('groupformation_scenario', 'name', array('assigned_id' => $scenario));
         return $scenarioname;
     }
 
@@ -1200,7 +1200,7 @@ class mod_groupformation_storage_manager {
         };
 
         foreach (array_values($enrolledstudents) as $userid) {
-            if ($sum <= $numberofanswers($userid)) {
+            if ($sum <= $numberofanswers($userid) && !$this->is_filtered($userid)) {
                 $allanswers [] = $userid;
             } else if ($groupingsetting && $numberofanswers($userid) > 0) {
                 $someanswers [] = $userid;
@@ -1219,5 +1219,56 @@ class mod_groupformation_storage_manager {
 
         return array(
                 $groupalusers, $randomusers);
+    }
+
+    /**
+     * Returns whether groupformation uses filtering due to dishonesty
+     *
+     * @return bool
+     */
+    public function uses_filter() {
+        global $DB;
+
+        return ($DB->count_records('groupformation_started', array('groupformation' => $this->groupformationid, 'filtered' => 1))) > 0;
+    }
+
+    /**
+     * Returns whether a students will be filtered due to dishonesty
+     *
+     * @param $userid
+     * @return bool
+     */
+    public function is_filtered($userid) {
+        global $DB;
+
+        return boolval($DB->get_field('groupformation_started', 'filtered', array('groupformation' => $this->groupformationid, 'userid' => $userid)));
+    }
+
+    /**
+     * Returns stats about dishonesty
+     *
+     * @return array
+     */
+    public function get_honesty_stats() {
+        global $DB;
+
+        $yes = $DB->count_records('groupformation_answer', array('groupformation' => $this->groupformationid, 'category' => 'honesty', 'answer' => 1));
+        $maybe = $DB->count_records('groupformation_answer', array('groupformation' => $this->groupformationid, 'category' => 'honesty', 'answer' => 2));
+        $no = $DB->count_records('groupformation_answer', array('groupformation' => $this->groupformationid, 'category' => 'honesty', 'answer' => 3));
+        return ['yes' => $yes+$maybe, 'no' => $no];
+    }
+
+    public function filter_users($value) {
+        global $DB;
+
+        $users = $DB->get_records('groupformation_answer', array('groupformation' => $this->groupformationid, 'category' => 'honesty', 'answer' => 3), 'userid', 'userid');
+
+        foreach(array_keys($users) as $userid) {
+            $record = $DB->get_record('groupformation_started', array('groupformation' => $this->groupformationid, 'userid' => $userid));
+            $record->filtered = intval($value);
+
+            $DB->update_record('groupformation_started', $record);
+        }
+
     }
 }

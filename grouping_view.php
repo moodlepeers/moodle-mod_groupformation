@@ -74,10 +74,15 @@ if ((data_submitted()) && confirm_sesskey()) {
     redirect($returnurl);
 }
 
+require('research_actions.php');
+
 echo $OUTPUT->header();
 
 // Print the tabs.
 require('tabs.php');
+
+echo $debugbuttons;
+
 if (groupformation_get_current_questionnaire_version() > $store->get_version()) {
     echo '<div class="alert">'.get_string('questionnaire_outdated', 'groupformation').'</div>';
 }

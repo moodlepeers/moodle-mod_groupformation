@@ -62,7 +62,7 @@ if ($editsettings) {
     // The questionnaire_view -> preview mode .
     $questionnaireviewurl = new moodle_url ('/mod/groupformation/questionnaire_view.php', array(
         'id' => $usedid));
-    $row [] = new tabobject ('view', $questionnaireviewurl->out(), get_string('tab_preview', 'groupformation'));
+    $row [] = new tabobject ('questionnaire', $questionnaireviewurl->out(), get_string('tab_preview', 'groupformation'));
 
     // The import/export view.
     // TODO Only activate if export of study is needed.

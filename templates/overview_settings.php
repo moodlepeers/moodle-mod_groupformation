@@ -67,7 +67,7 @@ if (!defined('MOODLE_INTERNAL')) {
                             </p>
                         </div>
 
-                        <div><?php if ($this->_['participant_code_user'] === ''): ?>
+                        <div>
                                 <p>
                                     <?php echo get_string('participant_code_header', 'groupformation'); ?>
                                 </p>
@@ -77,7 +77,6 @@ if (!defined('MOODLE_INTERNAL')) {
                                 <p>
                                     <?php echo get_string('participant_code_example', 'groupformation'); ?>
                                 </p>
-                            <?php endif; ?>
                             <p>
                                 <?php echo get_string('participant_code_footer', 'groupformation'); ?>
                             </p>

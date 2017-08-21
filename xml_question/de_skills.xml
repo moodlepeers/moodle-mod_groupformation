@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="times questions">
-    <QUESTIONS VERSION="2017062501">
+    <QUESTIONS VERSION="2017081801">
         <QUESTION ID="1" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Für wie erfahren im Umgang mit Computern halten Sie sich?]]>
@@ -292,7 +292,78 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="7" TYPE="dropdown">
+        <QUESTION ID="7" TYPE="number">
+            <QUESTIONTEXT>
+                <![CDATA[In welchem Jahr wurde die Hochschulzulassung erworben?]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <MIN>
+                    <![CDATA[1900]]>
+                </MIN>
+                <MAX>
+                    <![CDATA[2018]]>
+                </MAX>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="8" TYPE="dropdown">
+            <QUESTIONTEXT>
+                <![CDATA[In welchem Bundesland wurde die Hochschulzulassung erworben?]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[Baden-Württemberg]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Bayern]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Berlin]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Brandenburg]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Bremen]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Hamburg]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Hessen]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Mecklenburg-Vorpommern]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Niedersachsen]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Nordrhein-Westfalen]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Rheinland-Pfalz]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Saarland]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Sachsen]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Sachsen-Anhalt]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Schleswig-Holstein]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Thüringen]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[- NICHT in Deutschland -]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="9" TYPE="dropdown">
             <QUESTIONTEXT>
                 <![CDATA[In welchem Studiengang haben Sie sich eingeschrieben?]]>
             </QUESTIONTEXT>

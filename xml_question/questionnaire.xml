@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<questionnaire version="2017062800">
+<questionnaire version="2017081802">
     <categories>
         <category>general</category>
         <category>skills</category>
@@ -12,6 +12,10 @@
         <category>team</category>
         <category>learning</category>
         <category>topic</category>
+        <category>srl</category>
+        <category>self</category>
+        <category>sellmo</category>
+        <category>honesty</category>
     </categories>
     <scenarios>
         <scenario>
@@ -26,6 +30,10 @@
                 <category>character</category>
                 <category>motivation</category>
                 <category>team</category>
+                <category>srl</category>
+                <category>self</category>
+                <category>sellmo</category>
+                <category>honesty</category>
             </categories>
         </scenario>
         <scenario>

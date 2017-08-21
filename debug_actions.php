@@ -40,10 +40,16 @@ if ($CFG->debug === 32767) {
         global $DB;
 
         $DB->delete_records('groupformation_jobs', array('groupformationid' => $groupformation->id));
+
+        $return = new moodle_url ('/mod/groupformation/view.php', array(
+            'id' => $id, 'do_show' => 'analysis'));
+        redirect($return->out());
     }
 
     // Run job action.
     if ($runjob) {
+        $ajm = new mod_groupformation_advanced_job_manager();
+
         $job = null;
 
         $job = $ajm::get_job($groupformation->id);
@@ -51,8 +57,11 @@ if ($CFG->debug === 32767) {
         if (!is_null($job)) {
             $result = $ajm::do_groupal($job);
             $saved = $ajm::save_result($job, $result);
-            $ajm::set_job('done');
+            $ajm::set_job($job,'done');
         }
+        $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
+            'id' => $id, 'do_show' => 'analysis'));
+        redirect($return->out());
     }
 
     $cqt = new mod_groupformation_test_user_generator ($cm);

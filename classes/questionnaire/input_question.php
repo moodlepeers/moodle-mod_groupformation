@@ -111,15 +111,5 @@ abstract class mod_groupformation_input_question extends mod_groupformation_basi
     public function create_random_answer() {
         return str_shuffle ('ABCDEFGH');
     }
-
-    /**
-     * Converts options if string
-     *
-     * @param $options
-     * @return array
-     */
-    protected function convert_options($options) {
-        return null;
-    }
 }
 

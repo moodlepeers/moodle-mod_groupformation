@@ -536,7 +536,7 @@ class mod_groupformation_groups_manager {
         }
 
         $topicoptions = null;
-        $istopic = (!!$flags['topic']); // Fast boolean casting of 0 and 1.
+        $istopic = array_key_exists('topic', $flags) && (!!$flags['topic']); // Fast boolean casting of 0 and 1.
 
         if ($istopic) {
             $xmlcontent = $this->store->get_knowledge_or_topic_values('topic');

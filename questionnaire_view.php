@@ -52,7 +52,7 @@ $names = $store->get_categories();
 if (!has_capability('mod/groupformation:editsettings', $context)) {
     $currenttab = 'answering';
 } else {
-    $currenttab = 'view';
+    $currenttab = 'questionnaire';
 }
 
 $consent = $usermanager->get_consent($userid);
@@ -65,7 +65,6 @@ if (((!$consent || !$participantcode) && !$groupsmanager->groups_created()) &&
             'id' => $cm->id, 'giveconsent' => !$consent, 'giveparticipantcode' => !$participantcode));
     redirect($returnurl);
 }
-
 $category = $store->get_previous_category($urlcategory);
 $direction = 1;
 $percent = 0;

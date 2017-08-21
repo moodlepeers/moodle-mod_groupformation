@@ -531,6 +531,9 @@ $string ['tabletitle_times'] = 'Availability';
 $string ['category_skills'] = 'Experience';
 $string ['tabletitle_skills'] = 'Experience';
 
+$string ['category_honesty'] = 'Honesty';
+$string ['tabletitle_honesty'] = 'Honesty';
+
 $string ['freetext_noanswer'] = 'No answer';
 
 $string ['allanswersrequired'] = 'All questions need to be answered in order to complete the activity.';
