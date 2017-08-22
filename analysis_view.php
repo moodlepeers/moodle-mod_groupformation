@@ -32,6 +32,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/controller/analysis_co
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_parser.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/scientific_grouping_2.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/analysis_view_controller.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/group_generator.php');
 
 $filename = substr(__FILE__, strrpos(__FILE__, '\\') + 1);
 $url = new moodle_url('/mod/groupformation/' . $filename, $urlparams);
@@ -63,11 +64,11 @@ $currenttab = 'analysis';
 
 $ajm = new mod_groupformation_advanced_job_manager();
 
-$job = $ajm::get_job($groupformation->id);
+//$job = $ajm::get_job($groupformation->id);
 
-$results = $ajm::do_groupal($job);
+//$results = $ajm::do_groupal($job);
 
-// var_dump($results);
+//var_dump($results);
 // Print the tabs.
 require('tabs.php');
 

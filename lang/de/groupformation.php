@@ -512,7 +512,7 @@ $string['answers_for_eval_text'] = 'Wenn alle Fragen beantwortet sind, wird im R
 
 $string['page_title_analysis'] = 'Aktivität';
 $string['page_title_grouping'] = 'Gruppenbildung';
-$string['page_title_group'] = 'Gruppenzuweisung';
+$string['page_title_group'] = 'Gruppenzuordnung';
 $string['page_title_overview'] = 'Überblick';
 $string['page_title_evaluation'] = 'Evaluation';
 $string['page_title_import_export'] = 'Import & Export';

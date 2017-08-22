@@ -23,7 +23,8 @@
  */
 
 // Reads URL parameters.
-$runjob = optional_param('runjob', false, PARAM_BOOL);
+$runjob = optional_param('run_job', false, PARAM_BOOL);
+$buildgroups = optional_param('build_groups', false, PARAM_BOOL);
 $createusers = optional_param('create_users', 0, PARAM_INT);
 $createanswers = optional_param('create_answers', false, PARAM_BOOL);
 $randomanswers = optional_param('random_answers', false, PARAM_BOOL);
@@ -58,6 +59,23 @@ if ($CFG->debug === 32767) {
             $result = $ajm::do_groupal($job);
             $saved = $ajm::save_result($job, $result);
             $ajm::set_job($job,'done');
+        }
+        $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
+            'id' => $id, 'do_show' => 'analysis'));
+        redirect($return->out());
+    }
+
+    // Run job action.
+    if ($buildgroups) {
+        $ajm = new mod_groupformation_advanced_job_manager();
+
+        $job = null;
+
+        $job = $ajm::get_job($groupformation->id);
+
+        if (!is_null($job)) {
+            mod_groupformation_group_generator::generate_moodle_groups($job->groupformationid);
+            $ajm::set_job($job, 'done_groups');
         }
         $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
             'id' => $id, 'do_show' => 'analysis'));
