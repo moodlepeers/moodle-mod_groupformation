@@ -28,6 +28,8 @@ $unfilterusers = optional_param('unfilterusers', false, PARAM_BOOL);
 
 $debugbuttons = "";
 
+$stats = $store->get_honesty_stats();
+
 // Only if debug mode is activated.
 if (mod_groupformation_data::is_math_prep_course_mode()) {
 
@@ -54,8 +56,6 @@ if (mod_groupformation_data::is_math_prep_course_mode()) {
     $debugbuttons .= '</div>';
     $debugbuttons .= '<div class="gf_pad_content">';
 
-
-    $stats = $store->get_honesty_stats();
     $debugbuttons .= '<p>';
 
     $debugbuttons .= 'Es haben <b>' . $stats['yes'] . '</b> Studierende geantwortet, dass sie ehrlich und konzentriert geantwortet haben.';
@@ -63,7 +63,11 @@ if (mod_groupformation_data::is_math_prep_course_mode()) {
     $debugbuttons .= 'Es haben <b>' . $stats['no'] . '</b> Studierende geantwortet, dass sie <b>nicht</b> ehrlich und konzentriert geantwortet haben.';
     $debugbuttons .= '</p>';
     $debugbuttons .= '<p>';
-    $debugbuttons .= 'Es haben also <b>' . round(floatval($stats['no']) / ($stats['yes'] + $stats['no']), 4)*100 . '%</b> der Studierende geantwortet, dass sie <b>nicht</b> ehrlich und konzentriert geantwortet haben.';
+    $v = 0.0;
+    if ($stats['yes'] !== 0 && $stats['no'] !== 0){
+        $v = round(floatval($stats['no']) / ($stats['yes'] + $stats['no']), 4)*100;
+    }
+    $debugbuttons .= 'Es haben also <b>' . $v . '%</b> der Studierende geantwortet, dass sie <b>nicht</b> ehrlich und konzentriert geantwortet haben.';
     $debugbuttons .= '</p>';
 
     if (!$store->uses_filter()) {
