@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="demographic questions">
-    <QUESTIONS VERSION="2017062800">
-        <QUESTION ID="1" TYPE="likert">
+    <QUESTIONS VERSION="2017082500">
+        <QUESTION ID="1" TYPE="dropdown">
             <QUESTIONTEXT>
                 <![CDATA[Geschlecht]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
+                    <![CDATA[weiblich]]>
+                </OPTION>
+                <OPTION>
                     <![CDATA[männlich]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[weiblich]]>
+                    <![CDATA[keine Angabe]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>

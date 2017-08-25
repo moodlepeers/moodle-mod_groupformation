@@ -1,56 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="times questions">
-    <QUESTIONS VERSION="2017081801">
-        <QUESTION ID="1" TYPE="likert">
-            <QUESTIONTEXT>
-                <![CDATA[Für wie erfahren im Umgang mit Computern halten Sie sich?]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[wenig erfahren]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[sehr erfahren]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="2" TYPE="likert">
-            <QUESTIONTEXT>
-                <![CDATA[Ich lerne (bzw. arbeite) gern in Verbindung mit dem Computer]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[trifft nicht zu]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[trifft zu]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
+    <QUESTIONS VERSION="2017082500">
         <QUESTION ID="3" TYPE="dropdown">
             <QUESTIONTEXT>
                 <![CDATA[Was war ihr letzter schulischer Mathematikkurs?]]>

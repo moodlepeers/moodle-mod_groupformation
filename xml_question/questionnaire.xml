@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<questionnaire version="2017081802">
+<questionnaire version="2017082501">
     <categories>
         <category>general</category>
         <category>skills</category>
@@ -32,7 +32,6 @@
                 <category>team</category>
                 <category>srl</category>
                 <category>self</category>
-                <category>sellmo</category>
                 <category>honesty</category>
             </categories>
         </scenario>

@@ -33,7 +33,8 @@ $filename = substr(__FILE__, strrpos(__FILE__, '\\') + 1);
 $url = new moodle_url('/mod/groupformation/' . $filename, $urlparams);
 
 // Set PAGE config.
-$PAGE->set_url($url);
+$PAGE->set_url('/mod/groupformation/view.php', array(
+    'id' => $cm->id, 'do_show' => $doshow));
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 

@@ -612,11 +612,11 @@
 }
 
 .path-mod-groupformation .responsive-table tbody tr.noAnswer {
-    background-color: #fefdf5;
+    background-color: rgba(255, 0, 0, 0.21);
 }
 
 .path-mod-groupformation .responsive-table tbody tr.noAnswer:nth-of-type(even) {
-    background-color: #fcf8e3;
+    background-color: rgba(255, 0, 0, 0.45);
 }
 
 .path-mod-groupformation .responsive-table tbody th[scope="row"] {
@@ -628,7 +628,7 @@
     visibility: hidden;
     display: none;
 }
-
+s
 @media (min-width: 64em) {
     .path-mod-groupformation .responsive-table tbody td.td-extra {
         visibility: visible;

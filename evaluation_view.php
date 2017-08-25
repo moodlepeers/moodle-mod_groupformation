@@ -36,7 +36,7 @@ $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 
 // Import jQuery and js file.
-groupformation_add_jquery($PAGE, 'startCarousel.js');
+groupformation_add_jquery($PAGE, 'startcarousel.js');
 
 if (has_capability('mod/groupformation:editsettings', $context)) {
     $returnurl = new moodle_url('/mod/groupformation/analysis_view.php', array('id' => $id, 'do_show' => 'analysis'));

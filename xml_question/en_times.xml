@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="times questions">
-    <QUESTIONS VERSION="2017062800">
+    <QUESTIONS VERSION="2017082500">
         <QUESTION ID="1" TYPE="freetext">
             <QUESTIONTEXT>
                 <![CDATA[Welche anderen Verpflichtungen haben Sie parallel zum Vorkurs?  Gemeint sind Praktika, Jobs, andere Lehrveranstaltungen, Reisen, aufwendige Hobbies etc.]]>
@@ -170,50 +170,6 @@
                 </OPTION>
                 <OPTION>
                     <![CDATA[12]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="7" TYPE="dropdown">
-            <QUESTIONTEXT>
-                <![CDATA[Von welchem Ort aus bearbeiten Sie die Inhalte des Vorkurses und der Studie?]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[Eigenes Zimmer]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Zimmer, das mit anderen Personen gemeinsam benutzt wird]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Öffentlicher Ort]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Wechselnde Orte]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="8" TYPE="dropdown">
-            <QUESTIONTEXT>
-                <![CDATA[Wie häufig werden Sie voraussichtlich an diesem Ort durch andere Personen unterbrochen?]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[nie]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[sehr selten]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[selten]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[manchmal]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[häufig]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[sehr häufig]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
