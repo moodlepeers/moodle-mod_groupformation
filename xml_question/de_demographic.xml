@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="demographic questions">
-    <QUESTIONS VERSION="2017082500">
+    <QUESTIONS VERSION="2017082901">
         <QUESTION ID="1" TYPE="dropdown">
             <QUESTIONTEXT>
                 <![CDATA[Geschlecht]]>
@@ -32,28 +32,24 @@
         </QUESTION>
         <QUESTION ID="3" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Ist Deutsch ihre Muttersprache?]]>
+                <![CDATA[Wie gut sind Ihre Deutschkenntnisse?]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[Ja]]>
+                    <![CDATA[Muttersprache]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Nein]]>
+                    <![CDATA[sehr gut]]>
                 </OPTION>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="4" TYPE="number">
-            <QUESTIONTEXT>
-                <![CDATA[Wenn nein, wie viele Jahre leben Sie schon in Deutschland?]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <MIN>
-                    <![CDATA[0]]>
-                </MIN>
-                <MAX>
-                    <![CDATA[100]]>
-                </MAX>
+                <OPTION>
+                    <![CDATA[gut]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[mittel]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[schlecht]]>
+                </OPTION>
             </OPTIONS>
         </QUESTION>
     </QUESTIONS>

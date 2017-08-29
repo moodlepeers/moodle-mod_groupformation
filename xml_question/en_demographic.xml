@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="demographic questions">
-    <QUESTIONS VERSION="2017082500">
+    <QUESTIONS VERSION="2017082901">
         <QUESTION ID="1" TYPE="dropdown">
             <QUESTIONTEXT>
                 <![CDATA[What is your sex?]]>
@@ -32,28 +32,24 @@
         </QUESTION>
         <QUESTION ID="3" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Is German your native language?]]>
+                <![CDATA[How good are your German skills?]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[Yes]]>
+                    <![CDATA[Native speaker]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[No]]>
+                    <![CDATA[Very good]]>
                 </OPTION>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="4" TYPE="number">
-            <QUESTIONTEXT>
-                <![CDATA[If no, for how long do you live Germany?]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <MIN>
-                    <![CDATA[0]]>
-                </MIN>
-                <MAX>
-                    <![CDATA[100]]>
-                </MAX>
+                <OPTION>
+                    <![CDATA[Good]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Average]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Bad]]>
+                </OPTION>
             </OPTIONS>
         </QUESTION>
     </QUESTIONS>
