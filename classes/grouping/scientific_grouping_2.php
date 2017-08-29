@@ -101,7 +101,7 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
 
         usort($scores, $cmp);
 
-        //var_dump($scores);
+        $best = $this->get_slices($scores, $numberofslices);
 
         while ($i < 100 && !$bestfound) {
             $i++;
@@ -141,8 +141,8 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
             for ($k = 0; $k < count($means); $k++) {
                 $mean = $means[$k];
                 $stddev = $stddevs[$k];
-                $distmean = abs($mean - $avgmean) / $avgmean;
-                $diststddev = abs ($stddev - $avgstddev) / $avgstddev;
+                $distmean = abs($mean - $avgmean) / ($avgmean+0.01);
+                $diststddev = abs ($stddev - $avgstddev) / ($avgstddev+0.01);
                 $boolmean &= ($distmean < $cutoff);
                 $boolstddev &= ($diststddev < $cutoff);
                 $distsummean += $distmean;
