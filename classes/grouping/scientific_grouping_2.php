@@ -124,6 +124,10 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
             $avgmean = array_sum($means) / count($means);
             $avgstddev = array_sum($stddevs) / count($stddevs);
 
+            if ($avgmean == 0 || $avgstddev == 0) {
+                continue;
+            }
+
             // Loop preparation.
             $boolmean = true;
             $boolstddev = true;
