@@ -103,6 +103,8 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
 
         $best = $this->get_slices($scores, $numberofslices);
 
+        var_dump($best);
+
         while ($i < 100 && !$bestfound) {
             $i++;
             $slices = $this->get_slices($scores, $numberofslices);
@@ -192,23 +194,30 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
      * @return array
      */
     public function run_grouping($users) {
+        var_dump($users);
 
         $groupsizes = $this->store->determine_group_size($users);
+        var_dump($groupsizes);
 
         $specification = $this->get_specification();
         list ($configurations, $specs) = $specification;
         $weights = $this->get_weights();
 
+        var_dump($configurations,$specs,$weights);
+
         $numberofslices = count($specification[0]);
+
+        var_dump($numberofslices);
 
         if (count($users[0]) < $numberofslices) {
             return [];
         }
 
         $slices = $this->get_optimal_slices($users[0], $numberofslices, $specs);
+        var_dump($slices);
 
         $cohorts = $this->build_cohorts($slices, $groupsizes[0], $specification, $weights);
-
+        var_dump($cohorts);
         // Handle all users with incomplete or no questionnaire submission.
         $randomkey = "rand:1;mrand:_;ex:_;gh:_";
 
@@ -242,9 +251,12 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
 
             $configurationkey = $configurationkeys[$i];
             $configuration = $configurations[$configurationkey];
-
+            var_dump($slice);
             $rawparticipants = $this->participantparser->build_participants($slice, $specs, $weights);
+            var_dump($rawparticipants);
             $participants = $this->configure_participants($rawparticipants, $configuration);
+            var_dump($participants);
+            var_dump(array_values($participants)[0]);
 
             $cohorts[$configurationkey] = $this->build_cohort($participants, $groupsize, $configurationkey);
         }
