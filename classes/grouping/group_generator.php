@@ -39,7 +39,9 @@ class mod_groupformation_group_generator {
      * @return boolean
      */
     public static function generate_moodle_groups($groupformationid) {
-        global $COURSE;
+        global $DB;
+
+        $courseid = $DB->get_field('groupformation','course',array('id'=>$groupformationid));
 
         $groupsmanager = new mod_groupformation_groups_manager ($groupformationid);
         $groupalgroups = $groupsmanager->get_generated_groups('id', 'id, groupname,performance_index,moodlegroupid');
@@ -64,7 +66,7 @@ class mod_groupformation_group_generator {
 
             $parsedgroupname = groups_parse_name($groupname, $position);
 
-            if (groups_get_group_by_name($COURSE->id, $parsedgroupname)) {
+            if (groups_get_group_by_name($courseid, $parsedgroupname)) {
                 $error = get_string('groupnameexists', 'groupformation', $parsedgroupname);
                 $failed = true;
                 break;
@@ -72,7 +74,7 @@ class mod_groupformation_group_generator {
 
             // Create group.
             $newmoodlegroup = new stdClass ();
-            $newmoodlegroup->courseid = $COURSE->id;
+            $newmoodlegroup->courseid = $courseid;
             $newmoodlegroup->name = $parsedgroupname;
             $newmoodlegroup->timecreated = time();
 
@@ -87,8 +89,7 @@ class mod_groupformation_group_generator {
             $groupsmanager->save_moodlegroup_id($groupid, $moodlegroupid);
 
             // Invalidate the course groups cache seeing as we've changed it.
-            cache_helper::invalidate_by_definition('core', 'groupdata', array(), array(
-                $COURSE->id));
+            cache_helper::invalidate_by_definition('core', 'groupdata', array(), array($courseid));
 
             if ($failed) {
                 foreach ($createdmoodlegroups as $groupid => $moodlegroupid) {
