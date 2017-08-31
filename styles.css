@@ -628,7 +628,7 @@
     visibility: hidden;
     display: none;
 }
-s
+
 @media (min-width: 64em) {
     .path-mod-groupformation .responsive-table tbody td.td-extra {
         visibility: visible;
