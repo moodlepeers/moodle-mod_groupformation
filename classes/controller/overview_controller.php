@@ -122,17 +122,26 @@ class mod_groupformation_overview_controller {
 
                 $disabled = false && $this->store->all_answers_required() && !$this->usermanager->has_answered_everything($this->userid);
 
+                $modalarray = array(
+                        'type' => 'submit', 'name' => 'begin', 'value' => '0',
+                        'state' => (($disabled) ? 'disabled' : ''),
+                        'text' => get_string('questionnaire_submit', 'groupformation'));
+
+                if (mod_groupformation_data::is_math_prep_course_mode()) {
+                    $modalarray = array(
+                            'type' => 'submit', 'name' => 'begin', 'value' => '0',
+                            'state' => (($disabled) ? 'disabled' : ''),
+                            'modal-id' => 'deleteModal',
+                            'modal-text' => get_string('submit-modal-text', 'groupformation'),
+                            'modal-title' => get_string('submit-modal-title', 'groupformation'),
+                            'text' => get_string('questionnaire_submit', 'groupformation'));
+                }
+
                 $this->buttonsarray = array(
                     array(
                         'type' => 'submit', 'name' => 'begin', 'value' => '1', 'state' => '',
                         'text' => get_string('edit')),
-                    array(
-                        'type' => 'submit', 'name' => 'begin', 'value' => '0',
-                        'state' => (($disabled) ? 'disabled' : ''),
-                        'modal-id' => 'deleteModal',
-                        'modal-text' => get_string('submit-modal-text', 'groupformation'),
-                        'modal-title' => get_string('submit-modal-title', 'groupformation'),
-                        'text' => get_string('questionnaire_submit', 'groupformation')),
+                    $modalarray,
                     array(
                         'type' => 'submit', 'name' => 'begin', 'value' => '-1',
                         'state' => '',

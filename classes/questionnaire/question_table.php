@@ -70,7 +70,7 @@ class mod_groupformation_question_table {
      */
     public function print_footer() {
         // Closing the table or unordered list.
-        if ($this->category == 'topics') {
+        if ($this->category == 'topic') {
             // Close unordered list.
             echo '</ul>';
 

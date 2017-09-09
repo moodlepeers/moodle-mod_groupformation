@@ -85,6 +85,7 @@ $go = true;
 if (has_capability('mod/groupformation:onlystudent', $context) &&
         !has_capability('mod/groupformation:editsettings', $context) &&
         (data_submitted() && confirm_sesskey())) {
+
     $status = $usermanager->get_answering_status($userid);
     if ($status == 0 || $status == -1) {
         if ($inarray) {

@@ -1,41 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="multiselect questions">
-    <QUESTIONS VERSION="2017060319">
+    <QUESTIONS VERSION="2017090901">
         <QUESTION ID="1" TYPE="multiselect">
             <QUESTIONTEXT>
-                <![CDATA[What do you study?]]>
+                <![CDATA[What are your favorite colors?]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[Informatik]]>
+                    <![CDATA[Red]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Mathematik]]>
+                    <![CDATA[Blue]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Chemie]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Bauingenieurwesen]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Wirtschaftsingenieurwesen]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Biologie]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="2" TYPE="multiselect">
-            <QUESTIONTEXT>
-                <![CDATA[What school degree do you have?]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[Fachabitur]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Abitur]]>
+                    <![CDATA[Green]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>

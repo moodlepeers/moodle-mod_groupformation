@@ -258,7 +258,7 @@ $string ['emailnotifications_description'] = '<i style="color:red;">The automate
 $string ['sampleGroupName'] = 'The name of your group is';
 $string ['oneManGroup'] = 'You are a one man group.';
 $string ['noUser'] = 'User does not exist';
-$string ['membersAre'] = 'Your team members are:';
+$string ['membersAre'] = 'Your group members are:';
 $string ['groupingNotReady'] = 'Group formation is not finished yet.';
 $string ['jobget_name'] = 'Group formation and clean up';
 $string ['build_groups_task'] = 'Group formation task';

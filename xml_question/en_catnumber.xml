@@ -1,22 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="number questions">
-    <QUESTIONS VERSION="2017060319">
+    <QUESTIONS VERSION="2017090901">
         <QUESTION ID="1" TYPE="number">
             <QUESTIONTEXT>
-                <![CDATA[Wenn ich die Wahl habe, arbeite ich lieber im Team als allein.]]>
+                <![CDATA[How many hours do you study per week?]]>
             </QUESTIONTEXT>
             <OPTIONS>
-                <MIN><![CDATA[-100]]></MIN>
-                <MAX><![CDATA[100]]></MAX>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="2" TYPE="number">
-            <QUESTIONTEXT>
-                <![CDATA[Ich finde, Teamarbeit hilft mir dabei, effektiver zu arbeiten.]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <MIN><![CDATA[-100]]></MIN>
-                <MAX><![CDATA[100]]></MAX>
+                <MIN><![CDATA[0]]></MIN>
+                <MAX><![CDATA[168]]></MAX>
             </OPTIONS>
         </QUESTION>
     </QUESTIONS>
