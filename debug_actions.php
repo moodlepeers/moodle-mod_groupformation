@@ -21,6 +21,7 @@
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+require_once('../../config.php');
 
 // Reads URL parameters.
 $runjob = optional_param('run_job', false, PARAM_BOOL);
@@ -58,7 +59,7 @@ if ($CFG->debug === 32767) {
         if (!is_null($job)) {
             $result = $ajm::do_groupal($job);
             $saved = $ajm::save_result($job, $result);
-            $ajm::set_job($job,'done');
+            $ajm::set_job($job, 'done');
         }
         $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
             'id' => $id, 'do_show' => 'analysis'));

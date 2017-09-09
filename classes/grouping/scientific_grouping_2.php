@@ -90,7 +90,6 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
 
         $scores = [];
 
-        //var_dump($specs);
         foreach ($users as $user) {
             $scores[] = array($user, $this->usermanager->get_eval_score($user, $specs));
         }
@@ -143,8 +142,8 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
             for ($k = 0; $k < count($means); $k++) {
                 $mean = $means[$k];
                 $stddev = $stddevs[$k];
-                $distmean = abs($mean - $avgmean) / ($avgmean+0.01);
-                $diststddev = abs ($stddev - $avgstddev) / ($avgstddev+0.01);
+                $distmean = abs($mean - $avgmean) / ($avgmean + 0.01);
+                $diststddev = abs ($stddev - $avgstddev) / ($avgstddev + 0.01);
                 $boolmean &= ($distmean < $cutoff);
                 $boolstddev &= ($diststddev < $cutoff);
                 $distsummean += $distmean;
@@ -203,7 +202,7 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
         list ($configurations, $specs) = $specification;
         $weights = $this->get_weights();
 
-        var_dump($configurations,$specs,$weights);
+        var_dump($configurations, $specs, $weights);
 
         $numberofslices = count($specification[0]);
 
@@ -279,13 +278,17 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
         unset($big5specs['labels']['agreeableness']);
         unset($knowledgespecs['labels']['one']);
 
-        $specs = ["big5" => $big5specs, 'knowledge'=>$knowledgespecs];
+        $specs = ['big5' => $big5specs, 'knowledge' => $knowledgespecs];
 
         $configurations = array(
-            "mrand:0;ex:1;gh:1;vw:0" => array('big5_extraversion' => true, 'big5_conscientiousness' => true, 'knowledge_two' => false),
-            "mrand:0;ex:1;gh:0;vw:0" => array('big5_extraversion' => true, 'big5_conscientiousness' => false, 'knowledge_two' => false),
-            "mrand:0;ex:0;gh:0;vw:0" => array('big5_extraversion' => false, 'big5_conscientiousness' => false, 'knowledge_two' => false),
-            "mrand:0;ex:0;gh:1;vw:0" => array('big5_extraversion' => false, 'big5_conscientiousness' => true, 'knowledge_two' => false),
+            "mrand:0;ex:1;gh:1;vw:0" => array('big5_extraversion' => true,
+                    'big5_conscientiousness' => true, 'knowledge_two' => false),
+            "mrand:0;ex:1;gh:0;vw:0" => array('big5_extraversion' => true,
+                    'big5_conscientiousness' => false, 'knowledge_two' => false),
+            "mrand:0;ex:0;gh:0;vw:0" => array('big5_extraversion' => false,
+                    'big5_conscientiousness' => false, 'knowledge_two' => false),
+            "mrand:0;ex:0;gh:1;vw:0" => array('big5_extraversion' => false,
+                    'big5_conscientiousness' => true, 'knowledge_two' => false),
         );
 
         return [$configurations, $specs];
@@ -299,7 +302,6 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
      * @return array
      */
     private function get_slices($scores, $numberofslices) {
-
 
         $slices = range(1, $numberofslices);
         $userslices = [];

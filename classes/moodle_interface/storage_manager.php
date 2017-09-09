@@ -1229,7 +1229,8 @@ class mod_groupformation_storage_manager {
     public function uses_filter() {
         global $DB;
 
-        return ($DB->count_records('groupformation_started', array('groupformation' => $this->groupformationid, 'filtered' => 1))) > 0;
+        return ($DB->count_records('groupformation_started',
+                        array('groupformation' => $this->groupformationid, 'filtered' => 1))) > 0;
     }
 
     /**
@@ -1241,7 +1242,8 @@ class mod_groupformation_storage_manager {
     public function is_filtered($userid) {
         global $DB;
 
-        return boolval($DB->get_field('groupformation_started', 'filtered', array('groupformation' => $this->groupformationid, 'userid' => $userid)));
+        return boolval($DB->get_field('groupformation_started', 'filtered',
+                array('groupformation' => $this->groupformationid, 'userid' => $userid)));
     }
 
     /**
@@ -1252,19 +1254,27 @@ class mod_groupformation_storage_manager {
     public function get_honesty_stats() {
         global $DB;
 
-        $yes = $DB->count_records('groupformation_answer', array('groupformation' => $this->groupformationid, 'category' => 'honesty', 'answer' => 1));
-        $maybe = $DB->count_records('groupformation_answer', array('groupformation' => $this->groupformationid, 'category' => 'honesty', 'answer' => 2));
-        $no = $DB->count_records('groupformation_answer', array('groupformation' => $this->groupformationid, 'category' => 'honesty', 'answer' => 3));
-        return ['yes' => $yes+$maybe, 'no' => $no];
+        $yes = $DB->count_records('groupformation_answer',
+                array('groupformation' => $this->groupformationid, 'category' => 'honesty', 'answer' => 1));
+        $maybe = $DB->count_records('groupformation_answer',
+                array('groupformation' => $this->groupformationid, 'category' => 'honesty', 'answer' => 2));
+        $no = $DB->count_records('groupformation_answer',
+                array('groupformation' => $this->groupformationid, 'category' => 'honesty', 'answer' => 3));
+        return ['yes' => $yes + $maybe, 'no' => $no];
     }
 
     public function filter_users($value) {
         global $DB;
 
-        $users = $DB->get_records('groupformation_answer', array('groupformation' => $this->groupformationid, 'category' => 'honesty', 'answer' => 3), 'userid', 'userid');
+        $users = $DB->get_records('groupformation_answer',
+                array('groupformation' => $this->groupformationid, 'category' => 'honesty', 'answer' => 3),
+                'userid',
+                'userid'
+        );
 
         foreach(array_keys($users) as $userid) {
-            $record = $DB->get_record('groupformation_started', array('groupformation' => $this->groupformationid, 'userid' => $userid));
+            $record = $DB->get_record('groupformation_started',
+                    array('groupformation' => $this->groupformationid, 'userid' => $userid));
             $record->filtered = intval($value);
 
             $DB->update_record('groupformation_started', $record);

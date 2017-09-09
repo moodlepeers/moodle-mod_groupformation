@@ -120,7 +120,7 @@ class mod_groupformation_overview_controller {
                     $this->get_availability_state(), get_string('questionnaire_not_submitted', 'groupformation'));
                 $this->buttonsinfo = get_string('questionnaire_press_continue_submit', 'groupformation');
 
-                $disabled = false && $this->store->all_answers_required() && !$this->usermanager->has_answered_everything($this->userid);
+                $disabled = $this->store->all_answers_required() && !$this->usermanager->has_answered_everything($this->userid);
 
                 $modalarray = array(
                         'type' => 'submit', 'name' => 'begin', 'value' => '0',

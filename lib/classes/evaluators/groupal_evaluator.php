@@ -204,7 +204,6 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
             // (otherwise the criterion will be unthought weighted ).
 
             $d = $this->distancefunction->normalized_distance($c1, $c2);
-            /** @var mod_groupformation_specific_criterion $c1 */
             $wd = $d * $c1->get_weight();
             if ($c1->is_homogeneous()) {
                 $homval += $wd;

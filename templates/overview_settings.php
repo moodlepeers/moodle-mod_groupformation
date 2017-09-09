@@ -106,18 +106,23 @@ if (!defined('MOODLE_INTERNAL')) {
                             <?php echo $button['text']; ?>
                         </button>
                         <!-- Modal -->
-                        <div class="modal fade" id="<?php echo $button['modal-id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal fade" id="<?php echo $button['modal-id']; ?>"
+                             tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                         <h4 class="modal-title" id="myModalLabel"><?php echo $button['modal-title']; ?></h4>
                                     </div>
                                     <div class="modal-body">
                                         <?php echo $button['modal-text']; ?>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo get_string('cancel');?></button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                                            <?php echo get_string('cancel');?>
+                                        </button>
                                         <button type="<?php echo $button['type']; ?>"
                                                 name="<?php echo $button['name']; ?>"
                                                 value="<?php echo $button['value']; ?>"
