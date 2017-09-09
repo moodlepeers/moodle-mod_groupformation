@@ -41,7 +41,7 @@ class mod_groupformation_group_generator {
     public static function generate_moodle_groups($groupformationid) {
         global $DB;
 
-        $courseid = $DB->get_field('groupformation','course', array(
+        $courseid = $DB->get_field('groupformation', 'course', array(
                 'id' => $groupformationid)
         );
 
