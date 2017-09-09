@@ -67,7 +67,7 @@ if (mod_groupformation_data::is_math_prep_course_mode()) {
     $debugbuttons .= '</p>';
     $debugbuttons .= '<p>';
     $v = 0.0;
-    if ($stats['yes'] !== 0 && $stats['no'] !== 0){
+    if ($stats['yes'] !== 0 && $stats['no'] !== 0) {
         $v = round(floatval($stats['no']) / ($stats['yes'] + $stats['no']), 4) * 100;
     }
     $debugbuttons .= 'Es haben also <b>' . $v . '%</b> der Studierende geantwortet, dass sie <b>nicht</b> ehrlich und ';

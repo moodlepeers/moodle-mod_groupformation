@@ -1272,7 +1272,7 @@ class mod_groupformation_storage_manager {
                 'userid'
         );
 
-        foreach(array_keys($users) as $userid) {
+        foreach (array_keys($users) as $userid) {
             $record = $DB->get_record('groupformation_started',
                     array('groupformation' => $this->groupformationid, 'userid' => $userid));
             $record->filtered = intval($value);

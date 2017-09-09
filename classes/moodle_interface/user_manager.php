@@ -724,7 +724,7 @@ class mod_groupformation_user_manager {
 
         foreach ($records as $record) {
             if (!is_null($specs)) {
-                if (array_key_exists($record->criterion,$specs)) {
+                if (array_key_exists($record->criterion,$specs)) { 
                     if (array_key_exists($record->label, $specs[$record->criterion]['labels'])) {
                         $product *= ($record->value + 1);
                     }
