@@ -23,10 +23,10 @@
  */
 
 defined('MOODLE_INTERNAL') || die();
-$plugin->version = 2017081503;
-$plugin->requires = 2016052300; // Could be set to Moodle 3.1 2016052300; Best use Moodle 3.2 (2016120500) due to new bootstrap 4.
+$plugin->version = 2017100618;
+$plugin->requires = 2016120500; // Could be set to Moodle 3.1 2016052300; Best use Moodle 3.2 (2016120500) due to new bootstrap 4.
 $plugin->cron = 0;
 $plugin->component = 'mod_groupformation';
 $plugin->maturity = MATURITY_STABLE;
-$plugin->release = 'v1.4'; // We do not use the Moodle versions as prefix; we use semantic versioning (http://semver.org/).
+$plugin->release = 'v1.5'; // We do not use the Moodle versions as prefix; we use semantic versioning (http://semver.org/).
 $plugin->dependencies = array();

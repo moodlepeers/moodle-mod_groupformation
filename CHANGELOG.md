@@ -1,5 +1,24 @@
 # Change Log
 
+## [v1.5](https://github.com/moodlepeers/moodle-mod_groupformation/tree/v1.5) (2017-10-06)
+[Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/v1.4...v1.5)
+
+**Implemented enhancements:**
+
+- Accessing URL hacks via links [\#18](https://github.com/moodlepeers/moodle-mod_groupformation/issues/18)
+- Visualization of the sorted topics [\#16](https://github.com/moodlepeers/moodle-mod_groupformation/issues/16)
+
+**Closed issues:**
+
+- Unusable slow: grouping\_view.php?id=XXX&do\_show=grouping  [\#17](https://github.com/moodlepeers/moodle-mod_groupformation/issues/17)
+
+## [v1.4](https://github.com/moodlepeers/moodle-mod_groupformation/tree/v1.4) (2017-07-12)
+[Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/v1.3.1...v1.4)
+
+**Closed issues:**
+
+- Translation Notification preferences [\#53](https://github.com/moodlepeers/moodle-mod_groupformation/issues/53)
+
 ## [v1.3.1](https://github.com/moodlepeers/moodle-mod_groupformation/tree/v1.3.1) (2017-05-26)
 [Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/v1.3...v1.3.1)
 
