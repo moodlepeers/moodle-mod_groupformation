@@ -24,6 +24,9 @@ if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.');
 }
 
+require_once($CFG->dirroot . "/util/criterion_type.php");
+
+
 class mod_groupformation_data {
 
     private static $criteria = array(
@@ -34,7 +37,7 @@ class mod_groupformation_data {
                     "labels" => array(
                             // TODO discuss with Henrik which questions to use how.
                             "extraversion" => array(
-                                    "scenarios" => array(1 => false, 2 => false),  // False = heterogeneous, True = homogeneous.
+                                    "scenarios" => array(1 => false, 2 => false),  // false = heterogeneous, true = homogeneous.
                                     "evaluation" => true,  // Use for displaying it to user (to compare to group and course).
                                     "questionids" => array(-1, 6), // Inverse questions = negative.
                                     "significant_id_only" => false,

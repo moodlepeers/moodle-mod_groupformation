@@ -43,12 +43,12 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
     /**
      * homogeneous criteria->subtract values-> the smaller the better
      * heterogeneous criteria->subtract values->the bigger the better
-     * the difference: heterogeneous value - homogeneous is the return value the biger the better
+     * the difference: heterogeneous value - homogeneous is the return value the bigger the better
      * normalize by the best possible GroupPerformanceIndex
      *      (the difference of a perfect homogeneous pair of values is 0)
      *      (the difference of a perfect heterogeneous pair of value is 1)
-     *      (the besst possible (non realistic) GroupPerformanceIndex, with resct to these rules, is
-     *      the sum (of 1 to nummber of groupmembers count) * (the count of heterogen criterion) *
+     *      (the best possible (non realistic) GroupPerformanceIndex, with resct to these rules, is
+     *      the sum (of 1 to number of groupmembers count) * (the count of heterogen criterion) *
      *          (the sum of the count of each criterions values)
      *      e.g. for a Group of 3 persons with 2 heterogen Criterion each with 4 values
      *      the best posible GroupPerformanceIndex would be (3+2+1)*2*4
@@ -115,7 +115,7 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
             return new mod_groupformation_stats();
         }
 
-        // Calculate avergae of NPIs
+        // Calculate average of NPIs
         $avg = ((float)array_sum($performanceindices)) / count($performanceindices); // float.
 
         // Calculate standard deviation   (which is all diffs of elements and avg squared and finally summed up.
@@ -127,7 +127,7 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
 
         $stddev = (float)0.0;
 
-        // Standard deaviation of all npi values (NPIs) in one Groups.
+        // Standard deviation of all npi values (NPIs) in one Groups.
         if (count($performanceindices) != 1) {
             $stddev = sqrt($sumquadraticerrors) / (count($performanceindices) - 1); // Float.
         }

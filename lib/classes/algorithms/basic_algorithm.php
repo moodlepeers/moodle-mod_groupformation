@@ -124,7 +124,7 @@ class mod_groupformation_basic_algorithm implements mod_groupformation_ialgorith
 
     /**
      *  The main method to call for getting a formation "run" (this takes a while)
-     *  Uses the global set matcher to assign evry not yet matched participant to a group
+     *  Uses the global set matcher to assign every not yet matched participant to a group
      *
      * @return mod_groupformation_cohort
      * @throws Exception

@@ -13,20 +13,20 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 /**
- * Version information
+ * Abstract Class (Use like enum) for defining criteria types
  *
  * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @author Nora Koreuber
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+if (!defined('MOODLE_INTERNAL')) {
+    die ('Direct access to this script is forbidden.');
+}
 
-defined('MOODLE_INTERNAL') || die();
-$plugin->version = 2017081503;
-$plugin->requires = 2016052300; // Could be set to Moodle 3.1 2016052300; Best use Moodle 3.2 (2016120500) due to new bootstrap 4.
-$plugin->cron = 0;
-$plugin->component = 'mod_groupformation';
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = 'v1.4'; // We do not use the Moodle versions as prefix; we use semantic versioning (http://semver.org/).
-$plugin->dependencies = array();
+class mod_groupformation_criterion_type {
+
+    const het = 'het'; // heterogeneous criterion
+    const hom = 'hom'; // homogeneous criterion
+
+}

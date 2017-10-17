@@ -109,7 +109,7 @@ class mod_groupformation_group {
      * Adds an Participant to this Group and calculates the new GroupPerformanceIndex
      *
      * @param mod_groupformation_participant $p
-     * @return bool, true: if was succesful, otherwise false
+     * @return bool, true: if was successful, otherwise false
      */
     public function add_participant(mod_groupformation_participant $p, $random = false) {
 
@@ -169,7 +169,7 @@ class mod_groupformation_group {
 
     // Extra methods.
     /**
-     * clears this group -> removes alle entries and sets the GPI to 0
+     * clears this group -> removes all entries and sets the GPI to 0
      * void TODO einzelne Participants müssen bearbeitet werden (next werte)
      */
     public function clear() {
