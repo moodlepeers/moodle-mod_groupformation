@@ -1560,5 +1560,27 @@ function xmldb_groupformation_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2017081503, 'groupformation');
     }
 
+    if ($oldversion < 2017121401) {
+
+        // Changing type of field onlyactivestudents on table groupformation to int.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('onlyactivestudents', XMLDB_TYPE_INTEGER, '1', null, null, null, null, 'maxpoints');
+
+        // Launch change of type for field onlyactivestudents.
+        $dbman->change_field_type($table, $field);
+
+        // Changing type of field emailnotifications on table groupformation to int.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('emailnotifications', XMLDB_TYPE_INTEGER, '1', null, null, null, null, 'onlyactivestudents');
+
+        // Launch change of type for field emailnotifications.
+        $dbman->change_field_type($table, $field);
+
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2017121401, 'groupformation');
+    }
+
+
     return true;
 }
