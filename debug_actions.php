@@ -34,7 +34,7 @@ $resetjob = optional_param('reset_job', false, PARAM_BOOL);
 
 $debugbuttons = "";
 
-// Only if debug mode is activated or if the user is a debug user
+// Only if debug mode is activated or if the user is a debug user.
 $debugusers = explode(',', $CFG->debugusers);
 if (($CFG->debug === 32767) || (in_array($USER->id, $debugusers))) {
 
