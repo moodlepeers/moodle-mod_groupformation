@@ -1575,7 +1575,7 @@ function xmldb_groupformation_upgrade($oldversion) {
 
         // Launch change of type for field emailnotifications.
         $dbman->change_field_type($table, $field);
-        
+
         // Groupformation savepoint reached.
         upgrade_mod_savepoint(true, 2017121401, 'groupformation');
     }
