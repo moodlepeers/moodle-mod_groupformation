@@ -182,7 +182,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
                 <div id="szenarioradios">
                     <div class="grid gf_grid_m_minus">
                     <div class="col_m_33">
-                        <input type="radio" name="js_szenario" id="project" value="project"  />
+                        <input type="radio" name="js_scenario" id="project" value="project"  />
                         <label class="col_m_100 szenarioLabel" id="label_project" for="project" ><div class="sz_header">' .
             get_string('scenario_projectteams', 'groupformation')
             . '</div><p><small><b><i>' . get_string('scenario_usage_header', 'groupformation') . '</i></b><br>'
@@ -191,7 +191,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
                                         </label>
                 </div>
                 <div class="col_m_33">
-                    <input type="radio" name="js_szenario" id="homework" value="homework" />
+                    <input type="radio" name="js_scenario" id="homework" value="homework" />
                     <label class="col_m_100 szenarioLabel" id="label_homework" for="homework" ><div class="sz_header">' .
             get_string('scenario_homeworkgroups', 'groupformation') .
             '</div><p><small><b><i>' . get_string('scenario_usage_header', 'groupformation') . '</i></b><br>'
@@ -200,7 +200,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
                     </label>
                 </div>
                         ' . (($mathprepcourse) ? '' : '<div class="col_m_33">
-                            <input type="radio" name="js_szenario" id="presentation" value="presentation" />
+                            <input type="radio" name="js_scenario" id="presentation" value="presentation" />
                                 <label class="col_m_100 szenarioLabel" for="presentation">
                                     <div class="sz_header">' .
                 get_string('scenario_presentationgroups', 'groupformation') . '</div>
@@ -216,7 +216,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
         ');
 
         // Wrapper of the szenario.
-        $mform->addElement('html', '<div id="js_szenarioWrapper">');
+        $mform->addElement('html', '<div id="js_scenarioWrapper">');
 
         // Wrapper for preknowledge.
         $mform->addElement('html', '<div class="gf_settings_pad">');
@@ -226,21 +226,25 @@ class mod_groupformation_mod_form extends moodleform_mod {
                     <div class="gf_pad_header">
                         <label class="gf_label" for="id_js_knowledge">
                           <input type="checkbox" id="id_js_knowledge" name="chbKnowledge" value="wantKnowledge" />
-                          ' . get_string('knowledge_description', 'groupformation') . '</label><span class="optional"></span>
-                    </div>');
+                          ' . get_string('knowledge_description', 'groupformation') . '</label>'.
+                '<span class="optional"></span>'.
+                '<span class="toolt" tooltip="' .
+                get_string('knowledge_help', 'groupformation') . '"></span>'.
+                '    </div>');
 
         // Add dynamic input fields preknowledge and Preview.
         $mform->addElement('html', '
                     <div class="gf_pad_content" id="js_knowledgeWrapper">
                     <!-- <p>' . get_string('knowledge_description_extended', 'groupformation') . '</p> -->
-                       <p id="knowledeInfo"></p>
-                        <p id="knowledeInfoProject" style="display:none;">' .
+                       <p id="knowledgeInfo"></p>
+                        <p id="knowledgeInfoProject" style="display:none;">' .
             get_string('knowledge_info_project', 'groupformation') . '</p>
-                        <p id="knowledeInfoHomework" style="display:none;">' .
+                        <p id="knowledgeInfoHomework" style="display:none;">' .
             get_string('knowledge_info_homework', 'groupformation') . '</p>
-            <p id="knowledeInfoPresentation" style="display:none;">' .
+            <p id="knowledgeInfoPresentation" style="display:none;">' .
             get_string('knowledge_info_presentation', 'groupformation') . '</p>
             <p id="stringAddInput" style="display:none;">' . get_string('add_line', 'groupformation') . '</p>
+            <p id="language" style="display:none;">' . get_string('language', 'groupformation') . '</p>
             <div class="grid">
             <div id="prk">
             <div class="multi_field_wrapper persist-area">
@@ -332,8 +336,10 @@ class mod_groupformation_mod_form extends moodleform_mod {
                             <label class="gf_label" for="id_js_topics">
                               <input type="checkbox" id="id_js_topics" name="chbTopics" value="wantTopics">
                               ' . get_string('topics_description', 'groupformation') . '</label>
-                              <span id="topicsStateLabel" class="optional"></span>
-                        </div>');
+                              <span id="topicsStateLabel" class="optional"></span>'.
+                    '<span class="toolt" tooltip="' .
+                    get_string('topics_help', 'groupformation') . '"></span>'.
+                    '            </div>');
 
             // Add dynamic input fields topics with preview.
             $mform->addElement('html', '
@@ -454,8 +460,8 @@ class mod_groupformation_mod_form extends moodleform_mod {
 
             get_string('groupname', 'groupformation') .
             '<span class="optional"></span><span class="toolt" tooltip="' .
-            get_string('groupname_help', 'groupformation') . '"></span>
-                </div>
+            get_string('groupname_help', 'groupformation') . '"></span>'.
+            '    </div>
                 <div class="gf_pad_content">
                     <input type="text" class="respwidth" id="js_groupname" />
                 </div>
