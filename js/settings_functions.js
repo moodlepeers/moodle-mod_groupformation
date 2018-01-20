@@ -237,7 +237,7 @@ require(['jquery', 'jqueryui'], function($) {
             if (state == 'off') {
                 $('#id_knowledge').prop('checked', false);
                 $('#id_knowledge').attr('disabled', 'disabled');
-                //
+
                 $('#id_js_knowledge').prop('checked', false);
                 $('#id_js_knowledge').attr('disabled', 'disabled');
 
@@ -400,7 +400,7 @@ require(['jquery', 'jqueryui'], function($) {
 
                 if (scenario == 1) {
 
-                    // Check scenario box
+                    // Check scenario box.
                     $("input[name='js_scenario'][value='project']").attr("checked", "checked");
 
                     // Check browser support first, before delete this.
@@ -409,7 +409,7 @@ require(['jquery', 'jqueryui'], function($) {
 
                 } else if (scenario == 2) {
 
-                    // Check scenario box
+                    // Check scenario box.
                     $("input[name='js_scenario'][value='homework']").attr("checked", "checked");
 
                     // Check browser support first, before delete this.
@@ -418,7 +418,7 @@ require(['jquery', 'jqueryui'], function($) {
 
                 } else if (scenario == 3) {
 
-                    // Check scenario box
+                    // Check scenario box.
                     $("input[name='js_scenario'][value='presentation']").attr("checked", "checked");
 
                     // Check browser support first, before delete this.
@@ -427,8 +427,6 @@ require(['jquery', 'jqueryui'], function($) {
 
                     switchTopics('on');
                     $('#id_js_topics').prop('disabled', true);
-
-                    //$('#id_js_topics').prop('checked', true);
 
                     adjustGroupSizeOptions('none');
 
@@ -533,10 +531,10 @@ require(['jquery', 'jqueryui'], function($) {
 
             if (scenario == 'project') {
 
-                // Deactivate selected scenario and select scenario 'project'
+                // Deactivate selected scenario and select scenario 'project'.
                 $('#id_szenario option').prop('selected', false).filter('[value=1]').prop('selected', true);
 
-                // Update info-text for knowledge questions
+                // Update info-text for knowledge questions.
                 var infoText = $('#knowledgeInfoProject').text();
                 $('#knowledgeInfo').text(infoText);
 
@@ -548,10 +546,10 @@ require(['jquery', 'jqueryui'], function($) {
 
             } else if (scenario == 'homework') {
 
-                // Deactivate selected scenario and select scenario 'homework'
+                // Deactivate selected scenario and select scenario 'homework'.
                 $('#id_szenario option').prop('selected', false).filter('[value=2]').prop('selected', true);
 
-                // Update info-text for knowledge questions
+                // Update info-text for knowledge questions.
                 var infoText = $('#knowledgeInfoHomework').text();
                 $('#knowledgeInfo').text(infoText);
 
@@ -564,14 +562,14 @@ require(['jquery', 'jqueryui'], function($) {
 
             } else if (scenario == 'presentation') {
 
-                // Deactivate selected scenario and select scenario 'presentation'
+                // Deactivate selected scenario and select scenario 'presentation'.
                 $('#id_szenario option').prop('selected', false).filter('[value=3]').prop('selected', true);
 
-                // Update info-text for knowledge questions
+                // Update info-text for knowledge questions.
                 var infoText = $('#knowledgeInfoPresentation').text();
                 $('#knowledgeInfo').text(infoText);
 
-                // Switch optional hint to required asterisk
+                // Switch optional hint to required asterisk.
                 $('#topicsStateLabel').removeClass('optional').addClass('required');
 
                 switchTopics('on');
