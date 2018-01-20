@@ -155,6 +155,7 @@ class mod_groupformation_grouping {
      * @param $users
      * @param $groupsize
      * @return mod_groupformation_cohort
+     * @throws Exception
      */
     public function build_groupal_cohort($users, $groupsize) {
         // Choose matcher.

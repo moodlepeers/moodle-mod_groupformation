@@ -89,9 +89,9 @@ abstract class mod_groupformation_criterion {
         $this->value[$i] = $v;
     }
 
-
     /**
      * @param float[] $v iterates and copies each value
+     * @throws Exception
      */
     public function set_values(&$v) {
         for ($i = 0; $i < count($v); $i++) {

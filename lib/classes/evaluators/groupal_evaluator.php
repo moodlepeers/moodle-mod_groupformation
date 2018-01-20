@@ -39,7 +39,6 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
         $this->distancefunction = new mod_groupformation_manhattan_distance();
     }
 
-
     /**
      * homogeneous criteria->subtract values-> the smaller the better
      * heterogeneous criteria->subtract values->the bigger the better
@@ -55,6 +54,7 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
      *
      * @param mod_groupformation_group $group
      * @return float|int
+     * @throws Exception
      */
 
     public function evaluate_gpi(mod_groupformation_group $group) {
