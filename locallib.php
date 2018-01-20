@@ -31,6 +31,7 @@ defined('MOODLE_INTERNAL') || die ();
  *
  * @param unknown $PAGE
  * @param string $filename
+ * @throws moodle_exception
  */
 function groupformation_add_jquery($PAGE, $filename = null) {
     global $CFG;
@@ -48,6 +49,7 @@ function groupformation_add_jquery($PAGE, $filename = null) {
  *
  * @param unknown $PAGE
  * @param string $filename in amd folder of mod
+ * @throws moodle_exception
  */
 function groupformation_add_js_amd($PAGE, $filename) {
     global $CFG;
@@ -72,6 +74,7 @@ function groupformation_call_js_amd($PAGE, $modulname, $method, $params=null) {
  *
  * @param int $id
  * @return array
+ * @throws moodle_exception
  */
 function groupformation_determine_instance($id) {
     list ($course, $cm) = get_course_and_cm_from_cmid($id, 'groupformation');
@@ -100,6 +103,7 @@ function groupformation_get_context($groupformationid) {
  *
  * @param $id
  * @param int $userid
+ * @throws moodle_exception
  */
 function groupformation_set_activity_completion($id, $userid) {
     list($course, $cm) = get_course_and_cm_from_cmid($id);
@@ -112,8 +116,11 @@ function groupformation_set_activity_completion($id, $userid) {
  *
  * @param stdClass $recipient
  * @param string $subject
- * @param string $message
- *
+ * @param $messagetext
+ * @param null $contexturl
+ * @param null $contexturlname
+ * @throws coding_exception
+ * @throws dml_exception
  */
 function groupformation_send_message($recipient, $subject, $messagetext, $contexturl = null, $contexturlname = null) {
     global $DB;
@@ -148,7 +155,9 @@ function groupformation_send_message($recipient, $subject, $messagetext, $contex
 
 /**
  * Checks for cronjob whether it is running or not
+ *
  * @throws coding_exception
+ * @throws dml_exception
  */
 function groupformation_check_for_cron_job() {
     global $DB;
@@ -166,8 +175,10 @@ function groupformation_check_for_cron_job() {
 /**
  * Reads questionnaire file
  *
- * @param mod_groupformation_storage_manager $store
  * @param string $filename
+ * @throws Exception
+ * @throws coding_exception
+ * @throws dml_exception
  */
 function groupformation_import_questionnaire_configuration($filename = 'questionnaire.xml') {
     global $CFG, $DB;
@@ -266,6 +277,7 @@ function groupformation_import_questionnaire_configuration($filename = 'question
  * @param int $numbers
  * @param unknown $version
  * @param boolean $init
+ * @throws dml_exception
  */
 function groupformation_add_catalog_version($category, $numbers, $version, $init) {
     global $DB;
@@ -292,6 +304,8 @@ function groupformation_add_catalog_version($category, $numbers, $version, $init
  * Deletes all questions in a specific category
  *
  * @param string $category
+ * @param $language
+ * @throws dml_exception
  */
 function groupformation_delete_all_catalog_questions($category, $language) {
     global $DB;
@@ -303,6 +317,7 @@ function groupformation_delete_all_catalog_questions($category, $language) {
  * Returns current questionnaire version
  *
  * @return mixed|null
+ * @throws dml_exception
  */
 function groupformation_get_current_questionnaire_version() {
     global $DB;
@@ -321,6 +336,7 @@ function groupformation_get_current_questionnaire_version() {
  *
  * @param string $category
  * @return int|mixed
+ * @throws dml_exception
  */
 function groupformation_get_category_version($category) {
     global $DB;
@@ -975,6 +991,13 @@ function groupformation_z_lookup_table($z) {
     return $zlookuptable[$z];
 }
 
+/**
+ * @param $fileinfo
+ * @param $content
+ * @return string
+ * @throws file_exception
+ * @throws stored_file_creation_exception
+ */
 function groupformation_get_url($fileinfo, $content) {
     $filestorage = get_file_storage();
 
