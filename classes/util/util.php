@@ -35,14 +35,14 @@ class mod_groupformation_util {
      * @param bool|false $unfolded
      * @param string $page
      * @return string
-     * @throws coding_exception
      */
     public static function get_info_text_for_teacher($unfolded = false, $page = "settings") {
-        $s = '<p><a class="show">' . get_string('info_header_teacher_' . $page, 'groupformation') . '</a></p>';
-        $s .= '<div id="info_text" style="display: ' . (($unfolded) ? 'block' : 'none') . ';">';
-        $s .= '<p style="padding-left: 10px;">' . get_string('info_text_teacher_' . $page, 'groupformation') . '</p>';
-        $s .= '</div>';
-        $s .= self::get_js_for_info_text();
+        $s = '';
+        //$s .= '<p><a class="show">' . get_string('info_header_teacher_' . $page, 'groupformation') . '</a></p>';
+        //$s .= '<div id="info_text" style="display: ' . (($unfolded) ? 'block' : 'none') . ';">';
+        //$s .= '<p style="padding-left: 10px;">' . get_string('info_text_teacher_' . $page, 'groupformation') . '</p>';
+        //$s .= '</div>';
+        //$s .= self::get_js_for_info_text();
 
         return $s;
     }
@@ -54,13 +54,13 @@ class mod_groupformation_util {
      */
     private static function get_js_for_info_text() {
         $s = "";
-        $s .= '<script type="text/javascript">';
-        $s .= '        $(function() {';
-        $s .= '            $(\'.show\').click(function() {';
-        $s .= '                $(\'#info_text\').slideToggle();';
-        $s .= '            });';
-        $s .= '        });';
-        $s .= '</script>';
+        //$s .= '<script type="text/javascript">';
+        //$s .= '        $(function() {';
+        //$s .= '            $(\'.show\').click(function() {';
+        //$s .= '                $(\'#info_text\').slideToggle();';
+        //$s .= '            });';
+        //$s .= '        });';
+        //$s .= '</script>';
 
         return $s;
     }
@@ -84,11 +84,12 @@ class mod_groupformation_util {
         $a = new stdClass ();
         $a->scenario_name = $scenarioname;
 
-        $s = '<p><a class="show">' . get_string('info_header_' . $role, 'groupformation') . '</a></p>';
-        $s .= '<div id="info_text" style="display: ' . (($unfolded) ? 'block' : 'none') . ';">';
-        $s .= '<p style="padding-left: 10px;">' . get_string('info_text_' . $role, 'groupformation', $a) . '</p>';
-        $s .= '</div>';
-        $s .= self::get_js_for_info_text();
+        $s = "";
+        //$s .= '<p><a class="show">' . get_string('info_header_' . $role, 'groupformation') . '</a></p>';
+        //$s .= '<div id="info_text" style="display: ' . (($unfolded) ? 'block' : 'none') . ';">';
+        //$s .= '<p style="padding-left: 10px;">' . get_string('info_text_' . $role, 'groupformation', $a) . '</p>';
+        //$s .= '</div>';
+        //$s .= self::get_js_for_info_text();
 
         return $s;
     }
@@ -98,6 +99,7 @@ class mod_groupformation_util {
      *
      * @param int $userid
      * @return stdClass|null
+     * @throws dml_exception
      */
     public static function get_user_record($userid) {
         global $DB;
@@ -170,6 +172,7 @@ class mod_groupformation_util {
      * Deletes user-related data (e.g. answers)
      *
      * @param int $groupformationid
+     * @throws dml_exception
      */
     public static function delete_user_related_data($groupformationid) {
         global $DB;
@@ -181,6 +184,7 @@ class mod_groupformation_util {
      * Archives activity
      *
      * @param int $groupformationid
+     * @throws dml_exception
      */
     public static function archive_activity($groupformationid) {
         global $DB;
@@ -221,27 +225,23 @@ class mod_groupformation_util {
     /**
      * Returns student user ids of the course
      *
-     * @param $store
+     * @param null $groupformationid
+     * @param $cm
      * @return array
      */
-    public static function get_users($groupformationid = null, $store = null, $context = null, $job = null) {
-        $ajm = new mod_groupformation_advanced_job_manager();
+    public static function get_users($groupformationid = null, $cm) {
 
-        if (is_null($job)) {
-            $job = $ajm::get_job($groupformationid);
-        }
-
-        if (is_null($store)) {
-            $store = new mod_groupformation_storage_manager($groupformationid);
-        }
+        $store = new mod_groupformation_storage_manager($groupformationid);
 
         $courseid = $store->get_course_id();
         $context = context_course::instance($courseid);
 
         $enrolledstudents = null;
 
-        if (intval($job->groupingid) != 0) {
-            $enrolledstudents = array_keys(groups_get_grouping_members($job->groupingid));
+        $groupingid = ($cm->groupmode != 0) ? $cm->groupingid : 0;
+
+        if (intval($groupingid) != 0) {
+            $enrolledstudents = array_keys(groups_get_grouping_members($groupingid));
         } else {
             $enrolledstudents = array_keys(get_enrolled_users($context, 'mod/groupformation:onlystudent'));
             $enrolledprevusers = array_keys(get_enrolled_users($context, 'mod/groupformation:editsettings'));

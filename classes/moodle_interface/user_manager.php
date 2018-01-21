@@ -25,6 +25,8 @@ if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.');
 }
 
+require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/criterion_calculator.php');
+
 class mod_groupformation_user_manager {
 
     /** @var int ID of module instance */

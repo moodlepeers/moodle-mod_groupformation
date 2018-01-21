@@ -31,7 +31,6 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
-require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/group_generator.php');
 
 class mod_groupformation_overview_controller {
 
@@ -46,9 +45,6 @@ class mod_groupformation_overview_controller {
 
     /** @var mod_groupformation_storage_manager The manager of activity data */
     private $store;
-
-    /** @var mod_groupformation_groups_manager The manager of groups data */
-    private $groupsmanager;
 
     /** @var mod_groupformation_user_manager The manager of user data */
     private $usermanager;
@@ -70,7 +66,6 @@ class mod_groupformation_overview_controller {
         $this->userid = $userid;
         $this->groupformationid = $groupformationid;
         $this->store = new mod_groupformation_storage_manager ($groupformationid);
-        $this->groupsmanager = new mod_groupformation_groups_manager ($groupformationid);
         $this->usermanager = new mod_groupformation_user_manager ($groupformationid);
 
         $this->determine_view();
@@ -83,15 +78,10 @@ class mod_groupformation_overview_controller {
         global $PAGE;
 
         if (has_capability('mod/groupformation:onlystudent', $PAGE->context)) {
-            $isbuild = $this->groupsmanager->is_build();
-            if ($isbuild) {
-                $this->viewstate = 2;
+            if ($this->store->is_questionnaire_available()) {
+                $this->viewstate = $this->usermanager->get_answering_status($this->userid);
             } else {
-                if ($this->store->is_questionnaire_available()) {
-                    $this->viewstate = $this->usermanager->get_answering_status($this->userid);
-                } else {
-                    $this->viewstate = 4;
-                }
+                $this->viewstate = 4;
             }
         } else {
             $this->viewstate = 3;

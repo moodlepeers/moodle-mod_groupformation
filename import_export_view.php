@@ -45,6 +45,8 @@ if (!mod_groupformation_data::import_export_enabled()) {
 
 echo $OUTPUT->header();
 
+$currenttab = 'import_export';
+
 // Print the tabs.
 require('tabs.php');
 

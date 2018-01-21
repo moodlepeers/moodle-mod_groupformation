@@ -27,7 +27,6 @@ if (!defined('MOODLE_INTERNAL')) {
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
-require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
 
 class mod_groupformation_csv_writer {
@@ -40,9 +39,6 @@ class mod_groupformation_csv_writer {
 
     /** @var mod_groupformation_user_manager */
     private $usermanager = null;
-
-    /** @var mod_groupformation_groups_manager */
-    private $groupsmanager = null;
 
     /** @var array This is the user_to_new_id mapping */
     private $usermap = array();
@@ -60,7 +56,6 @@ class mod_groupformation_csv_writer {
 
         $this->store = new mod_groupformation_storage_manager($groupformationid);
         $this->usermanager = new mod_groupformation_user_manager($groupformationid);
-        $this->groupsmanager = new mod_groupformation_groups_manager($groupformationid);
 
     }
 
@@ -76,12 +71,6 @@ class mod_groupformation_csv_writer {
                 return $this->get_answers();
             case 'users':
                 return $this->get_users();
-            case 'groups':
-                return $this->get_groups();
-            case 'group_users':
-                return $this->get_group_users();
-            case 'logging':
-                return $this->get_logging_data();
         }
     }
 
@@ -149,33 +138,6 @@ class mod_groupformation_csv_writer {
     }
 
     /**
-     * Returns csv-formatted groups with anonymous user ids
-     *
-     * @return string
-     */
-    public function get_groups() {
-        $groups = $this->groupsmanager->get_generated_groups(null,
-                'id,groupformation,groupname,group_size,performance_index,groupal,random,mrandom,created');
-
-        $csv = $this->records_to_csv($groups);
-
-        return $csv;
-    }
-
-    /**
-     * Returns csv-formatted group-users with anonymous user ids
-     *
-     * @return string
-     */
-    public function get_group_users() {
-        $groups = $this->groupsmanager->get_group_users(null, 'id,groupformation,userid,groupid');
-
-        $csv = $this->records_to_csv($groups);
-
-        return $csv;
-    }
-
-    /**
      * Returns csv-formatted answers with anonymous user ids
      *
      * @return string
@@ -191,12 +153,10 @@ class mod_groupformation_csv_writer {
     public function get_userids() {
 
         $users = $this->usermanager->get_users_started('userid', 'userid');
-        $groupusers = $this->groupsmanager->get_group_users('userid', 'userid,groupid,groupformation');
 
         $us = array_values(array_keys($users));
-        $gs = array_values(array_keys($groupusers));
 
-        $users = array_values(array_merge($us, $gs));
+        $users = array_values($us);
 
         $userids = array();
         foreach ($users as $u) {
@@ -209,15 +169,12 @@ class mod_groupformation_csv_writer {
             $gidorig = $this->groupformationid - 2;
 
             $umorig = new mod_groupformation_user_manager($gidorig);
-            $gmorig = new mod_groupformation_groups_manager($gidorig);
 
             $users = $umorig->get_users_started('userid', 'userid');
-            $groupusers = $gmorig->get_group_users('userid', 'userid,groupid,groupformation');
 
             $us = array_values(array_keys($users));
-            $gs = array_values(array_keys($groupusers));
 
-            $users = array_values(array_merge($us, $gs));
+            $users = array_values($us);
 
             $userids = array();
             foreach ($users as $u) {
@@ -280,61 +237,16 @@ class mod_groupformation_csv_writer {
             $userdata[$userid]['ex'] = null;
             $userdata[$userid]['gh'] = null;
 
-            if ($this->groupsmanager->has_group($userid)) {
-                $groupid = $this->groupsmanager->get_group_id($userid);
-                $userdata[$userid]['groupid'] = $this->groupsmanager->get_moodle_group_id($groupid) - 394;
-                $userdata[$userid]['groupname'] = str_replace("G1_", "", $this->groupsmanager->get_group_name($userid));
-                $userdata[$userid]['performance_index'] = $this->groupsmanager->get_performance_index($groupid);
 
-                $groupkey = str_replace(';', '-', $this->groupsmanager->get_group_key($groupid));
-                $groupkey = str_replace('mrand', 'manual', $groupkey);
-
-                $userdata[$userid]['groupkey'] = $groupkey;
-
-                $manual = (strpos($groupkey, 'manual:'));
-                $random = (strpos($groupkey, 'rand:'));
-
-                $mrand = 0;
-                if ($manual !== false) {
-                    $mrand = substr($groupkey, strpos($groupkey, 'manual:') + 7, 1);
-                }
-
-                $rand = 0;
-                if ($random !== false) {
-                    $rand = substr($groupkey, strpos($groupkey, 'rand:') + 5, 1);
-                    $mrand = 0;
-                }
-
-                if ($rand == 1 || $mrand == 1) {
-                    $userdata[$userid]['performance_index'] = null;
-                }
-
-                $ex = substr($groupkey, strpos($groupkey, 'ex:') + 3, 1);
-                $gh = substr($groupkey, strpos($groupkey, 'gh:') + 3, 1);
-
-                $ex = str_replace('1', 1, $ex);
-                $ex = str_replace('_', 2, $ex);
-                $ex = str_replace('0', 3, $ex);
-
-                $gh = str_replace('1', 1, $gh);
-                $gh = str_replace('_', 2, $gh);
-                $gh = str_replace('0', 3, $gh);
-
-                $userdata[$userid]['rand'] = $rand;
-                $userdata[$userid]['mrand'] = $mrand;
-                $userdata[$userid]['ex'] = $ex;
-                $userdata[$userid]['gh'] = $gh;
-            } else {
-                $result = $DB->record_exists('groups_members', array('userid' => $userid));
-                if ($result) {
-                    $groupid = $DB->get_field('groups_members', 'groupid', array('userid' => $userid));
-                    $courseid = $DB->get_field('groups', 'courseid', array('id' => $groupid));
-                    if ($courseid == $this->groupformationid || $courseid + 2 == $this->groupformationid) {
-                        $members = $DB->get_records('groups_members', array('groupid' => $groupid), 'userid', 'userid');
-                        $unknown = array_merge($unknown, array_keys($members));
-                        $userdata[$userid]['groupid'] = $groupid - 394;
-                        $userdata[$userid]['random'] = 2;
-                    }
+            $result = $DB->record_exists('groups_members', array('userid' => $userid));
+            if ($result) {
+                $groupid = $DB->get_field('groups_members', 'groupid', array('userid' => $userid));
+                $courseid = $DB->get_field('groups', 'courseid', array('id' => $groupid));
+                if ($courseid == $this->groupformationid || $courseid + 2 == $this->groupformationid) {
+                    $members = $DB->get_records('groups_members', array('groupid' => $groupid), 'userid', 'userid');
+                    $unknown = array_merge($unknown, array_keys($members));
+                    $userdata[$userid]['groupid'] = $groupid - 394;
+                    $userdata[$userid]['random'] = 2;
                 }
             }
 

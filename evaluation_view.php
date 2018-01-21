@@ -26,6 +26,7 @@ require('header.php');
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/controller/evaluation_controller.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/evaluation_view_controller.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 
 $filename = substr(__FILE__, strrpos(__FILE__, '\\') + 1);
 $url = new moodle_url('/mod/groupformation/' . $filename, $urlparams);

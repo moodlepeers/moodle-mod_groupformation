@@ -44,7 +44,6 @@ $urlcategory = optional_param('category', '', PARAM_TEXT);
 
 $store = new mod_groupformation_storage_manager ($groupformation->id);
 $usermanager = new mod_groupformation_user_manager ($groupformation->id);
-$groupsmanager = new mod_groupformation_groups_manager ($groupformation->id);
 
 $scenario = $store->get_scenario();
 $names = $store->get_categories();
@@ -59,7 +58,7 @@ $consent = $usermanager->get_consent($userid);
 $askforparticipantcode = mod_groupformation_data::ask_for_participant_code();
 $participantcode = $usermanager->has_participant_code($userid) || !$askforparticipantcode;
 
-if (((!$consent || !$participantcode) && !$groupsmanager->groups_created()) &&
+if (((!$consent || !$participantcode)) &&
         !has_capability('mod/groupformation:editsettings', $context)) {
     $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
             'id' => $cm->id, 'giveconsent' => !$consent, 'giveparticipantcode' => !$participantcode));

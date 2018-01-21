@@ -88,41 +88,5 @@ if (mod_groupformation_data::is_math_prep_course_mode()) {
         $debugbuttons .= '</p>';
     }
 
-    $ajm = new mod_groupformation_advanced_job_manager();
-
-    $job = $ajm::get_job($groupformation->id);
-
-    if ($ajm::get_state($job) == 'ready') {
-
-        $debugbuttons .= '<p>';
-        $debugbuttons .= 'Klicken sie auf "Filtern", um die Studierenden, die nicht ehrlich und konzentriert geantwortet ';
-        $debugbuttons .= 'haben von der optimierten Gruppierung auszuschließen und sie stattdessen randomisiert zu gruppieren. ';
-        $debugbuttons .= 'Klicken Sie auf "Nicht filtern" um diese Aktion rückgängig zu machen.';
-        $debugbuttons .= '</p>';
-
-        if (!$store->uses_filter()) {
-            $debugbuttons .= '<a href="' . (new moodle_url('/mod/groupformation/grouping_view.php', array(
-                    'id' => $id, 'do_show' => 'grouping', 'filterusers' => 1)))->out() . '">';
-            $debugbuttons .= '<span class="gf_button gf_button_pill gf_button_small">';
-            $debugbuttons .= 'Filtern';
-            $debugbuttons .= '</span>';
-
-            $debugbuttons .= '</a>';
-        } else {
-            $debugbuttons .= '<a href="' . (new moodle_url('/mod/groupformation/grouping_view.php', array(
-                    'id' => $id, 'do_show' => 'grouping', 'unfilterusers' => 1)))->out() . '">';
-            $debugbuttons .= '<span class="gf_button gf_button_pill gf_button_small">';
-            $debugbuttons .= 'Nicht filtern';
-            $debugbuttons .= '</span>';
-            $debugbuttons .= '</a>';
-        }
-
-    } else {
-        $debugbuttons .= '<p>';
-        $debugbuttons .= 'Aufgrund der laufenden oder schon abgeschlossenen Gruppenbildung ist ein Ändern ';
-        $debugbuttons .= 'der Filtereinstellungen nicht möglich.';
-        $debugbuttons .= '</p>';
-    }
-
     $debugbuttons .= '</div>';
 }

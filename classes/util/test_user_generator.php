@@ -37,7 +37,6 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/freetext
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/multiselect_question.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/number_question.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/question_table.php');
-require_once($CFG->dirroot . '/mod/groupformation/classes/controller/grouping_controller.php');
 
 class mod_groupformation_test_user_generator {
 
@@ -199,9 +198,6 @@ class mod_groupformation_test_user_generator {
             foreach (array_keys($userrecords) as $userid) {
 
                 try {
-                    $groupingcontroller = new mod_groupformation_grouping_controller($groupformationid, $this->cm);
-                    $groupingcontroller->delete();
-
                     $DB->delete_records("user", array(
                             'id' => $userid
                     ));

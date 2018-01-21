@@ -28,7 +28,6 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/stora
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
-require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/advanced_job_manager.php');
 
 class mod_groupformation_analysis_controller {
 
@@ -47,6 +46,9 @@ class mod_groupformation_analysis_controller {
     /** @var int ID of course module*/
     public $cmid = null;
 
+    /** @var stdClass course module */
+    public $cm = null;
+
     /**
      * Creates instance of analysis controller
      *
@@ -54,11 +56,12 @@ class mod_groupformation_analysis_controller {
      */
     public function __construct($groupformationid, $cm) {
         $this->cmid = $cm->id;
+        $this->cm = $cm;
         $this->groupformationid = $groupformationid;
         $this->store = new mod_groupformation_storage_manager($groupformationid);
         $this->usermanager = new mod_groupformation_user_manager($groupformationid);
         $this->view = new mod_groupformation_template_builder();
-        $this->determine_status($cm);
+        $this->determine_status();
     }
 
     /**
@@ -84,32 +87,14 @@ class mod_groupformation_analysis_controller {
     /**
      * Determine status variables
      *
-     * @param $cm
      */
-    public function determine_status($cm) {
+    public function determine_status() {
         $questionnaireavailable = $this->store->is_questionnaire_available();
         $this->state = 1;
-        $ajm = new mod_groupformation_advanced_job_manager();
-        $job = $ajm::get_job($this->groupformationid);
-        if (is_null($job)) {
-            $groupingid = ($cm->groupmode != 0) ? $cm->groupingid : 0;
-            $ajm::create_job($this->groupformationid, $groupingid);
+        if (!$questionnaireavailable) {
+            $this->state = 2;
         }
-        $job = $ajm::get_job($this->groupformationid);
-        $jobstate = $ajm::get_state($job);
-        if ($jobstate !== 'ready') {
-            $this->state = 3;
-        } else {
-            if ($questionnaireavailable) {
-                $this->state = 1;
-            } else {
-                if (count($this->usermanager->get_completed()) > 0) {
-                    $this->state = 4;
-                } else {
-                    $this->state = 2;
-                }
-            }
-        }
+
     }
 
     /**
@@ -124,7 +109,9 @@ class mod_groupformation_analysis_controller {
 
         $stats = array();
 
-        $studentcount = count(mod_groupformation_util::get_users($this->groupformationid));
+        $cm = $this->cm;
+
+        $studentcount = count(mod_groupformation_util::get_users($this->groupformationid, $cm));
 
         $stats [] = $studentcount;
 
@@ -177,9 +164,6 @@ class mod_groupformation_analysis_controller {
         }
 
         $buttondisabled = "";
-        if ($this->state == 3) {
-            $buttondisabled = "disabled";
-        }
 
         $buttonvalue = 1;
         if ($this->state == 1) {
@@ -199,7 +183,7 @@ class mod_groupformation_analysis_controller {
         $assigns['info_teacher'] = mod_groupformation_util::get_info_text_for_teacher(false, "analysis");
         $assigns['analysis_time_start'] = $starttime;
         $assigns['analysis_time_end'] = $endtime;
-        $assigns['analysis_status_info'] = get_string('analysis_status_info' . strval($this->state), 'groupformation');
+        $assigns['analysis_status_info'] = get_string('analysis_status_info'.strval($this->state), 'groupformation');
 
         return $assigns;
     }

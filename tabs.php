@@ -29,7 +29,6 @@ $inactive = array();
 $activated = array();
 
 $store = new mod_groupformation_storage_manager ($groupformation->id);
-$groupsmanager = new mod_groupformation_groups_manager ($groupformation->id);
 $usermanager = new mod_groupformation_user_manager ($groupformation->id);
 
 // Some pages deliver the cmid instead the id.
@@ -55,9 +54,9 @@ if ($editsettings) {
     $row [] = new tabobject ('analysis', $analyseurl->out(), get_string('tab_overview', 'groupformation'));
 
     // The grouping_view.
-    $groupingurl = new moodle_url ('/mod/groupformation/grouping_view.php', array(
-        'id' => $usedid, 'do_show' => 'grouping'));
-    $row [] = new tabobject ('grouping', $groupingurl->out(), get_string('tab_grouping', 'groupformation'));
+    //$groupingurl = new moodle_url ('/mod/groupformation/grouping_view.php', array(
+    //    'id' => $usedid, 'do_show' => 'grouping'));
+    //$row [] = new tabobject ('grouping', $groupingurl->out(), get_string('tab_grouping', 'groupformation'));
 
     // The questionnaire_view -> preview mode .
     $questionnaireviewurl = new moodle_url ('/mod/groupformation/questionnaire_view.php', array(
@@ -66,7 +65,7 @@ if ($editsettings) {
 
     // The import/export view.
     // TODO Only activate if export of study is needed.
-    if (false) {
+    if (true) {
         $exporturl = new moodle_url ('/mod/groupformation/export_view.php', array(
             'id' => $usedid, 'do_show' => 'export'));
         $row [] = new tabobject ('export', $exporturl->out(), 'Export');
@@ -97,9 +96,9 @@ if ($editsettings) {
     }
 
     // The group view.
-    $groupurl = new moodle_url ('/mod/groupformation/group_view.php', array(
-        'id' => $usedid, 'do_show' => 'group'));
-    $row [] = new tabobject ('group', $groupurl->out(), get_string('tab_group', 'groupformation'));
+    //$groupurl = new moodle_url ('/mod/groupformation/group_view.php', array(
+    //    'id' => $usedid, 'do_show' => 'group'));
+    //$row [] = new tabobject ('group', $groupurl->out(), get_string('tab_group', 'groupformation'));
 
     // The import/export view.
     if (mod_groupformation_data::import_export_enabled()) {
@@ -111,7 +110,7 @@ if ($editsettings) {
     }
 }
 
-if (count($row) >= 1 && ($editsettings || $usermanager->get_consent($userid) || $groupsmanager->groups_created())) {
+if (count($row) >= 1 && ($editsettings || $usermanager->get_consent($userid))) {
     $tabs [] = $row;
 
     print_tabs($tabs, $currenttab, $inactive, $activated);

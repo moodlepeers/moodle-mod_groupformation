@@ -26,7 +26,6 @@ if (!defined('MOODLE_INTERNAL')) {
 }
 
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
-require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/advanced_job_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 require_once($CFG->dirroot . '/group/lib.php');
 
@@ -1143,82 +1142,6 @@ class mod_groupformation_storage_manager {
         global $DB;
 
         $DB->delete_records('groupformation_stats', array('groupformationid' => $this->groupformationid));
-    }
-
-    /**
-     * Returns users that are available for group formation
-     *
-     * @param null $job
-     * @return array
-     */
-    public function get_users_for_grouping($job = null) {
-        global $DB;
-
-        $ajm = new mod_groupformation_advanced_job_manager();
-
-        if (is_null($job)) {
-
-            $job = $ajm::get_job($this->groupformationid);
-        }
-
-        $courseid = $this->get_course_id();
-        $context = context_course::instance($courseid);
-
-        $enrolledstudents = null;
-
-        if (intval($job->groupingid) != 0) {
-            $enrolledstudents = array_keys(groups_get_grouping_members($job->groupingid));
-        } else {
-            $enrolledstudents = array_keys(get_enrolled_users($context, 'mod/groupformation:onlystudent'));
-            $enrolledprevusers = array_keys(get_enrolled_users($context, 'mod/groupformation:editsettings'));
-            $diff = array_diff($enrolledstudents, $enrolledprevusers);
-            $enrolledstudents = $diff;
-        }
-        if (is_null($enrolledstudents) || count($enrolledstudents) <= 0) {
-            return null;
-        }
-
-        $groupingsetting = $this->get_grouping_setting();
-
-        $allanswers = array();
-        $someanswers = array();
-        $noorsomeanswers = array();
-
-        // Has_answered_everything.
-        $categories = $this->get_categories();
-        $sum = array_sum($this->get_numbers($categories));
-
-        // Get userids of groupformation answers.
-        $userids = $DB->get_fieldset_select('groupformation_answer', 'userid', 'groupformation = ?',
-                array($this->groupformationid));
-
-        // Returns an array using the userids as keys and their frequency in answers as values.
-        $userfrequencies = array_count_values($userids);
-
-        $numberofanswers = function($userid) use ($sum, $userfrequencies) {
-            return array_key_exists($userid, $userfrequencies) ? $userfrequencies[$userid] : 0;
-        };
-
-        foreach (array_values($enrolledstudents) as $userid) {
-            if ($sum <= $numberofanswers($userid) && !$this->is_filtered($userid)) {
-                $allanswers [] = $userid;
-            } else if ($groupingsetting && $numberofanswers($userid) > 0) {
-                $someanswers [] = $userid;
-            } else {
-                $noorsomeanswers [] = $userid;
-            }
-        }
-
-        $groupalusers = $allanswers;
-
-        if ($groupingsetting) {
-            $randomusers = $someanswers;
-        } else {
-            $randomusers = $noorsomeanswers;
-        }
-
-        return array(
-                $groupalusers, $randomusers);
     }
 
     /**

@@ -33,9 +33,6 @@ class mod_groupformation_evaluation_controller {
     /** @var mod_groupformation_storage_manager The manager of activity data */
     private $store = null;
 
-    /** @var mod_groupformation_groups_manager The manager of groups data */
-    private $groupsmanager;
-
     /** @var mod_groupformation_user_manager The manager of user data */
     private $usermanager = null;
 
@@ -50,7 +47,6 @@ class mod_groupformation_evaluation_controller {
         $this->groupformationid = $groupformationid;
 
         $this->store = new mod_groupformation_storage_manager ($groupformationid);
-        $this->groupsmanager = new mod_groupformation_groups_manager ($groupformationid);
         $this->usermanager = new mod_groupformation_user_manager ($groupformationid);
     }
 
@@ -86,14 +82,6 @@ class mod_groupformation_evaluation_controller {
         }
 
         $groupusers = array();
-        $hasgroup = $this->groupsmanager->has_group($userid);
-        if ($hasgroup) {
-            $groupusers = $this->groupsmanager->get_group_members($userid);
-        }
-
-        if (!count($groupusers) >= 2 || !$this->groupsmanager->groups_created()) {
-            $groupusers = array();
-        }
 
         $cc = new mod_groupformation_criterion_calculator($this->groupformationid);
 
