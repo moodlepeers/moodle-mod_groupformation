@@ -498,6 +498,7 @@ class mod_groupformation_questionnaire_controller {
      *
      * @param array $questions
      * @param unknown $percent
+     * @throws coding_exception
      */
     public function print_questions($questions, $percent) {
 
@@ -508,7 +509,7 @@ class mod_groupformation_questionnaire_controller {
         if (!is_null($questions) && count($questions) != 0) {
 
             $category = $this->category;
-            var_dump($category);
+
             $table = new mod_groupformation_question_table ($category);
 
             // Here is the actual category and groupformationid is sent hidden.

@@ -77,6 +77,7 @@ $string ['scenario_presentationgroups_short'] = 'Ermöglicht ausschließlich das
 
 $string ['time'] = 'Zeit';
 $string ['topics'] = 'Themen';
+$string ['topics_help'] = 'Wenn Themen verwendet werden, wird die Option zu Vorwissen automatisch deaktiviert und ist nicht weiter auswählbar. Außerdem wird die Anzahl der Gruppen automatisch an die Anzahl der Themen angepasst.';
 $string ['topics_dummy'] = 'Thema';
 $string ['knowledge_dummy'] = 'Beispiel';
 $string ['topics_description'] = 'Ich möchte (Gruppen-)Themen zur Auswahl anbieten';
@@ -85,6 +86,7 @@ $string ['topics_question'] = 'Bitte sortieren Sie die zur Wahl stehenden Themen
 $string ['topicchoice'] = 'Themenauswahl';
 $string ['useOneLineForEachTopic'] = 'Pro Thema jeweils eine Zeile benutzen';
 $string ['knowledge'] = 'Vorwissen';
+$string ['knowledge_help'] = 'Wenn Themen (siehe unten) aktiviert sind, wird diese Option automatisch deaktiviert und ist nicht weiter auswählbar.';
 $string ['knowledge_description'] = 'Das Vorwissen in bestimmten Gebieten soll in die Gruppenbildung einfließen.';
 $string ['knowledge_description_extended'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einschätzen sollen.
 		Eine Vorschau des Fragebogens-Abschnittes für die Studierenden ist rechts zu sehen.';

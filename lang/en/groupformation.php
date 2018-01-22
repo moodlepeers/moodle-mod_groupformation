@@ -79,6 +79,7 @@ $string ['scenario_presentationgroups_short'] = 'Enables exclusively to order a 
 
 $string ['time'] = 'Time';
 $string ['topics'] = 'Topics';
+$string ['topics_help'] = 'When using topics, knowledge questions are deactivated and the number of groups is fixed by the number of topics.';
 $string ['topics_dummy'] = 'Topic';
 $string ['knowledge_dummy'] = 'Example';
 $string ['topics_description'] = 'I want to define topics';
@@ -87,6 +88,7 @@ $string ['topics_question'] = 'Please sort the following topics regarding your p
 $string ['topicchoice'] = 'Topic selection';
 $string ['useOneLineForEachTopic'] = 'Use one line for each topic';
 $string ['knowledge'] = 'Knowledge';
+$string ['knowledge_help'] = 'If topics (option below) are activated, this option gets automatically deactivated and disabled.';
 $string ['knowledge_description'] = 'I want to include knowledge questions';
 $string ['knowledge_description_extended'] = 'Please list knowledge areas in which students should assess themselves.
     Take a look at the preview on the right hand side.';

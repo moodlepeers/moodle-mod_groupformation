@@ -87,6 +87,7 @@ class mod_groupformation_advanced_job_manager {
      *
      * @param $groupformationid
      * @return stdClass|null
+     * @throws dml_exception
      */
     public static function get_job($groupformationid) {
         global $DB;
@@ -105,6 +106,7 @@ class mod_groupformation_advanced_job_manager {
      *
      * @param string $state
      * @return stdClass|null
+     * @throws dml_exception
      */
     public static function get_next_job($state = 'waiting') {
 
@@ -132,6 +134,7 @@ class mod_groupformation_advanced_job_manager {
      *
      * @param string $state
      * @return array
+     * @throws dml_exception
      */
     public static function get_jobs($state = 'waiting') {
         global $DB;
@@ -146,7 +149,10 @@ class mod_groupformation_advanced_job_manager {
      *
      * @param $job
      * @param string $state
+     * @param bool $settime
+     * @param bool $resettime
      * @return bool
+     * @throws dml_exception
      */
     public static function set_job($job, $state = 'ready', $settime = false, $resettime = false) {
         global $DB, $USER;
@@ -186,6 +192,7 @@ class mod_groupformation_advanced_job_manager {
      *
      * @param $job
      * @return bool
+     * @throws dml_exception
      */
     public static function reset_job($job) {
         global $DB;
@@ -219,6 +226,8 @@ class mod_groupformation_advanced_job_manager {
      * Creates job for groupformation instance
      *
      * @param integer $groupformationid
+     * @param int $groupingid
+     * @throws dml_exception
      */
     public static function create_job($groupformationid, $groupingid = 0) {
         global $DB;
@@ -233,8 +242,9 @@ class mod_groupformation_advanced_job_manager {
     /**
      * Updates job record
      *
-     * @param integer $groupformationid
+     * @param $job
      * @param integer $groupingid
+     * @throws dml_exception
      */
     public static function update_job($job, $groupingid) {
         global $DB;
@@ -262,6 +272,8 @@ class mod_groupformation_advanced_job_manager {
      *
      * @param $job
      * @return null
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public static function notify_teacher($job) {
         global $DB, $CFG;
@@ -326,6 +338,7 @@ class mod_groupformation_advanced_job_manager {
      * @param stdClass $job
      * @param stdClass $result
      * @return boolean
+     * @throws dml_exception
      */
     public static function save_result($job, $result = null) {
 

@@ -90,8 +90,8 @@
 }
 
 .path-mod-groupformation #js_topicsWrapper, .path-mod-groupformation #js_knowledgeWrapper,
-.path-mod-groupformation #js_szenarioWrapper, .path-mod-groupformation #knowledfeInfoProject,
-.path-mod-groupformation #knowledfeInfoHomework, .path-mod-groupformation #knowledfeInfoPresentation,
+.path-mod-groupformation #js_scenarioWrapper, .path-mod-groupformation #knowledgeInfoProject,
+.path-mod-groupformation #knowledgeInfoHomework, .path-mod-groupformation #knowledgeInfoPresentation,
 .path-mod-groupformation #max_points_wrapper {
     display: none;
 }
