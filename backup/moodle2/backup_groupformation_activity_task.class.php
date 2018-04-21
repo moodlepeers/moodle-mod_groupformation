@@ -30,7 +30,7 @@ require_once($CFG->dirroot . '/mod/groupformation/backup/moodle2/backup_groupfor
  *
  * @package mod_groupformation
  * @category backup
- * @copyright Nora Wester
+ * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class backup_groupformation_activity_task extends backup_activity_task {
@@ -54,14 +54,14 @@ class backup_groupformation_activity_task extends backup_activity_task {
      * @return string the content with the URLs encoded
      */
     static public function encode_content_links($content) {
-        global $CFG;
-        $base = preg_quote($CFG->wwwroot, '/');
-        // Link to the list of groupformations.
-        $search = '/(' . $base . '\/mod\/groupformation\/index.php\?id\=)([0-9]+)/';
-        $content = preg_replace($search, '$@GROUPFORMATIONINDEX*$2@$', $content);
-        // Link to groupformation view by moduleid.
-        $search = '/(' . $base . '\/mod\/groupformation\/view.php\?id\=)([0-9]+)/';
-        $content = preg_replace($search, '$@GROUPFORMATIONVIEWBYID*$2@$', $content);
+        //global $CFG;
+        //$base = preg_quote($CFG->wwwroot, '/');
+        //// Link to the list of groupformations.
+        //$search = '/(' . $base . '\/mod\/groupformation\/index.php\?id\=)([0-9]+)/';
+        //$content = preg_replace($search, '$@GROUPFORMATIONINDEX*$2@$', $content);
+        //// Link to groupformation view by moduleid.
+        //$search = '/(' . $base . '\/mod\/groupformation\/view.php\?id\=)([0-9]+)/';
+        //$content = preg_replace($search, '$@GROUPFORMATIONVIEWBYID*$2@$', $content);
         return $content;
     }
 }

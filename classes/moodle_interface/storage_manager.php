@@ -49,6 +49,7 @@ class mod_groupformation_storage_manager {
      *
      * @param $id
      * @return string
+     * @throws coding_exception
      */
     public function get_intro($id) {
         global $OUTPUT;
@@ -66,6 +67,7 @@ class mod_groupformation_storage_manager {
 
     /**
      * @return mixed
+     * @throws dml_exception
      */
     public function get_version() {
         global $DB;
@@ -77,6 +79,7 @@ class mod_groupformation_storage_manager {
      * Returns whether all answers are required or not
      *
      * @return bool
+     * @throws dml_exception
      */
     public function all_answers_required() {
         global $DB;
@@ -88,11 +91,12 @@ class mod_groupformation_storage_manager {
      * Returns whether the activity is archived
      *
      * @return bool
+     * @throws dml_exception
      */
     public function is_archived() {
         global $DB;
-        $record = $DB->get_record('groupformation_q_settings', array(
-                'groupformation' => $this->groupformationid
+        $record = $DB->get_record('groupformation', array(
+                'id' => $this->groupformationid
         ));
 
         return $record->archived == 1;
@@ -124,6 +128,7 @@ class mod_groupformation_storage_manager {
      *
      * @param string $category
      * @return boolean
+     * @throws dml_exception
      */
     public function catalog_table_not_set($category = 'grade') {
         global $DB;
@@ -137,6 +142,7 @@ class mod_groupformation_storage_manager {
      * Returns course id
      *
      * @return mixed
+     * @throws dml_exception
      */
     public function get_course_id() {
         global $DB;
@@ -173,6 +179,7 @@ class mod_groupformation_storage_manager {
      * @param unknown $knowledge
      * @param unknown $topics
      * @param unknown $init
+     * @throws dml_exception
      */
     public function add_setting_question($knowledge, $topics, $init) {
         global $DB;
@@ -202,7 +209,9 @@ class mod_groupformation_storage_manager {
     /**
      * Returns map with availability times (xxx_raw is timestamp, xxx is formatted time for display)
      *
-     * @return multitype:string NULL mixed
+     * @return array :string NULL mixed
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public function get_time() {
         global $DB;
@@ -271,6 +280,7 @@ class mod_groupformation_storage_manager {
      *
      * @param $categories
      * @return array
+     * @throws dml_exception
      */
     public function get_numbers($categories) {
 
@@ -287,6 +297,7 @@ class mod_groupformation_storage_manager {
      *
      * @param unknown $category
      * @return mixed
+     * @throws dml_exception
      */
     public function get_possible_language($category) {
         global $DB;
@@ -303,13 +314,14 @@ class mod_groupformation_storage_manager {
      *
      * @param string $category
      * @return mixed
+     * @throws dml_exception
      */
     public function get_number($category = null) {
         global $DB;
 
         if ($category == 'topic' || $category == 'knowledge') {
-            return $DB->get_field('groupformation_q_settings', $category . 'valuesnumber', array(
-                    'groupformation' => $this->groupformationid
+            return $DB->get_field('groupformation', $category . 'number', array(
+                    'id' => $this->groupformationid
             ));
         } else {
             return $DB->get_field('groupformation_q_version', 'numberofquestion', array(
@@ -323,12 +335,13 @@ class mod_groupformation_storage_manager {
      *
      * @param unknown $category
      * @return mixed
+     * @throws dml_exception
      */
     public function get_knowledge_or_topic_values($category) {
         global $DB;
 
-        return $DB->get_field('groupformation_q_settings', $category . 'values', array(
-                'groupformation' => $this->groupformationid
+        return $DB->get_field('groupformation', $category . 'values', array(
+                'id' => $this->groupformationid
         ));
     }
 
@@ -338,6 +351,7 @@ class mod_groupformation_storage_manager {
      * @param unknown $i
      * @param string $category
      * @return int
+     * @throws dml_exception
      */
     public function get_max_option_of_catalog_question($i, $category = 'grade') {
         global $DB;
@@ -358,7 +372,9 @@ class mod_groupformation_storage_manager {
      * @param unknown $i
      * @param string $category
      * @param string $lang
+     * @param null $version
      * @return mixed
+     * @throws dml_exception
      */
     public function get_catalog_question($i, $category = 'general', $lang = 'en', $version = null) {
         global $DB;
@@ -376,6 +392,7 @@ class mod_groupformation_storage_manager {
      *
      * @param $category
      * @return mixed
+     * @throws dml_exception
      */
     public function get_catalog_version($category) {
         global $DB;
@@ -389,6 +406,7 @@ class mod_groupformation_storage_manager {
      * Returns the scenario
      *
      * @return string
+     * @throws dml_exception
      */
     public function get_scenario() {
         global $DB;
@@ -410,6 +428,7 @@ class mod_groupformation_storage_manager {
      * @param null $sortedby
      * @param string $fieldset
      * @return array
+     * @throws dml_exception
      */
     public function get_logging_data($sortedby = null, $fieldset = '*') {
         global $DB;
@@ -423,6 +442,7 @@ class mod_groupformation_storage_manager {
      * Returns raw categories without applying any activity based restrictions
      *
      * @return array
+     * @throws dml_exception
      */
     public function get_raw_categories() {
         global $DB;
@@ -439,6 +459,7 @@ class mod_groupformation_storage_manager {
      * Returns categories with at least one question, not just the scenario-based category set
      *
      * @return array
+     * @throws dml_exception
      */
     public function get_categories() {
         $categoryset = $this->get_raw_categories();

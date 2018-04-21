@@ -1580,5 +1580,63 @@ function xmldb_groupformation_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2017121401, 'groupformation');
     }
 
+    if ($oldversion < 2018042101) {
+
+        // Define field archived to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('archived', XMLDB_TYPE_INTEGER, '1', null, null, null, null, 'allanswersrequired');
+
+        // Conditionally launch add field archived.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field knowledgevalues to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('knowledgevalues', XMLDB_TYPE_TEXT, null, null, null, null, null, 'knowledgelines');
+
+        // Conditionally launch add field knowledgevalues.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field topicvalues to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('topicvalues', XMLDB_TYPE_TEXT, null, null, null, null, null, 'topiclines');
+
+        // Conditionally launch add field topicvalues.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2018042101, 'groupformation');
+    }
+
+    if ($oldversion < 2018042102) {
+
+        // Define field knowledgenumber to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('knowledgenumber', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'knowledgevalues');
+
+        // Conditionally launch add field knowledgenumber.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field topicnumber to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('topicnumber', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'topicvalues');
+
+        // Conditionally launch add field topicnumber.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2018042102, 'groupformation');
+    }
+
+
     return true;
 }

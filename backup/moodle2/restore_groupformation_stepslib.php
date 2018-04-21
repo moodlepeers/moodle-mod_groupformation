@@ -33,10 +33,13 @@ class restore_groupformation_activity_structure_step extends restore_activity_st
      * Defines structure of path elements to be processed during the restore
      *
      * @return array of {@link restore_path_element}
+     * @throws base_step_exception
      */
     protected function define_structure() {
         $paths = array();
+
         $paths[] = new restore_path_element('groupformation', '/activity/groupformation');
+
         // Return the paths wrapped into standard activity structure.
         return $this->prepare_activity_structure($paths);
     }
@@ -45,6 +48,8 @@ class restore_groupformation_activity_structure_step extends restore_activity_st
      * Process the given restore path element data
      *
      * @param array $data parsed element data
+     * @throws base_step_exception
+     * @throws dml_exception
      */
     protected function process_groupformation($data) {
         global $DB;
@@ -55,10 +60,6 @@ class restore_groupformation_activity_structure_step extends restore_activity_st
         }
         if (empty($data->timemodified)) {
             $data->timemodified = time();
-        }
-        if ($data->grade < 0) {
-            // Scale found, get mapping.
-            $data->grade = -($this->get_mappingid('scale', abs($data->grade)));
         }
         // Create the groupformation instance.
         $newitemid = $DB->insert_record('groupformation', $data);

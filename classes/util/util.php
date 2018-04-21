@@ -98,6 +98,7 @@ class mod_groupformation_util {
      *
      * @param int $userid
      * @return stdClass|null
+     * @throws dml_exception
      */
     public static function get_user_record($userid) {
         global $DB;
@@ -123,6 +124,7 @@ class mod_groupformation_util {
      * @param $groupformationid
      * @param $userid
      * @return array
+     * @throws dml_exception
      */
     public static function get_stats($groupformationid, $userid) {
         $usermanager = new mod_groupformation_user_manager($groupformationid);
@@ -170,6 +172,7 @@ class mod_groupformation_util {
      * Deletes user-related data (e.g. answers)
      *
      * @param int $groupformationid
+     * @throws dml_exception
      */
     public static function delete_user_related_data($groupformationid) {
         global $DB;
@@ -181,13 +184,18 @@ class mod_groupformation_util {
      * Archives activity
      *
      * @param int $groupformationid
+     * @throws dml_exception
      */
     public static function archive_activity($groupformationid) {
         global $DB;
 
-        $record = $DB->get_record('groupformation_q_settings', array('groupformation' => $groupformationid));
+        $record = $DB->get_record('groupformation', array('id' => $groupformationid));
         $record->archived = 1;
-        $DB->update_record('groupformation_q_settings', $record);
+        $DB->update_record('groupformation', $record);
+
+        //$record = $DB->get_record('groupformation_q_settings', array('groupformation' => $groupformationid));
+        //$record->archived = 1;
+        //$DB->update_record('groupformation_q_settings', $record);
     }
 
     /**
@@ -221,8 +229,12 @@ class mod_groupformation_util {
     /**
      * Returns student user ids of the course
      *
+     * @param null $groupformationid
      * @param $store
+     * @param null $context
+     * @param null $job
      * @return array
+     * @throws dml_exception
      */
     public static function get_users($groupformationid = null, $store = null, $context = null, $job = null) {
         $ajm = new mod_groupformation_advanced_job_manager();

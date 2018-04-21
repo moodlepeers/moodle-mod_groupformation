@@ -49,7 +49,7 @@ function groupformation_supports($feature) {
         case FEATURE_SHOW_DESCRIPTION :
             return false;
         case FEATURE_BACKUP_MOODLE2 :
-            return false;
+            return true;
         case FEATURE_COMPLETION_TRACKS_VIEWS :
             return true;
         case FEATURE_GROUPS :
@@ -72,9 +72,11 @@ function groupformation_supports($feature) {
  * @param stdClass $groupformation
  * @param mod_groupformation_mod_form|null $mform
  * @return mixed
+ * @throws coding_exception
+ * @throws dml_exception
  */
 function groupformation_add_instance(stdClass $groupformation, mod_groupformation_mod_form $mform = null) {
-    global $DB, $USER, $PAGE;
+    global $DB;
 
     groupformation_import_questionnaire_configuration();
 
@@ -93,7 +95,7 @@ function groupformation_add_instance(stdClass $groupformation, mod_groupformatio
 
     groupformation_grade_item_update($groupformation);
 
-    groupformation_save_more_infos($groupformation, true);
+    //groupformation_save_more_infos($groupformation, true);
 
     return $groupformation->id;
 }
@@ -108,9 +110,11 @@ function groupformation_add_instance(stdClass $groupformation, mod_groupformatio
  * @param stdClass $groupformation An object from the form in mod_form.php
  * @param mod_groupformation_mod_form $mform
  * @return boolean Success/Fail
+ * @throws coding_exception
+ * @throws dml_exception
  */
 function groupformation_update_instance(stdClass $groupformation, mod_groupformation_mod_form $mform = null) {
-    global $DB, $USER, $PAGE;
+    global $DB;
 
     // Checks all fields and sets them properly.
     $groupformation = groupformation_set_fields($groupformation);
@@ -137,7 +141,7 @@ function groupformation_update_instance(stdClass $groupformation, mod_groupforma
 
     groupformation_grade_item_update($groupformation);
 
-    groupformation_save_more_infos($groupformation, false);
+    // groupformation_save_more_infos($groupformation, false);
 
     return $result;
 }
@@ -151,6 +155,7 @@ function groupformation_update_instance(stdClass $groupformation, mod_groupforma
  *
  * @param int $id Id of the module instance
  * @return boolean Success/Failure
+ * @throws dml_exception
  */
 function groupformation_delete_instance($id) {
     global $DB, $USER;
@@ -299,7 +304,9 @@ function groupformation_get_extra_capabilities() {
  *
  * @param int $groupformationid
  *            ID of an instance of this module
+ * @param $scaleid
  * @return bool true if the scale is used by the given groupformation instance
+ * @throws dml_exception
  */
 function groupformation_scale_used($groupformationid, $scaleid) {
     global $DB;
@@ -320,6 +327,7 @@ function groupformation_scale_used($groupformationid, $scaleid) {
  *
  * @param $scaleid int
  * @return boolean true if the scale is used by any groupformation instance
+ * @throws dml_exception
  */
 function groupformation_scale_used_anywhere($scaleid) {
     global $DB;
@@ -340,9 +348,9 @@ function groupformation_scale_used_anywhere($scaleid) {
  *
  * @param stdClass $groupformation
  *            instance object with extra cmidnumber and modname property
- * @param
- *            mixed optional array/object of grade(s); 'reset' means reset grades in gradebook
+ * @param bool $reset
  * @return void
+ * @throws coding_exception
  */
 function groupformation_grade_item_update(stdClass $groupformation, $reset = false) {
     global $CFG;
@@ -450,8 +458,8 @@ function groupformation_get_file_info($browser, $areas, $course, $cm, $context, 
  * @param array $options
  * @return bool
  * @throws coding_exception
+ * @throws moodle_exception
  * @throws require_login_exception
- * @throws require_login_session_timeout_exception
  */
 function groupformation_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = array()) {
     // Check the contextlevel is as expected - if your plugin is a block, this becomes CONTEXT_BLOCK, etc.
@@ -548,27 +556,53 @@ function groupformation_set_fields(stdClass $groupformation) {
     if (isset ($groupformation->knowledge) && $groupformation->knowledge == 0) {
         $groupformation->knowledge = 0;
         $groupformation->knowledgelines = "";
+        $groupformation->knowledgevalues = null;
+        $groupformation->knowledgenumber = null;
     } else if (!isset ($groupformation->knowledge)) {
         $groupformation->knowledge = 0;
         $groupformation->knowledgelines = "";
+        $groupformation->knowledgevalues = null;
+        $groupformation->knowledgenumber = null;
     } else if (isset ($groupformation->knowledge) && $groupformation->knowledge == 1 &&
         isset ($groupformation->knowledgelines) && $groupformation->knowledgelines == ""
     ) {
         $groupformation->knowledge = 0;
         $groupformation->knowledgelines = "";
+        $groupformation->knowledgevalues = null;
+        $groupformation->knowledgenumber = null;
+    } else {
+        $knowledgearray = array();
+        if ($groupformation->knowledge != 0) {
+            $knowledgearray = explode("\n", $groupformation->knowledgelines);
+        }
+        $groupformation->knowledgevalues = groupformation_convert_options($knowledgearray);
+        $groupformation->knowledgenumber = count($knowledgearray);
     }
 
     if (isset ($groupformation->topics) && $groupformation->topics == 0) {
         $groupformation->topics = 0;
         $groupformation->topiclines = "";
+        $groupformation->topicvalues = null;
+        $groupformation->topicnumber = null;
     } else if (!isset ($groupformation->topics)) {
         $groupformation->topics = 0;
         $groupformation->topiclines = "";
+        $groupformation->topicvalues = null;
+        $groupformation->topicnumber = null;
     } else if (isset ($groupformation->topics) && $groupformation->topics == 1 && isset ($groupformation->topiclines) &&
         $groupformation->topiclines == ""
     ) {
         $groupformation->topics = 0;
         $groupformation->topiclines = "";
+        $groupformation->topicvalues = null;
+        $groupformation->topicnumber = null;
+    } else {
+        $topicarray = array();
+        if ($groupformation->topics != 0) {
+            $topicarray = explode("\n", $groupformation->topiclines);
+        }
+        $groupformation->topicvalues = groupformation_convert_options($topicarray);
+        $groupformation->topicnumber = count($topicarray);
     }
 
     if (isset ($groupformation->groupoption) && $groupformation->groupoption == 1) {
@@ -607,6 +641,7 @@ function groupformation_set_fields(stdClass $groupformation) {
  *
  * @param $groupformation
  * @param $init
+ * @throws dml_exception
  */
 function groupformation_save_more_infos($groupformation, $init) {
     $store = new mod_groupformation_storage_manager ($groupformation->id);
@@ -619,10 +654,6 @@ function groupformation_save_more_infos($groupformation, $init) {
     $topicsarray = array();
     if ($groupformation->topics != 0) {
         $topicsarray = explode("\n", $groupformation->topiclines);
-    }
-
-    if ($store->is_editable()) {
-        $store->add_setting_question($knowledgearray, $topicsarray, $init);
     }
 }
 

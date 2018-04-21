@@ -49,7 +49,7 @@ class restore_groupformation_activity_task extends restore_activity_task {
      */
     protected function define_my_steps() {
         // We have just one structure step here.
-        $this->add_step(new restore_groupformation_activity_structure_step('newmodule_structure', 'newmodule.xml'));
+        $this->add_step(new restore_groupformation_activity_structure_step('groupformation_structure', 'groupformation.xml'));
     }
 
     /**
@@ -58,7 +58,7 @@ class restore_groupformation_activity_task extends restore_activity_task {
      */
     static public function define_decode_contents() {
         $contents = array();
-        $contents[] = new restore_decode_content('groupformation', array('intro'), 'groupformation');
+        //$contents[] = new restore_decode_content('groupformation', array('intro'), 'groupformation');
         return $contents;
     }
 
@@ -68,8 +68,8 @@ class restore_groupformation_activity_task extends restore_activity_task {
      */
     static public function define_decode_rules() {
         $rules = array();
-        $rules[] = new restore_decode_rule('GROUPFORMATIONVIEWBYID', '/mod/groupformation/view.php?id=$1', 'course_module');
-        $rules[] = new restore_decode_rule('GROUPFORMATIONINDEX', '/mod/groupformation/index.php?id=$1', 'course');
+        //$rules[] = new restore_decode_rule('GROUPFORMATIONVIEWBYID', '/mod/groupformation/view.php?id=$1', 'course_module');
+        //$rules[] = new restore_decode_rule('GROUPFORMATIONINDEX', '/mod/groupformation/index.php?id=$1', 'course');
         return $rules;
     }
 
@@ -81,9 +81,9 @@ class restore_groupformation_activity_task extends restore_activity_task {
      */
     static public function define_restore_log_rules() {
         $rules = array();
-        $rules[] = new restore_log_rule('groupformation', 'add', 'view.php?id={course_module}', '{groupformation}');
-        $rules[] = new restore_log_rule('groupformation', 'update', 'view.php?id={course_module}', '{groupformation}');
-        $rules[] = new restore_log_rule('groupformation', 'view', 'view.php?id={course_module}', '{groupformation}');
+        //$rules[] = new restore_log_rule('groupformation', 'add', 'view.php?id={course_module}', '{groupformation}');
+        //$rules[] = new restore_log_rule('groupformation', 'update', 'view.php?id={course_module}', '{groupformation}');
+        //$rules[] = new restore_log_rule('groupformation', 'view', 'view.php?id={course_module}', '{groupformation}');
         return $rules;
     }
 
@@ -99,7 +99,7 @@ class restore_groupformation_activity_task extends restore_activity_task {
      */
     static public function define_restore_log_rules_for_course() {
         $rules = array();
-        $rules[] = new restore_log_rule('groupformation', 'view all', 'index.php?id={course}', null);
+        //$rules[] = new restore_log_rule('groupformation', 'view all', 'index.php?id={course}', null);
         return $rules;
     }
 }

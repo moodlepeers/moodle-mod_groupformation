@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="mod/groupformation/db" VERSION="20171214" COMMENT="XMLDB file for Moodle mod/groupformation"
+<XMLDB PATH="mod/groupformation/db" VERSION="20180421" COMMENT="XMLDB file for Moodle mod/groupformation"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
@@ -19,8 +19,12 @@
         <FIELD NAME="szenario" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="The szenario: project-0, homework-1, presentation-2."/>
         <FIELD NAME="knowledge" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Knowledge questions are asked if field is 1, otherwise field is 0."/>
         <FIELD NAME="knowledgelines" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="Questions are seperated by SEPERATOR, to collect knowledge of users"/>
+        <FIELD NAME="knowledgevalues" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="knowledgenumber" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="topics" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="topics are given if field is 1, otherwise field is 0."/>
         <FIELD NAME="topiclines" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="Topics are seperated by SEPERATOR"/>
+        <FIELD NAME="topicvalues" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="topicnumber" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="groupoption" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Option for max members or max number of groups"/>
         <FIELD NAME="maxmembers" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Maximum number of group members."/>
         <FIELD NAME="maxgroups" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Maximum number of groups to generate."/>
@@ -31,6 +35,7 @@
         <FIELD NAME="emailnotifications" TYPE="int" LENGTH="1" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="version" TYPE="int" LENGTH="12" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="allanswersrequired" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="archived" TYPE="int" LENGTH="1" NOTNULL="false" SEQUENCE="false"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
