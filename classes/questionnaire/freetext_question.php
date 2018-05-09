@@ -53,6 +53,7 @@ class mod_groupformation_freetext_question extends mod_groupformation_input_ques
      * Reads answer
      *
      * @return array|null
+     * @throws coding_exception
      */
     public function read_answer() {
 

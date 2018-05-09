@@ -84,7 +84,61 @@ class mod_groupformation_dropdown_question extends mod_groupformation_basic_ques
     }
 
     /**
+     * Returns HTML of drop-down inputs
+     *
+     * @param $highlight
+     * @param $required
+     * @return string
+     */
+    public function get_html($highlight, $required) {
+        $s = "";
+        $category = $this->category;
+        $questionid = $this->questionid;
+        $question = $this->question;
+        $options = $this->options;
+        $answer = $this->answer;
+
+        $questioncounter = 1;
+
+        if ($answer == false) {
+            $answer = -1;
+        }
+
+        if ($answer != -1) {
+            $s .= '<tr>';
+            $s .= '<th scope="row">' . $question . '</th>';
+        } else if ($highlight) {
+            $s .= '<tr class="noAnswer">';
+            $s .= '<th scope="row">' . $question . '</th>';
+        } else {
+            $s .= '<tr>';
+            $s .= '<th scope="row">' . $question . '</th>';
+        }
+
+        $s .= '<td colspan="100%" class="center">';
+        $categoryquestionid = $category . $questionid;
+        $s .= '<select style="height:35px" class="form-control" name="';
+        $s .= $categoryquestionid;
+        $s .= '" id="' . $categoryquestionid . '">';
+        $s .= '<option value="0"> - </option>';
+        foreach ($options as $option) {
+            if (intval($answer) == $questioncounter) {
+                $s .= '<option value="' . $questioncounter . '" selected="selected">' . $option . '</option>';
+            } else {
+                $s .= '<option value="' . $questioncounter . '">' . $option . '</option>';
+            }
+            $questioncounter++;
+        }
+
+        $s .= '</select>
+            </td>
+        </tr>';
+        return $s;
+    }
+
+    /**
      * @return array|null
+     * @throws coding_exception
      */
     public function read_answer() {
         $parameter = $this->category . $this->questionid;

@@ -27,6 +27,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php')
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/controller/questionnaire_controller.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/questionnaire_view_controller.php');
 
 $filename = substr(__FILE__, strrpos(__FILE__, '\\') + 1);
 $url = new moodle_url('/mod/groupformation/' . $filename, $urlparams);
@@ -79,6 +80,8 @@ if (data_submitted() && confirm_sesskey()) {
 
 $controller = new mod_groupformation_questionnaire_controller($groupformation->id,
         $userid, $category, $cm->id);
+$viewcontroller = new mod_groupformation_questionnaire_view_controller($groupformation->id, $controller);
+
 $inarray = in_array($category, $names);
 $go = true;
 
@@ -108,7 +111,6 @@ $isteacher = has_capability('mod/groupformation:editsettings', $context);
 if ($next && ($available || $isteacher) && ($category == '' || $inarray)) {
 
     echo $OUTPUT->header();
-
     // Print the tabs.
     require('tabs.php');
 
@@ -123,8 +125,11 @@ if ($next && ($available || $isteacher) && ($category == '' || $inarray)) {
         } else if (!$go) {
             $controller->not_go_on();
         }
-        $controller->render();
+        echo $viewcontroller->render();
     }
+    echo '</div></div>';
+    echo $OUTPUT->footer();
+
 } else if (!$next ||!$available || $category == 'no') {
 
     if ($usermanager->has_answered_everything($userid)) {
@@ -140,6 +145,3 @@ if ($next && ($available || $isteacher) && ($category == '' || $inarray)) {
 } else {
     echo $OUTPUT->notification('Category has been manipulated');
 }
-
-echo $OUTPUT->footer();
-

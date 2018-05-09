@@ -88,7 +88,62 @@ class mod_groupformation_range_question extends mod_groupformation_basic_questio
     }
 
     /**
+     * Print HTML of range inputs
+     *
+     * @param $highlight
+     * @param $required
+     * @return string
+     */
+    public function get_html($highlight, $required) {
+
+        $s = "";
+        $category = $this->category;
+        $questionid = $this->questionid;
+        $question = $this->question;
+        $options = $this->options;
+
+        $answer = $this->get_answer();
+
+        if ($answer != -1) {
+            $s .= '<tr>';
+            $s .= '<th scope="row">' . $question . '</th>';
+        } else {
+            if ($highlight) {
+                $s .= '<tr class="noAnswer">';
+                $s .= '<th scope="row">' . $question . '</th>';
+            } else {
+                $s .= '<tr>';
+                $s .= '<th scope="row">' . $question . '</th>';
+            }
+        }
+
+        $s .= '<td colspan="100%" data-title="';
+        $s .= min(array_keys($options)) . ' = ' . $options [min(array_keys($options))];
+        $s .= ', ' . max(array_keys($options)) . ' = ' . $options [max(array_keys($options))];
+        $s .= '" class="range">';
+        $s .= '<span class="">' . min(array_keys($options)) . '</span>';
+
+        $s .= '<input class="gf_range_inputs" type="range" name="' . $category . $questionid . '" min="0" max="';
+        $s .= max(array_keys($options)) . '" value="' . intval($answer) . '" />';
+        $s .= '<span class="">';
+        $s .= max(array_keys($options));
+        $s .= '</span>';
+        $s .= '<input type="text" name="' . $category . $questionid;
+        $s .= '_valid" value="' . intval($answer) . '" style="display:none;"/>';
+        if ($category == 'points') {
+            $s .= '<br>';
+            $s .= '<label id="text' . $category . $questionid . '">';
+            $s .= ((intval($answer) == -1) ? '0' : intval($answer));
+            $s .= '</label>';
+        }
+        $s .= '</td>';
+        $s .= '</tr>';
+        return $s;
+    }
+
+    /**
      * @return array|null
+     * @throws coding_exception
      */
     public function read_answer() {
         $answerparameter = $this->category . $this->questionid;
@@ -111,13 +166,12 @@ class mod_groupformation_range_question extends mod_groupformation_basic_questio
         return rand(1, max(array_keys($this->options)));
     }
 
-
-
     /**
      * Converts options if string
      *
      * @param $options
      * @return array
+     * @throws coding_exception
      */
     protected function convert_options($options) {
 

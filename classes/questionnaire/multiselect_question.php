@@ -90,9 +90,76 @@ class mod_groupformation_multiselect_question extends mod_groupformation_basic_q
     }
 
     /**
+     * Returns HTML of a multiselect question
+     *
+     * @param $highlight
+     * @param $required
+     * @return string
+     * @throws coding_exception
+     */
+    public function get_html($highlight, $required) {
+
+        $s = "";
+        $category = $this->category;
+        $questionid = $this->questionid;
+        $question = $this->question;
+        $options = $this->options;
+        $answer = $this->answer;
+
+        if ($answer == false) {
+            $answer = -1;
+        }
+
+        if ($answer != "") {
+            $s .= '<tr>';
+            $s .= '<th scope="row">' . $question . '</th>';
+        } else {
+            if ($highlight) {
+                $s .= '<tr class="noAnswer">';
+                $s .= '<th scope="row">' . $question . '</th>';
+            } else {
+                $s .= '<tr>';
+                $s .= '<th scope="row">' . $question . '</th>';
+            }
+        }
+
+        $answers = array();
+        if ($answer != -1) {
+            $answer = substr($answer, 5);
+            $answers = explode(",", $answer);
+        }
+
+        $s .= '<td colspan="100%" class="freetext">';
+        $s .= '<div class="form-group">';
+        $s .= '<select multiple class="freetext-textarea form-control" name="';
+        $s .= $category . $questionid . '[]" style="width: 80%;">';
+        foreach ($options as $key => $option) {
+            $s .= '<option value="' . $key . '" ' . ((in_array($key, $answers)) ? 'selected' : '') . '>' . $option . '</option>';
+        }
+        $s .= '  </select>';
+        $s .= '</div>';
+        if (!$required) {
+            $s .= '<br>';
+            $s .= '<div class="form-check">';
+            $s .= '    <label class="form-check-label">';
+            $s .= '        <input class="freetext-checkbox" type="checkbox" name="'.$category.$questionid.'_noanswer"/>';
+            $s .= get_string('freetext_noanswer', 'groupformation');
+            $s .= '    </label>';
+            $s .= '</div>';
+        }
+
+        $s .= '</td>';
+
+        $s .= '</tr>';
+
+        return $s;
+    }
+
+    /**
      * Reads answer
      *
      * @return array|null
+     * @throws coding_exception
      */
     public function read_answer() {
 

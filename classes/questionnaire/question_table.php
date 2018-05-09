@@ -66,6 +66,34 @@ class mod_groupformation_question_table {
     }
 
     /**
+     * Returns HTML of table header
+     */
+    public function get_header() {
+        $s = "";
+
+        if ($this->category == 'topic') {
+            $s .= '<div id="topicshead">';
+            $s .= get_string('topics_question', 'groupformation');
+            $s .= '</div>';
+            $s .= '<ul class="sortable_topics">';
+
+        } else {
+            $s .= '<table class="responsive-table">';
+            $s .= '<colgroup><col class="firstCol"></colgroup>';
+            $s .= '<thead>';
+            $s .= '<tr>';
+            $s .= '<th scope="col">';
+            $s .= get_string('tabletitle_' . $this->category, 'groupformation');
+            $s .= '</th>';
+            $s .= '<th scope="col" colspan="100%">';
+            $s .= '</th>';
+
+            $s .= '</tr></thead><tbody>';
+        }
+        return $s;
+    }
+
+    /**
      * Print HTML for table footer
      */
     public function print_footer() {
@@ -81,6 +109,26 @@ class mod_groupformation_question_table {
             echo ' </tbody>
                           </table>';
         }
+    }
+
+    /**
+     * Returns HTML for table footer
+     */
+    public function get_footer() {
+        $s = "";
+        // Closing the table or unordered list.
+        if ($this->category == 'topic') {
+            // Close unordered list.
+            $s .= '</ul>';
+
+            $s .= '<div id="invisible_topics_inputs">
+                            </div>';
+        } else {
+            // Close tablebody and close table.
+            $s .= ' </tbody>
+                          </table>';
+        }
+        return $s;
     }
 }
 

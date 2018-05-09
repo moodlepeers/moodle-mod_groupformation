@@ -32,11 +32,11 @@ class mod_groupformation_likert_question extends mod_groupformation_basic_questi
     protected $type = 'likert';
 
     /**
-     * Print HTML of radio inputs
-     *
-     * @param $highlight
-     * @param $required
-     */
+ * Print HTML of radio inputs
+ *
+ * @param $highlight
+ * @param $required
+ */
     public function print_html($highlight, $required) {
 
         $category = $this->category;
@@ -64,7 +64,7 @@ class mod_groupformation_likert_question extends mod_groupformation_basic_questi
                     echo $option;
                     echo '" class="toolt2 radioleft select-area selected_label">';
                     echo '<input type="radio" name="' . $category .
-                        $questionid . '" value="' . $radiocount . '" checked="checked"/></td>';
+                            $questionid . '" value="' . $radiocount . '" checked="checked"/></td>';
                     echo (($option != "" && $radiocount == count($options)) ? '<td class="td-extra">' . $option . '</td>' : '');
                 } else {
                     echo (($option != "" && $radiocount == 1) ? '<td class="td-extra">' . $option . '</td>' : '');
@@ -80,8 +80,8 @@ class mod_groupformation_likert_question extends mod_groupformation_basic_questi
             foreach ($options as $option) {
                 if (intval($answer) == $radiocount) {
                     echo '<td title="'.$option.'" data-title="' . $option .
-                        '" class="toolt2 radioleft select-area selected_label"><input type="radio" name="' . $category .
-                        $questionid . '" value="' . $radiocount . '" checked="checked"/>'.$option.'</td>';
+                            '" class="toolt2 radioleft select-area selected_label"><input type="radio" name="' . $category .
+                            $questionid . '" value="' . $radiocount . '" checked="checked"/>'.$option.'</td>';
                 } else {
                     echo '<td title="' . $option . '" data-title="' . $option . '" class="toolt2 radioleft select-area">';
                     echo '<input type="radio" name="' . $category . $questionid . '" value="' . $radiocount . '"/>';
@@ -96,7 +96,74 @@ class mod_groupformation_likert_question extends mod_groupformation_basic_questi
     }
 
     /**
+     * Returns HTML of radio inputs
+     *
+     * @param $highlight
+     * @param $required
+     * @return string
+     */
+    public function get_html($highlight, $required) {
+
+        $s = "";
+        $category = $this->category;
+        $questionid = $this->questionid;
+        $question = $this->question;
+        $options = $this->options;
+        $answer = $this->answer;
+
+        if ($answer == false) {
+            $answer = -1;
+        }
+        if ($answer == -1 && $highlight) {
+            $s .= '<tr class="noAnswer">';
+        } else {
+            $s .= '<tr>';
+        }
+        $s .= '<th scope="row">' . $question . '</th>';
+
+        if (count($options) > 2) {
+            $radiocount = 1;
+            foreach ($options as $option) {
+                if (intval($answer) == $radiocount) {
+                    $s .= (($option != "" && $radiocount == 1) ? '<td class="td-extra">' . $option . '</td>' : '');
+                    $s .= '<td title="'.$option.'" data-title="';
+                    $s .= $option;
+                    $s .= '" class="toolt2 radioleft select-area selected_label">';
+                    $s .= '<input type="radio" name="' . $category .
+                            $questionid . '" value="' . $radiocount . '" checked="checked"/></td>';
+                    $s .= (($option != "" && $radiocount == count($options)) ? '<td class="td-extra">' . $option . '</td>' : '');
+                } else {
+                    $s .= (($option != "" && $radiocount == 1) ? '<td class="td-extra">' . $option . '</td>' : '');
+                    $s .= '<td title="' . $option . '" data-title="' . $option . '" class="toolt2 radioleft select-area">';
+                    $s .= '<input type="radio" name="' . $category . $questionid . '" value="' . $radiocount . '"/>';
+                    $s .= '</td>';
+                    $s .= (($option != "" && $radiocount == count($options)) ? '<td class="td-extra">' . $option . '</td>' : '');
+                }
+                $radiocount++;
+            }
+        } else {
+            $radiocount = 1;
+            foreach ($options as $option) {
+                if (intval($answer) == $radiocount) {
+                    $s .= '<td title="'.$option.'" data-title="' . $option .
+                            '" class="toolt2 radioleft select-area selected_label"><input type="radio" name="' . $category .
+                            $questionid . '" value="' . $radiocount . '" checked="checked"/>'.$option.'</td>';
+                } else {
+                    $s .= '<td title="' . $option . '" data-title="' . $option . '" class="toolt2 radioleft select-area">';
+                    $s .= '<input type="radio" name="' . $category . $questionid . '" value="' . $radiocount . '"/>';
+                    $s .= $option;
+                    $s .= '</td>';
+                }
+                $radiocount++;
+            }
+        }
+        $s .= '</tr>';
+        return $s;
+    }
+
+    /**
      * @return array|null
+     * @throws coding_exception
      */
     public function read_answer() {
         $parameter = $this->category . $this->questionid;

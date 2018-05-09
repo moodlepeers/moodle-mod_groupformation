@@ -70,6 +70,15 @@ abstract class mod_groupformation_basic_question {
     public abstract function print_html($highlight, $required);
 
     /**
+     * Returns HTML of drop-down inputs
+     *
+     * @param $highlight
+     * @param $required
+     * @return
+     */
+    public abstract function get_html($highlight, $required);
+
+    /**
      * Returns type
      *
      * @return string

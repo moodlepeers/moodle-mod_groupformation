@@ -48,6 +48,24 @@ class mod_groupformation_topic_question extends mod_groupformation_basic_questio
     }
 
     /**
+     * Returns HTML for topics table
+     *
+     * @param $highlight
+     * @param $required
+     * @return string
+     */
+    public function get_html($highlight, $required) {
+
+        $category = $this->category;
+        $questionid = $this->questionid;
+        $question = $this->question;
+
+        return '<li id="' . $category . $questionid . '"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>' .
+                $question . '</li>';
+
+    }
+
+    /**
      * Sets answer
      *
      * @param $answer
@@ -56,6 +74,12 @@ class mod_groupformation_topic_question extends mod_groupformation_basic_questio
         $this->answer = $answer;
     }
 
+    /**
+     * Reads answer
+     *
+     * @return array|mixed|null
+     * @throws coding_exception
+     */
     public function read_answer() {
 
         $parameter = $this->category . $this->questionid;

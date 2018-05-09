@@ -615,6 +615,7 @@ class mod_groupformation_user_manager {
      *
      * @param $userid
      * @param $participantcode
+     * @throws dml_exception
      */
     public function register_participant_code($userid, $participantcode) {
         global $DB;
@@ -630,6 +631,7 @@ class mod_groupformation_user_manager {
      *
      * @param $userid
      * @return mixed|string
+     * @throws dml_exception
      */
     public function get_participant_code($userid) {
         global $DB;
@@ -651,6 +653,8 @@ class mod_groupformation_user_manager {
      * Sets all values for a user.
      *
      * @param $userid
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public function set_evaluation_values($userid) {
         global $DB;
@@ -698,6 +702,7 @@ class mod_groupformation_user_manager {
      *
      * @param $userid
      * @return bool
+     * @throws dml_exception
      */
     public function has_evaluation_values($userid) {
         global $DB;
@@ -708,8 +713,12 @@ class mod_groupformation_user_manager {
 
     /**
      * Returns (linearized) eval score for user
+     *
      * @param $userid
+     * @param null $specs
      * @return float
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public function get_eval_score($userid, $specs = null) {
         global $DB;
@@ -741,6 +750,7 @@ class mod_groupformation_user_manager {
      *
      * @param $userid
      * @param $value
+     * @throws dml_exception
      */
     public function set_complete($userid, $value) {
         global $DB;
@@ -759,6 +769,7 @@ class mod_groupformation_user_manager {
      *
      * @param int $topicnumber
      * @return float|string
+     * @throws dml_exception
      */
     public function get_topic_score($topicnumber) {
         global $DB;

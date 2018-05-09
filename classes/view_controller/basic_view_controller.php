@@ -48,17 +48,18 @@ abstract class mod_groupformation_basic_view_controller {
     protected $title = '<title>';
 
     /**
-     * block_pseudolearner_basic_controller constructor.
+     * mod_groupformation_basic_controller constructor.
      *
      * @param $groupformationid
      * @param $controller
+     * @throws coding_exception
      */
     public function __construct($groupformationid, $controller) {
         $this->groupformationid = $groupformationid;
         $this->controller = $controller;
         $this->store = new mod_groupformation_storage_manager($groupformationid);
         $this->view = new mod_groupformation_template_builder();
-        $this->view->set_template('wrapper_view');
+        $this->view->set_template($this->wrappername);
         $this->title = get_string('page_title_' . $this->title, 'mod_groupformation');
     }
 

@@ -78,6 +78,7 @@ class mod_groupformation_questionnaire_controller {
      * @param $userid
      * @param $oldcategory
      * @param $cmid
+     * @throws dml_exception
      * @internal param $lang
      */
     public function __construct($groupformationid, $userid, $oldcategory, $cmid) {
@@ -112,6 +113,7 @@ class mod_groupformation_questionnaire_controller {
      *
      * @param string $category
      * @return number
+     * @throws dml_exception
      */
     public function get_percent($category = null) {
         if (!is_null($category)) {
@@ -165,6 +167,8 @@ class mod_groupformation_questionnaire_controller {
      * @param int $i
      * @param int $version
      * @return stdClass
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public function get_question($i, $version) {
         $category = $this->category;
@@ -215,6 +219,8 @@ class mod_groupformation_questionnaire_controller {
      * Returns questions
      *
      * @return array
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public function get_next_questions() {
         $category = $this->category;
@@ -327,29 +333,37 @@ class mod_groupformation_questionnaire_controller {
         }
 
     }
-
+    
     /**
-     * Prints action buttons for questionnaire page
+     * Returns action buttons for questionnaire page
+     *
+     * @return string
+     * @throws coding_exception
      */
-    public function print_action_buttons() {
-        echo '<div class="grid">';
-        echo '    <div class="col_m_100 questionaire_button_row">';
-        echo '        <button type="submit" name="direction" value="0" class="gf_button gf_button_pill gf_button_small">';
-        echo get_string('previous');
-        echo '        </button>';
-        echo '        <button type="submit" name="direction" value="1" class="gf_button gf_button_pill gf_button_small">';
-        echo get_string('next');
-        echo '        </button>';
-        echo '    </div>';
-        echo '</div>';
+    public function get_action_buttons() {
+        $s = '<div class="grid">';
+        $s .= '    <div class="col_m_100 questionaire_button_row">';
+        $s .= '        <button type="submit" name="direction" value="0" class="gf_button gf_button_pill gf_button_small">';
+        $s .= get_string('previous');
+        $s .= '        </button>';
+        $s .= '        <button type="submit" name="direction" value="1" class="gf_button gf_button_pill gf_button_small">';
+        $s .= get_string('next');
+        $s .= '        </button>';
+        $s .= '    </div>';
+        $s .= '</div>';
+        return $s;
     }
 
     /**
-     * Prints navigation bar
+     * Returns navigation bar
      *
      * @param string $activecategory
+     * @return string
+     * @throws coding_exception
+     * @throws dml_exception
+     * @throws moodle_exception
      */
-    public function print_navbar($activecategory = null) {
+    public function get_navbar($activecategory = null) {
         $context = context_module::instance($this->cmid);
 
         $tempcategories = $this->store->get_categories();
@@ -364,14 +378,14 @@ class mod_groupformation_questionnaire_controller {
 
         }
 
-        echo '<div id="questionaire_navbar">';
-        echo '<ul id="accordion">';
+        $s = '<div id="questionaire_navbar">';
+        $s .= '<ul id="accordion">';
         $prevcomplete = !$this->store->all_answers_required();
 
         foreach ($categories as $category) {
 
             $url = new moodle_url ('questionnaire_view.php', array(
-                'id' => $this->cmid, 'category' => $category));
+                    'id' => $this->cmid, 'category' => $category));
             $positionactivecategory = $this->store->get_position($activecategory);
             $positioncategory = $this->store->get_position($category);
 
@@ -383,128 +397,36 @@ class mod_groupformation_questionnaire_controller {
 
             $current = ($activecategory == $category) ? 'current' : 'accord_li';
 
-            echo '<li class="' . $current . '">';
-            echo '<a class="' . $class . '"  href="' . $url . '">';
-            echo '<span>';
-            echo $positioncategory + 1;
-            echo '</span>';
-            echo get_string('category_' . $category, 'groupformation');
-            echo '</a>';
-            echo '</li>';
+            $s .= '<li class="' . $current . '">';
+            $s .= '<a class="' . $class . '"  href="' . $url . '">';
+            $s .= '<span>';
+            $s .= $positioncategory + 1;
+            $s .= '</span>';
+            $s .= get_string('category_' . $category, 'groupformation');
+            $s .= '</a>';
+            $s .= '</li>';
 
         }
 
-        echo '</ul>';
-        echo '</div>';
+        $s .= '</ul>';
+        $s .= '</div>';
+        return $s;
     }
 
     /**
-     * Prints final page of questionnaire
-     */
-    public function print_final_page() {
-        $context = context_module::instance($this->cmid);
-
-        echo '<div class="col_m_100">';
-        echo '<h4>';
-        echo get_string('questionnaire_no_more_questions', 'groupformation');
-        echo '</h>';
-        echo '</div>';
-        $action = htmlspecialchars($_SERVER ["PHP_SELF"]);
-        echo '<form action="' . $action . '" method="post" autocomplete="off" class="groupformation_questionnaire">';
-
-        echo '<input type="hidden" name="category" value="no"/>';
-        echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
-
-        $activityid = optional_param('id', $this->groupformationid, PARAM_INT);
-        echo '<input type="hidden" name="id" value="' . $activityid . '"/>';
-
-        if (has_capability('mod/groupformation:editsettings', $context)) {
-            echo '<div class="alert col_m_100 questionaire_hint">' .
-                get_string('questionnaire_submit_disabled_teacher', 'groupformation') . '</div>';
-        }
-
-        $url = new moodle_url ('/mod/groupformation/view.php', array(
-            'id' => $this->cmid, 'do_show' => 'view'));
-
-        echo '<div class="grid">';
-        echo '    <div class="questionaire_button_text">';
-        echo '        <div class="col_m_100 questionaire_button_row">';
-        echo '            <a href=' . $url->out() . '>';
-        echo '                <span class="gf_button gf_button_pill gf_button_small">';
-        echo get_string('questionnaire_go_to_start', 'groupformation');
-        echo '                </span>';
-        echo '            </a>';
-        echo '        </div>';
-        echo '    </div>';
-        echo '</div>';
-
-        echo '</form>';
-    }
-
-    /**
-     * Prints questionnaire page
-     */
-    public function render() {
-        $context = context_module::instance($this->cmid);
-
-        if (groupformation_get_current_questionnaire_version() > $this->store->get_version()) {
-            echo '<div class="alert">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
-        }
-
-        if ($this->has_next()) {
-            $category = $this->categories[$this->categoryposition];
-            $this->category = $category;
-
-            $isteacher = has_capability('mod/groupformation:editsettings', $context);
-
-            if ($isteacher) {
-                echo '<div class="alert">' . get_string('questionnaire_preview', 'groupformation') . '</div>';
-            }
-
-            if ($this->usermanager->is_completed($this->userid) || !$this->store->is_questionnaire_available()) {
-                echo '<div class="alert" id="commited_view">';
-                echo get_string('questionnaire_committed', 'groupformation');
-                echo '</div>';
-            }
-
-            $percent = $this->get_percent($category);
-
-            if (mod_groupformation_data::ask_for_participant_code() && !$isteacher) {
-                $this->print_participant_code();
-            }
-
-            $this->print_navbar($category);
-
-            $this->print_progressbar($percent);
-
-            $questions = $this->get_next_questions();
-
-            $this->print_questions($questions, $percent);
-
-        } else {
-
-            if ($this->usermanager->has_answered_everything($this->userid)) {
-                $this->usermanager->set_evaluation_values($this->userid);
-            }
-
-            $returnurl = new moodle_url ('/mod/groupformation/analysis_view.php', array(
-                    'id' => $this->cmid, 'do_show' => 'analysis'));
-            redirect($returnurl);
-        }
-    }
-
-    /**
-     * Prints table with questions
+     * Returns table with questions
      *
      * @param array $questions
      * @param unknown $percent
+     * @return string
      * @throws coding_exception
+     * @throws dml_exception
      */
-    public function print_questions($questions, $percent) {
+    public function get_questions($questions, $percent) {
 
-        echo '<form style="width:100%; float:left;" action="';
-        echo htmlspecialchars($_SERVER ["PHP_SELF"]);
-        echo '" method="post" autocomplete="off" class="groupformation_questionnaire">';
+        $s = '<form style="width:100%; float:left;" action="';
+        $s .= htmlspecialchars($_SERVER ["PHP_SELF"]);
+        $s .= '" method="post" autocomplete="off" class="groupformation_questionnaire">';
 
         if (!is_null($questions) && count($questions) != 0) {
 
@@ -513,64 +435,69 @@ class mod_groupformation_questionnaire_controller {
             $table = new mod_groupformation_question_table ($category);
 
             // Here is the actual category and groupformationid is sent hidden.
-            echo '<input type="hidden" name="category" value="' . $category . '"/>';
+            $s .= '<input type="hidden" name="category" value="' . $category . '"/>';
 
-            echo '<input type="hidden" name="percent" value="' . $percent . '"/>';
+            $s .= '<input type="hidden" name="percent" value="' . $percent . '"/>';
 
-            echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
+            $s .= '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
 
             $activityid = optional_param('id', $this->groupformationid, PARAM_INT);
 
-            echo '<input type="hidden" name="id" value="' . $activityid . '"/>';
+            $s .= '<input type="hidden" name="id" value="' . $activityid . '"/>';
 
-            echo '<h4 class="view_on_mobile">';
-            echo get_string('category_' . $category, 'groupformation');
-            echo '</h4>';
+            $s .= '<h4 class="view_on_mobile">';
+            $s .= get_string('category_' . $category, 'groupformation');
+            $s .= '</h4>';
 
             // Print the header of a table or unordered list.
-            $table->print_header();
+            $s .= $table->get_header();
 
             foreach ($questions as $q) {
 
-                $q->print_html($this->highlightmissinganswers, $this->store->all_answers_required());
+                $s .= $q->get_html($this->highlightmissinganswers, $this->store->all_answers_required());
 
             }
 
             // Print the footer of a table or unordered list.
-            $table->print_footer();
+            $s .= $table->get_footer();
         }
 
-        $this->print_action_buttons();
+        $s .= $this->get_action_buttons();
 
-        echo '</form>';
+        $s .= '</form>';
+        return $s;
     }
 
     /**
-     * Prints progress bar
+     * Returns progress bar
      *
-     * @param unknown $percent
+     * @param $percent
+     * @return string
      */
-    public function print_progressbar($percent) {
-        echo '<div class="progress">';
+    public function get_progressbar($percent) {
+        $s = '<div class="progress">';
 
-        echo '    <div class="questionaire_progress-bar" role="progressbar" aria-valuenow="' . $percent .
-            '" aria-valuemin="0" aria-valuemax="100" style="width:' . $percent . '%">';
-        echo '    </div>';
+        $s .= '    <div class="questionaire_progress-bar" role="progressbar" aria-valuenow="' . $percent .
+                '" aria-valuemin="0" aria-valuemax="100" style="width:' . $percent . '%">';
+        $s .= '    </div>';
 
-        echo '</div>';
+        $s .= '</div>';
+
+        return $s;
     }
 
     /**
      * Prints participant code for user
      */
-    public function print_participant_code() {
-        echo '<div class="participantcode">';
+    public function get_participant_code() {
+        $s = '<div class="participantcode">';
 
-        echo get_string('participant_code_footer', 'groupformation');
-        echo ': ';
-        echo $this->usermanager->get_participant_code($this->userid);
+        $s .= get_string('participant_code_footer', 'groupformation');
+        $s .= ': ';
+        $s .= $this->usermanager->get_participant_code($this->userid);
 
-        echo '</div>';
+        $s .= '</div>';
+        return $s;
     }
 
     /**
@@ -578,6 +505,7 @@ class mod_groupformation_questionnaire_controller {
      *
      * @param $category
      * @return bool
+     * @throws dml_exception
      */
     public function save_answers($category) {
         $go = true;
@@ -629,5 +557,66 @@ class mod_groupformation_questionnaire_controller {
         } else if ($answer[0] == "delete") {
             $this->usermanager->delete_answer($userid, $category, $questionid);
         }
+    }
+
+    /**
+     * Loads questionnaire page content
+     *
+     * @return array
+     * @throws coding_exception
+     * @throws dml_exception
+     * @throws moodle_exception
+     */
+    public function load_questionnaire_page() {
+        $assigns = array();
+
+        $context = context_module::instance($this->cmid);
+
+        if (groupformation_get_current_questionnaire_version() > $this->store->get_version()) {
+            $assigns['archived_alert'] = '<div class="alert">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
+        }
+
+        if ($this->has_next()) {
+            $category = $this->categories[$this->categoryposition];
+            $this->category = $category;
+
+            $isteacher = has_capability('mod/groupformation:editsettings', $context);
+
+            if ($isteacher) {
+                $assigns['preview_alert'] = '<div class="alert">' . get_string('questionnaire_preview', 'groupformation') . '</div>';
+            }
+
+            if ($this->usermanager->is_completed($this->userid) || !$this->store->is_questionnaire_available()) {
+                $s = '<div class="alert" id="commited_view">';
+                $s .= get_string('questionnaire_committed', 'groupformation');
+                $s .= '</div>';
+                $assigns['committed_alert'] = $s;
+            }
+
+            $percent = $this->get_percent($category);
+
+            if (mod_groupformation_data::ask_for_participant_code() && !$isteacher) {
+                $assigns['participant_code'] = $this->get_participant_code();
+            }
+
+            $assigns['navbar'] = $this->get_navbar($category);
+            $assigns['progressbar'] = $this->get_progressbar($percent);
+
+            $questions = $this->get_next_questions();
+
+            $assigns['questions'] = $this->get_questions($questions, $percent);
+
+        } else {
+
+            if ($this->usermanager->has_answered_everything($this->userid)) {
+                $this->usermanager->set_evaluation_values($this->userid);
+            }
+
+            $returnurl = new moodle_url ('/mod/groupformation/analysis_view.php', array(
+                    'id' => $this->cmid, 'do_show' => 'analysis'));
+            redirect($returnurl);
+        }
+
+        return $assigns;
     }
 }

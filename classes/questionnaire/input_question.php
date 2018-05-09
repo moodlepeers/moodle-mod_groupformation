@@ -40,6 +40,7 @@ abstract class mod_groupformation_input_question extends mod_groupformation_basi
      *
      * @param $highlight
      * @param $required
+     * @throws coding_exception
      */
     public function print_html($highlight, $required) {
 
@@ -85,9 +86,63 @@ abstract class mod_groupformation_input_question extends mod_groupformation_basi
     }
 
     /**
+     * Returns HTML of a freetext question
+     *
+     * @param $highlight
+     * @param $required
+     * @return string
+     * @throws coding_exception
+     */
+    public function get_html($highlight, $required) {
+
+        $s = "";
+        $category = $this->category;
+        $questionid = $this->questionid;
+        $question = $this->question;
+        $options = $this->options;
+        $answer = $this->answer;
+
+        if ($answer == false) {
+            $answer = "";
+        }
+
+        if ($answer != "") {
+            $s .=  '<tr>';
+            $s .= '<th scope="row">' . $question . '</th>';
+        } else {
+            if ($highlight) {
+                $s .= '<tr class="noAnswer">';
+                $s .= '<th scope="row">' . $question . '</th>';
+            } else {
+                $s .= '<tr>';
+                $s .= '<th scope="row">' . $question . '</th>';
+            }
+        }
+
+        $s .= '<td colspan="100%" class="freetext">';
+
+        $s .= $this->get_input();
+
+        $s .= '<br>';
+        if (!$required) {
+            $s .= '<div class="form-check">';
+            $s .= '    <label class="form-check-label">';
+            $s .= '        <input class="freetext-checkbox" type="checkbox" name="'.$category.$questionid.'_noanswer"/>';
+            $s .= get_string('freetext_noanswer', 'groupformation');
+            $s .= '    </label>';
+            $s .= '</div>';
+        }
+        $s .= '</td>';
+
+        $s .= '</tr>';
+        return $s;
+    }
+
+    /**
      * Reads answer
      *
      * @return array|null
+     * @throws coding_exception
      */
     public function read_answer() {
 
