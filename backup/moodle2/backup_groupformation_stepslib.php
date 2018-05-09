@@ -104,12 +104,6 @@ class backup_groupformation_activity_structure_step extends backup_activity_stru
                     array('groupformation' => backup::VAR_PARENTID)
             );
         }
-
-        //$qsetting->annotate_ids('')
-
-        // Define file annotations (we do not use itemid in this example).
-        //$groupformation->annotate_files('mod_groupformation', 'qsetting', null);
-        // Return the root element (groupformation), wrapped into standard activity structure.
         return $this->prepare_activity_structure($groupformation);
     }
 }

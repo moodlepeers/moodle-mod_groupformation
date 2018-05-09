@@ -32,11 +32,11 @@ class mod_groupformation_likert_question extends mod_groupformation_basic_questi
     protected $type = 'likert';
 
     /**
- * Print HTML of radio inputs
- *
- * @param $highlight
- * @param $required
- */
+     * Print HTML of radio inputs
+     *
+     * @param $highlight
+     * @param $required
+     */
     public function print_html($highlight, $required) {
 
         $category = $this->category;

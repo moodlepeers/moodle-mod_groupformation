@@ -95,8 +95,6 @@ function groupformation_add_instance(stdClass $groupformation, mod_groupformatio
 
     groupformation_grade_item_update($groupformation);
 
-    //groupformation_save_more_infos($groupformation, true);
-
     return $groupformation->id;
 }
 

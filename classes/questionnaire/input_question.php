@@ -107,7 +107,7 @@ abstract class mod_groupformation_input_question extends mod_groupformation_basi
         }
 
         if ($answer != "") {
-            $s .=  '<tr>';
+            $s .= '<tr>';
             $s .= '<th scope="row">' . $question . '</th>';
         } else {
             if ($highlight) {

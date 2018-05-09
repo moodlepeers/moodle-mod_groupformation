@@ -192,10 +192,6 @@ class mod_groupformation_util {
         $record = $DB->get_record('groupformation', array('id' => $groupformationid));
         $record->archived = 1;
         $DB->update_record('groupformation', $record);
-
-        //$record = $DB->get_record('groupformation_q_settings', array('groupformation' => $groupformationid));
-        //$record->archived = 1;
-        //$DB->update_record('groupformation_q_settings', $record);
     }
 
     /**

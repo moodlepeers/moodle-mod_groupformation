@@ -236,7 +236,7 @@ class mod_groupformation_questionnaire_controller {
                 $values = mod_groupformation_util::xml_to_array($xmlcontent);
 
                 $options = array(
-                    100 => get_string('excellent', 'groupformation'), 0 => get_string('none', 'groupformation'));
+                        100 => get_string('excellent', 'groupformation'), 0 => get_string('none', 'groupformation'));
 
                 $position = 1;
                 $questionsfirst = array();
@@ -247,7 +247,7 @@ class mod_groupformation_questionnaire_controller {
 
                     if ($hasanswer) {
                         $answer = $this->usermanager->get_single_answer(
-                            $this->userid, $category, $position);
+                                $this->userid, $category, $position);
                         if ($answer == false) {
                             $answer = -1;
                         }
@@ -280,60 +280,61 @@ class mod_groupformation_questionnaire_controller {
                 } else {
                     $questions = $questionsfirst;
                 }
-            } else if ($this->is_points()) {
+            } else {
+                if ($this->is_points()) {
 
-                $records = $this->store->get_questions_randomized_for_user($category, $this->userid);
+                    $records = $this->store->get_questions_randomized_for_user($category, $this->userid);
 
-                foreach ($records as $record) {
+                    foreach ($records as $record) {
 
-                    $type = $record->type;
+                        $type = $record->type;
 
-                    $options = array(
-                        $this->store->get_max_points() => get_string('excellent', 'groupformation'),
-                        0 => get_string('bad', 'groupformation'));
+                        $options = array(
+                                $this->store->get_max_points() => get_string('excellent', 'groupformation'),
+                                0 => get_string('bad', 'groupformation'));
 
-                    $answer = $this->usermanager->get_single_answer($this->userid, $category, $record->questionid);
-                    if ($answer == false) {
-                        $answer = -1;
+                        $answer = $this->usermanager->get_single_answer($this->userid, $category, $record->questionid);
+                        if ($answer == false) {
+                            $answer = -1;
+                        }
+
+                        $questionid = $record->questionid;
+                        $question = $record->question;
+
+                        $name = 'mod_groupformation_' . $type . '_question';
+                        $questionobj = new $name($category, $questionid, $question, $options, $answer);
+
+                        $questions [] = $questionobj;
                     }
 
-                    $questionid = $record->questionid;
-                    $question = $record->question;
+                } else {
 
-                    $name = 'mod_groupformation_' . $type . '_question';
-                    $questionobj = new $name($category, $questionid, $question, $options, $answer);
+                    $records = $this->store->get_questions_randomized_for_user($category, $this->userid);
 
-                    $questions [] = $questionobj;
+                    foreach ($records as $record) {
+
+                        $type = $record->type;
+                        $questionid = $record->questionid;
+                        $question = $record->question;
+
+                        $temp = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $record->options . ' </OPTIONS>';
+                        $options = mod_groupformation_util::xml_to_array($temp);
+
+                        $answer = $this->usermanager->get_single_answer($this->userid, $category, $record->questionid);
+
+                        $name = 'mod_groupformation_' . $type . '_question';
+                        $questionobj = new $name($category, $questionid, $question, $options, $answer);
+
+                        $questions [] = $questionobj;
+                    }
+
                 }
-
-            } else {
-
-                $records = $this->store->get_questions_randomized_for_user($category, $this->userid);
-
-                foreach ($records as $record) {
-
-                    $type = $record->type;
-                    $questionid = $record->questionid;
-                    $question = $record->question;
-
-                    $temp = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $record->options . ' </OPTIONS>';
-                    $options = mod_groupformation_util::xml_to_array($temp);
-
-                    $answer = $this->usermanager->get_single_answer($this->userid, $category, $record->questionid);
-
-                    $name = 'mod_groupformation_' . $type . '_question';
-                    $questionobj = new $name($category, $questionid, $question, $options, $answer);
-
-                    $questions [] = $questionobj;
-                }
-
             }
 
             return $questions;
         }
-
     }
-    
+
     /**
      * Returns action buttons for questionnaire page
      *

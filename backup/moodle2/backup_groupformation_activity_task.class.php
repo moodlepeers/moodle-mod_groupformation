@@ -54,14 +54,6 @@ class backup_groupformation_activity_task extends backup_activity_task {
      * @return string the content with the URLs encoded
      */
     static public function encode_content_links($content) {
-        //global $CFG;
-        //$base = preg_quote($CFG->wwwroot, '/');
-        //// Link to the list of groupformations.
-        //$search = '/(' . $base . '\/mod\/groupformation\/index.php\?id\=)([0-9]+)/';
-        //$content = preg_replace($search, '$@GROUPFORMATIONINDEX*$2@$', $content);
-        //// Link to groupformation view by moduleid.
-        //$search = '/(' . $base . '\/mod\/groupformation\/view.php\?id\=)([0-9]+)/';
-        //$content = preg_replace($search, '$@GROUPFORMATIONVIEWBYID*$2@$', $content);
         return $content;
     }
 }

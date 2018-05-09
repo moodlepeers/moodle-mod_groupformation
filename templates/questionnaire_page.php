@@ -24,11 +24,19 @@ defined('MOODLE_INTERNAL') || die();
 global $USER;
 ?>
 
-<div> <!-- class="gf_pad_content" -->
-    <?php if (isset($this->_['archive_alert'])) echo $this->_['archive_alert']; ?>
-    <?php if (isset($this->_['preview_alert'])) echo $this->_['preview_alert']; ?>
-    <?php if (isset($this->_['committed_alert'])) echo $this->_['committed_alert']; ?>
-    <?php if (isset($this->_['participant_code'])) echo $this->_['participant_code']; ?>
+<div>
+    <?php if (isset($this->_['archive_alert'])): ?>
+        <?php echo $this->_['archive_alert']; ?>
+    <?php endif; ?>
+    <?php if (isset($this->_['preview_alert'])): ?>
+        <?php echo $this->_['preview_alert']; ?>
+    <?php endif; ?>
+    <?php if (isset($this->_['committed_alert'])): ?>
+        <?php echo $this->_['committed_alert']; ?>
+    <?php endif; ?>
+    <?php if (isset($this->_['participant_code'])): ?>
+        <?php echo $this->_['participant_code']; ?>
+    <?php endif; ?>
     <?php echo $this->_['navbar']; ?>
     <?php echo $this->_['progressbar']; ?>
     <?php echo $this->_['questions']; ?>

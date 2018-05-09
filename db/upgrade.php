@@ -1637,6 +1637,5 @@ function xmldb_groupformation_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2018042102, 'groupformation');
     }
 
-
     return true;
 }
