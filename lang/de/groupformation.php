@@ -545,3 +545,41 @@ $string ['allanswersrequired'] = 'Es müssen alle Fragen des Fragebogens beantwo
 $string ['allanswersrequired_description'] = 'Es müssen alle Fragen des Fragebogens beantwortet werden.';
 $string ['groupoption_allanswersrequired'] = 'Damit optimierte Gruppen gebildet werden können, werden alle Antworten eines Studierenden benötigt. Beantwortet ein Studierender den Fragebogen nicht vollständig wird dieser lediglich randomisiert gruppiert.';
 
+$string ['privacy:metadata:groupformation_started'] = 'Informationen über den Status eines Benutzers für die Aktivität';
+$string ['privacy:metadata:groupformation_started:groupformation'] = 'ID der Aktivität';
+$string ['privacy:metadata:groupformation_started:userid'] = 'ID des Benutzers';
+$string ['privacy:metadata:groupformation_started:completed'] = 'Flag zeigt an, ob der Benutzer den Fragebogen ausgefüllt hat';
+$string ['privacy:metadata:groupformation_started:timecompleted'] = 'Zeitstempel, wann der Benutzer den Fragebogen ausgefüllt hat';
+$string ['privacy:metadata:groupformation_started:groupid'] = 'Gruppen-ID, wenn A/B-Gruppierung für Forschungseinrichtung aktiviert ist';
+$string ['privacy:metadata:groupformation_started:answer_count'] = 'Anzahl der beantworteten Fragen';
+$string ['privacy:metadata:groupformation_started:consent'] = 'Flag, das angibt, ob der Benutzer seine Zustimmung gegeben hat (wenn die Zustimmung angefordert wird)';
+$string ['privacy:metadata:groupformation_started:participantcode'] = 'Teilnehmercode des Benutzers (wenn Teilnehmercode angefordert wird)';
+$string ['privacy:metadata:groupformation_started:filtered'] = 'Flag, das angibt, ob der Benutzer während des Gruppierungsprozesses herausgefiltert und zufällig gruppiert wurde';
+
+$string ['privacy:metadata:groupformation_answer'] = 'Informationen über die Antworten der Benutzer auf den Fragebogen der Aktivität.';
+$string ['privacy:metadata:groupformation_answer:groupformation'] = 'ID der Aktivität';
+$string ['privacy:metadata:groupformation_answer:userid'] = 'ID des Benutzers';
+$string ['privacy:metadata:groupformation_answer:category'] = 'Kategorie der entsprechenden Frage';
+$string ['privacy:metadata:groupformation_answer:questionid'] = 'ID der entsprechenden Frage';
+$string ['privacy:metadata:groupformation_answer:answer'] = 'Antwort vom Benutzer';
+$string ['privacy:metadata:groupformation_answer:timestamp'] = 'Zeitstempel, wann der Benutzer die Antwort gesendet hat';
+
+$string['privacy:metadata:groupformation_user_values'] = 'Information über die Werte der Benutzer für die Kriteriendimensionen, die für die Gruppenbildung verwendet werden.';
+$string['privacy:metadata:groupformation_user_values:groupformationid'] = 'ID der Aktivität';
+$string['privacy:metadata:groupformation_user_values:userid'] = 'ID des Benutzers';
+$string['privacy:metadata:groupformation_user_values:criterion'] = 'Typ des für die Gruppenbildung verwendeten Kriteriums';
+$string['privacy:metadata:groupformation_user_values:label'] = 'Name des für die Gruppenbildung verwendeten Kriteriums';
+$string['privacy:metadata:groupformation_user_values:dimension'] = 'Dimension des für die Gruppenbildung verwendeten Kriteriums';
+$string['privacy:metadata:groupformation_user_values:value'] = 'Wert des Benutzers für die entsprechende Kriteriumsdimension';
+
+$string ['privacy:metadata:groupformation_groups'] = 'Informationen über die Gruppen der Aktivität';
+$string ['privacy:metadata:groupformation_groups:groupformation'] = 'ID der Aktivität';
+$string ['privacy:metadata:groupformation_groups:moodlegroupid'] = 'ID des entsprechenden Datensatzes in der Tabelle "groups"';
+$string ['privacy:metadata:groupformation_groups:groupname'] = 'Name der Gruppe';
+$string ['privacy:metadata:groupformation_groups:group_size'] = 'Größe der Gruppe';
+
+$string ['privacy:metadata:groupformation_group_users'] = 'Information über die Zuordnung der Benutzer zu Gruppen der Aktivität';
+$string ['privacy:metadata:groupformation_group_users:groupformation'] = 'ID der Aktivität';
+$string ['privacy:metadata:groupformation_group_users:userid'] = 'ID des Benutzers';
+$string ['privacy:metadata:groupformation_group_users:groupid'] = 'ID des entsprechenden Datensatzes in der Tabelle "groupformation_groups"';
+
