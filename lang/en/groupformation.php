@@ -238,11 +238,11 @@ $string ['info_text_teacher_analysis'] = 'With this plugin you have the ability 
 ';
 $string ['grouping_status_0'] = 'You have to close the questionnaire to start group formation.';
 $string ['grouping_status_1'] = 'You can start the group formation now';
-$string ['grouping_status_2'] = 'The group formation is in progress.';
+$string ['grouping_status_2'] = 'The group formation is in progress. This process may take 2-5 min . Please reload the page occasionally to see the result.';
 $string ['grouping_status_3'] = 'The termination of group formation is in progress';
 $string ['grouping_status_4'] = 'The group formation is finished. You can adopt the groups to Moodle or generate a new results by algorithm.';
 $string ['grouping_status_5'] = 'The generated groups are adopted to Moodle. You can manually adjust them.';
-$string ['grouping_status_6'] = 'The generated groups are going to be adopted to Moodle. This process might take some time.';
+$string ['grouping_status_6'] = 'The generated groups are going to be adopted to Moodle. This process may take 2-5 min . Please reload the page occasionally to see the result.';
 $string ['grouping_start'] = 'Start group formation';
 $string ['grouping_delete'] = 'Delete groups';
 $string ['grouping_adopt'] = 'Adopt groups';

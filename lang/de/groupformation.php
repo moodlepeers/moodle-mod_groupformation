@@ -242,11 +242,11 @@ $string ['info_text_teacher_analysis'] = 'Mit diesem Plugin haben Sie die Mögli
 ';
 $string['grouping_status_0'] = 'Um die Gruppenbildung starten zu können, müssen Sie die Aktivität im Tab Überblick beenden.';
 $string['grouping_status_1'] = 'Sie können die Gruppenbildung jetzt starten.';
-$string['grouping_status_2'] = 'Die Gruppenbildung läuft.';
+$string['grouping_status_2'] = 'Die Gruppenbildung läuft gerade. Dieser Prozess kann 2-5 Minuten dauern. Bitte laden Sie die Seite gelegentlich neu, um das Ergebnis zu sehen.';
 $string['grouping_status_3'] = 'Die Gruppenbildung wird abgebrochen.';
 $string['grouping_status_4'] = 'Gruppenbildung ist abgeschlossen. Sie können den Gruppenvorschlag übernehmen, oder verwerfen.';
 $string['grouping_status_5'] = 'Die Moodle-Gruppen sind gebildet. Sie können jetzt manuelle Veränderung an den Gruppen vornehmen.';
-$string['grouping_status_6'] = 'Die Moodle-Gruppen werden gebildet. Dieser Prozess kann einen Moment dauern.';
+$string['grouping_status_6'] = 'Die Moodle-Gruppen werden gebildet. Dieser Prozess kann 2-5 Minuten dauern. Bitte laden Sie die Seite gelegentlich neu, um das Ergebnis zu sehen.';
 $string['grouping_start'] = 'Gruppenbildung starten';
 $string['grouping_delete'] = 'Gruppenvorschlag verwerfen';
 $string['grouping_adopt'] = 'Gruppenvorschlag übernehmen';
