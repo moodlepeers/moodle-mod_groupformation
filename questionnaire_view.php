@@ -127,7 +127,9 @@ if ($next && ($available || $isteacher) && ($category == '' || $inarray)) {
         }
         echo $viewcontroller->render();
     }
-    echo '</div></div>';
+    if (get_config('theme') == 'boost') {
+        echo '</div></div>';
+    }
     echo $OUTPUT->footer();
 
 } else if (!$next ||!$available || $category == 'no') {
