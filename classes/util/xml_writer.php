@@ -30,6 +30,15 @@ class mod_groupformation_xml_writer {
     /** @var XMLWriter This is the writer instance used to create xml */
     private $writer;
 
+    /** @var mod_groupformation_user_manager User manager instance */
+    private $usermanager;
+
+    /** @var mod_groupformation_groups_manager Groups manager instance */
+    private $groupsmanager;
+
+    /** @var mod_groupformation_storage_manager Storage manager instance */
+    private $store;
+
     /**
      * mod_groupformation_xml_writer constructor.
      */
@@ -45,6 +54,7 @@ class mod_groupformation_xml_writer {
      * @param null $groupformationid
      * @param null $categories
      * @return bool|string
+     * @throws dml_exception
      */
     public function write($userid = null, $groupformationid = null, $categories = null) {
         if (is_null($userid) || is_null($groupformationid) || is_null($categories)) {
@@ -53,7 +63,7 @@ class mod_groupformation_xml_writer {
 
         $writer = $this->writer;
 
-        $usermanager = new mod_groupformation_user_manager ($groupformationid);
+        $this->usermanager = new mod_groupformation_user_manager ($groupformationid);
 
         $writer->openMemory();
 
@@ -67,16 +77,7 @@ class mod_groupformation_xml_writer {
 
         $writer->startElement('categories');
 
-        foreach ($categories as $category) {
-            $writer->startElement('category');
-            $writer->writeAttribute('name', $category);
-
-            $answers = $usermanager->get_answers($userid, $category);
-
-            $this->write_answers($answers);
-
-            $writer->endElement();
-        }
+        $this->write_categories($categories, $userid);
 
         $writer->endElement();
 
@@ -87,6 +88,189 @@ class mod_groupformation_xml_writer {
         $content = $writer->outputMemory(false);
 
         return $content;
+    }
+
+    /**
+     * @param null $categories
+     * @param null $userid
+     * @throws dml_exception
+     */
+    private function write_categories($categories = null, $userid = null) {
+        if (is_null($categories)) {
+            $categories = $this->store->get_categories();
+        }
+
+        foreach ($categories as $category) {
+            $this->write_category($category, $userid);
+        }
+    }
+
+    /**
+     * Creates XML with category and answers
+     *
+     * @param $category
+     * @param $userid
+     */
+    private function write_category($category, $userid) {
+        $writer = $this->writer;
+
+        $writer->startElement('category');
+        $writer->writeAttribute('name', $category);
+
+        $answers = $this->usermanager->get_answers($userid, $category);
+
+        $this->write_answers($answers);
+        $writer->endElement();
+    }
+
+    /**
+     * Creates XML with all user related data
+     *
+     * @param $userid
+     * @param $groupformationid
+     * @param bool $allinstances
+     * @return string
+     * @throws dml_exception
+     */
+    public function write_all_data($userid, $groupformationid, $allinstances = false){
+        $this->store = new mod_groupformation_storage_manager($groupformationid);
+        $this->usermanager = new mod_groupformation_user_manager ($groupformationid);
+
+        $writer = $this->writer;
+
+        $writer->openMemory();
+
+        $writer->startDocument('1.0', 'utf-8');
+        $writer->setIndent(true);
+        $writer->setIndentString("    ");
+
+        $writer->startElement('groupformations');
+
+        if ($allinstances) {
+            $groupformations = $this->store->get_all_instances_with_user($userid);
+        } else {
+            $groupformations = array($this->store->get_instance($groupformationid));
+        }
+
+        foreach ($groupformations as $groupformation) {
+            $this->write_groupformation($groupformation, $userid);
+        }
+
+        $writer->endElement();
+
+        $writer->endDocument();
+
+        $content = $writer->outputMemory(false);
+
+        return $content;
+
+    }
+
+    /**
+     * Creates XML for groupformation instance and user data
+     * @param $gf
+     * @param $userid
+     * @throws dml_exception
+     */
+    private function write_groupformation($gf, $userid) {
+        $writer = $this->writer;
+
+        $this->store = new mod_groupformation_storage_manager($gf->id);
+        $this->usermanager = new mod_groupformation_user_manager ($gf->id);
+        $this->groupsmanager = new mod_groupformation_groups_manager ($gf->id);
+
+        $writer->startElement('groupformation');
+        $writer->writeAttribute('id', $gf->id);
+        $writer->writeAttribute('course', $gf->course);
+        $writer->writeAttribute('name', $gf->name);
+
+        $this->write_status($userid);
+
+        $writer->startElement('answers');
+        $this->write_categories(null, $userid);
+        $writer->endElement();
+
+        $writer->startElement('criteria');
+        $this->write_user_values($userid);
+        $writer->endElement();
+
+        $writer->endElement();
+    }
+
+    /**
+     * @param $userid
+     */
+    private function write_group($userid) {
+        $writer = $this->writer;
+
+        $groupid = $this->groupsmanager->get_group_id($userid);
+        $moodlegroupid = $this->groupsmanager->get_moodle_group_id($groupid);
+        $name = $this->groupsmanager->get_group_name($userid);
+        $groupmembers = $this->groupsmanager->get_users_for_generated_group($groupid);
+        $writer->startElement('group');
+        $writer->writeAttribute('id', $groupid);
+        $writer->writeAttribute('moodlegroupid', $moodlegroupid);
+        $writer->writeAttribute('name', $name);
+        //$writer->writeAttribute('members', implode(',',$groupmembers));
+        $writer->endElement();
+
+    }
+
+    /**
+     * Creates XML about user values
+     *
+     * @param $userid
+     * @throws dml_exception
+     */
+    private function write_user_values($userid) {
+        $writer = $this->writer;
+
+        $uservalues = $this->usermanager->get_user_values($userid);
+
+        foreach($uservalues as $uservalue) {
+            $writer->startElement('criterion');
+            $writer->writeAttribute('name', $uservalue->criterion.'_'.$uservalue->label);
+            $writer->writeAttribute('dimension', $uservalue->dimension);
+            $writer->writeAttribute('value', $uservalue->value);
+            $writer->endElement();
+        }
+    }
+
+    /**
+     * Creates XML about started record
+     *
+     * @param $userid
+     * @throws dml_exception
+     */
+    private function write_status($userid) {
+        $writer = $this->writer;
+
+        $started = $this->usermanager->get_instance($userid);
+
+        $writer->startElement('status');
+        $writer->startElement('consent');
+        $writer->writeAttribute('value', $started->consent);
+        $writer->endElement();
+        $writer->startElement('participantcode');
+        $writer->writeAttribute('value', $started->participantcode);
+        $writer->endElement();
+        $writer->startElement('completed');
+        $writer->writeAttribute('value', $started->completed);
+        $writer->writeAttribute('timestamp', $started->timecompleted);
+        $writer->endElement();
+        $writer->startElement('answers');
+        $writer->writeAttribute('count', $started->answer_count);
+        $writer->endElement();
+        $writer->startElement('filtered');
+        $writer->writeAttribute('value', $started->filtered);
+        $writer->endElement();
+        if (!is_null($started->groupid)) {
+            $writer->startElement('groupAB');
+            $writer->writeAttribute('id', $started->filtered);
+            $writer->endElement();
+        }
+        $this->write_group($userid);
+        $writer->endElement();
     }
 
     /**

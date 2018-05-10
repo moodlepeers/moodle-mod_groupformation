@@ -49,6 +49,7 @@ class mod_groupformation_user_manager {
      * @param null $sortedby
      * @param string $fieldset
      * @return array
+     * @throws dml_exception
      */
     public function get_completed($sortedby = null, $fieldset = '*') {
         global $DB;
@@ -65,6 +66,7 @@ class mod_groupformation_user_manager {
      * @param null $sortedby
      * @param string $fieldset
      * @return array
+     * @throws dml_exception
      */
     public function get_users_started($sortedby = null, $fieldset = '*') {
         global $DB;
@@ -79,6 +81,7 @@ class mod_groupformation_user_manager {
      * @param null $sortedby
      * @param string $fieldset
      * @return array
+     * @throws dml_exception
      */
     public function get_not_completed($sortedby = null, $fieldset = '*') {
         global $DB;
@@ -95,6 +98,7 @@ class mod_groupformation_user_manager {
      * @param null $sortedby
      * @param string $fieldset
      * @return array
+     * @throws dml_exception
      */
     public function get_started($sortedby = null, $fieldset = '*') {
         global $DB;
@@ -105,12 +109,26 @@ class mod_groupformation_user_manager {
     }
 
     /**
+     * Returns record of groupformation_started instance
+     * @param $userid
+     * @return mixed
+     * @throws dml_exception
+     */
+    public function get_instance($userid) {
+        global $DB;
+
+        return $DB->get_record('groupformation_started', array(
+                'groupformation' => $this->groupformationid, 'userid' => $userid));
+    }
+
+    /**
      * Returns array of records of table_groupformation_started if answer_count is equal to
      * the total answer count for this activity
      *
      * @param string $sortedby
      * @param string $fieldset
-     * @return multitype:unknown
+     * @return array :unknown
+     * @throws dml_exception
      */
     public function get_completed_by_answer_count($sortedby = null, $fieldset = '*') {
         global $DB;
@@ -127,7 +145,8 @@ class mod_groupformation_user_manager {
      *
      * @param string $sortedby
      * @param string $fieldset
-     * @return multitype:unknown
+     * @return array :unknown
+     * @throws dml_exception
      */
     public function get_not_completed_by_answer_count($sortedby = null, $fieldset = '*') {
         global $DB;
@@ -145,6 +164,7 @@ class mod_groupformation_user_manager {
      * Sets answer counter for user
      *
      * @param int $userid
+     * @throws dml_exception
      */
     public function set_answer_count($userid) {
         global $DB;
@@ -177,6 +197,7 @@ class mod_groupformation_user_manager {
      *
      * @param $userid
      * @param bool|false $completed
+     * @throws dml_exception
      */
     public function set_status($userid, $completed = false) {
         global $DB;
@@ -206,6 +227,7 @@ class mod_groupformation_user_manager {
      *
      * @param $userid
      * @param bool|false $complete
+     * @throws dml_exception
      */
     public function change_status($userid, $complete = false) {
         $status = 0;
@@ -230,6 +252,7 @@ class mod_groupformation_user_manager {
      *
      * @param $userid
      * @return int|mixed
+     * @throws dml_exception
      */
     public function get_answering_status($userid) {
         global $DB;
@@ -260,6 +283,7 @@ class mod_groupformation_user_manager {
      *
      * @param int $userid
      * @return boolean
+     * @throws dml_exception
      */
     public function is_completed($userid) {
         return array_key_exists($userid, $this->get_completed(null, 'userid'));
@@ -792,5 +816,18 @@ class mod_groupformation_user_manager {
         }
 
         return floatval(floatval($score) / count($answers)) / $num;
+    }
+
+    /**
+     * Returns all user values
+     *
+     * @param $userid
+     * @return array
+     * @throws dml_exception
+     */
+    public function get_user_values($userid) {
+        global $DB;
+
+        return $DB->get_records('groupformation_user_values', array('groupformationid'=>$this->groupformationid, 'userid'=>$userid));
     }
 }

@@ -1460,3 +1460,7 @@
     flex: 1 1 auto;
     padding: 1.25rem;
 }
+
+.path-mod-groupformation .gf_hidden {
+    display: none;
+}

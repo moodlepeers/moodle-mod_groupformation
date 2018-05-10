@@ -35,6 +35,9 @@ $PAGE->set_url($url);
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 
+// Import jQuery and js file.
+groupformation_add_jquery($PAGE, 'import_export4.js');
+
 $store = new mod_groupformation_storage_manager($groupformation->id);
 
 if (!mod_groupformation_data::import_export_enabled()) {
@@ -43,6 +46,7 @@ if (!mod_groupformation_data::import_export_enabled()) {
     redirect($returnurl);
 }
 
+$currenttab = 'import_export';
 echo $OUTPUT->header();
 
 // Print the tabs.

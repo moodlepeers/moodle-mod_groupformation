@@ -60,4 +60,32 @@ if (!defined('MOODLE_INTERNAL')) {
             <?php endif; ?>
         </p>
     </div>
+    <div class="gf_pad_header"><?php echo get_string('export_all', 'groupformation'); ?></div>
+    <div class="gf_pad_content">
+        <p><?php echo $this->_['export_all_description']; ?></p>
+        <p>
+            <div>
+                <input type="checkbox" value="1" id="all_data_check">
+                <label for="all_data_check">
+                    <?php echo $this->_['export_all_data_check'];?>
+                </label>
+            </div>
+        </p>
+        <p>
+            <div id="all_data_false">
+                <a href="<?php echo $this->_['export_all_data_url_false']; ?>" target="_blank">
+                    <span class="gf_button gf_button_pill gf_button_small">
+                        <?php echo get_string('export', 'groupformation'); ?>
+                    </span>
+                </a>
+            </div>
+            <div id="all_data_true" class="gf_hidden">
+                <a href="<?php echo $this->_['export_all_data_url_true']; ?>" target="_blank">
+                    <span class="gf_button gf_button_pill gf_button_small">
+                        <?php echo get_string('export', 'groupformation'); ?>
+                    </span>
+                </a>
+            </div>
+        </p>
+    </div>
 </div>

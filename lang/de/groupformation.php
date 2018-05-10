@@ -337,6 +337,7 @@ $string['groupformation_message_contexturlname'] = 'Resultate';
 
 $string['import'] = 'Import';
 $string['export'] = 'Export';
+$string['export_all'] = 'Export personenbezogener Daten';
 $string['export_answers'] = 'Sie können die Antworten mit anonymisierten Teilnehmerkennungen hier herunterladen:';
 $string['export_users'] = 'Sie können die Teilnehmer-bezogenen Daten mit anonymisierten Teilnehmerkennungen hier herunterladen:';
 $string['export_groups'] = 'Sie können die Gruppen mit anonymisierten Teilnehmerkennungen hier herunterladen:';
@@ -347,6 +348,8 @@ $string['export_description_yes'] = 'Klicke auf den folgenden Button, um deine A
 $string['import_description_yes'] = 'Klicke auf den folgenden Button, um Antworten von früheren Fragebögen zu importieren.';
 $string['import_description_no'] = 'Es ist nicht möglich Antworten zu importieren, da der Fragebogen nicht mehr verfügbar ist oder bereits abgegeben wurde.';
 $string['import_form_description'] = 'Du kannst Antworten von früheren Fragebögen importieren, indem du hier deine Antworten im passenden Format hochlädst (z.B. answers.xml).';
+$string ['export_all_description'] = 'Sie können alle ihrer durch die Aktivität erfassten personenbezogenen Daten hier herunterladen:';
+$string ['export_all_data_check'] = 'Inklusive aller personenbezogener Daten jeder Gruppenformation im ganzen Moodle (konform zur EU-Datenschutz-Grundverordnung)';
 
 $string['file_error'] = 'Du musst eine *.xml-Datei hochladen.';
 $string['failed_import'] = 'Der Import ist fehlgeschlagen. Das Format der Datei war nicht korrekt. Bitte lade eine Datei mit exportierten Antworten hoch.';
@@ -461,7 +464,7 @@ $string['consent_header_import'] = 'Durch Import ihrer Antworten sind sie damit 
 $string['consent_header'] = 'Ich möchte die Möglichkeiten des Gruppenformationsplugins nutzen und fülle dafür die gestellten Fragen soweit möglich aus. Die Teilnahme oder Nicht-Teilnahme hat keinerlei Einfluß auf die Benotung (Creditpoints).';
 $string['consent_message'] = '<ul><li>
 Der Kursleiter/in oder Dozent/in sieht meine persönlichen Angaben für die Gruppenformation nicht (nur ich selbst
-erhalten Feedback zu meinen Persönlichkeitsmerkmalen, sowie zum Durchschnittsvergleich mit der Gruppe).
+erhalte Feedback zu meinen Persönlichkeitsmerkmalen, sowie zum Durchschnittsvergleich mit der Gruppe).
 </li><li>
 Meine Angaben werden am Kursende - spätestens nach 360 Tagen gelöscht.</li></ul>';
 $string['consent_agree'] = 'Ich bin einverstanden';

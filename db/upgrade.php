@@ -1637,5 +1637,35 @@ function xmldb_groupformation_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2018042102, 'groupformation');
     }
 
+    if ($oldversion < 2018051000) {
+
+        // Define field answers_ready to be dropped from groupformation_started.
+        $table = new xmldb_table('groupformation_started');
+        $field = new xmldb_field('answers_ready');
+
+        // Conditionally launch drop field answers_ready.
+        if ($dbman->field_exists($table, $field)) {
+            $dbman->drop_field($table, $field);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2018051000, 'groupformation');
+    }
+
+    if ($oldversion < 2018051001) {
+
+        // Define field answers_url to be dropped from groupformation_started.
+        $table = new xmldb_table('groupformation_started');
+        $field = new xmldb_field('answers_url');
+
+        // Conditionally launch drop field answers_url.
+        if ($dbman->field_exists($table, $field)) {
+            $dbman->drop_field($table, $field);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2018051001, 'groupformation');
+    }
+
     return true;
 }

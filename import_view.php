@@ -62,6 +62,7 @@ if ($cancel) {
     redirect($returnurl);
 }
 
+$currenttab = 'import_export';
 // Echo standard header.
 echo $OUTPUT->header();
 

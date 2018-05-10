@@ -329,6 +329,7 @@ $string ['groupformation_message_contexturlname'] = 'results';
 
 $string ['import'] = 'Import';
 $string ['export'] = 'Export';
+$string ['export_all'] = 'Export all personal data';
 $string ['export_answers'] = 'You can download all answers with anonymized user ids here:';
 $string ['export_users'] = 'You can download all user-related data with anonymized user ids here:';
 $string ['export_groups'] = 'You can download all groups with anonymized user ids here:';
@@ -339,6 +340,8 @@ $string ['export_description_yes'] = 'You can export your answers by clicking on
 $string ['import_description_yes'] = 'You can import your answers by clicking on the button below and uploading a file with exportable answer format.';
 $string ['import_description_no'] = 'You cannot import your answers because you submitted your answers already or the questionnaire is not available.';
 $string ['import_form_description'] = 'You can import your answers from previous questionnaires by submitting an "answers.xml" file below.';
+$string ['export_all_description'] = 'You can export all your personal data stored by this activity here:';
+$string ['export_all_data_check'] = 'Include personal data of all groupformations in the whole Moodle system (according to EU General Data Proctection Regulation)';
 
 $string ['file_error'] = 'You have to upload an *.xml file.';
 $string ['failed_import'] = 'The import has failed due to an invalid format. Please upload a file with exportable answer format';

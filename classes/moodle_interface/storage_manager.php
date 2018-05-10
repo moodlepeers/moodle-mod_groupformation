@@ -892,6 +892,7 @@ class mod_groupformation_storage_manager {
      * @param $users
      * @param null $groupformationid
      * @return array|null
+     * @throws dml_exception
      */
     public function determine_group_size($users, $groupformationid = null) {
         if ($this->ask_for_topics()) {
@@ -1048,8 +1049,9 @@ class mod_groupformation_storage_manager {
      * Returns questions
      *
      * @param $category
-     * @param string $lang
      * @return array
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public function get_questions($category) {
         global $DB;
@@ -1085,6 +1087,8 @@ class mod_groupformation_storage_manager {
      * @param $category
      * @param $userid
      * @return array
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public function get_questions_randomized_for_user($category, $userid) {
         $questions = array_values($this->get_questions($category));
@@ -1103,6 +1107,7 @@ class mod_groupformation_storage_manager {
      * Returns scenario name
      *
      * @return string
+     * @throws dml_exception
      */
     public function get_scenario_name() {
         global $DB;
@@ -1129,6 +1134,7 @@ class mod_groupformation_storage_manager {
      *
      * @param $groupkey
      * @param $cohort
+     * @throws dml_exception
      */
     public function save_statistics($groupkey, $cohort) {
         global $DB;
@@ -1159,6 +1165,8 @@ class mod_groupformation_storage_manager {
 
     /**
      * Deletes all statistics of previous groupformations
+     *
+     * @throws dml_exception
      */
     public function delete_statistics() {
         global $DB;
@@ -1171,6 +1179,7 @@ class mod_groupformation_storage_manager {
      *
      * @param null $job
      * @return array
+     * @throws dml_exception
      */
     public function get_users_for_grouping($job = null) {
         global $DB;
@@ -1246,6 +1255,7 @@ class mod_groupformation_storage_manager {
      * Returns whether groupformation uses filtering due to dishonesty
      *
      * @return bool
+     * @throws dml_exception
      */
     public function uses_filter() {
         global $DB;
@@ -1259,6 +1269,7 @@ class mod_groupformation_storage_manager {
      *
      * @param $userid
      * @return bool
+     * @throws dml_exception
      */
     public function is_filtered($userid) {
         global $DB;
@@ -1271,6 +1282,7 @@ class mod_groupformation_storage_manager {
      * Returns stats about dishonesty
      *
      * @return array
+     * @throws dml_exception
      */
     public function get_honesty_stats() {
         global $DB;
@@ -1284,6 +1296,10 @@ class mod_groupformation_storage_manager {
         return ['yes' => $yes + $maybe, 'no' => $no];
     }
 
+    /**
+     * @param $value
+     * @throws dml_exception
+     */
     public function filter_users($value) {
         global $DB;
 
@@ -1301,5 +1317,38 @@ class mod_groupformation_storage_manager {
             $DB->update_record('groupformation_started', $record);
         }
 
+    }
+
+    /**
+     * Returns DB entry for groupformation instance
+     *
+     * @param $groupformationid
+     * @return mixed
+     * @throws dml_exception
+     */
+    public function get_instance($groupformationid) {
+        global $DB;
+
+        return $DB->get_record('groupformation', array('id'=>$groupformationid));
+    }
+
+    /**
+     * Returns all DB entries for groupformation instances in which a user is involved
+     *
+     * @param $userid
+     * @return array
+     * @throws dml_exception
+     */
+    public function get_all_instances_with_user($userid) {
+        global $DB;
+        $ids = array();
+        $records = $DB->get_records('groupformation_started', array('userid' => $userid));
+        foreach ($records as $record) {
+            $ids[]=$record->groupformation;
+        }
+
+        $instances = $DB->get_records_list('groupformation','id',$ids);
+
+        return $instances;
     }
 }

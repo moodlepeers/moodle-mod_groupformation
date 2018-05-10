@@ -88,9 +88,40 @@ class mod_groupformation_import_export_controller {
     }
 
     /**
+     * Generates answers and creates a file for download
+     *
+     * @param $userid
+     * @param bool $allinstances
+     * @return string
+     * @throws dml_exception
+     * @throws file_exception
+     * @throws stored_file_creation_exception
+     */
+    private function generate_all_data_url($userid, $allinstances = false) {
+        $xmlwriter = new mod_groupformation_xml_writer ();
+
+        // Generate content for answer file for export.
+        $content = $xmlwriter->write_all_data($userid, $this->groupformationid, $allinstances);
+
+        $filename = 'personal_data_'.(($allinstances)?'all':'one').'.xml';
+
+        $context = context_module::instance($this->cmid);
+
+        $fileinfo = array(
+                'contextid' => $context->id, 'component' => 'mod_groupformation', 'filearea' => 'groupformation_answers',
+                'itemid' => $userid, 'filepath' => '/', 'filename' => $filename);
+
+        return groupformation_get_url($fileinfo, $content);
+    }
+
+    /**
      * Returns infos about import export
      *
      * @return array
+     * @throws coding_exception
+     * @throws file_exception
+     * @throws moodle_exception
+     * @throws stored_file_creation_exception
      */
     public function load_info() {
         global $USER;
@@ -133,6 +164,11 @@ class mod_groupformation_import_export_controller {
         $assigns['import_form'] = $url->out();
         $assigns['import_button'] = $importbutton;
 
+        $assigns['export_all_description'] = get_string('export_all_description', 'groupformation');
+        $assigns['export_all_data_url_false'] = $this->generate_all_data_url($userid);
+        $assigns['export_all_data_url_true'] = $this->generate_all_data_url($userid, true);
+        $assigns['export_all_data_check'] = get_string('export_all_data_check', 'groupformation');
+
         return $assigns;
     }
 
@@ -160,6 +196,7 @@ class mod_groupformation_import_export_controller {
      * Renders result page of import
      *
      * @param $successful
+     * @throws moodle_exception
      */
     public function render_result($successful) {
         $this->view = new mod_groupformation_template_builder ();
@@ -182,7 +219,8 @@ class mod_groupformation_import_export_controller {
      * Handles xml string and import
      *
      * @param string $content
-     * @throws InvalidArgumentException
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public function import_xml($content) {
         global $DB, $USER, $CFG;
@@ -237,8 +275,8 @@ class mod_groupformation_import_export_controller {
      *
      * @param string $category
      * @param array $answers
-     * @throws InvalidArgumentException
      * @return array
+     * @throws dml_exception
      */
     public function create_answer_records($category, $answers) {
         global $DB, $USER;
