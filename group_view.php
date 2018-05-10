@@ -50,12 +50,6 @@ echo $OUTPUT->header();
 // Print the tabs.
 require('tabs.php');
 
-// Conditions to show the intro can change to look for own settings or whatever.
-if ($groupformation->intro) {
-    echo $OUTPUT->box(
-        format_module_intro('groupformation', $groupformation, $cm->id), 'generalbox mod_introbox', 'groupformationintro');
-}
-
 $userid = $USER->id;
 if ($store->is_archived()) {
     echo '<div class="alert" id="commited_view">' . get_string('archived_activity_answers', 'groupformation') . '</div>';

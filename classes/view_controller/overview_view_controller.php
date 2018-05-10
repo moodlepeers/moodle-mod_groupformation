@@ -168,6 +168,8 @@ class mod_groupformation_overview_view_controller extends mod_groupformation_bas
      * Renders content.
      *
      * @return string
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public function render() {
         $output = "";
