@@ -54,6 +54,8 @@ class mod_groupformation_group_controller {
      * Returns infos for template
      *
      * @return array
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public function load_info() {
         global $CFG, $COURSE, $USER;
@@ -61,7 +63,8 @@ class mod_groupformation_group_controller {
         $assigns = array();
 
         $userid = $USER->id;
-        $array = array();
+        $activemembers = array();
+        $inactivemembers = array();
         $topicinfo = '';
 
         $options = null;
@@ -77,17 +80,19 @@ class mod_groupformation_group_controller {
             $name = $this->groupsmanager->get_group_name($userid);
 
             $groupname = $name;
+            $groupid = $this->groupsmanager->get_group_id($userid);
+            $groupid = $this->groupsmanager->get_moodle_group_id($groupid);
             $othermembers = $this->groupsmanager->get_group_members($userid);
 
             $pos = strrpos($groupname, "_");
             $number = substr($groupname, $pos + 1, strlen($groupname) - $pos);
-
+            $groupleftinfo = null;
             if ($topics) {
                 $topicinfo = get_string("topic_group_info", "groupformation") . ": <b>" . $options[$number - 1] . "</b>";
             }
 
             if (count($othermembers) > 0) {
-                $groupinfo = get_string('membersAre', 'groupformation');
+                $groupinfo = get_string('members_are', 'groupformation');
 
                 foreach ($othermembers as $memberid) {
 
@@ -96,10 +101,15 @@ class mod_groupformation_group_controller {
                     $url = $CFG->wwwroot . '/user/view.php?id=' . $memberid . '&course=' . $COURSE->id;
 
                     if (!$member) {
-                        $array[] = get_string('noUser', 'groupformation');
+                        $activemembers[] = get_string('noUser', 'groupformation');
                     }
 
-                    $array[] = '<a href="' . $url . '">' . fullname($member) . '</a>';
+                    if (!groups_is_member($groupid, $member->id)) {
+                        $groupleftinfo = get_string('inactive_members_are', 'groupformation');
+                        $inactivemembers[] = fullname($member);
+                    } else {
+                        $activemembers[] = '<a href="' . $url . '">' . fullname($member) . '</a>';
+                    }
                 }
 
             } else {
@@ -107,8 +117,10 @@ class mod_groupformation_group_controller {
             }
             $assigns['topic_info'] = $topicinfo;
             $assigns['group_name'] = $groupname;
-            $assigns['members'] = $array;
+            $assigns['members'] = $activemembers;
             $assigns['group_info'] = $groupinfo;
+            $assigns['group_left_info'] = $groupleftinfo;
+            $assigns['inactivemembers'] = $inactivemembers;
         } else {
             if ($this->groupsmanager->groups_created()) {
                 $groupinfo = get_string('noGroup', 'groupformation');

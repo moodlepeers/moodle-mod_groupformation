@@ -38,6 +38,7 @@ class mod_groupformation_group_view_controller extends mod_groupformation_basic_
      *
      * @param $groupformationid
      * @param $controller
+     * @throws coding_exception
      */
     public function __construct($groupformationid, $controller) {
         parent::__construct($groupformationid, $controller);

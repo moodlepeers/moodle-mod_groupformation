@@ -42,14 +42,36 @@ if (!defined('MOODLE_INTERNAL')) {
         </p>
     <?php endif; ?>
     <?php if (array_key_exists('members', $this->_)): ?>
-
-        <?php foreach ($this->_['members'] as $row) { ?>
+        <ul>
+        <?php foreach ($this->_['members'] as $row): ?>
             <p>
-                <b>
-                    <?php echo $row; ?>
-                </b>
+                <li>
+                    <b>
+                        <?php echo $row; ?>
+                    </b>
+                </li>
             </p>
-        <?php } ?>
+        <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
+    <?php if (!is_null($this->_['group_left_info'])): ?>
+        <p>
+            <?php echo $this->_['group_left_info']; ?>
+        </p>
+    <?php endif; ?>
+    <?php if (array_key_exists('inactivemembers', $this->_)): ?>
+
+        <ul>
+            <?php foreach ($this->_['inactivemembers'] as $row): ?>
+                <p>
+                <li>
+                    <i>
+                        <?php echo $row; ?>
+                    </i>
+                </li>
+                </p>
+            <?php endforeach; ?>
+        </ul>
 
     <?php endif; ?>
 </div>
