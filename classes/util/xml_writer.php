@@ -132,7 +132,7 @@ class mod_groupformation_xml_writer {
      * @return string
      * @throws dml_exception
      */
-    public function write_all_data($userid, $groupformationid, $allinstances = false){
+    public function write_all_data($userid, $groupformationid, $allinstances = false) {
         $this->store = new mod_groupformation_storage_manager($groupformationid);
         $this->usermanager = new mod_groupformation_user_manager ($groupformationid);
 
@@ -206,12 +206,10 @@ class mod_groupformation_xml_writer {
         $groupid = $this->groupsmanager->get_group_id($userid);
         $moodlegroupid = $this->groupsmanager->get_moodle_group_id($groupid);
         $name = $this->groupsmanager->get_group_name($userid);
-        $groupmembers = $this->groupsmanager->get_users_for_generated_group($groupid);
         $writer->startElement('group');
         $writer->writeAttribute('id', $groupid);
         $writer->writeAttribute('moodlegroupid', $moodlegroupid);
         $writer->writeAttribute('name', $name);
-        //$writer->writeAttribute('members', implode(',',$groupmembers));
         $writer->endElement();
 
     }
@@ -227,7 +225,7 @@ class mod_groupformation_xml_writer {
 
         $uservalues = $this->usermanager->get_user_values($userid);
 
-        foreach($uservalues as $uservalue) {
+        foreach ($uservalues as $uservalue) {
             $writer->startElement('criterion');
             $writer->writeAttribute('name', $uservalue->criterion.'_'.$uservalue->label);
             $writer->writeAttribute('dimension', $uservalue->dimension);

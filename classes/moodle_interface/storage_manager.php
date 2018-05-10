@@ -1329,7 +1329,7 @@ class mod_groupformation_storage_manager {
     public function get_instance($groupformationid) {
         global $DB;
 
-        return $DB->get_record('groupformation', array('id'=>$groupformationid));
+        return $DB->get_record('groupformation', array('id' => $groupformationid));
     }
 
     /**
@@ -1344,10 +1344,10 @@ class mod_groupformation_storage_manager {
         $ids = array();
         $records = $DB->get_records('groupformation_started', array('userid' => $userid));
         foreach ($records as $record) {
-            $ids[]=$record->groupformation;
+            $ids[] = $record->groupformation;
         }
 
-        $instances = $DB->get_records_list('groupformation','id',$ids);
+        $instances = $DB->get_records_list('groupformation', 'id', $ids);
 
         return $instances;
     }

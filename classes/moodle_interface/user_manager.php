@@ -828,6 +828,7 @@ class mod_groupformation_user_manager {
     public function get_user_values($userid) {
         global $DB;
 
-        return $DB->get_records('groupformation_user_values', array('groupformationid'=>$this->groupformationid, 'userid'=>$userid));
+        return $DB->get_records('groupformation_user_values',
+                array('groupformationid' => $this->groupformationid, 'userid' => $userid));
     }
 }

@@ -103,7 +103,7 @@ class mod_groupformation_import_export_controller {
         // Generate content for answer file for export.
         $content = $xmlwriter->write_all_data($userid, $this->groupformationid, $allinstances);
 
-        $filename = 'personal_data_'.(($allinstances)?'all':'one').'.xml';
+        $filename = 'personal_data_' . (($allinstances) ? 'all' : 'one') . '.xml';
 
         $context = context_module::instance($this->cmid);
 

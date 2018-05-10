@@ -584,7 +584,10 @@ class mod_groupformation_questionnaire_controller {
             $isteacher = has_capability('mod/groupformation:editsettings', $context);
 
             if ($isteacher) {
-                $assigns['preview_alert'] = '<div class="alert">' . get_string('questionnaire_preview', 'groupformation') . '</div>';
+                $s = '<div class="alert">';
+                $s .= get_string('questionnaire_preview', 'groupformation');
+                $s .= '</div>';
+                $assigns['preview_alert'] = $s;
             }
 
             if ($this->usermanager->is_completed($this->userid) || !$this->store->is_questionnaire_available()) {
