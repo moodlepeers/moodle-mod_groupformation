@@ -246,28 +246,33 @@ class mod_groupformation_xml_writer {
         $started = $this->usermanager->get_instance($userid);
 
         $writer->startElement('status');
-        $writer->startElement('consent');
-        $writer->writeAttribute('value', $started->consent);
-        $writer->endElement();
-        $writer->startElement('participantcode');
-        $writer->writeAttribute('value', $started->participantcode);
-        $writer->endElement();
-        $writer->startElement('completed');
-        $writer->writeAttribute('value', $started->completed);
-        $writer->writeAttribute('timestamp', $started->timecompleted);
-        $writer->endElement();
-        $writer->startElement('answers');
-        $writer->writeAttribute('count', $started->answer_count);
-        $writer->endElement();
-        $writer->startElement('filtered');
-        $writer->writeAttribute('value', $started->filtered);
-        $writer->endElement();
-        if (!is_null($started->groupid)) {
-            $writer->startElement('groupAB');
-            $writer->writeAttribute('id', $started->filtered);
+
+        if (!is_bool($started) && $started) {
+            $writer->startElement('consent');
+            $writer->writeAttribute('value', $started->consent);
             $writer->endElement();
+            $writer->startElement('participantcode');
+            $writer->writeAttribute('value', $started->participantcode);
+            $writer->endElement();
+            $writer->startElement('completed');
+            $writer->writeAttribute('value', $started->completed);
+            $writer->writeAttribute('timestamp', $started->timecompleted);
+            $writer->endElement();
+            $writer->startElement('answers');
+            $writer->writeAttribute('count', $started->answer_count);
+            $writer->endElement();
+            $writer->startElement('filtered');
+            $writer->writeAttribute('value', $started->filtered);
+            $writer->endElement();
+
+            if (!is_null($started->groupid)) {
+                $writer->startElement('groupAB');
+                $writer->writeAttribute('id', $started->filtered);
+                $writer->endElement();
+            }
         }
         $this->write_group($userid);
+
         $writer->endElement();
     }
 
