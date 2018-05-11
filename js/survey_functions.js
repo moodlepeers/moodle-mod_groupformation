@@ -46,16 +46,16 @@ require(['jquery', 'jqueryui'], function ($, jqueryui) {
             return $(this).outerWidth();
         });
 
-        // Shrink all widths to 50.
+        // Shrink all widths to 40.
         $("#accordion li.accord_li").each(function () {
-            $(this).width(50);
+            $(this).width(40);
         });
 
         var activeItem = $();
 
         // Hover event.
         function accordion_rollout() {
-            $(activeItem).animate({width: "50px"}, {duration: 300, queue: false});
+            $(activeItem).animate({width: "40px"}, {duration: 300, queue: false});
             var a_width = menuWidths.get($(this).index()) + 1;
             $(this).animate({width: a_width}, {duration: 300, queue: false});
             activeItem = this;
@@ -63,7 +63,7 @@ require(['jquery', 'jqueryui'], function ($, jqueryui) {
 
         // Mouse leave event.
         function accordion_rollin() {
-            $(activeItem).animate({width: "50px"}, {duration: 300, queue: false});
+            $(activeItem).animate({width: "40px"}, {duration: 300, queue: false});
         }
 
         $("#accordion li.accord_li").hover(accordion_rollout, accordion_rollin);
