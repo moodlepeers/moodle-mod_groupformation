@@ -1138,7 +1138,7 @@ function xmldb_groupformation_upgrade($oldversion) {
         }
 
         // Groupformation savepoint reached.
-        upgrade_mod_savepoint(true, 2016071900, 'groupformation');
+        upgrade_mod_savepoint(true, 2016071802, 'groupformation');
     }
 
     if ($oldversion < 2016071901) {
