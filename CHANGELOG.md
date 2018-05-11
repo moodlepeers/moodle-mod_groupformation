@@ -1,5 +1,35 @@
 # Change Log
 
+## [v1.6.1](https://github.com/moodlepeers/moodle-mod_groupformation/tree/v1.6.1) (2018-05-11)
+[Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/v1.6...v1.6.1)
+
+## [v1.6](https://github.com/moodlepeers/moodle-mod_groupformation/tree/v1.6) (2018-05-10)
+[Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/v1.5.1...v1.6)
+
+**Implemented enhancements:**
+
+- "my group" does not update list of users due to leaves and manual changes [\#61](https://github.com/moodlepeers/moodle-mod_groupformation/issues/61)
+- While grouping is running: better instruct user by text \(reload of page after 2-5min\) [\#60](https://github.com/moodlepeers/moodle-mod_groupformation/issues/60)
+- Allow to dublicate a configured groupformation activity in Moodle LMS [\#58](https://github.com/moodlepeers/moodle-mod_groupformation/issues/58)
+
+**Merged pull requests:**
+
+- Adding debug options for debug user [\#56](https://github.com/moodlepeers/moodle-mod_groupformation/pull/56) ([Nullmann](https://github.com/Nullmann))
+
+## [v1.5.1](https://github.com/moodlepeers/moodle-mod_groupformation/tree/v1.5.1) (2018-01-20)
+[Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/v1.5...v1.5.1)
+
+**Implemented enhancements:**
+
+- show topic-offering ONLY when selecting "presentation groups" and DON'T offer topics for the other two scenarios [\#43](https://github.com/moodlepeers/moodle-mod_groupformation/issues/43)
+- PHP notices in the cron output [\#28](https://github.com/moodlepeers/moodle-mod_groupformation/issues/28)
+- Problem when both topics and knowledge questions are defined [\#27](https://github.com/moodlepeers/moodle-mod_groupformation/issues/27)
+
+**Fixed bugs:**
+
+- Type "binary" for DB-field onlyactivestudents in table groupformation causes bug with PostgreSQL [\#55](https://github.com/moodlepeers/moodle-mod_groupformation/issues/55)
+- Blank screen when student access questionnaire [\#46](https://github.com/moodlepeers/moodle-mod_groupformation/issues/46)
+
 ## [v1.5](https://github.com/moodlepeers/moodle-mod_groupformation/tree/v1.5) (2017-10-06)
 [Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/v1.4...v1.5)
 
@@ -80,7 +110,7 @@
 - Max. Gruppenzahl: Beschränkung in mod\_form.php aufheben [\#11](https://github.com/moodlepeers/moodle-mod_groupformation/issues/11)
 
 ## [v1.1-b](https://github.com/moodlepeers/moodle-mod_groupformation/tree/v1.1-b) (2016-09-10)
-[Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/v3.0...v1.1-b)
+[Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/v1.0.1b...v1.1-b)
 
 **Fixed bugs:**
 
@@ -92,23 +122,11 @@
 
 - Postgresql COUNT Error in SQL statement on creation of new activity instance [\#4](https://github.com/moodlepeers/moodle-mod_groupformation/issues/4)
 - Requires non-standard libraries [\#3](https://github.com/moodlepeers/moodle-mod_groupformation/issues/3)
-
-## [v3.0](https://github.com/moodlepeers/moodle-mod_groupformation/tree/v3.0) (2016-03-13)
-[Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/v2.0...v3.0)
-
-**Closed issues:**
-
 - hand-rolled forms should implement sesskey checks [\#2](https://github.com/moodlepeers/moodle-mod_groupformation/issues/2)
 - direct access to $\_GET/$\_POST variables is not allowed [\#1](https://github.com/moodlepeers/moodle-mod_groupformation/issues/1)
 
-## [v2.0](https://github.com/moodlepeers/moodle-mod_groupformation/tree/v2.0) (2015-12-10)
-[Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/v1.0.1b...v2.0)
-
 ## [v1.0.1b](https://github.com/moodlepeers/moodle-mod_groupformation/tree/v1.0.1b) (2015-11-18)
-[Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/v1.9...v1.0.1b)
-
-## [v1.9](https://github.com/moodlepeers/moodle-mod_groupformation/tree/v1.9) (2015-11-02)
-[Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/v1.0...v1.9)
+[Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/v1.0...v1.0.1b)
 
 ## [v1.0](https://github.com/moodlepeers/moodle-mod_groupformation/tree/v1.0) (2015-08-19)
 [Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/v0.9.1...v1.0)
