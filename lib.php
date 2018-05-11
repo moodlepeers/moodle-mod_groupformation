@@ -22,10 +22,10 @@
  * logic, should go to locallib.php. This will help to save some memory when
  * Moodle is performing actions across all modules.
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die ();
 
@@ -189,12 +189,18 @@ function groupformation_delete_instance($id) {
 }
 
 /**
+ * Returns user outline
+ *
  * Returns a small object with summary information about what a
  * user has done with a given particular instance of this module
  * Used for user activity reports.
  * $return->time = the time they did it
  * $return->info = a short text description
  *
+ * @param stdClass $course
+ * @param stdClass $user
+ * @param stdClass $mod
+ * @param stdClass $groupformation
  * @return stdClass|null
  */
 function groupformation_user_outline($course, $user, $mod, $groupformation) {
@@ -206,6 +212,8 @@ function groupformation_user_outline($course, $user, $mod, $groupformation) {
 }
 
 /**
+ * Prints user complete
+ *
  * Prints a detailed representation of what a user has done with
  * a given particular instance of this module, for user activity reports.
  *
@@ -223,10 +231,15 @@ function groupformation_user_complete($course, $user, $mod, $groupformation) {
 }
 
 /**
+ * Prints recent activity
+ *
  * Given a course and a time, this module should find recent activity
  * that has occurred in newmodule activities and print it out.
  * Return true if there was output, or false is there was none.
  *
+ * @param stdClass $course
+ * @param array $viewfullnames
+ * @param number $timestart
  * @return boolean
  */
 function groupformation_print_recent_activity($course, $viewfullnames, $timestart) {
@@ -261,8 +274,13 @@ function groupformation_get_recent_mod_activity(&$activities, &$index, $timestar
 }
 
 /**
- * Prints single activity item prepared by {@see groupformation_get_recent_mod_activity()}
+ * Prints single activity item
  *
+ * @param stdClass $activity
+ * @param int $courseid
+ * @param stdClass $detail
+ * @param array $modnames
+ * @param array $viewfullnames
  * @return void
  */
 function groupformation_print_recent_mod_activity($activity, $courseid, $detail, $modnames, $viewfullnames) {
@@ -282,7 +300,6 @@ function groupformation_cron() {
 /**
  * Returns all other caps used in the module
  *
- * @example return array('moodle/site:accessallgroups');
  * @return array
  */
 function groupformation_get_extra_capabilities() {
@@ -302,13 +319,12 @@ function groupformation_get_extra_capabilities() {
  *
  * @param int $groupformationid
  *            ID of an instance of this module
- * @param $scaleid
+ * @param int $scaleid
  * @return bool true if the scale is used by the given groupformation instance
  * @throws dml_exception
  */
 function groupformation_scale_used($groupformationid, $scaleid) {
     global $DB;
-    /* @example */
     if ($scaleid and $DB->record_exists('groupformation', array(
             'id' => $groupformationid, 'grade' => -$scaleid))
     ) {
@@ -323,13 +339,12 @@ function groupformation_scale_used($groupformationid, $scaleid) {
  *
  * This is used to find out if scale used anywhere.
  *
- * @param $scaleid int
+ * @param int $scaleid
  * @return boolean true if the scale is used by any groupformation instance
  * @throws dml_exception
  */
 function groupformation_scale_used_anywhere($scaleid) {
     global $DB;
-    /* @example */
     if ($scaleid and $DB->record_exists('groupformation', array(
             'grade' => -$scaleid))
     ) {
@@ -404,7 +419,7 @@ function groupformation_grade_item_delete($groupformation) {
  * @return void
  */
 function groupformation_update_grades(stdClass $groupformation, $userid = 0) {
-    $grades = array(); // Populate array of grade objects indexed by userid. @example .
+    $grades = array(); // Populate array of grade objects indexed by userid.
     grade_update('mod/groupformation', $groupformation->course, 'mod', 'groupformation', $groupformation->id, 0,
         $grades);
 }
@@ -447,12 +462,14 @@ function groupformation_get_file_info($browser, $areas, $course, $cm, $context, 
 }
 
 /**
- * @param $course
- * @param $cm
- * @param $context
- * @param $filearea
- * @param $args
- * @param $forcedownload
+ * Handles files
+ *
+ * @param stdClass $course
+ * @param stdClass $cm
+ * @param stdClass $context
+ * @param string $filearea
+ * @param array $args
+ * @param bool $forcedownload
  * @param array $options
  * @return bool
  * @throws coding_exception
@@ -513,13 +530,12 @@ function groupformation_pluginfile($course, $cm, $context, $filearea, $args, $fo
  *
  * This can be called by an AJAX request so do not rely on $PAGE as it might not be set up properly.
  *
- * @param navigation_node $navref
- *            An object representing the navigation tree node of the newmodule module instance
+ * @param navigation_node $navref An object representing the navigation tree node of the newmodule module instance
  * @param stdClass $course
  * @param stdClass $module
  * @param cm_info $cm
  */
-function groupformation_extend_navigation(navigation_node $navref, stdclass $course, stdclass $module, cm_info $cm) {
+function groupformation_extend_navigation(navigation_node $navref, stdClass $course, stdClass $module, cm_info $cm) {
     foreach ($navref->parent->get_children_key_list() as $key) {
         $node = $navref->parent->get($key);
         if (count($node->get_children_key_list()) == 0) {
@@ -635,26 +651,12 @@ function groupformation_set_fields(stdClass $groupformation) {
 }
 
 /**
- * Saves more infos and updates questions if needed
+ * Returns groupformation by id
  *
- * @param $groupformation
- * @param $init
+ * @param int $id
+ * @return mixed
  * @throws dml_exception
  */
-function groupformation_save_more_infos($groupformation, $init) {
-    $store = new mod_groupformation_storage_manager ($groupformation->id);
-
-    $knowledgearray = array();
-    if ($groupformation->knowledge != 0) {
-        $knowledgearray = explode("\n", $groupformation->knowledgelines);
-    }
-
-    $topicsarray = array();
-    if ($groupformation->topics != 0) {
-        $topicsarray = explode("\n", $groupformation->topiclines);
-    }
-}
-
 function groupformation_get_by_id($id) {
     global $DB;
 
