@@ -16,14 +16,23 @@
 /**
  * Class mod_groupformation_basic_controller
  *
- * @package mod_groupformation
- * @author Rene Roepke
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
 
+/**
+ * Class mod_groupformation_basic_view_controller
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 abstract class mod_groupformation_basic_view_controller {
 
     /** @var int ID of the course */
@@ -50,8 +59,8 @@ abstract class mod_groupformation_basic_view_controller {
     /**
      * mod_groupformation_basic_controller constructor.
      *
-     * @param $groupformationid
-     * @param $controller
+     * @param int $groupformationid
+     * @param Controller $controller
      * @throws coding_exception
      */
     public function __construct($groupformationid, $controller) {

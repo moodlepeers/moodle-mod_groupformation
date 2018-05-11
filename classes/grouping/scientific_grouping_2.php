@@ -17,9 +17,10 @@
 /**
  * Scientific grouping interface
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
@@ -35,6 +36,14 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/grouping.php'
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/statistics.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 
+/**
+ * Class mod_groupformation_scientific_grouping_2
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_scientific_grouping_2 extends mod_groupformation_grouping {
 
     /** @var int ID of module instance */
@@ -55,7 +64,8 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
     /**
      * mod_groupformation_scientific_grouping constructor.
      *
-     * @param $groupformationid
+     * @param int $groupformationid
+     * @throws dml_exception
      */
     public function __construct($groupformationid) {
         $this->groupformationid = $groupformationid;
@@ -69,9 +79,12 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
     /**
      * Returns equally distributed slices by checking mean and std deviation.
      *
-     * @param $users
-     * @param $numberofslices
+     * @param array $users
+     * @param int $numberofslices
+     * @param null $specs
      * @return array
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public function get_optimal_slices($users, $numberofslices, $specs = null) {
         $statistics = new mod_groupformation_statistics();
@@ -189,8 +202,10 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
     /**
      * Scientific division of users and creation of participants
      *
-     * @param $users Two parted array - first part is all groupal users, second part are all random users
+     * @param array $users Two parted array - first part is all groupal users, second part are all random users
      * @return array
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public function run_grouping($users) {
         var_dump($users);
@@ -228,14 +243,15 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
         return $cohorts;
     }
 
-
     /**
      * Computes cohorts by slices and configurations
      *
-     * @param $slices
-     * @param $groupsize
-     * @param $specification
+     * @param array $slices
+     * @param int $groupsize
+     * @param array $specification
+     * @param null $weights
      * @return array
+     * @throws dml_exception
      */
     private function build_cohorts($slices, $groupsize, $specification, $weights = null) {
 
@@ -297,8 +313,8 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
     /**
      * Creates evenly distributed slices by using the linearized eval score
      *
-     * @param $scores
-     * @param $numberofslices
+     * @param array $scores
+     * @param int $numberofslices
      * @return array
      */
     private function get_slices($scores, $numberofslices) {

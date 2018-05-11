@@ -16,16 +16,26 @@
 /**
  * Define file for questionnaires
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.');
 }
 
+/**
+ * Class mod_groupformation_data
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_data {
 
+    /** @var array Containing all criteria specifications */
     private static $criteria = array(
             "big5" => array(
                     "category" => "character",
@@ -225,7 +235,7 @@ class mod_groupformation_data {
             ),
     );
 
-    // Special mode booleans (can be ignored in normal use cases).
+    /** @var bool Special mode booleans (can be ignored in normal use cases). */
     private static $mathprepcoursemode = false;
 
     /**
@@ -259,7 +269,7 @@ class mod_groupformation_data {
     /**
      * Returns criterion specification
      *
-     * @param $name
+     * @param string $name
      * @return mixed
      */
     public static function get_criterion_specification($name = null) {
@@ -277,6 +287,7 @@ class mod_groupformation_data {
      * Returns whether a participant code is required or not
      *
      * @return bool
+     * @throws dml_exception
      */
     public static function ask_for_participant_code() {
         $configvalue = get_config('groupformation', 'participant_code');
@@ -290,6 +301,7 @@ class mod_groupformation_data {
      * Returns whether import export is enabled or not
      *
      * @return bool
+     * @throws dml_exception
      */
     public static function import_export_enabled() {
         $configvalue = get_config('groupformation', 'import_export');

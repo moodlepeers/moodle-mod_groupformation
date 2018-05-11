@@ -13,14 +13,13 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
-
 /**
  * Controller for grouping view
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.');
@@ -38,6 +37,14 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/util/xml_writer.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/group_generator.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/advanced_job_manager.php');
 
+/**
+ * Class mod_groupformation_grouping_controller
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_grouping_controller {
 
     /** @var int The id of the groupformation activity */
@@ -68,6 +75,8 @@ class mod_groupformation_grouping_controller {
      * Creates an instance of grouping_controller for groupformation
      *
      * @param int $groupformationid
+     * @param stdClass $cm
+     * @throws dml_exception
      */
     public function __construct($groupformationid, $cm = null) {
         global $DB;
@@ -160,6 +169,11 @@ class mod_groupformation_grouping_controller {
 
     /**
      * POST action to start job, sets it to 'waiting'
+     *
+     * @param stdClass $cm
+     * @return array
+     * @throws dml_exception
+     * @throws moodle_exception
      */
     public function start($cm) {
 
@@ -204,6 +218,9 @@ class mod_groupformation_grouping_controller {
 
     /**
      * POST action to adopt groups to moodle
+     *
+     * @param stdClass $cm
+     * @throws moodle_exception
      */
     public function edit($cm) {
         $returnurl = new moodle_url ('/mod/groupformation/grouping_edit_view.php', array(
@@ -225,7 +242,9 @@ class mod_groupformation_grouping_controller {
     }
 
     /**
-     * @param $groupsstring
+     * Stores the editing of groups
+     *
+     * @param string $groupsstring
      */
     public function save_edit($groupsstring) {
         $groupsarrayafter = json_decode($groupsstring, true);
@@ -511,8 +530,7 @@ class mod_groupformation_grouping_controller {
     /**
      * Gets the name and moodle link of group members
      *
-     * @param
-     *            $groupID
+     * @param int $groupid
      * @return array
      */
     private function get_group_members($groupid) {

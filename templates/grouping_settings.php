@@ -14,9 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * Grouping settings template
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.');

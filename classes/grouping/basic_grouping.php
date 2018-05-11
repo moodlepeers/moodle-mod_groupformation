@@ -17,9 +17,10 @@
 /**
  * Basic grouping interface
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 if (!defined('MOODLE_INTERNAL')) {
@@ -30,6 +31,14 @@ require_once($CFG->dirroot . '/mod/groupformation/lib.php');
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/grouping.php');
 
+/**
+ * Class mod_groupformation_basic_grouping
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_basic_grouping extends mod_groupformation_grouping {
 
     /** @var int ID of module instance */
@@ -50,7 +59,7 @@ class mod_groupformation_basic_grouping extends mod_groupformation_grouping {
     /**
      * mod_groupformation_basic_grouping constructor.
      *
-     * @param $groupformationid
+     * @param int $groupformationid
      */
     public function __construct($groupformationid) {
         $this->groupformationid = $groupformationid;
@@ -64,8 +73,9 @@ class mod_groupformation_basic_grouping extends mod_groupformation_grouping {
     /**
      * Scientific division of users and creation of participants
      *
-     * @param $users Two parted array - first part is all groupal users, second part are all random users
+     * @param array $users Two parted array - first part is all groupal users, second part are all random users
      * @return array
+     * @throws dml_exception
      */
     public function run_grouping($users) {
         $configurations = array(

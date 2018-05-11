@@ -16,9 +16,10 @@
 /**
  * Class mod_groupformation_export_view_controller
  *
- * @package mod_groupformation
- * @author Rene Roepke
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
@@ -26,6 +27,14 @@ if (!defined('MOODLE_INTERNAL')) {
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/basic_view_controller.php');
 
+/**
+ * Class mod_groupformation_export_view_controller
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_export_view_controller extends mod_groupformation_basic_view_controller {
 
     /** @var array Template names */

@@ -15,11 +15,15 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Random cohort
+ *
  * This class contains the results of a group formation as a cohort consisting
  * of groups filled with participants
  *
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/lgpl.html GNU LGPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
@@ -29,11 +33,19 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/groupal
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/group.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/cohorts/cohort.php");
 
+/**
+ * Class mod_groupformation_random_cohort
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_random_cohort extends mod_groupformation_cohort {
 
     /**
      * mod_groupformation_random_cohort constructor.
-     * @param $numberofgroups
+     * @param number $numberofgroups
      * @param null $groups
      */
     public function __construct($numberofgroups, $groups = null) {
@@ -48,7 +60,8 @@ class mod_groupformation_random_cohort extends mod_groupformation_cohort {
 
     /**
      * Adds a Group to this Cohort if not already a member
-     * @param $g mod_groupformation_group
+     *
+     * @param mod_groupformation_group $g
      * @return boolean
      */
     public function add_group(mod_groupformation_group $g) {

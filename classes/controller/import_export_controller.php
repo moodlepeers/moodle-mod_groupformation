@@ -15,10 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Controller for import_export view
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
@@ -30,6 +32,14 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/util/xml_writer.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/csv_writer.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
 
+/**
+ * Class mod_groupformation_import_export_controller
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_import_export_controller {
 
     /** @var int ID of module instance */
@@ -50,7 +60,8 @@ class mod_groupformation_import_export_controller {
     /**
      * Constructs instance of import export controller
      *
-     * @param integer $groupformationid
+     * @param int $groupformationid
+     * @param stdClass $cm
      */
     public function __construct($groupformationid, $cm) {
         $this->groupformationid = $groupformationid;
@@ -64,9 +75,10 @@ class mod_groupformation_import_export_controller {
     /**
      * Generates answers and creates a file for download
      *
-     * @param $userid
-     * @param $categories
+     * @param int $userid
+     * @param array $categories
      * @return string
+     * @throws dml_exception
      * @throws file_exception
      * @throws stored_file_creation_exception
      */
@@ -90,7 +102,7 @@ class mod_groupformation_import_export_controller {
     /**
      * Generates answers and creates a file for download
      *
-     * @param $userid
+     * @param int $userid
      * @param bool $allinstances
      * @return string
      * @throws dml_exception
@@ -175,7 +187,7 @@ class mod_groupformation_import_export_controller {
     /**
      * Renders two-parted template with form
      *
-     * @param $mform
+     * @param moodleform $mform
      * @param bool|false $showwarning
      */
     public function render_form($mform, $showwarning = false) {
@@ -195,7 +207,7 @@ class mod_groupformation_import_export_controller {
     /**
      * Renders result page of import
      *
-     * @param $successful
+     * @param bool $successful
      * @throws moodle_exception
      */
     public function render_result($successful) {

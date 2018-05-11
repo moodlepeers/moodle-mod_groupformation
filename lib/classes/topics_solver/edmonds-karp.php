@@ -18,24 +18,49 @@
  *
  * Contains the algorithm for the distribution
  *
- * @package    mod_ratingallocate
- * @subpackage mod_ratingallocate
- * @copyright  2014 M Schulze
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * This file was based on M. Schulze's mod_ratingallocate
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
 }
 
-
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/topics_solver/solver-template.php');
 
+/**
+ * Class mod_groupformation_solver_edmonds_karp
+ *
+ * This class was based on M. Schulze's mod_ratingallocate
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_solver_edmonds_karp extends mod_groupformation_topic_distributor {
 
+    /**
+     * Returns name
+     *
+     * @return string
+     */
     public function get_name() {
         return 'edmonds_karp';
     }
 
+    /**
+     * Computes distribution
+     *
+     * @param array $choicerecords
+     * @param array $ratings
+     * @param int $usercount
+     * @return array
+     * @throws moodle_exception
+     */
     public function compute_distribution($choicerecords, $ratings, $usercount) {
 
         $choicedata = array();
@@ -69,8 +94,8 @@ class mod_groupformation_solver_edmonds_karp extends mod_groupformation_topic_di
     /**
      * Bellman-Ford acc. to Cormen
      *
-     * @param $from index of starting node
-     * @param $to index of end node
+     * @param int $from index of starting node
+     * @param int $to index of end node
      * @return array with the of the nodes in the path
      */
     private function find_shortest_path_bellf($from, $to) {

@@ -15,11 +15,15 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Optimizer
+ *
  * This class contains an implementation of an evaluator interface which handles
  * the evaluation of groups
  *
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/lgpl.html GNU LGPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
@@ -27,14 +31,35 @@ if (!defined('MOODLE_INTERNAL')) {
 
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/optimizers/ioptimizer.php");
 
+/**
+ * Class mod_groupformation_optimizer
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_optimizer implements mod_groupformation_ioptimizer {
 
+    /** @var mod_groupformation_imatcher Matcher */
     public $matcher;
 
+    /**
+     * mod_groupformation_optimizer constructor.
+     *
+     * @param mod_groupformation_imatcher $matcher
+     */
     public function __construct(mod_groupformation_imatcher $matcher) {
         $this->matcher = $matcher;
     }
 
+    /**
+     * Optimizes cohort
+     *
+     * @param mod_groupformation_cohort $cohort
+     * @return mixed|void
+     * @throws Exception
+     */
     public function optimize_cohort(mod_groupformation_cohort $cohort) {
         // For each pair of good and bad group try to average them.
         for ($i = 0; $i < count($this->groups / 2); $i++) {
@@ -45,7 +70,12 @@ class mod_groupformation_optimizer implements mod_groupformation_ioptimizer {
         $cohort->calculate_cpi();
     }
 
-
+    /**
+     * Computes average of two groups
+     *
+     * @param mod_groupformation_group $goodgroup
+     * @param mod_groupformation_group $badgroup
+     */
     public function average_two_groups(mod_groupformation_group &$goodgroup, mod_groupformation_group &$badgroup) {
 
         if (abs($goodgroup->get_gpi() - $badgroup->get_gpi()) < 0.02) {
@@ -80,7 +110,11 @@ class mod_groupformation_optimizer implements mod_groupformation_ioptimizer {
         }
     }
 
-    // Shuffle a List of entries.
+    /**
+     * Shuffles
+     *
+     * @param array $list
+     */
     public function shuffle(array &$list) {
         // TODO Randomize Array Entries.
     }

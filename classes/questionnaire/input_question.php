@@ -16,9 +16,10 @@
 /**
  * Prints a particular instance of groupformation questionnaire
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
@@ -26,6 +27,14 @@ if (!defined('MOODLE_INTERNAL')) {
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/basic_question.php');
 
+/**
+ * Class mod_groupformation_input_question
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 abstract class mod_groupformation_input_question extends mod_groupformation_basic_question {
 
     /**
@@ -38,8 +47,8 @@ abstract class mod_groupformation_input_question extends mod_groupformation_basi
     /**
      * Prints HTML of a freetext question
      *
-     * @param $highlight
-     * @param $required
+     * @param bool $highlight
+     * @param bool $required
      * @throws coding_exception
      */
     public function print_html($highlight, $required) {
@@ -88,8 +97,8 @@ abstract class mod_groupformation_input_question extends mod_groupformation_basi
     /**
      * Returns HTML of a freetext question
      *
-     * @param $highlight
-     * @param $required
+     * @param bool $highlight
+     * @param bool $required
      * @return string
      * @throws coding_exception
      */

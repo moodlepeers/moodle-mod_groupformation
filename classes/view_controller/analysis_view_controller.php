@@ -16,14 +16,23 @@
 /**
  * Class mod_groupformation_analysis_view_controller
  *
- * @package mod_groupformation
- * @author Rene Roepke
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/basic_view_controller.php');
 
+/**
+ * Class mod_groupformation_analysis_view_controller
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_analysis_view_controller extends mod_groupformation_basic_view_controller {
 
     /** @var array Template names */
@@ -34,8 +43,9 @@ class mod_groupformation_analysis_view_controller extends mod_groupformation_bas
     /**
      * mod_groupformation_analysis_view_controller constructor.
      *
-     * @param $groupformationid
-     * @param $controller
+     * @param int $groupformationid
+     * @param mod_groupformation_analysis_controller $controller
+     * @throws coding_exception
      */
     public function __construct($groupformationid, $controller) {
         parent::__construct($groupformationid, $controller);
@@ -117,7 +127,13 @@ class mod_groupformation_analysis_view_controller extends mod_groupformation_bas
         }
     }
 
-
+    /**
+     * Renders page
+     *
+     * @return string
+     * @throws coding_exception
+     * @throws dml_exception
+     */
     public function render() {
         $id = $this->controller->cmid;
         $context = context_module::instance($id);

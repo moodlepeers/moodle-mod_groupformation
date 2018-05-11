@@ -17,16 +17,26 @@
 /**
  * Define all the restore steps that will be used by the restore_groupformation_activity_task
  *
- * @package mod_groupformation
- * @category backup
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @category    backup
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
 }
 
+/**
+ * Class restore_groupformation_activity_structure_step
+ *
+ * @package     mod_groupformation
+ * @category    backup
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class restore_groupformation_activity_structure_step extends restore_activity_structure_step {
 
     /**

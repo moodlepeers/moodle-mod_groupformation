@@ -17,8 +17,10 @@
 /**
  * This interface contains the distance handling methods.
  *
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/lgpl.html GNU LGPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
@@ -26,8 +28,18 @@ if (!defined('MOODLE_INTERNAL')) {
 
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion.php");
 
+/**
+ * Interface mod_groupformation_idistance
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 interface mod_groupformation_idistance {
     /**
+     * Computes normalized distance
+     *
      * @param mod_groupformation_criterion $c1
      * @param mod_groupformation_criterion $c2
      * @return float  ( a value normalized to (0...1) )

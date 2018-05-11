@@ -16,15 +16,24 @@
 /**
  * An XML Writer for student
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
 }
 
+/**
+ * Class mod_groupformation_xml_writer
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_xml_writer {
 
     /** @var XMLWriter This is the writer instance used to create xml */
@@ -91,6 +100,8 @@ class mod_groupformation_xml_writer {
     }
 
     /**
+     * Creates XML for categories
+     *
      * @param null $categories
      * @param null $userid
      * @throws dml_exception
@@ -108,8 +119,9 @@ class mod_groupformation_xml_writer {
     /**
      * Creates XML with category and answers
      *
-     * @param $category
-     * @param $userid
+     * @param string $category
+     * @param int $userid
+     * @throws dml_exception
      */
     private function write_category($category, $userid) {
         $writer = $this->writer;
@@ -126,8 +138,8 @@ class mod_groupformation_xml_writer {
     /**
      * Creates XML with all user related data
      *
-     * @param $userid
-     * @param $groupformationid
+     * @param int $userid
+     * @param int $groupformationid
      * @param bool $allinstances
      * @return string
      * @throws dml_exception
@@ -168,8 +180,8 @@ class mod_groupformation_xml_writer {
 
     /**
      * Creates XML for groupformation instance and user data
-     * @param $gf
-     * @param $userid
+     * @param stdClass $gf
+     * @param int $userid
      * @throws dml_exception
      */
     private function write_groupformation($gf, $userid) {
@@ -198,7 +210,9 @@ class mod_groupformation_xml_writer {
     }
 
     /**
-     * @param $userid
+     * Creates XML for group
+     *
+     * @param int $userid
      */
     private function write_group($userid) {
         $writer = $this->writer;
@@ -217,7 +231,7 @@ class mod_groupformation_xml_writer {
     /**
      * Creates XML about user values
      *
-     * @param $userid
+     * @param int $userid
      * @throws dml_exception
      */
     private function write_user_values($userid) {
@@ -237,7 +251,7 @@ class mod_groupformation_xml_writer {
     /**
      * Creates XML about started record
      *
-     * @param $userid
+     * @param int $userid
      * @throws dml_exception
      */
     private function write_status($userid) {

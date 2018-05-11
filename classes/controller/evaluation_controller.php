@@ -15,10 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Controller for evaluation view
  *
- * @package mod_groupformation
- * @@author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 if (!defined('MOODLE_INTERNAL')) {
@@ -28,6 +30,14 @@ if (!defined('MOODLE_INTERNAL')) {
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
 
+/**
+ * Class mod_groupformation_evaluation_controller
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_evaluation_controller {
 
     /** @var mod_groupformation_storage_manager The manager of activity data */
@@ -44,7 +54,8 @@ class mod_groupformation_evaluation_controller {
 
     /**
      * mod_groupformation_evaluation_controller constructor.
-     * @param $groupformationid
+     *
+     * @param int $groupformationid
      */
     public function __construct($groupformationid) {
         $this->groupformationid = $groupformationid;
@@ -59,6 +70,7 @@ class mod_groupformation_evaluation_controller {
      *
      * @param string $caption
      * @return array
+     * @throws coding_exception
      */
     public function no_evaluation($caption = 'no_evaluation_text') {
 
@@ -75,8 +87,10 @@ class mod_groupformation_evaluation_controller {
     /**
      * Returns eval array for user.
      *
-     * @param $userid
+     * @param int $userid
      * @return array
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public function get_eval($userid) {
         $courseusers = $this->store->get_users();
@@ -106,6 +120,8 @@ class mod_groupformation_evaluation_controller {
      * Load info
      *
      * @return array
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public function load_info() {
         global $USER;

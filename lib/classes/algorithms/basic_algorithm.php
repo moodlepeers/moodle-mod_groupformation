@@ -15,12 +15,15 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Basic algorithm
+ *
  * main class to be used for group formations. get an instance of this and run your
  * groupformations using the provided API of this class.
  *
- *
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/lgpl.html GNU LGPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 if (!defined('MOODLE_INTERNAL')) {
@@ -35,6 +38,14 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/matchers/imatcher.
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/participant.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/statistics.php");
 
+/**
+ * Class mod_groupformation_basic_algorithm
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_basic_algorithm implements mod_groupformation_ialgorithm {
 
     /** @var array This array contains all participants which need to be matched to groups */
@@ -67,9 +78,9 @@ class mod_groupformation_basic_algorithm implements mod_groupformation_ialgorith
     /**
      * mod_groupformation_basic_algorithm constructor.
      *
-     * @param $participants
+     * @param array $participants
      * @param mod_groupformation_imatcher $matcher
-     * @param $groupsize
+     * @param int $groupsize
      */
     public function __construct($participants, mod_groupformation_imatcher $matcher, $groupsize) {
         foreach ($participants as $p) {

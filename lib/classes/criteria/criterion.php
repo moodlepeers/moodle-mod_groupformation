@@ -15,16 +15,28 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Criterion
+ *
  * This abstract class contains method signatures and field variables for organizing
  * values based on users answers
  *
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/lgpl.html GNU LGPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
 }
 
+/**
+ * Class mod_groupformation_criterion
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 abstract class mod_groupformation_criterion {
 
 
@@ -44,21 +56,27 @@ abstract class mod_groupformation_criterion {
     protected $homogeneous = false;
 
     /**
-     * @return String
+     * Returns name
+     *
+     * @return string
      */
     public function get_name() {
         return $this->name;
     }
 
     /**
-     * @param String $n
+     * Sets name
+     *
+     * @param string $n
      */
     public function set_name($n) {
         $this->name = $n;
     }
 
     /**
-     * @param $i int index
+     * Returns value
+     *
+     * @param int $i index
      * @return float value at index i
      */
     public function get_value($i) {
@@ -67,7 +85,9 @@ abstract class mod_groupformation_criterion {
 
 
     /**
-     * @return float[]
+     * Returns values
+     *
+     * @return array
      */
     public function get_values() {
         return $this->value;
@@ -77,8 +97,8 @@ abstract class mod_groupformation_criterion {
     /**
      * Adds or replaces value at index. Checks for min/max value conformity
      *
-     * @param $i
-     * @param $v
+     * @param number $i
+     * @param number $v
      * @throws Exception
      */
     public function set_value($i, $v) {
@@ -89,9 +109,11 @@ abstract class mod_groupformation_criterion {
         $this->value[$i] = $v;
     }
 
-
     /**
-     * @param float[] $v iterates and copies each value
+     * Sets values
+     *
+     * @param array $v iterates and copies each value
+     * @throws Exception
      */
     public function set_values(&$v) {
         for ($i = 0; $i < count($v); $i++) {
@@ -101,6 +123,8 @@ abstract class mod_groupformation_criterion {
 
 
     /**
+     * Returns max value
+     *
      * @return float
      */
     public function get_max_value() {
@@ -109,7 +133,9 @@ abstract class mod_groupformation_criterion {
 
 
     /**
-     * @param $number
+     * Sets max value
+     *
+     * @param number $number
      * @throws Exception
      */
     public function set_max_value($number) {
@@ -121,6 +147,8 @@ abstract class mod_groupformation_criterion {
 
 
     /**
+     * Returns min value
+     *
      * @return float
      */
     public function get_min_value() {
@@ -129,6 +157,8 @@ abstract class mod_groupformation_criterion {
 
 
     /**
+     * Sets min value
+     *
      * @param float $number
      */
     public function set_min_value($number) {
@@ -137,6 +167,8 @@ abstract class mod_groupformation_criterion {
 
 
     /**
+     * Returns whether criterion is homogeneous or not
+     *
      * @return bool
      */
     public function is_homogeneous() {
@@ -144,6 +176,8 @@ abstract class mod_groupformation_criterion {
     }
 
     /**
+     * Sets whether criterion is homogeneous
+     *
      * @param bool $bool
      */
     public function set_homogeneous($bool) {
@@ -152,6 +186,8 @@ abstract class mod_groupformation_criterion {
 
 
     /**
+     * Returns weight
+     *
      * @return float
      * @throws Exception if Criterion (this) not valid
      */

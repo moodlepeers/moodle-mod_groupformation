@@ -17,10 +17,10 @@
 /**
  * Controller for analysis view
  *
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @package    mod_groupformation
- * @copyright  2015 MoodlePeers
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die('Direct access to this script is forbidden.');
 
@@ -30,6 +30,14 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/advanced_job_manager.php');
 
+/**
+ * Class mod_groupformation_analysis_controller
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_analysis_controller {
 
     /** @var int ID of module instance */
@@ -51,6 +59,8 @@ class mod_groupformation_analysis_controller {
      * Creates instance of analysis controller
      *
      * @param int $groupformationid
+     * @param stdClass $cm
+     * @throws dml_exception
      */
     public function __construct($groupformationid, $cm) {
         $this->cmid = $cm->id;
@@ -64,7 +74,7 @@ class mod_groupformation_analysis_controller {
     /**
      * Triggers questionnaire
      *
-     * @param $switcher
+     * @param bool $switcher
      */
     public function trigger_questionnaire($switcher) {
 
@@ -84,7 +94,8 @@ class mod_groupformation_analysis_controller {
     /**
      * Determine status variables
      *
-     * @param $cm
+     * @param stdClass $cm
+     * @throws dml_exception
      */
     public function determine_status($cm) {
         $questionnaireavailable = $this->store->is_questionnaire_available();

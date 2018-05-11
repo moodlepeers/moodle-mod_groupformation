@@ -15,11 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This class contains an implementation of an matcher interface which handles
- * the group centric matching
+ * This class contains an implementation of an matcher interface which handles the group centric matching
  *
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/lgpl.html GNU LGPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
@@ -30,12 +31,22 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/cohorts/cohort.php
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/group.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/participant.php");
 
+/**
+ * Class mod_groupformation_group_centric_matcher
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_group_centric_matcher implements mod_groupformation_imatcher {
 
     /**
-     * @param $notyetmatched
-     * @param $groups
-     * @return mixed
+     * Match to groups
+     *
+     * @param array $notyetmatched
+     * @param array $groups
+     * @return array
      */
     public function match_to_groups(&$notyetmatched, &$groups) {
         $deltaold = -INF;

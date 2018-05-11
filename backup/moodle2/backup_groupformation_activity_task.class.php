@@ -17,10 +17,11 @@
 /**
  * Defines backup_groupformation_activity_task class
  *
- * @package mod_groupformation
- * @category backup
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @category    backup
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die;
 require_once($CFG->dirroot . '/mod/groupformation/backup/moodle2/backup_groupformation_stepslib.php');
@@ -28,10 +29,11 @@ require_once($CFG->dirroot . '/mod/groupformation/backup/moodle2/backup_groupfor
 /**
  * Provides the steps to perform one complete backup of the groupformation instance
  *
- * @package mod_groupformation
- * @category backup
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @category    backup
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class backup_groupformation_activity_task extends backup_activity_task {
     /**

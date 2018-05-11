@@ -17,9 +17,10 @@
 /**
  * Interface betweeen DB and Plugin
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
@@ -29,6 +30,14 @@ require_once($CFG->dirroot . '/group/lib.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
 
+/**
+ * Class mod_groupformation_groups_manager
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_groups_manager {
 
     /** @var int ID of module instance */
@@ -49,11 +58,12 @@ class mod_groupformation_groups_manager {
     /**
      * Creats user-group instance in DB
      *
-     * @param $groupformationid
-     * @param $userid
-     * @param $groupalid
-     * @param $idmap
+     * @param int $groupformationid
+     * @param int $userid
+     * @param int $groupalid
+     * @param array $idmap
      * @return bool|int
+     * @throws dml_exception
      */
     public function assign_user_to_group($groupformationid, $userid, $groupalid, $idmap) {
         global $DB;
@@ -68,8 +78,9 @@ class mod_groupformation_groups_manager {
     /**
      * Returns topic name
      *
-     * @param $id
+     * @param int $id
      * @return mixed
+     * @throws dml_exception
      */
     public function get_topic_name($id) {
         if (is_null($this->store)) {
@@ -86,9 +97,12 @@ class mod_groupformation_groups_manager {
      * Creates group instance in DB
      *
      * @param integer $groupalid
+     * @param array $group
      * @param string $name
      * @param integer $groupformationid
-     * @return Ambigous <boolean, number>
+     * @param array $flags
+     * @return bool|int <boolean, number>
+     * @throws dml_exception
      */
     public function create_group($groupalid, $group, $name, $groupformationid, $flags) {
         global $DB;
@@ -117,6 +131,7 @@ class mod_groupformation_groups_manager {
      * Returns whether groups are created in moodle or not
      *
      * @return bool
+     * @throws dml_exception
      */
     public function groups_created() {
         global $DB;
@@ -137,6 +152,7 @@ class mod_groupformation_groups_manager {
      *
      * @param unknown $moodlegroupid
      * @return boolean
+     * @throws dml_exception
      */
     public function delete_moodlegroup_id($moodlegroupid) {
         global $DB;
@@ -153,9 +169,10 @@ class mod_groupformation_groups_manager {
     /**
      * Saves moodlegroupid in database
      *
-     * @param $groupid
-     * @param $moodlegroupid
+     * @param int $groupid
+     * @param int $moodlegroupid
      * @return bool
+     * @throws dml_exception
      */
     public function save_moodlegroup_id($groupid, $moodlegroupid) {
         global $DB;
@@ -171,8 +188,9 @@ class mod_groupformation_groups_manager {
     /**
      * Returns groupname
      *
-     * @param unknown $userid
+     * @param int $userid
      * @return mixed
+     * @throws dml_exception
      */
     public function get_group_name($userid) {
         global $DB;
@@ -186,8 +204,9 @@ class mod_groupformation_groups_manager {
     /**
      * Returns group key
      *
-     * @param $groupid
+     * @param int $groupid
      * @return mixed
+     * @throws dml_exception
      */
     public function get_group_key($groupid) {
         global $DB;
@@ -199,8 +218,9 @@ class mod_groupformation_groups_manager {
     /**
      * Returns group key
      *
-     * @param $groupid
+     * @param int $groupid
      * @return mixed
+     * @throws dml_exception
      */
     public function get_moodle_group_id($groupid) {
         global $DB;
@@ -212,8 +232,9 @@ class mod_groupformation_groups_manager {
     /**
      * Returns group key
      *
-     * @param $groupid
+     * @param int $groupid
      * @return mixed
+     * @throws dml_exception
      */
     public function get_performance_index($groupid) {
         global $DB;
@@ -225,8 +246,9 @@ class mod_groupformation_groups_manager {
     /**
      * Returns members (userids) of group of user
      *
-     * @param $userid
+     * @param int $userid
      * @return array
+     * @throws dml_exception
      */
     public function get_group_members($userid) {
         global $DB;
@@ -249,7 +271,9 @@ class mod_groupformation_groups_manager {
      * Returns whether user has a group or not
      *
      * @param int $userid
+     * @param bool $moodlegroup
      * @return boolean
+     * @throws dml_exception
      */
     public function has_group($userid, $moodlegroup = false) {
         global $DB;
@@ -264,6 +288,7 @@ class mod_groupformation_groups_manager {
      *
      * @param integer $userid
      * @return mixed
+     * @throws dml_exception
      */
     public function get_group_id($userid) {
         global $DB;
@@ -276,6 +301,7 @@ class mod_groupformation_groups_manager {
      * Returns whether groups are build in moodle or just generated by GroupAL
      *
      * @return boolean
+     * @throws dml_exception
      */
     public function is_build() {
         global $DB;
@@ -289,6 +315,7 @@ class mod_groupformation_groups_manager {
     /**
      * Returns max groups size
      *
+     * @param null $groups
      * @return null
      */
     public function get_max_groups_size($groups = null) {
@@ -308,7 +335,10 @@ class mod_groupformation_groups_manager {
     /**
      * Returns groups which are generated by groupal
      *
+     * @param null $sortedby
+     * @param string $fieldset
      * @return mixed
+     * @throws dml_exception
      */
     public function get_generated_groups($sortedby = null, $fieldset = '*') {
         global $DB;
@@ -320,7 +350,10 @@ class mod_groupformation_groups_manager {
     /**
      * Returns groups which are generated by groupal
      *
+     * @param null $sortedby
+     * @param string $fieldset
      * @return mixed
+     * @throws dml_exception
      */
     public function get_group_users($sortedby = null, $fieldset = '*') {
         global $DB;
@@ -332,7 +365,9 @@ class mod_groupformation_groups_manager {
     /**
      * Returns all users from groups which are generated by groupal
      *
+     * @param int $groupid
      * @return mixed
+     * @throws dml_exception
      */
     public function get_users_for_generated_group($groupid) {
         global $DB;
@@ -366,6 +401,9 @@ class mod_groupformation_groups_manager {
      * (uses order of user submissions and assigns one %2 to A or B)
      *
      * @param int $userid
+     * @throws coding_exception
+     * @throws dml_exception
+     * @throws moodle_exception
      */
     public function assign_to_groups_a_and_b($userid) {
         global $DB, $COURSE;
@@ -427,7 +465,8 @@ class mod_groupformation_groups_manager {
     /**
      * Removes users from group
      *
-     * @param $groupid
+     * @param int $groupid
+     * @throws dml_exception
      */
     public function remove_users($groupid) {
         global $DB;
@@ -439,8 +478,10 @@ class mod_groupformation_groups_manager {
     /**
      * Adds users to a group
      *
-     * @param $groupid
-     * @param $userids
+     * @param int $groupid
+     * @param int $userids
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public function add_users($groupid, $userids) {
         global $DB;
@@ -459,7 +500,8 @@ class mod_groupformation_groups_manager {
     /**
      * Deletes group
      *
-     * @param $groupid
+     * @param int $groupid
+     * @throws dml_exception
      */
     public function delete_group($groupid) {
         global $DB;
@@ -473,8 +515,9 @@ class mod_groupformation_groups_manager {
     /**
      * Updates group
      *
-     * @param $groupid
-     * @param $groupsize
+     * @param int $groupid
+     * @param int $groupsize
+     * @throws dml_exception
      */
     public function update_group($groupid, $groupsize) {
         global $DB;
@@ -489,8 +532,10 @@ class mod_groupformation_groups_manager {
     /**
      * Updates groups
      *
-     * @param $groupsarrayafter
-     * @param $groupsarraybefore
+     * @param array $groupsarrayafter
+     * @param array $groupsarraybefore
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public function update_groups($groupsarrayafter, $groupsarraybefore) {
         $updated = false;
@@ -519,9 +564,10 @@ class mod_groupformation_groups_manager {
     /**
      * Creates groups of groupformation
      *
-     * @param $groups
-     * @param $flags
+     * @param array $groups
+     * @param array $flags
      * @return array
+     * @throws dml_exception
      */
     public function create_groups($groups, $flags) {
         $this->store = new mod_groupformation_storage_manager($this->groupformationid);

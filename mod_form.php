@@ -16,9 +16,10 @@
 /**
  * The main groupformation configuration form
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 if (!defined('MOODLE_INTERNAL')) {
@@ -33,7 +34,17 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/util/xml_loader.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 
+/**
+ * Class mod_groupformation_mod_form
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_mod_form extends moodleform_mod {
+
+    /** @var mod_groupformation_storage_manager */
     private $store;
 
     /**
@@ -115,6 +126,10 @@ class mod_groupformation_mod_form extends moodleform_mod {
      * (non-PHPdoc)
      *
      * @see moodleform_mod::validation()
+     * @param array $data
+     * @param array $files
+     * @return array
+     * @throws coding_exception
      */
     public function validation($data, $files) {
         $errors = array();

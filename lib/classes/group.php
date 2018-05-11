@@ -17,8 +17,10 @@
 /**
  * This class contains an implementation of an ListItem as a Group.
  *
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/lgpl.html GNU LGPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.');
@@ -27,19 +29,35 @@ if (!defined('MOODLE_INTERNAL')) {
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/statistics.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/groupal_evaluator.php");
 
+/**
+ * Class mod_groupformation_group
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_group {
 
+    /** @var int */
     public static $groupcount = 0; // Int.
+
+    /** @var mod_groupformation_ievaluator */
     public static $evaluator;  // IEvaluator.
 
+    /** @var int  */
     public static $groupmembersmaxsize = 0;
 
+    /** @var int  */
     public $groupid = 0; // Int.
 
+    /** @var mod_groupformation_stats */
     public $statistics;
 
+    /** @var int  */
     public $gpi = 0;
 
+    /** @var array  */
     private $participants; // Generic array: Participant .
 
     /**
@@ -76,6 +94,7 @@ class mod_groupformation_group {
     }
 
     /**
+     * Returns participant IDs
      *
      * @return array of integers, the participant IDs
      */
@@ -109,6 +128,7 @@ class mod_groupformation_group {
      * Adds an Participant to this Group and calculates the new GroupPerformanceIndex
      *
      * @param mod_groupformation_participant $p
+     * @param bool $random
      * @return bool, true: if was succesful, otherwise false
      */
     public function add_participant(mod_groupformation_participant $p, $random = false) {
@@ -129,13 +149,16 @@ class mod_groupformation_group {
     }
 
     /**
-     * @return float[]
+     * Returns GPI
+     *
+     * @return array
      */
     public function get_gpi() {
         return $this->gpi;
     }
 
     /**
+     * Sets GPI
      *
      * @param float $index
      */
@@ -144,6 +167,7 @@ class mod_groupformation_group {
     }
 
     /**
+     * Returns group members max size
      *
      * @return int
      */
@@ -152,6 +176,7 @@ class mod_groupformation_group {
     }
 
     /**
+     * Sets group members max size
      *
      * @param int $size
      */

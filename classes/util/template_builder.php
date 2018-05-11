@@ -28,7 +28,8 @@ if (!defined('MOODLE_INTERNAL')) {
 /**
  * Class mod_groupformation_template_builder
  *
- * @@package     mod_groupformation
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -64,7 +65,7 @@ class mod_groupformation_template_builder {
     /**
      * Assigns multiple values according to an associative array
      *
-     * @param $map
+     * @param array $map
      */
     public function assign_multiple($map) {
         foreach ($map as $key => $value) {

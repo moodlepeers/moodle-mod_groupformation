@@ -17,9 +17,10 @@
 /**
  * Basic grouping interface
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
@@ -42,6 +43,14 @@ require_once($CFG->dirroot . '/mod/groupformation/lib/classes/optimizers/optimiz
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/xml_writers/participant_writer.php');
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/xml_writers/cohort_writer.php');
 
+/**
+ * Class mod_groupformation_grouping
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_grouping {
 
     /** @var int ID of module instance */
@@ -62,7 +71,8 @@ class mod_groupformation_grouping {
     /**
      * mod_groupformation_grouping constructor.
      *
-     * @param $groupformationid
+     * @param int $groupformationid
+     * @throws dml_exception
      */
     public function __construct($groupformationid) {
         $this->groupformationid = $groupformationid;
@@ -76,8 +86,8 @@ class mod_groupformation_grouping {
     /**
      * Returns configured participants with either two (GH and EX), one (GH or EX) or no criteria
      *
-     * @param $participants
-     * @param $configuration
+     * @param array $participants
+     * @param array $configuration
      * @return mixed
      */
     public function configure_participants($participants, $configuration) {
@@ -115,10 +125,11 @@ class mod_groupformation_grouping {
     /**
      * Handles grouping based on algorithms determined by configuration key
      *
-     * @param $users
-     * @param $groupsize
-     * @param $configurationkey
+     * @param array $users
+     * @param int $groupsize
+     * @param string $configurationkey
      * @return mod_groupformation_cohort
+     * @throws Exception
      */
     public function build_cohort($users, $groupsize, $configurationkey) {
         if (strpos($configurationkey, "rand:1") !== false) {
@@ -139,8 +150,8 @@ class mod_groupformation_grouping {
     /**
      * Handles grouping based on the random algorithm
      *
-     * @param $users
-     * @param $groupsize
+     * @param array $users
+     * @param int $groupsize
      * @return mod_groupformation_cohort
      */
     public function build_random_cohort($users, $groupsize) {
@@ -152,9 +163,10 @@ class mod_groupformation_grouping {
     /**
      * Handles grouping based on the groupal algorithm
      *
-     * @param $users
-     * @param $groupsize
+     * @param array $users
+     * @param int $groupsize
      * @return mod_groupformation_cohort
+     * @throws Exception
      */
     public function build_groupal_cohort($users, $groupsize) {
         // Choose matcher.
@@ -166,8 +178,8 @@ class mod_groupformation_grouping {
     /**
      * Handles grouping based on the groupal algorithm
      *
-     * @param $users
-     * @param $groupsize
+     * @param array $users
+     * @param int $groupsizes
      * @return mod_groupformation_cohort
      */
     public function build_topic_cohort($users, $groupsizes) {
@@ -178,8 +190,8 @@ class mod_groupformation_grouping {
     /**
      * Slices the array of users into a specific number of almost even sized arrays of users
      *
-     * @param $users
-     * @param $numberofslices
+     * @param array $users
+     * @param int $numberofslices
      * @return array
      */
     public function slicing($users, $numberofslices) {
@@ -204,7 +216,7 @@ class mod_groupformation_grouping {
     /**
      * Scientific division of users and creation of participants
      *
-     * @param $users Two parted array - first part is all groupal users, second part are all random users
+     * @param array $users Two parted array - first part is all groupal users, second part are all random users
      * @return array
      */
     public function run_grouping($users) {

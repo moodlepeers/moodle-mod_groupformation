@@ -20,8 +20,7 @@
  * Contains the algorithm for the group distribution and some helper functions
  * that wrap useful SQL querys.
  *
- * @package    mod_ratingallocate
- * @subpackage mod_ratingallocate
+ * @package    mod_groupformation
  * @copyright  2014 M Schulze, C Usener
  * @copyright  based on code by Stefan Koegel copyright (C) 2013 Stefan Koegel
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -32,13 +31,27 @@ if (!defined('MOODLE_INTERNAL')) {
 
 /**
  * Class allocation: user asociated with group found by algo
+ *
+ * @package    mod_groupformation
+ * @copyright  2014 M Schulze, C Usener
+ * @copyright  based on code by Stefan Koegel copyright (C) 2013 Stefan Koegel
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class mod_groupformation_topic_allocation {
 
+    /** @var int Choice ID */
     public $choiceid;
+    /** @var int User ID */
     public $userid;
+    /** @var int Groupformation ID */
     public $groupformationid;
 
+    /**
+     * mod_groupformation_topic_allocation constructor.
+     *
+     * @param int $choiceid
+     * @param int $userid
+     */
     public function __construct($choiceid, $userid) {
         $this->choiceid = $choiceid;
         $this->userid = $userid;
@@ -49,17 +62,30 @@ class mod_groupformation_topic_allocation {
 
 /**
  * Represents an Edge in the graph to have fixed fields instead of array-fields
+ *
+ * @package    mod_groupformation
+ * @copyright  2014 M Schulze, C Usener
+ * @copyright  based on code by Stefan Koegel copyright (C) 2013 Stefan Koegel
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class mod_groupformation_topic_edge {
-    /** @var from int */
+    /** @var int */
     public $from;
-    /** @var to int */
+    /** @var int */
     public $to;
-    /** @var weight int Cost for this edge (rating of user) */
+    /** @var int Cost for this edge (rating of user) */
     public $weight;
-    /** @var space int (places left for choices) */
+    /** @var int space (places left for choices) */
     public $space;
 
+    /**
+     * mod_groupformation_topic_edge constructor.
+     *
+     * @param int $from
+     * @param int $to
+     * @param int $weight
+     * @param int $space
+     */
     public function __construct($from, $to, $weight, $space = 0) {
         $this->from = $from;
         $this->to = $to;
@@ -71,12 +97,16 @@ class mod_groupformation_topic_edge {
 
 /**
  * Template Class for distribution algorithms
+ *
+ * @package    mod_groupformation
+ * @copyright  2014 M Schulze, C Usener
+ * @copyright  based on code by Stefan Koegel copyright (C) 2013 Stefan Koegel
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class mod_groupformation_topic_distributor {
 
     /** @var $graph Flow-Graph built */
     protected $graph;
-
 
     /**
      * Compute the 'satisfaction' functions that is to be maximized by adding the
@@ -104,7 +134,11 @@ class mod_groupformation_topic_distributor {
 
     /**
      * Entry-point for the \ratingallocate object to call a topics_solver
-     * @param \ratingallocate $ratingallocate
+     *
+     * @param array $ratings
+     * @param array $topics
+     * @param number $participantscount
+     * @return array
      */
     public function distribute_users($ratings, $topics, $participantscount) {
 
@@ -122,9 +156,9 @@ class mod_groupformation_topic_distributor {
     /**
      * Extracts a distribution/allocation from the graph.
      *
-     * @param $touserid a map mapping from indexes in the graph to userids
-     * @param $tochoiceid a map mapping from indexes in the graph to choiceids
-     * @return an array of the form array(groupid => array(userid, ...), ...)
+     * @param array $touserid a map mapping from indexes in the graph to userids
+     * @param array $tochoiceid a map mapping from indexes in the graph to choiceids
+     * @return array an array of the form array(groupid => array(userid, ...), ...)
      */
     protected function extract_allocation($touserid, $tochoiceid) {
         $distribution = array();
@@ -143,8 +177,9 @@ class mod_groupformation_topic_distributor {
 
     /**
      * Setup conversions between ids of users and choices to their node-ids in the graph
-     * @param type $usercount
-     * @param type $ratings
+     *
+     * @param int $usercount
+     * @param array $ratings
      * @return array($fromuserid, $touserid, $fromchoiceid, $tochoiceid);
      */
     public static function setup_id_conversions($usercount, $ratings) {
@@ -181,14 +216,16 @@ class mod_groupformation_topic_distributor {
 
     /**
      * Sets up $this->graph
-     * @param type $choicecount
-     * @param type $usercount
-     * @param type $fromuserid
-     * @param type $fromchoiceid
-     * @param type $ratings
-     * @param type $choicedata
-     * @param type $source
-     * @param type $sink
+     *
+     * @param int $choicecount
+     * @param int $usercount
+     * @param int $fromuserid
+     * @param int $fromchoiceid
+     * @param array $ratings
+     * @param array $choicedata
+     * @param int $source
+     * @param int $sink
+     * @param int $weightmult
      */
     protected function setup_graph($choicecount, $usercount, $fromuserid, $fromchoiceid, $ratings, $choicedata,
                                    $source, $sink, $weightmult = 1) {
@@ -226,10 +263,11 @@ class mod_groupformation_topic_distributor {
     }
 
     /**
-     * Augments the flow in the network, i.e. augments the overall 'satisfaction'
-     * by distributing users to choices
+     * Augments the flow in the network, i.e. augments the overall 'satisfaction' by distributing users to choices
      * Reverses all edges along $path in $graph
-     * @param type $path path from t to s
+     *
+     * @param array $path path from t to s
+     * @throws moodle_exception
      */
     protected function augment_flow($path) {
         if (is_null($path) or count($path) < 2) {

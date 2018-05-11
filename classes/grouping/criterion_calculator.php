@@ -15,10 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Criterion calculator for grouping
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 if (!defined('MOODLE_INTERNAL')) {
@@ -33,6 +35,14 @@ require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 require_once($CFG->dirroot . '/group/lib.php');
 
+/**
+ * Class mod_groupformation_criterion_calculator
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_criterion_calculator {
 
     /** @var mod_groupformation_storage_manager The manager of activity data */
@@ -49,7 +59,9 @@ class mod_groupformation_criterion_calculator {
 
     /**
      * mod_groupformation_criterion_calculator constructor.
-     * @param $groupformationid
+     *
+     * @param int $groupformationid
+     * @throws dml_exception
      */
     public function __construct($groupformationid) {
         $this->groupformationid = $groupformationid;
@@ -65,6 +77,7 @@ class mod_groupformation_criterion_calculator {
      * @param string $category
      * @param number $answer
      * @return number
+     * @throws dml_exception
      */
     private function invert_answer($questionid, $category, $answer) {
         $max = $this->store->get_max_option_of_catalog_question($questionid, $category);
@@ -75,10 +88,11 @@ class mod_groupformation_criterion_calculator {
     /**
      * Filter criteria specs by erasing useless question ids if not significant enough
      *
-     * @param $criteriaspecs
-     * @param $users
-     * @param bool|false $eval
+     * @param array $criteriaspecs
+     * @param array $users
+     * @param bool $eval
      * @return array
+     * @throws dml_exception
      */
     public function filter_criteria_specs($criteriaspecs, $users, $eval = false) {
         $filteredspecs = array();
@@ -170,10 +184,11 @@ class mod_groupformation_criterion_calculator {
     /**
      * Filters criterion specs by eval
      *
-     * @param $criterion
-     * @param $criterionspecs
-     * @param null $users
+     * @param array $criterion
+     * @param array $criterionspecs
+     * @param array $users
      * @return array
+     * @throws dml_exception
      */
     public function filter_criterion_specs_for_eval($criterion, $criterionspecs, $users = null) {
         $array = array($criterion => $criterionspecs);
@@ -188,10 +203,11 @@ class mod_groupformation_criterion_calculator {
     /**
      * Computes values for given criterion
      *
-     * @param $criterion
-     * @param $userid
-     * @param null $specs
+     * @param array $criterion
+     * @param int $userid
+     * @param array $specs
      * @return array|null
+     * @throws dml_exception
      */
     public function get_values($criterion, $userid, $specs = null) {
 
@@ -246,6 +262,7 @@ class mod_groupformation_criterion_calculator {
      * @param int $userid
      * @param array $specs
      * @return array
+     * @throws dml_exception
      */
     public function get_big5($userid, $specs = null) {
         return $this->get_values('big5', $userid, $specs);
@@ -254,9 +271,10 @@ class mod_groupformation_criterion_calculator {
     /**
      * Returns fam criterion values
      *
-     * @param $userid
-     * @param $specs
+     * @param int $userid
+     * @param array $specs
      * @return array
+     * @throws dml_exception
      */
     public function get_fam($userid, $specs = null) {
         return $this->get_values('fam', $userid, $specs);
@@ -268,6 +286,7 @@ class mod_groupformation_criterion_calculator {
      * @param int $userid
      * @param array $specs
      * @return array
+     * @throws dml_exception
      */
     public function get_learning($userid, $specs = null) {
         return $this->get_values('learning', $userid, $specs);
@@ -327,9 +346,10 @@ class mod_groupformation_criterion_calculator {
     /**
      * Returns knowledge criterion values
      *
-     * @param $userid
+     * @param int $userid
      * @param null $specs
      * @return array
+     * @throws dml_exception
      */
     public function get_knowledge($userid, $specs = null) {
 
@@ -462,9 +482,10 @@ class mod_groupformation_criterion_calculator {
     /**
      * Returns team criterion values
      *
-     * @param $userid
-     * @param $specs
+     * @param int $userid
+     * @param array $specs
      * @return array
+     * @throws dml_exception
      */
     public function get_team($userid, $specs = null) {
         return $this->get_values('team', $userid, $specs);
@@ -485,7 +506,7 @@ class mod_groupformation_criterion_calculator {
     /**
      * Computes z score
      *
-     * @param $usersvalues
+     * @param array $usersvalues
      * @return mixed
      */
     public function compute_z_score($usersvalues) {
@@ -569,7 +590,7 @@ class mod_groupformation_criterion_calculator {
     /**
      * Lookup z-score
      *
-     * @param $z
+     * @param number $z
      * @return float|mixed
      */
     private function lookup_z($z) {
@@ -589,10 +610,12 @@ class mod_groupformation_criterion_calculator {
     /**
      * Returns eval data for user
      *
-     * @param $userid
-     * @param $groupusers
-     * @param $courseusers
+     * @param int $userid
+     * @param array $groupusers
+     * @param array $courseusers
      * @return array
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public function get_eval($userid, $groupusers = array(), $courseusers = array()) {
         $completedusers = array_keys($this->usermanager->get_completed_by_answer_count('userid', 'userid'));
@@ -655,12 +678,14 @@ class mod_groupformation_criterion_calculator {
     /**
      * Returns eval values for user, group and course
      *
-     * @param $criterion
-     * @param $labels
-     * @param $userid
-     * @param $groupusers
-     * @param $courseusers
+     * @param array $criterion
+     * @param array $labels
+     * @param int $userid
+     * @param array $groupusers
+     * @param array $courseusers
      * @return array
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public function get_eval_infos($criterion, $labels, $userid, $groupusers = array(), $courseusers = array()) {
         $completedusers = array_keys($this->usermanager->get_completed_by_answer_count('userid', 'userid'));
@@ -717,11 +742,12 @@ class mod_groupformation_criterion_calculator {
     /**
      * Returns evaluation text
      *
-     * @param $criterion
-     * @param $label
-     * @param $cutoffs
-     * @param $uservalue
+     * @param string $criterion
+     * @param string $label
+     * @param array $cutoffs
+     * @param array $uservalue
      * @return string
+     * @throws coding_exception
      */
     private function get_eval_text($criterion, $label, $cutoffs, $uservalue) {
         if (is_null($cutoffs)) {
@@ -743,10 +769,11 @@ class mod_groupformation_criterion_calculator {
     /**
      * Returns captions for evaluation data
      *
-     * @param $mode
-     * @param $setfinaltext
-     * @param $completed
-     * @param $coursesize
+     * @param string $label
+     * @param number $mode
+     * @param bool $setfinaltext
+     * @param bool $completed
+     * @param number $coursesize
      * @return array
      * @throws coding_exception
      */
@@ -787,9 +814,10 @@ class mod_groupformation_criterion_calculator {
     /**
      * Reads values from DB
      *
-     * @param $criterion
-     * @param $userid
+     * @param string $criterion
+     * @param int $userid
      * @return array
+     * @throws dml_exception
      */
     public function read_values_for_user($criterion, $userid) {
         global $DB;
@@ -818,10 +846,10 @@ class mod_groupformation_criterion_calculator {
     /**
      * Returns values for users
      *
-     * @param $criterion
-     * @param $userid
-     * @param null $specs
+     * @param string $criterion
+     * @param array $users
      * @return mixed
+     * @throws dml_exception
      */
     public function get_values_for_users($criterion, $users) {
         $usersvalues = array();
@@ -836,8 +864,8 @@ class mod_groupformation_criterion_calculator {
     /**
      * Returns average values for the users
      *
-     * @param $groupusers
-     * @param $usersvalues
+     * @param array $groupusers
+     * @param array $usersvalues
      * @return null
      */
     public function get_avg_values_for_users($groupusers, $usersvalues) {

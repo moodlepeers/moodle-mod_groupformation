@@ -17,24 +17,45 @@
 /**
  * This class contains data for topics to build groups for.
  *
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/lgpl.html GNU LGPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
 }
 
+/**
+ * Class mod_groupformation_choicedata
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_choicedata {
 
+    /** @var int */
     private $id;
+
+    /** @var number */
     private $maxsize;
 
+    /**
+     * mod_groupformation_choicedata constructor.
+     *
+     * @param int $id
+     * @param number $size
+     */
     public function __construct($id, $size) {
         $this->id = $id;
         $this->maxsize = $size;
     }
 
     /**
+     * Returns max size
+     *
      * @return mixed
      */
     public function get_max_size() {
@@ -42,6 +63,8 @@ class mod_groupformation_choicedata {
     }
 
     /**
+     * Returns ID
+     *
      * @return mixed
      */
     public function get_id() {

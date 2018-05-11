@@ -17,8 +17,10 @@
 /**
  * This class contains an implementation of an ListItem as an Participant
  *
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/lgpl.html GNU LGPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
@@ -26,6 +28,14 @@ if (!defined('MOODLE_INTERNAL')) {
 
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion.php");
 
+/**
+ * Class mod_groupformation_participant
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_participant {
 
     /** @var int This is the static ID count which assigns ids if they are not given */
@@ -42,8 +52,8 @@ class mod_groupformation_participant {
 
     /**
      * mod_groupformation_participant constructor.
-     * @param $criteria  array of criteria (will be copied/iterated)
-     * @param $id to be set as id of participant (otherwise generated automatically), but pay attention not to
+     * @param array $criteria  array of criteria (will be copied/iterated)
+     * @param int $id to be set as id of participant (otherwise generated automatically), but pay attention not to
      * mix given and non-given IDs!
      */
     public function __construct($criteria = array(), $id = null) {

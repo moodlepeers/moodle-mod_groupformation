@@ -17,9 +17,10 @@
 /**
  * This is a csv writer for exporting DB data
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
@@ -30,6 +31,14 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
 
+/**
+ * Class mod_groupformation_csv_writer
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_csv_writer {
 
     /** @var int This is the id of the activity */
@@ -53,7 +62,7 @@ class mod_groupformation_csv_writer {
     /**
      * mod_groupformation_csv_writer constructor.
      *
-     * @param $groupformationid
+     * @param int $groupformationid
      */
     public function __construct($groupformationid) {
         $this->groupformationid = $groupformationid;
@@ -67,8 +76,10 @@ class mod_groupformation_csv_writer {
     /**
      * Returns data by type
      *
-     * @param $type
+     * @param string $type
      * @return string
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public function get_data($type) {
         switch ($type) {
@@ -88,7 +99,7 @@ class mod_groupformation_csv_writer {
     /**
      * Returns a csv-formatted string of a record
      *
-     * @param $record
+     * @param stdClass $record
      * @param bool|false $title
      * @return string
      */
@@ -106,7 +117,7 @@ class mod_groupformation_csv_writer {
     /**
      * Returns a csv-formatted string of all records
      *
-     * @param $records
+     * @param stdClass $records
      * @return string
      */
     public function records_to_csv($records) {
@@ -138,6 +149,7 @@ class mod_groupformation_csv_writer {
      * Returns csv-formatted answers with anonymous user ids
      *
      * @return string
+     * @throws dml_exception
      */
     public function get_answers() {
 
@@ -152,6 +164,7 @@ class mod_groupformation_csv_writer {
      * Returns csv-formatted groups with anonymous user ids
      *
      * @return string
+     * @throws dml_exception
      */
     public function get_groups() {
         $groups = $this->groupsmanager->get_generated_groups(null,
@@ -166,6 +179,7 @@ class mod_groupformation_csv_writer {
      * Returns csv-formatted group-users with anonymous user ids
      *
      * @return string
+     * @throws dml_exception
      */
     public function get_group_users() {
         $groups = $this->groupsmanager->get_group_users(null, 'id,groupformation,userid,groupid');
@@ -179,6 +193,7 @@ class mod_groupformation_csv_writer {
      * Returns csv-formatted answers with anonymous user ids
      *
      * @return string
+     * @throws dml_exception
      */
     public function get_logging_data() {
         $groups = $this->store->get_logging_data('timestamp');
@@ -188,6 +203,12 @@ class mod_groupformation_csv_writer {
         return $csv;
     }
 
+    /**
+     * Returns userids
+     *
+     * @return array
+     * @throws dml_exception
+     */
     public function get_userids() {
 
         $users = $this->usermanager->get_users_started('userid', 'userid');
@@ -255,6 +276,13 @@ class mod_groupformation_csv_writer {
         return $userscurrent;
     }
 
+    /**
+     * Returns users
+     *
+     * @return string
+     * @throws coding_exception
+     * @throws dml_exception
+     */
     public function get_users() {
         global $DB;
 

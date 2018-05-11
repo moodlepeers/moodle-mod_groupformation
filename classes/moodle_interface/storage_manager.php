@@ -17,9 +17,10 @@
 /**
  * Adapter class between DB and Plugin
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.');
@@ -30,6 +31,14 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/advan
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 require_once($CFG->dirroot . '/group/lib.php');
 
+/**
+ * Class mod_groupformation_storage_manager
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_storage_manager {
 
     /** @var int ID of module instance */
@@ -47,7 +56,7 @@ class mod_groupformation_storage_manager {
     /**
      * Returns intro box if intro is set
      *
-     * @param $id
+     * @param int $id
      * @return string
      * @throws coding_exception
      */
@@ -66,6 +75,8 @@ class mod_groupformation_storage_manager {
     }
 
     /**
+     * Returns version of groupformation instance
+     *
      * @return mixed
      * @throws dml_exception
      */
@@ -105,7 +116,7 @@ class mod_groupformation_storage_manager {
     /**
      * Returns whether the activity is accessible
      *
-     * @param $userid
+     * @param int $userid
      * @return bool
      */
     public function is_accessible($userid) {
@@ -278,7 +289,7 @@ class mod_groupformation_storage_manager {
     /**
      * Returns an array with number of questions in each category
      *
-     * @param $categories
+     * @param array $categories
      * @return array
      * @throws dml_exception
      */
@@ -295,7 +306,7 @@ class mod_groupformation_storage_manager {
     /**
      * Returns possible language
      *
-     * @param unknown $category
+     * @param string $category
      * @return mixed
      * @throws dml_exception
      */
@@ -390,7 +401,7 @@ class mod_groupformation_storage_manager {
     /**
      * Returns version of requested category stored in DB
      *
-     * @param $category
+     * @param string $category
      * @return mixed
      * @throws dml_exception
      */
@@ -889,7 +900,7 @@ class mod_groupformation_storage_manager {
     /**
      * Determines group size
      *
-     * @param $users
+     * @param array $users
      * @param null $groupformationid
      * @return array|null
      * @throws dml_exception
@@ -1048,7 +1059,7 @@ class mod_groupformation_storage_manager {
     /**
      * Returns questions
      *
-     * @param $category
+     * @param string $category
      * @return array
      * @throws coding_exception
      * @throws dml_exception
@@ -1084,8 +1095,8 @@ class mod_groupformation_storage_manager {
     /**
      * Returns questions for a user in randomized order (with user-specific seed)
      *
-     * @param $category
-     * @param $userid
+     * @param string $category
+     * @param int $userid
      * @return array
      * @throws coding_exception
      * @throws dml_exception
@@ -1120,6 +1131,11 @@ class mod_groupformation_storage_manager {
 
     /**
      * Returns question by position
+     *
+     * @param string $category
+     * @param number $position
+     * @return mixed
+     * @throws dml_exception
      */
     public function get_question_by_position($category, $position) {
         global $DB;
@@ -1132,8 +1148,8 @@ class mod_groupformation_storage_manager {
     /**
      * Saves statistics of groupformation cohort
      *
-     * @param $groupkey
-     * @param $cohort
+     * @param string $groupkey
+     * @param stdClass $cohort
      * @throws dml_exception
      */
     public function save_statistics($groupkey, $cohort) {
@@ -1267,7 +1283,7 @@ class mod_groupformation_storage_manager {
     /**
      * Returns whether a students will be filtered due to dishonesty
      *
-     * @param $userid
+     * @param int $userid
      * @return bool
      * @throws dml_exception
      */
@@ -1297,7 +1313,9 @@ class mod_groupformation_storage_manager {
     }
 
     /**
-     * @param $value
+     * Filters users based on value
+     *
+     * @param number $value
      * @throws dml_exception
      */
     public function filter_users($value) {
@@ -1322,7 +1340,7 @@ class mod_groupformation_storage_manager {
     /**
      * Returns DB entry for groupformation instance
      *
-     * @param $groupformationid
+     * @param int $groupformationid
      * @return mixed
      * @throws dml_exception
      */
@@ -1335,7 +1353,7 @@ class mod_groupformation_storage_manager {
     /**
      * Returns all DB entries for groupformation instances in which a user is involved
      *
-     * @param $userid
+     * @param int $userid
      * @return array
      * @throws dml_exception
      */

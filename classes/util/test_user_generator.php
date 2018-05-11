@@ -17,9 +17,10 @@
 /**
  * Test user generator
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
@@ -39,6 +40,14 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/number_q
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/question_table.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/controller/grouping_controller.php');
 
+/**
+ * Class mod_groupformation_test_user_generator
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_test_user_generator {
 
     /** @var cm_info */
@@ -65,11 +74,14 @@ class mod_groupformation_test_user_generator {
     }
 
     /**
-     * @param $n
-     * @param $groupformationid
+     * Creates n test users
+     *
+     * @param int $n
+     * @param int $groupformationid
      * @param bool|false $setanswers
      * @param bool|false $randomized
      * @return bool
+     * @throws dml_exception
      */
     public function create_test_users($n, $groupformationid, $setanswers = false, $randomized = false) {
         global $COURSE, $DB;
@@ -185,8 +197,11 @@ class mod_groupformation_test_user_generator {
     }
 
     /**
-     * @param $groupformationid
+     * Deletes test users
+     *
+     * @param int $groupformationid
      * @return bool
+     * @throws dml_exception
      */
     public function delete_test_users($groupformationid) {
         global $DB;

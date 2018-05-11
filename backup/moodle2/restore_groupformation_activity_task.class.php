@@ -17,10 +17,11 @@
 /**
  * Provides the restore activity task class
  *
- * @package mod_groupformation
- * @category backup
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @category    backup
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
 require_once($CFG->dirroot . '/mod/groupformation/backup/moodle2/restore_groupformation_stepslib.php');
@@ -30,10 +31,11 @@ require_once($CFG->dirroot . '/mod/groupformation/backup/moodle2/restore_groupfo
  *
  * Provides all the settings and steps to perform complete restore of the activity.
  *
- * @package mod_groupformation
- * @category backup
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @category    backup
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class restore_groupformation_activity_task extends restore_activity_task {
 

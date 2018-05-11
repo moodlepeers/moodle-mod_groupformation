@@ -15,10 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Participant parser for grouping
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.');
@@ -30,6 +32,14 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/criterion_calculator.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 
+/**
+ * Class mod_groupformation_participant_parser
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_participant_parser {
 
     /** @var int ID of module instance */
@@ -46,7 +56,9 @@ class mod_groupformation_participant_parser {
 
     /**
      * mod_groupformation_participant_parser constructor.
-     * @param $groupformationid
+     *
+     * @param int $groupformationid
+     * @throws dml_exception
      */
     public function __construct($groupformationid) {
         $this->groupformationid = $groupformationid;
@@ -58,9 +70,9 @@ class mod_groupformation_participant_parser {
     /**
      * Parses infos to Participants
      *
-     * @param $users
-     * @param $labels
-     * @param $weights
+     * @param array $users
+     * @param array $labels
+     * @param array $weights
      *
      * @return array
      */
@@ -106,7 +118,7 @@ class mod_groupformation_participant_parser {
     /**
      * Builds all participants wrt topic choices
      *
-     * @param $users
+     * @param array $users
      * @return array
      */
     public function build_topic_participants($users) {
@@ -140,9 +152,11 @@ class mod_groupformation_participant_parser {
     /**
      * Builds Participants array using a parser (at the end)
      *
-     * @param $users
-     * @param $specs
+     * @param array $users
+     * @param array $specs
+     * @param null $weights
      * @return array
+     * @throws dml_exception
      */
     public function build_participants($users, $specs = null, $weights = null) {
         if (count($users) == 0) {
@@ -209,7 +223,7 @@ class mod_groupformation_participant_parser {
     /**
      * Generates participants without criterions
      *
-     * @param $users
+     * @param array $users
      * @return array
      */
     public function build_empty_participants($users) {

@@ -15,10 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Controller for view
  *
- * @package mod_groupformation
- * @@author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 if (!defined('MOODLE_INTERNAL')) {
@@ -33,6 +35,14 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/group_generator.php');
 
+/**
+ * Class mod_groupformation_overview_controller
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_overview_controller {
 
     /** @var int ID of course module*/
@@ -53,17 +63,29 @@ class mod_groupformation_overview_controller {
     /** @var mod_groupformation_user_manager The manager of user data */
     private $usermanager;
 
+    /** @var int Current view state */
     private $viewstate;
+
+    /** @var array State info array */
     private $groupformationstateinfo = array();
+
+    /** @var array Button array */
     private $buttonsarray = array();
+
+    /** @var string Button info text */
     private $buttonsinfo;
+
+    /** @var string text for students or teachers */
     private $groupformationinfo;
 
     /**
      * mod_groupformation_student_overview_controller constructor.
-     * @param $cmid
-     * @param $groupformationid
-     * @param $userid
+     *
+     * @param int $cmid
+     * @param int $groupformationid
+     * @param int $userid
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public function __construct($cmid, $groupformationid, $userid) {
         $this->cmid = $cmid;
@@ -78,6 +100,9 @@ class mod_groupformation_overview_controller {
 
     /**
      * set all variable to the current state
+     *
+     * @throws coding_exception
+     * @throws dml_exception
      */
     private function determine_view() {
         global $PAGE;

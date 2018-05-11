@@ -17,8 +17,10 @@
 /**
  * This class contains a static array of criteria weights.
  *
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/lgpl.html GNU LGPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
@@ -26,6 +28,14 @@ if (!defined('MOODLE_INTERNAL')) {
 
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/util/hash_map.php");
 
+/**
+ * Class mod_groupformation_criterion_weight
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_criterion_weight {
 
     /** @var mod_groupformation_hash_map This hash map contains all criterion weights */
@@ -44,8 +54,8 @@ class mod_groupformation_criterion_weight {
     /**
      * Adds criterion weight to static collection of all weights.
      *
-     * @param $k String
-     * @param $v float
+     * @param string $k
+     * @param number $v
      * @throws Exception if key already exists
      * @return true
      */
@@ -81,7 +91,9 @@ class mod_groupformation_criterion_weight {
     // TODO wieso muss Summer der Values 1 ergeben? warum diese überprüfung? (JK: Normalisierung prüfen).
 
     /**
-     * @param String $criterionname
+     * Returns weight
+     *
+     * @param string $criterionname
      * @return float
      * @throws Exception if $criterionName does not exist
      */
@@ -96,7 +108,7 @@ class mod_groupformation_criterion_weight {
     /**
      * Adds a key, value pair if not already there. allows repetitive calls as long as key AND value are same.
      *
-     * @param String $name
+     * @param string $name
      * @param float $weight
      * @throws Exception if key exists already with different value
      * @return true

@@ -15,12 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Question controller
+ * Controller for questionnaire view
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
@@ -42,6 +42,14 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 
+/**
+ * Class mod_groupformation_questionnaire_controller
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_questionnaire_controller {
 
     /** @var int The id of the groupformation activity */
@@ -74,12 +82,11 @@ class mod_groupformation_questionnaire_controller {
     /**
      * mod_groupformation_questionnaire_controller constructor.
      *
-     * @param $groupformationid
-     * @param $userid
-     * @param $oldcategory
-     * @param $cmid
+     * @param int $groupformationid
+     * @param int $userid
+     * @param string $oldcategory
+     * @param int $cmid
      * @throws dml_exception
-     * @internal param $lang
      */
     public function __construct($groupformationid, $userid, $oldcategory, $cmid) {
         $this->groupformationid = $groupformationid;
@@ -472,7 +479,7 @@ class mod_groupformation_questionnaire_controller {
     /**
      * Returns progress bar
      *
-     * @param $percent
+     * @param float $percent
      * @return string
      */
     public function get_progressbar($percent) {
@@ -504,8 +511,9 @@ class mod_groupformation_questionnaire_controller {
     /**
      * Saves answers for user
      *
-     * @param $category
+     * @param string $category
      * @return bool
+     * @throws coding_exception
      * @throws dml_exception
      */
     public function save_answers($category) {
@@ -538,9 +546,9 @@ class mod_groupformation_questionnaire_controller {
     /**
      * Handles answers
      *
-     * @param $userid
-     * @param $category
-     * @param $question
+     * @param int $userid
+     * @param string $category
+     * @param stdClass $question
      */
     public function handle_answer($userid, $category, $question) {
 

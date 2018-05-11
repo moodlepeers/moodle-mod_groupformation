@@ -17,18 +17,38 @@
 /**
  * This class contains ratings which where made by participants to each topic
  *
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/lgpl.html GNU LGPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
 }
 
+/**
+ * Class mod_groupformation_rating_for_topic
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_rating_for_topic {
+    /** @var int */
     private $userid;
+    /** @var int */
     private $choiceid;
+    /** @var int */
     private $rating;
 
+    /**
+     * mod_groupformation_rating_for_topic constructor.
+     *
+     * @param int $choiceid
+     * @param int $userid
+     * @param int $rating
+     */
     public function __construct($choiceid, $userid, $rating) {
         $this->choiceid = $choiceid;
         $this->userid = $userid;
@@ -36,6 +56,8 @@ class mod_groupformation_rating_for_topic {
     }
 
     /**
+     * Returns user ID
+     *
      * @return mixed
      */
     public function get_userid() {
@@ -43,6 +65,8 @@ class mod_groupformation_rating_for_topic {
     }
 
     /**
+     * Returns Choice ID
+     *
      * @return mixed
      */
     public function get_choiceid() {
@@ -50,6 +74,8 @@ class mod_groupformation_rating_for_topic {
     }
 
     /**
+     * Returns Rating
+     *
      * @return mixed
      */
     public function get_rating() {

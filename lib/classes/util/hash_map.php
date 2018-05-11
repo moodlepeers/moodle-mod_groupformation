@@ -17,23 +17,34 @@
 /**
  * This class contains an implementation of a HashMap
  *
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/lgpl.html GNU LGPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
 }
 
+/**
+ * Class mod_groupformation_hash_map
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_hash_map {
 
+    /** @var array Hashmap */
     private $hashmap = array();
 
     /**
      * Adding Pairs of key and value elements and returns $k
      *
-     * @param $k Key
-     * @param $v Value
-     * @return $k Key
+     * @param number $k Key
+     * @param number $v Value
+     * @return number
      */
     public function add($k, $v) {
         $this->hashmap[$k] = $v;
@@ -43,8 +54,8 @@ class mod_groupformation_hash_map {
     /**
      * Changing value $v of existing, given $k
      *
-     * @param $k Key
-     * @param $v Value
+     * @param number $k Key
+     * @param number $v Value
      * @return boolean: true if change successful, false if $key does not exist
      */
     public function set($k, $v) {
@@ -59,8 +70,8 @@ class mod_groupformation_hash_map {
     /**
      * Returns value for key $k
      *
-     * @param $k key
-     * @return Value
+     * @param number $k key
+     * @return mixed
      * @throws Exception if key does not exist
      */
     public function get_value($k) {
@@ -74,7 +85,7 @@ class mod_groupformation_hash_map {
     /**
      * Remove given key $k and value $v from assoc. array
      *
-     * @param $k Key
+     * @param number $k Key
      * @return boolean: true if removing successful, false if $key does not exist
      */
     public function remove($k) {
@@ -89,7 +100,7 @@ class mod_groupformation_hash_map {
     /**
      * Checks if key exists in hashMap
      *
-     * @param $k
+     * @param number $k
      * @return bool
      */
     public function contains_key($k) {

@@ -17,17 +17,29 @@
 /**
  * Defines the view event.
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace mod_groupformation\event;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Class course_module_viewed
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class course_module_viewed extends \core\event\course_module_viewed {
 
+    /**
+     * Initializing function
+     */
     protected function init() {
         $this->data['objecttable'] = 'groupformation';
         parent::init();

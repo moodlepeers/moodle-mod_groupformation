@@ -20,9 +20,10 @@
  * All the newmodule specific functions, needed to implement the module
  * logic, should go here. Never include this file from your lib.php!
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die ();
 
@@ -60,12 +61,12 @@ function groupformation_add_js_amd($PAGE, $filename) {
  * Calls a JavaScript AMD module
  * @link https://docs.moodle.org/dev/Javascript_Modules
  *
- * @param unknown $PAGE
- * @param string moudlname AMD conform modulname. prefix it with groupformation if it is internal (e.g. groupformation/mymodule)
- * @param method  method to call as initialize in return object of AMD
- * @param params optional params to send to this initialize js method
+ * @param stdClass $PAGE
+ * @param string $modulname AMD conform modulname. prefix it with groupformation if it is internal (e.g. groupformation/mymodule)
+ * @param unknown $method method to call as initialize in return object of AMD
+ * @param array $params optional params to send to this initialize js method
  */
-function groupformation_call_js_amd($PAGE, $modulname, $method, $params=null) {
+function groupformation_call_js_amd($PAGE, $modulname, $method, $params = null) {
     $PAGE->requires->js_call_amd($modulname, $method, $params);
 }
 
@@ -101,7 +102,7 @@ function groupformation_get_context($groupformationid) {
 /**
  * Sets activity completion
  *
- * @param $id
+ * @param int $id
  * @param int $userid
  * @throws moodle_exception
  */
@@ -112,11 +113,11 @@ function groupformation_set_activity_completion($id, $userid) {
 }
 
 /**
- * send confirmation for finishing group formation
+ * Send confirmation for finishing group formation
  *
  * @param stdClass $recipient
  * @param string $subject
- * @param $messagetext
+ * @param string $messagetext
  * @param null $contexturl
  * @param null $contexturlname
  * @throws coding_exception
@@ -304,7 +305,7 @@ function groupformation_add_catalog_version($category, $numbers, $version, $init
  * Deletes all questions in a specific category
  *
  * @param string $category
- * @param $language
+ * @param string $language
  * @throws dml_exception
  */
 function groupformation_delete_all_catalog_questions($category, $language) {
@@ -375,6 +376,7 @@ function groupformation_convert_options($options) {
 /**
  * Returns z values as a lookup table.
  *
+ * @param number $z
  * @return array
  */
 function groupformation_z_lookup_table($z) {
@@ -992,8 +994,10 @@ function groupformation_z_lookup_table($z) {
 }
 
 /**
- * @param $fileinfo
- * @param $content
+ * Returns url
+ *
+ * @param array $fileinfo
+ * @param string $content
  * @return string
  * @throws file_exception
  * @throws stored_file_creation_exception

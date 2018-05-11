@@ -16,14 +16,23 @@
 /**
  * Class mod_groupformation_basic_controller
  *
- * @package mod_groupformation
- * @author Rene Roepke
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/basic_view_controller.php');
 
+/**
+ * Class mod_groupformation_questionnaire_view_controller
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_questionnaire_view_controller extends mod_groupformation_basic_view_controller {
 
     /** @var array Template names */
@@ -38,8 +47,8 @@ class mod_groupformation_questionnaire_view_controller extends mod_groupformatio
     /**
      * mod_groupformation_import_export_view_controller constructor.
      *
-     * @param $groupformationid
-     * @param $controller
+     * @param int $groupformationid
+     * @param mod_groupformation_questionnaire_controller $controller
      * @throws coding_exception
      */
     public function __construct($groupformationid, $controller) {
@@ -47,7 +56,11 @@ class mod_groupformation_questionnaire_view_controller extends mod_groupformatio
         $this->title = null;
     }
 
-
+    /**
+     * Renders page
+     *
+     * @return string
+     */
     public function render_questionnaire_page() {
         $questionnairepage = new mod_groupformation_template_builder();
         $questionnairepage->set_template('questionnaire_page');

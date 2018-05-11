@@ -15,11 +15,15 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * GroupAL evaluator
+ *
  * This class contains an implementation of an evaluator interface which handles
  * the evaluation of groups
  *
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/lgpl.html GNU LGPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
@@ -30,17 +34,29 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/ievalua
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/group.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion.php");
 
+/**
+ * Class mod_groupformation_evaluator
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
 
+    /** @var mod_groupformation_manhattan_distance Object which implements IDistance*/
+    private $distancefunction;
 
-    private $distancefunction; // Object which implements IDistance.
-
+    /**
+     * mod_groupformation_evaluator constructor.
+     */
     public function __construct() {
         $this->distancefunction = new mod_groupformation_manhattan_distance();
     }
 
-
     /**
+     * Evaluates GPI
+     *
      * homogeneous criteria->subtract values-> the smaller the better
      * heterogeneous criteria->subtract values->the bigger the better
      * the difference: heterogeneous value - homogeneous is the return value the biger the better
@@ -55,8 +71,8 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
      *
      * @param mod_groupformation_group $group
      * @return float|int
+     * @throws Exception
      */
-
     public function evaluate_gpi(mod_groupformation_group $group) {
         // All Normalized paar performance indices of a Group
         $npis = array(); // Generic List: float.
@@ -88,6 +104,8 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
 
 
     /**
+     * Evaluate CPI
+     *
      * @param mod_groupformation_cohort $cohort
      * @return double
      */
@@ -107,7 +125,9 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
     }
 
     /**
-     * @param float[] $performanceindices (generic List)
+     * Returns performance index
+     *
+     * @param array $performanceindices (generic List)
      * @return mod_groupformation_stats
      */
     public static function get_performance_index($performanceindices) {
@@ -149,6 +169,8 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
 
 
     /**
+     *  Calculates normalized pair performance
+     *
      *  homogeneous criteria->subtract values-> the smaller the better
      *  heterogeneous criteria->subtract values->the biger the better
      *  the difference: heterogeneous value - homogeneous is the return value the biger the better
@@ -166,7 +188,6 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
      * @return float
      * @throws Exception
      */
-
     public function calc_normalized_pair_performance(mod_groupformation_participant $p1, mod_groupformation_participant $p2) {
         // The summed distances of all hommogeneous values.
         $homval = 0.0; // float

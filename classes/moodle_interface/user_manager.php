@@ -17,14 +17,23 @@
 /**
  * Interface for user-related activity data in DB
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.');
 }
 
+/**
+ * Class mod_groupformation_user_manager
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_user_manager {
 
     /** @var int ID of module instance */
@@ -110,7 +119,7 @@ class mod_groupformation_user_manager {
 
     /**
      * Returns record of groupformation_started instance
-     * @param $userid
+     * @param int $userid
      * @return mixed
      * @throws dml_exception
      */
@@ -195,7 +204,7 @@ class mod_groupformation_user_manager {
     /**
      * set status to complete
      *
-     * @param $userid
+     * @param int $userid
      * @param bool|false $completed
      * @throws dml_exception
      */
@@ -225,7 +234,7 @@ class mod_groupformation_user_manager {
     /**
      * Changes status of questionnaire for a specific user
      *
-     * @param $userid
+     * @param int $userid
      * @param bool|false $complete
      * @throws dml_exception
      */
@@ -250,7 +259,7 @@ class mod_groupformation_user_manager {
      * 1 completed
      * -1 otherwise
      *
-     * @param $userid
+     * @param int $userid
      * @return int|mixed
      * @throws dml_exception
      */
@@ -295,6 +304,7 @@ class mod_groupformation_user_manager {
      * @param int $userid
      * @param string $category
      * @return number
+     * @throws dml_exception
      */
     public function get_number_of_answers($userid, $category = null) {
         global $DB;
@@ -318,6 +328,7 @@ class mod_groupformation_user_manager {
      *
      * @param int $userid
      * @return boolean
+     * @throws dml_exception
      */
     public function has_answered_everything($userid) {
         $store = new mod_groupformation_storage_manager ($this->groupformationid);
@@ -336,6 +347,7 @@ class mod_groupformation_user_manager {
      * @param null $userid
      * @param null $categories
      * @return bool
+     * @throws dml_exception
      */
     public function already_answered($userid = null, $categories = null) {
         global $DB;
@@ -365,11 +377,12 @@ class mod_groupformation_user_manager {
     /**
      * Returns all answers of a specific user in a specific category
      *
-     * @param $userid
-     * @param $category
+     * @param int $userid
+     * @param string $category
      * @param null $sortedby
      * @param string $fieldset
      * @return array
+     * @throws dml_exception
      */
     public function get_answers($userid, $category, $sortedby = null, $fieldset = '*') {
         global $DB;
@@ -409,6 +422,7 @@ class mod_groupformation_user_manager {
      * @param string $category
      * @param int $questionid
      * @return int
+     * @throws dml_exception
      */
     public function get_single_answer($userid, $category, $questionid) {
         global $DB;
@@ -424,9 +438,10 @@ class mod_groupformation_user_manager {
     /**
      * Delete answer
      *
-     * @param $userid
-     * @param $category
-     * @param $questionid
+     * @param int $userid
+     * @param string $category
+     * @param int $questionid
+     * @throws dml_exception
      */
     public function delete_answer($userid, $category, $questionid) {
         global $DB;
@@ -444,10 +459,11 @@ class mod_groupformation_user_manager {
     /**
      * Saves answer
      *
-     * @param $userid
-     * @param $category
-     * @param $answer
-     * @param $questionid
+     * @param int $userid
+     * @param string $category
+     * @param number $answer
+     * @param int $questionid
+     * @throws dml_exception
      */
     public function save_answer($userid, $category, $answer, $questionid) {
         global $DB;
@@ -488,6 +504,7 @@ class mod_groupformation_user_manager {
      * @param string $category
      * @param int $questionid
      * @return boolean
+     * @throws dml_exception
      */
     public function has_answer($userid, $category, $questionid) {
         global $DB;
@@ -503,9 +520,10 @@ class mod_groupformation_user_manager {
     /**
      * Returns whether a user has answers in a specific category or not
      *
-     * @param $userid
-     * @param $category
+     * @param int $userid
+     * @param string $category
      * @return bool
+     * @throws dml_exception
      */
     public function has_answers($userid, $category) {
         $firstcondition = ($this->get_answering_status($userid) > -1);
@@ -517,8 +535,9 @@ class mod_groupformation_user_manager {
     /**
      * Returns the most chosen topics wrt the users
      *
-     * @param $numberoftopics
+     * @param number $numberoftopics
      * @return array
+     * @throws dml_exception
      */
     public function get_most_common_topics($numberoftopics) {
         global $DB;
@@ -544,8 +563,9 @@ class mod_groupformation_user_manager {
     /**
      * Returns consent value for user
      *
-     * @param $userid
+     * @param int $userid
      * @return bool
+     * @throws dml_exception
      */
     public function get_consent($userid) {
         global $DB;
@@ -562,8 +582,9 @@ class mod_groupformation_user_manager {
     /**
      * Sets consent by value
      *
-     * @param $userid
-     * @param $value
+     * @param int $userid
+     * @param bool $value
+     * @throws dml_exception
      */
     public function set_consent($userid, $value) {
         global $DB;
@@ -577,7 +598,8 @@ class mod_groupformation_user_manager {
     /**
      * Deletes all answers
      *
-     * @param $userid
+     * @param int $userid
+     * @throws dml_exception
      */
     public function delete_answers($userid) {
         global $DB;
@@ -590,7 +612,7 @@ class mod_groupformation_user_manager {
     /**
      * Returns whether participant code is correctly computed or not
      *
-     * @param $participantcode
+     * @param string $participantcode
      * @return bool
      */
     public function validate_participant_code($participantcode) {
@@ -615,8 +637,9 @@ class mod_groupformation_user_manager {
     /**
      * Returns whether the user has a valid participant code or not
      *
-     * @param $userid
+     * @param int $userid
      * @return bool
+     * @throws dml_exception
      */
     public function has_participant_code($userid) {
         global $DB;
@@ -637,8 +660,8 @@ class mod_groupformation_user_manager {
     /**
      * Registers participant code for user
      *
-     * @param $userid
-     * @param $participantcode
+     * @param int $userid
+     * @param string $participantcode
      * @throws dml_exception
      */
     public function register_participant_code($userid, $participantcode) {
@@ -653,7 +676,7 @@ class mod_groupformation_user_manager {
     /**
      * Returns participant code
      *
-     * @param $userid
+     * @param int $userid
      * @return mixed|string
      * @throws dml_exception
      */
@@ -676,7 +699,7 @@ class mod_groupformation_user_manager {
     /**
      * Sets all values for a user.
      *
-     * @param $userid
+     * @param int $userid
      * @throws coding_exception
      * @throws dml_exception
      */
@@ -724,7 +747,7 @@ class mod_groupformation_user_manager {
     /**
      * Returns whether the count of user_values is larger than zero to express that a user has evaluation values already
      *
-     * @param $userid
+     * @param int $userid
      * @return bool
      * @throws dml_exception
      */
@@ -738,7 +761,7 @@ class mod_groupformation_user_manager {
     /**
      * Returns (linearized) eval score for user
      *
-     * @param $userid
+     * @param int $userid
      * @param null $specs
      * @return float
      * @throws coding_exception
@@ -772,8 +795,8 @@ class mod_groupformation_user_manager {
     /**
      * Sets completed status for user
      *
-     * @param $userid
-     * @param $value
+     * @param int $userid
+     * @param number $value
      * @throws dml_exception
      */
     public function set_complete($userid, $value) {
@@ -821,7 +844,7 @@ class mod_groupformation_user_manager {
     /**
      * Returns all user values
      *
-     * @param $userid
+     * @param int $userid
      * @return array
      * @throws dml_exception
      */

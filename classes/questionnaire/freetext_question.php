@@ -16,9 +16,10 @@
 /**
  * Prints a particular instance of groupformation questionnaire
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
@@ -26,6 +27,14 @@ if (!defined('MOODLE_INTERNAL')) {
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/input_question.php');
 
+/**
+ * Class mod_groupformation_freetext_question
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_freetext_question extends mod_groupformation_input_question {
 
     /**
@@ -81,7 +90,7 @@ class mod_groupformation_freetext_question extends mod_groupformation_input_ques
     /**
      * Converts options if string
      *
-     * @param $options
+     * @param array $options
      * @return array
      */
     protected function convert_options($options) {

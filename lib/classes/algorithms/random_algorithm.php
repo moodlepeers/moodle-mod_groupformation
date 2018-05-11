@@ -17,8 +17,10 @@
 /**
  * This class contains an implementation of a random group formation algorithm
  *
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/lgpl.html GNU LGPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 if (!defined('MOODLE_INTERNAL')) {
@@ -29,6 +31,14 @@ require_once($CFG->dirroot . '/mod/groupformation/lib/classes/algorithms/ialgori
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/group.php');
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/cohorts/random_cohort.php');
 
+/**
+ * Class mod_groupformation_random_algorithm
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_random_algorithm implements mod_groupformation_ialgorithm {
 
     /** @var  array This array contains all participants which need to be matched */
@@ -43,8 +53,8 @@ class mod_groupformation_random_algorithm implements mod_groupformation_ialgorit
     /**
      * mod_groupformation_random_algorithm constructor.
      *
-     * @param $participants
-     * @param $groupsize
+     * @param array $participants
+     * @param int $groupsize
      */
     public function __construct($participants, $groupsize) {
         $this->groupsize = $groupsize;
@@ -52,6 +62,8 @@ class mod_groupformation_random_algorithm implements mod_groupformation_ialgorit
     }
 
     /**
+     * Do one formation
+     *
      * @return mod_groupformation_cohort
      */
     public function do_one_formation() {

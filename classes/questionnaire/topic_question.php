@@ -17,14 +17,23 @@
 /**
  * Prints a particular instance of groupformation questionnaire
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
 }
 
+/**
+ * Class mod_groupformation_topic_question
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_topic_question extends mod_groupformation_basic_question {
 
     /** @var string Type of question */
@@ -33,8 +42,8 @@ class mod_groupformation_topic_question extends mod_groupformation_basic_questio
     /**
      * Print HTML for topics table
      *
-     * @param $highlight
-     * @param $required
+     * @param bool $highlight
+     * @param bool $required
      */
     public function print_html($highlight, $required) {
 
@@ -50,8 +59,8 @@ class mod_groupformation_topic_question extends mod_groupformation_basic_questio
     /**
      * Returns HTML for topics table
      *
-     * @param $highlight
-     * @param $required
+     * @param bool $highlight
+     * @param bool $required
      * @return string
      */
     public function get_html($highlight, $required) {
@@ -68,7 +77,7 @@ class mod_groupformation_topic_question extends mod_groupformation_basic_questio
     /**
      * Sets answer
      *
-     * @param $answer
+     * @param number $answer
      */
     public function set_answer($answer) {
         $this->answer = $answer;
@@ -92,6 +101,11 @@ class mod_groupformation_topic_question extends mod_groupformation_basic_questio
         }
     }
 
+    /**
+     * Returns random answer
+     *
+     * @return int|mixed
+     */
     public function create_random_answer() {
         return $this->questionid;
     }
@@ -99,7 +113,7 @@ class mod_groupformation_topic_question extends mod_groupformation_basic_questio
     /**
      * Converts options if string
      *
-     * @param $options
+     * @param array $options
      * @return array
      */
     protected function convert_options($options) {

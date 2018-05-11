@@ -17,9 +17,10 @@
 /**
  * Handles jobs for cron (groupformation jobs)
  *
- * @package mod_groupformation
- * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.');
@@ -46,6 +47,14 @@ require_once($CFG->dirroot . '/mod/groupformation/lib/classes/optimizers/optimiz
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/xml_writers/participant_writer.php');
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/xml_writers/cohort_writer.php');
 
+/**
+ * Class mod_groupformation_advanced_job_manager
+ *
+ * @package     mod_groupformation
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright   2015 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_advanced_job_manager {
 
     /** @var array Job states */
@@ -85,7 +94,7 @@ class mod_groupformation_advanced_job_manager {
     /**
      * Returns job
      *
-     * @param $groupformationid
+     * @param int $groupformationid
      * @return stdClass|null
      * @throws dml_exception
      */
@@ -147,7 +156,7 @@ class mod_groupformation_advanced_job_manager {
     /**
      * Sets job state
      *
-     * @param $job
+     * @param stdClass $job
      * @param string $state
      * @param bool $settime
      * @param bool $resettime
@@ -190,7 +199,7 @@ class mod_groupformation_advanced_job_manager {
     /**
      * Resets job
      *
-     * @param $job
+     * @param stdClass $job
      * @return bool
      * @throws dml_exception
      */
@@ -207,7 +216,7 @@ class mod_groupformation_advanced_job_manager {
     /**
      * Returns state of job
      *
-     * @param $job
+     * @param stdClass $job
      * @return int|string
      */
     public static function get_state($job) {
@@ -242,7 +251,7 @@ class mod_groupformation_advanced_job_manager {
     /**
      * Updates job record
      *
-     * @param $job
+     * @param stdClass $job
      * @param integer $groupingid
      * @throws dml_exception
      */
@@ -257,8 +266,8 @@ class mod_groupformation_advanced_job_manager {
     /**
      * Checks whether a job is in the expected state
      *
-     * @param $job
-     * @param $expectedstate
+     * @param stdClass $job
+     * @param number $expectedstate
      * @return bool
      */
     public static function check_state($job, $expectedstate) {
@@ -270,7 +279,7 @@ class mod_groupformation_advanced_job_manager {
     /**
      * Notifies teacher about terminated job
      *
-     * @param $job
+     * @param stdClass $job
      * @return null
      * @throws coding_exception
      * @throws dml_exception
