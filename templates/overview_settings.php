@@ -47,7 +47,7 @@ if (!defined('MOODLE_INTERNAL')) {
                                 <?php echo get_string('consent_header', 'groupformation'); ?>
                             </p>
                             <p>
-                                <?php echo get_string('consent_message', 'groupformation'); ?>
+                                <?php echo $this->_['consenttext']; ?>
                             </p>
                         </div>
                         <div>

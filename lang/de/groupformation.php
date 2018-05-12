@@ -470,7 +470,7 @@ $string['consent_message'] = '<ul><li>
 Der Kursleiter/in oder Dozent/in sieht meine persönlichen Angaben für die Gruppenformation nicht (nur ich selbst
 erhalte Feedback zu meinen Persönlichkeitsmerkmalen, sowie zum Durchschnittsvergleich mit der Gruppe).
 </li><li>
-Meine Angaben werden am Kursende - spätestens nach 360 Tagen gelöscht.</li></ul>';
+Meine Angaben werden am Kursende - spätestens nach {$a->archivedays} Tagen gelöscht.</li></ul>';
 $string['consent_agree'] = 'Ich bin einverstanden';
 
 $string['questionnaire_delete'] = 'Zustimmung widerrufen';

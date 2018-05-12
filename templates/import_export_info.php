@@ -31,7 +31,7 @@ if (!defined('MOODLE_INTERNAL')) {
     <div class="gf_pad_content">
         <p><?php echo $this->_['import_description']; ?></p>
         <p><?php echo get_string('consent_header_import', 'groupformation'); ?><p>
-        <p><?php echo get_string('consent_message', 'groupformation'); ?></p>
+        <p><?php echo $this->_['consenttext']; ?></p>
 
         <p>
             <?php if (!$this->_['import_button']): ?>

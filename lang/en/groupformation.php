@@ -461,7 +461,7 @@ $string ['consent_header_import'] = 'By importing your answers, you agree to par
 $string ['consent_message'] = '<ul><li>
 The teacher has no direct access to my answers for the group formation (just I am able to access the evaluation about my personality as well as the group average).
 </li><li>
-My personal data will be deleted when the course ends - latest after 360 days.</li></ul>';
+My personal data will be deleted when the course ends - latest after {$a->archivedays} days.</li></ul>';
 $string ['consent_agree'] = 'I agree to the terms';
 
 $string ['questionnaire_delete'] = 'Remove consent';

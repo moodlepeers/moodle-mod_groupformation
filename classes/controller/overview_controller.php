@@ -358,6 +358,8 @@ class mod_groupformation_overview_controller {
      * Returns settings buttons
      *
      * @return array
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public function load_settings() {
         $assigns = array();
@@ -369,7 +371,9 @@ class mod_groupformation_overview_controller {
             $assigns['participant_code'] = mod_groupformation_data::ask_for_participant_code();
             $assigns['participant_code_user'] = $this->usermanager->get_participant_code($this->userid);
             $assigns['consentheader'] = get_string('consent_header', 'groupformation');
-            $assigns['consenttext'] = get_string('consent_message', 'groupformation');
+            $a = new stdClass();
+            $a->archivedays = get_config('groupformation', 'archiving_time');
+            $assigns['consenttext'] = get_string('consent_message', 'groupformation', $a);
             $assigns['consentvalue'] = $this->usermanager->get_consent($this->userid);
         } else {
             $assigns['cmid'] = $this->cmid;
