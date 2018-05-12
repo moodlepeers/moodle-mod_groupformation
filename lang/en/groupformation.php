@@ -418,9 +418,6 @@ $string ['eval_min_text_successprobability'] = 'Probability of success includes 
 $string ['eval_max_text_lackofconfidence'] = 'Expectation of failure is a form of motivation, which arises from the fear of not succeeding in the task, combined with the idea that due to the pressure of the situation one will not be able to study optimally.';
 $string ['eval_min_text_lackofconfidence'] = 'Expectation of failure is a form of motivation, which arises from the fear of not succeeding in the task, combined with the idea that due to the pressure of the situation one will not be able to study optimally.';
 
-$string ['blbubl'] = 'neurotizismus,extraversion,gewissenhaftigkeit,agreeableness,openness';
-$string ['dlfdss'] = 'herausforderung,interesse,erfolgswahrscheinlichkeit,misserfolgsbefuerchtung';
-
 $string ['eval_text_big5_extraversion_3'] = 'Your answers indicate a high score on extraversion. Accordingly, you probably tend towards socializing, expressing active and talkative behavior, being optimistic and warm, and you probably react with higher susceptibility to stimuli and excitements.';
 $string ['eval_text_big5_extraversion_2'] = 'Your answers suggest an average score on extraversion. Accordingly, you are probably enthusiastic to a rather moderate extent, and you are not particularly dominant or talkative.';
 $string ['eval_text_big5_extraversion_1'] = 'Your answers indicate a low score on extraversion. Accordingly, you probably tend towards introverted, discrete behavior in social interactions and you are happy alone and on your own. Introverted people are often described as calm, quiet and reserved.';

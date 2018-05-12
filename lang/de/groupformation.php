@@ -37,6 +37,7 @@ $string ['groupformation:readsettings'] = 'Gruppenformation: Leserechte (Einstel
 $string ['groupformation:submit'] = 'Gruppenformation: Abschicken';
 $string ['groupformation:view'] = 'Gruppenformation: Ansehen';
 $string ['password_wrong'] = 'Das eingegebene Passwort ist falsch';
+$string ['groupformationfieldset'] = 'Gruppenformation - Felder';
 $string ['groupformationname'] = 'Name der Gruppenformation';
 $string ['groupformationname_help'] = 'Dieser Titel wird auf der Kursseite angezeigt.';
 $string ['groupformation'] = 'Gruppenformation';
@@ -182,6 +183,7 @@ $string ['stats_partly'] = 'In der Kategorie "{$a->category}" haben Sie {$a->ans
 $string ['stats_all'] = 'In der Kategorie "{$a->category}" haben Sie alle Fragen beantwortet.';
 $string ['stats_none'] = 'In der Kategorie "{$a->category}" haben Sie noch keine Frage beantwortet.';
 $string ['tab_questionnaire'] = 'Fragebogen';
+$string ['tab_analysis'] = 'Analyse';
 $string ['tab_overview'] = 'Überblick';
 $string ['tab_grouping'] = 'Gruppenbildung';
 $string ['tab_preview'] = 'Fragebogen-Vorschau';
@@ -338,6 +340,7 @@ $string['cron_job_not_running'] = 'Um die gestarteten Anfragen zur Gruppenbildun
 $string['groupformation_message'] = 'Die Gruppenformation ist abgeschlossen. Sie können sich nun das Ergebnis anschauen';
 $string['groupformation_message_subject'] = 'Gruppenformation abgeschlossen';
 $string['groupformation_message_contexturlname'] = 'Resultate';
+$string ['groupformation_subject'] = 'Gruppenformation abgeschlossen';
 
 $string['import'] = 'Import';
 $string['export'] = 'Export';
@@ -533,6 +536,13 @@ $string['topics_statistics'] = 'Statistik über angebotene Themen';
 $string['topics_statistics_score'] = 'Wert [0-1]';
 $string['topics_statistics_description'] = 'Die folgenden Werte stellen eine Statistik dar, wie beliebt die angebotenen Themen sind. Ein Thema mit einem höheren Wert ist beliebter als ein Thema mit niedrigen Wert.';
 
+$string ['category_catfreetext'] = 'Freitext';
+$string ['category_catnumber'] = 'Zahl';
+$string ['category_catmultiselect'] = 'Mehrfachauswahl';
+$string ['tabletitle_catfreetext'] = 'Freitext';
+$string ['tabletitle_catnumber'] = 'Zahl';
+$string ['tabletitle_catmultiselect'] = 'Mehrfachauswahl';
+
 $string ['category_demographic'] = 'Demografie';
 $string ['tabletitle_demographic'] = 'Demografie';
 
@@ -544,6 +554,8 @@ $string ['tabletitle_skills'] = 'Erfahrung';
 
 $string ['category_honesty'] = 'Ehrlichkeit';
 $string ['tabletitle_honesty'] = 'Ehrlichkeit';
+
+$string ['freetext_noanswer'] = 'Keine Antwort';
 
 $string ['allanswersrequired'] = 'Es müssen alle Fragen des Fragebogens beantwortet werden.';
 $string ['allanswersrequired_description'] = 'Es müssen alle Fragen des Fragebogens beantwortet werden.';
