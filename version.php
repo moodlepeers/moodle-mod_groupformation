@@ -29,5 +29,5 @@ $plugin->requires = 2016120500; // Could be set to Moodle 3.1 2016052300; Best u
 $plugin->cron = 0;
 $plugin->component = 'mod_groupformation';
 $plugin->maturity = MATURITY_STABLE;
-$plugin->release = 'v1.5'; // We do not use the Moodle versions as prefix; we use semantic versioning (http://semver.org/).
+$plugin->release = 'v1.6.2'; // We do not use the Moodle versions as prefix; we use semantic versioning (http://semver.org/).
 $plugin->dependencies = array();
