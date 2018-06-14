@@ -1676,5 +1676,20 @@ function xmldb_groupformation_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2018051001, 'groupformation');
     }
 
+    if ($oldversion < 2018061300) {
+
+        // Define field state to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('state', XMLDB_TYPE_INTEGER, '3', null, XMLDB_NOTNULL, null, '0', 'archived');
+
+        // Conditionally launch add field state.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2018061300, 'groupformation');
+    }
+
     return true;
 }

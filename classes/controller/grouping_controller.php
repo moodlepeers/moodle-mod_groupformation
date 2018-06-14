@@ -36,6 +36,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/xml_writer.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/group_generator.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/advanced_job_manager.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/state_machine.php');
 
 /**
  * Class mod_groupformation_grouping_controller
@@ -68,9 +69,8 @@ class mod_groupformation_grouping_controller {
     /** @var stdClass instance of job */
     private $job = null;
 
-    /** @var boolean flag whether groups are created or not */
-    private $groupscreated;
-
+    /** @var mod_groupformation_state_machine Activity state machine */
+    private $statemachine;
     /**
      * Creates an instance of grouping_controller for groupformation
      *
@@ -87,6 +87,8 @@ class mod_groupformation_grouping_controller {
         }
 
         $this->store = new mod_groupformation_storage_manager ($groupformationid);
+
+        $this->statemachine = new mod_groupformation_state_machine($groupformationid);
 
         $this->groupsmanager = new mod_groupformation_groups_manager ($groupformationid);
 
@@ -122,49 +124,6 @@ class mod_groupformation_grouping_controller {
             $ajm::update_job($this->job, $groupingid);
             $this->job = $ajm::get_job($this->groupformationid);
         }
-
-        $this->determine_status();
-    }
-
-    /**
-     * Determines status of grouping_view
-     */
-    public function determine_status() {
-        $activitystate = $this->store->is_questionnaire_available();
-
-        $ajm = new mod_groupformation_advanced_job_manager();
-
-        $job = $ajm::get_job($this->groupformationid);
-
-        $jobstatus = $ajm::get_state($this->job);
-
-        $this->groupscreated = $this->groupsmanager->groups_created();
-
-        if ($activitystate) {
-            /* Questionnaire is still on */
-            $this->viewstate = 0;
-        } else if ($jobstatus == 'ready') {
-            /* Questionnaire closed, but no groups are generated yet. */
-            $this->viewstate = 1;
-        } else if ($jobstatus == 'waiting' || $jobstatus == 'started') {
-            /* Groupbuilding is in progress */
-            $this->viewstate = 2;
-        } else if ($jobstatus == 'aborted') {
-            /* Groupbuilding is done, but not integrated to moodle-groups */
-            $this->viewstate = 3;
-        } else if ($jobstatus == 'done' && !$this->groupscreated) {
-            /* Moodlegroups are created */
-            $this->viewstate = 4;
-        } else if ($jobstatus == 'done_groups' && $this->groupscreated) {
-            /* currently everything block til job is aborted and reset by cron */
-            $this->viewstate = 5;
-        }
-
-        $ajm = new mod_groupformation_advanced_job_manager();
-
-        $job = $ajm::get_job($this->groupformationid);
-
-        $this->state = $ajm::get_state($job);
     }
 
     /**
@@ -185,7 +144,6 @@ class mod_groupformation_grouping_controller {
 
         $this->job->groupingid = $cm->groupingid;
         $ajm::set_job($this->job, "waiting", true);
-        $this->determine_status();
 
         $context = groupformation_get_context($this->groupformationid);
         $enrolledusers = get_enrolled_users($context, 'mod/groupformation:onlystudent');
@@ -193,6 +151,8 @@ class mod_groupformation_grouping_controller {
         foreach (array_values($enrolledusers) as $user) {
             groupformation_set_activity_completion($cm->id, $user->id);
         }
+
+        $this->statemachine->next();
 
         return $users;
     }
@@ -205,7 +165,8 @@ class mod_groupformation_grouping_controller {
         $ajm = new mod_groupformation_advanced_job_manager();
 
         $ajm::set_job($this->job, "aborted", false, false);
-        $this->determine_status();
+
+        $this->statemachine->prev();
     }
 
     /**
@@ -214,6 +175,8 @@ class mod_groupformation_grouping_controller {
     public function adopt() {
         $ajm = new mod_groupformation_advanced_job_manager();
         $ajm::set_job($this->job, "waiting_groups", false, false);
+
+        $this->statemachine->next();
     }
 
     /**
@@ -245,6 +208,8 @@ class mod_groupformation_grouping_controller {
      * Stores the editing of groups
      *
      * @param string $groupsstring
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public function save_edit($groupsstring) {
         $groupsarrayafter = json_decode($groupsstring, true);
@@ -281,6 +246,8 @@ class mod_groupformation_grouping_controller {
      * Returns settings for template
      *
      * @return array
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public function load_settings() {
         $assigns = array();
@@ -300,8 +267,10 @@ class mod_groupformation_grouping_controller {
                         'text' => get_string('grouping_edit', 'groupformation'))
         );
 
-        switch ($this->state) {
-            case 'ready':
+        $state = $this->statemachine->get_state();
+
+        switch ($state) {
+            case 'q_closed':
                 // 000000 = none.
                 $assigns['status'] = array(
                         get_string('grouping_status_1', 'groupformation'), 0);
@@ -309,7 +278,7 @@ class mod_groupformation_grouping_controller {
                 $array['button1']['state'] = '';
                 break;
 
-            case 'waiting':
+            case 'gf_started':
                 // 100000 = waiting.
                 // 010000 = started.
                 $assigns['status'] = array(
@@ -321,25 +290,13 @@ class mod_groupformation_grouping_controller {
                 $assigns['emailnotifications'] = $this->store->get_email_setting();
                 break;
 
-            case 'started':
-                // 100000 = waiting.
-                // 010000 = started.
-                $assigns['status'] = array(
-                        get_string('grouping_status_2', 'groupformation'), 1);
-                $array['button1']['name'] = 'abort';
-                $array['button1']['text'] = get_string('grouping_abort', 'groupformation');
-                $array['button1']['value'] = 1;
-                $array['button1']['state'] = '';
-                $assigns['emailnotifications'] = $this->store->get_email_setting();
-                break;
-
-            case 'aborted' :
+            case 'gf_aborted' :
                 // 001000 = aborted.
                 $assigns['status'] = array(
                         get_string('grouping_status_3', 'groupformation'), 1);
                 break;
 
-            case 'done' :
+            case 'gf_done' :
                 // 000110 = done - groups_generated.
                 $assigns['status'] = array(
                         get_string('grouping_status_4', 'groupformation'), 0);
@@ -351,7 +308,7 @@ class mod_groupformation_grouping_controller {
                 $array['button4']['state'] = '';
                 break;
 
-            case 'done_groups' :
+            case 'ga_done':
                 // 000111 = done - groups_generated - groups_adopted.
                 $assigns['status'] = array(
                         get_string('grouping_status_5', 'groupformation'), 0);
@@ -360,13 +317,26 @@ class mod_groupformation_grouping_controller {
                 $array['button2']['text'] = get_string('grouping_delete_moodle_groups', 'groupformation');
                 break;
 
-            case 'waiting_groups':
+            case 'ga_started':
                 // 100000 = waiting - groups_generated.
                 // 010000 = started - groups_generated.
                 $assigns['status'] = array(
                         get_string('grouping_status_6', 'groupformation'), 1);
                 $assigns['emailnotifications'] = $this->store->get_email_setting();
                 break;
+
+            /*case 'started':
+                var_dump($this->statemachine->get_state());
+                // 100000 = waiting.
+                // 010000 = started.
+                $assigns['status'] = array(
+                        get_string('grouping_status_2', 'groupformation'), 1);
+                $array['button1']['name'] = 'abort';
+                $array['button1']['text'] = get_string('grouping_abort', 'groupformation');
+                $array['button1']['value'] = 1;
+                $array['button1']['state'] = '';
+                $assigns['emailnotifications'] = $this->store->get_email_setting();
+                break;*/
 
             default:
                 $assigns['status'] = array(
@@ -390,10 +360,13 @@ class mod_groupformation_grouping_controller {
      * Returns statistics for template
      *
      * @return array
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public function load_statistics() {
         $assigns = array();
-        if ($this->state == 'done' || $this->state == 'done_groups') {
+        $state = $this->statemachine->get_state();
+        if ($state == 'gf_done' || $state == 'ga_done') {
 
             $assigns['numbOfGroups'] = count($this->groups);
             $assigns['maxSize'] = $this->groupsmanager->get_max_groups_size($this->groups);
@@ -409,6 +382,9 @@ class mod_groupformation_grouping_controller {
      * Returns generated groups for template
      *
      * @return array
+     * @throws coding_exception
+     * @throws dml_exception
+     * @throws moodle_exception
      */
     public function load_generated_groups() {
         $assigns = array();
@@ -421,7 +397,9 @@ class mod_groupformation_grouping_controller {
             $options = mod_groupformation_util::xml_to_array($xmlcontent);
         }
 
-        if ($this->state == 'done' || $this->state == 'done_groups') {
+        $state = $this->statemachine->get_state();
+
+        if ($state == 'gf_done' || $state == 'ga_done') {
 
             foreach ($this->groups as $key => $value) {
 
@@ -451,6 +429,8 @@ class mod_groupformation_grouping_controller {
      * sets the buttons of grouping settings
      *
      * @return array
+     * @throws coding_exception
+     * @throws moodle_exception
      */
     public function load_edit_header() {
         global $PAGE;
@@ -482,12 +462,14 @@ class mod_groupformation_grouping_controller {
     /**
      * Assign groups-data to template
      *
-     * @return string
+     * @return array
+     * @throws coding_exception
+     * @throws moodle_exception
      */
     public function load_edit_groups() {
         $assigns = array();
-
-        if ($this->viewstate == 4 || $this->viewstate == 5) {
+        $state = $this->statemachine->get_state();
+        if ($state == "gf_done" || $state == "ga_done") {
 
             $groupsstring = "";
             $groupsarray = array();
@@ -566,10 +548,11 @@ class mod_groupformation_grouping_controller {
      *
      * @param int $groupid
      * @return array
+     * @throws moodle_exception
      */
     private function get_group_link($groupid) {
         $link = array();
-        if ($this->groupscreated) {
+        if ($this->statemachine->get_state()== "ga_done") {
             $url = new moodle_url ('/group/members.php', array(
                 'group' => $groupid));
             $link [] = $url;

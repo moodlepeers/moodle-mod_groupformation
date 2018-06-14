@@ -29,6 +29,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/advanced_job_manager.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/state_machine.php');
 
 /**
  * Class mod_groupformation_analysis_controller
@@ -49,11 +50,11 @@ class mod_groupformation_analysis_controller {
     /** @var mod_groupformation_user_manager The manager of user data */
     private $usermanager = null;
 
-    /** @var int state of questionnaire */
-    private $state = null;
-
     /** @var int ID of course module*/
     public $cmid = null;
+
+    /** @var mod_groupformation_state_machine Activity state machine */
+    private $statemachine;
 
     /**
      * Creates instance of analysis controller
@@ -67,6 +68,7 @@ class mod_groupformation_analysis_controller {
         $this->groupformationid = $groupformationid;
         $this->store = new mod_groupformation_storage_manager($groupformationid);
         $this->usermanager = new mod_groupformation_user_manager($groupformationid);
+        $this->statemachine = new mod_groupformation_state_machine($groupformationid);
         $this->view = new mod_groupformation_template_builder();
         $this->determine_status($cm);
     }
@@ -75,18 +77,20 @@ class mod_groupformation_analysis_controller {
      * Triggers questionnaire
      *
      * @param bool $switcher
+     * @throws dml_exception
      */
     public function trigger_questionnaire($switcher) {
-
         switch ($switcher) {
             // Sets start time of questionnaire to now.
             case 1:
                 $this->store->open_questionnaire();
+                $this->statemachine->prev();
                 break;
 
             // Sets end time of questionnaire to now.
             case -1:
                 $this->store->close_questionnaire();
+                $this->statemachine->next();
                 break;
         }
     }
@@ -98,28 +102,11 @@ class mod_groupformation_analysis_controller {
      * @throws dml_exception
      */
     public function determine_status($cm) {
-        $questionnaireavailable = $this->store->is_questionnaire_available();
-        $this->state = 1;
         $ajm = new mod_groupformation_advanced_job_manager();
         $job = $ajm::get_job($this->groupformationid);
         if (is_null($job)) {
             $groupingid = ($cm->groupmode != 0) ? $cm->groupingid : 0;
             $ajm::create_job($this->groupformationid, $groupingid);
-        }
-        $job = $ajm::get_job($this->groupformationid);
-        $jobstate = $ajm::get_state($job);
-        if ($jobstate !== 'ready') {
-            $this->state = 3;
-        } else {
-            if ($questionnaireavailable) {
-                $this->state = 1;
-            } else {
-                if (count($this->usermanager->get_completed()) > 0) {
-                    $this->state = 4;
-                } else {
-                    $this->state = 2;
-                }
-            }
         }
     }
 
@@ -127,6 +114,7 @@ class mod_groupformation_analysis_controller {
      * Returns activity statistics
      *
      * @return array
+     * @throws dml_exception
      */
     public function load_statistics() {
         $assigns = array();
@@ -168,6 +156,8 @@ class mod_groupformation_analysis_controller {
      * Returns activity infos
      *
      * @return array
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public function load_info() {
         $activitytime = $this->store->get_time();
@@ -183,17 +173,17 @@ class mod_groupformation_analysis_controller {
         }
 
         $buttoncaption = get_string('activity_start', 'groupformation');
-        if ($this->state == 1) {
+        if ($this->statemachine->get_state(true) == 0) {
             $buttoncaption = get_string('activity_end', 'groupformation');
         }
 
         $buttondisabled = "";
-        if ($this->state == 3) {
+        if ($this->statemachine->get_state(true) >= 2) {
             $buttondisabled = "disabled";
         }
 
         $buttonvalue = 1;
-        if ($this->state == 1) {
+        if ($this->statemachine->get_state(true) == 0) {
             $buttonvalue = -1;
         }
 
@@ -210,7 +200,7 @@ class mod_groupformation_analysis_controller {
         $assigns['info_teacher'] = mod_groupformation_util::get_info_text_for_teacher(false, "analysis");
         $assigns['analysis_time_start'] = $starttime;
         $assigns['analysis_time_end'] = $endtime;
-        $assigns['analysis_status_info'] = get_string('analysis_status_info' . strval($this->state), 'groupformation');
+        $assigns['analysis_status_info'] = get_string('analysis_status_info' . strval(min($this->statemachine->get_state(true),2)), 'groupformation');
 
         return $assigns;
     }
@@ -219,6 +209,7 @@ class mod_groupformation_analysis_controller {
      * Returns topic statistics
      *
      * @return array
+     * @throws dml_exception
      */
     public function load_topic_statistics() {
         $assigns = array();

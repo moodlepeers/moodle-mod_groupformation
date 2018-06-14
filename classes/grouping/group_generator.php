@@ -31,6 +31,7 @@ if (!defined('MOODLE_INTERNAL')) {
 
 require_once($CFG->dirroot . '/group/lib.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/state_machine.php');
 
 /**
  * Class mod_groupformation_group_generator
@@ -47,6 +48,9 @@ class mod_groupformation_group_generator {
      *
      * @param int $groupformationid
      * @return boolean
+     * @throws coding_exception
+     * @throws dml_exception
+     * @throws moodle_exception
      */
     public static function generate_moodle_groups($groupformationid) {
         global $DB;
@@ -112,6 +116,9 @@ class mod_groupformation_group_generator {
                 }
             }
         }
+
+        $statemachine = new mod_groupformation_state_machine($groupformationid);
+        $statemachine->next();
     }
 }
 

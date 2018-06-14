@@ -46,6 +46,7 @@ require_once($CFG->dirroot . '/mod/groupformation/lib/classes/algorithms/topic_a
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/optimizers/optimizer.php');
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/xml_writers/participant_writer.php');
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/xml_writers/cohort_writer.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/state_machine.php');
 
 /**
  * Class mod_groupformation_advanced_job_manager
@@ -210,6 +211,9 @@ class mod_groupformation_advanced_job_manager {
                 array('groupformationid' => $job->groupformationid)
         );
 
+        $statemachine = new mod_groupformation_state_machine($job->groupformationid);
+        $statemachine->prev();
+
         return true;
     }
 
@@ -312,6 +316,8 @@ class mod_groupformation_advanced_job_manager {
      *
      * @param stdClass $job
      * @return array with 3 elements: groupal cohorts, random cohort and incomplete random cohort
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public static function do_groupal($job) {
 
@@ -385,6 +391,8 @@ class mod_groupformation_advanced_job_manager {
         }
 
         self::set_job($job, 'done', true);
+        $statemachine = new mod_groupformation_state_machine($job->groupformationid);
+        $statemachine->next();
 
         return true;
     }

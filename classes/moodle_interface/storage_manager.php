@@ -59,6 +59,7 @@ class mod_groupformation_storage_manager {
      * @param int $id
      * @return string
      * @throws coding_exception
+     * @throws dml_exception
      */
     public function get_intro($id) {
         global $OUTPUT;

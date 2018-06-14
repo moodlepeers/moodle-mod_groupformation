@@ -67,7 +67,9 @@ class build_groups_task extends \core\task\scheduled_task {
     /**
      * Selects a waiting job, runs it and saves results
      *
-     * @return boolean
+     * @return void
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     private function do_job() {
 
