@@ -57,7 +57,7 @@ if (!defined('MOODLE_INTERNAL')) {
         <?php endforeach; ?>
         </ul>
     <?php endif; ?>
-    <?php if (!is_null($this->_['group_left_info'])): ?>
+    <?php if (array_key_exists('group_left_info', $this->_)): ?>
         <p>
             <?php echo $this->_['group_left_info']; ?>
         </p>
