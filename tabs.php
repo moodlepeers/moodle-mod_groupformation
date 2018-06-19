@@ -79,7 +79,8 @@ if ($editsettings) {
     $row [] = new tabobject ('view', $viewurl->out(), get_string('tab_overview', 'groupformation'));
 
     // If questionnaire is available for students.
-    if ($store->is_questionnaire_available() || ($store->is_questionnaire_accessible())) {
+    $state = $store->statemachine->get_state();
+    if (true || in_array($state, array('q_open', 'q_reopened')) || $usermanager->already_answered($userid)) {//$store->is_questionnaire_available() || ($store->is_questionnaire_accessible())) {
         // The questionnaire view.
         $questionnaireviewurl = new moodle_url ('/mod/groupformation/questionnaire_view.php', array(
             'id' => $usedid));

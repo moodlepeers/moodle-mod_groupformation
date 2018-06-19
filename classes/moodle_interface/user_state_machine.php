@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * State machine
+ * User state machine
  *
  * @package     mod_groupformation
  * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
@@ -32,40 +32,47 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php')
 require_once($CFG->dirroot . '/group/lib.php');
 
 /**
- * Class mod_groupformation_state_machine
+ * Class mod_groupformation_user_state_machine
  *
  * @package     mod_groupformation
  * @author      Johannes Konert, Rene Roepke
  * @copyright   2018 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class mod_groupformation_state_machine {
+class mod_groupformation_user_state_machine {
 
     /** @var int ID of module instance */
     private $groupformationid;
 
     /** @var array Transitions of state machine */
     private $transitions = array(
-            0 => array(1, 0),      // closing questionnaire
-            1 => array(2, 0),   // starting groupformation, opening questionnaire
-            2 => array(4, 3),   // groupformation terminates, aborting groupformation
-            3 => array(3, 1),      // job abortion terminates
-            4 => array(5, 1),    // starting groupadoption, reset groupformation
-            5 => array(6, 5),      // job terminates
-            6 => array(1, 7),     // deleting moodlegroups, reopens questionnaire,
-            7 => array(6, 7)
+            0 => array("consent" => 1, "p_code" => 2, "consent+p_code" => 3, "answer" => 3, "submit" => 4),
+            1 => array("p_code" => 3, "answer" => 3),
+            2 => array("consent" => 3, "answer" => 3),
+            3 => array("submit" => 4, "remove_consent" => 0),
+            4 => array("revert" => 3, "remove_consent" => 0)
     );
 
     /** @var array States of state machine */
     private $states = array(
-            0 => "q_open",
-            1 => "q_closed",
-            2 => "gf_started",
-            3 => "gf_aborted",
-            4 => "gf_done",
-            5 => "ga_started",
-            6 => "ga_done",
-            7 => "q_reopened"
+            0 => "started",
+            1 => "consent_given",
+            2 => "p_code_given",
+            3 => "answering",
+            4 => "submitted"
+    );
+
+    /** @var array Modes of state machine*/
+    private $modes = array(
+            "q_open" => 0,
+            "q_closed" => 10,
+            "ga_done" => 10,
+            "gf_started" => 10,
+            "gf_aborted" => 10,
+            "gf_done" => 10,
+            "ga_started" => 10,
+            "ga_done" => 10,
+            "q_reopened" => 20,
     );
 
     /**
@@ -84,12 +91,19 @@ class mod_groupformation_state_machine {
      * @return mixed
      * @throws dml_exception
      */
-    public function get_state($internal = false) {
+    public function get_state($userid, $internal = false) {
         global $DB;
 
-        $field = $DB->get_field('groupformation', 'state', array('id' => $this->groupformationid));
+        $field = $DB->get_field(
+                'groupformation_users',
+                'state',
+                array(
+                        'groupformation' => $this->groupformationid,
+                        'userid' => $userid
+                )
+        );
 
-        return ($internal) ? $field : $this->states[$field];
+        return $internal ? $field % 10 : $this->states[$field % 10];
     }
 
     /**
@@ -98,38 +112,34 @@ class mod_groupformation_state_machine {
      * @param $state
      * @throws dml_exception
      */
-    private function set_state($state) {
+    public function set_state($userid, $state) {
         global $DB;
 
-        $DB->set_field('groupformation', 'state', $state, array('id' => $this->groupformationid));
+        $DB->set_field('groupformation_users',
+                'state',
+                $state,
+                array(
+                        'groupformation' => $this->groupformationid,
+                        'userid' => $userid
+                )
+        );
     }
 
     /**
-     * Switches to previous state
+     * Changes state
      *
+     * @param $userid
+     * @param $action
      * @throws dml_exception
      */
-    public function prev() {
+    public function change_state($userid, $action) {
+        $transitions = $this->transitions;
+        $state = $this->get_state($userid, true);
+        $state = $state % 10;
 
-        $state = $this->get_state(true);
-
-        $nextstate = $this->transitions[$state][1];
-
-        if (!is_null($nextstate))
-            $this->set_state($nextstate);
-    }
-
-    /**
-     * Switches to next state
-     *
-     * @throws dml_exception
-     */
-    public function next() {
-
-        $state = $this->get_state(true);
-
-        $nextstate = $this->transitions[$state][0];
-
-        $this->set_state($nextstate);
+        if (array_key_exists($state, $transitions) && array_key_exists($action,$transitions[$state])) {
+            $newstate = $transitions[$state][$action];
+            $this->set_state($userid, $newstate);
+        }
     }
 }

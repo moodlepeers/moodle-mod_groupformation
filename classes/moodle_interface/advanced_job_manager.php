@@ -211,9 +211,6 @@ class mod_groupformation_advanced_job_manager {
                 array('groupformationid' => $job->groupformationid)
         );
 
-        $statemachine = new mod_groupformation_state_machine($job->groupformationid);
-        $statemachine->prev();
-
         return true;
     }
 

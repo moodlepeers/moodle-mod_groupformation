@@ -39,7 +39,7 @@ if (!defined('MOODLE_INTERNAL')) {
     <?php endif; ?>
 
     <div class="grid">
-        <div class="col_m_87-5">
+        <div>
             <?php echo get_string('are', 'groupformation'); ?>
             <b>
                 <?php echo $this->_['student_count']; ?>
@@ -64,11 +64,6 @@ if (!defined('MOODLE_INTERNAL')) {
 
     <div>
         <div style="
-        <?php if ($this->_['status'][1] == 0): ?>
-            opacity:0.5;
-        <?php else: ?>
-            opacity:1.0;
-        <?php endif; ?>
             margin-left: 4px;
         <?php if ($this->_['status'][1] == 1): ?>
             color: red

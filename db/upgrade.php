@@ -1676,7 +1676,7 @@ function xmldb_groupformation_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2018051001, 'groupformation');
     }
 
-    if ($oldversion < 2018061300) {
+    if ($oldversion < 2018061701) {
 
         // Define field state to be added to groupformation.
         $table = new xmldb_table('groupformation');
@@ -1688,7 +1688,72 @@ function xmldb_groupformation_upgrade($oldversion) {
         }
 
         // Groupformation savepoint reached.
-        upgrade_mod_savepoint(true, 2018061300, 'groupformation');
+        upgrade_mod_savepoint(true, 2018061701, 'groupformation');
+    }
+
+    if ($oldversion < 2018061702) {
+
+        // Define table groupformation_started to be renamed to groupformation_users.
+        $table = new xmldb_table('groupformation_started');
+
+        // Launch rename table for groupformation_started.
+        $dbman->rename_table($table, 'groupformation_users');
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2018061702, 'groupformation');
+    }
+
+    if ($oldversion < 2018061703) {
+
+        // Define table groupformation_answer to be renamed to groupformation_answers.
+        $table = new xmldb_table('groupformation_answer');
+
+        // Launch rename table for groupformation_answer.
+        $dbman->rename_table($table, 'groupformation_answers');
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2018061703, 'groupformation');
+    }
+
+    if ($oldversion < 2018061704) {
+
+        // Define table groupformation_question to be renamed to NEWNAMEGOESHERE.
+        $table = new xmldb_table('groupformation_question');
+
+        // Launch rename table for groupformation_question.
+        $dbman->rename_table($table, 'groupformation_questions');
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2018061704, 'groupformation');
+    }
+
+    if ($oldversion < 2018061705) {
+
+        // Define table groupformation_q_settings to be dropped.
+        $table = new xmldb_table('groupformation_q_settings');
+
+        // Conditionally launch drop table for groupformation_q_settings.
+        if ($dbman->table_exists($table)) {
+            $dbman->drop_table($table);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2018061705, 'groupformation');
+    }
+
+    if ($oldversion < 2018061706) {
+
+        // Define field state to be added to groupformation_users.
+        $table = new xmldb_table('groupformation_users');
+        $field = new xmldb_field('state', XMLDB_TYPE_INTEGER, '3', null, XMLDB_NOTNULL, null, '0', 'filtered');
+
+        // Conditionally launch add field state.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2018061706, 'groupformation');
     }
 
     return true;

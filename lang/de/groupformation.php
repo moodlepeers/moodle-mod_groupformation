@@ -257,7 +257,8 @@ $string['grouping_adopt'] = 'Gruppenvorschlag übernehmen';
 $string['grouping_abort'] = 'Gruppenbildung abbrechen';
 $string['grouping_edit'] = 'Gruppen bearbeiten';
 $string['grouping_delete_moodle_groups'] = 'Moodle-Gruppen l&ouml;schen';
-$string['questionnaire_committed'] = 'Ihre Antworten sind abgegeben. Somit können Sie sie nicht mehr verändern.';
+$string['questionnaire_committed'] = 'Sie haben Ihre Antworten bereits eingereicht und können sie daher nicht mehr bearbeiten.';
+$string['questionnaire_closed'] = 'Der Fragebogen ist geschlossen, so dass keine Antworten eingegeben oder bearbeitet werden können.';
 $string['no_data_to_display'] = 'Keine Daten vorhanden.';
 
 $string['onlyactivestudents'] = 'Zur Gruppenbildung sollen ausschließlich Studierende betrachtet werden, die mind. eine Frage beantwortet haben.';
@@ -278,13 +279,11 @@ $string['archive_activity_task'] = 'Task zur Archivierung alter Aktivitäten';
 $string['no_time'] = 'Kein Zeitpunkt festgelegt';
 $string['activity_end'] = 'Aktivität beenden';
 $string['activity_start'] = 'Aktivität starten';
-$string['analysis_status_info0'] = 'Sie müssen die Aktivität beenden, bevor sie Gruppen bilden können.';
-$string['analysis_status_info1'] = 'Sie müssen die Aktivität starten, damit Studierende den Fragebogen beantworten können.';
-$string['analysis_status_info2'] = 'Die Gruppenbildung wurde bereits angestoßen bzw. durchgeführt. Die Aktivität kann nicht mehr gestartet werden.';
+
 $string['contact_members'] = 'Um deine Gruppenmitglieder zu kontaktieren, klicke auf deren Profilnamen.';
 $string['invalid'] = 'Ungültiger Zustand';
-$string['groups_build'] = 'Gruppen sind gebildet.';
-$string['activity_visible'] = 'Die Aktivität ist für dich nicht einsehbar.';
+$string['groups_built'] = 'Gruppen sind gebildet.';
+$string['activity_visible'] = 'Diese Aktivität ist für Sie aufgrund Ihrer Rolle nicht zugänglich. Sie können auf diese Tätigkeit als Lehrende oder Teilnehmender zugreifen. Lehrende ohne Bearbeitungsrechte oder Tutoren haben möglicherweise keinen Zugang.';
 
 $string['are'] = 'Es gibt';
 $string['are_now'] = 'Es gibt derzeit';
@@ -527,7 +526,7 @@ $string['page_title_overview'] = 'Überblick';
 $string['page_title_evaluation'] = 'Evaluation';
 $string['page_title_import_export'] = 'Import & Export';
 $string['page_title_grouping_edit'] = 'Gruppenbildung - Bearbeitungsmodus';
-$string['noGroup'] = 'Du wurdest einer Gruppe zugewiesen, da du den Fragebogen nicht beantwortet hast.';
+$string['noGroup'] = 'Du wurdest einer Gruppe zugewiesen, da du den Fragebogen nicht rechtzeitig beantwortet hast. Ein/e Kursleiter/in oder ein/e Dozent/in kann Sie auf Nachfrage manuell einer Gruppe zuweisen.';
 $string['page_title_export'] = 'Export';
 
 $string['topics_statistics'] = 'Statistik über angebotene Themen';

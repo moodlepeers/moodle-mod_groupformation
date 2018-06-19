@@ -200,7 +200,29 @@ class mod_groupformation_analysis_controller {
         $assigns['info_teacher'] = mod_groupformation_util::get_info_text_for_teacher(false, "analysis");
         $assigns['analysis_time_start'] = $starttime;
         $assigns['analysis_time_end'] = $endtime;
-        $assigns['analysis_status_info'] = get_string('analysis_status_info' . strval(min($this->statemachine->get_state(true),2)), 'groupformation');
+        $assigns['analysis_status'] = get_string('analysis_status_' . ($this->statemachine->get_state()), 'groupformation');
+
+        if ($this->statemachine->get_state(true) >= 6) {
+
+            $buttoncaption = get_string('close_questionnaire', 'groupformation');
+            if ($this->statemachine->get_state(true) == 6) {
+                $buttoncaption = get_string('re-open_questionnaire', 'groupformation');
+            }
+
+            $buttonvalue = 1;
+            if ($this->statemachine->get_state(true) == 7) {
+                $buttonvalue = -1;
+            }
+
+            $assigns['reopen_button'] = array(
+                    'type' => 'submit',
+                    'name' => 'questionnaire_switcher',
+                    'value' => $buttonvalue,
+                    'state' => "",
+                    'text' => $buttoncaption
+            );
+
+        }
 
         return $assigns;
     }

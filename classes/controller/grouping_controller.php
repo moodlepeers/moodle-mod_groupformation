@@ -202,6 +202,8 @@ class mod_groupformation_grouping_controller {
         $job = $ajm::get_job($this->groupformationid);
 
         $ajm::reset_job($job);
+
+        $this->statemachine->next();
     }
 
     /**
@@ -324,19 +326,6 @@ class mod_groupformation_grouping_controller {
                         get_string('grouping_status_6', 'groupformation'), 1);
                 $assigns['emailnotifications'] = $this->store->get_email_setting();
                 break;
-
-            /*case 'started':
-                var_dump($this->statemachine->get_state());
-                // 100000 = waiting.
-                // 010000 = started.
-                $assigns['status'] = array(
-                        get_string('grouping_status_2', 'groupformation'), 1);
-                $array['button1']['name'] = 'abort';
-                $array['button1']['text'] = get_string('grouping_abort', 'groupformation');
-                $array['button1']['value'] = 1;
-                $array['button1']['state'] = '';
-                $assigns['emailnotifications'] = $this->store->get_email_setting();
-                break;*/
 
             default:
                 $assigns['status'] = array(

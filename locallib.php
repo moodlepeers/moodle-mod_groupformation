@@ -237,7 +237,7 @@ function groupformation_import_questionnaire_configuration($filename = 'question
                     if ($version > $prevversion || !$prevversion) {
                         groupformation_delete_all_catalog_questions($category, $language);
 
-                        $DB->insert_records('groupformation_question', $questions);
+                        $DB->insert_records('groupformation_questions', $questions);
                         groupformation_add_catalog_version($category, $numberofquestions, $version, false);
                     }
                 }
@@ -311,7 +311,7 @@ function groupformation_add_catalog_version($category, $numbers, $version, $init
 function groupformation_delete_all_catalog_questions($category, $language) {
     global $DB;
 
-    $DB->delete_records('groupformation_question', array('category' => $category, 'language' => $language));
+    $DB->delete_records('groupformation_questions', array('category' => $category, 'language' => $language));
 }
 
 /**

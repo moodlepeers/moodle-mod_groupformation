@@ -140,7 +140,7 @@ class mod_groupformation_test_user_generator {
                     $record->answer_count = $store->get_total_number_of_answers();
                     $record->timecompleted = ($setanswers) ? time() : null;
                     $record->groupid = null;
-                    $DB->insert_record("groupformation_started", $record);
+                    $DB->insert_record("groupformation_users", $record);
 
                 } catch (Exception $e) {
                     $this->echowarn("Error while saving questionnaire status for user.");
@@ -166,7 +166,7 @@ class mod_groupformation_test_user_generator {
                             $allrecords [] = $record;
                         }
                     }
-                    $DB->insert_records("groupformation_answer", $allrecords);
+                    $DB->insert_records("groupformation_answers", $allrecords);
 
                     if ($usermanager->has_answered_everything($userid)) {
                         $usermanager->set_evaluation_values($userid);
@@ -221,11 +221,11 @@ class mod_groupformation_test_user_generator {
                             'id' => $userid
                     ));
 
-                    $DB->delete_records("groupformation_answer", array(
+                    $DB->delete_records("groupformation_answers", array(
                             'userid' => $userid
                     ));
 
-                    $DB->delete_records("groupformation_started", array(
+                    $DB->delete_records("groupformation_users", array(
                             'userid' => $userid
                     ));
 

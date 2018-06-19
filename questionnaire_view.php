@@ -61,7 +61,7 @@ $consent = $usermanager->get_consent($userid);
 $askforparticipantcode = mod_groupformation_data::ask_for_participant_code();
 $participantcode = $usermanager->has_participant_code($userid) || !$askforparticipantcode;
 
-if (((!$consent || !$participantcode) && !$groupsmanager->groups_created()) &&
+if ((!$consent || !$participantcode) &&
         !has_capability('mod/groupformation:editsettings', $context)) {
     $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
             'id' => $cm->id, 'giveconsent' => !$consent, 'giveparticipantcode' => !$participantcode));
@@ -83,19 +83,18 @@ $controller = new mod_groupformation_questionnaire_controller($groupformation->i
         $userid, $category, $cm->id);
 $viewcontroller = new mod_groupformation_questionnaire_view_controller($groupformation->id, $controller);
 
-$inarray = in_array($category, $names);
+$validcategory = in_array($category, $names);
 $go = true;
+
+$state = $store->statemachine->get_state();
+$userstate = $store->userstatemachine->get_state($userid);
 
 if (has_capability('mod/groupformation:onlystudent', $context) &&
         !has_capability('mod/groupformation:editsettings', $context) &&
-        (data_submitted() && confirm_sesskey())) {
-
-    $status = $usermanager->get_answering_status($userid);
-    if ($status == 0 || $status == -1) {
-        if ($inarray) {
-            $go = $controller->save_answers($category);
-        }
-    }
+        (data_submitted() && confirm_sesskey()) &&
+        ($validcategory && in_array($state, array("q_open", "q_reopened")))) {
+    $go = $controller->save_answers($category);
+    $store->userstatemachine->change_state($userid, "answer");
 }
 
 if ($direction == 0 && $percent == 0) {
@@ -105,12 +104,10 @@ if ($direction == 0 && $percent == 0) {
 }
 
 $next = $controller->has_next();
-
 $available = $store->is_questionnaire_available() || $store->is_questionnaire_accessible();
 $isteacher = has_capability('mod/groupformation:editsettings', $context);
 
-if ($next && ($available || $isteacher) && ($category == '' || $inarray)) {
-
+if ($next && ($available || $isteacher) && ($category == '' || $validcategory)) {
     echo $OUTPUT->header();
     // Print the tabs.
     require('tabs.php');
@@ -134,9 +131,9 @@ if ($next && ($available || $isteacher) && ($category == '' || $inarray)) {
     echo $OUTPUT->footer();
 
 } else if (!$next ||!$available || $category == 'no') {
-
     if ($usermanager->has_answered_everything($userid)) {
         $usermanager->set_evaluation_values($userid);
+        $store->userstatemachine->change_state($userid, "complete");
     }
     if (isset ($action) && $action == 1) {
         $usermanager->change_status($userid);
@@ -146,5 +143,5 @@ if ($next && ($available || $isteacher) && ($category == '' || $inarray)) {
         'id' => $cm->id, 'do_show' => 'view', 'back' => '1'));
     redirect($returnurl);
 } else {
-    echo $OUTPUT->notification('Category has been manipulated');
+    echo $OUTPUT->notification('Category has been manipulated.');
 }

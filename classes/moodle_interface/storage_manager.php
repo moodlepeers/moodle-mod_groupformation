@@ -28,6 +28,8 @@ if (!defined('MOODLE_INTERNAL')) {
 
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/advanced_job_manager.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/state_machine.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_state_machine.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 require_once($CFG->dirroot . '/group/lib.php');
 
@@ -44,6 +46,12 @@ class mod_groupformation_storage_manager {
     /** @var int ID of module instance */
     private $groupformationid;
 
+    /** @var mod_groupformation_state_machine State machine */
+    public $statemachine;
+
+    /** @var mod_groupformation_user_state_machine User State machine*/
+    public $userstatemachine;
+
     /**
      * Constructs storage manager for a specific groupformation
      *
@@ -51,6 +59,8 @@ class mod_groupformation_storage_manager {
      */
     public function __construct($groupformationid) {
         $this->groupformationid = $groupformationid;
+        $this->statemachine = new mod_groupformation_state_machine($groupformationid);
+        $this->userstatemachine = new mod_groupformation_user_state_machine($groupformationid);
     }
 
     /**
@@ -145,7 +155,7 @@ class mod_groupformation_storage_manager {
     public function catalog_table_not_set($category = 'grade') {
         global $DB;
 
-        $count = $DB->count_records('groupformation_question', array('category' => $category));
+        $count = $DB->count_records('groupformation_questions', array('category' => $category));
 
         return $count == 0;
     }
@@ -183,39 +193,6 @@ class mod_groupformation_storage_manager {
         }
 
         return $i;
-    }
-
-    /**
-     * Adds/Updates knowledge and topic setting of groupformation
-     *
-     * @param unknown $knowledge
-     * @param unknown $topics
-     * @param unknown $init
-     * @throws dml_exception
-     */
-    public function add_setting_question($knowledge, $topics, $init) {
-        global $DB;
-
-        $data = new stdClass ();
-        $data->groupformation = $this->groupformationid;
-        $data->topicvalues = groupformation_convert_options($topics);
-        $data->knowledgevalues = groupformation_convert_options($knowledge);
-        $data->topicvaluesnumber = count($topics);
-        $data->knowledgevaluesnumber = count($knowledge);
-
-        if ($init) {
-            $DB->insert_record('groupformation_q_settings', $data);
-        } else {
-            if ($DB->count_records('groupformation_answer', array(
-                            'groupformation' => $this->groupformationid
-                    )) == 0
-            ) {
-                $data->id = $DB->get_field('groupformation_q_settings', 'id', array(
-                        'groupformation' => $this->groupformationid
-                ));
-                $DB->update_record('groupformation_q_settings', $data);
-            }
-        }
     }
 
     /**
@@ -314,7 +291,7 @@ class mod_groupformation_storage_manager {
     public function get_possible_language($category) {
         global $DB;
 
-        $table = 'groupformation_question';
+        $table = 'groupformation_questions';
 
         $lang = $DB->get_field($table, 'language', array('category' => $category), IGNORE_MULTIPLE);
 
@@ -371,7 +348,7 @@ class mod_groupformation_storage_manager {
             return $this->get_max_points();
         }
 
-        $table = 'groupformation_question';
+        $table = 'groupformation_questions';
         return $DB->get_field($table, 'optionmax', array(
                 'language' => 'en', 'category' => $category,
                 'questionid' => $i
@@ -390,7 +367,7 @@ class mod_groupformation_storage_manager {
      */
     public function get_catalog_question($i, $category = 'general', $lang = 'en', $version = null) {
         global $DB;
-        $table = 'groupformation_question';
+        $table = 'groupformation_questions';
         $return = $DB->get_record($table, array(
                 'language' => $lang, 'category' => $category,
                 'position' => $i, 'version' => $version
@@ -588,7 +565,7 @@ class mod_groupformation_storage_manager {
             return true;
         }
 
-        return ($DB->count_records('groupformation_answer', array(
+        return ($DB->count_records('groupformation_answers', array(
                         'groupformation' => $this->groupformationid
                 )) == 0);
     }
@@ -603,7 +580,7 @@ class mod_groupformation_storage_manager {
     public function get_answers_to_special_question($category, $questionid) {
         global $DB;
 
-        return $DB->get_records('groupformation_answer', array(
+        return $DB->get_records('groupformation_answers', array(
                 'groupformation' => $this->groupformationid,
                 'category' => $category,
                 'questionid' => $questionid
@@ -1090,7 +1067,7 @@ class mod_groupformation_storage_manager {
             return $values;
         }
 
-        return $DB->get_records('groupformation_question', array('category' => $category, 'language' => $lang));
+        return $DB->get_records('groupformation_questions', array('category' => $category, 'language' => $lang));
     }
 
     /**
@@ -1141,7 +1118,7 @@ class mod_groupformation_storage_manager {
     public function get_question_by_position($category, $position) {
         global $DB;
 
-        return $DB->get_record('groupformation_question',
+        return $DB->get_record('groupformation_questions',
                 array('category' => $category, 'language' => 'en', 'position' => $position));
 
     }
@@ -1236,7 +1213,7 @@ class mod_groupformation_storage_manager {
         $sum = array_sum($this->get_numbers($categories));
 
         // Get userids of groupformation answers.
-        $userids = $DB->get_fieldset_select('groupformation_answer', 'userid', 'groupformation = ?',
+        $userids = $DB->get_fieldset_select('groupformation_answers', 'userid', 'groupformation = ?',
                 array($this->groupformationid));
 
         // Returns an array using the userids as keys and their frequency in answers as values.
@@ -1277,7 +1254,7 @@ class mod_groupformation_storage_manager {
     public function uses_filter() {
         global $DB;
 
-        return ($DB->count_records('groupformation_started',
+        return ($DB->count_records('groupformation_users',
                         array('groupformation' => $this->groupformationid, 'filtered' => 1))) > 0;
     }
 
@@ -1291,7 +1268,7 @@ class mod_groupformation_storage_manager {
     public function is_filtered($userid) {
         global $DB;
 
-        return boolval($DB->get_field('groupformation_started', 'filtered',
+        return boolval($DB->get_field('groupformation_users', 'filtered',
                 array('groupformation' => $this->groupformationid, 'userid' => $userid)));
     }
 
@@ -1304,11 +1281,11 @@ class mod_groupformation_storage_manager {
     public function get_honesty_stats() {
         global $DB;
 
-        $yes = $DB->count_records('groupformation_answer',
+        $yes = $DB->count_records('groupformation_answers',
                 array('groupformation' => $this->groupformationid, 'category' => 'honesty', 'answer' => 1));
-        $maybe = $DB->count_records('groupformation_answer',
+        $maybe = $DB->count_records('groupformation_answers',
                 array('groupformation' => $this->groupformationid, 'category' => 'honesty', 'answer' => 2));
-        $no = $DB->count_records('groupformation_answer',
+        $no = $DB->count_records('groupformation_answers',
                 array('groupformation' => $this->groupformationid, 'category' => 'honesty', 'answer' => 3));
         return ['yes' => $yes + $maybe, 'no' => $no];
     }
@@ -1322,18 +1299,18 @@ class mod_groupformation_storage_manager {
     public function filter_users($value) {
         global $DB;
 
-        $users = $DB->get_records('groupformation_answer',
+        $users = $DB->get_records('groupformation_answers',
                 array('groupformation' => $this->groupformationid, 'category' => 'honesty', 'answer' => 3),
                 'userid',
                 'userid'
         );
 
         foreach (array_keys($users) as $userid) {
-            $record = $DB->get_record('groupformation_started',
+            $record = $DB->get_record('groupformation_users',
                     array('groupformation' => $this->groupformationid, 'userid' => $userid));
             $record->filtered = intval($value);
 
-            $DB->update_record('groupformation_started', $record);
+            $DB->update_record('groupformation_users', $record);
         }
 
     }
@@ -1361,7 +1338,7 @@ class mod_groupformation_storage_manager {
     public function get_all_instances_with_user($userid) {
         global $DB;
         $ids = array();
-        $records = $DB->get_records('groupformation_started', array('userid' => $userid));
+        $records = $DB->get_records('groupformation_users', array('userid' => $userid));
         foreach ($records as $record) {
             $ids[] = $record->groupformation;
         }
@@ -1369,5 +1346,9 @@ class mod_groupformation_storage_manager {
         $instances = $DB->get_records_list('groupformation', 'id', $ids);
 
         return $instances;
+    }
+
+    public function get_state($internal = false) {
+        return $this->statemachine->get_state($internal);
     }
 }

@@ -81,31 +81,11 @@ class backup_groupformation_activity_structure_step extends backup_activity_stru
                 )
         );
 
-        // If we had more elements, we would build the tree here.
-        $qsettings = new backup_nested_element('q_settings');
-        $qsetting = new backup_nested_element('q_setting',
-                array('id'),
-                array(
-                        'archived',
-                        'topicvalues',
-                        'knowledgevalues',
-                        'topicvaluesnumber',
-                        'knowledgevaluesnumber'
-                )
-        );
-
-        $groupformation->add_child($qsettings);
-        $qsettings->add_child($qsetting);
-
         // Define data sources.
         $groupformation->set_source_table('groupformation', array('id' => backup::VAR_ACTIVITYID));
         // If we were referring to other tables, we would annotate the relation
         // with the element's annotate_ids() method.
-        if ($userinfo) {
-            $qsetting->set_source_table('groupformation_q_settings',
-                    array('groupformation' => backup::VAR_PARENTID)
-            );
-        }
+
         return $this->prepare_activity_structure($groupformation);
     }
 }
