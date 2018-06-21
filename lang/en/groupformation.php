@@ -25,7 +25,7 @@
 $string ['language'] = 'en';
 $string ['modulename'] = 'Group formation';
 $string ['modulenameplural'] = 'Group formations';
-$string ['modulename_help'] = 'The groupformation plugin generates groups of participants based on a questionnaire answers.';
+$string ['modulename_help'] = 'The groupformation plugin generates groups of students based on a questionnaire answers.';
 $string ['beta_version'] = '';
 $string ['groupformation:addinstance'] = 'Add groupformation';
 $string ['groupformation:editsettings'] = 'Edit groupformation';
@@ -555,3 +555,13 @@ $string ['groupoption_allanswersrequired'] = 'Before continuing to the next page
 
 $string ['re-open_questionnaire'] = 'Re-open questionnaire';
 $string ['close_questionnaire'] = 'Close questionnaire';
+
+$string ['math_prep_course_study'] = 'Math pre-course study';
+$string ['honest_answers'] = '<b>{$a}</b> students replied that they answered honestly and with concentration.';
+$string ['dishonest_answers'] = '<b>{$a}</b> students replied that they did not give honest answers with full concentration.';
+$string ['ratio_answers'] = 'Thus, <b>{$a}%</b> of the students replied that they did not give honest answers with full concentration.';
+$string ['filter_inactive'] = 'It will be not filtered';
+$string ['filter_active'] = 'It will be filtered.';
+$string ['filter_description'] = 'Click on "Filter" to exclude students who have not responded honestly and concentrated from the optimized grouping and to group them randomized instead. Click on "Do not filter" to undo this action.';
+$string ['no_filter_change'] = 'Due to the currently running or already completed group formation, it is not possible to change the filter settings.';
+

@@ -32,7 +32,7 @@ $string ['groupformation:addinstance'] = 'Gruppenformation hinzufügen';
 $string ['groupformation:editsettings'] = 'Gruppenformation bearbeiten';
 $string ['groupformation:onlymanager'] = 'Gruppenformation: Managerrechte';
 $string ['groupformation:onlyread'] = 'Gruppenformation: Leserechte';
-$string ['groupformation:onlystudent'] = 'Gruppenformation: Studentennrechte';
+$string ['groupformation:onlystudent'] = 'Gruppenformation: Teilnehmendenrechte';
 $string ['groupformation:readsettings'] = 'Gruppenformation: Leserechte (Einstellungen)';
 $string ['groupformation:submit'] = 'Gruppenformation: Abschicken';
 $string ['groupformation:view'] = 'Gruppenformation: Ansehen';
@@ -47,7 +47,7 @@ $string ['nogroupformation'] = 'keine Gruppenformation';
 $string ['groupnameexists'] = 'Dieser Gruppenname existiert schon';
 $string ['generategroups'] = 'Gruppengenerierung';
 $string ['namingschema'] = 'Namensschema';
-$string ['userpergroup'] = 'Wieviele Studierende pro Gruppe?';
+$string ['userpergroup'] = 'Wieviele Teilnehmende pro Gruppe?';
 $string ['notOpen'] = 'Die Abgabe ist nicht mehr möglich';
 $string ['continueTheForm'] = 'Weiter ausfüllen';
 $string ['completeTheForm'] = 'Ausfüllen';
@@ -56,7 +56,7 @@ $string ['overview'] = 'Übersicht';
 $string ['generategroups'] = "Gruppen erstellen";
 $string ['edit_param'] = 'Bearbeiten';
 $string ['editparam'] = 'Paramter bearbeiten';
-$string ['nochangespossible'] = 'Der Fragebogen wurde bereits von mindestens einem Studierenden beantwortet. Sie können nur noch Gruppengröße oder Gruppenanzahl ändern. Weitere Änderungen werden nicht gespeichert.';
+$string ['nochangespossible'] = 'Der Fragebogen wurde bereits von mindestens einem Teilnehmenden beantwortet. Sie können nur noch Gruppengröße oder Gruppenanzahl ändern. Weitere Änderungen werden nicht gespeichert.';
 $string ['availability_nochangespossible'] = 'Der Fragebogen wurde bereits beantwortet. Sie können die Verfügbarkeit nicht mehr ändern.';
 $string ['scenario'] = 'Szenario';
 $string ['scenarioLabel'] = '';
@@ -73,7 +73,7 @@ $string ['scenario_homeworkgroups_description'] = 'Hausaufgabengruppen arbeiten 
 $string ['scenario_presentationgroups'] = 'Referatsgruppen';
 $string ['scenario_presentationgroups_description'] = 'Referatsgruppen arbeiten nur über einen relativ kurzen Zeitraum zusammen an einer gemeinsamen Präsentation. Oft wird dabei die Aufgabenstellung schon zu Beginn auf die Gruppenmitglieder aufgeteilt (oder gewählt), dann individuell bearbeitet und erst am Ende wieder zusammengesetzt. Bewertet wird meist die gemeinsame Gruppenleistung. Daher geht es bei der Zusammensetzung von Referatsgruppen primär um gemeinsame Interessen an Themen.';
 $string ['scenario_usage_header'] = 'Fragebogen-Nutzung';
-$string ['scenario_usage_header_presentation'] = 'Studierende geben Präferenzen an';
+$string ['scenario_usage_header_presentation'] = 'Teilnehmende geben Präferenzen an';
 $string ['scenario_projectteams_short'] = 'Vorwissensbereiche und Motivation heterogen; Vorwissensniveau, angestrebte Ziele und Teamorientierung homogen; Persönlichkeitsmerkmale teilweise homogen, teilweise heterogen';
 $string ['scenario_homeworkgroups_short'] = 'Vorwissensbereiche und angestrebte Ziele heterogen; Teamorientierung homogen';
 $string ['scenario_presentationgroups_short'] = 'Ermöglicht ausschließlich das Ordnen einer Liste mittels Drag&Drop, wodurch das Windhundverfahren vermieden und eine gerechtere Einteilung möglich wird.';
@@ -84,25 +84,25 @@ $string ['topics_help'] = 'Wenn Themen verwendet werden, wird die Option zu Vorw
 $string ['topics_dummy'] = 'Thema';
 $string ['knowledge_dummy'] = 'Beispiel';
 $string ['topics_description'] = 'Ich möchte (Gruppen-)Themen zur Auswahl anbieten';
-$string ['topics_description_extended'] = 'Geben Sie hier die Themen an, die die Gruppen bearbeiten sollen. <strong>Die Gruppenzuordnung erfolgt ausschließlich nach den Priorisierungen der Studierenden.</strong> Alle anderen Fragebogenteile werden dann nicht berücksichtigt.';
+$string ['topics_description_extended'] = 'Geben Sie hier die Themen an, die die Gruppen bearbeiten sollen. <strong>Die Gruppenzuordnung erfolgt ausschließlich nach den Priorisierungen der Teilnehmenden.</strong> Alle anderen Fragebogenteile werden dann nicht berücksichtigt.';
 $string ['topics_question'] = 'Bitte sortieren Sie die zur Wahl stehenden Themen entsprechend Ihrer Präferenz, beginnend mit Ihrem bevorzugten Thema. Zum Sortieren verwenden Sie bitte Drag & Drop.';
 $string ['topicchoice'] = 'Themenauswahl';
 $string ['useOneLineForEachTopic'] = 'Pro Thema jeweils eine Zeile benutzen';
 $string ['knowledge'] = 'Vorwissen';
 $string ['knowledge_help'] = 'Wenn Themen (siehe unten) aktiviert sind, wird diese Option automatisch deaktiviert und ist nicht weiter auswählbar.';
 $string ['knowledge_description'] = 'Das Vorwissen in bestimmten Gebieten soll in die Gruppenbildung einfließen.';
-$string ['knowledge_description_extended'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einschätzen sollen.
-		Eine Vorschau des Fragebogens-Abschnittes für die Studierenden ist rechts zu sehen.';
+$string ['knowledge_description_extended'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Teilnehmenden einschätzen sollen.
+		Eine Vorschau des Fragebogens-Abschnittes für die Teilnehmenden ist rechts zu sehen.';
 $string ['knowledgeChoice'] = 'Vorwissen';
-$string ['knowledge_info_presentation'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einschätzen sollen.
-		Eine Vorschau des Fragebogens-Abschnittes für die Studierenden ist rechts zu sehen.
+$string ['knowledge_info_presentation'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Teilnehmenden einschätzen sollen.
+		Eine Vorschau des Fragebogens-Abschnittes für die Teilnehmenden ist rechts zu sehen.
 		Für Ihre Auswahl "Referatsgruppen" wird das Vorwissen beim Gruppenbilden nicht berücksichtigt (auschließlich die Themenwahl).';
-$string ['knowledge_info_homework'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einschätzen sollen.
-		Eine Vorschau des Fragebogens-Abschnittes für die Studierenden ist rechts zu sehen.
+$string ['knowledge_info_homework'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Teilnehmenden einschätzen sollen.
+		Eine Vorschau des Fragebogens-Abschnittes für die Teilnehmenden ist rechts zu sehen.
 		Für Ihre Auswahl "Hausaufgabengruppen" wird so optimiert, dass das Vorwissen sich in jeder Gruppe möglichst ergänzt.';
-$string ['knowledge_info_project'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Studierenden einschätzen sollen.
-		Eine Vorschau des Studierenden-Fragebogens sehen Sie rechts.
-		Für Ihre Auswahl "Projektgruppen" wird so optimiert, dass das Vorwissen sich in jeder Gruppe möglichst ergänzt, das Wissensniveau der Studierenden aber vergleichbar ist.';
+$string ['knowledge_info_project'] = 'Geben Sie hier die Wissensgebiete ein, in welchen sich die Teilnehmenden einschätzen sollen.
+		Eine Vorschau des Fragebogens sehen Sie rechts.
+		Für Ihre Auswahl "Projektgruppen" wird so optimiert, dass das Vorwissen sich in jeder Gruppe möglichst ergänzt, das Wissensniveau der Teilnehmenden aber vergleichbar ist.';
 $string ['add_line'] = 'Zeile hinzufügen';
 $string ['remove_line'] = 'Zeile entfernen';
 $string ['preview'] = 'Vorschau:';
@@ -111,8 +111,8 @@ $string ['knowledge_question'] = 'Wie schätzen Sie Ihr persönliches Vorwissen 
 $string ['knowledge_scale'] = '0&nbsp;=&nbsp;kein&nbsp;Vorwissen, 100&nbsp;=&nbsp;sehr&nbsp;viel Vorwissen';
 $string ['groupoptions'] = 'Gruppen-Einstellungen';
 $string ['groupoption_description'] = 'Gruppen-Einstellungen';
-$string ['groupoption_help'] = 'Diese Einstellungen können bis zum Starten der Gruppenbildung geändert werden, selbst wenn schon Fragebögen von Studierenden ausgefüllt wurden.';
-$string ['groupoption_onlyactivestudents'] = 'Studierende ohne einzige Antwort werden nicht in Gruppen eingeteilt.';
+$string ['groupoption_help'] = 'Diese Einstellungen können bis zum Starten der Gruppenbildung geändert werden, selbst wenn schon Fragebögen von Teilnehmenden ausgefüllt wurden.';
+$string ['groupoption_onlyactivestudents'] = 'Teilnehmende ohne einzige Antwort werden nicht in Gruppen eingeteilt.';
 $string ['maxmembers'] = 'Max. Gruppengröße';
 $string ['maxgroups'] = 'Max. Gruppenanzahl';
 $string ['maxpoints'] = 'Max. Punktzahl';
@@ -135,7 +135,7 @@ $string ['choose_scenario'] = 'Szenario auswählen';
 $string ['choose_number'] = 'Anzahl auswählen';
 $string ['choose_evaluationmethod'] = 'Bewertungsmethode auswählen';
 $string ['evaluation_point_info'] = 'Bitte maximale Punktzahl eingeben';
-$string ['students_enrolled_info'] = 'Studierenden sind im Kurs eingeschrieben';
+$string ['students_enrolled_info'] = 'Teilnehmenden sind im Kurs eingeschrieben';
 $string ['groupSettingsInfo'] = 'Sie haben Themen zur Auswahl angegeben. Daraus bestimmt sich die Anzahl der Gruppen und deren Größe.';
 $string ['analyse'] = 'Analyse';
 $string ['questionnaire_not_started'] = 'Der Fragebogen wartet noch auf Ihre Bearbeitung.';
@@ -212,37 +212,37 @@ $string ['info_text_student'] = 'In diesem Moodle-Kurs wird die Gruppenformation
 ';
 $string ['info_header_teacher_analysis'] = 'Wie funktioniert die Gruppenformation?';
 $string ['info_header_teacher_settings'] = 'Wie funktioniert die Gruppenformation?';
-$string ['info_text_teacher_settings'] = 'Mit diesem Plugin haben Sie die Möglichkeit die Bildung von Gruppen Ihrer Studierenden zu optimieren. Die drei erforderlichen Schritte sind:<br>
+$string ['info_text_teacher_settings'] = 'Mit diesem Plugin haben Sie die Möglichkeit die Bildung von Gruppen Ihrer Teilnehmenden zu optimieren. Die drei erforderlichen Schritte sind:<br>
 		1.)	Sie fügen die Aktivität „Gruppenformation“ Ihrem Kurs hinzu.
 		Auf dieser Seite können Sie auswählen, welches Szenario am besten zu Ihren Vorstellungen der späteren Gruppenarbeit passt
 		(bei Unsicherheit wählen Sie Projektteams). Die weiteren Einstellungen erlauben Ihnen die gewünschte Gruppengröße und evtl. eine Themenauswahl für
-		Studierende anzugeben. Wenn Sie möchten, dass die Studierenden sich im Vorwissen gut ergänzen in den später gebildeten Gruppen, können Sie die Vorwissensthemen
+		Teilnehmende anzugeben. Wenn Sie möchten, dass die Teilnehmenden sich im Vorwissen gut ergänzen in den später gebildeten Gruppen, können Sie die Vorwissensthemen
 		zur Abfrage angeben.<br>
-		2.)	Studierende sehen den Fragebogen, welcher basierend auf Ihren Einstellungen erstellt wurde. Die Dauer der Verfügbarkeit der Fragen können Sie einstellen (siehe 1.).
-		Eine Vorschau des Studierenden-Fragebogens erhalten Sie beim späteren Öffnen der Aktivität als Lehrende/r.<br>
+		2.)	Teilnehmende sehen den Fragebogen, welcher basierend auf Ihren Einstellungen erstellt wurde. Die Dauer der Verfügbarkeit der Fragen können Sie einstellen (siehe 1.).
+		Eine Vorschau des Fragebogens erhalten Sie beim späteren Öffnen der Aktivität als Lehrende/r.<br>
 		3.)	Sie können unter dem Menüpunkt ‚Gruppenformation‘, wenn Sie die Aktivität später selbst aufrufen, sehen, wie viele Antworten bereits
 		vorliegen. Sind Sie mit dem Rücklauf zufrieden, starten Sie manuell die Bildung der Gruppen (dies geschieht niemals automatisch).<br>
 		Es dauert eine Weile, bis alle Gruppen fertig erstellt sind. Das Ergebnis können Sie sich noch einmal ansehen, bevor Sie die Gruppen so in Moodle übernehmen.<br>
 		<br>
-		Fertig. Jetzt können auch die Studierenden Ihre Gruppenmitglieder sehen. Es ist Ihnen als Lehrende/r jederzeit möglich, die Gruppen manuell in Moodle nachzubearbeiten (bspw. bei Nachzüglern).<br>
+		Fertig. Jetzt können auch die Teilnehmenden Ihre Gruppenmitglieder sehen. Es ist Ihnen als Lehrende/r jederzeit möglich, die Gruppen manuell in Moodle nachzubearbeiten (bspw. bei Nachzüglern).<br>
 ';
-$string ['info_text_teacher_analysis'] = 'Mit diesem Plugin haben Sie die Möglichkeit die Bildung von Gruppen Ihrer Studierenden zu optimieren. Die drei erforderlichen Schritte sind:<br>
+$string ['info_text_teacher_analysis'] = 'Mit diesem Plugin haben Sie die Möglichkeit die Bildung von Gruppen Ihrer Teilnehmenden zu optimieren. Die drei erforderlichen Schritte sind:<br>
 		<br>
 		1.)	Sie fügen die Aktivität „Gruppenformation“ Ihrem Kurs hinzu.
 		(Das ist bereits geschehen, wenn Sie diese Seite hier sehen).
 		In den Einstellungen können Sie auswählen, welches Szenario am besten zu Ihren Vorstellungen der späteren Gruppenarbeit passt
 		(bei Unsicherheit wählen Sie Projektteams). Die weiteren Einstellungen erlauben Ihnen die gewünschte Gruppengröße und evtl. eine Themenauswahl für
-		Studierende anzugeben. Wenn Sie möchten, dass die Studierenden sich im Vorwissen gut ergänzen in den später gebildeten Gruppen, können Sie die Vorwissensthemen
+		Teilnehmende anzugeben. Wenn Sie möchten, dass die Teilnehmenden sich im Vorwissen gut ergänzen in den später gebildeten Gruppen, können Sie die Vorwissensthemen
 		zur Abfrage angeben.<br>
 		<br>
-		2.)	Studierende sehen den Fragebogen, welcher basierend auf Ihren Einstellungen erstellt wurde. Die Dauer der Verfügbarkeit der Fragen können Sie einstellen (siehe 1.).
-		Eine Vorschau des Studierenden-Fragebogens erhalten Sie im Menü oben.<br>
+		2.)	Teilnehmende sehen den Fragebogen, welcher basierend auf Ihren Einstellungen erstellt wurde. Die Dauer der Verfügbarkeit der Fragen können Sie einstellen (siehe 1.).
+		Eine Vorschau des Fragebogens erhalten Sie im Menü oben.<br>
 		<br>
 		3.)	Sie können unter dem Menüpunkt ‚Gruppenformation‘ hier auf dieser Seite sehen, wie viele Antworten bereits
 		vorliegen. Sind Sie mit dem Rücklauf zufrieden, starten Sie manuell die Bildung der Gruppen (dies geschieht niemals automatisch).<br>
 		Es dauert eine Weile, bis alle Gruppen fertig erstellt sind. Das Ergebnis können Sie sich noch einmal ansehen, bevor Sie die Gruppen so in Moodle übernehmen.<br>
 		<br>
-		Fertig. Jetzt können auch die Studierenden Ihre Gruppenmitglieder sehen. Es ist Ihnen als Lehrende/r jederzeit möglich, die Gruppen manuell in Moodle nachzubearbeiten (bspw. bei Nachzüglern).<br>
+		Fertig. Jetzt können auch die Teilnehmenden Ihre Gruppenmitglieder sehen. Es ist Ihnen als Lehrende/r jederzeit möglich, die Gruppen manuell in Moodle nachzubearbeiten (bspw. bei Nachzüglern).<br>
 ';
 $string['grouping_status_0'] = 'Um die Gruppenbildung starten zu können, müssen Sie die Aktivität im Tab Überblick beenden.';
 $string['grouping_status_1'] = 'Sie können die Gruppenbildung jetzt starten.';
@@ -261,9 +261,9 @@ $string['questionnaire_committed'] = 'Sie haben Ihre Antworten bereits eingereic
 $string['questionnaire_closed'] = 'Der Fragebogen ist geschlossen, so dass keine Antworten eingegeben oder bearbeitet werden können.';
 $string['no_data_to_display'] = 'Keine Daten vorhanden.';
 
-$string['onlyactivestudents'] = 'Zur Gruppenbildung sollen ausschließlich Studierende betrachtet werden, die mind. eine Frage beantwortet haben.';
+$string['onlyactivestudents'] = 'Zur Gruppenbildung sollen ausschließlich Teilnehmende betrachtet werden, die mind. eine Frage beantwortet haben.';
 $string['emailnotifications'] = 'Nach Abschluss der Gruppenbildung möchte ich via Nachricht in Moodle benachrichtigt werden.';
-$string['onlyactivestudents_description'] = 'Zur Gruppenbildung sollen ausschließlich Studierende betrachtet werden, die mind. eine Frage beantwortet haben.';
+$string['onlyactivestudents_description'] = 'Zur Gruppenbildung sollen ausschließlich Teilnehmende betrachtet werden, die mind. eine Frage beantwortet haben.';
 $string['emailnotifications_description'] = 'Nach Abschluss der Gruppenbildung möchte ich via Nachricht in Moodle benachrichtigt werden.';
 $string['sampleGroupName'] = 'Der Name deiner Gruppe ist';
 $string['oneManGroup'] = 'Du bist allein in dieser Gruppe.';
@@ -280,6 +280,15 @@ $string['no_time'] = 'Kein Zeitpunkt festgelegt';
 $string['activity_end'] = 'Aktivität beenden';
 $string['activity_start'] = 'Aktivität starten';
 
+$string ['analysis_status_q_closed'] = 'Die Aktivität wurde geschlossen. Sie können sie neu starten oder mit der Gruppenbildung im entsprechenden Reiter fortfahren.';
+$string ['analysis_status_q_open'] = 'Die Aktivität ist derzeit geöffnet und Teilnehmende können den Fragebogen beantworten. Sie müssen die Aktivität stoppen, bevor Sie mit der Gruppenbildung beginnen können.';
+$string ['analysis_status_ga_done'] = 'Die Gruppen wurden nach Moodle übernommen. Sie können den Fragebogen für alle Teilnehmenden wieder öffnen, die den Fragebogen bisher nicht beantwortet haben.';
+$string ['analysis_status_ga_started'] = 'Gruppen werden nach Moodle übernommen. Das kann eine Weile dauern. Kommen Sie zu einem späteren Zeitpunkt zurück um die Ergebnisse einzusehen.';
+$string ['analysis_status_q_reopened'] = 'Gruppen wurden nach Moodle übernommen. Sie haben den Fragebogen erneut geöffnet und können ihn jederzeit wieder schließen.';
+$string ['analysis_status_gf_done'] = 'Die Gruppenbildung ist abgeschlossen. Sie können sich die generierten Gruppen ansehen und anschließend nach Moodle übernehmen.';
+$string ['analysis_status_gf_started'] = 'Die Gruppenbildung läuft. Das kann eine Weile dauern. Kommen Sie zu einem späteren Zeitpunkt zurück um die Ergebnisse einzusehen.';
+$string ['analysis_status_gf_aborted'] = 'Die Gruppenbildung wurde abgebrochen. Das Zurücksetzen des Systems kann eine Weile dauern. Kommen Sie zu einem späteren Zeitpunkt zurück um die Gruppenformation erneut anzustoßen.';
+
 $string['contact_members'] = 'Um deine Gruppenmitglieder zu kontaktieren, klicke auf deren Profilnamen.';
 $string['invalid'] = 'Ungültiger Zustand';
 $string['groups_built'] = 'Gruppen sind gebildet.';
@@ -287,10 +296,10 @@ $string['activity_visible'] = 'Diese Aktivität ist für Sie aufgrund Ihrer Roll
 
 $string['are'] = 'Es gibt';
 $string['are_now'] = 'Es gibt derzeit';
-$string['students_available_single'] = 'eingeschriebenen Studierenden, der den Fragebogen ausfüllen kann.';
-$string['students_available_multiple'] = 'eingeschriebene Studierende, die den Fragebogen ausfüllen können.';
-$string['students_answered_single'] = 'Studierender hat den Fragebogen bearbeitet.';
-$string['students_answered_multiple'] = 'Studierende haben den Fragebogen bearbeitet.';
+$string['students_available_single'] = 'eingeschriebenen Teilnehmenden, der den Fragebogen ausfüllen kann.';
+$string['students_available_multiple'] = 'eingeschriebene Teilnehmende, die den Fragebogen ausfüllen können.';
+$string['students_answered_single'] = 'Teilnehmende hat den Fragebogen bearbeitet.';
+$string['students_answered_multiple'] = 'Teilnehmende haben den Fragebogen bearbeitet.';
 $string['name_by_group'] = 'Name:';
 $string['quality'] = 'Gruppenqualität:';
 $string['quality_info'] = 'Der Gruppen-Performanz-Index (GPI) gibt die Qualität der gebildeten Gruppe wieder und ist ein Wert zwischen 0 und 1. Je größer der Wert, deste besser ist die gebildete Gruppe. Ist kein Wert angegeben, so sind die Gruppen nicht algorithmisch gebildet, sondern randomisiert.';
@@ -308,18 +317,18 @@ $string['evaluation'] = 'Auswertung';
 $string['group_overview'] = 'Übersicht gebildeter Gruppen';
 $string['max_group_size_not_reached'] = 'Maximale Gruppengröße wurde bei folgenden Gruppen nicht erreicht:';
 $string['your_group'] = 'Deine Gruppe';
-$string['students_grouping_single'] = 'Studierende zur Gruppenbildung.';
-$string['students_grouping_multiple'] = 'Studierende zur Gruppenbildung.';
-$string['students_committed_single'] = 'Studierende davon haben ihre Antworten schon endgültig abgegeben.';
-$string['students_committed_multiple'] = 'Studierende davon hat seine Antworten schon endgültig abgegeben.';
+$string['students_grouping_single'] = 'Teilnehmende zur Gruppenbildung.';
+$string['students_grouping_multiple'] = 'Teilnehmende zur Gruppenbildung.';
+$string['students_committed_single'] = 'Teilnehmende davon haben ihre Antworten schon endgültig abgegeben.';
+$string['students_committed_multiple'] = 'Teilnehmende davon hat seine Antworten schon endgültig abgegeben.';
 $string['committed_not_completed'] = 'von den fest abgegebenen Fragebögen sind nicht vollständig.';
 $string['completed_questionnaire'] = 'vollständig beantwortete Fragebögen.';
 
 $string['emailnotifications_info'] = '<i style="color:red;">Die automatische Benachrichtigung über abgeschlossene Gruppenformationen ist momentan leider nicht verfügbar.</i>';
-$string['onlyactivestudents_info'] = 'Zur Gruppenbildung werden ausschließlich Studierende betrachtet werden, die mind. eine Frage beantwortet haben.';
-$string['onlyactivestudents'] = 'Zur Gruppenbildung werden ausschließlich Studierende betrachtet werden, die mind. eine Frage beantwortet haben. Sie können das in den {$a->url} anpassen.';
+$string['onlyactivestudents_info'] = 'Zur Gruppenbildung werden ausschließlich Teilnehmende betrachtet werden, die mind. eine Frage beantwortet haben.';
+$string['onlyactivestudents'] = 'Zur Gruppenbildung werden ausschließlich Teilnehmende betrachtet werden, die mind. eine Frage beantwortet haben. Sie können das in den {$a->url} anpassen.';
 $string['emailnotifications'] = '<i style="color:red;">Die automatische Benachrichtigung über abgeschlossene Gruppenformationen ist momentan leider nicht verfügbar.</i>';
-$string['onlyactivestudents_description'] = 'Zur Gruppenbildung werden ausschließlich Studierende betrachtet werden, die mind. eine Frage beantwortet haben.';
+$string['onlyactivestudents_description'] = 'Zur Gruppenbildung werden ausschließlich Teilnehmende betrachtet werden, die mind. eine Frage beantwortet haben.';
 $string['emailnotifications_description'] = '<i style="color:red;">Die automatische Benachrichtigung über abgeschlossene Gruppenformationen ist momentan leider nicht verfügbar.</i>';
 
 
@@ -370,7 +379,7 @@ $string['no_evaluation_ready'] = 'Es gibt keine Auswertung, da nicht alle Fragen
 $string['eval_final_text'] = 'Die Vergleichswerte basieren auf derzeit {$a->percent}% gegebener Antworten ({$a->completed} von {$a->coursesize} Personen haben bisher geantwortet).';
 
 $string['eval_first_page_title'] = "Allgemeine Informationen";
-$string['eval_first_page_text'] = "Sie erhalten nun eine individuelle Rückmeldung auf die Antworten, die Sie im Fragebogen gegeben haben. Dabei werden jeweils mehrere Antworten, die sich auf dasselbe Thema beziehen, zu einem Mittelwert zusammengefasst und mit einer Vergleichsstichprobe anderer Studierender verglichen. Daraus wird ein sogenannter Prozentrang berechnet; dieser bewertet nicht, ob eine Eigenschaft gut oder schlecht ist, sondern nur, wie häufig solche Werte unter Studierenden vorkommen. Ein Prozentrang von 10 bedeutet, dass 10% der Vergleichsstichprobe ein gleiches oder kleineres Ergebnis hatten; ein Prozentrang von 90 hingegen bedeutet, dass 90% der Vergleichsstichprobe ein gleiches oder kleineres Ergebnis hatten.
+$string['eval_first_page_text'] = "Sie erhalten nun eine individuelle Rückmeldung auf die Antworten, die Sie im Fragebogen gegeben haben. Dabei werden jeweils mehrere Antworten, die sich auf dasselbe Thema beziehen, zu einem Mittelwert zusammengefasst und mit einer Vergleichsstichprobe anderer Teilnehmender verglichen. Daraus wird ein sogenannter Prozentrang berechnet; dieser bewertet nicht, ob eine Eigenschaft gut oder schlecht ist, sondern nur, wie häufig solche Werte unter Teilnehmenden vorkommen. Ein Prozentrang von 10 bedeutet, dass 10% der Vergleichsstichprobe ein gleiches oder kleineres Ergebnis hatten; ein Prozentrang von 90 hingegen bedeutet, dass 90% der Vergleichsstichprobe ein gleiches oder kleineres Ergebnis hatten.
 \\n\\n
 Zunächst erhalten Sie Rückmeldung zu fünf Persönlichkeitseigenschaften, die als relativ stabil, das heißt unabhängig von bestimmten Situationen, betrachtet werden können: Extraversion, Neurotizismus, Gewissenhaftigkeit, soziale Verträglichkeit und Offenheit für Erfahrungen.
 \\n\\n
@@ -476,7 +485,7 @@ $string['consent_agree'] = 'Ich bin einverstanden';
 $string['questionnaire_delete'] = 'Zustimmung widerrufen';
 $string['groupsize'] = 'Gruppengröße:';
 $string['unselect_all'] = 'Auswahl aufheben';
-$string['students_selected'] = 'Studenten in Auswahl';
+$string['students_selected'] = 'Teilnehmende in Auswahl';
 $string['select_info'] = 'Wählen Sie die Gruppenmitglieder aus, um Gruppen zu bearbeiten';
 
 $string['topic_group_info'] = 'Euer Thema ist';
@@ -512,10 +521,10 @@ $string['settings_archiving_time'] = 'Archivierungszeitpunkt';
 $string['settings_archiving_time_description'] = 'Nach der gesetzten Anzahl an Tagen wird die Aktivität archiviert.';
 
 $string['settings_import_export'] = 'Import/Export von Antworten';
-$string['settings_import_export_description'] = 'Wenn aktiviert, können Studierende ihre Antworten importieren bzw. exportieren.';
+$string['settings_import_export_description'] = 'Wenn aktiviert, können Teilnehmende ihre Antworten importieren bzw. exportieren.';
 
 $string['settings_participant_code'] = 'Teilnehmercode';
-$string['settings_participant_code_description'] = 'Studierende müssen einen Teilnehmercode eingeben (so wie in psychologischen Tests).';
+$string['settings_participant_code_description'] = 'Teilnehmende müssen einen Teilnehmercode eingeben (so wie in psychologischen Tests).';
 
 $string['answers_for_eval_text'] = 'Wenn alle Fragen beantwortet sind, wird im Reiter \'Auswertung\' eine Auswertung angezeigt. Bei unvollständiger Bearbeitung des Fragebogens steht diese Funktion nicht zur Verfügung.';
 
@@ -556,5 +565,13 @@ $string ['freetext_noanswer'] = 'Keine Antwort';
 
 $string ['allanswersrequired'] = 'Es müssen alle Fragen des Fragebogens beantwortet werden.';
 $string ['allanswersrequired_description'] = 'Es müssen alle Fragen des Fragebogens beantwortet werden.';
-$string ['groupoption_allanswersrequired'] = 'Damit optimierte Gruppen gebildet werden können, werden alle Antworten eines Studierenden benötigt. Beantwortet ein Studierender den Fragebogen nicht vollständig wird dieser lediglich randomisiert gruppiert.';
+$string ['groupoption_allanswersrequired'] = 'Damit optimierte Gruppen gebildet werden können, werden alle Antworten eines Teilnehmenden benötigt. Beantwortet ein Teilnehmender den Fragebogen nicht vollständig wird dieser lediglich randomisiert gruppiert.';
 
+$string ['math_prep_course_study'] = 'Mathe-Vorkurs-Studie';
+$string ['honest_answers'] = 'Es haben <b>{$a}</b> Teilnehmende geantwortet, dass sie ehrlich und konzentriert geantwortet haben.';
+$string ['dishonest_answers'] = 'Es haben <b>{$a}</b> Teilnehmende geantwortet, dass sie <b>nicht</b> ehrlich und konzentriert geantwortet haben.';
+$string ['ratio_answers'] = 'Es haben also <b>{$a}%</b> der Teilnehmende geantwortet, dass sie <b>nicht</b> ehrlich und konzentriert geantwortet haben.';
+$string ['filter_inactive'] = 'Es wird aktuell nicht gefiltert.';
+$string ['filter_active'] = 'Es wird aktuell gefiltert.';
+$string ['filter_description'] = 'Klicken sie auf "Filtern", um die Teilnehmenden, die nicht ehrlich und konzentriert geantwortet haben von der optimierten Gruppierung auszuschließen und sie stattdessen randomisiert zu gruppieren. Klicken Sie auf "Nicht filtern" um diese Aktion rückgängig zu machen.';
+$string ['no_filter_change'] = 'Aufgrund der laufenden oder schon abgeschlossenen Gruppenbildung ist ein Ändern der Filtereinstellungen nicht möglich.';

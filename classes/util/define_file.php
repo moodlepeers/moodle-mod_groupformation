@@ -236,7 +236,7 @@ class mod_groupformation_data {
     );
 
     /** @var bool Special mode booleans (can be ignored in normal use cases). */
-    private static $mathprepcoursemode = false;
+    private static $mathprepcoursemode = true;
 
     /**
      * Returns whether this instance is running in math prep course mode;

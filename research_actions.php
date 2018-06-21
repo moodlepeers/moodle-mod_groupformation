@@ -54,37 +54,33 @@ if (mod_groupformation_data::is_math_prep_course_mode()) {
     // Generate debug actions as buttons.
     $debugbuttons = "";
     $debugbuttons .= '<div class="gf_pad_header">';
-    $debugbuttons .= 'Mathe-Vorkurs-Studie';
+    $debugbuttons .= get_string('math_prep_course_study', 'groupformation');
     $debugbuttons .= '</div>';
     $debugbuttons .= '<div class="gf_pad_content">';
 
     $debugbuttons .= '<p>';
-
-    $debugbuttons .= 'Es haben <b>' . $stats['yes'] . '</b> Studierende geantwortet, dass sie ehrlich und ';
-    $debugbuttons .= 'konzentriert geantwortet haben.';
+    $debugbuttons .= get_string('honest_answers', 'groupformation', $stats['yes']);
     $debugbuttons .= '<br>';
-    $debugbuttons .= 'Es haben <b>' . $stats['no'] . '</b> Studierende geantwortet, dass sie <b>nicht</b> ehrlich und ';
-    $debugbuttons .= 'konzentriert geantwortet haben.';
+    $debugbuttons .= get_string('dishonest_answers', 'groupformation', $stats['no']);
     $debugbuttons .= '</p>';
     $debugbuttons .= '<p>';
     $v = 0.0;
     if ($stats['yes'] !== 0 && $stats['no'] !== 0) {
         $v = round(floatval($stats['no']) / ($stats['yes'] + $stats['no']), 4) * 100;
     }
-    $debugbuttons .= 'Es haben also <b>' . $v . '%</b> der Studierende geantwortet, dass sie <b>nicht</b> ehrlich und ';
-    $debugbuttons .= 'konzentriert geantwortet haben.';
+    $debugbuttons .= get_string('ratio_answers', 'groupformation', $v);
     $debugbuttons .= '</p>';
 
     if (!$store->uses_filter()) {
         $debugbuttons .= '<p>';
         $debugbuttons .= '<h5>';
-        $debugbuttons .= 'Es wird aktuell nicht gefiltert.';
+        $debugbuttons .= get_string('filter_inactive', 'groupformation');
         $debugbuttons .= '</h5>';
         $debugbuttons .= '</p>';
     } else {
         $debugbuttons .= '<p>';
         $debugbuttons .= '<h5 style="color: red;">';
-        $debugbuttons .= 'Es wird aktuell gefiltert.';
+        $debugbuttons .= get_string('filter_active', 'groupformation');
         $debugbuttons .= '</h5>';
         $debugbuttons .= '</p>';
     }
@@ -96,9 +92,7 @@ if (mod_groupformation_data::is_math_prep_course_mode()) {
     if ($ajm::get_state($job) == 'ready') {
 
         $debugbuttons .= '<p>';
-        $debugbuttons .= 'Klicken sie auf "Filtern", um die Studierenden, die nicht ehrlich und konzentriert geantwortet ';
-        $debugbuttons .= 'haben von der optimierten Gruppierung auszuschließen und sie stattdessen randomisiert zu gruppieren. ';
-        $debugbuttons .= 'Klicken Sie auf "Nicht filtern" um diese Aktion rückgängig zu machen.';
+        $debugbuttons .= get_string('filter_description', 'groupformation');
         $debugbuttons .= '</p>';
 
         if (!$store->uses_filter()) {
@@ -120,8 +114,7 @@ if (mod_groupformation_data::is_math_prep_course_mode()) {
 
     } else {
         $debugbuttons .= '<p>';
-        $debugbuttons .= 'Aufgrund der laufenden oder schon abgeschlossenen Gruppenbildung ist ein Ändern ';
-        $debugbuttons .= 'der Filtereinstellungen nicht möglich.';
+        $debugbuttons .= get_string('no_filter_change', 'groupformation');
         $debugbuttons .= '</p>';
     }
 
