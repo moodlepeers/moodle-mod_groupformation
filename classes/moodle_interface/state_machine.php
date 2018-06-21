@@ -98,7 +98,7 @@ class mod_groupformation_state_machine {
      * @param $state
      * @throws dml_exception
      */
-    private function set_state($state) {
+    public function set_state($state) {
         global $DB;
 
         $DB->set_field('groupformation', 'state', $state, array('id' => $this->groupformationid));

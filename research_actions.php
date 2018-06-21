@@ -89,7 +89,8 @@ if (mod_groupformation_data::is_math_prep_course_mode()) {
 
     $job = $ajm::get_job($groupformation->id);
 
-    if ($ajm::get_state($job) == 'ready') {
+    $state = $store->statemachine->get_state();
+    if (in_array($state, array('q_closed'))) { //$ajm::get_state($job) == 'ready') {
 
         $debugbuttons .= '<p>';
         $debugbuttons .= get_string('filter_description', 'groupformation');
