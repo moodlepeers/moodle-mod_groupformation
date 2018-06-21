@@ -1,36 +1,47 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<questionnaire version="2017090901">
+<questionnaire version="2018061902">
     <categories>
+        <category>demographic</category>
+        <category>skills</category>
+        <category>times</category>
         <category>general</category>
-        <category>points</category>
         <category>grade</category>
+        <category>points</category>
         <category>character</category>
         <category>motivation</category>
         <category>team</category>
-        <category>learning</category>
+        <category>honesty</category>
         <category>topic</category>
     </categories>
     <scenarios>
         <scenario>
             <name>projectteams</name>
             <categories>
+                <category>demographic</category>
+                <category>skills</category>
+                <category>times</category>
                 <category>general</category>
                 <category>grade</category>
                 <category>points</category>
                 <category>character</category>
                 <category>motivation</category>
                 <category>team</category>
+                <category>honesty</category>
             </categories>
         </scenario>
         <scenario>
             <name>homeworkgroups</name>
             <categories>
+                <category>demographic</category>
+                <category>skills</category>
+                <category>times</category>
                 <category>general</category>
                 <category>grade</category>
                 <category>points</category>
                 <category>character</category>
-                <category>learning</category>
+                <category>motivation</category>
                 <category>team</category>
+                <category>honesty</category>
             </categories>
         </scenario>
         <scenario>

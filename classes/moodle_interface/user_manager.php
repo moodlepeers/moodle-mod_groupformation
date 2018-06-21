@@ -111,10 +111,16 @@ class mod_groupformation_user_manager {
      */
     public function get_started($sortedby = null, $fieldset = '*') {
         global $DB;
-
-        return $DB->get_records('groupformation_users', array(
+        $started = array();
+        $recs = $DB->get_records('groupformation_users', array(
                 'groupformation' => $this->groupformationid
         ), $sortedby, $fieldset);
+        foreach ($recs as $rec) {
+            if ($rec->answer_count != 0){
+                $started[] = $rec;
+            }
+        }
+        return $started;
     }
 
     /**
