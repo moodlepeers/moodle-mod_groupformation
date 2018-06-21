@@ -114,7 +114,7 @@ class mod_groupformation_overview_view_controller extends mod_groupformation_bas
                 // If consent was given, set internal.
                 if (isset($consent)) {
                     $usermanager->set_consent($userid, true);
-                    // User state machine calls action "consent"
+                    // User state machine calls action "consent".
                     $this->store->userstatemachine->change_state($userid, "consent");
                 }
 

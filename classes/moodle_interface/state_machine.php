@@ -46,13 +46,13 @@ class mod_groupformation_state_machine {
 
     /** @var array Transitions of state machine */
     private $transitions = array(
-            0 => array(1, 0),      // closing questionnaire
-            1 => array(2, 0),   // starting groupformation, opening questionnaire
-            2 => array(4, 3),   // groupformation terminates, aborting groupformation
-            3 => array(3, 1),      // job abortion terminates
-            4 => array(5, 1),    // starting groupadoption, reset groupformation
-            5 => array(6, 5),      // job terminates
-            6 => array(1, 7),     // deleting moodlegroups, reopens questionnaire,
+            0 => array(1, 0),   // Closing questionnaire.
+            1 => array(2, 0),   // Starting groupformation, opening questionnaire.
+            2 => array(4, 3),   // Groupformation terminates, aborting groupformation.
+            3 => array(3, 1),   // Job abortion terminates.
+            4 => array(5, 1),   // Starting groupadoption, reset groupformation.
+            5 => array(6, 5),   // Job terminates.
+            6 => array(1, 7),   // Deleting moodlegroups, reopens questionnaire.
             7 => array(6, 7)
     );
 
@@ -115,8 +115,9 @@ class mod_groupformation_state_machine {
 
         $nextstate = $this->transitions[$state][1];
 
-        if (!is_null($nextstate))
+        if (!is_null($nextstate)) {
             $this->set_state($nextstate);
+        }
     }
 
     /**

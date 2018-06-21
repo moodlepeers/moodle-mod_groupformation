@@ -618,7 +618,7 @@ class mod_groupformation_questionnaire_controller {
                 $s .= get_string('questionnaire_committed', 'groupformation');
                 $s .= '</div>';
                 $assigns['committed_alert'] = $s;
-            } else if (!in_array($state, array('q_open', 'q_reopened'))){
+            } else if (!in_array($state, array('q_open', 'q_reopened'))) {
                 $s = '<div class="alert" id="commited_view">';
                 $s .= get_string('questionnaire_closed', 'groupformation');
                 $s .= '</div>';

@@ -44,9 +44,6 @@ class backup_groupformation_activity_structure_step extends backup_activity_stru
      * @throws base_step_exception
      */
     protected function define_structure() {
-        // Get know if we are including userinfo.
-        $userinfo = $this->get_setting_value('userinfo');
-
         // Define the root element describing the groupformation instance.
         $groupformation = new backup_nested_element('groupformation',
                 array('id'),

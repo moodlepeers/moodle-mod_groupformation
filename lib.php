@@ -139,8 +139,6 @@ function groupformation_update_instance(stdClass $groupformation, mod_groupforma
 
     groupformation_grade_item_update($groupformation);
 
-    // groupformation_save_more_infos($groupformation, false);
-
     return $result;
 }
 
@@ -165,7 +163,7 @@ function groupformation_delete_instance($id) {
     }
 
     // Delete any dependent records here.
-    $result = $DB->delete_records('groupformation', array(
+    $DB->delete_records('groupformation', array(
         'id' => $groupformation->id));
 
     // Cascading deletion of all related db entries.

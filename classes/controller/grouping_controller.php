@@ -507,8 +507,6 @@ class mod_groupformation_grouping_controller {
     private function get_group_members($groupid) {
         global $CFG, $COURSE;
 
-        //var_dump($groupid);
-
         $userids = array_keys($this->groups[$groupid]->users);
 
         $groupmembers = array();
@@ -543,7 +541,7 @@ class mod_groupformation_grouping_controller {
      */
     private function get_group_link($groupid) {
         $link = array();
-        if ($this->statemachine->get_state()== "ga_done") {
+        if ($this->statemachine->get_state() == "ga_done") {
             $url = new moodle_url ('/group/members.php', array(
                 'group' => $groupid));
             $link [] = $url;

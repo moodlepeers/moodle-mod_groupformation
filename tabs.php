@@ -80,7 +80,7 @@ if ($editsettings) {
 
     // If questionnaire is available for students.
     $state = $store->statemachine->get_state();
-    if (true || in_array($state, array('q_open', 'q_reopened')) || $usermanager->already_answered($userid)) {//$store->is_questionnaire_available() || ($store->is_questionnaire_accessible())) {
+    if (true || in_array($state, array('q_open', 'q_reopened')) || $usermanager->already_answered($userid)) {
         // The questionnaire view.
         $questionnaireviewurl = new moodle_url ('/mod/groupformation/questionnaire_view.php', array(
             'id' => $usedid));

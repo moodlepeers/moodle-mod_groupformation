@@ -137,7 +137,7 @@ class mod_groupformation_user_state_machine {
         $state = $this->get_state($userid, true);
         $state = $state % 10;
 
-        if (array_key_exists($state, $transitions) && array_key_exists($action,$transitions[$state])) {
+        if (array_key_exists($state, $transitions) && array_key_exists($action, $transitions[$state])) {
             $newstate = $transitions[$state][$action];
             $this->set_state($userid, $newstate);
         }

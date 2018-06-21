@@ -189,7 +189,6 @@ class mod_groupformation_overview_controller {
                         );
                         break;
                     default:
-                        // userstate == started, consent_given, p_code_given
                         $infounfolded = true;
 
                         $pc = mod_groupformation_data::ask_for_participant_code();
@@ -314,7 +313,6 @@ class mod_groupformation_overview_controller {
                             );
                             break;
                         default:
-                            // userstate == started, consent_given, p_code_given
                             $infounfolded = true;
 
                             $this->groupformationstateinfo = get_string('questionnaire_reopened_available', 'groupformation');
@@ -492,7 +490,8 @@ class mod_groupformation_overview_controller {
         $assigns['buttons'] = $this->buttonsarray;
         $assigns['buttons_infos'] = $this->buttonsinfo;
 
-        if (in_array($state, array("q_open", "q_reopened")) && in_array($userstate, array("started", "consent_given", "p_code_given", "answering"))) {
+        if (in_array($state, array("q_open", "q_reopened")) &&
+                in_array($userstate, array("started", "consent_given", "p_code_given", "answering"))) {
             $assigns['participant_code'] = mod_groupformation_data::ask_for_participant_code();
             $assigns['participant_code_user'] = $this->usermanager->get_participant_code($this->userid);
             $assigns['consentheader'] = get_string('consent_header', 'groupformation');

@@ -116,7 +116,7 @@ class mod_groupformation_user_manager {
                 'groupformation' => $this->groupformationid
         ), $sortedby, $fieldset);
         foreach ($recs as $rec) {
-            if ($rec->answer_count != 0){
+            if ($rec->answer_count != 0) {
                 $started[] = $rec;
             }
         }
@@ -321,7 +321,6 @@ class mod_groupformation_user_manager {
         global $DB;
 
         return $DB->get_field('groupformation_users', 'completed', array('groupformation' => $this->groupformationid, 'userid' => $userid));
-        // return array_key_exists($userid, $this->get_completed(null, 'userid'));
     }
 
     /**
