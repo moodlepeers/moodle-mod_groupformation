@@ -192,8 +192,7 @@ class mod_groupformation_overview_controller {
                         $infounfolded = true;
 
                         $pc = mod_groupformation_data::ask_for_participant_code();
-                        $buttonsinfo =
-                                ($pc) ? "questionnaire_press_to_begin_participant_code" : "questionnaire_press_to_begin";
+                        $buttonsinfo = ($pc) ? "questionnaire_press_to_begin_participant_code" : "questionnaire_press_to_begin";
 
                         $this->buttonsarray = array(
                                 array(
@@ -318,8 +317,7 @@ class mod_groupformation_overview_controller {
                             $this->groupformationstateinfo = get_string('questionnaire_reopened_available', 'groupformation');
 
                             $pc = mod_groupformation_data::ask_for_participant_code();
-                            $buttonsinfo =
-                                    ($pc) ? "questionnaire_press_to_begin_participant_code" : "questionnaire_press_to_begin";
+                            $buttonsinfo = ($pc) ? "questionnaire_press_to_begin_participant_code" : "questionnaire_press_to_begin";
 
                             $this->buttonsarray = array(
                                     array(
