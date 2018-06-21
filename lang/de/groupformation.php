@@ -573,5 +573,9 @@ $string ['dishonest_answers'] = 'Es haben <b>{$a}</b> Teilnehmende geantwortet, 
 $string ['ratio_answers'] = 'Es haben also <b>{$a}%</b> der Teilnehmende geantwortet, dass sie <b>nicht</b> ehrlich und konzentriert geantwortet haben.';
 $string ['filter_inactive'] = 'Es wird aktuell nicht gefiltert.';
 $string ['filter_active'] = 'Es wird aktuell gefiltert.';
-$string ['filter_description'] = 'Klicken sie auf "Filtern", um die Teilnehmenden, die nicht ehrlich und konzentriert geantwortet haben von der optimierten Gruppierung auszuschließen und sie stattdessen randomisiert zu gruppieren. Klicken Sie auf "Nicht filtern" um diese Aktion rückgängig zu machen.';
+$string ['filter_description'] = 'Klicken sie auf "Filter aktivieren", um die Teilnehmenden, die nicht ehrlich und konzentriert geantwortet haben von der optimierten Gruppierung auszuschließen und sie stattdessen randomisiert zu gruppieren. Klicken Sie auf "Filter deaktivieren" um diese Aktion rückgängig zu machen.';
 $string ['no_filter_change'] = 'Aufgrund der laufenden oder schon abgeschlossenen Gruppenbildung ist ein Ändern der Filtereinstellungen nicht möglich.';
+$string ['filter'] = 'Filter aktivieren';
+$string ['not_filter'] = 'Filter deaktivieren';
+
+
