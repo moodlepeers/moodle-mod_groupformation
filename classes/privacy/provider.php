@@ -188,7 +188,7 @@ class provider implements \core_privacy\local\metadata\provider, \core_privacy\l
                 'groupformation_group_users',
                 'groupid',
                 array('groupformation' => $groupformationid, 'userid' => $userid)
-        )){
+        )) {
 
             $group = $DB->get_record('groupformation_groups',
                     array("id" => $groupid),
