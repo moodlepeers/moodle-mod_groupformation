@@ -37,7 +37,7 @@ class provider implements \core_privacy\local\metadata\provider, \core_privacy\l
      * @param   collection $collection The initialised collection to add items to.
      * @return  collection     A listing of user data stored through this system.
      */
-    public static function get_metadata(collection $collection) : collection {
+    public static function get_metadata(collection $collection) {
         // TODO: Implement get_metadata() method.
         $collection->add_database_table(
                 'groupformation_answer',
@@ -101,7 +101,7 @@ class provider implements \core_privacy\local\metadata\provider, \core_privacy\l
      * @param   int $userid The user to search.
      * @return  contextlist   $contextlist  The contextlist containing the list of contexts used in this plugin.
      */
-    public static function get_contexts_for_userid(int $userid) : \core_privacy\local\request\contextlist {
+    public static function get_contexts_for_userid(int $userid) {
         // TODO: Implement get_contexts_for_userid() method.
         $contextlist = new \core_privacy\local\request\contextlist();
 
@@ -158,7 +158,7 @@ class provider implements \core_privacy\local\metadata\provider, \core_privacy\l
      * @return mixed
      * @throws \dml_exception
      */
-    public static function get_user_data(int $userid, int $groupformationid) {
+    private static function get_user_data(int $userid, int $groupformationid) {
         global $DB;
 
         $userdata = $DB->get_record('groupformation_users', array(
