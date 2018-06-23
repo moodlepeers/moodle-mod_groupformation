@@ -37,7 +37,7 @@ class provider implements \core_privacy\local\metadata\provider, \core_privacy\l
      * @param   collection $collection The initialised collection to add items to.
      * @return  collection     A listing of user data stored through this system.
      */
-    public static function get_metadata(collection $collection): collection {
+    public static function get_metadata(collection $collection) : collection {
         // TODO: Implement get_metadata() method.
         $collection->add_database_table(
                 'groupformation_answer',
@@ -112,7 +112,7 @@ class provider implements \core_privacy\local\metadata\provider, \core_privacy\l
         ];
 
         $sql = "SELECT DISTINCT c.id
-                FROM {context} c 
+                FROM {context} c
                 INNER JOIN {course_modules} cm ON cm.id = c.instanceid AND c.contextlevel = :contextlevel
                 INNER JOIN {modules} m ON m.id = cm.module AND m.name = :modname
                 INNER JOIN {groupformation} g ON g.id = cm.instance
@@ -184,22 +184,24 @@ class provider implements \core_privacy\local\metadata\provider, \core_privacy\l
     private static function get_group(int $userid, int $groupformationid) {
         global $DB;
 
-        if ($groupid = $DB->get_field('groupformation_group_users', 'groupid', array('groupformation' => $groupformationid, 'userid' => $userid))){
+        if ($groupid = $DB->get_field(
+                'groupformation_group_users',
+                'groupid',
+                array('groupformation' => $groupformationid, 'userid' => $userid)
+        )){
 
             $group = $DB->get_record('groupformation_groups',
                     array("id" => $groupid),
                     "id, groupname, group_size, topic_name"
             );
 
-            if (is_null($group->topic_name)){
+            if (is_null($group->topic_name)) {
                 unset($group->topic_name);
             }
             return $group;
         } else {
             return null;
         }
-
-
     }
 
     /**
@@ -214,16 +216,16 @@ class provider implements \core_privacy\local\metadata\provider, \core_privacy\l
         global $DB;
 
         $sql = 'SELECT q.id as id, a.category as category, a.questionid as qid, q.question as question, a.answer as answer, a.timestamp
-                FROM {groupformation_answers} a 
-                JOIN 
+                FROM {groupformation_answers} a
+                JOIN
                   (SELECT * FROM {groupformation_questions} qe WHERE qe.language = "en") AS q
-                  ON 
+                  ON
                         a.category = q.category
                     AND
                         a.questionid = q.questionid
                 WHERE (
                         a.userid = :userid
-                    AND 
+                    AND
                         a.groupformation = :groupformationid
                 )
             ';
@@ -234,18 +236,6 @@ class provider implements \core_privacy\local\metadata\provider, \core_privacy\l
         );
 
         $myanswers = $DB->get_records_sql($sql, $params);
-
-        //$answers = array();
-        //foreach($myanswers as $myanswer) {
-        //    $answer = array();
-        //    $answer[] = $myanswer->category;
-        //    $answer[] = $myanswer->qid;
-        //    $answer[] = $myanswer->question;
-        //    $answer[] = $myanswer->answer;
-        //    $answer[] = date('l, F jS, Y, h:i:s A', $myanswer->t);
-        //
-        //    $answers[] = $answer;
-        //}
 
         return array_values($myanswers);
     }
@@ -274,7 +264,7 @@ class provider implements \core_privacy\local\metadata\provider, \core_privacy\l
                     cm.id AS cmid,
                     g.id AS gid,
                     g.name AS name
-                FROM {context} c 
+                FROM {context} c
                 JOIN {course_modules} cm ON cm.id = c.instanceid
                 JOIN {groupformation} g ON g.id = cm.instance
                 WHERE (
@@ -285,7 +275,7 @@ class provider implements \core_privacy\local\metadata\provider, \core_privacy\l
         $mappings = [];
 
         $groupformations = $DB->get_recordset_sql($sql, $contextparams);
-        foreach($groupformations as $groupformation) {
+        foreach ($groupformations as $groupformation) {
 
             $groupformationid = $groupformation->gid;
             $mappings[$groupformationid] = $groupformation->contextid;
@@ -355,7 +345,14 @@ class provider implements \core_privacy\local\metadata\provider, \core_privacy\l
             $DB->delete_records('groupformation_user_values', ['groupformationid' => $groupformationid, 'userid' => $userid]);
             $DB->delete_records('groupformation_answers', ['groupformation' => $groupformationid, 'userid' => $userid]);
 
-            if ($groupid = $DB->get_field('groupformation_group_users', 'groupid', array('groupformation' => $groupformationid, 'userid' => $userid))){
+            if ($groupid = $DB->get_field(
+                    'groupformation_group_users',
+                    'groupid',
+                    array(
+                            'groupformation' => $groupformationid,
+                            'userid' => $userid
+                    )
+            )) {
 
                 $DB->delete_records('groupformation_group_users', ['groupformation' => $groupformationid, 'userid' => $userid]);
                 $group = $DB->get_record('groupformation_groups', ['id' => $groupid]);
