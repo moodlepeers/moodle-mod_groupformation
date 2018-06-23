@@ -38,6 +38,8 @@ $PAGE->set_url('/mod/groupformation/view.php', array(
     'id' => $cm->id, 'do_show' => $doshow));
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
+$PAGE->set_cm($cm);
+$PAGE->set_context(context_module::instance($cm->id));
 
 // Import jQuery and js file.
 groupformation_add_jquery($PAGE, 'survey_functions.js');
