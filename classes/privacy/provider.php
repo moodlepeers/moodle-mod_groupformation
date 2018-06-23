@@ -30,14 +30,18 @@ use \core_privacy\local\request\contextlist;
 use \core_privacy\local\request\writer;
 use \core_privacy\local\request\approved_contextlist;
 
-class provider implements \core_privacy\local\metadata\provider, \core_privacy\local\request\plugin\provider{
+class provider implements
+        \core_privacy\local\metadata\provider,
+        \core_privacy\local\request\plugin\provider {
+
+    use \core_privacy\local\legacy_polyfill;
     /**
      * Returns meta data about this system.
      *
      * @param   collection $collection The initialised collection to add items to.
      * @return  collection     A listing of user data stored through this system.
      */
-    public static function get_metadata(collection $collection) : collection {
+    public static function _get_metadata(collection $collection) {
         // TODO: Implement get_metadata() method.
         $collection->add_database_table(
                 'groupformation_answer',
@@ -101,7 +105,7 @@ class provider implements \core_privacy\local\metadata\provider, \core_privacy\l
      * @param   int $userid The user to search.
      * @return  contextlist   $contextlist  The contextlist containing the list of contexts used in this plugin.
      */
-    public static function get_contexts_for_userid(int $userid) : \core_privacy\local\request\contextlist {
+    public static function _get_contexts_for_userid(int $userid) {
         // TODO: Implement get_contexts_for_userid() method.
         $contextlist = new \core_privacy\local\request\contextlist();
 
