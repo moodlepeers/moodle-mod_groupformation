@@ -115,8 +115,6 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
 
         $best = $this->get_slices($scores, $numberofslices);
 
-        var_dump($best);
-
         while ($i < 100 && !$bestfound) {
             $i++;
             $slices = $this->get_slices($scores, $numberofslices);
@@ -196,7 +194,13 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
      */
     public function get_weights() {
 
-        return array('big5_extraversion' => 4, 'big5_conscientiousness' => 4, 'knowledge_two' => 2);
+        return array('big5_extraversion' => 4,
+                'big5_conscientiousness' => 4,
+                'knowledge_two' => 2,
+                'fam_challenge' => 2,
+                'fam_interest' => 2,
+                'fam_successprobability' => 2,
+                'fam_lackofconfidence' => 2);
     }
 
     /**
@@ -208,30 +212,25 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
      * @throws dml_exception
      */
     public function run_grouping($users) {
-        var_dump($users);
 
         $groupsizes = $this->store->determine_group_size($users);
-        var_dump($groupsizes);
 
         $specification = $this->get_specification();
+
         list ($configurations, $specs) = $specification;
         $weights = $this->get_weights();
-
-        var_dump($configurations, $specs, $weights);
+        var_dump($weights);
 
         $numberofslices = count($specification[0]);
-
-        var_dump($numberofslices);
 
         if (count($users[0]) < $numberofslices) {
             return [];
         }
 
         $slices = $this->get_optimal_slices($users[0], $numberofslices, $specs);
-        var_dump($slices);
 
         $cohorts = $this->build_cohorts($slices, $groupsizes[0], $specification, $weights);
-        var_dump($cohorts);
+
         // Handle all users with incomplete or no questionnaire submission.
         $randomkey = "rand:1;mrand:_;ex:_;gh:_";
 
@@ -266,13 +265,8 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
 
             $configurationkey = $configurationkeys[$i];
             $configuration = $configurations[$configurationkey];
-            var_dump($slice);
             $rawparticipants = $this->participantparser->build_participants($slice, $specs, $weights);
-            var_dump($rawparticipants);
             $participants = $this->configure_participants($rawparticipants, $configuration);
-            var_dump($participants);
-            var_dump(array_values($participants)[0]);
-
             $cohorts[$configurationkey] = $this->build_cohort($participants, $groupsize, $configurationkey);
         }
 
@@ -288,23 +282,24 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
 
         $big5specs = mod_groupformation_data::get_criterion_specification('big5');
         $knowledgespecs = mod_groupformation_data::get_criterion_specification('knowledge');
+        $famspecs = mod_groupformation_data::get_criterion_specification('fam');
 
         unset($big5specs['labels']['neuroticism']);
         unset($big5specs['labels']['openness']);
         unset($big5specs['labels']['agreeableness']);
         unset($knowledgespecs['labels']['one']);
 
-        $specs = ['big5' => $big5specs, 'knowledge' => $knowledgespecs];
+        $specs = ['big5' => $big5specs, 'knowledge' => $knowledgespecs, 'fam' => $famspecs];
 
         $configurations = array(
             "mrand:0;ex:1;gh:1;vw:0" => array('big5_extraversion' => true,
-                    'big5_conscientiousness' => true, 'knowledge_two' => false),
+                    'big5_conscientiousness' => true, 'knowledge_two' => false, 'fam' => false),
             "mrand:0;ex:1;gh:0;vw:0" => array('big5_extraversion' => true,
-                    'big5_conscientiousness' => false, 'knowledge_two' => false),
+                    'big5_conscientiousness' => false, 'knowledge_two' => false, 'fam' => false),
             "mrand:0;ex:0;gh:0;vw:0" => array('big5_extraversion' => false,
-                    'big5_conscientiousness' => false, 'knowledge_two' => false),
+                    'big5_conscientiousness' => false, 'knowledge_two' => false, 'fam' => false),
             "mrand:0;ex:0;gh:1;vw:0" => array('big5_extraversion' => false,
-                    'big5_conscientiousness' => true, 'knowledge_two' => false),
+                    'big5_conscientiousness' => true, 'knowledge_two' => false, 'fam' => false),
         );
 
         return [$configurations, $specs];

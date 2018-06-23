@@ -94,7 +94,7 @@ class mod_groupformation_overview_controller {
         $this->store = new mod_groupformation_storage_manager ($groupformationid);
         $this->groupsmanager = new mod_groupformation_groups_manager ($groupformationid);
         $this->usermanager = new mod_groupformation_user_manager ($groupformationid);
-
+        $this->usermanager->init($userid);
         $this->determine_view();
     }
 
@@ -106,138 +106,248 @@ class mod_groupformation_overview_controller {
      */
     private function determine_view() {
         global $PAGE;
+        $infounfolded = false;
 
-        if (has_capability('mod/groupformation:onlystudent', $PAGE->context)) {
-            $isbuild = $this->groupsmanager->is_build();
-            if ($isbuild) {
-                $this->viewstate = 2;
-            } else {
-                if ($this->store->is_questionnaire_available()) {
-                    $this->viewstate = $this->usermanager->get_answering_status($this->userid);
+        $buttonsinfo = null;
+        $this->buttonsinfo = '';
+        $this->buttonsarray = array();
+        $this->groupformationstateinfo = $this->get_availability_state();
+
+        if (!has_capability('mod/groupformation:onlystudent', $PAGE->context)) {
+
+            $this->buttonsinfo = '';
+            $this->groupformationstateinfo = get_string('activity_visible', 'groupformation');
+            $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(
+                    $infounfolded, $this->groupformationid);
+            return;
+        }
+
+        $state = $this->store->get_state();
+
+        switch ($state) {
+            case "q_open":
+                $userstate = $this->store->userstatemachine->get_state($this->userid);
+                switch ($userstate) {
+                    case "answering":
+                        $this->groupformationstateinfo = get_string('questionnaire_not_submitted',
+                                'groupformation');
+
+                        $buttonsinfo = 'questionnaire_press_continue_submit';
+
+                        $disabled = $this->store->all_answers_required() &&
+                                !$this->usermanager->has_answered_everything($this->userid);
+
+                        $modalarray = array(
+                                'type' => 'submit', 'name' => 'begin', 'value' => '0',
+                                'state' => (($disabled) ? 'disabled' : ''),
+                                'text' => get_string('questionnaire_submit', 'groupformation'));
+
+                        if (mod_groupformation_data::is_math_prep_course_mode()) {
+                            $modalarray = array(
+                                    'type' => 'submit', 'name' => 'begin', 'value' => '0',
+                                    'state' => (($disabled) ? 'disabled' : ''),
+                                    'modal-id' => 'deleteModal',
+                                    'modal-text' => get_string('submit-modal-text', 'groupformation'),
+                                    'modal-title' => get_string('submit-modal-title', 'groupformation'),
+                                    'text' => get_string('questionnaire_submit', 'groupformation')
+                            );
+                        }
+
+                        $this->buttonsarray = array(
+                                array(
+                                        'type' => 'submit', 'name' => 'begin', 'value' => '1', 'state' => '',
+                                        'text' => get_string('edit')),
+                                $modalarray,
+                                array(
+                                        'type' => 'submit', 'name' => 'begin', 'value' => '-1',
+                                        'state' => '',
+                                        'text' => get_string('questionnaire_delete', 'groupformation')
+                                )
+                        );
+                        break;
+                    case "submitted":
+                        $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(
+                                true, $this->groupformationid);
+
+                        $this->groupformationstateinfo = get_string('questionnaire_submitted',
+                                'groupformation');
+
+                        $math = mod_groupformation_data::is_math_prep_course_mode();
+
+                        $buttonsinfo = 'questionnaire_press_revert';
+
+                        $this->buttonsarray = array(
+                                array(
+                                        'type' => 'submit', 'name' => 'begin', 'value' => '0',
+                                        'state' => $math ? 'disabled' : '',
+                                        'text' => get_string('revert')),
+                                array(
+                                        'type' => 'submit', 'name' => 'begin', 'value' => '-1',
+                                        'state' => '',
+                                        'text' => get_string('questionnaire_delete', 'groupformation')
+                                )
+                        );
+                        break;
+                    default:
+                        $infounfolded = true;
+
+                        $pc = mod_groupformation_data::ask_for_participant_code();
+                        $buttonsinfo = ($pc) ? "questionnaire_press_to_begin_participant_code" : "questionnaire_press_to_begin";
+
+                        $this->buttonsarray = array(
+                                array(
+                                        'type' => 'submit', 'name' => '', 'value' => get_string("next"), 'state' => '',
+                                        'text' => get_string("next")
+                                )
+                        );
+                }
+                break;
+            case "q_reopened":
+                $hasgroup = $this->groupsmanager->has_group($this->userid, true);
+
+                if ($hasgroup) {
+                    $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(
+                            true, $this->groupformationid);
+
+                    $this->groupformationstateinfo = get_string('groups_built',
+                            'groupformation');
                 } else {
-                    $this->viewstate = 4;
+                    $userstate = $this->store->userstatemachine->get_state($this->userid);
+                    switch ($userstate) {
+                        case "sdtarted":
+                            $this->groupformationstateinfo = get_string('questionnaire_reopened_available',
+                                    'groupformation');
+
+                            $buttonsinfo = 'questionnaire_press_continue_submit';
+
+                            $disabled = $this->store->all_answers_required() &&
+                                    !$this->usermanager->has_answered_everything($this->userid);
+
+                            $modalarray = array(
+                                    'type' => 'submit', 'name' => 'begin', 'value' => '0',
+                                    'state' => (($disabled) ? 'disabled' : ''),
+                                    'text' => get_string('questionnaire_submit', 'groupformation'));
+
+                            if (mod_groupformation_data::is_math_prep_course_mode()) {
+                                $modalarray = array(
+                                        'type' => 'submit', 'name' => 'begin', 'value' => '0',
+                                        'state' => (($disabled) ? 'disabled' : ''),
+                                        'modal-id' => 'deleteModal',
+                                        'modal-text' => get_string('submit-modal-text', 'groupformation'),
+                                        'modal-title' => get_string('submit-modal-title', 'groupformation'),
+                                        'text' => get_string('questionnaire_submit', 'groupformation')
+                                );
+                            }
+
+                            $this->buttonsarray = array(
+                                    array(
+                                            'type' => 'submit', 'name' => 'begin', 'value' => '1', 'state' => '',
+                                            'text' => get_string('edit')),
+                                    $modalarray,
+                                    array(
+                                            'type' => 'submit', 'name' => 'begin', 'value' => '-1',
+                                            'state' => '',
+                                            'text' => get_string('questionnaire_delete', 'groupformation')
+                                    )
+                            );
+                            break;
+                        case "answering":
+                            $this->groupformationstateinfo = get_string('questionnaire_reopened_available',
+                                    'groupformation');
+
+                            $buttonsinfo = 'questionnaire_press_continue_submit';
+
+                            $disabled = $this->store->all_answers_required() &&
+                                    !$this->usermanager->has_answered_everything($this->userid);
+
+                            $modalarray = array(
+                                    'type' => 'submit', 'name' => 'begin', 'value' => '0',
+                                    'state' => (($disabled) ? 'disabled' : ''),
+                                    'text' => get_string('questionnaire_submit', 'groupformation'));
+
+                            if (mod_groupformation_data::is_math_prep_course_mode()) {
+                                $modalarray = array(
+                                        'type' => 'submit', 'name' => 'begin', 'value' => '0',
+                                        'state' => (($disabled) ? 'disabled' : ''),
+                                        'modal-id' => 'deleteModal',
+                                        'modal-text' => get_string('submit-modal-text', 'groupformation'),
+                                        'modal-title' => get_string('submit-modal-title', 'groupformation'),
+                                        'text' => get_string('questionnaire_submit', 'groupformation')
+                                );
+                            }
+
+                            $this->buttonsarray = array(
+                                    array(
+                                            'type' => 'submit', 'name' => 'begin', 'value' => '1', 'state' => '',
+                                            'text' => get_string('edit')),
+                                    $modalarray,
+                                    array(
+                                            'type' => 'submit', 'name' => 'begin', 'value' => '-1',
+                                            'state' => '',
+                                            'text' => get_string('questionnaire_delete', 'groupformation')
+                                    )
+                            );
+                            break;
+                        case "submitted":
+                            $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(
+                                    true, $this->groupformationid);
+
+                            $this->groupformationstateinfo = get_string('questionnaire_submitted',
+                                    'groupformation');
+
+                            $math = mod_groupformation_data::is_math_prep_course_mode();
+
+                            $buttonsinfo = 'questionnaire_press_revert';
+
+                            $this->buttonsarray = array(
+                                    array(
+                                            'type' => 'submit', 'name' => 'begin', 'value' => '0',
+                                            'state' => $math ? 'disabled' : '',
+                                            'text' => get_string('revert')),
+                                    array(
+                                            'type' => 'submit', 'name' => 'begin', 'value' => '-1',
+                                            'state' => '',
+                                            'text' => get_string('questionnaire_delete', 'groupformation')
+                                    )
+                            );
+                            break;
+                        default:
+                            $infounfolded = true;
+
+                            $this->groupformationstateinfo = get_string('questionnaire_reopened_available', 'groupformation');
+
+                            $pc = mod_groupformation_data::ask_for_participant_code();
+                            $buttonsinfo = ($pc) ? "questionnaire_press_to_begin_participant_code" : "questionnaire_press_to_begin";
+
+                            $this->buttonsarray = array(
+                                    array(
+                                            'type' => 'submit', 'name' => '', 'value' => get_string("next"), 'state' => '',
+                                            'text' => get_string("next")
+                                    )
+                            );
+                    }
                 }
-            }
-        } else {
-            $this->viewstate = 3;
-        }
-
-        switch ($this->viewstate) {
-            case -1 : // Questionnaire is available but not started yet.
-                $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(
-                    true, $this->groupformationid);
-                $this->groupformationstateinfo = array(
-                    $this->get_availability_state());
-                $pc = mod_groupformation_data::ask_for_participant_code();
-                $buttoncaption = ($pc) ? "questionnaire_press_to_begin_participant_code" : "questionnaire_press_to_begin";
-                $this->buttonsinfo = get_string($buttoncaption, 'groupformation');
-                $this->buttonsarray = array(
-                    array(
-                        'type' => 'submit', 'name' => '', 'value' => get_string("next"), 'state' => '',
-                        'text' => get_string("next")));
                 break;
-
-            case 0 :
-                // Questionnaire is available, started, not finished and not submitted.
-                $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(
-                    false, $this->groupformationid);
-                $this->groupformationstateinfo = array(
-                    $this->get_availability_state(), get_string('questionnaire_not_submitted', 'groupformation'));
-                $this->buttonsinfo = get_string('questionnaire_press_continue_submit', 'groupformation');
-
-                $disabled = $this->store->all_answers_required() && !$this->usermanager->has_answered_everything($this->userid);
-
-                $modalarray = array(
-                        'type' => 'submit', 'name' => 'begin', 'value' => '0',
-                        'state' => (($disabled) ? 'disabled' : ''),
-                        'text' => get_string('questionnaire_submit', 'groupformation'));
-
-                if (mod_groupformation_data::is_math_prep_course_mode()) {
-                    $modalarray = array(
-                            'type' => 'submit', 'name' => 'begin', 'value' => '0',
-                            'state' => (($disabled) ? 'disabled' : ''),
-                            'modal-id' => 'deleteModal',
-                            'modal-text' => get_string('submit-modal-text', 'groupformation'),
-                            'modal-title' => get_string('submit-modal-title', 'groupformation'),
-                            'text' => get_string('questionnaire_submit', 'groupformation'));
-                }
-
-                $this->buttonsarray = array(
-                    array(
-                        'type' => 'submit', 'name' => 'begin', 'value' => '1', 'state' => '',
-                        'text' => get_string('edit')),
-                    $modalarray,
-                    array(
-                        'type' => 'submit', 'name' => 'begin', 'value' => '-1',
-                        'state' => '',
-                        'text' => get_string('questionnaire_delete', 'groupformation')),
-                );
-                break;
-
-            case 1 :
-                // Questionnaire is submitted.
-                $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(
-                    true, $this->groupformationid);
-                $this->groupformationstateinfo = array(
-                    get_string('questionnaire_submitted', 'groupformation'));
-                $math = mod_groupformation_data::is_math_prep_course_mode();
-                $this->buttonsinfo = get_string('questionnaire_press_revert', 'groupformation');
-                $this->buttonsarray = array(
-                    array(
-                        'type' => 'submit', 'name' => 'begin', 'value' => '0', 'state' => $math ? 'disabled' : '',
-                        'text' => get_string('revert')),
-                    array(
-                        'type' => 'submit', 'name' => 'begin', 'value' => '-1',
-                        'state' => '',
-                        'text' => get_string('questionnaire_delete', 'groupformation'))
-                );
-                break;
-
-            case 2 :
+            case "ga_done":
                 // Groups are built.
-                $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(
-                    false, $this->groupformationid);
-                $this->groupformationstateinfo = array(
-                    get_string('groups_build', 'groupformation'));
-                $this->buttonsinfo = '';
-                $this->buttonsarray = array();
+                $this->groupformationstateinfo = get_string('groups_built', 'groupformation');
                 break;
-
-            case 3 :
-                // The activity is not accessible for the student/teacher.
-                $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(
-                    false, $this->groupformationid);
-                $this->groupformationstateinfo = array(
-                    get_string('activity_visible', 'groupformation'));
-                $this->buttonsinfo = '';
-                $this->buttonsarray = array();
-                break;
-
-            case 4 :
-                // The questionnaire is not available, but groups are not build yet.
-                $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(
-                    true, $this->groupformationid);
-                $this->groupformationstateinfo = array(
-                    $this->get_availability_state());
-                $this->buttonsinfo = '';
-                $this->buttonsarray = array();
-
-                break;
-
-            default :
-                $this->groupformationstateinfo = array(
-                    get_string('invalid', 'groupformation'));
-                $this->buttonsinfo = '';
-                $this->buttonsarray = array();
+            default:
+                $infounfolded = true;
                 break;
         }
+
+        $this->buttonsinfo = (is_null($buttonsinfo)) ? '' : get_string($buttonsinfo, 'groupformation');
+        $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(
+                $infounfolded, $this->groupformationid);
     }
 
     /**
      * return the status of the survey
      *
      * @return string
-     *
+     * @throws coding_exception
+     * @throws dml_exception
      */
     private function get_availability_state() {
         $a = $this->store->get_time();
@@ -321,6 +431,8 @@ class mod_groupformation_overview_controller {
      * Returns info about activity
      *
      * @return array
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public function load_info() {
         $assigns = array();
@@ -338,11 +450,16 @@ class mod_groupformation_overview_controller {
      * Returns statistics about questionnaire
      *
      * @return array
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public function load_statistics() {
         $assigns = array();
 
-        if ($this->viewstate == 0) {
+        $userstate = $this->store->userstatemachine->get_state($this->userid);
+        $state = $this->store->statemachine->get_state();
+
+        if ($state == "q_open" && in_array($userstate, array("answering"))) {
             $assigns['ask_for_topics'] = $this->store->ask_for_topics();
             $assigns['survey_states'] = $this->determine_survey_stats();
             $assigns['questionnaire_answer_stats'] = get_string('questionnaire_answer_stats', 'groupformation');
@@ -364,10 +481,15 @@ class mod_groupformation_overview_controller {
     public function load_settings() {
         $assigns = array();
 
-        if ($this->viewstate == -1 || $this->viewstate == 0) {
-            $assigns['cmid'] = $this->cmid;
-            $assigns['buttons'] = $this->buttonsarray;
-            $assigns['buttons_infos'] = $this->buttonsinfo;
+        $state = $this->store->statemachine->get_state();
+        $userstate = $this->store->userstatemachine->get_state($this->userid);
+
+        $assigns['cmid'] = $this->cmid;
+        $assigns['buttons'] = $this->buttonsarray;
+        $assigns['buttons_infos'] = $this->buttonsinfo;
+
+        if (in_array($state, array("q_open", "q_reopened")) &&
+                in_array($userstate, array("started", "consent_given", "p_code_given", "answering"))) {
             $assigns['participant_code'] = mod_groupformation_data::ask_for_participant_code();
             $assigns['participant_code_user'] = $this->usermanager->get_participant_code($this->userid);
             $assigns['consentheader'] = get_string('consent_header', 'groupformation');
@@ -375,10 +497,6 @@ class mod_groupformation_overview_controller {
             $a->archivedays = get_config('groupformation', 'archiving_time');
             $assigns['consenttext'] = get_string('consent_message', 'groupformation', $a);
             $assigns['consentvalue'] = $this->usermanager->get_consent($this->userid);
-        } else {
-            $assigns['cmid'] = $this->cmid;
-            $assigns['buttons'] = $this->buttonsarray;
-            $assigns['buttons_infos'] = $this->buttonsinfo;
         }
 
         return $assigns;

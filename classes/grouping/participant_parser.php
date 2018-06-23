@@ -75,10 +75,14 @@ class mod_groupformation_participant_parser {
      * @param array $weights
      *
      * @return array
+     * @throws Exception
      */
     private function parse($users, $labels, $weights = null) {
 
         $participants = array();
+        var_dump($users[0]);
+        var_dump('<br>');
+        var_dump($weights);
         foreach ($users as $user) {
             $position = 0;
             $participant = null;

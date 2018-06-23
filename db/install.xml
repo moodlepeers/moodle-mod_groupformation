@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="mod/groupformation/db" VERSION="20180510" COMMENT="XMLDB file for Moodle mod/groupformation"
+<XMLDB PATH="mod/groupformation/db" VERSION="20180617" COMMENT="XMLDB file for Moodle mod/groupformation"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
@@ -36,6 +36,7 @@
         <FIELD NAME="version" TYPE="int" LENGTH="12" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="allanswersrequired" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="archived" TYPE="int" LENGTH="1" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="state" TYPE="int" LENGTH="3" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
@@ -44,7 +45,7 @@
         <INDEX NAME="course" UNIQUE="false" FIELDS="course"/>
       </INDEXES>
     </TABLE>
-    <TABLE NAME="groupformation_answer" COMMENT="Stores answers given by users">
+    <TABLE NAME="groupformation_answers" COMMENT="Stores answers given by users">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="groupformation" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
@@ -62,21 +63,6 @@
         <INDEX NAME="userid" UNIQUE="false" FIELDS="userid"/>
       </INDEXES>
     </TABLE>
-    <TABLE NAME="groupformation_q_settings" COMMENT="input requirements of lecturer">
-      <FIELDS>
-        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
-        <FIELD NAME="groupformation" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
-        <FIELD NAME="archived" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false"/>
-        <FIELD NAME="topicvalues" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="knowledgevalues" TYPE="text" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="topicvaluesnumber" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
-        <FIELD NAME="knowledgevaluesnumber" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
-      </FIELDS>
-      <KEYS>
-        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
-        <KEY NAME="groupformation" TYPE="foreign" FIELDS="groupformation" REFTABLE="groupformation" REFFIELDS="id"/>
-      </KEYS>
-    </TABLE>
     <TABLE NAME="groupformation_q_version" COMMENT="save things according to a question">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
@@ -88,7 +74,7 @@
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
       </KEYS>
     </TABLE>
-    <TABLE NAME="groupformation_started" COMMENT="Have questions been seen/answered from student">
+    <TABLE NAME="groupformation_users" COMMENT="Have questions been seen/answered from student">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="groupformation" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
@@ -100,6 +86,7 @@
         <FIELD NAME="consent" TYPE="int" LENGTH="1" NOTNULL="false" DEFAULT="0" SEQUENCE="false"/>
         <FIELD NAME="participantcode" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
         <FIELD NAME="filtered" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="state" TYPE="int" LENGTH="3" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
@@ -194,7 +181,7 @@
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
       </KEYS>
     </TABLE>
-    <TABLE NAME="groupformation_question" COMMENT="Default comment for the table, please edit me">
+    <TABLE NAME="groupformation_questions" COMMENT="Default comment for the table, please edit me">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="category" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>

@@ -277,9 +277,15 @@ class mod_groupformation_groups_manager {
      */
     public function has_group($userid, $moodlegroup = false) {
         global $DB;
+
         $count = $DB->count_records('groupformation_group_users', array(
                 'groupformation' => $this->groupformationid, 'userid' => $userid));
 
+        if ($count == 1 && $moodlegroup) {
+            $groupid = $this->get_group_id($userid);
+            $mgroup = $this->get_moodle_group_id($groupid);
+            return (!is_null($mgroup));
+        }
         return ($count == 1);
     }
 
@@ -426,10 +432,10 @@ class mod_groupformation_groups_manager {
             $b = groups_create_group($record);
         }
 
-        $records = $DB->get_records('groupformation_started', array(
+        $records = $DB->get_records('groupformation_users', array(
                 'groupformation' => $this->groupformationid, 'completed' => $completed), 'timecompleted',
                 'id, userid, timecompleted');
-        $field = $DB->get_field('groupformation_started', 'groupid', array(
+        $field = $DB->get_field('groupformation_users', 'groupid', array(
                 'groupformation' => $this->groupformationid, 'completed' => $completed, 'userid' => $userid));
 
         if (is_null($field) && count($records) > 0) {
@@ -449,14 +455,14 @@ class mod_groupformation_groups_manager {
             if ($i % 2 == 0) {
                 // Sort to group A.
                 groups_add_member($a, $userid);
-                $DB->set_field('groupformation_started', 'groupid', $a, array(
+                $DB->set_field('groupformation_users', 'groupid', $a, array(
                         'groupformation' => $this->groupformationid, 'completed' => $completed, 'userid' => $userid));
             }
 
             if ($i % 2 == 1) {
                 // Sort to group B.
                 groups_add_member($b, $userid);
-                $DB->set_field('groupformation_started', 'groupid', $b, array(
+                $DB->set_field('groupformation_users', 'groupid', $b, array(
                         'groupformation' => $this->groupformationid, 'completed' => $completed, 'userid' => $userid));
             }
         }

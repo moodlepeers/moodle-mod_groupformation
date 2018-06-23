@@ -187,7 +187,7 @@ class mod_groupformation_util {
     public static function delete_user_related_data($groupformationid) {
         global $DB;
 
-        $DB->delete_records('groupformation_answer', array('groupformation' => $groupformationid));
+        $DB->delete_records('groupformation_answers', array('groupformation' => $groupformationid));
     }
 
     /**

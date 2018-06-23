@@ -25,7 +25,7 @@
 $string ['language'] = 'en';
 $string ['modulename'] = 'Group formation';
 $string ['modulenameplural'] = 'Group formations';
-$string ['modulename_help'] = 'The groupformation plugin generates groups of participants based on a questionnaire answers.';
+$string ['modulename_help'] = 'The groupformation plugin generates groups of students based on a questionnaire answers.';
 $string ['beta_version'] = '';
 $string ['groupformation:addinstance'] = 'Add groupformation';
 $string ['groupformation:editsettings'] = 'Edit groupformation';
@@ -141,7 +141,7 @@ $string ['groupSettingsInfo'] = 'You have choosen to define topics. Thereof the 
 $string ['analyse'] = 'Analysis';
 $string ['questionnaire_not_started'] = 'The questionnaire is ready.';
 $string ['questionnaire_press_to_begin'] = 'Give your consent and click "Next" to begin.';
-$string ['questionnaire_not_submitted'] = 'Your answers are not submitted yet.';
+$string ['questionnaire_not_submitted'] = 'The questionnaire is available for processing. When finished answering the questions, please submit your answers.';
 $string ['questionnaire_press_continue_submit'] = 'Click "Edit" to continue the questionnaire or "Submit" to submit your current answers.
 You can also remove your consent, which also deletes all given answers, by clicking on "Remove consent".';
 $string ['questionnaire_press_revert'] = 'Click "Revert" to revert your decision to submit the questionnaire. You can also remove your consent, which also deletes all given answers, by clicking on "Remove consent".';
@@ -196,6 +196,7 @@ $string ['questionnaire_availability_info_now'] = 'The questionnaire is availabl
 $string ['questionnaire_availability_info_until'] = 'The questionnaire is currently available until {$a->end}.';
 $string ['questionnaire_availability_info_from'] = 'The questionnaire will be available on {$a->start}.';
 $string ['questionnaire_available'] = 'The questionnaire is ready for processing.';
+$string ['questionnaire_reopened_available'] = 'Groups have been built already. You may answer the questionnaire and the instructor can assign you to a group manually afterwards.';
 $string ['questionnaire_not_available_begin'] = 'The questionnaire is available from {$a->start}.';
 $string ['questionnaire_available_end'] = 'The questionnaire is available till {$a->end}.';
 $string ['questionnaire_not_available'] = 'The questionnaire is currently unavailable.';
@@ -238,20 +239,21 @@ $string ['info_text_teacher_analysis'] = 'With this plugin you have the ability 
         <br>
         Finished. Now also the students can see their groupmates. As a docent you can manually adjust the groups anytime at Moodle(e.g. with stragglers).<br>
 ';
-$string ['grouping_status_0'] = 'You have to close the questionnaire to start group formation.';
-$string ['grouping_status_1'] = 'You can start the group formation now';
-$string ['grouping_status_2'] = 'The group formation is in progress. This process may take 2-5 min . Please reload the page occasionally to see the result.';
-$string ['grouping_status_3'] = 'The termination of group formation is in progress';
-$string ['grouping_status_4'] = 'The group formation is finished. You can adopt the groups to Moodle or generate a new results by algorithm.';
+$string ['grouping_status_0'] = 'You have to close the activity to start the group formation.';
+$string ['grouping_status_1'] = 'You can start the group formation now.';
+$string ['grouping_status_2'] = 'The group formation is in progress. This process may take 2-5 minutes. Please reload the page occasionally to see the result.';
+$string ['grouping_status_3'] = 'The group formation was aborted. The system reset may take 2-5 minutes. Please reload the page occasionally.';
+$string ['grouping_status_4'] = 'The group formation is finished. You can adopt the groups to Moodle or if needed you may edit the results manually.';
 $string ['grouping_status_5'] = 'The generated groups are adopted to Moodle. You can manually adjust them.';
-$string ['grouping_status_6'] = 'The generated groups are going to be adopted to Moodle. This process may take 2-5 min . Please reload the page occasionally to see the result.';
+$string ['grouping_status_6'] = 'The generated groups are going to be adopted to Moodle. This process may take 2-5 minutes. Please reload the page occasionally to see the result.';
 $string ['grouping_start'] = 'Start group formation';
 $string ['grouping_delete'] = 'Delete groups';
 $string ['grouping_adopt'] = 'Adopt groups';
 $string ['grouping_abort'] = 'Cancel generating groups';
 $string ['grouping_edit'] = 'Edit groups';
 $string ['grouping_delete_moodle_groups'] = 'Delete moodle groups';
-$string ['questionnaire_committed'] = 'Your answers are submitted. You cannot change them in this activity.';
+$string ['questionnaire_committed'] = 'You already submitted your answers hence you cannot edit them anymore.';
+$string ['questionnaire_closed'] = 'The questionnaire is closed hence no answers can be entered or edited.';
 $string ['no_data_to_display'] = 'No data to display';
 
 $string ['onlyactivestudents'] = 'Only students with at least one submitted answer should be considered for building groups.';
@@ -273,15 +275,20 @@ $string ['archive_activity_task'] = 'Archiving Task';
 $string ['no_time'] = 'No time set';
 $string ['activity_end'] = 'Stop activity';
 $string ['activity_start'] = 'Start activity';
-$string ['analysis_status_info1'] = 'You have to stop the activity before group formation.';
-$string ['analysis_status_info2'] = 'You have to start activity so that students are able to answer the questionnaire.';
-$string ['analysis_status_info3'] = 'Group formation has already started or is done respectively. Activity cannot be started anymore. If you want to start the activity again, you need to delete generated groups.';
-$string ['analysis_status_info0'] = 'You are able to start or end activity.';
-$string ['analysis_status_info4'] = 'You can now start the group formation.';
+
+$string ['analysis_status_q_closed'] = 'The activity was closed. You can restart it, or continue with group formation in the respective tab.';
+$string ['analysis_status_q_open'] = 'The activity is currently open and students can answer the questionnaire. You have to stop the activity before starting the group formation.';
+$string ['analysis_status_ga_done'] = 'Groups have been adopted to Moodle. You may re-open the questionnaire to all users which did not answer the questionnaire so far.';
+$string ['analysis_status_ga_started'] = 'Groups are currently being adopted to Moodle. This may take a while. Please check-in later for the results.';
+$string ['analysis_status_q_reopened'] = 'Groups have been adopted to Moodle. You did re-open the questionnaire and may close it if you like.';
+$string ['analysis_status_gf_done'] = 'Group formation has been finished. You may take a look at the generated groups and adopt them to Moodle.';
+$string ['analysis_status_gf_started'] = 'Group formation is currently running. This may take a while. Please check-in later for the results.';
+$string ['analysis_status_gf_aborted'] = 'Group formation was aborted. The system reset may take a while. Please check-in later.';
+
 $string ['contact_members'] = 'To contact your team members you can click on their user names.';
 $string ['invalid'] = 'invalid status';
-$string ['groups_build'] = 'Groups are built.';
-$string ['activity_visible'] = 'Activity is not visible for you.';
+$string ['groups_built'] = 'Groups are built.';
+$string ['activity_visible'] = 'This activity is not accessible to you due to your role. You may access this activiy as a teacher or a user. Non-editing teachers or tutors may not have access.';
 
 $string ['are'] = 'There are';
 $string ['are_now'] = 'Now, there are';
@@ -297,17 +304,17 @@ $string ['number_member'] = 'Number of members:';
 $string ['cohort_index'] = 'Cohorts-Performance-Index:';
 $string ['cohort_index_info'] = 'The Cohorts-Performance-Index (KPI) represents the quality of the built groups and has a range between 0 and 1. The bigger the value, so much better the built groups.';
 $string ['max_group_size'] = 'Max. group size:';
-$string ['number_of_groups'] = 'Number of built groups:';
+$string ['number_of_groups'] = 'Number of generated groups:';
 $string ['options'] = 'Options';
 $string ['activity'] = 'Activity';
 $string ['statistic'] = 'Statistics of questionnaire';
 $string ['group_building'] = 'Group building';
 $string ['evaluation'] = 'Evaluation';
-$string ['group_overview'] = 'Overview of built groups';
+$string ['group_overview'] = 'Overview of generated groups';
 $string ['max_group_size_not_reached'] = 'Maximum group size has not been reached by the following groups:';
 $string ['your_group'] = 'The name of your group is: ';
-$string ['students_grouping_single'] = 'student for group building.';
-$string ['students_grouping_multiple'] = 'students for group building.';
+$string ['students_grouping_single'] = 'student for group formation.';
+$string ['students_grouping_multiple'] = 'students for group formation.';
 $string ['students_committed_single'] = 'student therefrom has already committed his/her answers.';
 $string ['students_committed_multiple'] = 'students have also committed their answers already.';
 $string ['committed_not_completed'] = 'from the committed questionnaires are not complete.';
@@ -456,7 +463,7 @@ $string ['consent_opt_in'] = 'Consent (opt-in)';
 $string ['consent_header'] = 'I want to participate in the groupformation plugin and agree to submit answers to the questionnaire. The participation or non-participation has no impact on the grading process (or the credit points).';
 $string ['consent_header_import'] = 'By importing your answers, you agree to participate in the groupformation plugin and you agree to submit answers to the questionnaire. The participation or non-participation has no impact on the grading process (or the credit points).';
 $string ['consent_message'] = '<ul><li>
-The teacher has no direct access to my answers for the group formation (just I am able to access the evaluation about my personality as well as the group average).
+The instructor has no direct access to my answers for the group formation (just I am able to access the evaluation about my personality as well as the group average).
 </li><li>
 My personal data will be deleted when the course ends - latest after {$a->archivedays} days.</li></ul>';
 $string ['consent_agree'] = 'I agree to the terms';
@@ -515,7 +522,7 @@ $string ['page_title_grouping'] = 'Group formation';
 $string ['page_title_group'] = 'Group assignment';
 $string ['page_title_grouping_edit'] = 'Group formation - Edit mode';
 $string ['page_title_import_export'] = 'Import & Export';
-$string ['noGroup'] = 'You haven\'t been assigned any group because you did not answer the questionnaire.';
+$string ['noGroup'] = 'You haven\'t been assigned any group because you did not answer the questionnaire in time. However, the instructor can assign you to a group manually upon your request.';
 
 $string ['topics_statistics'] = 'Statistics of offered topics';
 $string ['topics_statistics_score'] = 'Score [0-1]';

@@ -61,6 +61,9 @@ class mod_groupformation_questionnaire_controller {
     /** @var mod_groupformation_user_manager The manager of user data */
     private $usermanager = null;
 
+    /** @var mod_groupformation_groups_manager The manager of groups data */
+    private $groupsmanager = null;
+
     /** @var int ID of user */
     public $userid;
 
@@ -95,6 +98,7 @@ class mod_groupformation_questionnaire_controller {
 
         $this->store = new mod_groupformation_storage_manager ($groupformationid);
         $this->usermanager = new mod_groupformation_user_manager ($groupformationid);
+        $this->groupsmanager = new mod_groupformation_groups_manager ($groupformationid);
 
         $this->categories = $this->store->get_categories();
         $this->set_internal_number($oldcategory);
@@ -461,7 +465,6 @@ class mod_groupformation_questionnaire_controller {
             $s .= $table->get_header();
 
             foreach ($questions as $q) {
-
                 $s .= $q->get_html($this->highlightmissinganswers, $this->store->all_answers_required());
 
             }
@@ -500,9 +503,13 @@ class mod_groupformation_questionnaire_controller {
     public function get_participant_code() {
         $s = '<div class="participantcode">';
 
-        $s .= get_string('participant_code_footer', 'groupformation');
-        $s .= ': ';
-        $s .= $this->usermanager->get_participant_code($this->userid);
+        $participantcode = $this->usermanager->get_participant_code($this->userid);
+
+        if (!is_null($participantcode)) {
+            $s .= get_string('participant_code_footer', 'groupformation');
+            $s .= ': ';
+            $s .= $participantcode;
+        }
 
         $s .= '</div>';
         return $s;
@@ -549,6 +556,7 @@ class mod_groupformation_questionnaire_controller {
      * @param int $userid
      * @param string $category
      * @param stdClass $question
+     * @throws dml_exception
      */
     public function handle_answer($userid, $category, $question) {
 
@@ -590,24 +598,38 @@ class mod_groupformation_questionnaire_controller {
             $this->category = $category;
 
             $isteacher = has_capability('mod/groupformation:editsettings', $context);
+            $hasgroup = $this->groupsmanager->has_group($this->userid, true);
 
+            $state = $this->store->statemachine->get_state();
+            $userstate = $this->store->userstatemachine->get_state($this->userid);
             if ($isteacher) {
                 $s = '<div class="alert">';
                 $s .= get_string('questionnaire_preview', 'groupformation');
                 $s .= '</div>';
                 $assigns['preview_alert'] = $s;
-            }
-
-            if ($this->usermanager->is_completed($this->userid) || !$this->store->is_questionnaire_available()) {
+            } else if (in_array($state, array('q_open')) &&
+                    !in_array($userstate, array("started", "consent_given", "p_code_given", "answering"))) {
                 $s = '<div class="alert" id="commited_view">';
                 $s .= get_string('questionnaire_committed', 'groupformation');
+                $s .= '</div>';
+                $assigns['committed_alert'] = $s;
+            } else if (in_array($state, array('q_reopened')) && $hasgroup) {
+                $s = '<div class="alert" id="commited_view">';
+                $s .= get_string('questionnaire_committed', 'groupformation');
+                $s .= '</div>';
+                $assigns['committed_alert'] = $s;
+            } else if (!in_array($state, array('q_open', 'q_reopened'))) {
+                $s = '<div class="alert" id="commited_view">';
+                $s .= get_string('questionnaire_closed', 'groupformation');
                 $s .= '</div>';
                 $assigns['committed_alert'] = $s;
             }
 
             $percent = $this->get_percent($category);
 
-            if (mod_groupformation_data::ask_for_participant_code() && !$isteacher) {
+            $hasparticipantcode = $this->usermanager->has_participant_code($this->userid);
+
+            if (mod_groupformation_data::ask_for_participant_code() && $hasparticipantcode && !$isteacher) {
                 $assigns['participant_code'] = $this->get_participant_code();
             }
 

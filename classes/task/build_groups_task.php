@@ -31,6 +31,7 @@ if (!defined('MOODLE_INTERNAL')) {
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 require_once($CFG->dirroot . '/mod/groupformation/lib.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/advanced_job_manager.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/state_machine.php');
 
 /**
  * Class build_groups_task
@@ -67,7 +68,9 @@ class build_groups_task extends \core\task\scheduled_task {
     /**
      * Selects a waiting job, runs it and saves results
      *
-     * @return boolean
+     * @return void
+     * @throws \coding_exception
+     * @throws \dml_exception
      */
     private function do_job() {
 
@@ -99,6 +102,8 @@ class build_groups_task extends \core\task\scheduled_task {
 
         $jobs = $ajm::get_jobs('aborted');
         foreach (array_values($jobs) as $job) {
+            $statemachine = new \mod_groupformation_state_machine($job->groupformationid);
+            $statemachine->prev();
             $ajm::reset_job($job);
         }
     }

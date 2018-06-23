@@ -282,7 +282,7 @@ class mod_groupformation_import_export_controller {
             }
         }
 
-        $DB->insert_records('groupformation_answer', $allrecords);
+        $DB->insert_records('groupformation_answers', $allrecords);
         $this->usermanager->set_answer_count($userid);
     }
 
@@ -313,7 +313,7 @@ class mod_groupformation_import_export_controller {
 
             $questionids [] = $questionid;
 
-            if (!($record = $DB->get_record('groupformation_answer', array('groupformation' => $this->groupformationid,
+            if (!($record = $DB->get_record('groupformation_answers', array('groupformation' => $this->groupformationid,
                     'userid' => $userid, 'category' => $category, 'questionid' => $questionid))
             )
             ) {

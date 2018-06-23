@@ -95,6 +95,7 @@ class mod_groupformation_overview_view_controller extends mod_groupformation_bas
      * Handle actions on submit or click
      */
     public function handle_actions() {
+
         if (data_submitted() && confirm_sesskey()) {
             // Initialize useful entities.
             $usermanager = new mod_groupformation_user_manager($this->groupformationid);
@@ -109,15 +110,19 @@ class mod_groupformation_overview_view_controller extends mod_groupformation_bas
             $questions = optional_param('questions', null, PARAM_BOOL);
             $participantcode = optional_param('participantcode', '', PARAM_TEXT);
             if ($begin == 1 && isset($questions) && $questions == 1 && !$back) {
+
                 // If consent was given, set internal.
                 if (isset($consent)) {
                     $usermanager->set_consent($userid, true);
+                    // User state machine calls action "consent".
+                    $this->store->userstatemachine->change_state($userid, "consent");
                 }
 
                 // If participant code was given, validate and set internal.
                 if (isset($participantcode) && $participantcode !== '') {
                     if ($usermanager->validate_participant_code($participantcode)) {
                         $usermanager->register_participant_code($userid, $participantcode);
+                        $this->store->userstatemachine->change_state($userid, "p_code");
                     }
                 }
 
@@ -127,7 +132,9 @@ class mod_groupformation_overview_view_controller extends mod_groupformation_bas
                 redirect($returnurl);
             } else if ($begin == -1) {
                 // Delete answers due to consent removal.
+
                 $usermanager->delete_answers($userid);
+                $this->store->userstatemachine->change_state($userid, "remove_consent");
 
                 // Redirect.
                 $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
@@ -137,9 +144,12 @@ class mod_groupformation_overview_view_controller extends mod_groupformation_bas
                 if ($usermanager->is_completed($userid)) {
                     // If completed, unset internal completion status.
                     $usermanager->set_complete($userid, 0);
+                    $this->store->userstatemachine->change_state($userid, "revert");
+
                 } else {
+                    $this->store->userstatemachine->change_state($userid, "submit");
                     // If not completed, set internal completion status.
-                    $usermanager->change_status($userid, 1);
+                    $usermanager->set_complete($userid, 1);
                     // Also, set activity completion.
                     groupformation_set_activity_completion($id, $userid);
 

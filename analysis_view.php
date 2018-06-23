@@ -34,6 +34,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_p
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/scientific_grouping_2.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/analysis_view_controller.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/group_generator.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/state_machine.php');
 
 $filename = substr(__FILE__, strrpos(__FILE__, '\\') + 1);
 $url = new moodle_url('/mod/groupformation/' . $filename, $urlparams);
@@ -61,6 +62,8 @@ $viewcontroller->handle_actions();
 require('debug_actions.php');
 
 echo $OUTPUT->header();
+
+$statemachine = new mod_groupformation_state_machine($groupformation->id);
 
 $currenttab = 'analysis';
 

@@ -119,7 +119,7 @@ function groupformation_update_instance(stdClass $groupformation, mod_groupforma
     $groupformation->timemodified = time();
     $groupformation->id = $groupformation->instance;
 
-    if ($DB->count_records('groupformation_answer', array(
+    if ($DB->count_records('groupformation_answers', array(
             'groupformation' => $groupformation->id)) == 0
     ) {
         $result = $DB->update_record('groupformation', $groupformation);
@@ -138,8 +138,6 @@ function groupformation_update_instance(stdClass $groupformation, mod_groupforma
         'id' => $groupformation->id));
 
     groupformation_grade_item_update($groupformation);
-
-    // groupformation_save_more_infos($groupformation, false);
 
     return $result;
 }
@@ -165,15 +163,13 @@ function groupformation_delete_instance($id) {
     }
 
     // Delete any dependent records here.
-    $result = $DB->delete_records('groupformation', array(
+    $DB->delete_records('groupformation', array(
         'id' => $groupformation->id));
 
     // Cascading deletion of all related db entries.
-    $DB->delete_records('groupformation_answer', array(
+    $DB->delete_records('groupformation_answers', array(
         'groupformation' => $id));
-    $DB->delete_records('groupformation_q_settings', array(
-        'groupformation' => $id));
-    $DB->delete_records('groupformation_started', array(
+    $DB->delete_records('groupformation_users', array(
         'groupformation' => $id));
     $DB->delete_records('groupformation_jobs', array(
         'groupformationid' => $id));

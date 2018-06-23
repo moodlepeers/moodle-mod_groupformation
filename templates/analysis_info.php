@@ -32,16 +32,16 @@ global $USER;
         <span><?php echo $this->_['info_teacher']; ?></span><br>
         <span><i></i></span>
     </div>
-    <div class="col_m_66 bp_align_left-middle">
+    <div class="col_m_10 bp_align_left-middle">
         <span><b><?php echo get_string('starttime', 'groupformation'); ?>
                 : </b><?php echo $this->_['analysis_time_start']; ?></span><br>
         <span><b><?php echo get_string('endtime', 'groupformation'); ?>
                 : </b><?php echo $this->_['analysis_time_end']; ?></span><br><br>
-        <span><i><?php echo $this->_['analysis_status_info']; ?></i></span>
+        <span><i><?php echo $this->_['analysis_status']; ?></i></span>
         <span><i></i></span>
     </div>
 
-    <div class="col_m_33 bp_align_right-middle">
+    <div >
         <button type="<?php echo $this->_['button']['type']; ?>"
                 name="<?php echo $this->_['button']['name']; ?>"
                 value="<?php echo $this->_['button']['value']; ?>"
@@ -50,5 +50,15 @@ global $USER;
         >
             <?php echo $this->_['button']['text']; ?>
         </button>
+        <?php if (array_key_exists('reopen_button', $this->_)): ?>
+            <button type="<?php echo $this->_['reopen_button']['type']; ?>"
+                    name="<?php echo $this->_['reopen_button']['name']; ?>"
+                    value="<?php echo $this->_['reopen_button']['value']; ?>"
+                    class="gf_button gf_button_pill gf_button_small"
+                    <?php echo $this->_['reopen_button']['state']; ?>
+            >
+                <?php echo $this->_['reopen_button']['text']; ?>
+            </button>
+        <?php endif; ?>
     </div>
 </div>

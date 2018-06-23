@@ -48,6 +48,8 @@ if (($CFG->debug === 32767) || (in_array($USER->id, $debugusers))) {
 
         $DB->delete_records('groupformation_jobs', array('groupformationid' => $groupformation->id));
 
+        $store->statemachine->set_state(1);
+
         $return = new moodle_url ('/mod/groupformation/view.php', array(
             'id' => $id, 'do_show' => 'analysis'));
         redirect($return->out());
@@ -65,6 +67,7 @@ if (($CFG->debug === 32767) || (in_array($USER->id, $debugusers))) {
             $result = $ajm::do_groupal($job);
             $saved = $ajm::save_result($job, $result);
             $ajm::set_job($job, 'done');
+            $store->statemachine->set_state(4);
         }
         $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
             'id' => $id, 'do_show' => 'analysis'));
@@ -82,6 +85,8 @@ if (($CFG->debug === 32767) || (in_array($USER->id, $debugusers))) {
         if (!is_null($job)) {
             mod_groupformation_group_generator::generate_moodle_groups($job->groupformationid);
             $ajm::set_job($job, 'done_groups');
+
+            $store->statemachine->set_state(6);
         }
         $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
             'id' => $id, 'do_show' => 'analysis'));

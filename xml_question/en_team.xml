@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="team orientation">
-    <QUESTIONS VERSION="2017060319">
+    <QUESTIONS VERSION="2018061901">
         <QUESTION ID="14" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[If given the choice, I would prefer to work as part of a team rather than work alone.]]>
