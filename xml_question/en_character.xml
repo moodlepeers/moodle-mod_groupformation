@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="Big5 short version regular">
-    <QUESTIONS VERSION="2018061901">
+    <QUESTIONS VERSION="2017090901">
         <QUESTION ID="1" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Ich bin gesprächig, unterhalte mich gern.]]>
+                <![CDATA[I see myself as someone who is reserved.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[disagree]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -22,17 +22,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[agree]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="2" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Ich bin eher zurückhaltend, reserviert.]]>
+                <![CDATA[I see myself as someone who is generally trusting.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[disagree]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -47,17 +47,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[agree]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="3" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Ich bin voller Energie und Tatendrang.]]>
+                <![CDATA[I see myself as someone who tends to be lazy.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[disagree]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -72,17 +72,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[agree]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="4" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Ich bin begeisterungsfähig und kann andere leicht mitreißen.]]>
+                <![CDATA[I see myself as someone who is relaxed, handles stress well.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[disagree]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -97,17 +97,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[agree]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="5" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Ich bin eher der „stille Typ“, wortkarg.]]>
+                <![CDATA[I see myself as someone who has few artistic interests.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[disagree]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -122,17 +122,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[agree]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="6" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Ich bin durchsetzungsfähig, energisch.]]>
+                <![CDATA[I see myself as someone who is outgoing, sociable.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[disagree]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -147,17 +147,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[agree]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="7" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Ich bin manchmal schüchtern und gehemmt.]]>
+                <![CDATA[I see myself as someone who tends to find fault with others.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[disagree]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -172,17 +172,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[agree]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="8" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Ich gehe aus mir heraus, bin gesellig.]]>
+                <![CDATA[I see myself as someone who does a thorough job.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[disagree]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -197,18 +197,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[agree]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-
         <QUESTION ID="9" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Ich erledige Aufgaben gründlich.]]>
+                <![CDATA[I see myself as someone who gets nervous easily.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[disagree]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -223,17 +222,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[agree]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="10" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Ich bin manchmal unsorgfältig und schluderig.]]>
+                <![CDATA[I see myself as someone who has an active imagination.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[disagree]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -248,17 +247,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[agree]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="11" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Ich arbeite zuverlässig und gewissenhaft.]]>
+                <![CDATA[I see myself as someone who is considerate and kind to almost everyone.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[trifft nicht zu]]>
+                    <![CDATA[disagree]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -273,485 +272,7 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[trifft zu]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="12" TYPE="likert">
-            <QUESTIONTEXT>
-                <![CDATA[Ich bin eher unordentlich.]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[trifft nicht zu]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[trifft zu]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="13" TYPE="likert">
-            <QUESTIONTEXT>
-                <![CDATA[Ich bin bequem, neige zur Faulheit.]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[trifft nicht zu]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[trifft zu]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="14" TYPE="likert">
-            <QUESTIONTEXT>
-                <![CDATA[Ich harre aus (und arbeite weiter), bis die Aufgabe fertig ist.]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[trifft nicht zu]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[trifft zu]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="15" TYPE="likert">
-            <QUESTIONTEXT>
-                <![CDATA[Ich bin tüchtig und arbeite flott.]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[trifft nicht zu]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[trifft zu]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="16" TYPE="likert">
-            <QUESTIONTEXT>
-                <![CDATA[Ich mache Pläne und führe sie auch durch.]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[trifft nicht zu]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[trifft zu]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="17" TYPE="likert">
-            <QUESTIONTEXT>
-                <![CDATA[Ich bin leicht ablenkbar, bleibe nicht bei der Sache.]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[trifft nicht zu]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[trifft zu]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
-
-        <QUESTION ID="18" TYPE="likert">
-            <QUESTIONTEXT>
-                <![CDATA[Ich neige dazu, andere zu kritisieren.]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[trifft nicht zu]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[trifft zu]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="19" TYPE="likert">
-            <QUESTIONTEXT>
-                <![CDATA[Ich schenke anderen leicht vertrauen, glaube an das Gute im Menschen.]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[trifft nicht zu]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[trifft zu]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="20" TYPE="likert">
-            <QUESTIONTEXT>
-                <![CDATA[Ich kann mich kalt und distanziert verhalten.]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[trifft nicht zu]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[trifft zu]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="21" TYPE="likert">
-            <QUESTIONTEXT>
-                <![CDATA[Ich kann mich schroff und abweisend anderen gegenüber verhalten.]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[trifft nicht zu]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[trifft zu]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
-
-        <QUESTION ID="22" TYPE="likert">
-            <QUESTIONTEXT>
-                <![CDATA[Ich werde leicht deprimiert, niedergeschlagen.]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[trifft nicht zu]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[trifft zu]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="23" TYPE="likert">
-            <QUESTIONTEXT>
-                <![CDATA[Ich bin entspannt, lasse mich durch Stress nicht aus der Ruhe bringen.]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[trifft nicht zu]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[trifft zu]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="24" TYPE="likert">
-            <QUESTIONTEXT>
-                <![CDATA[Ich mache mir viele Sorgen.]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[trifft nicht zu]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[trifft zu]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="25" TYPE="likert">
-            <QUESTIONTEXT>
-                <![CDATA[Ich werde leicht nervös und unsicher.]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[trifft nicht zu]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[trifft zu]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
-
-        <QUESTION ID="26" TYPE="likert">
-            <QUESTIONTEXT>
-                <![CDATA[Ich bin vielseitig interessiert.]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[trifft nicht zu]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[trifft zu]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="27" TYPE="likert">
-            <QUESTIONTEXT>
-                <![CDATA[Ich bin tiefsinnig, denke gerne über Sachen nach.]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[trifft nicht zu]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[trifft zu]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="28" TYPE="likert">
-            <QUESTIONTEXT>
-                <![CDATA[Ich habe eine aktive Vorstellungskraft, bin phantasievoll.]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[trifft nicht zu]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[trifft zu]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="29" TYPE="likert">
-            <QUESTIONTEXT>
-                <![CDATA[Ich schätze künstlerische und ästhetische Eindrücke.]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[trifft nicht zu]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[trifft zu]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="30" TYPE="likert">
-            <QUESTIONTEXT>
-                <![CDATA[Ich habe nur wenig künstlerisches Interesse.]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[trifft nicht zu]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[trifft zu]]>
+                    <![CDATA[agree]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>

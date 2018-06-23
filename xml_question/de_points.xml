@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="">
-     <QUESTIONS VERSION="2018061901">
+     <QUESTIONS VERSION="2017060319">
           <QUESTION ID="1" TYPE="range">
                <QUESTIONTEXT>
                     <![CDATA[Welche Punktzahl möchten Sie erreichen?]]>
