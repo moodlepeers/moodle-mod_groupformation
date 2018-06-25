@@ -122,7 +122,7 @@ class mod_groupformation_overview_controller {
             return;
         }
 
-        $state = $this->store->get_state();
+        $state = $this->store->statemachine->get_state();
 
         switch ($state) {
             case "q_open":
