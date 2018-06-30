@@ -50,7 +50,7 @@ class mod_groupformation_state_machine {
             1 => array(2, 0),   // Starting groupformation, opening questionnaire.
             2 => array(4, 3),   // Groupformation terminates, aborting groupformation.
             3 => array(3, 1),   // Job abortion terminates.
-            4 => array(5, 1),   // Starting groupadoption, reset groupformation.
+            4 => array(1, 5),   // Starting groupadoption, reset groupformation.
             5 => array(6, 5),   // Job terminates.
             6 => array(1, 7),   // Deleting moodlegroups, reopens questionnaire.
             7 => array(6, 7)

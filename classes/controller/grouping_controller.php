@@ -176,7 +176,7 @@ class mod_groupformation_grouping_controller {
         $ajm = new mod_groupformation_advanced_job_manager();
         $ajm::set_job($this->job, "waiting_groups", false, false);
 
-        $this->statemachine->next();
+        $this->statemachine->prev();
     }
 
     /**
