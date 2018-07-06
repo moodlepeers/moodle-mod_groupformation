@@ -34,11 +34,11 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/stora
 /**
  * Returns activity state
  *
- * @param int $groupformationid
+ * @param int $groupformationid ID of the activity
  * @return mixed
  * @throws dml_exception
  */
-function groupformation_get_activity_state(int $groupformationid) {
+function groupformation_get_activity_state($groupformationid) {
     $store = new mod_groupformation_storage_manager($groupformationid);
 
     return $store->statemachine->get_state();
@@ -47,13 +47,28 @@ function groupformation_get_activity_state(int $groupformationid) {
 /**
  * Returns user state
  *
- * @param int $groupformationid
- * @param int $userid
+ * @param int $groupformationid ID of the activity
+ * @param int $userid ID of the user
  * @return mixed
  * @throws dml_exception
  */
-function groupformation_get_user_state(int $groupformationid, int $userid) {
+function groupformation_get_user_state($groupformationid, $userid) {
     $store = new mod_groupformation_storage_manager($groupformationid);
 
     return $store->userstatemachine->get_state($userid);
+}
+
+/**
+ * Returns all instances of groupformation activities in a given course
+ *
+ * @param int courseid ID of the course
+ * @return array stdClass
+ * @throws dml_exception
+ */
+function groupformation_get_instances($courseid) {
+    global $DB;
+
+    $instances = $DB->get_records('groupformation', array('course' => $courseid));
+
+    return $instances;
 }
