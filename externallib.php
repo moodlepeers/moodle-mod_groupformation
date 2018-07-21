@@ -72,3 +72,18 @@ function groupformation_get_instances($courseid) {
 
     return $instances;
 }
+
+/**
+ * Returns all instances of groupformation activities in a given course
+ *
+ * @param int courseid ID of the course
+ * @return array stdClass
+ * @throws dml_exception
+ */
+function groupformation_get_instance_by_id($groupformationid) {
+    global $DB;
+
+    $instance = $DB->get_record('groupformation', array('id' => $groupformationid));
+
+    return $instance;
+}
