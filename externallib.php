@@ -30,6 +30,7 @@
 defined('MOODLE_INTERNAL') || die ();
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
 
 /**
  * Returns activity state
@@ -86,4 +87,40 @@ function groupformation_get_instance_by_id($groupformationid) {
     $instance = $DB->get_record('groupformation', array('id' => $groupformationid));
 
     return $instance;
+}
+
+/**
+ * Returns an array including all group members names.
+ *
+ * @param $groupformationid
+ * @param $userid
+ * @return array
+ * @throws dml_exception
+ */
+function groupformation_get_group_members($groupformationid, $userid) {
+    $groupsmanager = new mod_groupformation_groups_manager ($groupformationid);
+    $groupmembers = $groupsmanager->get_group_members($userid);
+    $members = array();
+    foreach ($groupmembers as $groupmember) {
+        $user = get_complete_user_data('id', $groupmember);
+        $members[$groupmember] = fullname($user);
+    }
+    return $members;
+}
+
+function groupformation_get_group_name($groupformationid, $userid) {
+    $groupsmanager = new mod_groupformation_groups_manager ($groupformationid);
+    return $groupsmanager->get_group_name($userid);
+}
+
+function groupformation_get_cm($groupformationid) {
+    global $DB;
+    $gfinstance = groupformation_get_instance_by_id($groupformationid);
+    $moduleid = $DB->get_field('modules', 'id', array('name' => 'groupformation'));
+    return $DB->get_field('course_modules', 'id', array('course'=> $gfinstance->course, 'module' => $moduleid, 'instance' => $groupformationid));
+}
+
+function groupformation_has_group($groupformationid, $userid) {
+    $groupsmanager = new mod_groupformation_groups_manager ($groupformationid);
+    return $groupsmanager->has_group($userid);
 }
