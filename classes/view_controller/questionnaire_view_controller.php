@@ -143,7 +143,7 @@ class mod_groupformation_questionnaire_view_controller extends mod_groupformatio
             $go = $controller->save_answers();
         }
 
-        if ($controller->currentcategory == "") {
+        if (has_capability('mod/groupformation:editsettings', $context) && $controller->currentcategory == "") {
             $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
                     'id' => $id, 'back' => '1'));
             redirect($returnurl);
@@ -154,7 +154,6 @@ class mod_groupformation_questionnaire_view_controller extends mod_groupformatio
         }
 
         $next = ($direction == -1 && $this->controller->currentcategory != "") || $controller->has_next();
-
         if (!$next) {
             if ($usermanager->has_answered_everything($userid)) {
                 $usermanager->set_evaluation_values($userid);
