@@ -253,28 +253,25 @@ class mod_groupformation_import_export_controller {
 
             libxml_clear_errors();
         }
-
         $name = $xml->getName();
+
         if (!($name == 'answers')) {
             throw new InvalidArgumentException ("Wrong format");
         }
         $attr = $xml->attributes();
-
         $userid = intval($attr->userid);
         if (!($userid == intval($USER->id))) {
             throw new InvalidArgumentException ("Wrong format");
         }
-        $categories = $this->store->get_categories();
 
+        $categories = $this->store->get_categories();
         $allrecords = array();
 
         foreach ($xml->categories->category as $category) {
-
             $name = strval($category->attributes()->name);
 
             // Check if category is needed to be imported.
             if (in_array($name, $categories)) {
-
                 // Try importing answers.
                 $records = $this->create_answer_records($name, $category->answer);
 
@@ -292,6 +289,7 @@ class mod_groupformation_import_export_controller {
      * @param string $category
      * @param array $answers
      * @return array
+     * @throws coding_exception
      * @throws dml_exception
      */
     public function create_answer_records($category, $answers) {
@@ -305,18 +303,25 @@ class mod_groupformation_import_export_controller {
         foreach ($answers as $answer) {
             $attr = $answer->attributes();
             $questionid = intval($attr->questionid);
-            $value = intval($attr->value);
+            $value = strval($attr->value);
 
-            if ($questionid <= 0 || $value <= 0 || in_array($questionid, $questionids)) {
+            $question = $DB->get_record('groupformation_questions',
+                    array(
+                            'category' => $category,
+                            'questionid' => $questionid,
+                            'language' => get_string('language', 'groupformation')
+                            )
+            );
+            if ($questionid <= 0 || in_array($questionid, $questionids)) {
                 throw new InvalidArgumentException ("Wrong format");
             }
 
             $questionids [] = $questionid;
 
-            if (!($record = $DB->get_record('groupformation_answers', array('groupformation' => $this->groupformationid,
-                    'userid' => $userid, 'category' => $category, 'questionid' => $questionid))
-            )
-            ) {
+            $record = $DB->get_record('groupformation_answers', array('groupformation' => $this->groupformationid,
+                    'userid' => $userid, 'category' => $category, 'questionid' => $questionid));
+
+            if (!$record) {
 
                 // Create record for import.
                 $record = new stdClass ();
