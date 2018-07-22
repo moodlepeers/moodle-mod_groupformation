@@ -66,7 +66,7 @@ if ($editsettings) {
 
     // The import/export view.
     // TODO Only activate if export of study is needed.
-    if (mod_groupformation_data::is_math_prep_course_mode()) {
+    if (false && mod_groupformation_data::is_math_prep_course_mode()) {
         $exporturl = new moodle_url ('/mod/groupformation/export_view.php', array(
             'id' => $usedid, 'do_show' => 'export'));
         $row [] = new tabobject ('export', $exporturl->out(), 'Export');
