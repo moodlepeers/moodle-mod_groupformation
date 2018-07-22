@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="times questions">
-    <QUESTIONS VERSION="2018061901">
+    <QUESTIONS VERSION="2018072201">
         <QUESTION ID="3" TYPE="dropdown">
             <QUESTIONTEXT>
                 <![CDATA[Was war ihr letzter schulischer Mathematikkurs?]]>
@@ -319,6 +319,15 @@
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
+                    <![CDATA[Angewandte Geowissenschaften (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Angewandte Mechanik (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Bauingenieurwesen (Bachelor)]]>
+                </OPTION>
+                <OPTION>
                     <![CDATA[Chemie (Bachelor)]]>
                 </OPTION>
                 <OPTION>
@@ -343,7 +352,13 @@
                     <![CDATA[Mathematik (Bachelor)]]>
                 </OPTION>
                 <OPTION>
+                    <![CDATA[Psychologie in IT (Bachelor)]]>
+                </OPTION>
+                <OPTION>
                     <![CDATA[Technomathematik (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Umweltingenieurwesen (Bachelor)]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[Wirtschaftsinformatik (Bachelor)]]>
