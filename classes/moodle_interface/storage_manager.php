@@ -22,9 +22,8 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.');
-}
+
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/advanced_job_manager.php');
@@ -488,6 +487,7 @@ class mod_groupformation_storage_manager {
      * Returns all exportable categories
      *
      * @return array
+     * @throws dml_exception
      */
     public function get_exportable_categories() {
         $exportablecategories = array();
@@ -516,7 +516,7 @@ class mod_groupformation_storage_manager {
     public function get_next_category($category) {
         $categories = $this->get_categories();
         $pos = $this->get_position($category);
-        if ($pos < count($categories)-1) {
+        if ($pos < count($categories) - 1) {
             $previous = $categories [$pos + 1];
         } else {
             $previous = '';
@@ -548,6 +548,7 @@ class mod_groupformation_storage_manager {
      * Returns whether the questionnaire asks for grade
      *
      * @return boolean
+     * @throws dml_exception
      */
     public function ask_for_grade() {
         global $DB;
@@ -562,6 +563,7 @@ class mod_groupformation_storage_manager {
      * Returns whether the questionnaire asks for points
      *
      * @return boolean
+     * @throws dml_exception
      */
     public function ask_for_points() {
         global $DB;
@@ -577,6 +579,7 @@ class mod_groupformation_storage_manager {
      * Returns whether this instance is still editable or not
      *
      * @return boolean
+     * @throws dml_exception
      */
     public function is_editable() {
         global $DB;
@@ -596,6 +599,7 @@ class mod_groupformation_storage_manager {
      * @param string $category
      * @param int $questionid
      * @return array
+     * @throws dml_exception
      */
     public function get_answers_to_special_question($category, $questionid) {
         global $DB;
@@ -611,6 +615,7 @@ class mod_groupformation_storage_manager {
      * Returns maximum number of points
      *
      * @return mixed
+     * @throws dml_exception
      */
     public function get_max_points() {
         global $DB;
@@ -624,6 +629,8 @@ class mod_groupformation_storage_manager {
      * Returns whether questionnaire is available or not
      *
      * @return boolean
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public function is_questionnaire_available() {
         $now = time();
@@ -683,6 +690,7 @@ class mod_groupformation_storage_manager {
      * Returns group size as set in settings
      *
      * @return mixed
+     * @throws dml_exception
      */
     public function get_max_members() {
         global $DB;
@@ -696,6 +704,7 @@ class mod_groupformation_storage_manager {
      * Returns number of groups as set in settings
      *
      * @return mixed
+     * @throws dml_exception
      */
     public function get_max_groups() {
         global $DB;
@@ -709,6 +718,7 @@ class mod_groupformation_storage_manager {
      * Returns option if students with no answers should be exluded in formation
      *
      * @return boolean
+     * @throws dml_exception
      */
     public function get_grouping_setting() {
         global $DB;
@@ -722,6 +732,7 @@ class mod_groupformation_storage_manager {
      * Returns the chosen option if whether group size or the number of group is fixed in settings
      *
      * @return mixed
+     * @throws dml_exception
      */
     public function get_group_option() {
         global $DB;
@@ -795,6 +806,7 @@ class mod_groupformation_storage_manager {
      * Returns the total number of answers
      *
      * @return int
+     * @throws dml_exception
      */
     public function get_total_number_of_answers() {
         $categories = $this->get_categories();
@@ -807,6 +819,7 @@ class mod_groupformation_storage_manager {
      * Returns whether the email setting is set or not
      *
      * @return number
+     * @throws dml_exception
      */
     public function get_email_setting() {
         global $DB;
@@ -818,6 +831,7 @@ class mod_groupformation_storage_manager {
      * Returns label set
      *
      * @return array
+     * @throws dml_exception
      */
     public function get_label_set() {
         $array = mod_groupformation_data::get_label_set($this->get_scenario());
@@ -851,6 +865,7 @@ class mod_groupformation_storage_manager {
      * Returns whether 'topic' is a valid category in this instance or not
      *
      * @return boolean
+     * @throws dml_exception
      */
     public function ask_for_topics() {
         global $DB;
@@ -865,6 +880,7 @@ class mod_groupformation_storage_manager {
      * Returns whether 'knowledge' is a valid category in this instance or not
      *
      * @return boolean
+     * @throws dml_exception
      */
     public function ask_for_knowledge() {
         global $DB;
@@ -879,6 +895,7 @@ class mod_groupformation_storage_manager {
      * Returns users
      *
      * @return array|null
+     * @throws dml_exception
      */
     public function get_users() {
         global $PAGE;
@@ -909,7 +926,7 @@ class mod_groupformation_storage_manager {
      * @throws dml_exception
      */
     public function determine_group_size($users, $groupformationid = null) {
-        if (is_null($users) || count($users)==0){
+        if (is_null($users) || count($users) == 0) {
             return array(0,0);
         }
         if ($this->ask_for_topics()) {
@@ -1221,7 +1238,7 @@ class mod_groupformation_storage_manager {
             $enrolledstudents = $diff;
         }
         if (is_null($enrolledstudents) || count($enrolledstudents) <= 0) {
-            return array(array(),array());
+            return array(array(), array());
         }
 
         $groupingsetting = $this->get_grouping_setting();
@@ -1370,6 +1387,13 @@ class mod_groupformation_storage_manager {
         return $instances;
     }
 
+    /**
+     * Returns activity state
+     *
+     * @param bool $internal
+     * @return mixed
+     * @throws dml_exception
+     */
     public function get_state($internal = false) {
         return $this->statemachine->get_state($internal);
     }

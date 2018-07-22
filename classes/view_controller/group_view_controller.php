@@ -21,9 +21,8 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
-}
+
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/basic_view_controller.php');
 
@@ -39,6 +38,7 @@ class mod_groupformation_group_view_controller extends mod_groupformation_basic_
 
     /** @var array Template names */
     protected $templatenames = array('group_info');
+
     /** @var string Title of page */
     protected $title = 'group';
 
@@ -48,6 +48,7 @@ class mod_groupformation_group_view_controller extends mod_groupformation_basic_
      * @param int $groupformationid
      * @param mod_groupformation_group_controller $controller
      * @throws coding_exception
+     * @throws dml_exception
      */
     public function __construct($groupformationid, $controller) {
         parent::__construct($groupformationid, $controller);

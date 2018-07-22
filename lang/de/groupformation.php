@@ -15,14 +15,13 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * German lang string
+ * German lang strings
  *
  * @package     mod_groupformation
  * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 $string ['language'] = 'de';
 $string ['modulename'] = 'Gruppenformation';
 $string ['modulenameplural'] = 'Gruppenformationen';

@@ -22,9 +22,8 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.');
-}
+
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/advanced_job_manager.php');
@@ -60,19 +59,6 @@ class mod_groupformation_user_state_machine {
             2 => "p_code_given",
             3 => "answering",
             4 => "submitted"
-    );
-
-    /** @var array Modes of state machine*/
-    private $modes = array(
-            "q_open" => 0,
-            "q_closed" => 10,
-            "ga_done" => 10,
-            "gf_started" => 10,
-            "gf_aborted" => 10,
-            "gf_done" => 10,
-            "ga_started" => 10,
-            "ga_done" => 10,
-            "q_reopened" => 20,
     );
 
     /**

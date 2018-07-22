@@ -132,7 +132,7 @@ if (mod_groupformation_data::is_math_prep_course_mode()) {
 
     list($configurations, $specs) = $scientificgrouping->get_specification();
 
-    if (count($users)==0){
+    if (count($users) == 0) {
         $numberofslices = 0;
         $bestslices = array();
     } else {
@@ -157,11 +157,20 @@ if (mod_groupformation_data::is_math_prep_course_mode()) {
     $debugbuttons .= '<ul>';
 
     foreach(array_keys($configurations) as $key => $value) {
-        $debugbuttons .= '<li>'.$value.' - #users: '.count($bestslices[$key]).' - #groups: '.intval(ceil(count($bestslices[$key])/$groupsizes[0])).'</li>';
+        $debugbuttons .= '<li>';
+        $debugbuttons .= $value;
+        $debugbuttons .= ' - #users: ';
+        $debugbuttons .= count($bestslices[$key]);
+        $debugbuttons .= ' - #groups: ';
+        $debugbuttons .= intval(ceil(count($bestslices[$key]) / $groupsizes[0]));
+        $debugbuttons .= '</li>';
     }
     if (count($users[1]) != 0) {
-        $debugbuttons .= '<li>random:1 - #users: ' . count($users[1]) . ' - #groups: ' .
-                intval(ceil(count($users[1]) / $groupsizes[1])) . '</li>';
+        $debugbuttons .= '<li>random:1 - #users: ';
+        $debugbuttons .= count($users[1]);
+        $debugbuttons .= ' - #groups: ';
+        $debugbuttons .= intval(ceil(count($users[1]) / $groupsizes[1]));
+        $debugbuttons .= '</li>';
     }
 
     $debugbuttons .= '</ul>';

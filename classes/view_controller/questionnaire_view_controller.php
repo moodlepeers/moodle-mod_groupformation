@@ -149,9 +149,7 @@ class mod_groupformation_questionnaire_view_controller extends mod_groupformatio
             redirect($returnurl);
         }
 
-        if ($direction == -1) {
-            //$controller->go_back();
-        } else if (!$go) {
+        if (!$go) {
             $controller->not_go_on();
         }
 
@@ -167,7 +165,7 @@ class mod_groupformation_questionnaire_view_controller extends mod_groupformatio
             if (isset ($action) && $action == 1) {
                 $usermanager->change_status($userid);
             }
-            //var_dump($next, $isteacher, $available, $category, $validcategory);
+
             $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
                     'id' => $id, 'do_show' => 'view', 'back' => '1'));
             redirect($returnurl);

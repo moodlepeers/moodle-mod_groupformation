@@ -22,9 +22,8 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.');
-}
+
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/criteria/specific_criterion.php');
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/participant.php');
@@ -121,6 +120,7 @@ class mod_groupformation_participant_parser {
      *
      * @param array $users
      * @return array
+     * @throws dml_exception
      */
     public function build_topic_participants($users) {
         if (count($users) == 0) {

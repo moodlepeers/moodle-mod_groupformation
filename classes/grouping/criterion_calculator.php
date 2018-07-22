@@ -23,9 +23,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
-}
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
@@ -298,6 +296,7 @@ class mod_groupformation_criterion_calculator {
      * @param number $userid
      * @param array $specs
      * @return string
+     * @throws dml_exception
      */
     public function get_general($userid, $specs = null) {
         if (is_null($specs)) {
@@ -412,7 +411,8 @@ class mod_groupformation_criterion_calculator {
      *
      * @param int $userid
      * @param array $specs
-     * @return float
+     * @return array
+     * @throws dml_exception
      */
     public function get_points($userid, $specs = null) {
         if (is_null($specs)) {
@@ -453,7 +453,8 @@ class mod_groupformation_criterion_calculator {
      *
      * @param int $userid
      * @param array $specs
-     * @return float
+     * @return array
+     * @throws dml_exception
      */
     public function get_grade($userid, $specs = null) {
         if (is_null($specs)) {
@@ -495,7 +496,8 @@ class mod_groupformation_criterion_calculator {
      * Returns topic answers as a criterion
      *
      * @param number $userid
-     * @return TopicCriterion
+     * @return mod_groupformation_topic_criterion
+     * @throws dml_exception
      */
     public function get_topic($userid) {
         $choices = $this->usermanager->get_answers($userid, 'topic', 'questionid', 'answer');

@@ -37,6 +37,7 @@ class mod_groupformation_grouping_view_controller extends mod_groupformation_bas
 
     /** @var array Template names */
     protected $templatenames = array('grouping_settings', 'grouping_statistics', 'grouping_generated_groups');
+
     /** @var string Title of page */
     protected $title = 'grouping';
 

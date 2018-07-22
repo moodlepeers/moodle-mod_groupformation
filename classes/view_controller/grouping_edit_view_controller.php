@@ -37,6 +37,7 @@ class mod_groupformation_grouping_edit_view_controller extends mod_groupformatio
 
     /** @var array Template names */
     protected $templatenames = array('grouping_edit_header', 'grouping_edit_groups');
+
     /** @var string Title of page */
     protected $title = 'grouping_edit';
 
@@ -81,19 +82,21 @@ class mod_groupformation_grouping_edit_view_controller extends mod_groupformatio
         $output = "";
 
         if (groupformation_get_current_questionnaire_version() > $store->get_version()) {
-            $output.= '<div class="alert">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
+            $output .= '<div class="alert">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
         }
 
         if ($store->is_archived() && has_capability('mod/groupformation:editsettings', $context)) {
-            $output.= '<div class="alert" id="commited_view">' . get_string('archived_activity_admin', 'groupformation') . '</div>';
+            $output .= '<div class="alert" id="commited_view">';
+            $output .= get_string('archived_activity_admin', 'groupformation');
+            $output .= '</div>';
         } else {
-            $output.= '<form id="edit_groups_form" action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
-            $output.= '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
-            $output.= '<input type="hidden" name="id" value="' . $id . '"/>';
+            $output .= '<form id="edit_groups_form" action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
+            $output .= '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
+            $output .= '<input type="hidden" name="id" value="' . $id . '"/>';
 
-            $output.= parent::render();
+            $output .= parent::render();
 
-            $output.= '</form>';
+            $output .= '</form>';
         }
 
         return $output;

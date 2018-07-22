@@ -25,9 +25,8 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
-}
+
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/manhattan_distance.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/ievaluator.php");
@@ -102,7 +101,6 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
         // TODO Test functionality  (yes!); Issue #3.
     }
 
-
     /**
      * Evaluate CPI
      *
@@ -166,7 +164,6 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
         return $s;
 
     }
-
 
     /**
      *  Calculates normalized pair performance

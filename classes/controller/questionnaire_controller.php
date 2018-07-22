@@ -22,9 +22,8 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
-}
+
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/likert_question.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/topic_question.php');
@@ -533,7 +532,6 @@ class mod_groupformation_questionnaire_controller {
     /**
      * Saves answers for user
      *
-     * @param string $category
      * @return bool
      * @throws coding_exception
      * @throws dml_exception
@@ -541,7 +539,7 @@ class mod_groupformation_questionnaire_controller {
     public function save_answers() {
         $category = $this->previouscategory;
 
-        if (!in_array($category, $this->categories)){
+        if (!in_array($category, $this->categories)) {
             return false;
         }
 

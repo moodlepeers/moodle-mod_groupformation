@@ -25,7 +25,6 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-
 $settings->add(new admin_setting_heading('sampleheader',
                                          get_string('settings_header', 'groupformation'),
                                          get_string('settings_description', 'groupformation')));

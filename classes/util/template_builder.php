@@ -21,9 +21,8 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.');
-}
+
+defined('MOODLE_INTERNAL') || die();
 
 /**
  * Class mod_groupformation_template_builder
@@ -72,7 +71,6 @@ class mod_groupformation_template_builder {
             $this->_[$key] = $value;
         }
     }
-
 
     /**
      * Sets template name

@@ -25,9 +25,8 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
-}
+
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/cohorts/cohort.php");
@@ -63,6 +62,7 @@ class mod_groupformation_cohort_writer {
      *
      * @param null $cohort
      * @return bool
+     * @throws Exception
      */
     public function write($cohort = null) {
         if (is_null($cohort)) {
@@ -100,6 +100,7 @@ class mod_groupformation_cohort_writer {
      * Writes XML for an array participants
      *
      * @param mod_groupformation_cohort $cohort
+     * @throws Exception
      */
     private function write_groups(mod_groupformation_cohort $cohort) {
         $writer = $this->writer;

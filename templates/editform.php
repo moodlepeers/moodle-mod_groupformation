@@ -28,11 +28,11 @@ defined('MOODLE_INTERNAL') || die();
 
 <div id="js-content" style="display:none;">
 
-    <?= $this->_['teacherinfo'];?>
+    <?php echo $this->_['teacherinfo'];?>
 
     <div class="gf_settings_pad">
         <div class="gf_pad_header">
-            <?= get_string('scenario_description', 'groupformation');?>
+            <?php echo get_string('scenario_description', 'groupformation');?>
             <span class="required"></span>
         </div>
         <div class="js_errors" id="szenario_error">
@@ -44,22 +44,23 @@ defined('MOODLE_INTERNAL') || die();
                     <input type="radio" name="js_scenario" id="project" value="project"  />
                     <label class="col_m_100 szenarioLabel" id="label_project" for="project" >
                         <div class="sz_header">
-                            <?= get_string('scenario_projectteams', 'groupformation');?>
+                            <?php echo get_string('scenario_projectteams', 'groupformation');?>
                         </div>
                         <p>
                             <small>
                                 <b>
                                     <i>
-                                        <?= get_string('scenario_usage_header', 'groupformation');?>
+                                        <?php echo get_string('scenario_usage_header', 'groupformation');?>
                                     </i>
                                 </b>
                                 <br>
-                                <?= get_string('scenario_projectteams_short', 'groupformation');?>
+                                <?php echo get_string('scenario_projectteams_short', 'groupformation');?>
                             </small>
                         </p>
                             <p>
                                 <small>
-                                    <?= get_string('scenario_projectteams_description', 'groupformation');?>
+                                    <?php echo get_string('scenario_projectteams_description',
+                                            'groupformation');?>
                                 </small>
                             </p>
                     </label>
@@ -69,22 +70,23 @@ defined('MOODLE_INTERNAL') || die();
                     <input type="radio" name="js_scenario" id="homework" value="homework" />
                     <label class="col_m_100 szenarioLabel" id="label_homework" for="homework" >
                         <div class="sz_header">
-                            <?= get_string('scenario_homeworkgroups', 'groupformation');?>
+                            <?php echo get_string('scenario_homeworkgroups', 'groupformation');?>
                         </div>
                         <p>
                             <small>
                                 <b>
                                     <i>
-                                        <?= get_string('scenario_usage_header', 'groupformation');?>
+                                        <?php echo get_string('scenario_usage_header', 'groupformation');?>
                                     </i>
                                 </b>
                                 <br>
-                                <?= get_string('scenario_homeworkgroups_short', 'groupformation');?>
+                                <?php echo get_string('scenario_homeworkgroups_short', 'groupformation');?>
                             </small>
                         </p>
                         <p>
                             <small>
-                                <?= get_string('scenario_homeworkgroups_description', 'groupformation');?>
+                                <?php echo get_string('scenario_homeworkgroups_description',
+                                        'groupformation');?>
                             </small>
                         </p>
                     </label>
@@ -93,22 +95,25 @@ defined('MOODLE_INTERNAL') || die();
                     <input type="radio" name="js_scenario" id="presentation" value="presentation" />
                     <label class="col_m_100 szenarioLabel" for="presentation">
                         <div class="sz_header">
-                            <?= get_string('scenario_presentationgroups', 'groupformation');?>
+                            <?php echo get_string('scenario_presentationgroups', 'groupformation');?>
                         </div>
                         <p>
                             <small>
                                 <b>
                                     <i>
-                                        <?= get_string('scenario_usage_header_presentation', 'groupformation');?>
+                                        <?php echo get_string('scenario_usage_header_presentation',
+                                                'groupformation');?>
                                     </i>
                                 </b>
                                 <br>
-                                <?= get_string('scenario_presentationgroups_short', 'groupformation');?>
+                                <?php echo get_string('scenario_presentationgroups_short',
+                                        'groupformation');?>
                             </small>
                         </p>
                         <p>
                             <small>
-                                <?= get_string('scenario_presentationgroups_description', 'groupformation');?>
+                                <?php echo get_string('scenario_presentationgroups_description',
+                                        'groupformation');?>
                             </small>
                         </p>
                     </label>
@@ -125,11 +130,11 @@ defined('MOODLE_INTERNAL') || die();
             <div class="gf_pad_header">
                 <label class="gf_label" for="id_js_knowledge">
                     <input type="checkbox" id="id_js_knowledge" name="chbKnowledge" value="wantKnowledge" />
-                    <?= get_string('knowledge_description', 'groupformation');?>
+                    <?php echo get_string('knowledge_description', 'groupformation');?>
                 </label>
                 <span class="optional">
                 </span>
-                <span class="toolt" tooltip="<?= get_string('knowledge_help', 'groupformation');?>">
+                <span class="toolt" tooltip="<?php echo get_string('knowledge_help', 'groupformation');?>">
                 </span>
             </div>
             <div class="gf_pad_content" id="js_knowledgeWrapper">
@@ -137,26 +142,26 @@ defined('MOODLE_INTERNAL') || die();
 
                 </p>
                 <p id="knowledgeInfoProject" style="display:none;">
-                    <?= get_string('knowledge_info_project', 'groupformation');?>
+                    <?php echo get_string('knowledge_info_project', 'groupformation');?>
                 </p>
                 <p id="knowledgeInfoHomework" style="display:none;">
-                    <?= get_string('knowledge_info_homework', 'groupformation');?>
+                    <?php echo get_string('knowledge_info_homework', 'groupformation');?>
                 </p>
                 <p id="knowledgeInfoPresentation" style="display:none;">
-                    <?= get_string('knowledge_info_presentation', 'groupformation');?>
+                    <?php echo get_string('knowledge_info_presentation', 'groupformation');?>
                 </p>
                 <p id="stringAddInput" style="display:none;">
-                    <?= get_string('add_line', 'groupformation');?>
+                    <?php echo get_string('add_line', 'groupformation');?>
                 </p>
                 <p id="language" style="display:none;">
-                    <?= get_string('language', 'groupformation');?>
+                    <?php echo get_string('language', 'groupformation');?>
                 </p>
                 <div class="grid">
                     <div id="prk">
                         <div class="multi_field_wrapper persist-area">
                             <div class="col_m_50">
                                 <h5>
-                                    <?= get_string('input', 'groupformation');?>
+                                    <?php echo get_string('input', 'groupformation');?>
                                 </h5>
                                 <div class="multi_fields">
                                     <div class="multi_field" id="inputprk0">
@@ -173,9 +178,11 @@ defined('MOODLE_INTERNAL') || die();
                                     </div>
                                     <div class="multi_field" id="inputprk2">
                                         <input class="respwidth js_preknowledgeInput lastInput" type="text" placeholder="
-                                            <?= get_string('add_line', 'groupformation');?>
+                                            <?php echo get_string('add_line', 'groupformation');?>
                                         ">
-                                        <button type="button" class="remove_field gf_button gf_button_circle gf_button_small" disabled="disabled">
+                                        <button type="button"
+                                                class="remove_field gf_button gf_button_circle gf_button_small"
+                                                disabled="disabled">
 
                                         </button>
                                     </div>
@@ -183,7 +190,7 @@ defined('MOODLE_INTERNAL') || die();
                             </div>
                             <div class="col_m_50">
                                 <h5>
-                                    <?= get_string('preview', 'groupformation');?>
+                                    <?php echo get_string('preview', 'groupformation');?>
                                 </h5>
                                 <div class="col_m_100">
                                     <table class="responsive-table">
@@ -195,11 +202,13 @@ defined('MOODLE_INTERNAL') || die();
                                         <thead>
                                             <tr>
                                                 <th scope="col">
-                                                    <?= get_string('knowledge_question', 'groupformation');?>
+                                                    <?php echo get_string('knowledge_question',
+                                                            'groupformation');?>
                                                 </th>
                                                 <th scope="col">
                                                     <div class="legend">
-                                                        <?= get_string('knowledge_scale', 'groupformation');?>
+                                                        <?php echo get_string('knowledge_scale',
+                                                                'groupformation');?>
                                                     </div>
                                                 </th>
                                             </tr>
@@ -207,10 +216,12 @@ defined('MOODLE_INTERNAL') || die();
                                         <tbody id="preknowledges">
                                             <tr class="knowlRow" id="prkRow0">
                                                 <th scope="row">
-                                                    <?= get_string('knowledge_dummy', 'groupformation');?>  1
+                                                    <?php echo get_string('knowledge_dummy',
+                                                            'groupformation');?>  1
                                                 </th>
 
-                                                <td data-title="<?= get_string('knowledge_scale', 'groupformation');?>" class="range">
+                                                <td data-title="<?php echo get_string('knowledge_scale',
+                                                        'groupformation');?>" class="range">
                                                     <span >
                                                         0
                                                     </span>
@@ -222,9 +233,11 @@ defined('MOODLE_INTERNAL') || die();
                                             </tr>
                                             <tr class="knowlRow" id="prkRow1">
                                                 <th scope="row">
-                                                    <?= get_string('knowledge_dummy', 'groupformation');?>  2
+                                                    <?php echo get_string('knowledge_dummy',
+                                                            'groupformation');?>  2
                                                 </th>
-                                                <td data-title="<?= get_string('knowledge_scale', 'groupformation');?>" class="range">
+                                                <td data-title="<?php echo get_string('knowledge_scale',
+                                                        'groupformation');?>" class="range">
                                                     <span >
                                                         0
                                                     </span>
@@ -236,9 +249,12 @@ defined('MOODLE_INTERNAL') || die();
                                             </tr>
                                             <tr class="knowlRow" id="prkRow2">
                                                 <th scope="row">
-                                                    <?= get_string('knowledge_dummy', 'groupformation');?>  3
+                                                    <?php echo get_string('knowledge_dummy',
+                                                            'groupformation');?>  3
                                                 </th>
-                                                <td data-title="<?= get_string('knowledge_scale', 'groupformation');?>" class="range">
+                                                <td data-title="<?php echo get_string('knowledge_scale',
+                                                        'groupformation');?>"
+                                                    class="range">
                                                     <span>
                                                         0
                                                     </span>
@@ -264,25 +280,25 @@ defined('MOODLE_INTERNAL') || die();
                 <div class="gf_pad_header">
                     <label class="gf_label" for="id_js_topics">
                         <input type="checkbox" id="id_js_topics" name="chbTopics" value="wantTopics">
-                        <?= get_string('topics_description', 'groupformation');?>
+                        <?php echo get_string('topics_description', 'groupformation');?>
                     </label>
                     <span id="topicsStateLabel" class="optional">
 
                     </span>
-                    <span class="toolt" tooltip="<?= get_string('topics_help', 'groupformation');?>">
+                    <span class="toolt" tooltip="<?php echo get_string('topics_help', 'groupformation');?>">
                     </span>
                 </div>
 
                 <div class="gf_pad_content" id="js_topicsWrapper">
 
-                    <p><?= get_string('topics_description_extended', 'groupformation');?></p>
+                    <p><?php echo get_string('topics_description_extended', 'groupformation');?></p>
 
                     <div class="grid">
                         <div id="tpc">
                             <div class="multi_field_wrapper persist-area">
                                 <div class="col_m_50">
                                     <h5>
-                                        <?= get_string('input', 'groupformation');?>
+                                        <?php echo get_string('input', 'groupformation');?>
                                     </h5>
                                     <div class="multi_fields">
                                         <div class="multi_field" id="inputtpc0">
@@ -299,9 +315,11 @@ defined('MOODLE_INTERNAL') || die();
                                         </div>
                                         <div class="multi_field" id="inputtpc2">
                                             <input class="respwidth js_topicInput lastInput" type="text" placeholder="
-                                                <?= get_string('add_line', 'groupformation');?>
+                                                <?php echo get_string('add_line', 'groupformation');?>
                                             ">
-                                            <button type="button" class="remove_field gf_button gf_button_circle gf_button_small" disabled="disabled">
+                                            <button type="button"
+                                                    class="remove_field gf_button gf_button_circle gf_button_small"
+                                                    disabled="disabled">
 
                                             </button>
                                         </div>
@@ -309,33 +327,33 @@ defined('MOODLE_INTERNAL') || die();
                                 </div>
                                 <div class="col_m_50">
                                     <h5>
-                                        <?= get_string('preview', 'groupformation');?>
+                                        <?php echo get_string('preview', 'groupformation');?>
                                     </h5>
                                     <div class="col_m_100">
                                         <p id="topicshead">
-                                            <?= get_string('topics_question', 'groupformation');?>
+                                            <?php echo get_string('topics_question', 'groupformation');?>
                                         </p>
                                         <span id="topicsDummy" style="display:none;">
-                                            <?= get_string('topics_dummy', 'groupformation');?>
+                                            <?php echo get_string('topics_dummy', 'groupformation');?>
                                             </span>
                                         <ul class="sortable_topics" id="previewTopics">
                                             <li class="topicLi" id="tpcRow0" class="">
                                                 <span class="ui-icon ui-icon-arrowthick-2-n-s">
 
                                                 </span>
-                                                <?= get_string('topics_dummy', 'groupformation');?> 1
+                                                <?php echo get_string('topics_dummy', 'groupformation');?> 1
                                             </li>
                                             <li class="topicLi" id="tpcRow1" class="">
                                                 <span class="ui-icon ui-icon-arrowthick-2-n-s">
 
                                                 </span>
-                                                <?= get_string('topics_dummy', 'groupformation');?> 2
+                                                <?php echo get_string('topics_dummy', 'groupformation');?> 2
                                             </li>
                                             <li class="topicLi" id="tpcRow2" class="">
                                                 <span class="ui-icon ui-icon-arrowthick-2-n-s">
 
                                                 </span>
-                                                <?= get_string('topics_dummy', 'groupformation');?> 3
+                                                <?php echo get_string('topics_dummy', 'groupformation');?> 3
                                             </li>
                                         </ul>
                                     </div>
@@ -352,12 +370,12 @@ defined('MOODLE_INTERNAL') || die();
         <div class="gf_settings_pad">
 
             <div class="gf_pad_header">
-                <?= get_string('groupoption_description', 'groupformation');?>
+                <?php echo get_string('groupoption_description', 'groupformation');?>
                 <span class="required">
 
                 </span>
                 <span class="toolt" tooltip="
-                    <?= get_string('groupoption_help', 'groupformation');?>
+                    <?php echo get_string('groupoption_help', 'groupformation');?>
                 ">
             </span>
             </div>
@@ -369,23 +387,23 @@ defined('MOODLE_INTERNAL') || die();
             </div>
             <div class="settings_info" id="groupSettingsInfo">
                 <p>
-                    <?= get_string('groupSettingsInfo', 'groupformation');?>
+                    <?php echo get_string('groupSettingsInfo', 'groupformation');?>
                 </p>
             </div>
             <div class="gf_pad_content">
                 <p>
                     <span id="studentsInCourse">
                         <b>
-                            <?= $this->_['count'];?>
+                            <?php echo $this->_['count'];?>
                         </b>
                     </span>
-                    <?= get_string('students_enrolled_info', 'groupformation');?>
+                    <?php echo get_string('students_enrolled_info', 'groupformation');?>
                 </p>
                 <div class="grid">
                     <div class="col_m_50">
                         <label>
                             <input type="radio" name="group_opt" id="group_opt_size" value="group_size" checked="checked" />
-                            <?= get_string('maxmembers', 'groupformation');?>
+                            <?php echo get_string('maxmembers', 'groupformation');?>
                         </label>
                         <input type="number" class="group_opt" id="group_size" min="0" value="0" />
                     </div>
@@ -393,9 +411,14 @@ defined('MOODLE_INTERNAL') || die();
                         <div class="col_m_50">
                             <label>
                                 <input type="radio" name="group_opt" id="group_opt_numb" value="numb_of_groups"/>
-                                <?= get_string('maxgroups', 'groupformation');?>
+                                <?php echo get_string('maxgroups', 'groupformation');?>
                             </label>
-                            <input type="number" class="group_opt" id="numb_of_groups"  min="0" max="100" value="0" disabled="disabled" />
+                            <input type="number"
+                                   class="group_opt"
+                                   id="numb_of_groups"
+                                   min="0" max="100"
+                                   value="0"
+                                   disabled="disabled" />
                         </div>
                     <?php endif;?>
                 </div>
@@ -405,12 +428,12 @@ defined('MOODLE_INTERNAL') || die();
 
         <div class="gf_settings_pad">
             <div class="gf_pad_header">
-                <?= get_string('groupname', 'groupformation');?>
+                <?php echo get_string('groupname', 'groupformation');?>
                 <span class="optional">
 
                 </span>
                 <span class="toolt" tooltip="
-                    <?= get_string('groupname_help', 'groupformation');?>
+                    <?php echo get_string('groupname_help', 'groupformation');?>
                 ">
                 </span>
             </div>
@@ -421,7 +444,7 @@ defined('MOODLE_INTERNAL') || die();
 
         <div class="gf_settings_pad">
             <div class="gf_pad_header">
-                <?= get_string('evaluationmethod_description', 'groupformation');?>
+                <?php echo get_string('evaluationmethod_description', 'groupformation');?>
                 <span class="required">
 
                 </span>
@@ -435,21 +458,21 @@ defined('MOODLE_INTERNAL') || die();
             <div class="gf_pad_content">
                 <select id="js_evaluationmethod">
                     <option value="chooseM">
-                        <?= get_string('choose_evaluationmethod', 'groupformation');?>
+                        <?php echo get_string('choose_evaluationmethod', 'groupformation');?>
                     </option>
                     <option value="grades">
-                        <?= get_string('grades', 'groupformation');?></option>
+                        <?php echo get_string('grades', 'groupformation');?></option>
                     <option value="points">
-                        <?= get_string('points', 'groupformation');?></option>
+                        <?php echo get_string('points', 'groupformation');?></option>
                     <option value="justpass">
-                        <?= get_string('justpass', 'groupformation');?></option>
+                        <?php echo get_string('justpass', 'groupformation');?></option>
                     <option value="novaluation">
-                        <?= get_string('noevaluation', 'groupformation');?></option>
+                        <?php echo get_string('noevaluation', 'groupformation');?></option>
                 </select>
                 <span id="max_points_wrapper">
                     <input type="number" id="max_points"  min="0" max="100" value="100" />
                     <span class="toolt" tooltip="
-                        <?= get_string('evaluation_point_info', 'groupformation');?>
+                        <?php echo get_string('evaluation_point_info', 'groupformation');?>
                     ">
                     </span>
                 </span>
@@ -460,12 +483,12 @@ defined('MOODLE_INTERNAL') || die();
             <div class="gf_pad_header">
                 <label class="gf_label" for="id_js_onlyactivestudents">
                     <input type="checkbox" id="id_js_onlyactivestudents" name="chbOnlyactivestudents" value="onlyactivestudents">
-                        <?= get_string('onlyactivestudents_description', 'groupformation');?>
+                        <?php echo get_string('onlyactivestudents_description', 'groupformation');?>
                 </label>
                 <span id="onlyactivestudentsStateLabel" class="optional">
                 </span>
                 <span class="toolt" tooltip="
-                    <?= get_string('groupoption_onlyactivestudents', 'groupformation');?>
+                    <?php echo get_string('groupoption_onlyactivestudents', 'groupformation');?>
                 ">
                 </span>
             </div>
@@ -473,7 +496,7 @@ defined('MOODLE_INTERNAL') || die();
                 <label class="gf_label" for="id_js_emailnotifications">
                     <input disabled type="checkbox">
                     <!-- id="id_js_emailnotifications" name="chbEmailnotifications" value="wantEmailnotifications"> !-->
-                    <?= get_string('emailnotifications_description', 'groupformation');?>
+                    <?php echo get_string('emailnotifications_description', 'groupformation');?>
                 </label>
                 <span id="emailnotificationsStateLabel" class="optional">
 
@@ -483,12 +506,12 @@ defined('MOODLE_INTERNAL') || die();
         <div class="gf_pad_header">
             <label class="gf_label" for="id_js_allanswersrequired">
                 <input type="checkbox" id="id_js_allanswersrequired" name="chbAllanswersrequired" value="allanswersrequired">
-                <?= get_string('allanswersrequired_description', 'groupformation');?>
+                <?php echo get_string('allanswersrequired_description', 'groupformation');?>
             </label>
             <span id="allanswersrequiredStateLabel" class="optional">
             </span>
             <span class="toolt" tooltip="
-                <?= get_string('groupoption_allanswersrequired', 'groupformation');?>">
+                <?php echo get_string('groupoption_allanswersrequired', 'groupformation');?>">
             </span>
         </div>
     </div>

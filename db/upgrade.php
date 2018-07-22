@@ -1206,6 +1206,7 @@ function xmldb_groupformation_upgrade($oldversion) {
         // Groupformation savepoint reached.
         upgrade_mod_savepoint(true, 2016072100, 'groupformation');
     }
+
     if ($oldversion < 2016090700) {
         // Define field count_groups to be added to groupformation_jobs and groupformation_stats.
         $tablename = 'groupformation_jobs';

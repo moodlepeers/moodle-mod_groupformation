@@ -22,9 +22,8 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
-}
+
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/group/lib.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
@@ -323,6 +322,7 @@ class mod_groupformation_groups_manager {
      *
      * @param null $groups
      * @return null
+     * @throws dml_exception
      */
     public function get_max_groups_size($groups = null) {
         if (is_null($groups)) {
@@ -617,6 +617,7 @@ class mod_groupformation_groups_manager {
      *
      * @param unknown $users
      * @param unknown $idmap
+     * @throws dml_exception
      */
     public function assign_users_to_groups($users, $idmap) {
         foreach ($users as $userid => $groupalid) {

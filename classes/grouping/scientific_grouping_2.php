@@ -22,13 +22,8 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
-}
 
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.');
-}
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/groupformation/lib.php');
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
@@ -76,28 +71,32 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
         $this->participantparser = new mod_groupformation_participant_parser($groupformationid);
     }
 
+    /**
+     * Determines how many slices are possible
+     *
+     * @param $numberofusers
+     * @param $groupsize
+     * @param $numberofslices
+     * @return mixed
+     */
     public function determine_number_of_slices($numberofusers, $groupsize, $numberofslices) {
-        if ($numberofusers == 0){
+        if ($numberofusers == 0) {
             return $numberofusers;
         }
-        $minperslice = $groupsize*3;
-        $div = max(1, intval(floor($numberofusers/$minperslice)));
+        $minperslice = $groupsize * 3;
+        $div = max(1, intval(floor($numberofusers / $minperslice)));
         return min($div, $numberofslices);
     }
 
-    public function check_users($usersold) {
-
-        $groupsizes = $this->store->determine_group_size($usersold);
-
-        $specification = $this->get_specification();
-
-        list ($configurations, $specs) = $specification;
-
-        $minusers = count($configurations)*$groupsizes[0]*3;
-
-        return $usersold;
-    }
-
+    /**
+     * Returns scores
+     *
+     * @param $users
+     * @param $specs
+     * @return array
+     * @throws coding_exception
+     * @throws dml_exception
+     */
     public function get_scores($users, $specs) {
         $scores = [];
 
@@ -125,11 +124,11 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
      * @throws Exception
      */
     public function get_optimal_slices($users, $numberofslices, $specs = null, $groupsize = 3) {
-        if ($numberofslices == 0){
+        if ($numberofslices == 0) {
             return array();
         }
 
-        if (count($users) <= $groupsize*3) {
+        if (count($users) <= $groupsize * 3) {
             return array($users);
         }
 
@@ -256,7 +255,7 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
         $weights = $this->get_weights();
 
         $numberofslices = count($configurations);
-        $numberofslices = $this->determine_number_of_slices(count($users[0]),$groupsizes[0],$numberofslices);
+        $numberofslices = $this->determine_number_of_slices(count($users[0]), $groupsizes[0], $numberofslices);
 
         $cohorts = array();
 
@@ -360,20 +359,20 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
         $usercount = count($scores);
         $divider = $numberofslices * $groupsize;
         $ganzzahldiv = intval(floor($usercount / $divider));
-        $numberofremainingusers = $usercount-$divider*$ganzzahldiv;
+        $numberofremainingusers = $usercount - $divider * $ganzzahldiv;
 
-        $firstscores = array_slice($scores,0,$ganzzahldiv*$divider);
-        $lastscores = array_slice($scores, $ganzzahldiv*$divider);
+        $firstscores = array_slice($scores,0,$ganzzahldiv * $divider);
+        $lastscores = array_slice($scores, $ganzzahldiv * $divider);
 
         // Complete run.
         $userslices = $this->assign_to_slices($firstscores, $numberofslices);
 
         // Handling remaining students to only allow one incomplete group.
         $ganzzahldiv = intval(floor($numberofremainingusers / $groupsize));
-        $currentnumberofslices = min($numberofslices-1, $ganzzahldiv);
+        $currentnumberofslices = min($numberofslices - 1, $ganzzahldiv);
 
-        $firstscores = array_slice($lastscores, 0, $ganzzahldiv*$groupsize);
-        $restscores = array_slice($lastscores, $ganzzahldiv*$groupsize);
+        $firstscores = array_slice($lastscores, 0, $ganzzahldiv * $groupsize);
+        $restscores = array_slice($lastscores, $ganzzahldiv * $groupsize);
 
         // Creating some slices with group-size size.
         // Reminder run.
@@ -384,7 +383,7 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
         // Combining slices from complete run and reminder run.
         // Starting with slice based on groupformation ID.
         $modulo = $this->groupformationid % $numberofslices;
-        for ($i = 0; $i<count($reminderslices); $i++) {
+        for ($i = 0; $i < count($reminderslices); $i++) {
             $userslices[$modulo] = array_merge($userslices[$modulo], $reminderslices[$i]);
             $modulo = ($modulo + 1) % $numberofslices;
         }
@@ -400,7 +399,7 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
      * @return array
      */
     private function assign_to_slices($scores, $numberofslices) {
-        $userslices = array_fill(0,$numberofslices, []);
+        $userslices = array_fill(0, $numberofslices, []);
         $slices = range(1, $numberofslices);
 
         for ($i = 0; $i < count($scores); $i++) {

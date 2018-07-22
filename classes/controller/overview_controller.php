@@ -23,9 +23,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.');
-}
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
@@ -62,9 +60,6 @@ class mod_groupformation_overview_controller {
 
     /** @var mod_groupformation_user_manager The manager of user data */
     private $usermanager;
-
-    /** @var int Current view state */
-    private $viewstate;
 
     /** @var array State info array */
     private $groupformationstateinfo = array();
