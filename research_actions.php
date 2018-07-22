@@ -136,12 +136,14 @@ if (mod_groupformation_data::is_math_prep_course_mode()) {
         $numberofslices = 0;
         $bestslices = array();
     } else {
-        $numberofslices = $scientificgrouping->determine_number_of_slices(count($users[0]),$groupsizes[0],count($configurations));
+        $numberofslices = $scientificgrouping->determine_number_of_slices(count($users[0]),
+                $groupsizes[0],
+                count($configurations));
         $bestslices = $scientificgrouping->get_optimal_slices($users[0], $numberofslices, $specs, $groupsizes[0]);
     }
 
     $configurations2 = array();
-    foreach($bestslices as $key => $bestslice) {
+    foreach ($bestslices as $key => $bestslice) {
         $k = array_keys($configurations)[$key];
         $configurations2[$k]=$configurations[$k];
     }
@@ -156,7 +158,7 @@ if (mod_groupformation_data::is_math_prep_course_mode()) {
     $debugbuttons .= get_string('scientific_grouping_setup', 'groupformation', count($configurations));
     $debugbuttons .= '<ul>';
 
-    foreach(array_keys($configurations) as $key => $value) {
+    foreach (array_keys($configurations) as $key => $value) {
         $debugbuttons .= '<li>';
         $debugbuttons .= $value;
         $debugbuttons .= ' - #users: ';

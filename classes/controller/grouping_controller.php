@@ -70,7 +70,7 @@ class mod_groupformation_grouping_controller {
 
     /** @var mod_groupformation_state_machine Activity state machine */
     private $statemachine;
-    
+
     /**
      * Creates an instance of grouping_controller for groupformation
      *

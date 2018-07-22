@@ -361,7 +361,7 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
         $ganzzahldiv = intval(floor($usercount / $divider));
         $numberofremainingusers = $usercount - $divider * $ganzzahldiv;
 
-        $firstscores = array_slice($scores,0,$ganzzahldiv * $divider);
+        $firstscores = array_slice($scores, 0, $ganzzahldiv * $divider);
         $lastscores = array_slice($scores, $ganzzahldiv * $divider);
 
         // Complete run.

@@ -927,7 +927,7 @@ class mod_groupformation_storage_manager {
      */
     public function determine_group_size($users, $groupformationid = null) {
         if (is_null($users) || count($users) == 0) {
-            return array(0,0);
+            return array(0, 0);
         }
         if ($this->ask_for_topics()) {
             $groupoption = $this->get_group_option();
