@@ -132,13 +132,13 @@ class mod_groupformation_grouping {
      * @throws Exception
      */
     public function build_cohort($users, $groupsize, $configurationkey) {
-        if (strpos($configurationkey, "rand:1") !== false) {
+        if (strpos($configurationkey, "random:1") !== false) {
             // Random.
             return $this->build_random_cohort($users, $groupsize);
-        } else if (strpos($configurationkey, "rand:0") !== false || strpos($configurationkey, "groupal:1") !== false) {
+        } else if (strpos($configurationkey, "groupal:1") !== false) {
             // Not Random.
             return $this->build_groupal_cohort($users, $groupsize);
-        } else if (strpos($configurationkey, "rand:0") !== false || strpos($configurationkey, "topic:1") !== false) {
+        } else if (strpos($configurationkey, "topic:1") !== false) {
             // Not Random.
             return $this->build_topic_cohort($users, $groupsize);
         } else {

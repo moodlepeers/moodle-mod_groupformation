@@ -72,6 +72,10 @@ class mod_groupformation_export_controller {
      * Returns elements for template
      *
      * @return array
+     * @throws coding_exception
+     * @throws dml_exception
+     * @throws file_exception
+     * @throws stored_file_creation_exception
      */
     public function load_info() {
         $assigns = array();
@@ -90,6 +94,8 @@ class mod_groupformation_export_controller {
      *
      * @param string $type
      * @return string
+     * @throws coding_exception
+     * @throws dml_exception
      * @throws file_exception
      * @throws stored_file_creation_exception
      */

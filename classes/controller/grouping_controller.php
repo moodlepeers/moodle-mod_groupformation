@@ -52,7 +52,10 @@ class mod_groupformation_grouping_controller {
     private $groupformationid = null;
 
     /** @var int The id of the course module */
-    private $cmid;
+    public $cmid;
+
+    /** @var stdClass course module */
+    public $cm;
 
     /** @var int state of grouping */
     private $viewstate = 0;
@@ -84,6 +87,7 @@ class mod_groupformation_grouping_controller {
         $this->groupformationid = $groupformationid;
         if (!is_null($cm)) {
             $this->cmid = $cm->id;
+            $this->cm = $cm;
         }
 
         $this->store = new mod_groupformation_storage_manager ($groupformationid);

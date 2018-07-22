@@ -68,30 +68,38 @@ class mod_groupformation_questionnaire_controller {
     public $userid;
 
     /** @var int The id of the course module */
-    private $cmid;
+    public $cmid;
 
     /** @var bool Flag for highlighting missing answers */
     private $highlightmissinganswers = false;
 
     /** @var int Position of category */
-    private $categoryposition = 0;
+    public $categoryposition = 0;
 
-    /** @var string Current category */
-    private $category;
+    /** @var string previous category */
+    public $previouscategory;
+
+    /** @var string current category */
+    public $currentcategory;
+
+    /** @var int current direction */
+    public $direction;
 
     /** @var array Categories of questionnaire */
-    private $categories = array();
+    public $categories = array();
 
     /**
      * mod_groupformation_questionnaire_controller constructor.
      *
      * @param int $groupformationid
      * @param int $userid
-     * @param string $oldcategory
+     * @param string $previouscategory
+     * @param $currentcategory
+     * @param $direction
      * @param int $cmid
      * @throws dml_exception
      */
-    public function __construct($groupformationid, $userid, $oldcategory, $cmid) {
+    public function __construct($groupformationid, $userid, $cmid, $currentcategory, $direction) {
         $this->groupformationid = $groupformationid;
         $this->userid = $userid;
         $this->cmid = $cmid;
@@ -100,15 +108,30 @@ class mod_groupformation_questionnaire_controller {
         $this->usermanager = new mod_groupformation_user_manager ($groupformationid);
         $this->groupsmanager = new mod_groupformation_groups_manager ($groupformationid);
 
+        $previouscategory = "";
+        if ($direction == 0) {
+            $previouscategory = "";
+        } else if ($direction == 1) {
+            $previouscategory = $currentcategory;
+            $currentcategory = $this->store->get_next_category($currentcategory);
+        } else if ($direction == -1) {
+            $previouscategory = $currentcategory;
+            $currentcategory = $this->store->get_previous_category($previouscategory);
+        }
+
+        $this->direction = $direction;
+        $this->previouscategory = $previouscategory;
+        $this->currentcategory = $currentcategory;
+
         $this->categories = $this->store->get_categories();
-        $this->set_internal_number($oldcategory);
+        $this->categoryposition = $this->store->get_position($currentcategory);
     }
 
     /**
      * Triggers going a category page back
      */
     public function go_back() {
-        $this->categoryposition = max($this->categoryposition - 2, 0);
+        $this->categoryposition = max($this->categoryposition - 1, 0);
     }
 
     /**
@@ -153,17 +176,6 @@ class mod_groupformation_questionnaire_controller {
     }
 
     /**
-     * Sets internal page number
-     *
-     * @param unknown $category
-     */
-    private function set_internal_number($category) {
-        if ($category != "") {
-            $this->categoryposition = $this->store->get_position($category) + 1;
-        }
-    }
-
-    /**
      * Returns whether there is a next category or not
      *
      * @return boolean
@@ -203,6 +215,7 @@ class mod_groupformation_questionnaire_controller {
      * Returns whether current category is 'topic' or not
      *
      * @return boolean
+     * @throws dml_exception
      */
     public function is_topics() {
         return $this->categoryposition == $this->store->get_position('topic');
@@ -212,6 +225,7 @@ class mod_groupformation_questionnaire_controller {
      * Returns whether current category is 'knowledge' or not
      *
      * @return boolean
+     * @throws dml_exception
      */
     public function is_knowledge() {
         return $this->categoryposition == $this->store->get_position('knowledge');
@@ -221,6 +235,7 @@ class mod_groupformation_questionnaire_controller {
      * Returns whether current category is 'points' or not
      *
      * @return boolean
+     * @throws dml_exception
      */
     public function is_points() {
         return $this->categoryposition == $this->store->get_position('points');
@@ -355,7 +370,7 @@ class mod_groupformation_questionnaire_controller {
     public function get_action_buttons() {
         $s = '<div class="grid">';
         $s .= '    <div class="col_m_100 questionaire_button_row">';
-        $s .= '        <button type="submit" name="direction" value="0" class="gf_button gf_button_pill gf_button_small">';
+        $s .= '        <button type="submit" name="direction" value="-1" class="gf_button gf_button_pill gf_button_small">';
         $s .= get_string('previous');
         $s .= '        </button>';
         $s .= '        <button type="submit" name="direction" value="1" class="gf_button gf_button_pill gf_button_small">';
@@ -523,7 +538,13 @@ class mod_groupformation_questionnaire_controller {
      * @throws coding_exception
      * @throws dml_exception
      */
-    public function save_answers($category) {
+    public function save_answers() {
+        $category = $this->previouscategory;
+
+        if (!in_array($category, $this->categories)){
+            return false;
+        }
+
         $go = true;
         $number = $this->store->get_number($category);
 
@@ -546,6 +567,8 @@ class mod_groupformation_questionnaire_controller {
                 $this->userid, $category) != $number) {
             $go = false;
         }
+
+        $this->store->userstatemachine->change_state($this->userid, "answer");
 
         return $go;
     }

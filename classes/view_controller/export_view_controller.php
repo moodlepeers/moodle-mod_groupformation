@@ -54,4 +54,14 @@ class mod_groupformation_export_view_controller extends mod_groupformation_basic
 
         return $overviewoptions->load_template();
     }
+
+    public function handle_access() {
+        $id = $this->controller->cmid;
+        $context = context_module::instance($id);
+
+        if (!has_capability('mod/groupformation:editsettings', $context)) {
+            $returnurl = new moodle_url('/mod/groupformation/view.php', array('id' => $id, 'do_show' => 'view'));
+            redirect($returnurl);
+        }
+    }
 }

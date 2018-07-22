@@ -136,7 +136,7 @@ $string ['choose_scenario'] = 'Choose scenario';
 $string ['choose_number'] = 'Choose number';
 $string ['choose_evaluationmethod'] = 'Choose method';
 $string ['evaluation_point_info'] = 'indicate the maximum available points';
-$string ['students_enrolled_info'] = 'Students are enrolled in this course';
+$string ['students_enrolled_info'] = 'Students are enrolled in this course. If the activity is configured for a certain grouping only, the real number may be smaller.';
 $string ['groupSettingsInfo'] = 'You have choosen to define topics. Thereof the number of groups and their size will be calculated, as you can see below.';
 $string ['analyse'] = 'Analysis';
 $string ['questionnaire_not_started'] = 'The questionnaire is ready.';
@@ -601,3 +601,10 @@ $string ['privacy:metadata:groupformation_group_users:groupformation'] = 'ID of 
 $string ['privacy:metadata:groupformation_group_users:userid'] = 'ID of the user';
 $string ['privacy:metadata:groupformation_group_users:groupid'] = 'ID of corresponding record in table "groupformation_groups"';
 
+$string ['bucket_description'] = 'I want to pre-group the participants based on a selection question';
+
+$string ['pre_study_header'] = 'Pre-Grouping Statistics';
+$string ['optimized_grouping'] = '<b>{$a}</b> users are available for optimized grouping.';
+$string ['randomized_grouping'] = '<b>{$a}</b> users are available for randomized grouping.';
+
+$string ['scientific_grouping_setup'] = 'This scientific grouping setup divides all users (with completely answered questionnaires) into <b>{$a} cohorts</b>. All users with incomplete answers are grouped randomly (as an additional cohort).<br>The configuration keys are as follows:';

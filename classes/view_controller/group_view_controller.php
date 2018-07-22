@@ -68,4 +68,40 @@ class mod_groupformation_group_view_controller extends mod_groupformation_basic_
 
         return $overviewoptions->load_template();
     }
+
+    /**
+     * Handles access
+     *
+     * @throws coding_exception
+     * @throws moodle_exception
+     */
+    public function handle_access() {
+        $id = $this->controller->cmid;
+        $context = context_module::instance($id);
+
+        if (has_capability('mod/groupformation:editsettings', $context)) {
+            $returnurl = new moodle_url('/mod/groupformation/analysis_view.php', array('id' => $id, 'do_show' => 'analysis'));
+            redirect($returnurl);
+        }
+    }
+
+    /**
+     * Renders content
+     *
+     * @return string
+     * @throws coding_exception
+     * @throws dml_exception
+     */
+    public function render() {
+        $store = $this->store;
+
+        $output = "";
+        if ($store->is_archived()) {
+            $output .= '<div class="alert" id="commited_view">' . get_string('archived_activity_answers', 'groupformation') . '</div>';
+        } else {
+            $output .= parent::render();
+        }
+
+        return $output;
+    }
 }

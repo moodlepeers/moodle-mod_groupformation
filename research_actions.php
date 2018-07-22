@@ -32,6 +32,10 @@ $debugbuttons = "";
 
 $stats = $store->get_honesty_stats();
 
+$ajm = new mod_groupformation_advanced_job_manager();
+
+$job = $ajm::get_job($groupformation->id);
+
 // Only if debug mode is activated.
 if (mod_groupformation_data::is_math_prep_course_mode()) {
 
@@ -85,10 +89,6 @@ if (mod_groupformation_data::is_math_prep_course_mode()) {
         $debugbuttons .= '</p>';
     }
 
-    $ajm = new mod_groupformation_advanced_job_manager();
-
-    $job = $ajm::get_job($groupformation->id);
-
     $state = $store->statemachine->get_state();
     if (in_array($state, array('q_closed'))) {
 
@@ -118,6 +118,54 @@ if (mod_groupformation_data::is_math_prep_course_mode()) {
         $debugbuttons .= get_string('no_filter_change', 'groupformation');
         $debugbuttons .= '</p>';
     }
+
+    $debugbuttons .= '</div>';
+    $debugbuttons .= '<div class="gf_pad_header">';
+    $debugbuttons .= get_string('pre_study_header', 'groupformation');
+    $debugbuttons .= '</div>';
+    $debugbuttons .= '<div class="gf_pad_content">';
+
+    $scientificgrouping = new mod_groupformation_scientific_grouping_2($groupformation->id);
+
+    $users = $store->get_users_for_grouping($job);
+    $groupsizes = $store->determine_group_size($users);
+
+    list($configurations, $specs) = $scientificgrouping->get_specification();
+
+    if (count($users)==0){
+        $numberofslices = 0;
+        $bestslices = array();
+    } else {
+        $numberofslices = $scientificgrouping->determine_number_of_slices(count($users[0]),$groupsizes[0],count($configurations));
+        $bestslices = $scientificgrouping->get_optimal_slices($users[0], $numberofslices, $specs, $groupsizes[0]);
+    }
+
+    $configurations2 = array();
+    foreach($bestslices as $key => $bestslice) {
+        $k = array_keys($configurations)[$key];
+        $configurations2[$k]=$configurations[$k];
+    }
+    $configurations = $configurations2;
+
+    $debugbuttons .= '<p>';
+    $debugbuttons .= get_string('optimized_grouping', 'groupformation', count($users[0]));
+    $debugbuttons .= '<br>';
+    $debugbuttons .= get_string('randomized_grouping', 'groupformation', count($users[1]));
+    $debugbuttons .= '<br>';
+    $debugbuttons .= '<p>';
+    $debugbuttons .= get_string('scientific_grouping_setup', 'groupformation', count($configurations));
+    $debugbuttons .= '<ul>';
+
+    foreach(array_keys($configurations) as $key => $value) {
+        $debugbuttons .= '<li>'.$value.' - #users: '.count($bestslices[$key]).' - #groups: '.intval(ceil(count($bestslices[$key])/$groupsizes[0])).'</li>';
+    }
+    if (count($users[1]) != 0) {
+        $debugbuttons .= '<li>random:1 - #users: ' . count($users[1]) . ' - #groups: ' .
+                intval(ceil(count($users[1]) / $groupsizes[1])) . '</li>';
+    }
+
+    $debugbuttons .= '</ul>';
+    $debugbuttons .= '</p>';
 
     $debugbuttons .= '</div>';
 }

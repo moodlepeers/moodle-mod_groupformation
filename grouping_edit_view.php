@@ -36,50 +36,28 @@ $url = new moodle_url('/mod/groupformation/' . $filename, $urlparams);
 $PAGE->set_url($url);
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
+$PAGE->set_context(context_module::instance($cm->id));
+$PAGE->set_cm($cm);
 
 // Import jQuery and js file.
 groupformation_add_jquery($PAGE, 'edit_groups.js');
 
-if (!has_capability('mod/groupformation:editsettings', $context)) {
-    $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
-        'id' => $id, 'do_show' => 'view'));
-    redirect($returnurl);
-} else {
-    $currenttab = $doshow;
-}
-
 $store = new mod_groupformation_storage_manager ($groupformation->id);
-$controller = new mod_groupformation_grouping_controller ($groupformation->id, $cm);
 
-if ((data_submitted()) && confirm_sesskey()) {
-    $saveedit = optional_param('save_edit', null, PARAM_BOOL);
-    if (true || (isset ($saveedit) && $saveedit == 1)) {
-        $groupsstring = optional_param('groups_string', null, PARAM_TEXT);
-        $controller->save_edit($groupsstring);
-    }
-    $returnurl = new moodle_url ('/mod/groupformation/grouping_view.php', array(
-        'id' => $id, 'do_show' => 'grouping'));
-    redirect($returnurl);
-}
+$controller = new mod_groupformation_grouping_controller ($groupformation->id, $cm);
+$viewcontroller = new mod_groupformation_grouping_edit_view_controller($groupformation->id, $controller);
+
+$viewcontroller->handle_access();
+
+$viewcontroller->handle_actions();
 
 echo $OUTPUT->header();
+
+$currenttab = $doshow;
 
 // Print the tabs.
 require('tabs.php');
 
-if (groupformation_get_current_questionnaire_version() > $store->get_version()) {
-    echo '<div class="alert">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
-}
-if ($store->is_archived() && has_capability('mod/groupformation:editsettings', $context)) {
-    echo '<div class="alert" id="commited_view">' . get_string('archived_activity_admin', 'groupformation') . '</div>';
-} else {
-    echo '<form id="edit_groups_form" action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
-    echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
-    echo '<input type="hidden" name="id" value="' . $id . '"/>';
+echo $viewcontroller->render();
 
-    $viewcontroller = new mod_groupformation_grouping_edit_view_controller($groupformation->id, $controller);
-    echo $viewcontroller->render();
-
-    echo '</form>';
-}
 echo $OUTPUT->footer();

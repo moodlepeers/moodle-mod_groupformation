@@ -25,7 +25,6 @@
 require_once('../../config.php');
 require('header.php');
 
-// Get data for HTML output.
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/controller/grouping_controller.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/grouping_view_controller.php');
@@ -37,69 +36,29 @@ $url = new moodle_url('/mod/groupformation/' . $filename, $urlparams);
 $PAGE->set_url($url);
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
-
-// Import jQuery and js file.
-groupformation_add_jquery($PAGE, 'survey_functions.js');
-
-if (!has_capability('mod/groupformation:editsettings', $context)) {
-    $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
-            'id' => $id, 'do_show' => 'view'));
-    redirect($returnurl);
-} else {
-    $currenttab = $doshow;
-}
+$PAGE->set_context(context_module::instance($cm->id));
+$PAGE->set_cm($cm);
 
 $store = new mod_groupformation_storage_manager ($groupformation->id);
+
 $controller = new mod_groupformation_grouping_controller($groupformation->id, $cm);
+$viewcontroller = new mod_groupformation_grouping_view_controller($groupformation->id, $controller);
 
-if ((data_submitted()) && confirm_sesskey()) {
-    $start = optional_param('start', null, PARAM_BOOL);
-    $abort = optional_param('abort', null, PARAM_BOOL);
-    $adopt = optional_param('adopt', null, PARAM_BOOL);
-    $edit = optional_param('edit', null, PARAM_BOOL);
-    $delete = optional_param('delete', null, PARAM_BOOL);
+$viewcontroller->handle_access();
 
-    if (isset ($start) && $start == 1) {
-        $controller->start($cm);
-    } else if (isset ($abort) && $abort == 1) {
-        $controller->abort();
-    } else if (isset ($adopt) && $adopt == 1) {
-        $controller->adopt();
-    } else if (isset ($edit) && $edit == 1) {
-        $controller->edit($cm);
-    } else if (isset ($delete) && $delete == 1) {
-        $controller->delete();
-    }
-    $returnurl = new moodle_url ('/mod/groupformation/grouping_view.php', array(
-        'id' => $id, 'do_show' => 'grouping'));
-    redirect($returnurl);
-}
+$viewcontroller->handle_actions();
 
 require('research_actions.php');
 
 echo $OUTPUT->header();
+
+$currenttab = $doshow;
 
 // Print the tabs.
 require('tabs.php');
 
 echo $debugbuttons;
 
-if (groupformation_get_current_questionnaire_version() > $store->get_version()) {
-    echo '<div class="alert">'.get_string('questionnaire_outdated', 'groupformation').'</div>';
-}
-if ($store->is_archived() && has_capability('mod/groupformation:editsettings', $context)) {
-    echo '<div class="alert" id="commited_view">'.get_string('archived_activity_admin', 'groupformation').'</div>';
-} else {
-    groupformation_check_for_cron_job();
+echo $viewcontroller->render();
 
-    echo '<form action="'.htmlspecialchars($_SERVER ["PHP_SELF"]).'" method="post" autocomplete="off">';
-
-    echo '<input type="hidden" name="id" value="'.$id.'"/>';
-    echo '<input type="hidden" name="sesskey" value="'.sesskey().'" />';
-
-    $viewcontroller = new mod_groupformation_grouping_view_controller($groupformation->id, $controller);
-    echo $viewcontroller->render();
-
-    echo '</form>';
-}
 echo $OUTPUT->footer();

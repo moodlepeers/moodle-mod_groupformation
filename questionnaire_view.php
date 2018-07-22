@@ -37,111 +37,41 @@ $url = new moodle_url('/mod/groupformation/' . $filename, $urlparams);
 $PAGE->set_url($url);
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
+$PAGE->set_context(context_module::instance($cm->id));
+$PAGE->set_cm($cm);
 
 // Import jQuery and js file.
 groupformation_add_jquery($PAGE, 'survey_functions.js');
 
-// TODO: after fixing db issue, change param to url?
-$urlcategory = optional_param('category', '', PARAM_TEXT);
+$currentcategory = optional_param('category', "", PARAM_TEXT);
+$direction = optional_param('direction', 0, PARAM_INT);
 
 $store = new mod_groupformation_storage_manager ($groupformation->id);
 $usermanager = new mod_groupformation_user_manager ($groupformation->id);
-$groupsmanager = new mod_groupformation_groups_manager ($groupformation->id);
 
-$scenario = $store->get_scenario();
-$names = $store->get_categories();
+$controller = new mod_groupformation_questionnaire_controller(
+        $groupformation->id,
+        $userid,
+        $cm->id,
+        $currentcategory,
+        $direction
+);
 
-if (!has_capability('mod/groupformation:editsettings', $context)) {
-    $currenttab = 'answering';
-} else {
-    $currenttab = 'questionnaire';
-}
+$viewcontroller = new mod_groupformation_questionnaire_view_controller(
+        $groupformation->id,
+        $controller
+);
 
-$consent = $usermanager->get_consent($userid);
-$askforparticipantcode = mod_groupformation_data::ask_for_participant_code();
-$participantcode = $usermanager->has_participant_code($userid) || !$askforparticipantcode;
+$viewcontroller->handle_access();
 
-if ((!$consent || !$participantcode) &&
-        !has_capability('mod/groupformation:editsettings', $context)) {
-    $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
-            'id' => $cm->id, 'giveconsent' => !$consent, 'giveparticipantcode' => !$participantcode));
-    redirect($returnurl);
-}
-$category = $store->get_previous_category($urlcategory);
-$direction = 1;
-$percent = 0;
-$action = 0;
+$viewcontroller->handle_actions();
 
-if (data_submitted() && confirm_sesskey()) {
-    $category = optional_param('category', null, PARAM_ALPHA);
-    $direction = optional_param('direction', null, PARAM_BOOL);
-    $percent = optional_param('percent', null, PARAM_INT);
-    $action = optional_param('action', null, PARAM_BOOL);
-}
+echo $OUTPUT->header();
 
-$controller = new mod_groupformation_questionnaire_controller($groupformation->id,
-        $userid, $category, $cm->id);
-$viewcontroller = new mod_groupformation_questionnaire_view_controller($groupformation->id, $controller);
+$currenttab = 'questionnaire';
 
-$validcategory = in_array($category, $names);
-$go = true;
+// Print the tabs.
+require('tabs.php');
 
-$state = $store->statemachine->get_state();
-$userstate = $store->userstatemachine->get_state($userid);
-
-if (has_capability('mod/groupformation:onlystudent', $context) &&
-        !has_capability('mod/groupformation:editsettings', $context) &&
-        (data_submitted() && confirm_sesskey()) &&
-        ($validcategory && in_array($state, array("q_open", "q_reopened")))) {
-    $go = $controller->save_answers($category);
-    $store->userstatemachine->change_state($userid, "answer");
-}
-
-if ($direction == 0 && $percent == 0) {
-    $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
-            'id' => $cm->id, 'back' => '1'));
-    redirect($returnurl);
-}
-
-$next = $controller->has_next();
-$available = $store->is_questionnaire_available() || $store->is_questionnaire_accessible();
-$isteacher = has_capability('mod/groupformation:editsettings', $context);
-
-if ($next && ($available || $isteacher) && ($category == '' || $validcategory)) {
-    echo $OUTPUT->header();
-    // Print the tabs.
-    require('tabs.php');
-
-    if ($store->is_archived() && !has_capability('mod/groupformation:editsettings', $context)) {
-        echo '<div class="alert" id="commited_view">';
-        $tmp = has_capability('mod/groupformation:editsettings', $context) ? "admin" : "answers";
-        echo get_string('archived_activity_' . $tmp, 'groupformation');
-        echo '</div>';
-    } else {
-        if ($direction == 0) {
-            $controller->go_back();
-        } else if (!$go) {
-            $controller->not_go_on();
-        }
-        echo $viewcontroller->render();
-    }
-    if (get_config('core', 'theme') == 'boost') {
-        echo '</div></div>';
-    }
-    echo $OUTPUT->footer();
-
-} else if (!$next ||!$available || $category == 'no') {
-    if ($usermanager->has_answered_everything($userid)) {
-        $usermanager->set_evaluation_values($userid);
-        $store->userstatemachine->change_state($userid, "complete");
-    }
-    if (isset ($action) && $action == 1) {
-        $usermanager->change_status($userid);
-    }
-
-    $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
-        'id' => $cm->id, 'do_show' => 'view', 'back' => '1'));
-    redirect($returnurl);
-} else {
-    echo $OUTPUT->notification('Category has been manipulated.');
-}
+$viewcontroller->render();
+echo $OUTPUT->footer();

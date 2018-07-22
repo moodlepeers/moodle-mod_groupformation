@@ -128,7 +128,7 @@ class mod_groupformation_overview_view_controller extends mod_groupformation_bas
 
                 // Redirect.
                 $returnurl = new moodle_url ('/mod/groupformation/questionnaire_view.php', array(
-                        'id' => $id));
+                        'id' => $id, 'direction' => 1));
                 redirect($returnurl);
             } else if ($begin == -1) {
                 // Delete answers due to consent removal.

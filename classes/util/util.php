@@ -267,7 +267,7 @@ class mod_groupformation_util {
             $enrolledstudents = $diff;
         }
         if (is_null($enrolledstudents) || count($enrolledstudents) <= 0) {
-            return null;
+            return array();
         }
 
         return $enrolledstudents;

@@ -35,6 +35,8 @@ $url = new moodle_url('/mod/groupformation/' . $filename, $urlparams);
 $PAGE->set_url($url);
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
+$PAGE->set_context(context_module::instance($cm->id));
+$PAGE->set_cm($cm);
 
 // Import jQuery and js file.
 groupformation_add_jquery($PAGE, 'settings_functions.js');

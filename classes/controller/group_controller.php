@@ -49,13 +49,19 @@ class mod_groupformation_group_controller {
     /** @var mod_groupformation_storage_manager The manager of activity data */
     private $store = null;
 
+    /** @var int ID of course module */
+    public $cmid = null;
+
     /**
      * mod_groupformation_student_group_view_controller constructor.
      *
      * @param int $groupformationid
+     * @param $cmid
      */
-    public function __construct($groupformationid) {
+    public function __construct($groupformationid, $cmid) {
         $this->groupformationid = $groupformationid;
+        $this->cmid = $cmid;
+
         $this->store = new mod_groupformation_storage_manager($groupformationid);
         $this->groupsmanager = new mod_groupformation_groups_manager ($groupformationid);
     }

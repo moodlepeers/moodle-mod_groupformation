@@ -507,10 +507,30 @@ class mod_groupformation_storage_manager {
     }
 
     /**
+     * Gets next category
+     *
+     * @param string $category
+     * @return string
+     * @throws dml_exception
+     */
+    public function get_next_category($category) {
+        $categories = $this->get_categories();
+        $pos = $this->get_position($category);
+        if ($pos < count($categories)-1) {
+            $previous = $categories [$pos + 1];
+        } else {
+            $previous = '';
+        }
+
+        return $previous;
+    }
+
+    /**
      * Gets previous category
      *
      * @param string $category
      * @return string
+     * @throws dml_exception
      */
     public function get_previous_category($category) {
         $categories = $this->get_categories();
@@ -715,6 +735,7 @@ class mod_groupformation_storage_manager {
      * Returns group name prefix
      *
      * @return mixed
+     * @throws dml_exception
      */
     public function get_group_name_setting() {
         global $DB;
@@ -728,6 +749,7 @@ class mod_groupformation_storage_manager {
      * Returns the name of the groupformation instance
      *
      * @return mixed
+     * @throws dml_exception
      */
     public function get_name() {
         global $DB;
@@ -742,6 +764,7 @@ class mod_groupformation_storage_manager {
      *
      * @param unknown $category
      * @return mixed|number
+     * @throws dml_exception
      */
     public function get_position($category) {
         $categories = $this->get_categories();
@@ -758,6 +781,8 @@ class mod_groupformation_storage_manager {
      * Returns if questionnaire is closed
      *
      * @return boolean
+     * @throws coding_exception
+     * @throws dml_exception
      */
     public function is_questionnaire_accessible() {
         $times = $this->get_time();
@@ -884,6 +909,9 @@ class mod_groupformation_storage_manager {
      * @throws dml_exception
      */
     public function determine_group_size($users, $groupformationid = null) {
+        if (is_null($users) || count($users)==0){
+            return array(0,0);
+        }
         if ($this->ask_for_topics()) {
             $groupoption = $this->get_group_option();
             if ($groupoption) {
@@ -936,14 +964,10 @@ class mod_groupformation_storage_manager {
 
             return $sizearray;
         } else {
-
             $userscount0 = count($users [0]);
             $userscount1 = count($users [1]);
             $userscount = $userscount0 + $userscount1;
 
-            if ($userscount <= 0) {
-                return null;
-            }
             $groupoption = $this->get_group_option();
             if ($groupoption) {
                 $maxgroups = intval($this->get_max_groups());
@@ -1140,18 +1164,16 @@ class mod_groupformation_storage_manager {
 
         $record->matcher_used = strval($cohort->whichmatcherused);
         $record->count_groups = floatval($cohort->countofgroups);
-        $record->performance_index = floatval($cohort->cpi);
 
         $stats = $cohort->results;
 
         if (!is_null($stats)) {
-            $record->stats_avg_variance = $stats->avgvariance;
-            $record->stats_variance = $stats->variance;
-            $record->stats_n = $stats->n;
-            $record->stats_avg = $stats->avg;
-            $record->stats_st_dev = $stats->stddev;
-            $record->stats_norm_st_dev = $stats->normstddev;
-            $record->stats_performance_index = $stats->performanceindex;
+            $record->avg_variance = $stats->avgvariance;
+            $record->variance = $stats->variance;
+            $record->avg = $stats->avg;
+            $record->st_dev = $stats->stddev;
+            $record->norm_st_dev = $stats->normstddev;
+            $record->performance_index = $stats->performanceindex;
         }
 
         $DB->insert_record('groupformation_stats', $record);
@@ -1199,7 +1221,7 @@ class mod_groupformation_storage_manager {
             $enrolledstudents = $diff;
         }
         if (is_null($enrolledstudents) || count($enrolledstudents) <= 0) {
-            return null;
+            return array(array(),array());
         }
 
         $groupingsetting = $this->get_grouping_setting();
