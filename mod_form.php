@@ -172,14 +172,14 @@ class mod_groupformation_mod_form extends moodleform_mod {
     /**
      * Generates HTML code for JS version
      *
-     * @param unknown $mform
+     * @param MoodleQuickForm $mform
      * @throws coding_exception
      */
     private function generate_html_for_js(&$mform) {
         global $PAGE;
 
         $mathprepcourse = mod_groupformation_data::is_math_prep_course_mode();
-        $teacherinfo = mod_groupformation_util::get_info_text_for_teacher(false);
+        $teacherinfo = mod_groupformation_util::get_info_text_for_teacher();
 
         $templatebuilder = new mod_groupformation_template_builder();
         $templatebuilder->set_template('editform');

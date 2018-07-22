@@ -30,11 +30,13 @@ if (!defined('MOODLE_INTERNAL')) {
 <div class="gf_pad_content bp_align_left-middle">
 
     <?php if ($this->_['onlyactivestudents']): ?>
-        <div class="grid">
+        <div>
             <?php $url = new moodle_url("/course/modedit.php?update=" . $this->_['cmid'] . "&return=1");
             $a = new stdClass();
             $a->url = '<a href="' . $url->out() . '">' . get_string('settings') . '</a>'; ?>
-            <div class="col_m_100 alert"><?php echo get_string('onlyactivestudents_info', 'groupformation', $a); ?></div>
+            <div class="alert alert-warning">
+                <?php echo get_string('onlyactivestudents_info', 'groupformation', $a); ?>
+            </div>
         </div>
     <?php endif; ?>
 
@@ -52,16 +54,17 @@ if (!defined('MOODLE_INTERNAL')) {
             <?php endif; ?>
         </div>
     </div>
-
+<div>
     <?php foreach ($this->_['buttons'] as $button) { ?>
 
         <button type="<?php echo $button['type']; ?>" name="<?php echo $button['name']; ?>"
                 value="<?php echo $button['value']; ?>"
-                class="gf_button gf_button_pill gf_button_small" <?php echo $button['state']; ?>>
+                style="margin: 2px 0px;"
+                class="btn btn-primary" <?php echo $button['state']; ?>>
             <?php echo $button['text']; ?></button>
 
     <?php } ?>
-
+</div>
     <div>
         <div style="
             margin-left: 4px;

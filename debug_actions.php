@@ -118,52 +118,59 @@ if (($CFG->debug === 32767) || (in_array($USER->id, $debugusers))) {
     $debugbuttons .= '</div>';
     $debugbuttons .= '<div class="gf_pad_content">';
 
+    $debugbuttons .= '<p>';
     $debugbuttons .= '<a href="' . (new moodle_url('/mod/groupformation/analysis_view.php', array(
                     'id' => $id, 'do_show' => 'analysis', 'create_users' => 10, 'create_answers' => 1)))->out() . '">';
-    $debugbuttons .= '<span class="gf_button gf_button_pill gf_button_small">';
+    $debugbuttons .= '<span class="btn btn-warning">'; // gf_button gf_button_pill gf_button_small
     $debugbuttons .= 'Create 10 users with answers';
     $debugbuttons .= '</span>';
     $debugbuttons .= '</a>';
-    $debugbuttons .= '<br>';
+    $debugbuttons .= '</p>';
 
+    $debugbuttons .= '<p>';
     $debugbuttons .= '<a href="' . (new moodle_url('/mod/groupformation/analysis_view.php', array(
                     'id' => $id, 'do_show' => 'analysis', 'create_users' => 1, 'create_answers' => 1)))->out() . '">';
-    $debugbuttons .= '<span class="gf_button gf_button_pill gf_button_small">';
+    $debugbuttons .= '<span class="btn btn-warning">'; // gf_button gf_button_pill gf_button_small
     $debugbuttons .= 'Create 1 user with answers';
     $debugbuttons .= '</span>';
     $debugbuttons .= '</a>';
-    $debugbuttons .= '<br>';
+    $debugbuttons .= '</p>';
 
+    $debugbuttons .= '<p>';
     $debugbuttons .= '<a href="' . (new moodle_url('/mod/groupformation/analysis_view.php', array(
                     'id' => $id, 'do_show' => 'analysis', 'create_users' => 10)))->out() . '">';
-    $debugbuttons .= '<span class="gf_button gf_button_pill gf_button_small">';
+    $debugbuttons .= '<span class="btn btn-warning">'; //gf_button gf_button_pill gf_button_small
     $debugbuttons .= 'Create 10 users without answers';
     $debugbuttons .= '</span>';
     $debugbuttons .= '</a>';
-    $debugbuttons .= '<br>';
+    $debugbuttons .= '</p>';
 
+    $debugbuttons .= '<p>';
     $debugbuttons .= '<a href="' . (new moodle_url('/mod/groupformation/analysis_view.php', array(
                     'id' => $id, 'do_show' => 'analysis', 'create_users' => 1)))->out() . '">';
-    $debugbuttons .= '<span class="gf_button gf_button_pill gf_button_small">';
+    $debugbuttons .= '<span class="btn btn-warning">'; //gf_button gf_button_pill gf_button_small
     $debugbuttons .= 'Create 1 user without answers';
     $debugbuttons .= '</span>';
     $debugbuttons .= '</a>';
-    $debugbuttons .= '<br>';
+    $debugbuttons .= '</p>';
 
+    $debugbuttons .= '<p>';
     $debugbuttons .= '<a href="' . (new moodle_url('/mod/groupformation/analysis_view.php', array(
                     'id' => $id, 'do_show' => 'analysis', 'delete_users' => 1)))->out() . '">';
-    $debugbuttons .= '<span class="gf_button gf_button_pill gf_button_small">';
+    $debugbuttons .= '<span class="btn btn-warning">';
     $debugbuttons .= 'Delete all users with answers';
     $debugbuttons .= '</span>';
     $debugbuttons .= '</a>';
-    $debugbuttons .= '<br>';
+    $debugbuttons .= '</p>';
 
+    $debugbuttons .= '<p>';
     $debugbuttons .= '<a href="' . (new moodle_url('/mod/groupformation/analysis_view.php', array(
                     'id' => $id, 'do_show' => 'analysis', 'reset_job' => 1)))->out() . '">';
-    $debugbuttons .= '<span class="gf_button gf_button_pill gf_button_small">';
+    $debugbuttons .= '<span class="btn btn-warning">';
     $debugbuttons .= 'Delete jobs of this activity';
     $debugbuttons .= '</span>';
     $debugbuttons .= '</a>';
+    $debugbuttons .= '</p>';
 
     $debugbuttons .= '</div>';
 }

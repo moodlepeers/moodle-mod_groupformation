@@ -356,7 +356,7 @@ class mod_groupformation_grouping_controller {
     public function load_statistics() {
         $assigns = array();
         $state = $this->statemachine->get_state();
-        if ($state == 'gf_done' || $state == 'ga_done') {
+        if ($state == 'gf_done' || $state == "ga_started" || $state == 'ga_done') {
 
             $assigns['numbOfGroups'] = count($this->groups);
             $assigns['maxSize'] = $this->groupsmanager->get_max_groups_size($this->groups);
@@ -389,7 +389,7 @@ class mod_groupformation_grouping_controller {
 
         $state = $this->statemachine->get_state();
 
-        if ($state == 'gf_done' || $state == 'ga_done') {
+        if ($state == 'gf_done' || $state == "ga_started" || $state == 'ga_done') {
 
             foreach ($this->groups as $key => $value) {
 

@@ -99,7 +99,7 @@ if (mod_groupformation_data::is_math_prep_course_mode()) {
         if (!$store->uses_filter()) {
             $debugbuttons .= '<a href="' . (new moodle_url('/mod/groupformation/grouping_view.php', array(
                     'id' => $id, 'do_show' => 'grouping', 'filterusers' => 1)))->out() . '">';
-            $debugbuttons .= '<span class="gf_button gf_button_pill gf_button_small">';
+            $debugbuttons .= '<span class="btn btn-warning">'; // gf_button gf_button_pill gf_button_small
             $debugbuttons .= get_string('filter', 'groupformation');
             $debugbuttons .= '</span>';
 
@@ -107,7 +107,7 @@ if (mod_groupformation_data::is_math_prep_course_mode()) {
         } else {
             $debugbuttons .= '<a href="' . (new moodle_url('/mod/groupformation/grouping_view.php', array(
                     'id' => $id, 'do_show' => 'grouping', 'unfilterusers' => 1)))->out() . '">';
-            $debugbuttons .= '<span class="gf_button gf_button_pill gf_button_small">';
+            $debugbuttons .= '<span class="btn btn-warning">'; // gf_button gf_button_pill gf_button_small
             $debugbuttons .= get_string('not_filter', 'groupformation');
             $debugbuttons .= '</span>';
             $debugbuttons .= '</a>';

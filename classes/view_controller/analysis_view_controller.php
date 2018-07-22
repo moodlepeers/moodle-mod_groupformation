@@ -143,13 +143,13 @@ class mod_groupformation_analysis_view_controller extends mod_groupformation_bas
         $output = "";
 
         if (groupformation_get_current_questionnaire_version() > $this->store->get_version()) {
-            $output .= '<div class="alert">';
+            $output .= '<div class="alert alert-warning">';
             $output .= get_string('questionnaire_outdated', 'groupformation');
             $output .= '</div>';
         }
 
         if ($this->store->is_archived() && has_capability('mod/groupformation:editsettings', $context)) {
-            $output .= '<div class="alert" id="commited_view">';
+            $output .= '<div class="alert alert-warning" id="commited_view">';
             $output .= get_string('archived_activity_admin', 'groupformation');
             $output .= '</div>';
         } else {

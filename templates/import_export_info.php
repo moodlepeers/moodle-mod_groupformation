@@ -35,12 +35,12 @@ if (!defined('MOODLE_INTERNAL')) {
 
         <p>
             <?php if (!$this->_['import_button']): ?>
-                <button class="gf_button gf_button_pill gf_button_small" disabled>
+                <button class="btn btn-primary" gf_button gf_button_pill gf_button_small disabled>
                     <?php echo get_string('import', 'groupformation'); ?>
                 </button>
             <?php else: ?>
                 <a href="<?php echo $this->_['import_form']; ?>">
-                <span class="gf_button gf_button_pill gf_button_small">
+                <span class="btn btn-primary" gf_button gf_button_pill gf_button_small>
                     <?php echo get_string('import', 'groupformation'); ?>
                    </span></a>
             <?php endif; ?>
@@ -52,12 +52,12 @@ if (!defined('MOODLE_INTERNAL')) {
 
         <p>
             <?php if (!$this->_['export_button']): ?>
-                <button class="gf_button gf_button_pill gf_button_small" disabled>
+                <button class="btn btn-primary" gf_button gf_button_pill gf_button_small disabled>
                     <?php echo get_string('export', 'groupformation'); ?>
                 </button>
             <?php else: ?>
                 <a href="<?php echo $this->_['export_url']; ?>" target="_blank">
-                <span class="gf_button gf_button_pill gf_button_small">
+                <span class="btn btn-primary" gf_button gf_button_pill gf_button_small>
                     <?php echo get_string('export', 'groupformation'); ?>
                    </span></a>
             <?php endif; ?>
@@ -77,14 +77,14 @@ if (!defined('MOODLE_INTERNAL')) {
         <p>
             <div id="all_data_false">
                 <a href="<?php echo $this->_['export_all_data_url_false']; ?>" target="_blank">
-                    <span class="gf_button gf_button_pill gf_button_small">
+                    <span class="btn btn-primary" gf_button gf_button_pill gf_button_small>
                         <?php echo get_string('export', 'groupformation'); ?>
                     </span>
                 </a>
             </div>
             <div id="all_data_true" class="gf_hidden">
                 <a href="<?php echo $this->_['export_all_data_url_true']; ?>" target="_blank">
-                    <span class="gf_button gf_button_pill gf_button_small">
+                    <span class="btn btn-primary" gf_button gf_button_pill gf_button_small>
                         <?php echo get_string('export', 'groupformation'); ?>
                     </span>
                 </a>

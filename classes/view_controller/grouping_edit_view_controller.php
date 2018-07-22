@@ -82,11 +82,11 @@ class mod_groupformation_grouping_edit_view_controller extends mod_groupformatio
         $output = "";
 
         if (groupformation_get_current_questionnaire_version() > $store->get_version()) {
-            $output .= '<div class="alert">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
+            $output .= '<div class="alert alert-warning">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
         }
 
         if ($store->is_archived() && has_capability('mod/groupformation:editsettings', $context)) {
-            $output .= '<div class="alert" id="commited_view">';
+            $output .= '<div class="alert alert-warning" id="commited_view">';
             $output .= get_string('archived_activity_admin', 'groupformation');
             $output .= '</div>';
         } else {

@@ -143,10 +143,10 @@ class mod_groupformation_grouping_view_controller extends mod_groupformation_bas
 
         $output = "";
         if (groupformation_get_current_questionnaire_version() > $store->get_version()) {
-            $output .= '<div class="alert">'.get_string('questionnaire_outdated', 'groupformation').'</div>';
+            $output .= '<div class="alert alert-warning">'.get_string('questionnaire_outdated', 'groupformation').'</div>';
         }
         if ($store->is_archived() && has_capability('mod/groupformation:editsettings', $context)) {
-            $output .= '<div class="alert" id="commited_view">'.get_string('archived_activity_admin', 'groupformation').'</div>';
+            $output .= '<div class="alert alert-warning" id="commited_view">'.get_string('archived_activity_admin', 'groupformation').'</div>';
         } else {
             groupformation_check_for_cron_job();
 

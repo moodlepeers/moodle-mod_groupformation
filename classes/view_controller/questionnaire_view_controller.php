@@ -82,7 +82,7 @@ class mod_groupformation_questionnaire_view_controller extends mod_groupformatio
         $context = context_module::instance($id);
 
         if ($store->is_archived() && !has_capability('mod/groupformation:editsettings', $context)) {
-            echo '<div class="alert" id="commited_view">';
+            echo '<div class="alert alert-warning" id="commited_view">';
             $tmp = has_capability('mod/groupformation:editsettings', $context) ? "admin" : "answers";
             echo get_string('archived_activity_' . $tmp, 'groupformation');
             echo '</div>';

@@ -102,7 +102,7 @@ if (!defined('MOODLE_INTERNAL')) {
                 <?php foreach ($this->_['buttons'] as $button) { ?>
 
                     <?php if (array_key_exists('modal-id', $button)): ?>
-                        <button type="button" class="gf_button gf_button_pill gf_button_small"
+                        <button type="button" class="btn btn-primary" style="margin: 2px 0px;"
                                 data-toggle="modal" data-target="#<?php echo $button['modal-id']; ?>"
                                 <?php echo $button['state']; ?>
                         >
@@ -123,7 +123,7 @@ if (!defined('MOODLE_INTERNAL')) {
                                         <?php echo $button['modal-text']; ?>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                                        <button type="button"  style="margin: 2px 0px;" class="btn btn-default" data-dismiss="modal">
                                             <?php echo get_string('cancel');?>
                                         </button>
                                         <button type="<?php echo $button['type']; ?>"
@@ -138,7 +138,7 @@ if (!defined('MOODLE_INTERNAL')) {
                         <button type="<?php echo $button['type']; ?>"
                                 name="<?php echo $button['name']; ?>"
                                 value="<?php echo $button['value']; ?>"
-                                class="gf_button gf_button_pill gf_button_small"
+                                class="btn btn-primary" style="margin: 2px 0px;"
                             <?php echo $button['state']; ?>
                         >
                             <?php echo $button['text']; ?>

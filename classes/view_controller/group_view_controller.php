@@ -98,7 +98,7 @@ class mod_groupformation_group_view_controller extends mod_groupformation_basic_
 
         $output = "";
         if ($store->is_archived()) {
-            $output .= '<div class="alert" id="commited_view">' . get_string('archived_activity_answers', 'groupformation') . '</div>';
+            $output .= '<div class="alert alert-warning" id="commited_view">' . get_string('archived_activity_answers', 'groupformation') . '</div>';
         } else {
             $output .= parent::render();
         }

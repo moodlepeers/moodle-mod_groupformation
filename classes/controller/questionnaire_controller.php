@@ -369,10 +369,10 @@ class mod_groupformation_questionnaire_controller {
     public function get_action_buttons() {
         $s = '<div class="grid">';
         $s .= '    <div class="col_m_100 questionaire_button_row">';
-        $s .= '        <button type="submit" name="direction" value="-1" class="gf_button gf_button_pill gf_button_small">';
+        $s .= '        <button type="submit" name="direction" value="-1" class="btn btn-primary">'; // gf_button gf_button_pill gf_button_small
         $s .= get_string('previous');
         $s .= '        </button>';
-        $s .= '        <button type="submit" name="direction" value="1" class="gf_button gf_button_pill gf_button_small">';
+        $s .= '        <button type="submit" name="direction" value="1" class="btn btn-primary">'; // gf_button gf_button_pill gf_button_small
         $s .= get_string('next');
         $s .= '        </button>';
         $s .= '    </div>';
@@ -611,7 +611,7 @@ class mod_groupformation_questionnaire_controller {
         $context = context_module::instance($this->cmid);
 
         if (groupformation_get_current_questionnaire_version() > $this->store->get_version()) {
-            $assigns['archived_alert'] = '<div class="alert">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
+            $assigns['archived_alert'] = '<div class="alert alert-warning">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
         }
 
         if ($this->has_next()) {
@@ -624,23 +624,23 @@ class mod_groupformation_questionnaire_controller {
             $state = $this->store->statemachine->get_state();
             $userstate = $this->store->userstatemachine->get_state($this->userid);
             if ($isteacher) {
-                $s = '<div class="alert">';
+                $s = '<div class="alert alert-warning">';
                 $s .= get_string('questionnaire_preview', 'groupformation');
                 $s .= '</div>';
                 $assigns['preview_alert'] = $s;
             } else if (in_array($state, array('q_open')) &&
                     !in_array($userstate, array("started", "consent_given", "p_code_given", "answering"))) {
-                $s = '<div class="alert" id="commited_view">';
+                $s = '<div class="alert alert-warning" id="commited_view">';
                 $s .= get_string('questionnaire_committed', 'groupformation');
                 $s .= '</div>';
                 $assigns['committed_alert'] = $s;
             } else if (in_array($state, array('q_reopened')) && $hasgroup) {
-                $s = '<div class="alert" id="commited_view">';
+                $s = '<div class="alert alert-warning" id="commited_view">';
                 $s .= get_string('questionnaire_committed', 'groupformation');
                 $s .= '</div>';
                 $assigns['committed_alert'] = $s;
             } else if (!in_array($state, array('q_open', 'q_reopened'))) {
-                $s = '<div class="alert" id="commited_view">';
+                $s = '<div class="alert alert-warning" id="commited_view">';
                 $s .= get_string('questionnaire_closed', 'groupformation');
                 $s .= '</div>';
                 $assigns['committed_alert'] = $s;

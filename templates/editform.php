@@ -166,13 +166,13 @@ defined('MOODLE_INTERNAL') || die();
                                 <div class="multi_fields">
                                     <div class="multi_field" id="inputprk0">
                                         <input class="respwidth js_preknowledgeInput" type="text">
-                                        <button type="button" class="remove_field gf_button gf_button_circle gf_button_small">
+                                        <button type="button" class="btn btn-primary remove_field gf_button_circle gf_button_small">
 
                                         </button>
                                     </div>
                                     <div class="multi_field" id="inputprk1">
                                         <input class="respwidth js_preknowledgeInput" type="text">
-                                        <button type="button" class="remove_field gf_button gf_button_circle gf_button_small">
+                                        <button type="button" class="btn btn-primary remove_field gf_button_circle gf_button_small">
 
                                         </button>
                                     </div>
@@ -181,7 +181,7 @@ defined('MOODLE_INTERNAL') || die();
                                             <?php echo get_string('add_line', 'groupformation');?>
                                         ">
                                         <button type="button"
-                                                class="remove_field gf_button gf_button_circle gf_button_small"
+                                                class="btn btn-primary remove_field gf_button_circle gf_button_small"
                                                 disabled="disabled">
 
                                         </button>
@@ -303,13 +303,13 @@ defined('MOODLE_INTERNAL') || die();
                                     <div class="multi_fields">
                                         <div class="multi_field" id="inputtpc0">
                                             <input class="respwidth js_topicInput" type="text">
-                                            <button type="button" class="remove_field gf_button gf_button_circle gf_button_small">
+                                            <button type="button" class="btn btn-primary remove_field gf_button_circle gf_button_small">
 
                                             </button>
                                         </div>
                                         <div class="multi_field" id="inputtpc1">
                                             <input class="respwidth js_topicInput" type="text">
-                                            <button type="button" class="remove_field gf_button gf_button_circle gf_button_small">
+                                            <button type="button" class="btn btn-primary remove_field gf_button_circle gf_button_small">
 
                                             </button>
                                         </div>
@@ -318,7 +318,7 @@ defined('MOODLE_INTERNAL') || die();
                                                 <?php echo get_string('add_line', 'groupformation');?>
                                             ">
                                             <button type="button"
-                                                    class="remove_field gf_button gf_button_circle gf_button_small"
+                                                    class="btn btn-primary remove_field gf_button_circle gf_button_small"
                                                     disabled="disabled">
 
                                             </button>

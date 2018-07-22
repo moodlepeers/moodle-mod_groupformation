@@ -112,8 +112,7 @@ class mod_groupformation_overview_controller {
 
             $this->buttonsinfo = '';
             $this->groupformationstateinfo = get_string('activity_visible', 'groupformation');
-            $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(
-                    $infounfolded, $this->groupformationid);
+            $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student($this->groupformationid);
             return;
         }
 
@@ -161,8 +160,7 @@ class mod_groupformation_overview_controller {
                         );
                         break;
                     case "submitted":
-                        $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(
-                                true, $this->groupformationid);
+                        $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student($this->groupformationid);
 
                         $this->groupformationstateinfo = get_string('questionnaire_submitted',
                                 'groupformation');
@@ -201,8 +199,7 @@ class mod_groupformation_overview_controller {
                 $hasgroup = $this->groupsmanager->has_group($this->userid, true);
 
                 if ($hasgroup) {
-                    $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(
-                            true, $this->groupformationid);
+                    $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student($this->groupformationid);
 
                     $this->groupformationstateinfo = get_string('groups_built',
                             'groupformation');
@@ -284,8 +281,7 @@ class mod_groupformation_overview_controller {
                             );
                             break;
                         case "submitted":
-                            $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(
-                                    true, $this->groupformationid);
+                            $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student($this->groupformationid);
 
                             $this->groupformationstateinfo = get_string('questionnaire_submitted',
                                     'groupformation');
@@ -333,8 +329,7 @@ class mod_groupformation_overview_controller {
         }
 
         $this->buttonsinfo = (is_null($buttonsinfo)) ? '' : get_string($buttonsinfo, 'groupformation');
-        $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(
-                $infounfolded, $this->groupformationid);
+        $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student($this->groupformationid);
     }
 
     /**

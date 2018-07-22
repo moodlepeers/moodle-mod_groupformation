@@ -192,7 +192,7 @@ class mod_groupformation_test_user_generator {
      * @param string $string
      */
     private function echowarn($string) {
-        echo '<div class="alert">' . $string . '</div>';
+        echo '<div class="alert alert-primary">' . $string . '</div>';
     }
 
     /**

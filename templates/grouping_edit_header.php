@@ -60,7 +60,7 @@ if (!defined('MOODLE_INTERNAL')) {
                                 type="<?php echo $button['type']; ?>"
                                 name="<?php echo $button['name']; ?>"
                                 value="<?php echo $button['value']; ?>"
-                                class="gf_button gf_button_pill gf_button_small"
+                                class="btn btn-primary" gf_button gf_button_pill gf_button_small
                                 <?php echo $button['state']; ?>
                         >
                             <?php echo $button['text']; ?>
@@ -68,7 +68,7 @@ if (!defined('MOODLE_INTERNAL')) {
                     <?php endif; ?>
                     <?php if ($button['type'] == 'cancel'): ?>
                         <a href="<?php echo $button['value'] ?>">
-                        <span class="gf_button gf_button_pill gf_button_small">
+                        <span class="btn btn-primary" gf_button gf_button_pill gf_button_small>
                         <?php echo $button['text']; ?>
                     </span></a>
                     <?php endif; ?>

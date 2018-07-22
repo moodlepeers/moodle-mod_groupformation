@@ -740,7 +740,7 @@
 .path-mod-groupformation .gf_pad_header, .path-mod-groupformation .gf_pad_header > p {
     font-size: 1.4em;
     font-weight: lighter;
-    padding: 1em 1.2em 1em;
+    padding: 0.5em 1.2em;
     border-bottom: 1px solid white;
     background-color: #ebebeb;
 }

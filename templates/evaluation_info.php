@@ -37,11 +37,11 @@ if (!defined('MOODLE_INTERNAL')) {
 
         <div class="fluid-container">
             <div class="row">
-                <button type="button" class="btn btn-warning col-md-2 col-xs-2 pull-left" href="#gf-carousel"
+                <button type="button" class="btn btn-primary col-md-2 col-xs-2 pull-left" href="#gf-carousel"
                         role="button" data-slide="prev">
                     <?php echo get_string("back"); ?>
                 </button>
-                <button type="button" class="btn btn-warning col-md-2 col-xs-2 pull-right" href="#gf-carousel"
+                <button type="button" class="btn btn-primary col-md-2 col-xs-2 pull-right" href="#gf-carousel"
                         role="button" data-slide="next">
                     <?php echo get_string("next"); ?>
                 </button>

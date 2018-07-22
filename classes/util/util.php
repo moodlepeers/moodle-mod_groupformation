@@ -45,45 +45,50 @@ class mod_groupformation_util {
      * @return string
      * @throws coding_exception
      */
-    public static function get_info_text_for_teacher($unfolded = false, $page = "settings") {
-        $s = '<p><a class="show">' . get_string('info_header_teacher_' . $page, 'groupformation') . '</a></p>';
-        $s .= '<div id="info_text" style="display: ' . (($unfolded) ? 'block' : 'none') . ';">';
-        $s .= '<p style="padding-left: 10px;">' . get_string('info_text_teacher_' . $page, 'groupformation') . '</p>';
-        $s .= '</div>';
-        $s .= self::get_js_for_info_text();
-
-        return $s;
-    }
-
-    /**
-     * Returns inline JS
-     *
-     * @return string
-     */
-    private static function get_js_for_info_text() {
-        $s = "";
-        $s .= '<script type="text/javascript">';
-        $s .= '        $(function() {';
-        $s .= '            $(\'.show\').click(function() {';
-        $s .= '                $(\'#info_text\').slideToggle();';
-        $s .= '            });';
-        $s .= '        });';
-        $s .= '</script>';
-
-        return $s;
+    public static function get_info_text_for_teacher($page = "settings") {
+        $t = '
+        <p>
+            <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModal">';
+        $t .= get_string('info_header_teacher_' . $page, 'groupformation');
+        $t .= '
+            </button>
+        </p>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">';
+        $t .= get_string('info_header_teacher_' . $page, 'groupformation');
+        $t .= '         </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">';
+        $t .= get_string('info_text_teacher_' . $page, 'groupformation');
+        $t .= '     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>';
+        return $t;
     }
 
     /**
      * Returns html code for info text for students
      *
-     * @param bool|false $unfolded
      * @param null $groupformationid
      * @param string $role
      * @return string
      * @throws coding_exception
      * @throws dml_exception
      */
-    public static function get_info_text_for_student($unfolded = false, $groupformationid = null, $role = "student") {
+    public static function get_info_text_for_student($groupformationid = null, $role = "student") {
         if (is_null($groupformationid)) {
             return "";
         }
@@ -93,13 +98,37 @@ class mod_groupformation_util {
         $a = new stdClass ();
         $a->scenario_name = $scenarioname;
 
-        $s = '<p><a class="show">' . get_string('info_header_' . $role, 'groupformation') . '</a></p>';
-        $s .= '<div id="info_text" style="display: ' . (($unfolded) ? 'block' : 'none') . ';">';
-        $s .= '<p style="padding-left: 10px;">' . get_string('info_text_' . $role, 'groupformation', $a) . '</p>';
-        $s .= '</div>';
-        $s .= self::get_js_for_info_text();
-
-        return $s;
+        $t = '
+        <p>
+            <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModal">';
+        $t .= get_string('info_header_' . $role, 'groupformation');
+        $t .= '
+            </button>
+        </p>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">';
+        $t .= get_string('info_header_' . $role, 'groupformation');
+        $t .= '         </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">';
+        $t .= get_string('info_text_' . $role, 'groupformation', $a);
+        $t .= '     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>';
+        return $t;
     }
 
     /**

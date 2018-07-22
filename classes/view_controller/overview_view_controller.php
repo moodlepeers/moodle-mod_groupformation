@@ -213,12 +213,12 @@ class mod_groupformation_overview_view_controller extends mod_groupformation_bas
 
         // If version is outdated, display message.
         if (groupformation_get_current_questionnaire_version() > $this->store->get_version()) {
-            $output .= '<div class="alert">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
+            $output .= '<div class="alert alert-warning">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
         }
 
         // If activity is archived, display message, else content.
         if ($this->store->is_archived()) {
-            $output .= '<div class="alert" id="commited_view">' . get_string('archived_activity_answers', 'groupformation') .
+            $output .= '<div class="alert alert-warning" id="commited_view">' . get_string('archived_activity_answers', 'groupformation') .
                     '</div>';
         } else {
             // Form to catch user submissions and clicks.

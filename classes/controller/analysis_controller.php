@@ -198,7 +198,7 @@ class mod_groupformation_analysis_controller {
                 'text' => $buttoncaption
         );
 
-        $assigns['info_teacher'] = mod_groupformation_util::get_info_text_for_teacher(false, "analysis");
+        $assigns['info_teacher'] = mod_groupformation_util::get_info_text_for_teacher("analysis");
         $assigns['analysis_time_start'] = $starttime;
         $assigns['analysis_time_end'] = $endtime;
         $assigns['analysis_status'] = get_string('analysis_status_' . ($this->statemachine->get_state()), 'groupformation');

@@ -170,7 +170,7 @@ function groupformation_check_for_cron_job() {
     $lastruntime = $record->lastruntime;
 
     if (($now - intval($lastruntime)) > 60 * 60 * 24) {
-        echo '<div class="alert">' . get_string('cron_job_not_running', 'groupformation') . '</div>';
+        echo '<div class="alert alert-danger">' . get_string('cron_job_not_running', 'groupformation') . '</div>';
     }
 }
 
