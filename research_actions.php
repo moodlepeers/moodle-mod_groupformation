@@ -145,7 +145,7 @@ if (mod_groupformation_data::is_math_prep_course_mode()) {
     $configurations2 = array();
     foreach ($bestslices as $key => $bestslice) {
         $k = array_keys($configurations)[$key];
-        $configurations2[$k]=$configurations[$k];
+        $configurations2[$k] = $configurations[$k];
     }
     $configurations = $configurations2;
 
