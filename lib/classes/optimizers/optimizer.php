@@ -38,7 +38,8 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/optimizers/ioptimi
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class mod_groupformation_optimizer implements mod_groupformation_ioptimizer {
+class mod_groupformation_optimizer implements mod_groupformation_ioptimizer
+{
 
     /** @var mod_groupformation_imatcher Matcher */
     public $matcher;
@@ -48,7 +49,8 @@ class mod_groupformation_optimizer implements mod_groupformation_ioptimizer {
      *
      * @param mod_groupformation_imatcher $matcher
      */
-    public function __construct(mod_groupformation_imatcher $matcher) {
+    public function __construct(mod_groupformation_imatcher $matcher)
+    {
         $this->matcher = $matcher;
     }
 
@@ -56,17 +58,31 @@ class mod_groupformation_optimizer implements mod_groupformation_ioptimizer {
      * Optimizes cohort
      *
      * @param mod_groupformation_cohort $cohort
-     * @return mixed|void
+     * @return mixed
      * @throws Exception
      */
-    public function optimize_cohort(mod_groupformation_cohort $cohort) {
-        // For each pair of good and bad group try to average them.
-        for ($i = 0; $i < count($this->groups / 2); $i++) {
-            $goodgroup = $this->groups[$i];
-            $badgroup = $this->groups[(count($this->groups) - 1) - $i];
-            $this->average_two_groups($goodgroup, $badgroup);
+    public function optimize_cohort(mod_groupformation_cohort $cohort)
+    {
+        $groups = $cohort->groups;
+        for ($breakCount = 0; $breakCount < 200; $breakCount++) {
+
+            $groups = $this->sortGroups($groups);
+            // For each pair of good and bad group try to average them.
+            for ($i = 0; $i < count($groups) / 2; $i++) {
+                $goodgroup = $groups[$i];
+                $badgroup = $groups[(count($groups) - 1) - $i];
+
+                $this->average_two_groups($goodgroup, $badgroup);
+
+                $groups[$i] = $goodgroup;
+                $groups[(count($groups) - 1) - $i] = $badgroup;
+
+            }
         }
+
+        $cohort->groups = $groups;
         $cohort->calculate_cpi();
+        return $cohort;
     }
 
     /**
@@ -75,7 +91,8 @@ class mod_groupformation_optimizer implements mod_groupformation_ioptimizer {
      * @param mod_groupformation_group $goodgroup
      * @param mod_groupformation_group $badgroup
      */
-    public function average_two_groups(mod_groupformation_group &$goodgroup, mod_groupformation_group &$badgroup) {
+    public function average_two_groups(mod_groupformation_group &$goodgroup, mod_groupformation_group &$badgroup)
+    {
 
         if (abs($goodgroup->get_gpi() - $badgroup->get_gpi()) < 0.02) {
             return;
@@ -85,12 +102,13 @@ class mod_groupformation_optimizer implements mod_groupformation_ioptimizer {
         foreach ($goodgroup->get_participants() as $p) {
             $localngt[] = $p;
         }
+
         foreach ($badgroup->get_participants() as $p) {
             $localngt[] = $p;
         }
 
         // Randomize position of entries.
-        $this->shuffle($localngt);
+        shuffle($localngt);
 
         // Match the groups new.
         $g1 = new mod_groupformation_group();
@@ -99,23 +117,27 @@ class mod_groupformation_optimizer implements mod_groupformation_ioptimizer {
         $newgroups = array($g1, $g2);
         $this->matcher->match_to_groups($localngt, $newgroups);
         $oldavg = ($goodgroup->get_gpi() - $badgroup->get_gpi()) / 2;
-        $newavg = ($g1->get_gpi() - $g2->get_gpi()) / 2;
+        $newavg = ($newgroups[0]->get_gpi() - $newgroups[1]->get_gpi()) / 2;
+
         $firstcondition = $newavg > $oldavg;
         if ($firstcondition) {
-            $goodgroup->set_participants($g1->get_participants());
-            $goodgroup->set_gpi($g1->get_gpi());
-            $badgroup->set_participants($g2->get_participants());
-            $badgroup->set_gpi($g2->get_gpi());
+            $goodgroup = $newgroups[0];
+            $badgroup = $newgroups[1];
         }
     }
 
     /**
-     * Shuffles
-     *
-     * @param array $list
+     * @param array $groups
+     * @return array
      */
-    public function shuffle(array &$list) {
-        // TODO Randomize Array Entries.
-    }
+    public function sortGroups(array $groups)
+    {
+        $gpi = array();
+        foreach ($groups as $key => $row) {
+            $gpi[$key] = $row->gpi;
+        }
 
+        array_multisort($gpi, SORT_DESC, $groups);
+        return $groups;
+    }
 }
