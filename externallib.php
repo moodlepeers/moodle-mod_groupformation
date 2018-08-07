@@ -124,3 +124,46 @@ function groupformation_has_group($groupformationid, $userid) {
     $groupsmanager = new mod_groupformation_groups_manager ($groupformationid);
     return $groupsmanager->has_group($userid);
 }
+
+/**
+ * Returns total number of answers
+ *
+ * @param $groupformationid
+ * @return int
+ * @throws dml_exception
+ */
+function groupformation_get_number_of_questions($groupformationid) {
+    $store = new mod_groupformation_storage_manager($groupformationid);
+    return $store->get_total_number_of_answers();
+}
+
+/**
+ * Returns number of answers questions
+ *
+ * @param $groupformationid
+ * @param $userid
+ * @return number
+ * @throws dml_exception
+ */
+function groupformation_get_number_of_answered_questions($groupformationid, $userid) {
+    $usermanager = new mod_groupformation_user_manager($groupformationid);
+    return $usermanager->get_number_of_answers($userid);
+}
+
+/**
+ * Returns statistics
+ *
+ * The returned array contains four values:
+ * enrolled (number of enrolled students),
+ * processing (number of students processing the questionnaire),
+ * submitted (number of submitted questionnaires),
+ * submitted completely (number of submitted questionnaires with complete answers to all questions)
+ *
+ * @param $groupformationid
+ * @return array
+ * @throws dml_exception
+ */
+function groupformation_get_progress_statistics($groupformationid) {
+    $usermanager = new mod_groupformation_user_manager($groupformationid);
+    return $usermanager->get_statistics();
+}
