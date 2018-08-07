@@ -122,33 +122,12 @@ class mod_groupformation_analysis_controller {
 
         $usermanager = $this->usermanager;
 
-        $stats = array();
+        $questionnairestats = $usermanager->get_statistics();
 
-        $studentcount = count(mod_groupformation_util::get_users($this->groupformationid));
-
-        $stats [] = $studentcount;
-
-        $started = $usermanager->get_started();
-        $startedcount = count($started);
-
-        $stats [] = $startedcount;
-
-        $completed = $usermanager->get_completed();
-        $completedcount = count($completed);
-
-        $stats [] = $completedcount;
-
-        $nomissinganswers = $usermanager->get_completed_by_answer_count();
-        $nomissingcount = count($nomissinganswers);
-
-        $stats [] = $nomissingcount;
-
-        $questionnairestats = $stats;
-
-        $assigns['statistics_enrolled'] = $questionnairestats [0];
-        $assigns['statistics_processed'] = $questionnairestats [1];
-        $assigns['statistics_submitted'] = $questionnairestats [2];
-        $assigns['statistics_submitted_complete'] = $questionnairestats [3];
+        $assigns['statistics_enrolled'] = $questionnairestats ['enrolled'];
+        $assigns['statistics_processed'] = $questionnairestats ['processing'];
+        $assigns['statistics_submitted'] = $questionnairestats ['submitted'];
+        $assigns['statistics_submitted_complete'] = $questionnairestats ['submitted_completely'];
 
         return $assigns;
     }
