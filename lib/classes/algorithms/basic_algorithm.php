@@ -45,8 +45,7 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/optimizers/ioptimi
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class mod_groupformation_basic_algorithm implements mod_groupformation_ialgorithm
-{
+class mod_groupformation_basic_algorithm implements mod_groupformation_ialgorithm {
 
     /** @var array This array contains all participants which need to be matched to groups */
     public $participants = array();
@@ -82,8 +81,7 @@ class mod_groupformation_basic_algorithm implements mod_groupformation_ialgorith
      * @param mod_groupformation_imatcher $matcher
      * @param int $groupsize
      */
-    public function __construct($participants, mod_groupformation_imatcher $matcher, $groupsize)
-    {
+    public function __construct($participants, mod_groupformation_imatcher $matcher, $groupsize) {
         foreach ($participants as $p) {
             $this->participants[] = clone($p);
         }
@@ -97,8 +95,7 @@ class mod_groupformation_basic_algorithm implements mod_groupformation_ialgorith
     /**
      * Init of algorithm class
      */
-    private function init()
-    {
+    private function init() {
         $this->numberofparticipants = count($this->participants);
         mod_groupformation_group::set_group_members_max_size($this->groupsize);
         mod_groupformation_group::$evaluator = $this->evaluator;
@@ -116,8 +113,7 @@ class mod_groupformation_basic_algorithm implements mod_groupformation_ialgorith
      * @param mod_groupformation_participant $participant
      * @return bool
      */
-    public function add_new_participant(mod_groupformation_participant $participant)
-    {
+    public function add_new_participant(mod_groupformation_participant $participant) {
         if ($this->participants == null || in_array($participant, $this->participants, true)) {
             return false;
         }
@@ -143,11 +139,11 @@ class mod_groupformation_basic_algorithm implements mod_groupformation_ialgorith
      * @return mod_groupformation_cohort
      * @throws Exception
      */
-    public function do_one_formation()
-    {
+    public function do_one_formation() {
         $this->matcher->match_to_groups($this->notmatchedparticipants, $this->cohort->groups);
         $this->cohort->countofgroups = count($this->cohort->groups);
 
+        // TODO no optimizer needed -> just comment the next two lines out
         $this->optimizer = new mod_groupformation_optimizer($this->matcher);
         $this->cohort = $this->optimizer->optimize_cohort($this->cohort);
 

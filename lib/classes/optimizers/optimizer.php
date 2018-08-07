@@ -38,8 +38,7 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/optimizers/ioptimi
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class mod_groupformation_optimizer implements mod_groupformation_ioptimizer
-{
+class mod_groupformation_optimizer implements mod_groupformation_ioptimizer {
 
     /** @var mod_groupformation_imatcher Matcher */
     public $matcher;
@@ -49,8 +48,7 @@ class mod_groupformation_optimizer implements mod_groupformation_ioptimizer
      *
      * @param mod_groupformation_imatcher $matcher
      */
-    public function __construct(mod_groupformation_imatcher $matcher)
-    {
+    public function __construct(mod_groupformation_imatcher $matcher) {
         $this->matcher = $matcher;
     }
 
@@ -61,12 +59,12 @@ class mod_groupformation_optimizer implements mod_groupformation_ioptimizer
      * @return mixed
      * @throws Exception
      */
-    public function optimize_cohort(mod_groupformation_cohort $cohort)
-    {
+    public function optimize_cohort(mod_groupformation_cohort $cohort) {
         $groups = $cohort->groups;
+        // TODO breakCount 200 is just a random number. Change to a actually wanted number
         for ($breakCount = 0; $breakCount < 200; $breakCount++) {
 
-            $groups = $this->sortGroups($groups);
+            $groups = $this->sort_groups($groups);
             // For each pair of good and bad group try to average them.
             for ($i = 0; $i < count($groups) / 2; $i++) {
                 $goodgroup = $groups[$i];
@@ -91,8 +89,7 @@ class mod_groupformation_optimizer implements mod_groupformation_ioptimizer
      * @param mod_groupformation_group $goodgroup
      * @param mod_groupformation_group $badgroup
      */
-    public function average_two_groups(mod_groupformation_group &$goodgroup, mod_groupformation_group &$badgroup)
-    {
+    public function average_two_groups(mod_groupformation_group &$goodgroup, mod_groupformation_group &$badgroup) {
 
         if (abs($goodgroup->get_gpi() - $badgroup->get_gpi()) < 0.02) {
             return;
@@ -127,11 +124,12 @@ class mod_groupformation_optimizer implements mod_groupformation_ioptimizer
     }
 
     /**
+     * sort groups by gpi
+     *
      * @param array $groups
      * @return array
      */
-    public function sortGroups(array $groups)
-    {
+    public function sort_groups(array $groups) {
         $gpi = array();
         foreach ($groups as $key => $row) {
             $gpi[$key] = $row->gpi;
