@@ -576,4 +576,9 @@ $string ['no_filter_change'] = 'Aufgrund der laufenden oder schon abgeschlossene
 $string ['filter'] = 'Filter aktivieren';
 $string ['not_filter'] = 'Filter deaktivieren';
 
+$string ['pre_study_header'] = 'Statistiken zum Studiendesign';
+$string ['optimized_grouping'] = '<b>{$a}</b> Teilnehmende sind für die optimierte Gruppenbildung verfügbar.';
+$string ['randomized_grouping'] = '<b>{$a}</b> Teilnehmende sind für die randomisierte Gruppenbildung verfügbar.';
+
+$string ['scientific_grouping_setup'] = 'Dieses Studiendesign teilt alle Teilnehmenden (mit vollständig beantworteten Fragebögen) in <b>{$a} Kohorten/Experimentalbedigungen</b>. Alle Teilnehmenden mit unvollständig beantworteten Fragebögen werden randomisiert gruppiert (als zusätzliche Kohorte/Bedingung).<br>Die Konfigurationsschlüssel sind wie folgt:';
 

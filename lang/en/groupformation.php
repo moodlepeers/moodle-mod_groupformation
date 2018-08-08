@@ -603,8 +603,9 @@ $string ['privacy:metadata:groupformation_group_users:groupid'] = 'ID of corresp
 
 $string ['bucket_description'] = 'I want to pre-group the participants based on a selection question';
 
-$string ['pre_study_header'] = 'Pre-Grouping Statistics';
+$string ['pre_study_header'] = 'Statistics for Study Design';
 $string ['optimized_grouping'] = '<b>{$a}</b> users are available for optimized grouping.';
 $string ['randomized_grouping'] = '<b>{$a}</b> users are available for randomized grouping.';
 
 $string ['scientific_grouping_setup'] = 'This scientific grouping setup divides all users (with completely answered questionnaires) into <b>{$a} cohorts</b>. All users with incomplete answers are grouped randomly (as an additional cohort).<br>The configuration keys are as follows:';
+
