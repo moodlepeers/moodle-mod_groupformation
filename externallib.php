@@ -191,3 +191,16 @@ function groupformation_get_progress_statistics($groupformationid) {
     $usermanager = new mod_groupformation_user_manager($groupformationid);
     return $usermanager->get_statistics();
 }
+
+/**
+ * Returns dates for started and terminated if set.
+ *
+ * @param $groupformationid
+ * @return array
+ * @throws coding_exception
+ * @throws dml_exception
+ */
+function groupformation_get_dates($groupformationid) {
+    $store = new mod_groupformation_storage_manager($groupformationid);
+    return $store->get_time();
+}
