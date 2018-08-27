@@ -25,7 +25,7 @@
 $string ['language'] = 'de';
 $string ['modulename'] = 'Gruppenformation';
 $string ['modulenameplural'] = 'Gruppenformationen';
-$string ['modulename_help'] = 'Erlaubt die automatische Erstellung von (Lern)-Gruppen Ihrer Teilnehmenden. Basierend auf Fragebogen-Antworten werden die Gruppen(zusammenstellungen) optimiert.';
+$string ['modulename_help'] = 'Erlaubt die automatische Erstellung von (Lern)-Gruppen Ihrer Teilnehmenden. Basierend auf Fragebogen-Antworten werden die Gruppen(zusammenstellungen) optimiert. Dieses Plugin ist nur für die Verwendung im Rahmen des Forschungsprojektes MoodlePeers installiert. Bitte in anderen Kursen nicht verwenden! Infos: www.moodlepeers.de';
 $string ['beta_version'] = '';
 $string ['groupformation:addinstance'] = 'Gruppenformation hinzufügen';
 $string ['groupformation:editsettings'] = 'Gruppenformation bearbeiten';

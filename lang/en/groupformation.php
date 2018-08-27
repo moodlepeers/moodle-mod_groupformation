@@ -25,7 +25,7 @@
 $string ['language'] = 'en';
 $string ['modulename'] = 'Group formation';
 $string ['modulenameplural'] = 'Group formations';
-$string ['modulename_help'] = 'The groupformation plugin generates groups of students based on a questionnaire answers.';
+$string ['modulename_help'] = 'The groupformation plugin generates groups of students based on a questionnaire answers. This activity is only for participants in the research project MoodlePeers. Please do not use this activity in other courses. Further information on www.moodlepeers.de';
 $string ['beta_version'] = '';
 $string ['groupformation:addinstance'] = 'Add groupformation';
 $string ['groupformation:editsettings'] = 'Edit groupformation';
