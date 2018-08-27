@@ -393,15 +393,20 @@ class mod_groupformation_storage_manager {
     /**
      * Returns the scenario
      *
+     * @param $assigned
      * @return string
      * @throws dml_exception
      */
-    public function get_scenario() {
+    public function get_scenario($assigned = false) {
         global $DB;
 
         $settings = $DB->get_record('groupformation', array(
                 'id' => $this->groupformationid
         ));
+
+        if ($assigned) {
+            return $settings->szenario;
+        }
 
         $scenarios = $DB->get_records('groupformation_scenario');
 
@@ -834,7 +839,7 @@ class mod_groupformation_storage_manager {
      * @throws dml_exception
      */
     public function get_label_set() {
-        $array = mod_groupformation_data::get_label_set($this->get_scenario());
+        $array = mod_groupformation_data::get_label_set($this->get_scenario(true));
 
         if ($this->groupformationid != null) {
             $hastopic = $this->get_number('topic');

@@ -164,7 +164,7 @@ class mod_groupformation_participant_parser {
             return array();
         }
 
-        $scenario = $this->store->get_scenario();
+        $scenario = $this->store->get_scenario(true);
 
         $starttime = microtime(true);
 
@@ -179,6 +179,7 @@ class mod_groupformation_participant_parser {
             $criteriaspecs = $specs;
         }
 
+        // var_dump(array_keys($criteriaspecs));
         $criteriaspecs = $this->criterioncalculator->filter_criteria_specs($criteriaspecs, $users);
 
         $array = array();
@@ -194,9 +195,12 @@ class mod_groupformation_participant_parser {
 
                 if (in_array($scenario, $spec['scenarios'])) {
                     $points = array();
-                    if ($this->usermanager->has_answered_everything($user)) {
+                    $answeredeverything = $this->usermanager->has_answered_everything($user);
+                    if ($answeredeverything) {
                         $points = $this->criterioncalculator->read_values_for_user($criterion, $user, $spec);
                     }
+
+                    // var_dump($points);
                     foreach ($spec['labels'] as $label => $lspec) {
                         $value = array();
                         $vs = $points[$label]["values"];
@@ -217,7 +221,6 @@ class mod_groupformation_participant_parser {
         $res = $this->parse($array, $totallabel, $weights);
         $endtime = microtime(true);
         $comptime = $endtime - $starttime;
-
         return $res;
     }
 

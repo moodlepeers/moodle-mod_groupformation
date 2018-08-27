@@ -132,9 +132,14 @@ function groupformation_get_group_name($groupformationid, $userid) {
 function groupformation_get_cm($groupformationid) {
     global $DB;
     $gfinstance = groupformation_get_instance_by_id($groupformationid);
-    $moduleid = $DB->get_field('modules', 'id', array('name' => 'groupformation'));
-    return $DB->get_field('course_modules', 'id', array('course' => $gfinstance->course, 'module' => $moduleid, 'instance' => $groupformationid));
-}
+
+    if ($gfinstance) {
+        $moduleid = $DB->get_field('modules', 'id', array('name' => 'groupformation'));
+        return $DB->get_field('course_modules', 'id', array('course' => $gfinstance->course, 'module' => $moduleid, 'instance' => $groupformationid));
+    }
+
+    return null;
+    }
 
 /**
  * Returns whether user has a group

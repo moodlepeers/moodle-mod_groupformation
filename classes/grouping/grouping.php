@@ -90,7 +90,6 @@ class mod_groupformation_grouping {
      * @return mixed
      */
     public function configure_participants($participants, $configuration) {
-
         foreach ($participants as $participant) {
             $criteria = $participant->criteria;
             $configuredcriteria = array();

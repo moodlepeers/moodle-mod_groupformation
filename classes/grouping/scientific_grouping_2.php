@@ -399,6 +399,9 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
      * @return array
      */
     private function assign_to_slices($scores, $numberofslices) {
+        if ($numberofslices == 0) {
+            return array();
+        }
         $userslices = array_fill(0, $numberofslices, []);
         $slices = range(1, $numberofslices);
 

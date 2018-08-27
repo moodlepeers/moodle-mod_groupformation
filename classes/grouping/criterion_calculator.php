@@ -65,7 +65,7 @@ class mod_groupformation_criterion_calculator {
         $this->groupformationid = $groupformationid;
         $this->store = new mod_groupformation_storage_manager ($groupformationid);
         $this->usermanager = new mod_groupformation_user_manager ($groupformationid);
-        $this->scenario = $this->store->get_scenario();
+        $this->scenario = $this->store->get_scenario(true);
     }
 
     /**
@@ -94,88 +94,98 @@ class mod_groupformation_criterion_calculator {
      */
     public function filter_criteria_specs($criteriaspecs, $users, $eval = false) {
         $filteredspecs = array();
+
         foreach ($criteriaspecs as $criterion => $spec) {
-            $category = $spec['category'];
-            $labels = $spec['labels'];
-            if (!is_null($spec) && in_array($this->scenario, $spec['scenarios']) &&
-                (!$eval || (array_key_exists('evaluation', $spec) &&
-                        $spec['evaluation']))) {
+            if (!is_null($spec)) {
 
-                $positions = array();
-                foreach ($labels as $label => $specs) {
-                    $condition1 = array_key_exists($this->scenario, $specs['scenarios']);
-                    $condition2 = (!$eval || (array_key_exists('evaluation', $spec) && $spec['evaluation']));
-                    if ($condition1 && $condition2) {
-                        if (array_key_exists('significant_id_only', $specs) && $specs['significant_id_only']) {
-                            $variance = 0;
-                            $position = 1;
-                            $total = 0;
-                            $initialid = null;
-                            foreach ($specs['questionids'] as $id) {
-                                if (is_null($initialid)) {
-                                    $initialid = $id;
-                                }
-                                // Answers for catalog question in category $criterion.
-                                $answers = $this->store->get_answers_to_special_question($category, $id);
+                $scenarios = $spec['scenarios'];
+                $validscenario = in_array($this->scenario, $scenarios);
+                $validforeval = !$eval || array_key_exists('evaluation', $spec);
 
-                                // Number of options for catalog question.
-                                $totaloptions = $this->store->get_max_option_of_catalog_question($id, $category);
+                if ($validscenario && $validforeval) {
 
-                                $dist = array_fill(1, $totaloptions, 0);
+                    $category = $spec['category'];
+                    $labels = $spec['labels'];
 
-                                // Iterates over answers for grade questions.
-                                foreach ($answers as $answer) {
-                                    // Checks if answer is relevant for this group of users.
-                                    if (is_null($users) || in_array($answer->userid, $users)) {
+                    $positions = array();
 
-                                        // Increments count for answer option.
-                                        $dist [intval($answer->answer)]++;
-                                        // Increments count for total.
-                                        if ($id == $initialid) {
-                                            $total++;
+                    // Check for each label of a criterion
+                    // Either validscenario or validforeval
+                    foreach ($labels as $label => $specs) {
+
+                        $validscenario = array_key_exists($this->scenario, $specs['scenarios']);
+                        $validforeval = (!$eval || (array_key_exists('evaluation', $specs) && $specs['evaluation']));
+
+                        if ($validscenario && $validforeval) {
+                            if (array_key_exists('significant_id_only', $specs) && $specs['significant_id_only']) {
+                                $variance = 0;
+                                $position = 1;
+                                $total = 0;
+                                $initialid = null;
+                                foreach ($specs['questionids'] as $id) {
+                                    if (is_null($initialid)) {
+                                        $initialid = $id;
+                                    }
+                                    // Answers for catalog question in category $criterion.
+                                    $answers = $this->store->get_answers_to_special_question($category, $id);
+
+                                    // Number of options for catalog question.
+                                    $totaloptions = $this->store->get_max_option_of_catalog_question($id, $category);
+
+                                    $dist = array_fill(1, $totaloptions, 0);
+
+                                    // Iterates over answers for grade questions.
+                                    foreach ($answers as $answer) {
+                                        // Checks if answer is relevant for this group of users.
+                                        if (is_null($users) || in_array($answer->userid, $users)) {
+
+                                            // Increments count for answer option.
+                                            $dist [intval($answer->answer)]++;
+                                            // Increments count for total.
+                                            if ($id == $initialid) {
+                                                $total++;
+                                            }
                                         }
                                     }
-                                }
 
-                                // Computes tempexp for later use.
-                                $tempexp = 0;
-                                $p = 1;
-                                foreach ($dist as $d) {
-                                    $tempexp = $tempexp + ($p * ($d / $total));
-                                    $p++;
-                                }
+                                    // Computes tempexp for later use.
+                                    $tempexp = 0;
+                                    $p = 1;
+                                    foreach ($dist as $d) {
+                                        $tempexp = $tempexp + ($p * ($d / $total));
+                                        $p++;
+                                    }
 
-                                // Computes tempvariance to find maximal variance.
-                                $tempvariance = 0;
-                                $p = 1;
-                                foreach ($dist as $d) {
-                                    $tempvariance = $tempvariance + ((pow(($p - $tempexp), 2)) * ($d / $total));
-                                    $p++;
-                                }
+                                    // Computes tempvariance to find maximal variance.
+                                    $tempvariance = 0;
+                                    $p = 1;
+                                    foreach ($dist as $d) {
+                                        $tempvariance = $tempvariance + ((pow(($p - $tempexp), 2)) * ($d / $total));
+                                        $p++;
+                                    }
 
-                                // Sets position by maximal variance.
-                                if ($variance < $tempvariance) {
-                                    $variance = $tempvariance;
-                                    $position = $id;
-                                }
+                                    // Sets position by maximal variance.
+                                    if ($variance < $tempvariance) {
+                                        $variance = $tempvariance;
+                                        $position = $id;
+                                    }
 
+                                }
+                                $specs['questionids'] = array($position);
                             }
-                            $specs['questionids'] = array($position);
+
+                            $positions[$label] = $specs;
                         }
 
-                        $positions[$label] = $specs;
                     }
 
-                }
-
-                if (count($positions) > 0) {
-                    $spec['labels'] = $positions;
-                    $filteredspecs[$criterion] = $spec;
+                    if (count($positions) > 0) {
+                        $spec['labels'] = $positions;
+                        $filteredspecs[$criterion] = $spec;
+                    }
                 }
             }
-
         }
-
         return $filteredspecs;
     }
 
