@@ -312,7 +312,7 @@ class mod_groupformation_csv_writer {
 
             if ($this->groupsmanager->has_group($userid)) {
                 $groupid = $this->groupsmanager->get_group_id($userid);
-                $userdata[$userid]['groupid'] = $this->groupsmanager->get_moodle_group_id($groupid) - 394;
+                $userdata[$userid]['groupid'] = $this->groupsmanager->get_moodle_group_id($groupid);
                 $userdata[$userid]['groupname'] = str_replace("G1_", "", $this->groupsmanager->get_group_name($userid));
                 $userdata[$userid]['performance_index'] = $this->groupsmanager->get_performance_index($groupid);
 
