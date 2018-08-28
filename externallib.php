@@ -209,3 +209,15 @@ function groupformation_get_dates($groupformationid) {
     $store = new mod_groupformation_storage_manager($groupformationid);
     return $store->get_time();
 }
+
+/**
+ * Return users for this activity
+ *
+ * @param $groupformationid
+ * @return array
+ * @throws dml_exception
+ */
+function groupformation_get_users($groupformationid) {
+    $store = new mod_groupformation_storage_manager($groupformationid);
+    return $store->get_users_for_grouping();
+}
