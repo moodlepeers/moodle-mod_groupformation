@@ -3,12 +3,12 @@
     <QUESTIONS VERSION="2018061901">
         <QUESTION ID="1" TYPE="freetext">
             <QUESTIONTEXT>
-                <![CDATA[Welche anderen Verpflichtungen haben Sie parallel zum Vorkurs?  Gemeint sind Praktika, Jobs, andere Lehrveranstaltungen, Reisen, aufwendige Hobbies etc.]]>
+                <![CDATA[What other activitives are you planning besides the precourse? Meant are internships, jobs, other courses, holidays, time-consuming hobbies etc.]]>
             </QUESTIONTEXT>
         </QUESTION>
         <QUESTION ID="2" TYPE="number">
             <QUESTIONTEXT>
-                <![CDATA[Wie viele Stunden pro Woche nehmen alle diese Aktivitäten insgesamt in Anspruch?]]>
+                <![CDATA[How many hours per week you will spend for this activities all in all?]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <MIN>
@@ -21,7 +21,7 @@
         </QUESTION>
         <QUESTION ID="3" TYPE="dropdown">
             <QUESTIONTEXT>
-                <![CDATA[An wie vielen Tagen pro Woche können Sie sich maximal mit dem Vorkurs Mathematik beschäftigen?]]>
+                <![CDATA[How many days per week are you able to engage in the math precourse maximally?]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -52,7 +52,7 @@
         </QUESTION>
         <QUESTION ID="4" TYPE="dropdown">
             <QUESTIONTEXT>
-                <![CDATA[An wie vielen Tagen pro Woche haben Sie wirklich vor, sich mit dem Vorkurs Mathematik beschäftigen?]]>
+                <![CDATA[How many days per week are you actually planning to engage with the math precourse?]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -83,7 +83,7 @@
         </QUESTION>
         <QUESTION ID="5" TYPE="dropdown">
             <QUESTIONTEXT>
-                <![CDATA[Wie viele Stunden pro Tag können Sie maximal für den Vorkurs Mathematik investieren?]]>
+                <![CDATA[How many hours per day are you able to engage in the math precourse maximally?]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -129,7 +129,7 @@
         </QUESTION>
         <QUESTION ID="6" TYPE="dropdown">
             <QUESTIONTEXT>
-                <![CDATA[Wie viele Stunden pro Tag haben Sie wirklich vor, für den Vorkurs Mathematik zu investieren?]]>
+                <![CDATA[How many hours per day are you actually planning to engage with the math precourse?]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
