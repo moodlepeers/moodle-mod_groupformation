@@ -221,3 +221,9 @@ function groupformation_get_users($groupformationid) {
     $store = new mod_groupformation_storage_manager($groupformationid);
     return $store->get_users_for_grouping();
 }
+
+function groupformation_check_instance($instance) {
+    global $DB;
+
+    return $DB->record_exists('groupformation',array('id' => $instance));
+}
