@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="">
-     <QUESTIONS VERSION="2018061901">
-          <QUESTION ID="1" TYPE="dropdown">
-               <QUESTIONTEXT>
-                    <![CDATA[Bitte wählen Sie, in welcher Sprache es Ihnen möglich ist mit ihrer Gruppe zu kommunizieren]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[Englisch]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[Deutsch]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[Englisch, aber Deutsch ist auch möglich]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[Deutsch, aber Englisch ist auch möglich]]>
-                    </OPTION>
-               </OPTIONS>
-         </QUESTION>
-     </QUESTIONS>
+    <QUESTIONS VERSION="2018061901">
+        <QUESTION ID="1" TYPE="dropdown">
+            <QUESTIONTEXT>
+                <![CDATA[Bitte wählen Sie, in welcher Sprache es Ihnen möglich ist mit ihrer Gruppe zu kommunizieren]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[Englisch]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Deutsch]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Englisch, aber Deutsch ist auch möglich]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Deutsch, aber Englisch ist auch möglich]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+    </QUESTIONS>
 </GROUPFORMATION>

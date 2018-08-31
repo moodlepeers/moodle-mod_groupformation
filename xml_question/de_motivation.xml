@@ -1,576 +1,576 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="FAM questionnaire">
-     <QUESTIONS VERSION="2018061902">
-         <QUESTION ID="1" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[Ich weiß, dass ich die Inhalte des Vorkurses erlernen kann.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[trifft zu]]>
-                    </OPTION>
-               </OPTIONS>
-          </QUESTION>
-          
-          <QUESTION ID="2" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[Ich denke, dass ich im Vorkurs gut abschneiden werde.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[trifft zu]]>
-                    </OPTION>
-               </OPTIONS>
-          </QUESTION>
-          
-          <QUESTION ID="3" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[Ich bin zuversichtlich, dass ich erfolgreich sein werde im Vorkurs.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[trifft zu]]>
-                    </OPTION>
-               </OPTIONS>
-         </QUESTION>
-          
-         <QUESTION ID="4" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[Ich glaube, dass ich die Inhalte des Vorkurses lernen kann.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[trifft zu]]>
-                    </OPTION>
-               </OPTIONS>
-          </QUESTION>
-          
-          <QUESTION ID="5" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[Ich kann das, was wir im Vorkurs lernen, im echten Leben einsetzen.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[trifft zu]]>
-                    </OPTION>
-               </OPTIONS>
-         </QUESTION>
-          
-         <QUESTION ID="6" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[Die Inhalte des Vorkurses sind relevant für meine zukünftige Karriere.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[trifft zu]]>
-                    </OPTION>
-               </OPTIONS>
-          </QUESTION>
-          
-          <QUESTION ID="7" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[Die Inhalte des Vorkurses sind für mich persönlich relevant.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[trifft zu]]>
-                    </OPTION>
-               </OPTIONS>
-         </QUESTION>
-          
-         <QUESTION ID="8" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[Ich verstehe, inwiefern der Vorkurs wichtig für meine Zukunft ist.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[trifft zu]]>
-                    </OPTION>
-               </OPTIONS>
-          </QUESTION>
-          
-          <QUESTION ID="9" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[Der Vorkurs wird mir dabei helfen, meine zukünftigen Ziele zu erreichen.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[trifft zu]]>
-                    </OPTION>
-               </OPTIONS>
-          </QUESTION>
-          
-          <QUESTION ID="10" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[Während des Vorkurses habe ich sehr viele andere Verpflichtungen.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[trifft zu]]>
-                    </OPTION>
-               </OPTIONS>
-          </QUESTION>
-          
-          <QUESTION ID="11" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[Aktuell fehlt mir die Zeit für den Vorkurs.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[trifft zu]]>
-                    </OPTION>
-               </OPTIONS>
-          </QUESTION>
-          
-          <QUESTION ID="12" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[Der Zeitaufwand des Vorkurses erscheint mir groß.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[trifft zu]]>
-                    </OPTION>
-               </OPTIONS>
-          </QUESTION>
-          
-          <QUESTION ID="13" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[Ich kann nicht so viel Zeit investieren, wie es für den Vorkurs nötig wäre.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[trifft zu]]>
-                    </OPTION>
-               </OPTIONS>
-          </QUESTION>
+    <QUESTIONS VERSION="2018061902">
+        <QUESTION ID="1" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich weiß, dass ich die Inhalte des Kurses erlernen kann.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
 
-          <QUESTION ID="14" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[Der Vorkurs dauert zu lange.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[trifft zu]]>
-                    </OPTION>
-               </OPTIONS>
-         </QUESTION>
-          
-         <QUESTION ID="15" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[Leider kann ich nicht so viel Zeit auf den Vorkurs investieren, wie ich gerne würde.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[trifft zu]]>
-                    </OPTION>
-               </OPTIONS>
-          </QUESTION>
-          
-          <QUESTION ID="16" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[Der Vorkurs ist sehr interessant.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[trifft zu]]>
-                    </OPTION>
-               </OPTIONS>
-         </QUESTION>
-          
-         <QUESTION ID="17" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[Ich finde Mathematik faszinierend.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[trifft zu]]>
-                    </OPTION>
-               </OPTIONS>
-          </QUESTION>
-          
-          <QUESTION ID="18" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[Ich denke, Mathematik ist eine wichtige Disziplin.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[trifft nicht zu]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[trifft zu]]>
-                    </OPTION>
-               </OPTIONS>
-          </QUESTION>
+        <QUESTION ID="2" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich denke, dass ich im Kurs gut abschneiden werde.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
 
-         <QUESTION ID="19" TYPE="likert">
-             <QUESTIONTEXT>
-                 <![CDATA[Ich freue mich auf den Vorkurs.]]>
-             </QUESTIONTEXT>
-             <OPTIONS>
-                 <OPTION>
-                     <![CDATA[trifft nicht zu]]>
-                 </OPTION>
-                 <OPTION>
-                     <![CDATA[]]>
-                 </OPTION>
-                 <OPTION>
-                     <![CDATA[]]>
-                 </OPTION>
-                 <OPTION>
-                     <![CDATA[]]>
-                 </OPTION>
-                 <OPTION>
-                     <![CDATA[]]>
-                 </OPTION>
-                 <OPTION>
-                     <![CDATA[trifft zu]]>
-                 </OPTION>
-             </OPTIONS>
-         </QUESTION>
+        <QUESTION ID="3" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich bin zuversichtlich, dass ich erfolgreich sein werde im Kurs.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
 
-         <QUESTION ID="20" TYPE="likert">
-             <QUESTIONTEXT>
-                 <![CDATA[Ich würde den Vorkurs anderen empfehlen.]]>
-             </QUESTIONTEXT>
-             <OPTIONS>
-                 <OPTION>
-                     <![CDATA[trifft nicht zu]]>
-                 </OPTION>
-                 <OPTION>
-                     <![CDATA[]]>
-                 </OPTION>
-                 <OPTION>
-                     <![CDATA[]]>
-                 </OPTION>
-                 <OPTION>
-                     <![CDATA[]]>
-                 </OPTION>
-                 <OPTION>
-                     <![CDATA[]]>
-                 </OPTION>
-                 <OPTION>
-                     <![CDATA[trifft zu]]>
-                 </OPTION>
-             </OPTIONS>
-         </QUESTION>
+        <QUESTION ID="4" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich glaube, dass ich die Inhalte des Kurses lernen kann.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
 
-         <QUESTION ID="21" TYPE="likert">
-             <QUESTIONTEXT>
-                 <![CDATA[Der Vorkurs macht mir Spaß.]]>
-             </QUESTIONTEXT>
-             <OPTIONS>
-                 <OPTION>
-                     <![CDATA[trifft nicht zu]]>
-                 </OPTION>
-                 <OPTION>
-                     <![CDATA[]]>
-                 </OPTION>
-                 <OPTION>
-                     <![CDATA[]]>
-                 </OPTION>
-                 <OPTION>
-                     <![CDATA[]]>
-                 </OPTION>
-                 <OPTION>
-                     <![CDATA[]]>
-                 </OPTION>
-                 <OPTION>
-                     <![CDATA[trifft zu]]>
-                 </OPTION>
-             </OPTIONS>
-         </QUESTION>
+        <QUESTION ID="5" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich kann das, was wir im Kurs lernen, im echten Leben einsetzen.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
 
-         <QUESTION ID="22" TYPE="likert">
-             <QUESTIONTEXT>
-                 <![CDATA[Ich habe vor, mich noch mehr Kurse in Mathematik zu belegen.]]>
-             </QUESTIONTEXT>
-             <OPTIONS>
-                 <OPTION>
-                     <![CDATA[trifft nicht zu]]>
-                 </OPTION>
-                 <OPTION>
-                     <![CDATA[]]>
-                 </OPTION>
-                 <OPTION>
-                     <![CDATA[]]>
-                 </OPTION>
-                 <OPTION>
-                     <![CDATA[]]>
-                 </OPTION>
-                 <OPTION>
-                     <![CDATA[]]>
-                 </OPTION>
-                 <OPTION>
-                     <![CDATA[trifft zu]]>
-                 </OPTION>
-             </OPTIONS>
-         </QUESTION>
-     </QUESTIONS>
+        <QUESTION ID="6" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Die Inhalte des Kurses sind relevant für meine zukünftige Karriere.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="7" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Die Inhalte des Kurses sind für mich persönlich relevant.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="8" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich verstehe, inwiefern der Kurs wichtig für meine Zukunft ist.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="9" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Der Kurs wird mir dabei helfen, meine zukünftigen Ziele zu erreichen.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="10" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Während des Kurses habe ich sehr viele andere Verpflichtungen.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="11" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Aktuell fehlt mir die Zeit für den Kurs.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="12" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Der Zeitaufwand des Kurses erscheint mir groß.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="13" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich kann nicht so viel Zeit investieren, wie es für den Kurs nötig wäre.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="14" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Der Kurs dauert zu lange.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="15" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Leider kann ich nicht so viel Zeit auf den Kurs investieren, wie ich gerne würde.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="16" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Der Kurs ist sehr interessant.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="17" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich finde Mathematik faszinierend.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="18" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich denke, Mathematik ist eine wichtige Disziplin.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="19" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich freue mich auf den Kurs.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="20" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich würde den Kurs anderen empfehlen.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="21" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Der Kurs macht mir Spaß.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+             <OPTION>
+                 <![CDATA[trifft nicht zu]]>
+             </OPTION>
+             <OPTION>
+                 <![CDATA[]]>
+             </OPTION>
+             <OPTION>
+                 <![CDATA[]]>
+             </OPTION>
+             <OPTION>
+                 <![CDATA[]]>
+             </OPTION>
+             <OPTION>
+                 <![CDATA[]]>
+             </OPTION>
+             <OPTION>
+                 <![CDATA[trifft zu]]>
+             </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="22" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich habe vor, mich noch mehr Kurse in Mathematik zu belegen.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+    </QUESTIONS>
 </GROUPFORMATION>
