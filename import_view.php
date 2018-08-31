@@ -29,7 +29,9 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/controller/import_expo
 require_once($CFG->dirroot . '/mod/groupformation/classes/forms/import_form.php');
 
 $filename = substr(__FILE__, strrpos(__FILE__, '\\') + 1);
-$url = new moodle_url('/mod/groupformation/' . $filename, $urlparams);
+$filename = substr($filename, strpos($filename, '/mod'));
+
+$url = new moodle_url($filename, $urlparams);
 
 // Set PAGE config.
 $PAGE->set_url($url);
