@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="FAM questionnaire">
-    <QUESTIONS VERSION="2018083006">
+    <QUESTIONS VERSION="2018083100">
         <QUESTION ID="1" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Ich weiß, dass ich die Inhalte des Kurses erlernen kann.]]>
+                <![CDATA[Ich weiß, dass ich die Inhalte der Veranstaltung erlernen kann.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -29,7 +29,7 @@
 
         <QUESTION ID="2" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Ich denke, dass ich im Kurs gut abschneiden werde.]]>
+                <![CDATA[Ich denke, dass ich in der Veranstaltung gut abschneiden werde.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -55,7 +55,7 @@
 
         <QUESTION ID="3" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Ich bin zuversichtlich, dass ich erfolgreich sein werde im Kurs.]]>
+                <![CDATA[Ich bin zuversichtlich, dass ich erfolgreich sein werde in der Veranstaltung.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -81,7 +81,7 @@
 
         <QUESTION ID="4" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Ich glaube, dass ich die Inhalte des Kurses lernen kann.]]>
+                <![CDATA[Ich glaube, dass ich die Inhalte der Veranstaltung lernen kann.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -107,7 +107,7 @@
 
         <QUESTION ID="5" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Ich kann das, was wir im Kurs lernen, im echten Leben einsetzen.]]>
+                <![CDATA[Ich kann das, was wir in der Veranstaltung lernen, im echten Leben einsetzen.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -133,7 +133,7 @@
 
         <QUESTION ID="6" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Die Inhalte des Kurses sind relevant für meine zukünftige Karriere.]]>
+                <![CDATA[Die Inhalte der Veranstaltung sind relevant für meine zukünftige Karriere.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -159,7 +159,7 @@
 
         <QUESTION ID="7" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Die Inhalte des Kurses sind für mich persönlich relevant.]]>
+                <![CDATA[Die Inhalte der Veranstaltung sind für mich persönlich relevant.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -185,7 +185,7 @@
 
         <QUESTION ID="8" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Ich verstehe, inwiefern der Kurs wichtig für meine Zukunft ist.]]>
+                <![CDATA[Ich verstehe, inwiefern die Veranstaltung wichtig für meine Zukunft ist.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -211,7 +211,7 @@
 
         <QUESTION ID="9" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Der Kurs wird mir dabei helfen, meine zukünftigen Ziele zu erreichen.]]>
+                <![CDATA[Die Veranstaltung wird mir dabei helfen, meine zukünftigen Ziele zu erreichen.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -237,7 +237,7 @@
 
         <QUESTION ID="10" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Während des Kurses habe ich sehr viele andere Verpflichtungen.]]>
+                <![CDATA[Während der Veranstaltung habe ich sehr viele andere Verpflichtungen.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -263,7 +263,7 @@
 
         <QUESTION ID="11" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Aktuell fehlt mir die Zeit für den Kurs.]]>
+                <![CDATA[Aktuell fehlt mir die Zeit für die Veranstaltung.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -289,7 +289,7 @@
 
         <QUESTION ID="12" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Der Zeitaufwand des Kurses erscheint mir groß.]]>
+                <![CDATA[Der Zeitaufwand der Veranstaltung erscheint mir groß.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -315,7 +315,7 @@
 
         <QUESTION ID="13" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Ich kann nicht so viel Zeit investieren, wie es für den Kurs nötig wäre.]]>
+                <![CDATA[Ich kann nicht so viel Zeit investieren, wie es für die Veranstaltung nötig wäre.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -341,7 +341,7 @@
 
         <QUESTION ID="14" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Der Kurs dauert zu lange.]]>
+                <![CDATA[Die Veranstaltung dauert zu lange.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -367,7 +367,7 @@
 
         <QUESTION ID="15" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Leider kann ich nicht so viel Zeit auf den Kurs investieren, wie ich gerne würde.]]>
+                <![CDATA[Leider kann ich nicht so viel Zeit auf die Veranstaltung investieren, wie ich gerne würde.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -393,7 +393,7 @@
 
         <QUESTION ID="16" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Der Kurs ist sehr interessant.]]>
+                <![CDATA[Die Veranstaltung ist sehr interessant.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -471,7 +471,7 @@
 
         <QUESTION ID="19" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Ich freue mich auf den Kurs.]]>
+                <![CDATA[Ich freue mich auf die Veranstaltung.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -497,7 +497,7 @@
 
         <QUESTION ID="20" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Ich würde den Kurs anderen empfehlen.]]>
+                <![CDATA[Ich würde die Veranstaltung anderen empfehlen.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -523,7 +523,7 @@
 
         <QUESTION ID="21" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Der Kurs macht mir Spaß.]]>
+                <![CDATA[Die Veranstaltung macht mir Spaß.]]>
             </QUESTIONTEXT>
             <OPTIONS>
              <OPTION>
@@ -549,7 +549,7 @@
 
         <QUESTION ID="22" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Ich habe vor, mich noch mehr Kurse in Mathematik zu belegen.]]>
+                <![CDATA[Ich habe vor, mich noch mehr Veranstaltungen in Mathematik zu belegen.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>

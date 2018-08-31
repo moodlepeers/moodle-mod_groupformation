@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="times questions">
-    <QUESTIONS VERSION="2018083006">
+    <QUESTIONS VERSION="2018083100">
         <QUESTION ID="1" TYPE="freetext">
             <QUESTIONTEXT>
                 <![CDATA[What other activities are you planning besides the course? Meant are internships, jobs, other courses, holidays, time-consuming hobbies etc.]]>

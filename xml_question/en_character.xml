@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="Big5 short version regular">
-    <QUESTIONS VERSION="2018083003">
+    <QUESTIONS VERSION="2018083100">
         <QUESTION ID="1" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[I see myself as someone who is talkative.]]>
