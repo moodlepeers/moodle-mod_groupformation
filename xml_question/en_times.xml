@@ -3,7 +3,7 @@
     <QUESTIONS VERSION="2018083005">
         <QUESTION ID="1" TYPE="freetext">
             <QUESTIONTEXT>
-                <![CDATA[What other activities are you planning besides the pre-course? Meant are internships, jobs, other courses, holidays, time-consuming hobbies etc.]]>
+                <![CDATA[What other activities are you planning besides the course? Meant are internships, jobs, other courses, holidays, time-consuming hobbies etc.]]>
             </QUESTIONTEXT>
         </QUESTION>
         <QUESTION ID="2" TYPE="number">
@@ -21,7 +21,7 @@
         </QUESTION>
         <QUESTION ID="3" TYPE="dropdown">
             <QUESTIONTEXT>
-                <![CDATA[How many days per week are you able to engage in the math pre-course maximally?]]>
+                <![CDATA[How many days per week are you able to engage in the math course maximally?]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -52,7 +52,7 @@
         </QUESTION>
         <QUESTION ID="4" TYPE="dropdown">
             <QUESTIONTEXT>
-                <![CDATA[How many days per week are you actually planning to engage with the math pre-course?]]>
+                <![CDATA[How many days per week are you actually planning to engage with the math course?]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -83,7 +83,7 @@
         </QUESTION>
         <QUESTION ID="5" TYPE="dropdown">
             <QUESTIONTEXT>
-                <![CDATA[How many hours per day are you able to engage in the math pre-course maximally?]]>
+                <![CDATA[How many hours per day are you able to engage in the math course maximally?]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -129,7 +129,7 @@
         </QUESTION>
         <QUESTION ID="6" TYPE="dropdown">
             <QUESTIONTEXT>
-                <![CDATA[How many hours per day are you actually planning to engage with the math pre-course?]]>
+                <![CDATA[How many hours per day are you actually planning to engage with the math course?]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
