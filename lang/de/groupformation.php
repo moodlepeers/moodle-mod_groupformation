@@ -565,7 +565,7 @@ $string ['allanswersrequired'] = 'Es müssen alle Fragen des Fragebogens beantwo
 $string ['allanswersrequired_description'] = 'Es müssen alle Fragen des Fragebogens beantwortet werden.';
 $string ['groupoption_allanswersrequired'] = 'Damit optimierte Gruppen gebildet werden können, werden alle Antworten eines Teilnehmenden benötigt. Beantwortet ein Teilnehmender den Fragebogen nicht vollständig wird dieser lediglich randomisiert gruppiert.';
 
-$string ['math_prep_course_study'] = 'Mathe-Vorkurs-Studie';
+$string ['math_prep_course_study'] = 'Filter zur Ehrlichkeit';
 $string ['honest_answers'] = 'Es haben <b>{$a}</b> Teilnehmende geantwortet, dass sie ehrlich und konzentriert geantwortet haben.';
 $string ['dishonest_answers'] = 'Es haben <b>{$a}</b> Teilnehmende geantwortet, dass sie <b>nicht</b> ehrlich und konzentriert geantwortet haben.';
 $string ['ratio_answers'] = 'Es haben also <b>{$a}%</b> der Teilnehmende geantwortet, dass sie <b>nicht</b> ehrlich und konzentriert geantwortet haben.';

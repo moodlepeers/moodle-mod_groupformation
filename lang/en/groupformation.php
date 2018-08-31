@@ -556,7 +556,7 @@ $string ['groupoption_allanswersrequired'] = 'Before continuing to the next page
 $string ['re-open_questionnaire'] = 'Re-open questionnaire';
 $string ['close_questionnaire'] = 'Close questionnaire';
 
-$string ['math_prep_course_study'] = 'Math pre-course study';
+$string ['math_prep_course_study'] = 'Filter for honesty';
 $string ['honest_answers'] = '<b>{$a}</b> students replied that they answered honestly and with concentration.';
 $string ['dishonest_answers'] = '<b>{$a}</b> students replied that they did not give honest answers with full concentration.';
 $string ['ratio_answers'] = 'Thus, <b>{$a}%</b> of the students replied that they did not give honest answers with full concentration.';
