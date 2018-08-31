@@ -29,7 +29,9 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/controller/export_cont
 require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/export_view_controller.php');
 
 $filename = substr(__FILE__, strrpos(__FILE__, '\\') + 1);
-$url = new moodle_url('/mod/groupformation/' . $filename, $urlparams);
+$filename = substr($filename, strpos($filename, '/mod'));
+
+$url = new moodle_url($filename, $urlparams);
 
 // Set PAGE config.
 $PAGE->set_url($url);
