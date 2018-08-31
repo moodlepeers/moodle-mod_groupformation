@@ -315,25 +315,28 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
     public function get_specification() {
 
         $big5specs = mod_groupformation_data::get_criterion_specification('big5');
-        $knowledgespecs = mod_groupformation_data::get_criterion_specification('knowledge');
+        // $knowledgespecs = mod_groupformation_data::get_criterion_specification('knowledge');
         $famspecs = mod_groupformation_data::get_criterion_specification('fam');
 
         unset($big5specs['labels']['neuroticism']);
         unset($big5specs['labels']['openness']);
         unset($big5specs['labels']['agreeableness']);
-        unset($knowledgespecs['labels']['one']);
+        // unset($knowledgespecs['labels']['one']);
 
-        $specs = ['big5' => $big5specs, 'knowledge' => $knowledgespecs, 'fam' => $famspecs];
+        $specs = [
+                'big5' => $big5specs,
+                // 'knowledge' => $knowledgespecs,
+                'fam' => $famspecs];
 
         $configurations = array(
-            "groupal:1;ex:1;gh:1;vw:0;fam:0" => array('big5_extraversion' => true,
-                    'big5_conscientiousness' => true, 'knowledge_two' => false, 'fam' => false),
-            "groupal:1;ex:1;gh:0;vw:0;fam:0" => array('big5_extraversion' => true,
-                    'big5_conscientiousness' => false, 'knowledge_two' => false, 'fam' => false),
-            "groupal:1;ex:0;gh:0;vw:0;fam:0" => array('big5_extraversion' => false,
-                    'big5_conscientiousness' => false, 'knowledge_two' => false, 'fam' => false),
-            "groupal:1;ex:0;gh:1;vw:0;fam:0" => array('big5_extraversion' => false,
-                    'big5_conscientiousness' => true, 'knowledge_two' => false, 'fam' => false),
+            "groupal:1;ex:1;gh:1;fam:0" => array('big5_extraversion' => true,
+                    'big5_conscientiousness' => true, 'fam' => false),
+            "groupal:1;ex:1;gh:0;fam:0" => array('big5_extraversion' => true,
+                    'big5_conscientiousness' => false, 'fam' => false),
+            "groupal:1;ex:0;gh:0;fam:0" => array('big5_extraversion' => false,
+                    'big5_conscientiousness' => false, 'fam' => false),
+            "groupal:1;ex:0;gh:1;fam:0" => array('big5_extraversion' => false,
+                    'big5_conscientiousness' => true, 'fam' => false),
         );
 
         return [$configurations, $specs];
