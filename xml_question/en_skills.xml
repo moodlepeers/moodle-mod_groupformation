@@ -1,147 +1,147 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="times questions">
-    <QUESTIONS VERSION="2018072201">
+    <QUESTIONS VERSION="2018083005">
         <QUESTION ID="3" TYPE="dropdown">
             <QUESTIONTEXT>
-                <![CDATA[Was war ihr letzter schulischer Mathematikkurs?]]>
+                <![CDATA[What was your last math course during school?]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[Gymnasialer GK (G8)]]>
+                    <![CDATA[High-school basic course (Gymnasialer GK, G8)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Gymnasialer GK (G9)]]>
+                    <![CDATA[High-school basic course (Gymnasialer LK, G8)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Gymnasialer LK (G8)]]>
+                    <![CDATA[High-school advanced course (Gymnasialer GK, G9)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Gymnasialer LK (G9)]]>
+                    <![CDATA[High-school advanced course (Gymnasialer LK, G9)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Fachoberschule mit technischem Schwerpunkt]]>
+                    <![CDATA[Technical secondary school]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Fachoberschule mit nicht-technischem Schwerpunkt]]>
+                    <![CDATA[Non-technical secondary school]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Sonstiges]]>
+                    <![CDATA[Other]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="4" TYPE="dropdown">
             <QUESTIONTEXT>
-                <![CDATA[Wenn Sie auf Ihre gesamte Schullaufbahn zurückdenken: Welche Mathematiknote hatten Sie wohl etwa im Durchschnitt?]]>
+                <![CDATA[Thinking back of your academic track: What was your average math grade (by estimate)?]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[15 - sehr gut (+)]]>
+                    <![CDATA[15 - excellent (+)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[14 - sehr gut]]>
+                    <![CDATA[14 - excellent]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[13 - sehr gut (-)]]>
+                    <![CDATA[13 - excellent (-)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[12 - gut (+)]]>
+                    <![CDATA[12 - good (+)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[11 - gut]]>
+                    <![CDATA[11 - good]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[10 - gut (-)]]>
+                    <![CDATA[10 - good (-)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[9 - befriedigend (+)]]>
+                    <![CDATA[9 - satisfying (+)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[8 - befriedigend]]>
+                    <![CDATA[8 - satisfying]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[7 - befriedigend (-)]]>
+                    <![CDATA[7 - satisfying (-)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[6 - ausreichend (+)]]>
+                    <![CDATA[6 - fair (+)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[5 - ausreichend]]>
+                    <![CDATA[5 - fair]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[4 - ausreichend (-)]]>
+                    <![CDATA[4 - fair (-)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[3 - mangelhaft (+)]]>
+                    <![CDATA[3 - poor (+)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[2 - mangelhaft]]>
+                    <![CDATA[2 - poor]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[1 - mangelhaft (-)]]>
+                    <![CDATA[1 - poor (-)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[0 - ungenügend]]>
+                    <![CDATA[0 - fail]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="5" TYPE="dropdown">
             <QUESTIONTEXT>
-                <![CDATA[Welche Mathematiknote hatten Sie auf dem Abiturzeugnis (bzw. ihrem Abschlusszeugnis)?]]>
+                <![CDATA[What math grade did you have in the final exams?]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[15]]>
+                    <![CDATA[15 - excellent (+)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[14 - sehr gut]]>
+                    <![CDATA[14 - excellent]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[13]]>
+                    <![CDATA[13 - excellent (-)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[12]]>
+                    <![CDATA[12 - good (+)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[11 - gut]]>
+                    <![CDATA[11 - good]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[10]]>
+                    <![CDATA[10 - good (-)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[9]]>
+                    <![CDATA[9 - satisfying (+)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[8 - befriedigend]]>
+                    <![CDATA[8 - satisfying]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[7]]>
+                    <![CDATA[7 - satisfying (-)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[6]]>
+                    <![CDATA[6 - fair (+)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[5 - ausreichend]]>
+                    <![CDATA[5 - fair]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[4]]>
+                    <![CDATA[4 - fair (-)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[3]]>
+                    <![CDATA[3 - poor (+)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[2 - mangelhaft]]>
+                    <![CDATA[2 - poor]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[1]]>
+                    <![CDATA[1 - poor (-)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[0 - ungenügend]]>
+                    <![CDATA[0 - fail]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="6" TYPE="dropdown">
             <QUESTIONTEXT>
-                <![CDATA[Bitte geben Sie Ihre Abiturnote (bzw. Durchschnittsnote des Abschlusszeugnis) an:]]>
+                <![CDATA[Please name your school diploma grade according to the German Grading System:]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -238,13 +238,13 @@
                     <![CDATA[4,0]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[nicht bestanden]]>
+                    <![CDATA[not passed]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="7" TYPE="number">
             <QUESTIONTEXT>
-                <![CDATA[In welchem Jahr wurde die Hochschulzulassung erworben?]]>
+                <![CDATA[In what year did you graduate from school?]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <MIN>
@@ -257,14 +257,14 @@
         </QUESTION>
         <QUESTION ID="8" TYPE="dropdown">
             <QUESTIONTEXT>
-                <![CDATA[In welchem Bundesland wurde die Hochschulzulassung erworben?]]>
+                <![CDATA[In what state or country did you graduade from school?]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
                     <![CDATA[Baden-Württemberg]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Bayern]]>
+                    <![CDATA[Bavaria]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[Berlin]]>
@@ -279,125 +279,125 @@
                     <![CDATA[Hamburg]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Hessen]]>
+                    <![CDATA[Hesse]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[Mecklenburg-Vorpommern]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Niedersachsen]]>
+                    <![CDATA[Lower Saxony]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Nordrhein-Westfalen]]>
+                    <![CDATA[North Rhine-Westphalia]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Rheinland-Pfalz]]>
+                    <![CDATA[Rhineland-Palantine]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[Saarland]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Sachsen]]>
+                    <![CDATA[Saxony]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Sachsen-Anhalt]]>
+                    <![CDATA[Saxony-Anhalt]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[Schleswig-Holstein]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Thüringen]]>
+                    <![CDATA[Thuringia]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[- NICHT in Deutschland -]]>
+                    <![CDATA[- Not in Germany -]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="9" TYPE="dropdown">
             <QUESTIONTEXT>
-                <![CDATA[In welchem Studiengang haben Sie sich eingeschrieben?]]>
+                <![CDATA[What is your major in university?]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[Angewandte Geowissenschaften (Bachelor)]]>
+                    <![CDATA[Applied Geosciences (Bachelor)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Angewandte Mechanik (Bachelor)]]>
+                    <![CDATA[Applied Mechanics (Bachelor)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Bauingenieurwesen (Bachelor)]]>
+                    <![CDATA[Civil Engineering (Bachelor)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Chemie (Bachelor)]]>
+                    <![CDATA[Chemistry (Bachelor)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Chemieingenieurwesen]]>
+                    <![CDATA[Chemical Engineering (Bachelor)]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[Computational Engineering (Bachelor)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Elektrotechnik (Bachelor)]]>
+                    <![CDATA[Electrical Engineering and Information Technology (Bachelor)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Informatik (Bachelor)]]>
+                    <![CDATA[Computer Science (Bachelor)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Ingenieurinformatik (Bachelor)]]>
+                    <![CDATA[Engineering Informatics (Bachelor)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Maschinenbau (Bachelor)]]>
+                    <![CDATA[Mechanical Engineering (Bachelor)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Mathematik (Bachelor)]]>
+                    <![CDATA[Mathematics (Bachelor)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Psychologie in IT (Bachelor)]]>
+                    <![CDATA[Psychology in IT (Bachelor)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Technomathematik (Bachelor)]]>
+                    <![CDATA[Techno-Mathematics (Bachelor)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Umweltingenieurwesen (Bachelor)]]>
+                    <![CDATA[Environmental Engineering (Bachelor)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Wirtschaftsinformatik (Bachelor)]]>
+                    <![CDATA[Business Information Systems (Bachelor)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Wirtschaftsingenieurwesen (Bachelor)]]>
+                    <![CDATA[Business Administration/Industrial Engineering (Bachelor)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[B.Ed. mit dem Unterrichtsfach Chemie (Lehramt Gy/Ge)]]>
+                    <![CDATA[B.Ed. with subject Chemistry (Teaching Programme for High School)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[B.Ed. mit dem Unterrichtsfach Chemie (Lehramt BK)]]>
+                    <![CDATA[B.Ed. with subject Chemistry (Teaching Programme for Vocational School)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[B.Ed. mit dem Unterrichtsfach Informatik (Lehramt Gy/Ge)]]>
+                    <![CDATA[B.Ed. with subject Computer Science (Teaching Programme for High School)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[B.Ed. mit dem Unterrichtsfach Informatik (Lehramt BK)]]>
+                    <![CDATA[B.Ed. with subject Computer Science (Teaching Programme for Vocational School)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[B.Ed. mit dem Unterrichtsfach Mathematik (Lehramt Haupt-/Real- und Gesamtschule)]]>
+                    <![CDATA[B.Ed. with subject Mathematics (Teaching Programme for Secondary and Comprehensive)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[B.Ed. mit dem Unterrichtsfach Mathematik (Lehramt Gy/Ge)]]>
+                    <![CDATA[B.Ed. with subject Mathematics (Teaching Programme for High School)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[B.Ed. mit dem Unterrichtsfach Mathematik (Lehramt BK)]]>
+                    <![CDATA[B.Ed. with subject Mathematics (Teaching Programme for Vocational School)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[B.Ed. mit der beruflichen Fachrichtung Fertigungstechnik (Lehramt BK)]]>
+                    <![CDATA[B.Ed. with subject Manufacturing Engineering (Teaching Programme for Vocational School)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[B.Ed. mit der beruflichen Fachrichtung Elektrotechnik (Lehramt BK)]]>
+                    <![CDATA[B.Ed. with subject Electrical Engineering and Information Technology (Teaching Programme for Vocational School)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[B.Ed. mit der beruflichen Fachrichtung Maschinenbautechnik (Lehramt BK)]]>
+                    <![CDATA[B.Ed. with subject Mechanical Engineering (Teaching Programme for Vocational School)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Sonstiges]]>
+                    <![CDATA[Other]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
