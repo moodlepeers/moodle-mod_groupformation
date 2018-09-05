@@ -32,7 +32,6 @@ $filename = substr(__FILE__, strrpos(__FILE__, '\\') + 1);
 $filename = substr($filename, strpos($filename, '/mod'));
 
 $url = new moodle_url($filename, $urlparams);
-
 // Set PAGE config.
 $PAGE->set_url($url);
 $PAGE->set_title(format_string($groupformation->name));
