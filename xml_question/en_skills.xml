@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="times questions">
-    <QUESTIONS VERSION="2018083100">
+    <QUESTIONS VERSION="2018090700">
         <QUESTION ID="3" TYPE="dropdown">
             <QUESTIONTEXT>
                 <![CDATA[What was your last math course during school?]]>
@@ -313,6 +313,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
+<<<<<<< HEAD
         <QUESTION ID="9" TYPE="dropdown">
             <QUESTIONTEXT>
                 <![CDATA[What is your major in university?]]>
@@ -401,5 +402,7 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
+=======
+>>>>>>> 010592b... questionnaire edited
     </QUESTIONS>
 </GROUPFORMATION>
