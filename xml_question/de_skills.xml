@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="times questions">
-    <QUESTIONS VERSION="2018072201">
+    <QUESTIONS VERSION="2018090700">
         <QUESTION ID="3" TYPE="dropdown">
             <QUESTIONTEXT>
                 <![CDATA[Was war ihr letzter schulischer Mathematikkurs?]]>
@@ -310,94 +310,6 @@
                 </OPTION>
                 <OPTION>
                     <![CDATA[- NICHT in Deutschland -]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="9" TYPE="dropdown">
-            <QUESTIONTEXT>
-                <![CDATA[In welchem Studiengang haben Sie sich eingeschrieben?]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[Angewandte Geowissenschaften (Bachelor)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Angewandte Mechanik (Bachelor)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Bauingenieurwesen (Bachelor)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Chemie (Bachelor)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Chemieingenieurwesen]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Computational Engineering (Bachelor)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Elektrotechnik (Bachelor)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Informatik (Bachelor)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Ingenieurinformatik (Bachelor)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Maschinenbau (Bachelor)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Mathematik (Bachelor)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Psychologie in IT (Bachelor)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Technomathematik (Bachelor)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Umweltingenieurwesen (Bachelor)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Wirtschaftsinformatik (Bachelor)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Wirtschaftsingenieurwesen (Bachelor)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[B.Ed. mit dem Unterrichtsfach Chemie (Lehramt Gy/Ge)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[B.Ed. mit dem Unterrichtsfach Chemie (Lehramt BK)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[B.Ed. mit dem Unterrichtsfach Informatik (Lehramt Gy/Ge)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[B.Ed. mit dem Unterrichtsfach Informatik (Lehramt BK)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[B.Ed. mit dem Unterrichtsfach Mathematik (Lehramt Haupt-/Real- und Gesamtschule)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[B.Ed. mit dem Unterrichtsfach Mathematik (Lehramt Gy/Ge)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[B.Ed. mit dem Unterrichtsfach Mathematik (Lehramt BK)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[B.Ed. mit der beruflichen Fachrichtung Fertigungstechnik (Lehramt BK)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[B.Ed. mit der beruflichen Fachrichtung Elektrotechnik (Lehramt BK)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[B.Ed. mit der beruflichen Fachrichtung Maschinenbautechnik (Lehramt BK)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Sonstiges]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
