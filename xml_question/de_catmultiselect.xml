@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="multiselect questions">
-    <QUESTIONS VERSION="2017090901">
+    <QUESTIONS VERSION="2018083100">
         <QUESTION ID="1" TYPE="multiselect">
             <QUESTIONTEXT>
                 <![CDATA[Was sind deine Lieblingsfarben?]]>

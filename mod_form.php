@@ -61,6 +61,8 @@ class mod_groupformation_mod_form extends moodleform_mod {
 
         $mform = &$this->_form;
 
+        $mform->addElement('html', '<h3 style="color:red;">'.((get_string('language', 'groupformation')=='de')?'Dieses Plugin ist nur für die Verwendung im Rahmen des Forschungsprojektes MoodlePeers installiert. Bitte in anderen Kursen nicht verwenden! Infos: <a href="http://www.moodlepeers.de">www.moodlepeers.de</a>':'This activity is only for participants in the research project MoodlePeers. Please do not use this activity in other courses. Further information on <a href="http://www.moodlepeers.de">www.moodlepeers.de</a>').'</h3>');
+
         // Adding the "general" fieldset, where all the common settings are showed.
         $mform->addElement('header', 'general', get_string('general', 'form'));
         $mform->setExpanded('general');

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="number questions">
-    <QUESTIONS VERSION="2017090901">
+    <QUESTIONS VERSION="2018083100">
         <QUESTION ID="1" TYPE="number">
             <QUESTIONTEXT>
                 <![CDATA[Wie viele Stunden lernst du in der Woche?]]>
