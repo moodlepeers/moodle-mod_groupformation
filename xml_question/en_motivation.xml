@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="FAM questionnaire">
-    <QUESTIONS VERSION="2018083100">
+    <QUESTIONS VERSION="2018101100">
         <QUESTION ID="1" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[I know I can learn the material in the course.]]>
@@ -419,7 +419,7 @@
 
         <QUESTION ID="17" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I find the field of mathematics fascinating.]]>
+                <![CDATA[I find the field of psychology fascinating.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -445,7 +445,7 @@
 
         <QUESTION ID="18" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I think the field of mathematics is an important discipline.]]>
+                <![CDATA[I think the field of psychology is an important discipline.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -549,7 +549,7 @@
 
         <QUESTION ID="22" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I plan on taking more courses in mathematics.]]>
+                <![CDATA[I plan on taking more courses in psychology.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
