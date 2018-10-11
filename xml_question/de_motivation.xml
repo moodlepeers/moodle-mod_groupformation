@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="FAM questionnaire">
-    <QUESTIONS VERSION="2018101100">
+    <QUESTIONS VERSION="2018101101">
         <QUESTION ID="1" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Ich weiß, dass ich die Inhalte der Veranstaltung erlernen kann.]]>
@@ -419,7 +419,7 @@
 
         <QUESTION ID="17" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Ich finde Psychologie faszinierend.]]>
+                <![CDATA[Ich finde die Inhalte dieser Veranstaltung faszinierend.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -445,7 +445,7 @@
 
         <QUESTION ID="18" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Ich denke, Psychologie ist eine wichtige Disziplin.]]>
+                <![CDATA[Ich denke, das Thema ist eine wichtige Disziplin.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -549,7 +549,7 @@
 
         <QUESTION ID="22" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Ich habe vor, noch mehr Veranstaltungen in Psychologie zu belegen.]]>
+                <![CDATA[Ich habe vor, noch mehr Veranstaltungen, wie diese, zu belegen.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="FAM questionnaire">
-    <QUESTIONS VERSION="2018101100">
+    <QUESTIONS VERSION="2018101101">
         <QUESTION ID="1" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[I know I can learn the material in the course.]]>
@@ -159,7 +159,7 @@
 
         <QUESTION ID="7" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[The material in this preclass is useful in my everyday life.]]>
+                <![CDATA[The material in this class is useful in my everyday life.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -419,7 +419,7 @@
 
         <QUESTION ID="17" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I find the field of psychology fascinating.]]>
+                <![CDATA[I find the topics of this course fascinating.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -445,7 +445,7 @@
 
         <QUESTION ID="18" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I think the field of psychology is an important discipline.]]>
+                <![CDATA[I think the topic of this course is an important discipline.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -549,7 +549,7 @@
 
         <QUESTION ID="22" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I plan on taking more courses in psychology.]]>
+                <![CDATA[I plan on taking more courses like this.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
