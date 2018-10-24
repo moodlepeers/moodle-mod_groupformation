@@ -30,6 +30,7 @@ if (!defined('MOODLE_INTERNAL')) {
 }
 
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/manhattan_distance.php");
+require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/bin_distance.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/ievaluator.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/group.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion.php");
@@ -51,7 +52,8 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
      * mod_groupformation_evaluator constructor.
      */
     public function __construct() {
-        $this->distancefunction = new mod_groupformation_manhattan_distance();
+//        $this->distancefunction = new mod_groupformation_manhattan_distance();
+        $this->distancefunction = new mod_groupformation_bin_distance();
     }
 
     /**
@@ -225,7 +227,9 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
             // (otherwise the criterion will be unthought weighted ).
 
             $d = $this->distancefunction->normalized_distance($c1, $c2);
+
             $wd = $d * $c1->get_weight();
+
             if ($c1->is_homogeneous()) {
                 $homval += $wd;
             } else {

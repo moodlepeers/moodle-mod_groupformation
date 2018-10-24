@@ -31,6 +31,7 @@ require_once($CFG->dirroot . '/mod/groupformation/lib/classes/participant.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/criterion_calculator.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
+require_once($CFG->dirroot . '/mod/groupformation/lib/classes/criteria/one_of_bin_criterion.php');
 
 /**
  * Class mod_groupformation_participant_parser
@@ -106,6 +107,7 @@ class mod_groupformation_participant_parser {
                 }
 
                 $criterion = new mod_groupformation_specific_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
+//                $criterion = new mod_groupformation_one_of_bin_criterion($label, $value, $minval, $maxval, $homogen, $weight);
                 if ($position == 0) {
                     $participant = new mod_groupformation_participant (array(
                         $criterion), $user->id);
