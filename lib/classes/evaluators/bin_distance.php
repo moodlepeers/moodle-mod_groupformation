@@ -52,11 +52,19 @@ class mod_groupformation_bin_distance implements mod_groupformation_idistance {
      * @return float|number
      */
     private function get_distance(mod_groupformation_criterion $cr1, mod_groupformation_criterion $cr2) {
-        $distance = 0.0;
 
-        $dis = strcmp($cr1->get_name(), $cr2->get_name());
-        if ($dis != 0) {
-            $distance = 1.0;
+        $distance = 0.0;
+        $index = 0;
+
+        foreach ($cr1->get_values() as $p) {
+            if ($p == 1) {
+                $dis = strcmp($p, $cr2->get_value($index));
+                if ($dis != 0) {
+                    return 1.0;
+                }
+                break;
+            }
+            $index += 1;
         }
 
         return $distance;

@@ -55,6 +55,22 @@ abstract class mod_groupformation_criterion {
     /** @var bool  flag to mark Criterion as homogeneous or as not homogeneous (heterogeneous) */
     protected $homogeneous = false;
 
+    protected $distance = "manhattan_distance";
+
+    /**
+     * @return string
+     */
+    public function get_distance() {
+        return $this->distance;
+    }
+
+    /**
+     * @param string $distance
+     */
+    public function set_distance($distance) {
+        $this->distance = $distance;
+    }
+
     /**
      * Returns name
      *

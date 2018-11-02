@@ -50,7 +50,7 @@ class mod_groupformation_one_of_bin_criterion extends mod_groupformation_criteri
      * @param number $weight
      * @throws Exception
      */
-    public function __construct($name, $valuearray, $minval, $maxval, $ishomo, $weight) {
+    public function __construct($name, $valuearray, $minval, $maxval, $ishomo, $weight, $distance = "bin_distance") {
         $this->set_name($name);
         $this->set_min_value($minval);
         $this->set_max_value($maxval);

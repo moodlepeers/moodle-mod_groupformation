@@ -88,6 +88,8 @@ class mod_groupformation_basic_algorithm implements mod_groupformation_ialgorith
         }
 
         $this->matcher = $matcher;
+        echo($matcher);
+        die();
         $this->evaluator = new mod_groupformation_evaluator();
         $this->groupsize = $groupsize;
         $this->init();

@@ -54,6 +54,7 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
     public function __construct() {
 //        $this->distancefunction = new mod_groupformation_manhattan_distance();
         $this->distancefunction = new mod_groupformation_bin_distance();
+
     }
 
     /**
