@@ -65,6 +65,8 @@ abstract class mod_groupformation_criterion {
     }
 
     /**
+     * Sets distance
+     *
      * @param string $distance
      */
     public function set_distance($distance) {

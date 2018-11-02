@@ -48,6 +48,7 @@ class mod_groupformation_one_of_bin_criterion extends mod_groupformation_criteri
      * @param number $maxval
      * @param bool $ishomo
      * @param number $weight
+     * @param string $distance
      * @throws Exception
      */
     public function __construct($name, $valuearray, $minval, $maxval, $ishomo, $weight, $distance = "bin_distance") {
