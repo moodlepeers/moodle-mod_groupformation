@@ -84,10 +84,14 @@ require(['jquery', 'jqueryui'], function($) {
                 $('#id_knowledge').prop('checked', false);
                 $('#id_knowledgelines').attr('disabled', 'disabled');
 
+                switchTopics('enable');
+
                 $("#js_knowledgeWrapper").hide('2000', 'swing');
             } else {
                 $('#id_knowledge').prop('checked', true);
                 $('#id_knowledgelines').removeAttr('disabled');
+
+                switchTopics('disable');
 
                 $("#js_knowledgeWrapper").show('2000', 'swing');
             }
