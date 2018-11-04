@@ -80,9 +80,6 @@ class mod_groupformation_participant_parser {
     private function parse($users, $labels, $weights = null) {
 
         $participants = array();
-        var_dump($users[0]);
-        var_dump('<br>');
-        var_dump($weights);
         foreach ($users as $user) {
             $position = 0;
             $participant = null;
