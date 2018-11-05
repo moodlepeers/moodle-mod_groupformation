@@ -45,16 +45,16 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion
  */
 class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
 
-    /** @var mod_groupformation_manhattan_distance Object which implements IDistance*/
+    /** @var mod_groupformation_manhattan_distance Object which implements IDistance */
     private $distancefunction;
 
     /**
      * mod_groupformation_evaluator constructor.
+     * @param $distance
      */
-    public function __construct() {
-//        $this->distancefunction = new mod_groupformation_manhattan_distance();
-        $this->distancefunction = new mod_groupformation_bin_distance();
-
+    public function __construct($distance) {
+        $class = "mod_groupformation_" . $distance;
+        $this->distancefunction = new $class();
     }
 
     /**
