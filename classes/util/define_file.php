@@ -42,7 +42,7 @@ class mod_groupformation_data {
                     "scenarios" => array(1, 2),
                     "evaluation" => true,
                     "labels" => array(
-                            // TODO discuss with Henrik which questions to use how.
+                        // TODO discuss with Henrik which questions to use how.
                             "extraversion" => array(
                                     "scenarios" => array(1 => false, 2 => false),  // False = heterogeneous, True = homogeneous.
                                     "evaluation" => true,  // Use for displaying it to user (to compare to group and course).
@@ -87,8 +87,8 @@ class mod_groupformation_data {
                     "evaluation" => true,
                     "labels" => array(
                             "challenge" => array(
-                                    // TODO: support scenariocriteriontypes and allow "none" to not use it for grouping.
-                                   // Added for displaying feedback to user; no true/false asignment to prevent algorithmic usage.
+                                // TODO: support scenariocriteriontypes and allow "none" to not use it for grouping.
+                                // Added for displaying feedback to user; no true/false asignment to prevent algorithmic usage.
                                     "scenarios" => array(1 => false),
                                     "evaluation" => true,
                                     "questionids" => array(6, 8, 10, 15, 17),

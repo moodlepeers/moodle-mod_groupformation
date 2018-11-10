@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="FAM questionnaire">
-     <QUESTIONS VERSION="2017060319">
+     <QUESTIONS VERSION="2018111001">
 		 <QUESTION ID="1" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[I like such kinds of courses.]]>
