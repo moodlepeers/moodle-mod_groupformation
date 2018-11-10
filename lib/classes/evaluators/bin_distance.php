@@ -58,8 +58,8 @@ class mod_groupformation_bin_distance implements mod_groupformation_idistance {
 
         foreach ($cr1->get_values() as $p) {
             if ($p == 1) {
-                $dis = strcmp($p, $cr2->get_value($index));
-                if ($dis != 0) {
+                $distance = strcmp($p, $cr2->get_value($index));
+                if ($distance != 0) {
                     return 1.0;
                 }
                 break;
@@ -75,12 +75,10 @@ class mod_groupformation_bin_distance implements mod_groupformation_idistance {
      *
      * @param mod_groupformation_criterion $c1
      * @param mod_groupformation_criterion $c2
-     * @return float  in [0,1] normalized distance (divided by number of criteria values and value interval space)
+     * @return float 1 or 0
      */
     public function normalized_distance(mod_groupformation_criterion $c1, mod_groupformation_criterion $c2) {
-
-        $result = ($this->get_distance($c1, $c2) / count($c1->get_values()));
-        return $result;
+        return $this->get_distance($c1, $c2);
     }
 
 }
