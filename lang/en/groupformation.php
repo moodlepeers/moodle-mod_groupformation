@@ -89,6 +89,14 @@ $string ['topics_description_extended'] = 'Please list topics for the students t
 $string ['topics_question'] = 'Please sort the following topics regarding your personal interests and start with your favorite topic. Sort via drag and drop.';
 $string ['topicchoice'] = 'Topic selection';
 $string ['useOneLineForEachTopic'] = 'Use one line for each topic';
+
+$string ['oneOfBinQuestion'] = 'One-of-bin question';
+$string ['oneOfBinAnswers'] = 'One-of-bin answers';
+$string ['oneOfBinImportance'] = 'One-of-bin importance';
+$string ['oneOfBinRelation'] = 'One-of-bin relation';
+$string ['homogenous'] = 'Homogenous';
+$string ['heterogenous'] = 'Heterogenous';
+
 $string ['knowledge'] = 'Knowledge';
 $string ['knowledge_help'] = 'If topics (option below) are activated, this option gets automatically deactivated and disabled.';
 $string ['knowledge_description'] = 'I want to include knowledge questions';

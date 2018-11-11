@@ -187,6 +187,9 @@ class mod_groupformation_mod_form extends moodleform_mod {
         $assign = array();
         $assign['teacherinfo'] = $teacherinfo;
 
+        $subjects = ['Computer Science', 'Math', 'English', 'Physics'];
+        $assign['subjects'] = $subjects;
+
         $context = $PAGE->context;
         $enrolledstudents = array_keys(get_enrolled_users($context, 'mod/groupformation:onlystudent'));
         $enrolledprevusers = array_keys(get_enrolled_users($context, 'mod/groupformation:editsettings'));
@@ -232,6 +235,19 @@ class mod_groupformation_mod_form extends moodleform_mod {
             get_string('scenario_presentationgroups', 'groupformation')), null);
 
         $mform->addRule('szenario', get_string('scenario_error', 'groupformation'), 'required', null, 'client');
+
+        // Add one of bin question.
+        $mform->addElement('checkbox', 'oneofbin', get_string('oneOfBinQuestion', 'groupformation'));
+        $mform->addElement('textarea', 'oneofbinquestion', get_string('oneOfBinQuestion', 'groupformation'),
+            'wrap="virtual" rows="1" cols="50"');
+        $mform->addElement('textarea', 'oneofbinanswers', get_string('oneOfBinAnswers', 'groupformation'),
+            'wrap="virtual" rows="10" cols="50"');
+        $mform->addElement('text', 'oneofbinimportance', get_string('oneOfBinImportance', 'groupformation'), null);
+        $mform->setType('oneofbinimportance', PARAM_INT);
+        $mform->addElement('select', 'oneofbinrelation', get_string('oneOfBinRelation', 'groupformation'), array(
+            get_string('homogenous', 'groupformation'),
+            get_string('heterogenous', 'groupformation')), null);
+
 
         // Add fields for Knowledge questions.
         $mform->addElement('checkbox', 'knowledge', get_string('knowledge', 'groupformation'));

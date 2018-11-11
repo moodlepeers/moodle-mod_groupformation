@@ -126,6 +126,162 @@ defined('MOODLE_INTERNAL') || die();
         <div class="gf_settings_pad">
         </div>
 
+        <!-- Start:one of bin section -->
+        <div class="gf_settings_pad">
+            <div class="gf_pad_header">
+                <label class="gf_label" for="id_js_one_of_bin">
+                    <input type="checkbox" id="id_js_one_of_bin" name="chbOneOfBin" value="wantOneOfBin" />
+                    One of bin question.
+                </label>
+            </div>
+            <div class="gf_pad_content" id="js_oneOfBin">
+                <p id="oneOfBinInfoText">Here you can choose the subjects for your one of bin!</p>
+                <input type="text" class="respwidth" id="js_oob_question" placeholder="Please add the one of Bin question here!" style="width: 80%" />
+                <div class="grid">
+                    <div class="multi_field_wrapper persist-area">
+                        <div class="col_m_50">
+                            <h5>
+                                Subjects:
+                            </h5>
+                            <div class="multi_fields">
+                                <!--
+                                <?php
+                                foreach ($this->_['subjects'] as $key => $subject){
+                                    $html = '<div class="multi_field" id="subject'.$key.'">';
+                                    //$html .= '<label class="gf_label" for="subject'.$key.'">';
+                                    $html .= '<input type="checkbox" id="id_js_subject_'.$key.'" name="one_of_bin_subjects">';
+                                    $html .= $subject;
+                                    //$html .= '</label>';
+                                    $html .= '</div>';
+                                    echo $html;
+                                }
+                                ?>-->
+                                <div class="multi_fields">
+                                    <div class="multi_field" id="gf_oob_input0">
+                                        <input class="respwidth js_oneOfBinInput" type="text">
+                                        <button type="button" class="remove_field gf_button gf_button_circle gf_button_small">
+
+                                        </button>
+                                    </div>
+                                    <div class="multi_field" id="gf_oob_input1">
+                                        <input class="respwidth js_oneOfBinInput" type="text">
+                                        <button type="button" class="remove_field gf_button gf_button_circle gf_button_small">
+
+                                        </button>
+                                    </div>
+                                    <div class="multi_field" id="gf_oob_input2">
+                                        <input class="respwidth js_oneOfBinInput lastInput" type="text" placeholder="
+                                            <?php echo get_string('add_line', 'groupformation');?>
+                                        ">
+                                        <button type="button"
+                                                class="remove_field gf_button gf_button_circle gf_button_small"
+                                                disabled="disabled">
+
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col_m_50">
+                            <div id="gf_oneOfBinImportanceDiv">
+                                <h5 id="gf_one_of_bin_Importance">
+                                    Importance: 5
+                                </h5>
+                                <p>You can choose the importance of this question here</p>
+
+                                <div class="col_m_100">
+                                    <!--
+                                <table class="responsive-table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">
+                                            How important is this question ?
+                                        </th>
+                                        <th scope="col">
+                                            <div class="legend">
+                                                0 = not important, 10 = very important
+                                            </div>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="preknowledges">
+                                    <tr class="knowlRow" id="prkRow0">
+                                        <th scope="row">
+                                            Importance
+                                        </th>
+
+                                        <td data-title="0 = not important, 100 = very important" class="range">
+                                                    <span >
+                                                        0
+                                                    </span>
+                                            <input type="range"  list="gfOneOfBinImpValues" min="0" max="10" value="5" />
+                                            <span>
+                                                        10
+                                                    </span>
+                                            <datalist id="gfOneOfBinImpValues">
+                                                <option value="0" label="0%">
+                                                <option value="1">
+                                                <option value="2">
+                                                <option value="3">
+                                                <option value="4">
+                                                <option value="5" label="50%">
+                                                <option value="6">
+                                                <option value="7">
+                                                <option value="8">
+                                                <option value="9">
+                                                <option value="10" label="100%">
+                                            </datalist>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+
+                                </table>
+                                -->
+
+                                    <span >
+                                        0
+                                    </span>
+                                    <input type="range" id="gf_importance_slider" list="gfOneOfBinImpValues" min="0" max="10" value="5" />
+                                    <span>
+                                        10
+                                    </span>
+                                    <datalist id="gfOneOfBinImpValues">
+                                        <option value="0" label="0%">
+                                        <option value="1">
+                                        <option value="2">
+                                        <option value="3">
+                                        <option value="4">
+                                        <option value="5" label="50%">
+                                        <option value="6">
+                                        <option value="7">
+                                        <option value="8">
+                                        <option value="9">
+                                        <option value="10" label="100%">
+                                    </datalist>
+                                </div>
+                            </div>
+                            <div id="gf_oneOfBinRelation">
+                                <h5>Relation: </h5>
+                                <p>Choose the required relation between the groupmembers.</p>
+                                <select id="gf_oneOfBinRelationSelect">
+                                    <option value="homogen">
+                                        Homogen
+                                    </option>
+                                    <option value="heterogen">
+                                        Heterogen
+                                    </option>
+
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End: one of bin section -->
+
         <div class="gf_settings_pad">
             <div class="gf_pad_header">
                 <label class="gf_label" for="id_js_knowledge">

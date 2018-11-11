@@ -94,6 +94,18 @@ require(['jquery', 'jqueryui'], function($) {
 
         });
 
+        /*
+        $('#gfOneOfBinImpValues').val().change(funciton(){
+            $("#gf_one_of_bin_Importance").html(5);
+            console.log(es wurde etwas geändert);
+        });
+        */
+
+        $('#gf_importance_slider').change(function(){
+            alert("The text has been changed.");
+            console.log('es wurde etwas geändert');
+        });
+
         // If topics gets checked.
         $('#id_js_topics').click(function () {
             if ($('#id_topics').prop('checked')) {
@@ -772,5 +784,7 @@ require(['jquery', 'jqueryui'], function($) {
                 scrollTop: $($param).offset().top
             }, 80);
         }
+
+
     });
 });
