@@ -102,7 +102,14 @@ require(['jquery', 'jqueryui'], function($) {
         */
 
         $('#gf_importance_slider').change(function(){
-
+            var s = $('#gf_one_of_bin_Importance').html();
+            s = s.replace(/\ /g,"");
+            var r = s.split("");
+            if (r[r.length -2] != 1){
+                s = s.replace("1", "");
+            }
+            var l = s.replace(r[r.length-2], " " + $('#gf_importance_slider').val());
+            $('#gf_one_of_bin_Importance').html(l);
         });
 
         // If topics gets checked.
