@@ -96,6 +96,15 @@ $string ['oneOfBinImportance'] = 'One-of-bin importance';
 $string ['oneOfBinRelation'] = 'One-of-bin relation';
 $string ['homogenous'] = 'Homogenous';
 $string ['heterogenous'] = 'Heterogenous';
+$string ['choose_oob_answers'] = 'Here you can choose the answers for your choice-question!';
+$string ['add_oob_question'] = 'Please add the choice-question here!';
+$string ['answers'] = 'Answers:';
+$string ['importance'] = 'Importance:';
+$string ['choose_oob_importance'] = 'You can choose the importance of this question here';
+$string ['relation'] = 'Relation:';
+$string ['choose_oob_relation'] = 'Choose the required relation between the groupmembers.';
+$string ['choose_answer'] = 'Choose one answer!';
+$string ['no_oob_question'] = 'No choice-question is chosen!';
 
 $string ['knowledge'] = 'Knowledge';
 $string ['knowledge_help'] = 'If topics (option below) are activated, this option gets automatically deactivated and disabled.';

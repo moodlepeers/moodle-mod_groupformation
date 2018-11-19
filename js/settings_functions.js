@@ -102,8 +102,7 @@ require(['jquery', 'jqueryui'], function($) {
         */
 
         $('#gf_importance_slider').change(function(){
-            alert("The text has been changed.");
-            console.log('es wurde etwas geändert');
+
         });
 
         // If topics gets checked.
