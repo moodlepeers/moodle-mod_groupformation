@@ -134,7 +134,7 @@ defined('MOODLE_INTERNAL') || die();
                     <?php echo get_string('oneOfBinQuestion', 'groupformation'); ?>
                 </label>
             </div>
-            <div class="gf_pad_content" id="js_oneOfBinWrapper">
+            <div class="gf_pad_content" id="js_oneOfBinWrapper" style="display:none;">
                 <p id="oneOfBinInfoText"><?php echo get_string('choose_oob_answers', 'groupformation'); ?></p>
                 <input type="text" class="respwidth" id="js_oob_question" placeholder="<?php echo get_string('add_oob_question', 'groupformation'); ?>" style="width: 80%" />
                 <div class="grid">
@@ -181,7 +181,7 @@ defined('MOODLE_INTERNAL') || die();
                                         <span >
                                             0
                                         </span>
-                                        <input type="range" id="gf_importance_slider" list="gfOneOfBinImpValues" min="0" max="10" value="5" />
+                                        <input type="range" id="id_js_oneofbinimportance" list="gfOneOfBinImpValues" min="0" max="10" value="5" />
                                         <span>
                                             10
                                         </span>
@@ -203,7 +203,7 @@ defined('MOODLE_INTERNAL') || die();
                                 <div id="gf_oneOfBinRelation">
                                     <h5><?php echo get_string('relation', 'groupformation'); ?> </h5>
                                     <p><?php echo get_string('choose_oob_relation', 'groupformation'); ?></p>
-                                    <select id="gf_oneOfBinRelationSelect">
+                                    <select id="id_js_oneofbinrelation">
                                         <option value="homogenous">
                                             <?php echo get_string('homogenous', 'groupformation'); ?>
                                         </option>
@@ -228,20 +228,19 @@ defined('MOODLE_INTERNAL') || die();
 
                                         <thead>
                                         <tr>
-                                            <th scope="col">
-                                                <?php echo get_string('choose_answer', 'groupformation'); ?>
+                                            <th id="oobquestion" scope="col">
+                                                <?php echo get_string('no_oob_question', 'groupformation');?>
                                             </th>
                                             <th></th>
                                         </tr>
                                         </thead>
                                         <tbody id="oneofbinpreview">
-                                        <tr class="knowlRow" id="oobQues">
+                                        <tr class="knowlRow">
                                             <th scope="row">
-                                                <?php echo get_string('no_oob_question', 'groupformation');?>
+                                                <?php echo get_string('choose_answer', 'groupformation'); ?>
                                             </th>
 
-                                            <td data-title="<?php echo get_string('knowledge_scale',
-                                                'groupformation');?>" class="range">
+                                            <td class="range">
                                                 <select id="oobpreviewdd">
                                                     <option class="oobRow" id="oobRow0">
                                                         <?php echo get_string('knowledge_dummy',

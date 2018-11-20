@@ -117,22 +117,19 @@ require(['jquery', 'jqueryui'], function($) {
 
         });
 
-        /*
-        $('#gfOneOfBinImpValues').val().change(funciton(){
-            $("#gf_one_of_bin_Importance").html(5);
-            console.log(es wurde etwas geändert);
-        });
-        */
 
-        $('#gf_importance_slider').change(function(){
+
+        $('#id_js_oneofbinimportance').change(function(){
             var old = $('#gf_one_of_bin_Importance').html();
             old = old.replace(/\ /g,"");
             var r = old.split("");
             if (r[r.length -2] != 1){
                 old = old.replace("1", "");
             }
-            var l = old.replace(r[r.length-2], " " + $('#gf_importance_slider').val());
+            var l = old.replace(r[r.length-2], " " + $('#id_js_oneofbinimportance').val());
             $('#gf_one_of_bin_Importance').html(l);
+
+            $('#id_oneofbinimportance').val($('#id_js_oneofbinimportance').val());
         });
 
         // If topics gets checked.
@@ -143,6 +140,21 @@ require(['jquery', 'jqueryui'], function($) {
             } else {
                 switchTopics('on');
                 switchKnowledge('off');
+            }
+        });
+
+        // Dynamic input oobquestion.
+        $('#js_oob_question').keyup(function oobquestionInput() {
+            $('#oobquestion').text($(this).val());
+            $('#id_oneofbinquestion').val($(this).val());
+        });
+
+        // Change oob-Relation
+        $('#id_js_oneofbinrelation').change(function oobRelChange () {
+            if ($(this).val() == 'homogenous') {
+                $('#id_oneofbinrelation option').prop('selected', false).filter('[value=0]').prop('selected', true);
+            } else if ($(this).val() == 'heterogenous') {
+                $('#id_oneofbinrelation option').prop('selected', false).filter('[value=1]').prop('selected', true);
             }
         });
 
@@ -489,6 +501,47 @@ require(['jquery', 'jqueryui'], function($) {
                     adjustGroupSizeOptions('none');
 
                     $("#js_topicsWrapper").show('2000', 'swing');
+                }
+            }
+
+            //if oneofbin was checked before.
+            // TODO testen!!!
+            if ($('#id_oneofbin').prop('checked')) {
+                $('#id_js_oneofbin').prop('checked', true);
+                $('#id_oneofbin').prop('checked', true);
+                $("#js_oneOFBinWrapper").show('2000', 'swing');
+
+                // Get the value of Moodle nativ field #id_knowledgelines, parse it and create dynamic input fields.
+                var lines = $('textarea[name=oneofbinanswers]').val().split('\n');
+                wrapper = $('#oob').find('.multi_fields');
+                cat = 'prk';
+                $.each(lines, function () {
+                    addInput(wrapper, cat, this);
+                });
+                for (var i = 0, l = 3; i < l; i++) {
+                    // Remove the first 3 dynamic fields which been created by default.
+                    removeInput(wrapper, cat, i);
+                }
+                addInput(wrapper, cat, '');
+
+                // TODO Muss erweitert werden
+                var question = $('#id_oneofbinquestion').val();
+                $('#js_oob_question').text(question);
+
+                if($('#id_oneofbinrelation option:selected').val() != 0){
+                    var opt = $('#id_oneofbinrelation option:selected').val();
+                    if (opt == 0){
+                        $('#id_js_oneofbinrelation').prop('selected',false).filter('[value=homogenous]').prop('selected',true);
+                    } else if (opt == 1){
+                        $('#id_js_oneofbinrelation').prop('selected',false).filter('[value=heterogenous]').prop('selected',true);
+                    }
+                }
+
+                if (!($('id_oneofbinquestion').val().trim())){
+                    var value = parseInt($('id_oneofbinquestion').val());
+                    if (value >= 0 && value <= 10){
+                        $('id_js_oneofbinimportance').val(value);
+                    }
                 }
             }
 
