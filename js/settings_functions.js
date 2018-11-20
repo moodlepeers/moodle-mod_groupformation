@@ -78,6 +78,29 @@ require(['jquery', 'jqueryui'], function($) {
             });
         }
 
+        // If oob gets checked
+
+        $('#id_js_oneofbin').click(function () {
+            if ($('#id_oneofbin').prop('checked')) {
+                $('#id_oneofbin').prop('checked', false);
+                $('#id_oneofbinquestion').attr('disabled', 'disabled');
+                $('#id_oneofbinanswers').attr('disabled', 'disabled');
+                $('#id_oneofbinrelation').attr('disabled', 'disabled');
+                $('#id_oneofbinimportance').attr('disabled', 'disabled');
+
+                $("#js_oneOfBinWrapper").hide('2000', 'swing');
+            } else {
+                $('#id_oneofbin').prop('checked', true);
+                $('#id_oneofbinquestion').removeAttr('disabled');
+                $('#id_oneofbinanswers').removeAttr('disabled');
+                $('#id_oneofbinrealtion').removeAttr('disabled');
+                $('#id_oneofbinimportance').removeAttr('disabled');
+
+                $("#js_oneOfBinWrapper").show('2000', 'swing');
+            }
+
+        });
+
         // If knowledge gets checked.
         $('#id_js_knowledge').click(function () {
             if ($('#id_knowledge').prop('checked')) {
@@ -102,13 +125,13 @@ require(['jquery', 'jqueryui'], function($) {
         */
 
         $('#gf_importance_slider').change(function(){
-            var s = $('#gf_one_of_bin_Importance').html();
-            s = s.replace(/\ /g,"");
-            var r = s.split("");
+            var old = $('#gf_one_of_bin_Importance').html();
+            old = old.replace(/\ /g,"");
+            var r = old.split("");
             if (r[r.length -2] != 1){
-                s = s.replace("1", "");
+                old = old.replace("1", "");
             }
-            var l = s.replace(r[r.length-2], " " + $('#gf_importance_slider').val());
+            var l = old.replace(r[r.length-2], " " + $('#gf_importance_slider').val());
             $('#gf_one_of_bin_Importance').html(l);
         });
 
@@ -156,6 +179,10 @@ require(['jquery', 'jqueryui'], function($) {
                     synchronizeTopics();
                     computeGroupSizeParameters(0, countTopics());
                     setGroupSettings();
+                }
+                if (cat == 'oob'){
+                    $('#' + $previewRowID).text($(this).val());
+                    synchronizeoob();
                 }
             });
         });
@@ -349,6 +376,9 @@ require(['jquery', 'jqueryui'], function($) {
                 $('.topicLi:first-child', '#previewTopics').clone(true).attr('id', $previewRowID)
                     .appendTo('#previewTopics').html('<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>').append(document.createTextNode(value));
             }
+            if (cat == 'oob'){
+                $('.oobRow:first-child', '#oobpreviewdd').clone(true).attr('id', $previewRowID).appendTo('#oobpreviewdd').text(value);
+            }
         }
 
         /**
@@ -402,6 +432,16 @@ require(['jquery', 'jqueryui'], function($) {
                 }
             });
             $('#id_topiclines').val(stringOfTopics.slice(0, -1));
+        }
+
+        function synchronizeoob() {
+            stringOfPreAnswers = '';
+            $('.js_preknowledgeInput').each(function () {
+                if (!$(this).val() == '') {
+                    stringOfPreAnswers += $(this).val() + '\n';
+                }
+            });
+            $('#id_oneofbinanswers').val(stringOfPreAnswers.slice(0, -1));
         }
 
         /**

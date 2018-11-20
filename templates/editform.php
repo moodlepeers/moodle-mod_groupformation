@@ -129,12 +129,12 @@ defined('MOODLE_INTERNAL') || die();
         <!-- Start:one of bin section -->
         <div class="gf_settings_pad">
             <div class="gf_pad_header">
-                <label class="gf_label" for="id_js_one_of_bin">
-                    <input type="checkbox" id="id_js_one_of_bin" name="chbOneOfBin" value="wantOneOfBin" />
+                <label class="gf_label" for="id_js_oneofbin">
+                    <input type="checkbox" id="id_js_oneofbin" name="chbOneOfBin" value="wantOneOfBin" />
                     <?php echo get_string('oneOfBinQuestion', 'groupformation'); ?>
                 </label>
             </div>
-            <div class="gf_pad_content" id="js_oneOfBin">
+            <div class="gf_pad_content" id="js_oneOfBinWrapper">
                 <p id="oneOfBinInfoText"><?php echo get_string('choose_oob_answers', 'groupformation'); ?></p>
                 <input type="text" class="respwidth" id="js_oob_question" placeholder="<?php echo get_string('add_oob_question', 'groupformation'); ?>" style="width: 80%" />
                 <div class="grid">
@@ -235,7 +235,7 @@ defined('MOODLE_INTERNAL') || die();
                                         </tr>
                                         </thead>
                                         <tbody id="oneofbinpreview">
-                                        <tr class="knowlRow" id="oobRow0">
+                                        <tr class="knowlRow" id="oobQues">
                                             <th scope="row">
                                                 <?php echo get_string('no_oob_question', 'groupformation');?>
                                             </th>
@@ -243,13 +243,17 @@ defined('MOODLE_INTERNAL') || die();
                                             <td data-title="<?php echo get_string('knowledge_scale',
                                                 'groupformation');?>" class="range">
                                                 <select id="oobpreviewdd">
-                                                    <option value="oobpre0">
+                                                    <option class="oobRow" id="oobRow0">
                                                         <?php echo get_string('knowledge_dummy',
                                                             'groupformation');?> 1
                                                     </option>
-                                                    <option id="oobpre1">
+                                                    <option class="oobRow" id="oobRow1">
                                                         <?php echo get_string('knowledge_dummy',
                                                             'groupformation');?> 2
+                                                    </option>
+                                                    <option class="oobRow" id="oobRow2">
+                                                        <?php echo get_string('knowledge_dummy',
+                                                            'groupformation');?> 3
                                                     </option>
                                                 </select>
 
