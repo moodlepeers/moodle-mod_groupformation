@@ -148,19 +148,19 @@ defined('MOODLE_INTERNAL') || die();
 
                                 <div class="multi_fields">
                                     <div class="multi_field" id="inputoob0">
-                                        <input class="respwidth" type="text">
+                                        <input class="respwidth js_oneofbinInput" type="text">
                                         <button type="button" class="remove_field gf_button gf_button_circle gf_button_small">
 
                                         </button>
                                     </div>
                                     <div class="multi_field" id="inputoob1">
-                                        <input class="respwidth" type="text">
+                                        <input class="respwidth js_oneofbinInput" type="text">
                                         <button type="button" class="remove_field gf_button gf_button_circle gf_button_small">
 
                                         </button>
                                     </div>
                                     <div class="multi_field" id="inputoob2">
-                                        <input class="respwidth lastInput" type="text" placeholder="
+                                        <input class="respwidth js_oneofbinInput lastInput" type="text" placeholder="
                                             <?php echo get_string('add_line', 'groupformation');?>
                                         ">
                                         <button type="button"
@@ -171,9 +171,10 @@ defined('MOODLE_INTERNAL') || die();
                                     </div>
                                 </div>
                                 <div id="gf_oneOfBinImportanceDiv">
-                                    <h5 id="gf_one_of_bin_Importance">
-                                        <?php echo get_string('importance', 'groupformation'); ?> 5
+                                    <h5>
+                                        <?php echo get_string('importance', 'groupformation'); ?>
                                     </h5>
+                                    <p id="gf_one_of_bin_Importance"><?php echo get_string('oob_selected_value', 'groupformation'); ?></p>
                                     <p><?php echo get_string('choose_oob_importance', 'groupformation'); ?></p>
 
                                     <div >
@@ -181,7 +182,7 @@ defined('MOODLE_INTERNAL') || die();
                                         <span >
                                             0
                                         </span>
-                                        <input type="range" id="id_js_oneofbinimportance" list="gfOneOfBinImpValues" min="0" max="10" value="5" />
+                                        <input type="range" id="id_js_oneofbinimportance" list="gfOneOfBinImpValues" min="0" max="10" value="0" />
                                         <span>
                                             10
                                         </span>
@@ -202,6 +203,7 @@ defined('MOODLE_INTERNAL') || die();
                                 </div>
                                 <div id="gf_oneOfBinRelation">
                                     <h5><?php echo get_string('relation', 'groupformation'); ?> </h5>
+                                    <p id="js_oobrelselval"><?php echo get_string('oob_selected_value', 'groupformation'); ?></p>
                                     <p><?php echo get_string('choose_oob_relation', 'groupformation'); ?></p>
                                     <select id="id_js_oneofbinrelation">
                                         <option value="homogenous">

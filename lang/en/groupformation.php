@@ -105,6 +105,7 @@ $string ['relation'] = 'Relation:';
 $string ['choose_oob_relation'] = 'Choose the required relation between the groupmembers.';
 $string ['choose_answer'] = 'Choose one answer!';
 $string ['no_oob_question'] = 'No choice-question is chosen!';
+$string ['oob_selected_value'] = 'Selected value: ';
 
 $string ['knowledge'] = 'Knowledge';
 $string ['knowledge_help'] = 'If topics (option below) are activated, this option gets automatically deactivated and disabled.';

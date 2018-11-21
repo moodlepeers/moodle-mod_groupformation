@@ -248,6 +248,12 @@ class mod_groupformation_mod_form extends moodleform_mod {
             get_string('homogenous', 'groupformation'),
             get_string('heterogenous', 'groupformation')), null);
 
+        $mform->disabledIf('oneofbinquestion', 'oneofbin', 'notchecked');
+        $mform->disabledIf('oneofbinanswers', 'oneofbin', 'notchecked');
+        $mform->disabledIf('oneofbinimportance', 'oneofbin', 'notchecked');
+        $mform->disabledIf('oneofbinrelation', 'oneofbin', 'notchecked');
+
+
 
         // Add fields for Knowledge questions.
         $mform->addElement('checkbox', 'knowledge', get_string('knowledge', 'groupformation'));

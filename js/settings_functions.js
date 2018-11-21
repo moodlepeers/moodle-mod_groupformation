@@ -14,7 +14,7 @@ require(['jquery', 'jqueryui'], function($) {
 
         $(".settings_info").hide();
 
-        $("#non-js-content").hide();
+        //$("#non-js-content").hide();
         $("#js-content").show();
 
         var studentsInCourse = $('#studentsInCourse').text();
@@ -118,18 +118,19 @@ require(['jquery', 'jqueryui'], function($) {
         });
 
 
-
+        // Importance Slider update oob.
         $('#id_js_oneofbinimportance').change(function(){
-            var old = $('#gf_one_of_bin_Importance').html();
-            old = old.replace(/\ /g,"");
-            var r = old.split("");
-            if (r[r.length -2] != 1){
-                old = old.replace("1", "");
+            var text = $('#gf_one_of_bin_Importance').html();
+            var oldValue = text.match(/\d+/);
+            var value = $('#id_js_oneofbinimportance').val();
+            if (oldValue == null){
+                text = text.replace(': ', ': ' + value);
+            } else {
+                text = text.replace(oldValue, value);
             }
-            var l = old.replace(r[r.length-2], " " + $('#id_js_oneofbinimportance').val());
-            $('#gf_one_of_bin_Importance').html(l);
+            $('#gf_one_of_bin_Importance').html(text);
 
-            $('#id_oneofbinimportance').val($('#id_js_oneofbinimportance').val());
+            $('#id_oneofbinimportance').val(value);
         });
 
         // If topics gets checked.
@@ -150,11 +151,27 @@ require(['jquery', 'jqueryui'], function($) {
         });
 
         // Change oob-Relation
+        function oobChangeSelValue(value){
+            var text = $('#js_oobrelselval').html();
+            var oldValue = text.match(/homogenous/);
+            if (oldValue == null){
+                oldValue = text.match(/heterogenous/);
+            }
+            if (oldValue == null){
+                text = text.replace(': ', ': ' + value);
+            } else {
+                text = text.replace(oldValue, value);
+            }
+            $('#js_oobrelselval').html(text);
+        }
+
         $('#id_js_oneofbinrelation').change(function oobRelChange () {
             if ($(this).val() == 'homogenous') {
                 $('#id_oneofbinrelation option').prop('selected', false).filter('[value=0]').prop('selected', true);
+                oobChangeSelValue('homogenous');
             } else if ($(this).val() == 'heterogenous') {
                 $('#id_oneofbinrelation option').prop('selected', false).filter('[value=1]').prop('selected', true);
+                oobChangeSelValue('heterogenous');
             }
         });
 
@@ -417,6 +434,9 @@ require(['jquery', 'jqueryui'], function($) {
                     computeGroupSizeParameters(0, countTopics());
                     setGroupSettings();
                 }
+                if (cat == oob){
+                    synchronizeoob();
+                }
             }
         }
 
@@ -448,7 +468,7 @@ require(['jquery', 'jqueryui'], function($) {
 
         function synchronizeoob() {
             stringOfPreAnswers = '';
-            $('.js_preknowledgeInput').each(function () {
+            $('.js_oneofbinInput').each(function () {
                 if (!$(this).val() == '') {
                     stringOfPreAnswers += $(this).val() + '\n';
                 }
@@ -504,7 +524,7 @@ require(['jquery', 'jqueryui'], function($) {
                 }
             }
 
-            //if oneofbin was checked before.
+            // If oneofbin was checked before.
             // TODO testen!!!
             if ($('#id_oneofbin').prop('checked')) {
                 $('#id_js_oneofbin').prop('checked', true);
