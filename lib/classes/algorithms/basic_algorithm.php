@@ -88,9 +88,7 @@ class mod_groupformation_basic_algorithm implements mod_groupformation_ialgorith
         }
 
         $this->matcher = $matcher;
-
-        $criteria = $participants[0] -> get_criteria();
-        $this->evaluator = new mod_groupformation_evaluator($criteria[0] -> get_distance());
+        $this->evaluator = new mod_groupformation_evaluator();
         $this->groupsize = $groupsize;
         $this->init();
     }

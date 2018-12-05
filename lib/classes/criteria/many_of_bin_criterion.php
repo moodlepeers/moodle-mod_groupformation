@@ -37,10 +37,10 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class mod_groupformation_one_of_bin_criterion extends mod_groupformation_criterion {
+class mod_groupformation_many_of_bin_criterion extends mod_groupformation_criterion {
 
     /**
-     * mod_groupformation_one_of_bin_criterion constructor.
+     * mod_groupformation_many_of_bin_criterion constructor.
      *
      * @param string $name
      * @param array $valuearray
@@ -51,7 +51,7 @@ class mod_groupformation_one_of_bin_criterion extends mod_groupformation_criteri
      * @param string $distance
      * @throws Exception
      */
-    public function __construct($name, $valuearray, $minval, $maxval, $ishomo, $weight, $distance = "bin_distance") {
+    public function __construct($name, $valuearray, $minval, $maxval, $ishomo, $weight, $distance = "many_bin_distance") {
         $this->set_name($name);
         $this->set_min_value($minval);
         $this->set_max_value($maxval);

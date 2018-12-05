@@ -31,9 +31,11 @@ if (!defined('MOODLE_INTERNAL')) {
 
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/manhattan_distance.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/bin_distance.php");
+require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/many_bin_distance.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/ievaluator.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/group.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion.php");
+require_once($CFG->dirroot . '/mod/groupformation/lib/classes/criteria/tests/test_one_of_bin.php');
 
 /**
  * Class mod_groupformation_evaluator
@@ -45,16 +47,10 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion
  */
 class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
 
-    /** @var mod_groupformation_manhattan_distance Object which implements IDistance */
-    private $distancefunction;
-
     /**
      * mod_groupformation_evaluator constructor.
-     * @param $distance
      */
-    public function __construct($distance) {
-        $class = "mod_groupformation_" . $distance;
-        $this->distancefunction = new $class();
+    public function __construct() {
     }
 
     /**
@@ -85,9 +81,23 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
         $gpi = 0.0; // float.
         $participants = $group->get_participants();
         $participantcount = count($participants);
+
         if ($participantcount == 0) {
             return 0;
         }
+
+        //TODO delete if is not running in test mode
+        ###################### TEST #######################
+        $test = new test_one_of_bin();
+        $participants = $test->create_participants($participants);
+//        $participants = $test->create_manually_participant();
+        $participantcount = count($participants);
+
+        if ($participantcount == 0) {
+            return 0;
+        }
+        ###################################################
+
 
         // Calculate npi for every pair of entries in the  group g (but not double and not compare with oneself!)
         for ($i = 0; $i < $participantcount - 1; $i++) {
@@ -104,7 +114,6 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
         return $gpi;
         // TODO Test functionality  (yes!); Issue #3.
     }
-
 
     /**
      * Evaluate CPI
@@ -206,6 +215,7 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
         // Normlized pair performance index.
         $npi = 0.0; // float.
 
+
         if (count($p1->get_criteria()) !== count($p2->get_criteria())) {
             throw new Exception("calcPairPerformance: the entries have different count of criteria!!!");
         }
@@ -223,13 +233,24 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
                 throw new Exception("code error; unreachable state reached.");
             }
 
-            // Calculate Manhattan distanze for both Criteria.
+            // Calculate the specific distance
             // and normalize the distanze over the maximal amount of dimensions so evry criterion gets a value between 0 and 1.
             // (otherwise the criterion will be unthought weighted ).
+            $distance_name = "mod_groupformation_" . $c1->get_distance();
+            $temp_distance = new $distance_name;
 
-            $d = $this->distancefunction->normalized_distance($c1, $c2);
 
+            //TODO delete if is not running in test mode
+            ###################### TEST #######################
+            $test = new test_one_of_bin();
+            $test->log_criteria("criteria: ", $c1->get_name());
+            ###################################################
+
+            $d = $temp_distance->normalized_distance($c1, $c2);
+
+            $test->log_performance_index("normalized_distance: ", $d);
             $wd = $d * $c1->get_weight();
+
 
             if ($c1->is_homogeneous()) {
                 $homval += $wd;
