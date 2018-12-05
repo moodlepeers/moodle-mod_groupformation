@@ -1835,5 +1835,75 @@ function xmldb_groupformation_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2018072102, 'groupformation');
     }
 
+    if ($oldversion < 2018120500) {
+
+        // Define field binquestion to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('binquestion', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '0', 'szenario');
+
+        // Conditionally launch add field binquestion.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field binquestiontext to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('binquestiontext', XMLDB_TYPE_CHAR, '1000', null, null, null, null, 'binquestion');
+
+        // Conditionally launch add field binquestiontext.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field binquestionlines to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('binquestionlines', XMLDB_TYPE_TEXT, null, null, null, null, null, 'binquestiontext');
+
+        // Conditionally launch add field binquestionlines.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field binquestionvalues to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('binquestionvalues', XMLDB_TYPE_TEXT, null, null, null, null, null, 'binquestionlines');
+
+        // Conditionally launch add field binquestionvalues.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field binquestionnumber to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('binquestionnumber', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'binquestionvalues');
+
+        // Conditionally launch add field binquestionnumber.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field binquestionimportance to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('binquestionimportance', XMLDB_TYPE_NUMBER, '20, 8', null, null, null, null, 'binquestionnumber');
+
+        // Conditionally launch add field binquestionimportance.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field binquestionrelation to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('binquestionrelation', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'binquestionimportance');
+
+        // Conditionally launch add field binquestionrelation.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2018120500, 'groupformation');
+    }
+
+
     return true;
 }
