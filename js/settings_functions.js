@@ -81,20 +81,20 @@ require(['jquery', 'jqueryui'], function($) {
         // If oob gets checked
 
         $('#id_js_oneofbin').click(function () {
-            if ($('#id_oneofbin').prop('checked')) {
-                $('#id_oneofbin').prop('checked', false);
-                $('#id_oneofbinquestion').attr('disabled', 'disabled');
-                $('#id_oneofbinanswers').attr('disabled', 'disabled');
-                $('#id_oneofbinrelation').attr('disabled', 'disabled');
-                $('#id_oneofbinimportance').attr('disabled', 'disabled');
+            if ($('#id_binquestion').prop('checked')) {
+                $('#id_binquestion').prop('checked', false);
+                $('#id_binquestiontext').attr('disabled', 'disabled');
+                $('#id_binquestionlines').attr('disabled', 'disabled');
+                $('#id_binquestionrelation').attr('disabled', 'disabled');
+                $('#id_binquestionimportance').attr('disabled', 'disabled');
 
                 $("#js_oneOfBinWrapper").hide('2000', 'swing');
             } else {
-                $('#id_oneofbin').prop('checked', true);
-                $('#id_oneofbinquestion').removeAttr('disabled');
-                $('#id_oneofbinanswers').removeAttr('disabled');
+                $('#id_binquestion').prop('checked', true);
+                $('#id_binquestiontext').removeAttr('disabled');
+                $('#id_binquestionlines').removeAttr('disabled');
                 $('#id_oneofbinrealtion').removeAttr('disabled');
-                $('#id_oneofbinimportance').removeAttr('disabled');
+                $('#id_binquestionimportance').removeAttr('disabled');
 
                 $("#js_oneOfBinWrapper").show('2000', 'swing');
             }
@@ -130,7 +130,7 @@ require(['jquery', 'jqueryui'], function($) {
             }
             $('#gf_one_of_bin_Importance').html(text);
 
-            $('#id_oneofbinimportance').val(value);
+            $('#id_binquestionimportance').val(value);
         });
 
         // If topics gets checked.
@@ -147,7 +147,7 @@ require(['jquery', 'jqueryui'], function($) {
         // Dynamic input oobquestion.
         $('#js_oob_question').keyup(function oobquestionInput() {
             $('#oobquestion').text($(this).val());
-            $('#id_oneofbinquestion').val($(this).val());
+            $('#id_binquestiontext').val($(this).val());
         });
 
         // Change oob-Relation
@@ -167,10 +167,10 @@ require(['jquery', 'jqueryui'], function($) {
 
         $('#id_js_oneofbinrelation').change(function oobRelChange () {
             if ($(this).val() == 'homogenous') {
-                $('#id_oneofbinrelation option').prop('selected', false).filter('[value=0]').prop('selected', true);
+                $('#id_binquestionrelation option').prop('selected', false).filter('[value=0]').prop('selected', true);
                 oobChangeSelValue('homogenous');
             } else if ($(this).val() == 'heterogenous') {
-                $('#id_oneofbinrelation option').prop('selected', false).filter('[value=1]').prop('selected', true);
+                $('#id_binquestionrelation option').prop('selected', false).filter('[value=1]').prop('selected', true);
                 oobChangeSelValue('heterogenous');
             }
         });
@@ -473,7 +473,7 @@ require(['jquery', 'jqueryui'], function($) {
                     stringOfPreAnswers += $(this).val() + '\n';
                 }
             });
-            $('#id_oneofbinanswers').val(stringOfPreAnswers.slice(0, -1));
+            $('#id_binquestionlines').val(stringOfPreAnswers.slice(0, -1));
         }
 
         /**
@@ -526,9 +526,9 @@ require(['jquery', 'jqueryui'], function($) {
 
             // If oneofbin was checked before.
             // TODO testen!!!
-            if ($('#id_oneofbin').prop('checked')) {
+            if ($('#id_binquestion').prop('checked')) {
                 $('#id_js_oneofbin').prop('checked', true);
-                $('#id_oneofbin').prop('checked', true);
+                $('#id_binquestion').prop('checked', true);
                 $("#js_oneOFBinWrapper").show('2000', 'swing');
 
                 // Get the value of Moodle nativ field #id_knowledgelines, parse it and create dynamic input fields.
@@ -545,11 +545,11 @@ require(['jquery', 'jqueryui'], function($) {
                 addInput(wrapper, cat, '');
 
                 // TODO Muss erweitert werden
-                var question = $('#id_oneofbinquestion').val();
+                var question = $('#id_binquestiontext').val();
                 $('#js_oob_question').text(question);
 
-                if($('#id_oneofbinrelation option:selected').val() != 0){
-                    var opt = $('#id_oneofbinrelation option:selected').val();
+                if($('#id_binquestionrelation option:selected').val() != 0){
+                    var opt = $('#id_binquestionrelation option:selected').val();
                     if (opt == 0){
                         $('#id_js_oneofbinrelation').prop('selected',false).filter('[value=homogenous]').prop('selected',true);
                     } else if (opt == 1){
@@ -557,8 +557,8 @@ require(['jquery', 'jqueryui'], function($) {
                     }
                 }
 
-                if (!($('id_oneofbinquestion').val().trim())){
-                    var value = parseInt($('id_oneofbinquestion').val());
+                if (!($('id_binquestiontext').val().trim())){
+                    var value = parseInt($('id_binquestiontext').val());
                     if (value >= 0 && value <= 10){
                         $('id_js_oneofbinimportance').val(value);
                     }

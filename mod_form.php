@@ -237,21 +237,21 @@ class mod_groupformation_mod_form extends moodleform_mod {
         $mform->addRule('szenario', get_string('scenario_error', 'groupformation'), 'required', null, 'client');
 
         // Add one of bin question.
-        $mform->addElement('checkbox', 'oneofbin', get_string('oneOfBinQuestion', 'groupformation'));
-        $mform->addElement('textarea', 'oneofbinquestion', get_string('oneOfBinQuestion', 'groupformation'),
+        $mform->addElement('checkbox', 'binquestion', get_string('oneOfBinQuestion', 'groupformation'));
+        $mform->addElement('textarea', 'binquestiontext', get_string('oneOfBinQuestion', 'groupformation'),
             'wrap="virtual" rows="1" cols="50"');
-        $mform->addElement('textarea', 'oneofbinanswers', get_string('oneOfBinAnswers', 'groupformation'),
+        $mform->addElement('textarea', 'binquestionlines', get_string('oneOfBinAnswers', 'groupformation'),
             'wrap="virtual" rows="10" cols="50"');
-        $mform->addElement('text', 'oneofbinimportance', get_string('oneOfBinImportance', 'groupformation'), null);
-        $mform->setType('oneofbinimportance', PARAM_INT);
-        $mform->addElement('select', 'oneofbinrelation', get_string('oneOfBinRelation', 'groupformation'), array(
+        $mform->addElement('text', 'binquestionimportance', get_string('oneOfBinImportance', 'groupformation'), null);
+        $mform->setType('binquestionimportance', PARAM_INT);
+        $mform->addElement('select', 'binquestionrelation', get_string('oneOfBinRelation', 'groupformation'), array(
             get_string('homogenous', 'groupformation'),
             get_string('heterogenous', 'groupformation')), null);
 
-        $mform->disabledIf('oneofbinquestion', 'oneofbin', 'notchecked');
-        $mform->disabledIf('oneofbinanswers', 'oneofbin', 'notchecked');
-        $mform->disabledIf('oneofbinimportance', 'oneofbin', 'notchecked');
-        $mform->disabledIf('oneofbinrelation', 'oneofbin', 'notchecked');
+        $mform->disabledIf('binquestiontext', 'binquestion', 'notchecked');
+        $mform->disabledIf('binquestionlines', 'binquestion', 'notchecked');
+        $mform->disabledIf('binquestionimportance', 'binquestion', 'notchecked');
+        $mform->disabledIf('binquestionrelation', 'binquestion', 'notchecked');
 
 
 
