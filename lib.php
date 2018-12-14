@@ -564,6 +564,65 @@ function groupformation_extend_settings_navigation(settings_navigation $settings
  */
 function groupformation_set_fields(stdClass $groupformation) {
 
+    if (isset ($groupformation->binquestion) && $groupformation->binquestion == 0) {
+        $groupformation->binquestion = 0;
+        $groupformation->binquestiontext = "";
+        $groupformation->binquestionlines = "";
+        $groupformation->binquestionvalues = null;
+        $groupformation->binquestionnumber = null;
+        $groupformation->binquestionimportance = null;
+        $groupformation->binquestionrelation = null;
+    } else if (!isset ($groupformation->binquestion)) {
+        $groupformation->binquestion = 0;
+        $groupformation->binquestiontext = "";
+        $groupformation->binquestionlines = "";
+        $groupformation->binquestionvalues = null;
+        $groupformation->binquestionnumber = null;
+        $groupformation->binquestionimportance = null;
+        $groupformation->binquestionrelation = null;
+    } else if (isset ($groupformation->binquestion) && $groupformation->binquestion == 1 &&
+            isset ($groupformation->binquestiontext) && $groupformation->binquestiontext == "") {
+        $groupformation->binquestion = 0;
+        $groupformation->binquestiontext = "";
+        $groupformation->binquestionlines = "";
+        $groupformation->binquestionvalues = null;
+        $groupformation->binquestionnumber = null;
+        $groupformation->binquestionimportance = null;
+        $groupformation->binquestionrelation = null;
+    } else if (isset ($groupformation->binquestion) && $groupformation->binquestion == 1 &&
+        isset ($groupformation->binquestionlines) && $groupformation->binquestionlines == "") {
+        $groupformation->binquestion = 0;
+        $groupformation->binquestiontext = "";
+        $groupformation->binquestionlines = "";
+        $groupformation->binquestionvalues = null;
+        $groupformation->binquestionnumber = null;
+        $groupformation->binquestionimportance = null;
+        $groupformation->binquestionrelation = null;
+    } else if (!isset ($groupformation->binquestionrelation)) {
+        $groupformation->binquestion = 0;
+        $groupformation->binquestiontext = "";
+        $groupformation->binquestionlines = "";
+        $groupformation->binquestionvalues = null;
+        $groupformation->binquestionnumber = null;
+        $groupformation->binquestionimportance = null;
+        $groupformation->binquestionrelation = null;
+    } else if (!isset($groupformation->binquestionimportance)) {
+        $groupformation->binquestion = 0;
+        $groupformation->binquestiontext = "";
+        $groupformation->binquestionlines = "";
+        $groupformation->binquestionvalues = null;
+        $groupformation->binquestionnumber = null;
+        $groupformation->binquestionimportance = null;
+        $groupformation->binquestionrelation = null;
+    } else {
+        $binanswerarray = array();
+        if ($groupformation->binquestion != 0){
+            $binanswerarray = explode("\n", $groupformation->binquestionlines);
+        }
+        $groupformation->binquestionvalues = groupformation_convert_options($binanswerarray);
+        $groupformation->binquestionnumber = count($binanswerarray);
+    }
+
     if (isset ($groupformation->knowledge) && $groupformation->knowledge == 0) {
         $groupformation->knowledge = 0;
         $groupformation->knowledgelines = "";
