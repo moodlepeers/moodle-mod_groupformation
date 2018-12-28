@@ -473,8 +473,8 @@ $string['eval_caption_course'] = 'Kurs';
 $string['consent_alert_message'] = 'Sie müssen den Nutzungsbedingungen zustimmen, um den Fragebogen zu beantworten. Lesen und akzeptieren sie die Nutzungsbedingungen, bevor sie auf "Weiter" klicken.';
 $string['consent_opt_in'] = 'Einwilligung (opt-in)';
 $string['consent_header_import'] = 'Durch Import ihrer Antworten sind sie damit einverstanden, die Möglichkeiten des Gruppenformationsplugins zu nutzen und füllen dafür die gestellten Fragen soweit möglich aus. Die Teilnahme oder Nicht-Teilnahme hat keinerlei Einfluß auf die Benotung (Creditpoints).';
-$string['consent_header'] = 'Ich möchte die Möglichkeiten des Gruppenformationsplugins nutzen und fülle dafür die gestellten Fragen soweit möglich aus. Die Teilnahme oder Nicht-Teilnahme hat keinerlei Einfluß auf die Benotung (Creditpoints).';
-$string['consent_message'] = '<ul><li>
+$string['consent_header_RE'] = 'Ich möchte die Möglichkeiten des Gruppenformationsplugins nutzen und fülle dafür die gestellten Fragen soweit möglich aus. Die Teilnahme oder Nicht-Teilnahme hat keinerlei Einfluß auf die Benotung (Creditpoints).';
+$string['consent_message_RE'] = '<ul><li>
 Der Kursleiter/in oder Dozent/in sieht meine persönlichen Angaben für die Gruppenformation nicht (nur ich selbst
 erhalte Feedback zu meinen Persönlichkeitsmerkmalen, sowie zum Durchschnittsvergleich mit der Gruppe).
 </li><li>

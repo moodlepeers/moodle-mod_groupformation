@@ -487,10 +487,10 @@ class mod_groupformation_overview_controller {
                 in_array($userstate, array("started", "consent_given", "p_code_given", "answering"))) {
             $assigns['participant_code'] = mod_groupformation_data::ask_for_participant_code();
             $assigns['participant_code_user'] = $this->usermanager->get_participant_code($this->userid);
-            $assigns['consentheader'] = get_string('consent_header', 'groupformation');
+            $assigns['consentheader'] = get_string('consent_header_RE', 'groupformation');
             $a = new stdClass();
             $a->archivedays = get_config('groupformation', 'archiving_time');
-            $assigns['consenttext'] = get_string('consent_message', 'groupformation', $a);
+            $assigns['consenttext'] = get_string('consent_message_RE', 'groupformation', $a);
             $assigns['consentvalue'] = $this->usermanager->get_consent($this->userid);
         }
 

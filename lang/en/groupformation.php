@@ -460,9 +460,9 @@ $string ['eval_caption_course'] = 'Course';
 
 $string ['consent_alert_message'] = 'You need give consent before accessing the questionnaire. Scroll down and agree to terms before clicking on "Next".';
 $string ['consent_opt_in'] = 'Consent (opt-in)';
-$string ['consent_header'] = 'I want to participate in the groupformation plugin and agree to submit answers to the questionnaire. The participation or non-participation has no impact on the grading process (or the credit points).';
+$string ['consent_header_RE'] = 'I want to participate in the groupformation plugin and agree to submit answers to the questionnaire. The participation or non-participation has no impact on the grading process (or the credit points).';
 $string ['consent_header_import'] = 'By importing your answers, you agree to participate in the groupformation plugin and you agree to submit answers to the questionnaire. The participation or non-participation has no impact on the grading process (or the credit points).';
-$string ['consent_message'] = '<ul><li>
+$string ['consent_message_RE'] = '<ul><li>
 The instructor has no direct access to my answers for the group formation (just I am able to access the evaluation about my personality as well as the group average).
 </li><li>
 My personal data will be deleted when the course ends - latest after {$a->archivedays} days.</li></ul>';
