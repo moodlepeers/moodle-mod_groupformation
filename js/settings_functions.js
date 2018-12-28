@@ -434,7 +434,7 @@ require(['jquery', 'jqueryui'], function($) {
                     computeGroupSizeParameters(0, countTopics());
                     setGroupSettings();
                 }
-                if (cat == oob){
+                if (cat == 'oob'){
                     synchronizeoob();
                 }
             }

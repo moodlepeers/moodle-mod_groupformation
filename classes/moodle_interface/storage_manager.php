@@ -458,6 +458,7 @@ class mod_groupformation_storage_manager {
         $categoryset = $this->get_raw_categories();
         $categories = array();
 
+
         $hasknowledge = $this->get_number('knowledge');
         if ($this->ask_for_knowledge() && $hasknowledge != 0) {
             $categories[] = 'knowledge';

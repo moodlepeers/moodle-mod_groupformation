@@ -187,8 +187,6 @@ class mod_groupformation_mod_form extends moodleform_mod {
         $assign = array();
         $assign['teacherinfo'] = $teacherinfo;
 
-        $subjects = ['Computer Science', 'Math', 'English', 'Physics'];
-        $assign['subjects'] = $subjects;
 
         $context = $PAGE->context;
         $enrolledstudents = array_keys(get_enrolled_users($context, 'mod/groupformation:onlystudent'));
