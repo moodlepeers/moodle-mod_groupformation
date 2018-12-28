@@ -492,12 +492,13 @@ $string['topic'] = "Thema";
 
 $string['participant_code_title'] = "Persönlicher Teilnehmercode";
 $string['participant_code_header_study'] = "Bitte legen Sie sich einen persönlichen Teilnehmercode nach dem folgenden Schema an:";
-$string['participant_code_rules_study'] = "1. Die ersten zwei Buchstaben des Vornamens der Mutter (Beispiel: BÄrbel —> BA, nicht: BÄ oder BAE)<br>
-2. Die ersten zwei Buchstaben des Vornamens des Vaters (Beispiel: ÖMer —> OM, nicht ÖM oder OEM)<br>
-3. Die ersten zwei Ziffern des eigenen Geburtstages (Beispiel: 03.10.1989 —> 03)<br><br>
+$string['participant_code_rules_study_RE'] = "1. Vorname Ihrer Mutter (ersten zwei Buchstaben, z.B. EV für Eva)<br>
+2. Geburtsmonat Ihrer Mutter (als zwei Ziffern, z.B. 07 für Juli)<br>
+3. Vorname Ihres Vaters (ersten zwei Buchstaben, z.B. AD für Adam)<br>
+4. Geburtsmonat Ihres Vaters (als zwei Ziffern, z.B. 11 für November)<br><br>
 Bitte verwenden Sie keine Umlaute, sondern ersetzen Sie diese durch normale Buchstaben<br>
 (Ä &rarr; A; Ö &rarr; O; Ü &rarr; U; ß &rarr; S)";
-$string['participant_code_example_study'] = "Beispiel: BAOM03";
+$string['participant_code_example_study_RE'] = "Beispiel: EV07AD11";
 $string['participant_code_footer'] = "Ihr persönlicher Teilnehmercode lautet";
 
 $string['participant_code_alert_message'] = 'Sie müssen einen gültigen Teilnehmercode eingeben bevor Sie den Fragebogen beantworten können.';

@@ -640,10 +640,10 @@ class mod_groupformation_user_manager {
      * @return bool
      */
     public function validate_participant_code($participantcode) {
-        if (strlen($participantcode) !== 6) {
+        if (strlen($participantcode) !== 8) {
             return false;
         }
-        $array = array(true, true, false);
+        $array = array(true, false, true, false);
         $valid = true;
         $i = 0;
         $d = 2;

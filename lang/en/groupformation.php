@@ -480,12 +480,13 @@ $string ['topic'] = "Topic";
 
 $string ['participant_code_title'] = "Participant Code";
 $string ['participant_code_header_study'] = "Please enter a personal participant code based on the following rules:";
-$string ['participant_code_rules_study'] = "1. The first two letters of your mother's first name (capitalized, e.g. BÄrbel -> BA, not: BÄ or BAE)<br>
-2. The first two letters of your father's first name (capitalized, e.g. ÖMer —> OM, not ÖM or OEM)<br>
-3. The first two digits of your birthday (e.g. 03.10.1989 —> 03)<br><br>
+$string ['participant_code_rules_study_RE'] = "1. Your mother's first name (first two characters, capitalized, z.B. EV for Eva)<br>
+2. Your mother's month of birth (as two digits, z.B. 07 for July)<br>
+3. Your father's first name (first two characters, capitalized, z.B. AD for Adam)<br>
+4. Your father's month of birth (as two digits, z.B. 11 for November)<br><br>
 Replace \"Umlaute\" and special characters as follows<br>
 Ä &rarr; A; Ö &rarr; O; Ü &rarr; U; ß &rarr; S";
-$string ['participant_code_example_study'] = "Example: BAOM03";
+$string ['participant_code_example_study_RE'] = "Example: EV07AD11";
 
 $string ['participant_code_footer'] = "Your personal participant code is";
 
