@@ -471,7 +471,7 @@ class mod_groupformation_storage_manager {
                     if ($category == 'points' && $this->ask_for_points()) {
                         $categories [] = $category;
                     } else {
-                        if ($category != 'grade' && $category != 'points' && $category != 'general') {
+                        if ($category != 'grade' && $category != 'points') {
                             $categories [] = $category;
                         }
                     }
