@@ -35,6 +35,7 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/ievalua
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/matchers/imatcher.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/participant.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/statistics.php");
+require_once($CFG->dirroot . "/mod/groupformation/lib/classes/optimizers/ioptimizer.php");
 
 /**
  * Class mod_groupformation_basic_algorithm
@@ -141,6 +142,11 @@ class mod_groupformation_basic_algorithm implements mod_groupformation_ialgorith
     public function do_one_formation() {
         $this->matcher->match_to_groups($this->notmatchedparticipants, $this->cohort->groups);
         $this->cohort->countofgroups = count($this->cohort->groups);
+
+        // TODO no optimizer needed -> just comment the next two lines out
+        $this->optimizer = new mod_groupformation_optimizer($this->matcher);
+        $this->cohort = $this->optimizer->optimize_cohort($this->cohort);
+
         $this->cohort->whichmatcherused = get_class($this);
         $this->cohort->calculate_cpi();
         return $this->cohort;
