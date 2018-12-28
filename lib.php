@@ -598,14 +598,6 @@ function groupformation_set_fields(stdClass $groupformation) {
         $groupformation->binquestionnumber = null;
         $groupformation->binquestionimportance = null;
         $groupformation->binquestionrelation = null;
-    } else if (!isset ($groupformation->binquestionrelation)) {
-        $groupformation->binquestion = 0;
-        $groupformation->binquestiontext = "";
-        $groupformation->binquestionlines = "";
-        $groupformation->binquestionvalues = null;
-        $groupformation->binquestionnumber = null;
-        $groupformation->binquestionimportance = null;
-        $groupformation->binquestionrelation = null;
     } else if (!isset($groupformation->binquestionimportance)) {
         $groupformation->binquestion = 0;
         $groupformation->binquestiontext = "";
@@ -616,6 +608,9 @@ function groupformation_set_fields(stdClass $groupformation) {
         $groupformation->binquestionrelation = null;
     } else {
         $binanswerarray = array();
+        if (!isset ($groupformation->binquestionrelation)){
+            $groupformation->binquestionrelation = 0;
+        }
         if ($groupformation->binquestion != 0){
             $binanswerarray = explode("\n", $groupformation->binquestionlines);
         }

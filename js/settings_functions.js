@@ -93,7 +93,7 @@ require(['jquery', 'jqueryui'], function($) {
                 $('#id_binquestion').prop('checked', true);
                 $('#id_binquestiontext').removeAttr('disabled');
                 $('#id_binquestionlines').removeAttr('disabled');
-                $('#id_oneofbinrealtion').removeAttr('disabled');
+                $('#id_binquestionrelation').removeAttr('disabled');
                 $('#id_binquestionimportance').removeAttr('disabled');
 
                 $("#js_oneOfBinWrapper").show('2000', 'swing');
@@ -119,16 +119,22 @@ require(['jquery', 'jqueryui'], function($) {
 
 
         // Importance Slider update oob.
-        $('#id_js_oneofbinimportance').change(function(){
+        function oobChangeImpSelVal(value){
+
             var text = $('#gf_one_of_bin_Importance').html();
             var oldValue = text.match(/\d+/);
-            var value = $('#id_js_oneofbinimportance').val();
             if (oldValue == null){
                 text = text.replace(': ', ': ' + value);
             } else {
                 text = text.replace(oldValue, value);
             }
             $('#gf_one_of_bin_Importance').html(text);
+        }
+
+        $('#id_js_oneofbinimportance').change(function(){
+            var value = $('#id_js_oneofbinimportance').val();
+
+            oobChangeImpSelVal(value);
 
             $('#id_binquestionimportance').val(value);
         });
@@ -529,15 +535,16 @@ require(['jquery', 'jqueryui'], function($) {
             if ($('#id_binquestion').prop('checked')) {
                 $('#id_js_oneofbin').prop('checked', true);
                 $('#id_binquestion').prop('checked', true);
-                $("#js_oneOFBinWrapper").show('2000', 'swing');
+                $("#js_oneOfBinWrapper").show('2000', 'swing');
 
                 // Get the value of Moodle nativ field #id_knowledgelines, parse it and create dynamic input fields.
-                var lines = $('textarea[name=oneofbinanswers]').val().split('\n');
+                var lines = $('textarea[name=binquestionlines]').val().split('\n');
                 wrapper = $('#oob').find('.multi_fields');
-                cat = 'prk';
+                cat = 'oob';
                 $.each(lines, function () {
                     addInput(wrapper, cat, this);
                 });
+
                 for (var i = 0, l = 3; i < l; i++) {
                     // Remove the first 3 dynamic fields which been created by default.
                     removeInput(wrapper, cat, i);
@@ -546,22 +553,24 @@ require(['jquery', 'jqueryui'], function($) {
 
                 // TODO Muss erweitert werden
                 var question = $('#id_binquestiontext').val();
-                $('#js_oob_question').text(question);
+                $('#js_oob_question').val(question);
 
                 if($('#id_binquestionrelation option:selected').val() != 0){
                     var opt = $('#id_binquestionrelation option:selected').val();
                     if (opt == 0){
-                        $('#id_js_oneofbinrelation').prop('selected',false).filter('[value=homogenous]').prop('selected',true);
+                        $('#id_js_oneofbinrelation').val('homogenous');
+                        oobChangeSelValue('homogenous');
                     } else if (opt == 1){
-                        $('#id_js_oneofbinrelation').prop('selected',false).filter('[value=heterogenous]').prop('selected',true);
+                        $('#id_js_oneofbinrelation').val('heterogenous');
+                        oobChangeSelValue('heterogenous');
                     }
                 }
 
-                if (!($('id_binquestiontext').val().trim())){
-                    var value = parseInt($('id_binquestiontext').val());
-                    if (value >= 0 && value <= 10){
-                        $('id_js_oneofbinimportance').val(value);
-                    }
+                var value = parseInt($('#id_binquestionimportance').val());
+                console.log(value);
+                if (value >= 0 && value <= 10){
+                    $('#id_js_oneofbinimportance').val(value);
+                    oobChangeImpSelVal(value);
                 }
             }
 
