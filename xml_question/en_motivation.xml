@@ -3,7 +3,7 @@
     <QUESTIONS VERSION="2018101100">
         <QUESTION ID="1" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I know I can learn the material in the course.]]>
+                <![CDATA[I know I can learn the material in the class.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -29,7 +29,7 @@
 
         <QUESTION ID="2" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I expect to do well in this course.]]>
+                <![CDATA[I expect to do well in this class.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -55,7 +55,7 @@
 
         <QUESTION ID="3" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I am confident that I will be successful in this course.]]>
+                <![CDATA[I am confident that I will be successful in this class.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -81,7 +81,7 @@
 
         <QUESTION ID="4" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I am confident I can learn the material in this course.]]>
+                <![CDATA[I am confident I can learn the material in this class.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -107,7 +107,7 @@
 
         <QUESTION ID="5" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I can apply what we’re learning in this course to the real world.]]>
+                <![CDATA[I can apply what we’re learning in this class to the real world.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -237,7 +237,7 @@
 
         <QUESTION ID="10" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[During the course, I have a lot of other demands on my time.]]>
+                <![CDATA[This semester, I have a lot of other demands on my time.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -263,7 +263,7 @@
 
         <QUESTION ID="11" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[During the course, I don't have time to put into this class.]]>
+                <![CDATA[This semester, I don't have time to put into this class.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -289,7 +289,7 @@
 
         <QUESTION ID="12" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Doing well in this course isn't worth all the things that I have to give up.]]>
+                <![CDATA[Doing well in this class isn't worth all the things that I have to give up.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -315,7 +315,7 @@
 
         <QUESTION ID="13" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I am unable to invest the effort that is needed to do well in this course.]]>
+                <![CDATA[I am unable to invest the effort that is needed to do well in this class.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -341,7 +341,7 @@
 
         <QUESTION ID="14" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[The course requires too much time.]]>
+                <![CDATA[The class requires too much time.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -367,7 +367,7 @@
 
         <QUESTION ID="15" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Unfortunately, I can’t put as much time into this course as I would like.]]>
+                <![CDATA[Unfortunately, I can’t put as much time into this class as I would like.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -393,7 +393,7 @@
 
         <QUESTION ID="16" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[The course is very interesting.]]>
+                <![CDATA[The class is very interesting.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -419,7 +419,7 @@
 
         <QUESTION ID="17" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I find the field of psychology fascinating.]]>
+                <![CDATA[I find the topic of the class fascinating.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -445,7 +445,7 @@
 
         <QUESTION ID="18" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I think the field of psychology is an important discipline.]]>
+                <![CDATA[I think the topic of the class is an important discipline.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -471,7 +471,7 @@
 
         <QUESTION ID="19" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I am excited about this course.]]>
+                <![CDATA[I am excited about this class.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -497,7 +497,7 @@
 
         <QUESTION ID="20" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I would recommend this course to others.]]>
+                <![CDATA[I would recommend this class to others.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -523,7 +523,7 @@
 
         <QUESTION ID="21" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I really enjoy this course.]]>
+                <![CDATA[I really enjoy this class.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -549,7 +549,7 @@
 
         <QUESTION ID="22" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I plan on taking more courses in psychology.]]>
+                <![CDATA[I plan on taking more class on this topic.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>

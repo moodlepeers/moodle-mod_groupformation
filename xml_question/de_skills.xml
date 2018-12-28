@@ -1,6 +1,61 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="times questions">
     <QUESTIONS VERSION="2018101100">
+        <QUESTION ID="4" TYPE="dropdown">
+            <QUESTIONTEXT>
+                <![CDATA[Wenn Sie auf Ihre gesamte Schullaufbahn zurückdenken: Welche Mathematiknote hatten Sie wohl etwa im Durchschnitt?]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[15 - sehr gut (+)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[14 - sehr gut]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[13 - sehr gut (-)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[12 - gut (+)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[11 - gut]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[10 - gut (-)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[9 - befriedigend (+)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[8 - befriedigend]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[7 - befriedigend (-)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[6 - ausreichend (+)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[5 - ausreichend]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[4 - ausreichend (-)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[3 - mangelhaft (+)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[2 - mangelhaft]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[1 - mangelhaft (-)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[0 - ungenügend]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
         <QUESTION ID="6" TYPE="dropdown">
             <QUESTIONTEXT>
                 <![CDATA[Bitte geben Sie Ihre Abiturnote (bzw. Durchschnittsnote des Abschlusszeugnis) an:]]>
@@ -101,6 +156,94 @@
                 </OPTION>
                 <OPTION>
                     <![CDATA[nicht bestanden]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="9" TYPE="dropdown">
+            <QUESTIONTEXT>
+                <![CDATA[In welchem Studiengang haben Sie sich eingeschrieben?]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[Angewandte Geowissenschaften (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Angewandte Mechanik (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Bauingenieurwesen (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Chemie (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Chemieingenieurwesen]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Computational Engineering (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Elektrotechnik (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Informatik (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Ingenieurinformatik (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Maschinenbau (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Mathematik (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Psychologie in IT (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Technomathematik (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Umweltingenieurwesen (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Wirtschaftsinformatik (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Wirtschaftsingenieurwesen (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[B.Ed. mit dem Unterrichtsfach Chemie (Lehramt Gy/Ge)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[B.Ed. mit dem Unterrichtsfach Chemie (Lehramt BK)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[B.Ed. mit dem Unterrichtsfach Informatik (Lehramt Gy/Ge)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[B.Ed. mit dem Unterrichtsfach Informatik (Lehramt BK)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[B.Ed. mit dem Unterrichtsfach Mathematik (Lehramt Haupt-/Real- und Gesamtschule)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[B.Ed. mit dem Unterrichtsfach Mathematik (Lehramt Gy/Ge)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[B.Ed. mit dem Unterrichtsfach Mathematik (Lehramt BK)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[B.Ed. mit der beruflichen Fachrichtung Fertigungstechnik (Lehramt BK)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[B.Ed. mit der beruflichen Fachrichtung Elektrotechnik (Lehramt BK)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[B.Ed. mit der beruflichen Fachrichtung Maschinenbautechnik (Lehramt BK)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Sonstiges]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>

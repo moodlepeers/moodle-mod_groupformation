@@ -1,6 +1,61 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="times questions">
     <QUESTIONS VERSION="2018101100">
+        <QUESTION ID="4" TYPE="dropdown">
+            <QUESTIONTEXT>
+                <![CDATA[Thinking back of your academic track: What was your average math grade (by estimate)?]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[15 - excellent (+)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[14 - excellent]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[13 - excellent (-)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[12 - good (+)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[11 - good]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[10 - good (-)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[9 - satisfying (+)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[8 - satisfying]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[7 - satisfying (-)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[6 - fair (+)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[5 - fair]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[4 - fair (-)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[3 - poor (+)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[2 - poor]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[1 - poor (-)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[0 - fail]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
         <QUESTION ID="6" TYPE="dropdown">
             <QUESTIONTEXT>
                 <![CDATA[Please name your school diploma grade according to the German Grading System:]]>
@@ -101,6 +156,94 @@
                 </OPTION>
                 <OPTION>
                     <![CDATA[not passed]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="9" TYPE="dropdown">
+            <QUESTIONTEXT>
+                <![CDATA[What is your major in university?]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[Applied Geosciences (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Applied Mechanics (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Civil Engineering (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Chemistry (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Chemical Engineering (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Computational Engineering (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Electrical Engineering and Information Technology (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Computer Science (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Engineering Informatics (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Mechanical Engineering (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Mathematics (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Psychology in IT (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Techno-Mathematics (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Environmental Engineering (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Business Information Systems (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Business Administration/Industrial Engineering (Bachelor)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[B.Ed. with subject Chemistry (Teaching Programme for High School)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[B.Ed. with subject Chemistry (Teaching Programme for Vocational School)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[B.Ed. with subject Computer Science (Teaching Programme for High School)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[B.Ed. with subject Computer Science (Teaching Programme for Vocational School)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[B.Ed. with subject Mathematics (Teaching Programme for Secondary and Comprehensive)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[B.Ed. with subject Mathematics (Teaching Programme for High School)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[B.Ed. with subject Mathematics (Teaching Programme for Vocational School)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[B.Ed. with subject Manufacturing Engineering (Teaching Programme for Vocational School)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[B.Ed. with subject Electrical Engineering and Information Technology (Teaching Programme for Vocational School)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[B.Ed. with subject Mechanical Engineering (Teaching Programme for Vocational School)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Other]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
