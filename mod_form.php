@@ -285,7 +285,6 @@ class mod_groupformation_mod_form extends moodleform_mod {
             get_string('justpass', 'groupformation'),
             get_string('noevaluation', 'groupformation')
         );
-
         // Add field for evaluation method.
         $mform->addElement('select', 'evaluationmethod',
             get_string('evaluationmethod_description', 'groupformation'), $array, null);
@@ -294,10 +293,14 @@ class mod_groupformation_mod_form extends moodleform_mod {
         $mform->addElement('text', 'maxpoints', get_string('maxpoints', 'groupformation'));
         $mform->disabledIf('maxpoints', 'evaluationmethod', 'neq', '2');
         $mform->setType('maxpoints', PARAM_NUMBER);
+
+        $mform->setDefault('evaluationmethod', 4); // TODO delete if feature is fixed.
+
         $mform->addElement('checkbox', 'onlyactivestudents', get_string('onlyactivestudents', 'groupformation'));
         $mform->addElement('checkbox', 'allanswersrequired', get_string('allanswersrequired', 'groupformation'));
         $mform->addElement('checkbox', 'emailnotifications', get_string('emailnotifications', 'groupformation'));
         $mform->setDefault('emailnotifications', false); // TODO delete if feature is fixed.
+        $mform->setDefault('allanswersrequired', 1); // TODO delete if feature is fixed.
 
         // Close div tag for non-js related content.
         $mform->addElement('html', '</div id="non-js-content">');
