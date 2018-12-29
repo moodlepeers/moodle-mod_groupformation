@@ -79,7 +79,6 @@ class mod_groupformation_criterion_calculator {
      */
     private function invert_answer($questionid, $category, $answer) {
         $max = $this->store->get_max_option_of_catalog_question($questionid, $category);
-
         return $max + 1 - $answer;
     }
 
@@ -239,6 +238,7 @@ class mod_groupformation_criterion_calculator {
             $maxvalue = 0;
 
             $questionids = $spec['questionids'];
+
             if (array_key_exists($this->scenario, $spec['scenarios'])) {
 
                 foreach (array_values($questionids) as $tempquestionid) {
@@ -247,18 +247,22 @@ class mod_groupformation_criterion_calculator {
                         $questionid = abs($tempquestionid);
                         if ($this->usermanager->has_answer($userid, $category, $questionid)) {
                             $singleanswer = $this->usermanager->get_single_answer($userid, $category, $questionid);
-                            $temp = $temp + $this->invert_answer($questionid, $category,
+                            $invertedanswer = $this->invert_answer($questionid, $category,
                                     $singleanswer);
+                            $temp = $temp + $invertedanswer;
                         }
                     } else {
                         if ($this->usermanager->has_answer($userid, $category, $questionid)) {
-                            $temp = $temp + $this->usermanager->get_single_answer($userid, $category, $questionid);
+                            $singleanswer = $this->usermanager->get_single_answer($userid, $category, $questionid);
+                            $temp = $temp + $singleanswer;
                         }
                     }
                     $minvalue = $minvalue + 1;
-                    $maxvalue = $maxvalue + $this->store->get_max_option_of_catalog_question($questionid, $category);
+                    $maxforquestion = $this->store->get_max_option_of_catalog_question($questionid, $category);
+                    $maxvalue = $maxvalue + $maxforquestion;
                 }
-                $array [$key] = array("values" => array(floatval($temp - $minvalue) / ($maxvalue - $minvalue)));
+                $value = floatval(floatval($temp - $minvalue) / floatval($maxvalue - $minvalue));
+                $array [$key] = array("values" => array($value));
             }
         }
         return $array;

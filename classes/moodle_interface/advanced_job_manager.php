@@ -334,7 +334,8 @@ class mod_groupformation_advanced_job_manager {
 
         if (mod_groupformation_data::is_math_prep_course_mode()) {
             $sg = new mod_groupformation_scientific_grouping_2($groupformationid);
-            return $sg->run_grouping($users);
+            $return = $sg->run_grouping($users);
+            return $return;
         } else if ($store->ask_for_topics()) {
             $tg = new mod_groupformation_topic_grouping($groupformationid);
             return $tg->run_grouping($users);

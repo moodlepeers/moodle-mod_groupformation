@@ -326,12 +326,28 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
                 //'fam' => $famspecs
         ];
 
-        $configurations = array(
-            "groupal:1;ex:1;gh:1;vw:0" => array('big5_extraversion' => true,
-                    'big5_conscientiousness' => true, 'knowledge_two' => false),
-            "groupal:1;ex:0;gh:1;vw:0" => array('big5_extraversion' => false,
-                    'big5_conscientiousness' => true, 'knowledge_two' => false)
+        $spec1 = array(
+                "groupal:1;ex:1;gh:1;vw:0" => array('big5_extraversion' => true,
+                        'big5_conscientiousness' => true, 'knowledge_two' => false)
         );
+
+        $spec2 = array(
+                "groupal:1;ex:0;gh:1;vw:0" => array('big5_extraversion' => false,
+                        'big5_conscientiousness' => true, 'knowledge_two' => false)
+        );
+
+        if ($this->groupformationid % 2 != 0){
+            $configurations = $spec1;
+        } else {
+            $configurations = $spec2;
+        }
+
+        //$configurations = array(
+        //    "groupal:1;ex:1;gh:1;vw:0" => array('big5_extraversion' => true,
+        //            'big5_conscientiousness' => true, 'knowledge_two' => false),
+        //    "groupal:1;ex:0;gh:1;vw:0" => array('big5_extraversion' => false,
+        //            'big5_conscientiousness' => true, 'knowledge_two' => false)
+        //);
 
         return [$configurations, $specs];
     }
