@@ -34,7 +34,7 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/one_of_bin_criterion.php");
 
 /**
- * Class mod_groupformation_bin_distance
+ * Class mod_groupformation_many_bin_distance
  *
  * @package     mod_groupformation
  * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic, Stefan Jung
@@ -58,13 +58,16 @@ class mod_groupformation_many_bin_distance implements mod_groupformation_idistan
 
         foreach ($cr1->get_values() as $p) {
             if ($p == 1) {
+                // get the distance between these two values
                 $d = strcmp($p, $cr2->get_value($index));
+                // if the values are NOT equals then increase the distance variable by one
                 if ($d != 0) {
                     $distance += 1.0;
                 }
             }
             $index += 1;
         }
+        // divide the distance variable by ALL values
         return $distance / count($cr1->get_values());
     }
 

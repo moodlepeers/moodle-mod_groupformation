@@ -29,45 +29,51 @@ if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
 }
 
-require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/idistance.php");
+require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/idistance_group.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/one_of_bin_criterion.php");
 
 /**
- * Class mod_groupformation_bin_distance
+ * Class mod_groupformation_no_one_alone_bin_distance
  *
  * @package     mod_groupformation
  * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic, Stefan Jung
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class mod_groupformation_bin_distance implements mod_groupformation_idistance {
+class mod_groupformation_both_bin_types_distance implements mod_groupformation_idistance_group {
 
     /**
      * normes distance for each dimension (INTERNAL method)
      * return max value is number of dimensions.
      *
      * @param mod_groupformation_criterion $cr1
-     * @param mod_groupformation_criterion $cr2
+     * @param mod_groupformation_criterion $group
      * @return float|number
      */
-    private function get_distance(mod_groupformation_criterion $cr1, mod_groupformation_criterion $cr2) {
+    private function get_distance(mod_groupformation_criterion $cr1, mod_groupformation_group $group) {
 
-        $distance = 0.0;
-        $index = 0;
+        $distance = 1.0;
 
-        foreach ($cr1->get_values() as $p) {
-            if ($p == 1) {
-                // get the distance between these two values
-                $distance = strcmp($p, $cr2->get_value($index));
-                // if the values are NOT equals then return distance of 1
-                // otherwise it will return a distance of 0
-                if ($distance != 0) {
-                    return 1.0;
+        // no one alone
+        // check each participant until they matched
+        // get list of participants from group
+        foreach ($group->get_participants() as $p) {
+            // get values of cr1
+            foreach ($cr1->get_values() as $p1) {
+                // get criteria's of participants
+                foreach ($p->get_criteria() as $c) {
+                    // get values of each criteria
+                    foreach ($c->get_values() as $p2) {
+                        // get the distance between these two values
+                        $d = strcmp($p1, $p2);
+                        // if the values are equals return distance of 0.0
+                        if ($d == 0) {
+                            return 0.0;
+                        }
+                    }
                 }
-                break;
             }
-            $index += 1;
         }
 
         return $distance;
@@ -80,7 +86,7 @@ class mod_groupformation_bin_distance implements mod_groupformation_idistance {
      * @param mod_groupformation_criterion $c2
      * @return float 1 or 0
      */
-    public function normalized_distance(mod_groupformation_criterion $c1, mod_groupformation_criterion $c2) {
+    public function normalized_distance(mod_groupformation_criterion $c1, mod_groupformation_group $c2) {
         return $this->get_distance($c1, $c2);
     }
 

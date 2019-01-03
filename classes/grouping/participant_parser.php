@@ -106,8 +106,21 @@ class mod_groupformation_participant_parser {
                     }
                 }
 
+                // TODO add the kind of criterion to the labels fields, otherwise they can not find out which criterion is needed
+                // TODO then the switch case block can be used
+//                switch ($value["criterion"]) {
+//                    case "specific":
+//                        $criterion = new mod_groupformation_specific_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
+//                        break;
+//                    case "one-of-bin":
+//                        $criterion = new mod_groupformation_one_of_bin_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
+//                        break;
+//                    case "many-of-bin":
+//                        $criterion = new mod_groupformation_many_of_bin_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
+//                        break;
+//                }
                 $criterion = new mod_groupformation_specific_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
-//                $criterion = new mod_groupformation_one_of_bin_criterion($label, $value, $minval, $maxval, $homogen, $weight);
+
                 if ($position == 0) {
                     $participant = new mod_groupformation_participant (array(
                         $criterion), $user->id);

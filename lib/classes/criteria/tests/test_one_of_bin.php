@@ -5,6 +5,7 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/one_of_bin_criterion.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/many_of_bin_criterion.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/specific_criterion.php");
+require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/both_bin_types_criterion.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/participant.php");
 
 /**
@@ -43,7 +44,7 @@ class test_one_of_bin {
                         $list[] = new mod_groupformation_one_of_bin_criterion("one_of_bin", $value, $minval, $maxval, $homogen, $weight);
 //                        $list[] = new mod_groupformation_many_of_bin_criterion("many_of_bin", array(1, 0.4, 1), $minval, $maxval, $homogen, $weight);
                     } else {
-                        $list[] = new mod_groupformation_specific_criterion("specific", $value, $minval, $maxval, $homogen, $weight);
+                        $list[] = new mod_groupformation_both_bin_types_criterion("both_bin_types", $value, $minval, $maxval, $homogen, $weight);
 //                        $list[] = new mod_groupformation_many_of_bin_criterion("many_of_bin", array(0.4, 1, 1), $minval, $maxval, $homogen, $weight);
                     }
 
@@ -57,6 +58,10 @@ class test_one_of_bin {
         }
     }
 
+
+    public function test_result(){
+
+    }
 
     //TODO not working quite well. Got an error if there wanna save participants in db
 
