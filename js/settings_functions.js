@@ -14,7 +14,7 @@ require(['jquery', 'jqueryui'], function($) {
 
         $(".settings_info").hide();
 
-        //$("#non-js-content").hide();
+        $("#non-js-content").hide();
         $("#js-content").show();
 
         var studentsInCourse = $('#studentsInCourse').text();

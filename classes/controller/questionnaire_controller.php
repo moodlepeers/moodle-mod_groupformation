@@ -30,6 +30,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/topic_qu
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/basic_question.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/range_question.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/knowledge_question.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/binquestion_question.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/dropdown_question.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/freetext_question.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/multiselect_question.php');
@@ -231,6 +232,16 @@ class mod_groupformation_questionnaire_controller {
     }
 
     /**
+     * Returns whether current category is 'binquestion' or not
+     *
+     * @return boolean
+     * @throws dml_exception
+     */
+    public function is_binquestion() {
+        return $this->categoryposition == $this->store->get_position('binquestion');
+    }
+
+    /**
      * Returns whether current category is 'points' or not
      *
      * @return boolean
@@ -254,6 +265,19 @@ class mod_groupformation_questionnaire_controller {
             $questions = array();
 
             $hasanswer = $this->usermanager->has_answers($this->userid, $category);
+
+            if ($this->is_binquestion()){
+                $temp = $this->store->get_knowledge_or_topic_values($category);
+                $xmlcontent = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>';
+                $options = mod_groupformation_util::xml_to_array($xmlcontent);
+
+                $question = $this->store->get_binquestion_text();
+
+                $name = 'mod_groupformation_' . $category . '_question';
+                $questionid = 1;
+                $questionobj = new $name($category, $questionid, $question, $options, $answer);
+                $questions[] = $questionobj;
+            }
 
             if ($this->is_knowledge() || $this->is_topics()) {
                 $temp = $this->store->get_knowledge_or_topic_values($category);

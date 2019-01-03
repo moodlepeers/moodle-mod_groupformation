@@ -307,7 +307,7 @@ class mod_groupformation_storage_manager {
     public function get_number($category = null) {
         global $DB;
 
-        if ($category == 'topic' || $category == 'knowledge') {
+        if ($category == 'topic' || $category == 'knowledge' || $category == 'binquestion') {
             return $DB->get_field('groupformation', $category . 'number', array(
                     'id' => $this->groupformationid
             ));
@@ -331,6 +331,12 @@ class mod_groupformation_storage_manager {
         return $DB->get_field('groupformation', $category . 'values', array(
                 'id' => $this->groupformationid
         ));
+    }
+
+    public function get_binquestion_text(){
+        global $DB;
+
+        return $DB->get_field('groupformation', 'binquestiontext', array('id' => $this->groupformationid));
     }
 
     /**
@@ -462,6 +468,11 @@ class mod_groupformation_storage_manager {
         $hasknowledge = $this->get_number('knowledge');
         if ($this->ask_for_knowledge() && $hasknowledge != 0) {
             $categories[] = 'knowledge';
+        }
+
+        $hasbinquestion = $this->get_number('binquestion');
+        if ($this->ask_for_binquestion() && $hasbinquestion != 0) {
+            $categories[] = 'binquestion';
         }
 
         foreach ($categoryset as $category) {
@@ -896,6 +907,22 @@ class mod_groupformation_storage_manager {
 
         return $evaluationmethod == 1;
     }
+
+    /**
+     * Returns whether 'binquestion' is a valid category in this instance or not
+     *
+     * @return boolean
+     * @throws dml_exception
+     */
+    public function ask_for_binquestion() {
+        global $DB;
+        $evaluationmethod = $DB->get_field('groupformation', 'binquestion', array(
+            'id' => $this->groupformationid
+        ));
+
+        return $evaluationmethod == 1;
+    }
+
 
     /**
      * Returns users
