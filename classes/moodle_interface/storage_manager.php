@@ -923,7 +923,6 @@ class mod_groupformation_storage_manager {
         return $evaluationmethod == 1;
     }
 
-
     /**
      * Returns users
      *

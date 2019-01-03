@@ -270,11 +270,20 @@ class mod_groupformation_questionnaire_controller {
                 $temp = $this->store->get_knowledge_or_topic_values($category);
                 $xmlcontent = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>';
                 $options = mod_groupformation_util::xml_to_array($xmlcontent);
+                $questionid = 1;
 
+                if ($hasanswer){
+                    $answer = $this->usermanager->get_single_answer(
+                        $this->userid, $category, $questionid);
+                    if ($answer == false){
+                        $answer = -1;
+                    }
+                } else {
+                    $answer = -1;
+                }
                 $question = $this->store->get_binquestion_text();
 
                 $name = 'mod_groupformation_' . $category . '_question';
-                $questionid = 1;
                 $questionobj = new $name($category, $questionid, $question, $options, $answer);
                 $questions[] = $questionobj;
             }
@@ -577,6 +586,11 @@ class mod_groupformation_questionnaire_controller {
                 $question->questionid = $i;
                 $this->handle_answer($this->userid, $category, $question);
             }
+        } else if ($category == 'binquestion'){
+            $question = new stdClass();
+            $question->type = $category;
+            $question->questionid = 1;
+            $this->handle_answer($this->userid, $category, $question);
         } else {
             $questions = $this->store->get_questions_randomized_for_user($category, $this->userid);
 
