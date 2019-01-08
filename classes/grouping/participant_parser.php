@@ -81,9 +81,6 @@ class mod_groupformation_participant_parser {
     private function parse($users, $labels, $weights = null) {
 
         $participants = array();
-        var_dump($users[0]);
-        var_dump('<br>');
-        var_dump($weights);
         foreach ($users as $user) {
             $position = 0;
             $participant = null;
@@ -106,20 +103,21 @@ class mod_groupformation_participant_parser {
                     }
                 }
 
-                // TODO add the kind of criterion to the labels fields, otherwise they can not find out which criterion is needed
-                // TODO then the switch case block can be used
-//                switch ($value["criterion"]) {
-//                    case "specific":
-//                        $criterion = new mod_groupformation_specific_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
-//                        break;
-//                    case "one-of-bin":
-//                        $criterion = new mod_groupformation_one_of_bin_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
-//                        break;
-//                    case "many-of-bin":
-//                        $criterion = new mod_groupformation_many_of_bin_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
-//                        break;
-//                }
-                $criterion = new mod_groupformation_specific_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
+                //TODO name the criterion labels like "criterion_label". Should wait until its implemented
+                switch ($label) {
+                    case "specific":
+                        $criterion = new mod_groupformation_specific_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
+                        break;
+                    case "bin_distance":
+                        $criterion = new mod_groupformation_one_of_bin_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
+                        break;
+                    case "many_bin_distance":
+                        $criterion = new mod_groupformation_many_of_bin_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
+                        break;
+                    default:
+                        // TODO default criterion
+                        $criterion = new mod_groupformation_specific_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
+                }
 
                 if ($position == 0) {
                     $participant = new mod_groupformation_participant (array(
