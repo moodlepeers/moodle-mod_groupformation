@@ -164,7 +164,7 @@ class mod_groupformation_overview_controller {
                         $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(
                                 true, $this->groupformationid);
 
-                        $this->groupformationstateinfo = get_string('questionnaire_submitted',
+                        $this->groupformationstateinfo = get_string('questionnaire_submitted2',
                                 'groupformation');
 
                         $math = mod_groupformation_data::is_math_prep_course_mode();
@@ -287,7 +287,7 @@ class mod_groupformation_overview_controller {
                             $this->groupformationinfo = mod_groupformation_util::get_info_text_for_student(
                                     true, $this->groupformationid);
 
-                            $this->groupformationstateinfo = get_string('questionnaire_submitted',
+                            $this->groupformationstateinfo = get_string('questionnaire_submitted2',
                                     'groupformation');
 
                             $math = mod_groupformation_data::is_math_prep_course_mode();

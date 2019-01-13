@@ -463,6 +463,8 @@ class mod_groupformation_storage_manager {
             $categories[] = 'knowledge';
         }
 
+        //$categories[] = 'general';
+
         foreach ($categoryset as $category) {
             if ($this->get_number($category) > 0) {
                 if ($category == 'grade' && $this->ask_for_grade()) {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="times questions">
-    <QUESTIONS VERSION="2018122800">
+    <QUESTIONS VERSION="2019011300">
         <QUESTION ID="4" TYPE="dropdown">
             <QUESTIONTEXT>
                 <![CDATA[Thinking back of your academic track: What was your average math grade (by estimate)?]]>
@@ -156,94 +156,6 @@
                 </OPTION>
                 <OPTION>
                     <![CDATA[not passed]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="9" TYPE="dropdown">
-            <QUESTIONTEXT>
-                <![CDATA[What is your major in university?]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[Applied Geosciences (Bachelor)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Applied Mechanics (Bachelor)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Civil Engineering (Bachelor)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Chemistry (Bachelor)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Chemical Engineering (Bachelor)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Computational Engineering (Bachelor)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Electrical Engineering and Information Technology (Bachelor)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Computer Science (Bachelor)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Engineering Informatics (Bachelor)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Mechanical Engineering (Bachelor)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Mathematics (Bachelor)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Psychology in IT (Bachelor)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Techno-Mathematics (Bachelor)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Environmental Engineering (Bachelor)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Business Information Systems (Bachelor)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Business Administration/Industrial Engineering (Bachelor)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[B.Ed. with subject Chemistry (Teaching Programme for High School)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[B.Ed. with subject Chemistry (Teaching Programme for Vocational School)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[B.Ed. with subject Computer Science (Teaching Programme for High School)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[B.Ed. with subject Computer Science (Teaching Programme for Vocational School)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[B.Ed. with subject Mathematics (Teaching Programme for Secondary and Comprehensive)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[B.Ed. with subject Mathematics (Teaching Programme for High School)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[B.Ed. with subject Mathematics (Teaching Programme for Vocational School)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[B.Ed. with subject Manufacturing Engineering (Teaching Programme for Vocational School)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[B.Ed. with subject Electrical Engineering and Information Technology (Teaching Programme for Vocational School)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[B.Ed. with subject Mechanical Engineering (Teaching Programme for Vocational School)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Other]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>

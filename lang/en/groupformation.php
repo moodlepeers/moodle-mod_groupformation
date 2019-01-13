@@ -146,7 +146,7 @@ $string ['questionnaire_press_continue_submit'] = 'Click "Edit" to continue the 
 You can also remove your consent, which also deletes all given answers, by clicking on "Remove consent".';
 $string ['questionnaire_press_revert'] = 'Click "Revert" to revert your decision to submit the questionnaire. You can also remove your consent, which also deletes all given answers, by clicking on "Remove consent".';
 $string ['questionnaire_answer_stats'] = 'Current state of the questionnaire:';
-$string ['questionnaire_submitted'] = 'You have submitted your answers. Revert your submission or remove consent to start over.';
+$string ['questionnaire_submitted2'] = 'You have submitted your answers. Revert your submission or remove consent to start over.';
 $string ['questionnaire_press_preview'] = 'Press "Preview" to take a look at the questionnaire.';
 $string ['questionnaire_no_more_questions'] = 'There are no more questions to answer.';
 $string ['questionnaire_press_beginning_submit'] = 'Click "Go to Start" to go back to the start page. There you can submit your current answers.';
