@@ -30,14 +30,14 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion_weight.php");
 
 /**
- * Class mod_groupformation_both_bin_types_criterion
+ * Class mod_groupformation_both_bin_types_bins_covered_criterion
  *
  * @package     mod_groupformation
  * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic, Stefan Jung
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class mod_groupformation_both_bin_types_criterion extends mod_groupformation_criterion {
+class mod_groupformation_both_bin_types_bins_covered_criterion extends mod_groupformation_criterion {
 
     /**
      * mod_groupformation_both_bin_types_criterion constructor.
@@ -51,7 +51,7 @@ class mod_groupformation_both_bin_types_criterion extends mod_groupformation_cri
      * @param string $distance
      * @throws Exception
      */
-    public function __construct($name, $valuearray, $minval, $maxval, $ishomo, $weight, $distance = "both_bin_types_distance") {
+    public function __construct($name, $valuearray, $minval, $maxval, $ishomo, $weight, $distance = "both_bin_types_bins_covered_distance") {
         $this->set_name($name);
         $this->set_min_value($minval);
         $this->set_max_value($maxval);

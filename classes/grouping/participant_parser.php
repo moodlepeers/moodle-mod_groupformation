@@ -114,6 +114,8 @@ class mod_groupformation_participant_parser {
                     case "many_bin_distance":
                         $criterion = new mod_groupformation_many_of_bin_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
                         break;
+                    case "both_bin_types_bins_covered":
+                       // $criterion = new mod_groupformation_both_bin_types_bins_covered_criterion($label, $value, $minval, $maxval, $homogen, $weight);
                     default:
                         // TODO default criterion
                         $criterion = new mod_groupformation_specific_criterion ($label, $value, $minval, $maxval, $homogen, $weight);

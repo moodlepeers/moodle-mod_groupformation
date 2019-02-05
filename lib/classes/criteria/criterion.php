@@ -58,6 +58,14 @@ abstract class mod_groupformation_criterion {
     protected $distance = "manhattan_distance";
 
     /**
+     * @return int
+     */
+    public function get_number_of_bins() {
+        $count = count($this->get_values());
+        return $count;
+    }
+
+    /**
      * @return string
      */
     public function get_distance() {

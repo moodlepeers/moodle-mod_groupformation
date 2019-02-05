@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Bin Distance
+ * no one alone in bin
  *
  * This class contains an implementation of an distance interface which is based
- * bin distance
+ * no one alone in bin distance with the attribute type both bin types
  *
  * @package     mod_groupformation
  * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
@@ -34,14 +34,14 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/one_of_bin_criterion.php");
 
 /**
- * Class mod_groupformation_no_one_alone_bin_distance
+ * Class mod_groupformation_both_bin_types_no_one_alone_distance
  *
  * @package     mod_groupformation
  * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic, Stefan Jung
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class mod_groupformation_both_bin_types_distance implements mod_groupformation_idistance_group {
+class mod_groupformation_both_bin_types_no_one_alone_distance implements mod_groupformation_idistance_group {
 
     /**
      * normes distance for each dimension (INTERNAL method)
