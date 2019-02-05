@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="FAM questionnaire">
-    <QUESTIONS VERSION="2018122800">
+    <QUESTIONS VERSION="2019020500">
         <QUESTION ID="1" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[I know I can learn the material in the class.]]>
@@ -107,7 +107,7 @@
 
         <QUESTION ID="5" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I can apply what we’re learning in this class to the real world.]]>
+                <![CDATA[I am confident I can apply what we’re learning in this class to the real world.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -133,7 +133,7 @@
 
         <QUESTION ID="6" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[The course material is relevant to my future career plans.]]>
+                <![CDATA[The content of this course is relevant to my future career plans.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -159,7 +159,7 @@
 
         <QUESTION ID="7" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[The material in this preclass is useful in my everyday life.]]>
+                <![CDATA[The content of this course is useful in my everyday life.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -211,7 +211,7 @@
 
         <QUESTION ID="9" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Learning the course material will help me achieve my future goals.]]>
+                <![CDATA[Learning the course content will help me achieve my future goals.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -289,7 +289,7 @@
 
         <QUESTION ID="12" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Doing well in this class isn't worth all the things that I have to give up.]]>
+                <![CDATA[Doing well in this class isn't worth all the effort I have to put into it.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -393,7 +393,7 @@
 
         <QUESTION ID="16" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[The class is very interesting.]]>
+                <![CDATA[I think the class might be of interest for me.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -523,7 +523,7 @@
 
         <QUESTION ID="21" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I really enjoy this class.]]>
+                <![CDATA[I think I might really enjoy this class.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -549,7 +549,7 @@
 
         <QUESTION ID="22" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I plan on taking more class on this topic.]]>
+                <![CDATA[I plan on taking more classes on this topic.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>

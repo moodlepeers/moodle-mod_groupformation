@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="">
-    <QUESTIONS VERSION="2018122800">
+    <QUESTIONS VERSION="2019020500">
         <QUESTION ID="1" TYPE="dropdown">
             <QUESTIONTEXT>
-                <![CDATA[Please select in which languages you can possibly communicate with your team]]>
+                <![CDATA[Please select the languages you could possibly communicate in:]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[english]]>
+                    <![CDATA[Only English]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[german]]>
+                    <![CDATA[Only German]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[english, but german is also possible]]>
+                    <![CDATA[Both possible but I prefer German]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[german, but english is also possible]]>
+                    <![CDATA[Both possible but I prefer English]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
