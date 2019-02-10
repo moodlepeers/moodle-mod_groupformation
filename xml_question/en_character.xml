@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="Big5 short version regular">
-    <QUESTIONS VERSION="2018122801">
+    <QUESTIONS VERSION="2018021001">
         <QUESTION ID="1" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[I see myself as someone who is talkative.]]>
@@ -78,7 +78,7 @@
         </QUESTION>
         <QUESTION ID="4" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I see myself as someone who generates a lot of enthusiasm.]]>
+                <![CDATA[I see myself as someone who is enthusiastic.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -103,7 +103,7 @@
         </QUESTION>
         <QUESTION ID="5" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I see myself as someone who tends to be quiet, inhibited.]]>
+                <![CDATA[I see myself as someone who tends to worry a lot.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -204,7 +204,7 @@
 
         <QUESTION ID="9" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I see myself as someone who does a thorough job.]]>
+                <![CDATA[I see myself as someone who is thorough.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -354,7 +354,7 @@
         </QUESTION>
         <QUESTION ID="15" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I see myself as someone who does things efficiently.]]>
+                <![CDATA[I see myself as someone who often does things efficiently.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -480,7 +480,7 @@
         </QUESTION>
         <QUESTION ID="20" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I see myself as someone who can be cold and aloof.]]>
+                <![CDATA[I see myself as someone who is sometimes cold and uncaring.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -531,7 +531,7 @@
 
         <QUESTION ID="22" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I see myself as someone who is depressed, blue.]]>
+                <![CDATA[I see myself as someone who is often depressed, blue.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -581,7 +581,7 @@
         </QUESTION>
         <QUESTION ID="24" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I see myself as someone who worries a lot.]]>
+                <![CDATA[I see myself as someone who tends to worry a lot.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -632,7 +632,7 @@
 
         <QUESTION ID="26" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I see myself as someone who is curious about many different thing.]]>
+                <![CDATA[I see myself as someone who is curious about many different things.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>

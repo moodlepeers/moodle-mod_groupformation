@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="times questions">
-    <QUESTIONS VERSION="2019020500">
+    <QUESTIONS VERSION="2019021001">
         <QUESTION ID="4" TYPE="dropdown">
             <QUESTIONTEXT>
                 <![CDATA[Wenn Sie auf Ihre gesamte Schullaufbahn zurückdenken: Welche Mathematiknote hatten Sie wohl etwa im Durchschnitt?]]>
@@ -41,11 +41,6 @@
                     <![CDATA[Unterhalb der Top 50%]]>
                 </OPTION>
             </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="7" TYPE="freetext">
-            <QUESTIONTEXT>
-                <![CDATA[In welchen Studiengang haben Sie sich eingeschrieben?]]>
-            </QUESTIONTEXT>
         </QUESTION>
     </QUESTIONS>
 </GROUPFORMATION>

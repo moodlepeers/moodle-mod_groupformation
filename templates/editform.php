@@ -479,7 +479,7 @@ defined('MOODLE_INTERNAL') || die();
             </div>
         </div>
 
-        <?php if (!$this->_['mathprepcourse']): ?>
+        <?php if (true || !$this->_['mathprepcourse']): ?>
             <div class="gf_pad_header">
                 <label class="gf_label" for="id_js_onlyactivestudents">
                     <input type="checkbox" id="id_js_onlyactivestudents" name="chbOnlyactivestudents" value="onlyactivestudents">
@@ -492,6 +492,8 @@ defined('MOODLE_INTERNAL') || die();
                 ">
                 </span>
             </div>
+        <?php endif;?>
+        <?php if (!$this->_['mathprepcourse']): ?>
             <div class="gf_pad_header">
                 <label class="gf_label" for="id_js_emailnotifications">
                     <input disabled type="checkbox">

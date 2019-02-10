@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="times questions">
-    <QUESTIONS VERSION="2019020500">
+    <QUESTIONS VERSION="2019021001">
         <QUESTION ID="4" TYPE="dropdown">
             <QUESTIONTEXT>
                 <![CDATA[Thinking back of your schooldays: What was – approximately - your grade point average in math?]]>
@@ -41,11 +41,6 @@
                     <![CDATA[below top 50%]]>
                 </OPTION>
             </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="7" TYPE="freetext">
-            <QUESTIONTEXT>
-                <![CDATA[In which degree seeking study programme are you enrolled?]]>
-            </QUESTIONTEXT>
         </QUESTION>
     </QUESTIONS>
 </GROUPFORMATION>
