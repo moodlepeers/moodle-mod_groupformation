@@ -137,6 +137,16 @@ defined('MOODLE_INTERNAL') || die();
             <div class="gf_pad_content" id="js_oneOfBinWrapper" style="display:none;">
                 <p id="oneOfBinInfoText"><?php echo get_string('choose_oob_answers', 'groupformation'); ?></p>
                 <input type="text" class="respwidth" id="js_oob_question" placeholder="<?php echo get_string('add_oob_question', 'groupformation'); ?>" style="width: 80%" />
+
+                <div id="oob_multiselect_box">
+                    <h5><?php echo get_string('choose_type', 'groupformation'); ?></h5>
+                    <p><?php echo get_string('decide_multiselect', 'groupformation'); ?></p>
+                    <label class="gf_label" for="id_js_binquestionmultiselect">
+                        <input type="checkbox" id="id_js_binquestionmultiselect"  value="wantMultiselect" />
+                        <?php echo get_string('multiselect', 'groupformation'); ?>
+                    </label>
+                </div>
+
                 <div class="grid">
                     <div id="oob">
                         <div class="multi_field_wrapper persist-area">

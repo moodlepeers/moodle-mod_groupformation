@@ -14,7 +14,7 @@ require(['jquery', 'jqueryui'], function($) {
 
         $(".settings_info").hide();
 
-        $("#non-js-content").hide();
+        //$("#non-js-content").hide();
         $("#js-content").show();
 
         var studentsInCourse = $('#studentsInCourse').text();
@@ -537,7 +537,7 @@ require(['jquery', 'jqueryui'], function($) {
                 $('#id_binquestion').prop('checked', true);
                 $("#js_oneOfBinWrapper").show('2000', 'swing');
 
-                // Get the value of Moodle nativ field #id_knowledgelines, parse it and create dynamic input fields.
+                // Get the value of Moodle nativ field #id_binquestionlines, parse it and create dynamic input fields.
                 var lines = $('textarea[name=binquestionlines]').val().split('\n');
                 wrapper = $('#oob').find('.multi_fields');
                 cat = 'oob';

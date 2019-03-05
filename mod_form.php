@@ -236,6 +236,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 
         // Add one of bin question.
         $mform->addElement('checkbox', 'binquestion', get_string('oneOfBinQuestion', 'groupformation'));
+        $mform->addElement('checkbox', 'binquestionmultiselect', get_string('multiselect', 'groupformation'));
         $mform->addElement('textarea', 'binquestiontext', get_string('oneOfBinQuestion', 'groupformation'),
             'wrap="virtual" rows="1" cols="50"');
         $mform->addElement('textarea', 'binquestionlines', get_string('oneOfBinAnswers', 'groupformation'),
@@ -246,6 +247,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
             get_string('homogenous', 'groupformation'),
             get_string('heterogenous', 'groupformation')), null);
 
+        $mform->disabledIf('binquestionmultiselect', 'binquestion', 'notchecked');
         $mform->disabledIf('binquestiontext', 'binquestion', 'notchecked');
         $mform->disabledIf('binquestionlines', 'binquestion', 'notchecked');
         $mform->disabledIf('binquestionimportance', 'binquestion', 'notchecked');

@@ -106,6 +106,9 @@ $string ['choose_oob_relation'] = 'Choose the required relation between the grou
 $string ['choose_answer'] = 'Choose one answer!';
 $string ['no_oob_question'] = 'No choice-question is chosen!';
 $string ['oob_selected_value'] = 'Selected value: ';
+$string ['decide_multiselect'] = 'Decide between multi-select- and single choice-question (Standard: single choice)';
+$string ['multiselect'] = 'Multi-select';
+$string ['choose_type'] = 'Choose Type';
 
 $string ['knowledge'] = 'Knowledge';
 $string ['knowledge_help'] = 'If topics (option below) are activated, this option gets automatically deactivated and disabled.';
