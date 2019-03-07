@@ -46,4 +46,21 @@ class mod_groupformation_binquestion_question extends mod_groupformation_dropdow
         return $answer;
     }
 
+
+    /**
+     * Reads answer
+     *
+     * @return array|null
+     * @throws coding_exception
+     */
+    public function read_answer() {
+        $parameter = $this->category . $this->questionid;
+        $answer = optional_param($parameter, null, PARAM_RAW);
+        if (isset($answer) && $answer != 0) {
+            return array('save', $answer);
+        } else {
+            return array('delete', null);
+        }
+    }
+
 }

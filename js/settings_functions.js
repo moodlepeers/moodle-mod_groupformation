@@ -78,7 +78,7 @@ require(['jquery', 'jqueryui'], function($) {
             });
         }
 
-        // If oob gets checked
+        // If oob gets checked.
 
         $('#id_js_oneofbin').click(function () {
             if ($('#id_binquestion').prop('checked')) {
@@ -87,6 +87,7 @@ require(['jquery', 'jqueryui'], function($) {
                 $('#id_binquestionlines').attr('disabled', 'disabled');
                 $('#id_binquestionrelation').attr('disabled', 'disabled');
                 $('#id_binquestionimportance').attr('disabled', 'disabled');
+                $('#id_binquestionmultiselect').attr('disabled', 'disabled');
 
                 $("#js_oneOfBinWrapper").hide('2000', 'swing');
             } else {
@@ -95,6 +96,7 @@ require(['jquery', 'jqueryui'], function($) {
                 $('#id_binquestionlines').removeAttr('disabled');
                 $('#id_binquestionrelation').removeAttr('disabled');
                 $('#id_binquestionimportance').removeAttr('disabled');
+                $('#id_binquestionmultiselect').removeAttr('disabled');
 
                 $("#js_oneOfBinWrapper").show('2000', 'swing');
             }
@@ -115,6 +117,17 @@ require(['jquery', 'jqueryui'], function($) {
                 $("#js_knowledgeWrapper").show('2000', 'swing');
             }
 
+        });
+
+        // If Multiselect box gets checked.
+        $('#id_js_binquestionmultiselect').click(function () {
+            if ($('#id_binquestionmultiselect').prop('checked')) {
+                $('#id_binquestionmultiselect').prop('checked', false);
+                // TODO show single choice preview
+            } else {
+                $('#id_binquestionmultiselect').prop('checked', true);
+                // TODO show multiselect preveiw
+            }
         });
 
 
@@ -536,6 +549,15 @@ require(['jquery', 'jqueryui'], function($) {
                 $('#id_js_oneofbin').prop('checked', true);
                 $('#id_binquestion').prop('checked', true);
                 $("#js_oneOfBinWrapper").show('2000', 'swing');
+
+                // Multiselect box
+                if ($('#id_binquestionmultiselect').prop('checked')){
+                    $('#id_js_binquestionmultiselect').prop('checked', true);
+                    // TODO show multiselect preview
+                } else {
+                    $('#id_js_binquestionmultiselect').prop('checked', false);
+                    // TODO show single choice preview
+                }
 
                 // Get the value of Moodle nativ field #id_binquestionlines, parse it and create dynamic input fields.
                 var lines = $('textarea[name=binquestionlines]').val().split('\n');
