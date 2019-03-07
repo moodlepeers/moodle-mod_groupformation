@@ -263,7 +263,7 @@ class mod_groupformation_questionnaire_controller {
         if ($this->categoryposition != -1) {
 
             $questions = array();
-            $multiselect = false;
+            $multiselect = true;
 
             $hasanswer = $this->usermanager->has_answers($this->userid, $category);
 
@@ -626,7 +626,13 @@ class mod_groupformation_questionnaire_controller {
 
         $type = $question->type;
         $questionid = $question->questionid;
+        $multiselect = true;
         $name = 'mod_groupformation_' . $type . '_question';
+        if ($type == 'binquestion'){
+            if ($multiselect){
+                $name = 'mod_groupformation_multiselect_question';
+            }
+        }
         $questionobj = new $name($category, $questionid);
         $answer = $questionobj->read_answer();
         if (is_null($answer)) {
@@ -635,10 +641,8 @@ class mod_groupformation_questionnaire_controller {
 
         if ($answer[0] == "save") {
             $this->usermanager->save_answer($userid, $category, $answer[1], $questionid);
-            var_dump('saved');
         } else if ($answer[0] == "delete") {
             $this->usermanager->delete_answer($userid, $category, $questionid);
-            var_dump('deleted');
         }
     }
 
