@@ -231,7 +231,7 @@ defined('MOODLE_INTERNAL') || die();
                                 <h5>
                                     <?php echo get_string('preview', 'groupformation');?>
                                 </h5>
-                                <div class="col_m_100">
+                                <div class="col_m_100" id="oobPreview">
                                     <table class="responsive-table">
                                         <colgroup>
                                             <col class="firstCol">
@@ -240,8 +240,8 @@ defined('MOODLE_INTERNAL') || die();
 
                                         <thead>
                                         <tr>
-                                            <th id="oobquestion" scope="col">
-                                                <?php echo get_string('no_oob_question', 'groupformation');?>
+                                            <th scope="col">
+                                                <?php echo get_string('choose_answer', 'groupformation'); ?>
                                             </th>
                                             <th></th>
                                         </tr>
@@ -249,7 +249,9 @@ defined('MOODLE_INTERNAL') || die();
                                         <tbody id="oneofbinpreview">
                                         <tr class="knowlRow">
                                             <th scope="row">
-                                                <?php echo get_string('choose_answer', 'groupformation'); ?>
+                                                <p id="oobquestionPreview">
+                                                    <?php echo get_string('no_oob_question', 'groupformation');?>
+                                                </p>
                                             </th>
 
                                             <td class="range">
@@ -263,6 +265,49 @@ defined('MOODLE_INTERNAL') || die();
                                                             'groupformation');?> 2
                                                     </option>
                                                     <option class="oobRow" id="oobRow2">
+                                                        <?php echo get_string('knowledge_dummy',
+                                                            'groupformation');?> 3
+                                                    </option>
+                                                </select>
+
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="col_m_100" id="oobMultiPreview" style="display:none;">
+                                    <table class="responsive-table">
+                                        <colgroup>
+                                            <col class="firstCol">
+                                            <col width="36%">
+                                        </colgroup>
+
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">
+                                                <?php echo get_string('choose_answers', 'groupformation'); ?>
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="oneofbinpreview">
+                                        <tr class="knowlRow">
+                                            <th id="oobquestionPreviewMulti" scope="row">
+                                                <?php echo get_string('no_oob_question', 'groupformation');?>
+                                            </th>
+
+                                            <td class="range">
+                                                <select multiple id="oobpreviewddMulti">
+                                                    <option class="oobRowMulti" id="oobRow0Multi">
+                                                        <?php echo get_string('knowledge_dummy',
+                                                            'groupformation');?> 1
+                                                    </option>
+                                                    <option class="oobRowMulti" id="oobRow1Multi">
+                                                        <?php echo get_string('knowledge_dummy',
+                                                            'groupformation');?> 2
+                                                    </option>
+                                                    <option class="oobRowMulti" id="oobRow2Multi">
                                                         <?php echo get_string('knowledge_dummy',
                                                             'groupformation');?> 3
                                                     </option>

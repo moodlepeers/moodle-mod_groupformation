@@ -123,10 +123,14 @@ require(['jquery', 'jqueryui'], function($) {
         $('#id_js_binquestionmultiselect').click(function () {
             if ($('#id_binquestionmultiselect').prop('checked')) {
                 $('#id_binquestionmultiselect').prop('checked', false);
-                // TODO show single choice preview
+                // Show single choice preview.
+                $('#oobMultiPreview').hide();
+                $('#oobPreview').show();
             } else {
                 $('#id_binquestionmultiselect').prop('checked', true);
-                // TODO show multiselect preveiw
+                // Show multiselect preveiw.
+                $('#oobMultiPreview').show();
+                $('#oobPreview').hide();
             }
         });
 
@@ -165,7 +169,8 @@ require(['jquery', 'jqueryui'], function($) {
 
         // Dynamic input oobquestion.
         $('#js_oob_question').keyup(function oobquestionInput() {
-            $('#oobquestion').text($(this).val());
+            $('#oobquestionPreview').text($(this).val());
+            $('#oobquestionPreviewMulti').text($(this).val());
             $('#id_binquestiontext').val($(this).val());
         });
 
@@ -230,6 +235,7 @@ require(['jquery', 'jqueryui'], function($) {
                 }
                 if (cat == 'oob'){
                     $('#' + $previewRowID).text($(this).val());
+                    $('#' + $previewRowID + 'Multi').text($(this).val());
                     synchronizeoob();
                 }
             });
@@ -426,6 +432,7 @@ require(['jquery', 'jqueryui'], function($) {
             }
             if (cat == 'oob'){
                 $('.oobRow:first-child', '#oobpreviewdd').clone(true).attr('id', $previewRowID).appendTo('#oobpreviewdd').text(value);
+                $('.oobRowMulti:first-child', '#oobpreviewddMulti').clone(true).attr('id', $previewRowID +'Multi').appendTo('#oobpreviewddMulti').text(value);
             }
         }
 
@@ -442,6 +449,9 @@ require(['jquery', 'jqueryui'], function($) {
                 $multifieldID = 'input' + cat + theID;
                 // Remove Preview.
                 $('#' + $previewRowID).remove();
+                if (cat == 'oob'){
+                    $('#' + $previewRowID + 'Multi').remove();
+                }
                 // Remove Input.
                 $('#' + $multifieldID).remove();
                 // Remove from Moodle native input field.
@@ -544,19 +554,23 @@ require(['jquery', 'jqueryui'], function($) {
             }
 
             // If oneofbin was checked before.
-            // TODO testen!!!
             if ($('#id_binquestion').prop('checked')) {
                 $('#id_js_oneofbin').prop('checked', true);
                 $('#id_binquestion').prop('checked', true);
                 $("#js_oneOfBinWrapper").show('2000', 'swing');
 
                 // Multiselect box
+                // TODO testen ob direkt beim laden die richtige Preview angezeigt wird
                 if ($('#id_binquestionmultiselect').prop('checked')){
                     $('#id_js_binquestionmultiselect').prop('checked', true);
-                    // TODO show multiselect preview
+                    // Show multiselect preview.
+                    $('#oobMultiPreview').show();
+                    $('#oobPreview').hide();
                 } else {
                     $('#id_js_binquestionmultiselect').prop('checked', false);
-                    // TODO show single choice preview
+                    // Show single choice preview.
+                    $('#oobMultiPreview').hide();
+                    $('#oobPreview').show();
                 }
 
                 // Get the value of Moodle nativ field #id_binquestionlines, parse it and create dynamic input fields.
@@ -573,9 +587,12 @@ require(['jquery', 'jqueryui'], function($) {
                 }
                 addInput(wrapper, cat, '');
 
-                // TODO Muss erweitert werden
                 var question = $('#id_binquestiontext').val();
-                $('#js_oob_question').val(question);
+                if (question != "") {
+                    $('#js_oob_question').val(question);
+                    $('#oobquestionPreview').text(question);
+                    $('#oobquestionPreviewMulti').text(question);
+                }
 
                 if($('#id_binquestionrelation option:selected').val() != 0){
                     var opt = $('#id_binquestionrelation option:selected').val();

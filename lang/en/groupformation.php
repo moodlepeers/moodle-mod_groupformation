@@ -104,6 +104,7 @@ $string ['choose_oob_importance'] = 'You can choose the importance of this quest
 $string ['relation'] = 'Relation:';
 $string ['choose_oob_relation'] = 'Choose the required relation between the groupmembers.';
 $string ['choose_answer'] = 'Choose one answer!';
+$string ['choose_answers'] = 'Choose as many answers you want!';
 $string ['no_oob_question'] = 'No choice-question is chosen!';
 $string ['oob_selected_value'] = 'Selected value: ';
 $string ['decide_multiselect'] = 'Decide between multi-select- and single choice-question (Standard: single choice)';
@@ -203,6 +204,7 @@ $string ['tabletitle_self'] = 'Self-assessment';
 $string ['tabletitle_srl'] = 'Self-controlled Learning';
 $string ['tabletitle_knowledge'] = 'How much do you know about the following topics?';
 $string ['tabletitle_binquestion'] = 'Choose one of the answers!';
+$string ['tabletitle_binquesiton_multi'] = 'You can choose as many answers you want!';
 
 $string ['stats_partly'] = 'You answered {$a->answered} out of {$a->questions} questions in the category "{$a->category}".';
 $string ['stats_all'] = 'You answered all questions in the category "{$a->category}".';

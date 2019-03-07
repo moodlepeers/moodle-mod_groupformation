@@ -267,6 +267,7 @@ class mod_groupformation_questionnaire_controller {
 
             $hasanswer = $this->usermanager->has_answers($this->userid, $category);
 
+
             if ($this->is_binquestion()){
                 $temp = $this->store->get_knowledge_or_topic_values($category);
                 $xmlcontent = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>';
@@ -514,7 +515,7 @@ class mod_groupformation_questionnaire_controller {
             $s .= '</h4>';
 
             // Print the header of a table or unordered list.
-            $s .= $table->get_header();
+            $s .= $table->get_header(); // TODO ändere title für multiselect
 
             foreach ($questions as $q) {
                 $s .= $q->get_html($this->highlightmissinganswers, $this->store->all_answers_required());
