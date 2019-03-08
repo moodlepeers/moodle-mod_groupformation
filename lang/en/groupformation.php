@@ -208,6 +208,8 @@ $string ['tabletitle_binquesiton_multi'] = 'You can choose as many answers you w
 
 $string ['stats_partly'] = 'You answered {$a->answered} out of {$a->questions} questions in the category "{$a->category}".';
 $string ['stats_all'] = 'You answered all questions in the category "{$a->category}".';
+$string ['stats_all_binquestion'] = 'You answered the question in the category "{$a->category}".';
+$string ['stats_none_binquestion'] = 'You did not answer the question in the category "{$a->category}".';
 $string ['stats_none'] = 'You did not answer any question in the category "{$a->category}".';
 $string ['tab_overview'] = 'Overview';
 $string ['tab_questionnaire'] = 'Questionnaire';

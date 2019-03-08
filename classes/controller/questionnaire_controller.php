@@ -263,7 +263,7 @@ class mod_groupformation_questionnaire_controller {
         if ($this->categoryposition != -1) {
 
             $questions = array();
-            $multiselect = true;
+            $multiselect = false;
 
             $hasanswer = $this->usermanager->has_answers($this->userid, $category);
 
@@ -605,6 +605,10 @@ class mod_groupformation_questionnaire_controller {
             }
         }
 
+        // There is only one question, if it's a binquestion.
+        if ($category == 'binquestion' && $number > 0){
+            $number = 1;
+        }
         if ($this->store->all_answers_required() && $this->usermanager->get_number_of_answers(
                 $this->userid, $category) != $number) {
             $go = false;
@@ -627,7 +631,7 @@ class mod_groupformation_questionnaire_controller {
 
         $type = $question->type;
         $questionid = $question->questionid;
-        $multiselect = true;
+        $multiselect = false;
         $name = 'mod_groupformation_' . $type . '_question';
         if ($type == 'binquestion'){
             if ($multiselect){

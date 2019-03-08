@@ -149,12 +149,19 @@ class mod_groupformation_util {
 
         $stats = array();
         foreach ($categories as $category => $value) {
+
             $count = $usermanager->get_number_of_answers($userid, $category);
+            if ($category == 'binquestion') {
+                if ($value >= 1){
+                    $value = 1;
+                }
+            }
             $stats [$category] = array(
-                    'questions' => $value,
-                    'answered' => $count,
-                    'missing' => $value - $count
+                'questions' => $value,
+                'answered' => $count,
+                'missing' => $value - $count
             );
+
         }
 
         return $stats;
