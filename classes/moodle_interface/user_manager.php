@@ -878,4 +878,35 @@ class mod_groupformation_user_manager {
         return $DB->get_records('groupformation_user_values',
                 array('groupformationid' => $this->groupformationid, 'userid' => $userid));
     }
+
+    /**
+     * Returns statistics about answers of users and submissions
+     *
+     * @return array
+     * @throws dml_exception
+     */
+    public function get_statistics() {
+        $stats = array();
+
+        $studentcount = count(mod_groupformation_util::get_users($this->groupformationid));
+
+        $stats ['enrolled'] = $studentcount;
+
+        $started = $this->get_started();
+        $startedcount = count($started);
+
+        $stats ['processing'] = $startedcount;
+
+        $completed = $this->get_completed();
+        $completedcount = count($completed);
+
+        $stats ['submitted'] = $completedcount;
+
+        $nomissinganswers = $this->get_completed_by_answer_count();
+        $nomissingcount = count($nomissinganswers);
+
+        $stats ['submitted_completely'] = $nomissingcount;
+
+        return $stats;
+    }
 }

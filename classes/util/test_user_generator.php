@@ -149,9 +149,18 @@ class mod_groupformation_test_user_generator {
                 }
                 try {
                     foreach ($categories as $category) {
+                        var_dump($category);
                         $questions2 = $store->get_questions($category);
+
                         foreach (array_values($questions2) as $key => $question) {
                             $options = $question->options;
+
+                            if ($category == 'points'){
+                                $options = array(
+                                        $store->get_max_points() => get_string('excellent', 'groupformation'),
+                                        0 => get_string('bad', 'groupformation'));
+                            }
+
                             $name = 'mod_groupformation_' . $question->type . '_question';
                             /** @var mod_groupformation_basic_question $questionobj */
                             $questionobj = new $name($category, $question->questionid, $question->question, $options);

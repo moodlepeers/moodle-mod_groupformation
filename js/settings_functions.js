@@ -84,10 +84,14 @@ require(['jquery', 'jqueryui'], function($) {
                 $('#id_knowledge').prop('checked', false);
                 $('#id_knowledgelines').attr('disabled', 'disabled');
 
+                switchTopics('enable');
+
                 $("#js_knowledgeWrapper").hide('2000', 'swing');
             } else {
                 $('#id_knowledge').prop('checked', true);
                 $('#id_knowledgelines').removeAttr('disabled');
+
+                switchTopics('disable');
 
                 $("#js_knowledgeWrapper").show('2000', 'swing');
             }
@@ -101,6 +105,7 @@ require(['jquery', 'jqueryui'], function($) {
                 switchKnowledge('enable');
             } else {
                 switchTopics('on');
+                switchTopics('enable');
                 switchKnowledge('off');
             }
         });
@@ -254,6 +259,9 @@ require(['jquery', 'jqueryui'], function($) {
             if (state == 'enable') {
                 $('#id_topics').removeAttr('disabled');
                 $('#id_js_topics').removeAttr('disabled');
+            }
+            if (state == 'js-disable') {
+                $('#id_js_topics').attr('disabled', 'disabled');
             }
             if (state == 'disable') {
                 $('#id_topics').attr('disabled', 'disabled');
@@ -426,7 +434,8 @@ require(['jquery', 'jqueryui'], function($) {
                     $('#topicsStateLabel').removeClass('optional').addClass('required');
 
                     switchTopics('on');
-                    $('#id_js_topics').prop('disabled', true);
+                    switchTopics('enable');
+                    //$('#id_js_topics').prop('disabled', true);
 
                     adjustGroupSizeOptions('none');
 
@@ -540,7 +549,7 @@ require(['jquery', 'jqueryui'], function($) {
 
                 switchTopics('off');
                 $('#topicsStateLabel').removeClass('required').addClass('optional');
-                $('#id_js_topics').prop('disabled', false);
+                switchTopics('enable');
 
                 setGroupSettings();
 
@@ -556,7 +565,7 @@ require(['jquery', 'jqueryui'], function($) {
                 switchTopics('off');
 
                 $('#topicsStateLabel').removeClass('required').addClass('optional');
-                $('#id_js_topics').prop('disabled', false);
+                switchTopics('enable');
 
                 setGroupSettings();
 
@@ -573,7 +582,7 @@ require(['jquery', 'jqueryui'], function($) {
                 $('#topicsStateLabel').removeClass('optional').addClass('required');
 
                 switchTopics('on');
-                switchTopics('disable');
+                switchTopics('js-disable');
 
                 switchKnowledge('off');
                 switchKnowledge('disable');

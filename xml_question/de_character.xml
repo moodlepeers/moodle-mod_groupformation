@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="Big5 short version regular">
-    <QUESTIONS VERSION="2017090901">
+    <QUESTIONS VERSION="2018111001">
         <QUESTION ID="1" TYPE="likert">
             <QUESTIONTEXT>
                 <![CDATA[Ich bin eher zurückhaltend, reserviert.]]>
@@ -28,7 +28,7 @@
         </QUESTION>
         <QUESTION ID="2" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Ich schenke anderen leicht vertrauen, glaube an das Gute im Menschen.]]>
+                <![CDATA[Ich bin gesprächig, unterhalte mich gern.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -53,7 +53,7 @@
         </QUESTION>
         <QUESTION ID="3" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Ich bin bequem, neige zur Faulheit.]]>
+                <![CDATA[Ich bin eher zurückhaltend, reserviert.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
