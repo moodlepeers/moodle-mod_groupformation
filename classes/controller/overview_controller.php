@@ -406,7 +406,6 @@ class mod_groupformation_overview_controller {
                     $a->category = '<a href="' . $url . '">' . $a->category . '</a>';
                 }
                 if ($key == 'binquestion'){
-                    var_dump($values ['answered'], $values ['questions'], $values['missing']);
                     if ($values ['answered'] > 0){
                         $array [] = get_string('stats_all_binquestion', 'groupformation', $a) .
                             ' <span class="questionaire_all">&#10004;</span>';

@@ -1904,6 +1904,22 @@ function xmldb_groupformation_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2018120500, 'groupformation');
     }
 
+    if ($oldversion < 2019031400) {
+
+        // Define field binquestionmultiselect to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('binquestionmultiselect', XMLDB_TYPE_INTEGER, '1', null, null, null, null, 'binquestionrelation');
+
+        // Conditionally launch add field binquestionmultiselect.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2019031400, 'groupformation');
+    }
+
+
 
     return true;
 }

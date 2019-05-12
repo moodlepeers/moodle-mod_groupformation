@@ -307,6 +307,11 @@ class mod_groupformation_storage_manager {
     public function get_number($category = null) {
         global $DB;
 
+        if ($category == 'binquestion' && ($DB->get_field('groupformation', $category . 'number', array(
+                'id' => $this->groupformationid
+            )) >= 1)) {
+            return 1; // TODO absprechen ob so okay
+        }
         if ($category == 'topic' || $category == 'knowledge' || $category == 'binquestion') {
             return $DB->get_field('groupformation', $category . 'number', array(
                     'id' => $this->groupformationid
@@ -316,6 +321,26 @@ class mod_groupformation_storage_manager {
                     'category' => $category
             ));
         }
+    }
+
+    /**
+     * Returns the number of questions in a specified category
+     *
+     * @param string $category
+     * @return mixed
+     * @throws dml_exception
+     */
+    public function get_question_number($category = null){
+        global $DB;
+
+        if ($category == 'binquesiton'){
+            if ($DB->get_field('groupformation', $category . 'number', array(
+                    'id' => $this->groupformationid
+                )) >= 1){
+                return 1;
+            }
+        }
+        return $this->get_number($category);
     }
 
     /**
@@ -339,6 +364,11 @@ class mod_groupformation_storage_manager {
         return $DB->get_field('groupformation', 'binquestiontext', array('id' => $this->groupformationid));
     }
 
+    public function get_binquestion_multiselect(){
+        global $DB;
+
+        return $DB->get_field('groupformation', 'binquestionmultiselect', array('id' => $this->groupformationid));
+    }
     /**
      * Returns max number of options for a specific question in a specific category
      *
