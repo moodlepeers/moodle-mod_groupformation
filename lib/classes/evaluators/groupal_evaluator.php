@@ -46,12 +46,14 @@ require_once($CFG->dirroot . '/mod/groupformation/lib/classes/criteria/tests/tes
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
+class mod_groupformation_evaluator implements mod_groupformation_ievaluator
+{
 
     /**
      * mod_groupformation_evaluator constructor.
      */
-    public function __construct() {
+    public function __construct()
+    {
     }
 
     /**
@@ -73,7 +75,8 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
      * @return float|int
      * @throws Exception
      */
-    public function evaluate_gpi(mod_groupformation_group $group) {
+    public function evaluate_gpi(mod_groupformation_group $group)
+    {
         // All Normalized paar performance indices of a Group
         $npis = array(); // Generic List: float.
 
@@ -139,7 +142,8 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
      * @return double
      */
     public
-    function evaluate_cpi(mod_groupformation_cohort $cohort) {
+    function evaluate_cpi(mod_groupformation_cohort $cohort)
+    {
         if (count($cohort->groups) == 0) {
             return 0;
         }
@@ -161,7 +165,8 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
      * @return mod_groupformation_stats
      */
     public
-    static function get_performance_index($performanceindices) {
+    static function get_performance_index($performanceindices)
+    {
         if (count($performanceindices) < 1) {
             return new mod_groupformation_stats();
         }
@@ -220,7 +225,8 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
      * @throws Exception
      */
     public
-    function calc_normalized_pair_performance(mod_groupformation_participant $p1, mod_groupformation_participant $p2) {
+    function calc_normalized_pair_performance(mod_groupformation_participant $p1, mod_groupformation_participant $p2)
+    {
         // The summed distances of all hommogeneous values.
         $homval = 0.0; // float
         // The summed distances of all heterogeneous values.
@@ -235,50 +241,49 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
         // Normlized pair performance index.
         $npi = 0.0; // float.
 
-
         if (count($p1->get_criteria()) !== count($p2->get_criteria())) {
             throw new Exception("calcPairPerformance: the entries have different count of criteria!!!");
         }
 
         foreach ($p1->get_criteria() as $c1) {
-            if (strpos($c1->get_distance(), 'both_bin_types_bins_covered_distance') === 1) {
 
-                // Get the same Criterion of the other participant (first criterion of $p2, that matches condition same as ).
-                $c2 = null;
-                foreach ($p2->get_criteria() as $cc) {
-                    if ($c1->get_name() == $cc->get_name()) {
-                        $c2 = $cc;
-                        break;
-                    }
-                }
-                if ($c2 === null) {
-                    throw new Exception("code error; unreachable state reached.");
-                }
+            // if (strpos($c1->get_distance(), 'both_bin_types_bins_covered_distance') === 1) {
 
-                // Calculate the specific distance
-                // and normalize the distanze over the maximal amount of dimensions so every criterion gets a value between 0 and 1.
-                // (otherwise the criterion will be unthought weighted ).
-                $distance_name = "mod_groupformation_" . $c1->get_distance();
-                $temp_distance = new $distance_name;
-
-
-                //TODO delete if is not running in test mode
-                ###################### TEST #######################
-                //$test = new test_one_of_bin();
-                //$test->log_criteria("criteria: ", $c1->get_name());
-                ###################################################
-
-                $d = $temp_distance->normalized_distance($c1, $c2);
-
-                //  $test->log_performance_index("normalized_distance: ", $d);
-                $wd = $d * $c1->get_weight();
-
-                if ($c1->is_homogeneous()) {
-                    $homval += $wd;
-                } else {
-                    $hetval += $wd;
+            // Get the same Criterion of the other participant (first criterion of $p2, that matches condition same as ).
+            $c2 = null;
+            foreach ($p2->get_criteria() as $cc) {
+                if ($c1->get_name() == $cc->get_name()) {
+                    $c2 = $cc;
+                    break;
                 }
             }
+            if ($c2 === null) {
+                throw new Exception("code error; unreachable state reached.");
+            }
+
+            // Calculate the specific distance
+            // and normalize the distanze over the maximal amount of dimensions so every criterion gets a value between 0 and 1.
+            // (otherwise the criterion will be unthought weighted ).
+            $distance_name = "mod_groupformation_" . $c1->get_distance();
+            $temp_distance = new $distance_name;
+
+            //TODO delete if is not running in test mode
+            ###################### TEST #######################
+            //$test = new test_one_of_bin();
+            //$test->log_criteria("criteria: ", $c1->get_name());
+            ###################################################
+
+            $d = $temp_distance->normalized_distance($c1, $c2);
+
+            //  $test->log_performance_index("normalized_distance: ", $d);
+            $wd = $d * $c1->get_weight();
+
+            if ($c1->is_homogeneous()) {
+                $homval += $wd;
+            } else {
+                $hetval += $wd;
+            }
+
         }
 
         $pairperformanceindex = $hetval - $homval;
@@ -308,7 +313,8 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
      * @throws Exception
      */
     public
-    function calc_normalized_one_against_group_performance(mod_groupformation_criterion $c1, mod_groupformation_group $group) {
+    function calc_normalized_one_against_group_performance(mod_groupformation_criterion $c1, mod_groupformation_group $group)
+    {
         // The summed distances of all hommogeneous values.
         $homval = 0.0; // float
         // The summed distances of all heterogeneous values.
@@ -409,7 +415,8 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
      * @return float|int
      */
     public
-    function calc_npi_with_weight($c, $hetval, $homval) {
+    function calc_npi_with_weight($c, $hetval, $homval)
+    {
         $pairperformanceindex = $hetval - $homval;
         $maxdist = 0.0; // Float.
         // Worst case Heterogen criteria is 0 and hom is 1 than the value for pairperformanceindex < 0.

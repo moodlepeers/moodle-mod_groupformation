@@ -49,15 +49,17 @@ class mod_groupformation_both_bin_types_bins_covered_criterion extends mod_group
      * @param bool $ishomo
      * @param number $weight
      * @param string $distance
+     * @param string $property
      * @throws Exception
      */
-    public function __construct($name, $valuearray, $minval, $maxval, $ishomo, $weight, $distance = "both_bin_types_bins_covered_distance") {
+    public function __construct($name, $valuearray, $minval, $maxval, $ishomo, $weight, $distance = "both_bin_types_bins_covered_distance", $property = "most") {
         $this->set_name($name);
         $this->set_min_value($minval);
         $this->set_max_value($maxval);
         $this->set_values($valuearray);
         $this->set_homogeneous($ishomo);
         $this->set_distance($distance);
+        $this->set_property($property);
         mod_groupformation_criterion_weight::add_if_not_allready_exist($name, $weight);
     }
 }

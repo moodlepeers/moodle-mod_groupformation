@@ -57,6 +57,24 @@ abstract class mod_groupformation_criterion {
 
     protected $distance = "manhattan_distance";
 
+    protected $property = "";
+
+    /**
+     * @return string
+     */
+    public function get_property()
+    {
+        return $this->property;
+    }
+
+    /**
+     * @param string $property
+     */
+    public function set_property($property)
+    {
+        $this->property = $property;
+    }
+
     /**
      * @return int
      */

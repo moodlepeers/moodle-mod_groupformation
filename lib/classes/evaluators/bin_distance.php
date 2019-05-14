@@ -53,23 +53,20 @@ class mod_groupformation_bin_distance implements mod_groupformation_idistance {
      */
     private function get_distance(mod_groupformation_criterion $cr1, mod_groupformation_criterion $cr2) {
 
-        $distance = 0.0;
+        $distance = 1;
         $index = 0;
 
         foreach ($cr1->get_values() as $p) {
             if ($p == 1) {
                 // get the distance between these two values
                 $distance = strcmp($p, $cr2->get_value($index));
-                // if the values are NOT equals then return distance of 1
-                // otherwise it will return a distance of 0
-                if ($distance != 0) {
-                    return 1.0;
+                // if the values are equals then return distance of 0
+                if ($distance == 0) {
+                    return 0;
                 }
-                break;
             }
             $index += 1;
         }
-
         return $distance;
     }
 
