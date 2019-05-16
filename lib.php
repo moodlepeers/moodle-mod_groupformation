@@ -572,6 +572,7 @@ function groupformation_set_fields(stdClass $groupformation) {
         $groupformation->binquestionnumber = null;
         $groupformation->binquestionimportance = null;
         $groupformation->binquestionrelation = null;
+        $groupformation->binquestionmultiselect = null;
     } else if (!isset ($groupformation->binquestion)) {
         $groupformation->binquestion = 0;
         $groupformation->binquestiontext = "";
@@ -580,6 +581,7 @@ function groupformation_set_fields(stdClass $groupformation) {
         $groupformation->binquestionnumber = null;
         $groupformation->binquestionimportance = null;
         $groupformation->binquestionrelation = null;
+        $groupformation->binquestionmultiselect = null;
     } else if (isset ($groupformation->binquestion) && $groupformation->binquestion == 1 &&
             isset ($groupformation->binquestiontext) && $groupformation->binquestiontext == "") {
         $groupformation->binquestion = 0;
@@ -589,6 +591,7 @@ function groupformation_set_fields(stdClass $groupformation) {
         $groupformation->binquestionnumber = null;
         $groupformation->binquestionimportance = null;
         $groupformation->binquestionrelation = null;
+        $groupformation->binquestionmultiselect = null;
     } else if (isset ($groupformation->binquestion) && $groupformation->binquestion == 1 &&
         isset ($groupformation->binquestionlines) && $groupformation->binquestionlines == "") {
         $groupformation->binquestion = 0;
@@ -598,6 +601,7 @@ function groupformation_set_fields(stdClass $groupformation) {
         $groupformation->binquestionnumber = null;
         $groupformation->binquestionimportance = null;
         $groupformation->binquestionrelation = null;
+        $groupformation->binquestionmultiselect = null;
     } else if (!isset($groupformation->binquestionimportance)) {
         $groupformation->binquestion = 0;
         $groupformation->binquestiontext = "";
@@ -606,10 +610,14 @@ function groupformation_set_fields(stdClass $groupformation) {
         $groupformation->binquestionnumber = null;
         $groupformation->binquestionimportance = null;
         $groupformation->binquestionrelation = null;
+        $groupformation->binquestionmultiselect = null;
     } else {
         $binanswerarray = array();
         if (!isset ($groupformation->binquestionrelation)){
             $groupformation->binquestionrelation = 0;
+        }
+        if (!isset($groupformation->binquestionmultiselect)){
+            $groupformation->binquestionmultiselect = 0;
         }
         if ($groupformation->binquestion != 0){
             $binanswerarray = explode("\n", $groupformation->binquestionlines);
