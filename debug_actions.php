@@ -24,6 +24,7 @@
  */
 require_once('../../config.php');
 require_once("lib/classes/criteria/tests/fake_participants.php");
+require_once("lib/classes/criteria/tests/fake_group.php");
 
 // Reads URL parameters.
 $runjob = optional_param('run_job', false, PARAM_BOOL);
@@ -34,6 +35,7 @@ $randomanswers = optional_param('random_answers', false, PARAM_BOOL);
 $deleteusers = optional_param('delete_users', false, PARAM_BOOL);
 $resetjob = optional_param('reset_job', false, PARAM_BOOL);
 $testbins = optional_param('test_bins', false, PARAM_BOOL);
+$testgroups = optional_param('test_groups', false, PARAM_BOOL);
 
 $debugbuttons = "";
 
@@ -121,10 +123,18 @@ if (($CFG->debug === 32767) || (in_array($USER->id, $debugusers))) {
         $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
             'id' => $id, 'do_show' => 'analysis'));
         redirect($return->out());
-
-
-
     }
+
+    // Create test group with participants for testing bin classes
+    if ($testgroups > 0) {
+        $participants = new mod_groupformation_fake_group();
+        $participants->create();
+
+        $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
+            'id' => $id, 'do_show' => 'analysis'));
+        redirect($return->out());
+    }
+
 
     // Generate debug actions as buttons.
     $debugbuttons = "";

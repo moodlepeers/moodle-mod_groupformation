@@ -85,21 +85,9 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator
         $gpi = 0.0; // float.
         $participants = $group->get_participants();
         $participantcount = count($participants);
-
         if ($participantcount == 0) {
             return 0;
         }
-
-        //TODO delete if is not running in test mode
-        ###################### TEST #######################
-//        $test = new test_one_of_bin();
-//        $participants = $test->create_participants($participants);
-//        $participantcount = count($participants);
-//
-//        if ($participantcount == 0) {
-//            return 0;
-//        }
-        ###################################################
 
 
         // Calculate npi for every pair of entries in the  group g (but not double and not compare with oneself!)
@@ -155,7 +143,6 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator
         $results = $this->get_performance_index($gpis);
         $cohort->results = $results;
         return $results->performanceindex;
-
     }
 
     /**
@@ -266,12 +253,6 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator
             // (otherwise the criterion will be unthought weighted ).
             $distance_name = "mod_groupformation_" . $c1->get_distance();
             $temp_distance = new $distance_name;
-
-            //TODO delete if is not running in test mode
-            ###################### TEST #######################
-            //$test = new test_one_of_bin();
-            //$test->log_criteria("criteria: ", $c1->get_name());
-            ###################################################
 
             $d = $temp_distance->normalized_distance($c1, $c2);
 
