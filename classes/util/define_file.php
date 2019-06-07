@@ -232,6 +232,29 @@ class mod_groupformation_data {
                             ),
                     ),
             ),
+        "binquestion" => array(
+                    "category" => "binquesiton",
+                    "scenarios" => array(1, 2),
+                    "evaluation" => false,
+                    "labels" => array(
+                            "singlechoice" => array(
+                                    "scenarios" => array(1 => true, 2 => true),
+                                    "evaluation" => false,
+                                    "questionids" => null,
+                                    "significant_id_only" => false,
+                                    "separate_dimensions" => false,
+                                    "cutoffs" => null,
+                            ),
+                            "multiselect" => array(
+                                    "scenarios" => array(1 => true, 2 => true),
+                                    "evaluation" => false,
+                                    "questionids" => null,
+                                    "significant_id_only" => false,
+                                    "separate_dimensions" => false,
+                                    "cutoffs" => null,
+                            ),
+                    ),
+            ),
     );
 
     /** @var bool Special mode booleans (can be ignored in normal use cases). */

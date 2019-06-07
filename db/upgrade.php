@@ -1919,6 +1919,21 @@ function xmldb_groupformation_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2019031400, 'groupformation');
     }
 
+    if ($oldversion < 2019060600) {
+
+        // Define field binvalue to be added to groupformation_user_values.
+        $table = new xmldb_table('groupformation_user_values');
+        $field = new xmldb_field('binvalue', XMLDB_TYPE_CHAR, '255', null, null, null, null, 'value');
+
+        // Conditionally launch add field binvalue.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2019060600, 'groupformation');
+    }
+
 
 
     return true;

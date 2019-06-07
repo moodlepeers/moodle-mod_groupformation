@@ -298,6 +298,17 @@ class mod_groupformation_storage_manager {
     }
 
     /**
+     * Returns number of possible choices of binquestion-answers
+     *
+     * @return mixed
+     * @throws dml_exception
+     */
+    public function get_number_binchoices() {
+        global $DB;
+        return $DB->get_field('groupformation', 'binquestionnumber', array(
+            'id' => $this->groupformationid));
+    }
+    /**
      * Returns the number of questions in a specified category
      *
      * @param string $category
@@ -886,6 +897,7 @@ class mod_groupformation_storage_manager {
         if ($this->groupformationid != null) {
             $hastopic = $this->get_number('topic');
             $hasknowledge = $this->get_number('knowledge');
+            $hasbinquestion = $this->get_number('binquestion');
             $grades = $this->ask_for_grade();
             $points = $this->ask_for_points();
             $position = 0;
@@ -893,7 +905,8 @@ class mod_groupformation_storage_manager {
                 if (('points' == $c && $points == false) ||
                         ('grade' == $c && $grades == false) ||
                         ($hastopic == 0 && 'topic' == $c) ||
-                        ($hasknowledge == 0 && ('knowledge' == $c))
+                        ($hasknowledge == 0 && ('knowledge' == $c)) ||
+                        ($hasbinquestion == 0 && ('binquestion' == $c))
                 ) {
                     unset ($array [$position]);
                 }

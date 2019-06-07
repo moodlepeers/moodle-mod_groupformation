@@ -416,6 +416,42 @@ class mod_groupformation_criterion_calculator {
         return $array;
     }
 
+
+    // TODO bisher nur grob. Testen, aufräumen, kommentieren.
+    public function get_binquestion($userid, $specs = null) {
+
+        if (is_null($specs)) {
+            $specs = mod_groupformation_data::get_criterion_specification('binquestion');
+        }
+        $scenario = $this->scenario;
+        $labels = $specs['labels'];
+        $array = array();
+        $category = $specs['category'];
+
+        $answers = $this->usermanager->get_answers($userid, $category);
+        $number_of_choices = floatval($this->store->get_number_binchoices());
+        $binvalue = $this->usermanager->get_single_answer($userid, $category,1);
+
+
+        // Iterate over labels of criterion.
+        foreach ($labels as $key => $spec) {
+            $binquestionvalues = array();
+
+            if (array_key_exists($scenario, $spec['scenarios'])) {
+
+                $binquestionvalues [] = array(
+                    'binvalue' => $binvalue,
+                    'number_choices' => $number_of_choices
+                );
+                //$binquestionvalues [] = $this->usermanager->get_single_answer($userid, $category, 1); //TODO muss eigentlich weg
+            }
+
+            $array[$key] = array('values' => $binquestionvalues);
+
+        }
+        return $array;
+    }
+
     /**
      * Returns points criterion values
      *

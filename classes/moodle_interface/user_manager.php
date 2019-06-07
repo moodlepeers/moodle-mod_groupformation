@@ -397,6 +397,15 @@ class mod_groupformation_user_manager {
 
         return false;
     }
+    //TODO entfernen
+    public function binanswers_help($userid, $category, $sortedby = null, $fieldset = '*'){
+        global $DB;
+        return $DB->get_records('groupformation_answers', array(
+            'groupformation' => $this->groupformationid,
+            'userid' => $userid,
+            'category' => $category
+        ), $sortedby, $fieldset);
+    }
 
     /**
      * Returns all answers of a specific user in a specific category
@@ -742,19 +751,32 @@ class mod_groupformation_user_manager {
                 foreach ($uservalues as $label => $values) {
                     $values = $values['values'];
                     foreach ($values as $dimension => $value) {
-                        $record = new stdClass();
-                        $record->groupformationid = $this->groupformationid;
-                        $record->userid = $userid;
-                        $record->criterion = $criterion;
-                        $record->label = $label;
-                        $record->dimension = $dimension;
-                        $record->value = $value;
-                        $records[] = $record;
+                        if ($criterion == 'binquestion'){
+                            $record = new stdClass();
+                            $record->groupformationid = $this->groupformationid;
+                            $record->userid = $userid;
+                            $record->criterion = $criterion;
+                            $record->label = $label;
+                            $record->dimension = $dimension;
+                            $record->value = $value['number_choices'];
+                            $record->binvalue = $value['binvalue'];
+                            $records[] = $record;
+                        } else {
+                            $record = new stdClass();
+                            $record->groupformationid = $this->groupformationid;
+                            $record->userid = $userid;
+                            $record->criterion = $criterion;
+                            $record->label = $label;
+                            $record->dimension = $dimension;
+                            $record->value = $value;
+                            $record->binvalue = '';
+                            $records[] = $record;
+                        }
                     }
                 }
             }
         }
-        var_dump($records);
+        var_dump('records', $records);
         $DB->insert_records('groupformation_user_values', $records);
     }
 
