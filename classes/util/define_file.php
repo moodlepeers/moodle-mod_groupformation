@@ -233,7 +233,7 @@ class mod_groupformation_data {
                     ),
             ),
         "binquestion" => array(
-                    "category" => "binquesiton",
+                    "category" => "binquestion",
                     "scenarios" => array(1, 2),
                     "evaluation" => false,
                     "labels" => array(

@@ -931,4 +931,18 @@ class mod_groupformation_user_manager {
 
         return $stats;
     }
+
+    /**
+     * Returns whether the the binquestion is a multiselect (1) or a single choice (0) question
+     *
+     * @return mixed
+     * @throws dml_exception
+     */
+    public function get_binquestionmultiselect(){
+        global  $DB;
+
+        return $DB->get_field('groupformation', 'binquestionmultiselect', array(
+            'id' => $this->groupformationid
+        ));
+    }
 }

@@ -418,6 +418,15 @@ class mod_groupformation_criterion_calculator {
 
 
     // TODO bisher nur grob. Testen, aufräumen, kommentieren.
+
+    /**
+     * Returns binquestion criterion values
+     *
+     * @param $userid
+     * @param null $specs
+     * @return array
+     * @throws dml_exception
+     */
     public function get_binquestion($userid, $specs = null) {
 
         if (is_null($specs)) {
@@ -428,9 +437,12 @@ class mod_groupformation_criterion_calculator {
         $array = array();
         $category = $specs['category'];
 
-        $answers = $this->usermanager->get_answers($userid, $category);
+        $questiontype = $this->usermanager->get_binquestionmultiselect(); // 0 := singlechoice; 1 := multiselect
         $number_of_choices = floatval($this->store->get_number_binchoices());
         $binvalue = $this->usermanager->get_single_answer($userid, $category,1);
+        $binvalue = str_replace('list:', '', $binvalue);
+        $binvalue = $questiontype . ',' . $binvalue; // the first value shows the questiontype
+
 
 
         // Iterate over labels of criterion.
@@ -443,7 +455,6 @@ class mod_groupformation_criterion_calculator {
                     'binvalue' => $binvalue,
                     'number_choices' => $number_of_choices
                 );
-                //$binquestionvalues [] = $this->usermanager->get_single_answer($userid, $category, 1); //TODO muss eigentlich weg
             }
 
             $array[$key] = array('values' => $binquestionvalues);
