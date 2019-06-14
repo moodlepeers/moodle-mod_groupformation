@@ -442,15 +442,15 @@ class mod_groupformation_criterion_calculator {
         $answers = $this->usermanager->get_single_answer($userid, $category,1);
         $answers = str_replace('list:', '', $answers);
         $answer_array = str_getcsv($answers);
-        var_dump($answer_array);
         $cur_index_answers = 0;
         $binvalue = '';
         $importance = floatval($this->usermanager->get_binquestionimportance())/10;
+
         if ($questiontype == 0){
             $answer_array[0] -= 1;
         }
 
-        for ($i = 0; $i < $number_of_choices; $i++) {
+        for ($i = 0; $i < $number_of_choices; $i++) { // Creates an array in a vector-form with 0 and 1 as entries like "0,1,1,0,0"
             if ($i == $answer_array[$cur_index_answers]){
                 $binvalue .= '1';
                 $cur_index_answers++;
