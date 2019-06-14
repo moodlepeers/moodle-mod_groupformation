@@ -446,6 +446,9 @@ class mod_groupformation_criterion_calculator {
         $cur_index_answers = 0;
         $binvalue = '';
         $importance = floatval($this->usermanager->get_binquestionimportance())/10;
+        if ($questiontype == 0){
+            $answer_array[0] -= 1;
+        }
 
         for ($i = 0; $i < $number_of_choices; $i++) {
             if ($i == $answer_array[$cur_index_answers]){
@@ -462,18 +465,20 @@ class mod_groupformation_criterion_calculator {
 
 
         // Iterate over labels of criterion.
-        foreach ($labels as $key => $spec) {
-            $binquestionvalues = array();
+        foreach ($labels as $key => $spec) { // maybe later there are more than one binquestion per groupformation
+            if (($questiontype == 0 && $key == 'singlechoice') || ($questiontype == 1 && $key == 'multiselect')) {
+                $binquestionvalues = array();
 
-            if (array_key_exists($scenario, $spec['scenarios'])) {
+                if (array_key_exists($scenario, $spec['scenarios'])) {
 
-                $binquestionvalues [] = array(
-                    'binvalue' => $binvalue,
-                    'importance' => $importance
-                );
+                    $binquestionvalues [] = array(
+                        'binvalue' => $binvalue,
+                        'importance' => $importance
+                    );
+                }
+
+                $array[$key] = array('values' => $binquestionvalues);
             }
-
-            $array[$key] = array('values' => $binquestionvalues);
 
         }
         return $array;
