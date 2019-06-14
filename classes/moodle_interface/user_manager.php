@@ -758,7 +758,7 @@ class mod_groupformation_user_manager {
                             $record->criterion = $criterion;
                             $record->label = $label;
                             $record->dimension = $dimension;
-                            $record->value = $value['number_choices'];
+                            $record->value = $value['importance'];
                             $record->binvalue = $value['binvalue'];
                             $records[] = $record;
                         } else {
@@ -942,6 +942,20 @@ class mod_groupformation_user_manager {
         global  $DB;
 
         return $DB->get_field('groupformation', 'binquestionmultiselect', array(
+            'id' => $this->groupformationid
+        ));
+    }
+
+    /**
+     * Returns binquestion importance value
+     *
+     * @return mixed
+     * @throws dml_exception
+     */
+    public function get_binquestionimportance(){
+        global  $DB;
+
+        return $DB->get_field('groupformation', 'binquestionimportance', array(
             'id' => $this->groupformationid
         ));
     }

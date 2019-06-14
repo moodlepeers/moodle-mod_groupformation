@@ -439,9 +439,25 @@ class mod_groupformation_criterion_calculator {
 
         $questiontype = $this->usermanager->get_binquestionmultiselect(); // 0 := singlechoice; 1 := multiselect
         $number_of_choices = floatval($this->store->get_number_binchoices());
-        $binvalue = $this->usermanager->get_single_answer($userid, $category,1);
-        $binvalue = str_replace('list:', '', $binvalue);
-        $binvalue = $questiontype . ',' . $binvalue; // the first value shows the questiontype
+        $answers = $this->usermanager->get_single_answer($userid, $category,1);
+        $answers = str_replace('list:', '', $answers);
+        $answer_array = str_getcsv($answers);
+        var_dump($answer_array);
+        $cur_index_answers = 0;
+        $binvalue = '';
+        $importance = floatval($this->usermanager->get_binquestionimportance())/10;
+
+        for ($i = 0; $i < $number_of_choices; $i++) {
+            if ($i == $answer_array[$cur_index_answers]){
+                $binvalue .= '1';
+                $cur_index_answers++;
+            } else {
+                $binvalue .= '0';
+            }
+            if (($i+1) < $number_of_choices){
+                $binvalue .= ',';
+            }
+        }
 
 
 
@@ -453,7 +469,7 @@ class mod_groupformation_criterion_calculator {
 
                 $binquestionvalues [] = array(
                     'binvalue' => $binvalue,
-                    'number_choices' => $number_of_choices
+                    'importance' => $importance
                 );
             }
 
