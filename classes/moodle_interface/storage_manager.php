@@ -1259,6 +1259,7 @@ class mod_groupformation_storage_manager {
 
         $groupalusers = $allanswers;
 
+
         if ($groupingsetting) {
             $randomusers = $someanswers;
         } else {

@@ -8,6 +8,9 @@ class mod_groupformation_fake_group
 {
     private $evaluator = null;
 
+    /**
+     * create test cases
+     */
     public function create()
     {
         mod_groupformation_group::set_group_members_max_size(100);
@@ -17,13 +20,17 @@ class mod_groupformation_fake_group
         die();
     }
 
-
+    /**
+     * create participants with one of bin criterion based on $values
+     * @param $values
+     * @return mod_groupformation_participant
+     */
     private function create_participant($values)
     {
         try {
             $participant = new mod_groupformation_participant();
             $c = new mod_groupformation_one_of_bin_criterion(
-                "one_of_bin", array(), 0, 1, true, 0.3);
+                "one_of_bin", array(), 0, 1, true, 0);
             $c->set_values($values);
             $participant->add_criterion($c);
             return $participant;
@@ -31,6 +38,9 @@ class mod_groupformation_fake_group
         }
     }
 
+    /**
+     * create a group with equals group member
+     */
     private function create_equals_group()
     {
         try {
@@ -78,6 +88,9 @@ class mod_groupformation_fake_group
         }
     }
 
+    /**
+     * create group with different group members with different values
+     */
     private function create_differently_group()
     {
         try {

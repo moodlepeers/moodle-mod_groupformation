@@ -3,11 +3,29 @@
 
 class mod_groupformation_fake_participants
 {
+    /**
+     * calling the different test cases
+     */
     public function create()
     {
-        $this->create_criterion();
+        try {
+            $this->one_of_bin_test_1();
+            $this->one_of_bin_test_2();
+            $this->one_of_bin_test_3();
+            $this->one_of_bin_test_4();
+            $this->one_of_bin_test_5();
+            $this->one_of_bin_test_6();
+            die();
+        } catch (Exception $e) {
+            die("Exception: " . $e);
+        }
     }
 
+    /**
+     * normalized participants
+     * @param $participants
+     * @return array
+     */
     private function call_normalized_function($participants)
     {
         // All Normalized paar performance indices of a Group
@@ -30,23 +48,11 @@ class mod_groupformation_fake_participants
         }
     }
 
-    private function create_criterion()
-    {
-        try {
-            $this->one_of_bin_test_1();
-            $this->one_of_bin_test_2();
-            $this->one_of_bin_test_3();
-            $this->one_of_bin_test_4();
-            $this->one_of_bin_test_5();
-            $this->one_of_bin_test_6();
-            die();
-        } catch (Exception $e) {
-            die("Exception: " . $e);
-        }
-    }
-
-
-    // create participants and add the one of bin criterion
+    /**
+     *  create participants and add the one of bin criterion
+     * @param $valueArray
+     * @return array
+     */
     private function create_one_of_bin($valueArray)
     {
         try {
@@ -91,6 +97,10 @@ class mod_groupformation_fake_participants
 
 
     //different test cases
+
+    /**
+     * test case 1 compare two different participants
+     */
     private function one_of_bin_test_1()
     {
         $valueArray = array();
@@ -101,6 +111,9 @@ class mod_groupformation_fake_participants
         $this->print_result(__FUNCTION__, $valueArray, 1, $participants);
     }
 
+    /**
+     * test case 2 compare two different participants
+     */
     private function one_of_bin_test_2()
     {
         $valueArray = array();
@@ -112,6 +125,9 @@ class mod_groupformation_fake_participants
     }
 
 
+    /**
+     * test case 3 compare three different participants
+     */
     private function one_of_bin_test_3()
     {
         $valueArray = array();
@@ -123,6 +139,9 @@ class mod_groupformation_fake_participants
         $this->print_result(__FUNCTION__, $valueArray, 0, $participants);
     }
 
+    /**
+     * test case 4 compare three different participants
+     */
     private function one_of_bin_test_4()
     {
         $valueArray = array();
@@ -134,6 +153,9 @@ class mod_groupformation_fake_participants
         $this->print_result(__FUNCTION__, $valueArray, 0, $participants);
     }
 
+    /**
+     * test case 5 compare three different participants
+     */
     private function one_of_bin_test_5()
     {
         $valueArray = array();
@@ -146,6 +168,9 @@ class mod_groupformation_fake_participants
     }
 
 
+    /**
+     * test case 6 compare four different participants
+     */
     private function one_of_bin_test_6()
     {
         $valueArray = array();

@@ -32,7 +32,6 @@ if (!defined('MOODLE_INTERNAL')) {
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/manhattan_distance.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/bin_distance.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/many_bin_distance.php");
-require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/both_bin_types_no_one_alone_distance.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/ievaluator.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/group.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion.php");

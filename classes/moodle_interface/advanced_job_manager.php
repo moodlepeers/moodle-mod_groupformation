@@ -210,7 +210,6 @@ class mod_groupformation_advanced_job_manager {
         $DB->delete_records('groupformation_jobs',
                 array('groupformationid' => $job->groupformationid)
         );
-
         return true;
     }
 
@@ -324,6 +323,23 @@ class mod_groupformation_advanced_job_manager {
         $groupformationid = $job->groupformationid;
 
         $store = new mod_groupformation_storage_manager ($groupformationid);
+
+        //TODO test case
+        /**
+         * test case: expand user with criterion
+         */
+        $user1 = $store->get_all_instances_with_user(7);
+        $user2 = $store->get_all_instances_with_user(16);
+        $user3 = $store->get_all_instances_with_user(8);
+
+        array_push($user1, ['criterion' => 'bin_distance']);
+        array_push($user2, ['criterion' => 'bin_distance']);
+        array_push($user3, ['criterion' => 'bin_distance']);
+
+        /**
+         * test case finished
+         */
+
 
         // Assign users.
         $users = $store->get_users_for_grouping($job);

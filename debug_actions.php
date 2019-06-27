@@ -69,6 +69,8 @@ if (($CFG->debug === 32767) || (in_array($USER->id, $debugusers))) {
 
         if (!is_null($job)) {
             $result = $ajm::do_groupal($job);
+
+            //die();
             $saved = $ajm::save_result($job, $result);
             $ajm::set_job($job, 'done');
             $store->statemachine->set_state(4);

@@ -79,7 +79,6 @@ class mod_groupformation_participant_parser {
      * @throws Exception
      */
     private function parse($users, $labels, $weights = null) {
-
         $participants = array();
         foreach ($users as $user) {
             $position = 0;
@@ -103,7 +102,7 @@ class mod_groupformation_participant_parser {
                     }
                 }
 
-                //TODO name the criterion labels like "criterion_label". Should wait until its implemented
+                //TODO change the label names if needed after frontend is connected
                 switch ($label) {
                     case "specific":
                         $criterion = new mod_groupformation_specific_criterion ($label, $value, $minval, $maxval, $homogen, $weight);

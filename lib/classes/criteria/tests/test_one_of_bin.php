@@ -5,7 +5,6 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/one_of_bin_criterion.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/many_of_bin_criterion.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/specific_criterion.php");
-require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/both_bin_types_bins_covered_criterion.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/participant.php");
 
 /**
