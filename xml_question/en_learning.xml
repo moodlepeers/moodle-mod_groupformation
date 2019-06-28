@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="KOLB learning styles">
      <QUESTIONS VERSION="2017060319">
-     	<QUESTION ID="1" TYPE="likert">
+        <QUESTION ID="1" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[I learn by feeling.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[disagree]]>
+                        <![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
+                        <![CDATA[]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[agree]]>
-					</OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[agree]]>
+                    </OPTION>
                </OPTIONS>
          </QUESTION>
           
@@ -33,23 +33,23 @@
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[disagree]]>
+                        <![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
+                        <![CDATA[]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[agree]]>
-					</OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[agree]]>
+                    </OPTION>
                </OPTIONS>
           </QUESTION>
           
@@ -59,49 +59,49 @@
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[disagree]]>
+                        <![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
+                        <![CDATA[]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[agree]]>
-					</OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[agree]]>
+                    </OPTION>
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="4" TYPE="likert">
+         <QUESTION ID="4" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[I learn by thinking.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[disagree]]>
+                        <![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
+                        <![CDATA[]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[agree]]>
-					</OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[agree]]>
+                    </OPTION>
                </OPTIONS>
          </QUESTION>
           
@@ -111,49 +111,49 @@
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[disagree]]>
+                        <![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
+                        <![CDATA[]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[agree]]>
-					</OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[agree]]>
+                    </OPTION>
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="6" TYPE="likert">
+         <QUESTION ID="6" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[When I learn, I first consider all possible perspectives of the subject.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[disagree]]>
+                        <![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
+                        <![CDATA[]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[agree]]>
-					</OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[agree]]>
+                    </OPTION>
                </OPTIONS>
          </QUESTION>
           
@@ -163,49 +163,49 @@
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[disagree]]>
+                        <![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
+                        <![CDATA[]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[agree]]>
-					</OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[agree]]>
+                    </OPTION>
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="8" TYPE="likert">
+         <QUESTION ID="8" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[I prefer to try out things for myself to be sure of the possibilities.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[disagree]]>
+                        <![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
+                        <![CDATA[]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[agree]]>
-					</OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[agree]]>
+                    </OPTION>
                </OPTIONS>
          </QUESTION>
           
@@ -215,49 +215,49 @@
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[disagree]]>
+                        <![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
+                        <![CDATA[]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[agree]]>
-					</OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[agree]]>
+                    </OPTION>
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="10" TYPE="likert">
+         <QUESTION ID="10" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[I learn best when I can proceed practically.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[disagree]]>
+                        <![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
+                        <![CDATA[]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[agree]]>
-					</OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[agree]]>
+                    </OPTION>
                </OPTIONS>
          </QUESTION>
           
@@ -267,49 +267,49 @@
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[disagree]]>
+                        <![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
+                        <![CDATA[]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[agree]]>
-					</OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[agree]]>
+                    </OPTION>
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="12" TYPE="likert">
+         <QUESTION ID="12" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[When I learn, I proceed rationally.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[disagree]]>
+                        <![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
+                        <![CDATA[]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[agree]]>
-					</OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[agree]]>
+                    </OPTION>
                </OPTIONS>
          </QUESTION>
           
@@ -319,75 +319,75 @@
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[disagree]]>
+                        <![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
+                        <![CDATA[]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[agree]]>
-					</OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[agree]]>
+                    </OPTION>
                </OPTIONS>
           </QUESTION>
 
-		  <QUESTION ID="14" TYPE="likert">
+          <QUESTION ID="14" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[I learn best from personal contacts.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[disagree]]>
+                        <![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
+                        <![CDATA[]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[agree]]>
-					</OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[agree]]>
+                    </OPTION>
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="15" TYPE="likert">
+         <QUESTION ID="15" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[I learn best when I can rely on logical ideas.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[disagree]]>
+                        <![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
+                        <![CDATA[]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[agree]]>
-					</OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[agree]]>
+                    </OPTION>
                </OPTIONS>
          </QUESTION>
           
@@ -397,49 +397,49 @@
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[disagree]]>
+                        <![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
+                        <![CDATA[]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[agree]]>
-					</OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[agree]]>
+                    </OPTION>
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="17" TYPE="likert">
+         <QUESTION ID="17" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[I learn best when I can see the results of my work.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[disagree]]>
+                        <![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
+                        <![CDATA[]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[agree]]>
-					</OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[agree]]>
+                    </OPTION>
                </OPTIONS>
          </QUESTION>
           
@@ -449,23 +449,23 @@
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[disagree]]>
+                        <![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
+                        <![CDATA[]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[agree]]>
-					</OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[agree]]>
+                    </OPTION>
                </OPTIONS>
          </QUESTION>
           
@@ -475,23 +475,23 @@
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[disagree]]>
+                        <![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
+                        <![CDATA[]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[agree]]>
-					</OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[agree]]>
+                    </OPTION>
                </OPTIONS>
           </QUESTION>
           
@@ -501,49 +501,49 @@
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[disagree]]>
+                        <![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
+                        <![CDATA[]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[agree]]>
-					</OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[agree]]>
+                    </OPTION>
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="21" TYPE="likert">
+         <QUESTION ID="21" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[I learn best when I rely on my observations.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[disagree]]>
+                        <![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
+                        <![CDATA[]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[agree]]>
-					</OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[agree]]>
+                    </OPTION>
                </OPTIONS>
          </QUESTION>
           
@@ -553,49 +553,49 @@
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[disagree]]>
+                        <![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
+                        <![CDATA[]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[agree]]>
-					</OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[agree]]>
+                    </OPTION>
                </OPTIONS>
          </QUESTION>
           
-		 <QUESTION ID="23" TYPE="likert">
+         <QUESTION ID="23" TYPE="likert">
                <QUESTIONTEXT>
                     <![CDATA[I don't take advantage of learning situations in which I have a passive role.]]>
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[disagree]]>
+                        <![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
+                        <![CDATA[]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[agree]]>
-					</OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[agree]]>
+                    </OPTION>
                </OPTIONS>
          </QUESTION>
           
@@ -605,23 +605,23 @@
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[disagree]]>
+                        <![CDATA[disagree]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
+                        <![CDATA[]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[agree]]>
-					</OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[agree]]>
+                    </OPTION>
                </OPTIONS>
          </QUESTION>
      </QUESTIONS>

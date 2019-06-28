@@ -27,6 +27,7 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 defined('MOODLE_INTERNAL') || die ();
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
@@ -108,18 +109,46 @@ function groupformation_get_group_members($groupformationid, $userid) {
     return $members;
 }
 
+/**
+ * Returns group name
+ *
+ * @param $groupformationid
+ * @param $userid
+ * @return mixed
+ * @throws dml_exception
+ */
 function groupformation_get_group_name($groupformationid, $userid) {
     $groupsmanager = new mod_groupformation_groups_manager ($groupformationid);
     return $groupsmanager->get_group_name($userid);
 }
 
+/**
+ * Returns course module for activity
+ *
+ * @param $groupformationid
+ * @return mixed
+ * @throws dml_exception
+ */
 function groupformation_get_cm($groupformationid) {
     global $DB;
     $gfinstance = groupformation_get_instance_by_id($groupformationid);
-    $moduleid = $DB->get_field('modules', 'id', array('name' => 'groupformation'));
-    return $DB->get_field('course_modules', 'id', array('course'=> $gfinstance->course, 'module' => $moduleid, 'instance' => $groupformationid));
-}
 
+    if ($gfinstance) {
+        $moduleid = $DB->get_field('modules', 'id', array('name' => 'groupformation'));
+        return $DB->get_field('course_modules', 'id', array('course' => $gfinstance->course, 'module' => $moduleid, 'instance' => $groupformationid));
+    }
+
+    return null;
+    }
+
+/**
+ * Returns whether user has a group
+ *
+ * @param $groupformationid
+ * @param $userid
+ * @return bool
+ * @throws dml_exception
+ */
 function groupformation_has_group($groupformationid, $userid) {
     $groupsmanager = new mod_groupformation_groups_manager ($groupformationid);
     return $groupsmanager->has_group($userid);

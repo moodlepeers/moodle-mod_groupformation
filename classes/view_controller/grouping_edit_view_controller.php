@@ -37,6 +37,7 @@ class mod_groupformation_grouping_edit_view_controller extends mod_groupformatio
 
     /** @var array Template names */
     protected $templatenames = array('grouping_edit_header', 'grouping_edit_groups');
+
     /** @var string Title of page */
     protected $title = 'grouping_edit';
 
@@ -64,5 +65,79 @@ class mod_groupformation_grouping_edit_view_controller extends mod_groupformatio
         $overviewoptions->assign_multiple($this->controller->load_edit_groups());
 
         return $overviewoptions->load_template();
+    }
+
+    /**
+     * Renders content
+     *
+     * @return string
+     * @throws coding_exception
+     * @throws dml_exception
+     */
+    public function render() {
+        $store = $this->store;
+        $id = $this->controller->cm->id;
+        $context = context_module::instance($id);
+
+        $output = "";
+
+        if (groupformation_get_current_questionnaire_version() > $store->get_version()) {
+            $output .= '<div class="alert">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
+        }
+
+        if ($store->is_archived() && has_capability('mod/groupformation:editsettings', $context)) {
+            $output .= '<div class="alert" id="commited_view">';
+            $output .= get_string('archived_activity_admin', 'groupformation');
+            $output .= '</div>';
+        } else {
+            $output .= '<form id="edit_groups_form" action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
+            $output .= '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
+            $output .= '<input type="hidden" name="id" value="' . $id . '"/>';
+
+            $output .= parent::render();
+
+            $output .= '</form>';
+        }
+
+        return $output;
+    }
+
+    /**
+     * Handles access
+     *
+     * @throws coding_exception
+     * @throws moodle_exception
+     */
+    public function handle_access() {
+        $id = $this->controller->cm->id;
+        $context = context_module::instance($id);
+
+        if (!has_capability('mod/groupformation:editsettings', $context)) {
+            $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
+                    'id' => $id, 'do_show' => 'view'));
+            redirect($returnurl);
+        }
+    }
+
+    /**
+     * Handles actions
+     *
+     * @throws coding_exception
+     * @throws moodle_exception
+     */
+    public function handle_actions() {
+        $controller = $this->controller;
+        $id = $this->controller->cmid;
+
+        if ((data_submitted()) && confirm_sesskey()) {
+            $saveedit = optional_param('save_edit', null, PARAM_BOOL);
+            if (true || (isset ($saveedit) && $saveedit == 1)) {
+                $groupsstring = optional_param('groups_string', null, PARAM_TEXT);
+                $controller->save_edit($groupsstring);
+            }
+            $returnurl = new moodle_url ('/mod/groupformation/grouping_view.php', array(
+                    'id' => $id, 'do_show' => 'grouping'));
+            redirect($returnurl);
+        }
     }
 }

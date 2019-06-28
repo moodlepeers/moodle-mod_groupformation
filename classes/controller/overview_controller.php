@@ -23,9 +23,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.');
-}
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
@@ -62,9 +60,6 @@ class mod_groupformation_overview_controller {
 
     /** @var mod_groupformation_user_manager The manager of user data */
     private $usermanager;
-
-    /** @var int Current view state */
-    private $viewstate;
 
     /** @var array State info array */
     private $groupformationstateinfo = array();
@@ -410,17 +405,29 @@ class mod_groupformation_overview_controller {
                 if (!$this->store->all_answers_required() || !$previncomplete) {
                     $a->category = '<a href="' . $url . '">' . $a->category . '</a>';
                 }
-                if ($values ['missing'] == 0) {
-                    $array [] = get_string('stats_all', 'groupformation', $a) .
-                        ' <span class="questionaire_all">&#10004;</span>';
-                    $previncomplete = false;
-                } else if ($values ['answered'] == 0) {
-                    $array [] = get_string('stats_none', 'groupformation', $a) .
-                        ' <span class="questionaire_none">&#10008;</span>';
-                    $previncomplete = true;
+                if ($key == 'binquestion'){
+                    if ($values ['answered'] > 0){
+                        $array [] = get_string('stats_all_binquestion', 'groupformation', $a) .
+                            ' <span class="questionaire_all">&#10004;</span>';
+                        $previncomplete = false;
+                    } else {
+                        $array [] = get_string('stats_none_binquestion', 'groupformation', $a) .
+                            ' <span class="questionaire_none">&#10008;</span>';
+                        $previncomplete = true;
+                    }
                 } else {
-                    $array [] = get_string('stats_partly', 'groupformation', $a);
-                    $previncomplete = true;
+                    if ($values ['missing'] == 0) {
+                        $array [] = get_string('stats_all', 'groupformation', $a) .
+                            ' <span class="questionaire_all">&#10004;</span>';
+                        $previncomplete = false;
+                    } else if ($values ['answered'] == 0) {
+                        $array [] = get_string('stats_none', 'groupformation', $a) .
+                            ' <span class="questionaire_none">&#10008;</span>';
+                        $previncomplete = true;
+                    } else {
+                        $array [] = get_string('stats_partly', 'groupformation', $a);
+                        $previncomplete = true;
+                    }
                 }
             }
         }

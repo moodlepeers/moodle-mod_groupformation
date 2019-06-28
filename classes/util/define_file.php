@@ -21,9 +21,8 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.');
-}
+
+defined('MOODLE_INTERNAL') || die();
 
 /**
  * Class mod_groupformation_data
@@ -228,6 +227,29 @@ class mod_groupformation_data {
                                     "questionids" => null,
                                     "significant_id_only" => false,
                                     "separate_dimensions" => true,  // All questions remain seperate.
+                                    "cutoffs" => null,
+                            ),
+                    ),
+            ),
+        "binquestion" => array(
+                    "category" => "binquestion",
+                    "scenarios" => array(1, 2),
+                    "evaluation" => false,
+                    "labels" => array(
+                            "singlechoice" => array(
+                                    "scenarios" => array(1 => true, 2 => true),
+                                    "evaluation" => false,
+                                    "questionids" => null,
+                                    "significant_id_only" => false,
+                                    "separate_dimensions" => false,
+                                    "cutoffs" => null,
+                            ),
+                            "multiselect" => array(
+                                    "scenarios" => array(1 => true, 2 => true),
+                                    "evaluation" => false,
+                                    "questionids" => null,
+                                    "significant_id_only" => false,
+                                    "separate_dimensions" => false,
                                     "cutoffs" => null,
                             ),
                     ),

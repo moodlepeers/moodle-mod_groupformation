@@ -17,55 +17,50 @@
  * Prints a particular instance of groupformation questionnaire
  *
  * @package     mod_groupformation
- * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic, Sven Timpe
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/input_question.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/dropdown_question.php');
 
 /**
- * Class mod_groupformation_number_question
+ * Class mod_groupformation_binquestion_question
  *
  * @package     mod_groupformation
- * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic, Sven Timpe
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class mod_groupformation_number_question extends mod_groupformation_input_question {
+class mod_groupformation_binquestion_question extends mod_groupformation_dropdown_question {
 
     /**
-     * Returns input of question
+     * Returns answer
      *
-     * @return string
+     * @return int|mixed|null
      */
-    public function get_input() {
-        $category = $this->category;
-        $questionid = $this->questionid;
-        $options = $this->options;
+    public function get_answer() {
         $answer = $this->answer;
-
-        $input = "";
-
-        $input .= '<input style="height:35px" class="freetext-textarea form-control" type="number" min="';
-        $input .= $options[0] . '" max="' . $options[1] . '" value="' . ((is_number($answer)) ? intval($answer) : "") . '" name="';
-        $input .= $category;
-        $input .= $questionid;
-        $input .= '">';
-
-        return $input;
+        return $answer;
     }
+
 
     /**
-     * Returns random answer
+     * Reads answer
      *
-     * @return int
+     * @return array|null
+     * @throws coding_exception
      */
-    public function create_random_answer() {
-        $options = $this->options;
-        return rand($options[0], $options[1]);
+    public function read_answer() {
+        $parameter = $this->category . $this->questionid;
+        $answer = optional_param($parameter, null, PARAM_RAW);
+        if (isset($answer) && $answer != 0) {
+            return array('save', $answer);
+        } else {
+            return array('delete', null);
+        }
     }
-}
 
+}

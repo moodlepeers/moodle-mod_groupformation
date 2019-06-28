@@ -22,9 +22,8 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.');
-}
+
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/criteria/specific_criterion.php');
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/participant.php');
@@ -102,18 +101,19 @@ class mod_groupformation_participant_parser {
                     }
                 }
 
+
                 //TODO change the label names if needed after frontend is connected
                 switch ($label) {
                     case "specific":
                         $criterion = new mod_groupformation_specific_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
                         break;
-                    case "bin_distance":
+                    case "binquestion_singlechoice":
                         $criterion = new mod_groupformation_one_of_bin_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
                         break;
-                    case "many_bin_distance":
-                        $criterion = new mod_groupformation_many_of_bin_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
-                        break;
-                    case "both_bin_types_bins_covered":
+                   // case "binquestion_multiselect ":
+                     //   $criterion = new mod_groupformation_many_of_bin_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
+                       // break;
+                   // case "both_bin_types_bins_covered":
                        // $criterion = new mod_groupformation_both_bin_types_bins_covered_criterion($label, $value, $minval, $maxval, $homogen, $weight);
                     default:
                         // TODO default criterion
@@ -138,6 +138,7 @@ class mod_groupformation_participant_parser {
      *
      * @param array $users
      * @return array
+     * @throws dml_exception
      */
     public function build_topic_participants($users) {
         if (count($users) == 0) {
@@ -181,7 +182,7 @@ class mod_groupformation_participant_parser {
             return array();
         }
 
-        $scenario = $this->store->get_scenario();
+        $scenario = $this->store->get_scenario(true);
 
         $starttime = microtime(true);
 
@@ -196,6 +197,7 @@ class mod_groupformation_participant_parser {
             $criteriaspecs = $specs;
         }
 
+        // var_dump(array_keys($criteriaspecs));
         $criteriaspecs = $this->criterioncalculator->filter_criteria_specs($criteriaspecs, $users);
 
         $array = array();
@@ -211,9 +213,12 @@ class mod_groupformation_participant_parser {
 
                 if (in_array($scenario, $spec['scenarios'])) {
                     $points = array();
-                    if ($this->usermanager->has_answered_everything($user)) {
+                    $answeredeverything = $this->usermanager->has_answered_everything($user);
+                    if ($answeredeverything) {
                         $points = $this->criterioncalculator->read_values_for_user($criterion, $user, $spec);
                     }
+
+                    // var_dump($points);
                     foreach ($spec['labels'] as $label => $lspec) {
                         $value = array();
                         $vs = $points[$label]["values"];
@@ -234,7 +239,6 @@ class mod_groupformation_participant_parser {
         $res = $this->parse($array, $totallabel, $weights);
         $endtime = microtime(true);
         $comptime = $endtime - $starttime;
-
         return $res;
     }
 

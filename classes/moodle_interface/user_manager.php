@@ -22,9 +22,8 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.');
-}
+
+defined('MOODLE_INTERNAL') || die();
 
 /**
  * Class mod_groupformation_user_manager
@@ -398,6 +397,15 @@ class mod_groupformation_user_manager {
 
         return false;
     }
+    //TODO entfernen
+    public function binanswers_help($userid, $category, $sortedby = null, $fieldset = '*'){
+        global $DB;
+        return $DB->get_records('groupformation_answers', array(
+            'groupformation' => $this->groupformationid,
+            'userid' => $userid,
+            'category' => $category
+        ), $sortedby, $fieldset);
+    }
 
     /**
      * Returns all answers of a specific user in a specific category
@@ -641,10 +649,10 @@ class mod_groupformation_user_manager {
      * @return bool
      */
     public function validate_participant_code($participantcode) {
-        if (strlen($participantcode) !== 8) {
+        if (strlen($participantcode) !== 6) {
             return false;
         }
-        $array = array(true, false, true, false);
+        $array = array(true, true, false);
         $valid = true;
         $i = 0;
         $d = 2;
@@ -743,18 +751,32 @@ class mod_groupformation_user_manager {
                 foreach ($uservalues as $label => $values) {
                     $values = $values['values'];
                     foreach ($values as $dimension => $value) {
-                        $record = new stdClass();
-                        $record->groupformationid = $this->groupformationid;
-                        $record->userid = $userid;
-                        $record->criterion = $criterion;
-                        $record->label = $label;
-                        $record->dimension = $dimension;
-                        $record->value = $value;
-                        $records[] = $record;
+                        if ($criterion == 'binquestion'){
+                            $record = new stdClass();
+                            $record->groupformationid = $this->groupformationid;
+                            $record->userid = $userid;
+                            $record->criterion = $criterion;
+                            $record->label = $label;
+                            $record->dimension = $dimension;
+                            $record->value = $value['importance'];
+                            $record->binvalue = $value['binvalue'];
+                            $records[] = $record;
+                        } else {
+                            $record = new stdClass();
+                            $record->groupformationid = $this->groupformationid;
+                            $record->userid = $userid;
+                            $record->criterion = $criterion;
+                            $record->label = $label;
+                            $record->dimension = $dimension;
+                            $record->value = $value;
+                            $record->binvalue = '';
+                            $records[] = $record;
+                        }
                     }
                 }
             }
         }
+        var_dump('records', $records);
         $DB->insert_records('groupformation_user_values', $records);
     }
 
@@ -908,5 +930,33 @@ class mod_groupformation_user_manager {
         $stats ['submitted_completely'] = $nomissingcount;
 
         return $stats;
+    }
+
+    /**
+     * Returns whether the the binquestion is a multiselect (1) or a single choice (0) question
+     *
+     * @return mixed
+     * @throws dml_exception
+     */
+    public function get_binquestionmultiselect(){
+        global  $DB;
+
+        return $DB->get_field('groupformation', 'binquestionmultiselect', array(
+            'id' => $this->groupformationid
+        ));
+    }
+
+    /**
+     * Returns binquestion importance value
+     *
+     * @return mixed
+     * @throws dml_exception
+     */
+    public function get_binquestionimportance(){
+        global  $DB;
+
+        return $DB->get_field('groupformation', 'binquestionimportance', array(
+            'id' => $this->groupformationid
+        ));
     }
 }

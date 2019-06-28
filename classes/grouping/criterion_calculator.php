@@ -23,9 +23,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
-}
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
@@ -67,7 +65,7 @@ class mod_groupformation_criterion_calculator {
         $this->groupformationid = $groupformationid;
         $this->store = new mod_groupformation_storage_manager ($groupformationid);
         $this->usermanager = new mod_groupformation_user_manager ($groupformationid);
-        $this->scenario = $this->store->get_scenario();
+        $this->scenario = $this->store->get_scenario(true);
     }
 
     /**
@@ -96,88 +94,98 @@ class mod_groupformation_criterion_calculator {
      */
     public function filter_criteria_specs($criteriaspecs, $users, $eval = false) {
         $filteredspecs = array();
+
         foreach ($criteriaspecs as $criterion => $spec) {
-            $category = $spec['category'];
-            $labels = $spec['labels'];
-            if (!is_null($spec) && in_array($this->scenario, $spec['scenarios']) &&
-                (!$eval || (array_key_exists('evaluation', $spec) &&
-                        $spec['evaluation']))) {
+            if (!is_null($spec)) {
 
-                $positions = array();
-                foreach ($labels as $label => $specs) {
-                    $condition1 = array_key_exists($this->scenario, $specs['scenarios']);
-                    $condition2 = (!$eval || (array_key_exists('evaluation', $spec) && $spec['evaluation']));
-                    if ($condition1 && $condition2) {
-                        if (array_key_exists('significant_id_only', $specs) && $specs['significant_id_only']) {
-                            $variance = 0;
-                            $position = 1;
-                            $total = 0;
-                            $initialid = null;
-                            foreach ($specs['questionids'] as $id) {
-                                if (is_null($initialid)) {
-                                    $initialid = $id;
-                                }
-                                // Answers for catalog question in category $criterion.
-                                $answers = $this->store->get_answers_to_special_question($category, $id);
+                $scenarios = $spec['scenarios'];
+                $validscenario = in_array($this->scenario, $scenarios);
+                $validforeval = !$eval || array_key_exists('evaluation', $spec);
 
-                                // Number of options for catalog question.
-                                $totaloptions = $this->store->get_max_option_of_catalog_question($id, $category);
+                if ($validscenario && $validforeval) {
 
-                                $dist = array_fill(1, $totaloptions, 0);
+                    $category = $spec['category'];
+                    $labels = $spec['labels'];
 
-                                // Iterates over answers for grade questions.
-                                foreach ($answers as $answer) {
-                                    // Checks if answer is relevant for this group of users.
-                                    if (is_null($users) || in_array($answer->userid, $users)) {
+                    $positions = array();
 
-                                        // Increments count for answer option.
-                                        $dist [intval($answer->answer)]++;
-                                        // Increments count for total.
-                                        if ($id == $initialid) {
-                                            $total++;
+                    // Check for each label of a criterion
+                    // Either validscenario or validforeval
+                    foreach ($labels as $label => $specs) {
+
+                        $validscenario = array_key_exists($this->scenario, $specs['scenarios']);
+                        $validforeval = (!$eval || (array_key_exists('evaluation', $specs) && $specs['evaluation']));
+
+                        if ($validscenario && $validforeval) {
+                            if (array_key_exists('significant_id_only', $specs) && $specs['significant_id_only']) {
+                                $variance = 0;
+                                $position = 1;
+                                $total = 0;
+                                $initialid = null;
+                                foreach ($specs['questionids'] as $id) {
+                                    if (is_null($initialid)) {
+                                        $initialid = $id;
+                                    }
+                                    // Answers for catalog question in category $criterion.
+                                    $answers = $this->store->get_answers_to_special_question($category, $id);
+
+                                    // Number of options for catalog question.
+                                    $totaloptions = $this->store->get_max_option_of_catalog_question($id, $category);
+
+                                    $dist = array_fill(1, $totaloptions, 0);
+
+                                    // Iterates over answers for grade questions.
+                                    foreach ($answers as $answer) {
+                                        // Checks if answer is relevant for this group of users.
+                                        if (is_null($users) || in_array($answer->userid, $users)) {
+
+                                            // Increments count for answer option.
+                                            $dist [intval($answer->answer)]++;
+                                            // Increments count for total.
+                                            if ($id == $initialid) {
+                                                $total++;
+                                            }
                                         }
                                     }
-                                }
 
-                                // Computes tempexp for later use.
-                                $tempexp = 0;
-                                $p = 1;
-                                foreach ($dist as $d) {
-                                    $tempexp = $tempexp + ($p * ($d / $total));
-                                    $p++;
-                                }
+                                    // Computes tempexp for later use.
+                                    $tempexp = 0;
+                                    $p = 1;
+                                    foreach ($dist as $d) {
+                                        $tempexp = $tempexp + ($p * ($d / $total));
+                                        $p++;
+                                    }
 
-                                // Computes tempvariance to find maximal variance.
-                                $tempvariance = 0;
-                                $p = 1;
-                                foreach ($dist as $d) {
-                                    $tempvariance = $tempvariance + ((pow(($p - $tempexp), 2)) * ($d / $total));
-                                    $p++;
-                                }
+                                    // Computes tempvariance to find maximal variance.
+                                    $tempvariance = 0;
+                                    $p = 1;
+                                    foreach ($dist as $d) {
+                                        $tempvariance = $tempvariance + ((pow(($p - $tempexp), 2)) * ($d / $total));
+                                        $p++;
+                                    }
 
-                                // Sets position by maximal variance.
-                                if ($variance < $tempvariance) {
-                                    $variance = $tempvariance;
-                                    $position = $id;
-                                }
+                                    // Sets position by maximal variance.
+                                    if ($variance < $tempvariance) {
+                                        $variance = $tempvariance;
+                                        $position = $id;
+                                    }
 
+                                }
+                                $specs['questionids'] = array($position);
                             }
-                            $specs['questionids'] = array($position);
+
+                            $positions[$label] = $specs;
                         }
 
-                        $positions[$label] = $specs;
                     }
 
-                }
-
-                if (count($positions) > 0) {
-                    $spec['labels'] = $positions;
-                    $filteredspecs[$criterion] = $spec;
+                    if (count($positions) > 0) {
+                        $spec['labels'] = $positions;
+                        $filteredspecs[$criterion] = $spec;
+                    }
                 }
             }
-
         }
-
         return $filteredspecs;
     }
 
@@ -298,6 +306,7 @@ class mod_groupformation_criterion_calculator {
      * @param number $userid
      * @param array $specs
      * @return string
+     * @throws dml_exception
      */
     public function get_general($userid, $specs = null) {
         if (is_null($specs)) {
@@ -407,12 +416,81 @@ class mod_groupformation_criterion_calculator {
         return $array;
     }
 
+
+    // TODO bisher nur grob. Testen, aufräumen, kommentieren.
+
+    /**
+     * Returns binquestion criterion values
+     *
+     * @param $userid
+     * @param null $specs
+     * @return array
+     * @throws dml_exception
+     */
+    public function get_binquestion($userid, $specs = null) {
+
+        if (is_null($specs)) {
+            $specs = mod_groupformation_data::get_criterion_specification('binquestion');
+        }
+        $scenario = $this->scenario;
+        $labels = $specs['labels'];
+        $array = array();
+        $category = $specs['category'];
+
+        $questiontype = $this->usermanager->get_binquestionmultiselect(); // 0 := singlechoice; 1 := multiselect
+        $number_of_choices = floatval($this->store->get_number_binchoices());
+        $answers = $this->usermanager->get_single_answer($userid, $category,1);
+        $answers = str_replace('list:', '', $answers);
+        $answer_array = str_getcsv($answers);
+        $cur_index_answers = 0;
+        $binvalue = '';
+        $importance = floatval($this->usermanager->get_binquestionimportance())/10;
+
+        if ($questiontype == 0){
+            $answer_array[0] -= 1;
+        }
+
+        for ($i = 0; $i < $number_of_choices; $i++) { // Creates an array in a vector-form with 0 and 1 as entries like "0,1,1,0,0"
+            if ($i == $answer_array[$cur_index_answers]){
+                $binvalue .= '1';
+                $cur_index_answers++;
+            } else {
+                $binvalue .= '0';
+            }
+            if (($i+1) < $number_of_choices){
+                $binvalue .= ',';
+            }
+        }
+
+
+
+        // Iterate over labels of criterion.
+        foreach ($labels as $key => $spec) { // maybe later there are more than one binquestion per groupformation
+            if (($questiontype == 0 && $key == 'singlechoice') || ($questiontype == 1 && $key == 'multiselect')) {
+                $binquestionvalues = array();
+
+                if (array_key_exists($scenario, $spec['scenarios'])) {
+
+                    $binquestionvalues [] = array(
+                        'binvalue' => $binvalue,
+                        'importance' => $importance
+                    );
+                }
+
+                $array[$key] = array('values' => $binquestionvalues);
+            }
+
+        }
+        return $array;
+    }
+
     /**
      * Returns points criterion values
      *
      * @param int $userid
      * @param array $specs
-     * @return float
+     * @return array
+     * @throws dml_exception
      */
     public function get_points($userid, $specs = null) {
         if (is_null($specs)) {
@@ -453,7 +531,8 @@ class mod_groupformation_criterion_calculator {
      *
      * @param int $userid
      * @param array $specs
-     * @return float
+     * @return array
+     * @throws dml_exception
      */
     public function get_grade($userid, $specs = null) {
         if (is_null($specs)) {
@@ -495,7 +574,8 @@ class mod_groupformation_criterion_calculator {
      * Returns topic answers as a criterion
      *
      * @param number $userid
-     * @return TopicCriterion
+     * @return mod_groupformation_topic_criterion
+     * @throws dml_exception
      */
     public function get_topic($userid) {
         $choices = $this->usermanager->get_answers($userid, 'topic', 'questionid', 'answer');

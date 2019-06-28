@@ -22,9 +22,8 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
-}
+
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
@@ -72,6 +71,10 @@ class mod_groupformation_export_controller {
      * Returns elements for template
      *
      * @return array
+     * @throws coding_exception
+     * @throws dml_exception
+     * @throws file_exception
+     * @throws stored_file_creation_exception
      */
     public function load_info() {
         $assigns = array();
@@ -90,6 +93,8 @@ class mod_groupformation_export_controller {
      *
      * @param string $type
      * @return string
+     * @throws coding_exception
+     * @throws dml_exception
      * @throws file_exception
      * @throws stored_file_creation_exception
      */

@@ -46,6 +46,7 @@ class mod_groupformation_overview_view_controller extends mod_groupformation_bas
      * @param int $groupformationid
      * @param mod_groupformation_overview_controller $controller
      * @throws coding_exception
+     * @throws dml_exception
      */
     public function __construct($groupformationid, $controller) {
         parent::__construct($groupformationid, $controller);
@@ -128,7 +129,7 @@ class mod_groupformation_overview_view_controller extends mod_groupformation_bas
 
                 // Redirect.
                 $returnurl = new moodle_url ('/mod/groupformation/questionnaire_view.php', array(
-                        'id' => $id));
+                        'id' => $id, 'direction' => 1));
                 redirect($returnurl);
             } else if ($begin == -1) {
                 // Delete answers due to consent removal.

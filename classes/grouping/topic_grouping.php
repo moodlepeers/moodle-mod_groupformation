@@ -22,9 +22,8 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.');
-}
+
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/groupformation/lib.php');
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
@@ -59,6 +58,7 @@ class mod_groupformation_topic_grouping extends mod_groupformation_grouping {
      * mod_groupformation_topic_grouping constructor.
      *
      * @param int $groupformationid
+     * @throws dml_exception
      */
     public function __construct($groupformationid) {
         $this->groupformationid = $groupformationid;
@@ -74,6 +74,7 @@ class mod_groupformation_topic_grouping extends mod_groupformation_grouping {
      *
      * @param array $users Two parted array - first part is all groupal users, second part are all random users
      * @return array
+     * @throws dml_exception
      */
     public function run_grouping($users) {
         if (count($users[0]) == 0) {

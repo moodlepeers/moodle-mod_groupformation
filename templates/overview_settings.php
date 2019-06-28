@@ -74,13 +74,13 @@ if (!defined('MOODLE_INTERNAL')) {
 
                         <div>
                                 <p>
-                                    <?php echo get_string('participant_code_header', 'groupformation'); ?>
+                                    <?php echo get_string('participant_code_header_study', 'groupformation'); ?>
                                 </p>
                                 <p>
-                                    <?php echo get_string('participant_code_rules', 'groupformation'); ?>
+                                    <?php echo get_string('participant_code_rules_study', 'groupformation'); ?>
                                 </p>
                                 <p>
-                                    <?php echo get_string('participant_code_example', 'groupformation'); ?>
+                                    <?php echo get_string('participant_code_example_study', 'groupformation'); ?>
                                 </p>
                             <p>
                                 <?php echo get_string('participant_code_footer', 'groupformation'); ?>

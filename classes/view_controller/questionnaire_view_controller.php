@@ -68,4 +68,106 @@ class mod_groupformation_questionnaire_view_controller extends mod_groupformatio
 
         return $questionnairepage->load_template();
     }
+
+    /**
+     * Renders content
+     *
+     * @return string|void
+     * @throws coding_exception
+     * @throws dml_exception
+     */
+    public function render() {
+        $store = $this->store;
+        $id = $this->controller->cmid;
+        $context = context_module::instance($id);
+
+        if ($store->is_archived() && !has_capability('mod/groupformation:editsettings', $context)) {
+            echo '<div class="alert" id="commited_view">';
+            $tmp = has_capability('mod/groupformation:editsettings', $context) ? "admin" : "answers";
+            echo get_string('archived_activity_' . $tmp, 'groupformation');
+            echo '</div>';
+        } else {
+            echo parent::render();
+        }
+        if (get_config('core', 'theme') == 'boost') {
+            echo '</div></div>';
+        }
+    }
+
+    /**
+     * Handles access
+     *
+     * @throws coding_exception
+     * @throws dml_exception
+     * @throws moodle_exception
+     */
+    public function handle_access() {
+        $id = $this->controller->cmid;
+        $context = context_module::instance($id);
+
+        $userid = $this->controller->userid;
+        $usermanager = new mod_groupformation_user_manager($this->groupformationid);
+
+        $consent = $usermanager->get_consent($userid);
+        $participantcode = $usermanager->has_participant_code($userid) || !mod_groupformation_data::ask_for_participant_code();
+
+        if ((!$consent || !$participantcode) &&
+                !has_capability('mod/groupformation:editsettings', $context)) {
+            $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
+                    'id' => $id, 'giveconsent' => !$consent, 'giveparticipantcode' => !$participantcode));
+            redirect($returnurl);
+        }
+    }
+
+    /**
+     * @throws coding_exception
+     * @throws dml_exception
+     * @throws moodle_exception
+     */
+    public function handle_actions() {
+        /** @var mod_groupformation_questionnaire_controller $controller */
+        $controller = $this->controller;
+        $id = $this->controller->cmid;
+        $context = context_module::instance($id);
+
+        $userid = $this->controller->userid;
+        $usermanager = new mod_groupformation_user_manager($this->groupformationid);
+        $store = $this->store;
+
+        $direction = $this->controller->direction;
+        $go = true;
+
+        if (!has_capability('mod/groupformation:editsettings', $context) &&
+                (data_submitted() && confirm_sesskey()) &&
+                in_array($store->statemachine->get_state(), array("q_open", "q_reopened"))) {
+            $go = $controller->save_answers();
+        }
+
+        if (has_capability('mod/groupformation:editsettings', $context) && $controller->currentcategory == "") {
+            $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
+                    'id' => $id, 'back' => '1'));
+            redirect($returnurl);
+        }
+
+        if (!$go) {
+            $controller->not_go_on();
+        }
+
+        $next = ($direction == -1 && $this->controller->currentcategory != "") || $controller->has_next();
+        if (!$next) {
+            if ($usermanager->has_answered_everything($userid)) {
+                $usermanager->set_evaluation_values($userid);
+                $store->userstatemachine->change_state($userid, "complete");
+            }
+
+            $action = optional_param('action', 0, PARAM_BOOL);
+            if (isset ($action) && $action == 1) {
+                $usermanager->change_status($userid);
+            }
+
+            $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
+                    'id' => $id, 'do_show' => 'view', 'back' => '1'));
+            redirect($returnurl);
+        }
+    }
 }

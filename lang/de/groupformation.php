@@ -15,14 +15,13 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * German lang string
+ * German lang strings
  *
  * @package     mod_groupformation
  * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 $string ['language'] = 'de';
 $string ['modulename'] = 'Gruppenformation';
 $string ['modulenameplural'] = 'Gruppenformationen';
@@ -135,7 +134,7 @@ $string ['choose_scenario'] = 'Szenario auswählen';
 $string ['choose_number'] = 'Anzahl auswählen';
 $string ['choose_evaluationmethod'] = 'Bewertungsmethode auswählen';
 $string ['evaluation_point_info'] = 'Bitte maximale Punktzahl eingeben';
-$string ['students_enrolled_info'] = 'Teilnehmenden sind im Kurs eingeschrieben';
+$string ['students_enrolled_info'] = 'Teilnehmenden sind im Kurs eingeschrieben. Falls die Aktivität auf bestimmte Gruppierungen beschränkt wird, kann die echte Zahl kleiner sein.';
 $string ['groupSettingsInfo'] = 'Sie haben Themen zur Auswahl angegeben. Daraus bestimmt sich die Anzahl der Gruppen und deren Größe.';
 $string ['analyse'] = 'Analyse';
 $string ['questionnaire_not_started'] = 'Der Fragebogen wartet noch auf Ihre Bearbeitung.';
@@ -492,14 +491,13 @@ $string['topic_group_info'] = 'Euer Thema ist';
 $string['topic'] = "Thema";
 
 $string['participant_code_title'] = "Persönlicher Teilnehmercode";
-$string['participant_code_header'] = "Bitte legen Sie sich einen persönlichen Teilnehmercode nach dem folgenden Schema an:";
-$string['participant_code_rules'] = "1. Vorname Ihrer Mutter (erste 2 Buchstaben, z.B. EV für Eva)<br>
-2. Geburtsmonat Ihrer Mutter (als zwei Ziffern, z.B. 07 für Juli)<br>
-3. Vorname Ihres Vaters (erste 2 Buchstaben, z.B. AD für Adam)<br>
-4. Geburtsmonat Ihres Vaters (als zwei Ziffern, z.B. 11 für November)<br><br>
+$string['participant_code_header_study'] = "Bitte legen Sie sich einen persönlichen Teilnehmercode nach dem folgenden Schema an:";
+$string['participant_code_rules_study'] = "1. Die ersten zwei Buchstaben des Vornamens der Mutter (Beispiel: BÄrbel —> BA, nicht: BÄ oder BAE)<br>
+2. Die ersten zwei Buchstaben des Vornamens des Vaters (Beispiel: ÖMer —> OM, nicht ÖM oder OEM)<br>
+3. Die ersten zwei Ziffern des eigenen Geburtstages (Beispiel: 03.10.1989 —> 03)<br><br>
 Bitte verwenden Sie keine Umlaute, sondern ersetzen Sie diese durch normale Buchstaben<br>
 (Ä &rarr; A; Ö &rarr; O; Ü &rarr; U; ß &rarr; S)";
-$string['participant_code_example'] = "Beispiel: EV07AD11";
+$string['participant_code_example_study'] = "Beispiel: BAOM03";
 $string['participant_code_footer'] = "Ihr persönlicher Teilnehmercode lautet";
 
 $string['participant_code_alert_message'] = 'Sie müssen einen gültigen Teilnehmercode eingeben bevor Sie den Fragebogen beantworten können.';
@@ -578,4 +576,9 @@ $string ['no_filter_change'] = 'Aufgrund der laufenden oder schon abgeschlossene
 $string ['filter'] = 'Filter aktivieren';
 $string ['not_filter'] = 'Filter deaktivieren';
 
+$string ['pre_study_header'] = 'Statistiken zum Studiendesign';
+$string ['optimized_grouping'] = '<b>{$a}</b> Teilnehmende sind für die optimierte Gruppenbildung verfügbar.';
+$string ['randomized_grouping'] = '<b>{$a}</b> Teilnehmende sind für die randomisierte Gruppenbildung verfügbar.';
+
+$string ['scientific_grouping_setup'] = 'Dieses Studiendesign teilt alle Teilnehmenden (mit vollständig beantworteten Fragebögen) in <b>{$a} Kohorten/Experimentalbedigungen</b>. Alle Teilnehmenden mit unvollständig beantworteten Fragebögen werden randomisiert gruppiert (als zusätzliche Kohorte/Bedingung).<br>Die Konfigurationsschlüssel sind wie folgt:';
 

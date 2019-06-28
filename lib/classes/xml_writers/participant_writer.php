@@ -22,9 +22,8 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
-}
+
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/participant.php");
@@ -55,6 +54,7 @@ class mod_groupformation_participant_writer {
      *
      * @param null $participants
      * @return bool
+     * @throws Exception
      */
     public function write($participants = null) {
         if (is_null($participants)) {
@@ -96,6 +96,7 @@ class mod_groupformation_participant_writer {
      * Writes XML for an array participants
      *
      * @param array $participants
+     * @throws Exception
      */
     private function write_participants($participants) {
         foreach ($participants as $participant) {
@@ -107,6 +108,7 @@ class mod_groupformation_participant_writer {
      * Writes XML for a single participant
      *
      * @param mod_groupformation_participant $p
+     * @throws Exception
      */
     private function write_participant(mod_groupformation_participant $p) {
         $writer = $this->writer;
@@ -125,6 +127,7 @@ class mod_groupformation_participant_writer {
      * Writes XML for criteria
      *
      * @param array $criteria
+     * @throws Exception
      */
     private function write_criteria($criteria) {
         foreach ($criteria as $criterion) {
@@ -136,6 +139,7 @@ class mod_groupformation_participant_writer {
      * Writes XML for a single criterion
      *
      * @param mod_groupformation_criterion $c
+     * @throws Exception
      */
     private function write_criterion(mod_groupformation_criterion $c) {
         $writer = $this->writer;
@@ -181,6 +185,7 @@ class mod_groupformation_participant_writer {
      * Writes XML for criterion attributes
      *
      * @param mod_groupformation_criterion $c
+     * @throws Exception
      */
     private function write_criterion_attributes(mod_groupformation_criterion $c) {
         $writer = $this->writer;
@@ -196,6 +201,7 @@ class mod_groupformation_participant_writer {
      * Writes XML for an array of criterion types
      *
      * @param array $criteriatypes
+     * @throws Exception
      */
     private function write_criteria_types($criteriatypes) {
         $writer = $this->writer;
@@ -213,6 +219,7 @@ class mod_groupformation_participant_writer {
      * Writes XML for a single criterion type
      *
      * @param mod_groupformation_criterion $ctype
+     * @throws Exception
      */
     private function write_criterion_type(mod_groupformation_criterion $ctype) {
         $writer = $this->writer;

@@ -22,9 +22,8 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.');
-}
+
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/advanced_job_manager.php');
@@ -299,6 +298,17 @@ class mod_groupformation_storage_manager {
     }
 
     /**
+     * Returns number of possible choices of binquestion-answers
+     *
+     * @return mixed
+     * @throws dml_exception
+     */
+    public function get_number_binchoices() {
+        global $DB;
+        return $DB->get_field('groupformation', 'binquestionnumber', array(
+            'id' => $this->groupformationid));
+    }
+    /**
      * Returns the number of questions in a specified category
      *
      * @param string $category
@@ -308,7 +318,12 @@ class mod_groupformation_storage_manager {
     public function get_number($category = null) {
         global $DB;
 
-        if ($category == 'topic' || $category == 'knowledge') {
+        if ($category == 'binquestion' && ($DB->get_field('groupformation', $category . 'number', array(
+                'id' => $this->groupformationid
+            )) >= 1)) {
+            return 1; // TODO absprechen ob so okay
+        }
+        if ($category == 'topic' || $category == 'knowledge' || $category == 'binquestion') {
             return $DB->get_field('groupformation', $category . 'number', array(
                     'id' => $this->groupformationid
             ));
@@ -317,6 +332,26 @@ class mod_groupformation_storage_manager {
                     'category' => $category
             ));
         }
+    }
+
+    /**
+     * Returns the number of questions in a specified category
+     *
+     * @param string $category
+     * @return mixed
+     * @throws dml_exception
+     */
+    public function get_question_number($category = null){
+        global $DB;
+
+        if ($category == 'binquesiton'){
+            if ($DB->get_field('groupformation', $category . 'number', array(
+                    'id' => $this->groupformationid
+                )) >= 1){
+                return 1;
+            }
+        }
+        return $this->get_number($category);
     }
 
     /**
@@ -334,6 +369,17 @@ class mod_groupformation_storage_manager {
         ));
     }
 
+    public function get_binquestion_text(){
+        global $DB;
+
+        return $DB->get_field('groupformation', 'binquestiontext', array('id' => $this->groupformationid));
+    }
+
+    public function get_binquestion_multiselect(){
+        global $DB;
+
+        return $DB->get_field('groupformation', 'binquestionmultiselect', array('id' => $this->groupformationid));
+    }
     /**
      * Returns max number of options for a specific question in a specific category
      *
@@ -394,15 +440,20 @@ class mod_groupformation_storage_manager {
     /**
      * Returns the scenario
      *
+     * @param $assigned
      * @return string
      * @throws dml_exception
      */
-    public function get_scenario() {
+    public function get_scenario($assigned = false) {
         global $DB;
 
         $settings = $DB->get_record('groupformation', array(
                 'id' => $this->groupformationid
         ));
+
+        if ($assigned) {
+            return $settings->szenario;
+        }
 
         $scenarios = $DB->get_records('groupformation_scenario');
 
@@ -454,9 +505,15 @@ class mod_groupformation_storage_manager {
         $categoryset = $this->get_raw_categories();
         $categories = array();
 
+
         $hasknowledge = $this->get_number('knowledge');
         if ($this->ask_for_knowledge() && $hasknowledge != 0) {
             $categories[] = 'knowledge';
+        }
+
+        $hasbinquestion = $this->get_number('binquestion');
+        if ($this->ask_for_binquestion() && $hasbinquestion != 0) {
+            $categories[] = 'binquestion';
         }
 
         foreach ($categoryset as $category) {
@@ -505,6 +562,25 @@ class mod_groupformation_storage_manager {
         }
 
         return $exportablecategories;
+    }
+
+    /**
+     * Gets next category
+     *
+     * @param string $category
+     * @return string
+     * @throws dml_exception
+     */
+    public function get_next_category($category) {
+        $categories = $this->get_categories();
+        $pos = $this->get_position($category);
+        if ($pos < count($categories) - 1) {
+            $previous = $categories [$pos + 1];
+        } else {
+            $previous = '';
+        }
+
+        return $previous;
     }
 
     /**
@@ -816,11 +892,12 @@ class mod_groupformation_storage_manager {
      * @throws dml_exception
      */
     public function get_label_set() {
-        $array = mod_groupformation_data::get_label_set($this->get_scenario());
+        $array = mod_groupformation_data::get_label_set($this->get_scenario(true));
 
         if ($this->groupformationid != null) {
             $hastopic = $this->get_number('topic');
             $hasknowledge = $this->get_number('knowledge');
+            $hasbinquestion = $this->get_number('binquestion');
             $grades = $this->ask_for_grade();
             $points = $this->ask_for_points();
             $position = 0;
@@ -828,7 +905,8 @@ class mod_groupformation_storage_manager {
                 if (('points' == $c && $points == false) ||
                         ('grade' == $c && $grades == false) ||
                         ($hastopic == 0 && 'topic' == $c) ||
-                        ($hasknowledge == 0 && ('knowledge' == $c))
+                        ($hasknowledge == 0 && ('knowledge' == $c)) ||
+                        ($hasbinquestion == 0 && ('binquestion' == $c))
                 ) {
                     unset ($array [$position]);
                 }
@@ -874,6 +952,21 @@ class mod_groupformation_storage_manager {
     }
 
     /**
+     * Returns whether 'binquestion' is a valid category in this instance or not
+     *
+     * @return boolean
+     * @throws dml_exception
+     */
+    public function ask_for_binquestion() {
+        global $DB;
+        $evaluationmethod = $DB->get_field('groupformation', 'binquestion', array(
+            'id' => $this->groupformationid
+        ));
+
+        return $evaluationmethod == 1;
+    }
+
+    /**
      * Returns users
      *
      * @return array|null
@@ -908,6 +1001,9 @@ class mod_groupformation_storage_manager {
      * @throws dml_exception
      */
     public function determine_group_size($users, $groupformationid = null) {
+        if (is_null($users) || count($users) == 0) {
+            return array(0, 0);
+        }
         if ($this->ask_for_topics()) {
             $groupoption = $this->get_group_option();
             if ($groupoption) {
@@ -960,14 +1056,10 @@ class mod_groupformation_storage_manager {
 
             return $sizearray;
         } else {
-
             $userscount0 = count($users [0]);
             $userscount1 = count($users [1]);
             $userscount = $userscount0 + $userscount1;
 
-            if ($userscount <= 0) {
-                return null;
-            }
             $groupoption = $this->get_group_option();
             if ($groupoption) {
                 $maxgroups = intval($this->get_max_groups());
@@ -1164,18 +1256,16 @@ class mod_groupformation_storage_manager {
 
         $record->matcher_used = strval($cohort->whichmatcherused);
         $record->count_groups = floatval($cohort->countofgroups);
-        $record->performance_index = floatval($cohort->cpi);
 
         $stats = $cohort->results;
 
         if (!is_null($stats)) {
-            $record->stats_avg_variance = $stats->avgvariance;
-            $record->stats_variance = $stats->variance;
-            $record->stats_n = $stats->n;
-            $record->stats_avg = $stats->avg;
-            $record->stats_st_dev = $stats->stddev;
-            $record->stats_norm_st_dev = $stats->normstddev;
-            $record->stats_performance_index = $stats->performanceindex;
+            $record->avg_variance = $stats->avgvariance;
+            $record->variance = $stats->variance;
+            $record->avg = $stats->avg;
+            $record->st_dev = $stats->stddev;
+            $record->norm_st_dev = $stats->normstddev;
+            $record->performance_index = $stats->performanceindex;
         }
 
         $DB->insert_record('groupformation_stats', $record);
@@ -1223,7 +1313,7 @@ class mod_groupformation_storage_manager {
             $enrolledstudents = $diff;
         }
         if (is_null($enrolledstudents) || count($enrolledstudents) <= 0) {
-            return null;
+            return array(array(), array());
         }
 
         $groupingsetting = $this->get_grouping_setting();
@@ -1259,7 +1349,6 @@ class mod_groupformation_storage_manager {
 
         $groupalusers = $allanswers;
 
-
         if ($groupingsetting) {
             $randomusers = $someanswers;
         } else {
@@ -1268,7 +1357,9 @@ class mod_groupformation_storage_manager {
 
         return array(
                 $groupalusers, $randomusers);
+
     }
+
 
     /**
      * Returns whether groupformation uses filtering due to dishonesty
@@ -1373,4 +1464,14 @@ class mod_groupformation_storage_manager {
         return $instances;
     }
 
+    /**
+     * Returns activity state
+     *
+     * @param bool $internal
+     * @return mixed
+     * @throws dml_exception
+     */
+    public function get_state($internal = false) {
+        return $this->statemachine->get_state($internal);
+    }
 }

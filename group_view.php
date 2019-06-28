@@ -25,38 +25,36 @@
 require_once('../../config.php');
 require('header.php');
 
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/controller/group_controller.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/group_view_controller.php');
 
 $filename = substr(__FILE__, strrpos(__FILE__, '\\') + 1);
-$url = new moodle_url('/mod/groupformation/' . $filename, $urlparams);
+$filename = substr($filename, strpos($filename, '/mod'));
+
+$url = new moodle_url($filename, $urlparams);
 
 // Set PAGE config.
 $PAGE->set_url($url);
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
+$PAGE->set_context(context_module::instance($cm->id));
+$PAGE->set_cm($cm);
 
-if (has_capability('mod/groupformation:editsettings', $context)) {
-    $returnurl = new moodle_url('/mod/groupformation/analysis_view.php', array('id' => $id, 'do_show' => 'analysis'));
-    redirect($returnurl);
-} else {
-    $currenttab = $doshow;
-}
+$store = new mod_groupformation_storage_manager ($groupformation->id);
 
-// Import jQuery and js file.
-groupformation_add_jquery($PAGE, 'survey_functions.js');
+$controller = new mod_groupformation_group_controller($groupformation->id, $cm->id);
+$viewcontroller = new mod_groupformation_group_view_controller($groupformation->id, $controller);
+
+$viewcontroller->handle_access();
 
 echo $OUTPUT->header();
+
+$currenttab = $doshow;
 
 // Print the tabs.
 require('tabs.php');
 
-$userid = $USER->id;
-if ($store->is_archived()) {
-    echo '<div class="alert" id="commited_view">' . get_string('archived_activity_answers', 'groupformation') . '</div>';
-} else {
-    $controller = new mod_groupformation_group_controller($groupformation->id);
-    $viewcontroller = new mod_groupformation_group_view_controller($groupformation->id, $controller);
-    echo $viewcontroller->render();
-}
+echo $viewcontroller->render();
+
 echo $OUTPUT->footer();

@@ -22,13 +22,8 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
-}
 
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.');
-}
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/groupformation/lib.php');
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
@@ -77,16 +72,66 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
     }
 
     /**
+     * Determines how many slices are possible
+     *
+     * @param $numberofusers
+     * @param $groupsize
+     * @param $numberofslices
+     * @return mixed
+     */
+    public function determine_number_of_slices($numberofusers, $groupsize, $numberofslices) {
+        if ($numberofusers == 0) {
+            return $numberofusers;
+        }
+        $minperslice = $groupsize * 3;
+        $div = max(1, intval(floor($numberofusers / $minperslice)));
+        return min($div, $numberofslices);
+    }
+
+    /**
+     * Returns scores
+     *
+     * @param $users
+     * @param $specs
+     * @return array
+     * @throws coding_exception
+     * @throws dml_exception
+     */
+    public function get_scores($users, $specs) {
+        $scores = [];
+
+        foreach ($users as $user) {
+            $scores[] = array($user, $this->usermanager->get_eval_score($user, $specs));
+        }
+
+        $cmp = function($a, $b) {
+            return $a[1] < $b[1];
+        };
+
+        usort($scores, $cmp);
+
+        return $scores;
+    }
+
+    /**
      * Returns equally distributed slices by checking mean and std deviation.
      *
      * @param array $users
      * @param int $numberofslices
      * @param null $specs
+     * @param int $groupsize
      * @return array
-     * @throws coding_exception
-     * @throws dml_exception
+     * @throws Exception
      */
-    public function get_optimal_slices($users, $numberofslices, $specs = null) {
+    public function get_optimal_slices($users, $numberofslices, $specs = null, $groupsize = 3) {
+        if ($numberofslices == 0) {
+            return array();
+        }
+
+        if (count($users) <= $groupsize * 3) {
+            return array($users);
+        }
+
         $statistics = new mod_groupformation_statistics();
         // TODO Set cutoff value.
         $cutoff = 0.02;
@@ -101,23 +146,13 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
         // Loop to determine best slice based on mean and stddev.
         // Idea: all slices should have very similar mean and stddev (distance smaller cutoff).
 
-        $scores = [];
+        $scores = $this->get_scores($users, $specs);
 
-        foreach ($users as $user) {
-            $scores[] = array($user, $this->usermanager->get_eval_score($user, $specs));
-        }
-
-        $cmp = function($a, $b) {
-            return $a[1] < $b[1];
-        };
-
-        usort($scores, $cmp);
-
-        $best = $this->get_slices($scores, $numberofslices);
+        $best = $this->get_slices($scores, $numberofslices, $groupsize);
 
         while ($i < 100 && !$bestfound) {
             $i++;
-            $slices = $this->get_slices($scores, $numberofslices);
+            $slices = $this->get_slices($scores, $numberofslices, $groupsize);
             $func = function($value, $key = 1) {
                 return $value[$key];
             };
@@ -186,7 +221,6 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
         return array_map($func2, $best);
     }
 
-
     /**
      * Returns weights for criterions
      *
@@ -196,11 +230,8 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
 
         return array('big5_extraversion' => 4,
                 'big5_conscientiousness' => 4,
-                'knowledge_two' => 2,
-                'fam_challenge' => 2,
-                'fam_interest' => 2,
-                'fam_successprobability' => 2,
-                'fam_lackofconfidence' => 2);
+                'knowledge_two' => 2
+        );
     }
 
     /**
@@ -219,26 +250,26 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
 
         list ($configurations, $specs) = $specification;
         $weights = $this->get_weights();
-        var_dump($weights);
 
-        $numberofslices = count($specification[0]);
+        $numberofslices = count($configurations);
+        $numberofslices = $this->determine_number_of_slices(count($users[0]), $groupsizes[0], $numberofslices);
 
-        if (count($users[0]) < $numberofslices) {
-            return [];
+        $cohorts = array();
+
+        if ($numberofslices > 0) {
+
+            $slices = $this->get_optimal_slices($users[0], $numberofslices, $specs, $groupsizes[0]);
+
+            $cohorts = $this->build_cohorts($slices, $groupsizes[0], $specification, $weights);
         }
 
-        $slices = $this->get_optimal_slices($users[0], $numberofslices, $specs);
-
-        $cohorts = $this->build_cohorts($slices, $groupsizes[0], $specification, $weights);
-
         // Handle all users with incomplete or no questionnaire submission.
-        $randomkey = "rand:1;mrand:_;ex:_;gh:_";
+        $randomkey = "random:1";
 
         $randomparticipants = $this->participantparser->build_empty_participants($users[1]);
         $randomcohort = $this->build_cohort($randomparticipants, $groupsizes[1], $randomkey);
 
         $cohorts[$randomkey] = $randomcohort;
-
         return $cohorts;
     }
 
@@ -278,28 +309,32 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
      *
      * @return array
      */
-    private function get_specification() {
+    public function get_specification() {
 
         $big5specs = mod_groupformation_data::get_criterion_specification('big5');
         $knowledgespecs = mod_groupformation_data::get_criterion_specification('knowledge');
-        $famspecs = mod_groupformation_data::get_criterion_specification('fam');
+        //$famspecs = mod_groupformation_data::get_criterion_specification('fam');
 
         unset($big5specs['labels']['neuroticism']);
         unset($big5specs['labels']['openness']);
         unset($big5specs['labels']['agreeableness']);
         unset($knowledgespecs['labels']['one']);
 
-        $specs = ['big5' => $big5specs, 'knowledge' => $knowledgespecs, 'fam' => $famspecs];
+        $specs = [
+                'big5' => $big5specs,
+                'knowledge' => $knowledgespecs,
+                //'fam' => $famspecs
+        ];
 
         $configurations = array(
-            "mrand:0;ex:1;gh:1;vw:0" => array('big5_extraversion' => true,
-                    'big5_conscientiousness' => true, 'knowledge_two' => false, 'fam' => false),
-            "mrand:0;ex:1;gh:0;vw:0" => array('big5_extraversion' => true,
-                    'big5_conscientiousness' => false, 'knowledge_two' => false, 'fam' => false),
-            "mrand:0;ex:0;gh:0;vw:0" => array('big5_extraversion' => false,
-                    'big5_conscientiousness' => false, 'knowledge_two' => false, 'fam' => false),
-            "mrand:0;ex:0;gh:1;vw:0" => array('big5_extraversion' => false,
-                    'big5_conscientiousness' => true, 'knowledge_two' => false, 'fam' => false),
+            "groupal:1;ex:1;gh:1;vw:0" => array('big5_extraversion' => true,
+                    'big5_conscientiousness' => true, 'knowledge_two' => false),
+            "groupal:1;ex:1;gh:0;vw:0" => array('big5_extraversion' => true,
+                    'big5_conscientiousness' => false, 'knowledge_two' => false),
+            "groupal:1;ex:0;gh:0;vw:0" => array('big5_extraversion' => false,
+                    'big5_conscientiousness' => false, 'knowledge_two' => false),
+            "groupal:1;ex:0;gh:1;vw:0" => array('big5_extraversion' => false,
+                    'big5_conscientiousness' => true, 'knowledge_two' => false),
         );
 
         return [$configurations, $specs];
@@ -310,19 +345,73 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
      *
      * @param array $scores
      * @param int $numberofslices
+     * @param int $groupsize
+     * @return array
+     * @throws Exception
+     */
+    public function get_slices($scores, $numberofslices, $groupsize = 3) {
+        if ($numberofslices == 0 || $groupsize == 0) {
+            throw new Exception("Groupsize or Number of Slices cannot be 0");
+        }
+
+        // Handling suitable number of students.
+        // Suitable = number of slices times groupsize.
+        // This way, no incomplete groups are going to be formed.
+        $usercount = count($scores);
+        $divider = $numberofslices * $groupsize;
+        $ganzzahldiv = intval(floor($usercount / $divider));
+        $numberofremainingusers = $usercount - $divider * $ganzzahldiv;
+
+        $firstscores = array_slice($scores, 0, $ganzzahldiv * $divider);
+        $lastscores = array_slice($scores, $ganzzahldiv * $divider);
+
+        // Complete run.
+        $userslices = $this->assign_to_slices($firstscores, $numberofslices);
+
+        // Handling remaining students to only allow one incomplete group.
+        $ganzzahldiv = intval(floor($numberofremainingusers / $groupsize));
+        $currentnumberofslices = min($numberofslices - 1, $ganzzahldiv);
+
+        $firstscores = array_slice($lastscores, 0, $ganzzahldiv * $groupsize);
+        $restscores = array_slice($lastscores, $ganzzahldiv * $groupsize);
+
+        // Creating some slices with group-size size.
+        // Reminder run.
+        $reminderslices = $this->assign_to_slices($firstscores, $currentnumberofslices);
+        // Adding rest scores as a slice.
+        $reminderslices[] = $restscores;
+
+        // Combining slices from complete run and reminder run.
+        // Starting with slice based on groupformation ID.
+        $modulo = $this->groupformationid % $numberofslices;
+        for ($i = 0; $i < count($reminderslices); $i++) {
+            $userslices[$modulo] = array_merge($userslices[$modulo], $reminderslices[$i]);
+            $modulo = ($modulo + 1) % $numberofslices;
+        }
+
+        return $userslices;
+    }
+
+    /**
+     * Assignes participants to slices
+     *
+     * @param $scores
+     * @param $numberofslices
      * @return array
      */
-    private function get_slices($scores, $numberofslices) {
-
+    private function assign_to_slices($scores, $numberofslices) {
+        if ($numberofslices == 0) {
+            return array();
+        }
+        $userslices = array_fill(0, $numberofslices, []);
         $slices = range(1, $numberofslices);
-        $userslices = [];
-        foreach ($scores as $tuple) {
+
+        for ($i = 0; $i < count($scores); $i++) {
+            list($user, $score) = $scores[$i];
+
             if (count($slices) == 0) {
                 $slices = range(1, $numberofslices);
             }
-
-            $user = $tuple[0];
-            $score = $tuple[1];
 
             $assignto = array_rand($slices);
 
@@ -334,8 +423,6 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
 
             unset($slices[$assignto]);
         }
-
-        return $userslices;
+        return array_values($userslices);
     }
-
 }

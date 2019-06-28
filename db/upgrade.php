@@ -1206,6 +1206,7 @@ function xmldb_groupformation_upgrade($oldversion) {
         // Groupformation savepoint reached.
         upgrade_mod_savepoint(true, 2016072100, 'groupformation');
     }
+
     if ($oldversion < 2016090700) {
         // Define field count_groups to be added to groupformation_jobs and groupformation_stats.
         $tablename = 'groupformation_jobs';
@@ -1755,6 +1756,185 @@ function xmldb_groupformation_upgrade($oldversion) {
         // Groupformation savepoint reached.
         upgrade_mod_savepoint(true, 2018061706, 'groupformation');
     }
+
+    if ($oldversion < 2018072100) {
+
+        // Rename field stats_avg_variance on table groupformation_stats to avg_variance.
+        $table = new xmldb_table('groupformation_stats');
+        $field = new xmldb_field('stats_avg_variance', XMLDB_TYPE_NUMBER, '20, 8', null, null, null, null, 'performance_index');
+
+        // Launch rename field stats_avg_variance.
+        $dbman->rename_field($table, $field, 'avg_variance');
+
+        // Rename field stats_variance on table groupformation_stats to variance.
+        $table = new xmldb_table('groupformation_stats');
+        $field = new xmldb_field('stats_variance', XMLDB_TYPE_NUMBER, '20, 8', null, null, null, null, 'stats_avg_variance');
+
+        // Launch rename field stats_variance.
+        $dbman->rename_field($table, $field, 'variance');
+
+        // Rename field stats_n on table groupformation_stats to n.
+        $table = new xmldb_table('groupformation_stats');
+        $field = new xmldb_field('stats_n', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'stats_variance');
+
+        // Launch rename field stats_n.
+        $dbman->rename_field($table, $field, 'n');
+
+        // Rename field stats_avg on table groupformation_stats to avg.
+        $table = new xmldb_table('groupformation_stats');
+        $field = new xmldb_field('stats_avg', XMLDB_TYPE_NUMBER, '20, 8', null, null, null, null, 'stats_n');
+
+        // Launch rename field stats_avg.
+        $dbman->rename_field($table, $field, 'avg');
+
+        // Rename field stats_st_dev on table groupformation_stats to st_dev.
+        $table = new xmldb_table('groupformation_stats');
+        $field = new xmldb_field('stats_st_dev', XMLDB_TYPE_NUMBER, '20, 8', null, null, null, null, 'stats_avg');
+
+        // Launch rename field stats_st_dev.
+        $dbman->rename_field($table, $field, 'st_dev');
+
+        // Rename field stats_norm_st_dev on table groupformation_stats to norm_st_dev.
+        $table = new xmldb_table('groupformation_stats');
+        $field = new xmldb_field('stats_norm_st_dev', XMLDB_TYPE_NUMBER, '20, 8', null, null, null, null, 'stats_st_dev');
+
+        // Launch rename field stats_norm_st_dev.
+        $dbman->rename_field($table, $field, 'norm_st_dev');
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2018072100, 'groupformation');
+    }
+
+    if ($oldversion < 2018072101) {
+
+        // Define field stats_performance_index to be dropped from groupformation_stats.
+        $table = new xmldb_table('groupformation_stats');
+        $field = new xmldb_field('stats_performance_index');
+
+        // Conditionally launch drop field stats_performance_index.
+        if ($dbman->field_exists($table, $field)) {
+            $dbman->drop_field($table, $field);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2018072101, 'groupformation');
+    }
+
+    if ($oldversion < 2018072102) {
+
+        // Define field n to be dropped from groupformation_stats.
+        $table = new xmldb_table('groupformation_stats');
+        $field = new xmldb_field('n');
+
+        // Conditionally launch drop field n.
+        if ($dbman->field_exists($table, $field)) {
+            $dbman->drop_field($table, $field);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2018072102, 'groupformation');
+    }
+
+    if ($oldversion < 2018120500) {
+
+        // Define field binquestion to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('binquestion', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '0', 'szenario');
+
+        // Conditionally launch add field binquestion.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field binquestiontext to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('binquestiontext', XMLDB_TYPE_CHAR, '1000', null, null, null, null, 'binquestion');
+
+        // Conditionally launch add field binquestiontext.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field binquestionlines to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('binquestionlines', XMLDB_TYPE_TEXT, null, null, null, null, null, 'binquestiontext');
+
+        // Conditionally launch add field binquestionlines.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field binquestionvalues to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('binquestionvalues', XMLDB_TYPE_TEXT, null, null, null, null, null, 'binquestionlines');
+
+        // Conditionally launch add field binquestionvalues.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field binquestionnumber to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('binquestionnumber', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'binquestionvalues');
+
+        // Conditionally launch add field binquestionnumber.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field binquestionimportance to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('binquestionimportance', XMLDB_TYPE_NUMBER, '20, 8', null, null, null, null, 'binquestionnumber');
+
+        // Conditionally launch add field binquestionimportance.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field binquestionrelation to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('binquestionrelation', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'binquestionimportance');
+
+        // Conditionally launch add field binquestionrelation.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2018120500, 'groupformation');
+    }
+
+    if ($oldversion < 2019031400) {
+
+        // Define field binquestionmultiselect to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('binquestionmultiselect', XMLDB_TYPE_INTEGER, '1', null, null, null, null, 'binquestionrelation');
+
+        // Conditionally launch add field binquestionmultiselect.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2019031400, 'groupformation');
+    }
+
+    if ($oldversion < 2019060600) {
+
+        // Define field binvalue to be added to groupformation_user_values.
+        $table = new xmldb_table('groupformation_user_values');
+        $field = new xmldb_field('binvalue', XMLDB_TYPE_CHAR, '255', null, null, null, null, 'value');
+
+        // Conditionally launch add field binvalue.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2019060600, 'groupformation');
+    }
+
+
 
     return true;
 }

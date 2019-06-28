@@ -22,9 +22,8 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
-}
+
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
@@ -91,7 +90,6 @@ class mod_groupformation_grouping {
      * @return mixed
      */
     public function configure_participants($participants, $configuration) {
-
         foreach ($participants as $participant) {
             $criteria = $participant->criteria;
             $configuredcriteria = array();
@@ -132,13 +130,13 @@ class mod_groupformation_grouping {
      * @throws Exception
      */
     public function build_cohort($users, $groupsize, $configurationkey) {
-        if (strpos($configurationkey, "rand:1") !== false) {
+        if (strpos($configurationkey, "random:1") !== false) {
             // Random.
             return $this->build_random_cohort($users, $groupsize);
-        } else if (strpos($configurationkey, "rand:0") !== false || strpos($configurationkey, "groupal:1") !== false) {
+        } else if (strpos($configurationkey, "groupal:1") !== false) {
             // Not Random.
             return $this->build_groupal_cohort($users, $groupsize);
-        } else if (strpos($configurationkey, "rand:0") !== false || strpos($configurationkey, "topic:1") !== false) {
+        } else if (strpos($configurationkey, "topic:1") !== false) {
             // Not Random.
             return $this->build_topic_cohort($users, $groupsize);
         } else {

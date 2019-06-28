@@ -25,9 +25,8 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
-}
+
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/manhattan_distance.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/bin_distance.php");
@@ -189,7 +188,6 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator
 
     }
 
-
     /**
      *  Calculates normalized pair performance
      *
@@ -232,6 +230,8 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator
         }
 
         foreach ($p1->get_criteria() as $c1) {
+
+            print_r($c1);
 
             // if (strpos($c1->get_distance(), 'both_bin_types_bins_covered_distance') === 1) {
 
