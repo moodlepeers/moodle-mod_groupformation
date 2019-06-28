@@ -1163,6 +1163,29 @@ class mod_groupformation_storage_manager {
 
         $lang = get_string('language', 'groupformation');
 
+        if ($category == 'binquestion'){
+            $temp = $this->get_knowledge_or_topic_values($category);
+            $xmlcontent = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>';
+            $options = mod_groupformation_util::xml_to_array($xmlcontent);
+            $questiontext = $this->get_binquestion_text();
+            $question = array();
+
+            $q = new stdClass();
+            $q->id = 1;
+            $q->category = $category;
+            $q->questionid = 1;
+            $q->question = $questiontext;
+            $q->options = $options;
+            if ($this->get_binquestion_multiselect()){
+                $q->type = 'multiselect';
+            } else {
+                $q->type = $category;
+            }
+
+            $question[0] = $q;
+            return $question;
+        }
+
         if ($category == 'topic' || $category == 'knowledge') {
             $type = 'range';
             $temp = $this->get_knowledge_or_topic_values($category);

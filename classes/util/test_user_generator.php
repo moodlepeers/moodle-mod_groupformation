@@ -35,6 +35,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/knowledg
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/dropdown_question.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/freetext_question.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/multiselect_question.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/binquestion_question.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/number_question.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/question_table.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/controller/grouping_controller.php');
@@ -148,7 +149,6 @@ class mod_groupformation_test_user_generator {
                 }
                 try {
                     foreach ($categories as $category) {
-                        var_dump($category);
                         $questions2 = $store->get_questions($category);
 
                         foreach (array_values($questions2) as $key => $question) {
