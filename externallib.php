@@ -211,7 +211,7 @@ function groupformation_get_dates($groupformationid) {
 }
 
 /**
- * Return users for this activity
+ * Return users for this activity.
  *
  * @param $groupformationid
  * @return array
@@ -223,7 +223,7 @@ function groupformation_get_users($groupformationid) {
 }
 
 /**
- * Checks whethter a groupformation exists
+ * Checks whethter a groupformation exists.
  *
  * @param $instance
  * @return bool
@@ -235,8 +235,44 @@ function groupformation_check_instance($instance) {
     return $DB->record_exists('groupformation',array('id' => $instance));
 }
 
+/**
+ * Returns the ids of all groupformations a user had visited.
+ *
+ * @param $userid
+ * @return array
+ * @throws dml_exception
+ */
 function get_groupformationids_for_user($userid) {
     global $DB;
 
     return $DB->get_fieldset_select('groupformation_users', 'groupformation','userid ='.$userid, array('userid' =>$userid));
+}
+
+/**
+ * Returns whether a groupformation should be tracked for a user.
+ *
+ * @param $userid
+ * @param $gfid
+ * @return mixed
+ * @throws dml_exception
+ */
+function get_gf_tracked_for_user($userid, $gfid){
+    global $DB;
+
+    return $DB->get_field('groupformation_users', 'tracked', array('userid' =>$userid, 'groupformation' => $gfid));
+}
+
+/**
+ * Sets wheter a groupformation should tracked for user.
+ * @param $userid
+ * @param $gfid
+ * @param $tracked
+ * @throws dml_exception
+ */
+function set_gf_tracked_for_user($userid, $gfid, $tracked){
+    global $DB;
+
+    if ($tracked == 1 || $tracked == 0){
+        $DB->set_field('groupformation_users', 'tracked', $tracked, array('userid' =>$userid, 'groupformation' => $gfid));
+    }
 }
