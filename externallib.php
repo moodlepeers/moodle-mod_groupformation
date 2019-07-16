@@ -222,8 +222,21 @@ function groupformation_get_users($groupformationid) {
     return $store->get_users_for_grouping();
 }
 
+/**
+ * Checks whethter a groupformation exists
+ *
+ * @param $instance
+ * @return bool
+ * @throws dml_exception
+ */
 function groupformation_check_instance($instance) {
     global $DB;
 
     return $DB->record_exists('groupformation',array('id' => $instance));
+}
+
+function get_groupformationids_for_user($userid) {
+    global $DB;
+
+    return $DB->get_fieldset_select('groupformation_users', 'groupformation','userid ='.$userid, array('userid' =>$userid));
 }
