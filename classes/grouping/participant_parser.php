@@ -91,18 +91,12 @@ class mod_groupformation_participant_parser {
                 $minval = 0.0;
                 $maxval = 1.0;
 
-                if (!is_null($weights)) {
-                    $weight = $weights[$label];
-                } else {
-                    $weight = 1;
+                $weight = $weights[$label];
 
-                    if ($label == 'general') {
-                        $weight = (count($labels) - 1) / 2;
-                    }
+                if ($label == 'general') {
+                    $weight = (count($labels) - 1) / 2;
                 }
 
-
-                //TODO change the label names if needed after frontend is connected
                 switch ($label) {
                     case "specific":
                         $criterion = new mod_groupformation_specific_criterion ($label, $value, $minval, $maxval, $homogen, $weight);

@@ -39,7 +39,8 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php')
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class mod_groupformation_scientific_grouping_2 extends mod_groupformation_grouping {
+class mod_groupformation_scientific_grouping_2 extends mod_groupformation_grouping
+{
 
     /** @var int ID of module instance */
     public $groupformationid;
@@ -62,7 +63,8 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
      * @param int $groupformationid
      * @throws dml_exception
      */
-    public function __construct($groupformationid) {
+    public function __construct($groupformationid)
+    {
         $this->groupformationid = $groupformationid;
         $this->usermanager = new mod_groupformation_user_manager($groupformationid);
         $this->store = new mod_groupformation_storage_manager($groupformationid);
@@ -79,7 +81,8 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
      * @param $numberofslices
      * @return mixed
      */
-    public function determine_number_of_slices($numberofusers, $groupsize, $numberofslices) {
+    public function determine_number_of_slices($numberofusers, $groupsize, $numberofslices)
+    {
         if ($numberofusers == 0) {
             return $numberofusers;
         }
@@ -97,14 +100,15 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
      * @throws coding_exception
      * @throws dml_exception
      */
-    public function get_scores($users, $specs) {
+    public function get_scores($users, $specs)
+    {
         $scores = [];
 
         foreach ($users as $user) {
             $scores[] = array($user, $this->usermanager->get_eval_score($user, $specs));
         }
 
-        $cmp = function($a, $b) {
+        $cmp = function ($a, $b) {
             return $a[1] < $b[1];
         };
 
@@ -123,7 +127,8 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
      * @return array
      * @throws Exception
      */
-    public function get_optimal_slices($users, $numberofslices, $specs = null, $groupsize = 3) {
+    public function get_optimal_slices($users, $numberofslices, $specs = null, $groupsize = 3)
+    {
         if ($numberofslices == 0) {
             return array();
         }
@@ -153,7 +158,7 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
         while ($i < 100 && !$bestfound) {
             $i++;
             $slices = $this->get_slices($scores, $numberofslices, $groupsize);
-            $func = function($value, $key = 1) {
+            $func = function ($value, $key = 1) {
                 return $value[$key];
             };
 
@@ -189,7 +194,7 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
                 $mean = $means[$k];
                 $stddev = $stddevs[$k];
                 $distmean = abs($mean - $avgmean) / ($avgmean + 0.01);
-                $diststddev = abs ($stddev - $avgstddev) / ($avgstddev + 0.01);
+                $diststddev = abs($stddev - $avgstddev) / ($avgstddev + 0.01);
                 $boolmean &= ($distmean < $cutoff);
                 $boolstddev &= ($diststddev < $cutoff);
                 $distsummean += $distmean;
@@ -211,8 +216,8 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
             }
         }
 
-        $func2 = function($a) {
-            $func3 = function($b) {
+        $func2 = function ($a) {
+            $func3 = function ($b) {
                 return $b[0];
             };
             return array_map($func3, $a);
@@ -226,11 +231,13 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
      *
      * @return array
      */
-    public function get_weights() {
+    public function get_weights()
+    {
 
-        return array('big5_extraversion' => 4,
-                'big5_conscientiousness' => 4,
-                'knowledge_two' => 2
+        return array('big5_extraversion' => 2,
+            'big5_conscientiousness' => 2,
+            'knowledge_two' => 1,
+            'binquestion_singlechoice' => 10
         );
     }
 
@@ -242,7 +249,8 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
      * @throws coding_exception
      * @throws dml_exception
      */
-    public function run_grouping($users) {
+    public function run_grouping($users)
+    {
 
         $groupsizes = $this->store->determine_group_size($users);
 
@@ -283,7 +291,8 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
      * @return array
      * @throws dml_exception
      */
-    private function build_cohorts($slices, $groupsize, $specification, $weights = null) {
+    private function build_cohorts($slices, $groupsize, $specification, $weights = null)
+    {
 
         // Loop preparation.
         $numberofslices = count($slices);
@@ -309,7 +318,8 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
      *
      * @return array
      */
-    public function get_specification() {
+    public function get_specification()
+    {
 
         $big5specs = mod_groupformation_data::get_criterion_specification('big5');
         $knowledgespecs = mod_groupformation_data::get_criterion_specification('knowledge');
@@ -321,20 +331,20 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
         unset($knowledgespecs['labels']['one']);
 
         $specs = [
-                'big5' => $big5specs,
-                'knowledge' => $knowledgespecs,
-                //'fam' => $famspecs
+            'big5' => $big5specs,
+            'knowledge' => $knowledgespecs,
+            //'fam' => $famspecs
         ];
 
         $configurations = array(
             "groupal:1;ex:1;gh:1;vw:0" => array('big5_extraversion' => true,
-                    'big5_conscientiousness' => true, 'knowledge_two' => false),
+                'big5_conscientiousness' => true, 'knowledge_two' => false),
             "groupal:1;ex:1;gh:0;vw:0" => array('big5_extraversion' => true,
-                    'big5_conscientiousness' => false, 'knowledge_two' => false),
+                'big5_conscientiousness' => false, 'knowledge_two' => false),
             "groupal:1;ex:0;gh:0;vw:0" => array('big5_extraversion' => false,
-                    'big5_conscientiousness' => false, 'knowledge_two' => false),
+                'big5_conscientiousness' => false, 'knowledge_two' => false),
             "groupal:1;ex:0;gh:1;vw:0" => array('big5_extraversion' => false,
-                    'big5_conscientiousness' => true, 'knowledge_two' => false),
+                'big5_conscientiousness' => true, 'knowledge_two' => false),
         );
 
         return [$configurations, $specs];
@@ -349,7 +359,8 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
      * @return array
      * @throws Exception
      */
-    public function get_slices($scores, $numberofslices, $groupsize = 3) {
+    public function get_slices($scores, $numberofslices, $groupsize = 3)
+    {
         if ($numberofslices == 0 || $groupsize == 0) {
             throw new Exception("Groupsize or Number of Slices cannot be 0");
         }
@@ -399,7 +410,8 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
      * @param $numberofslices
      * @return array
      */
-    private function assign_to_slices($scores, $numberofslices) {
+    private function assign_to_slices($scores, $numberofslices)
+    {
         if ($numberofslices == 0) {
             return array();
         }
