@@ -337,18 +337,16 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
             //'fam' => $famspecs
         ];
 
-        //TODO complete the configuration bin binquestion
+        // true = homo ; false = hetero
         $configurations = array(
-            "groupal:1;ex:1;gh:1;vw:1;bi:0" => array('big5_extraversion' => true,
-                'big5_conscientiousness' => true, 'knowledge_two' => true, 'binquestion_singlechoice' => false),
-            "groupal:1;ex:1;gh:1;vw:0;bi:0" => array('big5_extraversion' => true,
-                'big5_conscientiousness' => true, 'knowledge_two' => false, 'binquestion_singlechoice' => false),
-            "groupal:1;ex:1;gh:0;vw:0;bi:0" => array('big5_extraversion' => true,
-                'big5_conscientiousness' => false, 'knowledge_two' => false, 'binquestion_singlechoice' => false),
-            "groupal:1;ex:0;gh:0;vw:0;bi:0" => array('big5_extraversion' => false,
-                'big5_conscientiousness' => false, 'knowledge_two' => false, 'binquestion_singlechoice' => false),
-            "groupal:1;ex:0;gh:1;vw:0,bi:0" => array('big5_extraversion' => false,
-                'big5_conscientiousness' => true, 'knowledge_two' => false, 'binquestion_singlechoice' => false),
+            "groupal:1;ex:1;gh:1;vw:0" => array('big5_extraversion' => true,
+                'big5_conscientiousness' => true, 'knowledge_two' => false, 'binquestion_singlechoice' => true),
+            "groupal:1;ex:1;gh:0;vw:0" => array('big5_extraversion' => true,
+                'big5_conscientiousness' => false, 'knowledge_two' => false, 'binquestion_singlechoice' => true),
+            "groupal:1;ex:0;gh:0;vw:0" => array('big5_extraversion' => false,
+                'big5_conscientiousness' => false, 'knowledge_two' => false, 'binquestion_singlechoice' => true),
+            "groupal:1;ex:0;gh:1;vw:0" => array('big5_extraversion' => false,
+                'big5_conscientiousness' => true, 'knowledge_two' => false, 'binquestion_singlechoice' => true),
         );
 
         return [$configurations, $specs];
