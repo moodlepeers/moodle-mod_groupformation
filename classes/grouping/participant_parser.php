@@ -203,8 +203,8 @@ class mod_groupformation_participant_parser {
             // Pre-computes values and generates and object which can be parsed into participants with criteria.
             $object = new stdClass ();
             $object->id = $user;
-            foreach ($criteriaspecs as $criterion => $spec) {
 
+            foreach ($criteriaspecs as $criterion => $spec) {
                 if (in_array($scenario, $spec['scenarios'])) {
                     $points = array();
                     $answeredeverything = $this->usermanager->has_answered_everything($user);
@@ -212,17 +212,19 @@ class mod_groupformation_participant_parser {
                         $points = $this->criterioncalculator->read_values_for_user($criterion, $user, $spec);
                     }
 
-                    // var_dump($points);
+                    //var_dump($points);
                     foreach ($spec['labels'] as $label => $lspec) {
                         $value = array();
-                        $vs = $points[$label]["values"];
-                        foreach ($vs as $v) {
-                            $value[] = $v;
+                        if (count($points) != 0) {
+                            $vs = $points[$label]["values"];
+                            foreach ($vs as $v) {
+                                $value[] = $v;
+                            }
+                            $value ["homogeneous"] = $lspec['scenarios'][$scenario];
+                            $name = $criterion . '_' . $label;
+                            $object->$name = $value;
+                            $totallabel [] = $name;
                         }
-                        $value ["homogeneous"] = $lspec['scenarios'][$scenario];
-                        $name = $criterion . '_' . $label;
-                        $object->$name = $value;
-                        $totallabel [] = $name;
                     }
                 }
             }

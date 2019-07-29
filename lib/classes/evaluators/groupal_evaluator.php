@@ -231,8 +231,6 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator
 
         foreach ($p1->get_criteria() as $c1) {
 
-            print_r($c1);
-
             // if (strpos($c1->get_distance(), 'both_bin_types_bins_covered_distance') === 1) {
 
             // Get the same Criterion of the other participant (first criterion of $p2, that matches condition same as ).

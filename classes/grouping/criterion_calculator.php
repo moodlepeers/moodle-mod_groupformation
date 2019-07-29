@@ -98,6 +98,7 @@ class mod_groupformation_criterion_calculator {
         foreach ($criteriaspecs as $criterion => $spec) {
             if (!is_null($spec)) {
 
+
                 $scenarios = $spec['scenarios'];
                 $validscenario = in_array($this->scenario, $scenarios);
                 $validforeval = !$eval || array_key_exists('evaluation', $spec);
@@ -113,8 +114,10 @@ class mod_groupformation_criterion_calculator {
                     // Either validscenario or validforeval
                     foreach ($labels as $label => $specs) {
 
+
                         $validscenario = array_key_exists($this->scenario, $specs['scenarios']);
                         $validforeval = (!$eval || (array_key_exists('evaluation', $specs) && $specs['evaluation']));
+
 
                         if ($validscenario && $validforeval) {
                             if (array_key_exists('significant_id_only', $specs) && $specs['significant_id_only']) {

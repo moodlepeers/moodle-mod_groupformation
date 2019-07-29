@@ -127,7 +127,7 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
      * @return array
      * @throws Exception
      */
-    public function get_optimal_slices($users, $numberofslices, $specs = null, $groupsize = 3)
+    public function get_optimal_slices($users, $numberofslices, $specs = null, $groupsize = 4)
     {
         if ($numberofslices == 0) {
             return array();
@@ -152,7 +152,6 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
         // Idea: all slices should have very similar mean and stddev (distance smaller cutoff).
 
         $scores = $this->get_scores($users, $specs);
-
         $best = $this->get_slices($scores, $numberofslices, $groupsize);
 
         while ($i < 100 && !$bestfound) {
@@ -237,7 +236,7 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
         return array('big5_extraversion' => 2,
             'big5_conscientiousness' => 2,
             'knowledge_two' => 1,
-            'binquestion_singlechoice' => 10
+            'binquestion_singlechoice' => 1
         );
     }
 
@@ -260,14 +259,13 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
         $weights = $this->get_weights();
 
         $numberofslices = count($configurations);
-        $numberofslices = $this->determine_number_of_slices(count($users[0]), $groupsizes[0], $numberofslices);
 
+        $numberofslices = $this->determine_number_of_slices(count($users[0]), $groupsizes[0], $numberofslices);
         $cohorts = array();
 
         if ($numberofslices > 0) {
 
             $slices = $this->get_optimal_slices($users[0], $numberofslices, $specs, $groupsizes[0]);
-
             $cohorts = $this->build_cohorts($slices, $groupsizes[0], $specification, $weights);
         }
 
@@ -276,7 +274,6 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
 
         $randomparticipants = $this->participantparser->build_empty_participants($users[1]);
         $randomcohort = $this->build_cohort($randomparticipants, $groupsizes[1], $randomkey);
-
         $cohorts[$randomkey] = $randomcohort;
         return $cohorts;
     }
@@ -297,12 +294,13 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
         // Loop preparation.
         $numberofslices = count($slices);
         list ($configurations, $specs) = $specification;
+
         $configurationkeys = array_keys($configurations);
+
         $cohorts = array();
         // Loop to iterate over slices and run GroupAL for each slice.
         for ($i = 0; $i < $numberofslices; $i++) {
             $slice = $slices[$i];
-
             $configurationkey = $configurationkeys[$i];
             $configuration = $configurations[$configurationkey];
             $rawparticipants = $this->participantparser->build_participants($slice, $specs, $weights);
@@ -323,6 +321,7 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
 
         $big5specs = mod_groupformation_data::get_criterion_specification('big5');
         $knowledgespecs = mod_groupformation_data::get_criterion_specification('knowledge');
+        $binquestionspecs = mod_groupformation_data::get_criterion_specification('binquestion');
         //$famspecs = mod_groupformation_data::get_criterion_specification('fam');
 
         unset($big5specs['labels']['neuroticism']);
@@ -333,18 +332,23 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
         $specs = [
             'big5' => $big5specs,
             'knowledge' => $knowledgespecs,
+            'binquestion' =>  $binquestionspecs
+
             //'fam' => $famspecs
         ];
 
+        //TODO complete the configuration bin binquestion
         $configurations = array(
-            "groupal:1;ex:1;gh:1;vw:0" => array('big5_extraversion' => true,
-                'big5_conscientiousness' => true, 'knowledge_two' => false),
-            "groupal:1;ex:1;gh:0;vw:0" => array('big5_extraversion' => true,
-                'big5_conscientiousness' => false, 'knowledge_two' => false),
-            "groupal:1;ex:0;gh:0;vw:0" => array('big5_extraversion' => false,
-                'big5_conscientiousness' => false, 'knowledge_two' => false),
-            "groupal:1;ex:0;gh:1;vw:0" => array('big5_extraversion' => false,
-                'big5_conscientiousness' => true, 'knowledge_two' => false),
+            "groupal:1;ex:1;gh:1;vw:1;bi:0" => array('big5_extraversion' => true,
+                'big5_conscientiousness' => true, 'knowledge_two' => true, 'binquestion_singlechoice' => false),
+            "groupal:1;ex:1;gh:1;vw:0;bi:0" => array('big5_extraversion' => true,
+                'big5_conscientiousness' => true, 'knowledge_two' => false, 'binquestion_singlechoice' => false),
+            "groupal:1;ex:1;gh:0;vw:0;bi:0" => array('big5_extraversion' => true,
+                'big5_conscientiousness' => false, 'knowledge_two' => false, 'binquestion_singlechoice' => false),
+            "groupal:1;ex:0;gh:0;vw:0;bi:0" => array('big5_extraversion' => false,
+                'big5_conscientiousness' => false, 'knowledge_two' => false, 'binquestion_singlechoice' => false),
+            "groupal:1;ex:0;gh:1;vw:0,bi:0" => array('big5_extraversion' => false,
+                'big5_conscientiousness' => true, 'knowledge_two' => false, 'binquestion_singlechoice' => false),
         );
 
         return [$configurations, $specs];
@@ -359,7 +363,7 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
      * @return array
      * @throws Exception
      */
-    public function get_slices($scores, $numberofslices, $groupsize = 3)
+    public function get_slices($scores, $numberofslices, $groupsize = 4)
     {
         if ($numberofslices == 0 || $groupsize == 0) {
             throw new Exception("Groupsize or Number of Slices cannot be 0");
