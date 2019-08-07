@@ -276,3 +276,31 @@ function set_gf_tracked_for_user($userid, $gfid, $tracked){
         $DB->set_field('groupformation_users', 'tracked', $tracked, array('userid' =>$userid, 'groupformation' => $gfid));
     }
 }
+
+/**
+ * Returns whether a groupformation should be tracked for the teacher.
+ *
+ * @param $gfid
+ * @return mixed
+ * @throws dml_exception
+ */
+function get_gf_tracked_for_teacher($gfid) {
+    global $DB;
+
+    return $DB->get_field('groupformation', 'tracked', array('id' => $gfid));
+}
+
+/**
+ * Sets wheter a groupformation should tracked for the teacher.
+ *
+ * @param $gfid
+ * @param $tracked
+ * @throws dml_exception
+ */
+function set_gf_tracked_for_teacher($gfid, $tracked){
+    global $DB;
+
+    if ($tracked == 1 || $tracked == 0){
+        $DB->set_field('groupformation', 'tracked', $tracked, array('id' => $gfid));
+    }
+}
