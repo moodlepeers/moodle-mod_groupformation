@@ -298,7 +298,7 @@ defined('MOODLE_INTERNAL') || die();
                                             </th>
 
                                             <td class="range">
-                                                <select multiple id="oobpreviewddMulti">
+                                                <select multiple class="oobpreviewddMulti" id="oobpreviewddMulti">
                                                     <option class="oobRowMulti" id="oobRow0Multi">
                                                         <?php echo get_string('knowledge_dummy',
                                                             'groupformation');?> 1

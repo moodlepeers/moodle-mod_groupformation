@@ -1468,7 +1468,7 @@
 .path-mod-groupformation .oobRowMulti {
     align-self: center;
 }
-.path-mod-groupformation #oobpreviewddMulti {
+.path-mod-groupformation .oobpreviewddMulti {
     width: available;
 }
 
