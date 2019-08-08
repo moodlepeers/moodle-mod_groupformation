@@ -236,7 +236,7 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
         return array('big5_extraversion' => 2,
             'big5_conscientiousness' => 2,
             'knowledge_two' => 1,
-            'binquestion_singlechoice' => 10
+            'binquestion_singlechoice' => 1
         );
     }
 

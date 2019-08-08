@@ -920,9 +920,13 @@ class mod_groupformation_criterion_calculator {
             if (!array_key_exists('values', $array[$rec->label])) {
                 $array[$rec->label]['values'] = array();
             }
-            $array[$rec->label]['values'][$rec->dimension] = floatval($rec->value);
-        }
 
+            if ($criterion == "binquestion"){
+                $array[$rec->label]['values'] = explode(',', $rec->binvalue);
+            } else {
+                $array[$rec->label]['values'][$rec->dimension] = floatval($rec->value);
+            }
+        }
         return $array;
     }
 

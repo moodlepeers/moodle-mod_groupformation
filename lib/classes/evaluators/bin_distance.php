@@ -41,7 +41,8 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/one_of_bi
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class mod_groupformation_bin_distance implements mod_groupformation_idistance {
+class mod_groupformation_bin_distance implements mod_groupformation_idistance
+{
 
     /**
      * normes distance for each dimension (INTERNAL method)
@@ -51,8 +52,8 @@ class mod_groupformation_bin_distance implements mod_groupformation_idistance {
      * @param mod_groupformation_criterion $cr2
      * @return float|number
      */
-    private function get_distance(mod_groupformation_criterion $cr1, mod_groupformation_criterion $cr2) {
-
+    private function get_distance(mod_groupformation_criterion $cr1, mod_groupformation_criterion $cr2)
+    {
         $distance = 1;
         $index = 0;
 
@@ -77,7 +78,8 @@ class mod_groupformation_bin_distance implements mod_groupformation_idistance {
      * @param mod_groupformation_criterion $c2
      * @return float 1 or 0
      */
-    public function normalized_distance(mod_groupformation_criterion $c1, mod_groupformation_criterion $c2) {
+    public function normalized_distance(mod_groupformation_criterion $c1, mod_groupformation_criterion $c2)
+    {
         return $this->get_distance($c1, $c2);
     }
 

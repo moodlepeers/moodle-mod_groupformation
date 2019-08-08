@@ -101,17 +101,18 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator
             }
         }
 
+        //TODO implement one against group when both bin types functions are in use
         // calculate the npi for once against group functions
         // get the last participants and compare it against the group
-        $p = $participants[$participantcount - 1];
-        foreach ($p->get_criteria() as $c) {
-            // all once against group function starts with both_bin_types
-            // check if a function is available in this criterion
-            if (strpos($c->get_distance(), 'both_bin_types') === 0) {
-                $npi = $this->calc_normalized_one_against_group_performance($c, $group);
-                $npis[] = $npi;
-            }
-        }
+//        $p = $participants[$participantcount - 1];
+//        foreach ($p->get_criteria() as $c) {
+//            // all once against group function starts with both_bin_types
+//            // check if a function is available in this criterion
+//            if (strpos($c->get_distance(), 'both_bin_types') === 0) {
+//                $npi = $this->calc_normalized_one_against_group_performance($c, $group);
+//                $npis[] = $npi;
+//            }
+//        }
 
         //once against all
         $group->results = $this->get_performance_index($npis);
