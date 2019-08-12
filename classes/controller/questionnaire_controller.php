@@ -632,10 +632,9 @@ class mod_groupformation_questionnaire_controller {
 
         $type = $question->type;
         $questionid = $question->questionid;
-        $multiselect = $this->store->get_binquestion_multiselect();
-        //$multiselect = true;
         $name = 'mod_groupformation_' . $type . '_question';
         if ($type == 'binquestion'){
+            $multiselect = $this->store->get_binquestion_multiselect();
             if ($multiselect){
                 $name = 'mod_groupformation_multiselect_question';
             }
