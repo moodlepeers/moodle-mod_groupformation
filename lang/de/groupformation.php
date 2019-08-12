@@ -201,7 +201,7 @@ $string ['tabletitle_self'] = 'Selbsteinschätzung';
 $string ['tabletitle_srl'] = 'Selbstreguliertes Lernen';
 $string ['tabletitle_knowledge'] = 'Wie schätzen Sie Ihr persönliches Vorwissen in folgenden Gebieten ein?';
 $string ['tabletitle_binquestion'] = 'Wählen Sie eine der Antworten!';
-$string ['tabletitle_binquesiton_multi'] = 'Wählen Sie so viele Antworten wie Sie wollen!';
+$string ['tabletitle_binquestion_multi'] = 'Wählen Sie so viele Antworten wie Sie wollen!';
 
 $string ['stats_partly'] = 'In der Kategorie "{$a->category}" haben Sie {$a->answered} von {$a->questions} Fragen beantwortet.';
 $string ['stats_all'] = 'In der Kategorie "{$a->category}" haben Sie alle Fragen beantwortet.';
