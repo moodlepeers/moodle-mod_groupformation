@@ -149,8 +149,8 @@ class mod_groupformation_test_user_generator {
                 }
                 try {
                     foreach ($categories as $category) {
+                        $last_answer = 0;
                         $questions2 = $store->get_questions($category);
-
                         foreach (array_values($questions2) as $key => $question) {
                             $options = $question->options;
 
@@ -163,6 +163,7 @@ class mod_groupformation_test_user_generator {
                             $name = 'mod_groupformation_' . $question->type . '_question';
                             /** @var mod_groupformation_basic_question $questionobj */
                             $questionobj = new $name($category, $question->questionid, $question->question, $options);
+
                             $answer = $questionobj->create_random_answer();
                             $record = new stdClass ();
                             $record->groupformation = $groupformationid;
@@ -170,6 +171,15 @@ class mod_groupformation_test_user_generator {
                             $record->questionid = $question->questionid;
                             $record->userid = $userid;
                             $record->timestamp = time();
+                            // TODO
+                            if ($category == 'knowledge'){
+                                if ($question->questionid == 1) {
+                                    $answer = rand(0, 38);
+                                    $last_answer = $answer;
+                                } else {
+                                    $answer = rand($last_answer, 38);
+                                }
+                            }
                             $record->answer = $answer;
                             $allrecords [] = $record;
                         }
@@ -180,18 +190,19 @@ class mod_groupformation_test_user_generator {
                         $usermanager->set_evaluation_values($userid);
                     }
                 } catch (Exception $e) {
+
                     $this->echowarn("Error while saving answers status for user.");
 
                     return false;
                 }
             }
         }
+
         if ($setanswers) {
             $this->echowarn('Users (and answers) have been created.');
         } else {
             $this->echowarn('Users have been created.');
         }
-
         return true;
     }
 
