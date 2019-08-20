@@ -776,7 +776,6 @@ class mod_groupformation_user_manager {
                 }
             }
         }
-        var_dump('records', $records);
         $DB->insert_records('groupformation_user_values', $records);
     }
 

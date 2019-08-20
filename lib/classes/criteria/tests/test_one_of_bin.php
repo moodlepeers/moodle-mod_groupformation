@@ -63,7 +63,6 @@ class test_one_of_bin {
 
     }
 
-    //TODO not working quite well. Got an error if there wanna save participants in db
 
     /**
      * create manually a participant

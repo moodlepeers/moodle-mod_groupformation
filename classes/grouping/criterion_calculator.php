@@ -914,6 +914,7 @@ class mod_groupformation_criterion_calculator {
 
         $array = array();
         foreach (array_values($recs) as $rec) {
+
             if (!array_key_exists($rec->label, $array)) {
                 $array[$rec->label] = array();
             }
@@ -927,6 +928,7 @@ class mod_groupformation_criterion_calculator {
                 $array[$rec->label]['values'][$rec->dimension] = floatval($rec->value);
             }
         }
+
         return $array;
     }
 

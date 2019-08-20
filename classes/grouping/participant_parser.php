@@ -191,7 +191,6 @@ class mod_groupformation_participant_parser {
             $criteriaspecs = $specs;
         }
 
-        // var_dump(array_keys($criteriaspecs));
         $criteriaspecs = $this->criterioncalculator->filter_criteria_specs($criteriaspecs, $users);
 
         $array = array();
@@ -212,7 +211,6 @@ class mod_groupformation_participant_parser {
                         $points = $this->criterioncalculator->read_values_for_user($criterion, $user, $spec);
                     }
 
-                    //var_dump($points);
                     foreach ($spec['labels'] as $label => $lspec) {
                         $value = array();
                         if (count($points) != 0) {

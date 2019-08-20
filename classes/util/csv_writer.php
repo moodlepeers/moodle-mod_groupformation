@@ -340,9 +340,6 @@ class mod_groupformation_csv_writer {
                     $ex = "-";
                     $gh = "-";
                 } else {
-
-                    //var_dump($groupkey); echo "<br>";
-
                     $ex = substr($groupkey, strpos($groupkey, 'ex:') + 3, 1);
                     $gh = substr($groupkey, strpos($groupkey, 'gh:') + 3, 1);
 
