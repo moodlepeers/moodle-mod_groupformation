@@ -35,7 +35,7 @@ $filename = substr($filename, strpos($filename, '/mod'));
 $url = new moodle_url($filename, $urlparams);
 
 // Set PAGE config.
-$PAGE->set_url($url);
+$PAGE->set_url('/mod/groupformation/group_view.php', $urlparams);
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 $PAGE->set_context(context_module::instance($cm->id));

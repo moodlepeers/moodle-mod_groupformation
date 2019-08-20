@@ -30,12 +30,11 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/controller/analysis_co
 require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/analysis_view_controller.php');
 
 $filename = substr(__FILE__, strrpos(__FILE__, '\\') + 1);
-$filename = substr($filename, strpos($filename, '/mod'));
+$filename = substr($filename, strpos($filename, '/mod/groupformation/'));
 
-$url = new moodle_url($filename, $urlparams);
-
+$url = new moodle_url($filename);
 // Set PAGE config.
-$PAGE->set_url($url);
+$PAGE->set_url('/mod/groupformation/analysis_view.php', $urlparams);
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
 $PAGE->set_context(context_module::instance($cm->id));
