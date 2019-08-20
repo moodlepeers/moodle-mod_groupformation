@@ -375,11 +375,11 @@ class mod_groupformation_storage_manager {
         return $DB->get_field('groupformation', 'binquestiontext', array('id' => $this->groupformationid));
     }
 
-//    public function get_binquestion_multiselect(){
-//        global $DB;
-//
-//        return $DB->get_field('groupformation', 'binquestionmultiselect', array('id' => $this->groupformationid));
-//    }
+    public function get_binquestion_multiselect(){
+        global $DB;
+
+        return $DB->get_field('groupformation', 'binquestionmultiselect', array('id' => $this->groupformationid));
+    }
     /**
      * Returns max number of options for a specific question in a specific category
      *
