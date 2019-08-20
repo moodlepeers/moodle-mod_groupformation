@@ -1464,3 +1464,14 @@
 .path-mod-groupformation .gf_hidden {
     display: none;
 }
+
+.path-mod-groupformation .oobRowMulti {
+    align-self: center;
+}
+.path-mod-groupformation .oobpreviewddMulti {
+    width: available;
+}
+
+.path-mod-groupformation .oob_in_preview {
+    margin-top: 7px;
+}
