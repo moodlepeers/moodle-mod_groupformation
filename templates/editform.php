@@ -135,17 +135,9 @@ defined('MOODLE_INTERNAL') || die();
                 </label>
             </div>
             <div class="gf_pad_content" id="js_oneOfBinWrapper" style="display:none;">
-                <p class="oob_in_preview" id="oneOfBinInfoText"><?php echo get_string('choose_oob_answers', 'groupformation'); ?></p>
+                <p class="oob_in_preview" id="oneOfBinInfoText"><h5><?php echo get_string('choose_oob_answers', 'groupformation'); ?><span class="required"></span></h5>
                 <input type="text" class="respwidth oob_in_preview" id="js_oob_question" placeholder="<?php echo get_string('add_oob_question', 'groupformation'); ?>" style="width: 80%" />
-
-                <div id="oob_multiselect_box oob_in_preview">
-                    <h5><?php echo get_string('choose_type', 'groupformation'); ?></h5>
-                    <p><?php echo get_string('decide_multiselect', 'groupformation'); ?></p>
-                    <label class="gf_label" for="id_js_binquestionmultiselect">
-                        <input type="checkbox" id="id_js_binquestionmultiselect"  value="wantMultiselect" />
-                        <?php echo get_string('multiselect', 'groupformation'); ?>
-                    </label>
-                </div>
+                </p>
 
                 <div class="grid">
                     <div id="oob">
@@ -153,7 +145,7 @@ defined('MOODLE_INTERNAL') || die();
                             <div class="col_m_50">
                                 <h5>
                                     <?php echo get_string('answers', 'groupformation'); ?>
-                                </h5>
+                                    <span class="required"></span> </h5>
 
 
                                 <div class="multi_fields oob_in_preview">
@@ -180,16 +172,24 @@ defined('MOODLE_INTERNAL') || die();
                                         </button>
                                     </div>
                                 </div>
+                                <p><div id="oob_multiselect_box oob_in_preview">
+                                        <h5><?php echo get_string('choose_type', 'groupformation'); ?></h5>
+                                <p><?php echo get_string('decide_multiselect', 'groupformation'); ?></p>
+                                <label class="gf_label" for="id_js_binquestionmultiselect">
+                                    <input type="checkbox" id="id_js_binquestionmultiselect"  value="wantMultiselect" />
+                                    <?php echo get_string('multiselect', 'groupformation'); ?>
+                                </label>
+                            </div>
+                            </p><p>
                                 <div id="gf_oneOfBinImportanceDiv  oob_in_preview">
                                     <h5>
                                         <?php echo get_string('importance', 'groupformation'); ?>
-                                    </h5>
-                                    <p id="gf_one_of_bin_Importance"><?php echo get_string('oob_selected_value', 'groupformation'); ?></p>
+                                    <span class="required"></span></h5>
                                     <p><?php echo get_string('choose_oob_importance', 'groupformation'); ?></p>
+                                    <p id="gf_one_of_bin_Importance"><?php echo get_string('oob_selected_value', 'groupformation'); ?></p>
+                                <div>
 
-                                    <div >
-
-                                        <span >
+                                        <span>
                                             0
                                         </span>
                                         <input type="range" id="id_js_oneofbinimportance" list="gfOneOfBinImpValues" min="0" max="10" value="0" />
@@ -210,12 +210,12 @@ defined('MOODLE_INTERNAL') || die();
                                             <option value="10" label="100%">
                                         </datalist>
                                     </div>
-                                </div>
+                                </div></p><p>
                                 <div id="gf_oneOfBinRelation  oob_in_preview">
-                                    <h5><?php echo get_string('relation', 'groupformation'); ?> </h5>
-                                    <p id="js_oobrelselval"><?php echo get_string('oob_selected_value', 'groupformation'); ?></p>
+                                    <h5><?php echo get_string('relation', 'groupformation'); ?><span class="required"></span></h5>
                                     <p><?php echo get_string('choose_oob_relation', 'groupformation'); ?></p>
-                                    <select id="id_js_oneofbinrelation">
+                                <p id="js_oobrelselval"><?php echo get_string('oob_selected_value', 'groupformation'); ?></p>
+                                <select id="id_js_oneofbinrelation">
                                         <option value="homogenous">
                                             <?php echo get_string('homogenous', 'groupformation'); ?>
                                         </option>
@@ -224,7 +224,7 @@ defined('MOODLE_INTERNAL') || die();
                                         </option>
 
                                     </select>
-                                </div>
+                                </div></p>
                             </div>
                             <div class="col_m_50">
 
