@@ -191,7 +191,17 @@ class mod_groupformation_multiselect_question extends mod_groupformation_basic_q
      * @return mixed|string
      */
     public function create_random_answer() {
-        return "1,2";
+        $answer_array = array();
+        $number_options = rand(1, count($this->options));
+        for ($i = 0; $i < $number_options; $i++) {
+            $tmp;
+            do {
+                $tmp = rand(0, count($this->options)-1);
+            } while (in_array($tmp, $answer_array));
+            array_push($answer_array, $tmp);
+        }
+        sort($answer_array);
+        return 'list:'.implode(',',$answer_array);
     }
 }
 
