@@ -245,14 +245,14 @@ class mod_groupformation_data
                     "separate_dimensions" => false,
                     "cutoffs" => null,
                 ),
-//                            "multiselect" => array(
-//                                    "scenarios" => array(1 => true, 2 => true),
-//                                    "evaluation" => false,
-//                                    "questionids" => null,
-//                                    "significant_id_only" => false,
-//                                    "separate_dimensions" => false,
-//                                    "cutoffs" => null,
-//                            ),
+                "multiselect" => array(
+                    "scenarios" => array(1 => true, 2 => true),
+                    "evaluation" => false,
+                    "questionids" => null,
+                    "significant_id_only" => false,
+                    "separate_dimensions" => false,
+                    "cutoffs" => null,
+                ),
             ),
         ),
     );

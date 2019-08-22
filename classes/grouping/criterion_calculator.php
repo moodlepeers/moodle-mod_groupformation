@@ -929,6 +929,9 @@ class mod_groupformation_criterion_calculator {
             }
         }
 
+//        if ($criterion == "knowledge"){
+//            $array = array("two"=> array("values" => array($array["two"]["values"][0] / $array["two"]["values"][1])));
+//        }
         return $array;
     }
 

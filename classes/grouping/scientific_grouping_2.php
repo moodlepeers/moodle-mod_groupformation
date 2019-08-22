@@ -236,7 +236,8 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
         return array('big5_extraversion' => 2,
             'big5_conscientiousness' => 2,
             'knowledge_two' => 1,
-            'binquestion_singlechoice' => 1
+            'binquestion_singlechoice' => 1,
+            'binquestion_multiselect' => 10
         );
     }
 
@@ -250,7 +251,6 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
      */
     public function run_grouping($users)
     {
-
         $groupsizes = $this->store->determine_group_size($users);
 
         $specification = $this->get_specification();
@@ -259,12 +259,10 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
         $weights = $this->get_weights();
 
         $numberofslices = count($configurations);
-
         $numberofslices = $this->determine_number_of_slices(count($users[0]), $groupsizes[0], $numberofslices);
         $cohorts = array();
 
         if ($numberofslices > 0) {
-
             $slices = $this->get_optimal_slices($users[0], $numberofslices, $specs, $groupsizes[0]);
             $cohorts = $this->build_cohorts($slices, $groupsizes[0], $specification, $weights);
         }
@@ -332,7 +330,7 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
         $specs = [
             'big5' => $big5specs,
             'knowledge' => $knowledgespecs,
-            'binquestion' =>  $binquestionspecs
+            'binquestion' => $binquestionspecs
 
             //'fam' => $famspecs
         ];
@@ -340,13 +338,13 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
         // true = homo ; false = hetero
         $configurations = array(
             "groupal:1;ex:1;gh:1;vw:0" => array('big5_extraversion' => true,
-                'big5_conscientiousness' => true, 'knowledge_two' => false, 'binquestion_singlechoice' => true),
+                'big5_conscientiousness' => true, 'knowledge_two' => false, 'binquestion_singlechoice' => true, 'binquestion_multiselect' => true),
             "groupal:1;ex:1;gh:0;vw:0" => array('big5_extraversion' => true,
-                'big5_conscientiousness' => false, 'knowledge_two' => false, 'binquestion_singlechoice' => true),
+                'big5_conscientiousness' => false, 'knowledge_two' => false, 'binquestion_singlechoice' => true, 'binquestion_multiselect' => true),
             "groupal:1;ex:0;gh:0;vw:0" => array('big5_extraversion' => false,
-                'big5_conscientiousness' => false, 'knowledge_two' => false, 'binquestion_singlechoice' => true),
+                'big5_conscientiousness' => false, 'knowledge_two' => false, 'binquestion_singlechoice' => true, 'binquestion_multiselect' => true),
             "groupal:1;ex:0;gh:1;vw:0" => array('big5_extraversion' => false,
-                'big5_conscientiousness' => true, 'knowledge_two' => false, 'binquestion_singlechoice' => true),
+                'big5_conscientiousness' => true, 'knowledge_two' => false, 'binquestion_singlechoice' => true, 'binquestion_multiselect' => true),
         );
 
         return [$configurations, $specs];

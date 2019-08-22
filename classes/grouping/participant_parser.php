@@ -31,6 +31,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/criterion_calculator.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/criteria/one_of_bin_criterion.php');
+require_once($CFG->dirroot . '/mod/groupformation/lib/classes/criteria/many_of_bin_criterion.php');
 
 /**
  * Class mod_groupformation_participant_parser
@@ -104,9 +105,9 @@ class mod_groupformation_participant_parser {
                     case "binquestion_singlechoice":
                         $criterion = new mod_groupformation_one_of_bin_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
                         break;
-                   // case "binquestion_multiselect ":
-                     //   $criterion = new mod_groupformation_many_of_bin_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
-                       // break;
+                    case "binquestion_multiselect":
+                        $criterion = new mod_groupformation_many_of_bin_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
+                        break;
                    // case "both_bin_types_bins_covered":
                        // $criterion = new mod_groupformation_both_bin_types_bins_covered_criterion($label, $value, $minval, $maxval, $homogen, $weight);
                     default:
@@ -213,7 +214,7 @@ class mod_groupformation_participant_parser {
 
                     foreach ($spec['labels'] as $label => $lspec) {
                         $value = array();
-                        if (count($points) != 0) {
+                        if (count($spec['labels']) != 0 && isset($points[$label])) {
                             $vs = $points[$label]["values"];
                             foreach ($vs as $v) {
                                 $value[] = $v;
