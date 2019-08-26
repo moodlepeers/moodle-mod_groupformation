@@ -237,7 +237,7 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
             'big5_conscientiousness' => 2,
             'knowledge_two' => 1,
             'binquestion_singlechoice' => 1,
-            'binquestion_multiselect' => 10
+            'binquestion_multiselect' => 1
         );
     }
 

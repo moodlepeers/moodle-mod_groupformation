@@ -193,7 +193,11 @@ if (($CFG->debug === 32767) || (in_array($USER->id, $debugusers))) {
 
     $debugbuttons .= '</div>';
 
-    // create csv with result of binquestion
+
+    /**
+     * create csv with result of binquestion
+     * important: change the groupformation id in the select statement
+     */
     if ($createcsv) {
 
         // open the file "demosaved.csv" for writing
@@ -205,7 +209,7 @@ if (($CFG->debug === 32767) || (in_array($USER->id, $debugusers))) {
 
         global $DB;
         $data = $DB->get_records_sql(
-            "SELECT result.userid, result.answer, result.groupid, groups.groupname, groups.group_size ".
+            "SELECT result.userid, result.answer, result.groupid, groups.groupname, groups.group_size " .
             "FROM 
             (
             SELECT result.userid, result.answer, group_user.groupid
@@ -216,11 +220,11 @@ if (($CFG->debug === 32767) || (in_array($USER->id, $debugusers))) {
                 JOIN mdl_groupformation_answers as answers
                 ON users.userid = answers.userid
                 AND answers.category = \"binquestion\"
-                AND answers.groupformation= 10
-                AND users.groupformation = 10
+                AND answers.groupformation= 12
+                AND users.groupformation = 12
             ) AS result
             JOIN mdl_groupformation_group_users as group_user
-            ON group_user.groupformation = 10
+            ON group_user.groupformation = 12
             AND result.userid = group_user.userid
         ) as result
         JOIN mdl_groupformation_groups as groups
