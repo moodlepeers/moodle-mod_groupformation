@@ -1934,7 +1934,7 @@ function xmldb_groupformation_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2019060600, 'groupformation');
     }
 
-    if ($oldversion < 2019070900) {
+    if ($oldversion < 2019083000) {
 
         // Define field tracked to be added to groupformation_users.
         $table = new xmldb_table('groupformation_users');
@@ -1949,7 +1949,7 @@ function xmldb_groupformation_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2019070900, 'groupformation');
     }
 
-    if ($oldversion < 2019071000) {
+    if ($oldversion < 2019083000) {
 
         // Define field tracked to be added to groupformation.
         $table = new xmldb_table('groupformation');
@@ -1963,10 +1963,6 @@ function xmldb_groupformation_upgrade($oldversion) {
         // Groupformation savepoint reached.
         upgrade_mod_savepoint(true, 2019071000, 'groupformation');
     }
-
-
-
-
 
     return true;
 }
