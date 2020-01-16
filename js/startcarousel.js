@@ -61,12 +61,6 @@ require(['jquery', 'mod_groupformation/d3', 'mod_groupformation/singlesidechart'
                         }
                     }
                 });
-
-            /* activate popover info */
-            $(function () {
-                $('[data-toggle="popover"]').popover();
-            });
-
         });
 
         function buildPersonalResult(datam, index, divId) {
