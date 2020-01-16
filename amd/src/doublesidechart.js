@@ -224,13 +224,9 @@ define(['mod_groupformation/d3','jquery'],function(d3, $) {
             .attr("stroke-width", "1px");
 
         /* Achse entwerfen */
-        var axisLeft = d3.svg.axis()
-            .scale(widthScaleLeft)
-            .orient("top");
+        var axisLeft = d3.axisLeft(widthScaleLeft);
 
-        var axisRight = d3.svg.axis()
-            .scale(widthScaleRight)
-            .orient("top");
+        var axisRight = d3.axisRight(widthScaleRight);
 
         /* linker Hälfte Achse anfuegen */
         svgMitte.append("g")
