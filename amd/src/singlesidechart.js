@@ -33,11 +33,11 @@ define(['mod_groupformation/d3', 'jquery'], function (d3, $) {
         /* set master-div height */
         $(chartid).height(middleHeight + labelsSection + scaleBarHeight);
 
-        var widthScale = d3.scale.linear()
+        var widthScale = d3.scaleLinear()
             .domain([0, 100])
             .range([0, middleWidth]);
 
-        svgHeight = middleHeight + labelsSection + scaleBarHeight + 20;
+        svgHeight = middleHeight + labelsSection + scaleBarHeight;
 
         /* bulk colors */
         var color = ["rgb(136, 222, 0)",
@@ -171,7 +171,7 @@ define(['mod_groupformation/d3', 'jquery'], function (d3, $) {
             .attr("stroke-width", "1px");
 
         /* Achse entwerfen */
-        var axisLeft = d3.axisLeft(widthScale);
+        var axisLeft = d3.axisTop(widthScale);
 
         /* linker Hälfte Achse anfuegen */
         svgMitte.append("g")
