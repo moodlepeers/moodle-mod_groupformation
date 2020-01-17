@@ -39,10 +39,10 @@ define(['mod_groupformation/d3','jquery'],function(d3, $) {
         /* set master-div height */
         $(chartid).height(middleHeight + labelsSection + scaleBarHeight);
 
-        var widthScaleLeft = d3.scale.linear()
+        var widthScaleLeft = d3.scaleLinear()
                 .domain([100, 0])
                 .range([0, middleWidth / 2]),
-            widthScaleRight = d3.scale.linear()
+            widthScaleRight = d3.scaleLinear()
                 .domain([0, 100])
                 .range([middleWidth / 2, middleWidth]);
 
@@ -224,9 +224,9 @@ define(['mod_groupformation/d3','jquery'],function(d3, $) {
             .attr("stroke-width", "1px");
 
         /* Achse entwerfen */
-        var axisLeft = d3.axisLeft(widthScaleLeft);
+        var axisLeft = d3.axisTop(widthScaleLeft);
 
-        var axisRight = d3.axisRight(widthScaleRight);
+        var axisRight = d3.axisTop(widthScaleRight);
 
         /* linker Hälfte Achse anfuegen */
         svgMitte.append("g")
