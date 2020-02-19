@@ -70,16 +70,32 @@ class mod_groupformation_random_algorithm implements mod_groupformation_ialgorit
         $participants = $this->participants;
         $groupsize = $this->groupsize;
 
+        $groups = $this->random_grouping($participants);
+
+        $this->cohort = new mod_groupformation_random_cohort (count($groups), $groups);
+        $this->cohort->whichmatcherused = get_class($this);
+        $this->cohort->countofgroups = $this->cohort->countofgroups;
+        $this->cohort->cpi = null;
+        return $this->cohort;
+    }
+    
+    /**
+     * Do simple random grouping
+     *
+     * @return array
+     */
+    private function simple_random_grouping($participants) {
+
         shuffle($participants);
 
         $n = count($participants);
         $g = $groupsize;
 
-        $completepart = null;
-        $incompletepart = null;
-
         $quotient = intval($n / $g);
         $reminder = $n % $g;
+
+        $completepart = null;
+        $incompletepart = null;
 
         $t = $g - 1;
         $tt = $t - $reminder;
@@ -164,16 +180,71 @@ class mod_groupformation_random_algorithm implements mod_groupformation_ialgorit
                     $position++;
                 }
             }
-
+            
             if ($position != 0) {
                 $groups [] = $onegroup;
             }
         }
 
-        $this->cohort = new mod_groupformation_random_cohort (count($groups), $groups);
-        $this->cohort->whichmatcherused = get_class($this);
-        $this->cohort->countofgroups = $this->cohort->countofgroups;
-        $this->cohort->cpi = null;
-        return $this->cohort;
+        return $groups;
+    }
+
+    /**
+     * Do new random grouping
+     *
+     * @return array
+     */
+    private function random_grouping($participants) {
+        mod_groupformation_group::set_group_members_max_size($this->groupsize);
+
+        $participants = $this->participants;
+        $groupsize = $this->groupsize;
+
+        shuffle($participants);
+
+        $n = count($participants);
+        $g = $groupsize;
+
+        $quotient = intval($n / $g);
+        $reminder = $n % $g;
+
+        $ngroups = array_fill(0, $quotient+1, null);
+
+        do {
+            shuffle($ngroups);
+
+            // fill groups stepwise
+            for ($i = 0; $i < count($ngroups); $i++) {
+                
+                // get current group
+                $group = $ngroups[$i];
+
+                if (is_null($group)){
+                    $group = new mod_groupformation_group ();
+                }
+
+                // get next participant
+                $participant = $participants[0];
+
+                // add participant to group
+                $group->add_participant($participant, true);
+                
+                $ngroups[$i] = $group;
+
+                array_shift($participants);
+                
+                if (count($participants) == 0) {
+                    break;
+                }
+            }
+
+            if (count($participants) == 0) {
+                break;
+            }
+        } while (count($participants) > 0);
+
+        $groups = $ngroups;
+
+        return $groups;
     }
 }

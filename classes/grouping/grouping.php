@@ -169,6 +169,7 @@ class mod_groupformation_grouping {
      */
     public function build_groupal_cohort($users, $groupsize) {
         // Choose matcher.
+        //$matcher = new mod_groupformation_group_centric_matcher();
         $matcher = new mod_groupformation_group_stepwise_matcher();
         $gfa = new mod_groupformation_basic_algorithm($users, $matcher, $groupsize);
         return $gfa->do_one_formation();

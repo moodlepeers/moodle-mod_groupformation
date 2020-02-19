@@ -50,7 +50,7 @@ class mod_groupformation_group_centric_matcher implements mod_groupformation_ima
     public function match_to_groups(&$notyetmatched, &$groups) {
         $deltaold = -INF;
         $bestparticipant = null; // Participant instance to add.
-
+        
         // Search the best participant for the group.
         foreach ($groups as $g) {
 

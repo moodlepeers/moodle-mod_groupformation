@@ -327,7 +327,7 @@ class mod_groupformation_advanced_job_manager {
 
         // Assign users.
         $users = $store->get_users_for_grouping($job);
-
+        
         if (is_null($users)) {
             return $cohorts;
         }

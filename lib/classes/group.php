@@ -114,7 +114,6 @@ class mod_groupformation_group {
      */
     public function remove_participant(mod_groupformation_participant $p) {
         $index = array_search($p, $this->participants);
-        var_dump($index);
         if ($index == false) {
             return false;
         }
@@ -122,6 +121,20 @@ class mod_groupformation_group {
         array_splice($this->participants, $index, 1);
         $this->calculate_gpi();
         return true;
+    }
+
+    public function remove_participant_by_id($id) {
+        $position = null;
+        foreach($this->participants as $index => $participant) {
+            if ($participant->get_id() == $id){
+                $position = $index;
+                break;
+            }
+        }
+        $participant = $this->participants[$position];
+        $participant->actualGroup = null;
+        unset($this->participants[$position]);
+        $this->participants = array_values($this->participants);
     }
 
     /**

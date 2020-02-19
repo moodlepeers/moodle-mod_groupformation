@@ -40,6 +40,11 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/participant.php");
  */
 class mod_groupformation_group_stepwise_matcher implements mod_groupformation_imatcher {
 
+    private function array_unset(&$array, $index) {
+        unset($array[$index]);
+        $array = array_values($array);
+    }
+
     /**
      * Match to groups
      *
@@ -48,16 +53,10 @@ class mod_groupformation_group_stepwise_matcher implements mod_groupformation_im
      * @return array
      */
     public function match_to_groups(&$participants, &$groups) {        
-        
         // fill groups stepwise
         // in each iteration
         // take a group and find the best student for it
         // shuffle or better permute groups to definitely start with other group (modulo?)
-        
-        function array_unset(&$array, $index) {
-            unset($array[$index]);
-            $array = array_values($array);
-        }
 
         do {
             // shuffle groups to add users not every time in the same order
@@ -65,8 +64,10 @@ class mod_groupformation_group_stepwise_matcher implements mod_groupformation_im
             
             // fill groups stepwise
             for ($i = 0; $i < count($groups); $i++) {
+                
                 // get current group
                 $group = $groups[$i];
+                
                 // find best participant
                 $bestparticipant = null;
                 $bestdelta = null;
@@ -79,8 +80,7 @@ class mod_groupformation_group_stepwise_matcher implements mod_groupformation_im
                     // add participant to current group
                     // $group .= $currentparticipant;
                     $group->add_participant($participants[$j]);
-                    var_dump($group);
-                    echo "<br>";
+                    
                     // get score of new group
                     //$gpitmp = $gpi+rand(1,3);
                     $gpitmp = $group->get_gpi();
@@ -90,15 +90,14 @@ class mod_groupformation_group_stepwise_matcher implements mod_groupformation_im
                     
                     // remove
                     // $group = substr($group, 0, -1);
-                    $group->remove_participant($participants[$j]);
-                    var_dump($participants[$j]);
-                    die();
+                    $group->remove_participant_by_id($participants[$j]->get_id());
+                    
                     // transform to percentage
                     if (abs($gpi) > 0.001) {
                         $delta = $delta / $gpi;
                     }
 
-                    // decide who is best
+                    // decide whether delta is better than bestdelta so far
                     if (is_null($bestdelta) || $delta > $bestdelta) {
                         $bestparticipant = $participants[$j];
                         $bestdelta = $delta;
@@ -109,11 +108,11 @@ class mod_groupformation_group_stepwise_matcher implements mod_groupformation_im
                 // add participant to group
                 // $group .= $bestparticipant;
                 $group->add_participant($participants[$bestparticipantindex]);
+                
                 $groups[$i] = $group;
-                //var_dump(count($group));
                 
                 // remove participant from list
-                array_unset($participants, $bestparticipantindex);
+                $this->array_unset($participants, $bestparticipantindex);
                 
                 // terminate loop when no more participants are available
                 if (count($participants) == 0) {
@@ -121,8 +120,5 @@ class mod_groupformation_group_stepwise_matcher implements mod_groupformation_im
                 }
             }
         } while (count($participants) > 0);
-        die();
-        //var_dump(implode(",",$groups));
-        //return $groups;
     }
 }

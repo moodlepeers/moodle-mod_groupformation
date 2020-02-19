@@ -249,6 +249,11 @@ class mod_groupformation_scientific_grouping_amigo extends mod_groupformation_gr
     public function run_grouping($users)
     {
         $groupsizes = $this->store->determine_group_size($users);
+        
+        if (count($users[0]) < (2*$groupsizes[0]-2)) {
+            $users[1] = array_merge($users[0],$users[1]);
+            $users[0] = [];
+        }
 
         $specification = $this->get_specification();
 
@@ -256,7 +261,6 @@ class mod_groupformation_scientific_grouping_amigo extends mod_groupformation_gr
         $weights = $this->get_weights();
 
         $numberofslices = count($configurations);
-
         $numberofslices = $this->determine_number_of_slices(count($users[0]), $groupsizes[0], $numberofslices);
         $cohorts = array();
 
@@ -268,7 +272,6 @@ class mod_groupformation_scientific_grouping_amigo extends mod_groupformation_gr
 
         // Handle all users with incomplete or no questionnaire submission.
         $randomkey = "random:1";
-
         $randomparticipants = $this->participantparser->build_empty_participants($users[1]);
         $randomcohort = $this->build_cohort($randomparticipants, $groupsizes[1], $randomkey);
         $cohorts[$randomkey] = $randomcohort;
