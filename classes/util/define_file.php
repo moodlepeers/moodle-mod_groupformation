@@ -45,7 +45,7 @@ class mod_groupformation_data
                 "extraversion" => array(
                     "scenarios" => array(1 => false, 2 => false),  // False = heterogeneous, True = homogeneous.
                     "evaluation" => true,  // Use for displaying it to user (to compare to group and course).
-                    "questionids" => array(1,-2,3,4,-5,6,-7,8), // Inverse questions = negative.
+                    "questionids" => array(10,-11,12,13,-14,15,-16,17), // Inverse questions = negative.
                     "significant_id_only" => false,
                     // True = only use the one questionid with most significant differences between users.
                     "cutoffs" => array(0.313169217, 0.776242547),
@@ -53,28 +53,28 @@ class mod_groupformation_data
                 "conscientiousness" => array(
                     "scenarios" => array(1 => false, 2 => false),
                     "evaluation" => true,
-                    "questionids" => array(9,-10,11,-12,-13,14,15,16,-17),
+                    "questionids" => array(1,-2,3,-4,-5,6,7,8,-9),
                     "significant_id_only" => false,
                     "cutoffs" => array(0.456596974, 0.831246163),
                 ),
                 "agreeableness" => array(
                     "scenarios" => array(),
                     "evaluation" => true,
-                    "questionids" => array(-18,19,-20,-21),
+                    "questionids" => array(-18,19,-20,21,22,-23,24,-25,26),
                     "significant_id_only" => false,
                     "cutoffs" => array(0.492136484, 0.799889659),
                 ),
                 "neuroticism" => array(
                     "scenarios" => array(),
                     "evaluation" => true,
-                    "questionids" => array(22,-23,24,25),
+                    "questionids" => array(27,-28,29,30,-31,32,-33,34),
                     "significant_id_only" => false,
                     "cutoffs" => array(0.195135503, 0.602511556),
                 ),
                 "openness" => array(
                     "scenarios" => array(),
                     "evaluation" => true,
-                    "questionids" => array(26,27,28,29,-30),
+                    "questionids" => array(35,36,37,38,39,40,-41,42,-43,44),
                     "significant_id_only" => false,
                     "cutoffs" => array(0.348454964, 0.829192095),
                 ),
@@ -258,18 +258,27 @@ class mod_groupformation_data
     );
 
     /** @var bool Special mode booleans (can be ignored in normal use cases). */
-    private static $mathprepcoursemode = true;
+    private static $mathprepcoursemode = false;
+    private static $amigomode = true;
     //TODO
 
     /**
      * Returns whether this instance is running in math prep course mode;
-     * default should be false, since math prep course mode is only for research
+     * default should be false, since math prep course mode is only for research.
      *
      * @return bool
      */
     public static function is_math_prep_course_mode()
     {
         return self::$mathprepcoursemode;
+    }
+
+    /**
+     * Returns whether this instance is running in amigo mode;
+     * default should be false, since amigo mode is only for research.
+     */
+    public static function is_amigo_mode() {
+        return self::$amigomode;
     }
 
     /**

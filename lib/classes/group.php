@@ -114,6 +114,7 @@ class mod_groupformation_group {
      */
     public function remove_participant(mod_groupformation_participant $p) {
         $index = array_search($p, $this->participants);
+        var_dump($index);
         if ($index == false) {
             return false;
         }

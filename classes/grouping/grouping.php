@@ -35,6 +35,7 @@ require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/criteria/specific_criterion.php');
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/participant.php');
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/matchers/group_centric_matcher.php');
+require_once($CFG->dirroot . "/mod/groupformation/lib/classes/matchers/group_stepwise_matcher.php");
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/algorithms/basic_algorithm.php');
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/algorithms/random_algorithm.php');
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/algorithms/topic_algorithm.php');
@@ -168,7 +169,7 @@ class mod_groupformation_grouping {
      */
     public function build_groupal_cohort($users, $groupsize) {
         // Choose matcher.
-        $matcher = new mod_groupformation_group_centric_matcher();
+        $matcher = new mod_groupformation_group_stepwise_matcher();
         $gfa = new mod_groupformation_basic_algorithm($users, $matcher, $groupsize);
         return $gfa->do_one_formation();
     }

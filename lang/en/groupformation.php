@@ -75,7 +75,7 @@ $string ['scenario_presentationgroups'] = 'Presentation groups';
 $string ['scenario_presentationgroups_description'] = 'Presentation groups work together for a relatively short time period to finish a presentation (usually to be held in class). Often in the beginning a specific sub-task is assigned to (or selected by) each student, individually worked on, and in the end re-assembled to a complete presentation. Grading is usually done for the perforance of the whole group together. Therefore, groupformation aims primarily for mutual interest in the same topic.';
 $string ['scenario_usage_header'] = 'Questionnaire-Usage';
 $string ['scenario_usage_header_presentation'] = 'Students set preferences';
-$string ['scenario_projectteams_short'] = 'Knowledge areas and motivation are heterogeneous; knowledge level, targeted goals, and team orientation are homogeneous; character traits are partially homogeneous, partially heterogeneous.';
+$string ['scenario_projectteams_short'] = 'Some personality traits are heterogeneously distributed.';
 $string ['scenario_homeworkgroups_short'] = 'Knowledge areas and targeted goals are heterogeneous; team orientation homogeneous.';
 $string ['scenario_presentationgroups_short'] = 'Enables exclusively to order a list of topics by Drag&Drop. "first-come, first-served" procedure is avoided to allow a fairer topic distribution.';
 
@@ -136,8 +136,8 @@ $string ['groupoptions'] = 'Group settings';
 $string ['groupoption_description'] = 'Group settings description';
 $string ['groupoption_help'] = 'This parameter can be optimized after the submission of the questionnaires.';
 $string ['groupoption_onlyactivestudents'] = 'Students without answers will not be assigned to any groups.';
-$string ['maxmembers'] = 'Max. number of group members';
-$string ['maxgroups'] = 'Max. number of groups';
+$string ['maxmembers'] = 'Max. number of group members: ';
+$string ['maxgroups'] = 'Max. number of groups: ';
 $string ['maxpoints'] = 'Max. points';
 $string ['evaluationmethod_description'] = 'How do you evaluate the work?';
 $string ['groupname'] = 'Grouping name';
@@ -180,7 +180,7 @@ $string ['category_general'] = 'General';
 $string ['category_grade'] = 'Goals';
 $string ['category_points'] = 'Goals';
 $string ['category_team'] = 'Team';
-$string ['category_character'] = 'Character';
+$string ['category_character'] = 'Personality';
 $string ['category_motivation'] = 'Motivation';
 $string ['category_learning'] = 'Learning';
 $string ['category_knowledge'] = 'Knowledge';
@@ -194,7 +194,7 @@ $string ['tabletitle_general'] = 'General';
 $string ['tabletitle_grade'] = 'Goals';
 $string ['tabletitle_points'] = 'Goals';
 $string ['tabletitle_team'] = 'Team';
-$string ['tabletitle_character'] = 'Character';
+$string ['tabletitle_character'] = 'Personality';
 $string ['tabletitle_motivation'] = 'Motivation';
 $string ['tabletitle_learning'] = 'Learning';
 $string ['tabletitle_knowledge'] = 'Knowledge';
@@ -218,7 +218,7 @@ $string ['tab_grouping'] = 'Group formation';
 $string ['tab_preview'] = 'Questionnaire (Preview)';
 $string ['tab_evaluation'] = 'Evaluation';
 $string ['tab_group'] = 'Group assignment';
-$string ['questionnaire_availability_info_future'] = 'The questionnaire will be available in the perion from {$a->start} to {$a->end}.';
+$string ['questionnaire_availability_info_future'] = 'The questionnaire will be available in the period from {$a->start} to {$a->end}.';
 $string ['questionnaire_availability_info_now'] = 'The questionnaire is available until {$a->end}.';
 $string ['questionnaire_availability_info_until'] = 'The questionnaire is currently available until {$a->end}.';
 $string ['questionnaire_availability_info_from'] = 'The questionnaire will be available on {$a->start}.';
@@ -398,7 +398,7 @@ $string ['eval_final_text'] = 'The comparison is based on {$a->percent}% of the 
 $string ['eval_first_page_title'] = "General Information";
 $string ['eval_first_page_text'] = "Hereby you receive your personalized feedback regarding your answers given in the questionnaire. For this purpose, questions related to the same subject were clustered and average values were calculated and compared with a student’s sample. So-called percentile ranks were calculated, not with the intention of judging whether a certain obtained value was good or bad, but how frequent those values are within a student’s sample. A percentile rank of 10 % means, that 10 % of the comparison sample had an equal or smaller value. On the other hand, a percentile rank of 90 % means, that 90 % of the comparison sample obtained an equal or smaller value.
 \\n\\n
-First, you receive feedback on five personality characteristics, that can be understood as relatively stable, that is, independent of specific situations: extraversion, neuroticism, conscientiousness, social agreeableness and openness to experience. You will then receive feedback on four dimensions of motivation, which relate to the current academic course or exercise and thus may vary from situation to situation: interest, challenge, probability of success and expectation of failure.";
+First, you receive feedback on five personality traits, that can be understood as relatively stable, that is, independent of specific situations: extraversion, neuroticism, conscientiousness, social agreeableness and openness to experience. You will then receive feedback on four dimensions of motivation, which relate to the current academic course or exercise and thus may vary from situation to situation: interest, challenge, probability of success and expectation of failure.";
 
 $string ['eval_name_big5'] = 'Personality';
 $string ['eval_name_fam'] = 'Motivation';
@@ -634,5 +634,5 @@ $string ['pre_study_header'] = 'Statistics for Study Design';
 $string ['optimized_grouping'] = '<b>{$a}</b> users are available for optimized grouping.';
 $string ['randomized_grouping'] = '<b>{$a}</b> users are available for randomized grouping.';
 
-$string ['scientific_grouping_setup'] = 'This scientific grouping setup divides all users (with completely answered questionnaires) into <b>{$a} cohorts</b>. All users with incomplete answers are grouped randomly (as an additional cohort).<br>The configuration keys are as follows:';
+$string ['scientific_grouping_setup'] = 'This scientific grouping setup divides all users (with completely answered questionnaires) into <b>{$a} cohort(s)</b>. All users with incomplete answers are grouped randomly (as an additional cohort).<br>The configuration keys are as follows:';
 

@@ -51,7 +51,7 @@ class mod_groupformation_question_table {
      * Print HTML of table header
      */
     public function print_header() {
-
+        
         if ($this->category == 'topic') {
             echo '<div id="topicshead">';
             echo get_string('topics_question', 'groupformation');

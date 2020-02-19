@@ -70,7 +70,6 @@ if (($CFG->debug === 32767) || (in_array($USER->id, $debugusers))) {
 
         if (!is_null($job)) {
             $result = $ajm::do_groupal($job);
-
             $saved = $ajm::save_result($job, $result);
             $ajm::set_job($job, 'done');
             $store->statemachine->set_state(4);
@@ -188,6 +187,22 @@ if (($CFG->debug === 32767) || (in_array($USER->id, $debugusers))) {
             'id' => $id, 'do_show' => 'analysis', 'reset_job' => 1)))->out() . '">';
     $debugbuttons .= '<span class="gf_button gf_button_pill gf_button_small">';
     $debugbuttons .= 'Delete jobs of this activity';
+    $debugbuttons .= '</span>';
+    $debugbuttons .= '</a>';
+    $debugbuttons .= '<br>';
+
+    $debugbuttons .= '<a href="' . (new moodle_url('/mod/groupformation/analysis_view.php', array(
+            'id' => $id, 'do_show' => 'analysis', 'run_job' => 1)))->out() . '">';
+    $debugbuttons .= '<span class="gf_button gf_button_pill gf_button_small">';
+    $debugbuttons .= 'Run groupformation of this activity';
+    $debugbuttons .= '</span>';
+    $debugbuttons .= '</a>';
+    $debugbuttons .= '<br>';
+
+    $debugbuttons .= '<a href="' . (new moodle_url('/mod/groupformation/analysis_view.php', array(
+            'id' => $id, 'do_show' => 'analysis', 'build_groups' => 1)))->out() . '">';
+    $debugbuttons .= '<span class="gf_button gf_button_pill gf_button_small">';
+    $debugbuttons .= 'Build moodle groups of this activity';
     $debugbuttons .= '</span>';
     $debugbuttons .= '</a>';
 

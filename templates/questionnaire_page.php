@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 global $USER;
 ?>
 
-<div>
+<div id="crazy">
     <?php if (isset($this->_['archive_alert'])): ?>
         <?php echo $this->_['archive_alert']; ?>
     <?php endif; ?>

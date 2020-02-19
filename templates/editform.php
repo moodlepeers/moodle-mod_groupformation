@@ -65,7 +65,7 @@ defined('MOODLE_INTERNAL') || die();
                             </p>
                     </label>
                 </div>
-                <?php if (!$this->_['mathprepcourse']):?>
+                <?php if (!$this->_['mathprepcourse'] && !$this->_['amigomode']):?>
                 <div class="col_m_33">
                     <input type="radio" name="js_scenario" id="homework" value="homework" />
                     <label class="col_m_100 szenarioLabel" id="label_homework" for="homework" >
@@ -125,357 +125,360 @@ defined('MOODLE_INTERNAL') || die();
     <div id="js_scenarioWrapper">
         <div class="gf_settings_pad">
         </div>
-
+        <?php if (!$this->_['amigomode']): ?>
         <!-- Start:one of bin section -->
-        <div class="gf_settings_pad">
-            <div class="gf_pad_header">
-                <label class="gf_label" for="id_js_oneofbin">
-                    <input type="checkbox" id="id_js_oneofbin" name="chbOneOfBin" value="wantOneOfBin" />
-                    <?php echo get_string('oneOfBinQuestion', 'groupformation'); ?>
-                </label>
-            </div>
-            <div class="gf_pad_content" id="js_oneOfBinWrapper" style="display:none;">
-                <p class="oob_in_preview" id="oneOfBinInfoText"><h5><?php echo get_string('choose_oob_answers', 'groupformation'); ?><span class="required"></span></h5>
-                <input type="text" class="respwidth oob_in_preview" id="js_oob_question" placeholder="<?php echo get_string('add_oob_question', 'groupformation'); ?>" style="width: 80%" />
-                </p>
+            <div class="gf_settings_pad">
+                <div class="gf_pad_header">
+                    <label class="gf_label" for="id_js_oneofbin">
+                        <input type="checkbox" id="id_js_oneofbin" name="chbOneOfBin" value="wantOneOfBin" />
+                        <?php echo get_string('oneOfBinQuestion', 'groupformation'); ?>
+                    </label>
+                </div>
+                <div class="gf_pad_content" id="js_oneOfBinWrapper" style="display:none;">
+                    <p class="oob_in_preview" id="oneOfBinInfoText"><h5><?php echo get_string('choose_oob_answers', 'groupformation'); ?><span class="required"></span></h5>
+                    <input type="text" class="respwidth oob_in_preview" id="js_oob_question" placeholder="<?php echo get_string('add_oob_question', 'groupformation'); ?>" style="width: 80%" />
+                    </p>
 
-                <div class="grid">
-                    <div id="oob">
-                        <div class="multi_field_wrapper persist-area">
-                            <div class="col_m_50">
-                                <h5>
-                                    <?php echo get_string('answers', 'groupformation'); ?>
-                                    <span class="required"></span> </h5>
-
-
-                                <div class="multi_fields oob_in_preview">
-                                    <div class="multi_field" id="inputoob0">
-                                        <input class="respwidth js_oneofbinInput" type="text">
-                                        <button type="button" class="remove_field gf_button gf_button_circle gf_button_small">
-
-                                        </button>
-                                    </div>
-                                    <div class="multi_field" id="inputoob1">
-                                        <input class="respwidth js_oneofbinInput" type="text">
-                                        <button type="button" class="remove_field gf_button gf_button_circle gf_button_small">
-
-                                        </button>
-                                    </div>
-                                    <div class="multi_field" id="inputoob2">
-                                        <input class="respwidth js_oneofbinInput lastInput" type="text" placeholder="
-                                            <?php echo get_string('add_line', 'groupformation');?>
-                                        ">
-                                        <button type="button"
-                                                class="remove_field gf_button gf_button_circle gf_button_small"
-                                                disabled="disabled">
-
-                                        </button>
-                                    </div>
-                                </div>
-                                <p><div id="oob_multiselect_box oob_in_preview">
-                                        <h5><?php echo get_string('choose_type', 'groupformation'); ?></h5>
-                                <p><?php echo get_string('decide_multiselect', 'groupformation'); ?></p>
-                                <label class="gf_label" for="id_js_binquestionmultiselect">
-                                    <input type="checkbox" id="id_js_binquestionmultiselect"  value="wantMultiselect" />
-                                    <?php echo get_string('multiselect', 'groupformation'); ?>
-                                </label>
-                            </div>
-                            </p><p>
-                                <div id="gf_oneOfBinImportanceDiv  oob_in_preview">
+                    <div class="grid">
+                        <div id="oob">
+                            <div class="multi_field_wrapper persist-area">
+                                <div class="col_m_50">
                                     <h5>
-                                        <?php echo get_string('importance', 'groupformation'); ?>
-                                    <span class="required"></span></h5>
-                                    <p><?php echo get_string('choose_oob_importance', 'groupformation'); ?></p>
-                                    <p id="gf_one_of_bin_Importance"><?php echo get_string('oob_selected_value', 'groupformation'); ?></p>
-                                <div>
+                                        <?php echo get_string('answers', 'groupformation'); ?>
+                                        <span class="required"></span> </h5>
 
-                                        <span>
-                                            0
-                                        </span>
-                                        <input type="range" id="id_js_oneofbinimportance" list="gfOneOfBinImpValues" min="0" max="10" value="0" />
-                                        <span>
-                                            10
-                                        </span>
-                                        <datalist id="gfOneOfBinImpValues">
-                                            <option value="0" label="0%">
-                                            <option value="1">
-                                            <option value="2">
-                                            <option value="3">
-                                            <option value="4">
-                                            <option value="5" label="50%">
-                                            <option value="6">
-                                            <option value="7">
-                                            <option value="8">
-                                            <option value="9">
-                                            <option value="10" label="100%">
-                                        </datalist>
+
+                                    <div class="multi_fields oob_in_preview">
+                                        <div class="multi_field" id="inputoob0">
+                                            <input class="respwidth js_oneofbinInput" type="text">
+                                            <button type="button" class="remove_field gf_button gf_button_circle gf_button_small">
+
+                                            </button>
+                                        </div>
+                                        <div class="multi_field" id="inputoob1">
+                                            <input class="respwidth js_oneofbinInput" type="text">
+                                            <button type="button" class="remove_field gf_button gf_button_circle gf_button_small">
+
+                                            </button>
+                                        </div>
+                                        <div class="multi_field" id="inputoob2">
+                                            <input class="respwidth js_oneofbinInput lastInput" type="text" placeholder="
+                                                <?php echo get_string('add_line', 'groupformation');?>
+                                            ">
+                                            <button type="button"
+                                                    class="remove_field gf_button gf_button_circle gf_button_small"
+                                                    disabled="disabled">
+
+                                            </button>
+                                        </div>
                                     </div>
-                                </div></p><p>
-                                <div id="gf_oneOfBinRelation  oob_in_preview">
-                                    <h5><?php echo get_string('relation', 'groupformation'); ?><span class="required"></span></h5>
-                                    <p><?php echo get_string('choose_oob_relation', 'groupformation'); ?></p>
-                                <p id="js_oobrelselval"><?php echo get_string('oob_selected_value', 'groupformation'); ?></p>
-                                <select id="id_js_oneofbinrelation">
-                                        <option value="homogenous">
-                                            <?php echo get_string('homogenous', 'groupformation'); ?>
-                                        </option>
-                                        <option value="heterogenous">
-                                            <?php echo get_string('heterogenous', 'groupformation'); ?>
-                                        </option>
+                                    <p><div id="oob_multiselect_box oob_in_preview">
+                                            <h5><?php echo get_string('choose_type', 'groupformation'); ?></h5>
+                                    <p><?php echo get_string('decide_multiselect', 'groupformation'); ?></p>
+                                    <label class="gf_label" for="id_js_binquestionmultiselect">
+                                        <input type="checkbox" id="id_js_binquestionmultiselect"  value="wantMultiselect" />
+                                        <?php echo get_string('multiselect', 'groupformation'); ?>
+                                    </label>
+                                </div>
+                                </p><p>
+                                    <div id="gf_oneOfBinImportanceDiv  oob_in_preview">
+                                        <h5>
+                                            <?php echo get_string('importance', 'groupformation'); ?>
+                                        <span class="required"></span></h5>
+                                        <p><?php echo get_string('choose_oob_importance', 'groupformation'); ?></p>
+                                        <p id="gf_one_of_bin_Importance"><?php echo get_string('oob_selected_value', 'groupformation'); ?></p>
+                                    <div>
 
-                                    </select>
-                                </div></p>
-                            </div>
-                            <div class="col_m_50">
+                                            <span>
+                                                0
+                                            </span>
+                                            <input type="range" id="id_js_oneofbinimportance" list="gfOneOfBinImpValues" min="0" max="10" value="0" />
+                                            <span>
+                                                10
+                                            </span>
+                                            <datalist id="gfOneOfBinImpValues">
+                                                <option value="0" label="0%">
+                                                <option value="1">
+                                                <option value="2">
+                                                <option value="3">
+                                                <option value="4">
+                                                <option value="5" label="50%">
+                                                <option value="6">
+                                                <option value="7">
+                                                <option value="8">
+                                                <option value="9">
+                                                <option value="10" label="100%">
+                                            </datalist>
+                                        </div>
+                                    </div></p><p>
+                                    <div id="gf_oneOfBinRelation  oob_in_preview">
+                                        <h5><?php echo get_string('relation', 'groupformation'); ?><span class="required"></span></h5>
+                                        <p><?php echo get_string('choose_oob_relation', 'groupformation'); ?></p>
+                                    <p id="js_oobrelselval"><?php echo get_string('oob_selected_value', 'groupformation'); ?></p>
+                                    <select id="id_js_oneofbinrelation">
+                                            <option value="homogenous">
+                                                <?php echo get_string('homogenous', 'groupformation'); ?>
+                                            </option>
+                                            <option value="heterogenous">
+                                                <?php echo get_string('heterogenous', 'groupformation'); ?>
+                                            </option>
 
-                                <h5>
-                                    <?php echo get_string('preview', 'groupformation');?>
-                                </h5>
-                                <div class="col_m_100" id="oobPreview">
-                                    <table class="responsive-table">
-                                        <colgroup>
-                                            <col class="firstCol">
-                                            <col width="36%">
-                                        </colgroup>
+                                        </select>
+                                    </div></p>
+                                </div>
+                                <div class="col_m_50">
 
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">
-                                                <?php echo get_string('choose_answer', 'groupformation'); ?>
-                                            </th>
-                                            <th></th>
-                                        </tr>
-                                        </thead>
-                                        <tbody id="oneofbinpreview">
-                                        <tr class="knowlRow">
-                                            <th scope="row">
-                                                <p id="oobquestionPreview">
+                                    <h5>
+                                        <?php echo get_string('preview', 'groupformation');?>
+                                    </h5>
+                                    <div class="col_m_100" id="oobPreview">
+                                        <table class="responsive-table">
+                                            <colgroup>
+                                                <col class="firstCol">
+                                                <col width="36%">
+                                            </colgroup>
+
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">
+                                                    <?php echo get_string('choose_answer', 'groupformation'); ?>
+                                                </th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="oneofbinpreview">
+                                            <tr class="knowlRow">
+                                                <th scope="row">
+                                                    <p id="oobquestionPreview">
+                                                        <?php echo get_string('no_oob_question', 'groupformation');?>
+                                                    </p>
+                                                </th>
+
+                                                <td class="range">
+                                                    <select id="oobpreviewdd">
+                                                        <option class="oobRow" id="oobRow0">
+                                                            <?php echo get_string('knowledge_dummy',
+                                                                'groupformation');?> 1
+                                                        </option>
+                                                        <option class="oobRow" id="oobRow1">
+                                                            <?php echo get_string('knowledge_dummy',
+                                                                'groupformation');?> 2
+                                                        </option>
+                                                        <option class="oobRow" id="oobRow2">
+                                                            <?php echo get_string('knowledge_dummy',
+                                                                'groupformation');?> 3
+                                                        </option>
+                                                    </select>
+
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div class="col_m_100" id="oobMultiPreview" style="display:none;">
+                                        <table class="responsive-table">
+                                            <colgroup>
+                                                <col class="firstCol">
+                                                <col width="36%">
+                                            </colgroup>
+
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">
+                                                    <?php echo get_string('choose_answers', 'groupformation'); ?>
+                                                </th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="oneofbinpreview">
+                                            <tr class="knowlRow">
+                                                <th id="oobquestionPreviewMulti" scope="row">
                                                     <?php echo get_string('no_oob_question', 'groupformation');?>
-                                                </p>
-                                            </th>
+                                                </th>
 
-                                            <td class="range">
-                                                <select id="oobpreviewdd">
-                                                    <option class="oobRow" id="oobRow0">
-                                                        <?php echo get_string('knowledge_dummy',
-                                                            'groupformation');?> 1
-                                                    </option>
-                                                    <option class="oobRow" id="oobRow1">
-                                                        <?php echo get_string('knowledge_dummy',
-                                                            'groupformation');?> 2
-                                                    </option>
-                                                    <option class="oobRow" id="oobRow2">
-                                                        <?php echo get_string('knowledge_dummy',
-                                                            'groupformation');?> 3
-                                                    </option>
-                                                </select>
+                                                <td class="range">
+                                                    <select multiple class="oobpreviewddMulti" id="oobpreviewddMulti">
+                                                        <option class="oobRowMulti" id="oobRow0Multi">
+                                                            <?php echo get_string('knowledge_dummy',
+                                                                'groupformation');?> 1
+                                                        </option>
+                                                        <option class="oobRowMulti" id="oobRow1Multi">
+                                                            <?php echo get_string('knowledge_dummy',
+                                                                'groupformation');?> 2
+                                                        </option>
+                                                        <option class="oobRowMulti" id="oobRow2Multi">
+                                                            <?php echo get_string('knowledge_dummy',
+                                                                'groupformation');?> 3
+                                                        </option>
+                                                    </select>
 
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
                                 </div>
-
-                                <div class="col_m_100" id="oobMultiPreview" style="display:none;">
-                                    <table class="responsive-table">
-                                        <colgroup>
-                                            <col class="firstCol">
-                                            <col width="36%">
-                                        </colgroup>
-
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">
-                                                <?php echo get_string('choose_answers', 'groupformation'); ?>
-                                            </th>
-                                            <th></th>
-                                        </tr>
-                                        </thead>
-                                        <tbody id="oneofbinpreview">
-                                        <tr class="knowlRow">
-                                            <th id="oobquestionPreviewMulti" scope="row">
-                                                <?php echo get_string('no_oob_question', 'groupformation');?>
-                                            </th>
-
-                                            <td class="range">
-                                                <select multiple class="oobpreviewddMulti" id="oobpreviewddMulti">
-                                                    <option class="oobRowMulti" id="oobRow0Multi">
-                                                        <?php echo get_string('knowledge_dummy',
-                                                            'groupformation');?> 1
-                                                    </option>
-                                                    <option class="oobRowMulti" id="oobRow1Multi">
-                                                        <?php echo get_string('knowledge_dummy',
-                                                            'groupformation');?> 2
-                                                    </option>
-                                                    <option class="oobRowMulti" id="oobRow2Multi">
-                                                        <?php echo get_string('knowledge_dummy',
-                                                            'groupformation');?> 3
-                                                    </option>
-                                                </select>
-
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        <?php endif; ?>
         <!-- End: one of bin section -->
+        <!-- knowledge question -->
+        <?php if (!$this->_['amigomode']): ?>
+            <div class="gf_settings_pad">
+                <div class="gf_pad_header">
+                    <label class="gf_label" for="id_js_knowledge">
+                        <input type="checkbox" id="id_js_knowledge" name="chbKnowledge" value="wantKnowledge" />
+                        <?php echo get_string('knowledge_description', 'groupformation');?>
+                    </label>
+                    <span class="optional">
+                    </span>
+                    <span class="toolt" tooltip="<?php echo get_string('knowledge_help', 'groupformation');?>">
+                    </span>
+                </div>
+                <div class="gf_pad_content" id="js_knowledgeWrapper">
+                    <p id="knowledgeInfo">
 
-        <div class="gf_settings_pad">
-            <div class="gf_pad_header">
-                <label class="gf_label" for="id_js_knowledge">
-                    <input type="checkbox" id="id_js_knowledge" name="chbKnowledge" value="wantKnowledge" />
-                    <?php echo get_string('knowledge_description', 'groupformation');?>
-                </label>
-                <span class="optional">
-                </span>
-                <span class="toolt" tooltip="<?php echo get_string('knowledge_help', 'groupformation');?>">
-                </span>
-            </div>
-            <div class="gf_pad_content" id="js_knowledgeWrapper">
-                <p id="knowledgeInfo">
+                    </p>
+                    <p id="knowledgeInfoProject" style="display:none;">
+                        <?php echo get_string('knowledge_info_project', 'groupformation');?>
+                    </p>
+                    <p id="knowledgeInfoHomework" style="display:none;">
+                        <?php echo get_string('knowledge_info_homework', 'groupformation');?>
+                    </p>
+                    <p id="knowledgeInfoPresentation" style="display:none;">
+                        <?php echo get_string('knowledge_info_presentation', 'groupformation');?>
+                    </p>
+                    <p id="stringAddInput" style="display:none;">
+                        <?php echo get_string('add_line', 'groupformation');?>
+                    </p>
+                    <p id="language" style="display:none;">
+                        <?php echo get_string('language', 'groupformation');?>
+                    </p>
+                    <div class="grid">
+                        <div id="prk">
+                            <div class="multi_field_wrapper persist-area">
+                                <div class="col_m_50">
+                                    <h5>
+                                        <?php echo get_string('input', 'groupformation');?>
+                                    </h5>
+                                    <div class="multi_fields">
+                                        <div class="multi_field" id="inputprk0">
+                                            <input class="respwidth js_preknowledgeInput" type="text">
+                                            <button type="button" class="remove_field gf_button gf_button_circle gf_button_small">
 
-                </p>
-                <p id="knowledgeInfoProject" style="display:none;">
-                    <?php echo get_string('knowledge_info_project', 'groupformation');?>
-                </p>
-                <p id="knowledgeInfoHomework" style="display:none;">
-                    <?php echo get_string('knowledge_info_homework', 'groupformation');?>
-                </p>
-                <p id="knowledgeInfoPresentation" style="display:none;">
-                    <?php echo get_string('knowledge_info_presentation', 'groupformation');?>
-                </p>
-                <p id="stringAddInput" style="display:none;">
-                    <?php echo get_string('add_line', 'groupformation');?>
-                </p>
-                <p id="language" style="display:none;">
-                    <?php echo get_string('language', 'groupformation');?>
-                </p>
-                <div class="grid">
-                    <div id="prk">
-                        <div class="multi_field_wrapper persist-area">
-                            <div class="col_m_50">
-                                <h5>
-                                    <?php echo get_string('input', 'groupformation');?>
-                                </h5>
-                                <div class="multi_fields">
-                                    <div class="multi_field" id="inputprk0">
-                                        <input class="respwidth js_preknowledgeInput" type="text">
-                                        <button type="button" class="remove_field gf_button gf_button_circle gf_button_small">
+                                            </button>
+                                        </div>
+                                        <div class="multi_field" id="inputprk1">
+                                            <input class="respwidth js_preknowledgeInput" type="text">
+                                            <button type="button" class="remove_field gf_button gf_button_circle gf_button_small">
 
-                                        </button>
-                                    </div>
-                                    <div class="multi_field" id="inputprk1">
-                                        <input class="respwidth js_preknowledgeInput" type="text">
-                                        <button type="button" class="remove_field gf_button gf_button_circle gf_button_small">
+                                            </button>
+                                        </div>
+                                        <div class="multi_field" id="inputprk2">
+                                            <input class="respwidth js_preknowledgeInput lastInput" type="text" placeholder="
+                                                <?php echo get_string('add_line', 'groupformation');?>
+                                            ">
+                                            <button type="button"
+                                                    class="remove_field gf_button gf_button_circle gf_button_small"
+                                                    disabled="disabled">
 
-                                        </button>
-                                    </div>
-                                    <div class="multi_field" id="inputprk2">
-                                        <input class="respwidth js_preknowledgeInput lastInput" type="text" placeholder="
-                                            <?php echo get_string('add_line', 'groupformation');?>
-                                        ">
-                                        <button type="button"
-                                                class="remove_field gf_button gf_button_circle gf_button_small"
-                                                disabled="disabled">
-
-                                        </button>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col_m_50">
-                                <h5>
-                                    <?php echo get_string('preview', 'groupformation');?>
-                                </h5>
-                                <div class="col_m_100">
-                                    <table class="responsive-table">
-                                        <colgroup>
-                                            <col class="firstCol">
-                                            <col width="36%">
-                                        </colgroup>
+                                <div class="col_m_50">
+                                    <h5>
+                                        <?php echo get_string('preview', 'groupformation');?>
+                                    </h5>
+                                    <div class="col_m_100">
+                                        <table class="responsive-table">
+                                            <colgroup>
+                                                <col class="firstCol">
+                                                <col width="36%">
+                                            </colgroup>
 
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">
-                                                    <?php echo get_string('knowledge_question',
-                                                            'groupformation');?>
-                                                </th>
-                                                <th scope="col">
-                                                    <div class="legend">
-                                                        <?php echo get_string('knowledge_scale',
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">
+                                                        <?php echo get_string('knowledge_question',
                                                                 'groupformation');?>
-                                                    </div>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="preknowledges">
-                                            <tr class="knowlRow" id="prkRow0">
-                                                <th scope="row">
-                                                    <?php echo get_string('knowledge_dummy',
-                                                            'groupformation');?>  1
-                                                </th>
+                                                    </th>
+                                                    <th scope="col">
+                                                        <div class="legend">
+                                                            <?php echo get_string('knowledge_scale',
+                                                                    'groupformation');?>
+                                                        </div>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="preknowledges">
+                                                <tr class="knowlRow" id="prkRow0">
+                                                    <th scope="row">
+                                                        <?php echo get_string('knowledge_dummy',
+                                                                'groupformation');?>  1
+                                                    </th>
 
-                                                <td data-title="<?php echo get_string('knowledge_scale',
-                                                        'groupformation');?>" class="range">
-                                                    <span >
-                                                        0
-                                                    </span>
-                                                    <input type="range" min="0" max="100" value="0" />
-                                                    <span>
-                                                        100
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                            <tr class="knowlRow" id="prkRow1">
-                                                <th scope="row">
-                                                    <?php echo get_string('knowledge_dummy',
-                                                            'groupformation');?>  2
-                                                </th>
-                                                <td data-title="<?php echo get_string('knowledge_scale',
-                                                        'groupformation');?>" class="range">
-                                                    <span >
-                                                        0
-                                                    </span>
-                                                    <input type="range" min="0" max="100" value="0" />
-                                                    <span>
-                                                        100
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                            <tr class="knowlRow" id="prkRow2">
-                                                <th scope="row">
-                                                    <?php echo get_string('knowledge_dummy',
-                                                            'groupformation');?>  3
-                                                </th>
-                                                <td data-title="<?php echo get_string('knowledge_scale',
-                                                        'groupformation');?>"
-                                                    class="range">
-                                                    <span>
-                                                        0
-                                                    </span>
-                                                    <input type="range" min="0" max="100" value="0" />
-                                                    <span>
-                                                        100
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div> <!-- /col_50 -->
-                        </div>  <!-- /multi_field_wrapper-->
-                    </div> <!-- Anchor-->
-                </div> <!-- /.grid -->
+                                                    <td data-title="<?php echo get_string('knowledge_scale',
+                                                            'groupformation');?>" class="range">
+                                                        <span >
+                                                            0
+                                                        </span>
+                                                        <input type="range" min="0" max="100" value="0" />
+                                                        <span>
+                                                            100
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="knowlRow" id="prkRow1">
+                                                    <th scope="row">
+                                                        <?php echo get_string('knowledge_dummy',
+                                                                'groupformation');?>  2
+                                                    </th>
+                                                    <td data-title="<?php echo get_string('knowledge_scale',
+                                                            'groupformation');?>" class="range">
+                                                        <span >
+                                                            0
+                                                        </span>
+                                                        <input type="range" min="0" max="100" value="0" />
+                                                        <span>
+                                                            100
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="knowlRow" id="prkRow2">
+                                                    <th scope="row">
+                                                        <?php echo get_string('knowledge_dummy',
+                                                                'groupformation');?>  3
+                                                    </th>
+                                                    <td data-title="<?php echo get_string('knowledge_scale',
+                                                            'groupformation');?>"
+                                                        class="range">
+                                                        <span>
+                                                            0
+                                                        </span>
+                                                        <input type="range" min="0" max="100" value="0" />
+                                                        <span>
+                                                            100
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div> <!-- /col_50 -->
+                            </div>  <!-- /multi_field_wrapper-->
+                        </div> <!-- Anchor-->
+                    </div> <!-- /.grid -->
+                </div>
             </div>
-        </div>
-
-        <?php if (!$this->_['mathprepcourse']): ?>
+        <?php endif; ?>
+        <?php if (!$this->_['mathprepcourse'] && !$this->_['amigomode']): ?>
+        <!-- topic question -->
             <div class="gf_settings_pad">
 
                 <div class="gf_pad_header">
@@ -608,7 +611,7 @@ defined('MOODLE_INTERNAL') || die();
                         </label>
                         <input type="number" class="group_opt" id="group_size" min="0" value="0" />
                     </div>
-                    <?php if (!$this->_['mathprepcourse']): ?>
+                    <?php if (!$this->_['mathprepcourse'] && !$this->_['amigomode']): ?>
                         <div class="col_m_50">
                             <label>
                                 <input type="radio" name="group_opt" id="group_opt_numb" value="numb_of_groups"/>
@@ -680,7 +683,7 @@ defined('MOODLE_INTERNAL') || die();
             </div>
         </div>
 
-        <?php if (!$this->_['mathprepcourse']): ?>
+        <?php if (!$this->_['mathprepcourse'] && !$this->_['amigomode']): ?>
             <div class="gf_pad_header">
                 <label class="gf_label" for="id_js_onlyactivestudents">
                     <input type="checkbox" id="id_js_onlyactivestudents" name="chbOnlyactivestudents" value="onlyactivestudents">

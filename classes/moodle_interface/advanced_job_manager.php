@@ -33,6 +33,7 @@ require_once($CFG->dirroot . '/mod/groupformation/lib.php');
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/scientific_grouping.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/scientific_grouping_2.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/scientific_grouping_amigo.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/basic_grouping.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/topic_grouping.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
@@ -330,8 +331,10 @@ class mod_groupformation_advanced_job_manager {
         if (is_null($users)) {
             return $cohorts;
         }
-
-        if (mod_groupformation_data::is_math_prep_course_mode()) {
+        if (mod_groupformation_data::is_amigo_mode()) {
+            $sg = new mod_groupformation_scientific_grouping_amigo($groupformationid);
+            return $sg->run_grouping($users);
+        } else if (mod_groupformation_data::is_math_prep_course_mode()) {
             $sg = new mod_groupformation_scientific_grouping_2($groupformationid);
             return $sg->run_grouping($users);
         } else if ($store->ask_for_topics()) {
@@ -359,6 +362,7 @@ class mod_groupformation_advanced_job_manager {
         $store->delete_statistics();
 
         $mathprepcourse = mod_groupformation_data::is_math_prep_course_mode();
+        $amigo = mod_groupformation_data::is_amigo_mode();
 
         foreach ($result as $groupkey => $cohort) {
             if (is_null($cohort)) {
@@ -368,7 +372,7 @@ class mod_groupformation_advanced_job_manager {
 
             $flags = array('group_key' => $groupkey);
 
-            if (!$mathprepcourse) {
+            if (!$mathprepcourse && !$amigo) {
                 $flags = array(
                         "groupal" => (strpos($groupkey, "groupal:1") !== false) ? 1 : 0,
                         "random" => (strpos($groupkey, "random:1") !== false) ? 1 : 0,

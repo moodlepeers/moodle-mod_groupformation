@@ -1,47 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<questionnaire version="2019082000">
+<questionnaire version="2020013102">
     <categories>
-        <category>demographic</category>
-        <category>skills</category>
-        <category>times</category>
-        <category>general</category>
         <category>grade</category>
         <category>points</category>
+        <category>self</category>
         <category>character</category>
-        <category>motivation</category>
-        <category>team</category>
-        <category>honesty</category>
+        <category>demographic</category>
         <category>topic</category>
     </categories>
     <scenarios>
         <scenario>
             <name>projectteams</name>
             <categories>
-                <category>demographic</category>
-                <category>skills</category>
-                <category>times</category>
-                <category>general</category>
                 <category>grade</category>
                 <category>points</category>
+                <category>self</category>
                 <category>character</category>
-                <category>motivation</category>
-                <category>team</category>
-                <category>honesty</category>
+                <category>demographic</category>
+                <category>topic</category>
             </categories>
         </scenario>
         <scenario>
             <name>homeworkgroups</name>
             <categories>
-                <category>demographic</category>
-                <category>skills</category>
-                <category>times</category>
-                <category>general</category>
                 <category>grade</category>
                 <category>points</category>
+                <category>self</category>
                 <category>character</category>
-                <category>motivation</category>
-                <category>team</category>
-                <category>honesty</category>
+                <category>demographic</category>
+                <category>topic</category>
             </categories>
         </scenario>
         <scenario>

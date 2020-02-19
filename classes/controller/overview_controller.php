@@ -137,7 +137,7 @@ class mod_groupformation_overview_controller {
                                 'state' => (($disabled) ? 'disabled' : ''),
                                 'text' => get_string('questionnaire_submit', 'groupformation'));
 
-                        if (mod_groupformation_data::is_math_prep_course_mode()) {
+                        if (mod_groupformation_data::is_math_prep_course_mode() || mod_groupformation_data::is_amigo_mode()) {
                             $modalarray = array(
                                     'type' => 'submit', 'name' => 'begin', 'value' => '0',
                                     'state' => (($disabled) ? 'disabled' : ''),
@@ -167,7 +167,7 @@ class mod_groupformation_overview_controller {
                         $this->groupformationstateinfo = get_string('questionnaire_submitted',
                                 'groupformation');
 
-                        $math = mod_groupformation_data::is_math_prep_course_mode();
+                        $math = mod_groupformation_data::is_math_prep_course_mode() || mod_groupformation_data::is_amigo_mode();
 
                         $buttonsinfo = 'questionnaire_press_revert';
 
@@ -223,7 +223,7 @@ class mod_groupformation_overview_controller {
                                     'state' => (($disabled) ? 'disabled' : ''),
                                     'text' => get_string('questionnaire_submit', 'groupformation'));
 
-                            if (mod_groupformation_data::is_math_prep_course_mode()) {
+                            if (mod_groupformation_data::is_math_prep_course_mode() || mod_groupformation_data::is_amigo_mode()) {
                                 $modalarray = array(
                                         'type' => 'submit', 'name' => 'begin', 'value' => '0',
                                         'state' => (($disabled) ? 'disabled' : ''),
@@ -260,7 +260,7 @@ class mod_groupformation_overview_controller {
                                     'state' => (($disabled) ? 'disabled' : ''),
                                     'text' => get_string('questionnaire_submit', 'groupformation'));
 
-                            if (mod_groupformation_data::is_math_prep_course_mode()) {
+                            if (mod_groupformation_data::is_math_prep_course_mode() || mod_groupformation_data::is_amigo_mode()) {
                                 $modalarray = array(
                                         'type' => 'submit', 'name' => 'begin', 'value' => '0',
                                         'state' => (($disabled) ? 'disabled' : ''),
@@ -290,7 +290,7 @@ class mod_groupformation_overview_controller {
                             $this->groupformationstateinfo = get_string('questionnaire_submitted',
                                     'groupformation');
 
-                            $math = mod_groupformation_data::is_math_prep_course_mode();
+                            $math = mod_groupformation_data::is_math_prep_course_mode() || mod_groupformation_data::is_amigo_mode();
 
                             $buttonsinfo = 'questionnaire_press_revert';
 

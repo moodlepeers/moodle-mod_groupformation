@@ -37,7 +37,7 @@ $ajm = new mod_groupformation_advanced_job_manager();
 $job = $ajm::get_job($groupformation->id);
 
 // Only if debug mode is activated.
-if (mod_groupformation_data::is_math_prep_course_mode()) {
+if (mod_groupformation_data::is_math_prep_course_mode() || mod_groupformation_data::is_amigo_mode()) {
 
     // Reset job action.
     if ($filterusers) {
@@ -55,78 +55,86 @@ if (mod_groupformation_data::is_math_prep_course_mode()) {
         redirect($returnurl);
     }
 
-    // Generate debug actions as buttons.
-    $debugbuttons = "";
-    $debugbuttons .= '<div class="gf_pad_header">';
-    $debugbuttons .= get_string('math_prep_course_study', 'groupformation');
-    $debugbuttons .= '</div>';
-    $debugbuttons .= '<div class="gf_pad_content">';
+    if (mod_groupformation_data::is_math_prep_course_mode()) {
 
-    $debugbuttons .= '<p>';
-    $debugbuttons .= get_string('honest_answers', 'groupformation', $stats['yes']);
-    $debugbuttons .= '<br>';
-    $debugbuttons .= get_string('dishonest_answers', 'groupformation', $stats['no']);
-    $debugbuttons .= '</p>';
-    $debugbuttons .= '<p>';
-    $v = 0.0;
-    if ($stats['yes'] !== 0 && $stats['no'] !== 0) {
-        $v = round(floatval($stats['no']) / ($stats['yes'] + $stats['no']), 4) * 100;
-    }
-    $debugbuttons .= get_string('ratio_answers', 'groupformation', $v);
-    $debugbuttons .= '</p>';
+        // Generate debug actions as buttons.
+        $debugbuttons = "";
+        $debugbuttons .= '<div class="gf_pad_header">';
+        $debugbuttons .= get_string('math_prep_course_study', 'groupformation');
+        $debugbuttons .= '</div>';
+        $debugbuttons .= '<div class="gf_pad_content">';
 
-    if (!$store->uses_filter()) {
         $debugbuttons .= '<p>';
-        $debugbuttons .= '<h5>';
-        $debugbuttons .= get_string('filter_inactive', 'groupformation');
-        $debugbuttons .= '</h5>';
+        $debugbuttons .= get_string('honest_answers', 'groupformation', $stats['yes']);
+        $debugbuttons .= '<br>';
+        $debugbuttons .= get_string('dishonest_answers', 'groupformation', $stats['no']);
         $debugbuttons .= '</p>';
-    } else {
         $debugbuttons .= '<p>';
-        $debugbuttons .= '<h5 style="color: red;">';
-        $debugbuttons .= get_string('filter_active', 'groupformation');
-        $debugbuttons .= '</h5>';
-        $debugbuttons .= '</p>';
-    }
-
-    $state = $store->statemachine->get_state();
-    if (in_array($state, array('q_closed'))) {
-
-        $debugbuttons .= '<p>';
-        $debugbuttons .= get_string('filter_description', 'groupformation');
+        $v = 0.0;
+        if ($stats['yes'] !== 0 && $stats['no'] !== 0) {
+            $v = round(floatval($stats['no']) / ($stats['yes'] + $stats['no']), 4) * 100;
+        }
+        $debugbuttons .= get_string('ratio_answers', 'groupformation', $v);
         $debugbuttons .= '</p>';
 
         if (!$store->uses_filter()) {
-            $debugbuttons .= '<a href="' . (new moodle_url('/mod/groupformation/grouping_view.php', array(
-                    'id' => $id, 'do_show' => 'grouping', 'filterusers' => 1)))->out() . '">';
-            $debugbuttons .= '<span class="gf_button gf_button_pill gf_button_small">';
-            $debugbuttons .= get_string('filter', 'groupformation');
-            $debugbuttons .= '</span>';
-
-            $debugbuttons .= '</a>';
+            $debugbuttons .= '<p>';
+            $debugbuttons .= '<h5>';
+            $debugbuttons .= get_string('filter_inactive', 'groupformation');
+            $debugbuttons .= '</h5>';
+            $debugbuttons .= '</p>';
         } else {
-            $debugbuttons .= '<a href="' . (new moodle_url('/mod/groupformation/grouping_view.php', array(
-                    'id' => $id, 'do_show' => 'grouping', 'unfilterusers' => 1)))->out() . '">';
-            $debugbuttons .= '<span class="gf_button gf_button_pill gf_button_small">';
-            $debugbuttons .= get_string('not_filter', 'groupformation');
-            $debugbuttons .= '</span>';
-            $debugbuttons .= '</a>';
+            $debugbuttons .= '<p>';
+            $debugbuttons .= '<h5 style="color: red;">';
+            $debugbuttons .= get_string('filter_active', 'groupformation');
+            $debugbuttons .= '</h5>';
+            $debugbuttons .= '</p>';
         }
 
-    } else {
-        $debugbuttons .= '<p>';
-        $debugbuttons .= get_string('no_filter_change', 'groupformation');
-        $debugbuttons .= '</p>';
+        $state = $store->statemachine->get_state();
+        if (in_array($state, array('q_closed'))) {
+
+            $debugbuttons .= '<p>';
+            $debugbuttons .= get_string('filter_description', 'groupformation');
+            $debugbuttons .= '</p>';
+
+            if (!$store->uses_filter()) {
+                $debugbuttons .= '<a href="' . (new moodle_url('/mod/groupformation/grouping_view.php', array(
+                        'id' => $id, 'do_show' => 'grouping', 'filterusers' => 1)))->out() . '">';
+                $debugbuttons .= '<span class="gf_button gf_button_pill gf_button_small">';
+                $debugbuttons .= get_string('filter', 'groupformation');
+                $debugbuttons .= '</span>';
+
+                $debugbuttons .= '</a>';
+            } else {
+                $debugbuttons .= '<a href="' . (new moodle_url('/mod/groupformation/grouping_view.php', array(
+                        'id' => $id, 'do_show' => 'grouping', 'unfilterusers' => 1)))->out() . '">';
+                $debugbuttons .= '<span class="gf_button gf_button_pill gf_button_small">';
+                $debugbuttons .= get_string('not_filter', 'groupformation');
+                $debugbuttons .= '</span>';
+                $debugbuttons .= '</a>';
+            }
+
+        } else {
+            $debugbuttons .= '<p>';
+            $debugbuttons .= get_string('no_filter_change', 'groupformation');
+            $debugbuttons .= '</p>';
+        }
+
+        $debugbuttons .= '</div>';
     }
 
-    $debugbuttons .= '</div>';
     $debugbuttons .= '<div class="gf_pad_header">';
     $debugbuttons .= get_string('pre_study_header', 'groupformation');
     $debugbuttons .= '</div>';
     $debugbuttons .= '<div class="gf_pad_content">';
 
-    $scientificgrouping = new mod_groupformation_scientific_grouping_2($groupformation->id);
-
+    $scientificgrouping = null;
+    if (mod_groupformation_data::is_math_prep_course_mode()) {
+        $scientificgrouping = new mod_groupformation_scientific_grouping_2($groupformation->id);
+    } else if (mod_groupformation_data::is_amigo_mode()) {
+        $scientificgrouping = new mod_groupformation_scientific_grouping_amigo($groupformation->id);
+    }
     $users = $store->get_users_for_grouping($job);
     $groupsizes = $store->determine_group_size($users);
 

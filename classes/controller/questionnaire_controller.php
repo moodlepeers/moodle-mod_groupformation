@@ -488,7 +488,7 @@ class mod_groupformation_questionnaire_controller {
      */
     public function get_questions($questions, $percent) {
 
-        $s = '<form style="width:100%; float:left;" action="';
+        $s = '<div><form style="width:100%; float:left;" action="';
         $s .= htmlspecialchars($_SERVER ["PHP_SELF"]);
         $s .= '" method="post" autocomplete="off" class="groupformation_questionnaire">';
 
@@ -531,7 +531,7 @@ class mod_groupformation_questionnaire_controller {
 
         $s .= $this->get_action_buttons();
 
-        $s .= '</form>';
+        $s .= '</form></div>';
         return $s;
     }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="demographic questions">
-    <QUESTIONS VERSION="2017082901">
+    <QUESTIONS VERSION="2020013101">
         <QUESTION ID="1" TYPE="dropdown">
             <QUESTIONTEXT>
                 <![CDATA[Geschlecht]]>
@@ -13,11 +13,48 @@
                     <![CDATA[männlich]]>
                 </OPTION>
                 <OPTION>
+                    <![CDATA[divers]]>
+                </OPTION>
+                <OPTION>
                     <![CDATA[keine Angabe]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="2" TYPE="number">
+        <QUESTION ID="2" TYPE="dropdown">
+            <QUESTIONTEXT>
+                <![CDATA[Welcher Fächergruppe lässt sich Ihr Studiengang zuordnen?]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[Geisteswissenschaften]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Sport, Sportwissenschaften]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Rechts-, Wirtschafts- und Sozialwissenschaften]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Mathematik, Naturwissenschaften]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Humanmedizin/Gesundheitswissenschaften]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Agrar-, Forst- und Ernährungswissenschaften, Veterinärmedizin]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Ingenieurwissenschaften]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Kunst, Kunstwissenschaft]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Sonstige Fachrichtungen]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="3" TYPE="number">
             <QUESTIONTEXT>
                 <![CDATA[Alter]]>
             </QUESTIONTEXT>
@@ -30,25 +67,25 @@
                 </MAX>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="3" TYPE="likert">
+        <QUESTION ID="4" TYPE="dropdown">
             <QUESTIONTEXT>
-                <![CDATA[Wie gut sind Ihre Deutschkenntnisse?]]>
+                <![CDATA[An welcher Universität sind Sie eingeschrieben?]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[Muttersprache]]>
+                    <![CDATA[Beuth Hochschule für Technik Berlin (BHT)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[sehr gut]]>
+                    <![CDATA[Jacobs University Bremen (JUB)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[gut]]>
+                    <![CDATA[Johannes Gutenberg Universität Mainz (JGU)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[mittel]]>
+                    <![CDATA[Rheinisch-Westfälische Technische Hochschule Aachen (RWTH)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[schlecht]]>
+                    <![CDATA[Andere]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>

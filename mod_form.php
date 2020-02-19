@@ -179,6 +179,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
         global $PAGE;
 
         $mathprepcourse = mod_groupformation_data::is_math_prep_course_mode();
+        $amigomode = mod_groupformation_data::is_amigo_mode();
         $teacherinfo = mod_groupformation_util::get_info_text_for_teacher(false);
 
         $templatebuilder = new mod_groupformation_template_builder();
@@ -197,6 +198,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 
         $assign['count'] = $count;
         $assign['mathprepcourse'] = $mathprepcourse;
+        $assign['amigomode'] = $amigomode;
 
         $templatebuilder->assign_multiple($assign);
 
@@ -309,6 +311,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
         // Add field for evaluation method.
         $mform->addElement('select', 'evaluationmethod',
             get_string('evaluationmethod_description', 'groupformation'), $array, null);
+        $mform->setDefault('evaluationmethod',4);
         $mform->addRule('evaluationmethod', get_string('evaluationmethod_error', 'groupformation'), 'required', null,
             'client');
         $mform->addElement('text', 'maxpoints', get_string('maxpoints', 'groupformation'));
@@ -318,6 +321,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
         $mform->addElement('checkbox', 'allanswersrequired', get_string('allanswersrequired', 'groupformation'));
         $mform->addElement('checkbox', 'emailnotifications', get_string('emailnotifications', 'groupformation'));
         $mform->setDefault('emailnotifications', false); // TODO delete if feature is fixed.
+        $mform->setDefault('allanswersrequired', true); // TODO delete if feature is fixed.
 
         // Close div tag for non-js related content.
         $mform->addElement('html', '</div id="non-js-content">');

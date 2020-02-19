@@ -80,7 +80,7 @@ class mod_groupformation_questionnaire_view_controller extends mod_groupformatio
         $store = $this->store;
         $id = $this->controller->cmid;
         $context = context_module::instance($id);
-
+            echo '<div>';
         if ($store->is_archived() && !has_capability('mod/groupformation:editsettings', $context)) {
             echo '<div class="alert" id="commited_view">';
             $tmp = has_capability('mod/groupformation:editsettings', $context) ? "admin" : "answers";
@@ -92,6 +92,7 @@ class mod_groupformation_questionnaire_view_controller extends mod_groupformatio
         if (get_config('core', 'theme') == 'boost') {
             echo '</div></div>';
         }
+            echo '</div>';
     }
 
     /**

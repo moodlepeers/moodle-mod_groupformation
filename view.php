@@ -29,6 +29,8 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/stora
 require_once($CFG->dirroot . '/mod/groupformation/classes/controller/overview_controller.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/overview_view_controller.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
+require_once($CFG->dirroot . "/mod/groupformation/lib/classes/matchers/group_stepwise_matcher.php");
+
 
 $filename = substr(__FILE__, strrpos(__FILE__, '\\') + 1);
 $filename = substr($filename, strpos($filename, '/mod'));
@@ -51,6 +53,12 @@ $viewcontroller->handle_access();
 $viewcontroller->handle_actions();
 
 echo $OUTPUT->header();
+
+$participants = ["a","b","c","d","e","f","g","h","i","j","k"];
+$groups = ["","","",""];
+
+$gsm = new mod_groupformation_group_stepwise_matcher();
+//$groups = $gsm->match_to_groups($participants, $groups);
 
 // Print the tabs.
 require('tabs.php');
