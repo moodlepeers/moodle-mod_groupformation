@@ -139,6 +139,7 @@ class mod_groupformation_test_user_generator {
                     $record->completed = ($setanswers) ? 1 : 0;
                     $record->answer_count = $store->get_total_number_of_answers();
                     $record->timecompleted = ($setanswers) ? time() : null;
+                    $record->participantcode = "AB".$userid;
                     $record->groupid = null;
                     $DB->insert_record("groupformation_users", $record);
 

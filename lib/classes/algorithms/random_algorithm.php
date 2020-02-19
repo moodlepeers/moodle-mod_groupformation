@@ -200,6 +200,10 @@ class mod_groupformation_random_algorithm implements mod_groupformation_ialgorit
         $participants = $this->participants;
         $groupsize = $this->groupsize;
 
+        if (count($participants) == 0) {
+            return null;
+        }   
+
         shuffle($participants);
 
         $n = count($participants);
@@ -212,10 +216,11 @@ class mod_groupformation_random_algorithm implements mod_groupformation_ialgorit
 
         do {
             shuffle($ngroups);
-
             // fill groups stepwise
             for ($i = 0; $i < count($ngroups); $i++) {
-                
+                if (count($participants) == 0) {
+                    break;
+                }
                 // get current group
                 $group = $ngroups[$i];
 

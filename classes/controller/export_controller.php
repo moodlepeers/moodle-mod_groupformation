@@ -104,7 +104,8 @@ class mod_groupformation_export_controller {
         // Generate content for answer file for export.
         $content = $csvwriter->get_data($type);
 
-        $filename = 'archived_' . $type . '.csv';
+        $timestamp = time();
+        $filename = 'archived_' . $type . '_'.$timestamp.'.csv';
 
         $context = context_module::instance($this->cmid);
 
