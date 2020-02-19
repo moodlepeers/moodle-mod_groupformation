@@ -41,6 +41,7 @@ $createcsv = optional_param('create_csv', false, PARAM_BOOL);
 $debugbuttons = "";
 
 // Only if debug mode is activated or if the user is a debug user.
+$debugusers = array();
 if (isset($CFG->debugusers)) {
     $debugusers = explode(',', $CFG->debugusers);
 }
