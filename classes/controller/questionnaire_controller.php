@@ -263,7 +263,7 @@ class mod_groupformation_questionnaire_controller {
         if ($this->categoryposition != -1) {
 
             $questions = array();
-            $multiselect = $this->store->get_binquestion_multiselect();
+          //  $multiselect = $this->store->get_binquestion_multiselect();
             //$multiselect = true;
 
             $hasanswer = $this->usermanager->has_answers($this->userid, $category);
@@ -632,7 +632,7 @@ class mod_groupformation_questionnaire_controller {
 
         $type = $question->type;
         $questionid = $question->questionid;
-        $multiselect = $this->store->get_binquestion_multiselect();
+       // $multiselect = $this->store->get_binquestion_multiselect();
         //$multiselect = true;
         $name = 'mod_groupformation_' . $type . '_question';
         if ($type == 'binquestion'){
