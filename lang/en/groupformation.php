@@ -204,7 +204,7 @@ $string ['tabletitle_self'] = 'Self-assessment';
 $string ['tabletitle_srl'] = 'Self-controlled Learning';
 $string ['tabletitle_knowledge'] = 'How much do you know about the following topics?';
 $string ['tabletitle_binquestion'] = 'Choose one of the answers!';
-$string ['tabletitle_binquesiton_multi'] = 'You can choose as many answers you want!';
+$string ['tabletitle_binquestion_multi'] = 'You can choose as many answers you want!';
 
 $string ['stats_partly'] = 'You answered {$a->answered} out of {$a->questions} questions in the category "{$a->category}".';
 $string ['stats_all'] = 'You answered all questions in the category "{$a->category}".';

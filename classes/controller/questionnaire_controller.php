@@ -263,6 +263,7 @@ class mod_groupformation_questionnaire_controller {
         if ($this->categoryposition != -1) {
 
             $questions = array();
+            //TODO comment in when multiselect is supported
           //  $multiselect = $this->store->get_binquestion_multiselect();
             //$multiselect = true;
 
@@ -286,16 +287,15 @@ class mod_groupformation_questionnaire_controller {
                 }
                 $question = $this->store->get_binquestion_text();
 
-                if ($multiselect){
-                    $name = 'mod_groupformation_multiselect_question';
-                } else {
+                //TODO comment in when multiselect is supported
+//                if ($multiselect){
+//                    $name = 'mod_groupformation_multiselect_question';
+//                } else {
                     $name = 'mod_groupformation_' . $category . '_question';
-                }
+//                }
                 $questionobj = new $name($category, $questionid, $question, $options, $answer);
                 $questions[] = $questionobj;
-            }
-
-            if ($this->is_knowledge() || $this->is_topics()) {
+            } else if ($this->is_knowledge() || $this->is_topics()) {
                 $temp = $this->store->get_knowledge_or_topic_values($category);
                 $xmlcontent = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>';
                 $values = mod_groupformation_util::xml_to_array($xmlcontent);
@@ -515,8 +515,13 @@ class mod_groupformation_questionnaire_controller {
             $s .= get_string('category_' . $category, 'groupformation');
             $s .= '</h4>';
 
+            //TODO comment in when multiselect is supported
             // Print the header of a table or unordered list.
-            $s .= $table->get_header(); // TODO ändere title für multiselect
+//            $addon = '';
+//            if ($category == 'binquestion' && $this->store->get_binquestion_multiselect()){
+//                $addon = '_multi';
+//            }
+//            $s .= $table->get_header($addon); // TODO ändere title für multiselect
 
             foreach ($questions as $q) {
                 $s .= $q->get_html($this->highlightmissinganswers, $this->store->all_answers_required());
@@ -632,13 +637,13 @@ class mod_groupformation_questionnaire_controller {
 
         $type = $question->type;
         $questionid = $question->questionid;
-       // $multiselect = $this->store->get_binquestion_multiselect();
-        //$multiselect = true;
         $name = 'mod_groupformation_' . $type . '_question';
         if ($type == 'binquestion'){
-            if ($multiselect){
-                $name = 'mod_groupformation_multiselect_question';
-            }
+            //TODO comment in when multiselect is supported
+//            $multiselect = $this->store->get_binquestion_multiselect();
+//            if ($multiselect){
+//                $name = 'mod_groupformation_multiselect_question';
+//            }
         }
         $questionobj = new $name($category, $questionid);
         $answer = $questionobj->read_answer();
