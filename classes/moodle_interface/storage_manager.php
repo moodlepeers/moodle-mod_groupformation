@@ -1176,11 +1176,11 @@ class mod_groupformation_storage_manager {
             $q->questionid = 1;
             $q->question = $questiontext;
             $q->options = $options;
-            if ($this->get_binquestion_multiselect()){
-                $q->type = 'multiselect';
-            } else {
+//            if ($this->get_binquestion_multiselect()){
+//                $q->type = 'multiselect';
+//            } else {
                 $q->type = $category;
-            }
+//            }
 
             $question[0] = $q;
             return $question;

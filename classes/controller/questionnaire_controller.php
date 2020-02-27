@@ -530,12 +530,13 @@ class mod_groupformation_questionnaire_controller
             $s .= get_string('category_' . $category, 'groupformation');
             $s .= '</h4>';
 
-            //TODO comment in when multiselect is supported
+
             // Print the header of a table or unordered list.
             $addon = '';
-            if ($category == 'binquestion' && $this->store->get_binquestion_multiselect()) {
-                $addon = '_multi';
-            }
+            //TODO comment in when multiselect is supported
+//            if ($category == 'binquestion' && $this->store->get_binquestion_multiselect()) {
+//                $addon = '_multi';
+//            }
             $s .= $table->get_header($addon); // TODO ändere title für multiselect
 
             foreach ($questions as $q) {
