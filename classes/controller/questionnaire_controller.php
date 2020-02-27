@@ -265,7 +265,7 @@ class mod_groupformation_questionnaire_controller {
             $questions = array();
             //TODO comment in when multiselect is supported
           //  $multiselect = $this->store->get_binquestion_multiselect();
-            //$multiselect = true;
+            $multiselect = false;
 
             $hasanswer = $this->usermanager->has_answers($this->userid, $category);
 
@@ -288,11 +288,11 @@ class mod_groupformation_questionnaire_controller {
                 $question = $this->store->get_binquestion_text();
 
                 //TODO comment in when multiselect is supported
-//                if ($multiselect){
-//                    $name = 'mod_groupformation_multiselect_question';
-//                } else {
+                if ($multiselect){
+                    $name = 'mod_groupformation_multiselect_question';
+                } else {
                     $name = 'mod_groupformation_' . $category . '_question';
-//                }
+                }
                 $questionobj = new $name($category, $questionid, $question, $options, $answer);
                 $questions[] = $questionobj;
             } else if ($this->is_knowledge() || $this->is_topics()) {
@@ -517,11 +517,11 @@ class mod_groupformation_questionnaire_controller {
 
             //TODO comment in when multiselect is supported
             // Print the header of a table or unordered list.
-//            $addon = '';
-//            if ($category == 'binquestion' && $this->store->get_binquestion_multiselect()){
-//                $addon = '_multi';
-//            }
-//            $s .= $table->get_header($addon); // TODO ändere title für multiselect
+            $addon = '';
+            if ($category == 'binquestion' && $this->store->get_binquestion_multiselect()){
+                $addon = '_multi';
+            }
+            $s .= $table->get_header($addon); // TODO ändere title für multiselect
 
             foreach ($questions as $q) {
                 $s .= $q->get_html($this->highlightmissinganswers, $this->store->all_answers_required());
