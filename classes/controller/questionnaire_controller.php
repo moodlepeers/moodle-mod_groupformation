@@ -50,7 +50,8 @@ require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class mod_groupformation_questionnaire_controller {
+class mod_groupformation_questionnaire_controller
+{
 
     /** @var int The id of the groupformation activity */
     private $groupformationid = null;
@@ -99,7 +100,8 @@ class mod_groupformation_questionnaire_controller {
      * @param int $cmid
      * @throws dml_exception
      */
-    public function __construct($groupformationid, $userid, $cmid, $currentcategory, $direction) {
+    public function __construct($groupformationid, $userid, $cmid, $currentcategory, $direction)
+    {
         $this->groupformationid = $groupformationid;
         $this->userid = $userid;
         $this->cmid = $cmid;
@@ -130,14 +132,16 @@ class mod_groupformation_questionnaire_controller {
     /**
      * Triggers going a category page back
      */
-    public function go_back() {
+    public function go_back()
+    {
         $this->categoryposition = max($this->categoryposition - 1, 0);
     }
 
     /**
      * Regulates not going on and highlighting missing answers
      */
-    public function not_go_on() {
+    public function not_go_on()
+    {
         $this->categoryposition = max($this->categoryposition - 1, 0);
         $this->highlightmissinganswers = true;
     }
@@ -149,7 +153,8 @@ class mod_groupformation_questionnaire_controller {
      * @return number
      * @throws dml_exception
      */
-    public function get_percent($category = null) {
+    public function get_percent($category = null)
+    {
         if (!is_null($category)) {
             $categories = $this->store->get_categories();
             $pos = array_search($category, $categories);
@@ -180,7 +185,8 @@ class mod_groupformation_questionnaire_controller {
      *
      * @return boolean
      */
-    public function has_next() {
+    public function has_next()
+    {
         return ($this->categoryposition != -1 && $this->categoryposition < count($this->categories));
     }
 
@@ -193,7 +199,8 @@ class mod_groupformation_questionnaire_controller {
      * @throws coding_exception
      * @throws dml_exception
      */
-    public function get_question($i, $version) {
+    public function get_question($i, $version)
+    {
         $category = $this->category;
         $lang = get_string('language', 'groupformation');
 
@@ -217,7 +224,8 @@ class mod_groupformation_questionnaire_controller {
      * @return boolean
      * @throws dml_exception
      */
-    public function is_topics() {
+    public function is_topics()
+    {
         return $this->categoryposition == $this->store->get_position('topic');
     }
 
@@ -227,7 +235,8 @@ class mod_groupformation_questionnaire_controller {
      * @return boolean
      * @throws dml_exception
      */
-    public function is_knowledge() {
+    public function is_knowledge()
+    {
         return $this->categoryposition == $this->store->get_position('knowledge');
     }
 
@@ -237,7 +246,8 @@ class mod_groupformation_questionnaire_controller {
      * @return boolean
      * @throws dml_exception
      */
-    public function is_binquestion() {
+    public function is_binquestion()
+    {
         return $this->categoryposition == $this->store->get_position('binquestion');
     }
 
@@ -247,7 +257,8 @@ class mod_groupformation_questionnaire_controller {
      * @return boolean
      * @throws dml_exception
      */
-    public function is_points() {
+    public function is_points()
+    {
         return $this->categoryposition == $this->store->get_position('points');
     }
 
@@ -258,28 +269,29 @@ class mod_groupformation_questionnaire_controller {
      * @throws coding_exception
      * @throws dml_exception
      */
-    public function get_next_questions() {
+    public function get_next_questions()
+    {
         $category = $this->category;
         if ($this->categoryposition != -1) {
 
             $questions = array();
             //TODO comment in when multiselect is supported
-          //  $multiselect = $this->store->get_binquestion_multiselect();
+            //  $multiselect = $this->store->get_binquestion_multiselect();
             $multiselect = false;
 
             $hasanswer = $this->usermanager->has_answers($this->userid, $category);
 
 
-            if ($this->is_binquestion()){
+            if ($this->is_binquestion()) {
                 $temp = $this->store->get_knowledge_or_topic_values($category);
                 $xmlcontent = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>';
                 $options = mod_groupformation_util::xml_to_array($xmlcontent);
                 $questionid = 1;
 
-                if ($hasanswer){
+                if ($hasanswer) {
                     $answer = $this->usermanager->get_single_answer(
                         $this->userid, $category, $questionid);
-                    if ($answer == false){
+                    if ($answer == false) {
                         $answer = -1;
                     }
                 } else {
@@ -288,7 +300,7 @@ class mod_groupformation_questionnaire_controller {
                 $question = $this->store->get_binquestion_text();
 
                 //TODO comment in when multiselect is supported
-                if ($multiselect){
+                if ($multiselect) {
                     $name = 'mod_groupformation_multiselect_question';
                 } else {
                     $name = 'mod_groupformation_' . $category . '_question';
@@ -301,7 +313,7 @@ class mod_groupformation_questionnaire_controller {
                 $values = mod_groupformation_util::xml_to_array($xmlcontent);
 
                 $options = array(
-                        100 => get_string('excellent', 'groupformation'), 0 => get_string('none', 'groupformation'));
+                    100 => get_string('excellent', 'groupformation'), 0 => get_string('none', 'groupformation'));
 
                 $position = 1;
                 $questionsfirst = array();
@@ -312,7 +324,7 @@ class mod_groupformation_questionnaire_controller {
 
                     if ($hasanswer) {
                         $answer = $this->usermanager->get_single_answer(
-                                $this->userid, $category, $position);
+                            $this->userid, $category, $position);
                         if ($answer == false) {
                             $answer = -1;
                         }
@@ -355,8 +367,8 @@ class mod_groupformation_questionnaire_controller {
                         $type = $record->type;
 
                         $options = array(
-                                $this->store->get_max_points() => get_string('excellent', 'groupformation'),
-                                0 => get_string('bad', 'groupformation'));
+                            $this->store->get_max_points() => get_string('excellent', 'groupformation'),
+                            0 => get_string('bad', 'groupformation'));
 
                         $answer = $this->usermanager->get_single_answer($this->userid, $category, $record->questionid);
                         if ($answer == false) {
@@ -406,7 +418,8 @@ class mod_groupformation_questionnaire_controller {
      * @return string
      * @throws coding_exception
      */
-    public function get_action_buttons() {
+    public function get_action_buttons()
+    {
         $s = '<div class="grid">';
         $s .= '    <div class="col_m_100 questionaire_button_row">';
         $s .= '        <button type="submit" name="direction" value="-1" class="gf_button gf_button_pill gf_button_small">';
@@ -429,7 +442,8 @@ class mod_groupformation_questionnaire_controller {
      * @throws dml_exception
      * @throws moodle_exception
      */
-    public function get_navbar($activecategory = null) {
+    public function get_navbar($activecategory = null)
+    {
         $context = context_module::instance($this->cmid);
 
         $tempcategories = $this->store->get_categories();
@@ -451,7 +465,7 @@ class mod_groupformation_questionnaire_controller {
         foreach ($categories as $category) {
 
             $url = new moodle_url ('questionnaire_view.php', array(
-                    'id' => $this->cmid, 'category' => $category));
+                'id' => $this->cmid, 'category' => $category));
             $positionactivecategory = $this->store->get_position($activecategory);
             $positioncategory = $this->store->get_position($category);
 
@@ -488,7 +502,8 @@ class mod_groupformation_questionnaire_controller {
      * @throws coding_exception
      * @throws dml_exception
      */
-    public function get_questions($questions, $percent) {
+    public function get_questions($questions, $percent)
+    {
 
         $s = '<form style="width:100%; float:left;" action="';
         $s .= htmlspecialchars($_SERVER ["PHP_SELF"]);
@@ -518,7 +533,7 @@ class mod_groupformation_questionnaire_controller {
             //TODO comment in when multiselect is supported
             // Print the header of a table or unordered list.
             $addon = '';
-            if ($category == 'binquestion' && $this->store->get_binquestion_multiselect()){
+            if ($category == 'binquestion' && $this->store->get_binquestion_multiselect()) {
                 $addon = '_multi';
             }
             $s .= $table->get_header($addon); // TODO ändere title für multiselect
@@ -544,11 +559,12 @@ class mod_groupformation_questionnaire_controller {
      * @param float $percent
      * @return string
      */
-    public function get_progressbar($percent) {
+    public function get_progressbar($percent)
+    {
         $s = '<div class="progress">';
 
         $s .= '    <div class="questionaire_progress-bar" role="progressbar" aria-valuenow="' . $percent .
-                '" aria-valuemin="0" aria-valuemax="100" style="width:' . $percent . '%">';
+            '" aria-valuemin="0" aria-valuemax="100" style="width:' . $percent . '%">';
         $s .= '    </div>';
 
         $s .= '</div>';
@@ -559,7 +575,8 @@ class mod_groupformation_questionnaire_controller {
     /**
      * Prints participant code for user
      */
-    public function get_participant_code() {
+    public function get_participant_code()
+    {
         $s = '<div class="participantcode">';
 
         $participantcode = $this->usermanager->get_participant_code($this->userid);
@@ -581,7 +598,8 @@ class mod_groupformation_questionnaire_controller {
      * @throws coding_exception
      * @throws dml_exception
      */
-    public function save_answers() {
+    public function save_answers()
+    {
         $category = $this->previouscategory;
 
         if (!in_array($category, $this->categories)) {
@@ -598,7 +616,7 @@ class mod_groupformation_questionnaire_controller {
                 $question->questionid = $i;
                 $this->handle_answer($this->userid, $category, $question);
             }
-        } else if ($category == 'binquestion'){
+        } else if ($category == 'binquestion') {
             $question = new stdClass();
             $question->type = $category;
             $question->questionid = 1;
@@ -612,7 +630,7 @@ class mod_groupformation_questionnaire_controller {
         }
 
         // There is only one question, if it's a binquestion.
-        if ($category == 'binquestion' && $number > 0){
+        if ($category == 'binquestion' && $number > 0) {
             $number = 1;
         }
         if ($this->store->all_answers_required() && $this->usermanager->get_number_of_answers(
@@ -633,17 +651,19 @@ class mod_groupformation_questionnaire_controller {
      * @param stdClass $question
      * @throws dml_exception
      */
-    public function handle_answer($userid, $category, $question) {
+    public function handle_answer($userid, $category, $question)
+    {
 
         $type = $question->type;
         $questionid = $question->questionid;
         $name = 'mod_groupformation_' . $type . '_question';
-        if ($type == 'binquestion'){
-            //TODO comment in when multiselect is supported
-//            $multiselect = $this->store->get_binquestion_multiselect();
-//            if ($multiselect){
-//                $name = 'mod_groupformation_multiselect_question';
-//            }
+        if ($type == 'binquestion') {
+
+//          $multiselect = $this->store->get_binquestion_multiselect();
+            $multiselect = false;
+            if ($multiselect) {
+                $name = 'mod_groupformation_multiselect_question';
+            }
         }
         $questionobj = new $name($category, $questionid);
         $answer = $questionobj->read_answer();
@@ -666,7 +686,8 @@ class mod_groupformation_questionnaire_controller {
      * @throws dml_exception
      * @throws moodle_exception
      */
-    public function load_questionnaire_page() {
+    public function load_questionnaire_page()
+    {
         $assigns = array();
 
         $context = context_module::instance($this->cmid);
@@ -690,7 +711,7 @@ class mod_groupformation_questionnaire_controller {
                 $s .= '</div>';
                 $assigns['preview_alert'] = $s;
             } else if (in_array($state, array('q_open')) &&
-                    !in_array($userstate, array("started", "consent_given", "p_code_given", "answering"))) {
+                !in_array($userstate, array("started", "consent_given", "p_code_given", "answering"))) {
                 $s = '<div class="alert" id="commited_view">';
                 $s .= get_string('questionnaire_committed', 'groupformation');
                 $s .= '</div>';
@@ -729,7 +750,7 @@ class mod_groupformation_questionnaire_controller {
             }
 
             $returnurl = new moodle_url ('/mod/groupformation/analysis_view.php', array(
-                    'id' => $this->cmid, 'do_show' => 'analysis'));
+                'id' => $this->cmid, 'do_show' => 'analysis'));
             redirect($returnurl);
         }
 
