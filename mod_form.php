@@ -187,7 +187,6 @@ class mod_groupformation_mod_form extends moodleform_mod {
         $assign = array();
         $assign['teacherinfo'] = $teacherinfo;
 
-
         $context = $PAGE->context;
         $enrolledstudents = array_keys(get_enrolled_users($context, 'mod/groupformation:onlystudent'));
         $enrolledprevusers = array_keys(get_enrolled_users($context, 'mod/groupformation:editsettings'));
@@ -253,8 +252,6 @@ class mod_groupformation_mod_form extends moodleform_mod {
         $mform->disabledIf('binquestionlines', 'binquestion', 'notchecked');
         $mform->disabledIf('binquestionimportance', 'binquestion', 'notchecked');
         $mform->disabledIf('binquestionrelation', 'binquestion', 'notchecked');
-
-
 
         // Add fields for Knowledge questions.
         $mform->addElement('checkbox', 'knowledge', get_string('knowledge', 'groupformation'));
