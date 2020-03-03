@@ -43,7 +43,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/group_generat
  */
 class mod_groupformation_overview_controller {
 
-    /** @var int ID of course module*/
+    /** @var int ID of course module */
     public $cmid;
 
     /** @var int ID of user */
@@ -400,29 +400,29 @@ class mod_groupformation_overview_controller {
             $a->answered = $values ['answered'];
             if ($values ['questions'] > 0) {
                 $url = new moodle_url ('questionnaire_view.php', array(
-                    'id' => $this->cmid, 'category' => $key));
+                        'id' => $this->cmid, 'category' => $key));
 
                 if (!$this->store->all_answers_required() || !$previncomplete) {
                     $a->category = '<a href="' . $url . '">' . $a->category . '</a>';
                 }
-                if ($key == 'binquestion'){
-                    if ($values ['answered'] > 0){
+                if ($key == 'binquestion') {
+                    if ($values ['answered'] > 0) {
                         $array [] = get_string('stats_all_binquestion', 'groupformation', $a) .
-                            ' <span class="questionaire_all">&#10004;</span>';
+                                ' <span class="questionaire_all">&#10004;</span>';
                         $previncomplete = false;
                     } else {
                         $array [] = get_string('stats_none_binquestion', 'groupformation', $a) .
-                            ' <span class="questionaire_none">&#10008;</span>';
+                                ' <span class="questionaire_none">&#10008;</span>';
                         $previncomplete = true;
                     }
                 } else {
                     if ($values ['missing'] == 0) {
                         $array [] = get_string('stats_all', 'groupformation', $a) .
-                            ' <span class="questionaire_all">&#10004;</span>';
+                                ' <span class="questionaire_all">&#10004;</span>';
                         $previncomplete = false;
                     } else if ($values ['answered'] == 0) {
                         $array [] = get_string('stats_none', 'groupformation', $a) .
-                            ' <span class="questionaire_none">&#10008;</span>';
+                                ' <span class="questionaire_none">&#10008;</span>';
                         $previncomplete = true;
                     } else {
                         $array [] = get_string('stats_partly', 'groupformation', $a);

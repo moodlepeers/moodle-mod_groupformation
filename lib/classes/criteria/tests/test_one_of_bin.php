@@ -1,6 +1,4 @@
 <?php
-
-
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/one_of_bin_criterion.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/many_of_bin_criterion.php");
@@ -12,20 +10,19 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/participant.php");
  */
 class test_one_of_bin {
 
-
     /**
      * use created participants and change these with a criterion
+     *
      * @param $participants
      * @return array
      */
     public function create_participants($participants) {
-        $participantsList = array();
+        $participantslist = array();
         try {
             for ($i = 0; $i < count($participants) - 1; $i++) {
                 $p = $participants[$i];
                 $criteria = $p->get_criteria();
                 $list = array();
-
 
                 for ($j = 0; $j < count($criteria) - 1; $j++) {
 
@@ -37,35 +34,36 @@ class test_one_of_bin {
                     $homogen = $c->is_homogeneous();
                     $weight = $c->get_weight();
 
-                    //set random criterion to participant
+                    // set random criterion to participant
                     $rand = rand(0, 1);
                     if ($rand) {
-                        $list[] = new mod_groupformation_one_of_bin_criterion("one_of_bin", $value, $minval, $maxval, $homogen, $weight);
-//                        $list[] = new mod_groupformation_many_of_bin_criterion("many_of_bin", array(1, 0.4, 1), $minval, $maxval, $homogen, $weight);
+                        $list[] = new mod_groupformation_one_of_bin_criterion("one_of_bin", $value, $minval, $maxval, $homogen,
+                                $weight);
+                        // $list[] = new mod_groupformation_many_of_bin_criterion("many_of_bin", array(1, 0.4, 1), $minval, $maxval, $homogen, $weight);
                     } else {
-//                        $list[] = new mod_groupformation_both_bin_types_bins_covered_criterion("both_bin_types", $value, $minval, $maxval, $homogen, $weight);
-                       // $list[] = new mod_groupformation_both_bin_types_bins_covered_criterion("both_bin_types", $value, $minval, $maxval, $homogen, $weight);
-                        $list[] = new mod_groupformation_many_of_bin_criterion("many_of_bin", array(0.4, 1, 1), $minval, $maxval, $homogen, $weight);
+                        // $list[] = new mod_groupformation_both_bin_types_bins_covered_criterion("both_bin_types", $value, $minval, $maxval, $homogen, $weight);
+                        // $list[] = new mod_groupformation_both_bin_types_bins_covered_criterion("both_bin_types", $value, $minval, $maxval, $homogen, $weight);
+                        $list[] = new mod_groupformation_many_of_bin_criterion("many_of_bin", array(0.4, 1, 1), $minval, $maxval,
+                                $homogen, $weight);
                     }
 
                 }
-                $participantsList[] = new mod_groupformation_participant($list);
+                $participantslist[] = new mod_groupformation_participant($list);
             }
 
-            return $participantsList;
+            return $participantslist;
         } catch (Exception $e) {
-
+            // creating participants failed
         }
     }
 
-
-    public function test_result(){
+    public function test_result() {
 
     }
 
-
     /**
      * create manually a participant
+     *
      * @return array
      */
     public function create_manually_participant() {
@@ -79,7 +77,6 @@ class test_one_of_bin {
             $list[] = new mod_groupformation_participant($criteria_one_of_bin);
             $list[] = new mod_groupformation_participant($criteria_one_of_bin);
 
-
             return $list;
         } catch (Exception $e) {
         }
@@ -87,6 +84,7 @@ class test_one_of_bin {
 
     /**
      * log criteria name
+     *
      * @param $label
      * @param $criteria
      */
@@ -96,6 +94,7 @@ class test_one_of_bin {
 
     /**
      * log performance index
+     *
      * @param $label
      * @param $pi
      */
@@ -106,12 +105,13 @@ class test_one_of_bin {
 
     /**
      * logging in console
+     *
      * @param $label
      * @param $data
      */
     function debug_to_console($label, $data) {
         $output = $data;
-        print_r("<script>console.log( 'Debug Objects: " . $label . $output . "' );</script>");
+        //print_r("<script>console.log( 'Debug Objects: " . $label . $output . "' );</script>");
     }
 
 }

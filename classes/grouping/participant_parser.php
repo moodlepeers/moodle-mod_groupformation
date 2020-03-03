@@ -99,24 +99,27 @@ class mod_groupformation_participant_parser {
 
                 switch ($label) {
                     case "specific":
-                        $criterion = new mod_groupformation_specific_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
+                        $criterion =
+                                new mod_groupformation_specific_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
                         break;
                     case "binquestion_singlechoice":
-                        $criterion = new mod_groupformation_one_of_bin_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
+                        $criterion =
+                                new mod_groupformation_one_of_bin_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
                         break;
-                   // case "binquestion_multiselect ":
-                     //   $criterion = new mod_groupformation_many_of_bin_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
-                       // break;
-                   // case "both_bin_types_bins_covered":
-                       // $criterion = new mod_groupformation_both_bin_types_bins_covered_criterion($label, $value, $minval, $maxval, $homogen, $weight);
+                    // case "binquestion_multiselect ":
+                    //   $criterion = new mod_groupformation_many_of_bin_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
+                    // break;
+                    // case "both_bin_types_bins_covered":
+                    // $criterion = new mod_groupformation_both_bin_types_bins_covered_criterion($label, $value, $minval, $maxval, $homogen, $weight);
                     default:
                         // TODO default criterion
-                        $criterion = new mod_groupformation_specific_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
+                        $criterion =
+                                new mod_groupformation_specific_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
                 }
 
                 if ($position == 0) {
                     $participant = new mod_groupformation_participant (array(
-                        $criterion), $user->id);
+                            $criterion), $user->id);
                 } else {
                     $participant->add_criterion($criterion);
                 }
@@ -149,7 +152,7 @@ class mod_groupformation_participant_parser {
 
             $criterion = $this->criterioncalculator->get_topic($userid);
             $participant = new mod_groupformation_participant (array(
-                $criterion), $userid);
+                    $criterion), $userid);
 
             $participants [$userid] = $participant;
         }

@@ -90,7 +90,8 @@ class mod_groupformation_grouping_edit_view_controller extends mod_groupformatio
             $output .= get_string('archived_activity_admin', 'groupformation');
             $output .= '</div>';
         } else {
-            $output .= '<form id="edit_groups_form" action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) . '" method="post" autocomplete="off">';
+            $output .= '<form id="edit_groups_form" action="' . htmlspecialchars($_SERVER ["PHP_SELF"]) .
+                    '" method="post" autocomplete="off">';
             $output .= '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
             $output .= '<input type="hidden" name="id" value="' . $id . '"/>';
 

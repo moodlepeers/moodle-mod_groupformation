@@ -154,7 +154,7 @@ class mod_groupformation_test_user_generator {
                         foreach (array_values($questions2) as $key => $question) {
                             $options = $question->options;
 
-                            if ($category == 'points'){
+                            if ($category == 'points') {
                                 $options = array(
                                         $store->get_max_points() => get_string('excellent', 'groupformation'),
                                         0 => get_string('bad', 'groupformation'));

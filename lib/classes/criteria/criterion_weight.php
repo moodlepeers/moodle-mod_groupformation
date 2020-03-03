@@ -40,7 +40,6 @@ class mod_groupformation_criterion_weight {
     /** @var mod_groupformation_hash_map This hash map contains all criterion weights */
     public static $criterionweights;
 
-
     /**
      * Initializes the weights.
      */
@@ -66,7 +65,6 @@ class mod_groupformation_criterion_weight {
         static::$criterionweights->add($k, $v);
         return true;
     }
-
 
     /**
      * Changing CriterionWeights; only allowed if keys are equal to existing ones and the sum of all weights is 1.

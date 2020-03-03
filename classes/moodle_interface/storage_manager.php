@@ -48,7 +48,7 @@ class mod_groupformation_storage_manager {
     /** @var mod_groupformation_state_machine State machine */
     public $statemachine;
 
-    /** @var mod_groupformation_user_state_machine User State machine*/
+    /** @var mod_groupformation_user_state_machine User State machine */
     public $userstatemachine;
 
     /**
@@ -105,7 +105,7 @@ class mod_groupformation_storage_manager {
     public function all_answers_required() {
         global $DB;
 
-        return boolval($DB->get_field('groupformation', 'allanswersrequired', array('id' => $this->groupformationid )));
+        return boolval($DB->get_field('groupformation', 'allanswersrequired', array('id' => $this->groupformationid)));
     }
 
     /**
@@ -306,8 +306,9 @@ class mod_groupformation_storage_manager {
     public function get_number_binchoices() {
         global $DB;
         return $DB->get_field('groupformation', 'binquestionnumber', array(
-            'id' => $this->groupformationid));
+                'id' => $this->groupformationid));
     }
+
     /**
      * Returns the number of questions in a specified category
      *
@@ -319,8 +320,8 @@ class mod_groupformation_storage_manager {
         global $DB;
 
         if ($category == 'binquestion' && ($DB->get_field('groupformation', $category . 'number', array(
-                'id' => $this->groupformationid
-            )) >= 1)) {
+                                'id' => $this->groupformationid
+                        )) >= 1)) {
             return 1; // TODO absprechen ob so okay
         }
         if ($category == 'topic' || $category == 'knowledge' || $category == 'binquestion') {
@@ -341,13 +342,13 @@ class mod_groupformation_storage_manager {
      * @return mixed
      * @throws dml_exception
      */
-    public function get_question_number($category = null){
+    public function get_question_number($category = null) {
         global $DB;
 
-        if ($category == 'binquesiton'){
+        if ($category == 'binquesiton') {
             if ($DB->get_field('groupformation', $category . 'number', array(
-                    'id' => $this->groupformationid
-                )) >= 1){
+                            'id' => $this->groupformationid
+                    )) >= 1) {
                 return 1;
             }
         }
@@ -369,17 +370,16 @@ class mod_groupformation_storage_manager {
         ));
     }
 
-    public function get_binquestion_text(){
+    public function get_binquestion_text() {
         global $DB;
 
         return $DB->get_field('groupformation', 'binquestiontext', array('id' => $this->groupformationid));
     }
 
-//    public function get_binquestion_multiselect(){
-//        global $DB;
-//
-//        return $DB->get_field('groupformation', 'binquestionmultiselect', array('id' => $this->groupformationid));
-//    }
+    // public function get_binquestion_multiselect(){
+    // global $DB;
+    // return $DB->get_field('groupformation', 'binquestionmultiselect', array('id' => $this->groupformationid));
+    // }
     /**
      * Returns max number of options for a specific question in a specific category
      *
@@ -504,7 +504,6 @@ class mod_groupformation_storage_manager {
     public function get_categories() {
         $categoryset = $this->get_raw_categories();
         $categories = array();
-
 
         $hasknowledge = $this->get_number('knowledge');
         if ($this->ask_for_knowledge() && $hasknowledge != 0) {
@@ -960,7 +959,7 @@ class mod_groupformation_storage_manager {
     public function ask_for_binquestion() {
         global $DB;
         $evaluationmethod = $DB->get_field('groupformation', 'binquestion', array(
-            'id' => $this->groupformationid
+                'id' => $this->groupformationid
         ));
 
         return $evaluationmethod == 1;
@@ -1163,7 +1162,7 @@ class mod_groupformation_storage_manager {
 
         $lang = get_string('language', 'groupformation');
 
-        if ($category == 'binquestion'){
+        if ($category == 'binquestion') {
             $temp = $this->get_knowledge_or_topic_values($category);
             $xmlcontent = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>';
             $options = mod_groupformation_util::xml_to_array($xmlcontent);
@@ -1176,11 +1175,11 @@ class mod_groupformation_storage_manager {
             $q->questionid = 1;
             $q->question = $questiontext;
             $q->options = $options;
-//            if ($this->get_binquestion_multiselect()){
-//                $q->type = 'multiselect';
-//            } else {
-                $q->type = $category;
-//            }
+            // if ($this->get_binquestion_multiselect()){
+            // $q->type = 'multiselect';
+            // } else {
+            $q->type = $category;
+            // }
 
             $question[0] = $q;
             return $question;
@@ -1198,7 +1197,7 @@ class mod_groupformation_storage_manager {
                 $q->questionid = $key + 1;
                 $q->question = $v;
                 $q->options = array(
-                    100 => get_string('excellent', 'groupformation'), 0 => get_string('none', 'groupformation'));
+                        100 => get_string('excellent', 'groupformation'), 0 => get_string('none', 'groupformation'));
                 $q->type = $category;
                 $v = $q;
             };
@@ -1383,7 +1382,6 @@ class mod_groupformation_storage_manager {
 
     }
 
-
     /**
      * Returns whether groupformation uses filtering due to dishonesty
      *
@@ -1500,13 +1498,13 @@ class mod_groupformation_storage_manager {
 
     /**
      * Returns weights of criteria
+     *
      * @return mixed
      */
     public function get_weights() {
         global $DB;
         return $DB->get_record('groupformation', array(
-            'id' => $this->groupformationid));
-
+                'id' => $this->groupformationid));
 
     }
 }

@@ -91,12 +91,13 @@ class mod_groupformation_question_table {
             $s .= '<thead>';
             $s .= '<tr>';
             $s .= '<th scope="col">';
-            if ($this->category == 'knowledge'){
+            if ($this->category == 'knowledge') {
                 $s .= 'Wie ist dein Ergebnis im Eingangstest?';
             } else {
                 $s .= get_string('tabletitle_' . $this->category . $addon, 'groupformation');
             }
-            // TODO if(category == 'knowledge')... else... wieder hierdurch ersetzen $s .= get_string('tabletitle_' . $this->category . $addon, 'groupformation');
+            // TODO if(category == 'knowledge')... else...
+            // TODO wieder hierdurch ersetzen $s .=get_string('tabletitle_' . $this->category . $addon, 'groupformation');
             $s .= '</th>';
             $s .= '<th scope="col" colspan="100%">';
             $s .= '</th>';

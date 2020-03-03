@@ -119,7 +119,8 @@ class mod_groupformation_import_export_view_controller extends mod_groupformatio
             $output .= '<div class="alert">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
         }
         if ($store->is_archived()) {
-            $output .= '<div class="alert" id="commited_view">' . get_string('archived_activity_answers', 'groupformation') . '</div>';
+            $output .= '<div class="alert" id="commited_view">' . get_string('archived_activity_answers', 'groupformation') .
+                    '</div>';
         } else {
             $output .= parent::render();
         }

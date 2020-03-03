@@ -38,7 +38,6 @@ defined('MOODLE_INTERNAL') || die();
  */
 abstract class mod_groupformation_criterion {
 
-
     /** @var string The name of an Criterion e.g. "learner style after Silvermann & Felder" */
     protected $name = "";
 
@@ -61,16 +60,14 @@ abstract class mod_groupformation_criterion {
     /**
      * @return string
      */
-    public function get_property()
-    {
+    public function get_property() {
         return $this->property;
     }
 
     /**
      * @param string $property
      */
-    public function set_property($property)
-    {
+    public function set_property($property) {
         $this->property = $property;
     }
 
@@ -126,7 +123,6 @@ abstract class mod_groupformation_criterion {
         return $this->value[$i];
     }
 
-
     /**
      * Returns values
      *
@@ -135,7 +131,6 @@ abstract class mod_groupformation_criterion {
     public function get_values() {
         return $this->value;
     }
-
 
     /**
      * Adds or replaces value at index. Checks for min/max value conformity
@@ -147,7 +142,7 @@ abstract class mod_groupformation_criterion {
     public function set_value($i, $v) {
         if ($v < $this->get_min_value() || $v > $this->get_max_value()) {
             throw new Exception("value (" . $v . ") is out of min/max value area! (" . $this->get_min_value() . " to " .
-                $this->get_max_value() . ") [" . $this->get_name() . "]");
+                    $this->get_max_value() . ") [" . $this->get_name() . "]");
         }
         $this->value[$i] = $v;
     }
@@ -164,7 +159,6 @@ abstract class mod_groupformation_criterion {
         }
     }
 
-
     /**
      * Returns max value
      *
@@ -173,7 +167,6 @@ abstract class mod_groupformation_criterion {
     public function get_max_value() {
         return $this->maxvalue;
     }
-
 
     /**
      * Sets max value
@@ -188,7 +181,6 @@ abstract class mod_groupformation_criterion {
         $this->maxvalue = $number;
     }
 
-
     /**
      * Returns min value
      *
@@ -198,7 +190,6 @@ abstract class mod_groupformation_criterion {
         return $this->minvalue;
     }
 
-
     /**
      * Sets min value
      *
@@ -207,7 +198,6 @@ abstract class mod_groupformation_criterion {
     public function set_min_value($number) {
         $this->minvalue = $number;
     }
-
 
     /**
      * Returns whether criterion is homogeneous or not
@@ -226,7 +216,6 @@ abstract class mod_groupformation_criterion {
     public function set_homogeneous($bool) {
         $this->homogeneous = $bool;
     }
-
 
     /**
      * Returns weight

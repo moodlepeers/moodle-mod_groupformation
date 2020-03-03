@@ -44,14 +44,12 @@ require_once($CFG->dirroot . '/mod/groupformation/lib/classes/criteria/tests/tes
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class mod_groupformation_evaluator implements mod_groupformation_ievaluator
-{
+class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
 
     /**
      * mod_groupformation_evaluator constructor.
      */
-    public function __construct()
-    {
+    public function __construct() {
     }
 
     /**
@@ -73,8 +71,7 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator
      * @return float|int
      * @throws Exception
      */
-    public function evaluate_gpi(mod_groupformation_group $group)
-    {
+    public function evaluate_gpi(mod_groupformation_group $group) {
         // All Normalized paar performance indices of a Group
         $npis = array(); // Generic List: float.
 
@@ -87,14 +84,13 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator
             return 0;
         }
 
-
         // Calculate npi for every pair of entries in the  group g (but not double and not compare with oneself!)
         for ($i = 0;
-             $i < $participantcount - 1;
-             $i++) {
+                $i < $participantcount - 1;
+                $i++) {
             for ($j = $i + 1;
-                 $j < $participantcount;
-                 $j++) {
+                    $j < $participantcount;
+                    $j++) {
                 // Calulate normlizedPaarperformance index.
                 $npi = $this->calc_normalized_pair_performance($participants[$i], $participants[$j]);
                 $npis[] = $npi;
@@ -104,22 +100,22 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator
         //TODO implement one against group when both bin types functions are in use
         // calculate the npi for once against group functions
         // get the last participants and compare it against the group
-//        $p = $participants[$participantcount - 1];
-//        foreach ($p->get_criteria() as $c) {
-//            // all once against group function starts with both_bin_types
-//            // check if a function is available in this criterion
-//            if (strpos($c->get_distance(), 'both_bin_types') === 0) {
-//                $npi = $this->calc_normalized_one_against_group_performance($c, $group);
-//                $npis[] = $npi;
-//            }
-//        }
+        // $p = $participants[$participantcount - 1];
+        // foreach ($p->get_criteria() as $c) {
+        // // all once against group function starts with both_bin_types
+        // // check if a function is available in this criterion
+        // if (strpos($c->get_distance(), 'both_bin_types') === 0) {
+        // $npi = $this->calc_normalized_one_against_group_performance($c, $group);
+        // $npis[] = $npi;
+        // }
+        // }
 
-        //once against all
+        // once against all
         $group->results = $this->get_performance_index($npis);
         $gpi = $group->results->performanceindex;
         $group->set_gpi($gpi);
         return $gpi;
-// TODO Test functionality  (yes!); Issue #3.
+        // TODO Test functionality  (yes!); Issue #3.
     }
 
     /**
@@ -128,9 +124,7 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator
      * @param mod_groupformation_cohort $cohort
      * @return double
      */
-    public
-    function evaluate_cpi(mod_groupformation_cohort $cohort)
-    {
+    public function evaluate_cpi(mod_groupformation_cohort $cohort) {
         if (count($cohort->groups) == 0) {
             return 0;
         }
@@ -150,15 +144,13 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator
      * @param array $performanceindices (generic List)
      * @return mod_groupformation_stats
      */
-    public
-    static function get_performance_index($performanceindices)
-    {
+    public static function get_performance_index($performanceindices) {
         if (count($performanceindices) < 1) {
             return new mod_groupformation_stats();
         }
 
         // Calculate avergae of NPIs
-        $avg = ((float)array_sum($performanceindices)) / count($performanceindices); // float.
+        $avg = ((float) array_sum($performanceindices)) / count($performanceindices); // float.
 
         // Calculate standard deviation   (which is all diffs of elements and avg squared and finally summed up.
         $sumquadraticerrors = 0.0; // Double.
@@ -167,7 +159,7 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator
             $sumquadraticerrors += pow($diff, 2);
         }
 
-        $stddev = (float)0.0;
+        $stddev = (float) 0.0;
 
         // Standard deaviation of all npi values (NPIs) in one Groups.
         if (count($performanceindices) != 1) {
@@ -209,9 +201,7 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator
      * @return float
      * @throws Exception
      */
-    public
-    function calc_normalized_pair_performance(mod_groupformation_participant $p1, mod_groupformation_participant $p2)
-    {
+    public function calc_normalized_pair_performance(mod_groupformation_participant $p1, mod_groupformation_participant $p2) {
         // The summed distances of all hommogeneous values.
         $homval = 0.0; // float
         // The summed distances of all heterogeneous values.
@@ -291,9 +281,8 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator
      * @return float|int
      * @throws Exception
      */
-    public
-    function calc_normalized_one_against_group_performance(mod_groupformation_criterion $c1, mod_groupformation_group $group)
-    {
+    public function calc_normalized_one_against_group_performance(mod_groupformation_criterion $c1,
+            mod_groupformation_group $group) {
         // The summed distances of all hommogeneous values.
         $homval = 0.0; // float
         // The summed distances of all heterogeneous values.
@@ -302,8 +291,7 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator
         $type = $c1->get_type();
         $property = $c1->get_property();
 
-
-        //Example array for a criterion $c1 = [0,0,1,0]
+        // Example array for a criterion $c1 = [0,0,1,0]
 
         $group_value = array(); // array for values of all group criteria
 
@@ -319,12 +307,11 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator
             }
         }
 
-
         switch ($c1->get_distance()) { //get_distance is the fitness function of a criterion example: as few bins as possible
             case "both_bin_types_bins_covered_distance":
                 $t = $c1->get_t(); // target bin coverage
                 $d = $c1->get_d(); //is between 0 and 1 example: 0.5
-                $M = count($c1->get_values()); // maximum number of bins that could be covered
+                $m = count($c1->get_values()); // maximum number of bins that could be covered
 
                 // get the number of bins who is covered. covered means at least one student has chosen
                 $b = 0;
@@ -337,21 +324,21 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator
                 if ($property == "most") {
                     if (0 <= $b && $b < $t) {
                         $distance = 1 - (1 - d) * ($b / $t);
-                    } else if ($t <= $b && $b <= $M) {
-                        $distance = $d * (($M - $b) / ($M - $t));
+                    } else if ($t <= $b && $b <= $m) {
+                        $distance = $d * (($m - $b) / ($m - $t));
                     }
 
                     // at least t bins covered
                 } else if ($property == "least") {
                     if (0 <= $b && $b < $t) {
                         $distance = $d * ($b / $t);
-                    } else if ($t <= $b && $b <= $M) {
-                        $distance = $d + (1 - $d) * (($b - $t) / ($M - $t));
+                    } else if ($t <= $b && $b <= $m) {
+                        $distance = $d + (1 - $d) * (($b - $t) / ($m - $t));
                     }
                 }
             case "both_bin_types_bins_as_possible":
 
-                $M = count($c1->get_values()); // maximum number of bins that could be covered
+                $m = count($c1->get_values()); // maximum number of bins that could be covered
 
                 // get the number of bins who is covered. covered means at least one student has chosen
                 $b = 0;
@@ -363,13 +350,12 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator
 
                 // as many bins as possible
                 if ($property == "many") {
-                    $distance = $b / $M;
+                    $distance = $b / $m;
                     // as few bins as possible
                 } else if ($property == "few") {
-                    $distance = 1 - ($b / $M);
+                    $distance = 1 - ($b / $m);
                 }
             case "both_bin_types_members_in_bin":
-
 
         }
 
@@ -384,7 +370,6 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator
         return $this->calc_npi_with_weight($c1, $hetval, $homval);
     }
 
-
     /**
      * calculate npi value depends of the criterion weight for groups
      *
@@ -393,9 +378,7 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator
      * @param $homval
      * @return float|int
      */
-    public
-    function calc_npi_with_weight($c, $hetval, $homval)
-    {
+    public function calc_npi_with_weight($c, $hetval, $homval) {
         $pairperformanceindex = $hetval - $homval;
         $maxdist = 0.0; // Float.
         // Worst case Heterogen criteria is 0 and hom is 1 than the value for pairperformanceindex < 0.
@@ -408,7 +391,6 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator
             $hommaxdist += 1 * $c->get_weight();
         }
         $maxdist += 1 * $c->get_weight();
-
 
         return ($pairperformanceindex + $hommaxdist) / $maxdist;
     }

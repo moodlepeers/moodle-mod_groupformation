@@ -1,13 +1,10 @@
 <?php
 
-
-class mod_groupformation_fake_participants
-{
+class mod_groupformation_fake_participants {
     /**
      * calling the different test cases
      */
-    public function create()
-    {
+    public function create() {
         try {
             $this->one_of_bin_test_1();
             $this->one_of_bin_test_2();
@@ -23,11 +20,11 @@ class mod_groupformation_fake_participants
 
     /**
      * normalized participants
+     *
      * @param $participants
      * @return array
      */
-    private function call_normalized_function($participants)
-    {
+    private function call_normalized_function($participants) {
         // All Normalized paar performance indices of a Group
         $npis = array(); // Generic List: float.
 
@@ -50,24 +47,23 @@ class mod_groupformation_fake_participants
 
     /**
      *  create participants and add the one of bin criterion
-     * @param $valueArray
+     *
+     * @param $valuearray
      * @return array
      */
-    private function create_one_of_bin($valueArray)
-    {
+    private function create_one_of_bin($valuearray) {
         try {
             $participants = array();
 
-            for ($i = 0; count($participants) < count($valueArray); $i++) {
+            for ($i = 0; count($participants) < count($valuearray); $i++) {
                 $participant = new mod_groupformation_participant();
                 array_push($participants, $participant);
             }
 
-
             for ($i = 0; $i < count($participants); $i++) {
                 $c = new mod_groupformation_one_of_bin_criterion(
-                    "one_of_bin", array(), 0, 1, true, 0.3);
-                $c->set_values($valueArray[$i]);
+                        "one_of_bin", array(), 0, 1, true, 0.3);
+                $c->set_values($valuearray[$i]);
                 $participants[$i]->add_criterion($c);
             }
 
@@ -79,18 +75,17 @@ class mod_groupformation_fake_participants
     }
 
     // print the result of the test cases
-    private function print_result($name, $values, $expected, $participants)
-    {
+    private function print_result($name, $values, $expected, $participants) {
 
-        print_r("#### " . $name . " ####");
+       // print_r("#### " . $name . " ####");
         echo '<br/>';
         for ($i = 0; $i < count($values); $i++) {
             print_r(json_encode($values[$i]));
             echo '<br/>';
         }
-        print_r("expected result: " . $expected);
+        // print_r("expected result: " . $expected);
         echo '<br/>';
-        print_r("result npi: " . json_encode($this->call_normalized_function($participants)));
+        // print_r("result npi: " . json_encode($this->call_normalized_function($participants)));
         echo '<br/>';
         echo '<br/>';
     }
@@ -101,85 +96,77 @@ class mod_groupformation_fake_participants
     /**
      * test case 1 compare two different participants
      */
-    private function one_of_bin_test_1()
-    {
-        $valueArray = array();
-        array_push($valueArray, [1, 0, 0, 0]);
-        array_push($valueArray, [0, 1, 0, 0]);
+    private function one_of_bin_test_1() {
+        $valuearray = array();
+        array_push($valuearray, [1, 0, 0, 0]);
+        array_push($valuearray, [0, 1, 0, 0]);
 
-        $participants = $this->create_one_of_bin($valueArray);
-        $this->print_result(__FUNCTION__, $valueArray, 1, $participants);
+        $participants = $this->create_one_of_bin($valuearray);
+        $this->print_result(__FUNCTION__, $valuearray, 1, $participants);
     }
 
     /**
      * test case 2 compare two different participants
      */
-    private function one_of_bin_test_2()
-    {
-        $valueArray = array();
-        array_push($valueArray, [1, 0, 0, 0]);
-        array_push($valueArray, [1, 0, 0, 0]);
+    private function one_of_bin_test_2() {
+        $valuearray = array();
+        array_push($valuearray, [1, 0, 0, 0]);
+        array_push($valuearray, [1, 0, 0, 0]);
 
-        $participants = $this->create_one_of_bin($valueArray);
-        $this->print_result(__FUNCTION__, $valueArray, 0, $participants);
+        $participants = $this->create_one_of_bin($valuearray);
+        $this->print_result(__FUNCTION__, $valuearray, 0, $participants);
     }
-
 
     /**
      * test case 3 compare three different participants
      */
-    private function one_of_bin_test_3()
-    {
-        $valueArray = array();
-        array_push($valueArray, [1, 0, 0, 0]);
-        array_push($valueArray, [1, 0, 0, 0]);
-        array_push($valueArray, [0, 0, 0, 0]);
+    private function one_of_bin_test_3() {
+        $valuearray = array();
+        array_push($valuearray, [1, 0, 0, 0]);
+        array_push($valuearray, [1, 0, 0, 0]);
+        array_push($valuearray, [0, 0, 0, 0]);
 
-        $participants = $this->create_one_of_bin($valueArray);
-        $this->print_result(__FUNCTION__, $valueArray, 0, $participants);
+        $participants = $this->create_one_of_bin($valuearray);
+        $this->print_result(__FUNCTION__, $valuearray, 0, $participants);
     }
 
     /**
      * test case 4 compare three different participants
      */
-    private function one_of_bin_test_4()
-    {
-        $valueArray = array();
-        array_push($valueArray, [1, 0, 0, 0]);
-        array_push($valueArray, [0, 0, 0, 0]);
-        array_push($valueArray, [1, 0, 0, 0]);
+    private function one_of_bin_test_4() {
+        $valuearray = array();
+        array_push($valuearray, [1, 0, 0, 0]);
+        array_push($valuearray, [0, 0, 0, 0]);
+        array_push($valuearray, [1, 0, 0, 0]);
 
-        $participants = $this->create_one_of_bin($valueArray);
-        $this->print_result(__FUNCTION__, $valueArray, 0, $participants);
+        $participants = $this->create_one_of_bin($valuearray);
+        $this->print_result(__FUNCTION__, $valuearray, 0, $participants);
     }
 
     /**
      * test case 5 compare three different participants
      */
-    private function one_of_bin_test_5()
-    {
-        $valueArray = array();
-        array_push($valueArray, [0, 0, 1, 0]);
-        array_push($valueArray, [0, 0, 1, 0]);
-        array_push($valueArray, [0, 0, 1, 0]);
+    private function one_of_bin_test_5() {
+        $valuearray = array();
+        array_push($valuearray, [0, 0, 1, 0]);
+        array_push($valuearray, [0, 0, 1, 0]);
+        array_push($valuearray, [0, 0, 1, 0]);
 
-        $participants = $this->create_one_of_bin($valueArray);
-        $this->print_result(__FUNCTION__, $valueArray, 0, $participants);
+        $participants = $this->create_one_of_bin($valuearray);
+        $this->print_result(__FUNCTION__, $valuearray, 0, $participants);
     }
-
 
     /**
      * test case 6 compare four different participants
      */
-    private function one_of_bin_test_6()
-    {
-        $valueArray = array();
-        array_push($valueArray, [1, 0, 0, 0]);
-        array_push($valueArray, [0, 1, 0, 0]);
-        array_push($valueArray, [0, 0, 1, 0]);
-        array_push($valueArray, [0, 0, 0, 1]);
+    private function one_of_bin_test_6() {
+        $valuearray = array();
+        array_push($valuearray, [1, 0, 0, 0]);
+        array_push($valuearray, [0, 1, 0, 0]);
+        array_push($valuearray, [0, 0, 1, 0]);
+        array_push($valuearray, [0, 0, 0, 1]);
 
-        $participants = $this->create_one_of_bin($valueArray);
-        $this->print_result(__FUNCTION__, $valueArray, 1, $participants);
+        $participants = $this->create_one_of_bin($valuearray);
+        $this->print_result(__FUNCTION__, $valuearray, 1, $participants);
     }
 }

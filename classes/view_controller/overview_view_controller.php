@@ -50,7 +50,7 @@ class mod_groupformation_overview_view_controller extends mod_groupformation_bas
      */
     public function __construct($groupformationid, $controller) {
         parent::__construct($groupformationid, $controller);
-        $this->view->assign('title_append', " - ".$this->store->get_name());
+        $this->view->assign('title_append', " - " . $this->store->get_name());
     }
 
     /**
@@ -157,13 +157,13 @@ class mod_groupformation_overview_view_controller extends mod_groupformation_bas
                     // If math prep course, divide participants into A/B sampling groups.
                     if (mod_groupformation_data::is_math_prep_course_mode()) {
                         // TODO scientific studies A/B sampling groups.
-                        //$groupsmanager->assign_to_groups_a_and_b($userid);
+                        // $groupsmanager->assign_to_groups_a_and_b($userid);
                     }
                 }
 
                 // Redirect.
                 $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
-                    'id' => $id));
+                        'id' => $id));
                 redirect($returnurl);
             }
         }

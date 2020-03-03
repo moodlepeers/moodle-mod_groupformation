@@ -98,7 +98,6 @@ class mod_groupformation_criterion_calculator {
         foreach ($criteriaspecs as $criterion => $spec) {
             if (!is_null($spec)) {
 
-
                 $scenarios = $spec['scenarios'];
                 $validscenario = in_array($this->scenario, $scenarios);
                 $validforeval = !$eval || array_key_exists('evaluation', $spec);
@@ -110,14 +109,12 @@ class mod_groupformation_criterion_calculator {
 
                     $positions = array();
 
-                    // Check for each label of a criterion
-                    // Either validscenario or validforeval
+                    // Check for each label of a criterion.
+                    // Either validscenario or validforeval.
                     foreach ($labels as $label => $specs) {
-
 
                         $validscenario = array_key_exists($this->scenario, $specs['scenarios']);
                         $validforeval = (!$eval || (array_key_exists('evaluation', $specs) && $specs['evaluation']));
-
 
                         if ($validscenario && $validforeval) {
                             if (array_key_exists('significant_id_only', $specs) && $specs['significant_id_only']) {
@@ -251,7 +248,7 @@ class mod_groupformation_criterion_calculator {
                         if ($this->usermanager->has_answer($userid, $category, $questionid)) {
                             $singleanswer = $this->usermanager->get_single_answer($userid, $category, $questionid);
                             $temp = $temp + $this->invert_answer($questionid, $category,
-                                    $singleanswer);
+                                            $singleanswer);
                         }
                     } else {
                         if ($this->usermanager->has_answer($userid, $category, $questionid)) {
@@ -335,16 +332,16 @@ class mod_groupformation_criterion_calculator {
             $values = array(1.0, 0.0);
             if ($value == 1) {
                 $values = array(
-                    1.0, 0.0);
+                        1.0, 0.0);
             } else if ($value == 2) {
                 $values = array(
-                    0.0, 1.0);
+                        0.0, 1.0);
             } else if ($value == 3) {
                 $values = array(
-                    1.0, 0.5);
+                        1.0, 0.5);
             } else if ($value == 4) {
                 $values = array(
-                    0.5, 1.0);
+                        0.5, 1.0);
             }
 
             $tmp = array();
@@ -440,43 +437,41 @@ class mod_groupformation_criterion_calculator {
         $array = array();
         $category = $specs['category'];
 
-        $questiontype = $this->usermanager->get_binquestionmultiselect(); // 0 := singlechoice; 1 := multiselect
+        $questiontype = $this->usermanager->get_binquestionmultiselect(); // 0 := singlechoice; 1 := multiselect.
         $number_of_choices = floatval($this->store->get_number_binchoices());
-        $answers = $this->usermanager->get_single_answer($userid, $category,1);
+        $answers = $this->usermanager->get_single_answer($userid, $category, 1);
         $answers = str_replace('list:', '', $answers);
         $answer_array = str_getcsv($answers);
         $cur_index_answers = 0;
         $binvalue = '';
-        $importance = floatval($this->usermanager->get_binquestionimportance())/10;
+        $importance = floatval($this->usermanager->get_binquestionimportance()) / 10;
 
-        if ($questiontype == 0){
+        if ($questiontype == 0) {
             $answer_array[0] -= 1;
         }
 
         for ($i = 0; $i < $number_of_choices; $i++) { // Creates an array in a vector-form with 0 and 1 as entries like "0,1,1,0,0"
-            if ($i == $answer_array[$cur_index_answers]){
+            if ($i == $answer_array[$cur_index_answers]) {
                 $binvalue .= '1';
                 $cur_index_answers++;
             } else {
                 $binvalue .= '0';
             }
-            if (($i+1) < $number_of_choices){
+            if (($i + 1) < $number_of_choices) {
                 $binvalue .= ',';
             }
         }
 
-
-
         // Iterate over labels of criterion.
-        foreach ($labels as $key => $spec) { // maybe later there are more than one binquestion per groupformation
+        foreach ($labels as $key => $spec) { // maybe later there are more than one binquestion per groupformation.
             if (($questiontype == 0 && $key == 'singlechoice') || ($questiontype == 1 && $key == 'multiselect')) {
                 $binquestionvalues = array();
 
                 if (array_key_exists($scenario, $spec['scenarios'])) {
 
                     $binquestionvalues [] = array(
-                        'binvalue' => $binvalue,
-                        'importance' => $importance
+                            'binvalue' => $binvalue,
+                            'importance' => $importance
                     );
                 }
 
@@ -714,12 +709,12 @@ class mod_groupformation_criterion_calculator {
         }
 
         $eval = array(
-            array(
-                "name" => "first_page",
-                "mode" => "text",
-                "caption" => get_string("eval_first_page_title", "groupformation"),
-                "text" => get_string("eval_first_page_text", "groupformation")
-            )
+                array(
+                        "name" => "first_page",
+                        "mode" => "text",
+                        "caption" => get_string("eval_first_page_title", "groupformation"),
+                        "text" => get_string("eval_first_page_text", "groupformation")
+                )
         );
         $criteria = $this->store->get_label_set();
         foreach ($criteria as $criterion) {
@@ -743,13 +738,13 @@ class mod_groupformation_criterion_calculator {
                 }
 
                 $eval[] = array(
-                    "name" => $criterion,
-                    "directions" => $directions,
-                    "mode" => "chart",
-                    "caption" => get_string('eval_name_' . $criterion, 'groupformation'),
-                    "values" => $vals,
-                    "bars" => $bars,
-                    "criteria" => $array
+                        "name" => $criterion,
+                        "directions" => $directions,
+                        "mode" => "chart",
+                        "caption" => get_string('eval_name_' . $criterion, 'groupformation'),
+                        "values" => $vals,
+                        "bars" => $bars,
+                        "criteria" => $array
                 );
 
             }
@@ -867,10 +862,10 @@ class mod_groupformation_criterion_calculator {
         $a->completed = $completed;
         $a->coursesize = $coursesize;
         $captions = array(
-            "cutoffCaption" => get_string("eval_cutoff_caption_" . $label, "groupformation"),
-            "maxCaption" => get_string("eval_max_caption_" . $label, "groupformation"),
-            "maxText" => get_string("eval_max_text_" . $label, "groupformation"),
-            "finalText" => (($setfinaltext) ? get_string("eval_final_text", "groupformation", $a) : null)
+                "cutoffCaption" => get_string("eval_cutoff_caption_" . $label, "groupformation"),
+                "maxCaption" => get_string("eval_max_caption_" . $label, "groupformation"),
+                "maxText" => get_string("eval_max_text_" . $label, "groupformation"),
+                "finalText" => (($setfinaltext) ? get_string("eval_final_text", "groupformation", $a) : null)
         );
         if ($mode == 2) {
             $captions["mean"] = 0.5;
@@ -905,10 +900,10 @@ class mod_groupformation_criterion_calculator {
     public function read_values_for_user($criterion, $userid) {
         global $DB;
         $recs = $DB->get_records('groupformation_user_values',
-            array('groupformationid' => $this->groupformationid,
-                'userid' => $userid,
-                'criterion' => $criterion
-            )
+                array('groupformationid' => $this->groupformationid,
+                        'userid' => $userid,
+                        'criterion' => $criterion
+                )
         );
 
         $array = array();
@@ -919,14 +914,14 @@ class mod_groupformation_criterion_calculator {
             if (!array_key_exists('values', $array[$rec->label])) {
                 $array[$rec->label]['values'] = array();
             }
-            if ($criterion == "binquestion"){
+            if ($criterion == "binquestion") {
                 $array[$rec->label]['values'] = explode(',', $rec->binvalue);
             } else {
                 $array[$rec->label]['values'][$rec->dimension] = floatval($rec->value);
             }
         }
-        if ($criterion == "knowledge"){
-            $array = array("two"=> array("values" => array($array["two"]["values"][0] / $array["two"]["values"][1])));
+        if ($criterion == "knowledge") {
+            $array = array("two" => array("values" => array($array["two"]["values"][0] / $array["two"]["values"][1])));
         }
         return $array;
     }

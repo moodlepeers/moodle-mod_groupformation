@@ -30,7 +30,6 @@ require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/grouping.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 
-
 /**
  * Class mod_groupformation_basic_grouping
  *
@@ -39,8 +38,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/stora
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class mod_groupformation_basic_grouping extends mod_groupformation_grouping
-{
+class mod_groupformation_basic_grouping extends mod_groupformation_grouping {
 
     /** @var int ID of module instance */
     public $groupformationid;
@@ -63,8 +61,7 @@ class mod_groupformation_basic_grouping extends mod_groupformation_grouping
      * @param int $groupformationid
      * @throws dml_exception
      */
-    public function __construct($groupformationid)
-    {
+    public function __construct($groupformationid) {
         $this->groupformationid = $groupformationid;
         $this->usermanager = new mod_groupformation_user_manager($groupformationid);
         $this->store = new mod_groupformation_storage_manager($groupformationid);
@@ -80,10 +77,9 @@ class mod_groupformation_basic_grouping extends mod_groupformation_grouping
      * @return array
      * @throws dml_exception
      */
-    public function run_grouping($users)
-    {
+    public function run_grouping($users) {
         $configurations = array(
-            "groupal:1" => array(),
+                "groupal:1" => array(),
         );
 
         $weights = $this->get_weights();
@@ -128,10 +124,10 @@ class mod_groupformation_basic_grouping extends mod_groupformation_grouping
     /**
      * get weigth of binquestion from database
      * and set weight for other criterion to 1
+     *
      * @return array
      */
-    public function get_weights()
-    {
+    public function get_weights() {
         $weights = [];
         $labels = $this->store->get_label_set();
         foreach ($labels as $label) {

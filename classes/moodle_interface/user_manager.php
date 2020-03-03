@@ -124,6 +124,7 @@ class mod_groupformation_user_manager {
 
     /**
      * Returns record of groupformation_users instance
+     *
      * @param int $userid
      * @return mixed
      * @throws dml_exception
@@ -215,9 +216,9 @@ class mod_groupformation_user_manager {
     public function init($userid) {
         global $DB;
         if ($DB->count_records('groupformation_users', array(
-                'groupformation' => $this->groupformationid,
-                'userid' => $userid
-        )) == 0
+                        'groupformation' => $this->groupformationid,
+                        'userid' => $userid
+                )) == 0
         ) {
             $data = new stdClass ();
             $data->groupformation = $this->groupformationid;
@@ -319,7 +320,8 @@ class mod_groupformation_user_manager {
     public function is_completed($userid) {
         global $DB;
 
-        return $DB->get_field('groupformation_users', 'completed', array('groupformation' => $this->groupformationid, 'userid' => $userid));
+        return $DB->get_field('groupformation_users', 'completed',
+                array('groupformation' => $this->groupformationid, 'userid' => $userid));
     }
 
     /**
@@ -397,13 +399,14 @@ class mod_groupformation_user_manager {
 
         return false;
     }
-    //TODO entfernen
-    public function binanswers_help($userid, $category, $sortedby = null, $fieldset = '*'){
+
+    // TODO entfernen
+    public function binanswers_help($userid, $category, $sortedby = null, $fieldset = '*') {
         global $DB;
         return $DB->get_records('groupformation_answers', array(
-            'groupformation' => $this->groupformationid,
-            'userid' => $userid,
-            'category' => $category
+                'groupformation' => $this->groupformationid,
+                'userid' => $userid,
+                'category' => $category
         ), $sortedby, $fieldset);
     }
 
@@ -751,7 +754,7 @@ class mod_groupformation_user_manager {
                 foreach ($uservalues as $label => $values) {
                     $values = $values['values'];
                     foreach ($values as $dimension => $value) {
-                        if ($criterion == 'binquestion'){
+                        if ($criterion == 'binquestion') {
                             $record = new stdClass();
                             $record->groupformationid = $this->groupformationid;
                             $record->userid = $userid;
@@ -848,8 +851,8 @@ class mod_groupformation_user_manager {
     public function set_complete($userid, $value) {
         global $DB;
         $data = $DB->get_record('groupformation_users', array(
-            'groupformation' => $this->groupformationid,
-            'userid' => $userid
+                'groupformation' => $this->groupformationid,
+                'userid' => $userid
         ));
         $data->completed = intval($value);
         $data->timecompleted = time();
@@ -937,11 +940,11 @@ class mod_groupformation_user_manager {
      * @return mixed
      * @throws dml_exception
      */
-    public function get_binquestionmultiselect(){
-        global  $DB;
+    public function get_binquestionmultiselect() {
+        global $DB;
 
         return $DB->get_field('groupformation', 'binquestionmultiselect', array(
-            'id' => $this->groupformationid
+                'id' => $this->groupformationid
         ));
     }
 
@@ -951,11 +954,11 @@ class mod_groupformation_user_manager {
      * @return mixed
      * @throws dml_exception
      */
-    public function get_binquestionimportance(){
-        global  $DB;
+    public function get_binquestionimportance() {
+        global $DB;
 
         return $DB->get_field('groupformation', 'binquestionimportance', array(
-            'id' => $this->groupformationid
+                'id' => $this->groupformationid
         ));
     }
 }
