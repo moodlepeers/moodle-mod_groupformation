@@ -42,4 +42,4 @@ $settings->add(new admin_setting_configcheckbox('groupformation/import_export',
 $settings->add(new admin_setting_configcheckbox('groupformation/participant_code',
     get_string('settings_participant_code', 'groupformation'),
     get_string('settings_participant_code_description', 'groupformation'),
-    1));
+    0));

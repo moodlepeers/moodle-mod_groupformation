@@ -177,7 +177,7 @@ class mod_groupformation_import_export_controller {
 
         $a = new stdClass();
         $a->archivedays = get_config('groupformation', 'archiving_time');
-        $assigns['consenttext'] = get_string('consent_message', 'groupformation', $a);
+        $assigns['consenttext'] = get_string('consent_message_new', 'groupformation', $a);
 
         $assigns['export_all_description'] = get_string('export_all_description', 'groupformation');
         $assigns['export_all_data_url_false'] = $this->generate_all_data_url($userid);

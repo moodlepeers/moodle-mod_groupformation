@@ -489,8 +489,10 @@ $string ['consent_alert_message'] = 'You need give consent before accessing the 
 $string ['consent_opt_in'] = 'Consent (opt-in)';
 $string ['consent_header'] = 'I want to participate in the groupformation plugin and agree to submit answers to the questionnaire. The participation or non-participation has no impact on the grading process (or the credit points).';
 $string ['consent_header_import'] = 'By importing your answers, you agree to participate in the groupformation plugin and you agree to submit answers to the questionnaire. The participation or non-participation has no impact on the grading process (or the credit points).';
-$string ['consent_message'] = '<ul><li>
+$string ['consent_message_new'] = '<ul><li>
 The instructor has no direct access to my answers for the group formation (just I am able to access the evaluation about my personality as well as the group average).
+</li><li>
+My personal data will be paired through the matriculation number and will be pseudonymized afterwards. Identification of individuals through pseudonymized data will not be possible.
 </li><li>
 My personal data will be deleted when the course ends - latest after {$a->archivedays} days.</li></ul>';
 $string ['consent_agree'] = 'I agree to the terms';
