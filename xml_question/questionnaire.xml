@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<questionnaire version="2020013102">
+<questionnaire version="2020030403">
     <categories>
         <category>grade</category>
         <category>points</category>
         <category>self</category>
         <category>character</category>
         <category>demographic</category>
+        <category>team</category>
         <category>topic</category>
     </categories>
     <scenarios>
@@ -16,6 +17,7 @@
                 <category>points</category>
                 <category>self</category>
                 <category>character</category>
+                <category>team</category>
                 <category>demographic</category>
                 <category>topic</category>
             </categories>
@@ -27,6 +29,7 @@
                 <category>points</category>
                 <category>self</category>
                 <category>character</category>
+                <category>team</category>
                 <category>demographic</category>
                 <category>topic</category>
             </categories>
