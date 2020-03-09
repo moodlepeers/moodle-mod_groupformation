@@ -438,26 +438,26 @@ class mod_groupformation_criterion_calculator {
         $category = $specs['category'];
 
         $questiontype = $this->usermanager->get_binquestionmultiselect(); // 0 := singlechoice; 1 := multiselect.
-        $number_of_choices = floatval($this->store->get_number_binchoices());
+        $numberofchoices = floatval($this->store->get_number_binchoices());
         $answers = $this->usermanager->get_single_answer($userid, $category, 1);
         $answers = str_replace('list:', '', $answers);
-        $answer_array = str_getcsv($answers);
-        $cur_index_answers = 0;
+        $answerarray = str_getcsv($answers);
+        $curindexanswers = 0;
         $binvalue = '';
         $importance = floatval($this->usermanager->get_binquestionimportance()) / 10;
 
         if ($questiontype == 0) {
-            $answer_array[0] -= 1;
+            $answerarray[0] -= 1;
         }
 
-        for ($i = 0; $i < $number_of_choices; $i++) { // Creates an array in a vector-form with 0 and 1 as entries like "0,1,1,0,0"
-            if ($i == $answer_array[$cur_index_answers]) {
+        for ($i = 0; $i < $numberofchoices; $i++) { // Creates an array in a vector-form with 0 and 1 as entries like "0,1,1,0,0"
+            if ($i == $answerarray[$curindexanswers]) {
                 $binvalue .= '1';
-                $cur_index_answers++;
+                $curindexanswers++;
             } else {
                 $binvalue .= '0';
             }
-            if (($i + 1) < $number_of_choices) {
+            if (($i + 1) < $numberofchoices) {
                 $binvalue .= ',';
             }
         }

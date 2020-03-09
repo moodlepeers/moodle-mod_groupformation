@@ -107,7 +107,7 @@ class mod_groupformation_participant_parser {
                                 new mod_groupformation_one_of_bin_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
                         break;
                     // case "binquestion_multiselect ":
-                    //   $criterion = new mod_groupformation_many_of_bin_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
+                    // $criterion = new mod_groupformation_many_of_bin_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
                     // break;
                     // case "both_bin_types_bins_covered":
                     // $criterion = new mod_groupformation_both_bin_types_bins_covered_criterion($label, $value, $minval, $maxval, $homogen, $weight);

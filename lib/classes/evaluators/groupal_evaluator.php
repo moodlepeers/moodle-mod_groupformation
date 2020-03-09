@@ -97,7 +97,7 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
             }
         }
 
-        //TODO implement one against group when both bin types functions are in use
+        // TODO implement one against group when both bin types functions are in use
         // calculate the npi for once against group functions
         // get the last participants and compare it against the group
         // $p = $participants[$participantcount - 1];
@@ -239,12 +239,12 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
             // Calculate the specific distance
             // and normalize the distanze over the maximal amount of dimensions so every criterion gets a value between 0 and 1.
             // (otherwise the criterion will be unthought weighted ).
-            $distance_name = "mod_groupformation_" . $c1->get_distance();
-            $temp_distance = new $distance_name;
+            $distancename = "mod_groupformation_" . $c1->get_distance();
+            $tempdistance = new $distancename;
 
-            $d = $temp_distance->normalized_distance($c1, $c2);
+            $d = $tempdistance->normalized_distance($c1, $c2);
 
-            //  $test->log_performance_index("normalized_distance: ", $d);
+            // $test->log_performance_index("normalized_distance: ", $d);
             $wd = $d * $c1->get_weight();
 
             if ($c1->is_homogeneous()) {
@@ -293,7 +293,7 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
 
         // Example array for a criterion $c1 = [0,0,1,0]
 
-        $group_value = array(); // array for values of all group criteria
+        $groupvalue = array(); // array for values of all group criteria
 
         // get for each participant the criterion and add the values
         // to the group value array to get a result matrix with all values
@@ -301,22 +301,22 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
             foreach ($p->get_criterion() as $c) {
                 if ($c->get_name() == $c1->get_name()) {
                     for ($i = 0; $i < count($c1->get_values()); $i++) {
-                        $group_value[$i] += $c[$i];
+                        $groupvalue[$i] += $c[$i];
                     }
                 }
             }
         }
 
-        switch ($c1->get_distance()) { //get_distance is the fitness function of a criterion example: as few bins as possible
+        switch ($c1->get_distance()) { // get_distance is the fitness function of a criterion example: as few bins as possible
             case "both_bin_types_bins_covered_distance":
                 $t = $c1->get_t(); // target bin coverage
-                $d = $c1->get_d(); //is between 0 and 1 example: 0.5
+                $d = $c1->get_d(); // is between 0 and 1 example: 0.5
                 $m = count($c1->get_values()); // maximum number of bins that could be covered
 
                 // get the number of bins who is covered. covered means at least one student has chosen
                 $b = 0;
-                for ($i = 0; $i < count($group_value); $i++) {
-                    if ($group_value[$i] < 0) {
+                for ($i = 0; $i < count($groupvalue); $i++) {
+                    if ($groupvalue[$i] < 0) {
                         $b += 1;
                     }
                 }
@@ -342,8 +342,8 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
 
                 // get the number of bins who is covered. covered means at least one student has chosen
                 $b = 0;
-                for ($i = 0; $i < count($group_value); $i++) {
-                    if ($group_value[$i] < 0) {
+                for ($i = 0; $i < count($groupvalue); $i++) {
+                    if ($groupvalue[$i] < 0) {
                         $b += 1;
                     }
                 }

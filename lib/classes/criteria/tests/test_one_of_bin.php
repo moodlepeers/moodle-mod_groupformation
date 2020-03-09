@@ -68,14 +68,14 @@ class test_one_of_bin {
      */
     public function create_manually_participant() {
         try {
-            $criteria_one_of_bin = new mod_groupformation_one_of_bin_criterion("one_of_bin", array(0.4), 0, 1, false, 1);
-            $criteria_many_of_bin = new mod_groupformation_one_of_bin_criterion("many_of_bin", array(0.4), 0, 1, false, 1);
+            $criteriaoneofbin = new mod_groupformation_one_of_bin_criterion("one_of_bin", array(0.4), 0, 1, false, 1);
+            $criteriamanyofbin = new mod_groupformation_one_of_bin_criterion("many_of_bin", array(0.4), 0, 1, false, 1);
 
             $list = array();
-            $list[] = new mod_groupformation_participant($criteria_many_of_bin);
-            $list[] = new mod_groupformation_participant($criteria_one_of_bin);
-            $list[] = new mod_groupformation_participant($criteria_one_of_bin);
-            $list[] = new mod_groupformation_participant($criteria_one_of_bin);
+            $list[] = new mod_groupformation_participant($criteriamanyofbin);
+            $list[] = new mod_groupformation_participant($criteriaoneofbin);
+            $list[] = new mod_groupformation_participant($criteriaoneofbin);
+            $list[] = new mod_groupformation_participant($criteriaoneofbin);
 
             return $list;
         } catch (Exception $e) {

@@ -222,8 +222,8 @@ class provider implements
     public static function get_answers(int $userid, int $groupformationid) {
         global $DB;
 
-        $sql = 'SELECT q.id as id, a.category as category, a.questionid as qid, q.question as question, a.answer as answer, 
-                a.timestamp
+        $sql = 'SELECT
+                  q.id as id, a.category as category, a.questionid as qid, q.question as question, a.answer as answer, a.timestamp
                 FROM {groupformation_answers} a
                 JOIN
                   (SELECT * FROM {groupformation_questions} qe WHERE qe.language = "en") AS q

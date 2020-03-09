@@ -143,11 +143,11 @@ defined('MOODLE_INTERNAL') || die();
                 <br/>
                 <br/>
                 <!-- <div id="oob_multiselect_box oob_in_preview">-->
-                <!-- <h5>--><?php //echo get_string('choose_type', 'groupformation'); ?><!--</h5>-->
-                <!-- <p>--><?php //echo get_string('decide_multiselect', 'groupformation'); ?><!--</p>-->
+                <!-- <h5>--><?php // echo get_string('choose_type', 'groupformation'); ?><!--</h5>-->
+                <!-- <p>--><?php // echo get_string('decide_multiselect', 'groupformation'); ?><!--</p>-->
                 <!-- <label class="gf_label" for="id_js_binquestionmultiselect">-->
                 <!-- <input type="checkbox" id="id_js_binquestionmultiselect"  value="wantMultiselect" />-->
-                <!-- --><?php //echo get_string('multiselect', 'groupformation'); ?>
+                <!-- --><?php // echo get_string('multiselect', 'groupformation'); ?>
                 <!-- </label>-->
                 <!-- </div>-->
 

@@ -258,7 +258,6 @@ class mod_groupformation_data {
 
     /** @var bool Special mode booleans (can be ignored in normal use cases). */
     private static $mathprepcoursemode = true;
-    //TODO
 
     /**
      * Returns whether this instance is running in math prep course mode;
