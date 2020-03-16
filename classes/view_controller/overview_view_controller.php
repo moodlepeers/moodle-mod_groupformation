@@ -155,10 +155,10 @@ class mod_groupformation_overview_view_controller extends mod_groupformation_bas
                     groupformation_set_activity_completion($id, $userid);
 
                     // If math prep course, divide participants into A/B sampling groups.
-                     if (mod_groupformation_data::is_math_prep_course_mode()) {
+                    if (mod_groupformation_data::is_math_prep_course_mode()) {
                         // TODO scientific studies A/B sampling groups.
-                         $groupsmanager->assign_to_groups_a_and_b($userid);
-                     }
+                        $groupsmanager->assign_to_groups_a_and_b($userid);
+                    }
                 }
 
                 // Redirect.
