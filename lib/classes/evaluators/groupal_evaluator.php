@@ -34,7 +34,6 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/many_bi
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/ievaluator.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/group.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion.php");
-require_once($CFG->dirroot . '/mod/groupformation/lib/classes/criteria/tests/test_one_of_bin.php');
 
 /**
  * Class mod_groupformation_evaluator
@@ -244,7 +243,6 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
 
             $d = $tempdistance->normalized_distance($c1, $c2);
 
-            // $test->log_performance_index("normalized_distance: ", $d);
             $wd = $d * $c1->get_weight();
 
             if ($c1->is_homogeneous()) {

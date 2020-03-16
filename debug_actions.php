@@ -23,8 +23,6 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once('../../config.php');
-require_once("lib/classes/criteria/tests/fake_participants.php");
-require_once("lib/classes/criteria/tests/fake_group.php");
 
 // Reads URL parameters.
 $runjob = optional_param('run_job', false, PARAM_BOOL);
@@ -34,8 +32,6 @@ $createanswers = optional_param('create_answers', false, PARAM_BOOL);
 $randomanswers = optional_param('random_answers', false, PARAM_BOOL);
 $deleteusers = optional_param('delete_users', false, PARAM_BOOL);
 $resetjob = optional_param('reset_job', false, PARAM_BOOL);
-$testbins = optional_param('test_bins', false, PARAM_BOOL);
-$testgroups = optional_param('test_groups', false, PARAM_BOOL);
 $createcsv = optional_param('create_csv', false, PARAM_BOOL);
 
 $debugbuttons = "";
@@ -111,26 +107,6 @@ if (($CFG->debug === 32767) || (in_array($USER->id, $debugusers))) {
     // Create test users with or without answers.
     if ($createusers > 0) {
         $cqt->create_test_users($createusers, $groupformation->id, $createanswers, $randomanswers);
-        $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
-                'id' => $id, 'do_show' => 'analysis'));
-        redirect($return->out());
-    }
-
-    // Create test participants for testing bin classes
-    if ($testbins > 0) {
-        $participants = new mod_groupformation_fake_participants();
-        $participants->create();
-
-        $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
-                'id' => $id, 'do_show' => 'analysis'));
-        redirect($return->out());
-    }
-
-    // Create test group with participants for testing bin classes
-    if ($testgroups > 0) {
-        $participants = new mod_groupformation_fake_group();
-        $participants->create();
-
         $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
                 'id' => $id, 'do_show' => 'analysis'));
         redirect($return->out());

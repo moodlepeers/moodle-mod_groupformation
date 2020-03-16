@@ -1,11 +1,10 @@
 /* =============================
-   Grid related styles
+       Grid related styles
 ===============================*/
 /* general box-sizing, childs inherit it */
 .path-mod-groupformation .grid [class*='col_'],
 .path-mod-groupformation form.groupformation_questionnaire *,
-.path-mod-groupformation .gf_button
-{
+.path-mod-groupformation .gf_button {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -39,7 +38,6 @@
         font-size: 1.5em;
     }
 }
-
 
 .path-mod-groupformation .js_errors p {
     background-color: #fff0f0;
@@ -1131,7 +1129,6 @@
     width: 100%;
 }
 
-
 /*******************************/
 /* edit groups styles*/
 /*******************************/
@@ -1256,7 +1253,7 @@
 /*group overview group parameters*/
 .path-mod-groupformation .group_params {
     float: left;
-    clear:left;
+    clear: left;
     margin: 0 0.8em;
 }
 
@@ -1424,6 +1421,7 @@
 .path-mod-groupformation .gf_pad_content .row {
     margin-left: inherit;
 }
+
 /* cards in evaluation */
 /* inspired by http://v4-alpha.getbootstrap.com/components/collapse/ */
 .path-mod-groupformation .gfcard {
@@ -1431,26 +1429,30 @@
     display: flex;
     flex-direction: column;
     background-color: #fff;
-    border: 1px solid rgba(0,0,0,.125);
+    border: 1px solid rgba(0, 0, 0, .125);
     border-radius: .25rem;
     margin-top: 1em;
 }
+
 .path-mod-groupformation .gfcard-header {
     padding: .75rem 1.25rem;
     margin-bottom: 0;
     background-color: #f7f7f9;
-    border-bottom: 1px solid rgba(0,0,0,.125);
+    border-bottom: 1px solid rgba(0, 0, 0, .125);
 }
+
 .path-mod-groupformation .gfcard-header h5 {
     margin: 0;
 }
+
 .path-mod-groupformation .gfcard-header h5, .gfcard-header .fa-info-circle {
-    float:left;
+    float: left;
 }
 
 .path-mod-groupformation .gfcard-header[data-toggle="collapse"] {
     cursor: pointer;
 }
+
 .path-mod-groupformation .gfcard-header .popover {
     font-size: 80%;
     min-font-size: 8px;
@@ -1468,6 +1470,7 @@
 .path-mod-groupformation .oobRowMulti {
     align-self: center;
 }
+
 .path-mod-groupformation .oobpreviewddMulti {
     width: available;
 }
