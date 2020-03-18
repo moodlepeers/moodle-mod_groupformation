@@ -18,7 +18,7 @@
  *
  * @package mod_groupformation
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
- * @copyright
+ * @copyright Moodle
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace mod_groupformation\privacy;

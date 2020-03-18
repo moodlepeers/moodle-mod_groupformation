@@ -63,8 +63,8 @@ function groupformation_get_user_state($groupformationid, $userid) {
 /**
  * Returns all instances of groupformation activities in a given course
  *
- * @param int courseid ID of the course
- * @return array stdClass
+ * @param $courseid
+ * @return mixed
  */
 function groupformation_get_instances($courseid) {
     global $DB;
