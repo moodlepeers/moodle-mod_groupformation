@@ -42,9 +42,12 @@ interface mod_groupformation_idistance_members {
      *
      * @param mod_groupformation_criterion $c1
      * @param mod_groupformation_group $c2
-     * @param $t target bin coverage
-     * @param $b number of bins covered by group
-     * @return float  ( a value normalized to (0...1) )
+     * target bin coverage
+     * @param $t
+     * number of bins covered by group
+     * @param $b
+     * ( a value normalized to (0...1) )
+     * @return mixed
      */
     public function normalized_distance(mod_groupformation_criterion $c1, mod_groupformation_group $c2,  $t, $b);
 }

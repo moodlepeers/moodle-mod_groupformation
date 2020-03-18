@@ -425,7 +425,6 @@ class mod_groupformation_criterion_calculator {
      * @param $userid
      * @param null $specs
      * @return array
-     * @throws dml_exception
      */
     public function get_binquestion($userid, $specs = null) {
 

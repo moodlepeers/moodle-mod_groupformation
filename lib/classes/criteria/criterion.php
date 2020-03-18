@@ -53,11 +53,15 @@ abstract class mod_groupformation_criterion {
     /** @var bool  flag to mark Criterion as homogeneous or as not homogeneous (heterogeneous) */
     protected $homogeneous = false;
 
+    /** @var string distance name */
     protected $distance = "manhattan_distance";
 
+    /** @var string  */
     protected $property = "";
 
     /**
+     * get property
+     *
      * @return string
      */
     public function get_property() {
@@ -65,6 +69,8 @@ abstract class mod_groupformation_criterion {
     }
 
     /**
+     * set property
+     *
      * @param string $property
      */
     public function set_property($property) {
@@ -72,6 +78,8 @@ abstract class mod_groupformation_criterion {
     }
 
     /**
+     * get the number of bins
+     *
      * @return int
      */
     public function get_number_of_bins() {
@@ -80,6 +88,8 @@ abstract class mod_groupformation_criterion {
     }
 
     /**
+     * get the distance
+     *
      * @return string
      */
     public function get_distance() {

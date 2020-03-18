@@ -75,7 +75,6 @@ class mod_groupformation_user_state_machine {
      *
      * @param bool $internal
      * @return mixed
-     * @throws dml_exception
      */
     public function get_state($userid, $internal = false) {
         global $DB;
@@ -96,7 +95,6 @@ class mod_groupformation_user_state_machine {
      * Sets state
      *
      * @param $state
-     * @throws dml_exception
      */
     public function set_state($userid, $state) {
         global $DB;
@@ -116,7 +114,6 @@ class mod_groupformation_user_state_machine {
      *
      * @param $userid
      * @param $action
-     * @throws dml_exception
      */
     public function change_state($userid, $action) {
         $transitions = $this->transitions;

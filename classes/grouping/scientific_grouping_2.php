@@ -94,8 +94,6 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
      * @param $users
      * @param $specs
      * @return array
-     * @throws coding_exception
-     * @throws dml_exception
      */
     public function get_scores($users, $specs) {
         $scores = [];

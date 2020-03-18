@@ -211,7 +211,6 @@ class mod_groupformation_user_manager {
      * Initializes record
      *
      * @param $userid
-     * @throws dml_exception
      */
     public function init($userid) {
         global $DB;
@@ -232,7 +231,6 @@ class mod_groupformation_user_manager {
      *
      * @param int $userid
      * @param bool|false $completed
-     * @throws dml_exception
      */
     public function set_status($userid, $completed = false) {
         global $DB;
@@ -259,7 +257,6 @@ class mod_groupformation_user_manager {
      *
      * @param int $userid
      * @param bool|false $complete
-     * @throws dml_exception
      */
     public function change_status($userid, $complete = false) {
         $status = 0;
@@ -284,7 +281,6 @@ class mod_groupformation_user_manager {
      *
      * @param int $userid
      * @return int|mixed
-     * @throws dml_exception
      */
     public function get_answering_status($userid) {
         global $DB;
@@ -315,7 +311,6 @@ class mod_groupformation_user_manager {
      *
      * @param int $userid
      * @return boolean
-     * @throws dml_exception
      */
     public function is_completed($userid) {
         global $DB;
@@ -330,7 +325,6 @@ class mod_groupformation_user_manager {
      * @param int $userid
      * @param string $category
      * @return number
-     * @throws dml_exception
      */
     public function get_number_of_answers($userid, $category = null) {
         global $DB;
@@ -354,7 +348,6 @@ class mod_groupformation_user_manager {
      *
      * @param int $userid
      * @return boolean
-     * @throws dml_exception
      */
     public function has_answered_everything($userid) {
         $store = new mod_groupformation_storage_manager ($this->groupformationid);
@@ -373,7 +366,6 @@ class mod_groupformation_user_manager {
      * @param null $userid
      * @param null $categories
      * @return bool
-     * @throws dml_exception
      */
     public function already_answered($userid = null, $categories = null) {
         global $DB;
@@ -401,6 +393,15 @@ class mod_groupformation_user_manager {
     }
 
     // TODO entfernen
+    /**
+     * bin answer helper
+     *
+     * @param $userid
+     * @param $category
+     * @param null $sortedby
+     * @param string $fieldset
+     * @return mixed
+     */
     public function binanswers_help($userid, $category, $sortedby = null, $fieldset = '*') {
         global $DB;
         return $DB->get_records('groupformation_answers', array(
@@ -418,7 +419,6 @@ class mod_groupformation_user_manager {
      * @param null $sortedby
      * @param string $fieldset
      * @return array
-     * @throws dml_exception
      */
     public function get_answers($userid, $category, $sortedby = null, $fieldset = '*') {
         global $DB;
@@ -458,7 +458,6 @@ class mod_groupformation_user_manager {
      * @param string $category
      * @param int $questionid
      * @return int
-     * @throws dml_exception
      */
     public function get_single_answer($userid, $category, $questionid) {
         global $DB;
@@ -477,7 +476,6 @@ class mod_groupformation_user_manager {
      * @param int $userid
      * @param string $category
      * @param int $questionid
-     * @throws dml_exception
      */
     public function delete_answer($userid, $category, $questionid) {
         global $DB;
@@ -499,7 +497,6 @@ class mod_groupformation_user_manager {
      * @param string $category
      * @param number $answer
      * @param int $questionid
-     * @throws dml_exception
      */
     public function save_answer($userid, $category, $answer, $questionid) {
         global $DB;

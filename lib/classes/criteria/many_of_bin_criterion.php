@@ -46,7 +46,6 @@ class mod_groupformation_many_of_bin_criterion extends mod_groupformation_criter
      * @param array $valuearray
      * @param number $minval
      * @param number $maxval
-     * @param bool $ishomo
      * @param number $weight
      * @param string $distance
      * @throws Exception

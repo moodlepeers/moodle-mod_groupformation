@@ -18,9 +18,9 @@
  *
  * @package mod_groupformation
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 namespace mod_groupformation\privacy;
 
 defined('MOODLE_INTERNAL') || die();
@@ -31,6 +31,11 @@ use \core_privacy\local\request\contextlist;
 use \core_privacy\local\request\writer;
 use \core_privacy\local\request\approved_contextlist;
 
+/**
+ * Class provider
+ *
+ * @package mod_groupformation\privacy
+ */
 class provider implements
         \core_privacy\local\metadata\provider,
         \core_privacy\local\request\plugin\provider {

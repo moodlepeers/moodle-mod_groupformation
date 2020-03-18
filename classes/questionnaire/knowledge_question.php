@@ -52,7 +52,6 @@ class mod_groupformation_knowledge_question extends mod_groupformation_range_que
      * @param bool $highlight
      * @param bool $required
      */
-
     public function print_html($highlight, $required) {
 
         $category = $this->category;
@@ -102,7 +101,6 @@ class mod_groupformation_knowledge_question extends mod_groupformation_range_que
      * @param bool $required
      * @return string
      */
-
     public function get_html($highlight, $required) {
 
         $s = "";
@@ -146,6 +144,11 @@ class mod_groupformation_knowledge_question extends mod_groupformation_range_que
         return $s;
     }
 
+    /**
+     * return saved or deleted(null) answers
+     *
+     * @return array|null
+     */
     public function read_answer() {
         $parameter = $this->category . $this->questionid;
         $answer = optional_param($parameter, null, PARAM_RAW);

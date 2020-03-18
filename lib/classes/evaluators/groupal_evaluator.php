@@ -370,7 +370,6 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
 
     /**
      * calculate npi value depends of the criterion weight for groups
-     *
      * @param $c
      * @param $hetval
      * @param $homval

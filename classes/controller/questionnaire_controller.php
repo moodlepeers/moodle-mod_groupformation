@@ -97,7 +97,6 @@ class mod_groupformation_questionnaire_controller {
      * @param $currentcategory
      * @param $direction
      * @param int $cmid
-     * @throws dml_exception
      */
     public function __construct($groupformationid, $userid, $cmid, $currentcategory, $direction) {
         $this->groupformationid = $groupformationid;
@@ -245,7 +244,6 @@ class mod_groupformation_questionnaire_controller {
      * Returns whether current category is 'points' or not
      *
      * @return boolean
-     * @throws dml_exception
      */
     public function is_points() {
         return $this->categoryposition == $this->store->get_position('points');
@@ -255,8 +253,6 @@ class mod_groupformation_questionnaire_controller {
      * Returns questions
      *
      * @return array
-     * @throws coding_exception
-     * @throws dml_exception
      */
     public function get_next_questions() {
         $category = $this->category;

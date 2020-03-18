@@ -65,7 +65,6 @@ function groupformation_get_user_state($groupformationid, $userid) {
  *
  * @param int courseid ID of the course
  * @return array stdClass
- * @throws dml_exception
  */
 function groupformation_get_instances($courseid) {
     global $DB;
@@ -80,7 +79,6 @@ function groupformation_get_instances($courseid) {
  *
  * @param int courseid ID of the course
  * @return array stdClass
- * @throws dml_exception
  */
 function groupformation_get_instance_by_id($groupformationid) {
     global $DB;
@@ -96,7 +94,6 @@ function groupformation_get_instance_by_id($groupformationid) {
  * @param $groupformationid
  * @param $userid
  * @return array
- * @throws dml_exception
  */
 function groupformation_get_group_members($groupformationid, $userid) {
     $groupsmanager = new mod_groupformation_groups_manager ($groupformationid);
@@ -115,7 +112,6 @@ function groupformation_get_group_members($groupformationid, $userid) {
  * @param $groupformationid
  * @param $userid
  * @return mixed
- * @throws dml_exception
  */
 function groupformation_get_group_name($groupformationid, $userid) {
     $groupsmanager = new mod_groupformation_groups_manager ($groupformationid);
@@ -127,7 +123,6 @@ function groupformation_get_group_name($groupformationid, $userid) {
  *
  * @param $groupformationid
  * @return mixed
- * @throws dml_exception
  */
 function groupformation_get_cm($groupformationid) {
     global $DB;
@@ -148,7 +143,6 @@ function groupformation_get_cm($groupformationid) {
  * @param $groupformationid
  * @param $userid
  * @return bool
- * @throws dml_exception
  */
 function groupformation_has_group($groupformationid, $userid) {
     $groupsmanager = new mod_groupformation_groups_manager ($groupformationid);
@@ -160,7 +154,6 @@ function groupformation_has_group($groupformationid, $userid) {
  *
  * @param $groupformationid
  * @return int
- * @throws dml_exception
  */
 function groupformation_get_number_of_questions($groupformationid) {
     $store = new mod_groupformation_storage_manager($groupformationid);
@@ -173,7 +166,6 @@ function groupformation_get_number_of_questions($groupformationid) {
  * @param $groupformationid
  * @param $userid
  * @return number
- * @throws dml_exception
  */
 function groupformation_get_number_of_answered_questions($groupformationid, $userid) {
     $usermanager = new mod_groupformation_user_manager($groupformationid);
@@ -191,7 +183,6 @@ function groupformation_get_number_of_answered_questions($groupformationid, $use
  *
  * @param $groupformationid
  * @return array
- * @throws dml_exception
  */
 function groupformation_get_progress_statistics($groupformationid) {
     $usermanager = new mod_groupformation_user_manager($groupformationid);
@@ -203,8 +194,6 @@ function groupformation_get_progress_statistics($groupformationid) {
  *
  * @param $groupformationid
  * @return array
- * @throws coding_exception
- * @throws dml_exception
  */
 function groupformation_get_dates($groupformationid) {
     $store = new mod_groupformation_storage_manager($groupformationid);
@@ -216,7 +205,6 @@ function groupformation_get_dates($groupformationid) {
  *
  * @param $groupformationid
  * @return array
- * @throws dml_exception
  */
 function groupformation_get_users($groupformationid) {
     $store = new mod_groupformation_storage_manager($groupformationid);
@@ -228,7 +216,6 @@ function groupformation_get_users($groupformationid) {
  *
  * @param $instance
  * @return bool
- * @throws dml_exception
  */
 function groupformation_check_instance($instance) {
     global $DB;
@@ -241,7 +228,6 @@ function groupformation_check_instance($instance) {
  *
  * @param $userid
  * @return array
- * @throws dml_exception
  */
 function get_groupformationids_for_user($userid) {
     global $DB;
@@ -255,7 +241,6 @@ function get_groupformationids_for_user($userid) {
  * @param $userid
  * @param $gfid
  * @return mixed
- * @throws dml_exception
  */
 function get_gf_tracked_for_user($userid, $gfid) {
     global $DB;
@@ -269,7 +254,6 @@ function get_gf_tracked_for_user($userid, $gfid) {
  * @param $userid
  * @param $gfid
  * @param $tracked
- * @throws dml_exception
  */
 function set_gf_tracked_for_user($userid, $gfid, $tracked) {
     global $DB;
@@ -284,7 +268,6 @@ function set_gf_tracked_for_user($userid, $gfid, $tracked) {
  *
  * @param $gfid
  * @return mixed
- * @throws dml_exception
  */
 function get_gf_tracked_for_teacher($gfid) {
     global $DB;
@@ -297,7 +280,6 @@ function get_gf_tracked_for_teacher($gfid) {
  *
  * @param $gfid
  * @param $tracked
- * @throws dml_exception
  */
 function set_gf_tracked_for_teacher($gfid, $tracked) {
     global $DB;

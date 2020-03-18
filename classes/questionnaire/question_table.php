@@ -75,6 +75,9 @@ class mod_groupformation_question_table {
 
     /**
      * Returns HTML of table header
+     *
+     * @param string $addon
+     * @return string
      */
     public function get_header($addon = '') {
         $s = "";

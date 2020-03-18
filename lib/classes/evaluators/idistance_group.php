@@ -41,7 +41,7 @@ interface mod_groupformation_idistance_group {
      * Computes normalized distance
      *
      * @param mod_groupformation_criterion $c1
-     * @param mod_groupformation_criterion $c2
+     * @param mod_groupformation_group $c2
      * @return float  ( a value normalized to (0...1) )
      */
     public function normalized_distance(mod_groupformation_criterion $c1, mod_groupformation_group $c2);

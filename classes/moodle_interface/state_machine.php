@@ -95,7 +95,6 @@ class mod_groupformation_state_machine {
      * Sets state
      *
      * @param $state
-     * @throws dml_exception
      */
     public function set_state($state) {
         global $DB;

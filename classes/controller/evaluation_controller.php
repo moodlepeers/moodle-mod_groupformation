@@ -56,7 +56,7 @@ class mod_groupformation_evaluation_controller {
     /**
      * mod_groupformation_evaluation_controller constructor.
      *
-     * @param int $groupformationid
+     * @param $groupformationid
      * @param $cmid
      */
     public function __construct($groupformationid, $cmid) {
@@ -73,7 +73,6 @@ class mod_groupformation_evaluation_controller {
      *
      * @param string $caption
      * @return array
-     * @throws coding_exception
      */
     public function no_evaluation($caption = 'no_evaluation_text') {
 

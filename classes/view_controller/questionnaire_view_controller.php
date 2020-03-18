@@ -73,8 +73,6 @@ class mod_groupformation_questionnaire_view_controller extends mod_groupformatio
      * Renders content
      *
      * @return string|void
-     * @throws coding_exception
-     * @throws dml_exception
      */
     public function render() {
         $store = $this->store;
@@ -120,9 +118,7 @@ class mod_groupformation_questionnaire_view_controller extends mod_groupformatio
     }
 
     /**
-     * @throws coding_exception
-     * @throws dml_exception
-     * @throws moodle_exception
+     * handler
      */
     public function handle_actions() {
         /** @var mod_groupformation_questionnaire_controller $controller */
