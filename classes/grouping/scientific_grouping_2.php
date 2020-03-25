@@ -74,9 +74,9 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
     /**
      * Determines how many slices are possible
      *
-     * @param $numberofusers
-     * @param $groupsize
-     * @param $numberofslices
+     * @param int $numberofusers
+     * @param int $groupsize
+     * @param int $numberofslices
      * @return mixed
      */
     public function determine_number_of_slices($numberofusers, $groupsize, $numberofslices) {
@@ -91,8 +91,8 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
     /**
      * Returns scores
      *
-     * @param $users
-     * @param $specs
+     * @param array $users
+     * @param array $specs
      * @return array
      */
     public function get_scores($users, $specs) {
@@ -396,8 +396,8 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
     /**
      * Assignes participants to slices
      *
-     * @param $scores
-     * @param $numberofslices
+     * @param int $scores
+     * @param int $numberofslices
      * @return array
      */
     private function assign_to_slices($scores, $numberofslices) {

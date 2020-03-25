@@ -94,7 +94,7 @@ class mod_groupformation_state_machine {
     /**
      * Sets state
      *
-     * @param $state
+     * @param int $state The state of the machine
      */
     public function set_state($state) {
         global $DB;

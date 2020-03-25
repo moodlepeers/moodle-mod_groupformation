@@ -73,8 +73,9 @@ class mod_groupformation_user_state_machine {
     /**
      * Returns current state
      *
-     * @param bool $internal
-     * @return mixed
+     * @param int $userid ID of User
+     * @param bool $internal State if is it internal
+     * @return int|mixed
      */
     public function get_state($userid, $internal = false) {
         global $DB;
@@ -94,7 +95,8 @@ class mod_groupformation_user_state_machine {
     /**
      * Sets state
      *
-     * @param $state
+     * @param int $userid ID of user
+     * @param int $state state of machine
      */
     public function set_state($userid, $state) {
         global $DB;
@@ -112,8 +114,8 @@ class mod_groupformation_user_state_machine {
     /**
      * Changes state
      *
-     * @param $userid
-     * @param $action
+     * @param int $userid ID of user
+     * @param string $action the action to be executed
      */
     public function change_state($userid, $action) {
         $transitions = $this->transitions;

@@ -210,7 +210,7 @@ class mod_groupformation_user_manager {
     /**
      * Initializes record
      *
-     * @param $userid
+     * @param int $userid ID of user
      */
     public function init($userid) {
         global $DB;
@@ -396,8 +396,8 @@ class mod_groupformation_user_manager {
     /**
      * bin answer helper
      *
-     * @param $userid
-     * @param $category
+     * @param int $userid ID of USer
+     * @param string $category
      * @param null $sortedby
      * @param string $fieldset
      * @return mixed

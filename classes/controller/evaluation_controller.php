@@ -56,8 +56,8 @@ class mod_groupformation_evaluation_controller {
     /**
      * mod_groupformation_evaluation_controller constructor.
      *
-     * @param $groupformationid
-     * @param $cmid
+     * @param int $groupformationid
+     * @param int $cmid
      */
     public function __construct($groupformationid, $cmid) {
         $this->groupformationid = $groupformationid;

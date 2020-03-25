@@ -422,7 +422,7 @@ class mod_groupformation_criterion_calculator {
     /**
      * Returns binquestion criterion values
      *
-     * @param $userid
+     * @param int $userid
      * @param null $specs
      * @return array
      */

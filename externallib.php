@@ -78,8 +78,9 @@ function groupformation_get_instances($courseid) {
 /**
  * Returns all instances of groupformation activities in a given course
  *
- * @param $groupformationid
+ * @param int $groupformationid ID of the activity
  * @return mixed
+ * @throws dml_exception
  */
 function groupformation_get_instance_by_id($groupformationid) {
     global $DB;
@@ -92,8 +93,8 @@ function groupformation_get_instance_by_id($groupformationid) {
 /**
  * Returns an array including all group members names.
  *
- * @param $groupformationid
- * @param $userid
+ * @param int $groupformationid ID of the activity
+ * @param int $userid ID of user
  * @return array
  * @throws dml_exception
  */
@@ -111,8 +112,8 @@ function groupformation_get_group_members($groupformationid, $userid) {
 /**
  * Returns group name
  *
- * @param $groupformationid
- * @param $userid
+ * @param int $groupformationid ID of the activity
+ * @param int $userid ID of user
  * @return mixed
  * @throws dml_exception
  */
@@ -124,7 +125,7 @@ function groupformation_get_group_name($groupformationid, $userid) {
 /**
  * Returns course module for activity
  *
- * @param $groupformationid
+ * @param int $groupformationid ID of the activity
  * @return mixed
  * @throws dml_exception
  */
@@ -144,8 +145,8 @@ function groupformation_get_cm($groupformationid) {
 /**
  * Returns whether user has a group
  *
- * @param $groupformationid
- * @param $userid
+ * @param int $groupformationid ID of the activity
+ * @param int $userid ID of user
  * @return bool
  * @throws dml_exception
  */
@@ -157,7 +158,7 @@ function groupformation_has_group($groupformationid, $userid) {
 /**
  * Returns total number of answers
  *
- * @param $groupformationid
+ * @param int $groupformationid ID of the activity
  * @return int
  * @throws dml_exception
  */
@@ -169,8 +170,8 @@ function groupformation_get_number_of_questions($groupformationid) {
 /**
  * Returns number of answers questions
  *
- * @param $groupformationid
- * @param $userid
+ * @param int $groupformationid ID of the activity
+ * @param int $userid ID of user
  * @return number
  * @throws dml_exception
  */
@@ -188,7 +189,7 @@ function groupformation_get_number_of_answered_questions($groupformationid, $use
  * submitted (number of submitted questionnaires),
  * submitted completely (number of submitted questionnaires with complete answers to all questions)
  *
- * @param $groupformationid
+ * @param int $groupformationid ID of the activity
  * @return array
  * @throws dml_exception
  */
@@ -200,7 +201,7 @@ function groupformation_get_progress_statistics($groupformationid) {
 /**
  * Returns dates for started and terminated if set.
  *
- * @param $groupformationid
+ * @param int $groupformationid ID of the activity
  * @return array
  * @throws dml_exception
  */
@@ -212,7 +213,7 @@ function groupformation_get_dates($groupformationid) {
 /**
  * Return users for this activity.
  *
- * @param $groupformationid
+ * @param int $groupformationid ID of the activity
  * @return array
  * @throws dml_exception
  */
@@ -224,7 +225,7 @@ function groupformation_get_users($groupformationid) {
 /**
  * Checks whethter a groupformation exists.
  *
- * @param $instance
+ * @param int $instance instance of groupformation
  * @return bool
  * @throws dml_exception
  */
@@ -237,7 +238,7 @@ function groupformation_check_instance($instance) {
 /**
  * Returns the ids of all groupformations a user had visited.
  *
- * @param $userid
+ * @param int $userid ID of user
  * @return array
  * @throws dml_exception
  */
@@ -250,8 +251,8 @@ function get_groupformationids_for_user($userid) {
 /**
  * Returns whether a groupformation should be tracked for a user.
  *
- * @param $userid
- * @param $gfid
+ * @param int $userid ID of user
+ * @param int $gfid ID of the activity
  * @return mixed
  * @throws dml_exception
  */
@@ -264,9 +265,9 @@ function get_gf_tracked_for_user($userid, $gfid) {
 /**
  * Sets wheter a groupformation should tracked for user.
  *
- * @param $userid
- * @param $gfid
- * @param $tracked
+ * @param int $userid ID of user
+ * @param int $gfid ID of the activity
+ * @param int $tracked 0 or 1 if user is tracked
  * @throws dml_exception
  */
 function set_gf_tracked_for_user($userid, $gfid, $tracked) {
@@ -280,7 +281,7 @@ function set_gf_tracked_for_user($userid, $gfid, $tracked) {
 /**
  * Returns whether a groupformation should be tracked for the teacher.
  *
- * @param $gfid
+ * @param int $gfid ID of the activity
  * @return mixed
  * @throws dml_exception
  */
@@ -293,8 +294,8 @@ function get_gf_tracked_for_teacher($gfid) {
 /**
  * Sets wheter a groupformation should tracked for the teacher.
  *
- * @param $gfid
- * @param $tracked
+ * @param int $gfid ID of the activity
+ * @param int $tracked 0 or 1 if it is tracked
  * @throws dml_exception
  */
 function set_gf_tracked_for_teacher($gfid, $tracked) {

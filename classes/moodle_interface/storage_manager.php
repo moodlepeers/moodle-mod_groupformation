@@ -370,6 +370,11 @@ class mod_groupformation_storage_manager {
         ));
     }
 
+    /**
+     * returns text of bin question
+     *
+     * @return mixed
+     */
     public function get_binquestion_text() {
         global $DB;
 
@@ -440,7 +445,7 @@ class mod_groupformation_storage_manager {
     /**
      * Returns the scenario
      *
-     * @param $assigned
+     * @param boolean $assigned if scenario is assigned
      * @return string
      * @throws dml_exception
      */

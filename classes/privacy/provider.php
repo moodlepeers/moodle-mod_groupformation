@@ -34,7 +34,7 @@ use \core_privacy\local\request\approved_contextlist;
 /**
  * Class provider
  *
- * @package mod_groupformation\privacy
+ * @package mod_groupformation
  * @copyright 2018 MoodlePeers
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

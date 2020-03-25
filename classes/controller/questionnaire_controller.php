@@ -93,10 +93,9 @@ class mod_groupformation_questionnaire_controller {
      *
      * @param int $groupformationid
      * @param int $userid
-     * @param string $previouscategory
-     * @param $currentcategory
-     * @param $direction
      * @param int $cmid
+     * @param string $currentcategory
+     * @param int $direction
      */
     public function __construct($groupformationid, $userid, $cmid, $currentcategory, $direction) {
         $this->groupformationid = $groupformationid;

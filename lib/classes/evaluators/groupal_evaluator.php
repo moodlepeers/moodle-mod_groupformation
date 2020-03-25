@@ -371,9 +371,9 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
     /**
      * calculate npi value depends of the criterion weight for groups
      *
-     * @param $c
-     * @param $hetval
-     * @param $homval
+     * @param int $c criteria
+     * @param int $hetval heterogen value
+     * @param int $homval homogen value
      * @return float|int
      */
     public function calc_npi_with_weight($c, $hetval, $homval) {

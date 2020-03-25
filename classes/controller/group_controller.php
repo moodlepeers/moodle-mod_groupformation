@@ -54,7 +54,7 @@ class mod_groupformation_group_controller {
      * mod_groupformation_student_group_view_controller constructor.
      *
      * @param int $groupformationid
-     * @param $cmid
+     * @param int $cmid
      */
     public function __construct($groupformationid, $cmid) {
         $this->groupformationid = $groupformationid;
