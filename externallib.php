@@ -63,7 +63,7 @@ function groupformation_get_user_state($groupformationid, $userid) {
 /**
  * Returns all instances of groupformation activities in a given course
  *
- * @param int   $courseid The id of the current course
+ * @param int $courseid The id of the current course
  * @return mixed
  * @throws dml_exception
  */
@@ -78,9 +78,8 @@ function groupformation_get_instances($courseid) {
 /**
  * Returns all instances of groupformation activities in a given course
  *
- * @param int courseid ID of the course
- * @return array stdClass
- * @throws dml_exception
+ * @param $groupformationid
+ * @return mixed
  */
 function groupformation_get_instance_by_id($groupformationid) {
     global $DB;
