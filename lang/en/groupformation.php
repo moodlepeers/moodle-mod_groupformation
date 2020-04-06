@@ -57,7 +57,7 @@ $string ['edit_param'] = 'Edit';
 $string ['editparam'] = 'Edit parameters';
 $string ['nochangespossible'] = 'The questionnaire has been answered already.
 You can only change the maximum number of members or maximum number of groups. Further changes will not be saved.';
-$string ['availability_nochangespossible'] = 'The questionnaire has been answered already. You cannot change the availability anymore.';
+$string ['availability_nochangespossible'] = 'The questionnaire has been answered already. You cannot change the start time anymore.';
 $string ['scenario'] = 'Scenario';
 $string ['scenarioLabel'] = '';
 $string ['scenario_description'] = 'Please choose the most suitable scenario for the group formation.';

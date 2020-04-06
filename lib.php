@@ -120,19 +120,21 @@ function groupformation_update_instance(stdClass $groupformation, mod_groupforma
     $groupformation->timemodified = time();
     $groupformation->id = $groupformation->instance;
 
-    if ($DB->count_records('groupformation_answers', array(
-            'groupformation' => $groupformation->id)) == 0
-    ) {
-        $result = $DB->update_record('groupformation', $groupformation);
-    } else {
+    //if ($DB->count_records('groupformation_answers', array(
+    //        'groupformation' => $groupformation->id)) == 0
+    //) {
+    //    $result = $DB->update_record('groupformation', $groupformation);
+    //} else {
         $origrecord = $DB->get_record('groupformation', array(
             'id' => $groupformation->id));
         $origrecord->intro = $groupformation->intro;
         $origrecord->groupoption = $groupformation->groupoption;
         $origrecord->maxmembers = $groupformation->maxmembers;
         $origrecord->maxgroups = $groupformation->maxgroups;
+        $origrecord->timeopen = $groupformation->timeopen;
+        $origrecord->timeclose = $groupformation->timeclose;
         $result = $DB->update_record('groupformation', $origrecord);
-    }
+    //}
 
     // Get current DB record (with all DB defaults).
     $groupformation = $DB->get_record('groupformation', array(
