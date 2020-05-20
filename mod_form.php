@@ -67,7 +67,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 
         // Adding the standard "name" field.
         $mform->addElement('text', 'name', get_string('groupformationname', 'groupformation'), array(
-            'size' => '64'));
+                'size' => '64'));
         if (!empty ($CFG->formatstringstriptags)) {
             $mform->setType('name', PARAM_TEXT);
         } else {
@@ -83,24 +83,26 @@ class mod_groupformation_mod_form extends moodleform_mod {
         $mform->addElement('header', 'timinghdr', get_string('availability'));
         $mform->setExpanded('timinghdr');
         // No changes possible hint.
-        $changemsg = '<div class="fitem" id="nochangespossible"';
+        $changemsg = '<div class="fitem"';
         if (!$this->store->is_editable()) {
             $changemsg .= ' ><span value="1"';
+
         } else {
             $changemsg .= ' style="display:none;"><span value="0"';
         }
         $changemsg .= ' style="color:red;">' . get_string('availability_nochangespossible', 'groupformation') .
-            '</span></div>';
+                '</span></div>';
         $mform->addElement('html', $changemsg);
 
         $mform->addElement('date_time_selector', 'timeopen', get_string('feedbackopen', 'feedback'), array(
-            'optional' => true));
+                'optional' => true));
         $mform->addElement('date_time_selector', 'timeclose', get_string('feedbackclose', 'feedback'), array(
-            'optional' => true));
+                'optional' => true));
         // Adding the rest of groupformation settings, spreeading all them into this fieldset.
         $mform->addElement('header', 'groupformationsettings', get_string('groupformationsettings', 'groupformation'));
         $mform->setExpanded('groupformationsettings');
 
+        //die();
         $this->generate_html_for_non_js($mform);
 
         $this->generate_html_for_js($mform);
@@ -115,7 +117,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 
         $this->standard_coursemodule_elements($features);
 
-        $this->apply_admin_defaults();
+        $this->apply_admin_defaults(true);
 
         // Add standard buttons, common to all modules.
         $this->add_action_buttons();
@@ -160,8 +162,8 @@ class mod_groupformation_mod_form extends moodleform_mod {
         }
 
         if ($data ['evaluationmethod'] == 2 &&
-            (!(is_numeric($data ['maxpoints'])) || !(intval($data ['maxpoints']) <= 100) ||
-                !(intval($data ['maxpoints']) > 0))
+                (!(is_numeric($data ['maxpoints'])) || !(intval($data ['maxpoints']) <= 100) ||
+                        !(intval($data ['maxpoints']) > 0))
         ) {
             $errors ['maxpoints'] = get_string('maxpoints_error', 'groupformation');
         }
@@ -227,9 +229,9 @@ class mod_groupformation_mod_form extends moodleform_mod {
 
         // Add field Szenario choice.
         $mform->addElement('select', 'szenario', get_string('scenario', 'groupformation'), array(
-            get_string('choose_scenario', 'groupformation'), get_string('scenario_projectteams', 'groupformation'),
-            get_string('scenario_homeworkgroups', 'groupformation'),
-            get_string('scenario_presentationgroups', 'groupformation')), null);
+                get_string('choose_scenario', 'groupformation'), get_string('scenario_projectteams', 'groupformation'),
+                get_string('scenario_homeworkgroups', 'groupformation'),
+                get_string('scenario_presentationgroups', 'groupformation')), null);
 
         $mform->addRule('szenario', get_string('scenario_error', 'groupformation'), 'required', null, 'client');
 
@@ -238,14 +240,14 @@ class mod_groupformation_mod_form extends moodleform_mod {
         $mform->addElement('checkbox', 'binquestionmultiselect', get_string('multiselect', 'groupformation'));
         $mform->setDefault('binquestionmultiselect', false); // TODO delete if feature is implemented.
         $mform->addElement('textarea', 'binquestiontext', get_string('oneOfBinQuestion', 'groupformation'),
-            'wrap="virtual" rows="1" cols="50"');
+                'wrap="virtual" rows="1" cols="50"');
         $mform->addElement('textarea', 'binquestionlines', get_string('oneOfBinAnswers', 'groupformation'),
-            'wrap="virtual" rows="10" cols="50"');
+                'wrap="virtual" rows="10" cols="50"');
         $mform->addElement('text', 'binquestionimportance', get_string('oneOfBinImportance', 'groupformation'), null);
         $mform->setType('binquestionimportance', PARAM_INT);
         $mform->addElement('select', 'binquestionrelation', get_string('oneOfBinRelation', 'groupformation'), array(
-            get_string('homogenous', 'groupformation'),
-            get_string('heterogenous', 'groupformation')), null);
+                get_string('homogenous', 'groupformation'),
+                get_string('heterogenous', 'groupformation')), null);
 
         $mform->disabledIf('binquestionmultiselect', 'binquestion', 'notchecked');
         $mform->disabledIf('binquestiontext', 'binquestion', 'notchecked');
@@ -256,14 +258,14 @@ class mod_groupformation_mod_form extends moodleform_mod {
         // Add fields for Knowledge questions.
         $mform->addElement('checkbox', 'knowledge', get_string('knowledge', 'groupformation'));
         $mform->addElement('textarea', 'knowledgelines', get_string('knowledge', 'groupformation'),
-            'wrap="virtual" rows="10" cols="50"');
+                'wrap="virtual" rows="10" cols="50"');
 
         $mform->disabledIf('knowledgelines', 'knowledge', 'notchecked');
 
         // Add fields for topic choices.
         $mform->addElement('checkbox', 'topics', get_string('topics', 'groupformation'));
         $mform->addElement('textarea', 'topiclines', get_string('topics', 'groupformation'),
-            'wrap="virtual" rows="10" cols="50"');
+                'wrap="virtual" rows="10" cols="50"');
 
         $mform->disabledIf('topiclines', 'topics', 'notchecked');
 
@@ -272,7 +274,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
         $radioarray [] = &$mform->createElement('radio', 'groupoption', '', get_string('maxmembers', 'groupformation'), 0, null);
         $radioarray [] = &$mform->createElement('radio', 'groupoption', '', get_string('maxgroups', 'groupformation'), 1, null);
         $mform->addGroup($radioarray, 'radioar', get_string('groupoptions', 'groupformation'), array(
-            ' '), false);
+                ' '), false);
         $mform->addRule('radioar', get_string('maxmembers_error', 'groupformation'), 'required', null, 'client');
 
         $mform->addElement('text', 'maxmembers', get_string('maxmembers', 'groupformation'), null);
@@ -287,7 +289,7 @@ class mod_groupformation_mod_form extends moodleform_mod {
 
         // Add group name field.
         $mform->addElement('text', 'groupname', get_string('groupname', 'groupformation'), array(
-            'size' => '64'));
+                'size' => '64'));
         if (!empty ($CFG->formatstringstriptags)) {
             $mform->setType('groupname', PARAM_TEXT);
         } else {
@@ -297,18 +299,18 @@ class mod_groupformation_mod_form extends moodleform_mod {
         $mform->addHelpButton('groupname', 'groupname', 'groupformation');
 
         $array = array(
-            get_string('choose_evaluationmethod', 'groupformation'),
-            get_string('grades', 'groupformation'),
-            get_string('points', 'groupformation'),
-            get_string('justpass', 'groupformation'),
-            get_string('noevaluation', 'groupformation')
+                get_string('choose_evaluationmethod', 'groupformation'),
+                get_string('grades', 'groupformation'),
+                get_string('points', 'groupformation'),
+                get_string('justpass', 'groupformation'),
+                get_string('noevaluation', 'groupformation')
         );
 
         // Add field for evaluation method.
         $mform->addElement('select', 'evaluationmethod',
-            get_string('evaluationmethod_description', 'groupformation'), $array, null);
+                get_string('evaluationmethod_description', 'groupformation'), $array, null);
         $mform->addRule('evaluationmethod', get_string('evaluationmethod_error', 'groupformation'), 'required', null,
-            'client');
+                'client');
         $mform->addElement('text', 'maxpoints', get_string('maxpoints', 'groupformation'));
         $mform->disabledIf('maxpoints', 'evaluationmethod', 'neq', '2');
         $mform->setType('maxpoints', PARAM_NUMBER);

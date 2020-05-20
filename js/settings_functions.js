@@ -39,8 +39,8 @@ require(['jquery', 'jqueryui'], function($) {
 
             $("select[id*='id_timeopen']").prop('disabled', true);
             $("input[id*='id_timeopen']").prop('disabled', true);
-            $("select[id*='id_timeclose']").prop('disabled', true);
-            $("input[id*='id_timeclose']").prop('disabled', true);
+            $("select[id*='id_timeclose']").prop('enabled', true);
+            $("input[id*='id_timeclose']").prop('enabled', true);
         }
 
         $('.szenarioLabel').click(function () {
