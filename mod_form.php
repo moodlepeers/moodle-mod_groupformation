@@ -102,7 +102,6 @@ class mod_groupformation_mod_form extends moodleform_mod {
         $mform->addElement('header', 'groupformationsettings', get_string('groupformationsettings', 'groupformation'));
         $mform->setExpanded('groupformationsettings');
 
-        //die();
         $this->generate_html_for_non_js($mform);
 
         $this->generate_html_for_js($mform);
