@@ -449,7 +449,7 @@ class mod_groupformation_criterion_calculator {
             $answerarray[0] -= 1;
         }
 
-        for ($i = 0; $i < $numberofchoices; $i++) { // Creates an array in a vector-form with 0 and 1 as entries like "0,1,1,0,0"
+        for ($i = 0; $i < ($numberofchoices-1); $i++) { // Creates an array in a vector-form with 0 and 1 as entries like "0,1,1,0,0"
             if ($i == $answerarray[$curindexanswers]) {
                 $binvalue .= '1';
                 $curindexanswers++;
@@ -914,14 +914,17 @@ class mod_groupformation_criterion_calculator {
                 $array[$rec->label]['values'] = array();
             }
             if ($criterion == "binquestion") {
-                $array[$rec->label]['values'] = explode(',', $rec->binvalue);
+                $array[$rec->label]['values'] = explode(',', $rec->value);
             } else {
                 $array[$rec->label]['values'][$rec->dimension] = floatval($rec->value);
             }
+
         }
-        if ($criterion == "knowledge") {
-            $array = array("two" => array("values" => array($array["two"]["values"][0] / $array["two"]["values"][1])));
-        }
+
+        //if ($criterion == "knowledge") {
+        //    $array = array("two" => array("values" => array($array["two"]["values"][0] / $array["two"]["values"][1])));
+        //}
+
         return $array;
     }
 
