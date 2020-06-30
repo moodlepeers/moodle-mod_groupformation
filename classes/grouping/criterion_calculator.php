@@ -449,7 +449,8 @@ class mod_groupformation_criterion_calculator {
             $answerarray[0] -= 1;
         }
 
-        for ($i = 0; $i < ($numberofchoices-1); $i++) { // Creates an array in a vector-form with 0 and 1 as entries like "0,1,1,0,0"
+        for ($i = 0; $i < ($numberofchoices - 1); $i++)
+        { // Creates an array in a vector-form with 0 and 1 as entries like "0,1,1,0,0"
             if ($i == $answerarray[$curindexanswers]) {
                 $binvalue .= '1';
                 $curindexanswers++;
@@ -921,43 +922,8 @@ class mod_groupformation_criterion_calculator {
 
         }
 
-        //if ($criterion == "knowledge") {
-        //    $array = array("two" => array("values" => array($array["two"]["values"][0] / $array["two"]["values"][1])));
-        //}
-
         return $array;
     }
-
-    /* old Version
-    public function read_values_for_user($criterion, $userid) {
-        global $DB;
-        // TODO: hier bearbeiten knowledge
-        $recs = $DB->get_records('groupformation_user_values',
-            array('groupformationid' => $this->groupformationid,
-                'userid' => $userid,
-                'criterion' => $criterion
-            )
-        );
-
-        $array = array();
-        foreach (array_values($recs) as $rec) {
-
-            if (!array_key_exists($rec->label, $array)) {
-                $array[$rec->label] = array();
-            }
-            if (!array_key_exists('values', $array[$rec->label])) {
-                $array[$rec->label]['values'] = array();
-            }
-
-            if ($criterion == "binquestion"){
-                $array[$rec->label]['values'] = explode(',', $rec->binvalue);
-            } else {
-                $array[$rec->label]['values'][$rec->dimension] = floatval($rec->value);
-            }
-        }
-
-        return $array;
-    }*/
 
     /**
      * Returns values for users
