@@ -25,33 +25,26 @@ require_once('../../config.php');
 require('header.php');
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/test_user_generator.php');
-require_once($CFG->dirroot . '/mod/groupformation/classes/util/xml_loader.php');
-require_once($CFG->dirroot . '/mod/groupformation/classes/util/util.php');
-require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/controller/analysis_controller.php');
-require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/participant_parser.php');
-require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/scientific_grouping_2.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/analysis_view_controller.php');
-require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/group_generator.php');
-require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/state_machine.php');
 
 $filename = substr(__FILE__, strrpos(__FILE__, '\\') + 1);
-$url = new moodle_url('/mod/groupformation/' . $filename, $urlparams);
+$filename = substr($filename, strpos($filename, '/mod/groupformation/'));
 
+$url = new moodle_url($filename);
 // Set PAGE config.
-$PAGE->set_url('/mod/groupformation/analysis_view.php', array(
-    'id' => $cm->id, 'do_show' => $doshow));
+$PAGE->set_url('/mod/groupformation/analysis_view.php', $urlparams);
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
-
-// Import jQuery and js file.
-groupformation_add_jquery($PAGE, 'survey_functions.js');
+$PAGE->set_context(context_module::instance($cm->id));
+$PAGE->set_cm($cm);
 
 // Update questionnaire config if necessary.
 groupformation_import_questionnaire_configuration();
 
 $store = new mod_groupformation_storage_manager($groupformation->id);
+
 $controller = new mod_groupformation_analysis_controller ($groupformation->id, $cm);
 $viewcontroller = new mod_groupformation_analysis_view_controller($groupformation->id, $controller);
 
@@ -63,9 +56,7 @@ require('debug_actions.php');
 
 echo $OUTPUT->header();
 
-$statemachine = new mod_groupformation_state_machine($groupformation->id);
-
-$currenttab = 'analysis';
+$currenttab = $doshow;
 
 // Print the tabs.
 require('tabs.php');

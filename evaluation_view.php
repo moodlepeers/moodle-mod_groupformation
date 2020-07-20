@@ -29,40 +29,33 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/controller/evaluation_
 require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/evaluation_view_controller.php');
 
 $filename = substr(__FILE__, strrpos(__FILE__, '\\') + 1);
-$url = new moodle_url('/mod/groupformation/' . $filename, $urlparams);
+$filename = substr($filename, strpos($filename, '/mod'));
 
+$url = new moodle_url($filename, $urlparams);
 // Set PAGE config.
-$PAGE->set_url($url);
+$PAGE->set_url('/mod/groupformation/evaluation_view.php', $urlparams);
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
+$PAGE->set_context(context_module::instance($cm->id));
+$PAGE->set_cm($cm);
 
 // Import jQuery and js file.
 groupformation_add_jquery($PAGE, 'startcarousel.js');
 
-if (has_capability('mod/groupformation:editsettings', $context)) {
-    $returnurl = new moodle_url('/mod/groupformation/analysis_view.php', array('id' => $id, 'do_show' => 'analysis'));
-    redirect($returnurl);
-} else {
-    $currenttab = $doshow;
-}
+$controller = new mod_groupformation_evaluation_controller($groupformation->id, $cm->id);
+$viewcontroller = new mod_groupformation_evaluation_view_controller($groupformation->id, $controller);
+
+$viewcontroller->handle_access();
 
 echo '<link rel="stylesheet" href="fonts/fontawesome/css/font-awesome.min.css">';
 
 echo $OUTPUT->header();
 
+$currenttab = $doshow;
+
 // Print the tabs.
 require('tabs.php');
 
-if (groupformation_get_current_questionnaire_version() > $store->get_version()) {
-    echo '<div class="alert">'.get_string('questionnaire_outdated', 'groupformation') . '</div>';
-}
-if ($store->is_archived()) {
-    echo '<div class="alert" id="commited_view">'.get_string('archived_activity_answers', 'groupformation') . '</div>';
-} else {
-    $controller = new mod_groupformation_evaluation_controller($groupformation->id);
-
-    $viewcontroller = new mod_groupformation_evaluation_view_controller($groupformation->id, $controller);
-    echo $viewcontroller->render();
-}
+echo $viewcontroller->render();
 
 echo $OUTPUT->footer();

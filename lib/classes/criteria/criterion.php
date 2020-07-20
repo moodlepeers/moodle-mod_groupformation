@@ -25,9 +25,8 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
-}
+
+defined('MOODLE_INTERNAL') || die();
 
 /**
  * Class mod_groupformation_criterion
@@ -38,7 +37,6 @@ if (!defined('MOODLE_INTERNAL')) {
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 abstract class mod_groupformation_criterion {
-
 
     /** @var string The name of an Criterion e.g. "learner style after Silvermann & Felder" */
     protected $name = "";
@@ -54,6 +52,58 @@ abstract class mod_groupformation_criterion {
 
     /** @var bool  flag to mark Criterion as homogeneous or as not homogeneous (heterogeneous) */
     protected $homogeneous = false;
+
+    /** @var string distance name */
+    protected $distance = "manhattan_distance";
+
+    /** @var string  */
+    protected $property = "";
+
+    /**
+     * get property
+     *
+     * @return string
+     */
+    public function get_property() {
+        return $this->property;
+    }
+
+    /**
+     * set property
+     *
+     * @param string $property
+     */
+    public function set_property($property) {
+        $this->property = $property;
+    }
+
+    /**
+     * get the number of bins
+     *
+     * @return int
+     */
+    public function get_number_of_bins() {
+        $count = count($this->get_values());
+        return $count;
+    }
+
+    /**
+     * get the distance
+     *
+     * @return string
+     */
+    public function get_distance() {
+        return $this->distance;
+    }
+
+    /**
+     * Sets distance
+     *
+     * @param string $distance
+     */
+    public function set_distance($distance) {
+        $this->distance = $distance;
+    }
 
     /**
      * Returns name
@@ -83,7 +133,6 @@ abstract class mod_groupformation_criterion {
         return $this->value[$i];
     }
 
-
     /**
      * Returns values
      *
@@ -92,7 +141,6 @@ abstract class mod_groupformation_criterion {
     public function get_values() {
         return $this->value;
     }
-
 
     /**
      * Adds or replaces value at index. Checks for min/max value conformity
@@ -104,7 +152,7 @@ abstract class mod_groupformation_criterion {
     public function set_value($i, $v) {
         if ($v < $this->get_min_value() || $v > $this->get_max_value()) {
             throw new Exception("value (" . $v . ") is out of min/max value area! (" . $this->get_min_value() . " to " .
-                $this->get_max_value() . ") [" . $this->get_name() . "]");
+                    $this->get_max_value() . ") [" . $this->get_name() . "]");
         }
         $this->value[$i] = $v;
     }
@@ -121,7 +169,6 @@ abstract class mod_groupformation_criterion {
         }
     }
 
-
     /**
      * Returns max value
      *
@@ -130,7 +177,6 @@ abstract class mod_groupformation_criterion {
     public function get_max_value() {
         return $this->maxvalue;
     }
-
 
     /**
      * Sets max value
@@ -145,7 +191,6 @@ abstract class mod_groupformation_criterion {
         $this->maxvalue = $number;
     }
 
-
     /**
      * Returns min value
      *
@@ -155,7 +200,6 @@ abstract class mod_groupformation_criterion {
         return $this->minvalue;
     }
 
-
     /**
      * Sets min value
      *
@@ -164,7 +208,6 @@ abstract class mod_groupformation_criterion {
     public function set_min_value($number) {
         $this->minvalue = $number;
     }
-
 
     /**
      * Returns whether criterion is homogeneous or not
@@ -183,7 +226,6 @@ abstract class mod_groupformation_criterion {
     public function set_homogeneous($bool) {
         $this->homogeneous = $bool;
     }
-
 
     /**
      * Returns weight

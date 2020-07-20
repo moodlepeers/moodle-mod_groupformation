@@ -54,5 +54,5 @@ if (!defined('MOODLE_INTERNAL')) {
             </div>
         </div>
 
-        <?php endif; ?>
+    <?php endif; ?>
 </div>

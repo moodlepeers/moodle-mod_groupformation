@@ -21,9 +21,8 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
-}
+
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/range_question.php');
 
@@ -45,6 +44,119 @@ class mod_groupformation_knowledge_question extends mod_groupformation_range_que
     public function get_answer() {
         $answer = $this->answer;
         return $answer;
+    }
+
+    /**
+     * Print HTML of range inputs
+     *
+     * @param bool $highlight
+     * @param bool $required
+     */
+    public function print_html($highlight, $required) {
+
+        $category = $this->category;
+        $questionid = $this->questionid;
+        $question = $this->question;
+        $options = $this->options;
+
+        $answer = $this->get_answer();
+
+        if ($answer != -1) {
+            echo '<tr>';
+            echo '<th scope="row">' . $question . '</th>';
+        } else {
+            if ($highlight) {
+                echo '<tr class="noAnswer">';
+                echo '<th scope="row">' . $question . '</th>';
+            } else {
+                echo '<tr>';
+                echo '<th scope="row">' . $question . '</th>';
+            }
+        }
+
+        echo '<td colspan="100%" data-title="';
+        echo min(array_keys($options)) . ' = ' . $options [min(array_keys($options))];
+        echo ', ' . max(array_keys($options)) . ' = ' . $options [max(array_keys($options))];
+        echo '" class="range">';
+
+        echo '<input class="form-control" type="number" name="' . $category . $questionid . '" min="0" max="100"  value="' .
+                intval($answer) . '"/>';
+
+        echo '<input type="text" name="' . $category . $questionid;
+        echo '_valid" value="' . intval($answer) . '" style="display:none;"/>';
+        if ($category == 'points') {
+            echo '<br>';
+            echo '<label id="text' . $category . $questionid . '">';
+            echo((intval($answer) == -1) ? '0' : intval($answer));
+            echo '</label>';
+        }
+        echo '</td>';
+        echo '</tr>';
+    }
+
+    /**
+     * Print HTML of range inputs
+     *
+     * @param bool $highlight
+     * @param bool $required
+     * @return string
+     */
+    public function get_html($highlight, $required) {
+
+        $s = "";
+        $category = $this->category;
+        $questionid = $this->questionid;
+        $question = $this->question;
+        $options = $this->options;
+
+        $answer = $this->get_answer();
+
+        if ($answer != -1) {
+            $s .= '<tr>';
+            $s .= '<th scope="row">' . $question . '</th>';
+        } else {
+            if ($highlight) {
+                $s .= '<tr class="noAnswer">';
+                $s .= '<th scope="row">' . $question . '</th>';
+            } else {
+                $s .= '<tr>';
+                $s .= '<th scope="row">' . $question . '</th>';
+            }
+        }
+
+        $s .= '<td colspan="100%" data-title="';
+        $s .= min(array_keys($options)) . ' = ' . $options [min(array_keys($options))];
+        $s .= ', ' . max(array_keys($options)) . ' = ' . $options [max(array_keys($options))];
+        $s .= '" class="range">';
+        $s .= '<input class="form-control" type="number" name="' . $category . $questionid . '" min="0" max="100" value="' .
+                intval($answer) . '"/>';
+        $s .= '<input type="text" name="' . $category . $questionid;
+        $s .= '_valid" value="' . intval($answer) . '" style="display:none;"/>';
+        if ($category == 'points') {
+            $s .= '<br>';
+            $s .= '<label id="text' . $category . $questionid . '">';
+            $s .= ((intval($answer) == -1) ? '0' : intval($answer));
+            $s .= '</label>';
+        }
+        $s .= '</td>';
+        $s .= '</tr>';
+
+        return $s;
+    }
+
+    /**
+     * return saved or deleted(null) answers
+     *
+     * @return array|null
+     */
+    public function read_answer() {
+        $parameter = $this->category . $this->questionid;
+        $answer = optional_param($parameter, null, PARAM_RAW);
+        if (isset($answer) && $answer != 0) {
+            return array('save', $answer);
+        } else {
+            return array('delete', null);
+        }
     }
 
 }

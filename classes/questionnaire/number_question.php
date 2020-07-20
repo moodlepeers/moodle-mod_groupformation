@@ -21,9 +21,8 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
-}
+
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/input_question.php');
 
@@ -50,8 +49,8 @@ class mod_groupformation_number_question extends mod_groupformation_input_questi
 
         $input = "";
 
-        $input .= '<input style="height:35px" class="freetext-textarea form-control" type="number" min="';
-        $input .= $options[0] . '" max="' . $options[1] . '" value="' . ((is_number($answer)) ? intval($answer) : "") . '" name="';
+        $input .= '<input style="height:35px" class="freetext-textarea form-control"';
+        $input .= '" value="' . ((is_number($answer)) ? intval($answer) : "") . '" name="';
         $input .= $category;
         $input .= $questionid;
         $input .= '">';

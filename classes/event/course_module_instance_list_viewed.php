@@ -24,6 +24,7 @@
  */
 
 namespace mod_groupformation\event;
+
 defined('MOODLE_INTERNAL') || die();
 
 /**

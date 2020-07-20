@@ -1,55 +1,40 @@
-# Travis CI integration for plugin test
-# based on https://github.com/moodlerooms/moodle-plugin-ci/blob/master/doc/TravisFileExplained.md
 language: php
 
-sudo: false
+sudo: true
+
+addons:
+  firefox: "47.0.1"
+  postgresql: "9.4"
+
+services:
+  - mysql
+  - postgresql
 
 cache:
   directories:
     - $HOME/.composer/cache
+    - $HOME/.npm
 
 php:
- - 5.6
+ - 7.0
  - 7.1
 
 env:
-  - MOODLE_BRANCH=MOODLE_35_STABLE DB=mysqli
-  - MOODLE_BRANCH=MOODLE_35_STABLE DB=pgsql
-  - MOODLE_BRANCH=MOODLE_34_STABLE DB=mysqli
-  - MOODLE_BRANCH=MOODLE_34_STABLE DB=pgsql
-  - MOODLE_BRANCH=MOODLE_33_STABLE DB=mysqli
-  - MOODLE_BRANCH=MOODLE_33_STABLE DB=pgsql
-  - MOODLE_BRANCH=MOODLE_32_STABLE DB=mysqli
-  - MOODLE_BRANCH=MOODLE_32_STABLE DB=pgsql
-  - MOODLE_BRANCH=MOODLE_31_STABLE DB=mysqli
-  - MOODLE_BRANCH=MOODLE_31_STABLE DB=pgsql
-  - MOODLE_BRANCH=MOODLE_30_STABLE DB=pgsql
-  - MOODLE_BRANCH=MOODLE_27_STABLE DB=mysqli
-
-matrix:
-  exclude:
-    - php: 5.6
-      env: MOODLE_BRANCH=MOODLE_35_STABLE DB=pgsql
-    - php: 5.6
-      env: MOODLE_BRANCH=MOODLE_35_STABLE DB=mysqli
-    - php: 5.6
-      env: MOODLE_BRANCH=MOODLE_34_STABLE DB=pgsql
-    - php: 5.6
-      env: MOODLE_BRANCH=MOODLE_34_STABLE DB=mysqli
-    - php: 7.1
-      env: MOODLE_BRANCH=MOODLE_30_STABLE DB=pgsql
-    - php: 7.1
-      env: MOODLE_BRANCH=MOODLE_27_STABLE DB=mysqli
-    - php: 7.1
-      env: MOODLE_BRANCH=MOODLE_31_STABLE DB=pgsql
-    - php: 7.1
-      env: MOODLE_BRANCH=MOODLE_31_STABLE DB=mysqli
+ global:
+  - MOODLE_BRANCH=MOODLE_38_STABLE
+  - MOODLE_BRANCH=MOODLE_37_STABLE
+  - MOODLE_BRANCH=MOODLE_36_STABLE
+  - MOODLE_BRANCH=MOODLE_35_STABLE
+ matrix:
+  - DB=pgsql
+  - DB=mysqli
 
 before_install:
   - phpenv config-rm xdebug.ini
+  - nvm install node
+  - nvm use node
   - cd ../..
-  - composer selfupdate
-  - composer create-project -n --no-dev --prefer-dist moodlerooms/moodle-plugin-ci ci ^1
+  - composer create-project -n --no-dev --prefer-dist blackboard-open-source/moodle-plugin-ci ci ^2
   - export PATH="$(cd ci/bin; pwd):$(cd ci/vendor/bin; pwd):$PATH"
 
 install:
@@ -57,14 +42,13 @@ install:
 
 script:
   - moodle-plugin-ci phplint
+#  - moodle-plugin-ci phpcpd
   - moodle-plugin-ci phpmd
-  - moodle-plugin-ci codechecker
   - moodle-plugin-ci validate
+  - moodle-plugin-ci savepoints
+  - moodle-plugin-ci mustache
+  - moodle-plugin-ci phpdoc
   - moodle-plugin-ci phpunit
   - moodle-plugin-ci behat
-  - moodle-plugin-ci shifter
-  - moodle-plugin-ci csslint
-# - moodle-plugin-ci jshint
-
-notifications:
-    slack: moodlepeers:CPibsew1aB1FWpNdPLHmJP0o
+  - moodle-plugin-ci codechecker
+#  - moodle-plugin-ci grunt

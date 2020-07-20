@@ -21,9 +21,8 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.');
-}
+
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once(dirname(__FILE__) . '/define_file.php');
@@ -150,12 +149,19 @@ class mod_groupformation_util {
 
         $stats = array();
         foreach ($categories as $category => $value) {
+
             $count = $usermanager->get_number_of_answers($userid, $category);
+            if ($category == 'binquestion') {
+                if ($value >= 1) {
+                    $value = 1;
+                }
+            }
             $stats [$category] = array(
                     'questions' => $value,
                     'answered' => $count,
                     'missing' => $value - $count
             );
+
         }
 
         return $stats;
@@ -267,7 +273,7 @@ class mod_groupformation_util {
             $enrolledstudents = $diff;
         }
         if (is_null($enrolledstudents) || count($enrolledstudents) <= 0) {
-            return null;
+            return array();
         }
 
         return $enrolledstudents;

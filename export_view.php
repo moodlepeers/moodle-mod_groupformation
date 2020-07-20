@@ -29,33 +29,29 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/controller/export_cont
 require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/export_view_controller.php');
 
 $filename = substr(__FILE__, strrpos(__FILE__, '\\') + 1);
-$url = new moodle_url('/mod/groupformation/' . $filename, $urlparams);
+$filename = substr($filename, strpos($filename, '/mod'));
+
+$url = new moodle_url($filename, $urlparams);
 
 // Set PAGE config.
-$PAGE->set_url($url);
+$PAGE->set_url('/mod/groupformation/export_view.php', $urlparams);
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
+$PAGE->set_context(context_module::instance($cm->id));
+$PAGE->set_cm($cm);
 
-$manualid = optional_param('gid', null, PARAM_INT);
-if (is_null($manualid)) {
-    $manualid = $groupformation->id;
-}
+$controller = new mod_groupformation_export_controller($groupformation->id, $cm->id);
+$viewcontroller = new mod_groupformation_export_view_controller($groupformation->id, $controller);
 
-// Redirect if no access is granted for user.
-if (!has_capability('mod/groupformation:editsettings', $context)) {
-    $returnurl = new moodle_url('/mod/groupformation/view.php', array('id' => $id, 'do_show' => 'view'));
-    redirect($returnurl);
-} else {
-    $currenttab = $doshow;
-}
+$viewcontroller->handle_access();
 
 echo $OUTPUT->header();
+
+$currenttab = $doshow;
 
 // Print the tabs.
 require('tabs.php');
 
-$controller = new mod_groupformation_export_controller($groupformation->id, $id);
-$viewcontroller = new mod_groupformation_export_view_controller($groupformation->id, $controller);
 echo $viewcontroller->render();
 
 echo $OUTPUT->footer();

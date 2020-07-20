@@ -39,8 +39,8 @@ require(['jquery', 'jqueryui'], function($) {
 
             $("select[id*='id_timeopen']").prop('disabled', true);
             $("input[id*='id_timeopen']").prop('disabled', true);
-            $("select[id*='id_timeclose']").prop('disabled', true);
-            $("input[id*='id_timeclose']").prop('disabled', true);
+            $("select[id*='id_timeclose']").prop('enabled', true);
+            $("input[id*='id_timeclose']").prop('enabled', true);
         }
 
         $('.szenarioLabel').click(function () {
@@ -78,6 +78,31 @@ require(['jquery', 'jqueryui'], function($) {
             });
         }
 
+        // If oob gets checked.
+
+        $('#id_js_oneofbin').click(function () {
+            if ($('#id_binquestion').prop('checked')) {
+                $('#id_binquestion').prop('checked', false);
+                $('#id_binquestiontext').attr('disabled', 'disabled');
+                $('#id_binquestionlines').attr('disabled', 'disabled');
+                $('#id_binquestionrelation').attr('disabled', 'disabled');
+                $('#id_binquestionimportance').attr('disabled', 'disabled');
+                $('#id_binquestionmultiselect').attr('disabled', 'disabled');
+
+                $("#js_oneOfBinWrapper").hide('2000', 'swing');
+            } else {
+                $('#id_binquestion').prop('checked', true);
+                $('#id_binquestiontext').removeAttr('disabled');
+                $('#id_binquestionlines').removeAttr('disabled');
+                $('#id_binquestionrelation').removeAttr('disabled');
+                $('#id_binquestionimportance').removeAttr('disabled');
+                $('#id_binquestionmultiselect').removeAttr('disabled');
+
+                $("#js_oneOfBinWrapper").show('2000', 'swing');
+            }
+
+        });
+
         // If knowledge gets checked.
         $('#id_js_knowledge').click(function () {
             if ($('#id_knowledge').prop('checked')) {
@@ -98,6 +123,43 @@ require(['jquery', 'jqueryui'], function($) {
 
         });
 
+        // If Multiselect box gets checked.
+        $('#id_js_binquestionmultiselect').click(function () {
+            if ($('#id_binquestionmultiselect').prop('checked')) {
+                $('#id_binquestionmultiselect').prop('checked', false);
+                // Show single choice preview.
+                $('#oobMultiPreview').hide();
+                $('#oobPreview').show();
+            } else {
+                $('#id_binquestionmultiselect').prop('checked', true);
+                // Show multiselect preveiw.
+                $('#oobMultiPreview').show();
+                $('#oobPreview').hide();
+            }
+        });
+
+
+        // Importance Slider update oob.
+        function oobChangeImpSelVal(value){
+
+            var text = $('#gf_one_of_bin_Importance').html();
+            var oldValue = text.match(/\d+/);
+            if (oldValue == null){
+                text = text.replace(': ', ': ' + value);
+            } else {
+                text = text.replace(oldValue, value);
+            }
+            $('#gf_one_of_bin_Importance').html(text);
+        }
+
+        $('#id_js_oneofbinimportance').change(function(){
+            var value = $('#id_js_oneofbinimportance').val();
+
+            oobChangeImpSelVal(value);
+
+            $('#id_binquestionimportance').val(value);
+        });
+
         // If topics gets checked.
         $('#id_js_topics').click(function () {
             if ($('#id_topics').prop('checked')) {
@@ -107,6 +169,38 @@ require(['jquery', 'jqueryui'], function($) {
                 switchTopics('on');
                 switchTopics('enable');
                 switchKnowledge('off');
+            }
+        });
+
+        // Dynamic input oobquestion.
+        $('#js_oob_question').keyup(function oobquestionInput() {
+            $('#oobquestionPreview').text($(this).val());
+            $('#oobquestionPreviewMulti').text($(this).val());
+            $('#id_binquestiontext').val($(this).val());
+        });
+
+        // Change oob-Relation
+        function oobChangeSelValue(value){
+            var text = $('#js_oobrelselval').html();
+            var oldValue = text.match(/homogenous/);
+            if (oldValue == null){
+                oldValue = text.match(/heterogenous/);
+            }
+            if (oldValue == null){
+                text = text.replace(': ', ': ' + value);
+            } else {
+                text = text.replace(oldValue, value);
+            }
+            $('#js_oobrelselval').html(text);
+        }
+
+        $('#id_js_oneofbinrelation').change(function oobRelChange () {
+            if ($(this).val() == 'homogenous') {
+                $('#id_binquestionrelation option').prop('selected', false).filter('[value=0]').prop('selected', true);
+                oobChangeSelValue('homogenous');
+            } else if ($(this).val() == 'heterogenous') {
+                $('#id_binquestionrelation option').prop('selected', false).filter('[value=1]').prop('selected', true);
+                oobChangeSelValue('heterogenous');
             }
         });
 
@@ -143,6 +237,11 @@ require(['jquery', 'jqueryui'], function($) {
                     synchronizeTopics();
                     computeGroupSizeParameters(0, countTopics());
                     setGroupSettings();
+                }
+                if (cat == 'oob'){
+                    $('#' + $previewRowID).text($(this).val());
+                    $('#' + $previewRowID + 'Multi').text($(this).val());
+                    synchronizeoob();
                 }
             });
         });
@@ -339,6 +438,10 @@ require(['jquery', 'jqueryui'], function($) {
                 $('.topicLi:first-child', '#previewTopics').clone(true).attr('id', $previewRowID)
                     .appendTo('#previewTopics').html('<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>').append(document.createTextNode(value));
             }
+            if (cat == 'oob'){
+                $('.oobRow:first-child', '#oobpreviewdd').clone(true).attr('id', $previewRowID).appendTo('#oobpreviewdd').text(value);
+                $('.oobRowMulti:first-child', '#oobpreviewddMulti').clone(true).attr('id', $previewRowID +'Multi').appendTo('#oobpreviewddMulti').text(value);
+            }
         }
 
         /**
@@ -354,6 +457,9 @@ require(['jquery', 'jqueryui'], function($) {
                 $multifieldID = 'input' + cat + theID;
                 // Remove Preview.
                 $('#' + $previewRowID).remove();
+                if (cat == 'oob'){
+                    $('#' + $previewRowID + 'Multi').remove();
+                }
                 // Remove Input.
                 $('#' + $multifieldID).remove();
                 // Remove from Moodle native input field.
@@ -364,6 +470,9 @@ require(['jquery', 'jqueryui'], function($) {
                     synchronizeTopics();
                     computeGroupSizeParameters(0, countTopics());
                     setGroupSettings();
+                }
+                if (cat == 'oob'){
+                    synchronizeoob();
                 }
             }
         }
@@ -392,6 +501,16 @@ require(['jquery', 'jqueryui'], function($) {
                 }
             });
             $('#id_topiclines').val(stringOfTopics.slice(0, -1));
+        }
+
+        function synchronizeoob() {
+            stringOfPreAnswers = '';
+            $('.js_oneofbinInput').each(function () {
+                if (!$(this).val() == '') {
+                    stringOfPreAnswers += $(this).val() + '\n';
+                }
+            });
+            $('#id_binquestionlines').val(stringOfPreAnswers.slice(0, -1));
         }
 
         /**
@@ -440,6 +559,66 @@ require(['jquery', 'jqueryui'], function($) {
                     adjustGroupSizeOptions('none');
 
                     $("#js_topicsWrapper").show('2000', 'swing');
+                }
+            }
+
+            // If oneofbin was checked before.
+            if ($('#id_binquestion').prop('checked')) {
+                $('#id_js_oneofbin').prop('checked', true);
+                $('#id_binquestion').prop('checked', true);
+                $("#js_oneOfBinWrapper").show('2000', 'swing');
+
+                // Multiselect box
+                // TODO testen ob direkt beim laden die richtige Preview angezeigt wird
+                if ($('#id_binquestionmultiselect').prop('checked')){
+                    $('#id_js_binquestionmultiselect').prop('checked', true);
+                    // Show multiselect preview.
+                    $('#oobMultiPreview').show();
+                    $('#oobPreview').hide();
+                } else {
+                    $('#id_js_binquestionmultiselect').prop('checked', false);
+                    // Show single choice preview.
+                    $('#oobMultiPreview').hide();
+                    $('#oobPreview').show();
+                }
+
+                // Get the value of Moodle nativ field #id_binquestionlines, parse it and create dynamic input fields.
+                var lines = $('textarea[name=binquestionlines]').val().split('\n');
+                wrapper = $('#oob').find('.multi_fields');
+                cat = 'oob';
+                $.each(lines, function () {
+                    addInput(wrapper, cat, this);
+                });
+
+                for (var i = 0, l = 3; i < l; i++) {
+                    // Remove the first 3 dynamic fields which been created by default.
+                    removeInput(wrapper, cat, i);
+                }
+                addInput(wrapper, cat, '');
+
+                var question = $('#id_binquestiontext').val();
+                if (question != "") {
+                    $('#js_oob_question').val(question);
+                    $('#oobquestionPreview').text(question);
+                    $('#oobquestionPreviewMulti').text(question);
+                }
+
+                if($('#id_binquestionrelation option:selected').val() != 0){
+                    var opt = $('#id_binquestionrelation option:selected').val();
+                    if (opt == 0){
+                        $('#id_js_oneofbinrelation').val('homogenous');
+                        oobChangeSelValue('homogenous');
+                    } else if (opt == 1){
+                        $('#id_js_oneofbinrelation').val('heterogenous');
+                        oobChangeSelValue('heterogenous');
+                    }
+                }
+
+                var value = parseInt($('#id_binquestionimportance').val());
+                console.log(value);
+                if (value >= 0 && value <= 10){
+                    $('#id_js_oneofbinimportance').val(value);
+                    oobChangeImpSelVal(value);
                 }
             }
 
@@ -781,5 +960,7 @@ require(['jquery', 'jqueryui'], function($) {
                 scrollTop: $($param).offset().top
             }, 80);
         }
+
+
     });
 });

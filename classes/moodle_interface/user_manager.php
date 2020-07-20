@@ -22,9 +22,8 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.');
-}
+
+defined('MOODLE_INTERNAL') || die();
 
 /**
  * Class mod_groupformation_user_manager
@@ -125,6 +124,7 @@ class mod_groupformation_user_manager {
 
     /**
      * Returns record of groupformation_users instance
+     *
      * @param int $userid
      * @return mixed
      * @throws dml_exception
@@ -210,15 +210,14 @@ class mod_groupformation_user_manager {
     /**
      * Initializes record
      *
-     * @param $userid
-     * @throws dml_exception
+     * @param int $userid ID of user
      */
     public function init($userid) {
         global $DB;
         if ($DB->count_records('groupformation_users', array(
-                'groupformation' => $this->groupformationid,
-                'userid' => $userid
-        )) == 0
+                        'groupformation' => $this->groupformationid,
+                        'userid' => $userid
+                )) == 0
         ) {
             $data = new stdClass ();
             $data->groupformation = $this->groupformationid;
@@ -232,7 +231,6 @@ class mod_groupformation_user_manager {
      *
      * @param int $userid
      * @param bool|false $completed
-     * @throws dml_exception
      */
     public function set_status($userid, $completed = false) {
         global $DB;
@@ -259,7 +257,6 @@ class mod_groupformation_user_manager {
      *
      * @param int $userid
      * @param bool|false $complete
-     * @throws dml_exception
      */
     public function change_status($userid, $complete = false) {
         $status = 0;
@@ -284,7 +281,6 @@ class mod_groupformation_user_manager {
      *
      * @param int $userid
      * @return int|mixed
-     * @throws dml_exception
      */
     public function get_answering_status($userid) {
         global $DB;
@@ -315,12 +311,12 @@ class mod_groupformation_user_manager {
      *
      * @param int $userid
      * @return boolean
-     * @throws dml_exception
      */
     public function is_completed($userid) {
         global $DB;
 
-        return $DB->get_field('groupformation_users', 'completed', array('groupformation' => $this->groupformationid, 'userid' => $userid));
+        return $DB->get_field('groupformation_users', 'completed',
+                array('groupformation' => $this->groupformationid, 'userid' => $userid));
     }
 
     /**
@@ -329,7 +325,6 @@ class mod_groupformation_user_manager {
      * @param int $userid
      * @param string $category
      * @return number
-     * @throws dml_exception
      */
     public function get_number_of_answers($userid, $category = null) {
         global $DB;
@@ -353,7 +348,6 @@ class mod_groupformation_user_manager {
      *
      * @param int $userid
      * @return boolean
-     * @throws dml_exception
      */
     public function has_answered_everything($userid) {
         $store = new mod_groupformation_storage_manager ($this->groupformationid);
@@ -372,7 +366,6 @@ class mod_groupformation_user_manager {
      * @param null $userid
      * @param null $categories
      * @return bool
-     * @throws dml_exception
      */
     public function already_answered($userid = null, $categories = null) {
         global $DB;
@@ -399,6 +392,25 @@ class mod_groupformation_user_manager {
         return false;
     }
 
+    // TODO entfernen
+    /**
+     * bin answer helper
+     *
+     * @param int $userid ID of USer
+     * @param string $category
+     * @param null $sortedby
+     * @param string $fieldset
+     * @return mixed
+     */
+    public function binanswers_help($userid, $category, $sortedby = null, $fieldset = '*') {
+        global $DB;
+        return $DB->get_records('groupformation_answers', array(
+                'groupformation' => $this->groupformationid,
+                'userid' => $userid,
+                'category' => $category
+        ), $sortedby, $fieldset);
+    }
+
     /**
      * Returns all answers of a specific user in a specific category
      *
@@ -407,7 +419,6 @@ class mod_groupformation_user_manager {
      * @param null $sortedby
      * @param string $fieldset
      * @return array
-     * @throws dml_exception
      */
     public function get_answers($userid, $category, $sortedby = null, $fieldset = '*') {
         global $DB;
@@ -447,7 +458,6 @@ class mod_groupformation_user_manager {
      * @param string $category
      * @param int $questionid
      * @return int
-     * @throws dml_exception
      */
     public function get_single_answer($userid, $category, $questionid) {
         global $DB;
@@ -466,7 +476,6 @@ class mod_groupformation_user_manager {
      * @param int $userid
      * @param string $category
      * @param int $questionid
-     * @throws dml_exception
      */
     public function delete_answer($userid, $category, $questionid) {
         global $DB;
@@ -488,7 +497,6 @@ class mod_groupformation_user_manager {
      * @param string $category
      * @param number $answer
      * @param int $questionid
-     * @throws dml_exception
      */
     public function save_answer($userid, $category, $answer, $questionid) {
         global $DB;
@@ -641,10 +649,10 @@ class mod_groupformation_user_manager {
      * @return bool
      */
     public function validate_participant_code($participantcode) {
-        if (strlen($participantcode) !== 8) {
+        if (strlen($participantcode) !== 6) {
             return false;
         }
-        $array = array(true, false, true, false);
+        $array = array(true, true, false);
         $valid = true;
         $i = 0;
         $d = 2;
@@ -743,14 +751,27 @@ class mod_groupformation_user_manager {
                 foreach ($uservalues as $label => $values) {
                     $values = $values['values'];
                     foreach ($values as $dimension => $value) {
-                        $record = new stdClass();
-                        $record->groupformationid = $this->groupformationid;
-                        $record->userid = $userid;
-                        $record->criterion = $criterion;
-                        $record->label = $label;
-                        $record->dimension = $dimension;
-                        $record->value = $value;
-                        $records[] = $record;
+                        if ($criterion == 'binquestion') {
+                            $record = new stdClass();
+                            $record->groupformationid = $this->groupformationid;
+                            $record->userid = $userid;
+                            $record->criterion = $criterion;
+                            $record->label = $label;
+                            $record->dimension = $dimension;
+                            $record->value = $value['importance'];
+                            $record->binvalue = $value['binvalue'];
+                            $records[] = $record;
+                        } else {
+                            $record = new stdClass();
+                            $record->groupformationid = $this->groupformationid;
+                            $record->userid = $userid;
+                            $record->criterion = $criterion;
+                            $record->label = $label;
+                            $record->dimension = $dimension;
+                            $record->value = $value;
+                            $record->binvalue = '';
+                            $records[] = $record;
+                        }
                     }
                 }
             }
@@ -827,8 +848,8 @@ class mod_groupformation_user_manager {
     public function set_complete($userid, $value) {
         global $DB;
         $data = $DB->get_record('groupformation_users', array(
-            'groupformation' => $this->groupformationid,
-            'userid' => $userid
+                'groupformation' => $this->groupformationid,
+                'userid' => $userid
         ));
         $data->completed = intval($value);
         $data->timecompleted = time();
@@ -908,5 +929,33 @@ class mod_groupformation_user_manager {
         $stats ['submitted_completely'] = $nomissingcount;
 
         return $stats;
+    }
+
+    /**
+     * Returns whether the the binquestion is a multiselect (1) or a single choice (0) question
+     *
+     * @return mixed
+     * @throws dml_exception
+     */
+    public function get_binquestionmultiselect() {
+        global $DB;
+
+        return $DB->get_field('groupformation', 'binquestionmultiselect', array(
+                'id' => $this->groupformationid
+        ));
+    }
+
+    /**
+     * Returns binquestion importance value
+     *
+     * @return mixed
+     * @throws dml_exception
+     */
+    public function get_binquestionimportance() {
+        global $DB;
+
+        return $DB->get_field('groupformation', 'binquestionimportance', array(
+                'id' => $this->groupformationid
+        ));
     }
 }

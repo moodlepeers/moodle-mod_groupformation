@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="Big5 short version regular">
-    <QUESTIONS VERSION="2018111001">
+    <QUESTIONS VERSION="2018083003">
         <QUESTION ID="1" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I see myself as someone who is reserved.]]>
+                <![CDATA[I see myself as someone who is talkative.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[disagree]]>
+                    <![CDATA[(strongly) disagree]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -22,17 +22,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[agree]]>
+                    <![CDATA[(strongly) agree]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="2" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I see myself as someone who is generally trusting.]]>
+                <![CDATA[I see myself as someone who is reserved.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[disagree]]>
+                    <![CDATA[(strongly) disagree]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -47,17 +47,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[agree]]>
+                    <![CDATA[(strongly) agree]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="3" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I see myself as someone who tends to be lazy.]]>
+                <![CDATA[I see myself as someone who is full of energy and zest for action.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[disagree]]>
+                    <![CDATA[(strongly) disagree]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -72,17 +72,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[agree]]>
+                    <![CDATA[(strongly) agree]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="4" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I see myself as someone who is relaxed, handles stress well.]]>
+                <![CDATA[I see myself as someone who generates a lot of enthusiasm.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[disagree]]>
+                    <![CDATA[(strongly) disagree]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -97,17 +97,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[agree]]>
+                    <![CDATA[(strongly) agree]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="5" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I see myself as someone who has few artistic interests.]]>
+                <![CDATA[I see myself as someone who tends to be quiet, inhibited.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[disagree]]>
+                    <![CDATA[(strongly) disagree]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -122,17 +122,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[agree]]>
+                    <![CDATA[(strongly) agree]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="6" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I see myself as someone who is outgoing, sociable.]]>
+                <![CDATA[I see myself as someone who is assertive, energetic.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[disagree]]>
+                    <![CDATA[(strongly) disagree]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -147,17 +147,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[agree]]>
+                    <![CDATA[(strongly) agree]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="7" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I see myself as someone who tends to find fault with others.]]>
+                <![CDATA[I see myself as someone who is sometimes shy, inhibited.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[disagree]]>
+                    <![CDATA[(strongly) disagree]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -172,17 +172,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[agree]]>
+                    <![CDATA[(strongly) agree]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="8" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I see myself as someone who does a thorough job.]]>
+                <![CDATA[I see myself as someone who is outgoing, social.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[disagree]]>
+                    <![CDATA[(strongly) disagree]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -197,17 +197,18 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[agree]]>
+                    <![CDATA[(strongly) agree]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
+
         <QUESTION ID="9" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I see myself as someone who gets nervous easily.]]>
+                <![CDATA[I see myself as someone who does a thorough job.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[disagree]]>
+                    <![CDATA[(strongly) disagree]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -222,17 +223,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[agree]]>
+                    <![CDATA[(strongly) agree]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="10" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I see myself as someone who has an active imagination.]]>
+                <![CDATA[I see myself as someone who can be somewhat careless.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[disagree]]>
+                    <![CDATA[(strongly) disagree]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -247,17 +248,17 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[agree]]>
+                    <![CDATA[(strongly) agree]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="11" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[I see myself as someone who is considerate and kind to almost everyone.]]>
+                <![CDATA[I see myself as someone who is a reliable worker.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[disagree]]>
+                    <![CDATA[(strongly) disagree]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[]]>
@@ -272,7 +273,485 @@
                     <![CDATA[]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[agree]]>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="12" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[I see myself as someone who tends to be disorganized.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="13" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[I see myself as someone who tends to be lazy.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="14" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[I see myself as someone who perseveres until the task is finished.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="15" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[I see myself as someone who does things efficiently.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="16" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[I see myself as someone who makes plans and follows through with them.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="17" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[I see myself as someone who is easily distracted.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="18" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[I see myself as someone who tends to find fault with others.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="19" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[I see myself as someone who is generally trusting.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="20" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[I see myself as someone who can be cold and aloof.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="21" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[I see myself as someone who is sometimes rude to others.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="22" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[I see myself as someone who is depressed, blue.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="23" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[I see myself as someone who is emotionally stable, not easily upset.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="24" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[I see myself as someone who worries a lot.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="25" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[I see myself as someone who gets nervous easily.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="26" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[I see myself as someone who is curious about many different thing.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="27" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[I see myself as someone who is ingenious, a deep thinker.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="28" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[I see myself as someone who has an active imagination.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="29" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[I see myself as someone who values artistic, aesthetic experiences.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="30" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[I see myself as someone who has few artistic interests.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>

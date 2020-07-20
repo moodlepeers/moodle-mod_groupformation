@@ -22,15 +22,15 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.');
-}
+
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/criteria/specific_criterion.php');
 require_once($CFG->dirroot . '/mod/groupformation/lib/classes/participant.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/criterion_calculator.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/define_file.php');
+require_once($CFG->dirroot . '/mod/groupformation/lib/classes/criteria/one_of_bin_criterion.php');
 
 /**
  * Class mod_groupformation_participant_parser
@@ -78,7 +78,6 @@ class mod_groupformation_participant_parser {
      * @throws Exception
      */
     private function parse($users, $labels, $weights = null) {
-
         $participants = array();
         foreach ($users as $user) {
             $position = 0;
@@ -92,20 +91,35 @@ class mod_groupformation_participant_parser {
                 $minval = 0.0;
                 $maxval = 1.0;
 
-                if (!is_null($weights)) {
-                    $weight = $weights[$label];
-                } else {
-                    $weight = 1;
+                $weight = $weights[$label];
 
-                    if ($label == 'general') {
-                        $weight = (count($labels) - 1) / 2;
-                    }
+                if ($label == 'general') {
+                    $weight = (count($labels) - 1) / 2;
                 }
 
-                $criterion = new mod_groupformation_specific_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
+                switch ($label) {
+                    case "specific":
+                        $criterion =
+                                new mod_groupformation_specific_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
+                        break;
+                    case "binquestion_singlechoice":
+                        $criterion =
+                                new mod_groupformation_one_of_bin_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
+                        break;
+                    // case "binquestion_multiselect ":
+                    // $criterion = new mod_groupformation_many_of_bin_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
+                    // break;
+                    // case "both_bin_types_bins_covered":
+                    // $criterion = new mod_groupformation_both_bin_types_bins_covered_criterion($label, $value, $minval, $maxval, $homogen, $weight);
+                    default:
+                        // TODO default criterion
+                        $criterion =
+                                new mod_groupformation_specific_criterion ($label, $value, $minval, $maxval, $homogen, $weight);
+                }
+
                 if ($position == 0) {
                     $participant = new mod_groupformation_participant (array(
-                        $criterion), $user->id);
+                            $criterion), $user->id);
                 } else {
                     $participant->add_criterion($criterion);
                 }
@@ -121,6 +135,7 @@ class mod_groupformation_participant_parser {
      *
      * @param array $users
      * @return array
+     * @throws dml_exception
      */
     public function build_topic_participants($users) {
         if (count($users) == 0) {
@@ -137,7 +152,7 @@ class mod_groupformation_participant_parser {
 
             $criterion = $this->criterioncalculator->get_topic($userid);
             $participant = new mod_groupformation_participant (array(
-                $criterion), $userid);
+                    $criterion), $userid);
 
             $participants [$userid] = $participant;
         }
@@ -164,7 +179,7 @@ class mod_groupformation_participant_parser {
             return array();
         }
 
-        $scenario = $this->store->get_scenario();
+        $scenario = $this->store->get_scenario(true);
 
         $starttime = microtime(true);
 
@@ -190,23 +205,27 @@ class mod_groupformation_participant_parser {
             // Pre-computes values and generates and object which can be parsed into participants with criteria.
             $object = new stdClass ();
             $object->id = $user;
-            foreach ($criteriaspecs as $criterion => $spec) {
 
+            foreach ($criteriaspecs as $criterion => $spec) {
                 if (in_array($scenario, $spec['scenarios'])) {
                     $points = array();
-                    if ($this->usermanager->has_answered_everything($user)) {
+                    $answeredeverything = $this->usermanager->has_answered_everything($user);
+                    if ($answeredeverything) {
                         $points = $this->criterioncalculator->read_values_for_user($criterion, $user, $spec);
                     }
+
                     foreach ($spec['labels'] as $label => $lspec) {
                         $value = array();
-                        $vs = $points[$label]["values"];
-                        foreach ($vs as $v) {
-                            $value[] = $v;
+                        if (count($points) != 0) {
+                            $vs = $points[$label]["values"];
+                            foreach ($vs as $v) {
+                                $value[] = $v;
+                            }
+                            $value ["homogeneous"] = $lspec['scenarios'][$scenario];
+                            $name = $criterion . '_' . $label;
+                            $object->$name = $value;
+                            $totallabel [] = $name;
                         }
-                        $value ["homogeneous"] = $lspec['scenarios'][$scenario];
-                        $name = $criterion . '_' . $label;
-                        $object->$name = $value;
-                        $totallabel [] = $name;
                     }
                 }
             }
@@ -217,7 +236,6 @@ class mod_groupformation_participant_parser {
         $res = $this->parse($array, $totallabel, $weights);
         $endtime = microtime(true);
         $comptime = $endtime - $starttime;
-
         return $res;
     }
 

@@ -22,9 +22,8 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
-}
+
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
@@ -286,6 +285,9 @@ class mod_groupformation_csv_writer {
     public function get_users() {
         global $DB;
 
+        $sep = '$';
+        $sep2 = ' US-Dollar';
+
         $us = $this->get_userids();
 
         $categories = $this->store->get_categories();
@@ -310,7 +312,7 @@ class mod_groupformation_csv_writer {
 
             if ($this->groupsmanager->has_group($userid)) {
                 $groupid = $this->groupsmanager->get_group_id($userid);
-                $userdata[$userid]['groupid'] = $this->groupsmanager->get_moodle_group_id($groupid) - 394;
+                $userdata[$userid]['groupid'] = $this->groupsmanager->get_moodle_group_id($groupid);
                 $userdata[$userid]['groupname'] = str_replace("G1_", "", $this->groupsmanager->get_group_name($userid));
                 $userdata[$userid]['performance_index'] = $this->groupsmanager->get_performance_index($groupid);
 
@@ -320,7 +322,7 @@ class mod_groupformation_csv_writer {
                 $userdata[$userid]['groupkey'] = $groupkey;
 
                 $manual = (strpos($groupkey, 'manual:'));
-                $random = (strpos($groupkey, 'rand:'));
+                $random = (strpos($groupkey, 'random:'));
 
                 $mrand = 0;
                 if ($manual !== false) {
@@ -329,24 +331,26 @@ class mod_groupformation_csv_writer {
 
                 $rand = 0;
                 if ($random !== false) {
-                    $rand = substr($groupkey, strpos($groupkey, 'rand:') + 5, 1);
+                    $rand = substr($groupkey, strpos($groupkey, 'random:') + 7, 1);
                     $mrand = 0;
                 }
 
                 if ($rand == 1 || $mrand == 1) {
                     $userdata[$userid]['performance_index'] = null;
+                    $ex = "-";
+                    $gh = "-";
+                } else {
+                    $ex = substr($groupkey, strpos($groupkey, 'ex:') + 3, 1);
+                    $gh = substr($groupkey, strpos($groupkey, 'gh:') + 3, 1);
+
+                    $ex = str_replace('1', 1, $ex);
+                    $ex = str_replace('_', 2, $ex);
+                    $ex = str_replace('0', 3, $ex);
+
+                    $gh = str_replace('1', 1, $gh);
+                    $gh = str_replace('_', 2, $gh);
+                    $gh = str_replace('0', 3, $gh);
                 }
-
-                $ex = substr($groupkey, strpos($groupkey, 'ex:') + 3, 1);
-                $gh = substr($groupkey, strpos($groupkey, 'gh:') + 3, 1);
-
-                $ex = str_replace('1', 1, $ex);
-                $ex = str_replace('_', 2, $ex);
-                $ex = str_replace('0', 3, $ex);
-
-                $gh = str_replace('1', 1, $gh);
-                $gh = str_replace('_', 2, $gh);
-                $gh = str_replace('0', 3, $gh);
 
                 $userdata[$userid]['rand'] = $rand;
                 $userdata[$userid]['mrand'] = $mrand;
@@ -360,7 +364,7 @@ class mod_groupformation_csv_writer {
                     if ($courseid == $this->groupformationid || $courseid + 2 == $this->groupformationid) {
                         $members = $DB->get_records('groups_members', array('groupid' => $groupid), 'userid', 'userid');
                         $unknown = array_merge($unknown, array_keys($members));
-                        $userdata[$userid]['groupid'] = $groupid - 394;
+                        $userdata[$userid]['groupid'] = $groupid;
                         $userdata[$userid]['random'] = 2;
                     }
                 }
@@ -372,7 +376,7 @@ class mod_groupformation_csv_writer {
                 $answers = $this->usermanager->get_answers($userid, $category, null, 'questionid, answer');
                 foreach ($answers as $answer) {
                     $questionid = $answer->questionid;
-                    $userdata[$userid][$category][$questionid] = $answer->answer;
+                    $userdata[$userid][$category][$questionid] = str_replace($sep, $sep2, $answer->answer);
                 }
             }
         }
@@ -383,7 +387,7 @@ class mod_groupformation_csv_writer {
             if (!array_key_exists($userid, $userdata)) {
                 $userdata[$userid] = array();
                 $groupid = $DB->get_field('groups_members', 'groupid', array('userid' => $userid));
-                $userdata[$userid]['groupid'] = $groupid - 394;
+                $userdata[$userid]['groupid'] = $groupid;
                 $userdata[$userid]['code'] = $this->usermanager->get_participant_code($userid);
                 $userdata[$userid]['groupformation'] = $this->groupformationid;
                 $userdata[$userid]['groupname'] = null;
@@ -398,7 +402,7 @@ class mod_groupformation_csv_writer {
                     $answers = $this->usermanager->get_answers($userid, $category, null, 'questionid, answer');
                     foreach ($answers as $answer) {
                         $questionid = $answer->questionid;
-                        $userdata[$userid][$category][$questionid] = $answer->answer;
+                        $userdata[$userid][$category][$questionid] = str_replace($sep, $sep2, $answer->answer);
                     }
                 }
             }
@@ -410,14 +414,23 @@ class mod_groupformation_csv_writer {
         for ($j = 0; $j < count($us); $j++) {
 
             if ($j == 0) {
-                $csv .= "userid,participantcode,groupformationid,groupid,groupname,performance_index,";
-                $csv .= "random,manual_random,criterion_extraversion,criterion_gewissenhaftigkeit,";
+                $csv .= "userid" . $sep;
+                $csv .= "participantcode" . $sep;
+                $csv .= "groupformationid" . $sep;
+                $csv .= "groupid" . $sep;
+                $csv .= "groupname" . $sep;
+                $csv .= "performance_index" . $sep;
+                $csv .= "random" . $sep;
+                $csv .= "manual_random" . $sep;
+                $csv .= "criterion_extraversion" . $sep;
+                $csv .= "criterion_gewissenhaftigkeit" . $sep;
+                $csv .= "";
                 foreach ($categories as $category) {
                     if ($category == "knowledge" || $category == "topic") {
                         $temp = $this->store->get_knowledge_or_topic_values($category);
                         $xmlcontent = '<?xml version="1.0" encoding="UTF-8" ?> <OPTIONS> ' . $temp . ' </OPTIONS>';
                         $options = mod_groupformation_util::xml_to_array($xmlcontent);
-                        $csv .= implode(",", $options) . ",";
+                        $csv .= implode($sep, $options) . $sep;
                     } else {
                         $questions = $this->store->get_questions($category);
                         $questionids = array();
@@ -425,27 +438,27 @@ class mod_groupformation_csv_writer {
                             $questionids[] = $question->questionid;
                         }
 
-                        $csv .= implode('_' . $category . ",", $questionids) .
-                                '_' . $category . ",";
+                        $csv .= implode('_' . $category . $sep, $questionids) .
+                                '_' . $category . $sep;
                     }
                 }
-                $csv = rtrim($csv, ",");
+                $csv = rtrim($csv, $sep);
                 $csv .= "\n";
             }
 
             $userid = $us[$j];
 
             $line = "";
-            $line .= $userid . ",";
-            $line .= $userdata[$userid]['code'] . ",";
-            $line .= $userdata[$userid]['groupformation'] . ",";
-            $line .= $userdata[$userid]['groupid'] . ",";
-            $line .= $userdata[$userid]['groupname'] . ",";
-            $line .= $userdata[$userid]['performance_index'] . ",";
-            $line .= $userdata[$userid]['rand'] . ",";
-            $line .= $userdata[$userid]['mrand'] . ",";
-            $line .= $userdata[$userid]['ex'] . ",";
-            $line .= $userdata[$userid]['gh'] . ",";
+            $line .= $userid . $sep;
+            $line .= $userdata[$userid]['code'] . $sep;
+            $line .= $userdata[$userid]['groupformation'] . $sep;
+            $line .= $userdata[$userid]['groupid'] . $sep;
+            $line .= $userdata[$userid]['groupname'] . $sep;
+            $line .= $userdata[$userid]['performance_index'] . $sep;
+            $line .= $userdata[$userid]['rand'] . $sep;
+            $line .= $userdata[$userid]['mrand'] . $sep;
+            $line .= $userdata[$userid]['ex'] . $sep;
+            $line .= $userdata[$userid]['gh'] . $sep;
 
             foreach ($categories as $category) {
 
@@ -453,7 +466,7 @@ class mod_groupformation_csv_writer {
                     $optionscount = $this->store->get_number($category);
 
                     for ($i = 1; $i <= $optionscount; $i++) {
-                        $line .= $this->usermanager->get_single_answer($userid, $category, $i) . ",";
+                        $line .= $this->usermanager->get_single_answer($userid, $category, $i) . $sep;
                     }
                 } else {
                     $questions = $this->store->get_questions($category);
@@ -461,16 +474,16 @@ class mod_groupformation_csv_writer {
                     foreach ($questions as $question) {
                         $i = $question->questionid;
                         if (array_key_exists($i, $userdata[$userid][$category])) {
-                            $line .= $userdata[$userid][$category][$i] . ",";
+                            $line .= $userdata[$userid][$category][$i] . $sep;
                         } else {
-                            $line .= ",";
+                            $line .= $sep;
                         }
                     }
                 }
             }
 
             $csv .= $line;
-            $csv = rtrim($csv, ",");
+            $csv = rtrim($csv, $sep);
             $csv .= "\n";
         }
 

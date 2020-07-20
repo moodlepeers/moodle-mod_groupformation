@@ -23,13 +23,12 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
-}
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/groupformation/lib.php');
 require_once($CFG->dirroot . '/mod/groupformation/locallib.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/grouping/grouping.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 
 /**
  * Class mod_groupformation_basic_grouping
@@ -60,6 +59,7 @@ class mod_groupformation_basic_grouping extends mod_groupformation_grouping {
      * mod_groupformation_basic_grouping constructor.
      *
      * @param int $groupformationid
+     * @throws dml_exception
      */
     public function __construct($groupformationid) {
         $this->groupformationid = $groupformationid;
@@ -79,9 +79,10 @@ class mod_groupformation_basic_grouping extends mod_groupformation_grouping {
      */
     public function run_grouping($users) {
         $configurations = array(
-            "groupal:1" => array(),
+                "groupal:1" => array(),
         );
 
+        $weights = $this->get_weights();
         $configurationkeys = array_keys($configurations);
 
         // Here only 1 slice (groupal:1).
@@ -98,7 +99,7 @@ class mod_groupformation_basic_grouping extends mod_groupformation_grouping {
             for ($i = 0; $i < $numberofslices; $i++) {
                 $slice = $slices[$i];
                 $configurationkey = $configurationkeys[$i];
-                $rawparticipants = $this->participantparser->build_participants($slice);
+                $rawparticipants = $this->participantparser->build_participants($slice, null, $weights);
                 $participants = $rawparticipants;
                 $cohorts[$configurationkey] = $this->build_cohort($participants, $groupsizes[0], $configurationkey);
             }
@@ -118,6 +119,26 @@ class mod_groupformation_basic_grouping extends mod_groupformation_grouping {
         $cohorts[$randomkey] = $randomcohort;
 
         return $cohorts;
+    }
+
+    /**
+     * get weigth of binquestion from database
+     * and set weight for other criterion to 1
+     *
+     * @return array
+     */
+    public function get_weights() {
+        $weights = [];
+        $labels = $this->store->get_label_set();
+        foreach ($labels as $label) {
+            if ($label == "binquestion") {
+                $result = $this->store->get_weights();
+                $weights[$label] = $result->binquestionimportance;
+            } else {
+                $weights[$label] = 1;
+            }
+        }
+        return $weights;
     }
 
 }

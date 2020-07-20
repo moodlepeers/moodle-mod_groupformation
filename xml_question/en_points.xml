@@ -3,41 +3,41 @@
      <QUESTIONS VERSION="2018111001">
           <QUESTION ID="1" TYPE="range">
                <QUESTIONTEXT>
-                    <![CDATA[Which score would you like to achive?]]>
+                    <![CDATA[Which score would you like to achieve?]]>
                </QUESTIONTEXT>
                <OPTIONS>
-                   	<OPTION> 
-                   		<![CDATA[0]]>
-                   	</OPTION>
-                   	<OPTION>	
-             			<![CDATA[10]]>
-             		</OPTION>
                     <OPTION>
-                    	<![CDATA[20]]>
+                        <![CDATA[0]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[30]]>
+                        <![CDATA[10]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[40]]>
+                        <![CDATA[20]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[50]]>
+                        <![CDATA[30]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[60]]>
+                        <![CDATA[40]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[70]]>
+                        <![CDATA[50]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[80]]>
+                        <![CDATA[60]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[90]]>
+                        <![CDATA[70]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[100]]>
+                        <![CDATA[80]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[90]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[100]]>
                     </OPTION>
                </OPTIONS>
           </QUESTION>
@@ -47,38 +47,38 @@
                     <![CDATA[Which score seems realistic to you?]]>
                </QUESTIONTEXT>
                <OPTIONS>
-                   	<OPTION> 
-                   		<![CDATA[0]]>
-                   	</OPTION>
-                   	<OPTION>	
-             			<![CDATA[10]]>
-             		</OPTION>
                     <OPTION>
-                    	<![CDATA[20]]>
+                        <![CDATA[0]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[30]]>
+                        <![CDATA[10]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[40]]>
+                        <![CDATA[20]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[50]]>
+                        <![CDATA[30]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[60]]>
+                        <![CDATA[40]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[70]]>
+                        <![CDATA[50]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[80]]>
+                        <![CDATA[60]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[90]]>
+                        <![CDATA[70]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[100]]>
+                        <![CDATA[80]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[90]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[100]]>
                     </OPTION>
                </OPTIONS>
           </QUESTION>
@@ -88,38 +88,38 @@
                     <![CDATA[From which score on would you be unsatisfied?]]>
                </QUESTIONTEXT>
                <OPTIONS>
-                   	<OPTION> 
-                   		<![CDATA[0]]>
-                   	</OPTION>
-                   	<OPTION>	
-             			<![CDATA[10]]>
-             		</OPTION>
                     <OPTION>
-                    	<![CDATA[20]]>
+                        <![CDATA[0]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[30]]>
+                        <![CDATA[10]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[40]]>
+                        <![CDATA[20]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[50]]>
+                        <![CDATA[30]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[60]]>
+                        <![CDATA[40]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[70]]>
+                        <![CDATA[50]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[80]]>
+                        <![CDATA[60]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[90]]>
+                        <![CDATA[70]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[100]]>
+                        <![CDATA[80]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[90]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[100]]>
                     </OPTION>
                </OPTIONS>
           </QUESTION>

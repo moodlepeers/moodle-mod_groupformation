@@ -21,9 +21,8 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
-}
+
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/basic_view_controller.php');
 
@@ -53,5 +52,21 @@ class mod_groupformation_export_view_controller extends mod_groupformation_basic
         $overviewoptions->assign_multiple($this->controller->load_info());
 
         return $overviewoptions->load_template();
+    }
+
+    /**
+     * Handles access
+     *
+     * @throws coding_exception
+     * @throws moodle_exception
+     */
+    public function handle_access() {
+        $id = $this->controller->cmid;
+        $context = context_module::instance($id);
+
+        if (!has_capability('mod/groupformation:editsettings', $context)) {
+            $returnurl = new moodle_url('/mod/groupformation/view.php', array('id' => $id, 'do_show' => 'view'));
+            redirect($returnurl);
+        }
     }
 }

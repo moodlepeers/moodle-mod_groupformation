@@ -1,472 +1,576 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="FAM questionnaire">
-     <QUESTIONS VERSION="2018111004">
-         <QUESTION ID="1" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[I like such kinds of courses.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[disagree]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[agree]]>
-                    </OPTION>
-               </OPTIONS>
-          </QUESTION>
-          
-          <QUESTION ID="2" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[I think I can cope with the difficulty of this course.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[disagree]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[agree]]>
-                    </OPTION>
-               </OPTIONS>
-         </QUESTION>
-          
-         <QUESTION ID="3" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[I might not be able to pass this course.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[disagree]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[agree]]>
-                    </OPTION>
-               </OPTIONS>
-          </QUESTION>
-          
-          <QUESTION ID="4" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[In this course I like the scientific working.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[disagree]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[agree]]>
-                    </OPTION>
-               </OPTIONS>
-         </QUESTION>
-          
-         <QUESTION ID="5" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[I feel under pressure to do well in this course.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[disagree]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[agree]]>
-                    </OPTION>
-               </OPTIONS>
-          </QUESTION>
-          
-          <QUESTION ID="6" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[The course is a real challenge for me.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[disagree]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[agree]]>
-                    </OPTION>
-               </OPTIONS>
-         </QUESTION>
-          
-         <QUESTION ID="7" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[After reading the course description I find it very interesting.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[disagree]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[agree]]>
-                    </OPTION>
-               </OPTIONS>
-          </QUESTION>
-          
-          <QUESTION ID="8" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[I am looking forward to see how good I can do this course.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[disagree]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[agree]]>
-                    </OPTION>
-               </OPTIONS>
-         </QUESTION>
-          
-         <QUESTION ID="9" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[I am a little afraid that I could embarrass myself here.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[disagree]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[agree]]>
-                    </OPTION>
-               </OPTIONS>
-          </QUESTION>
-          
-          <QUESTION ID="10" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[I am determined to fully exert myself in this course.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[disagree]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[agree]]>
-                    </OPTION>
-               </OPTIONS>
-         </QUESTION>
-          
-         <QUESTION ID="11" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[I don't need any reward for this kind of course; I enjoy doing it.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[disagree]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[agree]]>
-                    </OPTION>
-               </OPTIONS>
-          </QUESTION>
-          
-          <QUESTION ID="12" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[It would be embarrasing to fail here.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[disagree]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[agree]]>
-                    </OPTION>
-               </OPTIONS>
-          </QUESTION>
+    <QUESTIONS VERSION="2018083005">
+        <QUESTION ID="1" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[I know I can learn the material in the pre-course.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
 
-          <QUESTION ID="13" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[I think everyone can pass this course.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[disagree]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[agree]]>
-                    </OPTION>
-               </OPTIONS>
-         </QUESTION>
-          
-         <QUESTION ID="14" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[I think I am not going to pass this course.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[disagree]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[agree]]>
-                    </OPTION>
-               </OPTIONS>
-          </QUESTION>
-          
-          <QUESTION ID="15" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[If I pass this course I am going to be proud of my skills.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[disagree]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[agree]]>
-                    </OPTION>
-               </OPTIONS>
-         </QUESTION>
-          
-         <QUESTION ID="16" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[When I think anout this course I feel a bit nervous.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[disagree]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[agree]]>
-                    </OPTION>
-               </OPTIONS>
-          </QUESTION>
-          
-          <QUESTION ID="17" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[I would also do this type of work in my leisure time.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[disagree]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[agree]]>
-                    </OPTION>
-               </OPTIONS>
-          </QUESTION>	
-          
-          <QUESTION ID="18" TYPE="likert">
-               <QUESTIONTEXT>
-                    <![CDATA[The specific course requirements paralyze me.]]>
-               </QUESTIONTEXT>
-               <OPTIONS>
-                    <OPTION>
-                        <![CDATA[disagree]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[]]>
-                    </OPTION>
-                    <OPTION>
-                        <![CDATA[agree]]>
-                    </OPTION>
-               </OPTIONS>
-          </QUESTION>
-     </QUESTIONS>
+        <QUESTION ID="2" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[I expect to do well in this pre-course.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="3" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[I am confident that I will be successful in this pre-course.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="4" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[I am confident I can learn the material in this pre-course.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="5" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[I can apply what we’re learning in this pre-course to the real world.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="6" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[The pre-course material is relevant to my future career plans.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="7" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[The material in this preclass is useful in my everyday life.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="8" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[I see how what we are studying is important to my future.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="9" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Learning the pre-course material will help me achieve my future goals.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="10" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[During the pre-course, I have a lot of other demands on my time.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="11" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[During the pre-course, I don't have time to put into this class.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="12" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Doing well in this pre-course isn't worth all the things that I have to give up.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="13" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[I am unable to invest the effort that is needed to do well in this pre-course.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="14" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[The pre-course requires too much time.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="15" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Unfortunately, I can’t put as much time into this pre-course as I would like.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="16" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[The pre-course is very interesting.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="17" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[I find the field of mathematics fascinating.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="18" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[I think the field of mathematics is an important discipline.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="19" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[I am excited about this pre-course.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="20" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[I would recommend this pre-course to others.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="21" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[I really enjoy this pre-course.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+
+        <QUESTION ID="22" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[I plan on taking more courses in mathematics.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[(strongly) disagree]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[(strongly) agree]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+    </QUESTIONS>
 </GROUPFORMATION>

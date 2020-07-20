@@ -52,7 +52,7 @@ function xmldb_groupformation_upgrade($oldversion) {
 
         $table = new xmldb_table ('groupformation');
         $field = new xmldb_field ('knowledge', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, '0',
-            'szenario');
+                'szenario');
 
         if (!$dbman->field_exists($table, $field)) {
             $dbman->add_field($table, $field);
@@ -67,7 +67,7 @@ function xmldb_groupformation_upgrade($oldversion) {
 
         $table = new xmldb_table ('groupformation');
         $field = new xmldb_field ('topics', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, '0',
-            'knowledgelines');
+                'knowledgelines');
 
         if (!$dbman->field_exists($table, $field)) {
             $dbman->add_field($table, $field);
@@ -82,7 +82,7 @@ function xmldb_groupformation_upgrade($oldversion) {
 
         $table = new xmldb_table ('groupformation');
         $field = new xmldb_field ('maxmembers', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, '0',
-            'topiclines');
+                'topiclines');
 
         if (!$dbman->field_exists($table, $field)) {
             $dbman->add_field($table, $field);
@@ -90,7 +90,7 @@ function xmldb_groupformation_upgrade($oldversion) {
 
         $table = new xmldb_table ('groupformation');
         $field = new xmldb_field ('maxgroups', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, '0',
-            'maxmembers');
+                'maxmembers');
 
         if (!$dbman->field_exists($table, $field)) {
             $dbman->add_field($table, $field);
@@ -98,7 +98,7 @@ function xmldb_groupformation_upgrade($oldversion) {
 
         $table = new xmldb_table ('groupformation');
         $field = new xmldb_field ('evaluationmethod', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, '0',
-            'maxgroups');
+                'maxgroups');
 
         if (!$dbman->field_exists($table, $field)) {
             $dbman->add_field($table, $field);
@@ -111,7 +111,7 @@ function xmldb_groupformation_upgrade($oldversion) {
 
         $table = new xmldb_table ('groupformation');
         $field = new xmldb_field ('groupoption', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, '0',
-            'topiclines');
+                'topiclines');
 
         if (!$dbman->field_exists($table, $field)) {
             $dbman->add_field($table, $field);
@@ -124,7 +124,7 @@ function xmldb_groupformation_upgrade($oldversion) {
 
         $table = new xmldb_table ('groupformation');
         $field = new xmldb_field ('maxpoints', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, '100',
-            'evaluationmethod');
+                'evaluationmethod');
 
         if (!$dbman->field_exists($table, $field)) {
             $dbman->add_field($table, $field);
@@ -171,7 +171,7 @@ function xmldb_groupformation_upgrade($oldversion) {
         $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
 
         $table->add_key('primary', XMLDB_KEY_PRIMARY, array(
-            'id'));
+                'id'));
 
         if (!$dbman->table_exists($table)) {
             $dbman->create_table($table);
@@ -231,7 +231,7 @@ function xmldb_groupformation_upgrade($oldversion) {
 
         // Adding keys to table groupformation_logging.
         $table->add_key('primary', XMLDB_KEY_PRIMARY, array(
-            'id'));
+                'id'));
 
         // Conditionally launch create table for groupformation_logging.
         if (!$dbman->table_exists($table)) {
@@ -381,7 +381,7 @@ function xmldb_groupformation_upgrade($oldversion) {
         foreach ($tablenames as $tablename) {
 
             // Define table groupformation_srl to be created.
-            $table = new xmldb_table ('groupformation_'.$tablename);
+            $table = new xmldb_table ('groupformation_' . $tablename);
 
             // Adding fields to table groupformation_srl.
             $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
@@ -394,7 +394,7 @@ function xmldb_groupformation_upgrade($oldversion) {
 
             // Adding keys to table groupformation_srl.
             $table->add_key('primary', XMLDB_KEY_PRIMARY, array(
-                'id'));
+                    'id'));
 
             // Conditionally launch create table for groupformation_srl.
             if (!$dbman->table_exists($table)) {
@@ -419,7 +419,7 @@ function xmldb_groupformation_upgrade($oldversion) {
 
         // Adding keys to table groupformation_groups.
         $table->add_key('primary', XMLDB_KEY_PRIMARY, array(
-            'id'));
+                'id'));
         $table->add_key('groupformation', XMLDB_KEY_FOREIGN, array('groupformation'), 'groupformation', array('id'));
 
         // Conditionally launch create table for groupformation_groups.
@@ -437,7 +437,7 @@ function xmldb_groupformation_upgrade($oldversion) {
 
         // Adding keys to table groupformation_group_users.
         $table->add_key('primary', XMLDB_KEY_PRIMARY, array(
-            'id'));
+                'id'));
         $table->add_key('groupformation', XMLDB_KEY_FOREIGN, array('groupformation'), 'groupformation', array('id'));
 
         // Conditionally launch create table for groupformation_group_users.
@@ -578,7 +578,7 @@ function xmldb_groupformation_upgrade($oldversion) {
         // Define field stats_avg_variance to be added to groupformation_jobs.
         $table = new xmldb_table ('groupformation_jobs');
         $field = new xmldb_field ('stats_avg_variance', XMLDB_TYPE_NUMBER, '20, 8', null, null, null, null,
-            'performance_index');
+                'performance_index');
 
         // Conditionally launch add field stats_avg_variance.
         if (!$dbman->field_exists($table, $field)) {
@@ -588,7 +588,7 @@ function xmldb_groupformation_upgrade($oldversion) {
         // Define field stats_variance to be added to groupformation_jobs.
         $table = new xmldb_table ('groupformation_jobs');
         $field = new xmldb_field ('stats_variance', XMLDB_TYPE_NUMBER, '20, 8', null, null, null, null,
-            'stats_avg_variance');
+                'stats_avg_variance');
 
         // Conditionally launch add field stats_variance.
         if (!$dbman->field_exists($table, $field)) {
@@ -634,7 +634,7 @@ function xmldb_groupformation_upgrade($oldversion) {
         // Define field stats_performance_index to be added to groupformation_jobs.
         $table = new xmldb_table ('groupformation_jobs');
         $field = new xmldb_field ('stats_performance_index', XMLDB_TYPE_NUMBER, '20, 8', null, null, null, null,
-            'stats_norm_st_dev');
+                'stats_norm_st_dev');
 
         // Conditionally launch add field stats_performance_index.
         if (!$dbman->field_exists($table, $field)) {
@@ -700,7 +700,7 @@ function xmldb_groupformation_upgrade($oldversion) {
         // Define field emailnotifications to be added to groupformation.
         $table = new xmldb_table('groupformation');
         $field = new xmldb_field('emailnotifications', XMLDB_TYPE_INTEGER, '1', null, null, null, null,
-            'onlyactivestudents');
+                'onlyactivestudents');
 
         // Conditionally launch add field emailnotifications.
         if (!$dbman->field_exists($table, $field)) {
@@ -944,7 +944,7 @@ function xmldb_groupformation_upgrade($oldversion) {
         // Define field groupingid to be added to groupformation_jobs.
         $table = new xmldb_table('groupformation_jobs');
         $field = new xmldb_field('groupingid', XMLDB_TYPE_INTEGER, '20', null, null, null, null,
-            'groupformationid');
+                'groupformationid');
 
         // Conditionally launch add field groupingid.
         if (!$dbman->field_exists($table, $field)) {
@@ -1083,7 +1083,7 @@ function xmldb_groupformation_upgrade($oldversion) {
         // Define field stats_avg_variance to be added to groupformation_jobs.
         $table = new xmldb_table ($tablename);
         $field = new xmldb_field ('stats_avg_variance', XMLDB_TYPE_NUMBER, '20, 8', null, null, null, null,
-            'performance_index');
+                'performance_index');
 
         // Conditionally launch add field stats_avg_variance.
         if (!$dbman->field_exists($table, $field)) {
@@ -1093,7 +1093,7 @@ function xmldb_groupformation_upgrade($oldversion) {
         // Define field stats_variance to be added to groupformation_jobs.
         $table = new xmldb_table ($tablename);
         $field = new xmldb_field ('stats_variance', XMLDB_TYPE_NUMBER, '20, 8', null, null, null, null,
-            'stats_avg_variance');
+                'stats_avg_variance');
 
         // Conditionally launch add field stats_variance.
         if (!$dbman->field_exists($table, $field)) {
@@ -1139,7 +1139,7 @@ function xmldb_groupformation_upgrade($oldversion) {
         // Define field stats_performance_index to be added to groupformation_jobs.
         $table = new xmldb_table ($tablename);
         $field = new xmldb_field ('stats_performance_index', XMLDB_TYPE_NUMBER, '20, 8', null, null, null, null,
-            'stats_norm_st_dev');
+                'stats_norm_st_dev');
 
         // Conditionally launch add field stats_performance_index.
         if (!$dbman->field_exists($table, $field)) {
@@ -1206,6 +1206,7 @@ function xmldb_groupformation_upgrade($oldversion) {
         // Groupformation savepoint reached.
         upgrade_mod_savepoint(true, 2016072100, 'groupformation');
     }
+
     if ($oldversion < 2016090700) {
         // Define field count_groups to be added to groupformation_jobs and groupformation_stats.
         $tablename = 'groupformation_jobs';
@@ -1756,5 +1757,211 @@ function xmldb_groupformation_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2018061706, 'groupformation');
     }
 
+    if ($oldversion < 2018072100) {
+
+        // Rename field stats_avg_variance on table groupformation_stats to avg_variance.
+        $table = new xmldb_table('groupformation_stats');
+        $field = new xmldb_field('stats_avg_variance', XMLDB_TYPE_NUMBER, '20, 8', null, null, null, null, 'performance_index');
+
+        // Launch rename field stats_avg_variance.
+        $dbman->rename_field($table, $field, 'avg_variance');
+
+        // Rename field stats_variance on table groupformation_stats to variance.
+        $table = new xmldb_table('groupformation_stats');
+        $field = new xmldb_field('stats_variance', XMLDB_TYPE_NUMBER, '20, 8', null, null, null, null, 'stats_avg_variance');
+
+        // Launch rename field stats_variance.
+        $dbman->rename_field($table, $field, 'variance');
+
+        // Rename field stats_n on table groupformation_stats to n.
+        $table = new xmldb_table('groupformation_stats');
+        $field = new xmldb_field('stats_n', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'stats_variance');
+
+        // Launch rename field stats_n.
+        $dbman->rename_field($table, $field, 'n');
+
+        // Rename field stats_avg on table groupformation_stats to avg.
+        $table = new xmldb_table('groupformation_stats');
+        $field = new xmldb_field('stats_avg', XMLDB_TYPE_NUMBER, '20, 8', null, null, null, null, 'stats_n');
+
+        // Launch rename field stats_avg.
+        $dbman->rename_field($table, $field, 'avg');
+
+        // Rename field stats_st_dev on table groupformation_stats to st_dev.
+        $table = new xmldb_table('groupformation_stats');
+        $field = new xmldb_field('stats_st_dev', XMLDB_TYPE_NUMBER, '20, 8', null, null, null, null, 'stats_avg');
+
+        // Launch rename field stats_st_dev.
+        $dbman->rename_field($table, $field, 'st_dev');
+
+        // Rename field stats_norm_st_dev on table groupformation_stats to norm_st_dev.
+        $table = new xmldb_table('groupformation_stats');
+        $field = new xmldb_field('stats_norm_st_dev', XMLDB_TYPE_NUMBER, '20, 8', null, null, null, null, 'stats_st_dev');
+
+        // Launch rename field stats_norm_st_dev.
+        $dbman->rename_field($table, $field, 'norm_st_dev');
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2018072100, 'groupformation');
+    }
+
+    if ($oldversion < 2018072101) {
+
+        // Define field stats_performance_index to be dropped from groupformation_stats.
+        $table = new xmldb_table('groupformation_stats');
+        $field = new xmldb_field('stats_performance_index');
+
+        // Conditionally launch drop field stats_performance_index.
+        if ($dbman->field_exists($table, $field)) {
+            $dbman->drop_field($table, $field);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2018072101, 'groupformation');
+    }
+
+    if ($oldversion < 2018072102) {
+
+        // Define field n to be dropped from groupformation_stats.
+        $table = new xmldb_table('groupformation_stats');
+        $field = new xmldb_field('n');
+
+        // Conditionally launch drop field n.
+        if ($dbman->field_exists($table, $field)) {
+            $dbman->drop_field($table, $field);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2018072102, 'groupformation');
+    }
+
+    if ($oldversion < 2018120500) {
+
+        // Define field binquestion to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('binquestion', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '0', 'szenario');
+
+        // Conditionally launch add field binquestion.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field binquestiontext to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('binquestiontext', XMLDB_TYPE_CHAR, '1000', null, null, null, null, 'binquestion');
+
+        // Conditionally launch add field binquestiontext.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field binquestionlines to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('binquestionlines', XMLDB_TYPE_TEXT, null, null, null, null, null, 'binquestiontext');
+
+        // Conditionally launch add field binquestionlines.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field binquestionvalues to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('binquestionvalues', XMLDB_TYPE_TEXT, null, null, null, null, null, 'binquestionlines');
+
+        // Conditionally launch add field binquestionvalues.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field binquestionnumber to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('binquestionnumber', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'binquestionvalues');
+
+        // Conditionally launch add field binquestionnumber.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field binquestionimportance to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('binquestionimportance', XMLDB_TYPE_NUMBER, '20, 8', null, null, null, null, 'binquestionnumber');
+
+        // Conditionally launch add field binquestionimportance.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Define field binquestionrelation to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('binquestionrelation', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'binquestionimportance');
+
+        // Conditionally launch add field binquestionrelation.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2018120500, 'groupformation');
+    }
+
+    if ($oldversion < 2019031400) {
+
+        // Define field binquestionmultiselect to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('binquestionmultiselect', XMLDB_TYPE_INTEGER, '1', null, null, null, null, 'binquestionrelation');
+
+        // Conditionally launch add field binquestionmultiselect.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2019031400, 'groupformation');
+    }
+
+    if ($oldversion < 2019060600) {
+
+        // Define field binvalue to be added to groupformation_user_values.
+        $table = new xmldb_table('groupformation_user_values');
+        $field = new xmldb_field('binvalue', XMLDB_TYPE_CHAR, '255', null, null, null, null, 'value');
+
+        // Conditionally launch add field binvalue.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2019060600, 'groupformation');
+    }
+
+    if ($oldversion < 2019070900) {
+
+        // Define field tracked to be added to groupformation_users.
+        $table = new xmldb_table('groupformation_users');
+        $field = new xmldb_field('tracked', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '1', 'state');
+
+        // Conditionally launch add field tracked.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2019070900, 'groupformation');
+    }
+
+    if ($oldversion < 2019071000) {
+
+        // Define field tracked to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('tracked', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, null, '1', 'state');
+
+        // Conditionally launch add field tracked.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2019071000, 'groupformation');
+    }
     return true;
 }

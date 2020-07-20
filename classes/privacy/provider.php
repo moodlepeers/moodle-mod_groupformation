@@ -18,6 +18,7 @@
  *
  * @package mod_groupformation
  * @author Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
+ * @copyright 2018 MoodlePeers
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace mod_groupformation\privacy;
@@ -30,11 +31,19 @@ use \core_privacy\local\request\contextlist;
 use \core_privacy\local\request\writer;
 use \core_privacy\local\request\approved_contextlist;
 
+/**
+ * Class provider
+ *
+ * @package mod_groupformation
+ * @copyright 2018 MoodlePeers
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class provider implements
         \core_privacy\local\metadata\provider,
         \core_privacy\local\request\plugin\provider {
 
     use \core_privacy\local\legacy_polyfill;
+
     /**
      * Returns meta data about this system.
      *
@@ -99,6 +108,7 @@ class provider implements
         );
         return $collection;
     }
+
     /**
      * Get the list of contexts that contain user information for the specified user.
      *
@@ -143,8 +153,8 @@ class provider implements
 
         $uservalues = $DB->get_records('groupformation_user_values',
                 array(
-                    "groupformationid" => $groupformationid,
-                    "userid" => $userid,
+                        "groupformationid" => $groupformationid,
+                        "userid" => $userid,
                 ),
                 "id",
                 "id, criterion, label, dimension, value"
@@ -166,9 +176,9 @@ class provider implements
         global $DB;
 
         $userdata = $DB->get_record('groupformation_users', array(
-                    "userid" => $userid,
-                    "groupformation" => $groupformationid,
-                ), "completed, timecompleted, consent, participantcode"
+                "userid" => $userid,
+                "groupformation" => $groupformationid,
+        ), "completed, timecompleted, consent, participantcode"
         );
 
         $userdata->timecompleted = date('Y-m-d H:i:s', $userdata->timecompleted);
@@ -219,7 +229,8 @@ class provider implements
     public static function get_answers(int $userid, int $groupformationid) {
         global $DB;
 
-        $sql = 'SELECT q.id as id, a.category as category, a.questionid as qid, q.question as question, a.answer as answer, a.timestamp
+        $sql = 'SELECT
+                  q.id as id, a.category as category, a.questionid as qid, q.question as question, a.answer as answer, a.timestamp
                 FROM {groupformation_answers} a
                 JOIN
                   (SELECT * FROM {groupformation_questions} qe WHERE qe.language = "en") AS q

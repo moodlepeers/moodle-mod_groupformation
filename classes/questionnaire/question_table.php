@@ -22,9 +22,8 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
-}
+
+defined('MOODLE_INTERNAL') || die();
 
 /**
  * Class mod_groupformation_question_table
@@ -76,8 +75,11 @@ class mod_groupformation_question_table {
 
     /**
      * Returns HTML of table header
+     *
+     * @param string $addon
+     * @return string
      */
-    public function get_header() {
+    public function get_header($addon = '') {
         $s = "";
 
         if ($this->category == 'topic') {
@@ -92,7 +94,13 @@ class mod_groupformation_question_table {
             $s .= '<thead>';
             $s .= '<tr>';
             $s .= '<th scope="col">';
-            $s .= get_string('tabletitle_' . $this->category, 'groupformation');
+            if ($this->category == 'knowledge') {
+                $s .= 'Wie ist dein Ergebnis im Eingangstest?';
+            } else {
+                $s .= get_string('tabletitle_' . $this->category . $addon, 'groupformation');
+            }
+            // TODO if(category == 'knowledge')... else...
+            // TODO wieder hierdurch ersetzen $s .=get_string('tabletitle_' . $this->category . $addon, 'groupformation');
             $s .= '</th>';
             $s .= '<th scope="col" colspan="100%">';
             $s .= '</th>';

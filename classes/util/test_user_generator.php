@@ -22,9 +22,8 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
-}
+
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
@@ -36,6 +35,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/knowledg
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/dropdown_question.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/freetext_question.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/multiselect_question.php');
+require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/binquestion_question.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/number_question.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/questionnaire/question_table.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/controller/grouping_controller.php');
@@ -149,13 +149,12 @@ class mod_groupformation_test_user_generator {
                 }
                 try {
                     foreach ($categories as $category) {
-                        var_dump($category);
                         $questions2 = $store->get_questions($category);
 
                         foreach (array_values($questions2) as $key => $question) {
                             $options = $question->options;
 
-                            if ($category == 'points'){
+                            if ($category == 'points') {
                                 $options = array(
                                         $store->get_max_points() => get_string('excellent', 'groupformation'),
                                         0 => get_string('bad', 'groupformation'));

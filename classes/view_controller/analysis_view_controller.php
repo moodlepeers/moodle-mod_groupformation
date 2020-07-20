@@ -37,6 +37,7 @@ class mod_groupformation_analysis_view_controller extends mod_groupformation_bas
 
     /** @var array Template names */
     protected $templatenames = array('analysis_info', 'analysis_statistics', 'analysis_topics');
+
     /** @var string Title of page */
     protected $title = 'analysis';
 
@@ -46,6 +47,7 @@ class mod_groupformation_analysis_view_controller extends mod_groupformation_bas
      * @param int $groupformationid
      * @param mod_groupformation_analysis_controller $controller
      * @throws coding_exception
+     * @throws dml_exception
      */
     public function __construct($groupformationid, $controller) {
         parent::__construct($groupformationid, $controller);

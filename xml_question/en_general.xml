@@ -7,17 +7,17 @@
                </QUESTIONTEXT>
                <OPTIONS>
                     <OPTION>
-                    	<![CDATA[english]]>
+                        <![CDATA[english]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[german]]>
+                        <![CDATA[german]]>
                     </OPTION>
                     <OPTION>
-                    	<![CDATA[english, but german is also possible]]>
-					</OPTION>
-					<OPTION>
-						<![CDATA[german, but english is also possible]]>
-					</OPTION>
+                        <![CDATA[english, but german is also possible]]>
+                    </OPTION>
+                    <OPTION>
+                        <![CDATA[german, but english is also possible]]>
+                    </OPTION>
                </OPTIONS>
          </QUESTION>
      </QUESTIONS>

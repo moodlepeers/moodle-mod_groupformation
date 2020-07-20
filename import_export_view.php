@@ -29,39 +29,34 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/controller/import_expo
 require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/import_export_view_controller.php');
 
 $filename = substr(__FILE__, strrpos(__FILE__, '\\') + 1);
-$url = new moodle_url('/mod/groupformation/' . $filename, $urlparams);
+$filename = substr($filename, strpos($filename, '/mod'));
+
+$url = new moodle_url($filename, $urlparams);
 
 // Set PAGE config.
-$PAGE->set_url($url);
+$PAGE->set_url('/mod/groupformation/import_export_view.php', $urlparams);
 $PAGE->set_title(format_string($groupformation->name));
 $PAGE->set_heading(format_string($course->fullname));
+$PAGE->set_context(context_module::instance($cm->id));
+$PAGE->set_cm($cm);
 
 // Import jQuery and js file.
 groupformation_add_jquery($PAGE, 'import_export4.js');
 
 $store = new mod_groupformation_storage_manager($groupformation->id);
 
-if (!mod_groupformation_data::import_export_enabled()) {
-    $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
-        'id' => $cm->id));
-    redirect($returnurl);
-}
+$controller = new mod_groupformation_import_export_controller($groupformation->id, $cm);
+$viewcontroller = new mod_groupformation_import_export_view_controller($groupformation->id, $controller);
 
-$currenttab = 'import_export';
+$viewcontroller->handle_access();
+
 echo $OUTPUT->header();
+
+$currenttab = $doshow;
 
 // Print the tabs.
 require('tabs.php');
 
-if (groupformation_get_current_questionnaire_version() > $store->get_version()) {
-    echo '<div class="alert">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
-}
-if ($store->is_archived()) {
-    echo '<div class="alert" id="commited_view">' . get_string('archived_activity_answers', 'groupformation') . '</div>';
-} else {
-    $controller = new mod_groupformation_import_export_controller($groupformation->id, $cm);
-    $viewcontroller = new mod_groupformation_import_export_view_controller($groupformation->id, $controller);
-    echo $viewcontroller->render();
-}
+echo $viewcontroller->render();
 
 echo $OUTPUT->footer();

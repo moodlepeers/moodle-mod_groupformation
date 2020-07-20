@@ -61,12 +61,12 @@ if ($editsettings) {
 
     // The questionnaire_view -> preview mode .
     $questionnaireviewurl = new moodle_url ('/mod/groupformation/questionnaire_view.php', array(
-        'id' => $usedid));
+        'id' => $usedid, 'direction' => 1));
     $row [] = new tabobject ('questionnaire', $questionnaireviewurl->out(), get_string('tab_preview', 'groupformation'));
 
     // The import/export view.
     // TODO Only activate if export of study is needed.
-    if (false) {
+    if (mod_groupformation_data::is_math_prep_course_mode()) {
         $exporturl = new moodle_url ('/mod/groupformation/export_view.php', array(
             'id' => $usedid, 'do_show' => 'export'));
         $row [] = new tabobject ('export', $exporturl->out(), 'Export');
@@ -83,8 +83,8 @@ if ($editsettings) {
     if (true || in_array($state, array('q_open', 'q_reopened')) || $usermanager->already_answered($userid)) {
         // The questionnaire view.
         $questionnaireviewurl = new moodle_url ('/mod/groupformation/questionnaire_view.php', array(
-            'id' => $usedid));
-        $row [] = new tabobject ('answering', $questionnaireviewurl->out(),
+            'id' => $usedid, 'direction' => 1));
+        $row [] = new tabobject ('questionnaire', $questionnaireviewurl->out(),
             get_string('tab_questionnaire', 'groupformation'));
     }
 

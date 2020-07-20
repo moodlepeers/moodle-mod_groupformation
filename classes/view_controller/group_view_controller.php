@@ -21,9 +21,8 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
-}
+
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/basic_view_controller.php');
 
@@ -39,6 +38,7 @@ class mod_groupformation_group_view_controller extends mod_groupformation_basic_
 
     /** @var array Template names */
     protected $templatenames = array('group_info');
+
     /** @var string Title of page */
     protected $title = 'group';
 
@@ -48,6 +48,7 @@ class mod_groupformation_group_view_controller extends mod_groupformation_basic_
      * @param int $groupformationid
      * @param mod_groupformation_group_controller $controller
      * @throws coding_exception
+     * @throws dml_exception
      */
     public function __construct($groupformationid, $controller) {
         parent::__construct($groupformationid, $controller);
@@ -67,5 +68,42 @@ class mod_groupformation_group_view_controller extends mod_groupformation_basic_
         $overviewoptions->assign_multiple($this->controller->load_info());
 
         return $overviewoptions->load_template();
+    }
+
+    /**
+     * Handles access
+     *
+     * @throws coding_exception
+     * @throws moodle_exception
+     */
+    public function handle_access() {
+        $id = $this->controller->cmid;
+        $context = context_module::instance($id);
+
+        if (has_capability('mod/groupformation:editsettings', $context)) {
+            $returnurl = new moodle_url('/mod/groupformation/analysis_view.php', array('id' => $id, 'do_show' => 'analysis'));
+            redirect($returnurl);
+        }
+    }
+
+    /**
+     * Renders content
+     *
+     * @return string
+     * @throws coding_exception
+     * @throws dml_exception
+     */
+    public function render() {
+        $store = $this->store;
+
+        $output = "";
+        if ($store->is_archived()) {
+            $output .= '<div class="alert" id="commited_view">' . get_string('archived_activity_answers', 'groupformation') .
+                    '</div>';
+        } else {
+            $output .= parent::render();
+        }
+
+        return $output;
     }
 }

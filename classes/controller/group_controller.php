@@ -22,9 +22,7 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
-}
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/groups_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
@@ -49,13 +47,19 @@ class mod_groupformation_group_controller {
     /** @var mod_groupformation_storage_manager The manager of activity data */
     private $store = null;
 
+    /** @var int ID of course module */
+    public $cmid = null;
+
     /**
      * mod_groupformation_student_group_view_controller constructor.
      *
      * @param int $groupformationid
+     * @param int $cmid
      */
-    public function __construct($groupformationid) {
+    public function __construct($groupformationid, $cmid) {
         $this->groupformationid = $groupformationid;
+        $this->cmid = $cmid;
+
         $this->store = new mod_groupformation_storage_manager($groupformationid);
         $this->groupsmanager = new mod_groupformation_groups_manager ($groupformationid);
     }

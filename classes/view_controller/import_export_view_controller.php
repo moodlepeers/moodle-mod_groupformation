@@ -90,4 +90,41 @@ class mod_groupformation_import_export_view_controller extends mod_groupformatio
 
         return $overviewoptions->load_template();
     }
+
+    /**
+     * Handles access
+     */
+    public function handle_access() {
+        $id = $this->controller->cm->id;
+
+        if (!mod_groupformation_data::import_export_enabled()) {
+            $returnurl = new moodle_url ('/mod/groupformation/view.php', array(
+                    'id' => $id));
+            redirect($returnurl);
+        }
+    }
+
+    /**
+     * Renders content
+     *
+     * @return string
+     * @throws coding_exception
+     * @throws dml_exception
+     */
+    public function render() {
+        $store = $this->store;
+
+        $output = "";
+        if (groupformation_get_current_questionnaire_version() > $store->get_version()) {
+            $output .= '<div class="alert">' . get_string('questionnaire_outdated', 'groupformation') . '</div>';
+        }
+        if ($store->is_archived()) {
+            $output .= '<div class="alert" id="commited_view">' . get_string('archived_activity_answers', 'groupformation') .
+                    '</div>';
+        } else {
+            $output .= parent::render();
+        }
+
+        return $output;
+    }
 }

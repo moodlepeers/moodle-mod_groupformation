@@ -25,11 +25,12 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
-}
+
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/manhattan_distance.php");
+require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/bin_distance.php");
+require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/many_bin_distance.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/evaluators/ievaluator.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/group.php");
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion.php");
@@ -44,14 +45,10 @@ require_once($CFG->dirroot . "/mod/groupformation/lib/classes/criteria/criterion
  */
 class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
 
-    /** @var mod_groupformation_manhattan_distance Object which implements IDistance*/
-    private $distancefunction;
-
     /**
      * mod_groupformation_evaluator constructor.
      */
     public function __construct() {
-        $this->distancefunction = new mod_groupformation_manhattan_distance();
     }
 
     /**
@@ -87,21 +84,38 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
         }
 
         // Calculate npi for every pair of entries in the  group g (but not double and not compare with oneself!)
-        for ($i = 0; $i < $participantcount - 1; $i++) {
-            for ($j = $i + 1; $j < $participantcount; $j++) {
+        for ($i = 0;
+                $i < $participantcount - 1;
+                $i++) {
+            for ($j = $i + 1;
+                    $j < $participantcount;
+                    $j++) {
                 // Calulate normlizedPaarperformance index.
                 $npi = $this->calc_normalized_pair_performance($participants[$i], $participants[$j]);
                 $npis[] = $npi;
             }
         }
 
+        // TODO implement one against group when both bin types functions are in use
+        // calculate the npi for once against group functions
+        // get the last participants and compare it against the group
+        // $p = $participants[$participantcount - 1];
+        // foreach ($p->get_criteria() as $c) {
+        // // all once against group function starts with both_bin_types
+        // // check if a function is available in this criterion
+        // if (strpos($c->get_distance(), 'both_bin_types') === 0) {
+        // $npi = $this->calc_normalized_one_against_group_performance($c, $group);
+        // $npis[] = $npi;
+        // }
+        // }
+
+        // once against all
         $group->results = $this->get_performance_index($npis);
         $gpi = $group->results->performanceindex;
         $group->set_gpi($gpi);
         return $gpi;
         // TODO Test functionality  (yes!); Issue #3.
     }
-
 
     /**
      * Evaluate CPI
@@ -121,7 +135,6 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
         $results = $this->get_performance_index($gpis);
         $cohort->results = $results;
         return $results->performanceindex;
-
     }
 
     /**
@@ -136,7 +149,7 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
         }
 
         // Calculate avergae of NPIs
-        $avg = ((float)array_sum($performanceindices)) / count($performanceindices); // float.
+        $avg = ((float) array_sum($performanceindices)) / count($performanceindices); // float.
 
         // Calculate standard deviation   (which is all diffs of elements and avg squared and finally summed up.
         $sumquadraticerrors = 0.0; // Double.
@@ -145,7 +158,7 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
             $sumquadraticerrors += pow($diff, 2);
         }
 
-        $stddev = (float)0.0;
+        $stddev = (float) 0.0;
 
         // Standard deaviation of all npi values (NPIs) in one Groups.
         if (count($performanceindices) != 1) {
@@ -166,7 +179,6 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
         return $s;
 
     }
-
 
     /**
      *  Calculates normalized pair performance
@@ -208,6 +220,9 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
         }
 
         foreach ($p1->get_criteria() as $c1) {
+
+            // if (strpos($c1->get_distance(), 'both_bin_types_bins_covered_distance') === 1) {
+
             // Get the same Criterion of the other participant (first criterion of $p2, that matches condition same as ).
             $c2 = null;
             foreach ($p2->get_criteria() as $cc) {
@@ -220,18 +235,24 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
                 throw new Exception("code error; unreachable state reached.");
             }
 
-            // Calculate Manhattan distanze for both Criteria.
-            // and normalize the distanze over the maximal amount of dimensions so evry criterion gets a value between 0 and 1.
+            // Calculate the specific distance
+            // and normalize the distanze over the maximal amount of dimensions so every criterion gets a value between 0 and 1.
             // (otherwise the criterion will be unthought weighted ).
+            $distancename = "mod_groupformation_" . $c1->get_distance();
+            $tempdistance = new $distancename;
 
-            $d = $this->distancefunction->normalized_distance($c1, $c2);
+            $d = $tempdistance->normalized_distance($c1, $c2);
+
             $wd = $d * $c1->get_weight();
+
             if ($c1->is_homogeneous()) {
                 $homval += $wd;
             } else {
                 $hetval += $wd;
             }
+
         }
+
         $pairperformanceindex = $hetval - $homval;
         $maxdist = 0.0; // Float.
         // Worst case Heterogen criteria is 0 and hom is 1 than the value for pairperformanceindex < 0.
@@ -247,9 +268,128 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator {
             $maxdist += 1 * $c->get_weight();
         }
 
-        $npi = ($pairperformanceindex + $hommaxdist) / $maxdist;
-
-        return $npi;
+        return ($pairperformanceindex + $hommaxdist) / $maxdist;
     }
 
+    /**
+     * Calculates normalized once against group performance
+     *
+     * @param mod_groupformation_criterion $c1
+     * @param mod_groupformation_group $group
+     * @return float|int
+     * @throws Exception
+     */
+    public function calc_normalized_one_against_group_performance(mod_groupformation_criterion $c1,
+            mod_groupformation_group $group) {
+        // The summed distances of all hommogeneous values.
+        $homval = 0.0; // float
+        // The summed distances of all heterogeneous values.
+        $hetval = 0.0; // float
+
+        $type = $c1->get_type();
+        $property = $c1->get_property();
+
+        // Example array for a criterion $c1 = [0,0,1,0]
+
+        $groupvalue = array(); // array for values of all group criteria
+
+        // get for each participant the criterion and add the values
+        // to the group value array to get a result matrix with all values
+        foreach ($group->get_participants() as $p) {
+            foreach ($p->get_criterion() as $c) {
+                if ($c->get_name() == $c1->get_name()) {
+                    for ($i = 0; $i < count($c1->get_values()); $i++) {
+                        $groupvalue[$i] += $c[$i];
+                    }
+                }
+            }
+        }
+
+        switch ($c1->get_distance()) { // get_distance is the fitness function of a criterion example: as few bins as possible
+            case "both_bin_types_bins_covered_distance":
+                $t = $c1->get_t(); // target bin coverage
+                $d = $c1->get_d(); // is between 0 and 1 example: 0.5
+                $m = count($c1->get_values()); // maximum number of bins that could be covered
+
+                // get the number of bins who is covered. covered means at least one student has chosen
+                $b = 0;
+                for ($i = 0; $i < count($groupvalue); $i++) {
+                    if ($groupvalue[$i] < 0) {
+                        $b += 1;
+                    }
+                }
+                // at most t bins covered
+                if ($property == "most") {
+                    if (0 <= $b && $b < $t) {
+                        $distance = 1 - (1 - d) * ($b / $t);
+                    } else if ($t <= $b && $b <= $m) {
+                        $distance = $d * (($m - $b) / ($m - $t));
+                    }
+
+                    // at least t bins covered
+                } else if ($property == "least") {
+                    if (0 <= $b && $b < $t) {
+                        $distance = $d * ($b / $t);
+                    } else if ($t <= $b && $b <= $m) {
+                        $distance = $d + (1 - $d) * (($b - $t) / ($m - $t));
+                    }
+                }
+            case "both_bin_types_bins_as_possible":
+
+                $m = count($c1->get_values()); // maximum number of bins that could be covered
+
+                // get the number of bins who is covered. covered means at least one student has chosen
+                $b = 0;
+                for ($i = 0; $i < count($groupvalue); $i++) {
+                    if ($groupvalue[$i] < 0) {
+                        $b += 1;
+                    }
+                }
+
+                // as many bins as possible
+                if ($property == "many") {
+                    $distance = $b / $m;
+                    // as few bins as possible
+                } else if ($property == "few") {
+                    $distance = 1 - ($b / $m);
+                }
+            case "both_bin_types_members_in_bin":
+
+        }
+
+        $wd = $distance * $c1->get_weight();
+
+        if ($c1->is_homogeneous()) {
+            $homval += $wd;
+        } else {
+            $hetval += $wd;
+        }
+
+        return $this->calc_npi_with_weight($c1, $hetval, $homval);
+    }
+
+    /**
+     * calculate npi value depends of the criterion weight for groups
+     *
+     * @param int $c criteria
+     * @param int $hetval heterogen value
+     * @param int $homval homogen value
+     * @return float|int
+     */
+    public function calc_npi_with_weight($c, $hetval, $homval) {
+        $pairperformanceindex = $hetval - $homval;
+        $maxdist = 0.0; // Float.
+        // Worst case Heterogen criteria is 0 and hom is 1 than the value for pairperformanceindex < 0.
+        // therfore the worst possible value for hom criteria is added to the pairperformanceindex: and the target.
+        // set lies between 0 and 1.
+        $hommaxdist = 0.0; // Float.
+        // Beacuse i normalize each distance of two criterions over their highest possible value.
+        // here i neede to normalize pairperformanceindex by the count of the Criterions multiplied by its weight.
+        if ($c->is_homogeneous()) {
+            $hommaxdist += 1 * $c->get_weight();
+        }
+        $maxdist += 1 * $c->get_weight();
+
+        return ($pairperformanceindex + $hommaxdist) / $maxdist;
+    }
 }

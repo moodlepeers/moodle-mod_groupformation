@@ -27,6 +27,7 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 defined('MOODLE_INTERNAL') || die ();
 
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
@@ -91,7 +92,7 @@ function groupformation_add_instance(stdClass $groupformation, mod_groupformatio
 
     // Get current DB record (with all DB defaults).
     $groupformation = $DB->get_record('groupformation', array(
-        'id' => $id));
+            'id' => $id));
 
     groupformation_grade_item_update($groupformation);
 
@@ -119,23 +120,19 @@ function groupformation_update_instance(stdClass $groupformation, mod_groupforma
     $groupformation->timemodified = time();
     $groupformation->id = $groupformation->instance;
 
-    if ($DB->count_records('groupformation_answers', array(
-            'groupformation' => $groupformation->id)) == 0
-    ) {
-        $result = $DB->update_record('groupformation', $groupformation);
-    } else {
-        $origrecord = $DB->get_record('groupformation', array(
+    $origrecord = $DB->get_record('groupformation', array(
             'id' => $groupformation->id));
-        $origrecord->intro = $groupformation->intro;
-        $origrecord->groupoption = $groupformation->groupoption;
-        $origrecord->maxmembers = $groupformation->maxmembers;
-        $origrecord->maxgroups = $groupformation->maxgroups;
-        $result = $DB->update_record('groupformation', $origrecord);
-    }
+    $origrecord->intro = $groupformation->intro;
+    $origrecord->groupoption = $groupformation->groupoption;
+    $origrecord->maxmembers = $groupformation->maxmembers;
+    $origrecord->maxgroups = $groupformation->maxgroups;
+    $origrecord->timeopen = $groupformation->timeopen;
+    $origrecord->timeclose = $groupformation->timeclose;
+    $result = $DB->update_record('groupformation', $origrecord);
 
     // Get current DB record (with all DB defaults).
     $groupformation = $DB->get_record('groupformation', array(
-        'id' => $groupformation->id));
+            'id' => $groupformation->id));
 
     groupformation_grade_item_update($groupformation);
 
@@ -157,28 +154,28 @@ function groupformation_delete_instance($id) {
     global $DB, $USER;
 
     if (!$groupformation = $DB->get_record('groupformation', array(
-        'id' => $id))
+            'id' => $id))
     ) {
         return false;
     }
 
     // Delete any dependent records here.
     $DB->delete_records('groupformation', array(
-        'id' => $groupformation->id));
+            'id' => $groupformation->id));
 
     // Cascading deletion of all related db entries.
     $DB->delete_records('groupformation_answers', array(
-        'groupformation' => $id));
+            'groupformation' => $id));
     $DB->delete_records('groupformation_users', array(
-        'groupformation' => $id));
+            'groupformation' => $id));
     $DB->delete_records('groupformation_jobs', array(
-        'groupformationid' => $id));
+            'groupformationid' => $id));
     $DB->delete_records('groupformation_user_values', array(
-        'groupformationid' => $id));
+            'groupformationid' => $id));
     $DB->delete_records('groupformation_groups', array(
-        'groupformation' => $id));
+            'groupformation' => $id));
     $DB->delete_records('groupformation_group_users', array(
-        'groupformation' => $id));
+            'groupformation' => $id));
     groupformation_grade_item_delete($groupformation);
 
     return true;
@@ -266,7 +263,7 @@ function groupformation_print_recent_activity($course, $viewfullnames, $timestar
  * @return void adds items into $activities and increases $index
  */
 function groupformation_get_recent_mod_activity(&$activities, &$index, $timestart, $courseid, $cmid, $userid = 0,
-                                                $groupid = 0) {
+        $groupid = 0) {
 }
 
 /**
@@ -322,7 +319,7 @@ function groupformation_get_extra_capabilities() {
 function groupformation_scale_used($groupformationid, $scaleid) {
     global $DB;
     if ($scaleid and $DB->record_exists('groupformation', array(
-            'id' => $groupformationid, 'grade' => -$scaleid))
+                    'id' => $groupformationid, 'grade' => -$scaleid))
     ) {
         return true;
     } else {
@@ -342,7 +339,7 @@ function groupformation_scale_used($groupformationid, $scaleid) {
 function groupformation_scale_used_anywhere($scaleid) {
     global $DB;
     if ($scaleid and $DB->record_exists('groupformation', array(
-            'grade' => -$scaleid))
+                    'grade' => -$scaleid))
     ) {
         return true;
     } else {
@@ -384,7 +381,7 @@ function groupformation_grade_item_update(stdClass $groupformation, $reset = fal
     }
 
     grade_update('mod/groupformation', $groupformation->course, 'mod', 'groupformation', $groupformation->id, 0, null,
-        $item);
+            $item);
 }
 
 /**
@@ -399,8 +396,8 @@ function groupformation_grade_item_delete($groupformation) {
     require_once($CFG->libdir . '/gradelib.php');
 
     return grade_update('mod/groupformation', $groupformation->course, 'mod', 'groupformation', $groupformation->id, 0,
-        null, array(
-            'deleted' => 1));
+            null, array(
+                    'deleted' => 1));
 }
 
 /**
@@ -417,7 +414,7 @@ function groupformation_grade_item_delete($groupformation) {
 function groupformation_update_grades(stdClass $groupformation, $userid = 0) {
     $grades = array(); // Populate array of grade objects indexed by userid.
     grade_update('mod/groupformation', $groupformation->course, 'mod', 'groupformation', $groupformation->id, 0,
-        $grades);
+            $grades);
 }
 
 /**
@@ -453,7 +450,7 @@ function groupformation_get_file_areas($course, $cm, $context) {
  * @return file_info instance or null if not found
  */
 function groupformation_get_file_info($browser, $areas, $course, $cm, $context, $filearea, $itemid, $filepath,
-                                      $filename) {
+        $filename) {
     return null;
 }
 
@@ -552,7 +549,7 @@ function groupformation_extend_navigation(navigation_node $navref, stdClass $cou
  *            {@link navigation_node}
  */
 function groupformation_extend_settings_navigation(settings_navigation $settingsnav,
-                                                   navigation_node $groupformationnode = null) {
+        navigation_node $groupformationnode = null) {
 }
 
 /**
@@ -562,6 +559,68 @@ function groupformation_extend_settings_navigation(settings_navigation $settings
  * @return stdClass
  */
 function groupformation_set_fields(stdClass $groupformation) {
+
+    if (isset ($groupformation->binquestion) && $groupformation->binquestion == 0) {
+        $groupformation->binquestion = 0;
+        $groupformation->binquestiontext = "";
+        $groupformation->binquestionlines = "";
+        $groupformation->binquestionvalues = null;
+        $groupformation->binquestionnumber = null;
+        $groupformation->binquestionimportance = null;
+        $groupformation->binquestionrelation = null;
+        $groupformation->binquestionmultiselect = null;
+    } else if (!isset ($groupformation->binquestion)) {
+        $groupformation->binquestion = 0;
+        $groupformation->binquestiontext = "";
+        $groupformation->binquestionlines = "";
+        $groupformation->binquestionvalues = null;
+        $groupformation->binquestionnumber = null;
+        $groupformation->binquestionimportance = null;
+        $groupformation->binquestionrelation = null;
+        $groupformation->binquestionmultiselect = null;
+    } else if (isset ($groupformation->binquestion) && $groupformation->binquestion == 1 &&
+            isset ($groupformation->binquestiontext) && $groupformation->binquestiontext == "") {
+        $groupformation->binquestion = 0;
+        $groupformation->binquestiontext = "";
+        $groupformation->binquestionlines = "";
+        $groupformation->binquestionvalues = null;
+        $groupformation->binquestionnumber = null;
+        $groupformation->binquestionimportance = null;
+        $groupformation->binquestionrelation = null;
+        $groupformation->binquestionmultiselect = null;
+    } else if (isset ($groupformation->binquestion) && $groupformation->binquestion == 1 &&
+            isset ($groupformation->binquestionlines) && $groupformation->binquestionlines == "") {
+        $groupformation->binquestion = 0;
+        $groupformation->binquestiontext = "";
+        $groupformation->binquestionlines = "";
+        $groupformation->binquestionvalues = null;
+        $groupformation->binquestionnumber = null;
+        $groupformation->binquestionimportance = null;
+        $groupformation->binquestionrelation = null;
+        $groupformation->binquestionmultiselect = null;
+    } else if (!isset($groupformation->binquestionimportance)) {
+        $groupformation->binquestion = 0;
+        $groupformation->binquestiontext = "";
+        $groupformation->binquestionlines = "";
+        $groupformation->binquestionvalues = null;
+        $groupformation->binquestionnumber = null;
+        $groupformation->binquestionimportance = null;
+        $groupformation->binquestionrelation = null;
+        $groupformation->binquestionmultiselect = null;
+    } else {
+        $binanswerarray = array();
+        if (!isset ($groupformation->binquestionrelation)) {
+            $groupformation->binquestionrelation = 0;
+        }
+        if (!isset($groupformation->binquestionmultiselect)) {
+            $groupformation->binquestionmultiselect = 0;
+        }
+        if ($groupformation->binquestion != 0) {
+            $binanswerarray = explode("\n", $groupformation->binquestionlines);
+        }
+        $groupformation->binquestionvalues = groupformation_convert_options($binanswerarray);
+        $groupformation->binquestionnumber = count($binanswerarray);
+    }
 
     if (isset ($groupformation->knowledge) && $groupformation->knowledge == 0) {
         $groupformation->knowledge = 0;
@@ -574,7 +633,7 @@ function groupformation_set_fields(stdClass $groupformation) {
         $groupformation->knowledgevalues = null;
         $groupformation->knowledgenumber = null;
     } else if (isset ($groupformation->knowledge) && $groupformation->knowledge == 1 &&
-        isset ($groupformation->knowledgelines) && $groupformation->knowledgelines == ""
+            isset ($groupformation->knowledgelines) && $groupformation->knowledgelines == ""
     ) {
         $groupformation->knowledge = 0;
         $groupformation->knowledgelines = "";
@@ -600,7 +659,7 @@ function groupformation_set_fields(stdClass $groupformation) {
         $groupformation->topicvalues = null;
         $groupformation->topicnumber = null;
     } else if (isset ($groupformation->topics) && $groupformation->topics == 1 && isset ($groupformation->topiclines) &&
-        $groupformation->topiclines == ""
+            $groupformation->topiclines == ""
     ) {
         $groupformation->topics = 0;
         $groupformation->topiclines = "";

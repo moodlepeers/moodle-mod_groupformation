@@ -15,14 +15,13 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * German lang string
+ * German lang strings
  *
  * @package     mod_groupformation
  * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 $string ['language'] = 'de';
 $string ['modulename'] = 'Gruppenformation';
 $string ['modulenameplural'] = 'Gruppenformationen';
@@ -57,7 +56,7 @@ $string ['generategroups'] = "Gruppen erstellen";
 $string ['edit_param'] = 'Bearbeiten';
 $string ['editparam'] = 'Paramter bearbeiten';
 $string ['nochangespossible'] = 'Der Fragebogen wurde bereits von mindestens einem Teilnehmenden beantwortet. Sie können nur noch Gruppengröße oder Gruppenanzahl ändern. Weitere Änderungen werden nicht gespeichert.';
-$string ['availability_nochangespossible'] = 'Der Fragebogen wurde bereits beantwortet. Sie können die Verfügbarkeit nicht mehr ändern.';
+$string ['availability_nochangespossible'] = 'Der Fragebogen wurde bereits beantwortet. Sie können die Startzeit nicht mehr ändern.';
 $string ['scenario'] = 'Szenario';
 $string ['scenarioLabel'] = '';
 $string ['scenario_description'] = 'Bitte wählen Sie das für Sie am Besten geeignete Szenario für die Gruppenformation aus.';
@@ -88,6 +87,28 @@ $string ['topics_description_extended'] = 'Geben Sie hier die Themen an, die die
 $string ['topics_question'] = 'Bitte sortieren Sie die zur Wahl stehenden Themen entsprechend Ihrer Präferenz, beginnend mit Ihrem bevorzugten Thema. Zum Sortieren verwenden Sie bitte Drag & Drop.';
 $string ['topicchoice'] = 'Themenauswahl';
 $string ['useOneLineForEachTopic'] = 'Pro Thema jeweils eine Zeile benutzen';
+
+$string ['oneOfBinQuestion'] = 'One-of-bin Frage';
+$string ['oneOfBinAnswers'] = 'One-of-bin Antworten';
+$string ['oneOfBinImportance'] = 'One-of-bin Gewichtung';
+$string ['oneOfBinRelation'] = 'One-of-bin RElation';
+$string ['homogenous'] = 'Homogen';
+$string ['heterogenous'] = 'Heterogen';
+$string ['choose_oob_answers'] = 'Hier können Sie die Antworten für ihre Auswahlfrage auswählen!';
+$string ['add_oob_question'] = 'Bitte fügen Sie die Auswahlfrage hier ein!';
+$string ['answers'] = 'Antworten:';
+$string ['importance'] = 'Gewichtung:';
+$string ['choose_oob_importance'] = 'Sie können hier die Geichtung der Frage auswählen';
+$string ['relation'] = 'Relation:';
+$string ['choose_oob_relation'] = 'Wählen sie die gewünschte Relation zwischen den Gruppenmitgliedern.';
+$string ['choose_answer'] = 'Wählen Sie eine Antwort!';
+$string ['choose_answers'] = 'Wählen Sie so viele Antworten wie Sie wollen!';
+$string ['no_oob_question'] = 'Keine Auswahlfrage wurde ausgewählt!';
+$string ['oob_selected_value'] = 'Ausgewählter Wert: ';
+$string ['decide_multiselect'] = 'Wählen Sie zwischen multi-select- und single choice-Frage (Standard: single choice)';
+$string ['multiselect'] = 'Multi-select';
+$string ['choose_type'] = 'Wählen Sie einen Typ';
+
 $string ['knowledge'] = 'Vorwissen';
 $string ['knowledge_help'] = 'Wenn Themen (siehe unten) aktiviert sind, wird diese Option automatisch deaktiviert und ist nicht weiter auswählbar.';
 $string ['knowledge_description'] = 'Das Vorwissen in bestimmten Gebieten soll in die Gruppenbildung einfließen.';
@@ -135,7 +156,7 @@ $string ['choose_scenario'] = 'Szenario auswählen';
 $string ['choose_number'] = 'Anzahl auswählen';
 $string ['choose_evaluationmethod'] = 'Bewertungsmethode auswählen';
 $string ['evaluation_point_info'] = 'Bitte maximale Punktzahl eingeben';
-$string ['students_enrolled_info'] = 'Teilnehmenden sind im Kurs eingeschrieben';
+$string ['students_enrolled_info'] = 'Teilnehmenden sind im Kurs eingeschrieben. Falls die Aktivität auf bestimmte Gruppierungen beschränkt wird, kann die echte Zahl kleiner sein.';
 $string ['groupSettingsInfo'] = 'Sie haben Themen zur Auswahl angegeben. Daraus bestimmt sich die Anzahl der Gruppen und deren Größe.';
 $string ['analyse'] = 'Analyse';
 $string ['questionnaire_not_started'] = 'Der Fragebogen wartet noch auf Ihre Bearbeitung.';
@@ -164,6 +185,7 @@ $string ['category_topic'] = 'Themenauswahl';
 $string ['category_sellmo'] = 'Lern- und Leistungsmotivation';
 $string ['category_self'] = 'Selbsteinschätzung';
 $string ['category_srl'] = 'Selbstreguliertes Lernen';
+$string ['category_binquestion'] = 'Binquestion';
 
 $string ['tabletitle_general'] = 'Allgemeines';
 $string ['tabletitle_grade'] = 'Ziele';
@@ -178,9 +200,13 @@ $string ['tabletitle_sellmo'] = 'Lern- und Leistungsmotivation';
 $string ['tabletitle_self'] = 'Selbsteinschätzung';
 $string ['tabletitle_srl'] = 'Selbstreguliertes Lernen';
 $string ['tabletitle_knowledge'] = 'Wie schätzen Sie Ihr persönliches Vorwissen in folgenden Gebieten ein?';
+$string ['tabletitle_binquestion'] = 'Wählen Sie eine der Antworten!';
+$string ['tabletitle_binquestion_multi'] = 'Wählen Sie so viele Antworten wie Sie wollen!';
 
 $string ['stats_partly'] = 'In der Kategorie "{$a->category}" haben Sie {$a->answered} von {$a->questions} Fragen beantwortet.';
 $string ['stats_all'] = 'In der Kategorie "{$a->category}" haben Sie alle Fragen beantwortet.';
+$string ['stats_all_binquestion'] = 'In der Kategorie "{$a->category}" haben Sie die Frage beantworted.';
+$string ['stats_none_binquestion'] = 'In der Kategorie "{$a->category}" haben Sie die Frage noch nicht beantworted.';
 $string ['stats_none'] = 'In der Kategorie "{$a->category}" haben Sie noch keine Frage beantwortet.';
 $string ['tab_questionnaire'] = 'Fragebogen';
 $string ['tab_analysis'] = 'Analyse';
@@ -492,14 +518,13 @@ $string['topic_group_info'] = 'Euer Thema ist';
 $string['topic'] = "Thema";
 
 $string['participant_code_title'] = "Persönlicher Teilnehmercode";
-$string['participant_code_header'] = "Bitte legen Sie sich einen persönlichen Teilnehmercode nach dem folgenden Schema an:";
-$string['participant_code_rules'] = "1. Vorname Ihrer Mutter (erste 2 Buchstaben, z.B. EV für Eva)<br>
-2. Geburtsmonat Ihrer Mutter (als zwei Ziffern, z.B. 07 für Juli)<br>
-3. Vorname Ihres Vaters (erste 2 Buchstaben, z.B. AD für Adam)<br>
-4. Geburtsmonat Ihres Vaters (als zwei Ziffern, z.B. 11 für November)<br><br>
+$string['participant_code_header_study'] = "Bitte legen Sie sich einen persönlichen Teilnehmercode nach dem folgenden Schema an:";
+$string['participant_code_rules_study'] = "1. Die ersten zwei Buchstaben des Vornamens der Mutter (Beispiel: BÄrbel —> BA, nicht: BÄ oder BAE)<br>
+2. Die ersten zwei Buchstaben des Vornamens des Vaters (Beispiel: ÖMer —> OM, nicht ÖM oder OEM)<br>
+3. Die ersten zwei Ziffern des eigenen Geburtstages (Beispiel: 03.10.1989 —> 03)<br><br>
 Bitte verwenden Sie keine Umlaute, sondern ersetzen Sie diese durch normale Buchstaben<br>
 (Ä &rarr; A; Ö &rarr; O; Ü &rarr; U; ß &rarr; S)";
-$string['participant_code_example'] = "Beispiel: EV07AD11";
+$string['participant_code_example_study'] = "Beispiel: BAOM03";
 $string['participant_code_footer'] = "Ihr persönlicher Teilnehmercode lautet";
 
 $string['participant_code_alert_message'] = 'Sie müssen einen gültigen Teilnehmercode eingeben bevor Sie den Fragebogen beantworten können.';
@@ -578,4 +603,9 @@ $string ['no_filter_change'] = 'Aufgrund der laufenden oder schon abgeschlossene
 $string ['filter'] = 'Filter aktivieren';
 $string ['not_filter'] = 'Filter deaktivieren';
 
+$string ['pre_study_header'] = 'Statistiken zum Studiendesign';
+$string ['optimized_grouping'] = '<b>{$a}</b> Teilnehmende sind für die optimierte Gruppenbildung verfügbar.';
+$string ['randomized_grouping'] = '<b>{$a}</b> Teilnehmende sind für die randomisierte Gruppenbildung verfügbar.';
+
+$string ['scientific_grouping_setup'] = 'Dieses Studiendesign teilt alle Teilnehmenden (mit vollständig beantworteten Fragebögen) in <b>{$a} Kohorten/Experimentalbedigungen</b>. Alle Teilnehmenden mit unvollständig beantworteten Fragebögen werden randomisiert gruppiert (als zusätzliche Kohorte/Bedingung).<br>Die Konfigurationsschlüssel sind wie folgt:';
 

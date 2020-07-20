@@ -22,9 +22,8 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.'); // It must be included from a Moodle page.
-}
+
+defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . "/mod/groupformation/lib/classes/util/hash_map.php");
 
@@ -40,7 +39,6 @@ class mod_groupformation_criterion_weight {
 
     /** @var mod_groupformation_hash_map This hash map contains all criterion weights */
     public static $criterionweights;
-
 
     /**
      * Initializes the weights.
@@ -67,7 +65,6 @@ class mod_groupformation_criterion_weight {
         static::$criterionweights->add($k, $v);
         return true;
     }
-
 
     /**
      * Changing CriterionWeights; only allowed if keys are equal to existing ones and the sum of all weights is 1.

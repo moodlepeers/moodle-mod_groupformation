@@ -32,6 +32,7 @@ $createanswers = optional_param('create_answers', false, PARAM_BOOL);
 $randomanswers = optional_param('random_answers', false, PARAM_BOOL);
 $deleteusers = optional_param('delete_users', false, PARAM_BOOL);
 $resetjob = optional_param('reset_job', false, PARAM_BOOL);
+$createcsv = optional_param('create_csv', false, PARAM_BOOL);
 
 $debugbuttons = "";
 
@@ -51,7 +52,7 @@ if (($CFG->debug === 32767) || (in_array($USER->id, $debugusers))) {
         $store->statemachine->set_state(1);
 
         $return = new moodle_url ('/mod/groupformation/view.php', array(
-            'id' => $id, 'do_show' => 'analysis'));
+                'id' => $id, 'do_show' => 'analysis'));
         redirect($return->out());
     }
 
@@ -65,12 +66,13 @@ if (($CFG->debug === 32767) || (in_array($USER->id, $debugusers))) {
 
         if (!is_null($job)) {
             $result = $ajm::do_groupal($job);
+
             $saved = $ajm::save_result($job, $result);
             $ajm::set_job($job, 'done');
             $store->statemachine->set_state(4);
         }
         $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
-            'id' => $id, 'do_show' => 'analysis'));
+                'id' => $id, 'do_show' => 'analysis'));
         redirect($return->out());
     }
 
@@ -85,11 +87,10 @@ if (($CFG->debug === 32767) || (in_array($USER->id, $debugusers))) {
         if (!is_null($job)) {
             mod_groupformation_group_generator::generate_moodle_groups($job->groupformationid);
             $ajm::set_job($job, 'done_groups');
-
             $store->statemachine->set_state(6);
         }
         $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
-            'id' => $id, 'do_show' => 'analysis'));
+                'id' => $id, 'do_show' => 'analysis'));
         redirect($return->out());
     }
 
@@ -166,4 +167,49 @@ if (($CFG->debug === 32767) || (in_array($USER->id, $debugusers))) {
     $debugbuttons .= '</a>';
 
     $debugbuttons .= '</div>';
+
+    // create csv with result of binquestion
+    if ($createcsv) {
+
+        // open the file "demosaved.csv" for writing
+        $file = fopen('binquestion_group_result.csv', 'w');
+
+        // save the column headers
+        fputcsv($file, array("sep=,"));
+        fputcsv($file, array('user id', 'answer', 'group id', 'group name', 'group size'));
+
+        global $DB;
+        $data = $DB->get_records_sql("SELECT result.userid, result.answer, result.groupid, groups.groupname, groups.group_size "
+                . "FROM
+            (
+            SELECT result.userid, result.answer, group_user.groupid
+            FROM
+            (
+                SELECT users.userid, answers.answer
+                FROM mdl_groupformation_users AS users
+                JOIN mdl_groupformation_answers as answers
+                ON users.userid = answers.userid
+                AND answers.category = \"binquestion\"
+                AND answers.groupformation= 10
+                AND users.groupformation = 10
+            ) AS result
+            JOIN mdl_groupformation_group_users as group_user
+            ON group_user.groupformation = 10
+            AND result.userid = group_user.userid
+        ) as result
+        JOIN mdl_groupformation_groups as groups
+        ON result.groupid = groups.id");
+
+        // save each row of the data
+        foreach ($data as $row) {
+            fputcsv($file, [$row->userid, $row->answer, $row->groupid, $row->groupname, $row->group_size]);
+        }
+
+        // Close the file
+        fclose($file);
+
+        $return = new moodle_url ('/mod/groupformation/analysis_view.php', array(
+                'id' => $id, 'do_show' => 'analysis'));
+        redirect($return->out());
+    }
 }

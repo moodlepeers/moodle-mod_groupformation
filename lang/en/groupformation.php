@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * English lang string
+ * English lang strings
  *
  * @package     mod_groupformation
  * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
@@ -57,7 +57,7 @@ $string ['edit_param'] = 'Edit';
 $string ['editparam'] = 'Edit parameters';
 $string ['nochangespossible'] = 'The questionnaire has been answered already.
 You can only change the maximum number of members or maximum number of groups. Further changes will not be saved.';
-$string ['availability_nochangespossible'] = 'The questionnaire has been answered already. You cannot change the availability anymore.';
+$string ['availability_nochangespossible'] = 'The questionnaire has been answered already. You cannot change the start time anymore.';
 $string ['scenario'] = 'Scenario';
 $string ['scenarioLabel'] = '';
 $string ['scenario_description'] = 'Please choose the most suitable scenario for the group formation.';
@@ -89,6 +89,28 @@ $string ['topics_description_extended'] = 'Please list topics for the students t
 $string ['topics_question'] = 'Please sort the following topics regarding your personal interests and start with your favorite topic. Sort via drag and drop.';
 $string ['topicchoice'] = 'Topic selection';
 $string ['useOneLineForEachTopic'] = 'Use one line for each topic';
+
+$string ['oneOfBinQuestion'] = 'One-of-bin question';
+$string ['oneOfBinAnswers'] = 'One-of-bin answers';
+$string ['oneOfBinImportance'] = 'One-of-bin importance';
+$string ['oneOfBinRelation'] = 'One-of-bin relation';
+$string ['homogenous'] = 'Homogenous';
+$string ['heterogenous'] = 'Heterogenous';
+$string ['choose_oob_answers'] = 'Here you can choose the answers for your choice-question!';
+$string ['add_oob_question'] = 'Please add the choice-question here!';
+$string ['answers'] = 'Answers:';
+$string ['importance'] = 'Importance:';
+$string ['choose_oob_importance'] = 'You can choose the importance of this question here';
+$string ['relation'] = 'Relation:';
+$string ['choose_oob_relation'] = 'Choose the required relation between the groupmembers.';
+$string ['choose_answer'] = 'Choose one answer!';
+$string ['choose_answers'] = 'Choose as many answers you want!';
+$string ['no_oob_question'] = 'No choice-question is chosen!';
+$string ['oob_selected_value'] = 'Selected value: ';
+$string ['decide_multiselect'] = 'Decide between multi-select- and single choice-question (Standard: single choice)';
+$string ['multiselect'] = 'Multi-select';
+$string ['choose_type'] = 'Choose Type';
+
 $string ['knowledge'] = 'Knowledge';
 $string ['knowledge_help'] = 'If topics (option below) are activated, this option gets automatically deactivated and disabled.';
 $string ['knowledge_description'] = 'I want to include knowledge questions';
@@ -136,7 +158,7 @@ $string ['choose_scenario'] = 'Choose scenario';
 $string ['choose_number'] = 'Choose number';
 $string ['choose_evaluationmethod'] = 'Choose method';
 $string ['evaluation_point_info'] = 'indicate the maximum available points';
-$string ['students_enrolled_info'] = 'Students are enrolled in this course';
+$string ['students_enrolled_info'] = 'Students are enrolled in this course. If the activity is configured for a certain grouping only, the real number may be smaller.';
 $string ['groupSettingsInfo'] = 'You have choosen to define topics. Thereof the number of groups and their size will be calculated, as you can see below.';
 $string ['analyse'] = 'Analysis';
 $string ['questionnaire_not_started'] = 'The questionnaire is ready.';
@@ -166,6 +188,7 @@ $string ['category_topic'] = 'Topics';
 $string ['category_sellmo'] = 'Learning and Achievement Motivation';
 $string ['category_self'] = 'Self-assessment';
 $string ['category_srl'] = 'Self-controlled Learning';
+$string ['category_binquestion'] = 'Binquestion';
 
 $string ['tabletitle_general'] = 'General';
 $string ['tabletitle_grade'] = 'Goals';
@@ -180,9 +203,13 @@ $string ['tabletitle_sellmo'] = 'Learning and Achievement Motivation';
 $string ['tabletitle_self'] = 'Self-assessment';
 $string ['tabletitle_srl'] = 'Self-controlled Learning';
 $string ['tabletitle_knowledge'] = 'How much do you know about the following topics?';
+$string ['tabletitle_binquestion'] = 'Choose one of the answers!';
+$string ['tabletitle_binquestion_multi'] = 'You can choose as many answers you want!';
 
 $string ['stats_partly'] = 'You answered {$a->answered} out of {$a->questions} questions in the category "{$a->category}".';
 $string ['stats_all'] = 'You answered all questions in the category "{$a->category}".';
+$string ['stats_all_binquestion'] = 'You answered the question in the category "{$a->category}".';
+$string ['stats_none_binquestion'] = 'You did not answer the question in the category "{$a->category}".';
 $string ['stats_none'] = 'You did not answer any question in the category "{$a->category}".';
 $string ['tab_overview'] = 'Overview';
 $string ['tab_questionnaire'] = 'Questionnaire';
@@ -479,14 +506,14 @@ $string ['topic_group_info'] = 'Your topic is';
 $string ['topic'] = "Topic";
 
 $string ['participant_code_title'] = "Participant Code";
-$string ['participant_code_header'] = "Please enter a personal participant code based on the following rules:";
-$string ['participant_code_rules'] = "1. Your mother's first name (first two characters, capitalized, z.B. EV for Eva)<br>
-2. Your mother's month of birth (as two digits, z.B. 07 for July)<br>
-3. Your father's first name (first two characters, capitalized, z.B. AD for Adam)<br>
-4. Your father's month of birth (as two digits, z.B. 11 for November)<br><br>
+$string ['participant_code_header_study'] = "Please enter a personal participant code based on the following rules:";
+$string ['participant_code_rules_study'] = "1. The first two letters of your mother's first name (capitalized, e.g. BÄrbel -> BA, not: BÄ or BAE)<br>
+2. The first two letters of your father's first name (capitalized, e.g. ÖMer —> OM, not ÖM or OEM)<br>
+3. The first two digits of your birthday (e.g. 03.10.1989 —> 03)<br><br>
 Replace \"Umlaute\" and special characters as follows<br>
 Ä &rarr; A; Ö &rarr; O; Ü &rarr; U; ß &rarr; S";
-$string ['participant_code_example'] = "Example: EV07AD11";
+$string ['participant_code_example_study'] = "Example: BAOM03";
+
 $string ['participant_code_footer'] = "Your personal participant code is";
 
 $string ['participant_code_alert_message'] = 'You need enter a valid participant code before accessing the questionnaire. Scroll down and enter your participant code.';
@@ -600,4 +627,12 @@ $string ['privacy:metadata:groupformation_group_users'] = 'Information about the
 $string ['privacy:metadata:groupformation_group_users:groupformation'] = 'ID of the activity';
 $string ['privacy:metadata:groupformation_group_users:userid'] = 'ID of the user';
 $string ['privacy:metadata:groupformation_group_users:groupid'] = 'ID of corresponding record in table "groupformation_groups"';
+
+$string ['bucket_description'] = 'I want to pre-group the participants based on a selection question';
+
+$string ['pre_study_header'] = 'Statistics for Study Design';
+$string ['optimized_grouping'] = '<b>{$a}</b> users are available for optimized grouping.';
+$string ['randomized_grouping'] = '<b>{$a}</b> users are available for randomized grouping.';
+
+$string ['scientific_grouping_setup'] = 'This scientific grouping setup divides all users (with completely answered questionnaires) into <b>{$a} cohorts</b>. All users with incomplete answers are grouped randomly (as an additional cohort).<br>The configuration keys are as follows:';
 
