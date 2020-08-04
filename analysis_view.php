@@ -40,6 +40,9 @@ $PAGE->set_heading(format_string($course->fullname));
 $PAGE->set_context(context_module::instance($cm->id));
 $PAGE->set_cm($cm);
 
+// load user table file
+groupformation_add_jquery($PAGE, 'user_table.js');
+
 // Update questionnaire config if necessary.
 groupformation_import_questionnaire_configuration();
 

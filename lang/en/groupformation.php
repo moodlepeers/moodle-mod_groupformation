@@ -346,6 +346,7 @@ $string ['students_committed_single'] = 'student therefrom has already committed
 $string ['students_committed_multiple'] = 'students have also committed their answers already.';
 $string ['committed_not_completed'] = 'from the committed questionnaires are not complete.';
 $string ['completed_questionnaire'] = 'completely answered questionnaires.';
+$string ['user_list'] = 'User list';
 
 $string ['emailnotifications_info'] = 'You will be notified via message when it is terminated.';
 $string ['onlyactivestudents_info'] = 'Only students with at least one submitted answer will be considered for the group formation. This can be configured in the {$a->url}.';

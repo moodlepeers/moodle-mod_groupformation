@@ -349,6 +349,7 @@ $string['students_committed_single'] = 'Teilnehmende davon haben ihre Antworten 
 $string['students_committed_multiple'] = 'Teilnehmende davon hat seine Antworten schon endgültig abgegeben.';
 $string['committed_not_completed'] = 'von den fest abgegebenen Fragebögen sind nicht vollständig.';
 $string['completed_questionnaire'] = 'vollständig beantwortete Fragebögen.';
+$string['user_list'] = 'Benutzerliste';
 
 $string['emailnotifications_info'] = '<i style="color:red;">Die automatische Benachrichtigung über abgeschlossene Gruppenformationen ist momentan leider nicht verfügbar.</i>';
 $string['onlyactivestudents_info'] = 'Zur Gruppenbildung werden ausschließlich Teilnehmende betrachtet werden, die mind. eine Frage beantwortet haben.';

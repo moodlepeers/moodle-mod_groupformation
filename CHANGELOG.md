@@ -1,9 +1,42 @@
-# Change Log
+# Changelog
+
+## [Unreleased](https://github.com/moodlepeers/moodle-mod_groupformation/tree/HEAD)
+
+[Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/v1.6.2...HEAD)
+
+**Implemented enhancements:**
+
+- Info-text and notification \(opt-in\) text needs to be changed/updated, to inform students about use of the data for scientific analysis etc. [\#71](https://github.com/moodlepeers/moodle-mod_groupformation/issues/71)
+- EU Datenschutzverordnung: Download aller über "mich" gespeicherten Daten \(aus allen Kursen\) anbieten [\#63](https://github.com/moodlepeers/moodle-mod_groupformation/issues/63)
+- Student view.php: use settings for archiving days in text instead of fixed 360 [\#44](https://github.com/moodlepeers/moodle-mod_groupformation/issues/44)
+
+**Fixed bugs:**
+
+- \(cron\) partisipant\_parser.php:85 Clone on NULL object causes exception [\#70](https://github.com/moodlepeers/moodle-mod_groupformation/issues/70)
+- phpunittest error: tool\_dataprivacy\_expired\_contexts\_testcase::test\_expired\_course\_related\_contexts Unexpected debugging\(\) call detected. [\#67](https://github.com/moodlepeers/moodle-mod_groupformation/issues/67)
+
+**Closed issues:**
+
+- End date for answers [\#80](https://github.com/moodlepeers/moodle-mod_groupformation/issues/80)
+- externallib [\#66](https://github.com/moodlepeers/moodle-mod_groupformation/issues/66)
+- The english language string in questionnaire\_availability\_info\_until | groupformation is in German [\#65](https://github.com/moodlepeers/moodle-mod_groupformation/issues/65)
+
+**Merged pull requests:**
+
+- Feature one of bin [\#82](https://github.com/moodlepeers/moodle-mod_groupformation/pull/82) ([stefanjung](https://github.com/stefanjung))
+- One of bin criterion [\#73](https://github.com/moodlepeers/moodle-mod_groupformation/pull/73) ([stefanjung](https://github.com/stefanjung))
+- English string variable in English [\#64](https://github.com/moodlepeers/moodle-mod_groupformation/pull/64) ([germanvaleroelizondo](https://github.com/germanvaleroelizondo))
+
+## [v1.6.2](https://github.com/moodlepeers/moodle-mod_groupformation/tree/v1.6.2) (2018-05-11)
+
+[Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/v1.6.1...v1.6.2)
 
 ## [v1.6.1](https://github.com/moodlepeers/moodle-mod_groupformation/tree/v1.6.1) (2018-05-11)
+
 [Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/v1.6...v1.6.1)
 
 ## [v1.6](https://github.com/moodlepeers/moodle-mod_groupformation/tree/v1.6) (2018-05-10)
+
 [Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/v1.5.1...v1.6)
 
 **Implemented enhancements:**
@@ -17,6 +50,7 @@
 - Adding debug options for debug user [\#56](https://github.com/moodlepeers/moodle-mod_groupformation/pull/56) ([Nullmann](https://github.com/Nullmann))
 
 ## [v1.5.1](https://github.com/moodlepeers/moodle-mod_groupformation/tree/v1.5.1) (2018-01-20)
+
 [Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/v1.5...v1.5.1)
 
 **Implemented enhancements:**
@@ -31,6 +65,7 @@
 - Blank screen when student access questionnaire [\#46](https://github.com/moodlepeers/moodle-mod_groupformation/issues/46)
 
 ## [v1.5](https://github.com/moodlepeers/moodle-mod_groupformation/tree/v1.5) (2017-10-06)
+
 [Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/v1.4...v1.5)
 
 **Implemented enhancements:**
@@ -43,6 +78,7 @@
 - Unusable slow: grouping\_view.php?id=XXX&do\_show=grouping  [\#17](https://github.com/moodlepeers/moodle-mod_groupformation/issues/17)
 
 ## [v1.4](https://github.com/moodlepeers/moodle-mod_groupformation/tree/v1.4) (2017-07-12)
+
 [Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/v1.3.1...v1.4)
 
 **Closed issues:**
@@ -50,6 +86,7 @@
 - Translation Notification preferences [\#53](https://github.com/moodlepeers/moodle-mod_groupformation/issues/53)
 
 ## [v1.3.1](https://github.com/moodlepeers/moodle-mod_groupformation/tree/v1.3.1) (2017-05-26)
+
 [Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/v1.3...v1.3.1)
 
 **Implemented enhancements:**
@@ -63,7 +100,8 @@
 - Template variable is not replaced [\#50](https://github.com/moodlepeers/moodle-mod_groupformation/issues/50)
 
 ## [v1.3](https://github.com/moodlepeers/moodle-mod_groupformation/tree/v1.3) (2017-03-01)
-[Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/1.2-b...v1.3)
+
+[Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/1.2.1-b...v1.3)
 
 **Implemented enhancements:**
 
@@ -91,11 +129,13 @@
 - Can not change the description of the activity [\#15](https://github.com/moodlepeers/moodle-mod_groupformation/issues/15)
 - Lang-strings: sourceforge -\> github [\#14](https://github.com/moodlepeers/moodle-mod_groupformation/issues/14)
 
-## [1.2-b](https://github.com/moodlepeers/moodle-mod_groupformation/tree/1.2-b) (2016-10-11)
-[Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/1.2.1-b...1.2-b)
-
 ## [1.2.1-b](https://github.com/moodlepeers/moodle-mod_groupformation/tree/1.2.1-b) (2016-10-11)
-[Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/v1.1-b...1.2.1-b)
+
+[Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/1.2-b...1.2.1-b)
+
+## [1.2-b](https://github.com/moodlepeers/moodle-mod_groupformation/tree/1.2-b) (2016-10-11)
+
+[Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/v1.1-b...1.2-b)
 
 **Implemented enhancements:**
 
@@ -110,6 +150,7 @@
 - Max. Gruppenzahl: Beschränkung in mod\_form.php aufheben [\#11](https://github.com/moodlepeers/moodle-mod_groupformation/issues/11)
 
 ## [v1.1-b](https://github.com/moodlepeers/moodle-mod_groupformation/tree/v1.1-b) (2016-09-10)
+
 [Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/v1.0.1b...v1.1-b)
 
 **Fixed bugs:**
@@ -126,15 +167,21 @@
 - direct access to $\_GET/$\_POST variables is not allowed [\#1](https://github.com/moodlepeers/moodle-mod_groupformation/issues/1)
 
 ## [v1.0.1b](https://github.com/moodlepeers/moodle-mod_groupformation/tree/v1.0.1b) (2015-11-18)
+
 [Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/v1.0...v1.0.1b)
 
 ## [v1.0](https://github.com/moodlepeers/moodle-mod_groupformation/tree/v1.0) (2015-08-19)
+
 [Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/v0.9.1...v1.0)
 
 ## [v0.9.1](https://github.com/moodlepeers/moodle-mod_groupformation/tree/v0.9.1) (2015-08-17)
+
 [Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/v0.9...v0.9.1)
 
 ## [v0.9](https://github.com/moodlepeers/moodle-mod_groupformation/tree/v0.9) (2015-08-15)
 
+[Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/5676d7f0b06308e3aa580d35d35ca3df677e3ccd...v0.9)
 
-\* *This Change Log was automatically generated by [github_changelog_generator](https://github.com/skywinder/Github-Changelog-Generator)*
+
+
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*

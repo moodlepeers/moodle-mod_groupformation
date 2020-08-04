@@ -238,4 +238,43 @@ class mod_groupformation_analysis_controller {
 
         return $assigns;
     }
+
+    public function load_users() {
+        global $DB;
+        $userList = $this->store->get_users();
+
+
+        $selectfields = implode(',', ['id', get_all_user_name_fields(true)]);
+
+        $users = [];
+
+        foreach($userList AS $id) {
+            // get user groupformation infos
+            $user = $this->store->get_user_info($id);
+
+            // get user info like name
+            $username = $DB->get_records_list('user', 'id', [$id], null, $selectfields);
+
+            // merge arrays
+            $userData = array_merge($user, $username);
+
+            // push to users array
+            array_push($users, $userData);
+
+        }
+
+
+        // filter users for specific groupformation
+        $filtered_user = array();
+        foreach ($users as $value) {
+            if ($value[0]->groupformation == $this->groupformationid)  {
+                array_push($filtered_user, $value);
+            }
+        }
+
+
+        $assigns['users'] = $filtered_user;
+
+        return $assigns;
+    }
 }

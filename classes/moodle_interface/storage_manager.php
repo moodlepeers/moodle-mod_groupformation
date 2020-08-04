@@ -1490,6 +1490,12 @@ class mod_groupformation_storage_manager {
         return $instances;
     }
 
+    public function get_user_info($userid){
+        global $DB;
+        $records = $DB->get_records('groupformation_users', array('userid' => $userid));
+        return $records;
+    }
+
     /**
      * Returns activity state
      *
