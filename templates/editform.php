@@ -708,6 +708,8 @@ defined('MOODLE_INTERNAL') || die();
                 ">
                 </span>
             </div>
+        <?php endif; ?>
+        <?php if (false && !$this->_['mathprepcourse']): ?><!-- currently disabled since not properly tested -->
             <div class="gf_pad_header">
                 <label class="gf_label" for="id_js_emailnotifications">
                     <input disabled type="checkbox">
