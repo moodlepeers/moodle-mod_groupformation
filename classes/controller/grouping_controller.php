@@ -195,7 +195,7 @@ class mod_groupformation_grouping_controller {
     /**
      * POST action to delete generated and/or adopted groups (moodle groups)
      */
-    public function delete() {
+    public function delete($next = false) {
         $this->groupsmanager->delete_generated_groups();
 
         $ajm = new mod_groupformation_advanced_job_manager();
@@ -204,7 +204,9 @@ class mod_groupformation_grouping_controller {
 
         $ajm::reset_job($job);
 
-        //$this->statemachine->next();
+        if (!$next) {
+            $this->statemachine->next();
+        }
     }
 
     /**
