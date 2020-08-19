@@ -1285,14 +1285,14 @@ class mod_groupformation_storage_manager {
         $record->count_groups = floatval($cohort->countofgroups);
 
         $stats = $cohort->results;
-
+        var_dump($stats);
         if (!is_null($stats)) {
-            $record->avg_variance = $stats->avgvariance;
-            $record->variance = $stats->variance;
-            $record->avg = $stats->avg;
-            $record->st_dev = $stats->stddev;
-            $record->norm_st_dev = $stats->normstddev;
-            $record->performance_index = $stats->performanceindex;
+            $record->avg_variance = !is_nan($stats->avgvariance) ? $stats->avgvariance : null;
+            $record->variance = !is_nan($stats->variance) ? $stats->variance : null; 
+            $record->avg = !is_nan($stats->avg) ? $stats->avg : null; 
+            $record->st_dev = !is_nan($stats->stddev) ? $stats->stddev : null; 
+            $record->norm_st_dev = !is_nan($stats->normstddev) ? $stats->normstddev : null; 
+            $record->performance_index = !is_nan($stats->performanceindex) ? $stats->performanceindex : null;
         }
 
         $DB->insert_record('groupformation_stats', $record);
