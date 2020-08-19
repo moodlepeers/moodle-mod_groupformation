@@ -204,7 +204,7 @@ class mod_groupformation_grouping_controller {
 
         $ajm::reset_job($job);
 
-        $this->statemachine->next();
+        //$this->statemachine->next();
     }
 
     /**

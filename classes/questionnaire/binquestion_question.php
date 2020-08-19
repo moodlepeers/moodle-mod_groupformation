@@ -63,4 +63,13 @@ class mod_groupformation_binquestion_question extends mod_groupformation_dropdow
         }
     }
 
+    /**
+     * Returns random answer
+     *
+     * @return int
+     */
+    public function create_random_answer() {
+        return rand(1, count($this->options));
+    }
+
 }

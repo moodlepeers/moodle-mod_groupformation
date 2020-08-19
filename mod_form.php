@@ -245,8 +245,8 @@ class mod_groupformation_mod_form extends moodleform_mod {
         $mform->addElement('text', 'binquestionimportance', get_string('oneOfBinImportance', 'groupformation'), null);
         $mform->setType('binquestionimportance', PARAM_INT);
         $mform->addElement('select', 'binquestionrelation', get_string('oneOfBinRelation', 'groupformation'), array(
-                get_string('homogenous', 'groupformation'),
-                get_string('heterogenous', 'groupformation')), null);
+                get_string('homogeneous', 'groupformation'),
+                get_string('heterogeneous', 'groupformation')), null);
 
         $mform->disabledIf('binquestionmultiselect', 'binquestion', 'notchecked');
         $mform->disabledIf('binquestiontext', 'binquestion', 'notchecked');

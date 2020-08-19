@@ -182,9 +182,9 @@ require(['jquery', 'jqueryui'], function($) {
         // Change oob-Relation
         function oobChangeSelValue(value){
             var text = $('#js_oobrelselval').html();
-            var oldValue = text.match(/homogenous/);
+            var oldValue = text.match(/homogeneous/);
             if (oldValue == null){
-                oldValue = text.match(/heterogenous/);
+                oldValue = text.match(/heterogeneous/);
             }
             if (oldValue == null){
                 text = text.replace(': ', ': ' + value);
@@ -195,12 +195,12 @@ require(['jquery', 'jqueryui'], function($) {
         }
 
         $('#id_js_oneofbinrelation').change(function oobRelChange () {
-            if ($(this).val() == 'homogenous') {
+            if ($(this).val() == 'homogeneous') {
                 $('#id_binquestionrelation option').prop('selected', false).filter('[value=0]').prop('selected', true);
-                oobChangeSelValue('homogenous');
-            } else if ($(this).val() == 'heterogenous') {
+                oobChangeSelValue('homogeneous');
+            } else if ($(this).val() == 'heterogeneous') {
                 $('#id_binquestionrelation option').prop('selected', false).filter('[value=1]').prop('selected', true);
-                oobChangeSelValue('heterogenous');
+                oobChangeSelValue('heterogeneous');
             }
         });
 
@@ -606,11 +606,11 @@ require(['jquery', 'jqueryui'], function($) {
                 if($('#id_binquestionrelation option:selected').val() != 0){
                     var opt = $('#id_binquestionrelation option:selected').val();
                     if (opt == 0){
-                        $('#id_js_oneofbinrelation').val('homogenous');
-                        oobChangeSelValue('homogenous');
+                        $('#id_js_oneofbinrelation').val('homogeneous');
+                        oobChangeSelValue('homogeneous');
                     } else if (opt == 1){
-                        $('#id_js_oneofbinrelation').val('heterogenous');
-                        oobChangeSelValue('heterogenous');
+                        $('#id_js_oneofbinrelation').val('heterogeneous');
+                        oobChangeSelValue('heterogeneous');
                     }
                 }
 
