@@ -226,9 +226,10 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
     public function get_weights() {
 
         return array('big5_extraversion' => 2,
-                'big5_conscientiousness' => 2,
-                'knowledge_two' => 1,
-                'binquestion_singlechoice' => 1
+            'big5_conscientiousness' => 2,
+            'knowledge_two' => 1,
+            'binquestion_singlechoice' => 10,
+            'binquestion_singlechoice' => 1
         );
     }
 
@@ -326,16 +327,16 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
             // 'fam' => $famspecs
         ];
 
-        // true = homo ; false = hetero
+        // true = homogeneous ; false = heterogeneous
         $configurations = array(
-                "groupal:1;ex:1;gh:1;vw:0" => array('big5_extraversion' => true,
-                        'big5_conscientiousness' => true, 'knowledge_two' => false, 'binquestion_singlechoice' => true),
-                "groupal:1;ex:1;gh:0;vw:0" => array('big5_extraversion' => true,
-                        'big5_conscientiousness' => false, 'knowledge_two' => false, 'binquestion_singlechoice' => true),
-                "groupal:1;ex:0;gh:0;vw:0" => array('big5_extraversion' => false,
-                        'big5_conscientiousness' => false, 'knowledge_two' => false, 'binquestion_singlechoice' => true),
-                "groupal:1;ex:0;gh:1;vw:0" => array('big5_extraversion' => false,
-                        'big5_conscientiousness' => true, 'knowledge_two' => false, 'binquestion_singlechoice' => true),
+            "groupal:1;ex:1;gh:1;vw:0" => array('big5_extraversion' => true,
+                'big5_conscientiousness' => true, 'knowledge_two' => false, 'binquestion_singlechoice' => true),
+            "groupal:1;ex:1;gh:0;vw:0" => array('big5_extraversion' => true,
+                'big5_conscientiousness' => false, 'knowledge_two' => false, 'binquestion_singlechoice' => true),
+            "groupal:1;ex:0;gh:0;vw:0" => array('big5_extraversion' => false,
+                'big5_conscientiousness' => false, 'knowledge_two' => false, 'binquestion_singlechoice' => true),
+            "groupal:1;ex:0;gh:1;vw:0" => array('big5_extraversion' => false,
+                'big5_conscientiousness' => true, 'knowledge_two' => false, 'binquestion_singlechoice' => true),
         );
 
         return [$configurations, $specs];
