@@ -194,6 +194,8 @@ class mod_groupformation_grouping_controller {
 
     /**
      * POST action to delete generated and/or adopted groups (moodle groups)
+     * 
+     * @param boolean $next
      */
     public function delete($next = false) {
         $this->groupsmanager->delete_generated_groups();

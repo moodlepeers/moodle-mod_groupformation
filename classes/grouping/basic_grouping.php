@@ -125,6 +125,7 @@ class mod_groupformation_basic_grouping extends mod_groupformation_grouping {
      * Get weigth of binquestion from database
      * and set weight for other criterion to 1
      *
+     * @param boolean $extended
      * @return array
      */
     public function get_weights($extended = false) {

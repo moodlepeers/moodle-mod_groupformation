@@ -892,6 +892,7 @@ class mod_groupformation_storage_manager {
     /**
      * Returns label set
      *
+     * @param boolean $extended
      * @return array
      * @throws dml_exception
      */
@@ -930,6 +931,14 @@ class mod_groupformation_storage_manager {
         return $array;
     }
 
+    /**
+     * Returns whether the string starts with the query.
+     * 
+     * @param string $string
+     * @param string $query
+     * @return boolean
+     * @throws dml_exception
+     */
     private function startswith($string, $query) {
         return substr($string, 0, strlen($query)) === $query;
     }

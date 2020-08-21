@@ -192,7 +192,7 @@ class mod_groupformation_participant_parser {
             }
         } else {
             $criteriaspecs = $specs;
-        }     
+        }
 
         $criteriaspecs = $this->criterioncalculator->filter_criteria_specs($criteriaspecs, $users);
 
