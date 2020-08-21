@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<questionnaire version="2018083005">
+<questionnaire version="2020082100">
     <categories>
         <category>demographic</category>
         <category>skills</category>
@@ -17,9 +17,6 @@
         <scenario>
             <name>projectteams</name>
             <categories>
-                <category>demographic</category>
-                <category>skills</category>
-                <category>times</category>
                 <category>general</category>
                 <category>grade</category>
                 <category>points</category>
@@ -32,9 +29,6 @@
         <scenario>
             <name>homeworkgroups</name>
             <categories>
-                <category>demographic</category>
-                <category>skills</category>
-                <category>times</category>
                 <category>general</category>
                 <category>grade</category>
                 <category>points</category>

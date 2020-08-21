@@ -82,7 +82,7 @@ class mod_groupformation_basic_grouping extends mod_groupformation_grouping {
                 "groupal:1" => array(),
         );
 
-        $weights = $this->get_weights();
+        $weights = $this->get_weights(true);
         $configurationkeys = array_keys($configurations);
 
         // Here only 1 slice (groupal:1).
@@ -122,14 +122,14 @@ class mod_groupformation_basic_grouping extends mod_groupformation_grouping {
     }
 
     /**
-     * get weigth of binquestion from database
+     * Get weigth of binquestion from database
      * and set weight for other criterion to 1
      *
      * @return array
      */
-    public function get_weights() {
+    public function get_weights($extended = false) {
         $weights = [];
-        $labels = $this->store->get_label_set();
+        $labels = $this->store->get_label_set($extended);
         foreach ($labels as $label) {
             if ($label == "binquestion") {
                 $result = $this->store->get_weights();

@@ -895,9 +895,13 @@ class mod_groupformation_storage_manager {
      * @return array
      * @throws dml_exception
      */
-    public function get_label_set() {
-        $array = mod_groupformation_data::get_label_set($this->get_scenario(true));
-
+    public function get_label_set($extended = false) {
+        $array = null;
+        if ($extended) {
+            $array = mod_groupformation_data::get_extended_label_set($this->get_scenario(true));
+        } else {
+            $array = mod_groupformation_data::get_label_set($this->get_scenario(true));
+        }
         if ($this->groupformationid != null) {
             $hastopic = $this->get_number('topic');
             $hasknowledge = $this->get_number('knowledge');
@@ -905,12 +909,13 @@ class mod_groupformation_storage_manager {
             $grades = $this->ask_for_grade();
             $points = $this->ask_for_points();
             $position = 0;
+
             foreach ($array as $c) {
-                if (('points' == $c && $points == false) ||
-                        ('grade' == $c && $grades == false) ||
-                        ($hastopic == 0 && 'topic' == $c) ||
-                        ($hasknowledge == 0 && ('knowledge' == $c)) ||
-                        ($hasbinquestion == 0 && ('binquestion' == $c))
+                if (($this->startswith($c,'points') && $points == false) ||
+                        ($this->startswith($c,'grade') && $grades == false) ||
+                        ($hastopic == 0 && $this->startswith($c,'topic')) ||
+                        ($hasknowledge == 0 && $this->startswith($c,'knowledge')) ||
+                        ($hasbinquestion == 0 && $this->startswith($c,'binquestion'))
                 ) {
                     unset ($array [$position]);
                 }
@@ -923,6 +928,10 @@ class mod_groupformation_storage_manager {
         }
 
         return $array;
+    }
+
+    private function startswith($string, $query) {
+        return substr($string, 0, strlen($query)) === $query;
     }
 
     /**
@@ -1285,7 +1294,7 @@ class mod_groupformation_storage_manager {
         $record->count_groups = floatval($cohort->countofgroups);
 
         $stats = $cohort->results;
-        var_dump($stats);
+        
         if (!is_null($stats)) {
             $record->avg_variance = !is_nan($stats->avgvariance) ? $stats->avgvariance : null;
             $record->variance = !is_nan($stats->variance) ? $stats->variance : null; 

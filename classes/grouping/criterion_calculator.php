@@ -495,7 +495,7 @@ class mod_groupformation_criterion_calculator {
             }
 
         }
-        var_dump($array["singlechoice"]);
+        //var_dump($array["singlechoice"]);
         return $array;
     }
 
