@@ -933,7 +933,7 @@ class mod_groupformation_storage_manager {
 
     /**
      * Returns whether the string starts with the query.
-     * 
+     *
      * @param string $string
      * @param string $query
      * @return boolean
