@@ -54,8 +54,8 @@ if (mod_groupformation_data::is_math_prep_course_mode()) {
             'id' => $id, 'do_show' => 'grouping'));
         redirect($returnurl);
     }
-    
-        // Generate debug actions as buttons.
+
+    // Generate debug actions as buttons.
     $debugbuttons = "";
     $debugbuttons .= '<div class="gf_pad_header">';
     $debugbuttons .= get_string('math_prep_course_study', 'groupformation');
@@ -179,6 +179,6 @@ if (mod_groupformation_data::is_math_prep_course_mode()) {
     $debugbuttons .= '</p>';
 
     $debugbuttons .= '</div>';
-    
-    
+
+
 }

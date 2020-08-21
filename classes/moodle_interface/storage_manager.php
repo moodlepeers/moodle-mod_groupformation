@@ -911,11 +911,11 @@ class mod_groupformation_storage_manager {
             $position = 0;
 
             foreach ($array as $c) {
-                if (($this->startswith($c,'points') && $points == false) ||
-                        ($this->startswith($c,'grade') && $grades == false) ||
-                        ($hastopic == 0 && $this->startswith($c,'topic')) ||
-                        ($hasknowledge == 0 && $this->startswith($c,'knowledge')) ||
-                        ($hasbinquestion == 0 && $this->startswith($c,'binquestion'))
+                if (($this->startswith($c, 'points') && $points == false) ||
+                        ($this->startswith($c, 'grade') && $grades == false) ||
+                        ($hastopic == 0 && $this->startswith($c, 'topic')) ||
+                        ($hasknowledge == 0 && $this->startswith($c, 'knowledge')) ||
+                        ($hasbinquestion == 0 && $this->startswith($c, 'binquestion'))
                 ) {
                     unset ($array [$position]);
                 }
@@ -1294,13 +1294,13 @@ class mod_groupformation_storage_manager {
         $record->count_groups = floatval($cohort->countofgroups);
 
         $stats = $cohort->results;
-        
+
         if (!is_null($stats)) {
             $record->avg_variance = !is_nan($stats->avgvariance) ? $stats->avgvariance : null;
-            $record->variance = !is_nan($stats->variance) ? $stats->variance : null; 
-            $record->avg = !is_nan($stats->avg) ? $stats->avg : null; 
-            $record->st_dev = !is_nan($stats->stddev) ? $stats->stddev : null; 
-            $record->norm_st_dev = !is_nan($stats->normstddev) ? $stats->normstddev : null; 
+            $record->variance = !is_nan($stats->variance) ? $stats->variance : null;
+            $record->avg = !is_nan($stats->avg) ? $stats->avg : null;
+            $record->st_dev = !is_nan($stats->stddev) ? $stats->stddev : null;
+            $record->norm_st_dev = !is_nan($stats->normstddev) ? $stats->normstddev : null;
             $record->performance_index = !is_nan($stats->performanceindex) ? $stats->performanceindex : null;
         }
 

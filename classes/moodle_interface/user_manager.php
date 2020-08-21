@@ -760,7 +760,6 @@ class mod_groupformation_user_manager {
                             $record->dimension = $dimension;
                             $record->value = $value['importance'];
                             $record->binvalue = $value['binvalue'];
-                            //var_dump($value['binvalue']);
                             $records[] = $record;
                         } else {
                             $record = new stdClass();

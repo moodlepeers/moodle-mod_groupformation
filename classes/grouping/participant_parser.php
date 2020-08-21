@@ -192,7 +192,7 @@ class mod_groupformation_participant_parser {
             }
         } else {
             $criteriaspecs = $specs;
-        }        
+        }       
 
         $criteriaspecs = $this->criterioncalculator->filter_criteria_specs($criteriaspecs, $users);
 
@@ -207,14 +207,13 @@ class mod_groupformation_participant_parser {
             $object->id = $user;
 
             foreach ($criteriaspecs as $criterion => $spec) {
-                
-                if (in_array($scenario, $spec['scenarios'])) {                
+
+                if (in_array($scenario, $spec['scenarios'])) {               
                     $points = array();
                     $answeredeverything = $this->usermanager->has_answered_everything($user);
                     if ($answeredeverything) {
                         $points = $this->criterioncalculator->read_values_for_user($criterion, $user, $spec);
                     }
-                    
                     foreach ($spec['labels'] as $label => $lspec) {
                         $value = array();
                         if (count($points) != 0) {

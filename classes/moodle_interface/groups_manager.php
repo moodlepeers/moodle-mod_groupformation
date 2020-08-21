@@ -110,7 +110,7 @@ class mod_groupformation_groups_manager {
         $record->groupformation = $groupformationid;
         $record->moodlegroupid = null;
         $record->groupname = $name;
-        $record->performance_index = null;//$group ['gpi'];
+        $record->performance_index = null;
         $record->groupal = (array_key_exists('groupal', $flags)) ? $flags ['groupal'] : 0;
         $record->random = (array_key_exists('random', $flags)) ? $flags ['random'] : 0;
         $record->mrandom = (array_key_exists('mrandom', $flags)) ? $flags ['mrandom'] : 0;

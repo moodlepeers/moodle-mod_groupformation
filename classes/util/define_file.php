@@ -278,23 +278,11 @@ class mod_groupformation_data {
     public static function get_label_set($scenario) {
         $labels = array();
         foreach (self::$criteria as $label => $criterion) {
-            $keys = array_keys($criterion['labels']);
-            $scenarios = $criterion["scenarios"];
-            if (in_array($scenario, $scenarios)) {
-                foreach ($keys as $key){
-                    $labels[] = $label.'_'.$key;
-                }
-            }
-        }
-
-        $labels = array();
-        foreach (self::$criteria as $label => $criterion) {
             $scenarios = $criterion["scenarios"];
             if (in_array($scenario, $scenarios)) {
                 $labels[] = $label;
             }
         }
-        //var_dump($labels); 
 
         return $labels;
     }
@@ -311,12 +299,11 @@ class mod_groupformation_data {
             $keys = array_keys($criterion['labels']);
             $scenarios = $criterion["scenarios"];
             if (in_array($scenario, $scenarios)) {
-                foreach ($keys as $key){
+                foreach ($keys as $key) {
                     $labels[] = $label.'_'.$key;
                 }
             }
         }
-        //var_dump($labels); 
 
         return $labels;
     }

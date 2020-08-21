@@ -439,7 +439,7 @@ class mod_groupformation_criterion_calculator {
         $numberofchoices = floatval($this->store->get_number_binchoices());
         $importance = floatval($this->usermanager->get_binquestionimportance()) / 10;
         $answers = $this->usermanager->get_single_answer($userid, $category, 1);
-        if (strpos($answers,'list:')>=0) {
+        if (strpos($answers, 'list:') >= 0) {
             $answers = str_replace('list:', '', $answers);
             $answerarray = str_getcsv($answers);
         } else {
@@ -450,9 +450,9 @@ class mod_groupformation_criterion_calculator {
 
         if ($questiontype == 0) {
 
-            $binvalue = array_fill(0,$numberofchoices,0);
-            $binvalue[$answers-1] = 1;
-            $binvalue = implode(',',$binvalue);
+            $binvalue = array_fill(0, $numberofchoices, 0);
+            $binvalue[$answers - 1] = 1;
+            $binvalue = implode(',', $binvalue);
         } else {
 
             $curindexanswers = 0;
@@ -462,7 +462,6 @@ class mod_groupformation_criterion_calculator {
             if ($questiontype == 0) {
                 $answerarray[0] -= 1;
             }
-            //var_dump($answerarray);
             for ($i = 0; $i < ($numberofchoices - 1); $i++) {
                 // Creates an array in a vector-form with 0 and 1 as entries like "0,1,1,0,0"
                 if ($i == $answerarray[$curindexanswers]) {
@@ -476,7 +475,7 @@ class mod_groupformation_criterion_calculator {
                 }
             }
 
-        } 
+        }
 
         // Iterate over labels of criterion.
         foreach ($labels as $key => $spec) { // maybe later there are more than one binquestion per groupformation.
@@ -495,7 +494,6 @@ class mod_groupformation_criterion_calculator {
             }
 
         }
-        //var_dump($array["singlechoice"]);
         return $array;
     }
 
