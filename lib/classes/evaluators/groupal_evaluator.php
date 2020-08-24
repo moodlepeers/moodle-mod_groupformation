@@ -101,6 +101,7 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator
             }
         }
 
+
         //TODO implement one against group when both bin types functions are in use
         // calculate the npi for once against group functions
         // get the last participants and compare it against the group
@@ -115,7 +116,8 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator
 //        }
 
         //once against all
-        $group->results = $this->get_performance_index($npis);
+        $group->results = $this->get_performance_index($npis, true);
+
         $gpi = $group->results->performanceindex;
         $group->set_gpi($gpi);
         return $gpi;
@@ -151,8 +153,9 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator
      * @return mod_groupformation_stats
      */
     public
-    static function get_performance_index($performanceindices)
+    static function get_performance_index($performanceindices, $nppis = false)
     {
+        
         if (count($performanceindices) < 1) {
             return new mod_groupformation_stats();
         }
@@ -162,15 +165,15 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator
 
         // Calculate standard deviation   (which is all diffs of elements and avg squared and finally summed up.
         $sumquadraticerrors = 0.0; // Double.
-        foreach ($performanceindices as $pi) {
-            $diff = $pi - $avg;
+        foreach ($performanceindices as $performanceindex) {
+            $diff = $performanceindex - $avg;
             $sumquadraticerrors += pow($diff, 2);
         }
 
         $stddev = (float)0.0;
 
         // Standard deaviation of all npi values (NPIs) in one Groups.
-        if (count($performanceindices) != 1) {
+        if (count($performanceindices) > 1) {
             $stddev = sqrt($sumquadraticerrors) / (count($performanceindices) - 1); // Float.
         }
 
@@ -184,7 +187,6 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator
         $s->stddev = $stddev;
         $s->normstddev = $nstddev;
         $s->performanceindex = $performanceindex;
-
         return $s;
 
     }
@@ -266,6 +268,7 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator
         }
 
         $pairperformanceindex = $hetval - $homval;
+
         $maxdist = 0.0; // Float.
         // Worst case Heterogen criteria is 0 and hom is 1 than the value for pairperformanceindex < 0.
         // therfore the worst possible value for hom criteria is added to the pairperformanceindex: and the target.
@@ -280,7 +283,8 @@ class mod_groupformation_evaluator implements mod_groupformation_ievaluator
             $maxdist += 1 * $c->get_weight();
         }
 
-        return ($pairperformanceindex + $hommaxdist) / $maxdist;
+        $v = ($pairperformanceindex + $hommaxdist) / $maxdist;
+        return $v;
     }
 
     /**

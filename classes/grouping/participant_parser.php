@@ -79,6 +79,7 @@ class mod_groupformation_participant_parser {
      */
     private function parse($users, $labels, $weights = null) {
         $participants = array();
+        shuffle($users);
         foreach ($users as $user) {
             $position = 0;
             $participant = null;
@@ -92,7 +93,6 @@ class mod_groupformation_participant_parser {
                 $maxval = 1.0;
 
                 $weight = $weights[$label];
-
                 if ($label == 'general') {
                     $weight = (count($labels) - 1) / 2;
                 }

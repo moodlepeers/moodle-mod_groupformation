@@ -167,7 +167,11 @@ class mod_groupformation_group {
      * @return array
      */
     public function get_gpi() {
-        return $this->gpi;
+        if (count($this->participants)<=1){
+            return 0;
+        } else {
+            return $this->gpi;
+        }
     }
 
     /**

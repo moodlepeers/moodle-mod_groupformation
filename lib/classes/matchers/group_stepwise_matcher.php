@@ -67,42 +67,49 @@ class mod_groupformation_group_stepwise_matcher implements mod_groupformation_im
                 
                 // get current group
                 $group = $groups[$i];
-                
+                // get score of current group
+                // $gpi = rand(0,100);
+                $gpi = $group->get_gpi();
                 // find best participant
                 $bestparticipant = null;
                 $bestdelta = null;
                 $bestparticipantindex = null;
-                for ($j = 0; $j < count($participants); $j++) {
-                    // get score of current group
-                    // $gpi = rand(0,100);
-                    $gpi = $group->get_gpi();
-
-                    // add participant to current group
-                    // $group .= $currentparticipant;
-                    $group->add_participant($participants[$j]);
-                    
-                    // get score of new group
-                    //$gpitmp = $gpi+rand(1,3);
-                    $gpitmp = $group->get_gpi();
-
-                    // compute gpi delta
-                    $delta = $gpitmp - $gpi;
-                    
-                    // remove
-                    // $group = substr($group, 0, -1);
-                    $group->remove_participant_by_id($participants[$j]->get_id());
-                    
-                    // transform to percentage
-                    if (abs($gpi) > 0.001) {
-                        $delta = $delta / $gpi;
-                    }
-
-                    // decide whether delta is better than bestdelta so far
-                    if (is_null($bestdelta) || $delta > $bestdelta) {
-                        $bestparticipant = $participants[$j];
-                        $bestdelta = $delta;
+                $bestgpi = null;
+                for ($j = 0; $j < count($participants); $j++) { 
+                    if (count($group->get_participants())==0) {
                         $bestparticipantindex = $j;
-                    }
+                        break;
+                    } else {
+                        // get score of current group
+                        // $gpi = rand(0,100);
+                        $gpi = $group->get_gpi();
+
+                        // add participant to current group
+                        // $group .= $currentparticipant;
+                        $group->add_participant($participants[$j]);
+                        
+                        // get score of new group
+                        //$gpitmp = $gpi+rand(1,3);
+                        $gpitmp = $group->get_gpi();
+
+                        // compute gpi delta
+                        $delta = $gpitmp - $gpi;
+                        // remove
+                        // $group = substr($group, 0, -1);
+                        $group->remove_participant_by_id($participants[$j]->get_id());
+                        
+                        // decide whether delta is better than bestdelta so far
+                        if (is_null($bestdelta) || $delta > $bestdelta) {
+                            $bestparticipant = $participants[$j];
+                            $bestdelta = $delta;
+                            $bestparticipantindex = $j;
+                            $bestgpi = $gpitmp;
+                        }
+
+                        if ($bestdelta == 1) {
+                            break;
+                        }
+                    }                        
                 }
                 
                 // add participant to group
@@ -110,6 +117,7 @@ class mod_groupformation_group_stepwise_matcher implements mod_groupformation_im
                 $group->add_participant($participants[$bestparticipantindex]);
                 
                 $groups[$i] = $group;
+                $gpi = $group->get_gpi();
                 
                 // remove participant from list
                 $this->array_unset($participants, $bestparticipantindex);

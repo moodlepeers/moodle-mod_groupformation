@@ -306,6 +306,7 @@ class mod_groupformation_scientific_grouping_amigo extends mod_groupformation_gr
             $rawparticipants = $this->participantparser->build_participants($slice, $specs, $weights);
             $participants = $this->configure_participants($rawparticipants, $configuration);
             $cohorts[$configurationkey] = $this->build_cohort($participants, $groupsize, $configurationkey);
+            //die();
         }
 
         return $cohorts;

@@ -65,6 +65,9 @@ class mod_groupformation_grouping_controller {
     /** @var mod_groupformation_groups_manager instance of groups manager */
     private $groupsmanager = null;
 
+    /** @var mod_groupformation_user_manager instance of groups manager */
+    private $usermanager = null;
+
     /** @var stdClass instance of job */
     private $job = null;
 
@@ -92,6 +95,8 @@ class mod_groupformation_grouping_controller {
         $this->statemachine = new mod_groupformation_state_machine($groupformationid);
 
         $this->groupsmanager = new mod_groupformation_groups_manager ($groupformationid);
+
+        $this->usermanager = new mod_groupformation_user_manager ($groupformationid);
 
         $this->groups = $this->groupsmanager->get_generated_groups('id, groupname,performance_index,moodlegroupid');
 
@@ -510,11 +515,18 @@ class mod_groupformation_grouping_controller {
 
         $userids = array_keys($this->groups[$groupid]->users);
 
+        $usermanager = $this->usermanager;
+
         $groupmembers = array();
         foreach ($userids as $user) {
+
+            $values = $usermanager->get_user_values($user);
+            
+
             $url = $CFG->wwwroot . '/user/view.php?id=' . $user . '&course=' . $COURSE->id;
 
             $username = $user;
+
             $userrecord = $this->userrecords[$username];
 
             if (!is_null($userrecord)) {
@@ -527,7 +539,7 @@ class mod_groupformation_grouping_controller {
             $userlink = $url;
 
             $groupmembers [$user] = [
-                'name' => $username, 'link' => $userlink, 'id' => $user];
+                'name' => $username, 'link' => $userlink, 'id' => $user, 'value' => array_values($values)[4]->value];
         }
 
         return $groupmembers;
