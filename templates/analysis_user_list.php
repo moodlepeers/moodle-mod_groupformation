@@ -21,8 +21,29 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-if (!defined('MOODLE_INTERNAL')) {
-    die ('Direct access to this script is forbidden.');
+//if (!defined('MOODLE_INTERNAL')) {
+//    die ('Direct access to this script is forbidden.');
+//}
+
+//Retrieve the string, which was sent via the POST parameter "user"
+$user = $_POST['data'];
+
+//Decode the JSON string and convert it into a PHP associative array.
+$decoded = json_decode($user, true);
+
+if($decoded["function"]){
+    test($decoded);
+}
+//var_dump the array so that we can view it's structure.
+var_dump($decoded);
+//
+
+
+function test($decoded){
+    echo("success");
+
+    $usermanager = new mod_groupformation_user_manager($this->groupformationid);
+    $usermanager->delete_answers($decoded[1]['id']);
 }
 
 ?>

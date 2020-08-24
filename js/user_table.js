@@ -8,14 +8,16 @@
  */
 
 const PAGE_SIZE = 10;
+let jquery = null
 
 require(['jquery'], function ($) {
     $(document).ready(function () {
+
         let userData = $("#data").text();
         let data = JSON.parse(userData);
-        selectPage(1);
+        jquery = $;
+        selectPage(1, $);
         createPagination(data)
-
     });
 });
 
@@ -23,13 +25,14 @@ require(['jquery'], function ($) {
  * get called if the user is changing the pagination index
  * @param page
  */
-function selectPage(page){
-    let userData =document.getElementById("data").innerText;
+function selectPage(page, $) {
+    let userData = document.getElementById("data").innerText;
+
 
     let data = JSON.parse(userData);
     let paginationArray = paginate(data, PAGE_SIZE, page)
 
-    let tableHeader = ["#", "Vorname", "Nachname", "Consent Given", "Questionaire Answered", "Answers Submitted"]
+    let tableHeader = ["#", "Vorname", "Nachname", "Consent Given", "Questionaire Answered", "Answers Submitted", "Actions"]
     addTable(paginationArray, tableHeader, page);
 
 }
@@ -40,8 +43,8 @@ function selectPage(page){
  * @param tableHeader
  * @param page
  */
-function addTable(data, tableHeader, page) {
-    let page_number = page -1;
+function addTable(data, tableHeader, page, $) {
+    let page_number = page - 1;
     let tableContent = document.getElementById("table_content");
 
     let oldTable = tableContent.getElementsByClassName("table");
@@ -94,7 +97,7 @@ function addTable(data, tableHeader, page) {
 
         // add consent given
         td = document.createElement('TD');
-        let consentIcon = data[i][0].consent === 0 ? renderXIcon() : renderCheckIcon();
+        let consentIcon = data[i][0].consent == 0 ? renderXIcon() : renderCheckIcon();
         td.insertAdjacentHTML("beforeend", consentIcon);
         tr.appendChild(td);
 
@@ -109,11 +112,62 @@ function addTable(data, tableHeader, page) {
         td.insertAdjacentHTML("beforeend", answeredIcon);
         tr.appendChild(td);
 
+        // add answers submitted
+        td = document.createElement('TD');
+        let button = document.createElement("button");
+        button.appendChild(document.createTextNode("Delete Answers"));
+        button.className = "btn btn-primary";
+        button.setAttribute("data", JSON.stringify(data[i]))
+        td.appendChild(button);
+        tr.appendChild(td);
+
+        // button.onclick = () => onClickEvent()
+
+
+        button.addEventListener('click', () => {
+            // stops refreshing the page
+            event.preventDefault();
+
+
+            // get data from clicked user
+            let data = event.srcElement.getAttribute("data");
+            data = JSON.parse(data);
+            console.log(data)
+
+
+            // dialog to delete data
+            if (confirm('Wollen Sie die Antworten von ' + data[1].firstname + " " + data[1].lastname + " löschen?")) {
+                // Save it!
+                // document.write('<?php $this->usermanager->delete_answer(233, 1, 7); ?>');
+
+
+                console.log(jquery)
+                let userStr = JSON.stringify(data);
+                jquery.ajax({
+                    url: '../groupformation/templates/analysis_user_list.php',
+                    type: 'post',
+                    data: {function: "function", data: JSON.stringify(data)},
+                    success: function(response){
+                        //do whatever.
+                        console.log(response)
+                    }
+                });
+
+                alert("<?php echo(myphpfunction(4,90))?>");
+                console.log('Thing was saved to the database.');
+            } else {
+                // Do nothing!
+                console.log('Thing was not saved to the database.');
+            }
+
+        });
+
     }
     tableContent.appendChild(table);
 
 
 }
+
 
 /**
  * create pagination view
@@ -130,21 +184,21 @@ function createPagination(data) {
         numPages = Math.floor(numPages) + 1;
 
 
-    for (let i = 0; i < numPages ; i++) {
+    for (let i = 0; i < numPages; i++) {
         let page = document.createElement("li");
         page.className = "pager-item";
         page.dataset.index = i;
 
         let a = document.createElement("a")
         a.className = "page-link";
-        a.text = i +1;
+        a.text = i + 1;
 
         page.appendChild(a);
 
         if (i === 0)
             page.className = "page-item active";
 
-        page.addEventListener('click', function() {
+        page.addEventListener('click', function () {
             console.log("click")
             let parent = this.parentNode;
             let items = parent.querySelectorAll(".page-item");
@@ -154,7 +208,10 @@ function createPagination(data) {
             this.className = "page-item active";
             let index = parseInt(this.dataset.index);
 
+
+            console.log("test")
             console.log(index + 1)
+            console.log(data)
             selectPage(index + 1);
             // loadTable(index);
         });

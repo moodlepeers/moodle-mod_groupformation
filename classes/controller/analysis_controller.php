@@ -265,15 +265,17 @@ class mod_groupformation_analysis_controller {
 
 
         // filter users for specific groupformation
-        $filtered_user = array();
-        foreach ($users as $value) {
-            if ($value[0]->groupformation == $this->groupformationid)  {
-                array_push($filtered_user, $value);
-            }
-        }
+        //$filtered_user = array();
+        //foreach ($users as $value) {
+        //    if ($value[0]->groupformation == $this->groupformationid)  {
+        //        array_push($filtered_user, $value);
+        //    }
+        //}
 
 
-        $assigns['users'] = $filtered_user;
+        $assigns['users'] = $users;
+
+        //$assigns['users'] = $filtered_user;
 
         return $assigns;
     }
