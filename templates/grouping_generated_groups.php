@@ -68,7 +68,7 @@ if (!defined('MOODLE_INTERNAL')) {
                 <div class="col_s_100 gf_group_links">
 
                     <?php foreach ($entry['group_members'] as $user) { ?>
-                        <a href="<?php echo $user['link']; ?>"><?php echo $user['name']; ?></a><?php echo $user['value'];?>
+                        <a href="<?php echo $user['link']; ?>"><?php echo $user['name']; ?></a><?php //echo $user['value'];?>
                     <?php } ?>
 
                 </div>

@@ -539,7 +539,7 @@ class mod_groupformation_grouping_controller {
             $userlink = $url;
 
             $groupmembers [$user] = [
-                'name' => $username, 'link' => $userlink, 'id' => $user, 'value' => array_values($values)[4]->value];
+                'name' => $username, 'link' => $userlink, 'id' => $user];//, 'value' => array_values($values)[4]->value];
         }
 
         return $groupmembers;
