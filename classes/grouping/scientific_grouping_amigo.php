@@ -234,7 +234,7 @@ class mod_groupformation_scientific_grouping_amigo extends mod_groupformation_gr
     {
 
         return array(
-            'big5_extraversion' => 1
+            'team_teamorientation' => 1
         );
     }
 
@@ -319,20 +319,31 @@ class mod_groupformation_scientific_grouping_amigo extends mod_groupformation_gr
     public function get_specification()
     {
 
-        $big5specs = mod_groupformation_data::get_criterion_specification('big5');
+        // $big5specs = mod_groupformation_data::get_criterion_specification('big5');
 
-        unset($big5specs['labels']['neuroticism']);
-        unset($big5specs['labels']['openness']);
-        unset($big5specs['labels']['agreeableness']);
-        unset($big5specs['labels']['conscientiousness']);
+        // unset($big5specs['labels']['neuroticism']);
+        // unset($big5specs['labels']['openness']);
+        // unset($big5specs['labels']['agreeableness']);
+        // unset($big5specs['labels']['conscientiousness']);
+
+        // $specs = [
+        //     'big5' => $big5specs,
+        // ];
+
+        // // true = homo ; false = hetero
+        // $configurations = array(
+        //     "groupal:1;ex:0" => array('big5_extraversion' => false),
+        // );
+
+        $teamspecs = mod_groupformation_data::get_criterion_specification('team');
 
         $specs = [
-            'big5' => $big5specs,
+            'team' => $teamspecs,
         ];
 
         // true = homo ; false = hetero
         $configurations = array(
-            "groupal:1;ex:0" => array('big5_extraversion' => false),
+            "groupal:1;team:1" => array('team_teamorientation' => true),
         );
 
         return [$configurations, $specs];
