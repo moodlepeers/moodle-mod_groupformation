@@ -570,7 +570,8 @@ class mod_groupformation_criterion_calculator {
      * @throws dml_exception
      */
     public function get_team($userid, $specs = null) {
-        return $this->get_values('team', $userid, $specs);
+        $v = $this->get_values('team', $userid, $specs);
+        return $v;
     }
 
     /**
@@ -910,7 +911,6 @@ class mod_groupformation_criterion_calculator {
                 'criterion' => $criterion
             )
         );
-
         $array = array();
         foreach (array_values($recs) as $rec) {
             if (!array_key_exists($rec->label, $array)) {

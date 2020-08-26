@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="demographic questions">
-    <QUESTIONS VERSION="2020030403">
+    <QUESTIONS VERSION="2020082400">
         <QUESTION ID="1" TYPE="dropdown">
             <QUESTIONTEXT>
                 <![CDATA[Geschlecht]]>
@@ -89,14 +89,10 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="5" TYPE="number">
+        <QUESTION ID="5" TYPE="freetext">
             <QUESTIONTEXT>
                 <![CDATA[Wie lautet Ihre Matrikelnummer?]]>
             </QUESTIONTEXT>
-            <OPTIONS>
-                <MIN><![CDATA[0]]></MIN>
-                <MAX><![CDATA[99999999]]></MAX>
-            </OPTIONS>
         </QUESTION>
     </QUESTIONS>
 </GROUPFORMATION>
