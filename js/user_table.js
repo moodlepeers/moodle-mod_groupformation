@@ -79,7 +79,6 @@ function addTable(data, tableHeader, page, $) {
         tr = document.createElement('TR');
         tableBody.appendChild(tr);
 
-
         // add index
         let td = document.createElement('TD');
         td.appendChild(document.createTextNode(page_number * PAGE_SIZE + i + 1));
@@ -87,28 +86,28 @@ function addTable(data, tableHeader, page, $) {
 
         // add first name
         td = document.createElement('TD');
-        td.appendChild(document.createTextNode(data[i][1].firstname));
+        td.appendChild(document.createTextNode(data[i][data[i].length > 1 ? 1 : 0].firstname));
         tr.appendChild(td);
 
         // add last name
         td = document.createElement('TD');
-        td.appendChild(document.createTextNode(data[i][1].lastname));
+        td.appendChild(document.createTextNode(data[i][data[i].length > 1 ? 1 : 0].lastname));
         tr.appendChild(td);
 
         // add consent given
         td = document.createElement('TD');
-        let consentIcon = data[i][0].consent == 0 ? renderXIcon() : renderCheckIcon();
+        let consentIcon = data[i][0].consent === undefined ? renderXIcon() : renderCheckIcon();
         td.insertAdjacentHTML("beforeend", consentIcon);
         tr.appendChild(td);
 
         // add questionaire answered
         td = document.createElement('TD');
-        td.appendChild(document.createTextNode(data[i][0].answer_count));
+        td.appendChild(document.createTextNode(data[i][0].answer_count !== undefined ? data[i][0].answer_count : 0));
         tr.appendChild(td);
 
         // add answers submitted
         td = document.createElement('TD');
-        let answeredIcon = data[i][0].completed === 0 ? renderXIcon() : renderCheckIcon();
+        let answeredIcon = data[i][0].completed === undefined ? renderXIcon() : renderCheckIcon();
         td.insertAdjacentHTML("beforeend", answeredIcon);
         tr.appendChild(td);
 
@@ -118,54 +117,12 @@ function addTable(data, tableHeader, page, $) {
         button.appendChild(document.createTextNode("Delete Answers"));
         button.className = "btn btn-primary";
         button.setAttribute("data", JSON.stringify(data[i]))
+        button.setAttribute('onclick', `deleteAnswers(${JSON.stringify(data[i])})`)
+        button.disabled = data[i].length === 1;
         td.appendChild(button);
         tr.appendChild(td);
-
-        // button.onclick = () => onClickEvent()
-
-
-        button.addEventListener('click', () => {
-            // stops refreshing the page
-            event.preventDefault();
-
-
-            // get data from clicked user
-            let data = event.srcElement.getAttribute("data");
-            data = JSON.parse(data);
-            console.log(data)
-
-
-            // dialog to delete data
-            if (confirm('Wollen Sie die Antworten von ' + data[1].firstname + " " + data[1].lastname + " löschen?")) {
-                // Save it!
-                // document.write('<?php $this->usermanager->delete_answer(233, 1, 7); ?>');
-
-
-                console.log(jquery)
-                let userStr = JSON.stringify(data);
-                jquery.ajax({
-                    url: '../groupformation/templates/analysis_user_list.php',
-                    type: 'post',
-                    data: {function: "function", data: JSON.stringify(data)},
-                    success: function(response){
-                        //do whatever.
-                        console.log(response)
-                    }
-                });
-
-                alert("<?php echo(myphpfunction(4,90))?>");
-                console.log('Thing was saved to the database.');
-            } else {
-                // Do nothing!
-                console.log('Thing was not saved to the database.');
-            }
-
-        });
-
     }
     tableContent.appendChild(table);
-
-
 }
 
 

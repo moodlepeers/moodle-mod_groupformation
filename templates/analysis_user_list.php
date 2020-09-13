@@ -21,40 +21,51 @@
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-//if (!defined('MOODLE_INTERNAL')) {
-//    die ('Direct access to this script is forbidden.');
-//}
-
-//Retrieve the string, which was sent via the POST parameter "user"
-$user = $_POST['data'];
-
-//Decode the JSON string and convert it into a PHP associative array.
-$decoded = json_decode($user, true);
-
-if($decoded["function"]){
-    test($decoded);
-}
-//var_dump the array so that we can view it's structure.
-var_dump($decoded);
-//
-
-
-function test($decoded){
-    echo("success");
-
-    $usermanager = new mod_groupformation_user_manager($this->groupformationid);
-    $usermanager->delete_answers($decoded[1]['id']);
-}
-
 ?>
 
+<script type="text/javascript">
+
+    function deleteAnswers(user) {
+        event.preventDefault();
+
+        if (confirm('Wollen Sie die Antworten von ' + user[1].firstname + " " + user[1].lastname + " löschen?")) {
+            require(['core/ajax'],
+                /**
+                 * test
+                 * @param ajax
+                 */
+                function (ajax) {
+                    let promises = ajax.call([
+                        {
+                            methodname: 'local_groupformation_delete_answers',
+                            args: {users: [{userid: user[0].userid, groupformation: user[0].groupformation}]}
+                        }
+                    ]);
+
+                    promises[0].done(function (response) {
+                        // do something with the response -> reload table
+                        console.log(response);
+                    }).fail(function (ex) {
+                        console.log(ex)
+                    });
+                });
+        } else {
+            // Do nothing!
+
+        }
+
+    };
+
+</script>
+
+
 <div class="gf_pad_header_small">
-    <?php //echo get_string('user_list', 'groupformation'); ?>
     <?php echo "List of users"; ?>
 </div>
 
 
 <div class="gf_pad_content">
+    <script id="user" data-uid=""></script>
     <script id="data"><?php echo json_encode($this->_['users']); ?></script>
     <div id="table_content">
 
