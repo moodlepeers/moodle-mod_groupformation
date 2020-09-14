@@ -98,16 +98,22 @@ function addTable(data, tableHeader, page, $) {
         td = document.createElement('TD');
         let consentIcon = data[i][0].consent === undefined ? renderXIcon() : renderCheckIcon();
         td.insertAdjacentHTML("beforeend", consentIcon);
+        td.setAttribute("name", JSON.stringify("consent"));
+        td.setAttribute("data", JSON.stringify(data[i][0].userid !== undefined ? data[i][0].userid : data[i][0].id))
         tr.appendChild(td);
 
         // add questionaire answered
         td = document.createElement('TD');
+        td.setAttribute("name", JSON.stringify("questionaire"));
         td.appendChild(document.createTextNode(data[i][0].answer_count !== undefined ? data[i][0].answer_count : 0));
+        td.setAttribute("data", JSON.stringify(data[i][0].userid !== undefined ? data[i][0].userid : data[i][0].id))
         tr.appendChild(td);
 
         // add answers submitted
         td = document.createElement('TD');
+        td.setAttribute("name", JSON.stringify("completed"))
         let answeredIcon = data[i][0].completed === undefined ? renderXIcon() : renderCheckIcon();
+        td.setAttribute("data", JSON.stringify(data[i][0].userid !== undefined ? data[i][0].userid : data[i][0].id))
         td.insertAdjacentHTML("beforeend", answeredIcon);
         tr.appendChild(td);
 
@@ -156,7 +162,6 @@ function createPagination(data) {
             page.className = "page-item active";
 
         page.addEventListener('click', function () {
-            console.log("click")
             let parent = this.parentNode;
             let items = parent.querySelectorAll(".page-item");
             for (let x = 0; x < items.length; x++) {
@@ -165,10 +170,6 @@ function createPagination(data) {
             this.className = "page-item active";
             let index = parseInt(this.dataset.index);
 
-
-            console.log("test")
-            console.log(index + 1)
-            console.log(data)
             selectPage(index + 1);
             // loadTable(index);
         });
@@ -192,7 +193,7 @@ function paginate(array, page_size, page_number) {
  * returns icon
  * @returns {string}
  */
-function renderCheckIcon() {
+const renderCheckIcon = () =>  {
     return "<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-check-circle-fill\" fill=\"#43A047\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
         "  <path fill-rule=\"evenodd\" d=\"M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z\"/>\n" +
         "</svg>"
@@ -202,7 +203,7 @@ function renderCheckIcon() {
  * returns icon
  * @returns {string}
  */
-function renderXIcon() {
+const renderXIcon = () => {
     return "<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-x-circle-fill\" fill=\"#e53935\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
         "  <path fill-rule=\"evenodd\" d=\"M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.146-3.146a.5.5 0 0 0-.708-.708L8 7.293 4.854 4.146a.5.5 0 1 0-.708.708L7.293 8l-3.147 3.146a.5.5 0 0 0 .708.708L8 8.707l3.146 3.147a.5.5 0 0 0 .708-.708L8.707 8l3.147-3.146z\"/>\n" +
         "</svg>"

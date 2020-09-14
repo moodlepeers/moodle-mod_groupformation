@@ -26,8 +26,10 @@
 <script type="text/javascript">
 
     function deleteAnswers(user) {
+        // prevent of reloading the page
         event.preventDefault();
 
+        // show alert window
         if (confirm('Wollen Sie die Antworten von ' + user[1].firstname + " " + user[1].lastname + " löschen?")) {
             require(['core/ajax'],
                 /**
@@ -43,8 +45,46 @@
                     ]);
 
                     promises[0].done(function (response) {
-                        // do something with the response -> reload table
-                        console.log(response);
+                        // if deleting answers were successfully
+
+                        // get dataset
+                        let userData = document.getElementById("data").innerText;
+                        let data = JSON.parse(userData);
+
+                        // find specific user in dataset
+                        let index = (data.findIndex(e => e[0].userid === user[0].userid), 1);
+                        // delete answers array from dataset
+                        data[index].splice(0, 1);
+
+                        // set new dataset back to the data element
+                        (document.getElementById("data")).innerHTML = JSON.stringify(data);
+
+
+                        // get all table elements
+                        let elements = document.getElementsByTagName('TD');
+
+                        for (let item of elements) {
+                                // find element from selected user
+                                if (JSON.parse(item.getAttribute("data")) === user[0].userid) {
+
+                                    // get name of element
+                                    let name = JSON.parse(item.getAttribute("name"));
+
+                                    // set the new value and updating the table
+                                    switch (name) {
+                                        case "consent":
+                                            item.innerHTML = renderXIcon();
+                                            break;
+                                        case "questionaire":
+                                            item.innerHTML = 0;
+                                            break;
+                                        case "completed":
+                                            item.innerHTML = renderXIcon();
+                                            break;
+                                        default:
+                                    }
+                                }
+                            }
                     }).fail(function (ex) {
                         console.log(ex)
                     });
@@ -54,7 +94,7 @@
 
         }
 
-    };
+    }
 
 </script>
 
