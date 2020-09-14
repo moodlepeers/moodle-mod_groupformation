@@ -121,7 +121,7 @@ function addTable(data, tableHeader, page, $) {
         td = document.createElement('TD');
         let button = document.createElement("button");
         button.appendChild(document.createTextNode("Delete Answers"));
-        button.className = "btn btn-primary";
+        button.className = "btn btn-primary table-button";
         button.setAttribute("data", JSON.stringify(data[i]))
         button.setAttribute('onclick', `deleteAnswers(${JSON.stringify(data[i])})`)
         button.disabled = data[i].length === 1;
