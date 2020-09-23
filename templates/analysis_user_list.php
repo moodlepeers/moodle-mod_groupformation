@@ -74,10 +74,8 @@
 
                                 // set the new value and updating the table
                                 switch (name) {
-                                    case "consent":
-                                        item.innerHTML = renderXIcon();
-                                        break;
                                     case "questionaire":
+                                        item.style.width = "0%";
                                         item.innerHTML = 0;
                                         break;
                                     case "completed":

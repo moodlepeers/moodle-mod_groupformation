@@ -123,6 +123,7 @@ function addTable(data, tableHeader, page, $) {
         value.innerText = pcg + "%";
 
         let progressBar = document.createElement("div");
+        progressBar.setAttribute("name", JSON.stringify("questionaire"));
         progressBar.className = "progress-bar";
         progressBar.setAttribute('style','width:'+Number(pcg)+'%');
         progressBar.setAttribute("role", "progressbar");
@@ -146,14 +147,50 @@ function addTable(data, tableHeader, page, $) {
         td.insertAdjacentHTML("beforeend", answeredIcon);
         tr.appendChild(td);
 
+
+
         // delete answers button
         td = document.createElement('TD');
-        let button = document.createElement("button");
-        button.appendChild(document.createTextNode("Delete Answers"));
-        button.className = "btn btn-primary table-button";
-        button.setAttribute("data", JSON.stringify(data[i]))
-        button.setAttribute('onclick', `deleteAnswers(${JSON.stringify(data[i])})`)
-        button.disabled = data[i].length === 1;
+
+        let dropdown = document.createElement("div");
+        dropdown.className = "dropdown";
+
+        let button  = document.createElement("button");
+        button.appendChild(document.createTextNode("Actions"));
+        button.className = "btn btn-secondary dropdown-toggle";
+        button.setAttribute("type", "button");
+        button.setAttribute("data-toggle", "dropdown");
+        button.setAttribute("aria-haspopup", "true");
+        button.setAttribute("aria-expanded", "false");
+
+        let dropdownMenu = document.createElement("div");
+        dropdownMenu.className= "dropdown-menu";
+        dropdownMenu.setAttribute("aria-labelledby","dropdownMenuButton");
+
+
+        let deleteButton = document.createElement("button");
+        deleteButton.appendChild(document.createTextNode("Delete Answers"));
+        deleteButton.style.marginLeft = "10px";
+        // deleteButton.className = "btn btn-primary table-button";
+        deleteButton.setAttribute("data", JSON.stringify(data[i]))
+        deleteButton.setAttribute('onclick', `deleteAnswers(${JSON.stringify(data[i])})`)
+        deleteButton.disabled = data[i][0].answer_count === "0";
+
+        dropdownMenu.appendChild(deleteButton);
+        button.appendChild(dropdownMenu);
+
+
+    // <div class="dropdown">
+    //         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    //         Dropdown button
+    //     </button>
+    //     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    //         <a class="dropdown-item" href="#">Action</a>
+    //         <a class="dropdown-item" href="#">Another action</a>
+    //     <a class="dropdown-item" href="#">Something else here</a>
+    //     </div>
+    //     </div>
+
         td.appendChild(button);
         tr.appendChild(td);
     }
