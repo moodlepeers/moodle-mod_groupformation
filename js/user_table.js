@@ -7,7 +7,7 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 20;
 let jquery = null
 
 require(['jquery'], function ($) {
@@ -32,7 +32,7 @@ function selectPage(page, $) {
     let data = JSON.parse(userData);
     let paginationArray = paginate(data, PAGE_SIZE, page)
 
-    let tableHeader = ["#", "Vorname", "Nachname", "Consent Given", "Questionaire Answered", "Answers Submitted", "Actions"]
+    let tableHeader = ["#", "Vorname", "Nachname", "Consent", "Questionaire Completed", "Answered", "Actions"]
     addTable(paginationArray, tableHeader, page);
 
 }
@@ -69,6 +69,9 @@ function addTable(data, tableHeader, page, $) {
         th.appendChild(document.createTextNode(tableHeader[k]));
         tr.appendChild(th);
     }
+
+
+    console.log(data);
 
     // create body
     let tableBody = document.createElement('TBODY');

@@ -39,7 +39,7 @@
                 function (ajax) {
                     let promises = ajax.call([
                         {
-                            methodname: 'local_groupformation_delete_answers',
+                            methodname: 'mod_groupformation_delete_answers',
                             args: {users: [{userid: user[0].userid, groupformation: user[0].groupformation}]}
                         }
                     ]);

@@ -28,29 +28,29 @@
  */
 $services = array(
         'groupformation_service' => array(                                                // the name of the web service
-                'functions' => array ('local_groupformation_delete_answers'), // web service functions of this service
+                'functions' => array('mod_groupformation_delete_answers'), // web service functions of this service
                 'requiredcapability' => '',                // if set, the web service user need this capability to access
             // any function of this service. For example: 'some/capability:specified'
-                'restrictedusers' => 0,                                             // if enabled, the Moodle administrator must link some user to this service
+                'restrictedusers' => 0, // if enabled, the Moodle administrator must link some user to this service
             // into the administration
-                'enabled' => 1,                                                       // if enabled, the service can be reachable on a default installation
-                'shortname' =>  '',       // optional – but needed if restrictedusers is set so as to allow logins.
+                'enabled' => 1, // if enabled, the service can be reachable on a default installation
+                'shortname' => '',       // optional – but needed if restrictedusers is set so as to allow logins.
                 'downloadfiles' => 0,    // allow file downloads.
-                'uploadfiles'  => 0      // allow file uploads.
+                'uploadfiles' => 0      // allow file uploads.
         )
 );
 /**
  * @params groups description
  */
 $functions = array(
-        'local_groupformation_delete_answers' => array(         //web service function name
-                'classname'   => 'local_groupformation_external',  //class containing the external function OR namespaced class in classes/external/XXXX.php
-                'methodname'  => 'delete_answers',          //external function name
-                'classpath'   => 'local/groupformation/externallib.php',  //file containing the class/external function - not required if using namespaced auto-loading classes.
+        'mod_groupformation_delete_answers' => array(         //web service function name
+                'classname' => 'mod_groupformation_external', //class containing the external function OR namespaced class in classes/external/XXXX.php
+                'methodname' => 'delete_answers',          //external function name
+                'classpath' => 'mod/groupformation/webservicelib.php', //file containing the class/external function - not required if using namespaced auto-loading classes.
             // defaults to the service's externalib.php
                 'description' => 'Delete answers of user.',    //human readable description of the web service function
-                'type'        => 'write',                  //database rights of the web service function (read, write)
+                'type' => 'write',                  //database rights of the web service function (read, write)
                 'ajax' => true,        // is the service available to 'internal' ajax calls.
-        'capabilities' => array(),   // capabilities required by the function.
-    ),
+                'capabilities' => array(),   // capabilities required by the function.
+        ),
 );
