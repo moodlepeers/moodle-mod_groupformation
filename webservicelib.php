@@ -1,6 +1,7 @@
 <?php
 
 require_once("$CFG->libdir/externallib.php");
+require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 
 class mod_groupformation_external extends external_api {
 
@@ -44,27 +45,20 @@ class mod_groupformation_external extends external_api {
      * @return array of newly created groups
      */
     public static function delete_answers($users) { //Don't forget to set it as static
-        global $CFG, $DB;
-        //require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/basic_view_controller.php');
-      
-        $params = self::validate_parameters(self::delete_answers_parameters(), array('users'=>$users));
+        $params = self::validate_parameters(self::delete_answers_parameters(), array('users' => $users));
 
         foreach ($params['users'] as $user) {
             $user = (object) $user;
 
-
-            //TODO call delete_answers function
-            //$usermanager = new mod_groupformation_user_manager($userObject->groupformation);
-            //$usermanager->delete_answers($userObject->userid);
-
             $groupformationid = $user->groupformation;
             $userid = $user->userid;
 
-            $DB->delete_records('groupformation_users', array('groupformation' => $groupformationid, 'userid' => $userid));
-            $DB->delete_records('groupformation_answers', array('groupformation' => $groupformationid, 'userid' => $userid));
-            $DB->delete_records('groupformation_user_values',
-                    array('groupformationid' => $groupformationid, 'userid' => $userid));
-            
+            $usermanager = new mod_groupformation_user_manager($groupformationid);
+            $usermanager->delete_answers($userid, true);
+            // set new answer count
+            $usermanager->set_answer_count($userid);
+            // set completed to false because answered were deleted
+            $usermanager->set_complete($userid, 0);
 
             $test = array("users" => array("id" => "20", "userid" => $user->userid, "groupformation" => $user->groupformation));
             return $test;

@@ -632,14 +632,19 @@ class mod_groupformation_user_manager {
      * Deletes all answers
      *
      * @param int $userid
-     * @throws dml_exception
+     * @param bool $only_answers
      */
-    public function delete_answers($userid) {
+    public function delete_answers($userid, $only_answers = false) {
         global $DB;
-        $DB->delete_records('groupformation_users', array('groupformation' => $this->groupformationid, 'userid' => $userid));
-        $DB->delete_records('groupformation_answers', array('groupformation' => $this->groupformationid, 'userid' => $userid));
-        $DB->delete_records('groupformation_user_values',
-                array('groupformationid' => $this->groupformationid, 'userid' => $userid));
+        if($only_answers){
+            $DB->delete_records('groupformation_answers', array('groupformation' => $this->groupformationid, 'userid' => $userid));
+        } else {
+            $DB->delete_records('groupformation_users', array('groupformation' => $this->groupformationid, 'userid' => $userid));
+            $DB->delete_records('groupformation_answers', array('groupformation' => $this->groupformationid, 'userid' => $userid));
+            $DB->delete_records('groupformation_user_values',
+                    array('groupformationid' => $this->groupformationid, 'userid' => $userid));
+        }
+
     }
 
     /**
