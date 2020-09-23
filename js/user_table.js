@@ -32,7 +32,7 @@ function selectPage(page, $) {
     let data = JSON.parse(userData);
     let paginationArray = paginate(data, PAGE_SIZE, page)
 
-    let tableHeader = ["#", "Vorname", "Nachname", "Consent", "Questionaire Completed", "Answered", "Actions"]
+    let tableHeader = ["#", "Vorname", "Nachname", "Consent", "Progress", "Submitted", "Actions"]
     addTable(paginationArray, tableHeader, page);
 
 }
@@ -99,28 +99,54 @@ function addTable(data, tableHeader, page, $) {
 
         // add consent given
         td = document.createElement('TD');
-        let consentIcon = data[i][0].consent === undefined ? renderXIcon() : renderCheckIcon();
+        let consentIcon = data[i][0].consent === 0 ? renderXIcon() : renderCheckIcon();
         td.insertAdjacentHTML("beforeend", consentIcon);
         td.setAttribute("name", JSON.stringify("consent"));
-        td.setAttribute("data", JSON.stringify(data[i][0].userid !== undefined ? data[i][0].userid : data[i][0].id))
+        td.setAttribute("data", JSON.stringify(data[i][0].userid !== 0 ? data[i][0].userid : data[i][0].id))
         tr.appendChild(td);
 
-        // add questionaire answered
-        td = document.createElement('TD');
-        td.setAttribute("name", JSON.stringify("questionaire"));
-        td.appendChild(document.createTextNode(data[i][0].answer_count !== undefined ? data[i][0].answer_count : 0));
-        td.setAttribute("data", JSON.stringify(data[i][0].userid !== undefined ? data[i][0].userid : data[i][0].id))
+        // progress bar
+        let answerCount = data[i][0].answer_count;
+
+        let maxAnswerCount = data[i][0].max_answer_count
+
+        // percentage of answer count
+        let pcg = Math.floor(answerCount  / maxAnswerCount  * 100);
+
+        td = document.createElement('td');
+        let progress = document.createElement("div");
+        progress.className = "progress";
+        progress.style.border = '1px solid black';
+
+        let value = document.createElement("span");
+        value.className = "progress-value";
+        value.innerText = pcg + "%";
+
+        let progressBar = document.createElement("div");
+        progressBar.className = "progress-bar";
+        progressBar.setAttribute('style','width:'+Number(pcg)+'%');
+        progressBar.setAttribute("role", "progressbar");
+        progressBar.setAttribute("aria-valuenow", answerCount);
+        progressBar.setAttribute("aria-valuemin", 0);
+        progressBar.setAttribute("aria-valuemax", maxAnswerCount);
+        td.appendChild(progress);
+        progress.appendChild(progressBar)
+
+        // don't show percentage if its 100 %
+        if (pcg < 100){
+            progress.appendChild(value);
+        }
         tr.appendChild(td);
 
         // add answers submitted
         td = document.createElement('TD');
         td.setAttribute("name", JSON.stringify("completed"))
-        let answeredIcon = data[i][0].completed === undefined ? renderXIcon() : renderCheckIcon();
-        td.setAttribute("data", JSON.stringify(data[i][0].userid !== undefined ? data[i][0].userid : data[i][0].id))
+        let answeredIcon = data[i][0].completed === "0" ? renderXIcon() : renderCheckIcon();
+        td.setAttribute("data", JSON.stringify(data[i][0].userid !== 0 ? data[i][0].userid : data[i][0].id))
         td.insertAdjacentHTML("beforeend", answeredIcon);
         tr.appendChild(td);
 
-        // add answers submitted
+        // delete answers button
         td = document.createElement('TD');
         let button = document.createElement("button");
         button.appendChild(document.createTextNode("Delete Answers"));
@@ -196,7 +222,7 @@ function paginate(array, page_size, page_number) {
  * returns icon
  * @returns {string}
  */
-const renderCheckIcon = () =>  {
+const renderCheckIcon = () => {
     return "<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-check-circle-fill\" fill=\"#43A047\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
         "  <path fill-rule=\"evenodd\" d=\"M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z\"/>\n" +
         "</svg>"

@@ -255,6 +255,25 @@ class mod_groupformation_analysis_controller {
             // get user info like name
             $username = $DB->get_records_list('user', 'id', [$id], null, $selectfields);
 
+
+            // calculate the max number count of answers:
+
+            // get all categories
+            $categories = $this->store->get_categories();
+            // max answer count of all categories
+            $answer_count = $this->store->get_numbers($categories);
+
+            // calc all together
+            $total = 0;
+            foreach ($answer_count AS $number){
+                $total += $number;
+            }
+
+            // add new field in user array
+            foreach( $user as &$row) {
+                $row->max_answer_count = $total;
+            }
+
             // merge arrays
             $userData = array_merge($user, $username);
 
