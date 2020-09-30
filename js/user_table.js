@@ -7,7 +7,7 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-const PAGE_SIZE = 20;
+let TABLE_SIZE = 20;
 let jquery = null
 
 require(['jquery'], function ($) {
@@ -18,6 +18,7 @@ require(['jquery'], function ($) {
         jquery = $;
         selectPage(1, $);
         createPagination(data)
+        createTableSize($);
     });
 });
 
@@ -30,7 +31,7 @@ function selectPage(page, $) {
 
 
     let data = JSON.parse(userData);
-    let paginationArray = paginate(data, PAGE_SIZE, page)
+    let paginationArray = paginate(data, TABLE_SIZE, page)
 
     let tableHeader = ["#", "Vorname", "Nachname", "Consent", "Progress", "Submitted", "Actions"]
     addTable(paginationArray, tableHeader, page);
@@ -88,7 +89,7 @@ function addTable(data, tableHeader, page, $) {
 
         // add index
         let td = document.createElement('TD');
-        td.appendChild(document.createTextNode(page_number * PAGE_SIZE + i + 1));
+        td.appendChild(document.createTextNode(page_number * TABLE_SIZE + i + 1));
         // style excluded user
         data[i][0].excluded === "1" ?
             td.style.color = "darkgrey" : null;
@@ -202,18 +203,6 @@ function addTable(data, tableHeader, page, $) {
         dropdownMenu.appendChild(deleteButton);
         button.appendChild(dropdownMenu);
 
-
-        // <div class="dropdown">
-        //         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        //         Dropdown button
-        //     </button>
-        //     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        //         <a class="dropdown-item" href="#">Action</a>
-        //         <a class="dropdown-item" href="#">Another action</a>
-        //     <a class="dropdown-item" href="#">Something else here</a>
-        //     </div>
-        //     </div>
-
         td.appendChild(button);
         tr.appendChild(td);
     }
@@ -229,7 +218,7 @@ function createPagination(data) {
 
     let pagination = document.getElementById("pagination");
 
-    let numPages = data.length / PAGE_SIZE;
+    let numPages = data.length / TABLE_SIZE;
 
     // add an extra page
     if (numPages % 1 > 0)
@@ -276,6 +265,68 @@ function createPagination(data) {
 function paginate(array, page_size, page_number) {
     // human-readable page numbers usually start with 1, so we reduce 1 in the first argument
     return array.slice((page_number - 1) * page_size, page_number * page_size);
+}
+
+/**
+ * create selector for choosing the table size
+ * @param $ jquery
+ */
+function createTableSize($) {
+    let tableSize = document.getElementById("table_size");
+
+    let dropdown = document.createElement("div");
+    dropdown.className = "dropdown";
+
+    let button = document.createElement("button");
+
+    let buttonTextNode = document.createTextNode(TABLE_SIZE.toString());
+
+    button.appendChild(buttonTextNode);
+    button.id = "table_size_button";
+    button.className = "btn btn-secondary dropdown-toggle";
+    button.setAttribute("type", "button");
+    button.setAttribute("data-toggle", "dropdown");
+    button.setAttribute("aria-haspopup", "true");
+    button.setAttribute("aria-expanded", "false");
+
+    let dropdownMenu = document.createElement("div");
+    dropdownMenu.className = "dropdown-menu";
+    dropdownMenu.setAttribute("aria-labelledby", "dropdownMenuButton");
+
+
+    let tableSizes = [20, 50, 100];
+
+    tableSizes.forEach((size) => {
+        let div = document.createElement("div");
+        let tableSize = document.createTextNode(size.toString());
+        div.onclick = () => {
+            TABLE_SIZE = size;
+            // reload table
+            selectPage(1);
+
+            // set new size to dropdown button
+            let tableSizeButton = document.getElementById("table_size_button");
+            tableSizeButton.firstChild.nodeValue = TABLE_SIZE.toString();
+
+            // reload the pagination
+            let userData = $("#data").text();
+            let data = JSON.parse(userData);
+            let pagination = document.getElementById("pagination");
+            pagination.innerHTML = '';
+            createPagination(data)
+        }
+
+        div.appendChild(tableSize)
+        dropdownMenu.appendChild(div);
+    });
+
+
+    button.appendChild(dropdownMenu);
+
+    dropdown.appendChild(button)
+    tableSize.appendChild(dropdown)
+
+
 }
 
 /**

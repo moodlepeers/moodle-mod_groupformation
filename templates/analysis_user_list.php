@@ -122,9 +122,9 @@
     </div>
 
 
-    <nav aria-label="...">
-        <ul class="pagination" id="pagination">
+    <nav>
+        <ul class="pagination" id="pagination"></ul>
 
-        </ul>
+        <ul class="table_size" id="table_size"></ul>
     </nav>
 </div>
