@@ -80,21 +80,36 @@ function addTable(data, tableHeader, page, $) {
     // add each item
     for (let i = 0; i < data.length; i++) {
         tr = document.createElement('TR');
+        // style excluded user
+        data[i][0].excluded === "1" ?
+            tr.style.backgroundColor = "lightgrey" : null;
+
         tableBody.appendChild(tr);
 
         // add index
         let td = document.createElement('TD');
         td.appendChild(document.createTextNode(page_number * PAGE_SIZE + i + 1));
+        // style excluded user
+        data[i][0].excluded === "1" ?
+            td.style.color = "darkgrey" : null;
+
         tr.appendChild(td);
 
         // add first name
         td = document.createElement('TD');
         td.appendChild(document.createTextNode(data[i][data[i].length > 1 ? 1 : 0].firstname));
+        // style excluded user
+        data[i][0].excluded === "1" ?
+            td.style.color = "darkgrey" : null;
         tr.appendChild(td);
 
         // add last name
         td = document.createElement('TD');
         td.appendChild(document.createTextNode(data[i][data[i].length > 1 ? 1 : 0].lastname));
+
+        // style excluded user
+        data[i][0].excluded === "1" ?
+            td.style.color = "darkgrey" : null;
         tr.appendChild(td);
 
         // add consent given
@@ -103,6 +118,10 @@ function addTable(data, tableHeader, page, $) {
         td.insertAdjacentHTML("beforeend", consentIcon);
         td.setAttribute("name", JSON.stringify("consent"));
         td.setAttribute("data", JSON.stringify(data[i][0].userid !== 0 ? data[i][0].userid : data[i][0].id))
+
+        // style excluded user
+        data[i][0].excluded === "1" ?
+            td.style.color = "darkgrey" : null;
         tr.appendChild(td);
 
         // progress bar
@@ -111,7 +130,7 @@ function addTable(data, tableHeader, page, $) {
         let maxAnswerCount = data[i][0].max_answer_count
 
         // percentage of answer count
-        let pcg = Math.floor(answerCount  / maxAnswerCount  * 100);
+        let pcg = Math.floor(answerCount / maxAnswerCount * 100);
 
         td = document.createElement('td');
         let progress = document.createElement("div");
@@ -125,16 +144,21 @@ function addTable(data, tableHeader, page, $) {
         let progressBar = document.createElement("div");
         progressBar.setAttribute("name", JSON.stringify("questionaire"));
         progressBar.className = "progress-bar";
-        progressBar.setAttribute('style','width:'+Number(pcg)+'%');
+        progressBar.setAttribute('style', 'width:' + Number(pcg) + '%');
         progressBar.setAttribute("role", "progressbar");
         progressBar.setAttribute("aria-valuenow", answerCount);
         progressBar.setAttribute("aria-valuemin", 0);
         progressBar.setAttribute("aria-valuemax", maxAnswerCount);
+
+        // style excluded user
+        data[i][0].excluded === "1" ?
+            td.style.color = "darkgrey" : null;
+
         td.appendChild(progress);
         progress.appendChild(progressBar)
 
         // don't show percentage if its 100 %
-        if (pcg < 100){
+        if (pcg < 100) {
             progress.appendChild(value);
         }
         tr.appendChild(td);
@@ -148,14 +172,13 @@ function addTable(data, tableHeader, page, $) {
         tr.appendChild(td);
 
 
-
         // delete answers button
         td = document.createElement('TD');
 
         let dropdown = document.createElement("div");
         dropdown.className = "dropdown";
 
-        let button  = document.createElement("button");
+        let button = document.createElement("button");
         button.appendChild(document.createTextNode("Actions"));
         button.className = "btn btn-secondary dropdown-toggle";
         button.setAttribute("type", "button");
@@ -164,8 +187,8 @@ function addTable(data, tableHeader, page, $) {
         button.setAttribute("aria-expanded", "false");
 
         let dropdownMenu = document.createElement("div");
-        dropdownMenu.className= "dropdown-menu";
-        dropdownMenu.setAttribute("aria-labelledby","dropdownMenuButton");
+        dropdownMenu.className = "dropdown-menu";
+        dropdownMenu.setAttribute("aria-labelledby", "dropdownMenuButton");
 
 
         let deleteButton = document.createElement("button");
@@ -180,16 +203,16 @@ function addTable(data, tableHeader, page, $) {
         button.appendChild(dropdownMenu);
 
 
-    // <div class="dropdown">
-    //         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    //         Dropdown button
-    //     </button>
-    //     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    //         <a class="dropdown-item" href="#">Action</a>
-    //         <a class="dropdown-item" href="#">Another action</a>
-    //     <a class="dropdown-item" href="#">Something else here</a>
-    //     </div>
-    //     </div>
+        // <div class="dropdown">
+        //         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        //         Dropdown button
+        //     </button>
+        //     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        //         <a class="dropdown-item" href="#">Action</a>
+        //         <a class="dropdown-item" href="#">Another action</a>
+        //     <a class="dropdown-item" href="#">Something else here</a>
+        //     </div>
+        //     </div>
 
         td.appendChild(button);
         tr.appendChild(td);
