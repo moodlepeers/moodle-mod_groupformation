@@ -1964,5 +1964,21 @@ function xmldb_groupformation_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2019071000, 'groupformation');
     }
 
+    if ($oldversion < 2020110100) {
+
+        // Define field condition to be added to groupformation.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('condition', XMLDB_TYPE_INTEGER, '1', null, null, null, null, 'tracked');
+
+        // Conditionally launch add field condition.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2020110100, 'groupformation');
+    }
+
+
     return true;
 }
