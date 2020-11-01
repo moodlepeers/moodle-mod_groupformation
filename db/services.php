@@ -44,11 +44,49 @@ $services = array(
  */
 $functions = array(
         'mod_groupformation_delete_answers' => array(         //web service function name
-                'classname' => 'mod_groupformation_external', //class containing the external function OR namespaced class in classes/external/XXXX.php
+                'classname' => 'mod_groupformation_external',
+            //class containing the external function OR namespaced class in classes/external/XXXX.php
                 'methodname' => 'delete_answers',          //external function name
-                'classpath' => 'mod/groupformation/webservicelib.php', //file containing the class/external function - not required if using namespaced auto-loading classes.
+                'classpath' => 'mod/groupformation/webservicelib.php',
+            //file containing the class/external function - not required if using namespaced auto-loading classes.
             // defaults to the service's externalib.php
                 'description' => 'Delete answers of user.',    //human readable description of the web service function
+                'type' => 'write',                  //database rights of the web service function (read, write)
+                'ajax' => true,        // is the service available to 'internal' ajax calls.
+                'capabilities' => array(),   // capabilities required by the function.
+        ),
+);
+
+/**
+ *  webservice to exclude users
+ * @params groups description
+ */
+$services = array(
+        'groupformation_service' => array(                                                // the name of the web service
+                'functions' => array('mod_groupformation_exclude_users'), // web service functions of this service
+                'requiredcapability' => '',                // if set, the web service user need this capability to access
+            // any function of this service. For example: 'some/capability:specified'
+                'restrictedusers' => 0, // if enabled, the Moodle administrator must link some user to this service
+            // into the administration
+                'enabled' => 1, // if enabled, the service can be reachable on a default installation
+                'shortname' => '',       // optional – but needed if restrictedusers is set so as to allow logins.
+                'downloadfiles' => 0,    // allow file downloads.
+                'uploadfiles' => 0      // allow file uploads.
+        )
+);
+/**
+ * webservice to exclude users
+ * @params groups description
+ */
+$functions = array(
+        'mod_groupformation_exclude_users' => array(         //web service function name
+                'classname' => 'mod_groupformation_external',
+            //class containing the external function OR namespaced class in classes/external/XXXX.php
+                'methodname' => 'exclude_users',          //external function name
+                'classpath' => 'mod/groupformation/webservicelib.php',
+            //file containing the class/external function - not required if using namespaced auto-loading classes.
+            // defaults to the service's externalib.php
+                'description' => 'Exclude users.',    //human readable description of the web service function
                 'type' => 'write',                  //database rights of the web service function (read, write)
                 'ajax' => true,        // is the service available to 'internal' ajax calls.
                 'capabilities' => array(),   // capabilities required by the function.

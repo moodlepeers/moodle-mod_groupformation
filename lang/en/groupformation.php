@@ -389,6 +389,8 @@ $string ['user_list_submitted'] = 'Submitted';
 $string ['user_list_actions'] = 'Actions';
 $string ['user_list_delete_answers'] = 'Delete answers';
 $string ['user_list_delete_answers_msg'] = 'Are you sure you want to delete the answers from this user?';
+$string ['user_list_exclude_user'] = 'Exclude user';
+$string ['user_list_exclude_user_msg'] = 'Are you sure you want to exclude this user?';
 
 $string ['emailnotifications_info'] = 'You will be notified via message when it is terminated.';
 $string ['onlyactivestudents_info'] =

@@ -112,6 +112,97 @@
 
 </script>
 
+
+<script type="text/javascript">
+
+    /**
+     * send ajax call to moodle web service and updates the table
+     * @param user - user element
+     */
+    function excludeUser(user) {
+
+        //TODO change style of name, consent etc. to darkgray
+        //TODO add function to include user after excluding
+        //TODO change button from exclude to include after excluding user
+        //TODO change method that exclude and include works in one method
+
+        // prevent of reloading the page
+        event.preventDefault();
+
+        // show alert window
+        if (confirm('<?php echo get_string("user_list_exclude_user_msg", "groupformation"); ?>')) {
+            require(['core/ajax'],
+                /**
+                 * ajax call to exclude user
+                 * @param ajax
+                 */
+                function (ajax) {
+                    let promises = ajax.call([
+                        {
+                            methodname: 'mod_groupformation_exclude_users',
+                            args: {users: [{userid: user[0].userid, groupformation: user[0].groupformation}]}
+                        }
+                    ]);
+
+                    promises[0].done(function () {
+                        // if excluding user was successfully
+
+                        // get dataset
+                        let userData = document.getElementById("data").innerText;
+                        let data = JSON.parse(userData);
+
+                        console.log(user[0])
+                        // find specific user in dataset
+                        let index = data.findIndex(e => e[0].userid === user[0].userid);
+
+                        // delete answers array from dataset
+                        data[index].splice(0, 1);
+
+                        // set new dataset back to the data element
+                        (document.getElementById("data")).innerHTML = JSON.stringify(data);
+
+                        // get all table elements
+                        let elements = document.getElementsByTagName('TR');
+
+                        for (let item of elements) {
+                            console.log("elements")
+                            // find element from selected user
+                            if (JSON.parse(item.getAttribute("data")) === user[0].userid) {
+
+                                // get name of element
+                                let name = JSON.parse(item.getAttribute("name"));
+
+                                // set the new value and updating the table
+                                switch (name) {
+                                    case "background":
+                                        item.style.backgroundColor = "lightgrey";
+                                        break;
+                                    default:
+                                }
+                            }
+                        }
+
+                        // // find buttons from user table and disable exclude button
+                        // let button = document.getElementById('exclude-button');
+                        // if (JSON.parse(button.getAttribute("data"))[0].userid === user.userid) {
+                        //     // disable button
+                        //     button.disabled = true;
+                        // }
+
+
+                    }).fail(function (ex) {
+                        console.log(ex)
+                    });
+                });
+        } else {
+            // Do nothing!
+
+        }
+
+    }
+
+</script>
+
 <!-- create object with all strings to use in js file-->
 <?php
 
@@ -128,11 +219,16 @@ $table_column_names = array(
 // delete button string
 $delete_answers_string = get_string('user_list_delete_answers', 'groupformation');
 
+$exclude_user_string = get_string('user_list_exclude_user', 'groupformation');
+
 $actions_string = get_string('user_list_actions', 'groupformation');
 
 // wrap everything up in an object
-$strings = (object) array('table_columns_names' => $table_column_names, 'delete_answers' => $delete_answers_string, 'actions' => $actions_string);
-
+$strings = (object) array(
+        'table_columns_names' => $table_column_names,
+        'delete_answers' => $delete_answers_string,
+        'actions' => $actions_string,
+        'exclude_user' => $exclude_user_string);
 
 ?>
 
@@ -145,7 +241,7 @@ $strings = (object) array('table_columns_names' => $table_column_names, 'delete_
     <script id="user" data-uid=""></script>
     <!-- push the data of all users in json format to js file -->
     <script id="data"><?php echo json_encode($this->_['users']); ?></script>
-    <!-- push the column names to js file in json format -->
+    <!-- push all needed strings to js file in json format -->
     <script id="strings"><?php echo json_encode($strings); ?></script>
     <!-- table content get added in js file -->
     <div id="table_content">

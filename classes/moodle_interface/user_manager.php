@@ -963,4 +963,21 @@ class mod_groupformation_user_manager {
                 'id' => $this->groupformationid
         ));
     }
+
+
+    /**
+     * update excluded state
+     *
+     * @param int $userid
+     * @param bool $value
+     * @throws dml_exception
+     */
+    public function set_excluded($userid, $value) {
+        global $DB;
+        $this->set_status($userid);
+        $record = $DB->get_record('groupformation_users',
+                array('groupformation' => $this->groupformationid, 'userid' => $userid));
+        $record->excluded = $value;
+        $DB->update_record('groupformation_users', $record);
+    }
 }

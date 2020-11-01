@@ -32,6 +32,7 @@ function selectPage(page, $) {
 
     let data = JSON.parse(userData);
     let paginationArray = paginate(data, TABLE_SIZE, page)
+    console.log(data);
 
     // get table column names from php
     let tableHeader = JSON.parse(document.getElementById("strings").innerText);
@@ -46,7 +47,7 @@ function selectPage(page, $) {
  * @param tableHeader
  * @param page
  */
-function addTable(data, tableHeader, page, $) {
+function addTable(data, tableHeader, page) {
     let page_number = page - 1;
     let tableContent = document.getElementById("table_content");
 
@@ -83,6 +84,8 @@ function addTable(data, tableHeader, page, $) {
     // add each item
     for (let i = 0; i < data.length; i++) {
         tr = document.createElement('TR');
+        tr.setAttribute("name", JSON.stringify("background"));
+        tr.setAttribute("data", JSON.stringify(data[i][0].userid !== 0 ? data[i][0].userid : data[i][0].id));
         // style excluded user
         data[i][0].excluded === "1" ?
             tr.style.backgroundColor = "lightgrey" : null;
@@ -135,7 +138,7 @@ function addTable(data, tableHeader, page, $) {
         // percentage of answer count
         let pcg = Math.floor(answerCount / maxAnswerCount * 100);
 
-        td = document.createElement('td');
+        td = document.createElement('TD');
         let progress = document.createElement("div");
         progress.className = "progress";
         progress.style.border = '1px solid black';
@@ -194,8 +197,9 @@ function addTable(data, tableHeader, page, $) {
         dropdownMenu.className = "dropdown-menu";
         dropdownMenu.setAttribute("aria-labelledby", "dropdownMenuButton");
 
-
+        // delete answers button
         let deleteButton = document.createElement("button");
+        deleteButton.className = "dropdown-item";
         // set button string
         deleteButton.appendChild(document.createTextNode((JSON.parse(document.getElementById("strings").innerText)).delete_answers));
         deleteButton.style.marginLeft = "10px";
@@ -205,7 +209,24 @@ function addTable(data, tableHeader, page, $) {
         deleteButton.disabled = data[i][0].answer_count === "0";
 
         dropdownMenu.appendChild(deleteButton);
+
+
+
+        // exclude user button
+        let excludeButton = document.createElement("button");
+        excludeButton.id = "exclude-button";
+        excludeButton.className = "dropdown-item";
+        // set button string
+        excludeButton.appendChild(document.createTextNode((JSON.parse(document.getElementById("strings").innerText)).exclude_user));
+        excludeButton.style.marginLeft = "10px";
+        excludeButton.setAttribute("data", JSON.stringify(data[i]))
+        excludeButton.setAttribute('onclick', `excludeUser(${JSON.stringify(data[i])})`)
+
+
+        dropdownMenu.appendChild(excludeButton)
+
         button.appendChild(dropdownMenu);
+
 
         td.appendChild(button);
         tr.appendChild(td);
