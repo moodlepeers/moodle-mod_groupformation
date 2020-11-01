@@ -316,7 +316,7 @@ class mod_groupformation_csv_writer {
                 $userdata[$userid]['groupid'] = $this->groupsmanager->get_moodle_group_id($groupid);
                 $userdata[$userid]['groupname'] = str_replace("G1_", "", $this->groupsmanager->get_group_name($userid));
                 $userdata[$userid]['performance_index'] = $this->groupsmanager->get_performance_index($groupid);
-
+                var_dump($userdata[$userid]['performance_index']);
                 $groupkey = str_replace(';', '-', $this->groupsmanager->get_group_key($groupid));
                 $groupkey = str_replace('mrand', 'manual', $groupkey);
 
@@ -364,7 +364,6 @@ class mod_groupformation_csv_writer {
                 $userdata[$userid]['ex'] = $ex;
                 $userdata[$userid]['gh'] = $gh;
                 $userdata[$userid]['to'] = $to;
-                var_dump($to);
             } else {
                 $result = $DB->record_exists('groups_members', array('userid' => $userid));
                 if ($result) {
@@ -429,6 +428,7 @@ class mod_groupformation_csv_writer {
                 $csv .= "groupformationid" . $sep;
                 $csv .= "groupid" . $sep;
                 $csv .= "groupname" . $sep;
+                $csv .= "groupkey" . $sep;
                 $csv .= "performance_index" . $sep;
                 $csv .= "random" . $sep;
                 $csv .= "manual_random" . $sep;
@@ -465,6 +465,7 @@ class mod_groupformation_csv_writer {
             $line .= $userdata[$userid]['groupformation'] . $sep;
             $line .= $userdata[$userid]['groupid'] . $sep;
             $line .= $userdata[$userid]['groupname'] . $sep;
+            $line .= $userdata[$userid]['groupkey'] . $sep;
             $line .= $userdata[$userid]['performance_index'] . $sep;
             $line .= $userdata[$userid]['rand'] . $sep;
             $line .= $userdata[$userid]['mrand'] . $sep;
