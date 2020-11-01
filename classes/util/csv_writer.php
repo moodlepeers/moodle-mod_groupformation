@@ -309,6 +309,7 @@ class mod_groupformation_csv_writer {
             $userdata[$userid]['mrand'] = null;
             $userdata[$userid]['ex'] = null;
             $userdata[$userid]['gh'] = null;
+            $userdata[$userid]['to'] = null;
 
             if ($this->groupsmanager->has_group($userid)) {
                 $groupid = $this->groupsmanager->get_group_id($userid);
@@ -339,23 +340,31 @@ class mod_groupformation_csv_writer {
                     $userdata[$userid]['performance_index'] = null;
                     $ex = "-";
                     $gh = "-";
+                    $to = "-";
                 } else {
                     $ex = substr($groupkey, strpos($groupkey, 'ex:') + 3, 1);
                     $gh = substr($groupkey, strpos($groupkey, 'gh:') + 3, 1);
+                    $to = substr($groupkey, strpos($groupkey, 'team:') + 5, 1);
 
-                    $ex = str_replace('1', 1, $ex);
-                    $ex = str_replace('_', 2, $ex);
-                    $ex = str_replace('0', 3, $ex);
+                    $ex = str_replace('1', 'homogen', $ex); //homogen
+                    $ex = str_replace('_', 'random', $ex); //random
+                    $ex = str_replace('0', 'heterogen', $ex); //heterogen
 
-                    $gh = str_replace('1', 1, $gh);
-                    $gh = str_replace('_', 2, $gh);
-                    $gh = str_replace('0', 3, $gh);
+                    $gh = str_replace('1', 'homogen', $gh);
+                    $gh = str_replace('_', 'random', $gh);
+                    $gh = str_replace('0', 'heterogen', $gh);
+                    
+                    $to = str_replace('1', 'homogen', $to);
+                    $to = str_replace('_', 'random', $to);
+                    $to = str_replace('0', 'heterogen', $to);
                 }
 
                 $userdata[$userid]['rand'] = $rand;
                 $userdata[$userid]['mrand'] = $mrand;
                 $userdata[$userid]['ex'] = $ex;
                 $userdata[$userid]['gh'] = $gh;
+                $userdata[$userid]['to'] = $to;
+                var_dump($to);
             } else {
                 $result = $DB->record_exists('groups_members', array('userid' => $userid));
                 if ($result) {
@@ -397,6 +406,7 @@ class mod_groupformation_csv_writer {
                 $userdata[$userid]['mrand'] = null;
                 $userdata[$userid]['ex'] = null;
                 $userdata[$userid]['gh'] = null;
+                $userdata[$userid]['to'] = null;
                 foreach ($categories as $category) {
                     $userdata[$userid][$category] = array();
                     $answers = $this->usermanager->get_answers($userid, $category, null, 'questionid, answer');
@@ -424,6 +434,7 @@ class mod_groupformation_csv_writer {
                 $csv .= "manual_random" . $sep;
                 $csv .= "criterion_extraversion" . $sep;
                 $csv .= "criterion_gewissenhaftigkeit" . $sep;
+                $csv .= "criterion_to" . $sep;
                 $csv .= "";
                 foreach ($categories as $category) {
                     if ($category == "knowledge" || $category == "topic") {
@@ -459,6 +470,7 @@ class mod_groupformation_csv_writer {
             $line .= $userdata[$userid]['mrand'] . $sep;
             $line .= $userdata[$userid]['ex'] . $sep;
             $line .= $userdata[$userid]['gh'] . $sep;
+            $line .= $userdata[$userid]['to'] . $sep;
 
             foreach ($categories as $category) {
 
