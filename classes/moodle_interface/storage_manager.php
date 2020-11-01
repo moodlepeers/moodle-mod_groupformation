@@ -1506,7 +1506,28 @@ class mod_groupformation_storage_manager {
         global $DB;
         return $DB->get_record('groupformation', array(
             'id' => $this->groupformationid));
-
-
     }
+
+    /** */
+    public function get_condition() {
+        global $DB;
+        return $DB->get_record('groupformation', array(
+            'id' => $this->groupformationid))->experimentalcondition;
+    }
+
+    public function toggle_condition() {
+        global $DB;
+
+        $record = $DB->get_record('groupformation', array(
+            'id' => $this->groupformationid));
+
+        if (is_null($record->experimentalcondition)){
+            $record->experimentalcondition = 0;
+        }
+
+        $record->experimentalcondition = intval(!$record->experimentalcondition);
+        
+        $DB->update_record('groupformation', $record);
+    }
+
 }

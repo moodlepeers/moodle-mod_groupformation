@@ -27,6 +27,7 @@ require_once('../../config.php');
 // Reads URL parameters.
 $filterusers = optional_param('filterusers', false, PARAM_BOOL);
 $unfilterusers = optional_param('unfilterusers', false, PARAM_BOOL);
+$togglecondition = optional_param('toggle_condition', false, PARAM_BOOL);
 
 $debugbuttons = "";
 
@@ -123,6 +124,38 @@ if (mod_groupformation_data::is_math_prep_course_mode() || mod_groupformation_da
 
         $debugbuttons .= '</div>';
     }
+
+    // Reset job action.
+    if ($togglecondition) {
+        $store->toggle_condition();
+        $returnurl = new moodle_url ('/mod/groupformation/grouping_view.php', array(
+            'id' => $id, 'do_show' => 'grouping'));
+        redirect($returnurl);
+    }
+
+    $condition = $store->get_condition(); 
+    $conditionstring = ($condition == 1) ? "homogenous" : "heterogenous";
+
+    $debugbuttons .= '<div class="gf_pad_header">';
+    $debugbuttons .= get_string('control_experimental_conditions', 'groupformation');
+    $debugbuttons .= '</div>';
+
+    $debugbuttons .= '<div class="gf_pad_content">';
+    $debugbuttons .= '<p>';
+    $debugbuttons .= get_string('experimental_condition', 'groupformation').' '.get_string($conditionstring, 'groupformation');
+    $debugbuttons .= '<br>';
+
+    $debugbuttons .= '<a href="' . (new moodle_url('/mod/groupformation/grouping_view.php', array(
+        'id' => $id, 'do_show' => 'grouping', 'toggle_condition' => 1)))->out() . '">';
+    $debugbuttons .= '<span class="gf_button gf_button_pill gf_button_small">';
+    $debugbuttons .= get_string('toggle_condition', 'groupformation');
+    $debugbuttons .= '</span>';
+
+    $debugbuttons .= '</a>';
+
+    $debugbuttons .= '</p>';
+
+    $debugbuttons .= '</div>';
 
     $debugbuttons .= '<div class="gf_pad_header">';
     $debugbuttons .= get_string('pre_study_header', 'groupformation');

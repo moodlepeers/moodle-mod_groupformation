@@ -316,7 +316,6 @@ class mod_groupformation_csv_writer {
                 $userdata[$userid]['groupid'] = $this->groupsmanager->get_moodle_group_id($groupid);
                 $userdata[$userid]['groupname'] = str_replace("G1_", "", $this->groupsmanager->get_group_name($userid));
                 $userdata[$userid]['performance_index'] = $this->groupsmanager->get_performance_index($groupid);
-                var_dump($userdata[$userid]['performance_index']);
                 $groupkey = str_replace(';', '-', $this->groupsmanager->get_group_key($groupid));
                 $groupkey = str_replace('mrand', 'manual', $groupkey);
 

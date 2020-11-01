@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="demographic questions">
-    <QUESTIONS VERSION="2020082400">
+    <QUESTIONS VERSION="2020110103">
         <QUESTION ID="1" TYPE="dropdown">
             <QUESTIONTEXT>
                 <![CDATA[Geschlecht]]>
@@ -20,40 +20,6 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="2" TYPE="dropdown">
-            <QUESTIONTEXT>
-                <![CDATA[Welcher Fächergruppe lässt sich Ihr Studiengang zuordnen?]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[Geisteswissenschaften]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Sport, Sportwissenschaften]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Rechts-, Wirtschafts- und Sozialwissenschaften]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Mathematik, Naturwissenschaften, Informatik]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Humanmedizin/Gesundheitswissenschaften]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Agrar-, Forst- und Ernährungswissenschaften, Veterinärmedizin]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Ingenieurwissenschaften]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Kunst, Kunstwissenschaft]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Sonstige Fachrichtungen]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
         <QUESTION ID="3" TYPE="number">
             <QUESTIONTEXT>
                 <![CDATA[Alter]]>
@@ -65,28 +31,6 @@
                 <MAX>
                     <![CDATA[100]]>
                 </MAX>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="4" TYPE="dropdown">
-            <QUESTIONTEXT>
-                <![CDATA[An welcher Universität sind Sie eingeschrieben?]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[Beuth Hochschule für Technik Berlin (BHT)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Jacobs University Bremen (JUB)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Johannes Gutenberg Universität Mainz (JGU)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Rheinisch-Westfälische Technische Hochschule Aachen (RWTH)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Andere]]>
-                </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="5" TYPE="freetext">

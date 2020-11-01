@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="demographic questions">
-    <QUESTIONS VERSION="2020082400">
+    <QUESTIONS VERSION="2020110103">
         <QUESTION ID="1" TYPE="dropdown">
             <QUESTIONTEXT>
                 <![CDATA[What is your sex?]]>
@@ -20,40 +20,6 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="2" TYPE="dropdown">
-            <QUESTIONTEXT>
-                <![CDATA[Which subject group can your degree programme be assigned to?]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[Humanities]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Sports, Sports Sciences]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Law, Economics and Social Sciences]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Mathematics, Natural Sciences, Computer Science]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Human Medicine/Health Sciences]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Agricultural, forestry and nutrition sciences, veterinary medicine]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Engineering Sciences]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Art, Art Science]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Other fields]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
         <QUESTION ID="3" TYPE="number">
             <QUESTIONTEXT>
                 <![CDATA[Age]]>
@@ -65,28 +31,6 @@
                 <MAX>
                     <![CDATA[100]]>
                 </MAX>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="4" TYPE="dropdown">
-            <QUESTIONTEXT>
-                <![CDATA[Which university are you enrolled at?]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[Beuth University of Applied Sciences Berlin]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Jacobs University Bremen (JUB)]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Mainz University JGU]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[RWTH Aachen University]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[Other]]>
-                </OPTION>
             </OPTIONS>
         </QUESTION>
         <QUESTION ID="5" TYPE="freetext">

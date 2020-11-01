@@ -611,3 +611,6 @@ $string ['randomized_grouping'] = '<b>{$a}</b> Teilnehmende sind für die random
 
 $string ['scientific_grouping_setup'] = 'Dieses Studiendesign teilt alle Teilnehmenden (mit vollständig beantworteten Fragebögen) in <b>{$a} Kohorten/Experimentalbedigungen</b>. Alle Teilnehmenden mit unvollständig beantworteten Fragebögen werden randomisiert gruppiert (als zusätzliche Kohorte/Bedingung).<br>Die Konfigurationsschlüssel sind wie folgt:';
 
+$string ['control_experimental_conditions'] = 'Steuerung der Experimentalbedingung';
+$string ['experimental_condition'] = 'Experimentalbedingung:';
+$string ['toggle_condition'] = 'Wechsle Bedingung';

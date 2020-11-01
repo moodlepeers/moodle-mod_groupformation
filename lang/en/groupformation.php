@@ -638,3 +638,6 @@ $string ['randomized_grouping'] = '<b>{$a}</b> users are available for randomize
 
 $string ['scientific_grouping_setup'] = 'This scientific grouping setup divides all users (with completely answered questionnaires) into <b>{$a} cohort(s)</b>. All users with incomplete answers are grouped randomly (as an additional cohort).<br>The configuration keys are as follows:';
 
+$string ['control_experimental_conditions'] = 'Control over experimental condition';
+$string ['experimental_condition'] = 'Experimental condition:';
+$string ['toggle_condition'] = 'Switch condition';

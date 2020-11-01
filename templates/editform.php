@@ -682,9 +682,7 @@ defined('MOODLE_INTERNAL') || die();
                 </span>
             </div>
         </div>
-
-        <?php if (!$this->_['mathprepcourse'] && !$this->_['amigomode']): ?>
-            <div class="gf_pad_header">
+        <div class="gf_pad_header">
                 <label class="gf_label" for="id_js_onlyactivestudents">
                     <input type="checkbox" id="id_js_onlyactivestudents" name="chbOnlyactivestudents" value="onlyactivestudents">
                         <?php echo get_string('onlyactivestudents_description', 'groupformation');?>
@@ -696,6 +694,8 @@ defined('MOODLE_INTERNAL') || die();
                 ">
                 </span>
             </div>
+        <?php if (!$this->_['mathprepcourse'] && !$this->_['amigomode']): ?>
+            
             <div class="gf_pad_header">
                 <label class="gf_label" for="id_js_emailnotifications">
                     <input disabled type="checkbox">
