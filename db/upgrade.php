@@ -1979,6 +1979,20 @@ function xmldb_groupformation_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2020110100, 'groupformation');
     }
 
+    if ($oldversion < 2020110101) {
+
+        // Rename field condition on table groupformation to experimentalcondition.
+        $table = new xmldb_table('groupformation');
+        $field = new xmldb_field('condition', XMLDB_TYPE_INTEGER, '1', null, null, null, null, 'tracked');
+
+        // Launch rename field condition.
+        $dbman->rename_field($table, $field, 'experimentalcondition');
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2020110101, 'groupformation');
+    }
+
+
 
     return true;
 }
