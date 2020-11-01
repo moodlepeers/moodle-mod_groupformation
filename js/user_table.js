@@ -34,7 +34,7 @@ function selectPage(page, $) {
     let paginationArray = paginate(data, TABLE_SIZE, page)
 
     // get table column names from php
-    let tableHeader = JSON.parse(($("#strings").text()));
+    let tableHeader = JSON.parse(document.getElementById("strings").innerText);
     tableHeader = tableHeader.table_columns_names;
 
     addTable(paginationArray, tableHeader, page);
