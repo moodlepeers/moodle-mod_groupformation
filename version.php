@@ -25,7 +25,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2020092300;
+$plugin->version = 2020110100;
 $plugin->requires = 2016052300; // Could be set to Moodle 3.1 2016052300; Best use Moodle 3.2 (2016120500) due to new bootstrap 4.
 $plugin->cron = 0;
 $plugin->component = 'mod_groupformation';

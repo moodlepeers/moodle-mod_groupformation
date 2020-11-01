@@ -27,15 +27,17 @@ require(['jquery'], function ($) {
  * @param page
  */
 function selectPage(page, $) {
+    // get user data from php
     let userData = document.getElementById("data").innerText;
-
 
     let data = JSON.parse(userData);
     let paginationArray = paginate(data, TABLE_SIZE, page)
 
-    let tableHeader = ["#", "Vorname", "Nachname", "Consent", "Progress", "Submitted", "Actions"]
-    addTable(paginationArray, tableHeader, page);
+    // get table column names from php
+    let tableHeader = JSON.parse(($("#strings").text()));
+    tableHeader = tableHeader.table_columns_names;
 
+    addTable(paginationArray, tableHeader, page);
 }
 
 /**
@@ -67,12 +69,12 @@ function addTable(data, tableHeader, page, $) {
     for (let k = 0; k < tableHeader.length; k++) {
         let th = document.createElement('TH');
         th.scope = "col";
-        th.appendChild(document.createTextNode(tableHeader[k]));
+        let divName = document.createElement('div');
+        divName.innerHTML = tableHeader[k]
+        th.appendChild(divName);
         tr.appendChild(th);
     }
 
-
-    console.log(data);
 
     // create body
     let tableBody = document.createElement('TBODY');
@@ -180,7 +182,8 @@ function addTable(data, tableHeader, page, $) {
         dropdown.className = "dropdown";
 
         let button = document.createElement("button");
-        button.appendChild(document.createTextNode("Actions"));
+        // set name of action button
+        button.appendChild(document.createTextNode((JSON.parse(document.getElementById("strings").innerText)).actions));
         button.className = "btn btn-secondary dropdown-toggle";
         button.setAttribute("type", "button");
         button.setAttribute("data-toggle", "dropdown");
@@ -193,7 +196,8 @@ function addTable(data, tableHeader, page, $) {
 
 
         let deleteButton = document.createElement("button");
-        deleteButton.appendChild(document.createTextNode("Delete Answers"));
+        // set button string
+        deleteButton.appendChild(document.createTextNode((JSON.parse(document.getElementById("strings").innerText)).delete_answers));
         deleteButton.style.marginLeft = "10px";
         // deleteButton.className = "btn btn-primary table-button";
         deleteButton.setAttribute("data", JSON.stringify(data[i]))

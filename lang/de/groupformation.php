@@ -349,7 +349,15 @@ $string['students_committed_single'] = 'Teilnehmende davon haben ihre Antworten 
 $string['students_committed_multiple'] = 'Teilnehmende davon hat seine Antworten schon endgültig abgegeben.';
 $string['committed_not_completed'] = 'von den fest abgegebenen Fragebögen sind nicht vollständig.';
 $string['completed_questionnaire'] = 'vollständig beantwortete Fragebögen.';
-$string['user_list'] = 'Benutzerliste';
+$string['user_list_headline'] = 'Benutzerliste';
+$string['user_list_firstname'] = 'Vorname';
+$string['user_list_lastname'] = 'Nachname';
+$string['user_list_consent'] = 'Einverständnis';
+$string['user_list_progress'] = 'Fortschritt';
+$string['user_list_submitted'] = 'Eingereicht';
+$string['user_list_actions'] = 'Aktionen';
+$string['user_list_delete_answers'] = 'Antworten löschen';
+$string['user_list_delete_answers_msg'] = 'Sind Sie sicher, dass Sie die Antworten von diesem Benutzer löschen möchten?';
 
 $string['emailnotifications_info'] = '<i style="color:red;">Die automatische Benachrichtigung über abgeschlossene Gruppenformationen ist momentan leider nicht verfügbar.</i>';
 $string['onlyactivestudents_info'] = 'Zur Gruppenbildung werden ausschließlich Teilnehmende betrachtet werden, die mind. eine Frage beantwortet haben.';

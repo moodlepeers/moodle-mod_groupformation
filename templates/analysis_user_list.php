@@ -25,12 +25,16 @@
 
 <script type="text/javascript">
 
+    /**
+     * send ajax call to moodle web service and updates the table
+     * @param user - user element
+     */
     function deleteAnswers(user) {
         // prevent of reloading the page
         event.preventDefault();
 
         // show alert window
-        if (confirm('Wollen Sie die Antworten von ' + user[1].firstname + " " + user[1].lastname + " löschen?")) {
+        if (confirm('<?php echo get_string("user_list_delete_answers_msg", "groupformation"); ?>')) {
             require(['core/ajax'],
                 /**
                  * test
@@ -108,23 +112,51 @@
 
 </script>
 
+<!-- create object with all strings to use in js file-->
+<?php
+
+// table column names
+$table_column_names = array(
+        "#",
+        get_string('user_list_firstname', 'groupformation'),
+        get_string('user_list_lastname', 'groupformation'),
+        get_string('user_list_consent', 'groupformation'),
+        get_string('user_list_progress', 'groupformation'),
+        get_string('user_list_submitted', 'groupformation'),
+        get_string('user_list_actions', 'groupformation'));
+
+// delete button string
+$delete_answers_string = get_string('user_list_delete_answers', 'groupformation');
+
+$actions_string = get_string('user_list_actions', 'groupformation');
+
+// wrap everything up in an object
+$strings = (object) array('table_columns_names' => $table_column_names, 'delete_answers' => $delete_answers_string, 'actions' => $actions_string);
+
+
+?>
 
 <div class="gf_pad_header_small">
-    <?php echo "List of users"; ?>
+    <?php echo get_string("user_list_headline", "groupformation"); ?>
 </div>
 
-
 <div class="gf_pad_content">
+    <!-- saves the user id for the action button -->
     <script id="user" data-uid=""></script>
+    <!-- push the data of all users in json format to js file -->
     <script id="data"><?php echo json_encode($this->_['users']); ?></script>
+    <!-- push the column names to js file in json format -->
+    <script id="strings"><?php echo json_encode($strings); ?></script>
+    <!-- table content get added in js file -->
     <div id="table_content">
-
     </div>
 
 
+    <!-- add nav field -->
     <nav>
+        <!-- pagination -->
         <ul class="pagination" id="pagination"></ul>
-
+        <!-- change the amount of users per page  -->
         <ul class="table_size" id="table_size"></ul>
     </nav>
 </div>
