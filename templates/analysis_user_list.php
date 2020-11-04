@@ -121,16 +121,15 @@
      */
     function excludeUser(user) {
 
-        //TODO change style of name, consent etc. to darkgray
-        //TODO add function to include user after excluding
-        //TODO change button from exclude to include after excluding user
-        //TODO change method that exclude and include works in one method
-
         // prevent of reloading the page
         event.preventDefault();
 
         // show alert window
-        if (confirm('<?php echo get_string("user_list_exclude_user_msg", "groupformation"); ?>')) {
+        if (confirm(user[0].excluded == 0
+            ? '<?php echo get_string("user_list_exclude_user_msg", "groupformation"); ?>'
+            : '<?php echo get_string("user_list_include_user_msg", "groupformation"); ?>'
+        )) {
+
             require(['core/ajax'],
                 /**
                  * ajax call to exclude user
@@ -140,18 +139,23 @@
                     let promises = ajax.call([
                         {
                             methodname: 'mod_groupformation_exclude_users',
-                            args: {users: [{userid: user[0].userid, groupformation: user[0].groupformation}]}
+                            args: {
+                                users: [{
+                                    userid: user[0].userid,
+                                    groupformation: user[0].groupformation,
+                                    excluded: user[0].excluded == 0 ? 1 : 0
+                                }]
+                            }
                         }
                     ]);
 
-                    promises[0].done(function () {
+                    promises[0].done(function (result) {
                         // if excluding user was successfully
 
                         // get dataset
                         let userData = document.getElementById("data").innerText;
                         let data = JSON.parse(userData);
 
-                        console.log(user[0])
                         // find specific user in dataset
                         let index = data.findIndex(e => e[0].userid === user[0].userid);
 
@@ -165,29 +169,27 @@
                         let elements = document.getElementsByTagName('TR');
 
                         for (let item of elements) {
-                            console.log("elements")
                             // find element from selected user
-                            if (JSON.parse(item.getAttribute("data")) === user[0].userid) {
-
+                            if (JSON.parse(item.getAttribute("data")) == user[0].userid) {
                                 // get name of element
-                                let name = JSON.parse(item.getAttribute("name"));
-
-                                // set the new value and updating the table
-                                switch (name) {
-                                    case "background":
-                                        item.style.backgroundColor = "lightgrey";
-                                        break;
-                                    default:
-                                }
+                                item.style.backgroundColor = result[0].excluded === 1 ? "lightgrey" : null;
                             }
                         }
 
-                        // // find buttons from user table and disable exclude button
-                        // let button = document.getElementById('exclude-button');
-                        // if (JSON.parse(button.getAttribute("data"))[0].userid === user.userid) {
-                        //     // disable button
-                        //     button.disabled = true;
-                        // }
+
+                        // disable button
+                        let excludeButtons = document.getElementById(`exclude-button-${user[0].userid}`);
+                        excludeButtons.disabled = true;
+
+                        // set color to grey if the user gets excluded or black if the user gets included
+                        let number = document.getElementById(`number-${user[0].userid}`);
+                        number.style.color = result[0].excluded === 1 ? "darkgrey" : null;
+
+                        let firstname = document.getElementById(`firstname-${user[0].userid}`);
+                        firstname.style.color = result[0].excluded === 1 ? "darkgrey" : null;
+
+                        let lastname = document.getElementById(`lastname-${user[0].userid}`);
+                        lastname.style.color = result[0].excluded === 1 ? "darkgrey" : null;
 
 
                     }).fail(function (ex) {
@@ -221,6 +223,8 @@ $delete_answers_string = get_string('user_list_delete_answers', 'groupformation'
 
 $exclude_user_string = get_string('user_list_exclude_user', 'groupformation');
 
+$include_user_string = get_string('user_list_include_user', 'groupformation');
+
 $actions_string = get_string('user_list_actions', 'groupformation');
 
 // wrap everything up in an object
@@ -228,7 +232,8 @@ $strings = (object) array(
         'table_columns_names' => $table_column_names,
         'delete_answers' => $delete_answers_string,
         'actions' => $actions_string,
-        'exclude_user' => $exclude_user_string);
+        'exclude_user' => $exclude_user_string,
+        'include_user' => $include_user_string);
 
 ?>
 

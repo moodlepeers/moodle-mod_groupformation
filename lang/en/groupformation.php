@@ -391,6 +391,8 @@ $string ['user_list_delete_answers'] = 'Delete answers';
 $string ['user_list_delete_answers_msg'] = 'Are you sure you want to delete the answers from this user?';
 $string ['user_list_exclude_user'] = 'Exclude user';
 $string ['user_list_exclude_user_msg'] = 'Are you sure you want to exclude this user?';
+$string ['user_list_include_user'] = 'Include user';
+$string ['user_list_include_user_msg'] = 'Are you sure you want to include this user?';
 
 $string ['emailnotifications_info'] = 'You will be notified via message when it is terminated.';
 $string ['onlyactivestudents_info'] =

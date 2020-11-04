@@ -360,6 +360,8 @@ $string['user_list_delete_answers'] = 'Antworten löschen';
 $string['user_list_delete_answers_msg'] = 'Sind Sie sicher, dass Sie die Antworten von diesem Benutzer löschen möchten?';
 $string ['user_list_exclude_user'] = 'Nutzer ausschließen';
 $string ['user_list_exclude_user_msg'] = 'Sind Sie sicher, dass Sie diesen Nutzer ausschließen wollen?';
+$string ['user_list_include_user'] = 'Nutzer einschließen';
+$string ['user_list_include_user_msg'] = 'Sind Sie sicher, dass Sie diesen Nutzer einschließen wollen?';
 
 $string['emailnotifications_info'] = '<i style="color:red;">Die automatische Benachrichtigung über abgeschlossene Gruppenformationen ist momentan leider nicht verfügbar.</i>';
 $string['onlyactivestudents_info'] = 'Zur Gruppenbildung werden ausschließlich Teilnehmende betrachtet werden, die mind. eine Frage beantwortet haben.';

@@ -85,7 +85,7 @@ function addTable(data, tableHeader, page) {
     for (let i = 0; i < data.length; i++) {
         tr = document.createElement('TR');
         tr.setAttribute("name", JSON.stringify("background"));
-        tr.setAttribute("data", JSON.stringify(data[i][0].userid !== 0 ? data[i][0].userid : data[i][0].id));
+        tr.setAttribute("data", JSON.stringify(data[i][0].userid));
         // style excluded user
         data[i][0].excluded === "1" ?
             tr.style.backgroundColor = "lightgrey" : null;
@@ -95,6 +95,7 @@ function addTable(data, tableHeader, page) {
         // add index
         let td = document.createElement('TD');
         td.appendChild(document.createTextNode(page_number * TABLE_SIZE + i + 1));
+        td.id = `number-${data[i][0].userid}`;
         // style excluded user
         data[i][0].excluded === "1" ?
             td.style.color = "darkgrey" : null;
@@ -104,6 +105,7 @@ function addTable(data, tableHeader, page) {
         // add first name
         td = document.createElement('TD');
         td.appendChild(document.createTextNode(data[i][data[i].length > 1 ? 1 : 0].firstname));
+        td.id = `firstname-${data[i][0].userid}`;
         // style excluded user
         data[i][0].excluded === "1" ?
             td.style.color = "darkgrey" : null;
@@ -112,6 +114,7 @@ function addTable(data, tableHeader, page) {
         // add last name
         td = document.createElement('TD');
         td.appendChild(document.createTextNode(data[i][data[i].length > 1 ? 1 : 0].lastname));
+        td.id = `lastname-${data[i][0].userid}`;
 
         // style excluded user
         data[i][0].excluded === "1" ?
@@ -214,10 +217,11 @@ function addTable(data, tableHeader, page) {
 
         // exclude user button
         let excludeButton = document.createElement("button");
-        excludeButton.id = "exclude-button";
+        excludeButton.id = `exclude-button-${data[i][0].userid}`;
         excludeButton.className = "dropdown-item";
         // set button string
-        excludeButton.appendChild(document.createTextNode((JSON.parse(document.getElementById("strings").innerText)).exclude_user));
+        let langString = JSON.parse(document.getElementById("strings").innerText);
+        excludeButton.appendChild(document.createTextNode(data[i][0].excluded == 0 ? langString.exclude_user : langString.include_user));
         excludeButton.style.marginLeft = "10px";
         excludeButton.setAttribute("data", JSON.stringify(data[i]))
         excludeButton.setAttribute('onclick', `excludeUser(${JSON.stringify(data[i])})`)

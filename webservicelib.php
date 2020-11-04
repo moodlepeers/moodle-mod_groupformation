@@ -76,7 +76,8 @@ class mod_groupformation_external extends external_api {
                                         array(
                                                 'userid' => new external_value(PARAM_INT, 'id of user'),
                                                 'groupformation' => new external_value(PARAM_TEXT,
-                                                        'id of groupformation')
+                                                        'id of groupformation'),
+                                                'excluded' => new external_value(PARAM_INT, 'exclude or include user')
                                         )
                                 )
                         )
@@ -89,16 +90,18 @@ class mod_groupformation_external extends external_api {
                 new external_single_structure(
                         array(
                                 'id' => new external_value(PARAM_INT, 'user id'),
-                                'groupformation' => new external_value(PARAM_INT, 'id of groupformation')
+                                'groupformation' => new external_value(PARAM_INT, 'id of groupformation'),
+                                'excluded' => new external_value(PARAM_INT, 'exclude or include user')
                         )
                 )
         );
     }
 
     /**
-     * exclude users from questionaire
+     * exclude or include user users from questionaire
      *
-     * @param array $user array of group description arrays (with keys groupname and courseid)
+     * @param $users array of the user with user id, groupformation id and exclude value 1 for excluding and 0 for including
+     * @return array
      */
     public static function exclude_users($users) {
         $params = self::validate_parameters(self::exclude_users_parameters(), array('users' => $users));
@@ -108,11 +111,12 @@ class mod_groupformation_external extends external_api {
 
             $groupformationid = $user->groupformation;
             $userid = $user->userid;
+            $excluded = $user->excluded;
 
             $usermanager = new mod_groupformation_user_manager($groupformationid);
-            $usermanager->set_excluded($userid, 1);
+            $usermanager->set_excluded($userid, $excluded);
 
-            return array("users" => array("id" => $user->userid, "groupformation" => $user->groupformation));
+            return array("users" => array("id" => $user->userid, "groupformation" => $user->groupformation, "excluded" => $user->excluded));
         }
     }
 
