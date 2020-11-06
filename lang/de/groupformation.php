@@ -501,13 +501,14 @@ $string['consent_alert_message'] = 'Sie müssen den Nutzungsbedingungen zustimme
 $string['consent_opt_in'] = 'Einwilligung (opt-in)';
 $string['consent_header_import'] = 'Durch Import ihrer Antworten sind sie damit einverstanden, die Möglichkeiten des Gruppenformationsplugins zu nutzen und füllen dafür die gestellten Fragen soweit möglich aus. Die Teilnahme oder Nicht-Teilnahme hat keinerlei Einfluß auf die Benotung (Creditpoints).';
 $string['consent_header'] = 'Ich möchte die Möglichkeiten des Gruppenformationsplugins nutzen und fülle dafür die gestellten Fragen soweit möglich aus. Die Teilnahme oder Nicht-Teilnahme hat keinerlei Einfluß auf die Benotung (Creditpoints).';
-$string['consent_message_new'] = '<ul><li>
+$string['consent_message_new_2'] = '<ul><li>
 Der Kursleiter/in oder Dozent/in sieht meine persönlichen Angaben für die Gruppenformation nicht (nur ich selbst
 erhalte Feedback zu meinen Persönlichkeitsmerkmalen, sowie zum Durchschnittsvergleich mit der Gruppe).
 </li><li>
-Meine Angaben werden im Rahmen der Studie dieser Lehrveranstaltung mittels meiner Matrikelnummer gepaart und anschließend pseudonymisiert. Es ist kein Rückschluss auf Einzelpersonen möglich.
+Meine Angaben werden im Rahmen der Studie dieser Lehrveranstaltung mittels meines Teilnehmercodes gepaart und dadurch pseudonymisiert. Es ist kein Rückschluss auf Einzelpersonen möglich.
 </li><li>
-Meine Angaben werden am Kursende - spätestens nach {$a->archivedays} Tagen gelöscht.</li></ul>';
+Meine Angaben werden am Kursende - spätestens nach {$a->archivedays} Tagen gelöscht.</li><li>
+Meine Leistungen im Kurs werden unter Verwendung meines Teilnehmercodes zu wissenschaftlichen Zwecken ausgewertet.</li></ul>';
 $string['consent_agree'] = 'Ich bin einverstanden';
 
 $string['questionnaire_delete'] = 'Zustimmung widerrufen';
