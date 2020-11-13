@@ -223,7 +223,7 @@ class mod_groupformation_test_user_generator {
 
                 try {
                     $groupingcontroller = new mod_groupformation_grouping_controller($groupformationid, $this->cm);
-                    $groupingcontroller->delete();
+                    $groupingcontroller->delete(true);
 
                     $DB->delete_records("user", array(
                             'id' => $userid

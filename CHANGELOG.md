@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased](https://github.com/moodlepeers/moodle-mod_groupformation/tree/HEAD)
+## [v1.7](https://github.com/moodlepeers/moodle-mod_groupformation/tree/HEAD)
 
 [Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/v1.6.2...HEAD)
 

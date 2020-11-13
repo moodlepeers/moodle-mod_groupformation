@@ -435,31 +435,46 @@ class mod_groupformation_criterion_calculator {
         $labels = $specs['labels'];
         $array = array();
         $category = $specs['category'];
-
         $questiontype = $this->usermanager->get_binquestionmultiselect(); // 0 := singlechoice; 1 := multiselect.
         $numberofchoices = floatval($this->store->get_number_binchoices());
-        $answers = $this->usermanager->get_single_answer($userid, $category, 1);
-        $answers = str_replace('list:', '', $answers);
-        $answerarray = str_getcsv($answers);
-        $curindexanswers = 0;
-        $binvalue = '';
         $importance = floatval($this->usermanager->get_binquestionimportance()) / 10;
-
-        if ($questiontype == 0) {
-            $answerarray[0] -= 1;
+        $answers = $this->usermanager->get_single_answer($userid, $category, 1);
+        if (strpos($answers, 'list:') >= 0) {
+            $answers = str_replace('list:', '', $answers);
+            $answerarray = str_getcsv($answers);
+        } else {
+            $answerarray = array($answers);
         }
 
-        for ($i = 0; $i < ($numberofchoices - 1); $i++) {
-            // Creates an array in a vector-form with 0 and 1 as entries like "0,1,1,0,0"
-            if ($i == $answerarray[$curindexanswers]) {
-                $binvalue .= '1';
-                $curindexanswers++;
-            } else {
-                $binvalue .= '0';
+        $binvalue = null;
+
+        if ($questiontype == 0) {
+
+            $binvalue = array_fill(0, $numberofchoices, 0);
+            $binvalue[$answers - 1] = 1;
+            $binvalue = implode(',', $binvalue);
+        } else {
+
+            $curindexanswers = 0;
+            $binvalue = '';
+            $importance = floatval($this->usermanager->get_binquestionimportance()) / 10;
+
+            if ($questiontype == 0) {
+                $answerarray[0] -= 1;
             }
-            if (($i + 1) < $numberofchoices) {
-                $binvalue .= ',';
+            for ($i = 0; $i < ($numberofchoices - 1); $i++) {
+                // Creates an array in a vector-form with 0 and 1 as entries like "0,1,1,0,0"
+                if ($i == $answerarray[$curindexanswers]) {
+                    $binvalue .= '1';
+                    $curindexanswers++;
+                } else {
+                    $binvalue .= '0';
+                }
+                if (($i + 1) < $numberofchoices) {
+                    $binvalue .= ',';
+                }
             }
+
         }
 
         // Iterate over labels of criterion.

@@ -892,12 +892,17 @@ class mod_groupformation_storage_manager {
     /**
      * Returns label set
      *
+     * @param boolean $extended
      * @return array
      * @throws dml_exception
      */
-    public function get_label_set() {
-        $array = mod_groupformation_data::get_label_set($this->get_scenario(true));
-
+    public function get_label_set($extended = false) {
+        $array = null;
+        if ($extended) {
+            $array = mod_groupformation_data::get_extended_label_set($this->get_scenario(true));
+        } else {
+            $array = mod_groupformation_data::get_label_set($this->get_scenario(true));
+        }
         if ($this->groupformationid != null) {
             $hastopic = $this->get_number('topic');
             $hasknowledge = $this->get_number('knowledge');
@@ -905,12 +910,13 @@ class mod_groupformation_storage_manager {
             $grades = $this->ask_for_grade();
             $points = $this->ask_for_points();
             $position = 0;
+
             foreach ($array as $c) {
-                if (('points' == $c && $points == false) ||
-                        ('grade' == $c && $grades == false) ||
-                        ($hastopic == 0 && 'topic' == $c) ||
-                        ($hasknowledge == 0 && ('knowledge' == $c)) ||
-                        ($hasbinquestion == 0 && ('binquestion' == $c))
+                if (($this->startswith($c, 'points') && $points == false) ||
+                        ($this->startswith($c, 'grade') && $grades == false) ||
+                        ($hastopic == 0 && $this->startswith($c, 'topic')) ||
+                        ($hasknowledge == 0 && $this->startswith($c, 'knowledge')) ||
+                        ($hasbinquestion == 0 && $this->startswith($c, 'binquestion'))
                 ) {
                     unset ($array [$position]);
                 }
@@ -923,6 +929,18 @@ class mod_groupformation_storage_manager {
         }
 
         return $array;
+    }
+
+    /**
+     * Returns whether the string starts with the query.
+     *
+     * @param string $string
+     * @param string $query
+     * @return boolean
+     * @throws dml_exception
+     */
+    private function startswith($string, $query) {
+        return substr($string, 0, strlen($query)) === $query;
     }
 
     /**
@@ -1287,12 +1305,12 @@ class mod_groupformation_storage_manager {
         $stats = $cohort->results;
 
         if (!is_null($stats)) {
-            $record->avg_variance = $stats->avgvariance;
-            $record->variance = $stats->variance;
-            $record->avg = $stats->avg;
-            $record->st_dev = $stats->stddev;
-            $record->norm_st_dev = $stats->normstddev;
-            $record->performance_index = $stats->performanceindex;
+            $record->avg_variance = !is_nan($stats->avgvariance) ? $stats->avgvariance : null;
+            $record->variance = !is_nan($stats->variance) ? $stats->variance : null;
+            $record->avg = !is_nan($stats->avg) ? $stats->avg : null;
+            $record->st_dev = !is_nan($stats->stddev) ? $stats->stddev : null;
+            $record->norm_st_dev = !is_nan($stats->normstddev) ? $stats->normstddev : null;
+            $record->performance_index = !is_nan($stats->performanceindex) ? $stats->performanceindex : null;
         }
 
         $DB->insert_record('groupformation_stats', $record);

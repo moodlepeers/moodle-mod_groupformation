@@ -179,4 +179,6 @@ if (mod_groupformation_data::is_math_prep_course_mode()) {
     $debugbuttons .= '</p>';
 
     $debugbuttons .= '</div>';
+
+
 }
