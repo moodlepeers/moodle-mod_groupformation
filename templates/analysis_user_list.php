@@ -59,6 +59,19 @@
                         spinner.className = "";
                         handleStyleOfTable(user, true)
 
+                        // get dataset
+                        let userData = document.getElementById("data").innerText;
+                        let data = JSON.parse(userData);
+
+                        // find specific user in dataset
+                        let index = data.findIndex(e => e[0].userid == user.userid);
+
+                        // change answer count to 0
+                        data[index][0].answer_count = 0;
+
+                        // set new dataset back to the data element
+                        (document.getElementById("data")).innerHTML = JSON.stringify(data);
+
                     }).fail(function (ex) {
                         console.log(ex)
                     });
@@ -130,8 +143,22 @@
                             }
                         )})`);
 
+
                         // set new style of excluded or included user
                         handleStyleOfTable(result[0])
+
+                        // get dataset
+                        let userData = document.getElementById("data").innerText;
+                        let data = JSON.parse(userData);
+
+                        // find specific user in dataset
+                        let index = data.findIndex(e => e[0].userid == user.userid);
+
+                        // change status of excluded
+                        data[index][0].excluded = user.excluded;
+
+                        // set new dataset back to the data element
+                        (document.getElementById("data")).innerHTML = JSON.stringify(data);
                     }).fail(function (ex) {
                         console.log(ex)
                     });
@@ -165,12 +192,13 @@ $include_user_string = get_string('user_list_include_user', 'groupformation');
 $actions_string = get_string('user_list_actions', 'groupformation');
 
 // wrap everything up in an object
-$strings = (object) array(
+$strings = array(
         'table_columns_names' => $table_column_names,
         'delete_answers' => $delete_answers_string,
         'actions' => $actions_string,
         'exclude_user' => $exclude_user_string,
         'include_user' => $include_user_string);
+
 
 ?>
 
@@ -178,7 +206,7 @@ $strings = (object) array(
     <?php echo get_string("user_list_headline", "groupformation"); ?>
 </div>
 
-<div class="gf_pad_content">
+<div class="gf_pad_content" id="content">
     <!-- saves the user id for the action button -->
     <script id="user" data-uid=""></script>
     <!-- push the data of all users in json format to js file -->

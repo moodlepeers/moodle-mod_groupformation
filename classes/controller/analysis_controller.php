@@ -243,7 +243,6 @@ class mod_groupformation_analysis_controller {
         global $DB;
         $userList = $this->store->get_users();
 
-
         $selectfields = implode(',', ['id', get_all_user_name_fields(true)]);
 
         $users = [];
@@ -255,9 +254,7 @@ class mod_groupformation_analysis_controller {
             // get user info like name
             $username = $DB->get_records_list('user', 'id', [$id], null, $selectfields);
 
-
             // calculate the max number count of answers:
-
             // get all categories
             $categories = $this->store->get_categories();
             // max answer count of all categories
@@ -282,23 +279,7 @@ class mod_groupformation_analysis_controller {
 
         }
 
-
-        // filter users for specific groupformation
-        //$filtered_user = array();
-        //foreach ($users as $value) {
-        //    if ($value[0]->groupformation == $this->groupformationid)  {
-        //        array_push($filtered_user, $value);
-        //    }
-        //}
-
-        //$store = new mod_groupformation_storage_manager(9);
-        //$user_values = $store->get_user_info(333);
-        // add new field in user array
-
-
         $assigns['users'] = $users;
-
-        //$assigns['users'] = $filtered_user;
 
         return $assigns;
     }

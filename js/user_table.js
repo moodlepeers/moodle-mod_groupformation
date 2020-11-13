@@ -114,7 +114,7 @@ function addTable(data, tableHeader, page) {
         // add consent given
         td = document.createElement('TD');
         td.id = `consent-${userId}`;
-        let consentIcon = data[i][0].consent === 0 ? renderXIcon() : renderCheckIcon();
+        let consentIcon = data[i][0].consent !== undefined ? data[i][0].consent === 0 ? renderXIcon() : renderCheckIcon(): renderXIcon();
         td.insertAdjacentHTML("beforeend", consentIcon);
         td.setAttribute("name", JSON.stringify("consent"));
         td.setAttribute("data", JSON.stringify(userId))
@@ -280,12 +280,6 @@ function handleStyleOfTable(user, deleteAnswers = false){
         let deleteAnswersButton = document.getElementById(`delete-answers-button-${userId}`);
         deleteAnswersButton.disabled = true;
     }
-
-    // check if user has no answers submitted yet
-    if (user.consent === undefined){
-        let completed = document.getElementById(`consent-${userId}`);
-        completed.innerHTML = renderXIcon();
-    }
 }
 
 
@@ -327,8 +321,12 @@ function createPagination(data) {
             this.className = "page-item active";
             let index = parseInt(this.dataset.index);
 
+            // scroll to top of the table
+            let tableContent = document.getElementById("content");
+            tableContent.scrollIntoView();
+
+            // change table page
             selectPage(index + 1);
-            // loadTable(index);
         });
         pagination.appendChild(page);
     }
