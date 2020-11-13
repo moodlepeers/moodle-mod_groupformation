@@ -33,8 +33,6 @@
         // prevent of reloading the page
         event.preventDefault();
 
-        console.log(user)
-
         // show alert window
         if (confirm('<?php echo get_string("user_list_delete_answers_msg", "groupformation"); ?>')) {
 
@@ -139,9 +137,7 @@
                     });
                 });
         } else {
-            console.log("else")
-            // Do nothing!
-
+            //
         }
     }
 
@@ -199,7 +195,10 @@ $strings = (object) array(
         <!-- pagination -->
         <ul class="pagination" id="pagination"></ul>
         <!-- change the amount of users per page  -->
-        <ul class="table_size" id="table_size"></ul>
+        <div>
+            <a style="font-size: x-small margin-bottom: 10px"><?php echo get_string('user_list_user_per_page', 'groupformation'); ?></a>
+            <div class="table_size" id="table_size"></div>
+        </div>
     </nav>
 </div>
 
