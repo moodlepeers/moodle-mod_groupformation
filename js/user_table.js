@@ -84,11 +84,8 @@ function addTable(data, tableHeader, page) {
     // add each item
     for (let i = 0; i < data.length; i++) {
         tr = document.createElement('TR');
-        tr.setAttribute("name", JSON.stringify("background"));
+        tr.id = `background-${data[i][0].userid}`;
         tr.setAttribute("data", JSON.stringify(data[i][0].userid));
-        // style excluded user
-        data[i][0].excluded === "1" ?
-            tr.style.backgroundColor = "lightgrey" : null;
 
         tableBody.appendChild(tr);
 
@@ -96,9 +93,6 @@ function addTable(data, tableHeader, page) {
         let td = document.createElement('TD');
         td.appendChild(document.createTextNode(page_number * TABLE_SIZE + i + 1));
         td.id = `number-${data[i][0].userid}`;
-        // style excluded user
-        data[i][0].excluded === "1" ?
-            td.style.color = "darkgrey" : null;
 
         tr.appendChild(td);
 
@@ -106,19 +100,12 @@ function addTable(data, tableHeader, page) {
         td = document.createElement('TD');
         td.appendChild(document.createTextNode(data[i][data[i].length > 1 ? 1 : 0].firstname));
         td.id = `firstname-${data[i][0].userid}`;
-        // style excluded user
-        data[i][0].excluded === "1" ?
-            td.style.color = "darkgrey" : null;
         tr.appendChild(td);
 
         // add last name
         td = document.createElement('TD');
         td.appendChild(document.createTextNode(data[i][data[i].length > 1 ? 1 : 0].lastname));
         td.id = `lastname-${data[i][0].userid}`;
-
-        // style excluded user
-        data[i][0].excluded === "1" ?
-            td.style.color = "darkgrey" : null;
         tr.appendChild(td);
 
         // add consent given
@@ -127,10 +114,6 @@ function addTable(data, tableHeader, page) {
         td.insertAdjacentHTML("beforeend", consentIcon);
         td.setAttribute("name", JSON.stringify("consent"));
         td.setAttribute("data", JSON.stringify(data[i][0].userid !== 0 ? data[i][0].userid : data[i][0].id))
-
-        // style excluded user
-        data[i][0].excluded === "1" ?
-            td.style.color = "darkgrey" : null;
         tr.appendChild(td);
 
         // progress bar
@@ -147,11 +130,15 @@ function addTable(data, tableHeader, page) {
         progress.style.border = '1px solid black';
 
         let value = document.createElement("span");
+        value.id = `questionaire-value-${data[i][0].userid}`;
         value.className = "progress-value";
         value.innerText = pcg + "%";
+        value.style.fontSize = "x-small";
 
         let progressBar = document.createElement("div");
-        progressBar.setAttribute("name", JSON.stringify("questionaire"));
+        // progressBar.setAttribute("name", JSON.stringify("questionaire"));
+        progressBar.id = `questionaire-${data[i][0].userid}`;
+
         progressBar.className = "progress-bar";
         progressBar.setAttribute('style', 'width:' + Number(pcg) + '%');
         progressBar.setAttribute("role", "progressbar");
@@ -159,22 +146,14 @@ function addTable(data, tableHeader, page) {
         progressBar.setAttribute("aria-valuemin", 0);
         progressBar.setAttribute("aria-valuemax", maxAnswerCount);
 
-        // style excluded user
-        data[i][0].excluded === "1" ?
-            td.style.color = "darkgrey" : null;
-
         td.appendChild(progress);
         progress.appendChild(progressBar)
-
-        // don't show percentage if its 100 %
-        if (pcg < 100) {
-            progress.appendChild(value);
-        }
+        td.appendChild(value);
         tr.appendChild(td);
 
         // add answers submitted
         td = document.createElement('TD');
-        td.setAttribute("name", JSON.stringify("completed"))
+        td.id = `completed-${data[i][0].userid}`;
         let answeredIcon = data[i][0].completed === "0" ? renderXIcon() : renderCheckIcon();
         td.setAttribute("data", JSON.stringify(data[i][0].userid !== 0 ? data[i][0].userid : data[i][0].id))
         td.insertAdjacentHTML("beforeend", answeredIcon);
@@ -188,6 +167,15 @@ function addTable(data, tableHeader, page) {
         dropdown.className = "dropdown";
 
         let button = document.createElement("button");
+
+        // loading spinner
+        let spinner = document.createElement("div");
+        spinner.id = `spinner-${data[i][0].userid}`;
+        spinner.setAttribute("role", "status");
+        spinner.style.marginRight = "10px";
+
+        button.appendChild(spinner)
+
         // set name of action button
         button.appendChild(document.createTextNode((JSON.parse(document.getElementById("strings").innerText)).actions));
         button.className = "btn btn-secondary dropdown-toggle";
@@ -203,39 +191,76 @@ function addTable(data, tableHeader, page) {
         // delete answers button
         let deleteButton = document.createElement("button");
         deleteButton.className = "dropdown-item";
+        deleteButton.id = `delete-answers-button-${data[i][0].userid}`;
         // set button string
         deleteButton.appendChild(document.createTextNode((JSON.parse(document.getElementById("strings").innerText)).delete_answers));
         deleteButton.style.marginLeft = "10px";
-        // deleteButton.className = "btn btn-primary table-button";
-        deleteButton.setAttribute("data", JSON.stringify(data[i]))
-        deleteButton.setAttribute('onclick', `deleteAnswers(${JSON.stringify(data[i])})`)
-        deleteButton.disabled = data[i][0].answer_count === "0";
+        deleteButton.setAttribute('onclick', `deleteAnswers(${JSON.stringify(data[i][0])})`);
 
         dropdownMenu.appendChild(deleteButton);
-
-
 
         // exclude user button
         let excludeButton = document.createElement("button");
         excludeButton.id = `exclude-button-${data[i][0].userid}`;
         excludeButton.className = "dropdown-item";
-        // set button string
-        let langString = JSON.parse(document.getElementById("strings").innerText);
-        excludeButton.appendChild(document.createTextNode(data[i][0].excluded == 0 ? langString.exclude_user : langString.include_user));
         excludeButton.style.marginLeft = "10px";
-        excludeButton.setAttribute("data", JSON.stringify(data[i]))
-        excludeButton.setAttribute('onclick', `excludeUser(${JSON.stringify(data[i])})`)
-
+        excludeButton.setAttribute('onclick', `excludeUser(${JSON.stringify({userid: data[i][0].userid, groupformation: data[i][0].groupformation, excluded: data[i][0].excluded})})`);
 
         dropdownMenu.appendChild(excludeButton)
 
         button.appendChild(dropdownMenu);
 
-
         td.appendChild(button);
         tr.appendChild(td);
     }
     tableContent.appendChild(table);
+
+    data.forEach((user) => {
+        handleStyleOfTable(user[0])
+    })
+}
+
+
+/**
+ *
+ * @param user
+ */
+function handleStyleOfTable(user, deleteAnswers = false){
+    // set color to grey if the user gets excluded or black if the user gets included
+    let number = document.getElementById(`number-${user.userid}`);
+    number.style.color = user.excluded == 1 ? "darkgrey" : null;
+
+    let firstname = document.getElementById(`firstname-${user.userid}`);
+    firstname.style.color = user.excluded == 1 ? "darkgrey" : null;
+
+    let lastname = document.getElementById(`lastname-${user.userid}`);
+    lastname.style.color = user.excluded == 1 ? "darkgrey" : null;
+
+    let excludeButton = document.getElementById(`exclude-button-${user.userid}`);
+    let langString = JSON.parse(document.getElementById("strings").innerText);
+    excludeButton.innerText= user.excluded == 0 ? langString.exclude_user : langString.include_user;
+
+    // background color
+    let background = document.getElementById(`background-${user.userid}`);
+    background.style.backgroundColor = user.excluded == 1 ? "lightgrey" : null;
+
+
+    console.log(user.answer_count);
+    if(user.answer_count == 0 || deleteAnswers){
+        console.log("delete answers")
+        let progressBar = document.getElementById(`questionaire-${user.userid}`);
+        progressBar.style.width = "0%";
+        // progressBar.innerHTML = "0";
+
+        let value = document.getElementById(`questionaire-value-${user.userid}`);
+        value.innerText = "0%";
+
+        let completed = document.getElementById(`completed-${user.userid}`);
+        completed.innerHTML = renderXIcon();
+
+        let deleteAnswersButton = document.getElementById(`delete-answers-button-${user.userid}`);
+        deleteAnswersButton.disabled = true;
+    }
 }
 
 

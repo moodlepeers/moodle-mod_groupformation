@@ -40,7 +40,8 @@ class mod_groupformation_external extends external_api {
     /**
      * delete answers, set the new answer count and change complete to false
      *
-     * @param array $user array of group description arrays (with keys groupname and courseid)
+     * @param array user array of group description arrays (with keys groupname and courseid)
+     * @return array
      */
     public static function delete_answers($users) {
         $params = self::validate_parameters(self::delete_answers_parameters(), array('users' => $users));
@@ -76,8 +77,7 @@ class mod_groupformation_external extends external_api {
                                         array(
                                                 'userid' => new external_value(PARAM_INT, 'id of user'),
                                                 'groupformation' => new external_value(PARAM_TEXT,
-                                                        'id of groupformation'),
-                                                'excluded' => new external_value(PARAM_INT, 'exclude or include user')
+                                                        'id of groupformation')
                                         )
                                 )
                         )
@@ -89,7 +89,7 @@ class mod_groupformation_external extends external_api {
         return new external_multiple_structure(
                 new external_single_structure(
                         array(
-                                'id' => new external_value(PARAM_INT, 'user id'),
+                                'userid' => new external_value(PARAM_INT, 'user id'),
                                 'groupformation' => new external_value(PARAM_INT, 'id of groupformation'),
                                 'excluded' => new external_value(PARAM_INT, 'exclude or include user')
                         )
@@ -111,12 +111,21 @@ class mod_groupformation_external extends external_api {
 
             $groupformationid = $user->groupformation;
             $userid = $user->userid;
-            $excluded = $user->excluded;
+
+            $store = new mod_groupformation_storage_manager($groupformationid);
+            $user_values = $store->get_user_info($userid);
+
+            $excluded = 0;
+            foreach( $user_values as &$row) {
+                if ($row->excluded == 0){
+                    $excluded = 1;
+                }
+            }
 
             $usermanager = new mod_groupformation_user_manager($groupformationid);
             $usermanager->set_excluded($userid, $excluded);
 
-            return array("users" => array("id" => $user->userid, "groupformation" => $user->groupformation, "excluded" => $user->excluded));
+            return array("users" => array("userid" => $user->userid, "groupformation" => $user->groupformation, "excluded" => $excluded));
         }
     }
 

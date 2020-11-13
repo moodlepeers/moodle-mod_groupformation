@@ -291,6 +291,10 @@ class mod_groupformation_analysis_controller {
         //    }
         //}
 
+        //$store = new mod_groupformation_storage_manager(9);
+        //$user_values = $store->get_user_info(333);
+        // add new field in user array
+
 
         $assigns['users'] = $users;
 

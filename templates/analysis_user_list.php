@@ -33,8 +33,15 @@
         // prevent of reloading the page
         event.preventDefault();
 
+        console.log(user)
+
         // show alert window
         if (confirm('<?php echo get_string("user_list_delete_answers_msg", "groupformation"); ?>')) {
+
+            // set spinner
+            let spinner = document.getElementById(`spinner-${user.userid}`);
+            spinner.className = "spinner-border spinner-border-sm";
+
             require(['core/ajax'],
                 /**
                  * test
@@ -44,60 +51,15 @@
                     let promises = ajax.call([
                         {
                             methodname: 'mod_groupformation_delete_answers',
-                            args: {users: [{userid: user[0].userid, groupformation: user[0].groupformation}]}
+                            args: {users: [{userid: user.userid, groupformation: user.groupformation}]}
                         }
                     ]);
 
                     promises[0].done(function (response) {
                         // if deleting answers were successfully
 
-                        // get dataset
-                        let userData = document.getElementById("data").innerText;
-                        let data = JSON.parse(userData);
-
-                        // find specific user in dataset
-                        let index = data.findIndex(e => e[0].userid === user[0].userid);
-
-
-                        // delete answers array from dataset
-                        data[index].splice(0, 1);
-
-                        // set new dataset back to the data element
-                        (document.getElementById("data")).innerHTML = JSON.stringify(data);
-
-
-                        // get all table elements
-                        let elements = document.getElementsByTagName('TD');
-
-                        for (let item of elements) {
-                            // find element from selected user
-                            if (JSON.parse(item.getAttribute("data")) === user[0].userid) {
-
-                                // get name of element
-                                let name = JSON.parse(item.getAttribute("name"));
-
-                                // set the new value and updating the table
-                                switch (name) {
-                                    case "questionaire":
-                                        item.style.width = "0%";
-                                        item.innerHTML = 0;
-                                        break;
-                                    case "completed":
-                                        item.innerHTML = renderXIcon();
-                                        break;
-                                    default:
-                                }
-                            }
-                        }
-
-                        // find buttons from user table
-                        let buttons = document.getElementsByClassName('table-button');
-                        for (let item of buttons) {
-                            if ((JSON.parse(item.getAttribute("data")))[0].userid === user[0].userid) {
-                                // disable button
-                                item.disabled = true;
-                            }
-                        }
+                        spinner.className = "";
+                        handleStyleOfTable(user, true)
 
                     }).fail(function (ex) {
                         console.log(ex)
@@ -120,15 +82,18 @@
      * @param user - user element
      */
     function excludeUser(user) {
-
         // prevent of reloading the page
         event.preventDefault();
 
         // show alert window
-        if (confirm(user[0].excluded == 0
+        if (confirm(user.excluded == 0
             ? '<?php echo get_string("user_list_exclude_user_msg", "groupformation"); ?>'
             : '<?php echo get_string("user_list_include_user_msg", "groupformation"); ?>'
         )) {
+
+            // set spinner
+            let spinner = document.getElementById(`spinner-${user.userid}`);
+            spinner.className = "spinner-border spinner-border-sm";
 
             require(['core/ajax'],
                 /**
@@ -141,73 +106,49 @@
                             methodname: 'mod_groupformation_exclude_users',
                             args: {
                                 users: [{
-                                    userid: user[0].userid,
-                                    groupformation: user[0].groupformation,
-                                    excluded: user[0].excluded == 0 ? 1 : 0
+                                    userid: user.userid,
+                                    groupformation: user.groupformation,
                                 }]
                             }
                         }
                     ]);
 
                     promises[0].done(function (result) {
-                        // if excluding user was successfully
 
-                        // get dataset
-                        let userData = document.getElementById("data").innerText;
-                        let data = JSON.parse(userData);
+                        // disable spinner
+                        spinner.className = "";
 
-                        // find specific user in dataset
-                        let index = data.findIndex(e => e[0].userid === user[0].userid);
-
-                        // delete answers array from dataset
-                        data[index].splice(0, 1);
-
-                        // set new dataset back to the data element
-                        (document.getElementById("data")).innerHTML = JSON.stringify(data);
-
-                        // get all table elements
-                        let elements = document.getElementsByTagName('TR');
-
-                        for (let item of elements) {
-                            // find element from selected user
-                            if (JSON.parse(item.getAttribute("data")) == user[0].userid) {
-                                // get name of element
-                                item.style.backgroundColor = result[0].excluded === 1 ? "lightgrey" : null;
+                        // user object from return of webservice
+                        let user = result[0];
+                        // get excluded button
+                        let excludeButton = document.getElementById(`exclude-button-${user.userid}`);
+                        // set the new data to button
+                        excludeButton.setAttribute('onclick', `excludeUser(
+                        ${JSON.stringify(
+                            {
+                                userid: user.userid,
+                                groupformation: user.groupformation,
+                                excluded: user.excluded
                             }
-                        }
+                        )})`);
 
-
-                        // disable button
-                        let excludeButtons = document.getElementById(`exclude-button-${user[0].userid}`);
-                        excludeButtons.disabled = true;
-
-                        // set color to grey if the user gets excluded or black if the user gets included
-                        let number = document.getElementById(`number-${user[0].userid}`);
-                        number.style.color = result[0].excluded === 1 ? "darkgrey" : null;
-
-                        let firstname = document.getElementById(`firstname-${user[0].userid}`);
-                        firstname.style.color = result[0].excluded === 1 ? "darkgrey" : null;
-
-                        let lastname = document.getElementById(`lastname-${user[0].userid}`);
-                        lastname.style.color = result[0].excluded === 1 ? "darkgrey" : null;
-
-
+                        // set new style of excluded or included user
+                        handleStyleOfTable(result[0])
                     }).fail(function (ex) {
                         console.log(ex)
                     });
                 });
         } else {
+            console.log("else")
             // Do nothing!
 
         }
-
     }
 
 </script>
 
 <!-- create object with all strings to use in js file-->
 <?php
-
 // table column names
 $table_column_names = array(
         "#",
@@ -261,3 +202,4 @@ $strings = (object) array(
         <ul class="table_size" id="table_size"></ul>
     </nav>
 </div>
+
