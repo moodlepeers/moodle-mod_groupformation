@@ -364,6 +364,7 @@ $string ['user_list_exclude_user_msg'] = 'Sind Sie sicher, dass Sie diesen Nutze
 $string ['user_list_include_user'] = 'Nutzer einschließen';
 $string ['user_list_include_user_msg'] = 'Sind Sie sicher, dass Sie diesen Nutzer einschließen wollen?';
 $string ['user_list_user_per_page'] = 'Teilnehmer pro Seite';
+$string ['user_list_email_copied_message'] = "Die Email Adresse wurde in die Zwischenablage kopiert";
 
 
 $string['emailnotifications_info'] = '<i style="color:red;">Die automatische Benachrichtigung über abgeschlossene Gruppenformationen ist momentan leider nicht verfügbar.</i>';
@@ -566,6 +567,10 @@ $string['settings_import_export_description'] = 'Wenn aktiviert, können Teilneh
 
 $string['settings_participant_code'] = 'Teilnehmercode';
 $string['settings_participant_code_description'] = 'Teilnehmende müssen einen Teilnehmercode eingeben (so wie in psychologischen Tests).';
+
+$string['settings_participant_email'] = 'Email Adressen anzeigen';
+$string['settings_participant_email_description'] = 'Wenn aktiviert, können die Email Adressen der Teilnehmer eingesehen werden';
+
 
 $string['answers_for_eval_text'] = 'Wenn alle Fragen beantwortet sind, wird im Reiter \'Auswertung\' eine Auswertung angezeigt. Bei unvollständiger Bearbeitung des Fragebogens steht diese Funktion nicht zur Verfügung.';
 

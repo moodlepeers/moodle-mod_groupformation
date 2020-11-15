@@ -395,6 +395,7 @@ $string ['user_list_exclude_user_msg'] = 'Are you sure you want to exclude this 
 $string ['user_list_include_user'] = 'Include user';
 $string ['user_list_include_user_msg'] = 'Are you sure you want to include this user?';
 $string ['user_list_user_per_page'] = 'Users per page';
+$string ['user_list_email_copied_message'] = "The email address was copied to the clipboard";
 
 $string ['emailnotifications_info'] = 'You will be notified via message when it is terminated.';
 $string ['onlyactivestudents_info'] =
@@ -646,6 +647,9 @@ $string ['settings_import_export_description'] =
 
 $string ['settings_participant_code'] = 'Participant code';
 $string ['settings_participant_code_description'] = 'Students need to enter a participant code (as used in psychological tests).';
+
+$string['settings_participant_email'] = 'Show email addresses';
+$string['settings_participant_email_description'] = 'If activated, the email addresses of the participants can be viewed';
 
 $string ['answers_for_eval_text'] =
         'If all questions are answered, you can receive feedback in the evaluation tab. If your answers are incomplete the evaluation is not possible due to missing answers.';

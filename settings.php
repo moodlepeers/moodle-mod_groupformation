@@ -26,20 +26,25 @@
 defined('MOODLE_INTERNAL') || die();
 
 $settings->add(new admin_setting_heading('sampleheader',
-                                         get_string('settings_header', 'groupformation'),
-                                         get_string('settings_description', 'groupformation')));
+        get_string('settings_header', 'groupformation'),
+        get_string('settings_description', 'groupformation')));
 
 $settings->add(new admin_setting_configtext('groupformation/archiving_time',
-    get_string('settings_archiving_time', 'groupformation'),
-    get_string('settings_archiving_time_description', 'groupformation'),
-    '365'));
+        get_string('settings_archiving_time', 'groupformation'),
+        get_string('settings_archiving_time_description', 'groupformation'),
+        '365'));
 
 $settings->add(new admin_setting_configcheckbox('groupformation/import_export',
-    get_string('settings_import_export', 'groupformation'),
-    get_string('settings_import_export_description', 'groupformation'),
-    1));
+        get_string('settings_import_export', 'groupformation'),
+        get_string('settings_import_export_description', 'groupformation'),
+        1));
 
 $settings->add(new admin_setting_configcheckbox('groupformation/participant_code',
-    get_string('settings_participant_code', 'groupformation'),
-    get_string('settings_participant_code_description', 'groupformation'),
-    0));
+        get_string('settings_participant_code', 'groupformation'),
+        get_string('settings_participant_code_description', 'groupformation'),
+        0));
+
+$settings->add(new admin_setting_configcheckbox('groupformation/participant_email',
+        get_string('settings_participant_email', 'groupformation'),
+        get_string('settings_participant_email_description', 'groupformation'),
+        0));

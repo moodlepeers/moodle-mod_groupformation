@@ -51,7 +51,7 @@ class mod_groupformation_analysis_controller {
     /** @var mod_groupformation_user_manager The manager of user data */
     private $usermanager = null;
 
-    /** @var int ID of course module*/
+    /** @var int ID of course module */
     public $cmid = null;
 
     /** @var mod_groupformation_state_machine Activity state machine */
@@ -247,12 +247,18 @@ class mod_groupformation_analysis_controller {
 
         $users = [];
 
-        foreach($userList AS $id) {
+        foreach ($userList AS $id) {
             // get user groupformation infos
             $user = $this->store->get_user_info($id);
 
             // get user info like name
-            $username = $DB->get_records_list('user', 'id', [$id], null, $selectfields);
+            $user_info = $DB->get_records_list('user', 'id', [$id], null, $selectfields);
+
+            // check if reading email of participant is enabled
+            if (mod_groupformation_data::participant_email_enabled()) {
+                $email = $this->store->get_email_of_user($id);
+                $user_info[$id]->email = $email;
+            }
 
             // calculate the max number count of answers:
             // get all categories
@@ -262,17 +268,17 @@ class mod_groupformation_analysis_controller {
 
             // calc all together
             $total = 0;
-            foreach ($answer_count AS $number){
+            foreach ($answer_count AS $number) {
                 $total += $number;
             }
 
             // add new field in user array
-            foreach( $user as &$row) {
+            foreach ($user as &$row) {
                 $row->max_answer_count = $total;
             }
 
             // merge arrays
-            $userData = array_merge($user, $username);
+            $userData = array_merge($user, $user_info);
 
             // push to users array
             array_push($users, $userData);

@@ -1536,4 +1536,14 @@ class mod_groupformation_storage_manager {
                 'id' => $this->groupformationid));
 
     }
+
+    /**
+     * Returns the email address of specific user
+     * @param $userid
+     * @return mixed
+     */
+    public function get_email_of_user($userid){
+        global $DB;
+        return $DB->get_field('user', 'email' , array('id' => $userid));
+    }
 }

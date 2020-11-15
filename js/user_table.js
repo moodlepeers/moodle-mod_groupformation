@@ -15,6 +15,7 @@ require(['jquery'], function ($) {
 
         let userData = $("#data").text();
         let data = JSON.parse(userData);
+
         jquery = $;
         selectPage(1, $);
         createPagination(data)
@@ -66,6 +67,14 @@ function addTable(data, tableHeader, page) {
 
     let tr = document.createElement('TR');
     tableHead.appendChild(tr);
+
+    // check if viewing email addresses of participants is enabled in settings
+    // if not delete the last item from header ("email")
+    let isEmailEnabled = data[0][data[0].length > 1 ? 1 : 0].email !== undefined;
+    if (!isEmailEnabled) {
+        tableHeader.pop();
+    }
+
     for (let k = 0; k < tableHeader.length; k++) {
         let th = document.createElement('TH');
         th.scope = "col";
@@ -96,7 +105,6 @@ function addTable(data, tableHeader, page) {
         let td = document.createElement('TD');
         td.appendChild(document.createTextNode(page_number * TABLE_SIZE + i + 1));
         td.id = `number-${userId}`;
-
         tr.appendChild(td);
 
         // add first name
@@ -114,7 +122,7 @@ function addTable(data, tableHeader, page) {
         // add consent given
         td = document.createElement('TD');
         td.id = `consent-${userId}`;
-        let consentIcon = data[i][0].consent !== undefined ? data[i][0].consent === 0 ? renderXIcon() : renderCheckIcon(): renderXIcon();
+        let consentIcon = data[i][0].consent !== undefined ? data[i][0].consent === 0 ? renderXIcon() : renderCheckIcon() : renderXIcon();
         td.insertAdjacentHTML("beforeend", consentIcon);
         td.setAttribute("name", JSON.stringify("consent"));
         td.setAttribute("data", JSON.stringify(userId))
@@ -215,6 +223,22 @@ function addTable(data, tableHeader, page) {
 
         td.appendChild(button);
         tr.appendChild(td);
+
+        console.log(isEmailEnabled)
+        // only add email column if email is enabled in plugin settings
+        if (isEmailEnabled) {
+            // email symbol
+            td = document.createElement('TD');
+            td.insertAdjacentHTML("beforeend", renderEmailIcon());
+            td.onclick = async () => {
+                // copy email address to clipboard
+                await navigator.clipboard.writeText(data[i][data[i].length > 1 ? 1 : 0].email).then(() => {
+                    alert(JSON.parse(document.getElementById("strings").innerText).email_message)
+                });
+            };
+            tr.appendChild(td);
+        }
+
     }
     tableContent.appendChild(table);
 
@@ -229,7 +253,7 @@ function addTable(data, tableHeader, page) {
  * @param user
  * @param deleteAnswers
  */
-function handleStyleOfTable(user, deleteAnswers = false){
+function handleStyleOfTable(user, deleteAnswers = false) {
 
     // check if user has no answers submitted yet
     let userId = user.userid !== undefined ? user.userid : user.id;
@@ -246,10 +270,10 @@ function handleStyleOfTable(user, deleteAnswers = false){
 
     let excludeButton = document.getElementById(`exclude-button-${userId}`);
     let langString = JSON.parse(document.getElementById("strings").innerText);
-    excludeButton.innerText= user.excluded == 0 ? langString.exclude_user : langString.include_user;
+    excludeButton.innerText = user.excluded == 0 ? langString.exclude_user : langString.include_user;
 
     // check if user has no answers submitted yet
-    if(user.excluded === undefined){
+    if (user.excluded === undefined) {
         excludeButton.disabled = true;
     }
 
@@ -257,7 +281,7 @@ function handleStyleOfTable(user, deleteAnswers = false){
     let background = document.getElementById(`background-${userId}`);
     background.style.backgroundColor = user.excluded == 1 ? "lightgrey" : null;
 
-    if(user.answer_count == 0 || deleteAnswers){
+    if (user.answer_count == 0 || deleteAnswers) {
         let progressBar = document.getElementById(`questionaire-${userId}`);
         progressBar.style.width = "0%";
         // progressBar.innerHTML = "0";
@@ -273,7 +297,7 @@ function handleStyleOfTable(user, deleteAnswers = false){
     }
 
     // check if user has no answers submitted yet
-    if (user.answer_count === undefined){
+    if (user.answer_count === undefined) {
         let completed = document.getElementById(`completed-${userId}`);
         completed.innerHTML = renderXIcon();
 
@@ -426,3 +450,9 @@ const renderXIcon = () => {
         "</svg>"
 }
 
+
+const renderEmailIcon = () => {
+    return "<svg width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" class=\"bi bi-envelope-fill\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+        "  <path fill-rule=\"evenodd\" d=\"M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z\"/>\n" +
+        "</svg>"
+}

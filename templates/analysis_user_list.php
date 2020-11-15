@@ -172,6 +172,7 @@
 
 <!-- create object with all strings to use in js file-->
 <?php
+
 // table column names
 $table_column_names = array(
         "#",
@@ -180,7 +181,8 @@ $table_column_names = array(
         get_string('user_list_consent', 'groupformation'),
         get_string('user_list_progress', 'groupformation'),
         get_string('user_list_submitted', 'groupformation'),
-        get_string('user_list_actions', 'groupformation'));
+        get_string('user_list_actions', 'groupformation'),
+        "E-Mail");
 
 // delete button string
 $delete_answers_string = get_string('user_list_delete_answers', 'groupformation');
@@ -191,13 +193,17 @@ $include_user_string = get_string('user_list_include_user', 'groupformation');
 
 $actions_string = get_string('user_list_actions', 'groupformation');
 
+$email_address_message = get_string('user_list_email_copied_message', 'groupformation');
+
 // wrap everything up in an object
 $strings = array(
         'table_columns_names' => $table_column_names,
         'delete_answers' => $delete_answers_string,
         'actions' => $actions_string,
         'exclude_user' => $exclude_user_string,
-        'include_user' => $include_user_string);
+        'include_user' => $include_user_string,
+        'email_message' => $email_address_message);
+
 
 
 ?>

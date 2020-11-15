@@ -300,7 +300,7 @@ class mod_groupformation_data {
             $scenarios = $criterion["scenarios"];
             if (in_array($scenario, $scenarios)) {
                 foreach ($keys as $key) {
-                    $labels[] = $label.'_'.$key;
+                    $labels[] = $label . '_' . $key;
                 }
             }
         }
@@ -351,5 +351,20 @@ class mod_groupformation_data {
             return $configvalue;
         }
         return true;
+    }
+
+    /**
+     * Returns whether reading participant email is enabled or not
+     *
+     * @return bool
+     * @throws dml_exception
+     */
+    public static function participant_email_enabled() {
+        $configvalue = get_config('groupformation', 'participant_email');
+        if ($configvalue == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
