@@ -1383,9 +1383,9 @@ class mod_groupformation_storage_manager {
         };
 
         foreach (array_values($enrolledstudents) as $userid) {
-            if ($sum <= $numberofanswers($userid) && !$this->is_filtered($userid)) {
+            if ($sum <= $numberofanswers($userid) && !$this->is_filtered($userid) & !$this->is_excluded($userid)) {
                 $allanswers [] = $userid;
-            } else if ($groupingsetting && $numberofanswers($userid) > 0) {
+            } else if ($groupingsetting && $numberofanswers($userid) > 0 & !$this->is_excluded($userid)) {
                 $someanswers [] = $userid;
             } else {
                 $noorsomeanswers [] = $userid;
@@ -1429,6 +1429,13 @@ class mod_groupformation_storage_manager {
         global $DB;
 
         return boolval($DB->get_field('groupformation_users', 'filtered',
+                array('groupformation' => $this->groupformationid, 'userid' => $userid)));
+    }
+
+    public function is_excluded($userid) {
+        global $DB;
+
+        return boolval($DB->get_field('groupformation_users', 'excluded',
                 array('groupformation' => $this->groupformationid, 'userid' => $userid)));
     }
 
