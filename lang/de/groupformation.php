@@ -350,7 +350,7 @@ $string['students_committed_single'] = 'Teilnehmende davon haben ihre Antworten 
 $string['students_committed_multiple'] = 'Teilnehmende davon hat seine Antworten schon endgültig abgegeben.';
 $string['committed_not_completed'] = 'von den fest abgegebenen Fragebögen sind nicht vollständig.';
 $string['completed_questionnaire'] = 'vollständig beantwortete Fragebögen.';
-$string['user_list_headline'] = 'Benutzerliste';
+$string['user_list_headline'] = 'Teilnehmer/innen Liste';
 $string['user_list_firstname'] = 'Vorname';
 $string['user_list_lastname'] = 'Nachname';
 $string['user_list_consent'] = 'Einverständnis';
@@ -358,12 +358,12 @@ $string['user_list_progress'] = 'Fortschritt';
 $string['user_list_submitted'] = 'Eingereicht';
 $string['user_list_actions'] = 'Aktionen';
 $string['user_list_delete_answers'] = 'Antworten löschen';
-$string['user_list_delete_answers_msg'] = 'Sind Sie sicher, dass Sie die Antworten von diesem Benutzer löschen möchten?';
-$string ['user_list_exclude_user'] = 'Nutzer ausschließen';
-$string ['user_list_exclude_user_msg'] = 'Sind Sie sicher, dass Sie diesen Nutzer ausschließen wollen?';
-$string ['user_list_include_user'] = 'Nutzer einschließen';
-$string ['user_list_include_user_msg'] = 'Sind Sie sicher, dass Sie diesen Nutzer einschließen wollen?';
-$string ['user_list_user_per_page'] = 'Teilnehmer pro Seite';
+$string['user_list_delete_answers_msg'] = 'Sind Sie sicher, dass Sie die Antworten des Teilnehmers/in löschen möchten?';
+$string ['user_list_exclude_user'] = 'Teilnehmer/in ausschließen';
+$string ['user_list_exclude_user_msg'] = 'Sind Sie sicher, dass Sie diesen Teilnehmer/in ausschließen wollen?';
+$string ['user_list_include_user'] = 'Teilnehmer/in einschließen';
+$string ['user_list_include_user_msg'] = 'Sind Sie sicher, dass Sie diesen Teilnehmer/in einschließen wollen?';
+$string ['user_list_user_per_page'] = 'Teilnehmer/innen pro Seite';
 $string ['user_list_email_copied_message'] = "Die Email Adresse wurde in die Zwischenablage kopiert";
 
 

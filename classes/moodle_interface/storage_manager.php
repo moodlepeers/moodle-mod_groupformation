@@ -1432,6 +1432,11 @@ class mod_groupformation_storage_manager {
                 array('groupformation' => $this->groupformationid, 'userid' => $userid)));
     }
 
+    /**
+     * returns whether a student is excluded
+     * @param $userid
+     * @return bool
+     */
     public function is_excluded($userid) {
         global $DB;
 
@@ -1515,6 +1520,11 @@ class mod_groupformation_storage_manager {
         return $instances;
     }
 
+    /**
+     * returns DB entry of user
+     * @param $userid
+     * @return mixed
+     */
     public function get_user_info($userid){
         global $DB;
         $records = $DB->get_records('groupformation_users', array('userid' => $userid));

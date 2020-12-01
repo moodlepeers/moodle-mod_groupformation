@@ -178,11 +178,11 @@ $table_column_names = array(
         "#",
         get_string('user_list_firstname', 'groupformation'),
         get_string('user_list_lastname', 'groupformation'),
+        "E-Mail",
         get_string('user_list_consent', 'groupformation'),
         get_string('user_list_progress', 'groupformation'),
         get_string('user_list_submitted', 'groupformation'),
-        get_string('user_list_actions', 'groupformation'),
-        "E-Mail");
+        get_string('user_list_actions', 'groupformation'));
 
 // delete button string
 $delete_answers_string = get_string('user_list_delete_answers', 'groupformation');

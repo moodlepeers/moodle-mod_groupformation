@@ -119,6 +119,20 @@ function addTable(data, tableHeader, page) {
         td.id = `lastname-${userId}`;
         tr.appendChild(td);
 
+        // only add email column if email is enabled in plugin settings
+        if (isEmailEnabled) {
+            // email symbol
+            td = document.createElement('TD');
+            td.insertAdjacentHTML("beforeend", renderEmailIcon());
+            td.onclick = async () => {
+                // copy email address to clipboard
+                await navigator.clipboard.writeText(data[i][data[i].length > 1 ? 1 : 0].email).then(() => {
+                    alert(JSON.parse(document.getElementById("strings").innerText).email_message)
+                });
+            };
+            tr.appendChild(td);
+        }
+
         // add consent given
         td = document.createElement('TD');
         td.id = `consent-${userId}`;
@@ -205,7 +219,7 @@ function addTable(data, tableHeader, page) {
         deleteButton.id = `delete-answers-button-${userId}`;
         // set button string
         deleteButton.appendChild(document.createTextNode((JSON.parse(document.getElementById("strings").innerText)).delete_answers));
-        deleteButton.style.marginLeft = "10px";
+        // deleteButton.style.marginLeft = "10px";
         deleteButton.setAttribute('onclick', `deleteAnswers(${JSON.stringify(data[i][0])})`);
 
         dropdownMenu.appendChild(deleteButton);
@@ -214,7 +228,7 @@ function addTable(data, tableHeader, page) {
         let excludeButton = document.createElement("button");
         excludeButton.id = `exclude-button-${userId}`;
         excludeButton.className = "dropdown-item";
-        excludeButton.style.marginLeft = "10px";
+        // excludeButton.style.marginLeft = "10px";
         excludeButton.setAttribute('onclick', `excludeUser(${JSON.stringify({userid: userId, groupformation: data[i][0].groupformation, excluded: data[i][0].excluded})})`);
 
         dropdownMenu.appendChild(excludeButton)
@@ -224,20 +238,6 @@ function addTable(data, tableHeader, page) {
         td.appendChild(button);
         tr.appendChild(td);
 
-        console.log(isEmailEnabled)
-        // only add email column if email is enabled in plugin settings
-        if (isEmailEnabled) {
-            // email symbol
-            td = document.createElement('TD');
-            td.insertAdjacentHTML("beforeend", renderEmailIcon());
-            td.onclick = async () => {
-                // copy email address to clipboard
-                await navigator.clipboard.writeText(data[i][data[i].length > 1 ? 1 : 0].email).then(() => {
-                    alert(JSON.parse(document.getElementById("strings").innerText).email_message)
-                });
-            };
-            tr.appendChild(td);
-        }
 
     }
     tableContent.appendChild(table);
@@ -392,6 +392,7 @@ function createTableSize($) {
 
     let dropdownMenu = document.createElement("div");
     dropdownMenu.className = "dropdown-menu";
+    dropdownMenu.style.minWidth = "0rem";
     dropdownMenu.setAttribute("aria-labelledby", "dropdownMenuButton");
 
 
@@ -399,7 +400,10 @@ function createTableSize($) {
 
     tableSizes.forEach((size) => {
         let div = document.createElement("div");
-        let tableSize = document.createTextNode(size.toString());
+        div.style.marginLeft = "1rem";
+        div.style.marginRight = "1rem";
+        // div.innerText = size.toString();
+       let tableSize = document.createTextNode(size.toString());
         div.onclick = () => {
             TABLE_SIZE = size;
             // reload table
@@ -417,7 +421,7 @@ function createTableSize($) {
             createPagination(data)
         }
 
-        div.appendChild(tableSize)
+       div.appendChild(tableSize)
         dropdownMenu.appendChild(div);
     });
 
