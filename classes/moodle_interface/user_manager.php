@@ -100,6 +100,24 @@ class mod_groupformation_user_manager {
         ), $sortedby, $fieldset);
     }
 
+
+    /**
+     * Returns array of records of table groupformation_users where excluded is 1
+     *
+     * @param null $sortedby
+     * @param string $fieldset
+     * @return array
+     * @throws dml_exception
+     */
+    public function get_excluded($sortedby = null, $fieldset = '*') {
+        global $DB;
+
+        return $DB->get_records('groupformation_users', array(
+                'groupformation' => $this->groupformationid,
+                'excluded' => 1
+        ), $sortedby, $fieldset);
+    }
+
     /**
      * Returns array of records of table groupformation_users
      *
@@ -932,6 +950,11 @@ class mod_groupformation_user_manager {
         $nomissingcount = count($nomissinganswers);
 
         $stats ['submitted_completely'] = $nomissingcount;
+
+        $excluded = $this->get_excluded();
+        $excludedcount = count($excluded);
+
+        $stats ['excluded'] = $excludedcount;
 
         return $stats;
     }

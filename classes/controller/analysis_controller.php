@@ -128,6 +128,7 @@ class mod_groupformation_analysis_controller {
         $assigns['statistics_processed'] = $questionnairestats ['processing'];
         $assigns['statistics_submitted'] = $questionnairestats ['submitted'];
         $assigns['statistics_submitted_complete'] = $questionnairestats ['submitted_completely'];
+        $assigns['statistics_excluded'] = $questionnairestats ['excluded'];
 
         return $assigns;
     }
