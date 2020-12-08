@@ -370,10 +370,10 @@ $string ['user_list_email_copied_message'] = "Die Email Adresse wurde in die Zwi
 
 
 $string['emailnotifications_info'] = '<i style="color:red;">Die automatische Benachrichtigung über abgeschlossene Gruppenformationen ist momentan leider nicht verfügbar.</i>';
-$string['onlyactivestudents_info'] = 'Zur Gruppenbildung werden ausschließlich Teilnehmende betrachtet werden, die mind. eine Frage beantwortet haben.';
-$string['onlyactivestudents'] = 'Zur Gruppenbildung werden ausschließlich Teilnehmende betrachtet werden, die mind. eine Frage beantwortet haben. Sie können das in den {$a->url} anpassen.';
+$string['onlyactivestudents_info'] = 'Es sollen alle Teilnehmer/innen ohne Antworten von der Gruppenbildung ausgeschlossen werden.';
+$string['onlyactivestudents'] = 'Es sollen alle Teilnehmer/innen ohne Antworten von der Gruppenbildung ausgeschlossen werden. Sie können das in den {$a->url} anpassen.';
 $string['emailnotifications'] = '<i style="color:red;">Die automatische Benachrichtigung über abgeschlossene Gruppenformationen ist momentan leider nicht verfügbar.</i>';
-$string['onlyactivestudents_description'] = 'Zur Gruppenbildung werden ausschließlich Teilnehmende betrachtet werden, die mind. eine Frage beantwortet haben.';
+$string['onlyactivestudents_description'] = 'Es sollen alle Teilnehmer/innen ohne Antworten von der Gruppenbildung ausgeschlossen werden.';
 $string['emailnotifications_description'] = '<i style="color:red;">Die automatische Benachrichtigung über abgeschlossene Gruppenformationen ist momentan leider nicht verfügbar.</i>';
 
 

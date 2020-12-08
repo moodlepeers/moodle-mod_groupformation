@@ -305,7 +305,7 @@ $string ['questionnaire_committed'] = 'You already submitted your answers hence 
 $string ['questionnaire_closed'] = 'The questionnaire is closed hence no answers can be entered or edited.';
 $string ['no_data_to_display'] = 'No data to display';
 
-$string ['onlyactivestudents'] = 'Only students with at least one submitted answer should be considered for building groups.';
+$string ['onlyactivestudents'] = 'Exclude all participants without any answers during group formation.';
 $string ['emailnotifications'] =
         '<i style="color:red;">The automated notification when the groupformation is finished is currently unavailable.</i>';
 $string ['onlyactivestudents_description'] =
