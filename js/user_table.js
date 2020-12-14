@@ -245,7 +245,7 @@ function addTable(data, tableHeader, page) {
             excludeButton.id = `exclude-button-${userId}`;
             excludeButton.className = "dropdown-item";
             // excludeButton.style.marginLeft = "10px";
-            excludeButton.setAttribute('onclick', `excludeUser(${JSON.stringify({userid: userId, groupformation: data[i][0].groupformation, excluded: data[i][0].excluded})})`);
+            excludeButton.setAttribute('onclick', `excludeUser(${JSON.stringify({userid: userId, groupformation: data[i][0].groupformation, excluded: data[i][0].excluded, completed: data[i][0].completed})})`);
 
             dropdownMenu.appendChild(excludeButton)
 
@@ -294,6 +294,14 @@ function handleStyleOfTable(user, deleteAnswers = false) {
         excludeButton.disabled = true;
     }
 
+    if(user.completed == 1){
+        let completed = document.getElementById(`completed-${userId}`);
+        completed.innerHTML = renderCheckIcon();
+    }else{
+        let completed = document.getElementById(`completed-${userId}`);
+        completed.innerHTML = renderXIcon();
+    }
+
     // background color
     let background = document.getElementById(`background-${userId}`);
     background.style.backgroundColor = user.excluded == 1 ? "lightgrey" : null;
@@ -306,18 +314,12 @@ function handleStyleOfTable(user, deleteAnswers = false) {
         let value = document.getElementById(`questionaire-value-${userId}`);
         value.innerText = "0%";
 
-        let completed = document.getElementById(`completed-${userId}`);
-        completed.innerHTML = renderXIcon();
-
         let deleteAnswersButton = document.getElementById(`delete-answers-button-${userId}`);
         deleteAnswersButton.disabled = true;
     }
 
     // check if user has no answers submitted yet
     if (user.answer_count === undefined) {
-        let completed = document.getElementById(`completed-${userId}`);
-        completed.innerHTML = renderXIcon();
-
         let deleteAnswersButton = document.getElementById(`delete-answers-button-${userId}`);
         deleteAnswersButton.disabled = true;
     }

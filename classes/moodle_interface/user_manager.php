@@ -119,6 +119,26 @@ class mod_groupformation_user_manager {
     }
 
     /**
+     * Returns array of records of table groupformation_users where excluded is 0 and
+     * completed is 1
+     *
+     * @param null $sortedby
+     * @param string $fieldset
+     * @return array
+     * @throws dml_exception
+     */
+    public function get_available($sortedby = null, $fieldset = '*') {
+        global $DB;
+
+        return $DB->get_records('groupformation_users', array(
+                'groupformation' => $this->groupformationid,
+                'excluded' => 0,
+                'completed' => 1
+        ), $sortedby, $fieldset);
+    }
+
+
+    /**
      * Returns array of records of table groupformation_users
      *
      * @param null $sortedby
@@ -956,6 +976,11 @@ class mod_groupformation_user_manager {
 
         $stats ['excluded'] = $excludedcount;
 
+        $available = $this->get_available();
+        $availablecount = count($available);
+
+        $stats ['available'] = $availablecount;
+
         return $stats;
     }
 
@@ -995,12 +1020,14 @@ class mod_groupformation_user_manager {
      * @param bool $value
      * @throws dml_exception
      */
-    public function set_excluded($userid, $value) {
+    public function set_excluded($userid, $value, $completed) {
         global $DB;
         $this->set_status($userid);
         $record = $DB->get_record('groupformation_users',
                 array('groupformation' => $this->groupformationid, 'userid' => $userid));
         $record->excluded = $value;
+        $record->completed = $completed;
+
         $DB->update_record('groupformation_users', $record);
     }
 }

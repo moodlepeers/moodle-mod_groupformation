@@ -130,32 +130,35 @@
                         spinner.className = "";
 
                         // user object from return of webservice
-                        let user = result[0];
+                        let resultUser = result[0];
                         // get excluded button
-                        let excludeButton = document.getElementById(`exclude-button-${user.userid}`);
+                        let excludeButton = document.getElementById(`exclude-button-${resultUser.userid}`);
                         // set the new data to button
                         excludeButton.setAttribute('onclick', `excludeUser(
                         ${JSON.stringify(
                             {
-                                userid: user.userid,
-                                groupformation: user.groupformation,
-                                excluded: user.excluded
+                                userid: resultUser.userid,
+                                groupformation: resultUser.groupformation,
+                                excluded: resultUser.excluded,
+                                completed: user.completed
                             }
                         )})`);
 
 
+                        resultUser.completed = user.completed
+
                         // set new style of excluded or included user
-                        handleStyleOfTable(result[0])
+                        handleStyleOfTable(resultUser)
 
                         // get dataset
                         let userData = document.getElementById("data").innerText;
                         let data = JSON.parse(userData);
 
                         // find specific user in dataset
-                        let index = data.findIndex(e => e[0].userid == user.userid);
+                        let index = data.findIndex(e => e[0].userid == resultUser.userid);
 
                         // change status of excluded
-                        data[index][0].excluded = user.excluded;
+                        data[index][0].excluded = resultUser.excluded;
 
                         // set new dataset back to the data element
                         (document.getElementById("data")).innerHTML = JSON.stringify(data);
