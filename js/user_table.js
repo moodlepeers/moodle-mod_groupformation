@@ -50,9 +50,14 @@ function selectPage(page, $) {
 function addTable(data, tableHeader, page) {
     if (data.length === 0) {
         let tableContent = document.getElementById("table_content");
-        let divName = document.createElement('div');
-        divName.innerHTML = (JSON.parse(document.getElementById("strings").innerText)).no_participants_message
-        tableContent.appendChild(divName);
+        let pNoUsers = document.createElement('p');
+        pNoUsers.style.opacity = "0.5";
+        pNoUsers.style.marginLeft = "4px";
+        let messageNoUsers = document.createElement('i');
+        messageNoUsers.innerText = (JSON.parse(document.getElementById("strings").innerText)).no_participants_message;
+
+        pNoUsers.appendChild(messageNoUsers)
+        tableContent.appendChild(pNoUsers);
 
         // hide table navigation
         document.getElementById("table-nav").style.visibility = "hidden";
