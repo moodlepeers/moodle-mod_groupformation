@@ -25,13 +25,13 @@
 $string ['language'] = 'en';
 $string ['modulename'] = 'Group formation';
 $string ['modulenameplural'] = 'Group formations';
-$string ['modulename_help'] = 'The groupformation plugin generates groups of students based on a questionnaire answers.';
+$string ['modulename_help'] = 'The groupformation plugin generates groups of participants based on a questionnaire answers.';
 $string ['beta_version'] = '';
 $string ['groupformation:addinstance'] = 'Add groupformation';
 $string ['groupformation:editsettings'] = 'Edit groupformation';
 $string ['groupformation:onlymanager'] = 'groupformation: only manager';
 $string ['groupformation:onlyread'] = 'groupformation: only read';
-$string ['groupformation:onlystudent'] = 'groupformation: only student';
+$string ['groupformation:onlystudent'] = 'groupformation: only participant';
 $string ['groupformation:readsettings'] = 'groupformation: read settings';
 $string ['groupformation:submit'] = 'groupformation: submit';
 $string ['groupformation:view'] = 'groupformation: view';
@@ -76,9 +76,9 @@ $string ['scenario_homeworkgroups_description'] =
         'Homework groups complete (smaller) assignments in regular intervals (often weekly) as a preperation for examination. Even though the assigment tasks (often called exercises, practice, control questions or homework) are principally subdividable among group members, this is not intended as with the final examination each member will be graded individually and needs to be able to solve all tasks alone. Consequently, groupformation aims for diverse prior knowledge and diverse learning styles that benefit from each other.';
 $string ['scenario_presentationgroups'] = 'Presentation groups';
 $string ['scenario_presentationgroups_description'] =
-        'Presentation groups work together for a relatively short time period to finish a presentation (usually to be held in class). Often in the beginning a specific sub-task is assigned to (or selected by) each student, individually worked on, and in the end re-assembled to a complete presentation. Grading is usually done for the perforance of the whole group together. Therefore, groupformation aims primarily for mutual interest in the same topic.';
+        'Presentation groups work together for a relatively short time period to finish a presentation (usually to be held in class). Often in the beginning a specific sub-task is assigned to (or selected by) each participant, individually worked on, and in the end re-assembled to a complete presentation. Grading is usually done for the perforance of the whole group together. Therefore, groupformation aims primarily for mutual interest in the same topic.';
 $string ['scenario_usage_header'] = 'Questionnaire-Usage';
-$string ['scenario_usage_header_presentation'] = 'Students set preferences';
+$string ['scenario_usage_header_presentation'] = 'Participants set preferences';
 $string ['scenario_projectteams_short'] =
         'Knowledge areas and motivation are heterogeneous; knowledge level, targeted goals, and team orientation are homogeneous; character traits are partially homogeneous, partially heterogeneous.';
 $string ['scenario_homeworkgroups_short'] = 'Knowledge areas and targeted goals are heterogeneous; team orientation homogeneous.';
@@ -93,7 +93,7 @@ $string ['topics_dummy'] = 'Topic';
 $string ['knowledge_dummy'] = 'Example';
 $string ['topics_description'] = 'I want to define topics';
 $string ['topics_description_extended'] =
-        'Please list topics for the students to choose from. <strong>Then group formation optimizes using the topic selection preferences exclusively.</strong> All other questionnaire parts will be ignored.';
+        'Please list topics for the participants to choose from. <strong>Then group formation optimizes using the topic selection preferences exclusively.</strong> All other questionnaire parts will be ignored.';
 $string ['topics_question'] =
         'Please sort the following topics regarding your personal interests and start with your favorite topic. Sort via drag and drop.';
 $string ['topicchoice'] = 'Topic selection';
@@ -124,15 +124,15 @@ $string ['choose_type'] = 'Choose Type';
 $string ['knowledge'] = 'Knowledge';
 $string ['knowledge_help'] = 'If topics (option below) are activated, this option gets automatically deactivated and disabled.';
 $string ['knowledge_description'] = 'I want to include knowledge questions';
-$string ['knowledge_description_extended'] = 'Please list knowledge areas in which students should assess themselves.
+$string ['knowledge_description_extended'] = 'Please list knowledge areas in which participants should assess themselves.
     Take a look at the preview on the right hand side.';
-$string ['knowledge_info_presentation'] = 'Please list knowledge areas in which students should assess themselves.
+$string ['knowledge_info_presentation'] = 'Please list knowledge areas in which participants should assess themselves.
     Take a look at the preview on the right hand side.
     According to your selection "presentation groups" prior knowledge will be varied within each group (ignored when topics are set)';
-$string ['knowledge_info_homework'] = 'Please list knowledge areas in which students should assess themselves.
+$string ['knowledge_info_homework'] = 'Please list knowledge areas in which participants should assess themselves.
     Take a look at the preview on the right hand side.
     According to your selection "homework groups" prior knowledge will be varied within each group.';
-$string ['knowledge_info_project'] = 'Please list knowledge areas in which students should assess themselves.
+$string ['knowledge_info_project'] = 'Please list knowledge areas in which participants should assess themselves.
     Take a look at the preview on the right hand side.
     According to your selection "project teams" prior knowledge (areas) will be varied within each group, but the level of knowledge is desired to be similar.';
 $string ['knowledgeChoice'] = 'Knowledge';
@@ -145,7 +145,7 @@ $string ['knowledge_scale'] = '0 = no knowledge, 100 = big knowledge';
 $string ['groupoptions'] = 'Group settings';
 $string ['groupoption_description'] = 'Group settings description';
 $string ['groupoption_help'] = 'This parameter can be optimized after the submission of the questionnaires.';
-$string ['groupoption_onlyactivestudents'] = 'Students without answers will not be assigned to any groups.';
+$string ['groupoption_onlyactivestudents'] = 'Participants without answers will not be assigned to any groups.';
 $string ['maxmembers'] = 'Max. number of group members';
 $string ['maxgroups'] = 'Max. number of groups';
 $string ['maxpoints'] = 'Max. points';
@@ -170,7 +170,7 @@ $string ['choose_number'] = 'Choose number';
 $string ['choose_evaluationmethod'] = 'Choose method';
 $string ['evaluation_point_info'] = 'indicate the maximum available points';
 $string ['students_enrolled_info'] =
-        'Students are enrolled in this course. If the activity is configured for a certain grouping only, the real number may be smaller.';
+        'Participants are enrolled in this course. If the activity is configured for a certain grouping only, the real number may be smaller.';
 $string ['groupSettingsInfo'] =
         'You have choosen to define topics. Thereof the number of groups and their size will be calculated, as you can see below.';
 $string ['analyse'] = 'Analysis';
@@ -260,29 +260,30 @@ $string ['info_text_student'] = 'In this Moodle course the "groupformation" is u
 ';
 $string ['info_header_teacher_analysis'] = 'How does the groupformation activity work?';
 $string ['info_header_teacher_settings'] = 'How does the groupformation activity work?';
-$string ['info_text_teacher_settings'] = 'With this plugin you have the ability to optimize the group formation of your students. The three required steps are:<br>
+$string ['info_text_teacher_settings'] = 'With this plugin you have the ability to optimize the group formation of your participants. The three required steps are:<br>
         1.) Add the activity "groupformation" to your course.
         In the settings you can choose which scenario fits best to your needs(in case of doubt choose project teams).
-        The further settings allow you to specify the group size and/or preknowledge of the students. If the preknowledges of students should complement to each other,
+        The further settings allow you to specify the group size and/or preknowledge of the participants. If the preknowledges of participants
+         should complement to each other,
         you can specify it in the settings.
-        2.) The students get the questionnaire which is based on your settings. You can set the period when the questionnaire is available(see step 1).
+        2.) The participants get the questionnaire which is based on your settings. You can set the period when the questionnaire is available(see step 1).
         A preview of the questonnaire can be found later on by opening the activity as a docent.<br>
         3.) The statistics to the answers can be found by opening the activity. If you are sutisfied with the response, you can start the groupformation manualy(it never happens automatically).<br>
         It will takes a while till the groups are formated. You can see the generated groups before you adopt them to Moodle.<br>
         <br>
-        Finished. Now also the students can see their groupmates. As a docent you can manually adjust the groups anytime at Moodle(e.g. with stragglers).
+        Finished. Now also the participants can see their groupmates. As a docent you can manually adjust the groups anytime at Moodle(e.g. with stragglers).
 ';
-$string ['info_text_teacher_analysis'] = 'With this plugin you have the ability to optimize the group formation of your students. The three required steps are:<br>
+$string ['info_text_teacher_analysis'] = 'With this plugin you have the ability to optimize the group formation of your participants. The three required steps are:<br>
         1.) Add the activity "groupformation" to your course.
         In the settings you can choose which scenario fits best to your needs(in case of doubt choose project teams).
-        The further settings allow you to specify the group size and/or preknowledge of the students. If the preknowledges of students should complement to each other,
+        The further settings allow you to specify the group size and/or preknowledge of the participants. If the preknowledges of participants should complement to each other,
         you can specify it in the settings.
-        2.) The students get the questionnaire which is based on your settings. You can set the period when the questionnaire is available(see step 1).
+        2.) The participants get the questionnaire which is based on your settings. You can set the period when the questionnaire is available(see step 1).
         A preview of the questonnaire can be found later on by opening the activity as a docent.<br>
         3.) The statistics to the answers can be found by opening the activity. If you are sutisfied with the response, you can start the groupformation manualy(it never happens automatically).<br>
         It will takes a while till the groups are formated. You can see the generated groups before you adopt them to Moodle.<br>
         <br>
-        Finished. Now also the students can see their groupmates. As a docent you can manually adjust the groups anytime at Moodle(e.g. with stragglers).<br>
+        Finished. Now also the participants can see their groupmates. As a docent you can manually adjust the groups anytime at Moodle(e.g. with stragglers).<br>
 ';
 $string ['grouping_status_0'] = 'You have to close the activity to start the group formation.';
 $string ['grouping_status_1'] = 'You can start the group formation now.';
@@ -309,7 +310,7 @@ $string ['onlyactivestudents'] = 'Exclude all participants without any answers d
 $string ['emailnotifications'] =
         '<i style="color:red;">The automated notification when the groupformation is finished is currently unavailable.</i>';
 $string ['onlyactivestudents_description'] =
-        'Only students with at least one submitted answer should be considered for building groups.';
+        'Only participants with at least one submitted answer should be considered for building groups.';
 $string ['emailnotifications_description'] =
         '<i style="color:red;">The automated notification when the groupformation is finished is currently unavailable.</i>';
 
@@ -331,7 +332,7 @@ $string ['activity_start'] = 'Start activity';
 $string ['analysis_status_q_closed'] =
         'The activity was closed. You can restart it, or continue with group formation in the respective tab.';
 $string ['analysis_status_q_open'] =
-        'The activity is currently open and students can answer the questionnaire. You have to stop the activity before starting the group formation.';
+        'The activity is currently open and participants can answer the questionnaire. You have to stop the activity before starting the group formation.';
 $string ['analysis_status_ga_done'] =
         'Groups have been adopted to Moodle. You may re-open the questionnaire to all users which did not answer the questionnaire so far.';
 $string ['analysis_status_ga_started'] =
@@ -352,12 +353,12 @@ $string ['activity_visible'] =
 
 $string ['are'] = 'There are';
 $string ['are_now'] = 'Now, there are';
-$string ['students_available_single'] = 'enrolled student who can fill out the questionnaire.';
-$string ['students_available_multiple'] = 'enrolled students who can fill out the questionnaire.';
-$string ['students_answered_single'] = 'student has answered the questionnaire.';
-$string ['students_answered_multiple'] = 'students have answered the questionnaire.';
-$string ['students_excluded_single'] = 'student was excluded from the questionnaire.';
-$string ['students_excluded_multiple'] = 'students were excluded from the questionnaire.';
+$string ['students_available_single'] = 'enrolled participant who can fill out the questionnaire.';
+$string ['students_available_multiple'] = 'enrolled participants who can fill out the questionnaire.';
+$string ['students_answered_single'] = 'participant has answered the questionnaire.';
+$string ['students_answered_multiple'] = 'participants have answered the questionnaire.';
+$string ['students_excluded_single'] = 'participant was excluded from the questionnaire.';
+$string ['students_excluded_multiple'] = 'participants were excluded from the questionnaire.';
 $string ['name_by_group'] = 'Name:';
 $string ['quality'] = 'Group quality';
 $string ['quality_info'] =
@@ -377,10 +378,10 @@ $string ['evaluation'] = 'Evaluation';
 $string ['group_overview'] = 'Overview of generated groups';
 $string ['max_group_size_not_reached'] = 'Maximum group size has not been reached by the following groups:';
 $string ['your_group'] = 'The name of your group is: ';
-$string ['students_grouping_single'] = 'student for group formation.';
-$string ['students_grouping_multiple'] = 'students for group formation.';
-$string ['students_committed_single'] = 'student therefrom has already committed his/her answers.';
-$string ['students_committed_multiple'] = 'students have also committed their answers already.';
+$string ['students_grouping_single'] = 'participant for group formation.';
+$string ['students_grouping_multiple'] = 'participants for group formation.';
+$string ['students_committed_single'] = 'participant therefrom has already committed his/her answers.';
+$string ['students_committed_multiple'] = 'participants have also committed their answers already.';
 $string ['committed_not_completed'] = 'from the committed questionnaires are not complete.';
 $string ['completed_questionnaire'] = 'completely answered questionnaires.';
 $string ['user_list_headline'] = 'Participant list';
@@ -404,7 +405,7 @@ $string ['user_list_no_participants_message'] = "Table can not be displayed beca
 
 $string ['emailnotifications_info'] = 'You will be notified via message when it is terminated.';
 $string ['onlyactivestudents_info'] =
-        'Only students with at least one submitted answer will be considered for the group formation. This can be configured in the {$a->url}.';
+        'Only participants with at least one submitted answer will be considered for the group formation. This can be configured in the {$a->url}.';
 $string ['starttime'] = 'Start time';
 $string ['endtime'] = 'End time';
 
@@ -451,7 +452,7 @@ $string ['archived_activity_answers'] =
         'The activity has been archived. Your answers are no longer stored and there is nothing to do here.';
 $string ['archived_activity_admin'] = 'The activity has been archived. There is nothing to do here.';
 
-$string ['students_selected'] = 'Students selected';
+$string ['students_selected'] = 'Participants selected';
 $string ['drop_selection'] = 'Unselect all';
 
 $string ['no_evaluation_text'] = 'There is no evaluation for this group formation activity.';
@@ -461,7 +462,7 @@ $string ['eval_final_text'] =
         'The comparison is based on {$a->percent}% of the users answers ({$a->completed} of {$a->coursesize} users have answered already).';
 
 $string ['eval_first_page_title'] = "General Information";
-$string ['eval_first_page_text'] = "Hereby you receive your personalized feedback regarding your answers given in the questionnaire. For this purpose, questions related to the same subject were clustered and average values were calculated and compared with a student’s sample. So-called percentile ranks were calculated, not with the intention of judging whether a certain obtained value was good or bad, but how frequent those values are within a student’s sample. A percentile rank of 10 % means, that 10 % of the comparison sample had an equal or smaller value. On the other hand, a percentile rank of 90 % means, that 90 % of the comparison sample obtained an equal or smaller value.
+$string ['eval_first_page_text'] = "Hereby you receive your personalized feedback regarding your answers given in the questionnaire. For this purpose, questions related to the same subject were clustered and average values were calculated and compared with a participants sample. So-called percentile ranks were calculated, not with the intention of judging whether a certain obtained value was good or bad, but how frequent those values are within a participants sample. A percentile rank of 10 % means, that 10 % of the comparison sample had an equal or smaller value. On the other hand, a percentile rank of 90 % means, that 90 % of the comparison sample obtained an equal or smaller value.
 \\n\\n
 First, you receive feedback on five personality characteristics, that can be understood as relatively stable, that is, independent of specific situations: extraversion, neuroticism, conscientiousness, social agreeableness and openness to experience. You will then receive feedback on four dimensions of motivation, which relate to the current academic course or exercise and thus may vary from situation to situation: interest, challenge, probability of success and expectation of failure.";
 
@@ -609,7 +610,7 @@ $string ['questionnaire_delete'] = 'Remove consent';
 
 $string ['groupsize'] = 'Group size:';
 $string ['unselect_all'] = 'Unselect All';
-$string ['students_selected'] = 'students selected';
+$string ['students_selected'] = 'participants selected';
 $string ['select_info'] = 'Select group members to move them to another group';
 
 $string ['topic_group_info'] = 'Your topic is';
@@ -648,10 +649,10 @@ $string ['settings_archiving_time_description'] = 'After x days the activity wil
 
 $string ['settings_import_export'] = 'Import/Export of answers';
 $string ['settings_import_export_description'] =
-        'If set, students can export their answers and import answers in another instance.';
+        'If set, participants can export their answers and import answers in another instance.';
 
 $string ['settings_participant_code'] = 'Participant code';
-$string ['settings_participant_code_description'] = 'Students need to enter a participant code (as used in psychological tests).';
+$string ['settings_participant_code_description'] = 'Participants need to enter a participant code (as used in psychological tests).';
 
 $string['settings_participant_email'] = 'Show email addresses';
 $string['settings_participant_email_description'] = 'If activated, the email addresses of the participants can be viewed';
@@ -673,7 +674,7 @@ $string ['noGroup'] =
 $string ['topics_statistics'] = 'Statistics of offered topics';
 $string ['topics_statistics_score'] = 'Score [0-1]';
 $string ['topics_statistics_description'] =
-        'The following scores indicate which topics have been favored by the students, i.e. a score close to 1 indicates that the topic is more liked than topics with a lower score.';
+        'The following scores indicate which topics have been favored by the participants, i.e. a score close to 1 indicates that the topic is more liked than topics with a lower score.';
 
 $string ['category_catfreetext'] = 'Freetext';
 $string ['category_catnumber'] = 'Number';
@@ -705,14 +706,14 @@ $string ['re-open_questionnaire'] = 'Re-open questionnaire';
 $string ['close_questionnaire'] = 'Close questionnaire';
 
 $string ['math_prep_course_study'] = 'Math pre-course study';
-$string ['honest_answers'] = '<b>{$a}</b> students replied that they answered honestly and with concentration.';
-$string ['dishonest_answers'] = '<b>{$a}</b> students replied that they did not give honest answers with full concentration.';
+$string ['honest_answers'] = '<b>{$a}</b> participants replied that they answered honestly and with concentration.';
+$string ['dishonest_answers'] = '<b>{$a}</b> participants replied that they did not give honest answers with full concentration.';
 $string ['ratio_answers'] =
-        'Thus, <b>{$a}%</b> of the students replied that they did not give honest answers with full concentration.';
+        'Thus, <b>{$a}%</b> of the participants replied that they did not give honest answers with full concentration.';
 $string ['filter_inactive'] = 'It will be not filtered';
 $string ['filter_active'] = 'It will be filtered.';
 $string ['filter_description'] =
-        'Click on "Activate filter" to exclude students who have not responded honestly and concentrated from the optimized grouping and to group them randomized instead. Click on "Deactivate filter" to undo this action.';
+        'Click on "Activate filter" to exclude participants who have not responded honestly and concentrated from the optimized grouping and to group them randomized instead. Click on "Deactivate filter" to undo this action.';
 $string ['no_filter_change'] =
         'Due to the currently running or already completed group formation, it is not possible to change the filter settings.';
 $string ['filter'] = 'Activate filter';
