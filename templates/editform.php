@@ -185,7 +185,7 @@ defined('MOODLE_INTERNAL') || die();
                                             <?php echo get_string('add_line', 'groupformation'); ?>
                                         ">
                                         <button type="button"
-                                                class="remove_field gf_button gf_button_circle gf_button_small"
+                                                class="remove_field gf_button btn btn-secondary"
                                                 disabled="disabled">
 
                                         </button>

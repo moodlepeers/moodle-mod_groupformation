@@ -32,7 +32,7 @@ if (!defined('MOODLE_INTERNAL')) {
     </p>
     <p>
         <a href="<?php echo $this->_['export_users_url']; ?>" target="_blank">
-            <span class="gf_button gf_button_pill gf_button_small">
+            <span class="btn btn-secondary">
                 <?php echo get_string('export', 'groupformation'); ?>
             </span>
         </a>

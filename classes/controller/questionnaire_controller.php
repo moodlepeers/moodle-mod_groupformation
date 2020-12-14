@@ -403,10 +403,10 @@ class mod_groupformation_questionnaire_controller {
     public function get_action_buttons() {
         $s = '<div class="grid">';
         $s .= '    <div class="col_m_100 questionaire_button_row">';
-        $s .= '        <button type="submit" name="direction" value="-1" class="gf_button gf_button_pill gf_button_small">';
+        $s .= '        <button type="submit" name="direction" value="-1" class="btn btn-secondary">';
         $s .= get_string('previous');
         $s .= '        </button>';
-        $s .= '        <button type="submit" name="direction" value="1" class="gf_button gf_button_pill gf_button_small">';
+        $s .= '        <button type="submit" name="direction" value="1" class="btn btn-secondary">';
         $s .= get_string('next');
         $s .= '        </button>';
         $s .= '    </div>';
