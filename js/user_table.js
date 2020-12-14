@@ -48,203 +48,215 @@ function selectPage(page, $) {
  * @param page
  */
 function addTable(data, tableHeader, page) {
-    let page_number = page - 1;
-    let tableContent = document.getElementById("table_content");
-
-    let oldTable = tableContent.getElementsByClassName("table");
-
-    // delete old table for the pagination index is change
-    oldTable.length > 0 ? tableContent.removeChild(oldTable[0]) : null;
-
-    // create table
-    let table = document.createElement('TABLE');
-    table.className = "table table-hover";
-
-    // create table header
-    let tableHead = document.createElement('THEAD');
-    tableHead.className = "thead-light"
-    table.appendChild(tableHead)
-
-    let tr = document.createElement('TR');
-    tableHead.appendChild(tr);
-
-    // check if viewing email addresses of participants is enabled in settings
-    // if not delete the last item from header ("email")
-    let isEmailEnabled = data[0][data[0].length > 1 ? 1 : 0].email !== undefined;
-    if (!isEmailEnabled) {
-        tableHeader.pop();
-    }
-
-    for (let k = 0; k < tableHeader.length; k++) {
-        let th = document.createElement('TH');
-        th.scope = "col";
+    if (data.length === 0) {
+        let tableContent = document.getElementById("table_content");
         let divName = document.createElement('div');
-        divName.innerHTML = tableHeader[k]
-        th.appendChild(divName);
-        tr.appendChild(th);
-    }
+        divName.innerHTML = (JSON.parse(document.getElementById("strings").innerText)).no_participants_message
+        tableContent.appendChild(divName);
+
+        // hide table navigation
+        document.getElementById("table-nav").style.visibility = "hidden";
 
 
-    // create body
-    let tableBody = document.createElement('TBODY');
-    table.appendChild(tableBody);
+    } else {
+        let page_number = page - 1;
+        let tableContent = document.getElementById("table_content");
 
-    // add each item
-    for (let i = 0; i < data.length; i++) {
+        let oldTable = tableContent.getElementsByClassName("table");
 
-        // check if user has no answers submitted yet
-        let userId = data[i].length > 1 ? data[i][0].userid : data[i][0].id;
+        // delete old table for the pagination index is change
+        oldTable.length > 0 ? tableContent.removeChild(oldTable[0]) : null;
 
-        tr = document.createElement('TR');
-        tr.id = `background-${userId}`;
-        tr.setAttribute("data", JSON.stringify(userId));
+        // create table
+        let table = document.createElement('TABLE');
+        table.className = "table table-hover";
 
-        tableBody.appendChild(tr);
+        // create table header
+        let tableHead = document.createElement('THEAD');
+        tableHead.className = "thead-light"
+        table.appendChild(tableHead)
 
-        // add index
-        let td = document.createElement('TD');
-        td.appendChild(document.createTextNode(page_number * TABLE_SIZE + i + 1));
-        td.id = `number-${userId}`;
-        tr.appendChild(td);
+        let tr = document.createElement('TR');
+        tableHead.appendChild(tr);
 
-        // add first name
-        td = document.createElement('TD');
-        td.appendChild(document.createTextNode(data[i][data[i].length > 1 ? 1 : 0].firstname));
-        td.id = `firstname-${userId}`;
-        tr.appendChild(td);
-
-        // add last name
-        td = document.createElement('TD');
-        td.appendChild(document.createTextNode(data[i][data[i].length > 1 ? 1 : 0].lastname));
-        td.id = `lastname-${userId}`;
-        tr.appendChild(td);
-
-        // only add email column if email is enabled in plugin settings
-        if (isEmailEnabled) {
-            // email symbol
-            td = document.createElement('TD');
-            td.insertAdjacentHTML("beforeend", renderEmailIcon());
-            td.onclick = async () => {
-                // copy email address to clipboard
-                await navigator.clipboard.writeText(data[i][data[i].length > 1 ? 1 : 0].email).then(() => {
-                    alert(JSON.parse(document.getElementById("strings").innerText).email_message)
-                });
-            };
-            tr.appendChild(td);
+        // check if viewing email addresses of participants is enabled in settings
+        // if not delete the last item from header ("email")
+        let isEmailEnabled = data[0][data[0].length > 1 ? 1 : 0].email !== undefined;
+        if (!isEmailEnabled) {
+            tableHeader.pop();
         }
 
-        // add consent given
-        td = document.createElement('TD');
-        td.id = `consent-${userId}`;
-        let consentIcon = data[i][0].consent !== undefined ? data[i][0].consent === 0 ? renderXIcon() : renderCheckIcon() : renderXIcon();
-        td.insertAdjacentHTML("beforeend", consentIcon);
-        td.setAttribute("name", JSON.stringify("consent"));
-        td.setAttribute("data", JSON.stringify(userId))
-        tr.appendChild(td);
-
-        // progress bar
-        let answerCount = data[i][0].answer_count;
-
-        let maxAnswerCount = data[i][0].max_answer_count
-
-        // percentage of answer count
-        let pcg = Math.floor(answerCount / maxAnswerCount * 100);
-
-        td = document.createElement('TD');
-        let progress = document.createElement("div");
-        progress.className = "progress";
-        progress.style.border = '1px solid black';
-
-        let value = document.createElement("span");
-        value.id = `questionaire-value-${userId}`;
-        value.className = "progress-value";
-        value.innerText = isNaN(pcg) ? "0%" : pcg + "%";
-        value.style.fontSize = "x-small";
-
-        let progressBar = document.createElement("div");
-        progressBar.id = `questionaire-${userId}`;
-
-        progressBar.className = "progress-bar";
-        progressBar.setAttribute('style', 'width:' + Number(pcg) + '%');
-        progressBar.setAttribute("role", "progressbar");
-        progressBar.setAttribute("aria-valuenow", answerCount);
-        progressBar.setAttribute("aria-valuemin", 0);
-        progressBar.setAttribute("aria-valuemax", maxAnswerCount);
-
-        td.appendChild(progress);
-        progress.appendChild(progressBar)
-        td.appendChild(value);
-        tr.appendChild(td);
-
-        // add answers submitted
-        td = document.createElement('TD');
-        td.id = `completed-${userId}`;
-        let answeredIcon = data[i][0].completed === "0" ? renderXIcon() : renderCheckIcon();
-        td.setAttribute("data", JSON.stringify(userId))
-        td.insertAdjacentHTML("beforeend", answeredIcon);
-        tr.appendChild(td);
+        for (let k = 0; k < tableHeader.length; k++) {
+            let th = document.createElement('TH');
+            th.scope = "col";
+            let divName = document.createElement('div');
+            divName.innerHTML = tableHeader[k]
+            th.appendChild(divName);
+            tr.appendChild(th);
+        }
 
 
-        // delete answers button
-        td = document.createElement('TD');
+        // create body
+        let tableBody = document.createElement('TBODY');
+        table.appendChild(tableBody);
 
-        let dropdown = document.createElement("div");
-        dropdown.className = "dropdown";
+        // add each item
+        for (let i = 0; i < data.length; i++) {
 
-        let button = document.createElement("button");
+            // check if user has no answers submitted yet
+            let userId = data[i].length > 1 ? data[i][0].userid : data[i][0].id;
 
-        // loading spinner
-        let spinner = document.createElement("div");
-        spinner.id = `spinner-${userId}`;
-        spinner.setAttribute("role", "status");
-        spinner.style.marginRight = "10px";
+            tr = document.createElement('TR');
+            tr.id = `background-${userId}`;
+            tr.setAttribute("data", JSON.stringify(userId));
 
-        button.appendChild(spinner)
+            tableBody.appendChild(tr);
 
-        // set name of action button
-        button.appendChild(document.createTextNode((JSON.parse(document.getElementById("strings").innerText)).actions));
-        button.className = "btn btn-secondary dropdown-toggle";
-        button.setAttribute("type", "button");
-        button.setAttribute("data-toggle", "dropdown");
-        button.setAttribute("aria-haspopup", "true");
-        button.setAttribute("aria-expanded", "false");
+            // add index
+            let td = document.createElement('TD');
+            td.appendChild(document.createTextNode(page_number * TABLE_SIZE + i + 1));
+            td.id = `number-${userId}`;
+            tr.appendChild(td);
 
-        let dropdownMenu = document.createElement("div");
-        dropdownMenu.className = "dropdown-menu";
-        dropdownMenu.setAttribute("aria-labelledby", "dropdownMenuButton");
+            // add first name
+            td = document.createElement('TD');
+            td.appendChild(document.createTextNode(data[i][data[i].length > 1 ? 1 : 0].firstname));
+            td.id = `firstname-${userId}`;
+            tr.appendChild(td);
 
-        // delete answers button
-        let deleteButton = document.createElement("button");
-        deleteButton.className = "dropdown-item";
-        deleteButton.id = `delete-answers-button-${userId}`;
-        // set button string
-        deleteButton.appendChild(document.createTextNode((JSON.parse(document.getElementById("strings").innerText)).delete_answers));
-        // deleteButton.style.marginLeft = "10px";
-        deleteButton.setAttribute('onclick', `deleteAnswers(${JSON.stringify(data[i][0])})`);
+            // add last name
+            td = document.createElement('TD');
+            td.appendChild(document.createTextNode(data[i][data[i].length > 1 ? 1 : 0].lastname));
+            td.id = `lastname-${userId}`;
+            tr.appendChild(td);
 
-        dropdownMenu.appendChild(deleteButton);
+            // only add email column if email is enabled in plugin settings
+            if (isEmailEnabled) {
+                // email symbol
+                td = document.createElement('TD');
+                td.insertAdjacentHTML("beforeend", renderEmailIcon());
+                td.onclick = async () => {
+                    // copy email address to clipboard
+                    await navigator.clipboard.writeText(data[i][data[i].length > 1 ? 1 : 0].email).then(() => {
+                        alert(JSON.parse(document.getElementById("strings").innerText).email_message)
+                    });
+                };
+                tr.appendChild(td);
+            }
 
-        // exclude user button
-        let excludeButton = document.createElement("button");
-        excludeButton.id = `exclude-button-${userId}`;
-        excludeButton.className = "dropdown-item";
-        // excludeButton.style.marginLeft = "10px";
-        excludeButton.setAttribute('onclick', `excludeUser(${JSON.stringify({userid: userId, groupformation: data[i][0].groupformation, excluded: data[i][0].excluded})})`);
+            // add consent given
+            td = document.createElement('TD');
+            td.id = `consent-${userId}`;
+            let consentIcon = data[i][0].consent !== undefined ? data[i][0].consent === 0 ? renderXIcon() : renderCheckIcon() : renderXIcon();
+            td.insertAdjacentHTML("beforeend", consentIcon);
+            td.setAttribute("name", JSON.stringify("consent"));
+            td.setAttribute("data", JSON.stringify(userId))
+            tr.appendChild(td);
 
-        dropdownMenu.appendChild(excludeButton)
+            // progress bar
+            let answerCount = data[i][0].answer_count;
 
-        button.appendChild(dropdownMenu);
+            let maxAnswerCount = data[i][0].max_answer_count
 
-        td.appendChild(button);
-        tr.appendChild(td);
+            // percentage of answer count
+            let pcg = Math.floor(answerCount / maxAnswerCount * 100);
+
+            td = document.createElement('TD');
+            let progress = document.createElement("div");
+            progress.className = "progress";
+            progress.style.border = '1px solid black';
+
+            let value = document.createElement("span");
+            value.id = `questionaire-value-${userId}`;
+            value.className = "progress-value";
+            value.innerText = isNaN(pcg) ? "0%" : pcg + "%";
+            value.style.fontSize = "x-small";
+
+            let progressBar = document.createElement("div");
+            progressBar.id = `questionaire-${userId}`;
+
+            progressBar.className = "progress-bar";
+            progressBar.setAttribute('style', 'width:' + Number(pcg) + '%');
+            progressBar.setAttribute("role", "progressbar");
+            progressBar.setAttribute("aria-valuenow", answerCount);
+            progressBar.setAttribute("aria-valuemin", 0);
+            progressBar.setAttribute("aria-valuemax", maxAnswerCount);
+
+            td.appendChild(progress);
+            progress.appendChild(progressBar)
+            td.appendChild(value);
+            tr.appendChild(td);
+
+            // add answers submitted
+            td = document.createElement('TD');
+            td.id = `completed-${userId}`;
+            let answeredIcon = data[i][0].completed === "0" ? renderXIcon() : renderCheckIcon();
+            td.setAttribute("data", JSON.stringify(userId))
+            td.insertAdjacentHTML("beforeend", answeredIcon);
+            tr.appendChild(td);
 
 
+            // delete answers button
+            td = document.createElement('TD');
+
+            let dropdown = document.createElement("div");
+            dropdown.className = "dropdown";
+
+            let button = document.createElement("button");
+
+            // loading spinner
+            let spinner = document.createElement("div");
+            spinner.id = `spinner-${userId}`;
+            spinner.setAttribute("role", "status");
+            spinner.style.marginRight = "10px";
+
+            button.appendChild(spinner)
+
+            // set name of action button
+            button.appendChild(document.createTextNode((JSON.parse(document.getElementById("strings").innerText)).actions));
+            button.className = "btn btn-secondary dropdown-toggle";
+            button.setAttribute("type", "button");
+            button.setAttribute("data-toggle", "dropdown");
+            button.setAttribute("aria-haspopup", "true");
+            button.setAttribute("aria-expanded", "false");
+
+            let dropdownMenu = document.createElement("div");
+            dropdownMenu.className = "dropdown-menu";
+            dropdownMenu.setAttribute("aria-labelledby", "dropdownMenuButton");
+
+            // delete answers button
+            let deleteButton = document.createElement("button");
+            deleteButton.className = "dropdown-item";
+            deleteButton.id = `delete-answers-button-${userId}`;
+            // set button string
+            deleteButton.appendChild(document.createTextNode((JSON.parse(document.getElementById("strings").innerText)).delete_answers));
+            // deleteButton.style.marginLeft = "10px";
+            deleteButton.setAttribute('onclick', `deleteAnswers(${JSON.stringify(data[i][0])})`);
+
+            dropdownMenu.appendChild(deleteButton);
+
+            // exclude user button
+            let excludeButton = document.createElement("button");
+            excludeButton.id = `exclude-button-${userId}`;
+            excludeButton.className = "dropdown-item";
+            // excludeButton.style.marginLeft = "10px";
+            excludeButton.setAttribute('onclick', `excludeUser(${JSON.stringify({userid: userId, groupformation: data[i][0].groupformation, excluded: data[i][0].excluded})})`);
+
+            dropdownMenu.appendChild(excludeButton)
+
+            button.appendChild(dropdownMenu);
+
+            td.appendChild(button);
+            tr.appendChild(td);
+
+
+        }
+        tableContent.appendChild(table);
+
+        data.forEach((user) => {
+            handleStyleOfTable(user[0])
+        })
     }
-    tableContent.appendChild(table);
-
-    data.forEach((user) => {
-        handleStyleOfTable(user[0])
-    })
 }
 
 
@@ -403,7 +415,7 @@ function createTableSize($) {
         div.style.marginLeft = "1rem";
         div.style.marginRight = "1rem";
         // div.innerText = size.toString();
-       let tableSize = document.createTextNode(size.toString());
+        let tableSize = document.createTextNode(size.toString());
         div.onclick = () => {
             TABLE_SIZE = size;
             // reload table
@@ -421,7 +433,7 @@ function createTableSize($) {
             createPagination(data)
         }
 
-       div.appendChild(tableSize)
+        div.appendChild(tableSize)
         dropdownMenu.appendChild(div);
     });
 

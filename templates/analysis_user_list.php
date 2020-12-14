@@ -195,6 +195,8 @@ $actions_string = get_string('user_list_actions', 'groupformation');
 
 $email_address_message = get_string('user_list_email_copied_message', 'groupformation');
 
+$no_participants_message = get_string('user_list_no_participants_message', 'groupformation');
+
 // wrap everything up in an object
 $strings = array(
         'table_columns_names' => $table_column_names,
@@ -202,9 +204,8 @@ $strings = array(
         'actions' => $actions_string,
         'exclude_user' => $exclude_user_string,
         'include_user' => $include_user_string,
-        'email_message' => $email_address_message);
-
-
+        'email_message' => $email_address_message,
+        'no_participants_message' => $no_participants_message);
 
 ?>
 
@@ -225,12 +226,13 @@ $strings = array(
 
 
     <!-- add nav field -->
-    <nav>
+    <nav id="table-nav">
         <!-- pagination -->
         <ul class="pagination" id="pagination"></ul>
         <!-- change the amount of users per page  -->
         <div>
-            <a style="font-size: x-small margin-bottom: 10px"><?php echo get_string('user_list_user_per_page', 'groupformation'); ?></a>
+            <a style="font-size: x-small margin-bottom: 10px"><?php echo get_string('user_list_user_per_page',
+                        'groupformation'); ?></a>
             <div class="table_size" id="table_size"></div>
         </div>
     </nav>

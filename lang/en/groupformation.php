@@ -398,6 +398,9 @@ $string ['user_list_include_user'] = 'Include participant';
 $string ['user_list_include_user_msg'] = 'Are you sure you want to include this participant?';
 $string ['user_list_user_per_page'] = 'Participants per page';
 $string ['user_list_email_copied_message'] = "The email address was copied to the clipboard";
+$string ['user_list_no_participants_message'] = "Table can not be displayed because there are no participants assigned to the activity.";
+
+
 
 $string ['emailnotifications_info'] = 'You will be notified via message when it is terminated.';
 $string ['onlyactivestudents_info'] =

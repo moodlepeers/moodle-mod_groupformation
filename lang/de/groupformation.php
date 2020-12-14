@@ -367,6 +367,7 @@ $string ['user_list_include_user'] = 'Teilnehmer/in einschließen';
 $string ['user_list_include_user_msg'] = 'Sind Sie sicher, dass Sie diesen Teilnehmer/in einschließen wollen?';
 $string ['user_list_user_per_page'] = 'Teilnehmer/innen pro Seite';
 $string ['user_list_email_copied_message'] = "Die Email Adresse wurde in die Zwischenablage kopiert";
+$string ['user_list_no_participants_message'] = "Es kann keine Tabelle angezeigt werden, da keine Teilnehmer/innen der Aktivität zugewiesen sind.";
 
 
 $string['emailnotifications_info'] = '<i style="color:red;">Die automatische Benachrichtigung über abgeschlossene Gruppenformationen ist momentan leider nicht verfügbar.</i>';
