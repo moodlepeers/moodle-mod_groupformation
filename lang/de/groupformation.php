@@ -346,12 +346,13 @@ $string['evaluation'] = 'Auswertung';
 $string['group_overview'] = 'Übersicht gebildeter Gruppen';
 $string['max_group_size_not_reached'] = 'Maximale Gruppengröße wurde bei folgenden Gruppen nicht erreicht:';
 $string['your_group'] = 'Deine Gruppe';
-$string['students_grouping_single'] = 'Teilnehmende zur Gruppenbildung.';
-$string['students_grouping_multiple'] = 'Teilnehmende zur Gruppenbildung.';
 $string['students_committed_single'] = 'Teilnehmende davon haben ihre Antworten schon endgültig abgegeben.';
 $string['students_committed_multiple'] = 'Teilnehmende davon hat seine Antworten schon endgültig abgegeben.';
-$string ['students_available_grouping_single'] = 'Teilnehmer/in ist für die Gruppenformation verfügbar.';
-$string ['students_available_grouping_multiple'] = 'Teilnehmer/innen sind für die Gruppenformation verfügbar';
+$string ['students_available_grouping_optimized_single'] = 'Teilnehmer/in ist für die optimierte Gruppenformation verfügbar.';
+$string ['students_available_grouping_optimized_multiple'] = 'Teilnehmer/innen sind für die optimierte Gruppenformation verfügbar';
+$string ['students_available_random_optimized_single'] = 'Teilnehmer/in ist für die zufällige Gruppenformation verfügbar.';
+$string ['students_available_random_optimized_multiple'] = 'Teilnehmer/innen sind für die zufällige Gruppenformation verfügbar';
+
 $string['committed_not_completed'] = 'von den fest abgegebenen Fragebögen sind nicht vollständig.';
 $string['completed_questionnaire'] = 'vollständig beantwortete Fragebögen.';
 $string['user_list_headline'] = 'Teilnehmer/innen Liste';

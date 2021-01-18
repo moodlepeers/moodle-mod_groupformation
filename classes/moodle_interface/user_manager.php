@@ -120,14 +120,14 @@ class mod_groupformation_user_manager {
 
     /**
      * Returns array of records of table groupformation_users where excluded is 0 and
-     * completed is 1
+     * completed is 1 (optimized grouping)
      *
      * @param null $sortedby
      * @param string $fieldset
      * @return array
      * @throws dml_exception
      */
-    public function get_available($sortedby = null, $fieldset = '*') {
+    public function get_available_optimized($sortedby = null, $fieldset = '*') {
         global $DB;
 
         return $DB->get_records('groupformation_users', array(
@@ -135,6 +135,48 @@ class mod_groupformation_user_manager {
                 'excluded' => 0,
                 'completed' => 1
         ), $sortedby, $fieldset);
+    }
+
+    /**
+     * Returns array of records of table groupformation_users where excluded is 0 (random grouping)
+     *
+     * @param null $sortedby
+     * @param string $fieldset
+     * @return array
+     * @throws dml_exception
+     */
+    public function get_available_random($sortedby = null, $fieldset = '*') {
+        //Workaround, if I use get_records where excluded => 0 the admin is also returned.
+        // But I want to have only students
+        $studentIds = mod_groupformation_util::get_users($this->groupformationid);
+
+        $store = new mod_groupformation_storage_manager($this->groupformationid);
+
+        $students = [];
+
+
+        foreach ($studentIds as $studentId){
+            // get record for each student
+            $studentRecord = $store->get_user_info($studentId);
+
+            // it is an array
+            foreach($studentRecord as $student){
+                // push only properties of student
+                array_push($students, $student);
+            }
+
+        }
+
+        $result = [];
+
+        // check if student is not excluded
+        foreach($students as $student){
+            if($student->excluded == 0){
+                array_push($result, $student);
+            }
+        }
+
+        return $result;
     }
 
 
@@ -976,10 +1018,17 @@ class mod_groupformation_user_manager {
 
         $stats ['excluded'] = $excludedcount;
 
-        $available = $this->get_available();
-        $availablecount = count($available);
+        $available_optimized = $this->get_available_optimized();
+        $available_optimized_count = count($available_optimized);
 
-        $stats ['available'] = $availablecount;
+        $stats ['available_optimized'] = $available_optimized_count;
+
+        $available_random = $this->get_available_random();
+
+        $available_random_count = count($available_random);
+
+        //$this->store->get_grouping_setting();
+        $stats ['available_random'] = $available_random_count;
 
         return $stats;
     }

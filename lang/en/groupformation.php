@@ -359,8 +359,12 @@ $string ['students_answered_single'] = 'participant has answered the questionnai
 $string ['students_answered_multiple'] = 'participants have answered the questionnaire.';
 $string ['students_excluded_single'] = 'participant was excluded from the questionnaire.';
 $string ['students_excluded_multiple'] = 'participants were excluded from the questionnaire.';
-$string ['students_available_grouping_single'] = 'participant is available for group formation.';
-$string ['students_available_grouping_multiple'] = 'participants are available for group formation.';
+$string ['students_available_grouping_optimized_single'] = 'participant is available for optimized group formation.';
+$string ['students_available_grouping_optimized_multiple'] = 'participants are available for optimized group formation.';
+$string ['students_available_grouping_random_single'] = 'participant is available for random group formation.';
+$string ['students_available_grouping_random_multiple'] = 'participants are available for random group formation.';
+
+
 $string ['name_by_group'] = 'Name:';
 $string ['quality'] = 'Group quality';
 $string ['quality_info'] =
@@ -380,8 +384,6 @@ $string ['evaluation'] = 'Evaluation';
 $string ['group_overview'] = 'Overview of generated groups';
 $string ['max_group_size_not_reached'] = 'Maximum group size has not been reached by the following groups:';
 $string ['your_group'] = 'The name of your group is: ';
-$string ['students_grouping_single'] = 'participant for group formation.';
-$string ['students_grouping_multiple'] = 'participants for group formation.';
 $string ['students_committed_single'] = 'participant therefrom has already committed his/her answers.';
 $string ['students_committed_multiple'] = 'participants have also committed their answers already.';
 $string ['committed_not_completed'] = 'from the committed questionnaires are not complete.';

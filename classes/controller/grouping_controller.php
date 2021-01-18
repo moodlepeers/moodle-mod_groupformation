@@ -351,7 +351,8 @@ class mod_groupformation_grouping_controller {
         $usermanager = $this->usermanager;
         $questionnairestats = $usermanager->get_statistics();
 
-        $assigns['student_count'] = $questionnairestats ['available'];
+        $assigns['statistics_available_optimized'] = $questionnairestats ['available_optimized'];
+        $assigns['statistics_available_random'] = $questionnairestats ['available_random'];
         //$assigns['student_count'] = $count;
         $assigns['cmid'] = $this->cmid;
         $assigns['onlyactivestudents'] = $this->store->get_grouping_setting();
