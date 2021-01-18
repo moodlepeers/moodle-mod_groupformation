@@ -409,7 +409,7 @@ $string ['user_list_no_participants_message'] = "Table can not be displayed beca
 
 $string ['emailnotifications_info'] = 'You will be notified via message when it is terminated.';
 $string ['onlyactivestudents_info'] =
-        'Only participants with at least one submitted answer will be considered for the group formation. This can be configured in the {$a->url}.';
+        'All participants without submitted answers will be excluded from the group formation. This can be configured in the {$a->url}.';
 $string ['starttime'] = 'Start time';
 $string ['endtime'] = 'End time';
 

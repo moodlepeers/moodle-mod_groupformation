@@ -374,8 +374,8 @@ $string ['user_list_no_participants_message'] = "Es kann keine Tabelle angezeigt
 
 
 $string['emailnotifications_info'] = '<i style="color:red;">Die automatische Benachrichtigung über abgeschlossene Gruppenformationen ist momentan leider nicht verfügbar.</i>';
-$string['onlyactivestudents_info'] = 'Es sollen alle Teilnehmer/innen ohne Antworten von der Gruppenbildung ausgeschlossen werden.';
-$string['onlyactivestudents'] = 'Es sollen alle Teilnehmer/innen ohne Antworten von der Gruppenbildung ausgeschlossen werden. Sie können das in den {$a->url} anpassen.';
+$string['onlyactivestudents_info'] = 'Alle Teilnehmer/innen ohne eingereichte Antworten werden von der Gruppenbildung ausgeschlossen.';
+$string['onlyactivestudents'] = 'Alle Teilnehmer/innen ohne eingereichte Antworten werden von der Gruppenbildung ausgeschlossen. Sie können das in den {$a->url} anpassen.';
 $string['emailnotifications'] = '<i style="color:red;">Die automatische Benachrichtigung über abgeschlossene Gruppenformationen ist momentan leider nicht verfügbar.</i>';
 $string['onlyactivestudents_description'] = 'Es sollen alle Teilnehmer/innen ohne Antworten von der Gruppenbildung ausgeschlossen werden.';
 $string['emailnotifications_description'] = '<i style="color:red;">Die automatische Benachrichtigung über abgeschlossene Gruppenformationen ist momentan leider nicht verfügbar.</i>';
