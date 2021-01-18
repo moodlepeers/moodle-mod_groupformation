@@ -310,7 +310,7 @@ $string ['onlyactivestudents'] = 'Exclude all participants without any answers d
 $string ['emailnotifications'] =
         '<i style="color:red;">The automated notification when the groupformation is finished is currently unavailable.</i>';
 $string ['onlyactivestudents_description'] =
-        'Only participants with at least one submitted answer should be considered for building groups.';
+        'Exclude participants without any answers when forming groups.';
 $string ['emailnotifications_description'] =
         '<i style="color:red;">The automated notification when the groupformation is finished is currently unavailable.</i>';
 

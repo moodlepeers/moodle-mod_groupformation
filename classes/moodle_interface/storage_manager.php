@@ -1383,9 +1383,11 @@ class mod_groupformation_storage_manager {
         };
 
         foreach (array_values($enrolledstudents) as $userid) {
-            if ($sum <= $numberofanswers($userid) && !$this->is_filtered($userid) & !$this->is_excluded($userid)) {
+            if ($this->is_excluded($userid)) {
+                continue;
+            } else if ($sum <= $numberofanswers($userid) && !$this->is_filtered($userid)) {
                 $allanswers [] = $userid;
-            } else if ($groupingsetting && $numberofanswers($userid) > 0 & !$this->is_excluded($userid)) {
+            } else if ($groupingsetting && $numberofanswers($userid) > 0) {
                 $someanswers [] = $userid;
             } else {
                 $noorsomeanswers [] = $userid;
@@ -1434,6 +1436,7 @@ class mod_groupformation_storage_manager {
 
     /**
      * returns whether a student is excluded
+     *
      * @param $userid
      * @return bool
      */
@@ -1522,10 +1525,11 @@ class mod_groupformation_storage_manager {
 
     /**
      * returns DB entry of user
+     *
      * @param $userid
      * @return mixed
      */
-    public function get_user_info($userid){
+    public function get_user_info($userid) {
         global $DB;
         $records = $DB->get_records('groupformation_users', array('userid' => $userid));
         return $records;
@@ -1556,11 +1560,12 @@ class mod_groupformation_storage_manager {
 
     /**
      * Returns the email address of specific user
+     *
      * @param $userid
      * @return mixed
      */
-    public function get_email_of_user($userid){
+    public function get_email_of_user($userid) {
         global $DB;
-        return $DB->get_field('user', 'email' , array('id' => $userid));
+        return $DB->get_field('user', 'email', array('id' => $userid));
     }
 }
