@@ -32,6 +32,9 @@ function selectPage(page, $) {
     let userData = document.getElementById("data").innerText;
 
     let data = JSON.parse(userData);
+
+    // let id = JSON.parse(document.getElementById("strings").innerText);
+
     let paginationArray = paginate(data, TABLE_SIZE, page)
 
     // get table column names from php
@@ -39,6 +42,33 @@ function selectPage(page, $) {
     tableHeader = tableHeader.table_columns_names;
 
     addTable(paginationArray, tableHeader, page);
+}
+
+
+function getGroupformationData(user){
+
+    let data = {
+        answer_count: 0,
+        completed: 0,
+        consent: 0,
+        excluded: 0,
+        max_answer_count: 0,
+        user_id: user.id
+    }
+
+    if (user.groupformations.length > 0) {
+        user.groupformations.forEach((item) => {
+            if(item.groupformation == user.current_groupformation){
+                data.answer_count = item.answer_count;
+                data.completed = item.completed;
+                data.consent = item.consent;
+                data.excluded = item.excluded;
+                data.max_answer_count = item.max_answer_count;
+            }
+        })
+    }
+
+    return data;
 }
 
 /**
@@ -86,7 +116,7 @@ function addTable(data, tableHeader, page) {
 
         // check if viewing email addresses of participants is enabled in settings
         // if not delete the last item from header ("email")
-        let isEmailEnabled = data[0][data[0].length > 1 ? 1 : 0].email !== undefined;
+        let isEmailEnabled = data[0].email !== undefined;
         if (!isEmailEnabled) {
             tableHeader.pop();
         }
@@ -108,8 +138,44 @@ function addTable(data, tableHeader, page) {
         // add each item
         for (let i = 0; i < data.length; i++) {
 
-            // check if user has no answers submitted yet
-            let userId = data[i].length > 1 ? data[i][0].userid : data[i][0].id;
+            let userData = data[i];
+            let userId = userData.id;
+
+            let firstname = userData.firstname;
+            let lastname = userData.lastname;
+            let email = userData.email;
+            let current_groupformation = userData.current_groupformation;
+
+
+            let groupformation_data = getGroupformationData(userData);
+
+            let answer_count = groupformation_data.answer_count;
+            let completed = groupformation_data.completed;
+            let consent = groupformation_data.consent;
+            let excluded = groupformation_data.excluded;
+            let max_answer_count = groupformation_data.max_answer_count;
+
+
+
+
+
+            // if (userData.groupformations.length > 0) {
+            //     userData.groupformations.forEach((item) => {
+            //         if(item.groupformation == current_groupformation){
+            //             console.log(item.groupformation);
+            //             console.log(current_groupformation)
+            //
+            //             console.log(item)
+            //             answer_count = item.answer_count;
+            //             submitted = item.completed;
+            //             consent = item.consent;
+            //             excluded = item.excluded;
+            //             max_answer_count = item.max_answer_count;
+            //         }
+            //     })
+            // }
+
+
 
             tr = document.createElement('TR');
             tr.id = `background-${userId}`;
@@ -125,13 +191,13 @@ function addTable(data, tableHeader, page) {
 
             // add first name
             td = document.createElement('TD');
-            td.appendChild(document.createTextNode(data[i][data[i].length > 1 ? 1 : 0].firstname));
+            td.appendChild(document.createTextNode(firstname));
             td.id = `firstname-${userId}`;
             tr.appendChild(td);
 
             // add last name
             td = document.createElement('TD');
-            td.appendChild(document.createTextNode(data[i][data[i].length > 1 ? 1 : 0].lastname));
+            td.appendChild(document.createTextNode(lastname));
             td.id = `lastname-${userId}`;
             tr.appendChild(td);
 
@@ -142,7 +208,7 @@ function addTable(data, tableHeader, page) {
                 td.insertAdjacentHTML("beforeend", renderEmailIcon());
                 td.onclick = async () => {
                     // copy email address to clipboard
-                    await navigator.clipboard.writeText(data[i][data[i].length > 1 ? 1 : 0].email).then(() => {
+                    await navigator.clipboard.writeText(email).then(() => {
                         alert(JSON.parse(document.getElementById("strings").innerText).email_message)
                     });
                 };
@@ -152,19 +218,15 @@ function addTable(data, tableHeader, page) {
             // add consent given
             td = document.createElement('TD');
             td.id = `consent-${userId}`;
-            let consentIcon = data[i][0].consent !== undefined ? data[i][0].consent === 0 ? renderXIcon() : renderCheckIcon() : renderXIcon();
+            let consentIcon = consent !== undefined ? consent === 0 ? renderXIcon() : renderCheckIcon() : renderXIcon();
             td.insertAdjacentHTML("beforeend", consentIcon);
             td.setAttribute("name", JSON.stringify("consent"));
             td.setAttribute("data", JSON.stringify(userId))
             tr.appendChild(td);
 
-            // progress bar
-            let answerCount = data[i][0].answer_count;
-
-            let maxAnswerCount = data[i][0].max_answer_count
 
             // percentage of answer count
-            let pcg = Math.floor(answerCount / maxAnswerCount * 100);
+            let pcg = Math.floor(answer_count / max_answer_count * 100);
 
             td = document.createElement('TD');
             let progress = document.createElement("div");
@@ -183,9 +245,9 @@ function addTable(data, tableHeader, page) {
             progressBar.className = "progress-bar";
             progressBar.setAttribute('style', 'width:' + Number(pcg) + '%');
             progressBar.setAttribute("role", "progressbar");
-            progressBar.setAttribute("aria-valuenow", answerCount);
+            progressBar.setAttribute("aria-valuenow", answer_count);
             progressBar.setAttribute("aria-valuemin", 0);
-            progressBar.setAttribute("aria-valuemax", maxAnswerCount);
+            progressBar.setAttribute("aria-valuemax", max_answer_count);
 
             td.appendChild(progress);
             progress.appendChild(progressBar)
@@ -195,7 +257,7 @@ function addTable(data, tableHeader, page) {
             // add answers submitted
             td = document.createElement('TD');
             td.id = `completed-${userId}`;
-            let answeredIcon = data[i][0].completed === "0" ? renderXIcon() : renderCheckIcon();
+            let answeredIcon = completed == 0 ? renderXIcon() : renderCheckIcon();
             td.setAttribute("data", JSON.stringify(userId))
             td.insertAdjacentHTML("beforeend", answeredIcon);
             tr.appendChild(td);
@@ -236,7 +298,7 @@ function addTable(data, tableHeader, page) {
             // set button string
             deleteButton.appendChild(document.createTextNode((JSON.parse(document.getElementById("strings").innerText)).delete_answers));
             // deleteButton.style.marginLeft = "10px";
-            deleteButton.setAttribute('onclick', `deleteAnswers(${JSON.stringify(data[i][0])})`);
+            deleteButton.setAttribute('onclick', `deleteAnswers(${JSON.stringify(userData)})`);
 
             dropdownMenu.appendChild(deleteButton);
 
@@ -245,7 +307,15 @@ function addTable(data, tableHeader, page) {
             excludeButton.id = `exclude-button-${userId}`;
             excludeButton.className = "dropdown-item";
             // excludeButton.style.marginLeft = "10px";
-            excludeButton.setAttribute('onclick', `excludeUser(${JSON.stringify({userid: userId, groupformation: data[i][0].groupformation, excluded: data[i][0].excluded, completed: data[i][0].completed})})`);
+            excludeButton.setAttribute('onclick', `excludeUser(${JSON.stringify({
+                userid: userId,
+                groupformation: current_groupformation,
+                excluded: excluded,
+                completed: completed,
+                answer_count: answer_count,
+                consent: consent,
+                max_answer_count: max_answer_count
+            })})`);
 
             dropdownMenu.appendChild(excludeButton)
 
@@ -259,7 +329,7 @@ function addTable(data, tableHeader, page) {
         tableContent.appendChild(table);
 
         data.forEach((user) => {
-            handleStyleOfTable(user[0])
+            handleStyleOfTable(user)
         })
     }
 }
@@ -272,41 +342,44 @@ function addTable(data, tableHeader, page) {
  */
 function handleStyleOfTable(user, deleteAnswers = false) {
 
+    let data = getGroupformationData(user);
+
     // check if user has no answers submitted yet
-    let userId = user.userid !== undefined ? user.userid : user.id;
+    let userId = data.user_id;
 
     // set color to grey if the user gets excluded or black if the user gets included
     let number = document.getElementById(`number-${userId}`);
-    number.style.color = user.excluded == 1 ? "darkgrey" : null;
+
+    number.style.color = data.excluded == 1 ? "darkgrey" : null;
 
     let firstname = document.getElementById(`firstname-${userId}`);
-    firstname.style.color = user.excluded == 1 ? "darkgrey" : null;
+    firstname.style.color = data.excluded == 1 ? "darkgrey" : null;
 
     let lastname = document.getElementById(`lastname-${userId}`);
-    lastname.style.color = user.excluded == 1 ? "darkgrey" : null;
+    lastname.style.color = data.excluded == 1 ? "darkgrey" : null;
 
     let excludeButton = document.getElementById(`exclude-button-${userId}`);
     let langString = JSON.parse(document.getElementById("strings").innerText);
-    excludeButton.innerText = user.excluded == 0 ? langString.exclude_user : langString.include_user;
+    excludeButton.innerText = data.excluded == 0 ? langString.exclude_user : langString.include_user;
 
     // check if user has no answers submitted yet
-    if (user.excluded === undefined) {
+    if (data.excluded === undefined) {
         excludeButton.disabled = true;
     }
 
-    if(user.completed == 1){
+    if (data.completed == 1) {
         let completed = document.getElementById(`completed-${userId}`);
         completed.innerHTML = renderCheckIcon();
-    }else{
+    } else {
         let completed = document.getElementById(`completed-${userId}`);
         completed.innerHTML = renderXIcon();
     }
 
     // background color
     let background = document.getElementById(`background-${userId}`);
-    background.style.backgroundColor = user.excluded == 1 ? "lightgrey" : null;
+    background.style.backgroundColor = data.excluded == 1 ? "lightgrey" : null;
 
-    if (user.answer_count == 0 || deleteAnswers) {
+    if (data.answer_count == 0 || deleteAnswers) {
         let progressBar = document.getElementById(`questionaire-${userId}`);
         progressBar.style.width = "0%";
         // progressBar.innerHTML = "0";
@@ -319,7 +392,7 @@ function handleStyleOfTable(user, deleteAnswers = false) {
     }
 
     // check if user has no answers submitted yet
-    if (user.answer_count === undefined) {
+    if (data.answer_count === undefined) {
         let deleteAnswersButton = document.getElementById(`delete-answers-button-${userId}`);
         deleteAnswersButton.disabled = true;
     }

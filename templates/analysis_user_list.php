@@ -140,15 +140,20 @@
                                 userid: resultUser.userid,
                                 groupformation: resultUser.groupformation,
                                 excluded: resultUser.excluded,
-                                completed: user.completed
+                                completed: user.completed,
+                                answer_count: user.answer_count,
+                                max_answer_count: user.max_answer_count,
+                                consent: user.consent,
                             }
                         )})`);
 
 
-                        resultUser.completed = user.completed
+                        user.excluded = resultUser.excluded
+
+
 
                         // set new style of excluded or included user
-                        handleStyleOfTable(resultUser)
+                        handleStyleOfTable({id: resultUser.userid, current_groupformation: user.groupformation, groupformations: [user]})
 
                         // get dataset
                         let userData = document.getElementById("data").innerText;

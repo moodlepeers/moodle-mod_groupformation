@@ -132,8 +132,6 @@ class mod_groupformation_analysis_controller {
         $assigns['statistics_available_optimized'] = $questionnairestats ['available_optimized'];
         $assigns['statistics_available_random'] = $questionnairestats ['available_random'];
 
-
-
         return $assigns;
     }
 
@@ -254,7 +252,7 @@ class mod_groupformation_analysis_controller {
 
         foreach ($userList AS $id) {
             // get user groupformation infos
-            $user = $this->store->get_user_info($id);
+            $groupformation_answers = $this->store->get_user_info($id);
 
             // get user info like name
             $user_info = $DB->get_records_list('user', 'id', [$id], null, $selectfields);
@@ -278,27 +276,38 @@ class mod_groupformation_analysis_controller {
             }
 
             // add new field in user array
-            foreach ($user as &$row) {
+            foreach ($groupformation_answers as &$row) {
                 $row->max_answer_count = $total;
             }
 
+            foreach ($user_info as $info) {
+                $groupformations = [];
+                foreach ($groupformation_answers as $item) {
+                    array_push($groupformations, $item);
+                }
+
+                $info->groupformations = $groupformations;
+                $info->current_groupformation = $this->groupformationid;
+                array_push($users, $info);
+            }
             // merge arrays
-            $userData = array_merge($user, $user_info);
+            $user_info->groupformations = $groupformation_answers;
+            //$userData = array_merge($user, $user_info);
 
             // push to users array
-            array_push($users, $userData);
+            //array_push($users, $user_info);
 
         }
 
-        // filter users for specific groupformation
-        $filtered_user = array();
-        foreach ($users as $value) {
-            if ($value[0]->groupformation == $this->groupformationid)  {
-                array_push($filtered_user, $value);
-            }
-        }
+        //// filter users for specific groupformation
+        //$filtered_user = array();
+        //foreach ($users as $value) {
+        //    if ($value[0]->groupformation == $this->groupformationid)  {
+        //        array_push($filtered_user, $value);
+        //    }
+        //}
 
-        $assigns['users'] = $filtered_user;
+        $assigns['users'] = $users;
 
         return $assigns;
     }
