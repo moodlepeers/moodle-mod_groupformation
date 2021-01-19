@@ -156,27 +156,6 @@ function addTable(data, tableHeader, page) {
             let max_answer_count = groupformation_data.max_answer_count;
 
 
-
-
-
-            // if (userData.groupformations.length > 0) {
-            //     userData.groupformations.forEach((item) => {
-            //         if(item.groupformation == current_groupformation){
-            //             console.log(item.groupformation);
-            //             console.log(current_groupformation)
-            //
-            //             console.log(item)
-            //             answer_count = item.answer_count;
-            //             submitted = item.completed;
-            //             consent = item.consent;
-            //             excluded = item.excluded;
-            //             max_answer_count = item.max_answer_count;
-            //         }
-            //     })
-            // }
-
-
-
             tr = document.createElement('TR');
             tr.id = `background-${userId}`;
             tr.setAttribute("data", JSON.stringify(userId));
@@ -306,7 +285,6 @@ function addTable(data, tableHeader, page) {
             let excludeButton = document.createElement("button");
             excludeButton.id = `exclude-button-${userId}`;
             excludeButton.className = "dropdown-item";
-            // excludeButton.style.marginLeft = "10px";
             excludeButton.setAttribute('onclick', `excludeUser(${JSON.stringify({
                 userid: userId,
                 groupformation: current_groupformation,

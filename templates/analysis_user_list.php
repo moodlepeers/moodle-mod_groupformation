@@ -37,7 +37,7 @@
         if (confirm('<?php echo get_string("user_list_delete_answers_msg", "groupformation"); ?>')) {
 
             // set spinner
-            let spinner = document.getElementById(`spinner-${user.userid}`);
+            let spinner = document.getElementById(`spinner-${user.id}`);
             spinner.className = "spinner-border spinner-border-sm";
 
             require(['core/ajax'],
@@ -49,13 +49,12 @@
                     let promises = ajax.call([
                         {
                             methodname: 'mod_groupformation_delete_answers',
-                            args: {users: [{userid: user.userid, groupformation: user.groupformation}]}
+                            args: {users: [{userid: user.id, groupformation: user.current_groupformation}]}
                         }
                     ]);
 
                     promises[0].done(function (response) {
                         // if deleting answers were successfully
-
                         spinner.className = "";
                         handleStyleOfTable(user, true)
 
@@ -64,10 +63,10 @@
                         let data = JSON.parse(userData);
 
                         // find specific user in dataset
-                        let index = data.findIndex(e => e[0].userid == user.userid);
+                        let index = data.findIndex(e => e.id == user.id);
 
                         // change answer count to 0
-                        data[index][0].answer_count = 0;
+                        data[index].answer_count = 0;
 
                         // set new dataset back to the data element
                         (document.getElementById("data")).innerHTML = JSON.stringify(data);
@@ -150,8 +149,6 @@
 
                         user.excluded = resultUser.excluded
 
-
-
                         // set new style of excluded or included user
                         handleStyleOfTable({id: resultUser.userid, current_groupformation: user.groupformation, groupformations: [user]})
 
@@ -160,10 +157,10 @@
                         let data = JSON.parse(userData);
 
                         // find specific user in dataset
-                        let index = data.findIndex(e => e[0].userid == resultUser.userid);
+                        let index = data.findIndex(e => e.id == resultUser.userid);
 
                         // change status of excluded
-                        data[index][0].excluded = resultUser.excluded;
+                        data[index].excluded = resultUser.excluded;
 
                         // set new dataset back to the data element
                         (document.getElementById("data")).innerHTML = JSON.stringify(data);
