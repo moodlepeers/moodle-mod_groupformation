@@ -105,6 +105,7 @@
             let spinner = document.getElementById(`spinner-${user.userid}`);
             spinner.className = "spinner-border spinner-border-sm";
 
+            console.log("exclude", user)
             require(['core/ajax'],
                 /**
                  * ajax call to exclude user
@@ -118,12 +119,16 @@
                                 users: [{
                                     userid: user.userid,
                                     groupformation: user.groupformation,
+                                    excluded: user.excluded == 0 ? 1 : 0
                                 }]
                             }
                         }
                     ]);
 
                     promises[0].done(function (result) {
+
+                        console.log("test")
+                        console.log("result", result);
 
                         // disable spinner
                         spinner.className = "";
@@ -150,7 +155,11 @@
                         user.excluded = resultUser.excluded
 
                         // set new style of excluded or included user
-                        handleStyleOfTable({id: resultUser.userid, current_groupformation: user.groupformation, groupformations: [user]})
+                        handleStyleOfTable({
+                            id: resultUser.userid,
+                            current_groupformation: user.groupformation,
+                            groupformations: [user]
+                        })
 
                         // get dataset
                         let userData = document.getElementById("data").innerText;

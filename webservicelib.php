@@ -77,7 +77,8 @@ class mod_groupformation_external extends external_api {
                                         array(
                                                 'userid' => new external_value(PARAM_INT, 'id of user'),
                                                 'groupformation' => new external_value(PARAM_TEXT,
-                                                        'id of groupformation')
+                                                        'id of groupformation'),
+                                                'excluded' => new external_value(PARAM_INT, 'excluded status')
                                         )
                                 )
                         )
@@ -115,19 +116,15 @@ class mod_groupformation_external extends external_api {
             $store = new mod_groupformation_storage_manager($groupformationid);
             $user_values = $store->get_user_info($userid);
 
-            $excluded = 0;
             $completed = 0;
             foreach( $user_values as &$row) {
-                if ($row->excluded == 0){
-                    $excluded = 1;
-                }
                 $completed = $row->completed;
             }
 
             $usermanager = new mod_groupformation_user_manager($groupformationid);
-            $usermanager->set_excluded($userid, $excluded, $completed);
+            $usermanager->set_excluded($userid, $user->excluded, $completed);
 
-            return array("users" => array("userid" => $user->userid, "groupformation" => $user->groupformation, "excluded" => $excluded));
+            return array("users" => array("userid" => $user->userid, "groupformation" => $groupformationid, "excluded" => $user->excluded));
         }
     }
 
