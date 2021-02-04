@@ -325,8 +325,6 @@ $string['are'] = 'Es gibt';
 $string['are_now'] = 'Es gibt derzeit';
 $string['students_available_single'] = 'eingeschriebenen Teilnehmenden, der den Fragebogen ausfüllen kann.';
 $string['students_available_multiple'] = 'eingeschriebene Teilnehmende, die den Fragebogen ausfüllen können.';
-$string['students_answered_single'] = 'Teilnehmende hat den Fragebogen bearbeitet.';
-$string['students_answered_multiple'] = 'Teilnehmende haben den Fragebogen bearbeitet.';
 $string['students_excluded_single'] = 'Teilnehmender wurde aus dem Fragebogen ausgeschlossen.';
 $string['students_excluded_multiple'] = 'Teilnehmende wurden aus dem Fragebogen ausgeschlossen.';
 $string['name_by_group'] = 'Name:';
@@ -346,12 +344,14 @@ $string['evaluation'] = 'Auswertung';
 $string['group_overview'] = 'Übersicht gebildeter Gruppen';
 $string['max_group_size_not_reached'] = 'Maximale Gruppengröße wurde bei folgenden Gruppen nicht erreicht:';
 $string['your_group'] = 'Deine Gruppe';
-$string['students_committed_single'] = 'Teilnehmende davon haben ihre Antworten schon endgültig abgegeben.';
-$string['students_committed_multiple'] = 'Teilnehmende davon hat seine Antworten schon endgültig abgegeben.';
-$string ['students_available_grouping_optimized_single'] = 'Teilnehmer/in ist für die optimierte Gruppenformation verfügbar.';
-$string ['students_available_grouping_optimized_multiple'] = 'Teilnehmer/innen sind für die optimierte Gruppenformation verfügbar';
+$string ['students_available_grouping_optimized_single'] = 'Teilnehmer/in ist für die optimierte und';
+$string ['students_available_grouping_optimized_multiple'] = 'Teilnehmer/innen sind für die optimierte und';
 $string ['students_available_random_optimized_single'] = 'Teilnehmer/in ist für die zufällige Gruppenformation verfügbar.';
-$string ['students_available_random_optimized_multiple'] = 'Teilnehmer/innen sind für die zufällige Gruppenformation verfügbar';
+$string ['students_available_random_optimized_multiple'] = 'Teilnehmer/innen sind für die zufällige Gruppenformation verfügbar.';
+
+$string ['students_have_started_not_completed_single'] = 'Teilnehmer/in hat den Fragebogen begonnen, aber noch nicht abgeschlossen.';
+$string ['students_have_started_not_completed_multiple'] = 'Teilnehmer/innen haben den Fragebogen begonnen, aber noch nicht abgeschlossen.';
+
 
 $string['committed_not_completed'] = 'von den fest abgegebenen Fragebögen sind nicht vollständig.';
 $string['completed_questionnaire'] = 'vollständig beantwortete Fragebögen.';

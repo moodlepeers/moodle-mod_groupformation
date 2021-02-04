@@ -1015,6 +1015,7 @@ class mod_groupformation_user_manager {
 
         $stats ['available_optimized'] = $available_optimized_count;
 
+        $stats['started_not_completed'] = count($this->get_available_random());
 
         $store = new mod_groupformation_storage_manager($this->groupformationid);
         $answers_required = $store->get_grouping_setting();

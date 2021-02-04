@@ -126,11 +126,11 @@ class mod_groupformation_analysis_controller {
 
         $assigns['statistics_enrolled'] = $questionnairestats ['enrolled'];
         $assigns['statistics_processed'] = $questionnairestats ['processing'];
-        $assigns['statistics_submitted'] = $questionnairestats ['submitted'];
         $assigns['statistics_submitted_complete'] = $questionnairestats ['submitted_completely'];
         $assigns['statistics_excluded'] = $questionnairestats ['excluded'];
         $assigns['statistics_available_optimized'] = $questionnairestats ['available_optimized'];
         $assigns['statistics_available_random'] = $questionnairestats ['available_random'];
+        $assigns['statistics_started_not_completed'] = $questionnairestats['started_not_completed'];
 
         return $assigns;
     }

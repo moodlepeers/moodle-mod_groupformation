@@ -38,27 +38,22 @@ if (!defined('MOODLE_INTERNAL')) {
         </div>
     <?php endif; ?>
 
-    <div class="grid">
-        <div class="grid row_highlight">
-            <div class="col_m_100"><b><?php echo $this->_['statistics_available_optimized']; ?></b>
-                <?php echo ' ' ?>
-                <?php if ($this->_['statistics_available_optimized'] == 1): ?>
-                    <?php echo get_string('students_available_grouping_optimized_single', 'groupformation'); ?>
-                <?php else: ?>
-                    <?php echo get_string('students_available_grouping_optimized_multiple', 'groupformation'); ?>
-                <?php endif; ?>
-            </div>
-        </div>
+    <div class="grid row_highlight">
+        <div class="col_m_100"><b><?php echo $this->_['statistics_available_optimized']; ?></b>
+            <?php echo ' ' ?>
+            <?php if ($this->_['statistics_available_optimized'] == 1): ?>
+                <?php echo get_string('students_available_grouping_optimized_single', 'groupformation'); ?>
+            <?php else: ?>
+                <?php echo get_string('students_available_grouping_optimized_multiple', 'groupformation'); ?>
+            <?php endif; ?>
 
-        <div class="grid row_highlight">
-            <div class="col_m_100"><b><?php echo $this->_['statistics_available_random']; ?></b>
-                <?php echo ' ' ?>
-                <?php if ($this->_['statistics_available_random'] == 1): ?>
-                    <?php echo get_string('students_available_grouping_random_single', 'groupformation'); ?>
-                <?php else: ?>
-                    <?php echo get_string('students_available_grouping_random_multiple', 'groupformation'); ?>
-                <?php endif; ?>
-            </div>
+            <b> <?php echo $this->_['statistics_available_random']; ?> </b>
+            <?php echo ' ' ?>
+            <?php if ($this->_['statistics_available_random'] == 1): ?>
+                <?php echo get_string('students_available_grouping_random_single', 'groupformation'); ?>
+            <?php else: ?>
+                <?php echo get_string('students_available_grouping_random_multiple', 'groupformation'); ?>
+            <?php endif; ?>
         </div>
     </div>
 

@@ -37,7 +37,7 @@ global $USER;
             <b>
                 <?php echo ' ' . $this->_['statistics_enrolled']; ?>
             </b>
-            <?php echo ' ';?>
+            <?php echo ' '; ?>
             <?php if ($this->_['statistics_enrolled'] == 1): ?>
                 <?php echo get_string('students_available_single', 'groupformation'); ?>
             <?php else: ?>
@@ -45,25 +45,7 @@ global $USER;
             <?php endif; ?>
         </div>
     </div>
-    <div class="grid row_highlight">
-        <div class="col_m_100"><b><?php echo $this->_['statistics_processed']; ?></b>
-            <?php if ($this->_['statistics_processed'] == 1): ?>
-                <?php echo get_string('students_answered_single', 'groupformation'); ?>
-            <?php else: ?>
-                <?php echo get_string('students_answered_multiple', 'groupformation'); ?>
-            <?php endif; ?>
-        </div>
-    </div>
-    <div class="grid row_highlight">
-        <div class="col_m_100"><b><?php echo $this->_['statistics_submitted']; ?></b>
-            <?php echo ' ' ?>
-            <?php if ($this->_['statistics_submitted'] == 1): ?>
-                <?php echo get_string('students_committed_single', 'groupformation'); ?>
-            <?php else: ?>
-                <?php echo get_string('students_committed_multiple', 'groupformation'); ?>
-            <?php endif; ?>
-        </div>
-    </div>
+
     <div class="grid row_highlight">
         <div class="col_m_100"><b><?php echo $this->_['statistics_submitted_complete']; ?></b>
             <?php echo ' ' ?>
@@ -74,16 +56,19 @@ global $USER;
             <?php endif; ?>
         </div>
     </div>
+
+
     <div class="grid row_highlight">
-        <div class="col_m_100"><b><?php echo $this->_['statistics_excluded']; ?></b>
+        <div class="col_m_100"><b><?php echo $this->_['statistics_started_not_completed']; ?></b>
             <?php echo ' ' ?>
-            <?php if ($this->_['statistics_excluded'] == 1): ?>
-                <?php echo get_string('students_excluded_single', 'groupformation'); ?>
+            <?php if ($this->_['statistics_started_not_completed'] == 1): ?>
+                <?php echo get_string('students_have_started_not_completed_single', 'groupformation'); ?>
             <?php else: ?>
-                <?php echo get_string('students_excluded_multiple', 'groupformation'); ?>
+                <?php echo get_string('students_have_started_not_completed_multiple', 'groupformation'); ?>
             <?php endif; ?>
         </div>
     </div>
+
     <div class="grid row_highlight">
         <div class="col_m_100"><b><?php echo $this->_['statistics_available_optimized']; ?></b>
             <?php echo ' ' ?>
@@ -92,16 +77,24 @@ global $USER;
             <?php else: ?>
                 <?php echo get_string('students_available_grouping_optimized_multiple', 'groupformation'); ?>
             <?php endif; ?>
-        </div>
-    </div>
 
-    <div class="grid row_highlight">
-        <div class="col_m_100"><b><?php echo $this->_['statistics_available_random']; ?></b>
+            <b> <?php echo $this->_['statistics_available_random']; ?> </b>
             <?php echo ' ' ?>
             <?php if ($this->_['statistics_available_random'] == 1): ?>
                 <?php echo get_string('students_available_grouping_random_single', 'groupformation'); ?>
             <?php else: ?>
                 <?php echo get_string('students_available_grouping_random_multiple', 'groupformation'); ?>
+            <?php endif; ?>
+        </div>
+    </div>
+
+    <div class="grid row_highlight">
+        <div class="col_m_100"><b><?php echo $this->_['statistics_excluded']; ?></b>
+            <?php echo ' ' ?>
+            <?php if ($this->_['statistics_excluded'] == 1): ?>
+                <?php echo get_string('students_excluded_single', 'groupformation'); ?>
+            <?php else: ?>
+                <?php echo get_string('students_excluded_multiple', 'groupformation'); ?>
             <?php endif; ?>
         </div>
     </div>
