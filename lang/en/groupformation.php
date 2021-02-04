@@ -489,13 +489,9 @@ $string ['consent_alert_message'] = 'You need give consent before accessing the 
 $string ['consent_opt_in'] = 'Consent (opt-in)';
 $string ['consent_header'] = 'I want to participate in the groupformation plugin and agree to submit answers to the questionnaire. The participation or non-participation has no impact on the grading process (or the credit points).';
 $string ['consent_header_import'] = 'By importing your answers, you agree to participate in the groupformation plugin and you agree to submit answers to the questionnaire. The participation or non-participation has no impact on the grading process (or the credit points).';
-$string ['consent_message_new_2'] = '<ul><li>
-The instructor has no direct access to my answers for the group formation (just I am able to access the evaluation about my personality as well as the group average).
-</li><li>
-My personal data will be paired through the parcipant code and will be pseudonymized with it. Identification of individuals through pseudonymized data will not be possible.
-</li><li>
-My personal data will be deleted when the course ends - latest after {$a->archivedays} days.</li><li>
-My performance in the course will be evaluated with my participant code for scientific purposes.</li></ul>';
+$string ['consent_message_new_3'] = '<p>You hereby consent to the completion of the following questionnaires and to the collection and processing of your data. This data is recorded and evaluated pseudonymously without linking your details to your name. Your matriculation number  will only be used in order to connect the different parts of the data collection and will be deleted immediately afterwards.</p>
+
+<p>You can recall your consent to the storage of the data during the test and terminate it without any disadvantages for you. By completing the test, you automatically agree that your anonymized data may be used for research purposes.</p>';
 $string ['consent_agree'] = 'I agree to the terms';
 
 $string ['questionnaire_delete'] = 'Remove consent';

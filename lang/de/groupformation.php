@@ -500,15 +500,18 @@ $string['eval_caption_course'] = 'Kurs';
 $string['consent_alert_message'] = 'Sie müssen den Nutzungsbedingungen zustimmen, um den Fragebogen zu beantworten. Lesen und akzeptieren sie die Nutzungsbedingungen, bevor sie auf "Weiter" klicken.';
 $string['consent_opt_in'] = 'Einwilligung (opt-in)';
 $string['consent_header_import'] = 'Durch Import ihrer Antworten sind sie damit einverstanden, die Möglichkeiten des Gruppenformationsplugins zu nutzen und füllen dafür die gestellten Fragen soweit möglich aus. Die Teilnahme oder Nicht-Teilnahme hat keinerlei Einfluß auf die Benotung (Creditpoints).';
-$string['consent_header'] = 'Ich möchte die Möglichkeiten des Gruppenformationsplugins nutzen und fülle dafür die gestellten Fragen soweit möglich aus. Die Teilnahme oder Nicht-Teilnahme hat keinerlei Einfluß auf die Benotung (Creditpoints).';
-$string['consent_message_new_2'] = '<ul><li>
-Der Kursleiter/in oder Dozent/in sieht meine persönlichen Angaben für die Gruppenformation nicht (nur ich selbst
-erhalte Feedback zu meinen Persönlichkeitsmerkmalen, sowie zum Durchschnittsvergleich mit der Gruppe).
-</li><li>
-Meine Angaben werden im Rahmen der Studie dieser Lehrveranstaltung mittels meines Teilnehmercodes gepaart und dadurch pseudonymisiert. Es ist kein Rückschluss auf Einzelpersonen möglich.
-</li><li>
-Meine Angaben werden am Kursende - spätestens nach {$a->archivedays} Tagen gelöscht.</li><li>
-Meine Leistungen im Kurs werden unter Verwendung meines Teilnehmercodes zu wissenschaftlichen Zwecken ausgewertet.</li></ul>';
+$string['consent_header'] = 'Hiermit willigen Sie ein, die folgenden Fragebögen auszufüllen und stimmen der Erhebung und Verarbeitung Ihrer Daten zu. Diese Daten werden pseudonymisiert erfasst und ausgewertet, ohne dass Ihre Angaben mit Ihrem Namen verknüpft werden. Ihre Matrikelnummer wird nur verwendet, um die verschiedenen Teile der Datenerhebung miteinander zu verbinden und wird danach sofort gelöscht.';
+$string['consent_message_new_3'] = '<p>Hiermit willigen Sie ein, die folgenden Fragebögen auszufüllen und stimmen der Erhebung und Verarbeitung Ihrer Daten zu. Diese Daten werden pseudonymisiert erfasst und ausgewertet, ohne dass Ihre Angaben mit Ihrem Namen verknüpft werden. Ihre Matrikelnummer wird nur verwendet, um die verschiedenen Teile der Datenerhebung miteinander zu verbinden und wird danach sofort gelöscht.</p>
+<p>Ihr Einverständnis über die Aufbewahrung bzw. Speicherung der Daten können Sie während des Tests widerrufen und ihn beenden, ohne dass Ihnen daraus Nachteile entstehen. Mit Beendigung des Tests erklären Sie sich automatisch damit einverstanden, dass Ihre anonymisierten Daten zu Forschungszwecken verwendet werden können.</p>';
+
+/*
+Hiermit willigen Sie ein, die folgenden Fragebögen auszufüllen und stimmen der Erhebung und Verarbeitung Ihrer Daten zu. Diese Daten werden pseudonymisiert erfasst und ausgewertet, ohne dass Ihre Angaben mit Ihrem Namen verknüpft werden. Ihre Matrikelnummer wird nur verwendet, um die verschiedenen Teile der Datenerhebung miteinander zu verbinden und wird danach sofort gelöscht.
+
+Ihr Einverständnis über die Aufbewahrung bzw. Speicherung der Daten können Sie während des Tests widerrufen und ihn beenden, ohne dass Ihnen daraus Nachteile entstehen. Mit Beendigung des Tests erklären Sie sich automatisch damit einverstanden, dass Ihre anonymisierten Daten zu Forschungszwecken verwendet werden können. 
+
+*/
+
+
 $string['consent_agree'] = 'Ich bin einverstanden';
 
 $string['questionnaire_delete'] = 'Zustimmung widerrufen';

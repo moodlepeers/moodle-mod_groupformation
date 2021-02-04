@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="demographic questions">
-    <QUESTIONS VERSION="2020110401">
+    <QUESTIONS VERSION="2021020401">
         <QUESTION ID="1" TYPE="dropdown">
             <QUESTIONTEXT>
                 <![CDATA[Geschlecht]]>
@@ -20,6 +20,40 @@
                 </OPTION>
             </OPTIONS>
         </QUESTION>
+        <QUESTION ID="2" TYPE="dropdown">
+            <QUESTIONTEXT>
+                <![CDATA[Welcher Fächergruppe lässt sich Ihr Studiengang zuordnen?]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[Geisteswissenschaften]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Sport, Sportwissenschaften]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Rechts-, Wirtschafts- und Sozialwissenschaften]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Mathematik, Naturwissenschaften, Informatik]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Humanmedizin/Gesundheitswissenschaften]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Agrar-, Forst- und Ernährungswissenschaften, Veterinärmedizin]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Ingenieurwissenschaften]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Kunst, Kunstwissenschaft]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Sonstige Fachrichtungen]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
         <QUESTION ID="3" TYPE="number">
             <QUESTIONTEXT>
                 <![CDATA[Alter]]>
@@ -33,111 +67,32 @@
                 </MAX>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="6" TYPE="dropdown">
+        <QUESTION ID="4" TYPE="dropdown">
             <QUESTIONTEXT>
-                <![CDATA[Bitte geben Sie Ihre Abiturnote (bzw. Durchschnittsnote des Abschlusszeugnis) an:]]>
+                <![CDATA[An welcher Universität sind Sie eingeschrieben?]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[Ausländischer Schulabschluss]]>
+                    <![CDATA[Beuth Hochschule für Technik Berlin (BHT)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[1,0]]>
+                    <![CDATA[Jacobs University Bremen (JUB)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[1,1]]>
+                    <![CDATA[Johannes Gutenberg Universität Mainz (JGU)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[1,2]]>
+                    <![CDATA[Rheinisch-Westfälische Technische Hochschule Aachen (RWTH)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[1,3]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[1,4]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[1,5]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[1,6]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[1,7]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[1,8]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[1,9]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[2,0]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[2,1]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[2,2]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[2,3]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[2,4]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[2,5]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[2,6]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[2,7]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[2,8]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[2,9]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[3,0]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[3,1]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[3,2]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[3,3]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[3,4]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[3,5]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[3,6]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[3,7]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[3,8]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[3,9]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[4,0]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[nicht bestanden]]>
+                    <![CDATA[Andere]]>
                 </OPTION>
             </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="5" TYPE="freetext">
+            <QUESTIONTEXT>
+                <![CDATA[Wie lautet Ihre Matrikelnummer?]]>
+            </QUESTIONTEXT>
         </QUESTION>
     </QUESTIONS>
 </GROUPFORMATION>

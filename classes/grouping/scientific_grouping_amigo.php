@@ -341,9 +341,10 @@ class mod_groupformation_scientific_grouping_amigo extends mod_groupformation_gr
         $specs = [
             'team' => $teamspecs,
         ];
-
+        
+        /*
         $condition = $this->store->get_condition();
-
+        
         if ($condition == 1) {
             // true = homo ; false = hetero
             $configurations = array(
@@ -355,6 +356,13 @@ class mod_groupformation_scientific_grouping_amigo extends mod_groupformation_gr
                 "groupal:1;team:0" => array('team_teamorientation' => false),
             );
         }
+        */
+
+        // true = homo ; false = hetero
+        $configurations = array(
+            "groupal:1;team:1" => array('team_teamorientation' => true),
+            "groupal:1;team:0" => array('team_teamorientation' => false),
+        );
 
         return [$configurations, $specs];
     }
