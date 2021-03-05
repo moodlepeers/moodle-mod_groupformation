@@ -118,6 +118,24 @@ class mod_groupformation_user_manager {
     }
 
     /**
+     * returns if the user is excluded from questionnaire (0 or 1)
+     *
+     * @param $userId
+     * @return integer
+     *  @throws dml_exception
+     */
+    public function is_user_excluded($userId) {
+        global $DB;
+
+        $result = $DB->get_record('groupformation_users', array(
+                'groupformation' => $this->groupformationid,
+                'userid' => $userId
+        ));
+
+        return $result->excluded;
+    }
+
+    /**
      * returns array of users who are available for random grouping where the
      * user have at least one submitted answer
      */

@@ -595,6 +595,9 @@ $string ['eval_caption_user'] = 'User';
 $string ['eval_caption_group'] = 'Group';
 $string ['eval_caption_course'] = 'Course';
 
+
+$string ['overview_excluded_message'] = 'You have been excluded from this group formation. If you have any questions, please contact the person in charge.';
+
 $string ['consent_alert_message'] =
         'You need give consent before accessing the questionnaire. Scroll down and agree to terms before clicking on "Next".';
 $string ['consent_opt_in'] = 'Consent (opt-in)';

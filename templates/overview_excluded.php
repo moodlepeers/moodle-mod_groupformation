@@ -13,22 +13,23 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 /**
- * Version information
+ * Overview info template
  *
  * @package     mod_groupformation
  * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+if (!defined('MOODLE_INTERNAL')) {
+    die ('Direct access to this script is forbidden.');
+}
 
-defined('MOODLE_INTERNAL') || die();
+?>
 
-$plugin->version = 2021030601;
-$plugin->requires = 2016052300; // Could be set to Moodle 3.1 2016052300; Best use Moodle 3.2 (2016120500) due to new bootstrap 4.
-$plugin->cron = 0;
-$plugin->component = 'mod_groupformation';
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = 'v1.7.0'; // We do not use the Moodle versions as prefix; we use semantic versioning (http://semver.org/).
-$plugin->dependencies = array();
+<div class="gf_pad_content">
+    <?php echo $this->_['intro_box']; ?>
+    <p>
+        <?php echo get_string('overview_excluded_message', 'groupformation'); ?>
+    </p>
+</div>
