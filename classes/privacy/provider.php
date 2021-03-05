@@ -53,16 +53,16 @@ class provider implements
     public static function _get_metadata(collection $collection) {
         // TODO: Implement get_metadata() method.
         $collection->add_database_table(
-                'groupformation_answer',
+                'groupformation_answers',
                 [
-                        'groupformation' => 'privacy:metadata:groupformation_answer:groupformation',
-                        'category' => 'privacy:metadata:groupformation_answer:category',
-                        'questionid' => 'privacy:metadata:groupformation_answer:questionid',
-                        'userid' => 'privacy:metadata:groupformation_answer:userid',
-                        'answer' => 'privacy:metadata:groupformation_answer:answer',
-                        'timestamp' => 'privacy:metadata:groupformation_answer:timestamp'
+                        'groupformation' => 'privacy:metadata:groupformation_answers:groupformation',
+                        'category' => 'privacy:metadata:groupformation_answers:category',
+                        'questionid' => 'privacy:metadata:groupformation_answers:questionid',
+                        'userid' => 'privacy:metadata:groupformation_answers:userid',
+                        'answer' => 'privacy:metadata:groupformation_answers:answer',
+                        'timestamp' => 'privacy:metadata:groupformation_answers:timestamp'
                 ],
-                'privacy:metadata:groupformation_answer'
+                'privacy:metadata:groupformation_answers'
         );
         $collection->add_database_table(
                 'groupformation_groups',
