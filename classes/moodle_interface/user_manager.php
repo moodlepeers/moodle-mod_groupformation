@@ -120,9 +120,9 @@ class mod_groupformation_user_manager {
     /**
      * returns if the user is excluded from questionnaire (0 or 1)
      *
-     * @param $userId
+     * @param int $userId
      * @return integer
-     *  @throws dml_exception
+     * @throws dml_exception
      */
     public function is_user_excluded($userId) {
         global $DB;
@@ -138,6 +138,10 @@ class mod_groupformation_user_manager {
     /**
      * returns array of users who are available for random grouping where the
      * user have at least one submitted answer
+     *
+     * @param null $sortedby
+     * @param string $fieldset
+     * @return mixed
      */
     public function get_users_optimized_random($sortedby = null, $fieldset = '*') {
         global $DB;
@@ -1082,8 +1086,8 @@ class mod_groupformation_user_manager {
      * update excluded state
      *
      * @param int $userid
-     * @param bool $value
-     * @throws dml_exception
+     * @param int $value
+     * @param int $completed
      */
     public function set_excluded($userid, $value, $completed) {
         global $DB;

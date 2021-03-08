@@ -1,8 +1,16 @@
 <?php
-
 require_once("$CFG->libdir/externallib.php");
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 
+/**
+ *
+ * Class mod_groupformation_external
+ *
+ * @package     mod_groupformation
+ * @author      Stefan Jung
+ * @copyright   2021 MoodlePeers
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class mod_groupformation_external extends external_api {
 
     /**
@@ -26,6 +34,11 @@ class mod_groupformation_external extends external_api {
         );
     }
 
+    /**
+     * return value of delete answers webservice
+     *
+     * @return external_multiple_structure
+     */
     public static function delete_answers_returns() {
         return new external_multiple_structure(
                 new external_single_structure(
@@ -40,7 +53,7 @@ class mod_groupformation_external extends external_api {
     /**
      * delete answers, set the new answer count and change complete to false
      *
-     * @param array user array of group description arrays (with keys groupname and courseid)
+     * @param array $users  array (with keys groupname and courseid)
      * @return array
      */
     public static function delete_answers($users) {
@@ -62,7 +75,6 @@ class mod_groupformation_external extends external_api {
             return array("users" => array("id" => $user->userid, "groupformation" => $user->groupformation));
         }
     }
-
 
     /**
      * Returns description of method parameters
@@ -86,6 +98,11 @@ class mod_groupformation_external extends external_api {
         );
     }
 
+    /**
+     * return value of exclude user webservice
+     *
+     * @return external_multiple_structure
+     */
     public static function exclude_users_returns() {
         return new external_multiple_structure(
                 new external_single_structure(
@@ -101,7 +118,7 @@ class mod_groupformation_external extends external_api {
     /**
      * exclude or include user users from questionaire
      *
-     * @param $users array of the user with user id, groupformation id and exclude value 1 for excluding and 0 for including
+     * @param array $users array of the user with user id, groupformation id and exclude value 1 for excluding and 0 for including
      * @return array
      */
     public static function exclude_users($users) {
@@ -117,14 +134,15 @@ class mod_groupformation_external extends external_api {
             $user_values = $store->get_user_info($userid);
 
             $completed = 0;
-            foreach( $user_values as &$row) {
+            foreach ($user_values as &$row) {
                 $completed = $row->completed;
             }
 
             $usermanager = new mod_groupformation_user_manager($groupformationid);
             $usermanager->set_excluded($userid, $user->excluded, $completed);
 
-            return array("users" => array("userid" => $user->userid, "groupformation" => $groupformationid, "excluded" => $user->excluded));
+            return array("users" => array("userid" => $user->userid, "groupformation" => $groupformationid,
+                    "excluded" => $user->excluded));
         }
     }
 

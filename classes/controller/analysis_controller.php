@@ -242,6 +242,11 @@ class mod_groupformation_analysis_controller {
         return $assigns;
     }
 
+    /**
+     * load users of groupformation for user table to display
+     *
+     * @return mixed
+     */
     public function load_users() {
         global $DB;
         $userList = $this->store->get_users();
@@ -292,20 +297,7 @@ class mod_groupformation_analysis_controller {
             }
             // merge arrays
             $user_info->groupformations = $groupformation_answers;
-            //$userData = array_merge($user, $user_info);
-
-            // push to users array
-            //array_push($users, $user_info);
-
         }
-
-        //// filter users for specific groupformation
-        //$filtered_user = array();
-        //foreach ($users as $value) {
-        //    if ($value[0]->groupformation == $this->groupformationid)  {
-        //        array_push($filtered_user, $value);
-        //    }
-        //}
 
         $assigns['users'] = $users;
 

@@ -1437,8 +1437,9 @@ class mod_groupformation_storage_manager {
     /**
      * returns whether a student is excluded
      *
-     * @param $userid
+     * @param int $userid
      * @return bool
+     * @throws dml_exception
      */
     public function is_excluded($userid) {
         global $DB;
@@ -1526,8 +1527,9 @@ class mod_groupformation_storage_manager {
     /**
      * returns DB entry of user
      *
-     * @param $userid
+     * @param int $userid
      * @return mixed
+     * @throws dml_exception
      */
     public function get_user_info($userid) {
         global $DB;
@@ -1561,8 +1563,9 @@ class mod_groupformation_storage_manager {
     /**
      * Returns the email address of specific user
      *
-     * @param $userid
+     * @param int $userid
      * @return mixed
+     * @throws dml_exception
      */
     public function get_email_of_user($userid) {
         global $DB;

@@ -24,9 +24,7 @@
  */
 
 /**
- *  webservice
- *
- * @params groups description
+ * webservice
  */
 $services = array(
         'groupformation_delete_answers_service' => array(                                                // the name of the web service
@@ -55,7 +53,6 @@ $services = array(
 /**
  * webservice functions
  *
- * @params groups description
  */
 $functions = array(
         'mod_groupformation_delete_answers' => array(         //web service function name

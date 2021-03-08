@@ -40,8 +40,10 @@ class mod_groupformation_overview_view_controller extends mod_groupformation_bas
     /** @var string Title of page */
     protected $title = 'overview';
 
+    /** @var mod_groupformation_user_manager user manager instance */
     private $usermanager;
 
+    /** @var int state of user (excluded 1, included 0) */
     private $is_excluded = 0;
 
     /**
