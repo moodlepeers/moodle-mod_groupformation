@@ -628,6 +628,11 @@ $string ['privacy:metadata:groupformation_group_users'] = 'Information about the
 $string ['privacy:metadata:groupformation_group_users:groupformation'] = 'ID of the activity';
 $string ['privacy:metadata:groupformation_group_users:userid'] = 'ID of the user';
 $string ['privacy:metadata:groupformation_group_users:groupid'] = 'ID of corresponding record in table "groupformation_groups"';
+$string ['privacy:metadata:groupformation_logging'] = 'Group formation logging table';
+$string ['privacy:metadata:groupformation_logging:timestamp'] = 'Timestamp of the entry';
+$string ['privacy:metadata:groupformation_logging:userid'] = 'ID of the user';
+$string ['privacy:metadata:groupformation_logging:groupformationid'] = 'ID of the activity';
+$string ['privacy:metadata:groupformation_logging:message'] = 'Log message';
 
 $string ['bucket_description'] = 'I want to pre-group the participants based on a selection question';
 
