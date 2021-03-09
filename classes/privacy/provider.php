@@ -317,7 +317,7 @@ class provider implements
     public static function delete_data_for_all_users_in_context(\context $context) {
         global $DB;
 
-        if ($context->contextlevel != COURSE_MODULE) {
+        if ($context->contextlevel != CONTEXT_MODULE) {
             return;
         }
 
