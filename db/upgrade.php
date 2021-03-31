@@ -958,7 +958,7 @@ function xmldb_groupformation_upgrade($oldversion) {
     if ($oldversion < 2015111400) {
 
         // Define field timestamp to be added to groupformation_answer.
-        $table = new xmldb_table('groupformation_answer');
+        $table = new xmldb_table('groupformation_answers');
         $field = new xmldb_field('timestamp', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'answer');
 
         // Conditionally launch add field timestamp.
@@ -1707,7 +1707,7 @@ function xmldb_groupformation_upgrade($oldversion) {
     if ($oldversion < 2018061703) {
 
         // Define table groupformation_answer to be renamed to groupformation_answers.
-        $table = new xmldb_table('groupformation_answer');
+        $table = new xmldb_table('groupformation_answers');
 
         // Launch rename table for groupformation_answer.
         $dbman->rename_table($table, 'groupformation_answers');

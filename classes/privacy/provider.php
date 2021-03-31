@@ -26,10 +26,11 @@ namespace mod_groupformation\privacy;
 defined('MOODLE_INTERNAL') || die();
 
 use core_privacy\local\metadata\collection;
-use core_privacy\local\request\context;
-use \core_privacy\local\request\contextlist;
-use \core_privacy\local\request\writer;
-use \core_privacy\local\request\approved_contextlist;
+use core_privacy\local\request\contextlist;
+use core_privacy\local\request\userlist;
+use core_privacy\local\request\writer;
+use core_privacy\local\request\approved_userlist;
+use core_privacy\local\request\approved_contextlist;
 
 /**
  * Class provider
@@ -39,9 +40,16 @@ use \core_privacy\local\request\approved_contextlist;
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements
-        \core_privacy\local\metadata\provider,
-        \core_privacy\local\request\plugin\provider {
+    // This plugin has data.
+    \core_privacy\local\metadata\provider,
 
+    // This plugin is capable of determining which users have data within it.
+    \core_privacy\local\request\core_userlist_provider,
+
+    // This plugin currently implements the original plugin\provider interface.
+    \core_privacy\local\request\plugin\provider {
+
+    // This trait must be included to provide the relevant polyfill for the metadata provider.
     use \core_privacy\local\legacy_polyfill;
 
     /**
@@ -50,19 +58,18 @@ class provider implements
      * @param   collection $collection The initialised collection to add items to.
      * @return  collection     A listing of user data stored through this system.
      */
-    public static function _get_metadata(collection $collection) {
-        // TODO: Implement get_metadata() method.
+    public static function get_metadata(collection $collection) : collection {
         $collection->add_database_table(
-                'groupformation_answer',
+                'groupformation_answers',
                 [
-                        'groupformation' => 'privacy:metadata:groupformation_answer:groupformation',
-                        'category' => 'privacy:metadata:groupformation_answer:category',
-                        'questionid' => 'privacy:metadata:groupformation_answer:questionid',
-                        'userid' => 'privacy:metadata:groupformation_answer:userid',
-                        'answer' => 'privacy:metadata:groupformation_answer:answer',
-                        'timestamp' => 'privacy:metadata:groupformation_answer:timestamp'
+                        'groupformation' => 'privacy:metadata:groupformation_answers:groupformation',
+                        'category' => 'privacy:metadata:groupformation_answers:category',
+                        'questionid' => 'privacy:metadata:groupformation_answers:questionid',
+                        'userid' => 'privacy:metadata:groupformation_answers:userid',
+                        'answer' => 'privacy:metadata:groupformation_answers:answer',
+                        'timestamp' => 'privacy:metadata:groupformation_answers:timestamp'
                 ],
-                'privacy:metadata:groupformation_answer'
+                'privacy:metadata:groupformation_answers'
         );
         $collection->add_database_table(
                 'groupformation_groups',
@@ -106,6 +113,16 @@ class provider implements
                 ],
                 'privacy:metadata:groupformation_user_values'
         );
+        $collection->add_database_table(
+            'groupformation_logging',
+            [
+                'timestamp' => 'privacy:metadata:groupformation_logging:timestamp',
+                'userid' => 'privacy:metadata:groupformation_logging:userid',
+                'groupformationid' => 'privacy:metadata:groupformation_logging:groupformationid',
+                'message' => 'privacy:metadata:groupformation_logging:message',
+            ],
+            'privacy:metadata:groupformation_logging'
+        );
         return $collection;
     }
 
@@ -115,9 +132,8 @@ class provider implements
      * @param   int $userid The user to search.
      * @return  contextlist   $contextlist  The contextlist containing the list of contexts used in this plugin.
      */
-    public static function _get_contexts_for_userid(int $userid) {
-        // TODO: Implement get_contexts_for_userid() method.
-        $contextlist = new \core_privacy\local\request\contextlist();
+    public static function get_contexts_for_userid(int $userid) : contextlist {
+        $contextlist = new contextlist();
 
         $params = [
                 'modname' => 'groupformation',
@@ -172,7 +188,7 @@ class provider implements
      * @return mixed
      * @throws \dml_exception
      */
-    public static function get_user_data(int $userid, int $groupformationid) {
+    private static function get_user_data(int $userid, int $groupformationid) {
         global $DB;
 
         $userdata = $DB->get_record('groupformation_users', array(
@@ -226,7 +242,7 @@ class provider implements
      * @return array
      * @throws \dml_exception
      */
-    public static function get_answers(int $userid, int $groupformationid) {
+    private static function get_answers(int $userid, int $groupformationid) {
         global $DB;
 
         $sql = 'SELECT
@@ -263,7 +279,6 @@ class provider implements
      * @throws \dml_exception
      */
     public static function export_user_data(approved_contextlist $contextlist) {
-        // TODO: Implement export_user_data() method.
         global $DB;
 
         if (empty($contextlist)) {
@@ -317,7 +332,7 @@ class provider implements
     public static function delete_data_for_all_users_in_context(\context $context) {
         global $DB;
 
-        if ($context->contextlevel != COURSE_MODULE) {
+        if ($context->contextlevel != CONTEXT_MODULE) {
             return;
         }
 
@@ -343,7 +358,7 @@ class provider implements
      * @param   approved_contextlist $contextlist The approved contexts and user information to delete information for.
      * @throws \dml_exception
      */
-    public static function delete_data_for_user(approved_contextlist $contextlist) {
+    public static function delete_data_for_users(approved_userlist $contextlist) {
         global $DB;
 
         if (empty($contextlist->count())) {
@@ -359,6 +374,7 @@ class provider implements
             $DB->delete_records('groupformation_users', ['groupformation' => $groupformationid, 'userid' => $userid]);
             $DB->delete_records('groupformation_user_values', ['groupformationid' => $groupformationid, 'userid' => $userid]);
             $DB->delete_records('groupformation_answers', ['groupformation' => $groupformationid, 'userid' => $userid]);
+            $DB->delete_records('groupformation_logging', ['groupformationid' => $groupformationid, 'userid' => $userid]);
 
             if ($groupid = $DB->get_field(
                     'groupformation_group_users',
@@ -381,5 +397,40 @@ class provider implements
                 }
             }
         }
+    }
+
+    /**
+     * Get the list of users who have data within a context.
+     *
+     * @param userlist $userlist The userlist containing the list of users who have data in this context/plugin combination.
+     */
+    public static function get_users_in_context(userlist $userlist) {
+        $context = $userlist->get_context();
+
+        if (!$context instanceof \context_user) {
+            return;
+        }
+
+        $params = [
+            'modname' => 'groupformation',
+            'contextid' => $context->id,
+            'contextuser' => CONTEXT_USER,
+        ];
+
+        $sql = "SELECT DISTINCT u.userid
+                  FROM {context} c
+                  JOIN {course_modules} cm
+                  JOIN {modules} m
+                  JOIN {groupformation} g
+             LEFT JOIN {groupformation_users} u
+                 WHERE cm.id = c.instanceid
+                   AND c.contextlevel = :contextlevel
+                   AND m.id = cm.module
+                   AND m.name = :modname
+                   AND g.id = cm.instance
+                   AND u.groupformation = g.id
+                   AND c.id = :contextid";
+
+        $userlist->add_from_sql('userid', $sql, $params);
     }
 }

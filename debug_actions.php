@@ -41,7 +41,7 @@ if (isset($CFG->debugusers)) {
     $debugusers = explode(',', $CFG->debugusers);
 }
 
-if (true || ($CFG->debug === 32767) || (in_array($USER->id, $debugusers))) {
+if (is_siteadmin($USER->id) || $CFG->debug == 32767) { //has_capability('mod/groupformation:debugactions', $context)) {
 
     // Reset job action.
     if ($resetjob) {
@@ -114,7 +114,7 @@ if (true || ($CFG->debug === 32767) || (in_array($USER->id, $debugusers))) {
     // Generate debug actions as buttons.
     $debugbuttons = "";
     $debugbuttons .= '<div class="gf_pad_header">';
-    $debugbuttons .= 'Developer options';
+    $debugbuttons .= 'Developer options (Only visible to admin or in debug mode. Do not use in production)';
     $debugbuttons .= '</div>';
     $debugbuttons .= '<div class="gf_pad_content">';
 

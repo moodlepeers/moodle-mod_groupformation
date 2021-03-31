@@ -733,17 +733,15 @@ $string ['privacy:metadata:groupformation_users:groupid'] = 'Group ID if A/B gro
 $string ['privacy:metadata:groupformation_users:answer_count'] = 'Number of answered questions';
 $string ['privacy:metadata:groupformation_users:consent'] = 'Flag indicating if user gave consent (if consent is requested)';
 $string ['privacy:metadata:groupformation_users:participantcode'] = 'Participant code of user (if participant code is requested)';
-$string ['privacy:metadata:groupformation_users:filtered'] =
-        'Flag indicating whether user was filtered out during grouping process and was grouped randomly.';
-$string ['privacy:metadata:groupformation_answer'] = 'Information about the users\' answers for the questionnaire of the activity.';
-$string ['privacy:metadata:groupformation_answer:groupformation'] = 'ID of the activity';
-$string ['privacy:metadata:groupformation_answer:userid'] = 'ID of the user';
-$string ['privacy:metadata:groupformation_answer:category'] = 'Category of the corresponding question';
-$string ['privacy:metadata:groupformation_answer:questionid'] = 'ID of the corresponding question';
-$string ['privacy:metadata:groupformation_answer:answer'] = 'Answer given by user';
-$string ['privacy:metadata:groupformation_answer:timestamp'] = 'Timestamp of when user sent the answer';
-$string ['privacy:metadata:groupformation_user_values'] =
-        'Information about the users\' value for criterion dimensions used for groupformation.';
+$string ['privacy:metadata:groupformation_users:filtered'] = 'Flag indicating whether user was filtered out during grouping process and was grouped randomly.';
+$string ['privacy:metadata:groupformation_answers'] = 'Information about the users\' answers for the questionnaire of the activity.';
+$string ['privacy:metadata:groupformation_answers:groupformation'] = 'ID of the activity';
+$string ['privacy:metadata:groupformation_answers:userid'] = 'ID of the user';
+$string ['privacy:metadata:groupformation_answers:category'] = 'Category of the corresponding question';
+$string ['privacy:metadata:groupformation_answers:questionid'] = 'ID of the corresponding question';
+$string ['privacy:metadata:groupformation_answers:answer'] = 'Answer given by user';
+$string ['privacy:metadata:groupformation_answers:timestamp'] = 'Timestamp of when user sent the answer';
+$string ['privacy:metadata:groupformation_user_values'] = 'Information about the users\' value for criterion dimensions used for groupformation.';
 $string ['privacy:metadata:groupformation_user_values:groupformationid'] = 'ID of the activity';
 $string ['privacy:metadata:groupformation_user_values:userid'] = 'ID of the user';
 $string ['privacy:metadata:groupformation_user_values:criterion'] = 'Type of criterion used for groupformation';
@@ -759,6 +757,11 @@ $string ['privacy:metadata:groupformation_group_users'] = 'Information about the
 $string ['privacy:metadata:groupformation_group_users:groupformation'] = 'ID of the activity';
 $string ['privacy:metadata:groupformation_group_users:userid'] = 'ID of the user';
 $string ['privacy:metadata:groupformation_group_users:groupid'] = 'ID of corresponding record in table "groupformation_groups"';
+$string ['privacy:metadata:groupformation_logging'] = 'Group formation logging table';
+$string ['privacy:metadata:groupformation_logging:timestamp'] = 'Timestamp of the entry';
+$string ['privacy:metadata:groupformation_logging:userid'] = 'ID of the user';
+$string ['privacy:metadata:groupformation_logging:groupformationid'] = 'ID of the activity';
+$string ['privacy:metadata:groupformation_logging:message'] = 'Log message';
 
 $string ['bucket_description'] = 'I want to pre-group the participants based on a selection question';
 
