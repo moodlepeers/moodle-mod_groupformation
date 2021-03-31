@@ -519,7 +519,7 @@ $string['eval_caption_user'] = 'Teilnehmer';
 $string['eval_caption_group'] = 'Gruppe';
 $string['eval_caption_course'] = 'Kurs';
 
-$string ['overview_excluded_message'] = 'Sie sind von dieser Gruppenbildung ausgeschlossen worden. Wenn Sie Fragen haben, wenden Sie sich bitte an die Lehrkraft.';
+$string ['overview_excluded_message'] = 'Sie sind von dieser Gruppenbildung ausgeschlossen worden. Sollten Sie Fragen haben, wenden Sie sich bitte an Ihre/n Dozierende/n.';
 
 
 $string['consent_alert_message'] = 'Sie müssen den Nutzungsbedingungen zustimmen, um den Fragebogen zu beantworten. Lesen und akzeptieren sie die Nutzungsbedingungen, bevor sie auf "Weiter" klicken.';
