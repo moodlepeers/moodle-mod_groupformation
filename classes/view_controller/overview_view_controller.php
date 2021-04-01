@@ -36,9 +36,15 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/basic_
 class mod_groupformation_overview_view_controller extends mod_groupformation_basic_view_controller {
 
     /** @var array Template names */
-    protected $templatenames = array('overview_info', 'overview_statistics', 'overview_settings');
+    protected $templatenames = array('overview_info', 'overview_statistics', 'overview_settings', 'overview_excluded');
     /** @var string Title of page */
     protected $title = 'overview';
+
+    /** @var mod_groupformation_user_manager user manager instance */
+    private $usermanager;
+
+    /** @var int state of user (excluded 1, included 0) */
+    private $is_excluded = 0;
 
     /**
      * mod_groupformation_overview_view_controller constructor.
@@ -51,6 +57,10 @@ class mod_groupformation_overview_view_controller extends mod_groupformation_bas
     public function __construct($groupformationid, $controller) {
         parent::__construct($groupformationid, $controller);
         $this->view->assign('title_append', " - " . $this->store->get_name());
+
+        $this->usermanager = new mod_groupformation_user_manager($this->groupformationid);
+
+        $this->is_excluded = $this->usermanager->is_user_excluded($this->controller->userid);
     }
 
     /**
@@ -59,11 +69,12 @@ class mod_groupformation_overview_view_controller extends mod_groupformation_bas
      * @return string
      */
     public function render_overview_info() {
-        $overviewoptions = new mod_groupformation_template_builder();
-        $overviewoptions->set_template('overview_info');
-        $overviewoptions->assign_multiple($this->controller->load_info());
-
-        return $overviewoptions->load_template();
+        if(!$this->is_excluded) {
+            $overviewoptions = new mod_groupformation_template_builder();
+            $overviewoptions->set_template('overview_info');
+            $overviewoptions->assign_multiple($this->controller->load_info());
+            return $overviewoptions->load_template();
+        }
     }
 
     /**
@@ -72,11 +83,13 @@ class mod_groupformation_overview_view_controller extends mod_groupformation_bas
      * @return string
      */
     public function render_overview_statistics() {
-        $overviewoptions = new mod_groupformation_template_builder();
-        $overviewoptions->set_template('overview_statistics');
-        $overviewoptions->assign_multiple($this->controller->load_statistics());
+        if(!$this->is_excluded){
+            $overviewoptions = new mod_groupformation_template_builder();
+            $overviewoptions->set_template('overview_statistics');
+            $overviewoptions->assign_multiple($this->controller->load_statistics());
+            return $overviewoptions->load_template();
+        }
 
-        return $overviewoptions->load_template();
     }
 
     /**
@@ -85,11 +98,26 @@ class mod_groupformation_overview_view_controller extends mod_groupformation_bas
      * @return string
      */
     public function render_overview_settings() {
-        $overviewoptions = new mod_groupformation_template_builder();
-        $overviewoptions->set_template('overview_settings');
-        $overviewoptions->assign_multiple($this->controller->load_settings());
+        if(!$this->is_excluded) {
+            $overviewoptions = new mod_groupformation_template_builder();
+            $overviewoptions->set_template('overview_settings');
+            $overviewoptions->assign_multiple($this->controller->load_settings());
+            return $overviewoptions->load_template();
+        }
+    }
 
-        return $overviewoptions->load_template();
+
+    /**
+     * Renders 'overview_excluded' template.
+     *
+     * @return string
+     */
+    public function render_overview_excluded() {
+        if($this->is_excluded) {
+            $overviewoptions = new mod_groupformation_template_builder();
+            $overviewoptions->set_template('overview_excluded');
+            return $overviewoptions->load_template();
+        }
     }
 
     /**
@@ -99,7 +127,6 @@ class mod_groupformation_overview_view_controller extends mod_groupformation_bas
 
         if (data_submitted() && confirm_sesskey()) {
             // Initialize useful entities.
-            $usermanager = new mod_groupformation_user_manager($this->groupformationid);
             $groupsmanager = new mod_groupformation_groups_manager ($this->groupformationid);
             $id = $this->controller->cmid;
             $userid = $this->controller->userid;
@@ -114,15 +141,15 @@ class mod_groupformation_overview_view_controller extends mod_groupformation_bas
 
                 // If consent was given, set internal.
                 if (isset($consent)) {
-                    $usermanager->set_consent($userid, true);
+                    $this->usermanager->set_consent($userid, true);
                     // User state machine calls action "consent".
                     $this->store->userstatemachine->change_state($userid, "consent");
                 }
 
                 // If participant code was given, validate and set internal.
                 if (isset($participantcode) && $participantcode !== '') {
-                    if ($usermanager->validate_participant_code($participantcode)) {
-                        $usermanager->register_participant_code($userid, $participantcode);
+                    if ( $this->usermanager->validate_participant_code($participantcode)) {
+                        $this->usermanager->register_participant_code($userid, $participantcode);
                         $this->store->userstatemachine->change_state($userid, "p_code");
                     }
                 }
@@ -134,7 +161,7 @@ class mod_groupformation_overview_view_controller extends mod_groupformation_bas
             } else if ($begin == -1) {
                 // Delete answers due to consent removal.
 
-                $usermanager->delete_answers($userid);
+                $this->usermanager->delete_answers($userid);
                 $this->store->userstatemachine->change_state($userid, "remove_consent");
 
                 // Redirect.
@@ -142,15 +169,15 @@ class mod_groupformation_overview_view_controller extends mod_groupformation_bas
                         'id' => $id));
                 redirect($returnurl);
             } else if ($begin == 0) {
-                if ($usermanager->is_completed($userid)) {
+                if ( $this->usermanager->is_completed($userid)) {
                     // If completed, unset internal completion status.
-                    $usermanager->set_complete($userid, 0);
+                    $this->usermanager->set_complete($userid, 0);
                     $this->store->userstatemachine->change_state($userid, "revert");
 
                 } else {
                     $this->store->userstatemachine->change_state($userid, "submit");
                     // If not completed, set internal completion status.
-                    $usermanager->set_complete($userid, 1);
+                    $this->usermanager->set_complete($userid, 1);
                     // Also, set activity completion.
                     groupformation_set_activity_completion($id, $userid);
 

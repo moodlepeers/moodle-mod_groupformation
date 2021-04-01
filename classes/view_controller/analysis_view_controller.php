@@ -36,7 +36,7 @@ require_once($CFG->dirroot . '/mod/groupformation/classes/view_controller/basic_
 class mod_groupformation_analysis_view_controller extends mod_groupformation_basic_view_controller {
 
     /** @var array Template names */
-    protected $templatenames = array('analysis_info', 'analysis_statistics', 'analysis_topics');
+    protected $templatenames = array('analysis_info', 'analysis_statistics', 'analysis_topics', "analysis_user_list");
 
     /** @var string Title of page */
     protected $title = 'analysis';
@@ -91,6 +91,19 @@ class mod_groupformation_analysis_view_controller extends mod_groupformation_bas
         $overviewoptions = new mod_groupformation_template_builder();
         $overviewoptions->set_template('analysis_topics');
         $overviewoptions->assign_multiple($this->controller->load_topic_statistics());
+
+        return $overviewoptions->load_template();
+    }
+
+    /**
+     * Renders 'analysis_user_list' template.
+     *
+     * @return string
+     */
+    public function render_analysis_user_list() {
+        $overviewoptions = new mod_groupformation_template_builder();
+        $overviewoptions->set_template('analysis_user_list');
+        $overviewoptions->assign_multiple($this->controller->load_users());
 
         return $overviewoptions->load_template();
     }

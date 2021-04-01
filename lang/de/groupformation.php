@@ -323,10 +323,10 @@ $string['activity_visible'] = 'Diese Aktivität ist für Sie aufgrund Ihrer Roll
 
 $string['are'] = 'Es gibt';
 $string['are_now'] = 'Es gibt derzeit';
-$string['students_available_single'] = 'eingeschriebenen Teilnehmenden, der den Fragebogen ausfüllen kann.';
-$string['students_available_multiple'] = 'eingeschriebene Teilnehmende, die den Fragebogen ausfüllen können.';
-$string['students_answered_single'] = 'Teilnehmende hat den Fragebogen bearbeitet.';
-$string['students_answered_multiple'] = 'Teilnehmende haben den Fragebogen bearbeitet.';
+$string['participant_available_single'] = 'eingeschriebenen Teilnehmer/in, der den Fragebogen ausfüllen kann.';
+$string['participant_available_multiple'] = 'eingeschriebene Teilnehmer/innen, die den Fragebogen ausfüllen können.';
+$string['students_excluded_single'] = 'Teilnehmer/in wurde aus dem Fragebogen ausgeschlossen.';
+$string['students_excluded_multiple'] = 'Teilnehmer/innen wurden aus dem Fragebogen ausgeschlossen.';
 $string['name_by_group'] = 'Name:';
 $string['quality'] = 'Gruppenqualität:';
 $string['quality_info'] = 'Der Gruppen-Performanz-Index (GPI) gibt die Qualität der gebildeten Gruppe wieder und ist ein Wert zwischen 0 und 1. Je größer der Wert, deste besser ist die gebildete Gruppe. Ist kein Wert angegeben, so sind die Gruppen nicht algorithmisch gebildet, sondern randomisiert.';
@@ -344,18 +344,40 @@ $string['evaluation'] = 'Auswertung';
 $string['group_overview'] = 'Übersicht gebildeter Gruppen';
 $string['max_group_size_not_reached'] = 'Maximale Gruppengröße wurde bei folgenden Gruppen nicht erreicht:';
 $string['your_group'] = 'Deine Gruppe';
-$string['students_grouping_single'] = 'Teilnehmende zur Gruppenbildung.';
-$string['students_grouping_multiple'] = 'Teilnehmende zur Gruppenbildung.';
-$string['students_committed_single'] = 'Teilnehmende davon haben ihre Antworten schon endgültig abgegeben.';
-$string['students_committed_multiple'] = 'Teilnehmende davon hat seine Antworten schon endgültig abgegeben.';
+$string ['students_available_grouping_optimized_single'] = 'Teilnehmer/in ist für die optimierte und';
+$string ['students_available_grouping_optimized_multiple'] = 'Teilnehmer/innen sind für die optimierte und';
+$string ['students_available_grouping_random_single'] = 'Teilnehmer/in ist für die zufällige Gruppenformation verfügbar.';
+$string ['students_available_grouping_random_multiple'] = 'Teilnehmer/innen sind für die zufällige Gruppenformation verfügbar.';
+
+$string ['students_have_started_not_completed_single'] = 'Teilnehmer/in hat den Fragebogen begonnen, aber noch nicht abgeschlossen.';
+$string ['students_have_started_not_completed_multiple'] = 'Teilnehmer/innen haben den Fragebogen begonnen, aber noch nicht abgeschlossen.';
+
+
 $string['committed_not_completed'] = 'von den fest abgegebenen Fragebögen sind nicht vollständig.';
 $string['completed_questionnaire'] = 'vollständig beantwortete Fragebögen.';
+$string['user_list_headline'] = 'Teilnehmer/innen Liste';
+$string['user_list_firstname'] = 'Vorname';
+$string['user_list_lastname'] = 'Nachname';
+$string['user_list_consent'] = 'Einverständnis';
+$string['user_list_progress'] = 'Fortschritt';
+$string['user_list_submitted'] = 'Eingereicht';
+$string['user_list_actions'] = 'Aktionen';
+$string['user_list_delete_answers'] = 'Antworten löschen';
+$string['user_list_delete_answers_msg'] = 'Sind Sie sicher, dass Sie die Antworten des Teilnehmers/in löschen möchten?';
+$string ['user_list_exclude_user'] = 'Teilnehmer/in ausschließen';
+$string ['user_list_exclude_user_msg'] = 'Sind Sie sicher, dass Sie diesen Teilnehmer/in ausschließen wollen?';
+$string ['user_list_include_user'] = 'Teilnehmer/in einschließen';
+$string ['user_list_include_user_msg'] = 'Sind Sie sicher, dass Sie diesen Teilnehmer/in einschließen wollen?';
+$string ['user_list_user_per_page'] = 'Teilnehmer/innen pro Seite';
+$string ['user_list_email_copied_message'] = "Die Email Adresse wurde in die Zwischenablage kopiert";
+$string ['user_list_no_participants_message'] = "Es kann keine Tabelle angezeigt werden, da keine Teilnehmer/innen der Aktivität zugewiesen sind.";
+
 
 $string['emailnotifications_info'] = '<i style="color:red;">Die automatische Benachrichtigung über abgeschlossene Gruppenformationen ist momentan leider nicht verfügbar.</i>';
-$string['onlyactivestudents_info'] = 'Zur Gruppenbildung werden ausschließlich Teilnehmende betrachtet werden, die mind. eine Frage beantwortet haben.';
-$string['onlyactivestudents'] = 'Zur Gruppenbildung werden ausschließlich Teilnehmende betrachtet werden, die mind. eine Frage beantwortet haben. Sie können das in den {$a->url} anpassen.';
+$string['onlyactivestudents_info'] = 'Alle Teilnehmer/innen ohne eingereichte Antworten werden von der Gruppenbildung ausgeschlossen.';
+$string['onlyactivestudents'] = 'Alle Teilnehmer/innen ohne eingereichte Antworten werden von der Gruppenbildung ausgeschlossen. Sie können das in den {$a->url} anpassen.';
 $string['emailnotifications'] = '<i style="color:red;">Die automatische Benachrichtigung über abgeschlossene Gruppenformationen ist momentan leider nicht verfügbar.</i>';
-$string['onlyactivestudents_description'] = 'Zur Gruppenbildung werden ausschließlich Teilnehmende betrachtet werden, die mind. eine Frage beantwortet haben.';
+$string['onlyactivestudents_description'] = 'Es sollen alle Teilnehmer/innen ohne Antworten von der Gruppenbildung ausgeschlossen werden.';
 $string['emailnotifications_description'] = '<i style="color:red;">Die automatische Benachrichtigung über abgeschlossene Gruppenformationen ist momentan leider nicht verfügbar.</i>';
 
 
@@ -497,6 +519,8 @@ $string['eval_caption_user'] = 'Teilnehmer';
 $string['eval_caption_group'] = 'Gruppe';
 $string['eval_caption_course'] = 'Kurs';
 
+$string ['overview_excluded_message'] = 'Sie sind von dieser Gruppenbildung ausgeschlossen worden. Sollten Sie Fragen haben, wenden Sie sich bitte an Ihre/n Dozierende/n.';
+
 
 $string['consent_alert_message'] = 'Sie müssen den Nutzungsbedingungen zustimmen, um den Fragebogen zu beantworten. Lesen und akzeptieren sie die Nutzungsbedingungen, bevor sie auf "Weiter" klicken.';
 $string['consent_opt_in'] = 'Einwilligung (opt-in)';
@@ -551,6 +575,10 @@ $string['settings_import_export_description'] = 'Wenn aktiviert, können Teilneh
 
 $string['settings_participant_code'] = 'Teilnehmercode';
 $string['settings_participant_code_description'] = 'Teilnehmende müssen einen Teilnehmercode eingeben (so wie in psychologischen Tests).';
+
+$string['settings_participant_email'] = 'Email Adressen anzeigen';
+$string['settings_participant_email_description'] = 'Wenn aktiviert, können die Email Adressen der Teilnehmer eingesehen werden';
+
 
 $string['answers_for_eval_text'] = 'Wenn alle Fragen beantwortet sind, wird im Reiter \'Auswertung\' eine Auswertung angezeigt. Bei unvollständiger Bearbeitung des Fragebogens steht diese Funktion nicht zur Verfügung.';
 

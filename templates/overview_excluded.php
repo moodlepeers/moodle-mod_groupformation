@@ -14,40 +14,22 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * Student import view template
+ * Overview info template
  *
  * @package     mod_groupformation
  * @author      Eduard Gallwas, Johannes Konert, Rene Roepke, Nora Wester, Ahmed Zukic
  * @copyright   2015 MoodlePeers
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 if (!defined('MOODLE_INTERNAL')) {
     die ('Direct access to this script is forbidden.');
 }
 
 ?>
-<div class="gf_settings_pad">
-    <div class="gf_pad_header"><?php echo get_string('import', 'groupformation'); ?></div>
-    <div class="gf_pad_content">
-        <?php if ($this->_['successful']): ?>
-            <p><?php echo get_string('successful_import', 'groupformation') ?></p>
-            <p>
-                <a href="<?php echo $this->_['import_export_url']; ?>">
-                <span class="btn btn-secondary">
-                    <?php echo get_string('tab_overview', 'groupformation'); ?>
-                   </span>
-                </a>
-            </p>
-        <?php else: ?>
-            <p><?php echo get_string('failed_import', 'groupformation'); ?></p>
-            <p>
-                <a href="<?php echo $this->_['import_form']; ?>">
-                <span class="btn btn-secondary">
-                    <?php echo get_string('back'); ?>
-                   </span>
-                </a>
-            </p>
-        <?php endif; ?>
-    </div>
+
+<div class="gf_pad_content">
+    <?php echo $this->_['intro_box']; ?>
+    <p>
+        <?php echo get_string('overview_excluded_message', 'groupformation'); ?>
+    </p>
 </div>

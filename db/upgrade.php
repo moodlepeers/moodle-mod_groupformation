@@ -1963,5 +1963,21 @@ function xmldb_groupformation_upgrade($oldversion) {
         // Groupformation savepoint reached.
         upgrade_mod_savepoint(true, 2019071000, 'groupformation');
     }
+
+    if ($oldversion < 2020081900) {
+
+        // Define field excluded to be added to groupformation_users.
+        $table = new xmldb_table('groupformation_users');
+        $field = new xmldb_field('excluded', XMLDB_TYPE_INTEGER, '1', null, null, null, '0', 'state');
+
+        // Conditionally launch add field excluded.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Groupformation savepoint reached.
+        upgrade_mod_savepoint(true, 2020081900, 'groupformation');
+    }
+
     return true;
 }

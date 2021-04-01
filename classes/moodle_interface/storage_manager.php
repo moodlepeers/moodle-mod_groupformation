@@ -1383,7 +1383,9 @@ class mod_groupformation_storage_manager {
         };
 
         foreach (array_values($enrolledstudents) as $userid) {
-            if ($sum <= $numberofanswers($userid) && !$this->is_filtered($userid)) {
+            if ($this->is_excluded($userid)) {
+                continue;
+            } else if ($sum <= $numberofanswers($userid) && !$this->is_filtered($userid)) {
                 $allanswers [] = $userid;
             } else if ($groupingsetting && $numberofanswers($userid) > 0) {
                 $someanswers [] = $userid;
@@ -1429,6 +1431,20 @@ class mod_groupformation_storage_manager {
         global $DB;
 
         return boolval($DB->get_field('groupformation_users', 'filtered',
+                array('groupformation' => $this->groupformationid, 'userid' => $userid)));
+    }
+
+    /**
+     * returns whether a student is excluded
+     *
+     * @param int $userid
+     * @return bool
+     * @throws dml_exception
+     */
+    public function is_excluded($userid) {
+        global $DB;
+
+        return boolval($DB->get_field('groupformation_users', 'excluded',
                 array('groupformation' => $this->groupformationid, 'userid' => $userid)));
     }
 
@@ -1509,6 +1525,19 @@ class mod_groupformation_storage_manager {
     }
 
     /**
+     * returns DB entry of user
+     *
+     * @param int $userid
+     * @return mixed
+     * @throws dml_exception
+     */
+    public function get_user_info($userid) {
+        global $DB;
+        $records = $DB->get_records('groupformation_users', array('userid' => $userid));
+        return $records;
+    }
+
+    /**
      * Returns activity state
      *
      * @param bool $internal
@@ -1529,5 +1558,17 @@ class mod_groupformation_storage_manager {
         return $DB->get_record('groupformation', array(
                 'id' => $this->groupformationid));
 
+    }
+
+    /**
+     * Returns the email address of specific user
+     *
+     * @param int $userid
+     * @return mixed
+     * @throws dml_exception
+     */
+    public function get_email_of_user($userid) {
+        global $DB;
+        return $DB->get_field('user', 'email', array('id' => $userid));
     }
 }

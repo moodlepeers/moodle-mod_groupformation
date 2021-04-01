@@ -38,17 +38,21 @@ if (!defined('MOODLE_INTERNAL')) {
         </div>
     <?php endif; ?>
 
-    <div class="grid">
-        <div>
-            <?php echo get_string('are', 'groupformation'); ?>
-            <b>
-                <?php echo $this->_['student_count']; ?>
-            </b>
-            <?php echo ' '; ?>
-            <?php if (intval($this->_['student_count']) > 1): ?>
-                <?php echo get_string('students_grouping_multiple', 'groupformation') ?>
+    <div class="grid row_highlight">
+        <div class="col_m_100"><b><?php echo $this->_['statistics_available_optimized']; ?></b>
+            <?php echo ' ' ?>
+            <?php if ($this->_['statistics_available_optimized'] == 1): ?>
+                <?php echo get_string('students_available_grouping_optimized_single', 'groupformation'); ?>
             <?php else: ?>
-                <?php echo get_string('students_grouping_single', 'groupformation'); ?>
+                <?php echo get_string('students_available_grouping_optimized_multiple', 'groupformation'); ?>
+            <?php endif; ?>
+
+            <b> <?php echo $this->_['statistics_available_random']; ?> </b>
+            <?php echo ' ' ?>
+            <?php if ($this->_['statistics_available_random'] == 1): ?>
+                <?php echo get_string('students_available_grouping_random_single', 'groupformation'); ?>
+            <?php else: ?>
+                <?php echo get_string('students_available_grouping_random_multiple', 'groupformation'); ?>
             <?php endif; ?>
         </div>
     </div>
@@ -57,7 +61,7 @@ if (!defined('MOODLE_INTERNAL')) {
 
         <button type="<?php echo $button['type']; ?>" name="<?php echo $button['name']; ?>"
                 value="<?php echo $button['value']; ?>"
-                class="gf_button gf_button_pill gf_button_small" <?php echo $button['state']; ?>>
+                class="btn btn-secondary" <?php echo $button['state']; ?>>
             <?php echo $button['text']; ?></button>
 
     <?php } ?>

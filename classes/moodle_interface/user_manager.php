@@ -101,6 +101,99 @@ class mod_groupformation_user_manager {
     }
 
     /**
+     * Returns array of records of table groupformation_users where excluded is 1
+     *
+     * @param null $sortedby
+     * @param string $fieldset
+     * @return array
+     * @throws dml_exception
+     */
+    public function get_excluded($sortedby = null, $fieldset = '*') {
+        global $DB;
+
+        return $DB->get_records('groupformation_users', array(
+                'groupformation' => $this->groupformationid,
+                'excluded' => 1
+        ), $sortedby, $fieldset);
+    }
+
+    /**
+     * returns if the user is excluded from questionnaire (0 or 1)
+     *
+     * @param int $userId
+     * @return integer
+     * @throws dml_exception
+     */
+    public function is_user_excluded($userId) {
+        global $DB;
+
+        $result = $DB->get_record('groupformation_users', array(
+                'groupformation' => $this->groupformationid,
+                'userid' => $userId
+        ));
+
+        return $result->excluded;
+    }
+
+    /**
+     * returns array of users who are available for random grouping where the
+     * user have at least one submitted answer
+     *
+     * @param null $sortedby
+     * @param string $fieldset
+     * @return mixed
+     */
+    public function get_users_optimized_random($sortedby = null, $fieldset = '*') {
+        global $DB;
+
+        return $DB->get_records('groupformation_users', array(
+                'groupformation' => $this->groupformationid,
+                'excluded' => 0,
+                'completed' => 0,
+        ), $sortedby, $fieldset);
+    }
+
+    /**
+     * Returns array of records of table groupformation_users where excluded is 0 and
+     * completed is 1 (optimized grouping)
+     *
+     * @param null $sortedby
+     * @param string $fieldset
+     * @return array
+     * @throws dml_exception
+     */
+    public function get_available_optimized($sortedby = null, $fieldset = '*') {
+        global $DB;
+
+        return $DB->get_records('groupformation_users', array(
+                'groupformation' => $this->groupformationid,
+                'excluded' => 0,
+                'completed' => 1
+        ), $sortedby, $fieldset);
+    }
+
+    /**
+     * Returns array of records of table groupformation_users where excluded is 0 (random grouping)
+     *
+     * @param null $sortedby
+     * @param string $fieldset
+     * @return array
+     * @throws dml_exception
+     */
+    public function get_available_random($sortedby = null, $fieldset = '*') {
+        $result = $this->get_users_optimized_random();
+
+        $students = [];
+        foreach ($result as $item) {
+            if ($item->answer_count > 0) {
+                array_push($students, $item);
+            }
+        }
+
+        return $students;
+    }
+
+    /**
      * Returns array of records of table groupformation_users
      *
      * @param null $sortedby
@@ -393,6 +486,7 @@ class mod_groupformation_user_manager {
     }
 
     // TODO entfernen
+
     /**
      * bin answer helper
      *
@@ -632,14 +726,19 @@ class mod_groupformation_user_manager {
      * Deletes all answers
      *
      * @param int $userid
-     * @throws dml_exception
+     * @param bool $only_answers
      */
-    public function delete_answers($userid) {
+    public function delete_answers($userid, $only_answers = false) {
         global $DB;
-        $DB->delete_records('groupformation_users', array('groupformation' => $this->groupformationid, 'userid' => $userid));
-        $DB->delete_records('groupformation_answers', array('groupformation' => $this->groupformationid, 'userid' => $userid));
-        $DB->delete_records('groupformation_user_values',
-                array('groupformationid' => $this->groupformationid, 'userid' => $userid));
+        if ($only_answers) {
+            $DB->delete_records('groupformation_answers', array('groupformation' => $this->groupformationid, 'userid' => $userid));
+        } else {
+            $DB->delete_records('groupformation_users', array('groupformation' => $this->groupformationid, 'userid' => $userid));
+            $DB->delete_records('groupformation_answers', array('groupformation' => $this->groupformationid, 'userid' => $userid));
+            $DB->delete_records('groupformation_user_values',
+                    array('groupformationid' => $this->groupformationid, 'userid' => $userid));
+        }
+
     }
 
     /**
@@ -928,6 +1027,30 @@ class mod_groupformation_user_manager {
 
         $stats ['submitted_completely'] = $nomissingcount;
 
+        $excluded = $this->get_excluded();
+        $excludedcount = count($excluded);
+
+        $stats ['excluded'] = $excludedcount;
+
+        $available_optimized = $this->get_available_optimized();
+        $available_optimized_count = count($available_optimized);
+
+        $stats ['available_optimized'] = $available_optimized_count;
+
+        $stats['started_not_completed'] = count($this->get_available_random());
+
+        $store = new mod_groupformation_storage_manager($this->groupformationid);
+        $answers_required = $store->get_grouping_setting();
+
+        // at least one answer must be submitted
+        if ($answers_required) {
+            $available_random_count = count($this->get_available_random());
+        } else {
+            $available_random_count = $studentcount - $excludedcount - $available_optimized_count;
+        }
+
+        $stats ['available_random'] = $available_random_count;
+
         return $stats;
     }
 
@@ -957,5 +1080,23 @@ class mod_groupformation_user_manager {
         return $DB->get_field('groupformation', 'binquestionimportance', array(
                 'id' => $this->groupformationid
         ));
+    }
+
+    /**
+     * update excluded state
+     *
+     * @param int $userid
+     * @param int $value
+     * @param int $completed
+     */
+    public function set_excluded($userid, $value, $completed) {
+        global $DB;
+        $this->set_status($userid);
+        $record = $DB->get_record('groupformation_users',
+                array('groupformation' => $this->groupformationid, 'userid' => $userid));
+        $record->excluded = $value;
+        $record->completed = $completed;
+
+        $DB->update_record('groupformation_users', $record);
     }
 }

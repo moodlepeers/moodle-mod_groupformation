@@ -104,7 +104,7 @@ if (!defined('MOODLE_INTERNAL')) {
                 <?php foreach ($this->_['buttons'] as $button) { ?>
 
                     <?php if (array_key_exists('modal-id', $button)): ?>
-                        <button type="button" class="gf_button gf_button_pill gf_button_small"
+                        <button type="button" class="btn btn-secondary"
                                 data-toggle="modal" data-target="#<?php echo $button['modal-id']; ?>"
                                 <?php echo $button['state']; ?>
                         >
@@ -140,7 +140,7 @@ if (!defined('MOODLE_INTERNAL')) {
                         <button type="<?php echo $button['type']; ?>"
                                 name="<?php echo $button['name']; ?>"
                                 value="<?php echo $button['value']; ?>"
-                                class="gf_button gf_button_pill gf_button_small"
+                                class="btn btn-secondary"
                             <?php echo $button['state']; ?>
                         >
                             <?php echo $button['text']; ?>
