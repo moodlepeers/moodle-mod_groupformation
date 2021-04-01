@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.8](https://github.com/moodlepeers/moodle-mod_groupformation/tree/HEAD)
+## [1.8](https://github.com/moodlepeers/moodle-mod_groupformation/tree/HEAD) (2021-04-01)
 
 [Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/1.7...HEAD)
 
