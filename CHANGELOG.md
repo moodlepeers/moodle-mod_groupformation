@@ -1,8 +1,26 @@
 # Changelog
 
-## [v1.7](https://github.com/moodlepeers/moodle-mod_groupformation/tree/HEAD)
+## [1.8](https://github.com/moodlepeers/moodle-mod_groupformation/tree/HEAD)
 
-[Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/v1.6.2...HEAD)
+[Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/1.7...HEAD)
+
+**Closed issues:**
+
+- Undefined constant COURSE\_MODULE [\#87](https://github.com/moodlepeers/moodle-mod_groupformation/issues/87)
+- Missing table in privacy provider and Moodle 3.9 incompatibility [\#85](https://github.com/moodlepeers/moodle-mod_groupformation/issues/85)
+- Core privacy tests are failing becuse of a typo in table name [\#83](https://github.com/moodlepeers/moodle-mod_groupformation/issues/83)
+- Critical Bug for Moodle 3.8: Installation of mod\_groupformation causes loss of functionality in Moodle 3.8 [\#79](https://github.com/moodlepeers/moodle-mod_groupformation/issues/79)
+
+**Merged pull requests:**
+
+- Feature participant list [\#89](https://github.com/moodlepeers/moodle-mod_groupformation/pull/89) ([stefanjung](https://github.com/stefanjung))
+- Fix constant name in privacy provider class [\#88](https://github.com/moodlepeers/moodle-mod_groupformation/pull/88) ([golenkovm](https://github.com/golenkovm))
+- Fix privacy provider to be Moodle 3.9 compatible [\#86](https://github.com/moodlepeers/moodle-mod_groupformation/pull/86) ([golenkovm](https://github.com/golenkovm))
+- Fix wrong name for prefix\_groupformation\_answers table [\#84](https://github.com/moodlepeers/moodle-mod_groupformation/pull/84) ([golenkovm](https://github.com/golenkovm))
+
+## [1.7](https://github.com/moodlepeers/moodle-mod_groupformation/tree/1.7) (2020-08-24)
+
+[Full Changelog](https://github.com/moodlepeers/moodle-mod_groupformation/compare/v1.6.2...1.7)
 
 **Implemented enhancements:**
 

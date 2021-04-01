@@ -51,7 +51,7 @@ class mod_groupformation_analysis_controller {
     /** @var mod_groupformation_user_manager The manager of user data */
     private $usermanager = null;
 
-    /** @var int ID of course module*/
+    /** @var int ID of course module */
     public $cmid = null;
 
     /** @var mod_groupformation_state_machine Activity state machine */
@@ -126,8 +126,11 @@ class mod_groupformation_analysis_controller {
 
         $assigns['statistics_enrolled'] = $questionnairestats ['enrolled'];
         $assigns['statistics_processed'] = $questionnairestats ['processing'];
-        $assigns['statistics_submitted'] = $questionnairestats ['submitted'];
         $assigns['statistics_submitted_complete'] = $questionnairestats ['submitted_completely'];
+        $assigns['statistics_excluded'] = $questionnairestats ['excluded'];
+        $assigns['statistics_available_optimized'] = $questionnairestats ['available_optimized'];
+        $assigns['statistics_available_random'] = $questionnairestats ['available_random'];
+        $assigns['statistics_started_not_completed'] = $questionnairestats['started_not_completed'];
 
         return $assigns;
     }
@@ -235,6 +238,68 @@ class mod_groupformation_analysis_controller {
         }
 
         $assigns['topics'] = $topics;
+
+        return $assigns;
+    }
+
+    /**
+     * load users of groupformation for user table to display
+     *
+     * @return mixed
+     */
+    public function load_users() {
+        global $DB;
+        $userList = $this->store->get_users();
+
+        $selectfields = implode(',', ['id', get_all_user_name_fields(true)]);
+
+        $users = [];
+
+        foreach ($userList AS $id) {
+            // get user groupformation infos
+            $groupformation_answers = $this->store->get_user_info($id);
+
+            // get user info like name
+            $user_info = $DB->get_records_list('user', 'id', [$id], null, $selectfields);
+
+            // check if reading email of participant is enabled
+            if (mod_groupformation_data::participant_email_enabled()) {
+                $email = $this->store->get_email_of_user($id);
+                $user_info[$id]->email = $email;
+            }
+
+            // calculate the max number count of answers:
+            // get all categories
+            $categories = $this->store->get_categories();
+            // max answer count of all categories
+            $answer_count = $this->store->get_numbers($categories);
+
+            // calc all together
+            $total = 0;
+            foreach ($answer_count AS $number) {
+                $total += $number;
+            }
+
+            // add new field in user array
+            foreach ($groupformation_answers as &$row) {
+                $row->max_answer_count = $total;
+            }
+
+            foreach ($user_info as $info) {
+                $groupformations = [];
+                foreach ($groupformation_answers as $item) {
+                    array_push($groupformations, $item);
+                }
+
+                $info->groupformations = $groupformations;
+                $info->current_groupformation = $this->groupformationid;
+                array_push($users, $info);
+            }
+            // merge arrays
+            $user_info->groupformations = $groupformation_answers;
+        }
+
+        $assigns['users'] = $users;
 
         return $assigns;
     }

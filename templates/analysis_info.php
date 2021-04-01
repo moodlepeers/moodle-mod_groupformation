@@ -45,7 +45,7 @@ global $USER;
         <button type="<?php echo $this->_['button']['type']; ?>"
                 name="<?php echo $this->_['button']['name']; ?>"
                 value="<?php echo $this->_['button']['value']; ?>"
-                class="gf_button gf_button_pill gf_button_small"
+                class="btn btn-secondary"
                 <?php echo $this->_['button']['state']; ?>
         >
             <?php echo $this->_['button']['text']; ?>
@@ -54,7 +54,7 @@ global $USER;
             <button type="<?php echo $this->_['reopen_button']['type']; ?>"
                     name="<?php echo $this->_['reopen_button']['name']; ?>"
                     value="<?php echo $this->_['reopen_button']['value']; ?>"
-                    class="gf_button gf_button_pill gf_button_small"
+                    class="btn btn-secondary"
                     <?php echo $this->_['reopen_button']['state']; ?>
             >
                 <?php echo $this->_['reopen_button']['text']; ?>

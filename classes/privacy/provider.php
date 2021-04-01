@@ -355,7 +355,7 @@ class provider implements
     /**
      * Delete all user data for the specified user, in the specified contexts.
      *
-     * @param   approved_contextlist $contextlist The approved contexts and user information to delete information for.
+     * @param approved_userlist $contextlist The approved contexts and user information to delete information for.
      * @throws \dml_exception
      */
     public static function delete_data_for_users(approved_userlist $contextlist) {

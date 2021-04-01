@@ -65,6 +65,9 @@ class mod_groupformation_grouping_controller {
     /** @var mod_groupformation_groups_manager instance of groups manager */
     private $groupsmanager = null;
 
+    /** @var mod_groupformation_user_manager instance of user manager */
+    private $usermanager = null;
+
     /** @var stdClass instance of job */
     private $job = null;
 
@@ -96,6 +99,8 @@ class mod_groupformation_grouping_controller {
         $this->groups = $this->groupsmanager->get_generated_groups('id, groupname,performance_index,moodlegroupid');
 
         $this->users = $this->groupsmanager->get_group_users();
+
+        $this->usermanager = new mod_groupformation_user_manager($this->groupformationid);
 
         foreach ($this->users as $user) {
             if (!isset($this->groups[$user->groupid]->users)) {
@@ -139,7 +144,7 @@ class mod_groupformation_grouping_controller {
 
         $ajm = new mod_groupformation_advanced_job_manager();
 
-        $usermanager = new mod_groupformation_user_manager($this->groupformationid);
+        $usermanager = $this->usermanager;
 
         $users = $usermanager->handle_complete_questionnaires();
 
@@ -343,7 +348,12 @@ class mod_groupformation_grouping_controller {
         $users = $this->store->get_users_for_grouping();
         $count = count($users[0]) + count($users[1]);
 
-        $assigns['student_count'] = $count;
+        $usermanager = $this->usermanager;
+        $questionnairestats = $usermanager->get_statistics();
+
+        $assigns['statistics_available_optimized'] = $questionnairestats ['available_optimized'];
+        $assigns['statistics_available_random'] = $questionnairestats ['available_random'];
+        //$assigns['student_count'] = $count;
         $assigns['cmid'] = $this->cmid;
         $assigns['onlyactivestudents'] = $this->store->get_grouping_setting();
 
@@ -443,10 +453,11 @@ class mod_groupformation_grouping_controller {
                         'id' => 'cancel_groups', 'type' => 'cancel', 'name' => 'cancel_edit', 'value' => $url->out(), 'state' => '',
                         'text' => get_string('cancel'))
         );
-        $context = $PAGE->context;
-        $count = count(get_enrolled_users($context, 'mod/groupformation:onlystudent'));
 
-        $assigns['student_count'] = $count;
+        $usermanager = $this->usermanager;
+        $questionnairestats = $usermanager->get_statistics();
+
+        $assigns['student_count'] = $questionnairestats ['available'];
         $assigns['cmid'] = $this->cmid;
         $assigns['onlyactivestudents'] = $this->store->get_grouping_setting();
 
