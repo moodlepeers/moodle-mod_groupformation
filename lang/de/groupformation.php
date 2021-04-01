@@ -323,10 +323,10 @@ $string['activity_visible'] = 'Diese Aktivität ist für Sie aufgrund Ihrer Roll
 
 $string['are'] = 'Es gibt';
 $string['are_now'] = 'Es gibt derzeit';
-$string['students_available_single'] = 'eingeschriebenen Teilnehmenden, der den Fragebogen ausfüllen kann.';
-$string['students_available_multiple'] = 'eingeschriebene Teilnehmende, die den Fragebogen ausfüllen können.';
-$string['students_excluded_single'] = 'Teilnehmender wurde aus dem Fragebogen ausgeschlossen.';
-$string['students_excluded_multiple'] = 'Teilnehmende wurden aus dem Fragebogen ausgeschlossen.';
+$string['participant_available_single'] = 'eingeschriebenen Teilnehmer/in, der den Fragebogen ausfüllen kann.';
+$string['participant_available_multiple'] = 'eingeschriebene Teilnehmer/innen, die den Fragebogen ausfüllen können.';
+$string['students_excluded_single'] = 'Teilnehmer/in wurde aus dem Fragebogen ausgeschlossen.';
+$string['students_excluded_multiple'] = 'Teilnehmer/innen wurden aus dem Fragebogen ausgeschlossen.';
 $string['name_by_group'] = 'Name:';
 $string['quality'] = 'Gruppenqualität:';
 $string['quality_info'] = 'Der Gruppen-Performanz-Index (GPI) gibt die Qualität der gebildeten Gruppe wieder und ist ein Wert zwischen 0 und 1. Je größer der Wert, deste besser ist die gebildete Gruppe. Ist kein Wert angegeben, so sind die Gruppen nicht algorithmisch gebildet, sondern randomisiert.';
@@ -346,8 +346,8 @@ $string['max_group_size_not_reached'] = 'Maximale Gruppengröße wurde bei folge
 $string['your_group'] = 'Deine Gruppe';
 $string ['students_available_grouping_optimized_single'] = 'Teilnehmer/in ist für die optimierte und';
 $string ['students_available_grouping_optimized_multiple'] = 'Teilnehmer/innen sind für die optimierte und';
-$string ['students_available_random_optimized_single'] = 'Teilnehmer/in ist für die zufällige Gruppenformation verfügbar.';
-$string ['students_available_random_optimized_multiple'] = 'Teilnehmer/innen sind für die zufällige Gruppenformation verfügbar.';
+$string ['students_available_grouping_random_single'] = 'Teilnehmer/in ist für die zufällige Gruppenformation verfügbar.';
+$string ['students_available_grouping_random_multiple'] = 'Teilnehmer/innen sind für die zufällige Gruppenformation verfügbar.';
 
 $string ['students_have_started_not_completed_single'] = 'Teilnehmer/in hat den Fragebogen begonnen, aber noch nicht abgeschlossen.';
 $string ['students_have_started_not_completed_multiple'] = 'Teilnehmer/innen haben den Fragebogen begonnen, aber noch nicht abgeschlossen.';

@@ -353,8 +353,8 @@ $string ['activity_visible'] =
 
 $string ['are'] = 'There are';
 $string ['are_now'] = 'Now, there are';
-$string ['students_available_single'] = 'enrolled participant who can fill out the questionnaire.';
-$string ['students_available_multiple'] = 'enrolled participants who can fill out the questionnaire.';
+$string ['participant_available_single'] = 'enrolled participant who can fill out the questionnaire.';
+$string ['participant_available_multiple'] = 'enrolled participants who can fill out the questionnaire.';
 $string ['students_excluded_single'] = 'participant was excluded from the questionnaire.';
 $string ['students_excluded_multiple'] = 'participants were excluded from the questionnaire.';
 $string ['students_available_grouping_optimized_single'] = 'participant is available for optimized and';

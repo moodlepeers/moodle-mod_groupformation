@@ -39,9 +39,9 @@ global $USER;
             </b>
             <?php echo ' '; ?>
             <?php if ($this->_['statistics_enrolled'] == 1): ?>
-                <?php echo get_string('students_available_single', 'groupformation'); ?>
+                <?php echo get_string('participant_available_single', 'groupformation'); ?>
             <?php else: ?>
-                <?php echo get_string('students_available_multiple', 'groupformation'); ?>
+                <?php echo get_string('participant_available_multiple', 'groupformation'); ?>
             <?php endif; ?>
         </div>
     </div>
