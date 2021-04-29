@@ -122,7 +122,7 @@ class mod_groupformation_group_controller {
                         $groupleftinfo = get_string('inactive_members_are', 'groupformation');
                         $inactivemembers[] = fullname($member);
                     } else {
-                        $activemembers[] = '<a href="' . $url . '">' . fullname($member) . '</a>';
+                        $activemembers[] = '<a href="' . $url . '">' . fullname($member) . '</a>' . ((mod_groupformation_data::participant_email_enabled())?(' - '. "<a href=\"mailto:".$member->email."\">". $member->email. '</a>'):'');
                     }
                 }
 
