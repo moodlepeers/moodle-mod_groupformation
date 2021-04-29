@@ -389,6 +389,7 @@ $string ['completed_questionnaire'] = 'completely answered questionnaires.';
 $string ['user_list_headline'] = 'Participant list';
 $string ['user_list_firstname'] = 'First Name';
 $string ['user_list_lastname'] = 'Last Name';
+$string['user_list_email'] = 'Email';
 $string ['user_list_consent'] = 'Consent';
 $string ['user_list_progress'] = 'Progress';
 $string ['user_list_submitted'] = 'Submitted';

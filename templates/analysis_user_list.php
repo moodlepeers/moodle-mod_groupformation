@@ -192,9 +192,9 @@ $table_column_names = array(
         "#",
         get_string('user_list_firstname', 'groupformation'),
         get_string('user_list_lastname', 'groupformation'),
-        "E-Mail",
-        get_string('user_list_consent', 'groupformation'),
+        get_string('user_list_email', 'groupformation'),
         get_string('user_list_progress', 'groupformation'),
+        get_string('user_list_consent', 'groupformation'),
         get_string('user_list_submitted', 'groupformation'),
         get_string('user_list_actions', 'groupformation'));
 

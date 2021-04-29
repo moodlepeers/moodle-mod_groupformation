@@ -296,7 +296,7 @@ class mod_groupformation_analysis_controller {
                 array_push($users, $info);
             }
             // merge arrays
-            $user_info->groupformations = $groupformation_answers;
+            //$users->groupformations = $groupformation_answers;
         }
 
         $assigns['users'] = $users;

@@ -1964,7 +1964,7 @@ function xmldb_groupformation_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2019071000, 'groupformation');
     }
 
-    if ($oldversion < 2020081900) {
+    if ($oldversion < 2021042900) {
 
         // Define field excluded to be added to groupformation_users.
         $table = new xmldb_table('groupformation_users');
@@ -1976,7 +1976,7 @@ function xmldb_groupformation_upgrade($oldversion) {
         }
 
         // Groupformation savepoint reached.
-        upgrade_mod_savepoint(true, 2020081900, 'groupformation');
+        upgrade_mod_savepoint(true, 2021042900, 'groupformation');
     }
 
     return true;

@@ -358,6 +358,7 @@ $string['completed_questionnaire'] = 'vollständig beantwortete Fragebögen.';
 $string['user_list_headline'] = 'Teilnehmer/innen Liste';
 $string['user_list_firstname'] = 'Vorname';
 $string['user_list_lastname'] = 'Nachname';
+$string['user_list_email'] = 'E-Mail';
 $string['user_list_consent'] = 'Einverständnis';
 $string['user_list_progress'] = 'Fortschritt';
 $string['user_list_submitted'] = 'Eingereicht';
