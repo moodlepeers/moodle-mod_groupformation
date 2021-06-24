@@ -77,14 +77,18 @@ $string ['scenario_homeworkgroups_description'] =
 $string ['scenario_presentationgroups'] = 'Presentation groups';
 $string ['scenario_presentationgroups_description'] =
         'Presentation groups work together for a relatively short time period to finish a presentation (usually to be held in class). Often in the beginning a specific sub-task is assigned to (or selected by) each participant, individually worked on, and in the end re-assembled to a complete presentation. Grading is usually done for the perforance of the whole group together. Therefore, groupformation aims primarily for mutual interest in the same topic.';
+$string ['scenario_groupwork'] = 'Groupwork';
+$string ['scenario_groupwork_description'] = 'Group work in which participants work together intensively over a longer period of time (e.g. weekly exercise tasks, conducting a study, submitting a report, etc.). Often the tasks can be divided within the group, so it is advantageous if the competences of the group members complement each other. Typically, the joint work is evaluated with a group grade for all group members. Therefore, the composition is primarily about similar personality traits and team orientation of the group members.';
+
 $string ['scenario_usage_header'] = 'Questionnaire-Usage';
 $string ['scenario_usage_header_presentation'] = 'Participants set preferences';
 $string ['scenario_projectteams_short'] =
         'Knowledge areas and motivation are heterogeneous; knowledge level, targeted goals, and team orientation are homogeneous; character traits are partially homogeneous, partially heterogeneous.';
 $string ['scenario_homeworkgroups_short'] = 'Knowledge areas and targeted goals are heterogeneous; team orientation homogeneous.';
 $string ['scenario_presentationgroups_short'] =
-        'Enables exclusively to order a list of topics by Drag&Drop. "first-come, first-served" procedure is avoided to allow a fairer topic distribution.';
-
+        'Enables exclusively to order a list of topics by Drag&Drop. "first-come, first-served" procedure is avoided to allow a fair topic distribution.';
+$string ['scenario_groupwork_short'] =
+    'Knowledge areas are heterogeneous; team orientation and personality traits are homogeneous.';
 $string ['time'] = 'Time';
 $string ['topics'] = 'Topics';
 $string ['topics_help'] =

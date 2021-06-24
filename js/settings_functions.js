@@ -165,10 +165,12 @@ require(['jquery', 'jqueryui'], function($) {
             if ($('#id_topics').prop('checked')) {
                 switchTopics('off');
                 switchKnowledge('enable');
+                switchBinQuestion('enable');
             } else {
                 switchTopics('on');
                 switchTopics('enable');
                 switchKnowledge('off');
+                switchBinQuestion('off');
             }
         });
 
@@ -346,6 +348,31 @@ require(['jquery', 'jqueryui'], function($) {
                 $('#id_js_knowledge').attr('disabled', 'disabled');
 
                 $("#js_knowledgeWrapper").hide('2000', 'swing');
+            }
+        }
+
+        /**
+         * Switch state of radio button for knowledge questions
+         *
+         * @param state
+         */
+        function switchBinQuestion(state) {
+            if (state == 'enable') {
+                $('#id_oneofbin').removeAttr('disabled');
+                $('#id_js_oneofbin').removeAttr('disabled');
+            }
+            if (state == 'disable') {
+                $('#id_oneofbin').attr('disabled', 'disabled');
+                $('#id_js_oneofbin').attr('disabled', 'disabled');
+            }
+            if (state == 'off') {
+                $('#id_oneofbin').prop('checked', false);
+                $('#id_oneofbin').attr('disabled', 'disabled');
+
+                $('#id_js_oneofbin').prop('checked', false);
+                $('#id_js_oneofbin').attr('disabled', 'disabled');
+
+                $("#js_oneOfBinWrapper").hide('2000', 'swing');
             }
         }
 
@@ -554,6 +581,7 @@ require(['jquery', 'jqueryui'], function($) {
 
                     switchTopics('on');
                     switchTopics('enable');
+                    switchBinQuestion('off');
                     //$('#id_js_topics').prop('disabled', true);
 
                     adjustGroupSizeOptions('none');
@@ -765,6 +793,9 @@ require(['jquery', 'jqueryui'], function($) {
 
                 switchKnowledge('off');
                 switchKnowledge('disable');
+
+                switchBinQuestion('off');
+                switchBinQuestion('disable');
 
                 setGroupSettings();
             }

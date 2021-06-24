@@ -44,7 +44,7 @@ defined('MOODLE_INTERNAL') || die();
                     <input type="radio" name="js_scenario" id="project" value="project"/>
                     <label class="col_m_100 szenarioLabel" id="label_project" for="project">
                         <div class="sz_header">
-                            <?php echo get_string('scenario_projectteams', 'groupformation'); ?>
+                            <?php echo get_string('scenario_groupwork', 'groupformation'); ?>
                         </div>
                         <p>
                             <small>
@@ -54,18 +54,19 @@ defined('MOODLE_INTERNAL') || die();
                                     </i>
                                 </b>
                                 <br>
-                                <?php echo get_string('scenario_projectteams_short', 'groupformation'); ?>
+                                <?php echo get_string('scenario_groupwork_short', 'groupformation'); ?>
                             </small>
                         </p>
                         <p>
                             <small>
-                                <?php echo get_string('scenario_projectteams_description',
+                                <?php echo get_string('scenario_groupwork_description',
                                         'groupformation'); ?>
                             </small>
                         </p>
                     </label>
                 </div>
                 <?php if (!$this->_['mathprepcourse']): ?>
+                    <?php if (false): ?>
                     <div class="col_m_33">
                         <input type="radio" name="js_scenario" id="homework" value="homework"/>
                         <label class="col_m_100 szenarioLabel" id="label_homework" for="homework">
@@ -91,6 +92,7 @@ defined('MOODLE_INTERNAL') || die();
                             </p>
                         </label>
                     </div>
+                    <?php endif; ?>
                     <div class="col_m_33">
                         <input type="radio" name="js_scenario" id="presentation" value="presentation"/>
                         <label class="col_m_100 szenarioLabel" for="presentation">
