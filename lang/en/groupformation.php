@@ -207,7 +207,7 @@ $string ['category_knowledge'] = 'Knowledge';
 $string ['category_topic'] = 'Topics';
 $string ['category_sellmo'] = 'Learning and Achievement Motivation';
 $string ['category_self'] = 'Self-assessment';
-$string ['category_srl'] = 'Self-controlled Learning';
+$string ['category_srl'] = 'Lernstrategien';
 $string ['category_binquestion'] = 'Choice question';
 
 $string ['tabletitle_general'] = 'General';
@@ -221,7 +221,7 @@ $string ['tabletitle_knowledge'] = 'Knowledge';
 $string ['tabletitle_topic'] = 'Topics';
 $string ['tabletitle_sellmo'] = 'Learning and Achievement Motivation';
 $string ['tabletitle_self'] = 'Self-assessment';
-$string ['tabletitle_srl'] = 'Self-controlled Learning';
+$string ['tabletitle_srl'] = 'Lernstrategien';
 $string ['tabletitle_knowledge'] = 'How much do you know about the following topics?';
 $string ['tabletitle_binquestion'] = 'Please answer the following choice question:';
 $string ['tabletitle_binquestion_multi'] = 'Please answer the following multiple choice question:';
@@ -704,6 +704,21 @@ $string ['tabletitle_skills'] = 'Experience';
 
 $string ['category_honesty'] = 'Honesty';
 $string ['tabletitle_honesty'] = 'Honesty';
+
+$string ['category_courses'] = 'Prior Grades';
+$string ['tabletitle_courses'] = 'Prior Grades';
+
+$string ['category_homeschooling'] = 'Homeschooling';
+$string ['tabletitle_homeschooling'] = 'Homeschooling';
+
+$string ['category_procrastination'] = 'Procrastination';
+$string ['tabletitle_procrastination'] = 'Procrastination';
+
+$string ['category_examinations'] = 'Prüfungssituationen';
+$string ['tabletitle_examinations'] = 'Prüfungssituationen';
+
+$string ['category_srl'] = 'Lernstrategien';
+$string ['tabletitle_srl'] = 'Lernstrategien';
 
 $string ['freetext_noanswer'] = 'No answer';
 

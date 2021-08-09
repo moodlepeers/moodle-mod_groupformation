@@ -225,11 +225,7 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
      */
     public function get_weights() {
 
-        return array('big5_extraversion' => 2,
-                'big5_conscientiousness' => 2,
-                'knowledge_two' => 1,
-                'binquestion_singlechoice' => 1
-        );
+        return array('srl_one' => 1);
     }
 
     /**
@@ -261,7 +257,7 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
         }
 
         // Handle all users with incomplete or no questionnaire submission.
-        $randomkey = "random:1";
+        $randomkey = "restrandom:1";
 
         $randomparticipants = $this->participantparser->build_empty_participants($users[1]);
         $randomcohort = $this->build_cohort($randomparticipants, $groupsizes[1], $randomkey);
@@ -286,16 +282,21 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
         list ($configurations, $specs) = $specification;
 
         $configurationkeys = array_keys($configurations);
-
         $cohorts = array();
         // Loop to iterate over slices and run GroupAL for each slice.
         for ($i = 0; $i < $numberofslices; $i++) {
             $slice = $slices[$i];
             $configurationkey = $configurationkeys[$i];
-            $configuration = $configurations[$configurationkey];
-            $rawparticipants = $this->participantparser->build_participants($slice, $specs, $weights);
-            $participants = $this->configure_participants($rawparticipants, $configuration);
-            $cohorts[$configurationkey] = $this->build_cohort($participants, $groupsize, $configurationkey);
+            if ($configurationkey == "random:1") {
+                $randomparticipants = $this->participantparser->build_empty_participants($slice);
+                $randomcohort = $this->build_cohort($randomparticipants, $groupsize, $configurationkey);
+                $cohorts[$configurationkey] = $randomcohort;
+            } else {
+                $configuration = $configurations[$configurationkey];
+                $rawparticipants = $this->participantparser->build_participants($slice, $specs, $weights);
+                $participants = $this->configure_participants($rawparticipants, $configuration);
+                $cohorts[$configurationkey] = $this->build_cohort($participants, $groupsize, $configurationkey);
+            }
         }
 
         return $cohorts;
@@ -308,34 +309,29 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
      */
     public function get_specification() {
 
-        $big5specs = mod_groupformation_data::get_criterion_specification('big5');
-        $knowledgespecs = mod_groupformation_data::get_criterion_specification('knowledge');
-        $binquestionspecs = mod_groupformation_data::get_criterion_specification('binquestion');
+        //$big5specs = mod_groupformation_data::get_criterion_specification('big5');
+        //$knowledgespecs = mod_groupformation_data::get_criterion_specification('knowledge');
+        //$binquestionspecs = mod_groupformation_data::get_criterion_specification('binquestion');
         // $famspecs = mod_groupformation_data::get_criterion_specification('fam');
+        $srlspecs = mod_groupformation_data::get_criterion_specification('srl');
 
-        unset($big5specs['labels']['neuroticism']);
-        unset($big5specs['labels']['openness']);
-        unset($big5specs['labels']['agreeableness']);
-        unset($knowledgespecs['labels']['one']);
+        //unset($big5specs['labels']['neuroticism']);
+        //unset($big5specs['labels']['openness']);
+        //unset($big5specs['labels']['agreeableness']);
+        //unset($knowledgespecs['labels']['one']);
 
         $specs = [
-                'big5' => $big5specs,
-                'knowledge' => $knowledgespecs,
-                'binquestion' => $binquestionspecs
-
-            // 'fam' => $famspecs
+            //'big5' => $big5specs,
+            //'knowledge' => $knowledgespecs,
+            //'binquestion' => $binquestionspecs,
+            // 'fam' => $famspecs,
+            'srl' => $srlspecs
         ];
 
         // true = homo ; false = hetero
         $configurations = array(
-                "groupal:1;ex:1;gh:1;vw:0" => array('big5_extraversion' => true,
-                        'big5_conscientiousness' => true, 'knowledge_two' => false, 'binquestion_singlechoice' => true),
-                "groupal:1;ex:1;gh:0;vw:0" => array('big5_extraversion' => true,
-                        'big5_conscientiousness' => false, 'knowledge_two' => false, 'binquestion_singlechoice' => true),
-                "groupal:1;ex:0;gh:0;vw:0" => array('big5_extraversion' => false,
-                        'big5_conscientiousness' => false, 'knowledge_two' => false, 'binquestion_singlechoice' => true),
-                "groupal:1;ex:0;gh:1;vw:0" => array('big5_extraversion' => false,
-                        'big5_conscientiousness' => true, 'knowledge_two' => false, 'binquestion_singlechoice' => true),
+            "groupal:1;srl:0" => array('srl_one' => false),
+            "random:1" => array('srl_one' => true) // dummy für random
         );
 
         return [$configurations, $specs];

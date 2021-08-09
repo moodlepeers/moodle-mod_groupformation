@@ -90,7 +90,6 @@ class mod_groupformation_participant_parser {
                 $value = array_map('abs', $value);
                 $minval = 0.0;
                 $maxval = 1.0;
-
                 $weight = $weights[$label];
 
                 if ($label == 'general') {

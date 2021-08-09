@@ -1,23 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="demographic questions">
-    <QUESTIONS VERSION="2017082901">
-        <QUESTION ID="1" TYPE="dropdown">
-            <QUESTIONTEXT>
-                <![CDATA[Geschlecht]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[weiblich]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[männlich]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[keine Angabe]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="2" TYPE="number">
+    <QUESTIONS VERSION="2021080921">
+        <QUESTION ID="1" TYPE="number">
             <QUESTIONTEXT>
                 <![CDATA[Alter]]>
             </QUESTIONTEXT>
@@ -30,25 +14,67 @@
                 </MAX>
             </OPTIONS>
         </QUESTION>
-        <QUESTION ID="3" TYPE="likert">
+        <QUESTION ID="2" TYPE="dropdown">
             <QUESTIONTEXT>
-                <![CDATA[Wie gut sind Ihre Deutschkenntnisse?]]>
+                <![CDATA[Geschlecht]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
-                    <![CDATA[Muttersprache]]>
+                    <![CDATA[weiblich]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[sehr gut]]>
+                    <![CDATA[männlich]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[gut]]>
+                    <![CDATA[divers]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[mittel]]>
+                    <![CDATA[keine Angabe]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="3" TYPE="dropdown">
+            <QUESTIONTEXT>
+                <![CDATA[Zu welcher Schulform gehört deine Schule?]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[Integrierte Gesamtschule (IGS)]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[schlecht]]>
+                    <![CDATA[Gymnasium]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="4" TYPE="dropdown">
+            <QUESTIONTEXT>
+                <![CDATA[In welcher Variante der Oberstufe befindest du dich?]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[G8 (Abitur nach 8 Jahren)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[G9 (Abitur nach 9 Jahren)]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="5" TYPE="dropdown">
+            <QUESTIONTEXT>
+                <![CDATA[In welcher Jahrgangsstufe befindest du dich?]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[10. Klasse]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[11. Klasse]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[12. Klasse]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[13. Klasse]]>
                 </OPTION>
             </OPTIONS>
         </QUESTION>

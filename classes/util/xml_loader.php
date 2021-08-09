@@ -55,7 +55,10 @@ class mod_groupformation_xml_loader {
 
         if (file_exists($xmlfile)) {
             $xml = simplexml_load_file($xmlfile);
-
+            $instruction = trim($xml->INSTRUCTION);
+            if ($instruction == ""){
+                $instruction = NULL;
+            }
             $v = trim($xml->QUESTIONS['VERSION']);
             $return[] = trim($xml->QUESTIONS['VERSION']);
             $numbers = 0;
@@ -95,7 +98,7 @@ class mod_groupformation_xml_loader {
             $return[] = $numbers;
             $return[] = $questions;
 
-            return $return;
+            return [$instruction, $return];
 
         } else {
             throw new Exception("The file $xmlfile cannot be opened or found.");

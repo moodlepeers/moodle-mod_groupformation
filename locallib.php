@@ -216,35 +216,36 @@ function groupformation_import_questionnaire_configuration($filename = 'question
         foreach ($xml->languages->language as $lang) {
             $newlanguages[] = trim($lang);
         }
-
-        if ($newversion > $currentversion) {
+        if (true || $newversion > $currentversion) {
 
             $xmlloader = new mod_groupformation_xml_loader();
 
             $number = 0;
-
             foreach ($newcategories as $category) {
 
                 $prevversion = groupformation_get_category_version($category);
-
+                $instructions = NULL;
+                $questions = [];
                 foreach ($newlanguages as $language) {
 
-                    $data = $xmlloader->save($category, $language);
-
+                    [$instruction, $data] = $xmlloader->save($category, $language);
                     $version = $data[0];
                     $numberofquestions = $data[1];
-                    $questions = $data[2];
-
-                    if ($version > $prevversion || !$prevversion) {
-                        groupformation_delete_all_catalog_questions($category, $language);
-
-                        $DB->insert_records('groupformation_questions', $questions);
-                        groupformation_add_catalog_version($category, $numberofquestions, $version, false);
+                    $questions = array_merge($questions, $data[2]);
+                    if (!is_null($instruction)) {
+                        $instructions[$language] = $instruction;
                     }
+                }
+                if ($version > $prevversion || !$prevversion) {
+                    groupformation_delete_all_catalog_questions($category);
+                    $DB->insert_records('groupformation_questions', $questions);
+                    if (!is_null($instructions)){
+                        $instructions = json_encode($instructions);
+                    }
+                    groupformation_add_catalog_version($category, $numberofquestions, $version, $instructions,false);
                 }
                 $number += $numberofquestions;
             }
-
             $DB->delete_records('groupformation_scenario');
             $DB->delete_records('groupformation_scenario_cats');
 
@@ -265,7 +266,7 @@ function groupformation_import_questionnaire_configuration($filename = 'question
                 $i += 1;
             }
 
-            groupformation_add_catalog_version('questionnaire', $number, $newversion, false);
+            groupformation_add_catalog_version('questionnaire', $number, $newversion, NULL,false);
         }
 
     }
@@ -281,14 +282,14 @@ function groupformation_import_questionnaire_configuration($filename = 'question
  * @param boolean $init
  * @throws dml_exception
  */
-function groupformation_add_catalog_version($category, $numbers, $version, $init) {
+function groupformation_add_catalog_version($category, $numbers, $version, $instructions, $init) {
     global $DB;
 
     $data = new stdClass ();
     $data->category = $category;
     $data->version = $version;
     $data->numberofquestion = $numbers;
-
+    $data->instructions = $instructions;
     if ($init || $DB->count_records('groupformation_q_version', array(
             'category' => $category
         )) == 0
@@ -309,10 +310,13 @@ function groupformation_add_catalog_version($category, $numbers, $version, $init
  * @param string $language
  * @throws dml_exception
  */
-function groupformation_delete_all_catalog_questions($category, $language) {
+function groupformation_delete_all_catalog_questions($category, $language = NULL) {
     global $DB;
-
-    $DB->delete_records('groupformation_questions', array('category' => $category, 'language' => $language));
+    if (is_null($language)) {
+        $DB->delete_records('groupformation_questions', array('category' => $category));
+    } else {
+        $DB->delete_records('groupformation_questions', array('category' => $category, 'language' => $language));
+    }
 }
 
 /**
@@ -358,7 +362,10 @@ function groupformation_get_category_version($category) {
  * @param unknown $options
  * @return string
  */
-function groupformation_convert_options($options) {
+function groupformation_convert_options($options = NULL) {
+    if (is_null($options)) {
+        return NULL;
+    }
     $ops = array();
     foreach ($options as $key => $option) {
         if (is_number($key)) {
@@ -372,6 +379,36 @@ function groupformation_convert_options($options) {
     $op = implode("", $ops);
 
     return $op;
+}
+
+/**
+ * Returns xml string for array
+ * @param null $options
+ * @return string|null
+ */
+function groupformation_implode_instructions($options = NULL) {
+    if (is_null($options)) {
+        return NULL;
+    }
+    $ops = array();
+    foreach ($options as $key => $option) {
+        $s = '<INSTRUCTION language="' . $key . '"><![CDATA[';
+        $s .= htmlentities($option, ENT_QUOTES | ENT_XHTML);
+        $s .= ']]></INSTRUCTION>';
+        $ops[] = $s;
+    }
+    $op = implode("", $ops);
+    return '<?xml version="1.0" encoding="UTF-8" ?> <INSTRUCTIONS> ' . $op . ' </INSTRUCTIONS>';
+}
+
+function groupformation_explode_instructions($xmlcontent) {
+    $xml = simplexml_load_string($xmlcontent);
+
+    $options = array();
+    foreach ($xml->children() as $option) {
+        $options[] = trim($option);
+    }
+    return $options;
 }
 
 /**

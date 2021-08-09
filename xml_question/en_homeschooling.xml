@@ -1,14 +1,112 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<GROUPFORMATION COMMENT="Big5 short version regular">
+<GROUPFORMATION COMMENT="Home schooling by Jansen, Van Leeuwen, Janssen, Kester, Kalz (DOI: 10.1007/s12528-016-9125-x)">
     <INSTRUCTION>
-        <![CDATA[Nachstehend findest du eine Reihe von Eigenschaften, die auf dich zutreffen könnten. Würdest du über dich z.B. sagen, dass du gerne Zeit mit anderen Menschen verbringst?
-
-Bitte gib für jede der folgenden Aussagen an, inwieweit diese auf dich persönlich zutreffen.]]>
+        <![CDATA[Die folgenden Aussagen beziehen sich auf dein Lernumfeld zuhause, zum Beispiel in Phasen des Homeschoolings oder Wechselunterrichts. Bitte gib bei jeder Aussage an, inwieweit diese auf dich persönlich zutrifft.]]>
     </INSTRUCTION>
-    <QUESTIONS VERSION="2021080919">
+    <QUESTIONS VERSION="2021080911">
+        <QUESTION ID="1" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich wähle den Ort, an dem ich zuhause lerne so, dass ich zu viel Ablenkung vermeide.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="2" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich finde einen komfortablen Platz, um von zuhause aus zu lernen.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="3" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich weiß, wo ich zuhause am effizientesten lernen kann.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="4" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich habe einen festen Platz, an dem ich zuhause lerne.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
         <QUESTION ID="5" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Ich erledige Aufgaben gründlich.]]>
+                <![CDATA[Ich weiß, was meine Lehrerinnen und Lehre von mir erwarten, wenn ich zuhause lerne.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -33,7 +131,7 @@ Bitte gib für jede der folgenden Aussagen an, inwieweit diese auf dich persönl
         </QUESTION>
         <QUESTION ID="6" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Ich bin bequem, neige zur Faulheit.]]>
+                <![CDATA[Wenn ich beim Lernen zuhause etwas nicht ganz verstehe, frage ich andere Schülerinnen und Schüler nach Ideen.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -58,7 +156,7 @@ Bitte gib für jede der folgenden Aussagen an, inwieweit diese auf dich persönl
         </QUESTION>
         <QUESTION ID="7" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Ich bin tüchtig und arbeite flott.]]>
+                <![CDATA[Ich teile meine Schwierigkeiten meinen Mitschülerinnen und Mitschülern mit, damit wir wissen, wo unsere Schwierigkeiten liegen und wie wir sie lösen können.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -83,7 +181,7 @@ Bitte gib für jede der folgenden Aussagen an, inwieweit diese auf dich persönl
         </QUESTION>
         <QUESTION ID="8" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Ich mache Pläne und führe sie auch durch.]]>
+                <![CDATA[Ich bin hartnäckig darin, von meinen Lehrerinnen und Lehrern Hilfe zu suchen.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -108,7 +206,7 @@ Bitte gib für jede der folgenden Aussagen an, inwieweit diese auf dich persönl
         </QUESTION>
         <QUESTION ID="9" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Ich werde leicht deprimiert, niedergeschlagen.]]>
+                <![CDATA[Wenn ich unsicher bin mit den Materialien beim Lernen zuhause, frage ich bei anderen nach.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>
@@ -133,182 +231,7 @@ Bitte gib für jede der folgenden Aussagen an, inwieweit diese auf dich persönl
         </QUESTION>
         <QUESTION ID="10" TYPE="likert">
             <QUESTIONTEXT>
-                <![CDATA[Ich bin entspannt, lasse mich durch Stress nicht aus der Ruhe bringen.]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[trifft nicht zu]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[trifft zu]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="11" TYPE="likert">
-            <QUESTIONTEXT>
-                <![CDATA[Ich mache mir viele Sorgen.]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[trifft nicht zu]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[trifft zu]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="12" TYPE="likert">
-            <QUESTIONTEXT>
-                <![CDATA[Ich werde leicht nervös und unsicher.]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[trifft nicht zu]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[trifft zu]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="13" TYPE="likert">
-            <QUESTIONTEXT>
-                <![CDATA[Ich bin vielseitig interessiert.]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[trifft nicht zu]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[trifft zu]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="14" TYPE="likert">
-            <QUESTIONTEXT>
-                <![CDATA[Ich bin tiefsinnig, denke gerne über Sachen nach.]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[trifft nicht zu]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[trifft zu]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="15" TYPE="likert">
-            <QUESTIONTEXT>
-                <![CDATA[Ich habe eine aktive Vorstellungskraft, bin phantasievoll.]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[trifft nicht zu]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[trifft zu]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="16" TYPE="likert">
-            <QUESTIONTEXT>
-                <![CDATA[Ich schätze künstlerische und ästhetische Eindrücke.]]>
-            </QUESTIONTEXT>
-            <OPTIONS>
-                <OPTION>
-                    <![CDATA[trifft nicht zu]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[]]>
-                </OPTION>
-                <OPTION>
-                    <![CDATA[trifft zu]]>
-                </OPTION>
-            </OPTIONS>
-        </QUESTION>
-        <QUESTION ID="17" TYPE="likert">
-            <QUESTIONTEXT>
-                <![CDATA[Ich habe nur wenig künstlerisches Interesse.]]>
+                <![CDATA[Ich kommuniziere mit meinen Mitschülerinnen und Mitschülern, um herauszufinden, wie gut ich bin.]]>
             </QUESTIONTEXT>
             <OPTIONS>
                 <OPTION>

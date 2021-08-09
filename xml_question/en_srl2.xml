@@ -1,0 +1,908 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<GROUPFORMATION COMMENT="self-regulated learning">
+    <INSTRUCTION>
+        <![CDATA[Die folgenden Aussagen beziehen sich auf dein Lernverhalten in der Schule, bei Hausaufgaben oder bei der Prüfungsvorbereitung. Bitte gib an, inwieweit die folgenden Aussagen auf dich persönlich zutreffen.]]>
+    </INSTRUCTION>
+    <QUESTIONS VERSION="2021080911">
+        <QUESTION ID="1" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich habe einen Lernplan für die Abiturprüfungen.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="2" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich setze mir feste Zeitpunkte, zu denen ich meine Ziele erreichen will.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="3" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Wenn mein Durchhaltevermögen nachlässt, weiß ich meist genau, wie ich meine Lust an der Sache verstärken kann.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="4" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich denke an frühere Erfolge zurück, um mein Selbstbewußtsein zu stärken.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="5" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Die meisten Probleme kann ich aus eigener Kraft meistern.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="6" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich suche mir Erfolgserlebnisse, um mich für schwierige Aufgaben zu motivieren.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="7" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich lerne immer zu gleich bleibenden Zeiten.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="8" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich stelle mir Fragen zum Stoff, um sicher zu gehen, daß ich auch alles verstanden habe.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="9" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Alle wichtigen Termine und Aufgaben schreibe ich mir auf.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="10" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Um mich zu motivieren, rufe ich mir vor Augen, wie schön es sein wird, wenn ich ein Ziel erreicht haben werde.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="11" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich beginne erst mit dem Lernen, wenn ich mir die notwendigen Einzelschritte klargemacht habe.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="12" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich kann meine Stimmung so verändern, dass mir dann alles leichter von der Hand geht.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="13" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich habe mir Ziele für die Abiturprüfungen gesetzt.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="14" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Wenn ich viel zu lernen habe, mache ich mir einen Zeitplan, was ich wann lerne.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="15" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich habe feste Ziele im Leben.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="16" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich notiere mir Strategien, die ich beim Lernen ausprobieren möchte.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="17" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Nach einer Lernwoche überlege ich, was ich alles gelernt habe.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="18" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Zu neuen Konzepten stelle ich mir praktische Anwendungen vor.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="19" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich kann überprüfen, ob ich meine Ziele erreicht habe.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="20" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Auch anstrengende und komplizierte Aufgaben kann ich in der Regel lösen.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="21" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich weiß, wie ich mich zum Lernen für die Abiturprüfungen motivieren kann.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="22" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich kann es schaffen, einer anfangs unangenehmen Tätigkeit zunehmend angenehme Seiten abzugewinnen.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="23" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Am Ende einer Woche denke ich nach darüber, welche Themen ich gekonnt habe und welche nicht.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="24" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich versuche in Gedanken, das Gelernte mit dem zu verbinden, was ich schon darüber weiß.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="25" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich kann mich beim Lernen gut in die Stimmung hineinbringen, die ich im Moment am besten gebrauchen kann.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="26" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich denke mir konkrete Beispiele zu bestimmten Lerninhalten aus.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="27" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich wähle meine Ziele so, dass sie eine Herausforderung für mich sind.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="28" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich denke regelmäßig über mein Lernen nach.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="29" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Am Ende des Tages frage ich mich, ob ich zufrieden bin mit meiner Leistung.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="30" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich mache mir Aufzeichnungen über mein Lernverhalten.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="31" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich gehe in Gedanken noch einmal den gelernten Stoff durch, um zu sehen, ob ich alles Wesentliche behalten habe.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="32" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich versuche, Beziehungen zu den Inhalten verwandter Fächer bzw. Lehrveranstaltungen herzustellen.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="33" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[In schwierigen Situationen kann ich mich auf meine Fähigkeiten verlassen.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="34" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich versuche, meine eigene Leistung von Mal zu Mal zu steigern.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="35" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Ich überlege mir, ob der Lernstoff auch für mein Alltagsleben von Bedeutung ist.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="36" TYPE="likert">
+            <QUESTIONTEXT>
+                <![CDATA[Wenn ich eine Kapitel gelernt habe, überlege ich, was ich beim Lernen für das nächste Kapitel anders machen möchte.]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[trifft nicht zu]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[trifft zu]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+    </QUESTIONS>
+</GROUPFORMATION>

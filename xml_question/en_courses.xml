@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<GROUPFORMATION COMMENT="courses questions">
+    <INSTRUCTION>
+        <![CDATA[Zunächst einmal interessieren wir uns dafür, welche Leistungsfächer Du belegst und welche Zeugnisnoten Du darin auf den letzten beiden Zeugnissen hattest.
+
+Wähle dazu immer eines deiner Leistungsfächer aus und gib dazu an, welche Note Du auf dem letzten Zeugnis vor den Sommerferien (Ganzjahreszeugnis des letzten Schuljahres) und auf dem vorletzten Zeugnis (Halbjahreszeugnis des letzten Schuljahres) in diesem Fach hattest.
+
+Es ist egal, in welcher Reihenfolge Du deine drei Leistungsfächer angibst; es ist nur wichtig, dass Du keines doppelt angibst. Falls Du eine Note nicht mehr ganz genau weißt, wähle eine Note aus, die dir realistisch erscheint.
+
+Nur zur Erinnerung: Deine Angaben hier sind anonym und werden nur unter deinem Codenamen abgespeichert - nicht unter deinem echten Namen. Antworte daher bitte ehrlich und gewissenhaft.]]>
+    </INSTRUCTION>
+    <QUESTIONS VERSION="2021080912">
+        <QUESTION ID="1" TYPE="dropdown">
+            <QUESTIONTEXT>
+                <![CDATA[Bitte wähle das erste deiner Leistungsfächer:]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[Deutsch]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Englisch]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Französisch]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Latein]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Griechisch]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Russisch]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Spanisch]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Italienisch]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Bildende Kunst]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Musik]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Geschichte]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Erdkunde]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Sozialkunde]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Mathematik]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Physik]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Chemie]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Biologie]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Informatik]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Evangelische Religionslehre]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Katholische Religionslehre]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Ethikunterricht]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Sport]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Philosophie]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="2" TYPE="dropdown">
+            <QUESTIONTEXT>
+                <![CDATA[Bitte gib deine Note in diesem Fach auf dem letzten Zeugnis an:]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[15 (sehr gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[14 (sehr gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[13 (sehr gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[12 (gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[11 (gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[10 (gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[9 (befriedigend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[8 (befriedigend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[7 (befriedigend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[6 (ausreichend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[5 (ausreichend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[4 (ausreichend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[3 (mangelhaft)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[2 (mangelhaft)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[1 (mangelhaft)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[0 (ungenügend)]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="3" TYPE="dropdown">
+            <QUESTIONTEXT>
+                <![CDATA[Welche Note möchtest du in diesem Fach in der Abiturprüfung erreichen?]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[15 (sehr gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[14 (sehr gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[13 (sehr gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[12 (gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[11 (gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[10 (gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[9 (befriedigend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[8 (befriedigend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[7 (befriedigend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[6 (ausreichend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[5 (ausreichend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[4 (ausreichend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[3 (mangelhaft)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[2 (mangelhaft)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[1 (mangelhaft)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[0 (ungenügend)]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="4" TYPE="dropdown">
+            <QUESTIONTEXT>
+                <![CDATA[Bitte wähle das zweite deiner Leistungsfächer:]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[Deutsch]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Englisch]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Französisch]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Latein]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Griechisch]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Russisch]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Spanisch]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Italienisch]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Bildende Kunst]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Musik]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Geschichte]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Erdkunde]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Sozialkunde]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Mathematik]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Physik]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Chemie]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Biologie]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Informatik]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Evangelische Religionslehre]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Katholische Religionslehre]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Ethikunterricht]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Sport]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Philosophie]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="5" TYPE="dropdown">
+            <QUESTIONTEXT>
+                <![CDATA[Bitte gib deine Note in diesem Fach auf dem letzten Zeugnis an:]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[15 (sehr gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[14 (sehr gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[13 (sehr gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[12 (gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[11 (gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[10 (gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[9 (befriedigend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[8 (befriedigend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[7 (befriedigend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[6 (ausreichend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[5 (ausreichend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[4 (ausreichend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[3 (mangelhaft)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[2 (mangelhaft)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[1 (mangelhaft)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[0 (ungenügend)]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="6" TYPE="dropdown">
+            <QUESTIONTEXT>
+                <![CDATA[Welche Note möchtest du in diesem Fach in der Abiturprüfung erreichen?]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[15 (sehr gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[14 (sehr gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[13 (sehr gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[12 (gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[11 (gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[10 (gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[9 (befriedigend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[8 (befriedigend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[7 (befriedigend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[6 (ausreichend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[5 (ausreichend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[4 (ausreichend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[3 (mangelhaft)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[2 (mangelhaft)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[1 (mangelhaft)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[0 (ungenügend)]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="7" TYPE="dropdown">
+            <QUESTIONTEXT>
+                <![CDATA[Bitte wähle das dritte deiner Leistungsfächer:]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[Deutsch]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Englisch]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Französisch]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Latein]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Griechisch]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Russisch]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Spanisch]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Italienisch]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Bildende Kunst]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Musik]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Geschichte]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Erdkunde]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Sozialkunde]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Mathematik]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Physik]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Chemie]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Biologie]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Informatik]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Evangelische Religionslehre]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Katholische Religionslehre]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Ethikunterricht]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Sport]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[Philosophie]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="8" TYPE="dropdown">
+            <QUESTIONTEXT>
+                <![CDATA[Bitte gib deine Note in diesem Fach auf dem letzten Zeugnis an:]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[15 (sehr gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[14 (sehr gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[13 (sehr gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[12 (gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[11 (gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[10 (gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[9 (befriedigend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[8 (befriedigend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[7 (befriedigend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[6 (ausreichend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[5 (ausreichend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[4 (ausreichend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[3 (mangelhaft)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[2 (mangelhaft)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[1 (mangelhaft)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[0 (ungenügend)]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+        <QUESTION ID="9" TYPE="dropdown">
+            <QUESTIONTEXT>
+                <![CDATA[Welche Note möchtest du in diesem Fach in der Abiturprüfung erreichen?]]>
+            </QUESTIONTEXT>
+            <OPTIONS>
+                <OPTION>
+                    <![CDATA[15 (sehr gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[14 (sehr gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[13 (sehr gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[12 (gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[11 (gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[10 (gut)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[9 (befriedigend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[8 (befriedigend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[7 (befriedigend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[6 (ausreichend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[5 (ausreichend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[4 (ausreichend)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[3 (mangelhaft)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[2 (mangelhaft)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[1 (mangelhaft)]]>
+                </OPTION>
+                <OPTION>
+                    <![CDATA[0 (ungenügend)]]>
+                </OPTION>
+            </OPTIONS>
+        </QUESTION>
+    </QUESTIONS>
+</GROUPFORMATION>

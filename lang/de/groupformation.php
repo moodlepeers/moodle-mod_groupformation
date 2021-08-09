@@ -188,7 +188,7 @@ $string ['category_knowledge'] = 'Vorwissen';
 $string ['category_topic'] = 'Themenauswahl';
 $string ['category_sellmo'] = 'Lern- und Leistungsmotivation';
 $string ['category_self'] = 'Selbsteinschätzung';
-$string ['category_srl'] = 'Selbstreguliertes Lernen';
+$string ['category_srl'] = 'Lernstrategien';
 $string ['category_binquestion'] = 'Binquestion';
 
 $string ['tabletitle_general'] = 'Allgemeines';
@@ -202,7 +202,7 @@ $string ['tabletitle_knowledge'] = 'Vorwissen';
 $string ['tabletitle_topic'] = 'Themenauswahl';
 $string ['tabletitle_sellmo'] = 'Lern- und Leistungsmotivation';
 $string ['tabletitle_self'] = 'Selbsteinschätzung';
-$string ['tabletitle_srl'] = 'Selbstreguliertes Lernen';
+$string ['tabletitle_srl'] = 'Lernstrategien';
 $string ['tabletitle_knowledge'] = 'Wie schätzen Sie Ihr persönliches Vorwissen in folgenden Gebieten ein?';
 $string ['tabletitle_binquestion'] = 'Wählen Sie eine der Antworten!';
 $string ['tabletitle_binquestion_multi'] = 'Wählen Sie so viele Antworten wie Sie wollen!';
@@ -618,6 +618,18 @@ $string ['tabletitle_skills'] = 'Erfahrung';
 
 $string ['category_honesty'] = 'Ehrlichkeit';
 $string ['tabletitle_honesty'] = 'Ehrlichkeit';
+
+$string ['category_courses'] = 'Vornoten';
+$string ['tabletitle_courses'] = 'Vornoten';
+
+$string ['category_homeschooling'] = 'Homeschooling';
+$string ['tabletitle_homeschooling'] = 'Homeschooling';
+
+$string ['category_procrastination'] = 'Aufschiebeverhalten';
+$string ['tabletitle_procrastination'] = 'Aufschiebeverhalten';
+
+$string ['category_examinations'] = 'Prüfungssituationen';
+$string ['tabletitle_examinations'] = 'Prüfungssituationen';
 
 $string ['freetext_noanswer'] = 'Keine Antwort';
 

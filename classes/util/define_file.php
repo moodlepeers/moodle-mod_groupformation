@@ -44,7 +44,7 @@ class mod_groupformation_data {
                             "extraversion" => array(
                                     "scenarios" => array(1 => false, 2 => false),  // False = heterogeneous, True = homogeneous.
                                     "evaluation" => true,  // Use for displaying it to user (to compare to group and course).
-                                    "questionids" => array(-1, 6), // Inverse questions = negative.
+                                    "questionids" => array(-1, 2, -3, 4), // Inverse questions = negative.
                                     "significant_id_only" => false,
                                 // True = only use the one questionid with most significant differences between users.
                                     "cutoffs" => array(0.313169217, 0.776242547),
@@ -52,28 +52,28 @@ class mod_groupformation_data {
                             "conscientiousness" => array(
                                     "scenarios" => array(1 => false, 2 => false),
                                     "evaluation" => true,
-                                    "questionids" => array(-3, 8),
+                                    "questionids" => array(5, -6, 7, 8),
                                     "significant_id_only" => false,
                                     "cutoffs" => array(0.456596974, 0.831246163),
                             ),
                             "agreeableness" => array(
                                     "scenarios" => array(),
                                     "evaluation" => true,
-                                    "questionids" => array(2, -7, 11),
+                                    "questionids" => array(-18, 19, -20, 21),
                                     "significant_id_only" => false,
                                     "cutoffs" => array(0.492136484, 0.799889659),
                             ),
                             "neuroticism" => array(
                                     "scenarios" => array(),
                                     "evaluation" => true,
-                                    "questionids" => array(-4, 9),
+                                    "questionids" => array(9, -10, 11, 12),
                                     "significant_id_only" => false,
                                     "cutoffs" => array(0.195135503, 0.602511556),
                             ),
                             "openness" => array(
                                     "scenarios" => array(),
                                     "evaluation" => true,
-                                    "questionids" => array(-5, 10),
+                                    "questionids" => array(13, 14, 15, 16, -17),
                                     "significant_id_only" => false,
                                     "cutoffs" => array(0.348454964, 0.829192095),
                             ),
@@ -130,6 +130,20 @@ class mod_groupformation_data {
                                     "cutoffs" => null,
                             ),
                     ),
+            ),
+            "srl" => array(
+                "category" => "srl",
+                "scenarios" => array(1, 2),
+                "evaluation" => false,
+                "labels" => array(
+                    "one" => array(
+                        "scenarios" => array(1 => false, 2 => false),
+                        "evaluation" => false,
+                        "questionids" => array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33),
+                        "significant_id_only" => false,
+                        "cutoffs" => null,
+                    ),
+                ),
             ),
             "learning" => array(
                     "category" => "learning",
@@ -257,7 +271,7 @@ class mod_groupformation_data {
     );
 
     /** @var bool Special mode booleans (can be ignored in normal use cases). */
-    private static $mathprepcoursemode = false;
+    private static $mathprepcoursemode = true;
 
     /**
      * Returns whether this instance is running in math prep course mode;

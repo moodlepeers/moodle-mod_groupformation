@@ -492,7 +492,16 @@ class mod_groupformation_questionnaire_controller {
 
             $category = $this->category;
 
-            $table = new mod_groupformation_question_table ($category);
+            $lang = get_string('language', 'groupformation');
+
+            $instructions = $this->store->get_category_instructions($category);
+            $instruction = NULL;
+            if (!is_null($instructions)) {
+                $instructions = json_decode($instructions);
+                $instruction = $instructions->$lang;
+            }
+
+            $table = new mod_groupformation_question_table ($category, $instruction);
 
             // Here is the actual category and groupformationid is sent hidden.
             $s .= '<input type="hidden" name="category" value="' . $category . '"/>';

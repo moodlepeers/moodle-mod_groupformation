@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<questionnaire version="2020082100">
+<questionnaire version="2021080921">
     <categories>
         <category>demographic</category>
-        <category>skills</category>
         <category>times</category>
         <category>general</category>
         <category>grade</category>
@@ -10,19 +9,25 @@
         <category>character</category>
         <category>motivation</category>
         <category>team</category>
+        <category>srl</category>
+        <category>courses</category>
         <category>honesty</category>
         <category>topic</category>
+        <category>homeschooling</category>
+        <category>procrastination</category>
+        <category>examinations</category>
     </categories>
     <scenarios>
         <scenario>
             <name>projectteams</name>
             <categories>
-                <category>general</category>
-                <category>grade</category>
-                <category>points</category>
+                <category>courses</category>
+                <category>srl</category>
                 <category>character</category>
-                <category>motivation</category>
-                <category>team</category>
+                <category>homeschooling</category>
+                <category>procrastination</category>
+                <category>examinations</category>
+                <category>demographic</category>
                 <category>honesty</category>
             </categories>
         </scenario>

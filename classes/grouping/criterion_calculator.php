@@ -584,6 +584,18 @@ class mod_groupformation_criterion_calculator {
     }
 
     /**
+     * Returns srl criterion values
+     *
+     * @param $userid
+     * @param null $specs
+     * @return array|null
+     * @throws dml_exception
+     */
+    public function get_srl($userid, $specs = null) {
+        return $this->get_values('srl', $userid, $specs);
+    }
+
+    /**
      * Returns topic answers as a criterion
      *
      * @param number $userid

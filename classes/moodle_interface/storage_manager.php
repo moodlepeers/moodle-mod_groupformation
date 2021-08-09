@@ -1571,4 +1571,16 @@ class mod_groupformation_storage_manager {
         global $DB;
         return $DB->get_field('user', 'email', array('id' => $userid));
     }
+
+    /**
+     * Returns instructions for a given category
+     *
+     * @param $category
+     * @return string
+     * @throws dml_exception
+     */
+    public function get_category_instructions($category) {
+        global $DB;
+        return $DB->get_field('groupformation_q_version', 'instructions', array('category' => $category));
+    }
 }

@@ -43,8 +43,9 @@ class mod_groupformation_question_table {
      *
      * @param string $category
      */
-    public function __construct($category) {
+    public function __construct($category, $instruction = NULL) {
         $this->category = $category;
+        $this->instruction = $instruction;
     }
 
     /**
@@ -89,23 +90,32 @@ class mod_groupformation_question_table {
             $s .= '<ul class="sortable_topics">';
 
         } else {
+            if (!is_null($this->instruction)) {
+                $s .= '<p style="margin: 1em;">';
+                $s .= str_replace("\n","<br>",$this->instruction);
+                $s .= '</p>';
+            }
             $s .= '<table class="responsive-table">';
             $s .= '<colgroup><col class="firstCol"></colgroup>';
             $s .= '<thead>';
             $s .= '<tr>';
             $s .= '<th scope="col">';
-            if ($this->category == 'knowledge') {
-                $s .= 'Wie ist dein Ergebnis im Eingangstest?';
-            } else {
-                $s .= get_string('tabletitle_' . $this->category . $addon, 'groupformation');
-            }
+            $s .= get_string('tabletitle_' . $this->category . $addon, 'groupformation');
             // TODO if(category == 'knowledge')... else...
             // TODO wieder hierdurch ersetzen $s .=get_string('tabletitle_' . $this->category . $addon, 'groupformation');
             $s .= '</th>';
             $s .= '<th scope="col" colspan="100%">';
             $s .= '</th>';
 
-            $s .= '</tr></thead><tbody>';
+            $s .= '</tr>';
+            if (false && !is_null($this->instruction)) {
+                $s .= '<tr>';
+                $s .= '<td scope="col" colspan="100%">';
+                $s .= str_replace("\n","<br>",$this->instruction);
+                $s .= '</td>';
+                $s .= '</tr>';
+            }
+            $s .= '</thead><tbody>';
         }
         return $s;
     }
