@@ -42,7 +42,7 @@ function groupformation_add_jquery($PAGE, $filename = null) {
     $PAGE->requires->jquery_plugin('ui-css');
 
     if (!is_null($filename)) {
-        $PAGE->requires->js(new moodle_url($CFG->wwwroot.'/mod/groupformation/js/'.$filename));
+        $PAGE->requires->js('/mod/groupformation/js/'.$filename);
     }
 }
 
