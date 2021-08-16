@@ -9,7 +9,7 @@ Es ist egal, in welcher Reihenfolge Du deine drei Leistungsfächer angibst; es i
 
 Nur zur Erinnerung: Deine Angaben hier sind anonym und werden nur unter deinem Codenamen abgespeichert - nicht unter deinem echten Namen. Antworte daher bitte ehrlich und gewissenhaft.]]>
     </INSTRUCTION>
-    <QUESTIONS VERSION="2021081603">
+    <QUESTIONS VERSION="2021081604">
         <QUESTION ID="1" TYPE="dropdown">
             <QUESTIONTEXT>
                 <![CDATA[Bitte wähle das erste deiner Leistungsfächer:]]>
@@ -22,7 +22,7 @@ Nur zur Erinnerung: Deine Angaben hier sind anonym und werden nur unter deinem C
                     <![CDATA[Englisch]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Französisch]]>
+                    <![CDATA[Franzoesisch]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[Latein]]>
@@ -208,7 +208,7 @@ Nur zur Erinnerung: Deine Angaben hier sind anonym und werden nur unter deinem C
                     <![CDATA[Englisch]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Französisch]]>
+                    <![CDATA[Franzoesisch]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[Latein]]>
@@ -394,7 +394,7 @@ Nur zur Erinnerung: Deine Angaben hier sind anonym und werden nur unter deinem C
                     <![CDATA[Englisch]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[Französisch]]>
+                    <![CDATA[Franzoesisch]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[Latein]]>
