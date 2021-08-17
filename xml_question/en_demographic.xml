@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GROUPFORMATION COMMENT="demographic questions">
-    <QUESTIONS VERSION="2021080921">
+    <QUESTIONS VERSION="2021081702">
         <QUESTION ID="1" TYPE="number">
             <QUESTIONTEXT>
                 <![CDATA[Alter]]>
@@ -23,7 +23,7 @@
                     <![CDATA[weiblich]]>
                 </OPTION>
                 <OPTION>
-                    <![CDATA[männlich]]>
+                    <![CDATA[maennlich]]>
                 </OPTION>
                 <OPTION>
                     <![CDATA[divers]]>
