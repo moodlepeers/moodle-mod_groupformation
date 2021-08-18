@@ -496,7 +496,7 @@ class mod_groupformation_questionnaire_controller {
 
             $instructions = $this->store->get_category_instructions($category);
             $instruction = NULL;
-            if (!is_null($instructions)) {
+            if ($instructions !== false && !is_null($instructions)) {
                 $instructions = json_decode($instructions);
                 $instruction = $instructions->$lang;
             }
@@ -689,7 +689,7 @@ class mod_groupformation_questionnaire_controller {
             $state = $this->store->statemachine->get_state();
             $userstate = $this->store->userstatemachine->get_state($this->userid);
             if ($isteacher) {
-                $s = '<div class="alert">';
+                $s = '<div class="alert" style="color:red;">';
                 $s .= get_string('questionnaire_preview', 'groupformation');
                 $s .= '</div>';
                 $assigns['preview_alert'] = $s;

@@ -128,8 +128,14 @@ class mod_groupformation_knowledge_question extends mod_groupformation_range_que
         $s .= min(array_keys($options)) . ' = ' . $options [min(array_keys($options))];
         $s .= ', ' . max(array_keys($options)) . ' = ' . $options [max(array_keys($options))];
         $s .= '" class="range">';
-        $s .= '<input class="form-control" type="number" name="' . $category . $questionid . '" min="0" max="100" value="' .
+
+        $s .= '<span>'.min(array_keys($options)).'</span>';
+
+        $s .= '<input class="form-control" type="range" name="' . $category . $questionid . '" min="0" max="100" value="' .
                 intval($answer) . '"/>';
+
+        $s .= '<span>'.max(array_keys($options)).'</span>';
+
         $s .= '<input type="text" name="' . $category . $questionid;
         $s .= '_valid" value="' . intval($answer) . '" style="display:none;"/>';
         if ($category == 'points') {
