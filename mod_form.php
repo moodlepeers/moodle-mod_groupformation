@@ -321,5 +321,240 @@ class mod_groupformation_mod_form extends moodleform_mod {
         // Close div tag for non-js related content.
         $mform->addElement('html', '</div id="non-js-content">');
     }
+
+    /**
+     * Checks knowledge fields for submitted groupformation
+     *
+     * @param $groupformation
+     * @return mixed
+     */
+    public function validate_knowledge_fields($groupformation) {
+        if (!isset($groupformation->knowledge)) {
+            // knowledge has not been selected or has been deselected
+            $groupformation->knowledge = 0;
+            $groupformation->knowledgelines = "";
+            $groupformation->knowledgevalues = null;
+            $groupformation->knowledgenumber = null;
+        } else {
+            if (isset($groupformation->knowledgelines)){
+                // knowledge lines need to be trimmed to ignore spaces
+                $groupformation->knowledgelines = trim($groupformation->knowledgelines);
+                if (strlen($groupformation->knowledgelines) == 0) {
+                    // no knowledge lines given; deactivate knowledge
+                    $groupformation->knowledge = 0;
+                    $groupformation->knowledgelines = "";
+                    $groupformation->knowledgevalues = null;
+                    $groupformation->knowledgenumber = null;
+                } else {
+                    // knowledge lines given; handle update
+                    $groupformation->knowledge = 1;
+                    $knowledgearray = explode("\n", $groupformation->knowledgelines);
+                    $groupformation->knowledgevalues = groupformation_convert_options($knowledgearray, true);
+                    $groupformation->knowledgenumber = count($knowledgearray);
+                }
+            } else {
+                $groupformation->knowledge = 0;
+                $groupformation->knowledgelines = "";
+                $groupformation->knowledgevalues = null;
+                $groupformation->knowledgenumber = null;
+            }
+        }
+        return $groupformation;
+    }
+
+    /**
+     * Checks topic fields for submitted groupformation
+     *
+     * @param $groupformation
+     * @return mixed
+     */
+    public function validate_topic_fields($groupformation) {
+        if (!isset($groupformation->topics)) {
+            // topics has not been selected or has been deselected
+            $groupformation->topics = 0;
+            $groupformation->topiclines = "";
+            $groupformation->topicvalues = null;
+            $groupformation->topicnumber = null;
+        } else {
+            if (isset($groupformation->topiclines)){
+                // topic lines need to be trimmed to ignore spaces
+                $groupformation->topiclines = trim($groupformation->topiclines);
+                if (strlen($groupformation->topiclines) == 0) {
+                    // no topic lines given; deactivate topics
+                    $groupformation->topics = 0;
+                    $groupformation->topiclines = "";
+                    $groupformation->topicvalues = null;
+                    $groupformation->topicnumber = null;
+                } else {
+                    // topic lines given; handle update
+                    $groupformation->topics = 1;
+                    $topicarray = explode("\n", $groupformation->topiclines);
+                    $groupformation->topicvalues = groupformation_convert_options($topicarray, true);
+                    $groupformation->topicnumber = count($topicarray);
+                }
+            } else {
+                $groupformation->topics = 0;
+                $groupformation->topiclines = "";
+                $groupformation->topicvalues = null;
+                $groupformation->topicnumber = null;
+            }
+        }
+        return $groupformation;
+    }
+
+    /**
+     * Checks groupoption fields for submitted groupformation
+     *
+     * @param $groupformation
+     * @return mixed
+     */
+    public function validate_group_option($groupformation) {
+        if (isset($groupformation->groupoption)) {
+            if ($groupformation->groupoption == 1) {
+                $groupformation->maxmembers = 0;
+            } else {
+                $groupformation->maxgroups = 0;
+            }
+        } else {
+            $groupformation->groupoption = 0;
+            $groupformation->maxmembers = 3;
+            $groupformation->maxgroups = 0;
+        }
+        return $groupformation;
+    }
+
+    /**
+     * Checks evaluationmethod fields for submitted groupformation
+     *
+     * @param $groupformation
+     * @return mixed
+     */
+    public function validate_evaluation_method($groupformation) {
+        if (isset ($groupformation->evaluationmethod)) {
+            if ($groupformation->evaluationmethod != 2) {
+                $groupformation->maxpoints = 100;
+            }
+        } else {
+            $groupformation->evaluationmethod = 1;
+            $groupformation->maxpoints = 100;
+        }
+        return $groupformation;
+    }
+
+    /**
+     * Checks onlyactivestudents field for submitted groupformation
+     *
+     * @param $groupformation
+     * @return mixed
+     */
+    public function validate_onlyactivestudents_field($groupformation) {
+        if (isset ($groupformation->onlyactivestudents)) {
+            $groupformation->onlyactivestudents = 1;
+        } else {
+            $groupformation->onlyactivestudents = 0;
+        }
+        return $groupformation;
+    }
+
+    /**
+     * Checks emailnotifications field for submitted groupformation
+     *
+     * @param $groupformation
+     * @return mixed
+     */
+    public function validate_emailnotifications_field($groupformation) {
+        if (isset ($groupformation->emailnotifications)) {
+            $groupformation->emailnotifications = 1;
+        } else {
+            $groupformation->emailnotifications = 0;
+        }
+        return $groupformation;
+    }
+
+    /**
+     * Checks allanswersrequired field for submitted groupformation
+     *
+     * @param $groupformation
+     * @return mixed
+     */
+    public function validate_allanswersrequired_field($groupformation) {
+        if (isset ($groupformation->allanswersrequired)) {
+            $groupformation->allanswersrequired = 1;
+        } else {
+            $groupformation->allanswersrequired = 0;
+        }
+        return $groupformation;
+    }
+
+    /**
+     * Checks binquestion fields for submitted groupformation
+     *
+     * @param $groupformation
+     * @return mixed
+     */
+    public function validate_binquestion_fields($groupformation) {
+        if (isset ($groupformation->binquestion) && $groupformation->binquestion == 0) {
+            $groupformation->binquestion = 0;
+            $groupformation->binquestiontext = "";
+            $groupformation->binquestionlines = "";
+            $groupformation->binquestionvalues = null;
+            $groupformation->binquestionnumber = null;
+            $groupformation->binquestionimportance = null;
+            $groupformation->binquestionrelation = null;
+            $groupformation->binquestionmultiselect = null;
+        } else if (!isset ($groupformation->binquestion)) {
+            $groupformation->binquestion = 0;
+            $groupformation->binquestiontext = "";
+            $groupformation->binquestionlines = "";
+            $groupformation->binquestionvalues = null;
+            $groupformation->binquestionnumber = null;
+            $groupformation->binquestionimportance = null;
+            $groupformation->binquestionrelation = null;
+            $groupformation->binquestionmultiselect = null;
+        } else if (isset ($groupformation->binquestion) && $groupformation->binquestion == 1 &&
+            isset ($groupformation->binquestiontext) && $groupformation->binquestiontext == "") {
+            $groupformation->binquestion = 0;
+            $groupformation->binquestiontext = "";
+            $groupformation->binquestionlines = "";
+            $groupformation->binquestionvalues = null;
+            $groupformation->binquestionnumber = null;
+            $groupformation->binquestionimportance = null;
+            $groupformation->binquestionrelation = null;
+            $groupformation->binquestionmultiselect = null;
+        } else if (isset ($groupformation->binquestion) && $groupformation->binquestion == 1 &&
+            isset ($groupformation->binquestionlines) && $groupformation->binquestionlines == "") {
+            $groupformation->binquestion = 0;
+            $groupformation->binquestiontext = "";
+            $groupformation->binquestionlines = "";
+            $groupformation->binquestionvalues = null;
+            $groupformation->binquestionnumber = null;
+            $groupformation->binquestionimportance = null;
+            $groupformation->binquestionrelation = null;
+            $groupformation->binquestionmultiselect = null;
+        } else if (!isset($groupformation->binquestionimportance)) {
+            $groupformation->binquestion = 0;
+            $groupformation->binquestiontext = "";
+            $groupformation->binquestionlines = "";
+            $groupformation->binquestionvalues = null;
+            $groupformation->binquestionnumber = null;
+            $groupformation->binquestionimportance = null;
+            $groupformation->binquestionrelation = null;
+            $groupformation->binquestionmultiselect = null;
+        } else {
+            $binanswerarray = array();
+            if (!isset ($groupformation->binquestionrelation)) {
+                $groupformation->binquestionrelation = 0;
+            }
+            if (!isset($groupformation->binquestionmultiselect)) {
+                $groupformation->binquestionmultiselect = 0;
+            }
+            if ($groupformation->binquestion != 0) {
+                $binanswerarray = explode("\n", $groupformation->binquestionlines);
+            }
+            $groupformation->binquestionvalues = groupformation_convert_options($binanswerarray);
+            $groupformation->binquestionnumber = count($binanswerarray);
+        }
+        return $groupformation;
+    }
 }
 

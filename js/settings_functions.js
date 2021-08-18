@@ -30,7 +30,7 @@ require(['jquery', 'jqueryui'], function($) {
         if (!($('#nochangespossible').css('display') == 'none')) {
 
             $('#js-content').find('input, button, select').prop('disabled', true);
-
+            $('#id_js_onlyactivestudents').prop('disabled', false);
             if ($('#id_topics').attr('checked', 'checked')) {
                 $('#js-content').find('#group_opt_size, #group_size, #group_opt_numb').removeAttr('disabled');
             } else {

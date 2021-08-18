@@ -362,19 +362,22 @@ function groupformation_get_category_version($category) {
  * @param unknown $options
  * @return string
  */
-function groupformation_convert_options($options = NULL) {
+function groupformation_convert_options($options = NULL, $trim = false) {
     if (is_null($options)) {
         return NULL;
     }
     $ops = array();
     foreach ($options as $key => $option) {
-        if (is_number($key)) {
-            $key = 'OPTION';
+        $trimmedoption = ($trim)?trim($option):$option;
+        if (!strlen($trimmedoption) == 0) {
+            if (is_number($key)) {
+                $key = 'OPTION';
+            }
+            $s = '<' . $key . '><![CDATA[';
+            $s .= htmlentities($trimmedoption, ENT_QUOTES | ENT_XHTML);
+            $s .= ']]></' . $key . '>';
+            $ops[] = $s;
         }
-        $s = '<' . $key . '><![CDATA[';
-        $s .= htmlentities($option, ENT_QUOTES | ENT_XHTML);
-        $s .= ']]></' . $key . '>';
-        $ops[] = $s;
     }
     $op = implode("", $ops);
 

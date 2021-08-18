@@ -309,29 +309,25 @@ class mod_groupformation_scientific_grouping_2 extends mod_groupformation_groupi
      */
     public function get_specification() {
 
-        //$big5specs = mod_groupformation_data::get_criterion_specification('big5');
-        //$knowledgespecs = mod_groupformation_data::get_criterion_specification('knowledge');
-        //$binquestionspecs = mod_groupformation_data::get_criterion_specification('binquestion');
-        // $famspecs = mod_groupformation_data::get_criterion_specification('fam');
-        $srlspecs = mod_groupformation_data::get_criterion_specification('srl');
+        $big5specs = mod_groupformation_data::get_criterion_specification('big5');
+        $knowledgespecs = mod_groupformation_data::get_criterion_specification('knowledge');
+        $teamspecs = mod_groupformation_data::get_criterion_specification('team');
 
-        //unset($big5specs['labels']['neuroticism']);
-        //unset($big5specs['labels']['openness']);
-        //unset($big5specs['labels']['agreeableness']);
-        //unset($knowledgespecs['labels']['one']);
+        unset($big5specs['labels']['neuroticism']);
+        unset($big5specs['labels']['openness']);
+        unset($big5specs['labels']['agreeableness']);
+        unset($big5specs['labels']['conscientiousness']);
+        unset($knowledgespecs['labels']['one']);
 
         $specs = [
-            //'big5' => $big5specs,
-            //'knowledge' => $knowledgespecs,
-            //'binquestion' => $binquestionspecs,
-            // 'fam' => $famspecs,
-            'srl' => $srlspecs
+            'big5' => $big5specs,
+            'knowledge' => $knowledgespecs,
+            'team' => $teamspecs
         ];
 
-        // true = homo ; false = hetero
+        // true = homogen; false = heterogen
         $configurations = array(
-            "groupal:1;srl:0" => array('srl_one' => false),
-            "random:1" => array('srl_one' => true) // dummy für random
+            "groupal:1;ex:0;knowledge:0" => array('big5_extraversion' => false, 'knowledge_one' => false, 'team_teamorientation' => false)
         );
 
         return [$configurations, $specs];

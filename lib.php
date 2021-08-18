@@ -86,7 +86,7 @@ function groupformation_add_instance(stdClass $groupformation, mod_groupformatio
     $groupformation->version = groupformation_get_current_questionnaire_version();
 
     // Checks all fields and sets them properly.
-    $groupformation = groupformation_set_fields($groupformation);
+    $groupformation = groupformation_set_fields($groupformation, $mform);
 
     $id = $DB->insert_record('groupformation', $groupformation);
 
@@ -112,22 +112,40 @@ function groupformation_add_instance(stdClass $groupformation, mod_groupformatio
  * @throws coding_exception
  * @throws dml_exception
  */
-function groupformation_update_instance(stdClass $groupformation, mod_groupformation_mod_form $mform = null) {
+function groupformation_update_instance(stdClass $groupformation, mod_groupformation_mod_form $mform = null): bool {
     global $DB;
 
     // Checks all fields and sets them properly.
-    $groupformation = groupformation_set_fields($groupformation);
+    $groupformation = groupformation_set_fields($groupformation, $mform);
+
     $groupformation->timemodified = time();
     $groupformation->id = $groupformation->instance;
 
     $origrecord = $DB->get_record('groupformation', array(
             'id' => $groupformation->id));
     $origrecord->intro = $groupformation->intro;
+    $origrecord->timeopen = $groupformation->timeopen;
+    $origrecord->timeclose = $groupformation->timeclose;
     $origrecord->groupoption = $groupformation->groupoption;
     $origrecord->maxmembers = $groupformation->maxmembers;
     $origrecord->maxgroups = $groupformation->maxgroups;
-    $origrecord->timeopen = $groupformation->timeopen;
-    $origrecord->timeclose = $groupformation->timeclose;
+    $origrecord->groupname = $groupformation->groupname;
+    $origrecord->onlyactivestudents = $groupformation->onlyactivestudents;
+    $origrecord->allanswersrequired = $groupformation->allanswersrequired;
+    $origrecord->emailnotifications = $groupformation->emailnotifications;
+
+    // should not be updated if someone started the questionnaire already
+    $store = new mod_groupformation_storage_manager($groupformation->id);
+    if ($store->is_editable()) {
+        $origrecord->knowledge = $groupformation->knowledge;
+        $origrecord->knowledgelines = $groupformation->knowledgelines;
+        $origrecord->knowledgevalues = $groupformation->knowledgevalues;
+        $origrecord->knowledgenumber = $groupformation->knowledgenumber;
+        $origrecord->topics = $groupformation->topics;
+        $origrecord->topiclines = $groupformation->topiclines;
+        $origrecord->topicvalues = $groupformation->topicvalues;
+        $origrecord->topicnumber = $groupformation->topicnumber;
+    }
     $result = $DB->update_record('groupformation', $origrecord);
 
     // Get current DB record (with all DB defaults).
@@ -135,7 +153,6 @@ function groupformation_update_instance(stdClass $groupformation, mod_groupforma
             'id' => $groupformation->id));
 
     groupformation_grade_item_update($groupformation);
-
     return $result;
 }
 
@@ -556,151 +573,19 @@ function groupformation_extend_settings_navigation(settings_navigation $settings
  * Sets all the important fields and clears fields which are supposed to be empty or back on default.
  *
  * @param stdClass $groupformation
+ * @param mod_groupformation_mod_form|null $mform
  * @return stdClass
  */
-function groupformation_set_fields(stdClass $groupformation) {
+function groupformation_set_fields(stdClass $groupformation, mod_groupformation_mod_form $mform = null) {
 
-    if (isset ($groupformation->binquestion) && $groupformation->binquestion == 0) {
-        $groupformation->binquestion = 0;
-        $groupformation->binquestiontext = "";
-        $groupformation->binquestionlines = "";
-        $groupformation->binquestionvalues = null;
-        $groupformation->binquestionnumber = null;
-        $groupformation->binquestionimportance = null;
-        $groupformation->binquestionrelation = null;
-        $groupformation->binquestionmultiselect = null;
-    } else if (!isset ($groupformation->binquestion)) {
-        $groupformation->binquestion = 0;
-        $groupformation->binquestiontext = "";
-        $groupformation->binquestionlines = "";
-        $groupformation->binquestionvalues = null;
-        $groupformation->binquestionnumber = null;
-        $groupformation->binquestionimportance = null;
-        $groupformation->binquestionrelation = null;
-        $groupformation->binquestionmultiselect = null;
-    } else if (isset ($groupformation->binquestion) && $groupformation->binquestion == 1 &&
-            isset ($groupformation->binquestiontext) && $groupformation->binquestiontext == "") {
-        $groupformation->binquestion = 0;
-        $groupformation->binquestiontext = "";
-        $groupformation->binquestionlines = "";
-        $groupformation->binquestionvalues = null;
-        $groupformation->binquestionnumber = null;
-        $groupformation->binquestionimportance = null;
-        $groupformation->binquestionrelation = null;
-        $groupformation->binquestionmultiselect = null;
-    } else if (isset ($groupformation->binquestion) && $groupformation->binquestion == 1 &&
-            isset ($groupformation->binquestionlines) && $groupformation->binquestionlines == "") {
-        $groupformation->binquestion = 0;
-        $groupformation->binquestiontext = "";
-        $groupformation->binquestionlines = "";
-        $groupformation->binquestionvalues = null;
-        $groupformation->binquestionnumber = null;
-        $groupformation->binquestionimportance = null;
-        $groupformation->binquestionrelation = null;
-        $groupformation->binquestionmultiselect = null;
-    } else if (!isset($groupformation->binquestionimportance)) {
-        $groupformation->binquestion = 0;
-        $groupformation->binquestiontext = "";
-        $groupformation->binquestionlines = "";
-        $groupformation->binquestionvalues = null;
-        $groupformation->binquestionnumber = null;
-        $groupformation->binquestionimportance = null;
-        $groupformation->binquestionrelation = null;
-        $groupformation->binquestionmultiselect = null;
-    } else {
-        $binanswerarray = array();
-        if (!isset ($groupformation->binquestionrelation)) {
-            $groupformation->binquestionrelation = 0;
-        }
-        if (!isset($groupformation->binquestionmultiselect)) {
-            $groupformation->binquestionmultiselect = 0;
-        }
-        if ($groupformation->binquestion != 0) {
-            $binanswerarray = explode("\n", $groupformation->binquestionlines);
-        }
-        $groupformation->binquestionvalues = groupformation_convert_options($binanswerarray);
-        $groupformation->binquestionnumber = count($binanswerarray);
-    }
-
-    if (isset ($groupformation->knowledge) && $groupformation->knowledge == 0) {
-        $groupformation->knowledge = 0;
-        $groupformation->knowledgelines = "";
-        $groupformation->knowledgevalues = null;
-        $groupformation->knowledgenumber = null;
-    } else if (!isset ($groupformation->knowledge)) {
-        $groupformation->knowledge = 0;
-        $groupformation->knowledgelines = "";
-        $groupformation->knowledgevalues = null;
-        $groupformation->knowledgenumber = null;
-    } else if (isset ($groupformation->knowledge) && $groupformation->knowledge == 1 &&
-            isset ($groupformation->knowledgelines) && $groupformation->knowledgelines == ""
-    ) {
-        $groupformation->knowledge = 0;
-        $groupformation->knowledgelines = "";
-        $groupformation->knowledgevalues = null;
-        $groupformation->knowledgenumber = null;
-    } else {
-        $knowledgearray = array();
-        if ($groupformation->knowledge != 0) {
-            $knowledgearray = explode("\n", $groupformation->knowledgelines);
-        }
-        $groupformation->knowledgevalues = groupformation_convert_options($knowledgearray);
-        $groupformation->knowledgenumber = count($knowledgearray);
-    }
-
-    if (isset ($groupformation->topics) && $groupformation->topics == 0) {
-        $groupformation->topics = 0;
-        $groupformation->topiclines = "";
-        $groupformation->topicvalues = null;
-        $groupformation->topicnumber = null;
-    } else if (!isset ($groupformation->topics)) {
-        $groupformation->topics = 0;
-        $groupformation->topiclines = "";
-        $groupformation->topicvalues = null;
-        $groupformation->topicnumber = null;
-    } else if (isset ($groupformation->topics) && $groupformation->topics == 1 && isset ($groupformation->topiclines) &&
-            $groupformation->topiclines == ""
-    ) {
-        $groupformation->topics = 0;
-        $groupformation->topiclines = "";
-        $groupformation->topicvalues = null;
-        $groupformation->topicnumber = null;
-    } else {
-        $topicarray = array();
-        if ($groupformation->topics != 0) {
-            $topicarray = explode("\n", $groupformation->topiclines);
-        }
-        $groupformation->topicvalues = groupformation_convert_options($topicarray);
-        $groupformation->topicnumber = count($topicarray);
-    }
-
-    if (isset ($groupformation->groupoption) && $groupformation->groupoption == 1) {
-        $groupformation->maxmembers = 0;
-    } else if (isset ($groupformation->groupoption) && $groupformation->groupoption == 0) {
-        $groupformation->maxgroups = 0;
-    }
-
-    if (isset ($groupformation->evaluationmethod) && $groupformation->evaluationmethod != 2) {
-        $groupformation->maxpoints = 100;
-    }
-
-    if (isset ($groupformation->onlyactivestudents)) {
-        $groupformation->onlyactivestudents = 1;
-    } else {
-        $groupformation->onlyactivestudents = 0;
-    }
-
-    if (isset ($groupformation->emailnotifications)) {
-        $groupformation->emailnotifications = 1;
-    } else {
-        $groupformation->emailnotifications = 0;
-    }
-
-    if (isset ($groupformation->allanswersrequired)) {
-        $groupformation->allanswersrequired = 1;
-    } else {
-        $groupformation->allanswersrequired = 0;
-    }
+    $groupformation = $mform->validate_binquestion_fields($groupformation);
+    $groupformation = $mform->validate_knowledge_fields($groupformation);
+    $groupformation = $mform->validate_topic_fields($groupformation);
+    $groupformation = $mform->validate_group_option($groupformation);
+    $groupformation = $mform->validate_evaluation_method($groupformation);
+    $groupformation = $mform->validate_emailnotifications_field($groupformation);
+    $groupformation = $mform->validate_onlyactivestudents_field($groupformation);
+    $groupformation = $mform->validate_allanswersrequired_field($groupformation);
 
     return $groupformation;
 }
