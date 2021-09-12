@@ -415,10 +415,11 @@ class mod_groupformation_grouping_controller {
                 if ($topics) {
                     $title = $options[$number - 1];
                 }
-
-                $assigns[$key] = array(
+                $gname = $value->groupname;
+                $gname = str_replace("G1_", "",$gname);
+                    $assigns[$key] = array(
                         'topic' => $title,
-                        'groupname' => $value->groupname, 'groupquallity' => $gpi,
+                        'groupname' => $gname, 'groupquallity' => $gpi,
                         'grouplink' => $this->get_group_link($value->moodlegroupid),
                         'group_members' => $this->get_group_members($key));
             }

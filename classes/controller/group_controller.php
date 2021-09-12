@@ -130,7 +130,7 @@ class mod_groupformation_group_controller {
                 $groupinfo = get_string('oneManGroup', 'groupformation');
             }
             $assigns['topic_info'] = $topicinfo;
-            $assigns['group_name'] = $groupname;
+            $assigns['group_name'] = str_replace("G1_", "", $groupname);
             $assigns['members'] = $activemembers;
             $assigns['group_info'] = $groupinfo;
             $assigns['group_left_info'] = $groupleftinfo;
