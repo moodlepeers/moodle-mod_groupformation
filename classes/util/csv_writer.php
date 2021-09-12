@@ -225,7 +225,7 @@ class mod_groupformation_csv_writer {
 
         $userscurrent = array_keys($userids);
 
-        if ($this->groupformationid == 3 || $this->groupformationid == 4) {
+        if (false){ // && $this->groupformationid == 3 || $this->groupformationid == 4) {
             $gidorig = $this->groupformationid - 2;
 
             $umorig = new mod_groupformation_user_manager($gidorig);
@@ -301,7 +301,7 @@ class mod_groupformation_csv_writer {
             $userdata[$userid]['groupformation'] = $this->groupformationid;
 
             $userdata[$userid]['groupid'] = null;
-            $userdata[$userid]['groupid'] = null;
+            $userdata[$userid]['mgroupid'] = null;
             $userdata[$userid]['groupname'] = null;
             $userdata[$userid]['performance_index'] = null;
             $userdata[$userid]['groupkey'] = null;
@@ -310,52 +310,58 @@ class mod_groupformation_csv_writer {
             $userdata[$userid]['ex'] = null;
             $userdata[$userid]['gh'] = null;
 
-            if ($this->groupsmanager->has_group($userid)) {
+            $hasgroup = $this->groupsmanager->has_group($userid);
+            if ($hasgroup) {
                 $groupid = $this->groupsmanager->get_group_id($userid);
-                $userdata[$userid]['groupid'] = $this->groupsmanager->get_moodle_group_id($groupid);
+                //var_dump($groupid);
+                $userdata[$userid]['groupid'] = $groupid;
+                $userdata[$userid]['mgroupid'] = $this->groupsmanager->get_moodle_group_id($groupid);
                 $userdata[$userid]['groupname'] = str_replace("G1_", "", $this->groupsmanager->get_group_name($userid));
                 $userdata[$userid]['performance_index'] = $this->groupsmanager->get_performance_index($groupid);
-
                 $groupkey = str_replace(';', '-', $this->groupsmanager->get_group_key($groupid));
-                $groupkey = str_replace('mrand', 'manual', $groupkey);
-
                 $userdata[$userid]['groupkey'] = $groupkey;
+                if (true) {
+                    $groupkey = str_replace('mrand', 'manual', $groupkey);
 
-                $manual = (strpos($groupkey, 'manual:'));
-                $random = (strpos($groupkey, 'random:'));
+                    $userdata[$userid]['groupkey'] = $groupkey;
 
-                $mrand = 0;
-                if ($manual !== false) {
-                    $mrand = substr($groupkey, strpos($groupkey, 'manual:') + 7, 1);
-                }
+                    $manual = (strpos($groupkey, 'manual:'));
+                    $random = (strpos($groupkey, 'random:'));
 
-                $rand = 0;
-                if ($random !== false) {
-                    $rand = substr($groupkey, strpos($groupkey, 'random:') + 7, 1);
                     $mrand = 0;
+                    if ($manual !== false) {
+                        $mrand = substr($groupkey, strpos($groupkey, 'manual:') + 7, 1);
+                    }
+
+                    $rand = 0;
+                    if ($random !== false) {
+                        $rand = substr($groupkey, strpos($groupkey, 'random:') + 7, 1);
+                        $mrand = 0;
+                    }
+
+                    if ($rand == 1 || $mrand == 1) {
+                        $userdata[$userid]['performance_index'] = null;
+                        $ex = "-";
+                        $gh = "-";
+                    } else {
+                        $ex = substr($groupkey, strpos($groupkey, 'ex:') + 3, 1);
+                        $gh = substr($groupkey, strpos($groupkey, 'gh:') + 3, 1);
+
+                        $ex = str_replace('1', 1, $ex);
+                        $ex = str_replace('_', 2, $ex);
+                        $ex = str_replace('0', 3, $ex);
+
+                        $gh = str_replace('1', 1, $gh);
+                        $gh = str_replace('_', 2, $gh);
+                        $gh = str_replace('0', 3, $gh);
+                    }
+
+                    $userdata[$userid]['rand'] = $rand;
+                    $userdata[$userid]['mrand'] = $mrand;
+                    $userdata[$userid]['ex'] = $ex;
+                    $userdata[$userid]['gh'] = $gh;
                 }
 
-                if ($rand == 1 || $mrand == 1) {
-                    $userdata[$userid]['performance_index'] = null;
-                    $ex = "-";
-                    $gh = "-";
-                } else {
-                    $ex = substr($groupkey, strpos($groupkey, 'ex:') + 3, 1);
-                    $gh = substr($groupkey, strpos($groupkey, 'gh:') + 3, 1);
-
-                    $ex = str_replace('1', 1, $ex);
-                    $ex = str_replace('_', 2, $ex);
-                    $ex = str_replace('0', 3, $ex);
-
-                    $gh = str_replace('1', 1, $gh);
-                    $gh = str_replace('_', 2, $gh);
-                    $gh = str_replace('0', 3, $gh);
-                }
-
-                $userdata[$userid]['rand'] = $rand;
-                $userdata[$userid]['mrand'] = $mrand;
-                $userdata[$userid]['ex'] = $ex;
-                $userdata[$userid]['gh'] = $gh;
             } else {
                 $result = $DB->record_exists('groups_members', array('userid' => $userid));
                 if ($result) {
@@ -365,6 +371,7 @@ class mod_groupformation_csv_writer {
                         $members = $DB->get_records('groups_members', array('groupid' => $groupid), 'userid', 'userid');
                         $unknown = array_merge($unknown, array_keys($members));
                         $userdata[$userid]['groupid'] = $groupid;
+                        $userdata[$userid]['mgroupid'] = $this->groupsmanager->get_moodle_group_id($groupid);
                         $userdata[$userid]['random'] = 2;
                     }
                 }
@@ -388,6 +395,7 @@ class mod_groupformation_csv_writer {
                 $userdata[$userid] = array();
                 $groupid = $DB->get_field('groups_members', 'groupid', array('userid' => $userid));
                 $userdata[$userid]['groupid'] = $groupid;
+                $userdata[$userid]['mgroupid'] = $groupid;
                 $userdata[$userid]['code'] = $this->usermanager->get_participant_code($userid);
                 $userdata[$userid]['groupformation'] = $this->groupformationid;
                 $userdata[$userid]['groupname'] = null;
@@ -418,7 +426,9 @@ class mod_groupformation_csv_writer {
                 $csv .= "participantcode" . $sep;
                 $csv .= "groupformationid" . $sep;
                 $csv .= "groupid" . $sep;
+                $csv .= "mgroupid" . $sep;
                 $csv .= "groupname" . $sep;
+                $csv .= "groupkey" . $sep;
                 $csv .= "performance_index" . $sep;
                 $csv .= "random" . $sep;
                 $csv .= "manual_random" . $sep;
@@ -447,19 +457,21 @@ class mod_groupformation_csv_writer {
             }
 
             $userid = $us[$j];
-
-            $line = "";
-            $line .= $userid . $sep;
+            //var_dump($userdata[$userid]);
+            $line = $userid . $sep;
             $line .= $userdata[$userid]['code'] . $sep;
             $line .= $userdata[$userid]['groupformation'] . $sep;
             $line .= $userdata[$userid]['groupid'] . $sep;
+            $line .= $userdata[$userid]['mgroupid'] . $sep;
             $line .= $userdata[$userid]['groupname'] . $sep;
+            $line .= $userdata[$userid]['groupkey'] . $sep;
             $line .= $userdata[$userid]['performance_index'] . $sep;
             $line .= $userdata[$userid]['rand'] . $sep;
             $line .= $userdata[$userid]['mrand'] . $sep;
             $line .= $userdata[$userid]['ex'] . $sep;
             $line .= $userdata[$userid]['gh'] . $sep;
 
+            //var_dump($line);
             foreach ($categories as $category) {
 
                 if ($category == "knowledge" || $category == "topic") {
@@ -481,6 +493,8 @@ class mod_groupformation_csv_writer {
                     }
                 }
             }
+
+            //var_dump($line);
 
             $csv .= $line;
             $csv = rtrim($csv, $sep);
