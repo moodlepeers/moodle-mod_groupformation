@@ -234,7 +234,7 @@ class mod_groupformation_scientific_grouping_amigo extends mod_groupformation_gr
     {
 
         return array(
-            'team_teamorientation' => 1
+            'big5_selfefficacyexpectation' => 1
         );
     }
 
@@ -320,39 +320,39 @@ class mod_groupformation_scientific_grouping_amigo extends mod_groupformation_gr
     public function get_specification()
     {
 
-        // $big5specs = mod_groupformation_data::get_criterion_specification('big5');
+        $big5specs = mod_groupformation_data::get_criterion_specification('big5');
 
-        // unset($big5specs['labels']['neuroticism']);
+        //unset($big5specs['labels']['neuroticism']);
         // unset($big5specs['labels']['openness']);
         // unset($big5specs['labels']['agreeableness']);
-        // unset($big5specs['labels']['conscientiousness']);
+        unset($big5specs['labels']['conscientiousness']);
 
-        // $specs = [
-        //     'big5' => $big5specs,
-        // ];
+        $specs = [
+            'big5' => $big5specs,
+        ];
 
         // // true = homo ; false = hetero
         // $configurations = array(
         //     "groupal:1;ex:0" => array('big5_extraversion' => false),
         // );
 
-        $teamspecs = mod_groupformation_data::get_criterion_specification('team');
-
-        $specs = [
-            'team' => $teamspecs,
-        ];
+//        $teamspecs = mod_groupformation_data::get_criterion_specification('team');
+//
+//        $specs = [
+//            'team' => $teamspecs,
+//        ];
 
         $condition = $this->store->get_condition();
 
         if ($condition == 1) {
             // true = homo ; false = hetero
             $configurations = array(
-                "groupal:1;team:1" => array('team_teamorientation' => true),
+                "groupal:1;see:1" => array('big5_selfefficacyexpectation' => true),
             );
         } else {        
             // true = homo ; false = hetero
             $configurations = array(
-                "groupal:1;team:0" => array('team_teamorientation' => false),
+                "groupal:1;see:0" => array('big5_selfefficacyexpectation' => false),
             );
         }
 

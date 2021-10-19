@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<questionnaire version="2020110401">
+<questionnaire version="2021100604">
     <categories>
         <category>grade</category>
         <category>points</category>
-        <category>self</category>
+        <category>emotionalaspects</category>
         <category>character</category>
         <category>demographic</category>
-        <category>team</category>
+        <category>teammotivation</category>
         <category>topic</category>
     </categories>
     <scenarios>
@@ -16,7 +16,8 @@
                 <category>grade</category>
                 <category>points</category>
                 <category>character</category>
-                <category>team</category>
+                <category>teammotivation</category>
+                <category>emotionalaspects</category>
                 <category>demographic</category>
                 <category>topic</category>
             </categories>
@@ -27,7 +28,8 @@
                 <category>grade</category>
                 <category>points</category>
                 <category>character</category>
-                <category>team</category>
+                <category>teammotivation</category>
+                <category>emotionalaspects</category>
                 <category>demographic</category>
                 <category>topic</category>
             </categories>

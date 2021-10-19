@@ -577,6 +577,12 @@ $string ['tabletitle_skills'] = 'Experience';
 $string ['category_honesty'] = 'Honesty';
 $string ['tabletitle_honesty'] = 'Honesty';
 
+$string ['category_teammotivation'] = 'Motivation';
+$string ['tabletitle_teammotivation'] = 'Motivation';
+
+$string ['category_emotionalaspects'] = 'Emotionale Aspekte';
+$string ['tabletitle_emotionalaspects'] = 'Emotionale Aspekte';
+
 $string ['freetext_noanswer'] = 'No answer';
 
 $string ['allanswersrequired'] = 'All questions need to be answered in order to complete the activity.';

@@ -1964,7 +1964,7 @@ function xmldb_groupformation_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2019071000, 'groupformation');
     }
 
-    if ($oldversion < 2020110100) {
+    if ($oldversion < 2021100601) {
 
         // Define field condition to be added to groupformation.
         $table = new xmldb_table('groupformation');
@@ -1976,7 +1976,7 @@ function xmldb_groupformation_upgrade($oldversion) {
         }
 
         // Groupformation savepoint reached.
-        upgrade_mod_savepoint(true, 2020110100, 'groupformation');
+        upgrade_mod_savepoint(true, 2021100601, 'groupformation');
     }
 
 

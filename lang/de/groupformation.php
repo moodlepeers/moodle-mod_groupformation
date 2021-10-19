@@ -177,7 +177,7 @@ $string ['category_general'] = 'Allgemeines';
 $string ['category_grade'] = 'Ziele';
 $string ['category_points'] = 'Ziele';
 $string ['category_team'] = 'Teamorientierung';
-$string ['category_character'] = 'Persönlichkeitsmerkmale';
+$string ['category_character'] = 'Persönlichkeit';
 $string ['category_motivation'] = 'Kurs-Motivation';
 $string ['category_learning'] = 'Lernstile';
 $string ['category_knowledge'] = 'Vorwissen';
@@ -191,7 +191,7 @@ $string ['tabletitle_general'] = 'Allgemeines';
 $string ['tabletitle_grade'] = 'Ziele';
 $string ['tabletitle_points'] = 'Ziele';
 $string ['tabletitle_team'] = 'Teamorientierung';
-$string ['tabletitle_character'] = 'Persönlichkeitsmerkmale';
+$string ['tabletitle_character'] = 'Persönlichkeit';
 $string ['tabletitle_motivation'] = 'Kurs-Motivation';
 $string ['tabletitle_learning'] = 'Lernstile';
 $string ['tabletitle_knowledge'] = 'Vorwissen';
@@ -588,6 +588,12 @@ $string ['tabletitle_skills'] = 'Erfahrung';
 
 $string ['category_honesty'] = 'Ehrlichkeit';
 $string ['tabletitle_honesty'] = 'Ehrlichkeit';
+
+$string ['category_teammotivation'] = 'Motivation';
+$string ['tabletitle_teammotivation'] = 'Motivation';
+
+$string ['category_emotionalaspects'] = 'Emotionale Aspekte';
+$string ['tabletitle_emotionalaspects'] = 'Emotionale Aspekte';
 
 $string ['freetext_noanswer'] = 'Keine Antwort';
 

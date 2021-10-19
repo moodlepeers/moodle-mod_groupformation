@@ -72,6 +72,10 @@ class mod_groupformation_random_algorithm implements mod_groupformation_ialgorit
 
         $groups = $this->random_grouping($participants);
 
+        if (is_null($groups)) {
+            return null;
+        }
+
         $this->cohort = new mod_groupformation_random_cohort (count($groups), $groups);
         $this->cohort->whichmatcherused = get_class($this);
         $this->cohort->countofgroups = $this->cohort->countofgroups;

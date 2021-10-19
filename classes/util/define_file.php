@@ -42,14 +42,14 @@ class mod_groupformation_data
             "scenarios" => array(1, 2),
             "evaluation" => true,
             "labels" => array(
-                "extraversion" => array(
-                    "scenarios" => array(1 => false, 2 => false),  // False = heterogeneous, True = homogeneous.
-                    "evaluation" => true,  // Use for displaying it to user (to compare to group and course).
-                    "questionids" => array(10,-11,12,13,-14,15,-16,17), // Inverse questions = negative.
-                    "significant_id_only" => false,
-                    // True = only use the one questionid with most significant differences between users.
-                    "cutoffs" => array(0.313169217, 0.776242547),
-                ),
+//                "extraversion" => array(
+//                    "scenarios" => array(1 => false, 2 => false),  // False = heterogeneous, True = homogeneous.
+//                    "evaluation" => true,  // Use for displaying it to user (to compare to group and course).
+//                    "questionids" => array(10,-11,12,13,-14,15,-16,17), // Inverse questions = negative.
+//                    "significant_id_only" => false,
+//                    // True = only use the one questionid with most significant differences between users.
+//                    "cutoffs" => array(0.313169217, 0.776242547),
+//                ),
                 "conscientiousness" => array(
                     "scenarios" => array(1 => false, 2 => false),
                     "evaluation" => true,
@@ -57,26 +57,34 @@ class mod_groupformation_data
                     "significant_id_only" => false,
                     "cutoffs" => array(0.456596974, 0.831246163),
                 ),
-                "agreeableness" => array(
-                    "scenarios" => array(),
-                    "evaluation" => true,
-                    "questionids" => array(-18,19,-20,21,22,-23,24,-25,26),
+//                "agreeableness" => array(
+//                    "scenarios" => array(),
+//                    "evaluation" => true,
+//                    "questionids" => array(-18,19,-20,21,22,-23,24,-25,26),
+//                    "significant_id_only" => false,
+//                    "cutoffs" => array(0.492136484, 0.799889659),
+//                ),
+//                "neuroticism" => array(
+//                    "scenarios" => array(),
+//                    "evaluation" => true,
+//                    "questionids" => array(27,-28,29,30,-31,32,-33,34),
+//                    "significant_id_only" => false,
+//                    "cutoffs" => array(0.195135503, 0.602511556),
+//                ),
+//                "openness" => array(
+//                    "scenarios" => array(),
+//                    "evaluation" => true,
+//                    "questionids" => array(35,36,37,38,39,40,-41,42,-43,44),
+//                    "significant_id_only" => false,
+//                    "cutoffs" => array(0.348454964, 0.829192095),
+//                ),
+                "selfefficacyexpectation" => array(
+                    "scenarios" => array(1 => false, 2 => false),  // False = heterogeneous, True = homogeneous.
+                    "evaluation" => false,  // Use for displaying it to user (to compare to group and course).
+                    "questionids" => array(10,11,12,13,14,15,16,17,18,19), // Inverse questions = negative.
                     "significant_id_only" => false,
-                    "cutoffs" => array(0.492136484, 0.799889659),
-                ),
-                "neuroticism" => array(
-                    "scenarios" => array(),
-                    "evaluation" => true,
-                    "questionids" => array(27,-28,29,30,-31,32,-33,34),
-                    "significant_id_only" => false,
-                    "cutoffs" => array(0.195135503, 0.602511556),
-                ),
-                "openness" => array(
-                    "scenarios" => array(),
-                    "evaluation" => true,
-                    "questionids" => array(35,36,37,38,39,40,-41,42,-43,44),
-                    "significant_id_only" => false,
-                    "cutoffs" => array(0.348454964, 0.829192095),
+                    // True = only use the one questionid with most significant differences between users.
+                    "cutoffs" => array(0.313169217, 0.776242547),
                 ),
             ),
         ),
