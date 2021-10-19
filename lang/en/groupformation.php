@@ -489,14 +489,24 @@ $string ['consent_alert_message'] = 'You need give consent before accessing the 
 $string ['consent_opt_in'] = 'Consent (opt-in)';
 $string ['consent_header'] = 'I want to participate in the groupformation plugin and agree to submit answers to the questionnaire. The participation or non-participation has no impact on the grading process (or the credit points).';
 $string ['consent_header_import'] = 'By importing your answers, you agree to participate in the groupformation plugin and you agree to submit answers to the questionnaire. The participation or non-participation has no impact on the grading process (or the credit points).';
-$string ['consent_message_new_2'] = '<ul><li>
-The instructor has no direct access to my answers for the group formation (just I am able to access the evaluation about my personality as well as the group average).
-</li><li>
+$string['consent_message_new_3'] = '<ul>
+<li>
+The instructor has no direct access to my answers for the group formation.
+</li>
+<li>
+My personal data will be deleted when the course ends - latest after {$a->archivedays} days.
+</li>
+<li>
 My personal data will be paired through the parcipant code and will be pseudonymized with it. Identification of individuals through pseudonymized data will not be possible.
-</li><li>
-My personal data will be deleted when the course ends - latest after {$a->archivedays} days.</li><li>
-My performance in the course will be evaluated with my participant code for scientific purposes.</li></ul>';
-$string ['consent_agree'] = 'I agree to the terms';
+</li>
+<li>
+My performance in the course will be evaluated with my participant code and only for scientific purposes.
+</li>
+<li>
+I know that my participation in this study is voluntary and I can terminate my participation at any point without any reason.
+</li>
+</ul>';
+$string['consent_agree_3'] = 'Ich bin mit den oben genannten Bedingungen einverstanden';
 
 $string ['questionnaire_delete'] = 'Remove consent';
 

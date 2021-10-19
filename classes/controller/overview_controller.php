@@ -502,7 +502,7 @@ class mod_groupformation_overview_controller {
             $assigns['consentheader'] = get_string('consent_header', 'groupformation');
             $a = new stdClass();
             $a->archivedays = get_config('groupformation', 'archiving_time');
-            $assigns['consenttext'] = get_string('consent_message_new_2', 'groupformation', $a);
+            $assigns['consenttext'] = get_string('consent_message_new_3', 'groupformation', $a);
             $assigns['consentvalue'] = $this->usermanager->get_consent($this->userid);
         }
 

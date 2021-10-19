@@ -56,7 +56,7 @@ if (!defined('MOODLE_INTERNAL')) {
                                         <?php echo ($this->_['consentvalue']) ? 'checked disabled' : '' ?>
                                        value="<?php echo $this->_['consentvalue']; ?>"/>
                                 <label class="form-check-label" for="consentbox">
-                                    <?php echo ' ' . get_string('consent_agree', 'groupformation'); ?>
+                                    <?php echo ' ' . get_string('consent_agree_3', 'groupformation'); ?>
                                 </label>
                             </p>
                         </div>
