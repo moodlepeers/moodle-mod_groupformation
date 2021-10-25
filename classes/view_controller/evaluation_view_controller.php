@@ -86,7 +86,8 @@ class mod_groupformation_evaluation_view_controller extends mod_groupformation_b
         if ($store->is_archived()) {
             $output .= '<div class="alert" id="commited_view">'.get_string('archived_activity_answers', 'groupformation') . '</div>';
         } else {
-            $output .= parent::render();
+            $output .= '<div class="alert" id="commited_view">Diese Ansicht ist im Rahmen der Studie deaktiviert.</div>';
+            //parent::render();
         }
 
         return $output;
