@@ -25,6 +25,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/storage_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/moodle_interface/user_manager.php');
 require_once($CFG->dirroot . '/mod/groupformation/classes/util/template_builder.php');
@@ -250,9 +251,9 @@ class mod_groupformation_analysis_controller {
     public function load_users() {
         global $DB;
         $userList = $this->store->get_users();
-
-        $selectfields = implode(',', ['id', get_all_user_name_fields(true)]);
-
+        
+        $selectfields = implode(',', ['id', implode(',',\core_user\fields::for_name()->get_required_fields())]);
+        
         $users = [];
 
         foreach ($userList AS $id) {

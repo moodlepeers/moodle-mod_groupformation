@@ -115,7 +115,8 @@ class mod_groupformation_grouping_controller {
 
         $userids = array_map($getuserid, $this->users);
 
-        $selectfields = implode(',', ['id', get_all_user_name_fields(true)]);
+        $selectfields = implode(',', ['id', implode(',',\core_user\fields::for_name()->get_required_fields())]);
+        
         $this->userrecords = $DB->get_records_list('user', 'id', $userids, null, $selectfields);
 
         $ajm = new mod_groupformation_advanced_job_manager();
