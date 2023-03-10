@@ -65,7 +65,7 @@ $functions = array(
                 'description' => 'Delete answers of user.',    //human readable description of the web service function
                 'type' => 'write',                  //database rights of the web service function (read, write)
                 'ajax' => true,        // is the service available to 'internal' ajax calls.
-                'capabilities' => array(),   // capabilities required by the function.
+                'capabilities' => '',   // capabilities required by the function. String made of comma separated values
         ),
         'mod_groupformation_exclude_users' => array(         //web service function name
                 'classname' => 'mod_groupformation_external',
@@ -77,6 +77,6 @@ $functions = array(
                 'description' => 'Exclude users.',    //human readable description of the web service function
                 'type' => 'write',                  //database rights of the web service function (read, write)
                 'ajax' => true,        // is the service available to 'internal' ajax calls.
-                'capabilities' => array(),   // capabilities required by the function.
+                'capabilities' => '',   // capabilities required by the function.
         ),
 );
